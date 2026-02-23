@@ -65,7 +65,7 @@ It should not be reframed as a strict EBNF clone.
     - cwd-local `name.spec` resolution (no `PathSearch` load),
     - lazy `PathSearch` fallback when local/module-relative candidate is absent.
   - `get_parser` invalid-spec-name negative-path checks:
-    - `undef`, empty-string, and whitespace-only names return `undef` without die,
+    - `undef`, empty-string, whitespace-only, and non-scalar names return `undef` without die,
     - diagnostics include `Invalid spec name`,
     - `PathSearch.pm` remains unloaded for these calls.
   - `get_parser` fallback-loader negative-path checks:
@@ -124,7 +124,7 @@ It should not be reframed as a strict EBNF clone.
   - avoids hard dependence on current working directory,
   - keeps `PathSearch` as lazy fallback only.
 - `LinkedSpec::get_parser` now validates spec-name input early:
-  - `undef`/empty/whitespace-only spec-name arguments fail fast with diagnostics and `undef` return,
+  - `undef`/empty/whitespace-only/non-scalar spec-name arguments fail fast with diagnostics and `undef` return,
   - invalid-name calls do not trigger fallback loader paths.
 - `LinkedSpec::get_parser` now treats unresolved path-like names as explicit misses:
   - when local/module-relative lookup fails for path-like names, it returns not-found directly,

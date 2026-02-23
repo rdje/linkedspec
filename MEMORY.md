@@ -229,6 +229,17 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 23 top-level test blocks pass.
+- Hardened non-scalar spec-name input handling in `LinkedSpec::get_parser`:
+  - invalid-name gate now rejects reference-type spec-name arguments,
+  - non-scalar names fail fast with diagnostics + undef return before any fallback activity.
+- Added non-scalar invalid-name regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_non_scalar_spec_name_reports_error_without_pathsearch`,
+  - covers arrayref (`[]`) and hashref (`{}`) inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with non-scalar invalid-name coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 24 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

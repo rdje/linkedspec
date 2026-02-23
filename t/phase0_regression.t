@@ -159,6 +159,25 @@ subtest 'get_parser_whitespace_spec_name_reports_error_without_pathsearch' => su
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after whitespace-spec-name checks');
 };
+subtest 'get_parser_non_scalar_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before non-scalar-spec-name checks');
+
+    my ($ok_arrayref, $parser_arrayref, $err_arrayref, $out_arrayref, $warn_arrayref) =
+        run_get_parser_with_captured_io([]);
+    ok($ok_arrayref, 'arrayref-spec get_parser call returns without die') or diag(normalize_error($err_arrayref));
+    ok(!defined($parser_arrayref), 'arrayref-spec get_parser returns undef');
+    like($out_arrayref, qr/Invalid spec name/, 'arrayref-spec diagnostics report invalid spec name');
+
+    my ($ok_hashref, $parser_hashref, $err_hashref, $out_hashref, $warn_hashref) =
+        run_get_parser_with_captured_io({});
+    ok($ok_hashref, 'hashref-spec get_parser call returns without die') or diag(normalize_error($err_hashref));
+    ok(!defined($parser_hashref), 'hashref-spec get_parser returns undef');
+    like($out_hashref, qr/Invalid spec name/, 'hashref-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after non-scalar-spec-name checks');
+};
 subtest 'get_parser_missing_explicit_path_skips_pathsearch' => sub {
     plan tests => 6;
 
