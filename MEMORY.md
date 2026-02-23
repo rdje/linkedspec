@@ -240,6 +240,25 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 24 top-level test blocks pass.
+- Hardened NUL-byte spec-name input handling in `LinkedSpec::get_parser`:
+  - invalid-name gate now rejects spec-name strings containing `\0`,
+  - NUL-byte names fail fast with diagnostics + undef return before any fallback activity.
+- Added NUL-byte invalid-name regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_nul_byte_spec_name_reports_error_without_pathsearch`,
+  - covers `"\0"` and `"Lispish\0.spec"` inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with NUL-byte invalid-name coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 25 top-level test blocks pass.
+- Expanded non-scalar invalid-name coverage in `t/phase0_regression.t`:
+  - added subtest `get_parser_non_scalar_reference_variants_reports_error_without_pathsearch`,
+  - covers scalarref, coderef, and regexp-ref spec-name arguments in addition to existing arrayref/hashref checks,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with non-scalar reference-variant coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 26 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

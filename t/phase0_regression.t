@@ -178,6 +178,51 @@ subtest 'get_parser_non_scalar_spec_name_reports_error_without_pathsearch' => su
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after non-scalar-spec-name checks');
 };
+subtest 'get_parser_non_scalar_reference_variants_reports_error_without_pathsearch' => sub {
+    plan tests => 11;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before non-scalar-reference-variant checks');
+
+    my $scalar_ref = do { my $v = 'Lispish'; \$v };
+    my ($ok_scalar_ref, $parser_scalar_ref, $err_scalar_ref, $out_scalar_ref, $warn_scalar_ref) =
+        run_get_parser_with_captured_io($scalar_ref);
+    ok($ok_scalar_ref, 'scalarref-spec get_parser call returns without die') or diag(normalize_error($err_scalar_ref));
+    ok(!defined($parser_scalar_ref), 'scalarref-spec get_parser returns undef');
+    like($out_scalar_ref, qr/Invalid spec name/, 'scalarref-spec diagnostics report invalid spec name');
+
+    my ($ok_coderef, $parser_coderef, $err_coderef, $out_coderef, $warn_coderef) =
+        run_get_parser_with_captured_io(sub { return 'noop' });
+    ok($ok_coderef, 'coderef-spec get_parser call returns without die') or diag(normalize_error($err_coderef));
+    ok(!defined($parser_coderef), 'coderef-spec get_parser returns undef');
+    like($out_coderef, qr/Invalid spec name/, 'coderef-spec diagnostics report invalid spec name');
+
+    my ($ok_regexref, $parser_regexref, $err_regexref, $out_regexref, $warn_regexref) =
+        run_get_parser_with_captured_io(qr/Lispish/o);
+    ok($ok_regexref, 'regexref-spec get_parser call returns without die') or diag(normalize_error($err_regexref));
+    ok(!defined($parser_regexref), 'regexref-spec get_parser returns undef');
+    like($out_regexref, qr/Invalid spec name/, 'regexref-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after non-scalar-reference-variant checks');
+};
+subtest 'get_parser_nul_byte_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before NUL-byte-spec-name checks');
+
+    my ($ok_nul_only, $parser_nul_only, $err_nul_only, $out_nul_only, $warn_nul_only) =
+        run_get_parser_with_captured_io("\0");
+    ok($ok_nul_only, 'NUL-only-spec get_parser call returns without die') or diag(normalize_error($err_nul_only));
+    ok(!defined($parser_nul_only), 'NUL-only-spec get_parser returns undef');
+    like($out_nul_only, qr/Invalid spec name/, 'NUL-only-spec diagnostics report invalid spec name');
+
+    my ($ok_nul_mixed, $parser_nul_mixed, $err_nul_mixed, $out_nul_mixed, $warn_nul_mixed) =
+        run_get_parser_with_captured_io("Lispish\0.spec");
+    ok($ok_nul_mixed, 'NUL-mixed-spec get_parser call returns without die') or diag(normalize_error($err_nul_mixed));
+    ok(!defined($parser_nul_mixed), 'NUL-mixed-spec get_parser returns undef');
+    like($out_nul_mixed, qr/Invalid spec name/, 'NUL-mixed-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after NUL-byte-spec-name checks');
+};
 subtest 'get_parser_missing_explicit_path_skips_pathsearch' => sub {
     plan tests => 6;
 

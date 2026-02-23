@@ -638,3 +638,59 @@ Hardened `get_parser` input validation to reject non-scalar spec-name arguments 
 - Result:
   - PASS
   - all 24 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser NUL-Byte Spec-Name Guard
+## Summary
+Hardened `get_parser` invalid-name validation to reject NUL-byte-containing spec names and added regression coverage to lock fail-fast behavior before any fallback loading.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` invalid-name gate:
+  - now rejects spec-name arguments containing `\0`,
+  - NUL-byte-containing names return `undef` with `Invalid spec name` diagnostics before resolution/fallback.
+- Added subtest `get_parser_nul_byte_spec_name_reports_error_without_pathsearch`:
+  - validates `\"\0\"` and `"Lispish\0.spec"` inputs,
+  - asserts no die, `undef` return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 25 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Non-Scalar Reference Variants
+## Summary
+Expanded invalid-input regression coverage for `get_parser` by locking behavior for additional non-scalar reference variants (scalarref, coderef, and regexp-ref).
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_non_scalar_reference_variants_reports_error_without_pathsearch`.
+- Scenarios:
+  - scalar reference spec-name argument (`\$scalar`),
+  - code reference spec-name argument (`sub { ... }`),
+  - regexp reference spec-name argument (`qr/.../`).
+- Asserts for each scenario:
+  - `get_parser` returns without die,
+  - parser return is `undef`,
+  - diagnostics include `Invalid spec name`.
+- Also asserts `PathSearch.pm` remains unloaded before and after these checks.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 26 top-level test blocks pass.
