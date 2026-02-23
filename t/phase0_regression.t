@@ -176,6 +176,23 @@ subtest 'get_parser_padded_spec_name_reports_error_without_pathsearch' => sub {
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after padded-spec-name checks');
 };
+subtest 'get_parser_control_char_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before control-char-spec-name checks');
+
+    my ($ok_tab, $parser_tab, $err_tab, $out_tab, $warn_tab) = run_get_parser_with_captured_io("Lis\tpish");
+    ok($ok_tab, 'tab-char-spec get_parser call returns without die') or diag(normalize_error($err_tab));
+    ok(!defined($parser_tab), 'tab-char-spec get_parser returns undef');
+    like($out_tab, qr/Invalid spec name/, 'tab-char-spec diagnostics report invalid spec name');
+
+    my ($ok_newline, $parser_newline, $err_newline, $out_newline, $warn_newline) = run_get_parser_with_captured_io("Lis\npish");
+    ok($ok_newline, 'newline-char-spec get_parser call returns without die') or diag(normalize_error($err_newline));
+    ok(!defined($parser_newline), 'newline-char-spec get_parser returns undef');
+    like($out_newline, qr/Invalid spec name/, 'newline-char-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after control-char-spec-name checks');
+};
 subtest 'get_parser_non_scalar_spec_name_reports_error_without_pathsearch' => sub {
     plan tests => 8;
 

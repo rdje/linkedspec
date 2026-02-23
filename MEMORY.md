@@ -280,6 +280,17 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 28 top-level test blocks pass.
+- Hardened control-character spec-name input handling in `LinkedSpec::get_parser`:
+  - invalid-name gate now rejects `\t`, `\r`, and `\n` in spec-name values,
+  - control-character names fail fast with diagnostics + undef return before fallback activity.
+- Added control-character invalid-input regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_control_char_spec_name_reports_error_without_pathsearch`,
+  - covers `"Lis\tpish"` and `"Lis\npish"` inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with control-character coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 29 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

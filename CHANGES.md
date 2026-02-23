@@ -749,3 +749,30 @@ Hardened `get_parser` invalid-name validation so spec names with leading or trai
 - Result:
   - PASS
   - all 28 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser Control-Character Spec-Name Guard
+## Summary
+Hardened `get_parser` invalid-name validation to reject tab/newline/carriage-return control characters in spec names and locked behavior with targeted regression coverage.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` invalid-name gate:
+  - now rejects spec names containing `\t`, `\r`, or `\n`,
+  - control-character names return `undef` with `Invalid spec name` diagnostics before resolution/fallback.
+- Added subtest `get_parser_control_char_spec_name_reports_error_without_pathsearch`:
+  - validates `"Lis\tpish"` and `"Lis\npish"` inputs,
+  - asserts no die, `undef` return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 29 top-level test blocks pass.
