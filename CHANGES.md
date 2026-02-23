@@ -274,3 +274,32 @@ Added focused negative-path regression coverage for unresolved specs to ensure `
 - Result:
   - PASS
   - all 11 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Open-Failure Negative Path
+## Summary
+Added regression coverage for the unresolved-open case where a spec path exists but cannot be opened.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_open_failure_reports_error`.
+- Scenario:
+  - create temporary spec file,
+  - make it unreadable via permissions,
+  - call `LinkedSpec::get_parser` and capture diagnostics.
+- Asserts:
+  - call returns without die,
+  - return value is `undef`,
+  - diagnostics include `Unable to open spec file`,
+  - diagnostics include requested file path and `OS Error`.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 12 top-level test blocks pass.

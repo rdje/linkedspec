@@ -172,6 +172,33 @@ subtest 'get_parser_unresolved_spec_reports_error' => sub {
     like($out_path, qr/Spec path not found/, 'missing-explicit-path reports \"Spec path not found\"');
     like($out_path . $warn_path, qr/\Q$missing_path\E/, 'missing-explicit-path diagnostics include requested path');
 };
+subtest 'get_parser_open_failure_reports_error' => sub {
+    plan tests => 6;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_unreadable_open_failure.spec');
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create unreadable-open-failure spec '$tmp_spec': $!";
+    print {$fh} $source_content;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary unreadable spec created');
+
+    my $perm_ok = chmod 0000, $tmp_spec;
+    ok($perm_ok, 'temporary spec permissions changed to unreadable') or diag("chmod 0000 failed for '$tmp_spec': $!");
+
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($tmp_spec);
+
+    ok($ok_call, 'unreadable-spec get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'unreadable-spec get_parser returns undef');
+    like($out, qr/Unable to open spec file/, 'unreadable-spec reports open failure');
+    like($out . $warn, qr/\Q$tmp_spec\E.*OS Error:/s, 'unreadable-spec diagnostics include path and OS error');
+
+    chmod 0600, $tmp_spec;
+    unlink($tmp_spec);
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

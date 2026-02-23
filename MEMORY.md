@@ -45,7 +45,7 @@ When resuming after interruption:
 ## Next Recommended Work Item
 - Continue Phase-1 hardening with targeted behavior locks:
   - keep full resolution-order tests green,
-  - add targeted diagnostics checks for open/read failures after resolution,
+  - add targeted checks for parser-generation failure diagnostics on intentionally malformed specs,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
@@ -106,6 +106,14 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 11 top-level test blocks pass.
+- Added open-failure negative-path coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_open_failure_reports_error`,
+  - scenario: existing but unreadable spec path,
+  - assertions: no die, undef return, open-failure diagnostic content.
+- Re-ran baseline with open-failure coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 12 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:
