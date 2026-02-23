@@ -776,3 +776,30 @@ Hardened `get_parser` invalid-name validation to reject tab/newline/carriage-ret
 - Result:
   - PASS
   - all 29 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Generalized Control-Byte Spec-Name Validation
+## Summary
+Generalized `get_parser` invalid-name validation from specific control characters to all control bytes, and expanded regression coverage with additional non-whitespace control-byte cases.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` invalid-name gate:
+  - replaced targeted `\t/\r/\n` filter with a generalized control-byte check (`/[[:cntrl:]]/`),
+  - this preserves prior behavior while covering additional control-byte variants.
+- Added subtest `get_parser_additional_control_byte_spec_name_reports_error_without_pathsearch`:
+  - validates `"Lis\apish"` (BEL) and `"Lis\x1Fpish"` (US) inputs,
+  - asserts no die, `undef` return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 30 top-level test blocks pass.

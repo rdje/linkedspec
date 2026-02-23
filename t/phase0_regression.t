@@ -193,6 +193,23 @@ subtest 'get_parser_control_char_spec_name_reports_error_without_pathsearch' => 
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after control-char-spec-name checks');
 };
+subtest 'get_parser_additional_control_byte_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before additional-control-byte-spec-name checks');
+
+    my ($ok_bel, $parser_bel, $err_bel, $out_bel, $warn_bel) = run_get_parser_with_captured_io("Lis\apish");
+    ok($ok_bel, 'BEL-char-spec get_parser call returns without die') or diag(normalize_error($err_bel));
+    ok(!defined($parser_bel), 'BEL-char-spec get_parser returns undef');
+    like($out_bel, qr/Invalid spec name/, 'BEL-char-spec diagnostics report invalid spec name');
+
+    my ($ok_us, $parser_us, $err_us, $out_us, $warn_us) = run_get_parser_with_captured_io("Lis\x1Fpish");
+    ok($ok_us, 'US-char-spec get_parser call returns without die') or diag(normalize_error($err_us));
+    ok(!defined($parser_us), 'US-char-spec get_parser returns undef');
+    like($out_us, qr/Invalid spec name/, 'US-char-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after additional-control-byte-spec-name checks');
+};
 subtest 'get_parser_non_scalar_spec_name_reports_error_without_pathsearch' => sub {
     plan tests => 8;
 

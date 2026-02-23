@@ -291,6 +291,17 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 29 top-level test blocks pass.
+- Generalized control-byte validation in `LinkedSpec::get_parser`:
+  - replaced targeted `\t/\r/\n` filter with generalized control-byte check (`/[[:cntrl:]]/`),
+  - preserves existing behavior while covering additional control-byte variants.
+- Added additional-control-byte regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_additional_control_byte_spec_name_reports_error_without_pathsearch`,
+  - covers BEL (`"Lis\apish"`) and US (`"Lis\x1Fpish"`) inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with generalized control-byte coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 30 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:
