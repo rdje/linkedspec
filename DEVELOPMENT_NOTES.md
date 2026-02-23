@@ -1,0 +1,85 @@
+# DEVELOPMENT NOTES
+Engineering notes for LinkedSpec refactoring and stabilization.
+
+## System Characterization
+LinkedSpec is a DSL compiler in Perl5:
+1. Parse `.spec` using a built-in hardcoded grammar parser.
+2. Build rule descriptors and generated handler code.
+3. Execute handler logic dynamically to parse target input.
+4. Return raw AST structures controlled by spec actions.
+
+## Core Files
+- `perl/LinkedSpec.pm` - DSL parsing + parser generation + runtime.
+- `perl/LinkedRE.pm` - regex OR dispatch and capture packaging.
+- `perl/PathSearch.pm` - spec location helper for `get_parser`.
+
+## Downstream Consumers
+- `LibReader`
+- `PPlugin`
+- `RTLUtils`
+- `TableGrep`
+
+These consumers exist, but integration/compatibility work for them is currently deferred unless explicitly resumed.
+
+## Key Observations
+- Strong at nested/recursive constructs.
+- Strong at staged parsing (coarse-to-fine passes).
+- Current implementation includes permissive extraction behavior useful for anchor-driven scanning.
+- Current implementation also contains technical debt:
+  - Runtime eval-heavy generation/execution paths.
+  - Validation logic weaknesses.
+  - Silent skipping risk in some DSL parse paths.
+  - Tight module coupling during load path.
+  - Inconsistent hard exits from library code.
+
+## Product Direction (Confirmed)
+LinkedSpec should be treated as:
+- A progressive extraction parser DSL.
+- A practical alternative to strict EBNF-centric workflows for niche/high-variance inputs.
+- A platform for building domain parsers quickly.
+
+It should not be reframed as a strict EBNF clone.
+
+## Design Goals
+1. Preserve extraction + recursion ergonomics.
+2. Introduce explicit parse semantics (`seek` vs `consume`).
+3. Formalize position/capture concepts into transparent APIs.
+4. Improve diagnostics, determinism, and maintainability.
+5. Maintain backward compatibility with existing specs.
+
+## Open Technical Work
+- Build robust regression harness for all existing specs.
+- Fix known `tclite.spec` regex issue.
+- Define strict vs permissive mode contracts.
+- Introduce structured error reporting and tracing.
+- Reduce hot-path runtime eval usage.
+
+## Testing Strategy (Current)
+- Framework: `Test::More`.
+- Baseline test entry point: `t/phase0_regression.t`.
+- Scope:
+  - Compile/generation checks for all `specs/*.spec` except `tclite.spec` (currently deferred).
+  - Smoke tests:
+    - strict AST shape assertion for `Lispish.spec`.
+    - invariant-based AST assertions for `vhdl.spec`.
+    - invariant-based AST assertions for `ebnf.spec`.
+- Current deferred test target:
+  - `tclite.spec` (explicitly deferred by scope decision).
+- Corpus regression (directory-level):
+  - `plugin/*.plg` parsed via `pplugin.spec`.
+  - `conf/*.conf` parsed via `Lispish.spec` flow (`Lispish::multi`).
+  - `tablescript/*.ts` parsed via current Lispish runtime flow (`Lispish::multi`).
+  - `ebnf/*.ebnf` parsed via `ebnf.spec`.
+- Baseline corpus counts currently covered:
+  - plugin: 52 files
+  - conf: 53 files
+  - tablescript: 23 files
+  - ebnf: 7 files
+
+## Change Discipline
+Before each commit:
+1. Update `CHANGES.md` with exact pending changes.
+2. Update `DEVELOPMENT_NOTES.md` with rationale/decisions.
+3. Update `USER_GUIDE.md` for user-visible behavior changes.
+4. Update `ROADMAP.md` status and milestones.
+5. Update `MEMORY.md` with resumable session context.

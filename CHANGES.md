@@ -1,0 +1,123 @@
+# CHANGES
+Detailed technical history of changes prepared for commit.
+
+## 2026-02-23 - Documentation Infrastructure Bootstrap
+## Summary
+Created live project documentation files to support long-running, interruption-resilient development and commit hygiene.
+
+## Added Files
+- `ROADMAP.md`
+- `USER_GUIDE.md`
+- `DEVELOPMENT_NOTES.md`
+- `CHANGES.md`
+- `MEMORY.md`
+
+## Technical Details
+- Established project positioning and multi-phase roadmap for LinkedSpec modernization.
+- Documented user-facing syntax/workflow guidance for LinkedSpec DSL.
+- Captured engineering rationale and architectural observations for refactoring decisions.
+- Established a compact, resumable session memory protocol (`MEMORY.md`) for LLM/AI handoff continuity.
+- Established a pre-commit documentation gate to keep live documents synchronized before commit workflow execution.
+- Recorded external-consumer policy: downstream consumers are separate projects and should be treated as independent compatibility targets.
+- Recorded scope update: downstream-consumer compatibility work is deferred for now.
+
+## Rationale
+- The project is parser-infrastructure-heavy and spans multiple modules and specs.
+- Session interruption risk is high during iterative “vibe coding.”
+- Live, versioned documents reduce context loss and improve continuation quality across agent/session restarts.
+
+## Validation
+- Verified requested markdown live-document set now exists in repository root.
+- No functional parser code changed in this change set.
+
+## Notes for Next Change Set
+- Add regression harness baseline for `specs/*.spec`.
+- Capture compile status matrix and known failures.
+- Start phase tracking updates in `ROADMAP.md`.
+
+## 2026-02-23 - Phase 0 Test::More Baseline Harness
+## Summary
+Switched from ad-hoc regression harness to `Test::More` and established baseline regression coverage under `t/`.
+
+## Changed Files
+- Added: `t/phase0_regression.t`
+- Removed: `bin/spec_regression.pl`
+- Updated: `ROADMAP.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a unified regression test file using `Test::More` with three blocks:
+  - compile/generation checks for all non-deferred specs,
+  - strict Lispish AST smoke check (`is_deeply`),
+  - VHDL invariant smoke check.
+- Added dedicated `ebnf.spec` smoke test to lock baseline expectations for rule-name extraction.
+- Explicitly excluded `tclite.spec` from current scope.
+- Initially marked `regdef.spec` compile check as TODO due validator false-positive; later resolved in this same change series.
+
+## Validation
+- Tests run via:
+  - `prove -Iperl t/phase0_regression.t`
+- Expected current behavior:
+  - all in-scope compile checks pass,
+  - Lispish smoke passes,
+  - VHDL invariant smoke passes,
+  - EBNF invariant smoke passes.
+- Actual baseline run result:
+  - PASS (`Result: PASS`)
+  - Scope confirmed: `tclite.spec` excluded by design.
+
+## 2026-02-23 - DSL Validator Fix (Escaped Slash Regex Handling)
+## Summary
+Resolved false-positive regex validation failures on `.spec` lines containing escaped slash sequences (e.g. `\\/\\/`), which previously impacted `regdef.spec`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Reworked regex-literal extraction inside `validate_dsl_syntax`:
+  - rule RHS is scanned for slash-delimited regex literals with escaped-delimiter-aware matching.
+- Validator now compiles extracted regex bodies directly, avoiding truncated-literal false positives.
+- Fixed undefined/unused rule warning calculations by replacing broken self-comparison logic with set-based checks.
+- Removed obsolete TODO handling for `regdef.spec` in tests.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all in-scope compile checks pass (`tclite.spec` remains excluded by scope)
+  - smoke tests pass for `Lispish.spec`, `vhdl.spec`, and `ebnf.spec`.
+
+## 2026-02-23 - Corpus Regression Expansion + Invalid conf Cleanup
+## Summary
+Expanded Phase-0 regression to include real corpus directories and removed an invalid non-Lisp-like conf file that should not have been present.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Deleted: `conf/httpd.conf`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added new `corpus_regression` subtest in `t/phase0_regression.t` to validate:
+  - `plugin/*.plg` via `pplugin.spec`
+  - `conf/*.conf` via Lispish parser flow
+  - `tablescript/*.ts` via Lispish parser flow
+  - `ebnf/*.ebnf` via `ebnf.spec`
+- Added exit-trapping helper in tests to protect suite integrity against parser-level `exit` calls.
+- Removed `conf/httpd.conf` per user instruction (file not in intended Lisp-like conf format).
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - compile/spec smoke and corpus regression are green.

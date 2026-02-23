@@ -1,0 +1,205 @@
+# Return Annotation Grammar for pgen
+# ==================================
+# Version: 2.0.0
+# This grammar defines the complete syntax for return annotations in pgen.
+# Supports extraction operators, spreading, objects, arrays, and more.
+
+# Entry point - return annotation with optional arrow
+# `->` with no payload is treated as passthrough (equivalent to $1)
+return_annotation := arrow expression
+                 | arrow
+                 | expression
+
+-> $2
+
+# Arrow operator (optional, may be pre-stripped by parser)
+arrow := '->'
+
+# Top-level expression
+expression := spread_expression
+            | extraction_expression
+            | property_access_expression
+            | array_access_expression
+            | primary_expression
+
+# Primary expressions (base values)
+primary_expression := object_literal
+                    | array_literal
+                    | positional_reference
+                    | string_literal
+                    | number_literal
+                    | boolean_literal
+                    | identifier
+                    | '(' expression ')' -> $2
+
+# =====================================
+# EXTRACTION OPERATORS (:: syntax)
+# =====================================
+
+# Extraction from quantified groups: $2::2, $2::first*, etc.
+extraction_expression := positional_reference '::' extraction_target spread_suffix?
+-> {
+    type: "extraction",
+    base: $1,
+    target: $3,
+    spread: $4
+}
+
+# Extraction targets
+extraction_target := positive_integer  # Index extraction (1-based)
+                   | 'first'           # First element
+                   | 'last'            # Last element
+
+@transform: str::parse::<usize>().unwrap_or(1)
+positive_integer := /[1-9][0-9]*/
+
+# =====================================
+# SPREAD OPERATOR
+# =====================================
+
+# Spread expression: $2*, [$1, $2*]
+spread_expression := spreadable_expression '*'
+-> {type: "spread", base: $1}
+
+# Expressions that can be spread
+spreadable_expression := extraction_expression
+                       | positional_reference
+                       | property_access_expression
+                       | array_access_expression
+                       | '(' expression ')' -> $2
+
+# Optional spread suffix for extractions
+spread_suffix := '*'
+-> "true"
+
+# =====================================
+# PROPERTY AND ARRAY ACCESS
+# =====================================
+
+# Property access: $1.value, $2.name
+property_access_expression := accessor_base '.' identifier
+-> {type: "property_access", base: $1, property: $3}
+
+# Array/index access: $1[0], $2[3]
+array_access_expression := accessor_base '[' expression ']'
+-> {type: "array_access", base: $1, index: $3}
+
+# Base expressions for property/array access
+accessor_base := positional_reference
+               | property_access_expression
+               | array_access_expression
+               | '(' expression ')' -> $2
+
+# =====================================
+# LITERALS AND REFERENCES
+# =====================================
+# Positional reference: $1, $2, $42
+positional_reference := '$' integer
+-> {type: "positional", index: $2}
+
+# String literals with quotes
+string_literal := ('"' string_content_double '"'
+                 | "'" string_content_single "'")
+-> {type: "string", value: $2}
+
+string_content_double := /[^"]*/
+string_content_single := /[^']*/
+
+# Number literals
+number_literal := float | integer
+
+@transform: str::parse::<f64>().unwrap_or(0.0)
+float := /[-+]?[0-9]+\.[0-9]+(?:[eE][-+]?[0-9]+)?/
+
+@transform: str::parse::<i64>().unwrap_or(0)  
+integer := /[-+]?[0-9]+/
+
+# Boolean literals
+boolean_literal := 'true' | 'false'
+
+# Identifiers for properties
+identifier := /[a-zA-Z_][a-zA-Z0-9_]*/
+
+# =====================================
+# OBJECTS
+# =====================================
+
+# Object literal: {}, {key: value}, {a: $1, b: $2}
+object_literal := '{' object_properties? '}'
+-> {type: "object", properties: $2}
+
+# Object properties (comma-separated)
+object_properties := object_property (',' object_property)*
+-> [$1, $2::2*]
+
+# Single property: key: value
+object_property := property_key ':' expression
+-> {key: $1, value: $3}
+
+# Property keys
+property_key := identifier | string_literal
+
+# =====================================
+# ARRAYS
+# =====================================
+
+# Array literal: [], [$1], [$1, $2*]
+array_literal := '[' array_elements? ']'
+-> {type: "array", elements: $2}
+
+# Array elements (comma-separated)
+array_elements := array_element (',' array_element)*
+-> [$1, $2::2*]
+
+# Single array element (may be spread)
+array_element := expression
+
+# =====================================
+# PARENTHESIZED EXPRESSIONS
+# =====================================
+
+# Parentheses for grouping: ($1 + $2)
+parenthesized := '(' expression ')'
+-> $2
+
+# =====================================
+# WHITESPACE (handled implicitly)
+# =====================================
+# The parser should automatically handle whitespace between tokens
+
+# =====================================
+# EXAMPLES
+# =====================================
+# Simple:
+#   -> $1                     # Positional reference
+#   -> "literal"              # String literal
+#   -> 42                     # Number literal
+#   -> true                   # Boolean literal
+#
+# Arrays:
+#   -> [$1, $2]              # Simple array
+#   -> [$1, $2*]             # Array with spread
+#   -> []                    # Empty array
+#
+# Objects:
+#   -> {type: "node"}        # Simple object
+#   -> {key: $1, val: $2}    # Object with positional refs
+#   -> {}                    # Empty object
+#
+# Extraction (NEW):
+#   -> $2::2                 # Extract index 2 from $2
+#   -> $2::first             # Extract first element
+#   -> $2::last              # Extract last element
+#   -> $2::2*                # Extract and spread
+#   -> [$1, $2::1*]          # In array context
+#
+# Property access:
+#   -> $1.value              # Access property
+#
+# Complex:
+#   -> {
+#        type: "function",
+#        name: $1,
+#        params: [$3, $4::2*],
+#        body: $6
+#      }

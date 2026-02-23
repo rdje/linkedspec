@@ -1,0 +1,279 @@
+# PCRE2-compatible regex grammar (corrected) for rgx
+# Supports embedded code blocks via (?{...}) constructs (intended for Lua/JS hooks)
+# Properly handles balanced braces and string literals in code blocks
+
+# Entry point
+regex          = pattern
+
+# Alternation and concatenation
+pattern        = alternation
+alternation    = concatenation ("|" concatenation)*
+concatenation  = piece+
+
+piece          = atom quantifier?
+
+# Quantifiers (with lazy and possessive variants)
+quantifier     = quant_base quant_suffix?
+quant_base     = "*" | "+" | "?" | counted_quantifier
+counted_quantifier = "{" ws? digits ws? ("," ws? digits?)? ws? "}"
+quant_suffix   = "?"     # lazy (non-greedy)
+               | "+"     # possessive
+
+# Atoms
+atom           = literal
+               | dot
+               | anchor
+               | escape
+               | backreference
+               | char_class
+               | group
+               | atomic_group
+               | lookaround
+               | inline_modifiers
+               | scoped_inline_modifiers
+               | conditional
+               | code_block
+
+# Literals and escapes
+literal        = literal_char+
+literal_char   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+               | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+               | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+               | ' ' | '!' | '#' | '%' | '&' | ',' | '-' | ';' | '<' | '=' | '>' | '@' | '_' | '`' | '~'
+               | '\t' | '\n' | '\r'  # Allow tabs, newlines, and carriage returns as literals
+
+# Dot
+dot            = "."
+
+# Anchors (subset; extend as needed)
+anchor         = "^" | "$" | "\\A" | "\\Z" | "\\z" | "\\b" | "\\B" | "\\G"
+
+# Backreferences
+backreference  = "\\" digits
+               | "\\k" name_ref
+name_ref       = "<" name ">" | "'" name "'"
+name           = name_start name_continue*
+name_start     = letter | '_'
+name_continue  = name_start | digit
+
+# Character classes with actionable code generation
+@generate: generate_char_class_matcher(has_negation($2), collect_class_items($2))
+@optimize: count(flatten($2)) > 8 ? "lookup_table" : "linear_checks"
+@validate: all(extract_ranges($2), r => valid_range(r.start, r.end))
+char_class     = "[" negation? class_body "]"
+
+@generate: "^" if $1 else ""
+@semantic_value: $1 != null
+negation       = "^"
+
+@generate: build_class_items_list($1)
+@semantic_value: flatten($1)
+@validate: all($1, item => is_valid_class_item(item))
+class_body     = class_item*
+
+@dispatch: {
+    "range": generate_range_check($1.start, $1.end),
+    "literal": generate_literal_check($1.char),
+    "escape": generate_escape_check($1.pattern),
+    "posix": generate_posix_check($1.name)
+}
+class_item     = class_range
+               | class_literal
+               | class_escape
+               | posix_class
+
+@generate: "ch >= '" + escape_char($1) + "' && ch <= '" + escape_char($3) + "'"
+@semantic_value: {type: "range", start: $1, end: $3}
+@validate: ord($1) <= ord($3)
+class_range    = class_atom "-" class_atom
+
+@generate: "ch == '" + escape_char($1) + "'"
+@semantic_value: {type: "literal", char: $1}
+@optimize: group_literals_for_switch($1)
+class_literal  = letter | digit | whitespace | class_safe_special
+
+class_safe_special = '!' | '@' | '#' | '$' | '%' | '^' | '&' | '*' | '(' | ')' | '-' | '+' | '=' | '{' | '}' | '|' | ':' | ';' | '"' | "'" | '<' | '>' | ',' | '.' | '?' | '/' | '`' | '~' | '_'
+
+@generate: resolve_escape_pattern($1)
+@semantic_value: {type: "escape", pattern: $1}
+@dispatch_table: {
+    "\\d": "ch.is_ascii_digit()",
+    "\\w": "ch.is_alphanumeric() || ch == '_'",
+    "\\s": "ch.is_whitespace()",
+    "\\n": "ch == '\\n'",
+    "\\t": "ch == '\\t'",
+    "\\r": "ch == '\\r'"
+}
+class_escape   = escape
+
+@generate: generate_posix_class_check($2)
+@semantic_value: {type: "posix", name: $2}
+posix_class    = "[:" posix_name ":]"
+
+@generate: extract_char_value($1)
+@semantic_value: {type: "atom", value: $1}
+class_atom     = class_escape | class_literal
+
+@generate: resolve_posix_class_name($1)
+@semantic_value: $1
+@dispatch_table: {
+    "alnum": "ch.is_alphanumeric()",
+    "alpha": "ch.is_alphabetic()",
+    "digit": "ch.is_ascii_digit()",
+    "lower": "ch.is_lowercase()",
+    "upper": "ch.is_uppercase()",
+    "space": "ch.is_whitespace()",
+    "word": "ch.is_alphanumeric() || ch == '_'",
+    "xdigit": "ch.is_ascii_hexdigit()"
+}
+posix_name     = "alnum" | "alpha" | "ascii" | "blank" | "cntrl" | "digit" | "graph"
+               | "lower" | "print" | "punct" | "space" | "upper" | "word" | "xdigit"
+
+# Escapes (common PCRE forms) with context-aware interpretation
+@type: "context_sensitive_escape_sequence"
+@description: "Escape sequence that interprets differently based on context"
+@effect: "produces_literal_character"
+@precedence: {level: 10, context: "any"}
+@codegen: "escape_literal_handling"
+escape         = "\\" escape_unit
+
+@type: "escape_variant_choice"
+@description: "Specific type of escape sequence"
+@constraint: "must produce valid character value"
+escape_unit    = simple_escape
+               | hex_escape
+               | unicode_escape
+               | octal_escape
+               | control_escape
+               | property_escape
+
+@type: "literal_escape"
+@description: "Simple character escape like \n, \t, \\, etc."
+@effect: "maps_to_literal_character"
+@constraint: "interpretation depends on escaped character"
+simple_escape  = any_char             # any char after backslash
+
+@type: "hexadecimal_escape"
+@description: "Hex escape sequences \xFF or \x{FFFF}"
+@constraint: "must be valid hexadecimal digits"
+@precedence: {level: 9}
+hex_escape     = "x" hex_digit hex_digit | "x{" hex_digits "}"
+
+@type: "unicode_escape"
+@description: "Unicode escape sequence \u{FFFF}"
+@constraint: "must be valid Unicode code point"
+@precedence: {level: 9}
+unicode_escape = "u{" hex_digits "}"
+
+@type: "octal_escape"
+@description: "Octal escape sequence \777"
+@constraint: "must be valid octal digits 0-7"
+@precedence: {level: 9}
+octal_escape   = octal_digit octal_digit? octal_digit?
+
+@type: "control_escape"
+@description: "Control character escape \cA"
+@constraint: "produces control character"
+control_escape = "c" any_char
+
+@type: "property_escape"
+@description: "Unicode property escape \p{Property} or \P{Property}"
+@constraint: "property name must be valid Unicode property"
+property_escape= "p{" prop_name "}" | "P{" prop_name "}"
+
+@type: "property_name"
+@description: "Unicode property name"
+prop_name      = prop_name_chars+
+
+prop_name_chars = letter | digit | '_' | ':' | '-'
+
+# Groups
+group          = capturing_group | noncapturing_group | named_group
+
+capturing_group      = "(" pattern ")"
+noncapturing_group   = "(?:" pattern ")"
+named_group          = "(?<" name ">" pattern ")"
+                     | "(?'" name "'" pattern ")"
+
+atomic_group         = "(?>" pattern ")"
+
+lookaround           = lookahead_pos | lookahead_neg | lookbehind_pos | lookbehind_neg
+lookahead_pos        = "(?=" pattern ")"
+lookahead_neg        = "(?!" pattern ")"
+lookbehind_pos       = "(?<=" pattern ")"
+lookbehind_neg       = "(?<!" pattern ")"
+
+# Inline modifier changes: global and scoped
+inline_modifiers           = "(?(" modifier_seq ")"                  # e.g., (?i-mx)
+scoped_inline_modifiers    = "(?(" modifier_seq ":" pattern ")"      # e.g., (?x: ...)
+modifier_seq               = modifier_group ("-" modifier_group)?
+modifier_group             = modifier_char+
+modifier_char              = "i" | "m" | "s" | "x" | "U" | "J" | "u" | "a" | "d" | "S" | "A" | "X" | "R" | "n"
+
+# Conditionals: (?(cond)yes|no)
+conditional       = "(" "?(" condition ")" yes_branch ("|" no_branch)? ")"
+yes_branch        = pattern
+no_branch         = pattern
+condition         = lookaround | name_ref | digits
+
+# Embedded code blocks for rgx hooks (Lua/JS)
+# Properly handles balanced braces and string literals
+code_block     = code_block_plain | code_block_lang
+code_block_plain = "(?{" code_content "})"
+code_block_lang  = "(?{" code_lang ":" ws? code_content "})"
+code_lang      = "lua" | "js"
+
+# Code content with proper brace balancing and string handling
+code_content   = code_element*
+code_element   = code_string_double
+               | code_string_single  
+               | code_balanced_braces
+               | code_escaped_char
+               | code_regular_char
+
+# Double-quoted strings: "..." (can contain unbalanced braces)
+code_string_double = '"' code_string_double_char* '"'
+code_string_double_char = code_string_escape | code_not_quote_or_backslash
+
+# Single-quoted strings: '...' (can contain unbalanced braces)
+code_string_single = "'" code_string_single_char* "'"
+code_string_single_char = code_string_escape | code_not_squote_or_backslash
+
+# String escape sequences
+code_string_escape = "\\" any_char
+
+# Balanced braces: { ... }
+code_balanced_braces = "{" code_content "}"
+
+# Escaped characters (don't participate in balancing)
+code_escaped_char = "\\" any_char
+
+# Regular characters (anything except special chars)
+code_regular_char = letter | digit | whitespace | code_safe_special
+
+# Characters safe to use in code blocks (excluding braces, quotes, and backslash)
+code_not_quote_or_backslash = letter | digit | whitespace | code_safe_special | '\'' | '{' | '}'
+code_not_squote_or_backslash = letter | digit | whitespace | code_safe_special | '"' | '{' | '}'
+code_safe_special = '!' | '@' | '#' | '$' | '%' | '^' | '&' | '*' | '(' | ')' | '-' | '+' | '=' | '[' | ']' | '|' | ':' | ';' | '<' | '>' | ',' | '.' | '?' | '/' | '`' | '~' | '_'
+
+# Basic character building blocks
+letter         = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+               | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+
+digit          = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+hex_digit      = digit | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f'
+
+octal_digit    = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7'
+
+whitespace     = ' ' | '\t' | '\n' | '\r' | '\f' | '\v'
+
+any_char       = letter | digit | whitespace | special_char
+
+special_char   = '!' | '@' | '#' | '$' | '%' | '^' | '&' | '*' | '(' | ')' | '-' | '+' | '=' | '[' | ']' | '{' | '}' | '|' | '\\' | ':' | ';' | '"' | '\'' | '<' | '>' | ',' | '.' | '?' | '/' | '`' | '~'
+
+# Lexical helpers
+digits         = digit+
+hex_digits     = hex_digit+
+octal_digits   = octal_digit+
+ws             = whitespace+
