@@ -13,8 +13,6 @@ use File::Spec;
 use File::Find;
 use Cwd;
 
-use Global;
-
 
 sub new {bless {}, ref $_[0] || $_[0]}
 

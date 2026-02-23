@@ -9,6 +9,7 @@ use Test::More;
 use FindBin qw($Bin);
 use File::Basename qw(basename);
 use File::Spec;
+use Cwd qw(getcwd);
 
 use lib "$Bin/../perl";
 use LinkedSpec;
@@ -38,6 +39,61 @@ subtest 'compile_all_target_specs' => sub {
     }
 };
 
+subtest 'get_parser_local_resolution_without_pathsearch' => sub {
+    plan tests => 4;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before local-resolution check');
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser('Lispish');
+        my $input = '(x y)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '';
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser executes from non-project cwd') or diag(normalize_error($err));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'module-relative Lispish parser resolves without cwd assumptions');
+    ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
+        'module-relative parser executes and keeps PathSearch unloaded');
+};
+
+subtest 'get_parser_pathsearch_fallback' => sub {
+    plan tests => 5;
+
+    my $tmp_name = 'phase1_pathsearch_fallback_' . $$;
+    my $tmp_dir = File::Spec->catdir($Bin, 'tmp_phase1_pathsearch');
+    my $tmp_spec = File::Spec->catfile($tmp_dir, "$tmp_name.spec");
+    my $module_relative_candidate = File::Spec->catfile($spec_dir, "$tmp_name.spec");
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+
+    mkdir($tmp_dir) or die "Cannot create directory '$tmp_dir': $!" unless -d $tmp_dir;
+    open(my $fh, '>', $tmp_spec) or die "Cannot create fallback spec '$tmp_spec': $!";
+    print {$fh} $source_content;
+    close($fh);
+
+    ok(-f $tmp_spec, 'temporary fallback spec created');
+    ok(!-f $module_relative_candidate, 'module-relative candidate does not exist for fallback case');
+
+    my $parser = LinkedSpec::get_parser($tmp_name);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'fallback parser created through get_parser');
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded when fallback resolution is needed');
+
+    my $input = '(u v)';
+    my $ast = eval { $parser->(\$input) };
+    ok(!$@ && defined($ast) && ref($ast) eq 'ARRAY', 'fallback parser executes and returns AST')
+        or diag(normalize_error($@));
+
+    unlink($tmp_spec) or die "Cannot remove temporary fallback spec '$tmp_spec': $!";
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

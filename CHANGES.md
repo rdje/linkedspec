@@ -156,4 +156,60 @@ Completed the first parser-core isolation step in `LinkedSpec`: removed eager pl
 - Result:
   - PASS
   - compile/smoke/corpus blocks all green.
-  - prior `Lispish.pm` smartmatch warnings no longer appear in this suite run.
+  - prior `Lispish.pm` smartmatch warnings no longer appear in module-relative-only paths.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Resolution Paths
+## Summary
+Expanded regression coverage to explicitly verify both `get_parser` resolution paths: module-relative local resolution (without cwd dependency) and lazy `PathSearch` fallback resolution.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_local_resolution_without_pathsearch`:
+  - changes cwd to a temporary non-project directory,
+  - verifies `LinkedSpec::get_parser('Lispish')` still resolves/parser-runs,
+  - verifies `PathSearch.pm` remains unloaded when module-relative resolution succeeds.
+- Added subtest `get_parser_pathsearch_fallback`:
+  - creates a temporary `.spec` outside `specs/` to force fallback path,
+  - verifies parser is created and executed,
+  - verifies `PathSearch.pm` is loaded only when fallback resolution is required.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - new subtests pass.
+  - Inference: exercising `PathSearch` fallback currently triggers legacy smartmatch warnings from `perl/Lispish.pm` via fallback dependency chain.
+
+## 2026-02-23 - Phase 1 Isolation Follow-up: Fallback Path Dependency Decoupling
+## Summary
+Removed unnecessary `PathSearch` dependency on `Global` so `get_parser` fallback no longer drags legacy modules into the load path.
+
+## Changed Files
+- Updated: `perl/PathSearch.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed `use Global;` from `perl/PathSearch.pm`.
+- Root cause chain was:
+  - `LinkedSpec::get_parser` fallback loads `PathSearch`,
+  - `PathSearch` imported `Global` even though it did not use it,
+  - `Global` pulled `HUtils`,
+  - `HUtils` pulls `Lispish`,
+  - `Lispish` emits smartmatch experimental warnings.
+- The `PathSearch` functionality used by `get_parser` (`go`) remains unchanged.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - compile, resolution-path, smoke, and corpus subtests all green.
+  - fallback-resolution subtest no longer emits the prior `Lispish.pm` smartmatch warnings.

@@ -59,6 +59,9 @@ It should not be reframed as a strict EBNF clone.
 - Baseline test entry point: `t/phase0_regression.t`.
 - Scope:
   - Compile/generation checks for all `specs/*.spec` except `tclite.spec` (currently deferred).
+  - `get_parser` resolution-path checks:
+    - module-relative local resolution from non-project cwd (no `PathSearch` load),
+    - lazy `PathSearch` fallback when local/module-relative candidate is absent.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -86,6 +89,9 @@ It should not be reframed as a strict EBNF clone.
   - keeps `PathSearch` as lazy fallback only.
 - Regression harness decoupled from direct `Lispish.pm` import:
   - uses LinkedSpec-generated `Lispish` parser coderef for stream parsing in corpus tests.
+- Fallback-path coupling cleanup:
+  - `PathSearch.pm` no longer imports `Global.pm` (unused for `PathSearch->go` behavior).
+  - This prevents fallback-only parser resolution from loading `HUtils`/`Lispish` through `Global`.
 
 ## Change Discipline
 Before each commit:

@@ -43,10 +43,10 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Keep Phase-0 baseline green while preparing Phase-1 start:
-  - preserve current regression suite in CI/local workflow,
-  - keep `tclite.spec` deferred until explicitly resumed,
-  - begin parser-core isolation planning with compatibility preserved.
+- Continue Phase-1 isolation by tightening fallback-path load surface:
+  - keep resolution-path tests green,
+  - identify any remaining unnecessary imports in fallback-related modules,
+  - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
 - Created and initialized live documents:
@@ -78,7 +78,19 @@ When resuming after interruption:
 - Re-ran baseline after these changes:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
-  - observation: prior `Lispish.pm` smartmatch warnings no longer appear in suite output.
+- Added explicit resolution-path regression coverage in `t/phase0_regression.t`:
+  - `get_parser_local_resolution_without_pathsearch`: verifies module-relative resolution works from non-project cwd and keeps `PathSearch.pm` unloaded.
+  - `get_parser_pathsearch_fallback`: creates a temporary fallback spec outside `specs/` and verifies fallback parser creation/execution with lazy `PathSearch` load.
+- Re-ran baseline with the new subtests:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+- Follow-up fallback-path isolation fix:
+  - removed unused `use Global;` from `perl/PathSearch.pm`.
+  - root-cause chain removed: `PathSearch -> Global -> HUtils -> Lispish`.
+- Re-ran baseline after the decoupling:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - observation: fallback path no longer emits the prior `Lispish.pm` smartmatch warnings.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:
