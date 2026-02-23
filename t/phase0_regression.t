@@ -142,6 +142,133 @@ subtest 'get_parser_empty_spec_name_reports_error_without_pathsearch' => sub {
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after empty-spec-name checks');
 };
+subtest 'get_parser_whitespace_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before whitespace-spec-name checks');
+
+    my ($ok_space, $parser_space, $err_space, $out_space, $warn_space) = run_get_parser_with_captured_io('   ');
+    ok($ok_space, 'space-only-spec get_parser call returns without die') or diag(normalize_error($err_space));
+    ok(!defined($parser_space), 'space-only-spec get_parser returns undef');
+    like($out_space, qr/Invalid spec name/, 'space-only-spec diagnostics report invalid spec name');
+
+    my ($ok_mixed, $parser_mixed, $err_mixed, $out_mixed, $warn_mixed) = run_get_parser_with_captured_io(" \t\n");
+    ok($ok_mixed, 'whitespace-mixed-spec get_parser call returns without die') or diag(normalize_error($err_mixed));
+    ok(!defined($parser_mixed), 'whitespace-mixed-spec get_parser returns undef');
+    like($out_mixed, qr/Invalid spec name/, 'whitespace-mixed-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after whitespace-spec-name checks');
+};
+subtest 'get_parser_missing_explicit_path_skips_pathsearch' => sub {
+    plan tests => 6;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before missing-explicit-path check');
+
+    my $missing_path = File::Spec->catfile($Bin, 'tmp_phase1_missing', 'does_not_exist.spec');
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($missing_path);
+
+    ok($ok_call, 'missing-explicit-path get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'missing-explicit-path get_parser returns undef');
+    like($out, qr/Spec path not found/, 'missing-explicit-path reports "Spec path not found"');
+    like($out . $warn, qr/\Q$missing_path\E/, 'missing-explicit-path diagnostics include requested path');
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after missing-explicit-path check');
+};
+subtest 'get_parser_missing_dot_spec_name_skips_pathsearch' => sub {
+    plan tests => 6;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before missing-dot-spec-name check');
+
+    my $missing_spec_name = 'phase1_missing_dot_spec_name_' . $$ . '.spec';
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($missing_spec_name);
+
+    ok($ok_call, 'missing-dot-spec-name get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'missing-dot-spec-name get_parser returns undef');
+    like($out, qr/Spec path not found/, 'missing-dot-spec-name reports "Spec path not found"');
+    like($out . $warn, qr/\Q$missing_spec_name\E/, 'missing-dot-spec-name diagnostics include requested name');
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after missing-dot-spec-name check');
+};
+subtest 'get_parser_pathsearch_load_failure_reports_error' => sub {
+    plan tests => 6;
+
+    require File::Temp;
+    my $tmp_inc = File::Temp::tempdir(CLEANUP => 1);
+    my $missing_name = 'phase1_force_pathsearch_load_failure_' . $$;
+    my ($ok_call, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before forced-load-failure check');
+
+    $ok_call = eval {
+        local @INC = ($tmp_inc);
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$out) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$warn) or die "Unable to capture STDERR: $!";
+        $parser = LinkedSpec::get_parser($missing_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'PathSearch-load-failure get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'PathSearch-load-failure get_parser returns undef');
+    like($out, qr/Unable to resolve spec/, 'PathSearch-load-failure diagnostics report unresolved spec');
+    like($out, qr/PathSearch load failed:/, 'PathSearch-load-failure diagnostics report require failure');
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after forced-load-failure check');
+};
+subtest 'get_parser_pathsearch_runtime_failure_reports_error' => sub {
+    plan tests => 6;
+
+    my $missing_name = 'phase1_force_pathsearch_runtime_failure_' . $$;
+    my ($ok_call, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+
+    require PathSearch;
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded for runtime-failure check');
+
+    $ok_call = eval {
+        no warnings 'redefine';
+        local *PathSearch::go = sub { die "__PHASE1_PATHSEARCH_GO_DIE__\n" };
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$out) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$warn) or die "Unable to capture STDERR: $!";
+        $parser = LinkedSpec::get_parser($missing_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'PathSearch-runtime-failure get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'PathSearch-runtime-failure get_parser returns undef');
+    like($out, qr/Unable to resolve spec/, 'PathSearch-runtime-failure diagnostics report unresolved spec');
+    like($out, qr/PathSearch runtime failure:/, 'PathSearch-runtime-failure diagnostics report runtime failure');
+    like($out . $warn, qr/__PHASE1_PATHSEARCH_GO_DIE__/, 'PathSearch-runtime-failure diagnostics include underlying die marker');
+};
+subtest 'get_parser_pathsearch_returns_missing_file_reports_error' => sub {
+    plan tests => 6;
+
+    my $missing_name = 'phase1_force_pathsearch_missing_file_' . $$;
+    my $fake_resolved = File::Spec->catfile($Bin, 'tmp_phase1_missing', "pathsearch_missing_" . $$ . '.spec');
+    my ($ok_call, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+
+    require PathSearch;
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded for fallback-resolved-missing-file check');
+
+    $ok_call = eval {
+        no warnings 'redefine';
+        local *PathSearch::go = sub { return $fake_resolved };
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$out) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$warn) or die "Unable to capture STDERR: $!";
+        $parser = LinkedSpec::get_parser($missing_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'PathSearch-resolved-missing-file get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'PathSearch-resolved-missing-file get_parser returns undef');
+    like($out, qr/Spec path not found/, 'PathSearch-resolved-missing-file diagnostics report not-found');
+    like($out . $warn, qr/\Q$missing_name\E/, 'PathSearch-resolved-missing-file diagnostics include requested spec');
+    like($out . $warn, qr/\Q$fake_resolved\E/, 'PathSearch-resolved-missing-file diagnostics include resolved missing path');
+};
 
 subtest 'get_parser_pathsearch_fallback' => sub {
     plan tests => 5;

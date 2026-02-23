@@ -1278,19 +1278,32 @@ sub _resolve_local_spec_path {
 sub get_parser {
  my ($spec_name, @opts) = @_;
 
- unless (defined $spec_name && length $spec_name) {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined or empty");
+ unless (defined $spec_name && $spec_name =~ /\S/o) {
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, or whitespace-only");
   return undef
  }
 
  my $spec_path = _resolve_local_spec_path($spec_name);
+ my $is_explicit_path = ($spec_name =~ m{[/\\]}o);
+ my $is_explicit_spec_name = ($spec_name =~ /\.spec$/o);
+ unless ($spec_path) {
+  if ($is_explicit_path || $is_explicit_spec_name) {
+   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='<undef>'");
+   return undef
+  }
+ }
  unless ($spec_path) {
   my $ok = eval {require PathSearch; 1};
   unless ($ok) {
    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch load failed: $@");
    return undef
   }
-
+  my $resolved_spec_path = eval { PathSearch->go($spec_name, 'spec') };
+  if ($@) {
+   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch runtime failure: $@");
+   return undef
+  }
+  $spec_path = $resolved_spec_path;
   $spec_path = PathSearch->go($spec_name, 'spec');
  }
 

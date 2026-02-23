@@ -171,6 +171,64 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 17 top-level test blocks pass.
+- Added fallback-loader failure-path coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_pathsearch_load_failure_reports_error`,
+  - forces fallback resolution while isolating `@INC` to an empty temporary directory so `require PathSearch` fails,
+  - assertions: no die, undef parser, unresolved-spec + `PathSearch load failed` diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with fallback-loader failure coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 18 top-level test blocks pass.
+- Hardened explicit-path miss handling in `LinkedSpec::get_parser`:
+  - unresolved path-like spec names (with path separators) now report `Spec path not found` directly,
+  - fallback `PathSearch` loading is skipped for these explicit-path miss cases.
+- Added explicit-path miss no-fallback regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_missing_explicit_path_skips_pathsearch`,
+  - assertions: no die, undef return, requested-path diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with explicit-path miss no-fallback coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 19 top-level test blocks pass.
+- Hardened missing `.spec` basename handling in `LinkedSpec::get_parser`:
+  - unresolved `.spec`-suffixed names now report `Spec path not found` directly,
+  - fallback `PathSearch` loading is skipped for these explicit `.spec` miss cases.
+- Added missing `.spec` basename no-fallback regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_missing_dot_spec_name_skips_pathsearch`,
+  - assertions: no die, undef return, requested-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with missing `.spec` basename no-fallback coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 20 top-level test blocks pass.
+- Hardened fallback runtime-failure handling in `LinkedSpec::get_parser`:
+  - wrapped `PathSearch->go` in `eval` inside fallback flow,
+  - runtime exceptions now emit diagnostics and return `undef` instead of escaping via outer die.
+- Added PathSearch runtime-failure regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_pathsearch_runtime_failure_reports_error`,
+  - monkey-patches `PathSearch::go` to `die`,
+  - assertions: no outer die, undef parser, unresolved-spec/runtime-failure diagnostics, and sentinel die marker in output.
+- Re-ran baseline with fallback runtime-failure coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 21 top-level test blocks pass.
+- Added fallback-resolved-missing-file coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_pathsearch_returns_missing_file_reports_error`,
+  - monkey-patches `PathSearch::go` to return a deterministic non-existent `*.spec` path,
+  - assertions: no die, undef parser, and diagnostics include not-found + requested spec + resolved missing path.
+- Re-ran baseline with fallback-resolved-missing-file coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 22 top-level test blocks pass.
+- Hardened whitespace-only spec-name input handling in `LinkedSpec::get_parser`:
+  - invalid-name gate now requires at least one non-whitespace character,
+  - whitespace-only names now fail fast with diagnostics + undef return before any fallback activity.
+- Added whitespace-only invalid-name regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_whitespace_spec_name_reports_error_without_pathsearch`,
+  - covers `'   '` and `" \t\n"` inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with whitespace-only invalid-name coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 23 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

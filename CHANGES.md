@@ -448,3 +448,166 @@ Added fail-fast guard behavior for invalid `get_parser` spec-name inputs (`undef
 - Result:
   - PASS
   - all 17 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser PathSearch-Load-Failure Negative Path
+## Summary
+Added regression coverage for the fallback-loader failure branch where `get_parser` cannot `require PathSearch`, and locked the diagnostic/error-return behavior.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_pathsearch_load_failure_reports_error`.
+- Scenario:
+  - force fallback resolution with a unique missing spec name,
+  - isolate module search path with temporary empty `@INC` so `require PathSearch` fails.
+- Asserts:
+  - `get_parser` returns without die,
+  - returned parser is `undef`,
+  - diagnostics include unresolved-spec error and `PathSearch load failed` details,
+  - `PathSearch.pm` remains unloaded before and after the call.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 18 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Skip PathSearch Fallback for Missing Explicit Paths
+## Summary
+Hardened `get_parser` to fail fast on unresolved path-like spec arguments (containing path separators) without loading `PathSearch`, and added regression coverage to lock the behavior.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` path-resolution flow:
+  - after local/module-relative resolution fails, path-like spec names now report `Spec path not found` directly,
+  - fallback `require PathSearch` is skipped for these explicit-path misses.
+- Added subtest `get_parser_missing_explicit_path_skips_pathsearch`:
+  - calls `get_parser` with missing explicit file path,
+  - asserts no die, `undef` return, and not-found diagnostics include requested path,
+  - asserts `PathSearch.pm` remains unloaded before and after the call.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 19 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Skip PathSearch Fallback for Missing .spec Basenames
+## Summary
+Hardened `get_parser` to treat unresolved `.spec`-suffixed arguments as explicit file-name misses and avoid `PathSearch` fallback loading for this case.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser`:
+  - unresolved arguments ending in `.spec` now report `Spec path not found` directly,
+  - fallback `require PathSearch` is skipped for these explicit `.spec` misses.
+- Added subtest `get_parser_missing_dot_spec_name_skips_pathsearch`:
+  - calls `get_parser` with a guaranteed-missing `<name>.spec`,
+  - asserts no die, `undef` return, and not-found diagnostics include requested name,
+  - asserts `PathSearch.pm` remains unloaded before and after the call.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 20 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Trap PathSearch Runtime Failure in get_parser Fallback
+## Summary
+Hardened `get_parser` fallback flow to trap runtime exceptions thrown by `PathSearch->go`, return `undef`, and emit explicit diagnostics instead of propagating `die`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` fallback resolution:
+  - wrapped `PathSearch->go($spec_name, 'spec')` in `eval`,
+  - on runtime exception, emits `Unable to resolve spec` + `PathSearch runtime failure` diagnostics and returns `undef`.
+- Added subtest `get_parser_pathsearch_runtime_failure_reports_error`:
+  - monkey-patches `PathSearch::go` to `die` with a sentinel marker,
+  - asserts no outer die from `get_parser`, `undef` return, runtime-failure diagnostics, and sentinel propagation in captured diagnostics.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 21 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser PathSearch-Resolved Missing-File Path
+## Summary
+Added regression coverage for the fallback branch where `PathSearch->go` returns a path string that does not exist on disk, and locked the resulting `Spec path not found` behavior.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_pathsearch_returns_missing_file_reports_error`.
+- Scenario:
+  - monkey-patch `PathSearch::go` to return a deterministic non-existent `*.spec` path,
+  - call `LinkedSpec::get_parser` with a missing spec name to force fallback resolution path.
+- Asserts:
+  - call returns without die,
+  - parser return is `undef`,
+  - diagnostics include `Spec path not found`,
+  - diagnostics include both requested spec name and the resolved missing file path.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 22 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser Whitespace-Only Spec-Name Guard
+## Summary
+Hardened `get_parser` input validation so whitespace-only spec names are treated as invalid (same fail-fast behavior as `undef`/empty names), with regression coverage that confirms no fallback loader activity.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` invalid-name gate:
+  - validation now requires at least one non-whitespace character (`/\S/`),
+  - whitespace-only names return `undef` with `Invalid spec name` diagnostics before resolution/fallback.
+- Added subtest `get_parser_whitespace_spec_name_reports_error_without_pathsearch`:
+  - checks both `'   '` and `" \\t\\n"` inputs,
+  - asserts no die, `undef` return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 23 top-level test blocks pass.
