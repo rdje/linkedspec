@@ -45,7 +45,7 @@ When resuming after interruption:
 ## Next Recommended Work Item
 - Continue Phase-1 hardening with targeted behavior locks:
   - keep full resolution-order tests green,
-  - add targeted checks for explicit exit-path diagnostics emitted by generated handlers,
+  - add targeted checks for additional explicit exit paths outside ACTION/BLIND CALL conflict handling,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
@@ -131,6 +131,15 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 14 top-level test blocks pass.
+- Added mixed ACTION/BLIND CALL explicit-exit coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_mixed_action_blind_call_trapped_exit`,
+  - scenario: `Top` rule intentionally mixes `->` and `=>`,
+  - assertions: subprocess exit code is `1` and diagnostics include rule + remediation guidance.
+- Added helper `run_get_parser_in_subprocess` (`IPC::Open3`) for safe exit-path testing without in-process context corruption.
+- Re-ran baseline with explicit-exit coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 15 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

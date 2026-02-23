@@ -10,6 +10,8 @@ use FindBin qw($Bin);
 use File::Basename qw(basename);
 use File::Spec;
 use Cwd qw(getcwd);
+use IPC::Open3;
+use Symbol qw(gensym);
 
 use lib "$Bin/../perl";
 use LinkedSpec;
@@ -249,6 +251,41 @@ SPEC
     ok(!defined($ast), 'malformed-handler parser invocation returns undef AST');
     ok(length($inner_eval_err) > 0, 'malformed-handler parser invocation exposes inner eval error');
     like($inner_eval_err, qr/syntax error/i, 'malformed-handler inner eval error reports syntax issue');
+
+    unlink($tmp_spec);
+};
+subtest 'get_parser_mixed_action_blind_call_trapped_exit' => sub {
+    plan tests => 6;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_mixed_action_blind_call.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> Top { return_a(Top) }
+ => helper
+
+helper:
+ /a/
+ -> helper { return_a(helper) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create mixed-action/blind-call spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary mixed-action/blind-call spec created');
+
+    my ($exit_code, $out, $err) = run_get_parser_in_subprocess($tmp_spec);
+    my $combined = ($out // '') . ($err // '');
+
+    is(defined($exit_code) ? $exit_code : '<undef>', '1', 'mixed-action/blind-call subprocess exit code is 1');
+    like($combined, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/,
+        'mixed-action/blind-call diagnostics report incompatible action types');
+    like($combined, qr/Rule 'Top'/, 'mixed-action/blind-call diagnostics include rule label');
+    like($combined, qr/Solution: Use either ACTION blocks OR BLIND CALL blocks, not both/,
+        'mixed-action/blind-call diagnostics include remediation guidance');
+    unlike($combined, qr/__PARSER_DEFINED__/, 'mixed-action/blind-call subprocess does not return parser-defined marker');
 
     unlink($tmp_spec);
 };
@@ -509,6 +546,32 @@ sub run_get_parser_with_captured_io {
 
     $err = $@ // '' unless $ok;
     return ($ok ? 1 : 0, $ret, $err, $stdout, $stderr);
+}
+
+sub run_get_parser_in_subprocess {
+    my ($spec_name) = @_;
+    my ($out, $err) = ('', '');
+    my $err_fh = gensym();
+    my $parser_marker = '__PARSER_DEFINED__';
+
+    my $pid = open3(
+        undef,
+        my $out_fh,
+        $err_fh,
+        $^X,
+        "-I$Bin/../perl",
+        '-MLinkedSpec',
+        '-e',
+        "my \$s = shift; my \$p = LinkedSpec::get_parser(\$s); print defined(\$p) ? \"$parser_marker\\n\" : \"__PARSER_UNDEF__\\n\";",
+        $spec_name,
+    );
+
+    $out .= $_ while <$out_fh>;
+    $err .= $_ while <$err_fh>;
+    waitpid($pid, 0);
+    my $exit_code = $? >> 8;
+
+    return ($exit_code, $out, $err);
 }
 
 sub run_parser_with_captured_io {

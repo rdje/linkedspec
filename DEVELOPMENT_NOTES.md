@@ -73,6 +73,9 @@ It should not be reframed as a strict EBNF clone.
     - invalid DSL content returns `undef` without die and reports validation/critical error diagnostics.
   - `get_parser` malformed-handler runtime negative-path check:
     - parser coderef builds, but malformed embedded action Perl reports runtime inner eval syntax error and returns undefined AST.
+  - `get_parser` mixed ACTION/BLIND CALL explicit-exit check:
+    - incompatible `->` and `=>` usage exits with code 1 and emits rule-level remediation diagnostics,
+    - validated via subprocess execution to avoid in-process test context interference.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

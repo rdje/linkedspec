@@ -362,3 +362,31 @@ Added regression coverage for post-generation runtime handler failures caused by
 - Result:
   - PASS
   - all 14 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Mixed ACTION/BLIND CALL Exit Path
+## Summary
+Added regression coverage for explicit `exit 1` behavior when a spec rule mixes ACTION (`->`) and BLIND CALL (`=>`) blocks, and validated emitted diagnostics.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_mixed_action_blind_call_trapped_exit`.
+- Scenario:
+  - create temporary spec where `Top` rule contains both `->` and `=>` flows.
+  - invoke `LinkedSpec::get_parser` in a subprocess to isolate explicit `exit` behavior from the test harness.
+- Asserts:
+  - subprocess exits with code `1`,
+  - diagnostics include incompatible ACTION/BLIND CALL message,
+  - diagnostics include offending rule label and remediation guidance.
+- Added helper `run_get_parser_in_subprocess` using `IPC::Open3` to capture stdout/stderr and exit status safely.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 15 top-level test blocks pass.
