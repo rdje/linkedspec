@@ -321,6 +321,19 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 33 top-level test blocks pass.
+- Generalized non-regular path handling in `LinkedSpec::get_parser`:
+  - existing explicit paths that are not regular files now consistently report `Spec path is not a file`,
+  - fallback-resolved existing non-regular paths now use the same not-a-file diagnostics,
+  - diagnostics include `type='directory'` or `type='non-regular'`.
+- Added non-regular-path regression coverage in `t/phase0_regression.t`:
+  - `get_parser_explicit_non_regular_path_reports_error_without_pathsearch`,
+  - `get_parser_pathsearch_returns_non_regular_path_reports_error`,
+  - uses `File::Spec->devnull` for stable non-regular path checks,
+  - assertions: no die, undef parser, not-a-file diagnostics with type marker, and single fallback resolver invocation.
+- Re-ran baseline with non-regular-path handling coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 35 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

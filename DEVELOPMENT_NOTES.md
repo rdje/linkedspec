@@ -90,6 +90,9 @@ It should not be reframed as a strict EBNF clone.
   - `get_parser` directory-path negative-path checks:
     - explicit directory path arguments return `undef` without die and report `Spec path is not a file`,
     - fallback-resolved directory paths (via `PathSearch::go`) return `undef` without die with directory-path diagnostics.
+  - `get_parser` non-regular-path negative-path checks:
+    - explicit non-regular path arguments (e.g. `File::Spec->devnull`) return `undef` without die and report `Spec path is not a file`,
+    - fallback-resolved non-regular paths (via `PathSearch::go`) return `undef` without die with non-regular path diagnostics.
   - `get_parser` explicit-.spec-miss negative-path checks:
     - unresolved `.spec`-suffixed basenames return `undef` without die and report `Spec path not found`,
     - `.spec` misses skip fallback loader paths and keep `PathSearch.pm` unloaded.
@@ -149,7 +152,7 @@ It should not be reframed as a strict EBNF clone.
   - fallback resolution is now fully covered by the eval-guarded call path.
 - `LinkedSpec::get_parser` now distinguishes missing paths vs directory paths:
   - unresolved explicit path-like names report `Spec path not found`,
-  - resolved directory paths report `Spec path is not a file`.
+  - resolved directory and non-regular paths report `Spec path is not a file`.
 - Regression harness decoupled from direct `Lispish.pm` import:
   - uses LinkedSpec-generated `Lispish` parser coderef for stream parsing in corpus tests.
 - Fallback-path coupling cleanup:

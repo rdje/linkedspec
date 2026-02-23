@@ -318,6 +318,22 @@ subtest 'get_parser_explicit_directory_path_reports_error_without_pathsearch' =>
     like($out . $warn, qr/\Q$tmp_dir\E/, 'explicit-directory-path diagnostics include resolved directory path');
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after explicit-directory-path check');
 };
+subtest 'get_parser_explicit_non_regular_path_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    my $devnull = File::Spec->devnull();
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before explicit-non-regular-path check');
+    ok(-e $devnull, 'non-regular explicit path exists for check');
+
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($devnull);
+
+    ok($ok_call, 'explicit-non-regular-path get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'explicit-non-regular-path get_parser returns undef');
+    like($out, qr/Spec path is not a file/, 'explicit-non-regular-path reports "Spec path is not a file"');
+    like($out . $warn, qr/\Q$devnull\E/, 'explicit-non-regular-path diagnostics include resolved path');
+    like($out . $warn, qr/type='non-regular'/, 'explicit-non-regular-path diagnostics include non-regular type marker');
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after explicit-non-regular-path check');
+};
 subtest 'get_parser_missing_dot_spec_name_skips_pathsearch' => sub {
     plan tests => 6;
 
@@ -445,6 +461,38 @@ subtest 'get_parser_pathsearch_returns_directory_reports_error' => sub {
     like($out . $warn, qr/\Q$missing_name\E/, 'PathSearch-resolved-directory diagnostics include requested spec');
     like($out . $warn, qr/\Q$tmp_dir\E/, 'PathSearch-resolved-directory diagnostics include resolved directory path');
     ok(-d $tmp_dir, 'temporary directory path remains available during check');
+};
+subtest 'get_parser_pathsearch_returns_non_regular_path_reports_error' => sub {
+    plan tests => 9;
+
+    require PathSearch;
+    my $devnull = File::Spec->devnull();
+    my $missing_name = 'phase1_force_pathsearch_non_regular_' . $$;
+    my $go_calls = 0;
+    my ($ok_call, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded for fallback-resolved-non-regular check');
+    ok(-e $devnull, 'non-regular fallback-resolved path exists for check');
+
+    $ok_call = eval {
+        no warnings 'redefine';
+        local *PathSearch::go = sub { ++$go_calls; return $devnull };
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$out) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$warn) or die "Unable to capture STDERR: $!";
+        $parser = LinkedSpec::get_parser($missing_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'PathSearch-resolved-non-regular get_parser call returns without die') or diag(normalize_error($err_call));
+    is($go_calls, 1, 'PathSearch-resolved-non-regular calls PathSearch::go exactly once');
+    ok(!defined($parser), 'PathSearch-resolved-non-regular get_parser returns undef');
+    like($out, qr/Spec path is not a file/, 'PathSearch-resolved-non-regular reports "Spec path is not a file"');
+    like($out . $warn, qr/\Q$missing_name\E/, 'PathSearch-resolved-non-regular diagnostics include requested spec');
+    like($out . $warn, qr/\Q$devnull\E/, 'PathSearch-resolved-non-regular diagnostics include resolved non-regular path');
+    like($out . $warn, qr/type='non-regular'/, 'PathSearch-resolved-non-regular diagnostics include non-regular type marker');
 };
 subtest 'get_parser_pathsearch_fallback_calls_go_once' => sub {
     plan tests => 7;

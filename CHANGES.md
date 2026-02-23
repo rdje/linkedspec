@@ -859,3 +859,35 @@ Hardened `get_parser` to explicitly handle resolved directory paths as a dedicat
 - Result:
   - PASS
   - all 33 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Generalize get_parser Non-Regular Path Handling
+## Summary
+Generalized `get_parser` non-file path handling to treat any existing non-regular path as a dedicated not-a-file error, and expanded regression coverage for explicit and fallback-resolved non-regular paths.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` path handling:
+  - explicit path-like inputs now report `Spec path is not a file` when the target exists but is not a regular file,
+  - fallback-resolved paths now report the same not-a-file diagnostics for any existing non-regular path,
+  - diagnostics include a `type` marker (`directory` or `non-regular`).
+- Added subtest `get_parser_explicit_non_regular_path_reports_error_without_pathsearch`:
+  - uses `File::Spec->devnull` as a stable existing non-regular explicit path,
+  - asserts no die, `undef` return, not-a-file diagnostics with `type='non-regular'`,
+  - asserts `PathSearch.pm` remains unloaded.
+- Added subtest `get_parser_pathsearch_returns_non_regular_path_reports_error`:
+  - monkey-patches `PathSearch::go` to return `File::Spec->devnull`,
+  - asserts no die, `undef` return, not-a-file diagnostics with requested spec + resolved path + `type='non-regular'`,
+  - asserts single fallback resolver invocation.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 35 top-level test blocks pass.

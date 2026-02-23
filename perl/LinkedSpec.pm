@@ -1288,8 +1288,9 @@ sub get_parser {
  my $is_explicit_spec_name = ($spec_name =~ /\.spec$/o);
  unless ($spec_path) {
   if ($is_explicit_path || $is_explicit_spec_name) {
-   if (-e $spec_name && -d $spec_name) {
-    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_name' type='directory'");
+   if (-e $spec_name && !-f $spec_name) {
+    my $path_type = -d $spec_name ? 'directory' : 'non-regular';
+    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_name' type='$path_type'");
     return undef
    }
    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='<undef>'");
@@ -1309,8 +1310,9 @@ sub get_parser {
   }
   $spec_path = $resolved_spec_path;
  }
- if ($spec_path && -e $spec_path && -d $spec_path) {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_path' type='directory'");
+ if ($spec_path && -e $spec_path && !-f $spec_path) {
+  my $path_type = -d $spec_path ? 'directory' : 'non-regular';
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_path' type='$path_type'");
   return undef
  }
 
