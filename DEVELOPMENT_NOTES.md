@@ -76,6 +76,8 @@ It should not be reframed as a strict EBNF clone.
   - `get_parser` mixed ACTION/BLIND CALL explicit-exit check:
     - incompatible `->` and `=>` usage exits with code 1 and emits rule-level remediation diagnostics,
     - validated via subprocess execution to avoid in-process test context interference.
+  - parser invalid-input runtime behavior lock:
+    - invoking generated parser with controlled non-scalar-ref input (via subprocess sentinel conversion) returns undefined AST without process exit.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

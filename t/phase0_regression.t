@@ -289,6 +289,18 @@ SPEC
 
     unlink($tmp_spec);
 };
+subtest 'parser_invalid_input_returns_undef_without_exit' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_parser_invocation_in_subprocess('Lispish', '__INPUT_ARRAYREF__');
+    my $combined = ($out // '') . ($err // '');
+
+    is(defined($exit_code) ? $exit_code : '<undef>', '0', 'invalid-input parser subprocess exit code is 0');
+    like($combined, qr/__AST_UNDEF__/, 'invalid-input parser subprocess reports undef AST marker');
+    unlike($combined, qr/__AST_DEFINED__/, 'invalid-input parser subprocess does not report AST-defined marker');
+    unlike($combined, qr/Error during handler code generation/, 'invalid-input parser subprocess does not emit handler-generation error banner');
+    unlike($combined, qr/__NO_PARSER__/, 'invalid-input parser subprocess confirms parser was created');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
@@ -564,6 +576,32 @@ sub run_get_parser_in_subprocess {
         '-e',
         "my \$s = shift; my \$p = LinkedSpec::get_parser(\$s); print defined(\$p) ? \"$parser_marker\\n\" : \"__PARSER_UNDEF__\\n\";",
         $spec_name,
+    );
+
+    $out .= $_ while <$out_fh>;
+    $err .= $_ while <$err_fh>;
+    waitpid($pid, 0);
+    my $exit_code = $? >> 8;
+
+    return ($exit_code, $out, $err);
+}
+
+sub run_parser_invocation_in_subprocess {
+    my ($spec_name, $input_text) = @_;
+    my ($out, $err) = ('', '');
+    my $err_fh = gensym();
+
+    my $pid = open3(
+        undef,
+        my $out_fh,
+        $err_fh,
+        $^X,
+        "-I$Bin/../perl",
+        '-MLinkedSpec',
+        '-e',
+        'my ($spec, $input) = @ARGV; my $p = LinkedSpec::get_parser($spec); die "__NO_PARSER__\n" unless $p; my $arg = ($input eq "__INPUT_ARRAYREF__") ? [] : $input; my $ast = $p->($arg); print defined($ast) ? "__AST_DEFINED__\n" : "__AST_UNDEF__\n";',
+        $spec_name,
+        $input_text,
     );
 
     $out .= $_ while <$out_fh>;

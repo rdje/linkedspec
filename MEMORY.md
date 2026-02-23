@@ -140,6 +140,14 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 15 top-level test blocks pass.
+- Added parser invalid-input runtime behavior lock in `t/phase0_regression.t`:
+  - subtest `parser_invalid_input_returns_undef_without_exit`,
+  - helper API keeps second argument as string and uses sentinel conversion (`__INPUT_ARRAYREF__`) inside subprocess to pass controlled non-scalar-ref input,
+  - assertions lock current behavior: subprocess exit code `0`, undefined AST marker present, no handler-generation error banner.
+- Re-ran baseline with invalid-input behavior lock:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 16 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

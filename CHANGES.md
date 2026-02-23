@@ -390,3 +390,34 @@ Added regression coverage for explicit `exit 1` behavior when a spec rule mixes 
 - Result:
   - PASS
   - all 15 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: Parser Invalid-Input Runtime Behavior Lock
+## Summary
+Added regression coverage for parser invocation with intentionally invalid non-scalar-ref input to lock current runtime behavior under subprocess isolation.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `parser_invalid_input_returns_undef_without_exit`.
+- Scenario:
+  - invoke `LinkedSpec::get_parser('Lispish')` in subprocess,
+  - pass helper second argument as string sentinel (`__INPUT_ARRAYREF__`),
+  - convert sentinel to arrayref inside subprocess before parser invocation.
+- Asserts:
+  - subprocess exits with code `0`,
+  - output contains `__AST_UNDEF__`,
+  - output does not contain `__AST_DEFINED__`,
+  - no handler-generation error banner is emitted,
+  - parser creation marker confirms parser existed (`__NO_PARSER__` absent).
+- Updated helper `run_parser_invocation_in_subprocess` to preserve string-only call API while allowing controlled non-scalar-ref injection in subprocess.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 16 top-level test blocks pass.
