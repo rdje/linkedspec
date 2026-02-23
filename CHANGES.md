@@ -213,3 +213,64 @@ Removed unnecessary `PathSearch` dependency on `Global` so `get_parser` fallback
   - PASS
   - compile, resolution-path, smoke, and corpus subtests all green.
   - fallback-resolution subtest no longer emits the prior `Lispish.pm` smartmatch warnings.
+
+## 2026-02-23 - Phase 1 Validation Expansion: Complete get_parser Resolution Order Coverage
+## Summary
+Extended regression coverage to validate all documented non-fallback `get_parser` local resolution modes before fallback is exercised.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_explicit_path_resolution_without_pathsearch`:
+  - uses a temporary spec file via explicit file path argument,
+  - verifies parser creation/execution,
+  - verifies `PathSearch.pm` remains unloaded.
+- Added subtest `get_parser_cwd_name_spec_resolution_without_pathsearch`:
+  - creates `name.spec` in temporary cwd,
+  - verifies `get_parser('name')` resolves directly from cwd local file,
+  - verifies `PathSearch.pm` remains unloaded.
+- Combined with existing coverage, `t/phase0_regression.t` now explicitly exercises:
+  1. module-relative local resolution,
+  2. explicit file path resolution,
+  3. cwd `name.spec` resolution,
+  4. lazy `PathSearch` fallback resolution.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 10 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Unresolved-Spec Negative Paths
+## Summary
+Added focused negative-path regression coverage for unresolved specs to ensure `get_parser` fails safely and emits useful diagnostics.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_unresolved_spec_reports_error` with captured STDOUT/STDERR assertions.
+- Validates two unresolved-spec scenarios:
+  - missing spec name (e.g. `phase1_missing_spec_<pid>`),
+  - missing explicit path (non-existent `.../does_not_exist.spec`).
+- For each scenario, verifies:
+  - `get_parser` returns without die,
+  - parser return value is `undef`,
+  - diagnostics include `Spec path not found`,
+  - diagnostics include the requested spec token/path.
+- Added helper `run_get_parser_with_captured_io` in test file to capture diagnostics without changing runtime behavior.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 11 top-level test blocks pass.

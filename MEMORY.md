@@ -43,9 +43,9 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Continue Phase-1 isolation by tightening fallback-path load surface:
-  - keep resolution-path tests green,
-  - identify any remaining unnecessary imports in fallback-related modules,
+- Continue Phase-1 hardening with targeted behavior locks:
+  - keep full resolution-order tests green,
+  - add targeted diagnostics checks for open/read failures after resolution,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
@@ -91,6 +91,21 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - observation: fallback path no longer emits the prior `Lispish.pm` smartmatch warnings.
+- Added missing local-resolution coverage in `t/phase0_regression.t`:
+  - `get_parser_explicit_path_resolution_without_pathsearch`
+  - `get_parser_cwd_name_spec_resolution_without_pathsearch`
+- Re-ran baseline with expanded resolution-order coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 10 top-level test blocks pass.
+- Added unresolved-spec negative-path coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_unresolved_spec_reports_error`,
+  - scenarios: missing spec name and missing explicit path,
+  - assertions: no die, undef return, and diagnostic content checks.
+- Re-ran baseline with the new negative-path coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 11 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

@@ -61,7 +61,12 @@ It should not be reframed as a strict EBNF clone.
   - Compile/generation checks for all `specs/*.spec` except `tclite.spec` (currently deferred).
   - `get_parser` resolution-path checks:
     - module-relative local resolution from non-project cwd (no `PathSearch` load),
+    - explicit file path resolution (no `PathSearch` load),
+    - cwd-local `name.spec` resolution (no `PathSearch` load),
     - lazy `PathSearch` fallback when local/module-relative candidate is absent.
+  - `get_parser` unresolved-spec negative-path checks:
+    - missing spec name returns `undef` without die and reports `Spec path not found`,
+    - missing explicit path returns `undef` without die and includes requested path in diagnostics.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

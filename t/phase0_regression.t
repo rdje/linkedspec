@@ -64,6 +64,65 @@ subtest 'get_parser_local_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'module-relative parser executes and keeps PathSearch unloaded');
 };
+subtest 'get_parser_explicit_path_resolution_without_pathsearch' => sub {
+    plan tests => 4;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_explicit_path_resolution.spec');
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before explicit-path check');
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create explicit-path spec '$tmp_spec': $!";
+    print {$fh} $source_content;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary explicit-path spec created');
+
+    my $parser = LinkedSpec::get_parser($tmp_spec);
+    my $input = '(ep path)';
+    my $ast = eval { $parser ? $parser->(\$input) : undef };
+
+    ok(!$@ && defined($parser) && ref($parser) eq 'CODE', 'explicit-path parser created and executed without die')
+        or diag(normalize_error($@));
+    ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
+        'explicit-path resolution keeps PathSearch unloaded');
+};
+
+subtest 'get_parser_cwd_name_spec_resolution_without_pathsearch' => sub {
+    plan tests => 4;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_name = 'phase1_cwd_name_resolution_' . $$;
+    my $tmp_spec = File::Spec->catfile($tmp_dir, "$tmp_name.spec");
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create cwd-resolution spec '$tmp_spec': $!";
+    print {$fh} $source_content;
+    close($fh);
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before cwd name.spec check');
+
+    my $orig_cwd = getcwd();
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        chdir($tmp_dir) or die "Unable to chdir '$tmp_dir': $!";
+        $parser = LinkedSpec::get_parser($tmp_name);
+        my $input = '(cw d)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '';
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser executes from cwd containing name.spec') or diag(normalize_error($err));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'cwd name.spec parser resolves by direct local file');
+    ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
+        'cwd name.spec resolution keeps PathSearch unloaded');
+};
 
 subtest 'get_parser_pathsearch_fallback' => sub {
     plan tests => 5;
@@ -93,6 +152,25 @@ subtest 'get_parser_pathsearch_fallback' => sub {
         or diag(normalize_error($@));
 
     unlink($tmp_spec) or die "Cannot remove temporary fallback spec '$tmp_spec': $!";
+};
+subtest 'get_parser_unresolved_spec_reports_error' => sub {
+    plan tests => 8;
+
+    my $missing_name = 'phase1_missing_spec_' . $$;
+    my ($ok_name, $parser_name, $err_name, $out_name, $warn_name) = run_get_parser_with_captured_io($missing_name);
+
+    ok($ok_name, 'missing-name get_parser call returns without die') or diag(normalize_error($err_name));
+    ok(!defined($parser_name), 'missing-name get_parser returns undef');
+    like($out_name, qr/Spec path not found/, 'missing-name path reports \"Spec path not found\"');
+    like($out_name . $warn_name, qr/\Q$missing_name\E/, 'missing-name diagnostics include requested spec');
+
+    my $missing_path = File::Spec->catfile($Bin, 'tmp_phase1_missing', 'does_not_exist.spec');
+    my ($ok_path, $parser_path, $err_path, $out_path, $warn_path) = run_get_parser_with_captured_io($missing_path);
+
+    ok($ok_path, 'missing-explicit-path get_parser call returns without die') or diag(normalize_error($err_path));
+    ok(!defined($parser_path), 'missing-explicit-path get_parser returns undef');
+    like($out_path, qr/Spec path not found/, 'missing-explicit-path reports \"Spec path not found\"');
+    like($out_path . $warn_path, qr/\Q$missing_path\E/, 'missing-explicit-path diagnostics include requested path');
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
@@ -331,5 +409,25 @@ sub run_with_exit_trapped {
 
     $err = $@ unless $ok;
     return ($ok ? 1 : 0, $ret, $err);
+}
+
+sub run_get_parser_with_captured_io {
+    my ($spec_name) = @_;
+    my ($ret, $err, $stdout, $stderr);
+    $err = '';
+    $stdout = '';
+    $stderr = '';
+
+    my $ok = eval {
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$stdout) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$stderr) or die "Unable to capture STDERR: $!";
+        $ret = LinkedSpec::get_parser($spec_name);
+        1;
+    };
+
+    $err = $@ // '' unless $ok;
+    return ($ok ? 1 : 0, $ret, $err, $stdout, $stderr);
 }
 
