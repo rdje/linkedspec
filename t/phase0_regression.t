@@ -221,6 +221,37 @@ subtest 'get_parser_malformed_spec_reports_validation_error' => sub {
 
     unlink($tmp_spec);
 };
+subtest 'get_parser_malformed_handler_runtime_error' => sub {
+    plan tests => 7;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_malformed_handler_runtime_error.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { my $broken = ; return_a(Top) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create malformed-handler spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary malformed-handler spec created');
+
+    my ($ok_get, $parser, $err_get, $out_get, $warn_get) = run_get_parser_with_captured_io($tmp_spec);
+    ok($ok_get, 'malformed-handler get_parser call returns without die') or diag(normalize_error($err_get));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'malformed-handler get_parser returns parser coderef');
+
+    my $input = 'a';
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+        run_parser_with_captured_io($parser, \$input);
+
+    ok($ok_run, 'malformed-handler parser invocation returns without outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast), 'malformed-handler parser invocation returns undef AST');
+    ok(length($inner_eval_err) > 0, 'malformed-handler parser invocation exposes inner eval error');
+    like($inner_eval_err, qr/syntax error/i, 'malformed-handler inner eval error reports syntax issue');
+
+    unlink($tmp_spec);
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
@@ -478,5 +509,28 @@ sub run_get_parser_with_captured_io {
 
     $err = $@ // '' unless $ok;
     return ($ok ? 1 : 0, $ret, $err, $stdout, $stderr);
+}
+
+sub run_parser_with_captured_io {
+    my ($parser, $input_ref) = @_;
+    my ($ret, $err, $stdout, $stderr, $inner_eval_err);
+    $err = '';
+    $stdout = '';
+    $stderr = '';
+    $inner_eval_err = '';
+
+    my $ok = eval {
+        local *STDOUT;
+        local *STDERR;
+        local *CORE::GLOBAL::exit = sub { die "__EXIT__(" . (@_ ? $_[0] : 0) . ")" };
+        open(STDOUT, '>', \$stdout) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$stderr) or die "Unable to capture STDERR: $!";
+        $ret = $parser->($input_ref);
+        $inner_eval_err = $@ // '';
+        1;
+    };
+
+    $err = $@ // '' unless $ok;
+    return ($ok ? 1 : 0, $ret, $err, $stdout, $stderr, $inner_eval_err);
 }
 

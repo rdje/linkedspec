@@ -45,7 +45,7 @@ When resuming after interruption:
 ## Next Recommended Work Item
 - Continue Phase-1 hardening with targeted behavior locks:
   - keep full resolution-order tests green,
-  - add targeted checks for runtime handler-generation failure diagnostics (post-DSL-parse generation path),
+  - add targeted checks for explicit exit-path diagnostics emitted by generated handlers,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
@@ -122,6 +122,15 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 13 top-level test blocks pass.
+- Added malformed-handler runtime-error coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_malformed_handler_runtime_error`,
+  - scenario: action block with invalid embedded Perl (`my $broken = ;`),
+  - assertions: parser coderef builds, invocation yields undef AST, inner eval syntax error is captured.
+- Added helper `run_parser_with_captured_io` to capture invocation IO + inner eval diagnostics with exit trapping.
+- Re-ran baseline with malformed-handler runtime coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 14 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

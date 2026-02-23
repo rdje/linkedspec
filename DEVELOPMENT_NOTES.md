@@ -71,6 +71,8 @@ It should not be reframed as a strict EBNF clone.
     - unreadable existing spec path returns `undef` without die and reports open/OS error diagnostics.
   - `get_parser` malformed-spec negative-path check:
     - invalid DSL content returns `undef` without die and reports validation/critical error diagnostics.
+  - `get_parser` malformed-handler runtime negative-path check:
+    - parser coderef builds, but malformed embedded action Perl reports runtime inner eval syntax error and returns undefined AST.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

@@ -331,3 +331,34 @@ Added regression coverage for malformed spec content to verify parser-generation
 - Result:
   - PASS
   - all 13 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Malformed-Handler Runtime Error Path
+## Summary
+Added regression coverage for post-generation runtime handler failures caused by malformed action-code emitted into generated parser handlers.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_malformed_handler_runtime_error`.
+- Scenario:
+  - create temporary valid-looking spec with intentionally invalid Perl statement inside action block:
+    - `my $broken = ;`
+  - build parser via `get_parser`,
+  - invoke parser and capture inner eval error from generated handler execution path.
+- Asserts:
+  - parser creation returns without die and yields coderef,
+  - parser invocation returns without outer die,
+  - returned AST is `undef`,
+  - inner eval error is present and reports syntax failure.
+- Added helper `run_parser_with_captured_io` to capture parser invocation IO and inner eval diagnostics under exit-trap protection.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 14 top-level test blocks pass.
