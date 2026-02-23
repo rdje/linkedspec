@@ -69,6 +69,7 @@ This pattern is a primary LinkedSpec strength.
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`
 - `generate_only => 1`
+- `return_descr => 1` (return internal `{spec=>..., gdata=>...}` descriptor instead of parser coderef)
 - `pm_drive => 1` (emit generated parser code text)
 
 ## Spec Lookup Behavior (`get_parser`)

@@ -87,7 +87,7 @@ It should not be reframed as a strict EBNF clone.
     - unresolved path-like arguments (containing `/` or `\\`) return `undef` without die and report `Spec path not found`,
     - includes missing backslash-separated explicit paths (windows-style separators),
     - explicit-path misses skip fallback loader paths and keep `PathSearch.pm` unloaded,
-    - explicit-path and missing `.spec` basename misses continue to bypass `PathSearch::go` even when `PathSearch.pm` is already loaded.
+    - explicit-path and missing `.spec` basename misses continue to bypass `PathSearch::go` even when `PathSearch.pm` is already loaded (resolver call count remains `0`).
   - `get_parser` directory-path negative-path checks:
     - explicit directory path arguments return `undef` without die and report `Spec path is not a file`,
     - fallback-resolved directory paths (via `PathSearch::go`) return `undef` without die with directory-path diagnostics.
@@ -111,6 +111,12 @@ It should not be reframed as a strict EBNF clone.
     - validated via subprocess execution to avoid in-process test context interference.
   - parser invalid-input runtime behavior lock:
     - invoking generated parser with controlled non-scalar-ref input (via subprocess sentinel conversion) returns undefined AST without process exit.
+  - `Get(..., return_descr => 1)` core-introspection behavior lock:
+    - returns descriptor hash (`spec` + `gdata`) instead of parser coderef,
+    - includes per-rule `meta` execution data (handler variant, regex/action counts, loop strategy marker).
+  - single-vs-multi AND strategy lock:
+    - single-regex AND action rule maps to `AND_SINGLE_ACODE` with non-loop strategy marker,
+    - multi-regex AND action rule maps to `AND_ACODE` with loop strategy marker.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -159,6 +165,13 @@ It should not be reframed as a strict EBNF clone.
 - Fallback-path coupling cleanup:
   - `PathSearch.pm` no longer imports `Global.pm` (unused for `PathSearch->go` behavior).
   - This prevents fallback-only parser resolution from loading `HUtils`/`Lispish` through `Global`.
+- Rule-compilation structure now exposes deterministic execution metadata:
+  - `LinkedSpec::Get(..., return_descr => 1)` returns generated descriptor internals for tooling (`spec` + `gdata`),
+  - `spec_entry(...)` now records `meta` per rule (node type, counts, execution shape, selected handler variant),
+  - handler-template selection now follows deterministic metadata-based routing instead of hash-key iteration order.
+- AND action semantics are now structurally explicit in template selection:
+  - one regex/action edge uses `AND_SINGLE_ACODE`,
+  - multi-regex/action AND continues to use `AND_ACODE` loop template.
 
 ## Change Discipline
 Before each commit:

@@ -34,16 +34,18 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `8c7150d` - Lock explicit-miss bypass behavior when PathSearch is preloaded
+- `8b766e4` - Generalize get_parser non-regular path handling and lock regressions
+- `751bee2` - Harden get_parser directory-path handling and lock new regressions
+- `2146f2f` - Lock windows-style explicit-path miss behavior and update live docs
+- `0b9fd0a` - Generalize get_parser control-byte validation and expand regression locks
+- `a8bb56a` - Harden get_parser control-character validation and extend regression locks
+- `50fe970` - Fix duplicate fallback resolver call and harden padded spec-name validation
+- `813fb42` - Expand get_parser invalid-name hardening and regression coverage
+- `9e1c8b7` - Harden get_parser invalid-input guards and expand negative-path regressions
+- `1012876` - Expand get_parser fallback hardening and negative-path regression locks
+- `78217d7` - Harden get_parser invalid spec-name handling and refresh regression/docs
 - `4067980` - Lock parser invalid-input subprocess behavior and update live docs
-- `59ed4d0` - Add mixed ACTION/BLIND CALL exit-path regression coverage for get_parser
-- `417d43e` - Add malformed-handler runtime-error regression coverage for get_parser
-- `cfa140b` - Add malformed-spec negative-path regression for get_parser
-- `8c66bc5` - Add get_parser open-failure negative-path regression coverage
-- `f38e0b3` - Add unresolved-spec negative-path regression checks for get_parser
-- `0651fc6` - Expand Phase-1 regression coverage and decouple PathSearch fallback dependencies
-- `3d4b75b` - Complete Phase-1 LinkedSpec core isolation and refresh live docs
-- `cf25bd3` - Bootstrap LinkedSpec baseline, docs, and corpus regression
-- `dca1b21` - Initial commit
 
 ## Resume-Work Checklist
 When resuming after interruption:
@@ -55,12 +57,25 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Continue Phase-1 hardening with targeted behavior locks:
-  - keep full resolution-order tests green,
-  - add targeted checks for additional explicit exit paths outside ACTION/BLIND CALL conflict handling,
+- Continue parser-core structure modernization (without semantic breakage):
+  - migrate additional handler-template decisions to metadata-driven routing,
+  - reduce string-eval footprint incrementally with regression locks at each step,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Paused further `get_parser` hardening by explicit user direction and shifted focus to `LinkedSpec.pm` core structure.
+- Landed core execution-structure increment in `perl/LinkedSpec.pm`:
+  - added `Get(..., return_descr => 1)` for descriptor introspection (`spec` + `gdata`),
+  - added deterministic rule strategy helpers (`_select_rule_handler_variant`, `_build_rule_execution_meta`),
+  - added per-rule `meta` payload under `spec->{rule}{meta}` (counts, strategy, loop marker),
+  - added dedicated `AND_SINGLE_ACODE` template for single-regex AND action rules,
+  - replaced non-deterministic handler selection via hash-key order with metadata-based selection.
+- Added regression lock in `t/phase0_regression.t`:
+  - subtest `get_return_descr_rule_meta_single_vs_multi_strategy` validates descriptor metadata and single-vs-multi AND strategy mapping.
+- Re-ran baseline after core changes:
+  - command: `prove -v -Iperl t/phase0_regression.t`
+  - result: PASS
+  - note: all 37 tests pass.
 - Created and initialized live documents:
   - `ROADMAP.md`
   - `USER_GUIDE.md`

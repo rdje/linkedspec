@@ -86,6 +86,7 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 ## Immediate Next Steps
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
+- Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -97,4 +98,6 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
   - Landed: lazy fallback loading for `PathSearch`.
   - Landed: removal of eager `PPlugin` load at module import time; `AUTOLOAD` remains lazy.
   - Landed: regression harness decoupled from direct `Lispish.pm` import.
+  - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
+  - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
 - Phase 2+: Planned.

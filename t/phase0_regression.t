@@ -743,6 +743,39 @@ subtest 'parser_invalid_input_returns_undef_without_exit' => sub {
     unlike($combined, qr/Error during handler code generation/, 'invalid-input parser subprocess does not emit handler-generation error banner');
     unlike($combined, qr/__NO_PARSER__/, 'invalid-input parser subprocess confirms parser was created');
 };
+subtest 'get_return_descr_rule_meta_single_vs_multi_strategy' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return_a(Top) }
+
+AndMulti:&
+ /b/ -> AndMulti { return_a(AndMulti) }
+ /c/ -> AndMulti { return_a(AndMulti) }
+
+Choice:|
+ /d/ -> Choice { return_a(Choice) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash');
+    ok(exists $descr->{spec} && ref($descr->{spec}) eq 'HASH', 'return_descr descriptor includes spec hash');
+    ok(exists $descr->{gdata} && ref($descr->{gdata}) eq 'HASH', 'return_descr descriptor includes gdata hash');
+
+    ok(exists $descr->{spec}{Top}{meta}, 'Top rule includes execution metadata');
+    is($descr->{spec}{Top}{meta}{handler_variant}, 'AND_SINGLE_ACODE', 'Top single-regex AND maps to AND_SINGLE_ACODE');
+    is($descr->{spec}{Top}{meta}{regex_count}, 1, 'Top metadata captures single regex count');
+    ok(!$descr->{spec}{Top}{meta}{uses_loop}, 'Top single-regex AND metadata reports non-loop strategy');
+
+    ok(exists $descr->{spec}{AndMulti}{meta}, 'AndMulti rule includes execution metadata');
+    is($descr->{spec}{AndMulti}{meta}{handler_variant}, 'AND_ACODE', 'AndMulti multi-regex AND maps to AND_ACODE');
+    is($descr->{spec}{AndMulti}{meta}{regex_count}, 2, 'AndMulti metadata captures multi-regex count');
+    ok($descr->{spec}{AndMulti}{meta}{uses_loop}, 'AndMulti multi-regex AND metadata reports loop strategy');
+
+    is($descr->{spec}{Choice}{meta}{handler_variant}, 'OR_ACODE', 'Choice OR rule maps to OR_ACODE');
+    ok(!$descr->{spec}{Choice}{meta}{uses_loop}, 'Choice OR metadata reports non-loop dispatch');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

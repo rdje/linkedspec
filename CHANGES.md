@@ -1,6 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-23 - Phase 1 Core Structure: Rule Execution Metadata + Descriptor Introspection
+## Summary
+Reworked core rule-compilation structure in `LinkedSpec.pm` to expose explicit per-rule execution metadata and deterministic handler-template selection, while preserving parser behavior and baseline compatibility.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `return_descr => 1` mode to `LinkedSpec::Get(...)`:
+  - returns generated descriptor hash (`{ spec => ..., gdata => ... }`) for tooling/introspection instead of parser coderef.
+- Added deterministic rule-strategy helpers:
+  - `_select_rule_handler_variant(...)`
+  - `_build_rule_execution_meta(...)`
+- `spec_entry(...)` now computes and stores per-rule metadata at `spec->{rule}{meta}` including:
+  - `node_type`, regex/action counts, `action_mode`,
+  - selected handler variant,
+  - execution shape and loop/non-loop strategy marker.
+- Added dedicated single-regex AND action template:
+  - `AND_SINGLE_ACODE` is now selected for AND rules with exactly one action-regex edge,
+  - multi-regex AND rules continue to use `AND_ACODE` loop template.
+- Replaced non-deterministic handler-template pick (`keys %handlers` ordering) with metadata-driven deterministic selection.
+
+## Validation
+- Ran syntax check:
+  - `perl -c perl/LinkedSpec.pm`
+  - Result: `syntax OK`
+- Ran regression suite:
+  - `prove -v -Iperl t/phase0_regression.t`
+  - Result: PASS
+  - Total: 37 tests successful.
+
 ## 2026-02-23 - Documentation Infrastructure Bootstrap
 ## Summary
 Created live project documentation files to support long-running, interruption-resilient development and commit hygiene.
@@ -915,6 +952,37 @@ Added regression coverage to lock the invariant that explicit missing path input
   - both calls return `undef`,
   - diagnostics report `Spec path not found` and include requested tokens,
   - `PathSearch::go` call count remains `0` (bypass preserved).
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 36 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: Explicit-Miss Bypass with Preloaded PathSearch
+## Summary
+Added a dedicated regression lock confirming that explicit missing-path inputs continue to bypass `PathSearch::go` even when `PathSearch.pm` is already loaded in-process.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_explicit_miss_bypasses_pathsearch_when_loaded`.
+- Scenario:
+  - preload `PathSearch.pm`,
+  - monkey-patch `PathSearch::go` with a sentinel die and call counter,
+  - invoke `get_parser` with both:
+    - missing explicit path (`.../does_not_exist_loaded.spec`),
+    - missing `.spec` basename (`phase1_missing_dot_spec_loaded_<pid>.spec`).
+- Asserts:
+  - no die from `get_parser`,
+  - both calls return `undef`,
+  - diagnostics report `Spec path not found` and include requested tokens,
+  - `PathSearch::go` call count remains `0`.
 
 ## Validation
 - Ran:

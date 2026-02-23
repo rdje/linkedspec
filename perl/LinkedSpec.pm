@@ -643,6 +643,7 @@ sub Get {
  # Check for execution mode options
  my $parse_only = $option{parse_only};
  my $generate_only = $option{generate_only};
+ my $return_descr = $option{return_descr};
  my $test_expectation = $option{test_expectation};
  
  # Always run validation, but handle failures differently for parse-only tests
@@ -735,10 +736,90 @@ sub Get {
          return undef;
      }
      
+     # Optional descriptor-return mode for tooling/introspection
+     if ($return_descr) {
+         log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
+         return $final_descr;
+     }
+     
      # Parser generation completed successfully
      log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
 
  return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
+}
+
+sub _select_rule_handler_variant {
+ my ($node_type, $acode_count, $bcode_count, $regex_count) = @_;
+
+ $node_type   = defined $node_type ? $node_type : 'default';
+ $acode_count = $acode_count // 0;
+ $bcode_count = $bcode_count // 0;
+ $regex_count = $regex_count // 0;
+
+ return 'MIXED_ACTIONS' if $acode_count && $bcode_count;
+
+ if ($node_type =~ /AND/o && $acode_count) {
+  return $regex_count == 1 ? 'AND_SINGLE_ACODE' : 'AND_ACODE';
+ }
+ return 'AND_BCODE' if $node_type =~ /AND/o && $bcode_count;
+ return 'OR_ACODE'  if $node_type =~ /OR/o  && $acode_count;
+ return 'OR_BCODE'  if $node_type =~ /OR/o  && $bcode_count;
+ return 'REP_ACODE' if $node_type =~ /REP_/o && $acode_count;
+ return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
+
+ return '_default'
+}
+
+sub _build_rule_execution_meta {
+ my (%args) = @_;
+
+ my $label = defined $args{label} ? $args{label} : '<undefined>';
+ my $node_type = defined $args{node_type} ? $args{node_type} : 'default';
+ my $regex_count = $args{regex_count} // 0;
+ my $acode_count = $args{acode_count} // 0;
+ my $bcode_count = $args{bcode_count} // 0;
+ my $handler_variant = _select_rule_handler_variant($node_type, $acode_count, $bcode_count, $regex_count);
+
+ my $action_mode =
+    $acode_count && $bcode_count ? 'mixed'
+  : $acode_count                 ? 'action'
+  : $bcode_count                 ? 'blind_call'
+  :                                'none';
+
+ my ($execution_shape, $uses_loop) = ('default_scan_loop', 1);
+ if ($handler_variant eq 'AND_SINGLE_ACODE') {
+  ($execution_shape, $uses_loop) = ('single_match', 0);
+ } elsif ($handler_variant eq 'AND_ACODE') {
+  ($execution_shape, $uses_loop) = ('and_sequence_loop', 1);
+ } elsif ($handler_variant eq 'AND_BCODE') {
+  ($execution_shape, $uses_loop) = ('and_call_loop', 1);
+ } elsif ($handler_variant eq 'OR_ACODE') {
+  ($execution_shape, $uses_loop) = ('or_choice_dispatch', 0);
+ } elsif ($handler_variant eq 'OR_BCODE') {
+  ($execution_shape, $uses_loop) = ('or_call_loop', 1);
+ } elsif ($handler_variant eq 'REP_ACODE' || $handler_variant eq 'REP_BCODE') {
+  ($execution_shape, $uses_loop) = ('repeat_loop', 1);
+ } elsif ($handler_variant eq 'MIXED_ACTIONS') {
+  ($execution_shape, $uses_loop) = ('invalid_mixed_actions', 0);
+ }
+
+ my $meta = {
+  label           => $label,
+  node_type       => $node_type,
+  regex_count     => $regex_count,
+  acode_count     => $acode_count,
+  bcode_count     => $bcode_count,
+  action_mode     => $action_mode,
+  handler_variant => $handler_variant,
+  execution_shape => $execution_shape,
+  uses_loop       => $uses_loop ? 1 : 0,
+ };
+
+ if (should_dump(DUMP_DEBUG)) {
+  log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", Dumper($meta));
+ }
+
+ return $meta
 }
 
 sub spec_descr {
@@ -810,6 +891,7 @@ my $einfo = shift;
  my @GDATA;
  my %ab_count;
  my %handlers;
+ my $rule_meta;
 
  if (should_dump(DUMP_HIGH)) {
      log_dump("=== SPEC ENTRY DUMP ===\n");
@@ -866,9 +948,17 @@ my $einfo = shift;
  }
 
 
- if ($ab_count{ACODE} && $ab_count{BCODE}) {
+ $rule_meta = _build_rule_execution_meta(
+  label       => $label,
+  node_type   => $node_type,
+  regex_count => scalar(@REs),
+  acode_count => $ab_count{ACODE} // 0,
+  bcode_count => $ab_count{BCODE} // 0,
+ );
+
+ if ($rule_meta->{action_mode} eq 'mixed') {
   my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
-  my $context = "ACTION blocks: $ab_count{ACODE} found, BLIND CALL blocks: $ab_count{BCODE} found";
+  my $context = "ACTION blocks: ".($ab_count{ACODE} // 0)." found, BLIND CALL blocks: ".($ab_count{BCODE} // 0)." found";
   log_output(DUMP_NONE, $error_msg, $context);
   print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
   print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
@@ -974,6 +1064,33 @@ my @'.$label.';
   '.($actual_ecode || 'return \@'.$label.'_collect').'
  ' if $isAND && $bcodes;
 
+ $handlers{AND_SINGLE_ACODE} = ' 
+
+ my @'.$label.'_collect;
+ my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+ unless($minfo) {
+  '.($actual_lxcode || 'return undef').'
+ }
+ 
+ unless($$minfo{index} == 0) {
+  '.($actual_lxcode || 'return undef').'
+ }
+
+ my $LMATCH      = $$minfo{match};
+ my @LMATCH_LIST = @{$$minfo{match_list} // []};
+ my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
+ my $LINDEX      = $$minfo{index};
+ my $LSPOS       = pos $$STRING;
+ 
+ '.$actual_lscode.'
+
+ '.   $acodes     .'
+
+ '.$actual_lecode.'
+ 
+ return \@'.$label.'_collect;
+ ' if $isAND && $acodes && scalar(@ACODEs) == 1;
+
  $handlers{AND_ACODE} = ' 
 
  my @'.$label.'_collect;
@@ -1006,7 +1123,7 @@ my @'.$label.';
  }
  
  return \@'.$label.'_collect;
- ' if $isAND && $acodes;
+ ' if $isAND && $acodes && scalar(@ACODEs) > 1;
 
  $handlers{OR_ACODE} = ' 
 
@@ -1136,9 +1253,12 @@ my @'.$label.';
   $info{re}      = [@REs];
  }
 
- # Updating the $handler variable
- my $right_key = (grep {defined} grep {$_ ne '_default'} keys %handlers)[0];
- $handler .= $handlers{$right_key || '_default'} || "";
+ # Updating the $handler variable with deterministic strategy selection
+ my $selected_handler_variant = exists $handlers{$rule_meta->{handler_variant}} ? $rule_meta->{handler_variant}
+                             : exists $handlers{_default} ? '_default'
+                             : undef;
+ $handler .= defined $selected_handler_variant ? ($handlers{$selected_handler_variant} || "") : "";
+ $rule_meta->{selected_handler_variant} = $selected_handler_variant // '<none>';
 
  my $external_handler = $handler;
  $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
@@ -1147,6 +1267,7 @@ my @'.$label.';
  $info{handler} = sub {eval $handler};
  #$info{acode}   = [@ACODEs];
  $info{gdata}   = [@GDATA];
+ $info{meta}    = $rule_meta;
 
  # Dump individual rule info if in dump mode
  if (should_dump(DUMP_HIGH)) {
