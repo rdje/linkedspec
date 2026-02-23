@@ -67,14 +67,25 @@ It should not be reframed as a strict EBNF clone.
   - `tclite.spec` (explicitly deferred by scope decision).
 - Corpus regression (directory-level):
   - `plugin/*.plg` parsed via `pplugin.spec`.
-  - `conf/*.conf` parsed via `Lispish.spec` flow (`Lispish::multi`).
-  - `tablescript/*.ts` parsed via current Lispish runtime flow (`Lispish::multi`).
+  - `conf/*.conf` parsed via LinkedSpec-generated `Lispish.spec` parser stream.
+  - `tablescript/*.ts` parsed via LinkedSpec-generated `Lispish.spec` parser stream.
   - `ebnf/*.ebnf` parsed via `ebnf.spec`.
 - Baseline corpus counts currently covered:
   - plugin: 52 files
   - conf: 53 files
   - tablescript: 23 files
   - ebnf: 7 files
+
+## Phase 1 Isolation Notes (Current)
+- `LinkedSpec` now avoids eager plugin dependency at module load:
+  - Removed top-level `use PPlugin;`.
+  - `AUTOLOAD` performs lazy `require PPlugin` only when plugin execution is requested.
+- `LinkedSpec::get_parser` now prefers module-relative spec resolution:
+  - resolves to `../specs/<name>.spec` relative to `perl/LinkedSpec.pm` location,
+  - avoids hard dependence on current working directory,
+  - keeps `PathSearch` as lazy fallback only.
+- Regression harness decoupled from direct `Lispish.pm` import:
+  - uses LinkedSpec-generated `Lispish` parser coderef for stream parsing in corpus tests.
 
 ## Change Discipline
 Before each commit:

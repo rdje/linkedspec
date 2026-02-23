@@ -71,6 +71,15 @@ This pattern is a primary LinkedSpec strength.
 - `generate_only => 1`
 - `pm_drive => 1` (emit generated parser code text)
 
+## Spec Lookup Behavior (`get_parser`)
+`LinkedSpec::get_parser('name')` resolves parser specs in this order:
+1. If argument is already a valid file path, use it directly.
+2. Try `name.spec` directly if available.
+3. Try module-relative `../specs/name.spec` (relative to `perl/LinkedSpec.pm`).
+4. If still unresolved, fall back to `PathSearch`.
+
+This removes hard dependency on running from the project root.
+
 ## Known Caveats
 - Current behavior is extraction-oriented and may not enforce full contiguous consumption unless spec logic does so.
 - Some old specs may rely on permissive behavior.

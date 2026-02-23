@@ -10,7 +10,6 @@ use 5.010;
 use re 'eval';
 use Data::Dumper;
 
-use PPlugin; 
 use LinkedRE;
 
 # UVM-style verbosity levels
@@ -1249,8 +1248,67 @@ my ($label, $code) = @_;
 }
 
 
-sub get_parser {use PathSearch; Get(\(my $o = do {open (my $f, PathSearch->go($_[0], 'spec')); local $/; <$f>}))}
+sub _resolve_local_spec_path {
+ my ($spec_name) = @_;
+ return undef unless defined $spec_name && length $spec_name;
 
-sub AUTOLOAD   {PPlugin->exec($AUTOLOAD, @_)}
+ return $spec_name if -f $spec_name;
+ my $spec_file = $spec_name =~ /\.spec$/o ? $spec_name : "$spec_name.spec";
+ return $spec_file if -f $spec_file;
+
+ my $candidate;
+ my $ok = eval {
+  require Cwd;
+  require File::Basename;
+  require File::Spec;
+
+  my $module_path = Cwd::abs_path($INC{__PACKAGE__.'.pm'});
+  my $module_dir  = (File::Basename::fileparse($module_path))[1];
+  my $root_dir    = Cwd::realpath(File::Spec->catdir($module_dir, File::Spec->updir()));
+  my $local_spec  = File::Spec->catfile($root_dir, 'specs', $spec_file);
+  $candidate      = $local_spec if -f $local_spec;
+  1;
+ };
+
+ return $candidate if $ok && $candidate;
+
+ return undef
+}
+
+sub get_parser {
+ my ($spec_name, @opts) = @_;
+
+ my $spec_path = _resolve_local_spec_path($spec_name);
+ unless ($spec_path) {
+  my $ok = eval {require PathSearch; 1};
+  unless ($ok) {
+   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch load failed: $@");
+   return undef
+  }
+
+  $spec_path = PathSearch->go($spec_name, 'spec');
+ }
+
+ unless ($spec_path && -f $spec_path) {
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='".($spec_path // '<undef>')."'");
+  return undef
+ }
+
+ open(my $f, '<', $spec_path) or do {
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to open spec file '$spec_path'", "OS Error: $!");
+  return undef
+ };
+ local $/;
+ my $content = <$f>;
+ close($f);
+
+ return Get(\$content, @opts)
+}
+
+sub AUTOLOAD   {
+ my $ok = eval {require PPlugin; 1};
+ die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
+ PPlugin->exec($AUTOLOAD, @_)
+}
 
 1;

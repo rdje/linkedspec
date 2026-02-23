@@ -84,11 +84,17 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
   - Documentation remains current at each commit.
 
 ## Immediate Next Steps
-- Implement Phase 0 harness and document results in `CHANGES.md`.
-- Fix `specs/tclite.spec` compile issue.
-- Define explicit `seek` vs `consume` semantics in design notes before code changes.
+- Keep Phase-0 baseline continuously green while Phase-1 proceeds.
+- Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
+- Keep `specs/tclite.spec` deferred until explicitly resumed.
+- Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
 ## Status
-- Phase 0: In progress (green Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
-- Phase 0 enhancement: corpus-level regression now includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
-- Phase 1+: Planned.
+- Phase 0: Active and green (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
+- Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
+- Phase 1: In progress.
+  - Landed: module-relative spec resolution in `LinkedSpec::get_parser`.
+  - Landed: lazy fallback loading for `PathSearch`.
+  - Landed: removal of eager `PPlugin` load at module import time; `AUTOLOAD` remains lazy.
+  - Landed: regression harness decoupled from direct `Lispish.pm` import.
+- Phase 2+: Planned.

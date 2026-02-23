@@ -69,6 +69,16 @@ When resuming after interruption:
   - `tablescript/*.ts` via Lispish flow (23 files)
   - `ebnf/*.ebnf` via `ebnf.spec` (7 files)
 - `conf/httpd.conf` removed by explicit user request because it is not valid for intended Lisp-like conf corpus.
+- Phase-1 isolation implementation progressed and validated:
+  - `LinkedSpec` no longer eagerly imports `PPlugin` at module load.
+  - `LinkedSpec::AUTOLOAD` now handles lazy `PPlugin` loading path.
+  - `LinkedSpec::get_parser` now resolves module-relative `specs/*.spec` first (no cwd assumption), then lazy-falls back to `PathSearch`.
+  - `_resolve_local_spec_path` return-flow bug fixed so module-relative matches are actually returned.
+  - `t/phase0_regression.t` no longer imports `Lispish.pm`; corpus stream parsing uses LinkedSpec-generated `Lispish` parser coderef.
+- Re-ran baseline after these changes:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - observation: prior `Lispish.pm` smartmatch warnings no longer appear in suite output.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

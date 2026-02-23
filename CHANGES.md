@@ -121,3 +121,39 @@ Expanded Phase-0 regression to include real corpus directories and removed an in
 - Result:
   - PASS
   - compile/spec smoke and corpus regression are green.
+
+## 2026-02-23 - Phase 1 Core Isolation: Module-Relative Spec Resolution + Lazy Dependency Loading
+## Summary
+Completed the first parser-core isolation step in `LinkedSpec`: removed eager plugin coupling, made spec resolution module-relative (no cwd assumption), and kept `PathSearch` as lazy fallback only.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `CHANGES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- `LinkedSpec` load path isolation:
+  - Removed eager `use PPlugin;` from module load path.
+  - `AUTOLOAD` now lazy-loads `PPlugin` only when plugin dispatch is actually needed.
+- `get_parser` resolution flow hardened:
+  - Added `_resolve_local_spec_path($spec_name)` to resolve in this order:
+    1. exact file path if provided,
+    2. `$spec_name.spec` in current context if directly available,
+    3. module-relative `../specs/$spec_name.spec` (relative to `perl/LinkedSpec.pm` location).
+  - If local resolution fails, fallback to `PathSearch` is loaded lazily (`require PathSearch`).
+  - Fixed `_resolve_local_spec_path` control flow so module-relative matches are actually returned.
+- Regression harness isolation:
+  - `t/phase0_regression.t` no longer imports `Lispish.pm`.
+  - Corpus helpers now use `LinkedSpec::get_parser('Lispish')` directly and parse streams iteratively with a guard.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - compile/smoke/corpus blocks all green.
+  - prior `Lispish.pm` smartmatch warnings no longer appear in this suite run.

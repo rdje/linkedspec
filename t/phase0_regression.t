@@ -12,7 +12,6 @@ use File::Spec;
 
 use lib "$Bin/../perl";
 use LinkedSpec;
-use Lispish;
 
 my $spec_dir = File::Spec->catdir($Bin, '..', 'specs');
 my @all_specs = discover_specs($spec_dir);
@@ -227,6 +226,7 @@ sub parse_with_linkedspec {
     state %parser_cache;
 
     my $parser = $parser_cache{$spec_name} //= LinkedSpec::get_parser($spec_name);
+    return (0, "unable to build parser for spec '$spec_name'") unless $parser && ref($parser) eq 'CODE';
     my $data = slurp($file);
 
     my ($ok, $ast, $err) = run_with_exit_trapped(sub { $parser->(\$data) });
@@ -240,12 +240,25 @@ sub parse_with_linkedspec {
 
 sub parse_with_lispish_multi {
     my ($file, $require_nonempty) = @_;
+    state $lispish_parser = LinkedSpec::get_parser('Lispish');
+    return (0, "unable to build parser for spec 'Lispish'") unless $lispish_parser && ref($lispish_parser) eq 'CODE';
     my $data = slurp($file);
+    my @ast_list;
+    my $iteration_count = 0;
 
-    my ($ok, $ast_list, $err) = run_with_exit_trapped(sub { [Lispish::multi(\$data)] });
-    return (0, normalize_error($err)) unless $ok;
-    return (0, 'undefined AST list') unless defined $ast_list && ref($ast_list) eq 'ARRAY';
-    return (0, 'empty AST list') if $require_nonempty && !@$ast_list;
+    while (1) {
+        my ($ok, $ast, $err) = run_with_exit_trapped(sub { $lispish_parser->(\$data) });
+        return (0, normalize_error($err)) unless $ok;
+        last unless defined $ast;
+
+        push @ast_list, $ast;
+        ++$iteration_count;
+        if ($iteration_count > 100000) {
+            return (0, 'iteration guard reached while parsing Lispish stream');
+        }
+    }
+
+    return (0, 'empty AST list') if $require_nonempty && !@ast_list;
 
     return (1, '');
 }
