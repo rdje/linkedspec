@@ -334,6 +334,14 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 35 top-level test blocks pass.
+- Added explicit-miss bypass-when-loaded coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_explicit_miss_bypasses_pathsearch_when_loaded`,
+  - preloads `PathSearch.pm`, monkey-patches `PathSearch::go` with call counter + sentinel,
+  - asserts explicit missing path and missing `.spec` basename both return undef/not-found without invoking `PathSearch::go`.
+- Re-ran baseline with explicit-bypass-when-loaded coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 36 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

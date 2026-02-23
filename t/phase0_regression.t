@@ -402,6 +402,40 @@ subtest 'get_parser_pathsearch_runtime_failure_reports_error' => sub {
     like($out, qr/PathSearch runtime failure:/, 'PathSearch-runtime-failure diagnostics report runtime failure');
     like($out . $warn, qr/__PHASE1_PATHSEARCH_GO_DIE__/, 'PathSearch-runtime-failure diagnostics include underlying die marker');
 };
+subtest 'get_parser_explicit_miss_bypasses_pathsearch_when_loaded' => sub {
+    plan tests => 10;
+
+    require PathSearch;
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded before explicit-miss bypass check');
+
+    my $missing_path = File::Spec->catfile($Bin, 'tmp_phase1_missing', 'does_not_exist_loaded.spec');
+    my $missing_spec_name = 'phase1_missing_dot_spec_loaded_' . $$ . '.spec';
+    my $go_calls = 0;
+    my ($ok_call, $err_call, $out, $warn, $parser_path, $parser_spec) = (0, '', '', '', undef, undef);
+
+    $ok_call = eval {
+        no warnings 'redefine';
+        local *PathSearch::go = sub { ++$go_calls; die "__UNEXPECTED_PATHSEARCH_GO__\n" };
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$out) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$warn) or die "Unable to capture STDERR: $!";
+        $parser_path = LinkedSpec::get_parser($missing_path);
+        $parser_spec = LinkedSpec::get_parser($missing_spec_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'explicit-miss bypass check returns without die') or diag(normalize_error($err_call));
+    is($go_calls, 0, 'explicit-miss bypass check does not call PathSearch::go');
+    ok(!defined($parser_path), 'missing-explicit-path with PathSearch loaded returns undef');
+    ok(!defined($parser_spec), 'missing-dot-spec-name with PathSearch loaded returns undef');
+    like($out, qr/Spec path not found/, 'explicit-miss bypass diagnostics report not-found');
+    like($out . $warn, qr/\Q$missing_path\E/, 'explicit-miss bypass diagnostics include requested explicit path');
+    like($out . $warn, qr/\Q$missing_spec_name\E/, 'explicit-miss bypass diagnostics include requested dot-spec name');
+    unlike($out . $warn, qr/__UNEXPECTED_PATHSEARCH_GO__/, 'explicit-miss bypass diagnostics do not include PathSearch::go sentinel');
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch remains loaded after explicit-miss bypass check');
+};
 subtest 'get_parser_pathsearch_returns_missing_file_reports_error' => sub {
     plan tests => 6;
 

@@ -891,3 +891,34 @@ Generalized `get_parser` non-file path handling to treat any existing non-regula
 - Result:
   - PASS
   - all 35 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: Explicit-Miss Bypass with PathSearch Already Loaded
+## Summary
+Added regression coverage to lock the invariant that explicit missing path inputs bypass `PathSearch::go` even when `PathSearch.pm` is already loaded in-process.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_explicit_miss_bypasses_pathsearch_when_loaded`.
+- Scenario:
+  - force `PathSearch.pm` to be loaded,
+  - monkey-patch `PathSearch::go` with a sentinel die and call counter,
+  - invoke `get_parser` with:
+    - a missing explicit path (`.../does_not_exist_loaded.spec`),
+    - a missing `.spec` basename (`phase1_missing_dot_spec_loaded_<pid>.spec`).
+- Asserts:
+  - no die from `get_parser`,
+  - both calls return `undef`,
+  - diagnostics report `Spec path not found` and include requested tokens,
+  - `PathSearch::go` call count remains `0` (bypass preserved).
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 36 top-level test blocks pass.
