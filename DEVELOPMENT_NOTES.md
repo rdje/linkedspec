@@ -85,6 +85,7 @@ It should not be reframed as a strict EBNF clone.
     - validated by monkey-patched call counter with successful parser creation/invocation.
   - `get_parser` explicit-path-miss negative-path checks:
     - unresolved path-like arguments (containing `/` or `\\`) return `undef` without die and report `Spec path not found`,
+    - includes missing backslash-separated explicit paths (windows-style separators),
     - explicit-path misses skip fallback loader paths and keep `PathSearch.pm` unloaded.
   - `get_parser` explicit-.spec-miss negative-path checks:
     - unresolved `.spec`-suffixed basenames return `undef` without die and report `Spec path not found`,

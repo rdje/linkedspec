@@ -803,3 +803,30 @@ Generalized `get_parser` invalid-name validation from specific control character
 - Result:
   - PASS
   - all 30 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Windows-Style Explicit Path Miss
+## Summary
+Added regression coverage to lock `get_parser` behavior for backslash-separated explicit path misses, ensuring fallback resolution is skipped and diagnostics remain stable.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_missing_windows_style_path_skips_pathsearch`.
+- Scenario:
+  - pass a missing backslash-separated explicit path (e.g. `tmp_phase1_missing\\does_not_exist.spec`) into `get_parser`.
+- Asserts:
+  - call returns without die,
+  - parser return is `undef`,
+  - diagnostics include `Spec path not found` and requested path token,
+  - `PathSearch.pm` remains unloaded before and after the call.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 31 top-level test blocks pass.

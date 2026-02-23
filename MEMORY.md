@@ -302,6 +302,14 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 30 top-level test blocks pass.
+- Added windows-style explicit-path miss coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_missing_windows_style_path_skips_pathsearch`,
+  - scenario uses missing backslash-separated path (`tmp_phase1_missing\\does_not_exist.spec`),
+  - assertions: no die, undef parser, not-found diagnostics include requested token, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with windows-style explicit-path miss coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 31 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

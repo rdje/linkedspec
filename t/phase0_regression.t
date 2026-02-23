@@ -288,6 +288,20 @@ subtest 'get_parser_missing_explicit_path_skips_pathsearch' => sub {
     like($out . $warn, qr/\Q$missing_path\E/, 'missing-explicit-path diagnostics include requested path');
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after missing-explicit-path check');
 };
+subtest 'get_parser_missing_windows_style_path_skips_pathsearch' => sub {
+    plan tests => 6;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before missing-windows-style-path check');
+
+    my $missing_windows_path = 'tmp_phase1_missing\\does_not_exist.spec';
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($missing_windows_path);
+
+    ok($ok_call, 'missing-windows-style-path get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'missing-windows-style-path get_parser returns undef');
+    like($out, qr/Spec path not found/, 'missing-windows-style-path reports "Spec path not found"');
+    like($out . $warn, qr/\Q$missing_windows_path\E/, 'missing-windows-style-path diagnostics include requested path');
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after missing-windows-style-path check');
+};
 subtest 'get_parser_missing_dot_spec_name_skips_pathsearch' => sub {
     plan tests => 6;
 
