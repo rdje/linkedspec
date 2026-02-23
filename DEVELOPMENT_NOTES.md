@@ -65,7 +65,7 @@ It should not be reframed as a strict EBNF clone.
     - cwd-local `name.spec` resolution (no `PathSearch` load),
     - lazy `PathSearch` fallback when local/module-relative candidate is absent.
   - `get_parser` invalid-spec-name negative-path checks:
-    - `undef`, empty-string, whitespace-only, non-scalar, and NUL-byte-containing names return `undef` without die,
+    - `undef`, empty-string, whitespace-only, non-scalar, NUL-byte-containing, and padded names return `undef` without die,
     - non-scalar coverage explicitly includes arrayref/hashref/scalarref/coderef/regexp-ref variants,
     - diagnostics include `Invalid spec name`,
     - `PathSearch.pm` remains unloaded for these calls.
@@ -79,6 +79,9 @@ It should not be reframed as a strict EBNF clone.
   - `get_parser` fallback-resolved-missing-path negative-path checks:
     - forced fallback with monkey-patched `PathSearch::go` returning non-existent file path returns `undef` without die,
     - diagnostics include `Spec path not found`, requested spec name, and resolved missing path.
+  - `get_parser` fallback single-call invariant check:
+    - fallback path invokes `PathSearch::go` exactly once per `get_parser` call,
+    - validated by monkey-patched call counter with successful parser creation/invocation.
   - `get_parser` explicit-path-miss negative-path checks:
     - unresolved path-like arguments (containing `/` or `\\`) return `undef` without die and report `Spec path not found`,
     - explicit-path misses skip fallback loader paths and keep `PathSearch.pm` unloaded.
@@ -125,7 +128,7 @@ It should not be reframed as a strict EBNF clone.
   - avoids hard dependence on current working directory,
   - keeps `PathSearch` as lazy fallback only.
 - `LinkedSpec::get_parser` now validates spec-name input early:
-  - `undef`/empty/whitespace-only/non-scalar/NUL-byte spec-name arguments fail fast with diagnostics and `undef` return,
+  - `undef`/empty/whitespace-only/non-scalar/NUL-byte/padded spec-name arguments fail fast with diagnostics and `undef` return,
   - invalid-name calls do not trigger fallback loader paths.
 - `LinkedSpec::get_parser` now treats unresolved path-like names as explicit misses:
   - when local/module-relative lookup fails for path-like names, it returns not-found directly,
@@ -136,6 +139,9 @@ It should not be reframed as a strict EBNF clone.
 - `LinkedSpec::get_parser` now traps `PathSearch->go` runtime exceptions:
   - fallback runtime failures are converted to diagnostics + `undef` return,
   - explicit `die` from `PathSearch` no longer escapes from `get_parser`.
+- `LinkedSpec::get_parser` fallback now uses a single guarded resolver call:
+  - duplicate unguarded `PathSearch->go` invocation removed,
+  - fallback resolution is now fully covered by the eval-guarded call path.
 - Regression harness decoupled from direct `Lispish.pm` import:
   - uses LinkedSpec-generated `Lispish` parser coderef for stream parsing in corpus tests.
 - Fallback-path coupling cleanup:

@@ -1278,8 +1278,8 @@ sub _resolve_local_spec_path {
 sub get_parser {
  my ($spec_name, @opts) = @_;
 
- unless (defined $spec_name && !ref($spec_name) && $spec_name =~ /\S/o && index($spec_name, "\0") == -1) {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, whitespace-only, non-scalar, or contains NUL byte");
+ unless (defined $spec_name && !ref($spec_name) && $spec_name =~ /\S/o && index($spec_name, "\0") == -1 && $spec_name !~ /^\s|\s$/o) {
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, whitespace-only, non-scalar, contains NUL byte, or has leading/trailing whitespace");
   return undef
  }
 
@@ -1304,7 +1304,6 @@ sub get_parser {
    return undef
   }
   $spec_path = $resolved_spec_path;
-  $spec_path = PathSearch->go($spec_name, 'spec');
  }
 
  unless ($spec_path && -f $spec_path) {

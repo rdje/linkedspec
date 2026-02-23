@@ -694,3 +694,58 @@ Expanded invalid-input regression coverage for `get_parser` by locking behavior 
 - Result:
   - PASS
   - all 26 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: Remove Duplicate PathSearch::go Fallback Call
+## Summary
+Fixed a fallback-resolution bug in `get_parser` where `PathSearch->go` was invoked twice (once inside eval guard and once again unguarded), and added regression coverage to lock single-call behavior.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed duplicate unguarded fallback call in `LinkedSpec::get_parser`:
+  - retained the eval-wrapped `PathSearch->go` result assignment,
+  - removed trailing second `PathSearch->go` invocation.
+- Added subtest `get_parser_pathsearch_fallback_calls_go_once`:
+  - monkey-patches `PathSearch::go` to count invocations and return a valid temporary spec path,
+  - asserts `get_parser` returns without die and creates parser coderef,
+  - asserts fallback resolver is called exactly once,
+  - asserts parser invocation succeeds and returns AST.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 27 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser Leading/Trailing Whitespace Guard
+## Summary
+Hardened `get_parser` invalid-name validation so spec names with leading or trailing whitespace are rejected as invalid input before any resolution/fallback path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser` invalid-name gate:
+  - now rejects values matching leading or trailing whitespace (`/^\s|\s$/`),
+  - padded names return `undef` with `Invalid spec name` diagnostics before fallback loader paths.
+- Added subtest `get_parser_padded_spec_name_reports_error_without_pathsearch`:
+  - validates `' Lispish'` and `'Lispish '` inputs,
+  - asserts no die, `undef` return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 28 top-level test blocks pass.

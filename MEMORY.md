@@ -259,6 +259,27 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 26 top-level test blocks pass.
+- Fixed duplicate fallback resolver invocation in `LinkedSpec::get_parser`:
+  - removed stale second unguarded `PathSearch->go` call after eval-guarded resolver assignment.
+- Added fallback go-once regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_pathsearch_fallback_calls_go_once`,
+  - monkey-patches `PathSearch::go` to count invocations and return a valid temporary spec path,
+  - assertions: no die, parser coderef returned, go-call count is exactly 1, parser invocation yields AST.
+- Re-ran baseline with go-once fallback coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 27 top-level test blocks pass.
+- Hardened padded spec-name input handling in `LinkedSpec::get_parser`:
+  - invalid-name gate now rejects leading/trailing whitespace in otherwise non-empty names,
+  - padded names fail fast with diagnostics + undef return before fallback activity.
+- Added padded-spec-name invalid-input regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_padded_spec_name_reports_error_without_pathsearch`,
+  - covers `' Lispish'` and `'Lispish '` inputs,
+  - assertions: no die, undef parser, invalid-name diagnostics, and `PathSearch.pm` remains unloaded.
+- Re-ran baseline with padded-spec-name coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 28 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

@@ -159,6 +159,23 @@ subtest 'get_parser_whitespace_spec_name_reports_error_without_pathsearch' => su
 
     ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after whitespace-spec-name checks');
 };
+subtest 'get_parser_padded_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before padded-spec-name checks');
+
+    my ($ok_lead, $parser_lead, $err_lead, $out_lead, $warn_lead) = run_get_parser_with_captured_io(' Lispish');
+    ok($ok_lead, 'leading-space-spec get_parser call returns without die') or diag(normalize_error($err_lead));
+    ok(!defined($parser_lead), 'leading-space-spec get_parser returns undef');
+    like($out_lead, qr/Invalid spec name/, 'leading-space-spec diagnostics report invalid spec name');
+
+    my ($ok_trail, $parser_trail, $err_trail, $out_trail, $warn_trail) = run_get_parser_with_captured_io('Lispish ');
+    ok($ok_trail, 'trailing-space-spec get_parser call returns without die') or diag(normalize_error($err_trail));
+    ok(!defined($parser_trail), 'trailing-space-spec get_parser returns undef');
+    like($out_trail, qr/Invalid spec name/, 'trailing-space-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after padded-spec-name checks');
+};
 subtest 'get_parser_non_scalar_spec_name_reports_error_without_pathsearch' => sub {
     plan tests => 8;
 
@@ -332,6 +349,45 @@ subtest 'get_parser_pathsearch_returns_missing_file_reports_error' => sub {
     like($out, qr/Spec path not found/, 'PathSearch-resolved-missing-file diagnostics report not-found');
     like($out . $warn, qr/\Q$missing_name\E/, 'PathSearch-resolved-missing-file diagnostics include requested spec');
     like($out . $warn, qr/\Q$fake_resolved\E/, 'PathSearch-resolved-missing-file diagnostics include resolved missing path');
+};
+subtest 'get_parser_pathsearch_fallback_calls_go_once' => sub {
+    plan tests => 7;
+
+    require File::Temp;
+    require PathSearch;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_pathsearch_go_once.spec');
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+    my $missing_name = 'phase1_pathsearch_go_once_' . $$;
+    my $go_calls = 0;
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create go-once fallback spec '$tmp_spec': $!";
+    print {$fh} $source_content;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary go-once fallback spec created');
+    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded for go-once fallback check');
+
+    my ($ok_call, $parser, $err_call) = (0, undef, '');
+    $ok_call = eval {
+        no warnings 'redefine';
+        local *PathSearch::go = sub {
+            ++$go_calls;
+            return $tmp_spec;
+        };
+        $parser = LinkedSpec::get_parser($missing_name);
+        1;
+    };
+    $err_call = $@ // '' unless $ok_call;
+
+    ok($ok_call, 'go-once fallback get_parser call returns without die') or diag(normalize_error($err_call));
+    is($go_calls, 1, 'go-once fallback calls PathSearch::go exactly once');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'go-once fallback get_parser returns parser coderef');
+
+    my $input = '(go once)';
+    my $ast = eval { $parser ? $parser->(\$input) : undef };
+    ok(!$@, 'go-once fallback parser invocation returns without die') or diag(normalize_error($@));
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'go-once fallback parser invocation returns AST');
 };
 
 subtest 'get_parser_pathsearch_fallback' => sub {
