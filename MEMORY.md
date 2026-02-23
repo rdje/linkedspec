@@ -310,6 +310,17 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 31 top-level test blocks pass.
+- Hardened directory-path handling in `LinkedSpec::get_parser`:
+  - explicit directory path inputs now report `Spec path is not a file` and return undef,
+  - fallback-resolved directory paths now report directory-path diagnostics and return undef.
+- Added directory-path regression coverage in `t/phase0_regression.t`:
+  - `get_parser_explicit_directory_path_reports_error_without_pathsearch`,
+  - `get_parser_pathsearch_returns_directory_reports_error`,
+  - assertions include no die, undef parser, directory-path diagnostics, and fallback resolver single-call behavior.
+- Re-ran baseline with directory-path handling coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 33 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

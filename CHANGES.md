@@ -830,3 +830,32 @@ Added regression coverage to lock `get_parser` behavior for backslash-separated 
 - Result:
   - PASS
   - all 31 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser Directory-Path Resolution Handling
+## Summary
+Hardened `get_parser` to explicitly handle resolved directory paths as a dedicated error case and expanded regression coverage for both explicit and fallback-resolved directory-path scenarios.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `LinkedSpec::get_parser`:
+  - when an explicit path-like argument resolves to an existing directory, reports `Spec path is not a file` and returns `undef`,
+  - retained existing not-found behavior for unresolved explicit paths.
+- Added subtest `get_parser_explicit_directory_path_reports_error_without_pathsearch`:
+  - validates explicit directory argument handling without fallback loading.
+- Added subtest `get_parser_pathsearch_returns_directory_reports_error`:
+  - monkey-patches `PathSearch::go` to return an existing directory path,
+  - asserts no die, `undef` return, directory-path diagnostics, and single resolver invocation.
+- Kept no-fallback/load-precondition checks stable by ordering PathSearch-loading subtests after no-PathSearch precondition subtests.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 33 top-level test blocks pass.
