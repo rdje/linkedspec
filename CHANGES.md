@@ -421,3 +421,30 @@ Added regression coverage for parser invocation with intentionally invalid non-s
 - Result:
   - PASS
   - all 16 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Hardening: get_parser Empty/Undefined Spec-Name Guard
+## Summary
+Added fail-fast guard behavior for invalid `get_parser` spec-name inputs (`undef`/empty string) and locked the behavior with non-fallback regression coverage.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- `LinkedSpec::get_parser` now validates the first argument before any local/fallback path resolution:
+  - if spec name is `undef` or empty, emits `Invalid spec name` diagnostics and returns `undef`.
+  - this prevents lazy fallback loading from being attempted for invalid-name calls.
+- Added subtest `get_parser_empty_spec_name_reports_error_without_pathsearch`:
+  - validates both `undef` and `''` inputs,
+  - asserts no die, `undef` parser return, and invalid-name diagnostics,
+  - asserts `PathSearch.pm` remains unloaded before and after these calls.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 17 top-level test blocks pass.

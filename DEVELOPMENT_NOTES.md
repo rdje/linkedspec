@@ -64,6 +64,10 @@ It should not be reframed as a strict EBNF clone.
     - explicit file path resolution (no `PathSearch` load),
     - cwd-local `name.spec` resolution (no `PathSearch` load),
     - lazy `PathSearch` fallback when local/module-relative candidate is absent.
+  - `get_parser` invalid-spec-name negative-path checks:
+    - `undef` and empty-string names return `undef` without die,
+    - diagnostics include `Invalid spec name`,
+    - `PathSearch.pm` remains unloaded for these calls.
   - `get_parser` unresolved-spec negative-path checks:
     - missing spec name returns `undef` without die and reports `Spec path not found`,
     - missing explicit path returns `undef` without die and includes requested path in diagnostics.
@@ -103,6 +107,9 @@ It should not be reframed as a strict EBNF clone.
   - resolves to `../specs/<name>.spec` relative to `perl/LinkedSpec.pm` location,
   - avoids hard dependence on current working directory,
   - keeps `PathSearch` as lazy fallback only.
+- `LinkedSpec::get_parser` now validates spec-name input early:
+  - `undef`/empty spec-name arguments fail fast with diagnostics and `undef` return,
+  - invalid-name calls do not trigger fallback loader paths.
 - Regression harness decoupled from direct `Lispish.pm` import:
   - uses LinkedSpec-generated `Lispish` parser coderef for stream parsing in corpus tests.
 - Fallback-path coupling cleanup:

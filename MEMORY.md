@@ -33,6 +33,18 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 
+## Recent Commit Ledger (Newest First)
+- `4067980` - Lock parser invalid-input subprocess behavior and update live docs
+- `59ed4d0` - Add mixed ACTION/BLIND CALL exit-path regression coverage for get_parser
+- `417d43e` - Add malformed-handler runtime-error regression coverage for get_parser
+- `cfa140b` - Add malformed-spec negative-path regression for get_parser
+- `8c66bc5` - Add get_parser open-failure negative-path regression coverage
+- `f38e0b3` - Add unresolved-spec negative-path regression checks for get_parser
+- `0651fc6` - Expand Phase-1 regression coverage and decouple PathSearch fallback dependencies
+- `3d4b75b` - Complete Phase-1 LinkedSpec core isolation and refresh live docs
+- `cf25bd3` - Bootstrap LinkedSpec baseline, docs, and corpus regression
+- `dca1b21` - Initial commit
+
 ## Resume-Work Checklist
 When resuming after interruption:
 1. Read `MEMORY.md` first (this file).
@@ -148,6 +160,17 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 16 top-level test blocks pass.
+- Hardened `LinkedSpec::get_parser` invalid-name entry path in `perl/LinkedSpec.pm`:
+  - added early guard for `undef`/empty spec-name arguments,
+  - invalid-name calls now emit `Invalid spec name` diagnostics and return `undef` before path resolution/fallback.
+- Added empty-spec-name regression coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_empty_spec_name_reports_error_without_pathsearch`,
+  - validates both `undef` and `''` inputs,
+  - asserts no die, `undef` return, and no `PathSearch.pm` load for these invalid-name calls.
+- Re-ran baseline with empty-spec-name guard coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 17 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:
@@ -155,3 +178,4 @@ Update this file after every meaningful exchange/task completion with:
 - Why it changed,
 - What remains,
 - Exact next step.
+- If a commit was created, append hash + subject in `Recent Commit Ledger (Newest First)`.

@@ -1278,6 +1278,11 @@ sub _resolve_local_spec_path {
 sub get_parser {
  my ($spec_name, @opts) = @_;
 
+ unless (defined $spec_name && length $spec_name) {
+  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined or empty");
+  return undef
+ }
+
  my $spec_path = _resolve_local_spec_path($spec_name);
  unless ($spec_path) {
   my $ok = eval {require PathSearch; 1};

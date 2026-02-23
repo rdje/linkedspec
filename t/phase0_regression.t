@@ -125,6 +125,23 @@ subtest 'get_parser_cwd_name_spec_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'cwd name.spec resolution keeps PathSearch unloaded');
 };
+subtest 'get_parser_empty_spec_name_reports_error_without_pathsearch' => sub {
+    plan tests => 8;
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch not loaded before empty-spec-name checks');
+
+    my ($ok_undef, $parser_undef, $err_undef, $out_undef, $warn_undef) = run_get_parser_with_captured_io(undef);
+    ok($ok_undef, 'undef-spec get_parser call returns without die') or diag(normalize_error($err_undef));
+    ok(!defined($parser_undef), 'undef-spec get_parser returns undef');
+    like($out_undef, qr/Invalid spec name/, 'undef-spec diagnostics report invalid spec name');
+
+    my ($ok_empty, $parser_empty, $err_empty, $out_empty, $warn_empty) = run_get_parser_with_captured_io('');
+    ok($ok_empty, 'empty-spec get_parser call returns without die') or diag(normalize_error($err_empty));
+    ok(!defined($parser_empty), 'empty-spec get_parser returns undef');
+    like($out_empty, qr/Invalid spec name/, 'empty-spec diagnostics report invalid spec name');
+
+    ok(!exists $INC{'PathSearch.pm'}, 'PathSearch remains unloaded after empty-spec-name checks');
+};
 
 subtest 'get_parser_pathsearch_fallback' => sub {
     plan tests => 5;
