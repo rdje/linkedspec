@@ -199,6 +199,28 @@ subtest 'get_parser_open_failure_reports_error' => sub {
     chmod 0600, $tmp_spec;
     unlink($tmp_spec);
 };
+subtest 'get_parser_malformed_spec_reports_validation_error' => sub {
+    plan tests => 5;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase1_malformed_spec_validation.spec');
+    my $malformed_spec = "this is not a valid LinkedSpec rule line\n";
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create malformed spec '$tmp_spec': $!";
+    print {$fh} $malformed_spec;
+    close($fh);
+    ok(-f $tmp_spec, 'temporary malformed spec created');
+
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($tmp_spec);
+
+    ok($ok_call, 'malformed-spec get_parser call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'malformed-spec get_parser returns undef');
+    like($out, qr/Spec file must start with a rule definition/, 'malformed-spec reports missing rule-definition validation failure');
+    like($out, qr/CRITICAL ERROR/, 'malformed-spec reports critical validation failure');
+
+    unlink($tmp_spec);
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

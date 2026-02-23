@@ -45,7 +45,7 @@ When resuming after interruption:
 ## Next Recommended Work Item
 - Continue Phase-1 hardening with targeted behavior locks:
   - keep full resolution-order tests green,
-  - add targeted checks for parser-generation failure diagnostics on intentionally malformed specs,
+  - add targeted checks for runtime handler-generation failure diagnostics (post-DSL-parse generation path),
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
@@ -114,6 +114,14 @@ When resuming after interruption:
   - command: `prove -v -I perl t/phase0_regression.t`
   - result: PASS
   - note: all 12 top-level test blocks pass.
+- Added malformed-spec negative-path coverage in `t/phase0_regression.t`:
+  - subtest `get_parser_malformed_spec_reports_validation_error`,
+  - scenario: invalid DSL content (no rule definition) in temporary `.spec`,
+  - assertions: no die, undef return, validation + critical-error diagnostics.
+- Re-ran baseline with malformed-spec coverage:
+  - command: `prove -v -I perl t/phase0_regression.t`
+  - result: PASS
+  - note: all 13 top-level test blocks pass.
 
 ## Update Policy
 Update this file after every meaningful exchange/task completion with:

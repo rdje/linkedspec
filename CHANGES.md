@@ -303,3 +303,31 @@ Added regression coverage for the unresolved-open case where a spec path exists 
 - Result:
   - PASS
   - all 12 top-level test blocks pass.
+
+## 2026-02-23 - Phase 1 Validation Expansion: get_parser Malformed-Spec Negative Path
+## Summary
+Added regression coverage for malformed spec content to verify parser-generation validation failures are surfaced cleanly through `get_parser`.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added subtest `get_parser_malformed_spec_reports_validation_error`.
+- Scenario:
+  - write a temporary `.spec` file containing intentionally invalid DSL content (no rule definition).
+  - call `LinkedSpec::get_parser` and capture diagnostics.
+- Asserts:
+  - call returns without die,
+  - return value is `undef`,
+  - diagnostics include DSL validation failure (`Spec file must start with a rule definition`),
+  - diagnostics include `CRITICAL ERROR` from failed generation path.
+
+## Validation
+- Ran:
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - PASS
+  - all 13 top-level test blocks pass.

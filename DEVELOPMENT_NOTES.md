@@ -69,6 +69,8 @@ It should not be reframed as a strict EBNF clone.
     - missing explicit path returns `undef` without die and includes requested path in diagnostics.
   - `get_parser` open-failure negative-path check:
     - unreadable existing spec path returns `undef` without die and reports open/OS error diagnostics.
+  - `get_parser` malformed-spec negative-path check:
+    - invalid DSL content returns `undef` without die and reports validation/critical error diagnostics.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
