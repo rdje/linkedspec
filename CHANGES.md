@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor-Level Action Rewriter Migration Summary
+## Summary
+Added descriptor-level migration summary metadata so `return_descr` consumers can quantify language-agnostic readiness across all rules and prioritize concrete blocker cleanup.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `_build_action_rewriter_migration_summary(...)` in `LinkedSpec.pm`:
+  - aggregates per-rule `meta.action_rewriter` into descriptor-level summary metrics.
+- Extended `Get(...)` descriptor payload:
+  - now exposes `meta.action_rewriter_migration` at descriptor top-level.
+- Summary metadata fields include:
+  - `total_rules`
+  - `rules_with_action_rewriter_meta`
+  - `language_agnostic_ready_rule_count`
+  - `language_agnostic_blocked_rule_count`
+  - `language_agnostic_ready_rules`
+  - `language_agnostic_blocked_rules`
+  - `language_agnostic_ready_ratio`
+- Added focused regression lock:
+  - `return_descr_exposes_action_rewriter_migration_summary`
+  - verifies deterministic counts/lists, blocked rule payloads, and readiness ratio.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=55`)
 
 ## 2026-02-24 - LinkedSpec.pm Maintainability Pass: Subroutine Docstrings and Structural Comments
 ## Summary

@@ -161,6 +161,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter language-agnostic blocker statement lock:
     - rule metadata now exposes unresolved-helper statement payloads and consolidated migration blockers (`unresolved_helper_events`, `unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`, `language_agnostic_action_ir_blocker_statement_count`),
     - covered by `action_rewriter_meta_exposes_language_agnostic_blocker_statements`.
+  - action-rewriter descriptor migration summary lock:
+    - `return_descr` now exposes descriptor-level migration summary metadata (`meta.action_rewriter_migration`) including ready/blocked counts, deterministic rule lists, blocked rule payloads, and readiness ratio,
+    - covered by `return_descr_exposes_action_rewriter_migration_summary`.
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.

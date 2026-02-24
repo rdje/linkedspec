@@ -1084,6 +1084,43 @@ SPEC
     is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
+subtest 'return_descr_exposes_action_rewriter_migration_summary' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); return_a(Top) }
+
+Mixed::&
+ /b/ -> Mixed { call(Leaf); my $tmp = 1 }
+
+Unresolved::&
+ /c/ -> Unresolved { return_a(Leaf) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return_a(Leaf) }
+ /c/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action_rewriter migration summary check');
+    ok(ref($descr->{meta}) eq 'HASH', 'descriptor exposes top-level meta hash');
+    ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor exposes action_rewriter migration summary');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    is($summary->{total_rules}, 4, 'migration summary tracks total rule count');
+    is($summary->{rules_with_action_rewriter_meta}, 4, 'migration summary tracks rules with action_rewriter metadata');
+    is($summary->{language_agnostic_ready_rule_count}, 2, 'migration summary tracks ready rule count');
+    is($summary->{language_agnostic_blocked_rule_count}, 2, 'migration summary tracks blocked rule count');
+    is_deeply($summary->{language_agnostic_ready_rules}, ['Leaf', 'Top'], 'migration summary exposes deterministic ready-rule list');
+
+    my ($mixed_row) = grep { $_->{rule} eq 'Mixed' } @{$summary->{language_agnostic_blocked_rules}};
+    my ($unresolved_row) = grep { $_->{rule} eq 'Unresolved' } @{$summary->{language_agnostic_blocked_rules}};
+    is_deeply($mixed_row->{blocker_statements}, ['my $tmp = 1'], 'migration summary blocked entry preserves RAW_PERL blocker payload');
+    is_deeply($unresolved_row->{blocker_statements}, ['return_a(Leaf)'], 'migration summary blocked entry preserves unresolved-helper blocker payload');
+    is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 

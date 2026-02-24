@@ -37,6 +37,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `45fb1ca` - Add LinkedSpec.pm subroutine docstrings and structural comments
 - `9d0c75f` - Backbone item #3 follow-up: add language-agnostic blocker statement metadata
 - `6c71e21` - Backbone item #3 follow-up: add language-agnostic action readiness metadata
 - `3e7de01` - Document language-agnostic .spec end-state and guardrails
@@ -86,12 +87,22 @@ When resuming after interruption:
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
+  - use descriptor-level `meta.action_rewriter_migration` summary to track migration progress and select next highest-value blocked rules,
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 descriptor-level migration summary follow-up in `perl/LinkedSpec.pm`:
+  - descriptor now exposes top-level `meta.action_rewriter_migration` summary in `return_descr` mode with ready/blocked counts, deterministic rule lists, blocked rule payload details, and readiness ratio,
+  - this provides a direct roadmap-aligned prioritization surface for language-agnostic migration backlog selection.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `return_descr_exposes_action_rewriter_migration_summary`.
+- Re-ran full validation after descriptor-level migration summary follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (55 tests)
 - Landed LinkedSpec.pm maintainability documentation pass in `perl/LinkedSpec.pm`:
   - added subroutine-level docstring-style comment headers (`Function`, `Purpose`, `Args`, `Returns`) across logging, parser generation, RuleIR, rewrite, and parser-resolution helpers,
   - added explanatory comments for important bootstrap/parser globals and structural parser/rewrite sections to improve maintainability and handoff readability.

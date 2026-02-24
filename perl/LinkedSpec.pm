@@ -770,6 +770,79 @@ my $gdata = {
 # Get(\$file)->(\$testdata);
 # Top-level entry rule selected while compiling the .spec source.
 my $top_rule;
+
+#------------------------------------------------------------------------------
+# Function: _build_action_rewriter_migration_summary
+# Purpose : Build descriptor-level migration summary from per-rule action_rewriter
+#           metadata so roadmap follow-up can prioritize high-impact blockers.
+# Args    : ($spec_hashref)
+# Returns : hashref summary
+#------------------------------------------------------------------------------
+sub _build_action_rewriter_migration_summary {
+ my ($spec) = @_;
+
+ my $summary = {
+  total_rules => 0,
+  rules_with_action_rewriter_meta => 0,
+  language_agnostic_ready_rule_count => 0,
+  language_agnostic_blocked_rule_count => 0,
+  language_agnostic_ready_rules => [],
+  language_agnostic_blocked_rules => [],
+ };
+
+ return $summary unless ref($spec) eq 'HASH';
+
+ foreach my $rule_name (sort keys %$spec) {
+  my $rule = $spec->{$rule_name};
+  next unless ref($rule) eq 'HASH';
+  ++$summary->{total_rules};
+
+  my $rule_meta = $rule->{meta};
+  next unless ref($rule_meta) eq 'HASH';
+  my $rewriter_meta = $rule_meta->{action_rewriter};
+  next unless ref($rewriter_meta) eq 'HASH';
+
+  ++$summary->{rules_with_action_rewriter_meta};
+
+  my $is_ready = $rewriter_meta->{language_agnostic_action_ir_ready} ? 1 : 0;
+  if ($is_ready) {
+   ++$summary->{language_agnostic_ready_rule_count};
+   push @{$summary->{language_agnostic_ready_rules}}, $rule_name;
+   next;
+  }
+
+  ++$summary->{language_agnostic_blocked_rule_count};
+  my @blocker_statements = ref($rewriter_meta->{language_agnostic_action_ir_blocker_statements}) eq 'ARRAY'
+   ? @{$rewriter_meta->{language_agnostic_action_ir_blocker_statements}}
+   : ();
+  push @{$summary->{language_agnostic_blocked_rules}}, {
+   rule => $rule_name,
+   blocker_statement_count => scalar @blocker_statements,
+   blocker_statements => \@blocker_statements,
+   unresolved_helper_count => $rewriter_meta->{unresolved_helper_count} || 0,
+   raw_perl_dependency_count => $rewriter_meta->{raw_perl_dependency_count} || 0,
+  };
+ }
+
+ if ($summary->{rules_with_action_rewriter_meta} > 0) {
+  $summary->{language_agnostic_ready_ratio} = sprintf(
+   '%.4f',
+   $summary->{language_agnostic_ready_rule_count} / $summary->{rules_with_action_rewriter_meta}
+  );
+ } else {
+  $summary->{language_agnostic_ready_ratio} = '0.0000';
+ }
+
+ if (should_dump(DUMP_DEBUG)) {
+  log_output(
+   DUMP_DEBUG,
+   "(LinkedSpec.pm::_build_action_rewriter_migration_summary) summary",
+   Dumper($summary)
+  );
+ }
+
+ return $summary
+}
 #------------------------------------------------------------------------------
 # Function: Get
 # Purpose : Compile a .spec source into a runnable parser coderef (or return
@@ -855,6 +928,8 @@ sub Get {
 
  my $auto_descr_spec  = spec_descr($retv);
  my $final_descr      = {spec=>$auto_descr_spec, gdata=>spec_gdata($auto_descr_spec)};
+ $final_descr->{meta} ||= {};
+ $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
  
       # Validate generated structures
      unless (validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
