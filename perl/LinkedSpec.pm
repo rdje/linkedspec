@@ -1896,9 +1896,17 @@ sub _split_action_ir_statements {
  my $bracket_depth = 0;
  my $in_single_quote = 0;
  my $in_double_quote = 0;
+ my $in_line_comment = 0;
  my $escape_next = 0;
 
  foreach my $char (split //, $code) {
+  if ($in_line_comment) {
+   $statement .= $char;
+   if ($char eq "\n") {
+    $in_line_comment = 0;
+   }
+   next;
+  }
   if ($in_single_quote) {
    $statement .= $char;
    if ($escape_next) {
@@ -1931,6 +1939,12 @@ sub _split_action_ir_statements {
 
   if ($char eq '"') {
    $in_double_quote = 1;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '#') {
+   $in_line_comment = 1;
    $statement .= $char;
    next;
   }

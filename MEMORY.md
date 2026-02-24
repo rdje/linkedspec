@@ -69,11 +69,20 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - continue reducing `RAW_PERL` fallback usage and unresolved helper surface by expanding structured action-IR coverage for currently non-lowerable helper forms,
+  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and improving canonical statement boundary handling for additional Perl surface constructs,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical splitter line-comment follow-up in `perl/LinkedSpec.pm`:
+  - `_split_action_ir_statements(...)` now tracks Perl line comments outside quoted strings,
+  - semicolons inside `# ...` comments are ignored by top-level statement splitting, avoiding comment-fragmented RAW_PERL fallback shards.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_ignores_line_comment_semicolon_fragmentation`.
+- Re-ran full validation after line-comment splitter follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (48 tests)
 - Landed Backbone item #3 whitespace-tolerant helper lowering follow-up in `perl/LinkedSpec.pm`:
   - helper-lowering substitutions in `_build_action_lowering_contracts(...)` now accept optional spacing around helper names/arguments (`call (X)`, `CAPTURE_IF ( )`, etc.),
   - spacing-only helper variants now lower through canonical action-IR flow instead of remaining unresolved.

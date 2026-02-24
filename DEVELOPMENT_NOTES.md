@@ -151,6 +151,9 @@ It should not be reframed as a strict EBNF clone.
     - helper lowering now accepts optional spacing forms (e.g. `call (Leaf)`, `CAPTURE_IF ( )`) across supported helper contracts,
     - unresolved-helper diagnostics lock now targets label-mismatch helper forms to preserve non-lowerable helper diagnostics coverage,
     - covered by updated `action_rewriter_pipeline_helper_substitutions`, `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`, and `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
+  - action-rewriter canonical action-IR line-comment semicolon lock:
+    - canonical statement splitting now ignores semicolons inside Perl line comments (`# ...`) so comment text is not fragmented into multiple fallback statements,
+    - covered by `action_rewriter_canonical_action_ir_ignores_line_comment_semicolon_fragmentation`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -250,6 +253,9 @@ It should not be reframed as a strict EBNF clone.
 - Canonical helper lowering is now whitespace-tolerant:
   - helper substitution regexes in `_build_action_lowering_contracts(...)` now accept optional spacing around helper names, parentheses, and arguments,
   - spacing-only helper variants now lower through canonical action-IR flow instead of remaining unresolved.
+- Canonical statement splitting is now line-comment-aware:
+  - `_split_action_ir_statements(...)` now tracks Perl line comments outside quoted strings,
+  - semicolons inside line comments are ignored by top-level statement splitting, reducing fallback-fragment noise in canonical metadata.
 
 ## Change Discipline
 Before each commit:

@@ -1045,6 +1045,35 @@ SPEC
     like($rewritten, qr/^return \['\?Top:', \( do \{ my \$x = 1; \$x \}\), /, 'canonical-IR lowering preserves RETURN_A rewrite payload with nested semicolon expression');
     like($rewritten, qr/&\{\$\$descr\{spec\}\{Leaf\}\{handler\}\}\(\$descr, \$STRING, \$minfo\)$/, 'canonical-IR lowering preserves CALL rewrite after nested semicolon payload helper');
 };
+subtest 'action_rewriter_canonical_action_ir_ignores_line_comment_semicolon_fragmentation' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); # keep; comment }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for line-comment semicolon canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 1, 'canonical action-IR fallback count treats semicolon inside line comment as a single fallback statement');
+    is($meta->{canonical_action_ir_count}, 2, 'canonical action-IR count remains helper plus one comment fallback statement');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL');
+    is(scalar(grep { $_ eq 'RAW_PERL' } @{$meta->{canonical_action_ir_nodes}}), 1, 'canonical action-IR nodes include a single RAW_PERL fallback marker');
+
+    my ($raw_evt) = grep { $_->{kind} eq 'RAW_PERL' } @{$meta->{canonical_action_ir_events}};
+    is($raw_evt->{args}{code}, '# keep; comment', 'canonical RAW_PERL fallback payload preserves line comment text with semicolon');
+    is($meta->{unresolved_helper_count}, 0, 'line-comment semicolon handling keeps helper lowering resolved');
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'call(Leaf); # keep; comment'),
+        '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); # keep; comment',
+        'canonical-IR lowering output preserves comment while lowering helper call'
+    );
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
