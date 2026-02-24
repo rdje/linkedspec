@@ -931,27 +931,149 @@ my $specretv = shift;
  return $result
 }
 
+sub _collect_rule_ir {
+ my ($einfo) = @_;
+
+ my $rule_ir = {
+  label         => undef,
+  node_type     => 'default',
+  top_rule      => undef,
+  REs           => [],
+  code_blocks   => {
+   ICODE  => [],
+   ECODE  => [],
+   EXCODE => [],
+   ITCODE => [],
+   LXCODE => [],
+   LSCODE => [],
+   LECODE => [],
+  },
+  acode_entries => [],
+  bcode_entries => [],
+ };
+
+ foreach my $centry (@$einfo) {
+  ($rule_ir->{label}, $rule_ir->{node_type}) = @$centry[1 .. 2] if $$centry[0] =~ /ELABEL/o;
+
+  my $entry_type = $$centry[0];
+  if ($entry_type =~ /ELABEL_INITIAL/o) {
+   $rule_ir->{top_rule} = $$centry[1];
+  }
+  elsif (exists $rule_ir->{code_blocks}{$entry_type}) {
+   push @{$rule_ir->{code_blocks}{$entry_type}}, $$centry[1];
+  }
+  elsif ($entry_type eq 'RE') {
+   push @{$rule_ir->{REs}}, qr/$$centry[1]/;
+  }
+  elsif ($entry_type eq 'ACODE') {
+   push @{$rule_ir->{acode_entries}}, {
+    relabel => $$centry[1]{relabel},
+    reidx   => $$centry[1]{reidx},
+    code    => $$centry[1]{code},
+   };
+  }
+  elsif ($entry_type eq 'BCODE') {
+   push @{$rule_ir->{bcode_entries}}, {
+    call => $$centry[1]{call},
+    code => $$centry[1]{code},
+   };
+  }
+  elsif ($entry_type eq 'MOVE_POS') {
+   push @{$rule_ir->{code_blocks}{LECODE}}, '$IPOS = pos $$STRING';
+  }
+ }
+
+ return $rule_ir
+}
+
+sub _plan_rule_ir_meta {
+ my ($rule_ir) = @_;
+
+ return _build_rule_execution_meta(
+  label       => $rule_ir->{label},
+  node_type   => $rule_ir->{node_type},
+  regex_count => scalar(@{$rule_ir->{REs}}),
+  acode_count => scalar(@{$rule_ir->{acode_entries}}),
+  bcode_count => scalar(@{$rule_ir->{bcode_entries}}),
+ )
+}
+
+sub _validate_rule_ir_or_exit {
+ my ($rule_ir, $rule_meta) = @_;
+
+ if ($rule_meta->{action_mode} eq 'mixed') {
+  my $label = $rule_ir->{label};
+  my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
+  my $context = "ACTION blocks: ".($rule_meta->{acode_count} // 0)." found, BLIND CALL blocks: ".($rule_meta->{bcode_count} // 0)." found";
+  log_output(DUMP_NONE, $error_msg, $context);
+  print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
+  print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
+  exit 1
+ }
+
+ return 1
+}
+
+sub _normalize_rule_code_chunks {
+ my ($label, $chunks) = @_;
+ return join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @$chunks
+}
+
+sub _build_rule_ir_emit_context {
+ my ($rule_ir) = @_;
+ my $label = $rule_ir->{label};
+
+ my @ACODEs;
+ my @GDATA;
+ foreach my $acode_entry (@{$rule_ir->{acode_entries}}) {
+  push @ACODEs, call_spec_handler_subst($label, $acode_entry->{code});
+  push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
+ }
+
+ my @BCALLs;
+ my %BCODEs;
+ foreach my $bcode_entry (@{$rule_ir->{bcode_entries}}) {
+  push @BCALLs, $bcode_entry->{call};
+  $BCODEs{$bcode_entry->{call}} = call_spec_handler_subst($label, $bcode_entry->{code});
+ }
+
+ my %ab_count = (
+  ACODE => scalar(@{$rule_ir->{acode_entries}}),
+  BCODE => scalar(@{$rule_ir->{bcode_entries}}),
+ );
+
+ my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE});
+ my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE});
+ my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE});
+ my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE});
+ my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE});
+ my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE});
+ my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE});
+
+ return {
+  label     => $label,
+  node_type => $rule_ir->{node_type},
+  REs       => $rule_ir->{REs},
+  ACODEs    => \@ACODEs,
+  BCODEs    => \%BCODEs,
+  BCALLs    => \@BCALLs,
+  GDATA     => \@GDATA,
+  ab_count  => \%ab_count,
+  icode     => $icode,
+  ecode     => $ecode,
+  excode    => $excode,
+  itcode    => $itcode,
+  lxcode    => $lxcode,
+  lscode    => $lscode,
+  lecode    => $lecode,
+ }
+}
+
 sub spec_entry {
 my $einfo = shift;
 
  my %info;
- my $label;
- my $node_type;
- my @REs;
- my @icode  ;
- my @ecode  ;
- my @excode ;
- my @itcode ;
- my @lxcode ;
- my @lscode ;
- my @lecode ;
- my @ACODEs;
- my %BCODEs;
- my @BCALLs;
- my @GDATA;
- my %ab_count;
  my %handlers;
- my $rule_meta;
 
  if (should_dump(DUMP_HIGH)) {
      log_dump("=== SPEC ENTRY DUMP ===\n");
@@ -959,79 +1081,29 @@ my $einfo = shift;
      log_dump("=== END SPEC ENTRY DUMP ===\n");
  }
 
- foreach my $centry (@$einfo) {
-   ($label, $node_type)  = @$centry[1 .. 2] if $$centry[0] =~ /ELABEL/o;
-   
-   my $entry_type = $$centry[0];
-   if ($entry_type =~ /ELABEL_INITIAL/o) {
-     $top_rule = $$centry[1];
-   }
-   elsif ($entry_type eq 'ICODE') {
-     push @icode, $$centry[1];
-   }
-   elsif ($entry_type eq 'ECODE') {
-     push @ecode, $$centry[1];
-   }
-   elsif ($entry_type eq 'EXCODE') {
-     push @excode, $$centry[1];
-   }
-   elsif ($entry_type eq 'ITCODE') {
-     push @itcode, $$centry[1];
-   }
-   elsif ($entry_type eq 'LXCODE') {
-     push @lxcode, $$centry[1];
-   }
-   elsif ($entry_type eq 'LSCODE') {
-     push @lscode, $$centry[1];
-   }
-   elsif ($entry_type eq 'LECODE') {
-     push @lecode, $$centry[1];
-   }
-   elsif ($entry_type eq 'RE') {
-     push @REs, qr/$$centry[1]/;
-   }
-   elsif ($entry_type eq 'ACODE') {
-     push @ACODEs, call_spec_handler_subst($label, $$centry[1]{code});
-     push @GDATA, {label=>$$centry[1]{relabel}, idx=>$$centry[1]{reidx}};
-     ++$ab_count{ACODE};
-   }
-   elsif ($entry_type eq 'BCODE') {
-     push @BCALLs, $$centry[1]{call};
-     $BCODEs{$$centry[1]{call}} = call_spec_handler_subst($label, $$centry[1]{code});
-     ++$ab_count{BCODE};
-   }
-   elsif ($entry_type eq 'MOVE_POS') {
-     # This is of course a temporary solution
-     #push @lscode, 'push @'.$label.', [\'?'.$label.'_others:\', substr $$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH]';
-     push @lecode, '$IPOS = pos $$STRING';
-   }
- }
+ my $rule_ir = _collect_rule_ir($einfo);
+ $top_rule = $rule_ir->{top_rule} if defined $rule_ir->{top_rule};
 
+ my $rule_meta = _plan_rule_ir_meta($rule_ir);
+ _validate_rule_ir_or_exit($rule_ir, $rule_meta);
 
- $rule_meta = _build_rule_execution_meta(
-  label       => $label,
-  node_type   => $node_type,
-  regex_count => scalar(@REs),
-  acode_count => $ab_count{ACODE} // 0,
-  bcode_count => $ab_count{BCODE} // 0,
- );
+ my $emit_ctx = _build_rule_ir_emit_context($rule_ir);
+ my $label    = $emit_ctx->{label};
+ my $node_type = $emit_ctx->{node_type};
+ my @REs      = @{$emit_ctx->{REs}};
+ my @ACODEs   = @{$emit_ctx->{ACODEs}};
+ my %BCODEs   = %{$emit_ctx->{BCODEs}};
+ my @BCALLs   = @{$emit_ctx->{BCALLs}};
+ my @GDATA    = @{$emit_ctx->{GDATA}};
+ my %ab_count = %{$emit_ctx->{ab_count}};
 
- if ($rule_meta->{action_mode} eq 'mixed') {
-  my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
-  my $context = "ACTION blocks: ".($ab_count{ACODE} // 0)." found, BLIND CALL blocks: ".($ab_count{BCODE} // 0)." found";
-  log_output(DUMP_NONE, $error_msg, $context);
-  print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
-  print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
-  exit 1
- }
-
- my $icode  = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @icode ;
- my $ecode  = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @ecode ;
- my $excode = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @excode;
- my $itcode = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @itcode;
- my $lxcode = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @lxcode;
- my $lscode = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @lscode;
- my $lecode = join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @lecode;
+ my $icode  = $emit_ctx->{icode};
+ my $ecode  = $emit_ctx->{ecode};
+ my $excode = $emit_ctx->{excode};
+ my $itcode = $emit_ctx->{itcode};
+ my $lxcode = $emit_ctx->{lxcode};
+ my $lscode = $emit_ctx->{lscode};
+ my $lecode = $emit_ctx->{lecode};
 
  # Initial value of the handler code
  my $actual_icode  = $icode  && "$icode;"  || "";

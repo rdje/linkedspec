@@ -120,6 +120,9 @@ It should not be reframed as a strict EBNF clone.
   - bootstrap rule-registry recursion lock:
     - hardcoded bootstrap grammar now uses ID/tag registry dispatch (no fixed slot index assumptions),
     - nested action-block braces with quoted literals remain stable under registry-driven `CURLY_BRACE` recursion (`bootstrap_registry_curly_brace_recursion_smoke`).
+  - RuleIR stage-pipeline mapping lock:
+    - staged `spec_entry()` RuleIR flow preserves ACODE gdata mapping order/count for multi-AND rule assembly,
+    - covered by `ruleir_pipeline_preserves_acode_gdata_mapping_order`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -179,6 +182,11 @@ It should not be reframed as a strict EBNF clone.
   - each bootstrap rule carries stable `id` + semantic `tags`,
   - `startREs` and dispatch routing are built from tag-driven registry data,
   - recursive brace handler dispatch now resolves `CURLY_BRACE` by ID rather than fixed index constants.
+- `spec_entry()` now follows an explicit staged RuleIR pipeline:
+  - collect phase: parsed entries are normalized into RuleIR (`_collect_rule_ir`),
+  - plan phase: execution metadata is derived from RuleIR (`_plan_rule_ir_meta`),
+  - validate phase: incompatible action-mode mixes are rejected (`_validate_rule_ir_or_exit`),
+  - emit-context phase: code chunks and action mappings are normalized for handler assembly (`_build_rule_ir_emit_context`).
 
 ## Change Discipline
 Before each commit:

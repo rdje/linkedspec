@@ -1,6 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Refactor Item #2: spec_entry Staged RuleIR Pipeline
+## Summary
+Landed Backbone Refactor Track item #2 by splitting `spec_entry()` into explicit RuleIR stages while preserving parser behavior and existing handler-template semantics.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added staged RuleIR helpers in `LinkedSpec.pm`:
+  - `_collect_rule_ir(...)`
+  - `_plan_rule_ir_meta(...)`
+  - `_validate_rule_ir_or_exit(...)`
+  - `_normalize_rule_code_chunks(...)`
+  - `_build_rule_ir_emit_context(...)`
+- `spec_entry(...)` now executes a clear pipeline:
+  1. collect RuleIR from parsed entries,
+  2. plan execution metadata,
+  3. validate incompatible action-mode combinations,
+  4. build normalized emit-context for handler assembly.
+- Preserved downstream behavior:
+  - existing handler templates unchanged,
+  - mixed ACTION/BLIND CALL explicit-exit behavior preserved,
+  - gdata mapping and handler-variant metadata flow preserved.
+- Added focused regression lock:
+  - `ruleir_pipeline_preserves_acode_gdata_mapping_order`
+  - verifies RuleIR stage outputs preserve ACODE gdata mapping order/count and expected multi-AND handler variant.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=39`)
+
 ## 2026-02-24 - Backbone Refactor Item #1: Declarative Bootstrap Rule Registry
 ## Summary
 Landed Backbone Refactor Track item #1 by replacing fixed-index bootstrap grammar coupling in `LinkedSpec.pm` with explicit rule IDs/tags and registry-driven dispatch.

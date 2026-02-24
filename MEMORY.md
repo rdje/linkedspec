@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `65467d9` - Landed Backbone Track item #1 with declarative bootstrap registry dispatch
 - `f2ead5a` - Track backbone refactor and language-neutral action DSL objectives in roadmap
 - `494f658` - Refactor LinkedSpec core with deterministic rule metadata and descriptor introspection
 - `8c7150d` - Lock explicit-miss bypass behavior when PathSearch is preloaded
@@ -59,12 +60,20 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Continue Backbone Refactor Track item #2 (`spec_entry()` staged RuleIR pipeline):
-  - split `spec_entry()` into explicit collect/validate/meta-plan/emit stages,
-  - keep behavior parity and lock each stage with regression coverage,
+- Continue Backbone Refactor Track item #3 (`call_spec_handler_subst()` structured action rewriter):
+  - define action IR for supported helper surface and deterministic lowering path,
+  - keep backward-compatible helper behavior under regression locks while introducing structured rewrites,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone Refactor Track item #2 in `perl/LinkedSpec.pm`:
+  - `spec_entry()` now runs staged RuleIR helpers (`_collect_rule_ir`, `_plan_rule_ir_meta`, `_validate_rule_ir_or_exit`, `_build_rule_ir_emit_context`),
+  - collection/planning/validation/emit-context normalization are now explicit phases before handler-template assembly.
+- Added focused RuleIR regression lock in `t/phase0_regression.t`:
+  - subtest `ruleir_pipeline_preserves_acode_gdata_mapping_order`.
+- Re-ran validation after Backbone item #2:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (39 tests)
 - Landed Backbone Refactor Track item #1 in `perl/LinkedSpec.pm`:
   - hardcoded bootstrap rules now carry explicit `id` + semantic `tags`,
   - root scanner dispatch now uses `start_dispatch` mapping instead of positional `index + 1`,
