@@ -1897,6 +1897,9 @@ sub _split_action_ir_statements {
  my $in_single_quote = 0;
  my $in_double_quote = 0;
  my $in_backtick_quote = 0;
+ my $in_slash_quote = 0;
+ my $slash_quote_segments_remaining = 0;
+ my $slash_quote_escape_next = 0;
  my $in_line_comment = 0;
  my $escape_next = 0;
 
@@ -1932,6 +1935,18 @@ sub _split_action_ir_statements {
    next;
   }
 
+  if ($in_slash_quote) {
+   $statement .= $char;
+   if ($slash_quote_escape_next) {
+    $slash_quote_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $slash_quote_escape_next = 1;
+   } elsif ($char eq '/') {
+    --$slash_quote_segments_remaining if $slash_quote_segments_remaining > 0;
+    $in_slash_quote = 0 if $slash_quote_segments_remaining == 0;
+   }
+   next;
+  }
   if ($char eq "'") {
    $in_single_quote = 1;
    $statement .= $char;
@@ -1965,6 +1980,26 @@ sub _split_action_ir_statements {
    $in_line_comment = 1;
    $statement .= $char;
    next;
+  }
+
+  if ($char eq '/') {
+   my $slash_context = $statement;
+   $slash_context =~ s/\s+$//o;
+
+   if ($slash_context =~ /(?:^|[^\w:])(?<op>s|tr|y|qr|qq|qx|q|m)\s*$/o) {
+    my $op = $+{op};
+    $in_slash_quote = 1;
+    $slash_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
+    $slash_quote_escape_next = 0;
+    $statement .= $char;
+    next;
+   } elsif ($slash_context =~ /(?:=~|!~)\s*$/o) {
+    $in_slash_quote = 1;
+    $slash_quote_segments_remaining = 1;
+    $slash_quote_escape_next = 0;
+    $statement .= $char;
+    next;
+   }
   }
 
   if ($char eq '(') {

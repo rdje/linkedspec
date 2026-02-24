@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `6ce4333` - Backbone item #3 follow-up: harden canonical splitter for backtick quotes
 - `5b93e84` - Backbone item #3 follow-up: harden canonical splitter for line comments
 - `2d4c16d` - Backbone item #3 follow-up: make helper lowering whitespace-tolerant
 - `7a33587` - Backbone item #3 follow-up: harden canonical IR statement splitting
@@ -71,11 +72,20 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and tightening statement-boundary handling for additional Perl surface constructs (beyond nested payloads/comments/backticks),
+  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and tightening statement-boundary handling for additional Perl surface constructs (beyond nested payloads/comments/backticks/slash-quote payloads),
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical splitter slash-quote follow-up in `perl/LinkedSpec.pm`:
+  - `_split_action_ir_statements(...)` now tracks slash-delimited Perl quote-like payloads with escape handling,
+  - semicolons inside slash-quote payload strings are ignored by top-level statement splitting, preventing fallback-fragment noise for statements like `my $re = qr/a;b/`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation`.
+- Re-ran full validation after slash-quote splitter follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (50 tests)
 - Landed Backbone item #3 canonical splitter backtick-quote follow-up in `perl/LinkedSpec.pm`:
   - `_split_action_ir_statements(...)` now tracks backtick-quoted strings with escape handling,
   - semicolons inside backtick payload strings are ignored by top-level statement splitting, preventing fallback-fragment noise for statements like ``my $cmd = `echo a;b` ``.

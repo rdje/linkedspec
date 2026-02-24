@@ -1103,6 +1103,35 @@ SPEC
         'canonical-IR lowering output preserves backtick string while lowering helper call'
     );
 };
+subtest 'action_rewriter_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); my $re = qr/a;b/; }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for slash-quote semicolon canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 1, 'canonical action-IR fallback count treats semicolon inside slash-quote payload as one fallback statement');
+    is($meta->{canonical_action_ir_count}, 2, 'canonical action-IR count remains helper plus one slash-quote fallback statement');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL');
+    is(scalar(grep { $_ eq 'RAW_PERL' } @{$meta->{canonical_action_ir_nodes}}), 1, 'canonical action-IR nodes include a single RAW_PERL fallback marker');
+
+    my ($raw_evt) = grep { $_->{kind} eq 'RAW_PERL' } @{$meta->{canonical_action_ir_events}};
+    is($raw_evt->{args}{code}, 'my $re = qr/a;b/', 'canonical RAW_PERL fallback payload preserves slash-quote semicolon text');
+    is($meta->{unresolved_helper_count}, 0, 'slash-quote semicolon handling keeps helper lowering resolved');
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'call(Leaf); my $re = qr/a;b/'),
+        '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); my $re = qr/a;b/',
+        'canonical-IR lowering output preserves slash-quote payload while lowering helper call'
+    );
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

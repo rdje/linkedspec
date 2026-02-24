@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Slash-Quote-Safe Canonical Statement Splitting
+## Summary
+Hardened canonical action-IR statement splitting to ignore semicolons inside slash-delimited Perl quote-like payloads, preventing fallback-fragment noise for `qr/.../` and related forms while preserving helper lowering behavior.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `_split_action_ir_statements(...)` in `LinkedSpec.pm`:
+  - added slash-quote-like state handling with escape support for slash-delimited Perl forms,
+  - semicolons inside slash-delimited quote-like payloads are no longer treated as top-level statement delimiters.
+- Canonical action-IR impact:
+  - slash-quote payload statements (e.g. `my $re = qr/a;b/`) remain single RAW_PERL fallback events instead of semicolon-fragmented shards.
+- Added focused regression lock:
+  - `action_rewriter_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation`
+  - verifies canonical fallback count/payload integrity, unresolved-helper stability, and lowering output for helper + slash-quote-semicolon mixed action code.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=50`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Backtick-Quote-Safe Canonical Statement Splitting
 ## Summary
 Hardened canonical action-IR statement splitting to ignore semicolons inside Perl backtick-quoted strings, preventing fallback-fragment noise for backtick payloads while preserving helper lowering behavior.
