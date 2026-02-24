@@ -187,6 +187,10 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter typed declare-method lowering lock:
     - canonical lowering now covers typed declaration methods (`declare(array|scalar|hash, ...)`) and short/long aliases (`declare_a/s/h`, `declare_array/scalar/hash`) so declaration setup can avoid RAW_PERL fallback,
     - covered by `action_rewriter_lowers_typed_declare_methods_and_aliases`.
+  - action-rewriter capture/return method-contract lowering lock:
+    - canonical lowering now covers `return_imatch`/`return_im`, `assign(..., CAPTURE|IMATCH|LMATCH)`, `substr(...)`/`regex_subst(...)`, and `return_array(..., array(...))` constructor payloads,
+    - canonical action-IR mapping now emits `RETURN`/`ASSIGN`/`REGEX_SUBST` events for these helper contracts,
+    - covered by `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
   - method-like action chain parsing lock:
     - chained method-like action forms (`-> Rule .m1(...).m2(...)`) now parse into multiple helper events, including empty-arg call segments (`()`),
     - covered by `method_like_action_chain_parses_into_multiple_helper_events`.

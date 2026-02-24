@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Method Contracts for Capture and Structured Return Patterns
+## Summary
+Added another method-like DSL migration slice (guided by `ebnf.spec` usage) to lower additional non-block helper forms through canonical action-IR: tagged IMATCH return, capture/source assignment, regex substitution, and structured return-array payload constructors.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added method-value and lowering helpers:
+  - `_normalize_method_tag_expr(...)`
+  - `_extract_scalar_symbol_name(...)`
+  - `_lower_assignment_source_expr(...)`
+  - `_strip_literal_delimiters(...)`
+  - `_split_top_level_csv(...)`
+  - `_lower_method_value_expr(...)`
+  - `_lower_return_imatch_statement(...)`
+  - `_lower_assign_statement(...)`
+  - `_lower_regex_subst_statement(...)`
+  - `_lower_return_array_statement(...)`
+- Added lowering contracts and scanner support for:
+  - `return_imatch` (including `return_im` alias),
+  - `assign(...)` with `CAPTURE|IMATCH|LMATCH` sources (`assign_value` contract),
+  - `substr(...)` / `regex_subst(...)` method forms (`regex_subst` contract),
+  - `return_array(...)` with nested constructor payloads such as `array(scalar(...), scalar(...))`.
+- Extended canonical event mapping:
+  - `_canonicalize_helper_action_ir_event(...)` now maps these new contracts into canonical `RETURN`, `ASSIGN`, and `REGEX_SUBST` kinds.
+- Added focused regression lock:
+  - `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=63`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Typed Declare Methods + Chained Method-Like Blocks
 ## Summary
 Added first method-like DSL migration slice for canonical typed declarations and chained method parsing, enabling `declare(type, ...)` lowering (with aliases) and multi-method chain handling without RAW_PERL fallback.

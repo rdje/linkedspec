@@ -908,6 +908,57 @@ SPEC
     ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include DECLARE for declare methods');
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
+    plan tests => 9;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
+        'return ["group_open", $IMATCH]',
+        'return_imatch helper lowers to tagged IMATCH return payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return_im(group_open)'),
+        'return ["group_open", $IMATCH]',
+        'return_im alias lowers to tagged IMATCH return payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(Top, scalar(c), CAPTURE)'),
+        '$c = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
+        'assign helper lowers CAPTURE source into canonical capture-expression assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'substr(Top, scalar(c), "\\s*$", "", o)'),
+        '$c =~ s{\\s*$}{}o',
+        'substr helper lowers quoted-pattern regex substitution'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'substr(Top, scalar(c), /^"|"$/, //, go)'),
+        '$c =~ s{^"|"$}{}go',
+        'substr helper lowers slash-pattern regex substitution'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return_array(Top, semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))'),
+        'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]',
+        'return_array helper lowers scalar()/array() constructor payloads'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.assign(scalar(c), CAPTURE).substr(scalar(c), "\\s*$", "", o).return_array(semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for non-action capture/return method contracts');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'capture/return method contracts avoid RAW_PERL fallback');
+    ok(
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$meta->{canonical_action_ir_nodes}}),
+        'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
+    );
+};
 subtest 'method_like_action_chain_parses_into_multiple_helper_events' => sub {
     plan tests => 6;
 

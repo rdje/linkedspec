@@ -1442,6 +1442,50 @@ sub _build_action_lowering_contracts {
    },
   },
   {
+   id                 => 'return_imatch',
+   ir_node            => 'RETURN',
+   diag_name          => 'return_imatch',
+   unresolved_pattern => qr/\breturn_im(?:atch)?\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*\)/_lower_return_imatch_statement($+{tag}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'assign_value',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'assign',
+   unresolved_pattern => qr/\bassign\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:scalar\s*\(\s*\w+\s*\)|\w+)\s*,\s*(?:CAPTURE|IMATCH|LMATCH)\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bassign\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<source>CAPTURE|IMATCH|LMATCH)\s*\)/_lower_assign_statement($+{target}, $+{source}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'regex_subst',
+   ir_node            => 'REGEX_SUBST',
+   diag_name          => 'substr',
+   unresolved_pattern => qr/\b(?:substr|regex_subst)\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:scalar\s*\(\s*\w+\s*\)|\w+)\s*,/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/_lower_regex_subst_statement($+{target}, $+{pattern}, $+{replacement}, $+{flags}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_array',
+   ir_node            => 'RETURN',
+   diag_name          => 'return_array',
+   unresolved_pattern => qr/\breturn_array\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/_lower_return_array_statement($+{tag}, $+{payload}) || $&/ge;
+    return $code
+   },
+  },
+  {
    id                 => 'declare_typed',
    ir_node            => 'DECLARE',
    diag_name          => 'declare',
@@ -2263,6 +2307,264 @@ sub _lower_typed_declare_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _normalize_method_tag_expr
+# Purpose : Normalize method tag atoms into Perl string expressions.
+# Args    : ($tag)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _normalize_method_tag_expr {
+ my ($tag) = @_;
+ return undef unless defined $tag;
+ $tag = _trim_action_ir_value($tag);
+ return undef unless defined($tag) && length($tag);
+ return $tag if $tag =~ /^".*"$/s || $tag =~ /^'.*'$/s;
+ return "\"$tag\"" if $tag =~ /^\w+$/o;
+ return $tag
+}
+
+#------------------------------------------------------------------------------
+# Function: _extract_scalar_symbol_name
+# Purpose : Resolve scalar variable symbol name from DSL method token surface.
+# Args    : ($token)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_scalar_symbol_name {
+ my ($token) = @_;
+ return undef unless defined $token;
+ $token = _trim_action_ir_value($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^scalar\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_assignment_source_expr
+# Purpose : Map assignment source tokens from method DSL to Perl expressions.
+# Args    : ($source)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_assignment_source_expr {
+ my ($source) = @_;
+ return undef unless defined $source;
+ $source = _trim_action_ir_value($source);
+ return 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)' if $source eq 'CAPTURE';
+ return '$IMATCH' if $source eq 'IMATCH';
+ return '$LMATCH' if $source eq 'LMATCH';
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _strip_literal_delimiters
+# Purpose : Strip outer literal delimiters for quoted/regex literal arguments.
+# Args    : ($value)
+# Returns : unwrapped scalar string or undef
+#------------------------------------------------------------------------------
+sub _strip_literal_delimiters {
+ my ($value) = @_;
+ return undef unless defined $value;
+ $value = _trim_action_ir_value($value);
+ return undef unless defined($value) && length($value);
+ return '' if $value eq '//';
+ return $1 if $value =~ m{^/(.*)/$}s;
+ return $1 if $value =~ /^"(.*)"$/s;
+ return $1 if $value =~ /^'(.*)'$/s;
+ return $value
+}
+
+#------------------------------------------------------------------------------
+# Function: _split_top_level_csv
+# Purpose : Split comma-separated argument lists while honoring nested scopes
+#           and quoted-string regions.
+# Args    : ($text)
+# Returns : arrayref of trimmed argument strings
+#------------------------------------------------------------------------------
+sub _split_top_level_csv {
+ my ($text) = @_;
+ return [] unless defined $text;
+
+ my @parts;
+ my $current = '';
+ my $paren_depth = 0;
+ my $brace_depth = 0;
+ my $bracket_depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+
+ foreach my $char (split //, $text) {
+  if ($in_single_quote) {
+   $current .= $char;
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq "'") {
+    $in_single_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_double_quote) {
+   $current .= $char;
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '"') {
+    $in_double_quote = 0;
+   }
+   next;
+  }
+
+  if ($char eq "'") {
+   $in_single_quote = 1;
+   $current .= $char;
+   next;
+  }
+  if ($char eq '"') {
+   $in_double_quote = 1;
+   $current .= $char;
+   next;
+  }
+  if ($char eq '(') {
+   ++$paren_depth;
+   $current .= $char;
+   next;
+  }
+  if ($char eq ')') {
+   --$paren_depth if $paren_depth > 0;
+   $current .= $char;
+   next;
+  }
+  if ($char eq '{') {
+   ++$brace_depth;
+   $current .= $char;
+   next;
+  }
+  if ($char eq '}') {
+   --$brace_depth if $brace_depth > 0;
+   $current .= $char;
+   next;
+  }
+  if ($char eq '[') {
+   ++$bracket_depth;
+   $current .= $char;
+   next;
+  }
+  if ($char eq ']') {
+   --$bracket_depth if $bracket_depth > 0;
+   $current .= $char;
+   next;
+  }
+  if ($char eq ',' && $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0) {
+   my $trimmed = _trim_action_ir_value($current);
+   push @parts, $trimmed if defined($trimmed) && length($trimmed);
+   $current = '';
+   next;
+  }
+  $current .= $char;
+ }
+
+ my $trimmed = _trim_action_ir_value($current);
+ push @parts, $trimmed if defined($trimmed) && length($trimmed);
+ return \@parts
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_method_value_expr
+# Purpose : Lower method DSL value expressions (`scalar(...)`, `array(...)`)
+#           into Perl value expressions.
+# Args    : ($expr)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_method_value_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ if ($trimmed =~ /^scalar\s*\(\s*IMATCH_LIST\s*,\s*(\d+)\s*\)$/o) {
+  return '$IMATCH_LIST['.$1.']';
+ }
+ if ($trimmed =~ /^scalar\s*\(\s*(\w+)\s*\)$/o) {
+  return '$'.$1;
+ }
+ if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))$/o) {
+  my $payload = $+{PAREN};
+  $payload =~ s/^\(|\)$//go;
+  my $args = _split_top_level_csv($payload);
+  my @lowered = map { _lower_method_value_expr($_) // $_ } @$args;
+  return '['.join(', ', @lowered).']';
+ }
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_return_imatch_statement
+# Purpose : Lower `return_imatch(...)`/`return_im(...)` method helper calls.
+# Args    : ($tag)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_return_imatch_statement {
+ my ($tag) = @_;
+ my $tag_expr = _normalize_method_tag_expr($tag);
+ return undef unless defined $tag_expr;
+ return "return [$tag_expr, \$IMATCH]"
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_assign_statement
+# Purpose : Lower `assign(target, source)` method helper calls.
+# Args    : ($target, $source)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_assign_statement {
+ my ($target, $source) = @_;
+ my $symbol = _extract_scalar_symbol_name($target);
+ return undef unless defined $symbol;
+ my $source_expr = _lower_assignment_source_expr($source);
+ return undef unless defined $source_expr;
+ return "\$$symbol = $source_expr"
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_regex_subst_statement
+# Purpose : Lower regex substitution method helper calls for scalar targets.
+# Args    : ($target, $pattern, $replacement, $flags)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_regex_subst_statement {
+ my ($target, $pattern, $replacement, $flags) = @_;
+ my $symbol = _extract_scalar_symbol_name($target);
+ return undef unless defined $symbol;
+
+ my $pattern_raw = _strip_literal_delimiters($pattern);
+ my $replacement_raw = _strip_literal_delimiters($replacement);
+ return undef unless defined($pattern_raw) && defined($replacement_raw);
+
+ $flags = _trim_action_ir_value($flags // '');
+ $flags = '' unless defined $flags;
+ return "\$$symbol =~ s{$pattern_raw}{$replacement_raw}$flags"
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_return_array_statement
+# Purpose : Lower `return_array(tag, payload)` method helper calls.
+# Args    : ($tag, $payload)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_return_array_statement {
+ my ($tag, $payload) = @_;
+ my $tag_expr = _normalize_method_tag_expr($tag);
+ return undef unless defined $tag_expr;
+ my $payload_expr = _lower_method_value_expr($payload);
+ return undef unless defined $payload_expr;
+ return "return [$tag_expr, $payload_expr]"
+}
+
+#------------------------------------------------------------------------------
 # Function: _scan_contract_ir_events
 # Purpose : Contract-specific scanner that extracts helper invocation events
 #           and parsed arguments from raw action code.
@@ -2293,6 +2595,22 @@ sub _scan_contract_ir_events {
  } elsif ($id eq 'return_call') {
   while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {callee => $+{callee}, context => 'return'}};
+  }
+ } elsif ($id eq 'return_imatch') {
+  while ($code =~ /\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*\)/g) {
+   push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}}};
+  }
+ } elsif ($id eq 'assign_value') {
+  while ($code =~ /\bassign\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<source>CAPTURE|IMATCH|LMATCH)\s*\)/g) {
+   push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, source => $+{source}}};
+  }
+ } elsif ($id eq 'regex_subst') {
+  while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
+   push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, pattern => $+{pattern}, replacement => $+{replacement}, flags => $+{flags}}};
+  }
+ } elsif ($id eq 'return_array') {
+  while ($code =~ /\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/g) {
+   push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}, payload => _trim_action_ir_value($+{payload})}};
   }
  } elsif ($id eq 'declare_typed') {
   while ($code =~ /\bdeclare\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<type>array|scalar|hash)\s*,(?<names>[^()]*)\)/g) {
@@ -2428,6 +2746,15 @@ sub _canonicalize_helper_action_ir_event {
  elsif ($contract_id eq 'return_call') {
   $kind = 'CALL';
   $args{context} = 'return';
+ }
+ elsif ($contract_id eq 'return_imatch' || $contract_id eq 'return_array') {
+  $kind = 'RETURN';
+ }
+ elsif ($contract_id eq 'assign_value') {
+  $kind = 'ASSIGN';
+ }
+ elsif ($contract_id eq 'regex_subst') {
+  $kind = 'REGEX_SUBST';
  }
  elsif ($contract_id eq 'declare_typed' || $contract_id eq 'declare_alias') {
   $kind = 'DECLARE';

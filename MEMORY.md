@@ -38,6 +38,15 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `677677d` - Backbone item #3 follow-up: add typed declare methods and method chains
+- `6ff99b5` - Backbone item #3 follow-up: lower indexed push-call wrappers
+- `e06493c` - Backbone item #3 follow-up: lower return-call action wrappers
+- `f9ad3fb` - Backbone item #3 follow-up: fix method-style action arg trimming
+- `ec2ee3f` - Backbone item #3: lower call-wrapper statements to reduce RAW_PERL fallback
+- `f4fc24a` - Backbone item #3: add descriptor migration blocker-type ratio metadata
+- `79e7d47` - Backbone item #3: add descriptor migration blocker-type breakdown metadata
+- `d66d925` - Backbone item #3: add migration-priority metadata and rewrite-helper cleanup
+- `a7c727e` - Backbone item #3 follow-up: add descriptor-level migration summary
 - `45fb1ca` - Add LinkedSpec.pm subroutine docstrings and structural comments
 - `9d0c75f` - Backbone item #3 follow-up: add language-agnostic blocker statement metadata
 - `6c71e21` - Backbone item #3 follow-up: add language-agnostic action readiness metadata
@@ -96,6 +105,16 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented (pending commit workflow) Backbone item #3 method-contract follow-up in `perl/LinkedSpec.pm`:
+  - added method-contract lowering for `return_imatch`/`return_im`, `assign(..., CAPTURE|IMATCH|LMATCH)`, `substr(...)`/`regex_subst(...)`, and `return_array(...)` with nested `array(scalar(...), scalar(...))` payload constructors,
+  - added helper/lowering utilities (`_lower_method_value_expr`, `_lower_return_imatch_statement`, `_lower_assign_statement`, `_lower_regex_subst_statement`, `_lower_return_array_statement`, and related normalization helpers),
+  - extended contract scanning/canonical mapping so descriptor metadata surfaces canonical `RETURN`, `ASSIGN`, and `REGEX_SUBST` event kinds for these forms.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
+- Re-ran full validation after method-contract follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (63 tests)
 - Landed Backbone item #3 method-like DSL migration slice in `perl/LinkedSpec.pm`:
   - bootstrap method-like parsing now supports chained forms for both action and non-action blocks via `_parse_method_call_chain(...)` and `_render_method_call_chain(...)`,
   - chained method parsing now accepts empty-arg segments (`()`),
