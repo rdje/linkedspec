@@ -743,6 +743,22 @@ subtest 'parser_invalid_input_returns_undef_without_exit' => sub {
     unlike($combined, qr/Error during handler code generation/, 'invalid-input parser subprocess does not emit handler-generation error banner');
     unlike($combined, qr/__NO_PARSER__/, 'invalid-input parser subprocess confirms parser was created');
 };
+subtest 'bootstrap_registry_curly_brace_recursion_smoke' => sub {
+    plan tests => 3;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { my $tmp = "{literal}"; if ($tmp) { return_a(Top) } }
+SPEC
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'bootstrap-registry smoke builds parser coderef');
+
+    my $input = 'a';
+    my $ast = eval { $parser->(\$input) };
+    ok(!$@, 'bootstrap-registry smoke parser executes without die') or diag(normalize_error($@));
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'bootstrap-registry smoke parser returns AST array');
+};
 subtest 'get_return_descr_rule_meta_single_vs_multi_strategy' => sub {
     plan tests => 13;
 

@@ -1,6 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Refactor Item #1: Declarative Bootstrap Rule Registry
+## Summary
+Landed Backbone Refactor Track item #1 by replacing fixed-index bootstrap grammar coupling in `LinkedSpec.pm` with explicit rule IDs/tags and registry-driven dispatch.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Annotated each hardcoded bootstrap rule in `$spec_descr` with explicit metadata:
+  - `id` (stable rule identity),
+  - `tags` (semantic routing markers such as `start_token` and `brace_scanner`).
+- Replaced positional dispatch assumptions:
+  - root bootstrap handler now dispatches via `start_dispatch` mapping (`gdata`), not `index + 1`.
+  - recursive brace handling now resolves via `CURLY_BRACE` rule ID lookup (`%bootstrap_rule_index`) instead of fixed numeric slot.
+- Rebuilt bootstrap scanner sets from registry metadata:
+  - `startREs` now derived from `start_token` tags,
+  - `cbrace` scanner now derived from `CURLY_BRACE` rule ID.
+- Added bootstrap integrity checks for required IDs and non-empty start-token registry.
+- Added focused regression lock:
+  - `bootstrap_registry_curly_brace_recursion_smoke`
+  - validates nested/quoted brace handling still compiles/runs AST parsing under registry-driven recursion dispatch.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=38`)
+
 ## 2026-02-23 - Phase 1 Core Structure: Rule Execution Metadata + Descriptor Introspection
 ## Summary
 Reworked core rule-compilation structure in `LinkedSpec.pm` to expose explicit per-rule execution metadata and deterministic handler-template selection, while preserving parser behavior and baseline compatibility.

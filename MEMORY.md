@@ -34,6 +34,8 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `f2ead5a` - Track backbone refactor and language-neutral action DSL objectives in roadmap
+- `494f658` - Refactor LinkedSpec core with deterministic rule metadata and descriptor introspection
 - `8c7150d` - Lock explicit-miss bypass behavior when PathSearch is preloaded
 - `8b766e4` - Generalize get_parser non-regular path handling and lock regressions
 - `751bee2` - Harden get_parser directory-path handling and lock new regressions
@@ -57,12 +59,24 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Continue parser-core structure modernization (without semantic breakage):
-  - migrate additional handler-template decisions to metadata-driven routing,
-  - reduce string-eval footprint incrementally with regression locks at each step,
+- Continue Backbone Refactor Track item #2 (`spec_entry()` staged RuleIR pipeline):
+  - split `spec_entry()` into explicit collect/validate/meta-plan/emit stages,
+  - keep behavior parity and lock each stage with regression coverage,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone Refactor Track item #1 in `perl/LinkedSpec.pm`:
+  - hardcoded bootstrap rules now carry explicit `id` + semantic `tags`,
+  - root scanner dispatch now uses `start_dispatch` mapping instead of positional `index + 1`,
+  - recursive brace handling now resolves `CURLY_BRACE` by rule ID instead of fixed numeric slot.
+- Added bootstrap-integrity guards:
+  - required bootstrap IDs (`SPEC_ROOT`, `CURLY_BRACE`) are validated at load time,
+  - bootstrap start-token registry must be non-empty.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `bootstrap_registry_curly_brace_recursion_smoke`.
+- Re-ran validation after Backbone item #1:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (38 tests)
 - Paused further `get_parser` hardening by explicit user direction and shifted focus to `LinkedSpec.pm` core structure.
 - Landed core execution-structure increment in `perl/LinkedSpec.pm`:
   - added `Get(..., return_descr => 1)` for descriptor introspection (`spec` + `gdata`),

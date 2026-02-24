@@ -359,7 +359,7 @@ sub extract_regex_literals_from_rule_rhs {
     return @regex_literals;
 }
 
-my $cbrace_index  = 12;
+my %bootstrap_rule_index;
 my $node_type     = {
 	'&'       => 'AND',
 	'|'       => 'OR',
@@ -377,6 +377,8 @@ my $rep_nodes_minmax = {
 my $pm_drive;
 my $spec_descr = [
 {# Spec			-0-
+ id => 'SPEC_ROOT',
+ tags => { root => 1 },
  handler=> sub {
   my ($descr, $string, $gdata) = @_;
   my @specentry;
@@ -389,7 +391,10 @@ my $spec_descr = [
     return [@specs]
    }
 
-   my $retv = &{$$descr[$$minfo{index}+1]{handler}}($minfo, $descr, $string, $gdata);
+   my $dispatch_idx = $$gdata{start_dispatch}[$$minfo{index}];
+   return undef unless defined $dispatch_idx;
+
+   my $retv = &{$$descr[$dispatch_idx]{handler}}($minfo, $descr, $string, $gdata);
    return undef unless $retv;
 
    unless ($$retv[0] eq 'COMMENT') {
@@ -416,6 +421,8 @@ my $spec_descr = [
 },
 
 {# Entry Label
+ id => 'ENTRY_LABEL',
+ tags => { start_token => 1 },
  re=> [qr/\w+\s*::?(?:&|\||\+|\*|\?)?/o],
  handler=> sub {
   my ($info, undef, undef, $gdata) = @_;
@@ -432,6 +439,8 @@ my $spec_descr = [
 },
 
 {# RE pattern
+ id => 'RE_PATTERN',
+ tags => { start_token => 1 },
  re=> [qr/(?<!\\)\/.+?(?<!\\)\//o],
  handler=> sub {
   my ($info) = @_;
@@ -443,6 +452,8 @@ my $spec_descr = [
 },
 
 {# Action code block
+ id => 'ACTION_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/->\s*\w+(?:\[\d+\])?\s*\{/o, qr/\}/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -463,7 +474,7 @@ my $spec_descr = [
    } elsif ($$minfo{index} == 0) {
     # Opening brace found, triggering recursion
     # say '(Curly BRACE) Recursion';
-    &{$$descr[$cbrace_index]{handler}}($minfo, $descr, $string, $gdata);
+    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
     # say '(Curly BRACE) Back From Recursion';
    } else {
     #say "QUOTES <$$minfo{match}>"
@@ -473,6 +484,8 @@ my $spec_descr = [
 },
 
 {# Method-like Empty Action code block
+ id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?\.\s*(?<METHOD>\w+)(?<ARGS>\s*\((?:[^\(\)]++|(?&ARGS))+\))?/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -485,6 +498,8 @@ my $spec_descr = [
 },
 
 {# Empty Action code block
+ id => 'EMPTY_ACTION_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/->\s*\w+(?:\[0\])?/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -497,6 +512,8 @@ my $spec_descr = [
 
 
 {# Non-Action code block
+ id => 'NON_ACTION_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/\w+\s*\{/o, qr/\}/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -516,7 +533,7 @@ my $spec_descr = [
    } elsif ($$minfo{index} == 0) {
     # Opening brace found, triggering recursion
     # print "(Curly BRACE) Recursion\n";
-    &{$$descr[$cbrace_index]{handler}}($minfo, $descr, $string, $gdata);
+    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
     # print "(Curly BRACE) Back From Recursion\n";
    } else {
     #print "QUOTES <$$minfo{match}>\n"
@@ -526,12 +543,16 @@ my $spec_descr = [
 },
 
 {# Comment
+ id => 'COMMENT',
+ tags => { start_token => 1 },
  #re=> [qr/(?:\r\n?)?[ \t]*#.*/o],
  re=> [qr/[ \t]*#.*/o],
  handler=> sub {return ['COMMENT']}
 },
 
 {# Blind call code block
+ id => 'BLIND_CALL_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/=>\s*\w+\s*\{/o, qr/\}/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -551,7 +572,7 @@ my $spec_descr = [
    } elsif ($$minfo{index} == 0) {
     # Opening brace found, triggering recursion
     # print "(Curly BRACE) Recursion\n";
-    &{$$descr[$cbrace_index]{handler}}($minfo, $descr, $string, $gdata);
+    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
     # print "(Curly BRACE) Back From Recursion\n";
    } else {
     #print "QUOTES <$$minfo{match}>\n"
@@ -561,6 +582,8 @@ my $spec_descr = [
 },
 
 {# Split-Like Code
+ id => 'SPLIT_LIKE_CODE',
+ tags => { start_token => 1 },
  re=> [qr/@\s*move_pos\b/o],
  handler=> sub {
   # say '(Split-Like Code)';
@@ -570,6 +593,8 @@ my $spec_descr = [
 
 
 {# Empty Blind code block
+ id => 'EMPTY_BLIND_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/=>\s*\w+/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -582,6 +607,8 @@ my $spec_descr = [
 
 
 {# Method-like Empty Non-Action code block
+ id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
+ tags => { start_token => 1 },
  re=> [qr/(?<TYPE>\w+)\s*\.\s*(?<METHOD>\w+)(?<ARGS>\s*\((?:[^\(\)]++|(?&ARGS))+\))?/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
@@ -594,6 +621,8 @@ my $spec_descr = [
 
 
 {# Curly Brace			-7- + dquotes + squotes
+ id => 'CURLY_BRACE',
+ tags => { start_token => 1, brace_scanner => 1 },
  #re=> [qr/(?<!\\)\{/o, qr/(?<!\\)\}/o],
  re=> [qr/(?<!\\)\{/o, qr/(?<!\\)\}/o, qr/(?<!\\)".*?(?<!\\)"/o, qr/(?<!\\)'.*?(?<!\\)'/o],
  handler=> sub {
@@ -613,7 +642,7 @@ my $spec_descr = [
    } elsif ($$minfo{index} == 0)  {
     # Opening brace found, triggering recursion
     #print "(Curly BRACE) Recursion\n";
-    &{$$descr[$cbrace_index]{handler}}($minfo, $descr, $string, $gdata);
+    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
     # print "(Curly BRACE) Back From Recursion\n";
    } else {
     #print "QUOTES <$$minfo{match}>\n"
@@ -623,10 +652,41 @@ my $spec_descr = [
 }
 ];
 
+%bootstrap_rule_index = map {
+ my $id = $spec_descr->[$_]{id};
+ defined $id ? ($id => $_) : ()
+} 0 .. $#$spec_descr;
+
+for my $required_rule_id (qw/SPEC_ROOT CURLY_BRACE/) {
+ die "(LinkedSpec.pm) -E- Missing required bootstrap rule id '$required_rule_id'"
+  unless defined $bootstrap_rule_index{$required_rule_id};
+}
+
+my @bootstrap_start_res;
+my @bootstrap_start_dispatch;
+for my $idx (0 .. $#$spec_descr) {
+ my $rule = $spec_descr->[$idx];
+ next unless ref($rule) eq 'HASH';
+ next unless exists $rule->{tags} && ref($rule->{tags}) eq 'HASH' && $rule->{tags}{start_token};
+ next unless exists $rule->{re} && ref($rule->{re}) eq 'ARRAY' && @{$rule->{re}};
+ push @bootstrap_start_res, $rule->{re}[0];
+ push @bootstrap_start_dispatch, $idx;
+}
+
+die "(LinkedSpec.pm) -E- Bootstrap start-token registry is empty"
+ unless @bootstrap_start_res && @bootstrap_start_dispatch;
+
+my @bootstrap_cbrace_res = ();
+if (defined $bootstrap_rule_index{CURLY_BRACE}
+    && exists $spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}
+    && ref($spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}) eq 'ARRAY') {
+ @bootstrap_cbrace_res = @{$spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}};
+}
 
 my $gdata = {
- startREs => LinkedRE::oredRE(map {$$_{re}[0]} grep {exists $$_{re}} @$spec_descr),
- cbrace   => LinkedRE::oredRE(@{$$spec_descr[$cbrace_index]{re}})
+ startREs       => LinkedRE::oredRE(@bootstrap_start_res),
+ start_dispatch => \@bootstrap_start_dispatch,
+ cbrace         => LinkedRE::oredRE(@bootstrap_cbrace_res)
 };
 
 
@@ -679,7 +739,7 @@ sub Get {
       # Try to parse the spec file
      log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
      eval {
-         $retv = &{$$spec_descr[0]{handler}}($spec_descr, $_[0], $gdata);
+         $retv = &{$$spec_descr[$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $_[0], $gdata);
      } or do {
          $parse_success = 0;
          my $error = $@;

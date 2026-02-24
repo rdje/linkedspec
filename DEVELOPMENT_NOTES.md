@@ -117,6 +117,9 @@ It should not be reframed as a strict EBNF clone.
   - single-vs-multi AND strategy lock:
     - single-regex AND action rule maps to `AND_SINGLE_ACODE` with non-loop strategy marker,
     - multi-regex AND action rule maps to `AND_ACODE` with loop strategy marker.
+  - bootstrap rule-registry recursion lock:
+    - hardcoded bootstrap grammar now uses ID/tag registry dispatch (no fixed slot index assumptions),
+    - nested action-block braces with quoted literals remain stable under registry-driven `CURLY_BRACE` recursion (`bootstrap_registry_curly_brace_recursion_smoke`).
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -172,6 +175,10 @@ It should not be reframed as a strict EBNF clone.
 - AND action semantics are now structurally explicit in template selection:
   - one regex/action edge uses `AND_SINGLE_ACODE`,
   - multi-regex/action AND continues to use `AND_ACODE` loop template.
+- Bootstrap grammar hardcode is now explicitly indexed by rule identity:
+  - each bootstrap rule carries stable `id` + semantic `tags`,
+  - `startREs` and dispatch routing are built from tag-driven registry data,
+  - recursive brace handler dispatch now resolves `CURLY_BRACE` by ID rather than fixed index constants.
 
 ## Change Discipline
 Before each commit:
