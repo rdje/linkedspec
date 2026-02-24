@@ -1896,6 +1896,7 @@ sub _split_action_ir_statements {
  my $bracket_depth = 0;
  my $in_single_quote = 0;
  my $in_double_quote = 0;
+ my $in_backtick_quote = 0;
  my $in_line_comment = 0;
  my $escape_next = 0;
 
@@ -1936,9 +1937,26 @@ sub _split_action_ir_statements {
    $statement .= $char;
    next;
   }
+  if ($in_backtick_quote) {
+   $statement .= $char;
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '`') {
+    $in_backtick_quote = 0;
+   }
+   next;
+  }
 
   if ($char eq '"') {
    $in_double_quote = 1;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '`') {
+   $in_backtick_quote = 1;
    $statement .= $char;
    next;
   }

@@ -154,6 +154,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter canonical action-IR line-comment semicolon lock:
     - canonical statement splitting now ignores semicolons inside Perl line comments (`# ...`) so comment text is not fragmented into multiple fallback statements,
     - covered by `action_rewriter_canonical_action_ir_ignores_line_comment_semicolon_fragmentation`.
+  - action-rewriter canonical action-IR backtick-semicolon lock:
+    - canonical statement splitting now ignores semicolons inside Perl backtick-quoted strings so backtick payload statements are not fragmented into fallback shards,
+    - covered by `action_rewriter_canonical_action_ir_ignores_backtick_semicolon_fragmentation`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -256,6 +259,9 @@ It should not be reframed as a strict EBNF clone.
 - Canonical statement splitting is now line-comment-aware:
   - `_split_action_ir_statements(...)` now tracks Perl line comments outside quoted strings,
   - semicolons inside line comments are ignored by top-level statement splitting, reducing fallback-fragment noise in canonical metadata.
+- Canonical statement splitting is now backtick-quote-aware:
+  - `_split_action_ir_statements(...)` now tracks backtick-quoted strings with escape handling,
+  - semicolons inside backtick payload strings are ignored by top-level statement splitting, keeping canonical RAW_PERL fallback payloads intact.
 
 ## Change Discipline
 Before each commit:
