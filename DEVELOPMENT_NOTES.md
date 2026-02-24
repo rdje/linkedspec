@@ -163,6 +163,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter canonical action-IR angle-quote semicolon lock:
     - canonical statement splitting now ignores semicolons inside angle-delimited Perl quote-like payloads so angle-quote payload statements are not fragmented into fallback shards,
     - covered by `action_rewriter_canonical_action_ir_ignores_angle_quote_semicolon_fragmentation`.
+  - action-rewriter canonical action-IR pipe-quote semicolon lock:
+    - canonical statement splitting now ignores semicolons inside pipe-delimited Perl quote-like payloads so pipe-quote payload statements are not fragmented into fallback shards,
+    - covered by `action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

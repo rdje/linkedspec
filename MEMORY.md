@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `0ca3a48` - Backbone item #3 follow-up: harden canonical splitter for angle quotes
 - `879585d` - Backbone item #3 follow-up: harden canonical splitter for slash quotes
 - `6ce4333` - Backbone item #3 follow-up: harden canonical splitter for backtick quotes
 - `5b93e84` - Backbone item #3 follow-up: harden canonical splitter for line comments
@@ -73,11 +74,20 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and tightening statement-boundary handling for additional Perl surface constructs (beyond nested payloads/comments/backticks/slash+angle quote-like payloads),
+  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and tightening statement-boundary handling for additional Perl surface constructs (beyond nested payloads/comments/backticks/slash+angle+pipe quote-like payloads),
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical splitter pipe-quote follow-up in `perl/LinkedSpec.pm`:
+  - `_split_action_ir_statements(...)` now tracks pipe-delimited Perl quote-like payloads with escape handling and multi-segment support for `s|...|...|`/`tr|...|...|`/`y|...|...|`,
+  - semicolons inside pipe-quote payload strings are ignored by top-level statement splitting, preventing fallback-fragment noise for statements like `my $re = qr|a;b|`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation`.
+- Re-ran full validation after pipe-quote splitter follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (52 tests)
 - Landed Backbone item #3 canonical splitter angle-quote follow-up in `perl/LinkedSpec.pm`:
   - `_split_action_ir_statements(...)` now tracks angle-delimited Perl quote-like payloads with escape and nested-angle handling,
   - semicolons inside angle-quote payload strings are ignored by top-level statement splitting, preventing fallback-fragment noise for statements like `my $re = qr<a;b>`.

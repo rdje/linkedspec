@@ -1904,6 +1904,9 @@ sub _split_action_ir_statements {
  my $angle_quote_segments_remaining = 0;
  my $angle_quote_depth = 0;
  my $angle_quote_escape_next = 0;
+ my $in_pipe_quote = 0;
+ my $pipe_quote_segments_remaining = 0;
+ my $pipe_quote_escape_next = 0;
  my $in_line_comment = 0;
  my $escape_next = 0;
 
@@ -1965,6 +1968,18 @@ sub _split_action_ir_statements {
      --$angle_quote_segments_remaining if $angle_quote_segments_remaining > 0;
      $in_angle_quote = 0 if $angle_quote_segments_remaining == 0;
     }
+   }
+   next;
+  }
+  if ($in_pipe_quote) {
+   $statement .= $char;
+   if ($pipe_quote_escape_next) {
+    $pipe_quote_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $pipe_quote_escape_next = 1;
+   } elsif ($char eq '|') {
+    --$pipe_quote_segments_remaining if $pipe_quote_segments_remaining > 0;
+    $in_pipe_quote = 0 if $pipe_quote_segments_remaining == 0;
    }
    next;
   }
@@ -2031,6 +2046,25 @@ sub _split_action_ir_statements {
     $angle_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
     $angle_quote_depth = 1;
     $angle_quote_escape_next = 0;
+    $statement .= $char;
+    next;
+   }
+  }
+  if ($char eq '|') {
+   my $pipe_context = $statement;
+   $pipe_context =~ s/\s+$//o;
+
+   if ($pipe_context =~ /(?:^|[^\$\w:])(?<op>s|tr|y|qr|qq|qx|q|m)\s*$/o) {
+    my $op = $+{op};
+    $in_pipe_quote = 1;
+    $pipe_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
+    $pipe_quote_escape_next = 0;
+    $statement .= $char;
+    next;
+   } elsif ($pipe_context =~ /(?:=~|!~)\s*m?\s*$/o) {
+    $in_pipe_quote = 1;
+    $pipe_quote_segments_remaining = 1;
+    $pipe_quote_escape_next = 0;
     $statement .= $char;
     next;
    }
