@@ -184,6 +184,12 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter indexed push-call wrapper lowering lock:
     - canonical lowering now covers full-statement `push @target, call(...)->[index]` wrappers so indexed push-call forms no longer require RAW_PERL fallback,
     - covered by `action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback`.
+  - action-rewriter typed declare-method lowering lock:
+    - canonical lowering now covers typed declaration methods (`declare(array|scalar|hash, ...)`) and short/long aliases (`declare_a/s/h`, `declare_array/scalar/hash`) so declaration setup can avoid RAW_PERL fallback,
+    - covered by `action_rewriter_lowers_typed_declare_methods_and_aliases`.
+  - method-like action chain parsing lock:
+    - chained method-like action forms (`-> Rule .m1(...).m2(...)`) now parse into multiple helper events, including empty-arg call segments (`()`),
+    - covered by `method_like_action_chain_parses_into_multiple_helper_events`.
   - action-rewriter method-empty arg normalization lock:
     - method-style empty-action argument trimming now removes outer parentheses with whitespace-tolerant boundaries, so leading-space forms keep balanced helper payloads for canonical lowering,
     - covered by `method_empty_action_return_with_leading_space_args_stays_balanced`.
@@ -314,6 +320,12 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Canonical helper lowering now covers indexed push-call wrappers:
   - `_build_action_lowering_contracts(...)` includes `push_call_indexed_builtin` for `push @target, call(Rule)->[index]` forms,
   - non-indexed `push_call_builtin` now uses a boundary guard so indexed wrappers are routed deterministically to the indexed contract.
+- Method-like parser entrypoints now support chained method blocks:
+  - `_parse_method_call_chain(...)` and `_render_method_call_chain(...)` now normalize `.method(...).method2(...)` chains for both action and non-action method-like bootstrap handlers,
+  - chained method parsing now accepts empty argument lists (`()`), preserving multi-step method-like authoring ergonomics.
+- Canonical helper lowering now covers typed declaration methods:
+  - `declare(type, ...)` with `type ∈ {array, scalar, hash}` is now lowered through dedicated `DECLARE` contracts and IR events,
+  - declaration aliases (`declare_a/s/h` and `declare_array/scalar/hash`) map to the same typed declaration semantics.
 - Method-style empty-action argument normalization is now whitespace-tolerant at outer boundaries:
   - `METHOD_EMPTY_ACTION_CODE_BLOCK` processing trims `^\s*\(` and `\)\s*$` around outer argument payloads,
   - leading-space argument forms no longer lose closing-balance alignment during helper rewrite/lowering paths.

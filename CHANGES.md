@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Typed Declare Methods + Chained Method-Like Blocks
+## Summary
+Added first method-like DSL migration slice for canonical typed declarations and chained method parsing, enabling `declare(type, ...)` lowering (with aliases) and multi-method chain handling without RAW_PERL fallback.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added method-chain parsing/render helpers:
+  - `_parse_method_call_chain(...)`
+  - `_render_method_call_chain(...)`
+- Extended bootstrap method-like handlers to accept chained method forms:
+  - `METHOD_EMPTY_ACTION_CODE_BLOCK` now parses/render chains like `-> Rule .m1(...).m2(...)`
+  - `METHOD_EMPTY_NON_ACTION_CODE_BLOCK` now parses/render chains like `I.m1(...).m2(...)`
+  - empty argument lists (`()`) in chained methods are now accepted.
+- Added typed declaration lowering utilities:
+  - `_split_declare_symbol_names(...)`
+  - `_declare_sigil_for_type(...)`
+  - `_declare_alias_to_type(...)`
+  - `_lower_typed_declare_statement(...)`
+- Added declaration lowering contracts and scanner support:
+  - canonical `declare(type, ...)` where `type` is `array|scalar|hash` (optional injected scope label tolerated for method-chain rendering),
+  - aliases `declare_a|declare_s|declare_h` and `declare_array|declare_scalar|declare_hash`.
+- Canonical action-IR:
+  - declaration methods now map to canonical `DECLARE` events (helper + canonical node surfaces).
+- Added focused regression locks:
+  - `action_rewriter_lowers_typed_declare_methods_and_aliases`
+  - `method_like_action_chain_parses_into_multiple_helper_events`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=62`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Indexed Push-Call Wrapper Lowering
 ## Summary
 Extended structured action lowering to handle full-statement `push @target, call(Rule)->[index]` wrappers so canonical action-IR can avoid RAW_PERL fallback for indexed call-wrapper push forms.

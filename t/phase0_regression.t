@@ -873,6 +873,59 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
 };
+subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
+    plan tests => 10;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items, captures); declare(scalar, flag); declare(hash, by_name)'),
+        'my @items; my @captures; my $flag; my %by_name',
+        'typed declare(type, ...) lowering emits canonical Perl declarations'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_a(Top, items, captures); declare_s(Top, flag); declare_h(Top, by_name)'),
+        'my @items; my @captures; my $flag; my %by_name',
+        'declare_* aliases lower to same declaration semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_array(Top, items); declare_scalar(Top, flag); declare_hash(Top, by_name)'),
+        'my @items; my $flag; my %by_name',
+        'long declare_* aliases lower to same declaration semantics'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.declare(array, items, captures).declare(scalar, flag).declare(hash, by_name)
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for non-action chained declare methods');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'chained declare methods avoid RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'chained declare methods avoid raw-Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'chained declare methods avoid unresolved-helper hits');
+    ok(grep { $_ eq 'DECLARE' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include DECLARE for declare methods');
+    ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include DECLARE for declare methods');
+    ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
+};
+subtest 'method_like_action_chain_parses_into_multiple_helper_events' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .return_a().return_m()
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for chained method-like action block');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'chained method-like action block avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'chained method-like action block avoids unresolved-helper hits');
+    ok(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_A from chained action methods');
+    ok(grep { $_ eq 'RETURN_M' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_M from chained action methods');
+    ok($meta->{language_agnostic_action_ir_ready}, 'chained method-like action block remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 

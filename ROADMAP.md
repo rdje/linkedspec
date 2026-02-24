@@ -113,11 +113,39 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 5. Multi-backend enablement:
    - Keep regex/execution semantics documented and map action IR to Perl first, then additional backends (e.g. Rust, Julia) incrementally.
 
+## Method-Like DSL Migration Track (Planned, Under Item #3)
+Goal: converge `.spec` semantics on method-like operations and phase out embedded `{...}` code blocks without breaking existing specs abruptly.
+
+1. Canonical method IR vocabulary (Planned)
+   - Define backend-neutral method ops for declaration/assignment/call/push/return/scalar-array-object construction/regex-substitution/capture-backtrack surfaces.
+   - Keep method semantics explicit and language-agnostic so every op can be implemented consistently across backends.
+   - Canonical declaration method form is `declare(type, ...)` where `type ∈ {array, scalar, hash}`.
+   - Optional short aliases (`declare_a`, `declare_s`, `declare_h`) remain syntax sugar only and must map to the same typed IR declaration node as `declare(array|scalar|hash, ...)`.
+2. Chained method syntax support (Planned)
+   - Action edges: `-> rule .method1(...).method2(...).methodN(...)`.
+   - Lifecycle sections: `I/E/EX/IT/LX/LS/LE .methodA(...).methodB(...).methodK(...)`.
+   - Parse method chains into canonical action IR (not raw host-language text).
+3. Unified lowering path (Planned)
+   - Lower both legacy helpers (`return_a`, `return_m`, etc.) and new method-chain forms into the same canonical IR/lowering pipeline.
+   - Keep compatibility helper APIs during migration so existing specs stay functional.
+   - Method-chain parsing and lowering stay IR-first: each method maps to a typed IR node (not opaque string rewrite).
+4. Code-block deprecation policy (Planned)
+   - Phase A: `{...}` allowed, but emit migration diagnostics encouraging method-like equivalents.
+   - Phase B: strict mode rejects new/remaining `{...}` usage.
+   - Phase C: strict mode becomes default after migration readiness is acceptable.
+5. Tracking policy (Planned)
+   - Track progress through existing migration readiness/blocker metadata and regression locks.
+   - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
+
 ## Immediate Next Steps
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
+- Start Method-Like DSL Migration Track implementation in small slices:
+  - introduce canonical method ops incrementally and validate each slice with focused regressions,
+  - keep helper-compatibility lowering active while method-chain coverage grows,
+  - gate `{...}` deprecation behind explicit migration phases (diagnose first, enforce later).
 - Pause further `_split_action_ir_statements(...)` hardening work; only revisit splitter surface expansion when a concrete regression or unsupported production pattern is observed.
 - Keep balanced-delimiter behavior strict by policy; do not introduce permissive missing-close helper normalization.
 - Keep `.spec` action semantics language-agnostic: avoid introducing new Perl code-block dependence and prioritize IR/DSL forms that can map cleanly to non-Perl backends.
@@ -164,6 +192,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
     - Landed follow-up: canonical lowering now covers common call-wrapper statements (`my $x = call(...)`, `$x = call(...)`, `push @arr, call(...)`) via explicit lowering contracts, reducing RAW_PERL fallback for wrapper-only action code, with regression lock `action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback`.
     - Landed follow-up: canonical lowering now covers full-statement indexed push-call wrappers (`push @target, call(...)->[index]`) via explicit `push_call_indexed_builtin` lowering contract, reducing RAW_PERL fallback for indexed call-wrapper push action code, with regression lock `action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback`.
     - Landed follow-up: canonical lowering now covers full-statement `return call(...)` wrappers via explicit `return_call` lowering contract, reducing RAW_PERL fallback for return-call wrapper action code, with regression lock `action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback`.
+    - Landed follow-up: method-like bootstrap parsing now supports chained action/non-action method forms (`.m1(...).m2(...)`) including empty-arg segments (`()`), with regression lock `method_like_action_chain_parses_into_multiple_helper_events`.
+    - Landed follow-up: canonical lowering now covers typed declaration methods (`declare(array|scalar|hash, ...)`) and declaration aliases (`declare_a/s/h`, `declare_array/scalar/hash`) via explicit `DECLARE` contracts, reducing RAW_PERL fallback for declaration setup code, with regression lock `action_rewriter_lowers_typed_declare_methods_and_aliases`.
     - Landed follow-up: method-style empty action argument trimming in `METHOD_EMPTY_ACTION_CODE_BLOCK` now removes outer parentheses with whitespace-tolerant boundaries, preserving balanced helper payload lowering for leading-space `.return ((...))` forms, with regression lock `method_empty_action_return_with_leading_space_args_stays_balanced`.
     - Landed follow-up: `LinkedSpec.pm` now has broad subroutine/top-level documentation comments to improve readability and continuity of parser/rewrite architecture understanding across maintainer handoffs.
     - Current decision: `_split_action_ir_statements(...)` hardening track is paused; future work should prioritize action-IR/lowering and diagnostics unless concrete splitter regressions appear.

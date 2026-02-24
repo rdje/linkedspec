@@ -423,6 +423,54 @@ sub extract_regex_literals_from_rule_rhs {
 }
 
 #------------------------------------------------------------------------------
+# Function: _parse_method_call_chain
+# Purpose : Parse `.method(args).method2(args2)` chains into ordered call
+#           descriptors while preserving nested-parenthesis argument payloads.
+# Args    : ($chain)
+# Returns : arrayref of { method => ..., args => ... } or undef on parse error
+#------------------------------------------------------------------------------
+sub _parse_method_call_chain {
+ my ($chain) = @_;
+ return [] unless defined($chain) && length($chain);
+
+ my @calls;
+ pos($chain) = 0;
+ while ($chain =~ /\G\s*\.\s*(?<method>\w+)(?<args>\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))?/gc) {
+  my $args = $+{args};
+  if (defined $args) {
+   $args =~ s/^\s*\(//o;
+   $args =~ s/\)\s*$//o;
+  }
+  push @calls, {
+   method => $+{method},
+   args   => $args,
+  };
+ }
+
+ return \@calls if $chain =~ /\G\s*$/gc;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _render_method_call_chain
+# Purpose : Render parsed method-chain calls into semicolon-joined helper-style
+#           calls with entry label injected as first argument.
+# Args    : ($entry_label, $chain)
+# Returns : rendered code string or undef
+#------------------------------------------------------------------------------
+sub _render_method_call_chain {
+ my ($entry_label, $chain) = @_;
+ my $calls = _parse_method_call_chain($chain);
+ return undef unless $calls && @$calls;
+
+ my @rendered = map {
+  my $args = $_->{args};
+  $_->{method} . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')'
+ } @$calls;
+ return join '; ', @rendered
+}
+
+#------------------------------------------------------------------------------
 # Bootstrap parser metadata and global state
 #------------------------------------------------------------------------------
 # Maps bootstrap rule id => index in $spec_descr; avoids hardcoded positional
@@ -561,17 +609,13 @@ my $spec_descr = [
 {# Method-like Empty Action code block
  id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
  tags => { start_token => 1 },
- re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?\.\s*(?<METHOD>\w+)(?<ARGS>\s*\((?:[^\(\)]++|(?&ARGS))+\))?/o],
+ re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
-
-  my ($entry_label, $reidx, $method, $args) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX METHOD ARGS/}; 
-  # say "(Method code block) ($entry_label:".($reidx // 0).":$method:".($args // '').")";
-  if (defined $args) {
-   $args =~ s/^\s*\(//o;
-   $args =~ s/\)\s*$//o;
-  }
-  return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>"$method($entry_label".($args ? ",$args" : '').")"}]
+  my ($entry_label, $reidx, $chain) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN/};
+  my $code = _render_method_call_chain($entry_label, $chain);
+  return undef unless defined $code;
+  return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>$code}]
  }
 },
 
@@ -687,13 +731,13 @@ my $spec_descr = [
 {# Method-like Empty Non-Action code block
  id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
  tags => { start_token => 1 },
- re=> [qr/(?<TYPE>\w+)\s*\.\s*(?<METHOD>\w+)(?<ARGS>\s*\((?:[^\(\)]++|(?&ARGS))+\))?/o],
+ re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
  handler=> sub {
   my ($info, $descr, $string, $gdata) = @_;
-
-  my ($type, $method, $args) = @{$$info{match_hash}}{qw/TYPE METHOD ARGS/};
-  # say "(Method-like Empty Action code block) ($type)($method)(".($args// '').")";
-  return ["${type}CODE", $method."($gdata->{_current_entry}".($args ? ",$args" :  '').')']
+  my ($type, $chain) = @{$$info{match_hash}}{qw/TYPE CHAIN/};
+  my $code = _render_method_call_chain($gdata->{_current_entry}, $chain);
+  return undef unless defined $code;
+  return ["${type}CODE", $code]
  }
 },
 
@@ -1394,6 +1438,28 @@ sub _build_action_lowering_contracts {
    lower              => sub {
     my ($code) = @_;
    $code =~ s/\breturn\s+call\s*\(\s*(\w+)\s*\)/return &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'declare_typed',
+   ir_node            => 'DECLARE',
+   diag_name          => 'declare',
+   unresolved_pattern => qr/\bdeclare\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:array|scalar|hash)\s*,/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bdeclare\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<type>array|scalar|hash)\s*,(?<names>[^()]*)\)/_lower_typed_declare_statement($+{type}, $+{names}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'declare_alias',
+   ir_node            => 'DECLARE',
+   diag_name          => 'declare',
+   unresolved_pattern => qr/\bdeclare_(?:a|array|s|scalar|h|hash)\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bdeclare_(?<alias>a|array|s|scalar|h|hash)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<names>[^()]*)\)/_lower_typed_declare_statement(_declare_alias_to_type($+{alias}), $+{names}) || $&/ge;
     return $code
    },
   },
@@ -2133,6 +2199,70 @@ sub _trim_action_ir_value {
 }
 
 #------------------------------------------------------------------------------
+# Function: _split_declare_symbol_names
+# Purpose : Parse and sanitize comma-separated declaration symbol names.
+# Args    : ($raw_names)
+# Returns : arrayref of symbol names
+#------------------------------------------------------------------------------
+sub _split_declare_symbol_names {
+ my ($raw_names) = @_;
+ return [] unless defined $raw_names;
+
+ my @names = grep { length($_) } map {
+  my $name = $_;
+  $name =~ s/^\s*|\s*$//go;
+  $name;
+ } split /\s*,\s*/o, $raw_names;
+ @names = grep { /^\w+$/o } @names;
+ return \@names
+}
+
+#------------------------------------------------------------------------------
+# Function: _declare_sigil_for_type
+# Purpose : Map canonical declaration type name to Perl declaration sigil.
+# Args    : ($type)
+# Returns : sigil scalar or undef
+#------------------------------------------------------------------------------
+sub _declare_sigil_for_type {
+ my ($type) = @_;
+ return '@' if defined($type) && $type eq 'array';
+ return '$' if defined($type) && $type eq 'scalar';
+ return '%' if defined($type) && $type eq 'hash';
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _declare_alias_to_type
+# Purpose : Resolve declaration alias tokens to canonical declaration type.
+# Args    : ($alias)
+# Returns : canonical type string or undef
+#------------------------------------------------------------------------------
+sub _declare_alias_to_type {
+ my ($alias) = @_;
+ return 'array'  if defined($alias) && ($alias eq 'a' || $alias eq 'array');
+ return 'scalar' if defined($alias) && ($alias eq 's' || $alias eq 'scalar');
+ return 'hash'   if defined($alias) && ($alias eq 'h' || $alias eq 'hash');
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_typed_declare_statement
+# Purpose : Lower typed declaration methods into canonical Perl declaration
+#           statements (`my @x`, `my $y`, `my %z`).
+# Args    : ($type, $raw_names)
+# Returns : lowered statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_typed_declare_statement {
+ my ($type, $raw_names) = @_;
+ my $sigil = _declare_sigil_for_type($type);
+ return undef unless defined $sigil;
+
+ my $names = _split_declare_symbol_names($raw_names);
+ return undef unless $names && @$names;
+ return join '; ', map { "my ${sigil}$_" } @$names
+}
+
+#------------------------------------------------------------------------------
 # Function: _scan_contract_ir_events
 # Purpose : Contract-specific scanner that extracts helper invocation events
 #           and parsed arguments from raw action code.
@@ -2163,6 +2293,17 @@ sub _scan_contract_ir_events {
  } elsif ($id eq 'return_call') {
   while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {callee => $+{callee}, context => 'return'}};
+  }
+ } elsif ($id eq 'declare_typed') {
+  while ($code =~ /\bdeclare\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<type>array|scalar|hash)\s*,(?<names>[^()]*)\)/g) {
+   my $names = _split_declare_symbol_names($+{names});
+   push @events, {raw => $&, args => {scope => $+{scope}, declaration_type => $+{type}, names => [@$names]}};
+  }
+ } elsif ($id eq 'declare_alias') {
+  while ($code =~ /\bdeclare_(?<alias>a|array|s|scalar|h|hash)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<names>[^()]*)\)/g) {
+   my $names = _split_declare_symbol_names($+{names});
+   my $type = _declare_alias_to_type($+{alias});
+   push @events, {raw => $&, args => {scope => $+{scope}, declaration_type => $type, names => [@$names]}} if defined $type;
   }
  } elsif ($id eq 'call') {
   while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
@@ -2287,6 +2428,9 @@ sub _canonicalize_helper_action_ir_event {
  elsif ($contract_id eq 'return_call') {
   $kind = 'CALL';
   $args{context} = 'return';
+ }
+ elsif ($contract_id eq 'declare_typed' || $contract_id eq 'declare_alias') {
+  $kind = 'DECLARE';
  }
  elsif ($contract_id eq 'push_single_arg') {
   $kind = 'PUSH';

@@ -96,6 +96,17 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 method-like DSL migration slice in `perl/LinkedSpec.pm`:
+  - bootstrap method-like parsing now supports chained forms for both action and non-action blocks via `_parse_method_call_chain(...)` and `_render_method_call_chain(...)`,
+  - chained method parsing now accepts empty-arg segments (`()`),
+  - canonical declaration methods now lower via typed form `declare(array|scalar|hash, ...)` plus aliases (`declare_a/s/h`, `declare_array/scalar/hash`) through explicit `DECLARE` contracts.
+- Added focused regression locks in `t/phase0_regression.t`:
+  - subtest `action_rewriter_lowers_typed_declare_methods_and_aliases`,
+  - subtest `method_like_action_chain_parses_into_multiple_helper_events`.
+- Re-ran full validation after typed declare + method-chain parsing follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (62 tests)
 - Landed Backbone item #3 indexed push-call wrapper lowering follow-up in `perl/LinkedSpec.pm`:
   - action lowering now explicitly covers full-statement `push @target, call(...)->[index]` wrappers through `push_call_indexed_builtin` contract support.
   - non-indexed `push_call_builtin` now excludes indexed forms so wrapper routing is deterministic.
