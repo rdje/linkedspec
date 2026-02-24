@@ -94,6 +94,15 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 call-wrapper lowering follow-up in `perl/LinkedSpec.pm`:
+  - action lowering now explicitly covers `my $x = call(...)`, `$x = call(...)`, and `push @arr, call(...)` wrappers,
+  - wrapper-only actions now avoid RAW_PERL fallback classification and remain language-agnostic action-IR ready.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback`.
+- Re-ran full validation after call-wrapper lowering follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (57 tests)
 - Landed Backbone item #3 descriptor migration blocker-type ratio follow-up in `perl/LinkedSpec.pm`:
   - descriptor-level `meta.action_rewriter_migration` now exposes blocked-rule composition ratios (`language_agnostic_blocked_raw_perl_only_ratio`, `language_agnostic_blocked_unresolved_helper_only_ratio`, `language_agnostic_blocked_mixed_ratio`) normalized by blocked-rule count.
 - Extended focused regression lock in `t/phase0_regression.t`:

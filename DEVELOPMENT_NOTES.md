@@ -175,6 +175,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
+  - action-rewriter call-wrapper lowering lock:
+    - canonical lowering now covers common call-wrapper statements (`my $x = call(...)`, `$x = call(...)`, `push @arr, call(...)`) so these forms no longer require RAW_PERL fallback,
+    - covered by `action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback`.
   - action-rewriter canonical action-IR nested-semicolon lock:
     - canonical action-IR statement splitting now ignores semicolons inside nested helper payload expressions (e.g. `do { ...; ... }`) when building statement-level events,
     - covered by `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`.

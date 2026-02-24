@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Call-Wrapper Lowering Coverage
+## Summary
+Extended structured action lowering to handle common call-wrapper statement forms so canonical action-IR can avoid RAW_PERL fallback for these wrappers while preserving existing rewrite-contract ordering.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended helper-lowering contracts in `_build_action_lowering_contracts(...)`:
+  - `assign_call_my` for `my $x = call(Rule)` wrappers,
+  - `assign_call` for `$x = call(Rule)` wrappers,
+  - `push_call_builtin` for `push @arr, call(Rule)` wrappers.
+- Extended helper event scanning in `_scan_contract_ir_events(...)` for the new wrapper contracts.
+- Kept historical contract ordering stability:
+  - appended new wrapper contracts after existing helper contracts so legacy ordering lock expectations remain stable.
+- Added focused regression lock:
+  - `action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback`
+  - verifies wrapper lowering output and confirms zero RAW_PERL fallback/unresolved-helper counts for supported wrapper-only actions.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=57`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor Migration Blocker-Type Ratios
 ## Summary
 Extended descriptor-level action-rewriter migration summary with blocker-type ratio fields so triage dashboards can track blocked-rule composition trends over time (raw-only vs unresolved-only vs mixed).

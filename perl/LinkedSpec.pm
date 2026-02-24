@@ -1339,6 +1339,39 @@ sub _build_action_lowering_contracts {
     return $code
    },
   },
+  {
+   id                 => 'assign_call_my',
+   ir_node            => 'CALL',
+   diag_name          => 'assign_call_my',
+   unresolved_pattern => qr/\bmy\s+\$\w+\s*=\s*call\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bmy\s+(\$\w+)\s*=\s*call\s*\(\s*(\w+)\s*\)/my $1 = &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'assign_call',
+   ir_node            => 'CALL',
+   diag_name          => 'assign_call',
+   unresolved_pattern => qr/\$\w+\s*=\s*call\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/(\$\w+)\s*=\s*call\s*\(\s*(\w+)\s*\)/$1 = &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'push_call_builtin',
+   ir_node            => 'CALL',
+   diag_name          => 'push_call_builtin',
+   unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
  ]
 }
 
@@ -2086,7 +2119,19 @@ sub _scan_contract_ir_events {
  my $id = $contract->{id} // '';
 
  my @events;
- if ($id eq 'call') {
+ if ($id eq 'assign_call_my') {
+  while ($code =~ /\bmy\s+(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'my'}};
+  }
+ } elsif ($id eq 'assign_call') {
+  while ($code =~ /(?<!\bmy\s)(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'existing'}};
+  }
+ } elsif ($id eq 'push_call_builtin') {
+  while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}}};
+  }
+ } elsif ($id eq 'call') {
   while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {callee => $+{callee}}};
   }

@@ -1165,6 +1165,30 @@ SPEC
     is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');
     is($summary->{language_agnostic_top_blocked_rule}, 'Mixed', 'migration summary priority still surfaces mixed rule with highest blocker load');
 };
+subtest 'action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my $retv = call(Leaf); $retv = call(Leaf); push @Top, call(Leaf) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for call-wrapper canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes supported call-wrapper statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes supported call-wrapper statements');
+    is($meta->{unresolved_helper_count}, 0, 'call-wrapper lowering keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL for call-wrapper coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my $retv = call(Leaf); $retv = call(Leaf); push @Top, call(Leaf)');
+    is($rewritten, 'my $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'call-wrapper lowering rewrites assignment and builtin push call wrappers to handler calls');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'call-wrapper-only rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 
