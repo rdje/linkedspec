@@ -37,6 +37,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `6c71e21` - Backbone item #3 follow-up: add language-agnostic action readiness metadata
 - `3e7de01` - Document language-agnostic .spec end-state and guardrails
 - `69c53f1` - Document pause for _split_action_ir_statements hardening track
 - `3b1e7d9` - Backbone item #3 follow-up: harden canonical splitter for pipe quotes
@@ -83,12 +84,22 @@ When resuming after interruption:
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
+  - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 language-agnostic blocker statement follow-up in `perl/LinkedSpec.pm`:
+  - unresolved helper diagnostics are now captured at statement granularity and exposed as `unresolved_helper_events` and `unresolved_helper_statements`,
+  - action-rewriter metadata now exposes consolidated blocker statement surface via `language_agnostic_action_ir_blocker_statements` and `language_agnostic_action_ir_blocker_statement_count`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_language_agnostic_blocker_statements`.
+- Re-ran full validation after blocker statement follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (54 tests)
 - Landed Backbone item #3 language-agnostic readiness follow-up in `perl/LinkedSpec.pm`:
   - action-rewriter metadata now exposes `raw_perl_dependency_count`, `raw_perl_dependency_statements`, and `language_agnostic_action_ir_ready` per rule,
   - readiness is now explicitly false when either RAW_PERL fallback dependency or unresolved helper diagnostics are present.

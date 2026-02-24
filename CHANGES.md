@@ -1,6 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Language-Agnostic Blocker Statement Metadata
+## Summary
+Extended action-rewriter rule metadata with explicit blocker statement details so language-agnostic migration can prioritize concrete unresolved-helper and RAW_PERL dependency statements per rule.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended unresolved-helper diagnostics in `LinkedSpec.pm`:
+  - unresolved-helper events are now captured at statement granularity and exposed in metadata.
+- Extended `spec->{rule}{meta}{action_rewriter}` with:
+  - `unresolved_helper_events`
+  - `unresolved_helper_statements`
+  - `language_agnostic_action_ir_blocker_statement_count`
+  - `language_agnostic_action_ir_blocker_statements`
+- Metadata semantics:
+  - blocker statement list is a deduplicated union of canonical RAW_PERL dependency statements and unresolved helper statements.
+  - readiness remains controlled by unresolved-helper count and raw-perl dependency count; blocker statements provide direct migration targets.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_language_agnostic_blocker_statements`
+  - verifies helper-only rules expose zero blockers and mixed unresolved+raw rules expose both blocker statement payloads and blocker count.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=54`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Language-Agnostic Action Readiness Metadata
 ## Summary
 Added explicit action-rewriter metadata that quantifies raw Perl fallback dependency and reports per-rule language-agnostic action readiness, so migration away from embedded Perl code-block behavior in `.spec` can be tracked and enforced incrementally.

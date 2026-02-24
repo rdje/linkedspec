@@ -1054,6 +1054,36 @@ SPEC
     is($unresolved_meta->{raw_perl_dependency_count}, 0, 'unresolved helper rule can still report zero raw-Perl fallback dependency count');
     ok(!$unresolved_meta->{language_agnostic_action_ir_ready}, 'unresolved helper rule is not language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_meta_exposes_language_agnostic_blocker_statements' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); return_a(Top) }
+
+Combo::&
+ /b/ -> Combo { return_a(Leaf); my $tmp = 1 }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for language-agnostic blocker statement metadata check');
+
+    my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is_deeply($top_meta->{language_agnostic_action_ir_blocker_statements}, [], 'helper-only rule exposes no language-agnostic blocker statements');
+    is($top_meta->{language_agnostic_action_ir_blocker_statement_count}, 0, 'helper-only rule exposes zero language-agnostic blocker statements');
+
+    my $combo_meta = $descr->{spec}{Combo}{meta}{action_rewriter};
+    is($combo_meta->{unresolved_helper_count}, 1, 'combo rule tracks unresolved helper count');
+    is_deeply($combo_meta->{unresolved_helper_statements}, ['return_a(Leaf)'], 'combo rule exposes unresolved helper statement payloads');
+    is_deeply($combo_meta->{raw_perl_dependency_statements}, ['my $tmp = 1'], 'combo rule exposes raw-Perl fallback dependency statements');
+    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return_a(Leaf)'], 'combo rule exposes combined language-agnostic blocker statements');
+    is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
+    ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 

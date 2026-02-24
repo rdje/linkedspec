@@ -1207,6 +1207,7 @@ sub _build_rule_ir_emit_context {
  my $rewrite_diag_acc = {
   unresolved_helper_hits  => {},
   unresolved_helper_count => 0,
+  unresolved_helper_events => [],
   helper_action_ir_hits   => {},
   helper_action_ir_count  => 0,
   helper_action_ir_events => [],
@@ -1248,6 +1249,14 @@ sub _build_rule_ir_emit_context {
  my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc, $rewrite_rules);
 
  my @rewrite_contract_ids = map { $_->{id} } @$rewrite_rules;
+ my @unresolved_helper_statements;
+ my %seen_unresolved_helper_statement;
+ foreach my $event (@{$rewrite_diag_acc->{unresolved_helper_events}}) {
+  my $raw_code = _trim_action_ir_value($event->{raw});
+  next unless defined($raw_code) && length($raw_code);
+  next if $seen_unresolved_helper_statement{$raw_code}++;
+  push @unresolved_helper_statements, $raw_code;
+ }
  my @raw_perl_dependency_statements;
  my %seen_raw_perl_dependency_statement;
  foreach my $event (@{$rewrite_diag_acc->{canonical_action_ir_events}}) {
@@ -1259,6 +1268,14 @@ sub _build_rule_ir_emit_context {
   push @raw_perl_dependency_statements, $raw_code;
  }
  my $raw_perl_dependency_count = $rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0;
+ my @language_agnostic_action_ir_blocker_statements;
+ my %seen_language_agnostic_action_ir_blocker_statement;
+ foreach my $statement (@raw_perl_dependency_statements, @unresolved_helper_statements) {
+  next unless defined($statement) && length($statement);
+  next if $seen_language_agnostic_action_ir_blocker_statement{$statement}++;
+  push @language_agnostic_action_ir_blocker_statements, $statement;
+ }
+ my $language_agnostic_action_ir_blocker_statement_count = scalar @language_agnostic_action_ir_blocker_statements;
  my $language_agnostic_action_ir_ready = (
   $raw_perl_dependency_count == 0 &&
   ($rewrite_diag_acc->{unresolved_helper_count} || 0) == 0
@@ -1268,6 +1285,8 @@ sub _build_rule_ir_emit_context {
   unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
   unresolved_helpers      => [sort keys %{$rewrite_diag_acc->{unresolved_helper_hits}}],
   unresolved_helper_hits  => {%{$rewrite_diag_acc->{unresolved_helper_hits}}},
+  unresolved_helper_events => [@{$rewrite_diag_acc->{unresolved_helper_events}}],
+  unresolved_helper_statements => \@unresolved_helper_statements,
   helper_action_ir_count  => $rewrite_diag_acc->{helper_action_ir_count},
   helper_action_ir_nodes  => [sort keys %{$rewrite_diag_acc->{helper_action_ir_hits}}],
   helper_action_ir_hits   => {%{$rewrite_diag_acc->{helper_action_ir_hits}}},
@@ -1279,6 +1298,8 @@ sub _build_rule_ir_emit_context {
   canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
   raw_perl_dependency_count => $raw_perl_dependency_count,
   raw_perl_dependency_statements => \@raw_perl_dependency_statements,
+  language_agnostic_action_ir_blocker_statement_count => $language_agnostic_action_ir_blocker_statement_count,
+  language_agnostic_action_ir_blocker_statements => \@language_agnostic_action_ir_blocker_statements,
   language_agnostic_action_ir_ready => $language_agnostic_action_ir_ready,
   rewrite_contract_ids    => \@rewrite_contract_ids,
  };
@@ -1723,20 +1744,26 @@ sub _find_unresolved_action_helpers {
 
  my %hits;
  my $total = 0;
+ my @events;
+ my @statements = @{_split_action_ir_statements($code)};
  foreach my $rule (@$rewrite_rules) {
   my $helper_name = $rule->{diag_name} // $rule->{id};
   my $helper_re = $rule->{unresolved_pattern};
   next unless $helper_re;
-  my $count = () = ($code =~ /$helper_re/g);
-  next unless $count;
-  $hits{$helper_name} += $count;
-  $total += $count;
+  foreach my $statement (@statements) {
+   my $count = () = ($statement =~ /$helper_re/g);
+   next unless $count;
+   $hits{$helper_name} += $count;
+   $total += $count;
+   push @events, map { +{helper => $helper_name, raw => $statement} } (1 .. $count);
+  }
  }
 
  return {
   unresolved_helper_count => $total,
   unresolved_helper_hits  => \%hits,
   unresolved_helpers      => [sort keys %hits],
+  unresolved_helper_events => \@events,
  }
 }
 
@@ -2236,6 +2263,10 @@ sub _accumulate_action_rewrite_diagnostics {
   next unless $count;
   $acc->{unresolved_helper_hits}{$helper_name} += $count;
   $acc->{unresolved_helper_count} += $count;
+ }
+ my $unresolved_events = $diag->{unresolved_helper_events};
+ if ($unresolved_events && ref($unresolved_events) eq 'ARRAY' && @$unresolved_events) {
+  push @{$acc->{unresolved_helper_events}}, @$unresolved_events;
  }
 
  my $ir_hits = $diag->{helper_action_ir_hits};

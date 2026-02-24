@@ -153,6 +153,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter language-agnostic readiness lock:
     - rule metadata now exposes raw-host-language dependency and readiness indicators (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to support backend-neutral `.spec` migration tracking,
     - covered by `action_rewriter_meta_exposes_language_agnostic_readiness`.
+  - action-rewriter language-agnostic blocker statement lock:
+    - rule metadata now exposes unresolved-helper statement payloads and consolidated migration blockers (`unresolved_helper_events`, `unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`, `language_agnostic_action_ir_blocker_statement_count`),
+    - covered by `action_rewriter_meta_exposes_language_agnostic_blocker_statements`.
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
