@@ -965,6 +965,38 @@ SPEC
     like($return_evt->{args}{arg}, qr/\$x \+ 1/, 'RETURN_A payload event captures expression argument payload');
     is($return_evt->{args}{label}, 'Top', 'RETURN_A payload event captures label argument');
 };
+subtest 'action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); my $tmp = 1; push(Leaf,Top); return_a(Top, $x + 1) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for canonical action-IR metadata check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_count}, 4, 'canonical action-IR count includes helper and fallback statements');
+    is($meta->{canonical_action_ir_fallback_count}, 1, 'canonical action-IR fallback count captures non-helper statement');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH');
+    ok(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_A');
+    ok(grep { $_ eq 'RAW_PERL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RAW_PERL fallback marker');
+
+    my ($call_evt) = grep { $_->{kind} eq 'CALL' } @{$meta->{canonical_action_ir_events}};
+    my ($push_evt) = grep { $_->{kind} eq 'PUSH' } @{$meta->{canonical_action_ir_events}};
+    my ($raw_evt)  = grep { $_->{kind} eq 'RAW_PERL' } @{$meta->{canonical_action_ir_events}};
+    my ($ret_evt)  = grep { $_->{kind} eq 'RETURN_A' } @{$meta->{canonical_action_ir_events}};
+
+    is($call_evt->{args}{callee}, 'Leaf', 'canonical CALL event captures callee');
+    is($push_evt->{args}{target}, 'Top', 'canonical PUSH event captures explicit target');
+    is($raw_evt->{args}{code}, 'my $tmp = 1', 'canonical RAW_PERL fallback event captures non-helper statement');
+    like($ret_evt->{args}{arg}, qr/\$x \+ 1/, 'canonical RETURN_A event captures expression payload');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

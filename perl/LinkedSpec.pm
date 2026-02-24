@@ -1210,6 +1210,10 @@ sub _build_rule_ir_emit_context {
   helper_action_ir_hits   => {},
   helper_action_ir_count  => 0,
   helper_action_ir_events => [],
+  canonical_action_ir_hits   => {},
+  canonical_action_ir_count  => 0,
+  canonical_action_ir_events => [],
+  canonical_action_ir_fallback_count => 0,
  };
 
  my @ACODEs;
@@ -1253,6 +1257,11 @@ sub _build_rule_ir_emit_context {
   helper_action_ir_nodes  => [sort keys %{$rewrite_diag_acc->{helper_action_ir_hits}}],
   helper_action_ir_hits   => {%{$rewrite_diag_acc->{helper_action_ir_hits}}},
   helper_action_ir_events => [@{$rewrite_diag_acc->{helper_action_ir_events}}],
+  canonical_action_ir_count => $rewrite_diag_acc->{canonical_action_ir_count},
+  canonical_action_ir_nodes => [sort keys %{$rewrite_diag_acc->{canonical_action_ir_hits}}],
+  canonical_action_ir_hits  => {%{$rewrite_diag_acc->{canonical_action_ir_hits}}},
+  canonical_action_ir_events => [@{$rewrite_diag_acc->{canonical_action_ir_events}}],
+  canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
   rewrite_contract_ids    => \@rewrite_contract_ids,
  };
 
@@ -1820,6 +1829,128 @@ sub _collect_action_helper_ir_nodes {
  }
 }
 
+sub _canonicalize_helper_action_ir_event {
+ my ($label, $event) = @_;
+
+ my $contract_id = $event->{contract_id} // '';
+ my $ir_node = $event->{ir_node} // 'HELPER';
+ my %args = %{(ref($event->{args}) eq 'HASH') ? $event->{args} : {}};
+
+ my $kind = $ir_node;
+ if ($contract_id eq 'call') {
+  $kind = 'CALL';
+ }
+ elsif ($contract_id eq 'push_single_arg') {
+  $kind = 'PUSH';
+  $args{target} = $label unless defined $args{target};
+  $args{target_mode} = 'implicit_current_label';
+ }
+ elsif ($contract_id eq 'push_target_arg') {
+  $kind = 'PUSH';
+  $args{target_mode} = 'explicit';
+ }
+ elsif ($contract_id eq 'return_a') {
+  $kind = 'RETURN_A';
+ }
+ elsif ($contract_id eq 'return') {
+  $kind = 'RETURN';
+ }
+ elsif ($contract_id eq 'return_ma') {
+  $kind = 'RETURN_MA';
+ }
+ elsif ($contract_id eq 'return_m') {
+  $kind = 'RETURN_M';
+ }
+ elsif ($contract_id eq 'capture_macro') {
+  $kind = 'CAPTURE_MACRO';
+ }
+ elsif ($contract_id eq 'capture') {
+  $kind = 'CAPTURE';
+ }
+ elsif ($contract_id eq 'capture_if' || $contract_id eq 'capture_if_macro') {
+  $kind = 'CAPTURE_IF';
+ }
+ elsif ($contract_id eq 'ibacktrack' || $contract_id eq 'ibacktrack_macro') {
+  $kind = 'IBACKTRACK';
+ }
+ elsif ($contract_id eq 'backtrack' || $contract_id eq 'backtrack_macro') {
+  $kind = 'BACKTRACK';
+ }
+
+ return {
+  kind        => $kind,
+  source      => 'helper_contract',
+  contract_id => $contract_id,
+  raw         => $event->{raw},
+  args        => \%args,
+ }
+}
+
+sub _split_action_ir_statements {
+ my ($code) = @_;
+
+ my @statements;
+ foreach my $statement (split /;/, $code) {
+  $statement = _trim_action_ir_value($statement);
+  push @statements, $statement if defined($statement) && length($statement);
+ }
+
+ return \@statements
+}
+
+sub _build_canonical_action_ir_events {
+ my ($label, $code, $helper_events) = @_;
+
+ my %helper_event_queue;
+ foreach my $helper_event (@$helper_events) {
+  my $raw_key = _trim_action_ir_value($helper_event->{raw});
+  next unless defined($raw_key) && length($raw_key);
+  my $canonical_event = _canonicalize_helper_action_ir_event($label, $helper_event);
+  push @{$helper_event_queue{$raw_key}}, $canonical_event;
+ }
+
+ my @canonical_events;
+ my $fallback_count = 0;
+ foreach my $statement (@{_split_action_ir_statements($code)}) {
+  if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
+   push @canonical_events, shift @{$helper_event_queue{$statement}};
+  } else {
+   push @canonical_events, {
+    kind        => 'RAW_PERL',
+    source      => 'fallback_non_helper_statement',
+    contract_id => undef,
+    raw         => $statement,
+    args        => {code => $statement},
+   };
+   ++$fallback_count;
+  }
+ }
+
+ foreach my $raw_key (keys %helper_event_queue) {
+  while (@{$helper_event_queue{$raw_key}}) {
+   my $event = shift @{$helper_event_queue{$raw_key}};
+   $event->{source} = 'unmatched_helper_scan_event';
+   push @canonical_events, $event;
+  }
+ }
+
+ my %hits;
+ my $count = 0;
+ foreach my $event (@canonical_events) {
+  my $kind = $event->{kind} // 'UNKNOWN';
+  $hits{$kind} += 1;
+  ++$count;
+ }
+
+ return {
+  canonical_action_ir_count => $count,
+  canonical_action_ir_hits  => \%hits,
+  canonical_action_ir_nodes => [sort keys %hits],
+  canonical_action_ir_events => \@canonical_events,
+  canonical_action_ir_fallback_count => $fallback_count,
+ }
+}
+
 sub _accumulate_action_rewrite_diagnostics {
  my ($acc, $diag) = @_;
  return $acc unless $acc && $diag && ref($diag) eq 'HASH';
@@ -1849,6 +1980,23 @@ sub _accumulate_action_rewrite_diagnostics {
   push @{$acc->{helper_action_ir_events}}, @$ir_events;
  }
 
+ my $canonical_hits = $diag->{canonical_action_ir_hits};
+ if ($canonical_hits && ref($canonical_hits) eq 'HASH') {
+  foreach my $kind (keys %$canonical_hits) {
+   my $count = $canonical_hits->{$kind} || 0;
+   next unless $count;
+   $acc->{canonical_action_ir_hits}{$kind} += $count;
+   $acc->{canonical_action_ir_count} += $count;
+  }
+ }
+
+ my $canonical_events = $diag->{canonical_action_ir_events};
+ if ($canonical_events && ref($canonical_events) eq 'ARRAY' && @$canonical_events) {
+  push @{$acc->{canonical_action_ir_events}}, @$canonical_events;
+ }
+
+ $acc->{canonical_action_ir_fallback_count} += ($diag->{canonical_action_ir_fallback_count} || 0);
+
  return $acc
 }
 
@@ -1857,6 +2005,7 @@ sub _rewrite_action_code_with_diagnostics {
 
  $rewrite_rules //= _build_action_rewrite_rules($label);
  my $ir_diag = _collect_action_helper_ir_nodes($code, $rewrite_rules);
+ my $canonical_ir_diag = _build_canonical_action_ir_events($label, $code, $ir_diag->{helper_action_ir_events});
  my $rewritten = _apply_action_rewrite_pipeline($code, $rewrite_rules);
  my $diag = _find_unresolved_action_helpers($rewritten, $rewrite_rules);
  return ($rewritten, {
@@ -1865,6 +2014,11 @@ sub _rewrite_action_code_with_diagnostics {
   helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
   helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
   helper_action_ir_events => $ir_diag->{helper_action_ir_events},
+  canonical_action_ir_count => $canonical_ir_diag->{canonical_action_ir_count},
+  canonical_action_ir_hits  => $canonical_ir_diag->{canonical_action_ir_hits},
+  canonical_action_ir_nodes => $canonical_ir_diag->{canonical_action_ir_nodes},
+  canonical_action_ir_events => $canonical_ir_diag->{canonical_action_ir_events},
+  canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
  })
 }
 sub _build_action_rewrite_rules {

@@ -1,6 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Canonical Action-IR Promotion with RAW_PERL Fallback
+## Summary
+Promoted helper payload events into canonical action-IR events and added explicit `RAW_PERL` fallback markers for non-helper statements so rule metadata now captures a canonical, statement-level action-IR view.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added canonical action-IR promotion helpers in `LinkedSpec.pm`:
+  - `_canonicalize_helper_action_ir_event(...)`
+  - `_split_action_ir_statements(...)`
+  - `_build_canonical_action_ir_events(...)`
+- Extended action-rewriter diagnostics aggregation:
+  - canonical action-IR counters/hits/events are now accumulated across ACODE/BCODE/lifecycle chunks.
+- Extended `spec->{rule}{meta}{action_rewriter}` metadata with:
+  - `canonical_action_ir_count`
+  - `canonical_action_ir_nodes`
+  - `canonical_action_ir_hits`
+  - `canonical_action_ir_events`
+  - `canonical_action_ir_fallback_count`
+- Canonical action-IR behavior:
+  - helper payload events are promoted into canonical node kinds (`CALL`, `PUSH`, `RETURN_A`, etc.),
+  - non-helper statements are represented explicitly as `RAW_PERL` fallback events with preserved statement payload.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`
+  - verifies canonical node coverage plus `RAW_PERL` fallback behavior and payload extraction.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=45`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Structured Helper Action-IR Payload Events
 ## Summary
 Extended helper action-IR reporting from node counters to structured payload events by parsing helper invocations before lowering and exposing the parsed argument payloads in rule metadata.

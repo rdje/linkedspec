@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `226ea24` - Backbone item #3 follow-up: add structured helper payload events
 - `9bb6647` - Backbone item #3 follow-up: add helper action-IR metadata
 - `546bfd0` - Backbone item #3 follow-up: add lowering contract catalog
 - `ce6be32` - Backbone item #3 follow-up: add action rewriter diagnostics metadata
@@ -66,11 +67,22 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - promote helper payload events into canonical action-IR nodes as the primary lowering input,
-  - extend action-IR coverage from helper forms to non-helper action snippets with explicit fallback markers,
+  - switch helper lowering to consume canonical action-IR events directly instead of regex-first replacement paths,
+  - retain `RAW_PERL` fallback markers while incrementally reducing fallback usage through structured action-IR coverage expansion,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical action-IR follow-up in `perl/LinkedSpec.pm`:
+  - helper payload events are now promoted into canonical action-IR events,
+  - non-helper statements are now represented explicitly as `RAW_PERL` fallback canonical events.
+- Extended `spec->{rule}{meta}{action_rewriter}` metadata:
+  - added `canonical_action_ir_count`, `canonical_action_ir_nodes`, `canonical_action_ir_hits`, `canonical_action_ir_events`, and `canonical_action_ir_fallback_count`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`.
+- Re-ran full validation after canonical action-IR follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (45 tests)
 - Landed Backbone item #3 helper payload-event follow-up in `perl/LinkedSpec.pm`:
   - helper invocation payload scanning is now explicit (`_scan_contract_ir_events`) with argument trimming (`_trim_action_ir_value`),
   - helper action-IR aggregation now carries structured per-event payloads (`ir_node`, `contract_id`, `raw`, `args`) in addition to counts.

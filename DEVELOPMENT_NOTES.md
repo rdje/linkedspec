@@ -138,6 +138,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter helper action-IR payload event lock:
     - rule metadata now exposes parsed helper payload events (`helper_action_ir_events`) with argument extraction,
     - covered by `action_rewriter_meta_exposes_helper_action_ir_payload_events`.
+  - action-rewriter canonical action-IR fallback lock:
+    - rule metadata now exposes canonical action-IR events and explicit `RAW_PERL` fallback markers for non-helper statements,
+    - covered by `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -223,6 +226,10 @@ It should not be reframed as a strict EBNF clone.
   - helper invocations are scanned pre-lowering with `_scan_contract_ir_events(...)`,
   - payload argument strings are normalized with `_trim_action_ir_value(...)`,
   - `spec->{rule}{meta}{action_rewriter}{helper_action_ir_events}` now provides per-invocation payload records (`ir_node`, `contract_id`, `raw`, `args`) to support canonical action-IR promotion.
+- Canonical action-IR promotion now builds statement-level lowering input metadata:
+  - helper payload events are promoted by `_canonicalize_helper_action_ir_event(...)`,
+  - `_build_canonical_action_ir_events(...)` merges helper-derived canonical events with `RAW_PERL` fallback events for non-helper statements,
+  - canonical metadata surface now includes `canonical_action_ir_*` fields under `spec->{rule}{meta}{action_rewriter}` for direct lowering-boundary consumption.
 
 ## Change Discipline
 Before each commit:

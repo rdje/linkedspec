@@ -98,7 +98,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
    - Parse supported action helpers into a small action AST/IR and emit backend code from IR.
    - Improve diagnostics for unsupported/ambiguous forms.
    - Move progressively away from raw Perl code blocks in `.spec`.
-   - Status: In progress (v1 pipeline + diagnostics + lowering-contract catalog + helper action-IR payload event parsing landed; full action AST/IR still planned).
+   - Status: In progress (v1 pipeline + diagnostics + lowering-contract catalog + canonical action-IR promotion with fallback markers landed; full action AST/IR lowering still planned).
 
 ## Practical Migration Path (Tracked Sequence)
 1. Refactor-only extraction:
@@ -116,7 +116,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
-- Continue Backbone Refactor Track action rewriter follow-up by promoting helper payload events into canonical action-IR nodes and widening coverage beyond helper forms.
+- Continue Backbone Refactor Track action rewriter follow-up by switching helper lowering to consume canonical action-IR events directly (reduce regex-coupled lowering path).
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -141,5 +141,6 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
     - Landed follow-up: helper lowering is now centralized in explicit contracts (`_build_action_lowering_contracts`) reused by rewrite+diagnostics plumbing, with exposed `rewrite_contract_ids` metadata and regression lock `action_rewriter_meta_exposes_lowering_contract_ids`.
     - Landed follow-up: helper action-IR node usage is now exposed in `spec->{rule}{meta}{action_rewriter}` (`helper_action_ir_nodes`, hit counts), with regression lock `action_rewriter_meta_exposes_helper_action_ir_nodes`.
     - Landed follow-up: helper action-IR payload events are now exposed in `spec->{rule}{meta}{action_rewriter}` (`helper_action_ir_events`) with parsed argument payloads, with regression lock `action_rewriter_meta_exposes_helper_action_ir_payload_events`.
+    - Landed follow-up: helper payload events are now promoted into canonical action-IR events (`canonical_action_ir_events`) with `RAW_PERL` fallback markers for non-helper statements, with regression lock `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`.
   - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
 - Phase 2+: Planned.
