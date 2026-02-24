@@ -1,6 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Nested-Semicolon-Safe Canonical Action-IR Statement Splitting
+## Summary
+Hardened canonical action-IR statement splitting so semicolons inside nested helper payload expressions no longer produce false `RAW_PERL` fallback canonical events, improving canonical IR fidelity while preserving helper-lowering behavior.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Reworked canonical statement splitter in `LinkedSpec.pm`:
+  - `_split_action_ir_statements(...)` now performs depth-aware scanning over `()`, `{}`, `[]`, and quoted strings instead of naive `split /;/`.
+  - top-level semicolons continue to delimit statements; nested semicolons inside helper payloads remain within the same statement.
+- Canonical action-IR effects:
+  - helper payloads like `return_a(... do { ...; ... } ...)` now stay canonicalized as helper events instead of being fragmented into fallback fragments.
+  - `canonical_action_ir_fallback_count` and `canonical_action_ir_nodes` no longer over-report `RAW_PERL` for nested helper payload semicolons.
+- Added focused regression lock:
+  - `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`
+  - verifies canonical metadata and lowering output for `return_a` helper payloads containing nested semicolons.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=47`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Canonical Action-IR-Driven Lowering
 ## Summary
 Switched helper lowering from whole-code regex rewrite passes to canonical action-IR event driven lowering so helper transformations now consume canonical IR metadata directly while preserving unresolved-helper behavior and RAW_PERL pass-through.

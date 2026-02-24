@@ -72,6 +72,15 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical action-IR splitting follow-up in `perl/LinkedSpec.pm`:
+  - `_split_action_ir_statements(...)` is now nesting-aware across `()`, `{}`, `[]`, and quoted strings,
+  - semicolons inside nested helper payloads no longer split helper statements into false `RAW_PERL` canonical fallback fragments.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`.
+- Re-ran full validation after canonical action-IR splitting follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (47 tests)
 - Landed Backbone item #3 canonical-IR-driven lowering follow-up in `perl/LinkedSpec.pm`:
   - action rewrite emission now lowers directly from canonical action-IR events via `_lower_action_code_from_canonical_ir(...)` inside `_rewrite_action_code_with_diagnostics(...)`,
   - lowering now uses event-driven in-place replacement on original action code, preserving unresolved helper forms and raw Perl regions while reducing regex-first coupling.

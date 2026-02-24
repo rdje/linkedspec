@@ -1890,11 +1890,104 @@ sub _split_action_ir_statements {
  my ($code) = @_;
 
  my @statements;
- foreach my $statement (split /;/, $code) {
-  $statement = _trim_action_ir_value($statement);
-  push @statements, $statement if defined($statement) && length($statement);
+ my $statement = '';
+ my $paren_depth = 0;
+ my $brace_depth = 0;
+ my $bracket_depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $escape_next = 0;
+
+ foreach my $char (split //, $code) {
+  if ($in_single_quote) {
+   $statement .= $char;
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq "'") {
+    $in_single_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_double_quote) {
+   $statement .= $char;
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '"') {
+    $in_double_quote = 0;
+   }
+   next;
+  }
+
+  if ($char eq "'") {
+   $in_single_quote = 1;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '"') {
+   $in_double_quote = 1;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '(') {
+   ++$paren_depth;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq ')') {
+   --$paren_depth if $paren_depth > 0;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '{') {
+   ++$brace_depth;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '}') {
+   --$brace_depth if $brace_depth > 0;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq '[') {
+   ++$bracket_depth;
+   $statement .= $char;
+   next;
+  }
+
+  if ($char eq ']') {
+   --$bracket_depth if $bracket_depth > 0;
+   $statement .= $char;
+   next;
+  }
+
+  if (
+   $char eq ';' &&
+   $paren_depth == 0 &&
+   $brace_depth == 0 &&
+   $bracket_depth == 0
+  ) {
+   my $trimmed = _trim_action_ir_value($statement);
+   push @statements, $trimmed if defined($trimmed) && length($trimmed);
+   $statement = '';
+   next;
+  }
+
+  $statement .= $char;
  }
 
+ my $trimmed = _trim_action_ir_value($statement);
+ push @statements, $trimmed if defined($trimmed) && length($trimmed);
  return \@statements
 }
 

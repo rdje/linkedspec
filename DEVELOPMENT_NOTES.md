@@ -144,6 +144,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
+  - action-rewriter canonical action-IR nested-semicolon lock:
+    - canonical action-IR statement splitting now ignores semicolons inside nested helper payload expressions (e.g. `do { ...; ... }`) when building statement-level events,
+    - covered by `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -237,6 +240,9 @@ It should not be reframed as a strict EBNF clone.
   - `_lower_action_code_from_canonical_ir(...)` consumes canonical action-IR events to apply helper lowerings event-by-event,
   - lowering is now canonical-IR-first instead of whole-code regex-pass-first,
   - unresolved helper forms remain unmodified when contract lowering does not apply, preserving unresolved-helper diagnostics.
+- Canonical action-IR statement splitting is now nesting-aware:
+  - `_split_action_ir_statements(...)` now scans with depth/quote tracking over `()`, `{}`, `[]`, and quoted strings,
+  - nested semicolons inside helper payloads no longer fragment helper statements into false `RAW_PERL` canonical fallback entries.
 
 ## Change Discipline
 Before each commit:
