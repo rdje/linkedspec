@@ -1900,6 +1900,10 @@ sub _split_action_ir_statements {
  my $in_slash_quote = 0;
  my $slash_quote_segments_remaining = 0;
  my $slash_quote_escape_next = 0;
+ my $in_angle_quote = 0;
+ my $angle_quote_segments_remaining = 0;
+ my $angle_quote_depth = 0;
+ my $angle_quote_escape_next = 0;
  my $in_line_comment = 0;
  my $escape_next = 0;
 
@@ -1947,6 +1951,23 @@ sub _split_action_ir_statements {
    }
    next;
   }
+  if ($in_angle_quote) {
+   $statement .= $char;
+   if ($angle_quote_escape_next) {
+    $angle_quote_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $angle_quote_escape_next = 1;
+   } elsif ($char eq '<') {
+    ++$angle_quote_depth;
+   } elsif ($char eq '>') {
+    --$angle_quote_depth if $angle_quote_depth > 0;
+    if ($angle_quote_depth == 0) {
+     --$angle_quote_segments_remaining if $angle_quote_segments_remaining > 0;
+     $in_angle_quote = 0 if $angle_quote_segments_remaining == 0;
+    }
+   }
+   next;
+  }
   if ($char eq "'") {
    $in_single_quote = 1;
    $statement .= $char;
@@ -1981,7 +2002,6 @@ sub _split_action_ir_statements {
    $statement .= $char;
    next;
   }
-
   if ($char eq '/') {
    my $slash_context = $statement;
    $slash_context =~ s/\s+$//o;
@@ -1997,6 +2017,20 @@ sub _split_action_ir_statements {
     $in_slash_quote = 1;
     $slash_quote_segments_remaining = 1;
     $slash_quote_escape_next = 0;
+    $statement .= $char;
+    next;
+   }
+  }
+  if ($char eq '<') {
+   my $angle_context = $statement;
+   $angle_context =~ s/\s+$//o;
+
+   if ($angle_context =~ /(?:^|[^\$\w:])(?<op>s|tr|y|qr|qq|qx|q)\s*$/o) {
+    my $op = $+{op};
+    $in_angle_quote = 1;
+    $angle_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
+    $angle_quote_depth = 1;
+    $angle_quote_escape_next = 0;
     $statement .= $char;
     next;
    }
