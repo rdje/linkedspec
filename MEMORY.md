@@ -37,6 +37,8 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `3e7de01` - Document language-agnostic .spec end-state and guardrails
+- `69c53f1` - Document pause for _split_action_ir_statements hardening track
 - `3b1e7d9` - Backbone item #3 follow-up: harden canonical splitter for pipe quotes
 - `0ca3a48` - Backbone item #3 follow-up: harden canonical splitter for angle quotes
 - `879585d` - Backbone item #3 follow-up: harden canonical splitter for slash quotes
@@ -80,12 +82,22 @@ When resuming after interruption:
 - Continue post-item-#3 follow-up toward language-neutral actions:
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
+  - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 language-agnostic readiness follow-up in `perl/LinkedSpec.pm`:
+  - action-rewriter metadata now exposes `raw_perl_dependency_count`, `raw_perl_dependency_statements`, and `language_agnostic_action_ir_ready` per rule,
+  - readiness is now explicitly false when either RAW_PERL fallback dependency or unresolved helper diagnostics are present.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_language_agnostic_readiness`.
+- Re-ran full validation after language-agnostic readiness follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (53 tests)
 - User reaffirmed final objective: make `.spec` language-agnostic and stop relying on embedded Perl code-blocks; keep generated host-language code within controlled canonical forms to reduce splitter fragility and simplify multi-backend portability.
 - User-directed decision: pause further `_split_action_ir_statements(...)` hardening for now and revisit only when needed by concrete regressions or unsupported production patterns.
 - Landed Backbone item #3 canonical splitter pipe-quote follow-up in `perl/LinkedSpec.pm`:

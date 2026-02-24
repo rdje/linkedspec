@@ -1017,6 +1017,43 @@ SPEC
     is($raw_evt->{args}{code}, 'my $tmp = 1', 'canonical RAW_PERL fallback event captures non-helper statement');
     like($ret_evt->{args}{arg}, qr/\$x \+ 1/, 'canonical RETURN_A event captures expression payload');
 };
+subtest 'action_rewriter_meta_exposes_language_agnostic_readiness' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); return_a(Top) }
+
+Mixed::&
+ /b/ -> Mixed { call(Leaf); my $tmp = 1 }
+
+Unresolved::&
+ /c/ -> Unresolved { return_a(Leaf) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return_a(Leaf) }
+ /c/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for language-agnostic readiness metadata check');
+
+    my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($top_meta->{raw_perl_dependency_count}, 0, 'helper-only rule reports zero raw-Perl dependency count');
+    is_deeply($top_meta->{raw_perl_dependency_statements}, [], 'helper-only rule reports empty raw-Perl dependency statement list');
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'helper-only rule reports language-agnostic action-IR readiness');
+
+    my $mixed_meta = $descr->{spec}{Mixed}{meta}{action_rewriter};
+    is($mixed_meta->{raw_perl_dependency_count}, 1, 'mixed rule reports raw-Perl fallback dependency count');
+    is_deeply($mixed_meta->{raw_perl_dependency_statements}, ['my $tmp = 1'], 'mixed rule reports canonical raw-Perl dependency statement payload');
+    ok(!$mixed_meta->{language_agnostic_action_ir_ready}, 'mixed rule with raw-Perl fallback is not language-agnostic action-IR ready');
+
+    my $unresolved_meta = $descr->{spec}{Unresolved}{meta}{action_rewriter};
+    is($unresolved_meta->{unresolved_helper_count}, 1, 'unresolved helper rule reports unresolved helper count');
+    is($unresolved_meta->{raw_perl_dependency_count}, 0, 'unresolved helper rule can still report zero raw-Perl fallback dependency count');
+    ok(!$unresolved_meta->{language_agnostic_action_ir_ready}, 'unresolved helper rule is not language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 

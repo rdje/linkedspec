@@ -1,6 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Language-Agnostic Action Readiness Metadata
+## Summary
+Added explicit action-rewriter metadata that quantifies raw Perl fallback dependency and reports per-rule language-agnostic action readiness, so migration away from embedded Perl code-block behavior in `.spec` can be tracked and enforced incrementally.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended action-rewriter metadata assembly in `LinkedSpec.pm` (`_build_rule_ir_emit_context(...)`):
+  - added `raw_perl_dependency_count` (canonical RAW_PERL fallback statement count),
+  - added `raw_perl_dependency_statements` (deduplicated canonical RAW_PERL statement payloads),
+  - added `language_agnostic_action_ir_ready` readiness flag (`true` only when both raw-Perl fallback count and unresolved-helper count are zero).
+- Migration impact:
+  - rule metadata now directly exposes whether an action block is currently backend-neutral-ready versus still dependent on fallback/raw-host-language behavior.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_language_agnostic_readiness`
+  - verifies readiness behavior for:
+    - helper-only rules (`ready`),
+    - rules with RAW_PERL fallback statements (`not ready`),
+    - rules with unresolved helpers (`not ready` even without RAW_PERL fallback).
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=53`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Pipe-Quote-Safe Canonical Statement Splitting
 ## Summary
 Hardened canonical action-IR statement splitting to ignore semicolons inside pipe-delimited Perl quote-like payloads (e.g. `qr|...|`), preventing fallback-fragment noise for pipe-quote payload statements while preserving helper lowering behavior.

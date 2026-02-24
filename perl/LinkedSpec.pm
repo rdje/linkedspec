@@ -1248,6 +1248,21 @@ sub _build_rule_ir_emit_context {
  my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc, $rewrite_rules);
 
  my @rewrite_contract_ids = map { $_->{id} } @$rewrite_rules;
+ my @raw_perl_dependency_statements;
+ my %seen_raw_perl_dependency_statement;
+ foreach my $event (@{$rewrite_diag_acc->{canonical_action_ir_events}}) {
+  next unless ($event->{kind} // '') eq 'RAW_PERL';
+  my $raw_code = (ref($event->{args}) eq 'HASH') ? $event->{args}{code} : $event->{raw};
+  $raw_code = _trim_action_ir_value($raw_code);
+  next unless defined($raw_code) && length($raw_code);
+  next if $seen_raw_perl_dependency_statement{$raw_code}++;
+  push @raw_perl_dependency_statements, $raw_code;
+ }
+ my $raw_perl_dependency_count = $rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0;
+ my $language_agnostic_action_ir_ready = (
+  $raw_perl_dependency_count == 0 &&
+  ($rewrite_diag_acc->{unresolved_helper_count} || 0) == 0
+ ) ? 1 : 0;
 
  my $action_rewriter_meta = {
   unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
@@ -1262,6 +1277,9 @@ sub _build_rule_ir_emit_context {
   canonical_action_ir_hits  => {%{$rewrite_diag_acc->{canonical_action_ir_hits}}},
   canonical_action_ir_events => [@{$rewrite_diag_acc->{canonical_action_ir_events}}],
   canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
+  raw_perl_dependency_count => $raw_perl_dependency_count,
+  raw_perl_dependency_statements => \@raw_perl_dependency_statements,
+  language_agnostic_action_ir_ready => $language_agnostic_action_ir_ready,
   rewrite_contract_ids    => \@rewrite_contract_ids,
  };
 
