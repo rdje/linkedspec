@@ -37,6 +37,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `9d0c75f` - Backbone item #3 follow-up: add language-agnostic blocker statement metadata
 - `6c71e21` - Backbone item #3 follow-up: add language-agnostic action readiness metadata
 - `3e7de01` - Document language-agnostic .spec end-state and guardrails
 - `69c53f1` - Document pause for _split_action_ir_statements hardening track
@@ -91,6 +92,13 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed LinkedSpec.pm maintainability documentation pass in `perl/LinkedSpec.pm`:
+  - added subroutine-level docstring-style comment headers (`Function`, `Purpose`, `Args`, `Returns`) across logging, parser generation, RuleIR, rewrite, and parser-resolution helpers,
+  - added explanatory comments for important bootstrap/parser globals and structural parser/rewrite sections to improve maintainability and handoff readability.
+- Re-ran full validation after documentation pass:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (54 tests)
 - Landed Backbone item #3 language-agnostic blocker statement follow-up in `perl/LinkedSpec.pm`:
   - unresolved helper diagnostics are now captured at statement granularity and exposed as `unresolved_helper_events` and `unresolved_helper_statements`,
   - action-rewriter metadata now exposes consolidated blocker statement surface via `language_agnostic_action_ir_blocker_statements` and `language_agnostic_action_ir_blocker_statement_count`.

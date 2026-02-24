@@ -25,7 +25,13 @@ use constant {
 # Global verbosity level - can be set externally for debugging
 our $DUMP_VERBOSITY = DUMP_NONE;
 
-# Single logging function that handles everything
+#------------------------------------------------------------------------------
+# Function: log_output
+# Purpose : Central logging entrypoint with verbosity-gating and optional file
+#           mirroring to $main::LOG_FILE.
+# Args    : ($level, $message, $context)
+# Returns : undef (side effects only: console/file output)
+#------------------------------------------------------------------------------
 sub log_output {
     my ($level, $message, $context) = @_;
     
@@ -52,7 +58,13 @@ sub log_output {
     }
 }
 
-# Simple function for Data::Dumper output (no timestamp needed)
+#------------------------------------------------------------------------------
+# Function: log_dump
+# Purpose : Lightweight dump writer used for already-formatted debug payloads
+#           (e.g. Data::Dumper output), without timestamp decoration.
+# Args    : ($message)
+# Returns : undef (side effects only: console/file output)
+#------------------------------------------------------------------------------
 sub log_dump {
     my ($message) = @_;
     print $message;
@@ -65,13 +77,24 @@ sub log_dump {
     }
 }
 
-# UVM-style verbosity check function
+#------------------------------------------------------------------------------
+# Function: should_dump
+# Purpose : Small helper that standardizes verbosity threshold checks.
+# Args    : ($level)
+# Returns : boolean (true when current verbosity enables this level)
+#------------------------------------------------------------------------------
 sub should_dump {
     my ($level) = @_;
     return $DUMP_VERBOSITY >= $level;
 }
 
-# DSL validation and error reporting functions
+#------------------------------------------------------------------------------
+# Function: get_dsl_context
+# Purpose : Build line-oriented context around a byte-position in .spec text so
+#           validation errors can report useful nearby source.
+# Args    : ($spec_content, $position)
+# Returns : hashref { line_number, current_line, prev_line, next_line, position }
+#------------------------------------------------------------------------------
 sub get_dsl_context {
     my ($spec_content, $position) = @_;
     
@@ -96,6 +119,13 @@ sub get_dsl_context {
     };
 }
 
+#------------------------------------------------------------------------------
+# Function: report_dsl_error
+# Purpose : Format and emit a human-readable DSL error message with local
+#           source context and optional remediation guidance.
+# Args    : ($spec_content, $position, $error_msg, $suggestion)
+# Returns : undef (side effects only: logging)
+#------------------------------------------------------------------------------
 sub report_dsl_error {
     my ($spec_content, $position, $error_msg, $suggestion) = @_;
     
@@ -119,7 +149,12 @@ sub report_dsl_error {
     log_output(DUMP_NONE, $error, "DSL validation failed");
 }
 
-# Input validation functions
+#------------------------------------------------------------------------------
+# Function: validate_spec_content
+# Purpose : Validate raw .spec input envelope before deeper syntax parsing.
+# Args    : ($spec_content)
+# Returns : boolean (true if minimal shape/entry rule expectations are met)
+#------------------------------------------------------------------------------
 sub validate_spec_content {
     my ($spec_content) = @_;
     
@@ -161,6 +196,13 @@ sub validate_spec_content {
     return 1;
 }
 
+#------------------------------------------------------------------------------
+# Function: validate_rule_definition
+# Purpose : Structural sanity-check for generated rule definitions in the
+#           descriptor (handler presence, regex shape, regex compilability).
+# Args    : ($rule_name, $rule_def)
+# Returns : boolean
+#------------------------------------------------------------------------------
 sub validate_rule_definition {
     my ($rule_name, $rule_def) = @_;
     
@@ -197,6 +239,13 @@ sub validate_rule_definition {
     return 1;
 }
 
+#------------------------------------------------------------------------------
+# Function: validate_gdata_references
+# Purpose : Validate integrity between gdata dispatch regexes and generated
+#           spec rules, including gdata indirections embedded in rules.
+# Args    : ($gdata, $spec)
+# Returns : boolean
+#------------------------------------------------------------------------------
 sub validate_gdata_references {
     my ($gdata, $spec) = @_;
     
@@ -268,6 +317,13 @@ sub validate_gdata_references {
     return 1;
 }
 
+#------------------------------------------------------------------------------
+# Function: validate_dsl_syntax
+# Purpose : Perform rule-level DSL checks (duplicate definitions, regex literal
+#           validity, undefined/unused rule warnings).
+# Args    : ($spec_content)
+# Returns : boolean
+#------------------------------------------------------------------------------
 sub validate_dsl_syntax {
     my ($spec_content) = @_;
     
@@ -348,6 +404,13 @@ sub validate_dsl_syntax {
     return 1;
 }
 
+#------------------------------------------------------------------------------
+# Function: extract_regex_literals_from_rule_rhs
+# Purpose : Extract slash-delimited regex literals from a rule RHS while
+#           respecting escaped delimiters.
+# Args    : ($rhs)
+# Returns : list of regex literal strings (including surrounding /.../)
+#------------------------------------------------------------------------------
 sub extract_regex_literals_from_rule_rhs {
     my ($rhs) = @_;
     my @regex_literals;
@@ -359,7 +422,14 @@ sub extract_regex_literals_from_rule_rhs {
     return @regex_literals;
 }
 
+#------------------------------------------------------------------------------
+# Bootstrap parser metadata and global state
+#------------------------------------------------------------------------------
+# Maps bootstrap rule id => index in $spec_descr; avoids hardcoded positional
+# assumptions when bootstrap handlers dispatch recursively.
 my %bootstrap_rule_index;
+
+# Declarative mapping from entry-label suffix markers to rule execution family.
 my $node_type     = {
 	'&'       => 'AND',
 	'|'       => 'OR',
@@ -368,13 +438,17 @@ my $node_type     = {
 	'?'       => 'REP_OPT'
 };
 
+# Min/max repetition semantics for REP_* rule families.
 my $rep_nodes_minmax = {
 	REP_PLUS=> [1, 10**9],
 	REP_STAR=> [0, 10**9],
 	REP_OPT => [0, 1]
 };
 
+# Legacy generation toggle: when enabled, emit parser descriptor Perl text.
 my $pm_drive;
+
+# Hardcoded bootstrap grammar used to parse .spec into intermediate entries.
 my $spec_descr = [
 {# Spec			-0-
  id => 'SPEC_ROOT',
@@ -683,6 +757,7 @@ if (defined $bootstrap_rule_index{CURLY_BRACE}
  @bootstrap_cbrace_res = @{$spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}};
 }
 
+# Bootstrap scanner bundles derived from tagged bootstrap rules.
 my $gdata = {
  startREs       => LinkedRE::oredRE(@bootstrap_start_res),
  start_dispatch => \@bootstrap_start_dispatch,
@@ -693,7 +768,15 @@ my $gdata = {
 # my $testdata = "999  + (3 + (7 - 9 + (arr + 99 - ZZAA)))";
 # $file = qx(cat ~/specfiletest.txt);
 # Get(\$file)->(\$testdata);
+# Top-level entry rule selected while compiling the .spec source.
 my $top_rule;
+#------------------------------------------------------------------------------
+# Function: Get
+# Purpose : Compile a .spec source into a runnable parser coderef (or return
+#           descriptor/parse-only outputs based on options).
+# Args    : ($spec_scalar_ref, %options)
+# Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
+#------------------------------------------------------------------------------
 sub Get {
  log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
  
@@ -808,6 +891,13 @@ sub Get {
  return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
 }
 
+#------------------------------------------------------------------------------
+# Function: _select_rule_handler_variant
+# Purpose : Deterministically map a rule shape (node type + code mix) to the
+#           handler template variant that should emit runtime behavior.
+# Args    : ($node_type, $acode_count, $bcode_count, $regex_count)
+# Returns : variant id string
+#------------------------------------------------------------------------------
 sub _select_rule_handler_variant {
  my ($node_type, $acode_count, $bcode_count, $regex_count) = @_;
 
@@ -830,6 +920,13 @@ sub _select_rule_handler_variant {
  return '_default'
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_rule_execution_meta
+# Purpose : Build normalized metadata describing how a rule executes, including
+#           action mode, selected variant and loop behavior.
+# Args    : named args hash
+# Returns : hashref metadata
+#------------------------------------------------------------------------------
 sub _build_rule_execution_meta {
  my (%args) = @_;
 
@@ -882,6 +979,13 @@ sub _build_rule_execution_meta {
  return $meta
 }
 
+#------------------------------------------------------------------------------
+# Function: spec_descr
+# Purpose : Convert parsed bootstrap entries into the descriptor's `spec` hash
+#           (rule label => compiled rule info).
+# Args    : ($parsed_spec_entries)
+# Returns : hashref of spec rule definitions
+#------------------------------------------------------------------------------
 sub spec_descr {
 my $specretv = shift;
 
@@ -931,6 +1035,13 @@ my $specretv = shift;
  return $result
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_action_lowering_contracts
+# Purpose : Declare helper-lowering contracts (scan pattern + lowering rewrite
+#           semantics + IR identity) for action rewriting.
+# Args    : ($label)
+# Returns : arrayref of contract hashes
+#------------------------------------------------------------------------------
 sub _build_action_lowering_contracts {
  my ($label) = @_;
 
@@ -1103,6 +1214,13 @@ sub _build_action_lowering_contracts {
  ]
 }
 
+#------------------------------------------------------------------------------
+# Function: _collect_rule_ir
+# Purpose : Normalize parsed bootstrap entry tuples into a structured RuleIR
+#           payload consumed by planning/validation/emission stages.
+# Args    : ($einfo)
+# Returns : hashref RuleIR
+#------------------------------------------------------------------------------
 sub _collect_rule_ir {
  my ($einfo) = @_;
 
@@ -1158,6 +1276,12 @@ sub _collect_rule_ir {
  return $rule_ir
 }
 
+#------------------------------------------------------------------------------
+# Function: _plan_rule_ir_meta
+# Purpose : Derive deterministic execution metadata from RuleIR counts/types.
+# Args    : ($rule_ir)
+# Returns : hashref execution metadata
+#------------------------------------------------------------------------------
 sub _plan_rule_ir_meta {
  my ($rule_ir) = @_;
 
@@ -1170,6 +1294,13 @@ sub _plan_rule_ir_meta {
  )
 }
 
+#------------------------------------------------------------------------------
+# Function: _validate_rule_ir_or_exit
+# Purpose : Enforce rule-shape invariants before emission (notably disallowing
+#           mixed ACTION + BLIND CALL forms in one rule).
+# Args    : ($rule_ir, $rule_meta)
+# Returns : 1 on success (may exit on critical incompatibility)
+#------------------------------------------------------------------------------
 sub _validate_rule_ir_or_exit {
  my ($rule_ir, $rule_meta) = @_;
 
@@ -1186,6 +1317,13 @@ sub _validate_rule_ir_or_exit {
  return 1
 }
 
+#------------------------------------------------------------------------------
+# Function: _normalize_rule_code_chunks
+# Purpose : Rewrite and join lifecycle code chunks while accumulating rewrite
+#           diagnostics across each transformed chunk.
+# Args    : ($label, $chunks, $rewrite_diag_acc, $rewrite_rules)
+# Returns : normalized code string
+#------------------------------------------------------------------------------
 sub _normalize_rule_code_chunks {
  my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
 
@@ -1200,6 +1338,13 @@ sub _normalize_rule_code_chunks {
  return join ";\n", @normalized
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_rule_ir_emit_context
+# Purpose : Build fully-rewritten emit context (ACODE/BCODE/gdata/lifecycle
+#           chunks) plus rich action-rewriter diagnostics metadata.
+# Args    : ($rule_ir)
+# Returns : hashref emit context
+#------------------------------------------------------------------------------
 sub _build_rule_ir_emit_context {
  my ($rule_ir) = @_;
  my $label = $rule_ir->{label};
@@ -1332,6 +1477,13 @@ sub _build_rule_ir_emit_context {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: spec_entry
+# Purpose : Compile one parsed rule entry through staged RuleIR flow and return
+#           a final (label, rule_info_hashref) pair for descriptor assembly.
+# Args    : ($einfo)
+# Returns : ($label, $rule_info_hashref)
+#------------------------------------------------------------------------------
 sub spec_entry {
 my $einfo = shift;
 
@@ -1678,6 +1830,13 @@ my @'.$label.';
  return ($label, \%info)
 }
 
+#------------------------------------------------------------------------------
+# Function: spec_gdata
+# Purpose : Build compiled dispatch regex bundles (gdata) for each rule from
+#           rule-to-rule gdata references collected during descriptor build.
+# Args    : ($spec_hashref)
+# Returns : hashref rule => compiled LinkedRE regex
+#------------------------------------------------------------------------------
 sub spec_gdata {
 my $sg = shift;
 
@@ -1739,6 +1898,13 @@ my $sg = shift;
  
  return $result
 }
+#------------------------------------------------------------------------------
+# Function: _find_unresolved_action_helpers
+# Purpose : Detect helper forms that remain unresolved after rewrite/lowering
+#           and report both counts and statement-level events.
+# Args    : ($code, $rewrite_rules)
+# Returns : hashref unresolved diagnostics payload
+#------------------------------------------------------------------------------
 sub _find_unresolved_action_helpers {
  my ($code, $rewrite_rules) = @_;
 
@@ -1767,6 +1933,12 @@ sub _find_unresolved_action_helpers {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _trim_action_ir_value
+# Purpose : Shared whitespace normalization helper for action-IR payload text.
+# Args    : ($value)
+# Returns : trimmed scalar or undef
+#------------------------------------------------------------------------------
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -1774,6 +1946,13 @@ sub _trim_action_ir_value {
  return $value
 }
 
+#------------------------------------------------------------------------------
+# Function: _scan_contract_ir_events
+# Purpose : Contract-specific scanner that extracts helper invocation events
+#           and parsed arguments from raw action code.
+# Args    : ($contract, $code)
+# Returns : arrayref of event hashes
+#------------------------------------------------------------------------------
 sub _scan_contract_ir_events {
  my ($contract, $code) = @_;
  my $id = $contract->{id} // '';
@@ -1844,6 +2023,13 @@ sub _scan_contract_ir_events {
  return \@events
 }
 
+#------------------------------------------------------------------------------
+# Function: _collect_action_helper_ir_nodes
+# Purpose : Aggregate helper-action IR hits/events across all rewrite contracts
+#           before lowering is applied.
+# Args    : ($code, $rewrite_rules)
+# Returns : hashref helper-action IR diagnostics
+#------------------------------------------------------------------------------
 sub _collect_action_helper_ir_nodes {
  my ($code, $rewrite_rules) = @_;
 
@@ -1874,6 +2060,13 @@ sub _collect_action_helper_ir_nodes {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _canonicalize_helper_action_ir_event
+# Purpose : Convert contract-level helper event identity into canonical IR
+#           event kind + normalized args for downstream lowering/metadata.
+# Args    : ($label, $event)
+# Returns : canonical event hashref
+#------------------------------------------------------------------------------
 sub _canonicalize_helper_action_ir_event {
  my ($label, $event) = @_;
 
@@ -1931,6 +2124,13 @@ sub _canonicalize_helper_action_ir_event {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _split_action_ir_statements
+# Purpose : Statement splitter for action code that honors nesting/quotes and
+#           known Perl quote-like forms so semicolon boundaries are robust.
+# Args    : ($code)
+# Returns : arrayref of top-level statement strings
+#------------------------------------------------------------------------------
 sub _split_action_ir_statements {
  my ($code) = @_;
 
@@ -2171,6 +2371,13 @@ sub _split_action_ir_statements {
  return \@statements
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_canonical_action_ir_events
+# Purpose : Promote helper events + fallback statements into canonical action
+#           IR event stream with per-kind hit accounting.
+# Args    : ($label, $code, $helper_events)
+# Returns : hashref canonical action-IR diagnostics
+#------------------------------------------------------------------------------
 sub _build_canonical_action_ir_events {
  my ($label, $code, $helper_events) = @_;
 
@@ -2224,6 +2431,13 @@ sub _build_canonical_action_ir_events {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _lower_action_code_from_canonical_ir
+# Purpose : Apply lowering contracts by replaying canonical helper events on
+#           the original source string while preserving non-helper regions.
+# Args    : ($label, $code, $rewrite_rules, $canonical_ir_diag)
+# Returns : lowered code string
+#------------------------------------------------------------------------------
 sub _lower_action_code_from_canonical_ir {
  my ($label, $code, $rewrite_rules, $canonical_ir_diag) = @_;
 
@@ -2251,6 +2465,13 @@ sub _lower_action_code_from_canonical_ir {
  return $rewritten
 }
 
+#------------------------------------------------------------------------------
+# Function: _accumulate_action_rewrite_diagnostics
+# Purpose : Merge per-chunk diagnostics into a rule-level accumulator used for
+#           metadata emission and migration readiness reporting.
+# Args    : ($acc, $diag)
+# Returns : updated accumulator hashref
+#------------------------------------------------------------------------------
 sub _accumulate_action_rewrite_diagnostics {
  my ($acc, $diag) = @_;
  return $acc unless $acc && $diag && ref($diag) eq 'HASH';
@@ -2304,6 +2525,13 @@ sub _accumulate_action_rewrite_diagnostics {
  return $acc
 }
 
+#------------------------------------------------------------------------------
+# Function: _rewrite_action_code_with_diagnostics
+# Purpose : One-stop action rewrite pipeline: helper IR scan, canonical IR
+#           assembly, lowering, unresolved detection, and diag packaging.
+# Args    : ($label, $code, $rewrite_rules)
+# Returns : ($rewritten_code, $diag_hashref)
+#------------------------------------------------------------------------------
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
 
@@ -2325,6 +2553,12 @@ sub _rewrite_action_code_with_diagnostics {
   canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
  })
 }
+#------------------------------------------------------------------------------
+# Function: _build_action_rewrite_rules
+# Purpose : Compile apply-ready rewrite rules from lowering contracts.
+# Args    : ($label)
+# Returns : arrayref rewrite rules
+#------------------------------------------------------------------------------
 sub _build_action_rewrite_rules {
  my ($label) = @_;
 
@@ -2338,6 +2572,12 @@ sub _build_action_rewrite_rules {
  }} @$contracts]
 }
 
+#------------------------------------------------------------------------------
+# Function: _apply_action_rewrite_pipeline
+# Purpose : Legacy/compat utility that applies ordered rewrite rules directly.
+# Args    : ($code, $rules)
+# Returns : rewritten code string
+#------------------------------------------------------------------------------
 sub _apply_action_rewrite_pipeline {
  my ($code, $rules) = @_;
  foreach my $rule (@$rules) {
@@ -2346,6 +2586,12 @@ sub _apply_action_rewrite_pipeline {
  return $code
 }
 
+#------------------------------------------------------------------------------
+# Function: call_spec_handler_subst
+# Purpose : Public helper-surface rewrite API used by rule compilation/tests.
+# Args    : ($label, $code)
+# Returns : rewritten code string
+#------------------------------------------------------------------------------
 sub call_spec_handler_subst {
 my ($label, $code) = @_;
 
@@ -2357,6 +2603,13 @@ my ($label, $code) = @_;
 }
 
 
+#------------------------------------------------------------------------------
+# Function: _resolve_local_spec_path
+# Purpose : Resolve a spec name/path via direct file match, local <name>.spec,
+#           then module-relative specs/ lookup.
+# Args    : ($spec_name)
+# Returns : resolved file path or undef
+#------------------------------------------------------------------------------
 sub _resolve_local_spec_path {
  my ($spec_name) = @_;
  return undef unless defined $spec_name && length $spec_name;
@@ -2384,6 +2637,13 @@ sub _resolve_local_spec_path {
  return undef
 }
 
+#------------------------------------------------------------------------------
+# Function: get_parser
+# Purpose : Public parser factory that resolves a spec, validates input, loads
+#           fallback resolver lazily, compiles parser, and returns coderef.
+# Args    : ($spec_name, %opts)
+# Returns : parser coderef or undef
+#------------------------------------------------------------------------------
 sub get_parser {
  my ($spec_name, @opts) = @_;
 
@@ -2441,7 +2701,13 @@ sub get_parser {
  return Get(\$content, @opts)
 }
 
-sub AUTOLOAD   {
+#------------------------------------------------------------------------------
+# Function: AUTOLOAD
+# Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
+# Args    : standard Perl AUTOLOAD args
+# Returns : whatever plugin call returns
+#------------------------------------------------------------------------------
+sub AUTOLOAD {
  my $ok = eval {require PPlugin; 1};
  die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
  PPlugin->exec($AUTOLOAD, @_)

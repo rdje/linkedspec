@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - LinkedSpec.pm Maintainability Pass: Subroutine Docstrings and Structural Comments
+## Summary
+Performed a broad documentation pass on `LinkedSpec.pm` to improve maintainability and readability by adding docstring-style comment headers for core subs, clarifying top-level parser globals, and annotating key compilation/rewrite pipeline responsibilities.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added structured comment headers (`Function`, `Purpose`, `Args`, `Returns`) to major subroutines across:
+  - logging/validation helpers,
+  - parser compilation entrypoints (`Get`, `get_parser`),
+  - RuleIR planning/emission helpers,
+  - action-rewriter and canonical action-IR pipeline helpers,
+  - plugin dispatch bridge (`AUTOLOAD`).
+- Added explanatory comments for important top-level variables and bootstrap structures:
+  - bootstrap rule index registry,
+  - node/repetition semantics maps,
+  - bootstrap grammar descriptor and gdata scanner bundles,
+  - top-rule parse state.
+- Added section-level readability anchors around bootstrap metadata and parser/rewrite flow areas without changing runtime behavior.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=54`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Language-Agnostic Blocker Statement Metadata
 ## Summary
 Extended action-rewriter rule metadata with explicit blocker statement details so language-agnostic migration can prioritize concrete unresolved-helper and RAW_PERL dependency statements per rule.

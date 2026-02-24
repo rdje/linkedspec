@@ -56,6 +56,11 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 4. Improve diagnostics, determinism, and maintainability.
 5. Maintain backward compatibility with existing specs.
 
+## Maintainability Documentation Policy
+- Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
+- Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
+- Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+
 ## Open Technical Work
 - Build robust regression harness for all existing specs.
 - Fix known `tclite.spec` regex issue.
