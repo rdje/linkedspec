@@ -135,6 +135,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter helper action-IR metadata lock:
     - rule metadata now exposes helper action-IR nodes/hit counts collected before lowering,
     - covered by `action_rewriter_meta_exposes_helper_action_ir_nodes`.
+  - action-rewriter helper action-IR payload event lock:
+    - rule metadata now exposes parsed helper payload events (`helper_action_ir_events`) with argument extraction,
+    - covered by `action_rewriter_meta_exposes_helper_action_ir_payload_events`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -216,6 +219,10 @@ It should not be reframed as a strict EBNF clone.
   - lowering contracts now carry canonical `ir_node` identities,
   - `_collect_action_helper_ir_nodes(...)` records helper action-IR hits before textual lowering is applied,
   - aggregated IR-node counters are surfaced at `spec->{rule}{meta}{action_rewriter}` as `helper_action_ir_count`, `helper_action_ir_nodes`, and `helper_action_ir_hits`.
+- Helper action-IR metadata now includes structured helper payload events:
+  - helper invocations are scanned pre-lowering with `_scan_contract_ir_events(...)`,
+  - payload argument strings are normalized with `_trim_action_ir_value(...)`,
+  - `spec->{rule}{meta}{action_rewriter}{helper_action_ir_events}` now provides per-invocation payload records (`ir_node`, `contract_id`, `raw`, `args`) to support canonical action-IR promotion.
 
 ## Change Discipline
 Before each commit:

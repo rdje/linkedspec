@@ -1209,6 +1209,7 @@ sub _build_rule_ir_emit_context {
   unresolved_helper_count => 0,
   helper_action_ir_hits   => {},
   helper_action_ir_count  => 0,
+  helper_action_ir_events => [],
  };
 
  my @ACODEs;
@@ -1251,6 +1252,7 @@ sub _build_rule_ir_emit_context {
   helper_action_ir_count  => $rewrite_diag_acc->{helper_action_ir_count},
   helper_action_ir_nodes  => [sort keys %{$rewrite_diag_acc->{helper_action_ir_hits}}],
   helper_action_ir_hits   => {%{$rewrite_diag_acc->{helper_action_ir_hits}}},
+  helper_action_ir_events => [@{$rewrite_diag_acc->{helper_action_ir_events}}],
   rewrite_contract_ids    => \@rewrite_contract_ids,
  };
 
@@ -1711,25 +1713,110 @@ sub _find_unresolved_action_helpers {
  }
 }
 
+sub _trim_action_ir_value {
+ my ($value) = @_;
+ return undef unless defined $value;
+ $value =~ s/^\s*|\s*$//go;
+ return $value
+}
+
+sub _scan_contract_ir_events {
+ my ($contract, $code) = @_;
+ my $id = $contract->{id} // '';
+
+ my @events;
+ if ($id eq 'call') {
+  while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {callee => $+{callee}}};
+  }
+ } elsif ($id eq 'push_single_arg') {
+  while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {source => $+{source}}};
+  }
+ } elsif ($id eq 'push_target_arg') {
+  while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {source => $+{source}, target => $+{target}}};
+  }
+ } elsif ($id eq 'return_a') {
+  while ($code =~ /\breturn_a\s*\(\s*(?<label>\w+)(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
+  }
+ } elsif ($id eq 'return') {
+  while ($code =~ /\breturn\s*\(\s*(?<label>\w+)\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
+  }
+ } elsif ($id eq 'return_ma') {
+  while ($code =~ /\breturn_ma\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ } elsif ($id eq 'return_m') {
+  while ($code =~ /\breturn_m\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ } elsif ($id eq 'capture_macro') {
+  while ($code =~ /\$CAPTURE\b/g) {
+   push @events, {raw => $&, args => {}};
+  }
+ } elsif ($id eq 'capture') {
+  while ($code =~ /\bcapture\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ } elsif ($id eq 'capture_if') {
+  while ($code =~ /\bcapture_if\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ } elsif ($id eq 'capture_if_macro') {
+  while ($code =~ /\bCAPTURE_IF\s*\(\s*\)/g) {
+   push @events, {raw => $&, args => {}};
+  }
+ } elsif ($id eq 'ibacktrack_macro') {
+  while ($code =~ /\bIBACKTRACK\s*\(\s*\)/g) {
+   push @events, {raw => $&, args => {}};
+  }
+ } elsif ($id eq 'backtrack_macro') {
+  while ($code =~ /\bBACKTRACK\s*\(\s*\)/g) {
+   push @events, {raw => $&, args => {}};
+  }
+ } elsif ($id eq 'ibacktrack') {
+  while ($code =~ /\bibacktrack\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ } elsif ($id eq 'backtrack') {
+  while ($code =~ /\bbacktrack\s*\(\s*(?<label>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {label => $+{label}}};
+  }
+ }
+
+ return \@events
+}
+
 sub _collect_action_helper_ir_nodes {
  my ($code, $rewrite_rules) = @_;
 
  my %hits;
  my $total = 0;
+ my @events;
  foreach my $rule (@$rewrite_rules) {
   my $ir_node = $rule->{ir_node} // $rule->{id};
-  my $helper_re = $rule->{unresolved_pattern};
-  next unless $helper_re;
-  my $count = () = ($code =~ /$helper_re/g);
-  next unless $count;
-  $hits{$ir_node} += $count;
-  $total += $count;
+  my $rule_events = _scan_contract_ir_events($rule, $code);
+  next unless ref($rule_events) eq 'ARRAY' && @$rule_events;
+  foreach my $event (@$rule_events) {
+   push @events, {
+    ir_node     => $ir_node,
+    contract_id => $rule->{id},
+    raw         => $event->{raw},
+    args        => $event->{args} || {},
+   };
+   $hits{$ir_node} += 1;
+   $total += 1;
+  }
  }
 
  return {
   helper_action_ir_count => $total,
   helper_action_ir_hits  => \%hits,
   helper_action_ir_nodes => [sort keys %hits],
+  helper_action_ir_events => \@events,
  }
 }
 
@@ -1757,6 +1844,11 @@ sub _accumulate_action_rewrite_diagnostics {
   }
  }
 
+ my $ir_events = $diag->{helper_action_ir_events};
+ if ($ir_events && ref($ir_events) eq 'ARRAY' && @$ir_events) {
+  push @{$acc->{helper_action_ir_events}}, @$ir_events;
+ }
+
  return $acc
 }
 
@@ -1772,6 +1864,7 @@ sub _rewrite_action_code_with_diagnostics {
   helper_action_ir_count => $ir_diag->{helper_action_ir_count},
   helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
   helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
+  helper_action_ir_events => $ir_diag->{helper_action_ir_events},
  })
 }
 sub _build_action_rewrite_rules {

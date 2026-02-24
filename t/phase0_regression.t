@@ -937,6 +937,34 @@ SPEC
     is($meta->{helper_action_ir_hits}{CAPTURE_IF}, 1, 'helper action-IR CAPTURE_IF hit count is tracked');
     is($meta->{helper_action_ir_hits}{RETURN_A}, 1, 'helper action-IR RETURN_A hit count is tracked');
 };
+subtest 'action_rewriter_meta_exposes_helper_action_ir_payload_events' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); push(Leaf,Top); return_a(Top, $x + 1) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for helper action-IR payload event metadata check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    ok(ref($meta->{helper_action_ir_events}) eq 'ARRAY', 'helper action-IR metadata exposes payload events array');
+    is(scalar @{$meta->{helper_action_ir_events}}, 3, 'helper action-IR payload event count matches helper invocations');
+
+    my ($call_evt)   = grep { $_->{contract_id} eq 'call' } @{$meta->{helper_action_ir_events}};
+    my ($push_evt)   = grep { $_->{contract_id} eq 'push_target_arg' } @{$meta->{helper_action_ir_events}};
+    my ($return_evt) = grep { $_->{contract_id} eq 'return_a' } @{$meta->{helper_action_ir_events}};
+
+    is($call_evt->{args}{callee}, 'Leaf', 'CALL payload event captures callee argument');
+    is($push_evt->{args}{source}, 'Leaf', 'PUSH payload event captures source rule argument');
+    is($push_evt->{args}{target}, 'Top', 'PUSH payload event captures target list argument');
+    like($return_evt->{args}{arg}, qr/\$x \+ 1/, 'RETURN_A payload event captures expression argument payload');
+    is($return_evt->{args}{label}, 'Top', 'RETURN_A payload event captures label argument');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

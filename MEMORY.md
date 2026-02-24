@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `9bb6647` - Backbone item #3 follow-up: add helper action-IR metadata
 - `546bfd0` - Backbone item #3 follow-up: add lowering contract catalog
 - `ce6be32` - Backbone item #3 follow-up: add action rewriter diagnostics metadata
 - `1943f0a` - Backbone item #3: land structured action rewriter pipeline
@@ -65,11 +66,22 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - extend helper action-IR metadata from node IDs to structured argument payloads (helper + args),
-  - use that structured action-IR as the direct lowering input boundary for backend code emission,
+  - promote helper payload events into canonical action-IR nodes as the primary lowering input,
+  - extend action-IR coverage from helper forms to non-helper action snippets with explicit fallback markers,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 helper payload-event follow-up in `perl/LinkedSpec.pm`:
+  - helper invocation payload scanning is now explicit (`_scan_contract_ir_events`) with argument trimming (`_trim_action_ir_value`),
+  - helper action-IR aggregation now carries structured per-event payloads (`ir_node`, `contract_id`, `raw`, `args`) in addition to counts.
+- Extended `spec->{rule}{meta}{action_rewriter}` metadata:
+  - added `helper_action_ir_events` for structured helper payload introspection.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_helper_action_ir_payload_events`.
+- Re-ran full validation after helper payload-event follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (44 tests)
 - Landed Backbone item #3 helper action-IR follow-up in `perl/LinkedSpec.pm`:
   - helper-lowering contracts now carry explicit `ir_node` identities (e.g. `CALL`, `RETURN_A`, `CAPTURE_IF`),
   - helper action-IR node hits are now collected pre-lowering via `_collect_action_helper_ir_nodes(...)`,

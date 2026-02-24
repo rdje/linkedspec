@@ -1,6 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Structured Helper Action-IR Payload Events
+## Summary
+Extended helper action-IR reporting from node counters to structured payload events by parsing helper invocations before lowering and exposing the parsed argument payloads in rule metadata.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added structured helper payload parsing in `LinkedSpec.pm`:
+  - `_trim_action_ir_value(...)`
+  - `_scan_contract_ir_events(...)`
+- Extended helper action-IR collection:
+  - `_collect_action_helper_ir_nodes(...)` now aggregates structured events (`ir_node`, `contract_id`, `raw`, parsed `args`) rather than only counts.
+- Extended rewrite diagnostics aggregation:
+  - `_accumulate_action_rewrite_diagnostics(...)` now accumulates `helper_action_ir_events` across ACODE/BCODE/lifecycle chunks.
+- Extended action-rewriter metadata in `spec->{rule}{meta}{action_rewriter}` with:
+  - `helper_action_ir_events` (structured per-helper payload events).
+- Preserved rewrite/lowering behavior while improving action-IR introspection fidelity for upcoming canonical action-IR migration.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_helper_action_ir_payload_events`
+  - verifies parsed helper payload events and argument extraction for representative helper forms (`call`, `push(rule,target)`, `return_a(label,arg)`).
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=44`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Helper Action-IR Node Metadata
 ## Summary
 Extended the action rewriter to expose helper action-IR node usage in rule metadata, using the existing lowering-contract catalog as the shared source for IR-node detection and unresolved-helper diagnostics.
