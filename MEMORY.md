@@ -24,6 +24,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 4. Live markdown documents must be maintained before each commit.
 5. Commit workflow uses `git commit -F git_message_brief.txt`; brief file should be cleared after commit.
 6. Downstream consumers exist, but work on them is currently out of scope unless explicitly requested.
+7. `_split_action_ir_statements(...)` hardening is intentionally paused for now; only resume if a concrete regression or unsupported real pattern appears.
 
 ## Live Documents Contract
 These files are live and must be amended before any commit:
@@ -34,6 +35,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `3b1e7d9` - Backbone item #3 follow-up: harden canonical splitter for pipe quotes
 - `0ca3a48` - Backbone item #3 follow-up: harden canonical splitter for angle quotes
 - `879585d` - Backbone item #3 follow-up: harden canonical splitter for slash quotes
 - `6ce4333` - Backbone item #3 follow-up: harden canonical splitter for backtick quotes
@@ -74,11 +76,13 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - continue reducing `RAW_PERL` fallback usage and fallback-fragment noise by expanding structured action-IR coverage and tightening statement-boundary handling for additional Perl surface constructs (beyond nested payloads/comments/backticks/slash+angle+pipe quote-like payloads),
+  - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,
+  - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- User-directed decision: pause further `_split_action_ir_statements(...)` hardening for now and revisit only when needed by concrete regressions or unsupported production patterns.
 - Landed Backbone item #3 canonical splitter pipe-quote follow-up in `perl/LinkedSpec.pm`:
   - `_split_action_ir_statements(...)` now tracks pipe-delimited Perl quote-like payloads with escape handling and multi-segment support for `s|...|...|`/`tr|...|...|`/`y|...|...|`,
   - semicolons inside pipe-quote payload strings are ignored by top-level statement splitting, preventing fallback-fragment noise for statements like `my $re = qr|a;b|`.

@@ -116,7 +116,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
-- Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage.
+- Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
+- Pause further `_split_action_ir_statements(...)` hardening work; only revisit splitter surface expansion when a concrete regression or unsupported production pattern is observed.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -150,5 +151,6 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
     - Landed follow-up: canonical action-IR statement splitting now ignores semicolons inside slash-delimited Perl quote-like payloads (e.g. `qr/.../`), preventing fallback fragmentation for slash-quote payload statements, with regression lock `action_rewriter_canonical_action_ir_ignores_slash_quote_semicolon_fragmentation`.
     - Landed follow-up: canonical action-IR statement splitting now ignores semicolons inside angle-delimited Perl quote-like payloads (e.g. `qr<...>`), preventing fallback fragmentation for angle-quote payload statements, with regression lock `action_rewriter_canonical_action_ir_ignores_angle_quote_semicolon_fragmentation`.
     - Landed follow-up: canonical action-IR statement splitting now ignores semicolons inside pipe-delimited Perl quote-like payloads (e.g. `qr|...|`), preventing fallback fragmentation for pipe-quote payload statements, with regression lock `action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation`.
+    - Current decision: `_split_action_ir_statements(...)` hardening track is paused; future work should prioritize action-IR/lowering and diagnostics unless concrete splitter regressions appear.
   - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
 - Phase 2+: Planned.
