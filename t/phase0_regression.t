@@ -816,6 +816,63 @@ SPEC
     is($descr->{spec}{Top}{meta}{acode_count}, 2, 'Top metadata acode_count preserved');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'AND_ACODE', 'Top handler variant remains AND_ACODE for multi-acode AND');
 };
+subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
+    plan tests => 10;
+
+    my $label = 'Top';
+
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'call(Foo)'),
+        '&{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
+        'call() helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'push(Foo)'),
+        'push @Top, &{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
+        'push(rule) helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'push(Foo,Bar)'),
+        'push @Bar, &{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
+        'push(rule,target) helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, '$CAPTURE'),
+        'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
+        '$CAPTURE helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
+        'pos($$STRING) = $IPOS  - length $IMATCH',
+        'IBACKTRACK() helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'BACKTRACK()'),
+        'pos($$STRING)  = $LSPOS - length $LMATCH',
+        'BACKTRACK() helper rewrite preserved'
+    );
+
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'return_a(Top, $x)'),
+        q{return ['?Top:', ( $x), \@Top]},
+        'return_a(label,arg) helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'return_ma(Top)'),
+        q{return ['?Top:', @IMATCH_LIST, \@Top]},
+        'return_ma(label) helper rewrite preserved'
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_if(Top)'),
+        qr/my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\);/,
+        'capture_if(label) helper rewrite preserved'
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'CAPTURE_IF()'),
+        qr/push \@Top, \$capt if \$capt/,
+        'CAPTURE_IF() helper rewrite preserved'
+    );
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

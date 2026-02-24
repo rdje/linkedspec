@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Refactor Item #3: Structured Action Rewriter Pipeline
+## Summary
+Landed Backbone Refactor Track item #3 by replacing inline regex-chain helper substitutions in `call_spec_handler_subst()` with an ordered, structured rewrite pipeline and locking helper behavior with focused regression coverage.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added rewrite-pipeline helpers in `LinkedSpec.pm`:
+  - `_build_action_rewrite_rules($label)`
+  - `_apply_action_rewrite_pipeline($code, $rules)`
+- Updated `call_spec_handler_subst(...)` to:
+  - build ordered rewrite rules once per invocation,
+  - apply rewrites through a dedicated pipeline stage rather than chained inline substitutions.
+- Added focused regression lock:
+  - `action_rewriter_pipeline_helper_substitutions`
+  - verifies helper rewrites for `call`, `push`, `$CAPTURE`, `IBACKTRACK`, `BACKTRACK`, `return_a`, `return_ma`, `capture_if`, and `CAPTURE_IF`.
+- Preserved current helper-rewrite output semantics, including argument-spacing behavior in `return_a(label,arg)` rewrite output.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=40`)
+
 ## 2026-02-24 - Backbone Refactor Item #2: spec_entry Staged RuleIR Pipeline
 ## Summary
 Landed Backbone Refactor Track item #2 by splitting `spec_entry()` into explicit RuleIR stages while preserving parser behavior and existing handler-template semantics.

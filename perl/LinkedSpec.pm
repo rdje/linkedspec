@@ -1475,26 +1475,147 @@ my $sg = shift;
  
  return $result
 }
+sub _build_action_rewrite_rules {
+ my ($label) = @_;
+
+ return [
+  {
+   id => 'call',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bcall\((\w+)\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id => 'push_single_arg',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bpush\((\w+)\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id => 'push_target_arg',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bpush\((\w+)\s*,\s*(\w+)\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id => 'return_a',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_a\($label(?:,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
+    return $code
+   },
+  },
+  {
+   id => 'return',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn\($label,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\)/return ['?$label:', $+{arg}]/g;
+    return $code
+   },
+  },
+  {
+   id => 'return_ma',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_ma\($label\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
+    return $code
+   },
+  },
+  {
+   id => 'return_m',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_m\($label\)/return ['?$label:', \@IMATCH_LIST]/g;
+    return $code
+   },
+  },
+  {
+   id => 'capture_macro',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\$CAPTURE\b/substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
+    return $code
+   },
+  },
+  {
+   id => 'capture',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bcapture\(\w+\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
+    return $code
+   },
+  },
+  {
+   id => 'capture_if',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s{\bcapture_if\(\w+\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    return $code
+   },
+  },
+  {
+   id => 'capture_if_macro',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s{\bCAPTURE_IF\(\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    return $code
+   },
+  },
+  {
+   id => 'ibacktrack_macro',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bIBACKTRACK\(\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+    return $code
+   },
+  },
+  {
+   id => 'backtrack_macro',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bBACKTRACK\(\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+    return $code
+   },
+  },
+  {
+   id => 'ibacktrack',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bibacktrack\(\w+\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+    return $code
+   },
+  },
+  {
+   id => 'backtrack',
+   apply => sub {
+    my ($code) = @_;
+    $code =~ s/\bbacktrack\(\w+\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+    return $code
+   },
+  },
+ ]
+}
+
+sub _apply_action_rewrite_pipeline {
+ my ($code, $rules) = @_;
+ foreach my $rule (@$rules) {
+  $code = $rule->{apply}->($code);
+ }
+ return $code
+}
 
 sub call_spec_handler_subst {
 my ($label, $code) = @_;
 
 #say "call_spec_handler_subst: BEFORE <$label><$code>";
- $code =~ s/\bcall\((\w+)\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
- $code =~ s/\bpush\((\w+)\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
- $code =~ s/\bpush\((\w+)\s*,\s*(\w+)\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
- $code =~ s/\breturn_a\($label(?:,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
- $code =~ s/\breturn\($label,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\)/return ['?$label:', $+{arg}]/g;
- $code =~ s/\breturn_ma\($label\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
- $code =~ s/\breturn_m\($label\)/return ['?$label:', \@IMATCH_LIST]/g;
- $code =~ s/\$CAPTURE\b/substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
- $code =~ s/\bcapture\(\w+\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
- $code =~ s{\bcapture_if\(\w+\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\\s*|\\s*\$//go; push \@$label, \$capt if \$capt}g;
- $code =~ s{\bCAPTURE_IF\(\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\\s*|\\s*\$//go; push \@$label, \$capt if \$capt}g;
- $code =~ s/\bIBACKTRACK\(\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
- $code =~ s/\bBACKTRACK\(\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
- $code =~ s/\bibacktrack\(\w+\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
- $code =~ s/\bbacktrack\(\w+\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+ my $rewrite_rules = _build_action_rewrite_rules($label);
+ $code = _apply_action_rewrite_pipeline($code, $rewrite_rules);
 
 # say "call_spec_handler_subst: AFTER <$label><$code>";
  return $code

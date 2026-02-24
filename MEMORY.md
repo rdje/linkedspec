@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `ef0de33` - Landed Backbone Track item #2 with staged RuleIR pipeline in spec_entry
 - `65467d9` - Landed Backbone Track item #1 with declarative bootstrap registry dispatch
 - `f2ead5a` - Track backbone refactor and language-neutral action DSL objectives in roadmap
 - `494f658` - Refactor LinkedSpec core with deterministic rule metadata and descriptor introspection
@@ -60,12 +61,22 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Continue Backbone Refactor Track item #3 (`call_spec_handler_subst()` structured action rewriter):
-  - define action IR for supported helper surface and deterministic lowering path,
-  - keep backward-compatible helper behavior under regression locks while introducing structured rewrites,
+- Start post-item-#3 follow-up toward language-neutral actions:
+  - define explicit action IR nodes and lowering contracts as the boundary for backend-neutral `.spec` actions,
+  - keep compatibility routing for current helper surface while introducing stricter diagnostics,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone Refactor Track item #3 in `perl/LinkedSpec.pm`:
+  - `call_spec_handler_subst()` now routes rewrites via `_build_action_rewrite_rules($label)` and `_apply_action_rewrite_pipeline($code, $rules)` instead of ad hoc substitution chaining.
+- Added focused helper-substitution regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_pipeline_helper_substitutions`.
+- Stabilized new regression expectation for `return_a(label,arg)` helper rewrite:
+  - expected output now preserves current argument spacing behavior (`( $x)`).
+- Re-ran full validation after item #3:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (40 tests)
 - Landed Backbone Refactor Track item #2 in `perl/LinkedSpec.pm`:
   - `spec_entry()` now runs staged RuleIR helpers (`_collect_rule_ir`, `_plan_rule_ir_meta`, `_validate_rule_ir_or_exit`, `_build_rule_ir_emit_context`),
   - collection/planning/validation/emit-context normalization are now explicit phases before handler-template assembly.

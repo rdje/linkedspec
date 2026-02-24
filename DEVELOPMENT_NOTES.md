@@ -123,6 +123,9 @@ It should not be reframed as a strict EBNF clone.
   - RuleIR stage-pipeline mapping lock:
     - staged `spec_entry()` RuleIR flow preserves ACODE gdata mapping order/count for multi-AND rule assembly,
     - covered by `ruleir_pipeline_preserves_acode_gdata_mapping_order`.
+  - action-rewriter pipeline helper lock:
+    - `call_spec_handler_subst()` helper substitutions are routed through ordered rewrite rules and a dedicated apply stage,
+    - covered by `action_rewriter_pipeline_helper_substitutions` for `call`/`push`/capture/backtrack/return helper surfaces.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -187,6 +190,10 @@ It should not be reframed as a strict EBNF clone.
   - plan phase: execution metadata is derived from RuleIR (`_plan_rule_ir_meta`),
   - validate phase: incompatible action-mode mixes are rejected (`_validate_rule_ir_or_exit`),
   - emit-context phase: code chunks and action mappings are normalized for handler assembly (`_build_rule_ir_emit_context`).
+- `call_spec_handler_subst()` now follows a structured rewrite pipeline:
+  - rewrite entries are declared in `_build_action_rewrite_rules($label)`,
+  - substitutions are applied in order by `_apply_action_rewrite_pipeline($code, $rules)`,
+  - this is a v1 bridge away from ad hoc rewrite chaining and toward language-neutral action lowering.
 
 ## Change Discipline
 Before each commit:
