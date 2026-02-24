@@ -788,8 +788,14 @@ sub _build_action_rewriter_migration_summary {
   language_agnostic_ready_rule_count => 0,
   language_agnostic_blocked_rule_count => 0,
   language_agnostic_blocker_statement_total_count => 0,
+ language_agnostic_blocked_raw_perl_only_rule_count => 0,
+ language_agnostic_blocked_unresolved_helper_only_rule_count => 0,
+ language_agnostic_blocked_mixed_rule_count => 0,
   language_agnostic_ready_rules => [],
   language_agnostic_blocked_rules => [],
+ language_agnostic_blocked_raw_perl_only_rules => [],
+ language_agnostic_blocked_unresolved_helper_only_rules => [],
+ language_agnostic_blocked_mixed_rules => [],
   language_agnostic_blocked_rules_by_priority => [],
   language_agnostic_top_blocked_rule => undef,
  };
@@ -816,6 +822,8 @@ sub _build_action_rewriter_migration_summary {
   }
 
   ++$summary->{language_agnostic_blocked_rule_count};
+ my $unresolved_helper_count = $rewriter_meta->{unresolved_helper_count} || 0;
+ my $raw_perl_dependency_count = $rewriter_meta->{raw_perl_dependency_count} || 0;
   my @blocker_statements = ref($rewriter_meta->{language_agnostic_action_ir_blocker_statements}) eq 'ARRAY'
    ? @{$rewriter_meta->{language_agnostic_action_ir_blocker_statements}}
    : ();
@@ -823,10 +831,23 @@ sub _build_action_rewriter_migration_summary {
    rule => $rule_name,
    blocker_statement_count => scalar @blocker_statements,
    blocker_statements => \@blocker_statements,
-   unresolved_helper_count => $rewriter_meta->{unresolved_helper_count} || 0,
-   raw_perl_dependency_count => $rewriter_meta->{raw_perl_dependency_count} || 0,
+  unresolved_helper_count => $unresolved_helper_count,
+  raw_perl_dependency_count => $raw_perl_dependency_count,
   };
   $summary->{language_agnostic_blocker_statement_total_count} += scalar @blocker_statements;
+
+ if ($raw_perl_dependency_count > 0 && $unresolved_helper_count > 0) {
+  ++$summary->{language_agnostic_blocked_mixed_rule_count};
+  push @{$summary->{language_agnostic_blocked_mixed_rules}}, $rule_name;
+ }
+ elsif ($raw_perl_dependency_count > 0) {
+  ++$summary->{language_agnostic_blocked_raw_perl_only_rule_count};
+  push @{$summary->{language_agnostic_blocked_raw_perl_only_rules}}, $rule_name;
+ }
+ elsif ($unresolved_helper_count > 0) {
+  ++$summary->{language_agnostic_blocked_unresolved_helper_only_rule_count};
+  push @{$summary->{language_agnostic_blocked_unresolved_helper_only_rules}}, $rule_name;
+ }
  }
 
  my @blocked_by_priority = sort {

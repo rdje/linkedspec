@@ -87,13 +87,21 @@ When resuming after interruption:
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
-  - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, and `language_agnostic_top_blocked_rule`) to track migration progress and select next highest-value blocked rules,
+  - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`, and blocker-type breakdown fields/lists) to track migration progress and select next highest-value blocked rules,
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 descriptor migration blocker-type breakdown follow-up in `perl/LinkedSpec.pm`:
+  - descriptor-level `meta.action_rewriter_migration` now exposes blocked-rule type counters/lists for raw-perl-only, unresolved-helper-only, and mixed blockers.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`.
+- Re-ran full validation after descriptor migration blocker-type breakdown follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (56 tests)
 - Cleanup pass on action-rewriter helper entrypoints in `perl/LinkedSpec.pm`:
   - removed unused legacy helper `_apply_action_rewrite_pipeline(...)` (no runtime/test callers),
   - clarified `call_spec_handler_subst(...)` as compatibility/test shim only; runtime rule compilation uses `_rewrite_action_code_with_diagnostics(...)` directly.

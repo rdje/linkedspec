@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor Migration Blocker-Type Breakdown
+## Summary
+Extended descriptor-level action-rewriter migration summary with explicit blocker-type breakdown fields so migration triage can distinguish raw-perl-only, unresolved-helper-only, and mixed blocked rules.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `_build_action_rewriter_migration_summary(...)` in `LinkedSpec.pm`:
+  - added blocked-rule type counters:
+    - `language_agnostic_blocked_raw_perl_only_rule_count`
+    - `language_agnostic_blocked_unresolved_helper_only_rule_count`
+    - `language_agnostic_blocked_mixed_rule_count`
+  - added deterministic blocked-rule lists by blocker type:
+    - `language_agnostic_blocked_raw_perl_only_rules`
+    - `language_agnostic_blocked_unresolved_helper_only_rules`
+    - `language_agnostic_blocked_mixed_rules`
+- Added focused regression lock:
+  - `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`
+  - verifies blocked-rule type counts/lists and priority interaction (`language_agnostic_top_blocked_rule`) for mixed/raw/unresolved blocker combinations.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=56`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Action Rewriter Dead-Helper Cleanup
 ## Summary
 Removed an unused legacy action-rewriter helper and clarified the remaining helper API so rewrite entrypoints are explicit and non-confusing for maintainers.

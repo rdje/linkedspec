@@ -1125,6 +1125,43 @@ SPEC
     is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
     is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
 };
+subtest 'return_descr_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); return_a(Top) }
+
+RawOnly::&
+ /b/ -> RawOnly { call(Leaf); my $tmp = 1 }
+
+UnresolvedOnly::&
+ /c/ -> UnresolvedOnly { return_a(Leaf) }
+
+Mixed::&
+ /d/ -> Mixed { return_a(Leaf); my $tmp = 2 }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+ /b/ -> Leaf { return_a(Leaf) }
+ /c/ -> Leaf { return_a(Leaf) }
+ /d/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for migration blocker-type breakdown check');
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'descriptor exposes migration summary for blocker-type breakdown check');
+
+    is($summary->{language_agnostic_blocked_rule_count}, 3, 'migration summary tracks blocked-rule count for blocker-type breakdown corpus');
+    is($summary->{language_agnostic_blocked_raw_perl_only_rule_count}, 1, 'migration summary tracks raw-Perl-only blocked-rule count');
+    is($summary->{language_agnostic_blocked_unresolved_helper_only_rule_count}, 1, 'migration summary tracks unresolved-helper-only blocked-rule count');
+    is($summary->{language_agnostic_blocked_mixed_rule_count}, 1, 'migration summary tracks mixed blocked-rule count');
+    is_deeply($summary->{language_agnostic_blocked_raw_perl_only_rules}, ['RawOnly'], 'migration summary exposes deterministic raw-Perl-only blocked-rule list');
+    is_deeply($summary->{language_agnostic_blocked_unresolved_helper_only_rules}, ['UnresolvedOnly'], 'migration summary exposes deterministic unresolved-helper-only blocked-rule list');
+    is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');
+    is($summary->{language_agnostic_top_blocked_rule}, 'Mixed', 'migration summary priority still surfaces mixed rule with highest blocker load');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 
