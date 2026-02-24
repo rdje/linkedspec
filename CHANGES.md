@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor Migration Blocker-Type Ratios
+## Summary
+Extended descriptor-level action-rewriter migration summary with blocker-type ratio fields so triage dashboards can track blocked-rule composition trends over time (raw-only vs unresolved-only vs mixed).
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `_build_action_rewriter_migration_summary(...)` in `LinkedSpec.pm`:
+  - added ratio fields normalized by `language_agnostic_blocked_rule_count`:
+    - `language_agnostic_blocked_raw_perl_only_ratio`
+    - `language_agnostic_blocked_unresolved_helper_only_ratio`
+    - `language_agnostic_blocked_mixed_ratio`
+  - ratio fields default to `'0.0000'` when blocked-rule count is zero.
+- Extended focused regression lock:
+  - `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`
+  - now validates all three blocker-type ratio fields in addition to blocked-rule type counts/lists.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=56`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor Migration Blocker-Type Breakdown
 ## Summary
 Extended descriptor-level action-rewriter migration summary with explicit blocker-type breakdown fields so migration triage can distinguish raw-perl-only, unresolved-helper-only, and mixed blocked rules.

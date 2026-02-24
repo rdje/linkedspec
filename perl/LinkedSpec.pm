@@ -791,6 +791,9 @@ sub _build_action_rewriter_migration_summary {
  language_agnostic_blocked_raw_perl_only_rule_count => 0,
  language_agnostic_blocked_unresolved_helper_only_rule_count => 0,
  language_agnostic_blocked_mixed_rule_count => 0,
+ language_agnostic_blocked_raw_perl_only_ratio => '0.0000',
+ language_agnostic_blocked_unresolved_helper_only_ratio => '0.0000',
+ language_agnostic_blocked_mixed_ratio => '0.0000',
   language_agnostic_ready_rules => [],
   language_agnostic_blocked_rules => [],
  language_agnostic_blocked_raw_perl_only_rules => [],
@@ -866,6 +869,21 @@ sub _build_action_rewriter_migration_summary {
   );
  } else {
   $summary->{language_agnostic_ready_ratio} = '0.0000';
+ }
+
+ if ($summary->{language_agnostic_blocked_rule_count} > 0) {
+  $summary->{language_agnostic_blocked_raw_perl_only_ratio} = sprintf(
+   '%.4f',
+   $summary->{language_agnostic_blocked_raw_perl_only_rule_count} / $summary->{language_agnostic_blocked_rule_count}
+  );
+  $summary->{language_agnostic_blocked_unresolved_helper_only_ratio} = sprintf(
+   '%.4f',
+   $summary->{language_agnostic_blocked_unresolved_helper_only_rule_count} / $summary->{language_agnostic_blocked_rule_count}
+  );
+  $summary->{language_agnostic_blocked_mixed_ratio} = sprintf(
+   '%.4f',
+   $summary->{language_agnostic_blocked_mixed_rule_count} / $summary->{language_agnostic_blocked_rule_count}
+  );
  }
 
  if (should_dump(DUMP_DEBUG)) {

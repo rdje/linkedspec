@@ -1126,7 +1126,7 @@ SPEC
     is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
 };
 subtest 'return_descr_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
-    plan tests => 10;
+    plan tests => 13;
 
     my $spec_content = <<'SPEC';
 Top::&
@@ -1157,6 +1157,9 @@ SPEC
     is($summary->{language_agnostic_blocked_raw_perl_only_rule_count}, 1, 'migration summary tracks raw-Perl-only blocked-rule count');
     is($summary->{language_agnostic_blocked_unresolved_helper_only_rule_count}, 1, 'migration summary tracks unresolved-helper-only blocked-rule count');
     is($summary->{language_agnostic_blocked_mixed_rule_count}, 1, 'migration summary tracks mixed blocked-rule count');
+    is($summary->{language_agnostic_blocked_raw_perl_only_ratio}, '0.3333', 'migration summary tracks raw-Perl-only blocked-rule ratio');
+    is($summary->{language_agnostic_blocked_unresolved_helper_only_ratio}, '0.3333', 'migration summary tracks unresolved-helper-only blocked-rule ratio');
+    is($summary->{language_agnostic_blocked_mixed_ratio}, '0.3333', 'migration summary tracks mixed blocked-rule ratio');
     is_deeply($summary->{language_agnostic_blocked_raw_perl_only_rules}, ['RawOnly'], 'migration summary exposes deterministic raw-Perl-only blocked-rule list');
     is_deeply($summary->{language_agnostic_blocked_unresolved_helper_only_rules}, ['UnresolvedOnly'], 'migration summary exposes deterministic unresolved-helper-only blocked-rule list');
     is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');

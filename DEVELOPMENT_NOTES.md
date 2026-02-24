@@ -170,7 +170,8 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - covered by extended `return_descr_exposes_action_rewriter_migration_summary`.
   - action-rewriter descriptor migration blocker-type breakdown lock:
     - descriptor-level migration summary now exposes blocked-rule type breakdown metadata (`language_agnostic_blocked_raw_perl_only_rule_count`, `language_agnostic_blocked_unresolved_helper_only_rule_count`, `language_agnostic_blocked_mixed_rule_count`, plus deterministic per-type rule lists),
-    - covered by `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`.
+    - descriptor-level migration summary also exposes blocked-rule type ratios (`language_agnostic_blocked_raw_perl_only_ratio`, `language_agnostic_blocked_unresolved_helper_only_ratio`, `language_agnostic_blocked_mixed_ratio`) normalized by blocked-rule count,
+    - covered by extended `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`.
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
