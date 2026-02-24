@@ -72,6 +72,15 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 canonical-IR-driven lowering follow-up in `perl/LinkedSpec.pm`:
+  - action rewrite emission now lowers directly from canonical action-IR events via `_lower_action_code_from_canonical_ir(...)` inside `_rewrite_action_code_with_diagnostics(...)`,
+  - lowering now uses event-driven in-place replacement on original action code, preserving unresolved helper forms and raw Perl regions while reducing regex-first coupling.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
+- Re-ran full validation after canonical-IR-driven lowering follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (46 tests)
 - Landed Backbone item #3 canonical action-IR follow-up in `perl/LinkedSpec.pm`:
   - helper payload events are now promoted into canonical action-IR events,
   - non-helper statements are now represented explicitly as `RAW_PERL` fallback canonical events.

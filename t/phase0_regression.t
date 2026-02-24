@@ -873,6 +873,26 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserved'
     );
 };
+subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
+    plan tests => 3;
+
+    my $label = 'Top';
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'call(Leaf); my $tmp = 1; CAPTURE_IF()'),
+        qr/^&\{\$\$descr\{spec\}\{Leaf\}\{handler\}\}\(\$descr, \$STRING, \$minfo\); my \$tmp = 1; .*push \@Top, \$capt if \$capt$/s,
+        'canonical-IR lowering rewrites helpers while preserving RAW_PERL statements'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'call (Leaf); my $tmp = 1'),
+        'call (Leaf); my $tmp = 1',
+        'unresolved helper form remains unchanged under canonical-IR lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return_a(Top, $x)'),
+        q{push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); return ['?Top:', ( $x), \@Top]},
+        'canonical-IR lowering preserves push/return helper output semantics'
+    );
+};
 subtest 'action_rewriter_reports_unresolved_helpers_in_rule_meta' => sub {
     plan tests => 8;
 

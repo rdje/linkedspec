@@ -141,6 +141,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter canonical action-IR fallback lock:
     - rule metadata now exposes canonical action-IR events and explicit `RAW_PERL` fallback markers for non-helper statements,
     - covered by `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`.
+  - action-rewriter canonical-IR lowering lock:
+    - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
+    - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -230,6 +233,10 @@ It should not be reframed as a strict EBNF clone.
   - helper payload events are promoted by `_canonicalize_helper_action_ir_event(...)`,
   - `_build_canonical_action_ir_events(...)` merges helper-derived canonical events with `RAW_PERL` fallback events for non-helper statements,
   - canonical metadata surface now includes `canonical_action_ir_*` fields under `spec->{rule}{meta}{action_rewriter}` for direct lowering-boundary consumption.
+- Canonical action-IR lowering is now active in rewrite execution flow:
+  - `_lower_action_code_from_canonical_ir(...)` consumes canonical action-IR events to apply helper lowerings event-by-event,
+  - lowering is now canonical-IR-first instead of whole-code regex-pass-first,
+  - unresolved helper forms remain unmodified when contract lowering does not apply, preserving unresolved-helper diagnostics.
 
 ## Change Discipline
 Before each commit:

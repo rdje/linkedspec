@@ -1951,6 +1951,33 @@ sub _build_canonical_action_ir_events {
  }
 }
 
+sub _lower_action_code_from_canonical_ir {
+ my ($label, $code, $rewrite_rules, $canonical_ir_diag) = @_;
+
+ my %rewrite_by_id = map { $_->{id} => $_ } @$rewrite_rules;
+ my $rewritten = $code;
+ foreach my $event (@{$canonical_ir_diag->{canonical_action_ir_events}}) {
+  my $kind = $event->{kind} // '';
+  next if $kind eq 'RAW_PERL';
+
+  my $contract_id = $event->{contract_id};
+  next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
+
+  my $source_stmt = $event->{raw};
+  next unless defined($source_stmt) && length($source_stmt);
+
+  my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt);
+  next unless defined($lowered_stmt) && length($lowered_stmt);
+  next if $lowered_stmt eq $source_stmt;
+
+  my $pos = index($rewritten, $source_stmt);
+  next if $pos < 0;
+  substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
+ }
+
+ return $rewritten
+}
+
 sub _accumulate_action_rewrite_diagnostics {
  my ($acc, $diag) = @_;
  return $acc unless $acc && $diag && ref($diag) eq 'HASH';
@@ -2006,7 +2033,7 @@ sub _rewrite_action_code_with_diagnostics {
  $rewrite_rules //= _build_action_rewrite_rules($label);
  my $ir_diag = _collect_action_helper_ir_nodes($code, $rewrite_rules);
  my $canonical_ir_diag = _build_canonical_action_ir_events($label, $code, $ir_diag->{helper_action_ir_events});
- my $rewritten = _apply_action_rewrite_pipeline($code, $rewrite_rules);
+ my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
  my $diag = _find_unresolved_action_helpers($rewritten, $rewrite_rules);
  return ($rewritten, {
   %$diag,

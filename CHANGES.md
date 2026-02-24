@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Canonical Action-IR-Driven Lowering
+## Summary
+Switched helper lowering from whole-code regex rewrite passes to canonical action-IR event driven lowering so helper transformations now consume canonical IR metadata directly while preserving unresolved-helper behavior and RAW_PERL pass-through.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added canonical lowering helper in `LinkedSpec.pm`:
+  - `_lower_action_code_from_canonical_ir(...)`
+- Updated rewrite flow:
+  - `_rewrite_action_code_with_diagnostics(...)` now lowers via canonical action-IR events instead of `_apply_action_rewrite_pipeline(...)` over the full code string.
+- Canonical lowering behavior:
+  - helper events are lowered via contract-specific apply functions using canonical event `contract_id` + `raw` payload,
+  - non-helper statements continue via existing canonical `RAW_PERL` pass-through behavior,
+  - unresolved helper forms remain unchanged when contract lowering does not apply (preserving diagnostics behavior).
+- Added focused regression lock:
+  - `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`
+  - verifies canonical-IR lowering rewrites helpers, preserves RAW_PERL statements, and keeps unresolved helper forms unchanged.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=46`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Canonical Action-IR Promotion with RAW_PERL Fallback
 ## Summary
 Promoted helper payload events into canonical action-IR events and added explicit `RAW_PERL` fallback markers for non-helper statements so rule metadata now captures a canonical, statement-level action-IR view.
