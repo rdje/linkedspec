@@ -27,6 +27,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 7. `_split_action_ir_statements(...)` hardening is intentionally paused for now; only resume if a concrete regression or unsupported real pattern appears.
 8. Final architecture goal: `.spec` files must become language-agnostic/language-independent, with no embedded Perl code-block dependency.
 9. Backend code emission should stay under strict canonical-generator control so emitted host-language code avoids avoidable splitter/parser fragility.
+10. Balanced delimiters are strict policy; do not add permissive missing-close helper behavior for unmatched `)`, `]`, or `}` cases.
 
 ## Live Documents Contract
 These files are live and must be amended before any commit:
@@ -91,9 +92,19 @@ When resuming after interruption:
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
+  - keep strict balanced-delimiter behavior (no permissive missing-close helper variants),
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 method-style action arg-normalization follow-up in `perl/LinkedSpec.pm`:
+  - `METHOD_EMPTY_ACTION_CODE_BLOCK` outer-arg trimming now uses whitespace-tolerant boundaries (`^\s*\(` and `\)\s*$`), so leading-space method-arg forms keep balanced helper payloads.
+  - method-style `.return ((...))` payloads now lower through structured helper contracts without false unresolved-helper/RAW_PERL blocker classification.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `method_empty_action_return_with_leading_space_args_stays_balanced`.
+- Re-ran full validation after method-style arg-normalization follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (58 tests)
 - Landed Backbone item #3 call-wrapper lowering follow-up in `perl/LinkedSpec.pm`:
   - action lowering now explicitly covers `my $x = call(...)`, `$x = call(...)`, and `push @arr, call(...)` wrappers,
   - wrapper-only actions now avoid RAW_PERL fallback classification and remain language-agnostic action-IR ready.

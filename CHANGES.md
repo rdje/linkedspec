@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Method-Style Action Arg Trimming Fix
+## Summary
+Fixed method-style empty action argument trimming so leading-space argument forms keep balanced helper payloads, preventing false unresolved-helper and RAW_PERL fallback classification for `.return ((...))`-style actions.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `METHOD_EMPTY_ACTION_CODE_BLOCK` handling in `LinkedSpec.pm`:
+  - outer argument parentheses are now trimmed with whitespace-tolerant boundary handling (`^\s*\(` and `\)\s*$`), instead of the prior strict `^\(`/`\)$` pattern.
+- Migration impact:
+  - method-style helper actions with leading-space args (e.g. `.return ((map {lc} @IMATCH_LIST), \@Top, call(Leaf))`) now lower through structured helper contracts without being misclassified as unresolved/RAW_PERL blockers.
+- Added focused regression lock:
+  - `method_empty_action_return_with_leading_space_args_stays_balanced`
+  - verifies zero unresolved-helper/raw-perl/fallback counts and canonical `RETURN` action-IR node presence for the leading-space method-arg form.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=58`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Call-Wrapper Lowering Coverage
 ## Summary
 Extended structured action lowering to handle common call-wrapper statement forms so canonical action-IR can avoid RAW_PERL fallback for these wrappers while preserving existing rewrite-contract ordering.

@@ -567,7 +567,10 @@ my $spec_descr = [
 
   my ($entry_label, $reidx, $method, $args) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX METHOD ARGS/}; 
   # say "(Method code block) ($entry_label:".($reidx // 0).":$method:".($args // '').")";
-  $args =~ s/^\(|\)$//go;
+  if (defined $args) {
+   $args =~ s/^\s*\(//o;
+   $args =~ s/\)\s*$//o;
+  }
   return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>"$method($entry_label".($args ? ",$args" : '').")"}]
  }
 },

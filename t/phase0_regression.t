@@ -1189,6 +1189,27 @@ SPEC
     is($rewritten, 'my $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'call-wrapper lowering rewrites assignment and builtin push call wrappers to handler calls');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'call-wrapper-only rule remains language-agnostic action-IR ready');
 };
+subtest 'method_empty_action_return_with_leading_space_args_stays_balanced' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .return ((map {lc} @IMATCH_LIST), \@Top, call(Leaf))
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-style return with leading-space args');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'method-style return with leading-space args avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'method-style return with leading-space args avoids unresolved helper hits');
+    is($meta->{raw_perl_dependency_count}, 0, 'method-style return with leading-space args reports zero raw-perl dependency');
+    ok($meta->{language_agnostic_action_ir_ready}, 'method-style return with leading-space args remains language-agnostic action-IR ready');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-style return contributes canonical RETURN action-IR node');
+};
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {
     plan tests => 9;
 
