@@ -96,6 +96,15 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 indexed push-call wrapper lowering follow-up in `perl/LinkedSpec.pm`:
+  - action lowering now explicitly covers full-statement `push @target, call(...)->[index]` wrappers through `push_call_indexed_builtin` contract support.
+  - non-indexed `push_call_builtin` now excludes indexed forms so wrapper routing is deterministic.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback`.
+- Re-ran full validation after indexed push-call wrapper follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (60 tests)
 - Landed Backbone item #3 return-call wrapper lowering follow-up in `perl/LinkedSpec.pm`:
   - action lowering now explicitly covers full-statement `return call(...)` wrappers through `return_call` contract support.
   - wrapper-only return-call actions now avoid RAW_PERL fallback classification and remain language-agnostic action-IR ready.

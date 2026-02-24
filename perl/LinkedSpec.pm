@@ -1365,13 +1365,24 @@ sub _build_action_lowering_contracts {
    },
   },
   {
+   id                 => 'push_call_indexed_builtin',
+   ir_node            => 'CALL',
+   diag_name          => 'push_call_indexed_builtin',
+   unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)\s*->\s*\[\s*\d+\s*\]/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)\s*->\s*\[\s*(\d+)\s*\]/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)->[$3]/g;
+    return $code
+   },
+  },
+  {
    id                 => 'push_call_builtin',
    ir_node            => 'CALL',
    diag_name          => 'push_call_builtin',
-   unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)/o,
+   unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)(?!\s*->\s*\[)/o,
    lower              => sub {
     my ($code) = @_;
-   $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
+   $code =~ s/\bpush\s+\@(\w+)\s*,\s*call\s*\(\s*(\w+)\s*\)(?!\s*->\s*\[)/push \@$1, &{\$\$descr{spec}{$2}{handler}}(\$descr, \$STRING, \$minfo)/g;
     return $code
    },
   },
@@ -2141,8 +2152,12 @@ sub _scan_contract_ir_events {
   while ($code =~ /(?<!\bmy\s)(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'existing'}};
   }
+ } elsif ($id eq 'push_call_indexed_builtin') {
+  while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)\s*->\s*\[\s*(?<index>\d+)\s*\]/g) {
+   push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, index => $+{index}}};
+  }
  } elsif ($id eq 'push_call_builtin') {
-  while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
+  while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)(?!\s*->\s*\[)/g) {
    push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}}};
   }
  } elsif ($id eq 'return_call') {

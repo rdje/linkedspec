@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Indexed Push-Call Wrapper Lowering
+## Summary
+Extended structured action lowering to handle full-statement `push @target, call(Rule)->[index]` wrappers so canonical action-IR can avoid RAW_PERL fallback for indexed call-wrapper push forms.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended helper-lowering contracts in `_build_action_lowering_contracts(...)`:
+  - added `push_call_indexed_builtin` contract for `push @target, call(Rule)->[index]` wrappers.
+  - tightened existing `push_call_builtin` with negative-lookahead boundary so non-indexed and indexed wrapper contracts do not overlap.
+- Extended helper event scanning in `_scan_contract_ir_events(...)`:
+  - captures indexed push-call wrapper payloads (`target`, `callee`, `index`) under `push_call_indexed_builtin`.
+- Added focused regression lock:
+  - `action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback`
+  - verifies no unresolved helper hits, no RAW_PERL fallback dependency, direct rewrite output correctness, and language-agnostic readiness for indexed push-call wrapper-only actions.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=60`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Return-Call Wrapper Lowering
 ## Summary
 Extended structured action lowering to handle full-statement `return call(Rule)` wrappers so canonical action-IR can avoid RAW_PERL fallback for this wrapper form.

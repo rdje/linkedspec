@@ -1189,6 +1189,30 @@ SPEC
     is($rewritten, 'my $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'call-wrapper lowering rewrites assignment and builtin push call wrappers to handler calls');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'call-wrapper-only rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { push @Top, call(Leaf)->[1] }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for indexed push-call wrapper canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes indexed push-call wrapper statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes indexed push-call wrapper statements');
+    is($meta->{unresolved_helper_count}, 0, 'indexed push-call wrapper lowering keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL for indexed push-call wrapper coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'push @Top, call(Leaf)->[1]');
+    is($rewritten, 'push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)->[1]', 'indexed push-call wrapper lowering rewrites to handler call with preserved index access');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'indexed push-call-wrapper-only rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback' => sub {
     plan tests => 7;
 

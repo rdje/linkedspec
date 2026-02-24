@@ -181,6 +181,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter return-call wrapper lowering lock:
     - canonical lowering now covers full-statement `return call(...)` wrappers so this form no longer requires RAW_PERL fallback,
     - covered by `action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback`.
+  - action-rewriter indexed push-call wrapper lowering lock:
+    - canonical lowering now covers full-statement `push @target, call(...)->[index]` wrappers so indexed push-call forms no longer require RAW_PERL fallback,
+    - covered by `action_rewriter_canonical_action_ir_lowers_push_call_indexed_wrapper_without_raw_fallback`.
   - action-rewriter method-empty arg normalization lock:
     - method-style empty-action argument trimming now removes outer parentheses with whitespace-tolerant boundaries, so leading-space forms keep balanced helper payloads for canonical lowering,
     - covered by `method_empty_action_return_with_leading_space_args_stays_balanced`.
@@ -308,6 +311,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Canonical helper lowering now covers return-call wrappers:
   - `_build_action_lowering_contracts(...)` includes a `return_call` contract for full-statement `return call(Rule)` forms,
   - `_scan_contract_ir_events(...)` + `_canonicalize_helper_action_ir_event(...)` now carry return-call wrapper events into canonical CALL lowering.
+- Canonical helper lowering now covers indexed push-call wrappers:
+  - `_build_action_lowering_contracts(...)` includes `push_call_indexed_builtin` for `push @target, call(Rule)->[index]` forms,
+  - non-indexed `push_call_builtin` now uses a boundary guard so indexed wrappers are routed deterministically to the indexed contract.
 - Method-style empty-action argument normalization is now whitespace-tolerant at outer boundaries:
   - `METHOD_EMPTY_ACTION_CODE_BLOCK` processing trims `^\s*\(` and `\)\s*$` around outer argument payloads,
   - leading-space argument forms no longer lose closing-balance alignment during helper rewrite/lowering paths.
