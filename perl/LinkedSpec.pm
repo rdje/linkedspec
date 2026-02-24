@@ -942,7 +942,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bcall\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcall\((\w+)\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+   $code =~ s/\bcall\s*\(\s*(\w+)\s*\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
     return $code
    },
   },
@@ -953,7 +953,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\((\w+)\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+   $code =~ s/\bpush\s*\(\s*(\w+)\s*\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
     return $code
    },
   },
@@ -964,7 +964,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bpush\((\w+)\s*,\s*(\w+)\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+   $code =~ s/\bpush\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
     return $code
    },
   },
@@ -975,7 +975,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\breturn_a\s*\(/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\breturn_a\($label(?:,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
+   $code =~ s/\breturn_a\s*\(\s*$label(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
     return $code
    },
   },
@@ -986,7 +986,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\breturn\s*\(\s*\w+\s*,/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\breturn\($label,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\)/return ['?$label:', $+{arg}]/g;
+   $code =~ s/\breturn\s*\(\s*$label\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/return ['?$label:', $+{arg}]/g;
     return $code
    },
   },
@@ -997,7 +997,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\breturn_ma\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\breturn_ma\($label\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
+   $code =~ s/\breturn_ma\s*\(\s*$label\s*\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
     return $code
    },
   },
@@ -1008,7 +1008,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\breturn_m\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\breturn_m\($label\)/return ['?$label:', \@IMATCH_LIST]/g;
+   $code =~ s/\breturn_m\s*\(\s*$label\s*\)/return ['?$label:', \@IMATCH_LIST]/g;
     return $code
    },
   },
@@ -1030,7 +1030,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bcapture\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcapture\(\w+\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
+   $code =~ s/\bcapture\s*\(\s*\w+\s*\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
     return $code
    },
   },
@@ -1041,7 +1041,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bcapture_if\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{\bcapture_if\(\w+\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+   $code =~ s{\bcapture_if\s*\(\s*\w+\s*\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
     return $code
    },
   },
@@ -1052,7 +1052,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bCAPTURE_IF\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{\bCAPTURE_IF\(\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+   $code =~ s{\bCAPTURE_IF\s*\(\s*\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
     return $code
    },
   },
@@ -1063,7 +1063,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bIBACKTRACK\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bIBACKTRACK\(\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+   $code =~ s/\bIBACKTRACK\s*\(\s*\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
     return $code
    },
   },
@@ -1074,7 +1074,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bBACKTRACK\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bBACKTRACK\(\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+   $code =~ s/\bBACKTRACK\s*\(\s*\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
     return $code
    },
   },
@@ -1085,7 +1085,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bibacktrack\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bibacktrack\(\w+\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+   $code =~ s/\bibacktrack\s*\(\s*\w+\s*\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
     return $code
    },
   },
@@ -1096,7 +1096,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bbacktrack\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bbacktrack\(\w+\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+   $code =~ s/\bbacktrack\s*\(\s*\w+\s*\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
     return $code
    },
   },

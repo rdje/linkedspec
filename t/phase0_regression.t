@@ -822,9 +822,9 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     my $label = 'Top';
 
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'call(Foo)'),
+        LinkedSpec::call_spec_handler_subst($label, 'call ( Foo )'),
         '&{$$descr{spec}{Foo}{handler}}($descr, $STRING, $minfo)',
-        'call() helper rewrite preserved'
+        'call() helper rewrite preserves optional whitespace forms'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'push(Foo)'),
@@ -868,9 +868,9 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'capture_if(label) helper rewrite preserved'
     );
     like(
-        LinkedSpec::call_spec_handler_subst($label, 'CAPTURE_IF()'),
+        LinkedSpec::call_spec_handler_subst($label, 'CAPTURE_IF ( )'),
         qr/push \@Top, \$capt if \$capt/,
-        'CAPTURE_IF() helper rewrite preserved'
+        'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
 };
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
@@ -884,8 +884,8 @@ subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'call (Leaf); my $tmp = 1'),
-        'call (Leaf); my $tmp = 1',
-        'unresolved helper form remains unchanged under canonical-IR lowering'
+        '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); my $tmp = 1',
+        'canonical-IR lowering accepts optional helper whitespace and preserves RAW_PERL statement'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'push(Leaf,Top); return_a(Top, $x)'),
@@ -898,7 +898,7 @@ subtest 'action_rewriter_reports_unresolved_helpers_in_rule_meta' => sub {
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call (Leaf); CAPTURE_IF (); return_a(Top) }
+ /a/ -> Top { call (Leaf); CAPTURE_IF (); return_a(Leaf); return(Leaf, $x) }
 
 Leaf:
  /a/ -> Leaf { return_a(Leaf) }
@@ -910,10 +910,10 @@ SPEC
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{unresolved_helper_count}, 2, 'Top unresolved helper count captures unrewritten helper forms');
-    ok(grep { $_ eq 'call' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include call');
-    ok(grep { $_ eq 'CAPTURE_IF' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include CAPTURE_IF');
-    is($meta->{unresolved_helper_hits}{call}, 1, 'Top call unresolved helper hit count is tracked');
-    is($meta->{unresolved_helper_hits}{CAPTURE_IF}, 1, 'Top CAPTURE_IF unresolved helper hit count is tracked');
+    ok(grep { $_ eq 'return_a' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include return_a label-mismatch form');
+    ok(grep { $_ eq 'return' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include return label-mismatch form');
+    is($meta->{unresolved_helper_hits}{return_a}, 1, 'Top return_a unresolved helper hit count is tracked');
+    is($meta->{unresolved_helper_hits}{return}, 1, 'Top return unresolved helper hit count is tracked');
     is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
 };
 subtest 'action_rewriter_meta_exposes_lowering_contract_ids' => sub {

@@ -144,5 +144,6 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
     - Landed follow-up: helper payload events are now promoted into canonical action-IR events (`canonical_action_ir_events`) with `RAW_PERL` fallback markers for non-helper statements, with regression lock `action_rewriter_meta_exposes_canonical_action_ir_with_raw_fallback`.
     - Landed follow-up: helper lowering now consumes canonical action-IR events first via `_lower_action_code_from_canonical_ir(...)`, with regression lock `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
     - Landed follow-up: canonical action-IR statement splitting is now nesting-aware (`()`, `{}`, `[]`, quotes), preventing false `RAW_PERL` fallback fragmentation for helper payloads containing nested semicolons, with regression lock `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`.
+    - Landed follow-up: helper lowering substitutions are now whitespace-tolerant (`call (X)`, `CAPTURE_IF ( )`, etc.), reducing spacing-only unresolved helper cases while preserving unresolved diagnostics for label-mismatch helper forms, with updated regression locks around helper substitution and unresolved-helper metadata.
   - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
 - Phase 2+: Planned.

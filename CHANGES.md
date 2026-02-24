@@ -1,6 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Whitespace-Tolerant Canonical Helper Lowering
+## Summary
+Expanded canonical helper lowering so helper invocations with optional whitespace are lowered consistently, reducing unresolved helper surface caused by spacing-only variations while preserving unresolved diagnostics for true label-mismatch helper forms.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated helper lowering substitutions in `LinkedSpec.pm` (`_build_action_lowering_contracts(...)`):
+  - helper-lowering regexes now accept optional spacing around helper names, parentheses, and arguments for supported helper contracts (`call`, `push`, `return*`, `capture*`, `backtrack*`).
+- Canonical lowering effect:
+  - spacing-only helper forms (e.g. `call (Leaf)`, `CAPTURE_IF ( )`) now lower via canonical action-IR helper events instead of remaining unresolved.
+- Preserved unresolved-helper diagnostics coverage:
+  - unresolved-helper regression now targets label-mismatch helper forms (`return_a(Leaf)`, `return(Leaf, $x)`) so diagnostics continue to lock non-lowerable helper behavior.
+- Updated focused regression locks:
+  - `action_rewriter_pipeline_helper_substitutions` now validates spaced helper lowering forms.
+  - `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior` now verifies spaced helper lowering in mixed helper + RAW_PERL statements.
+  - `action_rewriter_reports_unresolved_helpers_in_rule_meta` now locks unresolved label-mismatch helper diagnostics.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=47`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Nested-Semicolon-Safe Canonical Action-IR Statement Splitting
 ## Summary
 Hardened canonical action-IR statement splitting so semicolons inside nested helper payload expressions no longer produce false `RAW_PERL` fallback canonical events, improving canonical IR fidelity while preserving helper-lowering behavior.

@@ -147,6 +147,10 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter canonical action-IR nested-semicolon lock:
     - canonical action-IR statement splitting now ignores semicolons inside nested helper payload expressions (e.g. `do { ...; ... }`) when building statement-level events,
     - covered by `action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads`.
+  - action-rewriter whitespace-tolerant helper lowering lock:
+    - helper lowering now accepts optional spacing forms (e.g. `call (Leaf)`, `CAPTURE_IF ( )`) across supported helper contracts,
+    - unresolved-helper diagnostics lock now targets label-mismatch helper forms to preserve non-lowerable helper diagnostics coverage,
+    - covered by updated `action_rewriter_pipeline_helper_substitutions`, `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`, and `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -243,6 +247,9 @@ It should not be reframed as a strict EBNF clone.
 - Canonical action-IR statement splitting is now nesting-aware:
   - `_split_action_ir_statements(...)` now scans with depth/quote tracking over `()`, `{}`, `[]`, and quoted strings,
   - nested semicolons inside helper payloads no longer fragment helper statements into false `RAW_PERL` canonical fallback entries.
+- Canonical helper lowering is now whitespace-tolerant:
+  - helper substitution regexes in `_build_action_lowering_contracts(...)` now accept optional spacing around helper names, parentheses, and arguments,
+  - spacing-only helper variants now lower through canonical action-IR flow instead of remaining unresolved.
 
 ## Change Discipline
 Before each commit:

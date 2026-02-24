@@ -34,6 +34,8 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `7a33587` - Backbone item #3 follow-up: harden canonical IR statement splitting
+- `3d83017` - Backbone item #3 follow-up: lower action emission from canonical IR
 - `226ea24` - Backbone item #3 follow-up: add structured helper payload events
 - `9bb6647` - Backbone item #3 follow-up: add helper action-IR metadata
 - `546bfd0` - Backbone item #3 follow-up: add lowering contract catalog
@@ -67,11 +69,22 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - switch helper lowering to consume canonical action-IR events directly instead of regex-first replacement paths,
-  - retain `RAW_PERL` fallback markers while incrementally reducing fallback usage through structured action-IR coverage expansion,
+  - continue reducing `RAW_PERL` fallback usage and unresolved helper surface by expanding structured action-IR coverage for currently non-lowerable helper forms,
+  - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 whitespace-tolerant helper lowering follow-up in `perl/LinkedSpec.pm`:
+  - helper-lowering substitutions in `_build_action_lowering_contracts(...)` now accept optional spacing around helper names/arguments (`call (X)`, `CAPTURE_IF ( )`, etc.),
+  - spacing-only helper variants now lower through canonical action-IR flow instead of remaining unresolved.
+- Updated focused regression locks in `t/phase0_regression.t`:
+  - `action_rewriter_pipeline_helper_substitutions` now validates spaced helper forms,
+  - `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior` now locks spaced helper lowering in mixed helper + RAW_PERL flows,
+  - `action_rewriter_reports_unresolved_helpers_in_rule_meta` now uses label-mismatch helper forms (`return_a(Leaf)`, `return(Leaf, $x)`) to preserve unresolved-helper diagnostics coverage.
+- Re-ran full validation after whitespace-tolerant helper lowering follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (47 tests)
 - Landed Backbone item #3 canonical action-IR splitting follow-up in `perl/LinkedSpec.pm`:
   - `_split_action_ir_statements(...)` is now nesting-aware across `()`, `{}`, `[]`, and quoted strings,
   - semicolons inside nested helper payloads no longer split helper statements into false `RAW_PERL` canonical fallback fragments.
