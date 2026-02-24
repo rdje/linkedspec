@@ -96,6 +96,15 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 return-call wrapper lowering follow-up in `perl/LinkedSpec.pm`:
+  - action lowering now explicitly covers full-statement `return call(...)` wrappers through `return_call` contract support.
+  - wrapper-only return-call actions now avoid RAW_PERL fallback classification and remain language-agnostic action-IR ready.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback`.
+- Re-ran full validation after return-call wrapper lowering follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (59 tests)
 - Landed Backbone item #3 method-style action arg-normalization follow-up in `perl/LinkedSpec.pm`:
   - `METHOD_EMPTY_ACTION_CODE_BLOCK` outer-arg trimming now uses whitespace-tolerant boundaries (`^\s*\(` and `\)\s*$`), so leading-space method-arg forms keep balanced helper payloads.
   - method-style `.return ((...))` payloads now lower through structured helper contracts without false unresolved-helper/RAW_PERL blocker classification.

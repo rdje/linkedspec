@@ -178,6 +178,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter call-wrapper lowering lock:
     - canonical lowering now covers common call-wrapper statements (`my $x = call(...)`, `$x = call(...)`, `push @arr, call(...)`) so these forms no longer require RAW_PERL fallback,
     - covered by `action_rewriter_canonical_action_ir_lowers_call_wrappers_without_raw_fallback`.
+  - action-rewriter return-call wrapper lowering lock:
+    - canonical lowering now covers full-statement `return call(...)` wrappers so this form no longer requires RAW_PERL fallback,
+    - covered by `action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback`.
   - action-rewriter method-empty arg normalization lock:
     - method-style empty-action argument trimming now removes outer parentheses with whitespace-tolerant boundaries, so leading-space forms keep balanced helper payloads for canonical lowering,
     - covered by `method_empty_action_return_with_leading_space_args_stays_balanced`.
@@ -302,6 +305,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Canonical helper lowering is now whitespace-tolerant:
   - helper substitution regexes in `_build_action_lowering_contracts(...)` now accept optional spacing around helper names, parentheses, and arguments,
   - spacing-only helper variants now lower through canonical action-IR flow instead of remaining unresolved.
+- Canonical helper lowering now covers return-call wrappers:
+  - `_build_action_lowering_contracts(...)` includes a `return_call` contract for full-statement `return call(Rule)` forms,
+  - `_scan_contract_ir_events(...)` + `_canonicalize_helper_action_ir_event(...)` now carry return-call wrapper events into canonical CALL lowering.
 - Method-style empty-action argument normalization is now whitespace-tolerant at outer boundaries:
   - `METHOD_EMPTY_ACTION_CODE_BLOCK` processing trims `^\s*\(` and `\)\s*$` around outer argument payloads,
   - leading-space argument forms no longer lose closing-balance alignment during helper rewrite/lowering paths.

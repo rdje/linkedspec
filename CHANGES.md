@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Return-Call Wrapper Lowering
+## Summary
+Extended structured action lowering to handle full-statement `return call(Rule)` wrappers so canonical action-IR can avoid RAW_PERL fallback for this wrapper form.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended helper-lowering contracts in `_build_action_lowering_contracts(...)`:
+  - added `return_call` contract for `return call(Rule)` full-statement wrappers.
+- Extended helper event scanning in `_scan_contract_ir_events(...)`:
+  - captures `return_call` wrapper payloads with callee/context metadata.
+- Extended canonical helper-event normalization in `_canonicalize_helper_action_ir_event(...)`:
+  - maps `return_call` to canonical `CALL` kind (with return context marker).
+- Added focused regression lock:
+  - `action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback`
+  - verifies no unresolved helper hits, no RAW_PERL fallback dependency, direct rewrite output correctness, and language-agnostic readiness for return-call wrapper-only actions.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=59`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Method-Style Action Arg Trimming Fix
 ## Summary
 Fixed method-style empty action argument trimming so leading-space argument forms keep balanced helper payloads, preventing false unresolved-helper and RAW_PERL fallback classification for `.return ((...))`-style actions.

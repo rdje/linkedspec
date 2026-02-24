@@ -1375,6 +1375,17 @@ sub _build_action_lowering_contracts {
     return $code
    },
   },
+  {
+   id                 => 'return_call',
+   ir_node            => 'CALL',
+   diag_name          => 'return_call',
+   unresolved_pattern => qr/\breturn\s+call\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\breturn\s+call\s*\(\s*(\w+)\s*\)/return &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
  ]
 }
 
@@ -2134,6 +2145,10 @@ sub _scan_contract_ir_events {
   while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}}};
   }
+ } elsif ($id eq 'return_call') {
+  while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
+   push @events, {raw => $&, args => {callee => $+{callee}, context => 'return'}};
+  }
  } elsif ($id eq 'call') {
   while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {callee => $+{callee}}};
@@ -2253,6 +2268,10 @@ sub _canonicalize_helper_action_ir_event {
  my $kind = $ir_node;
  if ($contract_id eq 'call') {
   $kind = 'CALL';
+ }
+ elsif ($contract_id eq 'return_call') {
+  $kind = 'CALL';
+  $args{context} = 'return';
  }
  elsif ($contract_id eq 'push_single_arg') {
   $kind = 'PUSH';

@@ -1189,6 +1189,30 @@ SPEC
     is($rewritten, 'my $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); $retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo); push @Top, &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'call-wrapper lowering rewrites assignment and builtin push call wrappers to handler calls');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'call-wrapper-only rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return call(Leaf) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for return-call wrapper canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes return-call wrapper statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes return-call wrapper statements');
+    is($meta->{unresolved_helper_count}, 0, 'return-call wrapper lowering keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CALL for return-call wrapper coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return call(Leaf)');
+    is($rewritten, 'return &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'return-call wrapper lowering rewrites to direct handler return call');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'return-call-wrapper-only rule remains language-agnostic action-IR ready');
+};
 subtest 'method_empty_action_return_with_leading_space_args_stays_balanced' => sub {
     plan tests => 6;
 
