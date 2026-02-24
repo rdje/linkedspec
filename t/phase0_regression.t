@@ -1085,7 +1085,7 @@ SPEC
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
 subtest 'return_descr_exposes_action_rewriter_migration_summary' => sub {
-    plan tests => 11;
+    plan tests => 15;
 
     my $spec_content = <<'SPEC';
 Top::&
@@ -1113,12 +1113,16 @@ SPEC
     is($summary->{rules_with_action_rewriter_meta}, 4, 'migration summary tracks rules with action_rewriter metadata');
     is($summary->{language_agnostic_ready_rule_count}, 2, 'migration summary tracks ready rule count');
     is($summary->{language_agnostic_blocked_rule_count}, 2, 'migration summary tracks blocked rule count');
+    is($summary->{language_agnostic_blocker_statement_total_count}, 2, 'migration summary tracks total blocker statement count across blocked rules');
     is_deeply($summary->{language_agnostic_ready_rules}, ['Leaf', 'Top'], 'migration summary exposes deterministic ready-rule list');
 
     my ($mixed_row) = grep { $_->{rule} eq 'Mixed' } @{$summary->{language_agnostic_blocked_rules}};
     my ($unresolved_row) = grep { $_->{rule} eq 'Unresolved' } @{$summary->{language_agnostic_blocked_rules}};
     is_deeply($mixed_row->{blocker_statements}, ['my $tmp = 1'], 'migration summary blocked entry preserves RAW_PERL blocker payload');
     is_deeply($unresolved_row->{blocker_statements}, ['return_a(Leaf)'], 'migration summary blocked entry preserves unresolved-helper blocker payload');
+    is(scalar(@{$summary->{language_agnostic_blocked_rules_by_priority}}), 2, 'migration summary exposes prioritized blocked-rule list');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['Unresolved', 'Mixed'], 'migration summary sorts blocked rules by deterministic blocker priority');
+    is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
     is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
 };
 subtest 'action_rewriter_canonical_action_ir_handles_nested_semicolon_payloads' => sub {

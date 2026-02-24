@@ -138,7 +138,7 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - staged `spec_entry()` RuleIR flow preserves ACODE gdata mapping order/count for multi-AND rule assembly,
     - covered by `ruleir_pipeline_preserves_acode_gdata_mapping_order`.
   - action-rewriter pipeline helper lock:
-    - `call_spec_handler_subst()` helper substitutions are routed through ordered rewrite rules and a dedicated apply stage,
+    - `call_spec_handler_subst()` remains available as a compatibility/test shim while runtime rule emission uses canonical-IR-first rewrite flow through `_rewrite_action_code_with_diagnostics(...)`,
     - covered by `action_rewriter_pipeline_helper_substitutions` for `call`/`push`/capture/backtrack/return helper surfaces.
   - action-rewriter unresolved-helper diagnostics lock:
     - unresolved helper forms that survive rewrite normalization are tracked in rule metadata under `meta.action_rewriter`,
@@ -164,6 +164,10 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter descriptor migration summary lock:
     - `return_descr` now exposes descriptor-level migration summary metadata (`meta.action_rewriter_migration`) including ready/blocked counts, deterministic rule lists, blocked rule payloads, and readiness ratio,
     - covered by `return_descr_exposes_action_rewriter_migration_summary`.
+  - action-rewriter descriptor migration prioritization lock:
+    - descriptor-level migration summary now exposes blocker-triage prioritization metadata (`language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`),
+    - blocked-rule priority ordering is deterministic: blocker statements (desc), unresolved-helper count (desc), raw-Perl dependency count (desc), then rule name (asc),
+    - covered by extended `return_descr_exposes_action_rewriter_migration_summary`.
   - action-rewriter canonical-IR lowering lock:
     - helper lowering now consumes canonical action-IR events first while preserving unresolved-helper and RAW_PERL pass-through behavior,
     - covered by `action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior`.
@@ -253,10 +257,10 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - plan phase: execution metadata is derived from RuleIR (`_plan_rule_ir_meta`),
   - validate phase: incompatible action-mode mixes are rejected (`_validate_rule_ir_or_exit`),
   - emit-context phase: code chunks and action mappings are normalized for handler assembly (`_build_rule_ir_emit_context`).
-- `call_spec_handler_subst()` now follows a structured rewrite pipeline:
-  - rewrite entries are declared in `_build_action_rewrite_rules($label)`,
-  - substitutions are applied in order by `_apply_action_rewrite_pipeline($code, $rules)`,
-  - this is a v1 bridge away from ad hoc rewrite chaining and toward language-neutral action lowering.
+- Runtime action rewriting now flows through `_rewrite_action_code_with_diagnostics(...)`:
+  - helper events are scanned and promoted into canonical action-IR,
+  - lowering is applied from canonical events via `_lower_action_code_from_canonical_ir(...)`,
+  - `call_spec_handler_subst()` is retained as a compatibility/test shim and is not the runtime emission entrypoint.
 - Action rewriter diagnostics are now first-class metadata in RuleIR emit flow:
   - unresolved helper forms are detected by `_find_unresolved_action_helpers(...)`,
   - diagnostics are accumulated across ACODE/BCODE/lifecycle chunks and exposed at `spec->{rule}{meta}{action_rewriter}`,

@@ -492,6 +492,7 @@ my $spec_descr = [
 
   }
  }
+
 },
 
 {# Entry Label
@@ -786,8 +787,11 @@ sub _build_action_rewriter_migration_summary {
   rules_with_action_rewriter_meta => 0,
   language_agnostic_ready_rule_count => 0,
   language_agnostic_blocked_rule_count => 0,
+  language_agnostic_blocker_statement_total_count => 0,
   language_agnostic_ready_rules => [],
   language_agnostic_blocked_rules => [],
+  language_agnostic_blocked_rules_by_priority => [],
+  language_agnostic_top_blocked_rule => undef,
  };
 
  return $summary unless ref($spec) eq 'HASH';
@@ -822,7 +826,17 @@ sub _build_action_rewriter_migration_summary {
    unresolved_helper_count => $rewriter_meta->{unresolved_helper_count} || 0,
    raw_perl_dependency_count => $rewriter_meta->{raw_perl_dependency_count} || 0,
   };
+  $summary->{language_agnostic_blocker_statement_total_count} += scalar @blocker_statements;
  }
+
+ my @blocked_by_priority = sort {
+  $b->{blocker_statement_count} <=> $a->{blocker_statement_count}
+   || $b->{unresolved_helper_count} <=> $a->{unresolved_helper_count}
+   || $b->{raw_perl_dependency_count} <=> $a->{raw_perl_dependency_count}
+   || $a->{rule} cmp $b->{rule}
+ } @{$summary->{language_agnostic_blocked_rules}};
+ $summary->{language_agnostic_blocked_rules_by_priority} = [map { $_->{rule} } @blocked_by_priority];
+ $summary->{language_agnostic_top_blocked_rule} = @blocked_by_priority ? $blocked_by_priority[0]{rule} : undef;
 
  if ($summary->{rules_with_action_rewriter_meta} > 0) {
   $summary->{language_agnostic_ready_ratio} = sprintf(
@@ -2647,23 +2661,12 @@ sub _build_action_rewrite_rules {
  }} @$contracts]
 }
 
-#------------------------------------------------------------------------------
-# Function: _apply_action_rewrite_pipeline
-# Purpose : Legacy/compat utility that applies ordered rewrite rules directly.
-# Args    : ($code, $rules)
-# Returns : rewritten code string
-#------------------------------------------------------------------------------
-sub _apply_action_rewrite_pipeline {
- my ($code, $rules) = @_;
- foreach my $rule (@$rules) {
-  $code = $rule->{apply}->($code);
- }
- return $code
-}
 
 #------------------------------------------------------------------------------
 # Function: call_spec_handler_subst
-# Purpose : Public helper-surface rewrite API used by rule compilation/tests.
+# Purpose : Compatibility/test helper that exposes helper-surface rewrite output
+#           for regression locks; runtime rule compilation calls
+#           _rewrite_action_code_with_diagnostics(...) directly.
 # Args    : ($label, $code)
 # Returns : rewritten code string
 #------------------------------------------------------------------------------

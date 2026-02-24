@@ -1,5 +1,65 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-24 - Backbone Item #3 Follow-up: Action Rewriter Dead-Helper Cleanup
+## Summary
+Removed an unused legacy action-rewriter helper and clarified the remaining helper API so rewrite entrypoints are explicit and non-confusing for maintainers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed dead helper from `LinkedSpec.pm`:
+  - `_apply_action_rewrite_pipeline(...)` (no runtime/test callers).
+- Clarified retained helper contract:
+  - `call_spec_handler_subst(...)` is now explicitly documented as a compatibility/test shim,
+  - runtime rule compilation continues to call `_rewrite_action_code_with_diagnostics(...)` directly from RuleIR emit flow.
+- Updated architecture/test notes to reflect canonical-IR-first runtime rewrite path and avoid stale references to removed helper stage.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=55`)
+## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor Migration Prioritization Metadata
+## Summary
+Extended descriptor-level action-rewriter migration summary metadata with deterministic blocked-rule prioritization fields so language-agnostic migration work can be triaged by highest-impact blockers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Updated `_build_action_rewriter_migration_summary(...)` in `LinkedSpec.pm`:
+  - accumulates descriptor-level blocker payload total (`language_agnostic_blocker_statement_total_count`),
+  - computes deterministic blocked-rule migration order (`language_agnostic_blocked_rules_by_priority`) sorted by:
+    - blocker statement count (descending),
+    - unresolved helper count (descending),
+    - raw-Perl dependency count (descending),
+    - rule name (ascending tie-breaker),
+  - exposes highest-priority blocked rule (`language_agnostic_top_blocked_rule`).
+- Extended migration-summary regression lock:
+  - `return_descr_exposes_action_rewriter_migration_summary`
+  - now validates blocker-statement total, deterministic blocked-rule priority order, and top blocked rule.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=55`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor-Level Action Rewriter Migration Summary
 ## Summary
 Added descriptor-level migration summary metadata so `return_descr` consumers can quantify language-agnostic readiness across all rules and prioritize concrete blocker cleanup.
