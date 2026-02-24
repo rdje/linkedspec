@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Lowering Contract Catalog for Action Rewriter
+## Summary
+Refactored action-rewriter helper lowering to use an explicit contract catalog shared by rewrite application and unresolved-helper diagnostics, and surfaced the contract list in rule metadata.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added explicit helper lowering contracts in `LinkedSpec.pm`:
+  - `_build_action_lowering_contracts($label)`
+- Rewired action rewrite plumbing:
+  - `_build_action_rewrite_rules(...)` now compiles from lowering contracts,
+  - unresolved-helper diagnostics now reuse the same contract definitions (`diag_name` + `unresolved_pattern`),
+  - `_build_rule_ir_emit_context(...)` now builds rewrite rules once per rule and reuses them across ACODE/BCODE/lifecycle chunk normalization.
+- Extended metadata surface in `spec->{rule}{meta}{action_rewriter}`:
+  - added `rewrite_contract_ids` for stable tooling/introspection of active helper-lowering contracts.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_lowering_contract_ids`
+  - verifies `rewrite_contract_ids` presence, stability, and expected helper-contract membership.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=42`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Action-Rewriter Diagnostics Metadata
 ## Summary
 Extended the structured action rewriter with diagnostics for unresolved helper forms and surfaced those diagnostics in per-rule metadata for `return_descr` tooling workflows.

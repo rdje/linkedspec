@@ -129,6 +129,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter unresolved-helper diagnostics lock:
     - unresolved helper forms that survive rewrite normalization are tracked in rule metadata under `meta.action_rewriter`,
     - covered by `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
+  - action-rewriter contract-catalog metadata lock:
+    - rule metadata now exposes ordered helper-lowering contract IDs (`rewrite_contract_ids`) for tooling/introspection stability,
+    - covered by `action_rewriter_meta_exposes_lowering_contract_ids`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -201,6 +204,11 @@ It should not be reframed as a strict EBNF clone.
   - unresolved helper forms are detected by `_find_unresolved_action_helpers(...)`,
   - diagnostics are accumulated across ACODE/BCODE/lifecycle chunks and exposed at `spec->{rule}{meta}{action_rewriter}`,
   - current diagnostics scope focuses on helper-surface mismatch detection without changing rewrite/runtime behavior.
+- Action helper lowering contracts are now explicit and shared across rewrite subsystems:
+  - helper lowering is declared centrally by `_build_action_lowering_contracts($label)`,
+  - rewrite rules are compiled from contracts (`_build_action_rewrite_rules`) rather than hardcoded duplication,
+  - unresolved-helper diagnostics reuse contract-declared unresolved patterns and helper labels,
+  - per-rule metadata now includes `action_rewriter.rewrite_contract_ids` to expose active lowering-contract surface.
 
 ## Change Discipline
 Before each commit:

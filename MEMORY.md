@@ -34,6 +34,8 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `ce6be32` - Backbone item #3 follow-up: add action rewriter diagnostics metadata
+- `1943f0a` - Backbone item #3: land structured action rewriter pipeline
 - `ef0de33` - Landed Backbone Track item #2 with staged RuleIR pipeline in spec_entry
 - `65467d9` - Landed Backbone Track item #1 with declarative bootstrap registry dispatch
 - `f2ead5a` - Track backbone refactor and language-neutral action DSL objectives in roadmap
@@ -62,11 +64,22 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - define explicit action IR nodes and lowering contracts as the boundary for backend-neutral `.spec` actions,
-  - map current helper rewrites onto those IR nodes while preserving compatibility paths,
+  - define explicit action-IR nodes over the landed helper-lowering contract catalog,
+  - map parsed helper invocations to those nodes before lowering to backend code,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 lowering-contract follow-up in `perl/LinkedSpec.pm`:
+  - helper lowering is now centralized in `_build_action_lowering_contracts($label)`,
+  - rewrite rule compilation and unresolved-helper diagnostics now share the same contract definitions.
+- Extended action-rewriter metadata in `spec->{rule}{meta}{action_rewriter}`:
+  - added `rewrite_contract_ids` for stable tooling introspection of active helper-lowering surface.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_lowering_contract_ids`.
+- Re-ran full validation after lowering-contract follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (42 tests)
 - Landed Backbone item #3 diagnostics follow-up in `perl/LinkedSpec.pm`:
   - action rewrite flow now tracks unresolved helper forms via `_find_unresolved_action_helpers`, `_accumulate_action_rewrite_diagnostics`, and `_rewrite_action_code_with_diagnostics`.
   - per-rule diagnostics are now exposed at `spec->{rule}{meta}{action_rewriter}` with unresolved helper names/hit counts.

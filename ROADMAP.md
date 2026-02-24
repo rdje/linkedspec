@@ -98,7 +98,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
    - Parse supported action helpers into a small action AST/IR and emit backend code from IR.
    - Improve diagnostics for unsupported/ambiguous forms.
    - Move progressively away from raw Perl code blocks in `.spec`.
-   - Status: In progress (v1 pipeline + unresolved-helper diagnostics landed; full action AST/IR still planned).
+   - Status: In progress (v1 pipeline + unresolved-helper diagnostics + explicit lowering-contract catalog landed; full action AST/IR still planned).
 
 ## Practical Migration Path (Tracked Sequence)
 1. Refactor-only extraction:
@@ -116,7 +116,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
-- Continue Backbone Refactor Track action rewriter follow-up by defining explicit action IR nodes/lowering while preserving compatibility.
+- Continue Backbone Refactor Track action rewriter follow-up by introducing explicit helper action-IR nodes on top of the lowering-contract layer while preserving compatibility.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -138,5 +138,6 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
   - Item 3 (`call_spec_handler_subst()` structured action rewriter): In progress.
     - Landed detail: `call_spec_handler_subst()` now routes helper rewrites through ordered declarative rules (`_build_action_rewrite_rules`) and a dedicated apply stage (`_apply_action_rewrite_pipeline`), with regression lock `action_rewriter_pipeline_helper_substitutions`.
     - Landed follow-up: unresolved helper diagnostics are now surfaced in `spec->{rule}{meta}{action_rewriter}` (`unresolved_helpers`, hit counts), with regression lock `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
+    - Landed follow-up: helper lowering is now centralized in explicit contracts (`_build_action_lowering_contracts`) reused by rewrite+diagnostics plumbing, with exposed `rewrite_contract_ids` metadata and regression lock `action_rewriter_meta_exposes_lowering_contract_ids`.
   - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
 - Phase 2+: Planned.

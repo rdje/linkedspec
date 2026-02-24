@@ -896,6 +896,24 @@ SPEC
     is($meta->{unresolved_helper_hits}{CAPTURE_IF}, 1, 'Top CAPTURE_IF unresolved helper hit count is tracked');
     is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
 };
+subtest 'action_rewriter_meta_exposes_lowering_contract_ids' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for contract-id metadata check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    ok(ref($meta->{rewrite_contract_ids}) eq 'ARRAY', 'action rewriter metadata exposes rewrite_contract_ids array');
+    ok(@{$meta->{rewrite_contract_ids}} > 0, 'rewrite_contract_ids is non-empty');
+    is($meta->{rewrite_contract_ids}[0], 'call', 'rewrite_contract_ids preserves stable ordering (first: call)');
+    ok(grep { $_ eq 'return_a' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes return_a contract');
+    ok(grep { $_ eq 'capture_if_macro' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes CAPTURE_IF macro contract');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

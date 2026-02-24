@@ -931,6 +931,163 @@ my $specretv = shift;
  return $result
 }
 
+sub _build_action_lowering_contracts {
+ my ($label) = @_;
+
+ return [
+  {
+   id                 => 'call',
+   diag_name          => 'call',
+   unresolved_pattern => qr/\bcall\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcall\((\w+)\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'push_single_arg',
+   diag_name          => 'push',
+   unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bpush\((\w+)\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'push_target_arg',
+   diag_name          => 'push',
+   unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bpush\((\w+)\s*,\s*(\w+)\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_a',
+   diag_name          => 'return_a',
+   unresolved_pattern => qr/\breturn_a\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_a\($label(?:,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return',
+   diag_name          => 'return',
+   unresolved_pattern => qr/\breturn\s*\(\s*\w+\s*,/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn\($label,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\)/return ['?$label:', $+{arg}]/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_ma',
+   diag_name          => 'return_ma',
+   unresolved_pattern => qr/\breturn_ma\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_ma\($label\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_m',
+   diag_name          => 'return_m',
+   unresolved_pattern => qr/\breturn_m\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\breturn_m\($label\)/return ['?$label:', \@IMATCH_LIST]/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_macro',
+   diag_name          => 'capture_macro',
+   unresolved_pattern => qr/\$CAPTURE\b/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\$CAPTURE\b/substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture',
+   diag_name          => 'capture',
+   unresolved_pattern => qr/\bcapture\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcapture\(\w+\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_if',
+   diag_name          => 'capture_if',
+   unresolved_pattern => qr/\bcapture_if\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{\bcapture_if\(\w+\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_if_macro',
+   diag_name          => 'CAPTURE_IF',
+   unresolved_pattern => qr/\bCAPTURE_IF\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{\bCAPTURE_IF\(\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    return $code
+   },
+  },
+  {
+   id                 => 'ibacktrack_macro',
+   diag_name          => 'IBACKTRACK',
+   unresolved_pattern => qr/\bIBACKTRACK\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bIBACKTRACK\(\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'backtrack_macro',
+   diag_name          => 'BACKTRACK',
+   unresolved_pattern => qr/\bBACKTRACK\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bBACKTRACK\(\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'ibacktrack',
+   diag_name          => 'ibacktrack',
+   unresolved_pattern => qr/\bibacktrack\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bibacktrack\(\w+\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'backtrack',
+   diag_name          => 'backtrack',
+   unresolved_pattern => qr/\bbacktrack\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bbacktrack\(\w+\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
+    return $code
+   },
+  },
+ ]
+}
+
 sub _collect_rule_ir {
  my ($einfo) = @_;
 
@@ -1015,11 +1172,11 @@ sub _validate_rule_ir_or_exit {
 }
 
 sub _normalize_rule_code_chunks {
- my ($label, $chunks, $rewrite_diag_acc) = @_;
+ my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
 
  my @normalized;
  foreach my $chunk (@$chunks) {
-  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk);
+  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
   $rewritten =~ s/\s*;\s*$//o;
   push @normalized, $rewritten;
@@ -1031,6 +1188,7 @@ sub _normalize_rule_code_chunks {
 sub _build_rule_ir_emit_context {
  my ($rule_ir) = @_;
  my $label = $rule_ir->{label};
+ my $rewrite_rules = _build_action_rewrite_rules($label);
  my $rewrite_diag_acc = {
   unresolved_helper_hits  => {},
   unresolved_helper_count => 0,
@@ -1039,7 +1197,7 @@ sub _build_rule_ir_emit_context {
  my @ACODEs;
  my @GDATA;
  foreach my $acode_entry (@{$rule_ir->{acode_entries}}) {
-  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code});
+  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @ACODEs, $rewritten_acode;
   push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
@@ -1048,7 +1206,7 @@ sub _build_rule_ir_emit_context {
  my @BCALLs;
  my %BCODEs;
  foreach my $bcode_entry (@{$rule_ir->{bcode_entries}}) {
-  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code});
+  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @BCALLs, $bcode_entry->{call};
   $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
@@ -1059,18 +1217,21 @@ sub _build_rule_ir_emit_context {
   BCODE => scalar(@{$rule_ir->{bcode_entries}}),
  );
 
- my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE},  $rewrite_diag_acc);
- my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE},  $rewrite_diag_acc);
- my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE}, $rewrite_diag_acc);
- my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE}, $rewrite_diag_acc);
- my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE}, $rewrite_diag_acc);
- my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE}, $rewrite_diag_acc);
- my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc);
+ my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE},  $rewrite_diag_acc, $rewrite_rules);
+ my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE},  $rewrite_diag_acc, $rewrite_rules);
+ my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE}, $rewrite_diag_acc, $rewrite_rules);
+ my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE}, $rewrite_diag_acc, $rewrite_rules);
+ my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE}, $rewrite_diag_acc, $rewrite_rules);
+ my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE}, $rewrite_diag_acc, $rewrite_rules);
+ my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc, $rewrite_rules);
+
+ my @rewrite_contract_ids = map { $_->{id} } @$rewrite_rules;
 
  my $action_rewriter_meta = {
   unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
   unresolved_helpers      => [sort keys %{$rewrite_diag_acc->{unresolved_helper_hits}}],
   unresolved_helper_hits  => {%{$rewrite_diag_acc->{unresolved_helper_hits}}},
+  rewrite_contract_ids    => \@rewrite_contract_ids,
  };
 
  if ($action_rewriter_meta->{unresolved_helper_count}) {
@@ -1509,29 +1670,14 @@ my $sg = shift;
  return $result
 }
 sub _find_unresolved_action_helpers {
- my ($code) = @_;
-
- my @helper_patterns = (
-  ['call',           qr/\bcall\s*\(\s*\w+\s*\)/o],
-  ['push',           qr/\bpush\s*\(\s*\w+\s*(?:,\s*\w+\s*)?\)/o],
-  ['return_a',       qr/\breturn_a\s*\(/o],
-  ['return',         qr/\breturn\s*\(\s*\w+\s*,/o],
-  ['return_ma',      qr/\breturn_ma\s*\(\s*\w+\s*\)/o],
-  ['return_m',       qr/\breturn_m\s*\(\s*\w+\s*\)/o],
-  ['capture',        qr/\bcapture\s*\(\s*\w+\s*\)/o],
-  ['capture_if',     qr/\bcapture_if\s*\(\s*\w+\s*\)/o],
-  ['CAPTURE_IF',     qr/\bCAPTURE_IF\s*\(\s*\)/o],
-  ['IBACKTRACK',     qr/\bIBACKTRACK\s*\(\s*\)/o],
-  ['BACKTRACK',      qr/\bBACKTRACK\s*\(\s*\)/o],
-  ['ibacktrack',     qr/\bibacktrack\s*\(\s*\w+\s*\)/o],
-  ['backtrack',      qr/\bbacktrack\s*\(\s*\w+\s*\)/o],
-  ['capture_macro',  qr/\$CAPTURE\b/o],
- );
+ my ($code, $rewrite_rules) = @_;
 
  my %hits;
  my $total = 0;
- foreach my $entry (@helper_patterns) {
-  my ($helper_name, $helper_re) = @$entry;
+ foreach my $rule (@$rewrite_rules) {
+  my $helper_name = $rule->{diag_name} // $rule->{id};
+  my $helper_re = $rule->{unresolved_pattern};
+  next unless $helper_re;
   my $count = () = ($code =~ /$helper_re/g);
   next unless $count;
   $hits{$helper_name} += $count;
@@ -1563,139 +1709,24 @@ sub _accumulate_action_rewrite_diagnostics {
 }
 
 sub _rewrite_action_code_with_diagnostics {
- my ($label, $code) = @_;
+ my ($label, $code, $rewrite_rules) = @_;
 
- my $rewrite_rules = _build_action_rewrite_rules($label);
+ $rewrite_rules //= _build_action_rewrite_rules($label);
  my $rewritten = _apply_action_rewrite_pipeline($code, $rewrite_rules);
- my $diag = _find_unresolved_action_helpers($rewritten);
+ my $diag = _find_unresolved_action_helpers($rewritten, $rewrite_rules);
 
  return ($rewritten, $diag)
 }
 sub _build_action_rewrite_rules {
  my ($label) = @_;
 
- return [
-  {
-   id => 'call',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bcall\((\w+)\)/&{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
-    return $code
-   },
-  },
-  {
-   id => 'push_single_arg',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bpush\((\w+)\)/push \@$label, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
-    return $code
-   },
-  },
-  {
-   id => 'push_target_arg',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bpush\((\w+)\s*,\s*(\w+)\)/push \@$2, &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
-    return $code
-   },
-  },
-  {
-   id => 'return_a',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_a\($label(?:,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
-    return $code
-   },
-  },
-  {
-   id => 'return',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn\($label,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\)/return ['?$label:', $+{arg}]/g;
-    return $code
-   },
-  },
-  {
-   id => 'return_ma',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_ma\($label\)/return ['?$label:', \@IMATCH_LIST, \\\@$label]/g;
-    return $code
-   },
-  },
-  {
-   id => 'return_m',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\breturn_m\($label\)/return ['?$label:', \@IMATCH_LIST]/g;
-    return $code
-   },
-  },
-  {
-   id => 'capture_macro',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\$CAPTURE\b/substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
-    return $code
-   },
-  },
-  {
-   id => 'capture',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bcapture\(\w+\)/push \@$label, substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH)/g;
-    return $code
-   },
-  },
-  {
-   id => 'capture_if',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s{\bcapture_if\(\w+\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
-    return $code
-   },
-  },
-  {
-   id => 'capture_if_macro',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s{\bCAPTURE_IF\(\)}{my \$capt = substr(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
-    return $code
-   },
-  },
-  {
-   id => 'ibacktrack_macro',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bIBACKTRACK\(\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
-    return $code
-   },
-  },
-  {
-   id => 'backtrack_macro',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bBACKTRACK\(\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
-    return $code
-   },
-  },
-  {
-   id => 'ibacktrack',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bibacktrack\(\w+\)/pos(\$\$STRING) = \$IPOS  - length \$IMATCH/g;
-    return $code
-   },
-  },
-  {
-   id => 'backtrack',
-   apply => sub {
-    my ($code) = @_;
-    $code =~ s/\bbacktrack\(\w+\)/pos(\$\$STRING)  = \$LSPOS - length \$LMATCH/g;
-    return $code
-   },
-  },
- ]
+ my $contracts = _build_action_lowering_contracts($label);
+ return [map {{
+  id                 => $_->{id},
+  diag_name          => $_->{diag_name},
+  unresolved_pattern => $_->{unresolved_pattern},
+  apply              => $_->{lower},
+ }} @$contracts]
 }
 
 sub _apply_action_rewrite_pipeline {
