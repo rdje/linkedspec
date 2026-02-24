@@ -37,8 +37,17 @@ LinkedSpec should be treated as:
 - A progressive extraction parser DSL.
 - A practical alternative to strict EBNF-centric workflows for niche/high-variance inputs.
 - A platform for building domain parsers quickly.
+- A language-agnostic `.spec` system where parser semantics are portable across backend implementations.
 
 It should not be reframed as a strict EBNF clone.
+It should also not remain dependent on embedded Perl code-blocks in `.spec` as a long-term architecture.
+
+## Language-Agnostic `.spec` End-State (Confirmed)
+- Final objective: stop using Perl code-blocks in `.spec` files.
+- `.spec` action semantics should be represented in backend-neutral IR/DSL forms.
+- Backend implementations (Perl first, others later) should map the same `.spec` action IR to host-language code without requiring `.spec` changes.
+- Emitted host-language code should be constrained to canonical forms under generator control to minimize parser/splitter fragility and cross-backend divergence.
+- Near-term guardrail: avoid introducing new `.spec` features that increase raw Perl code-block dependence.
 
 ## Design Goals
 1. Preserve extraction + recursion ergonomics.

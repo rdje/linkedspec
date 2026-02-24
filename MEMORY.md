@@ -25,6 +25,8 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 5. Commit workflow uses `git commit -F git_message_brief.txt`; brief file should be cleared after commit.
 6. Downstream consumers exist, but work on them is currently out of scope unless explicitly requested.
 7. `_split_action_ir_statements(...)` hardening is intentionally paused for now; only resume if a concrete regression or unsupported real pattern appears.
+8. Final architecture goal: `.spec` files must become language-agnostic/language-independent, with no embedded Perl code-block dependency.
+9. Backend code emission should stay under strict canonical-generator control so emitted host-language code avoids avoidable splitter/parser fragility.
 
 ## Live Documents Contract
 These files are live and must be amended before any commit:
@@ -78,10 +80,13 @@ When resuming after interruption:
 - Continue post-item-#3 follow-up toward language-neutral actions:
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
+  - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
+  - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- User reaffirmed final objective: make `.spec` language-agnostic and stop relying on embedded Perl code-blocks; keep generated host-language code within controlled canonical forms to reduce splitter fragility and simplify multi-backend portability.
 - User-directed decision: pause further `_split_action_ir_statements(...)` hardening for now and revisit only when needed by concrete regressions or unsupported production patterns.
 - Landed Backbone item #3 canonical splitter pipe-quote follow-up in `perl/LinkedSpec.pm`:
   - `_split_action_ir_statements(...)` now tracks pipe-delimited Perl quote-like payloads with escape handling and multi-segment support for `s|...|...|`/`tr|...|...|`/`y|...|...|`,

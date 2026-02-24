@@ -29,6 +29,7 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 3. Make parser behavior explicit (not accidental).
 4. Improve trust with deterministic diagnostics and regression tests.
 5. Maintain backward compatibility by default while introducing stricter optional modes.
+6. Drive `.spec` toward language-agnostic action semantics (no embedded Perl code-block dependency in final state).
 
 ## Work Phases
 ## Phase 0: Safety Net and Baseline Lock
@@ -97,7 +98,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 3. Replace `call_spec_handler_subst()` regex-chain rewriting with a structured action rewriter.
    - Parse supported action helpers into a small action AST/IR and emit backend code from IR.
    - Improve diagnostics for unsupported/ambiguous forms.
-   - Move progressively away from raw Perl code blocks in `.spec`.
+   - Move progressively away from raw Perl code blocks in `.spec`, with final objective of eliminating Perl code-block usage in `.spec`.
    - Status: In progress (v1 pipeline + diagnostics + lowering-contract catalog + canonical action-IR promotion + canonical-IR-driven lowering landed; full action AST/IR lowering still planned).
 
 ## Practical Migration Path (Tracked Sequence)
@@ -108,7 +109,7 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 3. Action rewriter v1:
    - Introduce IR-based rewrite for current helper surface while keeping compatibility fallback.
 4. Language-neutral action DSL transition:
-   - Define and adopt a backend-agnostic action DSL in `.spec` (no raw Perl dependency by default).
+   - Define and adopt a backend-agnostic action DSL in `.spec` (no raw Perl dependency by default, and ultimately no Perl code-block usage in `.spec`).
 5. Multi-backend enablement:
    - Keep regex/execution semantics documented and map action IR to Perl first, then additional backends (e.g. Rust, Julia) incrementally.
 
@@ -118,6 +119,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
 - Pause further `_split_action_ir_statements(...)` hardening work; only revisit splitter surface expansion when a concrete regression or unsupported production pattern is observed.
+- Keep `.spec` action semantics language-agnostic: avoid introducing new Perl code-block dependence and prioritize IR/DSL forms that can map cleanly to non-Perl backends.
+- Keep backend emission under strict canonical forms we control so emitted host-language code avoids avoidable parser/splitter fragility.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -152,5 +155,5 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
     - Landed follow-up: canonical action-IR statement splitting now ignores semicolons inside angle-delimited Perl quote-like payloads (e.g. `qr<...>`), preventing fallback fragmentation for angle-quote payload statements, with regression lock `action_rewriter_canonical_action_ir_ignores_angle_quote_semicolon_fragmentation`.
     - Landed follow-up: canonical action-IR statement splitting now ignores semicolons inside pipe-delimited Perl quote-like payloads (e.g. `qr|...|`), preventing fallback fragmentation for pipe-quote payload statements, with regression lock `action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation`.
     - Current decision: `_split_action_ir_statements(...)` hardening track is paused; future work should prioritize action-IR/lowering and diagnostics unless concrete splitter regressions appear.
-  - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
+  - Language-neutral `.spec` action DSL objective (reduce/remove then eliminate Perl code-block dependency in `.spec`): Planned.
 - Phase 2+: Planned.
