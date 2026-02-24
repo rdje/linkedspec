@@ -1,6 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Helper Action-IR Node Metadata
+## Summary
+Extended the action rewriter to expose helper action-IR node usage in rule metadata, using the existing lowering-contract catalog as the shared source for IR-node detection and unresolved-helper diagnostics.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended helper-lowering contracts with explicit `ir_node` identities (e.g. `CALL`, `RETURN_A`, `CAPTURE_IF`).
+- Added helper action-IR collection helper:
+  - `_collect_action_helper_ir_nodes(...)`
+- Updated rewrite diagnostics flow:
+  - `_rewrite_action_code_with_diagnostics(...)` now returns both unresolved-helper diagnostics and helper action-IR node hits,
+  - `_accumulate_action_rewrite_diagnostics(...)` now accumulates both unresolved-helper and helper action-IR counters.
+- Extended `spec->{rule}{meta}{action_rewriter}` metadata with:
+  - `helper_action_ir_count`
+  - `helper_action_ir_nodes`
+  - `helper_action_ir_hits`
+- Preserved rewrite/runtime behavior while improving introspection surface for progressive action-IR migration.
+- Added focused regression lock:
+  - `action_rewriter_meta_exposes_helper_action_ir_nodes`
+  - verifies helper action-IR node presence/hit-counts for representative helper invocations.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=43`)
+
 ## 2026-02-24 - Backbone Item #3 Follow-up: Lowering Contract Catalog for Action Rewriter
 ## Summary
 Refactored action-rewriter helper lowering to use an explicit contract catalog shared by rewrite application and unresolved-helper diagnostics, and surfaced the contract list in rule metadata.

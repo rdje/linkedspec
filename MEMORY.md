@@ -34,6 +34,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `546bfd0` - Backbone item #3 follow-up: add lowering contract catalog
 - `ce6be32` - Backbone item #3 follow-up: add action rewriter diagnostics metadata
 - `1943f0a` - Backbone item #3: land structured action rewriter pipeline
 - `ef0de33` - Landed Backbone Track item #2 with staged RuleIR pipeline in spec_entry
@@ -64,11 +65,23 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
-  - define explicit action-IR nodes over the landed helper-lowering contract catalog,
-  - map parsed helper invocations to those nodes before lowering to backend code,
+  - extend helper action-IR metadata from node IDs to structured argument payloads (helper + args),
+  - use that structured action-IR as the direct lowering input boundary for backend code emission,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 helper action-IR follow-up in `perl/LinkedSpec.pm`:
+  - helper-lowering contracts now carry explicit `ir_node` identities (e.g. `CALL`, `RETURN_A`, `CAPTURE_IF`),
+  - helper action-IR node hits are now collected pre-lowering via `_collect_action_helper_ir_nodes(...)`,
+  - rewrite diagnostics aggregation now tracks both unresolved-helper diagnostics and helper action-IR counters.
+- Extended `spec->{rule}{meta}{action_rewriter}` metadata:
+  - added `helper_action_ir_count`, `helper_action_ir_nodes`, and `helper_action_ir_hits`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_meta_exposes_helper_action_ir_nodes`.
+- Re-ran full validation after helper action-IR follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (43 tests)
 - Landed Backbone item #3 lowering-contract follow-up in `perl/LinkedSpec.pm`:
   - helper lowering is now centralized in `_build_action_lowering_contracts($label)`,
   - rewrite rule compilation and unresolved-helper diagnostics now share the same contract definitions.

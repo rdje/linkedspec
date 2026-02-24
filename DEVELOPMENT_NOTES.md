@@ -132,6 +132,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter contract-catalog metadata lock:
     - rule metadata now exposes ordered helper-lowering contract IDs (`rewrite_contract_ids`) for tooling/introspection stability,
     - covered by `action_rewriter_meta_exposes_lowering_contract_ids`.
+  - action-rewriter helper action-IR metadata lock:
+    - rule metadata now exposes helper action-IR nodes/hit counts collected before lowering,
+    - covered by `action_rewriter_meta_exposes_helper_action_ir_nodes`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -209,6 +212,10 @@ It should not be reframed as a strict EBNF clone.
   - rewrite rules are compiled from contracts (`_build_action_rewrite_rules`) rather than hardcoded duplication,
   - unresolved-helper diagnostics reuse contract-declared unresolved patterns and helper labels,
   - per-rule metadata now includes `action_rewriter.rewrite_contract_ids` to expose active lowering-contract surface.
+- Helper action-IR node metadata is now collected pre-lowering and exposed for migration tooling:
+  - lowering contracts now carry canonical `ir_node` identities,
+  - `_collect_action_helper_ir_nodes(...)` records helper action-IR hits before textual lowering is applied,
+  - aggregated IR-node counters are surfaced at `spec->{rule}{meta}{action_rewriter}` as `helper_action_ir_count`, `helper_action_ir_nodes`, and `helper_action_ir_hits`.
 
 ## Change Discipline
 Before each commit:

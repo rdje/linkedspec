@@ -914,6 +914,29 @@ SPEC
     ok(grep { $_ eq 'return_a' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes return_a contract');
     ok(grep { $_ eq 'capture_if_macro' } @{$meta->{rewrite_contract_ids}}, 'rewrite_contract_ids includes CAPTURE_IF macro contract');
 };
+subtest 'action_rewriter_meta_exposes_helper_action_ir_nodes' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); capture_if(Top); return_a(Top) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for helper action-IR metadata check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{helper_action_ir_count}, 3, 'helper action-IR count captures helper invocations before lowering');
+    ok(grep { $_ eq 'CALL' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include CALL');
+    ok(grep { $_ eq 'CAPTURE_IF' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include CAPTURE_IF');
+    ok(grep { $_ eq 'RETURN_A' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include RETURN_A');
+    is($meta->{helper_action_ir_hits}{CALL}, 1, 'helper action-IR CALL hit count is tracked');
+    is($meta->{helper_action_ir_hits}{CAPTURE_IF}, 1, 'helper action-IR CAPTURE_IF hit count is tracked');
+    is($meta->{helper_action_ir_hits}{RETURN_A}, 1, 'helper action-IR RETURN_A hit count is tracked');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

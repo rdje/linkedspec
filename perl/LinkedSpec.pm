@@ -937,6 +937,7 @@ sub _build_action_lowering_contracts {
  return [
   {
    id                 => 'call',
+   ir_node            => 'CALL',
    diag_name          => 'call',
    unresolved_pattern => qr/\bcall\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -947,6 +948,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'push_single_arg',
+   ir_node            => 'PUSH',
    diag_name          => 'push',
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -957,6 +959,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'push_target_arg',
+   ir_node            => 'PUSH',
    diag_name          => 'push',
    unresolved_pattern => qr/\bpush\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
    lower              => sub {
@@ -967,6 +970,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'return_a',
+   ir_node            => 'RETURN_A',
    diag_name          => 'return_a',
    unresolved_pattern => qr/\breturn_a\s*\(/o,
    lower              => sub {
@@ -977,6 +981,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'return',
+   ir_node            => 'RETURN',
    diag_name          => 'return',
    unresolved_pattern => qr/\breturn\s*\(\s*\w+\s*,/o,
    lower              => sub {
@@ -987,6 +992,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'return_ma',
+   ir_node            => 'RETURN_MA',
    diag_name          => 'return_ma',
    unresolved_pattern => qr/\breturn_ma\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -997,6 +1003,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'return_m',
+   ir_node            => 'RETURN_M',
    diag_name          => 'return_m',
    unresolved_pattern => qr/\breturn_m\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -1007,6 +1014,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'capture_macro',
+   ir_node            => 'CAPTURE_MACRO',
    diag_name          => 'capture_macro',
    unresolved_pattern => qr/\$CAPTURE\b/o,
    lower              => sub {
@@ -1017,6 +1025,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'capture',
+   ir_node            => 'CAPTURE',
    diag_name          => 'capture',
    unresolved_pattern => qr/\bcapture\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -1027,6 +1036,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'capture_if',
+   ir_node            => 'CAPTURE_IF',
    diag_name          => 'capture_if',
    unresolved_pattern => qr/\bcapture_if\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -1037,6 +1047,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'capture_if_macro',
+   ir_node            => 'CAPTURE_IF',
    diag_name          => 'CAPTURE_IF',
    unresolved_pattern => qr/\bCAPTURE_IF\s*\(\s*\)/o,
    lower              => sub {
@@ -1047,6 +1058,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'ibacktrack_macro',
+   ir_node            => 'IBACKTRACK',
    diag_name          => 'IBACKTRACK',
    unresolved_pattern => qr/\bIBACKTRACK\s*\(\s*\)/o,
    lower              => sub {
@@ -1057,6 +1069,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'backtrack_macro',
+   ir_node            => 'BACKTRACK',
    diag_name          => 'BACKTRACK',
    unresolved_pattern => qr/\bBACKTRACK\s*\(\s*\)/o,
    lower              => sub {
@@ -1067,6 +1080,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'ibacktrack',
+   ir_node            => 'IBACKTRACK',
    diag_name          => 'ibacktrack',
    unresolved_pattern => qr/\bibacktrack\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -1077,6 +1091,7 @@ sub _build_action_lowering_contracts {
   },
   {
    id                 => 'backtrack',
+   ir_node            => 'BACKTRACK',
    diag_name          => 'backtrack',
    unresolved_pattern => qr/\bbacktrack\s*\(\s*\w+\s*\)/o,
    lower              => sub {
@@ -1192,6 +1207,8 @@ sub _build_rule_ir_emit_context {
  my $rewrite_diag_acc = {
   unresolved_helper_hits  => {},
   unresolved_helper_count => 0,
+  helper_action_ir_hits   => {},
+  helper_action_ir_count  => 0,
  };
 
  my @ACODEs;
@@ -1231,6 +1248,9 @@ sub _build_rule_ir_emit_context {
   unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
   unresolved_helpers      => [sort keys %{$rewrite_diag_acc->{unresolved_helper_hits}}],
   unresolved_helper_hits  => {%{$rewrite_diag_acc->{unresolved_helper_hits}}},
+  helper_action_ir_count  => $rewrite_diag_acc->{helper_action_ir_count},
+  helper_action_ir_nodes  => [sort keys %{$rewrite_diag_acc->{helper_action_ir_hits}}],
+  helper_action_ir_hits   => {%{$rewrite_diag_acc->{helper_action_ir_hits}}},
   rewrite_contract_ids    => \@rewrite_contract_ids,
  };
 
@@ -1691,6 +1711,28 @@ sub _find_unresolved_action_helpers {
  }
 }
 
+sub _collect_action_helper_ir_nodes {
+ my ($code, $rewrite_rules) = @_;
+
+ my %hits;
+ my $total = 0;
+ foreach my $rule (@$rewrite_rules) {
+  my $ir_node = $rule->{ir_node} // $rule->{id};
+  my $helper_re = $rule->{unresolved_pattern};
+  next unless $helper_re;
+  my $count = () = ($code =~ /$helper_re/g);
+  next unless $count;
+  $hits{$ir_node} += $count;
+  $total += $count;
+ }
+
+ return {
+  helper_action_ir_count => $total,
+  helper_action_ir_hits  => \%hits,
+  helper_action_ir_nodes => [sort keys %hits],
+ }
+}
+
 sub _accumulate_action_rewrite_diagnostics {
  my ($acc, $diag) = @_;
  return $acc unless $acc && $diag && ref($diag) eq 'HASH';
@@ -1705,6 +1747,16 @@ sub _accumulate_action_rewrite_diagnostics {
   $acc->{unresolved_helper_count} += $count;
  }
 
+ my $ir_hits = $diag->{helper_action_ir_hits};
+ if ($ir_hits && ref($ir_hits) eq 'HASH') {
+  foreach my $ir_node (keys %$ir_hits) {
+   my $count = $ir_hits->{$ir_node} || 0;
+   next unless $count;
+   $acc->{helper_action_ir_hits}{$ir_node} += $count;
+   $acc->{helper_action_ir_count} += $count;
+  }
+ }
+
  return $acc
 }
 
@@ -1712,10 +1764,15 @@ sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
 
  $rewrite_rules //= _build_action_rewrite_rules($label);
+ my $ir_diag = _collect_action_helper_ir_nodes($code, $rewrite_rules);
  my $rewritten = _apply_action_rewrite_pipeline($code, $rewrite_rules);
  my $diag = _find_unresolved_action_helpers($rewritten, $rewrite_rules);
-
- return ($rewritten, $diag)
+ return ($rewritten, {
+  %$diag,
+  helper_action_ir_count => $ir_diag->{helper_action_ir_count},
+  helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
+  helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
+ })
 }
 sub _build_action_rewrite_rules {
  my ($label) = @_;
@@ -1723,6 +1780,7 @@ sub _build_action_rewrite_rules {
  my $contracts = _build_action_lowering_contracts($label);
  return [map {{
   id                 => $_->{id},
+  ir_node            => $_->{ir_node},
   diag_name          => $_->{diag_name},
   unresolved_pattern => $_->{unresolved_pattern},
   apply              => $_->{lower},
