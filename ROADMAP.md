@@ -83,10 +83,40 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 - Exit criteria:
   - Documentation remains current at each commit.
 
+## Backbone Refactor Track (Explicit, Tracked)
+This track captures the core refactor items needed to make `LinkedSpec.pm` robust and extensible while preserving current behavior.
+
+1. Replace positional hardcoded bootstrap grammar (`$spec_descr` array indexing) with a declarative bootstrap rule registry.
+   - Use stable rule IDs/names and explicit tags instead of index-coupled dispatch.
+   - Derive special sets (e.g. start patterns, brace scanners) by semantic tags, not fixed numeric offsets.
+   - Status: Planned.
+2. Split `spec_entry()` into a staged compiler pipeline around an intermediate rule representation (RuleIR).
+   - Separate collection, validation, metadata planning, and handler emission.
+   - Keep `spec_entry()` as orchestration glue only.
+   - Status: Planned.
+3. Replace `call_spec_handler_subst()` regex-chain rewriting with a structured action rewriter.
+   - Parse supported action helpers into a small action AST/IR and emit backend code from IR.
+   - Improve diagnostics for unsupported/ambiguous forms.
+   - Move progressively away from raw Perl code blocks in `.spec`.
+   - Status: Planned.
+
+## Practical Migration Path (Tracked Sequence)
+1. Refactor-only extraction:
+   - Isolate bootstrap handlers and `spec_entry()` stages into private helpers/modules with behavior parity.
+2. Deterministic codegen routing:
+   - Route handler template selection entirely through explicit metadata/strategy plans.
+3. Action rewriter v1:
+   - Introduce IR-based rewrite for current helper surface while keeping compatibility fallback.
+4. Language-neutral action DSL transition:
+   - Define and adopt a backend-agnostic action DSL in `.spec` (no raw Perl dependency by default).
+5. Multi-backend enablement:
+   - Keep regex/execution semantics documented and map action IR to Perl first, then additional backends (e.g. Rust, Julia) incrementally.
+
 ## Immediate Next Steps
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
+- Start Backbone Refactor Track item #1 (`$spec_descr` declarative registry) behind regression locks.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -100,4 +130,9 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
   - Landed: regression harness decoupled from direct `Lispish.pm` import.
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
+- Backbone Refactor Track: Planned (not started).
+  - Item 1 (`$spec_descr` declarative registry): Planned.
+  - Item 2 (`spec_entry()` staged RuleIR pipeline): Planned.
+  - Item 3 (`call_spec_handler_subst()` structured action rewriter): Planned.
+  - Language-neutral `.spec` action DSL objective (reduce/remove Perl dependency): Planned.
 - Phase 2+: Planned.
