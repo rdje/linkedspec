@@ -873,6 +873,29 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserved'
     );
 };
+subtest 'action_rewriter_reports_unresolved_helpers_in_rule_meta' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call (Leaf); CAPTURE_IF (); return_a(Top) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for unresolved-helper diagnostics check');
+    ok(exists $descr->{spec}{Top}{meta}{action_rewriter}, 'Top rule exposes action_rewriter metadata');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{unresolved_helper_count}, 2, 'Top unresolved helper count captures unrewritten helper forms');
+    ok(grep { $_ eq 'call' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include call');
+    ok(grep { $_ eq 'CAPTURE_IF' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include CAPTURE_IF');
+    is($meta->{unresolved_helper_hits}{call}, 1, 'Top call unresolved helper hit count is tracked');
+    is($meta->{unresolved_helper_hits}{CAPTURE_IF}, 1, 'Top CAPTURE_IF unresolved helper hit count is tracked');
+    is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

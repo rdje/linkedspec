@@ -126,6 +126,9 @@ It should not be reframed as a strict EBNF clone.
   - action-rewriter pipeline helper lock:
     - `call_spec_handler_subst()` helper substitutions are routed through ordered rewrite rules and a dedicated apply stage,
     - covered by `action_rewriter_pipeline_helper_substitutions` for `call`/`push`/capture/backtrack/return helper surfaces.
+  - action-rewriter unresolved-helper diagnostics lock:
+    - unresolved helper forms that survive rewrite normalization are tracked in rule metadata under `meta.action_rewriter`,
+    - covered by `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.
@@ -194,6 +197,10 @@ It should not be reframed as a strict EBNF clone.
   - rewrite entries are declared in `_build_action_rewrite_rules($label)`,
   - substitutions are applied in order by `_apply_action_rewrite_pipeline($code, $rules)`,
   - this is a v1 bridge away from ad hoc rewrite chaining and toward language-neutral action lowering.
+- Action rewriter diagnostics are now first-class metadata in RuleIR emit flow:
+  - unresolved helper forms are detected by `_find_unresolved_action_helpers(...)`,
+  - diagnostics are accumulated across ACODE/BCODE/lifecycle chunks and exposed at `spec->{rule}{meta}{action_rewriter}`,
+  - current diagnostics scope focuses on helper-surface mismatch detection without changing rewrite/runtime behavior.
 
 ## Change Discipline
 Before each commit:

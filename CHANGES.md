@@ -1,6 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-02-24 - Backbone Item #3 Follow-up: Action-Rewriter Diagnostics Metadata
+## Summary
+Extended the structured action rewriter with diagnostics for unresolved helper forms and surfaced those diagnostics in per-rule metadata for `return_descr` tooling workflows.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added rewrite-diagnostics helpers in `LinkedSpec.pm`:
+  - `_find_unresolved_action_helpers(...)`
+  - `_accumulate_action_rewrite_diagnostics(...)`
+  - `_rewrite_action_code_with_diagnostics(...)`
+- Updated rule-emission pipeline wiring:
+  - action rewrites now collect unresolved helper diagnostics while normalizing ACODE/BCODE and lifecycle code chunks,
+  - diagnostics are exposed at `spec->{rule}{meta}{action_rewriter}` with:
+    - `unresolved_helper_count`,
+    - `unresolved_helpers`,
+    - `unresolved_helper_hits`.
+- Preserved existing rewrite/runtime behavior:
+  - `call_spec_handler_subst(...)` remains string-returning and backward-compatible.
+- Added focused regression lock:
+  - `action_rewriter_reports_unresolved_helpers_in_rule_meta`
+  - verifies unresolved helper diagnostics are emitted in rule metadata for malformed helper forms while clean rules remain at zero unresolved-helper count.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=41`)
+
 ## 2026-02-24 - Backbone Refactor Item #3: Structured Action Rewriter Pipeline
 ## Summary
 Landed Backbone Refactor Track item #3 by replacing inline regex-chain helper substitutions in `call_spec_handler_subst()` with an ordered, structured rewrite pipeline and locking helper behavior with focused regression coverage.

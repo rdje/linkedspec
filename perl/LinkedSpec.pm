@@ -1015,26 +1015,43 @@ sub _validate_rule_ir_or_exit {
 }
 
 sub _normalize_rule_code_chunks {
- my ($label, $chunks) = @_;
- return join ";\n", map {s/\s*;\s*$//o; $_} map {call_spec_handler_subst($label, $_)} @$chunks
+ my ($label, $chunks, $rewrite_diag_acc) = @_;
+
+ my @normalized;
+ foreach my $chunk (@$chunks) {
+  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk);
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
+  $rewritten =~ s/\s*;\s*$//o;
+  push @normalized, $rewritten;
+ }
+
+ return join ";\n", @normalized
 }
 
 sub _build_rule_ir_emit_context {
  my ($rule_ir) = @_;
  my $label = $rule_ir->{label};
+ my $rewrite_diag_acc = {
+  unresolved_helper_hits  => {},
+  unresolved_helper_count => 0,
+ };
 
  my @ACODEs;
  my @GDATA;
  foreach my $acode_entry (@{$rule_ir->{acode_entries}}) {
-  push @ACODEs, call_spec_handler_subst($label, $acode_entry->{code});
+  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code});
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
+  push @ACODEs, $rewritten_acode;
   push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
  }
 
  my @BCALLs;
  my %BCODEs;
  foreach my $bcode_entry (@{$rule_ir->{bcode_entries}}) {
+  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code});
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @BCALLs, $bcode_entry->{call};
-  $BCODEs{$bcode_entry->{call}} = call_spec_handler_subst($label, $bcode_entry->{code});
+  $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
  }
 
  my %ab_count = (
@@ -1042,13 +1059,27 @@ sub _build_rule_ir_emit_context {
   BCODE => scalar(@{$rule_ir->{bcode_entries}}),
  );
 
- my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE});
- my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE});
- my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE});
- my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE});
- my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE});
- my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE});
- my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE});
+ my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE},  $rewrite_diag_acc);
+ my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE},  $rewrite_diag_acc);
+ my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE}, $rewrite_diag_acc);
+ my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE}, $rewrite_diag_acc);
+ my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE}, $rewrite_diag_acc);
+ my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE}, $rewrite_diag_acc);
+ my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc);
+
+ my $action_rewriter_meta = {
+  unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
+  unresolved_helpers      => [sort keys %{$rewrite_diag_acc->{unresolved_helper_hits}}],
+  unresolved_helper_hits  => {%{$rewrite_diag_acc->{unresolved_helper_hits}}},
+ };
+
+ if ($action_rewriter_meta->{unresolved_helper_count}) {
+  log_output(
+   DUMP_LOW,
+   "Rule '$label': unresolved action helper(s) after rewrite pipeline",
+   "helpers=" . join(', ', @{$action_rewriter_meta->{unresolved_helpers}})
+  );
+ }
 
  return {
   label     => $label,
@@ -1066,6 +1097,7 @@ sub _build_rule_ir_emit_context {
   lxcode    => $lxcode,
   lscode    => $lscode,
   lecode    => $lecode,
+  action_rewriter_meta => $action_rewriter_meta,
  }
 }
 
@@ -1088,6 +1120,7 @@ my $einfo = shift;
  _validate_rule_ir_or_exit($rule_ir, $rule_meta);
 
  my $emit_ctx = _build_rule_ir_emit_context($rule_ir);
+ $rule_meta->{action_rewriter} = $emit_ctx->{action_rewriter_meta};
  my $label    = $emit_ctx->{label};
  my $node_type = $emit_ctx->{node_type};
  my @REs      = @{$emit_ctx->{REs}};
@@ -1475,6 +1508,69 @@ my $sg = shift;
  
  return $result
 }
+sub _find_unresolved_action_helpers {
+ my ($code) = @_;
+
+ my @helper_patterns = (
+  ['call',           qr/\bcall\s*\(\s*\w+\s*\)/o],
+  ['push',           qr/\bpush\s*\(\s*\w+\s*(?:,\s*\w+\s*)?\)/o],
+  ['return_a',       qr/\breturn_a\s*\(/o],
+  ['return',         qr/\breturn\s*\(\s*\w+\s*,/o],
+  ['return_ma',      qr/\breturn_ma\s*\(\s*\w+\s*\)/o],
+  ['return_m',       qr/\breturn_m\s*\(\s*\w+\s*\)/o],
+  ['capture',        qr/\bcapture\s*\(\s*\w+\s*\)/o],
+  ['capture_if',     qr/\bcapture_if\s*\(\s*\w+\s*\)/o],
+  ['CAPTURE_IF',     qr/\bCAPTURE_IF\s*\(\s*\)/o],
+  ['IBACKTRACK',     qr/\bIBACKTRACK\s*\(\s*\)/o],
+  ['BACKTRACK',      qr/\bBACKTRACK\s*\(\s*\)/o],
+  ['ibacktrack',     qr/\bibacktrack\s*\(\s*\w+\s*\)/o],
+  ['backtrack',      qr/\bbacktrack\s*\(\s*\w+\s*\)/o],
+  ['capture_macro',  qr/\$CAPTURE\b/o],
+ );
+
+ my %hits;
+ my $total = 0;
+ foreach my $entry (@helper_patterns) {
+  my ($helper_name, $helper_re) = @$entry;
+  my $count = () = ($code =~ /$helper_re/g);
+  next unless $count;
+  $hits{$helper_name} += $count;
+  $total += $count;
+ }
+
+ return {
+  unresolved_helper_count => $total,
+  unresolved_helper_hits  => \%hits,
+  unresolved_helpers      => [sort keys %hits],
+ }
+}
+
+sub _accumulate_action_rewrite_diagnostics {
+ my ($acc, $diag) = @_;
+ return $acc unless $acc && $diag && ref($diag) eq 'HASH';
+
+ my $hits = $diag->{unresolved_helper_hits};
+ return $acc unless $hits && ref($hits) eq 'HASH';
+
+ foreach my $helper_name (keys %$hits) {
+  my $count = $hits->{$helper_name} || 0;
+  next unless $count;
+  $acc->{unresolved_helper_hits}{$helper_name} += $count;
+  $acc->{unresolved_helper_count} += $count;
+ }
+
+ return $acc
+}
+
+sub _rewrite_action_code_with_diagnostics {
+ my ($label, $code) = @_;
+
+ my $rewrite_rules = _build_action_rewrite_rules($label);
+ my $rewritten = _apply_action_rewrite_pipeline($code, $rewrite_rules);
+ my $diag = _find_unresolved_action_helpers($rewritten);
+
+ return ($rewritten, $diag)
+}
 sub _build_action_rewrite_rules {
  my ($label) = @_;
 
@@ -1614,8 +1710,7 @@ sub call_spec_handler_subst {
 my ($label, $code) = @_;
 
 #say "call_spec_handler_subst: BEFORE <$label><$code>";
- my $rewrite_rules = _build_action_rewrite_rules($label);
- $code = _apply_action_rewrite_pipeline($code, $rewrite_rules);
+ ($code) = _rewrite_action_code_with_diagnostics($label, $code);
 
 # say "call_spec_handler_subst: AFTER <$label><$code>";
  return $code

@@ -61,12 +61,21 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- Start post-item-#3 follow-up toward language-neutral actions:
+- Continue post-item-#3 follow-up toward language-neutral actions:
   - define explicit action IR nodes and lowering contracts as the boundary for backend-neutral `.spec` actions,
-  - keep compatibility routing for current helper surface while introducing stricter diagnostics,
+  - map current helper rewrites onto those IR nodes while preserving compatibility paths,
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Landed Backbone item #3 diagnostics follow-up in `perl/LinkedSpec.pm`:
+  - action rewrite flow now tracks unresolved helper forms via `_find_unresolved_action_helpers`, `_accumulate_action_rewrite_diagnostics`, and `_rewrite_action_code_with_diagnostics`.
+  - per-rule diagnostics are now exposed at `spec->{rule}{meta}{action_rewriter}` with unresolved helper names/hit counts.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - subtest `action_rewriter_reports_unresolved_helpers_in_rule_meta`.
+- Re-ran full validation after diagnostics follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (41 tests)
 - Landed Backbone Refactor Track item #3 in `perl/LinkedSpec.pm`:
   - `call_spec_handler_subst()` now routes rewrites via `_build_action_rewrite_rules($label)` and `_apply_action_rewrite_pipeline($code, $rules)` instead of ad hoc substitution chaining.
 - Added focused helper-substitution regression lock in `t/phase0_regression.t`:
