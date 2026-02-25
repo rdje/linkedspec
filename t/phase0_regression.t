@@ -959,6 +959,97 @@ SPEC
         'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
     );
 };
+subtest 'action_rewriter_lowers_composable_array_string_method_contracts' => sub {
+    plan tests => 11;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'split(array(parts), scalar(args), /\s*,\s*/)'),
+        '@parts = split /\s*,\s*/, $args',
+        'split helper lowers into array assignment with regex delimiter'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'trim_each(array(parts))'),
+        '@parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts',
+        'trim_each helper lowers into map-trim assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'filter_nonempty(array(parts))'),
+        '@parts = grep { length($_) } @parts',
+        'filter_nonempty helper lowers into grep assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'split(array(parts), scalar(args), /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts))'),
+        '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
+        'composed split/trim/filter helper chain lowers deterministically'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.declare(array, parts).declare(scalar, args).assign(scalar(args), CAPTURE).split(array(parts), scalar(args), /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for composable array-string method contracts');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'composed array-string method contracts avoid RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'composed array-string method contracts avoid unresolved-helper hits');
+    ok(grep { $_ eq 'SPLIT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include SPLIT');
+    ok(grep { $_ eq 'TRIM_EACH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include TRIM_EACH');
+    ok(grep { $_ eq 'FILTER_NONEMPTY' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_NONEMPTY');
+    ok($meta->{language_agnostic_action_ir_ready}, 'composed array-string method contract rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_lowers_additional_composable_array_string_routines' => sub {
+    plan tests => 14;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'lowercase_each(array(parts))'),
+        '@parts = map { lc($_) } @parts',
+        'lowercase_each helper lowers into map lc assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'uppercase_each(array(parts))'),
+        '@parts = map { uc($_) } @parts',
+        'uppercase_each helper lowers into map uc assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'uniq(array(parts))'),
+        '@parts = do { my %seen; grep { !$seen{$_}++ } @parts }',
+        'uniq helper lowers into stable de-dup assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'filter_match(array(parts), /^[A-Z_]+$/)'),
+        '@parts = grep { $_ =~ /^[A-Z_]+$/ } @parts',
+        'filter_match helper lowers into regex grep assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'),
+        '@parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @parts }',
+        'nested functional composition lowers inner-to-outer over stable target array'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'lowercase_each(Top, array(parts)); filter_match(Top, uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'),
+        '@parts = map { lc($_) } @parts; @parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @parts }',
+        'mixed style (dot-chain scope form + nested functional composition) lowers deterministically'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.declare(array, parts).lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for mixed dot-chained and nested functional-composition routines');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'dot-chained lowercase/uppercase/uniq/filter_match routines avoid RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'dot-chained lowercase/uppercase/uniq/filter_match routines avoid unresolved-helper hits');
+    ok(grep { $_ eq 'MAP_LOWERCASE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MAP_LOWERCASE');
+    ok(grep { $_ eq 'MAP_UPPERCASE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MAP_UPPERCASE');
+    ok(grep { $_ eq 'UNIQ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include UNIQ');
+    ok(grep { $_ eq 'FILTER_MATCH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_MATCH');
+    ok($meta->{language_agnostic_action_ir_ready}, 'dot-chained lowercase/uppercase/uniq/filter_match rule remains language-agnostic action-IR ready');
+};
 subtest 'method_like_action_chain_parses_into_multiple_helper_events' => sub {
     plan tests => 6;
 

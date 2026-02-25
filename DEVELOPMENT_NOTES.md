@@ -191,6 +191,17 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - canonical lowering now covers `return_imatch`/`return_im`, `assign(..., CAPTURE|IMATCH|LMATCH)`, `substr(...)`/`regex_subst(...)`, and `return_array(..., array(...))` constructor payloads,
     - canonical action-IR mapping now emits `RETURN`/`ASSIGN`/`REGEX_SUBST` events for these helper contracts,
     - covered by `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
+  - action-rewriter composable array-string routine lock:
+    - canonical lowering now covers composable array transforms `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)`,
+    - array routine lowering is centralized through `_lower_array_pipeline_expr(...)` so semantics stay deterministic across standalone, dot-chain, and nested functional forms,
+    - covered by `action_rewriter_lowers_composable_array_string_method_contracts` and `action_rewriter_lowers_additional_composable_array_string_routines`.
+  - action-rewriter nested functional-composition lock:
+    - nested expressions such as `filter_match(uniq(uppercase_each(array(parts))), /.../)` now lower inner-to-outer through recursive `_build_array_pipeline_plan_from_expr(...)` planning with optional scope-token handling for method-chain injected forms (`method(Top, ...)`),
+    - nested functional lowering uses single-assignment expression composition for the nested expression path (rather than one assignment per intermediate stage),
+    - covered by nested and mixed-style assertions under `action_rewriter_lowers_additional_composable_array_string_routines`.
+  - spec-snippet codegen inspection tooling lock:
+    - `tools/inspect_spec_codegen.pl` now provides direct snippet-level generated-Perl and canonical-IR inspection for lifecycle chains, edge chains, and raw helper expressions,
+    - intended for visual verification during DSL migration without requiring full parser execution scaffolding.
   - method-like action chain parsing lock:
     - chained method-like action forms (`-> Rule .m1(...).m2(...)`) now parse into multiple helper events, including empty-arg call segments (`()`),
     - covered by `method_like_action_chain_parses_into_multiple_helper_events`.

@@ -90,6 +90,40 @@ This removes hard dependency on running from the project root.
 - Set `LinkedSpec` verbosity via `our $DUMP_VERBOSITY`.
 - Use `parse_only` and/or `pm_drive` to inspect compile/generation behavior.
 
+## Inspect Generated Perl for `.spec` Pieces
+Use the snippet inspection utility when you want to visually verify generated Perl for specific DSL fragments.
+
+- Script: `tools/inspect_spec_codegen.pl`
+- Supports:
+  - lifecycle chains, e.g. `I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)`
+  - action edges, e.g. `/a/ -> Top .lowercase_each(array(parts)).filter_match(...)`
+  - raw helper expressions, e.g. `filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)`
+
+Examples:
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet '/a/ -> Top .lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'`
+- `perl tools/inspect_spec_codegen.pl --snippet-file path/to/snippets.txt`
+
+Output includes:
+- normalized helper code,
+- generated Perl code,
+- canonical action-IR nodes,
+- RAW_PERL fallback count and unresolved-helper count.
+
+## Composable Array-String Method Routines
+Current composable method routines include:
+- `split(array(...), scalar(...), /.../)`
+- `trim_each(array(...))`
+- `filter_nonempty(array(...))`
+- `lowercase_each(array(...))`
+- `uppercase_each(array(...))`
+- `uniq(array(...))`
+- `filter_match(array(...), /.../)`
+
+Both styles are supported:
+- dot-chained method style,
+- nested functional composition style (including mixed usage).
+
 ## Versioning and Compatibility
 - Treat existing specs as compatibility contracts.
 - Before changing core semantics, validate against baseline specs and consumer modules.

@@ -1475,6 +1475,83 @@ sub _build_action_lowering_contracts {
    },
   },
   {
+   id                 => 'split_array',
+   ir_node            => 'SPLIT',
+   diag_name          => 'split',
+   unresolved_pattern => qr/\bsplit\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:array\s*\(\s*\w+\s*\)|\w+)\s*,\s*(?:scalar\s*\(\s*\w+\s*\)|\w+)/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'trim_each',
+   ir_node            => 'TRIM_EACH',
+   diag_name          => 'trim_each',
+   unresolved_pattern => qr/\btrim_each\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'filter_nonempty',
+   ir_node            => 'FILTER_NONEMPTY',
+   diag_name          => 'filter_nonempty',
+   unresolved_pattern => qr/\bfilter_nonempty\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'lowercase_each',
+   ir_node            => 'MAP_LOWERCASE',
+   diag_name          => 'lowercase_each',
+   unresolved_pattern => qr/\blowercase_each\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'uppercase_each',
+   ir_node            => 'MAP_UPPERCASE',
+   diag_name          => 'uppercase_each',
+   unresolved_pattern => qr/\buppercase_each\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'uniq_array',
+   ir_node            => 'UNIQ',
+   diag_name          => 'uniq',
+   unresolved_pattern => qr/\buniq\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'filter_match',
+   ir_node            => 'FILTER_MATCH',
+   diag_name          => 'filter_match',
+   unresolved_pattern => qr/\bfilter_match\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_array_pipeline_expr($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
    id                 => 'return_array',
    ir_node            => 'RETURN',
    diag_name          => 'return_array',
@@ -2339,6 +2416,22 @@ sub _extract_scalar_symbol_name {
 }
 
 #------------------------------------------------------------------------------
+# Function: _extract_array_symbol_name
+# Purpose : Resolve array variable symbol name from DSL method token surface.
+# Args    : ($token)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_array_symbol_name {
+ my ($token) = @_;
+ return undef unless defined $token;
+ $token = _trim_action_ir_value($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^array\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_assignment_source_expr
 # Purpose : Map assignment source tokens from method DSL to Perl expressions.
 # Args    : ($source)
@@ -2390,9 +2483,22 @@ sub _split_top_level_csv {
  my $bracket_depth = 0;
  my $in_single_quote = 0;
  my $in_double_quote = 0;
+ my $in_slash_quote = 0;
+ my $slash_escape_next = 0;
  my $escape_next = 0;
 
  foreach my $char (split //, $text) {
+  if ($in_slash_quote) {
+   $current .= $char;
+   if ($slash_escape_next) {
+    $slash_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $slash_escape_next = 1;
+   } elsif ($char eq '/') {
+    $in_slash_quote = 0;
+   }
+   next;
+  }
   if ($in_single_quote) {
    $current .= $char;
    if ($escape_next) {
@@ -2426,6 +2532,16 @@ sub _split_top_level_csv {
    $in_double_quote = 1;
    $current .= $char;
    next;
+  }
+  if ($char eq '/') {
+   my $current_context = $current;
+   $current_context =~ s/\s+$//o;
+   if (!length($current_context)) {
+    $in_slash_quote = 1;
+    $slash_escape_next = 0;
+    $current .= $char;
+    next;
+   }
   }
   if ($char eq '(') {
    ++$paren_depth;
@@ -2550,6 +2666,258 @@ sub _lower_regex_subst_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _normalize_split_delimiter_expr
+# Purpose : Normalize split delimiter argument into a Perl regex expression.
+# Args    : ($delimiter)
+# Returns : Perl regex expression string or undef
+#------------------------------------------------------------------------------
+sub _normalize_split_delimiter_expr {
+ my ($delimiter) = @_;
+ $delimiter = _trim_action_ir_value($delimiter // '');
+ return '/\s*,\s*/' unless defined($delimiter) && length($delimiter);
+ return $delimiter if $delimiter =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+
+ my $literal = _strip_literal_delimiters($delimiter);
+ return undef unless defined $literal;
+ my $quoted = quotemeta($literal);
+ return '/'.$quoted.'/'
+}
+#------------------------------------------------------------------------------
+# Function: _parse_method_function_expr
+# Purpose : Parse `method(arg1, arg2, ...)` expressions with nested-paren args.
+# Args    : ($expr)
+# Returns : hashref { method => ..., args => [...] } or undef
+#------------------------------------------------------------------------------
+sub _parse_method_function_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return undef unless $trimmed =~ /^(?<method>\w+)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))$/o;
+ my $method = $+{method};
+
+ my $payload = $+{PAREN};
+ $payload =~ s/^\(|\)$//go;
+ return {
+  method => $method,
+  args   => _split_top_level_csv($payload),
+ }
+}
+
+#------------------------------------------------------------------------------
+# Function: _is_bare_method_scope_token
+# Purpose : Check whether token is a bare scope label candidate.
+# Args    : ($token)
+# Returns : boolean
+#------------------------------------------------------------------------------
+sub _is_bare_method_scope_token {
+ my ($token) = @_;
+ return 0 unless defined $token;
+ $token = _trim_action_ir_value($token);
+ return defined($token) && $token =~ /^\w+$/o ? 1 : 0
+}
+
+#------------------------------------------------------------------------------
+# Function: _build_array_pipeline_plan_from_expr
+# Purpose : Build recursive array-pipeline operation plan from composable
+#           method expression forms like `filter_match(uniq(array(x)), /.../)`.
+# Args    : ($expr)
+# Returns : hashref { target_symbol => ..., ops => [...] } or undef
+#------------------------------------------------------------------------------
+sub _build_array_pipeline_plan_from_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $target_symbol = _extract_array_symbol_name($trimmed);
+ return {target_symbol => $target_symbol, ops => []} if defined $target_symbol;
+
+ my $call = _parse_method_function_expr($trimmed);
+ return undef unless $call;
+ my $method = $call->{method};
+ my $args = $call->{args} || [];
+
+ if ($method eq 'split') {
+  my @effective_args = @$args;
+  if ((@effective_args == 3 || @effective_args == 4) && _is_bare_method_scope_token($effective_args[0])) {
+   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
+   shift @effective_args if $scope_target_probe;
+  }
+  return undef unless @effective_args == 2 || @effective_args == 3;
+
+  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
+  return undef unless $pipeline;
+
+  my $source_symbol = _extract_scalar_symbol_name($effective_args[1]);
+  return undef unless defined $source_symbol;
+  my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[2]);
+  return undef unless defined $delimiter_expr;
+
+  push @{$pipeline->{ops}}, {
+   op             => 'split',
+   source_symbol  => $source_symbol,
+   delimiter_expr => $delimiter_expr,
+  };
+  return $pipeline
+ }
+
+ if ($method eq 'filter_match') {
+  my @effective_args = @$args;
+  if (@effective_args == 3 && _is_bare_method_scope_token($effective_args[0])) {
+   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
+   shift @effective_args if $scope_target_probe;
+  }
+  return undef unless @effective_args == 2;
+
+  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
+  return undef unless $pipeline;
+
+  my $pattern_expr = _normalize_split_delimiter_expr($effective_args[1]);
+  return undef unless defined $pattern_expr;
+  push @{$pipeline->{ops}}, {
+   op           => 'filter_match',
+   pattern_expr => $pattern_expr,
+  };
+  return $pipeline
+ }
+
+ if ($method =~ /^(trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq)$/o) {
+  my @effective_args = @$args;
+  if (@effective_args == 2 && _is_bare_method_scope_token($effective_args[0])) {
+   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
+   shift @effective_args if $scope_target_probe;
+  }
+  return undef unless @effective_args == 1;
+
+  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
+  return undef unless $pipeline;
+  push @{$pipeline->{ops}}, {op => $method};
+  return $pipeline
+ }
+
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_array_pipeline_expr
+# Purpose : Lower recursive composable array method expressions into ordered
+#           Perl statements over a stable target array symbol.
+# Args    : ($expr)
+# Returns : lowered statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_array_pipeline_expr {
+ my ($expr) = @_;
+ my $pipeline = _build_array_pipeline_plan_from_expr($expr);
+ return undef unless $pipeline && $pipeline->{target_symbol};
+ return undef unless @{$pipeline->{ops} || []};
+
+ my $target_symbol = $pipeline->{target_symbol};
+ my $list_expr = '@'.$target_symbol;
+ foreach my $op (@{$pipeline->{ops}}) {
+  my $name = $op->{op} // '';
+  if ($name eq 'split') {
+   $list_expr = 'split '.$op->{delimiter_expr}.', $'.$op->{source_symbol};
+  } elsif ($name eq 'trim_each') {
+   $list_expr = 'map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } '.$list_expr;
+  } elsif ($name eq 'filter_nonempty') {
+   $list_expr = 'grep { length($_) } '.$list_expr;
+  } elsif ($name eq 'lowercase_each') {
+   $list_expr = 'map { lc($_) } '.$list_expr;
+  } elsif ($name eq 'uppercase_each') {
+   $list_expr = 'map { uc($_) } '.$list_expr;
+  } elsif ($name eq 'uniq') {
+   $list_expr = 'do { my %seen; grep { !$seen{$_}++ } '.$list_expr.' }';
+  } elsif ($name eq 'filter_match') {
+   $list_expr = 'grep { $_ =~ '.$op->{pattern_expr}.' } '.$list_expr;
+  } else {
+   return undef;
+  }
+ }
+ return '@'.$target_symbol.' = '.$list_expr
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_split_statement
+# Purpose : Lower `split(...)` method helper into array-assignment form.
+# Args    : ($target, $source, $delimiter)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_split_statement {
+ my ($target, $source, $delimiter) = @_;
+ my $expr = 'split('.$target.', '.$source;
+ $expr .= ', '.$delimiter if defined($delimiter) && length($delimiter);
+ $expr .= ')';
+ return _lower_array_pipeline_expr($expr)
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_trim_each_statement
+# Purpose : Lower `trim_each(...)` method helper into array map-trim form.
+# Args    : ($target)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_trim_each_statement {
+ my ($target) = @_;
+ return _lower_array_pipeline_expr('trim_each('.$target.')')
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_filter_nonempty_statement
+# Purpose : Lower `filter_nonempty(...)` method helper into array grep form.
+# Args    : ($target)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_filter_nonempty_statement {
+ my ($target) = @_;
+ return _lower_array_pipeline_expr('filter_nonempty('.$target.')')
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_lowercase_each_statement
+# Purpose : Lower `lowercase_each(...)` helper into array map lowercase form.
+# Args    : ($target)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_lowercase_each_statement {
+ my ($target) = @_;
+ return _lower_array_pipeline_expr('lowercase_each('.$target.')')
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_uppercase_each_statement
+# Purpose : Lower `uppercase_each(...)` helper into array map uppercase form.
+# Args    : ($target)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_uppercase_each_statement {
+ my ($target) = @_;
+ return _lower_array_pipeline_expr('uppercase_each('.$target.')')
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_uniq_statement
+# Purpose : Lower `uniq(...)` helper into stable unique-filter assignment.
+# Args    : ($target)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_uniq_statement {
+ my ($target) = @_;
+ return _lower_array_pipeline_expr('uniq('.$target.')')
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_filter_match_statement
+# Purpose : Lower `filter_match(...)` helper into regex grep assignment.
+# Args    : ($target, $pattern)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_filter_match_statement {
+ my ($target, $pattern) = @_;
+ return _lower_array_pipeline_expr('filter_match('.$target.', '.$pattern.')')
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_return_array_statement
 # Purpose : Lower `return_array(tag, payload)` method helper calls.
 # Args    : ($tag, $payload)
@@ -2607,6 +2975,75 @@ sub _scan_contract_ir_events {
  } elsif ($id eq 'regex_subst') {
   while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
    push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, pattern => $+{pattern}, replacement => $+{replacement}, flags => $+{flags}}};
+  }
+ } elsif ($id eq 'split_array') {
+  while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'split';
+   push @events, {
+    raw => $+{expr},
+    args => {
+     target    => $pipeline->{target_symbol},
+     source    => $last_op->{source_symbol},
+     delimiter => $last_op->{delimiter_expr},
+    },
+   };
+  }
+ } elsif ($id eq 'trim_each') {
+  while ($code =~ /\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'trim_each';
+   push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+  }
+ } elsif ($id eq 'filter_nonempty') {
+  while ($code =~ /\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'filter_nonempty';
+   push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+  }
+ } elsif ($id eq 'lowercase_each') {
+  while ($code =~ /\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'lowercase_each';
+   push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+  }
+ } elsif ($id eq 'uppercase_each') {
+  while ($code =~ /\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'uppercase_each';
+   push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+  }
+ } elsif ($id eq 'uniq_array') {
+  while ($code =~ /\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'uniq';
+   push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+  }
+ } elsif ($id eq 'filter_match') {
+  while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+   next unless $pipeline && @{$pipeline->{ops} || []};
+   my $last_op = $pipeline->{ops}[-1];
+   next unless $last_op->{op} && $last_op->{op} eq 'filter_match';
+   push @events, {
+    raw => $+{expr},
+    args => {
+     target  => $pipeline->{target_symbol},
+     pattern => $last_op->{pattern_expr},
+    },
+   };
   }
  } elsif ($id eq 'return_array') {
   while ($code =~ /\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/g) {

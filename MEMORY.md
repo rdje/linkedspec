@@ -105,6 +105,23 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 composable array-method DSL follow-up in `perl/LinkedSpec.pm`:
+  - added/extended lowering contracts for `split`, `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`,
+  - introduced recursive function-expression parsing/planning helpers (`_parse_method_function_expr`, `_build_array_pipeline_plan_from_expr`, `_lower_array_pipeline_expr`) to support both dot-chain and nested functional composition (including mixed style),
+  - added scope-token handling for method-chain injected forms (`method(Top, ...)`) and improved CSV/slash-literal splitting behavior for nested helper argument parsing.
+- Added snippet-level generated-Perl inspection tooling:
+  - new script `tools/inspect_spec_codegen.pl` to inspect normalized helper code, generated Perl, canonical action-IR nodes, RAW_PERL fallback count, and unresolved-helper count from focused `.spec` snippets.
+- Updated regression coverage in `t/phase0_regression.t` for composable array-method contracts and mixed composition forms:
+  - `action_rewriter_lowers_composable_array_string_method_contracts`,
+  - `action_rewriter_lowers_additional_composable_array_string_routines`.
+- Adjusted lowering output style per user direction:
+  - nested functional composition lowers through single-assignment expression composition,
+  - removed unnecessary outer parentheses around map-led upstream expression in `uniq(...)` lowering stage.
+- Re-ran full validation after composable-array and inspection-tool follow-ups:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `perl -c tools/inspect_spec_codegen.pl` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (65 tests)
 - Implemented (pending commit workflow) Backbone item #3 method-contract follow-up in `perl/LinkedSpec.pm`:
   - added method-contract lowering for `return_imatch`/`return_im`, `assign(..., CAPTURE|IMATCH|LMATCH)`, `substr(...)`/`regex_subst(...)`, and `return_array(...)` with nested `array(scalar(...), scalar(...))` payload constructors,
   - added helper/lowering utilities (`_lower_method_value_expr`, `_lower_return_imatch_statement`, `_lower_assign_statement`, `_lower_regex_subst_statement`, `_lower_return_array_statement`, and related normalization helpers),
