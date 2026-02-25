@@ -38,6 +38,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `2984fb5` - Backbone #3: composable array-method lowering + snippet codegen inspector
 - `677677d` - Backbone item #3 follow-up: add typed declare methods and method chains
 - `6ff99b5` - Backbone item #3 follow-up: lower indexed push-call wrappers
 - `e06493c` - Backbone item #3 follow-up: lower return-call action wrappers
@@ -105,6 +106,21 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 fluent control-flow method-DSL follow-up in `perl/LinkedSpec.pm`:
+  - added lowering helpers/contracts for `if`/`i`, `elseif`/`elif`, `else`, `endif`, `switch`, `case`, `default`, optional `endcase`, `endswitch`, and branch statements `say`, `print`, `return_undef`,
+  - added control-flow value normalization helpers and contextual stack-aware lowering state for nested/ordered control-flow emission,
+  - fixed contextual lowering path usage by removing stale duplicate non-contextual apply call in `_lower_action_code_from_canonical_ir(...)`,
+  - added `push_scope_target_arg` handling so scope-injected push forms (for example `push(Top, pipe_operator, rule)`) lower cleanly in fluent branch flows.
+- Added and validated fluent control-flow regression coverage in `t/phase0_regression.t`:
+  - `action_rewriter_lowers_fluent_if_else_and_branch_statements`,
+  - `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase`.
+- Added fluent `pipe_operator` branch-chain showcase coverage:
+  - `USER_GUIDE.md` now includes `Fluent Control-Flow Example (pipe_operator with if/else)`,
+  - regression lock `action_rewriter_showcase_pipe_operator_if_else_method_chain` verifies expected lowering for method-chained if/else branch behavior.
+- Re-ran full validation after fluent control-flow + showcase follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (68 tests)
 - Implemented Backbone item #3 composable array-method DSL follow-up in `perl/LinkedSpec.pm`:
   - added/extended lowering contracts for `split`, `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`,
   - introduced recursive function-expression parsing/planning helpers (`_parse_method_function_expr`, `_build_array_pipeline_plan_from_expr`, `_lower_array_pipeline_expr`) to support both dot-chain and nested functional composition (including mixed style),

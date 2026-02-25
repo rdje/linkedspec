@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-25 - Backbone Item #3 Follow-up: Fluent Control-Flow DSL + pipe_operator If/Else Showcase
+## Summary
+Extended method-like DSL lowering to support fluent control-flow markers and branch statements without `{...}` code blocks, including `if`/`i`, `elseif`/`elif`, `else`, `endif`, `switch`, `case`, `default`, `endswitch`, optional `endcase`, and branch statements (`say`, `print`, `return_undef`). Added a `pipe_operator` showcase example and dedicated regression lock for fluent if/else method chaining.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added fluent control-flow lowering helpers and contracts for:
+  - `if_flow`/`elseif_flow`/`else_flow`/`endif_flow`
+  - `switch_flow`/`case_flow`/`default_flow`/`endcase_flow`/`endswitch_flow`
+  - branch statements `say_stmt`, `print_stmt`, `return_undef`
+- Added scope-aware argument normalization/lowering support for control-flow and switch/case value expressions.
+- Added `push_scope_target_arg` contract handling so scope-injected method-chain forms (for example `push(Top, pipe_operator, rule)`) lower through canonical IR without RAW fallback.
+- Updated canonical helper-event mapping and scanner coverage so fluent control-flow and branch events emit canonical action-IR forms deterministically.
+- Fixed contextual lowering bug in `_lower_action_code_from_canonical_ir(...)` by removing stale non-contextual duplicate apply-path usage; canonical lowering now uses the context-aware apply path only.
+- Added regression coverage in `t/phase0_regression.t`:
+  - `action_rewriter_lowers_fluent_if_else_and_branch_statements`
+  - `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase`
+  - `action_rewriter_showcase_pipe_operator_if_else_method_chain`
+- Added user-facing example section in `USER_GUIDE.md`:
+  - `Fluent Control-Flow Example (pipe_operator with if/else)`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=68`)
 ## 2026-02-25 - Backbone Item #3 Follow-up: Composable Array Method DSL + Codegen Inspection Utility
 ## Summary
 Extended method-like DSL lowering with composable array-string routines (`split`, `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, `filter_match`) including nested functional composition and dot-chain scope-injected forms, and added a utility to inspect generated Perl for `.spec` snippets.

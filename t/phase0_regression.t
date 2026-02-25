@@ -1050,6 +1050,154 @@ SPEC
     ok(grep { $_ eq 'FILTER_MATCH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_MATCH');
     ok($meta->{language_agnostic_action_ir_ready}, 'dot-chained lowercase/uppercase/uniq/filter_match rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_lowers_fluent_if_else_and_branch_statements' => sub {
+    plan tests => 8;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'if(scalar(on)); push(pipe_operator, rule); elseif(scalar(alt_on)); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
+        'if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } elsif ($alt_on) {; print "warn"; } else {; say "Error: no context"; return undef; }',
+        'if/elseif/else/endif fluent chain lowers to structured Perl control-flow with branch statements'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'i(scalar(on)); push(pipe_operator, rule); elif(scalar(alt_on)); say("warn"); endif()'),
+        'if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } elsif ($alt_on) {; say "warn"; }',
+        'i/elif aliases lower to canonical if/elsif flow'
+    );
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .if(scalar(on)).push(pipe_operator, rule).elseif(scalar(alt_on)).print("warn").else().say("Error: no context").return_undef().endif()
+
+pipe_operator:
+ /a/ -> pipe_operator { return_a(pipe_operator) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for fluent if/elseif/else/endif chain');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'fluent if/elseif/else/endif chain avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'fluent if/elseif/else/endif chain avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}),
+        'canonical action-IR nodes include IF/ELIF/ELSE/ENDIF control-flow markers'
+    );
+    ok(
+        scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'canonical action-IR nodes include PUSH/PRINT/SAY/RETURN branch statements'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'fluent if/elseif/else/endif rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
+    plan tests => 11;
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch(scalar(op)); case("|"); push(pipe_operator, rule); case("&"); push(pipe_operator, rule2); default(); say("Error"); return_undef(); endswitch()'
+    );
+    like(
+        $rewritten,
+        qr/do \{ my \$__ls_switch_value_1 = \$op; my \$__ls_switch_hit_1 = 0/s,
+        'switch(...) lowers into scoped switch-state prologue'
+    );
+    like(
+        $rewritten,
+        qr/if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"\\|\"\) \{ \$__ls_switch_hit_1 = 1/s,
+        'first case(...) lowers with guarded equality match'
+    );
+    like(
+        $rewritten,
+        qr/\}\s*if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"&\"\) \{ \$__ls_switch_hit_1 = 1/s,
+        'next case(...) implicitly closes previous case body when endcase() is omitted'
+    );
+    like(
+        $rewritten,
+        qr/\}\s*if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1/s,
+        'default() implicitly closes prior case body when endcase() is omitted'
+    );
+    like(
+        $rewritten,
+        qr/return undef;\s*\}\s*\}/s,
+        'endswitch() closes final case and switch scope'
+    );
+
+    my $explicit = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch(scalar(op)); case("|"); say("x"); endcase(); default(); say("d"); endcase(); endswitch()'
+    );
+    like(
+        $explicit,
+        qr/say \"x\";\s*\}\s*;\s*if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1/s,
+        'explicit endcase() is accepted while remaining optional'
+    );
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(op)).case("|").push(pipe_operator, rule).case("&").push(pipe_operator, rule2).default().say("Error").return_undef().endswitch()
+
+pipe_operator:
+ /a/ -> pipe_operator { return_a(pipe_operator) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for fluent switch/case/default/endswitch chain');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'fluent switch/case/default/endswitch chain avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'fluent switch/case/default/endswitch chain avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}),
+        'canonical action-IR nodes include SWITCH/CASE/DEFAULT/ENDSWITCH control-flow markers'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'fluent switch/case/default/endswitch rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_showcase_pipe_operator_if_else_method_chain' => sub {
+    plan tests => 7;
+
+    is(
+        LinkedSpec::call_spec_handler_subst(
+            'Top',
+            q{if(scalar(on)); push(pipe_operator, rule); else(); say("Error: '|' operator occurrence with no container rule context"); return_undef(); endif()}
+        ),
+        q{if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } else {; say "Error: '|' operator occurrence with no container rule context"; return undef; }},
+        'pipe_operator fluent if/else chain lowers to expected branch semantics without raw block code'
+    );
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /\|/ -> Top .if(scalar(on)).push(pipe_operator, rule).else().say("Error: '|' operator occurrence with no container rule context").return_undef().endif()
+
+pipe_operator:
+ /\|/ -> pipe_operator { return_a(pipe_operator) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pipe_operator fluent if/else chain');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'pipe_operator fluent if/else chain avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'pipe_operator fluent if/else chain avoids raw-Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'pipe_operator fluent if/else chain avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'canonical action-IR nodes include IF/ELSE/ENDIF and PUSH/SAY/RETURN for pipe_operator showcase'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'pipe_operator fluent if/else showcase remains language-agnostic action-IR ready');
+};
 subtest 'method_like_action_chain_parses_into_multiple_helper_events' => sub {
     plan tests => 6;
 

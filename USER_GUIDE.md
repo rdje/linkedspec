@@ -124,6 +124,31 @@ Both styles are supported:
 - dot-chained method style,
 - nested functional composition style (including mixed usage).
 
+## Fluent Control-Flow Example (`pipe_operator` with `if/else`)
+You can express branch logic without `{...}` blocks by chaining fluent control-flow methods.
+
+Example rule intent:
+- parse `|` via a `pipe_operator` rule,
+- if container context is enabled (`on`), push parsed pipe node into `rule`,
+- otherwise emit an error and return `undef`.
+
+```text
+pipe_operator:
+ /\|/ -> pipe_operator { return_a(pipe_operator) }
+
+Top::&
+ /\|/ -> Top
+   .if(scalar(on))
+     .push(pipe_operator, rule)
+   .else()
+     .say("Error: '|' operator occurrence with no container rule context")
+     .return_undef()
+   .endif()
+```
+
+Quick snippet inspection:
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(scalar(on)); push(pipe_operator, rule); else(); say("Error: '\''|'\'' operator occurrence with no container rule context"); return_undef(); endif()'`
+
 ## Versioning and Compatibility
 - Treat existing specs as compatibility contracts.
 - Before changing core semantics, validate against baseline specs and consumer modules.
