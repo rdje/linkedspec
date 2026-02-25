@@ -1051,7 +1051,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'dot-chained lowercase/uppercase/uniq/filter_match rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_fluent_if_else_and_branch_statements' => sub {
-    plan tests => 8;
+    plan tests => 12;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'if(scalar(on)); push(pipe_operator, rule); elseif(scalar(alt_on)); print("warn"); else(); say("Error: no context"); return_undef(); endif()'),
@@ -1062,6 +1062,34 @@ subtest 'action_rewriter_lowers_fluent_if_else_and_branch_statements' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'i(scalar(on)); push(pipe_operator, rule); elif(scalar(alt_on)); say("warn"); endif()'),
         'if ($on) {; push @rule, &{$$descr{spec}{pipe_operator}{handler}}($descr, $STRING, $minfo); } elsif ($alt_on) {; say "warn"; }',
         'i/elif aliases lower to canonical if/elsif flow'
+    );
+    my $lisp_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(or(scalar(on), and(not(scalar(off)), is_empty(scalar(name))))); say("ok"); endif()'
+    );
+    like(
+        $lisp_if,
+        qr/\$on.*\|\|.*\$off.*&&.*!defined\(\$name\).*say \"ok\"/s,
+        'if(...) condition supports nested Lisp-style boolean expressions (or/and/not/is_empty)'
+    );
+    like(
+        $lisp_if,
+        qr/\$name eq ''/s,
+        'is_empty(scalar(...)) lowers to scalar emptiness check in fluent conditions'
+    );
+    my $indexed_scalar_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(eq(scalar(foo_arr, idx), scalar(foo_hash, key))); say("shape"); endif()'
+    );
+    like(
+        $indexed_scalar_if,
+        qr/\$foo_arr\[\$idx\]\s+eq\s+\$foo_hash\{\$key\}/s,
+        'scalar(array_symbol, index_symbol) and scalar(hash_symbol, key_symbol) lower into array/hash entry access'
+    );
+    like(
+        $indexed_scalar_if,
+        qr/say \"shape\"/s,
+        'array/hash entry accessor expressions compose inside fluent if() branch conditions'
     );
 
     my $spec_content = <<'SPEC';
@@ -1095,7 +1123,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'fluent if/elseif/else/endif rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase' => sub {
-    plan tests => 11;
+    plan tests => 18;
 
     my $rewritten = LinkedSpec::call_spec_handler_subst(
         'Top',
@@ -1126,6 +1154,44 @@ subtest 'action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase
         qr/return undef;\s*\}\s*\}/s,
         'endswitch() closes final case and switch scope'
     );
+    my $lisp_switch = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch(or(scalar(op_ready), and(not(scalar(op_blocked)), is_empty(scalar(op_alt))))); case("|"); say("hit"); endswitch()'
+    );
+    like(
+        $lisp_switch,
+        qr/my \$__ls_switch_value_1 = .*\$op_ready.*\|\|.*\$op_blocked.*&&.*!defined\(\$op_alt\)/s,
+        'switch(...) condition supports nested Lisp-style boolean expressions through unified lowering'
+    );
+    my $composite_switch = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'switch(scalar(op), case("|", push(pipe_operator, rule)), case("&", say("amp")), default(say("Error"), return_undef()))'
+    );
+    like(
+        $composite_switch,
+        qr/if \(!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"\|\"\) \{ \$__ls_switch_hit_1 = 1; push \@rule, &\{\$\$descr\{spec\}\{pipe_operator\}\{handler\}\}\(\$descr, \$STRING, \$minfo\) \}/s,
+        'inline switch(..., case(...), ...) composite form lowers case branch actions without separate case()/endswitch() markers'
+    );
+    like(
+        $composite_switch,
+        qr/if \(!\$__ls_switch_hit_1\) \{ \$__ls_switch_hit_1 = 1; say \"Error\"; return undef \}/s,
+        'inline switch(..., default(...)) composite form lowers default branch actions directly inside switch arguments'
+    );
+
+    my $composite_spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(op), case("|", push(pipe_operator, rule)), default(return_undef()))
+
+pipe_operator:
+ /a/ -> pipe_operator { return_a(pipe_operator) }
+SPEC
+    my $composite_descr = LinkedSpec::Get(\$composite_spec_content, return_descr => 1);
+    ok(defined($composite_descr) && ref($composite_descr) eq 'HASH', 'descriptor build succeeds for inline composite switch(case/default) method form');
+
+    my $composite_meta = $composite_descr->{spec}{Top}{meta}{action_rewriter};
+    is($composite_meta->{canonical_action_ir_fallback_count}, 0, 'inline composite switch(case/default) form avoids RAW_PERL fallback');
+    is($composite_meta->{unresolved_helper_count}, 0, 'inline composite switch(case/default) form avoids unresolved-helper hits');
+    ok($composite_meta->{language_agnostic_action_ir_ready}, 'inline composite switch(case/default) rule remains language-agnostic action-IR ready');
 
     my $explicit = LinkedSpec::call_spec_handler_subst(
         'Top',

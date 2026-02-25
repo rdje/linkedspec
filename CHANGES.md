@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-25 - Backbone Item #3 Follow-up: Unified Lisp-Style Control-Flow Expressions + Inline Composite `switch(...)` Branches
+## Summary
+Extended fluent control-flow lowering to use a unified Lisp-style expression path for `if`/`elseif`/`switch` conditions, added scalar accessor support for collection entry reads (`scalar(container, key_or_index)`), and added inline composite switch-branch lowering so `switch(condition, case(...), default(...))` can be expressed directly inside `switch(...)` arguments.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `ROADMAP.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added unified recursive control-flow expression lowering for fluent conditions:
+  - boolean composition: `or(...)`, `and(...)`, `not(...)`
+  - emptiness predicates: `is_empty(...)`, `is_nonempty(...)`
+  - comparisons: `eq/ne/gt/ge/lt/le` and numeric `num_eq/num_ne/num_gt/num_ge/num_lt/num_le`
+  - regex predicate: `matches(...)`
+- Extended scalar value lowering:
+  - `scalar(name)` for scalar variables
+  - `scalar(container, key_or_index)` for collection entry reads
+  - explicit forms `scalar(array(foo), idx)` and `scalar(hash(bar), key)` supported
+  - compatibility form `scalar(IMATCH_LIST, n)` preserved
+- Added inline composite switch branch lowering:
+  - supports `switch(cond, case(v1, action1, ...), case(v2, ...), default(actionN, ...))`
+  - each inline branch action reuses existing helper-lowering contracts
+  - legacy marker flow (`switch(); case(); default(); endswitch()`) remains supported
+- Added/extended regression coverage in `t/phase0_regression.t`:
+  - extended `action_rewriter_lowers_fluent_if_else_and_branch_statements` with nested Lisp-style conditions and `scalar(array/hash, key)` access assertions
+  - extended `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase` with inline composite switch(case/default) lowering assertions and descriptor-level readiness checks
+- Expanded user documentation in `USER_GUIDE.md`:
+  - added a complete method/helper reference section covering control-flow markers, condition helpers, scalar/collection access forms, branch actions, return helpers, declarations/transforms, and method-chain usage forms.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=68`)
 ## 2026-02-25 - Backbone Item #3 Follow-up: Fluent Control-Flow DSL + pipe_operator If/Else Showcase
 ## Summary
 Extended method-like DSL lowering to support fluent control-flow markers and branch statements without `{...}` code blocks, including `if`/`i`, `elseif`/`elif`, `else`, `endif`, `switch`, `case`, `default`, `endswitch`, optional `endcase`, and branch statements (`say`, `print`, `return_undef`). Added a `pipe_operator` showcase example and dedicated regression lock for fluent if/else method chaining.

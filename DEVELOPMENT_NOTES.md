@@ -212,6 +212,16 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - fluent pipe-operator if/else showcase lock:
     - regression and user-guide examples now lock fluent branch lowering behavior for `pipe_operator` context checks and error-return branch handling in method-chained form,
     - covered by `action_rewriter_showcase_pipe_operator_if_else_method_chain`.
+  - action-rewriter unified Lisp-style control-flow expression lock:
+    - fluent condition/value lowering now routes through a shared recursive expression path for `if`/`elseif`/`switch` argument surfaces (including nested `or`/`and`/`not`, emptiness predicates, comparator helpers, and regex match predicates),
+    - covered by extended `action_rewriter_lowers_fluent_if_else_and_branch_statements` and `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase`.
+  - scalar-accessor method value lock:
+    - method value lowering now supports `scalar(container, key_or_index)` entry access forms for collection reads (`$arr[$idx]` / `$hash{$key}`) while preserving `scalar(IMATCH_LIST, n)` compatibility behavior,
+    - covered by extended fluent control-flow regression assertions for nested branch conditions.
+  - inline composite switch-branch lowering lock:
+    - canonical lowering now supports direct composite branch form `switch(cond, case(v, action...), default(action...))` inside switch arguments without requiring separate marker-only `case()/default()/endswitch()` statements,
+    - inline branch actions are lowered through existing helper contracts and maintain language-agnostic readiness/fallback invariants,
+    - covered by extended `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase`.
   - method-like action chain parsing lock:
     - chained method-like action forms (`-> Rule .m1(...).m2(...)`) now parse into multiple helper events, including empty-arg call segments (`()`),
     - covered by `method_like_action_chain_parses_into_multiple_helper_events`.

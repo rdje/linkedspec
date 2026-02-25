@@ -149,6 +149,152 @@ Top::&
 Quick snippet inspection:
 - `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(scalar(on)); push(pipe_operator, rule); else(); say("Error: '\''|'\'' operator occurrence with no container rule context"); return_undef(); endif()'`
 
+## Unified Lisp-Style Control-Flow Conditions
+Fluent control-flow condition/value arguments support nested Lisp-style expressions.
+
+Examples:
+- `if(or(scalar(on), and(not(scalar(off)), is_empty(scalar(name)))))`
+- `elseif(matches(scalar(token), /^[A-Z_]+$/))`
+- `switch(or(scalar(op_ready), not(is_empty(scalar(op)))))`
+
+Supported condition helpers include:
+- boolean composition: `or(...)`, `and(...)`, `not(...)`
+- emptiness checks: `is_empty(...)`, `is_nonempty(...)`
+- comparisons: `eq/ne/gt/ge/lt/le` and numeric `num_eq/num_ne/num_gt/num_ge/num_lt/num_le`
+- regex predicate: `matches(lhs, /regex/)`
+
+## Scalar Collection Entry Access in Conditions
+Control-flow expressions support scalar collection-entry access through:
+- `scalar(container, key_or_index)`
+
+Examples:
+- `scalar(foo_arr, idx)` -> array entry value form
+- `scalar(foo_hash, key)` -> hash entry value form
+- explicit forms:
+  - `scalar(array(foo_arr), idx)`
+  - `scalar(hash(foo_hash), key)`
+
+Single-argument scalar form remains:
+- `scalar(name)`
+
+Compatibility form remains:
+- `scalar(IMATCH_LIST, n)`
+
+## Inline Composite `switch(...)` Branch Form
+In addition to marker-style fluent chains (`switch(); case(); default(); endswitch()`), you can encode branches directly in `switch(...)` arguments.
+
+Example:
+```text
+Top::&
+ /a/ -> Top .switch(
+   scalar(op),
+   case("|", push(pipe_operator, rule)),
+   case("&", say("amp")),
+   default(say("Error"), return_undef())
+ )
+```
+
+This form keeps branch structure and branch actions co-located while still lowering through the same helper-contract pipeline.
+## Complete Method/Helper Reference (Current)
+This section summarizes the helper/method surface currently recognized by the action rewriter.
+
+### 1) Control-flow markers
+- `if(cond)` / `i(cond)`
+- `elseif(cond)` / `elif(cond)`
+- `else()`
+- `endif()`
+- `switch(cond)` (marker form)
+- `case(value)` (marker form)
+- `default()` (marker form)
+- `endcase()` (optional in switch marker flow)
+- `endswitch()`
+- inline composite form:
+  - `switch(cond, case(v1, action1, ...), case(v2, ...), default(actionN, ...))`
+
+### 2) Condition/value expression helpers used inside `if/elseif/switch`
+- Boolean composition:
+  - `or(expr1, expr2, ...)`
+  - `and(expr1, expr2, ...)`
+  - `not(expr)`
+- Emptiness predicates:
+  - `is_empty(expr)`
+  - `is_nonempty(expr)`
+- String comparisons:
+  - `eq(lhs, rhs)`, `ne(lhs, rhs)`, `gt(lhs, rhs)`, `ge(lhs, rhs)`, `lt(lhs, rhs)`, `le(lhs, rhs)`
+- Numeric comparisons:
+  - `num_eq(lhs, rhs)`, `num_ne(lhs, rhs)`, `num_gt(lhs, rhs)`, `num_ge(lhs, rhs)`, `num_lt(lhs, rhs)`, `num_le(lhs, rhs)`
+- Regex predicate:
+  - `matches(lhs, /regex/)`
+
+### 3) Scalar/array/hash value helpers
+- `scalar(name)` -> scalar variable value
+- `scalar(container, key_or_index)` -> collection entry value
+  - examples:
+    - `scalar(foo_arr, idx)` -> array entry access
+    - `scalar(foo_hash, key)` -> hash entry access
+  - explicit forms:
+    - `scalar(array(foo_arr), idx)`
+    - `scalar(hash(foo_hash), key)`
+- compatibility:
+  - `scalar(IMATCH_LIST, n)`
+- array constructor/value helper:
+  - `array(v1, v2, ...)`
+
+### 4) Branch/action statements
+- `say(v1, v2, ...)`
+- `print(v1, v2, ...)`
+- `return_undef()`
+
+### 5) Call/push/capture/backtrack helpers
+- `call(rule)`
+- `push(rule)` (push to current label array)
+- `push(rule, target)` (push to explicit target array)
+- `push(scope, rule, target)` (scope-injected form emitted by chained-method rendering)
+- `$CAPTURE`
+- `capture(label)`
+- `capture_if(label)` / `CAPTURE_IF()`
+- `ibacktrack(label)` / `IBACKTRACK()`
+- `backtrack(label)` / `BACKTRACK()`
+
+### 6) Return helpers
+- `return_a(label[, arg])`
+- `return_m(label)`
+- `return_ma(label)`
+- `return_imatch(tag)` / `return_im(tag)`
+- `return_array(tag, payload)`
+- `return(label, arg)` (legacy tagged return helper form)
+- `return call(rule)` (call-wrapper lowering form)
+
+### 7) Declaration/assignment/transform helpers
+- declarations:
+  - `declare(type, names...)` where `type` is `array|scalar|hash`
+  - aliases: `declare_a/s/h`, `declare_array/scalar/hash`
+- assignment/capture source:
+  - `assign(target, CAPTURE|IMATCH|LMATCH)`
+- regex substitution:
+  - `substr(target, pattern, replacement, flags)`
+  - `regex_subst(target, pattern, replacement, flags)`
+- composable array-string transforms:
+  - `split(array_target, scalar_source, delimiter?)`
+  - `trim_each(array_target)`
+  - `filter_nonempty(array_target)`
+  - `lowercase_each(array_target)`
+  - `uppercase_each(array_target)`
+  - `uniq(array_target)`
+  - `filter_match(array_target, regex)`
+
+### 8) Method-chain usage forms
+- action-edge chain:
+  - `-> Rule .method1(...).method2(...).methodN(...)`
+- lifecycle chain:
+  - `I.method1(...).method2(...)`
+  - also valid for `E`, `EX`, `IT`, `LX`, `LS`, `LE`
+
+### Notes on `return_undef()` and richer return payloads
+- `return_undef()` is a dedicated shorthand for `return undef` in fluent branches.
+- For richer payload returns, use existing return-helper forms and/or explicit return expressions where appropriate.
+- Current legacy `return(label, arg)` helper remains supported for compatibility with existing specs.
+
 ## Versioning and Compatibility
 - Treat existing specs as compatibility contracts.
 - Before changing core semantics, validate against baseline specs and consumer modules.

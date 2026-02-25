@@ -26,6 +26,132 @@ use constant {
 our $DUMP_VERBOSITY = DUMP_NONE;
 
 #------------------------------------------------------------------------------
+# Function: _lower_is_empty_expr
+# Purpose : Lower `is_empty(...)` checks across scalar/array/general expression
+#           payloads used in fluent control-flow expressions.
+# Args    : ($arg_expr)
+# Returns : Perl boolean expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_is_empty_expr {
+ my ($arg_expr) = @_;
+ return undef unless defined $arg_expr;
+ my $trimmed = _trim_action_ir_value($arg_expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ if ($trimmed =~ /^array\s*\(/o) {
+  my $array_symbol = _extract_array_symbol_name($trimmed);
+  return "(!\@$array_symbol)" if defined $array_symbol;
+ }
+
+ my $scalar_symbol = _extract_scalar_symbol_name($trimmed);
+ if (defined $scalar_symbol) {
+  return "(!defined(\$$scalar_symbol) || \$$scalar_symbol eq '')";
+ }
+
+ my $lowered = _lower_method_value_expr($trimmed);
+ $lowered = $trimmed unless defined($lowered) && length($lowered);
+ return "(!($lowered))"
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_flow_composite_expr
+# Purpose : Recursively lower Lisp-like fluent expression trees so control-flow
+#           conditions (`if`, `elseif`, `switch`) and value surfaces share one
+#           expression-lowering path.
+# Args    : ($expr)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_flow_composite_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ if ($trimmed =~ /^(?:scalar|array)\s*\(/o) {
+  my $lowered_value = _lower_method_value_expr($trimmed);
+  return $lowered_value if defined($lowered_value) && length($lowered_value);
+ }
+
+ my $call = _parse_method_function_expr($trimmed);
+ return $trimmed unless $call;
+
+ my $method = $call->{method} // '';
+ my $args = $call->{args} || [];
+ my %string_compare_ops = map { $_ => 1 } qw(eq ne gt ge lt le);
+ my %numeric_compare_ops = (
+  num_eq => '==',
+  num_ne => '!=',
+  num_gt => '>',
+  num_ge => '>=',
+  num_lt => '<',
+  num_le => '<=',
+ );
+
+ if ($method eq 'or' || $method eq 'and') {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, undef);
+  return undef unless $effective_args && @$effective_args;
+  my @parts = map { _lower_flow_composite_expr($_) } @$effective_args;
+  return undef if grep { !defined($_) || !length($_) } @parts;
+  my $joiner = $method eq 'or' ? ' || ' : ' && ';
+  return '('.join($joiner, map { "($_)" } @parts).')';
+ }
+
+ if ($method eq 'not') {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
+  return undef unless $effective_args;
+  my $value = _lower_flow_composite_expr($effective_args->[0]);
+  return undef unless defined($value) && length($value);
+  return "(!($value))";
+ }
+
+ if ($method eq 'is_empty') {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
+  return undef unless $effective_args;
+  return _lower_is_empty_expr($effective_args->[0]);
+ }
+
+ if ($method eq 'is_nonempty') {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
+  return undef unless $effective_args;
+  my $empty_expr = _lower_is_empty_expr($effective_args->[0]);
+  return undef unless defined($empty_expr) && length($empty_expr);
+  return "(!($empty_expr))";
+ }
+
+ if (exists $string_compare_ops{$method}) {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
+  return undef unless $effective_args;
+  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
+  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
+  return undef unless defined($lhs) && length($lhs);
+  return undef unless defined($rhs) && length($rhs);
+  return "($lhs $method $rhs)";
+ }
+
+ if (exists $numeric_compare_ops{$method}) {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
+  return undef unless $effective_args;
+  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
+  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
+  return undef unless defined($lhs) && length($lhs);
+  return undef unless defined($rhs) && length($rhs);
+  return "($lhs $numeric_compare_ops{$method} $rhs)";
+ }
+
+ if ($method eq 'matches') {
+  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
+  return undef unless $effective_args;
+  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
+  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
+  return undef unless defined($lhs) && length($lhs);
+  return undef unless defined($rhs) && length($rhs);
+  return "($lhs =~ $rhs)";
+ }
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
 # Function: log_output
 # Purpose : Central logging entrypoint with verbosity-gating and optional file
 #           mirroring to $main::LOG_FILE.
@@ -2575,6 +2701,62 @@ sub _extract_array_symbol_name {
 }
 
 #------------------------------------------------------------------------------
+# Function: _extract_hash_symbol_name
+# Purpose : Resolve hash variable symbol name from DSL method token surface.
+# Args    : ($token)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_hash_symbol_name {
+ my ($token) = @_;
+ return undef unless defined $token;
+ $token = _trim_action_ir_value($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalar_access_key_expr
+# Purpose : Lower scalar index/key expressions used for array/hash entry access.
+# Args    : ($expr)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalar_access_key_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return $trimmed if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return $trimmed if $trimmed =~ /^"(?:\\.|[^"])*"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+
+ my $lowered = _lower_flow_composite_expr($trimmed);
+ $lowered = _lower_method_value_expr($trimmed) unless defined($lowered) && length($lowered);
+ $lowered = $trimmed unless defined($lowered) && length($lowered);
+
+ return '$'.$lowered if $lowered =~ /^\w+$/o;
+ return $lowered
+}
+
+#------------------------------------------------------------------------------
+# Function: _infer_scalar_container_kind
+# Purpose : Infer whether `scalar(container, key)` should resolve through array
+#           index or hash key syntax when container kind is not explicit.
+# Args    : ($container_symbol, $key_expr)
+# Returns : 'array' or 'hash'
+#------------------------------------------------------------------------------
+sub _infer_scalar_container_kind {
+ my ($container_symbol, $key_expr) = @_;
+ return 'hash' if defined($container_symbol) && $container_symbol =~ /(hash|map|dict)/io;
+ return 'array' if defined($container_symbol) && $container_symbol =~ /(arr|array|list|vec|vector)/io;
+
+ my $key_trimmed = _trim_action_ir_value($key_expr // '');
+ return 'hash' if defined($key_trimmed) && ($key_trimmed =~ /^"(?:\\.|[^"])*"$/s || $key_trimmed =~ /^'(?:\\.|[^'])*'$/s);
+ return 'array' if defined($key_trimmed) && $key_trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return 'array'
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_assignment_source_expr
 # Purpose : Map assignment source tokens from method DSL to Perl expressions.
 # Args    : ($source)
@@ -2742,11 +2924,59 @@ sub _lower_method_value_expr {
  return undef unless defined $expr;
  my $trimmed = _trim_action_ir_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $scalar_call = _parse_method_function_expr($trimmed);
+ if ($scalar_call && $scalar_call->{method} eq 'scalar') {
+  my $scalar_args = $scalar_call->{args} || [];
+  return undef unless ref($scalar_args) eq 'ARRAY';
+  return undef unless @$scalar_args >= 1 && @$scalar_args <= 2;
 
- if ($trimmed =~ /^scalar\s*\(\s*IMATCH_LIST\s*,\s*(\d+)\s*\)$/o) {
-  return '$IMATCH_LIST['.$1.']';
- }
- if ($trimmed =~ /^scalar\s*\(\s*(\w+)\s*\)$/o) {
+  if (@$scalar_args == 1) {
+   my $value = _trim_action_ir_value($scalar_args->[0]);
+   return undef unless defined($value) && length($value);
+   if ($value =~ /^(\w+)$/o) {
+    return '$'.$1;
+   }
+   my $nested = _lower_method_value_expr($value);
+   return $nested if defined($nested) && length($nested) && $nested ne $trimmed;
+   return $value;
+  }
+
+  my ($container_expr, $key_expr) = @$scalar_args;
+  my $container_trimmed = _trim_action_ir_value($container_expr);
+  my $key_trimmed = _trim_action_ir_value($key_expr);
+  return undef unless defined($container_trimmed) && length($container_trimmed);
+  return undef unless defined($key_trimmed) && length($key_trimmed);
+
+  if ($container_trimmed eq 'IMATCH_LIST' && $key_trimmed =~ /^\d+$/o) {
+   return '$IMATCH_LIST['.$key_trimmed.']';
+  }
+
+  my ($explicit_array_symbol) = $container_trimmed =~ /^array\s*\(\s*(\w+)\s*\)$/o;
+  my ($explicit_hash_symbol) = $container_trimmed =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
+  my $array_symbol = $explicit_array_symbol || _extract_array_symbol_name($container_trimmed);
+  my $hash_symbol = $explicit_hash_symbol || _extract_hash_symbol_name($container_trimmed);
+  my $key_lowered = _lower_scalar_access_key_expr($key_trimmed);
+  return undef unless defined($key_lowered) && length($key_lowered);
+
+  if (defined $explicit_array_symbol) {
+   return '$'.$explicit_array_symbol.'['.$key_lowered.']';
+  }
+  if (defined $explicit_hash_symbol) {
+   return '$'.$explicit_hash_symbol.'{'.$key_lowered.'}';
+  }
+
+  if (defined $array_symbol && defined $hash_symbol) {
+   my $container_kind = _infer_scalar_container_kind($container_trimmed, $key_trimmed);
+   return '$'.$array_symbol.'['.$key_lowered.']' if $container_kind eq 'array';
+   return '$'.$hash_symbol.'{'.$key_lowered.'}';
+  }
+  if (defined $array_symbol) {
+   return '$'.$array_symbol.'['.$key_lowered.']';
+  }
+  if (defined $hash_symbol) {
+   return '$'.$hash_symbol.'{'.$key_lowered.'}';
+  }
+  return undef;
   return '$'.$1;
  }
  if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))$/o) {
@@ -2901,15 +3131,9 @@ sub _normalize_method_args_with_optional_scope {
 sub _lower_control_flow_value_expr {
  my ($expr) = @_;
  return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($trimmed =~ /^(?:scalar|array)\s*\(/o) {
-  my $lowered = _lower_method_value_expr($trimmed);
-  return $lowered if defined($lowered) && length($lowered);
- }
-
- return $trimmed
+ my $lowered = _lower_flow_composite_expr($expr);
+ return undef unless defined($lowered) && length($lowered);
+ return $lowered
 }
 
 #------------------------------------------------------------------------------
@@ -2928,17 +3152,13 @@ sub _lower_switch_case_value_expr {
  if ($trimmed =~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
   return {mode => 'regex', expr => $trimmed}
  }
+ my $lowered = _lower_flow_composite_expr($trimmed);
+ return undef unless defined($lowered) && length($lowered);
 
- if ($trimmed =~ /^(?:scalar|array)\s*\(/o) {
-  my $lowered = _lower_method_value_expr($trimmed);
-  return {mode => 'eq', expr => $lowered} if defined($lowered) && length($lowered);
+ if ($trimmed =~ /^\w+$/o && $lowered eq $trimmed) {
+  return {mode => 'eq', expr => _normalize_method_tag_expr($trimmed)}
  }
-
- if ($trimmed =~ /^"(?:\\.|[^"])*"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s) {
-  return {mode => 'eq', expr => $trimmed}
- }
-
- return {mode => 'eq', expr => _normalize_method_tag_expr($trimmed)}
+ return {mode => 'eq', expr => $lowered}
 }
 
 #------------------------------------------------------------------------------
@@ -3150,6 +3370,94 @@ sub _lower_endif_flow_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_flow_branch_action_expr
+# Purpose : Lower one branch action expression used in inline-composite switch
+#           branch arguments (`case(..., action1, action2, ...)`).
+# Args    : ($expr, $ctx)
+# Returns : lowered Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_flow_branch_action_expr {
+ my ($expr, $ctx) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $rules = $ctx->{rewrite_rules};
+ return $trimmed unless $rules && ref($rules) eq 'ARRAY';
+
+ foreach my $rule (@$rules) {
+  my $sub_ctx = {
+   if_stack       => [],
+   switch_stack   => [],
+   switch_counter => ($ctx->{switch_counter} || 0),
+   rewrite_rules  => $ctx->{rewrite_rules},
+  };
+  my $lowered = $rule->{apply}->($trimmed, $sub_ctx);
+  next unless defined($lowered) && length($lowered);
+  next if $lowered eq $trimmed;
+  next if @{$sub_ctx->{if_stack} || []};
+  next if @{$sub_ctx->{switch_stack} || []};
+  $ctx->{switch_counter} = $sub_ctx->{switch_counter} if defined $sub_ctx->{switch_counter};
+  return $lowered;
+ }
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_inline_switch_branch_expr
+# Purpose : Lower a single inline switch branch expression (`case(...)` or
+#           `default(...)`) in composite switch syntax.
+# Args    : ($branch_expr, $switch_var, $hit_var, $ctx, $switch_state)
+# Returns : Perl clause string or undef
+#------------------------------------------------------------------------------
+sub _lower_inline_switch_branch_expr {
+ my ($branch_expr, $switch_var, $hit_var, $ctx, $switch_state) = @_;
+ my $branch_call = _parse_method_function_expr($branch_expr);
+ return undef unless $branch_call;
+ my $method = $branch_call->{method} // '';
+
+ if ($method eq 'case') {
+  my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, undef);
+  return undef unless $effective_args && @$effective_args >= 1;
+  return undef if $switch_state->{default_seen};
+
+  my $case_value = _lower_switch_case_value_expr($effective_args->[0]);
+  return undef unless $case_value && defined($case_value->{expr});
+  my $match_expr = $case_value->{mode} eq 'regex'
+   ? "\$$switch_var =~ $case_value->{expr}"
+   : "\$$switch_var eq $case_value->{expr}";
+
+  my @actions;
+  foreach my $action_expr (@$effective_args[1 .. $#$effective_args]) {
+   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx);
+   return undef unless defined($lowered_action) && length($lowered_action);
+   push @actions, $lowered_action;
+  }
+  my $body = @actions ? '; '.join('; ', @actions) : '';
+  return "if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
+ }
+
+ if ($method eq 'default') {
+  my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 0, undef);
+  return undef unless $effective_args;
+  return undef if $switch_state->{default_seen};
+  $switch_state->{default_seen} = 1;
+
+  my @actions;
+  foreach my $action_expr (@$effective_args) {
+   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx);
+   return undef unless defined($lowered_action) && length($lowered_action);
+   push @actions, $lowered_action;
+  }
+  my $body = @actions ? '; '.join('; ', @actions) : '';
+  return "if (!\$$hit_var) { \$$hit_var = 1$body }";
+ }
+
+ return undef
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_switch_flow_statement
 # Purpose : Lower `switch(...)` fluent control-flow markers.
 # Args    : ($expr, $ctx)
@@ -3159,8 +3467,8 @@ sub _lower_switch_flow_statement {
  my ($expr, $ctx) = @_;
  my $call = _parse_method_function_expr($expr);
  return undef unless $call && $call->{method} eq 'switch';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ return undef unless $effective_args && @$effective_args >= 1;
  return undef unless $effective_args;
  my $switch_expr = _lower_control_flow_value_expr($effective_args->[0]);
  return undef unless defined($switch_expr) && length($switch_expr);
@@ -3170,12 +3478,26 @@ sub _lower_switch_flow_statement {
  my $suffix = $ctx->{switch_counter};
  my $switch_var = "__ls_switch_value_$suffix";
  my $hit_var = "__ls_switch_hit_$suffix";
- push @{$ctx->{switch_stack}}, {
+ my $switch_state = {
   switch_var   => $switch_var,
   hit_var      => $hit_var,
   open_case    => 0,
   default_seen => 0,
  };
+
+ if (@$effective_args > 1) {
+  my @clauses;
+  foreach my $branch_expr (@$effective_args[1 .. $#$effective_args]) {
+   my $clause = _lower_inline_switch_branch_expr($branch_expr, $switch_var, $hit_var, $ctx, $switch_state);
+   return undef unless defined($clause) && length($clause);
+   push @clauses, $clause;
+  }
+  my $body = @clauses ? '; '.join('; ', @clauses) : '';
+  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
+ }
+
+ $ctx->{switch_stack} ||= [];
+ push @{$ctx->{switch_stack}}, $switch_state;
 
  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0"
 }
@@ -3585,8 +3907,8 @@ sub _scan_contract_ir_events {
   while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});
    next unless $call;
-   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
-   next unless $effective_args;
+   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+   next unless $effective_args && @$effective_args >= 1;
    push @events, {raw => $+{expr}, args => {expr => _trim_action_ir_value($effective_args->[0])}};
   }
  } elsif ($id eq 'case_flow') {
@@ -4210,6 +4532,7 @@ sub _lower_action_code_from_canonical_ir {
   if_stack      => [],
   switch_stack  => [],
   switch_counter => 0,
+  rewrite_rules => $rewrite_rules,
  };
  foreach my $event (@{$canonical_ir_diag->{canonical_action_ir_events}}) {
   my $kind = $event->{kind} // '';

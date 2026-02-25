@@ -38,6 +38,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `2b1101b` - Backbone #3: fluent control-flow method DSL + pipe_operator showcase
 - `2984fb5` - Backbone #3: composable array-method lowering + snippet codegen inspector
 - `677677d` - Backbone item #3 follow-up: add typed declare methods and method chains
 - `6ff99b5` - Backbone item #3 follow-up: lower indexed push-call wrappers
@@ -106,6 +107,18 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 control-flow expression unification + composite switch follow-up in `perl/LinkedSpec.pm`:
+  - added unified Lisp-style recursive control-flow expression lowering shared by `if`/`elseif`/`switch` condition/value paths (`or`, `and`, `not`, emptiness predicates, comparison helpers, regex predicate),
+  - extended method-value lowering to support collection entry access through `scalar(container, key_or_index)` (including explicit `scalar(array(...), idx)` / `scalar(hash(...), key)` forms) while preserving `scalar(IMATCH_LIST, n)` behavior,
+  - added inline composite switch branch lowering so `switch(cond, case(...), default(...))` works directly inside switch arguments, with inline branch actions lowered through existing helper contracts,
+  - preserved existing marker-style fluent control-flow behavior (`switch(); case(); default(); endswitch()`) for backward compatibility.
+- Extended regression coverage in `t/phase0_regression.t`:
+  - `action_rewriter_lowers_fluent_if_else_and_branch_statements` now validates nested Lisp-style conditions and scalar collection-entry accessor lowering,
+  - `action_rewriter_lowers_fluent_switch_case_default_with_optional_endcase` now validates inline composite switch(case/default) lowering and descriptor readiness invariants.
+- Re-ran full validation after control-flow expression/composite switch follow-up:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (68 tests)
 - Implemented Backbone item #3 fluent control-flow method-DSL follow-up in `perl/LinkedSpec.pm`:
   - added lowering helpers/contracts for `if`/`i`, `elseif`/`elif`, `else`, `endif`, `switch`, `case`, `default`, optional `endcase`, `endswitch`, and branch statements `say`, `print`, `return_undef`,
   - added control-flow value normalization helpers and contextual stack-aware lowering state for nested/ordered control-flow emission,
