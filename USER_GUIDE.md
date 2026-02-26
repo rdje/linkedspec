@@ -257,6 +257,8 @@ This section summarizes the helper/method surface currently recognized by the ac
 - `backtrack(label)` / `BACKTRACK()`
 
 ### 6) Return helpers
+- `return(payload)` (general payload form)
+  - supports nested `[]` / `{}` literals, quoted strings, numbers, and embedded `scalar(...)` / `array(...)` helper values
 - `return_a(label[, arg])`
 - `return_m(label)`
 - `return_ma(label)`
@@ -292,8 +294,62 @@ This section summarizes the helper/method surface currently recognized by the ac
 
 ### Notes on `return_undef()` and richer return payloads
 - `return_undef()` is a dedicated shorthand for `return undef` in fluent branches.
-- For richer payload returns, use existing return-helper forms and/or explicit return expressions where appropriate.
-- Current legacy `return(label, arg)` helper remains supported for compatibility with existing specs.
+- For rich payload returns, prefer generalized `return(payload)` with nested literal structures.
+- Legacy `return(label, arg)` helper remains supported for compatibility with existing specs and tagged-return behavior.
+### Exhaustive `return(payload)` payload reference
+`return(payload)` accepts exactly one payload argument.
+
+Supported payload categories:
+- String literals
+  - `return("ok")`
+  - `return('ok')`
+- Numeric literals
+  - `return(0)`
+  - `return(-3.14)`
+- Array literals (including nested)
+  - `return(["semantic", 1, 2])`
+  - `return([1, { k => "v" }, [2, 3]])`
+- Hash literals (including nested)
+  - `return({ kind => "node", ok => 1 })`
+  - `return({ meta => { id => 7 }, list => [1, 2] })`
+- Helper-based scalar lookups
+  - `return(scalar(name))`
+  - `return(scalar(foo_arr, idx))`
+  - `return(scalar(foo_hash, key))`
+  - `return(scalar(array(foo_arr), idx))`
+  - `return(scalar(hash(foo_hash), key))`
+  - `return(scalar(IMATCH_LIST, 0))`
+- Helper-based array construction
+  - `return(array(scalar(name), 123, "x"))`
+- Mixed nested payloads with embedded helpers
+  - `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
+  - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
+- Raw Perl expressions are also accepted in block-form payloads
+  - `return($value)`
+  - `return($hash{$key} // "na")`
+  - `return(foo())`
+  - `return(foo)` (bare identifier)
+
+Lowering behavior examples:
+- `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
+  - lowers to: `return ["semantic", { key => $name }, [123, $foo_arr[$idx]]]`
+- `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
+  - lowers to: `return { item => $foo_hash{$key}, list => [$name, 123] }`
+- `return(scalar(name))`
+  - lowers to: `return $name`
+- `return(array(scalar(name), 2))`
+  - lowers to: `return [$name, 2]`
+
+Method-chain caveat (`-> Rule .return(...)`):
+- General payload mode is selected for chain payloads that start with:
+  - `[` / `{`
+  - quoted strings (`"..."` / `'...'`)
+  - numeric literals
+  - `scalar(...)`, `array(...)`, or `hash(...)`
+- Example (general payload):
+  - `-> Top .return(["semantic", { key => scalar(name) }])`
+- If chain payload does not match those starts, chain rendering falls back to label-injected legacy form.
+  - Example: `-> Top .return(foo)` is treated as legacy-style return with scope label injection, not generalized `return(payload)`.
 
 ## Versioning and Compatibility
 - Treat existing specs as compatibility contracts.

@@ -696,8 +696,8 @@ SPEC
 
     unlink($tmp_spec);
 };
-subtest 'get_parser_mixed_action_blind_call_trapped_exit' => sub {
-    plan tests => 6;
+subtest 'get_parser_mixed_action_blind_call_returns_undef_without_exit' => sub {
+    plan tests => 7;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -720,14 +720,14 @@ SPEC
 
     my ($exit_code, $out, $err) = run_get_parser_in_subprocess($tmp_spec);
     my $combined = ($out // '') . ($err // '');
-
-    is(defined($exit_code) ? $exit_code : '<undef>', '1', 'mixed-action/blind-call subprocess exit code is 1');
+    is(defined($exit_code) ? $exit_code : '<undef>', '0', 'mixed-action/blind-call subprocess exit code is 0');
     like($combined, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/,
         'mixed-action/blind-call diagnostics report incompatible action types');
     like($combined, qr/Rule 'Top'/, 'mixed-action/blind-call diagnostics include rule label');
     like($combined, qr/Solution: Use either ACTION blocks OR BLIND CALL blocks, not both/,
         'mixed-action/blind-call diagnostics include remediation guidance');
     unlike($combined, qr/__PARSER_DEFINED__/, 'mixed-action/blind-call subprocess does not return parser-defined marker');
+    like($combined, qr/__PARSER_UNDEF__/, 'mixed-action/blind-call subprocess returns parser-undef marker');
 
     unlink($tmp_spec);
 };
@@ -958,6 +958,43 @@ SPEC
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$meta->{canonical_action_ir_nodes}}),
         'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
     );
+};
+subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
+    plan tests => 8;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])'),
+        'return ["semantic", { key => $name }, [123, $foo_arr[$idx]]]',
+        'general return(payload) lowers nested array/hash payload with scalar helpers'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })'),
+        'return { item => $foo_hash{$key}, list => [$name, 123] }',
+        'general return(payload) lowers scalar(container,key_or_index) forms inside nested hash/list payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(Top, $x)'),
+        q{return ['?Top:',  $x]},
+        'legacy return(label,arg) helper behavior remains preserved for compatibility'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return_undef()'),
+        'return undef',
+        'return_undef() shorthand remains available'
+    );
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top .return(["semantic", { key => scalar(name) }, [scalar(foo_arr, idx)]])
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-chain general return payload form');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'method-chain general return payload avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'method-chain general return payload avoids unresolved-helper hits');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-chain general return payload contributes canonical RETURN action-IR node');
 };
 subtest 'action_rewriter_lowers_composable_array_string_method_contracts' => sub {
     plan tests => 11;
@@ -1645,6 +1682,216 @@ SPEC
     my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return call(Leaf)');
     is($rewritten, 'return &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)', 'return-call wrapper lowering rewrites to direct handler return call');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'return-call-wrapper-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_bare_return_statements_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return 1; return }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-return canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes bare return statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes bare return statements');
+    is($meta->{unresolved_helper_count}, 0, 'bare-return classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN for bare return statement coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return 1; return');
+    is($rewritten, 'return 1; return', 'bare return statements are preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-return-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_bare_exit_statements_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { exit; exit 1; exit(2) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-exit canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes bare exit statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes bare exit statements');
+    is($meta->{unresolved_helper_count}, 0, 'bare-exit classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include EXIT for bare exit statement coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'exit; exit 1; exit(2)');
+    is($rewritten, 'exit; exit 1; exit(2)', 'bare exit statements are preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-exit-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for prefix-newline line-count canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes prefix-newline line-count statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes prefix-newline line-count statement');
+    is($meta->{unresolved_helper_count}, 0, 'prefix-newline line-count classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'LINE_COUNT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include LINE_COUNT for prefix-newline line-count coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g');
+    is($rewritten, 'my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g', 'prefix-newline line-count statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'prefix-newline-linecount-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n" }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for capture-substr-print canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes capture-substr print statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes capture-substr print statement');
+    is($meta->{unresolved_helper_count}, 0, 'capture-substr print classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PRINT for capture-substr print coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"');
+    is($rewritten, 'print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"', 'capture-substr print statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'capture-substr-print-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_bare_my_declarations_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my $retv; my @matches }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-my-declaration canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes bare lexical my declarations');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes bare lexical my declarations');
+    is($meta->{unresolved_helper_count}, 0, 'bare lexical my declaration classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include DECLARE for bare lexical my declaration coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my $retv; my @matches');
+    is($rewritten, 'my $retv; my @matches', 'bare lexical my declarations are preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-my-declaration-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_position_tracking_cluster_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for position-tracking cluster canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes supported position-tracking cluster statements');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes supported position-tracking cluster statements');
+    is($meta->{unresolved_helper_count}, 0, 'position-tracking cluster classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'POSITION_TRACK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include POSITION_TRACK for cluster coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift');
+    is($rewritten, 'my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift', 'position-tracking cluster statements are preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'position-tracking-cluster-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_inline_regex_subst_assignment_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { $args =~ s/\s*\)\s*$// }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for inline-regex-subst assignment canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes inline regex-subst assignment statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes inline regex-subst assignment statement');
+    is($meta->{unresolved_helper_count}, 0, 'inline regex-subst assignment classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'REGEX_SUBST' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include REGEX_SUBST for inline assignment coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', '$args =~ s/\s*\)\s*$//');
+    is($rewritten, '$args =~ s/\s*\)\s*$//', 'inline regex-subst assignment statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'inline-regex-subst-assignment-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_lexical_match_assignment_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my $args = $IMATCH }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for lexical match-assignment canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes lexical match-assignment statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes lexical match-assignment statement');
+    is($meta->{unresolved_helper_count}, 0, 'lexical match-assignment classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include ASSIGN for lexical match-assignment coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my $args = $IMATCH');
+    is($rewritten, 'my $args = $IMATCH', 'lexical match-assignment statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'lexical-match-assignment-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_next_statement_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { next }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for next-statement canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes next statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes next statement');
+    is($meta->{unresolved_helper_count}, 0, 'next-statement classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include NEXT for next-statement coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'next');
+    is($rewritten, 'next', 'next statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'next-statement-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_ref_field_assignment_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { $prev_node_type = $retv->{type} }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ref-field-assignment canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes ref-field assignment statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes ref-field assignment statement');
+    is($meta->{unresolved_helper_count}, 0, 'ref-field assignment classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include ASSIGN for ref-field assignment coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', '$prev_node_type = $retv->{type}');
+    is($rewritten, '$prev_node_type = $retv->{type}', 'ref-field assignment statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'ref-field-assignment-only rule remains language-agnostic action-IR ready');
 };
 subtest 'method_empty_action_return_with_leading_space_args_stays_balanced' => sub {
     plan tests => 6;

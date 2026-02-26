@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-26 - Language-Agnostic Blocker Reduction Slice + `return(payload)` Guide Expansion
+## Summary
+Reduced high-frequency language-agnostic migration blockers by adding identity-preserving canonical action-IR classification for common raw statements, and expanded `return(payload)` user-guide coverage with concrete payload categories and examples.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added canonical action-IR classifier coverage (without behavior rewrites) for frequent raw statement forms:
+  - `return_bare` (canonical `RETURN`)
+  - `exit_bare` (canonical `EXIT`)
+  - `linecount_prefix_newline_matches` (canonical `LINE_COUNT`)
+  - `print_capture_substr` (canonical `PRINT`)
+  - `my_declare_bare` (canonical `DECLARE`)
+  - `position_tracking` cluster (canonical `POSITION_TRACK`)
+  - `assign_match_my` (canonical `ASSIGN`)
+  - `regex_subst_assignment` (canonical `REGEX_SUBST`)
+  - `next_bare` (canonical `NEXT`)
+  - `ref_field_assign` (canonical `ASSIGN` for `->{...}` / `->[...]` path reads)
+- Added focused phase0 regression locks for each classifier slice to ensure no RAW_PERL fallback for covered forms and deterministic canonical-node emission.
+- Expanded `USER_GUIDE.md` with exhaustive `return(payload)` usage guidance, payload typing notes, and examples aligned with canonical action lowering surfaces.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=79`)
 ## 2026-02-25 - Backbone Item #3 Follow-up: Unified Lisp-Style Control-Flow Expressions + Inline Composite `switch(...)` Branches
 ## Summary
 Extended fluent control-flow lowering to use a unified Lisp-style expression path for `if`/`elseif`/`switch` conditions, added scalar accessor support for collection entry reads (`scalar(container, key_or_index)`), and added inline composite switch-branch lowering so `switch(condition, case(...), default(...))` can be expressed directly inside `switch(...)` arguments.

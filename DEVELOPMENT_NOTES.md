@@ -60,6 +60,16 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-02-26)
+- Completed an incremental migration slice focused on lowering top-frequency language-agnostic action-IR blockers without changing runtime behavior (classification only).
+- Added canonical action-IR statement classification coverage for:
+  - `return_bare`, `exit_bare`, `linecount_prefix_newline_matches`, `print_capture_substr`, `my_declare_bare`, `position_tracking`, `assign_match_my`, `regex_subst_assignment`, `next_bare`, `ref_field_assign`.
+- Added focused phase0 regression locks for each new classifier contract to ensure deterministic canonical-node emission and no RAW fallback for covered forms.
+- Expanded `USER_GUIDE.md` with an exhaustive `return(payload)` section (supported payload classes + examples) so migration usage is explicit for downstream `.spec` conversions.
+- Validation snapshot for this slice:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=79`)
 
 ## Open Technical Work
 - Build robust regression harness for all existing specs.

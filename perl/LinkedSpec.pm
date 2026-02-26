@@ -578,6 +578,21 @@ sub _parse_method_call_chain {
 }
 
 #------------------------------------------------------------------------------
+# Function: _method_chain_return_uses_general_payload
+# Purpose : Detect method-chain `.return(...)` payloads that should be emitted
+#           as `return(payload)` without implicit scope-label injection.
+# Args    : ($args)
+# Returns : boolean
+#------------------------------------------------------------------------------
+sub _method_chain_return_uses_general_payload {
+ my ($args) = @_;
+ return 0 unless defined $args;
+ my $trimmed = _trim_action_ir_value($args);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return $trimmed =~ /^(?:\[|\{|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\()/o ? 1 : 0
+}
+
+#------------------------------------------------------------------------------
 # Function: _render_method_call_chain
 # Purpose : Render parsed method-chain calls into semicolon-joined helper-style
 #           calls with entry label injected as first argument.
@@ -588,10 +603,13 @@ sub _render_method_call_chain {
  my ($entry_label, $chain) = @_;
  my $calls = _parse_method_call_chain($chain);
  return undef unless $calls && @$calls;
-
  my @rendered = map {
+  my $method = $_->{method};
   my $args = $_->{args};
-  $_->{method} . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')'
+  if ($method eq 'return' && _method_chain_return_uses_general_payload($args)) {
+   return $method . '(' . $args . ')';
+  }
+  $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')'
  } @$calls;
  return join '; ', @rendered
 }
@@ -1142,6 +1160,12 @@ sub Get {
      }
      log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
  }
+
+ # Do not continue into generation when bootstrap parse failed or returned no data
+ unless ($parse_success && defined $retv) {
+     log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
+     return undef;
+ }
  
       # If parse-only mode, stop here and return undef
      if ($parse_only) {
@@ -1153,6 +1177,10 @@ sub Get {
      log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
 
  my $auto_descr_spec  = spec_descr($retv);
+ unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
+     log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
+     return undef;
+ }
  my $final_descr      = {spec=>$auto_descr_spec, gdata=>spec_gdata($auto_descr_spec)};
  $final_descr->{meta} ||= {};
  $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
@@ -1292,32 +1320,34 @@ my $specretv = shift;
 
  print 'my $descr = {
  spec => {'."\n" if $pm_drive;
-
- my @specinfo = map {spec_entry($_)} @$specretv;
+ my @specinfo;
+ foreach my $entry (@$specretv) {
+  my ($label, $info) = spec_entry($entry);
+  unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
+   log_output(DUMP_NONE, "CRITICAL ERROR", "Rule descriptor build failed while compiling parsed spec entries");
+   return undef
+  }
+  push @specinfo, $label, $info;
+ }
  
  # Debug: Log the specinfo array
  log_output(DUMP_LOW, "Specinfo array contents", "Number of entries: " . scalar(@specinfo));
- for (my $i = 0; $i < @specinfo; $i++) {
-     my $entry = $specinfo[$i];
-     if (ref($entry) eq 'ARRAY' && @$entry >= 2) {
-         log_output(DUMP_LOW, "Entry $i", "Label: '$entry->[0]', Type: " . ref($entry->[1]));
-     } else {
-         log_output(DUMP_LOW, "Entry $i", "Type: " . ref($entry) . ", Content: " . Dumper($entry));
-     }
+ for (my $i = 0; $i < @specinfo; $i += 2) {
+     my $label = $specinfo[$i];
+     my $info  = $specinfo[$i + 1];
+     log_output(DUMP_LOW, "Entry " . ($i / 2), "Label: '$label', Type: " . ref($info));
  }
  
  # Debug: Check for duplicate rules
  my %seen_rules;
  my @duplicate_rules;
- foreach my $pair (@specinfo) {
-     if (ref($pair) eq 'ARRAY' && @$pair >= 2) {
-         my ($label, $info) = @$pair;
-         if (exists $seen_rules{$label}) {
-             push @duplicate_rules, $label;
-             log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
-         }
-         $seen_rules{$label} = 1;
+ for (my $i = 0; $i < @specinfo; $i += 2) {
+     my $label = $specinfo[$i];
+     if (exists $seen_rules{$label}) {
+         push @duplicate_rules, $label;
+         log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
      }
+     $seen_rules{$label} = 1;
  }
  
  if (@duplicate_rules) {
@@ -1399,6 +1429,17 @@ sub _build_action_lowering_contracts {
    lower              => sub {
     my ($code) = @_;
    $code =~ s/\breturn_a\s*\(\s*$label(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/return ['?$label:', @{[$+{arg} ? "($+{arg}), " : '']}\\\@$label]/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_general',
+   ir_node            => 'RETURN',
+   diag_name          => 'return',
+   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|"|'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\()/o,
+   lower              => sub {
+    my ($code) = @_;
+   $code =~ s/\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_return_general_statement($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -1575,6 +1616,106 @@ sub _build_action_lowering_contracts {
    lower              => sub {
     my ($code) = @_;
    $code =~ s/\breturn\s+call\s*\(\s*(\w+)\s*\)/return &{\$\$descr{spec}{$1}{handler}}(\$descr, \$STRING, \$minfo)/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'return_bare',
+   ir_node            => 'RETURN',
+   diag_name          => 'return',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'exit_bare',
+   ir_node            => 'EXIT',
+   diag_name          => 'exit',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'linecount_prefix_newline_matches',
+   ir_node            => 'LINE_COUNT',
+   diag_name          => 'line_count',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'print_capture_substr',
+   ir_node            => 'PRINT',
+   diag_name          => 'print',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'my_declare_bare',
+   ir_node            => 'DECLARE',
+   diag_name          => 'declare',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'assign_match_my',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'assign',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'regex_subst_assignment',
+   ir_node            => 'REGEX_SUBST',
+   diag_name          => 'substr',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'next_bare',
+   ir_node            => 'NEXT',
+   diag_name          => 'next',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'ref_field_assign',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'assign',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'position_tracking',
+   ir_node            => 'POSITION_TRACK',
+   diag_name          => 'position_tracking',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
     return $code
    },
   },
@@ -1941,7 +2082,7 @@ sub _plan_rule_ir_meta {
 # Purpose : Enforce rule-shape invariants before emission (notably disallowing
 #           mixed ACTION + BLIND CALL forms in one rule).
 # Args    : ($rule_ir, $rule_meta)
-# Returns : 1 on success (may exit on critical incompatibility)
+# Returns : 1 on success, 0 on validation failure
 #------------------------------------------------------------------------------
 sub _validate_rule_ir_or_exit {
  my ($rule_ir, $rule_meta) = @_;
@@ -1953,7 +2094,7 @@ sub _validate_rule_ir_or_exit {
   log_output(DUMP_NONE, $error_msg, $context);
   print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
   print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
-  exit 1
+  return 0
  }
 
  return 1
@@ -2142,7 +2283,7 @@ my $einfo = shift;
  $top_rule = $rule_ir->{top_rule} if defined $rule_ir->{top_rule};
 
  my $rule_meta = _plan_rule_ir_meta($rule_ir);
- _validate_rule_ir_or_exit($rule_ir, $rule_meta);
+ return unless _validate_rule_ir_or_exit($rule_ir, $rule_meta);
 
  my $emit_ctx = _build_rule_ir_emit_context($rule_ir);
  $rule_meta->{action_rewriter} = $emit_ctx->{action_rewriter_meta};
@@ -2991,6 +3132,58 @@ sub _lower_method_value_expr {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_return_payload_expr
+# Purpose : Lower generalized return payload expressions, preserving nested
+#           `[]/{}` literals while lowering embedded scalar/array/hash helpers.
+# Args    : ($expr)
+# Returns : Perl payload expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_return_payload_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $direct = _lower_method_value_expr($trimmed);
+ if (
+  defined($direct) &&
+  length($direct) &&
+  ($trimmed =~ /^(?:scalar|array|hash)\s*\(/o || $direct ne $trimmed)
+ ) {
+  return $direct;
+ }
+
+ my $rewritten = $trimmed;
+ for (1 .. 64) {
+  my $before = $rewritten;
+  $rewritten =~ s/\b(?<helper>(?:scalar|array|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/do {
+   my $lowered = _lower_method_value_expr($+{helper});
+   (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
+  }/ge;
+  last if $rewritten eq $before;
+ }
+ return $rewritten
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_return_general_statement
+# Purpose : Lower generalized `return(payload)` helper form.
+# Args    : ($expr)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_return_general_statement {
+ my ($expr) = @_;
+ my $call = _parse_method_function_expr($expr);
+ return undef unless $call && $call->{method} eq 'return';
+
+ my $args = $call->{args} || [];
+ return undef unless ref($args) eq 'ARRAY' && @$args == 1;
+ my $payload = _lower_return_payload_expr($args->[0]);
+ return undef unless defined($payload) && length($payload);
+ return "return $payload"
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_return_imatch_statement
 # Purpose : Lower `return_imatch(...)`/`return_im(...)` method helper calls.
 # Args    : ($tag)
@@ -3790,6 +3983,92 @@ sub _scan_contract_ir_events {
   while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
    push @events, {raw => $&, args => {callee => $+{callee}, context => 'return'}};
   }
+ } elsif ($id eq 'return_bare') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^return(?:\s+.+)?$/o;
+   next if $trimmed =~ /^return\s*\(/o;
+   next if $trimmed =~ /^return_/o;
+   next if $trimmed =~ /^return\s+call\s*\(/o;
+   my $payload = $trimmed;
+   $payload =~ s/^return//o;
+   $payload = _trim_action_ir_value($payload // '');
+   push @events, {raw => $trimmed, args => {payload => $payload}};
+  }
+ } elsif ($id eq 'exit_bare') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^exit(?:\b|(?=\())/o;
+   my $payload = $trimmed;
+   $payload =~ s/^exit//o;
+   $payload = _trim_action_ir_value($payload // '');
+   push @events, {raw => $trimmed, args => {payload => $payload}};
+  }
+ } elsif ($id eq 'linecount_prefix_newline_matches') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^my\s+\@(?<target>\w+)\s*=\s*substr\(\s*\$\$STRING\s*,\s*0\s*,\s*(?<upto>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\)\s*=~\s*\/\\n\/g$/o;
+   push @events, {raw => $trimmed, args => {target => $+{target}, upto => _trim_action_ir_value($+{upto})}};
+  }
+ } elsif ($id eq 'print_capture_substr') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^print\s*"<"\s*\.\s*substr\(\s*\$\$STRING\s*,\s*\$IPOS\s*,\s*\$LSPOS\s*-\s*\$IPOS\s*-\s*1\s*\)\s*\.\s*">\\n"\s*$/o;
+   push @events, {raw => $trimmed, args => {source => 'capture_substr'}};
+  }
+ } elsif ($id eq 'my_declare_bare') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^my\s+(?<sigil>[\$\@\%])(?<name>\w+)$/o;
+   my $declaration_type = $+{sigil} eq '$' ? 'scalar' : $+{sigil} eq '@' ? 'array' : 'hash';
+   push @events, {raw => $trimmed, args => {declaration_type => $declaration_type, names => [$+{name}], scope => 'my'}};
+  }
+ } elsif ($id eq 'assign_match_my') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^my\s+\$(?<target>\w+)\s*=\s*\$(?<source>CAPTURE|IMATCH|LMATCH)$/o;
+   push @events, {raw => $trimmed, args => {target => $+{target}, source => $+{source}, scope => 'my'}};
+  }
+ } elsif ($id eq 'regex_subst_assignment') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^\$(?<target>\w+)\s*=~\s*s\/(?<pattern>(?:\\.|[^\/])*)\/(?<replacement>(?:\\.|[^\/])*)\/(?<flags>[a-z]*)$/o;
+   push @events, {raw => $trimmed, args => {target => $+{target}, pattern => '/'.$+{pattern}.'/', replacement => '/'.$+{replacement}.'/', flags => ($+{flags} // ''), scope => undef}};
+  }
+ } elsif ($id eq 'next_bare') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^next(?:\s+\w+)?$/o;
+   push @events, {raw => $trimmed, args => {}};
+  }
+ } elsif ($id eq 'ref_field_assign') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^(?<decl>my\s+)?\$(?<target>\w+)\s*=\s*\$(?<source>\w+)\s*->\s*(?<path>(?:\{[^{}]+\}|\[[^\[\]]+\])(?:\s*(?:\{[^{}]+\}|\[[^\[\]]+\]))*)$/o;
+   push @events, {raw => $trimmed, args => {target => $+{target}, source => $+{source}, path => _trim_action_ir_value($+{path}), scope => ($+{decl} ? 'my' : 'existing')}};
+  }
+ } elsif ($id eq 'position_tracking') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless (
+    $trimmed =~ /^\$\w+\s*=\s*pos(?:\s*\(\s*\$\$STRING\s*\)|\s+\$\$STRING)\s*$/o ||
+    $trimmed =~ /^my\s+\$\w+\s*=\s*\$IPOS\s*$/o ||
+    $trimmed =~ /^my\s+\$shift\s*=\s*\$LSPOS\s*-\s*\$last_pos\s*-\s*length(?:\s*\(\s*\$LMATCH\s*\)|\s+\$LMATCH)\s*$/o ||
+    $trimmed =~ /^push\s+\@\w+\s*,\s*substr\(\s*\$\$STRING\s*,\s*\$last_pos\s*,\s*\$shift\s*\)\s*if\s*\$shift\s*$/o ||
+    $trimmed =~ /^push\s+\@\w+\s*,\s*\{[^{}]*substr\(\s*\$\$STRING\s*,\s*\$last_pos\s*,\s*\$shift\s*\)[^{}]*\}\s*if\s*\$shift\s*$/o
+   );
+   push @events, {raw => $trimmed, args => {category => 'position_tracking'}};
+  }
  } elsif ($id eq 'return_imatch') {
   while ($code =~ /\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*\)/g) {
    push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}}};
@@ -4002,6 +4281,14 @@ sub _scan_contract_ir_events {
   while ($code =~ /\breturn_a\s*\(\s*(?<label>\w+)(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+))?\s*\)/g) {
    push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
   }
+ } elsif ($id eq 'return_general') {
+  while ($code =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && $call->{method} eq 'return';
+   my $args = $call->{args} || [];
+   next unless ref($args) eq 'ARRAY' && @$args == 1;
+   push @events, {raw => $+{expr}, args => {payload => _trim_action_ir_value($args->[0])}};
+  }
  } elsif ($id eq 'return') {
   while ($code =~ /\breturn\s*\(\s*(?<label>\w+)\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/g) {
    push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
@@ -4110,6 +4397,33 @@ sub _canonicalize_helper_action_ir_event {
   $kind = 'CALL';
   $args{context} = 'return';
  }
+ elsif ($contract_id eq 'return_bare') {
+  $kind = 'RETURN';
+ }
+ elsif ($contract_id eq 'exit_bare') {
+  $kind = 'EXIT';
+ }
+ elsif ($contract_id eq 'linecount_prefix_newline_matches') {
+  $kind = 'LINE_COUNT';
+ }
+ elsif ($contract_id eq 'print_capture_substr') {
+  $kind = 'PRINT';
+ }
+ elsif ($contract_id eq 'assign_match_my') {
+  $kind = 'ASSIGN';
+ }
+ elsif ($contract_id eq 'regex_subst_assignment') {
+  $kind = 'REGEX_SUBST';
+ }
+ elsif ($contract_id eq 'next_bare') {
+  $kind = 'NEXT';
+ }
+ elsif ($contract_id eq 'ref_field_assign') {
+  $kind = 'ASSIGN';
+ }
+ elsif ($contract_id eq 'position_tracking') {
+  $kind = 'POSITION_TRACK';
+ }
  elsif ($contract_id eq 'return_imatch' || $contract_id eq 'return_array') {
   $kind = 'RETURN';
  }
@@ -4137,6 +4451,9 @@ sub _canonicalize_helper_action_ir_event {
  }
  elsif ($contract_id eq 'return_a') {
   $kind = 'RETURN_A';
+ }
+ elsif ($contract_id eq 'return_general') {
+  $kind = 'RETURN';
  }
  elsif ($contract_id eq 'return') {
   $kind = 'RETURN';
