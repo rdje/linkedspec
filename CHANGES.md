@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-26 - Declare Initializers (`name=expr`) + Assign Expression Sources
+## Summary
+Extended declaration and assignment helper contracts so declaration entries can be initialized inline and assign sources can use the same expression surfaces as fluent control-flow conditions.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `declare(...)` and aliases now support per-entry initialization using `name=expr`:
+  - supported for `declare(type, ...)` where `type` is `array|scalar|hash`,
+  - supported for aliases `declare_a/s/h` and `declare_array/scalar/hash`,
+  - optional leading scope token remains supported.
+- Added declaration initializer lowering helpers:
+  - `_parse_declare_binding_entry(...)`
+  - `_lower_declare_value_expr(...)`
+  - `_lower_declare_initializer_expr(...)`
+  - `_extract_declare_statement_from_method_expr(...)`
+  - `_lower_declare_method_statement(...)`
+- `assign(target, source)` now accepts expression sources (not only CAPTURE/IMATCH/LMATCH):
+  - source lowering routes through the same flow/value expression surfaces used by `if()/elseif()/switch()`,
+  - helper lowering/scanning now parses full `assign(...)` expressions with optional scope token.
+- Regression updates:
+  - extended `action_rewriter_lowers_typed_declare_methods_and_aliases` with scalar/array/hash initializer cases,
+  - extended `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values` with expression-source assign case.
+- Updated helper reference documentation in `USER_GUIDE.md` for declare initializers and assign expression sources.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=79`)
 ## 2026-02-26 - `scalaref(base,path)` Generalized Ref-Path Lowering
 ## Summary
 Implemented generalized `scalaref(...)` helper lowering for mixed dereference paths (array/hash segments), so ref-path value access can be expressed in language-neutral helper form instead of raw Perl dereference chains.

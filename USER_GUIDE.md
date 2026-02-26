@@ -275,9 +275,17 @@ This section summarizes the helper/method surface currently recognized by the ac
 ### 7) Declaration/assignment/transform helpers
 - declarations:
   - `declare(type, names...)` where `type` is `array|scalar|hash`
+    - initialization form is supported per entry: `name=expr`
+    - examples:
+      - `declare(scalar, flag=or(scalar(on), scalar(off)))`
+      - `declare(array, parts=array(scalar(a), scalar(b)))`
+      - `declare(hash, by_name=hash("k1", scalar(v1), "k2", scalar(v2)))`
   - aliases: `declare_a/s/h`, `declare_array/scalar/hash`
 - assignment/capture source:
-  - `assign(target, CAPTURE|IMATCH|LMATCH)`
+  - `assign(target, source_expr)`
+    - special capture tokens still supported: `CAPTURE|IMATCH|LMATCH`
+    - source expressions now accept the same flow/value expression surfaces used by `if()/elseif()/switch()`
+    - example: `assign(scalar(flag), or(scalar(on), scalar(off)))`
 - regex substitution:
   - `substr(target, pattern, replacement, flags)`
   - `regex_subst(target, pattern, replacement, flags)`

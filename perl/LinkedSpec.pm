@@ -1734,10 +1734,10 @@ sub _build_action_lowering_contracts {
    id                 => 'assign_value',
    ir_node            => 'ASSIGN',
    diag_name          => 'assign',
-   unresolved_pattern => qr/\bassign\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:scalar\s*\(\s*\w+\s*\)|\w+)\s*,\s*(?:CAPTURE|IMATCH|LMATCH)\s*\)/o,
+   unresolved_pattern => qr/\bassign\s*\(/o,
    lower              => sub {
     my ($code) = @_;
-   $code =~ s/\bassign\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<source>CAPTURE|IMATCH|LMATCH)\s*\)/_lower_assign_statement($+{target}, $+{source}) || $&/ge;
+   $code =~ s/\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_assign_method_statement($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -1976,10 +1976,10 @@ sub _build_action_lowering_contracts {
    id                 => 'declare_typed',
    ir_node            => 'DECLARE',
    diag_name          => 'declare',
-   unresolved_pattern => qr/\bdeclare\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:array|scalar|hash)\s*,/o,
+   unresolved_pattern => qr/\bdeclare\s*\(/o,
    lower              => sub {
     my ($code) = @_;
-   $code =~ s/\bdeclare\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<type>array|scalar|hash)\s*,(?<names>[^()]*)\)/_lower_typed_declare_statement($+{type}, $+{names}) || $&/ge;
+   $code =~ s/\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_declare_method_statement($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -1990,7 +1990,7 @@ sub _build_action_lowering_contracts {
    unresolved_pattern => qr/\bdeclare_(?:a|array|s|scalar|h|hash)\s*\(/o,
    lower              => sub {
     my ($code) = @_;
-   $code =~ s/\bdeclare_(?<alias>a|array|s|scalar|h|hash)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<names>[^()]*)\)/_lower_typed_declare_statement(_declare_alias_to_type($+{alias}), $+{names}) || $&/ge;
+   $code =~ s/\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/_lower_declare_method_statement($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -2747,6 +2747,99 @@ sub _split_declare_symbol_names {
  @names = grep { /^\w+$/o } @names;
  return \@names
 }
+#------------------------------------------------------------------------------
+# Function: _parse_declare_binding_entry
+# Purpose : Parse a single declare binding entry token (`name` or `name = expr`).
+# Args    : ($entry)
+# Returns : hashref { name => ..., init => ...? } or undef
+#------------------------------------------------------------------------------
+sub _parse_declare_binding_entry {
+ my ($entry) = @_;
+ return undef unless defined $entry;
+ my $trimmed = _trim_action_ir_value($entry);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ return {name => $1} if $trimmed =~ /^(?<name>\w+)$/o;
+ if ($trimmed =~ /^(?<name>\w+)\s*=\s*(?<init>.+)$/s) {
+  my $init = _trim_action_ir_value($+{init});
+  return undef unless defined($init) && length($init);
+  return {name => $+{name}, init => $init};
+ }
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_declare_value_expr
+# Purpose : Lower a generic declare initializer value using the same expression
+#           surfaces as flow/value helpers.
+# Args    : ($expr)
+# Returns : lowered Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_declare_value_expr {
+ my ($expr) = @_;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $lowered = _lower_flow_composite_expr($trimmed);
+ return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
+
+ $lowered = _lower_method_value_expr($trimmed);
+ return $lowered if defined($lowered) && length($lowered);
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_declare_initializer_expr
+# Purpose : Lower declare initializer payloads for scalar/array/hash declares.
+# Args    : ($type, $expr)
+# Returns : lowered Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_declare_initializer_expr {
+ my ($type, $expr) = @_;
+ return undef unless defined $type;
+ return undef unless defined $expr;
+ my $trimmed = _trim_action_ir_value($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ if ($type eq 'array') {
+  my $array_ctor = _parse_method_function_expr($trimmed);
+  if ($array_ctor && $array_ctor->{method} eq 'array') {
+   my $items = $array_ctor->{args} || [];
+   return undef unless ref($items) eq 'ARRAY';
+   my @lowered_items = map { _lower_declare_value_expr($_) } @$items;
+   return undef if grep { !defined($_) || !length($_) } @lowered_items;
+   return '('.join(', ', @lowered_items).')';
+  }
+  if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
+   return '('.$+{payload}.')';
+  }
+ }
+
+ if ($type eq 'hash') {
+  my $hash_ctor = _parse_method_function_expr($trimmed);
+  if ($hash_ctor && $hash_ctor->{method} eq 'hash') {
+   my $items = $hash_ctor->{args} || [];
+   return undef unless ref($items) eq 'ARRAY';
+   return undef unless @$items % 2 == 0;
+   my @pairs;
+   for (my $i = 0; $i < @$items; $i += 2) {
+    my $key_expr = _lower_declare_value_expr($items->[$i]);
+    my $val_expr = _lower_declare_value_expr($items->[$i + 1]);
+    return undef unless defined($key_expr) && length($key_expr);
+    return undef unless defined($val_expr) && length($val_expr);
+    push @pairs, $key_expr.' => '.$val_expr;
+   }
+   return '('.join(', ', @pairs).')';
+  }
+  if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
+   return '('.$+{payload}.')';
+  }
+ }
+
+ return _lower_declare_value_expr($trimmed)
+}
 
 #------------------------------------------------------------------------------
 # Function: _declare_sigil_for_type
@@ -2780,17 +2873,37 @@ sub _declare_alias_to_type {
 # Function: _lower_typed_declare_statement
 # Purpose : Lower typed declaration methods into canonical Perl declaration
 #           statements (`my @x`, `my $y`, `my %z`).
-# Args    : ($type, $raw_names)
+# Args    : ($type, $entries_or_names)
 # Returns : lowered statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_typed_declare_statement {
- my ($type, $raw_names) = @_;
+ my ($type, $entries_or_names) = @_;
  my $sigil = _declare_sigil_for_type($type);
  return undef unless defined $sigil;
+ my @entries;
+ if (ref($entries_or_names) eq 'ARRAY') {
+  @entries = @$entries_or_names;
+ } else {
+  my $names = _split_declare_symbol_names($entries_or_names);
+  return undef unless $names && @$names;
+  @entries = @$names;
+ }
+ return undef unless @entries;
 
- my $names = _split_declare_symbol_names($raw_names);
- return undef unless $names && @$names;
- return join '; ', map { "my ${sigil}$_" } @$names
+ my @decls;
+ foreach my $entry (@entries) {
+  my $binding = _parse_declare_binding_entry($entry);
+  return undef unless $binding && $binding->{name};
+
+  my $decl = "my ${sigil}$binding->{name}";
+  if (defined $binding->{init}) {
+   my $init_expr = _lower_declare_initializer_expr($type, $binding->{init});
+   return undef unless defined($init_expr) && length($init_expr);
+   $decl .= " = $init_expr";
+  }
+  push @decls, $decl;
+ }
+ return join '; ', @decls
 }
 
 #------------------------------------------------------------------------------
@@ -3070,7 +3183,14 @@ sub _lower_assignment_source_expr {
  return 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)' if $source eq 'CAPTURE';
  return '$IMATCH' if $source eq 'IMATCH';
  return '$LMATCH' if $source eq 'LMATCH';
- return undef
+
+ my $lowered = _lower_flow_composite_expr($source);
+ return $lowered if defined($lowered) && length($lowered);
+
+ $lowered = _lower_method_value_expr($source);
+ return $lowered if defined($lowered) && length($lowered);
+
+ return $source
 }
 
 #------------------------------------------------------------------------------
@@ -3374,6 +3494,85 @@ sub _lower_assign_statement {
  my $source_expr = _lower_assignment_source_expr($source);
  return undef unless defined $source_expr;
  return "\$$symbol = $source_expr"
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_assign_method_statement
+# Purpose : Lower full assign(...) helper expressions with optional scope token.
+# Args    : ($expr)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_assign_method_statement {
+ my ($expr) = @_;
+ my $call = _parse_method_function_expr($expr);
+ return undef unless $call && $call->{method} eq 'assign';
+
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+ return undef unless $effective_args;
+ return _lower_assign_statement($effective_args->[0], $effective_args->[1])
+}
+
+#------------------------------------------------------------------------------
+# Function: _extract_declare_statement_from_method_expr
+# Purpose : Parse declare(...) / declare_* alias helper expressions and return
+#           normalized declaration type + entry arguments.
+# Args    : ($expr)
+# Returns : hashref { declaration_type => ..., entries => [...] } or undef
+#------------------------------------------------------------------------------
+sub _extract_declare_statement_from_method_expr {
+ my ($expr) = @_;
+ my $call = _parse_method_function_expr($expr);
+ return undef unless $call;
+ my $method = $call->{method} // '';
+
+ if ($method eq 'declare') {
+  my @effective_args = @{$call->{args} || []};
+  if (
+   @effective_args >= 3 &&
+   _is_bare_method_scope_token($effective_args[0]) &&
+   defined(_trim_action_ir_value($effective_args[1])) &&
+   _trim_action_ir_value($effective_args[1]) =~ /^(array|scalar|hash)$/o
+  ) {
+   shift @effective_args;
+  }
+
+  return undef unless @effective_args >= 2;
+  my $type = _trim_action_ir_value($effective_args[0]);
+  return undef unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
+  my @entries = @effective_args[1 .. $#effective_args];
+  return undef unless @entries;
+  return {
+   declaration_type => $type,
+   entries          => \@entries,
+  };
+ }
+
+ if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
+  my $type = _declare_alias_to_type($+{alias});
+  return undef unless defined $type;
+  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+  return undef unless $effective_args && @$effective_args >= 1;
+  return {
+   declaration_type => $type,
+   entries          => [@$effective_args],
+  };
+ }
+
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_declare_method_statement
+# Purpose : Lower full declare(...) / declare_* alias helper expressions with
+#           optional scope token and per-variable initialization entries.
+# Args    : ($expr)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_declare_method_statement {
+ my ($expr) = @_;
+ my $decl = _extract_declare_statement_from_method_expr($expr);
+ return undef unless $decl;
+ return _lower_typed_declare_statement($decl->{declaration_type}, $decl->{entries})
 }
 
 #------------------------------------------------------------------------------
@@ -4239,8 +4438,18 @@ sub _scan_contract_ir_events {
    push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}}};
   }
  } elsif ($id eq 'assign_value') {
-  while ($code =~ /\bassign\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<source>CAPTURE|IMATCH|LMATCH)\s*\)/g) {
-   push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, source => $+{source}}};
+  while ($code =~ /\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && $call->{method} eq 'assign';
+   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+   next unless $effective_args;
+   push @events, {
+    raw => $+{expr},
+    args => {
+     target => _trim_action_ir_value($effective_args->[0]),
+     source => _trim_action_ir_value($effective_args->[1]),
+    },
+   };
   }
  } elsif ($id eq 'regex_subst') {
   while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
@@ -4416,15 +4625,38 @@ sub _scan_contract_ir_events {
    push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}, payload => _trim_action_ir_value($+{payload})}};
   }
  } elsif ($id eq 'declare_typed') {
-  while ($code =~ /\bdeclare\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<type>array|scalar|hash)\s*,(?<names>[^()]*)\)/g) {
-   my $names = _split_declare_symbol_names($+{names});
-   push @events, {raw => $&, args => {scope => $+{scope}, declaration_type => $+{type}, names => [@$names]}};
+  while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $decl = _extract_declare_statement_from_method_expr($+{expr});
+   next unless $decl;
+   my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
+   next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
+   my @names = map { $_->{name} } @parsed_entries;
+   my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
+   push @events, {
+    raw => $+{expr},
+    args => {
+     declaration_type => $decl->{declaration_type},
+     names            => [@names],
+     initializers     => {%initializers},
+    },
+   };
   }
  } elsif ($id eq 'declare_alias') {
-  while ($code =~ /\bdeclare_(?<alias>a|array|s|scalar|h|hash)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<names>[^()]*)\)/g) {
-   my $names = _split_declare_symbol_names($+{names});
-   my $type = _declare_alias_to_type($+{alias});
-   push @events, {raw => $&, args => {scope => $+{scope}, declaration_type => $type, names => [@$names]}} if defined $type;
+  while ($code =~ /\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+   my $decl = _extract_declare_statement_from_method_expr($+{expr});
+   next unless $decl;
+   my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
+   next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
+   my @names = map { $_->{name} } @parsed_entries;
+   my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
+   push @events, {
+    raw => $+{expr},
+    args => {
+     declaration_type => $decl->{declaration_type},
+     names            => [@names],
+     initializers     => {%initializers},
+    },
+   };
   }
  } elsif ($id eq 'call') {
   while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {

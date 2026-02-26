@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-26)
+- Completed follow-up amendment for helper surfaces preferred by migration workflow:
+  - declaration helpers now support inline initialization (`name=expr`) for `declare(type, ...)` and `declare_*` aliases,
+  - assignment helper now accepts expression sources used by `if()/elseif()/switch()` first-argument surfaces.
+- Added/updated lowering internals:
+  - `_parse_declare_binding_entry(...)`
+  - `_lower_declare_value_expr(...)`
+  - `_lower_declare_initializer_expr(...)`
+  - `_extract_declare_statement_from_method_expr(...)`
+  - `_lower_declare_method_statement(...)`
+  - `_lower_assign_method_statement(...)`
+- Updated contract scanners/lowerers for `declare_typed`, `declare_alias`, and `assign_value` to parse full helper expressions with optional scope handling.
+- Extended phase0 regression coverage with explicit initializer and expression-source assertions:
+  - `declare(scalar, name=expr, ...)`,
+  - `declare_array(...=array(...))`,
+  - `declare_hash(...=hash(...))`,
+  - `assign(..., or(scalar(...), scalar(...)))`.
+- Validation snapshot for this amendment:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=79`)
 - Completed follow-up migration slice implementing generalized `scalaref(base_ref, path)` helper lowering for mixed ref-path access.
 - Added new helper-lowering internals for path segmentation and expression lowering:
   - `_split_scalaref_path_segments(...)`

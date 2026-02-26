@@ -874,7 +874,7 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     );
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
-    plan tests => 10;
+    plan tests => 13;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items, captures); declare(scalar, flag); declare(hash, by_name)'),
@@ -891,9 +891,24 @@ subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
         'my @items; my $flag; my %by_name',
         'long declare_* aliases lower to same declaration semantics'
     );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare(scalar, flag=or(scalar(on), scalar(off)), token=scalaref(myref, {kind}))'),
+        'my $flag = (($on) || ($off)); my $token = $myref->{kind}',
+        'declare(scalar, name=expr, ...) supports flow/value expression initializers'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_array(Top, parts=array(scalar(a), scalar(b)))'),
+        'my @parts = ($a, $b)',
+        'declare_array alias supports array(...) initializer lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_hash(Top, by_name=hash("k1", scalar(v1), "k2", scalar(v2)))'),
+        'my %by_name = ("k1" => $v1, "k2" => $v2)',
+        'declare_hash alias supports hash(...) initializer lowering'
+    );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, items, captures).declare(scalar, flag).declare(hash, by_name)
+Top:: I.declare(array, items, captures=array(scalar(seed))).declare(scalar, flag=or(scalar(on), scalar(off))).declare(hash, by_name=hash("k", scalar(v)))
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -909,7 +924,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -925,6 +940,11 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::call_spec_handler_subst('Top', 'assign(Top, scalar(c), CAPTURE)'),
         '$c = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
         'assign helper lowers CAPTURE source into canonical capture-expression assignment'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(Top, scalar(flag), or(scalar(on), scalar(off)))'),
+        '$flag = (($on) || ($off))',
+        'assign helper accepts flow/value expression sources used by if/elseif/switch'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'substr(Top, scalar(c), "\\s*$", "", o)'),
