@@ -237,6 +237,11 @@ This section summarizes the helper/method surface currently recognized by the ac
     - `scalar(hash(foo_hash), key)`
 - compatibility:
   - `scalar(IMATCH_LIST, n)`
+- reference-path scalar helper:
+  - `scalaref(base_ref, [path][segments]{...})` -> chained dereference from scalar ref base
+  - examples:
+    - `scalaref(myref, [A][B]{C}[D])` -> `$myref->[A]->[B]->{C}->[D]`
+    - `scalaref(myref, {A}[B]{C}[D])` -> `$myref->{A}->[B]->{C}->[D]`
 - array constructor/value helper:
   - `array(v1, v2, ...)`
 
@@ -319,6 +324,9 @@ Supported payload categories:
   - `return(scalar(array(foo_arr), idx))`
   - `return(scalar(hash(foo_hash), key))`
   - `return(scalar(IMATCH_LIST, 0))`
+- Helper-based ref-path lookups
+  - `return(scalaref(myref, [A][B]{C}[D]))`
+  - `return(scalaref(myref, {A}[B]{C}[D]))`
 - Helper-based array construction
   - `return(array(scalar(name), 123, "x"))`
 - Mixed nested payloads with embedded helpers
@@ -345,7 +353,7 @@ Method-chain caveat (`-> Rule .return(...)`):
   - `[` / `{`
   - quoted strings (`"..."` / `'...'`)
   - numeric literals
-  - `scalar(...)`, `array(...)`, or `hash(...)`
+  - `scalar(...)`, `scalaref(...)`, `array(...)`, or `hash(...)`
 - Example (general payload):
   - `-> Top .return(["semantic", { key => scalar(name) }])`
 - If chain payload does not match those starts, chain rendering falls back to label-injected legacy form.

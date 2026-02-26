@@ -61,6 +61,20 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-26)
+- Completed follow-up migration slice implementing generalized `scalaref(base_ref, path)` helper lowering for mixed ref-path access.
+- Added new helper-lowering internals for path segmentation and expression lowering:
+  - `_split_scalaref_path_segments(...)`
+  - `_lower_scalaref_segment_expr(...)`
+  - `_lower_scalaref_value_expr(...)`
+- Extended `_lower_method_value_expr(...)`, `_lower_return_payload_expr(...)`, and flow/value helper recognition to include `scalaref(...)` payloads.
+- Added focused phase0 regression assertions for both array-first and hash-first path surfaces:
+  - `scalaref(myref, [A][B]{C}[D])`
+  - `scalaref(myref, {A}[B]{C}[D])`
+- Updated `USER_GUIDE.md` helper reference and `return(payload)` examples to document generalized `scalaref(...)` usage.
+- Validation snapshot for this follow-up slice:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=79`)
 - Completed an incremental migration slice focused on lowering top-frequency language-agnostic action-IR blockers without changing runtime behavior (classification only).
 - Added canonical action-IR statement classification coverage for:
   - `return_bare`, `exit_bare`, `linecount_prefix_newline_matches`, `print_capture_substr`, `my_declare_bare`, `position_tracking`, `assign_match_my`, `regex_subst_assignment`, `next_bare`, `ref_field_assign`.

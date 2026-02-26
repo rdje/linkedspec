@@ -67,7 +67,7 @@ sub _lower_flow_composite_expr {
  my $trimmed = _trim_action_ir_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalar|array)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash)\s*\(/o) {
   my $lowered_value = _lower_method_value_expr($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
@@ -2878,6 +2878,166 @@ sub _lower_scalar_access_key_expr {
  return '$'.$lowered if $lowered =~ /^\w+$/o;
  return $lowered
 }
+#------------------------------------------------------------------------------
+# Function: _split_scalaref_path_segments
+# Purpose : Parse scalaref path payloads like `[A][B]{C}[D]` into ordered path
+#           segments while preserving nested expression payloads.
+# Args    : ($path_expr)
+# Returns : arrayref of { kind => 'index'|'key', expr => ... } or undef
+#------------------------------------------------------------------------------
+sub _split_scalaref_path_segments {
+ my ($path_expr) = @_;
+ return undef unless defined $path_expr;
+ my $path = _trim_action_ir_value($path_expr);
+ return undef unless defined($path) && length($path);
+
+ my @segments;
+ my $len = length($path);
+ my $idx = 0;
+ while ($idx < $len) {
+  while ($idx < $len && substr($path, $idx, 1) =~ /\s/o) {
+   ++$idx;
+  }
+  last if $idx >= $len;
+
+  my $open = substr($path, $idx, 1);
+  return undef unless $open eq '[' || $open eq '{';
+  my $close = $open eq '[' ? ']' : '}';
+  ++$idx;
+
+  my @stack = ($close);
+  my $payload = '';
+  my $in_single_quote = 0;
+  my $in_double_quote = 0;
+  my $escape_next = 0;
+  while ($idx < $len && @stack) {
+   my $char = substr($path, $idx, 1);
+   if ($in_single_quote) {
+    $payload .= $char;
+    if ($escape_next) {
+     $escape_next = 0;
+    } elsif ($char eq '\\') {
+     $escape_next = 1;
+    } elsif ($char eq "'") {
+     $in_single_quote = 0;
+    }
+    ++$idx;
+    next;
+   }
+   if ($in_double_quote) {
+    $payload .= $char;
+    if ($escape_next) {
+      $escape_next = 0;
+    } elsif ($char eq '\\') {
+      $escape_next = 1;
+    } elsif ($char eq '"') {
+      $in_double_quote = 0;
+    }
+    ++$idx;
+    next;
+   }
+   if ($char eq "'") {
+    $in_single_quote = 1;
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '"') {
+    $in_double_quote = 1;
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '[') {
+    push @stack, ']';
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '{') {
+    push @stack, '}';
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq ']' || $char eq '}') {
+    my $expected = $stack[-1];
+    return undef unless $char eq $expected;
+    pop @stack;
+    ++$idx;
+    $payload .= $char if @stack;
+    next;
+   }
+   $payload .= $char;
+   ++$idx;
+  }
+  return undef if @stack;
+
+  my $segment_expr = _trim_action_ir_value($payload);
+  return undef unless defined($segment_expr) && length($segment_expr);
+  push @segments, {
+   kind => ($open eq '[' ? 'index' : 'key'),
+   expr => $segment_expr,
+  };
+ }
+
+ return undef unless @segments;
+ return \@segments
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalaref_segment_expr
+# Purpose : Lower one scalaref path segment expression while preserving literal
+#           bareword path atoms (e.g. `{A}` or `[B]`) when no lowering applies.
+# Args    : ($segment_expr)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalaref_segment_expr {
+ my ($segment_expr) = @_;
+ return undef unless defined $segment_expr;
+ my $trimmed = _trim_action_ir_value($segment_expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $lowered = _lower_flow_composite_expr($trimmed);
+ return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
+
+ $lowered = _lower_method_value_expr($trimmed);
+ return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalaref_value_expr
+# Purpose : Lower `scalaref(base_ref, path)` helper into Perl dereference path
+#           expression (e.g. `$ref->[A]->{B}`).
+# Args    : ($base_expr, $path_expr)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalaref_value_expr {
+ my ($base_expr, $path_expr) = @_;
+ my $base_symbol = _extract_scalar_symbol_name($base_expr);
+ return undef unless defined $base_symbol;
+
+ my $segments = _split_scalaref_path_segments($path_expr);
+ return undef unless $segments && @$segments;
+
+ my $lowered = '$'.$base_symbol;
+ foreach my $segment (@$segments) {
+  my $segment_kind = $segment->{kind} // '';
+  my $segment_expr = _lower_scalaref_segment_expr($segment->{expr});
+  return undef unless defined($segment_expr) && length($segment_expr);
+
+  if ($segment_kind eq 'index') {
+   $lowered .= '->['.$segment_expr.']';
+  } elsif ($segment_kind eq 'key') {
+   $lowered .= '->{'.$segment_expr.'}';
+  } else {
+   return undef;
+  }
+ }
+ return $lowered
+}
 
 #------------------------------------------------------------------------------
 # Function: _infer_scalar_container_kind
@@ -3065,9 +3225,14 @@ sub _lower_method_value_expr {
  return undef unless defined $expr;
  my $trimmed = _trim_action_ir_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
- my $scalar_call = _parse_method_function_expr($trimmed);
- if ($scalar_call && $scalar_call->{method} eq 'scalar') {
-  my $scalar_args = $scalar_call->{args} || [];
+ my $method_call = _parse_method_function_expr($trimmed);
+ if ($method_call && $method_call->{method} eq 'scalaref') {
+  my $effective_args = _normalize_method_args_with_optional_scope($method_call->{args} || [], 2, 2);
+  return undef unless $effective_args;
+  return _lower_scalaref_value_expr($effective_args->[0], $effective_args->[1]);
+ }
+ if ($method_call && $method_call->{method} eq 'scalar') {
+  my $scalar_args = $method_call->{args} || [];
   return undef unless ref($scalar_args) eq 'ARRAY';
   return undef unless @$scalar_args >= 1 && @$scalar_args <= 2;
 
@@ -3148,7 +3313,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalar|array|hash)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -3156,7 +3321,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalar|array|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper});
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

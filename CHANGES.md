@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-26 - `scalaref(base,path)` Generalized Ref-Path Lowering
+## Summary
+Implemented generalized `scalaref(...)` helper lowering for mixed dereference paths (array/hash segments), so ref-path value access can be expressed in language-neutral helper form instead of raw Perl dereference chains.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `scalaref(base_ref, path)` value lowering support:
+  - supports mixed path segments such as `[A][B]{C}[D]` and `{A}[B]{C}[D]`,
+  - lowers into canonical Perl dereference chains with explicit segment traversal,
+  - supports nested/helper-based segment expressions while preserving bare token path atoms.
+- Extended value/payload lowering paths so `scalaref(...)` is recognized in:
+  - control-flow/value expression lowering,
+  - generalized `return(payload)` lowering and helper replacement passes.
+- Added focused regression checks under `action_rewriter_lowers_general_return_payloads_with_nested_structures` for:
+  - `return(scalaref(myref, [A][B]{C}[D]))`,
+  - `return({ item => scalaref(myref, {A}[B]{C}[D]) })`.
+- Updated user guide helper reference and payload examples to document `scalaref(...)` usage and chain payload recognition.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=79`)
 ## 2026-02-26 - Language-Agnostic Blocker Reduction Slice + `return(payload)` Guide Expansion
 ## Summary
 Reduced high-frequency language-agnostic migration blockers by adding identity-preserving canonical action-IR classification for common raw statements, and expanded `return(payload)` user-guide coverage with concrete payload categories and examples.

@@ -960,7 +960,7 @@ SPEC
     );
 };
 subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
-    plan tests => 8;
+    plan tests => 10;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])'),
@@ -971,6 +971,16 @@ subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' 
         LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })'),
         'return { item => $foo_hash{$key}, list => [$name, 123] }',
         'general return(payload) lowers scalar(container,key_or_index) forms inside nested hash/list payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(myref, [A][B]{C}[D]))'),
+        'return $myref->[A]->[B]->{C}->[D]',
+        'general return(payload) lowers scalaref(base,[...]{...}) with mixed index/key path segments'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalaref(myref, {A}[B]{C}[D]) })'),
+        'return { item => $myref->{A}->[B]->{C}->[D] }',
+        'general return(payload) lowers scalaref(base,{...}[...]) with hash-first path segments'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(Top, $x)'),
