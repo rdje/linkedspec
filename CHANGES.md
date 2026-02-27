@@ -1,5 +1,84 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Compiler Runtime Helpers to `LinkedSpec/Compiler.pm`
+## Summary
+Executed the next Phase 1A modularization slice by extracting selected compile-orchestration helpers from `LinkedSpec.pm` into `LinkedSpec::Compiler`, while preserving `Get(...)` behavior through incremental delegation.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Compiler.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::Compiler` with extracted helpers:
+  - `_run_bootstrap_parse`
+  - `_build_action_rewriter_migration_summary`
+  - `_build_final_descr`
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::Compiler ();`
+  - delegated `_build_action_rewriter_migration_summary(...)` to `LinkedSpec::Compiler`.
+  - updated `Get(...)` to delegate:
+    - bootstrap parser eval invocation via `_run_bootstrap_parse(...)`,
+    - final descriptor/meta assembly via `_build_final_descr(...)`.
+- Behavioral parity note:
+  - diagnostics/logging text and stage decisions in `Get(...)` remain unchanged; only helper execution location moved.
+- Added local `@INC` bootstrap in `LinkedSpec::Compiler` for direct module syntax-check workflows.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
+## 2026-02-27 - Phase 1A Slice: Extract ActionRewriter Runtime to `LinkedSpec/ActionRewriter.pm`
+## Summary
+Executed the next Phase 1A modularization slice by extracting action-rewrite pipeline orchestration and diagnostics helpers from `LinkedSpec.pm` into `LinkedSpec::ActionRewriter`, while preserving existing call surfaces through compatibility delegates.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::ActionRewriter` containing extracted helpers:
+  - `_find_unresolved_action_helpers`
+  - `_collect_action_helper_ir_nodes`
+  - `_build_canonical_action_ir_events`
+  - `_lower_action_code_from_canonical_ir`
+  - `_accumulate_action_rewrite_diagnostics`
+  - `_rewrite_action_code_with_diagnostics`
+  - `_build_action_rewrite_rules`
+  - `call_spec_handler_subst`
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionRewriter ();`
+  - delegated the helper names above to `LinkedSpec::ActionRewriter` to preserve compatibility and existing call sites.
+- Behavioral parity approach:
+  - `LinkedSpec::ActionRewriter` invokes remaining helper scanners/normalizers/contract builders via fully-qualified `LinkedSpec::...` calls, keeping the extraction incremental and no-behavior-change.
+- Added local `@INC` bootstrap in `LinkedSpec::ActionRewriter` for direct module syntax-check workflows.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract RuleIR Runtime to `LinkedSpec/RuleIR.pm`
 ## Summary
 Executed the next Phase 1A modularization slice by extracting RuleIR collection/planning/validation/emit-context helpers from `LinkedSpec.pm` into a dedicated `LinkedSpec::RuleIR` module, while preserving `spec_entry(...)` behavior through façade delegation.

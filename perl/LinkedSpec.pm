@@ -20,6 +20,8 @@ use LinkedSpec::Trace ();
 use LinkedSpec::Validation ();
 use LinkedSpec::Resolver ();
 use LinkedSpec::RuleIR ();
+use LinkedSpec::ActionRewriter ();
+use LinkedSpec::Compiler ();
 
 # UVM-style verbosity levels
 use constant {
@@ -750,121 +752,7 @@ my $top_rule;
 # Returns : hashref summary
 #------------------------------------------------------------------------------
 sub _build_action_rewriter_migration_summary {
- my ($spec) = @_;
-
- my $summary = {
-  total_rules => 0,
-  rules_with_action_rewriter_meta => 0,
-  language_agnostic_ready_rule_count => 0,
-  language_agnostic_blocked_rule_count => 0,
-  language_agnostic_blocker_statement_total_count => 0,
- language_agnostic_blocked_raw_perl_only_rule_count => 0,
- language_agnostic_blocked_unresolved_helper_only_rule_count => 0,
- language_agnostic_blocked_mixed_rule_count => 0,
- language_agnostic_blocked_raw_perl_only_ratio => '0.0000',
- language_agnostic_blocked_unresolved_helper_only_ratio => '0.0000',
- language_agnostic_blocked_mixed_ratio => '0.0000',
-  language_agnostic_ready_rules => [],
-  language_agnostic_blocked_rules => [],
- language_agnostic_blocked_raw_perl_only_rules => [],
- language_agnostic_blocked_unresolved_helper_only_rules => [],
- language_agnostic_blocked_mixed_rules => [],
-  language_agnostic_blocked_rules_by_priority => [],
-  language_agnostic_top_blocked_rule => undef,
- };
-
- return $summary unless ref($spec) eq 'HASH';
-
- foreach my $rule_name (sort keys %$spec) {
-  my $rule = $spec->{$rule_name};
-  next unless ref($rule) eq 'HASH';
-  ++$summary->{total_rules};
-
-  my $rule_meta = $rule->{meta};
-  next unless ref($rule_meta) eq 'HASH';
-  my $rewriter_meta = $rule_meta->{action_rewriter};
-  next unless ref($rewriter_meta) eq 'HASH';
-
-  ++$summary->{rules_with_action_rewriter_meta};
-
-  my $is_ready = $rewriter_meta->{language_agnostic_action_ir_ready} ? 1 : 0;
-  if ($is_ready) {
-   ++$summary->{language_agnostic_ready_rule_count};
-   push @{$summary->{language_agnostic_ready_rules}}, $rule_name;
-   next;
-  }
-
-  ++$summary->{language_agnostic_blocked_rule_count};
- my $unresolved_helper_count = $rewriter_meta->{unresolved_helper_count} || 0;
- my $raw_perl_dependency_count = $rewriter_meta->{raw_perl_dependency_count} || 0;
-  my @blocker_statements = ref($rewriter_meta->{language_agnostic_action_ir_blocker_statements}) eq 'ARRAY'
-   ? @{$rewriter_meta->{language_agnostic_action_ir_blocker_statements}}
-   : ();
-  push @{$summary->{language_agnostic_blocked_rules}}, {
-   rule => $rule_name,
-   blocker_statement_count => scalar @blocker_statements,
-   blocker_statements => \@blocker_statements,
-  unresolved_helper_count => $unresolved_helper_count,
-  raw_perl_dependency_count => $raw_perl_dependency_count,
-  };
-  $summary->{language_agnostic_blocker_statement_total_count} += scalar @blocker_statements;
-
- if ($raw_perl_dependency_count > 0 && $unresolved_helper_count > 0) {
-  ++$summary->{language_agnostic_blocked_mixed_rule_count};
-  push @{$summary->{language_agnostic_blocked_mixed_rules}}, $rule_name;
- }
- elsif ($raw_perl_dependency_count > 0) {
-  ++$summary->{language_agnostic_blocked_raw_perl_only_rule_count};
-  push @{$summary->{language_agnostic_blocked_raw_perl_only_rules}}, $rule_name;
- }
- elsif ($unresolved_helper_count > 0) {
-  ++$summary->{language_agnostic_blocked_unresolved_helper_only_rule_count};
-  push @{$summary->{language_agnostic_blocked_unresolved_helper_only_rules}}, $rule_name;
- }
- }
-
- my @blocked_by_priority = sort {
-  $b->{blocker_statement_count} <=> $a->{blocker_statement_count}
-   || $b->{unresolved_helper_count} <=> $a->{unresolved_helper_count}
-   || $b->{raw_perl_dependency_count} <=> $a->{raw_perl_dependency_count}
-   || $a->{rule} cmp $b->{rule}
- } @{$summary->{language_agnostic_blocked_rules}};
- $summary->{language_agnostic_blocked_rules_by_priority} = [map { $_->{rule} } @blocked_by_priority];
- $summary->{language_agnostic_top_blocked_rule} = @blocked_by_priority ? $blocked_by_priority[0]{rule} : undef;
-
- if ($summary->{rules_with_action_rewriter_meta} > 0) {
-  $summary->{language_agnostic_ready_ratio} = sprintf(
-   '%.4f',
-   $summary->{language_agnostic_ready_rule_count} / $summary->{rules_with_action_rewriter_meta}
-  );
- } else {
-  $summary->{language_agnostic_ready_ratio} = '0.0000';
- }
-
- if ($summary->{language_agnostic_blocked_rule_count} > 0) {
-  $summary->{language_agnostic_blocked_raw_perl_only_ratio} = sprintf(
-   '%.4f',
-   $summary->{language_agnostic_blocked_raw_perl_only_rule_count} / $summary->{language_agnostic_blocked_rule_count}
-  );
-  $summary->{language_agnostic_blocked_unresolved_helper_only_ratio} = sprintf(
-   '%.4f',
-   $summary->{language_agnostic_blocked_unresolved_helper_only_rule_count} / $summary->{language_agnostic_blocked_rule_count}
-  );
-  $summary->{language_agnostic_blocked_mixed_ratio} = sprintf(
-   '%.4f',
-   $summary->{language_agnostic_blocked_mixed_rule_count} / $summary->{language_agnostic_blocked_rule_count}
-  );
- }
-
- if (should_dump(DUMP_DEBUG)) {
-  log_output(
-   DUMP_DEBUG,
-   "(LinkedSpec.pm::_build_action_rewriter_migration_summary) summary",
-   Dumper($summary)
-  );
- }
-
- return $summary
+ return LinkedSpec::Compiler::_build_action_rewriter_migration_summary(@_)
 }
 #------------------------------------------------------------------------------
 # Function: Get
@@ -932,13 +820,16 @@ sub Get {
 
  # Try to parse the spec file
  log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
- eval {
-  $retv = &{$$spec_descr[$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $_[0], $gdata);
- } or do {
-  $parse_success = 0;
-  my $error = $@;
-  log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $error");
- };
+ my $parse_error = '';
+ ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
+  $spec_descr,
+  \%bootstrap_rule_index,
+  $_[0],
+  $gdata,
+ );
+ unless ($parse_success) {
+  log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $parse_error");
+ }
 
  trace_decision('bootstrap_spec_parse', $parse_success, $parse_success ? 'Hardcoded parser returned successfully' : 'Hardcoded parser eval failed', DUMP_HIGH);
  if ($parse_success) {
@@ -979,9 +870,7 @@ sub Get {
   trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
- my $final_descr = {spec=>$auto_descr_spec, gdata=>spec_gdata($auto_descr_spec)};
- $final_descr->{meta} ||= {};
- $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
+ my $final_descr = LinkedSpec::Compiler::_build_final_descr($auto_descr_spec, \&spec_gdata);
 
  # Validate generated structures
  unless (validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
@@ -2296,31 +2185,7 @@ my $sg = shift;
 # Returns : hashref unresolved diagnostics payload
 #------------------------------------------------------------------------------
 sub _find_unresolved_action_helpers {
- my ($code, $rewrite_rules) = @_;
-
- my %hits;
- my $total = 0;
- my @events;
- my @statements = @{_split_action_ir_statements($code)};
- foreach my $rule (@$rewrite_rules) {
-  my $helper_name = $rule->{diag_name} // $rule->{id};
-  my $helper_re = $rule->{unresolved_pattern};
-  next unless $helper_re;
-  foreach my $statement (@statements) {
-   my $count = () = ($statement =~ /$helper_re/g);
-   next unless $count;
-   $hits{$helper_name} += $count;
-   $total += $count;
-   push @events, map { +{helper => $helper_name, raw => $statement} } (1 .. $count);
-  }
- }
-
- return {
-  unresolved_helper_count => $total,
-  unresolved_helper_hits  => \%hits,
-  unresolved_helpers      => [sort keys %hits],
-  unresolved_helper_events => \@events,
- }
+ return LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -4390,33 +4255,7 @@ sub _scan_contract_ir_events {
 # Returns : hashref helper-action IR diagnostics
 #------------------------------------------------------------------------------
 sub _collect_action_helper_ir_nodes {
- my ($code, $rewrite_rules) = @_;
-
- my %hits;
- my $total = 0;
- my @events;
- foreach my $rule (@$rewrite_rules) {
-  my $ir_node = $rule->{ir_node} // $rule->{id};
-  my $rule_events = _scan_contract_ir_events($rule, $code);
-  next unless ref($rule_events) eq 'ARRAY' && @$rule_events;
-  foreach my $event (@$rule_events) {
-   push @events, {
-    ir_node     => $ir_node,
-    contract_id => $rule->{id},
-    raw         => $event->{raw},
-    args        => $event->{args} || {},
-   };
-   $hits{$ir_node} += 1;
-   $total += 1;
-  }
- }
-
- return {
-  helper_action_ir_count => $total,
-  helper_action_ir_hits  => \%hits,
-  helper_action_ir_nodes => [sort keys %hits],
-  helper_action_ir_events => \@events,
- }
+ return LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -4831,56 +4670,7 @@ sub _split_action_ir_statements {
 # Returns : hashref canonical action-IR diagnostics
 #------------------------------------------------------------------------------
 sub _build_canonical_action_ir_events {
- my ($label, $code, $helper_events) = @_;
-
- my %helper_event_queue;
- foreach my $helper_event (@$helper_events) {
-  my $raw_key = _trim_action_ir_value($helper_event->{raw});
-  next unless defined($raw_key) && length($raw_key);
-  my $canonical_event = _canonicalize_helper_action_ir_event($label, $helper_event);
-  push @{$helper_event_queue{$raw_key}}, $canonical_event;
- }
-
- my @canonical_events;
- my $fallback_count = 0;
- foreach my $statement (@{_split_action_ir_statements($code)}) {
-  if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
-   push @canonical_events, shift @{$helper_event_queue{$statement}};
-  } else {
-   push @canonical_events, {
-    kind        => 'RAW_PERL',
-    source      => 'fallback_non_helper_statement',
-    contract_id => undef,
-    raw         => $statement,
-    args        => {code => $statement},
-   };
-   ++$fallback_count;
-  }
- }
-
- foreach my $raw_key (keys %helper_event_queue) {
-  while (@{$helper_event_queue{$raw_key}}) {
-   my $event = shift @{$helper_event_queue{$raw_key}};
-   $event->{source} = 'unmatched_helper_scan_event';
-   push @canonical_events, $event;
-  }
- }
-
- my %hits;
- my $count = 0;
- foreach my $event (@canonical_events) {
-  my $kind = $event->{kind} // 'UNKNOWN';
-  $hits{$kind} += 1;
-  ++$count;
- }
-
- return {
-  canonical_action_ir_count => $count,
-  canonical_action_ir_hits  => \%hits,
-  canonical_action_ir_nodes => [sort keys %hits],
-  canonical_action_ir_events => \@canonical_events,
-  canonical_action_ir_fallback_count => $fallback_count,
- }
+ return LinkedSpec::ActionRewriter::_build_canonical_action_ir_events(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -4891,38 +4681,7 @@ sub _build_canonical_action_ir_events {
 # Returns : lowered code string
 #------------------------------------------------------------------------------
 sub _lower_action_code_from_canonical_ir {
- my ($label, $code, $rewrite_rules, $canonical_ir_diag) = @_;
-
- my %rewrite_by_id = map { $_->{id} => $_ } @$rewrite_rules;
- my $rewritten = $code;
- my $lower_ctx = {
-  if_stack      => [],
-  switch_stack  => [],
-  switch_counter => 0,
-  rewrite_rules => $rewrite_rules,
- };
- foreach my $event (@{$canonical_ir_diag->{canonical_action_ir_events}}) {
-  my $kind = $event->{kind} // '';
-  next if $kind eq 'RAW_PERL';
-
-  my $contract_id = $event->{contract_id};
-  next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
-
-  my $source_stmt = $event->{raw};
-  next unless defined($source_stmt) && length($source_stmt);
-  my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
-  next unless defined($lowered_stmt) && length($lowered_stmt);
-  next if $lowered_stmt eq $source_stmt;
-
-  my $pos = index($rewritten, $source_stmt);
-  next if $pos < 0;
-  substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
- }
- if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {
-  return $code;
- }
-
- return $rewritten
+ return LinkedSpec::ActionRewriter::_lower_action_code_from_canonical_ir(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -4933,56 +4692,7 @@ sub _lower_action_code_from_canonical_ir {
 # Returns : updated accumulator hashref
 #------------------------------------------------------------------------------
 sub _accumulate_action_rewrite_diagnostics {
- my ($acc, $diag) = @_;
- return $acc unless $acc && $diag && ref($diag) eq 'HASH';
-
- my $hits = $diag->{unresolved_helper_hits};
- return $acc unless $hits && ref($hits) eq 'HASH';
-
- foreach my $helper_name (keys %$hits) {
-  my $count = $hits->{$helper_name} || 0;
-  next unless $count;
-  $acc->{unresolved_helper_hits}{$helper_name} += $count;
-  $acc->{unresolved_helper_count} += $count;
- }
- my $unresolved_events = $diag->{unresolved_helper_events};
- if ($unresolved_events && ref($unresolved_events) eq 'ARRAY' && @$unresolved_events) {
-  push @{$acc->{unresolved_helper_events}}, @$unresolved_events;
- }
-
- my $ir_hits = $diag->{helper_action_ir_hits};
- if ($ir_hits && ref($ir_hits) eq 'HASH') {
-  foreach my $ir_node (keys %$ir_hits) {
-   my $count = $ir_hits->{$ir_node} || 0;
-   next unless $count;
-   $acc->{helper_action_ir_hits}{$ir_node} += $count;
-   $acc->{helper_action_ir_count} += $count;
-  }
- }
-
- my $ir_events = $diag->{helper_action_ir_events};
- if ($ir_events && ref($ir_events) eq 'ARRAY' && @$ir_events) {
-  push @{$acc->{helper_action_ir_events}}, @$ir_events;
- }
-
- my $canonical_hits = $diag->{canonical_action_ir_hits};
- if ($canonical_hits && ref($canonical_hits) eq 'HASH') {
-  foreach my $kind (keys %$canonical_hits) {
-   my $count = $canonical_hits->{$kind} || 0;
-   next unless $count;
-   $acc->{canonical_action_ir_hits}{$kind} += $count;
-   $acc->{canonical_action_ir_count} += $count;
-  }
- }
-
- my $canonical_events = $diag->{canonical_action_ir_events};
- if ($canonical_events && ref($canonical_events) eq 'ARRAY' && @$canonical_events) {
-  push @{$acc->{canonical_action_ir_events}}, @$canonical_events;
- }
-
- $acc->{canonical_action_ir_fallback_count} += ($diag->{canonical_action_ir_fallback_count} || 0);
-
- return $acc
+ return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -4993,25 +4703,7 @@ sub _accumulate_action_rewrite_diagnostics {
 # Returns : ($rewritten_code, $diag_hashref)
 #------------------------------------------------------------------------------
 sub _rewrite_action_code_with_diagnostics {
- my ($label, $code, $rewrite_rules) = @_;
-
- $rewrite_rules //= _build_action_rewrite_rules($label);
- my $ir_diag = _collect_action_helper_ir_nodes($code, $rewrite_rules);
- my $canonical_ir_diag = _build_canonical_action_ir_events($label, $code, $ir_diag->{helper_action_ir_events});
- my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
- my $diag = _find_unresolved_action_helpers($rewritten, $rewrite_rules);
- return ($rewritten, {
-  %$diag,
-  helper_action_ir_count => $ir_diag->{helper_action_ir_count},
-  helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
-  helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
-  helper_action_ir_events => $ir_diag->{helper_action_ir_events},
-  canonical_action_ir_count => $canonical_ir_diag->{canonical_action_ir_count},
-  canonical_action_ir_hits  => $canonical_ir_diag->{canonical_action_ir_hits},
-  canonical_action_ir_nodes => $canonical_ir_diag->{canonical_action_ir_nodes},
-  canonical_action_ir_events => $canonical_ir_diag->{canonical_action_ir_events},
-  canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
- })
+ return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@_)
 }
 #------------------------------------------------------------------------------
 # Function: _build_action_rewrite_rules
@@ -5020,16 +4712,7 @@ sub _rewrite_action_code_with_diagnostics {
 # Returns : arrayref rewrite rules
 #------------------------------------------------------------------------------
 sub _build_action_rewrite_rules {
- my ($label) = @_;
-
- my $contracts = _build_action_lowering_contracts($label);
- return [map {{
-  id                 => $_->{id},
-  ir_node            => $_->{ir_node},
-  diag_name          => $_->{diag_name},
-  unresolved_pattern => $_->{unresolved_pattern},
-  apply              => $_->{lower},
- }} @$contracts]
+ return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@_)
 }
 
 
@@ -5042,13 +4725,7 @@ sub _build_action_rewrite_rules {
 # Returns : rewritten code string
 #------------------------------------------------------------------------------
 sub call_spec_handler_subst {
-my ($label, $code) = @_;
-
-#say "call_spec_handler_subst: BEFORE <$label><$code>";
- ($code) = _rewrite_action_code_with_diagnostics($label, $code);
-
-# say "call_spec_handler_subst: AFTER <$label><$code>";
- return $code
+ return LinkedSpec::ActionRewriter::call_spec_handler_subst(@_)
 }
 
 

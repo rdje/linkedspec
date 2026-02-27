@@ -152,6 +152,53 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -c perl/LinkedSpec.pm` -> OK
   - `perl -c t/phase0_regression.t` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (ActionRewriter):
+  - created `perl/LinkedSpec/ActionRewriter.pm` and moved action-rewrite pipeline orchestration/diagnostics helpers out of `LinkedSpec.pm`,
+  - extracted helpers:
+    - `_find_unresolved_action_helpers`
+    - `_collect_action_helper_ir_nodes`
+    - `_build_canonical_action_ir_events`
+    - `_lower_action_code_from_canonical_ir`
+    - `_accumulate_action_rewrite_diagnostics`
+    - `_rewrite_action_code_with_diagnostics`
+    - `_build_action_rewrite_rules`
+    - `call_spec_handler_subst`.
+- Rewired `LinkedSpec.pm` façade orchestration:
+  - added `use LinkedSpec::ActionRewriter ();`,
+  - delegated the helper names above to `LinkedSpec::ActionRewriter` to keep existing call sites stable.
+- Incremental-parity extraction note:
+  - `LinkedSpec::ActionRewriter` intentionally calls remaining scanners/normalizers/contract-builder helpers via fully-qualified `LinkedSpec::...` references so behavior remains unchanged while module boundaries are introduced in steps.
+- Validation snapshot for ActionRewriter extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (Compiler helpers):
+  - created `perl/LinkedSpec/Compiler.pm` and extracted selected compile-orchestration helpers from `LinkedSpec.pm`,
+  - extracted helpers:
+    - `_run_bootstrap_parse`
+    - `_build_action_rewriter_migration_summary`
+    - `_build_final_descr`.
+- Rewired `LinkedSpec.pm` façade orchestration:
+  - added `use LinkedSpec::Compiler ();`,
+  - delegated `_build_action_rewriter_migration_summary(...)`,
+  - updated `Get(...)` to delegate bootstrap parse invocation and final descriptor/meta assembly to compiler helpers.
+- Behavioral parity note:
+  - `Get(...)` retains existing diagnostics text and stage-level flow decisions; extraction only relocates helper execution boundaries.
+- Validation snapshot for Compiler-helper extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:
