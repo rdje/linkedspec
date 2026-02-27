@@ -2074,10 +2074,7 @@ sub _find_unresolved_action_helpers {
 # Returns : trimmed scalar or undef
 #------------------------------------------------------------------------------
 sub _trim_action_ir_value {
- my ($value) = @_;
- return undef unless defined $value;
- $value =~ s/^\s*|\s*$//go;
- return $value
+ return LinkedSpec::ActionRewriter::_trim_action_ir_value(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2087,16 +2084,7 @@ sub _trim_action_ir_value {
 # Returns : arrayref of symbol names
 #------------------------------------------------------------------------------
 sub _split_declare_symbol_names {
- my ($raw_names) = @_;
- return [] unless defined $raw_names;
-
- my @names = grep { length($_) } map {
-  my $name = $_;
-  $name =~ s/^\s*|\s*$//go;
-  $name;
- } split /\s*,\s*/o, $raw_names;
- @names = grep { /^\w+$/o } @names;
- return \@names
+ return LinkedSpec::ActionRewriter::_split_declare_symbol_names(@_)
 }
 #------------------------------------------------------------------------------
 # Function: _parse_declare_binding_entry
@@ -2105,18 +2093,7 @@ sub _split_declare_symbol_names {
 # Returns : hashref { name => ..., init => ...? } or undef
 #------------------------------------------------------------------------------
 sub _parse_declare_binding_entry {
- my ($entry) = @_;
- return undef unless defined $entry;
- my $trimmed = _trim_action_ir_value($entry);
- return undef unless defined($trimmed) && length($trimmed);
-
- return {name => $1} if $trimmed =~ /^(?<name>\w+)$/o;
- if ($trimmed =~ /^(?<name>\w+)\s*=\s*(?<init>.+)$/s) {
-  my $init = _trim_action_ir_value($+{init});
-  return undef unless defined($init) && length($init);
-  return {name => $+{name}, init => $init};
- }
- return undef
+ return LinkedSpec::ActionRewriter::_parse_declare_binding_entry(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2127,18 +2104,7 @@ sub _parse_declare_binding_entry {
 # Returns : lowered Perl expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_value_expr {
- my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- my $lowered = _lower_flow_composite_expr($trimmed);
- return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
-
- $lowered = _lower_method_value_expr($trimmed);
- return $lowered if defined($lowered) && length($lowered);
-
- return $trimmed
+ return LinkedSpec::ActionRewriter::_lower_declare_value_expr(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2148,48 +2114,7 @@ sub _lower_declare_value_expr {
 # Returns : lowered Perl expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_initializer_expr {
- my ($type, $expr) = @_;
- return undef unless defined $type;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($type eq 'array') {
-  my $array_ctor = _parse_method_function_expr($trimmed);
-  if ($array_ctor && $array_ctor->{method} eq 'array') {
-   my $items = $array_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
-   my @lowered_items = map { _lower_declare_value_expr($_) } @$items;
-   return undef if grep { !defined($_) || !length($_) } @lowered_items;
-   return '('.join(', ', @lowered_items).')';
-  }
-  if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
-   return '('.$+{payload}.')';
-  }
- }
-
- if ($type eq 'hash') {
-  my $hash_ctor = _parse_method_function_expr($trimmed);
-  if ($hash_ctor && $hash_ctor->{method} eq 'hash') {
-   my $items = $hash_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
-   return undef unless @$items % 2 == 0;
-   my @pairs;
-   for (my $i = 0; $i < @$items; $i += 2) {
-    my $key_expr = _lower_declare_value_expr($items->[$i]);
-    my $val_expr = _lower_declare_value_expr($items->[$i + 1]);
-    return undef unless defined($key_expr) && length($key_expr);
-    return undef unless defined($val_expr) && length($val_expr);
-    push @pairs, $key_expr.' => '.$val_expr;
-   }
-   return '('.join(', ', @pairs).')';
-  }
-  if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
-   return '('.$+{payload}.')';
-  }
- }
-
- return _lower_declare_value_expr($trimmed)
+ return LinkedSpec::ActionRewriter::_lower_declare_initializer_expr(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2854,13 +2779,7 @@ sub _lower_assign_statement {
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_assign_method_statement {
- my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'assign';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
- return undef unless $effective_args;
- return _lower_assign_statement($effective_args->[0], $effective_args->[1])
+ return LinkedSpec::ActionRewriter::_lower_assign_method_statement(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2871,45 +2790,7 @@ sub _lower_assign_method_statement {
 # Returns : hashref { declaration_type => ..., entries => [...] } or undef
 #------------------------------------------------------------------------------
 sub _extract_declare_statement_from_method_expr {
- my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call;
- my $method = $call->{method} // '';
-
- if ($method eq 'declare') {
-  my @effective_args = @{$call->{args} || []};
-  if (
-   @effective_args >= 3 &&
-   _is_bare_method_scope_token($effective_args[0]) &&
-   defined(_trim_action_ir_value($effective_args[1])) &&
-   _trim_action_ir_value($effective_args[1]) =~ /^(array|scalar|hash)$/o
-  ) {
-   shift @effective_args;
-  }
-
-  return undef unless @effective_args >= 2;
-  my $type = _trim_action_ir_value($effective_args[0]);
-  return undef unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
-  my @entries = @effective_args[1 .. $#effective_args];
-  return undef unless @entries;
-  return {
-   declaration_type => $type,
-   entries          => \@entries,
-  };
- }
-
- if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
-  my $type = _declare_alias_to_type($+{alias});
-  return undef unless defined $type;
-  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
-  return undef unless $effective_args && @$effective_args >= 1;
-  return {
-   declaration_type => $type,
-   entries          => [@$effective_args],
-  };
- }
-
- return undef
+ return LinkedSpec::ActionRewriter::_extract_declare_statement_from_method_expr(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2920,10 +2801,7 @@ sub _extract_declare_statement_from_method_expr {
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_method_statement {
- my ($expr) = @_;
- my $decl = _extract_declare_statement_from_method_expr($expr);
- return undef unless $decl;
- return _lower_typed_declare_statement($decl->{declaration_type}, $decl->{entries})
+ return LinkedSpec::ActionRewriter::_lower_declare_method_statement(@_)
 }
 
 #------------------------------------------------------------------------------

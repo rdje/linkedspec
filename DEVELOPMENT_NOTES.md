@@ -243,6 +243,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
   - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next incremental ActionRewriter extraction slice:
+  - moved declaration/assignment helper parsing and lowering internals from `LinkedSpec.pm` into `LinkedSpec::ActionRewriter`:
+    - `_trim_action_ir_value`
+    - `_split_declare_symbol_names`
+    - `_parse_declare_binding_entry`
+    - `_lower_declare_value_expr`
+    - `_lower_declare_initializer_expr`
+    - `_extract_declare_statement_from_method_expr`
+    - `_lower_declare_method_statement`
+    - `_lower_assign_method_statement`
+- Rewired `LinkedSpec.pm` compatibility façade:
+  - each helper name above now delegates to `LinkedSpec::ActionRewriter`,
+  - existing call sites and contract-based lowering entrypoints remain stable.
+- Validation snapshot for this declare/assign helper extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:

@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Declare/Assign Method Lowering Helpers to `LinkedSpec::ActionRewriter`
+## Summary
+Executed the next incremental modularization slice by moving declaration/assignment helper parsing and lowering internals from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`, while preserving call surfaces through delegating wrappers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added helper implementations to `LinkedSpec::ActionRewriter`:
+  - `_trim_action_ir_value`
+  - `_split_declare_symbol_names`
+  - `_parse_declare_binding_entry`
+  - `_lower_declare_value_expr`
+  - `_lower_declare_initializer_expr`
+  - `_extract_declare_statement_from_method_expr`
+  - `_lower_declare_method_statement`
+  - `_lower_assign_method_statement`
+- Updated `LinkedSpec.pm` to delegate the same helper names to `LinkedSpec::ActionRewriter` for compatibility with existing call sites and regex-lowering contract execution paths.
+- Behavioral parity note:
+  - extraction keeps helper signatures and return semantics unchanged;
+  - contract-driven rewrites still resolve through `LinkedSpec` entrypoints, now delegating into `ActionRewriter` for this helper cluster.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract `spec_descr`/`spec_gdata` to `LinkedSpec::Compiler` and Replace `pm_drive`
 ## Summary
 Completed the active Phase 1A compiler follow-up slice by moving spec descriptor/gdata build logic into `LinkedSpec::Compiler`, delegating compatibility wrappers from `LinkedSpec.pm`, and replacing the legacy `pm_drive` generation toggle with an explicit parser-source emission option.
