@@ -18,6 +18,7 @@ BEGIN {
 use LinkedRE;
 use LinkedSpec::Trace ();
 use LinkedSpec::Validation ();
+use LinkedSpec::Resolver ();
 
 # UVM-style verbosity levels
 use constant {
@@ -5345,30 +5346,7 @@ my ($label, $code) = @_;
 # Returns : resolved file path or undef
 #------------------------------------------------------------------------------
 sub _resolve_local_spec_path {
- my ($spec_name) = @_;
- return undef unless defined $spec_name && length $spec_name;
-
- return $spec_name if -f $spec_name;
- my $spec_file = $spec_name =~ /\.spec$/o ? $spec_name : "$spec_name.spec";
- return $spec_file if -f $spec_file;
-
- my $candidate;
- my $ok = eval {
-  require Cwd;
-  require File::Basename;
-  require File::Spec;
-
-  my $module_path = Cwd::abs_path($INC{__PACKAGE__.'.pm'});
-  my $module_dir  = (File::Basename::fileparse($module_path))[1];
-  my $root_dir    = Cwd::realpath(File::Spec->catdir($module_dir, File::Spec->updir()));
-  my $local_spec  = File::Spec->catfile($root_dir, 'specs', $spec_file);
-  $candidate      = $local_spec if -f $local_spec;
-  1;
- };
-
- return $candidate if $ok && $candidate;
-
- return undef
+ return LinkedSpec::Resolver::_resolve_local_spec_path(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -5387,67 +5365,15 @@ sub get_parser {
   option_keys => [sort keys %opt_hash],
  }, DUMP_LOW);
 
- unless (defined $spec_name && !ref($spec_name) && $spec_name =~ /\S/o && $spec_name !~ /^\s|\s$/o && $spec_name !~ /[[:cntrl:]]/o) {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace");
-  trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_name' }, DUMP_LOW);
+ unless (LinkedSpec::Resolver::validate_spec_name($spec_name, $trace_scope)) {
   return undef
  }
 
- my $spec_path = _resolve_local_spec_path($spec_name);
- trace_decision('get_parser_local_resolution', defined($spec_path) ? 1 : 0, defined($spec_path) ? "resolved=$spec_path" : 'local resolution miss', DUMP_MEDIUM);
- my $is_explicit_path = ($spec_name =~ m{[/\\]}o);
- my $is_explicit_spec_name = ($spec_name =~ /\.spec$/o);
- unless ($spec_path) {
-  if ($is_explicit_path || $is_explicit_spec_name) {
-   if (-e $spec_name && !-f $spec_name) {
-    my $path_type = -d $spec_name ? 'directory' : 'non-regular';
-    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_name' type='$path_type'");
-    trace_exit($trace_scope, { status => 'error', stage => 'explicit_path_type', path_type => $path_type }, DUMP_LOW);
-    return undef
-   }
-   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='<undef>'");
-   trace_exit($trace_scope, { status => 'error', stage => 'explicit_path_missing' }, DUMP_LOW);
-   return undef
-  }
- }
- unless ($spec_path) {
-  trace_decision('get_parser_pathsearch_fallback', 1, "attempting PathSearch for '$spec_name'", DUMP_MEDIUM);
-  my $ok = eval {require PathSearch; 1};
-  unless ($ok) {
-   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch load failed: $@");
-   trace_exit($trace_scope, { status => 'error', stage => 'pathsearch_load' }, DUMP_LOW);
-   return undef
-  }
-  my $resolved_spec_path = eval { PathSearch->go($spec_name, 'spec') };
-  if ($@) {
-   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch runtime failure: $@");
-   trace_exit($trace_scope, { status => 'error', stage => 'pathsearch_runtime' }, DUMP_LOW);
-   return undef
-  }
-  $spec_path = $resolved_spec_path;
-  trace_decision('get_parser_pathsearch_result', defined($spec_path) ? 1 : 0, defined($spec_path) ? "resolved=$spec_path" : 'PathSearch returned undef', DUMP_MEDIUM);
- }
- if ($spec_path && -e $spec_path && !-f $spec_path) {
-  my $path_type = -d $spec_path ? 'directory' : 'non-regular';
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_path' type='$path_type'");
-  trace_exit($trace_scope, { status => 'error', stage => 'resolved_path_type', path_type => $path_type }, DUMP_LOW);
-  return undef
- }
+ my $spec_path = LinkedSpec::Resolver::resolve_spec_path($spec_name, $trace_scope);
+ return undef unless defined $spec_path;
 
- unless ($spec_path && -f $spec_path) {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='".($spec_path // '<undef>')."'");
-  trace_exit($trace_scope, { status => 'error', stage => 'resolved_path_missing' }, DUMP_LOW);
-  return undef
- }
-
- open(my $f, '<', $spec_path) or do {
-  log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to open spec file '$spec_path'", "OS Error: $!");
-  trace_exit($trace_scope, { status => 'error', stage => 'open_spec_file', spec_path => $spec_path }, DUMP_LOW);
-  return undef
- };
- local $/;
- my $content = <$f>;
- close($f);
+ my $content = LinkedSpec::Resolver::load_spec_content($spec_path, $trace_scope);
+ return undef unless defined $content;
  my @forward_opts = @opts;
  if (%opt_hash && exists $opt_hash{trace_reset_log}) {
   @forward_opts = ();

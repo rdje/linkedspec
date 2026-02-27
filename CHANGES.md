@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Resolver Runtime to `LinkedSpec/Resolver.pm`
+## Summary
+Executed the third Phase 1A modularization slice by extracting spec-name validation, spec-path resolution, and spec-source loading behavior from `LinkedSpec.pm` into a dedicated `LinkedSpec::Resolver` module, while preserving `get_parser(...)` behavior and diagnostics through façade delegation.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Resolver.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::Resolver` containing resolver helpers:
+  - `validate_spec_name`
+  - `_resolve_local_spec_path`
+  - `resolve_spec_path`
+  - `load_spec_content`
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::Resolver ();`
+  - delegated `_resolve_local_spec_path` to `LinkedSpec::Resolver::_resolve_local_spec_path(...)`
+  - simplified `get_parser(...)` orchestration to call resolver helpers for:
+    - spec-name validation error path handling,
+    - explicit/local/fallback spec path resolution behavior,
+    - spec file open/read path handling.
+- Preserved diagnostic and trace surfaces used by regression locks:
+  - error message text remains unchanged for invalid-name, missing-path, non-file path, pathsearch load/runtime failure, and open failure cases.
+- Added local `@INC` bootstrap in `LinkedSpec::Resolver` for direct `perl -c` workflow support.
+- Corrected module-path lookup in `_resolve_local_spec_path` by deriving an `@INC` key from package name (`LinkedSpec/Resolver.pm`) instead of raw `__PACKAGE__.'.pm'`, restoring module-relative specs lookup behavior.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Validation Runtime to `LinkedSpec/Validation.pm`
 ## Summary
 Executed the second Phase 1A modularization slice by extracting DSL/spec validation helpers from `LinkedSpec.pm` into a dedicated `LinkedSpec::Validation` module, while preserving external validation API compatibility via delegating wrappers.

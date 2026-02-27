@@ -108,6 +108,27 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -c perl/LinkedSpec.pm` -> OK
   - `perl -c t/phase0_regression.t` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed Phase 1A third extraction slice (Resolver):
+  - created `perl/LinkedSpec/Resolver.pm` and moved `get_parser(...)` resolution internals out of `LinkedSpec.pm`,
+  - extracted resolver helpers:
+    - `validate_spec_name`
+    - `_resolve_local_spec_path`
+    - `resolve_spec_path`
+    - `load_spec_content`.
+- Rewired `LinkedSpec.pm` façade orchestration:
+  - added `use LinkedSpec::Resolver ();`,
+  - delegated `_resolve_local_spec_path(...)` compatibility helper,
+  - updated `get_parser(...)` to delegate spec-name validation, path/fallback resolution, and spec-file loading to `LinkedSpec::Resolver` while preserving existing diagnostics and trace-decision surfaces.
+- Resolver module load-path hardening:
+  - added local `@INC` bootstrap in `LinkedSpec::Resolver` for direct `perl -c` workflows,
+  - corrected package-to-`@INC` key conversion in module-path lookup (`LinkedSpec/Resolver.pm`), fixing module-relative specs resolution after extraction.
+- Validation snapshot for Resolver extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:
