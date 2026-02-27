@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract RuleIR Runtime to `LinkedSpec/RuleIR.pm`
+## Summary
+Executed the next Phase 1A modularization slice by extracting RuleIR collection/planning/validation/emit-context helpers from `LinkedSpec.pm` into a dedicated `LinkedSpec::RuleIR` module, while preserving `spec_entry(...)` behavior through façade delegation.
+
+## Changed Files
+- Added: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::RuleIR` containing extracted RuleIR helpers:
+  - `_select_rule_handler_variant`
+  - `_build_rule_execution_meta`
+  - `_collect_rule_ir`
+  - `_plan_rule_ir_meta`
+  - `_validate_rule_ir_or_exit`
+  - `_normalize_rule_code_chunks`
+  - `_build_rule_ir_emit_context`
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::RuleIR ();`
+  - delegated the same helper names above to `LinkedSpec::RuleIR` for compatibility and minimal call-site churn.
+- Preserved runtime behavior:
+  - `spec_entry(...)` continues to orchestrate the same staged RuleIR pipeline,
+  - existing action-rewriter diagnostics/meta assembly paths remain unchanged, with `LinkedSpec::RuleIR` invoking existing rewrite helpers through fully-qualified calls.
+- Added local `@INC` bootstrap in `LinkedSpec::RuleIR` for direct module syntax-check workflows.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Resolver Runtime to `LinkedSpec/Resolver.pm`
 ## Summary
 Executed the third Phase 1A modularization slice by extracting spec-name validation, spec-path resolution, and spec-source loading behavior from `LinkedSpec.pm` into a dedicated `LinkedSpec::Resolver` module, while preserving `get_parser(...)` behavior and diagnostics through façade delegation.

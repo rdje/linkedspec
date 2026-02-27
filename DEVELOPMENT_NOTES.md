@@ -129,6 +129,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -c perl/LinkedSpec.pm` -> OK
   - `perl -c t/phase0_regression.t` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (RuleIR):
+  - created `perl/LinkedSpec/RuleIR.pm` and moved staged RuleIR helpers out of `LinkedSpec.pm`,
+  - extracted helpers include planning and emit-context surfaces:
+    - `_select_rule_handler_variant`
+    - `_build_rule_execution_meta`
+    - `_collect_rule_ir`
+    - `_plan_rule_ir_meta`
+    - `_validate_rule_ir_or_exit`
+    - `_normalize_rule_code_chunks`
+    - `_build_rule_ir_emit_context`.
+- Rewired `LinkedSpec.pm` façade orchestration:
+  - added `use LinkedSpec::RuleIR ();`,
+  - delegated the same RuleIR helper names to `LinkedSpec::RuleIR` so `spec_entry(...)` call flow remains unchanged.
+- Dependency handling note:
+  - `LinkedSpec::RuleIR` keeps behavior parity by invoking existing action-rewriter helpers through fully-qualified `LinkedSpec::...` calls rather than re-implementing rewrite plumbing.
+- Validation snapshot for RuleIR extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:
