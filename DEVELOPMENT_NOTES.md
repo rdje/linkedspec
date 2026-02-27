@@ -199,6 +199,27 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -c perl/LinkedSpec.pm` -> OK
   - `perl -c t/phase0_regression.t` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (BootstrapSpec helpers):
+  - created `perl/LinkedSpec/BootstrapSpec.pm`,
+  - extracted bootstrap registry/scanner setup helper:
+    - `_build_bootstrap_registry_gdata`.
+- Rewired `LinkedSpec.pm` bootstrap setup:
+  - added `use LinkedSpec::BootstrapSpec ();`,
+  - replaced inlined `%bootstrap_rule_index` and bootstrap `gdata` build block with helper call returning `(rule_index_hashref, gdata_hashref)`,
+  - preserved existing lexical `%bootstrap_rule_index` surface by assigning from returned hashref.
+- Behavioral parity note:
+  - bootstrap descriptor handlers and parser call surfaces remain unchanged; this slice only relocates setup logic.
+- Validation snapshot for BootstrapSpec-helper extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c perl/LinkedSpec/BootstrapSpec.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:

@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Bootstrap Registry Helpers to `LinkedSpec/BootstrapSpec.pm`
+## Summary
+Executed the next Phase 1A modularization slice by extracting bootstrap registry/scanner-bundle construction from `LinkedSpec.pm` into `LinkedSpec::BootstrapSpec`, while preserving bootstrap parsing behavior.
+
+## Changed Files
+- Added: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::BootstrapSpec` with helper:
+  - `_build_bootstrap_registry_gdata`
+- Helper responsibilities moved from `LinkedSpec.pm`:
+  - build `%bootstrap_rule_index` from bootstrap descriptor IDs,
+  - enforce required bootstrap rule IDs (`SPEC_ROOT`, `CURLY_BRACE`),
+  - derive bootstrap start-token scanner arrays and dispatch mapping,
+  - derive curly-brace scanner bundle,
+  - build bootstrap `gdata` (`startREs`, `start_dispatch`, `cbrace`).
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::BootstrapSpec ();`
+  - replaced inlined bootstrap registry/gdata initialization block with:
+    - `LinkedSpec::BootstrapSpec::_build_bootstrap_registry_gdata($spec_descr)`
+    - assignment of returned rule-index hashref into existing `%bootstrap_rule_index`.
+- Behavioral parity note:
+  - bootstrap descriptor handlers and call sites are unchanged; extraction is limited to registry/scanner setup logic.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Compiler Runtime Helpers to `LinkedSpec/Compiler.pm`
 ## Summary
 Executed the next Phase 1A modularization slice by extracting selected compile-orchestration helpers from `LinkedSpec.pm` into `LinkedSpec::Compiler`, while preserving `Get(...)` behavior through incremental delegation.
