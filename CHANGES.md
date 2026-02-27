@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Blocker Reduction Slice: Tuple Destructure + Foreach Print + Split/Trim/Filter Assignment
+## Summary
+Reduced remaining high-priority language-agnostic action-IR blockers by adding identity-preserving canonical classification coverage for three frequent raw statement forms while preserving runtime behavior.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added canonical action-IR contract coverage (classification-only, no rewrite behavior change) for:
+  - `destructure_imatch_list_my`:
+    - `my ($a, $b, ...) = @IMATCH_LIST`
+  - `print_foreach_iterable`:
+    - `print "...$_..." foreach (@iterable)`
+  - `split_trim_filter_assignment`:
+    - `my @parts = grep { length($_) } map { my $v = $_; $v =~ s/.../.../g; $v } split /.../, $args`
+- Extended canonical kind mapping for the new contracts:
+  - tuple destructure and split/trim/filter assignment map to canonical `ASSIGN`,
+  - foreach-print maps to canonical `PRINT`.
+- Added focused phase0 regression locks:
+  - `action_rewriter_canonical_action_ir_classifies_imatch_list_destructure_without_raw_fallback`
+  - `action_rewriter_canonical_action_ir_classifies_print_foreach_iterable_without_raw_fallback`
+  - `action_rewriter_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback`
+- Blocker triage impact:
+  - highest blocker frequency reduced from `2` to `1` across in-scope specs (excluding deferred `tclite.spec`).
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=82`)
 ## 2026-02-26 - Declare Initializers (`name=expr`) + Assign Expression Sources
 ## Summary
 Extended declaration and assignment helper contracts so declaration entries can be initialized inline and assign sources can use the same expression surfaces as fluent control-flow conditions.

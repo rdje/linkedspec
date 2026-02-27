@@ -1680,6 +1680,16 @@ sub _build_action_lowering_contracts {
    },
   },
   {
+   id                 => 'destructure_imatch_list_my',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'assign',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
    id                 => 'regex_subst_assignment',
    ir_node            => 'REGEX_SUBST',
    diag_name          => 'substr',
@@ -1713,6 +1723,26 @@ sub _build_action_lowering_contracts {
    id                 => 'position_tracking',
    ir_node            => 'POSITION_TRACK',
    diag_name          => 'position_tracking',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'print_foreach_iterable',
+   ir_node            => 'PRINT',
+   diag_name          => 'print',
+   unresolved_pattern => undef,
+   lower              => sub {
+    my ($code) = @_;
+    return $code
+   },
+  },
+  {
+   id                 => 'split_trim_filter_assignment',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'assign',
    unresolved_pattern => undef,
    lower              => sub {
     my ($code) = @_;
@@ -4399,6 +4429,23 @@ sub _scan_contract_ir_events {
    next unless $trimmed =~ /^my\s+\$(?<target>\w+)\s*=\s*\$(?<source>CAPTURE|IMATCH|LMATCH)$/o;
    push @events, {raw => $trimmed, args => {target => $+{target}, source => $+{source}, scope => 'my'}};
   }
+ } elsif ($id eq 'destructure_imatch_list_my') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^my\s*\((?<targets>[^()]+)\)\s*=\s*\@IMATCH_LIST$/o;
+   my @targets = grep { defined($_) && length($_) } map { _trim_action_ir_value($_) } split /\s*,\s*/o, $+{targets};
+   next unless @targets;
+   next if grep { $_ !~ /^\$\w+$/o } @targets;
+   push @events, {
+    raw  => $trimmed,
+    args => {
+     targets => [map { my $name = $_; $name =~ s/^\$//o; $name } @targets],
+     source  => 'IMATCH_LIST',
+     scope   => 'my',
+    },
+   };
+  }
  } elsif ($id eq 'regex_subst_assignment') {
   foreach my $statement (@{_split_action_ir_statements($code)}) {
    my $trimmed = _trim_action_ir_value($statement);
@@ -4432,6 +4479,29 @@ sub _scan_contract_ir_events {
     $trimmed =~ /^push\s+\@\w+\s*,\s*\{[^{}]*substr\(\s*\$\$STRING\s*,\s*\$last_pos\s*,\s*\$shift\s*\)[^{}]*\}\s*if\s*\$shift\s*$/o
    );
    push @events, {raw => $trimmed, args => {category => 'position_tracking'}};
+  }
+ } elsif ($id eq 'print_foreach_iterable') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^print\s+.+\s+foreach\s*\(\s*\@(?<iterable>\w+)\s*\)$/s;
+   push @events, {raw => $trimmed, args => {iterable => $+{iterable}}};
+  }
+ } elsif ($id eq 'split_trim_filter_assignment') {
+  foreach my $statement (@{_split_action_ir_statements($code)}) {
+   my $trimmed = _trim_action_ir_value($statement);
+   next unless defined($trimmed) && length($trimmed);
+   next unless $trimmed =~ /^my\s+\@(?<target>\w+)\s*=\s*grep\s*\{\s*length\(\$_\)\s*\}\s*map\s*\{\s*my\s+\$v\s*=\s*\$_\s*;\s*\$v\s*=~\s*s\/(?:\\.|[^\/])*\/(?:\\.|[^\/])*\/[a-z]*\s*;\s*\$v\s*\}\s*split\s*(?<delimiter>\/(?:\\.|[^\/])*\/[a-z]*)\s*,\s*\$(?<source>\w+)$/o;
+   push @events, {
+    raw  => $trimmed,
+    args => {
+     target    => $+{target},
+     source    => $+{source},
+     delimiter => $+{delimiter},
+     transforms => ['split', 'trim_each', 'filter_nonempty'],
+     scope     => 'my',
+    },
+   };
   }
  } elsif ($id eq 'return_imatch') {
   while ($code =~ /\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|"[^"]*"|\w+))\s*\)/g) {
@@ -4809,6 +4879,9 @@ sub _canonicalize_helper_action_ir_event {
  elsif ($contract_id eq 'assign_match_my') {
   $kind = 'ASSIGN';
  }
+ elsif ($contract_id eq 'destructure_imatch_list_my') {
+  $kind = 'ASSIGN';
+ }
  elsif ($contract_id eq 'regex_subst_assignment') {
   $kind = 'REGEX_SUBST';
  }
@@ -4820,6 +4893,9 @@ sub _canonicalize_helper_action_ir_event {
  }
  elsif ($contract_id eq 'position_tracking') {
   $kind = 'POSITION_TRACK';
+ }
+ elsif ($contract_id eq 'print_foreach_iterable') {
+  $kind = 'PRINT';
  }
  elsif ($contract_id eq 'return_imatch' || $contract_id eq 'return_array') {
   $kind = 'RETURN';

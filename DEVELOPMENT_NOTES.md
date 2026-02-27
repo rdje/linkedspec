@@ -61,6 +61,22 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-26)
+- Completed focused blocker-reduction follow-up under Backbone Item #3:
+  - added canonical classification coverage for `my ($a, $b, ...) = @IMATCH_LIST`,
+  - added canonical classification coverage for `print "...$_..." foreach (@iterable)`,
+  - added canonical classification coverage for split/trim/filter lexical assignment pattern:
+    - `my @parts = grep { length($_) } map { my $v = $_; $v =~ s/.../.../g; $v } split /.../, $args`.
+- Added contract IDs and canonical mapping:
+  - `destructure_imatch_list_my` -> `ASSIGN`
+  - `print_foreach_iterable` -> `PRINT`
+  - `split_trim_filter_assignment` -> `ASSIGN`
+- Added focused phase0 regression locks for each new contract to keep RAW fallback at zero for covered forms.
+- Blocker triage update:
+  - top blocker frequency moved from `2` down to `1` after this slice (in-scope specs; `tclite.spec` remains deferred).
+- Validation snapshot for this follow-up:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=82`)
 - Completed follow-up amendment for helper surfaces preferred by migration workflow:
   - declaration helpers now support inline initialization (`name=expr`) for `declare(type, ...)` and `declare_*` aliases,
   - assignment helper now accepts expression sources used by `if()/elseif()/switch()` first-argument surfaces.

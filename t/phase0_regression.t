@@ -1881,6 +1881,69 @@ SPEC
     is($rewritten, 'my $args = $IMATCH', 'lexical match-assignment statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'lexical-match-assignment-only rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_canonical_action_ir_classifies_imatch_list_destructure_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my ($attribute_name, $value) = @IMATCH_LIST }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for IMATCH_LIST destructure canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes IMATCH_LIST destructure statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes IMATCH_LIST destructure statement');
+    is($meta->{unresolved_helper_count}, 0, 'IMATCH_LIST destructure classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include ASSIGN for IMATCH_LIST destructure coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my ($attribute_name, $value) = @IMATCH_LIST');
+    is($rewritten, 'my ($attribute_name, $value) = @IMATCH_LIST', 'IMATCH_LIST destructure statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'IMATCH_LIST-destructure-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_print_foreach_iterable_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { print "perl_dquotes:<<$_>>\n" foreach (@matches) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for print-foreach canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes print-foreach statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes print-foreach statement');
+    is($meta->{unresolved_helper_count}, 0, 'print-foreach classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PRINT for print-foreach coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'print "perl_dquotes:<<$_>>\n" foreach (@matches)');
+    is($rewritten, 'print "perl_dquotes:<<$_>>\n" foreach (@matches)', 'print-foreach statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'print-foreach-only rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for split-trim-filter assignment canonical action-IR check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes split-trim-filter assignment statement');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes split-trim-filter assignment statement');
+    is($meta->{unresolved_helper_count}, 0, 'split-trim-filter assignment classification keeps unresolved-helper count at zero');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include ASSIGN for split-trim-filter assignment coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args');
+    is($rewritten, 'my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args', 'split-trim-filter assignment statement is preserved while avoiding RAW_PERL fallback');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'split-trim-filter-assignment-only rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_next_statement_without_raw_fallback' => sub {
     plan tests => 7;
 
