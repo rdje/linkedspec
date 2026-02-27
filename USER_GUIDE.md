@@ -70,7 +70,8 @@ This pattern is a primary LinkedSpec strength.
 - `parse_only => 1`
 - `generate_only => 1`
 - `return_descr => 1` (return internal `{spec=>..., gdata=>...}` descriptor instead of parser coderef)
-- `pm_drive => 1` (emit generated parser code text)
+- `dump_parser_source => 1` (emit generated parser code text)
+- `parser_source_ref => \$out` (capture generated parser code text into a scalar ref instead of printing)
 
 ## Spec Lookup Behavior (`get_parser`)
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:
@@ -88,7 +89,7 @@ This removes hard dependency on running from the project root.
 
 ## Debugging
 - Set `LinkedSpec` verbosity via `our $DUMP_VERBOSITY` or `LinkedSpec::configure_trace(...)`.
-- Use `parse_only` and/or `pm_drive` to inspect compile/generation behavior.
+- Use `parse_only` and/or `dump_parser_source` to inspect compile/generation behavior.
 
 ### First-Class Multi-Level Tracing
 LinkedSpec now supports UVM-style tracing levels and structured flow traces.

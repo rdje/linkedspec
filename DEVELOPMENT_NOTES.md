@@ -220,6 +220,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -c perl/LinkedSpec.pm` -> OK
   - `perl -c t/phase0_regression.t` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (Compiler spec descriptor helpers):
+  - moved `spec_descr(...)` and `spec_gdata(...)` implementations from `LinkedSpec.pm` into `LinkedSpec::Compiler`,
+  - kept compatibility call surfaces in `LinkedSpec.pm` via thin wrappers delegating to `LinkedSpec::Compiler`.
+- Replaced legacy parser-code dump toggle:
+  - removed `pm_drive` references from runtime and docs,
+  - added explicit `Get(...)` options:
+    - `dump_parser_source => 1`,
+    - `parser_source_ref => \$scalar` to capture generated source text without stdout.
+- Introduced emitter-based generation flow:
+  - added `_emit_parser_source_line(...)` hook in `LinkedSpec.pm`,
+  - `spec_entry(...)` contributes generated handler-source fragments through emitter callback,
+  - `Get(...)` assembles full parser source output in one place (descriptor envelope + handlers + gdata + `sub Get` shim).
+- Removed deprecated sample script `specs/test.pl` from repository per user direction.
+- Validation snapshot for spec descriptor extraction + dump-path redesign:
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:

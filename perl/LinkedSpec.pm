@@ -254,6 +254,15 @@ sub should_dump {
  return LinkedSpec::Trace::should_dump(@_)
 }
 
+our $PARSER_SOURCE_EMIT_CB;
+
+sub _emit_parser_source_line {
+ my ($chunk) = @_;
+ return unless ref($PARSER_SOURCE_EMIT_CB) eq 'CODE';
+ $PARSER_SOURCE_EMIT_CB->($chunk);
+ return
+}
+
 #------------------------------------------------------------------------------
 # Function: get_dsl_context
 # Purpose : Build line-oriented context around a byte-position in .spec text so
@@ -419,8 +428,7 @@ my $rep_nodes_minmax = {
 	REP_OPT => [0, 1]
 };
 
-# Legacy generation toggle: when enabled, emit parser descriptor Perl text.
-my $pm_drive;
+# Optional parser-source emitter callback is configured by Get() when requested.
 
 # Hardcoded bootstrap grammar used to parse .spec into intermediate entries.
 my $spec_descr = [
@@ -734,13 +742,19 @@ sub Get {
  my $generate_only = $option{generate_only};
  my $return_descr = $option{return_descr};
  my $test_expectation = $option{test_expectation};
- $pm_drive = $option{pm_drive};
+ my $dump_parser_source = $option{dump_parser_source};
+ my $parser_source_ref = $option{parser_source_ref};
+ my @parser_source_chunks;
+ local $PARSER_SOURCE_EMIT_CB = $dump_parser_source ? sub {
+  my ($chunk) = @_;
+  push @parser_source_chunks, $chunk;
+ } : undef;
 
  my $trace_scope = trace_enter('LinkedSpec::Get', {
   parse_only => $parse_only ? 1 : 0,
   generate_only => $generate_only ? 1 : 0,
   return_descr => $return_descr ? 1 : 0,
-  pm_drive => $pm_drive ? 1 : 0,
+  dump_parser_source => $dump_parser_source ? 1 : 0,
   trace_level => _trace_level_name($DUMP_VERBOSITY),
  }, DUMP_LOW);
 
@@ -829,6 +843,9 @@ sub Get {
 
  # Start parser generation phase
  log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
+ if ($dump_parser_source) {
+  _emit_parser_source_line("my \$descr = {\n spec => {\n");
+ }
 
  my $auto_descr_spec = spec_descr($retv);
  unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
@@ -847,8 +864,23 @@ sub Get {
 
  my $rule_count = scalar(keys %$auto_descr_spec);
  log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
-
- print "\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n" if $pm_drive;
+ if ($dump_parser_source) {
+  _emit_parser_source_line(" },\n gdata => {\n");
+  my @glabels = sort keys %{$final_descr->{gdata} || {}};
+  for (my $i = 0; $i < @glabels; ++$i) {
+   my $label = $glabels[$i];
+   my $gregex = $final_descr->{gdata}{$label};
+   my $prefix = $i ? ",\n" : '';
+   _emit_parser_source_line($prefix . " $label\t=> qr/$gregex/o");
+  }
+  _emit_parser_source_line("\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
+  my $parser_source = join('', @parser_source_chunks);
+  if (ref($parser_source_ref) eq 'SCALAR') {
+   $$parser_source_ref = $parser_source;
+  } else {
+   print $parser_source;
+  }
+ }
 
  # Dump final_descr if in dump mode
  if (should_dump(DUMP_LOW)) {
@@ -908,60 +940,7 @@ sub _build_rule_execution_meta {
 # Returns : hashref of spec rule definitions
 #------------------------------------------------------------------------------
 sub spec_descr {
-my $specretv = shift;
- my $trace_scope = trace_enter('LinkedSpec::spec_descr', {
-  entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
- }, DUMP_MEDIUM);
-
- print 'my $descr = {
- spec => {'."\n" if $pm_drive;
- my @specinfo;
- foreach my $entry (@$specretv) {
-  my ($label, $info) = spec_entry($entry);
-  unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
-   log_output(DUMP_NONE, "CRITICAL ERROR", "Rule descriptor build failed while compiling parsed spec entries");
-   trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
-   return undef
-  }
-  push @specinfo, $label, $info;
- }
- 
- # Debug: Log the specinfo array
- log_output(DUMP_LOW, "Specinfo array contents", "Number of entries: " . scalar(@specinfo));
- for (my $i = 0; $i < @specinfo; $i += 2) {
-     my $label = $specinfo[$i];
-     my $info  = $specinfo[$i + 1];
-     log_output(DUMP_LOW, "Entry " . ($i / 2), "Label: '$label', Type: " . ref($info));
- }
- 
- # Debug: Check for duplicate rules
- my %seen_rules;
- my @duplicate_rules;
- for (my $i = 0; $i < @specinfo; $i += 2) {
-     my $label = $specinfo[$i];
-     if (exists $seen_rules{$label}) {
-         push @duplicate_rules, $label;
-         log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
-     }
-     $seen_rules{$label} = 1;
- }
- trace_decision('duplicate_rule_definitions_present', scalar(@duplicate_rules) ? 1 : 0, scalar(@duplicate_rules) ? ('duplicate_rules=' . join(',', @duplicate_rules)) : 'no duplicates detected', DUMP_MEDIUM);
- 
- if (@duplicate_rules) {
-     log_output(DUMP_LOW, "Duplicate rules summary", "Rules with multiple definitions: " . join(", ", @duplicate_rules));
- }
- 
- my $result = {@specinfo};
- 
- # Dump generated spec if in dump mode
- if (should_dump(DUMP_MEDIUM)) {
-     log_dump("=== GENERATED SPEC DUMP ===\n");
-     log_dump(Dumper($result));
-     log_dump("=== END GENERATED SPEC DUMP ===\n");
- }
- trace_exit($trace_scope, { status => 'ok', rule_count => scalar(keys %$result) }, DUMP_MEDIUM);
-
- return $result
+ return LinkedSpec::Compiler::spec_descr(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -2018,7 +1997,7 @@ my @'.$label.';
 
  my $external_handler = $handler;
  $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
- print "\n $label => sub {\n$external_handler\n },\n" if $pm_drive;
+ _emit_parser_source_line("\n $label => sub {\n$external_handler\n },\n");
 
  $info{handler} = sub {
   my ($descr, $STRING, $info) = @_;
@@ -2075,73 +2054,7 @@ my @'.$label.';
 # Returns : hashref rule => compiled LinkedRE regex
 #------------------------------------------------------------------------------
 sub spec_gdata {
-my $sg = shift;
- my $trace_scope = trace_enter('LinkedSpec::spec_gdata', {
-  rule_count => (ref($sg) eq 'HASH') ? scalar(keys %$sg) : undef,
- }, DUMP_MEDIUM);
-
- if (should_dump(DUMP_HIGH)) {
-     log_dump("=== SPEC GDATA DUMP ===\n");
-     log_dump(Dumper($sg));
-     log_dump("=== END SPEC GDATA DUMP ===\n");
- }
-
- my $once=0;
- print ' gdata => {'."\n" if $pm_drive;
-
- my %gdata;
- foreach my $label (keys %$sg) {
-  my @lgdata;
-  foreach my $gde (@{$$sg{$label}{gdata}}) {
-   if (exists $$sg{$$gde{label}}{re}[$$gde{idx}]) {
-    push @lgdata, $$sg{$$gde{label}}{re}[$$gde{idx}]
-   } else {
-    trace_decision("spec_gdata:$label", 0, "missing regex mapping for label=$$gde{label} idx=$$gde{idx}", DUMP_HIGH);
-    my $error_msg = "Rule '$label': Referenced rule '$$gde{label}' has no regex at index $$gde{idx}";
-    my $context = "Referenced rule: $$gde{label}, Requested index: $$gde{idx}, Available indices: " . 
-                  (defined $$sg{$$gde{label}}{re} ? "0.." . ($#{$$sg{$$gde{label}}{re}}) : "none");
-    log_output(DUMP_NONE, $error_msg, $context);
-    print "  This usually means:\n";
-    print "    1. Rule '$$gde{label}' doesn't exist in your .spec file\n";
-    print "    2. Rule '$$gde{label}' has fewer regex patterns than expected\n";
-    print "    3. There's a mismatch in regex indexing in your .spec file\n";
-    if (should_dump(DUMP_HIGH)) {
-        log_dump("=== GDATA ERROR CONTEXT ===\n");
-        log_dump("label: $label\n");
-        log_dump("gde: ".Dumper($gde)."\n");
-        log_dump("sg: ".Dumper($sg)."\n");
-        log_dump("lgdata: ".Dumper(\@lgdata)."\n");
-        log_dump("=== END GDATA ERROR CONTEXT ===\n");
-    }
-    # exit 1
-   }
-  }
-
-  if (@lgdata) {
-   trace_decision("spec_gdata:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
-   $gdata{$label} = LinkedRE::oredRE(@lgdata);
-
-   print ''.($once ? ",\n" : "")." $label\t=> qr/$gdata{$label}/o" if $pm_drive;
-   ++$once
-  }
-  else {
-   trace_decision("spec_gdata:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
-  }
-
- }
-
- print "\n }\n};\n" if $pm_drive;
- 
- my $result = \%gdata;
- 
- # Dump generated gdata if in dump mode
- if (should_dump(DUMP_MEDIUM)) {
-     log_dump("=== GENERATED GDATA DUMP ===\n");
-     log_dump(Dumper($result));
-     log_dump("=== END GENERATED GDATA DUMP ===\n");
- }
- trace_exit($trace_scope, { status => 'ok', compiled_labels => scalar(keys %$result) }, DUMP_MEDIUM);
- return $result
+ return LinkedSpec::Compiler::spec_gdata(@_)
 }
 #------------------------------------------------------------------------------
 # Function: _find_unresolved_action_helpers

@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract `spec_descr`/`spec_gdata` to `LinkedSpec::Compiler` and Replace `pm_drive`
+## Summary
+Completed the active Phase 1A compiler follow-up slice by moving spec descriptor/gdata build logic into `LinkedSpec::Compiler`, delegating compatibility wrappers from `LinkedSpec.pm`, and replacing the legacy `pm_drive` generation toggle with an explicit parser-source emission option.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `USER_GUIDE.md`
+- Deleted: `specs/test.pl`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::Compiler` now owns:
+  - `spec_descr`
+  - `spec_gdata`
+- `LinkedSpec.pm` keeps stable helper call surfaces via wrappers:
+  - `spec_descr(...) -> LinkedSpec::Compiler::spec_descr(...)`
+  - `spec_gdata(...) -> LinkedSpec::Compiler::spec_gdata(...)`
+- Removed all `pm_drive` references from project sources and docs.
+- Added explicit parser-source dump flow in `Get(...)`:
+  - `dump_parser_source => 1` enables source emission,
+  - `parser_source_ref => \$scalar` captures emitted source without stdout printing.
+- Introduced internal emitter hook (`_emit_parser_source_line`) so generated handler source fragments are accumulated centrally during build and emitted once at the end of generation.
+- Removed legacy sample script `specs/test.pl` from version control per user request.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Bootstrap Registry Helpers to `LinkedSpec/BootstrapSpec.pm`
 ## Summary
 Executed the next Phase 1A modularization slice by extracting bootstrap registry/scanner-bundle construction from `LinkedSpec.pm` into `LinkedSpec::BootstrapSpec`, while preserving bootstrap parsing behavior.
