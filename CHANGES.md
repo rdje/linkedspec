@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Add `COMMIT.md` Workflow Guide
+## Summary
+Added a git-tracked workflow document describing the repository commit process so new AI sessions can reliably follow the same commit procedure and file responsibilities.
+
+## Changed Files
+- Added: `COMMIT.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `COMMIT.md` at repo root with:
+  - commit workflow objective and cadence,
+  - exact file roles and lifecycle (`git_message_brief.txt`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, task files),
+  - pre-commit validation expectations,
+  - step-by-step execution sequence,
+  - guardrails for scope, documentation consistency, and cleanup behavior.
+
+## Validation
+- Ran:
+  - `git --no-pager status --short`
+- Result:
+  - `COMMIT.md` tracked in git index and ready for commit.
 ## 2026-02-27 - Blocker Reduction Slice: Tuple Destructure + Foreach Print + Split/Trim/Filter Assignment
 ## Summary
 Reduced remaining high-priority language-agnostic action-IR blockers by adding identity-preserving canonical classification coverage for three frequent raw statement forms while preserving runtime behavior.

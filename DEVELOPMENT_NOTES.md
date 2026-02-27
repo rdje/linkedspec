@@ -61,6 +61,12 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-26)
+- Added a git-tracked commit-workflow reference document: `COMMIT.md`.
+- `COMMIT.md` now defines:
+  - commit workflow purpose and execution cadence,
+  - exact role/lifecycle of `git_message_brief.txt`, `CHANGES.md`, and `DEVELOPMENT_NOTES.md`,
+  - step-by-step commit execution procedure including post-commit cleanup.
+- Intended use: fast onboarding for new AI sessions so commit behavior is consistent without re-discovery.
 - Completed focused blocker-reduction follow-up under Backbone Item #3:
   - added canonical classification coverage for `my ($a, $b, ...) = @IMATCH_LIST`,
   - added canonical classification coverage for `print "...$_..." foreach (@iterable)`,
