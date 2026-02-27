@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Canonical IR/Statement Split Helpers to `LinkedSpec::ActionRewriter`
+## Summary
+Completed the in-progress ActionRewriter modularization by moving canonical helper-event normalization and robust action-statement splitting internals from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`, with delegating wrappers preserved in `LinkedSpec.pm`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added helper implementations to `LinkedSpec::ActionRewriter`:
+  - `_canonicalize_helper_action_ir_event`
+  - `_split_action_ir_statements`
+- Updated ActionRewriter internal call paths to use local helpers:
+  - `_find_unresolved_action_helpers` now calls local `_split_action_ir_statements`
+  - `_build_canonical_action_ir_events` now calls local `_trim_action_ir_value`, `_canonicalize_helper_action_ir_event`, and `_split_action_ir_statements`
+- Updated `LinkedSpec.pm` compatibility surfaces:
+  - `_canonicalize_helper_action_ir_event(...)` delegates to `LinkedSpec::ActionRewriter`
+  - `_split_action_ir_statements(...)` delegates to `LinkedSpec::ActionRewriter`
+- Behavioral parity note:
+  - action rewrite and canonical IR generation behavior remains unchanged; this slice relocates helper ownership only.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Declare/Assign Method Lowering Helpers to `LinkedSpec::ActionRewriter`
 ## Summary
 Executed the next incremental modularization slice by moving declaration/assignment helper parsing and lowering internals from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`, while preserving call surfaces through delegating wrappers.

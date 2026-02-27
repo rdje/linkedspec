@@ -260,6 +260,16 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
   - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed follow-up ActionRewriter extraction slice focused on canonical IR internals:
+  - moved `_canonicalize_helper_action_ir_event` and `_split_action_ir_statements` from `LinkedSpec.pm` into `LinkedSpec::ActionRewriter`.
+- Updated ActionRewriter internal usage to be module-local:
+  - `_find_unresolved_action_helpers` now consumes local `_split_action_ir_statements`,
+  - `_build_canonical_action_ir_events` now uses local `_trim_action_ir_value`, `_canonicalize_helper_action_ir_event`, and `_split_action_ir_statements`.
+- Rewired `LinkedSpec.pm` compatibility wrappers for both extracted helpers, preserving existing external/helper call surfaces.
+- Validation snapshot for canonical/split helper extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:
