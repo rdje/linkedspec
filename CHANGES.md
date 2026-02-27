@@ -1,5 +1,72 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Validation Runtime to `LinkedSpec/Validation.pm`
+## Summary
+Executed the second Phase 1A modularization slice by extracting DSL/spec validation helpers from `LinkedSpec.pm` into a dedicated `LinkedSpec::Validation` module, while preserving external validation API compatibility via delegating wrappers.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Validation.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::Validation` containing extracted validation helpers:
+  - `get_dsl_context`
+  - `report_dsl_error`
+  - `validate_spec_content`
+  - `validate_rule_definition`
+  - `validate_gdata_references`
+  - `validate_dsl_syntax`
+  - `extract_regex_literals_from_rule_rhs`
+- Updated `LinkedSpec.pm` to load `LinkedSpec::Validation` and delegate the same public validation function names to the new module, preserving call-site behavior and compatibility.
+- Added local `@INC` bootstrap in `LinkedSpec::Validation` so direct module syntax checks (`perl -c perl/LinkedSpec/Validation.pm`) resolve sibling `LinkedSpec::*` modules without requiring external `-I` flags.
+- Validation logging behavior remains routed through `LinkedSpec::Trace::log_output`, preserving tracing/runtime formatting and routing semantics introduced in the prior Trace extraction slice.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
+## 2026-02-27 - Phase 1A Slice: Extract Tracing Runtime to `LinkedSpec/Trace.pm`
+## Summary
+Executed the first Phase 1A modularization slice by extracting tracing runtime internals from `LinkedSpec.pm` into a dedicated `LinkedSpec::Trace` module, while preserving existing trace API behavior and regression stability.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Trace.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module `LinkedSpec::Trace` containing:
+  - trace state globals (`DUMP_VERBOSITY`, sink/style state),
+  - trace level parsing/mapping helpers,
+  - trace emit/routing internals,
+  - runtime configuration entrypoint (`configure_trace`),
+  - trace scope helpers (`trace_enter`, `trace_exit`, `trace_decision`),
+  - public logging helpers (`log_output`, `log_dump`, `should_dump`).
+- Updated `LinkedSpec.pm` to delegate trace APIs to `LinkedSpec::Trace`:
+  - `_trace_level_name`, `_apply_trace_options`, `configure_trace`,
+  - `trace_enter`, `trace_exit`, `trace_decision`,
+  - `log_output`, `log_dump`, `should_dump`.
+- Preserved compatibility for existing global trace variable surfaces in `LinkedSpec.pm` by aliasing to `LinkedSpec::Trace` package globals.
+- Added local `@INC` bootstrap in `LinkedSpec.pm` so sibling module loading works reliably for direct `perl -c perl/LinkedSpec.pm` workflows without requiring external `-I` flags.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - First-Class Tracing Framework + Modularization Roadmap Track
 ## Summary
 Implemented a first-class multi-level tracing framework in `LinkedSpec.pm` (UVM-style verbosity, structured scope/decision events, metadata-rich formatting, and trace-file routing), added focused regression locks for trace metadata/routing behavior, and updated roadmap tracking with a new phased modularization track for splitting `LinkedSpec.pm` into submodules.

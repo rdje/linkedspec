@@ -78,6 +78,36 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `Phase 1A: LinkedSpec.pm Modularization (New Priority)`,
   - extraction order starts with low-risk boundaries: `Trace -> Validation -> Resolver`,
   - then expands to `RuleIR`, `ActionRewriter`, `Compiler`, and (later) `BootstrapSpec`.
+- Executed Phase 1A first extraction slice:
+  - created `perl/LinkedSpec/Trace.pm` as the new trace-runtime implementation module,
+  - moved trace runtime state/configuration/routing/scope logic into `LinkedSpec::Trace`,
+  - rewired `LinkedSpec.pm` trace entrypoints to delegate to `LinkedSpec::Trace` while preserving existing call surfaces.
+- Compatibility handling kept explicit:
+  - aliased legacy `LinkedSpec.pm` trace globals (`$DUMP_VERBOSITY`, trace sink/style globals) to `LinkedSpec::Trace` package globals so external callers observing these variables remain behavior-compatible.
+- Loader robustness update:
+  - added local `@INC` bootstrap in `LinkedSpec.pm` so sibling module imports (e.g. `LinkedSpec::Trace`) work under direct `perl -c perl/LinkedSpec.pm` invocation without relying on external include-path setup.
+- Validation snapshot for this extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed Phase 1A second extraction slice (Validation):
+  - created `perl/LinkedSpec/Validation.pm` and moved validation helpers out of `LinkedSpec.pm`,
+  - extracted helpers include context/error reporting and DSL/spec validation flow:
+    - `get_dsl_context`, `report_dsl_error`, `validate_spec_content`,
+    - `validate_rule_definition`, `validate_gdata_references`,
+    - `validate_dsl_syntax`, `extract_regex_literals_from_rule_rhs`.
+- Rewired `LinkedSpec.pm` compatibility surface:
+  - existing validation function names now delegate to `LinkedSpec::Validation`,
+  - retained public call signatures/behavior so existing call sites and tests remain stable.
+- Loader robustness follow-up for module-local syntax workflows:
+  - added local `@INC` bootstrap in `LinkedSpec::Validation` so direct `perl -c perl/LinkedSpec/Validation.pm` resolves sibling `LinkedSpec::*` modules without external include-path setup.
+- Validation snapshot for Validation extraction slice:
+  - `perl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:

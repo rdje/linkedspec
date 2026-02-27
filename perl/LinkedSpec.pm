@@ -9,8 +9,15 @@ package LinkedSpec;
 use 5.010;
 use re 'eval';
 use Data::Dumper;
+BEGIN {
+ require File::Basename;
+ my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ unshift @INC, $module_dir unless grep { defined($_) && $_ eq $module_dir } @INC;
+}
 
 use LinkedRE;
+use LinkedSpec::Trace ();
+use LinkedSpec::Validation ();
 
 # UVM-style verbosity levels
 use constant {
@@ -22,15 +29,16 @@ use constant {
     DUMP_DEBUG  => 500   # Maximum detail (everything)
 };
 
-# Global verbosity level - can be set externally for debugging
-our $DUMP_VERBOSITY = DUMP_NONE;
-our $TRACE_LOG_FILE;
-our $TRACE_LOG_MODE = 'stdout'; # stdout | route | mirror
-our $TRACE_EMOJI = 0;
-our $TRACE_INDENT_LEVEL = 0;
-our $TRACE_INDENT_WIDTH = 2;
-our $TRACE_TOPIC_SPACING = 1;
-our $TRACE_INITIALIZED = 0;
+# Global trace state aliases (preserve public variable compatibility)
+our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_INDENT_LEVEL, $TRACE_INDENT_WIDTH, $TRACE_TOPIC_SPACING, $TRACE_INITIALIZED);
+*DUMP_VERBOSITY   = \$LinkedSpec::Trace::DUMP_VERBOSITY;
+*TRACE_LOG_FILE   = \$LinkedSpec::Trace::TRACE_LOG_FILE;
+*TRACE_LOG_MODE   = \$LinkedSpec::Trace::TRACE_LOG_MODE;
+*TRACE_EMOJI      = \$LinkedSpec::Trace::TRACE_EMOJI;
+*TRACE_INDENT_LEVEL = \$LinkedSpec::Trace::TRACE_INDENT_LEVEL;
+*TRACE_INDENT_WIDTH = \$LinkedSpec::Trace::TRACE_INDENT_WIDTH;
+*TRACE_TOPIC_SPACING = \$LinkedSpec::Trace::TRACE_TOPIC_SPACING;
+*TRACE_INITIALIZED = \$LinkedSpec::Trace::TRACE_INITIALIZED;
 
 #------------------------------------------------------------------------------
 # Function: _lower_is_empty_expr
@@ -161,179 +169,9 @@ sub _lower_flow_composite_expr {
 #------------------------------------------------------------------------------
 # Trace core helpers (verbosity parsing, formatting, routing, scope API)
 #------------------------------------------------------------------------------
-sub _trace_trim {
- my ($value) = @_;
- return undef unless defined $value;
- $value =~ s/^\s+|\s+$//go;
- return $value
-}
-
-sub _trace_truthy {
- my ($value) = @_;
- return 0 unless defined $value;
- return 1 if $value =~ /^(?:1|true|yes|on)$/io;
- return 0 if $value =~ /^(?:0|false|no|off)$/io;
- return $value ? 1 : 0
-}
-
-sub _trace_parse_level {
- my ($level) = @_;
- return undef unless defined $level;
- return int($level) if !ref($level) && $level =~ /^-?\d+$/o;
-
- my $name = lc(_trace_trim($level) // '');
- return DUMP_NONE   if $name eq 'none' || $name eq 'quiet';
- return DUMP_LOW    if $name eq 'low';
- return DUMP_MEDIUM if $name eq 'medium' || $name eq 'med';
- return DUMP_HIGH   if $name eq 'high';
- return DUMP_FULL   if $name eq 'full';
- return DUMP_DEBUG  if $name eq 'debug' || $name eq 'verbose';
- return undef
-}
 
 sub _trace_level_name {
- my ($level) = @_;
- return 'none'   if !defined($level) || $level <= DUMP_NONE;
- return 'low'    if $level <= DUMP_LOW;
- return 'medium' if $level <= DUMP_MEDIUM;
- return 'high'   if $level <= DUMP_HIGH;
- return 'full'   if $level <= DUMP_FULL;
- return 'debug'
-}
-
-sub _trace_emoji_prefix {
- my ($level) = @_;
- return '' unless $TRACE_EMOJI;
- return "\x{1F6D1} " if $level <= DUMP_NONE;
- return "\x{2139}\x{FE0F} " if $level <= DUMP_LOW;
- return "\x{1F50E} " if $level <= DUMP_MEDIUM;
- return "\x{1F9ED} " if $level <= DUMP_HIGH;
- return "\x{1F41E} " if $level <= DUMP_FULL;
- return "\x{1F525} "
-}
-
-sub _trace_stringify {
- my ($value) = @_;
- return undef unless defined $value;
- return $value unless ref($value);
-
- local $Data::Dumper::Terse = 1;
- local $Data::Dumper::Indent = 0;
- local $Data::Dumper::Sortkeys = 1;
- my $dump = Dumper($value);
- $dump =~ s/\s+$//o;
- return $dump
-}
-
-sub _trace_timestamp {
- my ($sec, $min, $hour, $mday, $mon, $year) = localtime();
- return sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year + 1900, $mon + 1, $mday, $hour, $min, $sec)
-}
-
-sub _trace_location {
- my ($caller_depth) = @_;
- $caller_depth = 1 unless defined $caller_depth;
- my (undef, $file, $line, $subname) = caller($caller_depth);
- $file ||= '<unknown>';
- $file =~ s{.*[\\/]}{}o;
- $subname ||= '<anon>';
- $subname =~ s/.*:://o;
- $line ||= 0;
- return ($file, $subname, $line)
-}
-
-sub _trace_build_prefix {
- my ($level, $caller_depth, $tag) = @_;
- my $timestamp = _trace_timestamp();
- my ($file, $subname, $line) = _trace_location($caller_depth);
- my $lvl_name = uc(_trace_level_name($level));
- my $indent = ' ' x ($TRACE_INDENT_LEVEL * $TRACE_INDENT_WIDTH);
- my $emoji = _trace_emoji_prefix($level);
- my $tag_prefix = defined($tag) && length($tag) ? "[$tag]" : '';
- return '['.$timestamp.']['.$lvl_name.']'.$tag_prefix.'['.$file.']['.$subname.':'.$line.'] '.$indent.$emoji
-}
-
-sub _trace_write_raw {
- my ($payload) = @_;
- return unless defined $payload;
-
- my $path = defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)
-  ? $TRACE_LOG_FILE
-  : (defined($main::LOG_FILE) && length($main::LOG_FILE) ? $main::LOG_FILE : undef);
-
- my $mode = $TRACE_LOG_MODE || 'stdout';
- if ((!defined($TRACE_LOG_FILE) || !length($TRACE_LOG_FILE)) && defined($main::LOG_FILE) && length($main::LOG_FILE) && $mode eq 'stdout') {
-  $mode = 'mirror';
- }
-
- print $payload unless $mode eq 'route';
-
- if (defined($path) && length($path) && ($mode eq 'route' || $mode eq 'mirror')) {
-  if (open(my $log_fh, '>>', $path)) {
-   print $log_fh $payload;
-   close($log_fh);
-  }
- }
-}
-
-sub _trace_emit {
- my (%args) = @_;
- my $level = $args{level};
- my $message = defined($args{message}) ? $args{message} : '';
- my $context = $args{context};
- my $caller_depth = defined($args{caller_depth}) ? $args{caller_depth} : 1;
- my $tag = $args{tag};
- my $prefix = _trace_build_prefix($level, $caller_depth, $tag);
-
- my @lines = split(/\n/, $message, -1);
- @lines = ('') unless @lines;
-
- my $payload = '';
- foreach my $line (@lines) {
-  $payload .= $prefix.$line."\n";
- }
-
- if (defined $context) {
-  my $ctx_txt = _trace_stringify($context);
-  my @ctx_lines = split(/\n/, $ctx_txt // '', -1);
-  @ctx_lines = ('') unless @ctx_lines;
-  foreach my $line (@ctx_lines) {
-   $payload .= $prefix.'  Context: '.$line."\n";
-  }
- }
-
- _trace_write_raw($payload);
- return undef
-}
-
-sub _trace_initialize {
- return if $TRACE_INITIALIZED;
-
- my $env_level = _trace_parse_level($ENV{LINKEDSPEC_TRACE_LEVEL});
- $env_level = _trace_parse_level($ENV{LINKEDSPEC_DUMP_VERBOSITY}) unless defined $env_level;
- $DUMP_VERBOSITY = $env_level if defined $env_level;
-
- $TRACE_EMOJI = _trace_truthy($ENV{LINKEDSPEC_TRACE_EMOJI}) if exists $ENV{LINKEDSPEC_TRACE_EMOJI};
-
- if (exists $ENV{LINKEDSPEC_TRACE_FILE}) {
-  my $trace_file = _trace_trim($ENV{LINKEDSPEC_TRACE_FILE});
-  $TRACE_LOG_FILE = (defined($trace_file) && length($trace_file)) ? $trace_file : undef;
-  $TRACE_LOG_MODE = _trace_truthy($ENV{LINKEDSPEC_TRACE_MIRROR_STDOUT}) ? 'mirror' : 'route';
- }
-
- if ((!defined($TRACE_LOG_FILE) || !length($TRACE_LOG_FILE)) && defined($main::LOG_FILE) && length($main::LOG_FILE)) {
-  $TRACE_LOG_FILE = $main::LOG_FILE;
-  $TRACE_LOG_MODE = 'mirror' if $TRACE_LOG_MODE eq 'stdout';
- }
-
- if (_trace_truthy($ENV{LINKEDSPEC_TRACE_RESET_FILE}) && defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)) {
-  if (open(my $reset_fh, '>', $TRACE_LOG_FILE)) {
-   close($reset_fh);
-  }
- }
-
- $TRACE_INITIALIZED = 1;
- return undef
+ return LinkedSpec::Trace::_trace_level_name(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -343,87 +181,11 @@ sub _trace_initialize {
 # Returns : hashref effective trace settings
 #------------------------------------------------------------------------------
 sub configure_trace {
- my (%opts) = @_;
- _trace_initialize();
-
- my $level_candidate =
-    exists($opts{trace_level})     ? $opts{trace_level}
-  : exists($opts{dump_verbosity})  ? $opts{dump_verbosity}
-  : exists($opts{DUMP_VERBOSITY})  ? $opts{DUMP_VERBOSITY}
-  : undef;
- my $parsed_level = _trace_parse_level($level_candidate);
- $DUMP_VERBOSITY = $parsed_level if defined $parsed_level;
- $DUMP_VERBOSITY = DUMP_DEBUG if exists($opts{debug}) && _trace_truthy($opts{debug});
- $DUMP_VERBOSITY = DUMP_NONE  if exists($opts{quiet}) && _trace_truthy($opts{quiet});
-
- if (exists $opts{trace_emoji}) {
-  $TRACE_EMOJI = _trace_truthy($opts{trace_emoji}) ? 1 : 0;
- }
-
- if (exists $opts{trace_indent_width} && defined $opts{trace_indent_width} && $opts{trace_indent_width} =~ /^\d+$/o) {
-  $TRACE_INDENT_WIDTH = $opts{trace_indent_width};
- }
-
- if (exists $opts{trace_topic_spacing}) {
-  $TRACE_TOPIC_SPACING = _trace_truthy($opts{trace_topic_spacing}) ? 1 : 0;
- }
-
- if (exists $opts{trace_log_file}) {
-  my $trace_file = _trace_trim($opts{trace_log_file});
-  if (defined($trace_file) && length($trace_file)) {
-   $TRACE_LOG_FILE = $trace_file;
-   $TRACE_LOG_MODE = 'route' unless exists $opts{trace_log_mode};
-  } else {
-   $TRACE_LOG_FILE = undef;
-   $TRACE_LOG_MODE = 'stdout' unless exists $opts{trace_log_mode};
-  }
- }
-
- if (exists $opts{trace_log_mode}) {
-  my $mode = lc(_trace_trim($opts{trace_log_mode}) // '');
-  $mode = 'stdout' unless $mode eq 'route' || $mode eq 'mirror' || $mode eq 'stdout';
-  $TRACE_LOG_MODE = $mode;
- }
-
- if (exists $opts{trace_reset_log} && _trace_truthy($opts{trace_reset_log}) && defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)) {
-  if (open(my $reset_fh, '>', $TRACE_LOG_FILE)) {
-   close($reset_fh);
-  }
- }
-
- return {
-  trace_level      => _trace_level_name($DUMP_VERBOSITY),
-  dump_verbosity   => $DUMP_VERBOSITY,
-  trace_log_file   => $TRACE_LOG_FILE,
-  trace_log_mode   => $TRACE_LOG_MODE,
-  trace_emoji      => $TRACE_EMOJI ? 1 : 0,
-  trace_indent     => $TRACE_INDENT_LEVEL,
-  trace_indent_width => $TRACE_INDENT_WIDTH,
-  trace_topic_spacing => $TRACE_TOPIC_SPACING ? 1 : 0,
- }
+ return LinkedSpec::Trace::configure_trace(@_)
 }
 
 sub _apply_trace_options {
- my ($option) = @_;
- return unless ref($option) eq 'HASH';
- my %trace_opts;
- foreach my $key (qw/
-  trace_level
-  dump_verbosity
-  DUMP_VERBOSITY
-  trace_emoji
-  trace_indent_width
-  trace_topic_spacing
-  trace_log_file
-  trace_log_mode
-  trace_reset_log
-  debug
-  quiet
- /) {
-  $trace_opts{$key} = $option->{$key} if exists $option->{$key};
- }
- configure_trace(%trace_opts) if %trace_opts;
- return undef
+ return LinkedSpec::Trace::_apply_trace_options(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -433,25 +195,7 @@ sub _apply_trace_options {
 # Returns : scope hashref (pass to trace_exit)
 #------------------------------------------------------------------------------
 sub trace_enter {
- my ($topic, $details, $level) = @_;
- _trace_initialize();
- $level = DUMP_HIGH unless defined $level;
- $level = _trace_parse_level($level) // DUMP_HIGH;
-
- my $scope = {
-  topic  => defined($topic) ? $topic : '<scope>',
-  level  => $level,
-  active => 0,
- };
-
- return $scope unless should_dump($level);
-
- _trace_write_raw("\n") if $TRACE_TOPIC_SPACING;
- my $ctx = _trace_stringify($details);
- log_output($level, "ENTER $scope->{topic}", $ctx, { caller_depth => 2 });
- ++$TRACE_INDENT_LEVEL;
- $scope->{active} = 1;
- return $scope
+ return LinkedSpec::Trace::trace_enter(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -461,17 +205,7 @@ sub trace_enter {
 # Returns : undef
 #------------------------------------------------------------------------------
 sub trace_exit {
- my ($scope, $details, $level) = @_;
- return undef unless $scope && ref($scope) eq 'HASH';
- return undef unless $scope->{active};
-
- my $effective_level = defined($level) ? (_trace_parse_level($level) // $scope->{level}) : $scope->{level};
- $TRACE_INDENT_LEVEL-- if $TRACE_INDENT_LEVEL > 0;
- my $ctx = _trace_stringify($details);
- log_output($effective_level, "EXIT $scope->{topic}", $ctx, { caller_depth => 2 });
- _trace_write_raw("\n") if $TRACE_TOPIC_SPACING;
- $scope->{active} = 0;
- return undef
+ return LinkedSpec::Trace::trace_exit(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -481,13 +215,7 @@ sub trace_exit {
 # Returns : boolean normalized taken value
 #------------------------------------------------------------------------------
 sub trace_decision {
- my ($decision_name, $taken, $reason, $level) = @_;
- _trace_initialize();
- $level = DUMP_DEBUG unless defined $level;
- $level = _trace_parse_level($level) // DUMP_DEBUG;
- my $status = $taken ? 'TAKEN' : 'SKIPPED';
- log_output($level, 'DECISION '.($decision_name // '<decision>')." => $status", $reason, { caller_depth => 2 });
- return $taken ? 1 : 0
+ return LinkedSpec::Trace::trace_decision(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -498,24 +226,7 @@ sub trace_decision {
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_output {
- my ($level, $message, $context, $opts) = @_;
- _trace_initialize();
- $level = DUMP_NONE unless defined $level;
- $level = _trace_parse_level($level) // DUMP_NONE;
- return if $level > $DUMP_VERBOSITY;
-
- my $caller_depth = 1;
- if (ref($opts) eq 'HASH' && exists $opts->{caller_depth}) {
-  $caller_depth = $opts->{caller_depth};
- }
-
- _trace_emit(
-  level => $level,
-  message => $message,
-  context => $context,
-  caller_depth => $caller_depth,
- );
- return undef
+ return LinkedSpec::Trace::log_output(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -525,29 +236,7 @@ sub log_output {
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_dump {
- my ($message, $opts) = @_;
- _trace_initialize();
-
- my $level = DUMP_DEBUG;
- if (ref($opts) eq 'HASH' && exists($opts->{level})) {
-  $level = _trace_parse_level($opts->{level}) // DUMP_DEBUG;
- }
- if (ref($opts) eq 'HASH' && $opts->{enforce_level}) {
-  return if $level > $DUMP_VERBOSITY;
- }
-
- my $caller_depth = 1;
- if (ref($opts) eq 'HASH' && exists $opts->{caller_depth}) {
-  $caller_depth = $opts->{caller_depth};
- }
-
- _trace_emit(
-  level => $level,
-  message => $message,
-  caller_depth => $caller_depth,
-  tag => 'DUMP',
- );
- return undef
+ return LinkedSpec::Trace::log_dump(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -557,11 +246,7 @@ sub log_dump {
 # Returns : boolean (true when current verbosity enables this level)
 #------------------------------------------------------------------------------
 sub should_dump {
- my ($level) = @_;
- _trace_initialize();
- $level = DUMP_NONE unless defined $level;
- $level = _trace_parse_level($level) // DUMP_NONE;
- return $DUMP_VERBOSITY >= $level
+ return LinkedSpec::Trace::should_dump(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -572,27 +257,7 @@ sub should_dump {
 # Returns : hashref { line_number, current_line, prev_line, next_line, position }
 #------------------------------------------------------------------------------
 sub get_dsl_context {
-    my ($spec_content, $position) = @_;
-    
-    # Find line number and context around the position
-    my $before_pos = substr($$spec_content, 0, $position);
-    my $line_number = 1 + ($before_pos =~ tr/\n//);
-    
-    # Get the line containing the position
-    my @lines = split(/\n/, $$spec_content);
-    my $current_line = $lines[$line_number - 1] || "";
-    
-    # Get surrounding context (previous and next lines)
-    my $prev_line = $line_number > 1 ? $lines[$line_number - 2] : "";
-    my $next_line = $line_number < @lines ? $lines[$line_number - 1] : "";
-    
-    return {
-        line_number => $line_number,
-        current_line => $current_line,
-        prev_line => $prev_line,
-        next_line => $next_line,
-        position => $position
-    };
+ return LinkedSpec::Validation::get_dsl_context(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -603,26 +268,7 @@ sub get_dsl_context {
 # Returns : undef (side effects only: logging)
 #------------------------------------------------------------------------------
 sub report_dsl_error {
-    my ($spec_content, $position, $error_msg, $suggestion) = @_;
-    
-    my $context = get_dsl_context($spec_content, $position);
-    
-    my $error = "DSL Error at line $context->{line_number}:\n";
-    $error .= "  $error_msg\n";
-    $error .= "  Line: $context->{current_line}\n";
-    
-    if ($context->{prev_line}) {
-        $error .= "  Previous: $context->{prev_line}\n";
-    }
-    if ($context->{next_line}) {
-        $error .= "  Next: $context->{next_line}\n";
-    }
-    
-    if ($suggestion) {
-        $error .= "  Suggestion: $suggestion\n";
-    }
-    
-    log_output(DUMP_NONE, $error, "DSL validation failed");
+ return LinkedSpec::Validation::report_dsl_error(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -632,44 +278,7 @@ sub report_dsl_error {
 # Returns : boolean (true if minimal shape/entry rule expectations are met)
 #------------------------------------------------------------------------------
 sub validate_spec_content {
-    my ($spec_content) = @_;
-    
-    # Check if spec content is a string reference
-    unless (ref($spec_content) eq 'SCALAR') {
-        log_output(DUMP_NONE, "Invalid spec content type", "Expected SCALAR reference, got " . ref($spec_content));
-        return 0;
-    }
-    
-    # Check if spec content is not empty
-    unless (length($$spec_content) > 0) {
-        log_output(DUMP_NONE, "Spec content is empty", "Spec file must contain content");
-        return 0;
-    }
-    
-    # Check for basic .spec file structure (skip comment lines)
-    my @lines = split(/\n/, $$spec_content);
-    my $found_rule = 0;
-    
-    foreach my $line (@lines) {
-        # Skip empty lines and comment lines
-        next if $line =~ /^\s*$/;
-        next if $line =~ /^\s*#/;
-        
-        # Check if this line starts with a rule definition
-        if ($line =~ /^\s*\w+::/) {
-            $found_rule = 1;
-            last;
-        }
-    }
-    
-    unless ($found_rule) {
-        report_dsl_error($spec_content, 0, 
-            "Spec file must start with a rule definition", 
-            "Add a rule like 'RuleName::' at the beginning");
-        return 0;
-    }
-    
-    return 1;
+ return LinkedSpec::Validation::validate_spec_content(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -680,39 +289,7 @@ sub validate_spec_content {
 # Returns : boolean
 #------------------------------------------------------------------------------
 sub validate_rule_definition {
-    my ($rule_name, $rule_def) = @_;
-    
-    # Check if rule definition is a hash reference
-    unless (ref($rule_def) eq 'HASH') {
-        log_output(DUMP_NONE, "Invalid rule definition for '$rule_name'", "Expected HASH reference, got " . ref($rule_def));
-        return 0;
-    }
-    
-    # Check required fields exist
-    unless (exists $rule_def->{handler}) {
-        log_output(DUMP_NONE, "Rule '$rule_name' missing required 'handler' field", "All rules must define handler code");
-        return 0;
-    }
-    
-    # Top-level rules (entry points) may not have 're' field
-    if (exists $rule_def->{re}) {
-        # Validate regex array
-        unless (ref($rule_def->{re}) eq 'ARRAY') {
-            log_output(DUMP_NONE, "Rule '$rule_name' 're' field must be an array", "Got " . ref($rule_def->{re}));
-            return 0;
-        }
-        
-        # Check regex patterns are valid
-        for my $i (0..$#{$rule_def->{re}}) {
-            my $regex = $rule_def->{re}[$i];
-            eval { qr/$regex/ } or do {
-                log_output(DUMP_NONE, "Invalid regex in rule '$rule_name' at index $i", "Error: $@");
-                return 0;
-            };
-        }
-    }
-    
-    return 1;
+ return LinkedSpec::Validation::validate_rule_definition(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -723,74 +300,7 @@ sub validate_rule_definition {
 # Returns : boolean
 #------------------------------------------------------------------------------
 sub validate_gdata_references {
-    my ($gdata, $spec) = @_;
-    
-    # Check if gdata is a hash reference
-    unless (ref($gdata) eq 'HASH') {
-        log_output(DUMP_NONE, "Invalid gdata structure", "Expected HASH reference, got " . ref($gdata));
-        return 0;
-    }
-    
-    # Check if spec is a hash reference
-    unless (ref($spec) eq 'HASH') {
-        log_output(DUMP_NONE, "Invalid spec structure", "Expected HASH reference, got " . ref($spec));
-        return 0;
-    }
-    
-    # Validate each gdata entry (compiled regex objects)
-    for my $rule_name (keys %$gdata) {
-        my $gdata_entry = $gdata->{$rule_name};
-        
-        # Check if referenced rule exists in spec
-        unless (exists $spec->{$rule_name}) {
-            log_output(DUMP_NONE, "Gdata references non-existent rule '$rule_name'", "Rule not found in spec");
-            return 0;
-        }
-        
-        # Validate gdata entry is a compiled regex
-        unless (ref($gdata_entry) eq 'Regexp') {
-            log_output(DUMP_NONE, "Invalid gdata entry for rule '$rule_name'", "Expected compiled regex, got " . ref($gdata_entry));
-            return 0;
-        }
-    }
-    
-    # Validate spec rule structures
-    for my $rule_name (keys %$spec) {
-        my $rule_def = $spec->{$rule_name};
-        
-        # Validate rule definition
-        unless (validate_rule_definition($rule_name, $rule_def)) {
-            return 0;
-        }
-        
-        # Validate gdata references within each rule
-        if (exists $rule_def->{gdata} && ref($rule_def->{gdata}) eq 'ARRAY') {
-            for my $i (0..$#{$rule_def->{gdata}}) {
-                my $element = $rule_def->{gdata}[$i];
-                unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
-                    log_output(DUMP_NONE, "Invalid gdata element at index $i for rule '$rule_name'", "Expected HASH with 'label' and 'idx' keys");
-                    return 0;
-                }
-                
-                # Check if referenced rule exists
-                my $ref_rule = $element->{label};
-                unless (exists $spec->{$ref_rule}) {
-                    log_output(DUMP_NONE, "Gdata element references non-existent rule '$ref_rule'", "Rule not found in spec");
-                    return 0;
-                }
-                
-                # Check if regex index is valid
-                my $ref_idx = $element->{idx};
-                my $ref_rule_def = $spec->{$ref_rule};
-                unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
-                    log_output(DUMP_NONE, "Invalid regex index $ref_idx for rule '$ref_rule'", "Index out of bounds");
-                    return 0;
-                }
-            }
-        }
-    }
-    
-    return 1;
+ return LinkedSpec::Validation::validate_gdata_references(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -801,83 +311,7 @@ sub validate_gdata_references {
 # Returns : boolean
 #------------------------------------------------------------------------------
 sub validate_dsl_syntax {
-    my ($spec_content) = @_;
-    
-    my @lines = split(/\n/, $$spec_content);
-    my @defined_rules = ();
-    my @used_rules = ();
-    
-    # First pass: collect all defined rules and used rules
-    for my $line (@lines) {
-        # Skip empty lines and comments
-        next if $line =~ /^\s*$/;
-        next if $line =~ /^\s*#/;
-        
-        # Check for rule definitions
-        if ($line =~ /^\s*(\w+)::/) {
-            my $rule_name = $1;
-            push @defined_rules, $rule_name;
-            
-            # Check for duplicate rule definitions
-            if (grep { $_ eq $rule_name } @defined_rules[0..$#defined_rules-1]) {
-                my $position = index($$spec_content, $line);
-                report_dsl_error($spec_content, $position,
-                    "Duplicate rule definition: '$rule_name'",
-                    "Remove the duplicate rule or rename one of them");
-                return 0;
-            }
-        }
-        
-        # Collect used rules (for warnings only, not errors)
-        if ($line =~ /->\s*(\w+)(?:\[(\d+)\])?/) {
-            my $rule_name = $1;
-            push @used_rules, $rule_name;
-        }
-    }
-    
-    # Second pass: validate syntax
-    for my $line (@lines) {
-        # Skip empty lines and comments
-        next if $line =~ /^\s*$/;
-        next if $line =~ /^\s*#/;
-
-        # Check regex literals appearing in rule-definition lines.
-        # Handles escaped delimiter slashes (e.g. \/\/) correctly.
-        my ($rhs) = $line =~ /^\s*\w+\s*:\s*(.*)$/;
-        next unless defined $rhs;
-
-        my @regex_literals = extract_regex_literals_from_rule_rhs($rhs);
-        for my $regex_literal (@regex_literals) {
-            my $regex_pattern = $regex_literal;
-            $regex_pattern =~ s{^/|/$}{}g;
-
-            eval { qr/$regex_pattern/ } or do {
-                my $position = index($$spec_content, $line);
-                report_dsl_error($spec_content, $position,
-                    "Invalid regex pattern: $regex_literal",
-                    "Check the regex syntax and ensure proper escaping");
-                return 0;
-            };
-        }
-    }
-    
-    # Check for unused rules (warning only)
-    my %defined_rules = map { $_ => 1 } @defined_rules;
-    my %used_rules = map { $_ => 1 } @used_rules;
-
-    my @unused_rules = grep { !$used_rules{$_} } @defined_rules;
-    if (@unused_rules) {
-        log_output(DUMP_LOW, "Warning: Unused rules detected", "Rules defined but never used: " . join(", ", @unused_rules));
-    }
-    
-    # Check for undefined rules (warning only, since order doesn't matter)
-    my @undefined_rules = grep { !$defined_rules{$_} } @used_rules;
-    if (@undefined_rules) {
-        my @unique_undefined = do { my %seen; grep { !$seen{$_}++ } @undefined_rules };
-        log_output(DUMP_LOW, "Warning: Undefined rules referenced", "Rules referenced but not defined: " . join(", ", @unique_undefined));
-    }
-    
-    return 1;
+ return LinkedSpec::Validation::validate_dsl_syntax(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -888,14 +322,7 @@ sub validate_dsl_syntax {
 # Returns : list of regex literal strings (including surrounding /.../)
 #------------------------------------------------------------------------------
 sub extract_regex_literals_from_rule_rhs {
-    my ($rhs) = @_;
-    my @regex_literals;
-
-    while ($rhs =~ /(?<!\\)\/(?:\\\\.|[^\/])*?(?<!\\)\//g) {
-        push @regex_literals, $&;
-    }
-
-    return @regex_literals;
+ return LinkedSpec::Validation::extract_regex_literals_from_rule_rhs(@_)
 }
 
 #------------------------------------------------------------------------------
