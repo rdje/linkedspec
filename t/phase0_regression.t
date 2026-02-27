@@ -2316,6 +2316,48 @@ subtest 'corpus_regression' => sub {
     }
 };
 
+subtest 'trace_output_includes_metadata_and_decisions' => sub {
+    plan tests => 5;
+
+    my ($ok, $parser, $err, $out, $warn) = run_get_parser_with_captured_io(
+        'Lispish',
+        trace_level => 'debug',
+        trace_log_mode => 'stdout',
+        trace_topic_spacing => 0,
+    );
+
+    ok($ok, 'get_parser with debug tracing returns without die') or diag(normalize_error($err));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser with debug tracing returns parser coderef');
+    like($out, qr/\[[A-Z]+\]\[LinkedSpec\.pm\]\[[^\]]+:\d+\]/, 'trace includes level + file + function:line metadata');
+    like($out, qr/ENTER LinkedSpec::get_parser|ENTER LinkedSpec::Get/, 'trace includes function entry events');
+    like($out, qr/DECISION [^\n]+ => (?:TAKEN|SKIPPED)/, 'trace includes decision/branch events');
+};
+
+subtest 'trace_log_file_route_redirects_stdout_to_trace_log' => sub {
+    plan tests => 6;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $trace_log = File::Spec->catfile($tmp_dir, 'trace.log');
+
+    my ($ok, $parser, $err, $out, $warn) = run_get_parser_with_captured_io(
+        'Lispish',
+        trace_level => 'high',
+        trace_log_file => $trace_log,
+        trace_log_mode => 'route',
+        trace_reset_log => 1,
+        trace_topic_spacing => 0,
+    );
+
+    ok($ok, 'get_parser with routed trace log returns without die') or diag(normalize_error($err));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser with routed trace log returns parser coderef');
+    ok(-f $trace_log, 'trace.log file created');
+    my $trace_content = slurp($trace_log);
+    ok(length($trace_content) > 0, 'trace.log captures routed trace output');
+    unlike($out, qr/ENTER LinkedSpec::get_parser|DECISION [^\n]+ => (?:TAKEN|SKIPPED)/, 'stdout does not include routed trace events');
+    like($trace_content, qr/ENTER LinkedSpec::get_parser/, 'trace.log includes get_parser trace events');
+};
+
 done_testing();
 
 sub discover_specs {
@@ -2420,7 +2462,7 @@ sub run_with_exit_trapped {
 }
 
 sub run_get_parser_with_captured_io {
-    my ($spec_name) = @_;
+    my ($spec_name, @opts) = @_;
     my ($ret, $err, $stdout, $stderr);
     $err = '';
     $stdout = '';
@@ -2431,7 +2473,7 @@ sub run_get_parser_with_captured_io {
         local *STDERR;
         open(STDOUT, '>', \$stdout) or die "Unable to capture STDOUT: $!";
         open(STDERR, '>', \$stderr) or die "Unable to capture STDERR: $!";
-        $ret = LinkedSpec::get_parser($spec_name);
+        $ret = LinkedSpec::get_parser($spec_name, @opts);
         1;
     };
 

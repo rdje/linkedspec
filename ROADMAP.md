@@ -46,6 +46,35 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 - Exit criteria:
   - LinkedSpec core can compile/run specs with minimal dependency surface.
 
+## Phase 1A: LinkedSpec.pm Modularization (New Priority)
+- Keep `perl/LinkedSpec.pm` as a thin orchestration façade with stable public APIs (`get_parser`, `Get`, compatibility helpers).
+- Extract cohesive internal concerns into focused submodules/packages with explicit interfaces and behavior parity.
+- Module boundaries (target structure):
+  - `perl/LinkedSpec/Trace.pm`
+    - Trace config + emission/routing (`configure_trace`, `log_output`, `log_dump`, `trace_enter`, `trace_exit`, `trace_decision`).
+  - `perl/LinkedSpec/Validation.pm`
+    - Spec and rule/gdata validation (`validate_spec_content`, `validate_dsl_syntax`, `validate_rule_definition`, `validate_gdata_references`).
+  - `perl/LinkedSpec/Resolver.pm`
+    - Spec path resolution + source loading (`_resolve_local_spec_path`, fallback rules, file-open error surfaces).
+  - `perl/LinkedSpec/RuleIR.pm`
+    - Rule IR collection/planning/validation/emit-context assembly.
+  - `perl/LinkedSpec/ActionRewriter.pm`
+    - Helper-contract catalog + canonical action-IR scanning/lowering.
+  - `perl/LinkedSpec/Compiler.pm`
+    - `Get` compile pipeline orchestration.
+  - `perl/LinkedSpec/BootstrapSpec.pm` (later slice)
+    - Bootstrap grammar descriptor + bootstrap parse handlers.
+- Shared-state policy:
+  - Introduce/expand a shared context object (hashref) for cross-cutting state (`top_rule`, trace/runtime config, compile metadata) to reduce package-global coupling during extraction.
+- Rollout policy:
+  - Incremental, no-behavior-change slices.
+  - Keep `t/phase0_regression.t` green after every slice.
+  - Start with lowest-risk extractions first: **Trace -> Validation -> Resolver**, then proceed to RuleIR/ActionRewriter/Compiler and finally BootstrapSpec.
+- Exit criteria:
+  - `LinkedSpec.pm` delegates most internal work to extracted modules.
+  - Existing behavior and regression baseline preserved.
+  - Public API compatibility maintained.
+
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.
 - Provide high-quality errors with line/column context.
@@ -138,6 +167,7 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
 
 ## Immediate Next Steps
+- Start Phase 1A modularization in no-behavior-change slices with Trace/Validation/Resolver extraction first, while keeping the façade API in `LinkedSpec.pm`.
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
@@ -157,6 +187,11 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 - Phase 0: Active and green (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
 - Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
 - Phase 1: In progress.
+- Phase 1A (LinkedSpec.pm modularization): Planned and queued as next execution track.
+  - Planned first slice: extract tracing/logging APIs to `LinkedSpec/Trace.pm`.
+  - Planned second slice: extract spec/rule/gdata validation APIs to `LinkedSpec/Validation.pm`.
+  - Planned third slice: extract spec path/file resolution APIs to `LinkedSpec/Resolver.pm`.
+  - Planned follow-up slices: RuleIR + ActionRewriter + Compiler + BootstrapSpec extraction.
   - Landed: module-relative spec resolution in `LinkedSpec::get_parser`.
   - Landed: lazy fallback loading for `PathSearch`.
   - Landed: removal of eager `PPlugin` load at module import time; `AUTOLOAD` remains lazy.

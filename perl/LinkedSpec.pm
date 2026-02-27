@@ -24,6 +24,13 @@ use constant {
 
 # Global verbosity level - can be set externally for debugging
 our $DUMP_VERBOSITY = DUMP_NONE;
+our $TRACE_LOG_FILE;
+our $TRACE_LOG_MODE = 'stdout'; # stdout | route | mirror
+our $TRACE_EMOJI = 0;
+our $TRACE_INDENT_LEVEL = 0;
+our $TRACE_INDENT_WIDTH = 2;
+our $TRACE_TOPIC_SPACING = 1;
+our $TRACE_INITIALIZED = 0;
 
 #------------------------------------------------------------------------------
 # Function: _lower_is_empty_expr
@@ -152,55 +159,395 @@ sub _lower_flow_composite_expr {
 }
 
 #------------------------------------------------------------------------------
+# Trace core helpers (verbosity parsing, formatting, routing, scope API)
+#------------------------------------------------------------------------------
+sub _trace_trim {
+ my ($value) = @_;
+ return undef unless defined $value;
+ $value =~ s/^\s+|\s+$//go;
+ return $value
+}
+
+sub _trace_truthy {
+ my ($value) = @_;
+ return 0 unless defined $value;
+ return 1 if $value =~ /^(?:1|true|yes|on)$/io;
+ return 0 if $value =~ /^(?:0|false|no|off)$/io;
+ return $value ? 1 : 0
+}
+
+sub _trace_parse_level {
+ my ($level) = @_;
+ return undef unless defined $level;
+ return int($level) if !ref($level) && $level =~ /^-?\d+$/o;
+
+ my $name = lc(_trace_trim($level) // '');
+ return DUMP_NONE   if $name eq 'none' || $name eq 'quiet';
+ return DUMP_LOW    if $name eq 'low';
+ return DUMP_MEDIUM if $name eq 'medium' || $name eq 'med';
+ return DUMP_HIGH   if $name eq 'high';
+ return DUMP_FULL   if $name eq 'full';
+ return DUMP_DEBUG  if $name eq 'debug' || $name eq 'verbose';
+ return undef
+}
+
+sub _trace_level_name {
+ my ($level) = @_;
+ return 'none'   if !defined($level) || $level <= DUMP_NONE;
+ return 'low'    if $level <= DUMP_LOW;
+ return 'medium' if $level <= DUMP_MEDIUM;
+ return 'high'   if $level <= DUMP_HIGH;
+ return 'full'   if $level <= DUMP_FULL;
+ return 'debug'
+}
+
+sub _trace_emoji_prefix {
+ my ($level) = @_;
+ return '' unless $TRACE_EMOJI;
+ return "\x{1F6D1} " if $level <= DUMP_NONE;
+ return "\x{2139}\x{FE0F} " if $level <= DUMP_LOW;
+ return "\x{1F50E} " if $level <= DUMP_MEDIUM;
+ return "\x{1F9ED} " if $level <= DUMP_HIGH;
+ return "\x{1F41E} " if $level <= DUMP_FULL;
+ return "\x{1F525} "
+}
+
+sub _trace_stringify {
+ my ($value) = @_;
+ return undef unless defined $value;
+ return $value unless ref($value);
+
+ local $Data::Dumper::Terse = 1;
+ local $Data::Dumper::Indent = 0;
+ local $Data::Dumper::Sortkeys = 1;
+ my $dump = Dumper($value);
+ $dump =~ s/\s+$//o;
+ return $dump
+}
+
+sub _trace_timestamp {
+ my ($sec, $min, $hour, $mday, $mon, $year) = localtime();
+ return sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year + 1900, $mon + 1, $mday, $hour, $min, $sec)
+}
+
+sub _trace_location {
+ my ($caller_depth) = @_;
+ $caller_depth = 1 unless defined $caller_depth;
+ my (undef, $file, $line, $subname) = caller($caller_depth);
+ $file ||= '<unknown>';
+ $file =~ s{.*[\\/]}{}o;
+ $subname ||= '<anon>';
+ $subname =~ s/.*:://o;
+ $line ||= 0;
+ return ($file, $subname, $line)
+}
+
+sub _trace_build_prefix {
+ my ($level, $caller_depth, $tag) = @_;
+ my $timestamp = _trace_timestamp();
+ my ($file, $subname, $line) = _trace_location($caller_depth);
+ my $lvl_name = uc(_trace_level_name($level));
+ my $indent = ' ' x ($TRACE_INDENT_LEVEL * $TRACE_INDENT_WIDTH);
+ my $emoji = _trace_emoji_prefix($level);
+ my $tag_prefix = defined($tag) && length($tag) ? "[$tag]" : '';
+ return '['.$timestamp.']['.$lvl_name.']'.$tag_prefix.'['.$file.']['.$subname.':'.$line.'] '.$indent.$emoji
+}
+
+sub _trace_write_raw {
+ my ($payload) = @_;
+ return unless defined $payload;
+
+ my $path = defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)
+  ? $TRACE_LOG_FILE
+  : (defined($main::LOG_FILE) && length($main::LOG_FILE) ? $main::LOG_FILE : undef);
+
+ my $mode = $TRACE_LOG_MODE || 'stdout';
+ if ((!defined($TRACE_LOG_FILE) || !length($TRACE_LOG_FILE)) && defined($main::LOG_FILE) && length($main::LOG_FILE) && $mode eq 'stdout') {
+  $mode = 'mirror';
+ }
+
+ print $payload unless $mode eq 'route';
+
+ if (defined($path) && length($path) && ($mode eq 'route' || $mode eq 'mirror')) {
+  if (open(my $log_fh, '>>', $path)) {
+   print $log_fh $payload;
+   close($log_fh);
+  }
+ }
+}
+
+sub _trace_emit {
+ my (%args) = @_;
+ my $level = $args{level};
+ my $message = defined($args{message}) ? $args{message} : '';
+ my $context = $args{context};
+ my $caller_depth = defined($args{caller_depth}) ? $args{caller_depth} : 1;
+ my $tag = $args{tag};
+ my $prefix = _trace_build_prefix($level, $caller_depth, $tag);
+
+ my @lines = split(/\n/, $message, -1);
+ @lines = ('') unless @lines;
+
+ my $payload = '';
+ foreach my $line (@lines) {
+  $payload .= $prefix.$line."\n";
+ }
+
+ if (defined $context) {
+  my $ctx_txt = _trace_stringify($context);
+  my @ctx_lines = split(/\n/, $ctx_txt // '', -1);
+  @ctx_lines = ('') unless @ctx_lines;
+  foreach my $line (@ctx_lines) {
+   $payload .= $prefix.'  Context: '.$line."\n";
+  }
+ }
+
+ _trace_write_raw($payload);
+ return undef
+}
+
+sub _trace_initialize {
+ return if $TRACE_INITIALIZED;
+
+ my $env_level = _trace_parse_level($ENV{LINKEDSPEC_TRACE_LEVEL});
+ $env_level = _trace_parse_level($ENV{LINKEDSPEC_DUMP_VERBOSITY}) unless defined $env_level;
+ $DUMP_VERBOSITY = $env_level if defined $env_level;
+
+ $TRACE_EMOJI = _trace_truthy($ENV{LINKEDSPEC_TRACE_EMOJI}) if exists $ENV{LINKEDSPEC_TRACE_EMOJI};
+
+ if (exists $ENV{LINKEDSPEC_TRACE_FILE}) {
+  my $trace_file = _trace_trim($ENV{LINKEDSPEC_TRACE_FILE});
+  $TRACE_LOG_FILE = (defined($trace_file) && length($trace_file)) ? $trace_file : undef;
+  $TRACE_LOG_MODE = _trace_truthy($ENV{LINKEDSPEC_TRACE_MIRROR_STDOUT}) ? 'mirror' : 'route';
+ }
+
+ if ((!defined($TRACE_LOG_FILE) || !length($TRACE_LOG_FILE)) && defined($main::LOG_FILE) && length($main::LOG_FILE)) {
+  $TRACE_LOG_FILE = $main::LOG_FILE;
+  $TRACE_LOG_MODE = 'mirror' if $TRACE_LOG_MODE eq 'stdout';
+ }
+
+ if (_trace_truthy($ENV{LINKEDSPEC_TRACE_RESET_FILE}) && defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)) {
+  if (open(my $reset_fh, '>', $TRACE_LOG_FILE)) {
+   close($reset_fh);
+  }
+ }
+
+ $TRACE_INITIALIZED = 1;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: configure_trace
+# Purpose : Runtime trace configuration API (verbosity, sink routing, style).
+# Args    : (%opts)
+# Returns : hashref effective trace settings
+#------------------------------------------------------------------------------
+sub configure_trace {
+ my (%opts) = @_;
+ _trace_initialize();
+
+ my $level_candidate =
+    exists($opts{trace_level})     ? $opts{trace_level}
+  : exists($opts{dump_verbosity})  ? $opts{dump_verbosity}
+  : exists($opts{DUMP_VERBOSITY})  ? $opts{DUMP_VERBOSITY}
+  : undef;
+ my $parsed_level = _trace_parse_level($level_candidate);
+ $DUMP_VERBOSITY = $parsed_level if defined $parsed_level;
+ $DUMP_VERBOSITY = DUMP_DEBUG if exists($opts{debug}) && _trace_truthy($opts{debug});
+ $DUMP_VERBOSITY = DUMP_NONE  if exists($opts{quiet}) && _trace_truthy($opts{quiet});
+
+ if (exists $opts{trace_emoji}) {
+  $TRACE_EMOJI = _trace_truthy($opts{trace_emoji}) ? 1 : 0;
+ }
+
+ if (exists $opts{trace_indent_width} && defined $opts{trace_indent_width} && $opts{trace_indent_width} =~ /^\d+$/o) {
+  $TRACE_INDENT_WIDTH = $opts{trace_indent_width};
+ }
+
+ if (exists $opts{trace_topic_spacing}) {
+  $TRACE_TOPIC_SPACING = _trace_truthy($opts{trace_topic_spacing}) ? 1 : 0;
+ }
+
+ if (exists $opts{trace_log_file}) {
+  my $trace_file = _trace_trim($opts{trace_log_file});
+  if (defined($trace_file) && length($trace_file)) {
+   $TRACE_LOG_FILE = $trace_file;
+   $TRACE_LOG_MODE = 'route' unless exists $opts{trace_log_mode};
+  } else {
+   $TRACE_LOG_FILE = undef;
+   $TRACE_LOG_MODE = 'stdout' unless exists $opts{trace_log_mode};
+  }
+ }
+
+ if (exists $opts{trace_log_mode}) {
+  my $mode = lc(_trace_trim($opts{trace_log_mode}) // '');
+  $mode = 'stdout' unless $mode eq 'route' || $mode eq 'mirror' || $mode eq 'stdout';
+  $TRACE_LOG_MODE = $mode;
+ }
+
+ if (exists $opts{trace_reset_log} && _trace_truthy($opts{trace_reset_log}) && defined($TRACE_LOG_FILE) && length($TRACE_LOG_FILE)) {
+  if (open(my $reset_fh, '>', $TRACE_LOG_FILE)) {
+   close($reset_fh);
+  }
+ }
+
+ return {
+  trace_level      => _trace_level_name($DUMP_VERBOSITY),
+  dump_verbosity   => $DUMP_VERBOSITY,
+  trace_log_file   => $TRACE_LOG_FILE,
+  trace_log_mode   => $TRACE_LOG_MODE,
+  trace_emoji      => $TRACE_EMOJI ? 1 : 0,
+  trace_indent     => $TRACE_INDENT_LEVEL,
+  trace_indent_width => $TRACE_INDENT_WIDTH,
+  trace_topic_spacing => $TRACE_TOPIC_SPACING ? 1 : 0,
+ }
+}
+
+sub _apply_trace_options {
+ my ($option) = @_;
+ return unless ref($option) eq 'HASH';
+ my %trace_opts;
+ foreach my $key (qw/
+  trace_level
+  dump_verbosity
+  DUMP_VERBOSITY
+  trace_emoji
+  trace_indent_width
+  trace_topic_spacing
+  trace_log_file
+  trace_log_mode
+  trace_reset_log
+  debug
+  quiet
+ /) {
+  $trace_opts{$key} = $option->{$key} if exists $option->{$key};
+ }
+ configure_trace(%trace_opts) if %trace_opts;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: trace_enter
+# Purpose : Structured entry trace event for high-level pipeline/functions.
+# Args    : ($topic, $details, $level)
+# Returns : scope hashref (pass to trace_exit)
+#------------------------------------------------------------------------------
+sub trace_enter {
+ my ($topic, $details, $level) = @_;
+ _trace_initialize();
+ $level = DUMP_HIGH unless defined $level;
+ $level = _trace_parse_level($level) // DUMP_HIGH;
+
+ my $scope = {
+  topic  => defined($topic) ? $topic : '<scope>',
+  level  => $level,
+  active => 0,
+ };
+
+ return $scope unless should_dump($level);
+
+ _trace_write_raw("\n") if $TRACE_TOPIC_SPACING;
+ my $ctx = _trace_stringify($details);
+ log_output($level, "ENTER $scope->{topic}", $ctx, { caller_depth => 2 });
+ ++$TRACE_INDENT_LEVEL;
+ $scope->{active} = 1;
+ return $scope
+}
+
+#------------------------------------------------------------------------------
+# Function: trace_exit
+# Purpose : Structured exit trace event paired with trace_enter.
+# Args    : ($scope, $details, $level)
+# Returns : undef
+#------------------------------------------------------------------------------
+sub trace_exit {
+ my ($scope, $details, $level) = @_;
+ return undef unless $scope && ref($scope) eq 'HASH';
+ return undef unless $scope->{active};
+
+ my $effective_level = defined($level) ? (_trace_parse_level($level) // $scope->{level}) : $scope->{level};
+ $TRACE_INDENT_LEVEL-- if $TRACE_INDENT_LEVEL > 0;
+ my $ctx = _trace_stringify($details);
+ log_output($effective_level, "EXIT $scope->{topic}", $ctx, { caller_depth => 2 });
+ _trace_write_raw("\n") if $TRACE_TOPIC_SPACING;
+ $scope->{active} = 0;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: trace_decision
+# Purpose : Emit decision/branch trace messages with explicit reason/context.
+# Args    : ($decision_name, $taken, $reason, $level)
+# Returns : boolean normalized taken value
+#------------------------------------------------------------------------------
+sub trace_decision {
+ my ($decision_name, $taken, $reason, $level) = @_;
+ _trace_initialize();
+ $level = DUMP_DEBUG unless defined $level;
+ $level = _trace_parse_level($level) // DUMP_DEBUG;
+ my $status = $taken ? 'TAKEN' : 'SKIPPED';
+ log_output($level, 'DECISION '.($decision_name // '<decision>')." => $status", $reason, { caller_depth => 2 });
+ return $taken ? 1 : 0
+}
+
+#------------------------------------------------------------------------------
 # Function: log_output
-# Purpose : Central logging entrypoint with verbosity-gating and optional file
-#           mirroring to $main::LOG_FILE.
-# Args    : ($level, $message, $context)
+# Purpose : Central trace/log entrypoint with UVM-style verbosity gating,
+#           metadata formatting, and stdout/file routing.
+# Args    : ($level, $message, $context, $opts)
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_output {
-    my ($level, $message, $context) = @_;
-    
-    # Check if we should log at this level
-    return if $level > $DUMP_VERBOSITY;
-    
-    # Format timestamp
-    my ($sec, $min, $hour, $mday, $mon, $year) = localtime();
-    my $timestamp = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-                           $year + 1900, $mon + 1, $mday, $hour, $min, $sec);
-    
-    # Build log message
-    my $log_msg = "[$timestamp] $message\n";
-    $log_msg .= "  Context: $context\n" if defined $context;
-    
-    # Output to console and file
-    print $log_msg;
-    
-    # Try to write to log file if it exists
-    if (defined $main::LOG_FILE && -w $main::LOG_FILE) {
-        open(my $log_fh, '>>', $main::LOG_FILE) or return;
-        print $log_fh $log_msg;
-        close($log_fh);
-    }
+ my ($level, $message, $context, $opts) = @_;
+ _trace_initialize();
+ $level = DUMP_NONE unless defined $level;
+ $level = _trace_parse_level($level) // DUMP_NONE;
+ return if $level > $DUMP_VERBOSITY;
+
+ my $caller_depth = 1;
+ if (ref($opts) eq 'HASH' && exists $opts->{caller_depth}) {
+  $caller_depth = $opts->{caller_depth};
+ }
+
+ _trace_emit(
+  level => $level,
+  message => $message,
+  context => $context,
+  caller_depth => $caller_depth,
+ );
+ return undef
 }
 
 #------------------------------------------------------------------------------
 # Function: log_dump
-# Purpose : Lightweight dump writer used for already-formatted debug payloads
-#           (e.g. Data::Dumper output), without timestamp decoration.
-# Args    : ($message)
+# Purpose : Dump writer for preformatted payloads with trace metadata routing.
+# Args    : ($message, $opts)
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_dump {
-    my ($message) = @_;
-    print $message;
-    
-    # Try to write to log file if it exists
-    if (defined $main::LOG_FILE && -w $main::LOG_FILE) {
-        open(my $log_fh, '>>', $main::LOG_FILE) or return;
-        print $log_fh $message;
-        close($log_fh);
-    }
+ my ($message, $opts) = @_;
+ _trace_initialize();
+
+ my $level = DUMP_DEBUG;
+ if (ref($opts) eq 'HASH' && exists($opts->{level})) {
+  $level = _trace_parse_level($opts->{level}) // DUMP_DEBUG;
+ }
+ if (ref($opts) eq 'HASH' && $opts->{enforce_level}) {
+  return if $level > $DUMP_VERBOSITY;
+ }
+
+ my $caller_depth = 1;
+ if (ref($opts) eq 'HASH' && exists $opts->{caller_depth}) {
+  $caller_depth = $opts->{caller_depth};
+ }
+
+ _trace_emit(
+  level => $level,
+  message => $message,
+  caller_depth => $caller_depth,
+  tag => 'DUMP',
+ );
+ return undef
 }
 
 #------------------------------------------------------------------------------
@@ -210,8 +557,11 @@ sub log_dump {
 # Returns : boolean (true when current verbosity enables this level)
 #------------------------------------------------------------------------------
 sub should_dump {
-    my ($level) = @_;
-    return $DUMP_VERBOSITY >= $level;
+ my ($level) = @_;
+ _trace_initialize();
+ $level = DUMP_NONE unless defined $level;
+ $level = _trace_parse_level($level) // DUMP_NONE;
+ return $DUMP_VERBOSITY >= $level
 }
 
 #------------------------------------------------------------------------------
@@ -1095,127 +1445,151 @@ sub _build_action_rewriter_migration_summary {
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
 sub Get {
- log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
- 
  my %option = @_[1 .. $#_];
- $pm_drive = $option{pm_drive};
- 
- # Check for execution mode options
+ _apply_trace_options(\%option);
  my $parse_only = $option{parse_only};
  my $generate_only = $option{generate_only};
  my $return_descr = $option{return_descr};
  my $test_expectation = $option{test_expectation};
- 
+ $pm_drive = $option{pm_drive};
+
+ my $trace_scope = trace_enter('LinkedSpec::Get', {
+  parse_only => $parse_only ? 1 : 0,
+  generate_only => $generate_only ? 1 : 0,
+  return_descr => $return_descr ? 1 : 0,
+  pm_drive => $pm_drive ? 1 : 0,
+  trace_level => _trace_level_name($DUMP_VERBOSITY),
+ }, DUMP_LOW);
+
+ log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
+
  # Always run validation, but handle failures differently for parse-only tests
  my $validation_failed = 0;
- 
-      # Validate input spec content
-     unless (validate_spec_content($_[0])) {
-         if ($parse_only && $test_expectation eq 'fail') {
-             $validation_failed = 1;
-             log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
-         } else {
-             log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
-             return undef;
-         }
-     }
- 
-      # Validate DSL syntax (only if content validation passed)
-     unless ($validation_failed) {
-         unless (validate_dsl_syntax($_[0])) {
-             if ($parse_only && $test_expectation eq 'fail') {
-                 $validation_failed = 1;
-                 log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
-             } else {
-                 log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
-                 return undef;
-             }
-         }
-     }
- 
+
+ # Validate input spec content
+ unless (validate_spec_content($_[0])) {
+  trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
+  if ($parse_only && $test_expectation eq 'fail') {
+   $validation_failed = 1;
+   log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
+  } else {
+   log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
+   trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
+   return undef;
+  }
+ } else {
+  trace_decision('validate_spec_content', 1, 'Input envelope validation passed', DUMP_HIGH);
+ }
+
+ # Validate DSL syntax (only if content validation passed)
+ unless ($validation_failed) {
+  unless (validate_dsl_syntax($_[0])) {
+   trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
+   if ($parse_only && $test_expectation eq 'fail') {
+    $validation_failed = 1;
+    log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
+   } else {
+    log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
+    trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
+    return undef;
+   }
+  } else {
+   trace_decision('validate_dsl_syntax', 1, 'Rule-level DSL syntax validation passed', DUMP_HIGH);
+  }
+ }
+
  my $retv;
  my $parse_success = 1;
- 
-      # Try to parse the spec file
-     log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
-     eval {
-         $retv = &{$$spec_descr[$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $_[0], $gdata);
-     } or do {
-         $parse_success = 0;
-         my $error = $@;
-         log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $error");
-     };
-     
-     if ($parse_success) {
-         log_output(DUMP_LOW, "Spec file parsing successful", "Hardcoded parser completed successfully");
-     }
- 
+
+ # Try to parse the spec file
+ log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
+ eval {
+  $retv = &{$$spec_descr[$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $_[0], $gdata);
+ } or do {
+  $parse_success = 0;
+  my $error = $@;
+  log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $error");
+ };
+
+ trace_decision('bootstrap_spec_parse', $parse_success, $parse_success ? 'Hardcoded parser returned successfully' : 'Hardcoded parser eval failed', DUMP_HIGH);
+ if ($parse_success) {
+  log_output(DUMP_LOW, "Spec file parsing successful", "Hardcoded parser completed successfully");
+ }
+
  # Dump parse result if in dump mode (always for parse-only tests)
  if (should_dump(DUMP_MEDIUM) || $parse_only) {
-     log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
-     if ($parse_success && defined $retv) {
-         log_dump(Dumper($retv));
-     } else {
-         log_dump("Parse failed - no result available\n");
-     }
-     log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
+  log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
+  if ($parse_success && defined $retv) {
+   log_dump(Dumper($retv));
+  } else {
+   log_dump("Parse failed - no result available\n");
+  }
+  log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
  }
 
  # Do not continue into generation when bootstrap parse failed or returned no data
  unless ($parse_success && defined $retv) {
-     log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
-     return undef;
+  log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
+  trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
+  return undef;
  }
- 
-      # If parse-only mode, stop here and return undef
-     if ($parse_only) {
-         log_output(DUMP_LOW, "Parse-only mode", "Stopping after .spec file parsing - no parser generated");
-         return undef;
-     }
-     
-     # Start parser generation phase
-     log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
 
- my $auto_descr_spec  = spec_descr($retv);
- unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
-     log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
-     return undef;
+ # If parse-only mode, stop here and return undef
+ if ($parse_only) {
+  log_output(DUMP_LOW, "Parse-only mode", "Stopping after .spec file parsing - no parser generated");
+  trace_exit($trace_scope, { status => 'ok', stage => 'parse_only', parse_only => 1 }, DUMP_LOW);
+  return undef;
  }
- my $final_descr      = {spec=>$auto_descr_spec, gdata=>spec_gdata($auto_descr_spec)};
+
+ # Start parser generation phase
+ log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
+
+ my $auto_descr_spec = spec_descr($retv);
+ unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
+  log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
+  trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
+  return undef;
+ }
+ my $final_descr = {spec=>$auto_descr_spec, gdata=>spec_gdata($auto_descr_spec)};
  $final_descr->{meta} ||= {};
  $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
- 
-      # Validate generated structures
-     unless (validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
-         log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
-         return undef;
-     }
- 
- log_output(DUMP_LOW, "Parser generation completed", "Generated parser with " . scalar(keys %$auto_descr_spec) . " rules");
+
+ # Validate generated structures
+ unless (validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
+  log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
+  trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+  return undef;
+ }
+
+ my $rule_count = scalar(keys %$auto_descr_spec);
+ log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
 
  print "\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n" if $pm_drive;
 
  # Dump final_descr if in dump mode
  if (should_dump(DUMP_LOW)) {
-     log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
-     log_dump(Dumper($final_descr));
-     log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
+  log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
+  log_dump(Dumper($final_descr));
+  log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
  }
- 
-      # If generate-only mode, stop here and return undef
-     if ($generate_only) {
-         log_output(DUMP_LOW, "Generate-only mode", "Stopping after parser generation - no functional parser returned");
-         return undef;
-     }
-     
-     # Optional descriptor-return mode for tooling/introspection
-     if ($return_descr) {
-         log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
-         return $final_descr;
-     }
-     
-     # Parser generation completed successfully
-     log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
+
+ # If generate-only mode, stop here and return undef
+ if ($generate_only) {
+  log_output(DUMP_LOW, "Generate-only mode", "Stopping after parser generation - no functional parser returned");
+  trace_exit($trace_scope, { status => 'ok', stage => 'generate_only', generate_only => 1 }, DUMP_LOW);
+  return undef;
+ }
+
+ # Optional descriptor-return mode for tooling/introspection
+ if ($return_descr) {
+  log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
+  trace_exit($trace_scope, { status => 'ok', stage => 'return_descr', return_descr => 1, rule_count => $rule_count }, DUMP_LOW);
+  return $final_descr;
+ }
+
+ # Parser generation completed successfully
+ log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
+ trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $top_rule, rule_count => $rule_count }, DUMP_LOW);
 
  return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
 }
@@ -1317,6 +1691,9 @@ sub _build_rule_execution_meta {
 #------------------------------------------------------------------------------
 sub spec_descr {
 my $specretv = shift;
+ my $trace_scope = trace_enter('LinkedSpec::spec_descr', {
+  entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
+ }, DUMP_MEDIUM);
 
  print 'my $descr = {
  spec => {'."\n" if $pm_drive;
@@ -1325,6 +1702,7 @@ my $specretv = shift;
   my ($label, $info) = spec_entry($entry);
   unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
    log_output(DUMP_NONE, "CRITICAL ERROR", "Rule descriptor build failed while compiling parsed spec entries");
+   trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
   }
   push @specinfo, $label, $info;
@@ -1349,6 +1727,7 @@ my $specretv = shift;
      }
      $seen_rules{$label} = 1;
  }
+ trace_decision('duplicate_rule_definitions_present', scalar(@duplicate_rules) ? 1 : 0, scalar(@duplicate_rules) ? ('duplicate_rules=' . join(',', @duplicate_rules)) : 'no duplicates detected', DUMP_MEDIUM);
  
  if (@duplicate_rules) {
      log_output(DUMP_LOW, "Duplicate rules summary", "Rules with multiple definitions: " . join(", ", @duplicate_rules));
@@ -1362,6 +1741,7 @@ my $specretv = shift;
      log_dump(Dumper($result));
      log_dump("=== END GENERATED SPEC DUMP ===\n");
  }
+ trace_exit($trace_scope, { status => 'ok', rule_count => scalar(keys %$result) }, DUMP_MEDIUM);
 
  return $result
 }
@@ -2118,6 +2498,12 @@ sub _validate_rule_ir_or_exit {
  my ($rule_ir, $rule_meta) = @_;
 
  if ($rule_meta->{action_mode} eq 'mixed') {
+  trace_decision(
+   "_validate_rule_ir_or_exit:$rule_ir->{label}",
+   0,
+   "mixed action mode detected (acode=$rule_meta->{acode_count}, bcode=$rule_meta->{bcode_count})",
+   DUMP_HIGH
+  );
   my $label = $rule_ir->{label};
   my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
   my $context = "ACTION blocks: ".($rule_meta->{acode_count} // 0)." found, BLIND CALL blocks: ".($rule_meta->{bcode_count} // 0)." found";
@@ -2126,6 +2512,12 @@ sub _validate_rule_ir_or_exit {
   print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
   return 0
  }
+ trace_decision(
+  "_validate_rule_ir_or_exit:$rule_ir->{label}",
+  1,
+  "rule action mode '$rule_meta->{action_mode}' is valid",
+  DUMP_DEBUG
+ );
 
  return 1
 }
@@ -2299,6 +2691,9 @@ sub _build_rule_ir_emit_context {
 #------------------------------------------------------------------------------
 sub spec_entry {
 my $einfo = shift;
+ my $trace_scope = trace_enter('LinkedSpec::spec_entry', {
+  token_count => (ref($einfo) eq 'ARRAY') ? scalar(@$einfo) : undef,
+ }, DUMP_HIGH);
 
  my %info;
  my %handlers;
@@ -2313,7 +2708,10 @@ my $einfo = shift;
  $top_rule = $rule_ir->{top_rule} if defined $rule_ir->{top_rule};
 
  my $rule_meta = _plan_rule_ir_meta($rule_ir);
- return unless _validate_rule_ir_or_exit($rule_ir, $rule_meta);
+ unless (_validate_rule_ir_or_exit($rule_ir, $rule_meta)) {
+  trace_exit($trace_scope, { status => 'error', stage => 'validate_rule_ir', label => $rule_ir->{label} }, DUMP_HIGH);
+  return undef;
+ }
 
  my $emit_ctx = _build_rule_ir_emit_context($rule_ir);
  $rule_meta->{action_rewriter} = $emit_ctx->{action_rewriter_meta};
@@ -2625,7 +3023,35 @@ my @'.$label.';
  $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
  print "\n $label => sub {\n$external_handler\n },\n" if $pm_drive;
 
- $info{handler} = sub {eval $handler};
+ $info{handler} = sub {
+  my ($descr, $STRING, $info) = @_;
+  my $runtime_scope = trace_enter(
+   "LinkedSpec::rule_handler:$label",
+   {
+    handler_variant => $rule_meta->{selected_handler_variant},
+    index => (ref($info) eq 'HASH') ? $info->{index} : undef,
+    match => (ref($info) eq 'HASH') ? $info->{match} : undef,
+   },
+   DUMP_HIGH
+  );
+  my $retv = eval $handler;
+  my $eval_error = $@;
+  if ($eval_error) {
+   trace_decision("rule_handler_eval:$label", 0, $eval_error, DUMP_NONE);
+  } else {
+   trace_decision("rule_handler_eval:$label", 1, 'handler eval completed', DUMP_DEBUG);
+  }
+  trace_exit(
+   $runtime_scope,
+   {
+    returned_defined => defined($retv) ? 1 : 0,
+    return_ref => ref($retv) || '',
+    return_size => (ref($retv) eq 'ARRAY') ? scalar(@$retv) : undef,
+   },
+   DUMP_HIGH
+  );
+  return $retv
+ };
  #$info{acode}   = [@ACODEs];
  $info{gdata}   = [@GDATA];
  $info{meta}    = $rule_meta;
@@ -2639,6 +3065,7 @@ my @'.$label.';
      log_dump("{\n$handler\n}\n");
      log_dump("=== END HANDLER DUMP for $label ===\n");
  }
+ trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 
  return ($label, \%info)
 }
@@ -2652,6 +3079,9 @@ my @'.$label.';
 #------------------------------------------------------------------------------
 sub spec_gdata {
 my $sg = shift;
+ my $trace_scope = trace_enter('LinkedSpec::spec_gdata', {
+  rule_count => (ref($sg) eq 'HASH') ? scalar(keys %$sg) : undef,
+ }, DUMP_MEDIUM);
 
  if (should_dump(DUMP_HIGH)) {
      log_dump("=== SPEC GDATA DUMP ===\n");
@@ -2669,6 +3099,7 @@ my $sg = shift;
    if (exists $$sg{$$gde{label}}{re}[$$gde{idx}]) {
     push @lgdata, $$sg{$$gde{label}}{re}[$$gde{idx}]
    } else {
+    trace_decision("spec_gdata:$label", 0, "missing regex mapping for label=$$gde{label} idx=$$gde{idx}", DUMP_HIGH);
     my $error_msg = "Rule '$label': Referenced rule '$$gde{label}' has no regex at index $$gde{idx}";
     my $context = "Referenced rule: $$gde{label}, Requested index: $$gde{idx}, Available indices: " . 
                   (defined $$sg{$$gde{label}}{re} ? "0.." . ($#{$$sg{$$gde{label}}{re}}) : "none");
@@ -2690,10 +3121,14 @@ my $sg = shift;
   }
 
   if (@lgdata) {
+   trace_decision("spec_gdata:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
    $gdata{$label} = LinkedRE::oredRE(@lgdata);
 
    print ''.($once ? ",\n" : "")." $label\t=> qr/$gdata{$label}/o" if $pm_drive;
    ++$once
+  }
+  else {
+   trace_decision("spec_gdata:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
   }
 
  }
@@ -2708,7 +3143,7 @@ my $sg = shift;
      log_dump(Dumper($result));
      log_dump("=== END GENERATED GDATA DUMP ===\n");
  }
- 
+ trace_exit($trace_scope, { status => 'ok', compiled_labels => scalar(keys %$result) }, DUMP_MEDIUM);
  return $result
 }
 #------------------------------------------------------------------------------
@@ -5518,13 +5953,21 @@ sub _resolve_local_spec_path {
 #------------------------------------------------------------------------------
 sub get_parser {
  my ($spec_name, @opts) = @_;
+ my %opt_hash = (@opts % 2 == 0) ? @opts : ();
+ _apply_trace_options(\%opt_hash) if %opt_hash;
+ my $trace_scope = trace_enter('LinkedSpec::get_parser', {
+  spec_name => $spec_name,
+  option_keys => [sort keys %opt_hash],
+ }, DUMP_LOW);
 
  unless (defined $spec_name && !ref($spec_name) && $spec_name =~ /\S/o && $spec_name !~ /^\s|\s$/o && $spec_name !~ /[[:cntrl:]]/o) {
   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace");
+  trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_name' }, DUMP_LOW);
   return undef
  }
 
  my $spec_path = _resolve_local_spec_path($spec_name);
+ trace_decision('get_parser_local_resolution', defined($spec_path) ? 1 : 0, defined($spec_path) ? "resolved=$spec_path" : 'local resolution miss', DUMP_MEDIUM);
  my $is_explicit_path = ($spec_name =~ m{[/\\]}o);
  my $is_explicit_spec_name = ($spec_name =~ /\.spec$/o);
  unless ($spec_path) {
@@ -5532,45 +5975,74 @@ sub get_parser {
    if (-e $spec_name && !-f $spec_name) {
     my $path_type = -d $spec_name ? 'directory' : 'non-regular';
     log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_name' type='$path_type'");
+    trace_exit($trace_scope, { status => 'error', stage => 'explicit_path_type', path_type => $path_type }, DUMP_LOW);
     return undef
    }
    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='<undef>'");
+   trace_exit($trace_scope, { status => 'error', stage => 'explicit_path_missing' }, DUMP_LOW);
    return undef
   }
  }
  unless ($spec_path) {
+  trace_decision('get_parser_pathsearch_fallback', 1, "attempting PathSearch for '$spec_name'", DUMP_MEDIUM);
   my $ok = eval {require PathSearch; 1};
   unless ($ok) {
    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch load failed: $@");
+   trace_exit($trace_scope, { status => 'error', stage => 'pathsearch_load' }, DUMP_LOW);
    return undef
   }
   my $resolved_spec_path = eval { PathSearch->go($spec_name, 'spec') };
   if ($@) {
    log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to resolve spec '$spec_name'", "PathSearch runtime failure: $@");
+   trace_exit($trace_scope, { status => 'error', stage => 'pathsearch_runtime' }, DUMP_LOW);
    return undef
   }
   $spec_path = $resolved_spec_path;
+  trace_decision('get_parser_pathsearch_result', defined($spec_path) ? 1 : 0, defined($spec_path) ? "resolved=$spec_path" : 'PathSearch returned undef', DUMP_MEDIUM);
  }
  if ($spec_path && -e $spec_path && !-f $spec_path) {
   my $path_type = -d $spec_path ? 'directory' : 'non-regular';
   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path is not a file", "spec='$spec_name' resolved='$spec_path' type='$path_type'");
+  trace_exit($trace_scope, { status => 'error', stage => 'resolved_path_type', path_type => $path_type }, DUMP_LOW);
   return undef
  }
 
  unless ($spec_path && -f $spec_path) {
   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Spec path not found", "spec='$spec_name' resolved='".($spec_path // '<undef>')."'");
+  trace_exit($trace_scope, { status => 'error', stage => 'resolved_path_missing' }, DUMP_LOW);
   return undef
  }
 
  open(my $f, '<', $spec_path) or do {
   log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to open spec file '$spec_path'", "OS Error: $!");
+  trace_exit($trace_scope, { status => 'error', stage => 'open_spec_file', spec_path => $spec_path }, DUMP_LOW);
   return undef
  };
  local $/;
  my $content = <$f>;
  close($f);
-
- return Get(\$content, @opts)
+ my @forward_opts = @opts;
+ if (%opt_hash && exists $opt_hash{trace_reset_log}) {
+  @forward_opts = ();
+  my @kv = @opts;
+  while (@kv) {
+   my ($k, $v) = splice(@kv, 0, 2);
+   next if defined($k) && $k eq 'trace_reset_log';
+   push @forward_opts, $k, $v;
+  }
+ }
+ my $parser = Get(\$content, @forward_opts);
+ trace_decision('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', DUMP_MEDIUM);
+ trace_exit(
+  $trace_scope,
+  {
+   status => defined($parser) ? 'ok' : 'error',
+   spec_path => $spec_path,
+   parser_ref => ref($parser) || '',
+  },
+  DUMP_LOW
+ );
+ return $parser;
 }
 
 #------------------------------------------------------------------------------

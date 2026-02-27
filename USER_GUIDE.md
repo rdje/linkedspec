@@ -87,8 +87,52 @@ This removes hard dependency on running from the project root.
 - `specs/tclite.spec` currently has a known compile issue to be fixed.
 
 ## Debugging
-- Set `LinkedSpec` verbosity via `our $DUMP_VERBOSITY`.
+- Set `LinkedSpec` verbosity via `our $DUMP_VERBOSITY` or `LinkedSpec::configure_trace(...)`.
 - Use `parse_only` and/or `pm_drive` to inspect compile/generation behavior.
+
+### First-Class Multi-Level Tracing
+LinkedSpec now supports UVM-style tracing levels and structured flow traces.
+
+Supported levels:
+- `none`
+- `low`
+- `medium`
+- `high`
+- `debug`
+
+Runtime API:
+- `LinkedSpec::configure_trace(trace_level => 'high')`
+- `LinkedSpec::configure_trace(trace_level => 'debug', trace_emoji => 1)`
+- `LinkedSpec::configure_trace(trace_log_file => 'trace.log')`
+- `LinkedSpec::configure_trace(trace_log_file => 'trace.log', trace_log_mode => 'route')`
+- `LinkedSpec::configure_trace(trace_log_file => 'trace.log', trace_log_mode => 'mirror')`
+
+Per-call options (forwarded by `get_parser(...)` into `Get(...)`):
+- `trace_level => 'none|low|medium|high|debug'`
+- `trace_log_file => 'trace.log'`
+- `trace_log_mode => 'route|mirror|stdout'`
+- `trace_reset_log => 1` (truncate log file before writing)
+- `trace_emoji => 1`
+- `debug => 1` (force debug verbosity)
+- `quiet => 1` (force none verbosity)
+
+Environment variables:
+- `LINKEDSPEC_TRACE_LEVEL`
+- `LINKEDSPEC_TRACE_FILE`
+- `LINKEDSPEC_TRACE_MIRROR_STDOUT` (`1` => mirror, default is route when trace file is set)
+- `LINKEDSPEC_TRACE_RESET_FILE`
+- `LINKEDSPEC_TRACE_EMOJI`
+
+Trace messages include:
+- timestamp,
+- verbosity level,
+- file name,
+- function name,
+- line number,
+- indentation for nested flow scopes,
+- decision events (`TAKEN`/`SKIPPED`) with reasons.
+
+When `trace_log_file` is set and `trace_log_mode => 'route'` (default for explicit trace files), trace output is routed to the file (for example `trace.log`) instead of stdout.
 
 ## Inspect Generated Perl for `.spec` Pieces
 Use the snippet inspection utility when you want to visually verify generated Perl for specific DSL fragments.

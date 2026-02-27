@@ -1,5 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - First-Class Tracing Framework + Modularization Roadmap Track
+## Summary
+Implemented a first-class multi-level tracing framework in `LinkedSpec.pm` (UVM-style verbosity, structured scope/decision events, metadata-rich formatting, and trace-file routing), added focused regression locks for trace metadata/routing behavior, and updated roadmap tracking with a new phased modularization track for splitting `LinkedSpec.pm` into submodules.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added centralized trace runtime in `LinkedSpec.pm`:
+  - multi-level trace/verbosity parsing (`none|low|medium|high|debug`, with compatibility for numeric/internal levels),
+  - runtime trace configuration API: `configure_trace(...)`,
+  - environment knobs: `LINKEDSPEC_TRACE_LEVEL`, `LINKEDSPEC_TRACE_FILE`, `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_RESET_FILE`, `LINKEDSPEC_TRACE_EMOJI`,
+  - structured trace helpers: `trace_enter`, `trace_exit`, `trace_decision`,
+  - metadata formatting includes timestamp, level, file, function, and line, with indentation and optional emoji styling,
+  - output sink modes: `stdout`, `route`, `mirror`.
+- Added targeted trace instrumentation in key compile/runtime paths:
+  - `Get`, `get_parser`, `spec_descr`, `spec_entry`, `spec_gdata`, `_validate_rule_ir_or_exit`,
+  - runtime rule handler wrapper now emits entry/exit + eval decision traces.
+- Added trace routing behavior for `trace.log` use cases:
+  - explicit `trace_log_file` defaults to route-style behavior unless `trace_log_mode` is set,
+  - preserved compatibility with existing `$main::LOG_FILE` mirroring behavior.
+- Updated docs in `USER_GUIDE.md` with tracing levels, APIs/options, env vars, and `trace.log` routing semantics.
+- Added focused phase0 regression locks:
+  - `trace_output_includes_metadata_and_decisions`
+  - `trace_log_file_route_redirects_stdout_to_trace_log`
+- Updated `ROADMAP.md`:
+  - added `Phase 1A: LinkedSpec.pm Modularization (New Priority)`,
+  - defined target module boundaries (`Trace`, `Validation`, `Resolver`, `RuleIR`, `ActionRewriter`, `Compiler`, `BootstrapSpec`),
+  - recorded phased extraction order (Trace -> Validation -> Resolver first) and status/next-step tracking.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Add `COMMIT.md` Workflow Guide
 ## Summary
 Added a git-tracked workflow document describing the repository commit process so new AI sessions can reliably follow the same commit procedure and file responsibilities.

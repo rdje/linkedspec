@@ -60,6 +60,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-02-27)
+- Landed first-class trace runtime upgrades in `LinkedSpec.pm`:
+  - centralized trace configuration (`configure_trace(...)`) with UVM-style verbosity names,
+  - structured scope/decision trace primitives (`trace_enter`, `trace_exit`, `trace_decision`),
+  - metadata-rich formatting (`timestamp + level + file + function + line`) with nested indentation,
+  - trace sink routing modes (`stdout`, `route`, `mirror`) with explicit trace-file support (`trace.log` workflow).
+- Instrumented high-impact compile/runtime flow points:
+  - `get_parser`, `Get`, `spec_descr`, `spec_entry`, `spec_gdata`, `_validate_rule_ir_or_exit`,
+  - runtime handler wrapper emits entry/exit and eval outcome decision trace events.
+- Added trace-focused phase0 locks:
+  - trace metadata and decision-event presence,
+  - routed trace-file behavior ensuring stdout suppression when route mode is active.
+- Important implementation guardrail:
+  - when `trace_reset_log` is used from `get_parser(...)`, options forwarded into `Get(...)` must avoid double-reset truncation; forwarding now strips `trace_reset_log` after first application in `get_parser`.
+- Roadmap tracking updated with a dedicated modularization execution track:
+  - `Phase 1A: LinkedSpec.pm Modularization (New Priority)`,
+  - extraction order starts with low-risk boundaries: `Trace -> Validation -> Resolver`,
+  - then expands to `RuleIR`, `ActionRewriter`, `Compiler`, and (later) `BootstrapSpec`.
 ## Session Notes (2026-02-26)
 - Added a git-tracked commit-workflow reference document: `COMMIT.md`.
 - `COMMIT.md` now defines:
