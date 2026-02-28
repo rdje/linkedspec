@@ -60,6 +60,22 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-02-28)
+- Executed next Phase 1A extraction slice (method-expression parsing helpers):
+  - created `perl/LinkedSpec/ActionIR/MethodExpr.pm`,
+  - moved method-expression parser helper ownership out of `LinkedSpec.pm`:
+    - `_split_top_level_csv`
+    - `_parse_method_function_expr`
+    - `_is_bare_method_scope_token`
+    - `_normalize_method_args_with_optional_scope`.
+- Updated compatibility and call boundaries:
+  - `LinkedSpec.pm` now delegates the helpers above to `LinkedSpec::ActionIR::MethodExpr`,
+  - `LinkedSpec::ActionRewriter` now consumes `LinkedSpec::ActionIR::MethodExpr` directly for declare/assign parsing and scanner callback plumbing.
+- Validation snapshot for method-expression extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-27)
 - Executed next Phase 1A extraction slice (ActionIR scanner):
   - created `perl/LinkedSpec/ActionIR/Scanner.pm`,

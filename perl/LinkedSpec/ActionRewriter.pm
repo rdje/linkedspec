@@ -8,6 +8,7 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::ActionIR::Scanner ();
+use LinkedSpec::ActionIR::MethodExpr ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -67,7 +68,7 @@ sub _lower_declare_initializer_expr {
  return undef unless defined($trimmed) && length($trimmed);
 
  if ($type eq 'array') {
-  my $array_ctor = LinkedSpec::_parse_method_function_expr($trimmed);
+  my $array_ctor = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
   if ($array_ctor && $array_ctor->{method} eq 'array') {
    my $items = $array_ctor->{args} || [];
    return undef unless ref($items) eq 'ARRAY';
@@ -81,7 +82,7 @@ sub _lower_declare_initializer_expr {
  }
 
  if ($type eq 'hash') {
-  my $hash_ctor = LinkedSpec::_parse_method_function_expr($trimmed);
+  my $hash_ctor = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
   if ($hash_ctor && $hash_ctor->{method} eq 'hash') {
    my $items = $hash_ctor->{args} || [];
    return undef unless ref($items) eq 'ARRAY';
@@ -106,7 +107,7 @@ sub _lower_declare_initializer_expr {
 
 sub _extract_declare_statement_from_method_expr {
  my ($expr) = @_;
- my $call = LinkedSpec::_parse_method_function_expr($expr);
+ my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr);
  return undef unless $call;
  my $method = $call->{method} // '';
 
@@ -114,7 +115,7 @@ sub _extract_declare_statement_from_method_expr {
   my @effective_args = @{$call->{args} || []};
   if (
    @effective_args >= 3 &&
-   LinkedSpec::_is_bare_method_scope_token($effective_args[0]) &&
+   LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token($effective_args[0]) &&
    defined(_trim_action_ir_value($effective_args[1])) &&
    _trim_action_ir_value($effective_args[1]) =~ /^(array|scalar|hash)$/o
   ) {
@@ -135,7 +136,7 @@ sub _extract_declare_statement_from_method_expr {
  if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
   my $type = LinkedSpec::_declare_alias_to_type($+{alias});
   return undef unless defined $type;
-  my $effective_args = LinkedSpec::_normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+  my $effective_args = LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
   return undef unless $effective_args && @$effective_args >= 1;
   return {
    declaration_type => $type,
@@ -155,10 +156,10 @@ sub _lower_declare_method_statement {
 
 sub _lower_assign_method_statement {
  my ($expr) = @_;
- my $call = LinkedSpec::_parse_method_function_expr($expr);
+ my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr);
  return undef unless $call && $call->{method} eq 'assign';
 
- my $effective_args = LinkedSpec::_normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+ my $effective_args = LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
  return undef unless $effective_args;
  return LinkedSpec::_lower_assign_statement($effective_args->[0], $effective_args->[1])
 }
@@ -205,8 +206,8 @@ sub _collect_action_helper_ir_nodes {
    {
     split_action_ir_statements                 => \&_split_action_ir_statements,
     trim_action_ir_value                       => \&_trim_action_ir_value,
-    parse_method_function_expr                 => \&LinkedSpec::_parse_method_function_expr,
-    normalize_method_args_with_optional_scope  => \&LinkedSpec::_normalize_method_args_with_optional_scope,
+    parse_method_function_expr                 => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
+    normalize_method_args_with_optional_scope  => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
     build_array_pipeline_plan_from_expr        => \&LinkedSpec::_build_array_pipeline_plan_from_expr,
     extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
     parse_declare_binding_entry                => \&_parse_declare_binding_entry,

@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-28 - Phase 1A Slice: Extract Method-Expression Parsing Helpers to `LinkedSpec::ActionIR::MethodExpr`
+## Summary
+Extracted method-expression parsing primitives from `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::MethodExpr` module and rewired both `LinkedSpec.pm` and `LinkedSpec::ActionRewriter` to consume that module directly.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/MethodExpr.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module:
+  - `LinkedSpec::ActionIR::MethodExpr`
+  - extracted helpers:
+    - `_split_top_level_csv`
+    - `_parse_method_function_expr`
+    - `_is_bare_method_scope_token`
+    - `_normalize_method_args_with_optional_scope`
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::MethodExpr ();`
+  - replaced in-file helper bodies above with compatibility delegates to the new module.
+- Updated `LinkedSpec::ActionRewriter`:
+  - switched declare/assign helper parsing call sites to use `LinkedSpec::ActionIR::MethodExpr` directly,
+  - updated scanner callback wiring to pass parser/scope-normalization callbacks from `MethodExpr` rather than `LinkedSpec` wrapper functions.
+- Behavioral parity note:
+  - this slice is a boundary extraction and call-path cleanup only; parser/lowering semantics remain unchanged.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Contract IR Scanner to `LinkedSpec::ActionIR::Scanner`
 ## Summary
 Extracted `_scan_contract_ir_events` out of `LinkedSpec.pm` into a new dedicated scanner module and rewired both `LinkedSpec.pm` and `LinkedSpec::ActionRewriter` to use it through explicit helper-callback dependencies.
