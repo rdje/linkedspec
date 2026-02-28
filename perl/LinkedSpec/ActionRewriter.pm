@@ -7,6 +7,7 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::ActionIR::Scanner ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -198,7 +199,19 @@ sub _collect_action_helper_ir_nodes {
  my @events;
  foreach my $rule (@$rewrite_rules) {
   my $ir_node = $rule->{ir_node} // $rule->{id};
-  my $rule_events = LinkedSpec::_scan_contract_ir_events($rule, $code);
+  my $rule_events = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+   $rule,
+   $code,
+   {
+    split_action_ir_statements                 => \&_split_action_ir_statements,
+    trim_action_ir_value                       => \&_trim_action_ir_value,
+    parse_method_function_expr                 => \&LinkedSpec::_parse_method_function_expr,
+    normalize_method_args_with_optional_scope  => \&LinkedSpec::_normalize_method_args_with_optional_scope,
+    build_array_pipeline_plan_from_expr        => \&LinkedSpec::_build_array_pipeline_plan_from_expr,
+    extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
+    parse_declare_binding_entry                => \&_parse_declare_binding_entry,
+   }
+  );
   next unless ref($rule_events) eq 'ARRAY' && @$rule_events;
   foreach my $event (@$rule_events) {
    push @events, {

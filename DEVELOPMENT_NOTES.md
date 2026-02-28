@@ -61,6 +61,17 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-27)
+- Executed next Phase 1A extraction slice (ActionIR scanner):
+  - created `perl/LinkedSpec/ActionIR/Scanner.pm`,
+  - moved `_scan_contract_ir_events` implementation out of `LinkedSpec.pm` into `LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(...)`.
+- Updated scanner call boundaries to reduce `ActionRewriter -> LinkedSpec` indirection:
+  - `LinkedSpec.pm::_scan_contract_ir_events(...)` is now a compatibility delegate into `LinkedSpec::ActionIR::Scanner`,
+  - `LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes(...)` now calls `LinkedSpec::ActionIR::Scanner` directly via explicit helper callback dependencies.
+- Validation snapshot for ActionIR scanner extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 - Landed first-class trace runtime upgrades in `LinkedSpec.pm`:
   - centralized trace configuration (`configure_trace(...)`) with UVM-style verbosity names,
   - structured scope/decision trace primitives (`trace_enter`, `trace_exit`, `trace_decision`),

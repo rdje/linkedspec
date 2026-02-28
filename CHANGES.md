@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-27 - Phase 1A Slice: Extract Contract IR Scanner to `LinkedSpec::ActionIR::Scanner`
+## Summary
+Extracted `_scan_contract_ir_events` out of `LinkedSpec.pm` into a new dedicated scanner module and rewired both `LinkedSpec.pm` and `LinkedSpec::ActionRewriter` to use it through explicit helper-callback dependencies.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added new module:
+  - `LinkedSpec::ActionIR::Scanner`
+  - public entrypoint: `scan_contract_ir_events($contract, $code, $deps)`
+- Moved full contract scanner implementation from `LinkedSpec.pm` into the new module with no logic changes to pattern matching or event payload construction.
+- Introduced explicit dependency callbacks (`split/trim/parse/normalize/pipeline/declare` helpers) so scanner logic is reusable without direct hard-calls back into `LinkedSpec.pm`.
+- Updated call paths:
+  - `LinkedSpec.pm::_scan_contract_ir_events(...)` now delegates to `LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(...)`.
+  - `LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes(...)` now invokes scanner module directly instead of calling back through `LinkedSpec::_scan_contract_ir_events(...)`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-27 - Phase 1A Slice: Extract Canonical IR/Statement Split Helpers to `LinkedSpec::ActionRewriter`
 ## Summary
 Completed the in-progress ActionRewriter modularization by moving canonical helper-event normalization and robust action-statement splitting internals from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`, with delegating wrappers preserved in `LinkedSpec.pm`.
