@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-28 - Phase 1A Slice: Extract `spec_entry` to `LinkedSpec::SpecEntry`
+## Summary
+Moved full `spec_entry` rule-compilation ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::SpecEntry` module, and replaced `LinkedSpec.pm::spec_entry` with a thin façade delegate.
+
+## Changed Files
+- Added: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::SpecEntry::compile_spec_entry($einfo, $deps)` as the new owner of staged spec-entry compilation:
+  - RuleIR collection/planning/validation and emit-context assembly
+  - handler preamble generation
+  - deterministic handler-variant assembly and selection
+  - runtime handler closure construction with trace enter/exit/eval decision events
+  - parser-source emission through explicit dependency callback (`emit_parser_source_line`)
+- Split the extracted logic into clear sub-responsibility helpers inside `SpecEntry.pm`:
+  - handler preamble and dispatch block builders
+  - per-variant handler template builders (`AND_*`, `OR_*`, `REP_*`, default)
+  - variant selection and runtime-handler construction
+- Moved repetition min/max map ownership (`REP_PLUS`, `REP_STAR`, `REP_OPT`) from `LinkedSpec.pm` into `LinkedSpec::SpecEntry`.
+- Replaced large in-file `LinkedSpec.pm::spec_entry` body with a thin delegate that:
+  - calls `LinkedSpec::SpecEntry::compile_spec_entry(...)`
+  - updates local `$top_rule` from returned top-rule candidate
+  - preserves existing return shape `($label, $rule_info_hashref)`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-28 - Phase 1A Slice: Decompose Action-Lowering Contracts into Responsibility-Specific Builders
 ## Summary
 Replaced the monolithic `_build_action_lowering_contracts` implementation (previously ~660 lines in `LinkedSpec.pm`) with a delegated contracts module that is split into clear, responsibility-oriented builder functions.

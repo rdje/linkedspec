@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-28)
+- Executed next Phase 1A extraction slice (`spec_entry` ownership transfer):
+  - created `perl/LinkedSpec/SpecEntry.pm`,
+  - moved full `spec_entry` pipeline logic out of `LinkedSpec.pm` into `LinkedSpec::SpecEntry::compile_spec_entry(...)`.
+- `SpecEntry` now owns:
+  - RuleIR collection/planning/validation + emit-context usage,
+  - handler preamble and variant-template assembly (`_default`, `AND_*`, `OR_*`, `REP_*`),
+  - deterministic variant selection and runtime handler closure construction,
+  - parser-source emission wiring via explicit dependency callback.
+- `LinkedSpec.pm` boundary update:
+  - added `use LinkedSpec::SpecEntry ();`,
+  - replaced monolithic `spec_entry(...)` body with thin delegate that preserves return contract and updates `$top_rule` from extracted module output.
+- Ownership clean-up:
+  - moved repetition min/max semantics map (`REP_PLUS`, `REP_STAR`, `REP_OPT`) from `LinkedSpec.pm` into `LinkedSpec::SpecEntry`.
+- Validation snapshot for spec_entry extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 - Executed next Phase 1A extraction slice (method-expression parsing helpers):
   - created `perl/LinkedSpec/ActionIR/MethodExpr.pm`,
   - moved method-expression parser helper ownership out of `LinkedSpec.pm`:
