@@ -76,6 +76,46 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
   - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (value/scalaref helper cluster):
+  - created `perl/LinkedSpec/ActionIR/ValueExpr.pm`,
+  - moved helper ownership out of `LinkedSpec.pm`:
+    - `_extract_scalar_symbol_name`
+    - `_extract_array_symbol_name`
+    - `_extract_hash_symbol_name`
+    - `_lower_scalar_access_key_expr`
+    - `_split_scalaref_path_segments`
+    - `_lower_scalaref_segment_expr`
+    - `_lower_scalaref_value_expr`
+    - `_infer_scalar_container_kind`
+    - `_lower_assignment_source_expr`
+    - `_strip_literal_delimiters`.
+- Boundary design correction for module ownership:
+  - `ActionIR::ValueExpr` does not call back into `LinkedSpec` by hard-coded symbol name.
+  - `LinkedSpec.pm` delegates now pass explicit dependency callbacks (`trim_action_ir_value`, `lower_flow_composite_expr`, `lower_method_value_expr`) into `ActionIR::ValueExpr`.
+- Validation snapshot for value/scalaref extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+- Executed next Phase 1A extraction slice (action-lowering contracts decomposition):
+  - created `perl/LinkedSpec/ActionIR/Contracts.pm`,
+  - split the former monolithic contracts builder into clearly scoped helper builders:
+    - call/dispatch contracts
+    - return contracts
+    - capture/backtrack contracts
+    - passthrough IR contracts
+    - assignment/regex contracts
+    - array-pipeline contracts
+    - flow-control contracts
+    - emit/declare contracts
+    - orchestrated by `build_action_lowering_contracts`.
+- Updated `LinkedSpec.pm` boundaries:
+  - replaced the ~660-line `_build_action_lowering_contracts` body with a thin delegate,
+  - added `_action_contract_deps` to inject lowering callbacks explicitly into `ActionIR::Contracts`.
+- Validation snapshot for contracts decomposition slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-27)
 - Executed next Phase 1A extraction slice (ActionIR scanner):
   - created `perl/LinkedSpec/ActionIR/Scanner.pm`,

@@ -1,5 +1,77 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-28 - Phase 1A Slice: Decompose Action-Lowering Contracts into Responsibility-Specific Builders
+## Summary
+Replaced the monolithic `_build_action_lowering_contracts` implementation (previously ~660 lines in `LinkedSpec.pm`) with a delegated contracts module that is split into clear, responsibility-oriented builder functions.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::Contracts` with explicit separation of responsibilities:
+  - `_build_call_and_dispatch_contracts`
+  - `_build_return_contracts`
+  - `_build_capture_and_backtrack_contracts`
+  - `_build_passthrough_ir_contracts`
+  - `_build_assignment_and_regex_contracts`
+  - `_build_array_pipeline_contracts`
+  - `_build_flow_control_contracts`
+  - `_build_emit_and_declare_contracts`
+  - orchestrated by `build_action_lowering_contracts`.
+- Replaced `LinkedSpec.pm::_build_action_lowering_contracts` with a thin delegate to `LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts`.
+- Added `LinkedSpec.pm::_action_contract_deps` to pass explicit lowering callbacks into the contracts module.
+- Boundary quality:
+  - Contracts module does not hard-call `LinkedSpec::...` symbols.
+  - All lowering hooks are explicit dependencies injected by `LinkedSpec.pm`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
+## 2026-02-28 - Phase 1A Slice: Extract Value/Scalaref Helpers to `LinkedSpec::ActionIR::ValueExpr`
+## Summary
+Executed another `LinkedSpec.pm` decomposition slice by extracting the value/scalaref helper cluster into `LinkedSpec::ActionIR::ValueExpr` and wiring `LinkedSpec.pm` delegates to pass explicit dependency callbacks rather than hard-calling back into `LinkedSpec` from the module.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added module `LinkedSpec::ActionIR::ValueExpr` with extracted helpers:
+  - `_extract_scalar_symbol_name`
+  - `_extract_array_symbol_name`
+  - `_extract_hash_symbol_name`
+  - `_lower_scalar_access_key_expr`
+  - `_split_scalaref_path_segments`
+  - `_lower_scalaref_segment_expr`
+  - `_lower_scalaref_value_expr`
+  - `_infer_scalar_container_kind`
+  - `_lower_assignment_source_expr`
+  - `_strip_literal_delimiters`
+- Replaced local implementations in `LinkedSpec.pm` with thin delegates to `ActionIR::ValueExpr`.
+- Boundary/coupling correction:
+  - `ActionIR::ValueExpr` no longer hard-calls `LinkedSpec::...` helpers internally.
+  - Instead, each call receives explicit dependency callbacks (`trim_action_ir_value`, `lower_flow_composite_expr`, `lower_method_value_expr`) from `LinkedSpec.pm`.
+  - This keeps module ownership explicit while avoiding the prior callback-indirection anti-pattern.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-28 - Phase 1A Slice: Extract Method-Expression Parsing Helpers to `LinkedSpec::ActionIR::MethodExpr`
 ## Summary
 Extracted method-expression parsing primitives from `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::MethodExpr` module and rewired both `LinkedSpec.pm` and `LinkedSpec::ActionRewriter` to consume that module directly.

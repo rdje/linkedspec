@@ -1,0 +1,330 @@
+package LinkedSpec::ActionIR::ValueExpr;
+
+use 5.010;
+BEGIN {
+ require File::Basename;
+ my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ my $linked_spec_dir = File::Basename::dirname($module_dir);
+ my $perl_root = File::Basename::dirname($linked_spec_dir);
+ unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
+}
+
+sub _require_dep {
+ my ($deps, $name) = @_;
+ my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+ die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+  unless ref($cb) eq 'CODE';
+ return $cb
+}
+
+#------------------------------------------------------------------------------
+# Function: _extract_scalar_symbol_name
+# Purpose : Resolve scalar variable symbol name from DSL method token surface.
+# Args    : ($token, $deps)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_scalar_symbol_name {
+ my ($token, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ return undef unless defined $token;
+ $token = $trim_action_ir_value->($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^scalar\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _extract_array_symbol_name
+# Purpose : Resolve array variable symbol name from DSL method token surface.
+# Args    : ($token, $deps)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_array_symbol_name {
+ my ($token, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ return undef unless defined $token;
+ $token = $trim_action_ir_value->($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^array\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _extract_hash_symbol_name
+# Purpose : Resolve hash variable symbol name from DSL method token surface.
+# Args    : ($token, $deps)
+# Returns : bare symbol name or undef
+#------------------------------------------------------------------------------
+sub _extract_hash_symbol_name {
+ my ($token, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ return undef unless defined $token;
+ $token = $trim_action_ir_value->($token);
+ return undef unless defined($token) && length($token);
+ return $1 if $token =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(\w+)$/o;
+ return undef
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalar_access_key_expr
+# Purpose : Lower scalar index/key expressions used for array/hash entry access.
+# Args    : ($expr, $deps)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalar_access_key_expr {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
+ my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return $trimmed if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return $trimmed if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+
+ my $lowered = $lower_flow_composite_expr->($trimmed);
+ $lowered = $lower_method_value_expr->($trimmed) unless defined($lowered) && length($lowered);
+ $lowered = $trimmed unless defined($lowered) && length($lowered);
+
+ return '$'.$lowered if $lowered =~ /^\w+$/o;
+ return $lowered
+}
+
+#------------------------------------------------------------------------------
+# Function: _split_scalaref_path_segments
+# Purpose : Parse scalaref path payloads like `[A][B]{C}[D]` into ordered path
+#           segments while preserving nested expression payloads.
+# Args    : ($path_expr, $deps)
+# Returns : arrayref of { kind => 'index'|'key', expr => ... } or undef
+#------------------------------------------------------------------------------
+sub _split_scalaref_path_segments {
+ my ($path_expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ return undef unless defined $path_expr;
+ my $path = $trim_action_ir_value->($path_expr);
+ return undef unless defined($path) && length($path);
+
+ my @segments;
+ my $len = length($path);
+ my $idx = 0;
+ while ($idx < $len) {
+  while ($idx < $len && substr($path, $idx, 1) =~ /\s/o) {
+   ++$idx;
+  }
+  last if $idx >= $len;
+
+  my $open = substr($path, $idx, 1);
+  return undef unless $open eq '[' || $open eq '{';
+  my $close = $open eq '[' ? ']' : '}';
+  ++$idx;
+
+  my @stack = ($close);
+  my $payload = '';
+  my $in_single_quote = 0;
+  my $in_double_quote = 0;
+  my $escape_next = 0;
+  while ($idx < $len && @stack) {
+   my $char = substr($path, $idx, 1);
+   if ($in_single_quote) {
+    $payload .= $char;
+    if ($escape_next) {
+     $escape_next = 0;
+    } elsif ($char eq '\\') {
+     $escape_next = 1;
+    } elsif ($char eq "'") {
+     $in_single_quote = 0;
+    }
+    ++$idx;
+    next;
+   }
+   if ($in_double_quote) {
+    $payload .= $char;
+    if ($escape_next) {
+      $escape_next = 0;
+    } elsif ($char eq '\\') {
+      $escape_next = 1;
+    } elsif ($char eq '"') {
+      $in_double_quote = 0;
+    }
+    ++$idx;
+    next;
+   }
+   if ($char eq "'") {
+    $in_single_quote = 1;
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '"') {
+    $in_double_quote = 1;
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '[') {
+    push @stack, ']';
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq '{') {
+    push @stack, '}';
+    $payload .= $char;
+    ++$idx;
+    next;
+   }
+   if ($char eq ']' || $char eq '}') {
+    my $expected = $stack[-1];
+    return undef unless $char eq $expected;
+    pop @stack;
+    ++$idx;
+    $payload .= $char if @stack;
+    next;
+   }
+   $payload .= $char;
+   ++$idx;
+  }
+  return undef if @stack;
+
+  my $segment_expr = $trim_action_ir_value->($payload);
+  return undef unless defined($segment_expr) && length($segment_expr);
+  push @segments, {
+   kind => ($open eq '[' ? 'index' : 'key'),
+   expr => $segment_expr,
+  };
+ }
+
+ return undef unless @segments;
+ return \@segments
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalaref_segment_expr
+# Purpose : Lower one scalaref path segment expression while preserving literal
+#           bareword path atoms (e.g. `{A}` or `[B]`) when no lowering applies.
+# Args    : ($segment_expr, $deps)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalaref_segment_expr {
+ my ($segment_expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
+ my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+
+ return undef unless defined $segment_expr;
+ my $trimmed = $trim_action_ir_value->($segment_expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $lowered = $lower_flow_composite_expr->($trimmed);
+ return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
+
+ $lowered = $lower_method_value_expr->($trimmed);
+ return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
+
+ return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_scalaref_value_expr
+# Purpose : Lower `scalaref(base_ref, path)` helper into Perl dereference path
+#           expression (e.g. `$ref->[A]->{B}`).
+# Args    : ($base_expr, $path_expr, $deps)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_scalaref_value_expr {
+ my ($base_expr, $path_expr, $deps) = @_;
+ my $base_symbol = _extract_scalar_symbol_name($base_expr, $deps);
+ return undef unless defined $base_symbol;
+
+ my $segments = _split_scalaref_path_segments($path_expr, $deps);
+ return undef unless $segments && @$segments;
+
+ my $lowered = '$'.$base_symbol;
+ foreach my $segment (@$segments) {
+  my $segment_kind = $segment->{kind} // '';
+  my $segment_expr = _lower_scalaref_segment_expr($segment->{expr}, $deps);
+  return undef unless defined($segment_expr) && length($segment_expr);
+
+  if ($segment_kind eq 'index') {
+   $lowered .= '->['.$segment_expr.']';
+  } elsif ($segment_kind eq 'key') {
+   $lowered .= '->{'.$segment_expr.'}';
+  } else {
+   return undef;
+  }
+ }
+ return $lowered
+}
+
+#------------------------------------------------------------------------------
+# Function: _infer_scalar_container_kind
+# Purpose : Infer whether `scalar(container, key)` should resolve through array
+#           index or hash key syntax when container kind is not explicit.
+# Args    : ($container_symbol, $key_expr, $deps)
+# Returns : 'array' or 'hash'
+#------------------------------------------------------------------------------
+sub _infer_scalar_container_kind {
+ my ($container_symbol, $key_expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+
+ return 'hash' if defined($container_symbol) && $container_symbol =~ /(hash|map|dict)/io;
+ return 'array' if defined($container_symbol) && $container_symbol =~ /(arr|array|list|vec|vector)/io;
+
+ my $key_trimmed = $trim_action_ir_value->($key_expr // '');
+ return 'hash' if defined($key_trimmed) && ($key_trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $key_trimmed =~ /^'(?:\\.|[^'])*'$/s);
+ return 'array' if defined($key_trimmed) && $key_trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return 'array'
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_assignment_source_expr
+# Purpose : Map assignment source tokens from method DSL to Perl expressions.
+# Args    : ($source, $deps)
+# Returns : Perl expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_assignment_source_expr {
+ my ($source, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
+ my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+
+ return undef unless defined $source;
+ $source = $trim_action_ir_value->($source);
+ return 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)' if $source eq 'CAPTURE';
+ return '$IMATCH' if $source eq 'IMATCH';
+ return '$LMATCH' if $source eq 'LMATCH';
+
+ my $lowered = $lower_flow_composite_expr->($source);
+ return $lowered if defined($lowered) && length($lowered);
+
+ $lowered = $lower_method_value_expr->($source);
+ return $lowered if defined($lowered) && length($lowered);
+
+ return $source
+}
+
+#------------------------------------------------------------------------------
+# Function: _strip_literal_delimiters
+# Purpose : Strip outer literal delimiters for quoted/regex literal arguments.
+# Args    : ($value, $deps)
+# Returns : unwrapped scalar string or undef
+#------------------------------------------------------------------------------
+sub _strip_literal_delimiters {
+ my ($value, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+
+ return undef unless defined $value;
+ $value = $trim_action_ir_value->($value);
+ return undef unless defined($value) && length($value);
+ return '' if $value eq '//';
+ return $1 if $value =~ m{^/(.*)/$}s;
+ return $1 if $value =~ /^\"(.*)\"$/s;
+ return $1 if $value =~ /^'(.*)'$/s;
+ return $value
+}
+
+1;
