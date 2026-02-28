@@ -11,6 +11,7 @@ BEGIN {
 use LinkedRE;
 
 use LinkedSpec::Trace ();
+use LinkedSpec::Validation ();
 
 use constant {
  DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
@@ -34,6 +35,14 @@ sub _run_bootstrap_parse {
  };
 
  return ($parse_success, $retv, $error);
+}
+
+sub _require_dep {
+ my ($deps, $name) = @_;
+ my $value = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+ die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency '$name'"
+  unless defined $value;
+ return $value
 }
 
 sub _build_action_rewriter_migration_summary {
@@ -272,6 +281,189 @@ sub _build_final_descr {
  $final_descr->{meta} ||= {};
  $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
  return $final_descr;
+}
+
+#------------------------------------------------------------------------------
+# Function: run_get_pipeline
+# Purpose : Execute the full `.spec` compile/generate pipeline used by
+#           `LinkedSpec::Get`, with explicit dependency-injected state handles.
+# Args    : ($spec_content_ref, $option_hashref, $deps_hashref)
+# Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
+#------------------------------------------------------------------------------
+sub run_get_pipeline {
+ my ($spec_content_ref, $option, $deps) = @_;
+ $option = {} unless ref($option) eq 'HASH';
+ $deps = {} unless ref($deps) eq 'HASH';
+
+ my $spec_descr = _require_dep($deps, 'spec_descr');
+ my $bootstrap_rule_index = _require_dep($deps, 'bootstrap_rule_index');
+ my $gdata = _require_dep($deps, 'gdata');
+ my $emit_parser_source_line = _require_dep($deps, 'emit_parser_source_line');
+ my $top_rule_ref = _require_dep($deps, 'top_rule_ref');
+ my $parser_source_chunks_ref = $deps->{parser_source_chunks_ref};
+ $parser_source_chunks_ref = [] unless ref($parser_source_chunks_ref) eq 'ARRAY';
+
+ die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'emit_parser_source_line' must be CODE"
+  unless ref($emit_parser_source_line) eq 'CODE';
+ die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'top_rule_ref' must be SCALAR ref"
+  unless ref($top_rule_ref) eq 'SCALAR';
+
+ LinkedSpec::Trace::_apply_trace_options($option);
+ my $parse_only = $option->{parse_only};
+ my $generate_only = $option->{generate_only};
+ my $return_descr = $option->{return_descr};
+ my $test_expectation = $option->{test_expectation};
+ my $dump_parser_source = $option->{dump_parser_source};
+ my $parser_source_ref = $option->{parser_source_ref};
+
+ my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::Get', {
+  parse_only => $parse_only ? 1 : 0,
+  generate_only => $generate_only ? 1 : 0,
+  return_descr => $return_descr ? 1 : 0,
+  dump_parser_source => $dump_parser_source ? 1 : 0,
+  trace_level => LinkedSpec::Trace::_trace_level_name($LinkedSpec::Trace::DUMP_VERBOSITY),
+ }, DUMP_LOW);
+
+ LinkedSpec::Trace::log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
+
+ my $validation_failed = 0;
+
+ unless (LinkedSpec::Validation::validate_spec_content($spec_content_ref)) {
+  LinkedSpec::Trace::trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
+  if ($parse_only && $test_expectation eq 'fail') {
+   $validation_failed = 1;
+   LinkedSpec::Trace::log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
+  } else {
+   LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
+   LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
+   return undef;
+  }
+ } else {
+  LinkedSpec::Trace::trace_decision('validate_spec_content', 1, 'Input envelope validation passed', DUMP_HIGH);
+ }
+
+ unless ($validation_failed) {
+  unless (LinkedSpec::Validation::validate_dsl_syntax($spec_content_ref)) {
+   LinkedSpec::Trace::trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
+   if ($parse_only && $test_expectation eq 'fail') {
+    $validation_failed = 1;
+    LinkedSpec::Trace::log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
+   } else {
+    LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
+    LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
+    return undef;
+   }
+  } else {
+   LinkedSpec::Trace::trace_decision('validate_dsl_syntax', 1, 'Rule-level DSL syntax validation passed', DUMP_HIGH);
+  }
+ }
+
+ my $retv;
+ my $parse_success = 1;
+
+ LinkedSpec::Trace::log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
+ my $parse_error = '';
+ ($parse_success, $retv, $parse_error) = _run_bootstrap_parse(
+  $spec_descr,
+  $bootstrap_rule_index,
+  $spec_content_ref,
+  $gdata,
+ );
+ unless ($parse_success) {
+  LinkedSpec::Trace::log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $parse_error");
+ }
+
+ LinkedSpec::Trace::trace_decision('bootstrap_spec_parse', $parse_success, $parse_success ? 'Hardcoded parser returned successfully' : 'Hardcoded parser eval failed', DUMP_HIGH);
+ if ($parse_success) {
+  LinkedSpec::Trace::log_output(DUMP_LOW, "Spec file parsing successful", "Hardcoded parser completed successfully");
+ }
+
+ if (LinkedSpec::Trace::should_dump(DUMP_MEDIUM) || $parse_only) {
+  LinkedSpec::Trace::log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
+  if ($parse_success && defined $retv) {
+   LinkedSpec::Trace::log_dump(Dumper($retv));
+  } else {
+   LinkedSpec::Trace::log_dump("Parse failed - no result available\n");
+  }
+  LinkedSpec::Trace::log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
+ }
+
+ unless ($parse_success && defined $retv) {
+  LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
+  return undef;
+ }
+
+ if ($parse_only) {
+  LinkedSpec::Trace::log_output(DUMP_LOW, "Parse-only mode", "Stopping after .spec file parsing - no parser generated");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'parse_only', parse_only => 1 }, DUMP_LOW);
+  return undef;
+ }
+
+ LinkedSpec::Trace::log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
+ if ($dump_parser_source) {
+  $emit_parser_source_line->("my \$descr = {\n spec => {\n");
+ }
+
+ my $auto_descr_spec = spec_descr($retv);
+ unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
+  LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
+  return undef;
+ }
+ my $final_descr = _build_final_descr($auto_descr_spec, \&spec_gdata);
+
+ unless (LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
+  LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+  return undef;
+ }
+
+ my $rule_count = scalar(keys %$auto_descr_spec);
+ LinkedSpec::Trace::log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
+ if ($dump_parser_source) {
+  $emit_parser_source_line->(" },\n gdata => {\n");
+  my @glabels = sort keys %{$final_descr->{gdata} || {}};
+  for (my $i = 0; $i < @glabels; ++$i) {
+   my $label = $glabels[$i];
+   my $gregex = $final_descr->{gdata}{$label};
+   my $prefix = $i ? ",\n" : '';
+   $emit_parser_source_line->($prefix . " $label\t=> qr/$gregex/o");
+  }
+  my $top_rule = $$top_rule_ref;
+  $emit_parser_source_line->("\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
+  my $parser_source = join('', @$parser_source_chunks_ref);
+  if (ref($parser_source_ref) eq 'SCALAR') {
+   $$parser_source_ref = $parser_source;
+  } else {
+   print $parser_source;
+  }
+ }
+
+ if (LinkedSpec::Trace::should_dump(DUMP_LOW)) {
+  my $top_rule = $$top_rule_ref;
+  LinkedSpec::Trace::log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
+  LinkedSpec::Trace::log_dump(Dumper($final_descr));
+  LinkedSpec::Trace::log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
+ }
+
+ if ($generate_only) {
+  LinkedSpec::Trace::log_output(DUMP_LOW, "Generate-only mode", "Stopping after parser generation - no functional parser returned");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'generate_only', generate_only => 1 }, DUMP_LOW);
+  return undef;
+ }
+
+ if ($return_descr) {
+  LinkedSpec::Trace::log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
+  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'return_descr', return_descr => 1, rule_count => $rule_count }, DUMP_LOW);
+  return $final_descr;
+ }
+
+ LinkedSpec::Trace::log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
+ LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $$top_rule_ref, rule_count => $rule_count }, DUMP_LOW);
+
+ my $top_rule = $$top_rule_ref;
+ return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
 }
 
 1;

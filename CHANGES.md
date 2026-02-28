@@ -1,5 +1,111 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-28 - Phase 1A Slice: Extract Flow Composite Expression Helpers to `LinkedSpec::ActionIR::FlowExpr`
+## Summary
+Moved flow-composite expression lowering ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::FlowExpr` module, preserving existing call surfaces via thin delegates.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::FlowExpr` module owning:
+  - `_lower_is_empty_expr`
+  - `_lower_flow_composite_expr`
+- Boundary design:
+  - module uses explicit dependency callbacks (`trim`, symbol extractors, method-value lowering, method-expression parse/scope-normalization),
+  - no hard-coded `LinkedSpec::...` calls inside flow-expression module logic.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::FlowExpr ();`
+  - added `_flow_expr_deps` dependency map helper,
+  - replaced in-file bodies of `_lower_is_empty_expr` and `_lower_flow_composite_expr` with thin delegates.
+- Behavioral parity:
+  - composite condition lowering semantics (`and/or/not`, string/numeric compares, `matches`, `is_empty`, `is_nonempty`) unchanged.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
+## 2026-02-28 - Phase 1A Slice: Transfer Bootstrap Grammar Ownership to `LinkedSpec::BootstrapSpec`
+## Summary
+Moved hardcoded bootstrap grammar ownership out of `LinkedSpec.pm` into `LinkedSpec::BootstrapSpec`, including method-chain parsing/render helpers and descriptor construction logic. `LinkedSpec.pm` now initializes bootstrap parsing state through one builder call.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Expanded `LinkedSpec::BootstrapSpec` to own bootstrap grammar construction:
+  - added `build_bootstrap_spec()` returning:
+    - bootstrap descriptor (`$spec_descr`)
+    - bootstrap rule index map ref
+    - bootstrap gdata bundle
+- Moved method-chain helper ownership from `LinkedSpec.pm` into `BootstrapSpec`:
+  - `_parse_method_call_chain`
+  - `_method_chain_return_uses_general_payload`
+  - `_render_method_call_chain`
+  - local trim helper for method-chain payloads
+- Kept bootstrap registry/gdata build local to bootstrap module and reused by the new builder flow.
+- Replaced large in-file bootstrap grammar block in `LinkedSpec.pm` with:
+  - `my ($spec_descr, $bootstrap_rule_index_ref, $gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();`
+  - local hash materialization for existing parser call sites.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
+## 2026-02-28 - Phase 1A Slice: Extract `Get` Pipeline Ownership to `LinkedSpec::Compiler`
+## Summary
+Moved the full `Get` compile/generate orchestration pipeline out of `LinkedSpec.pm` into `LinkedSpec::Compiler::run_get_pipeline(...)`, while keeping `LinkedSpec.pm::Get` as a thin façade that only manages parser-source emitter scoping and state handles.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::Compiler::run_get_pipeline($spec_content_ref, $option_hashref, $deps_hashref)` as the new owner of `Get` pipeline orchestration:
+  - trace option application and pipeline scope tracing
+  - validation flow (`validate_spec_content`, `validate_dsl_syntax`)
+  - bootstrap parse execution and diagnostics
+  - descriptor generation and gdata validation
+  - parser-source emission and output routing
+  - parse-only / generate-only / return-descr mode branching
+  - final parser closure return
+- Added dependency validation helper in compiler module:
+  - `_require_dep($deps, $name)`
+- `run_get_pipeline` uses explicit injected state handles for the few fields owned by `LinkedSpec.pm`:
+  - `spec_descr`
+  - `bootstrap_rule_index`
+  - `gdata`
+  - `emit_parser_source_line`
+  - `top_rule_ref`
+  - `parser_source_chunks_ref`
+- Replaced monolithic `LinkedSpec.pm::Get` body with a thin delegate to compiler pipeline, preserving existing API and behavior.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-28 - Phase 1A Slice: Extract `spec_entry` to `LinkedSpec::SpecEntry`
 ## Summary
 Moved full `spec_entry` rule-compilation ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::SpecEntry` module, and replaced `LinkedSpec.pm::spec_entry` with a thin façade delegate.

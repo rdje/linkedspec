@@ -24,6 +24,7 @@ use LinkedSpec::ActionRewriter ();
 use LinkedSpec::ActionIR::Scanner ();
 use LinkedSpec::ActionIR::MethodExpr ();
 use LinkedSpec::ActionIR::ValueExpr ();
+use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
@@ -57,25 +58,19 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 # Args    : ($arg_expr)
 # Returns : Perl boolean expression string or undef
 #------------------------------------------------------------------------------
+sub _flow_expr_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
+  extract_array_symbol_name => \&_extract_array_symbol_name,
+  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
+  lower_method_value_expr => \&_lower_method_value_expr,
+  parse_method_function_expr => \&_parse_method_function_expr,
+  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+ }
+}
 sub _lower_is_empty_expr {
  my ($arg_expr) = @_;
- return undef unless defined $arg_expr;
- my $trimmed = _trim_action_ir_value($arg_expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($trimmed =~ /^array\s*\(/o) {
-  my $array_symbol = _extract_array_symbol_name($trimmed);
-  return "(!\@$array_symbol)" if defined $array_symbol;
- }
-
- my $scalar_symbol = _extract_scalar_symbol_name($trimmed);
- if (defined $scalar_symbol) {
-  return "(!defined(\$$scalar_symbol) || \$$scalar_symbol eq '')";
- }
-
- my $lowered = _lower_method_value_expr($trimmed);
- $lowered = $trimmed unless defined($lowered) && length($lowered);
- return "(!($lowered))"
+ return LinkedSpec::ActionIR::FlowExpr::_lower_is_empty_expr($arg_expr, _flow_expr_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -88,92 +83,7 @@ sub _lower_is_empty_expr {
 #------------------------------------------------------------------------------
 sub _lower_flow_composite_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash)\s*\(/o) {
-  my $lowered_value = _lower_method_value_expr($trimmed);
-  return $lowered_value if defined($lowered_value) && length($lowered_value);
- }
-
- my $call = _parse_method_function_expr($trimmed);
- return $trimmed unless $call;
-
- my $method = $call->{method} // '';
- my $args = $call->{args} || [];
- my %string_compare_ops = map { $_ => 1 } qw(eq ne gt ge lt le);
- my %numeric_compare_ops = (
-  num_eq => '==',
-  num_ne => '!=',
-  num_gt => '>',
-  num_ge => '>=',
-  num_lt => '<',
-  num_le => '<=',
- );
-
- if ($method eq 'or' || $method eq 'and') {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, undef);
-  return undef unless $effective_args && @$effective_args;
-  my @parts = map { _lower_flow_composite_expr($_) } @$effective_args;
-  return undef if grep { !defined($_) || !length($_) } @parts;
-  my $joiner = $method eq 'or' ? ' || ' : ' && ';
-  return '('.join($joiner, map { "($_)" } @parts).')';
- }
-
- if ($method eq 'not') {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
-  return undef unless $effective_args;
-  my $value = _lower_flow_composite_expr($effective_args->[0]);
-  return undef unless defined($value) && length($value);
-  return "(!($value))";
- }
-
- if ($method eq 'is_empty') {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
-  return undef unless $effective_args;
-  return _lower_is_empty_expr($effective_args->[0]);
- }
-
- if ($method eq 'is_nonempty') {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 1, 1);
-  return undef unless $effective_args;
-  my $empty_expr = _lower_is_empty_expr($effective_args->[0]);
-  return undef unless defined($empty_expr) && length($empty_expr);
-  return "(!($empty_expr))";
- }
-
- if (exists $string_compare_ops{$method}) {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
-  return undef unless $effective_args;
-  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
-  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs $method $rhs)";
- }
-
- if (exists $numeric_compare_ops{$method}) {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
-  return undef unless $effective_args;
-  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
-  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs $numeric_compare_ops{$method} $rhs)";
- }
-
- if ($method eq 'matches') {
-  my $effective_args = _normalize_method_args_with_optional_scope($args, 2, 2);
-  return undef unless $effective_args;
-  my $lhs = _lower_flow_composite_expr($effective_args->[0]);
-  my $rhs = _lower_flow_composite_expr($effective_args->[1]);
-  return undef unless defined($lhs) && length($lhs);
-  return undef unless defined($rhs) && length($rhs);
-  return "($lhs =~ $rhs)";
- }
-
- return $trimmed
+ return LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr($expr, _flow_expr_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -344,371 +254,13 @@ sub extract_regex_literals_from_rule_rhs {
  return LinkedSpec::Validation::extract_regex_literals_from_rule_rhs(@_)
 }
 
-#------------------------------------------------------------------------------
-# Function: _parse_method_call_chain
-# Purpose : Parse `.method(args).method2(args2)` chains into ordered call
-#           descriptors while preserving nested-parenthesis argument payloads.
-# Args    : ($chain)
-# Returns : arrayref of { method => ..., args => ... } or undef on parse error
-#------------------------------------------------------------------------------
-sub _parse_method_call_chain {
- my ($chain) = @_;
- return [] unless defined($chain) && length($chain);
-
- my @calls;
- pos($chain) = 0;
- while ($chain =~ /\G\s*\.\s*(?<method>\w+)(?<args>\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))?/gc) {
-  my $args = $+{args};
-  if (defined $args) {
-   $args =~ s/^\s*\(//o;
-   $args =~ s/\)\s*$//o;
-  }
-  push @calls, {
-   method => $+{method},
-   args   => $args,
-  };
- }
-
- return \@calls if $chain =~ /\G\s*$/gc;
- return undef
-}
-
-#------------------------------------------------------------------------------
-# Function: _method_chain_return_uses_general_payload
-# Purpose : Detect method-chain `.return(...)` payloads that should be emitted
-#           as `return(payload)` without implicit scope-label injection.
-# Args    : ($args)
-# Returns : boolean
-#------------------------------------------------------------------------------
-sub _method_chain_return_uses_general_payload {
- my ($args) = @_;
- return 0 unless defined $args;
- my $trimmed = _trim_action_ir_value($args);
- return 0 unless defined($trimmed) && length($trimmed);
- return $trimmed =~ /^(?:\[|\{|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\()/o ? 1 : 0
-}
-
-#------------------------------------------------------------------------------
-# Function: _render_method_call_chain
-# Purpose : Render parsed method-chain calls into semicolon-joined helper-style
-#           calls with entry label injected as first argument.
-# Args    : ($entry_label, $chain)
-# Returns : rendered code string or undef
-#------------------------------------------------------------------------------
-sub _render_method_call_chain {
- my ($entry_label, $chain) = @_;
- my $calls = _parse_method_call_chain($chain);
- return undef unless $calls && @$calls;
- my @rendered = map {
-  my $method = $_->{method};
-  my $args = $_->{args};
-  if ($method eq 'return' && _method_chain_return_uses_general_payload($args)) {
-   return $method . '(' . $args . ')';
-  }
-  $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')'
- } @$calls;
- return join '; ', @rendered
-}
 
 #------------------------------------------------------------------------------
 # Bootstrap parser metadata and global state
 #------------------------------------------------------------------------------
-# Maps bootstrap rule id => index in $spec_descr; avoids hardcoded positional
-# assumptions when bootstrap handlers dispatch recursively.
-my %bootstrap_rule_index;
-
-# Declarative mapping from entry-label suffix markers to rule execution family.
-my $node_type     = {
-	'&'       => 'AND',
-	'|'       => 'OR',
-	'+'       => 'REP_PLUS',
-	'*'       => 'REP_STAR',
-	'?'       => 'REP_OPT'
-};
-
-
 # Optional parser-source emitter callback is configured by Get() when requested.
-
-# Hardcoded bootstrap grammar used to parse .spec into intermediate entries.
-my $spec_descr = [
-{# Spec			-0-
- id => 'SPEC_ROOT',
- tags => { root => 1 },
- handler=> sub {
-  my ($descr, $string, $gdata) = @_;
-  my @specentry;
-  my @specs;
-  while (1) {
-   my $minfo = LinkedRE::or($string, $$gdata{startREs});
-   unless($minfo) {
-	   # print "(Spec) Closing specentry DUE TO EOF\n" if @specentry;
-    push @specs, [@specentry] if @specentry;
-    return [@specs]
-   }
-
-   my $dispatch_idx = $$gdata{start_dispatch}[$$minfo{index}];
-   return undef unless defined $dispatch_idx;
-
-   my $retv = &{$$descr[$dispatch_idx]{handler}}($minfo, $descr, $string, $gdata);
-   return undef unless $retv;
-
-   unless ($$retv[0] eq 'COMMENT') {
-    if ($$retv[0] =~ /ELABEL/o) {
-     if (@specentry) {
-      # say '(Spec) Closing specentry DUE TO NEW Entry';
-      push @specs, [@specentry];
-      # print "(Spec) Re-Initializing specentry (@{$retv})\n";
-      @specentry = $retv
-     } else {
-     # say "(Spec) Initializing specentry @{$retv})";
-     push @specentry, $retv;
-      # Hack
-      #$gdata->{_current_entry} = $retv->[1]
-     }
-    } else {
-     # say "(Spec) Pushing in specentry (@{$retv})";
-     push @specentry, $retv;
-    }
-   }
-
-  }
- }
-
-},
-
-{# Entry Label
- id => 'ENTRY_LABEL',
- tags => { start_token => 1 },
- re=> [qr/\w+\s*::?(?:&|\||\+|\*|\?)?/o],
- handler=> sub {
-  my ($info, undef, undef, $gdata) = @_;
-  $$info{match} =~ s/\s*://o;
-
-  #say "\n(Entry Label) ($$info{match})";
-  my $target = $$info{match} =~ /:/ ? '_INITIAL' : '';
-  $$info{match} =~ s/://o;
-  
-  $$info{match} =~ s/(\W)//o;
-  $gdata->{_current_entry} = $$info{match};
-  return ["ELABEL$target", $$info{match}, $1 ? $node_type->{$1} : "default"]
- }
-},
-
-{# RE pattern
- id => 'RE_PATTERN',
- tags => { start_token => 1 },
- re=> [qr/(?<!\\)\/.+?(?<!\\)\//o],
- handler=> sub {
-  my ($info) = @_;
-  $$info{match} =~ s/^\/|\/$//g;
-
-  #say "(RE pattern) ($$info{match})";
-  return ['RE', $$info{match}]
- }
-},
-
-{# Action code block
- id => 'ACTION_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/->\s*\w+(?:\[\d+\])?\s*\{/o, qr/\}/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my $ipos = pos($$string);
-  my ($entry_label, $reidx) = $$info{match} =~ /(\w+)(?:\[(\d+)\])?/o; 
-  $reidx = $reidx || 0;
-
-  #say "(Action code block)($$info{match})($entry_label, $reidx)";
-  while (1) {
-   my $minfo = LinkedRE::or($string, $$gdata{cbrace});
-   return undef unless $minfo;
-
-   if ($$minfo{index} == 1) {
-    # Closing brace, recursion stops here
-    #say "(Action code block) (${\(substr($$string, $ipos, pos($$string) - $ipos - 1))}) Closing";
-    return ['ACODE', {relabel=>$entry_label, reidx=>$reidx, code=>substr($$string, $ipos, pos($$string) - $ipos - 1)}]
-   } elsif ($$minfo{index} == 0) {
-    # Opening brace found, triggering recursion
-    # say '(Curly BRACE) Recursion';
-    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
-    # say '(Curly BRACE) Back From Recursion';
-   } else {
-    #say "QUOTES <$$minfo{match}>"
-   }
-  }
- }
-},
-
-{# Method-like Empty Action code block
- id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-  my ($entry_label, $reidx, $chain) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN/};
-  my $code = _render_method_call_chain($entry_label, $chain);
-  return undef unless defined $code;
-  return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>$code}]
- }
-},
-
-{# Empty Action code block
- id => 'EMPTY_ACTION_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/->\s*\w+(?:\[0\])?/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my ($entry_label) = $$info{match} =~ /(\w+)/o; 
-  #print "(Empty Action code block) ($entry_label)\n";
-  return ['ACODE', {relabel=>$entry_label, reidx=>0, code=>"call($entry_label)"}]
- }
-},
-
-
-{# Non-Action code block
- id => 'NON_ACTION_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/\w+\s*\{/o, qr/\}/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my $ipos = pos($$string);
-  my ($type) = $$info{match} =~ /(\w+)/o; 
-  #print "(Non-Action code block) ($type) Opening\n";
-
-  while (1) {
-   my $minfo = LinkedRE::or($string, $$gdata{cbrace});
-   return undef unless $minfo;
-
-   if ($$minfo{index} == 1) {
-    # Closing brace, recursion stops here
-    # print "(Initial/Loop  ($type) code block) (${\(substr($$string, $ipos, pos($$string) - $ipos - 1))}) Closing\n";
-    return ["${type}CODE", substr($$string, $ipos, pos($$string) - $ipos - 1)]
-   } elsif ($$minfo{index} == 0) {
-    # Opening brace found, triggering recursion
-    # print "(Curly BRACE) Recursion\n";
-    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
-    # print "(Curly BRACE) Back From Recursion\n";
-   } else {
-    #print "QUOTES <$$minfo{match}>\n"
-   }
-  }
- }
-},
-
-{# Comment
- id => 'COMMENT',
- tags => { start_token => 1 },
- #re=> [qr/(?:\r\n?)?[ \t]*#.*/o],
- re=> [qr/[ \t]*#.*/o],
- handler=> sub {return ['COMMENT']}
-},
-
-{# Blind call code block
- id => 'BLIND_CALL_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/=>\s*\w+\s*\{/o, qr/\}/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my $ipos = pos($$string);
-  my ($call) = $$info{match} =~ /(\w+)/o; 
-
-  #print "(Blind call code block)($$info{match})($call, $reidx)\n";
-  while (1) {
-   my $minfo = LinkedRE::or($string, $$gdata{cbrace});
-   return undef unless $minfo;
-
-   if ($$minfo{index} == 1) {
-    # Closing brace, recursion stops here
-    #print "(Action code block) (${\(substr($$string, $ipos, pos($$string) - $ipos - 1))}) Closing\n";
-    return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call);\n".substr($$string, $ipos, pos($$string) - $ipos - 1)}]
-   } elsif ($$minfo{index} == 0) {
-    # Opening brace found, triggering recursion
-    # print "(Curly BRACE) Recursion\n";
-    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
-    # print "(Curly BRACE) Back From Recursion\n";
-   } else {
-    #print "QUOTES <$$minfo{match}>\n"
-   }
-  }
- }
-},
-
-{# Split-Like Code
- id => 'SPLIT_LIKE_CODE',
- tags => { start_token => 1 },
- re=> [qr/@\s*move_pos\b/o],
- handler=> sub {
-  # say '(Split-Like Code)';
-  return ['MOVE_POS']
- }
-},
-
-
-{# Empty Blind code block
- id => 'EMPTY_BLIND_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/=>\s*\w+/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my ($call) = $$info{match} =~ /(\w+)/o; 
-  #print "(Empty Action code block) ($entry_label)\n";
-  return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call)"}]
- }
-},
-
-
-{# Method-like Empty Non-Action code block
- id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
- tags => { start_token => 1 },
- re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-  my ($type, $chain) = @{$$info{match_hash}}{qw/TYPE CHAIN/};
-  my $code = _render_method_call_chain($gdata->{_current_entry}, $chain);
-  return undef unless defined $code;
-  return ["${type}CODE", $code]
- }
-},
-
-
-{# Curly Brace			-7- + dquotes + squotes
- id => 'CURLY_BRACE',
- tags => { start_token => 1, brace_scanner => 1 },
- #re=> [qr/(?<!\\)\{/o, qr/(?<!\\)\}/o],
- re=> [qr/(?<!\\)\{/o, qr/(?<!\\)\}/o, qr/(?<!\\)".*?(?<!\\)"/o, qr/(?<!\\)'.*?(?<!\\)'/o],
- handler=> sub {
-  my ($info, $descr, $string, $gdata) = @_;
-
-  my $ipos = pos($$string);
-  #print "(Curly BRACE) Opening\n";
-
-  while (1) {
-   my $minfo = LinkedRE::or($string, $$gdata{cbrace});
-   return undef unless $minfo;
-
-   if ($$minfo{index} == 1) {
-    # Closing brace, recursion stops here
-    #print "(Curly BRACE) Closing <".substr($$string, $ipos, pos($$string) - $ipos - 1).">\n";
-    return 1
-   } elsif ($$minfo{index} == 0)  {
-    # Opening brace found, triggering recursion
-    #print "(Curly BRACE) Recursion\n";
-    &{$$descr[$bootstrap_rule_index{CURLY_BRACE}]{handler}}($minfo, $descr, $string, $gdata);
-    # print "(Curly BRACE) Back From Recursion\n";
-   } else {
-    #print "QUOTES <$$minfo{match}>\n"
-   }
-  }
- }
-}
-];
-
-my ($bootstrap_rule_index_ref, $gdata) = LinkedSpec::BootstrapSpec::_build_bootstrap_registry_gdata($spec_descr);
-%bootstrap_rule_index = %$bootstrap_rule_index_ref;
+my ($spec_descr, $bootstrap_rule_index_ref, $gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+my %bootstrap_rule_index = %$bootstrap_rule_index_ref;
 
 
 # my $testdata = "999  + (3 + (7 - 9 + (arr + 99 - ZZAA)))";
@@ -735,178 +287,25 @@ sub _build_action_rewriter_migration_summary {
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
 sub Get {
+ my $spec_content_ref = $_[0];
  my %option = @_[1 .. $#_];
- _apply_trace_options(\%option);
- my $parse_only = $option{parse_only};
- my $generate_only = $option{generate_only};
- my $return_descr = $option{return_descr};
- my $test_expectation = $option{test_expectation};
- my $dump_parser_source = $option{dump_parser_source};
- my $parser_source_ref = $option{parser_source_ref};
  my @parser_source_chunks;
- local $PARSER_SOURCE_EMIT_CB = $dump_parser_source ? sub {
+ local $PARSER_SOURCE_EMIT_CB = $option{dump_parser_source} ? sub {
   my ($chunk) = @_;
   push @parser_source_chunks, $chunk;
  } : undef;
-
- my $trace_scope = trace_enter('LinkedSpec::Get', {
-  parse_only => $parse_only ? 1 : 0,
-  generate_only => $generate_only ? 1 : 0,
-  return_descr => $return_descr ? 1 : 0,
-  dump_parser_source => $dump_parser_source ? 1 : 0,
-  trace_level => _trace_level_name($DUMP_VERBOSITY),
- }, DUMP_LOW);
-
- log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
-
- # Always run validation, but handle failures differently for parse-only tests
- my $validation_failed = 0;
-
- # Validate input spec content
- unless (validate_spec_content($_[0])) {
-  trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
-  if ($parse_only && $test_expectation eq 'fail') {
-   $validation_failed = 1;
-   log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
-  } else {
-   log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
-   trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
-   return undef;
+ return LinkedSpec::Compiler::run_get_pipeline(
+  $spec_content_ref,
+  \%option,
+  {
+   spec_descr => $spec_descr,
+   bootstrap_rule_index => \%bootstrap_rule_index,
+   gdata => $gdata,
+   emit_parser_source_line => \&_emit_parser_source_line,
+   top_rule_ref => \$top_rule,
+   parser_source_chunks_ref => \@parser_source_chunks,
   }
- } else {
-  trace_decision('validate_spec_content', 1, 'Input envelope validation passed', DUMP_HIGH);
- }
-
- # Validate DSL syntax (only if content validation passed)
- unless ($validation_failed) {
-  unless (validate_dsl_syntax($_[0])) {
-   trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
-   if ($parse_only && $test_expectation eq 'fail') {
-    $validation_failed = 1;
-    log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
-   } else {
-    log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
-    trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
-    return undef;
-   }
-  } else {
-   trace_decision('validate_dsl_syntax', 1, 'Rule-level DSL syntax validation passed', DUMP_HIGH);
-  }
- }
-
- my $retv;
- my $parse_success = 1;
-
- # Try to parse the spec file
- log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
- my $parse_error = '';
- ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
-  $spec_descr,
-  \%bootstrap_rule_index,
-  $_[0],
-  $gdata,
- );
- unless ($parse_success) {
-  log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $parse_error");
- }
-
- trace_decision('bootstrap_spec_parse', $parse_success, $parse_success ? 'Hardcoded parser returned successfully' : 'Hardcoded parser eval failed', DUMP_HIGH);
- if ($parse_success) {
-  log_output(DUMP_LOW, "Spec file parsing successful", "Hardcoded parser completed successfully");
- }
-
- # Dump parse result if in dump mode (always for parse-only tests)
- if (should_dump(DUMP_MEDIUM) || $parse_only) {
-  log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
-  if ($parse_success && defined $retv) {
-   log_dump(Dumper($retv));
-  } else {
-   log_dump("Parse failed - no result available\n");
-  }
-  log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
- }
-
- # Do not continue into generation when bootstrap parse failed or returned no data
- unless ($parse_success && defined $retv) {
-  log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
-  trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
-  return undef;
- }
-
- # If parse-only mode, stop here and return undef
- if ($parse_only) {
-  log_output(DUMP_LOW, "Parse-only mode", "Stopping after .spec file parsing - no parser generated");
-  trace_exit($trace_scope, { status => 'ok', stage => 'parse_only', parse_only => 1 }, DUMP_LOW);
-  return undef;
- }
-
- # Start parser generation phase
- log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
- if ($dump_parser_source) {
-  _emit_parser_source_line("my \$descr = {\n spec => {\n");
- }
-
- my $auto_descr_spec = spec_descr($retv);
- unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
-  log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
-  trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
-  return undef;
- }
- my $final_descr = LinkedSpec::Compiler::_build_final_descr($auto_descr_spec, \&spec_gdata);
-
- # Validate generated structures
- unless (validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
-  log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
-  trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
-  return undef;
- }
-
- my $rule_count = scalar(keys %$auto_descr_spec);
- log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
- if ($dump_parser_source) {
-  _emit_parser_source_line(" },\n gdata => {\n");
-  my @glabels = sort keys %{$final_descr->{gdata} || {}};
-  for (my $i = 0; $i < @glabels; ++$i) {
-   my $label = $glabels[$i];
-   my $gregex = $final_descr->{gdata}{$label};
-   my $prefix = $i ? ",\n" : '';
-   _emit_parser_source_line($prefix . " $label\t=> qr/$gregex/o");
-  }
-  _emit_parser_source_line("\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
-  my $parser_source = join('', @parser_source_chunks);
-  if (ref($parser_source_ref) eq 'SCALAR') {
-   $$parser_source_ref = $parser_source;
-  } else {
-   print $parser_source;
-  }
- }
-
- # Dump final_descr if in dump mode
- if (should_dump(DUMP_LOW)) {
-  log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
-  log_dump(Dumper($final_descr));
-  log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
- }
-
- # If generate-only mode, stop here and return undef
- if ($generate_only) {
-  log_output(DUMP_LOW, "Generate-only mode", "Stopping after parser generation - no functional parser returned");
-  trace_exit($trace_scope, { status => 'ok', stage => 'generate_only', generate_only => 1 }, DUMP_LOW);
-  return undef;
- }
-
- # Optional descriptor-return mode for tooling/introspection
- if ($return_descr) {
-  log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
-  trace_exit($trace_scope, { status => 'ok', stage => 'return_descr', return_descr => 1, rule_count => $rule_count }, DUMP_LOW);
-  return $final_descr;
- }
-
- # Parser generation completed successfully
- log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
- trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $top_rule, rule_count => $rule_count }, DUMP_LOW);
-
- return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
+ )
 }
 
 #------------------------------------------------------------------------------
