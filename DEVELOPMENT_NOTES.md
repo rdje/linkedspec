@@ -61,6 +61,34 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-28)
+- Executed next Phase 1A extraction slice (fluent control-flow lowering helpers):
+  - created `perl/LinkedSpec/ActionIR/ControlFlow.pm`,
+  - moved ownership of if/switch branch lowering and fluent emit helpers out of `LinkedSpec.pm`.
+- `ActionIR::ControlFlow` now owns:
+  - `_lower_control_flow_value_expr`
+  - `_lower_switch_case_value_expr`
+  - `_lower_if_flow_statement`
+  - `_lower_elseif_flow_statement`
+  - `_lower_else_flow_statement`
+  - `_lower_endif_flow_statement`
+  - `_lower_flow_branch_action_expr`
+  - `_lower_inline_switch_branch_expr`
+  - `_lower_switch_flow_statement`
+  - `_lower_case_flow_statement`
+  - `_lower_default_flow_statement`
+  - `_lower_endcase_flow_statement`
+  - `_lower_endswitch_flow_statement`
+  - `_lower_say_statement`
+  - `_lower_print_statement`
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::ActionIR::ControlFlow ();`,
+  - added `_control_flow_deps` callback map,
+  - replaced moved in-file implementations with thin delegates.
+- Validation snapshot for control-flow extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 - Executed next Phase 1A extraction slice (flow composite expression helpers):
   - created `perl/LinkedSpec/ActionIR/FlowExpr.pm`,
   - moved ownership of:

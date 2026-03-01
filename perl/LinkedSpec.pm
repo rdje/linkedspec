@@ -25,6 +25,7 @@ use LinkedSpec::ActionIR::Scanner ();
 use LinkedSpec::ActionIR::MethodExpr ();
 use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
+use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
@@ -64,6 +65,16 @@ sub _flow_expr_deps {
   extract_array_symbol_name => \&_extract_array_symbol_name,
   extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
   lower_method_value_expr => \&_lower_method_value_expr,
+  parse_method_function_expr => \&_parse_method_function_expr,
+  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+ }
+}
+
+sub _control_flow_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
+  normalize_method_tag_expr => \&_normalize_method_tag_expr,
+  lower_flow_composite_expr => \&_lower_flow_composite_expr,
   parse_method_function_expr => \&_parse_method_function_expr,
   normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
  }
@@ -1008,10 +1019,7 @@ sub _normalize_method_args_with_optional_scope {
 #------------------------------------------------------------------------------
 sub _lower_control_flow_value_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $lowered = _lower_flow_composite_expr($expr);
- return undef unless defined($lowered) && length($lowered);
- return $lowered
+ return LinkedSpec::ActionIR::ControlFlow::_lower_control_flow_value_expr($expr, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1023,20 +1031,7 @@ sub _lower_control_flow_value_expr {
 #------------------------------------------------------------------------------
 sub _lower_switch_case_value_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($trimmed =~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
-  return {mode => 'regex', expr => $trimmed}
- }
- my $lowered = _lower_flow_composite_expr($trimmed);
- return undef unless defined($lowered) && length($lowered);
-
- if ($trimmed =~ /^\w+$/o && $lowered eq $trimmed) {
-  return {mode => 'eq', expr => _normalize_method_tag_expr($trimmed)}
- }
- return {mode => 'eq', expr => $lowered}
+ return LinkedSpec::ActionIR::ControlFlow::_lower_switch_case_value_expr($expr, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1167,17 +1162,7 @@ sub _lower_array_pipeline_expr {
 #------------------------------------------------------------------------------
 sub _lower_if_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i');
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- return undef unless $effective_args;
- my $cond_expr = _lower_control_flow_value_expr($effective_args->[0]);
- return undef unless defined($cond_expr) && length($cond_expr);
-
- $ctx->{if_stack} ||= [];
- push @{$ctx->{if_stack}}, {else_seen => 0};
- return "if ($cond_expr) {"
+ return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1188,20 +1173,7 @@ sub _lower_if_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_elseif_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && ($call->{method} eq 'elif' || $call->{method} eq 'elseif');
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- return undef unless $effective_args;
- my $cond_expr = _lower_control_flow_value_expr($effective_args->[0]);
- return undef unless defined($cond_expr) && length($cond_expr);
-
- my $if_stack = $ctx->{if_stack} || [];
- return undef unless @$if_stack;
- my $current_if = $if_stack->[-1];
- return undef if $current_if->{else_seen};
-
- return "} elsif ($cond_expr) {"
+ return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1212,19 +1184,7 @@ sub _lower_elseif_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_else_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'else';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
-
- my $if_stack = $ctx->{if_stack} || [];
- return undef unless @$if_stack;
- my $current_if = $if_stack->[-1];
- return undef if $current_if->{else_seen};
- $current_if->{else_seen} = 1;
-
- return '} else {'
+ return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1235,16 +1195,7 @@ sub _lower_else_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endif_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'endif';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
-
- my $if_stack = $ctx->{if_stack} || [];
- return undef unless @$if_stack;
- pop @$if_stack;
- return '}'
+ return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1256,30 +1207,7 @@ sub _lower_endif_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_flow_branch_action_expr {
  my ($expr, $ctx) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- my $rules = $ctx->{rewrite_rules};
- return $trimmed unless $rules && ref($rules) eq 'ARRAY';
-
- foreach my $rule (@$rules) {
-  my $sub_ctx = {
-   if_stack       => [],
-   switch_stack   => [],
-   switch_counter => ($ctx->{switch_counter} || 0),
-   rewrite_rules  => $ctx->{rewrite_rules},
-  };
-  my $lowered = $rule->{apply}->($trimmed, $sub_ctx);
-  next unless defined($lowered) && length($lowered);
-  next if $lowered eq $trimmed;
-  next if @{$sub_ctx->{if_stack} || []};
-  next if @{$sub_ctx->{switch_stack} || []};
-  $ctx->{switch_counter} = $sub_ctx->{switch_counter} if defined $sub_ctx->{switch_counter};
-  return $lowered;
- }
-
- return $trimmed
+ return LinkedSpec::ActionIR::ControlFlow::_lower_flow_branch_action_expr($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1291,48 +1219,7 @@ sub _lower_flow_branch_action_expr {
 #------------------------------------------------------------------------------
 sub _lower_inline_switch_branch_expr {
  my ($branch_expr, $switch_var, $hit_var, $ctx, $switch_state) = @_;
- my $branch_call = _parse_method_function_expr($branch_expr);
- return undef unless $branch_call;
- my $method = $branch_call->{method} // '';
-
- if ($method eq 'case') {
-  my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, undef);
-  return undef unless $effective_args && @$effective_args >= 1;
-  return undef if $switch_state->{default_seen};
-
-  my $case_value = _lower_switch_case_value_expr($effective_args->[0]);
-  return undef unless $case_value && defined($case_value->{expr});
-  my $match_expr = $case_value->{mode} eq 'regex'
-   ? "\$$switch_var =~ $case_value->{expr}"
-   : "\$$switch_var eq $case_value->{expr}";
-
-  my @actions;
-  foreach my $action_expr (@$effective_args[1 .. $#$effective_args]) {
-   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx);
-   return undef unless defined($lowered_action) && length($lowered_action);
-   push @actions, $lowered_action;
-  }
-  my $body = @actions ? '; '.join('; ', @actions) : '';
-  return "if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
- }
-
- if ($method eq 'default') {
-  my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 0, undef);
-  return undef unless $effective_args;
-  return undef if $switch_state->{default_seen};
-  $switch_state->{default_seen} = 1;
-
-  my @actions;
-  foreach my $action_expr (@$effective_args) {
-   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx);
-   return undef unless defined($lowered_action) && length($lowered_action);
-   push @actions, $lowered_action;
-  }
-  my $body = @actions ? '; '.join('; ', @actions) : '';
-  return "if (!\$$hit_var) { \$$hit_var = 1$body }";
- }
-
- return undef
+ return LinkedSpec::ActionIR::ControlFlow::_lower_inline_switch_branch_expr($branch_expr, $switch_var, $hit_var, $ctx, $switch_state, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1343,41 +1230,7 @@ sub _lower_inline_switch_branch_expr {
 #------------------------------------------------------------------------------
 sub _lower_switch_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'switch';
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args >= 1;
- return undef unless $effective_args;
- my $switch_expr = _lower_control_flow_value_expr($effective_args->[0]);
- return undef unless defined($switch_expr) && length($switch_expr);
-
- $ctx->{switch_stack} ||= [];
- $ctx->{switch_counter} = ($ctx->{switch_counter} || 0) + 1;
- my $suffix = $ctx->{switch_counter};
- my $switch_var = "__ls_switch_value_$suffix";
- my $hit_var = "__ls_switch_hit_$suffix";
- my $switch_state = {
-  switch_var   => $switch_var,
-  hit_var      => $hit_var,
-  open_case    => 0,
-  default_seen => 0,
- };
-
- if (@$effective_args > 1) {
-  my @clauses;
-  foreach my $branch_expr (@$effective_args[1 .. $#$effective_args]) {
-   my $clause = _lower_inline_switch_branch_expr($branch_expr, $switch_var, $hit_var, $ctx, $switch_state);
-   return undef unless defined($clause) && length($clause);
-   push @clauses, $clause;
-  }
-  my $body = @clauses ? '; '.join('; ', @clauses) : '';
-  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
- }
-
- $ctx->{switch_stack} ||= [];
- push @{$ctx->{switch_stack}}, $switch_state;
-
- return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0"
+ return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1388,32 +1241,7 @@ sub _lower_switch_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_case_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'case';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- return undef unless $effective_args;
-
- my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
- my $switch_state = $switch_stack->[-1];
- return undef if $switch_state->{default_seen};
-
- my $case_value = _lower_switch_case_value_expr($effective_args->[0]);
- return undef unless $case_value && defined($case_value->{expr});
- my $switch_var = $switch_state->{switch_var};
- my $hit_var = $switch_state->{hit_var};
- my $match_expr = $case_value->{mode} eq 'regex'
-  ? "\$$switch_var =~ $case_value->{expr}"
-  : "\$$switch_var eq $case_value->{expr}";
-
- my $prefix = '';
- if ($switch_state->{open_case}) {
-  $prefix = '} ';
- }
- $switch_state->{open_case} = 1;
-
- return $prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1"
+ return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1424,26 +1252,7 @@ sub _lower_case_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_default_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'default';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
-
- my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
- my $switch_state = $switch_stack->[-1];
- return undef if $switch_state->{default_seen};
-
- my $prefix = '';
- if ($switch_state->{open_case}) {
-  $prefix = '} ';
- }
- $switch_state->{open_case} = 1;
- $switch_state->{default_seen} = 1;
-
- my $hit_var = $switch_state->{hit_var};
- return $prefix."if (!\$$hit_var) { \$$hit_var = 1"
+ return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1454,18 +1263,7 @@ sub _lower_default_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endcase_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'endcase';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
-
- my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
- my $switch_state = $switch_stack->[-1];
- return undef unless $switch_state->{open_case};
- $switch_state->{open_case} = 0;
- return '}'
+ return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1476,17 +1274,7 @@ sub _lower_endcase_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endswitch_flow_statement {
  my ($expr, $ctx) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'endswitch';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
-
- my $switch_stack = $ctx->{switch_stack} || [];
- return undef unless @$switch_stack;
- my $switch_state = pop @$switch_stack;
- my $prefix = $switch_state->{open_case} ? '} ' : '';
- return $prefix.'}'
+ return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement($expr, $ctx, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1497,14 +1285,7 @@ sub _lower_endswitch_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_say_statement {
  my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'say';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args;
- my @values = map { _lower_control_flow_value_expr($_) } @$effective_args;
- return undef unless @values && !grep { !defined($_) || !length($_) } @values;
- return 'say '.join(', ', @values)
+ return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement($expr, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1515,14 +1296,7 @@ sub _lower_say_statement {
 #------------------------------------------------------------------------------
 sub _lower_print_statement {
  my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'print';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
- return undef unless $effective_args && @$effective_args;
- my @values = map { _lower_control_flow_value_expr($_) } @$effective_args;
- return undef unless @values && !grep { !defined($_) || !length($_) } @values;
- return 'print '.join(', ', @values)
+ return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement($expr, _control_flow_deps())
 }
 
 #------------------------------------------------------------------------------

@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-02-28 - Phase 1A Slice: Extract Fluent Control-Flow Lowering to `LinkedSpec::ActionIR::ControlFlow`
+## Summary
+Moved fluent control-flow lowering ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionIR::ControlFlow`, including if/elseif/else/endif and switch/case/default/endcase/endswitch lowering plus fluent `say(...)`/`print(...)` lowering.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::ControlFlow` module owning:
+  - `_lower_control_flow_value_expr`
+  - `_lower_switch_case_value_expr`
+  - `_lower_if_flow_statement`
+  - `_lower_elseif_flow_statement`
+  - `_lower_else_flow_statement`
+  - `_lower_endif_flow_statement`
+  - `_lower_flow_branch_action_expr`
+  - `_lower_inline_switch_branch_expr`
+  - `_lower_switch_flow_statement`
+  - `_lower_case_flow_statement`
+  - `_lower_default_flow_statement`
+  - `_lower_endcase_flow_statement`
+  - `_lower_endswitch_flow_statement`
+  - `_lower_say_statement`
+  - `_lower_print_statement`
+- Boundary design:
+  - module uses explicit dependency callbacks for trim/tag normalization/composite expression lowering and method-expression parsing/scope normalization,
+  - no hard-coded `LinkedSpec::...` back-calls inside module logic.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::ControlFlow ();`
+  - added `_control_flow_deps` helper map,
+  - replaced moved function bodies with thin compatibility delegates.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-28 - Phase 1A Slice: Extract Flow Composite Expression Helpers to `LinkedSpec::ActionIR::FlowExpr`
 ## Summary
 Moved flow-composite expression lowering ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::FlowExpr` module, preserving existing call surfaces via thin delegates.
