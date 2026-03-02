@@ -61,6 +61,27 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-02)
+- Executed next Phase 1A extraction slice (`get_parser` orchestration):
+  - created `perl/LinkedSpec/ParserFactory.pm`,
+  - moved public parser-factory orchestration ownership out of `LinkedSpec.pm`.
+- `LinkedSpec::ParserFactory` now owns:
+  - trace option application + trace-scope orchestration for parser factory entrypoint,
+  - resolver pipeline wiring (`validate_spec_name`, `resolve_spec_path`, `load_spec_content`),
+  - compile invocation wiring with `trace_reset_log` option filtering semantics,
+  - compilation result decision logging and final trace exit payload.
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::ParserFactory ();`,
+  - added `_parser_factory_deps` callback map,
+  - replaced in-file `get_parser(...)` implementation with a thin delegate.
+- Boundary design:
+  - parser-factory orchestration module is callback-driven for trace/resolver/compile dependencies and dump levels,
+  - no direct hard-coded call path from `ParserFactory` into `LinkedSpec` internals.
+- Validation snapshot for parser-factory extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-02)
 - Executed next Phase 1A extraction slice (method/statement-lowering helpers):
   - created `perl/LinkedSpec/ActionIR/MethodLowering.pm`,
   - moved declaration/value/return/assignment/regex helper ownership out of `LinkedSpec.pm`.

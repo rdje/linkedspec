@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-02 - Phase 1A Slice: Extract `get_parser` Orchestration to `LinkedSpec::ParserFactory`
+## Summary
+Moved `get_parser` orchestration ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ParserFactory` module, preserving the public API via a thin delegate in `LinkedSpec.pm`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ParserFactory::run_get_parser(...)` as the new owner of parser-factory orchestration:
+  - trace option normalization/application,
+  - trace-scope entry/exit wiring,
+  - spec-name validation + path resolution + content loading integration,
+  - `trace_reset_log` option filtering before compilation,
+  - final compilation decision trace + parser return.
+- Boundary design:
+  - parser-factory module is dependency-injected for trace/resolver/compile callbacks and dump levels,
+  - no direct hard-coded calls back into `LinkedSpec` implementation internals.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ParserFactory ();`
+  - added `_parser_factory_deps` callback map
+  - replaced in-file `get_parser(...)` orchestration body with a thin delegate.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-02 - Phase 1A Slice: Extract Method/Statement Lowering to `LinkedSpec::ActionIR::MethodLowering`
 ## Summary
 Moved method-driven declaration/value/return/assign/regex lowering ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::MethodLowering` module, preserving compatibility through thin delegates in `LinkedSpec.pm`.

@@ -32,6 +32,7 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::BootstrapSpec ();
+use LinkedSpec::ParserFactory ();
 
 # UVM-style verbosity levels
 use constant {
@@ -69,6 +70,20 @@ sub _flow_expr_deps {
   lower_method_value_expr => \&_lower_method_value_expr,
   parse_method_function_expr => \&_parse_method_function_expr,
   normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+ }
+}
+sub _parser_factory_deps {
+ return {
+  apply_trace_options => \&_apply_trace_options,
+  trace_enter => \&trace_enter,
+  trace_exit => \&trace_exit,
+  trace_decision => \&trace_decision,
+  validate_spec_name => \&LinkedSpec::Resolver::validate_spec_name,
+  resolve_spec_path => \&LinkedSpec::Resolver::resolve_spec_path,
+  load_spec_content => \&LinkedSpec::Resolver::load_spec_content,
+  compile_spec => \&Get,
+  dump_low => DUMP_LOW,
+  dump_medium => DUMP_MEDIUM,
  }
 }
 sub _method_lowering_deps {
@@ -1319,44 +1334,7 @@ sub _resolve_local_spec_path {
 #------------------------------------------------------------------------------
 sub get_parser {
  my ($spec_name, @opts) = @_;
- my %opt_hash = (@opts % 2 == 0) ? @opts : ();
- _apply_trace_options(\%opt_hash) if %opt_hash;
- my $trace_scope = trace_enter('LinkedSpec::get_parser', {
-  spec_name => $spec_name,
-  option_keys => [sort keys %opt_hash],
- }, DUMP_LOW);
-
- unless (LinkedSpec::Resolver::validate_spec_name($spec_name, $trace_scope)) {
-  return undef
- }
-
- my $spec_path = LinkedSpec::Resolver::resolve_spec_path($spec_name, $trace_scope);
- return undef unless defined $spec_path;
-
- my $content = LinkedSpec::Resolver::load_spec_content($spec_path, $trace_scope);
- return undef unless defined $content;
- my @forward_opts = @opts;
- if (%opt_hash && exists $opt_hash{trace_reset_log}) {
-  @forward_opts = ();
-  my @kv = @opts;
-  while (@kv) {
-   my ($k, $v) = splice(@kv, 0, 2);
-   next if defined($k) && $k eq 'trace_reset_log';
-   push @forward_opts, $k, $v;
-  }
- }
- my $parser = Get(\$content, @forward_opts);
- trace_decision('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', DUMP_MEDIUM);
- trace_exit(
-  $trace_scope,
-  {
-   status => defined($parser) ? 'ok' : 'error',
-   spec_path => $spec_path,
-   parser_ref => ref($parser) || '',
-  },
-  DUMP_LOW
- );
- return $parser;
+ return LinkedSpec::ParserFactory::run_get_parser($spec_name, \@opts, _parser_factory_deps())
 }
 
 #------------------------------------------------------------------------------
