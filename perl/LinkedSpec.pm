@@ -27,6 +27,7 @@ use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
+use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
@@ -68,6 +69,25 @@ sub _flow_expr_deps {
   lower_method_value_expr => \&_lower_method_value_expr,
   parse_method_function_expr => \&_parse_method_function_expr,
   normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+ }
+}
+sub _method_lowering_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
+  split_declare_symbol_names => \&_split_declare_symbol_names,
+  parse_declare_binding_entry => \&_parse_declare_binding_entry,
+  lower_declare_initializer_expr => \&_lower_declare_initializer_expr,
+  parse_method_function_expr => \&_parse_method_function_expr,
+  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+  lower_scalaref_value_expr => \&_lower_scalaref_value_expr,
+  extract_array_symbol_name => \&_extract_array_symbol_name,
+  extract_hash_symbol_name => \&_extract_hash_symbol_name,
+  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
+  lower_scalar_access_key_expr => \&_lower_scalar_access_key_expr,
+  infer_scalar_container_kind => \&_infer_scalar_container_kind,
+  split_top_level_csv => \&_split_top_level_csv,
+  lower_assignment_source_expr => \&_lower_assignment_source_expr,
+  strip_literal_delimiters => \&_strip_literal_delimiters,
  }
 }
 sub _array_pipeline_deps {
@@ -563,10 +583,7 @@ sub _lower_declare_initializer_expr {
 #------------------------------------------------------------------------------
 sub _declare_sigil_for_type {
  my ($type) = @_;
- return '@' if defined($type) && $type eq 'array';
- return '$' if defined($type) && $type eq 'scalar';
- return '%' if defined($type) && $type eq 'hash';
- return undef
+ return LinkedSpec::ActionIR::MethodLowering::_declare_sigil_for_type($type, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -577,10 +594,7 @@ sub _declare_sigil_for_type {
 #------------------------------------------------------------------------------
 sub _declare_alias_to_type {
  my ($alias) = @_;
- return 'array'  if defined($alias) && ($alias eq 'a' || $alias eq 'array');
- return 'scalar' if defined($alias) && ($alias eq 's' || $alias eq 'scalar');
- return 'hash'   if defined($alias) && ($alias eq 'h' || $alias eq 'hash');
- return undef
+ return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type($alias, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -592,32 +606,7 @@ sub _declare_alias_to_type {
 #------------------------------------------------------------------------------
 sub _lower_typed_declare_statement {
  my ($type, $entries_or_names) = @_;
- my $sigil = _declare_sigil_for_type($type);
- return undef unless defined $sigil;
- my @entries;
- if (ref($entries_or_names) eq 'ARRAY') {
-  @entries = @$entries_or_names;
- } else {
-  my $names = _split_declare_symbol_names($entries_or_names);
-  return undef unless $names && @$names;
-  @entries = @$names;
- }
- return undef unless @entries;
-
- my @decls;
- foreach my $entry (@entries) {
-  my $binding = _parse_declare_binding_entry($entry);
-  return undef unless $binding && $binding->{name};
-
-  my $decl = "my ${sigil}$binding->{name}";
-  if (defined $binding->{init}) {
-   my $init_expr = _lower_declare_initializer_expr($type, $binding->{init});
-   return undef unless defined($init_expr) && length($init_expr);
-   $decl .= " = $init_expr";
-  }
-  push @decls, $decl;
- }
- return join '; ', @decls
+ return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement($type, $entries_or_names, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -628,12 +617,7 @@ sub _lower_typed_declare_statement {
 #------------------------------------------------------------------------------
 sub _normalize_method_tag_expr {
  my ($tag) = @_;
- return undef unless defined $tag;
- $tag = _trim_action_ir_value($tag);
- return undef unless defined($tag) && length($tag);
- return $tag if $tag =~ /^".*"$/s || $tag =~ /^'.*'$/s;
- return "\"$tag\"" if $tag =~ /^\w+$/o;
- return $tag
+ return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr($tag, _method_lowering_deps())
 }
 
 sub _value_expr_deps {
@@ -767,78 +751,7 @@ sub _split_top_level_csv {
 #------------------------------------------------------------------------------
 sub _lower_method_value_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
- my $method_call = _parse_method_function_expr($trimmed);
- if ($method_call && $method_call->{method} eq 'scalaref') {
-  my $effective_args = _normalize_method_args_with_optional_scope($method_call->{args} || [], 2, 2);
-  return undef unless $effective_args;
-  return _lower_scalaref_value_expr($effective_args->[0], $effective_args->[1]);
- }
- if ($method_call && $method_call->{method} eq 'scalar') {
-  my $scalar_args = $method_call->{args} || [];
-  return undef unless ref($scalar_args) eq 'ARRAY';
-  return undef unless @$scalar_args >= 1 && @$scalar_args <= 2;
-
-  if (@$scalar_args == 1) {
-   my $value = _trim_action_ir_value($scalar_args->[0]);
-   return undef unless defined($value) && length($value);
-   if ($value =~ /^(\w+)$/o) {
-    return '$'.$1;
-   }
-   my $nested = _lower_method_value_expr($value);
-   return $nested if defined($nested) && length($nested) && $nested ne $trimmed;
-   return $value;
-  }
-
-  my ($container_expr, $key_expr) = @$scalar_args;
-  my $container_trimmed = _trim_action_ir_value($container_expr);
-  my $key_trimmed = _trim_action_ir_value($key_expr);
-  return undef unless defined($container_trimmed) && length($container_trimmed);
-  return undef unless defined($key_trimmed) && length($key_trimmed);
-
-  if ($container_trimmed eq 'IMATCH_LIST' && $key_trimmed =~ /^\d+$/o) {
-   return '$IMATCH_LIST['.$key_trimmed.']';
-  }
-
-  my ($explicit_array_symbol) = $container_trimmed =~ /^array\s*\(\s*(\w+)\s*\)$/o;
-  my ($explicit_hash_symbol) = $container_trimmed =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
-  my $array_symbol = $explicit_array_symbol || _extract_array_symbol_name($container_trimmed);
-  my $hash_symbol = $explicit_hash_symbol || _extract_hash_symbol_name($container_trimmed);
-  my $key_lowered = _lower_scalar_access_key_expr($key_trimmed);
-  return undef unless defined($key_lowered) && length($key_lowered);
-
-  if (defined $explicit_array_symbol) {
-   return '$'.$explicit_array_symbol.'['.$key_lowered.']';
-  }
-  if (defined $explicit_hash_symbol) {
-   return '$'.$explicit_hash_symbol.'{'.$key_lowered.'}';
-  }
-
-  if (defined $array_symbol && defined $hash_symbol) {
-   my $container_kind = _infer_scalar_container_kind($container_trimmed, $key_trimmed);
-   return '$'.$array_symbol.'['.$key_lowered.']' if $container_kind eq 'array';
-   return '$'.$hash_symbol.'{'.$key_lowered.'}';
-  }
-  if (defined $array_symbol) {
-   return '$'.$array_symbol.'['.$key_lowered.']';
-  }
-  if (defined $hash_symbol) {
-   return '$'.$hash_symbol.'{'.$key_lowered.'}';
-  }
-  return undef;
-  return '$'.$1;
- }
- if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))$/o) {
-  my $payload = $+{PAREN};
-  $payload =~ s/^\(|\)$//go;
-  my $args = _split_top_level_csv($payload);
-  my @lowered = map { _lower_method_value_expr($_) // $_ } @$args;
-  return '['.join(', ', @lowered).']';
- }
-
- return $trimmed
+ return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr($expr, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -850,29 +763,7 @@ sub _lower_method_value_expr {
 #------------------------------------------------------------------------------
 sub _lower_return_payload_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- my $direct = _lower_method_value_expr($trimmed);
- if (
-  defined($direct) &&
-  length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash)\s*\(/o || $direct ne $trimmed)
- ) {
-  return $direct;
- }
-
- my $rewritten = $trimmed;
- for (1 .. 64) {
-  my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/do {
-   my $lowered = _lower_method_value_expr($+{helper});
-   (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
-  }/ge;
-  last if $rewritten eq $before;
- }
- return $rewritten
+ return LinkedSpec::ActionIR::MethodLowering::_lower_return_payload_expr($expr, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -883,14 +774,7 @@ sub _lower_return_payload_expr {
 #------------------------------------------------------------------------------
 sub _lower_return_general_statement {
  my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'return';
-
- my $args = $call->{args} || [];
- return undef unless ref($args) eq 'ARRAY' && @$args == 1;
- my $payload = _lower_return_payload_expr($args->[0]);
- return undef unless defined($payload) && length($payload);
- return "return $payload"
+ return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement($expr, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -901,9 +785,7 @@ sub _lower_return_general_statement {
 #------------------------------------------------------------------------------
 sub _lower_return_imatch_statement {
  my ($tag) = @_;
- my $tag_expr = _normalize_method_tag_expr($tag);
- return undef unless defined $tag_expr;
- return "return [$tag_expr, \$IMATCH]"
+ return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement($tag, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -914,11 +796,7 @@ sub _lower_return_imatch_statement {
 #------------------------------------------------------------------------------
 sub _lower_assign_statement {
  my ($target, $source) = @_;
- my $symbol = _extract_scalar_symbol_name($target);
- return undef unless defined $symbol;
- my $source_expr = _lower_assignment_source_expr($source);
- return undef unless defined $source_expr;
- return "\$$symbol = $source_expr"
+ return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement($target, $source, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -961,16 +839,7 @@ sub _lower_declare_method_statement {
 #------------------------------------------------------------------------------
 sub _lower_regex_subst_statement {
  my ($target, $pattern, $replacement, $flags) = @_;
- my $symbol = _extract_scalar_symbol_name($target);
- return undef unless defined $symbol;
-
- my $pattern_raw = _strip_literal_delimiters($pattern);
- my $replacement_raw = _strip_literal_delimiters($replacement);
- return undef unless defined($pattern_raw) && defined($replacement_raw);
-
- $flags = _trim_action_ir_value($flags // '');
- $flags = '' unless defined $flags;
- return "\$$symbol =~ s{$pattern_raw}{$replacement_raw}$flags"
+ return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement($target, $pattern, $replacement, $flags, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1215,12 +1084,7 @@ sub _lower_print_statement {
 #------------------------------------------------------------------------------
 sub _lower_return_undef_statement {
  my ($expr) = @_;
- my $call = _parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'return_undef';
-
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- return undef unless $effective_args;
- return 'return undef'
+ return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement($expr, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1308,11 +1172,7 @@ sub _lower_filter_match_statement {
 #------------------------------------------------------------------------------
 sub _lower_return_array_statement {
  my ($tag, $payload) = @_;
- my $tag_expr = _normalize_method_tag_expr($tag);
- return undef unless defined $tag_expr;
- my $payload_expr = _lower_method_value_expr($payload);
- return undef unless defined $payload_expr;
- return "return [$tag_expr, $payload_expr]"
+ return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement($tag, $payload, _method_lowering_deps())
 }
 
 #------------------------------------------------------------------------------

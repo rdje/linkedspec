@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-02 - Phase 1A Slice: Extract Method/Statement Lowering to `LinkedSpec::ActionIR::MethodLowering`
+## Summary
+Moved method-driven declaration/value/return/assign/regex lowering ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ActionIR::MethodLowering` module, preserving compatibility through thin delegates in `LinkedSpec.pm`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::MethodLowering` module owning:
+  - `_declare_sigil_for_type`
+  - `_declare_alias_to_type`
+  - `_lower_typed_declare_statement`
+  - `_normalize_method_tag_expr`
+  - `_lower_method_value_expr`
+  - `_lower_return_payload_expr`
+  - `_lower_return_general_statement`
+  - `_lower_return_imatch_statement`
+  - `_lower_assign_statement`
+  - `_lower_regex_subst_statement`
+  - `_lower_return_undef_statement`
+  - `_lower_return_array_statement`
+- Boundary design:
+  - module logic is callback-driven through explicit dependency injection and avoids hard-coded `LinkedSpec::...` calls.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::MethodLowering ();`
+  - added `_method_lowering_deps` callback map
+  - replaced moved in-file method/statement-lowering implementations with thin delegates.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-01 - Phase 1A Slice: Extract Array Pipeline Lowering to `LinkedSpec::ActionIR::ArrayPipeline`
 ## Summary
 Moved array pipeline planning/lowering ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionIR::ArrayPipeline`, preserving public helper surfaces via thin delegates in `LinkedSpec.pm`.

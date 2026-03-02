@@ -60,6 +60,34 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-02)
+- Executed next Phase 1A extraction slice (method/statement-lowering helpers):
+  - created `perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+  - moved declaration/value/return/assignment/regex helper ownership out of `LinkedSpec.pm`.
+- `ActionIR::MethodLowering` now owns:
+  - `_declare_sigil_for_type`
+  - `_declare_alias_to_type`
+  - `_lower_typed_declare_statement`
+  - `_normalize_method_tag_expr`
+  - `_lower_method_value_expr`
+  - `_lower_return_payload_expr`
+  - `_lower_return_general_statement`
+  - `_lower_return_imatch_statement`
+  - `_lower_assign_statement`
+  - `_lower_regex_subst_statement`
+  - `_lower_return_undef_statement`
+  - `_lower_return_array_statement`
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::ActionIR::MethodLowering ();`,
+  - added `_method_lowering_deps` callback map,
+  - replaced moved implementations with thin delegates.
+- Boundary design:
+  - `ActionIR::MethodLowering` consumes explicit callbacks and contains no hard-coded calls back into `LinkedSpec`.
+- Validation snapshot for method-lowering extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-02-28)
 - Executed next Phase 1A extraction slice (array pipeline lowering helpers):
   - created `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`,
