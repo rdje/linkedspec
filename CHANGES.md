@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-01 - Phase 1A Slice: Extract Array Pipeline Lowering to `LinkedSpec::ActionIR::ArrayPipeline`
+## Summary
+Moved array pipeline planning/lowering ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionIR::ArrayPipeline`, preserving public helper surfaces via thin delegates in `LinkedSpec.pm`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::ArrayPipeline` module owning:
+  - `_normalize_split_delimiter_expr`
+  - `_build_array_pipeline_plan_from_expr`
+  - `_lower_array_pipeline_expr`
+  - `_lower_split_statement`
+  - `_lower_trim_each_statement`
+  - `_lower_filter_nonempty_statement`
+  - `_lower_lowercase_each_statement`
+  - `_lower_uppercase_each_statement`
+  - `_lower_uniq_statement`
+  - `_lower_filter_match_statement`
+- Boundary design:
+  - module uses explicit dependency callbacks (`trim`, literal-strip, method parsing, scope-token detection, symbol extractors),
+  - no hard-coded `LinkedSpec::...` calls inside array-pipeline module logic.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::ArrayPipeline ();`
+  - added `_array_pipeline_deps` helper map
+  - replaced moved in-file implementations with thin delegates.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-02-28 - Phase 1A Slice: Extract Fluent Control-Flow Lowering to `LinkedSpec::ActionIR::ControlFlow`
 ## Summary
 Moved fluent control-flow lowering ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionIR::ControlFlow`, including if/elseif/else/endif and switch/case/default/endcase/endswitch lowering plus fluent `say(...)`/`print(...)` lowering.

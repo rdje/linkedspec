@@ -61,6 +61,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-02-28)
+- Executed next Phase 1A extraction slice (array pipeline lowering helpers):
+  - created `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`,
+  - moved array pipeline planning/lowering ownership out of `LinkedSpec.pm`.
+- `ActionIR::ArrayPipeline` now owns:
+  - `_normalize_split_delimiter_expr`
+  - `_build_array_pipeline_plan_from_expr`
+  - `_lower_array_pipeline_expr`
+  - `_lower_split_statement`
+  - `_lower_trim_each_statement`
+  - `_lower_filter_nonempty_statement`
+  - `_lower_lowercase_each_statement`
+  - `_lower_uppercase_each_statement`
+  - `_lower_uniq_statement`
+  - `_lower_filter_match_statement`
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::ActionIR::ArrayPipeline ();`,
+  - added `_array_pipeline_deps` callback map,
+  - replaced moved implementations with thin delegates.
+- Validation snapshot for array-pipeline extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 - Executed next Phase 1A extraction slice (fluent control-flow lowering helpers):
   - created `perl/LinkedSpec/ActionIR/ControlFlow.pm`,
   - moved ownership of if/switch branch lowering and fluent emit helpers out of `LinkedSpec.pm`.

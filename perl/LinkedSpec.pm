@@ -26,6 +26,7 @@ use LinkedSpec::ActionIR::MethodExpr ();
 use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::ControlFlow ();
+use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
@@ -67,6 +68,16 @@ sub _flow_expr_deps {
   lower_method_value_expr => \&_lower_method_value_expr,
   parse_method_function_expr => \&_parse_method_function_expr,
   normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
+ }
+}
+sub _array_pipeline_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
+  strip_literal_delimiters => \&_strip_literal_delimiters,
+  extract_array_symbol_name => \&_extract_array_symbol_name,
+  parse_method_function_expr => \&_parse_method_function_expr,
+  is_bare_method_scope_token => \&_is_bare_method_scope_token,
+  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
  }
 }
 
@@ -970,14 +981,7 @@ sub _lower_regex_subst_statement {
 #------------------------------------------------------------------------------
 sub _normalize_split_delimiter_expr {
  my ($delimiter) = @_;
- $delimiter = _trim_action_ir_value($delimiter // '');
- return '/\s*,\s*/' unless defined($delimiter) && length($delimiter);
- return $delimiter if $delimiter =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
-
- my $literal = _strip_literal_delimiters($delimiter);
- return undef unless defined $literal;
- my $quoted = quotemeta($literal);
- return '/'.$quoted.'/'
+ return LinkedSpec::ActionIR::ArrayPipeline::_normalize_split_delimiter_expr($delimiter, _array_pipeline_deps())
 }
 #------------------------------------------------------------------------------
 # Function: _parse_method_function_expr
@@ -1043,77 +1047,7 @@ sub _lower_switch_case_value_expr {
 #------------------------------------------------------------------------------
 sub _build_array_pipeline_plan_from_expr {
  my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- my $target_symbol = _extract_array_symbol_name($trimmed);
- return {target_symbol => $target_symbol, ops => []} if defined $target_symbol;
-
- my $call = _parse_method_function_expr($trimmed);
- return undef unless $call;
- my $method = $call->{method};
- my $args = $call->{args} || [];
-
- if ($method eq 'split') {
-  my @effective_args = @$args;
-  if ((@effective_args == 3 || @effective_args == 4) && _is_bare_method_scope_token($effective_args[0])) {
-   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
-   shift @effective_args if $scope_target_probe;
-  }
-  return undef unless @effective_args == 2 || @effective_args == 3;
-
-  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
-  return undef unless $pipeline;
-
-  my $source_symbol = _extract_scalar_symbol_name($effective_args[1]);
-  return undef unless defined $source_symbol;
-  my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[2]);
-  return undef unless defined $delimiter_expr;
-
-  push @{$pipeline->{ops}}, {
-   op             => 'split',
-   source_symbol  => $source_symbol,
-   delimiter_expr => $delimiter_expr,
-  };
-  return $pipeline
- }
-
- if ($method eq 'filter_match') {
-  my @effective_args = @$args;
-  if (@effective_args == 3 && _is_bare_method_scope_token($effective_args[0])) {
-   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
-   shift @effective_args if $scope_target_probe;
-  }
-  return undef unless @effective_args == 2;
-
-  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
-  return undef unless $pipeline;
-
-  my $pattern_expr = _normalize_split_delimiter_expr($effective_args[1]);
-  return undef unless defined $pattern_expr;
-  push @{$pipeline->{ops}}, {
-   op           => 'filter_match',
-   pattern_expr => $pattern_expr,
-  };
-  return $pipeline
- }
-
- if ($method =~ /^(trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq)$/o) {
-  my @effective_args = @$args;
-  if (@effective_args == 2 && _is_bare_method_scope_token($effective_args[0])) {
-   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1]);
-   shift @effective_args if $scope_target_probe;
-  }
-  return undef unless @effective_args == 1;
-
-  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0]);
-  return undef unless $pipeline;
-  push @{$pipeline->{ops}}, {op => $method};
-  return $pipeline
- }
-
- return undef
+ return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr($expr, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1125,33 +1059,7 @@ sub _build_array_pipeline_plan_from_expr {
 #------------------------------------------------------------------------------
 sub _lower_array_pipeline_expr {
  my ($expr) = @_;
- my $pipeline = _build_array_pipeline_plan_from_expr($expr);
- return undef unless $pipeline && $pipeline->{target_symbol};
- return undef unless @{$pipeline->{ops} || []};
-
- my $target_symbol = $pipeline->{target_symbol};
- my $list_expr = '@'.$target_symbol;
- foreach my $op (@{$pipeline->{ops}}) {
-  my $name = $op->{op} // '';
-  if ($name eq 'split') {
-   $list_expr = 'split '.$op->{delimiter_expr}.', $'.$op->{source_symbol};
-  } elsif ($name eq 'trim_each') {
-   $list_expr = 'map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } '.$list_expr;
-  } elsif ($name eq 'filter_nonempty') {
-   $list_expr = 'grep { length($_) } '.$list_expr;
-  } elsif ($name eq 'lowercase_each') {
-   $list_expr = 'map { lc($_) } '.$list_expr;
-  } elsif ($name eq 'uppercase_each') {
-   $list_expr = 'map { uc($_) } '.$list_expr;
-  } elsif ($name eq 'uniq') {
-   $list_expr = 'do { my %seen; grep { !$seen{$_}++ } '.$list_expr.' }';
-  } elsif ($name eq 'filter_match') {
-   $list_expr = 'grep { $_ =~ '.$op->{pattern_expr}.' } '.$list_expr;
-  } else {
-   return undef;
-  }
- }
- return '@'.$target_symbol.' = '.$list_expr
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr($expr, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1323,10 +1231,7 @@ sub _lower_return_undef_statement {
 #------------------------------------------------------------------------------
 sub _lower_split_statement {
  my ($target, $source, $delimiter) = @_;
- my $expr = 'split('.$target.', '.$source;
- $expr .= ', '.$delimiter if defined($delimiter) && length($delimiter);
- $expr .= ')';
- return _lower_array_pipeline_expr($expr)
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_split_statement($target, $source, $delimiter, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1337,7 +1242,7 @@ sub _lower_split_statement {
 #------------------------------------------------------------------------------
 sub _lower_trim_each_statement {
  my ($target) = @_;
- return _lower_array_pipeline_expr('trim_each('.$target.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_trim_each_statement($target, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1348,7 +1253,7 @@ sub _lower_trim_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_filter_nonempty_statement {
  my ($target) = @_;
- return _lower_array_pipeline_expr('filter_nonempty('.$target.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_filter_nonempty_statement($target, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1359,7 +1264,7 @@ sub _lower_filter_nonempty_statement {
 #------------------------------------------------------------------------------
 sub _lower_lowercase_each_statement {
  my ($target) = @_;
- return _lower_array_pipeline_expr('lowercase_each('.$target.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_lowercase_each_statement($target, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1370,7 +1275,7 @@ sub _lower_lowercase_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_uppercase_each_statement {
  my ($target) = @_;
- return _lower_array_pipeline_expr('uppercase_each('.$target.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_uppercase_each_statement($target, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1381,7 +1286,7 @@ sub _lower_uppercase_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_uniq_statement {
  my ($target) = @_;
- return _lower_array_pipeline_expr('uniq('.$target.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_uniq_statement($target, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -1392,7 +1297,7 @@ sub _lower_uniq_statement {
 #------------------------------------------------------------------------------
 sub _lower_filter_match_statement {
  my ($target, $pattern) = @_;
- return _lower_array_pipeline_expr('filter_match('.$target.', '.$pattern.')')
+ return LinkedSpec::ActionIR::ArrayPipeline::_lower_filter_match_statement($target, $pattern, _array_pipeline_deps())
 }
 
 #------------------------------------------------------------------------------
