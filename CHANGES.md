@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-02 - Phase 1A Slice: Transfer Action Contract/Scanner Wiring to `LinkedSpec::ActionRewriter`
+## Summary
+Moved action-rewriter contract wiring and scanner-adapter ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionRewriter`, preserving compatibility through thin delegates in `LinkedSpec.pm`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::ActionRewriter` now owns:
+  - `_action_contract_deps`
+  - `_build_action_lowering_contracts`
+  - `_scan_contract_ir_events`
+- `ActionRewriter` internal flow updates:
+  - `_collect_action_helper_ir_nodes` now routes scanner calls through local `_scan_contract_ir_events`,
+  - `_build_action_rewrite_rules` now builds contracts through local `_build_action_lowering_contracts` rather than calling back into `LinkedSpec`.
+- `LinkedSpec.pm` updates:
+  - `_action_contract_deps` converted to thin delegate,
+  - `_build_action_lowering_contracts` converted to thin delegate,
+  - `_scan_contract_ir_events` converted to thin delegate.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-02 - Phase 1A Slice: Extract `get_parser` Orchestration to `LinkedSpec::ParserFactory`
 ## Summary
 Moved `get_parser` orchestration ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::ParserFactory` module, preserving the public API via a thin delegate in `LinkedSpec.pm`.

@@ -9,6 +9,7 @@ BEGIN {
 }
 use LinkedSpec::ActionIR::Scanner ();
 use LinkedSpec::ActionIR::MethodExpr ();
+use LinkedSpec::ActionIR::Contracts ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -164,6 +165,55 @@ sub _lower_assign_method_statement {
  return LinkedSpec::_lower_assign_statement($effective_args->[0], $effective_args->[1])
 }
 
+sub _action_contract_deps {
+ return {
+  lower_return_general_statement => \&LinkedSpec::_lower_return_general_statement,
+  lower_return_imatch_statement  => \&LinkedSpec::_lower_return_imatch_statement,
+  lower_assign_method_statement  => \&_lower_assign_method_statement,
+  lower_regex_subst_statement    => \&LinkedSpec::_lower_regex_subst_statement,
+  lower_array_pipeline_expr      => \&LinkedSpec::_lower_array_pipeline_expr,
+  lower_if_flow_statement        => \&LinkedSpec::_lower_if_flow_statement,
+  lower_elseif_flow_statement    => \&LinkedSpec::_lower_elseif_flow_statement,
+  lower_else_flow_statement      => \&LinkedSpec::_lower_else_flow_statement,
+  lower_endif_flow_statement     => \&LinkedSpec::_lower_endif_flow_statement,
+  lower_switch_flow_statement    => \&LinkedSpec::_lower_switch_flow_statement,
+  lower_case_flow_statement      => \&LinkedSpec::_lower_case_flow_statement,
+  lower_default_flow_statement   => \&LinkedSpec::_lower_default_flow_statement,
+  lower_endcase_flow_statement   => \&LinkedSpec::_lower_endcase_flow_statement,
+  lower_endswitch_flow_statement => \&LinkedSpec::_lower_endswitch_flow_statement,
+  lower_say_statement            => \&LinkedSpec::_lower_say_statement,
+  lower_print_statement          => \&LinkedSpec::_lower_print_statement,
+  lower_return_undef_statement   => \&LinkedSpec::_lower_return_undef_statement,
+  lower_return_array_statement   => \&LinkedSpec::_lower_return_array_statement,
+  lower_declare_method_statement => \&_lower_declare_method_statement,
+ }
+}
+
+sub _build_action_lowering_contracts {
+ my ($label) = @_;
+ return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
+  $label,
+  _action_contract_deps(),
+ )
+}
+
+sub _scan_contract_ir_events {
+ my ($contract, $code) = @_;
+ return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+  $contract,
+  $code,
+  {
+   split_action_ir_statements                 => \&_split_action_ir_statements,
+   trim_action_ir_value                       => \&_trim_action_ir_value,
+   parse_method_function_expr                 => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
+   normalize_method_args_with_optional_scope  => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
+   build_array_pipeline_plan_from_expr        => \&LinkedSpec::_build_array_pipeline_plan_from_expr,
+   extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
+   parse_declare_binding_entry                => \&_parse_declare_binding_entry,
+  }
+ )
+}
+
 sub _find_unresolved_action_helpers {
  my ($code, $rewrite_rules) = @_;
 
@@ -200,19 +250,7 @@ sub _collect_action_helper_ir_nodes {
  my @events;
  foreach my $rule (@$rewrite_rules) {
   my $ir_node = $rule->{ir_node} // $rule->{id};
-  my $rule_events = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
-   $rule,
-   $code,
-   {
-    split_action_ir_statements                 => \&_split_action_ir_statements,
-    trim_action_ir_value                       => \&_trim_action_ir_value,
-    parse_method_function_expr                 => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
-    normalize_method_args_with_optional_scope  => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
-    build_array_pipeline_plan_from_expr        => \&LinkedSpec::_build_array_pipeline_plan_from_expr,
-    extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
-    parse_declare_binding_entry                => \&_parse_declare_binding_entry,
-   }
-  );
+  my $rule_events = _scan_contract_ir_events($rule, $code);
   next unless ref($rule_events) eq 'ARRAY' && @$rule_events;
   foreach my $event (@$rule_events) {
    push @events, {
@@ -788,8 +826,7 @@ sub _rewrite_action_code_with_diagnostics {
 
 sub _build_action_rewrite_rules {
  my ($label) = @_;
-
- my $contracts = LinkedSpec::_build_action_lowering_contracts($label);
+ my $contracts = _build_action_lowering_contracts($label);
  return [map {{
   id                 => $_->{id},
   ir_node            => $_->{ir_node},

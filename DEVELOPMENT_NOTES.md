@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-02)
+- Executed next Phase 1A extraction slice (action contract/scanner wiring transfer):
+  - moved contract dependency-map and scanner-adapter ownership from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`.
+- `LinkedSpec::ActionRewriter` now owns:
+  - `_action_contract_deps`
+  - `_build_action_lowering_contracts`
+  - `_scan_contract_ir_events`
+- Internal rewrite-pipeline wiring updates:
+  - `_collect_action_helper_ir_nodes` now calls local `_scan_contract_ir_events`,
+  - `_build_action_rewrite_rules` now calls local `_build_action_lowering_contracts` (no callback to `LinkedSpec::_build_action_lowering_contracts`).
+- `LinkedSpec.pm` updates:
+  - converted `_action_contract_deps` to thin delegate,
+  - converted `_build_action_lowering_contracts` to thin delegate,
+  - converted `_scan_contract_ir_events` to thin delegate.
+- Validation snapshot for action contract/scanner wiring extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-02)
 - Executed next Phase 1A extraction slice (`get_parser` orchestration):
   - created `perl/LinkedSpec/ParserFactory.pm`,
   - moved public parser-factory orchestration ownership out of `LinkedSpec.pm`.

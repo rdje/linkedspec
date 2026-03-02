@@ -407,27 +407,7 @@ sub spec_descr {
 # Returns : hashref callback dependency map
 #------------------------------------------------------------------------------
 sub _action_contract_deps {
- return {
-  lower_return_general_statement => \&_lower_return_general_statement,
-  lower_return_imatch_statement  => \&_lower_return_imatch_statement,
-  lower_assign_method_statement  => \&_lower_assign_method_statement,
-  lower_regex_subst_statement    => \&_lower_regex_subst_statement,
-  lower_array_pipeline_expr      => \&_lower_array_pipeline_expr,
-  lower_if_flow_statement        => \&_lower_if_flow_statement,
-  lower_elseif_flow_statement    => \&_lower_elseif_flow_statement,
-  lower_else_flow_statement      => \&_lower_else_flow_statement,
-  lower_endif_flow_statement     => \&_lower_endif_flow_statement,
-  lower_switch_flow_statement    => \&_lower_switch_flow_statement,
-  lower_case_flow_statement      => \&_lower_case_flow_statement,
-  lower_default_flow_statement   => \&_lower_default_flow_statement,
-  lower_endcase_flow_statement   => \&_lower_endcase_flow_statement,
-  lower_endswitch_flow_statement => \&_lower_endswitch_flow_statement,
-  lower_say_statement            => \&_lower_say_statement,
-  lower_print_statement          => \&_lower_print_statement,
-  lower_return_undef_statement   => \&_lower_return_undef_statement,
-  lower_return_array_statement   => \&_lower_return_array_statement,
-  lower_declare_method_statement => \&_lower_declare_method_statement,
- }
+ return LinkedSpec::ActionRewriter::_action_contract_deps(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -438,11 +418,7 @@ sub _action_contract_deps {
 # Returns : arrayref of contract hashes
 #------------------------------------------------------------------------------
 sub _build_action_lowering_contracts {
- my ($label) = @_;
- return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
-  $label,
-  _action_contract_deps(),
- )
+ return LinkedSpec::ActionRewriter::_build_action_lowering_contracts(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -1198,20 +1174,7 @@ sub _lower_return_array_statement {
 # Returns : arrayref of event hashes
 #------------------------------------------------------------------------------
 sub _scan_contract_ir_events {
- my ($contract, $code) = @_;
- return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
-  $contract,
-  $code,
-  {
-   split_action_ir_statements                 => \&_split_action_ir_statements,
-   trim_action_ir_value                       => \&_trim_action_ir_value,
-   parse_method_function_expr                 => \&_parse_method_function_expr,
-   normalize_method_args_with_optional_scope  => \&_normalize_method_args_with_optional_scope,
-   build_array_pipeline_plan_from_expr        => \&_build_array_pipeline_plan_from_expr,
-   extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
-   parse_declare_binding_entry                => \&_parse_declare_binding_entry,
-  }
- )
+ return LinkedSpec::ActionRewriter::_scan_contract_ir_events(@_)
 }
 
 #------------------------------------------------------------------------------
