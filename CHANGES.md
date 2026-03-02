@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-02 - Phase 1A Slice: Extract Runtime State + Get/spec_entry Orchestration to `LinkedSpec::Runtime`
+## Summary
+Moved bootstrap runtime state and `Get`/`spec_entry` orchestration ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::Runtime` module, preserving public entrypoint compatibility through thin delegates in `LinkedSpec.pm`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Runtime.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::Runtime` as the owner of:
+  - bootstrap parser runtime state initialization (`spec_descr`, `bootstrap_rule_index`, `gdata`),
+  - parser-source emit callback routing (`_emit_parser_source_line` + callback state),
+  - `Get` orchestration glue (`run_get`) that injects runtime state into `LinkedSpec::Compiler::run_get_pipeline(...)`,
+  - `spec_entry` orchestration glue (`compile_spec_entry`) including top-rule propagation.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::Runtime ();`
+  - converted `_emit_parser_source_line` to a thin delegate,
+  - replaced `Get(...)` body with a thin delegate to `LinkedSpec::Runtime::run_get(...)`,
+  - replaced `spec_entry(...)` body with a thin delegate to `LinkedSpec::Runtime::compile_spec_entry(...)`.
+- Ownership clean-up:
+  - removed runtime bootstrap globals/callback state management from `LinkedSpec.pm`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-02 - Phase 1A Slice: Transfer Action Contract/Scanner Wiring to `LinkedSpec::ActionRewriter`
 ## Summary
 Moved action-rewriter contract wiring and scanner-adapter ownership out of `LinkedSpec.pm` into `LinkedSpec::ActionRewriter`, preserving compatibility through thin delegates in `LinkedSpec.pm`.

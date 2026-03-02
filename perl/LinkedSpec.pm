@@ -29,10 +29,9 @@ use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::Contracts ();
-use LinkedSpec::SpecEntry ();
 use LinkedSpec::Compiler ();
-use LinkedSpec::BootstrapSpec ();
 use LinkedSpec::ParserFactory ();
+use LinkedSpec::Runtime ();
 
 # UVM-style verbosity levels
 use constant {
@@ -226,13 +225,9 @@ sub should_dump {
  return LinkedSpec::Trace::should_dump(@_)
 }
 
-our $PARSER_SOURCE_EMIT_CB;
 
 sub _emit_parser_source_line {
- my ($chunk) = @_;
- return unless ref($PARSER_SOURCE_EMIT_CB) eq 'CODE';
- $PARSER_SOURCE_EMIT_CB->($chunk);
- return
+ return LinkedSpec::Runtime::_emit_parser_source_line(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -312,19 +307,6 @@ sub extract_regex_literals_from_rule_rhs {
 }
 
 
-#------------------------------------------------------------------------------
-# Bootstrap parser metadata and global state
-#------------------------------------------------------------------------------
-# Optional parser-source emitter callback is configured by Get() when requested.
-my ($spec_descr, $bootstrap_rule_index_ref, $gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-my %bootstrap_rule_index = %$bootstrap_rule_index_ref;
-
-
-# my $testdata = "999  + (3 + (7 - 9 + (arr + 99 - ZZAA)))";
-# $file = qx(cat ~/specfiletest.txt);
-# Get(\$file)->(\$testdata);
-# Top-level entry rule selected while compiling the .spec source.
-my $top_rule;
 
 #------------------------------------------------------------------------------
 # Function: _build_action_rewriter_migration_summary
@@ -346,23 +328,7 @@ sub _build_action_rewriter_migration_summary {
 sub Get {
  my $spec_content_ref = $_[0];
  my %option = @_[1 .. $#_];
- my @parser_source_chunks;
- local $PARSER_SOURCE_EMIT_CB = $option{dump_parser_source} ? sub {
-  my ($chunk) = @_;
-  push @parser_source_chunks, $chunk;
- } : undef;
- return LinkedSpec::Compiler::run_get_pipeline(
-  $spec_content_ref,
-  \%option,
-  {
-   spec_descr => $spec_descr,
-   bootstrap_rule_index => \%bootstrap_rule_index,
-   gdata => $gdata,
-   emit_parser_source_line => \&_emit_parser_source_line,
-   top_rule_ref => \$top_rule,
-   parser_source_chunks_ref => \@parser_source_chunks,
-  }
- )
+ return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
 }
 
 #------------------------------------------------------------------------------
@@ -483,16 +449,7 @@ sub _build_rule_ir_emit_context {
 # Returns : ($label, $rule_info_hashref)
 #------------------------------------------------------------------------------
 sub spec_entry {
- my $einfo = shift;
- my ($label, $info, $top_rule_candidate) = LinkedSpec::SpecEntry::compile_spec_entry(
-  $einfo,
-  {
-   emit_parser_source_line => \&_emit_parser_source_line,
-  }
- );
- return undef unless defined($label) && ref($info) eq 'HASH';
- $top_rule = $top_rule_candidate if defined $top_rule_candidate;
- return ($label, $info)
+ return LinkedSpec::Runtime::compile_spec_entry(@_)
 }
 
 #------------------------------------------------------------------------------

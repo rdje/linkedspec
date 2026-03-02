@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-02)
+- Executed next Phase 1A extraction slice (runtime state + `Get`/`spec_entry` orchestration transfer):
+  - created `perl/LinkedSpec/Runtime.pm`,
+  - moved bootstrap runtime-state ownership and entrypoint orchestration out of `LinkedSpec.pm`.
+- `LinkedSpec::Runtime` now owns:
+  - bootstrap parser runtime state initialization (`spec_descr`, `bootstrap_rule_index`, `gdata`),
+  - parser-source emit callback state and `_emit_parser_source_line` routing,
+  - `run_get(...)` orchestration glue for compiler pipeline invocation,
+  - `compile_spec_entry(...)` orchestration glue with top-rule propagation.
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::Runtime ();`,
+  - converted `_emit_parser_source_line` to delegate,
+  - converted `Get(...)` to thin delegate,
+  - converted `spec_entry(...)` to thin delegate.
+- Validation snapshot for runtime orchestration extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-02)
 - Executed next Phase 1A extraction slice (action contract/scanner wiring transfer):
   - moved contract dependency-map and scanner-adapter ownership from `LinkedSpec.pm` to `LinkedSpec::ActionRewriter`.
 - `LinkedSpec::ActionRewriter` now owns:
