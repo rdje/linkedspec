@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-03)
+- Executed next Phase 1A extraction slice (final `Get`/`AUTOLOAD` ownership transfer from `LinkedSpec.pm`):
+  - created `perl/LinkedSpec/PluginBridge.pm`,
+  - moved raw `Get` argument parsing ownership into `LinkedSpec::Runtime`.
+- `LinkedSpec::PluginBridge` now owns:
+  - `dispatch_autoload($autoload_name, @args)` lazy plugin bridge behavior (`require PPlugin` + dispatch).
+- `LinkedSpec::Runtime` updates:
+  - added `run_get_from_args(@args)` to own raw `Get` argument normalization and delegate to `run_get(...)`.
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::PluginBridge ();`,
+  - converted `Get(...)` to thin delegate `LinkedSpec::Runtime::run_get_from_args(...)`,
+  - converted `AUTOLOAD(...)` to thin delegate `LinkedSpec::PluginBridge::dispatch_autoload(...)`.
+- Validation snapshot for final entrypoint extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-03)
 - Executed next Phase 1A extraction slice (declare/assign method helper transfer):
   - created `perl/LinkedSpec/ActionIR/DeclareMethod.pm`,
   - moved declare/assign helper parsing and lowering ownership out of `LinkedSpec::ActionRewriter`.

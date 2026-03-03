@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-03 - Phase 1A Slice: Extract Remaining `Get`/`AUTOLOAD` Ownership from `LinkedSpec.pm`
+## Summary
+Moved the last non-delegate entrypoint ownership out of `LinkedSpec.pm` by extracting `AUTOLOAD` plugin dispatch to `LinkedSpec::PluginBridge` and moving raw `Get` argument parsing into `LinkedSpec::Runtime`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::PluginBridge::dispatch_autoload($autoload_name, @args)`:
+  - owns lazy `PPlugin` loading and plugin dispatch execution.
+- Updated `LinkedSpec::Runtime`:
+  - added `run_get_from_args(@args)` to own raw `Get` argument normalization (`$spec_content_ref`, `%options`) and delegate to existing `run_get(...)`.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::PluginBridge ();`
+  - `Get(...)` now delegates to `LinkedSpec::Runtime::run_get_from_args(...)`
+  - `AUTOLOAD(...)` now delegates to `LinkedSpec::PluginBridge::dispatch_autoload(...)`
+- Ownership outcome:
+  - `LinkedSpec.pm` no longer contains non-delegate orchestration/bridge logic for `Get` and `AUTOLOAD`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-03 - Phase 1A Slice: Extract Declare/Assign Method Helper Ownership to `LinkedSpec::ActionIR::DeclareMethod`
 ## Summary
 Moved declare/assign method helper parsing/lowering ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::DeclareMethod` module, while preserving compatibility through thin delegates in `ActionRewriter` and `LinkedSpec.pm`.

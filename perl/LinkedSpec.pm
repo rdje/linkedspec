@@ -33,6 +33,7 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::ParserFactory ();
 use LinkedSpec::Runtime ();
+use LinkedSpec::PluginBridge ();
 use LinkedSpec::Deps ();
 
 # UVM-style verbosity levels
@@ -284,9 +285,7 @@ sub _build_action_rewriter_migration_summary {
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
 sub Get {
- my $spec_content_ref = $_[0];
- my %option = @_[1 .. $#_];
- return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
+ return LinkedSpec::Runtime::run_get_from_args(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -1218,9 +1217,7 @@ sub get_parser {
 # Returns : whatever plugin call returns
 #------------------------------------------------------------------------------
 sub AUTOLOAD {
- my $ok = eval {require PPlugin; 1};
- die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
- PPlugin->exec($AUTOLOAD, @_)
+ return LinkedSpec::PluginBridge::dispatch_autoload($AUTOLOAD, @_)
 }
 
 1;
