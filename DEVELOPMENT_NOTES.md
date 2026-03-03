@@ -61,6 +61,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-03)
+- Executed next Phase 1A extraction slice (declare/assign method helper transfer):
+  - created `perl/LinkedSpec/ActionIR/DeclareMethod.pm`,
+  - moved declare/assign helper parsing and lowering ownership out of `LinkedSpec::ActionRewriter`.
+- `LinkedSpec::ActionIR::DeclareMethod` now owns:
+  - `_split_declare_symbol_names`
+  - `_parse_declare_binding_entry`
+  - `_lower_declare_value_expr`
+  - `_lower_declare_initializer_expr`
+  - `_extract_declare_statement_from_method_expr`
+  - `_lower_declare_method_statement`
+  - `_lower_assign_method_statement`
+- Dependency/boundary wiring updates:
+  - `ActionRewriter` now uses `_declare_method_deps` and delegates moved helper surface to `DeclareMethod`,
+  - `LinkedSpec::Deps` now includes `declare_method_deps_for_package`,
+  - `LinkedSpec.pm` now delegates declare/assign helper wrappers directly to `DeclareMethod` via `_declare_method_deps`.
+- Validation snapshot for declare/assign helper extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-03)
 - Executed next Phase 1A extraction slice (dependency-map ownership transfer):
   - created `perl/LinkedSpec/Deps.pm`,
   - moved dependency-map construction and dependency-contract validation out of `LinkedSpec.pm`.

@@ -27,6 +27,7 @@ use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
+use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::Compiler ();
@@ -70,6 +71,9 @@ sub _parser_factory_deps {
 }
 sub _method_lowering_deps {
  return LinkedSpec::Deps::method_lowering_deps_for_package(__PACKAGE__)
+}
+sub _declare_method_deps {
+ return LinkedSpec::Deps::declare_method_deps_for_package(__PACKAGE__)
 }
 sub _array_pipeline_deps {
  return LinkedSpec::Deps::array_pipeline_deps_for_package(__PACKAGE__)
@@ -444,7 +448,7 @@ sub _trim_action_ir_value {
 # Returns : arrayref of symbol names
 #------------------------------------------------------------------------------
 sub _split_declare_symbol_names {
- return LinkedSpec::ActionRewriter::_split_declare_symbol_names(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@_, _declare_method_deps())
 }
 #------------------------------------------------------------------------------
 # Function: _parse_declare_binding_entry
@@ -453,7 +457,7 @@ sub _split_declare_symbol_names {
 # Returns : hashref { name => ..., init => ...? } or undef
 #------------------------------------------------------------------------------
 sub _parse_declare_binding_entry {
- return LinkedSpec::ActionRewriter::_parse_declare_binding_entry(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -464,7 +468,7 @@ sub _parse_declare_binding_entry {
 # Returns : lowered Perl expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_value_expr {
- return LinkedSpec::ActionRewriter::_lower_declare_value_expr(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -474,7 +478,7 @@ sub _lower_declare_value_expr {
 # Returns : lowered Perl expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_initializer_expr {
- return LinkedSpec::ActionRewriter::_lower_declare_initializer_expr(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -704,7 +708,7 @@ sub _lower_assign_statement {
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_assign_method_statement {
- return LinkedSpec::ActionRewriter::_lower_assign_method_statement(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -715,7 +719,7 @@ sub _lower_assign_method_statement {
 # Returns : hashref { declaration_type => ..., entries => [...] } or undef
 #------------------------------------------------------------------------------
 sub _extract_declare_statement_from_method_expr {
- return LinkedSpec::ActionRewriter::_extract_declare_statement_from_method_expr(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------
@@ -726,7 +730,7 @@ sub _extract_declare_statement_from_method_expr {
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_declare_method_statement {
- return LinkedSpec::ActionRewriter::_lower_declare_method_statement(@_)
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@_, _declare_method_deps())
 }
 
 #------------------------------------------------------------------------------

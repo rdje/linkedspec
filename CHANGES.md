@@ -1,5 +1,50 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-03 - Phase 1A Slice: Extract Declare/Assign Method Helper Ownership to `LinkedSpec::ActionIR::DeclareMethod`
+## Summary
+Moved declare/assign method helper parsing/lowering ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::DeclareMethod` module, while preserving compatibility through thin delegates in `ActionRewriter` and `LinkedSpec.pm`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::DeclareMethod` owning:
+  - `_split_declare_symbol_names`
+  - `_parse_declare_binding_entry`
+  - `_lower_declare_value_expr`
+  - `_lower_declare_initializer_expr`
+  - `_extract_declare_statement_from_method_expr`
+  - `_lower_declare_method_statement`
+  - `_lower_assign_method_statement`
+- Boundary design:
+  - module is dependency-injected via callback map (`trim`, method parse/scope helpers, flow/value lowering, declaration alias/type lowering, assign lowering),
+  - no hard-coded direct calls back into `LinkedSpec` internals from module logic.
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `_declare_method_deps` dependency map,
+  - converted the moved helper surface to thin delegates into `ActionIR::DeclareMethod`.
+- Updated `LinkedSpec::Deps`:
+  - added `declare_method_deps_for_package` callback map builder.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::ActionIR::DeclareMethod ();`,
+  - added `_declare_method_deps` delegate helper,
+  - rewired declare/assign helper wrappers to delegate directly to `ActionIR::DeclareMethod`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-03 - Phase 1A Slice: Extract Dependency-Map Ownership to `LinkedSpec::Deps`
 ## Summary
 Moved callback dependency-map construction ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::Deps` module with explicit callback/value contract checks.

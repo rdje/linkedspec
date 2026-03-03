@@ -9,6 +9,7 @@ BEGIN {
 }
 use LinkedSpec::ActionIR::Scanner ();
 use LinkedSpec::ActionIR::MethodExpr ();
+use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::Contracts ();
 
 sub _trim_action_ir_value {
@@ -17,152 +18,46 @@ sub _trim_action_ir_value {
  $value =~ s/^\s*|\s*$//go;
  return $value
 }
+sub _declare_method_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
+  parse_method_function_expr => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
+  is_bare_method_scope_token => \&LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token,
+  normalize_method_args_with_optional_scope => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
+  lower_flow_composite_expr => \&LinkedSpec::_lower_flow_composite_expr,
+  lower_method_value_expr => \&LinkedSpec::_lower_method_value_expr,
+  declare_alias_to_type => \&LinkedSpec::_declare_alias_to_type,
+  lower_typed_declare_statement => \&LinkedSpec::_lower_typed_declare_statement,
+  lower_assign_statement => \&LinkedSpec::_lower_assign_statement,
+ }
+}
 
 sub _split_declare_symbol_names {
- my ($raw_names) = @_;
- return [] unless defined $raw_names;
-
- my @names = grep { length($_) } map {
-  my $name = $_;
-  $name =~ s/^\s*|\s*$//go;
-  $name;
- } split /\s*,\s*/o, $raw_names;
- @names = grep { /^\w+$/o } @names;
- return \@names
+ return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@_, _declare_method_deps())
 }
 
 sub _parse_declare_binding_entry {
- my ($entry) = @_;
- return undef unless defined $entry;
- my $trimmed = _trim_action_ir_value($entry);
- return undef unless defined($trimmed) && length($trimmed);
-
- return {name => $1} if $trimmed =~ /^(?<name>\w+)$/o;
- if ($trimmed =~ /^(?<name>\w+)\s*=\s*(?<init>.+)$/s) {
-  my $init = _trim_action_ir_value($+{init});
-  return undef unless defined($init) && length($init);
-  return {name => $+{name}, init => $init};
- }
- return undef
+ return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@_, _declare_method_deps())
 }
 
 sub _lower_declare_value_expr {
- my ($expr) = @_;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- my $lowered = LinkedSpec::_lower_flow_composite_expr($trimmed);
- return $lowered if defined($lowered) && length($lowered) && $lowered ne $trimmed;
-
- $lowered = LinkedSpec::_lower_method_value_expr($trimmed);
- return $lowered if defined($lowered) && length($lowered);
-
- return $trimmed
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@_, _declare_method_deps())
 }
 
 sub _lower_declare_initializer_expr {
- my ($type, $expr) = @_;
- return undef unless defined $type;
- return undef unless defined $expr;
- my $trimmed = _trim_action_ir_value($expr);
- return undef unless defined($trimmed) && length($trimmed);
-
- if ($type eq 'array') {
-  my $array_ctor = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
-  if ($array_ctor && $array_ctor->{method} eq 'array') {
-   my $items = $array_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
-   my @lowered_items = map { _lower_declare_value_expr($_) } @$items;
-   return undef if grep { !defined($_) || !length($_) } @lowered_items;
-   return '('.join(', ', @lowered_items).')';
-  }
-  if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
-   return '('.$+{payload}.')';
-  }
- }
-
- if ($type eq 'hash') {
-  my $hash_ctor = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
-  if ($hash_ctor && $hash_ctor->{method} eq 'hash') {
-   my $items = $hash_ctor->{args} || [];
-   return undef unless ref($items) eq 'ARRAY';
-   return undef unless @$items % 2 == 0;
-   my @pairs;
-   for (my $i = 0; $i < @$items; $i += 2) {
-    my $key_expr = _lower_declare_value_expr($items->[$i]);
-    my $val_expr = _lower_declare_value_expr($items->[$i + 1]);
-    return undef unless defined($key_expr) && length($key_expr);
-    return undef unless defined($val_expr) && length($val_expr);
-    push @pairs, $key_expr.' => '.$val_expr;
-   }
-   return '('.join(', ', @pairs).')';
-  }
-  if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
-   return '('.$+{payload}.')';
-  }
- }
-
- return _lower_declare_value_expr($trimmed)
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@_, _declare_method_deps())
 }
 
 sub _extract_declare_statement_from_method_expr {
- my ($expr) = @_;
- my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr);
- return undef unless $call;
- my $method = $call->{method} // '';
-
- if ($method eq 'declare') {
-  my @effective_args = @{$call->{args} || []};
-  if (
-   @effective_args >= 3 &&
-   LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token($effective_args[0]) &&
-   defined(_trim_action_ir_value($effective_args[1])) &&
-   _trim_action_ir_value($effective_args[1]) =~ /^(array|scalar|hash)$/o
-  ) {
-   shift @effective_args;
-  }
-
-  return undef unless @effective_args >= 2;
-  my $type = _trim_action_ir_value($effective_args[0]);
-  return undef unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
-  my @entries = @effective_args[1 .. $#effective_args];
-  return undef unless @entries;
-  return {
-   declaration_type => $type,
-   entries          => \@entries,
-  };
- }
-
- if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
-  my $type = LinkedSpec::_declare_alias_to_type($+{alias});
-  return undef unless defined $type;
-  my $effective_args = LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
-  return undef unless $effective_args && @$effective_args >= 1;
-  return {
-   declaration_type => $type,
-   entries          => [@$effective_args],
-  };
- }
-
- return undef
+ return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@_, _declare_method_deps())
 }
 
 sub _lower_declare_method_statement {
- my ($expr) = @_;
- my $decl = _extract_declare_statement_from_method_expr($expr);
- return undef unless $decl;
- return LinkedSpec::_lower_typed_declare_statement($decl->{declaration_type}, $decl->{entries})
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@_, _declare_method_deps())
 }
 
 sub _lower_assign_method_statement {
- my ($expr) = @_;
- my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr);
- return undef unless $call && $call->{method} eq 'assign';
-
- my $effective_args = LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
- return undef unless $effective_args;
- return LinkedSpec::_lower_assign_statement($effective_args->[0], $effective_args->[1])
+ return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@_, _declare_method_deps())
 }
 
 sub _action_contract_deps {
