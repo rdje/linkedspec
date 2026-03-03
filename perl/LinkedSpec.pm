@@ -32,6 +32,7 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::ParserFactory ();
 use LinkedSpec::Runtime ();
+use LinkedSpec::Deps ();
 
 # UVM-style verbosity levels
 use constant {
@@ -62,67 +63,20 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 # Returns : Perl boolean expression string or undef
 #------------------------------------------------------------------------------
 sub _flow_expr_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  extract_array_symbol_name => \&_extract_array_symbol_name,
-  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
-  lower_method_value_expr => \&_lower_method_value_expr,
-  parse_method_function_expr => \&_parse_method_function_expr,
-  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
- }
+ return LinkedSpec::Deps::flow_expr_deps_for_package(__PACKAGE__)
 }
 sub _parser_factory_deps {
- return {
-  apply_trace_options => \&_apply_trace_options,
-  trace_enter => \&trace_enter,
-  trace_exit => \&trace_exit,
-  trace_decision => \&trace_decision,
-  validate_spec_name => \&LinkedSpec::Resolver::validate_spec_name,
-  resolve_spec_path => \&LinkedSpec::Resolver::resolve_spec_path,
-  load_spec_content => \&LinkedSpec::Resolver::load_spec_content,
-  compile_spec => \&Get,
-  dump_low => DUMP_LOW,
-  dump_medium => DUMP_MEDIUM,
- }
+ return LinkedSpec::Deps::parser_factory_deps_for_package(__PACKAGE__)
 }
 sub _method_lowering_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  split_declare_symbol_names => \&_split_declare_symbol_names,
-  parse_declare_binding_entry => \&_parse_declare_binding_entry,
-  lower_declare_initializer_expr => \&_lower_declare_initializer_expr,
-  parse_method_function_expr => \&_parse_method_function_expr,
-  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
-  lower_scalaref_value_expr => \&_lower_scalaref_value_expr,
-  extract_array_symbol_name => \&_extract_array_symbol_name,
-  extract_hash_symbol_name => \&_extract_hash_symbol_name,
-  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
-  lower_scalar_access_key_expr => \&_lower_scalar_access_key_expr,
-  infer_scalar_container_kind => \&_infer_scalar_container_kind,
-  split_top_level_csv => \&_split_top_level_csv,
-  lower_assignment_source_expr => \&_lower_assignment_source_expr,
-  strip_literal_delimiters => \&_strip_literal_delimiters,
- }
+ return LinkedSpec::Deps::method_lowering_deps_for_package(__PACKAGE__)
 }
 sub _array_pipeline_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  strip_literal_delimiters => \&_strip_literal_delimiters,
-  extract_array_symbol_name => \&_extract_array_symbol_name,
-  parse_method_function_expr => \&_parse_method_function_expr,
-  is_bare_method_scope_token => \&_is_bare_method_scope_token,
-  extract_scalar_symbol_name => \&_extract_scalar_symbol_name,
- }
+ return LinkedSpec::Deps::array_pipeline_deps_for_package(__PACKAGE__)
 }
 
 sub _control_flow_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  normalize_method_tag_expr => \&_normalize_method_tag_expr,
-  lower_flow_composite_expr => \&_lower_flow_composite_expr,
-  parse_method_function_expr => \&_parse_method_function_expr,
-  normalize_method_args_with_optional_scope => \&_normalize_method_args_with_optional_scope,
- }
+ return LinkedSpec::Deps::control_flow_deps_for_package(__PACKAGE__)
 }
 sub _lower_is_empty_expr {
  my ($arg_expr) = @_;
@@ -569,11 +523,7 @@ sub _normalize_method_tag_expr {
 }
 
 sub _value_expr_deps {
- return {
-  trim_action_ir_value      => \&_trim_action_ir_value,
-  lower_flow_composite_expr => \&_lower_flow_composite_expr,
-  lower_method_value_expr   => \&_lower_method_value_expr,
- }
+ return LinkedSpec::Deps::value_expr_deps_for_package(__PACKAGE__)
 }
 
 #------------------------------------------------------------------------------

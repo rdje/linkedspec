@@ -60,6 +60,33 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-03)
+- Executed next Phase 1A extraction slice (dependency-map ownership transfer):
+  - created `perl/LinkedSpec/Deps.pm`,
+  - moved dependency-map construction and dependency-contract validation out of `LinkedSpec.pm`.
+- `LinkedSpec::Deps` now owns:
+  - `flow_expr_deps_for_package`
+  - `method_lowering_deps_for_package`
+  - `array_pipeline_deps_for_package`
+  - `control_flow_deps_for_package`
+  - `value_expr_deps_for_package`
+  - `parser_factory_deps_for_package`
+- Dependency-contract checks introduced:
+  - `_require_pkg_cb` validates callback existence/callability,
+  - `_require_pkg_value` validates required value providers (e.g. dump-level constants).
+- `LinkedSpec.pm` updates:
+  - added `use LinkedSpec::Deps ();`,
+  - converted `_flow_expr_deps`, `_method_lowering_deps`, `_array_pipeline_deps`, `_control_flow_deps`, `_value_expr_deps`, and `_parser_factory_deps` to thin delegates.
+- Validation snapshot for dependency-registry extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-03-02)
 - Executed next Phase 1A extraction slice (runtime state + `Get`/`spec_entry` orchestration transfer):
   - created `perl/LinkedSpec/Runtime.pm`,

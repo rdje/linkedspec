@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-03 - Phase 1A Slice: Extract Dependency-Map Ownership to `LinkedSpec::Deps`
+## Summary
+Moved callback dependency-map construction ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::Deps` module with explicit callback/value contract checks.
+
+## Changed Files
+- Added: `perl/LinkedSpec/Deps.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::Deps` module owning dependency-map builders:
+  - `flow_expr_deps_for_package`
+  - `method_lowering_deps_for_package`
+  - `array_pipeline_deps_for_package`
+  - `control_flow_deps_for_package`
+  - `value_expr_deps_for_package`
+  - `parser_factory_deps_for_package`
+- Contract enforcement added in `LinkedSpec::Deps`:
+  - `_require_pkg_cb` verifies required callbacks exist and are callable,
+  - `_require_pkg_value` verifies required constant/value providers exist.
+- Updated `LinkedSpec.pm`:
+  - added `use LinkedSpec::Deps ();`
+  - converted `_flow_expr_deps`, `_method_lowering_deps`, `_array_pipeline_deps`, `_control_flow_deps`, `_value_expr_deps`, and `_parser_factory_deps` into thin delegates to `LinkedSpec::Deps`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-02 - Phase 1A Slice: Extract Runtime State + Get/spec_entry Orchestration to `LinkedSpec::Runtime`
 ## Summary
 Moved bootstrap runtime state and `Get`/`spec_entry` orchestration ownership out of `LinkedSpec.pm` into a dedicated `LinkedSpec::Runtime` module, preserving public entrypoint compatibility through thin delegates in `LinkedSpec.pm`.
