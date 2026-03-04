@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-04 - Phase 1A Slice: Extract Action-IR Statement Splitting to `LinkedSpec::ActionIR::StatementSplit`
+## Summary
+Moved statement-splitting ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::StatementSplit` module, preserving behavior through a thin delegate in `ActionRewriter`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::StatementSplit` owning:
+  - `_split_action_ir_statements`
+- Boundary design:
+  - module is dependency-injected for trimming callback (`trim_action_ir_value`),
+  - no hard-coded direct calls into `LinkedSpec` internals from statement-splitting logic.
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `use LinkedSpec::ActionIR::StatementSplit ();`
+  - added `_statement_split_deps` callback map
+  - converted `_split_action_ir_statements` to a thin delegate to `ActionIR::StatementSplit`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-03 - Phase 1A Slice: Extract Canonical Helper-Event Ownership to `LinkedSpec::ActionIR::CanonicalEvents`
 ## Summary
 Moved canonical helper-event normalization and canonical action-IR event assembly ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::CanonicalEvents` module, preserving compatibility through thin delegates in `ActionRewriter`.

@@ -12,6 +12,7 @@ use LinkedSpec::ActionIR::MethodExpr ();
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::CanonicalEvents ();
 use LinkedSpec::ActionIR::Contracts ();
+use LinkedSpec::ActionIR::StatementSplit ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -30,6 +31,11 @@ sub _declare_method_deps {
   declare_alias_to_type => \&LinkedSpec::_declare_alias_to_type,
   lower_typed_declare_statement => \&LinkedSpec::_lower_typed_declare_statement,
   lower_assign_statement => \&LinkedSpec::_lower_assign_statement,
+ }
+}
+sub _statement_split_deps {
+ return {
+  trim_action_ir_value => \&_trim_action_ir_value,
  }
 }
 sub _canonical_event_deps {
@@ -179,243 +185,7 @@ sub _canonicalize_helper_action_ir_event {
 }
 
 sub _split_action_ir_statements {
- my ($code) = @_;
-
- my @statements;
- my $statement = '';
- my $paren_depth = 0;
- my $brace_depth = 0;
- my $bracket_depth = 0;
- my $in_single_quote = 0;
- my $in_double_quote = 0;
- my $in_backtick_quote = 0;
- my $in_slash_quote = 0;
- my $slash_quote_segments_remaining = 0;
- my $slash_quote_escape_next = 0;
- my $in_angle_quote = 0;
- my $angle_quote_segments_remaining = 0;
- my $angle_quote_depth = 0;
- my $angle_quote_escape_next = 0;
- my $in_pipe_quote = 0;
- my $pipe_quote_segments_remaining = 0;
- my $pipe_quote_escape_next = 0;
- my $in_line_comment = 0;
- my $escape_next = 0;
-
- foreach my $char (split //, $code) {
-  if ($in_line_comment) {
-   $statement .= $char;
-   if ($char eq "\n") {
-    $in_line_comment = 0;
-   }
-   next;
-  }
-  if ($in_single_quote) {
-   $statement .= $char;
-   if ($escape_next) {
-    $escape_next = 0;
-   } elsif ($char eq '\\') {
-    $escape_next = 1;
-   } elsif ($char eq "'") {
-    $in_single_quote = 0;
-   }
-   next;
-  }
-
-  if ($in_double_quote) {
-   $statement .= $char;
-   if ($escape_next) {
-    $escape_next = 0;
-   } elsif ($char eq '\\') {
-    $escape_next = 1;
-   } elsif ($char eq '"') {
-    $in_double_quote = 0;
-   }
-   next;
-  }
-
-  if ($in_slash_quote) {
-   $statement .= $char;
-   if ($slash_quote_escape_next) {
-    $slash_quote_escape_next = 0;
-   } elsif ($char eq '\\') {
-    $slash_quote_escape_next = 1;
-   } elsif ($char eq '/') {
-    --$slash_quote_segments_remaining if $slash_quote_segments_remaining > 0;
-    $in_slash_quote = 0 if $slash_quote_segments_remaining == 0;
-   }
-   next;
-  }
-  if ($in_angle_quote) {
-   $statement .= $char;
-   if ($angle_quote_escape_next) {
-    $angle_quote_escape_next = 0;
-   } elsif ($char eq '\\') {
-    $angle_quote_escape_next = 1;
-   } elsif ($char eq '<') {
-    ++$angle_quote_depth;
-   } elsif ($char eq '>') {
-    --$angle_quote_depth if $angle_quote_depth > 0;
-    if ($angle_quote_depth == 0) {
-     --$angle_quote_segments_remaining if $angle_quote_segments_remaining > 0;
-     $in_angle_quote = 0 if $angle_quote_segments_remaining == 0;
-    }
-   }
-   next;
-  }
-  if ($in_pipe_quote) {
-   $statement .= $char;
-   if ($pipe_quote_escape_next) {
-    $pipe_quote_escape_next = 0;
-   } elsif ($char eq '\\') {
-    $pipe_quote_escape_next = 1;
-   } elsif ($char eq '|') {
-    --$pipe_quote_segments_remaining if $pipe_quote_segments_remaining > 0;
-    $in_pipe_quote = 0 if $pipe_quote_segments_remaining == 0;
-   }
-   next;
-  }
-  if ($char eq "'") {
-   $in_single_quote = 1;
-   $statement .= $char;
-   next;
-  }
-  if ($in_backtick_quote) {
-   $statement .= $char;
-   if ($escape_next) {
-    $escape_next = 0;
-   } elsif ($char eq '\\') {
-    $escape_next = 1;
-   } elsif ($char eq '`') {
-    $in_backtick_quote = 0;
-   }
-   next;
-  }
-
-  if ($char eq '"') {
-   $in_double_quote = 1;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq '`') {
-   $in_backtick_quote = 1;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq '#') {
-   $in_line_comment = 1;
-   $statement .= $char;
-   next;
-  }
-  if ($char eq '/') {
-   my $slash_context = $statement;
-   $slash_context =~ s/\s+$//o;
-
-   if ($slash_context =~ /(?:^|[^\w:])(?<op>s|tr|y|qr|qq|qx|q|m)\s*$/o) {
-    my $op = $+{op};
-    $in_slash_quote = 1;
-    $slash_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
-    $slash_quote_escape_next = 0;
-    $statement .= $char;
-    next;
-   } elsif ($slash_context =~ /(?:=~|!~)\s*$/o) {
-    $in_slash_quote = 1;
-    $slash_quote_segments_remaining = 1;
-    $slash_quote_escape_next = 0;
-    $statement .= $char;
-    next;
-   }
-  }
-  if ($char eq '<') {
-   my $angle_context = $statement;
-   $angle_context =~ s/\s+$//o;
-
-   if ($angle_context =~ /(?:^|[^\$\w:])(?<op>s|tr|y|qr|qq|qx|q)\s*$/o) {
-    my $op = $+{op};
-    $in_angle_quote = 1;
-    $angle_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
-    $angle_quote_depth = 1;
-    $angle_quote_escape_next = 0;
-    $statement .= $char;
-    next;
-   }
-  }
-  if ($char eq '|') {
-   my $pipe_context = $statement;
-   $pipe_context =~ s/\s+$//o;
-
-   if ($pipe_context =~ /(?:^|[^\$\w:])(?<op>s|tr|y|qr|qq|qx|q|m)\s*$/o) {
-    my $op = $+{op};
-    $in_pipe_quote = 1;
-    $pipe_quote_segments_remaining = ($op eq 's' || $op eq 'tr' || $op eq 'y') ? 2 : 1;
-    $pipe_quote_escape_next = 0;
-    $statement .= $char;
-    next;
-   } elsif ($pipe_context =~ /(?:=~|!~)\s*m?\s*$/o) {
-    $in_pipe_quote = 1;
-    $pipe_quote_segments_remaining = 1;
-    $pipe_quote_escape_next = 0;
-    $statement .= $char;
-    next;
-   }
-  }
-
-  if ($char eq '(') {
-   ++$paren_depth;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq ')') {
-   --$paren_depth if $paren_depth > 0;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq '{') {
-   ++$brace_depth;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq '}') {
-   --$brace_depth if $brace_depth > 0;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq '[') {
-   ++$bracket_depth;
-   $statement .= $char;
-   next;
-  }
-
-  if ($char eq ']') {
-   --$bracket_depth if $bracket_depth > 0;
-   $statement .= $char;
-   next;
-  }
-
-  if (
-   $char eq ';' &&
-   $paren_depth == 0 &&
-   $brace_depth == 0 &&
-   $bracket_depth == 0
-  ) {
-   my $trimmed = _trim_action_ir_value($statement);
-   push @statements, $trimmed if defined($trimmed) && length($trimmed);
-   $statement = '';
-   next;
-  }
-
-  $statement .= $char;
- }
-
- my $trimmed = _trim_action_ir_value($statement);
- push @statements, $trimmed if defined($trimmed) && length($trimmed);
- return \@statements
+ return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@_, _statement_split_deps())
 }
 sub _build_canonical_action_ir_events {
  return LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(@_, _canonical_event_deps())

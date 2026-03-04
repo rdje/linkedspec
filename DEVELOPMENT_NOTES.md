@@ -60,6 +60,21 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-04)
+- Executed next Phase 1A extraction slice (statement-splitting ownership transfer):
+  - created `perl/LinkedSpec/ActionIR/StatementSplit.pm`,
+  - moved `_split_action_ir_statements` ownership out of `LinkedSpec::ActionRewriter`.
+- `LinkedSpec::ActionIR::StatementSplit` now owns:
+  - `_split_action_ir_statements`
+- `LinkedSpec::ActionRewriter` updates:
+  - added `use LinkedSpec::ActionIR::StatementSplit ();`,
+  - added `_statement_split_deps` callback map,
+  - converted `_split_action_ir_statements` to thin delegate into `StatementSplit`.
+- Validation snapshot for statement-splitting extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-03-03)
 - Executed next Phase 1A extraction slice (canonical helper-event ownership transfer):
   - created `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`,
