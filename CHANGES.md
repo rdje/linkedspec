@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-03 - Phase 1A Slice: Extract Canonical Helper-Event Ownership to `LinkedSpec::ActionIR::CanonicalEvents`
+## Summary
+Moved canonical helper-event normalization and canonical action-IR event assembly ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::CanonicalEvents` module, preserving compatibility through thin delegates in `ActionRewriter`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::CanonicalEvents` owning:
+  - `_canonicalize_helper_action_ir_event`
+  - `_build_canonical_action_ir_events`
+- Boundary design:
+  - module is dependency-injected for trimming and top-level statement splitting callbacks,
+  - no hard-coded direct calls back into `LinkedSpec` internals from module logic.
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `use LinkedSpec::ActionIR::CanonicalEvents ();`
+  - added `_canonical_event_deps` callback map
+  - converted `_canonicalize_helper_action_ir_event` and `_build_canonical_action_ir_events` to thin delegates.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-03 - Phase 1A Slice: Extract Remaining `Get`/`AUTOLOAD` Ownership from `LinkedSpec.pm`
 ## Summary
 Moved the last non-delegate entrypoint ownership out of `LinkedSpec.pm` by extracting `AUTOLOAD` plugin dispatch to `LinkedSpec::PluginBridge` and moving raw `Get` argument parsing into `LinkedSpec::Runtime`.
