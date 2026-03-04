@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-04)
+- Executed next Phase 1A extraction slice (diagnostics/helper aggregation ownership transfer):
+  - created `perl/LinkedSpec/ActionIR/Diagnostics.pm`,
+  - moved diagnostics/helper aggregation ownership out of `LinkedSpec::ActionRewriter`.
+- `LinkedSpec::ActionIR::Diagnostics` now owns:
+  - `_find_unresolved_action_helpers`
+  - `_collect_action_helper_ir_nodes`
+  - `_accumulate_action_rewrite_diagnostics`
+- `LinkedSpec::ActionRewriter` updates:
+  - added `use LinkedSpec::ActionIR::Diagnostics ();`,
+  - added `_diagnostics_deps` callback map,
+  - converted moved diagnostics/helper functions to thin delegates.
+- Validation snapshot for diagnostics extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-04)
 - Executed next Phase 1A extraction slice (statement-splitting ownership transfer):
   - created `perl/LinkedSpec/ActionIR/StatementSplit.pm`,
   - moved `_split_action_ir_statements` ownership out of `LinkedSpec::ActionRewriter`.

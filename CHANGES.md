@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-04 - Phase 1A Slice: Extract Action-Rewrite Diagnostics Ownership to `LinkedSpec::ActionIR::Diagnostics`
+## Summary
+Moved action rewrite diagnostics/helper aggregation ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::Diagnostics` module, preserving compatibility through thin delegates in `ActionRewriter`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/Diagnostics.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::Diagnostics` owning:
+  - `_find_unresolved_action_helpers`
+  - `_collect_action_helper_ir_nodes`
+  - `_accumulate_action_rewrite_diagnostics`
+- Boundary design:
+  - module is dependency-injected for statement splitting and contract-event scanning callbacks,
+  - no hard-coded direct calls into `LinkedSpec` internals from diagnostics aggregation logic.
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `use LinkedSpec::ActionIR::Diagnostics ();`
+  - added `_diagnostics_deps` callback map
+  - converted `_find_unresolved_action_helpers`, `_collect_action_helper_ir_nodes`, and `_accumulate_action_rewrite_diagnostics` to thin delegates.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-04 - Phase 1A Slice: Extract Action-IR Statement Splitting to `LinkedSpec::ActionIR::StatementSplit`
 ## Summary
 Moved statement-splitting ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::StatementSplit` module, preserving behavior through a thin delegate in `ActionRewriter`.
