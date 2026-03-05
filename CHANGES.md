@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-04 - Phase 1A Slice: Extract Rewrite Pipeline Ownership to `LinkedSpec::ActionIR::RewritePipeline`
+## Summary
+Moved rewrite pipeline orchestration/lowering ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::RewritePipeline` module, preserving compatibility through thin delegates in `ActionRewriter`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `LinkedSpec::ActionIR::RewritePipeline` owning:
+  - `_lower_action_code_from_canonical_ir`
+  - `_build_action_rewrite_rules`
+  - `_rewrite_action_code_with_diagnostics`
+- Boundary design:
+  - module is dependency-injected for contract construction, helper-IR collection, canonical-event assembly, and unresolved-helper detection callbacks,
+  - no hard-coded direct calls into `LinkedSpec` internals from rewrite-pipeline logic.
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `use LinkedSpec::ActionIR::RewritePipeline ();`
+  - added `_rewrite_pipeline_deps` callback map
+  - converted moved rewrite pipeline functions to thin delegates.
+- Validation bug discovered/fixed during this slice:
+  - corrected delegate argument forwarding in `_rewrite_action_code_with_diagnostics` so dependency callbacks are passed in the dedicated deps argument slot when `rewrite_rules` is omitted.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-04 - Phase 1A Slice: Extract Action-Rewrite Diagnostics Ownership to `LinkedSpec::ActionIR::Diagnostics`
 ## Summary
 Moved action rewrite diagnostics/helper aggregation ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::Diagnostics` module, preserving compatibility through thin delegates in `ActionRewriter`.

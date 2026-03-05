@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-04)
+- Executed next Phase 1A extraction slice (rewrite pipeline ownership transfer):
+  - created `perl/LinkedSpec/ActionIR/RewritePipeline.pm`,
+  - moved rewrite pipeline orchestration/lowering ownership out of `LinkedSpec::ActionRewriter`.
+- `LinkedSpec::ActionIR::RewritePipeline` now owns:
+  - `_lower_action_code_from_canonical_ir`
+  - `_build_action_rewrite_rules`
+  - `_rewrite_action_code_with_diagnostics`
+- `LinkedSpec::ActionRewriter` updates:
+  - added `use LinkedSpec::ActionIR::RewritePipeline ();`,
+  - added `_rewrite_pipeline_deps` callback map,
+  - converted moved rewrite pipeline functions to thin delegates.
+- Validation wiring fix in this slice:
+  - corrected `_rewrite_action_code_with_diagnostics` delegate argument forwarding so deps are passed in the dedicated fourth argument slot when rewrite rules are omitted.
+- Validation snapshot for rewrite pipeline extraction slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-04)
 - Executed next Phase 1A extraction slice (diagnostics/helper aggregation ownership transfer):
   - created `perl/LinkedSpec/ActionIR/Diagnostics.pm`,
   - moved diagnostics/helper aggregation ownership out of `LinkedSpec::ActionRewriter`.
