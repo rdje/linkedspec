@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-05 - Phase 1A Slice: Extract ActionRewriter Dependency-Map Ownership to `LinkedSpec::Deps`
+## Summary
+Moved ActionRewriter dependency-map ownership out of `LinkedSpec::ActionRewriter` into `LinkedSpec::Deps`, preserving behavior with thin dependency-map delegates in `ActionRewriter`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added ActionRewriter-specific dependency-map builders in `LinkedSpec::Deps`:
+  - `action_rewriter_declare_method_deps_for_package`
+  - `action_rewriter_statement_split_deps_for_package`
+  - `action_rewriter_canonical_event_deps_for_package`
+  - `action_rewriter_scanner_deps_for_package`
+  - `action_rewriter_diagnostics_deps_for_package`
+  - `action_rewriter_rewrite_pipeline_deps_for_package`
+  - `action_rewriter_contract_deps_for_package`
+- Updated `LinkedSpec::ActionRewriter`:
+  - added `use LinkedSpec::Deps ();`
+  - converted `_declare_method_deps`, `_statement_split_deps`, `_canonical_event_deps`, `_diagnostics_deps`, `_rewrite_pipeline_deps`, and `_action_contract_deps` to delegates into `LinkedSpec::Deps`.
+  - added `_scan_contract_ir_event_deps` delegate into `LinkedSpec::Deps`.
+  - rewired `_scan_contract_ir_events` to consume `_scan_contract_ir_event_deps()` rather than an in-file dependency hash.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-04 - Phase 1A Slice: Extract Rewrite Pipeline Ownership to `LinkedSpec::ActionIR::RewritePipeline`
 ## Summary
 Moved rewrite pipeline orchestration/lowering ownership out of `LinkedSpec::ActionRewriter` into a dedicated `LinkedSpec::ActionIR::RewritePipeline` module, preserving compatibility through thin delegates in `ActionRewriter`.

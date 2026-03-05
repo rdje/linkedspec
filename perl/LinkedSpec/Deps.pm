@@ -101,6 +101,91 @@ sub declare_method_deps_for_package {
   lower_assign_statement => _require_pkg_cb($pkg, '_lower_assign_statement'),
  }
 }
+sub action_rewriter_declare_method_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
+  is_bare_method_scope_token => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_is_bare_method_scope_token'),
+  normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
+  lower_flow_composite_expr => _require_pkg_cb('LinkedSpec', '_lower_flow_composite_expr'),
+  lower_method_value_expr => _require_pkg_cb('LinkedSpec', '_lower_method_value_expr'),
+  declare_alias_to_type => _require_pkg_cb('LinkedSpec', '_declare_alias_to_type'),
+  lower_typed_declare_statement => _require_pkg_cb('LinkedSpec', '_lower_typed_declare_statement'),
+  lower_assign_statement => _require_pkg_cb('LinkedSpec', '_lower_assign_statement'),
+ }
+}
+
+sub action_rewriter_statement_split_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+ }
+}
+
+sub action_rewriter_canonical_event_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
+ }
+}
+
+sub action_rewriter_scanner_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
+  normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
+  build_array_pipeline_plan_from_expr => _require_pkg_cb('LinkedSpec', '_build_array_pipeline_plan_from_expr'),
+  extract_declare_statement_from_method_expr => _require_pkg_cb($pkg, '_extract_declare_statement_from_method_expr'),
+  parse_declare_binding_entry => _require_pkg_cb($pkg, '_parse_declare_binding_entry'),
+ }
+}
+
+sub action_rewriter_diagnostics_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
+  scan_contract_ir_events => _require_pkg_cb($pkg, '_scan_contract_ir_events'),
+ }
+}
+
+sub action_rewriter_rewrite_pipeline_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  build_action_lowering_contracts => _require_pkg_cb($pkg, '_build_action_lowering_contracts'),
+  collect_action_helper_ir_nodes => _require_pkg_cb($pkg, '_collect_action_helper_ir_nodes'),
+  build_canonical_action_ir_events => _require_pkg_cb($pkg, '_build_canonical_action_ir_events'),
+  find_unresolved_action_helpers => _require_pkg_cb($pkg, '_find_unresolved_action_helpers'),
+ }
+}
+
+sub action_rewriter_contract_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  lower_return_general_statement => _require_pkg_cb('LinkedSpec', '_lower_return_general_statement'),
+  lower_return_imatch_statement  => _require_pkg_cb('LinkedSpec', '_lower_return_imatch_statement'),
+  lower_assign_method_statement  => _require_pkg_cb($pkg, '_lower_assign_method_statement'),
+  lower_regex_subst_statement    => _require_pkg_cb('LinkedSpec', '_lower_regex_subst_statement'),
+  lower_array_pipeline_expr      => _require_pkg_cb('LinkedSpec', '_lower_array_pipeline_expr'),
+  lower_if_flow_statement        => _require_pkg_cb('LinkedSpec', '_lower_if_flow_statement'),
+  lower_elseif_flow_statement    => _require_pkg_cb('LinkedSpec', '_lower_elseif_flow_statement'),
+  lower_else_flow_statement      => _require_pkg_cb('LinkedSpec', '_lower_else_flow_statement'),
+  lower_endif_flow_statement     => _require_pkg_cb('LinkedSpec', '_lower_endif_flow_statement'),
+  lower_switch_flow_statement    => _require_pkg_cb('LinkedSpec', '_lower_switch_flow_statement'),
+  lower_case_flow_statement      => _require_pkg_cb('LinkedSpec', '_lower_case_flow_statement'),
+  lower_default_flow_statement   => _require_pkg_cb('LinkedSpec', '_lower_default_flow_statement'),
+  lower_endcase_flow_statement   => _require_pkg_cb('LinkedSpec', '_lower_endcase_flow_statement'),
+  lower_endswitch_flow_statement => _require_pkg_cb('LinkedSpec', '_lower_endswitch_flow_statement'),
+  lower_say_statement            => _require_pkg_cb('LinkedSpec', '_lower_say_statement'),
+  lower_print_statement          => _require_pkg_cb('LinkedSpec', '_lower_print_statement'),
+  lower_return_undef_statement   => _require_pkg_cb('LinkedSpec', '_lower_return_undef_statement'),
+  lower_return_array_statement   => _require_pkg_cb('LinkedSpec', '_lower_return_array_statement'),
+  lower_declare_method_statement => _require_pkg_cb($pkg, '_lower_declare_method_statement'),
+ }
+}
 
 sub parser_factory_deps_for_package {
  my ($pkg) = @_;

@@ -15,6 +15,7 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::ActionIR::StatementSplit ();
 use LinkedSpec::ActionIR::Diagnostics ();
 use LinkedSpec::ActionIR::RewritePipeline ();
+use LinkedSpec::Deps ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -23,42 +24,22 @@ sub _trim_action_ir_value {
  return $value
 }
 sub _declare_method_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  parse_method_function_expr => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
-  is_bare_method_scope_token => \&LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token,
-  normalize_method_args_with_optional_scope => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
-  lower_flow_composite_expr => \&LinkedSpec::_lower_flow_composite_expr,
-  lower_method_value_expr => \&LinkedSpec::_lower_method_value_expr,
-  declare_alias_to_type => \&LinkedSpec::_declare_alias_to_type,
-  lower_typed_declare_statement => \&LinkedSpec::_lower_typed_declare_statement,
-  lower_assign_statement => \&LinkedSpec::_lower_assign_statement,
- }
+ return LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package(__PACKAGE__)
 }
 sub _statement_split_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
- }
+ return LinkedSpec::Deps::action_rewriter_statement_split_deps_for_package(__PACKAGE__)
 }
 sub _canonical_event_deps {
- return {
-  trim_action_ir_value => \&_trim_action_ir_value,
-  split_action_ir_statements => \&_split_action_ir_statements,
- }
+ return LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package(__PACKAGE__)
 }
 sub _diagnostics_deps {
- return {
-  split_action_ir_statements => \&_split_action_ir_statements,
-  scan_contract_ir_events => \&_scan_contract_ir_events,
- }
+ return LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package(__PACKAGE__)
 }
 sub _rewrite_pipeline_deps {
- return {
-  build_action_lowering_contracts => \&_build_action_lowering_contracts,
-  collect_action_helper_ir_nodes => \&_collect_action_helper_ir_nodes,
-  build_canonical_action_ir_events => \&_build_canonical_action_ir_events,
-  find_unresolved_action_helpers => \&_find_unresolved_action_helpers,
- }
+ return LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package(__PACKAGE__)
+}
+sub _scan_contract_ir_event_deps {
+ return LinkedSpec::Deps::action_rewriter_scanner_deps_for_package(__PACKAGE__)
 }
 
 sub _split_declare_symbol_names {
@@ -90,27 +71,7 @@ sub _lower_assign_method_statement {
 }
 
 sub _action_contract_deps {
- return {
-  lower_return_general_statement => \&LinkedSpec::_lower_return_general_statement,
-  lower_return_imatch_statement  => \&LinkedSpec::_lower_return_imatch_statement,
-  lower_assign_method_statement  => \&_lower_assign_method_statement,
-  lower_regex_subst_statement    => \&LinkedSpec::_lower_regex_subst_statement,
-  lower_array_pipeline_expr      => \&LinkedSpec::_lower_array_pipeline_expr,
-  lower_if_flow_statement        => \&LinkedSpec::_lower_if_flow_statement,
-  lower_elseif_flow_statement    => \&LinkedSpec::_lower_elseif_flow_statement,
-  lower_else_flow_statement      => \&LinkedSpec::_lower_else_flow_statement,
-  lower_endif_flow_statement     => \&LinkedSpec::_lower_endif_flow_statement,
-  lower_switch_flow_statement    => \&LinkedSpec::_lower_switch_flow_statement,
-  lower_case_flow_statement      => \&LinkedSpec::_lower_case_flow_statement,
-  lower_default_flow_statement   => \&LinkedSpec::_lower_default_flow_statement,
-  lower_endcase_flow_statement   => \&LinkedSpec::_lower_endcase_flow_statement,
-  lower_endswitch_flow_statement => \&LinkedSpec::_lower_endswitch_flow_statement,
-  lower_say_statement            => \&LinkedSpec::_lower_say_statement,
-  lower_print_statement          => \&LinkedSpec::_lower_print_statement,
-  lower_return_undef_statement   => \&LinkedSpec::_lower_return_undef_statement,
-  lower_return_array_statement   => \&LinkedSpec::_lower_return_array_statement,
-  lower_declare_method_statement => \&_lower_declare_method_statement,
- }
+ return LinkedSpec::Deps::action_rewriter_contract_deps_for_package(__PACKAGE__)
 }
 
 sub _build_action_lowering_contracts {
@@ -126,15 +87,7 @@ sub _scan_contract_ir_events {
  return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
   $contract,
   $code,
-  {
-   split_action_ir_statements                 => \&_split_action_ir_statements,
-   trim_action_ir_value                       => \&_trim_action_ir_value,
-   parse_method_function_expr                 => \&LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr,
-   normalize_method_args_with_optional_scope  => \&LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope,
-   build_array_pipeline_plan_from_expr        => \&LinkedSpec::_build_array_pipeline_plan_from_expr,
-   extract_declare_statement_from_method_expr => \&_extract_declare_statement_from_method_expr,
-   parse_declare_binding_entry                => \&_parse_declare_binding_entry,
-  }
+  _scan_contract_ir_event_deps(),
  )
 }
 
