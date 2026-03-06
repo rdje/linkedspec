@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Phase 1A Slice: Decompose RuleIR Emit-Context Construction into `RuleIR::EmitContext`
+## Summary
+Refactored `LinkedSpec::RuleIR::_build_rule_ir_emit_context` into focused helper routines in a new `LinkedSpec::RuleIR::EmitContext` module, while keeping `RuleIR.pm` as a thin delegate surface for emit-context functions.
+
+## Changed Files
+- Added: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- New `LinkedSpec::RuleIR::EmitContext` ownership:
+  - rewrite diagnostics accumulator initialization (`_build_rewrite_diag_acc`)
+  - ACODE and BCODE rewrite passes (`_rewrite_acode_entries`, `_rewrite_bcode_entries`)
+  - lifecycle chunk normalization (`_normalize_rule_lifecycle_code` + `_normalize_rule_code_chunks`)
+  - unresolved-helper/raw-Perl blocker extraction and deduplication
+  - action-rewriter metadata assembly (`_build_action_rewriter_meta`)
+  - top-level emit-context orchestrator (`build_rule_ir_emit_context`).
+- `LinkedSpec::RuleIR` now delegates:
+  - `_normalize_rule_code_chunks` -> `RuleIR::EmitContext::_normalize_rule_code_chunks`
+  - `_build_rule_ir_emit_context` -> `RuleIR::EmitContext::build_rule_ir_emit_context`
+- Behavior-preserving output shape was retained for emit context fields consumed by `SpecEntry` (`ACODEs`, `BCODEs`, `BCALLs`, `GDATA`, lifecycle chunks, and `action_rewriter_meta`).
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-06 - Phase 1A Slice: Decompose `build_bootstrap_spec` into `BootstrapSpec::Core` Rule Builders
 ## Summary
 Refactored the large `LinkedSpec::BootstrapSpec::build_bootstrap_spec` flow into focused rule-builder helpers in a new `LinkedSpec::BootstrapSpec::Core` module, and reduced `BootstrapSpec.pm` to a thin delegate facade.

@@ -10,6 +10,7 @@ BEGIN {
 }
 
 use LinkedSpec::Trace ();
+use LinkedSpec::RuleIR::EmitContext ();
 
 use constant {
  DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
@@ -189,149 +190,11 @@ sub _validate_rule_ir_or_exit {
 }
 
 sub _normalize_rule_code_chunks {
- my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
-
- my @normalized;
- foreach my $chunk (@$chunks) {
-  my ($rewritten, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
-  $rewritten =~ s/\s*;\s*$//o;
-  push @normalized, $rewritten;
- }
-
- return join ";\n", @normalized
+ return LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks(@_)
 }
 
 sub _build_rule_ir_emit_context {
- my ($rule_ir) = @_;
- my $label = $rule_ir->{label};
- my $rewrite_rules = LinkedSpec::_build_action_rewrite_rules($label);
- my $rewrite_diag_acc = {
-  unresolved_helper_hits  => {},
-  unresolved_helper_count => 0,
-  unresolved_helper_events => [],
-  helper_action_ir_hits   => {},
-  helper_action_ir_count  => 0,
-  helper_action_ir_events => [],
-  canonical_action_ir_hits   => {},
-  canonical_action_ir_count  => 0,
-  canonical_action_ir_events => [],
-  canonical_action_ir_fallback_count => 0,
- };
-
- my @ACODEs;
- my @GDATA;
- foreach my $acode_entry (@{$rule_ir->{acode_entries}}) {
-  my ($rewritten_acode, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
-  push @ACODEs, $rewritten_acode;
-  push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
- }
-
- my @BCALLs;
- my %BCODEs;
- foreach my $bcode_entry (@{$rule_ir->{bcode_entries}}) {
-  my ($rewritten_bcode, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
-  push @BCALLs, $bcode_entry->{call};
-  $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
- }
-
- my %ab_count = (
-  ACODE => scalar(@{$rule_ir->{acode_entries}}),
-  BCODE => scalar(@{$rule_ir->{bcode_entries}}),
- );
-
- my $icode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ICODE},  $rewrite_diag_acc, $rewrite_rules);
- my $ecode  = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ECODE},  $rewrite_diag_acc, $rewrite_rules);
- my $excode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{EXCODE}, $rewrite_diag_acc, $rewrite_rules);
- my $itcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{ITCODE}, $rewrite_diag_acc, $rewrite_rules);
- my $lxcode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LXCODE}, $rewrite_diag_acc, $rewrite_rules);
- my $lscode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LSCODE}, $rewrite_diag_acc, $rewrite_rules);
- my $lecode = _normalize_rule_code_chunks($label, $rule_ir->{code_blocks}{LECODE}, $rewrite_diag_acc, $rewrite_rules);
-
- my @rewrite_contract_ids = map { $_->{id} } @$rewrite_rules;
- my @unresolved_helper_statements;
- my %seen_unresolved_helper_statement;
- foreach my $event (@{$rewrite_diag_acc->{unresolved_helper_events}}) {
-  my $raw_code = LinkedSpec::_trim_action_ir_value($event->{raw});
-  next unless defined($raw_code) && length($raw_code);
-  next if $seen_unresolved_helper_statement{$raw_code}++;
-  push @unresolved_helper_statements, $raw_code;
- }
- my @raw_perl_dependency_statements;
- my %seen_raw_perl_dependency_statement;
- foreach my $event (@{$rewrite_diag_acc->{canonical_action_ir_events}}) {
-  next unless ($event->{kind} // '') eq 'RAW_PERL';
-  my $raw_code = (ref($event->{args}) eq 'HASH') ? $event->{args}{code} : $event->{raw};
-  $raw_code = LinkedSpec::_trim_action_ir_value($raw_code);
-  next unless defined($raw_code) && length($raw_code);
-  next if $seen_raw_perl_dependency_statement{$raw_code}++;
-  push @raw_perl_dependency_statements, $raw_code;
- }
- my $raw_perl_dependency_count = $rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0;
- my @language_agnostic_action_ir_blocker_statements;
- my %seen_language_agnostic_action_ir_blocker_statement;
- foreach my $statement (@raw_perl_dependency_statements, @unresolved_helper_statements) {
-  next unless defined($statement) && length($statement);
-  next if $seen_language_agnostic_action_ir_blocker_statement{$statement}++;
-  push @language_agnostic_action_ir_blocker_statements, $statement;
- }
- my $language_agnostic_action_ir_blocker_statement_count = scalar @language_agnostic_action_ir_blocker_statements;
- my $language_agnostic_action_ir_ready = (
-  $raw_perl_dependency_count == 0 &&
-  ($rewrite_diag_acc->{unresolved_helper_count} || 0) == 0
- ) ? 1 : 0;
-
- my $action_rewriter_meta = {
-  unresolved_helper_count => $rewrite_diag_acc->{unresolved_helper_count},
-  unresolved_helpers      => [sort keys %{$rewrite_diag_acc->{unresolved_helper_hits}}],
-  unresolved_helper_hits  => {%{$rewrite_diag_acc->{unresolved_helper_hits}}},
-  unresolved_helper_events => [@{$rewrite_diag_acc->{unresolved_helper_events}}],
-  unresolved_helper_statements => \@unresolved_helper_statements,
-  helper_action_ir_count  => $rewrite_diag_acc->{helper_action_ir_count},
-  helper_action_ir_nodes  => [sort keys %{$rewrite_diag_acc->{helper_action_ir_hits}}],
-  helper_action_ir_hits   => {%{$rewrite_diag_acc->{helper_action_ir_hits}}},
-  helper_action_ir_events => [@{$rewrite_diag_acc->{helper_action_ir_events}}],
-  canonical_action_ir_count => $rewrite_diag_acc->{canonical_action_ir_count},
-  canonical_action_ir_nodes => [sort keys %{$rewrite_diag_acc->{canonical_action_ir_hits}}],
-  canonical_action_ir_hits  => {%{$rewrite_diag_acc->{canonical_action_ir_hits}}},
-  canonical_action_ir_events => [@{$rewrite_diag_acc->{canonical_action_ir_events}}],
-  canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
-  raw_perl_dependency_count => $raw_perl_dependency_count,
-  raw_perl_dependency_statements => \@raw_perl_dependency_statements,
-  language_agnostic_action_ir_blocker_statement_count => $language_agnostic_action_ir_blocker_statement_count,
-  language_agnostic_action_ir_blocker_statements => \@language_agnostic_action_ir_blocker_statements,
-  language_agnostic_action_ir_ready => $language_agnostic_action_ir_ready,
-  rewrite_contract_ids    => \@rewrite_contract_ids,
- };
-
- if ($action_rewriter_meta->{unresolved_helper_count}) {
-  LinkedSpec::Trace::log_output(
-   DUMP_LOW,
-   "Rule '$label': unresolved action helper(s) after rewrite pipeline",
-   "helpers=" . join(', ', @{$action_rewriter_meta->{unresolved_helpers}})
-  );
- }
-
- return {
-  label     => $label,
-  node_type => $rule_ir->{node_type},
-  REs       => $rule_ir->{REs},
-  ACODEs    => \@ACODEs,
-  BCODEs    => \%BCODEs,
-  BCALLs    => \@BCALLs,
-  GDATA     => \@GDATA,
-  ab_count  => \%ab_count,
-  icode     => $icode,
-  ecode     => $ecode,
-  excode    => $excode,
-  itcode    => $itcode,
-  lxcode    => $lxcode,
-  lscode    => $lscode,
-  lecode    => $lecode,
-  action_rewriter_meta => $action_rewriter_meta,
- }
+ return LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(@_)
 }
 
 1;

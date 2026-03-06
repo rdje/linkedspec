@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Executed next Phase 1A extraction slice (RuleIR emit-context decomposition):
+  - created `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+  - moved emit-context rewrite/diagnostics assembly ownership out of `RuleIR.pm`,
+  - converted `RuleIR.pm` emit-context functions to thin delegates.
+- `LinkedSpec::RuleIR::EmitContext` now owns:
+  - rewrite diagnostics accumulator bootstrapping,
+  - ACODE/BCODE rewrite passes and lifecycle code normalization,
+  - unresolved-helper and raw-Perl blocker statement extraction/deduplication,
+  - action-rewriter metadata assembly,
+  - top-level emit-context orchestration via `build_rule_ir_emit_context`.
+- `LinkedSpec::RuleIR` delegation updates:
+  - `_normalize_rule_code_chunks` -> `RuleIR::EmitContext::_normalize_rule_code_chunks`
+  - `_build_rule_ir_emit_context` -> `RuleIR::EmitContext::build_rule_ir_emit_context`
+- Validation snapshot for RuleIR emit-context decomposition slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-06)
 - Executed next Phase 1A extraction slice (bootstrap spec decomposition):
   - created `perl/LinkedSpec/BootstrapSpec/Core.pm`,
   - decomposed `build_bootstrap_spec` into focused helper builders and moved ownership there,
