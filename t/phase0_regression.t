@@ -924,7 +924,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -945,6 +945,11 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::call_spec_handler_subst('Top', 'assign(Top, scalar(flag), or(scalar(on), scalar(off)))'),
         '$flag = (($on) || ($off))',
         'assign helper accepts flow/value expression sources used by if/elseif/switch'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(capt_joined), join_values('', array(capt)))}),
+        q{$capt_joined = join('', @capt)},
+        'assign helper accepts join_values(delimiter, array(...)) source lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'substr(Top, scalar(c), "\\s*$", "", o)'),
@@ -2260,6 +2265,31 @@ subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' =>
         ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include ASSIGN after accumulator migration");
         ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include DECLARE after accumulator migration");
     }
+};
+subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
+    plan tests => 8;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl signal_decl_range migration check');
+
+    my $meta = $descr->{spec}{signal_decl_range}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'vhdl signal_decl_range exposes action_rewriter metadata');
+    ok(ref($meta->{raw_perl_dependency_statements}) eq 'ARRAY', 'vhdl signal_decl_range exposes raw_perl_dependency_statements array');
+
+    my @targeted_raw = grep {
+        defined($_) && (
+            $_ =~ /^my \(\@capt, \@msi_lsi\)$/ ||
+            $_ =~ /^push \@capt, substr\b/ ||
+            $_ =~ /^push \@msi_lsi, \$msi_lsi\b/ ||
+            $_ =~ /^if \(\@capt\)\b/
+        )
+    } @{$meta->{raw_perl_dependency_statements} || []};
+    is(scalar @targeted_raw, 0, 'vhdl signal_decl_range no longer reports targeted capture/push guard statements as raw-perl fallback');
+
+    cmp_ok($meta->{raw_perl_dependency_count}, '<', 9, 'vhdl signal_decl_range raw-perl dependency count is reduced from previous baseline');
+    ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include DECLARE');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include PUSH');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include ASSIGN');
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');

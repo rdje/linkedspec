@@ -307,17 +307,33 @@ interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
 -> interface_signal_declaration[1]   {return ['?port_decl:', [@IMATCH_LIST]]}
 
 
-signal_decl_range: /\(/ /\)/ I {my (@capt, @msi_lsi)}
-LS {push @capt, substr $$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH}
-LE {$IPOS = pos $$STRING}
+signal_decl_range: /\(/ /\)/ I {declare(array, capt, msi_lsi)}
+LS {push_value(array(capt), substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH))}
+LE {assign(scalar(IPOS), pos $$STRING)}
 
--> opar_cpar              {my $pos1 = pos($$STRING)-1; call(opar_cpar); my $pos2 = pos $$STRING; push @capt, substr $$STRING, $pos1, $pos2-$pos1}
--> downto_or_to           {(my $msi_lsi = join "", @capt) =~ s/^\s+|\n\s*|\s+$//goi; push @msi_lsi, $msi_lsi; @capt = ()} 
+-> opar_cpar              {
+   declare(scalar, pos1, pos2);
+   assign(scalar(pos1), pos($$STRING)-1);
+   call(opar_cpar);
+   assign(scalar(pos2), pos $$STRING);
+   push_value(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
+}
+-> downto_or_to           {
+   declare(scalar, msi_lsi);
+   assign(scalar(msi_lsi), join_values("", array(capt)));
+   substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
+   push_value(array(msi_lsi), scalar(msi_lsi));
+   @capt = ()
+} 
 -> signal_decl_range[1]   {
-   if (@capt) {
-    my $msi_lsi = join "", @capt;
-    if ($msi_lsi) {$msi_lsi =~ s/^\s+|\n\s*|\s+$//goi; push @msi_lsi, $msi_lsi};
-   }
+   if(not(is_empty(array(capt))));
+    declare(scalar, msi_lsi);
+    assign(scalar(msi_lsi), join_values("", array(capt)));
+    if(scalar(msi_lsi));
+     substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
+     push_value(array(msi_lsi), scalar(msi_lsi));
+    endif();
+   endif();
 
    return @msi_lsi
 }

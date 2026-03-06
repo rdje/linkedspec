@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Follow-up roadmap slice executed on highest remaining blocker `vhdl::signal_decl_range`.
+- Migration outcome:
+  - moved capture/push/guard logic from raw statements into fluent helper flow (`declare`, `assign`, `push_value`, `if/endif`, `substr`),
+  - reduced `raw_perl_dependency_count` from `9` to `1` for that rule.
+- Added canonical value helper:
+  - `join_values(delimiter, array(target))` in method-value lowering,
+  - used to replace inline raw `join("", @capt)` source expressions inside `assign(...)`.
+- Flow-expression compatibility update:
+  - `join_values(...)` is now routed through unified flow/value lowering so assignment-source lowering handles it deterministically.
+- Regression coverage:
+  - `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values` now includes `join_values` source-lowering assertion,
+  - new subtest `vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback` locks targeted fallback reduction.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` -> OK
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=89`)
+## Session Notes (2026-03-06)
 - Roadmap Item #3 slice completed: introduced a reusable fluent `push_value(...)` helper contract for canonical accumulator updates.
 - New `push_value` contract pipeline:
   - lowering: `LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement`,

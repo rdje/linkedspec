@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: Migrate `vhdl::signal_decl_range` to Method Flow + Add `join_values` Helper
+## Summary
+Advanced roadmap Item #3 by migrating `specs/vhdl.spec` rule `signal_decl_range` away from raw Perl capture/push/guard statements, and added canonical value helper `join_values(...)` so assignment sources no longer need raw Perl `join(...)` expression text in `.spec` method flow.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added method value helper lowering:
+  - `join_values(delimiter, array(target))` now lowers to `join(delimiter, @target)`.
+  - Implemented in `MethodLowering::_lower_method_value_expr`.
+  - Routed through flow-expression source lowering by extending `FlowExpr` value-expression passthrough set.
+- Migrated `vhdl.spec` `signal_decl_range` rule:
+  - declaration setup moved from raw `my (@capt, @msi_lsi)` to `declare(array, capt, msi_lsi)`,
+  - LS capture push moved to `push_value(array(capt), substr(...))`,
+  - LE position update moved to `assign(scalar(IPOS), pos $$STRING)`,
+  - nested capture handling moved to helper flow (`declare`, `assign`, `push_value`, `if`, `substr`, `endif`),
+  - raw `join("", @capt)` sources replaced with `join_values("", array(capt))`.
+- Added/updated regression locks:
+  - expanded `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values` with `join_values` assignment-source lowering assertion,
+  - added `vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback` to lock targeted raw fallback reductions and canonical node presence.
+- Post-migration metadata snapshot for `vhdl::signal_decl_range`:
+  - `raw_perl_dependency_count`: `9 -> 1`,
+  - remaining raw fallback statement: `@capt = ()`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=89`)
 ## 2026-03-06 - Roadmap Slice: Add `push_value` Method Contract and Migrate `tablegrep` Accumulator Flow
 ## Summary
 Advanced roadmap Item #3 by introducing a reusable `push_value(...)` action method contract (canonical `PUSH`) and migrating `tablegrep.spec` accumulator handling (`grep`/`group`) from raw Perl statements to fluent helper flow.

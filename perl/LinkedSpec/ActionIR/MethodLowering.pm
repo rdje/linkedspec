@@ -185,6 +185,21 @@ sub _lower_method_value_expr {
   }
   return undef;
  }
+ if ($method_call && $method_call->{method} eq 'join_values') {
+  my $join_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
+  return undef unless $join_args;
+
+  my $delimiter_expr = _lower_method_value_expr($join_args->[0], $deps);
+  $delimiter_expr = $trim_action_ir_value->($join_args->[0]) unless defined($delimiter_expr) && length($delimiter_expr);
+  return undef unless defined($delimiter_expr) && length($delimiter_expr);
+
+  my $array_expr = $trim_action_ir_value->($join_args->[1]);
+  return undef unless defined($array_expr) && length($array_expr);
+  my $array_symbol = $extract_array_symbol_name->($array_expr);
+  return undef unless defined($array_symbol) && length($array_symbol);
+
+  return "join($delimiter_expr, \@$array_symbol)";
+ }
  if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
