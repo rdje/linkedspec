@@ -113,6 +113,15 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 - Exit criteria:
   - Documentation remains current at each commit.
 
+## Phase 7: Self-Hosted `.spec` Grammar via `spec.spec`
+- Define and maintain a first-class `spec.spec` that captures the currently supported LinkedSpec `.spec` syntax and semantics.
+- Make `spec.spec` the preferred extension surface for future `.spec` format evolution so most syntax/semantic improvements can be implemented without modifying LinkedSpec core files.
+- Keep LinkedSpec core changes as the fallback path only when a required capability cannot be expressed through `spec.spec`-driven evolution.
+- Exit criteria:
+  - `spec.spec` can represent the current supported `.spec` language envelope with regression coverage.
+  - roadmap-level `.spec` feature changes are expected to land through `spec.spec` first.
+  - touching LinkedSpec core for `.spec` language evolution is treated as exception-only and explicitly justified.
+
 ## Backbone Refactor Track (Explicit, Tracked)
 This track captures the core refactor items needed to make `LinkedSpec.pm` robust and extensible while preserving current behavior.
 
