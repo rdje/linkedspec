@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: Migrate `tablegrep` Operator-Adjacency Guards to Fluent Method Flow
+## Summary
+Advanced roadmap Item #3 by migrating `tablegrep.spec` operator-adjacency guard logic from raw Perl `if (...) { ... }` blocks into fluent method-flow statements, reducing RAW_PERL fallback for those guard branches while preserving runtime behavior and diagnostics.
+
+## Changed Files
+- Updated: `specs/tablegrep.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- In both `tablegrep` rules `grep` and `group`, converted LE guard blocks from raw Perl:
+  - `if ($prev_node_type && $prev_node_type =~ /_OP/o && $$retv{type} =~ /_OP/o) { print ...; exit 1 }`
+  to fluent method-flow statements:
+  - `if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));`
+  - `print(...)`
+  - `exit 1`
+  - `endif();`
+- This migration reuses existing method/value lowering surfaces:
+  - `and(...)`, `matches(...)`, `scalar(...)`, `scalaref(...)`
+  - flow control markers `if(...)` / `endif()`
+- Added regression lock `tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback` to ensure:
+  - `grep` and `group` no longer report `if($prev_node_type...)` raw fallback statements,
+  - canonical action-IR includes `IF` and `EXIT` nodes for the migrated guards.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=86`)
 ## 2026-03-06 - Roadmap Slice: EBNF Fluent-Branch Migration + Quote-Aware Method Parsing
 ## Summary
 Advanced roadmap Item #3 (language-agnostic action migration) by converting `ebnf.spec` container-guard branches from raw Perl `if/else` blocks to fluent method-chain control flow, and fixed method-argument parsing/lowering so delimiters inside quoted strings (e.g., `(`, `)`, `{`, `}`, `[`, `]`) no longer break recursive parenthesis matching.

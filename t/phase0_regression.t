@@ -2195,6 +2195,22 @@ subtest 'ebnf_grammar_file_method_chain_branches_avoid_if_on_raw_fallback' => su
     ok(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}, 'ebnf grammar_file canonical action-IR nodes include IF');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'ebnf grammar_file canonical action-IR nodes include PUSH');
 };
+subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
+    plan tests => 9;
+
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep operator guard migration check');
+
+    for my $rule (qw(grep group)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "tablegrep $rule exposes action_rewriter metadata");
+
+        my @if_prev_node_raw = grep { defined($_) && $_ =~ /^if\s*\(.*prev_node_type/s } @{$meta->{raw_perl_dependency_statements} || []};
+        is(scalar @if_prev_node_raw, 0, "tablegrep $rule no longer reports prev_node_type if-guard as raw-perl fallback");
+        ok(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include IF");
+        ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include EXIT");
+    }
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

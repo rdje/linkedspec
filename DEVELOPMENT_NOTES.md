@@ -62,6 +62,22 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
 - Roadmap-first slice executed against Backbone Item #3 / Method-Like DSL Migration:
+  - migrated `specs/tablegrep.spec` `grep`/`group` LE operator-adjacency guards from raw Perl `if (...) { ... }` blocks to fluent method-flow (`if(and(...)); ...; endif();`).
+- Migration details:
+  - replaced raw `if ($prev_node_type && ... && $$retv{type} =~ /_OP/o)` guards with lowered method/value expressions using:
+    - `and(...)`
+    - `matches(...)`
+    - `scalar(...)`
+    - `scalaref(retv, {type})`
+  - preserved failure-side diagnostics (`print(...)`) and termination semantics (`exit 1`).
+- Regression lock added:
+  - `tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback`
+  - asserts `grep` + `group` no longer emit `if($prev_node_type...)` raw fallback statements and keep canonical `IF`/`EXIT` nodes.
+- Validation snapshot:
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=86`)
+## Session Notes (2026-03-06)
+- Roadmap-first slice executed against Backbone Item #3 / Method-Like DSL Migration:
   - migrated `specs/ebnf.spec` `grammar_file` container-guard token branches from raw Perl `if/else` action blocks to fluent method-chain control flow (`if/else/return_undef/push` markers),
   - added regression lock `ebnf_grammar_file_method_chain_branches_avoid_if_on_raw_fallback`.
 - Parsing/lowering bug fixed for quoted delimiter payloads:

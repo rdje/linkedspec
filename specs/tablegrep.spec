@@ -14,11 +14,11 @@ LX {return @internal ? \@internal : undef}
 LS {my $retv}
 LE {
  return undef unless $retv;
-
- if ($prev_node_type && $prev_node_type =~ /_OP/o && $$retv{type} =~ /_OP/o) {
-  print "ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n";
-  exit 1
- }
+ 
+ if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
+  print("ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
+  exit 1;
+ endif();
  
  push @internal, $retv;
  $prev_node_type = $retv->{type}
@@ -50,11 +50,11 @@ I {
 LS {my $retv}
 LE {
  return undef unless $retv;
-
- if ($prev_node_type && $prev_node_type =~ /_OP/o && $$retv{type} =~ /_OP/o) {
-  print "\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n";
-  exit 1
- }
+ 
+ if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
+  print("\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
+  exit 1;
+ endif();
 
  push @internal, $retv;
  $prev_node_type = $retv->{type}
