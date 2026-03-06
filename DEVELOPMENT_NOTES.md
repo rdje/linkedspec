@@ -60,6 +60,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-06)
+- Executed next Phase 1A extraction slice (`_split_action_ir_statements` function decomposition):
+  - converted `LinkedSpec::ActionIR::StatementSplit` to a thin dependency-check + delegate facade,
+  - moved statement-splitting engine orchestration into `StatementSplit::Core`,
+  - moved quote/comment/mode transition logic into `StatementSplit::Mode`.
+- New statement-split submodules:
+  - `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm`
+- `StatementSplit::Core` responsibilities:
+  - splitter loop orchestration
+  - state initialization
+  - nesting-depth / top-level semicolon boundary handling
+  - final trimmed statement emission.
+- `StatementSplit::Mode` responsibilities:
+  - active-mode consumers (line/single/double/backtick/slash/angle/pipe)
+  - mode-entry detection for quote/comment and regex-like delimiters.
+- Validation snapshot for statement-split decomposition slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-03-05)
 - Executed next Phase 1A extraction slice (`scan_contract_ir_events` function decomposition):
   - converted `LinkedSpec::ActionIR::Scanner` to a thin facade,

@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Phase 1A Slice: Decompose `_split_action_ir_statements` into Core + Mode Submodules
+## Summary
+Refactored the large statement-splitting state machine into smaller targeted functions across dedicated `StatementSplit` submodules, keeping `LinkedSpec::ActionIR::StatementSplit` as a thin facade.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+- Added: `perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::ActionIR::StatementSplit` now owns only dependency validation + delegation.
+- New `StatementSplit::Core` ownership:
+  - split orchestrator loop (`split_action_ir_statements`)
+  - state initialization
+  - nesting/terminator handling
+  - trimmed statement emission.
+- New `StatementSplit::Mode` ownership:
+  - line/single/double/backtick/slash/angle/pipe mode consumers
+  - mode-entry detectors for quote/comment and regex-like delimiters.
+- The original single 240+ line state machine is now decomposed into focused helpers connected by the core orchestrator while preserving call surface.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-05 - Phase 1A Slice: Decompose `scan_contract_ir_events` into Smaller Scanner Rule Submodules
 ## Summary
 Refactored scanner ownership to break the large `scan_contract_ir_events` implementation into smaller targeted scanner rule submodules, with a thin orchestrator in `ScannerCore` and a stable facade in `Scanner`.
