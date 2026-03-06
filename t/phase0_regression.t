@@ -979,6 +979,39 @@ SPEC
         'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
     );
 };
+subtest 'action_rewriter_lowers_push_value_method_contract' => sub {
+    plan tests => 8;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(items), scalar(retv))'),
+        'push @items, $retv',
+        'push_value(array(target), scalar(value)) lowers to canonical Perl push statement'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(items, array(scalar(tag), scalar(name)))'),
+        'push @items, [$tag, $name]',
+        'push_value accepts bare target symbol and lowers nested array(...) value expression'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(Top, array(items), scalar(retv))'),
+        'push @items, $retv',
+        'push_value optional scope argument is ignored during lowering'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.declare(array, items).declare(scalar, retv).assign(scalar(retv), CAPTURE).push_value(array(items), scalar(retv))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_value method contract');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'push_value method contract avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'push_value method contract avoids unresolved-helper hits');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
+    ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
     plan tests => 10;
 
@@ -2209,6 +2242,23 @@ subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallb
         is(scalar @if_prev_node_raw, 0, "tablegrep $rule no longer reports prev_node_type if-guard as raw-perl fallback");
         ok(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include IF");
         ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include EXIT");
+    }
+};
+subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep accumulator migration check');
+
+    for my $rule (qw(grep group)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "tablegrep $rule exposes action_rewriter metadata for accumulator migration check");
+
+        my @push_internal_raw = grep { defined($_) && $_ =~ /^push\s+\@internal\s*,\s*\$retv\b/ } @{$meta->{raw_perl_dependency_statements} || []};
+        is(scalar @push_internal_raw, 0, "tablegrep $rule no longer reports push \@internal, \$retv as raw-perl fallback");
+        ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include PUSH after accumulator migration");
+        ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include ASSIGN after accumulator migration");
+        ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include DECLARE after accumulator migration");
     }
 };
 subtest 'lispish_ast_smoke' => sub {

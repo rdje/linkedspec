@@ -284,6 +284,40 @@ sub _lower_assign_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_push_value_statement
+# Purpose : Lower `push_value(array(target), value)` helper calls.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_push_value_statement {
+ my ($expr, $deps) = @_;
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+
+ my $call = $parse_method_function_expr->($expr);
+ return undef unless $call && $call->{method} eq 'push_value';
+
+ my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
+ return undef unless $effective_args;
+
+ my $target_expr = $trim_action_ir_value->($effective_args->[0]);
+ return undef unless defined($target_expr) && length($target_expr);
+ my $target_symbol = $extract_array_symbol_name->($target_expr);
+ if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+  $target_symbol = $1;
+ }
+ return undef unless defined($target_symbol) && length($target_symbol);
+
+ my $value_expr = $trim_action_ir_value->($effective_args->[1]);
+ return undef unless defined($value_expr) && length($value_expr);
+ my $lowered_value = _lower_method_value_expr($value_expr, $deps);
+ $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
+ return "push \@$target_symbol, $lowered_value"
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_regex_subst_statement
 # Purpose : Lower regex substitution method helper calls for scalar targets.
 # Args    : ($target, $pattern, $replacement, $flags, $deps)

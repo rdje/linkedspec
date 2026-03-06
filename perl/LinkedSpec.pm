@@ -701,6 +701,17 @@ sub _lower_assign_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_push_value_statement
+# Purpose : Lower `push_value(array(target), value)` helper calls.
+# Args    : ($expr)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_push_value_statement {
+ my ($expr) = @_;
+ return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement($expr, _method_lowering_deps())
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_assign_method_statement
 # Purpose : Lower full assign(...) helper expressions with optional scope token.
 # Args    : ($expr)

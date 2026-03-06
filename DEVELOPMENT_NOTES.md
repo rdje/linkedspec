@@ -61,6 +61,33 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Roadmap Item #3 slice completed: introduced a reusable fluent `push_value(...)` helper contract for canonical accumulator updates.
+- New `push_value` contract pipeline:
+  - lowering: `LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement`,
+  - contract registration: `LinkedSpec::ActionIR::Contracts` (`id => 'push_value'`, `ir_node => 'PUSH'`),
+  - scanner event extraction: `LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_scan_contract_push_value`,
+  - dependency plumbing: `LinkedSpec::Deps` + `LinkedSpec` wrapper `_lower_push_value_statement`.
+- Important implementation guardrail:
+  - scanner events must preserve the matched raw expression before any subsequent regex work; otherwise canonical replay cannot locate/replace helper text (initial push_value scanner draft exposed this and was corrected).
+- `tablegrep.spec` migration continued beyond operator-guard conversion:
+  - `grep`/`group` declarations moved to `declare(...)`,
+  - accumulator null-guards moved to fluent `if(not(scalar(retv))) ... return_undef ... endif`,
+  - accumulator appends moved from raw `push @internal, $retv` to `push_value(array(internal), scalar(retv))`,
+  - previous-node tracking moved to `assign(..., scalaref(...))`,
+  - `group` empty-check converted to fluent `if(is_empty(array(internal)))` with preserved diagnostic/exit behavior.
+- Regression additions:
+  - `action_rewriter_lowers_push_value_method_contract`,
+  - `tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback`.
+- Validation snapshot:
+  - syntax checks pass on touched modules/tests,
+  - `prove -Iperl t/phase0_regression.t` passes (`Files=1, Tests=88`),
+  - `tablegrep::grep` and `tablegrep::group` now both report `raw=0`, `unresolved=0`, and `language_agnostic_action_ir_ready=1`.
+- Current top blockers after this slice remain centered on:
+  - `vhdl::signal_decl_range`,
+  - `simenv::begin_end_blocks`,
+  - `ds_vhistory::vhistory`,
+  with roadmap continuation opportunity to apply the same method-contract migration pattern.
+## Session Notes (2026-03-06)
 - Roadmap-first slice executed against Backbone Item #3 / Method-Like DSL Migration:
   - migrated `specs/tablegrep.spec` `grep`/`group` LE operator-adjacency guards from raw Perl `if (...) { ... }` blocks to fluent method-flow (`if(and(...)); ...; endif();`).
 - Migration details:

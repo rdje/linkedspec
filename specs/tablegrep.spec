@@ -5,23 +5,24 @@ grep::
  -> group	{$retv = call(group)}
 
 I {
-# print "\n\n\nGREP: START \n";
- my @internal;
- my $prev_node_type;
+ declare(array, internal);
+ declare(scalar, prev_node_type)
 }
 
 LX {return @internal ? \@internal : undef}
 LS {my $retv}
 LE {
- return undef unless $retv;
+ if(not(scalar(retv)));
+  return_undef();
+ endif();
  
  if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
   print("ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit 1;
  endif();
  
- push @internal, $retv;
- $prev_node_type = $retv->{type}
+ push_value(array(internal), scalar(retv));
+ assign(scalar(prev_node_type), scalaref(retv, {type}))
 }
 #======== End Of grep ========
 
@@ -32,32 +33,31 @@ group:	/\(/ /\)/
  -> or_op		{$retv = call(or_op)}
  -> and_op		{$retv = call(and_op)}
  -> group[1]		{
-#  print "GROUP: ) CLOSING\n";
-  unless (@internal) {
-   print "\nERROR: ** Empty **  GROUP\n";
-   exit 2
-  }
-
-  return {type=>'GROUP', group=>\@internal}
+  if(is_empty(array(internal)));
+   print("\\nERROR: ** Empty **  GROUP\\n");
+   exit 2;
+  endif();
+  return({type=>'GROUP', group=>array(internal)})
  }
 
 I {
-# print "GROUP: OPENING ( \n";
- my @internal;
- my $prev_node_type;
+ declare(array, internal);
+ declare(scalar, prev_node_type)
 }
 
 LS {my $retv}
 LE {
- return undef unless $retv;
+ if(not(scalar(retv)));
+  return_undef();
+ endif();
  
  if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
   print("\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit 1;
  endif();
 
- push @internal, $retv;
- $prev_node_type = $retv->{type}
+ push_value(array(internal), scalar(retv));
+ assign(scalar(prev_node_type), scalaref(retv, {type}))
 }
 #==========
 

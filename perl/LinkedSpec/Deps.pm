@@ -168,6 +168,7 @@ sub action_rewriter_contract_deps_for_package {
   lower_return_general_statement => _require_pkg_cb('LinkedSpec', '_lower_return_general_statement'),
   lower_return_imatch_statement  => _require_pkg_cb('LinkedSpec', '_lower_return_imatch_statement'),
   lower_assign_method_statement  => _require_pkg_cb($pkg, '_lower_assign_method_statement'),
+  lower_push_value_statement     => _require_pkg_cb('LinkedSpec', '_lower_push_value_statement'),
   lower_regex_subst_statement    => _require_pkg_cb('LinkedSpec', '_lower_regex_subst_statement'),
   lower_array_pipeline_expr      => _require_pkg_cb('LinkedSpec', '_lower_array_pipeline_expr'),
   lower_if_flow_statement        => _require_pkg_cb('LinkedSpec', '_lower_if_flow_statement'),

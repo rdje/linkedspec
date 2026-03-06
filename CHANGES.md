@@ -1,5 +1,51 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: Add `push_value` Method Contract and Migrate `tablegrep` Accumulator Flow
+## Summary
+Advanced roadmap Item #3 by introducing a reusable `push_value(...)` action method contract (canonical `PUSH`) and migrating `tablegrep.spec` accumulator handling (`grep`/`group`) from raw Perl statements to fluent helper flow.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `specs/tablegrep.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Added `push_value(...)` helper lowering end-to-end:
+  - new lowering routine `MethodLowering::_lower_push_value_statement`,
+  - new lowering contract `push_value` in `ActionIR::Contracts` with canonical `PUSH` node,
+  - new scanner extractor `_scan_contract_push_value` in `Scanner::PrimitivePipelineRules`,
+  - dependency wiring via `Deps::action_rewriter_contract_deps_for_package` and `LinkedSpec::_lower_push_value_statement`.
+- Migrated `specs/tablegrep.spec` `grep`/`group` accumulator actions to fluent helper flow:
+  - declarations now use `declare(array, internal)` + `declare(scalar, prev_node_type)`,
+  - null-guard uses `if(not(scalar(retv))); return_undef(); endif();`,
+  - accumulator push uses `push_value(array(internal), scalar(retv));`,
+  - previous-node tracking uses `assign(scalar(prev_node_type), scalaref(retv, {type}))`,
+  - group-empty guard now uses `if(is_empty(array(internal))); print(...); exit 2; endif();`,
+  - group return now uses `return({type=>'GROUP', group=>array(internal)})`.
+- Added regression coverage:
+  - `action_rewriter_lowers_push_value_method_contract`,
+  - `tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback`.
+- Post-migration metadata check:
+  - `tablegrep::grep` and `tablegrep::group` now report `raw=0`, `unresolved=0`, `fallback=0`, and `language_agnostic_action_ir_ready=1`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=88`)
 ## 2026-03-06 - Roadmap Slice: Migrate `tablegrep` Operator-Adjacency Guards to Fluent Method Flow
 ## Summary
 Advanced roadmap Item #3 by migrating `tablegrep.spec` operator-adjacency guard logic from raw Perl `if (...) { ... }` blocks into fluent method-flow statements, reducing RAW_PERL fallback for those guard branches while preserving runtime behavior and diagnostics.
