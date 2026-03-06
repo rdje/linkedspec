@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Phase 1A Slice: Decompose Canonical Helper-Event Normalization into `CanonicalEvents::Core`
+## Summary
+Refactored `_canonicalize_helper_action_ir_event` by decomposing its large contract-id mapping logic into smaller targeted helpers in a new `LinkedSpec::ActionIR::CanonicalEvents::Core` module, while keeping `CanonicalEvents.pm` as a thin delegate for that path.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::ActionIR::CanonicalEvents::Core` now owns decomposed canonicalization helpers:
+  - `_kind_override_for_contract_id`
+  - `_canonical_kind`
+  - `_normalize_canonical_args`
+  - `canonicalize_helper_action_ir_event`
+- Canonicalization logic is now structured as:
+  - contract-id -> kind override lookup
+  - grouped multi-contract kind handling
+  - focused argument normalization for special contract families (`return_call`, push variants, `return_undef`)
+  - final canonical event assembly.
+- `LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event` is now a thin delegate into `CanonicalEvents::Core`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-06 - Phase 1A Slice: Decompose `_split_action_ir_statements` into Core + Mode Submodules
 ## Summary
 Refactored the large statement-splitting state machine into smaller targeted functions across dedicated `StatementSplit` submodules, keeping `LinkedSpec::ActionIR::StatementSplit` as a thin facade.

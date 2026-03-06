@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Executed next Phase 1A extraction slice (canonical helper-event normalization decomposition):
+  - created `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`,
+  - moved large contract-id canonicalization mapping logic out of `CanonicalEvents.pm`.
+- `CanonicalEvents::Core` now owns:
+  - `_kind_override_for_contract_id`
+  - `_canonical_kind`
+  - `_normalize_canonical_args`
+  - `canonicalize_helper_action_ir_event`
+- `CanonicalEvents.pm` update:
+  - `_canonicalize_helper_action_ir_event` is now a thin delegate into `CanonicalEvents::Core`.
+- Validation snapshot for canonical helper-event decomposition slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-06)
 - Executed next Phase 1A extraction slice (`_split_action_ir_statements` function decomposition):
   - converted `LinkedSpec::ActionIR::StatementSplit` to a thin dependency-check + delegate facade,
   - moved statement-splitting engine orchestration into `StatementSplit::Core`,
