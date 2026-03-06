@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Executed next Phase 1A extraction slice (bootstrap spec decomposition):
+  - created `perl/LinkedSpec/BootstrapSpec/Core.pm`,
+  - decomposed `build_bootstrap_spec` into focused helper builders and moved ownership there,
+  - converted `perl/LinkedSpec/BootstrapSpec.pm` into a thin delegate facade.
+- `LinkedSpec::BootstrapSpec::Core` now owns:
+  - method-chain helper parsing/rendering for method-like bootstrap rules,
+  - per-rule descriptor builders for bootstrap scanner tokens and code-block handlers,
+  - bootstrap descriptor assembly and registry/gdata construction,
+  - top-level bootstrap orchestration via `build_bootstrap_spec`.
+- Decomposition structure:
+  - context setup (`node_type` map + mutable `bootstrap_rule_index` handle),
+  - rule descriptor construction from focused builder functions,
+  - registry/gdata compilation and index backfill for recursive curly-brace dispatch.
+- Validation snapshot for bootstrap decomposition slice:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-06)
 - Executed next Phase 1A extraction slice (canonical helper-event normalization decomposition):
   - created `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`,
   - moved large contract-id canonicalization mapping logic out of `CanonicalEvents.pm`.

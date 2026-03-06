@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Phase 1A Slice: Decompose `build_bootstrap_spec` into `BootstrapSpec::Core` Rule Builders
+## Summary
+Refactored the large `LinkedSpec::BootstrapSpec::build_bootstrap_spec` flow into focused rule-builder helpers in a new `LinkedSpec::BootstrapSpec::Core` module, and reduced `BootstrapSpec.pm` to a thin delegate facade.
+
+## Changed Files
+- Added: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::BootstrapSpec::Core` now owns:
+  - method-chain parsing/rendering helpers used by method-like bootstrap rules,
+  - focused per-rule descriptor builders (SPEC_ROOT, entry-label, action/non-action code blocks, comment, blind-call, split-like, and curly-brace scanner),
+  - bootstrap descriptor assembly orchestrator (`_build_bootstrap_rule_descriptors`),
+  - bootstrap registry/gdata compilation (`_build_bootstrap_registry_gdata`),
+  - top-level orchestrator (`build_bootstrap_spec`).
+- `build_bootstrap_spec` is now decomposed as:
+  - context initialization (`node_type` map + mutable `bootstrap_rule_index` registry handle),
+  - descriptor construction via targeted helper builders,
+  - registry/gdata construction and registry backfill into handler-shared context.
+- `LinkedSpec::BootstrapSpec::build_bootstrap_spec` is now a thin facade delegating to `LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-06 - Phase 1A Slice: Decompose Canonical Helper-Event Normalization into `CanonicalEvents::Core`
 ## Summary
 Refactored `_canonicalize_helper_action_ir_event` by decomposing its large contract-id mapping logic into smaller targeted helpers in a new `LinkedSpec::ActionIR::CanonicalEvents::Core` module, while keeping `CanonicalEvents.pm` as a thin delegate for that path.
