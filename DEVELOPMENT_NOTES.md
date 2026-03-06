@@ -61,6 +61,21 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Roadmap-first slice executed against Backbone Item #3 / Method-Like DSL Migration:
+  - migrated `specs/ebnf.spec` `grammar_file` container-guard token branches from raw Perl `if/else` action blocks to fluent method-chain control flow (`if/else/return_undef/push` markers),
+  - added regression lock `ebnf_grammar_file_method_chain_branches_avoid_if_on_raw_fallback`.
+- Parsing/lowering bug fixed for quoted delimiter payloads:
+  - root cause: recursive `PAREN` regex surfaces treated delimiters inside quoted strings as structural,
+  - impact: method-chain expression capture and lowering could fragment when `say(...)` payload strings contained delimiter characters like `)` / `(`.
+- Applied quote-aware recursive `PAREN` handling in:
+  - `BootstrapSpec::Core` method-chain parsing/matching,
+  - `ActionIR::MethodExpr` function-expression parser,
+  - ActionIR lowering/scanner regex surfaces (`Contracts`, `MethodLowering`, `Scanner::FlowRules`, `Scanner::LegacyRules`, `Scanner::PrimitivePipelineRules`).
+- Verification snapshot:
+  - `grammar_file` no longer reports `if($on)` raw fallback statements,
+  - unresolved helper count for migrated `ebnf` `grammar_file` branch logic resolved to zero,
+  - full phase0 regression passes (`Files=1, Tests=85`).
+## Session Notes (2026-03-06)
 - Executed next Phase 1A extraction slice (RuleIR emit-context decomposition):
   - created `perl/LinkedSpec/RuleIR/EmitContext.pm`,
   - moved emit-context rewrite/diagnostics assembly ownership out of `RuleIR.pm`,

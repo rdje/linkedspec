@@ -149,7 +149,7 @@ sub _parse_method_function_expr {
  return undef unless defined $expr;
  my $trimmed = _trim_method_expr_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
- return undef unless $trimmed =~ /^(?<method>\w+)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))$/o;
+ return undef unless $trimmed =~ /^(?<method>\w+)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
  my $method = $+{method};
 
  my $payload = $+{PAREN};

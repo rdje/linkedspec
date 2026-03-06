@@ -2180,6 +2180,21 @@ SPEC
         'canonical-IR lowering output preserves pipe-quote payload while lowering helper call'
     );
 };
+subtest 'ebnf_grammar_file_method_chain_branches_avoid_if_on_raw_fallback' => sub {
+    plan tests => 6;
+
+    my $descr = LinkedSpec::get_parser('ebnf', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ebnf method-chain migration check');
+
+    my $meta = $descr->{spec}{grammar_file}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'ebnf grammar_file exposes action_rewriter metadata');
+    ok(ref($meta->{raw_perl_dependency_statements}) eq 'ARRAY', 'ebnf grammar_file exposes raw_perl_dependency_statements array');
+
+    my @if_on_raw = grep { defined($_) && $_ =~ /^if\s*\(\s*\$on\s*\)/ } @{$meta->{raw_perl_dependency_statements}};
+    is(scalar @if_on_raw, 0, 'ebnf grammar_file no longer reports if($on) branches as raw-perl fallback statements');
+    ok(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}, 'ebnf grammar_file canonical action-IR nodes include IF');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'ebnf grammar_file canonical action-IR nodes include PUSH');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

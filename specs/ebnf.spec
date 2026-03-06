@@ -33,150 +33,134 @@ LX {
   $on=1
 }
 
--> rule_name  {
-  if ($on) {
-    push @rule, call(rule_name)
-  } else {
-    say "Error: Rule name '$LMATCH' reference with no container rule context";
-    return undef
-  }
-}
+-> rule_name
+  .if(scalar(on))
+    .push(rule_name, rule)
+  .else()
+    .say("Error: Rule name '$LMATCH' reference with no container rule context")
+    .return_undef()
+  .endif()
 
--> quoted_string   {
-  if ($on) {
-    push @rule, call(quoted_string)
-  } else {
-    say "Error: Quoted string <$LMATCH> occurrence with no container rule context";
-    return undef
-  }
-}
+-> quoted_string
+  .if(scalar(on))
+    .push(quoted_string, rule)
+  .else()
+    .say("Error: Quoted string <$LMATCH> occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> number  {
-  if ($on) { 
-    push @rule, call(number)
-  } else {
-    say "Error: Number '$LMATCH' occurrence with no container rule context";
-    return undef
-  }
-}
+-> number
+  .if(scalar(on))
+    .push(number, rule)
+  .else()
+    .say("Error: Number '$LMATCH' occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> quantifier  {
-  if ($on) { 
-    push @rule, call(quantifier)
-  } else {
-    say "Error: Quantifier occurrence with no container rule context";
-    return undef
-  }
-}
+-> quantifier
+  .if(scalar(on))
+    .push(quantifier, rule)
+  .else()
+    .say("Error: Quantifier occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> plus_operator  {
-  if ($on) { 
-    push @rule, call(plus_operator)
-  } else {
-    say "Error: '+' operator occurrence with no container rule context";
-    return undef
-  }
-}
+-> plus_operator
+  .if(scalar(on))
+    .push(plus_operator, rule)
+  .else()
+    .say("Error: '+' operator occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> return_scalar  {
-  if ($on) { 
-    push @rule, call(return_scalar)
-  } else {
-    say "Error: Scalar return annotation occurrence with no container rule context";
-    return undef
-  }
-}
+-> return_scalar
+  .if(scalar(on))
+    .push(return_scalar, rule)
+  .else()
+    .say("Error: Scalar return annotation occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> return_array  {
-  if ($on) { 
-    push @rule, call(return_array)
-  } else {
-    say "Error: Array return annotation occurrence with no container rule context";
-    return undef
-  }
-}
+-> return_array
+  .if(scalar(on))
+    .push(return_array, rule)
+  .else()
+    .say("Error: Array return annotation occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> return_object  {
-  if ($on) { 
-    push @rule, call(return_object)
-  } else {
-    say "Error: Object return annotation occurrence with no container rule context";
-    return undef
-  }
-}
+-> return_object
+  .if(scalar(on))
+    .push(return_object, rule)
+  .else()
+    .say("Error: Object return annotation occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> star_operator  {
-  if ($on) { 
-    push @rule, call(star_operator)
-  } else {
-    say "Error: '*' operator occurrence with no container rule context";
-    return undef
-  }
-}
+-> star_operator
+  .if(scalar(on))
+    .push(star_operator, rule)
+  .else()
+    .say("Error: '*' operator occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> question_operator {
-  if ($on) { 
-    push @rule, call(question_operator)
-  } else {
-    say "Error: '?' operator occurrence with no container rule context";
-    return undef
-  }
-}
+-> question_operator
+  .if(scalar(on))
+    .push(question_operator, rule)
+  .else()
+    .say("Error: '?' operator occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> pipe_operator  {
-  if ($on) { 
-    push @rule, call(pipe_operator)
-  } else {
-    say "Error: '|' operator occurrence with no container rule context";
-    return undef
-  }
-}
+-> pipe_operator
+  .if(scalar(on))
+    .push(pipe_operator, rule)
+  .else()
+    .say("Error: '|' operator occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> open_paren   {
-  if ($on) { 
-    push @rule, call(open_paren)
-  } else {
-    say "Error: '(' occurrence with no container rule context";
-    return undef
-  }
-}
+-> open_paren
+  .if(scalar(on))
+    .push(open_paren, rule)
+  .else()
+    .say("Error: '(' occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> close_paren  {
-  if ($on) { 
-    push @rule, call(close_paren)
-  } else {
-    say "Error: ')' occurrence with no container rule context";
-    return undef
-  }
-}
+-> close_paren
+  .if(scalar(on))
+    .push(close_paren, rule)
+  .else()
+    .say("Error: ')' occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> probability   {
-  if ($on) { 
-    push @rule, call(probability)
-  } else {
-    say "Error: Probability occurrence with no container rule context";
-    return undef
-  }
-}
+-> probability
+  .if(scalar(on))
+    .push(probability, rule)
+  .else()
+    .say("Error: Probability occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
--> regex   {
-  if ($on) { 
-    push @rule, call(regex)
-  } else {
-    say "Error: Regex occurrence with no container rule context";
-    return undef
-  }
-}
+-> regex
+  .if(scalar(on))
+    .push(regex, rule)
+  .else()
+    .say("Error: Regex occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
 -> semantic_annotation.push(semantic_annotations)
--> logging_annotation  {
-  if ($on) { 
-    push @rule, call(logging_annotation)
-  } else {
-    say "Error: Logging annotation occurrence with no container rule context";
-    return undef
-  }
-}
+-> logging_annotation
+  .if(scalar(on))
+    .push(logging_annotation, rule)
+  .else()
+    .say("Error: Logging annotation occurrence with no container rule context")
+    .return_undef()
+  .endif()
 
 -> whitespace
 -> comment

@@ -76,7 +76,7 @@ while ($code =~ /\breturn_im(?:atch)?\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:
 sub _scan_contract_assign_value {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && $call->{method} eq 'assign';
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
@@ -104,7 +104,7 @@ while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tar
 sub _scan_contract_split_array {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -124,7 +124,7 @@ while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_trim_each {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -137,7 +137,7 @@ while ($code =~ /\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g
 sub _scan_contract_filter_nonempty {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -150,7 +150,7 @@ while ($code =~ /\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*
 sub _scan_contract_lowercase_each {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -163,7 +163,7 @@ while ($code =~ /\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\
 sub _scan_contract_uppercase_each {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -176,7 +176,7 @@ while ($code =~ /\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\
 sub _scan_contract_uniq_array {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
@@ -189,7 +189,7 @@ while ($code =~ /\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_filter_match {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];

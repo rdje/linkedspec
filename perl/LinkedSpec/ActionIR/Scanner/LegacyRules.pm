@@ -84,7 +84,7 @@ while ($code =~ /\breturn_a\s*\(\s*(?<label>\w+)(?:\s*,(?<arg>\s*(?:[^\(\)]++|(?
 sub _scan_contract_return_general {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && $call->{method} eq 'return';
  my $args = $call->{args} || [];

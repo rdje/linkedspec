@@ -30,7 +30,7 @@ sub _parse_method_call_chain {
 
  my @calls;
  pos($chain) = 0;
- while ($chain =~ /\G\s*\.\s*(?<method>\w+)(?<args>\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))?/gc) {
+ while ($chain =~ /\G\s*\.\s*(?<method>\w+)(?<args>\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\)))?/gc) {
   my $args = $+{args};
   if (defined $args) {
    $args =~ s/^\s*\(//o;
@@ -207,7 +207,7 @@ sub _build_method_empty_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
+  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)/o],
   handler=> sub {
    my ($info, $descr, $string, $gdata) = @_;
    my ($entry_label, $reidx, $chain) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN/};
@@ -324,7 +324,7 @@ sub _build_method_empty_non_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)]++|(?&PAREN))*\))?)+)/o],
+  re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)/o],
   handler=> sub {
    my ($info, $descr, $string, $gdata) = @_;
    my ($type, $chain) = @{$$info{match_hash}}{qw/TYPE CHAIN/};

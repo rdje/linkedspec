@@ -37,7 +37,7 @@ sub try_scan_contract_ir_events {
 sub _scan_contract_if_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/g) {
+while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
@@ -50,7 +50,7 @@ while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\
 sub _scan_contract_elseif_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/g) {
+while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
@@ -63,7 +63,7 @@ while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*
 sub _scan_contract_else_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -76,7 +76,7 @@ while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_endif_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -89,7 +89,7 @@ while ($code =~ /\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_switch_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
@@ -102,7 +102,7 @@ while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_case_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
@@ -115,7 +115,7 @@ while ($code =~ /\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_default_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -128,7 +128,7 @@ while ($code =~ /\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) 
 sub _scan_contract_endcase_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -141,7 +141,7 @@ while ($code =~ /\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) 
 sub _scan_contract_endswitch_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -154,7 +154,7 @@ while ($code =~ /\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g
 sub _scan_contract_say_stmt {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
@@ -167,7 +167,7 @@ while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_print_stmt {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
@@ -180,7 +180,7 @@ while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
 sub _scan_contract_return_undef {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -202,7 +202,7 @@ while ($code =~ /\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*
 sub _scan_contract_declare_typed {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $decl = _extract_declare_statement_from_method_expr($+{expr});
  next unless $decl;
  my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
@@ -224,7 +224,7 @@ while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) 
 sub _scan_contract_declare_alias {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $decl = _extract_declare_statement_from_method_expr($+{expr});
  next unless $decl;
  my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};

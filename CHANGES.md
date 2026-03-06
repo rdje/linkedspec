@@ -1,5 +1,50 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: EBNF Fluent-Branch Migration + Quote-Aware Method Parsing
+## Summary
+Advanced roadmap Item #3 (language-agnostic action migration) by converting `ebnf.spec` container-guard branches from raw Perl `if/else` blocks to fluent method-chain control flow, and fixed method-argument parsing/lowering so delimiters inside quoted strings (e.g., `(`, `)`, `{`, `}`, `[`, `]`) no longer break recursive parenthesis matching.
+
+## Changed Files
+- Updated: `specs/ebnf.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `perl/LinkedSpec/ActionIR/MethodExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- Migrated `specs/ebnf.spec` `grammar_file` token edges (`rule_name`, `quoted_string`, `number`, operators, parens, regex, logging annotation, etc.) from raw Perl:
+  - `if ($on) { push @rule, call(...) } else { say ...; return undef }`
+  to fluent method-chain forms:
+  - `.if(scalar(on)).push(..., rule).else().say(...).return_undef().endif()`
+- Added regression lock `ebnf_grammar_file_method_chain_branches_avoid_if_on_raw_fallback` to assert:
+  - `grammar_file` no longer reports `if($on)` raw-perl fallback statements,
+  - canonical action-IR captures `IF` and `PUSH` nodes for those branches.
+- Fixed parser/lowering bug root cause:
+  - recursive `PAREN` regexes previously counted delimiters inside quoted string payloads as structural parentheses,
+  - this could fragment/skip method calls when strings contained delimiter characters.
+- Applied quote-aware recursive `PAREN` handling across method-chain parsing and ActionIR rewrite/scanner surfaces so quoted string delimiters are ignored as literals.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=85`)
 ## 2026-03-06 - Phase 1A Slice: Decompose RuleIR Emit-Context Construction into `RuleIR::EmitContext`
 ## Summary
 Refactored `LinkedSpec::RuleIR::_build_rule_ir_emit_context` into focused helper routines in a new `LinkedSpec::RuleIR::EmitContext` module, while keeping `RuleIR.pm` as a thin delegate surface for emit-context functions.

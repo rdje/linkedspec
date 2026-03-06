@@ -177,7 +177,7 @@ sub _build_return_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_return_general_statement};
-    $code =~ s/\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -240,11 +240,11 @@ sub _build_return_contracts {
    id                 => 'return_undef',
    ir_node            => 'RETURN',
    diag_name          => 'return_undef',
-   unresolved_pattern => qr/\breturn_undef\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\breturn_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_return_undef_statement};
-    $code =~ s/\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -397,7 +397,7 @@ sub _build_assignment_and_regex_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_assign_method_statement};
-    $code =~ s/\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>assign\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -431,7 +431,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -443,7 +443,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -455,7 +455,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -467,7 +467,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -479,7 +479,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -491,7 +491,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -503,7 +503,7 @@ sub _build_array_pipeline_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
-    $code =~ s/\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -521,11 +521,11 @@ sub _build_flow_control_contracts {
    id                 => 'if_flow',
    ir_node            => 'IF',
    diag_name          => 'if',
-   unresolved_pattern => qr/\b(?:if|i)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{)/o,
+   unresolved_pattern => qr/\b(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{)/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_if_flow_statement};
-    $code =~ s/\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -533,11 +533,11 @@ sub _build_flow_control_contracts {
    id                 => 'elseif_flow',
    ir_node            => 'ELIF',
    diag_name          => 'elseif',
-   unresolved_pattern => qr/\b(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{)/o,
+   unresolved_pattern => qr/\b(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{)/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_elseif_flow_statement};
-    $code =~ s/\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -545,11 +545,11 @@ sub _build_flow_control_contracts {
    id                 => 'else_flow',
    ir_node            => 'ELSE',
    diag_name          => 'else',
-   unresolved_pattern => qr/\belse\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\belse\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_else_flow_statement};
-    $code =~ s/\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -557,11 +557,11 @@ sub _build_flow_control_contracts {
    id                 => 'endif_flow',
    ir_node            => 'ENDIF',
    diag_name          => 'endif',
-   unresolved_pattern => qr/\bendif\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bendif\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endif_flow_statement};
-    $code =~ s/\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -569,11 +569,11 @@ sub _build_flow_control_contracts {
    id                 => 'switch_flow',
    ir_node            => 'SWITCH',
    diag_name          => 'switch',
-   unresolved_pattern => qr/\bswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_switch_flow_statement};
-    $code =~ s/\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -581,11 +581,11 @@ sub _build_flow_control_contracts {
    id                 => 'case_flow',
    ir_node            => 'CASE',
    diag_name          => 'case',
-   unresolved_pattern => qr/\bcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_case_flow_statement};
-    $code =~ s/\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -593,11 +593,11 @@ sub _build_flow_control_contracts {
    id                 => 'default_flow',
    ir_node            => 'DEFAULT',
    diag_name          => 'default',
-   unresolved_pattern => qr/\bdefault\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bdefault\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_default_flow_statement};
-    $code =~ s/\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -605,11 +605,11 @@ sub _build_flow_control_contracts {
    id                 => 'endcase_flow',
    ir_node            => 'ENDCASE',
    diag_name          => 'endcase',
-   unresolved_pattern => qr/\bendcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bendcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endcase_flow_statement};
-    $code =~ s/\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -617,11 +617,11 @@ sub _build_flow_control_contracts {
    id                 => 'endswitch_flow',
    ir_node            => 'ENDSWITCH',
    diag_name          => 'endswitch',
-   unresolved_pattern => qr/\bendswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bendswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endswitch_flow_statement};
-    $code =~ s/\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -639,11 +639,11 @@ sub _build_emit_and_declare_contracts {
    id                 => 'say_stmt',
    ir_node            => 'SAY',
    diag_name          => 'say',
-   unresolved_pattern => qr/\bsay\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bsay\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_say_statement};
-    $code =~ s/\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -651,11 +651,11 @@ sub _build_emit_and_declare_contracts {
    id                 => 'print_stmt',
    ir_node            => 'PRINT',
    diag_name          => 'print',
-   unresolved_pattern => qr/\bprint\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/\bprint\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_print_statement};
-    $code =~ s/\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -667,7 +667,7 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_declare_method_statement};
-    $code =~ s/\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -679,7 +679,7 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_declare_method_statement};
-    $code =~ s/\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    $code =~ s/\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
