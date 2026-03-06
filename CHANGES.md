@@ -1,5 +1,53 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-05 - Phase 1A Slice: Decompose `scan_contract_ir_events` into Smaller Scanner Rule Submodules
+## Summary
+Refactored scanner ownership to break the large `scan_contract_ir_events` implementation into smaller targeted scanner rule submodules, with a thin orchestrator in `ScannerCore` and a stable facade in `Scanner`.
+
+## Changed Files
+- Added: `perl/LinkedSpec/ActionIR/ScannerCore.pm`
+- Added: `perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm`
+- Added: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+- Added: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Added: `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+
+## Technical Details
+- `LinkedSpec::ActionIR::Scanner` is now a thin facade that delegates to `LinkedSpec::ActionIR::ScannerCore`.
+- `LinkedSpec::ActionIR::ScannerCore` now owns orchestration only:
+  - dependency callback validation (`_require_dep`)
+  - callback symbol localization into scanner-rule submodule packages
+  - ordered dispatch across focused scanner rule modules.
+- Scanner rule ownership moved into focused submodules:
+  - `Scanner::PrimitiveBasicRules`
+  - `Scanner::PrimitivePipelineRules`
+  - `Scanner::FlowRules`
+  - `Scanner::LegacyRules`
+- Each scanner submodule now owns only a bounded contract-id family and uses small targeted handlers per contract id.
+- Resulting scanner file sizing (approx):
+  - `ScannerCore.pm`: 66 lines
+  - `PrimitiveBasicRules.pm`: 241 lines
+  - `PrimitivePipelineRules.pm`: 208 lines
+  - `FlowRules.pm`: 246 lines
+  - `LegacyRules.pm`: 198 lines
+  - `Scanner.pm`: 25 lines
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=84`)
 ## 2026-03-05 - Phase 1A Slice: Extract ActionRewriter Dependency-Map Ownership to `LinkedSpec::Deps`
 ## Summary
 Moved ActionRewriter dependency-map ownership out of `LinkedSpec::ActionRewriter` into `LinkedSpec::Deps`, preserving behavior with thin dependency-map delegates in `ActionRewriter`.

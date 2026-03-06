@@ -1,0 +1,246 @@
+package LinkedSpec::ActionIR::Scanner::FlowRules;
+
+use 5.010;
+BEGIN {
+ require File::Basename;
+ my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ my $action_ir_dir = File::Basename::dirname($module_dir);
+ my $linked_spec_dir = File::Basename::dirname($action_ir_dir);
+ my $perl_root = File::Basename::dirname($linked_spec_dir);
+ unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
+}
+
+sub try_scan_contract_ir_events {
+ my ($id, $code) = @_;
+ my %dispatch = (
+  'if_flow' => \&_scan_contract_if_flow,
+  'elseif_flow' => \&_scan_contract_elseif_flow,
+  'else_flow' => \&_scan_contract_else_flow,
+  'endif_flow' => \&_scan_contract_endif_flow,
+  'switch_flow' => \&_scan_contract_switch_flow,
+  'case_flow' => \&_scan_contract_case_flow,
+  'default_flow' => \&_scan_contract_default_flow,
+  'endcase_flow' => \&_scan_contract_endcase_flow,
+  'endswitch_flow' => \&_scan_contract_endswitch_flow,
+  'say_stmt' => \&_scan_contract_say_stmt,
+  'print_stmt' => \&_scan_contract_print_stmt,
+  'return_undef' => \&_scan_contract_return_undef,
+  'return_array' => \&_scan_contract_return_array,
+  'declare_typed' => \&_scan_contract_declare_typed,
+  'declare_alias' => \&_scan_contract_declare_alias,
+ );
+ my $handler = $dispatch{$id};
+ return undef unless $handler;
+ return $handler->($code)
+}
+
+sub _scan_contract_if_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+}
+ return \@events
+}
+
+sub _scan_contract_elseif_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\))(?!\s*\{))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+}
+ return \@events
+}
+
+sub _scan_contract_else_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_endif_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_switch_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ next unless $effective_args && @$effective_args >= 1;
+ push @events, {raw => $+{expr}, args => {expr => _trim_action_ir_value($effective_args->[0])}};
+}
+ return \@events
+}
+
+sub _scan_contract_case_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {value => _trim_action_ir_value($effective_args->[0])}};
+}
+ return \@events
+}
+
+sub _scan_contract_default_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_endcase_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_endswitch_flow {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_say_stmt {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ next unless $effective_args && @$effective_args;
+ push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
+}
+ return \@events
+}
+
+sub _scan_contract_print_stmt {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ next unless $effective_args && @$effective_args;
+ push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
+}
+ return \@events
+}
+
+sub _scan_contract_return_undef {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ next unless $effective_args;
+ push @events, {raw => $+{expr}, args => {value => 'undef'}};
+}
+ return \@events
+}
+
+sub _scan_contract_return_array {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\breturn_array\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<tag>(?:'[^']*'|\"[^\"]*\"|\w+))\s*,\s*(?<payload>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\s*\)/g) {
+ push @events, {raw => $&, args => {scope => $+{scope}, tag => $+{tag}, payload => _trim_action_ir_value($+{payload})}};
+}
+ return \@events
+}
+
+sub _scan_contract_declare_typed {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $decl = _extract_declare_statement_from_method_expr($+{expr});
+ next unless $decl;
+ my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
+ next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
+ my @names = map { $_->{name} } @parsed_entries;
+ my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
+ push @events, {
+  raw => $+{expr},
+  args => {
+   declaration_type => $decl->{declaration_type},
+   names            => [@names],
+   initializers     => {%initializers},
+  },
+ };
+}
+ return \@events
+}
+
+sub _scan_contract_declare_alias {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)]++|(?&PAREN))*\)))/g) {
+ my $decl = _extract_declare_statement_from_method_expr($+{expr});
+ next unless $decl;
+ my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
+ next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
+ my @names = map { $_->{name} } @parsed_entries;
+ my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
+ push @events, {
+  raw => $+{expr},
+  args => {
+   declaration_type => $decl->{declaration_type},
+   names            => [@names],
+   initializers     => {%initializers},
+  },
+ };
+}
+ return \@events
+}
+
+1;
