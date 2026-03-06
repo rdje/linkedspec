@@ -200,6 +200,17 @@ sub _lower_method_value_expr {
 
   return "join($delimiter_expr, \@$array_symbol)";
  }
+ if ($method_call && $method_call->{method} eq 'array_values') {
+  my $array_value_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $array_value_args;
+
+  my $array_expr = $trim_action_ir_value->($array_value_args->[0]);
+  return undef unless defined($array_expr) && length($array_expr);
+  my $array_symbol = $extract_array_symbol_name->($array_expr);
+  return undef unless defined($array_symbol) && length($array_symbol);
+
+  return '[@'.$array_symbol.']';
+ }
  if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
@@ -230,7 +241,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|array_values)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -238,7 +249,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_values|join_values|array|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -289,13 +300,33 @@ sub _lower_return_imatch_statement {
 sub _lower_assign_statement {
  my ($target, $source, $deps) = @_;
  my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
+ my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+ my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
  my $lower_assignment_source_expr = _require_dep($deps, 'lower_assignment_source_expr');
+ my $lower_declare_initializer_expr = _require_dep($deps, 'lower_declare_initializer_expr');
 
  my $symbol = $extract_scalar_symbol_name->($target);
- return undef unless defined $symbol;
- my $source_expr = $lower_assignment_source_expr->($source);
- return undef unless defined $source_expr;
- return "\$$symbol = $source_expr"
+ if (defined $symbol) {
+  my $source_expr = $lower_assignment_source_expr->($source);
+  return undef unless defined $source_expr;
+  return "\$$symbol = $source_expr";
+ }
+
+ my $array_symbol = $extract_array_symbol_name->($target);
+ if (defined $array_symbol) {
+  my $source_expr = $lower_declare_initializer_expr->('array', $source);
+  return undef unless defined $source_expr;
+  return "\@$array_symbol = $source_expr";
+ }
+
+ my $hash_symbol = $extract_hash_symbol_name->($target);
+ if (defined $hash_symbol) {
+  my $source_expr = $lower_declare_initializer_expr->('hash', $source);
+  return undef unless defined $source_expr;
+  return "\%$hash_symbol = $source_expr";
+ }
+
+ return undef
 }
 
 #------------------------------------------------------------------------------

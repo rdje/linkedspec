@@ -107,6 +107,23 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `perl/LinkedSpec/ActionIR/FlowExpr.pm`, and `specs/simenv.spec`:
+  - added canonical array snapshot helper `array_values(array(target))` so `.spec` can express array-copy payloads without Perl-specific `[@target]` syntax,
+  - extended `assign(target, source_expr)` to support `array(...)` and `hash(...)` targets in addition to scalar targets,
+  - migrated `simenv::begin_end_blocks` off Perl-specific array payload forms and onto helper flow (`declare`, `assign`, `push_value`, `if/else/endif`, `substr`, `print`, `return`, `return_undef`, `exit`).
+- Added focused regression locks in `t/phase0_regression.t`:
+  - `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`,
+  - `simenv_begin_end_blocks_method_flow_is_language_agnostic_ready`.
+- Re-ran validation after the `simenv` slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` => syntax OK
+  - `perl -Iperl -c t/phase0_regression.t` => syntax OK
+  - `prove -Iperl t/phase0_regression.t` => PASS (91 tests)
+- Migration impact snapshot:
+  - `simenv::begin_end_blocks` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - the rule is no longer in the blocked-rule set for the roadmap-first migration track.
+- Updated blocker ranking snapshot after the slice:
+  - highest current blocker counts include `Lispish::parenthesis` (`raw=6`), `ifelse::then` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `simenv::bvariable_substitution` (`raw=3`).
 - Implemented Backbone item #3 control-flow expression unification + composite switch follow-up in `perl/LinkedSpec.pm`:
   - added unified Lisp-style recursive control-flow expression lowering shared by `if`/`elseif`/`switch` condition/value paths (`or`, `and`, `not`, emptiness predicates, comparison helpers, regex predicate),
   - extended method-value lowering to support collection entry access through `scalar(container, key_or_index)` (including explicit `scalar(array(...), idx)` / `scalar(hash(...), key)` forms) while preserving `scalar(IMATCH_LIST, n)` behavior,

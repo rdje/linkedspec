@@ -9,36 +9,44 @@ top::            I {my @blocks}
  LX {return @blocks ? \@blocks : undef}
 
 
-begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {my ($block_namei) = $IMATCH =~ /(\w+)$/; print "begin_end_blocks: BEGIN   ($IMATCH)\n"; my $retv; my @assigns; my @keyval_pairs}
+begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=scalar(IMATCH), retv); declare(array, assigns, keyval_pairs); substr(scalar(block_namei), /^.*\s+/, "", o); print("begin_end_blocks: BEGIN   (", scalar(IMATCH), "\n")}
 
  -> comments
  -> anyvariable                       {
-	                               if (@keyval_pairs) {
-                                        push @assigns, [@keyval_pairs];
-					@keyval_pairs = (call(anyvariable));
-				       }
+                                       if(is_nonempty(array(keyval_pairs)));
+                                         push_value(array(assigns), array_values(array(keyval_pairs)));
+                                       endif();
+                                       $retv = call(anyvariable);
+                                       assign(array(keyval_pairs), array(scalar(retv)))
                                       }
 
  -> multiline_value                   {push @keyval_pairs, call(multiline_value)}
  -> singleline_value                  {push @keyval_pairs, call(singleline_value)}
  -> begin_end_blocks[1]               {
-	                               my ($block_namee) = $LMATCH =~ /(\w+)$/;
+                                       declare(scalar, block_namee=scalar(LMATCH));
+                                       substr(scalar(block_namee), /^.*\s+/, "", o);
 
-				       do {
+                                       if(ne(scalar(block_namee), scalar(block_namei)));
                                          my @startline = substr($$STRING, 0, $IPOS)  =~ /\n/g;  
                                          my @endline   = substr($$STRING, 0, $LSPOS-length($LMATCH)) =~ /\n/g;  
-                                         print "(simenv) -E- BEGIN Block Name '$block_namei' and END Block name '$block_namee' do not match.\n"; 
-                                         print "             BEGIN statement is on line ".(@startline +1)." while END statement is on line ".(@endline +1)."\n"; 
-					 exit
-				        } unless $block_namee eq $block_namei;
+                                         print("(simenv) -E- BEGIN Block Name '", scalar(block_namei), "' and END Block name '", scalar(block_namee), "' do not match.\n");
+                                         print("             BEGIN statement is on line ", (@startline +1), " while END statement is on line ", (@endline +1), "\n");
+                                         exit;
+                                       endif();
 
-	                               push @assigns, [@keyval_pairs] if @keyval_pairs;
-	                               print "begin_end_blocks: END    ($LMATCH)\n";
-				       return @assigns ? {name=>$block_namei, content=>\@assigns} : undef
+                                       if(is_nonempty(array(keyval_pairs)));
+                                         push_value(array(assigns), array_values(array(keyval_pairs)));
+                                       endif();
+                                       print("begin_end_blocks: END    (", scalar(LMATCH), "\n");
+                                       if(is_nonempty(array(assigns)));
+                                         return({name=>scalar(block_namei), content=>array_values(array(assigns))});
+                                       else();
+                                         return_undef();
+                                       endif()
 			              }
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- END Block statement not found for *begin_end_blocks* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- END Block statement not found for *begin_end_blocks* starting on line ", (@startline +1), "\n"); 
      exit}
 
       

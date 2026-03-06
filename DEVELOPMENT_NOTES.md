@@ -61,6 +61,29 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Roadmap Item #3 slice completed against `simenv::begin_end_blocks`.
+- User architectural guardrail reaffirmed during the slice:
+  - do not introduce Perl-specific array-literal payload syntax in `.spec` when a canonical backend-neutral helper can express the same intent.
+- Added canonical helper/value surface:
+  - `array_values(array(target))` for array snapshot payloads,
+  - `assign(target, source_expr)` now supports `array(...)` and `hash(...)` targets in addition to scalar targets.
+- `specs/simenv.spec` migration outcome:
+  - `begin_end_blocks` now uses helper flow for block-name normalization, pending key/value accumulation flush, mismatch diagnostics, and structured return payloads,
+  - Perl-specific `[@keyval_pairs]` / `\@assigns` payload forms were removed in favor of `array_values(array(...))`,
+  - metadata improved from `raw_perl_dependency_count=8` to `raw_perl_dependency_count=0`,
+  - `unresolved_helper_count=0` and `language_agnostic_action_ir_ready=1`.
+- Regression additions:
+  - `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`,
+  - `simenv_begin_end_blocks_method_flow_is_language_agnostic_ready`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` -> OK
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=91`)
+- Updated blocker scan after this slice:
+  - `simenv::begin_end_blocks` no longer appears in the blocked set,
+  - current highest blocker counts are led by `Lispish::parenthesis` (`raw=6`), `ifelse::then` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `simenv::bvariable_substitution` (`raw=3`).
+## Session Notes (2026-03-06)
 - Follow-up roadmap slice executed on highest remaining blocker `vhdl::signal_decl_range`.
 - Migration outcome:
   - moved capture/push/guard logic from raw statements into fluent helper flow (`declare`, `assign`, `push_value`, `if/endif`, `substr`),
@@ -1088,6 +1111,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - canonical lowering now covers `return_imatch`/`return_im`, `assign(..., CAPTURE|IMATCH|LMATCH)`, `substr(...)`/`regex_subst(...)`, and `return_array(..., array(...))` constructor payloads,
     - canonical action-IR mapping now emits `RETURN`/`ASSIGN`/`REGEX_SUBST` events for these helper contracts,
     - covered by `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
+  - action-rewriter array snapshot / collection-assignment lock:
+    - canonical lowering now covers `array_values(array(...))` snapshot payloads and `assign(array|hash target, source_expr)` collection-target assignments,
+    - covered by `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`.
   - action-rewriter composable array-string routine lock:
     - canonical lowering now covers composable array transforms `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)`,
     - array routine lowering is centralized through `_lower_array_pipeline_expr(...)` so semantics stay deterministic across standalone, dot-chain, and nested functional forms,
@@ -1147,6 +1173,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter canonical action-IR pipe-quote semicolon lock:
     - canonical statement splitting now ignores semicolons inside pipe-delimited Perl quote-like payloads so pipe-quote payload statements are not fragmented into fallback shards,
     - covered by `action_rewriter_canonical_action_ir_ignores_pipe_quote_semicolon_fragmentation`.
+  - `simenv::begin_end_blocks` migration readiness lock:
+    - migrated `simenv` block assembly logic now reports zero raw fallback and zero unresolved helpers while exercising canonical `DECLARE`/`ASSIGN`/`PUSH`/`RETURN` plus control/diagnostic nodes,
+    - covered by `simenv_begin_end_blocks_method_flow_is_language_agnostic_ready`.
   - Smoke tests:
     - strict AST shape assertion for `Lispish.spec`.
     - invariant-based AST assertions for `vhdl.spec`.

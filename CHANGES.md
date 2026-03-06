@@ -1,5 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: Migrate `simenv::begin_end_blocks` with Canonical Array Snapshot Flow
+## Summary
+Advanced roadmap Item #3 by introducing backend-neutral `array_values(...)` array snapshot lowering, extending `assign(...)` beyond scalar targets, and migrating `specs/simenv.spec` rule `begin_end_blocks` away from Perl-specific `[@...]` / `\@...` payload forms to canonical helper flow.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `specs/simenv.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added method value helper lowering:
+  - `array_values(array(target))` now lowers to a snapshot of current array contents (`[@target]`) without requiring Perl array-literal syntax in `.spec`.
+  - Implemented through `MethodLowering::_lower_method_value_expr` and routed through generalized return/flow value lowering so it works inside `return(...)` payloads and nested helper expressions.
+- Extended assignment lowering:
+  - `assign(target, source_expr)` now accepts `array(name)` and `hash(name)` targets in addition to scalar targets.
+  - Collection-target assignment reuses structured initializer lowering, so `assign(array(items), array(...))` and `assign(hash(map), hash(...))` remain canonical helper forms.
+- Migrated `specs/simenv.spec` `begin_end_blocks`:
+  - replaced Perl-ish `[@keyval_pairs]` / `\@assigns` payload usage with `array_values(array(...))`,
+  - moved block-name extraction, branch guards, pending-pair flush, structured return, and diagnostics to helper flow using `declare`, `assign`, `push_value`, `if/else/endif`, `substr`, `print`, `return`, `return_undef`, and `exit`.
+- Added regression coverage:
+  - `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`,
+  - `simenv_begin_end_blocks_method_flow_is_language_agnostic_ready`.
+- Post-migration metadata snapshot for `simenv::begin_end_blocks`:
+  - `raw_perl_dependency_count`: `8 -> 0`
+  - `unresolved_helper_count`: `0 -> 0`
+  - `language_agnostic_action_ir_ready`: `0 -> 1`
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=91`)
 ## 2026-03-06 - Roadmap Slice: Migrate `vhdl::signal_decl_range` to Method Flow + Add `join_values` Helper
 ## Summary
 Advanced roadmap Item #3 by migrating `specs/vhdl.spec` rule `signal_decl_range` away from raw Perl capture/push/guard statements, and added canonical value helper `join_values(...)` so assignment sources no longer need raw Perl `join(...)` expression text in `.spec` method flow.

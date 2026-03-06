@@ -289,6 +289,9 @@ This section summarizes the helper/method surface currently recognized by the ac
     - `scalaref(myref, {A}[B]{C}[D])` -> `$myref->{A}->[B]->{C}->[D]`
 - array constructor/value helper:
   - `array(v1, v2, ...)`
+- array snapshot/value helper:
+  - `array_values(array(name))` -> snapshot current array contents as a value
+  - use this when you need backend-neutral array-copy semantics inside `return(...)`, `push_value(...)`, or nested payloads instead of Perl-specific `[@name]`
 
 ### 4) Branch/action statements
 - `say(v1, v2, ...)`
@@ -328,9 +331,13 @@ This section summarizes the helper/method surface currently recognized by the ac
   - aliases: `declare_a/s/h`, `declare_array/scalar/hash`
 - assignment/capture source:
   - `assign(target, source_expr)`
+    - target may be `scalar(name)`, `array(name)`, or `hash(name)`
     - special capture tokens still supported: `CAPTURE|IMATCH|LMATCH`
     - source expressions now accept the same flow/value expression surfaces used by `if()/elseif()/switch()`
-    - example: `assign(scalar(flag), or(scalar(on), scalar(off)))`
+    - examples:
+      - `assign(scalar(flag), or(scalar(on), scalar(off)))`
+      - `assign(array(items), array(scalar(retv)))`
+      - `assign(hash(by_name), hash("k", scalar(v)))`
 - regex substitution:
   - `substr(target, pattern, replacement, flags)`
   - `regex_subst(target, pattern, replacement, flags)`
@@ -382,6 +389,8 @@ Supported payload categories:
   - `return(scalaref(myref, {A}[B]{C}[D]))`
 - Helper-based array construction
   - `return(array(scalar(name), 123, "x"))`
+- Helper-based array snapshots
+  - `return(array_values(array(items)))`
 - Mixed nested payloads with embedded helpers
   - `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
   - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
@@ -400,6 +409,10 @@ Lowering behavior examples:
   - lowers to: `return $name`
 - `return(array(scalar(name), 2))`
   - lowers to: `return [$name, 2]`
+- `return(array_values(array(items)))`
+  - lowers to: `return [@items]`
+- `return({name=>scalar(block_namei), content=>array_values(array(assigns))})`
+  - lowers to: `return {name=>$block_namei, content=>[@assigns]}`
 
 Method-chain caveat (`-> Rule .return(...)`):
 - General payload mode is selected for chain payloads that start with:
