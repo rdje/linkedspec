@@ -1,4 +1,4 @@
-vhdl_file:: I {$|=1}
+vhdl_file::
 -> comment                    .push
 -> space                      .push
 -> library_clause             .push
@@ -365,15 +365,15 @@ group_template_declaration: /(?is)group\s+(\w+)\s+is\s+\(\s*(.+?)\s*\)\s*;/     
 group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*;/    I.return_m
 
 signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\s*:=\s*(.+?))?\s*;/ I {
-  my ($identifier_list, @remainder_info) = @IMATCH_LIST;
+  my ($identifier_list, $subtype_indication, $signal_kind, $expression) = @IMATCH_LIST;
 
-  return [map {['?signal_declaration:', $_, @remainder_info]} split /\s*,\s*/o, $identifier_list],
+  return [map {['?signal_declaration:', $_, $subtype_indication, $signal_kind, $expression]} split /\s*,\s*/o, $identifier_list],
 }
 
 configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
-  my ($instantiation_list, @remainder_info) = @IMATCH_LIST;
+  my ($instantiation_list, $component_name, $binding_indication) = @IMATCH_LIST;
 
-  return [map {['?configuration_specification:', $_, @remainder_info]} split /\s*,\s*/o, $instantiation_list]
+  return [map {['?configuration_specification:', $_, $component_name, $binding_indication]} split /\s*,\s*/o, $instantiation_list]
 }
 
 downto_or_to: /(?i)\b(?:downto|to)\b/

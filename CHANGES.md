@@ -1,5 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Clear the Remaining Small VHDL Blockers
+## Summary
+Advanced roadmap Item #3 by clearing the remaining small `vhdl` blockers — `signal_declaration`, `configuration_specification`, and `vhdl_file` — without adding new helper surface, reducing the `vhdl` blocked-rule set from five rules to just `subprogram_body` and `process_statement`.
+
+## Changed Files
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Cleared `vhdl::signal_declaration`:
+  - replaced raw rest-arity destructuring `my ($identifier_list, @remainder_info) = @IMATCH_LIST` with fixed-arity scalar destructuring:
+    - `my ($identifier_list, $subtype_indication, $signal_kind, $expression) = @IMATCH_LIST`
+  - preserved the existing return shape while removing the only remaining raw blocker statement for the rule.
+- Cleared `vhdl::configuration_specification`:
+  - replaced raw rest-arity destructuring `my ($instantiation_list, @remainder_info) = @IMATCH_LIST` with fixed-arity scalar destructuring:
+    - `my ($instantiation_list, $component_name, $binding_indication) = @IMATCH_LIST`
+  - preserved the existing return shape while removing the only remaining raw blocker statement for the rule.
+- Cleared `vhdl::vhdl_file`:
+  - removed the leftover line-buffering side effect `I {$|=1}`
+  - kept the parser rule behavior unchanged apart from dropping that non-portable startup side effect.
+- Added focused regression coverage:
+  - `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`
+- Refreshed the older declaration-slice snapshot test:
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback` now expects the later post-cleanup blocked-rule count.
+- Post-migration metadata snapshot:
+  - `vhdl::signal_declaration`: `raw_perl_dependency_count` `1 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::configuration_specification`: `raw_perl_dependency_count` `1 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::vhdl_file`: `raw_perl_dependency_count` `1 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl` descriptor migration summary: `language_agnostic_blocked_rule_count` `5 -> 2`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=101`)
 ## 2026-03-07 - Roadmap Slice: Migrate `ebnf::grammar_file` to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by migrating the remaining blocked `ebnf::grammar_file` accumulator/finalization path off raw Perl fallback using the existing helper surface, clearing the last `ebnf` blocked rule without adding new lowering contracts.

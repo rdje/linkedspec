@@ -2503,12 +2503,33 @@ subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
-    is($summary->{language_agnostic_blocked_rule_count}, 5, 'vhdl blocked-rule count drops after declaration migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 2, 'vhdl blocked-rule count reflects the later small-blocker cleanup after declaration migration');
     ok(
         !grep { $_ eq 'subprogram_declaration' || $_ eq 'type_declaration' } @{$summary->{language_agnostic_blocked_rules_by_priority} || []},
         'vhdl migration summary no longer lists declaration rules as blocked'
     );
     is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after declaration migration');
+};
+subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 20;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for small vhdl blocker migration check');
+
+    for my $rule (qw(signal_declaration configuration_specification vhdl_file)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "vhdl $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "vhdl $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "vhdl $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "vhdl $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "vhdl $rule is language-agnostic action-IR ready");
+    }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 2, 'vhdl blocked-rule count drops after the small blocker migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [qw(subprogram_body process_statement)], 'vhdl blocked-rule priority list now contains only the two large remaining blockers');
+    is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after the small blocker migration');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
