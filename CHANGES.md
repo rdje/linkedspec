@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate `simenv` Quote/Substitution Diagnostics to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by converting the remaining raw diagnostic/debug print statements in a focused `simenv.spec` quote/substitution family to canonical helper flow, and by rewriting `variable_substitution` and `comments` to avoid raw regex/print/chomp fallbacks.
+
+## Changed Files
+- Updated: `specs/simenv.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated raw diagnostic/debug print statements to canonical helper flow in:
+  - `singleline_value`
+  - `dquotes`
+  - `perl_dquotes`
+  - `command_substitution`
+  - `perl_command_substitution`
+- Rewrote remaining raw helper-block logic in:
+  - `variable_substitution`
+    - now uses `declare(scalar, variable_name=scalar(IMATCH))`
+    - strips the leading `$` via `substr(...)`
+    - emits diagnostics through `print(...)`
+    - returns via generalized `return({...})`
+  - `comments`
+    - now uses `declare(scalar, comment_text=scalar(IMATCH))`
+    - removes the trailing newline via `substr(...)`
+    - emits diagnostics through `print(...)`
+- Migration impact:
+  - all seven migrated rules now report `raw_perl_dependency_count=0`,
+  - all seven migrated rules now report `language_agnostic_action_ir_ready=1`.
+- Added focused regression coverage:
+  - `simenv_quote_substitution_helper_flow_eliminates_raw_fallback`
+  - locks zero raw fallback, canonical `PRINT` node presence, and readiness across the selected `simenv` quote/substitution family.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=95`)
 ## 2026-03-07 - Roadmap Slice: Migrate `simenv` Delimiter-Helper Diagnostics to Canonical `print(...)` Flow
 ## Summary
 Advanced roadmap Item #3 by converting the raw diagnostic/debug print statements in a focused `simenv.spec` delimiter-helper family to canonical `print(...)` helper calls, removing raw Perl fallback from those rules without changing parser behavior.

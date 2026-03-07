@@ -108,6 +108,20 @@ When resuming after interruption:
 
 ## Latest Session Update
 - Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
+  - converted the remaining raw diagnostic/debug print statements in `singleline_value`, `dquotes`, `perl_dquotes`, `command_substitution`, and `perl_command_substitution` to canonical `print(...)` helper calls,
+  - rewrote `variable_substitution` and `comments` to helper flow using `declare`, `substr`, `print`, and generalized `return(...)` where needed.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - `simenv_quote_substitution_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `simenv` quote/substitution slice:
+  - `perl -Iperl -c t/phase0_regression.t` => syntax OK
+  - `prove -Iperl t/phase0_regression.t` => PASS (95 tests)
+- Migration impact snapshot:
+  - all seven migrated `simenv` rules now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - the previously remaining top `simenv` blockers (`command_substitution`, `dquotes`, `perl_command_substitution`, `perl_dquotes`) are no longer part of the blocked-rule set.
+- Updated blocker ranking snapshot after the slice:
+  - current top blockers include `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
+  - no `simenv` rules remain in the current top blocked-rule ranking.
+- Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
   - converted the raw diagnostic/debug print statements to canonical `print(...)` helper calls in `bs_nl`, `squotes`, `perl_squotes`, `multiline_value`, `bvariable_substitution`, `curlybrace`, and `parenthesis`,
   - preserved existing parser behavior while removing raw-print fallback from that delimiter-helper family.
 - Added focused regression lock in `t/phase0_regression.t`:

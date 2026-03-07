@@ -61,6 +61,37 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against the next `simenv.spec` quote/substitution family.
+- Migration scope:
+  - converted raw diagnostic/debug print statements to canonical `print(...)` helper calls in:
+    - `singleline_value`
+    - `dquotes`
+    - `perl_dquotes`
+    - `command_substitution`
+    - `perl_command_substitution`
+  - rewrote `variable_substitution` to helper flow using:
+    - `declare(scalar, variable_name=scalar(IMATCH))`
+    - `substr(...)` to strip the leading `$`
+    - `print(...)`
+    - generalized `return({...})`
+  - rewrote `comments` to helper flow using:
+    - `declare(scalar, comment_text=scalar(IMATCH))`
+    - `substr(...)` to remove the trailing newline
+    - `print(...)`
+- Migration outcome:
+  - all seven migrated rules now report `raw_perl_dependency_count=0`,
+  - all seven migrated rules now report `unresolved_helper_count=0` and `language_agnostic_action_ir_ready=1`,
+  - the previously remaining `simenv` top blockers (`command_substitution`, `dquotes`, `perl_command_substitution`, `perl_dquotes`) are no longer in the blocked set.
+- Regression addition:
+  - `simenv_quote_substitution_helper_flow_eliminates_raw_fallback`
+  - verifies zero raw fallback, canonical `PRINT` node presence, and readiness across the selected `simenv` quote/substitution rules.
+- Validation snapshot:
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=95`)
+- Updated blocker scan after this slice:
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
+  - no `simenv` rules remain in the current top blocked-rule set.
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against a focused `simenv.spec` delimiter-helper family.
 - Migration scope:
   - converted raw diagnostic/debug print statements to canonical `print(...)` helper calls in:
@@ -1196,6 +1227,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `simenv.spec` delimiter-helper print migration lock:
     - raw debug-print statements in the selected `simenv` delimiter-helper family now lower through canonical `PRINT` helper calls instead of RAW_PERL fallback,
     - covered by `simenv_delimiter_helper_print_flow_eliminates_raw_fallback`.
+  - `simenv.spec` quote/substitution helper migration lock:
+    - raw debug-print statements in the selected `simenv` quote/substitution family now lower through canonical `PRINT` helper calls, and `variable_substitution`/`comments` now use helper flow instead of raw regex/print/chomp fallback,
+    - covered by `simenv_quote_substitution_helper_flow_eliminates_raw_fallback`.
   - action-rewriter composable array-string routine lock:
     - canonical lowering now covers composable array transforms `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)`,
     - array routine lowering is centralized through `_lower_array_pipeline_expr(...)` so semantics stay deterministic across standalone, dot-chain, and nested functional forms,
