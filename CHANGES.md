@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Note: Queue `array_values(...)` Naming Cleanup
+## Summary
+Recorded a deferred roadmap task to rename the backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))` later, without changing current runtime behavior or helper semantics in this slice.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added an explicit backlog note under roadmap immediate-next-step guidance:
+  - future naming cleanup target: `array_values(array(...))` -> `array_copy(array(...))`
+  - current helper behavior remains unchanged for now
+  - transition is expected to preserve compatibility for existing specs when the rename is eventually implemented
+
+## Validation
+- Docs-only roadmap update.
+- No code or test validation was required for this slice.
 ## 2026-03-07 - Roadmap Slice: Migrate `simenv` Quote/Substitution Diagnostics to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by converting the remaining raw diagnostic/debug print statements in a focused `simenv.spec` quote/substitution family to canonical helper flow, and by rewriting `variable_substitution` and `comments` to avoid raw regex/print/chomp fallbacks.

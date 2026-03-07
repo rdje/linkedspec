@@ -61,6 +61,14 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Clarified the semantic distinction between:
+  - `array(...)` as constructor/container surface
+  - `array_values(array(...))` as array snapshot/materialization surface
+- User requested a deferred naming cleanup only for now:
+  - queue future rename `array_values(array(...))` -> `array_copy(array(...))`
+  - keep the current helper name and behavior unchanged in the present codebase
+  - expect compatibility preservation during the eventual transition so existing specs continue to work
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the next `simenv.spec` quote/substitution family.
 - Migration scope:
   - converted raw diagnostic/debug print statements to canonical `print(...)` helper calls in:

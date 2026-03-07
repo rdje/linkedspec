@@ -189,6 +189,7 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 - Keep balanced-delimiter behavior strict by policy; do not introduce permissive missing-close helper normalization.
 - Keep `.spec` action semantics language-agnostic: avoid introducing new Perl code-block dependence and prioritize IR/DSL forms that can map cleanly to non-Perl backends.
 - Keep backend emission under strict canonical forms we control so emitted host-language code avoids avoidable parser/splitter fragility.
+- Queue a later DSL naming cleanup: rename backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))` once the current blocker-reduction work calms down, likely with a compatibility alias during transition so existing specs keep working.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 

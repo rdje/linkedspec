@@ -107,6 +107,9 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Added a docs-only roadmap backlog note:
+  - future naming cleanup should rename backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))`,
+  - no implementation change was made yet; current helper behavior and existing specs remain unchanged for now.
 - Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
   - converted the remaining raw diagnostic/debug print statements in `singleline_value`, `dquotes`, `perl_dquotes`, `command_substitution`, and `perl_command_substitution` to canonical `print(...)` helper calls,
   - rewrote `variable_substitution` and `comments` to helper flow using `declare`, `substr`, `print`, and generalized `return(...)` where needed.
