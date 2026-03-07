@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-06 - Roadmap Slice: Migrate `ifelse.spec` Debug Prints to Canonical `print(...)` Helper Flow
+## Summary
+Advanced roadmap Item #3 by converting the raw debug-print statements in `specs/ifelse.spec` to canonical `print(...)` helper calls, removing raw Perl fallback across the entire `ifelse` grammar without changing parser behavior.
+
+## Changed Files
+- Updated: `specs/ifelse.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated all debug-print statements in `specs/ifelse.spec` from raw Perl:
+  - `print "..."` -> `print("...")`
+- Covered rules:
+  - `program`
+  - `if`
+  - `then`
+  - `elsif`
+  - `else`
+  - `while`
+  - `while_then`
+- Migration impact:
+  - eliminated 23 raw-print fallback statements across the `ifelse` file,
+  - all seven rules now report `raw_perl_dependency_count=0`,
+  - all seven rules now report `language_agnostic_action_ir_ready=1`.
+- Added focused regression coverage:
+  - `ifelse_debug_print_helper_flow_eliminates_raw_fallback`
+  - locks zero raw fallback, canonical `PRINT` node presence, and readiness across the full `ifelse` rule set.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=92`)
 ## 2026-03-06 - Roadmap Slice: Migrate `simenv::begin_end_blocks` with Canonical Array Snapshot Flow
 ## Summary
 Advanced roadmap Item #3 by introducing backend-neutral `array_values(...)` array snapshot lowering, extending `assign(...)` beyond scalar targets, and migrating `specs/simenv.spec` rule `begin_end_blocks` away from Perl-specific `[@...]` / `\@...` payload forms to canonical helper flow.

@@ -107,6 +107,19 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/ifelse.spec`:
+  - converted all raw debug-print statements in `program`, `if`, `then`, `elsif`, `else`, `while`, and `while_then` from `print "..."` to canonical `print("...")` helper calls,
+  - preserved the existing parser flow while eliminating raw-print fallback across the whole file.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - `ifelse_debug_print_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `ifelse` slice:
+  - `perl -Iperl -c t/phase0_regression.t` => syntax OK
+  - `prove -Iperl t/phase0_regression.t` => PASS (92 tests)
+- Migration impact snapshot:
+  - all seven migrated `ifelse` rules now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `ifelse::then`, `ifelse::else`, and `ifelse::while_then` are no longer part of the blocked-rule set.
+- Updated blocker ranking snapshot after the slice:
+  - current top blockers include `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `BNF::group` (`raw=4`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 - Implemented Backbone item #3 roadmap slice in `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `perl/LinkedSpec/ActionIR/FlowExpr.pm`, and `specs/simenv.spec`:
   - added canonical array snapshot helper `array_values(array(target))` so `.spec` can express array-copy payloads without Perl-specific `[@target]` syntax,
   - extended `assign(target, source_expr)` to support `array(...)` and `hash(...)` targets in addition to scalar targets,

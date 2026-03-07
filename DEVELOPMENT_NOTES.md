@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-06)
+- Roadmap Item #3 slice completed against `specs/ifelse.spec`.
+- Migration scope:
+  - converted all raw debug prints in `program`, `if`, `then`, `elsif`, `else`, `while`, and `while_then` from `print "..."` to canonical `print("...")` helper calls,
+  - preserved existing call/return behavior while removing raw host-language print statements from the action-rewriter blocker set.
+- Migration outcome:
+  - 23 raw-print fallback statements eliminated across the file,
+  - all seven `ifelse` rules now report `raw_perl_dependency_count=0`,
+  - all seven `ifelse` rules now report `unresolved_helper_count=0` and `language_agnostic_action_ir_ready=1`.
+- Regression addition:
+  - `ifelse_debug_print_helper_flow_eliminates_raw_fallback`
+  - verifies the migrated `ifelse` rules expose zero raw fallback, include canonical `PRINT` nodes, and remain language-agnostic-ready.
+- Validation snapshot:
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=92`)
+- Updated blocker scan after this slice:
+  - `ifelse::then`, `ifelse::else`, and `ifelse::while_then` are no longer in the blocked set,
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `BNF::group` (`raw=4`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
+## Session Notes (2026-03-06)
 - Roadmap Item #3 slice completed against `simenv::begin_end_blocks`.
 - User architectural guardrail reaffirmed during the slice:
   - do not introduce Perl-specific array-literal payload syntax in `.spec` when a canonical backend-neutral helper can express the same intent.
@@ -1114,6 +1132,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - action-rewriter array snapshot / collection-assignment lock:
     - canonical lowering now covers `array_values(array(...))` snapshot payloads and `assign(array|hash target, source_expr)` collection-target assignments,
     - covered by `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`.
+  - `ifelse.spec` print-helper migration lock:
+    - raw debug-print statements in `ifelse` grammar rules now lower through canonical `PRINT` helper calls instead of RAW_PERL fallback,
+    - covered by `ifelse_debug_print_helper_flow_eliminates_raw_fallback`.
   - action-rewriter composable array-string routine lock:
     - canonical lowering now covers composable array transforms `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)`,
     - array routine lowering is centralized through `_lower_array_pipeline_expr(...)` so semantics stay deterministic across standalone, dot-chain, and nested functional forms,

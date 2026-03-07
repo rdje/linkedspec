@@ -2373,6 +2373,21 @@ subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub 
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'simenv begin_end_blocks is now language-agnostic action-IR ready');
 };
+subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 36;
+
+    my $descr = LinkedSpec::get_parser('ifelse', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ifelse debug-print migration check');
+
+    for my $rule (qw(program if then elsif else while while_then)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "ifelse $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "ifelse $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "ifelse $rule exposes no raw-Perl fallback statements");
+        ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "ifelse $rule canonical action-IR nodes include PRINT after debug-print migration");
+        ok($meta->{language_agnostic_action_ir_ready}, "ifelse $rule is language-agnostic action-IR ready");
+    }
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
