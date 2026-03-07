@@ -159,9 +159,7 @@ component_declaration:    /(?i)\bcomponent\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+com
 
 
 package_declaration:    /(?i)\bpackage\s+(\w+)\s+is\b/ /(?i)\bend\b(?!\s+component\b)(?:\s+package\b)?(?:\s+\w+)?\s*;/ 
-I {
-#  say "############## START package_declaration <@IMATCH_LIST> ##############";
-}
+I {declare(array, imatch_copy)}
 
 -> comment                    .push
 -> dquote_string              .push
@@ -182,15 +180,13 @@ I {
 -> group_template_declaration .push
 -> group_declaration          .push
 -> package_declaration[1]        {
-#	say "############## END package_declaration <@IMATCH_LIST> ##############\n";
-	return ['?package_declaration:', (map {lc} @IMATCH_LIST), \@package_declaration]
+	assign(array(imatch_copy), array(scalar(IMATCH_LIST, 0)));
+	lowercase_each(array(imatch_copy));
+	return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_values(array(package_declaration))))
 }
 
 
 package_body: /(?i)\bpackage\s+body\s+(\w+)\s+is\b/ /(?i)\bend(?:\s+package\s+body)?(?:\s+\w+)?\s*;/ 
-I  {
-#  say "##############       START package_body <@IMATCH_LIST>      ###############";
-}
 
 -> comment                   .push                    
 -> dquote_string             .push             
@@ -206,10 +202,7 @@ I  {
 -> use_clause                .push     
 -> group_template_declaration.push     
 -> group_declaration         .push              
--> package_body[1]                {
-#  say "##############        END package_body <@IMATCH_LIST>       ##############";
- return ['?package_body:', @IMATCH_LIST, \@package_body]
-}
+-> package_body[1]                .return(array("?package_body:", scalar(IMATCH_LIST, 0), array_values(array(package_body))))
 
 
 configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(?i)\bend\b(?:\s+configuration\b)?(?:\s+(\w+))?\s*;/

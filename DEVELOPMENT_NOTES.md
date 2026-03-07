@@ -61,6 +61,33 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against the VHDL package rules:
+  - `package_declaration`
+  - `package_body`
+- Migration scope:
+  - no new helper surface was needed; the slice used existing helper contracts only
+  - `package_declaration` now uses helper declaration/assignment/lowercase/return flow:
+    - `declare(array, imatch_copy)`
+    - `assign(array(imatch_copy), array(scalar(IMATCH_LIST, 0)))`
+    - `lowercase_each(array(imatch_copy))`
+    - `return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_values(array(package_declaration))))`
+  - `package_body` now returns through generalized helper flow:
+    - `return(array("?package_body:", scalar(IMATCH_LIST, 0), array_values(array(package_body))))`
+- Migration outcome:
+  - `vhdl::package_declaration` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `vhdl::package_body` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `vhdl` now reports `language_agnostic_blocked_rule_count=7`
+- Regression addition:
+  - `vhdl_package_helper_flow_eliminates_raw_fallback`
+  - the lock verifies zero raw fallback, canonical node coverage, readiness, and that neither package rule remains in the blocked-rule priority list
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=98`)
+- Updated blocker scan after this slice:
+  - `vhdl` top blockers are now `subprogram_body` (`raw=5`), `process_statement` (`raw=4`), and `type_declaration` (`raw=2`)
+  - broader top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against `vhdl::signal_decl_range`.
 - Migration scope:
   - cleared the final remaining raw fallback statement in the rule by replacing raw array reset `@capt = ()` with canonical helper form `assign(array(capt), array())`

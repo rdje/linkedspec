@@ -2382,6 +2382,41 @@ subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' =
     ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include ASSIGN');
     ok($meta->{language_agnostic_action_ir_ready}, 'vhdl signal_decl_range is now language-agnostic action-IR ready');
 };
+subtest 'vhdl_package_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 15;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl package migration check');
+
+    my $package_decl_meta = $descr->{spec}{package_declaration}{meta}{action_rewriter};
+    ok(ref($package_decl_meta) eq 'HASH', 'vhdl package_declaration exposes action_rewriter metadata');
+    is($package_decl_meta->{raw_perl_dependency_count}, 0, 'vhdl package_declaration no longer reports raw-Perl fallback dependency');
+    is_deeply($package_decl_meta->{raw_perl_dependency_statements}, [], 'vhdl package_declaration exposes no raw-Perl fallback statements');
+    is($package_decl_meta->{unresolved_helper_count}, 0, 'vhdl package_declaration avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'MAP_LOWERCASE' } @{$package_decl_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$package_decl_meta->{canonical_action_ir_nodes}}),
+        'vhdl package_declaration canonical action-IR nodes include DECLARE/ASSIGN/MAP_LOWERCASE/RETURN after helper migration'
+    );
+    ok($package_decl_meta->{language_agnostic_action_ir_ready}, 'vhdl package_declaration is language-agnostic action-IR ready');
+
+    my $package_body_meta = $descr->{spec}{package_body}{meta}{action_rewriter};
+    ok(ref($package_body_meta) eq 'HASH', 'vhdl package_body exposes action_rewriter metadata');
+    is($package_body_meta->{raw_perl_dependency_count}, 0, 'vhdl package_body no longer reports raw-Perl fallback dependency');
+    is_deeply($package_body_meta->{raw_perl_dependency_statements}, [], 'vhdl package_body exposes no raw-Perl fallback statements');
+    is($package_body_meta->{unresolved_helper_count}, 0, 'vhdl package_body avoids unresolved-helper hits');
+    ok(grep { $_ eq 'RETURN' } @{$package_body_meta->{canonical_action_ir_nodes}}, 'vhdl package_body canonical action-IR nodes include RETURN after helper migration');
+    ok($package_body_meta->{language_agnostic_action_ir_ready}, 'vhdl package_body is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
+    ok(
+        !grep { $_ eq 'package_declaration' || $_ eq 'package_body' } @{$summary->{language_agnostic_blocked_rules_by_priority} || []},
+        'vhdl migration summary no longer lists package rules as blocked'
+    );
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 

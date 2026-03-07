@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate VHDL Package Rules to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by migrating `vhdl::package_declaration` and `vhdl::package_body` off raw Perl fallback using the existing helper surface, clearing both rules from the blocked set without adding new lowering contracts.
+
+## Changed Files
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated `vhdl::package_declaration`:
+  - replaced the inert raw start block with canonical helper declaration flow `I {declare(array, imatch_copy)}`
+  - replaced raw lowercase/return logic with helper flow:
+    - `assign(array(imatch_copy), array(scalar(IMATCH_LIST, 0)))`
+    - `lowercase_each(array(imatch_copy))`
+    - `return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_values(array(package_declaration))))`
+- Migrated `vhdl::package_body`:
+  - removed the empty raw start block entirely
+  - replaced the raw structured return with `.return(array("?package_body:", scalar(IMATCH_LIST, 0), array_values(array(package_body))))`
+- Added focused regression coverage:
+  - `vhdl_package_helper_flow_eliminates_raw_fallback`
+  - verifies zero raw fallback, canonical node coverage, readiness, and absence from the blocked-rule summary
+- Post-migration metadata snapshot:
+  - `vhdl::package_declaration`: `raw_perl_dependency_count` `2 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::package_body`: `raw_perl_dependency_count` `2 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl` descriptor migration summary: `language_agnostic_blocked_rule_count` `9 -> 7`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=98`)
 ## 2026-03-07 - Roadmap Slice: Clear Final `vhdl::signal_decl_range` Blocker
 ## Summary
 Advanced roadmap Item #3 by clearing the last remaining raw fallback in `vhdl::signal_decl_range`, replacing the raw array reset with canonical helper flow so the rule now reports zero blockers and full language-agnostic action-IR readiness.
