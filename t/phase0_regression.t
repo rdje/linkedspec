@@ -2355,7 +2355,7 @@ subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tablegrep exposes no top blocked rule after terminal/token migration');
 };
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
-    plan tests => 8;
+    plan tests => 11;
 
     my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl signal_decl_range migration check');
@@ -2369,15 +2369,18 @@ subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' =
             $_ =~ /^my \(\@capt, \@msi_lsi\)$/ ||
             $_ =~ /^push \@capt, substr\b/ ||
             $_ =~ /^push \@msi_lsi, \$msi_lsi\b/ ||
-            $_ =~ /^if \(\@capt\)\b/
+            $_ =~ /^if \(\@capt\)\b/ ||
+            $_ =~ /^\@capt = \(\)$/
         )
     } @{$meta->{raw_perl_dependency_statements} || []};
     is(scalar @targeted_raw, 0, 'vhdl signal_decl_range no longer reports targeted capture/push guard statements as raw-perl fallback');
-
+    is($meta->{raw_perl_dependency_count}, 0, 'vhdl signal_decl_range no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'vhdl signal_decl_range exposes no raw-Perl fallback statements');
     cmp_ok($meta->{raw_perl_dependency_count}, '<', 9, 'vhdl signal_decl_range raw-perl dependency count is reduced from previous baseline');
     ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include DECLARE');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include PUSH');
     ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'vhdl signal_decl_range canonical action-IR nodes include ASSIGN');
+    ok($meta->{language_agnostic_action_ir_ready}, 'vhdl signal_decl_range is now language-agnostic action-IR ready');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;

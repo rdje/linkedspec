@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against `vhdl::signal_decl_range`.
+- Migration scope:
+  - cleared the final remaining raw fallback statement in the rule by replacing raw array reset `@capt = ()` with canonical helper form `assign(array(capt), array())`
+  - no new helper surface was needed for this cleanup; it was a contained follow-up on previously landed collection-target assignment support.
+- Migration outcome:
+  - `vhdl::signal_decl_range` now reports `raw_perl_dependency_count=0`
+  - `vhdl::signal_decl_range` now reports `unresolved_helper_count=0`
+  - `vhdl::signal_decl_range` now reports `language_agnostic_action_ir_ready=1`
+- Regression update:
+  - strengthened `vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback`
+  - the lock now verifies zero raw fallback statements and full readiness, not just reduced fallback count
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=97`)
+- Updated blocker scan after this slice:
+  - `vhdl` now reports `language_agnostic_blocked_rule_count=9`
+  - current `vhdl` top blockers remain `subprogram_body` (`raw=5`), `process_statement` (`raw=4`), and `package_body` (`raw=2`)
+  - broader top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `ebnf::grammar_file` (`raw=4`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the remaining blocked `tablegrep` terminal/token rules:
   - `and_op`
   - `or_op`

@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Clear Final `vhdl::signal_decl_range` Blocker
+## Summary
+Advanced roadmap Item #3 by clearing the last remaining raw fallback in `vhdl::signal_decl_range`, replacing the raw array reset with canonical helper flow so the rule now reports zero blockers and full language-agnostic action-IR readiness.
+
+## Changed Files
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated the last remaining blocked statement in `vhdl::signal_decl_range`:
+  - replaced raw `@capt = ()` with canonical helper flow `assign(array(capt), array())`
+- Strengthened existing regression lock:
+  - `vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback`
+  - now verifies:
+    - zero raw fallback statements,
+    - zero raw fallback count,
+    - and `language_agnostic_action_ir_ready=1`
+- Post-migration metadata snapshot for `vhdl::signal_decl_range`:
+  - `raw_perl_dependency_count`: `1 -> 0`
+  - `unresolved_helper_count`: `0 -> 0`
+  - `language_agnostic_action_ir_ready`: `0 -> 1`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=97`)
 ## 2026-03-07 - Roadmap Slice: Add `hash(...)` Return Payload Lowering and Clear `tablegrep` Blockers
 ## Summary
 Advanced roadmap Item #3 by teaching generalized `return(payload)` lowering to handle helper-based `hash(...)` constructor payloads, then using that canonical form to migrate the remaining blocked `tablegrep` rules (`and_op`, `or_op`, `re_term`) off raw Perl fallback.

@@ -107,6 +107,20 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
+  - cleared the final remaining `vhdl::signal_decl_range` blocker by replacing raw array reset `@capt = ()` with canonical helper flow `assign(array(capt), array())`.
+- Strengthened focused regression coverage in `t/phase0_regression.t`:
+  - `vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback` now locks zero raw fallback statements and full readiness for `signal_decl_range`.
+- Re-ran validation after the final `signal_decl_range` cleanup:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (97 tests)
+- Migration impact snapshot:
+  - `vhdl::signal_decl_range` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`.
+- Updated blocker ranking snapshot after the slice:
+  - `signal_decl_range` is no longer blocked,
+  - current `vhdl` top blockers remain `subprogram_body` (`raw=5`), `process_statement` (`raw=4`), and `package_body` (`raw=2`),
+  - broader top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `ebnf::grammar_file` (`raw=4`).
 - Implemented Backbone item #3 roadmap slice in `perl/LinkedSpec/ActionIR/MethodLowering.pm` and `specs/tablegrep.spec`:
   - added canonical helper-based `hash(...)` lowering for generalized `return(payload)` expressions,
   - migrated `tablegrep::and_op`, `tablegrep::or_op`, and `tablegrep::re_term` to use canonical `return(hash(...))` helper flow instead of raw Perl payloads,

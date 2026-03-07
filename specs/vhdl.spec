@@ -323,7 +323,7 @@ LE {assign(scalar(IPOS), pos $$STRING)}
    assign(scalar(msi_lsi), join_values("", array(capt)));
    substr(scalar(msi_lsi), /^\s+|\n\s*|\s+$/, //, goi);
    push_value(array(msi_lsi), scalar(msi_lsi));
-   @capt = ()
+   assign(array(capt), array())
 } 
 -> signal_decl_range[1]   {
    if(not(is_empty(array(capt))));
