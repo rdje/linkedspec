@@ -60,6 +60,36 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against `specs/BNF.spec`.
+- Migration scope:
+  - converted raw debug-print statements across the full BNF grammar to canonical `print(...)` helper calls,
+  - used `scalar(IMATCH)` inside `print(...)` where message content depends on the current match value.
+- Covered rules:
+  - `description`
+  - `construction_start`
+  - `node`
+  - `dquote_str`
+  - `squote_str`
+  - `regex`
+  - `group`
+  - `g_repetition`
+  - `q_mark`
+  - `plus`
+  - `star`
+  - `pipe`
+- Migration outcome:
+  - all 12 migrated BNF rules now report `raw_perl_dependency_count=0`,
+  - all 12 migrated BNF rules now report `unresolved_helper_count=0` and `language_agnostic_action_ir_ready=1`,
+  - `BNF::group` is no longer in the blocked set.
+- Regression addition:
+  - `bnf_debug_print_helper_flow_eliminates_raw_fallback`
+  - verifies zero raw fallback, canonical `PRINT` node presence, and readiness across the migrated BNF rules.
+- Validation snapshot:
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=93`)
+- Updated blocker scan after this slice:
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 ## Session Notes (2026-03-06)
 - Roadmap Item #3 slice completed against `specs/ifelse.spec`.
 - Migration scope:
@@ -1135,6 +1165,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `ifelse.spec` print-helper migration lock:
     - raw debug-print statements in `ifelse` grammar rules now lower through canonical `PRINT` helper calls instead of RAW_PERL fallback,
     - covered by `ifelse_debug_print_helper_flow_eliminates_raw_fallback`.
+  - `BNF.spec` print-helper migration lock:
+    - raw debug-print statements across the BNF grammar now lower through canonical `PRINT` helper calls instead of RAW_PERL fallback,
+    - covered by `bnf_debug_print_helper_flow_eliminates_raw_fallback`.
   - action-rewriter composable array-string routine lock:
     - canonical lowering now covers composable array transforms `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)`,
     - array routine lowering is centralized through `_lower_array_pipeline_expr(...)` so semantics stay deterministic across standalone, dot-chain, and nested functional forms,

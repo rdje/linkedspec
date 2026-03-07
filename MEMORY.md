@@ -107,6 +107,19 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/BNF.spec`:
+  - converted the raw debug-print statements across the BNF grammar to canonical `print(...)` helper calls,
+  - used `scalar(IMATCH)` inside helper print payloads where the message depends on the current match value.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - `bnf_debug_print_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `BNF` slice:
+  - `perl -Iperl -c t/phase0_regression.t` => syntax OK
+  - `prove -Iperl t/phase0_regression.t` => PASS (93 tests)
+- Migration impact snapshot:
+  - all 12 migrated BNF rules now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `BNF::group` is no longer part of the blocked-rule set.
+- Updated blocker ranking snapshot after the slice:
+  - current top blockers include `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 - Implemented Backbone item #3 roadmap slice in `specs/ifelse.spec`:
   - converted all raw debug-print statements in `program`, `if`, `then`, `elsif`, `else`, `while`, and `while_then` from `print "..."` to canonical `print("...")` helper calls,
   - preserved the existing parser flow while eliminating raw-print fallback across the whole file.
