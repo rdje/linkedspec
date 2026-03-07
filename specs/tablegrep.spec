@@ -64,19 +64,16 @@ LE {
 
 re_term: /((?:\w+|\[\d+\]))\s*([!=])~\s*\/(.+?)(?<!\\)\//
 I {
- my ($field, $sens, $re) = @IMATCH_LIST;
-# print "RE_TERM#$IMATCH#->($field)($re)\n";
-
- my ($subscript) =  $field =~ /\[(\d+)\]/o;
- return {type=> defined($subscript) ? 'STERM' : 'TERM', field=>defined($subscript) ? $subscript : $field, sens=>$sens, re=>$re}
+ declare(scalar, field=scalar(IMATCH_LIST, 0), sens=scalar(IMATCH_LIST, 1), re=scalar(IMATCH_LIST, 2));
+ if(matches(scalar(field), /^\[\d+\]$/o));
+  declare(scalar, subscript=scalar(field));
+  substr(scalar(subscript), /^\[(\d+)\]$/, "$1", o);
+  return(hash("type", "STERM", "field", scalar(subscript), "sens", scalar(sens), "re", scalar(re)));
+ else();
+  return(hash("type", "TERM", "field", scalar(field), "sens", scalar(sens), "re", scalar(re)));
+ endif()
 }
 
-or_op: /\|\|/		I {
-# print "OR_OP#$IMATCH#\n"; 
- return {type=>"OR_OP"}
-}
+or_op: /\|\|/		I.return(hash("type", "OR_OP"))
 
-and_op: /\&\&/		I {
-# print "AND_OP#$IMATCH#\n"; 
- return {type=>"AND_OP"}
-}
+and_op: /\&\&/		I.return(hash("type", "AND_OP"))

@@ -107,6 +107,23 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `perl/LinkedSpec/ActionIR/MethodLowering.pm` and `specs/tablegrep.spec`:
+  - added canonical helper-based `hash(...)` lowering for generalized `return(payload)` expressions,
+  - migrated `tablegrep::and_op`, `tablegrep::or_op`, and `tablegrep::re_term` to use canonical `return(hash(...))` helper flow instead of raw Perl payloads,
+  - rewrote `re_term` branch logic with `declare`, `if(matches(...))`, `substr`, and canonical structured helper returns.
+- Extended and added focused regression locks in `t/phase0_regression.t`:
+  - extended `action_rewriter_lowers_general_return_payloads_with_nested_structures` to cover `return(hash(...))`,
+  - added `tablegrep_terminal_token_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `hash(...)`/`tablegrep` slice:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (97 tests)
+- Migration impact snapshot:
+  - `tablegrep::and_op`, `tablegrep::or_op`, and `tablegrep::re_term` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `tablegrep` now reports `language_agnostic_blocked_rule_count=0`.
+- Updated blocker ranking snapshot after the slice:
+  - `tablegrep` no longer contributes blocked rules,
+  - current top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 - Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
   - migrated the last two blocked `simenv` rules, `top` and `anyvariable`, to canonical helper flow,
   - replaced the remaining raw block push guard in `top` with fluent helper control flow,

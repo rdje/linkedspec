@@ -1066,7 +1066,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot/assign method contracts remain language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])'),
@@ -1087,6 +1087,11 @@ subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' 
         LinkedSpec::call_spec_handler_subst('Top', 'return({ item => scalaref(myref, {A}[B]{C}[D]) })'),
         'return { item => $myref->{A}->[B]->{C}->[D] }',
         'general return(payload) lowers scalaref(base,{...}[...]) with hash-first path segments'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind", "node", "item", scalar(foo_hash, key), "list", array(scalar(name), 123)))'),
+        'return {"kind" => "node", "item" => $foo_hash{$key}, "list" => [$name, 123]}',
+        'general return(payload) lowers hash(...) constructor payloads with nested helper values'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(Top, $x)'),
@@ -2313,6 +2318,41 @@ subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' =>
         ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include ASSIGN after accumulator migration");
         ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include DECLARE after accumulator migration");
     }
+};
+subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 21;
+
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep terminal/token migration check');
+
+    for my $rule (qw(and_op or_op)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "tablegrep $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "tablegrep $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "tablegrep $rule exposes no raw-Perl fallback statements");
+        ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include RETURN after helper migration");
+        ok($meta->{language_agnostic_action_ir_ready}, "tablegrep $rule is language-agnostic action-IR ready");
+    }
+
+    my $re_term_meta = $descr->{spec}{re_term}{meta}{action_rewriter};
+    ok(ref($re_term_meta) eq 'HASH', 'tablegrep re_term exposes action_rewriter metadata');
+    is($re_term_meta->{raw_perl_dependency_count}, 0, 'tablegrep re_term no longer reports raw-Perl fallback dependency');
+    is_deeply($re_term_meta->{raw_perl_dependency_statements}, [], 'tablegrep re_term exposes no raw-Perl fallback statements');
+    is($re_term_meta->{unresolved_helper_count}, 0, 'tablegrep re_term avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$re_term_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$re_term_meta->{canonical_action_ir_nodes}}),
+        'tablegrep re_term canonical action-IR nodes include DECLARE/IF/REGEX_SUBST/RETURN after helper migration'
+    );
+    ok($re_term_meta->{language_agnostic_action_ir_ready}, 'tablegrep re_term is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'tablegrep descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'tablegrep no longer reports blocked rules after terminal/token migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'tablegrep exposes no prioritized blocked-rule list after terminal/token migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tablegrep exposes no top blocked rule after terminal/token migration');
 };
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
     plan tests => 8;

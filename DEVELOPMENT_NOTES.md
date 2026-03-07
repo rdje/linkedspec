@@ -61,6 +61,37 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against the remaining blocked `tablegrep` terminal/token rules:
+  - `and_op`
+  - `or_op`
+  - `re_term`
+- User design correction during the slice:
+  - raw Perl hash literals inside `return(payload)` are not backend-neutral enough for the target DSL shape,
+  - generalized `return(payload)` therefore needed native helper-based `hash(...)` constructor lowering before the `tablegrep` migration could be considered canonical.
+- Implementation scope:
+  - added `hash(...)` constructor lowering in `LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(...)`
+  - updated `tablegrep` returns to use canonical `return(hash(...))`
+  - rewrote `re_term` to helper flow using:
+    - `declare(scalar, field=..., sens=..., re=...)`
+    - `if(matches(...))`
+    - `substr(...)`
+    - `return(hash(...))`
+- Migration outcome:
+  - `tablegrep::and_op` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `tablegrep::or_op` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `tablegrep::re_term` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `tablegrep` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+- Regression additions:
+  - `tablegrep_terminal_token_helper_flow_eliminates_raw_fallback`
+  - extended `action_rewriter_lowers_general_return_payloads_with_nested_structures` with `return(hash(...))` lowering coverage
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=97`)
+- Updated blocker scan after this slice:
+  - `tablegrep` has no remaining blocked rules
+  - current top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the final remaining blocked `simenv.spec` rules:
   - `top`
   - `anyvariable`

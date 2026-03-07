@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Add `hash(...)` Return Payload Lowering and Clear `tablegrep` Blockers
+## Summary
+Advanced roadmap Item #3 by teaching generalized `return(payload)` lowering to handle helper-based `hash(...)` constructor payloads, then using that canonical form to migrate the remaining blocked `tablegrep` rules (`and_op`, `or_op`, `re_term`) off raw Perl fallback.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `specs/tablegrep.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added helper-based hash constructor lowering in generalized return payload flow:
+  - `return(hash("key", value, ...))` now lowers to a canonical structured hash payload instead of falling through as a raw helper expression
+  - helper hash keys are normalized as stable string expressions while nested helper values continue to lower recursively
+- Migrated remaining blocked `tablegrep` rules:
+  - `and_op`
+    - moved raw return payload to `I.return(hash("type", "AND_OP"))`
+  - `or_op`
+    - moved raw return payload to `I.return(hash("type", "OR_OP"))`
+  - `re_term`
+    - replaced raw capture/branch logic with helper flow using `declare`, `if(matches(...))`, `substr`, and `return(hash(...))`
+    - bracketed numeric fields now normalize through canonical regex substitution helper flow before returning `STERM`
+- Added/extended regression coverage:
+  - extended `action_rewriter_lowers_general_return_payloads_with_nested_structures` to lock `return(hash(...))` lowering
+  - added `tablegrep_terminal_token_helper_flow_eliminates_raw_fallback`
+  - verifies zero raw fallback and zero blocked-rule summary state for `tablegrep`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=97`)
 ## 2026-03-07 - Roadmap Slice: Clear Remaining `simenv` Action-Rewriter Blockers
 ## Summary
 Advanced roadmap Item #3 by migrating the last two blocked `simenv.spec` rules, `top` and `anyvariable`, to canonical helper flow so the `simenv` spec no longer reports any language-agnostic action-IR blocked rules.

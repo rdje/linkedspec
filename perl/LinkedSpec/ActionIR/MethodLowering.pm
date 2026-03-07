@@ -211,6 +211,22 @@ sub _lower_method_value_expr {
 
   return '[@'.$array_symbol.']';
  }
+ if ($trimmed =~ /^hash\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
+  my $payload = $+{PAREN};
+  $payload =~ s/^\(|\)$//go;
+  my $args = $split_top_level_csv->($payload);
+  return undef unless @$args % 2 == 0;
+  my @pairs;
+  for (my $i = 0; $i < @$args; $i += 2) {
+   my $key_expr = _normalize_method_tag_expr($args->[$i], $deps);
+   return undef unless defined($key_expr) && length($key_expr);
+   my $val_expr = _lower_method_value_expr($args->[$i + 1], $deps);
+   $val_expr = $trim_action_ir_value->($args->[$i + 1]) unless defined($val_expr) && length($val_expr);
+   return undef unless defined($val_expr) && length($val_expr);
+   push @pairs, $key_expr.' => '.$val_expr;
+  }
+  return '{'.join(', ', @pairs).'}';
+ }
  if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;

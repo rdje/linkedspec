@@ -311,7 +311,7 @@ This section summarizes the helper/method surface currently recognized by the ac
 
 ### 6) Return helpers
 - `return(payload)` (general payload form)
-  - supports nested `[]` / `{}` literals, quoted strings, numbers, and embedded `scalar(...)` / `array(...)` helper values
+  - supports nested `[]` / `{}` literals, quoted strings, numbers, and embedded `scalar(...)` / `array(...)` / `hash(...)` helper values
 - `return_a(label[, arg])`
 - `return_m(label)`
 - `return_ma(label)`
@@ -389,6 +389,8 @@ Supported payload categories:
   - `return(scalaref(myref, {A}[B]{C}[D]))`
 - Helper-based array construction
   - `return(array(scalar(name), 123, "x"))`
+- Helper-based hash construction
+  - `return(hash("kind", "node", "ok", 1))`
 - Helper-based array snapshots
   - `return(array_values(array(items)))`
 - Mixed nested payloads with embedded helpers
@@ -409,6 +411,8 @@ Lowering behavior examples:
   - lowers to: `return $name`
 - `return(array(scalar(name), 2))`
   - lowers to: `return [$name, 2]`
+- `return(hash("item", scalar(foo_hash, key), "list", array(scalar(name), 123)))`
+  - lowers to: `return {"item" => $foo_hash{$key}, "list" => [$name, 123]}`
 - `return(array_values(array(items)))`
   - lowers to: `return [@items]`
 - `return({name=>scalar(block_namei), content=>array_values(array(assigns))})`
