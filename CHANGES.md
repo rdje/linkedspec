@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate `simenv` Delimiter-Helper Diagnostics to Canonical `print(...)` Flow
+## Summary
+Advanced roadmap Item #3 by converting the raw diagnostic/debug print statements in a focused `simenv.spec` delimiter-helper family to canonical `print(...)` helper calls, removing raw Perl fallback from those rules without changing parser behavior.
+
+## Changed Files
+- Updated: `specs/simenv.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated raw print statements to canonical helper flow in:
+  - `bs_nl`
+  - `squotes`
+  - `perl_squotes`
+  - `multiline_value`
+  - `bvariable_substitution`
+  - `curlybrace`
+  - `parenthesis`
+- Where diagnostic output included captured text or computed line numbers, the helper form now uses ordinary print arguments such as:
+  - `print("<", substr(...), ">\n")`
+  - `print("...", (@startline + 1), "\n")`
+- Migration impact:
+  - all seven migrated rules now report `raw_perl_dependency_count=0`,
+  - all seven migrated rules now report `language_agnostic_action_ir_ready=1`.
+- Added focused regression coverage:
+  - `simenv_delimiter_helper_print_flow_eliminates_raw_fallback`
+  - locks zero raw fallback, canonical `PRINT` node presence, and readiness across the selected `simenv` rule family.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=94`)
 ## 2026-03-07 - Roadmap Slice: Migrate `BNF.spec` Debug Prints to Canonical `print(...)` Helper Flow
 ## Summary
 Advanced roadmap Item #3 by converting the raw debug-print statements in `specs/BNF.spec` to canonical `print(...)` helper calls, removing raw Perl fallback across the full BNF grammar while preserving existing behavior.

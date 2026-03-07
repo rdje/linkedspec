@@ -107,6 +107,20 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
+  - converted the raw diagnostic/debug print statements to canonical `print(...)` helper calls in `bs_nl`, `squotes`, `perl_squotes`, `multiline_value`, `bvariable_substitution`, `curlybrace`, and `parenthesis`,
+  - preserved existing parser behavior while removing raw-print fallback from that delimiter-helper family.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - `simenv_delimiter_helper_print_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `simenv` delimiter-helper slice:
+  - `perl -Iperl -c t/phase0_regression.t` => syntax OK
+  - `prove -Iperl t/phase0_regression.t` => PASS (94 tests)
+- Migration impact snapshot:
+  - all seven migrated `simenv` rules now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `simenv::bvariable_substitution` and `simenv::parenthesis` are no longer part of the blocked-rule set.
+- Updated blocker ranking snapshot after the slice:
+  - current top blockers include `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
+  - remaining `simenv` blockers are now concentrated in `command_substitution`, `dquotes`, `perl_command_substitution`, and `perl_dquotes`.
 - Implemented Backbone item #3 roadmap slice in `specs/BNF.spec`:
   - converted the raw debug-print statements across the BNF grammar to canonical `print(...)` helper calls,
   - used `scalar(IMATCH)` inside helper print payloads where the message depends on the current match value.

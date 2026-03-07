@@ -52,16 +52,16 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
       
 anyvariable: /\S+\s*(?==)/ I {$IMATCH =~ /(\S+)/; print "anyvariable: VARIABLE NAME ($1)\n"; return {type=>'anyvariable', content=>$1}}
 
-multiline_value: /=\s*\{/    /\}/ I {print "multiline_value: START\n"}
+multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
  -> curlybrace
  -> multiline_value[1]	     {
-	                      print "multiline_value: CLOSING curly brace\n"; 
-			      print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; 
+	                      print("multiline_value: CLOSING curly brace\n"); 
+			      print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
 			      return {type=>'multiline_value', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 		             }
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g; 
-     print "(simenv) -E- Closing parenthesis not found for *multiline_value* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing parenthesis not found for *multiline_value* starting on line ", (@startline +1), "\n"); 
      exit}
 
 
@@ -86,16 +86,16 @@ singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {my $last_pos=$IPOS; my @
      exit}
 
 
-bs_nl: /\\\n\s*/                            I {print "bs_nl: SEEN\n"; return "**BS_NL**"}
-squotes: /'/ /(?<!\\)'/                     I {print "squotes: START\n"}
+bs_nl: /\\\n\s*/                            I {print("bs_nl: SEEN\n"); return "**BS_NL**"}
+squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
  -> squotes[1]                                {
-	                                       print "squotes: END\n";  
-					       print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; 
+	                                       print("squotes: END\n");  
+					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
 					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- Closing tick not found for *$squotes* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", (@startline +1), "\n"); 
      exit}
 
 dquotes: /"/ /(?<!\\)"/                     I {print "dquotes: START\n"; my @matches; my $last_pos=$IPOS}
@@ -111,16 +111,16 @@ dquotes: /"/ /(?<!\\)"/                     I {print "dquotes: START\n"; my @mat
      exit}
 
 
-perl_squotes: /q\(/  /\)/                   I {print "perl_squotes: START\n"}
+perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
  -> parenthesis
  -> perl_squotes[1]                           {
-	                                       print "perl_squotes: END\n"; 
-					       print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; 
+	                                       print("perl_squotes: END\n"); 
+					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
 					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", (@startline +1), "\n"); 
      exit}
 
 perl_dquotes: /qq\(/  /\)/                  I {print "perl_dquotes: START\n"; my @matches; my $last_pos=$IPOS}
@@ -165,16 +165,16 @@ perl_command_substitution: /qx\(/  /\)/     I {print "perl_command_substitution:
      exit}
  
 
-bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print "bvariable_substitution: START\n"}
+bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: START\n")}
  -> curlybrace
  -> bvariable_substitution[1]                 {
-	                                       print "bvariable_substitution: END\n"; 
-					       print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; 
+	                                       print("bvariable_substitution: END\n"); 
+					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
 					       return {type=>'bvariable_substitution', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- Closing Curly Brace not found for *bvariable_substitution* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing Curly Brace not found for *bvariable_substitution* starting on line ", (@startline +1), "\n"); 
      exit}
  
 
@@ -184,21 +184,21 @@ variable_substitution: /(?<!\\)\$\w+/       I {
 					       return {type=>'variable_substitution', content=>$1}
 				              }
 
-curlybrace: /\{/   /\}/                     I {print "curlybrace: OPENING Brace\n"}
+curlybrace: /\{/   /\}/                     I {print("curlybrace: OPENING Brace\n")}
  -> curlybrace
- -> curlybrace[1]                             {print "curlybrace: CLOSING Brace\n";  print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; return}
+ -> curlybrace[1]                             {print("curlybrace: CLOSING Brace\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- Closing Curly Brace not found for *curlybrace* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing Curly Brace not found for *curlybrace* starting on line ", (@startline +1), "\n"); 
      exit}
 
 
-parenthesis: /\(/   /\)/                    I {print "parenthesis: OPENING Parenthesis\n"}
+parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Parenthesis\n")}
  -> parenthesis
- -> parenthesis[1]                            {print "parenthesis: CLOSING Parenthesis\n";  print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n"; return}
+ -> parenthesis[1]                            {print("parenthesis: CLOSING Parenthesis\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
 
  LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print "(simenv) -E- Closing Parenthesis not found for *parenthesis* starting on line ".(@startline +1)."\n"; 
+     print("(simenv) -E- Closing Parenthesis not found for *parenthesis* starting on line ", (@startline +1), "\n"); 
      exit}
 
 

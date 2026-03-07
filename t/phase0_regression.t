@@ -2403,6 +2403,21 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "BNF $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
+    plan tests => 36;
+
+    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv delimiter-helper migration check');
+
+    for my $rule (qw(bs_nl squotes perl_squotes multiline_value bvariable_substitution curlybrace parenthesis)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "simenv $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "simenv $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "simenv $rule exposes no raw-Perl fallback statements");
+        ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "simenv $rule canonical action-IR nodes include PRINT after delimiter-helper migration");
+        ok($meta->{language_agnostic_action_ir_ready}, "simenv $rule is language-agnostic action-IR ready");
+    }
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
