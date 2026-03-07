@@ -38,6 +38,7 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `714abf7` - Backbone #3: clear remaining small Lispish blockers
 - `a04282d` - Backbone #3: clear remaining small vhdl blockers
 - `6ff211b` - Backbone #3: migrate ebnf grammar_file helper flow
 - `a79dc72` - Backbone #3: add flat list helpers and clear VHDL declarations
@@ -114,11 +115,11 @@ When resuming after interruption:
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
   - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`, blocker-type breakdown fields/lists, and blocker-type ratio fields) to track migration progress and select next highest-value blocked rules,
-  - current top blocked rules after the small `Lispish` cleanup are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `vhdl::process_statement` (`raw=4`),
+  - current top blocked rules after the `vhdl::process_statement` cleanup are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), and `vhdl::subprogram_body` (`raw=5`),
   - `ebnf` no longer contributes blocked rules in descriptor migration metadata,
   - within `Lispish`, the only remaining blocked rule is now `parenthesis`,
-  - within `vhdl`, `package_declaration`, `package_body`, `subprogram_declaration`, `type_declaration`, `signal_declaration`, `configuration_specification`, and `vhdl_file` are now clear; the remaining blocked rules are only `subprogram_body` and `process_statement`,
-  - prefer the next contained slice from `ds_vhistory::vhistory` or one of the two remaining larger `vhdl` rules before attempting the larger stateful `Lispish::parenthesis` migration,
+  - within `vhdl`, `package_declaration`, `package_body`, `subprogram_declaration`, `type_declaration`, `signal_declaration`, `configuration_specification`, `vhdl_file`, and `process_statement` are now clear; the only remaining blocked rule is `subprogram_body`,
+  - prefer the next contained slice from `ds_vhistory::vhistory` or the last remaining `vhdl::subprogram_body` blocker before attempting the larger stateful `Lispish::parenthesis` migration,
   - flat list insertion helpers are now available for future migrations:
     - `flat(array(name))` / `flatten(array(name))`
     - `flat(hash(name))` / `flatten(hash(name))`
@@ -133,6 +134,23 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
+  - migrated `process_statement` to helper flow with `declare(scalar, pos_begin, process_statement_part)`, saved-position assignment, helper-based substring capture, and generalized `return(array(...))`,
+  - removed the leftover commented raw debug-print statements from the `process_statement` action blocks.
+- Added focused regression coverage in `t/phase0_regression.t`:
+  - `vhdl_process_statement_helper_flow_eliminates_raw_fallback`,
+  - and refreshed the older `vhdl_declaration_helper_flow_eliminates_raw_fallback` and `vhdl_small_blocker_helper_flow_eliminates_raw_fallback` snapshot expectations to the current post-migration state.
+- Re-ran validation after the `process_statement` slice:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (103 tests)
+- Migration impact snapshot:
+  - `vhdl::process_statement` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `vhdl::process_statement` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, and `RETURN`,
+  - `vhdl` now reports `language_agnostic_blocked_rule_count=1`.
+- Updated blocker ranking snapshot after the slice:
+  - the only remaining `vhdl` blocked rule is `subprogram_body` (`raw=5`),
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), and `vhdl::subprogram_body` (`raw=5`).
 - Implemented Backbone item #3 roadmap slice in `specs/Lispish.spec`:
   - migrated the top-level `Lispish` syntax-error branch to canonical `say(...)` call syntax while preserving `exit 1`,
   - migrated `sbrackets`, `dquotes`, `squotes`, `spaces`, `others`, and `comments` to canonical `return(hash(...))` payload flow,

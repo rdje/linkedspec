@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate `vhdl::process_statement` to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by migrating `vhdl::process_statement` off raw Perl fallback using the existing helper surface, reducing the `vhdl` blocked-rule set from two rules to only `subprogram_body`.
+
+## Changed Files
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Cleared `vhdl::process_statement` without adding new helper surface:
+  - replaced raw declaration block `my $pos_begin` with canonical declaration flow:
+    - `declare(scalar, pos_begin, process_statement_part)`
+  - replaced raw position capture `$pos_begin = pos $$STRING` with:
+    - `assign(scalar(pos_begin), pos $$STRING)`
+  - replaced raw substring/return logic with:
+    - `assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH))`
+    - `return(array("?process_statement:", flat_array(IMATCH_LIST), array_values(array(process_statement)), scalar(process_statement_part)))`
+- Removed the leftover commented raw debug-print statements from the action blocks so the rule no longer contributes raw fallback metadata.
+- Added focused regression coverage:
+  - `vhdl_process_statement_helper_flow_eliminates_raw_fallback`
+- Refreshed older VHDL snapshot tests:
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback` now expects the later `process_statement` cleanup state
+  - `vhdl_small_blocker_helper_flow_eliminates_raw_fallback` now reflects that only `subprogram_body` remains blocked
+- Post-migration metadata snapshot:
+  - `vhdl::process_statement`: `raw_perl_dependency_count` `4 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::process_statement` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `RETURN`, plus existing `CALL`/`PUSH`
+  - `vhdl` descriptor migration summary: `language_agnostic_blocked_rule_count` `2 -> 1`, with blocked-rule priority list now reduced to `['subprogram_body']`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=103`)
 ## 2026-03-07 - Roadmap Slice: Clear the Remaining Small Lispish Blockers
 ## Summary
 Advanced roadmap Item #3 by migrating the remaining small `Lispish` blockers — `Lispish`, `sbrackets`, `dquotes`, `squotes`, `curlyb`, `spaces`, `others`, and `comments` — off raw Perl fallback using the existing helper surface, reducing the `Lispish` blocked-rule set from nine rules to only `parenthesis`.

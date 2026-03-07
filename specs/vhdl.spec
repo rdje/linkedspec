@@ -114,11 +114,7 @@ port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
 # by a port_map_aspect. I know it is not ** elegant ** but...
 association_element: /(?is)(\w+)\s*=>\s*(.+?)(?=\s*(?:,|\)\s*(?:;|port\b)))/  I.return_m
 
-process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\bend(?:\s+postponed)?\s+process\b.*?;/  I {
-	#print "\nSTART process_statement <@IMATCH_LIST>\n";
-	my $pos_begin
-}
-
+process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\bend(?:\s+postponed)?\s+process\b.*?;/  I {declare(scalar, pos_begin, process_statement_part)}
 -> comment                              .push
 -> dquote_string                        .push
 -> subprogram_body                      .push
@@ -137,16 +133,11 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 -> if_endif 
 -> case_endcase 
 -> loop_endloop
--> process_statement[1]                 {
-       #print "\nBEGIN process_statement <@IMATCH_LIST>\n";
-	$pos_begin = pos $$STRING
-}
+-> process_statement[1]                 {assign(scalar(pos_begin), pos $$STRING)}
 
 -> process_statement[2]                 {
-   my $process_statement_part = substr $$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH;
-  #print "\nEND process_statement <@IMATCH_LIST>\n";
-
-   return ['?process_statement:', @IMATCH_LIST, \@process_statement, $process_statement_part];
+   assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
+   return(array("?process_statement:", flat_array(IMATCH_LIST), array_values(array(process_statement)), scalar(process_statement_part)))
 }
 
 

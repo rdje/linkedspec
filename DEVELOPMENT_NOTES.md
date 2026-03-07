@@ -61,6 +61,36 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against `vhdl::process_statement`.
+- Slice-selection rationale:
+  - `process_statement` still needed only saved-position tracking, substring capture, and structured return cleanup,
+  - `subprogram_body` still wants the extra split/tokenization pipeline over the captured text,
+  - `ds_vhistory::vhistory` still wants arrayref-target mutation such as `push @$cur_object, ...`,
+  - `process_statement` was therefore the smallest remaining high-priority blocker slice.
+- Migration scope:
+  - no new helper surface was added,
+  - the raw declaration block was replaced with `declare(scalar, pos_begin, process_statement_part)`,
+  - saved-position tracking now uses `assign(scalar(pos_begin), pos $$STRING)`,
+  - final substring capture and return now use helper flow:
+    - `assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH))`
+    - `return(array("?process_statement:", flat_array(IMATCH_LIST), array_values(array(process_statement)), scalar(process_statement_part)))`
+  - leftover commented raw debug-print statements were removed from the action blocks so they no longer count as raw fallback.
+- Migration outcome:
+  - `vhdl::process_statement` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `vhdl::process_statement` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, and `RETURN` in addition to existing `CALL`/`PUSH`
+  - `vhdl` descriptor migration summary now reports `language_agnostic_blocked_rule_count=1`, with only `subprogram_body` still blocked
+- Regression additions/updates:
+  - added `vhdl_process_statement_helper_flow_eliminates_raw_fallback`
+  - refreshed `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+  - refreshed `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=103`)
+- Updated blocker scan after this slice:
+  - the only remaining `vhdl` blocked rule is `subprogram_body` (`raw=5`)
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), and `vhdl::subprogram_body` (`raw=5`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the remaining small `Lispish` blockers:
   - `Lispish`
   - `comments`
