@@ -107,6 +107,23 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/simenv.spec`:
+  - migrated the last two blocked `simenv` rules, `top` and `anyvariable`, to canonical helper flow,
+  - replaced the remaining raw block push guard in `top` with fluent helper control flow,
+  - replaced raw variable-name extraction and print logic in `anyvariable` with `declare`, `substr`, `print`, and generalized `return(...)`.
+- Added focused regression lock in `t/phase0_regression.t`:
+  - `simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the final `simenv` cleanup slice:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (96 tests)
+- Migration impact snapshot:
+  - `simenv::top` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `simenv::anyvariable` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `simenv` now reports `language_agnostic_blocked_rule_count=0`.
+- Updated blocker ranking snapshot after the slice:
+  - `simenv` no longer contributes blocked rules,
+  - current top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 - Added a docs-only roadmap backlog note:
   - future naming cleanup should rename backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))`,
   - no implementation change was made yet; current helper behavior and existing specs remain unchanged for now.

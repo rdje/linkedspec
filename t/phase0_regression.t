@@ -2433,6 +2433,46 @@ subtest 'simenv_quote_substitution_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "simenv $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 17;
+
+    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv top/anyvariable migration check');
+
+    my $top_meta = $descr->{spec}{top}{meta}{action_rewriter};
+    ok(ref($top_meta) eq 'HASH', 'simenv top exposes action_rewriter metadata');
+    is($top_meta->{raw_perl_dependency_count}, 0, 'simenv top no longer reports raw-Perl fallback dependency');
+    is_deeply($top_meta->{raw_perl_dependency_statements}, [], 'simenv top exposes no raw-Perl fallback statements');
+    is($top_meta->{unresolved_helper_count}, 0, 'simenv top avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
+        'simenv top canonical action-IR nodes include DECLARE/IF/PUSH/RETURN after helper migration'
+    );
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'simenv top is language-agnostic action-IR ready');
+
+    my $any_meta = $descr->{spec}{anyvariable}{meta}{action_rewriter};
+    ok(ref($any_meta) eq 'HASH', 'simenv anyvariable exposes action_rewriter metadata');
+    is($any_meta->{raw_perl_dependency_count}, 0, 'simenv anyvariable no longer reports raw-Perl fallback dependency');
+    is_deeply($any_meta->{raw_perl_dependency_statements}, [], 'simenv anyvariable exposes no raw-Perl fallback statements');
+    is($any_meta->{unresolved_helper_count}, 0, 'simenv anyvariable avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$any_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$any_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PRINT' } @{$any_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$any_meta->{canonical_action_ir_nodes}}),
+        'simenv anyvariable canonical action-IR nodes include DECLARE/REGEX_SUBST/PRINT/RETURN after helper migration'
+    );
+    ok($any_meta->{language_agnostic_action_ir_ready}, 'simenv anyvariable is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'simenv descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'simenv no longer reports blocked rules after top/anyvariable migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'simenv exposes no prioritized blocked-rule list after top/anyvariable migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'simenv exposes no top blocked rule after top/anyvariable migration');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

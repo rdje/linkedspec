@@ -61,6 +61,35 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against the final remaining blocked `simenv.spec` rules:
+  - `top`
+  - `anyvariable`
+- Migration scope:
+  - `top` now uses helper flow for block collection and return behavior:
+    - `declare(array, blocks)`
+    - `if(scalar(retv))`
+    - `push_value(array(blocks), scalar(retv))`
+    - `return(array_values(array(blocks)))` / `return_undef()`
+  - `anyvariable` now uses helper flow for variable-name normalization and structured return:
+    - `declare(scalar, variable_name=scalar(IMATCH))`
+    - `substr(...)` to trim trailing whitespace before `=`
+    - `print(...)`
+    - generalized `return({...})`
+- Migration outcome:
+  - `simenv::top` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `simenv::anyvariable` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `simenv` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+- Regression addition:
+  - `simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback`
+  - verifies zero raw fallback, canonical node coverage, and zero blocked-rule summary state for `simenv`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=96`)
+- Updated blocker scan after this slice:
+  - `simenv` has no remaining blocked rules
+  - current top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`)
+## Session Notes (2026-03-07)
 - Clarified the semantic distinction between:
   - `array(...)` as constructor/container surface
   - `array_values(array(...))` as array snapshot/materialization surface

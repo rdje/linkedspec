@@ -1,12 +1,20 @@
-top::            I {my @blocks}
+top::            I {declare(array, blocks)}
 
  -> comments
  -> begin_end_blocks          {
 	                       my $retv = call(begin_end_blocks);
-	                       push @blocks, $retv if $retv
+	                       if(scalar(retv));
+	                         push_value(array(blocks), scalar(retv));
+	                       endif()
 		              }
 
- LX {return @blocks ? \@blocks : undef}
+LX {
+     if(is_nonempty(array(blocks)));
+       return(array_values(array(blocks)));
+     else();
+       return_undef();
+     endif()
+   }
 
 
 begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=scalar(IMATCH), retv); declare(array, assigns, keyval_pairs); substr(scalar(block_namei), /^.*\s+/, "", o); print("begin_end_blocks: BEGIN   (", scalar(IMATCH), "\n")}
@@ -50,7 +58,12 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
      exit}
 
       
-anyvariable: /\S+\s*(?==)/ I {$IMATCH =~ /(\S+)/; print "anyvariable: VARIABLE NAME ($1)\n"; return {type=>'anyvariable', content=>$1}}
+anyvariable: /\S+\s*(?==)/ I {
+	                                       declare(scalar, variable_name=scalar(IMATCH));
+	                                       substr(scalar(variable_name), /\s+$/, "", o);
+	                                       print("anyvariable: VARIABLE NAME (", scalar(variable_name), ")\n");
+	                                       return({type=>'anyvariable', content=>scalar(variable_name)})
+			                      }
 
 multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
  -> curlybrace

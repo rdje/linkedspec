@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Clear Remaining `simenv` Action-Rewriter Blockers
+## Summary
+Advanced roadmap Item #3 by migrating the last two blocked `simenv.spec` rules, `top` and `anyvariable`, to canonical helper flow so the `simenv` spec no longer reports any language-agnostic action-IR blocked rules.
+
+## Changed Files
+- Updated: `specs/simenv.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated `simenv::top`:
+  - replaced raw `my @blocks` initialization with `declare(array, blocks)`
+  - replaced `push @blocks, $retv if $retv` with fluent helper control flow using `if(...)`, `push_value(...)`, and `endif()`
+  - replaced bare Perl `return @blocks ? \@blocks : undef` with helper return flow using `if(...)`, `return(array_values(array(blocks)))`, and `return_undef()`
+- Migrated `simenv::anyvariable`:
+  - replaced raw regex capture extraction `$IMATCH =~ /(\S+)/` with helper flow using `declare(scalar, variable_name=scalar(IMATCH))`
+  - trimmed trailing spaces through `substr(...)`
+  - converted diagnostic output to canonical `print(...)`
+  - returned the structured payload through generalized `return({...})`
+- Added focused regression coverage:
+  - `simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback`
+  - locks zero raw fallback and readiness for `top` and `anyvariable`, and verifies `simenv` now reports zero blocked rules in descriptor migration metadata
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=96`)
 ## 2026-03-07 - Roadmap Note: Queue `array_values(...)` Naming Cleanup
 ## Summary
 Recorded a deferred roadmap task to rename the backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))` later, without changing current runtime behavior or helper semantics in this slice.
