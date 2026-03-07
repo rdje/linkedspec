@@ -2,35 +2,31 @@
 # This spec will parse EBNF-style grammar definitions
 
 grammar_file:: I {
-  my @rules;
-  my @rule;
-  my $rule;
-  my @includes;
-  my @semantic_annotations;
-  my $on;
+  declare(array, rules, rule, includes, semantic_annotations);
+  declare(scalar, rule, on)
 }
 
 LX {
-  if ($rule) {
-    push @rules, [$rule, @rule];
-  }
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
+  endif();
 
-  return [@includes, @rules]
+  return(array(flat_array(includes), flat_array(rules)))
 }
 
 -> include_dir.push(includes)
 -> include_file.push(includes)
 
 -> grammar_rule   {
-  if ($rule) {
-    push @rules, [$rule, @rule];
-  }
+  if(scalar(rule));
+    push_value(array(rules), array(scalar(rule), flat_array(rule)));
+  endif();
 
-  @rule=(@semantic_annotations);
-  @semantic_annotations=();
+  assign(array(rule), array(flat_array(semantic_annotations)));
+  assign(array(semantic_annotations), array());
 
   $rule = call(grammar_rule);
-  $on=1
+  assign(scalar(on), 1)
 }
 
 -> rule_name

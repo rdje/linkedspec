@@ -1,5 +1,53 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate `ebnf::grammar_file` to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by migrating the remaining blocked `ebnf::grammar_file` accumulator/finalization path off raw Perl fallback using the existing helper surface, clearing the last `ebnf` blocked rule without adding new lowering contracts.
+
+## Changed Files
+- Updated: `specs/ebnf.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated `ebnf::grammar_file` initialization/finalization state to canonical helper flow:
+  - replaced raw declarations with:
+    - `declare(array, rules, rule, includes, semantic_annotations)`
+    - `declare(scalar, rule, on)`
+  - replaced both raw pending-rule flush sites with:
+    - `if(scalar(rule))`
+    - `push_value(array(rules), array(scalar(rule), flat_array(rule)))`
+    - `endif()`
+  - replaced raw final return `[@includes, @rules]` with:
+    - `return(array(flat_array(includes), flat_array(rules)))`
+- Migrated the `-> grammar_rule` state handoff:
+  - copied staged semantic annotations into the next rule accumulator with:
+    - `assign(array(rule), array(flat_array(semantic_annotations)))`
+    - `assign(array(semantic_annotations), array())`
+  - retained canonical call-wrapper assignment for rule binding:
+    - `$rule = call(grammar_rule)`
+    - `assign(scalar(on), 1)`
+- Important DSL usage note captured during the slice:
+  - `array_values(array(...))` remains the array-snapshot helper,
+  - list-context array copying into an `assign(array(...), ...)` target should use `array(flat_array(source))`.
+- Added focused regression coverage:
+  - `ebnf_grammar_file_helper_flow_eliminates_raw_fallback`
+- Post-migration metadata snapshot:
+  - `ebnf::grammar_file`: `raw_perl_dependency_count` `4 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `ebnf` descriptor migration summary: `language_agnostic_blocked_rule_count` `1 -> 0`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=100`)
 ## 2026-03-07 - Roadmap Slice: Add Flat List Helpers and Clear VHDL Declaration Blockers
 ## Summary
 Advanced roadmap Item #3 by adding backend-neutral flat list insertion helpers for array/hash content and then using that new helper surface to migrate `vhdl::subprogram_declaration` and `vhdl::type_declaration` off raw Perl fallback.

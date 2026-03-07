@@ -38,6 +38,18 @@ These files are live and must be amended before any commit:
 - `MEMORY.md`
 
 ## Recent Commit Ledger (Newest First)
+- `a79dc72` - Backbone #3: add flat list helpers and clear VHDL declarations
+- `1757b21` - Backbone #3: migrate VHDL package helper flow
+- `193b42f` - Backbone #3: clear final signal_decl_range blocker
+- `b17a173` - Backbone #3: add hash payload lowering and clear tablegrep blockers
+- `1495f86` - Backbone #3: clear remaining simenv blockers
+- `933e22a` - Roadmap: queue array_values naming cleanup
+- `1eda69a` - Backbone #3: migrate simenv quote substitution helpers
+- `f5fe9d9` - Backbone #3: migrate simenv delimiter helper prints
+- `12dc155` - Backbone #3: migrate BNF debug prints to print helper flow
+- `6f0eb1a` - Backbone #3: migrate ifelse debug prints to print helper flow
+- `a240bca` - Backbone #3: add array_values helper and migrate simenv begin_end_blocks
+- `858e586` - feat(spec): migrate vhdl signal_decl_range with join_values method flow
 - `2b1101b` - Backbone #3: fluent control-flow method DSL + pipe_operator showcase
 - `2984fb5` - Backbone #3: composable array-method lowering + snippet codegen inspector
 - `677677d` - Backbone item #3 follow-up: add typed declare methods and method chains
@@ -100,12 +112,17 @@ When resuming after interruption:
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
   - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`, blocker-type breakdown fields/lists, and blocker-type ratio fields) to track migration progress and select next highest-value blocked rules,
-  - current top blocked rules after the flat-list/VHDL-declarations slice are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
+  - current top blocked rules after the `ebnf::grammar_file` slice are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `vhdl::process_statement` (`raw=4`),
+  - `ebnf` no longer contributes blocked rules in descriptor migration metadata,
   - within `vhdl`, `package_declaration`, `package_body`, `subprogram_declaration`, and `type_declaration` are now clear; the remaining blocked rules are `subprogram_body`, `process_statement`, `configuration_specification`, `signal_declaration`, and `vhdl_file`,
+  - prefer the next contained slice from `ds_vhistory::vhistory` or the remaining `vhdl` rules before attempting the larger stateful `Lispish::parenthesis` migration,
   - flat list insertion helpers are now available for future migrations:
     - `flat(array(name))` / `flatten(array(name))`
     - `flat(hash(name))` / `flatten(hash(name))`
     - `flat_array(name)` / `flat_hash(name)`
+  - remember the current DSL distinction:
+    - `array_values(array(name))` => array snapshot payload,
+    - `array(flat_array(name))` => list-context insertion/copy inside array constructors,
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
@@ -113,6 +130,29 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 roadmap slice in `specs/ebnf.spec`:
+  - migrated `grammar_file` initialization, pending-rule flush, semantic-annotation handoff, and final return path to canonical helper flow,
+  - replaced raw declarations with `declare(array, ...)` / `declare(scalar, ...)`,
+  - replaced raw list assembly with `if(...)`, `push_value(...)`, `assign(array(...), array(flat_array(...)))`, and `return(array(flat_array(...), ...))`.
+- Important DSL note from the slice:
+  - `array_values(array(name))` remains the snapshot helper,
+  - list-context copy into an array-target assignment now has an explicit canonical shape: `assign(array(target), array(flat_array(source)))`.
+- Reused existing call-wrapper lowering rather than adding new helper surface:
+  - `grammar_file` still binds the active rule via `$rule = call(grammar_rule)`,
+  - this is already covered by canonical CALL contracts and kept the slice contained.
+- Added focused regression coverage in `t/phase0_regression.t`:
+  - `ebnf_grammar_file_helper_flow_eliminates_raw_fallback`.
+- Re-ran validation after the `ebnf` slice:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (100 tests)
+- Migration impact snapshot:
+  - `ebnf::grammar_file` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `ebnf` now reports `language_agnostic_blocked_rule_count=0`.
+- Updated blocker ranking snapshot after the slice:
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `vhdl::process_statement` (`raw=4`),
+  - remaining `vhdl` blocked rules are `subprogram_body`, `process_statement`, `configuration_specification`, `signal_declaration`, and `vhdl_file`,
+  - `ebnf` no longer appears in the blocked-rule priority list.
 - Implemented Backbone item #3 helper-surface follow-up in `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm`, and `perl/LinkedSpec/BootstrapSpec/Core.pm`:
   - added first-class flat list insertion helpers for backend-neutral list-context expansion,
   - generic forms: `flat(array(name))`, `flatten(array(name))`, `flat(hash(name))`, `flatten(hash(name))`,

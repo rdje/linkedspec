@@ -61,6 +61,32 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against `ebnf::grammar_file`.
+- Migration scope:
+  - no new helper surface was added; the rule now uses existing `declare`, `assign`, `if/endif`, `push_value`, `flat_array`, and generalized `return(array(...))` lowering paths,
+  - pending-rule flush now uses canonical helper flow in both the lifecycle exit and `grammar_rule` rollover path,
+  - semantic-annotation handoff now uses `assign(array(rule), array(flat_array(semantic_annotations)))` and `assign(array(semantic_annotations), array())`.
+- Important DSL usage note:
+  - `array_values(array(name))` should remain the array-snapshot helper for arrayref-style payloads,
+  - when the intent is list-context insertion into an `array(...)` constructor for an array-target assignment, the canonical form is `array(flat_array(name))`.
+- Compatibility decision retained:
+  - the rule-binding step continues to use canonical call-wrapper assignment `$rule = call(grammar_rule)`,
+  - this already lowers through explicit CALL contracts and did not justify a new helper surface just for this contained slice.
+- Migration outcome:
+  - `ebnf::grammar_file` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `ebnf` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+- Regression addition:
+  - `ebnf_grammar_file_helper_flow_eliminates_raw_fallback`
+  - the lock verifies zero raw fallback, zero blocker statements, canonical node coverage, readiness, and zero blocked-rule summary state for `ebnf`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=100`)
+- Updated blocker scan after this slice:
+  - `ebnf` has no remaining blocked rules
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `vhdl::process_statement` (`raw=4`)
+  - remaining `vhdl` blocked rules are `subprogram_body`, `process_statement`, `configuration_specification`, `signal_declaration`, and `vhdl_file`
+## Session Notes (2026-03-07)
 - User design correction for helper surface:
   - explicit per-index expansion like `scalar(IMATCH_LIST, 0), scalar(IMATCH_LIST, 1), ...` is not an acceptable long-term DSL pattern for list-context insertion,
   - instead the DSL now needs a first-class flatten surface for array/hash contents.
