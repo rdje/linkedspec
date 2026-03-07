@@ -2343,6 +2343,41 @@ subtest 'ebnf_grammar_file_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ebnf exposes no prioritized blocked-rule list after grammar_file migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after grammar_file migration');
 };
+subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 13;
+
+    my $descr = LinkedSpec::get_parser('ds_vhistory', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ds_vhistory vhistory migration check');
+
+    my $meta = $descr->{spec}{vhistory}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'ds_vhistory vhistory exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'ds_vhistory vhistory no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'ds_vhistory vhistory exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'ds_vhistory vhistory avoids unresolved-helper hits');
+    is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'ds_vhistory vhistory exposes no language-agnostic blocker statements');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'ds_vhistory vhistory canonical action-IR nodes include DECLARE/ASSIGN/IF/ELSE/ENDIF/PUSH/RETURN after helper migration'
+    );
+    ok(
+        scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}),
+        'ds_vhistory vhistory canonical action-IR nodes include CALL and PRINT after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'ds_vhistory vhistory is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'ds_vhistory descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'ds_vhistory no longer reports blocked rules after vhistory migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ds_vhistory exposes no prioritized blocked-rule list after vhistory migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
+};
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 9;
 

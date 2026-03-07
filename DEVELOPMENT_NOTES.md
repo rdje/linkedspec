@@ -61,6 +61,32 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against `ds_vhistory::vhistory`.
+- Slice-selection rationale:
+  - `vhistory` became tractable once the rule was reframed to build finalized `"?object:"` payloads directly instead of mutating `@$cur_object` in place,
+  - this avoided the earlier arrayref-target mutation blocker without introducing new helper surface,
+  - `vhdl::subprogram_body` still wants additional split/tokenization cleanup, and `Lispish::parenthesis` remains the larger stateful migration.
+- Migration scope:
+  - no new helper surface was added,
+  - the rule now uses helper declarations for all working state arrays/scalars,
+  - capture flush and entry-tag selection now use `scalaref(...)`, `eq(...)`, `if/else/endif`, and `push_value(...)`,
+  - finalized object rows are now rebuilt as `array("?object:", scalar(current_object_name), array_values(array(object_hier)))` before being pushed into `vhistory`,
+  - the debug print now uses canonical `print(...)` helper flow.
+- Migration outcome:
+  - `ds_vhistory::vhistory` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `ds_vhistory::vhistory` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `IF`, `ELSE`, `ENDIF`, `PUSH`, `RETURN`, `CALL`, and `PRINT`
+  - `ds_vhistory` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+- Regression addition:
+  - `ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback`
+  - the lock verifies zero raw fallback, zero unresolved helpers, canonical node coverage, readiness, and zero blocked-rule summary state for `ds_vhistory`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=104`)
+- Updated blocker scan after this slice:
+  - `ds_vhistory` no longer has blocked rules
+  - current top blockers are `Lispish::parenthesis` (`raw=6`) and `vhdl::subprogram_body` (`raw=5`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against `vhdl::process_statement`.
 - Slice-selection rationale:
   - `process_statement` still needed only saved-position tracking, substring capture, and structured return cleanup,

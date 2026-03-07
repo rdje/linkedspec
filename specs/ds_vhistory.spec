@@ -4,43 +4,64 @@
 #  dssc vhistory -all -report verbose
 # --------------------------------------------
 
-vhistory::  I {my (@vhistory, @capt, @object_hier, $cur_object)}
+vhistory::  I {
+declare(array, vhistory, capt, object_hier);
+declare(scalar, cur_object, first_capt, entry_tag, current_object_name)
+}
 LX  {
- if (@capt) {
-   push @object_hier, [$capt[0][0] eq '?branch:' ? '?branch_entry:' : '?version_entry:', [@capt]];
- }
+ if(is_nonempty(array(capt)));
+  assign(scalar(first_capt), scalar(array(capt), 0));
+  if(eq(scalaref(first_capt, [0]), "?branch:"));
+   assign(scalar(entry_tag), "?branch_entry:");
+  else();
+   assign(scalar(entry_tag), "?version_entry:");
+  endif();
+  push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
+ endif();
 
- if (@object_hier) {
-  push @$cur_object, [@object_hier];
-  push @vhistory,    $cur_object;
- }
+ if(is_nonempty(array(object_hier)));
+  assign(scalar(current_object_name), scalaref(cur_object, [1]));
+  push_value(array(vhistory), array("?object:", scalar(current_object_name), array_values(array(object_hier))));
+ endif();
 
- return ['?ds_vhistory:', \@vhistory]
+ return(array("?ds_vhistory:", array_values(array(vhistory))))
 } 
 
 -> object             {
-  if (@capt) {
-    push @object_hier, [$capt[0][0] eq '?branch:' ? '?branch_entry:' : '?version_entry:', [@capt]];
-    @capt = ();
-  }
+  if(is_nonempty(array(capt)));
+   assign(scalar(first_capt), scalar(array(capt), 0));
+   if(eq(scalaref(first_capt, [0]), "?branch:"));
+    assign(scalar(entry_tag), "?branch_entry:");
+   else();
+    assign(scalar(entry_tag), "?version_entry:");
+   endif();
+   push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
+   assign(array(capt), array());
 
-  if (@object_hier) {
-   push @$cur_object, [@object_hier];
-   push @vhistory,    $cur_object;
+  endif();
 
-   @object_hier = ();
-  }
+  if(is_nonempty(array(object_hier)));
+   assign(scalar(current_object_name), scalaref(cur_object, [1]));
+   push_value(array(vhistory), array("?object:", scalar(current_object_name), array_values(array(object_hier))));
+   assign(array(object_hier), array());
+  endif();
 
   $cur_object  = call(object);
-  print "\tObject   $cur_object->[1]\n";
+  print("\tObject   ", scalaref(cur_object, [1]), "\n")
 }
 
 
 -> separator          {
-  if (@capt) {
-    push @object_hier, [$capt[0][0] eq '?branch:' ? '?branch_entry:' : '?version_entry:', [@capt]];
-    @capt = ();
-  }
+  if(is_nonempty(array(capt)));
+   assign(scalar(first_capt), scalar(array(capt), 0));
+   if(eq(scalaref(first_capt, [0]), "?branch:"));
+    assign(scalar(entry_tag), "?branch_entry:");
+   else();
+    assign(scalar(entry_tag), "?version_entry:");
+   endif();
+   push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
+   assign(array(capt), array());
+  endif();
 }
 
 

@@ -1,5 +1,50 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Migrate `ds_vhistory::vhistory` to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by migrating `ds_vhistory::vhistory` off raw Perl fallback using the existing helper surface, clearing the last blocked `ds_vhistory` rule without adding new lowering contracts.
+
+## Changed Files
+- Updated: `specs/ds_vhistory.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Cleared `ds_vhistory::vhistory` without adding new helper surface:
+  - replaced the raw declaration block `my (@vhistory, @capt, @object_hier, $cur_object)` with canonical declaration flow:
+    - `declare(array, vhistory, capt, object_hier)`
+    - `declare(scalar, cur_object, first_capt, entry_tag, current_object_name)`
+  - replaced the raw capture/object-hierarchy flush logic with helper flow using:
+    - `if(is_nonempty(array(capt)))`
+    - `assign(scalar(first_capt), scalar(array(capt), 0))`
+    - `if(eq(scalaref(first_capt, [0]), "?branch:")) ... else() ... endif()`
+    - `push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))))`
+  - replaced in-place arrayref mutation `push @$cur_object, [@object_hier]` with direct construction of the finalized object payload before pushing into `vhistory`:
+    - `assign(scalar(current_object_name), scalaref(cur_object, [1]))`
+    - `push_value(array(vhistory), array("?object:", scalar(current_object_name), array_values(array(object_hier))))`
+  - replaced the raw final return `['?ds_vhistory:', \@vhistory]` with:
+    - `return(array("?ds_vhistory:", array_values(array(vhistory))))`
+  - migrated the debug print to canonical helper form:
+    - `print("\tObject   ", scalaref(cur_object, [1]), "\n")`
+- Added focused regression coverage:
+  - `ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback`
+- Post-migration metadata snapshot:
+  - `ds_vhistory::vhistory`: `raw_perl_dependency_count` `5 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `ds_vhistory::vhistory` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `IF`, `ELSE`, `ENDIF`, `PUSH`, `RETURN`, `CALL`, and `PRINT`
+  - `ds_vhistory` descriptor migration summary: `language_agnostic_blocked_rule_count` `1 -> 0`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=104`)
 ## 2026-03-07 - Roadmap Slice: Migrate `vhdl::process_statement` to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by migrating `vhdl::process_statement` off raw Perl fallback using the existing helper surface, reducing the `vhdl` blocked-rule set from two rules to only `subprogram_body`.
