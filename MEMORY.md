@@ -100,8 +100,12 @@ When resuming after interruption:
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
   - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`, blocker-type breakdown fields/lists, and blocker-type ratio fields) to track migration progress and select next highest-value blocked rules,
-  - current top blocked rules after the VHDL package slice are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
-  - within `vhdl`, `package_declaration` and `package_body` are now clear; the next blocked rules are `subprogram_body`, `process_statement`, and `type_declaration`,
+  - current top blocked rules after the flat-list/VHDL-declarations slice are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`),
+  - within `vhdl`, `package_declaration`, `package_body`, `subprogram_declaration`, and `type_declaration` are now clear; the remaining blocked rules are `subprogram_body`, `process_statement`, `configuration_specification`, `signal_declaration`, and `vhdl_file`,
+  - flat list insertion helpers are now available for future migrations:
+    - `flat(array(name))` / `flatten(array(name))`
+    - `flat(hash(name))` / `flatten(hash(name))`
+    - `flat_array(name)` / `flat_hash(name)`
   - prioritize backend-neutral action DSL/IR migration so `.spec` no longer depends on embedded Perl code-blocks,
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
@@ -109,6 +113,29 @@ When resuming after interruption:
   - keep `tclite.spec` deferred until explicitly resumed.
 
 ## Latest Session Update
+- Implemented Backbone item #3 helper-surface follow-up in `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm`, and `perl/LinkedSpec/BootstrapSpec/Core.pm`:
+  - added first-class flat list insertion helpers for backend-neutral list-context expansion,
+  - generic forms: `flat(array(name))`, `flatten(array(name))`, `flat(hash(name))`, `flatten(hash(name))`,
+  - non-redundant aliases: `flat_array(name)`, `flat_hash(name)`,
+  - generalized `return(payload)` and method-chain `.return(...)` payload detection now recognize flat helper starts,
+  - `hash(...)` constructor lowering now accepts flat list insertions in addition to ordinary key/value pairs.
+- Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
+  - migrated `subprogram_declaration` to `flat_array(IMATCH_LIST)` return flow,
+  - migrated `type_declaration` to helper flow with `declare`, `assign(..., CAPTURE)`, and `return(array(..., flat_array(IMATCH_LIST), ...))`.
+- Added focused regression coverage in `t/phase0_regression.t`:
+  - `action_rewriter_lowers_flat_list_value_helpers`
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+- Re-ran validation after the flat-list helper and VHDL declaration slice:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (100 tests)
+- Migration impact snapshot:
+  - `vhdl::subprogram_declaration` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `vhdl::type_declaration` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`,
+  - `vhdl` now reports `language_agnostic_blocked_rule_count=5`.
+- Updated blocker ranking snapshot after the slice:
+  - current `vhdl` top blockers are `subprogram_body` (`raw=5`), `process_statement` (`raw=4`), `configuration_specification` (`raw=1`), `signal_declaration` (`raw=1`), and `vhdl_file` (`raw=1`),
+  - broader top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`).
 - Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
   - migrated `package_declaration` and `package_body` to canonical helper flow,
   - replaced the inert `package_declaration` start block with `declare(array, imatch_copy)`,

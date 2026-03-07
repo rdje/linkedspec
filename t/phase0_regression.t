@@ -1117,6 +1117,49 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'method-chain general return payload avoids unresolved-helper hits');
     ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-chain general return payload contributes canonical RETURN action-IR node');
 };
+subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
+    plan tests => 10;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
+        'return ["?subprogram_declaration:", @IMATCH_LIST]',
+        'flat_array(name) lowers array contents into surrounding array constructor list context'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic", flat(array(parts)), scalar(name)))'),
+        'return ["semantic", @parts, $name]',
+        'flat(array(name)) lowers explicit array wrapper into surrounding array constructor list context'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node", "item", scalar(name)))'),
+        'return {%extra, "kind" => "node", "item" => $name}',
+        'flat_hash(name) lowers hash contents into surrounding hash constructor list context'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat(hash(extra)), "kind", "node"))'),
+        'return {%extra, "kind" => "node"}',
+        'flat(hash(name)) lowers explicit hash wrapper into surrounding hash constructor list context'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(flat_array(items))'),
+        'return @items',
+        'return(payload) accepts flat_array(name) as a direct flat list payload'
+    );
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /(\w+)\s+(\w+)/ -> Top .return(flat_array(IMATCH_LIST))
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-chain flat list return payload form');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'method-chain flat list return payload avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'method-chain flat list return payload avoids unresolved-helper hits');
+    ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-chain flat list return payload contributes canonical RETURN action-IR node');
+    ok($meta->{language_agnostic_action_ir_ready}, 'method-chain flat list return payload remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_lowers_composable_array_string_method_contracts' => sub {
     plan tests => 11;
 
@@ -2416,6 +2459,42 @@ subtest 'vhdl_package_helper_flow_eliminates_raw_fallback' => sub {
         !grep { $_ eq 'package_declaration' || $_ eq 'package_body' } @{$summary->{language_agnostic_blocked_rules_by_priority} || []},
         'vhdl migration summary no longer lists package rules as blocked'
     );
+};
+subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 17;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl declaration migration check');
+
+    my $subprogram_meta = $descr->{spec}{subprogram_declaration}{meta}{action_rewriter};
+    ok(ref($subprogram_meta) eq 'HASH', 'vhdl subprogram_declaration exposes action_rewriter metadata');
+    is($subprogram_meta->{raw_perl_dependency_count}, 0, 'vhdl subprogram_declaration no longer reports raw-Perl fallback dependency');
+    is_deeply($subprogram_meta->{raw_perl_dependency_statements}, [], 'vhdl subprogram_declaration exposes no raw-Perl fallback statements');
+    is($subprogram_meta->{unresolved_helper_count}, 0, 'vhdl subprogram_declaration avoids unresolved-helper hits');
+    ok(grep { $_ eq 'RETURN' } @{$subprogram_meta->{canonical_action_ir_nodes}}, 'vhdl subprogram_declaration canonical action-IR nodes include RETURN after helper migration');
+    ok($subprogram_meta->{language_agnostic_action_ir_ready}, 'vhdl subprogram_declaration is language-agnostic action-IR ready');
+
+    my $type_meta = $descr->{spec}{type_declaration}{meta}{action_rewriter};
+    ok(ref($type_meta) eq 'HASH', 'vhdl type_declaration exposes action_rewriter metadata');
+    is($type_meta->{raw_perl_dependency_count}, 0, 'vhdl type_declaration no longer reports raw-Perl fallback dependency');
+    is_deeply($type_meta->{raw_perl_dependency_statements}, [], 'vhdl type_declaration exposes no raw-Perl fallback statements');
+    is($type_meta->{unresolved_helper_count}, 0, 'vhdl type_declaration avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$type_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$type_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$type_meta->{canonical_action_ir_nodes}}),
+        'vhdl type_declaration canonical action-IR nodes include DECLARE/ASSIGN/RETURN after helper migration'
+    );
+    ok($type_meta->{language_agnostic_action_ir_ready}, 'vhdl type_declaration is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 5, 'vhdl blocked-rule count drops after declaration migration');
+    ok(
+        !grep { $_ eq 'subprogram_declaration' || $_ eq 'type_declaration' } @{$summary->{language_agnostic_blocked_rules_by_priority} || []},
+        'vhdl migration summary no longer lists declaration rules as blocked'
+    );
+    is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after declaration migration');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;

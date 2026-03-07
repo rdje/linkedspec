@@ -217,10 +217,7 @@ block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 -> block_configuration
 -> block_configuration[1]        .return([])
 
-subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I {
-#  say "subprogram_declaration: (@IMATCH_LIST)";
- return ['?subprogram_declaration:', @IMATCH_LIST]
-}
+subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I.return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))
 
 subprogram_body:           /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s+is\b/   /(?i)\bbegin\b/ /(?is)\bend\b.*?;/ 
 I {
@@ -332,15 +329,13 @@ LE {assign(scalar(IPOS), pos $$STRING)}
 }
 
 
-type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/  I {
-  #print "START TYPE definition (@IMATCH_LIST)\n";
-}
+type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 
 -> record_endrecord
 -> type_declaration[1]      {
-        #print "END TYPE definition (@IMATCH_LIST)\n";
-	return ['?type_declaration:',    @IMATCH_LIST, substr $$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH]}
-
+	declare(scalar, type_definition);
+	assign(scalar(type_definition), CAPTURE);
+	return(array("?type_declaration:", flat_array(IMATCH_LIST), scalar(type_definition)))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 

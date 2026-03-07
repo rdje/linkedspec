@@ -61,6 +61,38 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- User design correction for helper surface:
+  - explicit per-index expansion like `scalar(IMATCH_LIST, 0), scalar(IMATCH_LIST, 1), ...` is not an acceptable long-term DSL pattern for list-context insertion,
+  - instead the DSL now needs a first-class flatten surface for array/hash contents.
+- Roadmap Item #3 slice completed by adding flat list helper support and using it to clear two VHDL declaration blockers:
+  - added generic list-context helpers:
+    - `flat(array(name))`
+    - `flatten(array(name))`
+    - `flat(hash(name))`
+    - `flatten(hash(name))`
+  - added non-redundant aliases:
+    - `flat_array(name)`
+    - `flat_hash(name)`
+- Implementation scope:
+  - method/value lowering now maps flat helpers to list-context Perl expressions (`@name` / `%name`) for use inside array/hash constructors and direct generalized `return(payload)` forms,
+  - `return(payload)` helper detection and method-chain `.return(...)` payload detection now recognize flat helper starts,
+  - `hash(...)` constructor lowering now permits flat insertions intermixed with ordinary key/value pairs.
+- VHDL migration outcome:
+  - `subprogram_declaration` now returns through `flat_array(IMATCH_LIST)` rather than raw `@IMATCH_LIST` expansion,
+  - `type_declaration` now uses helper flow `declare` + `assign(..., CAPTURE)` + `return(array(..., flat_array(IMATCH_LIST), ...))`,
+  - both rules now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`.
+- Regression additions:
+  - `action_rewriter_lowers_flat_list_value_helpers`
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=100`)
+- Updated blocker scan after this slice:
+  - `vhdl` now reports `language_agnostic_blocked_rule_count=5`
+  - `vhdl` top blockers are now `subprogram_body` (`raw=5`), `process_statement` (`raw=4`), `configuration_specification` (`raw=1`), `signal_declaration` (`raw=1`), and `vhdl_file` (`raw=1`)
+  - broader top blockers remain `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), `ebnf::grammar_file` (`raw=4`), and `vhdl::process_statement` (`raw=4`)
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the VHDL package rules:
   - `package_declaration`
   - `package_body`

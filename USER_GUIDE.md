@@ -292,6 +292,11 @@ This section summarizes the helper/method surface currently recognized by the ac
 - array snapshot/value helper:
   - `array_values(array(name))` -> snapshot current array contents as a value
   - use this when you need backend-neutral array-copy semantics inside `return(...)`, `push_value(...)`, or nested payloads instead of Perl-specific `[@name]`
+- flat list insertion helpers:
+  - `flat(array(name))` / `flatten(array(name))` -> inject array contents into the surrounding list context
+  - `flat(hash(name))` / `flatten(hash(name))` -> inject hash key/value contents into the surrounding list context
+  - `flat_array(name)` -> non-redundant array alias for `@name`-style list insertion
+  - `flat_hash(name)` -> non-redundant hash alias for `%name`-style list insertion
 
 ### 4) Branch/action statements
 - `say(v1, v2, ...)`
@@ -393,6 +398,9 @@ Supported payload categories:
   - `return(hash("kind", "node", "ok", 1))`
 - Helper-based array snapshots
   - `return(array_values(array(items)))`
+- Helper-based flat list insertion
+  - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))`
+  - `return(hash(flat_hash(extra_pairs), "kind", "node"))`
 - Mixed nested payloads with embedded helpers
   - `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
   - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
@@ -415,6 +423,10 @@ Lowering behavior examples:
   - lowers to: `return {"item" => $foo_hash{$key}, "list" => [$name, 123]}`
 - `return(array_values(array(items)))`
   - lowers to: `return [@items]`
+- `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))`
+  - lowers to: `return ["?subprogram_declaration:", @IMATCH_LIST]`
+- `return(hash(flat_hash(extra_pairs), "kind", "node"))`
+  - lowers to: `return {%extra_pairs, "kind" => "node"}`
 - `return({name=>scalar(block_namei), content=>array_values(array(assigns))})`
   - lowers to: `return {name=>$block_namei, content=>[@assigns]}`
 
@@ -423,7 +435,7 @@ Method-chain caveat (`-> Rule .return(...)`):
   - `[` / `{`
   - quoted strings (`"..."` / `'...'`)
   - numeric literals
-  - `scalar(...)`, `scalaref(...)`, `array(...)`, or `hash(...)`
+  - `scalar(...)`, `scalaref(...)`, `array(...)`, `hash(...)`, `flat(...)`, `flatten(...)`, `flat_array(...)`, or `flat_hash(...)`
 - Example (general payload):
   - `-> Top .return(["semantic", { key => scalar(name) }])`
 - If chain payload does not match those starts, chain rendering falls back to label-injected legacy form.

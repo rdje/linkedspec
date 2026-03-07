@@ -58,7 +58,7 @@ sub _method_chain_return_uses_general_payload {
  return 0 unless defined $args;
  my $trimmed = _trim_bootstrap_value($args);
  return 0 unless defined($trimmed) && length($trimmed);
- return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\()/o ? 1 : 0
+ return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
 }
 
 #------------------------------------------------------------------------------

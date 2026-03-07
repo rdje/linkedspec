@@ -106,7 +106,8 @@ sub _normalize_method_tag_expr {
 
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
-# Purpose : Lower method DSL value expressions (`scalar(...)`, `array(...)`)
+# Purpose : Lower method DSL value expressions (`scalar(...)`, `array(...)`,
+#           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -122,6 +123,56 @@ sub _lower_method_value_expr {
  my $lower_scalar_access_key_expr = _require_dep($deps, 'lower_scalar_access_key_expr');
  my $infer_scalar_container_kind = _require_dep($deps, 'infer_scalar_container_kind');
  my $split_top_level_csv = _require_dep($deps, 'split_top_level_csv');
+ my $lower_flat_list_value_expr = sub {
+  my ($flat_expr) = @_;
+  return undef unless defined $flat_expr;
+  my $flat_trimmed = $trim_action_ir_value->($flat_expr);
+  return undef unless defined($flat_trimmed) && length($flat_trimmed);
+  my $flat_call = $parse_method_function_expr->($flat_trimmed);
+  return undef unless $flat_call;
+
+  my $method = $flat_call->{method} // '';
+  if ($method eq 'flat' || $method eq 'flatten') {
+   my $flat_args = $normalize_method_args_with_optional_scope->($flat_call->{args} || [], 1, 1);
+   return undef unless $flat_args;
+   my $container_expr = $trim_action_ir_value->($flat_args->[0]);
+   return undef unless defined($container_expr) && length($container_expr);
+
+   if ($container_expr =~ /^array\s*\(/o) {
+    my $array_symbol = $extract_array_symbol_name->($container_expr);
+    return undef unless defined($array_symbol) && length($array_symbol);
+    return '@'.$array_symbol;
+   }
+   if ($container_expr =~ /^hash\s*\(/o) {
+    my $hash_symbol = $extract_hash_symbol_name->($container_expr);
+    return undef unless defined($hash_symbol) && length($hash_symbol);
+    return '%'.$hash_symbol;
+   }
+   return undef;
+  }
+
+  if ($method eq 'flat_array') {
+   my $flat_args = $normalize_method_args_with_optional_scope->($flat_call->{args} || [], 1, 1);
+   return undef unless $flat_args;
+   my $array_expr = $trim_action_ir_value->($flat_args->[0]);
+   return undef unless defined($array_expr) && length($array_expr);
+   my $array_symbol = $extract_array_symbol_name->($array_expr);
+   return undef unless defined($array_symbol) && length($array_symbol);
+   return '@'.$array_symbol;
+  }
+
+  if ($method eq 'flat_hash') {
+   my $flat_args = $normalize_method_args_with_optional_scope->($flat_call->{args} || [], 1, 1);
+   return undef unless $flat_args;
+   my $hash_expr = $trim_action_ir_value->($flat_args->[0]);
+   return undef unless defined($hash_expr) && length($hash_expr);
+   my $hash_symbol = $extract_hash_symbol_name->($hash_expr);
+   return undef unless defined($hash_symbol) && length($hash_symbol);
+   return '%'.$hash_symbol;
+  }
+
+  return undef;
+ };
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -200,6 +251,8 @@ sub _lower_method_value_expr {
 
   return "join($delimiter_expr, \@$array_symbol)";
  }
+ my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
+ return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);
  if ($method_call && $method_call->{method} eq 'array_values') {
   my $array_value_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $array_value_args;
@@ -215,15 +268,23 @@ sub _lower_method_value_expr {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
-  return undef unless @$args % 2 == 0;
   my @pairs;
-  for (my $i = 0; $i < @$args; $i += 2) {
+  for (my $i = 0; $i < @$args; ) {
+   my $flat_pair_expr = $lower_flat_list_value_expr->($args->[$i]);
+   if (defined($flat_pair_expr) && length($flat_pair_expr)) {
+    push @pairs, $flat_pair_expr;
+    ++$i;
+    next;
+   }
+
+   return undef unless $i + 1 < @$args;
    my $key_expr = _normalize_method_tag_expr($args->[$i], $deps);
    return undef unless defined($key_expr) && length($key_expr);
    my $val_expr = _lower_method_value_expr($args->[$i + 1], $deps);
    $val_expr = $trim_action_ir_value->($args->[$i + 1]) unless defined($val_expr) && length($val_expr);
    return undef unless defined($val_expr) && length($val_expr);
    push @pairs, $key_expr.' => '.$val_expr;
+   $i += 2;
   }
   return '{'.join(', ', @pairs).'}';
  }
@@ -241,7 +302,7 @@ sub _lower_method_value_expr {
 #------------------------------------------------------------------------------
 # Function: _lower_return_payload_expr
 # Purpose : Lower generalized return payload expressions, preserving nested
-#           `[]/{}` literals while lowering embedded scalar/array/hash helpers.
+#           `[]/{}` literals while lowering embedded scalar/array/hash/flat helpers.
 # Args    : ($expr, $deps)
 # Returns : Perl payload expression string or undef
 #------------------------------------------------------------------------------
@@ -257,7 +318,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|array_values)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -265,7 +326,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_values|join_values|array|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_values|join_values|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

@@ -1,5 +1,62 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Add Flat List Helpers and Clear VHDL Declaration Blockers
+## Summary
+Advanced roadmap Item #3 by adding backend-neutral flat list insertion helpers for array/hash content and then using that new helper surface to migrate `vhdl::subprogram_declaration` and `vhdl::type_declaration` off raw Perl fallback.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added flat list insertion helper support in method/value lowering:
+  - generic forms:
+    - `flat(array(name))`
+    - `flatten(array(name))`
+    - `flat(hash(name))`
+    - `flatten(hash(name))`
+  - non-redundant aliases:
+    - `flat_array(name)`
+    - `flat_hash(name)`
+- Flat helpers now lower into surrounding list-context insertion expressions:
+  - arrays -> `@name`
+  - hashes -> `%name`
+- Generalized `return(payload)` and method-chain `.return(...)` payload detection now recognize flat-list helper starts, including direct forms such as `return(flat_array(items))`.
+- `hash(...)` constructor lowering now accepts flat hash/list insertions alongside ordinary key/value pairs.
+- Migrated VHDL declaration rules to use the new helper:
+  - `subprogram_declaration`
+    - replaced raw `@IMATCH_LIST` return expansion with `I.return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))`
+  - `type_declaration`
+    - removed inert raw start block
+    - replaced raw capture/return logic with:
+      - `declare(scalar, type_definition)`
+      - `assign(scalar(type_definition), CAPTURE)`
+      - `return(array("?type_declaration:", flat_array(IMATCH_LIST), scalar(type_definition)))`
+- Added focused regression coverage:
+  - `action_rewriter_lowers_flat_list_value_helpers`
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+- Post-migration metadata snapshot:
+  - `vhdl::subprogram_declaration`: `raw_perl_dependency_count` `1 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::type_declaration`: `raw_perl_dependency_count` `2 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl` descriptor migration summary: `language_agnostic_blocked_rule_count` `7 -> 5`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=100`)
 ## 2026-03-07 - Roadmap Slice: Migrate VHDL Package Rules to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by migrating `vhdl::package_declaration` and `vhdl::package_body` off raw Perl fallback using the existing helper surface, clearing both rules from the blocked set without adding new lowering contracts.
