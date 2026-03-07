@@ -2665,6 +2665,38 @@ subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub 
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'simenv exposes no prioritized blocked-rule list after top/anyvariable migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'simenv exposes no top blocked rule after top/anyvariable migration');
 };
+subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 47;
+
+    my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for small Lispish migration check');
+
+    for my $rule (qw(Lispish comments curlyb dquotes others sbrackets spaces squotes)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "Lispish $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "Lispish $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "Lispish $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "Lispish $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "Lispish $rule is language-agnostic action-IR ready");
+    }
+
+    my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$curlyb_meta->{canonical_action_ir_nodes}}),
+        'Lispish curlyb canonical action-IR nodes include DECLARE/ASSIGN/RETURN after helper migration'
+    );
+
+    my $top_meta = $descr->{spec}{Lispish}{meta}{action_rewriter};
+    ok(grep { $_ eq 'SAY' } @{$top_meta->{canonical_action_ir_nodes}}, 'Lispish top canonical action-IR nodes include SAY after helper migration');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'Lispish descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 1, 'Lispish blocked-rule count drops to only parenthesis after the small-rule migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['parenthesis'], 'Lispish blocked-rule priority list now contains only parenthesis');
+    is($summary->{language_agnostic_top_blocked_rule}, 'parenthesis', 'Lispish top blocked rule remains parenthesis after the small-rule migration');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');

@@ -1,6 +1,6 @@
 Lispish::
  -> parenthesis     {return call(parenthesis)}
- -> parenthesis[1]  {say "(Lispish) -E- Syntax Error"; exit 1}
+ -> parenthesis[1]  {say("(Lispish) -E- Syntax Error"); exit 1}
  -> comments
 
 parenthesis: /\(/ /\)/
@@ -49,41 +49,23 @@ I {
   } 
  }
 
-sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I {
-	#say $IMATCH; 
- return {type=>'SBRACKETS', content=>$IMATCH}
-}
+sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", scalar(IMATCH)))
 
-dquotes: /"(.*?)(?<!\\)"/     I {
- #say "dquotes<$IMATCH_LIST[0]>"; 
- return {type=>'DQUOTES', content=>$IMATCH_LIST[0]}
-}
+dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", scalar(IMATCH_LIST, 0)))
 
-squotes: /'(.*?)(?<!\\)'/     I {
- #say "squotes<$IMATCH_LIST[0]>"; 
- return {type=>'SQUOTES', content=>$IMATCH_LIST[0]}
-}
+squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", scalar(IMATCH_LIST, 0)))
 
-curlyb: /(?<!\\)\{/ /(?<!\\)\}/
+curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
  -> curlyb
  -> dquotes
  -> squotes
  -> curlyb[1]                 {
- #say "curlyb<".substr($$STRING, $IPOS, $LSPOS - $IPOS - 1).">"; 
- return {type=>'CBRACE',   content=>substr($$STRING, $IPOS, $LSPOS - $IPOS - 1)}
+ assign(scalar(content), CAPTURE);
+ return(hash("type", "CBRACE", "content", scalar(content)))
 }
 
-spaces: /\s+/               I {
-	#say "spaces<$IMATCH>"; 
- return {type=>'SPACE',    content=>$IMATCH}
-}
+spaces: /\s+/               I.return(hash("type", "SPACE", "content", scalar(IMATCH)))
 
-others: /[^\s"\{\}\(\)\[\];]+/  I {
- #say "others<$IMATCH>"; 
- return {type=>'OTHERS',   content=>$IMATCH}
-}
+others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", scalar(IMATCH)))
 			      
-comments: /;.*\n/           I {
- #say "comments<$IMATCH>"; 
- return {type=>'COMMENTS', content=>$IMATCH}
-}
+comments: /;.*\n/           I.return(hash("type", "COMMENTS", "content", scalar(IMATCH)))

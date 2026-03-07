@@ -61,6 +61,41 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-07)
+- Roadmap Item #3 slice completed against the remaining small `Lispish` blockers:
+  - `Lispish`
+  - `comments`
+  - `curlyb`
+  - `dquotes`
+  - `others`
+  - `sbrackets`
+  - `spaces`
+  - `squotes`
+- Slice-selection rationale:
+  - `ds_vhistory::vhistory` still wants arrayref-target mutation patterns such as `push @$cur_object, ...` and stateful capture branching,
+  - `vhdl::subprogram_body` and `vhdl::process_statement` still want position/substr/split style helper surface,
+  - the small `Lispish` rules were therefore the most contained next blocker-reduction slice.
+- Migration scope:
+  - no new helper surface was added,
+  - the top-level syntax error branch now uses canonical `say(...)` call syntax while preserving `exit 1`,
+  - the token/leaf rules now return canonical `hash(...)` payloads instead of raw Perl fallback,
+  - `curlyb` now uses `declare(scalar, content)` plus `assign(scalar(content), CAPTURE)` before returning its canonical hash payload.
+- Migration outcome:
+  - `Lispish`, `comments`, `curlyb`, `dquotes`, `others`, `sbrackets`, `spaces`, and `squotes` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `curlyb` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, and `RETURN`
+  - top-level `Lispish` canonical action-IR nodes now include `SAY`
+  - `Lispish` descriptor migration summary now reports `language_agnostic_blocked_rule_count=1`, with only `parenthesis` still blocked
+- Regression addition:
+  - `lispish_small_helper_flow_eliminates_raw_fallback`
+  - the lock verifies zero raw fallback, zero unresolved helpers, canonical node coverage, readiness, and the reduced `Lispish` blocked-rule summary
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=102`)
+- Updated blocker scan after this slice:
+  - the only remaining `Lispish` blocked rule is `parenthesis` (`raw=6`)
+  - current top blockers are `Lispish::parenthesis` (`raw=6`), `ds_vhistory::vhistory` (`raw=5`), `vhdl::subprogram_body` (`raw=5`), and `vhdl::process_statement` (`raw=4`)
+  - `vhdl` still has only two blocked rules left: `subprogram_body` and `process_statement`
+## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against the remaining small `vhdl` blockers:
   - `signal_declaration`
   - `configuration_specification`

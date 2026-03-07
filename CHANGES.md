@@ -1,5 +1,51 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-07 - Roadmap Slice: Clear the Remaining Small Lispish Blockers
+## Summary
+Advanced roadmap Item #3 by migrating the remaining small `Lispish` blockers — `Lispish`, `sbrackets`, `dquotes`, `squotes`, `curlyb`, `spaces`, `others`, and `comments` — off raw Perl fallback using the existing helper surface, reducing the `Lispish` blocked-rule set from nine rules to only `parenthesis`.
+
+## Changed Files
+- Updated: `specs/Lispish.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Cleared the top-level `Lispish` syntax-error branch:
+  - replaced the raw form `say "(Lispish) -E- Syntax Error"` with canonical helper-call syntax:
+    - `say("(Lispish) -E- Syntax Error")`
+  - preserved the existing hard exit behavior with `exit 1`.
+- Migrated the small token/leaf rules to canonical structured returns:
+  - `sbrackets` now returns `hash("type", "SBRACKETS", "content", scalar(IMATCH))`
+  - `dquotes` now returns `hash("type", "DQUOTES", "content", scalar(IMATCH_LIST, 0))`
+  - `squotes` now returns `hash("type", "SQUOTES", "content", scalar(IMATCH_LIST, 0))`
+  - `spaces` now returns `hash("type", "SPACE", "content", scalar(IMATCH))`
+  - `others` now returns `hash("type", "OTHERS", "content", scalar(IMATCH))`
+  - `comments` now returns `hash("type", "COMMENTS", "content", scalar(IMATCH))`
+- Migrated `curlyb` to canonical helper flow:
+  - added `declare(scalar, content)`
+  - replaced the raw capture/return block with:
+    - `assign(scalar(content), CAPTURE)`
+    - `return(hash("type", "CBRACE", "content", scalar(content)))`
+- Added focused regression coverage:
+  - `lispish_small_helper_flow_eliminates_raw_fallback`
+- Post-migration metadata snapshot:
+  - `Lispish`, `comments`, `curlyb`, `dquotes`, `others`, `sbrackets`, `spaces`, and `squotes` now each report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `curlyb` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, and `RETURN`
+  - top-level `Lispish` canonical action-IR nodes now include `SAY`
+  - `Lispish` descriptor migration summary: `language_agnostic_blocked_rule_count` `9 -> 1`, with blocked-rule priority list now reduced to `['parenthesis']`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=102`)
 ## 2026-03-07 - Roadmap Slice: Clear the Remaining Small VHDL Blockers
 ## Summary
 Advanced roadmap Item #3 by clearing the remaining small `vhdl` blockers — `signal_declaration`, `configuration_specification`, and `vhdl_file` — without adding new helper surface, reducing the `vhdl` blocked-rule set from five rules to just `subprogram_body` and `process_statement`.
