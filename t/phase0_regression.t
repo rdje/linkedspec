@@ -2689,6 +2689,27 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "BNF $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 70;
+
+    my $descr = LinkedSpec::get_parser('operators_try', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for operators_try debug-print migration check');
+
+    for my $rule (qw(top_expression group function_call string auto_inc_op auto_dec_op div_op mul_op add_op sub_op string_concat variable integer)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "operators_try $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "operators_try $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "operators_try $rule exposes no raw-Perl fallback statements");
+        ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "operators_try $rule canonical action-IR nodes include PRINT after debug-print migration");
+        ok($meta->{language_agnostic_action_ir_ready}, "operators_try $rule is language-agnostic action-IR ready");
+    }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'operators_try descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'operators_try blocked-rule count drops to zero after debug-print migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'operators_try exposes no prioritized blocked-rule list after debug-print migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'operators_try exposes no top blocked rule after debug-print migration');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 

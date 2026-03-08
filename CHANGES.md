@@ -1,5 +1,58 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `operators_try` Debug Prints to Canonical Helper Flow
+## Summary
+Cleared the remaining `operators_try` blocked rules by converting all raw debug `print` statements to canonical `print(...)` helper flow, added a focused regression lock, and refreshed the live notes with the new post-slice blocker ranking.
+
+## Changed Files
+- Updated: `specs/operators_try.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Selected `operators_try` as the next slice because the corpus-level migration summary had it as the highest remaining blocked spec (`BLOCKED=13`, `BLOCKERS=16`) and every blocker statement in the inspected rules was a raw debug print, so no new lowering contracts were required.
+- Migrated the remaining blocked `operators_try` rules:
+  - `top_expression`
+  - `group`
+  - `function_call`
+  - `string`
+  - `auto_inc_op`
+  - `auto_dec_op`
+  - `div_op`
+  - `mul_op`
+  - `add_op`
+  - `sub_op`
+  - `string_concat`
+  - `variable`
+  - `integer`
+- Replaced raw `print "..."` actions with canonical `print(...)` helper flow throughout the spec.
+- Re-expressed the old interpolated `($IMATCH)` diagnostics with canonical helper arguments using `scalar(IMATCH)`, e.g. `print("-> (", scalar(IMATCH), ") auto_inc_op\n")`.
+- Removed the leftover nested `I { ... }` wrapper inside the `group[1]` closing action so the rule no longer contributed a residual raw fallback statement.
+- Added focused regression coverage:
+  - `operators_try_debug_print_helper_flow_eliminates_raw_fallback`
+  - locks per-rule zero raw fallback, canonical `PRINT` node coverage, and descriptor-level zero-blocker summary state.
+- Updated blocker scan after the slice:
+  - `operators_try` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `DT.spec` (`BLOCKED=11`, `TOP=group`, `BLOCKERS=14`)
+    - `hlink_substitution.spec` (`BLOCKED=3`, `TOP=substitute_top`, `BLOCKERS=4`)
+    - `lib_reader.spec` (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`)
+    - `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=107`)
 ## 2026-03-08 - Roadmap Slice: Migrate `Lispish::parenthesis` and Finalize the Exhaustive Lowering Guide Set
 ## Summary
 Completed the last outstanding `Lispish` blocker by migrating `Lispish::parenthesis` off raw Perl fallback, added canonical assignment-source lowering for `call(rule)`, and finished the lowering documentation pass with a hub, module-focused guides, and an exhaustive emitted-Perl reference for the current ActionIR surface.

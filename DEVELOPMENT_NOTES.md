@@ -61,6 +61,43 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `operators_try`.
+- Slice-selection rationale:
+  - the corpus-level migration summary still had `operators_try` as the highest remaining blocked spec before this slice,
+  - the blocker statements in that spec were raw debug prints rather than stateful lowering gaps,
+  - this made the slice a low-risk, high-yield cleanup that did not require adding new helper surface.
+- Migration scope:
+  - replaced raw debug `print "..."` actions with canonical `print(...)` helper flow in:
+    - `top_expression`
+    - `group`
+    - `function_call`
+    - `string`
+    - `auto_inc_op`
+    - `auto_dec_op`
+    - `div_op`
+    - `mul_op`
+    - `add_op`
+    - `sub_op`
+    - `string_concat`
+    - `variable`
+    - `integer`
+  - converted the old `($IMATCH)` string interpolation cases to canonical helper arguments using `scalar(IMATCH)`
+  - removed the leftover nested `I { ... }` wrapper in `group[1]`, which was the only residual raw blocker after the first patch
+- Migration outcome:
+  - `operators_try` now reports `language_agnostic_blocked_rule_count=0`
+  - the migrated rules now report `raw_perl_dependency_count=0` and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR node coverage for the migrated rules includes `PRINT`
+- Regression addition:
+  - added `operators_try_debug_print_helper_flow_eliminates_raw_fallback`
+  - the lock verifies per-rule zero raw fallback plus descriptor-level zero-blocker summary state
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=107`)
+- Updated blocker scan after this slice:
+  - `operators_try` no longer appears in the blocked-spec ranking
+  - the current top blocked spec is `DT.spec` (`BLOCKED=11`, `TOP=group`, `BLOCKERS=14`)
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `Lispish::parenthesis`, which had been the last remaining top blocked rule in the current blocker-reduction pass.
 - Slice-selection rationale:
   - the rule was the only remaining `Lispish` blocker after the earlier small-rule cleanup,
