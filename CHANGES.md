@@ -1,5 +1,107 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `hlink_substitution` to Canonical Helper Flow
+## Summary
+Cleared the remaining `hlink_substitution.spec` blocked rules by converting the raw error prints to canonical `print(...)` helper flow and rewriting the top accumulator rule into canonical helper flow with declarations, handler-call assignment, helper push, and helper return logic.
+
+## Changed Files
+- Updated: `specs/hlink_substitution.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Chose `hlink_substitution.spec` over the tied `lib_reader.spec` candidate because it was the lower-risk slice:
+  - `hlink_substitution` blockers were limited to raw error prints plus one simple accumulator push in `substitute_top`
+  - `lib_reader` still wants conditional regex-substitution cleanup in three rules
+- Cleared the blocked `hlink_substitution` rules:
+  - `substitute_top`
+  - `substitute_statement2`
+  - `curlyb`
+- Reworked `substitute_top` into canonical helper flow:
+  - declarations now use `declare(scalar, retv); declare(array, word_items)`
+  - child dispatch assignments now use `assign(scalar(retv), call(...))`
+  - the loop-end accumulator now uses `push_value(array(word_items), scalar(retv))`
+  - the rule exit now uses helper control flow:
+    - `if(is_nonempty(array(word_items))); return(array_values(array(word_items))); else(); return_undef(); endif()`
+- Replaced the remaining raw error prints with canonical helper calls:
+  - dangling closing bracket in `substitute_top`
+  - unmatched closing bracket in `substitute_statement2`
+  - unmatched closing brace in `curlyb`
+- Added focused regression coverage:
+  - `hlink_substitution_helper_flow_eliminates_raw_fallback`
+  - locks per-rule zero raw fallback, zero unresolved-helper hits, node coverage, and descriptor-level zero-blocker summary state
+- Updated blocker scan after the slice:
+  - `hlink_substitution.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `lib_reader.spec` (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`)
+    - `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=109`)
+## 2026-03-08 - Roadmap Slice: Migrate `DT` Debug Prints to Canonical Helper Flow
+## Summary
+Cleared the remaining `DT.spec` blocked rules by converting all raw debug `print` statements to canonical `print(...)` helper flow, added a focused regression lock, and refreshed the blocker snapshot after the slice.
+
+## Changed Files
+- Updated: `specs/DT.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `DT.spec` immediately after the `operators_try` commit because it became the highest remaining blocked spec in the corpus scan (`BLOCKED=11`, `TOP=group`, `BLOCKERS=14`).
+- Confirmed that the entire `DT.spec` blocker surface was raw debug prints only, so the slice required no new lowering contracts.
+- Migrated the remaining blocked `DT` rules:
+  - `dtree`
+  - `testcontrol`
+  - `group`
+  - `identifier`
+  - `if_binary`
+  - `if_vector`
+  - `reg_assignment_lhs`
+  - `state_transition`
+  - `dtree_call`
+  - `logical_operator`
+  - `inline_dt_definition`
+- Replaced raw `print "..."` actions with canonical `print(...)` helper flow throughout the spec.
+- Re-expressed the old interpolated `($IMATCH)` diagnostics with canonical helper arguments using `scalar(IMATCH)`, e.g. `print("(identifier)(", scalar(IMATCH), ")\n")`.
+- Added focused regression coverage:
+  - `dt_debug_print_helper_flow_eliminates_raw_fallback`
+  - locks per-rule zero raw fallback, canonical `PRINT` node coverage, and descriptor-level zero-blocker summary state.
+- Updated blocker scan after the slice:
+  - `DT.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `hlink_substitution.spec` (`BLOCKED=3`, `TOP=substitute_top`, `BLOCKERS=4`)
+    - `lib_reader.spec` (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`)
+    - `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=108`)
 ## 2026-03-08 - Roadmap Slice: Migrate `operators_try` Debug Prints to Canonical Helper Flow
 ## Summary
 Cleared the remaining `operators_try` blocked rules by converting all raw debug `print` statements to canonical `print(...)` helper flow, added a focused regression lock, and refreshed the live notes with the new post-slice blocker ranking.

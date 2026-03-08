@@ -181,7 +181,7 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
-- With `operators_try` now cleared, the next highest-value blocker-reduction slice is `DT.spec` (`BLOCKED=11`, `TOP=group`, `BLOCKERS=14` in the latest corpus scan); prefer another canonical `print(...)` migration pass there before adding new lowering surface.
+- With `hlink_substitution.spec` now cleared after the `DT.spec` follow-up, `lib_reader.spec` is the next highest blocker-reduction slice (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4` in the latest corpus scan); inspect its conditional regex-substitution blockers before deciding whether to clear it directly or pivot to `sdce.spec`.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
 - With `Lispish::parenthesis` now cleared, the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries no longer report a remaining top blocked rule; shift the next Backbone item #3 work away from per-rule blocker removal in those families and back toward broader ActionIR-first lowering improvements and compatibility-surface cleanup.
 - Start Method-Like DSL Migration Track implementation in small slices:

@@ -61,6 +61,70 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `hlink_substitution.spec`.
+- Slice-selection rationale:
+  - after the `DT.spec` cleanup, `hlink_substitution.spec` and `lib_reader.spec` were tied as the next blocker leaders,
+  - `hlink_substitution` was the lower-risk slice because its blockers were limited to raw error prints plus one helper-friendly accumulator push in `substitute_top`,
+  - `lib_reader` still wants conditional regex-substitution cleanup in three rules.
+- Migration scope:
+  - converted `substitute_top` from mixed raw Perl helper wrappers into canonical helper flow:
+    - `declare(scalar, retv); declare(array, word_items)`
+    - `assign(scalar(retv), call(...))`
+    - `push_value(array(word_items), scalar(retv))`
+    - `if(is_nonempty(array(word_items))) ... return(array_values(array(word_items))) ... return_undef()`
+  - converted the remaining raw error prints in:
+    - `substitute_top`
+    - `substitute_statement2`
+    - `curlyb`
+- Migration outcome:
+  - `hlink_substitution` now reports `language_agnostic_blocked_rule_count=0`
+  - the migrated rules now report `raw_perl_dependency_count=0` and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR coverage now includes `DECLARE`, `ASSIGN`, `PUSH`, `IF`, `PRINT`, `EXIT`, and `RETURN` in `substitute_top`
+- Regression addition:
+  - added `hlink_substitution_helper_flow_eliminates_raw_fallback`
+  - the lock verifies per-rule zero raw fallback, zero unresolved-helper hits, node coverage, and descriptor-level zero-blocker summary state
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=109`)
+- Updated blocker scan after this slice:
+  - `hlink_substitution.spec` no longer appears in the blocked-spec ranking
+  - the current top blocked spec is now `lib_reader.spec` (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`)
+## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `DT.spec`.
+- Slice-selection rationale:
+  - after the `operators_try` commit, `DT.spec` became the highest remaining blocked spec in the corpus-level migration summary,
+  - every blocked statement in `DT.spec` was a raw debug print rather than a missing lowering contract,
+  - this made the slice another low-risk canonical `print(...)` migration pass.
+- Migration scope:
+  - replaced raw debug `print "..."` actions with canonical `print(...)` helper flow in:
+    - `dtree`
+    - `testcontrol`
+    - `group`
+    - `identifier`
+    - `if_binary`
+    - `if_vector`
+    - `reg_assignment_lhs`
+    - `state_transition`
+    - `dtree_call`
+    - `logical_operator`
+    - `inline_dt_definition`
+  - converted the old `($IMATCH)` string interpolation cases to canonical helper arguments using `scalar(IMATCH)`
+- Migration outcome:
+  - `DT` now reports `language_agnostic_blocked_rule_count=0`
+  - the migrated rules now report `raw_perl_dependency_count=0` and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR node coverage for the migrated rules includes `PRINT`
+- Regression addition:
+  - added `dt_debug_print_helper_flow_eliminates_raw_fallback`
+  - the lock verifies per-rule zero raw fallback plus descriptor-level zero-blocker summary state
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=108`)
+- Updated blocker scan after this slice:
+  - `DT.spec` no longer appears in the blocked-spec ranking
+  - the current highest remaining blocked specs are `hlink_substitution.spec` and `lib_reader.spec`, tied at `BLOCKED=3` / `BLOCKERS=4`
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `operators_try`.
 - Slice-selection rationale:
   - the corpus-level migration summary still had `operators_try` as the highest remaining blocked spec before this slice,

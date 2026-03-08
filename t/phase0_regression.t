@@ -2710,6 +2710,76 @@ subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'operators_try exposes no prioritized blocked-rule list after debug-print migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'operators_try exposes no top blocked rule after debug-print migration');
 };
+subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 60;
+
+    my $descr = LinkedSpec::get_parser('DT', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for DT debug-print migration check');
+
+    for my $rule (qw(dtree testcontrol group identifier if_binary if_vector reg_assignment_lhs state_transition dtree_call logical_operator inline_dt_definition)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "DT $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "DT $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "DT $rule exposes no raw-Perl fallback statements");
+        ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "DT $rule canonical action-IR nodes include PRINT after debug-print migration");
+        ok($meta->{language_agnostic_action_ir_ready}, "DT $rule is language-agnostic action-IR ready");
+    }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'DT descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'DT blocked-rule count drops to zero after debug-print migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'DT exposes no prioritized blocked-rule list after debug-print migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'DT exposes no top blocked rule after debug-print migration');
+};
+subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 23;
+
+    my $descr = LinkedSpec::get_parser('hlink_substitution', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for hlink_substitution helper-flow migration check');
+
+    for my $rule (qw(substitute_top substitute_statement2 curlyb)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "hlink_substitution $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "hlink_substitution $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "hlink_substitution $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "hlink_substitution $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "hlink_substitution $rule is language-agnostic action-IR ready");
+    }
+
+    my $top_meta = $descr->{spec}{substitute_top}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PRINT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'EXIT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
+        'hlink_substitution substitute_top canonical action-IR nodes include DECLARE/ASSIGN/PUSH/IF/PRINT/EXIT/RETURN after helper migration'
+    );
+
+    my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'PRINT' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'EXIT' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$curlyb_meta->{canonical_action_ir_nodes}}),
+        'hlink_substitution curlyb canonical action-IR nodes include PRINT/EXIT/RETURN after helper migration'
+    );
+
+    my $sub2_meta = $descr->{spec}{substitute_statement2}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'PRINT' } @{$sub2_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'EXIT' } @{$sub2_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$sub2_meta->{canonical_action_ir_nodes}}),
+        'hlink_substitution substitute_statement2 canonical action-IR nodes include PRINT/EXIT/RETURN after helper migration'
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'hlink_substitution descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'hlink_substitution blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'hlink_substitution exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'hlink_substitution exposes no top blocked rule after helper migration');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
