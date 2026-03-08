@@ -37,6 +37,32 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-08)
+- Uncommitted Backbone item #3 slice completed against `sdce.spec`.
+- Key technical outcome:
+  - `sdce` is now clear,
+  - `sdc_esplit` now uses canonical `declare`/`assign`/`push_value`/`array_values` accumulator flow,
+  - `get_pinport` now uses canonical `split`/`filter_nonempty`/`flat_array` merge flow.
+- Semantic-preservation note:
+  - plain-text segments still preserve interstitial whitespace tokens via `split(..., /(\\s+)/)`,
+  - brace-content segments still emit only non-whitespace tokens via `split(..., /\\s+/)` plus `filter_nonempty(...)`,
+  - representative parser outputs were manually spot-checked and matched the pre-migration baseline.
+- Rule-migration outcome:
+  - `sdce` now reports `language_agnostic_blocked_rule_count=0`
+  - `sdc_esplit` and `get_pinport` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+- Regression outcome:
+  - added `sdce_helper_flow_eliminates_raw_fallback`
+  - full `t/phase0_regression.t` suite now passes at 111 tests
+- Blocker-ranking outcome:
+  - `sdce.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (111 tests)
+## Current Session Snapshot (2026-03-08)
 - Uncommitted Backbone item #3 slice completed against `lib_reader.spec`.
 - Key technical outcome:
   - `lib_reader` is now clear,
@@ -221,10 +247,10 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- If continuing blocker reduction before the next commit, target `sdce.spec` next:
-  - it is now the highest remaining blocked spec (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
-  - `portmap.spec`, `pplugin.spec`, and `tkgui.spec` are smaller tail slices after that
-- `lib_reader.spec` is now clear and should be treated like the already-cleared `hlink_substitution`, `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
+- If continuing blocker reduction before the next commit, target `portmap.spec` next:
+  - it is now the highest remaining blocked spec (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+  - `pplugin.spec` and `tkgui.spec` are the smaller tail slices after that
+- `sdce.spec` is now clear and should be treated like the already-cleared `lib_reader`, `hlink_substitution`, `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
 - Continue post-item-#3 follow-up toward language-neutral actions:
   - after this commit, the next high-value work item is user review of the exhaustive lowering-guide set, with any resulting syntax/semantic cleanup driven by that review,
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,

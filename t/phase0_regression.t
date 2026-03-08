@@ -2824,6 +2824,47 @@ subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'lib_reader exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
 };
+subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 17;
+
+    my $descr = LinkedSpec::get_parser('sdce', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for sdce helper-flow migration check');
+
+    for my $rule (qw(sdc_esplit get_pinport)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "sdce $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "sdce $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "sdce $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "sdce $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "sdce $rule is language-agnostic action-IR ready");
+    }
+
+    my $top_meta = $descr->{spec}{sdc_esplit}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
+        'sdce sdc_esplit canonical action-IR nodes include DECLARE/ASSIGN/PUSH/RETURN after helper migration'
+    );
+
+    my $get_meta = $descr->{spec}{get_pinport}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SPLIT' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$get_meta->{canonical_action_ir_nodes}}),
+        'sdce get_pinport canonical action-IR nodes include DECLARE/ASSIGN/CALL/SPLIT/FILTER_NONEMPTY/RETURN after helper migration'
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'sdce descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'sdce blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'sdce exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 

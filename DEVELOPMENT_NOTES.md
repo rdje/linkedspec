@@ -61,6 +61,45 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `sdce.spec`.
+- Slice-selection rationale:
+  - after the `lib_reader.spec` cleanup, `sdce.spec` became the highest remaining blocked spec,
+  - both blocked rules (`sdc_esplit`, `get_pinport`) were raw-only helper-friendly cleanup candidates, so no new lowering contracts were needed.
+- Migration scope:
+  - `sdc_esplit`
+    - initializer moved to `I.declare(array, pieces).declare(scalar, retv).assign(scalar(IPOS), 0)`
+    - child dispatch and plain substring captures now use `assign(...)` plus `push_value(...)`
+    - rule exit now uses `return(array_values(array(pieces)))`
+  - `get_pinport`
+    - initializer moved to `I.declare(array, pieces)`
+    - plain-text segment tokenization now uses `split(..., /(\\s+)/)` plus `filter_nonempty(...)`
+    - brace-content tokenization now uses `split(..., /\\s+/)` plus `filter_nonempty(...)`
+    - append semantics are preserved with `assign(array(pieces), array(flat_array(pieces), flat_array(segment_parts)))`
+    - structured return now uses `return(array(flat_array(IMATCH_LIST), array_values(array(pieces))))`
+- Important implementation nuance:
+  - preserving the original token stream required two different split delimiters:
+    - `/(\\s+)/` on the plain-text `LS` path to preserve interstitial whitespace tokens,
+    - `/\\s+/` on the brace path to preserve the older `=~ /\\S+/og` behavior,
+  - `assign(array(...), array(flat_array(...), flat_array(...)))` is a viable canonical replacement for raw `push @pieces, LIST` splice behavior when order must be preserved.
+- Migration outcome:
+  - `sdce` now reports `language_agnostic_blocked_rule_count=0`
+  - `sdc_esplit` and `get_pinport` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR coverage now includes:
+    - `sdc_esplit`: `ASSIGN`, `CALL`, `DECLARE`, `PUSH`, `RETURN`
+    - `get_pinport`: `ASSIGN`, `CALL`, `DECLARE`, `SPLIT`, `FILTER_NONEMPTY`, `RETURN`
+- Regression addition:
+  - added `sdce_helper_flow_eliminates_raw_fallback`
+  - the lock verifies per-rule zero raw fallback, zero unresolved-helper hits, canonical node coverage, and descriptor-level zero-blocker summary state
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=111`)
+- Manual semantic spot-check:
+  - representative parser outputs for `[get_port foo bar]`, `[get_port foo {bar baz}]`, and `[get_pin clk [get_port data]]` matched the pre-migration baseline.
+- Updated blocker scan after this slice:
+  - `sdce.spec` no longer appears in the blocked-spec ranking
+  - the current top blocked spec is now `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `lib_reader.spec`.
 - Slice-selection rationale:
   - after the `DT.spec` + `hlink_substitution.spec` commit, `lib_reader.spec` became the highest remaining blocked spec,

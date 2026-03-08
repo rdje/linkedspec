@@ -1,5 +1,57 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `sdce` to Canonical Helper Flow
+## Summary
+Cleared the remaining `sdce.spec` blocked rules by rewriting the top accumulator and nested pin/port tokenization flow into canonical helper actions, removing raw push/substr/split chains while preserving parser output shape.
+
+## Changed Files
+- Updated: `specs/sdce.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `sdce.spec` as the next slice because after the `lib_reader` cleanup it was the highest remaining blocked spec (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`).
+- Cleared the blocked `sdce` rules:
+  - `sdc_esplit`
+  - `get_pinport`
+- Reworked `sdc_esplit` into canonical helper flow:
+  - initializer now uses `I.declare(array, pieces).declare(scalar, retv).assign(scalar(IPOS), 0)`
+  - child dispatch accumulation now uses `assign(scalar(retv), call(get_pinport))` plus `push_value(array(pieces), scalar(retv))`
+  - plain substring captures now use helper-shell `assign(...)` plus `push_value(...)`
+  - rule exit now uses `return(array_values(array(pieces)))`
+- Reworked `get_pinport` into canonical helper flow:
+  - initializer now uses `I.declare(array, pieces)`
+  - plain-text segment tokenization now uses `split(..., /(\\s+)/)` plus `filter_nonempty(...)`
+  - brace-content tokenization now uses `split(..., /\\s+/)` plus `filter_nonempty(...)`
+  - append semantics are preserved with `assign(array(pieces), array(flat_array(pieces), flat_array(segment_parts)))`
+  - structured return now uses `return(array(flat_array(IMATCH_LIST), array_values(array(pieces))))`
+- Important migration nuance:
+  - `split(array(segment_parts), scalar(segment), /(\\s+)/)` was needed on the `LS` path to preserve the original interstitial whitespace tokens from raw `split /(\\s+)/`,
+  - `split(..., /\\s+/)` on the brace path preserved the old non-whitespace token behavior from `=~ /\\S+/og`,
+  - array reassignment with `flat_array(...)` provided a canonical replacement for the old raw `push @pieces, LIST` splice behavior.
+- Added focused regression coverage:
+  - `sdce_helper_flow_eliminates_raw_fallback`
+  - locks per-rule zero raw fallback, zero unresolved-helper hits, canonical node coverage, and descriptor-level zero-blocker summary state for `sdce`
+- Manual semantic spot-checks on representative inputs remained unchanged, including bracketed pin/port lists with whitespace and nested brace content.
+- Updated blocker scan after the slice:
+  - `sdce.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=111`)
 ## 2026-03-08 - Roadmap Slice: Migrate `lib_reader` to Canonical Helper Flow
 ## Summary
 Cleared the remaining `lib_reader.spec` blocked rules by rewriting the initializer and attribute-normalization logic into canonical helper flow, using method-chain initializer syntax where the brace-block helper form still left raw-fallback metadata.
