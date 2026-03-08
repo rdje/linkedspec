@@ -449,6 +449,18 @@ sub _build_array_pipeline_contracts {
    },
   },
   {
+   id                 => 'split_each',
+   ir_node            => 'SPLIT_EACH',
+   diag_name          => 'split_each',
+   unresolved_pattern => qr/\bsplit_each\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_array_pipeline_expr};
+    $code =~ s/\b(?<expr>split_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
    id                 => 'trim_each',
    ir_node            => 'TRIM_EACH',
    diag_name          => 'trim_each',

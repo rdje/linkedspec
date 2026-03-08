@@ -2538,12 +2538,12 @@ subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
-    is($summary->{language_agnostic_blocked_rule_count}, 1, 'vhdl blocked-rule count reflects the later process_statement cleanup after declaration migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'vhdl blocked-rule count reaches zero after the later subprogram_body cleanup');
     ok(
         !grep { $_ eq 'subprogram_declaration' || $_ eq 'type_declaration' } @{$summary->{language_agnostic_blocked_rules_by_priority} || []},
         'vhdl migration summary no longer lists declaration rules as blocked'
     );
-    is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after declaration migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after the later subprogram_body cleanup');
 };
 subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 20;
@@ -2562,9 +2562,9 @@ subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary');
-    is($summary->{language_agnostic_blocked_rule_count}, 1, 'vhdl blocked-rule count now reflects the later process_statement migration');
-    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['subprogram_body'], 'vhdl blocked-rule priority list now contains only subprogram_body');
-    is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after the later process_statement migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'vhdl blocked-rule count reaches zero after the later subprogram_body migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'vhdl blocked-rule priority list is empty after the later subprogram_body migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after the later subprogram_body migration');
 };
 subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
@@ -2587,9 +2587,38 @@ subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary after process_statement migration');
-    is($summary->{language_agnostic_blocked_rule_count}, 1, 'vhdl blocked-rule count drops to only subprogram_body after process_statement migration');
-    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['subprogram_body'], 'vhdl blocked-rule priority list now contains only subprogram_body');
-    is($summary->{language_agnostic_top_blocked_rule}, 'subprogram_body', 'vhdl top blocked rule remains subprogram_body after process_statement migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'vhdl blocked-rule count reaches zero after the later subprogram_body migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'vhdl blocked-rule priority list is empty after the later subprogram_body migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after the later subprogram_body migration');
+};
+subtest 'vhdl_subprogram_body_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 12;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl subprogram_body migration check');
+
+    my $meta = $descr->{spec}{subprogram_body}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'vhdl subprogram_body exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'vhdl subprogram_body no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'vhdl subprogram_body exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'vhdl subprogram_body avoids unresolved-helper hits');
+    is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'vhdl subprogram_body exposes no language-agnostic blocker statements');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SPLIT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SPLIT_EACH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'vhdl subprogram_body canonical action-IR nodes include DECLARE/ASSIGN/SPLIT/SPLIT_EACH/FILTER_NONEMPTY/RETURN after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'vhdl subprogram_body is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary after subprogram_body migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'vhdl no longer reports blocked rules after subprogram_body migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'vhdl blocked-rule priority list is empty after subprogram_body migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after subprogram_body migration');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;

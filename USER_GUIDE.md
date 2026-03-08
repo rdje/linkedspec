@@ -158,6 +158,7 @@ Output includes:
 ## Composable Array-String Method Routines
 Current composable method routines include:
 - `split(array(...), scalar(...), /.../)`
+- `split_each(array(...), /.../)`
 - `trim_each(array(...))`
 - `filter_nonempty(array(...))`
 - `lowercase_each(array(...))`

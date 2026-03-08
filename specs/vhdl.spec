@@ -210,11 +210,8 @@ block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 
 subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I.return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))
 
-subprogram_body:           /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s+is\b/   /(?i)\bbegin\b/ /(?is)\bend\b.*?;/ 
-I {
-#  say "subprogram_body: (@IMATCH_LIST)";
- my $pos_begin;
-}
+subprogram_body:           /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s+is\b/   /(?i)\bbegin\b/ /(?is)\bend\b.*?;/
+I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprogram_statement_tokens)}
 
 
 -> comment 
@@ -238,18 +235,14 @@ I {
 -> group_template_declaration
 -> group_declaration
 
--> subprogram_body[1] {
-   # say "BEGIN subprogram_body<$IMATCH_LIST[1]>";
-   $pos_begin = pos $$STRING
-}
+-> subprogram_body[1] {assign(scalar(pos_begin), pos $$STRING)}
 
 -> subprogram_body[2] {
-   my $subprogram_statement_part = substr $$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH;
-   my @subprogram_statement_part = grep {length} map {split /^(\s+)/o} split /((?:\s*--.*\s*)+|\s*;\s*)/o, $subprogram_statement_part;
-
-   # say "END subprogram_body<@IMATCH_LIST>";
-
-   return ['?subprogram_body:', @IMATCH_LIST, \@subprogram_statement_part];
+   assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
+   split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
+   split_each(array(subprogram_statement_tokens), /^(\s+)/);
+   filter_nonempty(array(subprogram_statement_tokens));
+   return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_values(array(subprogram_statement_tokens))))
 }
 
 

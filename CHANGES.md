@@ -1,5 +1,55 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `vhdl::subprogram_body` to Canonical Helper Flow
+## Summary
+Advanced roadmap Item #3 by adding a small backend-neutral array tokenization helper and using it to migrate `vhdl::subprogram_body` off raw Perl fallback, clearing the last blocked `vhdl` rule.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `specs/vhdl.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added backend-neutral array tokenization helper:
+  - `split_each(array(...), /.../)`
+  - lowers as a composable flattened per-element split stage and now surfaces canonical `SPLIT_EACH` action-IR metadata.
+- Cleared `vhdl::subprogram_body` by replacing the raw init/finalization block with helper flow:
+  - `declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprogram_statement_tokens)`
+  - `assign(scalar(pos_begin), pos $$STRING)`
+  - `assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH))`
+  - `split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/)`
+  - `split_each(array(subprogram_statement_tokens), /^(\s+)/)`
+  - `filter_nonempty(array(subprogram_statement_tokens))`
+  - `return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_values(array(subprogram_statement_tokens))))`
+- Preserved the previous tokenization behavior while removing the raw Perl `grep {length} map {split /^(\s+)/o} split ...` fallback path.
+- Added focused regression coverage:
+  - `vhdl_subprogram_body_helper_flow_eliminates_raw_fallback`
+- Refreshed older VHDL snapshot tests:
+  - `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+  - `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`
+  - `vhdl_process_statement_helper_flow_eliminates_raw_fallback`
+  - each now expects the later zero-blocker state after `subprogram_body` cleanup.
+- Post-migration metadata snapshot:
+  - `vhdl::subprogram_body`: `raw_perl_dependency_count` `5 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `vhdl::subprogram_body` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `SPLIT`, `SPLIT_EACH`, `FILTER_NONEMPTY`, `RETURN`, and existing `CALL`
+  - `vhdl` descriptor migration summary: `language_agnostic_blocked_rule_count` `1 -> 0`
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=105`)
 ## 2026-03-07 - Roadmap Slice: Migrate `ds_vhistory::vhistory` to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by migrating `ds_vhistory::vhistory` off raw Perl fallback using the existing helper surface, clearing the last blocked `ds_vhistory` rule without adding new lowering contracts.

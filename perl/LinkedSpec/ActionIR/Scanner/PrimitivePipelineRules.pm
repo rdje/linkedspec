@@ -20,6 +20,7 @@ sub try_scan_contract_ir_events {
   'assign_value' => \&_scan_contract_assign_value,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
+  'split_each' => \&_scan_contract_split_each,
   'trim_each' => \&_scan_contract_trim_each,
   'filter_nonempty' => \&_scan_contract_filter_nonempty,
   'lowercase_each' => \&_scan_contract_lowercase_each,
@@ -145,6 +146,24 @@ while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\
  return \@events
 }
 
+sub _scan_contract_split_each {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>split_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ next unless $pipeline && @{$pipeline->{ops} || []};
+ my $last_op = $pipeline->{ops}[-1];
+ next unless $last_op->{op} && $last_op->{op} eq 'split_each';
+ push @events, {
+  raw => $+{expr},
+  args => {
+   target    => $pipeline->{target_symbol},
+   delimiter => $last_op->{delimiter_expr},
+  },
+ };
+}
+ return \@events
+}
 sub _scan_contract_trim_each {
  my ($code) = @_;
  my @events;

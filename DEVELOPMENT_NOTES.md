@@ -60,6 +60,39 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `vhdl::subprogram_body`.
+- Slice-selection rationale:
+  - `subprogram_body` had become the last remaining `vhdl` blocker after the earlier `process_statement` cleanup,
+  - the remaining raw path was specialized tokenization rather than broader stateful control flow,
+  - adding one small composable helper was lower-risk than attempting the larger `Lispish::parenthesis` migration first.
+- Helper-surface addition:
+  - added `split_each(array(...), /.../)` to the array pipeline so a rule can split each existing array element and flatten the result,
+  - this gives a backend-neutral representation of the previous Perl idiom `grep {length} map {split /^(\s+)/o} split ...`.
+- Migration scope:
+  - the rule now declares `pos_begin`, `subprogram_statement_part`, and `subprogram_statement_tokens` through helper flow,
+  - saved-position capture now uses `assign(scalar(pos_begin), pos $$STRING)`,
+  - the statement tail tokenization now uses:
+    - `split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/)`
+    - `split_each(array(subprogram_statement_tokens), /^(\s+)/)`
+    - `filter_nonempty(array(subprogram_statement_tokens))`
+  - final emission now uses generalized `return(array(...))`.
+- Migration outcome:
+  - `vhdl::subprogram_body` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `SPLIT`, `SPLIT_EACH`, `FILTER_NONEMPTY`, `RETURN`, and existing `CALL`
+  - `vhdl` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+- Regression additions/updates:
+  - added `vhdl_subprogram_body_helper_flow_eliminates_raw_fallback`
+  - refreshed `vhdl_declaration_helper_flow_eliminates_raw_fallback`
+  - refreshed `vhdl_small_blocker_helper_flow_eliminates_raw_fallback`
+  - refreshed `vhdl_process_statement_helper_flow_eliminates_raw_fallback`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=105`)
+- Updated blocker scan after this slice:
+  - `vhdl` no longer has blocked rules
+  - the current top blocked rule is now only `Lispish::parenthesis` (`raw=6`)
 ## Session Notes (2026-03-07)
 - Roadmap Item #3 slice completed against `ds_vhistory::vhistory`.
 - Slice-selection rationale:

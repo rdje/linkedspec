@@ -88,6 +88,25 @@ sub _build_array_pipeline_plan_from_expr {
   };
   return $pipeline
  }
+ if ($method eq 'split_each') {
+  my @effective_args = @$args;
+  if (@effective_args == 3 && $is_bare_method_scope_token->($effective_args[0])) {
+   my $scope_target_probe = _build_array_pipeline_plan_from_expr($effective_args[1], $deps);
+   shift @effective_args if $scope_target_probe;
+  }
+  return undef unless @effective_args == 2;
+
+  my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
+  return undef unless $pipeline;
+
+  my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[1], $deps);
+  return undef unless defined $delimiter_expr;
+  push @{$pipeline->{ops}}, {
+   op             => 'split_each',
+   delimiter_expr => $delimiter_expr,
+  };
+  return $pipeline
+ }
 
  if ($method eq 'filter_match') {
   my @effective_args = @$args;
@@ -145,6 +164,8 @@ sub _lower_array_pipeline_expr {
   my $name = $op->{op} // '';
   if ($name eq 'split') {
    $list_expr = 'split '.$op->{delimiter_expr}.', $'.$op->{source_symbol};
+  } elsif ($name eq 'split_each') {
+   $list_expr = 'map { split '.$op->{delimiter_expr}.', $_ } '.$list_expr;
   } elsif ($name eq 'trim_each') {
    $list_expr = 'map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } '.$list_expr;
   } elsif ($name eq 'filter_nonempty') {
