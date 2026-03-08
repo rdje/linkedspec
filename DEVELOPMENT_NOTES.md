@@ -61,6 +61,41 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `lib_reader.spec`.
+- Slice-selection rationale:
+  - after the `DT.spec` + `hlink_substitution.spec` commit, `lib_reader.spec` became the highest remaining blocked spec,
+  - its blockers were still in the helper-friendly cleanup family: quote normalization, split-based attribute packaging, and the raw `say` syntax-error branch in `group`.
+- Migration scope:
+  - `group`
+    - initializer moved from brace-block helper statements to method-chain form:
+      - `I.declare(...).substr(...)`
+    - close action migrated to method-style `.return(array(...))`
+    - syntax-error branch now uses canonical `say(...)` helper syntax plus `exit 1`
+  - `sattribute`
+    - migrated to:
+      - `I.declare(...).substr(...).return(array(...))`
+  - `cattribute`
+    - migrated to:
+      - `I.declare(...).declare(array, value_items).substr(...).split(...).return(array(...))`
+- Important implementation nuance:
+  - the direct brace-block helper form for these initializer rules still left `raw_perl_dependency_count > 0` in descriptor metadata even though the same helper statements lowered correctly through `call_spec_handler_subst(...)`,
+  - converting the initializer logic to method-chain form (`I.declare(...).substr(...).return(...)`) cleared the raw-fallback metadata and made the rules language-agnostic-action-IR ready,
+  - for this rule family, method-chain initializer syntax is therefore the safer migration form than multiline helper statements inside `I { ... }`.
+- Migration outcome:
+  - `lib_reader` now reports `language_agnostic_blocked_rule_count=0`
+  - `group`, `sattribute`, and `cattribute` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `group` canonical action-IR nodes now include `DECLARE`, `REGEX_SUBST`, `PUSH`, `RETURN`, `SAY`, and `EXIT`
+- Regression addition:
+  - added `lib_reader_helper_flow_eliminates_raw_fallback`
+  - the lock verifies per-rule zero raw fallback, zero unresolved-helper hits, readiness, and descriptor-level zero-blocker summary state
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=110`)
+- Updated blocker scan after this slice:
+  - `lib_reader.spec` no longer appears in the blocked-spec ranking
+  - the current top blocked spec is now `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `hlink_substitution.spec`.
 - Slice-selection rationale:
   - after the `DT.spec` cleanup, `hlink_substitution.spec` and `lib_reader.spec` were tied as the next blocker leaders,

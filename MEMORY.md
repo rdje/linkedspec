@@ -37,6 +37,31 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-08)
+- Uncommitted Backbone item #3 slice completed against `lib_reader.spec`.
+- Key technical outcome:
+  - `lib_reader` is now clear,
+  - the winning migration form for this slice was method-chain initializer syntax rather than multiline helper statements inside `I { ... }`.
+- Rule-migration outcome:
+  - `lib_reader` now reports `language_agnostic_blocked_rule_count=0`
+  - `group`, `sattribute`, and `cattribute` now report `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+- Migration nuance:
+  - the brace-block helper rewrite still left raw-fallback metadata in these initializer rules even though the same helper statements lowered correctly through `call_spec_handler_subst(...)`,
+  - switching those initializers to method-chain form (`I.declare(...).substr(...).return(...)`) cleared the blockers.
+- Regression outcome:
+  - added `lib_reader_helper_flow_eliminates_raw_fallback`
+  - full `t/phase0_regression.t` suite now passes at 110 tests
+- Blocker-ranking outcome:
+  - `lib_reader.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (110 tests)
+## Current Session Snapshot (2026-03-08)
 - Uncommitted Backbone item #3 slices completed against `DT.spec` and `hlink_substitution.spec`.
 - Key technical outcome:
   - `DT.spec` was cleared via canonical `print(...)` helper rewrites across the recursive delimiters, top rule, and token rules,
@@ -196,10 +221,10 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- If continuing blocker reduction before the next commit, target `lib_reader.spec` next:
-  - it is now the highest remaining blocked spec (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`)
-  - the remaining blockers are conditional regex-substitution cleanup in `group`, `cattribute`, and `sattribute`
-- `hlink_substitution.spec` is now clear and should be treated like the already-cleared `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
+- If continuing blocker reduction before the next commit, target `sdce.spec` next:
+  - it is now the highest remaining blocked spec (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+  - `portmap.spec`, `pplugin.spec`, and `tkgui.spec` are smaller tail slices after that
+- `lib_reader.spec` is now clear and should be treated like the already-cleared `hlink_substitution`, `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
 - Continue post-item-#3 follow-up toward language-neutral actions:
   - after this commit, the next high-value work item is user review of the exhaustive lowering-guide set, with any resulting syntax/semantic cleanup driven by that review,
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,

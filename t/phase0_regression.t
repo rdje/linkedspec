@@ -2780,6 +2780,50 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'hlink_substitution exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'hlink_substitution exposes no top blocked rule after helper migration');
 };
+subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 23;
+
+    my $descr = LinkedSpec::get_parser('lib_reader', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for lib_reader helper-flow migration check');
+
+    for my $rule (qw(group cattribute sattribute)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "lib_reader $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "lib_reader $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "lib_reader $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "lib_reader $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "lib_reader $rule is language-agnostic action-IR ready");
+    }
+
+    my $group_meta = $descr->{spec}{group}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$group_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'EXIT' } @{$group_meta->{canonical_action_ir_nodes}}),
+        'lib_reader group canonical action-IR nodes include DECLARE/REGEX_SUBST/PUSH/RETURN/SAY/EXIT after helper migration'
+    );
+
+    my $cattribute_meta = $descr->{spec}{cattribute}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'RETURN' } @{$cattribute_meta->{canonical_action_ir_nodes}}),
+        'lib_reader cattribute canonical action-IR nodes include RETURN after helper migration'
+    );
+
+    my $sattribute_meta = $descr->{spec}{sattribute}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'RETURN' } @{$sattribute_meta->{canonical_action_ir_nodes}}),
+        'lib_reader sattribute canonical action-IR nodes include RETURN after helper migration'
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'lib_reader descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'lib_reader blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'lib_reader exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 

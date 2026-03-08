@@ -1,5 +1,59 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `lib_reader` to Canonical Helper Flow
+## Summary
+Cleared the remaining `lib_reader.spec` blocked rules by rewriting the initializer and attribute-normalization logic into canonical helper flow, using method-chain initializer syntax where the brace-block helper form still left raw-fallback metadata.
+
+## Changed Files
+- Updated: `specs/lib_reader.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `lib_reader.spec` as the next slice because it had become the highest remaining blocked spec after the `DT` + `hlink_substitution` cleanup (`BLOCKED=3`, `TOP=group`, `BLOCKERS=4`).
+- Cleared the blocked `lib_reader` rules:
+  - `group`
+  - `sattribute`
+  - `cattribute`
+- Rewrote the old raw cleanup paths into helper flow:
+  - `group`
+    - moved the initializer into method-chain form:
+      - `I.declare(scalar, grouptype=scalar(IMATCH_LIST, 0), groupname=scalar(IMATCH_LIST, 1)).substr(scalar(groupname), "\"", "", go)`
+    - migrated the close action to:
+      - `.return(array("GROUP", scalar(grouptype), scalar(groupname), array_values(array(group))))`
+    - migrated the syntax-error branch to canonical `say(...)` helper syntax plus `exit 1`
+  - `sattribute`
+    - migrated to method-chain form:
+      - `I.declare(...).substr(...).return(array("SATTRIBUTE", ...))`
+  - `cattribute`
+    - migrated to method-chain form:
+      - `I.declare(...).declare(array, value_items).substr(...).split(...).return(array("CATTRIBUTE", ..., array_values(array(value_items))))`
+- Important nuance discovered during the slice:
+  - the direct brace-block helper form for these initializer rules still reported raw-fallback metadata even though `call_spec_handler_subst(...)` could lower the same helper statements correctly in isolation,
+  - switching those initializers to the existing method-chain form (`I.declare(...).substr(...).return(...)`) cleared the raw-fallback counts and made the rules language-agnostic-action-IR ready.
+- Added focused regression coverage:
+  - `lib_reader_helper_flow_eliminates_raw_fallback`
+  - locks zero raw fallback, zero unresolved-helper hits, readiness, and zero blocked-rule summary state for `lib_reader`
+- Updated blocker scan after the slice:
+  - `lib_reader.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `sdce.spec` (`BLOCKED=2`, `TOP=sdc_esplit`, `BLOCKERS=5`)
+    - `portmap.spec` (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=110`)
 ## 2026-03-08 - Roadmap Slice: Migrate `hlink_substitution` to Canonical Helper Flow
 ## Summary
 Cleared the remaining `hlink_substitution.spec` blocked rules by converting the raw error prints to canonical `print(...)` helper flow and rewriting the top accumulator rule into canonical helper flow with declarations, handler-call assignment, helper push, and helper return logic.
