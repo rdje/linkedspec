@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Capture Plugin Modernization and `PathSearch` Strategy
+## Summary
+Recorded the missing roadmap commitment to replace the current `AUTOLOAD` + `.plg` plugin runtime with a clearer module-based plugin system, and documented the short-term decision to keep `PathSearch->go(...)` as a compatibility surface while hardening/replacing its internals rather than removing it outright.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `CHANGES.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Root cause for the roadmap gap:
+  - existing docs only captured the lazy-loading cleanup (`LinkedSpec::PluginBridge`, lazy `PPlugin` load, lazy `PathSearch` fallback),
+  - they did not explicitly state that the current plugin runtime itself is planned for later replacement.
+- Captured current plugin-runtime behavior in the notes:
+  - `LinkedSpec::AUTOLOAD` delegates to `LinkedSpec::PluginBridge::dispatch_autoload(...)`,
+  - the bridge lazy-loads `PPlugin`,
+  - `PPlugin` builds a cached registry from cwd `*.plg` plus project `plugin/*.plg`, parses those files via `pplugin.spec`, and dispatches plugins by extracted method-name suffix.
+- Captured current `PathSearch` behavior in the notes:
+  - `PathSearch->go(...)` seeds a mutable `state $search_path` from cwd plus a recursive project-tree walk,
+  - extra directories are merged by hash dedupe and unordered `keys %hash`,
+  - misses currently warn and return `undef`.
+- Recorded roadmap direction:
+  - plugin runtime: migrate toward explicit module/package plugins and registry/loader semantics, with `AUTOLOAD` + `.plg` kept only as a compatibility bridge during transition,
+  - `PathSearch`: keep the public API short-term because it is still used by parser resolution, config loading, GUI/resource lookup, FSM loading, and plugin helpers, but rework the implementation around deterministic search roots, lazy walking, better diagnostics, and later CPAN-backed primitives,
+  - keep this track orthogonal to Backbone item #3 so `pplugin.spec` cleanup can proceed without treating the current runtime as the final architecture.
+
+## Validation
+- Not run (`ROADMAP.md` / notes-only update)
 ## 2026-03-08 - Roadmap Slice: Migrate `portmap` Bare-Bit-Slice Classification to Canonical Helper Flow
 ## Summary
 Cleared the remaining `portmap.spec` blocked rule by rewriting `bare_bit_slice` from a raw Perl smartmatch classifier into canonical helper control flow, while preserving the existing `bare` / `bit` / `slice` / `constant` AST shapes and explicitly locking the `bit[0]` edge case.

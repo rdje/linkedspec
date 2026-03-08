@@ -954,6 +954,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
   - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-08)
+- Captured the previously implicit plugin-runtime replacement as an explicit roadmap track.
+- Root cause for the documentation gap:
+  - existing roadmap/isolation notes already described lazy `PPlugin` loading and `LinkedSpec::PluginBridge`,
+  - they did not explicitly say that the current `AUTOLOAD` + `.plg` runtime itself is planned for later replacement.
+- Architecture audit summary:
+  - `LinkedSpec::AUTOLOAD` delegates to `LinkedSpec::PluginBridge::dispatch_autoload(...)`,
+  - `LinkedSpec::PluginBridge` lazy-loads `PPlugin`,
+  - `PPlugin` builds a cached registry from cwd `*.plg` plus project `plugin/*.plg` and dispatches by extracted method-name suffix.
+  - `PathSearch` seeds a mutable `state $search_path` from cwd plus a recursive project-tree walk, merges extra dirs via hash dedupe / `keys`, and warns on miss.
+- Compatibility-impact assessment:
+  - `PathSearch` is still used by `LinkedSpec::Resolver`, `Global`, `HUtils`, `EasyTk`, `TableGrep`, `FSMGen`, and multiple `.plg` helpers,
+  - so direct removal would be broader and riskier than a compatibility-preserving refactor.
+- Recorded roadmap direction:
+  - long-term plugin direction: explicit module/package plugins with registry/loader semantics; `AUTOLOAD` + `.plg` remains compatibility-only during migration,
+  - `PathSearch` direction: keep `PathSearch->go(...)` for now, but harden internals around deterministic ordered roots, lazy walking, structured diagnostics, and later CPAN-backed primitives.
+  - candidate implementation primitives noted for later evaluation: `Path::Tiny` + `Path::Iterator::Rule` for path/search work, and `Module::Pluggable` + `Module::Runtime` for module discovery/loading.
+- Current practical next step remains unchanged:
+  - resume Backbone item #3 with `pplugin.spec` unless the user explicitly wants the plugin modernization track implemented ahead of the parser backlog.
 ## Session Notes (2026-03-05)
 - Executed next Phase 1A extraction slice (ActionRewriter dependency-map ownership transfer):
   - moved ActionRewriter dependency-map builders out of `LinkedSpec::ActionRewriter` into `LinkedSpec::Deps`.

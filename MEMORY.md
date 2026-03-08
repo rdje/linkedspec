@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-08)
+- Live docs now explicitly capture the future replacement of the current `AUTOLOAD` + `.plg` plugin runtime.
+- Architecture findings:
+  - `LinkedSpec::AUTOLOAD` delegates to `LinkedSpec::PluginBridge`, which lazy-loads `PPlugin`.
+  - `PPlugin` builds a cached registry from cwd/project `.plg` files and dispatches by extracted method suffix.
+  - `PathSearch` still uses a mutable `state` cache seeded from cwd plus a project-tree walk and remains a cross-cutting dependency.
+- Decision:
+  - long-term plugin direction is explicit module/package plugins with a registry/loader; the current bridge remains compatibility-only during migration.
+  - `PathSearch->go(...)` stays as the short-term compatibility surface, but the implementation should become deterministic and later use standard path/search primitives instead of the current global-state scan.
+- Roadmap impact:
+  - this new track is explicit and does not replace the short-term Backbone #3 tail work.
+  - the next deterministic parser slice is still `pplugin.spec`, followed by `tkgui.spec`.
+- Validation snapshot:
+  - docs-only update; no code validation run.
+## Current Session Snapshot (2026-03-08)
 - Uncommitted Backbone item #3 slice completed against `portmap.spec`.
 - Key technical outcome:
   - `portmap` is now clear,

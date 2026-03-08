@@ -174,6 +174,25 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 5. Tracking policy (Planned)
    - Track progress through existing migration readiness/blocker metadata and regression locks.
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
+## Plugin and Resource-Resolution Modernization Track (Planned)
+Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explicit module-based plugin architecture, while making path/resource lookup deterministic and easier to reason about.
+
+1. Freeze the current compatibility surface
+   - Document the current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge` -> `PPlugin->exec(...)`) and keep corpus coverage for `plugin/*.plg`.
+   - Treat current `.plg` behavior as legacy compatibility that must be preserved during migration, not as the desired end-state architecture.
+2. Introduce an explicit plugin API
+   - New plugin entrypoints should live in normal Perl packages with explicit names and registration/loading semantics.
+   - `LinkedSpec::PluginBridge` should remain only as a compatibility shim while legacy callers are migrated.
+3. Replace implicit discovery/loading
+   - Move away from method-name extraction plus cwd/project-root `.plg` globbing as the primary runtime plugin contract.
+   - Prefer explicit module discovery/loading and a deterministic registry interface; keep a `.plg` adapter only until parity is reached.
+4. `PathSearch` keep-and-harden strategy
+   - Do not remove `PathSearch` outright yet: it is still used by parser resolution, config loading, GUI resource lookup, FSM loading, and plugin helpers.
+   - Short term: preserve the `PathSearch->go(...)` caller surface but rework the implementation to use deterministic ordered roots, explicit search policy, lazy walking, and better diagnostics.
+   - Medium term: back the implementation with standard path/search primitives while preserving compatibility for existing callers.
+5. Deprecation gate
+   - Only deprecate `AUTOLOAD` / `.plg` execution after explicit module-based plugins reach practical parity and migration tooling exists.
+   - Keep this track orthogonal to Backbone item #3: clearing `pplugin.spec` is parser-grammar work, not a commitment to preserve the current plugin runtime forever.
 
 ## Immediate Next Steps
 - Use the new emitted-Perl lowering reference as the review baseline for Backbone item #3 and let user review feedback drive any compatibility-surface cleanup or syntax/semantic amendments.
@@ -181,6 +200,7 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
+- Plugin/runtime modernization is now an explicit roadmap track: future work should replace the current `AUTOLOAD` + `.plg` runtime with an explicit module-based plugin model, while treating current parser work in `pplugin.spec` as grammar/backlog cleanup only.
 - With `portmap.spec` now cleared, only the one-rule tail specs `pplugin.spec` (`TOP=pplugin_top`) and `tkgui.spec` (`TOP=sub_gui`) remain in the current blocker ranking; `pplugin.spec` is the next deterministic tail slice to inspect.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
 - With `Lispish::parenthesis` now cleared, the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries no longer report a remaining top blocked rule; shift the next Backbone item #3 work away from per-rule blocker removal in those families and back toward broader ActionIR-first lowering improvements and compatibility-surface cleanup.
@@ -211,6 +231,9 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
   - Landed: regression harness decoupled from direct `Lispish.pm` import.
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
+- Plugin and resource-resolution modernization track: Planned.
+  - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
+  - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.
   - Item 1 (`$spec_descr` declarative registry): Landed.
     - Landed detail: bootstrap rules now carry explicit `id` + `tags`, root dispatch uses `start_dispatch`, and curly-brace recursion resolves via `CURLY_BRACE` rule ID instead of fixed index.
