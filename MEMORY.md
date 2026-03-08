@@ -36,6 +36,39 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-08)
+- Backbone item #3 blocker-reduction slice completed against `Lispish::parenthesis`.
+- Key technical outcome:
+  - canonical lowering now supports `assign(scalar(retv), call(rule))`,
+  - this removed the need for raw wrapper assignments like `$retv = call(rule)` in `Lispish::parenthesis`.
+- Rule-migration outcome:
+  - `Lispish::parenthesis` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - `Lispish` now reports `language_agnostic_blocked_rule_count=0`
+  - within the previously tracked families (`Lispish`, `vhdl`, `ds_vhistory`, `ebnf`), no remaining top blocked rule is reported in descriptor migration metadata
+- Regression outcome:
+  - added a direct lowering lock for `assign(scalar(retv), call(Leaf))`
+  - added `lispish_parenthesis_helper_flow_eliminates_raw_fallback`
+  - refreshed `lispish_small_helper_flow_eliminates_raw_fallback` to the final zero-blocker state
+  - preserved `lispish_ast_smoke`
+- Documentation outcome:
+  - `USER_GUIDE.md` is now a top-level navigation hub
+  - the lowering reference is now split into module-focused guides:
+    - `USER_GUIDE_ActionIR_DeclareMethod.md`
+    - `USER_GUIDE_ActionIR_MethodLowering.md`
+    - `USER_GUIDE_ActionIR_ValueExpr.md`
+    - `USER_GUIDE_ActionIR_FlowExpr.md`
+    - `USER_GUIDE_ActionIR_ControlFlow.md`
+    - `USER_GUIDE_ActionIR_ArrayPipeline.md`
+    - `USER_GUIDE_ActionIR_Contracts.md`
+  - `USER_GUIDE_ActionIR_EmittedPerlReference.md` now serves as the exhaustive review baseline:
+    - lists the canonical helper surface,
+    - lists compatibility helpers such as `return_a` / `return_m` / `return_ma`, capture/backtrack helpers, and raw call wrappers,
+    - lists classified pass-through idioms that remain verbatim but no longer count as `RAW_PERL` fallback,
+    - shows the emitted Perl shape for each documented construct
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (106 tests)
 
 ## Recent Commit Ledger (Newest First)
 - `c850fca` - Backbone #3: migrate ds_vhistory vhistory helper flow
@@ -112,18 +145,21 @@ When resuming after interruption:
 
 ## Next Recommended Work Item
 - Continue post-item-#3 follow-up toward language-neutral actions:
+  - after this commit, the next high-value work item is user review of the exhaustive lowering-guide set, with any resulting syntax/semantic cleanup driven by that review,
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,
   - continue reducing `RAW_PERL` fallback usage through action-IR/lowering improvements and diagnostics tightening (not more delimiter-surface expansion for now),
   - use per-rule readiness metadata (`raw_perl_dependency_count`, `raw_perl_dependency_statements`, `language_agnostic_action_ir_ready`) to prioritize migration of high-impact rules away from raw Perl fallback behavior,
   - use blocker statement metadata (`unresolved_helper_statements`, `language_agnostic_action_ir_blocker_statements`) to drive concrete migration backlog items,
   - use descriptor-level `meta.action_rewriter_migration` summary (including `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, `language_agnostic_top_blocked_rule`, blocker-type breakdown fields/lists, and blocker-type ratio fields) to track migration progress and select next highest-value blocked rules,
-  - the only remaining top blocked rule is now `Lispish::parenthesis` (`raw=6`),
+  - no remaining top blocked rule is now reported in the tracked `Lispish`/`vhdl`/`ds_vhistory`/`ebnf` descriptor summaries,
+  - `Lispish::parenthesis` is now clear and `Lispish` no longer contributes blocked rules in descriptor migration metadata,
+  - the canonical call-assignment surface `assign(scalar(retv), call(rule))` is now available for future migrations and should be preferred over raw `$retv = call(rule)` wrappers,
+  - the emitted-Perl lowering reference should now be treated as the user-visible compatibility contract for current helper semantics during further ActionIR cleanup,
   - `ebnf` no longer contributes blocked rules in descriptor migration metadata,
   - `ds_vhistory` no longer contributes blocked rules in descriptor migration metadata,
   - `vhdl` no longer contributes blocked rules in descriptor migration metadata,
-  - within `Lispish`, the only remaining blocked rule is now `parenthesis`,
   - within `vhdl`, `package_declaration`, `package_body`, `subprogram_declaration`, `type_declaration`, `signal_declaration`, `configuration_specification`, `vhdl_file`, `process_statement`, and `subprogram_body` are now clear,
-  - the next blocker-reduction slice on Backbone item #3 is therefore the larger stateful `Lispish::parenthesis` migration,
+  - the next Backbone item #3 work is therefore broader compatibility-surface cleanup and ActionIR-first lowering improvements rather than another blocker-reduction slice in those tracked families,
   - flat list insertion helpers are now available for future migrations:
     - `flat(array(name))` / `flatten(array(name))`
     - `flat(hash(name))` / `flatten(hash(name))`
@@ -138,7 +174,7 @@ When resuming after interruption:
   - keep strict balanced-delimiter behavior (no permissive missing-close helper variants),
   - keep `tclite.spec` deferred until explicitly resumed.
 
-## Latest Session Update
+## Earlier Session Updates
 - Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
   - migrated `subprogram_body` to helper flow with typed declarations, saved-position assignment, helper-based substring capture, composable tokenization, and generalized `return(array(...))`,
   - preserved the previous split/map/grep token behavior by adding the backend-neutral `split_each(array(...), /.../)` helper instead of keeping a Perl-specific action block.

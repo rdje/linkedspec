@@ -1,5 +1,85 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `Lispish::parenthesis` and Finalize the Exhaustive Lowering Guide Set
+## Summary
+Completed the last outstanding `Lispish` blocker by migrating `Lispish::parenthesis` off raw Perl fallback, added canonical assignment-source lowering for `call(rule)`, and finished the lowering documentation pass with a hub, module-focused guides, and an exhaustive emitted-Perl reference for the current ActionIR surface.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- Updated: `specs/Lispish.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_DeclareMethod.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ValueExpr.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `USER_GUIDE_ActionIR_ArrayPipeline.md`
+- Updated: `USER_GUIDE_ActionIR_Contracts.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added canonical method-value lowering for `call(rule)` in `MethodLowering.pm` and taught assignment-source lowering in `ValueExpr.pm` to route `assign(scalar(retv), call(rule))` through that path instead of leaving it as a raw wrapper.
+- Cleared `Lispish::parenthesis` by replacing the old raw state machine:
+  - removed raw declarations `my @submatchs; my @word; my $retv`
+  - removed raw call-wrapper assignments such as `$retv = call(parenthesis)`
+  - removed the raw `LE { ... }` post-dispatch classification block
+  - replaced them with canonical helper flow using:
+    - `declare(array, word, tail)`
+    - `declare(scalar, retv, head, has_head)`
+    - `assign(scalar(retv), call(parenthesis))`
+    - `push_value(array(word), scalaref(retv, {content}))`
+    - `join_values("", array(word))`
+    - `if/else/endif`
+    - `return(array(...))`
+- Preserved the existing recursive Lispish AST semantics while re-expressing the rule as explicit head/tail accumulation:
+  - the first completed item becomes `head`
+  - later completed items are accumulated into `tail`
+  - empty list remains `return(array(undef))`
+  - single-item list remains `return(array(scalar(head), undef))`
+  - multi-item list remains `return(array(scalar(head), array_values(array(tail))))`
+- Added/updated regressions:
+  - extended `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values` with a direct lock for `assign(scalar(retv), call(Leaf))`
+  - refreshed `lispish_small_helper_flow_eliminates_raw_fallback` to the final zero-blocker state
+  - added `lispish_parenthesis_helper_flow_eliminates_raw_fallback`
+  - kept `lispish_ast_smoke` passing to preserve the baseline nested AST shape
+- Post-migration metadata snapshot:
+  - `Lispish::parenthesis`: `raw_perl_dependency_count` `6 -> 0`, `unresolved_helper_count` `0 -> 0`, `language_agnostic_action_ir_ready` `0 -> 1`
+  - `Lispish::parenthesis` canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `PUSH`, `IF`, `CALL`, and `RETURN`
+  - `Lispish` descriptor migration summary: `language_agnostic_blocked_rule_count` `1 -> 0`
+- Documentation scope:
+  - rewrote `USER_GUIDE.md` into a navigation hub that explains portability tiers, common lowering patterns, and inspection workflow
+  - added module-focused lowering references for:
+    - `DeclareMethod.pm`
+    - `MethodLowering.pm`
+    - `ValueExpr.pm`
+    - `FlowExpr.pm`
+    - `ControlFlow.pm`
+    - `ArrayPipeline.pm`
+    - `Contracts.pm`
+  - added `USER_GUIDE_ActionIR_EmittedPerlReference.md` as the exhaustive lowering-contract review document:
+    - enumerates the preferred canonical helper surface,
+    - enumerates compatibility helpers such as `return_a`, `return_m`, `return_ma`, `return_im`, `return_imatch`, `return_array`, capture/backtrack helpers, and raw call wrappers,
+    - enumerates classified pass-through idioms that are preserved verbatim while still counting as canonical ActionIR rather than `RAW_PERL` fallback,
+    - shows the emitted Perl shape for each documented construct
+  - documented the preferred canonical replacement of raw `$retv = call(rule)` wrappers with `assign(scalar(retv), call(rule))`
+  - added broader examples for declarations, value constructors, assignment, control flow, array pipelines, regex substitution, switch regex cases, and compatibility helper surfaces
+  - cross-linked the module guides back to the exhaustive emitted-Perl reference so review can start either from the top-level hub or from the relevant ActionIR module guide
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=106`)
 ## 2026-03-08 - Roadmap Slice: Migrate `vhdl::subprogram_body` to Canonical Helper Flow
 ## Summary
 Advanced roadmap Item #3 by adding a small backend-neutral array tokenization helper and using it to migrate `vhdl::subprogram_body` off raw Perl fallback, clearing the last blocked `vhdl` rule.

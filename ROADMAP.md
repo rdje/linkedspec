@@ -107,7 +107,7 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
   - Better performance predictability and debuggability.
 
 ## Phase 6: Documentation and Adoption
-- Expand `USER_GUIDE.md` with practical patterns and anti-patterns.
+- Expand `USER_GUIDE.md` with practical patterns and anti-patterns, and maintain module-focused lowering references when the user-facing surface becomes too large for one file.
 - Maintain architecture rationale in `DEVELOPMENT_NOTES.md`.
 - Keep live state in `MEMORY.md`.
 - Exit criteria:
@@ -176,12 +176,13 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
 
 ## Immediate Next Steps
+- Use the new emitted-Perl lowering reference as the review baseline for Backbone item #3 and let user review feedback drive any compatibility-surface cleanup or syntax/semantic amendments.
 - Start Phase 1A modularization in no-behavior-change slices with Trace/Validation/Resolver extraction first, while keeping the façade API in `LinkedSpec.pm`.
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
 - Extend Phase-1 isolation to remaining non-essential framework couplings (without changing parser semantics).
 - Continue core-structure cleanup with metadata-driven execution routing in `LinkedSpec.pm`, keeping behavior backward compatible.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
-- With `vhdl::subprogram_body` and `ds_vhistory::vhistory` now cleared, the only remaining top blocked rule is `Lispish::parenthesis` (`raw=6`); continue with that larger stateful migration when staying on Backbone item #3 blocker-reduction work.
+- With `Lispish::parenthesis` now cleared, the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries no longer report a remaining top blocked rule; shift the next Backbone item #3 work away from per-rule blocker removal in those families and back toward broader ActionIR-first lowering improvements and compatibility-surface cleanup.
 - Start Method-Like DSL Migration Track implementation in small slices:
   - introduce canonical method ops incrementally and validate each slice with focused regressions,
   - keep helper-compatibility lowering active while method-chain coverage grows,
@@ -263,6 +264,9 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
     - Landed follow-up: `vhdl::process_statement` now lowers through canonical helper flow using `declare`, `assign`, and generalized `return(array(...))`, clearing the rule from the blocked set without adding new lowering contracts; the refreshed `vhdl_process_statement_helper_flow_eliminates_raw_fallback` regression now tracks the later zero-blocker `vhdl` state after `subprogram_body` migration.
     - Landed follow-up: `ds_vhistory::vhistory` now lowers through canonical helper flow using `declare`, `assign`, `scalaref`, `if/else/endif`, `push_value`, `print(...)`, and generalized `return(array(...))`; rebuilding finalized `"?object:"` rows directly removed the earlier `@$cur_object` mutation blocker, and regression lock `ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback` now verifies zero raw fallback, zero unresolved helpers, canonical node coverage, readiness, and zero blocked-rule summary state for `ds_vhistory`.
     - Landed follow-up: added composable array helper `split_each(array(...), /.../)` with canonical `SPLIT_EACH` action-IR mapping, then used it to migrate `vhdl::subprogram_body` off the final raw Perl tokenization block; regression lock `vhdl_subprogram_body_helper_flow_eliminates_raw_fallback` now verifies zero raw fallback, zero blocker statements, canonical node coverage, readiness, and zero blocked-rule summary state for `vhdl`.
+    - Landed follow-up: method-value lowering now supports `call(rule)` as a canonical assignment source via `assign(scalar(retv), call(rule))`; this cleared `Lispish::parenthesis`, and the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries now all report zero blocked rules.
+    - Landed follow-up: the lowering documentation is now split into a top-level `USER_GUIDE.md` hub plus module-focused ActionIR guides, so the user-facing surface for declarations, value expressions, control flow, array pipelines, and compatibility helpers is documented with denser examples.
+    - Landed follow-up: the guide set now includes `USER_GUIDE_ActionIR_EmittedPerlReference.md`, which enumerates the current ActionIR lowering contract by showing emitted Perl for canonical helpers, compatibility helpers, and classified pass-through idioms; use that file as the review baseline for future DSL cleanup.
     - Landed follow-up: raw debug prints in `ifelse.spec` now lower through canonical `print(...)` helper calls instead of RAW_PERL fallback, clearing the full `ifelse` rule family (`program`, `if`, `then`, `elsif`, `else`, `while`, `while_then`) from the blocked set, with regression lock `ifelse_debug_print_helper_flow_eliminates_raw_fallback`.
     - Landed follow-up: raw debug prints in `BNF.spec` now lower through canonical `print(...)` helper calls instead of RAW_PERL fallback, clearing the full BNF rule family (`description`, `construction_start`, `node`, `dquote_str`, `squote_str`, `regex`, `group`, `g_repetition`, `q_mark`, `plus`, `star`, `pipe`) from the blocked set, with regression lock `bnf_debug_print_helper_flow_eliminates_raw_fallback`.
     - Landed follow-up: raw diagnostic/debug prints in the selected `simenv` delimiter-helper family (`bs_nl`, `squotes`, `perl_squotes`, `multiline_value`, `bvariable_substitution`, `curlybrace`, `parenthesis`) now lower through canonical `print(...)` helper calls instead of RAW_PERL fallback, with regression lock `simenv_delimiter_helper_print_flow_eliminates_raw_fallback`.

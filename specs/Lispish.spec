@@ -4,50 +4,65 @@ Lispish::
  -> comments
 
 parenthesis: /\(/ /\)/
-I {
- #say "parenthesis OPENING (";
- my @submatchs; 
- my @word;
- my $retv
-}
+I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
 
  -> parenthesis       {
- #say "Closing WORD --> submatchs (DUE to OPENING PARENTHESIS)" if @word;
- push @submatchs, join("", @word) if @word;
- @word = ();
- $retv = call(parenthesis)
+   if(is_nonempty(array(word)));
+    if(is_empty(scalar(has_head)));
+     assign(scalar(head), join_values("", array(word)));
+     assign(scalar(has_head), 1);
+    else();
+     push_value(array(tail), join_values("", array(word)));
+    endif();
+    assign(array(word), array());
+   endif();
+   assign(scalar(retv), call(parenthesis));
+   if(is_empty(scalar(has_head)));
+    assign(scalar(head), scalar(retv));
+    assign(scalar(has_head), 1);
+   else();
+    push_value(array(tail), scalar(retv));
+   endif()
 }
 
- -> spaces            {$retv = call(spaces)}
- -> dquotes           {$retv = call(dquotes)}
- -> sbrackets         {$retv = call(sbrackets)}
- -> curlyb            {$retv = call(curlyb)}
- -> others            {$retv = call(others)}
- -> comments          {$retv = call(comments)}
+ -> spaces            {
+   call(spaces);
+   if(is_nonempty(array(word)));
+    if(is_empty(scalar(has_head)));
+     assign(scalar(head), join_values("", array(word)));
+     assign(scalar(has_head), 1);
+    else();
+     push_value(array(tail), join_values("", array(word)));
+    endif();
+    assign(array(word), array());
+   endif()
+}
+ -> dquotes           {assign(scalar(retv), call(dquotes)); push_value(array(word), scalaref(retv, {content}))}
+ -> sbrackets         {assign(scalar(retv), call(sbrackets)); push_value(array(word), scalaref(retv, {content}))}
+ -> curlyb            {assign(scalar(retv), call(curlyb)); push_value(array(word), scalaref(retv, {content}))}
+ -> others            {assign(scalar(retv), call(others)); push_value(array(word), scalaref(retv, {content}))}
+ -> comments          {call(comments)}
 
  -> parenthesis[1]    {
- #say "parenthesis CLOSING )";
- #say "Closing WORD --> submatchs (DUE to CLOSING PARENTHESIS)" if @word;
- push @submatchs, join("", @word) if @word;
- return @submatchs >= 1 ? [$submatchs[0], @submatchs == 1 ? undef : [@submatchs[1 .. $#submatchs]]] : [undef]
-}
- 
+   if(is_nonempty(array(word)));
+    if(is_empty(scalar(has_head)));
+     assign(scalar(head), join_values("", array(word)));
+     assign(scalar(has_head), 1);
+    else();
+     push_value(array(tail), join_values("", array(word)));
+    endif();
+   endif();
 
- LE {
-  my $is_ref = ref($retv);
-  unless ($is_ref && $is_ref eq 'HASH') {
-  # For Opening parenthesis
-   push @submatchs, $retv;
-  } elsif ($retv->{type} eq 'SPACE') {
-    #say "Closing WORD --> submatchs (DUE to SPACE)";
-    push @submatchs, join("", @word) if @word;
-    @word = ()
-  } elsif ($retv->{type} ne 'COMMENTS') {
-    #say "Pushing '$retv' into WORD";
-    # DQUOTES + CBRACE + OTHERS
-    push @word, $retv->{content}
-  } 
- }
+   if(scalar(has_head));
+    if(is_nonempty(array(tail)));
+     return(array(scalar(head), array_values(array(tail))));
+    else();
+     return(array(scalar(head), undef));
+    endif();
+   else();
+    return(array(undef));
+   endif()
+}
 
 sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", scalar(IMATCH)))
 

@@ -1,24 +1,82 @@
 # USER GUIDE
-This guide explains how to use LinkedSpec as a progressive extraction parser DSL.
+This guide explains LinkedSpec in two layers:
+1. as a progressive extraction parser DSL, and
+2. as a lowering-driven action DSL whose helper forms are rewritten into canonical ActionIR and then emitted into backend code.
+
+For current LinkedSpec work, the second layer matters the most. If you want `.spec` files that stay backend-neutral and portable across future non-Perl backends, you should understand the lowering surface and prefer canonical helper forms over raw Perl fragments.
+
+## Why this guide is split
+The lowering surface is now large enough that a single giant guide becomes hard to navigate. This top-level guide is the map; the detailed lowering references live in focused module-oriented guides.
+
+Detailed lowering references:
+- [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md)
+- [`USER_GUIDE_ActionIR_DeclareMethod.md`](USER_GUIDE_ActionIR_DeclareMethod.md)
+- [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md)
+- [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md)
+- [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md)
+- [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md)
+- [`USER_GUIDE_ActionIR_ArrayPipeline.md`](USER_GUIDE_ActionIR_ArrayPipeline.md)
+- [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md)
+
+Read this file first, then jump into the specific module guide that matches the lowering family you are using.
+For exhaustive review of the current lowering contract, including emitted Perl for every supported helper and compatibility construct, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside the module guides.
 
 ## What LinkedSpec Is
-LinkedSpec compiles `.spec` files from `specs/` into dynamic Perl parsers.
-These generated parsers parse input strings and return raw AST/data structures.
+LinkedSpec compiles `.spec` files from `specs/` into dynamic parsers.
+Those parsers match recursive, regex-anchored grammars and return AST/data structures defined by rule actions.
 
-LinkedSpec is intentionally optimized for:
-- Nested and recursive constructs.
-- Coarse-to-fine staged parsing.
-- Rapid parser prototyping.
+LinkedSpec is intentionally strong at:
+- nested and recursive constructs,
+- staged coarse-to-fine parsing,
+- extraction-oriented parsing where anchor rules and follow-up passes matter more than strict token-by-token grammar purity.
+
+## The Most Important Concept: Lowering
+When you write helper-style action code such as:
+
+```text
+I {declare(array, items); declare(scalar, retv)}
+-> child {assign(scalar(retv), call(child)); push_value(array(items), scalar(retv))}
+-> child[1] {return(array("?Top:", array_values(array(items))))}
+```
+
+LinkedSpec does **not** treat that as opaque text. Instead it tries to:
+1. recognize supported helper/method constructs,
+2. convert them into canonical ActionIR events/nodes,
+3. lower those nodes into backend code.
+
+That distinction matters because not all syntactically valid Perl inside a `{ ... }` block is equally portable.
+
+### Portability tiers
+Think about authoring styles in three tiers:
+
+1. **Canonical helper-only lowering**
+   - Best choice.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_values(...)`, `join_values(...)`, and so on.
+   - This is the preferred style for backend-neutral `.spec` authoring.
+
+2. **Helper shells with raw host expressions inside arguments**
+   - Still useful and often unavoidable today.
+   - Example: `assign(scalar(pos_begin), pos $$STRING)` or `assign(scalar(part), substr($$STRING, ...))`.
+   - The outer statement is canonical, but the inner expression is still host-language flavored.
+   - Use when no dedicated helper exists yet, but do it consciously.
+
+3. **Legacy or raw compatibility forms**
+   - Works for existing Perl specs.
+   - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
+   - These are important for compatibility, but new backend-neutral specs should prefer the newer helper surface where possible.
 
 ## Typical Workflow
-1. Write a `.spec` grammar with rule labels, regexes, and actions.
-2. Build parser:
+1. Write or update a `.spec` grammar.
+2. Build a parser:
    - `my $parser = LinkedSpec::get_parser('my_spec_name');`
 3. Parse data:
    - `my $ast = $parser->(\$input_string);`
-4. Optionally run additional parsing passes on selected captured substrings.
+4. If the grammar is large or heterogeneous, run additional passes on captured substrings or substructures.
+5. If you are working on backend-neutral migration, inspect the lowering metadata with `return_descr => 1`.
 
-## Rule Skeleton
+## Rule Anatomy Refresher
+Minimal skeleton:
+
 ```text
 top_rule::
  -> subrule_a
@@ -29,70 +87,291 @@ subrule_a: /.../
 subrule_b: /.../
 ```
 
-## Core Syntax
+Most important syntax elements:
 - Entry rule: `name::`
 - Regular rule: `name:`
-- Regex pattern(s): `/.../` (single or multiple per rule)
-- Branch/action:
+- Regex pattern(s): `/.../`
+- Branch edges:
   - `-> rule`
   - `-> rule[idx]`
   - `-> rule { ... }`
-  - `-> rule .method(args)` (method-like shorthand)
-- Non-action code blocks:
-  - `I { ... }` (init)
-  - `LS { ... }` (loop-start hook)
-  - `LE { ... }` (loop-end hook)
-  - `LX { ... }` (loop-exit/fail hook)
-  - Also used in advanced specs: `E`, `EX`, `IT`
+  - `-> rule .method(args).method2(args)`
+- Lifecycle/non-action blocks:
+  - `I { ... }`
+  - `LS { ... }`
+  - `LE { ... }`
+  - `LX { ... }`
+  - also supported in advanced specs: `E`, `EX`, `IT`
 
-## Useful Action Helpers
-Inside action code, LinkedSpec supports helper forms such as:
-- `call(rule)`
-- `push(rule)`
-- `return_a(rule)`
-- `return_m(rule)`
-- `return_ma(rule)`
-- `$CAPTURE`
-- `BACKTRACK()`, `IBACKTRACK()`
+## Where Lowered Constructs Can Appear
+Lowered constructs are not limited to one place.
 
-These helpers are expanded by LinkedSpec into parser runtime code.
+### 1. Action blocks on edges
 
-## Multi-Pass Parsing Pattern (Recommended)
-Use pass-by-pass refinement:
-1. First pass: coarse anchors to chunk input.
-2. Next pass(es): parse chunk content with more specialized specs.
-3. Final pass: normalize/merge into final AST.
+```text
+-> child { assign(scalar(retv), call(child)); push_value(array(items), scalar(retv)) }
+```
 
-This pattern is a primary LinkedSpec strength.
+### 2. Chained action edges
 
-## Runtime Options (current)
+```text
+-> child .declare(scalar, name).assign(scalar(name), CAPTURE).return_array(node, array(scalar(name)))
+```
+
+### 3. Lifecycle blocks
+
+```text
+I  {declare(array, items); declare(scalar, flag)}
+LS {print("loop start\n")}
+LE {assign(scalar(flag), IMATCH)}
+LX {return(array_values(array(items)))}
+```
+
+### 4. Chained lifecycle forms
+
+```text
+I.declare(array, items).declare(scalar, flag)
+LX.if(is_nonempty(array(items))).return(array_values(array(items))).else().return_undef().endif()
+```
+
+## Runtime Match Values You Will See Repeatedly
+A lot of lowering examples refer to a small set of parser runtime values.
+
+- `IMATCH`
+  - the current immediate match text.
+- `LMATCH`
+  - the latest closing-side match text.
+- `IMATCH_LIST`
+  - the capture list from the current regex.
+- `CAPTURE`
+  - helper token representing the substring between current parser positions.
+- `IPOS`
+  - current start/input position marker.
+- `LSPOS`
+  - current latest scanner position marker.
+- `$$STRING`
+  - the input string reference.
+
+Examples:
+
+```text
+assign(scalar(name), scalar(IMATCH))
+assign(scalar(content), CAPTURE)
+return(array("?node:", scalar(IMATCH_LIST, 0), scalar(IMATCH_LIST, 1)))
+assign(scalar(pos_begin), pos $$STRING)
+```
+
+## Quick Navigation by Task
+If you are trying to do one of these jobs, read the matching guide first.
+
+### I need declarations or initialized working state
+Start with [`USER_GUIDE_ActionIR_DeclareMethod.md`](USER_GUIDE_ActionIR_DeclareMethod.md).
+
+Typical patterns:
+- `declare(array, items)`
+- `declare(scalar, flag=or(scalar(on), scalar(off)))`
+- `declare(hash, by_name=hash("kind", scalar(kind)))`
+
+### I need value constructors, nested return payloads, or `call(...)` as a value source
+Start with [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md).
+
+Typical patterns:
+- `array(...)`
+- `hash(...)`
+- `scalaref(...)`
+- `join_values(...)`
+- `array_values(...)`
+- `flat_array(...)`
+- `assign(scalar(retv), call(rule))`
+- `return(array(...))`
+
+### I need assignment semantics or special assignment sources
+Start with [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md).
+
+Typical patterns:
+- `assign(scalar(name), CAPTURE)`
+- `assign(scalar(retv), call(Leaf))`
+- `assign(array(items), array(scalar(retv)))`
+- `assign(hash(by_name), hash("k", scalar(v)))`
+
+### I need boolean/comparison expressions
+Start with [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md).
+
+Typical patterns:
+- `or(...)`, `and(...)`, `not(...)`
+- `is_empty(...)`, `is_nonempty(...)`
+- `eq/ne/gt/ge/lt/le`
+- `num_eq/...`
+- `matches(...)`
+
+### I need `if/else` or `switch/case` lowering
+Start with [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md).
+
+Typical patterns:
+- `if(...); ... else(); ... endif()`
+- `switch(...); case(...); default(); endswitch()`
+- `switch(expr, case(...), default(...))`
+- `say(...)`, `print(...)`, `return_undef()`
+
+### I need array tokenization or array post-processing
+Start with [`USER_GUIDE_ActionIR_ArrayPipeline.md`](USER_GUIDE_ActionIR_ArrayPipeline.md).
+
+Typical patterns:
+- `split(...)`
+- `split_each(...)`
+- `trim_each(...)`
+- `filter_nonempty(...)`
+- `lowercase_each(...)`, `uppercase_each(...)`
+- `uniq(...)`
+- `filter_match(...)`
+
+### I need legacy helper wrappers or capture/backtrack helpers
+Start with [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md).
+
+Typical patterns:
+- `call(rule)` as a standalone dispatch helper
+- `push(rule)` / `push(rule, target)`
+- `return_a`, `return_m`, `return_ma`
+- `return_imatch`, `return_array`
+- `$CAPTURE`, `capture_if(...)`, `BACKTRACK()`, `IBACKTRACK()`
+
+### I need the exact emitted Perl for every currently supported construct
+Start with [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
+
+This is the exhaustive review document. It covers:
+- preferred canonical helper forms,
+- older compatibility helpers such as `return_a`, `return_m`, `return_ma`, `capture_if`, and raw call wrappers,
+- classified pass-through idioms that are preserved verbatim but still count as canonical ActionIR rather than `RAW_PERL` fallback.
+
+## Most Common Canonical Patterns
+These are the patterns you will use over and over again.
+
+### Pattern 1: declare state, call a child, keep the result
+
+```text
+I {declare(array, items); declare(scalar, retv)}
+-> child {
+  assign(scalar(retv), call(child));
+  push_value(array(items), scalar(retv))
+}
+```
+
+Use this when you need the child result more than once, or when you need to branch on it before deciding where to store it.
+
+### Pattern 2: assign a captured substring and return a structured node
+
+```text
+I {declare(scalar, content)}
+-> block[1] {
+  assign(scalar(content), CAPTURE);
+  return(hash("type", "BLOCK", "content", scalar(content)))
+}
+```
+
+Use this when you are closing a delimited construct and want a canonical object/hash payload.
+
+### Pattern 3: accumulate tokens, then snapshot them in a return payload
+
+```text
+I {declare(array, parts)}
+-> piece {push_value(array(parts), scalar(IMATCH))}
+-> Top[1] {return(array("?Top:", array_values(array(parts))))}
+```
+
+Use `array_values(array(parts))` when you want a **snapshot array payload**.
+
+### Pattern 4: flatten an existing array into a constructor
+
+```text
+return(array("?node:", flat_array(IMATCH_LIST)))
+```
+
+Use `flat_array(...)` when you want **list-context insertion**, not an array snapshot.
+
+That distinction is important:
+- `array_values(array(items))` means “make an array payload from the current array contents.”
+- `flat_array(items)` means “splice the array elements into the surrounding constructor.”
+
+### Pattern 5: backend-neutral recursive accumulator flow
+This is the shape now used in `Lispish::parenthesis`:
+
+```text
+I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
+
+-> parenthesis {
+  if(is_nonempty(array(word)));
+    if(is_empty(scalar(has_head)));
+      assign(scalar(head), join_values("", array(word)));
+      assign(scalar(has_head), 1);
+    else();
+      push_value(array(tail), join_values("", array(word)));
+    endif();
+    assign(array(word), array());
+  endif();
+
+  assign(scalar(retv), call(parenthesis));
+  if(is_empty(scalar(has_head)));
+    assign(scalar(head), scalar(retv));
+    assign(scalar(has_head), 1);
+  else();
+    push_value(array(tail), scalar(retv));
+  endif()
+}
+```
+
+The important idea is not just recursion; it is the **canonical replacement** of older raw wrappers like `$retv = call(parenthesis)` with `assign(scalar(retv), call(parenthesis))`.
+
+## How To Inspect Lowering
+### Snippet inspection utility
+Use `tools/inspect_spec_codegen.pl` when you want to see the generated Perl and canonical action-IR for a specific snippet.
+
+Examples:
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.declare(array, items).declare(scalar, retv)'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'assign(scalar(retv), call(Leaf))'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(is_nonempty(array(items))); return(array_values(array(items))); else(); return_undef(); endif()'`
+
+The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
+
+### Descriptor introspection with `return_descr => 1`
+Use descriptor mode when you want to inspect rule readiness or migration metadata.
+
+Typical shape:
+
+```perl
+my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+my $meta  = $descr->{spec}{parenthesis}{meta}{action_rewriter};
+```
+
+High-value fields:
+- `raw_perl_dependency_count`
+- `raw_perl_dependency_statements`
+- `unresolved_helper_count`
+- `canonical_action_ir_nodes`
+- `helper_action_ir_nodes`
+- `language_agnostic_action_ir_ready`
+
+Descriptor summary fields:
+- `meta.action_rewriter_migration.language_agnostic_blocked_rule_count`
+- `meta.action_rewriter_migration.language_agnostic_blocked_rules_by_priority`
+- `meta.action_rewriter_migration.language_agnostic_top_blocked_rule`
+
+## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`
 - `generate_only => 1`
-- `return_descr => 1` (return internal `{spec=>..., gdata=>...}` descriptor instead of parser coderef)
-- `dump_parser_source => 1` (emit generated parser code text)
-- `parser_source_ref => \$out` (capture generated parser code text into a scalar ref instead of printing)
+- `return_descr => 1`
+- `dump_parser_source => 1`
+- `parser_source_ref => \$out`
 
-## Spec Lookup Behavior (`get_parser`)
+## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:
 1. If argument is already a valid file path, use it directly.
 2. Try `name.spec` directly if available.
-3. Try module-relative `../specs/name.spec` (relative to `perl/LinkedSpec.pm`).
+3. Try module-relative `../specs/name.spec`.
 4. If still unresolved, fall back to `PathSearch`.
 
-This removes hard dependency on running from the project root.
-
-## Known Caveats
-- Current behavior is extraction-oriented and may not enforce full contiguous consumption unless spec logic does so.
-- Some old specs may rely on permissive behavior.
-- `specs/tclite.spec` currently has a known compile issue to be fixed.
-
-## Debugging
-- Set `LinkedSpec` verbosity via `our $DUMP_VERBOSITY` or `LinkedSpec::configure_trace(...)`.
-- Use `parse_only` and/or `dump_parser_source` to inspect compile/generation behavior.
-
-### First-Class Multi-Level Tracing
-LinkedSpec now supports UVM-style tracing levels and structured flow traces.
+## Tracing and Debugging
+LinkedSpec supports multi-level tracing.
 
 Supported levels:
 - `none`
@@ -101,347 +380,59 @@ Supported levels:
 - `high`
 - `debug`
 
-Runtime API:
+Runtime API examples:
 - `LinkedSpec::configure_trace(trace_level => 'high')`
 - `LinkedSpec::configure_trace(trace_level => 'debug', trace_emoji => 1)`
 - `LinkedSpec::configure_trace(trace_log_file => 'trace.log')`
 - `LinkedSpec::configure_trace(trace_log_file => 'trace.log', trace_log_mode => 'route')`
 - `LinkedSpec::configure_trace(trace_log_file => 'trace.log', trace_log_mode => 'mirror')`
 
-Per-call options (forwarded by `get_parser(...)` into `Get(...)`):
+Per-call options:
 - `trace_level => 'none|low|medium|high|debug'`
 - `trace_log_file => 'trace.log'`
 - `trace_log_mode => 'route|mirror|stdout'`
-- `trace_reset_log => 1` (truncate log file before writing)
+- `trace_reset_log => 1`
 - `trace_emoji => 1`
-- `debug => 1` (force debug verbosity)
-- `quiet => 1` (force none verbosity)
+- `debug => 1`
+- `quiet => 1`
 
 Environment variables:
 - `LINKEDSPEC_TRACE_LEVEL`
 - `LINKEDSPEC_TRACE_FILE`
-- `LINKEDSPEC_TRACE_MIRROR_STDOUT` (`1` => mirror, default is route when trace file is set)
+- `LINKEDSPEC_TRACE_MIRROR_STDOUT`
 - `LINKEDSPEC_TRACE_RESET_FILE`
 - `LINKEDSPEC_TRACE_EMOJI`
 
 Trace messages include:
 - timestamp,
-- verbosity level,
+- trace level,
 - file name,
 - function name,
 - line number,
 - indentation for nested flow scopes,
-- decision events (`TAKEN`/`SKIPPED`) with reasons.
+- decision events (`TAKEN` / `SKIPPED`).
 
-When `trace_log_file` is set and `trace_log_mode => 'route'` (default for explicit trace files), trace output is routed to the file (for example `trace.log`) instead of stdout.
+## Strong Recommendations for New Specs
+If backend neutrality matters, these are the defaults you should follow.
 
-## Inspect Generated Perl for `.spec` Pieces
-Use the snippet inspection utility when you want to visually verify generated Perl for specific DSL fragments.
+1. Prefer `declare(...)` over raw `my` declarations.
+2. Prefer `assign(...)` over raw assignment wrappers.
+3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
+4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_values(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
+6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
+7. Prefer `array_values(array(name))` for snapshot payloads and `flat_array(name)` / `flat_hash(name)` for list-context insertion.
+8. Use snippet inspection and `return_descr` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
-- Script: `tools/inspect_spec_codegen.pl`
-- Supports:
-  - lifecycle chains, e.g. `I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)`
-  - action edges, e.g. `/a/ -> Top .lowercase_each(array(parts)).filter_match(...)`
-  - raw helper expressions, e.g. `filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)`
-
-Examples:
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'`
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet '/a/ -> Top .lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)'`
-- `perl tools/inspect_spec_codegen.pl --snippet-file path/to/snippets.txt`
-
-Output includes:
-- normalized helper code,
-- generated Perl code,
-- canonical action-IR nodes,
-- RAW_PERL fallback count and unresolved-helper count.
-
-## Composable Array-String Method Routines
-Current composable method routines include:
-- `split(array(...), scalar(...), /.../)`
-- `split_each(array(...), /.../)`
-- `trim_each(array(...))`
-- `filter_nonempty(array(...))`
-- `lowercase_each(array(...))`
-- `uppercase_each(array(...))`
-- `uniq(array(...))`
-- `filter_match(array(...), /.../)`
-
-Both styles are supported:
-- dot-chained method style,
-- nested functional composition style (including mixed usage).
-
-## Fluent Control-Flow Example (`pipe_operator` with `if/else`)
-You can express branch logic without `{...}` blocks by chaining fluent control-flow methods.
-
-Example rule intent:
-- parse `|` via a `pipe_operator` rule,
-- if container context is enabled (`on`), push parsed pipe node into `rule`,
-- otherwise emit an error and return `undef`.
-
-```text
-pipe_operator:
- /\|/ -> pipe_operator { return_a(pipe_operator) }
-
-Top::&
- /\|/ -> Top
-   .if(scalar(on))
-     .push(pipe_operator, rule)
-   .else()
-     .say("Error: '|' operator occurrence with no container rule context")
-     .return_undef()
-   .endif()
-```
-
-Quick snippet inspection:
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(scalar(on)); push(pipe_operator, rule); else(); say("Error: '\''|'\'' operator occurrence with no container rule context"); return_undef(); endif()'`
-
-## Unified Lisp-Style Control-Flow Conditions
-Fluent control-flow condition/value arguments support nested Lisp-style expressions.
-
-Examples:
-- `if(or(scalar(on), and(not(scalar(off)), is_empty(scalar(name)))))`
-- `elseif(matches(scalar(token), /^[A-Z_]+$/))`
-- `switch(or(scalar(op_ready), not(is_empty(scalar(op)))))`
-
-Supported condition helpers include:
-- boolean composition: `or(...)`, `and(...)`, `not(...)`
-- emptiness checks: `is_empty(...)`, `is_nonempty(...)`
-- comparisons: `eq/ne/gt/ge/lt/le` and numeric `num_eq/num_ne/num_gt/num_ge/num_lt/num_le`
-- regex predicate: `matches(lhs, /regex/)`
-
-## Scalar Collection Entry Access in Conditions
-Control-flow expressions support scalar collection-entry access through:
-- `scalar(container, key_or_index)`
-
-Examples:
-- `scalar(foo_arr, idx)` -> array entry value form
-- `scalar(foo_hash, key)` -> hash entry value form
-- explicit forms:
-  - `scalar(array(foo_arr), idx)`
-  - `scalar(hash(foo_hash), key)`
-
-Single-argument scalar form remains:
-- `scalar(name)`
-
-Compatibility form remains:
-- `scalar(IMATCH_LIST, n)`
-
-## Inline Composite `switch(...)` Branch Form
-In addition to marker-style fluent chains (`switch(); case(); default(); endswitch()`), you can encode branches directly in `switch(...)` arguments.
-
-Example:
-```text
-Top::&
- /a/ -> Top .switch(
-   scalar(op),
-   case("|", push(pipe_operator, rule)),
-   case("&", say("amp")),
-   default(say("Error"), return_undef())
- )
-```
-
-This form keeps branch structure and branch actions co-located while still lowering through the same helper-contract pipeline.
-## Complete Method/Helper Reference (Current)
-This section summarizes the helper/method surface currently recognized by the action rewriter.
-
-### 1) Control-flow markers
-- `if(cond)` / `i(cond)`
-- `elseif(cond)` / `elif(cond)`
-- `else()`
-- `endif()`
-- `switch(cond)` (marker form)
-- `case(value)` (marker form)
-- `default()` (marker form)
-- `endcase()` (optional in switch marker flow)
-- `endswitch()`
-- inline composite form:
-  - `switch(cond, case(v1, action1, ...), case(v2, ...), default(actionN, ...))`
-
-### 2) Condition/value expression helpers used inside `if/elseif/switch`
-- Boolean composition:
-  - `or(expr1, expr2, ...)`
-  - `and(expr1, expr2, ...)`
-  - `not(expr)`
-- Emptiness predicates:
-  - `is_empty(expr)`
-  - `is_nonempty(expr)`
-- String comparisons:
-  - `eq(lhs, rhs)`, `ne(lhs, rhs)`, `gt(lhs, rhs)`, `ge(lhs, rhs)`, `lt(lhs, rhs)`, `le(lhs, rhs)`
-- Numeric comparisons:
-  - `num_eq(lhs, rhs)`, `num_ne(lhs, rhs)`, `num_gt(lhs, rhs)`, `num_ge(lhs, rhs)`, `num_lt(lhs, rhs)`, `num_le(lhs, rhs)`
-- Regex predicate:
-  - `matches(lhs, /regex/)`
-
-### 3) Scalar/array/hash value helpers
-- `scalar(name)` -> scalar variable value
-- `scalar(container, key_or_index)` -> collection entry value
-  - examples:
-    - `scalar(foo_arr, idx)` -> array entry access
-    - `scalar(foo_hash, key)` -> hash entry access
-  - explicit forms:
-    - `scalar(array(foo_arr), idx)`
-    - `scalar(hash(foo_hash), key)`
-- compatibility:
-  - `scalar(IMATCH_LIST, n)`
-- reference-path scalar helper:
-  - `scalaref(base_ref, [path][segments]{...})` -> chained dereference from scalar ref base
-  - examples:
-    - `scalaref(myref, [A][B]{C}[D])` -> `$myref->[A]->[B]->{C}->[D]`
-    - `scalaref(myref, {A}[B]{C}[D])` -> `$myref->{A}->[B]->{C}->[D]`
-- array constructor/value helper:
-  - `array(v1, v2, ...)`
-- array snapshot/value helper:
-  - `array_values(array(name))` -> snapshot current array contents as a value
-  - use this when you need backend-neutral array-copy semantics inside `return(...)`, `push_value(...)`, or nested payloads instead of Perl-specific `[@name]`
-- flat list insertion helpers:
-  - `flat(array(name))` / `flatten(array(name))` -> inject array contents into the surrounding list context
-  - `flat(hash(name))` / `flatten(hash(name))` -> inject hash key/value contents into the surrounding list context
-  - `flat_array(name)` -> non-redundant array alias for `@name`-style list insertion
-  - `flat_hash(name)` -> non-redundant hash alias for `%name`-style list insertion
-
-### 4) Branch/action statements
-- `say(v1, v2, ...)`
-- `print(v1, v2, ...)`
-- `return_undef()`
-
-### 5) Call/push/capture/backtrack helpers
-- `call(rule)`
-- `push(rule)` (push to current label array)
-- `push(rule, target)` (push to explicit target array)
-- `push(scope, rule, target)` (scope-injected form emitted by chained-method rendering)
-- `$CAPTURE`
-- `capture(label)`
-- `capture_if(label)` / `CAPTURE_IF()`
-- `ibacktrack(label)` / `IBACKTRACK()`
-- `backtrack(label)` / `BACKTRACK()`
-
-### 6) Return helpers
-- `return(payload)` (general payload form)
-  - supports nested `[]` / `{}` literals, quoted strings, numbers, and embedded `scalar(...)` / `array(...)` / `hash(...)` helper values
-- `return_a(label[, arg])`
-- `return_m(label)`
-- `return_ma(label)`
-- `return_imatch(tag)` / `return_im(tag)`
-- `return_array(tag, payload)`
-- `return(label, arg)` (legacy tagged return helper form)
-- `return call(rule)` (call-wrapper lowering form)
-
-### 7) Declaration/assignment/transform helpers
-- declarations:
-  - `declare(type, names...)` where `type` is `array|scalar|hash`
-    - initialization form is supported per entry: `name=expr`
-    - examples:
-      - `declare(scalar, flag=or(scalar(on), scalar(off)))`
-      - `declare(array, parts=array(scalar(a), scalar(b)))`
-      - `declare(hash, by_name=hash("k1", scalar(v1), "k2", scalar(v2)))`
-  - aliases: `declare_a/s/h`, `declare_array/scalar/hash`
-- assignment/capture source:
-  - `assign(target, source_expr)`
-    - target may be `scalar(name)`, `array(name)`, or `hash(name)`
-    - special capture tokens still supported: `CAPTURE|IMATCH|LMATCH`
-    - source expressions now accept the same flow/value expression surfaces used by `if()/elseif()/switch()`
-    - examples:
-      - `assign(scalar(flag), or(scalar(on), scalar(off)))`
-      - `assign(array(items), array(scalar(retv)))`
-      - `assign(hash(by_name), hash("k", scalar(v)))`
-- regex substitution:
-  - `substr(target, pattern, replacement, flags)`
-  - `regex_subst(target, pattern, replacement, flags)`
-- composable array-string transforms:
-  - `split(array_target, scalar_source, delimiter?)`
-  - `trim_each(array_target)`
-  - `filter_nonempty(array_target)`
-  - `lowercase_each(array_target)`
-  - `uppercase_each(array_target)`
-  - `uniq(array_target)`
-  - `filter_match(array_target, regex)`
-
-### 8) Method-chain usage forms
-- action-edge chain:
-  - `-> Rule .method1(...).method2(...).methodN(...)`
-- lifecycle chain:
-  - `I.method1(...).method2(...)`
-  - also valid for `E`, `EX`, `IT`, `LX`, `LS`, `LE`
-
-### Notes on `return_undef()` and richer return payloads
-- `return_undef()` is a dedicated shorthand for `return undef` in fluent branches.
-- For rich payload returns, prefer generalized `return(payload)` with nested literal structures.
-- Legacy `return(label, arg)` helper remains supported for compatibility with existing specs and tagged-return behavior.
-### Exhaustive `return(payload)` payload reference
-`return(payload)` accepts exactly one payload argument.
-
-Supported payload categories:
-- String literals
-  - `return("ok")`
-  - `return('ok')`
-- Numeric literals
-  - `return(0)`
-  - `return(-3.14)`
-- Array literals (including nested)
-  - `return(["semantic", 1, 2])`
-  - `return([1, { k => "v" }, [2, 3]])`
-- Hash literals (including nested)
-  - `return({ kind => "node", ok => 1 })`
-  - `return({ meta => { id => 7 }, list => [1, 2] })`
-- Helper-based scalar lookups
-  - `return(scalar(name))`
-  - `return(scalar(foo_arr, idx))`
-  - `return(scalar(foo_hash, key))`
-  - `return(scalar(array(foo_arr), idx))`
-  - `return(scalar(hash(foo_hash), key))`
-  - `return(scalar(IMATCH_LIST, 0))`
-- Helper-based ref-path lookups
-  - `return(scalaref(myref, [A][B]{C}[D]))`
-  - `return(scalaref(myref, {A}[B]{C}[D]))`
-- Helper-based array construction
-  - `return(array(scalar(name), 123, "x"))`
-- Helper-based hash construction
-  - `return(hash("kind", "node", "ok", 1))`
-- Helper-based array snapshots
-  - `return(array_values(array(items)))`
-- Helper-based flat list insertion
-  - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))`
-  - `return(hash(flat_hash(extra_pairs), "kind", "node"))`
-- Mixed nested payloads with embedded helpers
-  - `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
-  - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
-- Raw Perl expressions are also accepted in block-form payloads
-  - `return($value)`
-  - `return($hash{$key} // "na")`
-  - `return(foo())`
-  - `return(foo)` (bare identifier)
-
-Lowering behavior examples:
-- `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])`
-  - lowers to: `return ["semantic", { key => $name }, [123, $foo_arr[$idx]]]`
-- `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })`
-  - lowers to: `return { item => $foo_hash{$key}, list => [$name, 123] }`
-- `return(scalar(name))`
-  - lowers to: `return $name`
-- `return(array(scalar(name), 2))`
-  - lowers to: `return [$name, 2]`
-- `return(hash("item", scalar(foo_hash, key), "list", array(scalar(name), 123)))`
-  - lowers to: `return {"item" => $foo_hash{$key}, "list" => [$name, 123]}`
-- `return(array_values(array(items)))`
-  - lowers to: `return [@items]`
-- `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))`
-  - lowers to: `return ["?subprogram_declaration:", @IMATCH_LIST]`
-- `return(hash(flat_hash(extra_pairs), "kind", "node"))`
-  - lowers to: `return {%extra_pairs, "kind" => "node"}`
-- `return({name=>scalar(block_namei), content=>array_values(array(assigns))})`
-  - lowers to: `return {name=>$block_namei, content=>[@assigns]}`
-
-Method-chain caveat (`-> Rule .return(...)`):
-- General payload mode is selected for chain payloads that start with:
-  - `[` / `{`
-  - quoted strings (`"..."` / `'...'`)
-  - numeric literals
-  - `scalar(...)`, `scalaref(...)`, `array(...)`, `hash(...)`, `flat(...)`, `flatten(...)`, `flat_array(...)`, or `flat_hash(...)`
-- Example (general payload):
-  - `-> Top .return(["semantic", { key => scalar(name) }])`
-- If chain payload does not match those starts, chain rendering falls back to label-injected legacy form.
-  - Example: `-> Top .return(foo)` is treated as legacy-style return with scope label injection, not generalized `return(payload)`.
+## Known Caveats and Nuances
+- `return(payload)` is the preferred general return form, but method-chain `.return(...)` detection is still more conservative than block-form `return(payload)`.
+- Helper shells can still contain raw backend expressions; this is sometimes practical, but it is less portable than pure helper-only authoring.
+- Legacy compatibility wrappers are still important because many existing specs depend on them. Keep them in mind when reading old specs, but do not default to them in new code.
+- Some old specs are still extraction-oriented and permissive; that is part of LinkedSpec's intended character, not automatically a bug.
 
 ## Versioning and Compatibility
-- Treat existing specs as compatibility contracts.
-- Before changing core semantics, validate against baseline specs and consumer modules.
+Treat existing specs as compatibility contracts.
+When changing lowering behavior:
+- preserve current AST shapes unless there is a deliberate migration,
+- add regression locks when a new lowering surface is introduced,
+- prefer canonical helper surfaces over expanding raw fallback.

@@ -106,8 +106,8 @@ sub _normalize_method_tag_expr {
 
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
-# Purpose : Lower method DSL value expressions (`scalar(...)`, `array(...)`,
-#           `flat(...)`)
+# Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
+#           `array(...)`, `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -178,6 +178,13 @@ sub _lower_method_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
  my $method_call = $parse_method_function_expr->($trimmed);
+ if ($method_call && $method_call->{method} eq 'call') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $effective_args;
+  my $callee = $trim_action_ir_value->($effective_args->[0]);
+  return undef unless defined($callee) && $callee =~ /^\w+$/o;
+  return '&{$$descr{spec}{'.$callee.'}{handler}}($descr, $STRING, $minfo)';
+ }
  if ($method_call && $method_call->{method} eq 'scalaref') {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
   return undef unless $effective_args;

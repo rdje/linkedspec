@@ -1,0 +1,240 @@
+# USER GUIDE - ActionIR `FlowExpr.pm`
+This guide covers the expression-lowering surface implemented by `perl/LinkedSpec/ActionIR/FlowExpr.pm`.
+
+This is the guide to read when you need conditions, boolean composition, comparisons, emptiness checks, and expression nesting.
+For exact DSL-to-Perl examples for every boolean/comparison helper discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
+
+## What this module is responsible for
+`FlowExpr.pm` is the shared expression language used by helper control-flow and some value contexts.
+
+In practice, it covers:
+- `or(...)`
+- `and(...)`
+- `not(...)`
+- `is_empty(...)`
+- `is_nonempty(...)`
+- string comparisons: `eq`, `ne`, `gt`, `ge`, `lt`, `le`
+- numeric comparisons: `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, `num_le`
+- regex predicates: `matches(lhs, /regex/)`
+- nested composition of those helpers
+
+## Why this expression family matters
+A large part of backend-neutral authoring is replacing raw Perl branch conditions such as:
+
+```text
+if ($flag && $name ne "")
+```
+
+with explicit DSL expressions such as:
+
+```text
+if(and(scalar(flag), is_nonempty(scalar(name))))
+```
+
+That is easier to analyze, easier to lower, and easier to port.
+
+## Boolean composition
+### `or(...)`
+
+```text
+or(scalar(on), scalar(off))
+or(eq(scalar(kind), "A"), eq(scalar(kind), "B"))
+```
+
+Use it when any one of the conditions should pass.
+
+### `and(...)`
+
+```text
+and(scalar(enabled), is_nonempty(scalar(name)))
+and(not(is_empty(array(items))), matches(scalar(token), /^[A-Z_]+$/))
+```
+
+Use it when all conditions must pass.
+
+### `not(...)`
+
+```text
+not(is_empty(scalar(name)))
+not(eq(scalar(kind), "ignore"))
+```
+
+Use it to invert one condition.
+
+## Emptiness helpers
+### `is_empty(...)`
+Use it for scalars, arrays, or general expressions.
+
+Examples:
+
+```text
+is_empty(scalar(name))
+is_empty(array(items))
+is_empty(join_values("", array(word)))
+```
+
+Typical meanings:
+- scalar is undefined or empty string,
+- array has no elements,
+- general expression evaluates false/empty.
+
+### `is_nonempty(...)`
+This is the inverse convenience helper.
+
+Examples:
+
+```text
+is_nonempty(array(word))
+is_nonempty(array(tail))
+is_nonempty(scalar(content))
+```
+
+## String comparisons
+Supported helpers:
+- `eq(lhs, rhs)`
+- `ne(lhs, rhs)`
+- `gt(lhs, rhs)`
+- `ge(lhs, rhs)`
+- `lt(lhs, rhs)`
+- `le(lhs, rhs)`
+
+Examples:
+
+```text
+eq(scalar(kind), "SPACE")
+ne(scalar(block_namee), scalar(block_namei))
+gt(scalar(name), "M")
+```
+
+Use these when you mean Perl-style string comparison semantics.
+
+## Numeric comparisons
+Supported helpers:
+- `num_eq(lhs, rhs)`
+- `num_ne(lhs, rhs)`
+- `num_gt(lhs, rhs)`
+- `num_ge(lhs, rhs)`
+- `num_lt(lhs, rhs)`
+- `num_le(lhs, rhs)`
+
+Examples:
+
+```text
+num_eq(scalar(count), 0)
+num_gt(scalar(index), 3)
+num_le(scalar(depth), 8)
+```
+
+Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
+
+## Regex predicate
+### `matches(lhs, /regex/)`
+
+Examples:
+
+```text
+matches(scalar(token), /^[A-Z_]+$/)
+matches(scalar(name), /foo/i)
+```
+
+Use this when a branch depends on regex membership rather than equality.
+
+## Nested examples
+This expression language is designed for nesting.
+
+### Example: nonempty and not disabled
+
+```text
+and(is_nonempty(array(items)), not(scalar(disabled)))
+```
+
+### Example: either explicit enable or a nonempty fallback name
+
+```text
+or(scalar(enabled), is_nonempty(scalar(name)))
+```
+
+### Example: check an entry inside a working array
+
+```text
+eq(scalar(array(capt), 0), "?branch:")
+```
+
+### Example: compound rule guard
+
+```text
+and(
+  is_nonempty(array(capt)),
+  matches(scalar(token), /^[A-Z_]+$/),
+  not(eq(scalar(mode), "skip"))
+)
+```
+
+## Where these expressions are used
+These helpers are most often used in:
+- `if(...)`
+- `elseif(...)`
+- `switch(...)`
+- declaration initializers,
+- assignment sources.
+
+Examples:
+
+```text
+declare(scalar, flag=or(scalar(on), scalar(off)))
+assign(scalar(flag), and(is_nonempty(array(items)), scalar(enabled)))
+if(not(is_empty(scalar(name)))); ... endif()
+```
+
+## Scalar and nested-access expressions inside conditions
+You can combine `scalar(...)` and `scalaref(...)` with the flow-expression helpers.
+
+Examples:
+
+```text
+eq(scalaref(retv, {type}), "SPACE")
+ne(scalaref(retv, {type}), "COMMENTS")
+is_nonempty(scalaref(retv, {content}))
+```
+
+This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
+
+## Worked examples
+### Example: flush a pending word only if it exists
+
+```text
+if(is_nonempty(array(word)));
+  push_value(array(tail), join_values("", array(word)));
+endif()
+```
+
+### Example: detect mismatched begin/end names
+
+```text
+if(ne(scalar(block_namee), scalar(block_namei)));
+  print("error\n");
+  exit;
+endif()
+```
+
+The branch body there may still be legacy/raw, but the condition itself is canonical.
+
+### Example: classify token kinds
+
+```text
+if(eq(scalaref(retv, {type}), "SPACE"));
+  ...
+elseif(ne(scalaref(retv, {type}), "COMMENTS"));
+  ...
+endif()
+```
+
+## Recommendations
+- Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
+- Prefer `eq(...)` / `ne(...)` over raw string comparisons when the logic is part of canonical helper flow.
+- Prefer `num_*` helpers over string comparisons for counters, indices, and numeric depths.
+- Keep nested expressions readable; if one condition becomes too large, split the logic by first assigning a temporary flag.
+
+## Related guides
+- Control-flow markers: [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md)
+- Assignments and value sources: [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md)

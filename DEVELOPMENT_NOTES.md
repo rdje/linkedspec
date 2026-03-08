@@ -61,6 +61,51 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `Lispish::parenthesis`, which had been the last remaining top blocked rule in the current blocker-reduction pass.
+- Slice-selection rationale:
+  - the rule was the only remaining `Lispish` blocker after the earlier small-rule cleanup,
+  - the user explicitly rejected raw wrapper assignments like `$retv = call(parenthesis)` as too host-language specific,
+  - the smallest clean fix was to make `call(rule)` usable as a canonical assignment value source so the spec could use `assign(scalar(retv), call(parenthesis))`.
+- Lowering-surface follow-up:
+  - `MethodLowering.pm` now lowers `call(rule)` as a method value expression,
+  - `ValueExpr.pm` now special-cases `call(...)` in assignment-source lowering so `assign(scalar(retv), call(rule))` stays canonical instead of being stranded as a raw source string.
+- Migration scope:
+  - removed the raw declaration block from `Lispish::parenthesis`,
+  - removed the raw `LE { ... }` post-dispatch classification logic,
+  - replaced the old `@submatchs`/`@word`/`$retv` state machine with helper-only state:
+    - `declare(array, word, tail)`
+    - `declare(scalar, retv, head, has_head)`
+  - recursive child dispatch now uses canonical helper flow:
+    - `assign(scalar(retv), call(parenthesis))`
+  - token content accumulation now uses:
+    - `push_value(array(word), scalaref(retv, {content}))`
+  - word flushes now use:
+    - `join_values("", array(word))`
+    - `push_value(array(tail), ...)`
+    - `assign(array(word), array())`
+  - final return shape now uses canonical helper flow instead of array slicing:
+    - `return(array(undef))`
+    - `return(array(scalar(head), undef))`
+    - `return(array(scalar(head), array_values(array(tail))))`
+- Migration outcome:
+  - `Lispish::parenthesis` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR nodes now include `DECLARE`, `ASSIGN`, `PUSH`, `IF`, `CALL`, and `RETURN`
+  - `Lispish` descriptor migration summary now reports `language_agnostic_blocked_rule_count=0`
+  - within the previously tracked families (`Lispish`, `vhdl`, `ds_vhistory`, `ebnf`), there is no longer a remaining top blocked rule in descriptor migration metadata
+- Regression additions/updates:
+  - added a direct lowering lock for `assign(scalar(retv), call(Leaf))`
+  - refreshed `lispish_small_helper_flow_eliminates_raw_fallback` to the final zero-blocker state
+  - added `lispish_parenthesis_helper_flow_eliminates_raw_fallback`
+  - preserved the `lispish_ast_smoke` nested AST baseline
+- Documentation follow-up:
+  - `USER_GUIDE.md` is now a navigation hub rather than a single terse file
+  - the lowering reference is now split into module-focused guides for `DeclareMethod.pm`, `MethodLowering.pm`, `ValueExpr.pm`, `FlowExpr.pm`, `ControlFlow.pm`, `ArrayPipeline.pm`, and `Contracts.pm`
+  - the new docs explicitly distinguish canonical helper forms from compatibility-only wrapper surfaces and document the preferred `assign(scalar(retv), call(rule))` form with examples
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=106`)
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `vhdl::subprogram_body`.
 - Slice-selection rationale:
   - `subprogram_body` had become the last remaining `vhdl` blocker after the earlier `process_statement` cleanup,
@@ -1740,6 +1785,13 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Canonical statement splitting is now angle-quote-aware:
   - `_split_action_ir_statements(...)` now tracks angle-delimited Perl quote-like payloads with escape and nested-angle handling,
   - semicolons inside angle-quote payload strings are ignored by top-level statement splitting, keeping canonical RAW_PERL fallback payloads intact.
+- Method-value lowering now supports canonical child-call capture:
+  - `call(rule)` now lowers as a method value expression, not only as a standalone compatibility wrapper,
+  - `assign(scalar(retv), call(rule))` is now the preferred backend-neutral replacement for raw `$retv = call(rule)` wrapper assignments.
+- Lowering documentation now treats the user-visible ActionIR surface as an explicit compatibility contract:
+  - the guide set is split into a top-level hub, module-oriented guides, and `USER_GUIDE_ActionIR_EmittedPerlReference.md`,
+  - the emitted-Perl reference is organized by preferred canonical helpers, compatibility helpers, and classified pass-through idioms,
+  - value-expression helpers such as `scalar(...)`, `scalaref(...)`, `array(...)`, `hash(...)`, `flat(...)`, and `flatten(...)` are now documented explicitly as value-context lowerings that take effect inside consumers like `assign(...)`, `push_value(...)`, `return(payload)`, declaration initializers, and flow/control expressions.
 
 ## Change Discipline
 Before each commit:

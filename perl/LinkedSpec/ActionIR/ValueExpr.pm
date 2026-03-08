@@ -298,9 +298,12 @@ sub _lower_assignment_source_expr {
  return '$IMATCH' if $source eq 'IMATCH';
  return '$LMATCH' if $source eq 'LMATCH';
 
+ my $method_value = $lower_method_value_expr->($source);
+ return $method_value if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;
+
  my $lowered = $lower_flow_composite_expr->($source);
  return $lowered if defined($lowered) && length($lowered);
-
+ $lowered = $method_value;
  $lowered = $lower_method_value_expr->($source);
  return $lowered if defined($lowered) && length($lowered);
 

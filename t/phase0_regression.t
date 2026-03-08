@@ -924,7 +924,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -950,6 +950,11 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(capt_joined), join_values('', array(capt)))}),
         q{$capt_joined = join('', @capt)},
         'assign helper accepts join_values(delimiter, array(...)) source lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(retv), call(Leaf))'),
+        q{$retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)},
+        'assign helper accepts call(rule) source lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'substr(Top, scalar(c), "\\s*$", "", o)'),
@@ -2782,9 +2787,31 @@ subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'Lispish descriptor exposes action_rewriter migration summary');
-    is($summary->{language_agnostic_blocked_rule_count}, 1, 'Lispish blocked-rule count drops to only parenthesis after the small-rule migration');
-    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['parenthesis'], 'Lispish blocked-rule priority list now contains only parenthesis');
-    is($summary->{language_agnostic_top_blocked_rule}, 'parenthesis', 'Lispish top blocked rule remains parenthesis after the small-rule migration');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'Lispish blocked-rule count drops to zero after the final parenthesis migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'Lispish exposes no prioritized blocked-rule list after the final parenthesis migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'Lispish exposes no top blocked rule after the final parenthesis migration');
+};
+subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 7;
+
+    my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for Lispish parenthesis migration check');
+
+    my $meta = $descr->{spec}{parenthesis}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'Lispish parenthesis exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'Lispish parenthesis no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'Lispish parenthesis exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'Lispish parenthesis avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'Lispish parenthesis canonical action-IR nodes include DECLARE/ASSIGN/PUSH/IF/CALL/RETURN after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
