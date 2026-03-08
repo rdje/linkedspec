@@ -61,6 +61,44 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-08)
+- Roadmap Item #3 slice completed against `portmap.spec`.
+- Slice-selection rationale:
+  - after the `sdce.spec` cleanup, `portmap.spec` became the next highest remaining blocked spec,
+  - its blocker surface was isolated to one raw-only classifier rule, `bare_bit_slice`, so the slice required no new lowering contracts.
+- Migration scope:
+  - `bare_bit_slice`
+    - replaced the raw `$mcnt = @IMATCH_LIST` / smartmatch return block with helper `if` / `elseif` / `else` control flow
+    - helper returns now use `return(array("?kind:", array(flat_array(IMATCH_LIST))))`
+    - classification now branches on:
+      - `matches(scalar(IMATCH), /:/)` for `slice`
+      - `or(eq(scalar(IMATCH_LIST, 1), "0"), is_nonempty(scalar(IMATCH_LIST, 1)))` for `bit`
+      - `matches(scalar(IMATCH_LIST, 0), /^\\d/io)` for `constant`
+      - final `else()` for `bare`
+- Important implementation nuance:
+  - indexed `is_nonempty(scalar(IMATCH_LIST, n))` currently lowers through truthiness,
+  - zero-valued captures therefore need explicit handling (`bar[0]` and the low-bit side of `baz[7:0]`),
+  - classifying `slice` through `matches(scalar(IMATCH), /:/)` and adding `eq(..., "0")` to the `bit` branch preserved those zero-valued cases cleanly inside helper flow.
+- Migration outcome:
+  - `portmap` now reports `language_agnostic_blocked_rule_count=0`
+  - `bare_bit_slice` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR coverage for the migrated rule now includes `IF`, `ELIF`, `ELSE`, `ENDIF`, and `RETURN`
+- Behavior note:
+  - the old raw classifier emitted Perl experimental smartmatch warnings during parsing,
+  - those warnings are now gone because the rule no longer lowers through smartmatch.
+- Regression addition:
+  - added `portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback`
+  - added `portmap_bare_bit_slice_classification_smoke`
+  - the smoke lock explicitly covers `foo`, `bar[3]`, `bar[0]`, `baz[7:0]`, `0x1f`, `foo[?bar]`, and `{foo bar[2]}`
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=113`)
+- Updated blocker scan after this slice:
+  - `portmap.spec` no longer appears in the blocked-spec ranking
+  - the remaining blocked-spec tail is now:
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `sdce.spec`.
 - Slice-selection rationale:
   - after the `lib_reader.spec` cleanup, `sdce.spec` became the highest remaining blocked spec,

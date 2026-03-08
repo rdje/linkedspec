@@ -12,9 +12,14 @@ concatenation: /\{/ /\}/
 -> concatenation  .push
 -> bare_bit_slice .push
 -> concatenation[1]    {return ['?concat:', [@concatenation]]} 
-
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
-	my $mcnt = @IMATCH_LIST;
-	#say "bare_bit_slice: <@IMATCH_LIST>";
-	return ['?'.($mcnt == 1 ? ($IMATCH_LIST[0] ~~ /^\d/io ? 'constant' : 'bare') : ($mcnt == 2 ? 'bit' : 'slice')).':', [@IMATCH_LIST]]
+	if(matches(scalar(IMATCH), /:/));
+		return(array("?slice:", array(flat_array(IMATCH_LIST))));
+	elseif(or(eq(scalar(IMATCH_LIST, 1), "0"), is_nonempty(scalar(IMATCH_LIST, 1))));
+		return(array("?bit:", array(flat_array(IMATCH_LIST))));
+	elseif(matches(scalar(IMATCH_LIST, 0), /^\d/io));
+		return(array("?constant:", array(flat_array(IMATCH_LIST))));
+	else();
+		return(array("?bare:", array(flat_array(IMATCH_LIST))));
+	endif()
 }

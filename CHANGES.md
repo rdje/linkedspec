@@ -1,5 +1,55 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-08 - Roadmap Slice: Migrate `portmap` Bare-Bit-Slice Classification to Canonical Helper Flow
+## Summary
+Cleared the remaining `portmap.spec` blocked rule by rewriting `bare_bit_slice` from a raw Perl smartmatch classifier into canonical helper control flow, while preserving the existing `bare` / `bit` / `slice` / `constant` AST shapes and explicitly locking the `bit[0]` edge case.
+
+## Changed Files
+- Updated: `specs/portmap.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `portmap.spec` as the next slice because after the `sdce` cleanup it was the highest remaining blocked spec (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`).
+- Cleared the blocked `portmap` rule:
+  - `bare_bit_slice`
+- Reworked `bare_bit_slice` into canonical helper flow:
+  - raw `$mcnt = @IMATCH_LIST` / smartmatch classification logic was replaced with helper `if` / `elseif` / `else` branches,
+  - helper returns now use `return(array("?kind:", array(flat_array(IMATCH_LIST))))`,
+  - classification now branches on:
+    - `matches(scalar(IMATCH), /:/)` for `slice`,
+    - `or(eq(scalar(IMATCH_LIST, 1), "0"), is_nonempty(scalar(IMATCH_LIST, 1)))` for `bit`,
+    - `matches(scalar(IMATCH_LIST, 0), /^\\d/io)` for `constant`,
+    - final `else()` for `bare`.
+- Important migration nuance:
+  - `is_nonempty(scalar(IMATCH_LIST, n))` on indexed captures lowers through truthiness rather than strict defined/nonempty string checks,
+  - because of that, zero-valued indices such as `bar[0]` and slice low bits such as `baz[7:0]` needed explicit classification logic instead of a naive truthiness test,
+  - using `matches(scalar(IMATCH), /:/)` for slice detection plus the explicit `eq(..., "0")` guard for `bit` preserved the original zero-valued cases without reintroducing raw Perl.
+- Behavior cleanup side effect:
+  - the old raw classifier emitted Perl experimental smartmatch warnings during parsing,
+  - the helper rewrite removes that warning path while keeping the AST contract unchanged.
+- Added focused regression coverage:
+  - `portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback`
+  - `portmap_bare_bit_slice_classification_smoke`
+  - these lock zero raw fallback, zero unresolved-helper hits, canonical node coverage, zero blocked-rule summary state, and representative AST classification cases including `bar[0]`.
+- Updated blocker scan after the slice:
+  - `portmap.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=113`)
 ## 2026-03-08 - Roadmap Slice: Migrate `sdce` to Canonical Helper Flow
 ## Summary
 Cleared the remaining `sdce.spec` blocked rules by rewriting the top accumulator and nested pin/port tokenization flow into canonical helper actions, removing raw push/substr/split chains while preserving parser output shape.

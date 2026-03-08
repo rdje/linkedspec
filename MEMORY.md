@@ -37,6 +37,34 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-08)
+- Uncommitted Backbone item #3 slice completed against `portmap.spec`.
+- Key technical outcome:
+  - `portmap` is now clear,
+  - `bare_bit_slice` now uses canonical helper control flow instead of raw Perl smartmatch classification,
+  - the zero-valued index cases (`bar[0]`, `baz[7:0]`) are explicitly preserved inside helper flow.
+- Migration nuance:
+  - indexed `is_nonempty(scalar(IMATCH_LIST, n))` lowers through truthiness, so zero-valued captures need explicit handling,
+  - `slice` classification now keys off `matches(scalar(IMATCH), /:/)`,
+  - `bit` classification now uses `or(eq(scalar(IMATCH_LIST, 1), "0"), is_nonempty(scalar(IMATCH_LIST, 1)))`.
+- Rule-migration outcome:
+  - `portmap` now reports `language_agnostic_blocked_rule_count=0`
+  - `bare_bit_slice` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+- Regression outcome:
+  - added `portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback`
+  - added `portmap_bare_bit_slice_classification_smoke`
+  - full `t/phase0_regression.t` suite now passes at 113 tests
+- Behavior note:
+  - the old experimental smartmatch warning path is gone after the helper rewrite.
+- Blocker-ranking outcome:
+  - `portmap.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `pplugin.spec` (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`)
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (113 tests)
+## Current Session Snapshot (2026-03-08)
 - Uncommitted Backbone item #3 slice completed against `sdce.spec`.
 - Key technical outcome:
   - `sdce` is now clear,
@@ -247,10 +275,10 @@ When resuming after interruption:
 6. Continue implementation from highest-priority roadmap item.
 
 ## Next Recommended Work Item
-- If continuing blocker reduction before the next commit, target `portmap.spec` next:
-  - it is now the highest remaining blocked spec (`BLOCKED=1`, `TOP=bare_bit_slice`, `BLOCKERS=2`)
-  - `pplugin.spec` and `tkgui.spec` are the smaller tail slices after that
-- `sdce.spec` is now clear and should be treated like the already-cleared `lib_reader`, `hlink_substitution`, `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
+- If continuing blocker reduction before the next commit, target `pplugin.spec` next:
+  - the remaining blocker tail is now `pplugin.spec` and `tkgui.spec`, each with one blocked rule
+  - `pplugin.spec` is the next deterministic one-rule tail slice to inspect, followed by `tkgui.spec`
+- `portmap.spec` is now clear and should be treated like the already-cleared `sdce`, `lib_reader`, `hlink_substitution`, `DT`, `operators_try`, `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` families for blocker-ranking purposes.
 - Continue post-item-#3 follow-up toward language-neutral actions:
   - after this commit, the next high-value work item is user review of the exhaustive lowering-guide set, with any resulting syntax/semantic cleanup driven by that review,
   - keep `_split_action_ir_statements(...)` hardening frozen unless a concrete regression appears,

@@ -2865,6 +2865,58 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'sdce exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
+subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 13;
+
+    my $descr = LinkedSpec::get_parser('portmap', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for portmap bare_bit_slice migration check');
+
+    my $meta = $descr->{spec}{bare_bit_slice}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'portmap bare_bit_slice exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'portmap bare_bit_slice no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'portmap bare_bit_slice exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'portmap bare_bit_slice avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'portmap bare_bit_slice canonical action-IR nodes include IF/ELIF/ELSE/RETURN after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'portmap bare_bit_slice is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'portmap descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'portmap blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'portmap exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'portmap exposes no top blocked rule after helper migration');
+    is($descr->{spec}{portmap}{meta}{action_rewriter}{raw_perl_dependency_count}, 0, 'portmap top rule remains free of raw fallback after bare_bit_slice migration');
+    is($descr->{spec}{concatenation}{meta}{action_rewriter}{raw_perl_dependency_count}, 0, 'portmap concatenation rule remains free of raw fallback after bare_bit_slice migration');
+};
+subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
+    plan tests => 15;
+
+    my $parser = LinkedSpec::get_parser('portmap');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'portmap parser created');
+
+    my @cases = (
+        [q{foo}, ['?bare:', ['foo']]],
+        [q{bar[3]}, ['?bit:', ['bar', '3']]],
+        [q{bar[0]}, ['?bit:', ['bar', '0']]],
+        [q{baz[7:0]}, ['?slice:', ['baz', '7', '0']]],
+        [q{0x1f}, ['?constant:', ['0x1f']]],
+        [q{foo[?bar]}, ['?bit:', ['foo', '?bar']]],
+        [q{{foo bar[2]}}, ['?concat:', [['?bare:', ['foo']], ['?bit:', ['bar', '2']]]]],
+    );
+
+    for my $case (@cases) {
+        my ($input, $expected) = @$case;
+        my $copy = $input;
+        my $ast = eval { $parser->(\$copy) };
+        ok(!$@, "portmap parse completed for `$input`") or diag(normalize_error($@));
+        is_deeply($ast, $expected, "portmap classification matches expected AST for `$input`");
+    }
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
