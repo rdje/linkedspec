@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A modularization slice completed against the façade-owned parser-factory dependency builder boundary.
+- Key technical outcome:
+  - `LinkedSpec::ParserFactory::run_get_parser(...)` now owns its default trace/resolution/compile dependency map,
+  - `LinkedSpec::get_parser(...)` remains the stable public wrapper but no longer depends on the private façade helper `_parser_factory_deps()`,
+  - the explicit injected-deps seam is still available for focused tests and internal reuse.
+- Regression outcome:
+  - added `get_parser_avoids_linkedspec_parser_factory_dep_builder`,
+  - the regression traps `LinkedSpec::_parser_factory_deps()` and proves `get_parser(...)` still returns an executable parser and parses input successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (127 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move ParserFactory default deps out of facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A modularization slice completed against the public `get_parser(...)`/parser-factory option-normalization boundary.
 - Key technical outcome:
   - `LinkedSpec::get_parser(...)` now normalizes flat option pairs locally before delegating,

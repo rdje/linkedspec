@@ -170,6 +170,32 @@ subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     is($captured_option->{trace_log_file}, $tmp_log, 'get_parser preserves normalized option values when delegating into ParserFactory');
     ok(defined($parser) && ref($parser) eq 'CODE' && defined($ast) && ref($ast) eq 'ARRAY', 'parser created through normalized ParserFactory options still executes');
 };
+subtest 'get_parser_avoids_linkedspec_parser_factory_dep_builder' => sub {
+    plan tests => 4;
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_parser_factory_deps = sub { die "__UNEXPECTED_LINKEDSPEC_PARSER_FACTORY_DEPS__\n" };
+
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser('Lispish');
+        my $input = '(deps owner)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser succeeds without the LinkedSpec parser-factory dep builder') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_PARSER_FACTORY_DEPS__/, 'get_parser does not call the trapped LinkedSpec parser-factory dep builder');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef when ParserFactory owns its default deps');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through ParserFactory-owned default deps still executes');
+};
 subtest 'get_parser_explicit_path_resolution_without_pathsearch' => sub {
     plan tests => 4;
 

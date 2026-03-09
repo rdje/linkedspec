@@ -375,6 +375,8 @@ Descriptor summary fields:
 
 `LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility.
 
+Public callers should continue to treat `LinkedSpec::get_parser(...)` as the stable entrypoint. Trace/spec-resolution/compile defaults are owned internally by `LinkedSpec::ParserFactory`, so callers do not need to wire those dependencies themselves.
+
 ## Tracing and Debugging
 LinkedSpec supports multi-level tracing.
 

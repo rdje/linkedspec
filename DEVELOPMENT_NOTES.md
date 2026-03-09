@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A no-behavior-change modularization slice completed against the façade-owned parser-factory dependency builder seam.
+- Slice-selection rationale:
+  - `LinkedSpec::get_parser(...)` still relied on the private façade helper `_parser_factory_deps()` even though `ParserFactory.pm` already owned parser-factory orchestration,
+  - the default trace/resolution/compile dependency map belongs with the parser-factory owner rather than the public wrapper,
+  - moving that default wiring into `ParserFactory.pm` makes `get_parser(...)` a thinner delegate without changing behavior.
+- Implementation scope:
+  - added default dependency-map ownership in `LinkedSpec::ParserFactory::run_get_parser(...)`,
+  - removed the now-unused façade helper `_parser_factory_deps()` from `LinkedSpec.pm`,
+  - kept the explicit injected-deps seam in `run_get_parser(...)` for focused tests and internal call sites.
+- Regression addition:
+  - added `get_parser_avoids_linkedspec_parser_factory_dep_builder`,
+  - the regression traps `LinkedSpec::_parser_factory_deps()` and verifies `get_parser(...)` still returns a working parser coderef and parses input successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=127`)
+## Session Notes (2026-03-10)
 - Phase 1A no-behavior-change modularization slice completed against the public `get_parser(...)`/parser-factory option-normalization seam.
 - Slice-selection rationale:
   - `LinkedSpec::get_parser(...)` still passed raw flat option pairs into `ParserFactory::run_get_parser(...)`,

@@ -8,6 +8,8 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::Deps ();
+
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -19,20 +21,25 @@ sub _require_dep {
 sub _require_value_dep {
  my ($deps, $name) = @_;
  die "(LinkedSpec::ParserFactory::_require_value_dep) -E- missing dependency value '$name'"
-  unless ref($deps) eq 'HASH' && exists $deps->{$name};
+ unless ref($deps) eq 'HASH' && exists $deps->{$name};
  return $deps->{$name}
+}
+
+sub _default_deps {
+ return LinkedSpec::Deps::parser_factory_deps_for_package(__PACKAGE__)
 }
 
 #------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
-# Args    : ($spec_name, $option_hashref, $deps)
+# Args    : ($spec_name, $option_hashref, $deps_opt)
 # Returns : parser coderef or undef
 #------------------------------------------------------------------------------
 sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
  my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
+ $deps = _default_deps() unless ref($deps) eq 'HASH';
 
  my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
  my $trace_enter = _require_dep($deps, 'trace_enter');

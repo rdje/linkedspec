@@ -68,9 +68,6 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 sub _flow_expr_deps {
  return LinkedSpec::Deps::flow_expr_deps_for_package(__PACKAGE__)
 }
-sub _parser_factory_deps {
- return LinkedSpec::Deps::parser_factory_deps_for_package(__PACKAGE__)
-}
 sub _method_lowering_deps {
  return LinkedSpec::Deps::method_lowering_deps_for_package(__PACKAGE__)
 }
@@ -1225,7 +1222,7 @@ sub _resolve_local_spec_path {
 sub get_parser {
  my ($spec_name, @opts) = @_;
  my %opt_hash = (@opts % 2 == 0) ? @opts : ();
- return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash, _parser_factory_deps())
+ return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash)
 }
 
 #------------------------------------------------------------------------------

@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Move ParserFactory Default Deps Out of the Facade
+## Summary
+Reduced another façade-only helper seam by making `LinkedSpec::ParserFactory::run_get_parser(...)` own its default trace/resolution/compile dependency map, so the public `LinkedSpec::get_parser(...)` path no longer depends on the private façade helper `_parser_factory_deps()`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::ParserFactory::run_get_parser(...)`:
+  - it now loads its default dependency map from `LinkedSpec::Deps` when no explicit dep hash is supplied,
+  - the explicit injected-deps seam remains available for focused tests and internal reuse.
+- Simplified `LinkedSpec::get_parser(...)`:
+  - it still normalizes flat option pairs locally,
+  - parser-factory dispatch now delegates without calling the façade-only `_parser_factory_deps()` helper.
+- Added focused regression coverage:
+  - `get_parser_avoids_linkedspec_parser_factory_dep_builder`
+  - the regression traps `LinkedSpec::_parser_factory_deps()` and proves `get_parser(...)` still returns an executable parser and parses input successfully.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=127`)
 ## 2026-03-10 - Phase 1A Slice: Normalize `get_parser(...)` Options Before `ParserFactory`
 ## Summary
 Reduced another active raw-argument compatibility seam by making `LinkedSpec::get_parser(...)` normalize its flat option pairs locally and pass a hashref into `LinkedSpec::ParserFactory::run_get_parser(...)`, so the public parser path no longer depends on option-list normalization inside `ParserFactory.pm`.
