@@ -891,6 +891,99 @@ subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     ok(($emit_ctx->{action_rewriter_meta}{rewrite_contract_ids} && @{$emit_ctx->{action_rewriter_meta}{rewrite_contract_ids}} > 0),
         'RuleIR emit-context still builds rewrite contracts through extracted action-rewriter module');
 };
+subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
+    plan tests => 12;
+
+    my %rewritten;
+    my ($ok_run, $err) = (0, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_lower_flow_composite_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FLOW_COMPOSITE_EXPR__\n" };
+        local *LinkedSpec::_lower_method_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_METHOD_VALUE_EXPR__\n" };
+        local *LinkedSpec::_declare_alias_to_type = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_ALIAS_TO_TYPE__\n" };
+        local *LinkedSpec::_lower_typed_declare_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_TYPED_DECLARE_STATEMENT__\n" };
+        local *LinkedSpec::_lower_assign_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGN_STATEMENT__\n" };
+        local *LinkedSpec::_build_array_pipeline_plan_from_expr = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ARRAY_PIPELINE_PLAN_FROM_EXPR__\n" };
+        local *LinkedSpec::_lower_return_general_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_GENERAL_STATEMENT__\n" };
+        local *LinkedSpec::_lower_return_imatch_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_IMATCH_STATEMENT__\n" };
+        local *LinkedSpec::_lower_push_value_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PUSH_VALUE_STATEMENT__\n" };
+        local *LinkedSpec::_lower_regex_subst_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_REGEX_SUBST_STATEMENT__\n" };
+        local *LinkedSpec::_lower_array_pipeline_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ARRAY_PIPELINE_EXPR__\n" };
+        local *LinkedSpec::_lower_if_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_IF_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_elseif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSEIF_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_else_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSE_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_endif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ENDIF_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_switch_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SWITCH_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_case_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_CASE_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_default_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DEFAULT_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_endcase_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ENDCASE_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_endswitch_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ENDSWITCH_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_say_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SAY_STATEMENT__\n" };
+        local *LinkedSpec::_lower_print_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PRINT_STATEMENT__\n" };
+        local *LinkedSpec::_lower_return_undef_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_UNDEF_STATEMENT__\n" };
+        local *LinkedSpec::_lower_return_array_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_ARRAY_STATEMENT__\n" };
+
+        $rewritten{declare} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'declare_s(Top, flag=or(scalar(on), scalar(off)))',
+        );
+        $rewritten{assign} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'assign(Top, scalar(flag), or(scalar(on), scalar(off)))',
+        );
+        $rewritten{push} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'push_value(array(items), scalar(retv))',
+        );
+        $rewritten{regex} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'substr(Top, scalar(c), /^"|"$/, //, go)',
+        );
+        $rewritten{pipeline} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'split(array(parts), scalar(args), /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts))',
+        );
+        $rewritten{flow} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'if(scalar(on)); print("warn"); else(); return_undef(); endif()',
+        );
+        $rewritten{switch} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'switch(scalar(kind)); case(foo); print("hit"); default(); say("miss"); endswitch()',
+        );
+        $rewritten{return_imatch} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'return_imatch(Top, semantic_annotation)',
+        );
+        $rewritten{return_array} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'return_array(Top, semantic_annotation, array(scalar(IMATCH_LIST, 0), scalar(c)))',
+        );
+        $rewritten{return_general} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'return(array_copy(array(items)))',
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter lowering succeeds without LinkedSpec lowering facade helpers')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'ActionRewriter lowering does not call the trapped LinkedSpec facade helpers');
+    is($rewritten{declare}, 'my $flag = (($on) || ($off))', 'declare alias lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{pipeline}, '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
+        'array pipeline lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{flow}, 'if ($on) {; print "warn"; } else {; return undef; }',
+        'if/else flow lowering stays inside ActionRewriter-owned lowering path');
+    like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
+        'switch/case/default lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{return_imatch}, 'return ["semantic_annotation", $IMATCH]', 'return_imatch lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{return_array}, 'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]', 'return_array lowering stays inside ActionRewriter-owned lowering path');
+    is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside ActionRewriter-owned lowering path');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Decouple ActionRewriter Lowering from `LinkedSpec.pm` Facade
+## Summary
+Reduced another modularization-era reach-back into `LinkedSpec.pm` by making `LinkedSpec::ActionRewriter` own the extracted lowering callbacks used by its declare/scanner/contract dependency maps, instead of resolving those callbacks through the façade.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Expanded `LinkedSpec::ActionRewriter`:
+  - added local wrapper/dependency-builder helpers for extracted ActionIR modules:
+    - `FlowExpr`
+    - `ValueExpr`
+    - `MethodLowering`
+    - `ArrayPipeline`
+    - `ControlFlow`
+  - direct action-rewriter lowering now stays inside `LinkedSpec::ActionRewriter` for:
+    - declare helper lowering
+    - value/assignment lowering
+    - array-pipeline lowering
+    - fluent control-flow lowering
+    - return/push/regex-substitution lowering
+- Updated `LinkedSpec::Deps`:
+  - `action_rewriter_declare_method_deps_for_package(...)` no longer hardcodes `LinkedSpec.pm` for declare/value lowering callbacks,
+  - `action_rewriter_scanner_deps_for_package(...)` no longer hardcodes `LinkedSpec.pm` for array-pipeline planning,
+  - `action_rewriter_contract_deps_for_package(...)` no longer hardcodes `LinkedSpec.pm` for method/pipeline/control-flow lowering callbacks.
+- Added focused regression coverage:
+  - `action_rewriter_avoids_linkedspec_lowering_facade`
+  - the regression traps the old `LinkedSpec::_...` lowering helper names and proves direct `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` rewrites still succeed for declare, assign, push, regex, pipeline, flow, switch, and return forms.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=120`)
 ## 2026-03-09 - Phase 1A Slice: Decouple RuleIR EmitContext from `LinkedSpec.pm` Action-Rewriter Facade
 ## Summary
 Reduced one more modularization-era reach-back into `LinkedSpec.pm` by making `LinkedSpec::RuleIR::EmitContext` call `LinkedSpec::ActionRewriter` directly for rewrite-rule construction, rewrite execution, diagnostic accumulation, and trim helpers.

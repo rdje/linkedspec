@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against `LinkedSpec::ActionRewriter` lowering dependencies.
+- Key technical outcome:
+  - `LinkedSpec::ActionRewriter` now owns the extracted ActionIR lowering/value/pipeline/control-flow callback surface it needs for direct rewrites,
+  - `LinkedSpec::Deps` no longer routes action-rewriter declare/scanner/contract lowering callbacks back through `LinkedSpec.pm`.
+- Regression outcome:
+  - added `action_rewriter_avoids_linkedspec_lowering_facade`,
+  - the regression traps the old `LinkedSpec::_...` lowering helper names and verifies direct `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` rewrites still succeed across representative declare, assign, push, regex, pipeline, flow, switch, and return forms.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (120 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: decouple ActionRewriter lowering from facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against `LinkedSpec::RuleIR::EmitContext`.
 - Key technical outcome:
   - `LinkedSpec::RuleIR::EmitContext` now routes rewrite-rule construction, rewrite execution, trim helpers, and diagnostic accumulation through `LinkedSpec::ActionRewriter`,

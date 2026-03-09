@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the action-rewriter lowering boundary.
+- Slice-selection rationale:
+  - the extracted ActionIR lowering modules already owned the behavior for declare/value/pipeline/control-flow lowering,
+  - `LinkedSpec::Deps` still resolved the action-rewriter callback surface through `LinkedSpec.pm`,
+  - this made `LinkedSpec::ActionRewriter` the next small, defensible place to cut façade-only indirection.
+- Implementation scope:
+  - added local wrapper/dependency-builder helpers in `perl/LinkedSpec/ActionRewriter.pm` for the extracted ActionIR lowering modules it already depends on,
+  - switched `LinkedSpec::Deps` action-rewriter dependency maps from hardcoded `LinkedSpec.pm` callbacks to package-local `LinkedSpec::ActionRewriter` callbacks for declare/scanner/contract lowering work,
+  - kept rewrite output and public compatibility (`LinkedSpec::call_spec_handler_subst(...)`) unchanged.
+- Regression addition:
+  - added `action_rewriter_avoids_linkedspec_lowering_facade`,
+  - the regression traps the old `LinkedSpec::_...` lowering helper names and verifies direct `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` rewrites still succeed across declare, assign, push, regex, array-pipeline, flow, switch, and return forms.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=120`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the RuleIR emit-context boundary.
 - Slice-selection rationale:
   - `LinkedSpec::RuleIR::EmitContext` still depended on `LinkedSpec.pm` façade helpers for action-rewriter plumbing,
