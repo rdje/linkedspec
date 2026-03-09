@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Route ParserFactory Compilation Through `Runtime::run_get`
+## Summary
+Reduced another active compatibility-wrapper dependency by making `LinkedSpec::ParserFactory` compile specs through `LinkedSpec::Runtime::run_get(...)` with an injected option hashref, so parser-factory compilation no longer depends on `LinkedSpec::Runtime::run_get_from_args(...)`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::ParserFactory::run_get_parser(...)`:
+  - it now forwards a normalized option hashref into the injected compile callback,
+  - `trace_reset_log` is still stripped before the compile step so parser generation does not reapply reset-only trace handling.
+- Updated parser-factory dependency wiring:
+  - `LinkedSpec::Deps::parser_factory_deps_for_package(...)` now resolves `compile_spec` from `LinkedSpec::Runtime::run_get(...)` instead of `run_get_from_args(...)`.
+- Preserved compatibility:
+  - `LinkedSpec::Runtime::run_get_from_args(...)` remains as a compatibility wrapper for raw `Get(...)`-style entrypoints,
+  - `LinkedSpec::Get(...)` public behavior is unchanged.
+- Extended focused regression coverage:
+  - `get_parser_avoids_linkedspec_parser_factory_facade`
+  - the regression now also traps `LinkedSpec::Runtime::run_get_from_args(...)` and proves `get_parser(...)` still resolves, compiles, executes, and emits trace output without touching that raw-arg wrapper.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=124`)
 ## 2026-03-09 - Phase 1A Slice: Move Bootstrap Parse Ownership into `BootstrapSpec`
 ## Summary
 Reduced another compiler/runtime coupling point by making `LinkedSpec::BootstrapSpec` own cached bootstrap grammar state and bootstrap parse execution, while `LinkedSpec::Compiler::run_get_pipeline(...)` now depends only on an injected `bootstrap_parse` callback instead of the raw bootstrap descriptor/index/gdata triple.

@@ -198,7 +198,7 @@ sub parser_factory_deps_for_package {
   validate_spec_name => _require_pkg_cb('LinkedSpec::Resolver', 'validate_spec_name'),
   resolve_spec_path => _require_pkg_cb('LinkedSpec::Resolver', 'resolve_spec_path'),
   load_spec_content => _require_pkg_cb('LinkedSpec::Resolver', 'load_spec_content'),
-  compile_spec => _require_pkg_cb('LinkedSpec::Runtime', 'run_get_from_args'),
+  compile_spec => _require_pkg_cb('LinkedSpec::Runtime', 'run_get'),
   dump_low => _require_pkg_value('LinkedSpec::Trace', 'DUMP_LOW'),
   dump_medium => _require_pkg_value('LinkedSpec::Trace', 'DUMP_MEDIUM'),
  }

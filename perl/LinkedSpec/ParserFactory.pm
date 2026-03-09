@@ -26,7 +26,7 @@ sub _require_value_dep {
 #------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
-#           resolution/loading and compilation via injected Get callback.
+#           resolution/loading and compilation via injected runtime compile callback.
 # Args    : ($spec_name, $raw_opts_arrayref, $deps)
 # Returns : parser coderef or undef
 #------------------------------------------------------------------------------
@@ -61,17 +61,9 @@ sub run_get_parser {
 
  my $content = $load_spec_content->($spec_path, $trace_scope);
  return undef unless defined $content;
- my @forward_opts = @opts;
- if (%opt_hash && exists $opt_hash{trace_reset_log}) {
-  @forward_opts = ();
-  my @kv = @opts;
-  while (@kv) {
-   my ($k, $v) = splice(@kv, 0, 2);
-   next if defined($k) && $k eq 'trace_reset_log';
-   push @forward_opts, $k, $v;
-  }
- }
- my $parser = $compile_spec->(\$content, @forward_opts);
+ my %forward_opt_hash = %opt_hash;
+ delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
+ my $parser = $compile_spec->(\$content, \%forward_opt_hash);
  $trace_decision->('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', $dump_medium);
  $trace_exit->(
   $trace_scope,

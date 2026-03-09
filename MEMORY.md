@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against the parser-factory/runtime compile boundary.
+- Key technical outcome:
+  - `LinkedSpec::ParserFactory::run_get_parser(...)` now compiles through `LinkedSpec::Runtime::run_get(...)` with a normalized option hashref,
+  - active parser-factory compilation no longer depends on the raw-arg compatibility wrapper `LinkedSpec::Runtime::run_get_from_args(...)`.
+- Regression outcome:
+  - extended `get_parser_avoids_linkedspec_parser_factory_facade`,
+  - the regression now traps `LinkedSpec::Runtime::run_get_from_args(...)` and proves `get_parser(...)` still resolves, compiles, executes, keeps `PathSearch` unloaded, and emits routed trace output.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (124 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: route ParserFactory compilation through Runtime::run_get` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against bootstrap parse ownership.
 - Key technical outcome:
   - `LinkedSpec::BootstrapSpec` now owns cached bootstrap grammar state via `cached_bootstrap_state()` and bootstrap parse execution via `run_bootstrap_parse(...)`,

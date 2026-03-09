@@ -66,7 +66,8 @@ sub run_get {
 
 #------------------------------------------------------------------------------
 # Function: run_get_from_args
-# Purpose : Normalize raw `Get` entrypoint arguments and delegate to run_get.
+# Purpose : Compatibility wrapper that normalizes raw `Get` entrypoint
+#           arguments and delegates to `run_get(...)`.
 # Args    : ($spec_content_ref, %options)
 # Returns : parser coderef | descriptor hashref | undef
 #------------------------------------------------------------------------------

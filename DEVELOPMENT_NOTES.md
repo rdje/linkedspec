@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the parser-factory/runtime compile seam.
+- Slice-selection rationale:
+  - `LinkedSpec::ParserFactory` still depended on `Runtime::run_get_from_args(...)`, which is only a raw-argument compatibility wrapper,
+  - the real owning runtime entrypoint for parser compilation is `Runtime::run_get(...)`,
+  - shifting parser-factory compilation to that direct owner narrows another active compatibility surface without changing public `get_parser(...)` behavior.
+- Implementation scope:
+  - changed `ParserFactory::run_get_parser(...)` to forward a normalized option hashref into the injected compile callback,
+  - updated `Deps::parser_factory_deps_for_package(...)` so `compile_spec` resolves from `LinkedSpec::Runtime::run_get(...)`,
+  - kept `Runtime::run_get_from_args(...)` as compatibility glue for raw `Get(...)`-style callers only.
+- Regression extension:
+  - expanded `get_parser_avoids_linkedspec_parser_factory_facade`,
+  - the regression now also traps `LinkedSpec::Runtime::run_get_from_args(...)` and verifies `get_parser(...)` still resolves, compiles, executes, keeps `PathSearch` unloaded, and emits routed trace output.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=124`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against bootstrap parse ownership.
 - Slice-selection rationale:
   - `Compiler::run_get_pipeline(...)` still knew the raw bootstrap descriptor/index/gdata internals,

@@ -90,6 +90,7 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
         local *LinkedSpec::Get = sub { die "__UNEXPECTED_LINKEDSPEC_GET__\n" };
         local *LinkedSpec::DUMP_LOW = sub { die "__UNEXPECTED_LINKEDSPEC_DUMP_LOW__\n" };
         local *LinkedSpec::DUMP_MEDIUM = sub { die "__UNEXPECTED_LINKEDSPEC_DUMP_MEDIUM__\n" };
+        local *LinkedSpec::Runtime::run_get_from_args = sub { die "__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__\n" };
 
         chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
         $parser = LinkedSpec::get_parser(
@@ -108,7 +109,7 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
 
     ok($ok_run, 'get_parser succeeds without LinkedSpec parser-factory facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'get_parser does not call the trapped LinkedSpec parser-factory facade helpers');
+    unlike($err, qr/__UNEXPECTED_(?:LINKEDSPEC|RUNTIME)_/, 'get_parser does not call the trapped LinkedSpec parser-factory facade helpers or Runtime raw-arg wrapper');
     ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef through extracted parser-factory dependencies');
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through extracted parser-factory dependencies still executes');
     ok(!exists $INC{'PathSearch.pm'}, 'module-relative parser-factory path still keeps PathSearch unloaded');
