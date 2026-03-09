@@ -233,6 +233,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
   - Landed follow-up: `LinkedSpec::Compiler::run_get_pipeline(...)` now receives `compile_spec_entry` as an injected dependency during descriptor assembly, so `Compiler.pm` no longer needs to reach back into `LinkedSpec.pm` for `spec_entry` while preserving existing parser-generation behavior.
+  - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now routes rewrite/diagnostic helper plumbing through `LinkedSpec::ActionRewriter` directly, so emit-context assembly no longer needs `LinkedSpec.pm` action-rewriter façade callbacks.
 - Plugin and resource-resolution modernization track: Planned.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.

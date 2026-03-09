@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the RuleIR emit-context boundary.
+- Slice-selection rationale:
+  - `LinkedSpec::RuleIR::EmitContext` still depended on `LinkedSpec.pm` façade helpers for action-rewriter plumbing,
+  - the concrete behavior owner for that helper surface already lived in `LinkedSpec::ActionRewriter`,
+  - this made the slice small, low-risk, and aligned with the roadmap goal of shrinking façade-only indirection.
+- Implementation scope:
+  - added direct `LinkedSpec::ActionRewriter` dependency in `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+  - replaced direct `LinkedSpec::_...` action-rewriter helper calls with local wrappers that delegate to `LinkedSpec::ActionRewriter`,
+  - kept emit-context output shape and metadata behavior unchanged.
+- Regression addition:
+  - added `ruleir_emit_context_avoids_linkedspec_action_rewriter_facade`,
+  - the regression traps the old façade helper names and verifies `build_rule_ir_emit_context(...)` still succeeds, preserving rewritten ACODE output and rewrite-contract metadata.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=119`)
+## Session Notes (2026-03-09)
 - Shared local/GitHub CI slice completed for the phase-0 regression gate.
 - Slice-selection rationale:
   - the repo had no committed GitHub Actions workflow yet,

@@ -10,6 +10,7 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::ActionRewriter ();
 use LinkedSpec::Trace ();
 
 use constant {
@@ -31,13 +32,29 @@ sub _build_rewrite_diag_acc {
  }
 }
 
+sub _trim_action_ir_value {
+ return LinkedSpec::ActionRewriter::_trim_action_ir_value(@_)
+}
+
+sub _rewrite_action_code_with_diagnostics {
+ return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@_)
+}
+
+sub _accumulate_action_rewrite_diagnostics {
+ return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@_)
+}
+
+sub _build_action_rewrite_rules {
+ return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@_)
+}
+
 sub _normalize_rule_code_chunks {
  my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
 
  my @normalized;
  foreach my $chunk (@$chunks) {
-  my ($rewritten, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
+  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
   $rewritten =~ s/\s*;\s*$//o;
   push @normalized, $rewritten;
  }
@@ -51,8 +68,8 @@ sub _rewrite_acode_entries {
  my @ACODEs;
  my @GDATA;
  foreach my $acode_entry (@$acode_entries) {
-  my ($rewritten_acode, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
+  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @ACODEs, $rewritten_acode;
   push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
  }
@@ -66,8 +83,8 @@ sub _rewrite_bcode_entries {
  my @BCALLs;
  my %BCODEs;
  foreach my $bcode_entry (@$bcode_entries) {
-  my ($rewritten_bcode, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules);
-  LinkedSpec::_accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
+  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules);
+  _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @BCALLs, $bcode_entry->{call};
   $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
  }
@@ -94,7 +111,7 @@ sub _collect_unresolved_helper_statements {
  my @unresolved_helper_statements;
  my %seen_unresolved_helper_statement;
  foreach my $event (@{$rewrite_diag_acc->{unresolved_helper_events}}) {
-  my $raw_code = LinkedSpec::_trim_action_ir_value($event->{raw});
+  my $raw_code = _trim_action_ir_value($event->{raw});
   next unless defined($raw_code) && length($raw_code);
   next if $seen_unresolved_helper_statement{$raw_code}++;
   push @unresolved_helper_statements, $raw_code;
@@ -110,7 +127,7 @@ sub _collect_raw_perl_dependency_statements {
  foreach my $event (@{$rewrite_diag_acc->{canonical_action_ir_events}}) {
   next unless ($event->{kind} // '') eq 'RAW_PERL';
   my $raw_code = (ref($event->{args}) eq 'HASH') ? $event->{args}{code} : $event->{raw};
-  $raw_code = LinkedSpec::_trim_action_ir_value($raw_code);
+  $raw_code = _trim_action_ir_value($raw_code);
   next unless defined($raw_code) && length($raw_code);
   next if $seen_raw_perl_dependency_statement{$raw_code}++;
   push @raw_perl_dependency_statements, $raw_code;
@@ -192,7 +209,7 @@ sub _build_action_rewriter_meta {
 sub build_rule_ir_emit_context {
  my ($rule_ir) = @_;
  my $label = $rule_ir->{label};
- my $rewrite_rules = LinkedSpec::_build_action_rewrite_rules($label);
+ my $rewrite_rules = _build_action_rewrite_rules($label);
  my $rewrite_diag_acc = _build_rewrite_diag_acc();
 
  my ($acodes, $gdata) = _rewrite_acode_entries(

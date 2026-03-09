@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Decouple RuleIR EmitContext from `LinkedSpec.pm` Action-Rewriter Facade
+## Summary
+Reduced one more modularization-era reach-back into `LinkedSpec.pm` by making `LinkedSpec::RuleIR::EmitContext` call `LinkedSpec::ActionRewriter` directly for rewrite-rule construction, rewrite execution, diagnostic accumulation, and trim helpers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Updated `LinkedSpec::RuleIR::EmitContext`:
+  - added explicit module dependency on `LinkedSpec::ActionRewriter`,
+  - introduced local wrapper helpers that delegate to `LinkedSpec::ActionRewriter`,
+  - removed remaining direct calls to:
+    - `LinkedSpec::_build_action_rewrite_rules(...)`
+    - `LinkedSpec::_rewrite_action_code_with_diagnostics(...)`
+    - `LinkedSpec::_accumulate_action_rewrite_diagnostics(...)`
+    - `LinkedSpec::_trim_action_ir_value(...)`
+- Preserved behavior:
+  - emit-context assembly still produces rewritten ACODE/BCODE/lifecycle chunks,
+  - per-rule `action_rewriter` metadata remains intact,
+  - gdata mapping order remains unchanged.
+- Added focused regression coverage:
+  - `ruleir_emit_context_avoids_linkedspec_action_rewriter_facade`
+  - the regression traps the old `LinkedSpec.pm` façade helper names and proves `LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(...)` still succeeds without them.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=119`)
 ## 2026-03-09 - CI Slice: Add Shared Local/GitHub Phase-0 Gate
 ## Summary
 Added a repo-root CI entrypoint that can be run locally and from GitHub Actions, and tightened it so the gate only passes when the workflow/script themselves are git-tracked and the exercised LinkedSpec surface stays free of machine-specific absolute paths.

@@ -847,6 +847,50 @@ SPEC
     is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
+subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
+    plan tests => 7;
+
+    my $rule_ir = {
+        label => 'Top',
+        node_type => 'default',
+        REs => [qr/a/],
+        code_blocks => {
+            ICODE  => [],
+            ECODE  => [],
+            EXCODE => [],
+            ITCODE => [],
+            LXCODE => [],
+            LSCODE => [],
+            LECODE => [],
+        },
+        acode_entries => [
+            { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
+        ],
+        bcode_entries => [],
+    };
+
+    my ($emit_ctx, $ok_run, $err) = (undef, 0, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_build_action_rewrite_rules = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ACTION_REWRITE_RULES__\n" };
+        local *LinkedSpec::_rewrite_action_code_with_diagnostics = sub { die "__UNEXPECTED_LINKEDSPEC_REWRITE_ACTION_CODE_WITH_DIAGNOSTICS__\n" };
+        local *LinkedSpec::_accumulate_action_rewrite_diagnostics = sub { die "__UNEXPECTED_LINKEDSPEC_ACCUMULATE_ACTION_REWRITE_DIAGNOSTICS__\n" };
+        local *LinkedSpec::_trim_action_ir_value = sub { die "__UNEXPECTED_LINKEDSPEC_TRIM_ACTION_IR_VALUE__\n" };
+        $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'RuleIR emit-context build succeeds without LinkedSpec action-rewriter facade helpers')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'RuleIR emit-context does not call the trapped LinkedSpec facade helpers');
+    ok(defined($emit_ctx) && ref($emit_ctx) eq 'HASH', 'RuleIR emit-context returns hashref');
+    ok(ref($emit_ctx->{ACODEs}) eq 'ARRAY' && @{$emit_ctx->{ACODEs}} == 1, 'RuleIR emit-context returns rewritten ACODE list');
+    is_deeply($emit_ctx->{GDATA}, [{ label => 'Top', idx => 0 }], 'RuleIR emit-context preserves ACODE gdata mapping');
+    ok(ref($emit_ctx->{action_rewriter_meta}) eq 'HASH', 'RuleIR emit-context exposes action-rewriter metadata');
+    ok(($emit_ctx->{action_rewriter_meta}{rewrite_contract_ids} && @{$emit_ctx->{action_rewriter_meta}{rewrite_contract_ids}} > 0),
+        'RuleIR emit-context still builds rewrite contracts through extracted action-rewriter module');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
@@ -3551,4 +3595,3 @@ sub run_parser_with_captured_io {
     $err = $@ // '' unless $ok;
     return ($ok ? 1 : 0, $ret, $err, $stdout, $stderr, $inner_eval_err);
 }
-

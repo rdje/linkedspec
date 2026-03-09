@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against `LinkedSpec::RuleIR::EmitContext`.
+- Key technical outcome:
+  - `LinkedSpec::RuleIR::EmitContext` now routes rewrite-rule construction, rewrite execution, trim helpers, and diagnostic accumulation through `LinkedSpec::ActionRewriter`,
+  - the module no longer needs `LinkedSpec.pm` action-rewriter façade helpers during emit-context assembly.
+- Regression outcome:
+  - added `ruleir_emit_context_avoids_linkedspec_action_rewriter_facade`,
+  - the regression traps the old `LinkedSpec::_...` façade helper names and verifies emit-context build still succeeds with preserved ACODE/gdata/meta outputs.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (119 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: decouple RuleIR emit context from facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - CI slice completed for local/GitHub phase-0 validation.
 - Key technical outcome:
   - `.github/workflows/ci.yml` now exists and delegates to `bash tools/run_ci_local.sh`,
