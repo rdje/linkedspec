@@ -1,5 +1,56 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - CI Slice: Add Shared Local/GitHub Phase-0 Gate
+## Summary
+Added a repo-root CI entrypoint that can be run locally and from GitHub Actions, and tightened it so the gate only passes when the workflow/script themselves are git-tracked and the exercised LinkedSpec surface stays free of machine-specific absolute paths.
+
+## Changed Files
+- Added: `.github/workflows/ci.yml`
+- Added: `tools/run_ci_local.sh`
+- Updated: `README.md`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added shared CI gate `tools/run_ci_local.sh`:
+  - checks required commands: `git`, `perl`, `prove`
+  - requires git-tracked CI-critical files:
+    - `.github/workflows/ci.yml`
+    - `tools/run_ci_local.sh`
+    - `perl/LinkedSpec.pm`
+    - `t/phase0_regression.t`
+  - requires git-tracked CI-critical trees:
+    - `specs/`, `plugin/`, `conf/`, `tablescript/`, `ebnf/`, `perl/`, `t/`
+  - fails on untracked files under the CI-critical surface, including the workflow directory and shared CI script path
+  - audits machine-specific absolute-path literals across:
+    - `.github/workflows/ci.yml`
+    - `tools/run_ci_local.sh`
+    - `t/phase0_regression.t`
+    - `perl/LinkedSpec.pm`
+    - `perl/LinkedSpec/**`
+  - runs:
+    - `perl -c perl/LinkedSpec.pm`
+    - `perl -c -Iperl t/phase0_regression.t`
+    - `prove -v -Iperl t/phase0_regression.t`
+- Added `.github/workflows/ci.yml`:
+  - triggers on `push`, `pull_request`, and `workflow_dispatch`
+  - delegates directly to `bash tools/run_ci_local.sh` so local and GitHub validation stay aligned
+- Verified the enforcement gap was closed:
+  - before staging the new CI files, the gate failed because `.github/workflows/ci.yml` was not git-tracked
+  - after staging the CI files, the gate passed cleanly
+- Scope note:
+  - the absolute-path audit now covers the CI-exercised LinkedSpec surface
+  - older literals remain in non-LinkedSpec/non-gated files such as `perl/env.conf` and `perl/EasyTk.pm`
+
+## Validation
+- Ran:
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=118`)
 ## 2026-03-09 - Phase 1A Slice: Inject `compile_spec_entry` into `Compiler.pm`
 ## Summary
 Reduced one more internal reverse dependency in the modularization track by making `LinkedSpec::Compiler` consume an injected `compile_spec_entry` callback during spec-descriptor assembly instead of calling back into `LinkedSpec.pm` directly.

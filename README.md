@@ -40,9 +40,12 @@ Top-level directories and files:
   - Primary regression gate: `t/phase0_regression.t`.
 - `tools/`
   - Project tooling and diagnostics helpers.
-  - Example: `tools/inspect_spec_codegen.pl`.
+  - Examples: `tools/inspect_spec_codegen.pl`, `tools/run_ci_local.sh`.
 - `bin/`
   - Utility/command scripts.
+- `.github/workflows/`
+  - GitHub Actions automation.
+  - Primary CI workflow: `.github/workflows/ci.yml`.
 - `plugin/`, `conf/`, `tablescript/`, `ebnf/`
   - Corpus and real-project inputs used in regression/integration flows.
 
@@ -54,6 +57,10 @@ Top-level project docs:
 - `CHANGES.md`
 - `MEMORY.md`
 - `COMMIT.md`
+
+## Local CI
+- Run `bash tools/run_ci_local.sh` from the repo root to execute the same gate used by GitHub Actions.
+- `.github/workflows/ci.yml` delegates to that shared script so local validation and GitHub CI stay aligned.
 
 ## Maintenance Policy for README
 - `README.md` must remain the single project entry point.

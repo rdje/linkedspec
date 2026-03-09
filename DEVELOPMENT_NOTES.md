@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Shared local/GitHub CI slice completed for the phase-0 regression gate.
+- Slice-selection rationale:
+  - the repo had no committed GitHub Actions workflow yet,
+  - the user explicitly wanted a locally runnable pre-push CI path,
+  - the first version of the gate still had a correctness gap because it could pass while the workflow/script themselves were untracked.
+- Implementation scope:
+  - added `tools/run_ci_local.sh` as the repo-root CI entrypoint,
+  - added `.github/workflows/ci.yml` to delegate to that shared script on GitHub,
+  - tightened the gate so it now requires the workflow file and CI script themselves to be git-tracked,
+  - extended the machine-specific absolute-path audit across the LinkedSpec package surface exercised by the gate (`perl/LinkedSpec.pm` + `perl/LinkedSpec/**`), alongside the workflow, script, and phase-0 regression test.
+- Validation nuance:
+  - the gate was intentionally checked in both directions:
+    - it failed while `.github/workflows/ci.yml` was still untracked,
+    - it passed after the CI files were added to the index.
+- Scope note:
+  - older machine-specific literals still exist in non-LinkedSpec/non-gated files such as `perl/env.conf` and `perl/EasyTk.pm`,
+  - those are not part of the current phase-0 CI surface and therefore were not made workflow-blocking in this slice.
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the compiler/runtime boundary.
 - Slice-selection rationale:
   - the roadmap still points to modularization as the next execution track,

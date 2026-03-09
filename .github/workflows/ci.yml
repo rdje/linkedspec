@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  phase0-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show Perl toolchain
+        run: |
+          perl -V:version
+          prove --version
+
+      - name: Run shared local CI gate
+        run: bash tools/run_ci_local.sh

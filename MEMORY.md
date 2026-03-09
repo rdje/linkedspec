@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- CI slice completed for local/GitHub phase-0 validation.
+- Key technical outcome:
+  - `.github/workflows/ci.yml` now exists and delegates to `bash tools/run_ci_local.sh`,
+  - `tools/run_ci_local.sh` is the shared repo-root gate for both local runs and GitHub Actions,
+  - the gate now enforces that the workflow file and shared CI script are git-tracked before it can pass.
+- Validation outcome:
+  - `bash tools/run_ci_local.sh` was verified to fail while `.github/workflows/ci.yml` was still untracked,
+  - after adding the CI files to the index, the same gate passed cleanly at `Files=1, Tests=118`.
+- Path-hygiene outcome:
+  - the CI audit now checks for machine-specific absolute paths across the exercised LinkedSpec package surface (`perl/LinkedSpec.pm` + `perl/LinkedSpec/**`) as well as the workflow, CI script, and regression test,
+  - no such absolute-path literals were found in the LinkedSpec package tree.
+- Scope note:
+  - older absolute-path literals still exist in non-gated files such as `perl/env.conf` and `perl/EasyTk.pm`,
+  - those remain portability debt but are outside the current CI-blocking surface.
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `CI: add shared local/GitHub phase0 gate` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against the compiler/runtime descriptor-assembly boundary.
 - Key technical outcome:
   - `LinkedSpec::Compiler::spec_descr(...)` now consumes an injected `compile_spec_entry` callback instead of calling back into `LinkedSpec.pm`,

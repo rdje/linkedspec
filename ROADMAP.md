@@ -195,6 +195,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
    - Keep this track orthogonal to Backbone item #3: clearing `pplugin.spec` is parser-grammar work, not a commitment to preserve the current plugin runtime forever.
 
 ## Immediate Next Steps
+- Keep local and GitHub CI aligned through the shared entrypoint `tools/run_ci_local.sh`, with `.github/workflows/ci.yml` delegating to that same repo-root gate.
 - Use the new emitted-Perl lowering reference as the review baseline for Backbone item #3 and let user review feedback drive any compatibility-surface cleanup or syntax/semantic amendments.
 - Start Phase 1A modularization in no-behavior-change slices with Trace/Validation/Resolver extraction first, while keeping the façade API in `LinkedSpec.pm`.
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.
@@ -231,6 +232,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed: regression harness decoupled from direct `Lispish.pm` import.
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
+  - Landed follow-up: `LinkedSpec::Compiler::run_get_pipeline(...)` now receives `compile_spec_entry` as an injected dependency during descriptor assembly, so `Compiler.pm` no longer needs to reach back into `LinkedSpec.pm` for `spec_entry` while preserving existing parser-generation behavior.
 - Plugin and resource-resolution modernization track: Planned.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
