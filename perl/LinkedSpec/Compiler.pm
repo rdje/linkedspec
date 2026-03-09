@@ -164,14 +164,16 @@ sub _build_action_rewriter_migration_summary {
 }
 
 sub spec_descr {
- my $specretv = shift;
+ my ($specretv, $compile_spec_entry) = @_;
+ die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
+  unless ref($compile_spec_entry) eq 'CODE';
  my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::Compiler::spec_descr', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
 
  my @specinfo;
  foreach my $entry (@$specretv) {
-  my ($label, $info) = LinkedSpec::spec_entry($entry);
+  my ($label, $info) = $compile_spec_entry->($entry);
   unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
    LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Rule descriptor build failed while compiling parsed spec entries");
    LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
@@ -298,6 +300,7 @@ sub run_get_pipeline {
  my $spec_descr = _require_dep($deps, 'spec_descr');
  my $bootstrap_rule_index = _require_dep($deps, 'bootstrap_rule_index');
  my $gdata = _require_dep($deps, 'gdata');
+ my $compile_spec_entry = _require_dep($deps, 'compile_spec_entry');
  my $emit_parser_source_line = _require_dep($deps, 'emit_parser_source_line');
  my $top_rule_ref = _require_dep($deps, 'top_rule_ref');
  my $parser_source_chunks_ref = $deps->{parser_source_chunks_ref};
@@ -405,7 +408,7 @@ sub run_get_pipeline {
   $emit_parser_source_line->("my \$descr = {\n spec => {\n");
  }
 
- my $auto_descr_spec = spec_descr($retv);
+ my $auto_descr_spec = spec_descr($retv, $compile_spec_entry);
  unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
   LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
   LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);

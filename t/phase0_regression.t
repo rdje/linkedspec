@@ -816,6 +816,37 @@ SPEC
     is($descr->{spec}{Top}{meta}{acode_count}, 2, 'Top metadata acode_count preserved');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'AND_ACODE', 'Top handler variant remains AND_ACODE for multi-acode AND');
 };
+subtest 'compiler_spec_descr_uses_injected_compile_spec_entry_callback' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
+        $bootstrap_spec_descr,
+        $bootstrap_rule_index,
+        \$spec_content,
+        $bootstrap_gdata,
+    );
+    ok($parse_success, 'bootstrap parse succeeds for injected spec_descr callback test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array');
+
+    my $compile_spec_entry_count = 0;
+    my $compiled = LinkedSpec::Compiler::spec_descr(
+        $retv,
+        sub {
+            ++$compile_spec_entry_count;
+            return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { emit_parser_source_line => sub {} });
+        }
+    );
+
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'spec_descr succeeds with injected compile_spec_entry callback');
+    is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

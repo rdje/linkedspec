@@ -37,6 +37,24 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against the compiler/runtime descriptor-assembly boundary.
+- Key technical outcome:
+  - `LinkedSpec::Compiler::spec_descr(...)` now consumes an injected `compile_spec_entry` callback instead of calling back into `LinkedSpec.pm`,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` now receives that callback explicitly,
+  - `LinkedSpec::Runtime::run_get(...)` injects `\&compile_spec_entry`, so runtime-owned top-rule propagation remains intact.
+- Compatibility outcome:
+  - `LinkedSpec::spec_descr(...)` keeps the same public surface and now supplies the runtime callback internally,
+  - parser-generation behavior and descriptor output stayed unchanged across the phase-0 suite.
+- Regression outcome:
+  - added `compiler_spec_descr_uses_injected_compile_spec_entry_callback`,
+  - full `t/phase0_regression.t` suite now passes at 118 tests.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (118 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: inject compile_spec_entry into compiler` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted post-blocker snapshot-helper naming slice completed in ActionIR lowering and docs.
 - Key technical outcome:
   - `array_copy(array(...))` now lowers identically to `array_values(array(...))`,

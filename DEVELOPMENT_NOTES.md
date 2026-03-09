@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the compiler/runtime boundary.
+- Slice-selection rationale:
+  - the roadmap still points to modularization as the next execution track,
+  - the codebase already had extracted `Runtime.pm`, `Compiler.pm`, and `SpecEntry.pm`,
+  - `Compiler.pm` still had one unnecessary reverse dependency back into `LinkedSpec.pm` through `LinkedSpec::spec_entry(...)`, making it a good bounded cleanup target.
+- Implementation scope:
+  - `LinkedSpec::Compiler::spec_descr(...)` now requires an injected `compile_spec_entry` callback instead of directly calling `LinkedSpec::spec_entry(...)`,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` now receives `compile_spec_entry` through explicit dependency injection,
+  - `LinkedSpec::Runtime::run_get(...)` now injects `\&compile_spec_entry`, preserving runtime ownership of top-rule propagation,
+  - `LinkedSpec::spec_descr(...)` remains a compatibility façade and now supplies the runtime callback internally.
+- Regression addition:
+  - added `compiler_spec_descr_uses_injected_compile_spec_entry_callback`,
+  - the regression locks that compiler-side descriptor assembly can proceed through an injected callback and still returns compiled handler state.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=118`)
+## Session Notes (2026-03-09)
 - Roadmap post-blocker naming-cleanup slice completed against the ActionIR snapshot-helper surface.
 - Slice-selection rationale:
   - the current non-deferred blocked-spec queue is already at zero,

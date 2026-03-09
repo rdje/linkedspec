@@ -51,6 +51,7 @@ sub run_get {
    spec_descr => $spec_descr,
    bootstrap_rule_index => \%bootstrap_rule_index,
    gdata => $gdata,
+   compile_spec_entry => \&compile_spec_entry,
    emit_parser_source_line => \&_emit_parser_source_line,
    top_rule_ref => \$top_rule,
    parser_source_chunks_ref => \@parser_source_chunks,

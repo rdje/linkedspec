@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Inject `compile_spec_entry` into `Compiler.pm`
+## Summary
+Reduced one more internal reverse dependency in the modularization track by making `LinkedSpec::Compiler` consume an injected `compile_spec_entry` callback during spec-descriptor assembly instead of calling back into `LinkedSpec.pm` directly.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Compiler::spec_descr(...)`:
+  - it now requires a `compile_spec_entry` callback,
+  - it no longer reaches back into `LinkedSpec::spec_entry(...)` while iterating parsed bootstrap entries.
+- Refactored `LinkedSpec::Compiler::run_get_pipeline(...)`:
+  - it now requires injected dependency `compile_spec_entry`,
+  - descriptor assembly passes that callback through to `spec_descr(...)`.
+- Updated `LinkedSpec::Runtime::run_get(...)`:
+  - runtime pipeline wiring now injects `\&compile_spec_entry` into compiler dependencies so top-rule propagation stays owned by `Runtime.pm`.
+- Preserved public compatibility surface:
+  - `LinkedSpec::spec_descr(...)` still works with its existing public signature,
+  - the façade now supplies `\&LinkedSpec::Runtime::compile_spec_entry` to the compiler internally.
+- Added focused regression coverage:
+  - `compiler_spec_descr_uses_injected_compile_spec_entry_callback`
+  - locks that `LinkedSpec::Compiler::spec_descr(...)` can build a rule descriptor through an injected callback and still returns a compiled handler.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=118`)
 ## 2026-03-09 - Roadmap Slice: Add `array_copy(...)` Snapshot Alias
 ## Summary
 Added clearer backend-neutral snapshot helper `array_copy(array(...))` as the preferred alias for `array_values(array(...))`, while keeping the older spelling fully supported and updating the lowering guides to present the new name as the canonical surface.
