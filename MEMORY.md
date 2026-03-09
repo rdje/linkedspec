@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against the compiler/runtime mutable-state dependency boundary.
+- Key technical outcome:
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` now consumes a single injected `runtime_ctx` hash for parser-source emission, parser-source chunk capture, and `top_rule` propagation,
+  - `LinkedSpec::Runtime::run_get(...)` no longer threads those mutable state handles as separate compiler dependencies.
+- Regression outcome:
+  - added `compiler_run_get_pipeline_uses_injected_runtime_context`,
+  - the regression proves `run_get_pipeline(...)` succeeds with only the injected shared runtime context for mutable parser-build state and still captures parser source plus `top_rule`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (123 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: collapse Compiler runtime deps into context` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against `LinkedSpec::Runtime` mutable state.
 - Key technical outcome:
   - cached bootstrap grammar state now lives in a shared lexical runtime hash,

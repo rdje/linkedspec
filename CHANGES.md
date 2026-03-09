@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Collapse Compiler Runtime State Deps into `runtime_ctx`
+## Summary
+Reduced another compiler/runtime coupling point by making `LinkedSpec::Compiler::run_get_pipeline(...)` consume a single injected runtime context hash for parser-source emission, chunk capture, and `top_rule` propagation instead of threading those mutable state handles as separate dependencies.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Compiler::run_get_pipeline(...)`:
+  - added a single required `runtime_ctx` dependency,
+  - runtime-context validation now ensures parser-source chunk storage exists on the shared hash,
+  - parser-source emission, final `Get` wrapper generation, and `top_rule` reads now all route through `runtime_ctx`.
+- Simplified `LinkedSpec::Runtime::run_get(...)`:
+  - stopped passing `emit_parser_source_line`, `top_rule_ref`, and `parser_source_chunks_ref` as separate compiler dependencies,
+  - now injects the already-existing per-run `runtime_ctx` hash directly into `Compiler.pm`.
+- Added focused regression coverage:
+  - `compiler_run_get_pipeline_uses_injected_runtime_context`
+  - the regression proves `run_get_pipeline(...)` succeeds when only `runtime_ctx` is provided for mutable parser-build state, records `top_rule`, and emits parser-source output through that shared injected context.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=123`)
 ## 2026-03-09 - Phase 1A Slice: Move Runtime Mutable State into Per-Run Context
 ## Summary
 Reduced another package-global coupling point in `LinkedSpec::Runtime` by moving mutable parser-build state (`top_rule`, parser-source emission) into an injected per-run runtime context hash while keeping the cached bootstrap grammar shared.

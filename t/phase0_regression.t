@@ -933,6 +933,51 @@ SPEC
     is($runtime_ctx->{top_rule}, 'Top', 'runtime compile_spec_entry writes discovered top rule into injected runtime context');
     like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'runtime compile_spec_entry emits parser source through injected runtime context');
 };
+subtest 'compiler_run_get_pipeline_uses_injected_runtime_context' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+    my @parser_source_chunks;
+    my $parser_source = '';
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => \@parser_source_chunks,
+        emit_parser_source_line => sub {
+            my ($chunk) = @_;
+            push @parser_source_chunks, $chunk;
+        },
+    };
+
+    my $descr = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        {
+            return_descr => 1,
+            dump_parser_source => 1,
+            parser_source_ref => \$parser_source,
+        },
+        {
+            spec_descr => $bootstrap_spec_descr,
+            bootstrap_rule_index => $bootstrap_rule_index,
+            gdata => $bootstrap_gdata,
+            compile_spec_entry => sub {
+                return LinkedSpec::Runtime::compile_spec_entry($_[0], $runtime_ctx);
+            },
+            runtime_ctx => $runtime_ctx,
+        },
+    );
+
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline returns descriptor through injected runtime context');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler pipeline still builds runtime handler through injected runtime context');
+    is($runtime_ctx->{top_rule}, 'Top', 'compiler pipeline records top rule in injected runtime context');
+    ok(@parser_source_chunks > 0, 'compiler pipeline records parser-source chunks in injected runtime context');
+    like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
+    like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
+};
 subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     plan tests => 7;
 

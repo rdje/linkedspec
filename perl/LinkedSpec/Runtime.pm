@@ -68,9 +68,7 @@ sub run_get {
    bootstrap_rule_index => $BOOTSTRAP_STATE->{bootstrap_rule_index},
    gdata => $BOOTSTRAP_STATE->{gdata},
    compile_spec_entry => sub { return compile_spec_entry($_[0], $runtime_ctx) },
-   emit_parser_source_line => sub { return _emit_parser_source_line($runtime_ctx, @_) },
-   top_rule_ref => \$runtime_ctx->{top_rule},
-   parser_source_chunks_ref => $runtime_ctx->{parser_source_chunks_ref},
+   runtime_ctx => $runtime_ctx,
   }
  )
 }

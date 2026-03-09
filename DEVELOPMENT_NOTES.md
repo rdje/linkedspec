@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the compiler/runtime mutable-state seam.
+- Slice-selection rationale:
+  - `LinkedSpec::Runtime` already had a per-run runtime context,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` was still threading three separate mutable-state deps (`emit_parser_source_line`, `top_rule_ref`, `parser_source_chunks_ref`),
+  - collapsing those onto `runtime_ctx` matches the roadmap's shared-context policy and narrows the compiler/runtime contract.
+- Implementation scope:
+  - added `runtime_ctx` validation helpers in `Compiler.pm`,
+  - moved parser-source emission, parser-source chunk storage, and `top_rule` reads in `run_get_pipeline(...)` onto the injected runtime context,
+  - simplified `Runtime::run_get(...)` so it injects only `runtime_ctx` for per-run mutable state instead of the older split dependency surface.
+- Regression addition:
+  - added `compiler_run_get_pipeline_uses_injected_runtime_context`,
+  - the regression calls `run_get_pipeline(...)` with only the shared runtime context for mutable state and verifies descriptor build, `top_rule` propagation, and parser-source capture still work.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=123`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against `Runtime.pm` mutable state handling.
 - Slice-selection rationale:
   - the roadmap explicitly calls for reducing package-global cross-cutting state,

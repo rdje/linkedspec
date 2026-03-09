@@ -285,10 +285,30 @@ sub _build_final_descr {
  return $final_descr;
 }
 
+sub _require_runtime_ctx {
+ my ($deps) = @_;
+ my $runtime_ctx = _require_dep($deps, 'runtime_ctx');
+ die "(LinkedSpec::Compiler::_require_runtime_ctx) -E- dependency 'runtime_ctx' must be HASH ref"
+  unless ref($runtime_ctx) eq 'HASH';
+ if (ref($runtime_ctx->{parser_source_chunks_ref}) ne 'ARRAY') {
+  my @parser_source_chunks;
+  $runtime_ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
+ }
+ return $runtime_ctx
+}
+
+sub _emit_runtime_ctx_parser_source_line {
+ my ($runtime_ctx, $chunk) = @_;
+ my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
+ return unless ref($emit) eq 'CODE';
+ $emit->($chunk);
+ return
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
-#           `LinkedSpec::Get`, with explicit dependency-injected state handles.
+#           `LinkedSpec::Get`, with explicit dependency-injected runtime state.
 # Args    : ($spec_content_ref, $option_hashref, $deps_hashref)
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
@@ -301,15 +321,8 @@ sub run_get_pipeline {
  my $bootstrap_rule_index = _require_dep($deps, 'bootstrap_rule_index');
  my $gdata = _require_dep($deps, 'gdata');
  my $compile_spec_entry = _require_dep($deps, 'compile_spec_entry');
- my $emit_parser_source_line = _require_dep($deps, 'emit_parser_source_line');
- my $top_rule_ref = _require_dep($deps, 'top_rule_ref');
- my $parser_source_chunks_ref = $deps->{parser_source_chunks_ref};
- $parser_source_chunks_ref = [] unless ref($parser_source_chunks_ref) eq 'ARRAY';
-
- die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'emit_parser_source_line' must be CODE"
-  unless ref($emit_parser_source_line) eq 'CODE';
- die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'top_rule_ref' must be SCALAR ref"
-  unless ref($top_rule_ref) eq 'SCALAR';
+ my $runtime_ctx = _require_runtime_ctx($deps);
+ my $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
 
  LinkedSpec::Trace::_apply_trace_options($option);
  my $parse_only = $option->{parse_only};
@@ -405,7 +418,7 @@ sub run_get_pipeline {
 
  LinkedSpec::Trace::log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
  if ($dump_parser_source) {
-  $emit_parser_source_line->("my \$descr = {\n spec => {\n");
+  _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
  my $auto_descr_spec = spec_descr($retv, $compile_spec_entry);
@@ -425,16 +438,16 @@ sub run_get_pipeline {
  my $rule_count = scalar(keys %$auto_descr_spec);
  LinkedSpec::Trace::log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
-  $emit_parser_source_line->(" },\n gdata => {\n");
+  _emit_runtime_ctx_parser_source_line($runtime_ctx, " },\n gdata => {\n");
   my @glabels = sort keys %{$final_descr->{gdata} || {}};
   for (my $i = 0; $i < @glabels; ++$i) {
    my $label = $glabels[$i];
    my $gregex = $final_descr->{gdata}{$label};
    my $prefix = $i ? ",\n" : '';
-   $emit_parser_source_line->($prefix . " $label\t=> qr/$gregex/o");
+   _emit_runtime_ctx_parser_source_line($runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }
-  my $top_rule = $$top_rule_ref;
-  $emit_parser_source_line->("\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
+  my $top_rule = $runtime_ctx->{top_rule};
+  _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
   my $parser_source = join('', @$parser_source_chunks_ref);
   if (ref($parser_source_ref) eq 'SCALAR') {
    $$parser_source_ref = $parser_source;
@@ -444,7 +457,7 @@ sub run_get_pipeline {
  }
 
  if (LinkedSpec::Trace::should_dump(DUMP_LOW)) {
-  my $top_rule = $$top_rule_ref;
+  my $top_rule = $runtime_ctx->{top_rule};
   LinkedSpec::Trace::log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
   LinkedSpec::Trace::log_dump(Dumper($final_descr));
   LinkedSpec::Trace::log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
@@ -463,9 +476,9 @@ sub run_get_pipeline {
  }
 
  LinkedSpec::Trace::log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
- LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $$top_rule_ref, rule_count => $rule_count }, DUMP_LOW);
+ LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $runtime_ctx->{top_rule}, rule_count => $rule_count }, DUMP_LOW);
 
- my $top_rule = $$top_rule_ref;
+ my $top_rule = $runtime_ctx->{top_rule};
  return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
 }
 

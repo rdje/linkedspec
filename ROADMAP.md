@@ -237,6 +237,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: `LinkedSpec::ActionRewriter` now owns the extracted FlowExpr/ValueExpr/MethodLowering/ArrayPipeline/ControlFlow callback surface it needs for declare/scanner/lowering work, so `LinkedSpec::Deps` no longer resolves those action-rewriter callbacks through `LinkedSpec.pm`.
   - Landed follow-up: `LinkedSpec::ParserFactory` now receives trace/config/compile dependencies from `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly, so `get_parser(...)` no longer relies on `LinkedSpec.pm` parser-factory façade callbacks for tracing or compilation.
   - Landed follow-up: `LinkedSpec::Runtime` now carries mutable per-run parser state (`top_rule`, parser-source emission) in an injected runtime context hash instead of package-global mutation, while keeping cached bootstrap grammar state shared.
+  - Landed follow-up: `LinkedSpec::Compiler::run_get_pipeline(...)` now consumes that injected `runtime_ctx` directly for parser-source emission/chunk capture and `top_rule` propagation, so compiler/runtime descriptor assembly no longer threads those mutable state handles as separate dependencies.
 - Plugin and resource-resolution modernization track: Planned.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
