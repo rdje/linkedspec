@@ -894,6 +894,30 @@ SPEC
     is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
+subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get_from_args = sub { die "__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__\n" };
+        $parser = LinkedSpec::Get(\$spec_content);
+        my $input = 'a';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Get succeeds without Runtime raw-arg wrapper') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__/, 'Get does not call the trapped Runtime raw-arg wrapper');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'Get still returns parser coderef through direct Runtime::run_get delegation');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through direct Runtime::run_get delegation still executes');
+};
 subtest 'runtime_compile_spec_entry_uses_injected_runtime_context' => sub {
     plan tests => 7;
 

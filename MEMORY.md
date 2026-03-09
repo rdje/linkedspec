@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against the public `Get(...)`/runtime wrapper boundary.
+- Key technical outcome:
+  - `LinkedSpec::Get(...)` now normalizes flat option pairs locally and delegates directly to `LinkedSpec::Runtime::run_get(...)`,
+  - the active public `Get` path no longer depends on the raw-arg compatibility wrapper `LinkedSpec::Runtime::run_get_from_args(...)`.
+- Regression outcome:
+  - added `get_avoids_runtime_run_get_from_args_wrapper`,
+  - the regression traps `LinkedSpec::Runtime::run_get_from_args(...)` and proves `LinkedSpec::Get(...)` still returns an executable parser and parses input successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (125 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: route Get through Runtime::run_get` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against the parser-factory/runtime compile boundary.
 - Key technical outcome:
   - `LinkedSpec::ParserFactory::run_get_parser(...)` now compiles through `LinkedSpec::Runtime::run_get(...)` with a normalized option hashref,

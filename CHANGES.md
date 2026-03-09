@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Route `Get(...)` Through `Runtime::run_get`
+## Summary
+Reduced another active compatibility-wrapper dependency by making `LinkedSpec::Get(...)` normalize its flat option pairs locally and delegate straight to `LinkedSpec::Runtime::run_get(...)`, so the public `Get` path no longer depends on `LinkedSpec::Runtime::run_get_from_args(...)`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Get(...)`:
+  - it now extracts the spec scalar ref and normalizes trailing flat option pairs locally,
+  - runtime compilation now delegates directly to `LinkedSpec::Runtime::run_get(...)`.
+- Preserved compatibility:
+  - `LinkedSpec::Runtime::run_get_from_args(...)` remains available as a compatibility wrapper for callers that still invoke the runtime entrypoint with raw flat option pairs,
+  - public `Get(...)` behavior and option surface remain unchanged.
+- Added focused regression coverage:
+  - `get_avoids_runtime_run_get_from_args_wrapper`
+  - the regression traps `LinkedSpec::Runtime::run_get_from_args(...)` and proves `LinkedSpec::Get(...)` still returns an executable parser coderef and successfully parses input without touching that wrapper.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=125`)
 ## 2026-03-09 - Phase 1A Slice: Route ParserFactory Compilation Through `Runtime::run_get`
 ## Summary
 Reduced another active compatibility-wrapper dependency by making `LinkedSpec::ParserFactory` compile specs through `LinkedSpec::Runtime::run_get(...)` with an injected option hashref, so parser-factory compilation no longer depends on `LinkedSpec::Runtime::run_get_from_args(...)`.

@@ -232,6 +232,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed: regression harness decoupled from direct `Lispish.pm` import.
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
+  - Landed follow-up: `LinkedSpec::Get(...)` now normalizes flat option pairs locally and delegates straight to `LinkedSpec::Runtime::run_get(...)`, so the active public `Get` path no longer depends on the raw-arg compatibility wrapper `LinkedSpec::Runtime::run_get_from_args(...)`.
   - Landed follow-up: `LinkedSpec::Compiler::run_get_pipeline(...)` now receives `compile_spec_entry` as an injected dependency during descriptor assembly, so `Compiler.pm` no longer needs to reach back into `LinkedSpec.pm` for `spec_entry` while preserving existing parser-generation behavior.
   - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now routes rewrite/diagnostic helper plumbing through `LinkedSpec::ActionRewriter` directly, so emit-context assembly no longer needs `LinkedSpec.pm` action-rewriter façade callbacks.
   - Landed follow-up: `LinkedSpec::ActionRewriter` now owns the extracted FlowExpr/ValueExpr/MethodLowering/ArrayPipeline/ControlFlow callback surface it needs for declare/scanner/lowering work, so `LinkedSpec::Deps` no longer resolves those action-rewriter callbacks through `LinkedSpec.pm`.

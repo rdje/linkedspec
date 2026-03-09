@@ -61,6 +61,22 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the public `Get(...)`/runtime wrapper seam.
+- Slice-selection rationale:
+  - `LinkedSpec::Get(...)` still used `Runtime::run_get_from_args(...)`, which had become a raw-argument compatibility wrapper rather than the active runtime owner,
+  - `Runtime::run_get(...)` is the actual owning runtime entrypoint for parser generation,
+  - shifting `Get(...)` onto that direct owner removes another active wrapper dependency on the public path without changing behavior.
+- Implementation scope:
+  - updated `LinkedSpec::Get(...)` to normalize flat option pairs locally and call `LinkedSpec::Runtime::run_get(...)` directly,
+  - kept `Runtime::run_get_from_args(...)` as compatibility glue for callers that still invoke the runtime surface with raw flat option pairs.
+- Regression addition:
+  - added `get_avoids_runtime_run_get_from_args_wrapper`,
+  - the regression traps `LinkedSpec::Runtime::run_get_from_args(...)` and verifies `LinkedSpec::Get(...)` still returns a working parser coderef and parses input successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=125`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the parser-factory/runtime compile seam.
 - Slice-selection rationale:
   - `LinkedSpec::ParserFactory` still depended on `Runtime::run_get_from_args(...)`, which is only a raw-argument compatibility wrapper,

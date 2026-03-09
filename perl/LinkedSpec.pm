@@ -286,7 +286,10 @@ sub _build_action_rewriter_migration_summary {
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
 sub Get {
- return LinkedSpec::Runtime::run_get_from_args(@_)
+ my @args = @_;
+ my $spec_content_ref = shift @args;
+ my %option = @args;
+ return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
 }
 
 #------------------------------------------------------------------------------
