@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Route SpecEntry Compilation Through `SpecEntry.pm`
+## Summary
+Reduced another façade-era wrapper by letting `LinkedSpec::SpecEntry::compile_spec_entry(...)` consume the injected runtime context directly for parser-source emission and `top_rule` propagation, so default spec-entry compilation no longer depends on `LinkedSpec::Runtime::compile_spec_entry(...)` except as compatibility glue.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::SpecEntry::compile_spec_entry(...)`:
+  - it now accepts `runtime_ctx` in its dependency hash,
+  - parser-source emission falls back to `runtime_ctx->{emit_parser_source_line}`,
+  - discovered `top_rule` is written back into the shared runtime context before returning.
+- Simplified default/facade wiring:
+  - `LinkedSpec::Runtime::run_get(...)` now injects `LinkedSpec::SpecEntry::compile_spec_entry(...)` directly into the compiler pipeline,
+  - `LinkedSpec::spec_descr(...)` now defaults to `LinkedSpec::SpecEntry::compile_spec_entry(...)`,
+  - `LinkedSpec::spec_entry(...)` now delegates directly to `SpecEntry.pm`,
+  - `LinkedSpec::Runtime::compile_spec_entry(...)` remains only as a compatibility wrapper around the extracted owner.
+- Added focused regression coverage:
+  - `spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper`
+  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still compile rules successfully without touching that wrapper.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=124`)
 ## 2026-03-09 - Phase 1A Slice: Collapse Compiler Runtime State Deps into `runtime_ctx`
 ## Summary
 Reduced another compiler/runtime coupling point by making `LinkedSpec::Compiler::run_get_pipeline(...)` consume a single injected runtime context hash for parser-source emission, chunk capture, and `top_rule` propagation instead of threading those mutable state handles as separate dependencies.

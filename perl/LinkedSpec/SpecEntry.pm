@@ -26,9 +26,20 @@ my $rep_nodes_minmax = {
  REP_OPT => [0, 1]
 };
 
+sub _runtime_ctx_from_deps {
+ my ($deps) = @_;
+ return undef unless ref($deps) eq 'HASH';
+ return $deps->{runtime_ctx} if ref($deps->{runtime_ctx}) eq 'HASH';
+ return undef
+}
+
 sub _emit_parser_source_line {
  my ($deps, $chunk) = @_;
  my $emit = (ref($deps) eq 'HASH') ? $deps->{emit_parser_source_line} : undef;
+ unless (ref($emit) eq 'CODE') {
+  my $runtime_ctx = _runtime_ctx_from_deps($deps);
+  $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
+ }
  return unless ref($emit) eq 'CODE';
  $emit->($chunk);
  return
@@ -533,6 +544,7 @@ sub _build_runtime_handler {
 sub compile_spec_entry {
  my ($einfo, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
+ my $runtime_ctx = _runtime_ctx_from_deps($deps);
 
  my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::spec_entry', {
   token_count => (ref($einfo) eq 'ARRAY') ? scalar(@$einfo) : undef,
@@ -628,7 +640,10 @@ sub compile_spec_entry {
   LinkedSpec::Trace::log_dump("=== END RULE INFO DUMP for $label ===\n");
   LinkedSpec::Trace::log_dump("=== HANDLER DUMP for $label ===\n");
   LinkedSpec::Trace::log_dump("{\n$handler\n}\n");
-  LinkedSpec::Trace::log_dump("=== END HANDLER DUMP for $label ===\n");
+ LinkedSpec::Trace::log_dump("=== END HANDLER DUMP for $label ===\n");
+ }
+ if (ref($runtime_ctx) eq 'HASH' && defined $rule_ir->{top_rule}) {
+  $runtime_ctx->{top_rule} = $rule_ir->{top_rule};
  }
  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 

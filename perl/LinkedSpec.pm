@@ -33,6 +33,7 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::ParserFactory ();
 use LinkedSpec::Runtime ();
+use LinkedSpec::SpecEntry ();
 use LinkedSpec::PluginBridge ();
 use LinkedSpec::Deps ();
 
@@ -319,7 +320,7 @@ sub _build_rule_execution_meta {
 #------------------------------------------------------------------------------
 sub spec_descr {
  my ($parsed_spec_entries, $compile_spec_entry) = @_;
- $compile_spec_entry ||= \&LinkedSpec::Runtime::compile_spec_entry;
+ $compile_spec_entry ||= \&LinkedSpec::SpecEntry::compile_spec_entry;
  return LinkedSpec::Compiler::spec_descr($parsed_spec_entries, $compile_spec_entry)
 }
 
@@ -408,7 +409,7 @@ sub _build_rule_ir_emit_context {
 # Returns : ($label, $rule_info_hashref)
 #------------------------------------------------------------------------------
 sub spec_entry {
- return LinkedSpec::Runtime::compile_spec_entry(@_)
+ return LinkedSpec::SpecEntry::compile_spec_entry(@_)
 }
 
 #------------------------------------------------------------------------------

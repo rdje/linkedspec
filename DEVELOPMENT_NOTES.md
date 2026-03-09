@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the spec-entry/runtime wrapper seam.
+- Slice-selection rationale:
+  - `LinkedSpec::SpecEntry` already owned the real rule-entry compilation logic,
+  - `LinkedSpec::Runtime::compile_spec_entry(...)` had become a thin wrapper whose remaining job was only to pass parser-source emission and `top_rule` through runtime context,
+  - moving that state hook into `SpecEntry.pm` removes another default path through `Runtime.pm` without changing the public `Get(...)` surface.
+- Implementation scope:
+  - added `runtime_ctx` handling in `SpecEntry::compile_spec_entry(...)` for parser-source emission and `top_rule` propagation,
+  - switched `Runtime::run_get(...)` to inject `LinkedSpec::SpecEntry::compile_spec_entry(...)` directly into `Compiler.pm`,
+  - updated `LinkedSpec::spec_descr(...)` and `LinkedSpec::spec_entry(...)` to default/delegate directly to `SpecEntry.pm`,
+  - retained `Runtime::compile_spec_entry(...)` only as compatibility glue.
+- Regression addition:
+  - added `spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper`,
+  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and verifies both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still compile rules successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=124`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the compiler/runtime mutable-state seam.
 - Slice-selection rationale:
   - `LinkedSpec::Runtime` already had a per-run runtime context,

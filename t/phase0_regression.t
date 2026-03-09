@@ -933,6 +933,44 @@ SPEC
     is($runtime_ctx->{top_rule}, 'Top', 'runtime compile_spec_entry writes discovered top rule into injected runtime context');
     like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'runtime compile_spec_entry emits parser source through injected runtime context');
 };
+subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
+        $bootstrap_spec_descr,
+        $bootstrap_rule_index,
+        \$spec_content,
+        $bootstrap_gdata,
+    );
+    ok($parse_success, 'bootstrap parse succeeds for spec-entry wrapper bypass test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for spec-entry wrapper bypass test');
+
+    my ($compiled, $descr, $ok_run, $err) = (undef, undef, 0, '');
+    my $spec_content_for_get = $spec_content;
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::compile_spec_entry = sub { die "__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__\n" };
+        $compiled = LinkedSpec::spec_descr($retv);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'default spec-entry paths succeed without Runtime compile_spec_entry wrapper')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__/, 'default spec-entry paths do not call the trapped Runtime compile_spec_entry wrapper');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr default callback still builds compiled rule hash');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr default callback still exposes runtime handler coderef');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without Runtime compile_spec_entry wrapper');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef');
+    is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get preserves selected handler metadata');
+};
 subtest 'compiler_run_get_pipeline_uses_injected_runtime_context' => sub {
     plan tests => 6;
 

@@ -67,7 +67,7 @@ sub run_get {
    spec_descr => $BOOTSTRAP_STATE->{spec_descr},
    bootstrap_rule_index => $BOOTSTRAP_STATE->{bootstrap_rule_index},
    gdata => $BOOTSTRAP_STATE->{gdata},
-   compile_spec_entry => sub { return compile_spec_entry($_[0], $runtime_ctx) },
+   compile_spec_entry => sub { return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx }) },
    runtime_ctx => $runtime_ctx,
   }
  )
@@ -88,22 +88,15 @@ sub run_get_from_args {
 
 #------------------------------------------------------------------------------
 # Function: compile_spec_entry
-# Purpose : Own spec_entry orchestration glue including top-rule propagation.
+# Purpose : Compatibility wrapper around `LinkedSpec::SpecEntry` injected-state
+#           compilation for callers that still route through Runtime.
 # Args    : ($einfo, $runtime_ctx)
 # Returns : ($label, $rule_info_hashref) or undef
 #------------------------------------------------------------------------------
 sub compile_spec_entry {
  my ($einfo, $runtime_ctx) = @_;
- my ($label, $info, $top_rule_candidate) = LinkedSpec::SpecEntry::compile_spec_entry(
-  $einfo,
-  {
-   emit_parser_source_line => sub { return _emit_parser_source_line($runtime_ctx, @_) },
-  }
- );
+ my ($label, $info, $top_rule_candidate) = LinkedSpec::SpecEntry::compile_spec_entry($einfo, { runtime_ctx => $runtime_ctx });
  return undef unless defined($label) && ref($info) eq 'HASH';
- if (ref($runtime_ctx) eq 'HASH' && defined $top_rule_candidate) {
-  $runtime_ctx->{top_rule} = $top_rule_candidate;
- }
  return ($label, $info)
 }
 

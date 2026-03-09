@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against the spec-entry/runtime wrapper boundary.
+- Key technical outcome:
+  - `LinkedSpec::SpecEntry::compile_spec_entry(...)` now accepts the injected `runtime_ctx` directly for parser-source emission and `top_rule` propagation,
+  - default rule compilation paths (`LinkedSpec::spec_descr(...)`, `LinkedSpec::spec_entry(...)`, and `Runtime::run_get(...)`) no longer need `LinkedSpec::Runtime::compile_spec_entry(...)` as the active owner.
+- Regression outcome:
+  - added `spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper`,
+  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both the façade default path and `LinkedSpec::Get(..., return_descr => 1)` still compile rules successfully.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (124 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: route SpecEntry compilation through SpecEntry` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against the compiler/runtime mutable-state dependency boundary.
 - Key technical outcome:
   - `LinkedSpec::Compiler::run_get_pipeline(...)` now consumes a single injected `runtime_ctx` hash for parser-source emission, parser-source chunk capture, and `top_rule` propagation,
