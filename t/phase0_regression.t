@@ -66,6 +66,58 @@ subtest 'get_parser_local_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'module-relative parser executes and keeps PathSearch unloaded');
 };
+subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
+    plan tests => 8;
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_log = File::Spec->catfile($tmp_cwd, 'parser_factory_trace.log');
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local $LinkedSpec::Trace::DUMP_VERBOSITY = LinkedSpec::Trace::DUMP_NONE();
+        local $LinkedSpec::Trace::TRACE_LOG_FILE;
+        local $LinkedSpec::Trace::TRACE_LOG_MODE = 'stdout';
+        local $LinkedSpec::Trace::TRACE_EMOJI = 0;
+        local $LinkedSpec::Trace::TRACE_INDENT_LEVEL = 0;
+        local $LinkedSpec::Trace::TRACE_INITIALIZED = 1;
+        local *LinkedSpec::_apply_trace_options = sub { die "__UNEXPECTED_LINKEDSPEC_APPLY_TRACE_OPTIONS__\n" };
+        local *LinkedSpec::trace_enter = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_ENTER__\n" };
+        local *LinkedSpec::trace_exit = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_EXIT__\n" };
+        local *LinkedSpec::trace_decision = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_DECISION__\n" };
+        local *LinkedSpec::Get = sub { die "__UNEXPECTED_LINKEDSPEC_GET__\n" };
+        local *LinkedSpec::DUMP_LOW = sub { die "__UNEXPECTED_LINKEDSPEC_DUMP_LOW__\n" };
+        local *LinkedSpec::DUMP_MEDIUM = sub { die "__UNEXPECTED_LINKEDSPEC_DUMP_MEDIUM__\n" };
+
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser(
+            'Lispish',
+            trace_level => 'high',
+            trace_log_file => $tmp_log,
+            trace_log_mode => 'route',
+            trace_reset_log => 1,
+        );
+        my $input = '(facade test)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser succeeds without LinkedSpec parser-factory facade helpers')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'get_parser does not call the trapped LinkedSpec parser-factory facade helpers');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef through extracted parser-factory dependencies');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through extracted parser-factory dependencies still executes');
+    ok(!exists $INC{'PathSearch.pm'}, 'module-relative parser-factory path still keeps PathSearch unloaded');
+    ok(-f $tmp_log, 'trace log file created through extracted Trace dependency path');
+
+    my $trace_log = slurp($tmp_log);
+    like($trace_log, qr/ENTER LinkedSpec::get_parser/, 'trace log records get_parser entry through extracted Trace dependency path');
+    like($trace_log, qr/parser coderef generated/, 'trace log records parser compilation result through extracted Runtime dependency path');
+};
 subtest 'get_parser_explicit_path_resolution_without_pathsearch' => sub {
     plan tests => 4;
 
@@ -3461,7 +3513,8 @@ subtest 'trace_output_includes_metadata_and_decisions' => sub {
 
     ok($ok, 'get_parser with debug tracing returns without die') or diag(normalize_error($err));
     ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser with debug tracing returns parser coderef');
-    like($out, qr/\[[A-Z]+\]\[LinkedSpec\.pm\]\[[^\]]+:\d+\]/, 'trace includes level + file + function:line metadata');
+    like($out, qr/\[[A-Z]+\]\[(?:LinkedSpec\.pm|ParserFactory\.pm|Resolver\.pm|Compiler\.pm|Validation\.pm)\]\[[^\]]+:\d+\]/,
+        'trace includes level + owning file + function:line metadata');
     like($out, qr/ENTER LinkedSpec::get_parser|ENTER LinkedSpec::Get/, 'trace includes function entry events');
     like($out, qr/DECISION [^\n]+ => (?:TAKEN|SKIPPED)/, 'trace includes decision/branch events');
 };

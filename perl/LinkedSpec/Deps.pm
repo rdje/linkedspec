@@ -191,16 +191,16 @@ sub action_rewriter_contract_deps_for_package {
 sub parser_factory_deps_for_package {
  my ($pkg) = @_;
  return {
-  apply_trace_options => _require_pkg_cb($pkg, '_apply_trace_options'),
-  trace_enter => _require_pkg_cb($pkg, 'trace_enter'),
-  trace_exit => _require_pkg_cb($pkg, 'trace_exit'),
-  trace_decision => _require_pkg_cb($pkg, 'trace_decision'),
+  apply_trace_options => _require_pkg_cb('LinkedSpec::Trace', '_apply_trace_options'),
+  trace_enter => _require_pkg_cb('LinkedSpec::Trace', 'trace_enter'),
+  trace_exit => _require_pkg_cb('LinkedSpec::Trace', 'trace_exit'),
+  trace_decision => _require_pkg_cb('LinkedSpec::Trace', 'trace_decision'),
   validate_spec_name => _require_pkg_cb('LinkedSpec::Resolver', 'validate_spec_name'),
   resolve_spec_path => _require_pkg_cb('LinkedSpec::Resolver', 'resolve_spec_path'),
   load_spec_content => _require_pkg_cb('LinkedSpec::Resolver', 'load_spec_content'),
-  compile_spec => _require_pkg_cb($pkg, 'Get'),
-  dump_low => _require_pkg_value($pkg, 'DUMP_LOW'),
-  dump_medium => _require_pkg_value($pkg, 'DUMP_MEDIUM'),
+  compile_spec => _require_pkg_cb('LinkedSpec::Runtime', 'run_get_from_args'),
+  dump_low => _require_pkg_value('LinkedSpec::Trace', 'DUMP_LOW'),
+  dump_medium => _require_pkg_value('LinkedSpec::Trace', 'DUMP_MEDIUM'),
  }
 }
 

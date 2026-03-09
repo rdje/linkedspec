@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Decouple ParserFactory from `LinkedSpec.pm` Facade
+## Summary
+Reduced another modularization-era reach-back into `LinkedSpec.pm` by making parser-factory dependency wiring use `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly instead of routing trace/config/compile callbacks through façade helpers on `LinkedSpec.pm`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Updated `LinkedSpec::Deps::parser_factory_deps_for_package(...)`:
+  - trace/config callbacks now resolve from `LinkedSpec::Trace`,
+  - spec validation/path/content callbacks continue to resolve from `LinkedSpec::Resolver`,
+  - parser compilation callback now resolves from `LinkedSpec::Runtime::run_get_from_args(...)`,
+  - dump-level values now resolve from `LinkedSpec::Trace` instead of `LinkedSpec.pm`.
+- Preserved behavior:
+  - `LinkedSpec::get_parser(...)` still returns parser coderefs with the same public API,
+  - module-relative spec resolution still keeps `PathSearch` unloaded when not needed,
+  - trace routing still works, but trace metadata now surfaces the real owning modules (`ParserFactory.pm`, `Resolver.pm`, `Compiler.pm`, etc.) rather than necessarily `LinkedSpec.pm`.
+- Added focused regression coverage:
+  - `get_parser_avoids_linkedspec_parser_factory_facade`
+  - the regression traps the old `LinkedSpec.pm` parser-factory façade helpers/values and proves `get_parser(...)` still creates and executes a parser, keeps `PathSearch` unloaded for module-relative resolution, and emits routed trace output.
+- Refreshed trace metadata regression:
+  - `trace_output_includes_metadata_and_decisions` now asserts owning-module metadata rather than hardcoding `LinkedSpec.pm`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=121`)
 ## 2026-03-09 - Phase 1A Slice: Decouple ActionRewriter Lowering from `LinkedSpec.pm` Facade
 ## Summary
 Reduced another modularization-era reach-back into `LinkedSpec.pm` by making `LinkedSpec::ActionRewriter` own the extracted lowering callbacks used by its declare/scanner/contract dependency maps, instead of resolving those callbacks through the façade.

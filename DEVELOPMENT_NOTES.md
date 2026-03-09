@@ -61,6 +61,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against the parser-factory dependency boundary.
+- Slice-selection rationale:
+  - `LinkedSpec::ParserFactory` was still getting trace/config/compile callbacks through `LinkedSpec.pm`,
+  - the real behavior owners for that surface already lived in `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime`,
+  - this made parser-factory wiring the next small, low-risk façade-indirection cleanup.
+- Implementation scope:
+  - updated `LinkedSpec::Deps::parser_factory_deps_for_package(...)` so parser-factory trace/config callbacks resolve from `Trace`,
+  - compilation now resolves from `LinkedSpec::Runtime::run_get_from_args(...)` instead of `LinkedSpec::Get(...)`,
+  - dump-level values now resolve from `LinkedSpec::Trace` instead of `LinkedSpec.pm`.
+- Regression addition:
+  - added `get_parser_avoids_linkedspec_parser_factory_facade`,
+  - the regression traps the old `LinkedSpec.pm` parser-factory façade helper names/values and verifies `get_parser(...)` still resolves `Lispish`, compiles a parser, executes it, keeps `PathSearch` unloaded, and writes routed trace output.
+- Trace-contract note:
+  - trace metadata now reports the real owning modules (`ParserFactory.pm`, `Resolver.pm`, `Compiler.pm`, etc.) rather than always surfacing `LinkedSpec.pm`,
+  - the trace regression was updated to lock metadata presence and ownership rather than the older façade-file assumption.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=121`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the action-rewriter lowering boundary.
 - Slice-selection rationale:
   - the extracted ActionIR lowering modules already owned the behavior for declare/value/pipeline/control-flow lowering,

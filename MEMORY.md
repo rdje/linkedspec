@@ -37,6 +37,24 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against `LinkedSpec::ParserFactory` dependency wiring.
+- Key technical outcome:
+  - parser-factory trace/config wiring now resolves directly from `LinkedSpec::Trace`,
+  - parser compilation now resolves from `LinkedSpec::Runtime::run_get_from_args(...)`,
+  - `LinkedSpec::get_parser(...)` no longer depends on `LinkedSpec.pm` parser-factory façade callbacks/values for tracing or compilation.
+- Regression outcome:
+  - added `get_parser_avoids_linkedspec_parser_factory_facade`,
+  - the regression traps the old `LinkedSpec.pm` parser-factory façade helper names/values and verifies `get_parser(...)` still resolves `Lispish`, builds a parser, executes it, keeps `PathSearch` unloaded, and emits routed trace output.
+- Trace-contract note:
+  - trace metadata now surfaces the real owning modules (`ParserFactory.pm`, `Resolver.pm`, `Compiler.pm`, etc.) rather than being implicitly tied to `LinkedSpec.pm`,
+  - the trace metadata regression was updated accordingly.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (121 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: decouple ParserFactory from facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against `LinkedSpec::ActionRewriter` lowering dependencies.
 - Key technical outcome:
   - `LinkedSpec::ActionRewriter` now owns the extracted ActionIR lowering/value/pipeline/control-flow callback surface it needs for direct rewrites,
