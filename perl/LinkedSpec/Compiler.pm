@@ -11,6 +11,7 @@ BEGIN {
 use LinkedRE;
 
 use LinkedSpec::BootstrapSpec ();
+use LinkedSpec::SpecEntry ();
 use LinkedSpec::Trace ();
 use LinkedSpec::Validation ();
 
@@ -162,6 +163,7 @@ sub _build_action_rewriter_migration_summary {
 
 sub spec_descr {
  my ($specretv, $compile_spec_entry) = @_;
+ $compile_spec_entry ||= \&LinkedSpec::SpecEntry::compile_spec_entry;
  die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
   unless ref($compile_spec_entry) eq 'CODE';
  my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::Compiler::spec_descr', {

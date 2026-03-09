@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Move `spec_descr(...)` Default Callback Into `Compiler`
+## Summary
+Reduced another façade-owned default by making `LinkedSpec::Compiler::spec_descr(...)` own the default `compile_spec_entry` callback, so `LinkedSpec::spec_descr(...)` is now a pure façade delegate and no longer injects that default itself.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Compiler::spec_descr(...)`:
+  - it now defaults `compile_spec_entry` to `LinkedSpec::SpecEntry::compile_spec_entry(...)` internally,
+  - injected compile callbacks are still supported for focused tests and alternative compilation paths.
+- Simplified `LinkedSpec::spec_descr(...)`:
+  - it now delegates directly to `LinkedSpec::Compiler::spec_descr(...)`,
+  - default callback ownership no longer lives in `LinkedSpec.pm`.
+- Added focused regression coverage:
+  - `spec_descr_defers_default_compile_callback_to_compiler_owner`
+  - the regression traps `LinkedSpec::Compiler::spec_descr(...)` and proves `LinkedSpec::spec_descr(...)` now delegates without injecting the default callback while still returning a compiled handler.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=128`)
 ## 2026-03-10 - Phase 1A Slice: Move ParserFactory Default Deps Out of the Facade
 ## Summary
 Reduced another façade-only helper seam by making `LinkedSpec::ParserFactory::run_get_parser(...)` own its default trace/resolution/compile dependency map, so the public `LinkedSpec::get_parser(...)` path no longer depends on the private façade helper `_parser_factory_deps()`.

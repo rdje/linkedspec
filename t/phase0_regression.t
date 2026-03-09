@@ -971,6 +971,39 @@ SPEC
     is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
+subtest 'spec_descr_defers_default_compile_callback_to_compiler_owner' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for spec_descr owner-default test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for spec_descr owner-default test');
+
+    my $orig_compiler_spec_descr = \&LinkedSpec::Compiler::spec_descr;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    my ($saw_undef_callback, $forwarded_entry_count);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::spec_descr = sub {
+            my ($entries, $compile_spec_entry) = @_;
+            $saw_undef_callback = !defined($compile_spec_entry);
+            $forwarded_entry_count = ref($entries) eq 'ARRAY' ? scalar(@$entries) : undef;
+            return $orig_compiler_spec_descr->(@_);
+        };
+        $compiled = LinkedSpec::spec_descr($retv);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::spec_descr succeeds while Compiler::spec_descr delegation is trapped') or diag(normalize_error($err));
+    ok($saw_undef_callback, 'LinkedSpec::spec_descr now delegates without injecting the default compile callback');
+    is($forwarded_entry_count, 1, 'LinkedSpec::spec_descr forwards the parsed entry array unchanged');
+    ok(defined($compiled) && ref($compiled) eq 'HASH' && ref($compiled->{Top}{handler}) eq 'CODE', 'Compiler-owned default compile callback still builds a compiled handler');
+};
 subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
     plan tests => 4;
 

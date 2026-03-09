@@ -319,9 +319,7 @@ sub _build_rule_execution_meta {
 # Returns : hashref of spec rule definitions
 #------------------------------------------------------------------------------
 sub spec_descr {
- my ($parsed_spec_entries, $compile_spec_entry) = @_;
- $compile_spec_entry ||= \&LinkedSpec::SpecEntry::compile_spec_entry;
- return LinkedSpec::Compiler::spec_descr($parsed_spec_entries, $compile_spec_entry)
+ return LinkedSpec::Compiler::spec_descr(@_)
 }
 
 #------------------------------------------------------------------------------

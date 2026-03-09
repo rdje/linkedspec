@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A modularization slice completed against the façade-owned `spec_descr(...)` default callback boundary.
+- Key technical outcome:
+  - `LinkedSpec::Compiler::spec_descr(...)` now owns the default `compile_spec_entry` callback,
+  - `LinkedSpec::spec_descr(...)` is now a pure façade delegate into `Compiler.pm`,
+  - injected compile callbacks remain supported for focused tests and alternative internal flows.
+- Regression outcome:
+  - added `spec_descr_defers_default_compile_callback_to_compiler_owner`,
+  - the regression traps `LinkedSpec::Compiler::spec_descr(...)` and proves `LinkedSpec::spec_descr(...)` delegates without injecting the default callback while still building a compiled handler hash.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (128 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move spec_descr default callback into Compiler` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A modularization slice completed against the façade-owned parser-factory dependency builder boundary.
 - Key technical outcome:
   - `LinkedSpec::ParserFactory::run_get_parser(...)` now owns its default trace/resolution/compile dependency map,

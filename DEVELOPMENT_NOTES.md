@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A no-behavior-change modularization slice completed against the façade-owned `spec_descr(...)` default callback seam.
+- Slice-selection rationale:
+  - `LinkedSpec::spec_descr(...)` still owned the default `compile_spec_entry` callback even though `Compiler.pm` already owned descriptor assembly,
+  - that default belongs with `LinkedSpec::Compiler::spec_descr(...)` rather than the façade wrapper,
+  - moving it narrows the façade to a pure delegate without changing descriptor-build behavior.
+- Implementation scope:
+  - updated `LinkedSpec::Compiler::spec_descr(...)` to default `compile_spec_entry` internally,
+  - simplified `LinkedSpec::spec_descr(...)` to a direct delegate into `Compiler.pm`,
+  - kept injected compile callbacks supported for focused tests and alternative owner paths.
+- Regression addition:
+  - added `spec_descr_defers_default_compile_callback_to_compiler_owner`,
+  - the regression traps `LinkedSpec::Compiler::spec_descr(...)` and verifies `LinkedSpec::spec_descr(...)` now delegates without injecting the default callback while still returning a working compiled handler hash.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=128`)
+## Session Notes (2026-03-10)
 - Phase 1A no-behavior-change modularization slice completed against the façade-owned parser-factory dependency builder seam.
 - Slice-selection rationale:
   - `LinkedSpec::get_parser(...)` still relied on the private façade helper `_parser_factory_deps()` even though `ParserFactory.pm` already owned parser-factory orchestration,
