@@ -36,6 +36,30 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-09)
+- Uncommitted Backbone item #3 slice completed against `pplugin.spec`.
+- Key technical outcome:
+  - `pplugin_top` is now clear,
+  - the final raw blocker `push @defs, @$retv` was replaced with canonical collection-target assignment using `flat_array(defs)` plus `scalaref(retv, [0])` / `scalaref(retv, [1])`.
+- Rule-migration outcome:
+  - `pplugin` now reports `language_agnostic_blocked_rule_count=0`
+  - `pplugin_top` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR coverage for `pplugin_top` now includes `DECLARE`, `ASSIGN`, `NEXT`, `CALL`, and `RETURN`
+- Regression outcome:
+  - added `pplugin_helper_flow_eliminates_raw_fallback`
+  - added `pplugin_parser_smoke`
+  - full `t/phase0_regression.t` suite now passes at 115 tests
+- Semantic-preservation note:
+  - the parser still returns a hash of plugin-name to coderef,
+  - the new smoke case confirms the returned coderefs still evaluate their captured plugin bodies correctly after parsing comments and multiple subdefs.
+- Blocker-ranking outcome:
+  - `pplugin.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (115 tests)
 ## Current Session Snapshot (2026-03-08)
 - Live docs now explicitly capture the future replacement of the current `AUTOLOAD` + `.plg` plugin runtime.
 - Architecture findings:
@@ -47,7 +71,7 @@ These files are live and must be amended before any commit:
   - `PathSearch->go(...)` stays as the short-term compatibility surface, but the implementation should become deterministic and later use standard path/search primitives instead of the current global-state scan.
 - Roadmap impact:
   - this new track is explicit and does not replace the short-term Backbone #3 tail work.
-  - the next deterministic parser slice is still `pplugin.spec`, followed by `tkgui.spec`.
+  - the next deterministic parser slice after that roadmap update was `pplugin.spec`, followed by `tkgui.spec`.
 - Validation snapshot:
   - docs-only update; no code validation run.
 ## Current Session Snapshot (2026-03-08)

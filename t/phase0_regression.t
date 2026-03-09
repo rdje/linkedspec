@@ -2917,6 +2917,54 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
         is_deeply($ast, $expected, "portmap classification matches expected AST for `$input`");
     }
 };
+subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $descr = LinkedSpec::get_parser('pplugin', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pplugin helper-flow migration check');
+
+    my $meta = $descr->{spec}{pplugin_top}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'pplugin_top exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'pplugin_top no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'pplugin_top exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'pplugin_top avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'pplugin_top canonical action-IR nodes include DECLARE/ASSIGN/NEXT/CALL/RETURN after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'pplugin_top is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'pplugin descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'pplugin blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'pplugin exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'pplugin exposes no top blocked rule after helper migration');
+};
+subtest 'pplugin_parser_smoke' => sub {
+    plan tests => 8;
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created');
+
+    my $input = <<'PPLUGIN';
+foo { 1 + 2 }
+# comment
+bar { qq(ok) }
+PPLUGIN
+
+    my $ast = eval { $parser->(\$input) };
+    ok(!$@, 'pplugin parser executed without die') or diag(normalize_error($@));
+    ok(defined($ast) && ref($ast) eq 'HASH', 'pplugin parser returned a hash AST');
+    is_deeply([sort keys %$ast], [qw(bar foo)], 'pplugin AST preserves expected subdef names');
+    is(ref($ast->{foo}), 'CODE', 'pplugin foo entry is a coderef');
+    is(ref($ast->{bar}), 'CODE', 'pplugin bar entry is a coderef');
+    is($ast->{foo}->(), 3, 'pplugin foo coderef preserves evaluated body behavior');
+    is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 

@@ -954,6 +954,28 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
   - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
+## Session Notes (2026-03-09)
+- Executed the next Backbone item #3 tail slice against `pplugin.spec`.
+- Blocker analysis:
+  - the only remaining blocked rule was `pplugin_top`,
+  - the only remaining blocker statement was raw list-splice `push @defs, @$retv`.
+- Migration decision:
+  - kept the existing rule shape and semantics,
+  - replaced only the raw splice with canonical collection-target assignment:
+    - `assign(array(defs), array(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])))`
+  - this preserved the current `return {@defs}` behavior without introducing new lowering contracts.
+- Regression additions:
+  - `pplugin_helper_flow_eliminates_raw_fallback`
+  - `pplugin_parser_smoke`
+  - the smoke regression locks the returned hash keys plus coderef execution behavior on a small inline `.plg` sample containing a comment.
+- Validation snapshot for the `pplugin` slice:
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=115`)
+- Updated backlog state:
+  - `pplugin` now reports `language_agnostic_blocked_rule_count=0`
+  - `pplugin_top` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - the current deterministic blocker tail is now only `tkgui.spec` (`TOP=sub_gui`).
 ## Session Notes (2026-03-08)
 - Captured the previously implicit plugin-runtime replacement as an explicit roadmap track.
 - Root cause for the documentation gap:

@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Roadmap Slice: Migrate `pplugin` Top Accumulator to Canonical Helper Flow
+## Summary
+Cleared the remaining `pplugin.spec` blocker by replacing the last raw list-splice in `pplugin_top` with canonical collection-target assignment, while preserving the parser’s returned hash-of-coderefs behavior for parsed `.plg` files.
+
+## Changed Files
+- Updated: `specs/pplugin.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `pplugin.spec` as the next deterministic tail slice because after the `portmap` cleanup it had become the highest remaining one-rule blocker (`BLOCKED=1`, `TOP=pplugin_top`, `BLOCKERS=1`).
+- Cleared the blocked `pplugin` rule:
+  - `pplugin_top`
+- Reworked the top accumulator flow:
+  - retained the existing initializer and child call shape (`my @defs; my $retv` and `$retv = call(subdef)`),
+  - replaced raw splice `push @defs, @$retv` with canonical collection-target assignment:
+    - `assign(array(defs), array(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])))`
+- Important migration nuance:
+  - the blocker was not the child call itself but the flat list-splice of the returned `[name, coderef]` pair,
+  - rebuilding `@defs` through `assign(array(...), array(...))` preserved the original flat `name => coderef` list semantics expected by the existing `return {@defs}` path,
+  - this avoided adding new lowering contracts or changing the parser’s output contract.
+- Added focused regression coverage:
+  - `pplugin_helper_flow_eliminates_raw_fallback`
+  - `pplugin_parser_smoke`
+  - these lock zero raw fallback, zero unresolved-helper hits, zero blocked-rule summary state, and preserved returned hash/coderef execution behavior on a small inline plugin sample with comments.
+- Updated blocker scan after the slice:
+  - `pplugin.spec` no longer appears in the blocked-spec ranking
+  - current remaining blocked specs are:
+    - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=115`)
 ## 2026-03-08 - Roadmap Slice: Capture Plugin Modernization and `PathSearch` Strategy
 ## Summary
 Recorded the missing roadmap commitment to replace the current `AUTOLOAD` + `.plg` plugin runtime with a clearer module-based plugin system, and documented the short-term decision to keep `PathSearch->go(...)` as a compatibility surface while hardening/replacing its internals rather than removing it outright.
