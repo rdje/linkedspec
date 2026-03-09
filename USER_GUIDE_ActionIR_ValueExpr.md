@@ -260,7 +260,7 @@ Prefer:
 assign(scalar(retv), call(rule))
 ```
 
-### Mistake: using `array_values(...)` when you only want to clear an array
+### Mistake: using `array_copy(...)` or legacy `array_values(...)` when you only want to clear an array
 For clearing, use:
 
 ```text

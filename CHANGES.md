@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Roadmap Slice: Add `array_copy(...)` Snapshot Alias
+## Summary
+Added clearer backend-neutral snapshot helper `array_copy(array(...))` as the preferred alias for `array_values(array(...))`, while keeping the older spelling fully supported and updating the lowering guides to present the new name as the canonical surface.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ArrayPipeline.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ValueExpr.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Added snapshot-helper alias recognition in canonical lowering:
+  - `array_copy(array(target))` now lowers to `[@target]`,
+  - legacy `array_values(array(target))` is unchanged and still lowers to the same emitted Perl shape.
+- Routed the alias through every existing array-snapshot lowering surface:
+  - direct method-value lowering in `MethodLowering::_lower_method_value_expr`,
+  - generalized `return(payload)` direct helper detection and nested helper rewriting in `_lower_return_payload_expr`,
+  - flow/value passthrough recognition in `ActionIR::FlowExpr`.
+- Expanded focused regression coverage:
+  - `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts` now covers `array_copy(...)` in `push_value(...)`, plain `return(payload)`, structured hash payloads, and descriptor readiness through an inline `return(array_copy(array(items)))` spec.
+- Documentation cleanup:
+  - the top-level guide and ActionIR references now present `array_copy(...)` as the preferred snapshot helper for new DSL authoring,
+  - `array_values(...)` is now documented explicitly as preserved compatibility syntax rather than the preferred new spelling.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=117`)
 ## 2026-03-09 - Roadmap Slice: Migrate `tkgui` Entry-Point Print to Canonical Helper Flow
 ## Summary
 Cleared the remaining `tkgui.spec` blocker by replacing the last raw entry-point debug print in `sub_gui` with canonical helper `print(...)`, while preserving both the printed message and the parser’s current one-entry hash result shape.

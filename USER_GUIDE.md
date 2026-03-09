@@ -36,7 +36,7 @@ When you write helper-style action code such as:
 ```text
 I {declare(array, items); declare(scalar, retv)}
 -> child {assign(scalar(retv), call(child)); push_value(array(items), scalar(retv))}
--> child[1] {return(array("?Top:", array_values(array(items))))}
+-> child[1] {return(array("?Top:", array_copy(array(items))))}
 ```
 
 LinkedSpec does **not** treat that as opaque text. Instead it tries to:
@@ -51,7 +51,7 @@ Think about authoring styles in three tiers:
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_values(...)`, `join_values(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `join_values(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -124,14 +124,14 @@ Lowered constructs are not limited to one place.
 I  {declare(array, items); declare(scalar, flag)}
 LS {print("loop start\n")}
 LE {assign(scalar(flag), IMATCH)}
-LX {return(array_values(array(items)))}
+LX {return(array_copy(array(items)))}
 ```
 
 ### 4. Chained lifecycle forms
 
 ```text
 I.declare(array, items).declare(scalar, flag)
-LX.if(is_nonempty(array(items))).return(array_values(array(items))).else().return_undef().endif()
+LX.if(is_nonempty(array(items))).return(array_copy(array(items))).else().return_undef().endif()
 ```
 
 ## Runtime Match Values You Will See Repeatedly
@@ -180,7 +180,7 @@ Typical patterns:
 - `hash(...)`
 - `scalaref(...)`
 - `join_values(...)`
-- `array_values(...)`
+- `array_copy(...)`
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
 - `return(array(...))`
@@ -275,10 +275,11 @@ Use this when you are closing a delimited construct and want a canonical object/
 ```text
 I {declare(array, parts)}
 -> piece {push_value(array(parts), scalar(IMATCH))}
--> Top[1] {return(array("?Top:", array_values(array(parts))))}
+-> Top[1] {return(array("?Top:", array_copy(array(parts))))}
 ```
 
-Use `array_values(array(parts))` when you want a **snapshot array payload**.
+Prefer `array_copy(array(parts))` when you want a **snapshot array payload**.
+`array_values(array(parts))` remains supported as the older compatibility spelling.
 
 ### Pattern 4: flatten an existing array into a constructor
 
@@ -289,7 +290,7 @@ return(array("?node:", flat_array(IMATCH_LIST)))
 Use `flat_array(...)` when you want **list-context insertion**, not an array snapshot.
 
 That distinction is important:
-- `array_values(array(items))` means “make an array payload from the current array contents.”
+- `array_copy(array(items))` means “make an array payload from the current array contents.”
 - `flat_array(items)` means “splice the array elements into the surrounding constructor.”
 
 ### Pattern 5: backend-neutral recursive accumulator flow
@@ -328,7 +329,7 @@ Use `tools/inspect_spec_codegen.pl` when you want to see the generated Perl and 
 Examples:
 - `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.declare(array, items).declare(scalar, retv)'`
 - `perl tools/inspect_spec_codegen.pl --label Top --snippet 'assign(scalar(retv), call(Leaf))'`
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(is_nonempty(array(items))); return(array_values(array(items))); else(); return_undef(); endif()'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(is_nonempty(array(items))); return(array_copy(array(items))); else(); return_undef(); endif()'`
 
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
@@ -419,9 +420,9 @@ If backend neutrality matters, these are the defaults you should follow.
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_values(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `array_values(array(name))` for snapshot payloads and `flat_array(name)` / `flat_hash(name)` for list-context insertion.
+7. Prefer `array_copy(array(name))` for snapshot payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(name)` / `flat_hash(name)` for list-context insertion.
 8. Use snippet inspection and `return_descr` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances

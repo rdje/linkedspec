@@ -212,7 +212,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - Keep balanced-delimiter behavior strict by policy; do not introduce permissive missing-close helper normalization.
 - Keep `.spec` action semantics language-agnostic: avoid introducing new Perl code-block dependence and prioritize IR/DSL forms that can map cleanly to non-Perl backends.
 - Keep backend emission under strict canonical forms we control so emitted host-language code avoids avoidable parser/splitter fragility.
-- Queue a later DSL naming cleanup: rename backend-neutral array snapshot helper `array_values(array(...))` to clearer `array_copy(array(...))` once the current blocker-reduction work calms down, likely with a compatibility alias during transition so existing specs keep working.
+- Landed DSL naming cleanup: backend-neutral array snapshot helper now prefers `array_copy(array(...))` while preserving `array_values(array(...))` as a compatibility alias, and existing specs can migrate opportunistically rather than through a dedicated sweep.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
@@ -300,6 +300,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
     - Landed follow-up: `portmap::bare_bit_slice` now lowers through canonical helper control flow instead of raw smartmatch classification; regression locks `portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback` and `portmap_bare_bit_slice_classification_smoke` verify zero raw fallback, zero blocked-rule summary state, and preserved `bare` / `bit` / `slice` / `constant` output classification including `bar[0]`.
     - Landed follow-up: `pplugin::pplugin_top` now lowers through canonical helper flow by rebuilding the flat definition list with collection-target assignment plus `flat_array(...)` / `scalaref(...)` instead of raw `push @defs, @$retv`; regression locks `pplugin_helper_flow_eliminates_raw_fallback` and `pplugin_parser_smoke` verify zero raw fallback, zero blocked-rule summary state, and preserved returned hash/coderef behavior for parsed plugin bodies.
     - Landed follow-up: `tkgui::sub_gui` now lowers through canonical helper flow by replacing its last raw entry-point debug print with helper `print(...)`; regression locks `tkgui_helper_flow_eliminates_raw_fallback` and `tkgui_parser_smoke` verify zero raw fallback, zero blocked-rule summary state, preserved entry-point print output, and preserved current one-entry hash result shape.
+    - Landed follow-up: backend-neutral array snapshot lowering now accepts clearer `array_copy(array(...))` anywhere `array_values(array(...))` already worked, while preserving `array_values(...)` as a compatibility alias; regression lock `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts` now covers both spellings.
     - Current decision: `_split_action_ir_statements(...)` hardening track is paused; future work should prioritize action-IR/lowering and diagnostics unless concrete splitter regressions appear.
   - Language-neutral `.spec` action DSL objective (reduce/remove then eliminate Perl code-block dependency in `.spec`): Planned.
 - Phase 2+: Planned.

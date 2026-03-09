@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted post-blocker snapshot-helper naming slice completed in ActionIR lowering and docs.
+- Key technical outcome:
+  - `array_copy(array(...))` now lowers identically to `array_values(array(...))`,
+  - support was wired through direct method-value lowering, generalized `return(payload)` nested-helper rewriting, and flow-expression passthrough surfaces.
+- Compatibility outcome:
+  - existing specs using `array_values(...)` remain unchanged and still emit the same `[@target]` payload form,
+  - the user guides now present `array_copy(...)` as the preferred spelling and `array_values(...)` as compatibility syntax.
+- Regression outcome:
+  - expanded `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`,
+  - full `t/phase0_regression.t` suite still passes at 117 tests.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (117 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone #3: add array_copy snapshot alias` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Backbone item #3 slice completed against `tkgui.spec`.
 - Key technical outcome:
   - `sub_gui` is now clear,

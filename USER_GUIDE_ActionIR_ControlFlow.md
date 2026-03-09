@@ -80,7 +80,7 @@ endif()
 
 ```text
 if(is_nonempty(array(tail)));
-  return(array(scalar(head), array_values(array(tail))));
+  return(array(scalar(head), array_copy(array(tail))));
 else();
   return(array(scalar(head), undef));
 endif()
@@ -90,7 +90,7 @@ endif()
 
 ```text
 if(is_nonempty(array(items)));
-  return(array_values(array(items)));
+  return(array_copy(array(items)));
 else();
   return_undef();
 endif()
@@ -192,7 +192,7 @@ Example:
 
 ```text
 if(is_nonempty(array(assigns)));
-  return(hash("name", scalar(block_namei), "content", array_values(array(assigns))));
+  return(hash("name", scalar(block_namei), "content", array_copy(array(assigns))));
 else();
   return_undef();
 endif()
@@ -205,7 +205,7 @@ Use it when the “no result” case is a deliberate branch outcome.
 
 ```text
 if(is_nonempty(array(items)));
-  return(array_values(array(items)));
+  return(array_copy(array(items)));
 else();
   return_undef();
 endif()
@@ -216,7 +216,7 @@ endif()
 ```text
 if(scalar(has_head));
   if(is_nonempty(array(tail)));
-    return(array(scalar(head), array_values(array(tail))));
+    return(array(scalar(head), array_copy(array(tail))));
   else();
     return(array(scalar(head), undef));
   endif();

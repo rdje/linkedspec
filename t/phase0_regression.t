@@ -1023,7 +1023,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
-    plan tests => 10;
+    plan tests => 13;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'assign(array(items), array(scalar(retv)))'),
@@ -1041,23 +1041,38 @@ subtest 'action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts
         'push_value accepts array_values(array(...)) snapshot payloads'
     );
     is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_copy(array(keyval_pairs)))'),
+        'push @assigns, [@keyval_pairs]',
+        'push_value accepts array_copy(array(...)) snapshot payloads as the clearer alias'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array_values(array(items)))'),
         'return [@items]',
         'return(payload) lowers array_values(array(...)) to a snapshot array payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array_copy(array(items)))'),
+        'return [@items]',
+        'return(payload) lowers array_copy(array(...)) to the same snapshot array payload'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_values(array(assigns))})'),
         'return {name=>$block_namei, content=>[@assigns]}',
         'return(payload) lowers array_values(array(...)) inside structured hash payloads'
     );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>scalar(block_namei), content=>array_copy(array(assigns))})'),
+        'return {name=>$block_namei, content=>[@assigns]}',
+        'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
+    );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, items).declare(scalar, retv).assign(array(items), array(scalar(retv))).return(array_values(array(items)))
+Top:: I.declare(array, items).declare(scalar, retv).assign(array(items), array(scalar(retv))).return(array_copy(array(items)))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for array snapshot/assign method contracts');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for array snapshot alias/assign method contracts');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0, 'array snapshot/assign method contracts avoid RAW_PERL fallback');
@@ -1068,7 +1083,7 @@ SPEC
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
         'canonical action-IR nodes include DECLARE/ASSIGN/RETURN for array snapshot/assign contracts'
     );
-    ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot/assign method contracts remain language-agnostic action-IR ready');
+    ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot alias/assign method contracts remain language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
     plan tests => 11;

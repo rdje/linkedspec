@@ -163,7 +163,7 @@ assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - 
 split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
 split_each(array(subprogram_statement_tokens), /^(\s+)/);
 filter_nonempty(array(subprogram_statement_tokens));
-return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_values(array(subprogram_statement_tokens))))
+return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_copy(array(subprogram_statement_tokens))))
 ```
 
 Why this matters:

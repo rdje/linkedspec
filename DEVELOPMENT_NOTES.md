@@ -60,6 +60,26 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-09)
+- Roadmap post-blocker naming-cleanup slice completed against the ActionIR snapshot-helper surface.
+- Slice-selection rationale:
+  - the current non-deferred blocked-spec queue is already at zero,
+  - `ROADMAP.md` had explicitly queued the clearer rename from `array_values(...)` to `array_copy(...)` once blocker reduction settled down,
+  - this was a bounded compatibility-safe follow-up that did not require touching existing specs.
+- Implementation scope:
+  - `MethodLowering` now accepts `array_copy(array(...))` anywhere direct snapshot value lowering already accepted `array_values(array(...))`,
+  - generalized `return(payload)` lowering now recognizes and recursively rewrites nested `array_copy(...)` helpers alongside the legacy alias,
+  - `FlowExpr` now whitelists `array_copy(...)` in value-expression passthrough paths so condition/value surfaces stay aligned.
+- Compatibility outcome:
+  - `array_values(array(...))` remains fully supported and still lowers to the same `[@target]` emitted-Perl shape,
+  - the user guides now present `array_copy(...)` as the preferred canonical spelling and `array_values(...)` as compatibility syntax.
+- Regression addition:
+  - expanded `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`,
+  - new assertions lock alias behavior in `push_value(...)`, plain `return(payload)`, structured hash payloads, and descriptor readiness.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=117`)
 ## Session Notes (2026-03-08)
 - Roadmap Item #3 slice completed against `portmap.spec`.
 - Slice-selection rationale:
@@ -1859,7 +1879,7 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - canonical action-IR mapping now emits `RETURN`/`ASSIGN`/`REGEX_SUBST` events for these helper contracts,
     - covered by `action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values`.
   - action-rewriter array snapshot / collection-assignment lock:
-    - canonical lowering now covers `array_values(array(...))` snapshot payloads and `assign(array|hash target, source_expr)` collection-target assignments,
+    - canonical lowering now covers preferred `array_copy(array(...))` snapshot payloads plus compatibility `array_values(array(...))`, and `assign(array|hash target, source_expr)` collection-target assignments,
     - covered by `action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts`.
   - `ifelse.spec` print-helper migration lock:
     - raw debug-print statements in `ifelse` grammar rules now lower through canonical `PRINT` helper calls instead of RAW_PERL fallback,

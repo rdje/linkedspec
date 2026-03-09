@@ -45,7 +45,8 @@ They take effect when the expression appears inside a statement or helper that c
 - `array(scalar(tag), scalar(name))` -> `[$tag, $name]`
 - `array()` -> `[]`
 - `hash("kind", "node", "item", scalar(name))` -> `{"kind" => "node", "item" => $name}`
-- `array_values(array(items))` -> `[@items]`
+- `array_copy(array(items))` -> `[@items]`
+- `array_values(array(items))` -> `[@items]` (compatibility alias for `array_copy(...)`)
 - `flat_array(items)` -> `@items`
 - `flat(array(parts))` -> `@parts`
 - `flatten(array(parts))` -> `@parts`
@@ -71,7 +72,7 @@ Important nuance:
 - `assign(hash(by_name), hash("kind", scalar(kind), "name", scalar(name)))` -> `%by_name = ("kind" => $kind, "name" => $name)`
 - `push_value(array(items), scalar(retv))` -> `push @items, $retv`
 - `push_value(items, array(scalar(tag), scalar(name)))` -> `push @items, [$tag, $name]`
-- `push_value(array(assigns), array_values(array(keyval_pairs)))` -> `push @assigns, [@keyval_pairs]`
+- `push_value(array(assigns), array_copy(array(keyval_pairs)))` -> `push @assigns, [@keyval_pairs]`
 - `substr(scalar(c), "\\s*$", "", o)` -> `$c =~ s{\\s*$}{}o`
 - `substr(scalar(c), /^\"|\"$/, //, go)` -> `$c =~ s{^\"|\"$}{}go`
 - `regex_subst(scalar(name), /\\s+/, "_", go)` -> `$name =~ s{\\s+}{_}go`
@@ -87,7 +88,7 @@ Important nuance:
 - `return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])` -> `return ["semantic", { key => $name }, [123, $foo_arr[$idx]]]`
 - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })` -> `return { item => $foo_hash{$key}, list => [$name, 123] }`
 - `return(hash("kind", "node", "item", scalar(foo_hash, key), "list", array(scalar(name), 123)))` -> `return {"kind" => "node", "item" => $foo_hash{$key}, "list" => [$name, 123]}`
-- `return(array_values(array(items)))` -> `return [@items]`
+- `return(array_copy(array(items)))` -> `return [@items]`
 - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))` -> `return ["?subprogram_declaration:", @IMATCH_LIST]`
 - `return(array("semantic", flat(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
 - `return(array("semantic", flatten(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
@@ -99,7 +100,7 @@ Important nuance:
 - `return_undef()` -> `return undef`
 
 Important nuance:
-- `return(payload)` is the preferred general return surface because nested `scalar`, `scalaref`, `array`, `hash`, `array_values`, and `flat_*` helpers all lower inside the payload.
+- `return(payload)` is the preferred general return surface because nested `scalar`, `scalaref`, `array`, `hash`, `array_copy`, compatibility `array_values`, and `flat_*` helpers all lower inside the payload.
 
 ### Flow expressions (`FlowExpr.pm`)
 - `or(scalar(on), scalar(off))` -> `(($on) || ($off))`

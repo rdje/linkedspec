@@ -10,7 +10,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `scalaref(...)`
 - `array(...)`
 - `hash(...)`
-- `array_values(...)`
+- `array_copy(...)`
+- `array_values(...)` as a compatibility alias
 - `flat(...)`, `flatten(...)`, `flat_array(...)`, `flat_hash(...)`
 - `join_values(...)`
 - `call(rule)` as a value source
@@ -27,6 +28,7 @@ scalar(name)
 scalar(retv)
 scalar(flag)
 ```
+
 
 Use it when you want the value of an existing scalar variable.
 
@@ -129,26 +131,28 @@ Examples:
 
 ```text
 hash("type", "SPACE", "content", scalar(IMATCH))
-hash("name", scalar(block_name), "content", array_values(array(assigns)))
+hash("name", scalar(block_name), "content", array_copy(array(assigns)))
 hash("kind", "node", "ok", 1)
 ```
 
 Use it when you want a structured return object or a temporary hash value without raw Perl hash literal syntax.
 
-## `array_values(array(name))`
+## `array_copy(array(name))` and compatibility `array_values(...)`
 This helper creates a **snapshot array payload**.
 
 Examples:
 
 ```text
-return(array_values(array(items)))
-return(hash("content", array_values(array(assigns))))
-push_value(array(nodes), array_values(array(keyval_pairs)))
+return(array_copy(array(items)))
+return(hash("content", array_copy(array(assigns))))
+push_value(array(nodes), array_copy(array(keyval_pairs)))
 ```
+
+`array_values(array(...))` remains supported as a compatibility alias and lowers identically.
 
 This is one of the most important distinctions in the DSL.
 
-### Use `array_values(...)` when you want:
+### Use `array_copy(...)` when you want:
 - an array payload,
 - a nested arrayref-like value,
 - a copy/snapshot of the current array contents.
@@ -189,7 +193,7 @@ This distinction is easy to get wrong, so it is worth repeating.
 #### Snapshot
 
 ```text
-array_values(array(items))
+array_copy(array(items))
 ```
 
 Meaning: “produce one array payload containing the current contents.”
@@ -301,8 +305,8 @@ Examples:
 ```text
 return(array("?node:", scalar(name), scalar(kind)))
 return(hash("type", "OTHERS", "content", scalar(IMATCH)))
-return(array_values(array(items)))
-return(array(scalar(head), array_values(array(tail))))
+return(array_copy(array(items)))
+return(array(scalar(head), array_copy(array(tail))))
 ```
 
 You can nest constructor helpers freely.
@@ -312,7 +316,7 @@ Examples:
 ```text
 return(hash(
   "name", scalar(block_name),
-  "content", array_values(array(assigns)),
+  "content", array_copy(array(assigns)),
   "meta", hash("kind", "block")
 ))
 ```
@@ -346,7 +350,7 @@ This is concise, structured, and backend-friendly.
 -> parenthesis[1] {
   if(scalar(has_head));
     if(is_nonempty(array(tail)));
-      return(array(scalar(head), array_values(array(tail))));
+      return(array(scalar(head), array_copy(array(tail))));
     else();
       return(array(scalar(head), undef));
     endif();
