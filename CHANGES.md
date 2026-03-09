@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Normalize `get_parser(...)` Options Before `ParserFactory`
+## Summary
+Reduced another active raw-argument compatibility seam by making `LinkedSpec::get_parser(...)` normalize its flat option pairs locally and pass a hashref into `LinkedSpec::ParserFactory::run_get_parser(...)`, so the public parser path no longer depends on option-list normalization inside `ParserFactory.pm`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::get_parser(...)`:
+  - it now preserves the existing odd-option fallback behavior while normalizing flat option pairs locally,
+  - parser-factory dispatch now forwards a normalized option hashref instead of a raw option list.
+- Tightened `LinkedSpec::ParserFactory::run_get_parser(...)`:
+  - it now treats the option payload as a hashref contract,
+  - trace setup, resolution, and compile forwarding continue to use the same option keys and values.
+- Added focused regression coverage:
+  - `get_parser_normalizes_option_pairs_before_parser_factory`
+  - the regression traps `LinkedSpec::ParserFactory::run_get_parser(...)` and proves `get_parser(...)` now passes a normalized option hashref with the expected trace option keys while still returning an executable parser.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=126`)
 ## 2026-03-09 - Phase 1A Slice: Route `Get(...)` Through `Runtime::run_get`
 ## Summary
 Reduced another active compatibility-wrapper dependency by making `LinkedSpec::Get(...)` normalize its flat option pairs locally and delegate straight to `LinkedSpec::Runtime::run_get(...)`, so the public `Get` path no longer depends on `LinkedSpec::Runtime::run_get_from_args(...)`.

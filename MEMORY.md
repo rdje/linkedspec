@@ -36,6 +36,22 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A modularization slice completed against the public `get_parser(...)`/parser-factory option-normalization boundary.
+- Key technical outcome:
+  - `LinkedSpec::get_parser(...)` now normalizes flat option pairs locally before delegating,
+  - `LinkedSpec::ParserFactory::run_get_parser(...)` now consumes an option hashref contract directly,
+  - the active public parser path no longer depends on raw option-list normalization inside `ParserFactory.pm`.
+- Regression outcome:
+  - added `get_parser_normalizes_option_pairs_before_parser_factory`,
+  - the regression traps `LinkedSpec::ParserFactory::run_get_parser(...)` and proves `get_parser(...)` passes the expected normalized trace option hash while still returning an executable parser.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (126 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: normalize get_parser options before ParserFactory` until commit workflow runs, then reset to zero-byte untracked.
 ## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against the public `Get(...)`/runtime wrapper boundary.
 - Key technical outcome:

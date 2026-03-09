@@ -119,6 +119,57 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
     like($trace_log, qr/ENTER LinkedSpec::get_parser/, 'trace log records get_parser entry through extracted Trace dependency path');
     like($trace_log, qr/parser coderef generated/, 'trace log records parser compilation result through extracted Runtime dependency path');
 };
+subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
+    plan tests => 5;
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_log = File::Spec->catfile($tmp_cwd, 'parser_factory_hashref_trace.log');
+    my $orig_run_get_parser = \&LinkedSpec::ParserFactory::run_get_parser;
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    my ($saw_hashref, $captured_option);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local $LinkedSpec::Trace::DUMP_VERBOSITY = LinkedSpec::Trace::DUMP_NONE();
+        local $LinkedSpec::Trace::TRACE_LOG_FILE;
+        local $LinkedSpec::Trace::TRACE_LOG_MODE = 'stdout';
+        local $LinkedSpec::Trace::TRACE_EMOJI = 0;
+        local $LinkedSpec::Trace::TRACE_INDENT_LEVEL = 0;
+        local $LinkedSpec::Trace::TRACE_INITIALIZED = 1;
+        local *LinkedSpec::ParserFactory::run_get_parser = sub {
+            my ($spec_name, $option, $deps) = @_;
+            $saw_hashref = ref($option) eq 'HASH';
+            $captured_option = $saw_hashref ? { %{$option} } : undef;
+            return $orig_run_get_parser->($spec_name, $option, $deps);
+        };
+
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser(
+            'Lispish',
+            trace_level => 'high',
+            trace_log_file => $tmp_log,
+            trace_log_mode => 'route',
+            trace_reset_log => 1,
+        );
+        my $input = '(hashref contract)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser succeeds while ParserFactory contract is trapped') or diag(normalize_error($err));
+    ok($saw_hashref, 'get_parser passes a normalized option hashref into ParserFactory');
+    is_deeply(
+        [sort keys %{ $captured_option || {} }],
+        [qw(trace_level trace_log_file trace_log_mode trace_reset_log)],
+        'get_parser forwards the expected normalized option keys into ParserFactory'
+    );
+    is($captured_option->{trace_log_file}, $tmp_log, 'get_parser preserves normalized option values when delegating into ParserFactory');
+    ok(defined($parser) && ref($parser) eq 'CODE' && defined($ast) && ref($ast) eq 'ARRAY', 'parser created through normalized ParserFactory options still executes');
+};
 subtest 'get_parser_explicit_path_resolution_without_pathsearch' => sub {
     plan tests => 4;
 

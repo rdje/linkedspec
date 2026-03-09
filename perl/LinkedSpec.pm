@@ -1224,7 +1224,8 @@ sub _resolve_local_spec_path {
 #------------------------------------------------------------------------------
 sub get_parser {
  my ($spec_name, @opts) = @_;
- return LinkedSpec::ParserFactory::run_get_parser($spec_name, \@opts, _parser_factory_deps())
+ my %opt_hash = (@opts % 2 == 0) ? @opts : ();
+ return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash, _parser_factory_deps())
 }
 
 #------------------------------------------------------------------------------

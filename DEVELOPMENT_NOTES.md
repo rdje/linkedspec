@@ -60,6 +60,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-10)
+- Phase 1A no-behavior-change modularization slice completed against the public `get_parser(...)`/parser-factory option-normalization seam.
+- Slice-selection rationale:
+  - `LinkedSpec::get_parser(...)` still passed raw flat option pairs into `ParserFactory::run_get_parser(...)`,
+  - `ParserFactory.pm` had become the owner of parser-factory orchestration rather than a raw-argument normalization shim,
+  - moving option normalization into the public wrapper removes another active compatibility-style boundary without changing parser behavior.
+- Implementation scope:
+  - updated `LinkedSpec::get_parser(...)` to normalize flat option pairs locally while preserving the existing odd-option fallback to an empty option set,
+  - changed `LinkedSpec::ParserFactory::run_get_parser(...)` to consume an option hashref contract directly.
+- Regression addition:
+  - added `get_parser_normalizes_option_pairs_before_parser_factory`,
+  - the regression traps `LinkedSpec::ParserFactory::run_get_parser(...)` and verifies `get_parser(...)` now passes a normalized option hashref with the expected trace keys and values while still returning a working parser coderef.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=126`)
 ## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the public `Get(...)`/runtime wrapper seam.
 - Slice-selection rationale:

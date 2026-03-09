@@ -27,12 +27,12 @@ sub _require_value_dep {
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
-# Args    : ($spec_name, $raw_opts_arrayref, $deps)
+# Args    : ($spec_name, $option_hashref, $deps)
 # Returns : parser coderef or undef
 #------------------------------------------------------------------------------
 sub run_get_parser {
- my ($spec_name, $raw_opts, $deps) = @_;
- my @opts = (ref($raw_opts) eq 'ARRAY') ? @$raw_opts : ();
+ my ($spec_name, $option, $deps) = @_;
+ my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
 
  my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
  my $trace_enter = _require_dep($deps, 'trace_enter');
@@ -45,7 +45,6 @@ sub run_get_parser {
  my $dump_low = _require_value_dep($deps, 'dump_low');
  my $dump_medium = _require_value_dep($deps, 'dump_medium');
 
- my %opt_hash = (@opts % 2 == 0) ? @opts : ();
  $apply_trace_options->(\%opt_hash) if %opt_hash;
  my $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
   spec_name => $spec_name,

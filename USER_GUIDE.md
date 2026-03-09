@@ -373,6 +373,8 @@ Descriptor summary fields:
 3. Try module-relative `../specs/name.spec`.
 4. If still unresolved, fall back to `PathSearch`.
 
+`LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility.
+
 ## Tracing and Debugging
 LinkedSpec supports multi-level tracing.
 
