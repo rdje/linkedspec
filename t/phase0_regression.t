@@ -876,13 +876,7 @@ Top::
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
-        $bootstrap_spec_descr,
-        $bootstrap_rule_index,
-        \$spec_content,
-        $bootstrap_gdata,
-    );
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
     ok($parse_success, 'bootstrap parse succeeds for injected spec_descr callback test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array');
 
@@ -907,13 +901,7 @@ Top::
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
-        $bootstrap_spec_descr,
-        $bootstrap_rule_index,
-        \$spec_content,
-        $bootstrap_gdata,
-    );
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
     ok($parse_success, 'bootstrap parse succeeds for injected runtime context test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for runtime context test');
 
@@ -941,13 +929,7 @@ Top::
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
-        $bootstrap_spec_descr,
-        $bootstrap_rule_index,
-        \$spec_content,
-        $bootstrap_gdata,
-    );
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
     ok($parse_success, 'bootstrap parse succeeds for spec-entry wrapper bypass test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for spec-entry wrapper bypass test');
 
@@ -971,17 +953,17 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get preserves selected handler metadata');
 };
-subtest 'compiler_run_get_pipeline_uses_injected_runtime_context' => sub {
-    plan tests => 6;
+subtest 'compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context' => sub {
+    plan tests => 7;
 
     my $spec_content = <<'SPEC';
 Top::
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
     my @parser_source_chunks;
     my $parser_source = '';
+    my $bootstrap_parse_count = 0;
     my $runtime_ctx = {
         top_rule => undef,
         parser_source_chunks_ref => \@parser_source_chunks,
@@ -999,9 +981,10 @@ SPEC
             parser_source_ref => \$parser_source,
         },
         {
-            spec_descr => $bootstrap_spec_descr,
-            bootstrap_rule_index => $bootstrap_rule_index,
-            gdata => $bootstrap_gdata,
+            bootstrap_parse => sub {
+                ++$bootstrap_parse_count;
+                return LinkedSpec::BootstrapSpec::run_bootstrap_parse($_[0]);
+            },
             compile_spec_entry => sub {
                 return LinkedSpec::Runtime::compile_spec_entry($_[0], $runtime_ctx);
             },
@@ -1011,6 +994,7 @@ SPEC
 
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline returns descriptor through injected runtime context');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler pipeline still builds runtime handler through injected runtime context');
+    is($bootstrap_parse_count, 1, 'compiler pipeline invokes injected bootstrap_parse callback exactly once');
     is($runtime_ctx->{top_rule}, 'Top', 'compiler pipeline records top rule in injected runtime context');
     ok(@parser_source_chunks > 0, 'compiler pipeline records parser-source chunks in injected runtime context');
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');

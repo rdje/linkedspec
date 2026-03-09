@@ -10,6 +10,7 @@ BEGIN {
 }
 use LinkedRE;
 
+use LinkedSpec::BootstrapSpec ();
 use LinkedSpec::Trace ();
 use LinkedSpec::Validation ();
 
@@ -23,18 +24,14 @@ use constant {
 
 sub _run_bootstrap_parse {
  my ($spec_descr, $bootstrap_rule_index, $spec_content_ref, $gdata) = @_;
-
- my $retv;
- my $parse_success = 1;
- my $error = '';
- eval {
-  $retv = &{$$spec_descr[$$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $spec_content_ref, $gdata);
- } or do {
-  $parse_success = 0;
-  $error = $@;
- };
-
- return ($parse_success, $retv, $error);
+ return LinkedSpec::BootstrapSpec::run_bootstrap_parse(
+  $spec_content_ref,
+  {
+   spec_descr => $spec_descr,
+   bootstrap_rule_index => $bootstrap_rule_index,
+   gdata => $gdata,
+  }
+ )
 }
 
 sub _require_dep {
@@ -308,7 +305,7 @@ sub _emit_runtime_ctx_parser_source_line {
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
-#           `LinkedSpec::Get`, with explicit dependency-injected runtime state.
+#           `LinkedSpec::Get`, with explicit injected bootstrap/runtime state.
 # Args    : ($spec_content_ref, $option_hashref, $deps_hashref)
 # Returns : parser coderef | descriptor hashref | undef (mode/error dependent)
 #------------------------------------------------------------------------------
@@ -317,12 +314,13 @@ sub run_get_pipeline {
  $option = {} unless ref($option) eq 'HASH';
  $deps = {} unless ref($deps) eq 'HASH';
 
- my $spec_descr = _require_dep($deps, 'spec_descr');
- my $bootstrap_rule_index = _require_dep($deps, 'bootstrap_rule_index');
- my $gdata = _require_dep($deps, 'gdata');
+ my $bootstrap_parse = _require_dep($deps, 'bootstrap_parse');
  my $compile_spec_entry = _require_dep($deps, 'compile_spec_entry');
  my $runtime_ctx = _require_runtime_ctx($deps);
  my $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
+
+ die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"
+  unless ref($bootstrap_parse) eq 'CODE';
 
  LinkedSpec::Trace::_apply_trace_options($option);
  my $parse_only = $option->{parse_only};
@@ -379,12 +377,7 @@ sub run_get_pipeline {
 
  LinkedSpec::Trace::log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
  my $parse_error = '';
- ($parse_success, $retv, $parse_error) = _run_bootstrap_parse(
-  $spec_descr,
-  $bootstrap_rule_index,
-  $spec_content_ref,
-  $gdata,
- );
+ ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
  unless ($parse_success) {
   LinkedSpec::Trace::log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $parse_error");
  }

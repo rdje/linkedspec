@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Move Bootstrap Parse Ownership into `BootstrapSpec`
+## Summary
+Reduced another compiler/runtime coupling point by making `LinkedSpec::BootstrapSpec` own cached bootstrap grammar state and bootstrap parse execution, while `LinkedSpec::Compiler::run_get_pipeline(...)` now depends only on an injected `bootstrap_parse` callback instead of the raw bootstrap descriptor/index/gdata triple.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Expanded `LinkedSpec::BootstrapSpec`:
+  - added `cached_bootstrap_state()` to lazily own the shared hardcoded bootstrap grammar state,
+  - added `run_bootstrap_parse(...)` as the bootstrap parse owner for runtime/compiler callers.
+- Refactored `LinkedSpec::Compiler::run_get_pipeline(...)`:
+  - removed direct dependency on `spec_descr`, `bootstrap_rule_index`, and `gdata`,
+  - now requires a single injected `bootstrap_parse` callback for the bootstrap parse step.
+- Simplified `LinkedSpec::Runtime::run_get(...)`:
+  - removed local bootstrap descriptor caching from `Runtime.pm`,
+  - now injects `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)` directly into the compiler pipeline.
+- Added focused regression coverage:
+  - `compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context`
+  - the regression proves `run_get_pipeline(...)` succeeds with the new injected `bootstrap_parse` callback plus shared `runtime_ctx`, and invokes the callback exactly once while preserving descriptor generation and parser-source capture.
+- Refreshed focused bootstrap-entry tests:
+  - targeted spec-entry/runtime tests now use `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)` directly instead of the older compiler-owned bootstrap parse helper.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=124`)
 ## 2026-03-09 - Phase 1A Slice: Route SpecEntry Compilation Through `SpecEntry.pm`
 ## Summary
 Reduced another façade-era wrapper by letting `LinkedSpec::SpecEntry::compile_spec_entry(...)` consume the injected runtime context directly for parser-source emission and `top_rule` propagation, so default spec-entry compilation no longer depends on `LinkedSpec::Runtime::compile_spec_entry(...)` except as compatibility glue.

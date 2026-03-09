@@ -13,15 +13,8 @@ use LinkedSpec::Compiler ();
 use LinkedSpec::SpecEntry ();
 
 #------------------------------------------------------------------------------
-# Runtime parser state (cached bootstrap descriptor + per-run mutable context)
+# Runtime parser state helpers (per-run mutable context only)
 #------------------------------------------------------------------------------
-my ($bootstrap_spec_descr, $bootstrap_rule_index_ref, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-my $BOOTSTRAP_STATE = {
- spec_descr => $bootstrap_spec_descr,
- bootstrap_rule_index => { %$bootstrap_rule_index_ref },
- gdata => $bootstrap_gdata,
-};
-
 sub _emit_parser_source_line {
  my ($runtime_ctx, $chunk) = @_;
  my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
@@ -51,7 +44,7 @@ sub _build_runtime_context {
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
-#           and compiler pipeline invocation against runtime bootstrap state.
+#           and compiler pipeline invocation against injected bootstrap parsing.
 # Args    : ($spec_content_ref, $option_hashref)
 # Returns : parser coderef | descriptor hashref | undef
 #------------------------------------------------------------------------------
@@ -64,9 +57,7 @@ sub run_get {
   $spec_content_ref,
   $option,
   {
-   spec_descr => $BOOTSTRAP_STATE->{spec_descr},
-   bootstrap_rule_index => $BOOTSTRAP_STATE->{bootstrap_rule_index},
-   gdata => $BOOTSTRAP_STATE->{gdata},
+   bootstrap_parse => \&LinkedSpec::BootstrapSpec::run_bootstrap_parse,
    compile_spec_entry => sub { return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx }) },
    runtime_ctx => $runtime_ctx,
   }

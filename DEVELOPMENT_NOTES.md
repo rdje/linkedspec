@@ -61,6 +61,27 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against bootstrap parse ownership.
+- Slice-selection rationale:
+  - `Compiler::run_get_pipeline(...)` still knew the raw bootstrap descriptor/index/gdata internals,
+  - `Runtime.pm` was still caching bootstrap grammar state locally even though bootstrap grammar ownership conceptually belongs with `BootstrapSpec`,
+  - replacing that triple with a single injected bootstrap-parse callback narrows the compiler contract and makes `BootstrapSpec` the real owner of the hardcoded grammar state.
+- Implementation scope:
+  - added `cached_bootstrap_state()` and `run_bootstrap_parse(...)` to `LinkedSpec::BootstrapSpec`,
+  - changed `Compiler::run_get_pipeline(...)` to require `bootstrap_parse` instead of raw bootstrap structures,
+  - removed local bootstrap cache ownership from `Runtime::run_get(...)` and injected `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)` directly.
+- Regression addition:
+  - renamed/expanded the compiler pipeline seam test to `compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context`,
+  - the regression now proves `run_get_pipeline(...)` succeeds with the injected bootstrap callback and shared runtime context, and that the callback is invoked exactly once.
+- Focused harness refresh:
+  - the local bootstrap-entry tests now call `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)` directly instead of the older compiler-owned helper.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=124`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the spec-entry/runtime wrapper seam.
 - Slice-selection rationale:
   - `LinkedSpec::SpecEntry` already owned the real rule-entry compilation logic,

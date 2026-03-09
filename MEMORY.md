@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against bootstrap parse ownership.
+- Key technical outcome:
+  - `LinkedSpec::BootstrapSpec` now owns cached bootstrap grammar state via `cached_bootstrap_state()` and bootstrap parse execution via `run_bootstrap_parse(...)`,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` now consumes a single injected `bootstrap_parse` callback rather than the raw bootstrap descriptor/index/gdata triple,
+  - `LinkedSpec::Runtime::run_get(...)` no longer owns local bootstrap cache state.
+- Regression outcome:
+  - updated the compiler/runtime seam lock to `compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context`,
+  - the regression proves the compiler pipeline works with the injected bootstrap parse callback plus shared runtime context and calls the bootstrap callback exactly once.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (124 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move bootstrap parse ownership into BootstrapSpec` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against the spec-entry/runtime wrapper boundary.
 - Key technical outcome:
   - `LinkedSpec::SpecEntry::compile_spec_entry(...)` now accepts the injected `runtime_ctx` directly for parser-source emission and `top_rule` propagation,
