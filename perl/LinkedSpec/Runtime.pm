@@ -13,19 +13,39 @@ use LinkedSpec::Compiler ();
 use LinkedSpec::SpecEntry ();
 
 #------------------------------------------------------------------------------
-# Runtime parser state (bootstrap descriptor + mutable top-rule tracking)
+# Runtime parser state (cached bootstrap descriptor + per-run mutable context)
 #------------------------------------------------------------------------------
-my ($spec_descr, $bootstrap_rule_index_ref, $gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-my %bootstrap_rule_index = %$bootstrap_rule_index_ref;
-my $top_rule;
-
-our $PARSER_SOURCE_EMIT_CB;
+my ($bootstrap_spec_descr, $bootstrap_rule_index_ref, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+my $BOOTSTRAP_STATE = {
+ spec_descr => $bootstrap_spec_descr,
+ bootstrap_rule_index => { %$bootstrap_rule_index_ref },
+ gdata => $bootstrap_gdata,
+};
 
 sub _emit_parser_source_line {
- my ($chunk) = @_;
- return unless ref($PARSER_SOURCE_EMIT_CB) eq 'CODE';
- $PARSER_SOURCE_EMIT_CB->($chunk);
+ my ($runtime_ctx, $chunk) = @_;
+ my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
+ return unless ref($emit) eq 'CODE';
+ $emit->($chunk);
  return
+}
+
+sub _build_runtime_context {
+ my ($option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
+
+ my @parser_source_chunks;
+ my $ctx = {
+  top_rule => undef,
+  parser_source_chunks_ref => \@parser_source_chunks,
+ };
+ if ($option->{dump_parser_source}) {
+  $ctx->{emit_parser_source_line} = sub {
+   my ($chunk) = @_;
+   push @parser_source_chunks, $chunk;
+  };
+ }
+ return $ctx
 }
 
 #------------------------------------------------------------------------------
@@ -39,22 +59,18 @@ sub run_get {
  my ($spec_content_ref, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
 
- my @parser_source_chunks;
- local $PARSER_SOURCE_EMIT_CB = $option->{dump_parser_source} ? sub {
-  my ($chunk) = @_;
-  push @parser_source_chunks, $chunk;
- } : undef;
+ my $runtime_ctx = _build_runtime_context($option);
  return LinkedSpec::Compiler::run_get_pipeline(
   $spec_content_ref,
   $option,
   {
-   spec_descr => $spec_descr,
-   bootstrap_rule_index => \%bootstrap_rule_index,
-   gdata => $gdata,
-   compile_spec_entry => \&compile_spec_entry,
-   emit_parser_source_line => \&_emit_parser_source_line,
-   top_rule_ref => \$top_rule,
-   parser_source_chunks_ref => \@parser_source_chunks,
+   spec_descr => $BOOTSTRAP_STATE->{spec_descr},
+   bootstrap_rule_index => $BOOTSTRAP_STATE->{bootstrap_rule_index},
+   gdata => $BOOTSTRAP_STATE->{gdata},
+   compile_spec_entry => sub { return compile_spec_entry($_[0], $runtime_ctx) },
+   emit_parser_source_line => sub { return _emit_parser_source_line($runtime_ctx, @_) },
+   top_rule_ref => \$runtime_ctx->{top_rule},
+   parser_source_chunks_ref => $runtime_ctx->{parser_source_chunks_ref},
   }
  )
 }
@@ -75,19 +91,21 @@ sub run_get_from_args {
 #------------------------------------------------------------------------------
 # Function: compile_spec_entry
 # Purpose : Own spec_entry orchestration glue including top-rule propagation.
-# Args    : ($einfo)
+# Args    : ($einfo, $runtime_ctx)
 # Returns : ($label, $rule_info_hashref) or undef
 #------------------------------------------------------------------------------
 sub compile_spec_entry {
- my ($einfo) = @_;
+ my ($einfo, $runtime_ctx) = @_;
  my ($label, $info, $top_rule_candidate) = LinkedSpec::SpecEntry::compile_spec_entry(
   $einfo,
   {
-   emit_parser_source_line => \&_emit_parser_source_line,
+   emit_parser_source_line => sub { return _emit_parser_source_line($runtime_ctx, @_) },
   }
  );
  return undef unless defined($label) && ref($info) eq 'HASH';
- $top_rule = $top_rule_candidate if defined $top_rule_candidate;
+ if (ref($runtime_ctx) eq 'HASH' && defined $top_rule_candidate) {
+  $runtime_ctx->{top_rule} = $top_rule_candidate;
+ }
  return ($label, $info)
 }
 

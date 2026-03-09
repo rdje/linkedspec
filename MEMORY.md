@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Phase 1A modularization slice completed against `LinkedSpec::Runtime` mutable state.
+- Key technical outcome:
+  - cached bootstrap grammar state now lives in a shared lexical runtime hash,
+  - mutable per-run parser-build state (`top_rule`, parser-source emission) now flows through an injected runtime context hash instead of package-global mutation.
+- Regression outcome:
+  - added `runtime_compile_spec_entry_uses_injected_runtime_context`,
+  - the regression proves `LinkedSpec::Runtime::compile_spec_entry(...)` can compile a parsed bootstrap entry, emit parser-source chunks, and record `top_rule` through injected runtime state.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (122 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move Runtime mutable state into context` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Phase 1A modularization slice completed against `LinkedSpec::ParserFactory` dependency wiring.
 - Key technical outcome:
   - parser-factory trace/config wiring now resolves directly from `LinkedSpec::Trace`,

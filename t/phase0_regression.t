@@ -899,6 +899,40 @@ SPEC
     is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
+subtest 'runtime_compile_spec_entry_uses_injected_runtime_context' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($bootstrap_spec_descr, $bootstrap_rule_index, $bootstrap_gdata) = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::Compiler::_run_bootstrap_parse(
+        $bootstrap_spec_descr,
+        $bootstrap_rule_index,
+        \$spec_content,
+        $bootstrap_gdata,
+    );
+    ok($parse_success, 'bootstrap parse succeeds for injected runtime context test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for runtime context test');
+
+    my @parser_source_chunks;
+    my $runtime_ctx = {
+        top_rule => undef,
+        emit_parser_source_line => sub {
+            my ($chunk) = @_;
+            push @parser_source_chunks, $chunk;
+        },
+    };
+
+    my ($label, $info) = LinkedSpec::Runtime::compile_spec_entry($retv->[0], $runtime_ctx);
+    is($label, 'Top', 'runtime compile_spec_entry still returns rule label through injected context');
+    ok(defined($info) && ref($info) eq 'HASH', 'runtime compile_spec_entry still returns rule info through injected context');
+    ok(ref($info->{handler}) eq 'CODE', 'runtime compile_spec_entry still exposes runtime handler coderef');
+    is($runtime_ctx->{top_rule}, 'Top', 'runtime compile_spec_entry writes discovered top rule into injected runtime context');
+    like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'runtime compile_spec_entry emits parser source through injected runtime context');
+};
 subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     plan tests => 7;
 

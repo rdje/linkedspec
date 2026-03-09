@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-09)
+- Phase 1A no-behavior-change modularization slice completed against `Runtime.pm` mutable state handling.
+- Slice-selection rationale:
+  - the roadmap explicitly calls for reducing package-global cross-cutting state,
+  - `LinkedSpec::Runtime` still owned mutable package globals for `top_rule` and parser-source emission,
+  - those were good candidates for a small state-shape cleanup because the actual data is naturally per-run, not process-global.
+- Implementation scope:
+  - grouped cached bootstrap grammar state into one shared lexical runtime hash,
+  - introduced per-run runtime context creation in `run_get(...)`,
+  - routed parser-source emission through the injected runtime context instead of package-global callback mutation,
+  - updated `compile_spec_entry(...)` to accept optional injected runtime context and write discovered `top_rule` into that context.
+- Regression addition:
+  - added `runtime_compile_spec_entry_uses_injected_runtime_context`,
+  - the regression uses a real parsed bootstrap entry and verifies runtime compilation still returns rule info, emits parser-source chunks, and records `top_rule` through injected state.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=122`)
+## Session Notes (2026-03-09)
 - Phase 1A no-behavior-change modularization slice completed against the parser-factory dependency boundary.
 - Slice-selection rationale:
   - `LinkedSpec::ParserFactory` was still getting trace/config/compile callbacks through `LinkedSpec.pm`,

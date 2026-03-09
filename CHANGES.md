@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Phase 1A Slice: Move Runtime Mutable State into Per-Run Context
+## Summary
+Reduced another package-global coupling point in `LinkedSpec::Runtime` by moving mutable parser-build state (`top_rule`, parser-source emission) into an injected per-run runtime context hash while keeping the cached bootstrap grammar shared.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Runtime`:
+  - cached bootstrap state is now grouped in a shared lexical hash (`spec_descr`, `bootstrap_rule_index`, `gdata`),
+  - mutable per-run state now lives in a runtime context hash created by `run_get(...)`,
+  - parser-source emission now delegates through the injected runtime context instead of package-global `PARSER_SOURCE_EMIT_CB`,
+  - `compile_spec_entry(...)` now accepts optional injected runtime context and writes discovered `top_rule` back into that context.
+- Preserved behavior:
+  - `LinkedSpec::Get(...)` / `LinkedSpec::Runtime::run_get_from_args(...)` still compile and return functional parsers with the same public API,
+  - cached bootstrap grammar reuse is unchanged,
+  - parser-source dumping and top-rule propagation still work through the compiler pipeline.
+- Added focused regression coverage:
+  - `runtime_compile_spec_entry_uses_injected_runtime_context`
+  - the regression proves `LinkedSpec::Runtime::compile_spec_entry(...)` can compile a parsed entry, emit parser-source chunks, and write `top_rule` into injected state without relying on package-global mutation.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=122`)
 ## 2026-03-09 - Phase 1A Slice: Decouple ParserFactory from `LinkedSpec.pm` Facade
 ## Summary
 Reduced another modularization-era reach-back into `LinkedSpec.pm` by making parser-factory dependency wiring use `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly instead of routing trace/config/compile callbacks through façade helpers on `LinkedSpec.pm`.
