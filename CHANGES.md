@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-09 - Roadmap Slice: Migrate `tkgui` Entry-Point Print to Canonical Helper Flow
+## Summary
+Cleared the remaining `tkgui.spec` blocker by replacing the last raw entry-point debug print in `sub_gui` with canonical helper `print(...)`, while preserving both the printed message and the parser’s current one-entry hash result shape.
+
+## Changed Files
+- Updated: `specs/tkgui.spec`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Selected `tkgui.spec` as the next deterministic tail slice because after the `pplugin` cleanup it was the final remaining blocked non-deferred spec (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`).
+- Cleared the blocked `tkgui` rule:
+  - `sub_gui`
+- Reworked the `sub_gui` initializer print:
+  - retained the existing `my ($subgui_name) = @IMATCH_LIST` destructuring,
+  - replaced raw debug print `print "Found a SUB GUI entry point <$subgui_name>\n"` with:
+    - `print("Found a SUB GUI entry point <", scalar(subgui_name), ">\n")`
+- Important migration nuance:
+  - the blocker was only the interpolated debug print; the existing return shape was already flowing through recognized helper lowering,
+  - preserving behavior meant keeping the current output string unchanged even though the parser’s resulting hash shape is non-obvious,
+  - the new smoke regression deliberately locks that current one-entry hash result instead of “fixing” it as part of this migration slice.
+- Added focused regression coverage:
+  - `tkgui_helper_flow_eliminates_raw_fallback`
+  - `tkgui_parser_smoke`
+  - these lock zero raw fallback, zero unresolved-helper hits, zero blocked-rule summary state, preserved entry-point print output, and the current one-entry hash result on a compact inline sample with a top-level comment.
+- Updated blocker scan after the slice:
+  - `tkgui.spec` no longer appears in the blocked-spec ranking
+  - current non-deferred action-rewriter migration scan result:
+    - zero blocked specs (`__BLOCKED_COUNT__=0`)
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=117`)
 ## 2026-03-09 - Roadmap Slice: Migrate `pplugin` Top Accumulator to Canonical Helper Flow
 ## Summary
 Cleared the remaining `pplugin.spec` blocker by replacing the last raw list-splice in `pplugin_top` with canonical collection-target assignment, while preserving the parser’s returned hash-of-coderefs behavior for parsed `.plg` files.

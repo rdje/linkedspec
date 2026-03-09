@@ -955,6 +955,28 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
   - `prove -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=84`)
 ## Session Notes (2026-03-09)
+- Executed the next Backbone item #3 tail slice against `tkgui.spec`.
+- Blocker analysis:
+  - the only remaining blocked rule was `sub_gui`,
+  - the only remaining blocker statement was raw debug print `print "Found a SUB GUI entry point <$subgui_name>\n"`.
+- Migration decision:
+  - kept the existing destructuring and return shape,
+  - replaced only the raw debug print with canonical helper output:
+    - `print("Found a SUB GUI entry point <", scalar(subgui_name), ">\n")`
+  - this preserved both the current printed message and the current parser output contract.
+- Regression additions:
+  - `tkgui_helper_flow_eliminates_raw_fallback`
+  - `tkgui_parser_smoke`
+  - the smoke regression locks both the printed `sub_gui` entry-point message and the current one-entry hash result on a compact inline sample with a top-level comment.
+- Validation snapshot for the `tkgui` slice:
+  - `perl -Iperl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c t/phase0_regression.t` -> OK
+  - `prove -v -Iperl t/phase0_regression.t` -> PASS (`Files=1, Tests=117`)
+- Updated backlog state:
+  - `tkgui` now reports `language_agnostic_blocked_rule_count=0`
+  - `sub_gui` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - the current non-deferred action-rewriter migration scan reports zero blocked specs (`__BLOCKED_COUNT__=0`)
+## Session Notes (2026-03-09)
 - Executed the next Backbone item #3 tail slice against `pplugin.spec`.
 - Blocker analysis:
   - the only remaining blocked rule was `pplugin_top`,

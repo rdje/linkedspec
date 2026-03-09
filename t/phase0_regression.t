@@ -2965,6 +2965,47 @@ PPLUGIN
     is($ast->{foo}->(), 3, 'pplugin foo coderef preserves evaluated body behavior');
     is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
 };
+subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $descr = LinkedSpec::get_parser('tkgui', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tkgui helper-flow migration check');
+
+    my $meta = $descr->{spec}{sub_gui}{meta}{action_rewriter};
+    ok(ref($meta) eq 'HASH', 'tkgui sub_gui exposes action_rewriter metadata');
+    is($meta->{raw_perl_dependency_count}, 0, 'tkgui sub_gui no longer reports raw-Perl fallback dependency');
+    is_deeply($meta->{raw_perl_dependency_statements}, [], 'tkgui sub_gui exposes no raw-Perl fallback statements');
+    is($meta->{unresolved_helper_count}, 0, 'tkgui sub_gui avoids unresolved-helper hits');
+    ok(
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'tkgui sub_gui canonical action-IR nodes include ASSIGN/CALL/PRINT/RETURN after helper migration'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'tkgui sub_gui is language-agnostic action-IR ready');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'tkgui descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'tkgui blocked-rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'tkgui exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tkgui exposes no top blocked rule after helper migration');
+};
+subtest 'tkgui_parser_smoke' => sub {
+    plan tests => 7;
+
+    my $parser = LinkedSpec::get_parser('tkgui');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'tkgui parser created');
+
+    my $input = "start {(frame foo)}\n# comment\n";
+    my ($ok, $ast, $err, $stdout, $stderr, $inner_eval_err) = run_parser_with_captured_io($parser, \$input);
+    ok($ok, 'tkgui parser executed without die') or diag(normalize_error($err));
+    ok(defined($ast) && ref($ast) eq 'HASH', 'tkgui parser returned a hash AST');
+    is($inner_eval_err, '', 'tkgui parser execution leaves no inner eval error');
+    is($stdout, "Found a SUB GUI entry point <start>\n", 'tkgui parser preserves the sub_gui entry-point debug print');
+    is($stderr, '', 'tkgui parser emits no stderr for the smoke input');
+    is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 

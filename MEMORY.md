@@ -37,6 +37,29 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-09)
+- Uncommitted Backbone item #3 slice completed against `tkgui.spec`.
+- Key technical outcome:
+  - `sub_gui` is now clear,
+  - the final raw blocker `print "Found a SUB GUI entry point <$subgui_name>\n"` was replaced with canonical helper `print("Found a SUB GUI entry point <", scalar(subgui_name), ">\n")`.
+- Rule-migration outcome:
+  - `tkgui` now reports `language_agnostic_blocked_rule_count=0`
+  - `sub_gui` now reports `raw_perl_dependency_count=0`, `unresolved_helper_count=0`, and `language_agnostic_action_ir_ready=1`
+  - canonical action-IR coverage for `sub_gui` now includes `ASSIGN`, `CALL`, `PRINT`, and `RETURN`
+- Regression outcome:
+  - added `tkgui_helper_flow_eliminates_raw_fallback`
+  - added `tkgui_parser_smoke`
+  - full `t/phase0_regression.t` suite now passes at 117 tests
+- Semantic-preservation note:
+  - the parser still emits the current `Found a SUB GUI entry point <...>` message,
+  - the new smoke case locks the current one-entry hash result shape `{'((frame foo))' => undef}` so the helper rewrite does not silently “improve” or alter existing semantics.
+- Blocker-ranking outcome:
+  - `tkgui.spec` no longer appears in the blocked-spec ranking
+  - the current non-deferred action-rewriter migration scan reports zero blocked specs
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (117 tests)
+## Current Session Snapshot (2026-03-09)
 - Uncommitted Backbone item #3 slice completed against `pplugin.spec`.
 - Key technical outcome:
   - `pplugin_top` is now clear,
@@ -54,7 +77,7 @@ These files are live and must be amended before any commit:
   - the new smoke case confirms the returned coderefs still evaluate their captured plugin bodies correctly after parsing comments and multiple subdefs.
 - Blocker-ranking outcome:
   - `pplugin.spec` no longer appears in the blocked-spec ranking
-  - current remaining blocked specs are:
+  - current remaining blocked specs at that point were:
     - `tkgui.spec` (`BLOCKED=1`, `TOP=sub_gui`, `BLOCKERS=1`)
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
