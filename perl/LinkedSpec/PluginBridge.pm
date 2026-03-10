@@ -27,6 +27,15 @@ sub _default_deps {
  }
 }
 
+sub _normalize_plugin_name {
+ my ($autoload_name) = @_;
+ my $display_name = defined($autoload_name) ? $autoload_name : '<undef>';
+ my ($plugin_name) = defined($autoload_name) ? ($autoload_name =~ /(\w+)$/o) : ();
+ die "(LinkedSpec::PluginBridge::_normalize_plugin_name) -E- invalid autoload name '$display_name'"
+  unless defined $plugin_name && length $plugin_name;
+ return $plugin_name
+}
+
 sub _dispatch_autoload {
  my ($autoload_name, $args, $deps) = @_;
  $args = [] unless ref($args) eq 'ARRAY';
@@ -34,9 +43,10 @@ sub _dispatch_autoload {
 
  my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
  my $exec_plugin = _require_dep($deps, 'exec_plugin');
+ my $plugin_name = _normalize_plugin_name($autoload_name);
 
  $load_plugin_runtime->();
- return $exec_plugin->($autoload_name, @$args)
+ return $exec_plugin->($plugin_name, @$args)
 }
 
 1;

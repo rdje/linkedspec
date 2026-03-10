@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Plugin Runtime Slice: Normalize `PluginBridge` Dispatch to Explicit Plugin Names
+## Summary
+Continued the plugin/runtime modernization track by making `LinkedSpec::PluginBridge` normalize full `AUTOLOAD` names into explicit plugin names before runtime dispatch, narrowing the compatibility seam toward a deterministic registry-style plugin contract.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::PluginBridge`:
+  - added `_normalize_plugin_name(...)` to extract and validate an explicit plugin identifier from the full Perl `AUTOLOAD` name,
+  - `_dispatch_autoload(...)` now normalizes the autoloaded method name before loading the legacy runtime and before calling the injected `exec_plugin` callback,
+  - invalid autoload names now fail before any legacy plugin-runtime load/exec side effects occur.
+- Preserved behavior:
+  - `LinkedSpec::AUTOLOAD` still delegates to `LinkedSpec::PluginBridge::_dispatch_autoload(...)`,
+  - the default compatibility runtime still lazy-loads `PPlugin`,
+  - legacy plugin execution still works through the same `.plg` compatibility path.
+- Updated focused regression coverage:
+  - `plugin_bridge_supports_injected_plugin_runtime_deps` now proves injected runtime callbacks receive normalized plugin names rather than full Perl method names,
+  - added `plugin_bridge_rejects_invalid_autoload_name_before_runtime_load` to prove invalid autoload names fail before plugin runtime load/exec.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=140`)
 ## 2026-03-10 - Phase 1A Slice: Remove Dead Validation Facade Wrappers
 ## Summary
 Reduced another stale `LinkedSpec.pm` seam by removing the dead validation delegate wrappers now that active validation and DSL error reporting already stay on `LinkedSpec::Validation`.

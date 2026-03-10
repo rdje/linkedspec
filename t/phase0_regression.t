@@ -150,7 +150,7 @@ subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
     plan tests => 6;
 
     my $load_calls = 0;
-    my ($exec_autoload_name, @exec_args);
+    my ($exec_plugin_name, @exec_args);
     my $ret = LinkedSpec::PluginBridge::_dispatch_autoload(
         'LinkedSpec::synthetic_plugin',
         ['alpha', 'beta'],
@@ -160,9 +160,9 @@ subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
                 return 1;
             },
             exec_plugin => sub {
-                ($exec_autoload_name, @exec_args) = @_;
+                ($exec_plugin_name, @exec_args) = @_;
                 return {
-                    autoload_name => $exec_autoload_name,
+                    plugin_name => $exec_plugin_name,
                     args => [@exec_args],
                 };
             },
@@ -170,11 +170,40 @@ subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
     );
 
     is($load_calls, 1, 'PluginBridge injected runtime deps invoke the load callback exactly once');
-    is($exec_autoload_name, 'LinkedSpec::synthetic_plugin', 'PluginBridge injected runtime deps forward the autoload name into exec callback');
+    is($exec_plugin_name, 'synthetic_plugin', 'PluginBridge injected runtime deps normalize the autoload name into a plugin name before exec callback dispatch');
     is_deeply(\@exec_args, [qw(alpha beta)], 'PluginBridge injected runtime deps forward plugin arguments into exec callback');
     ok(ref($ret) eq 'HASH', 'PluginBridge injected runtime deps return exec callback payload');
-    is($ret->{autoload_name}, 'LinkedSpec::synthetic_plugin', 'PluginBridge injected runtime deps preserve returned autoload name payload');
+    is($ret->{plugin_name}, 'synthetic_plugin', 'PluginBridge injected runtime deps preserve returned normalized plugin name payload');
     is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge injected runtime deps preserve returned argument payload');
+};
+subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub {
+    plan tests => 4;
+
+    my ($load_calls, $exec_calls) = (0, 0);
+    my ($ok_run, $err) = (0, '');
+    $ok_run = eval {
+        LinkedSpec::PluginBridge::_dispatch_autoload(
+            'LinkedSpec::',
+            ['alpha'],
+            {
+                load_plugin_runtime => sub {
+                    ++$load_calls;
+                    return 1;
+                },
+                exec_plugin => sub {
+                    ++$exec_calls;
+                    return 'unexpected';
+                },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok(!$ok_run, 'PluginBridge dies on invalid autoload names before attempting runtime dispatch');
+    like($err, qr/invalid autoload name/i, 'PluginBridge reports invalid autoload names clearly');
+    is($load_calls, 0, 'PluginBridge does not load plugin runtime for invalid autoload names');
+    is($exec_calls, 0, 'PluginBridge does not call exec callback for invalid autoload names');
 };
 subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     plan tests => 5;

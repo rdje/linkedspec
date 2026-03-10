@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge in `LinkedSpec::PluginBridge`.
+- Slice-selection rationale:
+  - the roadmap calls for moving away from method-name extraction as the primary plugin runtime contract,
+  - `LinkedSpec::PluginBridge` already owned the injected load/exec seam but still forwarded full Perl autoload names into the runtime callback,
+  - normalizing to explicit plugin names narrows the bridge toward a deterministic registry interface without changing `LinkedSpec::AUTOLOAD`.
+- Implementation scope:
+  - added `_normalize_plugin_name(...)` to `LinkedSpec::PluginBridge`,
+  - `_dispatch_autoload(...)` now validates and normalizes the autoloaded method name before runtime load/exec,
+  - invalid autoload names now fail before any plugin runtime side effects.
+- Regression addition/update:
+  - `plugin_bridge_supports_injected_plugin_runtime_deps` now proves the exec callback receives normalized plugin names,
+  - added `plugin_bridge_rejects_invalid_autoload_name_before_runtime_load` to prove invalid autoload names do not load the legacy runtime or call exec.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=140`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the dead validation facade wrappers in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Compiler` and `LinkedSpec::Validation` already owned the active compile-time validation path,

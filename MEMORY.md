@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge in `LinkedSpec::PluginBridge`.
+- Key technical outcome:
+  - added `_normalize_plugin_name(...)` to `LinkedSpec::PluginBridge`,
+  - `_dispatch_autoload(...)` now normalizes the full Perl autoload name to an explicit plugin name before runtime dispatch,
+  - invalid autoload names now fail before legacy plugin runtime load/exec side effects.
+- Regression outcome:
+  - `plugin_bridge_supports_injected_plugin_runtime_deps` now proves the exec callback receives normalized plugin names,
+  - added `plugin_bridge_rejects_invalid_autoload_name_before_runtime_load` to prove invalid autoload names do not load the runtime or call exec.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (140 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: normalize PluginBridge dispatch to explicit plugin names` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the dead validation facade wrappers in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed `get_dsl_context(...)`, `report_dsl_error(...)`, `validate_spec_content(...)`, `validate_rule_definition(...)`, `validate_gdata_references(...)`, `validate_dsl_syntax(...)`, and `extract_regex_literals_from_rule_rhs(...)` from `LinkedSpec.pm`,
