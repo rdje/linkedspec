@@ -66,6 +66,31 @@ subtest 'get_parser_local_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'module-relative parser executes and keeps PathSearch unloaded');
 };
+subtest 'autoload_delegates_to_plugin_bridge' => sub {
+    plan tests => 5;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($captured_name, @captured_args);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::PluginBridge::dispatch_autoload = sub {
+            ($captured_name, @captured_args) = @_;
+            return {
+                autoload_name => $captured_name,
+                args => [@captured_args],
+            };
+        };
+        $ret = LinkedSpec::synthetic_plugin('alpha', 'beta');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'AUTOLOAD succeeds while PluginBridge dispatch is trapped') or diag(normalize_error($err));
+    is($captured_name, 'LinkedSpec::synthetic_plugin', 'AUTOLOAD forwards the fully-qualified method name into PluginBridge');
+    is_deeply(\@captured_args, [qw(alpha beta)], 'AUTOLOAD forwards plugin arguments into PluginBridge unchanged');
+    ok(ref($ret) eq 'HASH', 'AUTOLOAD returns the PluginBridge dispatch result');
+    is_deeply($ret->{args}, [qw(alpha beta)], 'AUTOLOAD preserves the PluginBridge return payload');
+};
 subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
     plan tests => 8;
 
@@ -118,6 +143,36 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
     my $trace_log = slurp($tmp_log);
     like($trace_log, qr/ENTER LinkedSpec::get_parser/, 'trace log records get_parser entry through extracted Trace dependency path');
     like($trace_log, qr/parser coderef generated/, 'trace log records parser compilation result through extracted Runtime dependency path');
+};
+subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
+    plan tests => 6;
+
+    my $load_calls = 0;
+    my ($exec_autoload_name, @exec_args);
+    my $ret = LinkedSpec::PluginBridge::_dispatch_autoload(
+        'LinkedSpec::synthetic_plugin',
+        ['alpha', 'beta'],
+        {
+            load_plugin_runtime => sub {
+                ++$load_calls;
+                return 1;
+            },
+            exec_plugin => sub {
+                ($exec_autoload_name, @exec_args) = @_;
+                return {
+                    autoload_name => $exec_autoload_name,
+                    args => [@exec_args],
+                };
+            },
+        },
+    );
+
+    is($load_calls, 1, 'PluginBridge injected runtime deps invoke the load callback exactly once');
+    is($exec_autoload_name, 'LinkedSpec::synthetic_plugin', 'PluginBridge injected runtime deps forward the autoload name into exec callback');
+    is_deeply(\@exec_args, [qw(alpha beta)], 'PluginBridge injected runtime deps forward plugin arguments into exec callback');
+    ok(ref($ret) eq 'HASH', 'PluginBridge injected runtime deps return exec callback payload');
+    is($ret->{autoload_name}, 'LinkedSpec::synthetic_plugin', 'PluginBridge injected runtime deps preserve returned autoload name payload');
+    is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge injected runtime deps preserve returned argument payload');
 };
 subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     plan tests => 5;

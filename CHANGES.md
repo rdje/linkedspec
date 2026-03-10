@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Plugin Runtime Slice: Add Explicit `PluginBridge` Runtime Deps
+## Summary
+Started the plugin/runtime modernization track in code by making `LinkedSpec::PluginBridge` own explicit plugin-runtime load/exec dependency callbacks, so future module-based plugin runtime work can replace `PPlugin` without changing `LinkedSpec::AUTOLOAD`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::PluginBridge`:
+  - added `_default_deps()` for lazy `PPlugin` loading and dispatch execution,
+  - added `_dispatch_autoload(...)` as the internal compatibility-shim owner that consumes injected `load_plugin_runtime` and `exec_plugin` callbacks,
+  - kept `dispatch_autoload(...)` as the public bridge entrypoint for `LinkedSpec::AUTOLOAD`.
+- Added focused regression coverage:
+  - `autoload_delegates_to_plugin_bridge`
+  - `plugin_bridge_supports_injected_plugin_runtime_deps`
+  - the new seam locks prove `LinkedSpec::AUTOLOAD` still delegates through `PluginBridge`, and that `PluginBridge` can execute through injected runtime callbacks without relying on direct `PPlugin` calls at the call site.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=132`)
 ## 2026-03-10 - Phase 1A Slice: Move Pipeline Default Callbacks Into `Compiler`
 ## Summary
 Reduced another compiler/runtime callback seam by making `LinkedSpec::Compiler::run_get_pipeline(...)` own the default `bootstrap_parse` and `compile_spec_entry` callbacks, so `LinkedSpec::Runtime::run_get(...)` now injects only `runtime_ctx` for mutable per-run state.

@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Started the plugin/runtime modernization track with a no-behavior-change compatibility-shim slice in `LinkedSpec::PluginBridge`.
+- Slice-selection rationale:
+  - the roadmap already treats `AUTOLOAD` + `.plg` as legacy compatibility that should eventually be replaced by explicit package-based plugins,
+  - `LinkedSpec::PluginBridge` was still hardwired directly to `require PPlugin` and `PPlugin->exec(...)`,
+  - extracting explicit load/exec callbacks gives the bridge a narrow dependency seam for future runtime replacement without changing `LinkedSpec::AUTOLOAD`.
+- Implementation scope:
+  - added `_default_deps()` to `LinkedSpec::PluginBridge` for the current lazy `PPlugin` load/exec behavior,
+  - added `_dispatch_autoload(...)` as the internal compatibility-shim owner that consumes injected plugin-runtime callbacks,
+  - kept `dispatch_autoload(...)` as the public bridge entrypoint used by `LinkedSpec::AUTOLOAD`.
+- Regression additions:
+  - added `autoload_delegates_to_plugin_bridge`,
+  - added `plugin_bridge_supports_injected_plugin_runtime_deps`,
+  - the new regressions verify the `AUTOLOAD -> PluginBridge` handoff and the injected runtime dependency seam independently of direct `PPlugin` calls at the call site.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=132`)
+## Session Notes (2026-03-10)
 - Phase 1A no-behavior-change modularization slice completed against the compiler/runtime default-callback boundary in `run_get_pipeline(...)`.
 - Slice-selection rationale:
   - `Runtime::run_get(...)` still injected `bootstrap_parse` and `compile_spec_entry` into `Compiler::run_get_pipeline(...)` even though the owning modules already lived in `Compiler.pm`, `BootstrapSpec.pm`, and `SpecEntry.pm`,

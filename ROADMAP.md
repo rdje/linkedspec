@@ -247,7 +247,8 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: `LinkedSpec::Compiler::run_get_pipeline(...)` now consumes that injected `runtime_ctx` directly for parser-source emission/chunk capture and `top_rule` propagation, so compiler/runtime descriptor assembly no longer threads those mutable state handles as separate dependencies.
   - Landed follow-up: `LinkedSpec::SpecEntry::compile_spec_entry(...)` now consumes the injected `runtime_ctx` directly for parser-source emission and `top_rule` propagation, so default spec-entry compilation no longer routes through `LinkedSpec::Runtime::compile_spec_entry(...)` except as compatibility glue.
   - Landed follow-up: `LinkedSpec::BootstrapSpec` now owns the cached bootstrap grammar state and bootstrap parse callback (`run_bootstrap_parse(...)`), while `LinkedSpec::Compiler::run_get_pipeline(...)` consumes an injected `bootstrap_parse` callback instead of the raw bootstrap descriptor/index/gdata triple.
-- Plugin and resource-resolution modernization track: Planned.
+- Plugin and resource-resolution modernization track: In progress.
+  - Landed follow-up: `LinkedSpec::PluginBridge` now owns explicit plugin-runtime load/exec dependency callbacks through `_dispatch_autoload(...)`, so future module-based plugin runtime work can replace `PPlugin` without changing `LinkedSpec::AUTOLOAD`.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.

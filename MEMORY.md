@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge.
+- Key technical outcome:
+  - `LinkedSpec::PluginBridge` now owns explicit plugin-runtime load/exec dependency callbacks through `_dispatch_autoload(...)`,
+  - `LinkedSpec::AUTOLOAD` remains the stable compatibility entrypoint while future plugin runtime work can replace `PPlugin` behind that seam,
+  - the plugin/runtime modernization track is now in progress rather than purely planned.
+- Regression outcome:
+  - added `autoload_delegates_to_plugin_bridge`,
+  - added `plugin_bridge_supports_injected_plugin_runtime_deps`,
+  - the new regressions prove the `AUTOLOAD -> PluginBridge` handoff and the injected runtime dependency seam both work without changing public behavior.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (132 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: add explicit PluginBridge runtime deps` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A modularization slice completed against the compiler/runtime default-callback boundary in `run_get_pipeline(...)`.
 - Key technical outcome:
   - `LinkedSpec::Compiler::run_get_pipeline(...)` now owns the default `bootstrap_parse` and `compile_spec_entry` callbacks,
