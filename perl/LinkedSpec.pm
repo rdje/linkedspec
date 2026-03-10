@@ -1200,17 +1200,6 @@ sub call_spec_handler_subst {
 
 
 #------------------------------------------------------------------------------
-# Function: _resolve_local_spec_path
-# Purpose : Resolve a spec name/path via direct file match, local <name>.spec,
-#           then module-relative specs/ lookup.
-# Args    : ($spec_name)
-# Returns : resolved file path or undef
-#------------------------------------------------------------------------------
-sub _resolve_local_spec_path {
- return LinkedSpec::Resolver::_resolve_local_spec_path(@_)
-}
-
-#------------------------------------------------------------------------------
 # Function: get_parser
 # Purpose : Public parser factory that resolves a spec, validates input, loads
 #           fallback resolver lazily, compiles parser, and returns coderef.

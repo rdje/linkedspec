@@ -251,6 +251,33 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_dep_builder' => sub {
     ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef when ParserFactory owns its default deps');
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through ParserFactory-owned default deps still executes');
 };
+subtest 'get_parser_avoids_linkedspec_local_spec_path_facade' => sub {
+    plan tests => 5;
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_resolve_local_spec_path = sub { die "__UNEXPECTED_LINKEDSPEC_RESOLVE_LOCAL_SPEC_PATH__\n" };
+
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser('Lispish');
+        my $input = '(resolver owner)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser succeeds without the LinkedSpec local spec-path facade') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_RESOLVE_LOCAL_SPEC_PATH__/, 'get_parser does not call the trapped LinkedSpec local spec-path facade');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef through Resolver-owned local lookup');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through Resolver-owned local lookup still executes');
+    ok(!exists $INC{'PathSearch.pm'}, 'Resolver-owned local lookup still keeps PathSearch unloaded');
+};
 subtest 'get_parser_explicit_path_resolution_without_pathsearch' => sub {
     plan tests => 4;
 

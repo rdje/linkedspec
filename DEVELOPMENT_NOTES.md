@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the stale façade-local spec-resolution helper in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Resolver` already owned `_resolve_local_spec_path(...)` and `resolve_spec_path(...)`,
+  - no active parser path still needed the `LinkedSpec.pm` wrapper name,
+  - removing the wrapper tightens the façade surface and makes `Resolver.pm` the only live owner for local/module-relative lookup behavior.
+- Implementation scope:
+  - deleted `LinkedSpec::_resolve_local_spec_path(...)` from `LinkedSpec.pm`,
+  - left active parser resolution on `LinkedSpec::Resolver::resolve_spec_path(...)` and its internal `_resolve_local_spec_path(...)` helper.
+- Regression addition:
+  - added `get_parser_avoids_linkedspec_local_spec_path_facade`,
+  - the regression traps the removed façade helper name and verifies `get_parser('Lispish')` still resolves from a non-project cwd, returns a parser coderef, executes it, and keeps `PathSearch` unloaded.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=134`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against stale bootstrap parsing scaffolding in `Compiler.pm`.
 - Slice-selection rationale:
   - bootstrap parsing had already been reassigned to `LinkedSpec::BootstrapSpec`,

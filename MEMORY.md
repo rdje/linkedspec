@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the stale façade-local spec-resolution helper in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed `LinkedSpec::_resolve_local_spec_path(...)`,
+  - active local/module-relative parser lookup remains owned exclusively by `LinkedSpec::Resolver`,
+  - `LinkedSpec::get_parser(...)` no longer has a façade-level local-resolution helper alias to fall back through.
+- Regression outcome:
+  - added `get_parser_avoids_linkedspec_local_spec_path_facade`,
+  - the regression traps the removed façade helper name and proves `get_parser('Lispish')` still resolves from a non-project cwd, executes successfully, and keeps `PathSearch` unloaded.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (134 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: drop facade local spec path helper` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against stale bootstrap parsing scaffolding in `Compiler.pm`.
 - Key technical outcome:
   - removed the dead `LinkedSpec::Compiler::_run_bootstrap_parse(...)` helper,

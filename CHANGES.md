@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Facade Local Spec Path Helper
+## Summary
+Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade-only `_resolve_local_spec_path(...)` wrapper and regression-locking the active local/module-relative parser-resolution path to `LinkedSpec::Resolver`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale resolver delegation from `LinkedSpec.pm`:
+  - deleted `LinkedSpec::_resolve_local_spec_path(...)`,
+  - active local/module-relative lookup continues to resolve through `LinkedSpec::Resolver::_resolve_local_spec_path(...)` via `resolve_spec_path(...)`.
+- Added focused regression coverage:
+  - `get_parser_avoids_linkedspec_local_spec_path_facade`
+  - the regression traps the removed façade helper name and proves `get_parser('Lispish')` still resolves from a non-project cwd, builds a parser, executes it, and keeps `PathSearch` unloaded.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=134`)
 ## 2026-03-10 - Phase 1A Slice: Remove Stale Compiler Bootstrap Helper
 ## Summary
 Reduced stale compiler scaffolding by removing the unused `LinkedSpec::Compiler::_run_bootstrap_parse(...)` helper now that bootstrap parsing is fully owned by `LinkedSpec::BootstrapSpec`, and regression-locking the active pipeline to that owner path.
