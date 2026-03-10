@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the dead validation facade wrappers in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Compiler` and `LinkedSpec::Validation` already owned the active compile-time validation path,
+  - the remaining `LinkedSpec.pm` validation helpers were definition-only delegates with no live repo callers,
+  - removing them tightens the façade surface without changing `Get(...)`, `get_parser(...)`, or validation behavior.
+- Implementation scope:
+  - deleted `get_dsl_context(...)`, `report_dsl_error(...)`, `validate_spec_content(...)`, `validate_rule_definition(...)`, `validate_gdata_references(...)`, `validate_dsl_syntax(...)`, and `extract_regex_literals_from_rule_rhs(...)` from `LinkedSpec.pm`,
+  - removed the now-unused `LinkedSpec::Validation` import from `LinkedSpec.pm`,
+  - expanded the malformed-spec and return-descriptor seam locks to trap the removed validation helper names directly.
+- Regression addition/update:
+  - `get_parser_malformed_spec_reports_validation_error` now traps the removed validation facade helpers and proves DSL line-context reporting still stays on `LinkedSpec::Validation`,
+  - added `get_return_descr_avoids_removed_linkedspec_validation_facade` to prove successful descriptor build paths do not depend on the removed helper names.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=139`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the dead internal trace/runtime helper wrappers in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Trace`, `LinkedSpec::ParserFactory`, and `LinkedSpec::SpecEntry` already owned the active trace/parser-source paths,

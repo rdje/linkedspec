@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Dead Validation Facade Wrappers
+## Summary
+Reduced another stale `LinkedSpec.pm` seam by removing the dead validation delegate wrappers now that active validation and DSL error reporting already stay on `LinkedSpec::Validation`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale validation delegates from `LinkedSpec.pm`:
+  - deleted `get_dsl_context(...)`,
+  - deleted `report_dsl_error(...)`,
+  - deleted `validate_spec_content(...)`,
+  - deleted `validate_rule_definition(...)`,
+  - deleted `validate_gdata_references(...)`,
+  - deleted `validate_dsl_syntax(...)`,
+  - deleted `extract_regex_literals_from_rule_rhs(...)`,
+  - removed the now-unused `LinkedSpec::Validation` import from `LinkedSpec.pm`.
+- Preserved behavior:
+  - active compile-time validation still routes through `LinkedSpec::Validation` from `LinkedSpec::Compiler`,
+  - malformed-spec diagnostics still report DSL line context through the `LinkedSpec::Validation` owner path,
+  - `Get(..., return_descr => 1)` still returns the same descriptor structure and metadata.
+- Updated focused regression coverage:
+  - expanded `get_parser_malformed_spec_reports_validation_error` to trap the removed `LinkedSpec` validation helpers on the error path,
+  - added `get_return_descr_avoids_removed_linkedspec_validation_facade` to trap the removed validation helpers on the successful descriptor-build path.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=139`)
 ## 2026-03-10 - Phase 1A Slice: Remove Dead Internal Trace and Runtime Helper Wrappers
 ## Summary
 Reduced another stale `LinkedSpec.pm` seam by removing the dead internal trace/runtime helper wrappers now that active trace configuration and parser-source emission already stay on `LinkedSpec::Trace`, `LinkedSpec::ParserFactory`, and `LinkedSpec::SpecEntry`.

@@ -858,7 +858,7 @@ subtest 'get_parser_open_failure_reports_error' => sub {
     unlink($tmp_spec);
 };
 subtest 'get_parser_malformed_spec_reports_validation_error' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -870,10 +870,23 @@ subtest 'get_parser_malformed_spec_reports_validation_error' => sub {
     close($fh);
     ok(-f $tmp_spec, 'temporary malformed spec created');
 
-    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io($tmp_spec);
+    my ($ok_call, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+    ($ok_call, $parser, $err_call, $out, $warn) = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::get_dsl_context = sub { die "__UNEXPECTED_LINKEDSPEC_GET_DSL_CONTEXT__\n" };
+        local *LinkedSpec::report_dsl_error = sub { die "__UNEXPECTED_LINKEDSPEC_REPORT_DSL_ERROR__\n" };
+        local *LinkedSpec::validate_spec_content = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_SPEC_CONTENT__\n" };
+        local *LinkedSpec::validate_rule_definition = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_DEFINITION__\n" };
+        local *LinkedSpec::validate_gdata_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
+        local *LinkedSpec::validate_dsl_syntax = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_DSL_SYNTAX__\n" };
+        local *LinkedSpec::extract_regex_literals_from_rule_rhs = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_REGEX_LITERALS_FROM_RULE_RHS__\n" };
+        run_get_parser_with_captured_io($tmp_spec);
+    };
 
     ok($ok_call, 'malformed-spec get_parser call returns without die') or diag(normalize_error($err_call));
+    unlike($err_call, qr/__UNEXPECTED_LINKEDSPEC_/, 'malformed-spec validation error path does not call the trapped removed LinkedSpec validation facade helpers');
     ok(!defined($parser), 'malformed-spec get_parser returns undef');
+    like($out, qr/DSL Error at line 1:/, 'malformed-spec still reports DSL line context through Validation owner path');
     like($out, qr/Spec file must start with a rule definition/, 'malformed-spec reports missing rule-definition validation failure');
     like($out, qr/CRITICAL ERROR/, 'malformed-spec reports critical validation failure');
 
@@ -1278,6 +1291,39 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the removed internal facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the removed internal facade');
     ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor build through Get still exposes action-rewriter migration summary without the removed internal facade');
+};
+subtest 'get_return_descr_avoids_removed_linkedspec_validation_facade' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($descr, $ok_run, $err) = (undef, 0, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::get_dsl_context = sub { die "__UNEXPECTED_LINKEDSPEC_GET_DSL_CONTEXT__\n" };
+        local *LinkedSpec::report_dsl_error = sub { die "__UNEXPECTED_LINKEDSPEC_REPORT_DSL_ERROR__\n" };
+        local *LinkedSpec::validate_spec_content = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_SPEC_CONTENT__\n" };
+        local *LinkedSpec::validate_rule_definition = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_DEFINITION__\n" };
+        local *LinkedSpec::validate_gdata_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
+        local *LinkedSpec::validate_dsl_syntax = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_DSL_SYNTAX__\n" };
+        local *LinkedSpec::extract_regex_literals_from_rule_rhs = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_REGEX_LITERALS_FROM_RULE_RHS__\n" };
+        $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Get return_descr succeeds without the removed LinkedSpec validation facade helpers')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'Get return_descr does not call the trapped removed LinkedSpec validation facade helpers');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'Get return_descr still returns descriptor hash without the removed validation facade');
+    ok(ref($descr->{spec}) eq 'HASH', 'descriptor build still exposes spec hash without the removed validation facade');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build still exposes runtime handler coderef without the removed validation facade');
+    ok(ref($descr->{gdata}) eq 'HASH', 'descriptor build still exposes gdata hash without the removed validation facade');
+    is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build still preserves selected handler metadata without the removed validation facade');
+    ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor build still exposes migration metadata without the removed validation facade');
 };
 subtest 'compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context' => sub {
     plan tests => 7;

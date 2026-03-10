@@ -368,6 +368,8 @@ Bootstrap parsing is now owned exclusively by `LinkedSpec::BootstrapSpec` on the
 
 For focused helper-rewrite inspection, use the compatibility shim `LinkedSpec::call_spec_handler_subst(...)`. Older internal `LinkedSpec::_...` action-rewriter, ActionIR-lowering, trace/runtime, RuleIR, and descriptor-assembly helpers are no longer part of the active surface.
 
+Likewise, validation and DSL-error handling now stay on `LinkedSpec::Validation`; normal callers should not depend on the older `LinkedSpec::get_dsl_context(...)`, `report_dsl_error(...)`, `validate_*`, or `extract_regex_literals_from_rule_rhs(...)` facade wrappers.
+
 ## Legacy Plugin Bridge
 Generated parsers may still call legacy plugin handlers through `LinkedSpec::AUTOLOAD`. That compatibility path now delegates straight into `LinkedSpec::PluginBridge::_dispatch_autoload(...)` and remains legacy-only while the project moves toward explicit package-based plugin APIs.
 

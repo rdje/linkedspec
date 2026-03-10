@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the dead validation facade wrappers in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed `get_dsl_context(...)`, `report_dsl_error(...)`, `validate_spec_content(...)`, `validate_rule_definition(...)`, `validate_gdata_references(...)`, `validate_dsl_syntax(...)`, and `extract_regex_literals_from_rule_rhs(...)` from `LinkedSpec.pm`,
+  - removed the now-unused `LinkedSpec::Validation` import from `LinkedSpec.pm`,
+  - active compile-time validation and DSL error reporting now remain on `LinkedSpec::Validation`.
+- Regression outcome:
+  - `get_parser_malformed_spec_reports_validation_error` now traps the removed validation helper names and proves malformed-spec diagnostics still route through the `LinkedSpec::Validation` owner path,
+  - added `get_return_descr_avoids_removed_linkedspec_validation_facade` to prove successful descriptor-build paths do not depend on the removed helper names.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (139 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead validation facade wrappers` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the dead internal trace/runtime helper wrappers in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed `_trace_level_name(...)`, `_apply_trace_options(...)`, and `_emit_parser_source_line(...)` from `LinkedSpec.pm`,

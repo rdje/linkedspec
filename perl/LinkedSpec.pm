@@ -17,7 +17,6 @@ BEGIN {
 
 use LinkedRE;
 use LinkedSpec::Trace ();
-use LinkedSpec::Validation ();
 use LinkedSpec::Resolver ();
 use LinkedSpec::ActionRewriter ();
 use LinkedSpec::Compiler ();
@@ -119,83 +118,6 @@ sub log_dump {
 #------------------------------------------------------------------------------
 sub should_dump {
  return LinkedSpec::Trace::should_dump(@_)
-}
-
-
-#------------------------------------------------------------------------------
-# Function: get_dsl_context
-# Purpose : Build line-oriented context around a byte-position in .spec text so
-#           validation errors can report useful nearby source.
-# Args    : ($spec_content, $position)
-# Returns : hashref { line_number, current_line, prev_line, next_line, position }
-#------------------------------------------------------------------------------
-sub get_dsl_context {
- return LinkedSpec::Validation::get_dsl_context(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: report_dsl_error
-# Purpose : Format and emit a human-readable DSL error message with local
-#           source context and optional remediation guidance.
-# Args    : ($spec_content, $position, $error_msg, $suggestion)
-# Returns : undef (side effects only: logging)
-#------------------------------------------------------------------------------
-sub report_dsl_error {
- return LinkedSpec::Validation::report_dsl_error(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: validate_spec_content
-# Purpose : Validate raw .spec input envelope before deeper syntax parsing.
-# Args    : ($spec_content)
-# Returns : boolean (true if minimal shape/entry rule expectations are met)
-#------------------------------------------------------------------------------
-sub validate_spec_content {
- return LinkedSpec::Validation::validate_spec_content(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: validate_rule_definition
-# Purpose : Structural sanity-check for generated rule definitions in the
-#           descriptor (handler presence, regex shape, regex compilability).
-# Args    : ($rule_name, $rule_def)
-# Returns : boolean
-#------------------------------------------------------------------------------
-sub validate_rule_definition {
- return LinkedSpec::Validation::validate_rule_definition(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: validate_gdata_references
-# Purpose : Validate integrity between gdata dispatch regexes and generated
-#           spec rules, including gdata indirections embedded in rules.
-# Args    : ($gdata, $spec)
-# Returns : boolean
-#------------------------------------------------------------------------------
-sub validate_gdata_references {
- return LinkedSpec::Validation::validate_gdata_references(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: validate_dsl_syntax
-# Purpose : Perform rule-level DSL checks (duplicate definitions, regex literal
-#           validity, undefined/unused rule warnings).
-# Args    : ($spec_content)
-# Returns : boolean
-#------------------------------------------------------------------------------
-sub validate_dsl_syntax {
- return LinkedSpec::Validation::validate_dsl_syntax(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: extract_regex_literals_from_rule_rhs
-# Purpose : Extract slash-delimited regex literals from a rule RHS while
-#           respecting escaped delimiters.
-# Args    : ($rhs)
-# Returns : list of regex literal strings (including surrounding /.../)
-#------------------------------------------------------------------------------
-sub extract_regex_literals_from_rule_rhs {
- return LinkedSpec::Validation::extract_regex_literals_from_rule_rhs(@_)
 }
 
 
