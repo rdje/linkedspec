@@ -9,7 +9,6 @@ BEGIN {
 }
 
 use LinkedSpec::Compiler ();
-use LinkedSpec::SpecEntry ();
 
 #------------------------------------------------------------------------------
 # Runtime parser state helpers (per-run mutable context only)
@@ -59,20 +58,6 @@ sub run_get {
    runtime_ctx => $runtime_ctx,
   }
  )
-}
-
-#------------------------------------------------------------------------------
-# Function: compile_spec_entry
-# Purpose : Compatibility wrapper around `LinkedSpec::SpecEntry` injected-state
-#           compilation for callers that still route through Runtime.
-# Args    : ($einfo, $runtime_ctx)
-# Returns : ($label, $rule_info_hashref) or undef
-#------------------------------------------------------------------------------
-sub compile_spec_entry {
- my ($einfo, $runtime_ctx) = @_;
- my ($label, $info, $top_rule_candidate) = LinkedSpec::SpecEntry::compile_spec_entry($einfo, { runtime_ctx => $runtime_ctx });
- return undef unless defined($label) && ref($info) eq 'HASH';
- return ($label, $info)
 }
 
 1;

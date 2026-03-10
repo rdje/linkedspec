@@ -1132,7 +1132,7 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'Runtime::run_get still returns descriptor hash directly');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'Runtime::run_get still preserves compiled handler coderef');
 };
-subtest 'runtime_compile_spec_entry_uses_injected_runtime_context' => sub {
+subtest 'spec_entry_compile_spec_entry_uses_injected_runtime_context' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -1153,12 +1153,12 @@ SPEC
         },
     };
 
-    my ($label, $info) = LinkedSpec::Runtime::compile_spec_entry($retv->[0], $runtime_ctx);
-    is($label, 'Top', 'runtime compile_spec_entry still returns rule label through injected context');
-    ok(defined($info) && ref($info) eq 'HASH', 'runtime compile_spec_entry still returns rule info through injected context');
-    ok(ref($info->{handler}) eq 'CODE', 'runtime compile_spec_entry still exposes runtime handler coderef');
-    is($runtime_ctx->{top_rule}, 'Top', 'runtime compile_spec_entry writes discovered top rule into injected runtime context');
-    like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'runtime compile_spec_entry emits parser source through injected runtime context');
+    my ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx });
+    is($label, 'Top', 'SpecEntry compile_spec_entry still returns rule label through injected runtime context');
+    ok(defined($info) && ref($info) eq 'HASH', 'SpecEntry compile_spec_entry still returns rule info through injected runtime context');
+    ok(ref($info->{handler}) eq 'CODE', 'SpecEntry compile_spec_entry still exposes runtime handler coderef');
+    is($runtime_ctx->{top_rule}, 'Top', 'SpecEntry compile_spec_entry writes discovered top rule into injected runtime context');
+    like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'SpecEntry compile_spec_entry emits parser source through injected runtime context');
 };
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
@@ -1257,7 +1257,7 @@ SPEC
                 return LinkedSpec::BootstrapSpec::run_bootstrap_parse($_[0]);
             },
             compile_spec_entry => sub {
-                return LinkedSpec::Runtime::compile_spec_entry($_[0], $runtime_ctx);
+                return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx });
             },
             runtime_ctx => $runtime_ctx,
         },
@@ -1359,7 +1359,7 @@ SPEC
                     return LinkedSpec::BootstrapSpec::run_bootstrap_parse($_[0]);
                 },
                 compile_spec_entry => sub {
-                    return LinkedSpec::Runtime::compile_spec_entry($_[0], $runtime_ctx);
+                    return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx });
                 },
                 runtime_ctx => $runtime_ctx,
             },

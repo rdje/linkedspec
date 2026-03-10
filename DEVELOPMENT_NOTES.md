@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the stale runtime `compile_spec_entry(...)` wrapper in `LinkedSpec::Runtime`.
+- Slice-selection rationale:
+  - `LinkedSpec::Compiler::spec_descr(...)` and `LinkedSpec::Runtime::run_get(...)` already consumed `LinkedSpec::SpecEntry::compile_spec_entry(...)` as the active owner,
+  - the remaining runtime wrapper was only compatibility glue plus focused tests,
+  - removing it tightens the runtime surface and leaves rule-entry compilation fully owned by `SpecEntry.pm`.
+- Implementation scope:
+  - deleted `LinkedSpec::Runtime::compile_spec_entry(...)` from `Runtime.pm`,
+  - updated direct injected-state and injected-callback seam tests to call `LinkedSpec::SpecEntry::compile_spec_entry(...)` with `runtime_ctx`.
+- Regression addition/update:
+  - renamed direct injected-state coverage to `spec_entry_compile_spec_entry_uses_injected_runtime_context`,
+  - existing wrapper-bypass regressions still prove the active descriptor-build paths do not depend on the removed runtime wrapper.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=137`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the stale façade `spec_entry(...)` helper in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Compiler::spec_descr(...)` and `LinkedSpec::Runtime::run_get(...)` already defaulted rule-entry compilation through `LinkedSpec::SpecEntry::compile_spec_entry(...)`,

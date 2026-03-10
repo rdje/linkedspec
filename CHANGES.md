@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Runtime `compile_spec_entry` Wrapper
+## Summary
+Reduced another stale runtime seam by removing `LinkedSpec::Runtime::compile_spec_entry(...)` now that active rule-entry compilation already flows through `LinkedSpec::SpecEntry::compile_spec_entry(...)` with injected runtime context.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale runtime wrapper from `Runtime.pm`:
+  - deleted `LinkedSpec::Runtime::compile_spec_entry(...)`,
+  - active rule-entry compilation continues to resolve through `LinkedSpec::SpecEntry::compile_spec_entry(...)` with injected `runtime_ctx`.
+- Updated focused injected-callback coverage:
+  - direct injected-state coverage now targets `LinkedSpec::SpecEntry::compile_spec_entry(...)`,
+  - compiler-pipeline injected callback tests now use the `SpecEntry.pm` owner directly.
+- Added/updated focused regression coverage:
+  - `spec_entry_compile_spec_entry_uses_injected_runtime_context`
+  - existing wrapper-bypass seams continue to prove active descriptor-build paths do not depend on the removed runtime wrapper.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=137`)
 ## 2026-03-10 - Phase 1A Slice: Remove Facade `spec_entry` Helper
 ## Summary
 Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade-only `spec_entry(...)` wrapper and regression-locking rule-entry compilation to `LinkedSpec::SpecEntry`.

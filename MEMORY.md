@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the stale runtime `compile_spec_entry(...)` wrapper in `LinkedSpec::Runtime`.
+- Key technical outcome:
+  - removed `LinkedSpec::Runtime::compile_spec_entry(...)`,
+  - active rule-entry compilation now remains owned by `LinkedSpec::SpecEntry` plus injected `runtime_ctx`,
+  - no live repo path still depends on the deleted runtime wrapper.
+- Regression outcome:
+  - direct injected-state coverage now targets `LinkedSpec::SpecEntry::compile_spec_entry(...)` via `spec_entry_compile_spec_entry_uses_injected_runtime_context`,
+  - existing wrapper-bypass regressions still prove the active descriptor-build paths do not depend on the removed runtime wrapper.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (137 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove runtime compile_spec_entry wrapper` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the stale façade `spec_entry(...)` helper in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed `LinkedSpec::spec_entry(...)`,
