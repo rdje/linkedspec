@@ -1198,7 +1198,7 @@ sub get_parser {
 # Returns : whatever plugin call returns
 #------------------------------------------------------------------------------
 sub AUTOLOAD {
- return LinkedSpec::PluginBridge::dispatch_autoload($AUTOLOAD, @_)
+ return LinkedSpec::PluginBridge::_dispatch_autoload($AUTOLOAD, \@_)
 }
 
 1;

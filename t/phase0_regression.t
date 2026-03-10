@@ -66,15 +66,16 @@ subtest 'get_parser_local_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'module-relative parser executes and keeps PathSearch unloaded');
 };
-subtest 'autoload_delegates_to_plugin_bridge' => sub {
+subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
     my ($ok_run, $ret, $err) = (0, undef, '');
     my ($captured_name, @captured_args);
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::PluginBridge::dispatch_autoload = sub {
-            ($captured_name, @captured_args) = @_;
+        local *LinkedSpec::PluginBridge::_dispatch_autoload = sub {
+            my ($autoload_name, $args) = @_;
+            ($captured_name, @captured_args) = ($autoload_name, @{$args // []});
             return {
                 autoload_name => $captured_name,
                 args => [@captured_args],
@@ -85,10 +86,10 @@ subtest 'autoload_delegates_to_plugin_bridge' => sub {
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'AUTOLOAD succeeds while PluginBridge dispatch is trapped') or diag(normalize_error($err));
+    ok($ok_run, 'AUTOLOAD succeeds while the PluginBridge owner path is trapped') or diag(normalize_error($err));
     is($captured_name, 'LinkedSpec::synthetic_plugin', 'AUTOLOAD forwards the fully-qualified method name into PluginBridge');
     is_deeply(\@captured_args, [qw(alpha beta)], 'AUTOLOAD forwards plugin arguments into PluginBridge unchanged');
-    ok(ref($ret) eq 'HASH', 'AUTOLOAD returns the PluginBridge dispatch result');
+    ok(ref($ret) eq 'HASH', 'AUTOLOAD returns the PluginBridge owner-path result');
     is_deeply($ret->{args}, [qw(alpha beta)], 'AUTOLOAD preserves the PluginBridge return payload');
 };
 subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {

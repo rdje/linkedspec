@@ -137,10 +137,10 @@ These files are live and must be amended before any commit:
 - Uncommitted plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge.
 - Key technical outcome:
   - `LinkedSpec::PluginBridge` now owns explicit plugin-runtime load/exec dependency callbacks through `_dispatch_autoload(...)`,
-  - `LinkedSpec::AUTOLOAD` remains the stable compatibility entrypoint while future plugin runtime work can replace `PPlugin` behind that seam,
+  - `LinkedSpec::AUTOLOAD` now delegates straight to `_dispatch_autoload(...)` without the extra `dispatch_autoload(...)` wrapper,
   - the plugin/runtime modernization track is now in progress rather than purely planned.
 - Regression outcome:
-  - added `autoload_delegates_to_plugin_bridge`,
+  - added `autoload_avoids_plugin_bridge_wrapper`,
   - added `plugin_bridge_supports_injected_plugin_runtime_deps`,
   - the new regressions prove the `AUTOLOAD -> PluginBridge` handoff and the injected runtime dependency seam both work without changing public behavior.
 - Validation snapshot:

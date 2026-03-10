@@ -172,9 +172,9 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Implementation scope:
   - added `_default_deps()` to `LinkedSpec::PluginBridge` for the current lazy `PPlugin` load/exec behavior,
   - added `_dispatch_autoload(...)` as the internal compatibility-shim owner that consumes injected plugin-runtime callbacks,
-  - kept `dispatch_autoload(...)` as the public bridge entrypoint used by `LinkedSpec::AUTOLOAD`.
+  - removed the stale `dispatch_autoload(...)` wrapper so `LinkedSpec::AUTOLOAD` now delegates straight to `_dispatch_autoload(...)`.
 - Regression additions:
-  - added `autoload_delegates_to_plugin_bridge`,
+  - added `autoload_avoids_plugin_bridge_wrapper`,
   - added `plugin_bridge_supports_injected_plugin_runtime_deps`,
   - the new regressions verify the `AUTOLOAD -> PluginBridge` handoff and the injected runtime dependency seam independently of direct `PPlugin` calls at the call site.
 - Validation snapshot:

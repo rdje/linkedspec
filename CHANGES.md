@@ -208,9 +208,10 @@ Started the plugin/runtime modernization track in code by making `LinkedSpec::Pl
 - Refactored `LinkedSpec::PluginBridge`:
   - added `_default_deps()` for lazy `PPlugin` loading and dispatch execution,
   - added `_dispatch_autoload(...)` as the internal compatibility-shim owner that consumes injected `load_plugin_runtime` and `exec_plugin` callbacks,
-  - kept `dispatch_autoload(...)` as the public bridge entrypoint for `LinkedSpec::AUTOLOAD`.
+  - `LinkedSpec::AUTOLOAD` now delegates straight to `_dispatch_autoload(...)`,
+  - removed the stale `dispatch_autoload(...)` wrapper.
 - Added focused regression coverage:
-  - `autoload_delegates_to_plugin_bridge`
+  - `autoload_avoids_plugin_bridge_wrapper`
   - `plugin_bridge_supports_injected_plugin_runtime_deps`
   - the new seam locks prove `LinkedSpec::AUTOLOAD` still delegates through `PluginBridge`, and that `PluginBridge` can execute through injected runtime callbacks without relying on direct `PPlugin` calls at the call site.
 

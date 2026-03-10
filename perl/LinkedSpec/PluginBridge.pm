@@ -39,15 +39,4 @@ sub _dispatch_autoload {
  return $exec_plugin->($autoload_name, @$args)
 }
 
-#------------------------------------------------------------------------------
-# Function: dispatch_autoload
-# Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
-# Args    : ($autoload_name, @args)
-# Returns : whatever plugin call returns
-#------------------------------------------------------------------------------
-sub dispatch_autoload {
- my ($autoload_name, @args) = @_;
- return _dispatch_autoload($autoload_name, \@args)
-}
-
 1;
