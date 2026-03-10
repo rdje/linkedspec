@@ -61,6 +61,27 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the dead internal ActionIR lowering/dependency delegate block in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::ActionRewriter` and the extracted ActionIR modules already owned the active lowering path,
+  - the remaining `LinkedSpec.pm` helpers were definition-only delegates with no live repo callers beyond seam traps,
+  - removing them tightens the façade surface without changing the public compatibility shim `LinkedSpec::call_spec_handler_subst(...)`.
+- Implementation scope:
+  - deleted the stale internal dependency builders and lowering/parser/extraction wrappers for flow/value/declare/method/array-pipeline/control-flow helper lowering,
+  - removed the now-unused ActionIR/Deps imports from `LinkedSpec.pm`,
+  - expanded the focused ActionRewriter seam lock to trap those removed names directly while exercising broader owner-path lowering coverage.
+- Regression addition/update:
+  - renamed the seam lock to `action_rewriter_avoids_removed_linkedspec_lowering_facade`,
+  - added explicit `is_empty(...)` flow coverage and composable array-pipeline coverage to prove the removed helper surface is not used on the active path.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=138`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the dead internal `Compiler`/`RuleIR`/action-contract delegate block in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Compiler`, `LinkedSpec::SpecEntry`, `LinkedSpec::RuleIR`, and `LinkedSpec::ActionRewriter` already owned the active descriptor/rule-compilation path,
@@ -450,7 +471,7 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
   - switched `LinkedSpec::Deps` action-rewriter dependency maps from hardcoded `LinkedSpec.pm` callbacks to package-local `LinkedSpec::ActionRewriter` callbacks for declare/scanner/contract lowering work,
   - kept rewrite output and public compatibility (`LinkedSpec::call_spec_handler_subst(...)`) unchanged.
 - Regression addition:
-  - added `action_rewriter_avoids_linkedspec_lowering_facade`,
+  - added `action_rewriter_avoids_removed_linkedspec_lowering_facade`,
   - the regression traps the old `LinkedSpec::_...` lowering helper names and verifies direct `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` rewrites still succeed across declare, assign, push, regex, array-pipeline, flow, switch, and return forms.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` -> OK

@@ -37,6 +37,25 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the dead internal ActionIR lowering/dependency delegate block in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed the stale internal dependency builders and lowering/parser/extraction wrappers for flow expressions, declare/method lowering, value lowering, array-pipeline lowering, and fluent control-flow lowering,
+  - removed the now-unused ActionIR/Deps import surface from `LinkedSpec.pm`,
+  - active helper lowering now remains on `LinkedSpec::ActionRewriter` plus the extracted ActionIR owner modules.
+- Regression outcome:
+  - renamed and expanded the seam lock to `action_rewriter_avoids_removed_linkedspec_lowering_facade`,
+  - the regression traps the removed helper names and proves broader flow/value/pipeline lowering still succeeds through owner modules only.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (138 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead internal actionir lowering delegate block` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the dead internal `Compiler`/`RuleIR`/action-contract delegate block in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed the stale internal `LinkedSpec.pm` delegates for descriptor-level migration summary, action-contract defaults, RuleIR collection/planning/validation, and emit-context assembly,
@@ -380,7 +399,7 @@ These files are live and must be amended before any commit:
   - `LinkedSpec::ActionRewriter` now owns the extracted ActionIR lowering/value/pipeline/control-flow callback surface it needs for direct rewrites,
   - `LinkedSpec::Deps` no longer routes action-rewriter declare/scanner/contract lowering callbacks back through `LinkedSpec.pm`.
 - Regression outcome:
-  - added `action_rewriter_avoids_linkedspec_lowering_facade`,
+  - added `action_rewriter_avoids_removed_linkedspec_lowering_facade`,
   - the regression traps the old `LinkedSpec::_...` lowering helper names and verifies direct `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` rewrites still succeed across representative declare, assign, push, regex, pipeline, flow, switch, and return forms.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK

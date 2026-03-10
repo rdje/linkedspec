@@ -1490,28 +1490,64 @@ subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' =
     ok(($emit_ctx->{action_rewriter_meta}{rewrite_contract_ids} && @{$emit_ctx->{action_rewriter_meta}{rewrite_contract_ids}} > 0),
         'RuleIR emit-context still builds rewrite contracts through extracted action-rewriter module');
 };
-subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
-    plan tests => 12;
+subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
+    plan tests => 15;
 
     my %rewritten;
     my ($ok_run, $err) = (0, '');
     $ok_run = eval {
         no warnings 'redefine';
+        local *LinkedSpec::_flow_expr_deps = sub { die "__UNEXPECTED_LINKEDSPEC_FLOW_EXPR_DEPS__\n" };
+        local *LinkedSpec::_method_lowering_deps = sub { die "__UNEXPECTED_LINKEDSPEC_METHOD_LOWERING_DEPS__\n" };
+        local *LinkedSpec::_declare_method_deps = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_METHOD_DEPS__\n" };
+        local *LinkedSpec::_array_pipeline_deps = sub { die "__UNEXPECTED_LINKEDSPEC_ARRAY_PIPELINE_DEPS__\n" };
+        local *LinkedSpec::_control_flow_deps = sub { die "__UNEXPECTED_LINKEDSPEC_CONTROL_FLOW_DEPS__\n" };
+        local *LinkedSpec::_lower_is_empty_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_IS_EMPTY_EXPR__\n" };
         local *LinkedSpec::_lower_flow_composite_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FLOW_COMPOSITE_EXPR__\n" };
+        local *LinkedSpec::_split_declare_symbol_names = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_DECLARE_SYMBOL_NAMES__\n" };
+        local *LinkedSpec::_parse_declare_binding_entry = sub { die "__UNEXPECTED_LINKEDSPEC_PARSE_DECLARE_BINDING_ENTRY__\n" };
+        local *LinkedSpec::_lower_declare_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_VALUE_EXPR__\n" };
+        local *LinkedSpec::_lower_declare_initializer_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_INITIALIZER_EXPR__\n" };
+        local *LinkedSpec::_declare_sigil_for_type = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_SIGIL_FOR_TYPE__\n" };
         local *LinkedSpec::_lower_method_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_METHOD_VALUE_EXPR__\n" };
         local *LinkedSpec::_declare_alias_to_type = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_ALIAS_TO_TYPE__\n" };
         local *LinkedSpec::_lower_typed_declare_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_TYPED_DECLARE_STATEMENT__\n" };
+        local *LinkedSpec::_normalize_method_tag_expr = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_METHOD_TAG_EXPR__\n" };
+        local *LinkedSpec::_value_expr_deps = sub { die "__UNEXPECTED_LINKEDSPEC_VALUE_EXPR_DEPS__\n" };
+        local *LinkedSpec::_extract_scalar_symbol_name = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_SCALAR_SYMBOL_NAME__\n" };
+        local *LinkedSpec::_extract_array_symbol_name = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_ARRAY_SYMBOL_NAME__\n" };
+        local *LinkedSpec::_extract_hash_symbol_name = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_HASH_SYMBOL_NAME__\n" };
+        local *LinkedSpec::_lower_scalar_access_key_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAR_ACCESS_KEY_EXPR__\n" };
+        local *LinkedSpec::_split_scalaref_path_segments = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_SCALAREF_PATH_SEGMENTS__\n" };
+        local *LinkedSpec::_lower_scalaref_segment_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAREF_SEGMENT_EXPR__\n" };
+        local *LinkedSpec::_lower_scalaref_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SCALAREF_VALUE_EXPR__\n" };
+        local *LinkedSpec::_infer_scalar_container_kind = sub { die "__UNEXPECTED_LINKEDSPEC_INFER_SCALAR_CONTAINER_KIND__\n" };
+        local *LinkedSpec::_lower_assignment_source_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGNMENT_SOURCE_EXPR__\n" };
+        local *LinkedSpec::_strip_literal_delimiters = sub { die "__UNEXPECTED_LINKEDSPEC_STRIP_LITERAL_DELIMITERS__\n" };
+        local *LinkedSpec::_split_top_level_csv = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_TOP_LEVEL_CSV__\n" };
         local *LinkedSpec::_lower_assign_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGN_STATEMENT__\n" };
+        local *LinkedSpec::_lower_return_payload_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_PAYLOAD_EXPR__\n" };
         local *LinkedSpec::_build_array_pipeline_plan_from_expr = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ARRAY_PIPELINE_PLAN_FROM_EXPR__\n" };
         local *LinkedSpec::_lower_return_general_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_GENERAL_STATEMENT__\n" };
         local *LinkedSpec::_lower_return_imatch_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_IMATCH_STATEMENT__\n" };
         local *LinkedSpec::_lower_push_value_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PUSH_VALUE_STATEMENT__\n" };
+        local *LinkedSpec::_lower_assign_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGN_METHOD_STATEMENT__\n" };
+        local *LinkedSpec::_extract_declare_statement_from_method_expr = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_DECLARE_STATEMENT_FROM_METHOD_EXPR__\n" };
+        local *LinkedSpec::_lower_declare_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_METHOD_STATEMENT__\n" };
         local *LinkedSpec::_lower_regex_subst_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_REGEX_SUBST_STATEMENT__\n" };
+        local *LinkedSpec::_normalize_split_delimiter_expr = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_SPLIT_DELIMITER_EXPR__\n" };
+        local *LinkedSpec::_parse_method_function_expr = sub { die "__UNEXPECTED_LINKEDSPEC_PARSE_METHOD_FUNCTION_EXPR__\n" };
+        local *LinkedSpec::_is_bare_method_scope_token = sub { die "__UNEXPECTED_LINKEDSPEC_IS_BARE_METHOD_SCOPE_TOKEN__\n" };
+        local *LinkedSpec::_normalize_method_args_with_optional_scope = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_METHOD_ARGS_WITH_OPTIONAL_SCOPE__\n" };
+        local *LinkedSpec::_lower_control_flow_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_CONTROL_FLOW_VALUE_EXPR__\n" };
+        local *LinkedSpec::_lower_switch_case_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SWITCH_CASE_VALUE_EXPR__\n" };
         local *LinkedSpec::_lower_array_pipeline_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ARRAY_PIPELINE_EXPR__\n" };
         local *LinkedSpec::_lower_if_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_IF_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_elseif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSEIF_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_else_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ELSE_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_endif_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ENDIF_FLOW_STATEMENT__\n" };
+        local *LinkedSpec::_lower_flow_branch_action_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FLOW_BRANCH_ACTION_EXPR__\n" };
+        local *LinkedSpec::_lower_inline_switch_branch_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_INLINE_SWITCH_BRANCH_EXPR__\n" };
         local *LinkedSpec::_lower_switch_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SWITCH_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_case_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_CASE_FLOW_STATEMENT__\n" };
         local *LinkedSpec::_lower_default_flow_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DEFAULT_FLOW_STATEMENT__\n" };
@@ -1520,6 +1556,13 @@ subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_say_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SAY_STATEMENT__\n" };
         local *LinkedSpec::_lower_print_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PRINT_STATEMENT__\n" };
         local *LinkedSpec::_lower_return_undef_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_UNDEF_STATEMENT__\n" };
+        local *LinkedSpec::_lower_split_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_SPLIT_STATEMENT__\n" };
+        local *LinkedSpec::_lower_trim_each_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_TRIM_EACH_STATEMENT__\n" };
+        local *LinkedSpec::_lower_filter_nonempty_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FILTER_NONEMPTY_STATEMENT__\n" };
+        local *LinkedSpec::_lower_lowercase_each_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_LOWERCASE_EACH_STATEMENT__\n" };
+        local *LinkedSpec::_lower_uppercase_each_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_UPPERCASE_EACH_STATEMENT__\n" };
+        local *LinkedSpec::_lower_uniq_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_UNIQ_STATEMENT__\n" };
+        local *LinkedSpec::_lower_filter_match_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FILTER_MATCH_STATEMENT__\n" };
         local *LinkedSpec::_lower_return_array_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_ARRAY_STATEMENT__\n" };
 
         $rewritten{declare} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
@@ -1546,6 +1589,10 @@ subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
             'Top',
             'if(scalar(on)); print("warn"); else(); return_undef(); endif()',
         );
+        $rewritten{flow_empty} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'if(is_empty(array(items))); return_undef(); endif()',
+        );
         $rewritten{switch} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
             'Top',
             'switch(scalar(kind)); case(foo); print("hit"); default(); say("miss"); endswitch()',
@@ -1562,13 +1609,17 @@ subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
             'Top',
             'return(array_copy(array(items)))',
         );
+        $rewritten{pipeline_match} = LinkedSpec::ActionRewriter::call_spec_handler_subst(
+            'Top',
+            'lowercase_each(array(parts)); filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)',
+        );
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'ActionRewriter lowering succeeds without LinkedSpec lowering facade helpers')
+    ok($ok_run, 'ActionRewriter lowering succeeds without the removed LinkedSpec lowering facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'ActionRewriter lowering does not call the trapped LinkedSpec facade helpers');
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'ActionRewriter lowering does not call the trapped removed LinkedSpec facade helpers');
     is($rewritten{declare}, 'my $flag = (($on) || ($off))', 'declare alias lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside ActionRewriter-owned lowering path');
@@ -1577,11 +1628,14 @@ subtest 'action_rewriter_avoids_linkedspec_lowering_facade' => sub {
         'array pipeline lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{flow}, 'if ($on) {; print "warn"; } else {; return undef; }',
         'if/else flow lowering stays inside ActionRewriter-owned lowering path');
+    like($rewritten{flow_empty}, qr/!\@items.*return undef/s, 'is_empty flow lowering stays inside ActionRewriter-owned lowering path');
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
         'switch/case/default lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{return_imatch}, 'return ["semantic_annotation", $IMATCH]', 'return_imatch lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{return_array}, 'return ["semantic_annotation", [$IMATCH_LIST[0], $c]]', 'return_array lowering stays inside ActionRewriter-owned lowering path');
     is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside ActionRewriter-owned lowering path');
+    like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside ActionRewriter-owned lowering path');
+    like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside ActionRewriter-owned lowering path');
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
