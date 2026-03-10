@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the dead internal ActionRewriter delegate block in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::RuleIR::EmitContext` and `LinkedSpec::ActionRewriter` already owned the active rewrite/scanner/canonicalization path,
+  - the remaining `LinkedSpec.pm` helpers were definition-only internal delegates with no live repo callers,
+  - removing the dead block tightens the façade surface without changing the public compatibility shim `LinkedSpec::call_spec_handler_subst(...)`.
+- Implementation scope:
+  - deleted the stale internal `LinkedSpec.pm` delegates for unresolved-helper scanning, canonical event construction, statement splitting, rewrite-rule construction, canonical lowering, and diagnostics accumulation,
+  - updated the focused RuleIR seam lock to trap those removed helper names directly.
+- Regression addition/update:
+  - renamed the seam lock to `ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade`,
+  - expanded it to prove `build_rule_ir_emit_context(...)` does not call any of the removed internal delegate names.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=137`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the stale runtime `compile_spec_entry(...)` wrapper in `LinkedSpec::Runtime`.
 - Slice-selection rationale:
   - `LinkedSpec::Compiler::spec_descr(...)` and `LinkedSpec::Runtime::run_get(...)` already consumed `LinkedSpec::SpecEntry::compile_spec_entry(...)` as the active owner,

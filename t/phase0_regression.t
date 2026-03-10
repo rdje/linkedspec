@@ -1397,7 +1397,7 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the LinkedSpec spec_gdata facade');
     ok(ref($descr->{gdata}) eq 'HASH', 'final descriptor assembly still produces compiled gdata through Compiler ownership');
 };
-subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
+subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' => sub {
     plan tests => 7;
 
     my $rule_ir = {
@@ -1422,18 +1422,25 @@ subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     my ($emit_ctx, $ok_run, $err) = (undef, 0, '');
     $ok_run = eval {
         no warnings 'redefine';
+        local *LinkedSpec::_find_unresolved_action_helpers = sub { die "__UNEXPECTED_LINKEDSPEC_FIND_UNRESOLVED_ACTION_HELPERS__\n" };
+        local *LinkedSpec::_scan_contract_ir_events = sub { die "__UNEXPECTED_LINKEDSPEC_SCAN_CONTRACT_IR_EVENTS__\n" };
+        local *LinkedSpec::_collect_action_helper_ir_nodes = sub { die "__UNEXPECTED_LINKEDSPEC_COLLECT_ACTION_HELPER_IR_NODES__\n" };
         local *LinkedSpec::_build_action_rewrite_rules = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ACTION_REWRITE_RULES__\n" };
         local *LinkedSpec::_rewrite_action_code_with_diagnostics = sub { die "__UNEXPECTED_LINKEDSPEC_REWRITE_ACTION_CODE_WITH_DIAGNOSTICS__\n" };
         local *LinkedSpec::_accumulate_action_rewrite_diagnostics = sub { die "__UNEXPECTED_LINKEDSPEC_ACCUMULATE_ACTION_REWRITE_DIAGNOSTICS__\n" };
         local *LinkedSpec::_trim_action_ir_value = sub { die "__UNEXPECTED_LINKEDSPEC_TRIM_ACTION_IR_VALUE__\n" };
+        local *LinkedSpec::_canonicalize_helper_action_ir_event = sub { die "__UNEXPECTED_LINKEDSPEC_CANONICALIZE_HELPER_ACTION_IR_EVENT__\n" };
+        local *LinkedSpec::_split_action_ir_statements = sub { die "__UNEXPECTED_LINKEDSPEC_SPLIT_ACTION_IR_STATEMENTS__\n" };
+        local *LinkedSpec::_build_canonical_action_ir_events = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_CANONICAL_ACTION_IR_EVENTS__\n" };
+        local *LinkedSpec::_lower_action_code_from_canonical_ir = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ACTION_CODE_FROM_CANONICAL_IR__\n" };
         $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'RuleIR emit-context build succeeds without LinkedSpec action-rewriter facade helpers')
+    ok($ok_run, 'RuleIR emit-context build succeeds without the removed LinkedSpec action-rewriter facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'RuleIR emit-context does not call the trapped LinkedSpec facade helpers');
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'RuleIR emit-context does not call the trapped removed LinkedSpec facade helpers');
     ok(defined($emit_ctx) && ref($emit_ctx) eq 'HASH', 'RuleIR emit-context returns hashref');
     ok(ref($emit_ctx->{ACODEs}) eq 'ARRAY' && @{$emit_ctx->{ACODEs}} == 1, 'RuleIR emit-context returns rewritten ACODE list');
     is_deeply($emit_ctx->{GDATA}, [{ label => 'Top', idx => 0 }], 'RuleIR emit-context preserves ACODE gdata mapping');

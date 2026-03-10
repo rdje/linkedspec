@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Dead Internal ActionRewriter Facade Block
+## Summary
+Reduced another stale `LinkedSpec.pm` seam by removing the dead internal ActionRewriter delegate block now that active rewrite/scanner/canonicalization flow already stays on `LinkedSpec::ActionRewriter` and `LinkedSpec::RuleIR::EmitContext`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale internal ActionRewriter delegates from `LinkedSpec.pm`:
+  - deleted `_find_unresolved_action_helpers(...)`
+  - deleted `_scan_contract_ir_events(...)`
+  - deleted `_collect_action_helper_ir_nodes(...)`
+  - deleted `_trim_action_ir_value(...)`
+  - deleted `_canonicalize_helper_action_ir_event(...)`
+  - deleted `_split_action_ir_statements(...)`
+  - deleted `_build_canonical_action_ir_events(...)`
+  - deleted `_lower_action_code_from_canonical_ir(...)`
+  - deleted `_accumulate_action_rewrite_diagnostics(...)`
+  - deleted `_rewrite_action_code_with_diagnostics(...)`
+  - deleted `_build_action_rewrite_rules(...)`
+- Preserved behavior:
+  - runtime rule emission still rewrites through `LinkedSpec::RuleIR::EmitContext` plus `LinkedSpec::ActionRewriter`,
+  - `LinkedSpec::call_spec_handler_subst(...)` remains the public compatibility/test shim for focused rewrite inspection.
+- Updated focused regression coverage:
+  - `ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade`
+  - the seam lock now traps the removed helper names and proves `LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(...)` still succeeds through the owner modules only.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=137`)
 ## 2026-03-10 - Phase 1A Slice: Remove Runtime `compile_spec_entry` Wrapper
 ## Summary
 Reduced another stale runtime seam by removing `LinkedSpec::Runtime::compile_spec_entry(...)` now that active rule-entry compilation already flows through `LinkedSpec::SpecEntry::compile_spec_entry(...)` with injected runtime context.

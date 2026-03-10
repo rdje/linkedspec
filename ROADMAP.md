@@ -221,7 +221,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - Phase 0: Active and green (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
 - Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
 - Phase 1: In progress.
-- Phase 1A (LinkedSpec.pm modularization): Planned and queued as next execution track.
+- Phase 1A (LinkedSpec.pm modularization): In progress and far advanced.
   - Planned first slice: extract tracing/logging APIs to `LinkedSpec/Trace.pm`.
   - Planned second slice: extract spec/rule/gdata validation APIs to `LinkedSpec/Validation.pm`.
   - Planned third slice: extract spec path/file resolution APIs to `LinkedSpec/Resolver.pm`.
@@ -253,6 +253,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: the stale runtime wrapper `LinkedSpec::Runtime::compile_spec_entry(...)` has been removed, and active rule-entry compilation now stays on `LinkedSpec::SpecEntry` plus injected `runtime_ctx`.
   - Landed follow-up: the stale façade helper `LinkedSpec::spec_entry(...)` has been removed, and active rule-entry compilation now stays on `LinkedSpec::SpecEntry` only.
   - Landed follow-up: `LinkedSpec::BootstrapSpec` now owns the cached bootstrap grammar state and bootstrap parse callback (`run_bootstrap_parse(...)`), while `LinkedSpec::Compiler::run_get_pipeline(...)` consumes an injected `bootstrap_parse` callback instead of the raw bootstrap descriptor/index/gdata triple.
+  - Landed follow-up: the stale internal ActionRewriter façade delegates (`_find_unresolved_action_helpers`, `_scan_contract_ir_events`, `_collect_action_helper_ir_nodes`, `_trim_action_ir_value`, `_canonicalize_helper_action_ir_event`, `_split_action_ir_statements`, `_build_canonical_action_ir_events`, `_lower_action_code_from_canonical_ir`, `_accumulate_action_rewrite_diagnostics`, `_rewrite_action_code_with_diagnostics`, `_build_action_rewrite_rules`) have been removed from `LinkedSpec.pm`, and the active RuleIR/action-rewriter path is regression-locked to the `LinkedSpec::ActionRewriter` owner surface.
 - Plugin and resource-resolution modernization track: In progress.
   - Landed follow-up: `LinkedSpec::PluginBridge` now owns explicit plugin-runtime load/exec dependency callbacks through `_dispatch_autoload(...)`, so future module-based plugin runtime work can replace `PPlugin` without changing `LinkedSpec::AUTOLOAD`.
   - Landed follow-up: the stale `LinkedSpec::PluginBridge::dispatch_autoload(...)` wrapper has been removed, and `LinkedSpec::AUTOLOAD` now delegates straight to the owner path `_dispatch_autoload(...)`.

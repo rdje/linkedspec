@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the dead internal ActionRewriter delegate block in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed the stale internal `LinkedSpec.pm` delegates for unresolved-helper scanning, rewrite-rule construction, canonical event construction, statement splitting, canonical lowering, and rewrite diagnostics accumulation,
+  - active rewrite flow now remains on `LinkedSpec::ActionRewriter` plus `LinkedSpec::RuleIR::EmitContext`,
+  - `LinkedSpec::call_spec_handler_subst(...)` remains the only public compatibility/test shim on this surface.
+- Regression outcome:
+  - renamed and expanded the seam lock to `ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade`,
+  - the regression traps the removed helper names and proves `build_rule_ir_emit_context(...)` still succeeds without them.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (137 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead internal action rewriter facade block` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the stale runtime `compile_spec_entry(...)` wrapper in `LinkedSpec::Runtime`.
 - Key technical outcome:
   - removed `LinkedSpec::Runtime::compile_spec_entry(...)`,

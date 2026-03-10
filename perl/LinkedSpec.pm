@@ -400,27 +400,6 @@ sub _build_rule_ir_emit_context {
 }
 
 #------------------------------------------------------------------------------
-# Function: _find_unresolved_action_helpers
-# Purpose : Detect helper forms that remain unresolved after rewrite/lowering
-#           and report both counts and statement-level events.
-# Args    : ($code, $rewrite_rules)
-# Returns : hashref unresolved diagnostics payload
-#------------------------------------------------------------------------------
-sub _find_unresolved_action_helpers {
- return LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _trim_action_ir_value
-# Purpose : Shared whitespace normalization helper for action-IR payload text.
-# Args    : ($value)
-# Returns : trimmed scalar or undef
-#------------------------------------------------------------------------------
-sub _trim_action_ir_value {
- return LinkedSpec::ActionRewriter::_trim_action_ir_value(@_)
-}
-
-#------------------------------------------------------------------------------
 # Function: _split_declare_symbol_names
 # Purpose : Parse and sanitize comma-separated declaration symbol names.
 # Args    : ($raw_names)
@@ -1066,104 +1045,6 @@ sub _lower_return_array_statement {
  my ($tag, $payload) = @_;
  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement($tag, $payload, _method_lowering_deps())
 }
-
-#------------------------------------------------------------------------------
-# Function: _scan_contract_ir_events
-# Purpose : Contract-specific scanner that extracts helper invocation events
-#           and parsed arguments from raw action code.
-# Args    : ($contract, $code)
-# Returns : arrayref of event hashes
-#------------------------------------------------------------------------------
-sub _scan_contract_ir_events {
- return LinkedSpec::ActionRewriter::_scan_contract_ir_events(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _collect_action_helper_ir_nodes
-# Purpose : Aggregate helper-action IR hits/events across all rewrite contracts
-#           before lowering is applied.
-# Args    : ($code, $rewrite_rules)
-# Returns : hashref helper-action IR diagnostics
-#------------------------------------------------------------------------------
-sub _collect_action_helper_ir_nodes {
- return LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _canonicalize_helper_action_ir_event
-# Purpose : Convert contract-level helper event identity into canonical IR
-#           event kind + normalized args for downstream lowering/metadata.
-# Args    : ($label, $event)
-# Returns : canonical event hashref
-#------------------------------------------------------------------------------
-sub _canonicalize_helper_action_ir_event {
- return LinkedSpec::ActionRewriter::_canonicalize_helper_action_ir_event(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _split_action_ir_statements
-# Purpose : Statement splitter for action code that honors nesting/quotes and
-#           known Perl quote-like forms so semicolon boundaries are robust.
-# Args    : ($code)
-# Returns : arrayref of top-level statement strings
-#------------------------------------------------------------------------------
-sub _split_action_ir_statements {
- return LinkedSpec::ActionRewriter::_split_action_ir_statements(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _build_canonical_action_ir_events
-# Purpose : Promote helper events + fallback statements into canonical action
-#           IR event stream with per-kind hit accounting.
-# Args    : ($label, $code, $helper_events)
-# Returns : hashref canonical action-IR diagnostics
-#------------------------------------------------------------------------------
-sub _build_canonical_action_ir_events {
- return LinkedSpec::ActionRewriter::_build_canonical_action_ir_events(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _lower_action_code_from_canonical_ir
-# Purpose : Apply lowering contracts by replaying canonical helper events on
-#           the original source string while preserving non-helper regions.
-# Args    : ($label, $code, $rewrite_rules, $canonical_ir_diag)
-# Returns : lowered code string
-#------------------------------------------------------------------------------
-sub _lower_action_code_from_canonical_ir {
- return LinkedSpec::ActionRewriter::_lower_action_code_from_canonical_ir(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _accumulate_action_rewrite_diagnostics
-# Purpose : Merge per-chunk diagnostics into a rule-level accumulator used for
-#           metadata emission and migration readiness reporting.
-# Args    : ($acc, $diag)
-# Returns : updated accumulator hashref
-#------------------------------------------------------------------------------
-sub _accumulate_action_rewrite_diagnostics {
- return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _rewrite_action_code_with_diagnostics
-# Purpose : One-stop action rewrite pipeline: helper IR scan, canonical IR
-#           assembly, lowering, unresolved detection, and diag packaging.
-# Args    : ($label, $code, $rewrite_rules)
-# Returns : ($rewritten_code, $diag_hashref)
-#------------------------------------------------------------------------------
-sub _rewrite_action_code_with_diagnostics {
- return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@_)
-}
-#------------------------------------------------------------------------------
-# Function: _build_action_rewrite_rules
-# Purpose : Compile apply-ready rewrite rules from lowering contracts.
-# Args    : ($label)
-# Returns : arrayref rewrite rules
-#------------------------------------------------------------------------------
-sub _build_action_rewrite_rules {
- return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@_)
-}
-
 
 #------------------------------------------------------------------------------
 # Function: call_spec_handler_subst
