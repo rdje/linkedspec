@@ -411,16 +411,6 @@ sub spec_entry {
 }
 
 #------------------------------------------------------------------------------
-# Function: spec_gdata
-# Purpose : Build compiled dispatch regex bundles (gdata) for each rule from
-#           rule-to-rule gdata references collected during descriptor build.
-# Args    : ($spec_hashref)
-# Returns : hashref rule => compiled LinkedRE regex
-#------------------------------------------------------------------------------
-sub spec_gdata {
- return LinkedSpec::Compiler::spec_gdata(@_)
-}
-#------------------------------------------------------------------------------
 # Function: _find_unresolved_action_helpers
 # Purpose : Detect helper forms that remain unresolved after rewrite/lowering
 #           and report both counts and statement-level events.

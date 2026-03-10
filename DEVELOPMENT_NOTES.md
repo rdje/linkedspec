@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the stale façade `spec_gdata(...)` helper in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Compiler::_build_final_descr(...)` already owned the default `spec_gdata` callback,
+  - no active compiler path still needed the `LinkedSpec.pm` wrapper name,
+  - removing the wrapper tightens the façade surface and keeps final descriptor `gdata` compilation owned entirely by `Compiler.pm`.
+- Implementation scope:
+  - deleted `LinkedSpec::spec_gdata(...)` from `LinkedSpec.pm`,
+  - left active final descriptor assembly on `LinkedSpec::Compiler::_build_final_descr(...)` and `LinkedSpec::Compiler::spec_gdata(...)`.
+- Regression addition:
+  - added `compiler_pipeline_avoids_linkedspec_spec_gdata_facade`,
+  - the regression traps the removed façade helper name and verifies `Runtime::run_get(..., return_descr => 1)` still returns a descriptor hash with compiled `gdata`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=135`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the stale façade-local spec-resolution helper in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Resolver` already owned `_resolve_local_spec_path(...)` and `resolve_spec_path(...)`,

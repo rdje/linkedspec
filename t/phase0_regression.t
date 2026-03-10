@@ -1320,6 +1320,28 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor owner supplies spec_gdata');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor assembly still preserves compiled handler coderef');
 };
+subtest 'compiler_pipeline_avoids_linkedspec_spec_gdata_facade' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::spec_gdata = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__\n" };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds without the LinkedSpec spec_gdata facade') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__/, 'compiler pipeline does not call the trapped LinkedSpec spec_gdata facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the LinkedSpec spec_gdata facade');
+    ok(ref($descr->{gdata}) eq 'HASH', 'final descriptor assembly still produces compiled gdata through Compiler ownership');
+};
 subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     plan tests => 7;
 

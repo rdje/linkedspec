@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the stale façade `spec_gdata(...)` helper in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed `LinkedSpec::spec_gdata(...)`,
+  - active final descriptor `gdata` compilation remains owned exclusively by `LinkedSpec::Compiler`,
+  - `LinkedSpec::Runtime::run_get(...)` no longer has a façade-level `gdata` helper alias anywhere on the active descriptor path.
+- Regression outcome:
+  - added `compiler_pipeline_avoids_linkedspec_spec_gdata_facade`,
+  - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descr => 1)` still returns a descriptor hash with compiled `gdata`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (135 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: drop facade spec_gdata helper` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the stale façade-local spec-resolution helper in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed `LinkedSpec::_resolve_local_spec_path(...)`,
