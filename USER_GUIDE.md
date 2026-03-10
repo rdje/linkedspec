@@ -360,6 +360,8 @@ Descriptor summary fields:
 
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior.
 
+Likewise, final descriptor assembly keeps its `gdata` compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `spec_gdata` callback.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`

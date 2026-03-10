@@ -1135,6 +1135,54 @@ SPEC
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
+subtest 'run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my $orig_build_final_descr = \&LinkedSpec::Compiler::_build_final_descr;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my ($saw_undef_spec_gdata_cb, $saw_top_rule_spec);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_build_final_descr = sub {
+            my ($auto_descr_spec, $spec_gdata_cb) = @_;
+            $saw_undef_spec_gdata_cb = !defined($spec_gdata_cb);
+            $saw_top_rule_spec = ref($auto_descr_spec) eq 'HASH' && exists $auto_descr_spec->{Top};
+            return $orig_build_final_descr->(@_);
+        };
+
+        $descr = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                bootstrap_parse => sub {
+                    return LinkedSpec::BootstrapSpec::run_bootstrap_parse($_[0]);
+                },
+                compile_spec_entry => sub {
+                    return LinkedSpec::Runtime::compile_spec_entry($_[0], $runtime_ctx);
+                },
+                runtime_ctx => $runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds while final descriptor assembly is trapped') or diag(normalize_error($err));
+    ok($saw_undef_spec_gdata_cb, 'compiler pipeline now lets final descriptor assembly own the default spec_gdata callback');
+    ok($saw_top_rule_spec, 'compiler pipeline still forwards compiled rule descriptors into final descriptor assembly');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor owner supplies spec_gdata');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor assembly still preserves compiled handler coderef');
+};
 subtest 'ruleir_emit_context_avoids_linkedspec_action_rewriter_facade' => sub {
     plan tests => 7;
 

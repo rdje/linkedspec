@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Move Final Descriptor `spec_gdata` Default Into `Compiler`
+## Summary
+Reduced another compiler-owned callback seam by making `LinkedSpec::Compiler::_build_final_descr(...)` own the default `spec_gdata` callback, so `run_get_pipeline(...)` no longer threads that callback explicitly during descriptor assembly.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::Compiler::_build_final_descr(...)`:
+  - it now defaults `spec_gdata` to `LinkedSpec::Compiler::spec_gdata(...)` internally,
+  - explicit callback injection remains available for focused tests and future internal refactors.
+- Simplified `LinkedSpec::Compiler::run_get_pipeline(...)`:
+  - final descriptor assembly now calls `_build_final_descr($auto_descr_spec)` directly,
+  - `run_get_pipeline(...)` no longer threads `\&spec_gdata` as an explicit callback.
+- Added focused regression coverage:
+  - `run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner`
+  - the regression traps `LinkedSpec::Compiler::_build_final_descr(...)` and proves the compiler pipeline now leaves the default `spec_gdata` callback undefined at the call site while still returning a valid descriptor.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=129`)
 ## 2026-03-10 - Phase 1A Slice: Move `spec_descr(...)` Default Callback Into `Compiler`
 ## Summary
 Reduced another façade-owned default by making `LinkedSpec::Compiler::spec_descr(...)` own the default `compile_spec_entry` callback, so `LinkedSpec::spec_descr(...)` is now a pure façade delegate and no longer injects that default itself.

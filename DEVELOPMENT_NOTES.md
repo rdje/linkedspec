@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A no-behavior-change modularization slice completed against the compiler-owned final-descriptor `spec_gdata` callback seam.
+- Slice-selection rationale:
+  - `run_get_pipeline(...)` still threaded `\&spec_gdata` explicitly into `_build_final_descr(...)` even though both sides already live in `Compiler.pm`,
+  - the default `spec_gdata` callback belongs with final descriptor assembly rather than the higher-level pipeline wrapper,
+  - moving that default narrows one more internal callback seam without changing descriptor-build behavior.
+- Implementation scope:
+  - updated `LinkedSpec::Compiler::_build_final_descr(...)` to default `spec_gdata` internally,
+  - simplified `LinkedSpec::Compiler::run_get_pipeline(...)` to call `_build_final_descr($auto_descr_spec)` directly,
+  - kept explicit `spec_gdata` callback injection available for focused tests and future internal owner changes.
+- Regression addition:
+  - added `run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner`,
+  - the regression traps `LinkedSpec::Compiler::_build_final_descr(...)` and verifies `run_get_pipeline(...)` now delegates without injecting the default `spec_gdata` callback while still returning a working descriptor hash.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=129`)
+## Session Notes (2026-03-10)
 - Phase 1A no-behavior-change modularization slice completed against the façade-owned `spec_descr(...)` default callback seam.
 - Slice-selection rationale:
   - `LinkedSpec::spec_descr(...)` still owned the default `compile_spec_entry` callback even though `Compiler.pm` already owned descriptor assembly,

@@ -274,6 +274,7 @@ sub spec_gdata {
 
 sub _build_final_descr {
  my ($auto_descr_spec, $spec_gdata_cb) = @_;
+ $spec_gdata_cb ||= \&spec_gdata;
 
  my $final_descr = {
   spec  => $auto_descr_spec,
@@ -422,7 +423,7 @@ sub run_get_pipeline {
   LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
- my $final_descr = _build_final_descr($auto_descr_spec, \&spec_gdata);
+ my $final_descr = _build_final_descr($auto_descr_spec);
 
  unless (LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
   LinkedSpec::Trace::log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");

@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A modularization slice completed against the compiler-owned final-descriptor `spec_gdata` callback boundary.
+- Key technical outcome:
+  - `LinkedSpec::Compiler::_build_final_descr(...)` now owns the default `spec_gdata` callback,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` no longer threads `\&spec_gdata` explicitly during descriptor assembly,
+  - explicit callback injection remains available for focused tests and future internal refactors.
+- Regression outcome:
+  - added `run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner`,
+  - the regression traps `LinkedSpec::Compiler::_build_final_descr(...)` and proves the compiler pipeline now leaves the default `spec_gdata` callback undefined at the call site while still returning a valid descriptor.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (129 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move final descriptor spec_gdata default into Compiler` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A modularization slice completed against the façade-owned `spec_descr(...)` default callback boundary.
 - Key technical outcome:
   - `LinkedSpec::Compiler::spec_descr(...)` now owns the default `compile_spec_entry` callback,
