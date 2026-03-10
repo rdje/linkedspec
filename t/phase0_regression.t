@@ -264,6 +264,46 @@ subtest 'pplugin_legacy_plugin_files_are_sorted_and_deduped' => sub {
     is(scalar @files, 3, 'PPlugin legacy plugin file enumeration excludes duplicate roots and non-plugin files');
     ok((scalar grep { /\.txt\z/ } @files) == 0, 'PPlugin legacy plugin file enumeration only returns .plg files');
 };
+subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_failures' => sub {
+    plan tests => 6;
+
+    require File::Temp;
+    require PPlugin;
+
+    my $tmp_root = File::Temp::tempdir(CLEANUP => 1);
+    my $first_file = File::Spec->catfile($tmp_root, '001_first.plg');
+    my $second_file = File::Spec->catfile($tmp_root, '002_second.plg');
+    my $bad_file = File::Spec->catfile($tmp_root, '003_bad.plg');
+    write_text($first_file, "first\n");
+    write_text($second_file, "second\n");
+    write_text($bad_file, "bad\n");
+
+    my ($registry, $stdout, $ok_run, $err) = (undef, '', 0, '');
+    $ok_run = eval {
+        local *STDOUT;
+        open(STDOUT, '>', \$stdout) or die "Unable to capture STDOUT: $!";
+        $registry = PPlugin::_build_plugin_registry(
+            sub {
+                my ($content_ref) = @_;
+                return { foo => sub { 1 } } if $$content_ref eq "first\n";
+                return { foo => sub { 2 }, bar => sub { 3 } } if $$content_ref eq "second\n";
+                return undef;
+            },
+            $first_file,
+            $second_file,
+            $bad_file,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PPlugin explicit registry builder executes without die') or diag(normalize_error($err));
+    ok(ref($registry) eq 'HASH', 'PPlugin explicit registry builder returns a hashref registry');
+    is($registry->{foo}->(), 2, 'PPlugin explicit registry builder preserves later file override precedence for duplicate plugin names');
+    is($registry->{bar}->(), 3, 'PPlugin explicit registry builder preserves non-duplicate plugin entries');
+    ok(!exists $registry->{bad}, 'PPlugin explicit registry builder skips malformed plugin files');
+    like($stdout, qr/\Q$bad_file\E/, 'PPlugin explicit registry builder reports skipped malformed plugin files');
+};
 subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     plan tests => 5;
 

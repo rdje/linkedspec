@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Runtime Slice: Extract Explicit Legacy Registry Builder
+## Summary
+Continued the plugin/runtime modernization track by extracting legacy `.plg` registry construction in `PPlugin` into an explicit owner helper, so the compatibility adapter now exposes a narrower, testable registry seam without changing runtime behavior.
+
+## Changed Files
+- Updated: `perl/PPlugin.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `PPlugin` legacy registry construction:
+  - added `_build_plugin_registry(...)` as the owner helper for building the cached legacy plugin registry from discovered `.plg` files,
+  - `PPlugin::new(...)` now enumerates plugin files through `_legacy_plugin_files(...)` and hands the ordered list to `_build_plugin_registry(...)`,
+  - registry construction still preserves later-file override behavior for duplicate plugin names while skipping malformed plugin parses with a warning.
+- Preserved behavior:
+  - legacy `.plg` execution still searches the working directory and the project `plugin/` tree through the previously-landed deterministic discovery helpers,
+  - plugin dispatch behavior remains unchanged for the phase0 corpus,
+  - malformed legacy plugin files remain non-fatal to registry construction.
+- Updated focused regression coverage:
+  - added `pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_failures`,
+  - kept the deterministic discovery seam coverage for cwd-first root enumeration and sorted `.plg` file lists.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/PPlugin.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=143`)
 ## 2026-03-10 - Plugin Runtime Slice: Make Legacy `.plg` File Discovery Deterministic
 ## Summary
 Continued the plugin/runtime modernization track by replacing `PPlugin`'s brace-glob plugin-file discovery with explicit, deterministic cwd-first root enumeration and sorted `.plg` file lists.

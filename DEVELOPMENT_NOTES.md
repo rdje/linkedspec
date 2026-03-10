@@ -60,6 +60,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Core modules (especially `perl/LinkedSpec.pm`) should keep subroutine-level documentation comments that describe purpose, inputs, outputs, and side effects.
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
+## Session Notes (2026-03-11)
+- Plugin/runtime modernization slice completed against the legacy `.plg` registry builder in `PPlugin`.
+- Slice-selection rationale:
+  - the roadmap calls for moving away from implicit inline legacy registry state toward explicit, replaceable plugin runtime seams,
+  - `PPlugin::new(...)` still built the legacy `.plg` registry inline even after deterministic file discovery was extracted,
+  - extracting the registry builder keeps compatibility behavior stable while narrowing the future replacement boundary.
+- Implementation scope:
+  - added `_build_plugin_registry(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now passes the ordered `.plg` file list into that helper instead of building the registry inline,
+  - malformed legacy plugin parses are skipped with warning while later plugin files still override earlier duplicate plugin names.
+- Regression addition/update:
+  - added `pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_failures`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/PPlugin.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=143`)
 ## Session Notes (2026-03-10)
 - Plugin/runtime modernization slice completed against the legacy `.plg` adapter in `PPlugin`.
 - Slice-selection rationale:

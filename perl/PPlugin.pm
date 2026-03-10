@@ -46,36 +46,35 @@ sub _legacy_plugin_files {
  return grep { !$seen{$_}++ } @plugin_list
 }
 
+sub _build_plugin_registry {
+ my ($get, @plugin_list) = @_;
+ die "(PPlugin::_build_plugin_registry) -E- parser callback must be CODE"
+  unless ref($get) eq 'CODE';
+
+ my @plugins;
+ foreach my $cplugin (@plugin_list) {
+  my $content = do { local(@ARGV, $/) = $cplugin; <> };
+  my $rt = $get->(\$content); say $@ if $@;
+
+  unless ($rt) {
+   print "(PPlugin) -W- Issue parsing plugin file '$cplugin'\n";
+   next
+  }
+
+  push @plugins, %$rt;
+ }
+
+ my %plugins = @plugins;
+ return \%plugins
+}
+
 sub new {
 my $class = ref $_[0] || $_[0];
 
 state $main_str = do { 
  my $get         = LinkedSpec::get_parser('pplugin');
  my @plugin_list = _legacy_plugin_files();
-
- my @plugins;
- foreach my $cplugin (@plugin_list) {
-  my $content = do {local(@ARGV, $/) = $cplugin; <>};
-  my $rt      = $get->(\$content); say $@ if $@;
- 
-  unless ($rt) {
-   print "(PPlugin) -W- Issue parsing plugin file '$cplugin'\n";
-   next
-  }
- 
-  push @plugins, %$rt;
- }
-
-  my %plugins = @plugins;
-  # trying to directly output 
-  #   {@plugins} 
-  #
-  # seems to infact output 
-  #   @plugins
-  #
-  # I really can't explain this behaviour
-  # I've seen this many times
-  \%plugins
+ _build_plugin_registry($get, @plugin_list)
  };
 
 

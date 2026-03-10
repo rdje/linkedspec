@@ -36,6 +36,21 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-11)
+- Uncommitted plugin/runtime modernization slice completed against the legacy `.plg` registry builder in `PPlugin`.
+- Key technical outcome:
+  - added `_build_plugin_registry(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now routes ordered legacy `.plg` files through that helper instead of building the registry inline,
+  - duplicate plugin names still resolve by later-file override order, and malformed plugin parses are skipped with warning.
+- Regression outcome:
+  - added `pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_failures`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/PPlugin.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (143 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: extract explicit legacy registry builder` until commit workflow runs, then reset to zero-byte untracked.
 ## Current Session Snapshot (2026-03-10)
 - Uncommitted plugin/runtime modernization slice completed against the legacy `.plg` adapter in `PPlugin`.
 - Key technical outcome:
