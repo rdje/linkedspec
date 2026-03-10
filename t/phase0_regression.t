@@ -109,6 +109,7 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
         local $LinkedSpec::Trace::TRACE_EMOJI = 0;
         local $LinkedSpec::Trace::TRACE_INDENT_LEVEL = 0;
         local $LinkedSpec::Trace::TRACE_INITIALIZED = 1;
+        local *LinkedSpec::_trace_level_name = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_LEVEL_NAME__\n" };
         local *LinkedSpec::_apply_trace_options = sub { die "__UNEXPECTED_LINKEDSPEC_APPLY_TRACE_OPTIONS__\n" };
         local *LinkedSpec::trace_enter = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_ENTER__\n" };
         local *LinkedSpec::trace_exit = sub { die "__UNEXPECTED_LINKEDSPEC_TRACE_EXIT__\n" };
@@ -1134,7 +1135,7 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'Runtime::run_get still preserves compiled handler coderef');
 };
 subtest 'spec_entry_compile_spec_entry_uses_injected_runtime_context' => sub {
-    plan tests => 7;
+    plan tests => 9;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -1154,7 +1155,18 @@ SPEC
         },
     };
 
-    my ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx });
+    my ($label, $info, $ok_run, $err) = (undef, undef, 0, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_emit_parser_source_line = sub { die "__UNEXPECTED_LINKEDSPEC_EMIT_PARSER_SOURCE_LINE__\n" };
+        ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'SpecEntry compile_spec_entry succeeds without the removed LinkedSpec emit-parser-source wrapper')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_EMIT_PARSER_SOURCE_LINE__/, 'SpecEntry compile_spec_entry does not call the trapped removed LinkedSpec emit-parser-source wrapper');
     is($label, 'Top', 'SpecEntry compile_spec_entry still returns rule label through injected runtime context');
     ok(defined($info) && ref($info) eq 'HASH', 'SpecEntry compile_spec_entry still returns rule info through injected runtime context');
     ok(ref($info->{handler}) eq 'CODE', 'SpecEntry compile_spec_entry still exposes runtime handler coderef');

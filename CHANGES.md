@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Dead Internal Trace and Runtime Helper Wrappers
+## Summary
+Reduced another stale `LinkedSpec.pm` seam by removing the dead internal trace/runtime helper wrappers now that active trace configuration and parser-source emission already stay on `LinkedSpec::Trace`, `LinkedSpec::ParserFactory`, and `LinkedSpec::SpecEntry`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale internal wrappers from `LinkedSpec.pm`:
+  - deleted `_trace_level_name(...)`,
+  - deleted `_apply_trace_options(...)`,
+  - deleted `_emit_parser_source_line(...)`.
+- Preserved behavior:
+  - public `LinkedSpec::configure_trace(...)` remains as the compatibility trace entrypoint,
+  - active `get_parser(...)` tracing still routes through `LinkedSpec::Trace` and `LinkedSpec::ParserFactory`,
+  - active parser-source emission still routes through `LinkedSpec::SpecEntry` plus injected `runtime_ctx`.
+- Updated focused regression coverage:
+  - expanded `get_parser_avoids_linkedspec_parser_factory_facade` to trap the removed internal trace helper `_trace_level_name(...)`,
+  - expanded `spec_entry_compile_spec_entry_uses_injected_runtime_context` to trap the removed runtime helper `_emit_parser_source_line(...)`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=138`)
 ## 2026-03-10 - Phase 1A Slice: Remove Dead Internal ActionIR Lowering Delegate Block
 ## Summary
 Reduced another stale `LinkedSpec.pm` seam by removing the dead internal ActionIR lowering/dependency delegate block now that active helper lowering already stays on `LinkedSpec::ActionRewriter` and the extracted ActionIR owner modules.

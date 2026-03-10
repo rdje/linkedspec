@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the dead internal trace/runtime helper wrappers in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed `_trace_level_name(...)`, `_apply_trace_options(...)`, and `_emit_parser_source_line(...)` from `LinkedSpec.pm`,
+  - active trace/parser-source behavior now remains on `LinkedSpec::Trace`, `LinkedSpec::ParserFactory`, and `LinkedSpec::SpecEntry`.
+- Regression outcome:
+  - `get_parser_avoids_linkedspec_parser_factory_facade` now traps `_trace_level_name(...)` as part of the removed trace helper surface,
+  - `spec_entry_compile_spec_entry_uses_injected_runtime_context` now traps `_emit_parser_source_line(...)` and proves parser-source emission still uses injected runtime context only.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (138 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead internal trace and runtime helper wrappers` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the dead internal ActionIR lowering/dependency delegate block in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed the stale internal dependency builders and lowering/parser/extraction wrappers for flow expressions, declare/method lowering, value lowering, array-pipeline lowering, and fluent control-flow lowering,

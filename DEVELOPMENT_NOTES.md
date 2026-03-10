@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the dead internal trace/runtime helper wrappers in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Trace`, `LinkedSpec::ParserFactory`, and `LinkedSpec::SpecEntry` already owned the active trace/parser-source paths,
+  - the remaining `LinkedSpec.pm` helpers were definition-only wrappers with no live repo callers,
+  - removing them tightens the façade surface without changing the public `configure_trace(...)` entrypoint.
+- Implementation scope:
+  - deleted `_trace_level_name(...)`, `_apply_trace_options(...)`, and `_emit_parser_source_line(...)` from `LinkedSpec.pm`,
+  - expanded the focused trace/spec-entry seam locks to trap the removed helper names directly.
+- Regression addition/update:
+  - `get_parser_avoids_linkedspec_parser_factory_facade` now traps `_trace_level_name(...)` alongside the already-removed trace wrapper surface,
+  - `spec_entry_compile_spec_entry_uses_injected_runtime_context` now traps `_emit_parser_source_line(...)` and proves parser-source emission still flows through injected runtime context only.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=138`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the dead internal ActionIR lowering/dependency delegate block in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::ActionRewriter` and the extracted ActionIR modules already owned the active lowering path,

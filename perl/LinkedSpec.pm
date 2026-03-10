@@ -50,10 +50,6 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 # Trace core helpers (verbosity parsing, formatting, routing, scope API)
 #------------------------------------------------------------------------------
 
-sub _trace_level_name {
- return LinkedSpec::Trace::_trace_level_name(@_)
-}
-
 #------------------------------------------------------------------------------
 # Function: configure_trace
 # Purpose : Runtime trace configuration API (verbosity, sink routing, style).
@@ -62,10 +58,6 @@ sub _trace_level_name {
 #------------------------------------------------------------------------------
 sub configure_trace {
  return LinkedSpec::Trace::configure_trace(@_)
-}
-
-sub _apply_trace_options {
- return LinkedSpec::Trace::_apply_trace_options(@_)
 }
 
 #------------------------------------------------------------------------------
@@ -129,10 +121,6 @@ sub should_dump {
  return LinkedSpec::Trace::should_dump(@_)
 }
 
-
-sub _emit_parser_source_line {
- return LinkedSpec::Runtime::_emit_parser_source_line(@_)
-}
 
 #------------------------------------------------------------------------------
 # Function: get_dsl_context
