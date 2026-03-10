@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted plugin/runtime modernization slice completed against the legacy `.plg` adapter in `PPlugin`.
+- Key technical outcome:
+  - added `_plugin_project_root(...)`, `_legacy_plugin_search_roots(...)`, and `_legacy_plugin_files(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now enumerates plugin files through explicit cwd-first roots instead of brace-glob expansion,
+  - legacy `.plg` file enumeration is now sorted per root and deduped by file path.
+- Regression outcome:
+  - added `pplugin_legacy_plugin_search_roots_are_cwd_first_and_deduped`,
+  - added `pplugin_legacy_plugin_files_are_sorted_and_deduped`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/PPlugin.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (142 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: make legacy .plg file discovery deterministic` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge in `LinkedSpec::PluginBridge`.
 - Key technical outcome:
   - added `_normalize_plugin_name(...)` to `LinkedSpec::PluginBridge`,

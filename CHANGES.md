@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Plugin Runtime Slice: Make Legacy `.plg` File Discovery Deterministic
+## Summary
+Continued the plugin/runtime modernization track by replacing `PPlugin`'s brace-glob plugin-file discovery with explicit, deterministic cwd-first root enumeration and sorted `.plg` file lists.
+
+## Changed Files
+- Updated: `perl/PPlugin.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `PPlugin` legacy discovery:
+  - added `_plugin_project_root(...)` to compute the project-relative legacy plugin root,
+  - added `_legacy_plugin_search_roots(...)` to enumerate cwd-first legacy plugin roots explicitly,
+  - added `_legacy_plugin_files(...)` to enumerate `.plg` files per root in sorted order and dedupe duplicate file paths,
+  - `PPlugin::new(...)` now consumes `_legacy_plugin_files(...)` instead of brace-globbing two root patterns directly.
+- Preserved behavior:
+  - legacy `.plg` execution still searches the working directory and the project `plugin/` tree,
+  - plugin parsing/execution behavior remains unchanged for the phase0 corpus,
+  - duplicate plugin filenames in distinct roots still preserve cwd-first root precedence through stable per-root ordering.
+- Updated focused regression coverage:
+  - added `pplugin_legacy_plugin_search_roots_are_cwd_first_and_deduped`,
+  - added `pplugin_legacy_plugin_files_are_sorted_and_deduped`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/PPlugin.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=142`)
 ## 2026-03-10 - Plugin Runtime Slice: Normalize `PluginBridge` Dispatch to Explicit Plugin Names
 ## Summary
 Continued the plugin/runtime modernization track by making `LinkedSpec::PluginBridge` normalize full `AUTOLOAD` names into explicit plugin names before runtime dispatch, narrowing the compatibility seam toward a deterministic registry-style plugin contract.

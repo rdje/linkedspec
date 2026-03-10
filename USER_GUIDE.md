@@ -373,6 +373,8 @@ Likewise, validation and DSL-error handling now stay on `LinkedSpec::Validation`
 ## Legacy Plugin Bridge
 Generated parsers may still call legacy plugin handlers through `LinkedSpec::AUTOLOAD`. That compatibility path now delegates straight into `LinkedSpec::PluginBridge::_dispatch_autoload(...)`, which normalizes `LinkedSpec::method_name` into the explicit plugin name `method_name` before dispatch. The bridge remains legacy-only while the project moves toward explicit package-based plugin APIs.
 
+The current legacy `.plg` adapter in `PPlugin` still searches the working directory and the project `plugin/` directory, but it now enumerates those roots explicitly and lists `.plg` files in deterministic cwd-first sorted order. Treat that as compatibility behavior, not the long-term plugin architecture.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`

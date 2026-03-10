@@ -205,6 +205,65 @@ subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub
     is($load_calls, 0, 'PluginBridge does not load plugin runtime for invalid autoload names');
     is($exec_calls, 0, 'PluginBridge does not call exec callback for invalid autoload names');
 };
+subtest 'pplugin_legacy_plugin_search_roots_are_cwd_first_and_deduped' => sub {
+    plan tests => 2;
+
+    require File::Temp;
+    require PPlugin;
+
+    my $tmp_root = File::Temp::tempdir(CLEANUP => 1);
+    my $cwd_root = File::Spec->catdir($tmp_root, 'cwd');
+    my $project_root = File::Spec->catdir($tmp_root, 'project');
+    mkdir $cwd_root or die "Unable to create cwd-root '$cwd_root': $!";
+    mkdir $project_root or die "Unable to create project-root '$project_root': $!";
+    mkdir File::Spec->catdir($project_root, 'plugin') or die "Unable to create project plugin dir: $!";
+
+    my @roots = PPlugin::_legacy_plugin_search_roots($cwd_root, $project_root);
+    is_deeply(
+        \@roots,
+        [$cwd_root, File::Spec->catdir($project_root, 'plugin')],
+        'PPlugin legacy plugin search roots keep cwd first and project plugin dir second'
+    );
+
+    my $dedup_project_root = $tmp_root;
+    mkdir File::Spec->catdir($dedup_project_root, 'plugin') unless -d File::Spec->catdir($dedup_project_root, 'plugin');
+    my @deduped_roots = PPlugin::_legacy_plugin_search_roots(File::Spec->catdir($tmp_root, 'plugin'), $dedup_project_root);
+    is_deeply(
+        \@deduped_roots,
+        [File::Spec->catdir($tmp_root, 'plugin')],
+        'PPlugin legacy plugin search roots dedupe identical cwd/project plugin directories'
+    );
+};
+subtest 'pplugin_legacy_plugin_files_are_sorted_and_deduped' => sub {
+    plan tests => 3;
+
+    require File::Temp;
+    require PPlugin;
+
+    my $tmp_root = File::Temp::tempdir(CLEANUP => 1);
+    my $root_a = File::Spec->catdir($tmp_root, 'root_a');
+    my $root_b = File::Spec->catdir($tmp_root, 'root_b');
+    mkdir $root_a or die "Unable to create root_a '$root_a': $!";
+    mkdir $root_b or die "Unable to create root_b '$root_b': $!";
+
+    write_text(File::Spec->catfile($root_a, 'z_last.plg'), "plugin z\n");
+    write_text(File::Spec->catfile($root_a, 'a_first.plg'), "plugin a\n");
+    write_text(File::Spec->catfile($root_a, 'ignore.txt'), "skip\n");
+    write_text(File::Spec->catfile($root_b, 'b_only.plg'), "plugin b\n");
+
+    my @files = PPlugin::_legacy_plugin_files($root_a, $root_a, $root_b, File::Spec->catdir($tmp_root, 'missing'));
+    is_deeply(
+        \@files,
+        [
+            File::Spec->catfile($root_a, 'a_first.plg'),
+            File::Spec->catfile($root_a, 'z_last.plg'),
+            File::Spec->catfile($root_b, 'b_only.plg'),
+        ],
+        'PPlugin legacy plugin file enumeration is sorted per root, cwd-first, and deduped'
+    );
+    is(scalar @files, 3, 'PPlugin legacy plugin file enumeration excludes duplicate roots and non-plugin files');
+    ok((scalar grep { /\.txt\z/ } @files) == 0, 'PPlugin legacy plugin file enumeration only returns .plg files');
+};
 subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     plan tests => 5;
 
@@ -4247,6 +4306,14 @@ sub slurp {
     open(my $fh, '<', $path) or die "Cannot read '$path': $!";
     local $/;
     return <$fh>;
+}
+
+sub write_text {
+    my ($path, $content) = @_;
+    open(my $fh, '>', $path) or die "Cannot write '$path': $!";
+    print {$fh} $content;
+    close($fh);
+    return 1;
 }
 
 sub collect_tags {

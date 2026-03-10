@@ -10,15 +10,48 @@ use 5.010;
 
 use LinkedSpec;
 
+sub _plugin_project_root {
+ my $module_path = Cwd::abs_path($INC{__PACKAGE__.'.pm'});
+ my $module_dir = (File::Basename::fileparse($module_path))[1];
+ return Cwd::realpath(File::Spec->catdir($module_dir, File::Spec->updir()))
+}
+
+sub _legacy_plugin_search_roots {
+ my ($cwd_root, $project_root) = @_;
+ $cwd_root = File::Spec->rel2abs('.') unless defined $cwd_root;
+ $project_root = _plugin_project_root() unless defined $project_root;
+
+ my @roots = (
+  $cwd_root,
+  File::Spec->catdir($project_root, 'plugin'),
+ );
+ my %seen;
+ return grep { defined($_) && length($_) && !$seen{$_}++ } @roots
+}
+
+sub _legacy_plugin_files {
+ my @roots = @_;
+ @roots = _legacy_plugin_search_roots() unless @roots;
+
+ my @plugin_list;
+ foreach my $root (@roots) {
+  next unless defined $root && -d $root;
+  opendir(my $dh, $root) or next;
+  my @entries = sort grep { /\.plg\z/ && -f File::Spec->catfile($root, $_) } readdir($dh);
+  closedir($dh);
+  push @plugin_list, map { File::Spec->catfile($root, $_) } @entries;
+ }
+
+ my %seen;
+ return grep { !$seen{$_}++ } @plugin_list
+}
 
 sub new {
 my $class = ref $_[0] || $_[0];
 
 state $main_str = do { 
  my $get         = LinkedSpec::get_parser('pplugin');
- 
- my $top         = Cwd::realpath(File::Spec->catdir((File::Basename::fileparse(Cwd::abs_path($INC{__PACKAGE__.'.pm'})))[1], File::Spec->updir()));
- my @plugin_list = glob q({).join(',', map {"$_/*.plg"} File::Spec->rel2abs('.'), File::Spec->catdir($top, 'plugin')).q(});
+ my @plugin_list = _legacy_plugin_files();
 
  my @plugins;
  foreach my $cplugin (@plugin_list) {
@@ -66,4 +99,3 @@ sub AUTOLOAD {__PACKAGE__->new->exec($AUTOLOAD, @_)}
 sub DESTROY  {}
 
 1;
-

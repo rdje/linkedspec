@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Plugin/runtime modernization slice completed against the legacy `.plg` adapter in `PPlugin`.
+- Slice-selection rationale:
+  - the roadmap calls for moving away from implicit cwd/project-root globbing as the primary plugin runtime contract,
+  - `PPlugin` still discovered legacy plugin files through brace-glob expansion over two roots,
+  - extracting explicit helper stages gives the legacy adapter a deterministic file-order seam without changing current compatibility behavior.
+- Implementation scope:
+  - added `_plugin_project_root(...)`, `_legacy_plugin_search_roots(...)`, and `_legacy_plugin_files(...)` to `PPlugin`,
+  - replaced brace-glob enumeration in `PPlugin::new(...)` with sorted cwd-first helper enumeration and duplicate file-path filtering.
+- Regression addition/update:
+  - added `pplugin_legacy_plugin_search_roots_are_cwd_first_and_deduped`,
+  - added `pplugin_legacy_plugin_files_are_sorted_and_deduped`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/PPlugin.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=142`)
+## Session Notes (2026-03-10)
 - Plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge in `LinkedSpec::PluginBridge`.
 - Slice-selection rationale:
   - the roadmap calls for moving away from method-name extraction as the primary plugin runtime contract,
