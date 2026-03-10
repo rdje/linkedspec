@@ -264,6 +264,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: `LinkedSpec::PluginBridge` now normalizes full Perl autoload names into explicit plugin names before dispatching through its injected exec callback, so future plugin runtimes can consume deterministic plugin identifiers without depending on method-name extraction.
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now enumerates plugin search roots explicitly and lists `.plg` files in deterministic cwd-first sorted order instead of relying on brace-glob expansion.
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now builds its cached plugin registry through `_build_plugin_registry(...)`, preserving deterministic file-order override behavior while narrowing the registry construction seam for future runtime replacement.
+  - Landed follow-up: `PPlugin` now owns explicit normalized-name execution through `exec_plugin_name(...)`, and `LinkedSpec::PluginBridge` default runtime dispatch now uses that owner path directly while `PPlugin::exec(...)` remains as compatibility glue for older mixed-name callers.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.

@@ -68,6 +68,15 @@ sub _build_plugin_registry {
  return \%plugins
 }
 
+sub _normalize_plugin_name {
+ my ($autoload_or_subname) = @_;
+ my $display_name = defined($autoload_or_subname) ? $autoload_or_subname : '<undef>';
+ my ($plugin_name) = defined($autoload_or_subname) ? ($autoload_or_subname =~ /(\w+)$/o) : ();
+ die "(PPlugin::_normalize_plugin_name) -E- invalid plugin name '$display_name'"
+  unless defined $plugin_name && length $plugin_name;
+ return $plugin_name
+}
+
 sub new {
 my $class = ref $_[0] || $_[0];
 
@@ -83,18 +92,27 @@ state $main_str = do {
 
 
 sub get  {(ref $_[0] ? $_[0] : __PACKAGE__->new)->{$_[1]}}
-sub exec {
-my ($this, $autoload_or_subname) = splice @_, 0, 2;
+sub exec_plugin_name {
+my ($this, $plugin_name) = splice @_, 0, 2;
+   $this = ref($this) ? $this : __PACKAGE__->new;
 
- my ($method) = $autoload_or_subname =~ /(\w+)$/o;
- my $plugin = $this->get($method);
- 
- die "(PPlugin::exec) -E- Unknown plugin '$method' (<- $autoload_or_subname)," unless $plugin; 
+ die "(PPlugin::exec_plugin_name) -E- invalid explicit plugin name '$plugin_name'"
+  unless defined($plugin_name) && $plugin_name =~ /\A\w+\z/o;
+
+ my $plugin = $this->get($plugin_name);
+
+ die "(PPlugin::exec_plugin_name) -E- Unknown plugin '$plugin_name'" unless $plugin;
 
  goto &$plugin
 }
+sub exec {
+my ($this, $autoload_or_subname) = splice @_, 0, 2;
+ my $plugin_name = _normalize_plugin_name($autoload_or_subname);
+ $this = ref($this) ? $this : __PACKAGE__->new;
+ return $this->exec_plugin_name($plugin_name, @_)
+}
 
-sub AUTOLOAD {__PACKAGE__->new->exec($AUTOLOAD, @_)}
+sub AUTOLOAD {__PACKAGE__->new->exec_plugin_name(_normalize_plugin_name($AUTOLOAD), @_)}
 sub DESTROY  {}
 
 1;

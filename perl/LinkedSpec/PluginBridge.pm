@@ -18,12 +18,12 @@ sub _require_dep {
 
 sub _default_deps {
  return {
-  load_plugin_runtime => sub {
+ load_plugin_runtime => sub {
    my $ok = eval { require PPlugin; 1 };
    die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
    return 1
   },
-  exec_plugin => sub { return PPlugin->exec(@_) },
+  exec_plugin => sub { return PPlugin->exec_plugin_name(@_) },
  }
 }
 

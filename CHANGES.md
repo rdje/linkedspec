@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Runtime Slice: Route Bridge Exec Through Explicit `PPlugin` Plugin-Name Owner
+## Summary
+Continued the plugin/runtime modernization track by making `PPlugin` own explicit plugin-name execution through `exec_plugin_name(...)`, with `LinkedSpec::PluginBridge` now using that owner path directly while the older mixed-name `exec(...)` surface remains as compatibility glue.
+
+## Changed Files
+- Updated: `perl/PPlugin.pm`
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored legacy plugin execution ownership:
+  - added `PPlugin::exec_plugin_name(...)` as the explicit owner path for executing a plugin by normalized plugin name,
+  - added `PPlugin::_normalize_plugin_name(...)` so the older mixed-name `exec(...)` wrapper and `AUTOLOAD` compatibility path can normalize before delegating,
+  - `LinkedSpec::PluginBridge::_default_deps()` now dispatches through `PPlugin::exec_plugin_name(...)` instead of the older mixed-name wrapper.
+- Preserved behavior:
+  - `LinkedSpec::AUTOLOAD` still resolves through `LinkedSpec::PluginBridge`,
+  - the compatibility `PPlugin::exec(...)` surface still accepts older mixed autoload/subname inputs for direct callers,
+  - legacy `.plg` dispatch behavior remains unchanged for the phase0 corpus.
+- Updated focused regression coverage:
+  - added `plugin_bridge_default_exec_dep_uses_pplugin_explicit_name_owner`,
+  - added `pplugin_exec_wrapper_normalizes_to_explicit_name_owner`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/PPlugin.pm`
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=145`)
 ## 2026-03-11 - Plugin Runtime Slice: Extract Explicit Legacy Registry Builder
 ## Summary
 Continued the plugin/runtime modernization track by extracting legacy `.plg` registry construction in `PPlugin` into an explicit owner helper, so the compatibility adapter now exposes a narrower, testable registry seam without changing runtime behavior.

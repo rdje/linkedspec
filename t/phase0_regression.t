@@ -205,6 +205,40 @@ subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub
     is($load_calls, 0, 'PluginBridge does not load plugin runtime for invalid autoload names');
     is($exec_calls, 0, 'PluginBridge does not call exec callback for invalid autoload names');
 };
+subtest 'plugin_bridge_default_exec_dep_uses_pplugin_explicit_name_owner' => sub {
+    plan tests => 6;
+
+    require PPlugin;
+
+    my $deps = LinkedSpec::PluginBridge::_default_deps();
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($exec_calls, $captured_plugin_name, @captured_args) = (0, undef);
+
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
+        local *PPlugin::exec_plugin_name = sub {
+            my ($class_or_self, $plugin_name, @args) = @_;
+            ++$exec_calls;
+            ($captured_plugin_name, @captured_args) = ($plugin_name, @args);
+            return {
+                plugin_name => $plugin_name,
+                args => [@args],
+            };
+        };
+        $ret = $deps->{exec_plugin}->('synthetic_plugin', 'alpha', 'beta');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PluginBridge default exec dep succeeds while PPlugin exec wrapper is trapped')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_PPLUGIN_EXEC__/, 'PluginBridge default exec dep avoids the legacy mixed-name PPlugin exec wrapper');
+    is($exec_calls, 1, 'PluginBridge default exec dep calls the explicit PPlugin plugin-name owner exactly once');
+    is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge default exec dep forwards the normalized plugin name unchanged');
+    is_deeply(\@captured_args, [qw(alpha beta)], 'PluginBridge default exec dep forwards plugin arguments unchanged');
+    is_deeply($ret, { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'PluginBridge default exec dep preserves the explicit-owner return payload');
+};
 subtest 'pplugin_legacy_plugin_search_roots_are_cwd_first_and_deduped' => sub {
     plan tests => 2;
 
@@ -303,6 +337,37 @@ subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_fail
     is($registry->{bar}->(), 3, 'PPlugin explicit registry builder preserves non-duplicate plugin entries');
     ok(!exists $registry->{bad}, 'PPlugin explicit registry builder skips malformed plugin files');
     like($stdout, qr/\Q$bad_file\E/, 'PPlugin explicit registry builder reports skipped malformed plugin files');
+};
+subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
+    plan tests => 5;
+
+    require PPlugin;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($captured_self, $captured_plugin_name, @captured_args);
+
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *PPlugin::new = sub { bless {}, 'PPlugin' };
+        local *PPlugin::exec_plugin_name = sub {
+            my ($self, $plugin_name, @args) = @_;
+            ($captured_self, $captured_plugin_name, @captured_args) = ($self, $plugin_name, @args);
+            return {
+                plugin_name => $plugin_name,
+                args => [@args],
+            };
+        };
+        $ret = PPlugin->exec('LinkedSpec::synthetic_plugin', 'alpha', 'beta');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PPlugin compatibility exec wrapper succeeds while explicit owner path is trapped')
+        or diag(normalize_error($err));
+    ok(ref($captured_self) eq 'PPlugin', 'PPlugin compatibility exec wrapper resolves an object before delegating');
+    is($captured_plugin_name, 'synthetic_plugin', 'PPlugin compatibility exec wrapper normalizes mixed plugin names before delegating');
+    is_deeply(\@captured_args, [qw(alpha beta)], 'PPlugin compatibility exec wrapper forwards plugin arguments unchanged');
+    is_deeply($ret, { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'PPlugin compatibility exec wrapper preserves the explicit-owner return payload');
 };
 subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     plan tests => 5;

@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted plugin/runtime modernization slice completed against the legacy plugin-execution seam between `LinkedSpec::PluginBridge` and `PPlugin`.
+- Key technical outcome:
+  - added `PPlugin::exec_plugin_name(...)` as the explicit owner path for normalized plugin-name dispatch,
+  - added `PPlugin::_normalize_plugin_name(...)` so the older `PPlugin::exec(...)` and `AUTOLOAD` compatibility surfaces normalize before delegating,
+  - `LinkedSpec::PluginBridge::_default_deps()` now executes through `PPlugin::exec_plugin_name(...)` instead of `PPlugin::exec(...)`.
+- Regression outcome:
+  - added `plugin_bridge_default_exec_dep_uses_pplugin_explicit_name_owner`,
+  - added `pplugin_exec_wrapper_normalizes_to_explicit_name_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/PPlugin.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (145 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: route bridge exec through explicit PPlugin owner` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted plugin/runtime modernization slice completed against the legacy `.plg` registry builder in `PPlugin`.
 - Key technical outcome:
   - added `_build_plugin_registry(...)` to `PPlugin`,
