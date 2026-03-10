@@ -62,20 +62,6 @@ sub run_get {
 }
 
 #------------------------------------------------------------------------------
-# Function: run_get_from_args
-# Purpose : Compatibility wrapper that normalizes raw `Get` entrypoint
-#           arguments and delegates to `run_get(...)`.
-# Args    : ($spec_content_ref, %options)
-# Returns : parser coderef | descriptor hashref | undef
-#------------------------------------------------------------------------------
-sub run_get_from_args {
- my @args = @_;
- my $spec_content_ref = $args[0];
- my %option = @args[1 .. $#args];
- return run_get($spec_content_ref, \%option)
-}
-
-#------------------------------------------------------------------------------
 # Function: compile_spec_entry
 # Purpose : Compatibility wrapper around `LinkedSpec::SpecEntry` injected-state
 #           compilation for callers that still route through Runtime.

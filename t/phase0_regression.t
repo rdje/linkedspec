@@ -1110,6 +1110,28 @@ SPEC
     ok(defined($parser) && ref($parser) eq 'CODE', 'Get still returns parser coderef through direct Runtime::run_get delegation');
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through direct Runtime::run_get delegation still executes');
 };
+subtest 'runtime_run_get_avoids_legacy_raw_arg_wrapper' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get_from_args = sub { die "__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__\n" };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get succeeds without the legacy raw-arg wrapper') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__/, 'Runtime::run_get does not call the trapped legacy raw-arg wrapper');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'Runtime::run_get still returns descriptor hash directly');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'Runtime::run_get still preserves compiled handler coderef');
+};
 subtest 'runtime_compile_spec_entry_uses_injected_runtime_context' => sub {
     plan tests => 7;
 

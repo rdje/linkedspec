@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the legacy raw-argument runtime wrapper in `LinkedSpec::Runtime`.
+- Key technical outcome:
+  - removed `LinkedSpec::Runtime::run_get_from_args(...)`,
+  - active runtime entrypoints now normalize into `LinkedSpec::Runtime::run_get(...)` only,
+  - no live repo path still depends on the deleted raw-arg runtime wrapper.
+- Regression outcome:
+  - added `runtime_run_get_avoids_legacy_raw_arg_wrapper`,
+  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descr => 1 })` still returns a descriptor hash directly.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (136 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove runtime raw-arg wrapper` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the stale façade `spec_gdata(...)` helper in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed `LinkedSpec::spec_gdata(...)`,

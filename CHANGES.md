@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Legacy Runtime Raw-Arg Wrapper
+## Summary
+Reduced another stale runtime seam by removing `LinkedSpec::Runtime::run_get_from_args(...)` now that active public/runtime/parser-factory flows all normalize options before delegating into `LinkedSpec::Runtime::run_get(...)`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale runtime wrapper from `Runtime.pm`:
+  - deleted `LinkedSpec::Runtime::run_get_from_args(...)`,
+  - active runtime entrypoints continue to resolve through `LinkedSpec::Runtime::run_get(...)` with normalized hashref options supplied by `LinkedSpec::Get(...)` and `LinkedSpec::ParserFactory`.
+- Added focused regression coverage:
+  - `runtime_run_get_avoids_legacy_raw_arg_wrapper`
+  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descr => 1 })` still returns a descriptor hash directly through the active owner path.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=136`)
 ## 2026-03-10 - Phase 1A Slice: Remove Facade `spec_gdata` Helper
 ## Summary
 Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade-only `spec_gdata(...)` wrapper and regression-locking final descriptor `gdata` compilation to `LinkedSpec::Compiler`.

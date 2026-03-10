@@ -233,6 +233,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed: rule-level execution metadata + deterministic handler variant selection (`spec->{rule}{meta}`).
   - Landed: `LinkedSpec::Get(..., return_descr => 1)` descriptor-introspection mode for tooling.
   - Landed follow-up: `LinkedSpec::Get(...)` now normalizes flat option pairs locally and delegates straight to `LinkedSpec::Runtime::run_get(...)`, so the active public `Get` path no longer depends on the raw-arg compatibility wrapper `LinkedSpec::Runtime::run_get_from_args(...)`.
+  - Landed follow-up: the stale runtime wrapper `LinkedSpec::Runtime::run_get_from_args(...)` has been removed, and active runtime entrypoints now flow through normalized hashref options into `LinkedSpec::Runtime::run_get(...)`.
   - Landed follow-up: `LinkedSpec::get_parser(...)` now normalizes flat option pairs locally and passes a hashref into `LinkedSpec::ParserFactory::run_get_parser(...)`, so the active public parser path no longer depends on raw option-list normalization inside `ParserFactory.pm`.
   - Landed follow-up: `LinkedSpec::ParserFactory::run_get_parser(...)` now owns its default trace/resolution/compile dependency map, so `LinkedSpec::get_parser(...)` no longer depends on the façade-only `_parser_factory_deps()` helper.
   - Landed follow-up: `LinkedSpec::Compiler::spec_descr(...)` now owns the default `compile_spec_entry` callback, so `LinkedSpec::spec_descr(...)` is reduced to a pure façade delegate and no longer injects that default itself.

@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the legacy raw-argument runtime wrapper in `LinkedSpec::Runtime`.
+- Slice-selection rationale:
+  - `LinkedSpec::Get(...)`, `LinkedSpec::ParserFactory`, and the direct runtime owner path already normalized into `LinkedSpec::Runtime::run_get(...)`,
+  - no active repo caller still needed `run_get_from_args(...)`,
+  - removing the wrapper tightens the runtime surface and makes `run_get(...)` the only active runtime entrypoint owner.
+- Implementation scope:
+  - deleted `LinkedSpec::Runtime::run_get_from_args(...)` from `Runtime.pm`,
+  - left active runtime/parser generation flow on `LinkedSpec::Runtime::run_get(...)`.
+- Regression addition:
+  - added `runtime_run_get_avoids_legacy_raw_arg_wrapper`,
+  - the regression traps the removed wrapper name and verifies `Runtime::run_get(..., { return_descr => 1 })` still returns a descriptor hash with compiled handlers.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=136`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the stale façade `spec_gdata(...)` helper in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::Compiler::_build_final_descr(...)` already owned the default `spec_gdata` callback,
