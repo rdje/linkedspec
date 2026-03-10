@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Runtime Slice: Extract Explicit `PPlugin` Registry Loader Deps
+## Summary
+Continued the plugin/runtime modernization track by extracting legacy registry construction in `PPlugin::new(...)` behind an explicit dependency-owned loader seam, so the compatibility adapter no longer hardwires parser loading, plugin-file discovery, and registry assembly inline.
+
+## Changed Files
+- Updated: `perl/PPlugin.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored legacy plugin registry loading:
+  - added `_require_dep(...)`, `_default_deps()`, and `_load_legacy_registry(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now initializes its cached legacy registry through `_load_legacy_registry()` instead of calling `LinkedSpec::get_parser('pplugin')`, `_legacy_plugin_files(...)`, and `_build_plugin_registry(...)` inline,
+  - the default dependency map now makes parser loading, plugin-file discovery, and registry assembly explicit owner callbacks.
+- Preserved behavior:
+  - `PPlugin` still loads the `pplugin` parser through `LinkedSpec` by default,
+  - legacy `.plg` file discovery and registry assembly semantics remain unchanged for the phase0 corpus,
+  - the cached registry shape and dispatch behavior stay compatibility-stable.
+- Updated focused regression coverage:
+  - added `pplugin_load_legacy_registry_uses_explicit_dependency_callbacks`,
+  - added `pplugin_default_registry_deps_load_through_explicit_owner_paths`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/PPlugin.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=147`)
 ## 2026-03-11 - Plugin Runtime Slice: Route Bridge Exec Through Explicit `PPlugin` Plugin-Name Owner
 ## Summary
 Continued the plugin/runtime modernization track by making `PPlugin` own explicit plugin-name execution through `exec_plugin_name(...)`, with `LinkedSpec::PluginBridge` now using that owner path directly while the older mixed-name `exec(...)` surface remains as compatibility glue.

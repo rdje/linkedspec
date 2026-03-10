@@ -373,7 +373,7 @@ Likewise, validation and DSL-error handling now stay on `LinkedSpec::Validation`
 ## Legacy Plugin Bridge
 Generated parsers may still call legacy plugin handlers through `LinkedSpec::AUTOLOAD`. That compatibility path now delegates straight into `LinkedSpec::PluginBridge::_dispatch_autoload(...)`, which normalizes `LinkedSpec::method_name` into the explicit plugin name `method_name` before dispatch. The bridge remains legacy-only while the project moves toward explicit package-based plugin APIs.
 
-The current legacy `.plg` adapter in `PPlugin` still searches the working directory and the project `plugin/` directory, but it now enumerates those roots explicitly, lists `.plg` files in deterministic cwd-first sorted order, builds the cached registry through an explicit `_build_plugin_registry(...)` helper, and exposes normalized-name execution through `exec_plugin_name(...)`. The older `PPlugin::exec(...)` entry remains compatibility glue for mixed-name callers. Treat that as compatibility behavior, not the long-term plugin architecture.
+The current legacy `.plg` adapter in `PPlugin` still searches the working directory and the project `plugin/` directory, but it now enumerates those roots explicitly, lists `.plg` files in deterministic cwd-first sorted order, builds the cached registry through an explicit `_build_plugin_registry(...)` helper, initializes that cache through `_load_legacy_registry()` plus explicit default deps, and exposes normalized-name execution through `exec_plugin_name(...)`. The older `PPlugin::exec(...)` entry remains compatibility glue for mixed-name callers. Treat that as compatibility behavior, not the long-term plugin architecture.
 
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:

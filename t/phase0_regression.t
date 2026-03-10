@@ -338,6 +338,90 @@ subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_fail
     ok(!exists $registry->{bad}, 'PPlugin explicit registry builder skips malformed plugin files');
     like($stdout, qr/\Q$bad_file\E/, 'PPlugin explicit registry builder reports skipped malformed plugin files');
 };
+subtest 'pplugin_load_legacy_registry_uses_explicit_dependency_callbacks' => sub {
+    plan tests => 8;
+
+    require PPlugin;
+
+    my ($load_calls, $discover_calls, $build_calls) = (0, 0, 0);
+    my ($captured_get, @captured_files);
+    my ($ok_run, $registry, $err) = (0, undef, '');
+
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::get_parser = sub { die "__UNEXPECTED_LINKEDSPEC_GET_PARSER__\n" };
+        local *PPlugin::_legacy_plugin_files = sub { die "__UNEXPECTED_PPLUGIN_LEGACY_PLUGIN_FILES__\n" };
+        local *PPlugin::_build_plugin_registry = sub { die "__UNEXPECTED_PPLUGIN_BUILD_PLUGIN_REGISTRY__\n" };
+        $registry = PPlugin::_load_legacy_registry(
+            {
+                load_plugin_parser => sub {
+                    ++$load_calls;
+                    return sub { 'synthetic_parser' };
+                },
+                discover_plugin_files => sub {
+                    ++$discover_calls;
+                    return ['001_first.plg', '002_second.plg'];
+                },
+                build_plugin_registry => sub {
+                    ++$build_calls;
+                    ($captured_get, @captured_files) = @_;
+                    return {
+                        synthetic => sub { 1 },
+                    };
+                },
+            }
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PPlugin legacy registry loader succeeds while direct owner helpers are trapped')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_(?:LINKEDSPEC_GET_PARSER|PPLUGIN_(?:LEGACY_PLUGIN_FILES|BUILD_PLUGIN_REGISTRY))__/, 'PPlugin legacy registry loader avoids direct parser/discovery/registry helper calls when deps are injected');
+    is($load_calls, 1, 'PPlugin legacy registry loader invokes the injected parser-loader callback once');
+    is($discover_calls, 1, 'PPlugin legacy registry loader invokes the injected plugin-file discovery callback once');
+    is($build_calls, 1, 'PPlugin legacy registry loader invokes the injected registry-builder callback once');
+    ok(ref($captured_get) eq 'CODE', 'PPlugin legacy registry loader forwards the injected parser callback into the registry builder');
+    is_deeply(\@captured_files, ['001_first.plg', '002_second.plg'], 'PPlugin legacy registry loader forwards the discovered plugin files into the registry builder in order');
+    ok(ref($registry) eq 'HASH' && ref($registry->{synthetic}) eq 'CODE', 'PPlugin legacy registry loader preserves the injected registry payload');
+};
+subtest 'pplugin_default_registry_deps_load_through_explicit_owner_paths' => sub {
+    plan tests => 6;
+
+    require PPlugin;
+
+    my $deps = PPlugin::_default_deps();
+    my ($ok_run, $parser, $plugin_files, $registry, $err) = (0, undef, undef, undef, '');
+
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::get_parser = sub {
+            my ($spec_name) = @_;
+            return sub { return "parser:$spec_name" };
+        };
+        local *PPlugin::_legacy_plugin_files = sub { return ('001_first.plg', '002_second.plg') };
+        local *PPlugin::_build_plugin_registry = sub {
+            my ($get, @plugin_list) = @_;
+            return {
+                parser_result => $get->(),
+                files => [@plugin_list],
+            };
+        };
+
+        $parser = $deps->{load_plugin_parser}->();
+        $plugin_files = $deps->{discover_plugin_files}->();
+        $registry = $deps->{build_plugin_registry}->($parser, @$plugin_files);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PPlugin default registry deps execute without die') or diag(normalize_error($err));
+    ok(ref($parser) eq 'CODE', 'PPlugin default registry deps load a parser callback through LinkedSpec');
+    is_deeply($plugin_files, ['001_first.plg', '002_second.plg'], 'PPlugin default registry deps discover plugin files through the explicit owner helper');
+    ok(ref($registry) eq 'HASH', 'PPlugin default registry deps preserve the registry-builder payload');
+    is($registry->{parser_result}, 'parser:pplugin', 'PPlugin default parser-loader dep targets the pplugin spec explicitly');
+    is_deeply($registry->{files}, ['001_first.plg', '002_second.plg'], 'PPlugin default registry-builder dep forwards discovered plugin files unchanged');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 

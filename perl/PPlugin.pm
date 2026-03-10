@@ -10,6 +10,14 @@ use 5.010;
 
 use LinkedSpec;
 
+sub _require_dep {
+ my ($deps, $name) = @_;
+ my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+ die "(PPlugin::_require_dep) -E- missing dependency callback '$name'"
+  unless ref($cb) eq 'CODE';
+ return $cb
+}
+
 sub _plugin_project_root {
  my $module_path = Cwd::abs_path($INC{__PACKAGE__.'.pm'});
  my $module_dir = (File::Basename::fileparse($module_path))[1];
@@ -68,6 +76,29 @@ sub _build_plugin_registry {
  return \%plugins
 }
 
+sub _default_deps {
+ return {
+  load_plugin_parser => sub { return LinkedSpec::get_parser('pplugin') },
+  discover_plugin_files => sub { return [_legacy_plugin_files()] },
+  build_plugin_registry => sub { return _build_plugin_registry(@_) },
+ }
+}
+
+sub _load_legacy_registry {
+ my ($deps) = @_;
+ $deps = _default_deps() unless ref($deps) eq 'HASH';
+
+ my $load_plugin_parser = _require_dep($deps, 'load_plugin_parser');
+ my $discover_plugin_files = _require_dep($deps, 'discover_plugin_files');
+ my $build_plugin_registry = _require_dep($deps, 'build_plugin_registry');
+
+ my $get = $load_plugin_parser->();
+ my $plugin_list = $discover_plugin_files->();
+ $plugin_list = [$plugin_list] unless ref($plugin_list) eq 'ARRAY';
+
+ return $build_plugin_registry->($get, @$plugin_list)
+}
+
 sub _normalize_plugin_name {
  my ($autoload_or_subname) = @_;
  my $display_name = defined($autoload_or_subname) ? $autoload_or_subname : '<undef>';
@@ -80,11 +111,7 @@ sub _normalize_plugin_name {
 sub new {
 my $class = ref $_[0] || $_[0];
 
-state $main_str = do { 
- my $get         = LinkedSpec::get_parser('pplugin');
- my @plugin_list = _legacy_plugin_files();
- _build_plugin_registry($get, @plugin_list)
- };
+state $main_str = _load_legacy_registry();
 
 
  bless $main_str, $class;

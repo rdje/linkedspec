@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Plugin/runtime modernization slice completed against the legacy registry-construction boundary inside `PPlugin::new(...)`.
+- Slice-selection rationale:
+  - the roadmap calls for explicit plugin runtime seams instead of hardwired legacy construction paths,
+  - `PPlugin::new(...)` still initialized the cached legacy registry by calling parser loading, plugin-file discovery, and registry assembly inline,
+  - extracting a dependency-owned loader seam keeps compatibility behavior stable while narrowing the remaining implicit coupling to `LinkedSpec`.
+- Implementation scope:
+  - added `_require_dep(...)`, `_default_deps()`, and `_load_legacy_registry(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now builds its cached legacy registry through `_load_legacy_registry()`,
+  - default deps make `pplugin` parser loading, `.plg` discovery, and registry assembly explicit callbacks instead of inline calls.
+- Regression addition/update:
+  - added `pplugin_load_legacy_registry_uses_explicit_dependency_callbacks`,
+  - added `pplugin_default_registry_deps_load_through_explicit_owner_paths`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/PPlugin.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=147`)
+## Session Notes (2026-03-11)
 - Plugin/runtime modernization slice completed against the legacy plugin-execution boundary between `LinkedSpec::PluginBridge` and `PPlugin`.
 - Slice-selection rationale:
   - the roadmap calls for replacing mixed method-name extraction plus implicit dispatch with explicit plugin identifiers and deterministic runtime seams,

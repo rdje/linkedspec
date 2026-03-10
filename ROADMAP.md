@@ -265,6 +265,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now enumerates plugin search roots explicitly and lists `.plg` files in deterministic cwd-first sorted order instead of relying on brace-glob expansion.
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now builds its cached plugin registry through `_build_plugin_registry(...)`, preserving deterministic file-order override behavior while narrowing the registry construction seam for future runtime replacement.
   - Landed follow-up: `PPlugin` now owns explicit normalized-name execution through `exec_plugin_name(...)`, and `LinkedSpec::PluginBridge` default runtime dispatch now uses that owner path directly while `PPlugin::exec(...)` remains as compatibility glue for older mixed-name callers.
+  - Landed follow-up: `PPlugin::new(...)` now initializes its cached legacy registry through `_load_legacy_registry()` plus explicit default dependency callbacks (`load_plugin_parser`, `discover_plugin_files`, `build_plugin_registry`), so parser loading and registry setup are no longer hardwired inline in the constructor.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.

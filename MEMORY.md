@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted plugin/runtime modernization slice completed against the legacy registry-construction seam inside `PPlugin::new(...)`.
+- Key technical outcome:
+  - added `_require_dep(...)`, `_default_deps()`, and `_load_legacy_registry(...)` to `PPlugin`,
+  - `PPlugin::new(...)` now builds its cached legacy registry through the explicit `_load_legacy_registry()` seam instead of calling parser load/discovery/registry helpers inline,
+  - the default dependency map now makes `pplugin` parser loading, `.plg` discovery, and registry assembly explicit owner callbacks.
+- Regression outcome:
+  - added `pplugin_load_legacy_registry_uses_explicit_dependency_callbacks`,
+  - added `pplugin_default_registry_deps_load_through_explicit_owner_paths`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/PPlugin.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (147 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: extract explicit PPlugin registry loader deps` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted plugin/runtime modernization slice completed against the legacy plugin-execution seam between `LinkedSpec::PluginBridge` and `PPlugin`.
 - Key technical outcome:
   - added `PPlugin::exec_plugin_name(...)` as the explicit owner path for normalized plugin-name dispatch,
