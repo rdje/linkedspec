@@ -358,7 +358,7 @@ Descriptor summary fields:
 - `meta.action_rewriter_migration.language_agnostic_blocked_rules_by_priority`
 - `meta.action_rewriter_migration.language_agnostic_top_blocked_rule`
 
-Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior.
+Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 
 Likewise, final descriptor assembly keeps its `gdata` compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `spec_gdata` callback or depend on an older `LinkedSpec::spec_gdata(...)` façade helper.
 

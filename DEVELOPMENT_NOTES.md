@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the stale façade `spec_entry(...)` helper in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Compiler::spec_descr(...)` and `LinkedSpec::Runtime::run_get(...)` already defaulted rule-entry compilation through `LinkedSpec::SpecEntry::compile_spec_entry(...)`,
+  - no active repo caller still needed the `LinkedSpec.pm` wrapper name,
+  - removing the wrapper tightens the façade surface and keeps rule-entry compilation owned entirely by `SpecEntry.pm`.
+- Implementation scope:
+  - deleted `LinkedSpec::spec_entry(...)` from `LinkedSpec.pm`,
+  - left active rule-entry compilation on `LinkedSpec::SpecEntry::compile_spec_entry(...)`.
+- Regression addition:
+  - added `spec_descr_paths_avoid_linkedspec_spec_entry_facade`,
+  - the regression traps the removed façade helper name and verifies both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still build compiled handlers and preserve selected handler metadata.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=137`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the legacy raw-argument runtime wrapper in `LinkedSpec::Runtime`.
 - Slice-selection rationale:
   - `LinkedSpec::Get(...)`, `LinkedSpec::ParserFactory`, and the direct runtime owner path already normalized into `LinkedSpec::Runtime::run_get(...)`,

@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Facade `spec_entry` Helper
+## Summary
+Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade-only `spec_entry(...)` wrapper and regression-locking rule-entry compilation to `LinkedSpec::SpecEntry`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale rule-entry delegation from `LinkedSpec.pm`:
+  - deleted `LinkedSpec::spec_entry(...)`,
+  - active rule-entry compilation continues to resolve through `LinkedSpec::SpecEntry::compile_spec_entry(...)` via compiler-owned defaults.
+- Added focused regression coverage:
+  - `spec_descr_paths_avoid_linkedspec_spec_entry_facade`
+  - the regression traps the removed façade helper name and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still build compiled handlers through the `SpecEntry.pm` owner path.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=137`)
 ## 2026-03-10 - Phase 1A Slice: Remove Legacy Runtime Raw-Arg Wrapper
 ## Summary
 Reduced another stale runtime seam by removing `LinkedSpec::Runtime::run_get_from_args(...)` now that active public/runtime/parser-factory flows all normalize options before delegating into `LinkedSpec::Runtime::run_get(...)`.

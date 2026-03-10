@@ -1192,6 +1192,38 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get preserves selected handler metadata');
 };
+subtest 'spec_descr_paths_avoid_linkedspec_spec_entry_facade' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for LinkedSpec spec_entry facade bypass test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for LinkedSpec spec_entry facade bypass test');
+
+    my ($compiled, $descr, $ok_run, $err) = (undef, undef, 0, '');
+    my $spec_content_for_get = $spec_content;
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::spec_entry = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__\n" };
+        $compiled = LinkedSpec::spec_descr($retv);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'default spec-entry owner paths succeed without the LinkedSpec spec_entry facade')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__/, 'default spec-entry owner paths do not call the trapped LinkedSpec spec_entry facade');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr default callback still builds compiled rule hash without the facade');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr still exposes runtime handler coderef without the facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the LinkedSpec spec_entry facade');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the facade');
+    is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the facade');
+};
 subtest 'compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context' => sub {
     plan tests => 7;
 

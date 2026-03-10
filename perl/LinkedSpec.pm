@@ -400,17 +400,6 @@ sub _build_rule_ir_emit_context {
 }
 
 #------------------------------------------------------------------------------
-# Function: spec_entry
-# Purpose : Compile one parsed rule entry through staged RuleIR flow and return
-#           a final (label, rule_info_hashref) pair for descriptor assembly.
-# Args    : ($einfo)
-# Returns : ($label, $rule_info_hashref)
-#------------------------------------------------------------------------------
-sub spec_entry {
- return LinkedSpec::SpecEntry::compile_spec_entry(@_)
-}
-
-#------------------------------------------------------------------------------
 # Function: _find_unresolved_action_helpers
 # Purpose : Detect helper forms that remain unresolved after rewrite/lowering
 #           and report both counts and statement-level events.
