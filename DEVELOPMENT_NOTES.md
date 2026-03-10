@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against the dead internal `Compiler`/`RuleIR`/action-contract delegate block in `LinkedSpec.pm`.
+- Slice-selection rationale:
+  - `LinkedSpec::Compiler`, `LinkedSpec::SpecEntry`, `LinkedSpec::RuleIR`, and `LinkedSpec::ActionRewriter` already owned the active descriptor/rule-compilation path,
+  - the remaining `LinkedSpec.pm` helpers were definition-only delegates with no live repo callers,
+  - removing them tightens the façade surface without changing the public entrypoints `Get(...)`, `spec_descr(...)`, or `call_spec_handler_subst(...)`.
+- Implementation scope:
+  - deleted the stale internal `LinkedSpec.pm` delegates for descriptor-level migration summary, action-contract defaults, RuleIR collection/planning/validation, and emit-context assembly,
+  - added a focused seam lock that traps those removed names while exercising both `spec_descr(...)` and `Get(..., return_descr => 1)`.
+- Regression addition:
+  - added `spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade`,
+  - the regression proves default rule-compilation and descriptor-assembly paths no longer depend on any of the removed internal delegate names.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=138`)
+## Session Notes (2026-03-10)
 - Phase 1A cleanup slice completed against the dead internal ActionRewriter delegate block in `LinkedSpec.pm`.
 - Slice-selection rationale:
   - `LinkedSpec::RuleIR::EmitContext` and `LinkedSpec::ActionRewriter` already owned the active rewrite/scanner/canonicalization path,

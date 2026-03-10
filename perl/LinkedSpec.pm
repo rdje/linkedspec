@@ -266,16 +266,6 @@ sub extract_regex_literals_from_rule_rhs {
 
 
 #------------------------------------------------------------------------------
-# Function: _build_action_rewriter_migration_summary
-# Purpose : Build descriptor-level migration summary from per-rule action_rewriter
-#           metadata so roadmap follow-up can prioritize high-impact blockers.
-# Args    : ($spec_hashref)
-# Returns : hashref summary
-#------------------------------------------------------------------------------
-sub _build_action_rewriter_migration_summary {
- return LinkedSpec::Compiler::_build_action_rewriter_migration_summary(@_)
-}
-#------------------------------------------------------------------------------
 # Function: Get
 # Purpose : Compile a .spec source into a runnable parser coderef (or return
 #           descriptor/parse-only outputs based on options).
@@ -290,28 +280,6 @@ sub Get {
 }
 
 #------------------------------------------------------------------------------
-# Function: _select_rule_handler_variant
-# Purpose : Deterministically map a rule shape (node type + code mix) to the
-#           handler template variant that should emit runtime behavior.
-# Args    : ($node_type, $acode_count, $bcode_count, $regex_count)
-# Returns : variant id string
-#------------------------------------------------------------------------------
-sub _select_rule_handler_variant {
- return LinkedSpec::RuleIR::_select_rule_handler_variant(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _build_rule_execution_meta
-# Purpose : Build normalized metadata describing how a rule executes, including
-#           action mode, selected variant and loop behavior.
-# Args    : named args hash
-# Returns : hashref metadata
-#------------------------------------------------------------------------------
-sub _build_rule_execution_meta {
- return LinkedSpec::RuleIR::_build_rule_execution_meta(@_)
-}
-
-#------------------------------------------------------------------------------
 # Function: spec_descr
 # Purpose : Convert parsed bootstrap entries into the descriptor's `spec` hash
 #           (rule label => compiled rule info).
@@ -320,83 +288,6 @@ sub _build_rule_execution_meta {
 #------------------------------------------------------------------------------
 sub spec_descr {
  return LinkedSpec::Compiler::spec_descr(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _action_contract_deps
-# Purpose : Provide explicit lowering callback dependencies for contract
-#           assembly so contract definition ownership can live outside
-#           LinkedSpec.pm without hidden callback indirection.
-# Args    : none
-# Returns : hashref callback dependency map
-#------------------------------------------------------------------------------
-sub _action_contract_deps {
- return LinkedSpec::ActionRewriter::_action_contract_deps(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _build_action_lowering_contracts
-# Purpose : Declare helper-lowering contracts (scan pattern + lowering rewrite
-#           semantics + IR identity) for action rewriting.
-# Args    : ($label)
-# Returns : arrayref of contract hashes
-#------------------------------------------------------------------------------
-sub _build_action_lowering_contracts {
- return LinkedSpec::ActionRewriter::_build_action_lowering_contracts(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _collect_rule_ir
-# Purpose : Normalize parsed bootstrap entry tuples into a structured RuleIR
-#           payload consumed by planning/validation/emission stages.
-# Args    : ($einfo)
-# Returns : hashref RuleIR
-#------------------------------------------------------------------------------
-sub _collect_rule_ir {
- return LinkedSpec::RuleIR::_collect_rule_ir(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _plan_rule_ir_meta
-# Purpose : Derive deterministic execution metadata from RuleIR counts/types.
-# Args    : ($rule_ir)
-# Returns : hashref execution metadata
-#------------------------------------------------------------------------------
-sub _plan_rule_ir_meta {
- return LinkedSpec::RuleIR::_plan_rule_ir_meta(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _validate_rule_ir_or_exit
-# Purpose : Enforce rule-shape invariants before emission (notably disallowing
-#           mixed ACTION + BLIND CALL forms in one rule).
-# Args    : ($rule_ir, $rule_meta)
-# Returns : 1 on success, 0 on validation failure
-#------------------------------------------------------------------------------
-sub _validate_rule_ir_or_exit {
- return LinkedSpec::RuleIR::_validate_rule_ir_or_exit(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _normalize_rule_code_chunks
-# Purpose : Rewrite and join lifecycle code chunks while accumulating rewrite
-#           diagnostics across each transformed chunk.
-# Args    : ($label, $chunks, $rewrite_diag_acc, $rewrite_rules)
-# Returns : normalized code string
-#------------------------------------------------------------------------------
-sub _normalize_rule_code_chunks {
- return LinkedSpec::RuleIR::_normalize_rule_code_chunks(@_)
-}
-
-#------------------------------------------------------------------------------
-# Function: _build_rule_ir_emit_context
-# Purpose : Build fully-rewritten emit context (ACODE/BCODE/gdata/lifecycle
-#           chunks) plus rich action-rewriter diagnostics metadata.
-# Args    : ($rule_ir)
-# Returns : hashref emit context
-#------------------------------------------------------------------------------
-sub _build_rule_ir_emit_context {
- return LinkedSpec::RuleIR::_build_rule_ir_emit_context(@_)
 }
 
 #------------------------------------------------------------------------------

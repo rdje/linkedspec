@@ -37,6 +37,24 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against the dead internal `Compiler`/`RuleIR`/action-contract delegate block in `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed the stale internal `LinkedSpec.pm` delegates for descriptor-level migration summary, action-contract defaults, RuleIR collection/planning/validation, and emit-context assembly,
+  - active descriptor/rule-compilation flow now remains on `LinkedSpec::Compiler`, `LinkedSpec::SpecEntry`, `LinkedSpec::RuleIR`, and `LinkedSpec::ActionRewriter`,
+  - no live repo path still depends on the deleted internal delegate names.
+- Regression outcome:
+  - added `spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade`,
+  - the regression traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descr => 1)` still succeed through the owner modules only.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (138 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead internal ruleir and descriptor delegate block` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A cleanup slice completed against the dead internal ActionRewriter delegate block in `LinkedSpec.pm`.
 - Key technical outcome:
   - removed the stale internal `LinkedSpec.pm` delegates for unresolved-helper scanning, rewrite-rule construction, canonical event construction, statement splitting, canonical lowering, and rewrite diagnostics accumulation,

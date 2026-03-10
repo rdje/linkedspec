@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Dead Internal RuleIR and Descriptor Delegate Block
+## Summary
+Reduced another stale `LinkedSpec.pm` seam by removing the dead internal `Compiler`/`RuleIR`/action-contract delegate block now that active descriptor/rule-compilation flow already stays on the owner modules.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale internal delegates from `LinkedSpec.pm`:
+  - deleted `_build_action_rewriter_migration_summary(...)`
+  - deleted `_action_contract_deps(...)`
+  - deleted `_build_action_lowering_contracts(...)`
+  - deleted `_select_rule_handler_variant(...)`
+  - deleted `_build_rule_execution_meta(...)`
+  - deleted `_collect_rule_ir(...)`
+  - deleted `_plan_rule_ir_meta(...)`
+  - deleted `_validate_rule_ir_or_exit(...)`
+  - deleted `_normalize_rule_code_chunks(...)`
+  - deleted `_build_rule_ir_emit_context(...)`
+- Preserved behavior:
+  - `LinkedSpec::spec_descr(...)` still compiles rules through `LinkedSpec::Compiler` plus `LinkedSpec::SpecEntry`,
+  - `LinkedSpec::Get(..., return_descr => 1)` still exposes compiled handlers, selected handler metadata, and descriptor-level action-rewriter migration summary.
+- Added focused regression coverage:
+  - `spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade`
+  - the seam lock traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descr => 1)` succeed through the owner modules only.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=138`)
 ## 2026-03-10 - Phase 1A Slice: Remove Dead Internal ActionRewriter Facade Block
 ## Summary
 Reduced another stale `LinkedSpec.pm` seam by removing the dead internal ActionRewriter delegate block now that active rewrite/scanner/canonicalization flow already stays on `LinkedSpec::ActionRewriter` and `LinkedSpec::RuleIR::EmitContext`.

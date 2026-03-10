@@ -1225,6 +1225,48 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the facade');
 };
+subtest 'spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for removed LinkedSpec RuleIR/internal facade bypass test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for removed LinkedSpec RuleIR/internal facade bypass test');
+
+    my ($compiled, $descr, $ok_run, $err) = (undef, undef, 0, '');
+    my $spec_content_for_get = $spec_content;
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::_build_action_rewriter_migration_summary = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ACTION_REWRITER_MIGRATION_SUMMARY__\n" };
+        local *LinkedSpec::_action_contract_deps = sub { die "__UNEXPECTED_LINKEDSPEC_ACTION_CONTRACT_DEPS__\n" };
+        local *LinkedSpec::_build_action_lowering_contracts = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ACTION_LOWERING_CONTRACTS__\n" };
+        local *LinkedSpec::_select_rule_handler_variant = sub { die "__UNEXPECTED_LINKEDSPEC_SELECT_RULE_HANDLER_VARIANT__\n" };
+        local *LinkedSpec::_build_rule_execution_meta = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_RULE_EXECUTION_META__\n" };
+        local *LinkedSpec::_collect_rule_ir = sub { die "__UNEXPECTED_LINKEDSPEC_COLLECT_RULE_IR__\n" };
+        local *LinkedSpec::_plan_rule_ir_meta = sub { die "__UNEXPECTED_LINKEDSPEC_PLAN_RULE_IR_META__\n" };
+        local *LinkedSpec::_validate_rule_ir_or_exit = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_IR_OR_EXIT__\n" };
+        local *LinkedSpec::_normalize_rule_code_chunks = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_RULE_CODE_CHUNKS__\n" };
+        local *LinkedSpec::_build_rule_ir_emit_context = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_RULE_IR_EMIT_CONTEXT__\n" };
+        $compiled = LinkedSpec::spec_descr($retv);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'spec_descr and Get succeed without the removed LinkedSpec RuleIR/internal facade helpers')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'spec_descr and Get do not call the trapped removed LinkedSpec RuleIR/internal facade helpers');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr still builds compiled rule hash without the removed internal facade');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr still exposes runtime handler coderef without the removed internal facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the removed internal facade');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the removed internal facade');
+    is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the removed internal facade');
+    ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor build through Get still exposes action-rewriter migration summary without the removed internal facade');
+};
 subtest 'compiler_run_get_pipeline_uses_injected_bootstrap_parse_and_runtime_context' => sub {
     plan tests => 7;
 
