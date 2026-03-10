@@ -1223,6 +1223,28 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-owned default pipeline callbacks still return descriptor hash through Runtime::run_get');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through Runtime::run_get still preserves compiled handler coderef');
 };
+subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_run_bootstrap_parse = sub { die "__UNEXPECTED_COMPILER_RUN_BOOTSTRAP_PARSE__\n" };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds without the legacy compiler bootstrap helper') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_COMPILER_RUN_BOOTSTRAP_PARSE__/, 'compiler pipeline does not call the trapped legacy compiler bootstrap helper');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the legacy compiler bootstrap helper');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned without the legacy compiler bootstrap helper still preserves compiled handler coderef');
+};
 subtest 'run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner' => sub {
     plan tests => 5;
 

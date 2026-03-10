@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A cleanup slice completed against stale bootstrap parsing scaffolding in `Compiler.pm`.
+- Slice-selection rationale:
+  - bootstrap parsing had already been reassigned to `LinkedSpec::BootstrapSpec`,
+  - `LinkedSpec::Compiler::_run_bootstrap_parse(...)` was left behind as dead compatibility-era scaffolding,
+  - removing it tightens the compiler surface and makes the active owner path explicit without changing behavior.
+- Implementation scope:
+  - deleted the stale `LinkedSpec::Compiler::_run_bootstrap_parse(...)` helper,
+  - left the active bootstrap parse flow on `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)`.
+- Regression addition:
+  - added `compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper`,
+  - the regression traps the old compiler-local helper name and verifies `Runtime::run_get(...)` still returns a valid descriptor through the active BootstrapSpec-owned path.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=133`)
+## Session Notes (2026-03-10)
 - Started the plugin/runtime modernization track with a no-behavior-change compatibility-shim slice in `LinkedSpec::PluginBridge`.
 - Slice-selection rationale:
   - the roadmap already treats `AUTOLOAD` + `.plg` as legacy compatibility that should eventually be replaced by explicit package-based plugins,

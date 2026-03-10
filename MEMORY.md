@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A cleanup slice completed against stale bootstrap parsing scaffolding in `Compiler.pm`.
+- Key technical outcome:
+  - removed the dead `LinkedSpec::Compiler::_run_bootstrap_parse(...)` helper,
+  - active bootstrap parsing remains owned exclusively by `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)`,
+  - the compiler surface is smaller and no active path relies on the removed helper name.
+- Regression outcome:
+  - added `compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper`,
+  - the regression traps the old compiler-local helper name and proves `Runtime::run_get(...)` still returns a valid descriptor through the active BootstrapSpec-owned path.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (133 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove stale compiler bootstrap helper` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted plugin/runtime modernization slice completed against the legacy `AUTOLOAD` compatibility bridge.
 - Key technical outcome:
   - `LinkedSpec::PluginBridge` now owns explicit plugin-runtime load/exec dependency callbacks through `_dispatch_autoload(...)`,

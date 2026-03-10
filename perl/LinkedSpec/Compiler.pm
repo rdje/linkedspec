@@ -23,18 +23,6 @@ use constant {
  DUMP_DEBUG  => LinkedSpec::Trace::DUMP_DEBUG(),
 };
 
-sub _run_bootstrap_parse {
- my ($spec_descr, $bootstrap_rule_index, $spec_content_ref, $gdata) = @_;
- return LinkedSpec::BootstrapSpec::run_bootstrap_parse(
-  $spec_content_ref,
-  {
-   spec_descr => $spec_descr,
-   bootstrap_rule_index => $bootstrap_rule_index,
-   gdata => $gdata,
-  }
- )
-}
-
 sub _require_dep {
  my ($deps, $name) = @_;
  my $value = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;

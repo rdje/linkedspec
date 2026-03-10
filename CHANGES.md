@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-10 - Phase 1A Slice: Remove Stale Compiler Bootstrap Helper
+## Summary
+Reduced stale compiler scaffolding by removing the unused `LinkedSpec::Compiler::_run_bootstrap_parse(...)` helper now that bootstrap parsing is fully owned by `LinkedSpec::BootstrapSpec`, and regression-locking the active pipeline to that owner path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale compiler-local bootstrap parsing glue:
+  - deleted `LinkedSpec::Compiler::_run_bootstrap_parse(...)`,
+  - active bootstrap parsing continues to resolve through `LinkedSpec::BootstrapSpec::run_bootstrap_parse(...)`.
+- Added focused regression coverage:
+  - `compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper`
+  - the regression traps the removed compiler-local helper name and proves `Runtime::run_get(...)` still returns a valid descriptor through the active BootstrapSpec-owned path.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=133`)
 ## 2026-03-10 - Plugin Runtime Slice: Add Explicit `PluginBridge` Runtime Deps
 ## Summary
 Started the plugin/runtime modernization track in code by making `LinkedSpec::PluginBridge` own explicit plugin-runtime load/exec dependency callbacks, so future module-based plugin runtime work can replace `PPlugin` without changing `LinkedSpec::AUTOLOAD`.

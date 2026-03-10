@@ -364,6 +364,8 @@ Likewise, final descriptor assembly keeps its `gdata` compilation defaults insid
 
 The same applies to the full compile pipeline: `LinkedSpec::Compiler::run_get_pipeline(...)` owns its default bootstrap-parse and rule-compilation callbacks internally, while `LinkedSpec::Runtime::run_get(...)` only provides the mutable runtime context needed for parser-source capture and `top_rule` propagation.
 
+Bootstrap parsing is now owned exclusively by `LinkedSpec::BootstrapSpec` on the active path; callers should not depend on older compiler-local bootstrap helper internals.
+
 ## Legacy Plugin Bridge
 Generated parsers may still call legacy plugin handlers through `LinkedSpec::AUTOLOAD`. That compatibility path is bridged internally via `LinkedSpec::PluginBridge` and remains legacy-only while the project moves toward explicit package-based plugin APIs.
 
