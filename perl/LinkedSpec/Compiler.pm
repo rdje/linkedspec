@@ -317,9 +317,13 @@ sub run_get_pipeline {
  $option = {} unless ref($option) eq 'HASH';
  $deps = {} unless ref($deps) eq 'HASH';
 
- my $bootstrap_parse = _require_dep($deps, 'bootstrap_parse');
- my $compile_spec_entry = _require_dep($deps, 'compile_spec_entry');
  my $runtime_ctx = _require_runtime_ctx($deps);
+ my $bootstrap_parse = exists $deps->{bootstrap_parse}
+  ? _require_dep($deps, 'bootstrap_parse')
+  : \&LinkedSpec::BootstrapSpec::run_bootstrap_parse;
+ my $compile_spec_entry = exists $deps->{compile_spec_entry}
+  ? _require_dep($deps, 'compile_spec_entry')
+  : sub { return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx }) };
  my $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
 
  die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"

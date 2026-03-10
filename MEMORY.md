@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-10)
+- Uncommitted Phase 1A modularization slice completed against the compiler/runtime default-callback boundary in `run_get_pipeline(...)`.
+- Key technical outcome:
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` now owns the default `bootstrap_parse` and `compile_spec_entry` callbacks,
+  - `LinkedSpec::Runtime::run_get(...)` now injects only `runtime_ctx` for mutable per-run parser state,
+  - explicit callback injection remains available for focused tests and future internal refactors.
+- Regression outcome:
+  - added `runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner`,
+  - the regression traps `LinkedSpec::Compiler::run_get_pipeline(...)` and proves `Runtime::run_get(...)` no longer injects `bootstrap_parse` or `compile_spec_entry` while still returning a valid descriptor hash.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (130 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: move pipeline default callbacks into Compiler` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-10)
 - Uncommitted Phase 1A modularization slice completed against the compiler-owned final-descriptor `spec_gdata` callback boundary.
 - Key technical outcome:
   - `LinkedSpec::Compiler::_build_final_descr(...)` now owns the default `spec_gdata` callback,

@@ -1135,6 +1135,39 @@ SPEC
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
+subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $orig_run_get_pipeline = \&LinkedSpec::Compiler::run_get_pipeline;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my ($saw_runtime_ctx, $saw_bootstrap_parse_key, $saw_compile_spec_entry_key);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub {
+            my ($spec_content_ref, $option, $deps) = @_;
+            $saw_runtime_ctx = ref($deps->{runtime_ctx}) eq 'HASH';
+            $saw_bootstrap_parse_key = exists $deps->{bootstrap_parse};
+            $saw_compile_spec_entry_key = exists $deps->{compile_spec_entry};
+            return $orig_run_get_pipeline->(@_);
+        };
+
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get succeeds while Compiler::run_get_pipeline delegation is trapped') or diag(normalize_error($err));
+    ok($saw_runtime_ctx, 'Runtime::run_get still injects runtime_ctx into the compiler pipeline');
+    ok(!$saw_bootstrap_parse_key, 'Runtime::run_get no longer injects bootstrap_parse into the compiler pipeline');
+    ok(!$saw_compile_spec_entry_key, 'Runtime::run_get no longer injects compile_spec_entry into the compiler pipeline');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-owned default pipeline callbacks still return descriptor hash through Runtime::run_get');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through Runtime::run_get still preserves compiled handler coderef');
+};
 subtest 'run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner' => sub {
     plan tests => 5;
 

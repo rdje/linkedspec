@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-10)
+- Phase 1A no-behavior-change modularization slice completed against the compiler/runtime default-callback boundary in `run_get_pipeline(...)`.
+- Slice-selection rationale:
+  - `Runtime::run_get(...)` still injected `bootstrap_parse` and `compile_spec_entry` into `Compiler::run_get_pipeline(...)` even though the owning modules already lived in `Compiler.pm`, `BootstrapSpec.pm`, and `SpecEntry.pm`,
+  - those defaults belong with the compiler pipeline owner rather than the runtime wrapper,
+  - moving them narrows `Runtime::run_get(...)` to the single mutable-state concern it still legitimately owns.
+- Implementation scope:
+  - updated `LinkedSpec::Compiler::run_get_pipeline(...)` to default `bootstrap_parse` and `compile_spec_entry` internally,
+  - simplified `LinkedSpec::Runtime::run_get(...)` to inject only `runtime_ctx`,
+  - removed the now-unused `LinkedSpec::BootstrapSpec` import from `Runtime.pm`.
+- Regression addition:
+  - added `runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner`,
+  - the regression traps `LinkedSpec::Compiler::run_get_pipeline(...)` and verifies `Runtime::run_get(...)` now delegates without injecting `bootstrap_parse` or `compile_spec_entry` while still returning a working descriptor hash.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=130`)
+## Session Notes (2026-03-10)
 - Phase 1A no-behavior-change modularization slice completed against the compiler-owned final-descriptor `spec_gdata` callback seam.
 - Slice-selection rationale:
   - `run_get_pipeline(...)` still threaded `\&spec_gdata` explicitly into `_build_final_descr(...)` even though both sides already live in `Compiler.pm`,

@@ -8,7 +8,6 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::BootstrapSpec ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::SpecEntry ();
 
@@ -57,8 +56,6 @@ sub run_get {
   $spec_content_ref,
   $option,
   {
-   bootstrap_parse => \&LinkedSpec::BootstrapSpec::run_bootstrap_parse,
-   compile_spec_entry => sub { return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx }) },
    runtime_ctx => $runtime_ctx,
   }
  )
