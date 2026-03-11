@@ -2475,6 +2475,29 @@ subtest 'action_rewriter_avoids_deps_array_pipeline_dep_builder' => sub {
     ok(defined($lowered), 'ActionRewriter still returns lowered array-pipeline output through the ArrayPipeline-owned default deps');
     is($lowered, '@items = grep { length($_) } @items', 'ActionRewriter preserves array-pipeline lowering after moving default deps into ArrayPipeline');
 };
+subtest 'action_rewriter_avoids_deps_control_flow_dep_builder' => sub {
+    plan tests => 7;
+
+    my ($ok_run, $err, $if_stmt, $print_stmt, $ctx) = (0, '', undef, undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::control_flow_deps_for_package = sub { die "__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__\n" };
+        $ctx = { if_stack => [], switch_stack => [], switch_counter => 0, rewrite_rules => [] };
+        $if_stmt = LinkedSpec::ActionRewriter::_lower_if_flow_statement('if(is_empty(array(items)))', $ctx);
+        $print_stmt = LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter control-flow lowering succeeds without the removed Deps control-flow dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_CONTROL_FLOW_DEPS__/, 'ActionRewriter does not call the trapped Deps control-flow dep builder');
+    ok(defined($if_stmt), 'ActionRewriter still returns lowered if output through the ControlFlow-owned default deps');
+    is($if_stmt, 'if ((!@items)) {', 'ActionRewriter preserves if-flow lowering after moving default deps into ControlFlow');
+    is(scalar(@{$ctx->{if_stack} || []}), 1, 'ActionRewriter preserves if-stack mutation after moving default deps into ControlFlow');
+    ok(defined($print_stmt), 'ActionRewriter still returns lowered print output through the ControlFlow-owned default deps');
+    is($print_stmt, 'print $foo', 'ActionRewriter preserves print lowering after moving default deps into ControlFlow');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

@@ -41,7 +41,7 @@ sub _array_pipeline_deps {
  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _control_flow_deps {
- return LinkedSpec::Deps::control_flow_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
 }
 sub _value_expr_deps {
  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)

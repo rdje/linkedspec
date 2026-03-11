@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move ControlFlow Default Dep Builder into `ControlFlow`
+## Summary
+Continued the ActionIR cleanup track by moving control-flow default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::ControlFlow`, so the active control-flow owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored control-flow dependency ownership:
+  - added `LinkedSpec::ActionIR::ControlFlow::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_control_flow_deps()` to resolve through `ControlFlow` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::control_flow_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still lowers `if(...)`, switch markers, and output helpers through `LinkedSpec::ActionIR::ControlFlow`,
+  - control-flow defaults still target the same trim, tag-normalization, flow-expression, and method-expression callbacks as before,
+  - `if(...)` lowering, stack mutation, and `print(...)` lowering stay behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_control_flow_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=168`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move ArrayPipeline Default Dep Builder into `ArrayPipeline`
 ## Summary
 Continued the ActionIR cleanup track by moving array-pipeline default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::ArrayPipeline`, so the active array-pipeline owner now defines its own callback map.

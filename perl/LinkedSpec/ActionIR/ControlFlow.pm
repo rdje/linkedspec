@@ -17,6 +17,25 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::ControlFlow::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  normalize_method_tag_expr => _require_pkg_cb($pkg, '_normalize_method_tag_expr'),
+  lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
+  parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
+  normalize_method_args_with_optional_scope => _require_pkg_cb($pkg, '_normalize_method_args_with_optional_scope'),
+ }
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_control_flow_value_expr
 # Purpose : Lower control-flow method argument values (`scalar(...)` etc.) into

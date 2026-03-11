@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against control-flow default dependency ownership.
+- Slice-selection rationale:
+  - after moving `ArrayPipeline`, the next smallest remaining active shared ActionIR seam was control-flow lowering,
+  - `LinkedSpec::ActionIR::ControlFlow` already owned branch/output lowering but still depended on `LinkedSpec::Deps` for its default callback map,
+  - moving that map into `ControlFlow` keeps control-flow behavior and default wiring on the same owner surface.
+- Implementation scope:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::ControlFlow`,
+  - rewired `LinkedSpec::ActionRewriter::_control_flow_deps()` to use `ControlFlow` directly,
+  - removed the now-unused `LinkedSpec::Deps::control_flow_deps_for_package(...)`.
+- Regression addition/update:
+  - added `action_rewriter_avoids_deps_control_flow_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=168`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against array-pipeline default dependency ownership.
 - Slice-selection rationale:
   - after moving `FlowExpr`, the next smallest remaining active shared ActionIR seam was array-pipeline planning/lowering,
