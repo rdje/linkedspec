@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Drop ActionRewriter `Deps` Import
+## Summary
+Continued the ActionIR cleanup track by removing `LinkedSpec::ActionRewriter`'s last load-time dependency on `LinkedSpec::Deps`, so require-only ActionRewriter consumers now stay on the extracted ActionIR owner modules without pulling the remaining parser-factory wiring into `%INC`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Removed stale ActionRewriter load-time coupling:
+  - deleted `use LinkedSpec::Deps ();` from `LinkedSpec::ActionRewriter`.
+- Removed dead dependency plumbing:
+  - deleted `LinkedSpec::Deps::declare_method_deps_for_package(...)` because it is no longer used by the active path.
+- Preserved behavior:
+  - `LinkedSpec::ActionRewriter` still loads its direct ActionIR owner modules and exposes the same rewrite/lowering entrypoints,
+  - the remaining active `LinkedSpec::Deps` surface stays limited to parser-factory wiring.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_linkedspec_deps_load`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=170`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move MethodLowering Default Dep Builder into `MethodLowering`
 ## Summary
 Continued the ActionIR cleanup track by moving method-lowering default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::MethodLowering`, so the active method-lowering owner now defines its own callback map.

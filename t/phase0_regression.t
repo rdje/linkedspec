@@ -2522,6 +2522,20 @@ subtest 'action_rewriter_avoids_deps_method_lowering_dep_builder' => sub {
     ok(defined($return_array_stmt), 'ActionRewriter still returns return-array output through the MethodLowering-owned default deps');
     is($return_array_stmt, 'return ["Tag", [items]]', 'ActionRewriter preserves return-array lowering after moving default deps into MethodLowering');
 };
+subtest 'action_rewriter_require_avoids_linkedspec_deps_load' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::ActionRewriter;'
+      . 'print exists($INC{"LinkedSpec/Deps.pm"}) ? "__DEPS_LOADED__\n" : "__DEPS_NOT_LOADED__\n";'
+      . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_LOADED__\n" : "__METHODEXPR_NOT_LOADED__\n";'
+    );
+
+    is($exit_code, 0, 'ActionRewriter require-only subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DEPS_NOT_LOADED__/, 'ActionRewriter require-only subprocess keeps LinkedSpec::Deps unloaded');
+    like($out, qr/__METHODEXPR_LOADED__/, 'ActionRewriter require-only subprocess still loads its direct ActionIR owner modules');
+    is($err, '', 'ActionRewriter require-only subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

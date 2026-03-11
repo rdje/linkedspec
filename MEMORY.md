@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against ActionRewriter's last load-time `LinkedSpec::Deps` coupling.
+- Key technical outcome:
+  - removed `use LinkedSpec::Deps ();` from `LinkedSpec::ActionRewriter`,
+  - removed the dead `LinkedSpec::Deps::declare_method_deps_for_package(...)` helper,
+  - `require LinkedSpec::ActionRewriter` now stays on extracted ActionIR owner modules without pulling `LinkedSpec::Deps` into `%INC`.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_linkedspec_deps_load`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (170 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: drop ActionRewriter Deps import` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against method-lowering default dependency ownership.
 - Key technical outcome:
   - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::MethodLowering`,

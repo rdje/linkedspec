@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against ActionRewriter's last load-time `LinkedSpec::Deps` coupling.
+- Slice-selection rationale:
+  - after moving all active ActionIR default dep-builders onto their owner modules, `LinkedSpec::ActionRewriter` still imported `LinkedSpec::Deps` even though it no longer called any of its builders,
+  - `LinkedSpec::Deps` still contained one dead helper, `declare_method_deps_for_package(...)`,
+  - removing that load-time edge narrows the remaining `LinkedSpec::Deps` role to parser-factory wiring only.
+- Implementation scope:
+  - removed `use LinkedSpec::Deps ();` from `LinkedSpec::ActionRewriter`,
+  - removed the dead `LinkedSpec::Deps::declare_method_deps_for_package(...)` helper,
+  - added a subprocess regression proving `require LinkedSpec::ActionRewriter` no longer loads `LinkedSpec::Deps`.
+- Regression addition/update:
+  - added `action_rewriter_require_avoids_linkedspec_deps_load`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=170`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against method-lowering default dependency ownership.
 - Slice-selection rationale:
   - after moving `ControlFlow`, the last remaining active shared ActionIR dep-builder was method lowering,

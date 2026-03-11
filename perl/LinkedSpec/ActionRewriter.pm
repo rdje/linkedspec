@@ -20,7 +20,6 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::ActionIR::StatementSplit ();
 use LinkedSpec::ActionIR::Diagnostics ();
 use LinkedSpec::ActionIR::RewritePipeline ();
-use LinkedSpec::Deps ();
 
 sub _trim_action_ir_value {
  my ($value) = @_;
