@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move Scanner Default Dep Builder into `Scanner`
+## Summary
+Continued the ActionIR cleanup track by moving scanner default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::Scanner`, so the active scanner owner module now defines its own default callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored scanner dependency ownership:
+  - added `LinkedSpec::ActionIR::Scanner::default_deps_for_package(...)`,
+  - added `LinkedSpec::ActionIR::Scanner::_require_pkg_cb(...)` for scanner-owned callback validation,
+  - rewired `LinkedSpec::ActionRewriter::_scan_contract_ir_event_deps()` to resolve through `Scanner` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::action_rewriter_scanner_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still scans helper contracts through `LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(...)`,
+  - scanner default deps still target the same split/trim/method/declare helpers as before,
+  - rewrite output remains unchanged for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_scanner_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=158`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move Scanner Rule Dep Rebinding into `ScannerCore` Owner Helpers
 ## Summary
 Continued the ActionIR cleanup track by moving scanner-rule dependency rebinding and dispatcher selection into explicit `LinkedSpec::ActionIR::ScannerCore` owner helpers, instead of leaving that orchestration inline inside `scan_contract_ir_events(...)`.

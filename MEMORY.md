@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against scanner default dependency ownership.
+- Key technical outcome:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::Scanner`,
+  - `LinkedSpec::ActionRewriter::_scan_contract_ir_event_deps()` now resolves through `Scanner` instead of `Deps`,
+  - removed the now-unused `LinkedSpec::Deps::action_rewriter_scanner_deps_for_package(...)`.
+- Regression outcome:
+  - added `action_rewriter_avoids_deps_scanner_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (158 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: move scanner default deps into Scanner` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against `LinkedSpec::ActionIR::ScannerCore`.
 - Key technical outcome:
   - added `_scanner_rule_dep_bindings(...)`, `_with_scanner_rule_deps(...)`, and `_scanner_dispatchers()` to `ScannerCore`,

@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against scanner default dependency ownership.
+- Slice-selection rationale:
+  - after moving scanner-rule rebinding into `ScannerCore`, the remaining default dep-builder still lived in `LinkedSpec::Deps`,
+  - that left the active scanner path split across two owners even though `ActionRewriter` only uses the scanner dep-builder in one place,
+  - moving the default dep map into `LinkedSpec::ActionIR::Scanner` makes the scanner owner module define both its active surface and its default callback wiring.
+- Implementation scope:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::Scanner`,
+  - rewired `LinkedSpec::ActionRewriter::_scan_contract_ir_event_deps()` to use `Scanner` directly,
+  - removed the now-unused `LinkedSpec::Deps::action_rewriter_scanner_deps_for_package(...)`.
+- Regression addition/update:
+  - added `action_rewriter_avoids_deps_scanner_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=158`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against `LinkedSpec::ActionIR::ScannerCore` scanner-rule dependency orchestration.
 - Slice-selection rationale:
   - the active `LinkedSpec::*` scope still allows internal ActionIR cleanup even while external plugin-runtime work is out of bounds,

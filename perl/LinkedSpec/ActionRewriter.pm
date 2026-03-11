@@ -59,7 +59,7 @@ sub _rewrite_pipeline_deps {
  return LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package(__PACKAGE__)
 }
 sub _scan_contract_ir_event_deps {
- return LinkedSpec::Deps::action_rewriter_scanner_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
 }
 
 sub _parse_method_function_expr {

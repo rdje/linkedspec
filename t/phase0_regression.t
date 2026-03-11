@@ -2272,6 +2272,24 @@ subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
     is($events->[0]{raw}, 'return foo', 'ActionIR ScannerCore preserves the scanned raw statement');
     is_deeply($events->[0]{args}, { payload => 'foo' }, 'ActionIR ScannerCore preserves the scanned return payload');
 };
+subtest 'action_rewriter_avoids_deps_scanner_dep_builder' => sub {
+    plan tests => 4;
+
+    my ($ok_run, $err, $rewritten) = (0, '', undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_scanner_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__\n" };
+        $rewritten = LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'return_a(Top)');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter rewrite succeeds without the removed Deps scanner dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_SCANNER_DEPS__/, 'ActionRewriter does not call the trapped Deps scanner dep builder');
+    ok(defined($rewritten), 'ActionRewriter still returns rewritten code through the Scanner-owned default deps');
+    is($rewritten, q{return ['?Top:', \@Top]}, 'ActionRewriter preserves helper rewrite output after moving scanner default deps into Scanner');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
