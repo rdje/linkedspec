@@ -9,7 +9,16 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::ActionIR::StatementSplit::Core ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
+sub _require_statement_split_core_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Core')
+}
 
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
@@ -39,6 +48,7 @@ sub _split_action_ir_statements {
  my ($code, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ _require_statement_split_core_pkg();
  return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
 }
 

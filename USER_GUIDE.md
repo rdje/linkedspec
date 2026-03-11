@@ -74,7 +74,7 @@ Think about authoring styles in three tiers:
 4. If the grammar is large or heterogeneous, run additional passes on captured substrings or substructures.
 5. If you are working on backend-neutral migration, inspect the lowering metadata with `return_descr => 1`.
 
-Validation note: when changing parser/compiler/runtime behavior, run `bash tools/run_ci_local.sh` from the repo root before pushing so the local phase-0 gate matches GitHub CI.
+Validation note: when changing parser/compiler/runtime behavior, run `bash tools/run_ci_local.sh` from the repo root before pushing so the local phase-0 gate matches GitHub CI. Recent internal load-time cleanup means `ActionIR::Scanner.pm` now lazy-loads `ScannerCore.pm` only when contract scanning starts, and `ActionIR::StatementSplit.pm` now lazy-loads `StatementSplit::Core.pm` only when statement splitting starts.
 
 ## Rule Anatomy Refresher
 Minimal skeleton:

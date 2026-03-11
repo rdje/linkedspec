@@ -264,6 +264,36 @@ PERL
     like($out, qr/__EVENT_PAYLOAD_OK__/, 'scanner scan preserves return-bare payload after lazy ScannerCore loading');
     is($err, '', 'ActionIR::Scanner require/scan subprocess does not emit stderr');
 };
+subtest 'actionir_statement_split_require_avoids_core_load_until_split' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionIR::StatementSplit;
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit/Core.pm"}) ? "__STATEMENT_SPLIT_CORE_EAGER__\n" : "__STATEMENT_SPLIT_CORE_STILL_LAZY__\n";
+my $parts = LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(
+    "return foo; exit",
+    {
+        trim_action_ir_value => sub {
+            my ($value) = @_;
+            return undef unless defined $value;
+            $value =~ s/^\s+//;
+            $value =~ s/\s+$//;
+            return $value;
+        },
+    },
+);
+print ref($parts) eq "ARRAY" ? "__STATEMENT_PARTS_ARRAY__\n" : "__STATEMENT_PARTS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit/Core.pm"}) ? "__STATEMENT_SPLIT_CORE_AFTER_SPLIT__\n" : "__STATEMENT_SPLIT_CORE_STILL_UNLOADED__\n";
+print scalar(@{$parts || []}) == 2 && $parts->[0] eq "return foo" && $parts->[1] eq "exit" ? "__STATEMENT_PARTS_OK__\n" : "__STATEMENT_PARTS_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'ActionIR::StatementSplit require/split subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__STATEMENT_SPLIT_CORE_STILL_LAZY__/, 'require ActionIR::StatementSplit keeps StatementSplit::Core unloaded');
+    like($out, qr/__STATEMENT_PARTS_ARRAY__/, 'statement split still returns an array after lazy StatementSplit::Core loading');
+    like($out, qr/__STATEMENT_SPLIT_CORE_AFTER_SPLIT__/, 'statement split lazy-loads StatementSplit::Core on demand');
+    like($out, qr/__STATEMENT_PARTS_OK__/, 'statement split preserves split output after lazy StatementSplit::Core loading');
+    is($err, '', 'ActionIR::StatementSplit require/split subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

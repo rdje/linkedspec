@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit::Core` Through `ActionIR::StatementSplit`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::StatementSplit` load `StatementSplit::Core` only when statement splitting actually runs, so require-only consumers of `ActionIR::StatementSplit.pm` no longer import the statement-splitting engine up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored statement-split owner loading:
+  - removed eager `use LinkedSpec::ActionIR::StatementSplit::Core ();`,
+  - added `LinkedSpec::ActionIR::StatementSplit::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::StatementSplit::_require_statement_split_core_pkg(...)`,
+  - updated `_split_action_ir_statements(...)` to lazy-load `StatementSplit::Core.pm` before delegating.
+- Preserved behavior:
+  - statement splitting still uses the same injected trim callback,
+  - split output remains unchanged for canonical semicolon-delimited statements,
+  - downstream `ActionRewriter` usage inherits the narrower load surface automatically.
+- Updated focused regression coverage:
+  - added `actionir_statement_split_require_avoids_core_load_until_split`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=185`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `ScannerCore` Through `ActionIR::Scanner`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::Scanner` load `ScannerCore` only when contract scanning actually runs, so require-only consumers of `ActionIR::Scanner.pm` no longer import the scanner-core rule dispatcher up front.

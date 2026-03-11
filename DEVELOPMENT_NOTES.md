@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionIR::StatementSplit` no longer imports `LinkedSpec::ActionIR::StatementSplit::Core` at module load time.
+- `LinkedSpec::ActionIR::StatementSplit` now lazy-loads `StatementSplit::Core.pm` only when statement splitting actually starts.
+- Added require-only regression lock `actionir_statement_split_require_avoids_core_load_until_split`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=185`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionIR::Scanner` no longer imports `LinkedSpec::ActionIR::ScannerCore` at module load time.
 - `LinkedSpec::ActionIR::Scanner` now lazy-loads `ScannerCore.pm` only when contract scanning actually starts.
 - Added require-only regression lock `actionir_scanner_require_avoids_scannercore_load_until_scan`.
