@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Phase 1A follow-up slice completed against the façade's last eager owner imports on the public parser/plugin edges.
+- Slice-selection rationale:
+  - after lazy-loading the compile pipeline owners, `LinkedSpec.pm` still imported `ParserFactory` and `PluginBridge` eagerly,
+  - those two imports were only needed for `get_parser(...)` and `AUTOLOAD`,
+  - the façade could defer them as long as it respected existing trap-based tests that preinstall those symbols.
+- Implementation scope:
+  - removed eager `ParserFactory` and `PluginBridge` imports from `LinkedSpec.pm`,
+  - updated `get_parser(...)` and `AUTOLOAD` to lazy-load only when the target owner symbol is not already present,
+  - added subprocess regressions proving `require LinkedSpec` now keeps both modules unloaded until the corresponding façade entrypoint runs.
+- Regression addition/update:
+  - added `linkedspec_require_avoids_parser_factory_load_until_get_parser`,
+  - added `linkedspec_require_avoids_plugin_bridge_load_until_autoload`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=178`)
+## Session Notes (2026-03-11)
 - Phase 1A follow-up slice completed against the façade's remaining eager compile-pipeline imports.
 - Slice-selection rationale:
   - after lazy-loading `Resolver` through `ParserFactory`, `LinkedSpec.pm` still imported `Runtime`, `Compiler`, and `ActionRewriter` eagerly,

@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Phase 1A load-time coupling slice completed against the façade's eager parser/plugin edge imports.
+- Key technical outcome:
+  - removed eager `ParserFactory` and `PluginBridge` imports from `LinkedSpec.pm`,
+  - updated `get_parser(...)` and `AUTOLOAD` to lazy-load those owners only when their symbols are not already present.
+- Regression outcome:
+  - added `linkedspec_require_avoids_parser_factory_load_until_get_parser`,
+  - added `linkedspec_require_avoids_plugin_bridge_load_until_autoload`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (178 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load ParserFactory and PluginBridge through facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Phase 1A load-time coupling slice completed against the façade's eager compile-pipeline imports.
 - Key technical outcome:
   - added `LinkedSpec::_require_pkg(...)`,

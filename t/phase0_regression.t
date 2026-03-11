@@ -147,6 +147,49 @@ subtest 'linkedspec_require_avoids_action_rewriter_load_until_compat_helper' => 
     like($out, qr/__ACTION_REWRITER_AFTER_HELPER__/, 'call_spec_handler_subst lazy-loads ActionRewriter on demand');
     is($err, '', 'LinkedSpec require/helper subprocess does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_parser_factory_load_until_get_parser' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec;'
+      . 'print exists($INC{"LinkedSpec/ParserFactory.pm"}) ? "__PARSER_FACTORY_EAGER__\n" : "__PARSER_FACTORY_STILL_LAZY__\n";'
+      . 'my $parser = LinkedSpec::get_parser("Lispish");'
+      . 'print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";'
+      . 'print exists($INC{"LinkedSpec/ParserFactory.pm"}) ? "__PARSER_FACTORY_AFTER_GET_PARSER__\n" : "__PARSER_FACTORY_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec require/get_parser subprocess exits cleanly with lazy ParserFactory') or diag($err || $out);
+    like($out, qr/__PARSER_FACTORY_STILL_LAZY__/, 'require LinkedSpec keeps ParserFactory unloaded');
+    like($out, qr/__PARSER_DEFINED__/, 'get_parser still returns a parser coderef after lazy ParserFactory loading');
+    like($out, qr/__PARSER_FACTORY_AFTER_GET_PARSER__/, 'get_parser lazy-loads ParserFactory on demand');
+    is($err, '', 'LinkedSpec require/get_parser subprocess with lazy ParserFactory does not emit stderr');
+};
+subtest 'linkedspec_require_avoids_plugin_bridge_load_until_autoload' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec;
+require PPlugin;
+no warnings 'redefine';
+local *PPlugin::exec_plugin_name = sub {
+    my ($class_or_self, $plugin_name, @args) = @_;
+    print "__PLUGIN_NAME__=$plugin_name\n";
+    print "__ARGS__=" . join(',', @args) . "\n";
+    return 'plugin_ok';
+};
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_EAGER__\n" : "__PLUGIN_BRIDGE_STILL_LAZY__\n";
+my $ret = LinkedSpec::synthetic_plugin('alpha', 'beta');
+print "__RET__=$ret\n";
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_AFTER_AUTOLOAD__\n" : "__PLUGIN_BRIDGE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/AUTOLOAD subprocess exits cleanly with lazy PluginBridge') or diag($err || $out);
+    like($out, qr/__PLUGIN_BRIDGE_STILL_LAZY__/, 'require LinkedSpec keeps PluginBridge unloaded');
+    like($out, qr/__PLUGIN_NAME__=synthetic_plugin/, 'AUTOLOAD still normalizes through PluginBridge after lazy load');
+    like($out, qr/__ARGS__=alpha,beta/, 'AUTOLOAD still forwards plugin arguments after lazy PluginBridge loading');
+    like($out, qr/__RET__=plugin_ok\n__PLUGIN_BRIDGE_AFTER_AUTOLOAD__/, 'AUTOLOAD lazy-loads PluginBridge on demand and preserves return payload');
+    is($err, '', 'LinkedSpec require/AUTOLOAD subprocess with lazy PluginBridge does not emit stderr');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
@@ -229,6 +272,7 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
 };
 subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
     plan tests => 6;
+    require LinkedSpec::PluginBridge;
 
     my $load_calls = 0;
     my ($exec_plugin_name, @exec_args);
@@ -259,6 +303,7 @@ subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
 };
 subtest 'plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps' => sub {
     plan tests => 6;
+    require LinkedSpec::PluginBridge;
 
     my $load_calls = 0;
     my ($exec_plugin_name, @exec_args);
@@ -289,6 +334,7 @@ subtest 'plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps' => s
 };
 subtest 'plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_load' => sub {
     plan tests => 4;
+    require LinkedSpec::PluginBridge;
 
     my ($load_calls, $exec_calls) = (0, 0);
     my ($ok_run, $err) = (0, '');
@@ -318,6 +364,7 @@ subtest 'plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_
 };
 subtest 'plugin_bridge_default_load_dep_uses_legacy_runtime_owner' => sub {
     plan tests => 4;
+    require LinkedSpec::PluginBridge;
 
     my ($ok_run, $ret, $err) = (0, undef, '');
     my $load_calls = 0;
@@ -341,6 +388,7 @@ subtest 'plugin_bridge_default_load_dep_uses_legacy_runtime_owner' => sub {
 };
 subtest 'plugin_bridge_default_exec_dep_uses_legacy_exec_owner' => sub {
     plan tests => 6;
+    require LinkedSpec::PluginBridge;
 
     my ($ok_run, $ret, $err) = (0, undef, '');
     my ($exec_calls, $captured_plugin_name, @captured_args) = (0, undef);
@@ -371,6 +419,7 @@ subtest 'plugin_bridge_default_exec_dep_uses_legacy_exec_owner' => sub {
 };
 subtest 'plugin_bridge_autoload_uses_dispatch_plugin_name_owner' => sub {
     plan tests => 5;
+    require LinkedSpec::PluginBridge;
 
     my ($ok_run, $ret, $err) = (0, undef, '');
     my ($captured_plugin_name, @captured_args);
@@ -398,6 +447,7 @@ subtest 'plugin_bridge_autoload_uses_dispatch_plugin_name_owner' => sub {
 };
 subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub {
     plan tests => 4;
+    require LinkedSpec::PluginBridge;
 
     my ($load_calls, $exec_calls) = (0, 0);
     my ($ok_run, $err) = (0, '');
@@ -428,6 +478,7 @@ subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub
 subtest 'plugin_bridge_default_exec_dep_uses_pplugin_explicit_name_owner' => sub {
     plan tests => 6;
 
+    require LinkedSpec::PluginBridge;
     require PPlugin;
 
     my $deps = LinkedSpec::PluginBridge::_default_deps();

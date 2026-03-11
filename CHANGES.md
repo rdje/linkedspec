@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Phase 1A Slice: Lazy-Load `ParserFactory` and `PluginBridge` Through the Facade
+## Summary
+Reduced the remaining façade load-time coupling by making `LinkedSpec.pm` lazy-load `ParserFactory` and `PluginBridge` at `get_parser(...)` and `AUTOLOAD`, so plain `require LinkedSpec` no longer imports those owner modules up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored façade owner loading:
+  - removed eager `use LinkedSpec::ParserFactory ();`,
+  - removed eager `use LinkedSpec::PluginBridge ();`,
+  - updated `LinkedSpec::get_parser(...)` to lazy-load `ParserFactory` unless `run_get_parser(...)` is already available,
+  - updated `LinkedSpec::AUTOLOAD` to lazy-load `PluginBridge` unless `_dispatch_autoload(...)` is already available.
+- Preserved behavior:
+  - `get_parser(...)` still returns runnable parser coderefs,
+  - `AUTOLOAD` still routes plugin calls through `LinkedSpec::PluginBridge`,
+  - existing trap-based tests still work because the façade only lazy-loads when the owner symbol is not already present.
+- Updated focused regression coverage:
+  - added `linkedspec_require_avoids_parser_factory_load_until_get_parser`,
+  - added `linkedspec_require_avoids_plugin_bridge_load_until_autoload`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=178`)
 ## 2026-03-11 - Phase 1A Slice: Lazy-Load Compile Pipeline Owners Through the Facade
 ## Summary
 Reduced another large load-time coupling in `LinkedSpec.pm` by making the façade lazy-load `Runtime`, `Compiler`, and `ActionRewriter` on demand, instead of importing the compile pipeline and ActionIR stack eagerly on `require LinkedSpec`.

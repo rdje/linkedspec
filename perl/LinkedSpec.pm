@@ -17,8 +17,6 @@ BEGIN {
 
 use LinkedRE;
 use LinkedSpec::Trace ();
-use LinkedSpec::ParserFactory ();
-use LinkedSpec::PluginBridge ();
 
 # UVM-style verbosity levels
 use constant {
@@ -179,6 +177,7 @@ sub call_spec_handler_subst {
 sub get_parser {
  my ($spec_name, @opts) = @_;
  my %opt_hash = (@opts % 2 == 0) ? @opts : ();
+ _require_pkg('LinkedSpec::ParserFactory') unless LinkedSpec::ParserFactory->can('run_get_parser');
  return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash)
 }
 
@@ -189,6 +188,7 @@ sub get_parser {
 # Returns : whatever plugin call returns
 #------------------------------------------------------------------------------
 sub AUTOLOAD {
+ _require_pkg('LinkedSpec::PluginBridge') unless LinkedSpec::PluginBridge->can('_dispatch_autoload');
  return LinkedSpec::PluginBridge::_dispatch_autoload($AUTOLOAD, \@_)
 }
 
