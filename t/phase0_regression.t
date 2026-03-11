@@ -2412,6 +2412,27 @@ subtest 'action_rewriter_avoids_deps_action_contract_dep_builder' => sub {
     ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'ActionRewriter still exposes the declare_typed lowering contract through the Contracts owner');
     is($declare_output, 'my @items', 'ActionRewriter preserves declare_typed contract lowering after moving default deps into Contracts');
 };
+subtest 'action_rewriter_avoids_deps_value_expr_dep_builder' => sub {
+    plan tests => 6;
+
+    my ($ok_run, $err, $key_expr, $scalaref_expr) = (0, '', undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::value_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__\n" };
+        $key_expr = LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr('scalar(foo)');
+        $scalaref_expr = LinkedSpec::ActionRewriter::_lower_scalaref_value_expr('retv', '[scalar(foo)]');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter value-expression lowering succeeds without the removed Deps value-expression dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_VALUE_EXPR_DEPS__/, 'ActionRewriter does not call the trapped Deps value-expression dep builder');
+    ok(defined($key_expr), 'ActionRewriter still returns lowered scalar access output through the ValueExpr-owned default deps');
+    is($key_expr, '$foo', 'ActionRewriter preserves scalar access key lowering after moving default deps into ValueExpr');
+    ok(defined($scalaref_expr), 'ActionRewriter still returns lowered scalaref output through the ValueExpr-owned default deps');
+    is($scalaref_expr, '$retv->[$foo]', 'ActionRewriter preserves scalaref lowering after moving default deps into ValueExpr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

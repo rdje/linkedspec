@@ -78,15 +78,6 @@ sub control_flow_deps_for_package {
  }
 }
 
-sub value_expr_deps_for_package {
- my ($pkg) = @_;
- return {
-  trim_action_ir_value      => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-  lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
-  lower_method_value_expr   => _require_pkg_cb($pkg, '_lower_method_value_expr'),
- }
-}
-
 sub declare_method_deps_for_package {
  my ($pkg) = @_;
  return {

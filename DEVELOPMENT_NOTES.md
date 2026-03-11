@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against value-expression default dependency ownership.
+- Slice-selection rationale:
+  - after moving the action-contract and other specialized owner maps out of `LinkedSpec::Deps`, the next small remaining active seam was value-expression lowering,
+  - `LinkedSpec::ActionIR::ValueExpr` already owned scalar-access and scalaref lowering but still depended on `LinkedSpec::Deps` for its default callback map,
+  - moving that map into `ValueExpr` keeps value-expression lowering behavior and default wiring on the same owner surface.
+- Implementation scope:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::ValueExpr`,
+  - rewired `LinkedSpec::ActionRewriter::_value_expr_deps()` to use `ValueExpr` directly,
+  - removed the now-unused `LinkedSpec::Deps::value_expr_deps_for_package(...)`.
+- Regression addition/update:
+  - added `action_rewriter_avoids_deps_value_expr_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=165`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against action-contract default dependency ownership.
 - Slice-selection rationale:
   - after moving specialized declare-method and the recent ActionIR orchestration dep-builders into their owner modules, the next small remaining active seam was contract construction,

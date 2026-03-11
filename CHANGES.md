@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move ValueExpr Default Dep Builder into `ValueExpr`
+## Summary
+Continued the ActionIR cleanup track by moving value-expression default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::ValueExpr`, so the active value-expression owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored value-expression dependency ownership:
+  - added `LinkedSpec::ActionIR::ValueExpr::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_value_expr_deps()` to resolve through `ValueExpr` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::value_expr_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still lowers scalar-access and scalaref value expressions through `LinkedSpec::ActionIR::ValueExpr`,
+  - value-expression defaults still target the same trim, flow-expression, and method-value callbacks as before,
+  - scalar-access and scalaref lowering output stay behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_value_expr_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=165`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move Action Contract Default Dep Builder into `Contracts`
 ## Summary
 Continued the ActionIR cleanup track by moving action-contract default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::Contracts`, so the active contract owner now defines its own callback map.

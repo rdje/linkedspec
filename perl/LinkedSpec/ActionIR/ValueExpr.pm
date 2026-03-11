@@ -17,6 +17,23 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::ValueExpr::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value      => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
+  lower_method_value_expr   => _require_pkg_cb($pkg, '_lower_method_value_expr'),
+ }
+}
+
 #------------------------------------------------------------------------------
 # Function: _extract_scalar_symbol_name
 # Purpose : Resolve scalar variable symbol name from DSL method token surface.

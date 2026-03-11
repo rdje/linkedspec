@@ -44,7 +44,7 @@ sub _control_flow_deps {
  return LinkedSpec::Deps::control_flow_deps_for_package(__PACKAGE__)
 }
 sub _value_expr_deps {
- return LinkedSpec::Deps::value_expr_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _statement_split_deps {
  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
