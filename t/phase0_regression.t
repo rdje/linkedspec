@@ -83,6 +83,70 @@ subtest 'linkedspec_require_avoids_resolver_load_until_get_parser' => sub {
     like($out, qr/__RESOLVER_AFTER_GET_PARSER__/, 'get_parser lazy-loads Resolver when the parser-factory default deps are resolved');
     is($err, '', 'LinkedSpec require/get_parser subprocess does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_compile_pipeline_load_until_get' => sub {
+    plan tests => 8;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec;
+print exists($INC{"LinkedSpec/Runtime.pm"}) ? "__RUNTIME_EAGER__\n" : "__RUNTIME_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";
+my $parser = LinkedSpec::Get(\$spec_content);
+print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";
+print exists($INC{"LinkedSpec/Runtime.pm"}) ? "__RUNTIME_AFTER_GET__\n" : "__RUNTIME_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_GET__\n" : "__COMPILER_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_GET__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/Get subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__RUNTIME_STILL_LAZY__/, 'require LinkedSpec keeps Runtime unloaded');
+    like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec keeps Compiler unloaded');
+    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded');
+    like($out, qr/__PARSER_DEFINED__/, 'Get still returns a parser coderef after lazy compile-pipeline loading');
+    like($out, qr/__RUNTIME_AFTER_GET__/, 'Get lazy-loads Runtime');
+    like($out, qr/__COMPILER_AFTER_GET__\n__ACTION_REWRITER_AFTER_GET__/, 'Get lazy-loads Compiler and ActionRewriter through the compile pipeline');
+    is($err, '', 'LinkedSpec require/Get subprocess does not emit stderr');
+};
+subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec;
+require LinkedSpec::BootstrapSpec;
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
+my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+print $parse_success ? "__BOOTSTRAP_PARSED__\n" : "__BOOTSTRAP_FAILED__\n";
+my $compiled = $parse_success ? LinkedSpec::spec_descr($retv) : undef;
+print defined($compiled) ? "__SPEC_DESCR_DEFINED__\n" : "__SPEC_DESCR_UNDEF__\n";
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_SPEC_DESCR__\n" : "__COMPILER_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/spec_descr subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec keeps Compiler unloaded before spec_descr');
+    like($out, qr/__BOOTSTRAP_PARSED__/, 'bootstrap parse still succeeds before spec_descr lazy-loads Compiler');
+    like($out, qr/__SPEC_DESCR_DEFINED__/, 'spec_descr still returns compiled rule data after lazy Compiler loading');
+    like($out, qr/__COMPILER_AFTER_SPEC_DESCR__/, 'spec_descr lazy-loads Compiler on demand');
+    is($err, '', 'LinkedSpec require/spec_descr subprocess does not emit stderr');
+};
+subtest 'linkedspec_require_avoids_action_rewriter_load_until_compat_helper' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec;'
+      . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";'
+      . 'my $rewritten = LinkedSpec::call_spec_handler_subst("Top", "return_a(Top)");'
+      . 'print defined($rewritten) ? "__REWRITE_DEFINED__\n" : "__REWRITE_UNDEF__\n";'
+      . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_HELPER__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec require/helper subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded before the compatibility helper is used');
+    like($out, qr/__REWRITE_DEFINED__/, 'call_spec_handler_subst still returns rewritten helper code after lazy ActionRewriter loading');
+    like($out, qr/__ACTION_REWRITER_AFTER_HELPER__/, 'call_spec_handler_subst lazy-loads ActionRewriter on demand');
+    is($err, '', 'LinkedSpec require/helper subprocess does not emit stderr');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

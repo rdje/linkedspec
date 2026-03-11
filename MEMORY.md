@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Phase 1A load-time coupling slice completed against the façade's eager compile-pipeline imports.
+- Key technical outcome:
+  - added `LinkedSpec::_require_pkg(...)`,
+  - removed eager `Runtime`, `Compiler`, and `ActionRewriter` imports from `LinkedSpec.pm`,
+  - updated `Get(...)`, `spec_descr(...)`, and `call_spec_handler_subst(...)` to lazy-load their owner packages on demand.
+- Regression outcome:
+  - added `linkedspec_require_avoids_compile_pipeline_load_until_get`,
+  - added `linkedspec_require_avoids_compiler_load_until_spec_descr`,
+  - added `linkedspec_require_avoids_action_rewriter_load_until_compat_helper`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (176 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load compile pipeline owners through facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Phase 1A load-time coupling slice completed against the façade's direct `Resolver` import.
 - Key technical outcome:
   - added `LinkedSpec::ParserFactory::_require_pkg(...)`,

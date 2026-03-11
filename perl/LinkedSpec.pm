@@ -17,10 +17,7 @@ BEGIN {
 
 use LinkedRE;
 use LinkedSpec::Trace ();
-use LinkedSpec::ActionRewriter ();
-use LinkedSpec::Compiler ();
 use LinkedSpec::ParserFactory ();
-use LinkedSpec::Runtime ();
 use LinkedSpec::PluginBridge ();
 
 # UVM-style verbosity levels
@@ -119,6 +116,16 @@ sub should_dump {
  return LinkedSpec::Trace::should_dump(@_)
 }
 
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
 
 
 #------------------------------------------------------------------------------
@@ -132,6 +139,7 @@ sub Get {
  my @args = @_;
  my $spec_content_ref = shift @args;
  my %option = @args;
+ _require_pkg('LinkedSpec::Runtime');
  return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
 }
 
@@ -143,6 +151,7 @@ sub Get {
 # Returns : hashref of spec rule definitions
 #------------------------------------------------------------------------------
 sub spec_descr {
+ _require_pkg('LinkedSpec::Compiler');
  return LinkedSpec::Compiler::spec_descr(@_)
 }
 
@@ -155,6 +164,7 @@ sub spec_descr {
 # Returns : rewritten code string
 #------------------------------------------------------------------------------
 sub call_spec_handler_subst {
+ _require_pkg('LinkedSpec::ActionRewriter');
  return LinkedSpec::ActionRewriter::call_spec_handler_subst(@_)
 }
 

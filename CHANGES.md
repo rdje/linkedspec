@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Phase 1A Slice: Lazy-Load Compile Pipeline Owners Through the Facade
+## Summary
+Reduced another large load-time coupling in `LinkedSpec.pm` by making the façade lazy-load `Runtime`, `Compiler`, and `ActionRewriter` on demand, instead of importing the compile pipeline and ActionIR stack eagerly on `require LinkedSpec`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored façade owner loading:
+  - added `LinkedSpec::_require_pkg(...)`,
+  - updated `LinkedSpec::Get(...)` to lazy-load `LinkedSpec::Runtime`,
+  - updated `LinkedSpec::spec_descr(...)` to lazy-load `LinkedSpec::Compiler`,
+  - updated `LinkedSpec::call_spec_handler_subst(...)` to lazy-load `LinkedSpec::ActionRewriter`.
+- Reduced eager imports:
+  - removed `use LinkedSpec::Runtime ();`,
+  - removed `use LinkedSpec::Compiler ();`,
+  - removed `use LinkedSpec::ActionRewriter ();` from `LinkedSpec.pm`.
+- Preserved behavior:
+  - `Get(...)`, `spec_descr(...)`, and `call_spec_handler_subst(...)` still return the same outputs,
+  - `require LinkedSpec` now keeps the compile pipeline and ActionIR stack unloaded until one of those façade entrypoints is actually used.
+- Updated focused regression coverage:
+  - added `linkedspec_require_avoids_compile_pipeline_load_until_get`,
+  - added `linkedspec_require_avoids_compiler_load_until_spec_descr`,
+  - added `linkedspec_require_avoids_action_rewriter_load_until_compat_helper`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=176`)
 ## 2026-03-11 - Phase 1A Slice: Lazy-Load `Resolver` Through `ParserFactory`
 ## Summary
 Reduced another load-time coupling in the `LinkedSpec` façade by making `LinkedSpec::ParserFactory` lazy-load its callback-owner packages when default deps are resolved, so `LinkedSpec.pm` no longer imports `LinkedSpec::Resolver` just to keep `get_parser(...)` working.

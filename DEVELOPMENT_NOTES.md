@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Phase 1A follow-up slice completed against the façade's remaining eager compile-pipeline imports.
+- Slice-selection rationale:
+  - after lazy-loading `Resolver` through `ParserFactory`, `LinkedSpec.pm` still imported `Runtime`, `Compiler`, and `ActionRewriter` eagerly,
+  - those imports pulled most of the compile pipeline and ActionIR stack into memory even on plain `require LinkedSpec`,
+  - the façade already owned the relevant public entrypoints, so it could assume package-load responsibility locally instead of at module import time.
+- Implementation scope:
+  - added `_require_pkg(...)` to `LinkedSpec.pm`,
+  - removed eager `Runtime`, `Compiler`, and `ActionRewriter` imports from the façade,
+  - updated `Get(...)`, `spec_descr(...)`, and `call_spec_handler_subst(...)` to lazy-load their owner packages on demand,
+  - added subprocess regressions for the `Get`, `spec_descr`, and compatibility-helper lazy-load seams.
+- Regression addition/update:
+  - added `linkedspec_require_avoids_compile_pipeline_load_until_get`,
+  - added `linkedspec_require_avoids_compiler_load_until_spec_descr`,
+  - added `linkedspec_require_avoids_action_rewriter_load_until_compat_helper`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=176`)
+## Session Notes (2026-03-11)
 - Phase 1A follow-up slice completed against the `LinkedSpec.pm` façade's remaining direct `Resolver` load-time coupling.
 - Slice-selection rationale:
   - after deleting `LinkedSpec::Deps`, `LinkedSpec.pm` still imported `LinkedSpec::Resolver` only so `ParserFactory` could resolve its default callback owners,
