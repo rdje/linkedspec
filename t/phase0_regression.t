@@ -2370,6 +2370,27 @@ subtest 'action_rewriter_avoids_deps_rewrite_pipeline_dep_builder' => sub {
     ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the RewritePipeline-owned default deps');
     is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
 };
+subtest 'action_rewriter_avoids_deps_declare_method_dep_builder' => sub {
+    plan tests => 6;
+
+    my ($ok_run, $err, $declare_stmt, $assign_stmt) = (0, '', undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__\n" };
+        $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)');
+        $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_method_statement('assign(retv, scalar(foo))');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter declare-method lowering succeeds without the removed Deps declare-method dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__/, 'ActionRewriter does not call the trapped Deps declare-method dep builder');
+    ok(defined($declare_stmt), 'ActionRewriter still returns lowered declare output through the DeclareMethod-owned default deps');
+    is($declare_stmt, 'my @items', 'ActionRewriter preserves declare-method lowering output after moving default deps into DeclareMethod');
+    ok(defined($assign_stmt), 'ActionRewriter still returns lowered assign output through the DeclareMethod-owned default deps');
+    is($assign_stmt, '$retv = $foo', 'ActionRewriter preserves assign-method lowering output after moving default deps into DeclareMethod');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

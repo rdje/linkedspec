@@ -29,7 +29,7 @@ sub _trim_action_ir_value {
  return $value
 }
 sub _declare_method_deps {
- return LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
 }
 sub _flow_expr_deps {
  return LinkedSpec::Deps::flow_expr_deps_for_package(__PACKAGE__)

@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against specialized declare-method default dependency ownership.
+- Key technical outcome:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::DeclareMethod`,
+  - `LinkedSpec::ActionRewriter::_declare_method_deps()` now resolves through `DeclareMethod` instead of `Deps`,
+  - removed the now-unused `LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package(...)`.
+- Regression outcome:
+  - added `action_rewriter_avoids_deps_declare_method_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (163 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: move declare method default deps into DeclareMethod` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against rewrite-pipeline default dependency ownership.
 - Key technical outcome:
   - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::RewritePipeline`,

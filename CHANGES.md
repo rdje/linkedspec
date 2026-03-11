@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move DeclareMethod Default Dep Builder into `DeclareMethod`
+## Summary
+Continued the ActionIR cleanup track by moving the specialized declare-method default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::DeclareMethod`, so the active declare-method owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored declare-method dependency ownership:
+  - added `LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_declare_method_deps()` to resolve through `DeclareMethod` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still lowers `declare(...)` and `assign(...)` method forms through `LinkedSpec::ActionIR::DeclareMethod`,
+  - declare-method defaults still target the same trim/method-expr/flow/value/method-lowering callbacks as before,
+  - declare-method and assign-method lowering output stay behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_declare_method_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=163`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move RewritePipeline Default Dep Builder into `RewritePipeline`
 ## Summary
 Continued the ActionIR cleanup track by moving rewrite-pipeline default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::RewritePipeline`, so the active rewrite-pipeline owner now defines its own callback map.
