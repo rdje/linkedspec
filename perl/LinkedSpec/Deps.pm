@@ -116,14 +116,6 @@ sub action_rewriter_declare_method_deps_for_package {
  }
 }
 
-sub action_rewriter_diagnostics_deps_for_package {
- my ($pkg) = @_;
- return {
-  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
-  scan_contract_ir_events => _require_pkg_cb($pkg, '_scan_contract_ir_events'),
- }
-}
-
 sub action_rewriter_rewrite_pipeline_deps_for_package {
  my ($pkg) = @_;
  return {

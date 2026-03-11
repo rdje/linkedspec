@@ -53,7 +53,7 @@ sub _canonical_event_deps {
  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
 }
 sub _diagnostics_deps {
- return LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
 }
 sub _rewrite_pipeline_deps {
  return LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package(__PACKAGE__)

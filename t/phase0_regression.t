@@ -2330,6 +2330,27 @@ subtest 'action_rewriter_avoids_deps_canonical_event_dep_builder' => sub {
     ok(ref($diag) eq 'HASH', 'ActionRewriter still returns canonical-event diagnostics through the CanonicalEvents-owned default deps');
     is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event classification after moving default deps into CanonicalEvents');
 };
+subtest 'action_rewriter_avoids_deps_diagnostics_dep_builder' => sub {
+    plan tests => 4;
+
+    my ($ok_run, $err, $diag) = (0, '', undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__\n" };
+        $diag = LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(
+            'return_a(Top); return_a(Top)',
+            [{ id => 'return_a', diag_name => 'return_a', unresolved_pattern => qr/\breturn_a\s*\(/ }],
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter diagnostics scan succeeds without the removed Deps diagnostics dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__/, 'ActionRewriter does not call the trapped Deps diagnostics dep builder');
+    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the Diagnostics-owned default deps');
+    is($diag->{unresolved_helper_count}, 2, 'ActionRewriter preserves unresolved-helper counting after moving default deps into Diagnostics');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
