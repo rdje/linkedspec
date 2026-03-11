@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move MethodLowering Default Dep Builder into `MethodLowering`
+## Summary
+Continued the ActionIR cleanup track by moving method-lowering default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::MethodLowering`, so the active method-lowering owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored method-lowering dependency ownership:
+  - added `LinkedSpec::ActionIR::MethodLowering::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_method_lowering_deps()` to resolve through `MethodLowering` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::method_lowering_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still lowers declaration aliases, assignments, returns, push-value, regex-subst, and method-value forms through `LinkedSpec::ActionIR::MethodLowering`,
+  - method-lowering defaults still target the same trim, declare, method-expr, value-expr, and assignment-source callbacks as before,
+  - alias, assign, and return-array lowering output stay behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_method_lowering_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=169`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move ControlFlow Default Dep Builder into `ControlFlow`
 ## Summary
 Continued the ActionIR cleanup track by moving control-flow default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::ControlFlow`, so the active control-flow owner now defines its own callback map.

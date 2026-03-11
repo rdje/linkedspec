@@ -2498,6 +2498,30 @@ subtest 'action_rewriter_avoids_deps_control_flow_dep_builder' => sub {
     ok(defined($print_stmt), 'ActionRewriter still returns lowered print output through the ControlFlow-owned default deps');
     is($print_stmt, 'print $foo', 'ActionRewriter preserves print lowering after moving default deps into ControlFlow');
 };
+subtest 'action_rewriter_avoids_deps_method_lowering_dep_builder' => sub {
+    plan tests => 8;
+
+    my ($ok_run, $err, $alias, $assign_stmt, $return_array_stmt) = (0, '', undef, undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::method_lowering_deps_for_package = sub { die "__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__\n" };
+        $alias = LinkedSpec::ActionRewriter::_declare_alias_to_type('array');
+        $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_statement('scalar(foo)', 'scalar(bar)');
+        $return_array_stmt = LinkedSpec::ActionRewriter::_lower_return_array_statement('Tag', 'array(items)');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter method-lowering succeeds without the removed Deps method-lowering dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__/, 'ActionRewriter does not call the trapped Deps method-lowering dep builder');
+    ok(defined($alias), 'ActionRewriter still returns declaration alias output through the MethodLowering-owned default deps');
+    is($alias, 'array', 'ActionRewriter preserves declaration alias lowering after moving default deps into MethodLowering');
+    ok(defined($assign_stmt), 'ActionRewriter still returns assign output through the MethodLowering-owned default deps');
+    is($assign_stmt, '$foo = $bar', 'ActionRewriter preserves assign lowering after moving default deps into MethodLowering');
+    ok(defined($return_array_stmt), 'ActionRewriter still returns return-array output through the MethodLowering-owned default deps');
+    is($return_array_stmt, 'return ["Tag", [items]]', 'ActionRewriter preserves return-array lowering after moving default deps into MethodLowering');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

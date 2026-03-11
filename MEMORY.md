@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against method-lowering default dependency ownership.
+- Key technical outcome:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::MethodLowering`,
+  - `LinkedSpec::ActionRewriter::_method_lowering_deps()` now resolves through `MethodLowering` instead of `Deps`,
+  - removed the now-unused `LinkedSpec::Deps::method_lowering_deps_for_package(...)`.
+- Regression outcome:
+  - added `action_rewriter_avoids_deps_method_lowering_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (169 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: move method lowering default deps into MethodLowering` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against control-flow default dependency ownership.
 - Key technical outcome:
   - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::ControlFlow`,
