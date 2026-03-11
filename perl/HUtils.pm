@@ -340,7 +340,7 @@ my ($conf, $a2d_ref, $filter_seq) = @_;
 			      my @varargs;
 
 			      push @varargs, $conf, $info, $a2d_ref, $maptable, \@args;
-			      $filteredata = PPlugin->exec("genericfilter_$action", @varargs);
+			      $filteredata = PPlugin->exec_plugin_name("genericfilter_$action", @varargs);
 			      die "$@, " if $@;
 
 			     } else {

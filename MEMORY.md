@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted plugin/runtime modernization slice completed against repo-owned explicit plugin callers outside the `PluginBridge` autoload path.
+- Key technical outcome:
+  - `HUtils::GenericFilter(...)`, `RTLUtils`, `TableScript::http_exec(...)`, and `plugin/string.plg` now call `PPlugin::exec_plugin_name(...)`,
+  - repo-owned explicit plugin-name callers no longer need the mixed-name `PPlugin::exec(...)` compatibility wrapper,
+  - remaining mixed-name compatibility use is narrowed further toward autoload-style and external legacy callers.
+- Regression outcome:
+  - added `tablescript_http_exec_uses_pplugin_explicit_name_owner`,
+  - added `hutils_generic_filter_uses_pplugin_explicit_name_owner`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/HUtils.pm` => syntax OK
+  - `perl -Iperl -c perl/RTLUtils.pm` => syntax OK
+  - `perl -Iperl -c perl/TableScript.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (151 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: migrate internal explicit callers` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted plugin/runtime modernization slice completed against `PPlugin` eager module-load coupling to `LinkedSpec`.
 - Key technical outcome:
   - removed eager `use LinkedSpec;` from `PPlugin.pm`,

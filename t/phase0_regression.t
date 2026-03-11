@@ -456,6 +456,75 @@ subtest 'pplugin_default_parser_dep_lazy_loads_linkedspec' => sub {
     like($out, qr/__LINKEDSPEC_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads LinkedSpec only on callback execution');
     is($err, '', 'PPlugin default parser-dep subprocess does not emit stderr');
 };
+subtest 'tablescript_http_exec_uses_pplugin_explicit_name_owner' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    package Global;
+    sub search_path { return [] }
+}
+require PPlugin;
+require TableScript;
+no warnings 'redefine';
+local *TableScript::node_exec = sub { return $_[1] };
+local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
+local *PPlugin::exec_plugin_name = sub {
+    my ($class_or_self, $plugin_name, @args) = @_;
+    print "__PLUGIN_NAME__=$plugin_name\n";
+    print "__ARGS__=" . join(',', @args) . "\n";
+    return 'http://example.test/file';
+};
+my $ret = TableScript::http_exec({}, ['report.txt', 'Report']);
+print "__RET__=$ret\n";
+PERL
+
+    is($exit_code, 0, 'TableScript http_exec subprocess exits cleanly') or diag($err || $out);
+    unlike($err, qr/__UNEXPECTED_PPLUGIN_EXEC__/, 'TableScript http_exec avoids the legacy mixed-name PPlugin exec wrapper');
+    like($out, qr/__PLUGIN_NAME__=httplink/, 'TableScript http_exec dispatches through the explicit plugin name owner');
+    like($out, qr/__ARGS__=report\.txt/, 'TableScript http_exec forwards the resolved filename into the explicit plugin owner');
+    like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the explicit-owner return payload');
+};
+subtest 'hutils_generic_filter_uses_pplugin_explicit_name_owner' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require PPlugin;
+require HUtils;
+no warnings 'redefine';
+local *HUtils::Recurse = sub {
+    my ($data, $cb) = @_;
+    return $cb->(['leaf'], ['contains', 'needle']);
+};
+local *HUtils::avv_set = sub {
+    my ($href, $info, $value) = @_;
+    $href->{$info->[-1]} = $value;
+    return $href;
+};
+local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
+local *PPlugin::exec_plugin_name = sub {
+    my ($class_or_self, $plugin_name, @args) = @_;
+    print "__PLUGIN_NAME__=$plugin_name\n";
+    print "__MAPTABLE__=$args[3]\n";
+    return 'filtered_payload';
+};
+my $ret = HUtils::GenericFilter(
+    {
+        maptable => { DEFAULT => 'default_map' },
+        filters => {},
+    },
+    [],
+    ['filters'],
+);
+print "__LEAF__=$ret->{leaf}\n";
+PERL
+
+    is($exit_code, 0, 'HUtils GenericFilter subprocess exits cleanly') or diag($err || $out);
+    unlike($err, qr/__UNEXPECTED_PPLUGIN_EXEC__/, 'HUtils GenericFilter avoids the legacy mixed-name PPlugin exec wrapper');
+    like($out, qr/__PLUGIN_NAME__=genericfilter_contains/, 'HUtils GenericFilter dispatches through the explicit plugin name owner');
+    like($out, qr/__MAPTABLE__=default_map/, 'HUtils GenericFilter forwards the selected maptable into the explicit plugin owner');
+    like($out, qr/__LEAF__=filtered_payload/, 'HUtils GenericFilter preserves the explicit-owner filtered payload');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 

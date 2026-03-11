@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Plugin/runtime modernization slice completed against repo-owned explicit plugin callers outside the `PluginBridge` autoload path.
+- Slice-selection rationale:
+  - the roadmap calls for moving away from mixed-name compatibility dispatch toward explicit plugin identifiers,
+  - several internal callers already had explicit plugin names but still routed through the legacy `PPlugin::exec(...)` wrapper,
+  - migrating those low-risk callsites reduces remaining mixed-name compatibility usage without changing plugin semantics.
+- Implementation scope:
+  - changed `HUtils::GenericFilter(...)`, `RTLUtils`, `TableScript::http_exec(...)`, and `plugin/string.plg` to call `PPlugin::exec_plugin_name(...)`,
+  - left `PPlugin::exec(...)` and autoload-style compatibility entrypoints in place for remaining mixed-name callers.
+- Regression addition/update:
+  - added `tablescript_http_exec_uses_pplugin_explicit_name_owner`,
+  - added `hutils_generic_filter_uses_pplugin_explicit_name_owner`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/HUtils.pm` -> OK
+  - `perl -Iperl -c perl/RTLUtils.pm` -> OK
+  - `perl -Iperl -c perl/TableScript.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=151`)
+## Session Notes (2026-03-11)
 - Plugin/runtime modernization slice completed against `PPlugin` module-load coupling to `LinkedSpec`.
 - Slice-selection rationale:
   - the roadmap calls for narrowing legacy plugin runtime coupling and making dependency ownership explicit,

@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Runtime Slice: Migrate Internal Explicit Plugin Callers to `exec_plugin_name(...)`
+## Summary
+Continued the plugin/runtime modernization track by moving repo-owned callers that already know explicit plugin names off the compatibility `PPlugin::exec(...)` wrapper and onto `PPlugin::exec_plugin_name(...)`.
+
+## Changed Files
+- Updated: `perl/HUtils.pm`
+- Updated: `perl/RTLUtils.pm`
+- Updated: `perl/TableScript.pm`
+- Updated: `plugin/string.plg`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Migrated repo-owned explicit plugin dispatch sites:
+  - `HUtils::GenericFilter(...)` now calls `PPlugin::exec_plugin_name("genericfilter_$action", ...)`,
+  - `RTLUtils` header/context-clause generation now calls `PPlugin::exec_plugin_name('add_header_n_context_clause', ...)`,
+  - `TableScript::http_exec(...)` now calls `PPlugin::exec_plugin_name('httplink', ...)`,
+  - `plugin/string.plg` now calls `PPlugin::exec_plugin_name('file_list_path2http', ...)`.
+- Preserved behavior:
+  - explicit plugin names and arguments remain unchanged at each callsite,
+  - the compatibility `PPlugin::exec(...)` wrapper remains available for mixed-name and external legacy callers,
+  - autoload-style compatibility entrypoints are unchanged.
+- Updated focused regression coverage:
+  - added `tablescript_http_exec_uses_pplugin_explicit_name_owner`,
+  - added `hutils_generic_filter_uses_pplugin_explicit_name_owner`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/HUtils.pm`
+  - `perl -Iperl -c perl/RTLUtils.pm`
+  - `perl -Iperl -c perl/TableScript.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=151`)
 ## 2026-03-11 - Plugin Runtime Slice: Lazy-Load `LinkedSpec` from `PPlugin` Default Parser Deps
 ## Summary
 Continued the plugin/runtime modernization track by removing `PPlugin`'s eager `LinkedSpec` import and making the default `pplugin` parser dependency lazy-load `LinkedSpec` only when that callback is actually invoked.

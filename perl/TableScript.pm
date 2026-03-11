@@ -381,7 +381,7 @@ my ($conf, $args) = @_;
 
  my ($filename, $label) = map {node_exec $conf, $_} @$args[0,1];
 
- PPlugin->exec('httplink', $filename).'@'.$label
+ PPlugin->exec_plugin_name('httplink', $filename).'@'.$label
 }
 
 sub get_index {

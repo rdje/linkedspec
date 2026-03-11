@@ -267,6 +267,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: `PPlugin` now owns explicit normalized-name execution through `exec_plugin_name(...)`, and `LinkedSpec::PluginBridge` default runtime dispatch now uses that owner path directly while `PPlugin::exec(...)` remains as compatibility glue for older mixed-name callers.
   - Landed follow-up: `PPlugin::new(...)` now initializes its cached legacy registry through `_load_legacy_registry()` plus explicit default dependency callbacks (`load_plugin_parser`, `discover_plugin_files`, `build_plugin_registry`), so parser loading and registry setup are no longer hardwired inline in the constructor.
   - Landed follow-up: `PPlugin.pm` no longer eager-loads `LinkedSpec` at module import time; the default parser dependency now lazy-loads `LinkedSpec` only when the compatibility `pplugin` parser callback is actually needed.
+  - Landed follow-up: repo-owned callers that already have explicit plugin names (`HUtils`, `RTLUtils`, `TableScript`, and `plugin/string.plg`) now dispatch through `PPlugin::exec_plugin_name(...)` directly, narrowing the remaining mixed-name compatibility surface to autoload-style and external legacy callers.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.
