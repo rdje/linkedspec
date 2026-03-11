@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Phase 1A Slice: Lazy-Load `Compiler` Through `Runtime`
+## Summary
+Reduced internal compile-path load-time coupling by making `LinkedSpec::Runtime` load `LinkedSpec::Compiler` only when `run_get(...)` actually runs, so require-only consumers of `Runtime.pm` no longer import the compiler pipeline up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored runtime owner loading:
+  - removed the eager `use LinkedSpec::Compiler ();` import from `Runtime.pm`,
+  - added `LinkedSpec::Runtime::_require_pkg(...)`,
+  - updated `run_get(...)` to lazy-load `LinkedSpec::Compiler` unless `run_get_pipeline(...)` is already available.
+- Preserved behavior:
+  - `LinkedSpec::Runtime::run_get(...)` still returns runnable parser coderefs,
+  - the compiler pipeline still initializes through `LinkedSpec::Compiler::run_get_pipeline(...)`,
+  - façade and parser-factory callers now inherit the same narrower runtime load surface automatically.
+- Updated focused regression coverage:
+  - added `runtime_require_avoids_compiler_load_until_run_get`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=179`)
 ## 2026-03-11 - Phase 1A Slice: Lazy-Load `ParserFactory` and `PluginBridge` Through the Facade
 ## Summary
 Reduced the remaining façade load-time coupling by making `LinkedSpec.pm` lazy-load `ParserFactory` and `PluginBridge` at `get_parser(...)` and `AUTOLOAD`, so plain `require LinkedSpec` no longer imports those owner modules up front.

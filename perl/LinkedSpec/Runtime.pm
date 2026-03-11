@@ -8,7 +8,15 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::Compiler ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::Runtime::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
 
 #------------------------------------------------------------------------------
 # Runtime parser state helpers (per-run mutable context only)
@@ -51,6 +59,7 @@ sub run_get {
  $option = {} unless ref($option) eq 'HASH';
 
  my $runtime_ctx = _build_runtime_context($option);
+ _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
  return LinkedSpec::Compiler::run_get_pipeline(
   $spec_content_ref,
   $option,

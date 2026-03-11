@@ -108,6 +108,23 @@ PERL
     like($out, qr/__COMPILER_AFTER_GET__\n__ACTION_REWRITER_AFTER_GET__/, 'Get lazy-loads Compiler and ActionRewriter through the compile pipeline');
     is($err, '', 'LinkedSpec require/Get subprocess does not emit stderr');
 };
+subtest 'runtime_require_avoids_compiler_load_until_run_get' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec::Runtime;
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
+my $parser = LinkedSpec::Runtime::run_get(\$spec_content, {});
+print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_RUN_GET__\n" : "__COMPILER_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::Runtime require/run_get subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec::Runtime keeps Compiler unloaded');
+    like($out, qr/__PARSER_DEFINED__\n__COMPILER_AFTER_RUN_GET__/, 'run_get still returns a parser coderef and lazy-loads Compiler on demand');
+    is($err, '', 'LinkedSpec::Runtime require/run_get subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

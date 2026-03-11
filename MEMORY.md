@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Runtime`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Compiler` import from `perl/LinkedSpec/Runtime.pm`,
+  - added `LinkedSpec::Runtime::_require_pkg(...)`,
+  - updated `run_get(...)` to lazy-load `Compiler.pm` only when the runtime compile path is invoked.
+- Regression outcome:
+  - added `runtime_require_avoids_compiler_load_until_run_get`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (179 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Compiler through Runtime` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Phase 1A load-time coupling slice completed against the façade's eager parser/plugin edge imports.
 - Key technical outcome:
   - removed eager `ParserFactory` and `PluginBridge` imports from `LinkedSpec.pm`,
