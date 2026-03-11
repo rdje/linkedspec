@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-11)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::Compiler` no longer imports `LinkedSpec::BootstrapSpec`, `LinkedSpec::SpecEntry`, or `LinkedSpec::Validation` at module load time.
+- `LinkedSpec::Compiler::spec_descr(...)` and `run_get_pipeline(...)` now lazy-load those owner modules only when the active compile path actually needs them.
+- Added require-only regression lock `compiler_require_avoids_owner_load_until_run_get_pipeline`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=180`)
+
+## Current Session Notes (2026-03-11)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::Runtime` no longer imports `LinkedSpec::Compiler` at module load time.
 - `LinkedSpec::Runtime::run_get(...)` now lazy-loads `LinkedSpec::Compiler` only when compilation actually starts.
 - Added require-only regression lock `runtime_require_avoids_compiler_load_until_run_get`.

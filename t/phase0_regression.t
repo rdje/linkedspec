@@ -125,6 +125,32 @@ PERL
     like($out, qr/__PARSER_DEFINED__\n__COMPILER_AFTER_RUN_GET__/, 'run_get still returns a parser coderef and lazy-loads Compiler on demand');
     is($err, '', 'LinkedSpec::Runtime require/run_get subprocess does not emit stderr');
 };
+subtest 'compiler_require_avoids_owner_load_until_run_get_pipeline' => sub {
+    plan tests => 8;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec::Compiler;
+print exists($INC{"LinkedSpec/BootstrapSpec.pm"}) ? "__BOOTSTRAP_EAGER__\n" : "__BOOTSTRAP_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/SpecEntry.pm"}) ? "__SPEC_ENTRY_EAGER__\n" : "__SPEC_ENTRY_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/Validation.pm"}) ? "__VALIDATION_EAGER__\n" : "__VALIDATION_STILL_LAZY__\n";
+my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
+print exists($INC{"LinkedSpec/BootstrapSpec.pm"}) ? "__BOOTSTRAP_AFTER_PIPELINE__\n" : "__BOOTSTRAP_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/SpecEntry.pm"}) ? "__SPEC_ENTRY_AFTER_PIPELINE__\n" : "__SPEC_ENTRY_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/Validation.pm"}) ? "__VALIDATION_AFTER_PIPELINE__\n" : "__VALIDATION_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::Compiler require/run_get_pipeline subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__BOOTSTRAP_STILL_LAZY__/, 'require LinkedSpec::Compiler keeps BootstrapSpec unloaded');
+    like($out, qr/__SPEC_ENTRY_STILL_LAZY__/, 'require LinkedSpec::Compiler keeps SpecEntry unloaded');
+    like($out, qr/__VALIDATION_STILL_LAZY__/, 'require LinkedSpec::Compiler keeps Validation unloaded');
+    like($out, qr/__DESCR_DEFINED__/, 'run_get_pipeline still returns a descriptor hash after owner lazy loading');
+    like($out, qr/__BOOTSTRAP_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads BootstrapSpec on demand');
+    like($out, qr/__SPEC_ENTRY_AFTER_PIPELINE__\n__VALIDATION_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads SpecEntry and Validation on demand');
+    is($err, '', 'LinkedSpec::Compiler require/run_get_pipeline subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

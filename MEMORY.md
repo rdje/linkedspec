@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::BootstrapSpec`, `LinkedSpec::SpecEntry`, and `LinkedSpec::Validation` imports from `perl/LinkedSpec/Compiler.pm`,
+  - added `LinkedSpec::Compiler::_require_pkg(...)`,
+  - updated compiler default owner paths to lazy-load those modules only when `spec_descr(...)` or `run_get_pipeline(...)` actually uses them.
+- Regression outcome:
+  - added `compiler_require_avoids_owner_load_until_run_get_pipeline`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (180 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Compiler owner modules` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Runtime`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Compiler` import from `perl/LinkedSpec/Runtime.pm`,

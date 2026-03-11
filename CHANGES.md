@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Phase 1A Slice: Lazy-Load `BootstrapSpec`, `SpecEntry`, and `Validation` Through `Compiler`
+## Summary
+Reduced internal compile-path load-time coupling again by making `LinkedSpec::Compiler` load `BootstrapSpec`, `SpecEntry`, and `Validation` only when `spec_descr(...)` or `run_get_pipeline(...)` actually needs them, so require-only consumers of `Compiler.pm` no longer import those owner modules up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compiler owner loading:
+  - removed eager `use LinkedSpec::BootstrapSpec ();`,
+  - removed eager `use LinkedSpec::SpecEntry ();`,
+  - removed eager `use LinkedSpec::Validation ();`,
+  - added `LinkedSpec::Compiler::_require_pkg(...)`,
+  - added owner helpers for default bootstrap-parse, spec-entry, and validation loading.
+- Preserved behavior:
+  - `LinkedSpec::Compiler::spec_descr(...)` still uses the same default `SpecEntry` owner path when no callback override is provided,
+  - `LinkedSpec::Compiler::run_get_pipeline(...)` still uses the same default bootstrap parse and validation paths,
+  - injected callbacks continue to work unchanged.
+- Updated focused regression coverage:
+  - added `compiler_require_avoids_owner_load_until_run_get_pipeline`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=180`)
 ## 2026-03-11 - Phase 1A Slice: Lazy-Load `Compiler` Through `Runtime`
 ## Summary
 Reduced internal compile-path load-time coupling by making `LinkedSpec::Runtime` load `LinkedSpec::Compiler` only when `run_get(...)` actually runs, so require-only consumers of `Runtime.pm` no longer import the compiler pipeline up front.

@@ -10,10 +10,7 @@ BEGIN {
 }
 use LinkedRE;
 
-use LinkedSpec::BootstrapSpec ();
-use LinkedSpec::SpecEntry ();
 use LinkedSpec::Trace ();
-use LinkedSpec::Validation ();
 
 use constant {
  DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
@@ -29,6 +26,31 @@ sub _require_dep {
  die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency '$name'"
   unless defined $value;
  return $value
+}
+
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::Compiler::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _default_bootstrap_parse_cb {
+ _require_pkg('LinkedSpec::BootstrapSpec') unless LinkedSpec::BootstrapSpec->can('run_bootstrap_parse');
+ return \&LinkedSpec::BootstrapSpec::run_bootstrap_parse
+}
+
+sub _default_compile_spec_entry_cb {
+ _require_pkg('LinkedSpec::SpecEntry') unless LinkedSpec::SpecEntry->can('compile_spec_entry');
+ return \&LinkedSpec::SpecEntry::compile_spec_entry
+}
+
+sub _require_validation_pkg {
+ _require_pkg('LinkedSpec::Validation') unless LinkedSpec::Validation->can('validate_spec_content');
+ return 1
 }
 
 sub _build_action_rewriter_migration_summary {
@@ -151,7 +173,7 @@ sub _build_action_rewriter_migration_summary {
 
 sub spec_descr {
  my ($specretv, $compile_spec_entry) = @_;
- $compile_spec_entry ||= \&LinkedSpec::SpecEntry::compile_spec_entry;
+ $compile_spec_entry ||= _default_compile_spec_entry_cb();
  die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
   unless ref($compile_spec_entry) eq 'CODE';
  my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::Compiler::spec_descr', {
@@ -308,10 +330,11 @@ sub run_get_pipeline {
  my $runtime_ctx = _require_runtime_ctx($deps);
  my $bootstrap_parse = exists $deps->{bootstrap_parse}
   ? _require_dep($deps, 'bootstrap_parse')
-  : \&LinkedSpec::BootstrapSpec::run_bootstrap_parse;
+  : _default_bootstrap_parse_cb();
+ my $default_compile_spec_entry = _default_compile_spec_entry_cb();
  my $compile_spec_entry = exists $deps->{compile_spec_entry}
   ? _require_dep($deps, 'compile_spec_entry')
-  : sub { return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => $runtime_ctx }) };
+  : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
  my $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
 
  die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"
@@ -336,6 +359,7 @@ sub run_get_pipeline {
  LinkedSpec::Trace::log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
  my $validation_failed = 0;
+ _require_validation_pkg();
 
  unless (LinkedSpec::Validation::validate_spec_content($spec_content_ref)) {
   LinkedSpec::Trace::trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
