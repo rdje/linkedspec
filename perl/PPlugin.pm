@@ -7,8 +7,9 @@
 package PPlugin;
 
 use 5.010;
-
-use LinkedSpec;
+use Cwd ();
+use File::Basename ();
+use File::Spec ();
 
 sub _require_dep {
  my ($deps, $name) = @_;
@@ -78,7 +79,11 @@ sub _build_plugin_registry {
 
 sub _default_deps {
  return {
-  load_plugin_parser => sub { return LinkedSpec::get_parser('pplugin') },
+  load_plugin_parser => sub {
+   my $ok = eval { require LinkedSpec; 1 };
+   die "(PPlugin::_default_deps) -E- unable to load LinkedSpec: $@" unless $ok;
+   return LinkedSpec::get_parser('pplugin')
+  },
   discover_plugin_files => sub { return [_legacy_plugin_files()] },
   build_plugin_registry => sub { return _build_plugin_registry(@_) },
  }

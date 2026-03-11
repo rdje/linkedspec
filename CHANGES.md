@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Runtime Slice: Lazy-Load `LinkedSpec` from `PPlugin` Default Parser Deps
+## Summary
+Continued the plugin/runtime modernization track by removing `PPlugin`'s eager `LinkedSpec` import and making the default `pplugin` parser dependency lazy-load `LinkedSpec` only when that callback is actually invoked.
+
+## Changed Files
+- Updated: `perl/PPlugin.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `PPlugin` module-load behavior:
+  - removed eager `use LinkedSpec;` from `PPlugin.pm`,
+  - added explicit core path-module ownership in `PPlugin.pm` with `Cwd`, `File::Basename`, and `File::Spec`,
+  - updated `_default_deps()->{load_plugin_parser}` to `require LinkedSpec` lazily before calling `LinkedSpec::get_parser('pplugin')`.
+- Preserved behavior:
+  - `PPlugin` still uses the `pplugin` spec and `LinkedSpec::get_parser(...)` for legacy `.plg` parsing by default,
+  - default registry construction and plugin dispatch behavior remain unchanged for the phase0 corpus,
+  - `LinkedSpec` still loads when the default parser callback is executed.
+- Updated focused regression coverage:
+  - added `pplugin_require_does_not_eagerly_load_linkedspec`,
+  - added `pplugin_default_parser_dep_lazy_loads_linkedspec`,
+  - added `run_perl_snippet_in_subprocess(...)` helper for process-isolated module-load assertions.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/PPlugin.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=149`)
 ## 2026-03-11 - Plugin Runtime Slice: Extract Explicit `PPlugin` Registry Loader Deps
 ## Summary
 Continued the plugin/runtime modernization track by extracting legacy registry construction in `PPlugin::new(...)` behind an explicit dependency-owned loader seam, so the compatibility adapter no longer hardwires parser loading, plugin-file discovery, and registry assembly inline.

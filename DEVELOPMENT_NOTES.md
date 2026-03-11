@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Plugin/runtime modernization slice completed against `PPlugin` module-load coupling to `LinkedSpec`.
+- Slice-selection rationale:
+  - the roadmap calls for narrowing legacy plugin runtime coupling and making dependency ownership explicit,
+  - `PPlugin.pm` still loaded `LinkedSpec` eagerly at module import time even though that dependency is only needed for the default parser callback,
+  - deferring that load reduces legacy startup coupling while preserving the compatibility parser path.
+- Implementation scope:
+  - removed eager `use LinkedSpec;` from `PPlugin.pm`,
+  - added explicit `Cwd`, `File::Basename`, and `File::Spec` ownership to `PPlugin.pm`,
+  - changed `_default_deps()->{load_plugin_parser}` to `require LinkedSpec` lazily before calling `LinkedSpec::get_parser('pplugin')`.
+- Regression addition/update:
+  - added `pplugin_require_does_not_eagerly_load_linkedspec`,
+  - added `pplugin_default_parser_dep_lazy_loads_linkedspec`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/PPlugin.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=149`)
+## Session Notes (2026-03-11)
 - Plugin/runtime modernization slice completed against the legacy registry-construction boundary inside `PPlugin::new(...)`.
 - Slice-selection rationale:
   - the roadmap calls for explicit plugin runtime seams instead of hardwired legacy construction paths,

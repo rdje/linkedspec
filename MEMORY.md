@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted plugin/runtime modernization slice completed against `PPlugin` eager module-load coupling to `LinkedSpec`.
+- Key technical outcome:
+  - removed eager `use LinkedSpec;` from `PPlugin.pm`,
+  - added explicit `Cwd`, `File::Basename`, and `File::Spec` ownership in `PPlugin.pm`,
+  - `PPlugin::_default_deps()->{load_plugin_parser}` now lazy-loads `LinkedSpec` only when the default parser callback is executed.
+- Regression outcome:
+  - added `pplugin_require_does_not_eagerly_load_linkedspec`,
+  - added `pplugin_default_parser_dep_lazy_loads_linkedspec`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/PPlugin.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (149 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin runtime: lazy-load LinkedSpec from PPlugin deps` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted plugin/runtime modernization slice completed against the legacy registry-construction seam inside `PPlugin::new(...)`.
 - Key technical outcome:
   - added `_require_dep(...)`, `_default_deps()`, and `_load_legacy_registry(...)` to `PPlugin`,

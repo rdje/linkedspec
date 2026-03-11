@@ -422,6 +422,40 @@ subtest 'pplugin_default_registry_deps_load_through_explicit_owner_paths' => sub
     is($registry->{parser_result}, 'parser:pplugin', 'PPlugin default parser-loader dep targets the pplugin spec explicitly');
     is_deeply($registry->{files}, ['001_first.plg', '002_second.plg'], 'PPlugin default registry-builder dep forwards discovered plugin files unchanged');
 };
+subtest 'pplugin_require_does_not_eagerly_load_linkedspec' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require PPlugin;'
+      . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_LOADED__\n" : "__LINKEDSPEC_NOT_LOADED__\n";'
+      . 'print defined(&Cwd::abs_path) ? "__CWD_READY__\n" : "__CWD_MISSING__\n";'
+      . 'print eval { File::Spec->catdir("a", "b"); 1 } ? "__FILESPEC_READY__\n" : "__FILESPEC_MISSING__\n";'
+      . 'print defined(&File::Basename::fileparse) ? "__BASENAME_READY__\n" : "__BASENAME_MISSING__\n";'
+    );
+
+    is($exit_code, 0, 'PPlugin require-only subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LINKEDSPEC_NOT_LOADED__/, 'PPlugin require-only subprocess keeps LinkedSpec unloaded');
+    like($out, qr/__CWD_READY__\n__FILESPEC_READY__\n__BASENAME_READY__/, 'PPlugin require-only subprocess loads its direct core path modules explicitly');
+    is($err, '', 'PPlugin require-only subprocess does not emit stderr');
+};
+subtest 'pplugin_default_parser_dep_lazy_loads_linkedspec' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require PPlugin;'
+      . 'my $deps = PPlugin::_default_deps();'
+      . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_EAGER__\n" : "__LINKEDSPEC_STILL_LAZY__\n";'
+      . 'my $parser = $deps->{load_plugin_parser}->();'
+      . 'print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";'
+      . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_AFTER_CALLBACK__\n" : "__LINKEDSPEC_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'PPlugin default parser-dep subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LINKEDSPEC_STILL_LAZY__/, 'PPlugin default deps do not eager-load LinkedSpec when built');
+    like($out, qr/__PARSER_DEFINED__/, 'PPlugin default parser dep returns a parser callback when invoked');
+    like($out, qr/__LINKEDSPEC_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads LinkedSpec only on callback execution');
+    is($err, '', 'PPlugin default parser-dep subprocess does not emit stderr');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 
@@ -4653,6 +4687,30 @@ sub run_parser_invocation_in_subprocess {
         'my ($spec, $input) = @ARGV; my $p = LinkedSpec::get_parser($spec); die "__NO_PARSER__\n" unless $p; my $arg = ($input eq "__INPUT_ARRAYREF__") ? [] : $input; my $ast = $p->($arg); print defined($ast) ? "__AST_DEFINED__\n" : "__AST_UNDEF__\n";',
         $spec_name,
         $input_text,
+    );
+
+    $out .= $_ while <$out_fh>;
+    $err .= $_ while <$err_fh>;
+    waitpid($pid, 0);
+    my $exit_code = $? >> 8;
+
+    return ($exit_code, $out, $err);
+}
+
+sub run_perl_snippet_in_subprocess {
+    my ($snippet, @args) = @_;
+    my ($out, $err) = ('', '');
+    my $err_fh = gensym();
+
+    my $pid = open3(
+        undef,
+        my $out_fh,
+        $err_fh,
+        $^X,
+        "-I$Bin/../perl",
+        '-e',
+        $snippet,
+        @args,
     );
 
     $out .= $_ while <$out_fh>;
