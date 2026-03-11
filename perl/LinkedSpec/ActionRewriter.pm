@@ -239,7 +239,7 @@ sub _lower_print_statement {
 }
 
 sub _action_contract_deps {
- return LinkedSpec::Deps::action_rewriter_contract_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
 }
 
 sub _build_action_lowering_contracts {

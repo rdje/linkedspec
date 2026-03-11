@@ -2391,6 +2391,27 @@ subtest 'action_rewriter_avoids_deps_declare_method_dep_builder' => sub {
     ok(defined($assign_stmt), 'ActionRewriter still returns lowered assign output through the DeclareMethod-owned default deps');
     is($assign_stmt, '$retv = $foo', 'ActionRewriter preserves assign-method lowering output after moving default deps into DeclareMethod');
 };
+subtest 'action_rewriter_avoids_deps_action_contract_dep_builder' => sub {
+    plan tests => 5;
+
+    my ($ok_run, $err, $contracts, $declare_contract, $declare_output) = (0, '', undef, undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_contract_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__\n" };
+        $contracts = LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top');
+        ($declare_contract) = grep { $_->{id} eq 'declare_typed' } @{$contracts || []};
+        $declare_output = $declare_contract ? $declare_contract->{lower}->('declare(array, items)') : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter contract build succeeds without the removed Deps action-contract dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__/, 'ActionRewriter does not call the trapped Deps action-contract dep builder');
+    ok(ref($contracts) eq 'ARRAY' && @{$contracts} > 0, 'ActionRewriter still returns lowering contracts through the Contracts-owned default deps');
+    ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'ActionRewriter still exposes the declare_typed lowering contract through the Contracts owner');
+    is($declare_output, 'my @items', 'ActionRewriter preserves declare_typed contract lowering after moving default deps into Contracts');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

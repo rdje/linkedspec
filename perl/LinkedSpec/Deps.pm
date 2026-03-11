@@ -101,32 +101,6 @@ sub declare_method_deps_for_package {
   lower_assign_statement => _require_pkg_cb($pkg, '_lower_assign_statement'),
  }
 }
-sub action_rewriter_contract_deps_for_package {
- my ($pkg) = @_;
- return {
-  lower_return_general_statement => _require_pkg_cb($pkg, '_lower_return_general_statement'),
-  lower_return_imatch_statement  => _require_pkg_cb($pkg, '_lower_return_imatch_statement'),
-  lower_assign_method_statement  => _require_pkg_cb($pkg, '_lower_assign_method_statement'),
-  lower_push_value_statement     => _require_pkg_cb($pkg, '_lower_push_value_statement'),
-  lower_regex_subst_statement    => _require_pkg_cb($pkg, '_lower_regex_subst_statement'),
-  lower_array_pipeline_expr      => _require_pkg_cb($pkg, '_lower_array_pipeline_expr'),
-  lower_if_flow_statement        => _require_pkg_cb($pkg, '_lower_if_flow_statement'),
-  lower_elseif_flow_statement    => _require_pkg_cb($pkg, '_lower_elseif_flow_statement'),
-  lower_else_flow_statement      => _require_pkg_cb($pkg, '_lower_else_flow_statement'),
-  lower_endif_flow_statement     => _require_pkg_cb($pkg, '_lower_endif_flow_statement'),
-  lower_switch_flow_statement    => _require_pkg_cb($pkg, '_lower_switch_flow_statement'),
-  lower_case_flow_statement      => _require_pkg_cb($pkg, '_lower_case_flow_statement'),
-  lower_default_flow_statement   => _require_pkg_cb($pkg, '_lower_default_flow_statement'),
-  lower_endcase_flow_statement   => _require_pkg_cb($pkg, '_lower_endcase_flow_statement'),
-  lower_endswitch_flow_statement => _require_pkg_cb($pkg, '_lower_endswitch_flow_statement'),
-  lower_say_statement            => _require_pkg_cb($pkg, '_lower_say_statement'),
-  lower_print_statement          => _require_pkg_cb($pkg, '_lower_print_statement'),
-  lower_return_undef_statement   => _require_pkg_cb($pkg, '_lower_return_undef_statement'),
-  lower_return_array_statement   => _require_pkg_cb($pkg, '_lower_return_array_statement'),
-  lower_declare_method_statement => _require_pkg_cb($pkg, '_lower_declare_method_statement'),
- }
-}
-
 sub parser_factory_deps_for_package {
  my ($pkg) = @_;
  return {

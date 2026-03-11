@@ -17,6 +17,40 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::Contracts::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  lower_return_general_statement => _require_pkg_cb($pkg, '_lower_return_general_statement'),
+  lower_return_imatch_statement  => _require_pkg_cb($pkg, '_lower_return_imatch_statement'),
+  lower_assign_method_statement  => _require_pkg_cb($pkg, '_lower_assign_method_statement'),
+  lower_push_value_statement     => _require_pkg_cb($pkg, '_lower_push_value_statement'),
+  lower_regex_subst_statement    => _require_pkg_cb($pkg, '_lower_regex_subst_statement'),
+  lower_array_pipeline_expr      => _require_pkg_cb($pkg, '_lower_array_pipeline_expr'),
+  lower_if_flow_statement        => _require_pkg_cb($pkg, '_lower_if_flow_statement'),
+  lower_elseif_flow_statement    => _require_pkg_cb($pkg, '_lower_elseif_flow_statement'),
+  lower_else_flow_statement      => _require_pkg_cb($pkg, '_lower_else_flow_statement'),
+  lower_endif_flow_statement     => _require_pkg_cb($pkg, '_lower_endif_flow_statement'),
+  lower_switch_flow_statement    => _require_pkg_cb($pkg, '_lower_switch_flow_statement'),
+  lower_case_flow_statement      => _require_pkg_cb($pkg, '_lower_case_flow_statement'),
+  lower_default_flow_statement   => _require_pkg_cb($pkg, '_lower_default_flow_statement'),
+  lower_endcase_flow_statement   => _require_pkg_cb($pkg, '_lower_endcase_flow_statement'),
+  lower_endswitch_flow_statement => _require_pkg_cb($pkg, '_lower_endswitch_flow_statement'),
+  lower_say_statement            => _require_pkg_cb($pkg, '_lower_say_statement'),
+  lower_print_statement          => _require_pkg_cb($pkg, '_lower_print_statement'),
+  lower_return_undef_statement   => _require_pkg_cb($pkg, '_lower_return_undef_statement'),
+  lower_return_array_statement   => _require_pkg_cb($pkg, '_lower_return_array_statement'),
+  lower_declare_method_statement => _require_pkg_cb($pkg, '_lower_declare_method_statement'),
+ }
+}
+
 sub _require_lowering_deps {
  my ($deps) = @_;
  return {
