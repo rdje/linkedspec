@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move StatementSplit Default Dep Builder into `StatementSplit`
+## Summary
+Continued the ActionIR cleanup track by moving statement-split default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::StatementSplit`, so the active statement-splitting owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored statement-split dependency ownership:
+  - added `LinkedSpec::ActionIR::StatementSplit::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_statement_split_deps()` to resolve through `StatementSplit` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::action_rewriter_statement_split_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still splits action statements through `LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(...)`,
+  - the statement-split path still consumes the same `trim_action_ir_value` helper callback as before,
+  - statement segmentation stays behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_statement_split_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=159`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move Scanner Default Dep Builder into `Scanner`
 ## Summary
 Continued the ActionIR cleanup track by moving scanner default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::Scanner`, so the active scanner owner module now defines its own default callback map.

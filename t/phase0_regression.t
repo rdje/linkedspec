@@ -2290,6 +2290,24 @@ subtest 'action_rewriter_avoids_deps_scanner_dep_builder' => sub {
     ok(defined($rewritten), 'ActionRewriter still returns rewritten code through the Scanner-owned default deps');
     is($rewritten, q{return ['?Top:', \@Top]}, 'ActionRewriter preserves helper rewrite output after moving scanner default deps into Scanner');
 };
+subtest 'action_rewriter_avoids_deps_statement_split_dep_builder' => sub {
+    plan tests => 4;
+
+    my ($ok_run, $err, $parts) = (0, '', undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_statement_split_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_STATEMENT_SPLIT_DEPS__\n" };
+        $parts = LinkedSpec::ActionRewriter::_split_action_ir_statements("return foo; exit");
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter statement split succeeds without the removed Deps statement-split dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_STATEMENT_SPLIT_DEPS__/, 'ActionRewriter does not call the trapped Deps statement-split dep builder');
+    ok(ref($parts) eq 'ARRAY', 'ActionRewriter still returns a split statement list through the StatementSplit-owned default deps');
+    is_deeply($parts, ['return foo', 'exit'], 'ActionRewriter preserves statement splitting output after moving default deps into StatementSplit');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

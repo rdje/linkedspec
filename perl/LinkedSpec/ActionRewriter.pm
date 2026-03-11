@@ -47,7 +47,7 @@ sub _value_expr_deps {
  return LinkedSpec::Deps::value_expr_deps_for_package(__PACKAGE__)
 }
 sub _statement_split_deps {
- return LinkedSpec::Deps::action_rewriter_statement_split_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
 }
 sub _canonical_event_deps {
  return LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package(__PACKAGE__)

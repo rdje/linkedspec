@@ -116,13 +116,6 @@ sub action_rewriter_declare_method_deps_for_package {
  }
 }
 
-sub action_rewriter_statement_split_deps_for_package {
- my ($pkg) = @_;
- return {
-  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
- }
-}
-
 sub action_rewriter_canonical_event_deps_for_package {
  my ($pkg) = @_;
  return {
