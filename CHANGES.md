@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move Canonical Event Default Dep Builder into `CanonicalEvents`
+## Summary
+Continued the ActionIR cleanup track by moving canonical-event default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::CanonicalEvents`, so the active canonical-event owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored canonical-event dependency ownership:
+  - added `LinkedSpec::ActionIR::CanonicalEvents::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_canonical_event_deps()` to resolve through `CanonicalEvents` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still builds canonical action-IR events through `LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(...)`,
+  - canonical-event defaults still target the same trim and statement-split helpers as before,
+  - canonical node emission stays behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_canonical_event_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=160`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move StatementSplit Default Dep Builder into `StatementSplit`
 ## Summary
 Continued the ActionIR cleanup track by moving statement-split default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::StatementSplit`, so the active statement-splitting owner now defines its own callback map.

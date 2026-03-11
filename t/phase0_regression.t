@@ -2308,6 +2308,28 @@ subtest 'action_rewriter_avoids_deps_statement_split_dep_builder' => sub {
     ok(ref($parts) eq 'ARRAY', 'ActionRewriter still returns a split statement list through the StatementSplit-owned default deps');
     is_deeply($parts, ['return foo', 'exit'], 'ActionRewriter preserves statement splitting output after moving default deps into StatementSplit');
 };
+subtest 'action_rewriter_avoids_deps_canonical_event_dep_builder' => sub {
+    plan tests => 4;
+
+    my ($ok_run, $err, $diag) = (0, '', undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_canonical_event_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__\n" };
+        $diag = LinkedSpec::ActionRewriter::_build_canonical_action_ir_events(
+            'Top',
+            'return_a(Top)',
+            [{ raw => 'return_a(Top)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter canonical-event build succeeds without the removed Deps canonical-event dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CANONICAL_EVENT_DEPS__/, 'ActionRewriter does not call the trapped Deps canonical-event dep builder');
+    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns canonical-event diagnostics through the CanonicalEvents-owned default deps');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event classification after moving default deps into CanonicalEvents');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

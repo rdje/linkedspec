@@ -10,12 +10,29 @@ BEGIN {
 }
 use LinkedSpec::ActionIR::CanonicalEvents::Core ();
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ no strict 'refs';
+ my $cb = *{"${pkg}::${name}"}{CODE};
+ die "(LinkedSpec::ActionIR::CanonicalEvents::_require_pkg_cb) -E- missing callback ${pkg}::${name}"
+  unless ref($cb) eq 'CODE';
+ return $cb
+}
+
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
  die "(LinkedSpec::ActionIR::CanonicalEvents::_require_dep) -E- missing dependency callback '$name'"
   unless ref($cb) eq 'CODE';
  return $cb
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
+ }
 }
 
 sub _canonicalize_helper_action_ir_event {
