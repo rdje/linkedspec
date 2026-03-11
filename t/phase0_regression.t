@@ -294,6 +294,39 @@ PERL
     like($out, qr/__STATEMENT_PARTS_OK__/, 'statement split preserves split output after lazy StatementSplit::Core loading');
     is($err, '', 'ActionIR::StatementSplit require/split subprocess does not emit stderr');
 };
+subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionIR::CanonicalEvents;
+print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents/Core.pm"}) ? "__CANONICAL_EVENTS_CORE_EAGER__\n" : "__CANONICAL_EVENTS_CORE_STILL_LAZY__\n";
+my $diag = LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(
+    'Top',
+    'return_a(Top)',
+    [{ raw => 'return_a(Top)', args => { label => 'Top' }, contract_id => 'return_a', ir_node => 'RETURN' }],
+    {
+        trim_action_ir_value => sub {
+            my ($value) = @_;
+            return undef unless defined $value;
+            $value =~ s/^\s+//;
+            $value =~ s/\s+$//;
+            return $value;
+        },
+        split_action_ir_statements => sub { return ['return_a(Top)'] },
+    },
+);
+print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents/Core.pm"}) ? "__CANONICAL_EVENTS_CORE_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_CORE_STILL_UNLOADED__\n";
+print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_NODES_OK__\n" : "__CANONICAL_EVENTS_NODES_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'ActionIR::CanonicalEvents require/build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CANONICAL_EVENTS_CORE_STILL_LAZY__/, 'require ActionIR::CanonicalEvents keeps CanonicalEvents::Core unloaded');
+    like($out, qr/__CANONICAL_EVENTS_DIAG_HASH__/, 'canonical-event build still returns a hash after lazy CanonicalEvents::Core loading');
+    like($out, qr/__CANONICAL_EVENTS_CORE_AFTER_BUILD__/, 'canonical-event build lazy-loads CanonicalEvents::Core on demand');
+    like($out, qr/__CANONICAL_EVENTS_NODES_OK__/, 'canonical-event build preserves classification output after lazy CanonicalEvents::Core loading');
+    is($err, '', 'ActionIR::CanonicalEvents require/build subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

@@ -8,7 +8,16 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
-use LinkedSpec::ActionIR::CanonicalEvents::Core ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
+sub _require_canonical_events_core_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents::Core')
+}
 
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
@@ -37,6 +46,7 @@ sub default_deps_for_package {
 
 sub _canonicalize_helper_action_ir_event {
  my ($label, $event, $deps) = @_;
+ _require_canonical_events_core_pkg();
  return LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event($label, $event)
 }
 

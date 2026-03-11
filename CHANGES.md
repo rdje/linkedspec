@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `CanonicalEvents::Core` Through `ActionIR::CanonicalEvents`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::CanonicalEvents` load `CanonicalEvents::Core` only when canonical-event building actually runs, so require-only consumers of `ActionIR::CanonicalEvents.pm` no longer import the canonical-event classification engine up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored canonical-event owner loading:
+  - removed eager `use LinkedSpec::ActionIR::CanonicalEvents::Core ();`,
+  - added `LinkedSpec::ActionIR::CanonicalEvents::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::CanonicalEvents::_require_canonical_events_core_pkg(...)`,
+  - updated `_canonicalize_helper_action_ir_event(...)` to lazy-load `CanonicalEvents::Core.pm` before delegating.
+- Preserved behavior:
+  - canonical-event normalization still classifies helper contracts the same way,
+  - fallback raw-statement handling remains unchanged,
+  - downstream `ActionRewriter` usage inherits the narrower load surface automatically.
+- Updated focused regression coverage:
+  - added `actionir_canonical_events_require_avoids_core_load_until_build`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=186`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit::Core` Through `ActionIR::StatementSplit`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::StatementSplit` load `StatementSplit::Core` only when statement splitting actually runs, so require-only consumers of `ActionIR::StatementSplit.pm` no longer import the statement-splitting engine up front.
