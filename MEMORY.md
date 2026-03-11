@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::Scanner`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::ScannerCore` import from `perl/LinkedSpec/ActionIR/Scanner.pm`,
+  - added `LinkedSpec::ActionIR::Scanner::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::Scanner::_require_scanner_core_pkg(...)`,
+  - updated `scan_contract_ir_events(...)` to lazy-load `ScannerCore.pm` only when contract scanning actually starts.
+- Regression outcome:
+  - added `actionir_scanner_require_avoids_scannercore_load_until_scan`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (184 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load ScannerCore through ActionIR::Scanner` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::BootstrapSpec`.
 - Key technical outcome:
   - removed eager `LinkedSpec::BootstrapSpec::Core` import from `perl/LinkedSpec/BootstrapSpec.pm`,

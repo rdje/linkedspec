@@ -227,6 +227,43 @@ PERL
     like($out, qr/__BOOTSTRAP_CORE_AFTER_PARSE__/, 'run_bootstrap_parse lazy-loads BootstrapSpec::Core on demand');
     is($err, '', 'LinkedSpec::BootstrapSpec require/run_bootstrap_parse subprocess does not emit stderr');
 };
+subtest 'actionir_scanner_require_avoids_scannercore_load_until_scan' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionIR::Scanner;
+print exists($INC{"LinkedSpec/ActionIR/ScannerCore.pm"}) ? "__SCANNERCORE_EAGER__\n" : "__SCANNERCORE_STILL_LAZY__\n";
+my $events = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+    { id => 'return_bare' },
+    "return foo;",
+    {
+        split_action_ir_statements => sub { return ['return foo'] },
+        trim_action_ir_value => sub {
+            my ($value) = @_;
+            return undef unless defined $value;
+            $value =~ s/^\s+//;
+            $value =~ s/\s+$//;
+            return $value;
+        },
+        parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
+        normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
+        build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
+        extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
+        parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
+    },
+);
+print ref($events) eq "ARRAY" ? "__EVENTS_ARRAY__\n" : "__EVENTS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/ScannerCore.pm"}) ? "__SCANNERCORE_AFTER_SCAN__\n" : "__SCANNERCORE_STILL_UNLOADED__\n";
+print scalar(@{$events || []}) == 1 && $events->[0]{raw} eq "return foo" ? "__EVENT_PAYLOAD_OK__\n" : "__EVENT_PAYLOAD_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'ActionIR::Scanner require/scan subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__SCANNERCORE_STILL_LAZY__/, 'require ActionIR::Scanner keeps ScannerCore unloaded');
+    like($out, qr/__EVENTS_ARRAY__/, 'scanner scan still returns an event array after lazy ScannerCore loading');
+    like($out, qr/__SCANNERCORE_AFTER_SCAN__/, 'scanner scan lazy-loads ScannerCore on demand');
+    like($out, qr/__EVENT_PAYLOAD_OK__/, 'scanner scan preserves return-bare payload after lazy ScannerCore loading');
+    is($err, '', 'ActionIR::Scanner require/scan subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

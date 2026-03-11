@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `ScannerCore` Through `ActionIR::Scanner`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::Scanner` load `ScannerCore` only when contract scanning actually runs, so require-only consumers of `ActionIR::Scanner.pm` no longer import the scanner-core rule dispatcher up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored scanner owner loading:
+  - removed eager `use LinkedSpec::ActionIR::ScannerCore ();`,
+  - added `LinkedSpec::ActionIR::Scanner::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::Scanner::_require_scanner_core_pkg(...)`,
+  - updated `scan_contract_ir_events(...)` to lazy-load `ScannerCore.pm` before delegating.
+- Preserved behavior:
+  - injected scanner deps are unchanged,
+  - scanner event extraction still returns the same event payloads,
+  - downstream `ActionRewriter` usage inherits the narrower load surface automatically.
+- Updated focused regression coverage:
+  - added `actionir_scanner_require_avoids_scannercore_load_until_scan`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=184`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `BootstrapSpec::Core` Through `BootstrapSpec`
 ## Summary
 Reduced internal bootstrap-grammar load-time coupling again by making `LinkedSpec::BootstrapSpec` load `BootstrapSpec::Core` only when bootstrap grammar state is actually requested, so require-only consumers of `BootstrapSpec.pm` no longer import the hardcoded grammar builder up front.

@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionIR::Scanner` no longer imports `LinkedSpec::ActionIR::ScannerCore` at module load time.
+- `LinkedSpec::ActionIR::Scanner` now lazy-loads `ScannerCore.pm` only when contract scanning actually starts.
+- Added require-only regression lock `actionir_scanner_require_avoids_scannercore_load_until_scan`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=184`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::BootstrapSpec` no longer imports `LinkedSpec::BootstrapSpec::Core` at module load time.
 - `LinkedSpec::BootstrapSpec` now lazy-loads `BootstrapSpec::Core.pm` only when bootstrap grammar state or bootstrap parsing actually needs it.
 - Added require-only regression lock `bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build`.

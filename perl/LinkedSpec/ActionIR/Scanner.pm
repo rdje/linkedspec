@@ -9,7 +9,20 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::ActionIR::ScannerCore ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::ActionIR::Scanner::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _require_scanner_core_pkg {
+ _require_pkg('LinkedSpec::ActionIR::ScannerCore') unless LinkedSpec::ActionIR::ScannerCore->can('scan_contract_ir_events');
+ return 1
+}
 
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
@@ -41,6 +54,7 @@ sub default_deps_for_package {
 # Returns : arrayref of event hashes
 #------------------------------------------------------------------------------
 sub scan_contract_ir_events {
+ _require_scanner_core_pkg();
  return LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@_)
 }
 
