@@ -2351,6 +2351,25 @@ subtest 'action_rewriter_avoids_deps_diagnostics_dep_builder' => sub {
     ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the Diagnostics-owned default deps');
     is($diag->{unresolved_helper_count}, 2, 'ActionRewriter preserves unresolved-helper counting after moving default deps into Diagnostics');
 };
+subtest 'action_rewriter_avoids_deps_rewrite_pipeline_dep_builder' => sub {
+    plan tests => 5;
+
+    my ($ok_run, $err, $rewritten, $diag) = (0, '', undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__\n" };
+        ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics('Top', 'return_a(Top)');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter rewrite pipeline succeeds without the removed Deps rewrite-pipeline dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_REWRITE_PIPELINE_DEPS__/, 'ActionRewriter does not call the trapped Deps rewrite-pipeline dep builder');
+    is($rewritten, q{return ['?Top:', \@Top]}, 'ActionRewriter preserves rewrite output after moving default deps into RewritePipeline');
+    ok(ref($diag) eq 'HASH', 'ActionRewriter still returns diagnostics through the RewritePipeline-owned default deps');
+    is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN_A'], 'ActionRewriter preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

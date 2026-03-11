@@ -17,6 +17,24 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::RewritePipeline::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  build_action_lowering_contracts => _require_pkg_cb($pkg, '_build_action_lowering_contracts'),
+  collect_action_helper_ir_nodes  => _require_pkg_cb($pkg, '_collect_action_helper_ir_nodes'),
+  build_canonical_action_ir_events => _require_pkg_cb($pkg, '_build_canonical_action_ir_events'),
+  find_unresolved_action_helpers  => _require_pkg_cb($pkg, '_find_unresolved_action_helpers'),
+ }
+}
+
 sub _lower_action_code_from_canonical_ir {
  my ($label, $code, $rewrite_rules, $canonical_ir_diag) = @_;
 

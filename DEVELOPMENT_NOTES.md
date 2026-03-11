@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against rewrite-pipeline default dependency ownership.
+- Slice-selection rationale:
+  - after moving diagnostics, canonical-event, statement-split, and scanner default dep-builders into their owner modules, the next small remaining ActionIR default wiring mismatch was rewrite-pipeline orchestration,
+  - `LinkedSpec::ActionIR::RewritePipeline` already owned rule construction and canonical-IR-driven rewrite execution but still depended on `LinkedSpec::Deps` for its default callback map,
+  - moving that map into `RewritePipeline` keeps rewrite orchestration and default wiring on the same owner surface.
+- Implementation scope:
+  - added `_require_pkg_cb(...)` and `default_deps_for_package(...)` to `LinkedSpec::ActionIR::RewritePipeline`,
+  - rewired `LinkedSpec::ActionRewriter::_rewrite_pipeline_deps()` to use `RewritePipeline` directly,
+  - removed the now-unused `LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package(...)`.
+- Regression addition/update:
+  - added `action_rewriter_avoids_deps_rewrite_pipeline_dep_builder`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=162`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against diagnostics default dependency ownership.
 - Slice-selection rationale:
   - after moving scanner, statement-split, and canonical-event default dep-builders into their owner modules, the next small remaining ActionIR default wiring mismatch was diagnostics,

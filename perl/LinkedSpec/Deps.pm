@@ -116,16 +116,6 @@ sub action_rewriter_declare_method_deps_for_package {
  }
 }
 
-sub action_rewriter_rewrite_pipeline_deps_for_package {
- my ($pkg) = @_;
- return {
-  build_action_lowering_contracts => _require_pkg_cb($pkg, '_build_action_lowering_contracts'),
-  collect_action_helper_ir_nodes => _require_pkg_cb($pkg, '_collect_action_helper_ir_nodes'),
-  build_canonical_action_ir_events => _require_pkg_cb($pkg, '_build_canonical_action_ir_events'),
-  find_unresolved_action_helpers => _require_pkg_cb($pkg, '_find_unresolved_action_helpers'),
- }
-}
-
 sub action_rewriter_contract_deps_for_package {
  my ($pkg) = @_;
  return {

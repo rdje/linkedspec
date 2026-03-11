@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move RewritePipeline Default Dep Builder into `RewritePipeline`
+## Summary
+Continued the ActionIR cleanup track by moving rewrite-pipeline default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::RewritePipeline`, so the active rewrite-pipeline owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored rewrite-pipeline dependency ownership:
+  - added `LinkedSpec::ActionIR::RewritePipeline::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_rewrite_pipeline_deps()` to resolve through `RewritePipeline` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::action_rewriter_rewrite_pipeline_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still builds rewrite rules and canonical-IR-driven helper rewrites through `LinkedSpec::ActionIR::RewritePipeline`,
+  - rewrite-pipeline defaults still target the same lowering-contract, helper-event, canonical-event, and unresolved-helper callbacks as before,
+  - helper rewrite output stays behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_rewrite_pipeline_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=162`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move Diagnostics Default Dep Builder into `Diagnostics`
 ## Summary
 Continued the ActionIR cleanup track by moving diagnostics default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::Diagnostics`, so the active diagnostics owner now defines its own callback map.
