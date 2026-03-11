@@ -43,18 +43,6 @@ sub method_lowering_deps_for_package {
  }
 }
 
-sub array_pipeline_deps_for_package {
- my ($pkg) = @_;
- return {
-  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-  strip_literal_delimiters => _require_pkg_cb($pkg, '_strip_literal_delimiters'),
-  extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
-  parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
-  is_bare_method_scope_token => _require_pkg_cb($pkg, '_is_bare_method_scope_token'),
-  extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
- }
-}
-
 sub control_flow_deps_for_package {
  my ($pkg) = @_;
  return {

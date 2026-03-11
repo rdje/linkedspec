@@ -38,7 +38,7 @@ sub _method_lowering_deps {
  return LinkedSpec::Deps::method_lowering_deps_for_package(__PACKAGE__)
 }
 sub _array_pipeline_deps {
- return LinkedSpec::Deps::array_pipeline_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _control_flow_deps {
  return LinkedSpec::Deps::control_flow_deps_for_package(__PACKAGE__)

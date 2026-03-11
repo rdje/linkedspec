@@ -17,6 +17,26 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  strip_literal_delimiters => _require_pkg_cb($pkg, '_strip_literal_delimiters'),
+  extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
+  parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
+  is_bare_method_scope_token => _require_pkg_cb($pkg, '_is_bare_method_scope_token'),
+  extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
+ }
+}
+
 #------------------------------------------------------------------------------
 # Function: _normalize_split_delimiter_expr
 # Purpose : Normalize split delimiter argument into a Perl regex expression.

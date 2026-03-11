@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move ArrayPipeline Default Dep Builder into `ArrayPipeline`
+## Summary
+Continued the ActionIR cleanup track by moving array-pipeline default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::ArrayPipeline`, so the active array-pipeline owner now defines its own callback map.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored array-pipeline dependency ownership:
+  - added `LinkedSpec::ActionIR::ArrayPipeline::_require_pkg_cb(...)`,
+  - added `LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(...)`,
+  - rewired `LinkedSpec::ActionRewriter::_array_pipeline_deps()` to resolve through `ArrayPipeline` instead of `Deps`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::array_pipeline_deps_for_package(...)` because it is no longer part of the active path.
+- Preserved behavior:
+  - ActionRewriter still builds and lowers array-pipeline plans through `LinkedSpec::ActionIR::ArrayPipeline`,
+  - array-pipeline defaults still target the same trim, literal, array, method-expr, scope-token, and scalar callbacks as before,
+  - array-pipeline planning and lowering output stay behavior-stable for the current regression corpus.
+- Updated focused regression coverage:
+  - added `action_rewriter_avoids_deps_array_pipeline_dep_builder`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Deps.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=167`)
 ## 2026-03-11 - Backbone Item 3 Slice: Move FlowExpr Default Dep Builder into `FlowExpr`
 ## Summary
 Continued the ActionIR cleanup track by moving flow-expression default dependency construction out of `LinkedSpec::Deps` and into `LinkedSpec::ActionIR::FlowExpr`, so the active flow-expression owner now defines its own callback map.

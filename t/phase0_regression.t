@@ -2454,6 +2454,27 @@ subtest 'action_rewriter_avoids_deps_flow_expr_dep_builder' => sub {
     ok(defined($compound_expr), 'ActionRewriter still returns lowered composite flow output through the FlowExpr-owned default deps');
     is($compound_expr, '((($foo eq "x")) || ((!((!@items)))))', 'ActionRewriter preserves composite flow lowering after moving default deps into FlowExpr');
 };
+subtest 'action_rewriter_avoids_deps_array_pipeline_dep_builder' => sub {
+    plan tests => 6;
+
+    my ($ok_run, $err, $plan, $lowered) = (0, '', undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::array_pipeline_deps_for_package = sub { die "__UNEXPECTED_DEPS_ARRAY_PIPELINE_DEPS__\n" };
+        $plan = LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr('filter_nonempty(array(items))');
+        $lowered = LinkedSpec::ActionRewriter::_lower_array_pipeline_expr('filter_nonempty(array(items))');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter array-pipeline lowering succeeds without the removed Deps array-pipeline dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_ARRAY_PIPELINE_DEPS__/, 'ActionRewriter does not call the trapped Deps array-pipeline dep builder');
+    ok(ref($plan) eq 'HASH', 'ActionRewriter still returns array-pipeline plans through the ArrayPipeline-owned default deps');
+    is_deeply($plan, { target_symbol => 'items', ops => [{ op => 'filter_nonempty' }] }, 'ActionRewriter preserves array-pipeline planning after moving default deps into ArrayPipeline');
+    ok(defined($lowered), 'ActionRewriter still returns lowered array-pipeline output through the ArrayPipeline-owned default deps');
+    is($lowered, '@items = grep { length($_) } @items', 'ActionRewriter preserves array-pipeline lowering after moving default deps into ArrayPipeline');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
