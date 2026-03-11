@@ -61,6 +61,23 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- LinkedSpec-only plugin bridge slice completed against `LinkedSpec::PluginBridge` default legacy runtime dependency ownership.
+- Slice-selection rationale:
+  - current scope remains restricted to `LinkedSpec.pm` and `LinkedSpec::*` modules,
+  - `LinkedSpec::PluginBridge::_default_deps()` still expressed its lazy legacy runtime behavior through inline closures,
+  - moving those callbacks onto named bridge-owned helpers keeps the compatibility seam local to `LinkedSpec::PluginBridge` and makes later bridge removal/replacement easier to reason about.
+- Implementation scope:
+  - added `_load_legacy_plugin_runtime(...)` and `_exec_legacy_plugin(...)` to `LinkedSpec::PluginBridge`,
+  - updated `_default_deps()` to return those named owner helpers instead of anonymous subs.
+- Regression addition/update:
+  - added `plugin_bridge_default_load_dep_uses_legacy_runtime_owner`,
+  - added `plugin_bridge_default_exec_dep_uses_legacy_exec_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=156`)
+## Session Notes (2026-03-11)
 - LinkedSpec-only plugin bridge slice completed against `LinkedSpec::PluginBridge` autoload normalization/dispatch ownership.
 - Slice-selection rationale:
   - current scope is restricted to `LinkedSpec.pm` and `LinkedSpec::*` modules,

@@ -178,7 +178,7 @@ Goal: converge `.spec` semantics on method-like operations and phase out embedde
 Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explicit module-based plugin architecture, while making path/resource lookup deterministic and easier to reason about.
 
 1. Freeze the current compatibility surface
-   - Document the current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge` -> `PPlugin->exec(...)`) and keep corpus coverage for `plugin/*.plg`.
+   - Document the current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge::_dispatch_autoload(...)` -> `LinkedSpec::PluginBridge::_dispatch_plugin_name(...)` -> `PPlugin->exec_plugin_name(...)`) and keep corpus coverage for `plugin/*.plg`.
    - Treat current `.plg` behavior as legacy compatibility that must be preserved during migration, not as the desired end-state architecture.
 2. Introduce an explicit plugin API
    - New plugin entrypoints should live in normal Perl packages with explicit names and registration/loading semantics.
@@ -263,6 +263,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: the stale `LinkedSpec::PluginBridge::dispatch_autoload(...)` wrapper has been removed, and `LinkedSpec::AUTOLOAD` now delegates straight to the owner path `_dispatch_autoload(...)`.
   - Landed follow-up: `LinkedSpec::PluginBridge` now normalizes full Perl autoload names into explicit plugin names before dispatching through its injected exec callback, so future plugin runtimes can consume deterministic plugin identifiers without depending on method-name extraction.
   - Landed follow-up: `LinkedSpec::PluginBridge` now owns a dedicated explicit-name dispatcher (`_dispatch_plugin_name(...)`) plus explicit-name validation (`_require_plugin_name(...)`), so autoload handling is reduced to normalization plus delegation into the explicit-name owner path.
+  - Landed follow-up: `LinkedSpec::PluginBridge` now routes its default lazy legacy-runtime load/exec behavior through explicit owner helpers (`_load_legacy_plugin_runtime(...)`, `_exec_legacy_plugin(...)`) instead of inline closures, further localizing the compatibility bridge seam inside `LinkedSpec::*`.
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now enumerates plugin search roots explicitly and lists `.plg` files in deterministic cwd-first sorted order instead of relying on brace-glob expansion.
   - Landed follow-up: the legacy `.plg` adapter in `PPlugin` now builds its cached plugin registry through `_build_plugin_registry(...)`, preserving deterministic file-order override behavior while narrowing the registry construction seam for future runtime replacement.
   - Landed follow-up: `PPlugin` now owns explicit normalized-name execution through `exec_plugin_name(...)`, and `LinkedSpec::PluginBridge` default runtime dispatch now uses that owner path directly while `PPlugin::exec(...)` remains as compatibility glue for older mixed-name callers.

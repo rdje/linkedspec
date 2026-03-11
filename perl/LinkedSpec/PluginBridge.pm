@@ -16,14 +16,20 @@ sub _require_dep {
  return $cb
 }
 
+sub _load_legacy_plugin_runtime {
+ my $ok = eval { require PPlugin; 1 };
+ die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
+ return 1
+}
+
+sub _exec_legacy_plugin {
+ return PPlugin->exec_plugin_name(@_)
+}
+
 sub _default_deps {
  return {
- load_plugin_runtime => sub {
-   my $ok = eval { require PPlugin; 1 };
-   die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
-   return 1
-  },
-  exec_plugin => sub { return PPlugin->exec_plugin_name(@_) },
+  load_plugin_runtime => \&_load_legacy_plugin_runtime,
+  exec_plugin => \&_exec_legacy_plugin,
  }
 }
 

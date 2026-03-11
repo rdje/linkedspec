@@ -235,6 +235,59 @@ subtest 'plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_
     is($load_calls, 0, 'PluginBridge explicit-name dispatch does not load plugin runtime for invalid explicit plugin names');
     is($exec_calls, 0, 'PluginBridge explicit-name dispatch does not call exec callback for invalid explicit plugin names');
 };
+subtest 'plugin_bridge_default_load_dep_uses_legacy_runtime_owner' => sub {
+    plan tests => 4;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my $load_calls = 0;
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::PluginBridge::_load_legacy_plugin_runtime = sub {
+            ++$load_calls;
+            return 'legacy_runtime_loaded';
+        };
+        my $deps = LinkedSpec::PluginBridge::_default_deps();
+        $ret = $deps->{load_plugin_runtime}->();
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PluginBridge default load dep succeeds while the legacy runtime owner is trapped')
+        or diag(normalize_error($err));
+    is($load_calls, 1, 'PluginBridge default load dep calls the legacy runtime owner exactly once');
+    is($ret, 'legacy_runtime_loaded', 'PluginBridge default load dep preserves the legacy runtime owner return payload');
+    like(ref(LinkedSpec::PluginBridge::_default_deps()->{load_plugin_runtime}), qr/CODE/, 'PluginBridge default load dep remains callable after the owner trap test');
+};
+subtest 'plugin_bridge_default_exec_dep_uses_legacy_exec_owner' => sub {
+    plan tests => 6;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($exec_calls, $captured_plugin_name, @captured_args) = (0, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::PluginBridge::_exec_legacy_plugin = sub {
+            my ($plugin_name, @args) = @_;
+            ++$exec_calls;
+            ($captured_plugin_name, @captured_args) = ($plugin_name, @args);
+            return {
+                plugin_name => $plugin_name,
+                args => [@args],
+            };
+        };
+        my $deps = LinkedSpec::PluginBridge::_default_deps();
+        $ret = $deps->{exec_plugin}->('synthetic_plugin', 'alpha', 'beta');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PluginBridge default exec dep succeeds while the legacy exec owner is trapped')
+        or diag(normalize_error($err));
+    is($exec_calls, 1, 'PluginBridge default exec dep calls the legacy exec owner exactly once');
+    is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge default exec dep forwards the explicit plugin name unchanged into the legacy exec owner');
+    is_deeply(\@captured_args, [qw(alpha beta)], 'PluginBridge default exec dep forwards plugin arguments unchanged into the legacy exec owner');
+    ok(ref($ret) eq 'HASH', 'PluginBridge default exec dep preserves the legacy exec owner payload type');
+    is_deeply($ret, { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'PluginBridge default exec dep preserves the legacy exec owner return payload');
+};
 subtest 'plugin_bridge_autoload_uses_dispatch_plugin_name_owner' => sub {
     plan tests => 5;
 

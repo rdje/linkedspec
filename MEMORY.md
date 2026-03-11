@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted LinkedSpec-only plugin bridge slice completed against default legacy runtime dependency ownership in `LinkedSpec::PluginBridge`.
+- Key technical outcome:
+  - added `_load_legacy_plugin_runtime(...)` and `_exec_legacy_plugin(...)` to `LinkedSpec::PluginBridge`,
+  - `LinkedSpec::PluginBridge::_default_deps()` now routes through those explicit owner helpers instead of inline closures,
+  - the bridge keeps the same legacy `AUTOLOAD` behavior while exposing a cleaner internal replacement seam.
+- Regression outcome:
+  - added `plugin_bridge_default_load_dep_uses_legacy_runtime_owner`,
+  - added `plugin_bridge_default_exec_dep_uses_legacy_exec_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (156 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin bridge: move default legacy runtime deps onto owner helpers` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted LinkedSpec-only plugin bridge slice completed against autoload normalization/explicit-name dispatch ownership in `LinkedSpec::PluginBridge`.
 - Key technical outcome:
   - added `_require_plugin_name(...)` and `_dispatch_plugin_name(...)` to `LinkedSpec::PluginBridge`,

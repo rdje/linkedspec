@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Bridge Slice: Move Default Legacy Runtime Deps onto Owner Helpers
+## Summary
+Continued the `LinkedSpec::PluginBridge` modernization track by moving the bridge's default legacy runtime load/exec behavior onto explicit owner helpers, so the compatibility seam is now fully named inside `LinkedSpec::PluginBridge` instead of relying on inline closures.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::PluginBridge`:
+  - added `_load_legacy_plugin_runtime(...)` as the explicit owner helper for lazy `PPlugin` loading,
+  - added `_exec_legacy_plugin(...)` as the explicit owner helper for normalized-name legacy plugin execution,
+  - updated `_default_deps()` to point at those owner helpers instead of inline closures.
+- Preserved behavior:
+  - `LinkedSpec::AUTOLOAD` still delegates to `LinkedSpec::PluginBridge::_dispatch_autoload(...)`,
+  - default bridge dispatch still lazy-loads `PPlugin` and executes through `PPlugin::exec_plugin_name(...)`,
+  - the public compatibility surface is unchanged while the bridge replacement seam gets narrower and easier to test.
+- Updated focused regression coverage:
+  - added `plugin_bridge_default_load_dep_uses_legacy_runtime_owner`,
+  - added `plugin_bridge_default_exec_dep_uses_legacy_exec_owner`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=156`)
 ## 2026-03-11 - Plugin Bridge Slice: Split Explicit Plugin-Name Dispatch from Autoload Normalization
 ## Summary
 Continued the `LinkedSpec::PluginBridge` modernization track by splitting explicit plugin-name dispatch into its own owner path, so autoload handling now normalizes once and delegates to a reusable explicit-name dispatcher.
