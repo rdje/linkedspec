@@ -61,6 +61,22 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against `LinkedSpec::ActionIR::ScannerCore` scanner-rule dependency orchestration.
+- Slice-selection rationale:
+  - the active `LinkedSpec::*` scope still allows internal ActionIR cleanup even while external plugin-runtime work is out of bounds,
+  - `scan_contract_ir_events(...)` still embedded scanner-rule dependency rebinding and dispatcher selection inline,
+  - extracting those pieces into `ScannerCore` owner helpers narrows the remaining inline orchestration inside the contract scanner without changing rule-package behavior.
+- Implementation scope:
+  - added `_scanner_rule_dep_bindings(...)`, `_with_scanner_rule_deps(...)`, and `_scanner_dispatchers()` to `LinkedSpec::ActionIR::ScannerCore`,
+  - rewired `scan_contract_ir_events(...)` to use those owner helpers.
+- Regression addition/update:
+  - added `actionir_scannercore_uses_scanner_dep_binding_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=157`)
+## Session Notes (2026-03-11)
 - LinkedSpec-only plugin bridge slice completed against `LinkedSpec::PluginBridge` default legacy runtime dependency ownership.
 - Slice-selection rationale:
   - current scope remains restricted to `LinkedSpec.pm` and `LinkedSpec::*` modules,

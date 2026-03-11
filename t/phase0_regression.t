@@ -2214,6 +2214,64 @@ subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
     like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside ActionRewriter-owned lowering path');
     like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside ActionRewriter-owned lowering path');
 };
+subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
+    plan tests => 7;
+
+    my ($ok_run, $err, $events) = (0, '', undef);
+    my ($binding_calls, $captured_symbols) = (0, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        my $orig_with_scanner_rule_deps = \&LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_deps;
+        local *LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_deps = sub {
+            my ($bindings, $body) = @_;
+            ++$binding_calls;
+            $captured_symbols = [sort keys %{$bindings || {}}];
+            return $orig_with_scanner_rule_deps->($bindings, $body);
+        };
+        $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(
+            { id => 'return_bare' },
+            "return foo;",
+            {
+                split_action_ir_statements => sub { return ['return foo'] },
+                trim_action_ir_value => sub {
+                    my ($value) = @_;
+                    return undef unless defined $value;
+                    $value =~ s/^\s+//;
+                    $value =~ s/\s+$//;
+                    return $value;
+                },
+                parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
+                normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
+                build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
+                extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
+                parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionIR ScannerCore scan succeeds while the scanner dep-binding owner is trapped')
+        or diag(normalize_error($err));
+    is($binding_calls, 1, 'ActionIR ScannerCore routes dependency rebinding through the owner helper exactly once');
+    is_deeply(
+        $captured_symbols,
+        [
+            '_build_array_pipeline_plan_from_expr',
+            '_extract_declare_statement_from_method_expr',
+            '_normalize_method_args_with_optional_scope',
+            '_parse_declare_binding_entry',
+            '_parse_method_function_expr',
+            '_split_action_ir_statements',
+            '_trim_action_ir_value',
+        ],
+        'ActionIR ScannerCore owner helper receives the expected scanner rule dependency bindings'
+    );
+    ok(ref($events) eq 'ARRAY', 'ActionIR ScannerCore still returns an event list');
+    is(scalar(@{$events || []}), 1, 'ActionIR ScannerCore still finds one return-bare event through the owner helper path');
+    is($events->[0]{raw}, 'return foo', 'ActionIR ScannerCore preserves the scanned raw statement');
+    is_deeply($events->[0]{args}, { payload => 'foo' }, 'ActionIR ScannerCore preserves the scanned return payload');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

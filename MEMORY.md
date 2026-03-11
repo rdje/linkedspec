@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against `LinkedSpec::ActionIR::ScannerCore`.
+- Key technical outcome:
+  - added `_scanner_rule_dep_bindings(...)`, `_with_scanner_rule_deps(...)`, and `_scanner_dispatchers()` to `ScannerCore`,
+  - `scan_contract_ir_events(...)` now routes scanner-rule dependency rebinding and dispatch-chain selection through those owner helpers,
+  - the scanner rule packages still execute through the same active helper callbacks and scan order.
+- Regression outcome:
+  - added `actionir_scannercore_uses_scanner_dep_binding_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (157 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: move scanner dep rebinding into ScannerCore owner` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted LinkedSpec-only plugin bridge slice completed against default legacy runtime dependency ownership in `LinkedSpec::PluginBridge`.
 - Key technical outcome:
   - added `_load_legacy_plugin_runtime(...)` and `_exec_legacy_plugin(...)` to `LinkedSpec::PluginBridge`,

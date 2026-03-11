@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Move Scanner Rule Dep Rebinding into `ScannerCore` Owner Helpers
+## Summary
+Continued the ActionIR cleanup track by moving scanner-rule dependency rebinding and dispatcher selection into explicit `LinkedSpec::ActionIR::ScannerCore` owner helpers, instead of leaving that orchestration inline inside `scan_contract_ir_events(...)`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ScannerCore.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::ActionIR::ScannerCore`:
+  - added `_scanner_rule_dep_bindings(...)` to build the callback map consumed by scanner rule packages,
+  - added `_with_scanner_rule_deps(...)` to own scanner-rule dependency rebinding,
+  - added `_scanner_dispatchers()` so `scan_contract_ir_events(...)` no longer hardcodes its scanner dispatch chain inline.
+- Preserved behavior:
+  - ActionIR contract scanning still dispatches through the same primitive/basic/pipeline/flow/legacy rule packages,
+  - scanner rule packages still receive the same helper callbacks for statement splitting, trimming, method parsing, array-pipeline planning, and declare parsing,
+  - the action-rewriter and phase0 parser-generation path are behavior-stable.
+- Updated focused regression coverage:
+  - added `actionir_scannercore_uses_scanner_dep_binding_owner`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=157`)
 ## 2026-03-11 - Plugin Bridge Slice: Move Default Legacy Runtime Deps onto Owner Helpers
 ## Summary
 Continued the `LinkedSpec::PluginBridge` modernization track by moving the bridge's default legacy runtime load/exec behavior onto explicit owner helpers, so the compatibility seam is now fully named inside `LinkedSpec::PluginBridge` instead of relying on inline closures.

@@ -368,6 +368,8 @@ Bootstrap parsing is now owned exclusively by `LinkedSpec::BootstrapSpec` on the
 
 For focused helper-rewrite inspection, use the compatibility shim `LinkedSpec::call_spec_handler_subst(...)`. Older internal `LinkedSpec::_...` action-rewriter, ActionIR-lowering, trace/runtime, RuleIR, and descriptor-assembly helpers are no longer part of the active surface.
 
+Contract scanning internals are now owned by `LinkedSpec::ActionIR::ScannerCore`; scanner-rule dependency rebinding and dispatch ordering no longer live inline in `scan_contract_ir_events(...)`. Treat `LinkedSpec::ActionRewriter` and `LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(...)` as the active owner-facing surfaces, not the older inline scanner-core orchestration details.
+
 Likewise, validation and DSL-error handling now stay on `LinkedSpec::Validation`; normal callers should not depend on the older `LinkedSpec::get_dsl_context(...)`, `report_dsl_error(...)`, `validate_*`, or `extract_regex_literals_from_rule_rhs(...)` facade wrappers.
 
 ## Legacy Plugin Bridge
