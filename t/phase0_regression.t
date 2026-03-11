@@ -174,6 +174,41 @@ PERL
     like($out, qr/__RULEIR_AFTER_COMPILE_SPEC_ENTRY__/, 'compile_spec_entry lazy-loads RuleIR on demand');
     is($err, '', 'LinkedSpec::SpecEntry require/compile_spec_entry subprocess does not emit stderr');
 };
+subtest 'ruleir_require_avoids_emit_context_load_until_emit_context_build' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::RuleIR;
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
+my $rule_ir = {
+    label => 'Top',
+    node_type => 'default',
+    REs => [qr/a/],
+    code_blocks => {
+        ICODE  => [],
+        ECODE  => [],
+        EXCODE => [],
+        ITCODE => [],
+        LXCODE => [],
+        LSCODE => [],
+        LECODE => [],
+    },
+    acode_entries => [
+        { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
+    ],
+    bcode_entries => [],
+};
+my $emit_ctx = LinkedSpec::RuleIR::_build_rule_ir_emit_context($rule_ir);
+print defined($emit_ctx) ? "__EMIT_CTX_DEFINED__\n" : "__EMIT_CTX_UNDEF__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_BUILD__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::RuleIR require/build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec::RuleIR keeps EmitContext unloaded');
+    like($out, qr/__EMIT_CTX_DEFINED__/, 'RuleIR emit-context build still succeeds after lazy EmitContext loading');
+    like($out, qr/__EMIT_CONTEXT_AFTER_BUILD__/, 'RuleIR emit-context build lazy-loads EmitContext on demand');
+    is($err, '', 'LinkedSpec::RuleIR require/build subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

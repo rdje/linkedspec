@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR` no longer imports `LinkedSpec::RuleIR::EmitContext` at module load time.
+- `LinkedSpec::RuleIR` now lazy-loads `EmitContext.pm` only when rule-IR normalization or emit-context assembly actually starts.
+- Added require-only regression lock `ruleir_require_avoids_emit_context_load_until_emit_context_build`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=182`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::SpecEntry` no longer imports `LinkedSpec::RuleIR` at module load time.
 - `LinkedSpec::SpecEntry::compile_spec_entry(...)` now lazy-loads `RuleIR.pm` only when actual staged rule compilation starts.
 - Added require-only regression lock `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry`.

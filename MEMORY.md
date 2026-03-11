@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::RuleIR::EmitContext` import from `perl/LinkedSpec/RuleIR.pm`,
+  - added `LinkedSpec::RuleIR::_require_pkg(...)`,
+  - added `LinkedSpec::RuleIR::_require_emit_context_pkg(...)`,
+  - updated `_normalize_rule_code_chunks(...)` and `_build_rule_ir_emit_context(...)` to lazy-load `EmitContext.pm` only when the emit-context stage actually runs.
+- Regression outcome:
+  - added `ruleir_require_avoids_emit_context_load_until_emit_context_build`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (182 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load EmitContext through RuleIR` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::SpecEntry`.
 - Key technical outcome:
   - removed eager `LinkedSpec::RuleIR` import from `perl/LinkedSpec/SpecEntry.pm`,

@@ -10,7 +10,6 @@ BEGIN {
 }
 
 use LinkedSpec::Trace ();
-use LinkedSpec::RuleIR::EmitContext ();
 
 use constant {
  DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
@@ -40,6 +39,21 @@ sub _select_rule_handler_variant {
  return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
 
  return '_default'
+}
+
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::RuleIR::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _require_emit_context_pkg {
+ _require_pkg('LinkedSpec::RuleIR::EmitContext') unless LinkedSpec::RuleIR::EmitContext->can('build_rule_ir_emit_context');
+ return 1
 }
 
 sub _build_rule_execution_meta {
@@ -190,10 +204,12 @@ sub _validate_rule_ir_or_exit {
 }
 
 sub _normalize_rule_code_chunks {
+ _require_emit_context_pkg();
  return LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks(@_)
 }
 
 sub _build_rule_ir_emit_context {
+ _require_emit_context_pkg();
  return LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(@_)
 }
 
