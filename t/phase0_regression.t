@@ -209,6 +209,24 @@ PERL
     like($out, qr/__EMIT_CONTEXT_AFTER_BUILD__/, 'RuleIR emit-context build lazy-loads EmitContext on demand');
     is($err, '', 'LinkedSpec::RuleIR require/build subprocess does not emit stderr');
 };
+subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec::BootstrapSpec;
+print exists($INC{"LinkedSpec/BootstrapSpec/Core.pm"}) ? "__BOOTSTRAP_CORE_EAGER__\n" : "__BOOTSTRAP_CORE_STILL_LAZY__\n";
+my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+print $parse_success ? "__BOOTSTRAP_PARSE_DEFINED__\n" : "__BOOTSTRAP_PARSE_FAILED__\n";
+print exists($INC{"LinkedSpec/BootstrapSpec/Core.pm"}) ? "__BOOTSTRAP_CORE_AFTER_PARSE__\n" : "__BOOTSTRAP_CORE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::BootstrapSpec require/run_bootstrap_parse subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__BOOTSTRAP_CORE_STILL_LAZY__/, 'require LinkedSpec::BootstrapSpec keeps BootstrapSpec::Core unloaded');
+    like($out, qr/__BOOTSTRAP_PARSE_DEFINED__/, 'run_bootstrap_parse still succeeds after lazy BootstrapSpec::Core loading');
+    like($out, qr/__BOOTSTRAP_CORE_AFTER_PARSE__/, 'run_bootstrap_parse lazy-loads BootstrapSpec::Core on demand');
+    is($err, '', 'LinkedSpec::BootstrapSpec require/run_bootstrap_parse subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

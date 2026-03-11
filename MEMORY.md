@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::BootstrapSpec`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::BootstrapSpec::Core` import from `perl/LinkedSpec/BootstrapSpec.pm`,
+  - added `LinkedSpec::BootstrapSpec::_require_pkg(...)`,
+  - added `LinkedSpec::BootstrapSpec::_require_bootstrap_core_pkg(...)`,
+  - updated `build_bootstrap_spec(...)` to lazy-load `BootstrapSpec::Core.pm` only when bootstrap grammar state is actually requested.
+- Regression outcome:
+  - added `bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (183 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load BootstrapSpec::Core through BootstrapSpec` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR`.
 - Key technical outcome:
   - removed eager `LinkedSpec::RuleIR::EmitContext` import from `perl/LinkedSpec/RuleIR.pm`,

@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `BootstrapSpec::Core` Through `BootstrapSpec`
+## Summary
+Reduced internal bootstrap-grammar load-time coupling again by making `LinkedSpec::BootstrapSpec` load `BootstrapSpec::Core` only when bootstrap grammar state is actually requested, so require-only consumers of `BootstrapSpec.pm` no longer import the hardcoded grammar builder up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored bootstrap owner loading:
+  - removed eager `use LinkedSpec::BootstrapSpec::Core ();`,
+  - added `LinkedSpec::BootstrapSpec::_require_pkg(...)`,
+  - added `LinkedSpec::BootstrapSpec::_require_bootstrap_core_pkg(...)`,
+  - updated `build_bootstrap_spec(...)` to lazy-load `BootstrapSpec::Core` before delegating into the hardcoded grammar builder.
+- Preserved behavior:
+  - cached bootstrap state still builds once and remains shared,
+  - `run_bootstrap_parse(...)` still succeeds with the same default bootstrap state path,
+  - downstream compiler/runtime entrypoints inherit the narrower bootstrap load surface automatically.
+- Updated focused regression coverage:
+  - added `bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=183`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `EmitContext` Through `RuleIR`
 ## Summary
 Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::RuleIR` load `RuleIR::EmitContext` only when rule-IR normalization or emit-context assembly actually runs, so require-only consumers of `RuleIR.pm` no longer import the emit-context stage up front.
