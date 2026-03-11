@@ -66,6 +66,23 @@ subtest 'get_parser_local_resolution_without_pathsearch' => sub {
     ok(defined($ast) && ref($ast) eq 'ARRAY' && !exists $INC{'PathSearch.pm'},
         'module-relative parser executes and keeps PathSearch unloaded');
 };
+subtest 'linkedspec_require_avoids_resolver_load_until_get_parser' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec;'
+      . 'print exists($INC{"LinkedSpec/Resolver.pm"}) ? "__RESOLVER_EAGER__\n" : "__RESOLVER_STILL_LAZY__\n";'
+      . 'my $parser = LinkedSpec::get_parser("Lispish");'
+      . 'print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";'
+      . 'print exists($INC{"LinkedSpec/Resolver.pm"}) ? "__RESOLVER_AFTER_GET_PARSER__\n" : "__RESOLVER_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec require/get_parser subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__RESOLVER_STILL_LAZY__/, 'require LinkedSpec keeps Resolver unloaded');
+    like($out, qr/__PARSER_DEFINED__/, 'get_parser still returns a parser coderef after lazy Resolver loading');
+    like($out, qr/__RESOLVER_AFTER_GET_PARSER__/, 'get_parser lazy-loads Resolver when the parser-factory default deps are resolved');
+    is($err, '', 'LinkedSpec require/get_parser subprocess does not emit stderr');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

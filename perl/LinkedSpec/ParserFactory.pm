@@ -15,8 +15,19 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::ParserFactory::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
+ _require_pkg($pkg) unless $pkg->can($name);
  my $code = $pkg->can($name);
  die "(LinkedSpec::ParserFactory::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
   unless ref($code) eq 'CODE';

@@ -17,7 +17,6 @@ BEGIN {
 
 use LinkedRE;
 use LinkedSpec::Trace ();
-use LinkedSpec::Resolver ();
 use LinkedSpec::ActionRewriter ();
 use LinkedSpec::Compiler ();
 use LinkedSpec::ParserFactory ();

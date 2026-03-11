@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Phase 1A follow-up slice completed against the `LinkedSpec.pm` façade's remaining direct `Resolver` load-time coupling.
+- Slice-selection rationale:
+  - after deleting `LinkedSpec::Deps`, `LinkedSpec.pm` still imported `LinkedSpec::Resolver` only so `ParserFactory` could resolve its default callback owners,
+  - `LinkedSpec::ParserFactory` already owned that default dependency resolution path,
+  - moving the package load responsibility into `ParserFactory` keeps the façade thinner and reduces eager load surface on `require LinkedSpec`.
+- Implementation scope:
+  - added `_require_pkg(...)` to `LinkedSpec::ParserFactory`,
+  - updated `_require_pkg_cb(...)` to lazy-load callback owner packages before resolving `can(...)`,
+  - removed `use LinkedSpec::Resolver ();` from `LinkedSpec.pm`,
+  - added a subprocess regression proving `require LinkedSpec` keeps `Resolver` unloaded until `get_parser(...)` runs.
+- Regression addition/update:
+  - added `linkedspec_require_avoids_resolver_load_until_get_parser`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=173`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against the last remaining parser-factory `LinkedSpec::Deps` coupling.
 - Slice-selection rationale:
   - after removing the ActionRewriter load-time import, the only remaining active `LinkedSpec::Deps` surface was `parser_factory_deps_for_package(...)`,

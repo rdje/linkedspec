@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Phase 1A load-time coupling slice completed against the façade's direct `Resolver` import.
+- Key technical outcome:
+  - added `LinkedSpec::ParserFactory::_require_pkg(...)`,
+  - updated `LinkedSpec::ParserFactory::_require_pkg_cb(...)` to lazy-load callback owner packages,
+  - removed `use LinkedSpec::Resolver ();` from `LinkedSpec.pm`.
+- Regression outcome:
+  - added `linkedspec_require_avoids_resolver_load_until_get_parser`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (173 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Resolver through ParserFactory` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against the last remaining parser-factory `LinkedSpec::Deps` coupling.
 - Key technical outcome:
   - added `_require_pkg_cb(...)` and `_require_pkg_value(...)` to `LinkedSpec::ParserFactory`,

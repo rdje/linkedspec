@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Phase 1A Slice: Lazy-Load `Resolver` Through `ParserFactory`
+## Summary
+Reduced another load-time coupling in the `LinkedSpec` façade by making `LinkedSpec::ParserFactory` lazy-load its callback-owner packages when default deps are resolved, so `LinkedSpec.pm` no longer imports `LinkedSpec::Resolver` just to keep `get_parser(...)` working.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored parser-factory owner loading:
+  - added `LinkedSpec::ParserFactory::_require_pkg(...)`,
+  - updated `LinkedSpec::ParserFactory::_require_pkg_cb(...)` to lazy-load callback owner packages before resolving `can(...)`.
+- Reduced façade load-time coupling:
+  - removed `use LinkedSpec::Resolver ();` from `LinkedSpec.pm`.
+- Preserved behavior:
+  - `LinkedSpec::get_parser(...)` still returns runnable parser coderefs,
+  - `LinkedSpec::Resolver` stays unloaded on `require LinkedSpec` and loads on demand when `get_parser(...)` resolves parser-factory defaults.
+- Updated focused regression coverage:
+  - added `linkedspec_require_avoids_resolver_load_until_get_parser`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=173`)
 ## 2026-03-11 - Backbone Item 3 Slice: Remove Final ParserFactory `Deps` Builder
 ## Summary
 Continued the ActionIR and parser-core cleanup track by moving the last parser-factory default dep builder into `LinkedSpec::ParserFactory`, which removes the final active use of `LinkedSpec::Deps` and lets that module disappear entirely.
