@@ -61,6 +61,24 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- LinkedSpec-only plugin bridge slice completed against `LinkedSpec::PluginBridge` autoload normalization/dispatch ownership.
+- Slice-selection rationale:
+  - current scope is restricted to `LinkedSpec.pm` and `LinkedSpec::*` modules,
+  - `LinkedSpec::PluginBridge::_dispatch_autoload(...)` still combined autoload normalization with explicit-name runtime dispatch in one function,
+  - splitting those stages gives the bridge a clearer explicit-name owner path without touching external runtime packages.
+- Implementation scope:
+  - added `_require_plugin_name(...)` and `_dispatch_plugin_name(...)` to `LinkedSpec::PluginBridge`,
+  - `_dispatch_autoload(...)` now normalizes and then delegates to `_dispatch_plugin_name(...)`.
+- Regression addition/update:
+  - added `plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps`,
+  - added `plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_load`,
+  - added `plugin_bridge_autoload_uses_dispatch_plugin_name_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=154`)
+## Session Notes (2026-03-11)
 - Plugin/runtime modernization slice completed against repo-owned explicit plugin callers outside the `PluginBridge` autoload path.
 - Slice-selection rationale:
   - the roadmap calls for moving away from mixed-name compatibility dispatch toward explicit plugin identifiers,

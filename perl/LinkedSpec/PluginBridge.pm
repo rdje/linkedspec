@@ -36,17 +36,31 @@ sub _normalize_plugin_name {
  return $plugin_name
 }
 
-sub _dispatch_autoload {
- my ($autoload_name, $args, $deps) = @_;
+sub _require_plugin_name {
+ my ($plugin_name) = @_;
+ my $display_name = defined($plugin_name) ? $plugin_name : '<undef>';
+ die "(LinkedSpec::PluginBridge::_require_plugin_name) -E- invalid plugin name '$display_name'"
+  unless defined($plugin_name) && $plugin_name =~ /\A\w+\z/o;
+ return $plugin_name
+}
+
+sub _dispatch_plugin_name {
+ my ($plugin_name, $args, $deps) = @_;
  $args = [] unless ref($args) eq 'ARRAY';
  $deps = _default_deps() unless ref($deps) eq 'HASH';
 
  my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
  my $exec_plugin = _require_dep($deps, 'exec_plugin');
- my $plugin_name = _normalize_plugin_name($autoload_name);
+ $plugin_name = _require_plugin_name($plugin_name);
 
  $load_plugin_runtime->();
  return $exec_plugin->($plugin_name, @$args)
+}
+
+sub _dispatch_autoload {
+ my ($autoload_name, $args, $deps) = @_;
+ my $plugin_name = _normalize_plugin_name($autoload_name);
+ return _dispatch_plugin_name($plugin_name, $args, $deps)
 }
 
 1;

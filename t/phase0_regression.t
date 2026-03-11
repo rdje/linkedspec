@@ -176,6 +176,92 @@ subtest 'plugin_bridge_supports_injected_plugin_runtime_deps' => sub {
     is($ret->{plugin_name}, 'synthetic_plugin', 'PluginBridge injected runtime deps preserve returned normalized plugin name payload');
     is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge injected runtime deps preserve returned argument payload');
 };
+subtest 'plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps' => sub {
+    plan tests => 6;
+
+    my $load_calls = 0;
+    my ($exec_plugin_name, @exec_args);
+    my $ret = LinkedSpec::PluginBridge::_dispatch_plugin_name(
+        'synthetic_plugin',
+        ['alpha', 'beta'],
+        {
+            load_plugin_runtime => sub {
+                ++$load_calls;
+                return 1;
+            },
+            exec_plugin => sub {
+                ($exec_plugin_name, @exec_args) = @_;
+                return {
+                    plugin_name => $exec_plugin_name,
+                    args => [@exec_args],
+                };
+            },
+        },
+    );
+
+    is($load_calls, 1, 'PluginBridge explicit-name dispatch invokes the load callback exactly once');
+    is($exec_plugin_name, 'synthetic_plugin', 'PluginBridge explicit-name dispatch forwards the explicit plugin name unchanged');
+    is_deeply(\@exec_args, [qw(alpha beta)], 'PluginBridge explicit-name dispatch forwards plugin arguments unchanged');
+    ok(ref($ret) eq 'HASH', 'PluginBridge explicit-name dispatch returns exec callback payload');
+    is($ret->{plugin_name}, 'synthetic_plugin', 'PluginBridge explicit-name dispatch preserves returned plugin name payload');
+    is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge explicit-name dispatch preserves returned argument payload');
+};
+subtest 'plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_load' => sub {
+    plan tests => 4;
+
+    my ($load_calls, $exec_calls) = (0, 0);
+    my ($ok_run, $err) = (0, '');
+    $ok_run = eval {
+        LinkedSpec::PluginBridge::_dispatch_plugin_name(
+            'LinkedSpec::synthetic_plugin',
+            ['alpha'],
+            {
+                load_plugin_runtime => sub {
+                    ++$load_calls;
+                    return 1;
+                },
+                exec_plugin => sub {
+                    ++$exec_calls;
+                    return 'unexpected';
+                },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok(!$ok_run, 'PluginBridge explicit-name dispatch dies on invalid explicit plugin names before runtime dispatch');
+    like($err, qr/invalid plugin name/i, 'PluginBridge explicit-name dispatch reports invalid explicit plugin names clearly');
+    is($load_calls, 0, 'PluginBridge explicit-name dispatch does not load plugin runtime for invalid explicit plugin names');
+    is($exec_calls, 0, 'PluginBridge explicit-name dispatch does not call exec callback for invalid explicit plugin names');
+};
+subtest 'plugin_bridge_autoload_uses_dispatch_plugin_name_owner' => sub {
+    plan tests => 5;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($captured_plugin_name, @captured_args);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::PluginBridge::_dispatch_plugin_name = sub {
+            my ($plugin_name, $args) = @_;
+            ($captured_plugin_name, @captured_args) = ($plugin_name, @{$args // []});
+            return {
+                plugin_name => $plugin_name,
+                args => [@captured_args],
+            };
+        };
+        $ret = LinkedSpec::PluginBridge::_dispatch_autoload('LinkedSpec::synthetic_plugin', ['alpha', 'beta']);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PluginBridge autoload dispatch succeeds while the explicit-name owner path is trapped')
+        or diag(normalize_error($err));
+    is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge autoload dispatch normalizes the autoload name before delegating');
+    is_deeply(\@captured_args, [qw(alpha beta)], 'PluginBridge autoload dispatch forwards plugin arguments unchanged into the explicit-name owner');
+    ok(ref($ret) eq 'HASH', 'PluginBridge autoload dispatch returns the explicit-name owner payload');
+    is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge autoload dispatch preserves the explicit-name owner return payload');
+};
 subtest 'plugin_bridge_rejects_invalid_autoload_name_before_runtime_load' => sub {
     plan tests => 4;
 

@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted LinkedSpec-only plugin bridge slice completed against autoload normalization/explicit-name dispatch ownership in `LinkedSpec::PluginBridge`.
+- Key technical outcome:
+  - added `_require_plugin_name(...)` and `_dispatch_plugin_name(...)` to `LinkedSpec::PluginBridge`,
+  - `_dispatch_autoload(...)` now only normalizes the autoload name and delegates explicit-name runtime dispatch to `_dispatch_plugin_name(...)`,
+  - explicit plugin-name validation and injected runtime execution now have a dedicated bridge owner seam.
+- Regression outcome:
+  - added `plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps`,
+  - added `plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_load`,
+  - added `plugin_bridge_autoload_uses_dispatch_plugin_name_owner`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (154 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Plugin bridge: split explicit-name dispatch owner` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted plugin/runtime modernization slice completed against repo-owned explicit plugin callers outside the `PluginBridge` autoload path.
 - Key technical outcome:
   - `HUtils::GenericFilter(...)`, `RTLUtils`, `TableScript::http_exec(...)`, and `plugin/string.plg` now call `PPlugin::exec_plugin_name(...)`,

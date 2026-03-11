@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Plugin Bridge Slice: Split Explicit Plugin-Name Dispatch from Autoload Normalization
+## Summary
+Continued the `LinkedSpec::PluginBridge` modernization track by splitting explicit plugin-name dispatch into its own owner path, so autoload handling now normalizes once and delegates to a reusable explicit-name dispatcher.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored `LinkedSpec::PluginBridge`:
+  - added `_require_plugin_name(...)` to validate explicit normalized plugin names,
+  - added `_dispatch_plugin_name(...)` as the owner path for explicit-name plugin dispatch through injected runtime deps,
+  - `_dispatch_autoload(...)` now reduces to autoload-name normalization plus delegation into `_dispatch_plugin_name(...)`.
+- Preserved behavior:
+  - `LinkedSpec::AUTOLOAD` still delegates to `LinkedSpec::PluginBridge::_dispatch_autoload(...)`,
+  - injected and default plugin-runtime deps still load the runtime and execute the normalized plugin name the same way,
+  - invalid autoload names still fail before any runtime load/exec side effects.
+- Updated focused regression coverage:
+  - added `plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps`,
+  - added `plugin_bridge_dispatch_plugin_name_rejects_invalid_name_before_runtime_load`,
+  - added `plugin_bridge_autoload_uses_dispatch_plugin_name_owner`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=154`)
 ## 2026-03-11 - Plugin Runtime Slice: Migrate Internal Explicit Plugin Callers to `exec_plugin_name(...)`
 ## Summary
 Continued the plugin/runtime modernization track by moving repo-owned callers that already know explicit plugin names off the compatibility `PPlugin::exec(...)` wrapper and onto `PPlugin::exec_plugin_name(...)`.
