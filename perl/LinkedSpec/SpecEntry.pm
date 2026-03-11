@@ -10,7 +10,6 @@ BEGIN {
 }
 
 use LinkedSpec::Trace ();
-use LinkedSpec::RuleIR ();
 
 use constant {
  DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
@@ -25,6 +24,21 @@ my $rep_nodes_minmax = {
  REP_STAR=> [0, 10**9],
  REP_OPT => [0, 1]
 };
+
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::SpecEntry::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _require_rule_ir_pkg {
+ _require_pkg('LinkedSpec::RuleIR') unless LinkedSpec::RuleIR->can('_collect_rule_ir');
+ return 1
+}
 
 sub _runtime_ctx_from_deps {
  my ($deps) = @_;
@@ -545,6 +559,7 @@ sub compile_spec_entry {
  my ($einfo, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
  my $runtime_ctx = _runtime_ctx_from_deps($deps);
+ _require_rule_ir_pkg();
 
  my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::spec_entry', {
   token_count => (ref($einfo) eq 'ARRAY') ? scalar(@$einfo) : undef,

@@ -36,6 +36,21 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::SpecEntry`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::RuleIR` import from `perl/LinkedSpec/SpecEntry.pm`,
+  - added `LinkedSpec::SpecEntry::_require_pkg(...)`,
+  - added `LinkedSpec::SpecEntry::_require_rule_ir_pkg(...)`,
+  - updated `compile_spec_entry(...)` to lazy-load `RuleIR.pm` only when staged rule compilation actually begins.
+- Regression outcome:
+  - added `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (181 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load RuleIR through SpecEntry` until commit workflow runs, then reset to zero-byte untracked.
 ## Current Session Snapshot (2026-03-11)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
 - Key technical outcome:

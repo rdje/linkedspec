@@ -151,6 +151,29 @@ PERL
     like($out, qr/__SPEC_ENTRY_AFTER_PIPELINE__\n__VALIDATION_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads SpecEntry and Validation on demand');
     is($err, '', 'LinkedSpec::Compiler require/run_get_pipeline subprocess does not emit stderr');
 };
+subtest 'spec_entry_require_avoids_ruleir_load_until_compile_spec_entry' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec::SpecEntry;
+print exists($INC{"LinkedSpec/RuleIR.pm"}) ? "__RULEIR_EAGER__\n" : "__RULEIR_STILL_LAZY__\n";
+require LinkedSpec::BootstrapSpec;
+my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+print $parse_success ? "__BOOTSTRAP_PARSED__\n" : "__BOOTSTRAP_FAILED__\n";
+my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
+my ($label, $info) = $parse_success ? LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx }) : ();
+print defined($label) && ref($info) eq "HASH" ? "__COMPILED_ENTRY_DEFINED__\n" : "__COMPILED_ENTRY_UNDEF__\n";
+print exists($INC{"LinkedSpec/RuleIR.pm"}) ? "__RULEIR_AFTER_COMPILE_SPEC_ENTRY__\n" : "__RULEIR_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::SpecEntry require/compile_spec_entry subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__RULEIR_STILL_LAZY__/, 'require LinkedSpec::SpecEntry keeps RuleIR unloaded');
+    like($out, qr/__BOOTSTRAP_PARSED__/, 'bootstrap parse still succeeds before compile_spec_entry lazy-loads RuleIR');
+    like($out, qr/__COMPILED_ENTRY_DEFINED__/, 'compile_spec_entry still returns compiled rule info after lazy RuleIR loading');
+    like($out, qr/__RULEIR_AFTER_COMPILE_SPEC_ENTRY__/, 'compile_spec_entry lazy-loads RuleIR on demand');
+    is($err, '', 'LinkedSpec::SpecEntry require/compile_spec_entry subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
     plan tests => 6;
 

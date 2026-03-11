@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `RuleIR` Through `SpecEntry`
+## Summary
+Reduced internal rule-compilation load-time coupling again by making `LinkedSpec::SpecEntry` load `RuleIR` only when `compile_spec_entry(...)` actually runs, so require-only consumers of `SpecEntry.pm` no longer import the staged rule-IR pipeline up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored spec-entry owner loading:
+  - removed eager `use LinkedSpec::RuleIR ();`,
+  - added `LinkedSpec::SpecEntry::_require_pkg(...)`,
+  - added `LinkedSpec::SpecEntry::_require_rule_ir_pkg(...)`,
+  - updated `compile_spec_entry(...)` to lazy-load `RuleIR.pm` before staged rule-IR collection/planning/validation/emission.
+- Preserved behavior:
+  - `compile_spec_entry(...)` still returns the same `(label, rule_info)` output,
+  - injected runtime-context handling is unchanged,
+  - downstream compiler/runtime entrypoints inherit the narrower load surface automatically.
+- Updated focused regression coverage:
+  - added `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=181`)
 ## 2026-03-11 - Phase 1A Slice: Lazy-Load `BootstrapSpec`, `SpecEntry`, and `Validation` Through `Compiler`
 ## Summary
 Reduced internal compile-path load-time coupling again by making `LinkedSpec::Compiler` load `BootstrapSpec`, `SpecEntry`, and `Validation` only when `spec_descr(...)` or `run_get_pipeline(...)` actually needs them, so require-only consumers of `Compiler.pm` no longer import those owner modules up front.

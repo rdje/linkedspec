@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::SpecEntry` no longer imports `LinkedSpec::RuleIR` at module load time.
+- `LinkedSpec::SpecEntry::compile_spec_entry(...)` now lazy-loads `RuleIR.pm` only when actual staged rule compilation starts.
+- Added require-only regression lock `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=181`)
+
 ## Current Session Notes (2026-03-11)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::Compiler` no longer imports `LinkedSpec::BootstrapSpec`, `LinkedSpec::SpecEntry`, or `LinkedSpec::Validation` at module load time.
