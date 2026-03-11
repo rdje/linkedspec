@@ -32,7 +32,7 @@ sub _declare_method_deps {
  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
 }
 sub _flow_expr_deps {
- return LinkedSpec::Deps::flow_expr_deps_for_package(__PACKAGE__)
+ return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _method_lowering_deps {
  return LinkedSpec::Deps::method_lowering_deps_for_package(__PACKAGE__)

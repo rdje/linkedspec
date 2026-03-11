@@ -17,6 +17,26 @@ sub _require_dep {
  return $cb
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ActionIR::FlowExpr::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub default_deps_for_package {
+ my ($pkg) = @_;
+ return {
+  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+  extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
+  extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
+  lower_method_value_expr => _require_pkg_cb($pkg, '_lower_method_value_expr'),
+  parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
+  normalize_method_args_with_optional_scope => _require_pkg_cb($pkg, '_normalize_method_args_with_optional_scope'),
+ }
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_is_empty_expr
 # Purpose : Lower `is_empty(...)` checks across scalar/array/general expression

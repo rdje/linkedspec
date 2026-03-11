@@ -2433,6 +2433,27 @@ subtest 'action_rewriter_avoids_deps_value_expr_dep_builder' => sub {
     ok(defined($scalaref_expr), 'ActionRewriter still returns lowered scalaref output through the ValueExpr-owned default deps');
     is($scalaref_expr, '$retv->[$foo]', 'ActionRewriter preserves scalaref lowering after moving default deps into ValueExpr');
 };
+subtest 'action_rewriter_avoids_deps_flow_expr_dep_builder' => sub {
+    plan tests => 6;
+
+    my ($ok_run, $err, $empty_expr, $compound_expr) = (0, '', undef, undef);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::flow_expr_deps_for_package = sub { die "__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__\n" };
+        $empty_expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(array(items))');
+        $compound_expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(eq(scalar(foo), "x"), not(is_empty(array(items))))');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'ActionRewriter flow-expression lowering succeeds without the removed Deps flow-expression dep builder')
+        or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_FLOW_EXPR_DEPS__/, 'ActionRewriter does not call the trapped Deps flow-expression dep builder');
+    ok(defined($empty_expr), 'ActionRewriter still returns lowered empty-check output through the FlowExpr-owned default deps');
+    is($empty_expr, '(!@items)', 'ActionRewriter preserves empty-check flow lowering after moving default deps into FlowExpr');
+    ok(defined($compound_expr), 'ActionRewriter still returns lowered composite flow output through the FlowExpr-owned default deps');
+    is($compound_expr, '((($foo eq "x")) || ((!((!@items)))))', 'ActionRewriter preserves composite flow lowering after moving default deps into FlowExpr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
