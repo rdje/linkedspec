@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionIR::StatementSplit::Core` no longer imports `LinkedSpec::ActionIR::StatementSplit::Mode` at module load time.
+- `LinkedSpec::ActionIR::StatementSplit::Core` now lazy-loads `StatementSplit::Mode.pm` only when statement splitting actually starts.
+- Added require-only regression lock `actionir_statement_split_core_require_avoids_mode_load_until_split`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=187`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionIR::CanonicalEvents` no longer imports `LinkedSpec::ActionIR::CanonicalEvents::Core` at module load time.
 - `LinkedSpec::ActionIR::CanonicalEvents` now lazy-loads `CanonicalEvents::Core.pm` only when canonical-event building actually starts.
 - Added require-only regression lock `actionir_canonical_events_require_avoids_core_load_until_build`.

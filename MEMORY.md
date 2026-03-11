@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::StatementSplit::Core`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::StatementSplit::Mode` import from `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`,
+  - added `LinkedSpec::ActionIR::StatementSplit::Core::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::StatementSplit::Core::_require_statement_split_mode_pkg(...)`,
+  - updated `split_action_ir_statements(...)` to lazy-load `StatementSplit::Mode.pm` only when statement splitting actually starts.
+- Regression outcome:
+  - added `actionir_statement_split_core_require_avoids_mode_load_until_split`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (187 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load StatementSplit::Mode through ActionIR::StatementSplit::Core` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::CanonicalEvents`.
 - Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::CanonicalEvents::Core` import from `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`,

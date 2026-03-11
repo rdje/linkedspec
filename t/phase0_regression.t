@@ -294,6 +294,34 @@ PERL
     like($out, qr/__STATEMENT_PARTS_OK__/, 'statement split preserves split output after lazy StatementSplit::Core loading');
     is($err, '', 'ActionIR::StatementSplit require/split subprocess does not emit stderr');
 };
+subtest 'actionir_statement_split_core_require_avoids_mode_load_until_split' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionIR::StatementSplit::Core;
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit/Mode.pm"}) ? "__STATEMENT_SPLIT_MODE_EAGER__\n" : "__STATEMENT_SPLIT_MODE_STILL_LAZY__\n";
+my $parts = LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+    "return foo; exit",
+    sub {
+        my ($value) = @_;
+        return undef unless defined $value;
+        $value =~ s/^\s+//;
+        $value =~ s/\s+$//;
+        return $value;
+    },
+);
+print ref($parts) eq "ARRAY" ? "__STATEMENT_CORE_PARTS_ARRAY__\n" : "__STATEMENT_CORE_PARTS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit/Mode.pm"}) ? "__STATEMENT_SPLIT_MODE_AFTER_SPLIT__\n" : "__STATEMENT_SPLIT_MODE_STILL_UNLOADED__\n";
+print scalar(@{$parts || []}) == 2 && $parts->[0] eq "return foo" && $parts->[1] eq "exit" ? "__STATEMENT_CORE_PARTS_OK__\n" : "__STATEMENT_CORE_PARTS_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'ActionIR::StatementSplit::Core require/split subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__STATEMENT_SPLIT_MODE_STILL_LAZY__/, 'require ActionIR::StatementSplit::Core keeps StatementSplit::Mode unloaded');
+    like($out, qr/__STATEMENT_CORE_PARTS_ARRAY__/, 'statement-split core still returns an array after lazy StatementSplit::Mode loading');
+    like($out, qr/__STATEMENT_SPLIT_MODE_AFTER_SPLIT__/, 'statement-split core lazy-loads StatementSplit::Mode on demand');
+    like($out, qr/__STATEMENT_CORE_PARTS_OK__/, 'statement-split core preserves split output after lazy StatementSplit::Mode loading');
+    is($err, '', 'ActionIR::StatementSplit::Core require/split subprocess does not emit stderr');
+};
 subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {
     plan tests => 6;
 

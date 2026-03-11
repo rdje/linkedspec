@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit::Mode` Through `ActionIR::StatementSplit::Core`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::StatementSplit::Core` load `StatementSplit::Mode` only when statement splitting actually runs, so require-only consumers of `ActionIR::StatementSplit::Core.pm` no longer import the quote/comment mode-state engine up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored statement-split core owner loading:
+  - removed eager `use LinkedSpec::ActionIR::StatementSplit::Mode ();`,
+  - added `LinkedSpec::ActionIR::StatementSplit::Core::_require_pkg(...)`,
+  - added `LinkedSpec::ActionIR::StatementSplit::Core::_require_statement_split_mode_pkg(...)`,
+  - updated `split_action_ir_statements(...)` to lazy-load `StatementSplit::Mode.pm` before delegating into the quote/comment mode helpers.
+- Preserved behavior:
+  - statement splitting still preserves current balanced-delimiter and quote/comment handling,
+  - split output for canonical semicolon-delimited statements is unchanged,
+  - downstream `StatementSplit` and `ActionRewriter` usage inherit the narrower load surface automatically.
+- Updated focused regression coverage:
+  - added `actionir_statement_split_core_require_avoids_mode_load_until_split`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=187`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `CanonicalEvents::Core` Through `ActionIR::CanonicalEvents`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::CanonicalEvents` load `CanonicalEvents::Core` only when canonical-event building actually runs, so require-only consumers of `ActionIR::CanonicalEvents.pm` no longer import the canonical-event classification engine up front.

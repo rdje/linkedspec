@@ -11,7 +11,16 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::ActionIR::StatementSplit::Mode ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
+sub _require_statement_split_mode_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Mode')
+}
 
 sub _build_initial_state {
  return {
@@ -98,6 +107,7 @@ sub _consume_nesting_or_terminator {
 
 sub split_action_ir_statements {
  my ($code, $trim_action_ir_value) = @_;
+ _require_statement_split_mode_pkg();
  my $state = _build_initial_state();
  my @statements;
 
