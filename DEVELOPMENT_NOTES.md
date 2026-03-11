@@ -61,6 +61,25 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Important top-level parser globals/registries should remain annotated so architecture intent is understandable even without reading every implementation line.
 - Complex state-machine/pipeline sections should include concise explanatory comments to preserve continuity for successor maintainers and non-Perl backend migration work.
 ## Session Notes (2026-03-11)
+- Backbone Item #3 follow-up slice completed against the last remaining parser-factory `LinkedSpec::Deps` coupling.
+- Slice-selection rationale:
+  - after removing the ActionRewriter load-time import, the only remaining active `LinkedSpec::Deps` surface was `parser_factory_deps_for_package(...)`,
+  - `LinkedSpec::ParserFactory` already owned parser-factory orchestration, so keeping its last default callback map in a separate module no longer paid for its coupling cost,
+  - folding that map into `ParserFactory` allows `LinkedSpec::Deps` to be deleted outright.
+- Implementation scope:
+  - added `_require_pkg_cb(...)` and `_require_pkg_value(...)` to `LinkedSpec::ParserFactory`,
+  - moved `_default_deps()` to build the parser-factory default callback map locally,
+  - deleted `perl/LinkedSpec/Deps.pm`,
+  - added active-path and require-only regressions proving `ParserFactory` no longer depends on `LinkedSpec::Deps`.
+- Regression addition/update:
+  - added `get_parser_avoids_removed_deps_parser_factory_dep_builder`,
+  - added `parser_factory_require_avoids_linkedspec_deps_load`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` -> OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` -> OK
+  - `perl -c -Iperl t/phase0_regression.t` -> OK
+  - `bash tools/run_ci_local.sh` -> PASS (`Files=1, Tests=172`)
+## Session Notes (2026-03-11)
 - Backbone Item #3 follow-up slice completed against ActionRewriter's last load-time `LinkedSpec::Deps` coupling.
 - Slice-selection rationale:
   - after moving all active ActionIR default dep-builders onto their owner modules, `LinkedSpec::ActionRewriter` still imported `LinkedSpec::Deps` even though it no longer called any of its builders,

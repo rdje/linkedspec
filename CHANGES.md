@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-11 - Backbone Item 3 Slice: Remove Final ParserFactory `Deps` Builder
+## Summary
+Continued the ActionIR and parser-core cleanup track by moving the last parser-factory default dep builder into `LinkedSpec::ParserFactory`, which removes the final active use of `LinkedSpec::Deps` and lets that module disappear entirely.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Deleted: `perl/LinkedSpec/Deps.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `git_message_brief.txt`
+
+## Technical Details
+- Refactored parser-factory dependency ownership:
+  - added `_require_pkg_cb(...)` and `_require_pkg_value(...)` to `LinkedSpec::ParserFactory`,
+  - moved `_default_deps()` to build the trace/resolution/compile callback map locally inside `ParserFactory`.
+- Removed stale dependency plumbing:
+  - deleted `LinkedSpec::Deps::parser_factory_deps_for_package(...)`,
+  - deleted `perl/LinkedSpec/Deps.pm` because nothing in the active `LinkedSpec::*` surface depends on it any longer.
+- Preserved behavior:
+  - `LinkedSpec::get_parser(...)` still resolves specs through `Resolver`, applies trace options through `Trace`, and compiles through `Runtime::run_get(...)`,
+  - require-only `LinkedSpec::ParserFactory` consumers do not eager-load the old `LinkedSpec::Deps` module or the owner modules behind `_default_deps()`.
+- Updated focused regression coverage:
+  - added `get_parser_avoids_removed_deps_parser_factory_dep_builder`,
+  - added `parser_factory_require_avoids_linkedspec_deps_load`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=172`)
 ## 2026-03-11 - Backbone Item 3 Slice: Drop ActionRewriter `Deps` Import
 ## Summary
 Continued the ActionIR cleanup track by removing `LinkedSpec::ActionRewriter`'s last load-time dependency on `LinkedSpec::Deps`, so require-only ActionRewriter consumers now stay on the extracted ActionIR owner modules without pulling the remaining parser-factory wiring into `%INC`.

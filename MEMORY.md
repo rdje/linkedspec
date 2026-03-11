@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-11)
+- Uncommitted Backbone Item #3 cleanup slice completed against the last remaining parser-factory `LinkedSpec::Deps` coupling.
+- Key technical outcome:
+  - added `_require_pkg_cb(...)` and `_require_pkg_value(...)` to `LinkedSpec::ParserFactory`,
+  - moved `LinkedSpec::ParserFactory::_default_deps()` to local owner-built callback wiring,
+  - deleted `perl/LinkedSpec/Deps.pm` after removing its last active entrypoint.
+- Regression outcome:
+  - added `get_parser_avoids_removed_deps_parser_factory_dep_builder`,
+  - added `parser_factory_require_avoids_linkedspec_deps_load`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (172 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: remove final ParserFactory Deps builder` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-11)
 - Uncommitted Backbone Item #3 cleanup slice completed against ActionRewriter's last load-time `LinkedSpec::Deps` coupling.
 - Key technical outcome:
   - removed `use LinkedSpec::Deps ();` from `LinkedSpec::ActionRewriter`,

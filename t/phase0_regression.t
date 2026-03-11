@@ -772,6 +772,46 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_dep_builder' => sub {
     ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef when ParserFactory owns its default deps');
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through ParserFactory-owned default deps still executes');
 };
+subtest 'get_parser_avoids_removed_deps_parser_factory_dep_builder' => sub {
+    plan tests => 4;
+
+    require File::Temp;
+    my $orig_cwd = getcwd();
+    my $tmp_cwd = File::Temp::tempdir(CLEANUP => 1);
+
+    my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Deps::parser_factory_deps_for_package = sub { die "__UNEXPECTED_DEPS_PARSER_FACTORY_DEPS__\n" };
+
+        chdir($tmp_cwd) or die "Unable to chdir '$tmp_cwd': $!";
+        $parser = LinkedSpec::get_parser('Lispish');
+        my $input = '(deps removed)';
+        $ast = $parser ? $parser->(\$input) : undef;
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+    chdir($orig_cwd) or die "Unable to restore cwd to '$orig_cwd': $!";
+
+    ok($ok_run, 'get_parser succeeds without the removed Deps parser-factory dep builder') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_DEPS_PARSER_FACTORY_DEPS__/, 'get_parser does not call the trapped removed Deps parser-factory dep builder');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser still returns parser coderef after removing the Deps parser-factory dep builder');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created after removing the Deps parser-factory dep builder still executes');
+};
+subtest 'parser_factory_require_avoids_linkedspec_deps_load' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::ParserFactory;'
+      . 'print exists($INC{"LinkedSpec/Deps.pm"}) ? "__DEPS_LOADED__\n" : "__DEPS_NOT_LOADED__\n";'
+      . 'print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_LOADED__\n" : "__TRACE_NOT_LOADED__\n";'
+    );
+
+    is($exit_code, 0, 'ParserFactory require-only subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DEPS_NOT_LOADED__/, 'ParserFactory require-only subprocess keeps LinkedSpec::Deps unloaded');
+    like($out, qr/__TRACE_NOT_LOADED__/, 'ParserFactory require-only subprocess does not eager-load owner dependencies before default dep resolution');
+    is($err, '', 'ParserFactory require-only subprocess does not emit stderr');
+};
 subtest 'get_parser_avoids_linkedspec_local_spec_path_facade' => sub {
     plan tests => 5;
 

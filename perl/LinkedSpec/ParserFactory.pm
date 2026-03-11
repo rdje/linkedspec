@@ -7,15 +7,26 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
-
-use LinkedSpec::Deps ();
-
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
  die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback '$name'"
   unless ref($cb) eq 'CODE';
  return $cb
+}
+
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ my $code = $pkg->can($name);
+ die "(LinkedSpec::ParserFactory::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+  unless ref($code) eq 'CODE';
+ return $code
+}
+
+sub _require_pkg_value {
+ my ($pkg, $name) = @_;
+ my $cb = _require_pkg_cb($pkg, $name);
+ return $cb->()
 }
 
 sub _require_value_dep {
@@ -26,7 +37,18 @@ sub _require_value_dep {
 }
 
 sub _default_deps {
- return LinkedSpec::Deps::parser_factory_deps_for_package(__PACKAGE__)
+ return {
+  apply_trace_options => _require_pkg_cb('LinkedSpec::Trace', '_apply_trace_options'),
+  trace_enter => _require_pkg_cb('LinkedSpec::Trace', 'trace_enter'),
+  trace_exit => _require_pkg_cb('LinkedSpec::Trace', 'trace_exit'),
+  trace_decision => _require_pkg_cb('LinkedSpec::Trace', 'trace_decision'),
+  validate_spec_name => _require_pkg_cb('LinkedSpec::Resolver', 'validate_spec_name'),
+  resolve_spec_path => _require_pkg_cb('LinkedSpec::Resolver', 'resolve_spec_path'),
+  load_spec_content => _require_pkg_cb('LinkedSpec::Resolver', 'load_spec_content'),
+  compile_spec => _require_pkg_cb('LinkedSpec::Runtime', 'run_get'),
+  dump_low => _require_pkg_value('LinkedSpec::Trace', 'DUMP_LOW'),
+  dump_medium => _require_pkg_value('LinkedSpec::Trace', 'DUMP_MEDIUM'),
+ }
 }
 
 #------------------------------------------------------------------------------
