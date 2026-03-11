@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::ScannerCore`.
+- Key technical outcome:
+  - removed eager imports of `LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules`,
+    `PrimitivePipelineRules`, `FlowRules`, and `LegacyRules` from `perl/LinkedSpec/ActionIR/ScannerCore.pm`,
+  - added `LinkedSpec::ActionIR::ScannerCore::_require_pkg(...)`,
+  - updated `_scanner_dispatchers(...)` to lazy-load the scanner rule packages only when contract scanning actually starts.
+- Regression outcome:
+  - added `actionir_scannercore_require_avoids_scanner_rule_load_until_scan`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (188 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load scanner rule packages through ActionIR::ScannerCore` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::StatementSplit::Core`.
 - Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::StatementSplit::Mode` import from `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`,

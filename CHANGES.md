@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load Scanner Rule Packages Through `ActionIR::ScannerCore`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::ScannerCore` load its scanner rule packages only when contract scanning actually runs, so require-only consumers of `ActionIR::ScannerCore.pm` no longer import the rule tables up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ScannerCore.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored scanner-core owner loading:
+  - removed eager imports of `LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules`,
+    `PrimitivePipelineRules`, `FlowRules`, and `LegacyRules`,
+  - added `LinkedSpec::ActionIR::ScannerCore::_require_pkg(...)`,
+  - updated `_scanner_dispatchers(...)` to lazy-load the scanner rule packages before returning dispatcher coderefs.
+- Preserved behavior:
+  - scanner-core dependency rebinding still routes through the same owner helper,
+  - rule dispatch order is unchanged,
+  - scanned helper payload extraction is unchanged for existing contracts.
+- Updated focused regression coverage:
+  - added `actionir_scannercore_require_avoids_scanner_rule_load_until_scan`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=188`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit::Mode` Through `ActionIR::StatementSplit::Core`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::StatementSplit::Core` load `StatementSplit::Mode` only when statement splitting actually runs, so require-only consumers of `ActionIR::StatementSplit::Core.pm` no longer import the quote/comment mode-state engine up front.

@@ -9,10 +9,12 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules ();
-use LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules ();
-use LinkedSpec::ActionIR::Scanner::FlowRules ();
-use LinkedSpec::ActionIR::Scanner::LegacyRules ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
 
 sub _require_dep {
  my ($deps, $name) = @_;
@@ -36,6 +38,10 @@ sub _scanner_rule_dep_bindings {
 }
 
 sub _scanner_dispatchers {
+ _require_pkg('LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules');
+ _require_pkg('LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules');
+ _require_pkg('LinkedSpec::ActionIR::Scanner::FlowRules');
+ _require_pkg('LinkedSpec::ActionIR::Scanner::LegacyRules');
  return (
   \&LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::try_scan_contract_ir_events,
   \&LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::try_scan_contract_ir_events,

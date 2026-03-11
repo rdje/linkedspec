@@ -264,6 +264,51 @@ PERL
     like($out, qr/__EVENT_PAYLOAD_OK__/, 'scanner scan preserves return-bare payload after lazy ScannerCore loading');
     is($err, '', 'ActionIR::Scanner require/scan subprocess does not emit stderr');
 };
+subtest 'actionir_scannercore_require_avoids_scanner_rule_load_until_scan' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionIR::ScannerCore;
+my @rule_paths = (
+    "LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm",
+    "LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm",
+    "LinkedSpec/ActionIR/Scanner/FlowRules.pm",
+    "LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+);
+my $loaded_before = scalar grep { exists $INC{$_} } @rule_paths;
+print $loaded_before == 0 ? "__SCANNER_RULES_STILL_LAZY__\n" : "__SCANNER_RULES_EAGER__\n";
+my $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(
+    { id => 'return_bare' },
+    "return foo;",
+    {
+        split_action_ir_statements => sub { return ['return foo'] },
+        trim_action_ir_value => sub {
+            my ($value) = @_;
+            return undef unless defined $value;
+            $value =~ s/^\s+//;
+            $value =~ s/\s+$//;
+            return $value;
+        },
+        parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
+        normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
+        build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
+        extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
+        parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
+    },
+);
+print ref($events) eq "ARRAY" ? "__SCANNER_RULE_EVENTS_ARRAY__\n" : "__SCANNER_RULE_EVENTS_OTHER__\n";
+my $loaded_after = scalar grep { exists $INC{$_} } @rule_paths;
+print $loaded_after == scalar(@rule_paths) ? "__SCANNER_RULES_AFTER_SCAN__\n" : "__SCANNER_RULES_PARTIAL__\n";
+print scalar(@{$events || []}) == 1 && $events->[0]{raw} eq "return foo" ? "__SCANNER_RULE_PAYLOAD_OK__\n" : "__SCANNER_RULE_PAYLOAD_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'ActionIR::ScannerCore require/scan subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__SCANNER_RULES_STILL_LAZY__/, 'require ActionIR::ScannerCore keeps scanner rule modules unloaded');
+    like($out, qr/__SCANNER_RULE_EVENTS_ARRAY__/, 'scanner-core scan still returns an event array after lazy scanner rule loading');
+    like($out, qr/__SCANNER_RULES_AFTER_SCAN__/, 'scanner-core scan lazy-loads scanner rule modules on demand');
+    like($out, qr/__SCANNER_RULE_PAYLOAD_OK__/, 'scanner-core scan preserves return-bare payload after lazy scanner rule loading');
+    is($err, '', 'ActionIR::ScannerCore require/scan subprocess does not emit stderr');
+};
 subtest 'actionir_statement_split_require_avoids_core_load_until_split' => sub {
     plan tests => 6;
 
