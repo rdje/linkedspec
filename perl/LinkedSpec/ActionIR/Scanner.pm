@@ -24,6 +24,25 @@ sub _require_scanner_core_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  no strict 'refs';
@@ -54,8 +73,11 @@ sub default_deps_for_package {
 # Returns : arrayref of event hashes
 #------------------------------------------------------------------------------
 sub scan_contract_ir_events {
- _require_scanner_core_pkg();
- return LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_scanner_core_pkg();
+  return LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args)
+ })
 }
 
 1;

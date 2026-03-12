@@ -2,6 +2,21 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A owner-wrapper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::BootstrapSpec`, `LinkedSpec::Runtime`, `LinkedSpec::ActionIR::Scanner`, `LinkedSpec::ActionIR::StatementSplit`, and `LinkedSpec::ActionIR::CanonicalEvents` now preserve caller `$@` across successful owner delegation.
+- Added `_call_preserving_err(...)` to those owner modules and routed their thin delegate entrypoints through it.
+- Added focused regression lock `remaining_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=220`)
+
+## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A extracted-wrapper API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::Validation`, `LinkedSpec::Resolver`, `LinkedSpec::RuleIR`, and `LinkedSpec::RuleIR::EmitContext` now preserve caller `$@` across successful owner delegation.
 - Added `_call_preserving_err(...)` to those extracted modules and routed their thin trace/emit-context/action-rewrite delegate helpers through it.

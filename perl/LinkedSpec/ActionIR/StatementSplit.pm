@@ -20,6 +20,25 @@ sub _require_statement_split_core_pkg {
  return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Core')
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  no strict 'refs';
@@ -48,8 +67,10 @@ sub _split_action_ir_statements {
  my ($code, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- _require_statement_split_core_pkg();
- return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
+ return _call_preserving_err(sub {
+  _require_statement_split_core_pkg();
+  return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
+ })
 }
 
 1;

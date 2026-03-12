@@ -18,6 +18,25 @@ sub _require_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 #------------------------------------------------------------------------------
 # Runtime parser state helpers (per-run mutable context only)
 #------------------------------------------------------------------------------
@@ -59,14 +78,16 @@ sub run_get {
  $option = {} unless ref($option) eq 'HASH';
 
  my $runtime_ctx = _build_runtime_context($option);
- _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
- return LinkedSpec::Compiler::run_get_pipeline(
-  $spec_content_ref,
-  $option,
-  {
-   runtime_ctx => $runtime_ctx,
-  }
- )
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
+  return LinkedSpec::Compiler::run_get_pipeline(
+   $spec_content_ref,
+   $option,
+   {
+    runtime_ctx => $runtime_ctx,
+   }
+  )
+ })
 }
 
 1;

@@ -19,6 +19,25 @@ sub _require_canonical_events_core_pkg {
  return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents::Core')
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  no strict 'refs';
@@ -46,8 +65,10 @@ sub default_deps_for_package {
 
 sub _canonicalize_helper_action_ir_event {
  my ($label, $event, $deps) = @_;
- _require_canonical_events_core_pkg();
- return LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event($label, $event)
+ return _call_preserving_err(sub {
+  _require_canonical_events_core_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event($label, $event)
+ })
 }
 
 sub _build_canonical_action_ir_events {

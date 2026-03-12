@@ -1,5 +1,52 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Remaining Thin Owner Delegates
+## Summary
+Finished the current `$@`-preservation cleanup track by making the remaining thin owner delegates in `BootstrapSpec`, `Runtime`, `ActionIR::Scanner`, `ActionIR::StatementSplit`, and `ActionIR::CanonicalEvents` preserve caller `$@` across successful owner delegation.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec.pm`
+- Updated: `perl/LinkedSpec/Runtime.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored remaining thin owner delegates:
+  - added `_call_preserving_err(...)` to `BootstrapSpec`, `Runtime`,
+    `ActionIR::Scanner`, `ActionIR::StatementSplit`, and
+    `ActionIR::CanonicalEvents`,
+  - routed `build_bootstrap_spec(...)`, `run_get(...)`,
+    `scan_contract_ir_events(...)`, `_split_action_ir_statements(...)`, and
+    `_canonicalize_helper_action_ir_event(...)` through that helper,
+  - preserved scalar and list-context return payloads while restoring caller
+    `$@` after successful owner-path delegation.
+- Preserved behavior:
+  - these wrappers still delegate to the same owner modules,
+  - runtime context injection and canonical helper payloads stay unchanged,
+  - exception behavior is unchanged when an owner path dies.
+- Updated focused regression coverage:
+  - added `remaining_owner_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=220`)
+
 ## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Extracted Wrapper Delegation
 ## Summary
 Stabilized another no-behavior-change Phase 1A seam by making the thin extracted helper wrappers in `Validation`, `Resolver`, `RuleIR`, and `RuleIR::EmitContext` preserve caller `$@` across successful owner delegation.

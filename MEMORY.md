@@ -37,6 +37,28 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A owner-wrapper API-stability slice completed against the remaining thin `LinkedSpec::*` delegates.
+- Key technical outcome:
+  - added `_call_preserving_err(...)` to `BootstrapSpec`, `Runtime`,
+    `ActionIR::Scanner`, `ActionIR::StatementSplit`, and
+    `ActionIR::CanonicalEvents`,
+  - routed their thin owner-delegate entrypoints through those helpers,
+  - successful owner delegation now preserves caller `$@` across the remaining
+    lightweight wrapper layer too.
+- Regression outcome:
+  - added `remaining_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (220 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve remaining owner wrapper caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A extracted-wrapper API-stability slice completed against `LinkedSpec::*`.
 - Key technical outcome:
   - added `_call_preserving_err(...)` to `Validation`, `Resolver`, `RuleIR`, and `RuleIR::EmitContext`,

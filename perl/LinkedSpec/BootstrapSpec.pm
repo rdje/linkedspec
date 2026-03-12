@@ -25,6 +25,25 @@ sub _require_bootstrap_core_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 #------------------------------------------------------------------------------
 # Function: build_bootstrap_spec
 # Purpose : Build and return the hardcoded bootstrap grammar descriptor and its
@@ -33,8 +52,11 @@ sub _require_bootstrap_core_pkg {
 # Returns : ($spec_descr, $bootstrap_rule_index_ref, $gdata)
 #------------------------------------------------------------------------------
 sub build_bootstrap_spec {
- _require_bootstrap_core_pkg();
- return LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_bootstrap_core_pkg();
+  return LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec(@args)
+ })
 }
 
 #------------------------------------------------------------------------------

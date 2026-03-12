@@ -932,6 +932,80 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     is_deeply($diag, { label => 'Top', raw => 'call(Leaf)' }, 'EmitContext rewrite helper preserves list-context return payload');
     is($@, "__SAVED_ERR__\n", 'EmitContext rewrite helper preserves caller $@ on successful list-context delegation');
 };
+subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 11;
+
+    no warnings 'redefine';
+    require LinkedSpec::BootstrapSpec;
+    require LinkedSpec::Runtime;
+    require LinkedSpec::ActionIR::Scanner;
+    require LinkedSpec::ActionIR::StatementSplit;
+    require LinkedSpec::ActionIR::CanonicalEvents;
+
+    local *LinkedSpec::BootstrapSpec::_require_bootstrap_core_pkg = sub { return 1 };
+    local *LinkedSpec::Runtime::_require_pkg = sub { return 1 };
+    local *LinkedSpec::ActionIR::Scanner::_require_scanner_core_pkg = sub { return 1 };
+    local *LinkedSpec::ActionIR::StatementSplit::_require_statement_split_core_pkg = sub { return 1 };
+    local *LinkedSpec::ActionIR::CanonicalEvents::_require_canonical_events_core_pkg = sub { return 1 };
+
+    local *LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec = sub {
+        return ('bootstrap_descr', { SPEC_ROOT => 0 }, { root => 'gdata' });
+    };
+    local *LinkedSpec::Compiler::run_get_pipeline = sub {
+        my ($spec_content_ref, $option, $deps) = @_;
+        return {
+            spec => $$spec_content_ref,
+            option => $option,
+            deps => $deps,
+        };
+    };
+    local *LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events = sub {
+        return [{ kind => 'CALL', raw => 'call(Leaf)' }];
+    };
+    local *LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements = sub {
+        my ($code, $trim_action_ir_value) = @_;
+        return [$trim_action_ir_value->(' part_one '), $code];
+    };
+    local *LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event = sub {
+        my ($label, $event) = @_;
+        return { kind => 'CALL', label => $label, raw => $event->{raw} };
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my @bootstrap = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
+    is_deeply(\@bootstrap, ['bootstrap_descr', { SPEC_ROOT => 0 }, { root => 'gdata' }], 'BootstrapSpec build wrapper still delegates through BootstrapSpec::Core');
+    is($@, "__SAVED_ERR__\n", 'BootstrapSpec build wrapper preserves caller $@ on successful list-context delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    my $runtime_ret = LinkedSpec::Runtime::run_get(\"Top::\n /a/ -> Top { return_a(Top) }\n", { return_descr => 1 });
+    is_deeply($runtime_ret, {
+        spec => "Top::\n /a/ -> Top { return_a(Top) }\n",
+        option => { return_descr => 1 },
+        deps => { runtime_ctx => $runtime_ret->{deps}{runtime_ctx} },
+    }, 'Runtime run_get wrapper still delegates through Compiler');
+    ok(ref($runtime_ret->{deps}{runtime_ctx}) eq 'HASH', 'Runtime run_get still injects runtime context');
+    is($@, "__SAVED_ERR__\n", 'Runtime run_get wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionIR::Scanner::scan_contract_ir_events({}, 'call(Leaf)', {}), [{ kind => 'CALL', raw => 'call(Leaf)' }], 'Scanner owner wrapper still delegates through ScannerCore');
+    is($@, "__SAVED_ERR__\n", 'Scanner owner wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements('raw_part', { trim_action_ir_value => sub { my ($v) = @_; $v =~ s/^\s+|\s+$//g; return $v } }),
+        ['part_one', 'raw_part'],
+        'StatementSplit owner wrapper still delegates through StatementSplit::Core',
+    );
+    is($@, "__SAVED_ERR__\n", 'StatementSplit owner wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(
+        LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event('Top', { raw => 'call(Leaf)' }, {}),
+        { kind => 'CALL', label => 'Top', raw => 'call(Leaf)' },
+        'CanonicalEvents owner wrapper still delegates through CanonicalEvents::Core',
+    );
+    is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
