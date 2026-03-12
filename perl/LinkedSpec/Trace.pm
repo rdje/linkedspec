@@ -1,7 +1,6 @@
 package LinkedSpec::Trace;
 
 use 5.010;
-use Data::Dumper;
 
 # UVM-style verbosity levels
 use constant {
@@ -21,6 +20,11 @@ our $TRACE_INDENT_LEVEL = 0;
 our $TRACE_INDENT_WIDTH = 2;
 our $TRACE_TOPIC_SPACING = 1;
 our $TRACE_INITIALIZED = 0;
+
+sub _require_data_dumper_pkg {
+ require Data::Dumper;
+ return 1
+}
 
 sub _trace_trim {
  my ($value) = @_;
@@ -78,10 +82,11 @@ sub _trace_stringify {
  return undef unless defined $value;
  return $value unless ref($value);
 
+ _require_data_dumper_pkg();
  local $Data::Dumper::Terse = 1;
  local $Data::Dumper::Indent = 0;
  local $Data::Dumper::Sortkeys = 1;
- my $dump = Dumper($value);
+ my $dump = Data::Dumper::Dumper($value);
  $dump =~ s/\s+$//o;
  return $dump
 }

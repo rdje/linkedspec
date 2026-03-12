@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `Trace`
+## Summary
+Reduced another core load-time dependency by making `LinkedSpec::Trace` load `Data::Dumper` only when referenced values actually need structured dump formatting.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Trace.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Trace dump ownership:
+  - removed eager `use Data::Dumper;`,
+  - added `LinkedSpec::Trace::_require_data_dumper_pkg(...)`,
+  - updated `_trace_stringify(...)` to lazy-load `Data::Dumper` and call
+    `Data::Dumper::Dumper(...)` only for referenced values.
+- Preserved behavior:
+  - scalar trace context values still pass through unchanged,
+  - referenced values still use terse, single-line, sorted-key dump formatting,
+  - public trace APIs still format structured context payloads the same way.
+- Updated focused regression coverage:
+  - added `trace_require_avoids_data_dumper_load_until_stringify_ref`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=210`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `ActionRewriter` Through `RuleIR::EmitContext`
 ## Summary
 Reduced the last direct modularized owner import inside `LinkedSpec::*` by making `LinkedSpec::RuleIR::EmitContext` load `LinkedSpec::ActionRewriter` only when emit-context build paths actually need rewrite helpers.

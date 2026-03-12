@@ -144,6 +144,23 @@ subtest 'linkedspec_require_avoids_trace_load_until_public_trace_api' => sub {
     like($out, qr/__TRACE_AFTER_CONFIGURE__\n__FACADE_ALIAS_OK__|__FACADE_ALIAS_OK__\n__TRACE_AFTER_CONFIGURE__/, 'LinkedSpec public trace API lazy-loads Trace and preserves facade variable aliases');
     is($err, '', 'LinkedSpec require/configure_trace subprocess does not emit stderr');
 };
+subtest 'trace_require_avoids_data_dumper_load_until_stringify_ref' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::Trace;'
+      . 'print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_EAGER__\n" : "__DUMPER_STILL_LAZY__\n";'
+      . 'my $txt = LinkedSpec::Trace::_trace_stringify({ foo => [1, 2] });'
+      . 'print (defined($txt) && $txt =~ /foo/ && $txt =~ /1/ ? "__STRINGIFY_OK__\n" : "__STRINGIFY_BAD__\n");'
+      . 'print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_AFTER_STRINGIFY__\n" : "__DUMPER_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec::Trace require/stringify subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DUMPER_STILL_LAZY__/, 'require LinkedSpec::Trace keeps Data::Dumper unloaded');
+    like($out, qr/__STRINGIFY_OK__/, 'Trace ref stringification still returns structured dump output after lazy Data::Dumper loading');
+    like($out, qr/__DUMPER_AFTER_STRINGIFY__/, 'Trace ref stringification lazy-loads Data::Dumper on demand');
+    is($err, '', 'LinkedSpec::Trace require/stringify subprocess does not emit stderr');
+};
 subtest 'runtime_require_avoids_compiler_load_until_run_get' => sub {
     plan tests => 4;
 

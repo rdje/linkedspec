@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Trace`.
+- Key technical outcome:
+  - removed eager `Data::Dumper` import from `perl/LinkedSpec/Trace.pm`,
+  - added `LinkedSpec::Trace::_require_data_dumper_pkg(...)`,
+  - updated `_trace_stringify(...)` to lazy-load `Data::Dumper` and use
+    `Data::Dumper::Dumper(...)` only for referenced values.
+- Regression outcome:
+  - added `trace_require_avoids_data_dumper_load_until_stringify_ref`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (210 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Data::Dumper through Trace` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR::EmitContext`.
 - Key technical outcome:
   - removed eager `LinkedSpec::ActionRewriter` import from `perl/LinkedSpec/RuleIR/EmitContext.pm`,

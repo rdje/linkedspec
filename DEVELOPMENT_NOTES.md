@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::Trace` no longer imports `Data::Dumper` at module load time.
+- `LinkedSpec::Trace` now lazy-loads `Data::Dumper` only when referenced values actually need structured dump formatting.
+- Added require-only regression lock `trace_require_avoids_data_dumper_load_until_stringify_ref`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=210`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext` no longer imports `LinkedSpec::ActionRewriter` at module load time.
 - `LinkedSpec::RuleIR::EmitContext` now lazy-loads `ActionRewriter.pm` only when emit-context build paths actually need rewrite helpers.
 - Added require-only regression lock `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`.
