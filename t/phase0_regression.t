@@ -3208,6 +3208,30 @@ PERL
     like($out, qr/__ARRAY_PIPELINE_PAYLOAD_OK__/, 'array-pipeline helper preserves planning and lowering output after lazy ArrayPipeline loading');
     is($err, '', 'ActionRewriter require/array-pipeline subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_value_expr_load_until_value_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_EAGER__\n" : "__VALUE_EXPR_STILL_LAZY__\n";
+my $key_expr = LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr("scalar(foo)");
+my $scalaref_expr = LinkedSpec::ActionRewriter::_lower_scalaref_value_expr("retv", "[scalar(foo)]");
+print defined($key_expr) && defined($scalaref_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_AFTER_HELPER__\n" : "__VALUE_EXPR_STILL_UNLOADED__\n";
+if (defined($key_expr) && $key_expr eq "\$foo" && defined($scalaref_expr) && $scalaref_expr eq "\$retv->[\$foo]") {
+    print "__VALUE_EXPR_PAYLOAD_OK__\n";
+} else {
+    print "__VALUE_EXPR_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/value-expr subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALUE_EXPR_STILL_LAZY__/, 'require ActionRewriter keeps ValueExpr unloaded');
+    like($out, qr/__VALUE_EXPR_RESULT_OK__/, 'value helper still returns lowered output after lazy ValueExpr loading');
+    like($out, qr/__VALUE_EXPR_AFTER_HELPER__/, 'value helper lazy-loads ValueExpr on demand');
+    like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and scalaref lowering after lazy ValueExpr loading');
+    is($err, '', 'ActionRewriter require/value-expr subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

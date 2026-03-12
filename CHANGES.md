@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `ValueExpr` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ValueExpr` only when value helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the value-expression owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::ValueExpr ();`,
+  - added `LinkedSpec::ActionRewriter::_require_value_expr_pkg(...)`,
+  - updated `_value_expr_deps(...)`, `_extract_scalar_symbol_name(...)`,
+    `_extract_array_symbol_name(...)`, `_extract_hash_symbol_name(...)`,
+    `_lower_scalar_access_key_expr(...)`, `_lower_scalaref_value_expr(...)`,
+    `_infer_scalar_container_kind(...)`, `_lower_assignment_source_expr(...)`,
+    and `_strip_literal_delimiters(...)` to lazy-load `ValueExpr.pm`
+    before resolving default deps or delegating into value-expression helpers.
+- Preserved behavior:
+  - value-expression lowering still routes through `LinkedSpec::ActionIR::ValueExpr`,
+  - the existing value-expression default dep map remains intact,
+  - scalar-access and scalaref lowering outputs stay unchanged.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_value_expr_load_until_value_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=198`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `ArrayPipeline` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ArrayPipeline` only when array helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the array-pipeline owner up front.

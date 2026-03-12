@@ -8,7 +8,6 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::ActionIR::DeclareMethod ();
-use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::ControlFlow ();
 
@@ -55,6 +54,10 @@ sub _require_array_pipeline_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ArrayPipeline')
 }
 
+sub _require_value_expr_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
+}
+
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -80,6 +83,7 @@ sub _control_flow_deps {
  return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
 }
 sub _value_expr_deps {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _statement_split_deps {
@@ -142,34 +146,42 @@ sub _normalize_method_tag_expr {
 }
 
 sub _extract_scalar_symbol_name {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_extract_scalar_symbol_name(@_, _value_expr_deps())
 }
 
 sub _extract_array_symbol_name {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_extract_array_symbol_name(@_, _value_expr_deps())
 }
 
 sub _extract_hash_symbol_name {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_extract_hash_symbol_name(@_, _value_expr_deps())
 }
 
 sub _lower_scalar_access_key_expr {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr(@_, _value_expr_deps())
 }
 
 sub _lower_scalaref_value_expr {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_lower_scalaref_value_expr(@_, _value_expr_deps())
 }
 
 sub _infer_scalar_container_kind {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_infer_scalar_container_kind(@_, _value_expr_deps())
 }
 
 sub _lower_assignment_source_expr {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_lower_assignment_source_expr(@_, _value_expr_deps())
 }
 
 sub _strip_literal_delimiters {
+ _require_value_expr_pkg();
  return LinkedSpec::ActionIR::ValueExpr::_strip_literal_delimiters(@_, _value_expr_deps())
 }
 
