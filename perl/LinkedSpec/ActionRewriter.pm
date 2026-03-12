@@ -9,7 +9,6 @@ BEGIN {
 }
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::ValueExpr ();
-use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
@@ -49,6 +48,10 @@ sub _require_rewrite_pipeline_pkg {
  return _require_pkg('LinkedSpec::ActionIR::RewritePipeline')
 }
 
+sub _require_flow_expr_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::FlowExpr')
+}
+
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -60,6 +63,7 @@ sub _declare_method_deps {
  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
 }
 sub _flow_expr_deps {
+ _require_flow_expr_pkg();
  return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _method_lowering_deps {
@@ -117,6 +121,7 @@ sub _split_top_level_csv {
 }
 
 sub _lower_flow_composite_expr {
+ _require_flow_expr_pkg();
  return LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr(@_, _flow_expr_deps())
 }
 

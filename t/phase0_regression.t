@@ -3161,6 +3161,29 @@ PERL
     like($out, qr/__REWRITE_PIPELINE_PAYLOAD_OK__/, 'rewrite helper preserves rewrite output and canonical diagnostics after lazy RewritePipeline loading');
     is($err, '', 'ActionRewriter require/rewrite-pipeline subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_flow_expr_load_until_flow_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/FlowExpr.pm"}) ? "__FLOW_EXPR_EAGER__\n" : "__FLOW_EXPR_STILL_LAZY__\n";
+my $expr = LinkedSpec::ActionRewriter::_lower_flow_composite_expr("is_empty(array(items))");
+print defined($expr) ? "__FLOW_EXPR_DEFINED__\n" : "__FLOW_EXPR_UNDEF__\n";
+print exists($INC{"LinkedSpec/ActionIR/FlowExpr.pm"}) ? "__FLOW_EXPR_AFTER_HELPER__\n" : "__FLOW_EXPR_STILL_UNLOADED__\n";
+if (defined($expr) && $expr eq "(!\@items)") {
+    print "__FLOW_EXPR_PAYLOAD_OK__\n";
+} else {
+    print "__FLOW_EXPR_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/flow-expr subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__FLOW_EXPR_STILL_LAZY__/, 'require ActionRewriter keeps FlowExpr unloaded');
+    like($out, qr/__FLOW_EXPR_DEFINED__/, 'flow helper still returns lowered output after lazy FlowExpr loading');
+    like($out, qr/__FLOW_EXPR_AFTER_HELPER__/, 'flow helper lazy-loads FlowExpr on demand');
+    like($out, qr/__FLOW_EXPR_PAYLOAD_OK__/, 'flow helper preserves empty-check lowering after lazy FlowExpr loading');
+    is($err, '', 'ActionRewriter require/flow-expr subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

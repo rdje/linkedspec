@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `FlowExpr` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::FlowExpr` only when flow helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the flow-expression owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::FlowExpr ();`,
+  - added `LinkedSpec::ActionRewriter::_require_flow_expr_pkg(...)`,
+  - updated `_flow_expr_deps(...)` and `_lower_flow_composite_expr(...)`
+    to lazy-load `FlowExpr.pm` before resolving default deps or delegating into the flow-expression owner path.
+- Preserved behavior:
+  - flow lowering still routes through `LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr(...)`,
+  - the existing flow-expression default dep map remains intact,
+  - `is_empty(array(items))` still lowers to `(!@items)`.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_flow_expr_load_until_flow_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=196`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `RewritePipeline` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::RewritePipeline` only when rewrite helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the rewrite-pipeline owner up front.

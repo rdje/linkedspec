@@ -39,6 +39,21 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::FlowExpr` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_flow_expr_pkg(...)`,
+  - updated `_flow_expr_deps(...)` and `_lower_flow_composite_expr(...)`
+    to lazy-load `FlowExpr.pm` only when flow helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_flow_expr_load_until_flow_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (196 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load FlowExpr through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::RewritePipeline` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_rewrite_pipeline_pkg(...)`,
   - updated `_rewrite_pipeline_deps(...)`, `_lower_action_code_from_canonical_ir(...)`,
