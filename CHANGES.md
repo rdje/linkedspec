@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `SpecEntry`
+## Summary
+Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::SpecEntry` load `LinkedSpec::Trace` only when `compile_spec_entry(...)` actually starts traced rule compilation, so require-only consumers of `SpecEntry.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored SpecEntry trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced SpecEntry-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::SpecEntry::_require_trace_pkg(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_enter(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_exit(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_decision(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_log_dump(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_should_dump(...)`,
+  - updated `compile_spec_entry(...)` and runtime handler construction to route trace work through those owner helpers.
+- Preserved behavior:
+  - `compile_spec_entry(...)` still returns the same compiled rule info and `top_rule`,
+  - runtime handler eval tracing still records success/error plus exit metadata,
+  - high-verbosity rule-info and handler dumps remain unchanged.
+- Updated focused regression coverage:
+  - added `spec_entry_require_avoids_trace_load_until_compile_spec_entry`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=206`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `RuleIR`
 ## Summary
 Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::RuleIR` load `LinkedSpec::Trace` only when RuleIR diagnostics actually need to emit output, so require-only consumers of `RuleIR.pm` no longer import the trace owner up front.

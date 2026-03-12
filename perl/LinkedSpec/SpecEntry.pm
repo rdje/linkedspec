@@ -9,14 +9,12 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::Trace ();
-
 use constant {
- DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
- DUMP_LOW    => LinkedSpec::Trace::DUMP_LOW(),
- DUMP_MEDIUM => LinkedSpec::Trace::DUMP_MEDIUM(),
- DUMP_HIGH   => LinkedSpec::Trace::DUMP_HIGH(),
- DUMP_DEBUG  => LinkedSpec::Trace::DUMP_DEBUG(),
+ DUMP_NONE   => 0,
+ DUMP_LOW    => 100,
+ DUMP_MEDIUM => 200,
+ DUMP_HIGH   => 300,
+ DUMP_DEBUG  => 500,
 };
 
 my $rep_nodes_minmax = {
@@ -38,6 +36,51 @@ sub _require_pkg {
 sub _require_rule_ir_pkg {
  _require_pkg('LinkedSpec::RuleIR') unless LinkedSpec::RuleIR->can('_collect_rule_ir');
  return 1
+}
+
+sub _require_trace_pkg {
+ _require_pkg('LinkedSpec::Trace');
+ return 1
+}
+
+sub _trace_enter {
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_enter(@_);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _trace_exit {
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_exit(@_);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _trace_decision {
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_decision(@_);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _trace_log_dump {
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::log_dump(@_);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _trace_should_dump {
+ my $saved_err = $@;
+ return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+ my $ret = LinkedSpec::Trace::should_dump(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 sub _runtime_ctx_from_deps {
@@ -519,7 +562,7 @@ sub _build_runtime_handler {
 
  return sub {
   my ($descr, $STRING, $info) = @_;
-  my $runtime_scope = LinkedSpec::Trace::trace_enter(
+  my $runtime_scope = _trace_enter(
    "LinkedSpec::rule_handler:$label",
    {
     handler_variant => $rule_meta->{selected_handler_variant},
@@ -531,11 +574,11 @@ sub _build_runtime_handler {
   my $retv = eval $handler;
   my $eval_error = $@;
   if ($eval_error) {
-   LinkedSpec::Trace::trace_decision("rule_handler_eval:$label", 0, $eval_error, DUMP_NONE);
+   _trace_decision("rule_handler_eval:$label", 0, $eval_error, DUMP_NONE);
   } else {
-   LinkedSpec::Trace::trace_decision("rule_handler_eval:$label", 1, 'handler eval completed', DUMP_DEBUG);
+   _trace_decision("rule_handler_eval:$label", 1, 'handler eval completed', DUMP_DEBUG);
   }
-  LinkedSpec::Trace::trace_exit(
+  _trace_exit(
    $runtime_scope,
    {
     returned_defined => defined($retv) ? 1 : 0,
@@ -561,23 +604,23 @@ sub compile_spec_entry {
  my $runtime_ctx = _runtime_ctx_from_deps($deps);
  _require_rule_ir_pkg();
 
- my $trace_scope = LinkedSpec::Trace::trace_enter('LinkedSpec::spec_entry', {
+ my $trace_scope = _trace_enter('LinkedSpec::spec_entry', {
   token_count => (ref($einfo) eq 'ARRAY') ? scalar(@$einfo) : undef,
  }, DUMP_HIGH);
 
  my %info;
  my %handlers;
 
- if (LinkedSpec::Trace::should_dump(DUMP_HIGH)) {
-  LinkedSpec::Trace::log_dump("=== SPEC ENTRY DUMP ===\n");
-  LinkedSpec::Trace::log_dump(Dumper($einfo));
-  LinkedSpec::Trace::log_dump("=== END SPEC ENTRY DUMP ===\n");
+ if (_trace_should_dump(DUMP_HIGH)) {
+  _trace_log_dump("=== SPEC ENTRY DUMP ===\n");
+  _trace_log_dump(Dumper($einfo));
+  _trace_log_dump("=== END SPEC ENTRY DUMP ===\n");
  }
 
  my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($einfo);
  my $rule_meta = LinkedSpec::RuleIR::_plan_rule_ir_meta($rule_ir);
  unless (LinkedSpec::RuleIR::_validate_rule_ir_or_exit($rule_ir, $rule_meta)) {
-  LinkedSpec::Trace::trace_exit($trace_scope, { status => 'error', stage => 'validate_rule_ir', label => $rule_ir->{label} }, DUMP_HIGH);
+  _trace_exit($trace_scope, { status => 'error', stage => 'validate_rule_ir', label => $rule_ir->{label} }, DUMP_HIGH);
   return
  }
 
@@ -649,18 +692,18 @@ sub compile_spec_entry {
  $info{gdata} = [@GDATA];
  $info{meta} = $rule_meta;
 
- if (LinkedSpec::Trace::should_dump(DUMP_HIGH)) {
-  LinkedSpec::Trace::log_dump("\n=== RULE INFO DUMP for $label ===\n");
-  LinkedSpec::Trace::log_dump(Dumper(\%info));
-  LinkedSpec::Trace::log_dump("=== END RULE INFO DUMP for $label ===\n");
-  LinkedSpec::Trace::log_dump("=== HANDLER DUMP for $label ===\n");
-  LinkedSpec::Trace::log_dump("{\n$handler\n}\n");
- LinkedSpec::Trace::log_dump("=== END HANDLER DUMP for $label ===\n");
+ if (_trace_should_dump(DUMP_HIGH)) {
+  _trace_log_dump("\n=== RULE INFO DUMP for $label ===\n");
+  _trace_log_dump(Dumper(\%info));
+  _trace_log_dump("=== END RULE INFO DUMP for $label ===\n");
+  _trace_log_dump("=== HANDLER DUMP for $label ===\n");
+  _trace_log_dump("{\n$handler\n}\n");
+  _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
  }
  if (ref($runtime_ctx) eq 'HASH' && defined $rule_ir->{top_rule}) {
   $runtime_ctx->{top_rule} = $rule_ir->{top_rule};
  }
- LinkedSpec::Trace::trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
+ _trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 
  return ($label, \%info, $rule_ir->{top_rule})
 }

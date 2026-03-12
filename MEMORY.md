@@ -37,6 +37,26 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::SpecEntry`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/SpecEntry.pm`,
+  - replaced SpecEntry-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::SpecEntry::_require_trace_pkg(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_enter(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_exit(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_decision(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_log_dump(...)`,
+  - added `LinkedSpec::SpecEntry::_trace_should_dump(...)`,
+  - updated `compile_spec_entry(...)` and runtime handler construction to route trace work through those owner helpers.
+- Regression outcome:
+  - added `spec_entry_require_avoids_trace_load_until_compile_spec_entry`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (206 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through SpecEntry` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/RuleIR.pm`,

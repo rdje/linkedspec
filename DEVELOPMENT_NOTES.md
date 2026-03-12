@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::SpecEntry` no longer imports `LinkedSpec::Trace` at module load time.
+- `LinkedSpec::SpecEntry` now lazy-loads `Trace.pm` only when `compile_spec_entry(...)` actually starts traced rule compilation.
+- Added require-only regression lock `spec_entry_require_avoids_trace_load_until_compile_spec_entry`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=206`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR` no longer imports `LinkedSpec::Trace` at module load time.
 - `LinkedSpec::RuleIR` now lazy-loads `Trace.pm` only when RuleIR diagnostics actually emit output.
 - Added require-only regression lock `ruleir_require_avoids_trace_load_until_mixed_action_error`.
