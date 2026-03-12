@@ -8,12 +8,20 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::Trace ();
-
 use constant {
- DUMP_NONE => LinkedSpec::Trace::DUMP_NONE(),
- DUMP_LOW  => LinkedSpec::Trace::DUMP_LOW(),
+ DUMP_NONE => 0,
+ DUMP_LOW  => 100,
 };
+
+sub _require_trace_pkg {
+ require LinkedSpec::Trace;
+ return 1
+}
+
+sub _trace_log_output {
+ _require_trace_pkg();
+ return LinkedSpec::Trace::log_output(@_)
+}
 
 sub get_dsl_context {
  my ($spec_content, $position) = @_;
@@ -56,7 +64,7 @@ sub report_dsl_error {
   $error .= "  Suggestion: $suggestion\n";
  }
 
- LinkedSpec::Trace::log_output(DUMP_NONE, $error, "DSL validation failed");
+ _trace_log_output(DUMP_NONE, $error, "DSL validation failed");
  return undef
 }
 
@@ -64,12 +72,12 @@ sub validate_spec_content {
  my ($spec_content) = @_;
 
  unless (ref($spec_content) eq 'SCALAR') {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid spec content type", "Expected SCALAR reference, got " . ref($spec_content));
+  _trace_log_output(DUMP_NONE, "Invalid spec content type", "Expected SCALAR reference, got " . ref($spec_content));
   return 0;
  }
 
  unless (length($$spec_content) > 0) {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Spec content is empty", "Spec file must contain content");
+  _trace_log_output(DUMP_NONE, "Spec content is empty", "Spec file must contain content");
   return 0;
  }
 
@@ -100,25 +108,25 @@ sub validate_rule_definition {
  my ($rule_name, $rule_def) = @_;
 
  unless (ref($rule_def) eq 'HASH') {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid rule definition for '$rule_name'", "Expected HASH reference, got " . ref($rule_def));
+  _trace_log_output(DUMP_NONE, "Invalid rule definition for '$rule_name'", "Expected HASH reference, got " . ref($rule_def));
   return 0;
  }
 
  unless (exists $rule_def->{handler}) {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Rule '$rule_name' missing required 'handler' field", "All rules must define handler code");
+  _trace_log_output(DUMP_NONE, "Rule '$rule_name' missing required 'handler' field", "All rules must define handler code");
   return 0;
  }
 
  if (exists $rule_def->{re}) {
   unless (ref($rule_def->{re}) eq 'ARRAY') {
-   LinkedSpec::Trace::log_output(DUMP_NONE, "Rule '$rule_name' 're' field must be an array", "Got " . ref($rule_def->{re}));
+   _trace_log_output(DUMP_NONE, "Rule '$rule_name' 're' field must be an array", "Got " . ref($rule_def->{re}));
    return 0;
   }
 
   for my $i (0..$#{$rule_def->{re}}) {
    my $regex = $rule_def->{re}[$i];
    eval { qr/$regex/ } or do {
-    LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid regex in rule '$rule_name' at index $i", "Error: $@");
+    _trace_log_output(DUMP_NONE, "Invalid regex in rule '$rule_name' at index $i", "Error: $@");
     return 0;
    };
   }
@@ -131,12 +139,12 @@ sub validate_gdata_references {
  my ($gdata, $spec) = @_;
 
  unless (ref($gdata) eq 'HASH') {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid gdata structure", "Expected HASH reference, got " . ref($gdata));
+  _trace_log_output(DUMP_NONE, "Invalid gdata structure", "Expected HASH reference, got " . ref($gdata));
   return 0;
  }
 
  unless (ref($spec) eq 'HASH') {
-  LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid spec structure", "Expected HASH reference, got " . ref($spec));
+  _trace_log_output(DUMP_NONE, "Invalid spec structure", "Expected HASH reference, got " . ref($spec));
   return 0;
  }
 
@@ -144,12 +152,12 @@ sub validate_gdata_references {
   my $gdata_entry = $gdata->{$rule_name};
 
   unless (exists $spec->{$rule_name}) {
-   LinkedSpec::Trace::log_output(DUMP_NONE, "Gdata references non-existent rule '$rule_name'", "Rule not found in spec");
+   _trace_log_output(DUMP_NONE, "Gdata references non-existent rule '$rule_name'", "Rule not found in spec");
    return 0;
   }
 
   unless (ref($gdata_entry) eq 'Regexp') {
-   LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid gdata entry for rule '$rule_name'", "Expected compiled regex, got " . ref($gdata_entry));
+   _trace_log_output(DUMP_NONE, "Invalid gdata entry for rule '$rule_name'", "Expected compiled regex, got " . ref($gdata_entry));
    return 0;
   }
  }
@@ -165,20 +173,20 @@ sub validate_gdata_references {
    for my $i (0..$#{$rule_def->{gdata}}) {
     my $element = $rule_def->{gdata}[$i];
     unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
-     LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid gdata element at index $i for rule '$rule_name'", "Expected HASH with 'label' and 'idx' keys");
+     _trace_log_output(DUMP_NONE, "Invalid gdata element at index $i for rule '$rule_name'", "Expected HASH with 'label' and 'idx' keys");
      return 0;
     }
 
     my $ref_rule = $element->{label};
     unless (exists $spec->{$ref_rule}) {
-     LinkedSpec::Trace::log_output(DUMP_NONE, "Gdata element references non-existent rule '$ref_rule'", "Rule not found in spec");
+     _trace_log_output(DUMP_NONE, "Gdata element references non-existent rule '$ref_rule'", "Rule not found in spec");
      return 0;
     }
 
     my $ref_idx = $element->{idx};
     my $ref_rule_def = $spec->{$ref_rule};
     unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
-     LinkedSpec::Trace::log_output(DUMP_NONE, "Invalid regex index $ref_idx for rule '$ref_rule'", "Index out of bounds");
+     _trace_log_output(DUMP_NONE, "Invalid regex index $ref_idx for rule '$ref_rule'", "Index out of bounds");
      return 0;
     }
    }
@@ -245,13 +253,13 @@ sub validate_dsl_syntax {
 
  my @unused_rules = grep { !$used_rules{$_} } @defined_rules;
  if (@unused_rules) {
-  LinkedSpec::Trace::log_output(DUMP_LOW, "Warning: Unused rules detected", "Rules defined but never used: " . join(", ", @unused_rules));
+  _trace_log_output(DUMP_LOW, "Warning: Unused rules detected", "Rules defined but never used: " . join(", ", @unused_rules));
  }
 
  my @undefined_rules = grep { !$defined_rules{$_} } @used_rules;
  if (@undefined_rules) {
   my @unique_undefined = do { my %seen; grep { !$seen{$_}++ } @undefined_rules };
-  LinkedSpec::Trace::log_output(DUMP_LOW, "Warning: Undefined rules referenced", "Rules referenced but not defined: " . join(", ", @unique_undefined));
+  _trace_log_output(DUMP_LOW, "Warning: Undefined rules referenced", "Rules referenced but not defined: " . join(", ", @unique_undefined));
  }
 
  return 1;

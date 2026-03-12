@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Validation`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Validation.pm`,
+  - replaced Validation-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Validation::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Validation::_trace_log_output(...)`,
+  - updated Validation error/warning reporting paths to lazy-load `Trace.pm`
+    only when they actually emit log output.
+- Regression outcome:
+  - added `validation_require_avoids_trace_load_until_error_report`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (202 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through Validation` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::DeclareMethod` import from `perl/LinkedSpec/ActionRewriter.pm`,

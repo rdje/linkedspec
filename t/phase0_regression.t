@@ -151,6 +151,25 @@ PERL
     like($out, qr/__SPEC_ENTRY_AFTER_PIPELINE__\n__VALIDATION_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads SpecEntry and Validation on demand');
     is($err, '', 'LinkedSpec::Compiler require/run_get_pipeline subprocess does not emit stderr');
 };
+subtest 'validation_require_avoids_trace_load_until_error_report' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "not a rule\n";
+require LinkedSpec::Validation;
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
+my $ok = LinkedSpec::Validation::validate_spec_content(\$spec_content);
+print !$ok ? "__VALIDATION_FAILED__\n" : "__VALIDATION_PASSED__\n";
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_VALIDATE__\n" : "__TRACE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::Validation require/validate subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec::Validation keeps Trace unloaded');
+    like($out, qr/__VALIDATION_FAILED__/, 'validate_spec_content still fails malformed spec input after lazy Trace loading');
+    like($out, qr/__TRACE_AFTER_VALIDATE__/, 'validate_spec_content lazy-loads Trace on demand when reporting errors');
+    like($out, qr/DSL Error at line 1:/, 'validate_spec_content still reports DSL line context after lazy Trace loading');
+    is($err, '', 'LinkedSpec::Validation require/validate subprocess does not emit stderr');
+};
 subtest 'spec_entry_require_avoids_ruleir_load_until_compile_spec_entry' => sub {
     plan tests => 6;
 

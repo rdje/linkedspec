@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Validation`
+## Summary
+Reduced internal load-time coupling again by making `LinkedSpec::Validation` load `LinkedSpec::Trace` only when validation errors or warnings actually need to emit trace output, so require-only consumers of `Validation.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Validation.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Validation trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced Validation-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Validation::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Validation::_trace_log_output(...)`,
+  - updated all Validation error/warning reporting paths to lazy-load `Trace.pm`
+    only when they actually emit log output.
+- Preserved behavior:
+  - validation success paths still avoid trace work,
+  - malformed-spec diagnostics still include DSL line context,
+  - warning/error routing still goes through `LinkedSpec::Trace::log_output(...)`.
+- Updated focused regression coverage:
+  - added `validation_require_avoids_trace_load_until_error_report`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=202`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `DeclareMethod` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::DeclareMethod` only when declare-method helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the declare-method owner up front.
