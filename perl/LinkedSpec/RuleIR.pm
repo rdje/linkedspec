@@ -63,25 +63,55 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _trace_should_dump {
- return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
- return LinkedSpec::Trace::should_dump(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+  return LinkedSpec::Trace::should_dump(@args)
+ })
 }
 
 sub _trace_log_output {
- _require_trace_pkg();
- return LinkedSpec::Trace::log_output(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::log_output(@args)
+ })
 }
 
 sub _trace_decision {
- return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
- return LinkedSpec::Trace::trace_decision(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+  return LinkedSpec::Trace::trace_decision(@args)
+ })
 }
 
 sub _dump_value {
  my ($value) = @_;
- _require_data_dumper_pkg();
- return Data::Dumper::Dumper($value)
+ return _call_preserving_err(sub {
+  _require_data_dumper_pkg();
+  return Data::Dumper::Dumper($value)
+ })
 }
 
 sub _build_rule_execution_meta {
@@ -232,13 +262,19 @@ sub _validate_rule_ir_or_exit {
 }
 
 sub _normalize_rule_code_chunks {
- _require_emit_context_pkg();
- return LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks(@args)
+ })
 }
 
 sub _build_rule_ir_emit_context {
- _require_emit_context_pkg();
- return LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(@args)
+ })
 }
 
 1;

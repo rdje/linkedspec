@@ -2,6 +2,20 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A extracted-wrapper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::Validation`, `LinkedSpec::Resolver`, `LinkedSpec::RuleIR`, and `LinkedSpec::RuleIR::EmitContext` now preserve caller `$@` across successful owner delegation.
+- Added `_call_preserving_err(...)` to those extracted modules and routed their thin trace/emit-context/action-rewrite delegate helpers through it.
+- Added focused regression lock `extracted_wrapper_helpers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=219`)
+
+## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A façade API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec.pm` public façade wrappers now preserve caller `$@` across successful owner delegation.
 - Added `LinkedSpec::_call_preserving_err(...)` and routed `Get(...)`, `spec_descr(...)`, `call_spec_handler_subst(...)`, `get_parser(...)`, and `AUTOLOAD` through it.

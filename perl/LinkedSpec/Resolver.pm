@@ -19,19 +19,47 @@ sub _require_trace_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _trace_log_output {
- _require_trace_pkg();
- return LinkedSpec::Trace::log_output(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::log_output(@args)
+ })
 }
 
 sub _trace_exit {
- _require_trace_pkg();
- return LinkedSpec::Trace::trace_exit(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::trace_exit(@args)
+ })
 }
 
 sub _trace_decision {
- _require_trace_pkg();
- return LinkedSpec::Trace::trace_decision(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::trace_decision(@args)
+ })
 }
 
 sub validate_spec_name {

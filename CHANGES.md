@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Extracted Wrapper Delegation
+## Summary
+Stabilized another no-behavior-change Phase 1A seam by making the thin extracted helper wrappers in `Validation`, `Resolver`, `RuleIR`, and `RuleIR::EmitContext` preserve caller `$@` across successful owner delegation.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Validation.pm`
+- Updated: `perl/LinkedSpec/Resolver.pm`
+- Updated: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored extracted helper delegation behavior:
+  - added `_call_preserving_err(...)` to `Validation`, `Resolver`, `RuleIR`, and `RuleIR::EmitContext`,
+  - routed successful trace, emit-context, dump, and action-rewrite owner calls through that helper,
+  - preserved return-value context while restoring caller `$@` after successful owner-path delegation.
+- Preserved behavior:
+  - the extracted wrappers still delegate to the same owner modules,
+  - successful scalar and list-context helper calls keep their existing return payloads,
+  - exception behavior is unchanged when an owner path dies.
+- Updated focused regression coverage:
+  - added `extracted_wrapper_helpers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=219`)
+
 ## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Public Facade Delegation
 ## Summary
 Stabilized the public `LinkedSpec.pm` façade by making successful owner delegation preserve caller `$@`, so eval-based callers do not lose prior error state when using the thin compatibility entrypoints.

@@ -24,9 +24,31 @@ sub _require_trace_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _trace_log_output {
- _require_trace_pkg();
- return LinkedSpec::Trace::log_output(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::log_output(@args)
+ })
 }
 
 sub _build_rewrite_diag_acc {
@@ -45,23 +67,35 @@ sub _build_rewrite_diag_acc {
 }
 
 sub _trim_action_ir_value {
- _require_action_rewriter_pkg();
- return LinkedSpec::ActionRewriter::_trim_action_ir_value(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_action_rewriter_pkg();
+  return LinkedSpec::ActionRewriter::_trim_action_ir_value(@args)
+ })
 }
 
 sub _rewrite_action_code_with_diagnostics {
- _require_action_rewriter_pkg();
- return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_action_rewriter_pkg();
+  return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@args)
+ })
 }
 
 sub _accumulate_action_rewrite_diagnostics {
- _require_action_rewriter_pkg();
- return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_action_rewriter_pkg();
+  return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@args)
+ })
 }
 
 sub _build_action_rewrite_rules {
- _require_action_rewriter_pkg();
- return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_action_rewriter_pkg();
+  return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@args)
+ })
 }
 
 sub _normalize_rule_code_chunks {

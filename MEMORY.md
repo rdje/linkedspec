@@ -37,6 +37,24 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A extracted-wrapper API-stability slice completed against `LinkedSpec::*`.
+- Key technical outcome:
+  - added `_call_preserving_err(...)` to `Validation`, `Resolver`, `RuleIR`, and `RuleIR::EmitContext`,
+  - routed successful trace, emit-context, dump, and action-rewrite owner calls through those helpers,
+  - successful extracted wrapper delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `extracted_wrapper_helpers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (219 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve extracted wrapper caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A façade API-stability slice completed against `LinkedSpec.pm`.
 - Key technical outcome:
   - added `LinkedSpec::_call_preserving_err(...)`,

@@ -880,6 +880,58 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is_deeply(LinkedSpec::synthetic_plugin('alpha', 'beta'), { autoload_name => 'LinkedSpec::synthetic_plugin', args => [qw(alpha beta)] }, 'AUTOLOAD still delegates through the plugin-bridge owner');
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
+subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
+    plan tests => 13;
+
+    no warnings 'redefine';
+    require LinkedSpec::Validation;
+    require LinkedSpec::Resolver;
+    require LinkedSpec::RuleIR;
+    require LinkedSpec::RuleIR::EmitContext;
+
+    local *LinkedSpec::Validation::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::Resolver::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::_require_emit_context_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::EmitContext::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::EmitContext::_require_action_rewriter_pkg = sub { return 1 };
+
+    local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
+    local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
+    local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
+    local *LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks = sub { return 'normalized_ok' };
+    local *LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context = sub { return { emit_ctx => 1 } };
+    local *LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics = sub {
+        my ($label, $code) = @_;
+        return ('rewritten_ok', { label => $label, raw => $code });
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Validation::_trace_log_output(0, 'msg'), 'trace_log_ok', 'Validation trace wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Validation trace wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Resolver::_trace_exit(undef, { status => 'ok' }, 100), 'trace_exit_ok', 'Resolver trace wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Resolver trace wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::RuleIR::_trace_decision('ruleir_check', 1, 'ok', 100), 'trace_decision_ok', 'RuleIR trace wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'RuleIR trace wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::RuleIR::_normalize_rule_code_chunks('Top', [], undef, []), 'normalized_ok', 'RuleIR code normalization still delegates through EmitContext');
+    is($@, "__SAVED_ERR__\n", 'RuleIR code normalization preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::RuleIR::_build_rule_ir_emit_context('Top', [], [], [], []), { emit_ctx => 1 }, 'RuleIR emit-context builder still delegates through EmitContext');
+    is($@, "__SAVED_ERR__\n", 'RuleIR emit-context builder preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', []);
+    is($rewritten, 'rewritten_ok', 'EmitContext rewrite helper still delegates through ActionRewriter');
+    is_deeply($diag, { label => 'Top', raw => 'call(Leaf)' }, 'EmitContext rewrite helper preserves list-context return payload');
+    is($@, "__SAVED_ERR__\n", 'EmitContext rewrite helper preserves caller $@ on successful list-context delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
