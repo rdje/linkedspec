@@ -16,7 +16,6 @@ use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::ActionIR::StatementSplit ();
-use LinkedSpec::ActionIR::Diagnostics ();
 use LinkedSpec::ActionIR::RewritePipeline ();
 
 sub _require_pkg {
@@ -32,6 +31,10 @@ sub _require_method_expr_pkg {
 
 sub _require_canonical_events_pkg {
  return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents')
+}
+
+sub _require_diagnostics_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::Diagnostics')
 }
 
 sub _trim_action_ir_value {
@@ -66,6 +69,7 @@ sub _canonical_event_deps {
  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
 }
 sub _diagnostics_deps {
+ _require_diagnostics_pkg();
  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
 }
 sub _rewrite_pipeline_deps {
@@ -278,10 +282,12 @@ sub _scan_contract_ir_events {
 }
 
 sub _find_unresolved_action_helpers {
+ _require_diagnostics_pkg();
  return LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(@_, _diagnostics_deps())
 }
 
 sub _collect_action_helper_ir_nodes {
+ _require_diagnostics_pkg();
  return LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes(@_, _diagnostics_deps())
 }
 
@@ -303,6 +309,7 @@ sub _lower_action_code_from_canonical_ir {
 }
 
 sub _accumulate_action_rewrite_diagnostics {
+ _require_diagnostics_pkg();
  return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@_)
 }
 

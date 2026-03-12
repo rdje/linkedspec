@@ -39,6 +39,22 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::Diagnostics` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_diagnostics_pkg(...)`,
+  - updated `_diagnostics_deps(...)`, `_find_unresolved_action_helpers(...)`,
+    `_collect_action_helper_ir_nodes(...)`, and `_accumulate_action_rewrite_diagnostics(...)`
+    to lazy-load `Diagnostics.pm` only when diagnostics helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_diagnostics_load_until_diag_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (191 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Diagnostics through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::CanonicalEvents` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_canonical_events_pkg(...)`,
   - updated `_canonical_event_deps(...)`, `_canonicalize_helper_action_ir_event(...)`,

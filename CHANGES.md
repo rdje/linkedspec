@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Diagnostics` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::Diagnostics` only when diagnostics helpers actually run, so require-only consumers of `ActionRewriter.pm` no longer import the diagnostics collector up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::Diagnostics ();`,
+  - added `LinkedSpec::ActionRewriter::_require_diagnostics_pkg(...)`,
+  - updated `_diagnostics_deps(...)`, `_find_unresolved_action_helpers(...)`,
+    `_collect_action_helper_ir_nodes(...)`, and `_accumulate_action_rewrite_diagnostics(...)`
+    to lazy-load `Diagnostics.pm` before delegating into diagnostics helpers.
+- Preserved behavior:
+  - unresolved-helper counting and helper-IR collection are unchanged,
+  - downstream rewrite-pipeline and canonical-event accumulation paths still receive the same diagnostics payloads,
+  - require-only ActionRewriter consumers keep a narrower owner-module surface.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_diagnostics_load_until_diag_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=191`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `CanonicalEvents` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::CanonicalEvents` only when canonical-event helpers actually run, so require-only consumers of `ActionRewriter.pm` no longer import that owner module up front.

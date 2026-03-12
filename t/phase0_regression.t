@@ -3038,6 +3038,32 @@ subtest 'action_rewriter_require_avoids_canonical_events_load_until_canonical_bu
     like($out, qr/__CANONICAL_EVENTS_ARGS_OK__/, 'canonical-event build preserves classification output after lazy CanonicalEvents loading');
     is($err, '', 'ActionRewriter require/canonical-build subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_diagnostics_load_until_diag_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_EAGER__\n" : "__DIAGNOSTICS_STILL_LAZY__\n";
+my $diag = LinkedSpec::ActionRewriter::_find_unresolved_action_helpers(
+    "return_a(Top); return_a(Top)",
+    [{ id => "return_a", diag_name => "return_a", unresolved_pattern => qr/\breturn_a\s*\(/ }],
+);
+print ref($diag) eq "HASH" ? "__DIAGNOSTICS_HASH__\n" : "__DIAGNOSTICS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_AFTER_HELPER__\n" : "__DIAGNOSTICS_STILL_UNLOADED__\n";
+if (($diag->{unresolved_helper_count} // 0) == 2) {
+    print "__DIAGNOSTICS_COUNT_OK__\n";
+} else {
+    print "__DIAGNOSTICS_COUNT_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/diagnostics subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DIAGNOSTICS_STILL_LAZY__/, 'require ActionRewriter keeps Diagnostics unloaded');
+    like($out, qr/__DIAGNOSTICS_HASH__/, 'diagnostics helper still returns a hash after lazy Diagnostics loading');
+    like($out, qr/__DIAGNOSTICS_AFTER_HELPER__/, 'diagnostics helper lazy-loads Diagnostics on demand');
+    like($out, qr/__DIAGNOSTICS_COUNT_OK__/, 'diagnostics helper preserves unresolved-helper counting after lazy Diagnostics loading');
+    is($err, '', 'ActionRewriter require/diagnostics subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
