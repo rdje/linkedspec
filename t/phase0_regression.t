@@ -3184,6 +3184,30 @@ PERL
     like($out, qr/__FLOW_EXPR_PAYLOAD_OK__/, 'flow helper preserves empty-check lowering after lazy FlowExpr loading');
     is($err, '', 'ActionRewriter require/flow-expr subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_array_pipeline_load_until_array_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/ArrayPipeline.pm"}) ? "__ARRAY_PIPELINE_EAGER__\n" : "__ARRAY_PIPELINE_STILL_LAZY__\n";
+my $plan = LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr("filter_nonempty(array(items))");
+my $lowered = LinkedSpec::ActionRewriter::_lower_array_pipeline_expr("filter_nonempty(array(items))");
+print ref($plan) eq "HASH" && defined($lowered) ? "__ARRAY_PIPELINE_RESULT_OK__\n" : "__ARRAY_PIPELINE_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/ArrayPipeline.pm"}) ? "__ARRAY_PIPELINE_AFTER_HELPER__\n" : "__ARRAY_PIPELINE_STILL_UNLOADED__\n";
+if (ref($plan) eq "HASH" && $plan->{target_symbol} eq "items" && ref($plan->{ops}) eq "ARRAY" && @{$plan->{ops}} == 1 && $plan->{ops}[0]{op} eq "filter_nonempty" && $lowered eq "\@items = grep { length(\$_) } \@items") {
+    print "__ARRAY_PIPELINE_PAYLOAD_OK__\n";
+} else {
+    print "__ARRAY_PIPELINE_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/array-pipeline subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__ARRAY_PIPELINE_STILL_LAZY__/, 'require ActionRewriter keeps ArrayPipeline unloaded');
+    like($out, qr/__ARRAY_PIPELINE_RESULT_OK__/, 'array-pipeline helper still returns planning and lowering output after lazy ArrayPipeline loading');
+    like($out, qr/__ARRAY_PIPELINE_AFTER_HELPER__/, 'array-pipeline helper lazy-loads ArrayPipeline on demand');
+    like($out, qr/__ARRAY_PIPELINE_PAYLOAD_OK__/, 'array-pipeline helper preserves planning and lowering output after lazy ArrayPipeline loading');
+    is($err, '', 'ActionRewriter require/array-pipeline subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

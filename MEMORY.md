@@ -39,6 +39,22 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::ArrayPipeline` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_array_pipeline_pkg(...)`,
+  - updated `_array_pipeline_deps(...)`, `_build_array_pipeline_plan_from_expr(...)`,
+    and `_lower_array_pipeline_expr(...)` to lazy-load `ArrayPipeline.pm`
+    only when array helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_array_pipeline_load_until_array_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (197 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load ArrayPipeline through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::FlowExpr` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_flow_expr_pkg(...)`,
   - updated `_flow_expr_deps(...)` and `_lower_flow_composite_expr(...)`

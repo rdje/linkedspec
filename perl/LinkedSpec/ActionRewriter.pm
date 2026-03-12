@@ -10,7 +10,6 @@ BEGIN {
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::MethodLowering ();
-use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
 
 sub _require_pkg {
@@ -52,6 +51,10 @@ sub _require_flow_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::FlowExpr')
 }
 
+sub _require_array_pipeline_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::ArrayPipeline')
+}
+
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -70,6 +73,7 @@ sub _method_lowering_deps {
  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
 }
 sub _array_pipeline_deps {
+ _require_array_pipeline_pkg();
  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _control_flow_deps {
@@ -230,10 +234,12 @@ sub _lower_return_array_statement {
 }
 
 sub _build_array_pipeline_plan_from_expr {
+ _require_array_pipeline_pkg();
  return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr(@_, _array_pipeline_deps())
 }
 
 sub _lower_array_pipeline_expr {
+ _require_array_pipeline_pkg();
  return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@_, _array_pipeline_deps())
 }
 

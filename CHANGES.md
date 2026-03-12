@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `ArrayPipeline` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ArrayPipeline` only when array helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the array-pipeline owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::ArrayPipeline ();`,
+  - added `LinkedSpec::ActionRewriter::_require_array_pipeline_pkg(...)`,
+  - updated `_array_pipeline_deps(...)`, `_build_array_pipeline_plan_from_expr(...)`,
+    and `_lower_array_pipeline_expr(...)` to lazy-load `ArrayPipeline.pm`
+    before resolving default deps or delegating into array-pipeline helpers.
+- Preserved behavior:
+  - array-pipeline planning and lowering still route through `LinkedSpec::ActionIR::ArrayPipeline`,
+  - the existing array-pipeline default dep map remains intact,
+  - `filter_nonempty(array(items))` still plans and lowers the same way.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_array_pipeline_load_until_array_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=197`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `FlowExpr` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::FlowExpr` only when flow helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the flow-expression owner up front.
