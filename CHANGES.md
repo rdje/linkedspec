@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `CanonicalEvents` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::CanonicalEvents` only when canonical-event helpers actually run, so require-only consumers of `ActionRewriter.pm` no longer import that owner module up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::CanonicalEvents ();`,
+  - added `LinkedSpec::ActionRewriter::_require_canonical_events_pkg(...)`,
+  - updated `_canonical_event_deps(...)`, `_canonicalize_helper_action_ir_event(...)`,
+    and `_build_canonical_action_ir_events(...)` to lazy-load `CanonicalEvents.pm`
+    before delegating into canonical-event helpers.
+- Preserved behavior:
+  - canonical-event classification and fallback counting are unchanged,
+  - downstream rewrite-pipeline and diagnostics paths still receive the same canonical-event payloads,
+  - require-only ActionRewriter consumers keep a narrower owner-module surface.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_canonical_events_load_until_canonical_build`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=190`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `MethodExpr` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::MethodExpr` only when method-expression helpers actually run, so require-only consumers of `ActionRewriter.pm` no longer import the method-expression parser up front.

@@ -3019,6 +3019,25 @@ subtest 'action_rewriter_require_avoids_method_expr_load_until_parse_helper' => 
     like($out, qr/__METHOD_EXPR_ARGS_OK__/, 'method-expression parse preserves parsed argument output after lazy MethodExpr loading');
     is($err, '', 'ActionRewriter require/parse subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_canonical_events_load_until_canonical_build' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::ActionRewriter;'
+      . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_EAGER__\n" : "__CANONICAL_EVENTS_STILL_LAZY__\n";'
+      . 'my $diag = LinkedSpec::ActionRewriter::_build_canonical_action_ir_events("Top", "return_a(Top)", [{ raw => "return_a(Top)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
+      . 'print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";'
+      . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_STILL_UNLOADED__\n";'
+      . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
+    );
+
+    is($exit_code, 0, 'ActionRewriter require/canonical-build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CANONICAL_EVENTS_STILL_LAZY__/, 'require ActionRewriter keeps CanonicalEvents unloaded');
+    like($out, qr/__CANONICAL_EVENTS_DIAG_HASH__/, 'canonical-event build still returns a hash after lazy CanonicalEvents loading');
+    like($out, qr/__CANONICAL_EVENTS_AFTER_BUILD__/, 'canonical-event build lazy-loads CanonicalEvents on demand');
+    like($out, qr/__CANONICAL_EVENTS_ARGS_OK__/, 'canonical-event build preserves classification output after lazy CanonicalEvents loading');
+    is($err, '', 'ActionRewriter require/canonical-build subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

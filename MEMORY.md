@@ -39,6 +39,22 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::CanonicalEvents` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_canonical_events_pkg(...)`,
+  - updated `_canonical_event_deps(...)`, `_canonicalize_helper_action_ir_event(...)`,
+    and `_build_canonical_action_ir_events(...)` to lazy-load `CanonicalEvents.pm`
+    only when canonical-event helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_canonical_events_load_until_canonical_build`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (190 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load CanonicalEvents through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::MethodExpr` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_pkg(...)`,
   - added `LinkedSpec::ActionRewriter::_require_method_expr_pkg(...)`,
