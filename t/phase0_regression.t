@@ -570,6 +570,23 @@ PERL
     like($out, qr/__BOOTSTRAP_CORE_AFTER_PARSE__/, 'run_bootstrap_parse lazy-loads BootstrapSpec::Core on demand');
     is($err, '', 'LinkedSpec::BootstrapSpec require/run_bootstrap_parse subprocess does not emit stderr');
 };
+subtest 'bootstrap_spec_core_require_avoids_linkedre_load_until_bootstrap_spec_build' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::BootstrapSpec::Core;
+print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
+my ($descr, $rule_index, $gdata) = LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec();
+print (ref($descr) eq "ARRAY" && ref($rule_index) eq "HASH" && ref($gdata) eq "HASH" && defined($gdata->{startREs}) ? "__BOOTSTRAP_SPEC_DEFINED__\n" : "__BOOTSTRAP_SPEC_BAD__\n");
+print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_AFTER_BUILD__\n" : "__LINKEDRE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::BootstrapSpec::Core require/build_bootstrap_spec subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__LINKEDRE_STILL_LAZY__/, 'require LinkedSpec::BootstrapSpec::Core keeps LinkedRE unloaded');
+    like($out, qr/__BOOTSTRAP_SPEC_DEFINED__/, 'build_bootstrap_spec still returns descriptor, rule index, and gdata after lazy LinkedRE loading');
+    like($out, qr/__LINKEDRE_AFTER_BUILD__/, 'build_bootstrap_spec lazy-loads LinkedRE on demand');
+    is($err, '', 'LinkedSpec::BootstrapSpec::Core require/build_bootstrap_spec subprocess does not emit stderr');
+};
 subtest 'actionir_scanner_require_avoids_scannercore_load_until_scan' => sub {
     plan tests => 6;
 

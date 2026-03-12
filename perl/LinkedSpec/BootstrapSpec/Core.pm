@@ -8,7 +8,38 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedRE ();
+sub _require_pkg {
+ my ($pkg) = @_;
+ my $file = $pkg;
+ $file =~ s{::}{/}go;
+ $file .= '.pm';
+ my $ok = eval { require $file; 1 };
+ die "(LinkedSpec::BootstrapSpec::Core::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _require_linkedre_pkg {
+ _require_pkg('LinkedRE');
+ return 1
+}
+
+sub _linkedre_or {
+ my (@args) = @_;
+ my $saved_err = $@;
+ _require_linkedre_pkg();
+ my $ret = LinkedRE::or(@args);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _linkedre_ored_re {
+ my (@args) = @_;
+ my $saved_err = $@;
+ _require_linkedre_pkg();
+ my $ret = LinkedRE::oredRE(@args);
+ $@ = $saved_err;
+ return $ret
+}
 
 sub _trim_bootstrap_value {
  my ($value) = @_;
@@ -112,7 +143,7 @@ sub _build_spec_root_rule {
    my @specentry;
    my @specs;
    while (1) {
-    my $minfo = LinkedRE::or($string, $$gdata{startREs});
+    my $minfo = _linkedre_or($string, $$gdata{startREs});
     unless($minfo) {
      push @specs, [@specentry] if @specentry;
      return [@specs]
@@ -189,7 +220,7 @@ sub _build_action_code_block_rule {
    $reidx = $reidx || 0;
 
    while (1) {
-    my $minfo = LinkedRE::or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $$gdata{cbrace});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
@@ -245,7 +276,7 @@ sub _build_non_action_code_block_rule {
    my ($type) = $$info{match} =~ /(\w+)/o;
 
    while (1) {
-    my $minfo = LinkedRE::or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $$gdata{cbrace});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
@@ -281,7 +312,7 @@ sub _build_blind_call_code_block_rule {
    my ($call) = $$info{match} =~ /(\w+)/o;
 
    while (1) {
-    my $minfo = LinkedRE::or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $$gdata{cbrace});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
@@ -347,7 +378,7 @@ sub _build_curly_brace_rule {
    my $ipos = pos($$string);
 
    while (1) {
-    my $minfo = LinkedRE::or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $$gdata{cbrace});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
@@ -415,9 +446,9 @@ sub _build_bootstrap_registry_gdata {
  }
 
  my $gdata = {
-  startREs       => LinkedRE::oredRE(@bootstrap_start_res),
+  startREs       => _linkedre_ored_re(@bootstrap_start_res),
   start_dispatch => \@bootstrap_start_dispatch,
-  cbrace         => LinkedRE::oredRE(@bootstrap_cbrace_res)
+  cbrace         => _linkedre_ored_re(@bootstrap_cbrace_res)
  };
 
  return (\%bootstrap_rule_index, $gdata);

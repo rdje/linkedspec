@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::BootstrapSpec::Core` no longer imports `LinkedRE` at module load time.
+- `LinkedSpec::BootstrapSpec::Core` now lazy-loads `LinkedRE` only when bootstrap registry construction or bootstrap scanner handlers actually need it.
+- Added require-only regression lock `bootstrap_spec_core_require_avoids_linkedre_load_until_bootstrap_spec_build`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=217`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::Compiler` no longer imports `LinkedRE` at module load time.
 - `LinkedSpec::Compiler` now lazy-loads `LinkedRE` only when `spec_gdata(...)` actually builds combined regex dependencies.
 - Added require-only regression lock `compiler_require_avoids_linkedre_load_until_run_get_pipeline`.

@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `LinkedRE` Through `BootstrapSpec::Core`
+## Summary
+Reduced the last eager `LinkedRE` owner inside `LinkedSpec::*` by making `LinkedSpec::BootstrapSpec::Core` load the regex helper only when bootstrap registry construction or bootstrap scanning actually needs it.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored BootstrapSpec::Core regex-helper ownership:
+  - removed eager `use LinkedRE ();`,
+  - added `LinkedSpec::BootstrapSpec::Core::_require_linkedre_pkg(...)`,
+  - added `LinkedSpec::BootstrapSpec::Core::_linkedre_or(...)`,
+  - added `LinkedSpec::BootstrapSpec::Core::_linkedre_ored_re(...)`,
+  - updated bootstrap registry construction and bootstrap scanner handlers to lazy-load
+    `LinkedRE` only when they actually build or consume bootstrap regex dispatch state.
+- Preserved behavior:
+  - require-only `BootstrapSpec::Core` paths still keep `LinkedRE` unloaded,
+  - `build_bootstrap_spec(...)` still returns the same descriptor/rule-index/gdata shape,
+  - bootstrap parsing continues to use the same regex dispatch helper once loaded.
+- Updated focused regression coverage:
+  - added `bootstrap_spec_core_require_avoids_linkedre_load_until_bootstrap_spec_build`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=217`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `LinkedRE` Through `Compiler`
 ## Summary
 Reduced another staged-compile load-time dependency by making `LinkedSpec::Compiler` load `LinkedRE` only when regex gdata assembly actually needs it.
