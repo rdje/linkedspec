@@ -3138,6 +3138,29 @@ PERL
     like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed lowering output after lazy Contracts loading');
     is($err, '', 'ActionRewriter require/contracts subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_rewrite_pipeline_load_until_rewrite_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_EAGER__\n" : "__REWRITE_PIPELINE_STILL_LAZY__\n";
+my ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics("Top", "return_a(Top)");
+print defined($rewritten) && ref($diag) eq "HASH" ? "__REWRITE_PIPELINE_RESULT_OK__\n" : "__REWRITE_PIPELINE_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_HELPER__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
+if (defined($rewritten) && $rewritten eq q{return ['?Top:', \@Top]} && ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN_A") {
+    print "__REWRITE_PIPELINE_PAYLOAD_OK__\n";
+} else {
+    print "__REWRITE_PIPELINE_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/rewrite-pipeline subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require ActionRewriter keeps RewritePipeline unloaded');
+    like($out, qr/__REWRITE_PIPELINE_RESULT_OK__/, 'rewrite helper still returns rewrite output and diagnostics after lazy RewritePipeline loading');
+    like($out, qr/__REWRITE_PIPELINE_AFTER_HELPER__/, 'rewrite helper lazy-loads RewritePipeline on demand');
+    like($out, qr/__REWRITE_PIPELINE_PAYLOAD_OK__/, 'rewrite helper preserves rewrite output and canonical diagnostics after lazy RewritePipeline loading');
+    is($err, '', 'ActionRewriter require/rewrite-pipeline subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

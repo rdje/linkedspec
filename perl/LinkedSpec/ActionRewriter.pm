@@ -13,7 +13,6 @@ use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
-use LinkedSpec::ActionIR::RewritePipeline ();
 
 sub _require_pkg {
  my ($pkg) = @_;
@@ -44,6 +43,10 @@ sub _require_statement_split_pkg {
 
 sub _require_contracts_pkg {
  return _require_pkg('LinkedSpec::ActionIR::Contracts')
+}
+
+sub _require_rewrite_pipeline_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::RewritePipeline')
 }
 
 sub _trim_action_ir_value {
@@ -84,6 +87,7 @@ sub _diagnostics_deps {
  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
 }
 sub _rewrite_pipeline_deps {
+ _require_rewrite_pipeline_pkg();
  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _scan_contract_ir_event_deps {
@@ -321,6 +325,7 @@ sub _build_canonical_action_ir_events {
 }
 
 sub _lower_action_code_from_canonical_ir {
+ _require_rewrite_pipeline_pkg();
  return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@_)
 }
 
@@ -331,6 +336,7 @@ sub _accumulate_action_rewrite_diagnostics {
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
+ _require_rewrite_pipeline_pkg();
  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
   $label,
   $code,
@@ -340,6 +346,7 @@ sub _rewrite_action_code_with_diagnostics {
 }
 
 sub _build_action_rewrite_rules {
+ _require_rewrite_pipeline_pkg();
  return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@_, _rewrite_pipeline_deps())
 }
 

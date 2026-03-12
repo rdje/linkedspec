@@ -39,6 +39,22 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::RewritePipeline` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_rewrite_pipeline_pkg(...)`,
+  - updated `_rewrite_pipeline_deps(...)`, `_lower_action_code_from_canonical_ir(...)`,
+    `_rewrite_action_code_with_diagnostics(...)`, and `_build_action_rewrite_rules(...)`
+    to lazy-load `RewritePipeline.pm` only when rewrite helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_rewrite_pipeline_load_until_rewrite_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (195 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load RewritePipeline through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::Contracts` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_contracts_pkg(...)`,
   - updated `_action_contract_deps(...)` and `_build_action_lowering_contracts(...)`

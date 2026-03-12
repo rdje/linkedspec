@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `RewritePipeline` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::RewritePipeline` only when rewrite helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the rewrite-pipeline owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::RewritePipeline ();`,
+  - added `LinkedSpec::ActionRewriter::_require_rewrite_pipeline_pkg(...)`,
+  - updated `_rewrite_pipeline_deps(...)`, `_lower_action_code_from_canonical_ir(...)`,
+    `_rewrite_action_code_with_diagnostics(...)`, and `_build_action_rewrite_rules(...)`
+    to lazy-load `RewritePipeline.pm` before resolving default deps or delegating into rewrite helpers.
+- Preserved behavior:
+  - rewrite orchestration still routes through `LinkedSpec::ActionIR::RewritePipeline`,
+  - the existing rewrite-pipeline default dep map remains intact,
+  - `return_a(Top)` still rewrites to `return ['?Top:', \@Top]` with canonical `RETURN_A` diagnostics.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_rewrite_pipeline_load_until_rewrite_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=195`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Contracts` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::Contracts` only when lowering-contract helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the lowering-contract owner up front.
