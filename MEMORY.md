@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A façade API-stability slice completed against the public `LinkedSpec` trace wrapper surface.
+- Key technical outcome:
+  - routed `configure_trace(...)`, `trace_enter(...)`, `trace_exit(...)`,
+    `trace_decision(...)`, `log_output(...)`, `log_dump(...)`, and
+    `should_dump(...)` through `LinkedSpec::_call_preserving_err(...)`,
+  - successful public trace wrapper delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `linkedspec_trace_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (224 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve facade trace caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::Compiler`.
 - Key technical outcome:
   - added `LinkedSpec::Compiler::_call_preserving_err(...)`,

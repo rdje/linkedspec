@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across Public Trace Wrapper Delegation
+## Summary
+Stabilized another no-behavior-change `LinkedSpec.pm` seam by making the public trace wrapper API preserve caller `$@` across successful delegation to `LinkedSpec::Trace`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored public trace wrapper delegation behavior:
+  - routed `configure_trace(...)`, `trace_enter(...)`, `trace_exit(...)`,
+    `trace_decision(...)`, `log_output(...)`, `log_dump(...)`, and
+    `should_dump(...)` through `LinkedSpec::_call_preserving_err(...)`,
+  - preserved scalar and scope-hash return values while restoring caller `$@`
+    after successful owner-path delegation.
+- Preserved behavior:
+  - the public trace API still lazy-loads and delegates to `LinkedSpec::Trace`,
+  - successful trace wrapper calls keep their existing return payloads,
+  - exception behavior is unchanged when the trace owner path dies.
+- Updated focused regression coverage:
+  - added `linkedspec_trace_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=224`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `Compiler` Helper Delegation
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::Compiler` preserve caller `$@` across successful trace, dump, and regex helper delegation.
