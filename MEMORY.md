@@ -39,6 +39,21 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::Scanner` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_scanner_pkg(...)`,
+  - updated `_scan_contract_ir_event_deps(...)` and `_scan_contract_ir_events(...)`
+    to lazy-load `Scanner.pm` only when scanner helper paths actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_scanner_load_until_scan_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (192 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Scanner through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::Diagnostics` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_diagnostics_pkg(...)`,
   - updated `_diagnostics_deps(...)`, `_find_unresolved_action_helpers(...)`,

@@ -3064,6 +3064,32 @@ PERL
     like($out, qr/__DIAGNOSTICS_COUNT_OK__/, 'diagnostics helper preserves unresolved-helper counting after lazy Diagnostics loading');
     is($err, '', 'ActionRewriter require/diagnostics subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_scanner_load_until_scan_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/Scanner.pm"}) ? "__SCANNER_EAGER__\n" : "__SCANNER_STILL_LAZY__\n";
+my $events = LinkedSpec::ActionRewriter::_scan_contract_ir_events(
+    { id => 'return_bare' },
+    "return foo;",
+);
+print ref($events) eq "ARRAY" ? "__SCANNER_EVENTS_ARRAY__\n" : "__SCANNER_EVENTS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/Scanner.pm"}) ? "__SCANNER_AFTER_HELPER__\n" : "__SCANNER_STILL_UNLOADED__\n";
+if (scalar(@{$events || []}) == 1 && $events->[0]{raw} eq "return foo") {
+    print "__SCANNER_PAYLOAD_OK__\n";
+} else {
+    print "__SCANNER_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/scanner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__SCANNER_STILL_LAZY__/, 'require ActionRewriter keeps Scanner unloaded');
+    like($out, qr/__SCANNER_EVENTS_ARRAY__/, 'scanner helper still returns an event array after lazy Scanner loading');
+    like($out, qr/__SCANNER_AFTER_HELPER__/, 'scanner helper lazy-loads Scanner on demand');
+    like($out, qr/__SCANNER_PAYLOAD_OK__/, 'scanner helper preserves scanned return-bare payload after lazy Scanner loading');
+    is($err, '', 'ActionRewriter require/scanner subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

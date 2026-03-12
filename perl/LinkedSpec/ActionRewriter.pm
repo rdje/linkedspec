@@ -7,7 +7,6 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
-use LinkedSpec::ActionIR::Scanner ();
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
@@ -27,6 +26,10 @@ sub _require_pkg {
 
 sub _require_method_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
+}
+
+sub _require_scanner_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::Scanner')
 }
 
 sub _require_canonical_events_pkg {
@@ -77,6 +80,7 @@ sub _rewrite_pipeline_deps {
 }
 sub _scan_contract_ir_event_deps {
  _require_method_expr_pkg();
+ _require_scanner_pkg();
  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
 }
 
@@ -274,6 +278,7 @@ sub _build_action_lowering_contracts {
 
 sub _scan_contract_ir_events {
  my ($contract, $code) = @_;
+ _require_scanner_pkg();
  return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
   $contract,
   $code,
