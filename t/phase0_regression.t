@@ -156,6 +156,24 @@ subtest 'linkedspec_require_avoids_data_dumper_load' => sub {
     like($out, qr/__DUMPER_NOT_LOADED__/, 'require LinkedSpec keeps Data::Dumper unloaded');
     is($err, '', 'LinkedSpec require-only subprocess does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_linkedre_load_until_get' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec;
+print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
+my $parser = LinkedSpec::Get(\$spec_content);
+print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";
+print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_AFTER_GET__\n" : "__LINKEDRE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/Get subprocess exits cleanly with lazy LinkedRE') or diag($err || $out);
+    like($out, qr/__LINKEDRE_STILL_LAZY__/, 'require LinkedSpec keeps LinkedRE unloaded');
+    like($out, qr/__PARSER_DEFINED__/, 'Get still returns a parser coderef after lazy LinkedRE loading');
+    like($out, qr/__LINKEDRE_AFTER_GET__/, 'Get lazy-loads LinkedRE on demand through the compile path');
+    is($err, '', 'LinkedSpec require/Get subprocess with lazy LinkedRE does not emit stderr');
+};
 subtest 'trace_require_avoids_data_dumper_load_until_stringify_ref' => sub {
     plan tests => 5;
 

@@ -14,8 +14,6 @@ BEGIN {
  unshift @INC, $module_dir unless grep { defined($_) && $_ eq $module_dir } @INC;
 }
 
-use LinkedRE;
-
 # UVM-style verbosity levels
 use constant {
     DUMP_NONE   => 0,    # No dumps

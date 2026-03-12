@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A façade load-time coupling slice completed against `LinkedSpec.pm`.
+- Key technical outcome:
+  - removed dead eager `LinkedRE` import from `perl/LinkedSpec.pm`,
+  - added a focused regression proving plain `require LinkedSpec` keeps `LinkedRE`
+    unloaded until the compile path actually needs it.
+- Regression outcome:
+  - added `linkedspec_require_avoids_linkedre_load_until_get`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (215 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: remove dead LinkedRE import from LinkedSpec.pm` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
 - Key technical outcome:
   - removed eager `Data::Dumper` import from `perl/LinkedSpec/Compiler.pm`,
