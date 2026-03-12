@@ -246,6 +246,38 @@ PERL
     like($out, qr/__EMIT_CONTEXT_AFTER_BUILD__/, 'RuleIR emit-context build lazy-loads EmitContext on demand');
     is($err, '', 'LinkedSpec::RuleIR require/build subprocess does not emit stderr');
 };
+subtest 'ruleir_require_avoids_trace_load_until_mixed_action_error' => sub {
+    plan tests => 8;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::RuleIR;
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
+my $meta = LinkedSpec::RuleIR::_build_rule_execution_meta(
+    label => 'Top',
+    node_type => 'default',
+    regex_count => 1,
+    acode_count => 1,
+    bcode_count => 0,
+);
+print ref($meta) eq "HASH" && ($meta->{handler_variant} || '') eq '_default' ? "__META_OK__\n" : "__META_BAD__\n";
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_META__\n" : "__TRACE_STILL_UNLOADED_AFTER_META__\n";
+my $ok = LinkedSpec::RuleIR::_validate_rule_ir_or_exit(
+    { label => 'Top' },
+    { action_mode => 'mixed', acode_count => 1, bcode_count => 1 },
+);
+print !$ok ? "__MIXED_ACTION_REJECTED__\n" : "__MIXED_ACTION_ACCEPTED__\n";
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_ERROR__\n" : "__TRACE_STILL_UNLOADED_AFTER_ERROR__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::RuleIR require/meta/validate subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec::RuleIR keeps Trace unloaded');
+    like($out, qr/__META_OK__/, 'RuleIR execution-meta build still succeeds after lazy Trace loading changes');
+    like($out, qr/__TRACE_STILL_UNLOADED_AFTER_META__/, 'RuleIR execution-meta build keeps Trace unloaded by default');
+    like($out, qr/__MIXED_ACTION_REJECTED__/, 'RuleIR mixed action validation still rejects invalid mixed action mode');
+    like($out, qr/__TRACE_AFTER_ERROR__/, 'RuleIR mixed action error lazy-loads Trace on demand');
+    like($out, qr/Cannot mix ACTION \(->\) and BLIND CALL \(=>\) code blocks/, 'RuleIR mixed action error still reports the existing diagnostic');
+    is($err, '', 'LinkedSpec::RuleIR require/meta/validate subprocess does not emit stderr');
+};
 subtest 'emit_context_require_avoids_trace_load_until_unresolved_helper_diag' => sub {
     plan tests => 7;
 

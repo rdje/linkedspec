@@ -9,14 +9,12 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::Trace ();
-
 use constant {
- DUMP_NONE   => LinkedSpec::Trace::DUMP_NONE(),
- DUMP_LOW    => LinkedSpec::Trace::DUMP_LOW(),
- DUMP_MEDIUM => LinkedSpec::Trace::DUMP_MEDIUM(),
- DUMP_HIGH   => LinkedSpec::Trace::DUMP_HIGH(),
- DUMP_DEBUG  => LinkedSpec::Trace::DUMP_DEBUG(),
+ DUMP_NONE   => 0,
+ DUMP_LOW    => 100,
+ DUMP_MEDIUM => 200,
+ DUMP_HIGH   => 300,
+ DUMP_DEBUG  => 500,
 };
 
 sub _select_rule_handler_variant {
@@ -54,6 +52,26 @@ sub _require_pkg {
 sub _require_emit_context_pkg {
  _require_pkg('LinkedSpec::RuleIR::EmitContext') unless LinkedSpec::RuleIR::EmitContext->can('build_rule_ir_emit_context');
  return 1
+}
+
+sub _require_trace_pkg {
+ _require_pkg('LinkedSpec::Trace');
+ return 1
+}
+
+sub _trace_should_dump {
+ return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+ return LinkedSpec::Trace::should_dump(@_)
+}
+
+sub _trace_log_output {
+ _require_trace_pkg();
+ return LinkedSpec::Trace::log_output(@_)
+}
+
+sub _trace_decision {
+ return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+ return LinkedSpec::Trace::trace_decision(@_)
 }
 
 sub _build_rule_execution_meta {
@@ -101,8 +119,8 @@ sub _build_rule_execution_meta {
   uses_loop       => $uses_loop ? 1 : 0,
  };
 
- if (LinkedSpec::Trace::should_dump(DUMP_DEBUG)) {
-  LinkedSpec::Trace::log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", Dumper($meta));
+ if (_trace_should_dump(DUMP_DEBUG)) {
+  _trace_log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", Dumper($meta));
  }
 
  return $meta
@@ -179,7 +197,7 @@ sub _validate_rule_ir_or_exit {
  my ($rule_ir, $rule_meta) = @_;
 
  if ($rule_meta->{action_mode} eq 'mixed') {
-  LinkedSpec::Trace::trace_decision(
+  _trace_decision(
    "_validate_rule_ir_or_exit:$rule_ir->{label}",
    0,
    "mixed action mode detected (acode=$rule_meta->{acode_count}, bcode=$rule_meta->{bcode_count})",
@@ -188,12 +206,12 @@ sub _validate_rule_ir_or_exit {
   my $label = $rule_ir->{label};
   my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
   my $context = "ACTION blocks: ".($rule_meta->{acode_count} // 0)." found, BLIND CALL blocks: ".($rule_meta->{bcode_count} // 0)." found";
-  LinkedSpec::Trace::log_output(DUMP_NONE, $error_msg, $context);
+  _trace_log_output(DUMP_NONE, $error_msg, $context);
   print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
   print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
   return 0
  }
- LinkedSpec::Trace::trace_decision(
+ _trace_decision(
   "_validate_rule_ir_or_exit:$rule_ir->{label}",
   1,
   "rule action mode '$rule_meta->{action_mode}' is valid",

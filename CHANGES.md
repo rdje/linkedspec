@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `RuleIR`
+## Summary
+Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::RuleIR` load `LinkedSpec::Trace` only when RuleIR diagnostics actually need to emit output, so require-only consumers of `RuleIR.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored RuleIR trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced RuleIR-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::RuleIR::_require_trace_pkg(...)`,
+  - added `LinkedSpec::RuleIR::_trace_should_dump(...)`,
+  - added `LinkedSpec::RuleIR::_trace_log_output(...)`,
+  - added `LinkedSpec::RuleIR::_trace_decision(...)`,
+  - updated execution-meta debug dumping to stay lazy when `Trace.pm` has not been loaded,
+  - updated mixed-action validation diagnostics to lazy-load `Trace.pm` only when the error path actually emits output.
+- Preserved behavior:
+  - `_build_rule_execution_meta(...)` still returns the same handler-variant metadata,
+  - `_validate_rule_ir_or_exit(...)` still rejects mixed ACTION/BLIND CALL rules,
+  - the existing mixed-action diagnostic text remains unchanged.
+- Updated focused regression coverage:
+  - added `ruleir_require_avoids_trace_load_until_mixed_action_error`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=205`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `RuleIR::EmitContext`
 ## Summary
 Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::RuleIR::EmitContext` load `LinkedSpec::Trace` only when unresolved-helper diagnostics actually need to emit output, so require-only consumers of `EmitContext.pm` no longer import the trace owner up front.
