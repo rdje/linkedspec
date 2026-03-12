@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A façade API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec.pm` public façade wrappers now preserve caller `$@` across successful owner delegation.
+- Added `LinkedSpec::_call_preserving_err(...)` and routed `Get(...)`, `spec_descr(...)`, `call_spec_handler_subst(...)`, `get_parser(...)`, and `AUTOLOAD` through it.
+- Added focused regression lock `linkedspec_public_facade_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=218`)
+
+## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::BootstrapSpec::Core` no longer imports `LinkedRE` at module load time.
 - `LinkedSpec::BootstrapSpec::Core` now lazy-loads `LinkedRE` only when bootstrap registry construction or bootstrap scanner handlers actually need it.

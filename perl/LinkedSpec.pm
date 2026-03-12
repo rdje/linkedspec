@@ -153,6 +153,25 @@ sub _require_trace_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 
 
 #------------------------------------------------------------------------------
@@ -166,8 +185,10 @@ sub Get {
  my @args = @_;
  my $spec_content_ref = shift @args;
  my %option = @args;
- _require_pkg('LinkedSpec::Runtime');
- return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::Runtime');
+  return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
+ })
 }
 
 #------------------------------------------------------------------------------
@@ -178,8 +199,11 @@ sub Get {
 # Returns : hashref of spec rule definitions
 #------------------------------------------------------------------------------
 sub spec_descr {
- _require_pkg('LinkedSpec::Compiler');
- return LinkedSpec::Compiler::spec_descr(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::Compiler');
+  return LinkedSpec::Compiler::spec_descr(@args)
+ })
 }
 
 #------------------------------------------------------------------------------
@@ -191,8 +215,11 @@ sub spec_descr {
 # Returns : rewritten code string
 #------------------------------------------------------------------------------
 sub call_spec_handler_subst {
- _require_pkg('LinkedSpec::ActionRewriter');
- return LinkedSpec::ActionRewriter::call_spec_handler_subst(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::ActionRewriter');
+  return LinkedSpec::ActionRewriter::call_spec_handler_subst(@args)
+ })
 }
 
 
@@ -206,8 +233,10 @@ sub call_spec_handler_subst {
 sub get_parser {
  my ($spec_name, @opts) = @_;
  my %opt_hash = (@opts % 2 == 0) ? @opts : ();
- _require_pkg('LinkedSpec::ParserFactory') unless LinkedSpec::ParserFactory->can('run_get_parser');
- return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash)
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::ParserFactory') unless LinkedSpec::ParserFactory->can('run_get_parser');
+  return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash)
+ })
 }
 
 #------------------------------------------------------------------------------
@@ -217,8 +246,11 @@ sub get_parser {
 # Returns : whatever plugin call returns
 #------------------------------------------------------------------------------
 sub AUTOLOAD {
- _require_pkg('LinkedSpec::PluginBridge') unless LinkedSpec::PluginBridge->can('_dispatch_autoload');
- return LinkedSpec::PluginBridge::_dispatch_autoload($AUTOLOAD, \@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::PluginBridge') unless LinkedSpec::PluginBridge->can('_dispatch_autoload');
+  return LinkedSpec::PluginBridge::_dispatch_autoload($AUTOLOAD, \@args)
+ })
 }
 
 1;

@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A façade API-stability slice completed against `LinkedSpec.pm`.
+- Key technical outcome:
+  - added `LinkedSpec::_call_preserving_err(...)`,
+  - routed `Get(...)`, `spec_descr(...)`, `call_spec_handler_subst(...)`,
+    `get_parser(...)`, and `AUTOLOAD` through that helper,
+  - successful public façade delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `linkedspec_public_facade_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (218 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve facade caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::BootstrapSpec::Core`.
 - Key technical outcome:
   - removed eager `LinkedRE` import from `perl/LinkedSpec/BootstrapSpec/Core.pm`,

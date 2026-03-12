@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Public Facade Delegation
+## Summary
+Stabilized the public `LinkedSpec.pm` façade by making successful owner delegation preserve caller `$@`, so eval-based callers do not lose prior error state when using the thin compatibility entrypoints.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored façade delegation behavior:
+  - added `LinkedSpec::_call_preserving_err(...)`,
+  - routed `Get(...)`, `spec_descr(...)`, `call_spec_handler_subst(...)`,
+    `get_parser(...)`, and `AUTOLOAD` through that helper,
+  - preserved return-value context while restoring caller `$@` after successful
+    owner-path delegation.
+- Preserved behavior:
+  - the façade still delegates to the same owner modules,
+  - successful public entrypoints keep their existing return payloads,
+  - exception behavior is unchanged when an owner path dies.
+- Updated focused regression coverage:
+  - added `linkedspec_public_facade_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=218`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `LinkedRE` Through `BootstrapSpec::Core`
 ## Summary
 Reduced the last eager `LinkedRE` owner inside `LinkedSpec::*` by making `LinkedSpec::BootstrapSpec::Core` load the regex helper only when bootstrap registry construction or bootstrap scanning actually needs it.

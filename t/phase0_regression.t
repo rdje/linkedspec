@@ -842,6 +842,44 @@ PERL
     like($out, qr/__RET__=plugin_ok\n__PLUGIN_BRIDGE_AFTER_AUTOLOAD__/, 'AUTOLOAD lazy-loads PluginBridge on demand and preserves return payload');
     is($err, '', 'LinkedSpec require/AUTOLOAD subprocess with lazy PluginBridge does not emit stderr');
 };
+subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 10;
+
+    no warnings 'redefine';
+
+    local *LinkedSpec::_require_pkg = sub { return 1 };
+    local *LinkedSpec::Runtime::run_get = sub { return 'parser_ok' };
+    local *LinkedSpec::Compiler::spec_descr = sub { return { compiled => 1 } };
+    local *LinkedSpec::ActionRewriter::call_spec_handler_subst = sub { return 'rewritten_ok' };
+    local *LinkedSpec::ParserFactory::run_get_parser = sub { return 'factory_ok' };
+    local *LinkedSpec::PluginBridge::_dispatch_autoload = sub {
+        my ($autoload_name, $args) = @_;
+        return {
+            autoload_name => $autoload_name,
+            args => [@$args],
+        };
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Get(\"Top::\n /a/ -> Top { return_a(Top) }\n"), 'parser_ok', 'Get still delegates through the runtime owner');
+    is($@, "__SAVED_ERR__\n", 'Get preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::spec_descr([]), { compiled => 1 }, 'spec_descr still delegates through the compiler owner');
+    is($@, "__SAVED_ERR__\n", 'spec_descr preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the ActionRewriter owner');
+    is($@, "__SAVED_ERR__\n", 'call_spec_handler_subst preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::get_parser('Lispish'), 'factory_ok', 'get_parser still delegates through the parser-factory owner');
+    is($@, "__SAVED_ERR__\n", 'get_parser preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::synthetic_plugin('alpha', 'beta'), { autoload_name => 'LinkedSpec::synthetic_plugin', args => [qw(alpha beta)] }, 'AUTOLOAD still delegates through the plugin-bridge owner');
+    is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
