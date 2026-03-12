@@ -8,7 +8,6 @@ package LinkedSpec;
 
 use 5.010;
 use re 'eval';
-use Data::Dumper;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];

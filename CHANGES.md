@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Remove Dead `Data::Dumper` Import from `LinkedSpec.pm`
+## Summary
+Reduced the façade load-time surface again by removing a dead `Data::Dumper` import from `LinkedSpec.pm`, so plain `require LinkedSpec` no longer pulls that dump helper in up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored façade load-time ownership:
+  - removed unused `use Data::Dumper;` from `LinkedSpec.pm`,
+  - added a focused require-only regression to prove `require LinkedSpec` now keeps
+    `Data::Dumper` unloaded.
+- Preserved behavior:
+  - public façade APIs are unchanged,
+  - trace, parser-factory, compiler, runtime, and plugin lazy-load behavior is unchanged,
+  - structured dump formatting remains owned by extracted modules that still need it.
+- Updated focused regression coverage:
+  - added `linkedspec_require_avoids_data_dumper_load`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=212`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `RuleIR`
 ## Summary
 Reduced another internal load-time dependency by making `LinkedSpec::RuleIR` load `Data::Dumper` only when debug execution-meta dumps actually need structured formatting.

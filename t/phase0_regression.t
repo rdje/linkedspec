@@ -144,6 +144,18 @@ subtest 'linkedspec_require_avoids_trace_load_until_public_trace_api' => sub {
     like($out, qr/__TRACE_AFTER_CONFIGURE__\n__FACADE_ALIAS_OK__|__FACADE_ALIAS_OK__\n__TRACE_AFTER_CONFIGURE__/, 'LinkedSpec public trace API lazy-loads Trace and preserves facade variable aliases');
     is($err, '', 'LinkedSpec require/configure_trace subprocess does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_data_dumper_load' => sub {
+    plan tests => 3;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec;'
+      . 'print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_LOADED__\n" : "__DUMPER_NOT_LOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec require-only subprocess exits cleanly without Data::Dumper') or diag($err || $out);
+    like($out, qr/__DUMPER_NOT_LOADED__/, 'require LinkedSpec keeps Data::Dumper unloaded');
+    is($err, '', 'LinkedSpec require-only subprocess does not emit stderr');
+};
 subtest 'trace_require_avoids_data_dumper_load_until_stringify_ref' => sub {
     plan tests => 5;
 
