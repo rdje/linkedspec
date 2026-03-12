@@ -47,50 +47,71 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
-sub _trace_enter {
+sub _call_preserving_err {
+ my ($cb) = @_;
  my $saved_err = $@;
- _require_trace_pkg();
- my $ret = LinkedSpec::Trace::trace_enter(@_);
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
  $@ = $saved_err;
- return $ret
+ return
+}
+
+sub _trace_enter {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::trace_enter(@args)
+ })
 }
 
 sub _trace_exit {
- my $saved_err = $@;
- _require_trace_pkg();
- my $ret = LinkedSpec::Trace::trace_exit(@_);
- $@ = $saved_err;
- return $ret
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::trace_exit(@args)
+ })
 }
 
 sub _trace_decision {
- my $saved_err = $@;
- _require_trace_pkg();
- my $ret = LinkedSpec::Trace::trace_decision(@_);
- $@ = $saved_err;
- return $ret
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::trace_decision(@args)
+ })
 }
 
 sub _trace_log_dump {
- my $saved_err = $@;
- _require_trace_pkg();
- my $ret = LinkedSpec::Trace::log_dump(@_);
- $@ = $saved_err;
- return $ret
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_trace_pkg();
+  return LinkedSpec::Trace::log_dump(@args)
+ })
 }
 
 sub _trace_should_dump {
- my $saved_err = $@;
- return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
- my $ret = LinkedSpec::Trace::should_dump(@_);
- $@ = $saved_err;
- return $ret
+ my @args = @_;
+ return _call_preserving_err(sub {
+  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
+  return LinkedSpec::Trace::should_dump(@args)
+ })
 }
 
 sub _dump_value {
  my ($value) = @_;
- _require_data_dumper_pkg();
- return Data::Dumper::Dumper($value)
+ return _call_preserving_err(sub {
+  _require_data_dumper_pkg();
+  return Data::Dumper::Dumper($value)
+ })
 }
 
 sub _runtime_ctx_from_deps {

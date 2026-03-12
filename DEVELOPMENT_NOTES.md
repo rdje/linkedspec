@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::SpecEntry` trace and dump helper wrappers now preserve caller `$@` across successful delegation.
+- Added `LinkedSpec::SpecEntry::_call_preserving_err(...)` and routed `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, and `_dump_value(...)` through it.
+- Added focused regression lock `spec_entry_helper_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=222`)
+
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A / Backbone Item 3 API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` owner-delegate wrappers now preserve caller `$@` across successful delegation.

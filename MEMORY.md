@@ -36,6 +36,23 @@ These files are live and must be amended before any commit:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::SpecEntry`.
+- Key technical outcome:
+  - added `LinkedSpec::SpecEntry::_call_preserving_err(...)`,
+  - routed `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`,
+    `_trace_log_dump(...)`, `_trace_should_dump(...)`, and `_dump_value(...)`
+    through that helper,
+  - successful `SpecEntry` trace/dump helper delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `spec_entry_helper_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (222 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve SpecEntry caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A / Backbone Item 3 API-stability slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:

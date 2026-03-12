@@ -1093,6 +1093,47 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter compatibility helper preserves caller $@ on successful delegation');
 };
+subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 12;
+
+    no warnings 'redefine';
+    require LinkedSpec::SpecEntry;
+
+    local *LinkedSpec::SpecEntry::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::SpecEntry::_require_data_dumper_pkg = sub { return 1 };
+    local *LinkedSpec::Trace::trace_enter = sub { return { scope => 'entered' } };
+    local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
+    local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
+    local *LinkedSpec::Trace::log_dump = sub { return 'trace_dump_ok' };
+    local *LinkedSpec::Trace::should_dump = sub { return 1 };
+    local *Data::Dumper::Dumper = sub { return 'dump_value_ok' };
+
+    $INC{'LinkedSpec/Trace.pm'} = __FILE__;
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::SpecEntry::_trace_enter('topic', { x => 1 }, 100), { scope => 'entered' }, 'SpecEntry trace_enter wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry trace_enter wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::SpecEntry::_trace_exit({ scope => 'entered' }, { done => 1 }, 100), 'trace_exit_ok', 'SpecEntry trace_exit wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry trace_exit wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::SpecEntry::_trace_decision('path', 1, 'ok', 100), 'trace_decision_ok', 'SpecEntry trace_decision wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry trace_decision wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::SpecEntry::_trace_log_dump('payload', {}), 'trace_dump_ok', 'SpecEntry trace_log_dump wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry trace_log_dump wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    ok(LinkedSpec::SpecEntry::_trace_should_dump(100), 'SpecEntry trace_should_dump wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry trace_should_dump wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::SpecEntry::_dump_value({ foo => 1 }), 'dump_value_ok', 'SpecEntry dump_value wrapper still delegates through Data::Dumper');
+    is($@, "__SAVED_ERR__\n", 'SpecEntry dump_value wrapper preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
