@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `SpecEntry`
+## Summary
+Reduced another staged-compile load-time dependency by making `LinkedSpec::SpecEntry` load `Data::Dumper` only when high-verbosity rule-entry debug dumps actually need structured formatting.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored SpecEntry dump ownership:
+  - removed eager `use Data::Dumper;`,
+  - added `LinkedSpec::SpecEntry::_require_data_dumper_pkg(...)`,
+  - added `LinkedSpec::SpecEntry::_dump_value(...)`,
+  - updated `compile_spec_entry(...)` to lazy-load `Data::Dumper` only for the
+    high-verbosity `SPEC ENTRY DUMP` and `RULE INFO DUMP` trace paths.
+- Preserved behavior:
+  - require-only or non-debug SpecEntry paths still keep `Data::Dumper` unloaded,
+  - rule-entry compilation and handler generation are unchanged,
+  - high-verbosity debug dumps still emit the same structured payloads.
+- Updated focused regression coverage:
+  - added `spec_entry_require_avoids_data_dumper_load_until_debug_compile_dump`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=213`)
+
 ## 2026-03-12 - Phase 1A Slice: Remove Dead `Data::Dumper` Import from `LinkedSpec.pm`
 ## Summary
 Reduced the façade load-time surface again by removing a dead `Data::Dumper` import from `LinkedSpec.pm`, so plain `require LinkedSpec` no longer pulls that dump helper in up front.

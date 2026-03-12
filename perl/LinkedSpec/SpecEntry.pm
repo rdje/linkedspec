@@ -1,7 +1,6 @@
 package LinkedSpec::SpecEntry;
 
 use 5.010;
-use Data::Dumper;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
@@ -43,6 +42,11 @@ sub _require_trace_pkg {
  return 1
 }
 
+sub _require_data_dumper_pkg {
+ require Data::Dumper;
+ return 1
+}
+
 sub _trace_enter {
  my $saved_err = $@;
  _require_trace_pkg();
@@ -81,6 +85,12 @@ sub _trace_should_dump {
  my $ret = LinkedSpec::Trace::should_dump(@_);
  $@ = $saved_err;
  return $ret
+}
+
+sub _dump_value {
+ my ($value) = @_;
+ _require_data_dumper_pkg();
+ return Data::Dumper::Dumper($value)
 }
 
 sub _runtime_ctx_from_deps {
@@ -613,7 +623,7 @@ sub compile_spec_entry {
 
  if (_trace_should_dump(DUMP_HIGH)) {
   _trace_log_dump("=== SPEC ENTRY DUMP ===\n");
-  _trace_log_dump(Dumper($einfo));
+  _trace_log_dump(_dump_value($einfo));
   _trace_log_dump("=== END SPEC ENTRY DUMP ===\n");
  }
 
@@ -694,7 +704,7 @@ sub compile_spec_entry {
 
  if (_trace_should_dump(DUMP_HIGH)) {
   _trace_log_dump("\n=== RULE INFO DUMP for $label ===\n");
-  _trace_log_dump(Dumper(\%info));
+  _trace_log_dump(_dump_value(\%info));
   _trace_log_dump("=== END RULE INFO DUMP for $label ===\n");
   _trace_log_dump("=== HANDLER DUMP for $label ===\n");
   _trace_log_dump("{\n$handler\n}\n");

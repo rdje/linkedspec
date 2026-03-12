@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::SpecEntry` no longer imports `Data::Dumper` at module load time.
+- `LinkedSpec::SpecEntry` now lazy-loads `Data::Dumper` only when high-verbosity rule-entry debug dumps actually need structured formatting.
+- Added require-only regression lock `spec_entry_require_avoids_data_dumper_load_until_debug_compile_dump`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=213`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec.pm` no longer imports `Data::Dumper` at module load time.
 - Plain `require LinkedSpec` now keeps `Data::Dumper` unloaded until an extracted owner module actually needs it.
 - Added require-only regression lock `linkedspec_require_avoids_data_dumper_load`.
