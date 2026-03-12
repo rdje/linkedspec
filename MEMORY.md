@@ -39,6 +39,26 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::MethodLowering` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_method_lowering_pkg(...)`,
+  - updated `_method_lowering_deps(...)`, `_declare_alias_to_type(...)`,
+    `_lower_typed_declare_statement(...)`, `_normalize_method_tag_expr(...)`,
+    `_lower_method_value_expr(...)`, `_lower_return_general_statement(...)`,
+    `_lower_return_imatch_statement(...)`, `_lower_assign_statement(...)`,
+    `_lower_push_value_statement(...)`, `_lower_regex_subst_statement(...)`,
+    `_lower_return_undef_statement(...)`, and `_lower_return_array_statement(...)`
+    to lazy-load `MethodLowering.pm` only when method-lowering helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_method_lowering_load_until_method_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (200 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load MethodLowering through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::ControlFlow` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_control_flow_pkg(...)`,
   - updated `_control_flow_deps(...)`, `_lower_if_flow_statement(...)`,

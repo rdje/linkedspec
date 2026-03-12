@@ -3257,6 +3257,30 @@ PERL
     like($out, qr/__CONTROL_FLOW_PAYLOAD_OK__/, 'control-flow helpers preserve if/print lowering and stack mutation after lazy ControlFlow loading');
     is($err, '', 'ActionRewriter require/control-flow subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_method_lowering_load_until_method_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_EAGER__\n" : "__METHOD_LOWERING_STILL_LAZY__\n";
+my $alias = LinkedSpec::ActionRewriter::_declare_alias_to_type("array");
+my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_statement("scalar(foo)", "scalar(bar)");
+print defined($alias) && defined($assign_stmt) ? "__METHOD_LOWERING_RESULT_OK__\n" : "__METHOD_LOWERING_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_AFTER_HELPER__\n" : "__METHOD_LOWERING_STILL_UNLOADED__\n";
+if (defined($alias) && $alias eq "array" && defined($assign_stmt) && $assign_stmt eq "\$foo = \$bar") {
+    print "__METHOD_LOWERING_PAYLOAD_OK__\n";
+} else {
+    print "__METHOD_LOWERING_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/method-lowering subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__METHOD_LOWERING_STILL_LAZY__/, 'require ActionRewriter keeps MethodLowering unloaded');
+    like($out, qr/__METHOD_LOWERING_RESULT_OK__/, 'method-lowering helpers still return lowered output after lazy MethodLowering loading');
+    like($out, qr/__METHOD_LOWERING_AFTER_HELPER__/, 'method-lowering helpers lazy-load MethodLowering on demand');
+    like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve alias and assign lowering after lazy MethodLowering loading');
+    is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

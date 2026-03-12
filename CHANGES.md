@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `MethodLowering` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::MethodLowering` only when method-lowering helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the method-lowering owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::MethodLowering ();`,
+  - added `LinkedSpec::ActionRewriter::_require_method_lowering_pkg(...)`,
+  - updated `_method_lowering_deps(...)`, `_declare_alias_to_type(...)`,
+    `_lower_typed_declare_statement(...)`, `_normalize_method_tag_expr(...)`,
+    `_lower_method_value_expr(...)`, `_lower_return_general_statement(...)`,
+    `_lower_return_imatch_statement(...)`, `_lower_assign_statement(...)`,
+    `_lower_push_value_statement(...)`, `_lower_regex_subst_statement(...)`,
+    `_lower_return_undef_statement(...)`, and `_lower_return_array_statement(...)`
+    to lazy-load `MethodLowering.pm` before resolving default deps or delegating
+    into method-lowering helpers.
+- Preserved behavior:
+  - method-lowering still routes through `LinkedSpec::ActionIR::MethodLowering`,
+  - the existing method-lowering default dep map remains intact,
+  - alias resolution and assign lowering outputs stay unchanged.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_method_lowering_load_until_method_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=200`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `ControlFlow` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ControlFlow` only when flow-statement helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the control-flow owner up front.

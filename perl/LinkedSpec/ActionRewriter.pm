@@ -8,7 +8,6 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::ActionIR::DeclareMethod ();
-use LinkedSpec::ActionIR::MethodLowering ();
 
 sub _require_pkg {
  my ($pkg) = @_;
@@ -57,6 +56,10 @@ sub _require_control_flow_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
 }
 
+sub _require_method_lowering_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::MethodLowering')
+}
+
 sub _require_value_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
 }
@@ -76,6 +79,7 @@ sub _flow_expr_deps {
  return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _method_lowering_deps {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
 }
 sub _array_pipeline_deps {
@@ -138,14 +142,17 @@ sub _lower_flow_composite_expr {
 }
 
 sub _declare_alias_to_type {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type(@_, _method_lowering_deps())
 }
 
 sub _lower_typed_declare_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement(@_, _method_lowering_deps())
 }
 
 sub _normalize_method_tag_expr {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr(@_, _method_lowering_deps())
 }
 
@@ -218,34 +225,42 @@ sub _lower_assign_method_statement {
 }
 
 sub _lower_method_value_expr {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(@_, _method_lowering_deps())
 }
 
 sub _lower_return_general_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_return_imatch_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_assign_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_push_value_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_regex_subst_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_return_undef_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@_, _method_lowering_deps())
 }
 
 sub _lower_return_array_statement {
+ _require_method_lowering_pkg();
  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@_, _method_lowering_deps())
 }
 
