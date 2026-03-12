@@ -10,11 +10,14 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
-use LinkedSpec::ActionRewriter ();
-
 use constant {
  DUMP_LOW => 100,
 };
+
+sub _require_action_rewriter_pkg {
+ require LinkedSpec::ActionRewriter;
+ return 1
+}
 
 sub _require_trace_pkg {
  require LinkedSpec::Trace;
@@ -42,18 +45,22 @@ sub _build_rewrite_diag_acc {
 }
 
 sub _trim_action_ir_value {
+ _require_action_rewriter_pkg();
  return LinkedSpec::ActionRewriter::_trim_action_ir_value(@_)
 }
 
 sub _rewrite_action_code_with_diagnostics {
+ _require_action_rewriter_pkg();
  return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@_)
 }
 
 sub _accumulate_action_rewrite_diagnostics {
+ _require_action_rewriter_pkg();
  return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@_)
 }
 
 sub _build_action_rewrite_rules {
+ _require_action_rewriter_pkg();
  return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@_)
 }
 

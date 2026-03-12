@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `ActionRewriter` Through `RuleIR::EmitContext`
+## Summary
+Reduced the last direct modularized owner import inside `LinkedSpec::*` by making `LinkedSpec::RuleIR::EmitContext` load `LinkedSpec::ActionRewriter` only when emit-context build paths actually need rewrite helpers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored EmitContext action-rewriter ownership:
+  - removed eager `use LinkedSpec::ActionRewriter ();`,
+  - added `LinkedSpec::RuleIR::EmitContext::_require_action_rewriter_pkg(...)`,
+  - updated `_trim_action_ir_value(...)`, `_rewrite_action_code_with_diagnostics(...)`,
+    `_accumulate_action_rewrite_diagnostics(...)`, and `_build_action_rewrite_rules(...)`
+    to lazy-load `ActionRewriter.pm` before delegating.
+- Preserved behavior:
+  - `build_rule_ir_emit_context(...)` still rewrites ACODE/BCODE blocks through the same
+    ActionRewriter-owned helpers,
+  - unresolved-helper and canonical-action metadata stays unchanged,
+  - the previously landed removed-facade seam stays on `LinkedSpec::ActionRewriter`, not
+    the old `LinkedSpec.pm` compatibility surface.
+- Updated focused regression coverage:
+  - added `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=209`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through the Facade
 ## Summary
 Reduced the final façade-level trace load-time coupling by making `LinkedSpec.pm` load `LinkedSpec::Trace` only when the public trace API is actually used, so plain `require LinkedSpec` no longer imports `Trace.pm` up front.

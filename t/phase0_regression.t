@@ -377,6 +377,43 @@ PERL
     like($out, qr/__UNRESOLVED_HELPER_OK__\n__UNRESOLVED_RAW_OK__|__UNRESOLVED_RAW_OK__\n__UNRESOLVED_HELPER_OK__/, 'EmitContext meta preserves unresolved helper names and statements after lazy Trace loading');
     is($err, '', 'LinkedSpec::RuleIR::EmitContext require/meta subprocess does not emit stderr');
 };
+subtest 'emit_context_require_avoids_action_rewriter_load_until_emit_context_build' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::RuleIR::EmitContext;
+print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";
+my $rule_ir = {
+    label => 'Top',
+    node_type => 'default',
+    REs => [qr/a/],
+    code_blocks => {
+        ICODE  => [],
+        ECODE  => [],
+        EXCODE => [],
+        ITCODE => [],
+        LXCODE => [],
+        LSCODE => [],
+        LECODE => [],
+    },
+    acode_entries => [
+        { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
+    ],
+    bcode_entries => [],
+};
+my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+print ref($emit_ctx) eq "HASH" ? "__EMIT_CTX_DEFINED__\n" : "__EMIT_CTX_UNDEF__\n";
+print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_BUILD__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";
+print ((ref($emit_ctx->{ACODEs}) eq "ARRAY" && @{$emit_ctx->{ACODEs}} == 1) ? "__ACODES_OK__\n" : "__ACODES_BAD__\n");
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::RuleIR::EmitContext require/build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps ActionRewriter unloaded');
+    like($out, qr/__EMIT_CTX_DEFINED__/, 'EmitContext build still succeeds after lazy ActionRewriter loading');
+    like($out, qr/__ACTION_REWRITER_AFTER_BUILD__/, 'EmitContext build lazy-loads ActionRewriter on demand');
+    like($out, qr/__ACODES_OK__/, 'EmitContext build preserves rewritten ACODE output after lazy ActionRewriter loading');
+    is($err, '', 'LinkedSpec::RuleIR::EmitContext require/build subprocess does not emit stderr');
+};
 subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
     plan tests => 5;
 

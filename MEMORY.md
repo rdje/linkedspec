@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR::EmitContext`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::ActionRewriter` import from `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+  - added `LinkedSpec::RuleIR::EmitContext::_require_action_rewriter_pkg(...)`,
+  - updated `_trim_action_ir_value(...)`, `_rewrite_action_code_with_diagnostics(...)`,
+    `_accumulate_action_rewrite_diagnostics(...)`, and `_build_action_rewrite_rules(...)`
+    to lazy-load `ActionRewriter.pm` before delegating.
+- Regression outcome:
+  - added `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (209 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load ActionRewriter through RuleIR::EmitContext` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A load-time coupling slice completed against the `LinkedSpec.pm` façade trace surface.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec.pm`,

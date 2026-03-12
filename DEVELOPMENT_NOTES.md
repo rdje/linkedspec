@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext` no longer imports `LinkedSpec::ActionRewriter` at module load time.
+- `LinkedSpec::RuleIR::EmitContext` now lazy-loads `ActionRewriter.pm` only when emit-context build paths actually need rewrite helpers.
+- Added require-only regression lock `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=209`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec.pm` no longer imports `LinkedSpec::Trace` at module load time.
 - `LinkedSpec.pm` now lazy-loads `Trace.pm` only when the public trace API actually runs, while keeping the façade trace-state aliases intact.
 - Added require-only regression lock `linkedspec_require_avoids_trace_load_until_public_trace_api`.
