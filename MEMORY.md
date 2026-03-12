@@ -37,6 +37,30 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Compiler.pm`,
+  - replaced Compiler-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Compiler::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Compiler::_trace_log_output(...)`,
+  - added `LinkedSpec::Compiler::_trace_log_dump(...)`,
+  - added `LinkedSpec::Compiler::_trace_should_dump(...)`,
+  - added `LinkedSpec::Compiler::_trace_enter(...)`,
+  - added `LinkedSpec::Compiler::_trace_exit(...)`,
+  - added `LinkedSpec::Compiler::_trace_decision(...)`,
+  - added `LinkedSpec::Compiler::_trace_apply_trace_options(...)`,
+  - added `LinkedSpec::Compiler::_trace_level_name_for_current_verbosity(...)`,
+  - updated `spec_descr(...)`, `spec_gdata(...)`, `_build_action_rewriter_migration_summary(...)`,
+    and `run_get_pipeline(...)` to route trace work through those owner helpers.
+- Regression outcome:
+  - added `compiler_require_avoids_trace_load_until_run_get_pipeline`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (207 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through Compiler` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::SpecEntry`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/SpecEntry.pm`,

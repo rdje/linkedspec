@@ -1,5 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Compiler`
+## Summary
+Reduced internal compile-pipeline load-time coupling again by making `LinkedSpec::Compiler` load `LinkedSpec::Trace` only when compiler tracing actually starts, so require-only consumers of `Compiler.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Compiler trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced Compiler-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Compiler::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Compiler::_trace_log_output(...)`,
+  - added `LinkedSpec::Compiler::_trace_log_dump(...)`,
+  - added `LinkedSpec::Compiler::_trace_should_dump(...)`,
+  - added `LinkedSpec::Compiler::_trace_enter(...)`,
+  - added `LinkedSpec::Compiler::_trace_exit(...)`,
+  - added `LinkedSpec::Compiler::_trace_decision(...)`,
+  - added `LinkedSpec::Compiler::_trace_apply_trace_options(...)`,
+  - added `LinkedSpec::Compiler::_trace_level_name_for_current_verbosity(...)`,
+  - updated `spec_descr(...)`, `spec_gdata(...)`, `_build_action_rewriter_migration_summary(...)`,
+    and `run_get_pipeline(...)` to route trace work through those owner helpers.
+- Preserved behavior:
+  - `run_get_pipeline(...)` still returns descriptors and parser coderefs the same way,
+  - compiler validation and parse failure diagnostics still route through `LinkedSpec::Trace`,
+  - trace-level naming and option parsing stay on the extracted `Trace.pm` owner.
+- Updated focused regression coverage:
+  - added `compiler_require_avoids_trace_load_until_run_get_pipeline`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=207`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `SpecEntry`
 ## Summary
 Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::SpecEntry` load `LinkedSpec::Trace` only when `compile_spec_entry(...)` actually starts traced rule compilation, so require-only consumers of `SpecEntry.pm` no longer import the trace owner up front.

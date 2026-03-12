@@ -169,6 +169,25 @@ PERL
     like($out, qr/__SPEC_ENTRY_AFTER_PIPELINE__\n__VALIDATION_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads SpecEntry and Validation on demand');
     is($err, '', 'LinkedSpec::Compiler require/run_get_pipeline subprocess does not emit stderr');
 };
+subtest 'compiler_require_avoids_trace_load_until_run_get_pipeline' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
+require LinkedSpec::Compiler;
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
+my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_PIPELINE__\n" : "__TRACE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::Compiler require/run_get_pipeline trace subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec::Compiler keeps Trace unloaded');
+    like($out, qr/__DESCR_DEFINED__/, 'run_get_pipeline still returns a descriptor hash after lazy Trace loading');
+    like($out, qr/__TRACE_AFTER_PIPELINE__/, 'run_get_pipeline lazy-loads Trace on demand');
+    is($err, '', 'LinkedSpec::Compiler require/run_get_pipeline trace subprocess does not emit stderr');
+};
 subtest 'validation_require_avoids_trace_load_until_error_report' => sub {
     plan tests => 6;
 
