@@ -37,6 +37,26 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::MethodExpr` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_pkg(...)`,
+  - added `LinkedSpec::ActionRewriter::_require_method_expr_pkg(...)`,
+  - updated `_parse_method_function_expr(...)`, `_is_bare_method_scope_token(...)`,
+    `_normalize_method_args_with_optional_scope(...)`, and `_split_top_level_csv(...)`
+    to lazy-load `MethodExpr.pm` only when method-expression helpers actually run,
+  - updated `_scan_contract_ir_event_deps(...)` so scanner dep resolution loads
+    `MethodExpr.pm` before `ActionIR::Scanner` resolves its direct method-expression callbacks.
+- Regression outcome:
+  - updated `action_rewriter_require_avoids_linkedspec_deps_load`,
+  - added `action_rewriter_require_avoids_method_expr_load_until_parse_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (189 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load MethodExpr through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionIR::ScannerCore`.
 - Key technical outcome:
   - removed eager imports of `LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules`,

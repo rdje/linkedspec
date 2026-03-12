@@ -8,7 +8,6 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::ActionIR::Scanner ();
-use LinkedSpec::ActionIR::MethodExpr ();
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::ValueExpr ();
 use LinkedSpec::ActionIR::FlowExpr ();
@@ -20,6 +19,17 @@ use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::ActionIR::StatementSplit ();
 use LinkedSpec::ActionIR::Diagnostics ();
 use LinkedSpec::ActionIR::RewritePipeline ();
+
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
+sub _require_method_expr_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
+}
 
 sub _trim_action_ir_value {
  my ($value) = @_;
@@ -58,22 +68,27 @@ sub _rewrite_pipeline_deps {
  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _scan_contract_ir_event_deps {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
 }
 
 sub _parse_method_function_expr {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr(@_)
 }
 
 sub _is_bare_method_scope_token {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token(@_)
 }
 
 sub _normalize_method_args_with_optional_scope {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(@_)
 }
 
 sub _split_top_level_csv {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv(@_)
 }
 

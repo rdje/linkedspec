@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `MethodExpr` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::MethodExpr` only when method-expression helpers actually run, so require-only consumers of `ActionRewriter.pm` no longer import the method-expression parser up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::MethodExpr ();`,
+  - added `LinkedSpec::ActionRewriter::_require_pkg(...)`,
+  - added `LinkedSpec::ActionRewriter::_require_method_expr_pkg(...)`,
+  - updated `_parse_method_function_expr(...)`, `_is_bare_method_scope_token(...)`,
+    `_normalize_method_args_with_optional_scope(...)`, and `_split_top_level_csv(...)`
+    to lazy-load `MethodExpr.pm` before delegating,
+  - updated `_scan_contract_ir_event_deps(...)` so scanner dep resolution also loads
+    `MethodExpr.pm` before `ActionIR::Scanner` resolves its direct method-expression callbacks.
+- Preserved behavior:
+  - method-expression parsing and arity normalization are unchanged,
+  - downstream lowering that relies on method-expression helpers still receives the same parsed method/arg structures,
+  - `LinkedSpec::Deps` remains unloaded for require-only ActionRewriter consumers.
+- Updated focused regression coverage:
+  - updated `action_rewriter_require_avoids_linkedspec_deps_load`,
+  - added `action_rewriter_require_avoids_method_expr_load_until_parse_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=189`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load Scanner Rule Packages Through `ActionIR::ScannerCore`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionIR::ScannerCore` load its scanner rule packages only when contract scanning actually runs, so require-only consumers of `ActionIR::ScannerCore.pm` no longer import the rule tables up front.

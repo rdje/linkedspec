@@ -2997,8 +2997,27 @@ subtest 'action_rewriter_require_avoids_linkedspec_deps_load' => sub {
 
     is($exit_code, 0, 'ActionRewriter require-only subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__DEPS_NOT_LOADED__/, 'ActionRewriter require-only subprocess keeps LinkedSpec::Deps unloaded');
-    like($out, qr/__METHODEXPR_LOADED__/, 'ActionRewriter require-only subprocess still loads its direct ActionIR owner modules');
+    like($out, qr/__METHODEXPR_NOT_LOADED__/, 'ActionRewriter require-only subprocess keeps MethodExpr unloaded');
     is($err, '', 'ActionRewriter require-only subprocess does not emit stderr');
+};
+subtest 'action_rewriter_require_avoids_method_expr_load_until_parse_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::ActionRewriter;'
+      . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_EAGER__\n" : "__METHODEXPR_STILL_LAZY__\n";'
+      . 'my $expr = LinkedSpec::ActionRewriter::_parse_method_function_expr("return_a(Top)");'
+      . 'print ref($expr) eq "HASH" ? "__METHOD_EXPR_HASH__\n" : "__METHOD_EXPR_OTHER__\n";'
+      . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_AFTER_PARSE__\n" : "__METHODEXPR_STILL_UNLOADED__\n";'
+      . 'print ref($expr->{args}) eq "ARRAY" && @{$expr->{args}} == 1 && $expr->{args}[0] eq "Top" ? "__METHOD_EXPR_ARGS_OK__\n" : "__METHOD_EXPR_ARGS_BAD__\n";'
+    );
+
+    is($exit_code, 0, 'ActionRewriter require/parse subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__METHODEXPR_STILL_LAZY__/, 'require ActionRewriter keeps MethodExpr unloaded');
+    like($out, qr/__METHOD_EXPR_HASH__/, 'method-expression parse still returns a hash after lazy MethodExpr loading');
+    like($out, qr/__METHODEXPR_AFTER_PARSE__/, 'method-expression parse lazy-loads MethodExpr on demand');
+    like($out, qr/__METHOD_EXPR_ARGS_OK__/, 'method-expression parse preserves parsed argument output after lazy MethodExpr loading');
+    is($err, '', 'ActionRewriter require/parse subprocess does not emit stderr');
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;

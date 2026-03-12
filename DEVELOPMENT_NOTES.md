@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer imports `LinkedSpec::ActionIR::MethodExpr` at module load time.
+- `LinkedSpec::ActionRewriter` now lazy-loads `MethodExpr.pm` only when method-expression-dependent helper paths actually start, including scanner dep resolution.
+- Added require-only regression lock `action_rewriter_require_avoids_method_expr_load_until_parse_helper` and tightened the existing require-only ActionRewriter load contract.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=189`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionIR::ScannerCore` no longer imports its scanner rule packages at module load time.
 - `LinkedSpec::ActionIR::ScannerCore` now lazy-loads `PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules`, and `LegacyRules` only when contract scanning actually starts.
 - Added require-only regression lock `actionir_scannercore_require_avoids_scanner_rule_load_until_scan`.
