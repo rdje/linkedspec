@@ -1,7 +1,6 @@
 package LinkedSpec::RuleIR;
 
 use 5.010;
-use Data::Dumper;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
@@ -59,6 +58,11 @@ sub _require_trace_pkg {
  return 1
 }
 
+sub _require_data_dumper_pkg {
+ require Data::Dumper;
+ return 1
+}
+
 sub _trace_should_dump {
  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
  return LinkedSpec::Trace::should_dump(@_)
@@ -72,6 +76,12 @@ sub _trace_log_output {
 sub _trace_decision {
  return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
  return LinkedSpec::Trace::trace_decision(@_)
+}
+
+sub _dump_value {
+ my ($value) = @_;
+ _require_data_dumper_pkg();
+ return Data::Dumper::Dumper($value)
 }
 
 sub _build_rule_execution_meta {
@@ -120,7 +130,7 @@ sub _build_rule_execution_meta {
  };
 
  if (_trace_should_dump(DUMP_DEBUG)) {
-  _trace_log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", Dumper($meta));
+  _trace_log_output(DUMP_DEBUG, "(LinkedSpec.pm::_build_rule_execution_meta) Rule meta", _dump_value($meta));
  }
 
  return $meta

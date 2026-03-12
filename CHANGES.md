@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `RuleIR`
+## Summary
+Reduced another internal load-time dependency by making `LinkedSpec::RuleIR` load `Data::Dumper` only when debug execution-meta dumps actually need structured formatting.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored RuleIR dump ownership:
+  - removed eager `use Data::Dumper;`,
+  - added `LinkedSpec::RuleIR::_require_data_dumper_pkg(...)`,
+  - added `LinkedSpec::RuleIR::_dump_value(...)`,
+  - updated `_build_rule_execution_meta(...)` to lazy-load `Data::Dumper` only when
+    the debug-only `Rule meta` trace path runs.
+- Preserved behavior:
+  - normal require-only or non-debug RuleIR paths still keep `Data::Dumper` unloaded,
+  - debug execution-meta dumps still emit the same `Rule meta` trace label and structured payload,
+  - handler-variant selection and action-mode metadata stay unchanged.
+- Updated focused regression coverage:
+  - added `ruleir_require_avoids_data_dumper_load_until_debug_meta_dump`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=211`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `Trace`
 ## Summary
 Reduced another core load-time dependency by making `LinkedSpec::Trace` load `Data::Dumper` only when referenced values actually need structured dump formatting.

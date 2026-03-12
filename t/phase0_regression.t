@@ -355,6 +355,32 @@ PERL
     like($out, qr/Cannot mix ACTION \(->\) and BLIND CALL \(=>\) code blocks/, 'RuleIR mixed action error still reports the existing diagnostic');
     is($err, '', 'LinkedSpec::RuleIR require/meta/validate subprocess does not emit stderr');
 };
+subtest 'ruleir_require_avoids_data_dumper_load_until_debug_meta_dump' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::Trace;
+require LinkedSpec::RuleIR;
+print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_EAGER__\n" : "__DUMPER_STILL_LAZY__\n";
+LinkedSpec::Trace::configure_trace(trace_level => 'debug');
+my $meta = LinkedSpec::RuleIR::_build_rule_execution_meta(
+    label => 'Top',
+    node_type => 'default',
+    regex_count => 1,
+    acode_count => 1,
+    bcode_count => 0,
+);
+print ref($meta) eq "HASH" && ($meta->{handler_variant} || '') eq '_default' ? "__META_OK__\n" : "__META_BAD__\n";
+print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_AFTER_META__\n" : "__DUMPER_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::RuleIR require/debug-meta subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DUMPER_STILL_LAZY__/, 'require LinkedSpec::RuleIR keeps Data::Dumper unloaded');
+    like($out, qr/__META_OK__/, 'RuleIR execution-meta build still succeeds after lazy Data::Dumper loading');
+    like($out, qr/__DUMPER_AFTER_META__/, 'RuleIR debug execution-meta dump lazy-loads Data::Dumper on demand');
+    like($out, qr/Rule meta/, 'RuleIR debug execution-meta dump still emits the existing debug trace label');
+    is($err, '', 'LinkedSpec::RuleIR require/debug-meta subprocess does not emit stderr');
+};
 subtest 'emit_context_require_avoids_trace_load_until_unresolved_helper_diag' => sub {
     plan tests => 7;
 
