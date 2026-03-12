@@ -126,6 +126,24 @@ PERL
     like($out, qr/__COMPILER_AFTER_GET__\n__ACTION_REWRITER_AFTER_GET__/, 'Get lazy-loads Compiler and ActionRewriter through the compile pipeline');
     is($err, '', 'LinkedSpec require/Get subprocess does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_trace_load_until_public_trace_api' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec;'
+      . 'print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";'
+      . 'my $cfg = LinkedSpec::configure_trace(trace_level => "low");'
+      . 'print ref($cfg) eq "HASH" && ($cfg->{trace_level} // "") eq "low" ? "__CONFIG_OK__\n" : "__CONFIG_BAD__\n";'
+      . 'print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_CONFIGURE__\n" : "__TRACE_STILL_UNLOADED__\n";'
+      . 'print $LinkedSpec::DUMP_VERBOSITY == LinkedSpec::DUMP_LOW() ? "__FACADE_ALIAS_OK__\n" : "__FACADE_ALIAS_BAD__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec require/configure_trace subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec keeps Trace unloaded');
+    like($out, qr/__CONFIG_OK__/, 'LinkedSpec public configure_trace wrapper still configures trace state after lazy loading');
+    like($out, qr/__TRACE_AFTER_CONFIGURE__\n__FACADE_ALIAS_OK__|__FACADE_ALIAS_OK__\n__TRACE_AFTER_CONFIGURE__/, 'LinkedSpec public trace API lazy-loads Trace and preserves facade variable aliases');
+    is($err, '', 'LinkedSpec require/configure_trace subprocess does not emit stderr');
+};
 subtest 'runtime_require_avoids_compiler_load_until_run_get' => sub {
     plan tests => 4;
 
@@ -669,6 +687,7 @@ subtest 'get_parser_avoids_linkedspec_parser_factory_facade' => sub {
     my ($ok_run, $parser, $ast, $err) = (0, undef, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
+        require LinkedSpec::Trace;
         local $LinkedSpec::Trace::DUMP_VERBOSITY = LinkedSpec::Trace::DUMP_NONE();
         local $LinkedSpec::Trace::TRACE_LOG_FILE;
         local $LinkedSpec::Trace::TRACE_LOG_MODE = 'stdout';
@@ -1282,6 +1301,7 @@ subtest 'get_parser_normalizes_option_pairs_before_parser_factory' => sub {
     my ($saw_hashref, $captured_option);
     $ok_run = eval {
         no warnings 'redefine';
+        require LinkedSpec::Trace;
         local $LinkedSpec::Trace::DUMP_VERBOSITY = LinkedSpec::Trace::DUMP_NONE();
         local $LinkedSpec::Trace::TRACE_LOG_FILE;
         local $LinkedSpec::Trace::TRACE_LOG_MODE = 'stdout';

@@ -16,7 +16,6 @@ BEGIN {
 }
 
 use LinkedRE;
-use LinkedSpec::Trace ();
 
 # UVM-style verbosity levels
 use constant {
@@ -50,7 +49,11 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 # Returns : hashref effective trace settings
 #------------------------------------------------------------------------------
 sub configure_trace {
- return LinkedSpec::Trace::configure_trace(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::configure_trace(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -60,7 +63,11 @@ sub configure_trace {
 # Returns : scope hashref (pass to trace_exit)
 #------------------------------------------------------------------------------
 sub trace_enter {
- return LinkedSpec::Trace::trace_enter(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_enter(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -70,7 +77,11 @@ sub trace_enter {
 # Returns : undef
 #------------------------------------------------------------------------------
 sub trace_exit {
- return LinkedSpec::Trace::trace_exit(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_exit(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -80,7 +91,11 @@ sub trace_exit {
 # Returns : boolean normalized taken value
 #------------------------------------------------------------------------------
 sub trace_decision {
- return LinkedSpec::Trace::trace_decision(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::trace_decision(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -91,7 +106,11 @@ sub trace_decision {
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_output {
- return LinkedSpec::Trace::log_output(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::log_output(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -101,7 +120,11 @@ sub log_output {
 # Returns : undef (side effects only: console/file output)
 #------------------------------------------------------------------------------
 sub log_dump {
- return LinkedSpec::Trace::log_dump(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::log_dump(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 #------------------------------------------------------------------------------
@@ -111,7 +134,11 @@ sub log_dump {
 # Returns : boolean (true when current verbosity enables this level)
 #------------------------------------------------------------------------------
 sub should_dump {
- return LinkedSpec::Trace::should_dump(@_)
+ my $saved_err = $@;
+ _require_trace_pkg();
+ my $ret = LinkedSpec::Trace::should_dump(@_);
+ $@ = $saved_err;
+ return $ret
 }
 
 sub _require_pkg {
@@ -121,6 +148,11 @@ sub _require_pkg {
  $file .= '.pm';
  my $ok = eval { require $file; 1 };
  die "(LinkedSpec::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+ return 1
+}
+
+sub _require_trace_pkg {
+ _require_pkg('LinkedSpec::Trace');
  return 1
 }
 

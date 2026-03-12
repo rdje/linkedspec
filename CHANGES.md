@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through the Facade
+## Summary
+Reduced the final façade-level trace load-time coupling by making `LinkedSpec.pm` load `LinkedSpec::Trace` only when the public trace API is actually used, so plain `require LinkedSpec` no longer imports `Trace.pm` up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored façade trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - added `LinkedSpec::_require_trace_pkg(...)`,
+  - updated `configure_trace(...)`, `trace_enter(...)`, `trace_exit(...)`, `trace_decision(...)`,
+    `log_output(...)`, `log_dump(...)`, and `should_dump(...)` to lazy-load `Trace.pm`
+    before delegating,
+  - preserved `$@` across those façade wrappers so lazy trace loading does not clobber
+    eval error state,
+  - kept the existing façade trace-state aliases (`$LinkedSpec::DUMP_VERBOSITY`,
+    `$LinkedSpec::TRACE_LOG_FILE`, and related variables) as the public compatibility surface.
+- Updated regression assumptions:
+  - parser-factory option-normalization tests now explicitly `require LinkedSpec::Trace`
+    when they intentionally localize internal trace state, so plain `require LinkedSpec`
+    can stay lazy.
+- Updated focused regression coverage:
+  - added `linkedspec_require_avoids_trace_load_until_public_trace_api`.
+
+## Validation
+- Ran:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=208`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Compiler`
 ## Summary
 Reduced internal compile-pipeline load-time coupling again by making `LinkedSpec::Compiler` load `LinkedSpec::Trace` only when compiler tracing actually starts, so require-only consumers of `Compiler.pm` no longer import the trace owner up front.

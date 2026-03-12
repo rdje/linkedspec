@@ -37,6 +37,26 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A load-time coupling slice completed against the `LinkedSpec.pm` façade trace surface.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec.pm`,
+  - added `LinkedSpec::_require_trace_pkg(...)`,
+  - updated `configure_trace(...)`, `trace_enter(...)`, `trace_exit(...)`, `trace_decision(...)`,
+    `log_output(...)`, `log_dump(...)`, and `should_dump(...)` to lazy-load `Trace.pm`
+    before delegating while preserving `$@`,
+  - kept the existing façade trace-state aliases (`$LinkedSpec::DUMP_VERBOSITY`,
+    `$LinkedSpec::TRACE_LOG_FILE`, and related variables) as the compatibility surface,
+  - updated parser-factory regression setup to explicitly `require LinkedSpec::Trace` when it
+    intentionally localizes internal trace state, so façade loading can remain lazy.
+- Regression outcome:
+  - added `linkedspec_require_avoids_trace_load_until_public_trace_api`.
+- Validation snapshot:
+  - `perl -c perl/LinkedSpec.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (208 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through facade` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Compiler.pm`,
