@@ -11,11 +11,20 @@ BEGIN {
 }
 
 use LinkedSpec::ActionRewriter ();
-use LinkedSpec::Trace ();
 
 use constant {
- DUMP_LOW => LinkedSpec::Trace::DUMP_LOW(),
+ DUMP_LOW => 100,
 };
+
+sub _require_trace_pkg {
+ require LinkedSpec::Trace;
+ return 1
+}
+
+sub _trace_log_output {
+ _require_trace_pkg();
+ return LinkedSpec::Trace::log_output(@_)
+}
 
 sub _build_rewrite_diag_acc {
  return {
@@ -189,7 +198,7 @@ sub _build_action_rewriter_meta {
  };
 
  if ($action_rewriter_meta->{unresolved_helper_count}) {
-  LinkedSpec::Trace::log_output(
+  _trace_log_output(
    DUMP_LOW,
    "Rule '$label': unresolved action helper(s) after rewrite pipeline",
    "helpers=" . join(', ', @{$action_rewriter_meta->{unresolved_helpers}})

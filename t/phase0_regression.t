@@ -246,6 +246,45 @@ PERL
     like($out, qr/__EMIT_CONTEXT_AFTER_BUILD__/, 'RuleIR emit-context build lazy-loads EmitContext on demand');
     is($err, '', 'LinkedSpec::RuleIR require/build subprocess does not emit stderr');
 };
+subtest 'emit_context_require_avoids_trace_load_until_unresolved_helper_diag' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::RuleIR::EmitContext;
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
+my $meta = LinkedSpec::RuleIR::EmitContext::_build_action_rewriter_meta(
+    'Top',
+    [],
+    {
+        unresolved_helper_hits => { helper_x => 1 },
+        unresolved_helper_count => 1,
+        unresolved_helper_events => [
+            { raw => 'helper_x(foo)' },
+        ],
+        helper_action_ir_hits => {},
+        helper_action_ir_count => 0,
+        helper_action_ir_events => [],
+        canonical_action_ir_hits => {},
+        canonical_action_ir_count => 0,
+        canonical_action_ir_events => [],
+        canonical_action_ir_fallback_count => 0,
+    },
+);
+print ref($meta) eq "HASH" ? "__META_DEFINED__\n" : "__META_UNDEF__\n";
+print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_META__\n" : "__TRACE_STILL_UNLOADED__\n";
+print (($meta->{unresolved_helper_count} || 0) == 1 ? "__UNRESOLVED_COUNT_OK__\n" : "__UNRESOLVED_COUNT_BAD__\n");
+print ((grep { $_ eq "helper_x" } @{$meta->{unresolved_helpers} || []}) ? "__UNRESOLVED_HELPER_OK__\n" : "__UNRESOLVED_HELPER_BAD__\n");
+print ((grep { $_ eq "helper_x(foo)" } @{$meta->{unresolved_helper_statements} || []}) ? "__UNRESOLVED_RAW_OK__\n" : "__UNRESOLVED_RAW_BAD__\n");
+PERL
+
+    is($exit_code, 0, 'LinkedSpec::RuleIR::EmitContext require/meta subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps Trace unloaded');
+    like($out, qr/__META_DEFINED__/, 'EmitContext meta build still succeeds after lazy Trace loading');
+    like($out, qr/__TRACE_AFTER_META__/, 'EmitContext meta build lazy-loads Trace on unresolved-helper diagnostics');
+    like($out, qr/__UNRESOLVED_COUNT_OK__/, 'EmitContext meta preserves unresolved helper count after lazy Trace loading');
+    like($out, qr/__UNRESOLVED_HELPER_OK__\n__UNRESOLVED_RAW_OK__|__UNRESOLVED_RAW_OK__\n__UNRESOLVED_HELPER_OK__/, 'EmitContext meta preserves unresolved helper names and statements after lazy Trace loading');
+    is($err, '', 'LinkedSpec::RuleIR::EmitContext require/meta subprocess does not emit stderr');
+};
 subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
     plan tests => 5;
 

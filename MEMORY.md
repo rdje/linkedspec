@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::RuleIR::EmitContext`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+  - replaced the EmitContext-local `DUMP_LOW` constant with the stable numeric value matching `Trace.pm`,
+  - added `LinkedSpec::RuleIR::EmitContext::_require_trace_pkg(...)`,
+  - added `LinkedSpec::RuleIR::EmitContext::_trace_log_output(...)`,
+  - updated unresolved-helper diagnostic logging in `_build_action_rewriter_meta(...)`
+    to lazy-load `Trace.pm` only when that diagnostic path actually runs.
+- Regression outcome:
+  - added `emit_context_require_avoids_trace_load_until_unresolved_helper_diag`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (204 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through RuleIR::EmitContext` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Resolver`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Resolver.pm`,

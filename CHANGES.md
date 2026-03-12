@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `RuleIR::EmitContext`
+## Summary
+Reduced internal staged-rule-compilation load-time coupling again by making `LinkedSpec::RuleIR::EmitContext` load `LinkedSpec::Trace` only when unresolved-helper diagnostics actually need to emit output, so require-only consumers of `EmitContext.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored EmitContext trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced the EmitContext-local `DUMP_LOW` constant with the stable numeric value matching `Trace.pm`,
+  - added `LinkedSpec::RuleIR::EmitContext::_require_trace_pkg(...)`,
+  - added `LinkedSpec::RuleIR::EmitContext::_trace_log_output(...)`,
+  - updated unresolved-helper diagnostic logging in `_build_action_rewriter_meta(...)`
+    to lazy-load `Trace.pm` only when that diagnostic path actually runs.
+- Preserved behavior:
+  - action-rewriter metadata assembly still returns the same unresolved-helper counts, names, and raw statements,
+  - no trace work occurs on require-only or zero-unresolved-helper paths,
+  - unresolved-helper diagnostics still route through `LinkedSpec::Trace::log_output(...)`.
+- Updated focused regression coverage:
+  - added `emit_context_require_avoids_trace_load_until_unresolved_helper_diag`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=204`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Resolver`
 ## Summary
 Reduced internal load-time coupling again by making `LinkedSpec::Resolver` load `LinkedSpec::Trace` only when invalid-spec or spec-resolution trace/error paths actually need to emit output, so require-only consumers of `Resolver.pm` no longer import the trace owner up front.
