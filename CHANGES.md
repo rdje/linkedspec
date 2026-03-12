@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `Compiler`
+## Summary
+Reduced another staged-compile load-time dependency by making `LinkedSpec::Compiler` load `Data::Dumper` only when traced compiler dumps actually need structured formatting.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Compiler dump ownership:
+  - removed eager `use Data::Dumper;`,
+  - added `LinkedSpec::Compiler::_require_data_dumper_pkg(...)`,
+  - added `LinkedSpec::Compiler::_dump_value(...)`,
+  - updated compiler dump sites to lazy-load `Data::Dumper` only for traced summary,
+    parsed-spec, gdata, and final-descriptor dump paths.
+- Preserved behavior:
+  - require-only or non-debug compiler paths still keep `Data::Dumper` unloaded,
+  - `run_get_pipeline(...)`, `spec_descr(...)`, and `spec_gdata(...)` behavior is unchanged,
+  - traced compiler dump payloads still emit the same structured content.
+- Updated focused regression coverage:
+  - added `compiler_require_avoids_data_dumper_load_until_debug_pipeline_dump`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=214`)
+
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Data::Dumper` Through `SpecEntry`
 ## Summary
 Reduced another staged-compile load-time dependency by making `LinkedSpec::SpecEntry` load `Data::Dumper` only when high-verbosity rule-entry debug dumps actually need structured formatting.

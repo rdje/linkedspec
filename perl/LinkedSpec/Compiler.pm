@@ -1,7 +1,6 @@
 package LinkedSpec::Compiler;
 
 use 5.010;
-use Data::Dumper;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
@@ -39,6 +38,20 @@ sub _require_pkg {
 sub _require_trace_pkg {
  _require_pkg('LinkedSpec::Trace');
  return 1
+}
+
+sub _require_data_dumper_pkg {
+ _require_pkg('Data::Dumper');
+ return 1
+}
+
+sub _dump_value {
+ my ($value) = @_;
+ my $saved_err = $@;
+ _require_data_dumper_pkg();
+ my $ret = Data::Dumper::Dumper($value);
+ $@ = $saved_err;
+ return $ret
 }
 
 sub _trace_log_output {
@@ -229,10 +242,10 @@ sub _build_action_rewriter_migration_summary {
  }
 
  if (_trace_should_dump(DUMP_DEBUG)) {
-  _trace_log_output(
+ _trace_log_output(
    DUMP_DEBUG,
    "(LinkedSpec.pm::_build_action_rewriter_migration_summary) summary",
-   Dumper($summary)
+   _dump_value($summary)
   );
  }
 
@@ -286,7 +299,7 @@ sub spec_descr {
 
  if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED SPEC DUMP ===\n");
-  _trace_log_dump(Dumper($result));
+  _trace_log_dump(_dump_value($result));
   _trace_log_dump("=== END GENERATED SPEC DUMP ===\n");
  }
  _trace_exit($trace_scope, { status => 'ok', rule_count => scalar(keys %$result) }, DUMP_MEDIUM);
@@ -302,7 +315,7 @@ sub spec_gdata {
 
  if (_trace_should_dump(DUMP_HIGH)) {
   _trace_log_dump("=== SPEC GDATA DUMP ===\n");
-  _trace_log_dump(Dumper($sg));
+  _trace_log_dump(_dump_value($sg));
   _trace_log_dump("=== END SPEC GDATA DUMP ===\n");
  }
 
@@ -321,9 +334,9 @@ sub spec_gdata {
     if (_trace_should_dump(DUMP_HIGH)) {
      _trace_log_dump("=== GDATA ERROR CONTEXT ===\n");
      _trace_log_dump("label: $label\n");
-     _trace_log_dump("gde: ".Dumper($gde)."\n");
-     _trace_log_dump("sg: ".Dumper($sg)."\n");
-     _trace_log_dump("lgdata: ".Dumper(\@lgdata)."\n");
+     _trace_log_dump("gde: "._dump_value($gde)."\n");
+     _trace_log_dump("sg: "._dump_value($sg)."\n");
+     _trace_log_dump("lgdata: "._dump_value(\@lgdata)."\n");
      _trace_log_dump("=== END GDATA ERROR CONTEXT ===\n");
     }
     # exit 1
@@ -343,7 +356,7 @@ sub spec_gdata {
 
  if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED GDATA DUMP ===\n");
-  _trace_log_dump(Dumper($result));
+  _trace_log_dump(_dump_value($result));
   _trace_log_dump("=== END GENERATED GDATA DUMP ===\n");
  }
  _trace_exit($trace_scope, { status => 'ok', compiled_labels => scalar(keys %$result) }, DUMP_MEDIUM);
@@ -475,9 +488,9 @@ sub run_get_pipeline {
  }
 
  if (_trace_should_dump(DUMP_MEDIUM) || $parse_only) {
-  _trace_log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
+ _trace_log_dump("=== SPEC COMPILE RESULT DUMP ===\n");
   if ($parse_success && defined $retv) {
-   _trace_log_dump(Dumper($retv));
+   _trace_log_dump(_dump_value($retv));
   } else {
    _trace_log_dump("Parse failed - no result available\n");
   }
@@ -539,7 +552,7 @@ sub run_get_pipeline {
  if (_trace_should_dump(DUMP_LOW)) {
   my $top_rule = $runtime_ctx->{top_rule};
   _trace_log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
-  _trace_log_dump(Dumper($final_descr));
+  _trace_log_dump(_dump_value($final_descr));
   _trace_log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
  }
 

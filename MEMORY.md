@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
+- Key technical outcome:
+  - removed eager `Data::Dumper` import from `perl/LinkedSpec/Compiler.pm`,
+  - added `LinkedSpec::Compiler::_require_data_dumper_pkg(...)`,
+  - added `LinkedSpec::Compiler::_dump_value(...)`,
+  - updated traced compiler dump sites to lazy-load `Data::Dumper` only when
+    structured formatting is actually needed.
+- Regression outcome:
+  - added `compiler_require_avoids_data_dumper_load_until_debug_pipeline_dump`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (214 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Data::Dumper through Compiler` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::SpecEntry`.
 - Key technical outcome:
   - removed eager `Data::Dumper` import from `perl/LinkedSpec/SpecEntry.pm`,
