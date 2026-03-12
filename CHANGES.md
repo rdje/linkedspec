@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `LinkedRE` Through `Compiler`
+## Summary
+Reduced another staged-compile load-time dependency by making `LinkedSpec::Compiler` load `LinkedRE` only when regex gdata assembly actually needs it.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Compiler regex-helper ownership:
+  - removed eager `use LinkedRE;`,
+  - added `LinkedSpec::Compiler::_require_linkedre_pkg(...)`,
+  - added `LinkedSpec::Compiler::_ored_re(...)`,
+  - updated `spec_gdata(...)` to lazy-load `LinkedRE` only when it actually builds
+    combined regex dependencies.
+- Preserved behavior:
+  - require-only compiler paths still keep `LinkedRE` unloaded,
+  - `run_get_pipeline(...)` still returns the same descriptor hash shape,
+  - generated gdata regex composition stays owned by `Compiler.pm`.
+- Updated focused regression coverage:
+  - added `compiler_require_avoids_linkedre_load_until_run_get_pipeline`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=216`)
+
 ## 2026-03-12 - Phase 1A Slice: Remove Dead `LinkedRE` Import from `LinkedSpec.pm`
 ## Summary
 Reduced the façade load-time surface again by removing a dead `LinkedRE` import from `LinkedSpec.pm`, so plain `require LinkedSpec` no longer pulls the regex helper in up front.

@@ -37,6 +37,23 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Compiler`.
+- Key technical outcome:
+  - removed eager `LinkedRE` import from `perl/LinkedSpec/Compiler.pm`,
+  - added `LinkedSpec::Compiler::_require_linkedre_pkg(...)`,
+  - added `LinkedSpec::Compiler::_ored_re(...)`,
+  - updated `spec_gdata(...)` to lazy-load `LinkedRE` only when combined regex
+    dependency assembly actually needs it.
+- Regression outcome:
+  - added `compiler_require_avoids_linkedre_load_until_run_get_pipeline`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (216 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load LinkedRE through Compiler` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A façade load-time coupling slice completed against `LinkedSpec.pm`.
 - Key technical outcome:
   - removed dead eager `LinkedRE` import from `perl/LinkedSpec.pm`,

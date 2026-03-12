@@ -7,7 +7,6 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
-use LinkedRE;
 
 use constant {
  DUMP_NONE   => 0,
@@ -45,11 +44,25 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
+sub _require_linkedre_pkg {
+ _require_pkg('LinkedRE');
+ return 1
+}
+
 sub _dump_value {
  my ($value) = @_;
  my $saved_err = $@;
  _require_data_dumper_pkg();
  my $ret = Data::Dumper::Dumper($value);
+ $@ = $saved_err;
+ return $ret
+}
+
+sub _ored_re {
+ my (@regexes) = @_;
+ my $saved_err = $@;
+ _require_linkedre_pkg();
+ my $ret = LinkedRE::oredRE(@regexes);
  $@ = $saved_err;
  return $ret
 }
@@ -345,7 +358,7 @@ sub spec_gdata {
 
   if (@lgdata) {
    _trace_decision("spec_gdata:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
-   $gdata{$label} = LinkedRE::oredRE(@lgdata);
+   $gdata{$label} = _ored_re(@lgdata);
   }
   else {
    _trace_decision("spec_gdata:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
