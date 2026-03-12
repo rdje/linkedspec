@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `ControlFlow` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ControlFlow` only when flow-statement helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the control-flow owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::ControlFlow ();`,
+  - added `LinkedSpec::ActionRewriter::_require_control_flow_pkg(...)`,
+  - updated `_control_flow_deps(...)`, `_lower_if_flow_statement(...)`,
+    `_lower_elseif_flow_statement(...)`, `_lower_else_flow_statement(...)`,
+    `_lower_endif_flow_statement(...)`, `_lower_switch_flow_statement(...)`,
+    `_lower_case_flow_statement(...)`, `_lower_default_flow_statement(...)`,
+    `_lower_endcase_flow_statement(...)`, `_lower_endswitch_flow_statement(...)`,
+    `_lower_say_statement(...)`, and `_lower_print_statement(...)`
+    to lazy-load `ControlFlow.pm` before resolving default deps or delegating
+    into control-flow helpers.
+- Preserved behavior:
+  - control-flow lowering still routes through `LinkedSpec::ActionIR::ControlFlow`,
+  - the existing control-flow default dep map remains intact,
+  - `if(is_empty(array(items)))` and `print(scalar(foo))` still lower the same way.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_control_flow_load_until_control_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=199`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `ValueExpr` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::ValueExpr` only when value helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the value-expression owner up front.

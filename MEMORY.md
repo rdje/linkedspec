@@ -39,6 +39,26 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::ControlFlow` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_control_flow_pkg(...)`,
+  - updated `_control_flow_deps(...)`, `_lower_if_flow_statement(...)`,
+    `_lower_elseif_flow_statement(...)`, `_lower_else_flow_statement(...)`,
+    `_lower_endif_flow_statement(...)`, `_lower_switch_flow_statement(...)`,
+    `_lower_case_flow_statement(...)`, `_lower_default_flow_statement(...)`,
+    `_lower_endcase_flow_statement(...)`, `_lower_endswitch_flow_statement(...)`,
+    `_lower_say_statement(...)`, and `_lower_print_statement(...)`
+    to lazy-load `ControlFlow.pm` only when flow-statement helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_control_flow_load_until_control_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (199 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load ControlFlow through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::ValueExpr` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_value_expr_pkg(...)`,
   - updated `_value_expr_deps(...)`, `_extract_scalar_symbol_name(...)`,

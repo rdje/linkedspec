@@ -9,7 +9,6 @@ BEGIN {
 }
 use LinkedSpec::ActionIR::DeclareMethod ();
 use LinkedSpec::ActionIR::MethodLowering ();
-use LinkedSpec::ActionIR::ControlFlow ();
 
 sub _require_pkg {
  my ($pkg) = @_;
@@ -54,6 +53,10 @@ sub _require_array_pipeline_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ArrayPipeline')
 }
 
+sub _require_control_flow_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
+}
+
 sub _require_value_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
 }
@@ -80,6 +83,7 @@ sub _array_pipeline_deps {
  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
 }
 sub _control_flow_deps {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
 }
 sub _value_expr_deps {
@@ -256,46 +260,57 @@ sub _lower_array_pipeline_expr {
 }
 
 sub _lower_if_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_elseif_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_else_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_endif_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_switch_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_case_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_default_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_endcase_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_endswitch_flow_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@_, _control_flow_deps())
 }
 
 sub _lower_say_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@_, _control_flow_deps())
 }
 
 sub _lower_print_statement {
+ _require_control_flow_pkg();
  return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@_, _control_flow_deps())
 }
 

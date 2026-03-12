@@ -3232,6 +3232,31 @@ PERL
     like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and scalaref lowering after lazy ValueExpr loading');
     is($err, '', 'ActionRewriter require/value-expr subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_control_flow_load_until_control_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_EAGER__\n" : "__CONTROL_FLOW_STILL_LAZY__\n";
+my $ctx = { if_stack => [], switch_stack => [], switch_counter => 0, rewrite_rules => [] };
+my $if_stmt = LinkedSpec::ActionRewriter::_lower_if_flow_statement("if(is_empty(array(items)))", $ctx);
+my $print_stmt = LinkedSpec::ActionRewriter::_lower_print_statement("print(scalar(foo))");
+print defined($if_stmt) && defined($print_stmt) ? "__CONTROL_FLOW_RESULT_OK__\n" : "__CONTROL_FLOW_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_AFTER_HELPER__\n" : "__CONTROL_FLOW_STILL_UNLOADED__\n";
+if (defined($if_stmt) && $if_stmt eq "if ((!\@items)) {" && defined($print_stmt) && $print_stmt eq "print \$foo" && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
+    print "__CONTROL_FLOW_PAYLOAD_OK__\n";
+} else {
+    print "__CONTROL_FLOW_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/control-flow subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CONTROL_FLOW_STILL_LAZY__/, 'require ActionRewriter keeps ControlFlow unloaded');
+    like($out, qr/__CONTROL_FLOW_RESULT_OK__/, 'control-flow helpers still return lowered output after lazy ControlFlow loading');
+    like($out, qr/__CONTROL_FLOW_AFTER_HELPER__/, 'control-flow helpers lazy-load ControlFlow on demand');
+    like($out, qr/__CONTROL_FLOW_PAYLOAD_OK__/, 'control-flow helpers preserve if/print lowering and stack mutation after lazy ControlFlow loading');
+    is($err, '', 'ActionRewriter require/control-flow subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
