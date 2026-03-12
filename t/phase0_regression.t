@@ -3090,6 +3090,29 @@ PERL
     like($out, qr/__SCANNER_PAYLOAD_OK__/, 'scanner helper preserves scanned return-bare payload after lazy Scanner loading');
     is($err, '', 'ActionRewriter require/scanner subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_statement_split_load_until_split_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit.pm"}) ? "__STATEMENT_SPLIT_EAGER__\n" : "__STATEMENT_SPLIT_STILL_LAZY__\n";
+my $parts = LinkedSpec::ActionRewriter::_split_action_ir_statements("return foo; exit");
+print ref($parts) eq "ARRAY" ? "__STATEMENT_SPLIT_ARRAY__\n" : "__STATEMENT_SPLIT_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/StatementSplit.pm"}) ? "__STATEMENT_SPLIT_AFTER_HELPER__\n" : "__STATEMENT_SPLIT_STILL_UNLOADED__\n";
+if (ref($parts) eq "ARRAY" && @{$parts} == 2 && $parts->[0] eq "return foo" && $parts->[1] eq "exit") {
+    print "__STATEMENT_SPLIT_PAYLOAD_OK__\n";
+} else {
+    print "__STATEMENT_SPLIT_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/statement-split subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__STATEMENT_SPLIT_STILL_LAZY__/, 'require ActionRewriter keeps StatementSplit unloaded');
+    like($out, qr/__STATEMENT_SPLIT_ARRAY__/, 'statement-split helper still returns an array after lazy StatementSplit loading');
+    like($out, qr/__STATEMENT_SPLIT_AFTER_HELPER__/, 'statement-split helper lazy-loads StatementSplit on demand');
+    like($out, qr/__STATEMENT_SPLIT_PAYLOAD_OK__/, 'statement-split helper preserves split output after lazy StatementSplit loading');
+    is($err, '', 'ActionRewriter require/statement-split subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

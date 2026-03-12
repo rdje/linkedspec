@@ -14,7 +14,6 @@ use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
 use LinkedSpec::ActionIR::Contracts ();
-use LinkedSpec::ActionIR::StatementSplit ();
 use LinkedSpec::ActionIR::RewritePipeline ();
 
 sub _require_pkg {
@@ -38,6 +37,10 @@ sub _require_canonical_events_pkg {
 
 sub _require_diagnostics_pkg {
  return _require_pkg('LinkedSpec::ActionIR::Diagnostics')
+}
+
+sub _require_statement_split_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::StatementSplit')
 }
 
 sub _trim_action_ir_value {
@@ -65,6 +68,7 @@ sub _value_expr_deps {
  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
 }
 sub _statement_split_deps {
+ _require_statement_split_pkg();
  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
 }
 sub _canonical_event_deps {
@@ -302,6 +306,7 @@ sub _canonicalize_helper_action_ir_event {
 }
 
 sub _split_action_ir_statements {
+ _require_statement_split_pkg();
  return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@_, _statement_split_deps())
 }
 sub _build_canonical_action_ir_events {

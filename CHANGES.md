@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::StatementSplit` only when split helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the statement-splitting owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::StatementSplit ();`,
+  - added `LinkedSpec::ActionRewriter::_require_statement_split_pkg(...)`,
+  - updated `_statement_split_deps(...)` and `_split_action_ir_statements(...)`
+    to lazy-load `StatementSplit.pm` before resolving default deps or delegating into the owner path.
+- Preserved behavior:
+  - statement splitting still routes through `LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(...)`,
+  - the existing statement-split default dep map remains intact,
+  - split output for `return foo; exit` stays unchanged after the owner-module lazy load.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_statement_split_load_until_split_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=193`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Scanner` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::Scanner` only when scanner helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the contract scanner owner up front.
