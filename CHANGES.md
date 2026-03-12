@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Contracts` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::Contracts` only when lowering-contract helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the lowering-contract owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::Contracts ();`,
+  - added `LinkedSpec::ActionRewriter::_require_contracts_pkg(...)`,
+  - updated `_action_contract_deps(...)` and `_build_action_lowering_contracts(...)`
+    to lazy-load `Contracts.pm` before resolving default deps or delegating into the owner path.
+- Preserved behavior:
+  - action-lowering contracts still route through `LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(...)`,
+  - the existing contract default dep map remains intact,
+  - the `declare_typed` lowering contract still lowers `declare(array, items)` to `my @items`.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_contracts_load_until_contract_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=194`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `StatementSplit` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::StatementSplit` only when split helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the statement-splitting owner up front.

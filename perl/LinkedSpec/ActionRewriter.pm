@@ -13,7 +13,6 @@ use LinkedSpec::ActionIR::FlowExpr ();
 use LinkedSpec::ActionIR::MethodLowering ();
 use LinkedSpec::ActionIR::ArrayPipeline ();
 use LinkedSpec::ActionIR::ControlFlow ();
-use LinkedSpec::ActionIR::Contracts ();
 use LinkedSpec::ActionIR::RewritePipeline ();
 
 sub _require_pkg {
@@ -43,6 +42,10 @@ sub _require_statement_split_pkg {
  return _require_pkg('LinkedSpec::ActionIR::StatementSplit')
 }
 
+sub _require_contracts_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::Contracts')
+}
+
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -50,6 +53,7 @@ sub _trim_action_ir_value {
  return $value
 }
 sub _declare_method_deps {
+ _require_method_expr_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
 }
 sub _flow_expr_deps {
@@ -269,11 +273,13 @@ sub _lower_print_statement {
 }
 
 sub _action_contract_deps {
+ _require_contracts_pkg();
  return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
 }
 
 sub _build_action_lowering_contracts {
  my ($label) = @_;
+ _require_contracts_pkg();
  return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
   $label,
   _action_contract_deps(),

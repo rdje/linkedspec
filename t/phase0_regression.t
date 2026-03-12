@@ -3113,6 +3113,31 @@ PERL
     like($out, qr/__STATEMENT_SPLIT_PAYLOAD_OK__/, 'statement-split helper preserves split output after lazy StatementSplit loading');
     is($err, '', 'ActionRewriter require/statement-split subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_contracts_load_until_contract_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_EAGER__\n" : "__CONTRACTS_STILL_LAZY__\n";
+my $contracts = LinkedSpec::ActionRewriter::_build_action_lowering_contracts("Top");
+my ($declare_contract) = grep { $_->{id} eq "declare_typed" } @{$contracts || []};
+my $declare_output = $declare_contract ? $declare_contract->{lower}->("declare(array, items)") : undef;
+print ref($contracts) eq "ARRAY" ? "__CONTRACTS_ARRAY__\n" : "__CONTRACTS_OTHER__\n";
+print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_AFTER_HELPER__\n" : "__CONTRACTS_STILL_UNLOADED__\n";
+if (defined($declare_output) && $declare_output eq "my \@items") {
+    print "__CONTRACTS_PAYLOAD_OK__\n";
+} else {
+    print "__CONTRACTS_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/contracts subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__CONTRACTS_STILL_LAZY__/, 'require ActionRewriter keeps Contracts unloaded');
+    like($out, qr/__CONTRACTS_ARRAY__/, 'contract helper still returns a contract array after lazy Contracts loading');
+    like($out, qr/__CONTRACTS_AFTER_HELPER__/, 'contract helper lazy-loads Contracts on demand');
+    like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed lowering output after lazy Contracts loading');
+    is($err, '', 'ActionRewriter require/contracts subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
