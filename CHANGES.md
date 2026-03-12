@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across ActionRewriter Owner Delegation
+## Summary
+Stabilized the remaining `LinkedSpec::ActionRewriter` compatibility/helper seam by making its successful owner delegation preserve caller `$@` across deps, helper parsing, lowering, scanner, canonical, diagnostics, and rewrite-pipeline wrappers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored `ActionRewriter` delegation behavior:
+  - added `LinkedSpec::ActionRewriter::_call_preserving_err(...)`,
+  - routed the owner-delegate dep builders and helper wrappers through that helper,
+  - covered representative MethodExpr/FlowExpr/Contracts/Scanner/CanonicalEvents/RewritePipeline paths plus `call_spec_handler_subst(...)`,
+  - preserved scalar and list-context return payloads while restoring caller `$@` after successful owner-path delegation.
+- Preserved behavior:
+  - `ActionRewriter` still delegates to the same extracted ActionIR owners,
+  - successful lowering/rewrite helper calls keep their existing return payloads,
+  - exception behavior is unchanged when an owner path dies.
+- Updated focused regression coverage:
+  - added `action_rewriter_owner_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=221`)
+
 ## 2026-03-12 - Phase 1A Slice: Preserve Caller `$@` Across Remaining Thin Owner Delegates
 ## Summary
 Finished the current `$@`-preservation cleanup track by making the remaining thin owner delegates in `BootstrapSpec`, `Runtime`, `ActionIR::Scanner`, `ActionIR::StatementSplit`, and `ActionIR::CanonicalEvents` preserve caller `$@` across successful owner delegation.

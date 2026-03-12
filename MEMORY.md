@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A / Backbone Item 3 API-stability slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
+  - added `LinkedSpec::ActionRewriter::_call_preserving_err(...)`,
+  - routed owner-delegate dep builders and helper wrappers through that helper,
+  - successful `ActionRewriter` delegation now preserves caller `$@` across deps, helper parsing, lowering, scanner, canonical, diagnostics, and rewrite-pipeline wrapper paths.
+- Regression outcome:
+  - added `action_rewriter_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (221 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve ActionRewriter caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A owner-wrapper API-stability slice completed against the remaining thin `LinkedSpec::*` delegates.
 - Key technical outcome:
   - added `_call_preserving_err(...)` to `BootstrapSpec`, `Runtime`,

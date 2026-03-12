@@ -66,6 +66,25 @@ sub _require_value_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _trim_action_ir_value {
  my ($value) = @_;
  return undef unless defined $value;
@@ -73,351 +92,538 @@ sub _trim_action_ir_value {
  return $value
 }
 sub _declare_method_deps {
- _require_declare_method_pkg();
- _require_method_expr_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  _require_method_expr_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _flow_expr_deps {
- _require_flow_expr_pkg();
- return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_flow_expr_pkg();
+  return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _method_lowering_deps {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _array_pipeline_deps {
- _require_array_pipeline_pkg();
- return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_array_pipeline_pkg();
+  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _control_flow_deps {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _value_expr_deps {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _statement_split_deps {
- _require_statement_split_pkg();
- return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_statement_split_pkg();
+  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _canonical_event_deps {
- _require_canonical_events_pkg();
- return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_canonical_events_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _diagnostics_deps {
- _require_diagnostics_pkg();
- return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _rewrite_pipeline_deps {
- _require_rewrite_pipeline_pkg();
- return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
+ })
 }
 sub _scan_contract_ir_event_deps {
- _require_method_expr_pkg();
- _require_scanner_pkg();
- return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_method_expr_pkg();
+  _require_scanner_pkg();
+  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _parse_method_function_expr {
- _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_expr_pkg();
+  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr(@args)
+ })
 }
 
 sub _is_bare_method_scope_token {
- _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_expr_pkg();
+  return LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token(@args)
+ })
 }
 
 sub _normalize_method_args_with_optional_scope {
- _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_expr_pkg();
+  return LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(@args)
+ })
 }
 
 sub _split_top_level_csv {
- _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_expr_pkg();
+  return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv(@args)
+ })
 }
 
 sub _lower_flow_composite_expr {
- _require_flow_expr_pkg();
- return LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr(@_, _flow_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_flow_expr_pkg();
+  return LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr(@args, _flow_expr_deps())
+ })
 }
 
 sub _declare_alias_to_type {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_typed_declare_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _normalize_method_tag_expr {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr(@args, _method_lowering_deps())
+ })
 }
 
 sub _extract_scalar_symbol_name {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_extract_scalar_symbol_name(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_extract_scalar_symbol_name(@args, _value_expr_deps())
+ })
 }
 
 sub _extract_array_symbol_name {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_extract_array_symbol_name(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_extract_array_symbol_name(@args, _value_expr_deps())
+ })
 }
 
 sub _extract_hash_symbol_name {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_extract_hash_symbol_name(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_extract_hash_symbol_name(@args, _value_expr_deps())
+ })
 }
 
 sub _lower_scalar_access_key_expr {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr(@args, _value_expr_deps())
+ })
 }
 
 sub _lower_scalaref_value_expr {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_lower_scalaref_value_expr(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_lower_scalaref_value_expr(@args, _value_expr_deps())
+ })
 }
 
 sub _infer_scalar_container_kind {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_infer_scalar_container_kind(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_infer_scalar_container_kind(@args, _value_expr_deps())
+ })
 }
 
 sub _lower_assignment_source_expr {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_lower_assignment_source_expr(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_lower_assignment_source_expr(@args, _value_expr_deps())
+ })
 }
 
 sub _strip_literal_delimiters {
- _require_value_expr_pkg();
- return LinkedSpec::ActionIR::ValueExpr::_strip_literal_delimiters(@_, _value_expr_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::_strip_literal_delimiters(@args, _value_expr_deps())
+ })
 }
 
 sub _split_declare_symbol_names {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@args, _declare_method_deps())
+ })
 }
 
 sub _parse_declare_binding_entry {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@args, _declare_method_deps())
+ })
 }
 
 sub _lower_declare_value_expr {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@args, _declare_method_deps())
+ })
 }
 
 sub _lower_declare_initializer_expr {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@args, _declare_method_deps())
+ })
 }
 
 sub _extract_declare_statement_from_method_expr {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@args, _declare_method_deps())
+ })
 }
 
 sub _lower_declare_method_statement {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@args, _declare_method_deps())
+ })
 }
 
 sub _lower_assign_method_statement {
- _require_declare_method_pkg();
- return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@_, _declare_method_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@args, _declare_method_deps())
+ })
 }
 
 sub _lower_method_value_expr {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_return_general_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_return_imatch_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_assign_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_push_value_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_regex_subst_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_return_undef_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _lower_return_array_statement {
- _require_method_lowering_pkg();
- return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@_, _method_lowering_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@args, _method_lowering_deps())
+ })
 }
 
 sub _build_array_pipeline_plan_from_expr {
- _require_array_pipeline_pkg();
- return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr(@_, _array_pipeline_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_array_pipeline_pkg();
+  return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr(@args, _array_pipeline_deps())
+ })
 }
 
 sub _lower_array_pipeline_expr {
- _require_array_pipeline_pkg();
- return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@_, _array_pipeline_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_array_pipeline_pkg();
+  return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@args, _array_pipeline_deps())
+ })
 }
 
 sub _lower_if_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_elseif_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_else_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_endif_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_switch_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_case_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_default_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_endcase_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_endswitch_flow_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_say_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _lower_print_statement {
- _require_control_flow_pkg();
- return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@_, _control_flow_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@args, _control_flow_deps())
+ })
 }
 
 sub _action_contract_deps {
- _require_contracts_pkg();
- return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
+ return _call_preserving_err(sub {
+  _require_contracts_pkg();
+  return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _build_action_lowering_contracts {
  my ($label) = @_;
- _require_contracts_pkg();
- return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
-  $label,
-  _action_contract_deps(),
- )
+ return _call_preserving_err(sub {
+  _require_contracts_pkg();
+  return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
+   $label,
+   _action_contract_deps(),
+  )
+ })
 }
 
 sub _scan_contract_ir_events {
  my ($contract, $code) = @_;
- _require_scanner_pkg();
- return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
-  $contract,
-  $code,
-  _scan_contract_ir_event_deps(),
- )
+ return _call_preserving_err(sub {
+  _require_scanner_pkg();
+  return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+   $contract,
+   $code,
+   _scan_contract_ir_event_deps(),
+  )
+ })
 }
 
 sub _find_unresolved_action_helpers {
- _require_diagnostics_pkg();
- return LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(@_, _diagnostics_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(@args, _diagnostics_deps())
+ })
 }
 
 sub _collect_action_helper_ir_nodes {
- _require_diagnostics_pkg();
- return LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes(@_, _diagnostics_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes(@args, _diagnostics_deps())
+ })
 }
 
 sub _canonicalize_helper_action_ir_event {
- _require_canonical_events_pkg();
- return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@_, _canonical_event_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_canonical_events_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@args, _canonical_event_deps())
+ })
 }
 
 sub _split_action_ir_statements {
- _require_statement_split_pkg();
- return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@_, _statement_split_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_statement_split_pkg();
+  return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@args, _statement_split_deps())
+ })
 }
 sub _build_canonical_action_ir_events {
- _require_canonical_events_pkg();
- return LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(@_, _canonical_event_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_canonical_events_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(@args, _canonical_event_deps())
+ })
 }
 
 sub _lower_action_code_from_canonical_ir {
- _require_rewrite_pipeline_pkg();
- return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@args)
+ })
 }
 
 sub _accumulate_action_rewrite_diagnostics {
- _require_diagnostics_pkg();
- return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
+ })
 }
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
- _require_rewrite_pipeline_pkg();
- return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
-  $label,
-  $code,
-  $rewrite_rules,
-  _rewrite_pipeline_deps(),
- )
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
+   $label,
+   $code,
+   $rewrite_rules,
+   _rewrite_pipeline_deps(),
+  )
+ })
 }
 
 sub _build_action_rewrite_rules {
- _require_rewrite_pipeline_pkg();
- return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@_, _rewrite_pipeline_deps())
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@args, _rewrite_pipeline_deps())
+ })
 }
 
 sub call_spec_handler_subst {
-my ($label, $code) = @_;
-
- ($code) = _rewrite_action_code_with_diagnostics($label, $code);
- return $code
+ my ($label, $code) = @_;
+ return _call_preserving_err(sub {
+  ($code) = _rewrite_action_code_with_diagnostics($label, $code);
+  return $code
+ })
 }
 
 1;

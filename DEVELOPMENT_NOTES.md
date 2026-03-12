@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A / Backbone Item 3 API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` owner-delegate wrappers now preserve caller `$@` across successful delegation.
+- Added `LinkedSpec::ActionRewriter::_call_preserving_err(...)` and routed the extracted ActionIR dep-builder/helper/rewrite wrappers through it.
+- Added focused regression lock `action_rewriter_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=221`)
+
+## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A owner-wrapper API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::BootstrapSpec`, `LinkedSpec::Runtime`, `LinkedSpec::ActionIR::Scanner`, `LinkedSpec::ActionIR::StatementSplit`, and `LinkedSpec::ActionIR::CanonicalEvents` now preserve caller `$@` across successful owner delegation.
 - Added `_call_preserving_err(...)` to those owner modules and routed their thin delegate entrypoints through it.
