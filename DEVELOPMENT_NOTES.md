@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::Resolver` no longer imports `LinkedSpec::Trace` at module load time.
+- `LinkedSpec::Resolver` now lazy-loads `Trace.pm` only when invalid-spec or spec-resolution trace/error paths actually emit output.
+- Added require-only regression lock `resolver_require_avoids_trace_load_until_invalid_spec_error`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=203`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::Validation` no longer imports `LinkedSpec::Trace` at module load time.
 - `LinkedSpec::Validation` now lazy-loads `Trace.pm` only when validation errors or warnings actually emit trace output.
 - Added require-only regression lock `validation_require_avoids_trace_load_until_error_report`.

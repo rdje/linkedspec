@@ -37,6 +37,25 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Resolver`.
+- Key technical outcome:
+  - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Resolver.pm`,
+  - replaced Resolver-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Resolver::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Resolver::_trace_log_output(...)`,
+  - added `LinkedSpec::Resolver::_trace_exit(...)`,
+  - added `LinkedSpec::Resolver::_trace_decision(...)`,
+  - updated invalid-spec, path-resolution, and file-open reporting paths to lazy-load `Trace.pm`
+    only when they actually emit trace output.
+- Regression outcome:
+  - added `resolver_require_avoids_trace_load_until_invalid_spec_error`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (203 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load Trace through Resolver` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::Validation`.
 - Key technical outcome:
   - removed eager `LinkedSpec::Trace` import from `perl/LinkedSpec/Validation.pm`,

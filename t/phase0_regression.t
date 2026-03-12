@@ -83,6 +83,24 @@ subtest 'linkedspec_require_avoids_resolver_load_until_get_parser' => sub {
     like($out, qr/__RESOLVER_AFTER_GET_PARSER__/, 'get_parser lazy-loads Resolver when the parser-factory default deps are resolved');
     is($err, '', 'LinkedSpec require/get_parser subprocess does not emit stderr');
 };
+subtest 'resolver_require_avoids_trace_load_until_invalid_spec_error' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
+        'require LinkedSpec::Resolver;'
+      . 'print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";'
+      . 'my $ok = LinkedSpec::Resolver::validate_spec_name(undef, undef);'
+      . 'print !$ok ? "__INVALID_SPEC_REJECTED__\n" : "__INVALID_SPEC_ACCEPTED__\n";'
+      . 'print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_VALIDATE__\n" : "__TRACE_STILL_UNLOADED__\n";'
+    );
+
+    is($exit_code, 0, 'LinkedSpec::Resolver require/validate subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__TRACE_STILL_LAZY__/, 'require LinkedSpec::Resolver keeps Trace unloaded');
+    like($out, qr/__INVALID_SPEC_REJECTED__/, 'validate_spec_name still rejects invalid spec input after lazy Trace loading');
+    like($out, qr/__TRACE_AFTER_VALIDATE__/, 'validate_spec_name lazy-loads Trace on demand when reporting invalid spec input');
+    like($out, qr/Invalid spec name/, 'validate_spec_name still reports the invalid spec-name diagnostic after lazy Trace loading');
+    is($err, '', 'LinkedSpec::Resolver require/validate subprocess does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_compile_pipeline_load_until_get' => sub {
     plan tests => 8;
 

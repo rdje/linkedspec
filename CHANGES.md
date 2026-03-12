@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Resolver`
+## Summary
+Reduced internal load-time coupling again by making `LinkedSpec::Resolver` load `LinkedSpec::Trace` only when invalid-spec or spec-resolution trace/error paths actually need to emit output, so require-only consumers of `Resolver.pm` no longer import the trace owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Resolver.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored Resolver trace ownership:
+  - removed eager `use LinkedSpec::Trace ();`,
+  - replaced Resolver-local dump constants with stable numeric values matching `Trace.pm`,
+  - added `LinkedSpec::Resolver::_require_trace_pkg(...)`,
+  - added `LinkedSpec::Resolver::_trace_log_output(...)`,
+  - added `LinkedSpec::Resolver::_trace_exit(...)`,
+  - added `LinkedSpec::Resolver::_trace_decision(...)`,
+  - updated invalid-spec, path-resolution, and file-open reporting paths to lazy-load `Trace.pm`
+    only when they actually emit trace output.
+- Preserved behavior:
+  - valid local/module-relative resolution behavior stays unchanged,
+  - invalid spec-name and missing-path diagnostics still route through `LinkedSpec::Trace`,
+  - `PathSearch` fallback behavior is unchanged.
+- Updated focused regression coverage:
+  - added `resolver_require_avoids_trace_load_until_invalid_spec_error`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=203`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `Trace` Through `Validation`
 ## Summary
 Reduced internal load-time coupling again by making `LinkedSpec::Validation` load `LinkedSpec::Trace` only when validation errors or warnings actually need to emit trace output, so require-only consumers of `Validation.pm` no longer import the trace owner up front.
