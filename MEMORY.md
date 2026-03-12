@@ -37,6 +37,25 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::Compiler`.
+- Key technical outcome:
+  - added `LinkedSpec::Compiler::_call_preserving_err(...)`,
+  - routed `_dump_value(...)`, `_ored_re(...)`, `_trace_log_output(...)`,
+    `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_trace_enter(...)`,
+    `_trace_exit(...)`, `_trace_decision(...)`,
+    `_trace_apply_trace_options(...)`, and
+    `_trace_level_name_for_current_verbosity(...)` through that helper,
+  - successful `Compiler` trace/dump/regex helper delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `compiler_helper_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (223 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve Compiler caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::SpecEntry`.
 - Key technical outcome:
   - added `LinkedSpec::SpecEntry::_call_preserving_err(...)`,

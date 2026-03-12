@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::Compiler` trace, dump, and regex helper wrappers now preserve caller `$@` across successful delegation.
+- Added `LinkedSpec::Compiler::_call_preserving_err(...)` and routed `_dump_value(...)`, `_ored_re(...)`, `_trace_log_output(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_apply_trace_options(...)`, and `_trace_level_name_for_current_verbosity(...)` through it.
+- Added focused regression lock `compiler_helper_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=223`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::SpecEntry` trace and dump helper wrappers now preserve caller `$@` across successful delegation.
 - Added `LinkedSpec::SpecEntry::_call_preserving_err(...)` and routed `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, and `_dump_value(...)` through it.
 - Added focused regression lock `spec_entry_helper_wrappers_preserve_eval_error_state`.

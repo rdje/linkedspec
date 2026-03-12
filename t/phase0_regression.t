@@ -1134,6 +1134,69 @@ subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     is(LinkedSpec::SpecEntry::_dump_value({ foo => 1 }), 'dump_value_ok', 'SpecEntry dump_value wrapper still delegates through Data::Dumper');
     is($@, "__SAVED_ERR__\n", 'SpecEntry dump_value wrapper preserves caller $@ on successful delegation');
 };
+subtest 'compiler_helper_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 20;
+
+    no warnings 'redefine';
+    require LinkedSpec::Compiler;
+
+    local *LinkedSpec::Compiler::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::Compiler::_require_data_dumper_pkg = sub { return 1 };
+    local *LinkedSpec::Compiler::_require_linkedre_pkg = sub { return 1 };
+    local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
+    local *LinkedSpec::Trace::log_dump = sub { return 'trace_dump_ok' };
+    local *LinkedSpec::Trace::should_dump = sub { return 1 };
+    local *LinkedSpec::Trace::trace_enter = sub { return { scope => 'entered' } };
+    local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
+    local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
+    local *LinkedSpec::Trace::_apply_trace_options = sub { return 'trace_apply_ok' };
+    local *LinkedSpec::Trace::_trace_level_name = sub { return 'debug' };
+    local *LinkedRE::oredRE = sub { return '(?:foo|bar)' };
+    local *Data::Dumper::Dumper = sub { return 'dump_value_ok' };
+    local $LinkedSpec::Trace::DUMP_VERBOSITY = 500;
+
+    $INC{'LinkedSpec/Trace.pm'} = __FILE__;
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_log_output(0, 'msg'), 'trace_log_ok', 'Compiler trace_log_output wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_log_output wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_log_dump('payload', {}), 'trace_dump_ok', 'Compiler trace_log_dump wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_log_dump wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    ok(LinkedSpec::Compiler::_trace_should_dump(100), 'Compiler trace_should_dump wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_should_dump wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::Compiler::_trace_enter('topic', { x => 1 }, 100), { scope => 'entered' }, 'Compiler trace_enter wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_enter wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_exit({ scope => 'entered' }, { done => 1 }, 100), 'trace_exit_ok', 'Compiler trace_exit wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_exit wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_decision('path', 1, 'ok', 100), 'trace_decision_ok', 'Compiler trace_decision wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_decision wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_apply_trace_options({ verbosity => 'debug' }), 'trace_apply_ok', 'Compiler trace_apply_trace_options wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_apply_trace_options wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_trace_level_name_for_current_verbosity(), 'debug', 'Compiler trace_level_name wrapper still delegates through Trace');
+    is($@, "__SAVED_ERR__\n", 'Compiler trace_level_name wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_dump_value({ foo => 1 }), 'dump_value_ok', 'Compiler dump_value wrapper still delegates through Data::Dumper');
+    is($@, "__SAVED_ERR__\n", 'Compiler dump_value wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Compiler::_ored_re(qr/foo/, qr/bar/), '(?:foo|bar)', 'Compiler linkedre wrapper still delegates through LinkedRE');
+    is($@, "__SAVED_ERR__\n", 'Compiler linkedre wrapper preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

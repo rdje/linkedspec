@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `Compiler` Helper Delegation
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::Compiler` preserve caller `$@` across successful trace, dump, and regex helper delegation.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/Compiler.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored `Compiler` helper delegation behavior:
+  - added `LinkedSpec::Compiler::_call_preserving_err(...)`,
+  - routed `_dump_value(...)`, `_ored_re(...)`, `_trace_log_output(...)`,
+    `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_trace_enter(...)`,
+    `_trace_exit(...)`, `_trace_decision(...)`,
+    `_trace_apply_trace_options(...)`, and
+    `_trace_level_name_for_current_verbosity(...)` through that helper,
+  - preserved scalar return values and existing wrapper behavior while restoring
+    caller `$@` after successful owner-path delegation.
+- Preserved behavior:
+  - `Compiler` still delegates to the same `Trace`, `Data::Dumper`, and
+    `LinkedRE` owners,
+  - successful helper calls keep their existing return payloads,
+  - exception behavior is unchanged when an owner path dies.
+- Updated focused regression coverage:
+  - added `compiler_helper_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=223`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `SpecEntry` Helper Delegation
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::SpecEntry` preserve caller `$@` across successful trace and dump helper delegation.
