@@ -39,6 +39,24 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-12)
 - Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
 - Key technical outcome:
+  - removed eager `LinkedSpec::ActionIR::DeclareMethod` import from `perl/LinkedSpec/ActionRewriter.pm`,
+  - added `LinkedSpec::ActionRewriter::_require_declare_method_pkg(...)`,
+  - updated `_declare_method_deps(...)`, `_split_declare_symbol_names(...)`,
+    `_parse_declare_binding_entry(...)`, `_lower_declare_value_expr(...)`,
+    `_lower_declare_initializer_expr(...)`, `_extract_declare_statement_from_method_expr(...)`,
+    `_lower_declare_method_statement(...)`, and `_lower_assign_method_statement(...)`
+    to lazy-load `DeclareMethod.pm` only when declare-method helpers actually run.
+- Regression outcome:
+  - added `action_rewriter_require_avoids_declare_method_load_until_declare_helper`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (201 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: lazy-load DeclareMethod through ActionRewriter` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-12)
+- Uncommitted Phase 1A submodule load-time coupling slice completed against `LinkedSpec::ActionRewriter`.
+- Key technical outcome:
   - removed eager `LinkedSpec::ActionIR::MethodLowering` import from `perl/LinkedSpec/ActionRewriter.pm`,
   - added `LinkedSpec::ActionRewriter::_require_method_lowering_pkg(...)`,
   - updated `_method_lowering_deps(...)`, `_declare_alias_to_type(...)`,

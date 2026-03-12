@@ -3281,6 +3281,30 @@ PERL
     like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve alias and assign lowering after lazy MethodLowering loading');
     is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');
 };
+subtest 'action_rewriter_require_avoids_declare_method_load_until_declare_helper' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_EAGER__\n" : "__DECLARE_METHOD_STILL_LAZY__\n";
+my $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement("declare(array, items)");
+my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_method_statement("assign(retv, scalar(foo))");
+print defined($declare_stmt) && defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_AFTER_HELPER__\n" : "__DECLARE_METHOD_STILL_UNLOADED__\n";
+if (defined($declare_stmt) && $declare_stmt eq "my \@items" && defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
+    print "__DECLARE_METHOD_PAYLOAD_OK__\n";
+} else {
+    print "__DECLARE_METHOD_PAYLOAD_BAD__\n";
+}
+PERL
+
+    is($exit_code, 0, 'ActionRewriter require/declare-method subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__DECLARE_METHOD_STILL_LAZY__/, 'require ActionRewriter keeps DeclareMethod unloaded');
+    like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'declare-method helpers still return lowered output after lazy DeclareMethod loading');
+    like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand');
+    like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve declare and assign-method lowering after lazy DeclareMethod loading');
+    is($err, '', 'ActionRewriter require/declare-method subprocess does not emit stderr');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

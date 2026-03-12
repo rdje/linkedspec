@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-12)
 - Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer imports `LinkedSpec::ActionIR::DeclareMethod` at module load time.
+- `LinkedSpec::ActionRewriter` now lazy-loads `DeclareMethod.pm` only when declare-method helper paths actually start.
+- Added require-only regression lock `action_rewriter_require_avoids_declare_method_load_until_declare_helper`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=201`)
+
+## Current Session Notes (2026-03-12)
+- Completed another no-behavior-change Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer imports `LinkedSpec::ActionIR::MethodLowering` at module load time.
 - `LinkedSpec::ActionRewriter` now lazy-loads `MethodLowering.pm` only when method-lowering helper paths actually start.
 - Added require-only regression lock `action_rewriter_require_avoids_method_lowering_load_until_method_helper`.

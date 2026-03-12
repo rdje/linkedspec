@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-12 - Phase 1A Slice: Lazy-Load `DeclareMethod` Through `ActionRewriter`
+## Summary
+Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::DeclareMethod` only when declare-method helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the declare-method owner up front.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionRewriter owner loading:
+  - removed eager `use LinkedSpec::ActionIR::DeclareMethod ();`,
+  - added `LinkedSpec::ActionRewriter::_require_declare_method_pkg(...)`,
+  - updated `_declare_method_deps(...)`, `_split_declare_symbol_names(...)`,
+    `_parse_declare_binding_entry(...)`, `_lower_declare_value_expr(...)`,
+    `_lower_declare_initializer_expr(...)`, `_extract_declare_statement_from_method_expr(...)`,
+    `_lower_declare_method_statement(...)`, and `_lower_assign_method_statement(...)`
+    to lazy-load `DeclareMethod.pm` before resolving default deps or delegating
+    into declare-method helpers.
+- Preserved behavior:
+  - declare-method lowering still routes through `LinkedSpec::ActionIR::DeclareMethod`,
+  - the existing declare-method default dep map remains intact,
+  - `declare(array, items)` and `assign(retv, scalar(foo))` still lower the same way.
+- Updated focused regression coverage:
+  - added `action_rewriter_require_avoids_declare_method_load_until_declare_helper`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=201`)
 ## 2026-03-12 - Phase 1A Slice: Lazy-Load `MethodLowering` Through `ActionRewriter`
 ## Summary
 Reduced internal ActionIR load-time coupling again by making `LinkedSpec::ActionRewriter` load `ActionIR::MethodLowering` only when method-lowering helper paths actually run, so require-only consumers of `ActionRewriter.pm` no longer import the method-lowering owner up front.

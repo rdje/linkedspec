@@ -7,8 +7,6 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
-use LinkedSpec::ActionIR::DeclareMethod ();
-
 sub _require_pkg {
  my ($pkg) = @_;
  (my $path = "$pkg.pm") =~ s{::}{/}g;
@@ -60,6 +58,10 @@ sub _require_method_lowering_pkg {
  return _require_pkg('LinkedSpec::ActionIR::MethodLowering')
 }
 
+sub _require_declare_method_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::DeclareMethod')
+}
+
 sub _require_value_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
 }
@@ -71,6 +73,7 @@ sub _trim_action_ir_value {
  return $value
 }
 sub _declare_method_deps {
+ _require_declare_method_pkg();
  _require_method_expr_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
 }
@@ -197,30 +200,37 @@ sub _strip_literal_delimiters {
 }
 
 sub _split_declare_symbol_names {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@_, _declare_method_deps())
 }
 
 sub _parse_declare_binding_entry {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@_, _declare_method_deps())
 }
 
 sub _lower_declare_value_expr {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@_, _declare_method_deps())
 }
 
 sub _lower_declare_initializer_expr {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@_, _declare_method_deps())
 }
 
 sub _extract_declare_statement_from_method_expr {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@_, _declare_method_deps())
 }
 
 sub _lower_declare_method_statement {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@_, _declare_method_deps())
 }
 
 sub _lower_assign_method_statement {
+ _require_declare_method_pkg();
  return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@_, _declare_method_deps())
 }
 
