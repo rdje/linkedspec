@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 37;
+    plan tests => 53;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1043,6 +1043,38 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_split_top_level_csv = sub {
         my ($expr) = @_;
         return ['split', $expr];
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_extract_scalar_symbol_name = sub {
+        my ($expr) = @_;
+        return "scalar:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_extract_array_symbol_name = sub {
+        my ($expr) = @_;
+        return "array:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_extract_hash_symbol_name = sub {
+        my ($expr) = @_;
+        return "hash:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr = sub {
+        my ($expr) = @_;
+        return "key:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr = sub {
+        my ($target, $expr) = @_;
+        return "scalaref:$target:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_infer_scalar_container_kind = sub {
+        my ($expr) = @_;
+        return "kind:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_assignment_source_expr = sub {
+        my ($expr) = @_;
+        return "assignsrc:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_strip_literal_delimiters = sub {
+        my ($expr) = @_;
+        return "strip:$expr";
     };
     local *LinkedSpec::ActionIR::FlowExpr::default_deps_for_package = sub {
         return { deps => 'flow' };
@@ -1118,6 +1150,38 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_split_top_level_csv('a,b'), ['split', 'a,b'], 'ActionRewriter top-level CSV splitter now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter top-level CSV splitter preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_extract_scalar_symbol_name('scalar(foo)'), 'scalar:scalar(foo)', 'ActionRewriter scalar-symbol extractor now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-symbol extractor preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_extract_array_symbol_name('array(items)'), 'array:array(items)', 'ActionRewriter array-symbol extractor now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter array-symbol extractor preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_extract_hash_symbol_name('hash(lookup)'), 'hash:hash(lookup)', 'ActionRewriter hash-symbol extractor now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter hash-symbol extractor preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr('scalar(foo)'), 'key:scalar(foo)', 'ActionRewriter scalar-access lowering helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-access lowering helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_scalaref_value_expr('retv', '[scalar(foo)]'), 'scalaref:retv:[scalar(foo)]', 'ActionRewriter scalaref lowering helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalaref lowering helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_infer_scalar_container_kind('scalar(foo)'), 'kind:scalar(foo)', 'ActionRewriter scalar-container inference now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter scalar-container inference preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_assignment_source_expr('scalar(foo)'), 'assignsrc:scalar(foo)', 'ActionRewriter assignment-source lowering helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter assignment-source lowering helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_strip_literal_delimiters('"foo"'), 'strip:"foo"', 'ActionRewriter literal-delimiter stripper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter literal-delimiter stripper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(scalar(a), scalar(b))'), { expr => 'or(scalar(a), scalar(b))', deps => { deps => 'flow' } }, 'ActionRewriter flow lowering wrapper still delegates through FlowExpr');
@@ -4326,14 +4390,16 @@ PERL
     is($err, '', 'ActionRewriter require/array-pipeline subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_value_expr_load_until_value_helper' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_EAGER__\n" : "__VALUE_EXPR_STILL_LAZY__\n";
 my $key_expr = LinkedSpec::ActionRewriter::_lower_scalar_access_key_expr("scalar(foo)");
 my $scalaref_expr = LinkedSpec::ActionRewriter::_lower_scalaref_value_expr("retv", "[scalar(foo)]");
 print defined($key_expr) && defined($scalaref_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_AFTER_HELPER__\n" : "__VALUE_EXPR_STILL_UNLOADED__\n";
 if (defined($key_expr) && $key_expr eq "\$foo" && defined($scalaref_expr) && $scalaref_expr eq "\$retv->[\$foo]") {
     print "__VALUE_EXPR_PAYLOAD_OK__\n";
@@ -4343,8 +4409,10 @@ if (defined($key_expr) && $key_expr eq "\$foo" && defined($scalaref_expr) && $sc
 PERL
 
     is($exit_code, 0, 'ActionRewriter require/value-expr subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
     like($out, qr/__VALUE_EXPR_STILL_LAZY__/, 'require ActionRewriter keeps ValueExpr unloaded');
     like($out, qr/__VALUE_EXPR_RESULT_OK__/, 'value helper still returns lowered output after lazy ValueExpr loading');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'value helper lazy-loads EmitContext on demand');
     like($out, qr/__VALUE_EXPR_AFTER_HELPER__/, 'value helper lazy-loads ValueExpr on demand');
     like($out, qr/__VALUE_EXPR_PAYLOAD_OK__/, 'value helper preserves scalar-access and scalaref lowering after lazy ValueExpr loading');
     is($err, '', 'ActionRewriter require/value-expr subprocess does not emit stderr');

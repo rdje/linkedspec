@@ -3,6 +3,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the direct ValueExpr helper wrappers for symbol extraction and value lowering; those now route through `LinkedSpec::RuleIR::EmitContext`, which already owns that support for the active compile path.
+- That removes the last direct ValueExpr package loader and local ValueExpr dep-map builder from `ActionRewriter`, making the compatibility module narrower without changing downstream behavior.
+- Updated focused regression locks:
+  - strengthened `action_rewriter_require_avoids_value_expr_load_until_value_helper`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to cover the full ValueExpr helper family on the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the direct MethodExpr helper wrappers for parse / scope-token / arg-normalization / CSV split; those now route through `LinkedSpec::RuleIR::EmitContext`, which already owns that parsing support for the active compile path.
 - That removes the last direct MethodExpr package loader from `ActionRewriter` and makes the compatibility module narrower without changing downstream behavior.
 - Updated focused regression locks:

@@ -34,10 +34,6 @@ sub _require_declare_method_pkg {
  return _require_pkg('LinkedSpec::ActionIR::DeclareMethod')
 }
 
-sub _require_value_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
-}
-
 sub _require_emit_context_pkg {
  return _require_pkg('LinkedSpec::RuleIR::EmitContext')
 }
@@ -95,12 +91,6 @@ sub _control_flow_deps {
  return _call_preserving_err(sub {
   _require_control_flow_pkg();
   return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _value_expr_deps {
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
  })
 }
 sub _parse_method_function_expr {
@@ -170,64 +160,64 @@ sub _normalize_method_tag_expr {
 sub _extract_scalar_symbol_name {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_scalar_symbol_name(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_extract_scalar_symbol_name(@args)
  })
 }
 
 sub _extract_array_symbol_name {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_array_symbol_name(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_extract_array_symbol_name(@args)
  })
 }
 
 sub _extract_hash_symbol_name {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_hash_symbol_name(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_extract_hash_symbol_name(@args)
  })
 }
 
 sub _lower_scalar_access_key_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr(@args)
  })
 }
 
 sub _lower_scalaref_value_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_scalaref_value_expr(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_scalaref_value_expr(@args)
  })
 }
 
 sub _infer_scalar_container_kind {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_infer_scalar_container_kind(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_infer_scalar_container_kind(@args)
  })
 }
 
 sub _lower_assignment_source_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_assignment_source_expr(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_assignment_source_expr(@args)
  })
 }
 
 sub _strip_literal_delimiters {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_strip_literal_delimiters(@args, _value_expr_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_strip_literal_delimiters(@args)
  })
 }
 
