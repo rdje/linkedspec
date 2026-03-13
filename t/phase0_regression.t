@@ -799,20 +799,24 @@ PERL
     is($err, '', 'LinkedSpec require/spec_descr subprocess does not emit stderr');
 };
 subtest 'linkedspec_require_avoids_action_rewriter_load_until_compat_helper' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require LinkedSpec;'
       . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";'
+      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";'
       . 'my $rewritten = LinkedSpec::call_spec_handler_subst("Top", "return_a(Top)");'
       . 'print defined($rewritten) ? "__REWRITE_DEFINED__\n" : "__REWRITE_UNDEF__\n";'
       . 'print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_HELPER__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";'
+      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
     );
 
     is($exit_code, 0, 'LinkedSpec require/helper subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded before the compatibility helper is used');
-    like($out, qr/__REWRITE_DEFINED__/, 'call_spec_handler_subst still returns rewritten helper code after lazy ActionRewriter loading');
-    like($out, qr/__ACTION_REWRITER_AFTER_HELPER__/, 'call_spec_handler_subst lazy-loads ActionRewriter on demand');
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec keeps EmitContext unloaded before the compatibility helper is used');
+    like($out, qr/__REWRITE_DEFINED__/, 'call_spec_handler_subst still returns rewritten helper code through the EmitContext compatibility owner');
+    like($out, qr/__ACTION_REWRITER_STILL_UNLOADED__/, 'call_spec_handler_subst now keeps ActionRewriter out of the facade compatibility-helper path');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'call_spec_handler_subst lazy-loads EmitContext on demand');
     is($err, '', 'LinkedSpec require/helper subprocess does not emit stderr');
 };
 subtest 'linkedspec_require_avoids_parser_factory_load_until_get_parser' => sub {
@@ -866,7 +870,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::_require_pkg = sub { return 1 };
     local *LinkedSpec::Runtime::run_get = sub { return 'parser_ok' };
     local *LinkedSpec::Compiler::spec_descr = sub { return { compiled => 1 } };
-    local *LinkedSpec::ActionRewriter::call_spec_handler_subst = sub { return 'rewritten_ok' };
+    local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub { return 'rewritten_ok' };
     local *LinkedSpec::ParserFactory::run_get_parser = sub { return 'factory_ok' };
     local *LinkedSpec::PluginBridge::_dispatch_autoload = sub {
         my ($autoload_name, $args) = @_;
@@ -885,7 +889,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'spec_descr preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the ActionRewriter owner');
+    is(LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'call_spec_handler_subst preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
@@ -1027,6 +1031,7 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::ActionRewriter::_require_scanner_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_canonical_events_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_rewrite_pipeline_pkg = sub { return 1 };
+    local *LinkedSpec::ActionRewriter::_require_emit_context_pkg = sub { return 1 };
 
     local *LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr = sub {
         my ($expr) = @_;
@@ -1067,6 +1072,9 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
         my ($label, $code, $rewrite_rules, $deps) = @_;
         return ('rewritten_ok', { label => $label, raw => $code, rewrite_rules => $rewrite_rules, deps => $deps });
     };
+    local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub {
+        return 'rewritten_ok';
+    };
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_flow_expr_deps(), { deps => 'flow' }, 'ActionRewriter flow deps wrapper still delegates through FlowExpr');
@@ -1099,7 +1107,7 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite helper preserves caller $@ on successful list-context delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code');
+    is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter compatibility helper preserves caller $@ on successful delegation');
 };
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {

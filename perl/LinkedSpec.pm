@@ -217,8 +217,8 @@ sub spec_descr {
 sub call_spec_handler_subst {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::ActionRewriter');
-  return LinkedSpec::ActionRewriter::call_spec_handler_subst(@args)
+  _require_pkg('LinkedSpec::RuleIR::EmitContext');
+  return LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(@args)
  })
 }
 

@@ -66,6 +66,10 @@ sub _require_value_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
 }
 
+sub _require_emit_context_pkg {
+ return _require_pkg('LinkedSpec::RuleIR::EmitContext')
+}
+
 sub _call_preserving_err {
  my ($cb) = @_;
  my $saved_err = $@;
@@ -617,10 +621,10 @@ sub _build_action_rewrite_rules {
 }
 
 sub call_spec_handler_subst {
- my ($label, $code) = @_;
+ my @args = @_;
  return _call_preserving_err(sub {
-  ($code) = _rewrite_action_code_with_diagnostics($label, $code);
-  return $code
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(@args)
  })
 }
 

@@ -582,6 +582,14 @@ sub _build_action_rewrite_rules {
  })
 }
 
+sub rewrite_action_code_for_compat {
+ my ($label, $code) = @_;
+ return _call_preserving_err(sub {
+  my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
+  return $rewritten
+ })
+}
+
 sub _normalize_rule_code_chunks {
  my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
 

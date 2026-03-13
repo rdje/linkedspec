@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Route Facade Rewrite Shim Through `EmitContext`
+## Summary
+Reduced another compatibility-only `ActionRewriter` dependency by moving the public `LinkedSpec::call_spec_handler_subst(...)` façade entrypoint onto the `LinkedSpec::RuleIR::EmitContext` owner that already holds the extracted rewrite callback bundle.
+
+## Changed Files
+- Updated: `perl/LinkedSpec.pm`
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - added `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)` as the extracted owner entrypoint for focused helper-rewrite inspection,
+  - changed `LinkedSpec::call_spec_handler_subst(...)` to lazy-load `RuleIR::EmitContext` instead of `ActionRewriter`,
+  - changed `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` into a backward-compatible wrapper around the same `EmitContext` owner.
+- Preserved behavior:
+  - focused helper rewrites still return the same rewritten code strings,
+  - direct `LinkedSpec::ActionRewriter` helper/lowering wrappers remain available for legacy tests and callers,
+  - normal `Get(...)`/`compile_spec_entry(...)` compilation remains on the extracted `ActionIR::*` + `EmitContext` owner path.
+- Updated focused regression coverage:
+  - strengthened `linkedspec_require_avoids_action_rewriter_load_until_compat_helper` so the façade shim now keeps `ActionRewriter` unloaded and lazy-loads `EmitContext` instead,
+  - updated `linkedspec_public_facade_wrappers_preserve_eval_error_state` to lock the new `EmitContext` compatibility-owner seam,
+  - updated `action_rewriter_owner_wrappers_preserve_eval_error_state` so the legacy `ActionRewriter::call_spec_handler_subst(...)` wrapper is explicitly locked to the new `EmitContext` owner.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Move EmitContext Rewrite Callback Bundle Off `ActionRewriter`
 ## Summary
 Stabilized the remaining live compile-path `ActionRewriter` coupling inside `LinkedSpec::*` by making `LinkedSpec::RuleIR::EmitContext` assemble its rewrite callback bundle from the extracted `ActionIR::*` owners directly.

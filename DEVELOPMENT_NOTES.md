@@ -2,6 +2,22 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext` now exposes `rewrite_action_code_for_compat(...)` as the focused helper-rewrite owner, `LinkedSpec::call_spec_handler_subst(...)` now lazy-loads that owner directly, and `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` is now just a backward-compatible wrapper around the same path.
+- Normal façade helper rewrites now keep `ActionRewriter.pm` unloaded; only direct legacy callers of `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` still load that compatibility wrapper module.
+- Updated focused regression locks:
+  - strengthened `linkedspec_require_avoids_action_rewriter_load_until_compat_helper`,
+  - updated `linkedspec_public_facade_wrappers_preserve_eval_error_state`,
+  - updated `action_rewriter_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext` now assembles its rewrite callback bundle from extracted `ActionIR::*` owners directly instead of borrowing the `LinkedSpec::ActionRewriter` callback surface.
 - Normal `EmitContext` builds and normal `LinkedSpec::Get(...)` compilation now keep `ActionRewriter.pm` unloaded; only the explicit compatibility helper `call_spec_handler_subst(...)` still lazy-loads that owner.
