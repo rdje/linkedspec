@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::Trace`.
+- Key technical outcome:
+  - added `LinkedSpec::Trace::_call_preserving_err(...)`,
+  - routed the reference-formatting branch of `_trace_stringify(...)` through that helper,
+  - successful `Trace` dump formatting now preserves caller `$@`.
+- Regression outcome:
+  - added `trace_stringify_preserves_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (226 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve Trace caller error state during stringify` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::BootstrapSpec::Core`.
 - Key technical outcome:
   - added `LinkedSpec::BootstrapSpec::Core::_call_preserving_err(...)`,

@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::Trace::_trace_stringify(...)` now preserves caller `$@` across successful reference formatting through `Data::Dumper`.
+- Added `LinkedSpec::Trace::_call_preserving_err(...)` and routed the reference-formatting branch of `_trace_stringify(...)` through it.
+- Added focused regression lock `trace_stringify_preserves_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=226`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::BootstrapSpec::Core` regex helper wrappers now preserve caller `$@` across successful delegation.
 - Added `LinkedSpec::BootstrapSpec::Core::_call_preserving_err(...)` and routed `_linkedre_or(...)` plus `_linkedre_ored_re(...)` through it.
 - Added focused regression lock `bootstrap_spec_core_linkedre_wrappers_preserve_eval_error_state`.

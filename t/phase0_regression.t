@@ -1258,6 +1258,23 @@ subtest 'bootstrap_spec_core_linkedre_wrappers_preserve_eval_error_state' => sub
     is(LinkedSpec::BootstrapSpec::Core::_linkedre_ored_re(qr/foo/, qr/bar/), '(?:foo|bar)', 'BootstrapSpec::Core linkedre_ored_re wrapper still delegates through LinkedRE');
     is($@, "__SAVED_ERR__\n", 'BootstrapSpec::Core linkedre_ored_re wrapper preserves caller $@ on successful delegation');
 };
+subtest 'trace_stringify_preserves_eval_error_state' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::Trace;
+
+    local *LinkedSpec::Trace::_require_data_dumper_pkg = sub { return 1 };
+    local *Data::Dumper::Dumper = sub { return "dump_value_ok\n" };
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Trace::_trace_stringify('plain'), 'plain', 'Trace stringify still returns scalar values unchanged');
+    is($@, "__SAVED_ERR__\n", 'Trace stringify preserves caller $@ for scalar pass-through');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::Trace::_trace_stringify({ foo => 1 }), 'dump_value_ok', 'Trace stringify still delegates referenced values through Data::Dumper');
+    is($@, "__SAVED_ERR__\n", 'Trace stringify preserves caller $@ on successful dump formatting');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

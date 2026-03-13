@@ -26,6 +26,25 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _trace_trim {
  my ($value) = @_;
  return undef unless defined $value;
@@ -82,13 +101,15 @@ sub _trace_stringify {
  return undef unless defined $value;
  return $value unless ref($value);
 
- _require_data_dumper_pkg();
- local $Data::Dumper::Terse = 1;
- local $Data::Dumper::Indent = 0;
- local $Data::Dumper::Sortkeys = 1;
- my $dump = Data::Dumper::Dumper($value);
- $dump =~ s/\s+$//o;
- return $dump
+ return _call_preserving_err(sub {
+  _require_data_dumper_pkg();
+  local $Data::Dumper::Terse = 1;
+  local $Data::Dumper::Indent = 0;
+  local $Data::Dumper::Sortkeys = 1;
+  my $dump = Data::Dumper::Dumper($value);
+  $dump =~ s/\s+$//o;
+  return $dump
+ })
 }
 
 sub _trace_timestamp {
