@@ -1020,18 +1020,29 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 31;
+    plan tests => 37;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
 
-    local *LinkedSpec::ActionRewriter::_require_method_expr_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_flow_expr_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_emit_context_pkg = sub { return 1 };
 
-    local *LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr = sub {
+    local *LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr = sub {
         my ($expr) = @_;
-        return { parsed => $expr };
+        return { parsed => $expr, owner => 'emit_context_parse' };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_is_bare_method_scope_token = sub {
+        my ($expr) = @_;
+        return $expr eq '::';
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_normalize_method_args_with_optional_scope = sub {
+        my ($args) = @_;
+        return ['normalized', $args];
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_split_top_level_csv = sub {
+        my ($expr) = @_;
+        return ['split', $expr];
     };
     local *LinkedSpec::ActionIR::FlowExpr::default_deps_for_package = sub {
         return { deps => 'flow' };
@@ -1093,8 +1104,20 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'ActionRewriter flow deps wrapper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_parse_method_function_expr('call(Leaf)'), { parsed => 'call(Leaf)' }, 'ActionRewriter method parser wrapper still delegates through MethodExpr');
+    is_deeply(LinkedSpec::ActionRewriter::_parse_method_function_expr('call(Leaf)'), { parsed => 'call(Leaf)', owner => 'emit_context_parse' }, 'ActionRewriter method parser wrapper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter method parser wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    ok(LinkedSpec::ActionRewriter::_is_bare_method_scope_token('::'), 'ActionRewriter bare-scope helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter bare-scope helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_normalize_method_args_with_optional_scope('Leaf,Top'), ['normalized', 'Leaf,Top'], 'ActionRewriter method-arg normalizer now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-arg normalizer preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_split_top_level_csv('a,b'), ['split', 'a,b'], 'ActionRewriter top-level CSV splitter now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter top-level CSV splitter preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(scalar(a), scalar(b))'), { expr => 'or(scalar(a), scalar(b))', deps => { deps => 'flow' } }, 'ActionRewriter flow lowering wrapper still delegates through FlowExpr');
@@ -4091,20 +4114,24 @@ subtest 'action_rewriter_require_avoids_linkedspec_deps_load' => sub {
     is($err, '', 'ActionRewriter require-only subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_method_expr_load_until_parse_helper' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require LinkedSpec::ActionRewriter;'
+      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_EAGER__\n" : "__METHODEXPR_STILL_LAZY__\n";'
       . 'my $expr = LinkedSpec::ActionRewriter::_parse_method_function_expr("return_a(Top)");'
       . 'print ref($expr) eq "HASH" ? "__METHOD_EXPR_HASH__\n" : "__METHOD_EXPR_OTHER__\n";'
+      . 'print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_PARSE__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/MethodExpr.pm"}) ? "__METHODEXPR_AFTER_PARSE__\n" : "__METHODEXPR_STILL_UNLOADED__\n";'
       . 'print ref($expr->{args}) eq "ARRAY" && @{$expr->{args}} == 1 && $expr->{args}[0] eq "Top" ? "__METHOD_EXPR_ARGS_OK__\n" : "__METHOD_EXPR_ARGS_BAD__\n";'
     );
 
     is($exit_code, 0, 'ActionRewriter require/parse subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
     like($out, qr/__METHODEXPR_STILL_LAZY__/, 'require ActionRewriter keeps MethodExpr unloaded');
     like($out, qr/__METHOD_EXPR_HASH__/, 'method-expression parse still returns a hash after lazy MethodExpr loading');
+    like($out, qr/__EMIT_CONTEXT_AFTER_PARSE__/, 'method-expression parse lazy-loads EmitContext on demand');
     like($out, qr/__METHODEXPR_AFTER_PARSE__/, 'method-expression parse lazy-loads MethodExpr on demand');
     like($out, qr/__METHOD_EXPR_ARGS_OK__/, 'method-expression parse preserves parsed argument output after lazy MethodExpr loading');
     is($err, '', 'ActionRewriter require/parse subprocess does not emit stderr');

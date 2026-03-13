@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route MethodExpr Compatibility Helpers Through `EmitContext`
+## Summary
+Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving its remaining direct MethodExpr helper wrappers onto `LinkedSpec::RuleIR::EmitContext`, which already owns that parsing support for the live compile path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_parse_method_function_expr(...)`,
+    `_is_bare_method_scope_token(...)`,
+    `_normalize_method_args_with_optional_scope(...)`, and
+    `_split_top_level_csv(...)`
+    to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - removed the now-dead direct `ActionRewriter` MethodExpr package loader,
+  - kept downstream helper families behavior-stable because `EmitContext` already owns the same MethodExpr helper logic.
+- Preserved behavior:
+  - direct legacy callers still get the same parsed method-expression structures and normalization behavior,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `MethodExpr.pm` unloaded until the method-expression helper path is actually exercised,
+  - extracted `ActionIR::*` owner dep builders continue to lazy-load callback owners on demand.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_method_expr_load_until_parse_helper` so it now locks the `EmitContext` lazy-load seam as well,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the full MethodExpr helper family is explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route Remaining Generic Rewrite Helpers Through `EmitContext`
 ## Summary
 Completed another compatibility-surface cleanup in `LinkedSpec::*` by moving the remaining generic split/canonical/rewrite helper wrappers in `LinkedSpec::ActionRewriter` onto the extracted `LinkedSpec::RuleIR::EmitContext` owner.

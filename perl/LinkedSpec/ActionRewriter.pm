@@ -14,10 +14,6 @@ sub _require_pkg {
  return $pkg
 }
 
-sub _require_method_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
-}
-
 sub _require_flow_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::FlowExpr')
 }
@@ -110,32 +106,32 @@ sub _value_expr_deps {
 sub _parse_method_function_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr(@args)
  })
 }
 
 sub _is_bare_method_scope_token {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_is_bare_method_scope_token(@args)
  })
 }
 
 sub _normalize_method_args_with_optional_scope {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_normalize_method_args_with_optional_scope(@args)
  })
 }
 
 sub _split_top_level_csv {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_split_top_level_csv(@args)
  })
 }
 

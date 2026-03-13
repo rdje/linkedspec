@@ -3,6 +3,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the direct MethodExpr helper wrappers for parse / scope-token / arg-normalization / CSV split; those now route through `LinkedSpec::RuleIR::EmitContext`, which already owns that parsing support for the active compile path.
+- That removes the last direct MethodExpr package loader from `ActionRewriter` and makes the compatibility module narrower without changing downstream behavior.
+- Updated focused regression locks:
+  - strengthened `action_rewriter_require_avoids_method_expr_load_until_parse_helper`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to cover the full MethodExpr helper family on the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` now routes the rest of its generic split/canonical/rewrite helper wrappers through `LinkedSpec::RuleIR::EmitContext`, and `EmitContext` now exposes owner entrypoints for the canonicalize/lower helper stages too.
 - That removes another batch of duplicate dep-builder/load-time scaffolding from `ActionRewriter`; the compatibility module is now narrower and more clearly limited to lower-level direct helper families plus legacy wrapper surface.
 - Updated focused regression locks:
