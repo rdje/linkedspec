@@ -1,5 +1,46 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route `ActionRewriter` Generic Rewrite Wrappers Through `EmitContext`
+## Summary
+Reduced another compatibility-only `ActionRewriter` surface by moving its remaining generic rewrite-orchestration wrappers onto the extracted `LinkedSpec::RuleIR::EmitContext` owner that already backs the live compile-path rewrite flow.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_build_action_lowering_contracts(...)`,
+    `_scan_contract_ir_events(...)`,
+    `_find_unresolved_action_helpers(...)`,
+    `_collect_action_helper_ir_nodes(...)`,
+    `_build_canonical_action_ir_events(...)`, and
+    `_rewrite_action_code_with_diagnostics(...)`
+    to lazy-load `LinkedSpec::RuleIR::EmitContext` and delegate to that extracted owner,
+  - removed the now-dead local `ActionRewriter` scaffolding for direct scanner/contracts dep-map assembly on that generic rewrite path,
+  - kept lower-level direct lowering helpers in `ActionRewriter` unchanged, so legacy helper-family entrypoints still behave the same.
+- Preserved behavior:
+  - rewrite output and canonical diagnostics are unchanged,
+  - direct legacy callers of `LinkedSpec::ActionRewriter` still get the same helper/rewrite results,
+  - the active compile-time helper rewrite path remains centered on `RuleIR::EmitContext` plus extracted `ActionIR::*` owners.
+- Updated focused regression coverage:
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the generic rewrite wrappers are explicitly locked to the `EmitContext` owner,
+  - kept the broader rewrite/lazy-load regression suite green under the new owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Phase 1A Slice: Route Facade Rewrite Shim Through `EmitContext`
 ## Summary
 Reduced another compatibility-only `ActionRewriter` dependency by moving the public `LinkedSpec::call_spec_handler_subst(...)` façade entrypoint onto the `LinkedSpec::RuleIR::EmitContext` owner that already holds the extracted rewrite callback bundle.

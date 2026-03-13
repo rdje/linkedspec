@@ -2,6 +2,19 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` now routes its remaining generic rewrite-orchestration wrappers through `LinkedSpec::RuleIR::EmitContext`, so the compatibility module no longer re-owns generic contract scan / unresolved-helper / canonical-build / rewrite dispatch for that path.
+- Lower-level direct lowering helpers inside `ActionRewriter` remain intact; the change is specifically about keeping the generic rewrite orchestration centered on the same extracted owner used by the live compile path.
+- Updated focused regression locks:
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the new `EmitContext` owner path for those wrappers,
+  - revalidated the broader phase-0 rewrite/lazy-load suite through the local CI gate.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext` now exposes `rewrite_action_code_for_compat(...)` as the focused helper-rewrite owner, `LinkedSpec::call_spec_handler_subst(...)` now lazy-loads that owner directly, and `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` is now just a backward-compatible wrapper around the same path.
 - Normal façade helper rewrites now keep `ActionRewriter.pm` unloaded; only direct legacy callers of `LinkedSpec::ActionRewriter::call_spec_handler_subst(...)` still load that compatibility wrapper module.

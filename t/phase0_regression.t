@@ -1020,17 +1020,13 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 17;
+    plan tests => 21;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
 
     local *LinkedSpec::ActionRewriter::_require_method_expr_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_flow_expr_pkg = sub { return 1 };
-    local *LinkedSpec::ActionRewriter::_require_contracts_pkg = sub { return 1 };
-    local *LinkedSpec::ActionRewriter::_require_scanner_pkg = sub { return 1 };
-    local *LinkedSpec::ActionRewriter::_require_canonical_events_pkg = sub { return 1 };
-    local *LinkedSpec::ActionRewriter::_require_rewrite_pipeline_pkg = sub { return 1 };
     local *LinkedSpec::ActionRewriter::_require_emit_context_pkg = sub { return 1 };
 
     local *LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr = sub {
@@ -1044,33 +1040,29 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
         my ($expr, $deps) = @_;
         return { expr => $expr, deps => $deps };
     };
-    local *LinkedSpec::ActionIR::Contracts::default_deps_for_package = sub {
-        return { deps => 'contracts' };
+    local *LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts = sub {
+        my ($label) = @_;
+        return [{ id => 'return_general', label => $label, owner => 'emit_context_contracts' }];
     };
-    local *LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts = sub {
-        my ($label, $deps) = @_;
-        return [{ id => 'return_general', label => $label, deps => $deps }];
+    local *LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events = sub {
+        my ($contract, $code) = @_;
+        return [{ contract => $contract, raw => $code, owner => 'emit_context_scanner' }];
     };
-    local *LinkedSpec::ActionIR::Scanner::default_deps_for_package = sub {
-        return { deps => 'scanner' };
+    local *LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers = sub {
+        my ($code, $rewrite_rules) = @_;
+        return { raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_find' };
     };
-    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {
-        my ($contract, $code, $deps) = @_;
-        return [{ contract => $contract, raw => $code, deps => $deps }];
+    local *LinkedSpec::RuleIR::EmitContext::_collect_action_helper_ir_nodes = sub {
+        my ($code, $rewrite_rules) = @_;
+        return { raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_collect' };
     };
-    local *LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package = sub {
-        return { deps => 'canonical' };
+    local *LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events = sub {
+        my ($label, $code, $helper_events) = @_;
+        return { label => $label, code => $code, helper_events => $helper_events, owner => 'emit_context_canonical' };
     };
-    local *LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events = sub {
-        my ($label, $code, $helper_events, $deps) = @_;
-        return { label => $label, code => $code, helper_events => $helper_events, deps => $deps };
-    };
-    local *LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package = sub {
-        return { deps => 'rewrite' };
-    };
-    local *LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics = sub {
-        my ($label, $code, $rewrite_rules, $deps) = @_;
-        return ('rewritten_ok', { label => $label, raw => $code, rewrite_rules => $rewrite_rules, deps => $deps });
+    local *LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics = sub {
+        my ($label, $code, $rewrite_rules) = @_;
+        return ('rewritten_ok', { label => $label, raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_rewrite' });
     };
     local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub {
         return 'rewritten_ok';
@@ -1089,21 +1081,29 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'ActionRewriter flow lowering wrapper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', deps => { deps => 'contracts' } }], 'ActionRewriter contract builder still delegates through Contracts');
+    is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', owner => 'emit_context_contracts' }], 'ActionRewriter contract builder now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter contract builder preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_scan_contract_ir_events({ id => 'return_general' }, 'return_a(Top)'), [{ contract => { id => 'return_general' }, raw => 'return_a(Top)', deps => { deps => 'scanner' } }], 'ActionRewriter scanner wrapper still delegates through Scanner');
+    is_deeply(LinkedSpec::ActionRewriter::_scan_contract_ir_events({ id => 'return_general' }, 'return_a(Top)'), [{ contract => { id => 'return_general' }, raw => 'return_a(Top)', owner => 'emit_context_scanner' }], 'ActionRewriter scanner wrapper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter scanner wrapper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::ActionRewriter::_build_canonical_action_ir_events('Top', 'return_a(Top)', [{ raw => 'return_a(Top)' }]), { label => 'Top', code => 'return_a(Top)', helper_events => [{ raw => 'return_a(Top)' }], deps => { deps => 'canonical' } }, 'ActionRewriter canonical builder still delegates through CanonicalEvents');
+    is_deeply(LinkedSpec::ActionRewriter::_find_unresolved_action_helpers('call(Leaf)', [{ id => 'call' }]), { raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_find' }, 'ActionRewriter unresolved-helper wrapper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter unresolved-helper wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes('call(Leaf)', [{ id => 'call' }]), { raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_collect' }, 'ActionRewriter helper-IR collector now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter helper-IR collector preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_build_canonical_action_ir_events('Top', 'return_a(Top)', [{ raw => 'return_a(Top)' }]), { label => 'Top', code => 'return_a(Top)', helper_events => [{ raw => 'return_a(Top)' }], owner => 'emit_context_canonical' }, 'ActionRewriter canonical builder now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter canonical builder preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     my ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', [{ id => 'call' }]);
-    is($rewritten, 'rewritten_ok', 'ActionRewriter rewrite helper still delegates through RewritePipeline');
-    is_deeply($diag, { label => 'Top', raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], deps => { deps => 'rewrite' } }, 'ActionRewriter rewrite helper preserves list-context return payload');
+    is($rewritten, 'rewritten_ok', 'ActionRewriter rewrite helper now delegates through the EmitContext compatibility owner');
+    is_deeply($diag, { label => 'Top', raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_rewrite' }, 'ActionRewriter rewrite helper preserves list-context return payload through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite helper preserves caller $@ on successful list-context delegation');
 
     $@ = "__SAVED_ERR__\n";

@@ -18,10 +18,6 @@ sub _require_method_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
 }
 
-sub _require_scanner_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Scanner')
-}
-
 sub _require_canonical_events_pkg {
  return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents')
 }
@@ -32,10 +28,6 @@ sub _require_diagnostics_pkg {
 
 sub _require_statement_split_pkg {
  return _require_pkg('LinkedSpec::ActionIR::StatementSplit')
-}
-
-sub _require_contracts_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Contracts')
 }
 
 sub _require_rewrite_pipeline_pkg {
@@ -155,13 +147,6 @@ sub _rewrite_pipeline_deps {
   return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
  })
 }
-sub _scan_contract_ir_event_deps {
- return _call_preserving_err(sub {
-  _require_scanner_pkg();
-  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
- })
-}
-
 sub _parse_method_function_expr {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -514,49 +499,35 @@ sub _lower_print_statement {
  })
 }
 
-sub _action_contract_deps {
- return _call_preserving_err(sub {
-  _require_contracts_pkg();
-  return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
- })
-}
-
 sub _build_action_lowering_contracts {
- my ($label) = @_;
+ my @args = @_;
  return _call_preserving_err(sub {
-  _require_contracts_pkg();
-  return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts(
-   $label,
-   _action_contract_deps(),
-  )
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts(@args)
  })
 }
 
 sub _scan_contract_ir_events {
- my ($contract, $code) = @_;
+ my @args = @_;
  return _call_preserving_err(sub {
-  _require_scanner_pkg();
-  return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
-   $contract,
-   $code,
-   _scan_contract_ir_event_deps(),
-  )
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events(@args)
  })
 }
 
 sub _find_unresolved_action_helpers {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(@args, _diagnostics_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(@args)
  })
 }
 
 sub _collect_action_helper_ir_nodes {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes(@args, _diagnostics_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_collect_action_helper_ir_nodes(@args)
  })
 }
 
@@ -578,8 +549,8 @@ sub _split_action_ir_statements {
 sub _build_canonical_action_ir_events {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(@args, _canonical_event_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events(@args)
  })
 }
 
@@ -602,12 +573,11 @@ sub _accumulate_action_rewrite_diagnostics {
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
  return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(
    $label,
    $code,
    $rewrite_rules,
-   _rewrite_pipeline_deps(),
   )
  })
 }

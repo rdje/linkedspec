@@ -37,6 +37,26 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- Key technical outcome:
+  - `LinkedSpec::ActionRewriter::_build_action_lowering_contracts(...)`,
+    `_scan_contract_ir_events(...)`,
+    `_find_unresolved_action_helpers(...)`,
+    `_collect_action_helper_ir_nodes(...)`,
+    `_build_canonical_action_ir_events(...)`, and
+    `_rewrite_action_code_with_diagnostics(...)`
+    now delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - the remaining generic rewrite orchestration now stays on the same extracted owner path used by normal compile-time helper rewriting,
+  - `ActionRewriter` remains as compatibility wrapper surface plus direct lower-level lowering helpers.
+- Regression outcome:
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the new `EmitContext` owner path for the generic rewrite wrappers,
+  - revalidated the full phase-0 suite and local CI gate after the handoff.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (`Files=1, Tests=232`)
+  - `bash tools/run_ci_local.sh` => PASS (`Files=1, Tests=232`)
+
+## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - Key technical outcome:
   - `LinkedSpec::RuleIR::EmitContext` now owns focused helper rewrite inspection through `rewrite_action_code_for_compat(...)`,
