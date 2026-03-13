@@ -1,5 +1,58 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Lazy-Load ActionIR Callback Owners Inside Dep Builders
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by making the remaining extracted `ActionIR` dep-builder owners lazy-load their callback-owner packages on demand, instead of assuming those owner packages were already loaded by the caller.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Diagnostics.pm`
+- Updated: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored extracted ActionIR dep-builder owner loading:
+  - added local `_require_pkg(...)` helpers to the remaining dep-builder owners that still lacked one,
+  - updated `_require_pkg_cb(...)` in `ControlFlow`, `Diagnostics`, `RewritePipeline`, `Contracts`, `ValueExpr`, `ArrayPipeline`, `FlowExpr`, and `MethodLowering` to load callback-owner packages before resolving `can(...)`,
+  - updated the existing `_require_pkg_cb(...)` helpers in `StatementSplit` and `CanonicalEvents` to do the same before symbol-table callback lookup,
+  - kept the returned callback maps unchanged while removing the hidden assumption that callback-owner packages were already present in memory.
+- Preserved behavior:
+  - extracted ActionIR dep builders still return the same dependency keys and callback coderefs,
+  - no lowering, scanning, canonical-event, or diagnostics behavior changed,
+  - missing callback-owner packages still fail through the existing require/die surfaces.
+- Updated focused regression coverage:
+  - added `actionir_dep_builders_lazy_load_callback_owner_packages`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=231`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Move MethodExpr Dep Loading into DeclareMethod/Scanner Owners
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by making the `DeclareMethod` and `Scanner` owner dep-builders lazy-load `MethodExpr` themselves, so `ActionRewriter` no longer has to prefetch `MethodExpr` just to assemble those callback maps.

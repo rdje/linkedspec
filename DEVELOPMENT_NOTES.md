@@ -3,6 +3,27 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- The remaining extracted `ActionIR` dep-builder owners now lazy-load callback-owner packages on demand instead of assuming those packages were already loaded by the caller.
+- Added local `_require_pkg(...)` helpers to `ControlFlow`, `Diagnostics`, `RewritePipeline`, `Contracts`, `ValueExpr`, `ArrayPipeline`, `FlowExpr`, and `MethodLowering`, then routed `_require_pkg_cb(...)` through them.
+- Updated `StatementSplit::_require_pkg_cb(...)` and `CanonicalEvents::_require_pkg_cb(...)` to lazy-load callback-owner packages before symbol-table callback lookup too.
+- Added focused regression lock `actionir_dep_builders_lazy_load_callback_owner_packages`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=231`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionIR::DeclareMethod` and `LinkedSpec::ActionIR::Scanner` now lazy-load `MethodExpr` while building their default callback maps, so `LinkedSpec::ActionRewriter` no longer has to prefetch `MethodExpr` just to assemble those dep-builder payloads.
 - Removed the redundant `_require_method_expr_pkg()` calls from `LinkedSpec::ActionRewriter::_declare_method_deps(...)` and `_scan_contract_ir_event_deps(...)`.
 - Updated `LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb(...)` and `LinkedSpec::ActionIR::Scanner::_require_pkg_cb(...)` to load callback-owner packages on demand before resolving `can(...)`.

@@ -9,6 +9,13 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -39,6 +46,7 @@ sub _call_preserving_err {
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  return _call_preserving_err(sub {
+  _require_pkg($pkg) unless $pkg->can($name);
   my $code = $pkg->can($name);
   die "(LinkedSpec::ActionIR::ControlFlow::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
    unless ref($code) eq 'CODE';

@@ -37,6 +37,28 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- Key technical outcome:
+  - added local `_require_pkg(...)` helpers to `ControlFlow`, `Diagnostics`, `RewritePipeline`, `Contracts`, `ValueExpr`, `ArrayPipeline`, `FlowExpr`, and `MethodLowering`,
+  - updated `_require_pkg_cb(...)` in those modules to lazy-load callback-owner packages before resolving `can(...)`,
+  - updated `StatementSplit::_require_pkg_cb(...)` and `CanonicalEvents::_require_pkg_cb(...)` to do the same before symbol-table callback lookup,
+  - extracted ActionIR dep builders no longer assume their callback-owner package was already loaded by the caller.
+- Regression outcome:
+  - added `actionir_dep_builders_lazy_load_callback_owner_packages`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (231 tests)
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Backbone Item 3 / Phase 1A load-time coupling slice completed against the remaining `MethodExpr` dep-builder prefetch seam in `LinkedSpec::*`.
 - Key technical outcome:
   - removed the redundant `MethodExpr` prefetch from `LinkedSpec::ActionRewriter::_declare_method_deps(...)`,

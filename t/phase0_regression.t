@@ -4337,6 +4337,124 @@ subtest 'action_rewriter_dep_builders_avoid_method_expr_prefetch' => sub {
         },
     }, 'scanner lowering path preserves scanned payload after owner-side MethodExpr dep loading');
 };
+subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
+    require File::Temp;
+    require File::Path;
+
+    my $tmp_root = File::Temp::tempdir(CLEANUP => 1);
+    my @cases = (
+        {
+            label       => 'FlowExpr',
+            module      => 'LinkedSpec::ActionIR::FlowExpr',
+            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            sample_key  => 'trim_action_ir_value',
+            sample_name => '_trim_action_ir_value',
+        },
+        {
+            label       => 'MethodLowering',
+            module      => 'LinkedSpec::ActionIR::MethodLowering',
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _infer_scalar_container_kind _split_top_level_csv _lower_assignment_source_expr _strip_literal_delimiters)],
+            sample_key  => 'split_declare_symbol_names',
+            sample_name => '_split_declare_symbol_names',
+        },
+        {
+            label       => 'ArrayPipeline',
+            module      => 'LinkedSpec::ActionIR::ArrayPipeline',
+            callbacks   => [qw(_trim_action_ir_value _strip_literal_delimiters _extract_array_symbol_name _parse_method_function_expr _is_bare_method_scope_token _extract_scalar_symbol_name)],
+            sample_key  => 'strip_literal_delimiters',
+            sample_name => '_strip_literal_delimiters',
+        },
+        {
+            label       => 'ControlFlow',
+            module      => 'LinkedSpec::ActionIR::ControlFlow',
+            callbacks   => [qw(_trim_action_ir_value _normalize_method_tag_expr _lower_flow_composite_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            sample_key  => 'normalize_method_tag_expr',
+            sample_name => '_normalize_method_tag_expr',
+        },
+        {
+            label       => 'Contracts',
+            module      => 'LinkedSpec::ActionIR::Contracts',
+            callbacks   => [qw(_lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            sample_key  => 'lower_return_general_statement',
+            sample_name => '_lower_return_general_statement',
+        },
+        {
+            label       => 'RewritePipeline',
+            module      => 'LinkedSpec::ActionIR::RewritePipeline',
+            callbacks   => [qw(_build_action_lowering_contracts _collect_action_helper_ir_nodes _build_canonical_action_ir_events _find_unresolved_action_helpers)],
+            sample_key  => 'build_action_lowering_contracts',
+            sample_name => '_build_action_lowering_contracts',
+        },
+        {
+            label       => 'Diagnostics',
+            module      => 'LinkedSpec::ActionIR::Diagnostics',
+            callbacks   => [qw(_split_action_ir_statements _scan_contract_ir_events)],
+            sample_key  => 'split_action_ir_statements',
+            sample_name => '_split_action_ir_statements',
+        },
+        {
+            label       => 'ValueExpr',
+            module      => 'LinkedSpec::ActionIR::ValueExpr',
+            callbacks   => [qw(_trim_action_ir_value _lower_flow_composite_expr _lower_method_value_expr)],
+            sample_key  => 'lower_flow_composite_expr',
+            sample_name => '_lower_flow_composite_expr',
+        },
+        {
+            label       => 'StatementSplit',
+            module      => 'LinkedSpec::ActionIR::StatementSplit',
+            callbacks   => [qw(_trim_action_ir_value)],
+            sample_key  => 'trim_action_ir_value',
+            sample_name => '_trim_action_ir_value',
+        },
+        {
+            label       => 'CanonicalEvents',
+            module      => 'LinkedSpec::ActionIR::CanonicalEvents',
+            callbacks   => [qw(_trim_action_ir_value _split_action_ir_statements)],
+            sample_key  => 'split_action_ir_statements',
+            sample_name => '_split_action_ir_statements',
+        },
+    );
+
+    plan tests => scalar(@cases) * 4;
+
+    foreach my $i (0 .. $#cases) {
+        my $case = $cases[$i];
+        my $pkg = "Synthetic::ActionIRLazy::Owner$i";
+        my $pkg_rel = File::Spec->catfile('Synthetic', 'ActionIRLazy', "Owner$i.pm");
+        my $pkg_path = File::Spec->catfile($tmp_root, $pkg_rel);
+        my $pkg_dir = File::Basename::dirname($pkg_path);
+        File::Path::make_path($pkg_dir);
+
+        my $source = "package $pkg;\nuse 5.010;\n";
+        foreach my $callback (@{$case->{callbacks}}) {
+            $source .= "sub $callback { return '$callback' }\n";
+        }
+        $source .= "1;\n";
+        write_text($pkg_path, $source);
+
+        (my $module_path = "$case->{module}.pm") =~ s{::}{/}g;
+        require $module_path;
+        delete $INC{$pkg_rel};
+
+        my $deps;
+        my $ok = eval {
+            local @INC = ($tmp_root, @INC);
+            no strict 'refs';
+            $deps = $case->{module}->can('default_deps_for_package')->($pkg);
+            1;
+        };
+        my $err = $@;
+
+        ok($ok, "$case->{label} default dep builder accepts unloaded callback owner package")
+            or diag(normalize_error($err));
+        ok($ok && ref($deps) eq 'HASH', "$case->{label} default dep builder still returns a dependency hash");
+        ok(exists $INC{$pkg_rel}, "$case->{label} default dep builder lazy-loads callback owner package");
+
+        my $sample_cb = ($ok && ref($deps) eq 'HASH') ? $deps->{$case->{sample_key}} : undef;
+        ok(ref($sample_cb) eq 'CODE' && $sample_cb->() eq $case->{sample_name},
+            "$case->{label} returned callback stays callable after owner lazy load");
+    }
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 
