@@ -1344,6 +1344,50 @@ subtest 'plugin_bridge_owner_wrappers_preserve_eval_error_state' => sub {
     );
     is($@, "__SAVED_ERR__\n", 'PluginBridge autoload dispatch preserves caller $@ on successful delegation');
 };
+subtest 'parser_factory_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 8;
+
+    no warnings 'redefine';
+    require LinkedSpec::ParserFactory;
+
+    local $INC{'Synthetic/ParserFactoryLoaded.pm'} = __FILE__;
+    local *Synthetic::ParserFactoryLoaded::callback = sub { return 'cb_ok' };
+    local *Synthetic::ParserFactoryLoaded::value = sub { return 'value_ok' };
+
+    $@ = "__SAVED_ERR__\n";
+    ok(LinkedSpec::ParserFactory::_require_pkg('Synthetic::ParserFactoryLoaded'), 'ParserFactory package loader still succeeds for already-loaded packages');
+    is($@, "__SAVED_ERR__\n", 'ParserFactory package loader preserves caller $@ on successful load');
+
+    $@ = "__SAVED_ERR__\n";
+    my $cb = LinkedSpec::ParserFactory::_require_pkg_cb('Synthetic::ParserFactoryLoaded', 'callback');
+    is($cb->(), 'cb_ok', 'ParserFactory callback loader still returns the requested owner callback');
+    is($@, "__SAVED_ERR__\n", 'ParserFactory callback loader preserves caller $@ on successful lookup');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ParserFactory::_require_pkg_value('Synthetic::ParserFactoryLoaded', 'value'), 'value_ok', 'ParserFactory value loader still returns the requested owner value');
+    is($@, "__SAVED_ERR__\n", 'ParserFactory value loader preserves caller $@ on successful lookup');
+
+    my $parser = sub { return 'parser_ok' };
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'Lispish',
+        { trace_log_file => 'trace.log', trace_reset_log => 1 },
+        {
+            apply_trace_options => sub { return 'trace_apply_ok' },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 'trace_exit_ok' },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return 'specs/Lispish.spec' },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return $parser },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+    ok(ref($ret) eq 'CODE', 'ParserFactory run_get_parser still returns the compiled parser payload');
+    is($@, "__SAVED_ERR__\n", 'ParserFactory run_get_parser preserves caller $@ on successful orchestration');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

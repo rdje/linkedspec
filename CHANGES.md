@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `ParserFactory` Lazy Owner Lookup
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by making `LinkedSpec::ParserFactory` preserve caller `$@` across successful lazy owner lookup and public parser-factory orchestration.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ParserFactory.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored `ParserFactory` owner lookup/orchestration behavior:
+  - added `LinkedSpec::ParserFactory::_call_preserving_err(...)`,
+  - routed `_require_pkg(...)`, `_require_pkg_cb(...)`, `_require_pkg_value(...)`, and `run_get_parser(...)` through that helper,
+  - preserved existing lazy package callback/value resolution and parser-factory flow while restoring caller `$@` after successful delegation.
+- Preserved behavior:
+  - `ParserFactory` still lazy-loads owner packages on demand,
+  - public parser-factory orchestration still traces, resolves, loads, and compiles through the same dependency contract,
+  - exception behavior is unchanged when package load, callback lookup, or parser compilation dies.
+- Updated focused regression coverage:
+  - added `parser_factory_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=228`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `PluginBridge` Legacy Runtime Delegation
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::PluginBridge` preserve caller `$@` across successful legacy runtime load and exec delegation.

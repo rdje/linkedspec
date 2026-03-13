@@ -3,6 +3,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
+- `LinkedSpec::ParserFactory` lazy owner lookup and public parser-factory orchestration now preserve caller `$@` across successful delegation.
+- Added `LinkedSpec::ParserFactory::_call_preserving_err(...)` and routed `_require_pkg(...)`, `_require_pkg_cb(...)`, `_require_pkg_value(...)`, and `run_get_parser(...)` through it.
+- Added focused regression lock `parser_factory_wrappers_preserve_eval_error_state`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=228`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Phase 1A helper API-stability slice inside `LinkedSpec::*`.
 - `LinkedSpec::PluginBridge` legacy runtime load/exec helpers now preserve caller `$@` across successful delegation.
 - Added `LinkedSpec::PluginBridge::_call_preserving_err(...)` and routed `_load_legacy_plugin_runtime(...)`, `_exec_legacy_plugin(...)`, and `_dispatch_plugin_name(...)` through it.
 - Added focused regression lock `plugin_bridge_owner_wrappers_preserve_eval_error_state`.

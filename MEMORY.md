@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::ParserFactory`.
+- Key technical outcome:
+  - added `LinkedSpec::ParserFactory::_call_preserving_err(...)`,
+  - routed `_require_pkg(...)`, `_require_pkg_cb(...)`, `_require_pkg_value(...)`, and
+    `run_get_parser(...)` through that helper,
+  - successful lazy owner lookup and public parser-factory orchestration now preserve caller `$@`.
+- Regression outcome:
+  - added `parser_factory_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (228 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve ParserFactory caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::PluginBridge`.
 - Key technical outcome:
   - added `LinkedSpec::PluginBridge::_call_preserving_err(...)`,

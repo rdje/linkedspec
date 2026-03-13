@@ -15,29 +15,54 @@ sub _require_dep {
  return $cb
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::ParserFactory::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return _call_preserving_err(sub {
+  my $file = $pkg;
+  $file =~ s{::}{/}go;
+  $file .= '.pm';
+  my $ok = eval { require $file; 1 };
+  die "(LinkedSpec::ParserFactory::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
+  return 1
+ })
 }
 
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- _require_pkg($pkg) unless $pkg->can($name);
- my $code = $pkg->can($name);
- die "(LinkedSpec::ParserFactory::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-  unless ref($code) eq 'CODE';
- return $code
+ return _call_preserving_err(sub {
+  _require_pkg($pkg) unless $pkg->can($name);
+  my $code = $pkg->can($name);
+  die "(LinkedSpec::ParserFactory::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+   unless ref($code) eq 'CODE';
+  return $code
+ })
 }
 
 sub _require_pkg_value {
  my ($pkg, $name) = @_;
- my $cb = _require_pkg_cb($pkg, $name);
- return $cb->()
+ return _call_preserving_err(sub {
+  my $cb = _require_pkg_cb($pkg, $name);
+  return $cb->()
+ })
 }
 
 sub _require_value_dep {
@@ -71,49 +96,51 @@ sub _default_deps {
 #------------------------------------------------------------------------------
 sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
- my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
- $deps = _default_deps() unless ref($deps) eq 'HASH';
+ return _call_preserving_err(sub {
+  my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
+  $deps = _default_deps() unless ref($deps) eq 'HASH';
 
- my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
- my $trace_enter = _require_dep($deps, 'trace_enter');
- my $trace_exit = _require_dep($deps, 'trace_exit');
- my $trace_decision = _require_dep($deps, 'trace_decision');
- my $validate_spec_name = _require_dep($deps, 'validate_spec_name');
- my $resolve_spec_path = _require_dep($deps, 'resolve_spec_path');
- my $load_spec_content = _require_dep($deps, 'load_spec_content');
- my $compile_spec = _require_dep($deps, 'compile_spec');
- my $dump_low = _require_value_dep($deps, 'dump_low');
- my $dump_medium = _require_value_dep($deps, 'dump_medium');
+  my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
+  my $trace_enter = _require_dep($deps, 'trace_enter');
+  my $trace_exit = _require_dep($deps, 'trace_exit');
+  my $trace_decision = _require_dep($deps, 'trace_decision');
+  my $validate_spec_name = _require_dep($deps, 'validate_spec_name');
+  my $resolve_spec_path = _require_dep($deps, 'resolve_spec_path');
+  my $load_spec_content = _require_dep($deps, 'load_spec_content');
+  my $compile_spec = _require_dep($deps, 'compile_spec');
+  my $dump_low = _require_value_dep($deps, 'dump_low');
+  my $dump_medium = _require_value_dep($deps, 'dump_medium');
 
- $apply_trace_options->(\%opt_hash) if %opt_hash;
- my $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
-  spec_name => $spec_name,
-  option_keys => [sort keys %opt_hash],
- }, $dump_low);
+  $apply_trace_options->(\%opt_hash) if %opt_hash;
+  my $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
+   spec_name => $spec_name,
+   option_keys => [sort keys %opt_hash],
+  }, $dump_low);
 
- unless ($validate_spec_name->($spec_name, $trace_scope)) {
-  return undef
- }
+  unless ($validate_spec_name->($spec_name, $trace_scope)) {
+   return undef
+  }
 
- my $spec_path = $resolve_spec_path->($spec_name, $trace_scope);
- return undef unless defined $spec_path;
+  my $spec_path = $resolve_spec_path->($spec_name, $trace_scope);
+  return undef unless defined $spec_path;
 
- my $content = $load_spec_content->($spec_path, $trace_scope);
- return undef unless defined $content;
- my %forward_opt_hash = %opt_hash;
- delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
- my $parser = $compile_spec->(\$content, \%forward_opt_hash);
- $trace_decision->('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', $dump_medium);
- $trace_exit->(
-  $trace_scope,
-  {
-   status => defined($parser) ? 'ok' : 'error',
-   spec_path => $spec_path,
-   parser_ref => ref($parser) || '',
-  },
-  $dump_low
- );
- return $parser;
+  my $content = $load_spec_content->($spec_path, $trace_scope);
+  return undef unless defined $content;
+  my %forward_opt_hash = %opt_hash;
+  delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
+  my $parser = $compile_spec->(\$content, \%forward_opt_hash);
+  $trace_decision->('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', $dump_medium);
+  $trace_exit->(
+   $trace_scope,
+   {
+    status => defined($parser) ? 'ok' : 'error',
+    spec_path => $spec_path,
+    parser_ref => ref($parser) || '',
+   },
+   $dump_low
+  );
+  return $parser;
+ })
 }
 
 1;
