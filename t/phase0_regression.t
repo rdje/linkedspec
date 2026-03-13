@@ -1520,6 +1520,35 @@ subtest 'emit_context_control_flow_deps_route_through_owner_default_map' => sub 
     ok(LinkedSpec::RuleIR::EmitContext->can('_control_flow_deps'), 'EmitContext still exposes the local control-flow dep entrypoint');
 };
 
+subtest 'emit_context_diagnostics_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::Diagnostics;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::Diagnostics::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            split_action_ir_statements => sub { return ['scan_probe'] },
+            scan_contract_ir_events => sub { return [{ owner_pkg => $pkg }] },
+        };
+    };
+    local *LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes = sub {
+        my ($code, $rewrite_rules, $deps) = @_;
+        return $deps->{scan_contract_ir_events}->($rewrite_rules->[0], $code)->[0]{owner_pkg};
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_collect_action_helper_ir_nodes('call(Leaf)', [{ id => 'call' }]);
+    is($ret, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext diagnostics helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the diagnostics owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext diagnostics helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_diagnostics_deps'), 'EmitContext still exposes the local diagnostics dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

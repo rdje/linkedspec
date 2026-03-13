@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` Diagnostics Deps Through Owner Map
+## Summary
+Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built Diagnostics callback map and onto `LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)`, so the extracted diagnostics owner now defines that dependency contract in one place.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored owner dependency resolution:
+  - changed `LinkedSpec::RuleIR::EmitContext::_diagnostics_deps()` to delegate to `LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)`,
+  - stopped hand-building the local Diagnostics callback map in `EmitContext`.
+- Preserved behavior:
+  - `EmitContext` still runs unresolved-helper scans and helper-event collection through `LinkedSpec::ActionIR::Diagnostics`,
+  - caller `$@` is still preserved on successful diagnostics helper delegation,
+  - require-only consumers still keep `Diagnostics.pm` unloaded until the diagnostics helper path is actually exercised.
+- Updated focused regression coverage:
+  - added `emit_context_diagnostics_deps_route_through_owner_default_map` to lock that `EmitContext` now asks `Diagnostics` for the callback map owned by `LinkedSpec::RuleIR::EmitContext`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=235`)
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` ControlFlow Deps Through Owner Map
 ## Summary
 Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built ControlFlow callback map and onto `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)`, so the extracted control-flow owner now defines that dependency contract in one place.

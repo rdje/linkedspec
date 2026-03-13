@@ -258,10 +258,10 @@ sub _scan_contract_ir_event_deps {
 }
 
 sub _diagnostics_deps {
- return {
-  split_action_ir_statements => sub { return _split_action_ir_statements(@_) },
-  scan_contract_ir_events => sub { return _scan_contract_ir_events(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _canonical_event_deps {
