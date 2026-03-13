@@ -94,7 +94,6 @@ sub _trim_action_ir_value {
 sub _declare_method_deps {
  return _call_preserving_err(sub {
   _require_declare_method_pkg();
-  _require_method_expr_pkg();
   return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
  })
 }
@@ -154,7 +153,6 @@ sub _rewrite_pipeline_deps {
 }
 sub _scan_contract_ir_event_deps {
  return _call_preserving_err(sub {
-  _require_method_expr_pkg();
   _require_scanner_pkg();
   return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
  })

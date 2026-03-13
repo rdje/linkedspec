@@ -37,6 +37,24 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Backbone Item 3 / Phase 1A load-time coupling slice completed against the remaining `MethodExpr` dep-builder prefetch seam in `LinkedSpec::*`.
+- Key technical outcome:
+  - removed the redundant `MethodExpr` prefetch from `LinkedSpec::ActionRewriter::_declare_method_deps(...)`,
+  - removed the redundant `MethodExpr` prefetch from `LinkedSpec::ActionRewriter::_scan_contract_ir_event_deps(...)`,
+  - updated `LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb(...)` to lazy-load callback-owner packages before resolving `can(...)`,
+  - updated `LinkedSpec::ActionIR::Scanner::_require_pkg_cb(...)` the same way,
+  - `DeclareMethod` and `Scanner` now own `MethodExpr` callback loading for their default dep maps.
+- Regression outcome:
+  - added `action_rewriter_dep_builders_avoid_method_expr_prefetch`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (230 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: move MethodExpr dep loading into owners` until commit workflow runs, then reset to zero-byte untracked.
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Backbone Item 3 / Phase 1A API-stability slice completed against the remaining extracted `ActionIR` dep-builder owners.
 - Key technical outcome:
   - added `::_call_preserving_err(...)` to `Diagnostics`, `Contracts`, `DeclareMethod`, `ControlFlow`, `ArrayPipeline`, `RewritePipeline`, `FlowExpr`, `MethodLowering`, and `ValueExpr`,

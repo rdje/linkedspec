@@ -4308,6 +4308,35 @@ PERL
     like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve declare and assign-method lowering after lazy DeclareMethod loading');
     is($err, '', 'ActionRewriter require/declare-method subprocess does not emit stderr');
 };
+subtest 'action_rewriter_dep_builders_avoid_method_expr_prefetch' => sub {
+    plan tests => 6;
+
+    my ($declare_stmt, $events, $ok, $err);
+    $ok = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::ActionRewriter::_require_method_expr_pkg = sub { die "__UNEXPECTED_ACTION_REWRITER_REQUIRE_METHODEXPR__\n" };
+        $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)');
+        $events = LinkedSpec::ActionRewriter::_scan_contract_ir_events(
+            { id => 'assign_value' },
+            'assign(retv, scalar(foo))',
+        );
+        1;
+    };
+    $err = $@;
+
+    ok($ok, 'declare/scanner dep-builder paths no longer prefetch MethodExpr through ActionRewriter') or diag($err);
+    is($err, '', 'removed ActionRewriter MethodExpr prefetch seam is not touched');
+    is($declare_stmt, 'my @items', 'declare-method lowering still succeeds after owner-side MethodExpr dep loading');
+    is(ref($events), 'ARRAY', 'scanner lowering path still returns an event array after owner-side MethodExpr dep loading');
+    is(scalar(@{$events || []}), 1, 'scanner lowering path still finds one assign-value event');
+    is_deeply($events->[0], {
+        raw => 'assign(retv, scalar(foo))',
+        args => {
+            target => 'retv',
+            source => 'scalar(foo)',
+        },
+    }, 'scanner lowering path preserves scanned payload after owner-side MethodExpr dep loading');
+};
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     plan tests => 10;
 

@@ -46,6 +46,7 @@ sub _call_preserving_err {
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  return _call_preserving_err(sub {
+  _require_pkg($pkg) unless $pkg->can($name);
   no strict 'refs';
   my $cb = *{"${pkg}::${name}"}{CODE};
   die "(LinkedSpec::ActionIR::Scanner::_require_pkg_cb) -E- missing callback ${pkg}::${name}"

@@ -2,6 +2,20 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionIR::DeclareMethod` and `LinkedSpec::ActionIR::Scanner` now lazy-load `MethodExpr` while building their default callback maps, so `LinkedSpec::ActionRewriter` no longer has to prefetch `MethodExpr` just to assemble those dep-builder payloads.
+- Removed the redundant `_require_method_expr_pkg()` calls from `LinkedSpec::ActionRewriter::_declare_method_deps(...)` and `_scan_contract_ir_event_deps(...)`.
+- Updated `LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb(...)` and `LinkedSpec::ActionIR::Scanner::_require_pkg_cb(...)` to load callback-owner packages on demand before resolving `can(...)`.
+- Added focused regression lock `action_rewriter_dep_builders_avoid_method_expr_prefetch`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=230`)
+
+## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A API-stability slice inside `LinkedSpec::*`.
 - The remaining extracted ActionIR dep-builder owners now preserve caller `$@` across successful callback-map lookup and construction.
 - Added `::_call_preserving_err(...)` to the dep-builder-only ActionIR owners that still lacked it, then routed `_require_pkg_cb(...)` and `default_deps_for_package(...)` through that helper across `Diagnostics`, `Contracts`, `DeclareMethod`, `ControlFlow`, `ArrayPipeline`, `RewritePipeline`, `FlowExpr`, `MethodLowering`, and `ValueExpr`, while routing the same dep-builder surfaces through the existing helper in `Scanner`, `StatementSplit`, and `CanonicalEvents`.

@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Move MethodExpr Dep Loading into DeclareMethod/Scanner Owners
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by making the `DeclareMethod` and `Scanner` owner dep-builders lazy-load `MethodExpr` themselves, so `ActionRewriter` no longer has to prefetch `MethodExpr` just to assemble those callback maps.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored ActionIR dep-loading ownership:
+  - removed the redundant `MethodExpr` prefetch from `LinkedSpec::ActionRewriter::_declare_method_deps(...)`,
+  - removed the redundant `MethodExpr` prefetch from `LinkedSpec::ActionRewriter::_scan_contract_ir_event_deps(...)`,
+  - added package-level lazy callback-owner loading in `LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb(...)`,
+  - added the same lazy callback-owner loading in `LinkedSpec::ActionIR::Scanner::_require_pkg_cb(...)`.
+- Preserved behavior:
+  - declare-method lowering still parses helper expressions through the same `MethodExpr` owner,
+  - scanner dep resolution still exposes the same `parse_method_function_expr(...)` and `normalize_method_args_with_optional_scope(...)` callbacks,
+  - `ActionRewriter` direct method-expression helper wrappers are unchanged and still lazy-load `MethodExpr` on demand.
+- Updated focused regression coverage:
+  - added `action_rewriter_dep_builders_avoid_method_expr_prefetch`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=230`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Preserve Caller `$@` Across ActionIR Dep-Builder Callback Lookup
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by making the remaining extracted `ActionIR` dep-builder owners preserve caller `$@` across successful callback-map lookup and construction.
