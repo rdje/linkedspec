@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 55;
+    plan tests => 65;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1086,6 +1086,26 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr = sub {
         my ($expr) = @_;
         return "array_lowered:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type = sub {
+        my ($type) = @_;
+        return "emit_alias:$type";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_typed_declare_statement = sub {
+        my ($type, $name) = @_;
+        return "typed:$type:$name";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_normalize_method_tag_expr = sub {
+        my ($expr) = @_;
+        return "tag:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr = sub {
+        my ($expr) = @_;
+        return "method_value:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_assign_statement = sub {
+        my ($lhs, $rhs) = @_;
+        return "assign:$lhs:$rhs";
     };
     local *LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts = sub {
         my ($label) = @_;
@@ -1194,6 +1214,26 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_array_pipeline_expr('filter_nonempty(array(items))'), 'array_lowered:filter_nonempty(array(items))', 'ActionRewriter array-pipeline lowering wrapper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter array-pipeline lowering wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_declare_alias_to_type('array'), 'emit_alias:array', 'ActionRewriter method-lowering alias helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-lowering alias helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_typed_declare_statement('array', 'items'), 'typed:array:items', 'ActionRewriter typed-declare helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter typed-declare helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_normalize_method_tag_expr('scalar(foo)'), 'tag:scalar(foo)', 'ActionRewriter method-tag normalizer now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-tag normalizer preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_method_value_expr('call(foo)'), 'method_value:call(foo)', 'ActionRewriter method-value helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter method-value helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_assign_statement('scalar(foo)', 'scalar(bar)'), 'assign:scalar(foo):scalar(bar)', 'ActionRewriter assign helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter assign helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', owner => 'emit_context_contracts' }], 'ActionRewriter contract builder now delegates through the EmitContext compatibility owner');
@@ -4459,14 +4499,16 @@ PERL
     is($err, '', 'ActionRewriter require/control-flow subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_method_lowering_load_until_method_helper' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_EAGER__\n" : "__METHOD_LOWERING_STILL_LAZY__\n";
 my $alias = LinkedSpec::ActionRewriter::_declare_alias_to_type("array");
 my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_statement("scalar(foo)", "scalar(bar)");
 print defined($alias) && defined($assign_stmt) ? "__METHOD_LOWERING_RESULT_OK__\n" : "__METHOD_LOWERING_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_AFTER_HELPER__\n" : "__METHOD_LOWERING_STILL_UNLOADED__\n";
 if (defined($alias) && $alias eq "array" && defined($assign_stmt) && $assign_stmt eq "\$foo = \$bar") {
     print "__METHOD_LOWERING_PAYLOAD_OK__\n";
@@ -4476,8 +4518,10 @@ if (defined($alias) && $alias eq "array" && defined($assign_stmt) && $assign_stm
 PERL
 
     is($exit_code, 0, 'ActionRewriter require/method-lowering subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
     like($out, qr/__METHOD_LOWERING_STILL_LAZY__/, 'require ActionRewriter keeps MethodLowering unloaded');
     like($out, qr/__METHOD_LOWERING_RESULT_OK__/, 'method-lowering helpers still return lowered output after lazy MethodLowering loading');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'method-lowering helpers lazy-load EmitContext on demand');
     like($out, qr/__METHOD_LOWERING_AFTER_HELPER__/, 'method-lowering helpers lazy-load MethodLowering on demand');
     like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve alias and assign lowering after lazy MethodLowering loading');
     is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');

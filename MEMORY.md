@@ -39,6 +39,25 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - Key technical outcome:
+  - `LinkedSpec::ActionRewriter::_declare_alias_to_type(...)`,
+    `_lower_typed_declare_statement(...)`,
+    `_normalize_method_tag_expr(...)`,
+    `_lower_method_value_expr(...)`, and
+    `_lower_assign_statement(...)`
+    now delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - the broader MethodLowering statement wrappers remain on `ActionRewriter` for now,
+  - require-only consumers of `ActionRewriter.pm` now keep both `EmitContext.pm` and `MethodLowering.pm` unloaded until that migrated helper path is actually invoked.
+- Regression outcome:
+  - strengthened `action_rewriter_require_avoids_method_lowering_load_until_method_helper` to lock the `EmitContext` lazy-load seam too,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the migrated MethodLowering helper subset to the `EmitContext` owner path.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (`Files=1, Tests=232`)
+  - `bash tools/run_ci_local.sh` => PASS (`Files=1, Tests=232`)
+
+## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- Key technical outcome:
   - `LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr(...)` and
     `_lower_array_pipeline_expr(...)`
     now delegate to `LinkedSpec::RuleIR::EmitContext`,

@@ -116,24 +116,24 @@ sub _lower_flow_composite_expr {
 sub _declare_alias_to_type {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type(@args)
  })
 }
 
 sub _lower_typed_declare_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_typed_declare_statement(@args)
  })
 }
 
 sub _normalize_method_tag_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_normalize_method_tag_expr(@args)
  })
 }
 
@@ -260,8 +260,8 @@ sub _lower_assign_method_statement {
 sub _lower_method_value_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr(@args)
  })
 }
 
@@ -284,8 +284,8 @@ sub _lower_return_imatch_statement {
 sub _lower_assign_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_assign_statement(@args)
  })
 }
 
