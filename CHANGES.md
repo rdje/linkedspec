@@ -1,5 +1,52 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route Remaining ControlFlow Compatibility Helpers Through `EmitContext`
+## Summary
+Finished the ControlFlow compatibility-owner handoff by moving the remaining direct ControlFlow wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_lower_if_flow_statement(...)`,
+    `_lower_elseif_flow_statement(...)`,
+    `_lower_else_flow_statement(...)`,
+    `_lower_endif_flow_statement(...)`,
+    `_lower_switch_flow_statement(...)`,
+    `_lower_case_flow_statement(...)`,
+    `_lower_default_flow_statement(...)`,
+    `_lower_endcase_flow_statement(...)`,
+    `_lower_endswitch_flow_statement(...)`,
+    `_lower_say_statement(...)`, and
+    `_lower_print_statement(...)`
+    to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - added the matching direct owner entrypoints in `LinkedSpec::RuleIR::EmitContext`,
+  - removed the final direct `ControlFlow` package loader and local ControlFlow dep-map builder from `LinkedSpec::ActionRewriter`.
+- Preserved behavior:
+  - direct legacy callers still get the same `if(...)`, switch-marker, `say(...)`, and `print(...)` lowering outputs,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `ControlFlow.pm` unloaded until the control-helper path is actually exercised,
+  - normal compile-time emit-context assembly remains on the same extracted owner path.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_control_flow_load_until_control_helper` so it now locks the `EmitContext` lazy-load seam too,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining ControlFlow helper family is explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route Remaining DeclareMethod Compatibility Helpers Through `EmitContext`
 ## Summary
 Finished the DeclareMethod compatibility-owner handoff by moving the remaining direct DeclareMethod wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.

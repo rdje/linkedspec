@@ -583,6 +583,94 @@ sub _lower_array_pipeline_expr {
  })
 }
 
+sub _lower_if_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_elseif_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_else_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_endif_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_switch_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_case_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_default_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_endcase_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_endswitch_flow_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_say_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@args, _control_flow_deps())
+ })
+}
+
+sub _lower_print_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@args, _control_flow_deps())
+ })
+}
+
 sub _normalize_method_tag_expr {
  my @args = @_;
  return _call_preserving_err(sub {

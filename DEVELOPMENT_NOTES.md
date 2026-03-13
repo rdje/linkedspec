@@ -3,6 +3,20 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the remaining direct ControlFlow compatibility wrappers `_lower_if_flow_statement(...)`, `_lower_elseif_flow_statement(...)`, `_lower_else_flow_statement(...)`, `_lower_endif_flow_statement(...)`, `_lower_switch_flow_statement(...)`, `_lower_case_flow_statement(...)`, `_lower_default_flow_statement(...)`, `_lower_endcase_flow_statement(...)`, `_lower_endswitch_flow_statement(...)`, `_lower_say_statement(...)`, and `_lower_print_statement(...)`; those now route through `LinkedSpec::RuleIR::EmitContext`.
+- `LinkedSpec::RuleIR::EmitContext` now exposes the matching direct owner entrypoints for those remaining ControlFlow wrappers too, so `ActionRewriter` no longer needs a direct `ControlFlow` package loader or local ControlFlow dep-map builder.
+- Updated focused regression locks:
+  - strengthened `action_rewriter_require_avoids_control_flow_load_until_control_helper`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the remaining ControlFlow helper family to the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
+- Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the remaining direct DeclareMethod compatibility wrappers `_split_declare_symbol_names(...)`, `_parse_declare_binding_entry(...)`, `_lower_declare_value_expr(...)`, `_lower_declare_initializer_expr(...)`, `_extract_declare_statement_from_method_expr(...)`, `_lower_declare_method_statement(...)`, and `_lower_assign_method_statement(...)`; those now route through `LinkedSpec::RuleIR::EmitContext`.
 - `LinkedSpec::RuleIR::EmitContext` now exposes the missing direct owner entrypoints for the remaining DeclareMethod wrappers too, so `ActionRewriter` no longer needs a direct `DeclareMethod` package loader or local DeclareMethod dep-map builder.
 - Updated focused regression locks:

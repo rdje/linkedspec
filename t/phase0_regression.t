@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 91;
+    plan tests => 113;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1158,6 +1158,50 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement = sub {
         my ($tag, $payload) = @_;
         return "return_array:$tag:$payload";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_if_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "if_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_elseif_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "elseif_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_else_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "else_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_endif_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "endif_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_switch_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "switch_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_case_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "case_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_default_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "default_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_endcase_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "endcase_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_endswitch_flow_statement = sub {
+        my ($expr, $ctx) = @_;
+        return "endswitch_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_say_statement = sub {
+        my ($expr) = @_;
+        return "say_flow:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_print_statement = sub {
+        my ($expr) = @_;
+        return "print_flow:$expr";
     };
     local *LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts = sub {
         my ($label) = @_;
@@ -1338,6 +1382,50 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_return_array_statement('"TAG"', 'scalar(foo)'), 'return_array:"TAG":scalar(foo)', 'ActionRewriter return-array helper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter return-array helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_if_flow_statement('if(scalar(foo))', {}), 'if_flow:if(scalar(foo))', 'ActionRewriter if-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter if-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_elseif_flow_statement('elseif(scalar(foo))', {}), 'elseif_flow:elseif(scalar(foo))', 'ActionRewriter elseif-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter elseif-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_else_flow_statement('else()', {}), 'else_flow:else()', 'ActionRewriter else-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter else-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_endif_flow_statement('endif()', {}), 'endif_flow:endif()', 'ActionRewriter endif-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter endif-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_switch_flow_statement('switch(scalar(foo))', {}), 'switch_flow:switch(scalar(foo))', 'ActionRewriter switch-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter switch-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_case_flow_statement('case("TAG")', {}), 'case_flow:case("TAG")', 'ActionRewriter case-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter case-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_default_flow_statement('default()', {}), 'default_flow:default()', 'ActionRewriter default-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter default-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_endcase_flow_statement('endcase()', {}), 'endcase_flow:endcase()', 'ActionRewriter endcase-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter endcase-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_endswitch_flow_statement('endswitch()', {}), 'endswitch_flow:endswitch()', 'ActionRewriter endswitch-flow helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter endswitch-flow helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_say_statement('say("hi")'), 'say_flow:say("hi")', 'ActionRewriter say helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter say helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))'), 'print_flow:print(scalar(foo))', 'ActionRewriter print helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter print helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', owner => 'emit_context_contracts' }], 'ActionRewriter contract builder now delegates through the EmitContext compatibility owner');
@@ -4578,15 +4666,17 @@ PERL
     is($err, '', 'ActionRewriter require/value-expr subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_control_flow_load_until_control_helper' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_EAGER__\n" : "__CONTROL_FLOW_STILL_LAZY__\n";
 my $ctx = { if_stack => [], switch_stack => [], switch_counter => 0, rewrite_rules => [] };
 my $if_stmt = LinkedSpec::ActionRewriter::_lower_if_flow_statement("if(is_empty(array(items)))", $ctx);
 my $print_stmt = LinkedSpec::ActionRewriter::_lower_print_statement("print(scalar(foo))");
 print defined($if_stmt) && defined($print_stmt) ? "__CONTROL_FLOW_RESULT_OK__\n" : "__CONTROL_FLOW_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ControlFlow.pm"}) ? "__CONTROL_FLOW_AFTER_HELPER__\n" : "__CONTROL_FLOW_STILL_UNLOADED__\n";
 if (defined($if_stmt) && $if_stmt eq "if ((!\@items)) {" && defined($print_stmt) && $print_stmt eq "print \$foo" && ref($ctx->{if_stack}) eq "ARRAY" && @{$ctx->{if_stack}} == 1) {
     print "__CONTROL_FLOW_PAYLOAD_OK__\n";
@@ -4596,9 +4686,11 @@ if (defined($if_stmt) && $if_stmt eq "if ((!\@items)) {" && defined($print_stmt)
 PERL
 
     is($exit_code, 0, 'ActionRewriter require/control-flow subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
     like($out, qr/__CONTROL_FLOW_STILL_LAZY__/, 'require ActionRewriter keeps ControlFlow unloaded');
     like($out, qr/__CONTROL_FLOW_RESULT_OK__/, 'control-flow helpers still return lowered output after lazy ControlFlow loading');
-    like($out, qr/__CONTROL_FLOW_AFTER_HELPER__/, 'control-flow helpers lazy-load ControlFlow on demand');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'control-flow helpers lazy-load EmitContext on demand');
+    like($out, qr/__CONTROL_FLOW_AFTER_HELPER__/, 'control-flow helpers lazy-load ControlFlow on demand through EmitContext');
     like($out, qr/__CONTROL_FLOW_PAYLOAD_OK__/, 'control-flow helpers preserve if/print lowering and stack mutation after lazy ControlFlow loading');
     is($err, '', 'ActionRewriter require/control-flow subprocess does not emit stderr');
 };
