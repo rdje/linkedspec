@@ -2,6 +2,20 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext` now assembles its rewrite callback bundle from extracted `ActionIR::*` owners directly instead of borrowing the `LinkedSpec::ActionRewriter` callback surface.
+- Normal `EmitContext` builds and normal `LinkedSpec::Get(...)` compilation now keep `ActionRewriter.pm` unloaded; only the explicit compatibility helper `call_spec_handler_subst(...)` still lazy-loads that owner.
+- Added focused regression locks:
+  - strengthened `linkedspec_require_avoids_compile_pipeline_load_until_get`,
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`,
+  - added `emit_context_avoids_action_rewriter_owner_bundle`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Phase 1A ownership-cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::SpecEntry` now lazy-loads `LinkedSpec::RuleIR::EmitContext` directly and calls `build_rule_ir_emit_context(...)` on the owner module instead of routing through thin `RuleIR` delegates.
 - Removed the dead `LinkedSpec::RuleIR::_require_emit_context_pkg(...)`, `_normalize_rule_code_chunks(...)`, and `_build_rule_ir_emit_context(...)` scaffolding.

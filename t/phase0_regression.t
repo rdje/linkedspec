@@ -123,7 +123,7 @@ PERL
     like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec keeps ActionRewriter unloaded');
     like($out, qr/__PARSER_DEFINED__/, 'Get still returns a parser coderef after lazy compile-pipeline loading');
     like($out, qr/__RUNTIME_AFTER_GET__/, 'Get lazy-loads Runtime');
-    like($out, qr/__COMPILER_AFTER_GET__\n__ACTION_REWRITER_AFTER_GET__/, 'Get lazy-loads Compiler and ActionRewriter through the compile pipeline');
+    like($out, qr/__COMPILER_AFTER_GET__\n__ACTION_REWRITER_STILL_UNLOADED__/, 'Get lazy-loads Compiler while keeping ActionRewriter out of the compile pipeline');
     is($err, '', 'LinkedSpec require/Get subprocess does not emit stderr');
 };
 subtest 'linkedspec_require_avoids_trace_load_until_public_trace_api' => sub {
@@ -521,9 +521,52 @@ PERL
     like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps RewritePipeline unloaded');
     like($out, qr/__EMIT_CTX_DEFINED__/, 'EmitContext build still succeeds after lazy rewrite-owner loading');
     like($out, qr/__REWRITE_PIPELINE_AFTER_BUILD__/, 'EmitContext build now lazy-loads RewritePipeline on demand');
-    like($out, qr/__ACTION_REWRITER_AFTER_BUILD__/, 'EmitContext build still lazy-loads ActionRewriter indirectly through owner dep maps');
+    like($out, qr/__ACTION_REWRITER_STILL_UNLOADED__/, 'EmitContext build now keeps ActionRewriter unloaded while using extracted ActionIR owner dep maps');
     like($out, qr/__ACODES_OK__/, 'EmitContext build preserves rewritten ACODE output after owner-direct rewrite loading');
     is($err, '', 'LinkedSpec::RuleIR::EmitContext require/build subprocess does not emit stderr');
+};
+subtest 'emit_context_avoids_action_rewriter_owner_bundle' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::ActionRewriter;
+    require LinkedSpec::RuleIR::EmitContext;
+
+    local *LinkedSpec::ActionRewriter::_build_action_lowering_contracts = sub { die "__UNEXPECTED_ACTION_REWRITER_BUILD_CONTRACTS__\n" };
+    local *LinkedSpec::ActionRewriter::_collect_action_helper_ir_nodes = sub { die "__UNEXPECTED_ACTION_REWRITER_COLLECT_HELPERS__\n" };
+    local *LinkedSpec::ActionRewriter::_build_canonical_action_ir_events = sub { die "__UNEXPECTED_ACTION_REWRITER_BUILD_CANONICAL__\n" };
+    local *LinkedSpec::ActionRewriter::_find_unresolved_action_helpers = sub { die "__UNEXPECTED_ACTION_REWRITER_FIND_UNRESOLVED__\n" };
+
+    my $rule_ir = {
+        label => 'Top',
+        node_type => 'default',
+        REs => [qr/a/],
+        code_blocks => {
+            ICODE  => [],
+            ECODE  => [],
+            EXCODE => [],
+            ITCODE => [],
+            LXCODE => [],
+            LSCODE => [],
+            LECODE => [],
+        },
+        acode_entries => [
+            { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
+        ],
+        bcode_entries => [],
+    };
+
+    my ($ok_run, $emit_ctx, $err) = (0, undef, '');
+    $ok_run = eval {
+        $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+        1;
+    };
+    $err = $@ // '';
+
+    ok($ok_run, 'EmitContext build succeeds without the removed ActionRewriter owner bundle') or diag($err);
+    unlike($err, qr/__UNEXPECTED_ACTION_REWRITER_/, 'EmitContext does not touch the trapped ActionRewriter owner callbacks');
+    is(ref($emit_ctx), 'HASH', 'EmitContext still returns a hashref through the extracted ActionIR owners');
+    is($emit_ctx->{ACODEs}[0], q{return ['?Top:', \@Top]}, 'EmitContext preserves rewritten ACODE output without ActionRewriter owner callbacks');
 };
 subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
     plan tests => 5;

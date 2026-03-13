@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
+- Key technical outcome:
+  - `LinkedSpec::RuleIR::EmitContext` now assembles its rewrite callback bundle from extracted `ActionIR::*` owners directly,
+  - normal emit-context builds no longer load `LinkedSpec::ActionRewriter`,
+  - normal `LinkedSpec::Get(...)` compilation no longer loads `ActionRewriter` through the emit-context rewrite path either,
+  - `LinkedSpec::call_spec_handler_subst(...)` remains the compatibility-only entrypoint that still lazy-loads `ActionRewriter` on demand.
+- Regression outcome:
+  - strengthened `linkedspec_require_avoids_compile_pipeline_load_until_get`,
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`,
+  - added `emit_context_avoids_action_rewriter_owner_bundle`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (232 tests)
+## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Phase 1A ownership-cleanup slice inside `LinkedSpec::*`.
 - Key technical outcome:
   - added `LinkedSpec::SpecEntry::_require_emit_context_pkg(...)`,

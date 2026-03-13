@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Move EmitContext Rewrite Callback Bundle Off `ActionRewriter`
+## Summary
+Stabilized the remaining live compile-path `ActionRewriter` coupling inside `LinkedSpec::*` by making `LinkedSpec::RuleIR::EmitContext` assemble its rewrite callback bundle from the extracted `ActionIR::*` owners directly.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored emit-context rewrite dependency ownership:
+  - replaced `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package('LinkedSpec::ActionRewriter')` with an `EmitContext`-owned callback bundle,
+  - added local owner-direct dep builders for `Contracts`, `Diagnostics`, `CanonicalEvents`, `Scanner`, `StatementSplit`, `FlowExpr`, `ValueExpr`, `ArrayPipeline`, `ControlFlow`, `MethodLowering`, and `DeclareMethod`,
+  - kept the active rewrite path on extracted `ActionIR::*` owners while removing the last indirect compile-time `ActionRewriter` load from normal emit-context builds.
+- Preserved behavior:
+  - `build_rule_ir_emit_context(...)` still returns the same rewritten ACODE/BCODE/lifecycle payloads and action-rewriter metadata,
+  - `LinkedSpec::Get(...)` still returns parser coderefs through the same compile path,
+  - `LinkedSpec::call_spec_handler_subst(...)` remains the compatibility-only entrypoint that lazy-loads `ActionRewriter` on demand.
+- Updated focused regression coverage:
+  - strengthened `linkedspec_require_avoids_compile_pipeline_load_until_get` so the normal compile path now keeps `ActionRewriter` unloaded,
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build` so emit-context builds now keep `ActionRewriter` unloaded too,
+  - added `emit_context_avoids_action_rewriter_owner_bundle` to trap the removed `ActionRewriter` owner callbacks directly.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Phase 1A Slice: Route SpecEntry Emit-Context Build Through Owner Module
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by removing the dead `RuleIR` emit-context delegate layer and making `LinkedSpec::SpecEntry` call the `LinkedSpec::RuleIR::EmitContext` owner directly.
