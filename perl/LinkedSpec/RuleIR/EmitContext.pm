@@ -181,11 +181,10 @@ sub _flow_expr_deps {
 }
 
 sub _value_expr_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  lower_flow_composite_expr => sub { return _lower_flow_composite_expr(@_) },
-  lower_method_value_expr => sub { return _lower_method_value_expr(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_value_expr_pkg();
+  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _method_lowering_deps {

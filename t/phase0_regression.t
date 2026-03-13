@@ -1639,6 +1639,36 @@ subtest 'emit_context_flow_expr_deps_route_through_owner_default_map' => sub {
     ok(LinkedSpec::RuleIR::EmitContext->can('_flow_expr_deps'), 'EmitContext still exposes the local flow-expression dep entrypoint');
 };
 
+subtest 'emit_context_value_expr_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::ValueExpr;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::ValueExpr::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return 'trim_ok' },
+            lower_flow_composite_expr => sub { return "flow_for_$pkg" },
+            lower_method_value_expr => sub { return 'method_ok' },
+        };
+    };
+    local *LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr = sub {
+        my ($expr, $deps) = @_;
+        return $deps->{lower_flow_composite_expr}->($expr);
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_lower_scalar_access_key_expr('scalar(flag)');
+    is($ret, 'flow_for_LinkedSpec::RuleIR::EmitContext', 'EmitContext value-expression helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the value-expression owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext value-expression helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_value_expr_deps'), 'EmitContext still exposes the local value-expression dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 
