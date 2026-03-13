@@ -4,6 +4,17 @@ Compact, actionable session memory for interruption-safe continuation.
 ## Mission Context
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
+## Current Session Snapshot (2026-03-14)
+- Completed a small Backbone Item 3 cleanup slice inside `LinkedSpec::*`.
+- Removed the stale local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper; trimming now stays only on `LinkedSpec::RuleIR::EmitContext` and the extracted `ActionIR::*` owners.
+- Added the focused regression lock `action_rewriter_drops_dead_trim_helper` so the dead helper stays gone while `EmitContext` continues to own the active trim helper.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=233`)
+
 ## Current Session Snapshot (2026-03-13)
 - Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the remaining direct ControlFlow compatibility wrappers:

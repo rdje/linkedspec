@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Drop Dead `ActionRewriter` Trim Helper
+## Summary
+Removed the stale local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper now that trimming already lives on `LinkedSpec::RuleIR::EmitContext` and the extracted `ActionIR::*` owners.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed dead compatibility scaffolding:
+  - deleted the unused local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper,
+  - kept the active trim path on `LinkedSpec::RuleIR::EmitContext::_trim_action_ir_value(...)` and the extracted `ActionIR::*` owners that already consume trim callbacks there.
+- Preserved behavior:
+  - direct legacy `ActionRewriter` compatibility wrappers still route through `LinkedSpec::RuleIR::EmitContext`,
+  - helper rewrite behavior is unchanged because the removed trim helper was no longer referenced on the active compatibility path.
+- Updated focused regression coverage:
+  - added `action_rewriter_drops_dead_trim_helper` to lock that `ActionRewriter` no longer exposes the dead local trim helper while `EmitContext` still owns the active one.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=233`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route Remaining ControlFlow Compatibility Helpers Through `EmitContext`
 ## Summary
 Finished the ControlFlow compatibility-owner handoff by moving the remaining direct ControlFlow wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.

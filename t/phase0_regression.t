@@ -1477,6 +1477,17 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter compatibility helper preserves caller $@ on successful delegation');
 };
+
+subtest 'action_rewriter_drops_dead_trim_helper' => sub {
+    plan tests => 2;
+
+    require LinkedSpec::ActionRewriter;
+    require LinkedSpec::RuleIR::EmitContext;
+
+    ok(!LinkedSpec::ActionRewriter->can('_trim_action_ir_value'), 'ActionRewriter no longer exposes the stale local trim helper');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_trim_action_ir_value'), 'EmitContext still owns the active local trim helper');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

@@ -36,13 +36,6 @@ sub _call_preserving_err {
  $@ = $saved_err;
  return
 }
-
-sub _trim_action_ir_value {
- my ($value) = @_;
- return undef unless defined $value;
- $value =~ s/^\s*|\s*$//go;
- return $value
-}
 sub _parse_method_function_expr {
  my @args = @_;
  return _call_preserving_err(sub {

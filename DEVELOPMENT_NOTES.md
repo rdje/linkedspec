@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+## Current Session Notes (2026-03-14)
+- Completed a small Backbone Item 3 cleanup slice inside `LinkedSpec::*`.
+- Removed the stale local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper; trimming had already been localized to `LinkedSpec::RuleIR::EmitContext` and the extracted `ActionIR::*` owners, so the compatibility module no longer needs to carry dead trim scaffolding.
+- Added a focused regression lock:
+  - `action_rewriter_drops_dead_trim_helper`
+    to assert that `ActionRewriter` no longer exposes the dead trim helper while `EmitContext` still owns the active one.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=233`)
+
 ## Current Session Notes (2026-03-13)
 - Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the remaining direct ControlFlow compatibility wrappers `_lower_if_flow_statement(...)`, `_lower_elseif_flow_statement(...)`, `_lower_else_flow_statement(...)`, `_lower_endif_flow_statement(...)`, `_lower_switch_flow_statement(...)`, `_lower_case_flow_statement(...)`, `_lower_default_flow_statement(...)`, `_lower_endcase_flow_statement(...)`, `_lower_endswitch_flow_statement(...)`, `_lower_say_statement(...)`, and `_lower_print_statement(...)`; those now route through `LinkedSpec::RuleIR::EmitContext`.
