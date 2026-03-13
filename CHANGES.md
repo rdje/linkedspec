@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route EmitContext Rewrite/Diagnostics Through Extracted Owners
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by making `LinkedSpec::RuleIR::EmitContext` call the extracted rewrite-pipeline and diagnostics owners directly instead of routing that orchestration through thin `LinkedSpec::ActionRewriter` compatibility wrappers.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored emit-context rewrite/diagnostic ownership:
+  - replaced the direct `LinkedSpec::ActionRewriter` helper calls in `LinkedSpec::RuleIR::EmitContext` with owner-direct calls into `LinkedSpec::ActionIR::RewritePipeline` and `LinkedSpec::ActionIR::Diagnostics`,
+  - added local package-loading helpers plus `_rewrite_pipeline_deps(...)` so `EmitContext` resolves rewrite-pipeline callback maps from the extracted owner path instead of through the compatibility wrapper layer,
+  - localized `_trim_action_ir_value(...)` inside `EmitContext`, since that helper is only whitespace trimming and does not need to stay behind a rewrite-owner wrapper.
+- Preserved behavior:
+  - `build_rule_ir_emit_context(...)` still produces the same rewritten ACODE/BCODE/lifecycle payloads and action-rewriter metadata,
+  - `LinkedSpec::ActionRewriter` is still lazy-loaded when the rewrite-pipeline dep map resolves lowering callbacks, but `EmitContext` no longer depends on the thin `ActionRewriter` wrapper methods themselves,
+  - caller `$@` preservation remains intact across successful `EmitContext` rewrite-helper delegation.
+- Updated focused regression coverage:
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build` to lock lazy `RewritePipeline` loading alongside the still-indirect lazy `ActionRewriter` load,
+  - updated `extracted_wrapper_helpers_preserve_eval_error_state` so the `EmitContext` rewrite helper is regression-locked to `LinkedSpec::ActionIR::RewritePipeline` instead of the compatibility wrapper layer.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=231`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Lazy-Load ActionIR Callback Owners Inside Dep Builders
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by making the remaining extracted `ActionIR` dep-builder owners lazy-load their callback-owner packages on demand, instead of assuming those owner packages were already loaded by the caller.

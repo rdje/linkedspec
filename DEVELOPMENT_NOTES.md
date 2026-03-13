@@ -2,6 +2,19 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext` now routes rewrite-rule construction and rewrite execution through `LinkedSpec::ActionIR::RewritePipeline`, routes diagnostic accumulation through `LinkedSpec::ActionIR::Diagnostics`, and keeps its trivial trim helper local.
+- `EmitContext` no longer depends on the thin `LinkedSpec::ActionRewriter` wrapper methods for this path; `ActionRewriter` is only pulled indirectly when the extracted rewrite-pipeline owner resolves lowering callback maps.
+- Updated focused regression locks:
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build` to cover lazy `RewritePipeline` loading,
+  - updated `extracted_wrapper_helpers_preserve_eval_error_state` so the `EmitContext` rewrite helper is locked to `RewritePipeline`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=231`)
+
+## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - The remaining extracted `ActionIR` dep-builder owners now lazy-load callback-owner packages on demand instead of assuming those packages were already loaded by the caller.
 - Added local `_require_pkg(...)` helpers to `ControlFlow`, `Diagnostics`, `RewritePipeline`, `Contracts`, `ValueExpr`, `ArrayPipeline`, `FlowExpr`, and `MethodLowering`, then routed `_require_pkg_cb(...)` through them.

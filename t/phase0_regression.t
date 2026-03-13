@@ -516,11 +516,12 @@ PERL
     is($err, '', 'LinkedSpec::RuleIR::EmitContext require/meta subprocess does not emit stderr');
 };
 subtest 'emit_context_require_avoids_action_rewriter_load_until_emit_context_build' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_EAGER__\n" : "__ACTION_REWRITER_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_EAGER__\n" : "__REWRITE_PIPELINE_STILL_LAZY__\n";
 my $rule_ir = {
     label => 'Top',
     node_type => 'default',
@@ -541,15 +542,18 @@ my $rule_ir = {
 };
 my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
 print ref($emit_ctx) eq "HASH" ? "__EMIT_CTX_DEFINED__\n" : "__EMIT_CTX_UNDEF__\n";
+print exists($INC{"LinkedSpec/ActionIR/RewritePipeline.pm"}) ? "__REWRITE_PIPELINE_AFTER_BUILD__\n" : "__REWRITE_PIPELINE_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionRewriter.pm"}) ? "__ACTION_REWRITER_AFTER_BUILD__\n" : "__ACTION_REWRITER_STILL_UNLOADED__\n";
 print ((ref($emit_ctx->{ACODEs}) eq "ARRAY" && @{$emit_ctx->{ACODEs}} == 1) ? "__ACODES_OK__\n" : "__ACODES_BAD__\n");
 PERL
 
     is($exit_code, 0, 'LinkedSpec::RuleIR::EmitContext require/build subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__ACTION_REWRITER_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps ActionRewriter unloaded');
-    like($out, qr/__EMIT_CTX_DEFINED__/, 'EmitContext build still succeeds after lazy ActionRewriter loading');
-    like($out, qr/__ACTION_REWRITER_AFTER_BUILD__/, 'EmitContext build lazy-loads ActionRewriter on demand');
-    like($out, qr/__ACODES_OK__/, 'EmitContext build preserves rewritten ACODE output after lazy ActionRewriter loading');
+    like($out, qr/__REWRITE_PIPELINE_STILL_LAZY__/, 'require LinkedSpec::RuleIR::EmitContext keeps RewritePipeline unloaded');
+    like($out, qr/__EMIT_CTX_DEFINED__/, 'EmitContext build still succeeds after lazy rewrite-owner loading');
+    like($out, qr/__REWRITE_PIPELINE_AFTER_BUILD__/, 'EmitContext build now lazy-loads RewritePipeline on demand');
+    like($out, qr/__ACTION_REWRITER_AFTER_BUILD__/, 'EmitContext build still lazy-loads ActionRewriter indirectly through owner dep maps');
+    like($out, qr/__ACODES_OK__/, 'EmitContext build preserves rewritten ACODE output after owner-direct rewrite loading');
     is($err, '', 'LinkedSpec::RuleIR::EmitContext require/build subprocess does not emit stderr');
 };
 subtest 'bootstrap_spec_require_avoids_core_load_until_bootstrap_state_build' => sub {
@@ -894,7 +898,8 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::_require_emit_context_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_require_trace_pkg = sub { return 1 };
-    local *LinkedSpec::RuleIR::EmitContext::_require_action_rewriter_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::EmitContext::_require_rewrite_pipeline_pkg = sub { return 1 };
+    local *LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps = sub { return { injected => 1 } };
 
     local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
     local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
@@ -902,6 +907,9 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks = sub { return 'normalized_ok' };
     local *LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context = sub { return { emit_ctx => 1 } };
     local *LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics = sub {
+        die "__UNEXPECTED_ACTION_REWRITER_REWRITE__\n";
+    };
+    local *LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics = sub {
         my ($label, $code) = @_;
         return ('rewritten_ok', { label => $label, raw => $code });
     };
@@ -928,7 +936,7 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
 
     $@ = "__SAVED_ERR__\n";
     my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', []);
-    is($rewritten, 'rewritten_ok', 'EmitContext rewrite helper still delegates through ActionRewriter');
+    is($rewritten, 'rewritten_ok', 'EmitContext rewrite helper now delegates through RewritePipeline');
     is_deeply($diag, { label => 'Top', raw => 'call(Leaf)' }, 'EmitContext rewrite helper preserves list-context return payload');
     is($@, "__SAVED_ERR__\n", 'EmitContext rewrite helper preserves caller $@ on successful list-context delegation');
 };
@@ -3532,7 +3540,7 @@ subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' =
     is_deeply($emit_ctx->{GDATA}, [{ label => 'Top', idx => 0 }], 'RuleIR emit-context preserves ACODE gdata mapping');
     ok(ref($emit_ctx->{action_rewriter_meta}) eq 'HASH', 'RuleIR emit-context exposes action-rewriter metadata');
     ok(($emit_ctx->{action_rewriter_meta}{rewrite_contract_ids} && @{$emit_ctx->{action_rewriter_meta}{rewrite_contract_ids}} > 0),
-        'RuleIR emit-context still builds rewrite contracts through extracted action-rewriter module');
+        'RuleIR emit-context still builds rewrite contracts through extracted rewrite-pipeline ownership');
 };
 subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
     plan tests => 15;

@@ -14,14 +14,23 @@ use constant {
  DUMP_LOW => 100,
 };
 
-sub _require_action_rewriter_pkg {
- require LinkedSpec::ActionRewriter;
- return 1
+sub _require_pkg {
+ my ($pkg) = @_;
+ (my $path = "$pkg.pm") =~ s{::}{/}g;
+ require $path;
+ return $pkg
+}
+
+sub _require_rewrite_pipeline_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::RewritePipeline')
+}
+
+sub _require_diagnostics_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::Diagnostics')
 }
 
 sub _require_trace_pkg {
- require LinkedSpec::Trace;
- return 1
+ return _require_pkg('LinkedSpec::Trace')
 }
 
 sub _call_preserving_err {
@@ -67,34 +76,40 @@ sub _build_rewrite_diag_acc {
 }
 
 sub _trim_action_ir_value {
- my @args = @_;
+ my ($value) = @_;
+ return undef unless defined $value;
+ $value =~ s/^\s*|\s*$//go;
+ return $value
+}
+
+sub _rewrite_pipeline_deps {
  return _call_preserving_err(sub {
-  _require_action_rewriter_pkg();
-  return LinkedSpec::ActionRewriter::_trim_action_ir_value(@args)
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package('LinkedSpec::ActionRewriter')
  })
 }
 
 sub _rewrite_action_code_with_diagnostics {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_action_rewriter_pkg();
-  return LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics(@args)
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(@args, _rewrite_pipeline_deps())
  })
 }
 
 sub _accumulate_action_rewrite_diagnostics {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_action_rewriter_pkg();
-  return LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics(@args)
+  _require_diagnostics_pkg();
+  return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
  })
 }
 
 sub _build_action_rewrite_rules {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_action_rewriter_pkg();
-  return LinkedSpec::ActionRewriter::_build_action_rewrite_rules(@args)
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@args, _rewrite_pipeline_deps())
  })
 }
 

@@ -37,6 +37,20 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- Key technical outcome:
+  - `LinkedSpec::RuleIR::EmitContext` now calls `LinkedSpec::ActionIR::RewritePipeline` directly for rewrite-rule construction and rewrite execution,
+  - `LinkedSpec::RuleIR::EmitContext` now calls `LinkedSpec::ActionIR::Diagnostics` directly for rewrite-diagnostic accumulation,
+  - localized `_trim_action_ir_value(...)` inside `EmitContext`,
+  - removed the direct dependency on thin `LinkedSpec::ActionRewriter` wrapper methods from the emit-context rewrite/diagnostic path while preserving the indirect lazy `ActionRewriter` load behind rewrite-pipeline callback-map resolution.
+- Regression outcome:
+  - strengthened `emit_context_require_avoids_action_rewriter_load_until_emit_context_build`,
+  - updated `extracted_wrapper_helpers_preserve_eval_error_state` so the rewrite helper is locked to `RewritePipeline`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (231 tests)
+## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A load-time coupling slice inside `LinkedSpec::*`.
 - Key technical outcome:
   - added local `_require_pkg(...)` helpers to `ControlFlow`, `Diagnostics`, `RewritePipeline`, `Contracts`, `ValueExpr`, `ArrayPipeline`, `FlowExpr`, and `MethodLowering`,
