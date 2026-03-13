@@ -37,6 +37,22 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::PluginBridge`.
+- Key technical outcome:
+  - added `LinkedSpec::PluginBridge::_call_preserving_err(...)`,
+  - routed `_load_legacy_plugin_runtime(...)`, `_exec_legacy_plugin(...)`, and
+    `_dispatch_plugin_name(...)` through that helper,
+  - successful `PluginBridge` legacy runtime load/exec delegation now preserves caller `$@`.
+- Regression outcome:
+  - added `plugin_bridge_owner_wrappers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (227 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Phase 1A: preserve PluginBridge caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::Trace`.
 - Key technical outcome:
   - added `LinkedSpec::Trace::_call_preserving_err(...)`,

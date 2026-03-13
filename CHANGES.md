@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `PluginBridge` Legacy Runtime Delegation
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::PluginBridge` preserve caller `$@` across successful legacy runtime load and exec delegation.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/PluginBridge.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored `PluginBridge` owner delegation behavior:
+  - added `LinkedSpec::PluginBridge::_call_preserving_err(...)`,
+  - routed `_load_legacy_plugin_runtime(...)`, `_exec_legacy_plugin(...)`, and `_dispatch_plugin_name(...)` through that helper,
+  - preserved normalized plugin-name dispatch payloads while restoring caller `$@`
+    after successful legacy-runtime load/exec delegation.
+- Preserved behavior:
+  - `PluginBridge` still lazy-loads `PPlugin` for the legacy runtime path,
+  - explicit-name and autoload dispatch still preserve the same normalized
+    plugin-name payloads,
+  - exception behavior is unchanged when runtime load or exec dies.
+- Updated focused regression coverage:
+  - added `plugin_bridge_owner_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=227`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` During `Trace` Ref Stringification
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::Trace::_trace_stringify(...)` preserve caller `$@` across successful reference formatting through `Data::Dumper`.

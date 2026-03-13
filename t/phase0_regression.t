@@ -1275,6 +1275,75 @@ subtest 'trace_stringify_preserves_eval_error_state' => sub {
     is(LinkedSpec::Trace::_trace_stringify({ foo => 1 }), 'dump_value_ok', 'Trace stringify still delegates referenced values through Data::Dumper');
     is($@, "__SAVED_ERR__\n", 'Trace stringify preserves caller $@ on successful dump formatting');
 };
+subtest 'plugin_bridge_owner_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 8;
+
+    no warnings 'redefine';
+    require LinkedSpec::PluginBridge;
+
+    local $INC{'PPlugin.pm'} = __FILE__;
+    local *PPlugin::exec_plugin_name = sub {
+        my ($class, $plugin_name, @args) = @_;
+        return {
+            plugin_name => $plugin_name,
+            args => [@args],
+        };
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    ok(LinkedSpec::PluginBridge::_load_legacy_plugin_runtime(), 'PluginBridge legacy runtime loader still succeeds');
+    is($@, "__SAVED_ERR__\n", 'PluginBridge legacy runtime loader preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(
+        LinkedSpec::PluginBridge::_exec_legacy_plugin('synthetic_plugin', 'alpha', 'beta'),
+        { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] },
+        'PluginBridge legacy exec wrapper still delegates through PPlugin explicit-name owner',
+    );
+    is($@, "__SAVED_ERR__\n", 'PluginBridge legacy exec wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(
+        LinkedSpec::PluginBridge::_dispatch_plugin_name(
+            'synthetic_plugin',
+            ['alpha', 'beta'],
+            {
+                load_plugin_runtime => sub { return 1 },
+                exec_plugin => sub {
+                    my ($plugin_name, @args) = @_;
+                    return {
+                        plugin_name => $plugin_name,
+                        args => [@args],
+                    };
+                },
+            },
+        ),
+        { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] },
+        'PluginBridge explicit-name dispatch still preserves returned payload through injected runtime deps',
+    );
+    is($@, "__SAVED_ERR__\n", 'PluginBridge explicit-name dispatch preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(
+        LinkedSpec::PluginBridge::_dispatch_autoload(
+            'LinkedSpec::synthetic_plugin',
+            ['alpha', 'beta'],
+            {
+                load_plugin_runtime => sub { return 1 },
+                exec_plugin => sub {
+                    my ($plugin_name, @args) = @_;
+                    return {
+                        plugin_name => $plugin_name,
+                        args => [@args],
+                    };
+                },
+            },
+        ),
+        { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] },
+        'PluginBridge autoload dispatch still preserves returned payload through injected runtime deps',
+    );
+    is($@, "__SAVED_ERR__\n", 'PluginBridge autoload dispatch preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

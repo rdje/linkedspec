@@ -16,14 +16,38 @@ sub _require_dep {
  return $cb
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _load_legacy_plugin_runtime {
- my $ok = eval { require PPlugin; 1 };
- die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
- return 1
+ return _call_preserving_err(sub {
+  my $ok = eval { require PPlugin; 1 };
+  die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
+  return 1
+ })
 }
 
 sub _exec_legacy_plugin {
- return PPlugin->exec_plugin_name(@_)
+ my @args = @_;
+ return _call_preserving_err(sub {
+  return PPlugin->exec_plugin_name(@args)
+ })
 }
 
 sub _default_deps {
@@ -59,8 +83,10 @@ sub _dispatch_plugin_name {
  my $exec_plugin = _require_dep($deps, 'exec_plugin');
  $plugin_name = _require_plugin_name($plugin_name);
 
- $load_plugin_runtime->();
- return $exec_plugin->($plugin_name, @$args)
+ return _call_preserving_err(sub {
+  $load_plugin_runtime->();
+  return $exec_plugin->($plugin_name, @$args)
+ })
 }
 
 sub _dispatch_autoload {
