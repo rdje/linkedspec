@@ -39,6 +39,26 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - Key technical outcome:
+  - `LinkedSpec::RuleIR::EmitContext` now exposes owner entrypoints for `_canonicalize_helper_action_ir_event(...)` and `_lower_action_code_from_canonical_ir(...)`,
+  - `LinkedSpec::ActionRewriter::_canonicalize_helper_action_ir_event(...)`,
+    `_split_action_ir_statements(...)`,
+    `_lower_action_code_from_canonical_ir(...)`,
+    `_accumulate_action_rewrite_diagnostics(...)`, and
+    `_build_action_rewrite_rules(...)`
+    now delegate to `EmitContext`,
+  - the duplicate canonical/split/rewrite-pipeline/diagnostics dep-builder scaffolding has been removed from `ActionRewriter`.
+- Regression outcome:
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock those remaining generic helper wrappers to the `EmitContext` owner path,
+  - revalidated the full phase-0 suite and local CI gate after the handoff.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (`Files=1, Tests=232`)
+  - `bash tools/run_ci_local.sh` => PASS (`Files=1, Tests=232`)
+
+## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- Key technical outcome:
   - `LinkedSpec::ActionRewriter::_build_action_lowering_contracts(...)`,
     `_scan_contract_ir_events(...)`,
     `_find_unresolved_action_helpers(...)`,

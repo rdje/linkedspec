@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 21;
+    plan tests => 31;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1060,9 +1060,29 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
         my ($label, $code, $helper_events) = @_;
         return { label => $label, code => $code, helper_events => $helper_events, owner => 'emit_context_canonical' };
     };
+    local *LinkedSpec::RuleIR::EmitContext::_canonicalize_helper_action_ir_event = sub {
+        my ($label, $event, $diag_acc) = @_;
+        return { label => $label, event => $event, diag_acc => $diag_acc, owner => 'emit_context_canonicalize' };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements = sub {
+        my ($code) = @_;
+        return ['split_ok', $code, 'emit_context_split'];
+    };
     local *LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics = sub {
         my ($label, $code, $rewrite_rules) = @_;
         return ('rewritten_ok', { label => $label, raw => $code, rewrite_rules => $rewrite_rules, owner => 'emit_context_rewrite' });
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_action_code_from_canonical_ir = sub {
+        my ($label, $events, $diag_acc, $rewrite_rules) = @_;
+        return { label => $label, events => $events, diag_acc => $diag_acc, rewrite_rules => $rewrite_rules, owner => 'emit_context_lower' };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_accumulate_action_rewrite_diagnostics = sub {
+        my ($acc, $diag) = @_;
+        return { acc => $acc, diag => $diag, owner => 'emit_context_accumulate' };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_build_action_rewrite_rules = sub {
+        my ($label) = @_;
+        return [{ id => 'call', label => $label, owner => 'emit_context_rules' }];
     };
     local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub {
         return 'rewritten_ok';
@@ -1101,10 +1121,30 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'ActionRewriter canonical builder preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_canonicalize_helper_action_ir_event('Top', { raw => 'call(Leaf)' }, { seen => 1 }), { label => 'Top', event => { raw => 'call(Leaf)' }, diag_acc => { seen => 1 }, owner => 'emit_context_canonicalize' }, 'ActionRewriter canonicalize helper wrapper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter canonicalize helper wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_split_action_ir_statements('return foo; exit'), ['split_ok', 'return foo; exit', 'emit_context_split'], 'ActionRewriter statement-split wrapper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter statement-split wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
     my ($rewritten, $diag) = LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', [{ id => 'call' }]);
     is($rewritten, 'rewritten_ok', 'ActionRewriter rewrite helper now delegates through the EmitContext compatibility owner');
     is_deeply($diag, { label => 'Top', raw => 'call(Leaf)', rewrite_rules => [{ id => 'call' }], owner => 'emit_context_rewrite' }, 'ActionRewriter rewrite helper preserves list-context return payload through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite helper preserves caller $@ on successful list-context delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_lower_action_code_from_canonical_ir('Top', [{ ir_node => 'RETURN_A' }], { seen => 1 }, [{ id => 'call' }]), { label => 'Top', events => [{ ir_node => 'RETURN_A' }], diag_acc => { seen => 1 }, rewrite_rules => [{ id => 'call' }], owner => 'emit_context_lower' }, 'ActionRewriter canonical lowering wrapper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter canonical lowering wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_accumulate_action_rewrite_diagnostics({ seen => 1 }, { unresolved_helper_count => 1 }), { acc => { seen => 1 }, diag => { unresolved_helper_count => 1 }, owner => 'emit_context_accumulate' }, 'ActionRewriter rewrite-diagnostic accumulator now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite-diagnostic accumulator preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_build_action_rewrite_rules('Top'), [{ id => 'call', label => 'Top', owner => 'emit_context_rules' }], 'ActionRewriter rewrite-rule builder now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter rewrite-rule builder preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'), 'rewritten_ok', 'ActionRewriter compatibility helper still returns rewritten code through the EmitContext compatibility owner');

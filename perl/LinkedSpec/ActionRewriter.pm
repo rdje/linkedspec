@@ -18,22 +18,6 @@ sub _require_method_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
 }
 
-sub _require_canonical_events_pkg {
- return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents')
-}
-
-sub _require_diagnostics_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Diagnostics')
-}
-
-sub _require_statement_split_pkg {
- return _require_pkg('LinkedSpec::ActionIR::StatementSplit')
-}
-
-sub _require_rewrite_pipeline_pkg {
- return _require_pkg('LinkedSpec::ActionIR::RewritePipeline')
-}
-
 sub _require_flow_expr_pkg {
  return _require_pkg('LinkedSpec::ActionIR::FlowExpr')
 }
@@ -121,30 +105,6 @@ sub _value_expr_deps {
  return _call_preserving_err(sub {
   _require_value_expr_pkg();
   return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _statement_split_deps {
- return _call_preserving_err(sub {
-  _require_statement_split_pkg();
-  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _canonical_event_deps {
- return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _diagnostics_deps {
- return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _rewrite_pipeline_deps {
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
  })
 }
 sub _parse_method_function_expr {
@@ -534,16 +494,16 @@ sub _collect_action_helper_ir_nodes {
 sub _canonicalize_helper_action_ir_event {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@args, _canonical_event_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_canonicalize_helper_action_ir_event(@args)
  })
 }
 
 sub _split_action_ir_statements {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_statement_split_pkg();
-  return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@args, _statement_split_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements(@args)
  })
 }
 sub _build_canonical_action_ir_events {
@@ -557,16 +517,16 @@ sub _build_canonical_action_ir_events {
 sub _lower_action_code_from_canonical_ir {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_action_code_from_canonical_ir(@args)
  })
 }
 
 sub _accumulate_action_rewrite_diagnostics {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_accumulate_action_rewrite_diagnostics(@args)
  })
 }
 
@@ -585,8 +545,8 @@ sub _rewrite_action_code_with_diagnostics {
 sub _build_action_rewrite_rules {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@args, _rewrite_pipeline_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_build_action_rewrite_rules(@args)
  })
 }
 

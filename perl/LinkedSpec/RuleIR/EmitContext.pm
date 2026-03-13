@@ -551,6 +551,14 @@ sub _build_canonical_action_ir_events {
  })
 }
 
+sub _canonicalize_helper_action_ir_event {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_canonical_events_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@args, _canonical_event_deps())
+ })
+}
+
 sub _rewrite_pipeline_deps {
  return _call_preserving_err(sub {
   _require_rewrite_pipeline_pkg();
@@ -571,6 +579,14 @@ sub _accumulate_action_rewrite_diagnostics {
  return _call_preserving_err(sub {
   _require_diagnostics_pkg();
   return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
+ })
+}
+
+sub _lower_action_code_from_canonical_ir {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@args)
  })
 }
 

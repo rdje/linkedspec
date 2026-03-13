@@ -1,5 +1,47 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route Remaining Generic Rewrite Helpers Through `EmitContext`
+## Summary
+Completed another compatibility-surface cleanup in `LinkedSpec::*` by moving the remaining generic split/canonical/rewrite helper wrappers in `LinkedSpec::ActionRewriter` onto the extracted `LinkedSpec::RuleIR::EmitContext` owner.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - added `LinkedSpec::RuleIR::EmitContext` owner entrypoints for `_canonicalize_helper_action_ir_event(...)` and `_lower_action_code_from_canonical_ir(...)`,
+  - changed `LinkedSpec::ActionRewriter::_canonicalize_helper_action_ir_event(...)`,
+    `_split_action_ir_statements(...)`,
+    `_lower_action_code_from_canonical_ir(...)`,
+    `_accumulate_action_rewrite_diagnostics(...)`, and
+    `_build_action_rewrite_rules(...)`
+    to delegate to `EmitContext`,
+  - removed the now-dead direct canonical-events / statement-split / diagnostics / rewrite-pipeline dep-builder scaffolding from `ActionRewriter`.
+- Preserved behavior:
+  - direct legacy callers still receive the same split/canonical/rewrite outputs,
+  - normal compile-time helper rewriting remains on `EmitContext` plus extracted `ActionIR::*` owners,
+  - `ActionRewriter` keeps only the lower-level direct lowering helpers and compatibility wrapper surface that still need to stay there.
+- Updated focused regression coverage:
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining generic split/canonical/rewrite helpers are explicitly locked to the `EmitContext` owner path,
+  - revalidated the full phase-0 suite and local CI gate against the new owner layout.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route `ActionRewriter` Generic Rewrite Wrappers Through `EmitContext`
 ## Summary
 Reduced another compatibility-only `ActionRewriter` surface by moving its remaining generic rewrite-orchestration wrappers onto the extracted `LinkedSpec::RuleIR::EmitContext` owner that already backs the live compile-path rewrite flow.
