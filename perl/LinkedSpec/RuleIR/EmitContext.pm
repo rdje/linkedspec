@@ -174,14 +174,10 @@ sub _split_action_ir_statements {
 }
 
 sub _flow_expr_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  extract_array_symbol_name => sub { return _extract_array_symbol_name(@_) },
-  extract_scalar_symbol_name => sub { return _extract_scalar_symbol_name(@_) },
-  lower_method_value_expr => sub { return _lower_method_value_expr(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  normalize_method_args_with_optional_scope => sub { return _normalize_method_args_with_optional_scope(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_flow_expr_pkg();
+  return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _value_expr_deps {

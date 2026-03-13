@@ -1606,6 +1606,39 @@ subtest 'emit_context_statement_split_deps_route_through_owner_default_map' => s
     ok(LinkedSpec::RuleIR::EmitContext->can('_statement_split_deps'), 'EmitContext still exposes the local statement-split dep entrypoint');
 };
 
+subtest 'emit_context_flow_expr_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::FlowExpr;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::FlowExpr::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return 'trim_ok' },
+            extract_array_symbol_name => sub { return 'items' },
+            extract_scalar_symbol_name => sub { return 'flag' },
+            lower_method_value_expr => sub { return "method_for_$pkg" },
+            parse_method_function_expr => sub { return { method => 'is_empty', args => ['array(items)'] } },
+            normalize_method_args_with_optional_scope => sub { return ['array(items)'] },
+        };
+    };
+    local *LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr = sub {
+        my ($expr, $deps) = @_;
+        return $deps->{lower_method_value_expr}->($expr);
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('scalar(flag)');
+    is($ret, 'method_for_LinkedSpec::RuleIR::EmitContext', 'EmitContext flow-expression helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the flow-expression owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext flow-expression helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_flow_expr_deps'), 'EmitContext still exposes the local flow-expression dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 
