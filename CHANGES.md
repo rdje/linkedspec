@@ -1,5 +1,62 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Preserve Caller `$@` Across ActionIR Dep-Builder Callback Lookup
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by making the remaining extracted `ActionIR` dep-builder owners preserve caller `$@` across successful callback-map lookup and construction.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/Diagnostics.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- Updated: `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored extracted ActionIR dep-builder owner behavior:
+  - added `::_call_preserving_err(...)` to the remaining dep-builder-only ActionIR owners that still lacked it,
+  - routed `_require_pkg_cb(...)` and `default_deps_for_package(...)` through that helper across `Diagnostics`, `Contracts`, `DeclareMethod`, `ControlFlow`, `ArrayPipeline`, `RewritePipeline`, `FlowExpr`, `MethodLowering`, and `ValueExpr`,
+  - routed the same dep-builder surfaces through the existing helper in `Scanner`, `StatementSplit`, and `CanonicalEvents`,
+  - preserved the same callback-map payloads while restoring caller `$@` after successful dep lookup/build paths.
+- Preserved behavior:
+  - ActionIR owner modules still resolve the same callback names into the same dep maps,
+  - no lowering, scanning, canonical-event, or diagnostics behavior changes,
+  - exception behavior is unchanged when required owner callbacks are missing.
+- Updated focused regression coverage:
+  - added `actionir_dep_builders_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=229`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `ParserFactory` Lazy Owner Lookup
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by making `LinkedSpec::ParserFactory` preserve caller `$@` across successful lazy owner lookup and public parser-factory orchestration.

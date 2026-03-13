@@ -37,6 +37,33 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Uncommitted Backbone Item 3 / Phase 1A API-stability slice completed against the remaining extracted `ActionIR` dep-builder owners.
+- Key technical outcome:
+  - added `::_call_preserving_err(...)` to `Diagnostics`, `Contracts`, `DeclareMethod`, `ControlFlow`, `ArrayPipeline`, `RewritePipeline`, `FlowExpr`, `MethodLowering`, and `ValueExpr`,
+  - routed `_require_pkg_cb(...)` and `default_deps_for_package(...)` through that helper across those modules,
+  - routed the same dep-builder surfaces through the existing helper in `Scanner`, `StatementSplit`, and `CanonicalEvents`,
+  - successful ActionIR callback-map lookup/build paths now preserve caller `$@`.
+- Regression outcome:
+  - added `actionir_dep_builders_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (229 tests)
+- Commit workflow prep:
+  - `git_message_brief.txt` should contain `Backbone Item 3: preserve ActionIR dep-builder caller error state` until commit workflow runs, then reset to zero-byte untracked.
+
+## Current Session Snapshot (2026-03-13)
 - Uncommitted Phase 1A helper API-stability slice completed against `LinkedSpec::ParserFactory`.
 - Key technical outcome:
   - added `LinkedSpec::ParserFactory::_call_preserving_err(...)`,

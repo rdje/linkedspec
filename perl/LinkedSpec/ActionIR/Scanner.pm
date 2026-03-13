@@ -45,24 +45,28 @@ sub _call_preserving_err {
 
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- no strict 'refs';
- my $cb = *{"${pkg}::${name}"}{CODE};
- die "(LinkedSpec::ActionIR::Scanner::_require_pkg_cb) -E- missing callback ${pkg}::${name}"
-  unless ref($cb) eq 'CODE';
- return $cb
+ return _call_preserving_err(sub {
+  no strict 'refs';
+  my $cb = *{"${pkg}::${name}"}{CODE};
+  die "(LinkedSpec::ActionIR::Scanner::_require_pkg_cb) -E- missing callback ${pkg}::${name}"
+   unless ref($cb) eq 'CODE';
+  return $cb
+ })
 }
 
 sub default_deps_for_package {
  my ($pkg) = @_;
- return {
-  split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
-  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-  parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
-  normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
-  build_array_pipeline_plan_from_expr => _require_pkg_cb($pkg, '_build_array_pipeline_plan_from_expr'),
-  extract_declare_statement_from_method_expr => _require_pkg_cb($pkg, '_extract_declare_statement_from_method_expr'),
-  parse_declare_binding_entry => _require_pkg_cb($pkg, '_parse_declare_binding_entry'),
- }
+ return _call_preserving_err(sub {
+  return {
+   split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
+   trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+   parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
+   normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
+   build_array_pipeline_plan_from_expr => _require_pkg_cb($pkg, '_build_array_pipeline_plan_from_expr'),
+   extract_declare_statement_from_method_expr => _require_pkg_cb($pkg, '_extract_declare_statement_from_method_expr'),
+   parse_declare_binding_entry => _require_pkg_cb($pkg, '_parse_declare_binding_entry'),
+  }
+ })
 }
 
 #------------------------------------------------------------------------------

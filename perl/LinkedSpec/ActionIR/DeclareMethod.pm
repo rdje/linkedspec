@@ -17,27 +17,50 @@ sub _require_dep {
  return $cb
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- my $code = $pkg->can($name);
- die "(LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-  unless ref($code) eq 'CODE';
- return $code
+ return _call_preserving_err(sub {
+  my $code = $pkg->can($name);
+  die "(LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
+   unless ref($code) eq 'CODE';
+  return $code
+ })
 }
 
 sub default_deps_for_package {
  my ($pkg) = @_;
- return {
-  trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-  parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
-  is_bare_method_scope_token => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_is_bare_method_scope_token'),
-  normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
-  lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
-  lower_method_value_expr => _require_pkg_cb($pkg, '_lower_method_value_expr'),
-  declare_alias_to_type => _require_pkg_cb($pkg, '_declare_alias_to_type'),
-  lower_typed_declare_statement => _require_pkg_cb($pkg, '_lower_typed_declare_statement'),
-  lower_assign_statement => _require_pkg_cb($pkg, '_lower_assign_statement'),
- }
+ return _call_preserving_err(sub {
+  return {
+   trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+   parse_method_function_expr => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_parse_method_function_expr'),
+   is_bare_method_scope_token => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_is_bare_method_scope_token'),
+   normalize_method_args_with_optional_scope => _require_pkg_cb('LinkedSpec::ActionIR::MethodExpr', '_normalize_method_args_with_optional_scope'),
+   lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
+   lower_method_value_expr => _require_pkg_cb($pkg, '_lower_method_value_expr'),
+   declare_alias_to_type => _require_pkg_cb($pkg, '_declare_alias_to_type'),
+   lower_typed_declare_statement => _require_pkg_cb($pkg, '_lower_typed_declare_statement'),
+   lower_assign_statement => _require_pkg_cb($pkg, '_lower_assign_statement'),
+  }
+ })
 }
 
 sub _split_declare_symbol_names {

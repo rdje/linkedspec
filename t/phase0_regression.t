@@ -1388,6 +1388,101 @@ subtest 'parser_factory_wrappers_preserve_eval_error_state' => sub {
     ok(ref($ret) eq 'CODE', 'ParserFactory run_get_parser still returns the compiled parser payload');
     is($@, "__SAVED_ERR__\n", 'ParserFactory run_get_parser preserves caller $@ on successful orchestration');
 };
+subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
+    plan tests => 24;
+
+    no warnings 'redefine';
+    require LinkedSpec::ActionIR::Diagnostics;
+    require LinkedSpec::ActionIR::Contracts;
+    require LinkedSpec::ActionIR::DeclareMethod;
+    require LinkedSpec::ActionIR::ControlFlow;
+    require LinkedSpec::ActionIR::ArrayPipeline;
+    require LinkedSpec::ActionIR::RewritePipeline;
+    require LinkedSpec::ActionIR::FlowExpr;
+    require LinkedSpec::ActionIR::MethodLowering;
+    require LinkedSpec::ActionIR::ValueExpr;
+    require LinkedSpec::ActionIR::Scanner;
+    require LinkedSpec::ActionIR::StatementSplit;
+    require LinkedSpec::ActionIR::CanonicalEvents;
+
+    local *Synthetic::ActionIROwner::_split_action_ir_statements = sub { return ['split_ok'] };
+    local *Synthetic::ActionIROwner::_scan_contract_ir_events = sub { return [{ kind => 'CALL' }] };
+    local *Synthetic::ActionIROwner::_lower_return_general_statement = sub { return 'return_general_ok' };
+    local *Synthetic::ActionIROwner::_lower_return_imatch_statement = sub { return 'return_imatch_ok' };
+    local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
+    local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
+    local *Synthetic::ActionIROwner::_lower_regex_subst_statement = sub { return 'regex_subst_ok' };
+    local *Synthetic::ActionIROwner::_lower_array_pipeline_expr = sub { return 'array_pipeline_ok' };
+    local *Synthetic::ActionIROwner::_lower_if_flow_statement = sub { return 'if_ok' };
+    local *Synthetic::ActionIROwner::_lower_elseif_flow_statement = sub { return 'elseif_ok' };
+    local *Synthetic::ActionIROwner::_lower_else_flow_statement = sub { return 'else_ok' };
+    local *Synthetic::ActionIROwner::_lower_endif_flow_statement = sub { return 'endif_ok' };
+    local *Synthetic::ActionIROwner::_lower_switch_flow_statement = sub { return 'switch_ok' };
+    local *Synthetic::ActionIROwner::_lower_case_flow_statement = sub { return 'case_ok' };
+    local *Synthetic::ActionIROwner::_lower_default_flow_statement = sub { return 'default_ok' };
+    local *Synthetic::ActionIROwner::_lower_endcase_flow_statement = sub { return 'endcase_ok' };
+    local *Synthetic::ActionIROwner::_lower_endswitch_flow_statement = sub { return 'endswitch_ok' };
+    local *Synthetic::ActionIROwner::_lower_say_statement = sub { return 'say_ok' };
+    local *Synthetic::ActionIROwner::_lower_print_statement = sub { return 'print_ok' };
+    local *Synthetic::ActionIROwner::_lower_return_undef_statement = sub { return 'return_undef_ok' };
+    local *Synthetic::ActionIROwner::_lower_return_array_statement = sub { return 'return_array_ok' };
+    local *Synthetic::ActionIROwner::_lower_declare_method_statement = sub { return 'declare_method_ok' };
+    local *Synthetic::ActionIROwner::_trim_action_ir_value = sub { return 'trim_ok' };
+    local *Synthetic::ActionIROwner::_lower_flow_composite_expr = sub { return 'flow_expr_ok' };
+    local *Synthetic::ActionIROwner::_lower_method_value_expr = sub { return 'method_value_ok' };
+    local *Synthetic::ActionIROwner::_declare_alias_to_type = sub { return 'array' };
+    local *Synthetic::ActionIROwner::_lower_typed_declare_statement = sub { return 'typed_declare_ok' };
+    local *Synthetic::ActionIROwner::_lower_assign_statement = sub { return 'assign_ok' };
+    local *Synthetic::ActionIROwner::_normalize_method_tag_expr = sub { return 'tag_ok' };
+    local *Synthetic::ActionIROwner::_parse_method_function_expr = sub { return { method => 'call', args => [] } };
+    local *Synthetic::ActionIROwner::_normalize_method_args_with_optional_scope = sub { return ['arg_ok'] };
+    local *Synthetic::ActionIROwner::_strip_literal_delimiters = sub { return ',' };
+    local *Synthetic::ActionIROwner::_extract_array_symbol_name = sub { return 'items' };
+    local *Synthetic::ActionIROwner::_is_bare_method_scope_token = sub { return 0 };
+    local *Synthetic::ActionIROwner::_extract_scalar_symbol_name = sub { return 'retv' };
+    local *Synthetic::ActionIROwner::_build_action_lowering_contracts = sub { return [{ id => 'return_general' }] };
+    local *Synthetic::ActionIROwner::_collect_action_helper_ir_nodes = sub { return { helper_action_ir_count => 1 } };
+    local *Synthetic::ActionIROwner::_build_canonical_action_ir_events = sub { return { canonical_action_ir_count => 1 } };
+    local *Synthetic::ActionIROwner::_find_unresolved_action_helpers = sub { return { unresolved_helper_count => 0 } };
+    local *Synthetic::ActionIROwner::_split_declare_symbol_names = sub { return ['item'] };
+    local *Synthetic::ActionIROwner::_parse_declare_binding_entry = sub { return { name => 'item' } };
+    local *Synthetic::ActionIROwner::_lower_declare_initializer_expr = sub { return '$foo' };
+    local *Synthetic::ActionIROwner::_lower_scalaref_value_expr = sub { return '$$foo' };
+    local *Synthetic::ActionIROwner::_extract_hash_symbol_name = sub { return 'lookup' };
+    local *Synthetic::ActionIROwner::_lower_scalar_access_key_expr = sub { return '$foo->{bar}' };
+    local *Synthetic::ActionIROwner::_infer_scalar_container_kind = sub { return 'scalar' };
+    local *Synthetic::ActionIROwner::_split_top_level_csv = sub { return ['a', 'b'] };
+    local *Synthetic::ActionIROwner::_lower_assignment_source_expr = sub { return '$rhs' };
+    local *Synthetic::ActionIROwner::_build_array_pipeline_plan_from_expr = sub { return { target_symbol => 'items', ops => [] } };
+    local *Synthetic::ActionIROwner::_extract_declare_statement_from_method_expr = sub { return { type => 'array', symbols => ['items'] } };
+
+    local *LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr = sub { return { method => 'call', args => [] } };
+    local *LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token = sub { return 0 };
+    local *LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope = sub { return ['arg_ok'] };
+
+    my @checks = (
+        ['Diagnostics', sub { my $deps = LinkedSpec::ActionIR::Diagnostics::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{split_action_ir_statements}->()->[0] }],
+        ['Contracts', sub { my $deps = LinkedSpec::ActionIR::Contracts::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{lower_return_general_statement}->() }],
+        ['DeclareMethod', sub { my $deps = LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{parse_method_function_expr}->()->{method} }],
+        ['ControlFlow', sub { my $deps = LinkedSpec::ActionIR::ControlFlow::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{normalize_method_tag_expr}->() }],
+        ['ArrayPipeline', sub { my $deps = LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{extract_array_symbol_name}->() }],
+        ['RewritePipeline', sub { my $deps = LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{build_action_lowering_contracts}->()->[0]{id} }],
+        ['FlowExpr', sub { my $deps = LinkedSpec::ActionIR::FlowExpr::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{lower_method_value_expr}->() }],
+        ['MethodLowering', sub { my $deps = LinkedSpec::ActionIR::MethodLowering::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{lower_assignment_source_expr}->() }],
+        ['ValueExpr', sub { my $deps = LinkedSpec::ActionIR::ValueExpr::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{lower_flow_composite_expr}->() }],
+        ['Scanner', sub { my $deps = LinkedSpec::ActionIR::Scanner::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{parse_method_function_expr}->()->{method} }],
+        ['StatementSplit', sub { my $deps = LinkedSpec::ActionIR::StatementSplit::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{trim_action_ir_value}->() }],
+        ['CanonicalEvents', sub { my $deps = LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package('Synthetic::ActionIROwner'); return $deps->{split_action_ir_statements}->()->[0] }],
+    );
+
+    foreach my $check (@checks) {
+        my ($label, $cb) = @$check;
+        $@ = "__SAVED_ERR__\n";
+        my $ret = $cb->();
+        ok(defined $ret, "$label dep builder still returns callable dependency payloads");
+        is($@, "__SAVED_ERR__\n", "$label dep builder preserves caller \$@ on successful callback lookup");
+    }
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 
