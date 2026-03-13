@@ -4,6 +4,27 @@ Compact, actionable session memory for interruption-safe continuation.
 ## Mission Context
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
+## Current Session Snapshot (2026-03-13)
+- Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the remaining broad MethodLowering compatibility wrappers:
+  - `_lower_return_general_statement(...)`,
+  - `_lower_return_imatch_statement(...)`,
+  - `_lower_push_value_statement(...)`,
+  - `_lower_regex_subst_statement(...)`,
+  - `_lower_return_undef_statement(...)`,
+  - `_lower_return_array_statement(...)`;
+  those now delegate to `LinkedSpec::RuleIR::EmitContext`.
+- `LinkedSpec::RuleIR::EmitContext` now exposes the matching owner entrypoints too, so `ActionRewriter` no longer needs a direct `MethodLowering` package loader or local MethodLowering dep-map builder.
+- Focused regression locks updated:
+  - strengthened `action_rewriter_require_avoids_method_lowering_load_until_method_helper` to exercise the migrated broad MethodLowering helper path,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the remaining MethodLowering wrapper family to the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
 ## Current State Snapshot
 - Core module analyzed: `perl/LinkedSpec.pm`.
 - Dependencies analyzed: `perl/LinkedRE.pm`, `perl/PathSearch.pm`, `perl/PPlugin.pm`, and downstream consumers (`LibReader`, `RTLUtils`, `TableGrep`).

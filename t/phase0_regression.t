@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 65;
+    plan tests => 77;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1106,6 +1106,30 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_lower_assign_statement = sub {
         my ($lhs, $rhs) = @_;
         return "assign:$lhs:$rhs";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_return_general_statement = sub {
+        my ($expr) = @_;
+        return "return_general:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_return_imatch_statement = sub {
+        my ($tag) = @_;
+        return "return_imatch:$tag";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_push_value_statement = sub {
+        my ($expr) = @_;
+        return "push_value:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_regex_subst_statement = sub {
+        my ($target, $pattern, $replacement, $flags) = @_;
+        return "regex_subst:$target:$pattern:$replacement:$flags";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_return_undef_statement = sub {
+        my ($expr) = @_;
+        return "return_undef:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement = sub {
+        my ($tag, $payload) = @_;
+        return "return_array:$tag:$payload";
     };
     local *LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts = sub {
         my ($label) = @_;
@@ -1234,6 +1258,30 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_assign_statement('scalar(foo)', 'scalar(bar)'), 'assign:scalar(foo):scalar(bar)', 'ActionRewriter assign helper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter assign helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_return_general_statement('return(scalar(foo))'), 'return_general:return(scalar(foo))', 'ActionRewriter return-general helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-general helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_return_imatch_statement('"TAG"'), 'return_imatch:"TAG"', 'ActionRewriter return-imatch helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-imatch helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_push_value_statement('push_value(array(items), scalar(foo))'), 'push_value:push_value(array(items), scalar(foo))', 'ActionRewriter push-value helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter push-value helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_regex_subst_statement('scalar(foo)', '"/a/"', '"/b/"', 'g'), 'regex_subst:scalar(foo):"/a/":"/b/":g', 'ActionRewriter regex-subst helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter regex-subst helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_return_undef_statement('return_undef()'), 'return_undef:return_undef()', 'ActionRewriter return-undef helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-undef helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_return_array_statement('"TAG"', 'scalar(foo)'), 'return_array:"TAG":scalar(foo)', 'ActionRewriter return-array helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter return-array helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_build_action_lowering_contracts('Top'), [{ id => 'return_general', label => 'Top', owner => 'emit_context_contracts' }], 'ActionRewriter contract builder now delegates through the EmitContext compatibility owner');
@@ -4505,12 +4553,12 @@ subtest 'action_rewriter_require_avoids_method_lowering_load_until_method_helper
 require LinkedSpec::ActionRewriter;
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_EAGER__\n" : "__METHOD_LOWERING_STILL_LAZY__\n";
-my $alias = LinkedSpec::ActionRewriter::_declare_alias_to_type("array");
-my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_statement("scalar(foo)", "scalar(bar)");
-print defined($alias) && defined($assign_stmt) ? "__METHOD_LOWERING_RESULT_OK__\n" : "__METHOD_LOWERING_RESULT_BAD__\n";
+my $return_stmt = LinkedSpec::ActionRewriter::_lower_return_general_statement("return(scalar(foo))");
+my $undef_stmt = LinkedSpec::ActionRewriter::_lower_return_undef_statement("return_undef()");
+print defined($return_stmt) && defined($undef_stmt) ? "__METHOD_LOWERING_RESULT_OK__\n" : "__METHOD_LOWERING_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/MethodLowering.pm"}) ? "__METHOD_LOWERING_AFTER_HELPER__\n" : "__METHOD_LOWERING_STILL_UNLOADED__\n";
-if (defined($alias) && $alias eq "array" && defined($assign_stmt) && $assign_stmt eq "\$foo = \$bar") {
+if (defined($return_stmt) && $return_stmt eq "return \$foo" && defined($undef_stmt) && $undef_stmt eq "return undef") {
     print "__METHOD_LOWERING_PAYLOAD_OK__\n";
 } else {
     print "__METHOD_LOWERING_PAYLOAD_BAD__\n";
@@ -4522,8 +4570,8 @@ PERL
     like($out, qr/__METHOD_LOWERING_STILL_LAZY__/, 'require ActionRewriter keeps MethodLowering unloaded');
     like($out, qr/__METHOD_LOWERING_RESULT_OK__/, 'method-lowering helpers still return lowered output after lazy MethodLowering loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'method-lowering helpers lazy-load EmitContext on demand');
-    like($out, qr/__METHOD_LOWERING_AFTER_HELPER__/, 'method-lowering helpers lazy-load MethodLowering on demand');
-    like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve alias and assign lowering after lazy MethodLowering loading');
+    like($out, qr/__METHOD_LOWERING_AFTER_HELPER__/, 'method-lowering helpers lazy-load MethodLowering on demand through EmitContext');
+    like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve return-general and return-undef lowering after lazy MethodLowering loading');
     is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_declare_method_load_until_declare_helper' => sub {

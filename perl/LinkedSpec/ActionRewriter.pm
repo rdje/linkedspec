@@ -18,10 +18,6 @@ sub _require_control_flow_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
 }
 
-sub _require_method_lowering_pkg {
- return _require_pkg('LinkedSpec::ActionIR::MethodLowering')
-}
-
 sub _require_declare_method_pkg {
  return _require_pkg('LinkedSpec::ActionIR::DeclareMethod')
 }
@@ -59,12 +55,6 @@ sub _declare_method_deps {
  return _call_preserving_err(sub {
   _require_declare_method_pkg();
   return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _method_lowering_deps {
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
  })
 }
 sub _control_flow_deps {
@@ -268,16 +258,16 @@ sub _lower_method_value_expr {
 sub _lower_return_general_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_return_general_statement(@args)
  })
 }
 
 sub _lower_return_imatch_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_return_imatch_statement(@args)
  })
 }
 
@@ -292,32 +282,32 @@ sub _lower_assign_statement {
 sub _lower_push_value_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_push_value_statement(@args)
  })
 }
 
 sub _lower_regex_subst_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_regex_subst_statement(@args)
  })
 }
 
 sub _lower_return_undef_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_return_undef_statement(@args)
  })
 }
 
 sub _lower_return_array_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@args, _method_lowering_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_return_array_statement(@args)
  })
 }
 

@@ -1,5 +1,48 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route Remaining MethodLowering Compatibility Helpers Through `EmitContext`
+## Summary
+Finished the MethodLowering compatibility-owner handoff by moving the remaining broad MethodLowering wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_lower_return_general_statement(...)`,
+    `_lower_return_imatch_statement(...)`,
+    `_lower_push_value_statement(...)`,
+    `_lower_regex_subst_statement(...)`,
+    `_lower_return_undef_statement(...)`, and
+    `_lower_return_array_statement(...)`
+    to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - added the matching owner entrypoints in `LinkedSpec::RuleIR::EmitContext`,
+  - removed the final direct `MethodLowering` package loader and local MethodLowering dep-map builder from `LinkedSpec::ActionRewriter`.
+- Preserved behavior:
+  - direct legacy callers still get the same return/push/regex MethodLowering outputs,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `MethodLowering.pm` unloaded until the method-helper path is actually exercised,
+  - normal compile-time emit-context assembly remains on the same extracted owner path.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_method_lowering_load_until_method_helper` so it now exercises the migrated broad MethodLowering wrapper path through `EmitContext`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining MethodLowering helper family is explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route MethodLowering Compatibility Helpers Through `EmitContext`
 ## Summary
 Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving a focused MethodLowering helper subset onto `LinkedSpec::RuleIR::EmitContext`, which already owns that lowering support for the live compile path.

@@ -487,6 +487,54 @@ sub _lower_method_value_expr {
  })
 }
 
+sub _lower_return_general_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@args, _method_lowering_deps())
+ })
+}
+
+sub _lower_return_imatch_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@args, _method_lowering_deps())
+ })
+}
+
+sub _lower_push_value_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@args, _method_lowering_deps())
+ })
+}
+
+sub _lower_regex_subst_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@args, _method_lowering_deps())
+ })
+}
+
+sub _lower_return_undef_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@args, _method_lowering_deps())
+ })
+}
+
+sub _lower_return_array_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@args, _method_lowering_deps())
+ })
+}
+
 sub _extract_declare_statement_from_method_expr {
  my @args = @_;
  return _call_preserving_err(sub {
