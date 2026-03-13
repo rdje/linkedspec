@@ -39,6 +39,21 @@ These files are live and must be amended before any commit:
 ## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - Key technical outcome:
+  - `LinkedSpec::ActionRewriter::_lower_flow_composite_expr(...)`
+    now delegates to `LinkedSpec::RuleIR::EmitContext`,
+  - the direct `ActionRewriter` FlowExpr package loader and local FlowExpr dep-map builder have been removed,
+  - require-only consumers of `ActionRewriter.pm` now keep both `EmitContext.pm` and `FlowExpr.pm` unloaded until that helper path is actually invoked.
+- Regression outcome:
+  - strengthened `action_rewriter_require_avoids_flow_expr_load_until_flow_helper` to lock the `EmitContext` lazy-load seam too,
+  - updated `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the remaining flow helper to the `EmitContext` owner path.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm` => syntax OK
+  - `prove -v -Iperl t/phase0_regression.t` => PASS (`Files=1, Tests=232`)
+  - `bash tools/run_ci_local.sh` => PASS (`Files=1, Tests=232`)
+
+## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- Key technical outcome:
   - `LinkedSpec::ActionRewriter::_extract_scalar_symbol_name(...)`,
     `_extract_array_symbol_name(...)`,
     `_extract_hash_symbol_name(...)`,

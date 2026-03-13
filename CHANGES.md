@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route FlowExpr Compatibility Helper Through `EmitContext`
+## Summary
+Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving its remaining direct FlowExpr helper wrapper onto `LinkedSpec::RuleIR::EmitContext`, which already owns that flow-lowering support for the live compile path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_lower_flow_composite_expr(...)` to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - removed the now-dead direct `ActionRewriter` FlowExpr package loader and local FlowExpr dep-map builder,
+  - kept downstream helper behavior stable because `EmitContext` already owns the same FlowExpr helper logic for the active rewrite path.
+- Preserved behavior:
+  - direct legacy callers still get the same boolean/comparison flow lowering output,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `FlowExpr.pm` unloaded until the flow-helper path is actually exercised,
+  - extracted owner dep builders continue to lazy-load callback owners on demand.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_flow_expr_load_until_flow_helper` so it now locks the `EmitContext` lazy-load seam too,
+  - updated `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining ActionRewriter flow helper is explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route ValueExpr Compatibility Helpers Through `EmitContext`
 ## Summary
 Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving its remaining direct ValueExpr helper wrappers onto `LinkedSpec::RuleIR::EmitContext`, which already owns that value-lowering support for the live compile path.
