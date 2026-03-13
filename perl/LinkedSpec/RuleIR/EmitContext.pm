@@ -224,14 +224,10 @@ sub _declare_method_deps {
 }
 
 sub _array_pipeline_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  strip_literal_delimiters => sub { return _strip_literal_delimiters(@_) },
-  extract_array_symbol_name => sub { return _extract_array_symbol_name(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  is_bare_method_scope_token => sub { return _is_bare_method_scope_token(@_) },
-  extract_scalar_symbol_name => sub { return _extract_scalar_symbol_name(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_array_pipeline_pkg();
+  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _control_flow_deps {

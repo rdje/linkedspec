@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` ArrayPipeline Deps Through Owner Map
+## Summary
+Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built array-pipeline callback map and onto `LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)`, so the extracted array-pipeline owner now defines that dependency contract in one place.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored owner dependency resolution:
+  - changed `LinkedSpec::RuleIR::EmitContext::_array_pipeline_deps()` to delegate to `LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)`,
+  - stopped hand-building the local ArrayPipeline callback map in `EmitContext`.
+- Preserved behavior:
+  - `EmitContext` still lowers array-pipeline expressions through `LinkedSpec::ActionIR::ArrayPipeline`,
+  - caller `$@` is still preserved on successful array-pipeline helper delegation,
+  - require-only consumers still keep `ArrayPipeline.pm` unloaded until the array-pipeline helper path is actually exercised.
+- Updated focused regression coverage:
+  - added `emit_context_array_pipeline_deps_route_through_owner_default_map` to lock that `EmitContext` now asks `ArrayPipeline` for the callback map owned by `LinkedSpec::RuleIR::EmitContext`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=240`)
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` ValueExpr Deps Through Owner Map
 ## Summary
 Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built value-expression callback map and onto `LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)`, so the extracted value-expression owner now defines that dependency contract in one place.
