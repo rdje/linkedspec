@@ -1240,6 +1240,24 @@ subtest 'linkedspec_trace_wrappers_preserve_eval_error_state' => sub {
     ok(LinkedSpec::should_dump(100), 'LinkedSpec should_dump wrapper still delegates through Trace');
     is($@, "__SAVED_ERR__\n", 'LinkedSpec should_dump wrapper preserves caller $@ on successful delegation');
 };
+subtest 'bootstrap_spec_core_linkedre_wrappers_preserve_eval_error_state' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::BootstrapSpec::Core;
+
+    local *LinkedSpec::BootstrapSpec::Core::_require_linkedre_pkg = sub { return 1 };
+    local *LinkedRE::or = sub { return '(foo|bar)' };
+    local *LinkedRE::oredRE = sub { return '(?:foo|bar)' };
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::BootstrapSpec::Core::_linkedre_or(qr/foo/, qr/bar/), '(foo|bar)', 'BootstrapSpec::Core linkedre_or wrapper still delegates through LinkedRE');
+    is($@, "__SAVED_ERR__\n", 'BootstrapSpec::Core linkedre_or wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::BootstrapSpec::Core::_linkedre_ored_re(qr/foo/, qr/bar/), '(?:foo|bar)', 'BootstrapSpec::Core linkedre_ored_re wrapper still delegates through LinkedRE');
+    is($@, "__SAVED_ERR__\n", 'BootstrapSpec::Core linkedre_ored_re wrapper preserves caller $@ on successful delegation');
+};
 subtest 'autoload_avoids_plugin_bridge_wrapper' => sub {
     plan tests => 5;
 

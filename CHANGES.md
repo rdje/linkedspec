@@ -1,5 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across `BootstrapSpec::Core` Regex Helper Delegation
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` helper seam by making `LinkedSpec::BootstrapSpec::Core` preserve caller `$@` across successful `LinkedRE` helper delegation.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored `BootstrapSpec::Core` regex-helper delegation behavior:
+  - added `LinkedSpec::BootstrapSpec::Core::_call_preserving_err(...)`,
+  - routed `_linkedre_or(...)` and `_linkedre_ored_re(...)` through that helper,
+  - preserved regex-helper return values while restoring caller `$@` after
+    successful owner-path delegation.
+- Preserved behavior:
+  - `BootstrapSpec::Core` still delegates to the same `LinkedRE` owner,
+  - bootstrap registry construction and bootstrap scanner helper behavior are unchanged,
+  - exception behavior is unchanged when the regex-helper owner path dies.
+- Updated focused regression coverage:
+  - added `bootstrap_spec_core_linkedre_wrappers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=225`)
+
 ## 2026-03-13 - Phase 1A Slice: Preserve Caller `$@` Across Public Trace Wrapper Delegation
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec.pm` seam by making the public trace wrapper API preserve caller `$@` across successful delegation to `LinkedSpec::Trace`.

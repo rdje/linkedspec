@@ -23,22 +23,39 @@ sub _require_linkedre_pkg {
  return 1
 }
 
+sub _call_preserving_err {
+ my ($cb) = @_;
+ my $saved_err = $@;
+ my $wantarray = wantarray;
+ if ($wantarray) {
+  my @ret = $cb->();
+  $@ = $saved_err;
+  return @ret
+ }
+ if (defined $wantarray) {
+  my $ret = $cb->();
+  $@ = $saved_err;
+  return $ret
+ }
+ $cb->();
+ $@ = $saved_err;
+ return
+}
+
 sub _linkedre_or {
  my (@args) = @_;
- my $saved_err = $@;
- _require_linkedre_pkg();
- my $ret = LinkedRE::or(@args);
- $@ = $saved_err;
- return $ret
+ return _call_preserving_err(sub {
+  _require_linkedre_pkg();
+  return LinkedRE::or(@args)
+ })
 }
 
 sub _linkedre_ored_re {
  my (@args) = @_;
- my $saved_err = $@;
- _require_linkedre_pkg();
- my $ret = LinkedRE::oredRE(@args);
- $@ = $saved_err;
- return $ret
+ return _call_preserving_err(sub {
+  _require_linkedre_pkg();
+  return LinkedRE::oredRE(@args)
+ })
 }
 
 sub _trim_bootstrap_value {
