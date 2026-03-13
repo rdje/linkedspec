@@ -1,5 +1,49 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route Remaining DeclareMethod Compatibility Helpers Through `EmitContext`
+## Summary
+Finished the DeclareMethod compatibility-owner handoff by moving the remaining direct DeclareMethod wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_split_declare_symbol_names(...)`,
+    `_parse_declare_binding_entry(...)`,
+    `_lower_declare_value_expr(...)`,
+    `_lower_declare_initializer_expr(...)`,
+    `_extract_declare_statement_from_method_expr(...)`,
+    `_lower_declare_method_statement(...)`, and
+    `_lower_assign_method_statement(...)`
+    to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - added the missing direct owner entrypoints in `LinkedSpec::RuleIR::EmitContext`,
+  - removed the final direct `DeclareMethod` package loader and local DeclareMethod dep-map builder from `LinkedSpec::ActionRewriter`.
+- Preserved behavior:
+  - direct legacy callers still get the same declare-symbol, binding, initializer, declare-method, and assign-method lowering outputs,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `DeclareMethod.pm` unloaded until the declare-helper path is actually exercised,
+  - normal compile-time emit-context assembly remains on the same extracted owner path.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_declare_method_load_until_declare_helper` so it now locks the `EmitContext` lazy-load seam too,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining DeclareMethod helper family is explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route Remaining MethodLowering Compatibility Helpers Through `EmitContext`
 ## Summary
 Finished the MethodLowering compatibility-owner handoff by moving the remaining broad MethodLowering wrappers off `LinkedSpec::ActionRewriter` and onto `LinkedSpec::RuleIR::EmitContext`.

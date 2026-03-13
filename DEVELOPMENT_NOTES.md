@@ -3,6 +3,20 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the remaining direct DeclareMethod compatibility wrappers `_split_declare_symbol_names(...)`, `_parse_declare_binding_entry(...)`, `_lower_declare_value_expr(...)`, `_lower_declare_initializer_expr(...)`, `_extract_declare_statement_from_method_expr(...)`, `_lower_declare_method_statement(...)`, and `_lower_assign_method_statement(...)`; those now route through `LinkedSpec::RuleIR::EmitContext`.
+- `LinkedSpec::RuleIR::EmitContext` now exposes the missing direct owner entrypoints for the remaining DeclareMethod wrappers too, so `ActionRewriter` no longer needs a direct `DeclareMethod` package loader or local DeclareMethod dep-map builder.
+- Updated focused regression locks:
+  - strengthened `action_rewriter_require_avoids_declare_method_load_until_declare_helper`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the remaining DeclareMethod helper family to the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
+- Completed the next no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the remaining broad MethodLowering compatibility wrappers `_lower_return_general_statement(...)`, `_lower_return_imatch_statement(...)`, `_lower_push_value_statement(...)`, `_lower_regex_subst_statement(...)`, `_lower_return_undef_statement(...)`, and `_lower_return_array_statement(...)`; those now route through `LinkedSpec::RuleIR::EmitContext`.
 - `LinkedSpec::RuleIR::EmitContext` now exposes the matching owner entrypoints for those broad MethodLowering wrappers too, so the compatibility module no longer needs a direct `MethodLowering` package loader or local MethodLowering dep-map builder.
 - Updated focused regression locks:

@@ -1020,7 +1020,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 77;
+    plan tests => 91;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1074,6 +1074,34 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_strip_literal_delimiters = sub {
         my ($expr) = @_;
         return "strip:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_split_declare_symbol_names = sub {
+        my ($expr) = @_;
+        return ['decl_split', $expr];
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_parse_declare_binding_entry = sub {
+        my ($expr) = @_;
+        return { owner => 'emit_context_declare_binding', raw => $expr };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_value_expr = sub {
+        my ($expr) = @_;
+        return "declare_value:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_initializer_expr = sub {
+        my ($type, $expr) = @_;
+        return "declare_init:$type:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_extract_declare_statement_from_method_expr = sub {
+        my ($expr) = @_;
+        return { owner => 'emit_context_extract_declare', raw => $expr };
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement = sub {
+        my ($expr) = @_;
+        return "declare_method:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement = sub {
+        my ($expr) = @_;
+        return "assign_method:$expr";
     };
     local *LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr = sub {
         my ($expr) = @_;
@@ -1226,6 +1254,34 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_strip_literal_delimiters('"foo"'), 'strip:"foo"', 'ActionRewriter literal-delimiter stripper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter literal-delimiter stripper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_split_declare_symbol_names('items, more'), ['decl_split', 'items, more'], 'ActionRewriter declare-symbol splitter now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-symbol splitter preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_parse_declare_binding_entry('items = scalar(foo)'), { owner => 'emit_context_declare_binding', raw => 'items = scalar(foo)' }, 'ActionRewriter declare-binding parser now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-binding parser preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_declare_value_expr('scalar(foo)'), 'declare_value:scalar(foo)', 'ActionRewriter declare-value helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-value helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_declare_initializer_expr('array', 'array(foo, bar)'), 'declare_init:array:array(foo, bar)', 'ActionRewriter declare-initializer helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-initializer helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::ActionRewriter::_extract_declare_statement_from_method_expr('declare(array, items)'), { owner => 'emit_context_extract_declare', raw => 'declare(array, items)' }, 'ActionRewriter declare-statement extractor now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-statement extractor preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_declare_method_statement('declare(array, items)'), 'declare_method:declare(array, items)', 'ActionRewriter declare-method helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter declare-method helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_assign_method_statement('assign(retv, scalar(foo))'), 'assign_method:assign(retv, scalar(foo))', 'ActionRewriter assign-method helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter assign-method helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::ActionRewriter::_lower_flow_composite_expr('or(scalar(a), scalar(b))'), { expr => 'or(scalar(a), scalar(b))', owner => 'emit_context_flow' }, 'ActionRewriter flow lowering wrapper now delegates through the EmitContext compatibility owner');
@@ -4575,14 +4631,16 @@ PERL
     is($err, '', 'ActionRewriter require/method-lowering subprocess does not emit stderr');
 };
 subtest 'action_rewriter_require_avoids_declare_method_load_until_declare_helper' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::ActionRewriter;
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_EAGER__\n" : "__DECLARE_METHOD_STILL_LAZY__\n";
 my $declare_stmt = LinkedSpec::ActionRewriter::_lower_declare_method_statement("declare(array, items)");
 my $assign_stmt = LinkedSpec::ActionRewriter::_lower_assign_method_statement("assign(retv, scalar(foo))");
 print defined($declare_stmt) && defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_AFTER_HELPER__\n" : "__DECLARE_METHOD_STILL_UNLOADED__\n";
 if (defined($declare_stmt) && $declare_stmt eq "my \@items" && defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
     print "__DECLARE_METHOD_PAYLOAD_OK__\n";
@@ -4592,9 +4650,11 @@ if (defined($declare_stmt) && $declare_stmt eq "my \@items" && defined($assign_s
 PERL
 
     is($exit_code, 0, 'ActionRewriter require/declare-method subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require ActionRewriter keeps EmitContext unloaded');
     like($out, qr/__DECLARE_METHOD_STILL_LAZY__/, 'require ActionRewriter keeps DeclareMethod unloaded');
     like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'declare-method helpers still return lowered output after lazy DeclareMethod loading');
-    like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'declare-method helpers lazy-load EmitContext on demand');
+    like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand through EmitContext');
     like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve declare and assign-method lowering after lazy DeclareMethod loading');
     is($err, '', 'ActionRewriter require/declare-method subprocess does not emit stderr');
 };

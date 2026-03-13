@@ -447,6 +447,14 @@ sub _parse_declare_binding_entry {
  })
 }
 
+sub _lower_declare_value_expr {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@args, _declare_method_deps())
+ })
+}
+
 sub _lower_declare_initializer_expr {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -540,6 +548,22 @@ sub _extract_declare_statement_from_method_expr {
  return _call_preserving_err(sub {
   _require_declare_method_pkg();
   return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@args, _declare_method_deps())
+ })
+}
+
+sub _lower_declare_method_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@args, _declare_method_deps())
+ })
+}
+
+sub _lower_assign_method_statement {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@args, _declare_method_deps())
  })
 }
 

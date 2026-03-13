@@ -18,10 +18,6 @@ sub _require_control_flow_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
 }
 
-sub _require_declare_method_pkg {
- return _require_pkg('LinkedSpec::ActionIR::DeclareMethod')
-}
-
 sub _require_emit_context_pkg {
  return _require_pkg('LinkedSpec::RuleIR::EmitContext')
 }
@@ -50,12 +46,6 @@ sub _trim_action_ir_value {
  return undef unless defined $value;
  $value =~ s/^\s*|\s*$//go;
  return $value
-}
-sub _declare_method_deps {
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
- })
 }
 sub _control_flow_deps {
  return _call_preserving_err(sub {
@@ -194,56 +184,56 @@ sub _strip_literal_delimiters {
 sub _split_declare_symbol_names {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_split_declare_symbol_names(@args)
  })
 }
 
 sub _parse_declare_binding_entry {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_parse_declare_binding_entry(@args)
  })
 }
 
 sub _lower_declare_value_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_declare_value_expr(@args)
  })
 }
 
 sub _lower_declare_initializer_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_declare_initializer_expr(@args)
  })
 }
 
 sub _extract_declare_statement_from_method_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_extract_declare_statement_from_method_expr(@args)
  })
 }
 
 sub _lower_declare_method_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement(@args)
  })
 }
 
 sub _lower_assign_method_statement {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@args, _declare_method_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement(@args)
  })
 }
 
