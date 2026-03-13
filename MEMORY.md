@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext::_control_flow_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)`.
+- Added the focused regression lock `emit_context_control_flow_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `ControlFlow` owner map.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=233`)
+
+## Current Session Snapshot (2026-03-14)
 - Completed a small Backbone Item 3 cleanup slice inside `LinkedSpec::*`.
 - Removed the stale local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper; trimming now stays only on `LinkedSpec::RuleIR::EmitContext` and the extracted `ActionIR::*` owners.
 - Added the focused regression lock `action_rewriter_drops_dead_trim_helper` so the dead helper stays gone while `EmitContext` continues to own the active trim helper.

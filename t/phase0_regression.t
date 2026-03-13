@@ -1488,6 +1488,38 @@ subtest 'action_rewriter_drops_dead_trim_helper' => sub {
     ok(LinkedSpec::RuleIR::EmitContext->can('_trim_action_ir_value'), 'EmitContext still owns the active local trim helper');
 };
 
+subtest 'emit_context_control_flow_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::ControlFlow;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::ControlFlow::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return 'trim_ok' },
+            normalize_method_tag_expr => sub { return "tag_for_$pkg" },
+            lower_flow_composite_expr => sub { return 'flow_ok' },
+            parse_method_function_expr => sub { return { method => 'if', args => ['scalar(foo)'] } },
+            normalize_method_args_with_optional_scope => sub { return ['scalar(foo)'] },
+        };
+    };
+    local *LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement = sub {
+        my ($expr, $ctx, $deps) = @_;
+        return $deps->{normalize_method_tag_expr}->();
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_lower_if_flow_statement('if(scalar(foo))', {});
+    is($ret, 'tag_for_LinkedSpec::RuleIR::EmitContext', 'EmitContext control-flow helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the control-flow owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext control-flow helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_control_flow_deps'), 'EmitContext still exposes the local control-flow dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

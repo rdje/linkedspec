@@ -239,13 +239,10 @@ sub _array_pipeline_deps {
 }
 
 sub _control_flow_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  normalize_method_tag_expr => sub { return _normalize_method_tag_expr(@_) },
-  lower_flow_composite_expr => sub { return _lower_flow_composite_expr(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  normalize_method_args_with_optional_scope => sub { return _normalize_method_args_with_optional_scope(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_control_flow_pkg();
+  return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _scan_contract_ir_event_deps {
