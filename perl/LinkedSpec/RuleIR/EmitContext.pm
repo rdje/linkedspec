@@ -265,10 +265,10 @@ sub _diagnostics_deps {
 }
 
 sub _canonical_event_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  split_action_ir_statements => sub { return _split_action_ir_statements(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_canonical_events_pkg();
+  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _action_contract_deps {
