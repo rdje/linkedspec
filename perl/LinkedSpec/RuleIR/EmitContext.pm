@@ -159,9 +159,10 @@ sub _split_top_level_csv {
 }
 
 sub _statement_split_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_statement_split_pkg();
+  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _split_action_ir_statements {

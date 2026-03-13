@@ -1578,6 +1578,34 @@ subtest 'emit_context_canonical_event_deps_route_through_owner_default_map' => s
     ok(LinkedSpec::RuleIR::EmitContext->can('_canonical_event_deps'), 'EmitContext still exposes the local canonical-event dep entrypoint');
 };
 
+subtest 'emit_context_statement_split_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::StatementSplit;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::StatementSplit::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return "trim_for_$pkg" },
+        };
+    };
+    local *LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements = sub {
+        my ($code, $deps) = @_;
+        return [$deps->{trim_action_ir_value}->($code)];
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_split_action_ir_statements(' call(Leaf) ; ');
+    is_deeply($ret, ['trim_for_LinkedSpec::RuleIR::EmitContext'], 'EmitContext statement-split helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the statement-split owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext statement-split helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_statement_split_deps'), 'EmitContext still exposes the local statement-split dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 
