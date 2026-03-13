@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Phase 1A Slice: Route SpecEntry Emit-Context Build Through Owner Module
+## Summary
+Stabilized another no-behavior-change `LinkedSpec::*` seam by removing the dead `RuleIR` emit-context delegate layer and making `LinkedSpec::SpecEntry` call the `LinkedSpec::RuleIR::EmitContext` owner directly.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/SpecEntry.pm`
+- Updated: `perl/LinkedSpec/RuleIR.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored emit-context ownership:
+  - added `LinkedSpec::SpecEntry::_require_emit_context_pkg(...)`,
+  - changed `compile_spec_entry(...)` to call `LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(...)` directly,
+  - removed the now-dead `LinkedSpec::RuleIR::_require_emit_context_pkg(...)`, `_normalize_rule_code_chunks(...)`, and `_build_rule_ir_emit_context(...)` delegate block.
+- Preserved behavior:
+  - `compile_spec_entry(...)` still returns the same compiled rule info and action-rewriter metadata payload,
+  - `RuleIR` still owns collection/planning/validation, while `EmitContext` stays the sole owner of emit-context assembly,
+  - `SpecEntry` now lazy-loads `EmitContext` on demand at the actual compile stage instead of depending on a compatibility hop through `RuleIR`.
+- Updated focused regression coverage:
+  - strengthened `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry` to lock lazy `EmitContext` loading too,
+  - added `spec_entry_avoids_removed_ruleir_emit_context_delegates`,
+  - removed the obsolete `RuleIR`-delegate expectations from `extracted_wrapper_helpers_preserve_eval_error_state`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=231`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route EmitContext Rewrite/Diagnostics Through Extracted Owners
 ## Summary
 Stabilized another no-behavior-change `LinkedSpec::*` seam by making `LinkedSpec::RuleIR::EmitContext` call the extracted rewrite-pipeline and diagnostics owners directly instead of routing that orchestration through thin `LinkedSpec::ActionRewriter` compatibility wrappers.

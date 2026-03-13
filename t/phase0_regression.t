@@ -313,12 +313,13 @@ PERL
     is($err, '', 'LinkedSpec::Validation require/validate subprocess does not emit stderr');
 };
 subtest 'spec_entry_require_avoids_ruleir_load_until_compile_spec_entry' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
 require LinkedSpec::SpecEntry;
 print exists($INC{"LinkedSpec/RuleIR.pm"}) ? "__RULEIR_EAGER__\n" : "__RULEIR_STILL_LAZY__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
 require LinkedSpec::BootstrapSpec;
 my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
 print $parse_success ? "__BOOTSTRAP_PARSED__\n" : "__BOOTSTRAP_FAILED__\n";
@@ -326,13 +327,16 @@ my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
 my ($label, $info) = $parse_success ? LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx }) : ();
 print defined($label) && ref($info) eq "HASH" ? "__COMPILED_ENTRY_DEFINED__\n" : "__COMPILED_ENTRY_UNDEF__\n";
 print exists($INC{"LinkedSpec/RuleIR.pm"}) ? "__RULEIR_AFTER_COMPILE_SPEC_ENTRY__\n" : "__RULEIR_STILL_UNLOADED__\n";
+print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_COMPILE_SPEC_ENTRY__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 PERL
 
     is($exit_code, 0, 'LinkedSpec::SpecEntry require/compile_spec_entry subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__RULEIR_STILL_LAZY__/, 'require LinkedSpec::SpecEntry keeps RuleIR unloaded');
+    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec::SpecEntry keeps EmitContext unloaded');
     like($out, qr/__BOOTSTRAP_PARSED__/, 'bootstrap parse still succeeds before compile_spec_entry lazy-loads RuleIR');
     like($out, qr/__COMPILED_ENTRY_DEFINED__/, 'compile_spec_entry still returns compiled rule info after lazy RuleIR loading');
     like($out, qr/__RULEIR_AFTER_COMPILE_SPEC_ENTRY__/, 'compile_spec_entry lazy-loads RuleIR on demand');
+    like($out, qr/__EMIT_CONTEXT_AFTER_COMPILE_SPEC_ENTRY__/, 'compile_spec_entry now lazy-loads EmitContext on demand too');
     is($err, '', 'LinkedSpec::SpecEntry require/compile_spec_entry subprocess does not emit stderr');
 };
 subtest 'spec_entry_require_avoids_trace_load_until_compile_spec_entry' => sub {
@@ -382,41 +386,6 @@ PERL
     like($out, qr/__COMPILED_ENTRY_DEFINED__/, 'compile_spec_entry still returns compiled rule info after lazy Data::Dumper loading');
     like($out, qr/__DUMPER_AFTER_COMPILE_SPEC_ENTRY__/, 'compile_spec_entry debug dumps lazy-load Data::Dumper on demand');
     is($err, '', 'LinkedSpec::SpecEntry require/debug-compile subprocess does not emit stderr');
-};
-subtest 'ruleir_require_avoids_emit_context_load_until_emit_context_build' => sub {
-    plan tests => 5;
-
-    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec::RuleIR;
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_EAGER__\n" : "__EMIT_CONTEXT_STILL_LAZY__\n";
-my $rule_ir = {
-    label => 'Top',
-    node_type => 'default',
-    REs => [qr/a/],
-    code_blocks => {
-        ICODE  => [],
-        ECODE  => [],
-        EXCODE => [],
-        ITCODE => [],
-        LXCODE => [],
-        LSCODE => [],
-        LECODE => [],
-    },
-    acode_entries => [
-        { relabel => 'Top', reidx => 0, code => 'return_a(Top)' },
-    ],
-    bcode_entries => [],
-};
-my $emit_ctx = LinkedSpec::RuleIR::_build_rule_ir_emit_context($rule_ir);
-print defined($emit_ctx) ? "__EMIT_CTX_DEFINED__\n" : "__EMIT_CTX_UNDEF__\n";
-print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_BUILD__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
-PERL
-
-    is($exit_code, 0, 'LinkedSpec::RuleIR require/build subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__EMIT_CONTEXT_STILL_LAZY__/, 'require LinkedSpec::RuleIR keeps EmitContext unloaded');
-    like($out, qr/__EMIT_CTX_DEFINED__/, 'RuleIR emit-context build still succeeds after lazy EmitContext loading');
-    like($out, qr/__EMIT_CONTEXT_AFTER_BUILD__/, 'RuleIR emit-context build lazy-loads EmitContext on demand');
-    is($err, '', 'LinkedSpec::RuleIR require/build subprocess does not emit stderr');
 };
 subtest 'ruleir_require_avoids_trace_load_until_mixed_action_error' => sub {
     plan tests => 8;
@@ -885,7 +854,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
-    plan tests => 13;
+    plan tests => 9;
 
     no warnings 'redefine';
     require LinkedSpec::Validation;
@@ -896,7 +865,6 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     local *LinkedSpec::Validation::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::Resolver::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
-    local *LinkedSpec::RuleIR::_require_emit_context_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_require_rewrite_pipeline_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps = sub { return { injected => 1 } };
@@ -904,8 +872,6 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
     local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
     local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
-    local *LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks = sub { return 'normalized_ok' };
-    local *LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context = sub { return { emit_ctx => 1 } };
     local *LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics = sub {
         die "__UNEXPECTED_ACTION_REWRITER_REWRITE__\n";
     };
@@ -925,14 +891,6 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::RuleIR::_trace_decision('ruleir_check', 1, 'ok', 100), 'trace_decision_ok', 'RuleIR trace wrapper still delegates through Trace');
     is($@, "__SAVED_ERR__\n", 'RuleIR trace wrapper preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::RuleIR::_normalize_rule_code_chunks('Top', [], undef, []), 'normalized_ok', 'RuleIR code normalization still delegates through EmitContext');
-    is($@, "__SAVED_ERR__\n", 'RuleIR code normalization preserves caller $@ on successful delegation');
-
-    $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::RuleIR::_build_rule_ir_emit_context('Top', [], [], [], []), { emit_ctx => 1 }, 'RuleIR emit-context builder still delegates through EmitContext');
-    is($@, "__SAVED_ERR__\n", 'RuleIR emit-context builder preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', []);
@@ -3541,6 +3499,36 @@ subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' =
     ok(ref($emit_ctx->{action_rewriter_meta}) eq 'HASH', 'RuleIR emit-context exposes action-rewriter metadata');
     ok(($emit_ctx->{action_rewriter_meta}{rewrite_contract_ids} && @{$emit_ctx->{action_rewriter_meta}{rewrite_contract_ids}} > 0),
         'RuleIR emit-context still builds rewrite contracts through extracted rewrite-pipeline ownership');
+};
+subtest 'spec_entry_avoids_removed_ruleir_emit_context_delegates' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    require LinkedSpec::BootstrapSpec;
+    require LinkedSpec::SpecEntry;
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse still succeeds for direct SpecEntry owner-path check') or diag($parse_error // '');
+
+    my ($label, $info, $ok_run, $err) = (undef, undef, 0, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::RuleIR::_normalize_rule_code_chunks = sub { die "__UNEXPECTED_RULEIR_NORMALIZE_RULE_CODE_CHUNKS__\n" };
+        local *LinkedSpec::RuleIR::_build_rule_ir_emit_context = sub { die "__UNEXPECTED_RULEIR_BUILD_RULE_IR_EMIT_CONTEXT__\n" };
+        my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
+        ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compile_spec_entry succeeds without the removed RuleIR emit-context delegates') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_RULEIR_/, 'compile_spec_entry does not call the trapped removed RuleIR emit-context delegates');
+    is($label, 'Top', 'compile_spec_entry still returns the compiled rule label');
+    ok(ref($info) eq 'HASH' && ref($info->{meta}{action_rewriter}) eq 'HASH', 'compile_spec_entry still returns compiled rule info with action-rewriter metadata');
 };
 subtest 'action_rewriter_avoids_removed_linkedspec_lowering_facade' => sub {
     plan tests => 15;

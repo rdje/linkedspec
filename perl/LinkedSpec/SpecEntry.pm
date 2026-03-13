@@ -37,6 +37,12 @@ sub _require_rule_ir_pkg {
  return 1
 }
 
+sub _require_emit_context_pkg {
+ _require_pkg('LinkedSpec::RuleIR::EmitContext')
+  unless LinkedSpec::RuleIR::EmitContext->can('build_rule_ir_emit_context');
+ return 1
+}
+
 sub _require_trace_pkg {
  _require_pkg('LinkedSpec::Trace');
  return 1
@@ -655,7 +661,8 @@ sub compile_spec_entry {
   return
  }
 
- my $emit_ctx = LinkedSpec::RuleIR::_build_rule_ir_emit_context($rule_ir);
+ _require_emit_context_pkg();
+ my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
  $rule_meta->{action_rewriter} = $emit_ctx->{action_rewriter_meta};
  my $label = $emit_ctx->{label};
  my $node_type = $emit_ctx->{node_type};

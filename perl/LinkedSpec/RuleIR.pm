@@ -48,11 +48,6 @@ sub _require_pkg {
  return 1
 }
 
-sub _require_emit_context_pkg {
- _require_pkg('LinkedSpec::RuleIR::EmitContext') unless LinkedSpec::RuleIR::EmitContext->can('build_rule_ir_emit_context');
- return 1
-}
-
 sub _require_trace_pkg {
  _require_pkg('LinkedSpec::Trace');
  return 1
@@ -259,22 +254,6 @@ sub _validate_rule_ir_or_exit {
  );
 
  return 1
-}
-
-sub _normalize_rule_code_chunks {
- my @args = @_;
- return _call_preserving_err(sub {
-  _require_emit_context_pkg();
-  return LinkedSpec::RuleIR::EmitContext::_normalize_rule_code_chunks(@args)
- })
-}
-
-sub _build_rule_ir_emit_context {
- my @args = @_;
- return _call_preserving_err(sub {
-  _require_emit_context_pkg();
-  return LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(@args)
- })
 }
 
 1;

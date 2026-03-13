@@ -37,6 +37,21 @@ These files are live and must be amended before any commit:
 - `CHANGES.md`
 - `MEMORY.md`
 ## Current Session Snapshot (2026-03-13)
+- Completed another no-behavior-change Phase 1A ownership-cleanup slice inside `LinkedSpec::*`.
+- Key technical outcome:
+  - added `LinkedSpec::SpecEntry::_require_emit_context_pkg(...)`,
+  - changed `compile_spec_entry(...)` to call `LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context(...)` directly,
+  - removed `LinkedSpec::RuleIR::_require_emit_context_pkg(...)`, `_normalize_rule_code_chunks(...)`, and `_build_rule_ir_emit_context(...)`.
+- Regression outcome:
+  - strengthened `spec_entry_require_avoids_ruleir_load_until_compile_spec_entry` to lock lazy `EmitContext` loading too,
+  - added `spec_entry_avoids_removed_ruleir_emit_context_delegates`,
+  - removed obsolete `RuleIR` emit-context delegate expectations from `extracted_wrapper_helpers_preserve_eval_error_state`.
+- Validation snapshot:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR.pm` => syntax OK
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
+  - `perl -c -Iperl t/phase0_regression.t` => syntax OK
+  - `bash tools/run_ci_local.sh` => PASS (231 tests)
+## Current Session Snapshot (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - Key technical outcome:
   - `LinkedSpec::RuleIR::EmitContext` now calls `LinkedSpec::ActionIR::RewritePipeline` directly for rewrite-rule construction and rewrite execution,
