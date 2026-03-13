@@ -503,6 +503,14 @@ sub _build_array_pipeline_plan_from_expr {
  })
 }
 
+sub _lower_array_pipeline_expr {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  _require_array_pipeline_pkg();
+  return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@args, _array_pipeline_deps())
+ })
+}
+
 sub _normalize_method_tag_expr {
  my @args = @_;
  return _call_preserving_err(sub {

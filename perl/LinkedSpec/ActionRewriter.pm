@@ -14,10 +14,6 @@ sub _require_pkg {
  return $pkg
 }
 
-sub _require_array_pipeline_pkg {
- return _require_pkg('LinkedSpec::ActionIR::ArrayPipeline')
-}
-
 sub _require_control_flow_pkg {
  return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
 }
@@ -69,12 +65,6 @@ sub _method_lowering_deps {
  return _call_preserving_err(sub {
   _require_method_lowering_pkg();
   return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
- })
-}
-sub _array_pipeline_deps {
- return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
  })
 }
 sub _control_flow_deps {
@@ -334,16 +324,16 @@ sub _lower_return_array_statement {
 sub _build_array_pipeline_plan_from_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr(@args, _array_pipeline_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_build_array_pipeline_plan_from_expr(@args)
  })
 }
 
 sub _lower_array_pipeline_expr {
  my @args = @_;
  return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@args, _array_pipeline_deps())
+  _require_emit_context_pkg();
+  return LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr(@args)
  })
 }
 

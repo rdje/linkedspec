@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-13 - Backbone Item 3 Slice: Route ArrayPipeline Compatibility Helpers Through `EmitContext`
+## Summary
+Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving its remaining direct ArrayPipeline helper wrappers onto `LinkedSpec::RuleIR::EmitContext`, which already owns that array-planning/lowering support for the live compile path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored compatibility-helper ownership:
+  - changed `LinkedSpec::ActionRewriter::_build_array_pipeline_plan_from_expr(...)` and `_lower_array_pipeline_expr(...)` to delegate to `LinkedSpec::RuleIR::EmitContext`,
+  - added the missing direct owner entrypoint `LinkedSpec::RuleIR::EmitContext::_lower_array_pipeline_expr(...)`,
+  - removed the now-dead direct `ActionRewriter` ArrayPipeline package loader and local ArrayPipeline dep-map builder,
+  - kept downstream helper behavior stable because `EmitContext` already owns the same ArrayPipeline helper logic for the active rewrite path.
+- Preserved behavior:
+  - direct legacy callers still get the same array-pipeline planning and lowering outputs,
+  - require-only consumers of `ActionRewriter.pm` keep both `EmitContext.pm` and `ArrayPipeline.pm` unloaded until the array-helper path is actually exercised,
+  - extracted owner dep builders continue to lazy-load callback owners on demand.
+- Updated focused regression coverage:
+  - strengthened `action_rewriter_require_avoids_array_pipeline_load_until_array_helper` so it now locks the `EmitContext` lazy-load seam too,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` so the remaining ActionRewriter array-pipeline helpers are explicitly locked to the `EmitContext` owner path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - syntax OK
+  - PASS (`Files=1, Tests=232`)
+
 ## 2026-03-13 - Backbone Item 3 Slice: Route FlowExpr Compatibility Helper Through `EmitContext`
 ## Summary
 Reduced the `LinkedSpec::ActionRewriter` compatibility surface again by moving its remaining direct FlowExpr helper wrapper onto `LinkedSpec::RuleIR::EmitContext`, which already owns that flow-lowering support for the live compile path.

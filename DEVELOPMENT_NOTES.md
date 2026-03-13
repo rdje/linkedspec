@@ -3,6 +3,20 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-13)
 - Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` no longer owns the direct ArrayPipeline compatibility wrappers `_build_array_pipeline_plan_from_expr(...)` and `_lower_array_pipeline_expr(...)`; they now route through `LinkedSpec::RuleIR::EmitContext`, which already owns that array-planning/lowering support for the active compile path.
+- `LinkedSpec::RuleIR::EmitContext` now exposes the direct `_lower_array_pipeline_expr(...)` owner entrypoint too, so the compatibility wrapper handoff is complete on the owner side.
+- That removes the last direct ArrayPipeline package loader and local ArrayPipeline dep-map builder from `ActionRewriter`, making the compatibility module narrower without changing downstream behavior.
+- Updated focused regression locks:
+  - strengthened `action_rewriter_require_avoids_array_pipeline_load_until_array_helper`,
+  - expanded `action_rewriter_owner_wrappers_preserve_eval_error_state` to lock the remaining array-pipeline helpers to the `EmitContext` owner path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=232`)
+
+## Current Session Notes (2026-03-13)
+- Completed another no-behavior-change Backbone Item 3 / Phase 1A compatibility-surface slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` no longer owns the direct FlowExpr compatibility wrapper `_lower_flow_composite_expr(...)`; it now routes through `LinkedSpec::RuleIR::EmitContext`, which already owns that flow-lowering support for the active compile path.
 - That removes the last direct FlowExpr package loader and local FlowExpr dep-map builder from `ActionRewriter`, making the compatibility module narrower without changing downstream behavior.
 - Updated focused regression locks:
