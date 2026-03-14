@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Array Snapshot Helper Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking snapshot payload helpers between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `array_copy(...)` and compatibility `array_values(...)` payload forms now preserve the same lowering and migration metadata across both concrete syntaxes.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for supported array snapshot helper forms on:
+  - action edges with `-> rule .return(...array_copy/array_values...)`,
+  - and lifecycle sections with `LX.return(...array_copy/array_values...)`.
+- The locked snapshot payload helper surface includes:
+  - preferred `array_copy(...)`,
+  - and compatibility `array_values(...)`.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported fluent/block equivalence coverage inside the active track rather than changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Flat-List Helper Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking list-context insertion helpers between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `flat_array(...)` and `flat_hash(...)` payload forms now preserve the same lowering and migration metadata across both concrete syntaxes.
