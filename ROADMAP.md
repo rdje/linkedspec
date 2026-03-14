@@ -30,6 +30,12 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 4. Improve trust with deterministic diagnostics and regression tests.
 5. Maintain backward compatibility by default while introducing stricter optional modes.
 6. Drive `.spec` toward language-agnostic action semantics (no embedded Perl code-block dependency in final state).
+7. Treat documentation clarity as a product contract:
+   - prioritize readability over cleverness,
+   - remove ambiguity instead of hand-waving over it,
+   - explain semantics plainly,
+   - use representative examples generously,
+   - and avoid obfuscation in both user-facing docs and architecture notes.
 
 ## Work Phases
 ## Phase 0: Safety Net and Baseline Lock
@@ -110,6 +116,11 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 - Expand `USER_GUIDE.md` with practical patterns and anti-patterns, and maintain module-focused lowering references when the user-facing surface becomes too large for one file.
 - Maintain architecture rationale in `DEVELOPMENT_NOTES.md`.
 - Keep live state in `MEMORY.md`.
+- Documentation quality contract:
+  - optimize for readability, non-ambiguity, and clear explanations,
+  - use many representative examples where they materially improve understanding,
+  - prefer direct wording over expert-only shorthand,
+  - and do not intentionally obfuscate semantics, constraints, or tradeoffs.
 - Exit criteria:
   - Documentation remains current at each commit.
 

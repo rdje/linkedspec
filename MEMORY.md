@@ -4,6 +4,11 @@ Compact, actionable session memory for interruption-safe continuation.
 ## Mission Context
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
+## Documentation Contract
+- Project docs are expected to optimize for readability, non-ambiguity, and clear explanations.
+- Representative examples are encouraged whenever they make semantics easier to learn or verify.
+- Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
+
 ## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for branch-local flat-list payload helper equivalence:
   - supported `flat_array(...)` and `flat_hash(...)` return payloads now have regression coverage inside `if/elseif` and `switch/case` control-flow bodies on both action-edge and lifecycle surfaces,

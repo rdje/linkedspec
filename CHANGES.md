@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Docs Contract: Lock Readability and Non-Ambiguity Standard
+## Summary
+Recorded a project-level documentation quality contract so readability, non-ambiguity, direct explanations, and representative examples are treated as explicit goals rather than informal style preferences.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+- Updated: `CHANGES.md`
+
+## Technical Details
+- Added a strategic-principle level documentation contract in `ROADMAP.md`.
+- Added the same expectation to Phase 6 so documentation/adoption work has an explicit readability goal.
+- Mirrored the contract into `DEVELOPMENT_NOTES.md` and `MEMORY.md` so it persists across sessions and future refactor slices.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this is a process/quality-contract clarification rather than a roadmap-level completion change.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Branch-Local Flat-List Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking list-context insertion helpers inside control-flow branch bodies. Supported `flat_array(...)` and `flat_hash(...)` return payloads now preserve the same lowering and migration metadata across fluent and structured authoring for `if/elseif` and `switch/case` forms on both action-edge and lifecycle surfaces.

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+## Documentation Contract
+- Treat readability as a first-class engineering requirement, not a cosmetic nice-to-have.
+- Prefer explicit wording over compressed expert shorthand when the shorter phrasing risks ambiguity.
+- Explain semantics, constraints, and tradeoffs directly instead of implying them.
+- Use representative examples generously when they reduce ambiguity or help adoption.
+- Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
+
 ## Current Session Notes (2026-03-14)
 - Landed the next method-DSL branch-local equivalence follow-up on flat-list payload helpers:
   - supported `flat_array(...)` and `flat_hash(...)` return payloads are now regression-locked inside `if/elseif` and `switch/case` control-flow bodies on both action-edge and lifecycle surfaces,
