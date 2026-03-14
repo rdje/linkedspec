@@ -1,5 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Generic `LX` Blocks
+## Summary
+Extended the semicolon-light structured-block work to generic non-control-flow `LX { ... }` blocks too. Structured `LX` helper sequences can now be authored without `;` separators between top-level method statements while preserving the same lifecycle lowering and migration metadata as the fluent baseline.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a focused regression for semicolonless generic `LX { ... }` helper chains covering `declare(...)`, `assign(...)`, `call(...)`, and `return(...)` in the same lifecycle block.
+- Locked parity against the fluent `LX.` baseline on:
+  - identical `LXCODE` lowering,
+  - zero raw-Perl fallback,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic action-IR readiness.
+- Clarified in the roadmap and top-level guide that the broader optional-semicolon rule is now explicitly regression-locked on generic `LX { ... }` structured blocks too, not only on `I { ... }` and control-flow `LX { ... }` forms.
+- Clarified the broader policy too: if semicolon-light structured authoring applies to one lifecycle block family, it is intended to apply to the others too unless an explicit documented exception exists. `I { ... }` and `LX { ... }` are current regression locks for that broader lifecycle-wide direction.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported semicolon-light lifecycle authoring surface without changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Generic Structured Blocks
 ## Summary
 Extended the semicolon-light structured-block work beyond marker-style control flow. Generic helper-only structured action blocks and structured lifecycle blocks now have regression locks proving that top-level method statements can be authored without `;` separators while preserving the same lowering and migration metadata as the fluent baseline.

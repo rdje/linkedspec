@@ -8035,6 +8035,45 @@ SPEC
         'semicolonless structured lifecycle helper block stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_structured_lx_blocks_accept_optional_semicolons' => sub {
+    plan tests => 6;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(scalar, retv).assign(scalar(retv), call(Leaf)).return(hash("item", scalar(retv)))
+ /a/ -> Top { return_a(Top) }
+Leaf::&
+ /a/ -> Leaf { return("x") }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(scalar, retv)
+ assign(scalar(retv), call(Leaf))
+ return(hash("item", scalar(retv))) }
+ /a/ -> Top { return_a(Top) }
+Leaf::&
+ /a/ -> Leaf { return("x") }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent LX helper chain used as semicolonless comparison baseline');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured LX helper block');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'semicolonless structured LX helper block lowers to the same LXCODE as the fluent baseline');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'semicolonless structured LX helper block avoids RAW_PERL fallback');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'semicolonless structured LX helper block preserves canonical action-IR node coverage from the fluent baseline');
+    ok(
+        $block_meta->{unresolved_helper_count} == 0 &&
+        $block_meta->{language_agnostic_action_ir_ready},
+        'semicolonless structured LX helper block stays fully language-agnostic-ready',
+    );
+};
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 
