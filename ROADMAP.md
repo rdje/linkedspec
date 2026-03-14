@@ -219,6 +219,9 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 
 ## Status
 - This dashboard is the canonical live status source for roadmap progress.
+- Execution-order rule: roadmap phases are tracked in numbered order, but execution is dependency-first by default rather than strictly sequential.
+- Explicitly: phase numbers define objective groupings and intended broad progression, not a hard requirement to finish Phase N completely before touching any Phase N+1-related prerequisite or supporting slice.
+- Override rule: if strict sequential execution is desired, that must be requested explicitly; otherwise the default operating mode is bounded, dependency-ordered slices that keep the regression gate green.
 - Before every commit, update this section if the completed slice materially changes what is done, what is left, or which areas are active.
 - Whenever any dashboard row changes level, display the changed live-status rows in the task close-out and record the change here in `ROADMAP.md`.
 - For every commit workflow close-out, display the current live-status tracker snapshot as well, so it is always clear how the completed slice did or did not affect the dashboard.

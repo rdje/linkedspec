@@ -2,6 +2,13 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Clarified the roadmap execution policy explicitly in the repo:
+  - phase numbering is not a hard waterfall contract,
+  - the default execution mode is dependency-first, bounded slices,
+  - strict phase-by-phase sequencing only applies when explicitly requested.
+- This removes ambiguity about why some support/foundation work may land outside pure phase-number order.
+
+## Current Session Notes (2026-03-14)
 - Tightened the live-status workflow rule again:
   - every commit workflow close-out must now display the current live-status tracker snapshot,
   - so it is always explicit how the completed slice did or did not change the dashboard.

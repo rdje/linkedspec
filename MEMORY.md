@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Clarified the roadmap execution policy explicitly in the repo:
+  - phase numbering is not a hard waterfall contract,
+  - the default execution mode is dependency-first, bounded slices,
+  - strict phase-by-phase sequencing only applies when explicitly requested.
+
+## Current Session Snapshot (2026-03-14)
 - Tightened the live-status workflow rule again:
   - every commit workflow close-out must now display the current live-status tracker snapshot,
   - so it is always explicit how the completed slice did or did not change the dashboard.

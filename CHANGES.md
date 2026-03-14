@@ -1,5 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Document Dependency-First Roadmap Execution
+## Summary
+Made the roadmap execution policy explicit: phase numbering is a tracking/progression aid, but default execution is dependency-first rather than strict phase-by-phase waterfall ordering.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Clarified the canonical roadmap contract:
+  - phase numbers define objective groupings and intended broad progression,
+  - execution defaults to bounded dependency-ordered slices,
+  - strict sequential phase execution applies only when explicitly requested.
+- Mirrored the same rule into interruption-safe notes so the execution policy stays explicit across session loss.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Process Slice: Display Current Live-Status Tracker On Every Commit Close-Out
 ## Summary
 Tightened the roadmap workflow so every commit close-out must now include the current live-status tracker snapshot, making it explicit whether the completed slice changed the dashboard or left it unchanged.
