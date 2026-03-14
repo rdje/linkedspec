@@ -1702,6 +1702,48 @@ subtest 'emit_context_array_pipeline_deps_route_through_owner_default_map' => su
     ok(LinkedSpec::RuleIR::EmitContext->can('_array_pipeline_deps'), 'EmitContext still exposes the local array-pipeline dep entrypoint');
 };
 
+subtest 'emit_context_method_lowering_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::MethodLowering;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::MethodLowering::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return 'trim_ok' },
+            split_declare_symbol_names => sub { return ['items'] },
+            parse_declare_binding_entry => sub { return { name => 'items' } },
+            lower_declare_initializer_expr => sub { return 'init_ok' },
+            parse_method_function_expr => sub { return { method => 'scalar', args => ['flag'] } },
+            normalize_method_args_with_optional_scope => sub { return ['flag'] },
+            lower_scalaref_value_expr => sub { return 'scalaref_ok' },
+            extract_array_symbol_name => sub { return 'items' },
+            extract_hash_symbol_name => sub { return 'map' },
+            extract_scalar_symbol_name => sub { return "scalar_for_$pkg" },
+            lower_scalar_access_key_expr => sub { return '$key' },
+            infer_scalar_container_kind => sub { return 'scalar' },
+            split_top_level_csv => sub { return ['flag'] },
+            lower_assignment_source_expr => sub { return '$flag' },
+            strip_literal_delimiters => sub { return 'literal' },
+        };
+    };
+    local *LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr = sub {
+        my ($expr, $deps) = @_;
+        return $deps->{extract_scalar_symbol_name}->($expr);
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('scalar(flag)');
+    is($ret, 'scalar_for_LinkedSpec::RuleIR::EmitContext', 'EmitContext method-lowering helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the method-lowering owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext method-lowering helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_method_lowering_deps'), 'EmitContext still exposes the local method-lowering dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

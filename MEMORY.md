@@ -6,6 +6,17 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext::_method_lowering_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)`.
+- Added the focused regression lock `emit_context_method_lowering_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `MethodLowering` owner map.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=241`)
+
+## Current Session Snapshot (2026-03-14)
+- Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_array_pipeline_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)`.
 - Added the focused regression lock `emit_context_array_pipeline_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `ArrayPipeline` owner map.
 - Validation snapshot for this slice:

@@ -188,23 +188,10 @@ sub _value_expr_deps {
 }
 
 sub _method_lowering_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  split_declare_symbol_names => sub { return _split_declare_symbol_names(@_) },
-  parse_declare_binding_entry => sub { return _parse_declare_binding_entry(@_) },
-  lower_declare_initializer_expr => sub { return _lower_declare_initializer_expr(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  normalize_method_args_with_optional_scope => sub { return _normalize_method_args_with_optional_scope(@_) },
-  lower_scalaref_value_expr => sub { return _lower_scalaref_value_expr(@_) },
-  extract_array_symbol_name => sub { return _extract_array_symbol_name(@_) },
-  extract_hash_symbol_name => sub { return _extract_hash_symbol_name(@_) },
-  extract_scalar_symbol_name => sub { return _extract_scalar_symbol_name(@_) },
-  lower_scalar_access_key_expr => sub { return _lower_scalar_access_key_expr(@_) },
-  infer_scalar_container_kind => sub { return _infer_scalar_container_kind(@_) },
-  split_top_level_csv => sub { return _split_top_level_csv(@_) },
-  lower_assignment_source_expr => sub { return _lower_assignment_source_expr(@_) },
-  strip_literal_delimiters => sub { return _strip_literal_delimiters(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_method_lowering_pkg();
+  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _declare_method_deps {
