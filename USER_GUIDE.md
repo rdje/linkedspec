@@ -200,6 +200,8 @@ List-context insertion helpers are locked too: fluent and structured authoring n
 
 Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `array_copy(...)` and compatibility `array_values(...)` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract as the preferred and compatibility spellings evolve.
 
+That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` and `array_values(...)` return payloads on both action-edge and lifecycle surfaces.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

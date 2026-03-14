@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Branch-Local Array Snapshot Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking snapshot payload helpers inside control-flow branch bodies. Supported `array_copy(...)` and compatibility `array_values(...)` return payloads now preserve the same lowering and migration metadata across fluent and structured authoring for `if/elseif` and `switch/case` forms on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for supported branch-local array snapshot helper forms on:
+  - action-edge `if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - action-edge `switch(...)` / `case(...)` / `default()` / `endswitch()` bodies,
+  - lifecycle `LX.if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - and lifecycle `LX.switch(...)` / `case(...)` / `default()` / `endswitch()` bodies.
+- The locked snapshot payload helper surface includes:
+  - preferred `array_copy(...)`,
+  - and compatibility `array_values(...)`.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported fluent/block equivalence coverage inside active branch-local control-flow surfaces rather than changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Array Snapshot Helper Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking snapshot payload helpers between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `array_copy(...)` and compatibility `array_values(...)` payload forms now preserve the same lowering and migration metadata across both concrete syntaxes.

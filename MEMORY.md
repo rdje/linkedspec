@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for branch-local snapshot payload helper equivalence:
+  - supported `array_copy(...)` and compatibility `array_values(...)` return payloads now have regression coverage inside `if/elseif` and `switch/case` control-flow bodies on both action-edge and lifecycle surfaces,
+  - and those branch-local forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice deepens supported branch-local snapshot-payload equivalence coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=269`)
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for snapshot payload helper equivalence:
   - supported `array_copy(...)` and compatibility `array_values(...)` payload forms now have regression coverage between fluent and structured authoring on both action-edge and lifecycle surfaces,
   - and those forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.

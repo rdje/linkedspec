@@ -157,6 +157,7 @@ push_value(array(nodes), array_copy(array(keyval_pairs)))
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on supported `array_copy(...)` and compatibility `array_values(...)` payload forms too,
 - on both action-edge and lifecycle surfaces,
+- and that same supported snapshot-helper equivalence is now regression-locked inside control-flow branch bodies too,
 - so snapshot-array payload construction is part of the same equivalence contract as the rest of the method-like DSL surface.
 
 This is one of the most important distinctions in the DSL.
