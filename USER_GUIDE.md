@@ -164,6 +164,7 @@ Long-term, the backend-neutral goal is not "remove braces." It is:
 If a `{...}` block contains only method-like DSL statements, it is part of the intended backend-neutral surface, not a legacy escape hatch.
 If a `{...}` block contains raw Perl, that is migration debt to remove rather than syntax we want to preserve.
 Inside those method-only structured blocks, semicolons are accepted but no longer required between top-level method statements.
+That same optional-semicolon rule now applies on lifecycle structured blocks too, including `LX { if(...) ... endif() }` and `LX { switch(...) ... endswitch() }` marker-style control flow.
 
 ### Nested method composition should be unlimited
 Method arguments are intended to support unlimited nested method composition.

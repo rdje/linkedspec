@@ -1,5 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Structured Lifecycle Control-Flow Blocks
+## Summary
+Extended the semicolon-light structured control-flow work by regression-locking the same supported semicolonless marker-style forms on lifecycle surfaces too. Structured `LX { if(...) ... else() ... endif() }` and `LX { switch(...) ... case(...) ... default() ... endswitch() }` blocks now preserve the same lifecycle lowering and migration metadata as the fluent baseline without requiring `;` delimiters between top-level method statements.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused lifecycle regressions for semicolonless structured `if/elseif/else/endif` and `switch/case/default/endswitch` blocks inside `LX { ... }`.
+- Locked parity against the fluent lifecycle baseline on:
+  - identical `LXCODE` lowering,
+  - zero raw-Perl fallback,
+  - zero unresolved-helper drift,
+  - and language-agnostic action-IR readiness.
+- Clarified in the guides that optional semicolons now apply on both action-edge structured blocks and lifecycle `LX { ... }` structured blocks for canonical method-only control-flow.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported structured lifecycle authoring surface without changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Accept Semicolonless Structured Control-Flow Blocks
 ## Summary
 Extended the method-like DSL migration work by teaching structured helper-only blocks to split top-level control-flow statements without requiring `;` delimiters. Marker-style `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` blocks now compile cleanly in semicolonless structured form while preserving the same lowering and migration metadata as the existing fluent and semicolon-delimited structured surfaces.

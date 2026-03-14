@@ -9,6 +9,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Landed the lifecycle follow-up for semicolon-light structured control flow:
+  - semicolonless marker-style `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` forms are now regression-locked on structured lifecycle `LX { ... }` blocks too,
+  - those lifecycle blocks now match the fluent baseline on `LXCODE` lowering,
+  - and they preserve zero-fallback, zero-unresolved, language-agnostic migration metadata without needing `;` separators between top-level method statements.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported structured lifecycle control-flow authoring without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-14)
 - Landed the first semicolon-light structured control-flow follow-up:
   - `StatementSplit::Core` now accepts adjacent top-level method-like statements without `;` separators,
   - structured helper-only `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` blocks now compile cleanly without trailing semicolons,

@@ -47,12 +47,12 @@ This module lowers:
 - `return_undef()`
 
 It also supports two switch styles:
-1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons), and
+1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `LX { ... }` blocks), and
 2. inline composite switch arguments (`switch(expr, case(...), default(...))`).
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.
-In structured helper-only blocks, semicolons are accepted but not required between top-level method statements.
+In structured helper-only blocks and structured lifecycle `LX { ... }` blocks, semicolons are accepted but not required between top-level method statements.
 
 ### Basic form
 

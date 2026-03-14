@@ -6610,6 +6610,68 @@ SPEC
         'semicolonless structured action-edge switch/case branch form stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_semicolons' => sub {
+    plan tests => 10;
+
+    my $if_fluent_spec = <<'SPEC';
+Top::&
+LX.if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $if_block_spec = <<'SPEC';
+Top::&
+LX { if(scalar(on))
+ return(array_copy(array(items)))
+ elseif(scalar(alt_on))
+ return(hash("content", array_values(array(assigns))))
+ else()
+ return_undef()
+ endif() }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $switch_fluent_spec = <<'SPEC';
+Top::&
+LX.switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $switch_block_spec = <<'SPEC';
+Top::&
+LX { switch(scalar(kind))
+ case("A")
+ return(array_copy(array(items)))
+ default()
+ return(hash("content", array_values(array(assigns))))
+ endswitch() }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descr => 1);
+    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descr => 1);
+    ok(defined($if_fluent_descr) && ref($if_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif branch form used as semicolonless comparison baseline');
+    ok(defined($if_block_descr) && ref($if_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle if/elseif branch form');
+    is_deeply($if_fluent_descr->{spec}{Top}{LXCODE}, $if_block_descr->{spec}{Top}{LXCODE}, 'semicolonless structured lifecycle if/elseif branch form lowers to the same LXCODE as the fluent baseline');
+    is($if_block_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'semicolonless structured lifecycle if/elseif branch form avoids RAW_PERL fallback');
+    ok(
+        $if_block_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $if_block_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'semicolonless structured lifecycle if/elseif branch form stays fully language-agnostic-ready',
+    );
+
+    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descr => 1);
+    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descr => 1);
+    ok(defined($switch_fluent_descr) && ref($switch_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case branch form used as semicolonless comparison baseline');
+    ok(defined($switch_block_descr) && ref($switch_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle switch/case branch form');
+    is_deeply($switch_fluent_descr->{spec}{Top}{LXCODE}, $switch_block_descr->{spec}{Top}{LXCODE}, 'semicolonless structured lifecycle switch/case branch form lowers to the same LXCODE as the fluent baseline');
+    is($switch_block_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'semicolonless structured lifecycle switch/case branch form avoids RAW_PERL fallback');
+    ok(
+        $switch_block_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $switch_block_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'semicolonless structured lifecycle switch/case branch form stays fully language-agnostic-ready',
+    );
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 
