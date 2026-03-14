@@ -1861,6 +1861,38 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
     ok(LinkedSpec::RuleIR::EmitContext->can('_action_contract_deps'), 'EmitContext still exposes the local action-contract dep entrypoint');
 };
 
+subtest 'emit_context_rewrite_pipeline_deps_route_through_owner_default_map' => sub {
+    plan tests => 5;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::RewritePipeline;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            build_action_lowering_contracts => sub { return [{ owner_pkg => "rewrite_for_$pkg", id => 'contract_1', ir_node => 'RETURN', diag_name => 'return', unresolved_pattern => undef, lower => sub { return 'return $foo;' } }] },
+            collect_action_helper_ir_nodes => sub { return { helper_action_ir_count => 0, helper_action_ir_hits => {}, helper_action_ir_nodes => [], helper_action_ir_events => [] } },
+            build_canonical_action_ir_events => sub { return { canonical_action_ir_count => 0, canonical_action_ir_hits => {}, canonical_action_ir_nodes => [], canonical_action_ir_events => [], canonical_action_ir_fallback_count => 0 } },
+            find_unresolved_action_helpers => sub { return { unresolved_helper_count => 0, unresolved_helper_hits => {}, unresolved_helper_events => [] } },
+        };
+    };
+    local *LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules = sub {
+        my ($label, $deps) = @_;
+        return $deps->{build_action_lowering_contracts}->($label);
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_build_action_rewrite_rules('Top');
+    is(ref($ret), 'ARRAY', 'EmitContext rewrite-rule builder now returns the owner-built rule list');
+    is($ret->[0]{owner_pkg}, 'rewrite_for_LinkedSpec::RuleIR::EmitContext', 'EmitContext rewrite-rule builder now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the rewrite-pipeline owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext rewrite-rule builder preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_rewrite_pipeline_deps'), 'EmitContext still exposes the local rewrite-pipeline dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

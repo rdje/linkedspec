@@ -3,6 +3,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps()` is now explicitly grouped with the other owner-map helpers, and the focused seam lock now pins `_build_action_rewrite_rules(...)` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`.
+- Added a focused regression lock:
+  - `emit_context_rewrite_pipeline_deps_route_through_owner_default_map`
+    to assert that `EmitContext` now requests the `RewritePipeline` owner map for `LinkedSpec::RuleIR::EmitContext`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=245`)
+
+## Current Session Notes (2026-03-14)
+- Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_action_contract_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)`, so the extracted contracts owner defines that dependency contract in one place.
 - Added a focused regression lock:
   - `emit_context_action_contract_deps_route_through_owner_default_map`

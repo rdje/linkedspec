@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` RewritePipeline Deps Through Owner Map
+## Summary
+Made the remaining emit-context rewrite-pipeline dependency seam explicit by locking `LinkedSpec::RuleIR::EmitContext` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`, so the extracted rewrite-pipeline owner defines that callback contract in one place too.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Tightened the emit-context owner-map seam:
+  - moved `LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps()` up into the grouped owner-dependency section so the remaining callback-map owners stay clustered together,
+  - added focused regression coverage that locks `_build_action_rewrite_rules(...)` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`.
+- Preserved behavior:
+  - `EmitContext` still rewrites helper code through `LinkedSpec::ActionIR::RewritePipeline`,
+  - caller `$@` is still preserved on successful rewrite-pipeline owner delegation,
+  - require-only consumers still keep `RewritePipeline.pm` unloaded until rewrite helpers are actually exercised.
+- Updated focused regression coverage:
+  - added `emit_context_rewrite_pipeline_deps_route_through_owner_default_map` to lock that `EmitContext` now asks `RewritePipeline` for the callback map owned by `LinkedSpec::RuleIR::EmitContext`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=245`)
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` Action-Contract Deps Through Owner Map
 ## Summary
 Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built action-contract callback map and onto `LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)`, so the extracted contracts owner now defines that dependency contract in one place.

@@ -243,6 +243,13 @@ sub _action_contract_deps {
  })
 }
 
+sub _rewrite_pipeline_deps {
+ return _call_preserving_err(sub {
+  _require_rewrite_pipeline_pkg();
+  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
+ })
+}
+
 sub _lower_flow_composite_expr {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -608,13 +615,6 @@ sub _canonicalize_helper_action_ir_event {
  return _call_preserving_err(sub {
   _require_canonical_events_pkg();
   return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@args, _canonical_event_deps())
- })
-}
-
-sub _rewrite_pipeline_deps {
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
  })
 }
 
