@@ -174,6 +174,8 @@ This first lock is intentionally scoped. It does not yet claim that every nested
 
 One more supported slice is now locked too: nested array-pipeline composition inside `return(array(...))` lowers cleanly, and the fluent versus structured method surfaces now agree on the migration metadata for that return-payload shape as well.
 
+Collection-valued nested array-pipeline composition is now locked on a broader supported surface too: `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values all accept the same helper-only pipeline composition, and the fluent versus structured lifecycle forms agree on that metadata as well.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

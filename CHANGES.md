@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Collection-Value Pipeline Forms
+## Summary
+Extended the dedicated method-like DSL migration track by regression-locking collection-valued nested array-pipeline composition on supported surfaces: `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values now have explicit coverage, and fluent versus structured lifecycle surfaces agree on that metadata too.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added direct lowering regressions for:
+  - `declare(array, name=pipeline(...))`,
+  - `assign(array(target), pipeline(...))`,
+  - nested hash payload values using `array(pipeline(...))`,
+  - and nested array payload values using `array(pipeline(...))`.
+- Added a fluent-versus-structured lifecycle equivalence regression for collection-valued nested array-pipeline composition inside `declare(array, ...)` and `assign(array(...), ...)`.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported collection-value coverage inside the active track rather than changing the track level.
+
+## Validation
+- Ran:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=249`)
+
 ## 2026-03-14 - Method-Like DSL Slice: Lower Nested Return-Payload Pipelines
 ## Summary
 Extended the dedicated method-like DSL migration track on a second supported surface: helper-only nested array-pipeline composition inside `return(array(...))` now lowers cleanly, and fluent versus structured method surfaces now report matching zero-unresolved / zero-fallback migration metadata for that return-payload shape.
