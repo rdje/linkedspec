@@ -120,14 +120,20 @@ sub _render_method_call_chain {
  my ($entry_label, $chain) = @_;
  my $calls = _parse_method_call_chain($chain);
  return undef unless $calls && @$calls;
- my @rendered = map {
-  my $method = $_->{method};
-  my $args = $_->{args};
+ my @rendered;
+ foreach my $call (@$calls) {
+  my $method = $call->{method};
+  my $args = $call->{args};
+  my $rendered;
+  # Keep rendering the whole fluent chain even when a general-payload
+  # return(...) appears in the middle of control-flow branch bodies.
   if ($method eq 'return' && _method_chain_return_uses_general_payload($args)) {
-   return $method . '(' . $args . ')';
+   $rendered = $method . '(' . $args . ')';
+  } else {
+   $rendered = $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')';
   }
-  $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')'
- } @$calls;
+  push @rendered, $rendered;
+ }
  return join '; ', @rendered
 }
 

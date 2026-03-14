@@ -2,6 +2,18 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Landed a real method-DSL branch-local fix rather than just a wording clarification:
+  - the bootstrap fluent-chain renderer no longer truncates a chain when a general-payload `return(...)` appears inside `if(...)` / `elseif(...)` or `switch(...)` / `case(...)` branch bodies,
+  - and supported fluent versus structured branch-local control-flow forms are now regression-locked to the same canonical action-IR coverage and zero-fallback migration metadata.
+- The method-like DSL track still stays `in progress`; this slice fixes a real branch-local equivalence seam on supported control-flow surfaces without moving the tracker level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=253`)
+
+## Current Session Notes (2026-03-14)
 - Clarified another method-DSL equivalence requirement:
   - fluent-versus-structured equivalence is expected not only for top-level action/lifecycle sequences,
   - but also inside `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies.

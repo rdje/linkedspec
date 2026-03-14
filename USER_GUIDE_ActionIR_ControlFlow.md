@@ -7,6 +7,7 @@ For exact DSL-to-Perl examples for every control-flow marker and emitted branch 
 Method-DSL migration note:
 - fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,
 - so `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same method-like DSL equivalence target,
+- and supported general-`return(...)` branch-local method slices are now regression-locked on both the fluent and structured surfaces,
 - even when the docs show only representative branch examples.
 
 ## What this module is responsible for

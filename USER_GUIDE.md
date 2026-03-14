@@ -186,6 +186,8 @@ That supported collection-valued surface now extends to broader hash/object-orie
 
 That supported collection-hash shape is now locked on action-edge surfaces too: fluent `-> rule .m1(...).m2(...)` and structured `-> rule { m1(...); m2(...); }` forms now agree on compiled action output and migration metadata for that supported chain.
 
+Supported branch-local control-flow slices are now locked too: fluent and structured method-like forms agree on migration metadata inside `if(...)` / `elseif(...)` / `else()` branches and `switch(...)` / `case(...)` / `default()` bodies for supported general-`return(...)` payload chains.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

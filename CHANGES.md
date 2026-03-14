@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Fix Branch-Local Fluent Return Chains
+## Summary
+Fixed a real method-like DSL branch-local equivalence bug: fluent control-flow chains were being truncated at the first general `return(...)` payload inside `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` branch bodies. Supported fluent and structured branch-local forms now stay aligned on canonical action-IR coverage and migration metadata.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Fixed `LinkedSpec::BootstrapSpec::Core::_render_method_call_chain(...)` so a general-payload `return(...)` no longer aborts the rest of the fluent-chain render.
+- Added focused regression locks for supported branch-local fluent-versus-structured equivalence in:
+  - `if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - and `switch(...)` / `case(...)` / `default()` / `endswitch()` bodies.
+- Locked parity on:
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice fixes and locks another supported branch-local surface inside the active track rather than changing the track level.
+
 ## 2026-03-14 - Documentation Policy Slice: Clarify Branch-Local Fluent/Block Equivalence Scope
 ## Summary
 Clarified the method-like DSL target surface so fluent-versus-structured equivalence is now stated explicitly for branch-local control-flow bodies too: `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same equivalence goal, not a separate exception surface.

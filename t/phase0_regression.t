@@ -5854,6 +5854,88 @@ SPEC
     is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured collection-hash action forms produce identical canonical action-IR node coverage');
     ok($fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready}, 'fluent and structured collection-hash action forms remain language-agnostic action-IR ready');
 };
+subtest 'method_like_fluent_and_structured_if_elseif_branch_blocks_lower_equivalently' => sub {
+    plan tests => 11;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .if(scalar(on)).return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).elseif(scalar(alt_on)).return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).else().return_undef().endif()
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); else(); return_undef(); endif() }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent if/elseif branch-local method form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured if/elseif branch-local method form');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent if/elseif branch-local method form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured if/elseif branch-local method form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent if/elseif branch-local method form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured if/elseif branch-local method form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent if/elseif branch-local method form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured if/elseif branch-local method form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured if/elseif branch-local method forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured if/elseif branch-local method forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'branch-local if/elseif fluent form preserves IF/ELIF/ELSE/ENDIF canonical nodes with nested return payloads'
+    );
+};
+subtest 'method_like_fluent_and_structured_switch_case_branch_blocks_lower_equivalently' => sub {
+    plan tests => 11;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(kind)).case("A").return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).default().return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).endswitch()
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); endswitch() }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent switch/case branch-local method form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured switch/case branch-local method form');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent switch/case branch-local method form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured switch/case branch-local method form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent switch/case branch-local method form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured switch/case branch-local method form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent switch/case branch-local method form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured switch/case branch-local method form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured switch/case branch-local method forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured switch/case branch-local method forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'branch-local switch/case fluent form preserves SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes with nested return payloads'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

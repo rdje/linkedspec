@@ -5,6 +5,19 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Fixed a real method-DSL branch-local control-flow bug:
+  - the bootstrap fluent-chain renderer had been truncating the rest of a fluent chain at the first general `return(...)`,
+  - which broke fluent-versus-structured equivalence for supported `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` branch-local method bodies.
+- The fix is now landed together with regression locks covering those supported branch-local control-flow surfaces.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice fixes a concrete supported-surface bug without moving the level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=253`)
+
+## Current Session Snapshot (2026-03-14)
 - Clarified another method-DSL equivalence requirement:
   - fluent-versus-structured equivalence is expected inside `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies too,
   - not just at top-level action/lifecycle sequences.
