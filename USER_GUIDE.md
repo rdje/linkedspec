@@ -208,6 +208,8 @@ String-join payload helpers are locked too: fluent and structured authoring now 
 
 That same supported `join_values(...)` equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on joined-string return payloads on both action-edge and lifecycle surfaces.
 
+Canonical `call(rule)` value capture is locked too: fluent and structured authoring now agree on supported `assign(scalar(retv), call(rule))` helper forms on both action-edge and lifecycle surfaces, so child-result capture stays inside the same backend-neutral method-like DSL equivalence contract rather than depending on raw assignment wrappers.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

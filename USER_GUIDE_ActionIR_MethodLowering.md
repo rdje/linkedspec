@@ -299,6 +299,11 @@ Use this when:
 - you may assign it to a head/tail slot,
 - you want canonical helper flow rather than raw assignment wrappers.
 
+Method-DSL migration note:
+- fluent and structured authoring are now regression-locked on supported `assign(scalar(retv), call(rule))` capture forms too,
+- on both action-edge and lifecycle surfaces,
+- so canonical child-result capture is part of the same equivalence contract as the rest of the method-like DSL surface.
+
 ## `push_value(array(target), value)`
 `push_value(...)` lowers a value expression and appends it into an array variable.
 

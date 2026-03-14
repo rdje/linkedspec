@@ -1,5 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Call-Value Helper Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking canonical call-value capture between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `assign(scalar(retv), call(rule))` forms now preserve the same lowering and migration metadata across both concrete syntaxes.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for supported canonical call-value capture forms on:
+  - action-edge method chains,
+  - and lifecycle `LX` method chains.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported fluent/block equivalence coverage for canonical call-result capture without changing the track level.
+
 ## 2026-03-14 - Docs Contract: Lock Readability and Non-Ambiguity Standard
 ## Summary
 Recorded a project-level documentation quality contract so readability, non-ambiguity, direct explanations, and representative examples are treated as explicit goals rather than informal style preferences.
