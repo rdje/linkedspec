@@ -1744,6 +1744,42 @@ subtest 'emit_context_method_lowering_deps_route_through_owner_default_map' => s
     ok(LinkedSpec::RuleIR::EmitContext->can('_method_lowering_deps'), 'EmitContext still exposes the local method-lowering dep entrypoint');
 };
 
+subtest 'emit_context_declare_method_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::DeclareMethod;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            trim_action_ir_value => sub { return 'trim_ok' },
+            parse_method_function_expr => sub { return { method => 'declare_scalar', args => ['flag'] } },
+            is_bare_method_scope_token => sub { return 0 },
+            normalize_method_args_with_optional_scope => sub { return ['flag'] },
+            lower_flow_composite_expr => sub { return 'flow_ok' },
+            lower_method_value_expr => sub { return 'value_ok' },
+            declare_alias_to_type => sub { return "scalar_for_$pkg" },
+            lower_typed_declare_statement => sub { return 'typed_ok' },
+            lower_assign_statement => sub { return 'assign_ok' },
+        };
+    };
+    local *LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr = sub {
+        my ($expr, $deps) = @_;
+        return { owner_pkg => $deps->{declare_alias_to_type}->('s') };
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_extract_declare_statement_from_method_expr('declare_scalar(flag)');
+    is_deeply($ret, { owner_pkg => 'scalar_for_LinkedSpec::RuleIR::EmitContext' }, 'EmitContext declare-method helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the declare-method owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext declare-method helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_declare_method_deps'), 'EmitContext still exposes the local declare-method dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

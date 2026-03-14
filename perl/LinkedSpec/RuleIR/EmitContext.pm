@@ -195,19 +195,10 @@ sub _method_lowering_deps {
 }
 
 sub _declare_method_deps {
- return {
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  is_bare_method_scope_token => sub { return _is_bare_method_scope_token(@_) },
-  normalize_method_args_with_optional_scope => sub { return _normalize_method_args_with_optional_scope(@_) },
-  lower_flow_composite_expr => sub { return _lower_flow_composite_expr(@_) },
-  lower_method_value_expr => sub { return _lower_method_value_expr(@_) },
-  declare_alias_to_type => sub { return _declare_alias_to_type(@_) },
-  split_declare_symbol_names => sub { return _split_declare_symbol_names(@_) },
-  parse_declare_binding_entry => sub { return _parse_declare_binding_entry(@_) },
-  lower_typed_declare_statement => sub { return _lower_typed_declare_statement(@_) },
-  lower_assign_statement => sub { return _lower_assign_statement(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_declare_method_pkg();
+  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _array_pipeline_deps {
