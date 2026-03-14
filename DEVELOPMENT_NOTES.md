@@ -2,6 +2,12 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Clarified the method-DSL documentation policy:
+  - the roadmap and relevant guides now state explicitly that unlimited nested method composition in arguments is a supported capability,
+  - but the docs should show representative examples only rather than trying to catalog every legal nesting combination.
+- This is a wording/guide-policy cleanup only; the method-like DSL tracker row stays `in progress`.
+
+## Current Session Notes (2026-03-14)
 - Landed another method-like DSL follow-up for collection-valued hash/object composition:
   - `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` now have regression coverage for helper-only nested array-pipeline composition inside hash/object-valued shapes,
   - and fluent versus structured lifecycle surfaces now report matching zero-unresolved / zero-fallback metadata for that supported collection-hash shape too.

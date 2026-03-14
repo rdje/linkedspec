@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Clarified the method-DSL documentation policy:
+  - unlimited nested method composition in arguments is now stated explicitly as a supported capability in the roadmap and relevant guides,
+  - and the guides now say they use representative examples rather than trying to enumerate every nesting combination.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this is a documentation-policy clarification only.
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for collection-valued hash/object composition:
   - `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` now have regression coverage for helper-only nested array-pipeline composition inside hash/object-valued shapes,
   - and fluent versus structured lifecycle surfaces now agree on that supported collection-hash shape too.

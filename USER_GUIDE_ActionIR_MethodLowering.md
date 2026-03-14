@@ -4,6 +4,10 @@ This guide covers the value-construction and general method lowering handled by 
 This module is where many of the most important backend-neutral building blocks live.
 For exact DSL-to-Perl examples for every constructor, selector, flattening helper, return helper, and compatibility surface mentioned here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
+Documentation note:
+- nested method composition in arguments is intended to be supported with no fixed depth limit,
+- but this guide uses representative examples only rather than enumerating every possible nesting combination.
+
 ## What this module is responsible for
 In practical terms, this is the guide you want when you need to understand:
 - `scalar(...)`

@@ -4,6 +4,11 @@ Its job is simple: list every currently supported lowering helper or recognized 
 
 Use this file when you want to review the real lowering contract rather than just the higher-level explanations.
 
+Scope note:
+- “exhaustive” here means exhaustive over the recognized helper/lowering surfaces and compatibility constructs,
+- not exhaustive over every possible nested-composition arrangement of those helpers inside method arguments.
+- Unlimited nested method composition in arguments is a supported capability; this file uses representative emitted examples rather than trying to enumerate every combination.
+
 ## How to read this file
 - Preferred canonical helper forms are the best choice for new backend-neutral `.spec` authoring.
 - Compatibility helpers are still supported and important because existing specs use them.

@@ -1,5 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Documentation Policy Slice: Clarify Unlimited Nested Composition Wording
+## Summary
+Clarified the roadmap and user-guide policy for method-like DSL nesting: unlimited nested method composition in method arguments is an explicit supported capability, but the docs should present that capability with representative examples rather than trying to enumerate every legal nesting form.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ArrayPipeline.md`
+- Updated: `USER_GUIDE_ActionIR_ValueExpr.md`
+- Updated: `USER_GUIDE_ActionIR_DeclareMethod.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed the implication that the docs should spell out concrete nesting families in detail.
+- Added explicit wording that:
+  - unlimited nested method composition in arguments is supported,
+  - focused guides should use representative examples only,
+  - and the emitted-Perl reference is exhaustive over helper/lowering surfaces, not over every possible nesting arrangement.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice clarifies documentation policy only.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Collection-Hash Pipeline Forms
 ## Summary
 Extended the dedicated method-like DSL migration track by regression-locking collection-valued nested array-pipeline composition on broader hash/object-oriented surfaces: `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` now have explicit coverage, and fluent versus structured lifecycle surfaces agree on that metadata too.

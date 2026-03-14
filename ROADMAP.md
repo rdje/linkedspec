@@ -181,9 +181,9 @@ Status interpretation note:
    - Treat fluent chains and structured blocks as two equivalent concrete syntaxes for the same canonical IR.
    - Preserve order, scope, and backend-neutral lowering semantics across both surfaces.
 4. Unlimited method composition in arguments (Planned)
-   - Support nested method composition inside arguments with no fixed depth limit, in Lisp-like functional form:
-     - `mk(mk1(mk11(...), ..., mk1N(...)), mk2(...), ..., mkM(...))`
+   - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
+   - Document this as a supported capability plus representative examples; do not try to catalog every legal nesting combination in the roadmap or guides.
 5. Unified lowering path (Planned)
    - Lower both legacy helpers (`return_a`, `return_m`, etc.) and new method-chain forms into the same canonical IR/lowering pipeline.
    - Lower fluent chains, structured method blocks, and nested composed arguments into the same canonical IR/lowering pipeline.

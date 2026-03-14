@@ -156,17 +156,18 @@ Long-term, the backend-neutral goal is not "remove braces." It is:
 If a `{...}` block contains only method-like DSL statements, it is part of the intended backend-neutral surface, not a legacy escape hatch.
 
 ### Nested method composition should be unlimited
-Method arguments are also intended to support unlimited nested method composition in Lisp-like functional form:
-
-```text
-mk(mk1(mk11(...), mk12(...)), mk2(...), mk3(...))
-```
+Method arguments are intended to support unlimited nested method composition.
 
 That means the backend-neutral target surface includes both:
 - fluent sequencing at the statement level,
 - and arbitrarily nested method composition inside argument lists.
 
 Those two dimensions are meant to lower into the same canonical IR regardless of whether the outer surface is fluent chaining or a structured `{...}` block.
+
+Documentation policy note:
+- the guides should state this capability explicitly,
+- and use representative examples where helpful,
+- not try to enumerate every possible nesting shape.
 
 That equivalence is no longer just aspirational wording: helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical lowered action output, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lowered lifecycle output.
 

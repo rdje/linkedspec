@@ -12,6 +12,10 @@ This is the guide you want when you need to understand:
 - collection-entry access forms used in assignments
 - raw pass-through expressions inside helper shells
 
+Documentation note:
+- assignment/value expressions may consume arbitrarily nested method composition in arguments,
+- but this guide documents that capability with representative shapes rather than listing every nesting permutation.
+
 ## `assign(target, source)`
 This is the canonical assignment helper.
 

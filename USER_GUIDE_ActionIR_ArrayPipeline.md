@@ -20,6 +20,10 @@ These helpers can be used in:
 - method chains,
 - nested functional composition.
 
+Documentation note:
+- nested method composition that uses these pipeline helpers is intended to work with no fixed depth limit,
+- but this guide shows representative compositions only rather than an exhaustive nesting inventory.
+
 ## `split(array_target, scalar_source, delimiter?)`
 Use `split(...)` to populate an array from a scalar source string.
 

@@ -4,6 +4,10 @@ This guide covers the declaration surface lowered by `perl/LinkedSpec/ActionIR/D
 The declaration surface is where you define working state inside action/lifecycle code without dropping back to raw Perl declarations.
 For exact DSL-to-Perl examples for every declaration form and alias discussed here, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside this guide.
 
+Documentation note:
+- declaration initializer arguments may use nested method composition with no fixed depth limit,
+- but this guide keeps examples representative instead of attempting a full nesting catalog.
+
 ## Why declarations matter
 A lot of backend-neutral migration work starts by replacing raw Perl declarations such as:
 
