@@ -139,6 +139,35 @@ I.declare(array, items).declare(scalar, flag)
 LX.if(is_nonempty(array(items))).return(array_copy(array(items))).else().return_undef().endif()
 ```
 
+### Fluent chains and `{...}` blocks are meant to be equivalent
+Long-term, the backend-neutral goal is not "remove braces." It is:
+- remove raw Perl dependence,
+- keep method-like DSL semantics explicit,
+- and allow those semantics to be authored in either of these equivalent forms:
+
+```text
+-> child .m1(...).m2(...).mk(...)
+```
+
+```text
+-> child { m1(...); m2(...); mk(...) }
+```
+
+If a `{...}` block contains only method-like DSL statements, it is part of the intended backend-neutral surface, not a legacy escape hatch.
+
+### Nested method composition should be unlimited
+Method arguments are also intended to support unlimited nested method composition in Lisp-like functional form:
+
+```text
+mk(mk1(mk11(...), mk12(...)), mk2(...), mk3(...))
+```
+
+That means the backend-neutral target surface includes both:
+- fluent sequencing at the statement level,
+- and arbitrarily nested method composition inside argument lists.
+
+Those two dimensions are meant to lower into the same canonical IR regardless of whether the outer surface is fluent chaining or a structured `{...}` block.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

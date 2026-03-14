@@ -1,5 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Clarify Backend-Neutral Method DSL Goal
+## Summary
+Corrected the roadmap and guide language so the backend-neutral goal is no longer framed as removing `{...}` blocks entirely. The clarified target is to remove raw Perl dependence while supporting two equivalent structured DSL surfaces: fluent method chains and structured `{...}` method blocks, both with unlimited nested method composition in arguments.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Rewrote the method-like DSL roadmap language:
+  - replaced blanket `{...}` deprecation wording,
+  - added explicit equivalence between fluent chains and structured method blocks,
+  - added unlimited nested method-composition support as a first-class long-term goal,
+  - narrowed deprecation language to raw Perl dependence only.
+- Updated the top-level user guide to explain:
+  - fluent chains and structured `{...}` blocks are intended to be equivalent semantic surfaces when they contain method-like DSL statements,
+  - nested method composition inside arguments is part of the backend-neutral target surface too.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only clarification slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Process Slice: Clarify Method-Like DSL Track Status Interpretation
 ## Summary
 Removed an ambiguity in the roadmap by stating explicitly that Backbone Item 3 groundwork does not count as the method-like DSL migration track having started. That row remains `not started` until dedicated migration work lands for that track itself.

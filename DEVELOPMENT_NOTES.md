@@ -2,8 +2,18 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Corrected an important roadmap semantic point:
+  - the long-term goal is to eliminate raw Perl dependence,
+  - not to eliminate structured `{...}` blocks when those blocks contain method-like DSL statements.
+- The intended backend-neutral surface now needs to be stated explicitly as:
+  - fluent sequencing: `.m1(...).m2(...).mk(...)`,
+  - structured-block sequencing: `{ m1(...); m2(...); ...; mk(...) }`,
+  - and unlimited nested method composition inside arguments: `mk(mk1(...), mk2(...), ...)`.
+- `ROADMAP.md` and `USER_GUIDE.md` now describe those surfaces as equivalent semantic forms rather than framing braces as a blanket deprecation target.
+
+## Current Session Notes (2026-03-14)
 - Clarified one roadmap-status ambiguity explicitly:
-  - the `Method-like DSL migration track` stays `not started` until dedicated method-chain/deprecation work lands,
+  - the `Method-like DSL migration track` stays `not started` until dedicated method-chain / structured-block-equivalence / raw-Perl-reduction work lands,
   - and Backbone Item 3 groundwork does not count as starting that track by itself.
 - The roadmap row and the track section now both say this directly.
 

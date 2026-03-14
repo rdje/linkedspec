@@ -5,8 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Corrected the method-like DSL end-state wording:
+  - the target is to remove raw Perl dependence,
+  - not to remove structured `{...}` blocks when those blocks contain method-like DSL statements.
+- The intended backend-neutral surface now explicitly includes:
+  - fluent method sequences (`.m1(...).m2(...).mk(...)`),
+  - equivalent structured blocks (`{ m1(...); m2(...); ...; mk(...) }`),
+  - and unlimited nested method composition in argument lists.
+
+## Current Session Snapshot (2026-03-14)
 - Clarified the roadmap-status interpretation for the method-like DSL row:
-  - it remains `not started` until dedicated method-chain / code-block-deprecation work lands,
+  - it remains `not started` until dedicated method-chain / structured-block-equivalence / raw-Perl-reduction work lands,
   - and Backbone Item 3 groundwork does not count as starting that track on its own.
 
 ## Current Session Snapshot (2026-03-14)

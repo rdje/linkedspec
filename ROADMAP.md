@@ -147,12 +147,20 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
 3. Action rewriter v1:
    - Introduce IR-based rewrite for current helper surface while keeping compatibility fallback.
 4. Language-neutral action DSL transition:
-   - Define and adopt a backend-agnostic action DSL in `.spec` (no raw Perl dependency by default, and ultimately no Perl code-block usage in `.spec`).
+   - Define and adopt a backend-agnostic action DSL in `.spec` with no raw Perl dependency by default.
+   - Keep both authoring surfaces available for that DSL:
+     - fluent method chains (`.m1(...).m2(...).mk(...)`),
+     - and structured method blocks (`{ m1(...); m2(...); ...; mk(...) }`).
+   - Treat those surfaces as semantically equivalent structured DSL notation rather than treating `{...}` itself as something to eliminate.
 5. Multi-backend enablement:
    - Keep regex/execution semantics documented and map action IR to Perl first, then additional backends (e.g. Rust, Julia) incrementally.
 
 ## Method-Like DSL Migration Track (Planned, Under Item #3)
-Goal: converge `.spec` semantics on method-like operations and phase out embedded `{...}` code blocks without breaking existing specs abruptly.
+Goal: converge `.spec` semantics on backend-neutral method-like operations while supporting two equivalent structured authoring surfaces:
+- fluent chains such as `.m1(...).m2(...).mk(...)`,
+- and structured blocks such as `{ m1(...); m2(...); ...; mk(...) }`.
+
+The long-term goal is to eliminate raw Perl dependence, not to eliminate structured `{...}` blocks when those blocks contain method-like DSL statements.
 
 Status interpretation note:
 - This track stays `not started` until dedicated user-facing migration work lands for this track itself.
@@ -167,15 +175,27 @@ Status interpretation note:
    - Action edges: `-> rule .method1(...).method2(...).methodN(...)`.
    - Lifecycle sections: `I/E/EX/IT/LX/LS/LE .methodA(...).methodB(...).methodK(...)`.
    - Parse method chains into canonical action IR (not raw host-language text).
-3. Unified lowering path (Planned)
+3. Structured block equivalence (Planned)
+   - Support the same method-like sequence inside structured blocks:
+     - `{ m1(...); m2(...); ...; mk(...) }`
+   - Treat fluent chains and structured blocks as two equivalent concrete syntaxes for the same canonical IR.
+   - Preserve order, scope, and backend-neutral lowering semantics across both surfaces.
+4. Unlimited method composition in arguments (Planned)
+   - Support nested method composition inside arguments with no fixed depth limit, in Lisp-like functional form:
+     - `mk(mk1(mk11(...), ..., mk1N(...)), mk2(...), ..., mkM(...))`
+   - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
+5. Unified lowering path (Planned)
    - Lower both legacy helpers (`return_a`, `return_m`, etc.) and new method-chain forms into the same canonical IR/lowering pipeline.
+   - Lower fluent chains, structured method blocks, and nested composed arguments into the same canonical IR/lowering pipeline.
    - Keep compatibility helper APIs during migration so existing specs stay functional.
-   - Method-chain parsing and lowering stay IR-first: each method maps to a typed IR node (not opaque string rewrite).
-4. Code-block deprecation policy (Planned)
-   - Phase A: `{...}` allowed, but emit migration diagnostics encouraging method-like equivalents.
-   - Phase B: strict mode rejects new/remaining `{...}` usage.
-   - Phase C: strict mode becomes default after migration readiness is acceptable.
-5. Tracking policy (Planned)
+   - Parsing and lowering stay IR-first: each method maps to a typed IR node (not opaque string rewrite).
+6. Raw-Perl reduction policy (Planned)
+   - Reduce and eventually eliminate raw Perl dependence in action bodies.
+   - Distinguish clearly between:
+     - raw Perl blocks/fragments,
+     - and structured `{...}` blocks that contain only method-like DSL statements.
+   - Only the raw Perl dependency is a deprecation target; structured DSL blocks remain a supported surface.
+7. Tracking policy (Planned)
    - Track progress through existing migration readiness/blocker metadata and regression locks.
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
 ## Plugin and Resource-Resolution Modernization Track (Planned)
@@ -211,11 +231,12 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - With `Lispish::parenthesis` now cleared, the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries no longer report a remaining top blocked rule; shift the next Backbone item #3 work away from per-rule blocker removal in those families and back toward broader ActionIR-first lowering improvements and compatibility-surface cleanup.
 - Start Method-Like DSL Migration Track implementation in small slices:
   - introduce canonical method ops incrementally and validate each slice with focused regressions,
-  - keep helper-compatibility lowering active while method-chain coverage grows,
-  - gate `{...}` deprecation behind explicit migration phases (diagnose first, enforce later).
+  - keep helper-compatibility lowering active while fluent-chain and structured-block coverage grow together,
+  - support unlimited nested method composition in argument lists,
+  - reduce raw Perl dependence without treating structured DSL `{...}` blocks as deprecated syntax.
 - Pause further `_split_action_ir_statements(...)` hardening work; only revisit splitter surface expansion when a concrete regression or unsupported production pattern is observed.
 - Keep balanced-delimiter behavior strict by policy; do not introduce permissive missing-close helper normalization.
-- Keep `.spec` action semantics language-agnostic: avoid introducing new Perl code-block dependence and prioritize IR/DSL forms that can map cleanly to non-Perl backends.
+- Keep `.spec` action semantics language-agnostic: avoid introducing new raw Perl dependence, while supporting both fluent chains and structured DSL `{...}` blocks as equivalent IR-friendly surfaces that can map cleanly to non-Perl backends.
 - Keep backend emission under strict canonical forms we control so emitted host-language code avoids avoidable parser/splitter fragility.
 - Landed DSL naming cleanup: backend-neutral array snapshot helper now prefers `array_copy(array(...))` while preserving `array_values(array(...))` as a compatibility alias, and existing specs can migrate opportunistically rather than through a dedicated sweep.
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
@@ -253,7 +274,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
-| Method-like DSL migration track | `not started` | Backend-neutral method-style `.spec` action syntax and gradual retirement of raw `{...}` action blocks. Groundwork under Backbone Item 3 does not count as this track having started. | Still queued behind the current Backbone Item 3 cleanup; only dedicated method-chain / deprecation work will move this row out of `not started`. |
+| Method-like DSL migration track | `not started` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Groundwork under Backbone Item 3 does not count as this track having started. | Still queued behind the current Backbone Item 3 cleanup; only dedicated fluent/block equivalence, nested-composition, and raw-Perl-reduction work will move this row out of `not started`. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
 
 ### Detailed Status Notes
