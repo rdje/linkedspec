@@ -1,5 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Clarify Method-Like DSL Track Status Interpretation
+## Summary
+Removed an ambiguity in the roadmap by stating explicitly that Backbone Item 3 groundwork does not count as the method-like DSL migration track having started. That row remains `not started` until dedicated migration work lands for that track itself.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added an explicit interpretation note to the `Method-Like DSL Migration Track` section.
+- Tightened the dashboard row wording for `Method-like DSL migration track` so it now states:
+  - groundwork under Backbone Item 3 is prerequisite work,
+  - but it does not move the migration-track status by itself.
+- Added a matching clarification under the Backbone Item 3 detailed notes so the relationship between the two tracks is explicit in both directions.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only clarification slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Process Slice: Show Only Affected Live-Tracker Rows By Default
 ## Summary
 Adjusted the roadmap close-out workflow so commit summaries no longer print the entire live tracker by default. They now show only the rows affected by the current task unless a full tracker dump is explicitly requested.

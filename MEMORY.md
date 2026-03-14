@@ -5,6 +5,11 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Clarified the roadmap-status interpretation for the method-like DSL row:
+  - it remains `not started` until dedicated method-chain / code-block-deprecation work lands,
+  - and Backbone Item 3 groundwork does not count as starting that track on its own.
+
+## Current Session Snapshot (2026-03-14)
 - Refined the live-status display rule again:
   - commit close-outs should now print only the tracker rows affected by the current task,
   - and the full tracker should be shown only on explicit user request.

@@ -2,6 +2,12 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Clarified one roadmap-status ambiguity explicitly:
+  - the `Method-like DSL migration track` stays `not started` until dedicated method-chain/deprecation work lands,
+  - and Backbone Item 3 groundwork does not count as starting that track by itself.
+- The roadmap row and the track section now both say this directly.
+
+## Current Session Notes (2026-03-14)
 - Refined the live-status display rule again:
   - commit close-outs should no longer print the full tracker by default,
   - they should print only the rows affected by the current task,
