@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Inline Composite Switch Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking inline composite `switch(..., case(...), default(...))` forms between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported inline helper sequences inside `case(...)` and `default(...)` now preserve the same lowering and migration metadata across both concrete syntaxes.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for inline composite switch forms on:
+  - action edges with `-> rule .switch(..., case(...), default(...))`,
+  - and lifecycle sections with `LX.switch(..., case(...), default(...))`.
+- The locked inline branch action sequences include supported combinations of:
+  - `declare(...)`,
+  - `push_value(...)`,
+  - `say(...)`,
+  - and `return_*` helpers.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported fluent/block equivalence coverage inside the active track rather than changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Multi-Step Lifecycle Branch Bodies
 ## Summary
 Extended the method-like DSL migration track by regression-locking supported multi-step method sequences inside lifecycle control-flow bodies. Fluent and structured lifecycle forms now agree inside `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` branch bodies when those bodies contain supported helper sequences rather than only a single payload-return call.
