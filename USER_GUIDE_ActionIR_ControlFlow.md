@@ -10,6 +10,7 @@ Method-DSL migration note:
 - and supported general-`return(...)` branch-local method slices are now regression-locked on both the fluent and structured surfaces,
 - including the corresponding lifecycle surfaces (`LX.if(...).m(...).endif()` versus `LX { if(...); m(...); endif() }` and the parallel switch/case forms),
 - and supported multi-step helper sequences inside action-edge branch bodies are regression-locked there too,
+- and that same supported multi-step helper-sequence equivalence is regression-locked on lifecycle branch bodies too,
 - even when the docs show only representative branch examples.
 
 ## What this module is responsible for

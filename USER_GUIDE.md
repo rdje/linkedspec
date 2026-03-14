@@ -192,6 +192,8 @@ That supported branch-local control-flow equivalence is now locked on lifecycle 
 
 Supported multi-step method sequences inside action-edge control-flow bodies are locked too, not just single payload-return branches: fluent and structured forms now agree on compiled output and migration metadata when branch bodies contain supported helper sequences such as `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` combinations.
 
+That same supported multi-step branch-local equivalence is now locked on lifecycle surfaces too: `LX.if(...).declare(...).push_value(...).return_*...endif()` and the structured `LX { if(...); declare(...); push_value(...); return_*... endif() }` form, as well as the parallel `switch/case` forms, now agree on lowered lifecycle output and migration metadata for those supported helper sequences.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 
