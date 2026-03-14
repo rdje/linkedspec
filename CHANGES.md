@@ -1,5 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Show Only Affected Live-Tracker Rows By Default
+## Summary
+Adjusted the roadmap close-out workflow so commit summaries no longer print the entire live tracker by default. They now show only the rows affected by the current task unless a full tracker dump is explicitly requested.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Replaced the previous default full-tracker display rule with a narrower default:
+  - show changed or directly impacted tracker rows in normal commit close-outs,
+  - show the full tracker only when the user explicitly asks for it.
+- Kept the richer row format:
+  - whenever a row is shown, it still includes the brief `What it covers` scope description.
+- Mirrored the workflow change into interruption-safe notes so the smaller default display survives session loss.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Process Slice: Add Scope Descriptions To The Live-Status Tracker
 ## Summary
 Expanded the canonical roadmap dashboard so every live-status row now includes a brief scope description, and tightened the workflow so displayed tracker snapshots must include that description instead of only showing raw status labels.

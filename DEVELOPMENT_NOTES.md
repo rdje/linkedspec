@@ -2,6 +2,13 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Refined the live-status display rule again:
+  - commit close-outs should no longer print the full tracker by default,
+  - they should print only the rows affected by the current task,
+  - and they should print the full tracker only when the user explicitly asks for it.
+- Affected-row displays must still include the short scope description from `ROADMAP.md`.
+
+## Current Session Notes (2026-03-14)
 - Tightened the live-status presentation rule again:
   - every displayed tracker snapshot must now include each row's brief scope description,
   - not just the area name, level, and remaining focus,

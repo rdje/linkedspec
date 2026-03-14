@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Refined the live-status display rule again:
+  - commit close-outs should now print only the tracker rows affected by the current task,
+  - and the full tracker should be shown only on explicit user request.
+- Affected-row displays still need to include the row scope description from `ROADMAP.md`.
+
+## Current Session Snapshot (2026-03-14)
 - Tightened the live-status presentation rule again:
   - every displayed tracker snapshot must now include each row's brief scope description,
   - so the roadmap view remains understandable even when a row stands for multiple internal sub-slices.
