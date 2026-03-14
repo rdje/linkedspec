@@ -237,88 +237,10 @@ sub _canonical_event_deps {
 }
 
 sub _action_contract_deps {
- return {
-  lower_return_general_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@_, _method_lowering_deps())
-  },
-  lower_return_imatch_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@_, _method_lowering_deps())
-  },
-  lower_assign_method_statement => sub {
-   _require_declare_method_pkg();
-   return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@_, _declare_method_deps())
-  },
-  lower_push_value_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@_, _method_lowering_deps())
-  },
-  lower_regex_subst_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@_, _method_lowering_deps())
-  },
-  lower_array_pipeline_expr => sub {
-   _require_array_pipeline_pkg();
-   return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@_, _array_pipeline_deps())
-  },
-  lower_if_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@_, _control_flow_deps())
-  },
-  lower_elseif_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@_, _control_flow_deps())
-  },
-  lower_else_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@_, _control_flow_deps())
-  },
-  lower_endif_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@_, _control_flow_deps())
-  },
-  lower_switch_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@_, _control_flow_deps())
-  },
-  lower_case_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@_, _control_flow_deps())
-  },
-  lower_default_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@_, _control_flow_deps())
-  },
-  lower_endcase_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@_, _control_flow_deps())
-  },
-  lower_endswitch_flow_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@_, _control_flow_deps())
-  },
-  lower_say_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@_, _control_flow_deps())
-  },
-  lower_print_statement => sub {
-   _require_control_flow_pkg();
-   return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@_, _control_flow_deps())
-  },
-  lower_return_undef_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@_, _method_lowering_deps())
-  },
-  lower_return_array_statement => sub {
-   _require_method_lowering_pkg();
-   return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@_, _method_lowering_deps())
-  },
-  lower_declare_method_statement => sub {
-   _require_declare_method_pkg();
-   return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@_, _declare_method_deps())
-  },
- }
+ return _call_preserving_err(sub {
+  _require_contracts_pkg();
+  return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _lower_flow_composite_expr {

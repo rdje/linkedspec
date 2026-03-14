@@ -1814,6 +1814,53 @@ subtest 'emit_context_scanner_deps_route_through_owner_default_map' => sub {
     ok(LinkedSpec::RuleIR::EmitContext->can('_scan_contract_ir_event_deps'), 'EmitContext still exposes the local scanner dep entrypoint');
 };
 
+subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::Contracts;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::Contracts::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            lower_return_general_statement => sub { return "contract_for_$pkg" },
+            lower_return_imatch_statement  => sub { return 'return_imatch_ok' },
+            lower_assign_method_statement  => sub { return 'assign_method_ok' },
+            lower_push_value_statement     => sub { return 'push_value_ok' },
+            lower_regex_subst_statement    => sub { return 'regex_subst_ok' },
+            lower_array_pipeline_expr      => sub { return 'array_pipeline_ok' },
+            lower_if_flow_statement        => sub { return 'if_ok' },
+            lower_elseif_flow_statement    => sub { return 'elseif_ok' },
+            lower_else_flow_statement      => sub { return 'else_ok' },
+            lower_endif_flow_statement     => sub { return 'endif_ok' },
+            lower_switch_flow_statement    => sub { return 'switch_ok' },
+            lower_case_flow_statement      => sub { return 'case_ok' },
+            lower_default_flow_statement   => sub { return 'default_ok' },
+            lower_endcase_flow_statement   => sub { return 'endcase_ok' },
+            lower_endswitch_flow_statement => sub { return 'endswitch_ok' },
+            lower_say_statement            => sub { return 'say_ok' },
+            lower_print_statement          => sub { return 'print_ok' },
+            lower_return_undef_statement   => sub { return 'return_undef_ok' },
+            lower_return_array_statement   => sub { return 'return_array_ok' },
+            lower_declare_method_statement => sub { return 'declare_method_ok' },
+        };
+    };
+    local *LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts = sub {
+        my ($label, $deps) = @_;
+        return [{ owner_pkg => $deps->{lower_return_general_statement}->('return(scalar(flag))') }];
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts('Top');
+    is_deeply($ret, [{ owner_pkg => 'contract_for_LinkedSpec::RuleIR::EmitContext' }], 'EmitContext contract builder now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the contracts owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext contract builder preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_action_contract_deps'), 'EmitContext still exposes the local action-contract dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

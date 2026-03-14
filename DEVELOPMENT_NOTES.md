@@ -2,6 +2,19 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::RuleIR::EmitContext::_action_contract_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)`, so the extracted contracts owner defines that dependency contract in one place.
+- Added a focused regression lock:
+  - `emit_context_action_contract_deps_route_through_owner_default_map`
+    to assert that `EmitContext` now requests the `Contracts` owner map for `LinkedSpec::RuleIR::EmitContext`.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=244`)
+
+## Current Session Notes (2026-03-14)
 - Tightened the live-status workflow rule:
   - when any roadmap dashboard level changes, show the changed live-status rows in the task close-out,
   - and log that level change in the canonical roadmap source at `ROADMAP.md`.

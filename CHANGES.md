@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` Action-Contract Deps Through Owner Map
+## Summary
+Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built action-contract callback map and onto `LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)`, so the extracted contracts owner now defines that dependency contract in one place.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Refactored owner dependency resolution:
+  - changed `LinkedSpec::RuleIR::EmitContext::_action_contract_deps()` to delegate to `LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)`,
+  - stopped hand-building the local Contracts callback map in `EmitContext`.
+- Preserved behavior:
+  - `EmitContext` still builds lowering contracts through `LinkedSpec::ActionIR::Contracts`,
+  - caller `$@` is still preserved on successful contract-helper delegation,
+  - require-only consumers still keep `Contracts.pm` unloaded until the contract-helper path is actually exercised.
+- Updated focused regression coverage:
+  - added `emit_context_action_contract_deps_route_through_owner_default_map` to lock that `EmitContext` now asks `Contracts` for the callback map owned by `LinkedSpec::RuleIR::EmitContext`.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=244`)
+
 ## 2026-03-14 - Process Slice: Require Status-Change Display Plus Roadmap Logging
 ## Summary
 Tightened the live-status workflow so any dashboard level change must now be surfaced in the task close-out and logged in the canonical roadmap dashboard source.
