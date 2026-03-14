@@ -5,6 +5,25 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Added a canonical live four-level progress dashboard to `ROADMAP.md`.
+- Status vocabulary is now fixed to:
+  - `done`
+  - `mostly done`
+  - `in progress`
+  - `not started`
+- Commit workflow rule:
+  - before every commit, update the roadmap dashboard if a completed slice materially changes what is done, what is left, or which area is active.
+- Current dashboard snapshot at the time of this rule change:
+  - overall roadmap: `in progress`
+  - Phase 0: `done`
+  - Phase 1: `mostly done`
+  - Phase 1A: `mostly done`
+  - Backbone Item 3: `mostly done`
+  - Phase 5: `in progress`
+  - Phase 6: `in progress`
+  - Phases 2, 3, 4, 7: `not started`
+
+## Current Session Snapshot (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_method_lowering_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)`.
 - Added the focused regression lock `emit_context_method_lowering_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `MethodLowering` owner map.

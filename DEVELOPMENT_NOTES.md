@@ -2,6 +2,24 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Added a canonical live four-level roadmap dashboard to `ROADMAP.md`.
+- The dashboard is now the source of truth for project progress and uses only:
+  - `done`
+  - `mostly done`
+  - `in progress`
+  - `not started`
+- Workflow rule:
+  - before every commit, update the roadmap dashboard if the completed slice materially changes what is done, what is left, or which area is actively in progress.
+- Current classification snapshot at the time of this process change:
+  - overall roadmap: `in progress`
+  - Phase 0: `done`
+  - Phase 1: `mostly done`
+  - Phase 1A: `mostly done`
+  - Backbone Item 3: `mostly done`
+  - Phases 2, 3, 4, 7: `not started`
+  - Phase 5 and Phase 6: `in progress`
+
+## Current Session Notes (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_method_lowering_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)`, so the extracted method-lowering owner defines that dependency contract in one place.
 - Added a focused regression lock:

@@ -218,10 +218,38 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
 ## Status
-- Phase 0: Active and green (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
+- This dashboard is the canonical live status source for roadmap progress.
+- Before every commit, update this section if the completed slice materially changes what is done, what is left, or which areas are active.
+- Status levels:
+  - `done`: roadmap objective complete; only incidental follow-up cleanup may remain.
+  - `mostly done`: core objective landed; remaining work is bounded cleanup, integration, or narrow follow-up slices.
+  - `in progress`: active work has started, but the core objective is not yet landed.
+  - `not started`: no meaningful roadmap execution has landed yet.
+
+| Area | Status | Remaining focus |
+| --- | --- | --- |
+| Overall roadmap | `in progress` | Finish the remaining Backbone Item 3 cleanup, then drive the later semantic/runtime/self-hosting phases. |
+| Phase 0 | `done` | Keep the regression baseline green; `tclite.spec` remains the only explicitly deferred known issue. |
+| Phase 1 | `mostly done` | Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams. |
+| Phase 1A | `mostly done` | Finish shrinking `LinkedSpec.pm` and the remaining thin compatibility wrappers down to stable owner paths. |
+| Phase 2 | `not started` | DSL frontend hardening still has not begun as a dedicated phase. |
+| Phase 3 | `not started` | Execution-semantics clarification work is still ahead. |
+| Phase 4 | `not started` | Capture/mark API formalization is still ahead. |
+| Phase 5 | `in progress` | Runtime/diagnostic modernization has landed refactor groundwork, but the phase-level behavior work is not complete yet. |
+| Phase 6 | `in progress` | Documentation is being maintained live, but adoption/consolidation work is still active. |
+| Phase 7 | `not started` | Self-hosted `.spec` grammar work has not begun yet. |
+| Backbone refactor track | `mostly done` | Item 3 remains active; Items 1 and 2 are already landed. |
+| Backbone Item 1 | `done` | Declarative bootstrap registry landed. |
+| Backbone Item 2 | `done` | Staged `spec_entry()` RuleIR pipeline landed. |
+| Backbone Item 3 | `mostly done` | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
+| Method-like DSL migration track | `not started` | Still queued behind the current Backbone Item 3 cleanup. |
+| Plugin/resource-resolution modernization track | `in progress` | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
+
+### Detailed Status Notes
+- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
 - Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
-- Phase 1: In progress.
-- Phase 1A (LinkedSpec.pm modularization): In progress and far advanced.
+- Phase 1: `mostly done`.
+- Phase 1A (LinkedSpec.pm modularization): `mostly done`.
   - Planned first slice: extract tracing/logging APIs to `LinkedSpec/Trace.pm`.
   - Planned second slice: extract spec/rule/gdata validation APIs to `LinkedSpec/Validation.pm`.
   - Planned third slice: extract spec path/file resolution APIs to `LinkedSpec/Resolver.pm`.

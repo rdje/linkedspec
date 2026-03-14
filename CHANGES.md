@@ -1,5 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Add Live Four-Level Roadmap Status Dashboard
+## Summary
+Added a canonical four-level roadmap status dashboard so progress can be tracked precisely as `done`, `mostly done`, `in progress`, or `not started`, with the dashboard explicitly marked as a live source that must be updated before commits when a slice materially changes project status.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a canonical live progress dashboard to `ROADMAP.md`:
+  - defined the four allowed achievement levels,
+  - added explicit current classifications for the roadmap phases and major refactor tracks,
+  - recorded remaining focus for each area so "what is left" stays visible.
+- Tightened the process contract:
+  - documented that the dashboard is the canonical live status source,
+  - documented that it must be updated before commits whenever a slice materially changes the status picture,
+  - mirrored that workflow rule into the interruption-safe notes documents.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` MethodLowering Deps Through Owner Map
 ## Summary
 Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built method-lowering callback map and onto `LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)`, so the extracted method-lowering owner now defines that dependency contract in one place.
