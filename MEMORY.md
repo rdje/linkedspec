@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Tightened the live-status presentation rule again:
+  - every displayed tracker snapshot must now include each row's brief scope description,
+  - so the roadmap view remains understandable even when a row stands for multiple internal sub-slices.
+- `ROADMAP.md` now embeds those brief explanations directly in a `What it covers` column.
+
+## Current Session Snapshot (2026-03-14)
 - Completed a Backbone Item 3 compatibility-surface cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` now funnels its remaining `EmitContext` compatibility wrappers through one shared `_delegate_emit_context_call(...)` helper instead of a large wall of repeated wrapper bodies.
 - `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now passes the optional rewrite-rules slot explicitly into `LinkedSpec::ActionIR::RewritePipeline`, preserving the old two-argument `ActionRewriter` rewrite-helper behavior through the extracted owner path.

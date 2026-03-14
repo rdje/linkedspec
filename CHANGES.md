@@ -1,5 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Add Scope Descriptions To The Live-Status Tracker
+## Summary
+Expanded the canonical roadmap dashboard so every live-status row now includes a brief scope description, and tightened the workflow so displayed tracker snapshots must include that description instead of only showing raw status labels.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Strengthened the tracker-display contract:
+  - every close-out tracker snapshot must show what each row actually covers,
+  - not just the area name and current level.
+- Expanded the canonical `ROADMAP.md` dashboard:
+  - added a `What it covers` column,
+  - filled every tracked area with a short scope description,
+  - kept the four-level status vocabulary unchanged.
+- Mirrored the workflow rule into interruption-safe notes so future sessions keep the richer tracker display.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Backbone Item 3 Slice: Collapse `ActionRewriter` Compatibility Wrappers Through A Shared `EmitContext` Delegator
 ## Summary
 Collapsed the remaining `LinkedSpec::ActionRewriter` compatibility-wrapper wall into one shared `EmitContext` delegator, while preserving the legacy two-argument rewrite-helper call shape through the active `EmitContext` owner path.

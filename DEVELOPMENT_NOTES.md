@@ -2,6 +2,13 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Tightened the live-status presentation rule again:
+  - every displayed tracker snapshot must now include each row's brief scope description,
+  - not just the area name, level, and remaining focus,
+  - so complex rows stay self-explanatory even when they summarize several internal sub-steps.
+- `ROADMAP.md` now carries that scope text directly in the canonical dashboard through a `What it covers` column.
+
+## Current Session Notes (2026-03-14)
 - Completed a bounded Backbone Item 3 compatibility-surface cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::ActionRewriter` now installs its remaining `EmitContext` compatibility wrappers through one shared `_delegate_emit_context_call(...)` helper instead of carrying a long wall of near-identical wrapper bodies.
 - `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now explicitly threads the optional rewrite-rules slot when calling `LinkedSpec::ActionIR::RewritePipeline`, so the historical two-argument `ActionRewriter` rewrite-helper call shape stays intact through the owner path.
