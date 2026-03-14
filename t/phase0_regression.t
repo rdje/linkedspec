@@ -5257,7 +5257,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'MethodLowering',
             module      => 'LinkedSpec::ActionIR::MethodLowering',
-            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _infer_scalar_container_kind _split_top_level_csv _lower_assignment_source_expr _strip_literal_delimiters)],
+            callbacks   => [qw(_trim_action_ir_value _split_declare_symbol_names _parse_declare_binding_entry _lower_declare_initializer_expr _parse_method_function_expr _normalize_method_args_with_optional_scope _lower_scalaref_value_expr _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_scalar_access_key_expr _infer_scalar_container_kind _split_top_level_csv _lower_array_pipeline_expr _lower_assignment_source_expr _strip_literal_delimiters)],
             sample_key  => 'split_declare_symbol_names',
             sample_name => '_split_declare_symbol_names',
         },
@@ -5629,7 +5629,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot alias/assign method contracts remain language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => scalar(name) }, [123, scalar(foo_arr, idx)]])'),
@@ -5657,6 +5657,11 @@ subtest 'action_rewriter_lowers_general_return_payloads_with_nested_structures' 
         'general return(payload) lowers hash(...) constructor payloads with nested helper values'
     );
     is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))'),
+        'return [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]',
+        'general return(payload) lowers nested array-pipeline composition inside array(...) payloads'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(Top, $x)'),
         q{return ['?Top:',  $x]},
         'legacy return(label,arg) helper behavior remains preserved for compatibility'
@@ -5679,6 +5684,37 @@ SPEC
     is($meta->{canonical_action_ir_fallback_count}, 0, 'method-chain general return payload avoids RAW_PERL fallback');
     is($meta->{unresolved_helper_count}, 0, 'method-chain general return payload avoids unresolved-helper hits');
     ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-chain general return payload contributes canonical RETURN action-IR node');
+};
+subtest 'method_like_fluent_and_structured_return_payload_pipeline_lower_equivalently' => sub {
+    plan tests => 10;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .return(array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { return(array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent nested return-payload pipeline form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured nested return-payload pipeline form');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent nested return-payload pipeline form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured nested return-payload pipeline form avoids RAW_PERL fallback');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent nested return-payload pipeline form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured nested return-payload pipeline form avoids unresolved-helper hits');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent nested return-payload pipeline form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured nested return-payload pipeline form avoids raw Perl dependency');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured nested return-payload pipeline forms produce identical canonical action-IR node coverage');
+    ok($fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready}, 'fluent and structured nested return-payload pipeline forms remain language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;

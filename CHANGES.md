@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lower Nested Return-Payload Pipelines
+## Summary
+Extended the dedicated method-like DSL migration track on a second supported surface: helper-only nested array-pipeline composition inside `return(array(...))` now lowers cleanly, and fluent versus structured method surfaces now report matching zero-unresolved / zero-fallback migration metadata for that return-payload shape.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- `LinkedSpec::ActionIR::MethodLowering` now pulls the existing `_lower_array_pipeline_expr(...)` owner callback into its default dependency map.
+- Nested method value lowering now recognizes array-pipeline composition when that composition appears as a value inside supported payload contexts such as `return(array(filter_match(...)))`.
+- Added regression coverage for:
+  - direct lowering of nested array-pipeline composition inside generalized `return(array(...))`,
+  - and fluent-versus-structured metadata equivalence for that same supported return-payload shape.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice expands supported coverage inside the same active track rather than moving it to a new level.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=248`)
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Fluent/Structured Equivalence For Helper-Only Forms
 ## Summary
 Started the dedicated method-like DSL migration track by locking a concrete user-facing contract on supported surfaces: helper-only fluent action chains and structured `{...}` action blocks now have explicit regression coverage proving identical action lowering, and helper-only lifecycle chains with nested composed arguments now have explicit regression coverage proving identical lifecycle lowering.

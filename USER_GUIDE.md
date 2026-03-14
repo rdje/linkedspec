@@ -172,6 +172,8 @@ That equivalence is no longer just aspirational wording: helper-only fluent acti
 
 This first lock is intentionally scoped. It does not yet claim that every nested method-composition shape is already equivalent across every possible return-payload or helper context.
 
+One more supported slice is now locked too: nested array-pipeline composition inside `return(array(...))` lowers cleanly, and the fluent versus structured method surfaces now agree on the migration metadata for that return-payload shape as well.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

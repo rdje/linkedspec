@@ -5,6 +5,18 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for nested return payloads:
+  - helper-only nested array-pipeline composition inside `return(array(...))` now lowers cleanly,
+  - and fluent versus structured method surfaces now report matching zero-unresolved / zero-fallback migration metadata for that supported return-payload shape.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice expands supported coverage but does not move the level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=248`)
+
+## Current Session Snapshot (2026-03-14)
 - Started the dedicated Method-like DSL migration track in roadmap terms.
 - Helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical action lowering, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lifecycle lowering on the currently supported lifecycle surface.
 - `ROADMAP.md` now marks the `Method-like DSL migration track` row as `in progress` because dedicated migration work has landed, not just prerequisite Backbone Item 3 groundwork.

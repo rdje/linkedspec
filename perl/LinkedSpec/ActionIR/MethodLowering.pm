@@ -71,6 +71,7 @@ sub default_deps_for_package {
    lower_scalar_access_key_expr => _require_pkg_cb($pkg, '_lower_scalar_access_key_expr'),
    infer_scalar_container_kind => _require_pkg_cb($pkg, '_infer_scalar_container_kind'),
    split_top_level_csv => _require_pkg_cb($pkg, '_split_top_level_csv'),
+   lower_array_pipeline_expr => _require_pkg_cb($pkg, '_lower_array_pipeline_expr'),
    lower_assignment_source_expr => _require_pkg_cb($pkg, '_lower_assignment_source_expr'),
    strip_literal_delimiters => _require_pkg_cb($pkg, '_strip_literal_delimiters'),
   }
@@ -183,6 +184,7 @@ sub _lower_method_value_expr {
  my $lower_scalar_access_key_expr = _require_dep($deps, 'lower_scalar_access_key_expr');
  my $infer_scalar_container_kind = _require_dep($deps, 'infer_scalar_container_kind');
  my $split_top_level_csv = _require_dep($deps, 'split_top_level_csv');
+ my $lower_array_pipeline_expr = _require_dep($deps, 'lower_array_pipeline_expr');
  my $lower_flat_list_value_expr = sub {
   my ($flat_expr) = @_;
   return undef unless defined $flat_expr;
@@ -329,8 +331,10 @@ sub _lower_method_value_expr {
   my $array_symbol = $extract_array_symbol_name->($array_expr);
   return undef unless defined($array_symbol) && length($array_symbol);
 
-  return '[@'.$array_symbol.']';
+ return '[@'.$array_symbol.']';
  }
+ my $pipeline_expr = $lower_array_pipeline_expr->($trimmed);
+ return $pipeline_expr if defined($pipeline_expr) && length($pipeline_expr);
  if ($trimmed =~ /^hash\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
