@@ -180,6 +180,7 @@ Status interpretation note:
      - `{ m1(...); m2(...); ...; mk(...) }`
    - Treat fluent chains and structured blocks as two equivalent concrete syntaxes for the same canonical IR.
    - Preserve order, scope, and backend-neutral lowering semantics across both surfaces.
+   - Require that this equivalence also holds inside control-flow branch bodies, including `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies.
 4. Unlimited method composition in arguments (Planned)
    - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
@@ -187,6 +188,7 @@ Status interpretation note:
 5. Unified lowering path (Planned)
    - Lower both legacy helpers (`return_a`, `return_m`, etc.) and new method-chain forms into the same canonical IR/lowering pipeline.
    - Lower fluent chains, structured method blocks, and nested composed arguments into the same canonical IR/lowering pipeline.
+   - Lower method-like sequences inside control-flow branch bodies through that same canonical IR/lowering pipeline rather than treating branch-local blocks as a separate semantic surface.
    - Keep compatibility helper APIs during migration so existing specs stay functional.
    - Parsing and lowering stay IR-first: each method maps to a typed IR node (not opaque string rewrite).
 6. Raw-Perl reduction policy (Planned)

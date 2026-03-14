@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Documentation Policy Slice: Clarify Branch-Local Fluent/Block Equivalence Scope
+## Summary
+Clarified the method-like DSL target surface so fluent-versus-structured equivalence is now stated explicitly for branch-local control-flow bodies too: `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same equivalence goal, not a separate exception surface.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Clarified the roadmap’s `Structured block equivalence` and `Unified lowering path` items so branch-local method sequences are explicitly in scope.
+- Clarified the user guides so branch-local method bodies are treated as part of the same fluent-versus-structured equivalence target.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice clarifies target scope only.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Collection-Hash Action Forms
 ## Summary
 Extended the dedicated method-like DSL migration track by regression-locking the supported collection-hash method shape on action-edge surfaces too: fluent `-> rule .m1(...).m2(...)` and structured `-> rule { m1(...); m2(...); }` forms now agree on compiled action output and migration metadata for that supported chain.

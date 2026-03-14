@@ -2,6 +2,13 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Clarified another method-DSL equivalence requirement:
+  - fluent-versus-structured equivalence is expected not only for top-level action/lifecycle sequences,
+  - but also inside `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies.
+- Logged that requirement explicitly in the roadmap and user guides so the target surface is unambiguous.
+- This is a wording/guide-policy clarification only; the method-like DSL tracker row stays `in progress`.
+
+## Current Session Notes (2026-03-14)
 - Landed another method-like DSL equivalence follow-up on action-edge surfaces:
   - the supported collection-hash method shape is now regression-locked on `-> rule .m1(...).m2(...)` versus `-> rule { m1(...); m2(...); }` too,
   - and those fluent versus structured action-edge forms now agree on compiled action output plus zero-unresolved / zero-fallback migration metadata.

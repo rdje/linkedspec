@@ -164,6 +164,11 @@ That means the backend-neutral target surface includes both:
 
 Those two dimensions are meant to lower into the same canonical IR regardless of whether the outer surface is fluent chaining or a structured `{...}` block.
 
+That equivalence target also extends inside control-flow bodies:
+- `if(...)` / `elseif(...)` branches,
+- and `switch(...)` / `case(...)` action bodies
+should support the same fluent-versus-structured method-like authoring equivalence.
+
 Documentation policy note:
 - the guides should state this capability explicitly,
 - and use representative examples where helpful,

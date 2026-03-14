@@ -4,6 +4,11 @@ This guide covers the statement-level control-flow lowering implemented by `perl
 Read this when you want canonical `if/else` flow, switch/case branching, and helper-based output statements inside those branches.
 For exact DSL-to-Perl examples for every control-flow marker and emitted branch shape discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
+Method-DSL migration note:
+- fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,
+- so `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same method-like DSL equivalence target,
+- even when the docs show only representative branch examples.
+
 ## What this module is responsible for
 This module lowers:
 - `if(...)` and alias `i(...)`

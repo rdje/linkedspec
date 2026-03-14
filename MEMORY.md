@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Clarified another method-DSL equivalence requirement:
+  - fluent-versus-structured equivalence is expected inside `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies too,
+  - not just at top-level action/lifecycle sequences.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this is a target-surface clarification only.
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for action-edge fluent/block equivalence on the supported collection-hash shape:
   - `-> rule .m1(...).m2(...)` and `-> rule { m1(...); m2(...); }` now have regression coverage for the same supported collection-hash method chain,
   - and those action-edge forms now agree on compiled action output plus zero-unresolved / zero-fallback migration metadata.
