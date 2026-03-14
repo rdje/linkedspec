@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Tightened the live-status workflow rule again:
+  - every commit workflow close-out must now display the current live-status tracker snapshot,
+  - so it is always explicit how the completed slice did or did not change the dashboard.
+- This sits on top of the existing rules to update the dashboard before commits when status materially changes and to display/log any row whose level changes.
+
+## Current Session Snapshot (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps()` is now explicitly grouped with the other owner-map helpers, and the focused seam lock now pins `_build_action_rewrite_rules(...)` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`.
 - Added the focused regression lock `emit_context_rewrite_pipeline_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `RewritePipeline` owner map.

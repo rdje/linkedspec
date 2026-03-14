@@ -2,6 +2,14 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Tightened the live-status workflow rule again:
+  - every commit workflow close-out must now display the current live-status tracker snapshot,
+  - so it is always explicit how the completed slice did or did not change the dashboard.
+- This is in addition to the existing rules to:
+  - update the dashboard before commits when a slice materially changes status,
+  - and explicitly display/log any row whose level changes.
+
+## Current Session Notes (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps()` is now explicitly grouped with the other owner-map helpers, and the focused seam lock now pins `_build_action_rewrite_rules(...)` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`.
 - Added a focused regression lock:

@@ -1,5 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Display Current Live-Status Tracker On Every Commit Close-Out
+## Summary
+Tightened the roadmap workflow so every commit close-out must now include the current live-status tracker snapshot, making it explicit whether the completed slice changed the dashboard or left it unchanged.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Strengthened the canonical roadmap workflow:
+  - `ROADMAP.md` remains the live status source,
+  - dashboard rows must still be updated before commits when status materially changes,
+  - changed rows must still be displayed/logged when levels move,
+  - and now every commit close-out must also display the current live-status tracker snapshot.
+- Mirrored the same rule into the interruption-safe notes so the workflow survives session loss.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` RewritePipeline Deps Through Owner Map
 ## Summary
 Made the remaining emit-context rewrite-pipeline dependency seam explicit by locking `LinkedSpec::RuleIR::EmitContext` to `LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)`, so the extracted rewrite-pipeline owner defines that callback contract in one place too.
