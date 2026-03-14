@@ -5,6 +5,12 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Tightened the live-status workflow rule:
+  - when any roadmap dashboard level changes, display the changed rows in the task close-out,
+  - and record that level change in `ROADMAP.md`, which remains the canonical live-status source.
+- This sits on top of the existing pre-commit rule to update the dashboard whenever a slice materially changes what is done, what is left, or which area is active.
+
+## Current Session Snapshot (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_event_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)`.
 - Added the focused regression lock `emit_context_scanner_deps_route_through_owner_default_map` so `EmitContext` stays pinned to the extracted `Scanner` owner map.

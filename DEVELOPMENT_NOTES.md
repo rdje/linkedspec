@@ -2,6 +2,12 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Tightened the live-status workflow rule:
+  - when any roadmap dashboard level changes, show the changed live-status rows in the task close-out,
+  - and log that level change in the canonical roadmap source at `ROADMAP.md`.
+- This is in addition to the existing rule that the dashboard must be updated before commits whenever a slice materially changes what is done, what is left, or which area is active.
+
+## Current Session Notes (2026-03-14)
 - Completed another small Backbone Item 3 owner-contract cleanup slice inside `LinkedSpec::*`.
 - `LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_event_deps()` no longer hand-builds its local callback map; it now delegates to `LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)`, so the extracted scanner owner defines that dependency contract in one place.
 - Added a focused regression lock:

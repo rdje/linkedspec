@@ -220,6 +220,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 ## Status
 - This dashboard is the canonical live status source for roadmap progress.
 - Before every commit, update this section if the completed slice materially changes what is done, what is left, or which areas are active.
+- Whenever any dashboard row changes level, display the changed live-status rows in the task close-out and record the change here in `ROADMAP.md`.
 - Status levels:
   - `done`: roadmap objective complete; only incidental follow-up cleanup may remain.
   - `mostly done`: core objective landed; remaining work is bounded cleanup, integration, or narrow follow-up slices.

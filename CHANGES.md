@@ -1,5 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Process Slice: Require Status-Change Display Plus Roadmap Logging
+## Summary
+Tightened the live-status workflow so any dashboard level change must now be surfaced in the task close-out and logged in the canonical roadmap dashboard source.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Strengthened the roadmap tracking rule:
+  - `ROADMAP.md` remains the canonical live-status source,
+  - any dashboard row whose level changes must now be displayed in the user-facing task close-out,
+  - and the same level change must be recorded in `ROADMAP.md`.
+- Mirrored the rule into the interruption-safe notes files so the workflow survives session loss.
+
+## Validation
+- Ran:
+  - `git diff --stat -- ROADMAP.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+- Result:
+  - Doc-only process slice reviewed; no code paths changed.
+
 ## 2026-03-14 - Backbone Item 3 Slice: Route `EmitContext` Scanner Deps Through Owner Map
 ## Summary
 Moved `LinkedSpec::RuleIR::EmitContext` off its hand-built scanner callback map and onto `LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)`, so the extracted scanner owner now defines that dependency contract in one place.
