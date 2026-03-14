@@ -253,6 +253,7 @@ push_value(array(tail), join_values("", array(word)))
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on supported `join_values(delimiter, array(...))` payload forms too,
 - on both action-edge and lifecycle surfaces,
+- and that same supported `join_values(...)` equivalence is now regression-locked inside control-flow branch bodies too,
 - so string-join payload construction is part of the same equivalence contract as the rest of the method-like DSL surface.
 
 ## `call(rule)` as a value source
