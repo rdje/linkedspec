@@ -1,5 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Generic Structured Blocks
+## Summary
+Extended the semicolon-light structured-block work beyond marker-style control flow. Generic helper-only structured action blocks and structured lifecycle blocks now have regression locks proving that top-level method statements can be authored without `;` separators while preserving the same lowering and migration metadata as the fluent baseline.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused regressions for semicolonless generic method-only structured blocks on:
+  - action-edge `{ ... }` helper chains,
+  - and lifecycle `I { ... }` helper chains.
+- Locked parity against the fluent baseline on:
+  - identical `ACODE` or `ICODE` lowering,
+  - zero raw-Perl fallback,
+  - zero unresolved-helper drift,
+  - and language-agnostic action-IR readiness.
+- Clarified in the top-level guide and roadmap that the optional-semicolon rule now has explicit regression coverage on generic helper-only structured blocks too, not only on marker-style control-flow blocks.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported semicolon-light structured authoring surface without changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Structured Lifecycle Control-Flow Blocks
 ## Summary
 Extended the semicolon-light structured control-flow work by regression-locking the same supported semicolonless marker-style forms on lifecycle surfaces too. Structured `LX { if(...) ... else() ... endif() }` and `LX { switch(...) ... case(...) ... default() ... endswitch() }` blocks now preserve the same lifecycle lowering and migration metadata as the fluent baseline without requiring `;` delimiters between top-level method statements.

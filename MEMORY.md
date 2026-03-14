@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Landed the generic structured-block follow-up for semicolon-light method DSL authoring:
+  - semicolonless helper-only `{ ... }` blocks are now regression-locked on action-edge surfaces too,
+  - semicolonless helper-only lifecycle blocks like `I { ... }` are now regression-locked as well,
+  - and both forms now match the fluent baseline on lowered output plus zero-fallback, zero-unresolved, language-agnostic migration metadata without needing `;` separators.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported semicolon-light structured authoring without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-14)
 - Landed the lifecycle follow-up for semicolon-light structured control flow:
   - semicolonless marker-style `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` forms are now regression-locked on structured lifecycle `LX { ... }` blocks too,
   - those lifecycle blocks now match the fluent baseline on `LXCODE` lowering,

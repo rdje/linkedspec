@@ -7984,6 +7984,57 @@ SPEC
     is($block_lifecycle_meta->{unresolved_helper_count}, 0, 'structured nested-composition lifecycle block avoids unresolved-helper hits');
     ok($fluent_lifecycle_meta->{language_agnostic_action_ir_ready} && $block_lifecycle_meta->{language_agnostic_action_ir_ready}, 'fluent and structured nested-composition lifecycle forms remain language-agnostic action-IR ready');
 };
+subtest 'method_like_structured_blocks_accept_optional_semicolons' => sub {
+    plan tests => 10;
+
+    my $fluent_action_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .return_a().return_m()
+SPEC
+
+    my $block_action_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { return_a(Top)
+ return_m(Top) }
+SPEC
+
+    my $fluent_lifecycle_spec = <<'SPEC';
+Top::&
+I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/)
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_lifecycle_spec = <<'SPEC';
+Top::&
+I { lowercase_each(array(parts))
+ filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descr => 1);
+    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descr => 1);
+    ok(defined($fluent_action_descr) && ref($fluent_action_descr) eq 'HASH', 'descriptor build succeeds for fluent helper-only action chain used as semicolonless comparison baseline');
+    ok(defined($block_action_descr) && ref($block_action_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured helper-only action block');
+    is_deeply($fluent_action_descr->{spec}{Top}{ACODE}, $block_action_descr->{spec}{Top}{ACODE}, 'semicolonless structured helper-only action block lowers to the same ACODE as the fluent baseline');
+    is($block_action_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'semicolonless structured helper-only action block avoids RAW_PERL fallback');
+    ok(
+        $block_action_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $block_action_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'semicolonless structured helper-only action block stays fully language-agnostic-ready',
+    );
+
+    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descr => 1);
+    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descr => 1);
+    ok(defined($fluent_lifecycle_descr) && ref($fluent_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle helper chain used as semicolonless comparison baseline');
+    ok(defined($block_lifecycle_descr) && ref($block_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle helper block');
+    is_deeply($fluent_lifecycle_descr->{spec}{Top}{ICODE}, $block_lifecycle_descr->{spec}{Top}{ICODE}, 'semicolonless structured lifecycle helper block lowers to the same ICODE as the fluent baseline');
+    is($block_lifecycle_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'semicolonless structured lifecycle helper block avoids RAW_PERL fallback');
+    ok(
+        $block_lifecycle_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $block_lifecycle_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'semicolonless structured lifecycle helper block stays fully language-agnostic-ready',
+    );
+};
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 
