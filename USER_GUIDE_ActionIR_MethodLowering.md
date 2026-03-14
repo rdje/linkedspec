@@ -103,6 +103,11 @@ push_value(array(word), scalaref(retv, {content}))
 print("Object ", scalaref(cur_object, [1]), "\n")
 ```
 
+Method-DSL migration note:
+- fluent and structured authoring are now regression-locked on supported nested accessor payload forms built from `scalaref(base, path)` plus indexed/keyed `scalar(...)` reads too,
+- on both action-edge and lifecycle surfaces,
+- so path-following value composition is part of the same equivalence contract as the rest of the method-like DSL surface.
+
 ## `array(...)`
 `array(...)` constructs an array payload/value.
 

@@ -10,6 +10,17 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for nested accessor payload equivalence:
+  - supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads now have regression coverage between fluent and structured authoring on both action-edge and lifecycle surfaces,
+  - and those forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice deepens supported nested accessor payload equivalence coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=287`)
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for branch-local canonical call-result capture equivalence:
   - supported `assign(scalar(retv), call(rule))` chains now have regression coverage inside `if/elseif` and `switch/case` control-flow bodies on both action-edge and lifecycle surfaces,
   - and those branch-local forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.
