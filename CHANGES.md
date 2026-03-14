@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Branch-Local Call-Value Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking canonical call-result capture inside control-flow branch bodies. Supported `assign(scalar(retv), call(rule))` chains now preserve the same lowering and migration metadata across fluent and structured authoring for `if/elseif` and `switch/case` forms on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for supported branch-local canonical call-value capture forms on:
+  - action-edge `if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - action-edge `switch(...)` / `case(...)` / `default()` / `endswitch()` bodies,
+  - lifecycle `LX.if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - and lifecycle `LX.switch(...)` / `case(...)` / `default()` / `endswitch()` bodies.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported branch-local canonical call-value equivalence coverage without changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Call-Value Helper Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking canonical call-value capture between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `assign(scalar(retv), call(rule))` forms now preserve the same lowering and migration metadata across both concrete syntaxes.

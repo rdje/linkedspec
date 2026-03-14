@@ -302,6 +302,7 @@ Use this when:
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on supported `assign(scalar(retv), call(rule))` capture forms too,
 - on both action-edge and lifecycle surfaces,
+- and that same supported canonical call-value equivalence is now regression-locked inside control-flow branch bodies too,
 - so canonical child-result capture is part of the same equivalence contract as the rest of the method-like DSL surface.
 
 ## `push_value(array(target), value)`

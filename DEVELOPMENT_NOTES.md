@@ -9,6 +9,17 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Landed the next method-DSL branch-local equivalence follow-up on canonical call-result capture:
+  - supported `assign(scalar(retv), call(rule))` chains are now regression-locked inside `if/elseif` and `switch/case` control-flow bodies on both action-edge and lifecycle surfaces,
+  - and those branch-local forms now explicitly agree on lowered output, canonical action-IR coverage, and zero-fallback migration metadata.
+- The method-like DSL track still stays `in progress`; this slice deepens supported branch-local canonical call-value equivalence coverage without moving the tracker level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=285`)
+
+## Current Session Notes (2026-03-14)
 - Landed the next method-DSL lowering-equivalence follow-up on canonical call-result capture:
   - supported `assign(scalar(retv), call(rule))` forms are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces,
   - and those forms now explicitly agree on lowered output, canonical action-IR coverage, and zero-fallback migration metadata.
