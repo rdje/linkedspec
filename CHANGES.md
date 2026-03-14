@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Collection-Hash Action Forms
+## Summary
+Extended the dedicated method-like DSL migration track by regression-locking the supported collection-hash method shape on action-edge surfaces too: fluent `-> rule .m1(...).m2(...)` and structured `-> rule { m1(...); m2(...); }` forms now agree on compiled action output and migration metadata for that supported chain.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a focused fluent-versus-structured action-edge equivalence regression for a supported collection-hash method chain combining:
+  - `declare(hash, ...)`,
+  - `declare(array, ...)`,
+  - `push_value(array(...), hash(...))`,
+  - and `return_array(..., hash(...))`.
+- Locked equivalence on:
+  - compiled `ACODE`,
+  - canonical action-IR node coverage,
+  - zero fallback,
+  - zero unresolved helpers,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported fluent/block equivalence coverage inside the active track rather than changing the track level.
+
+## Validation
+- Ran:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=251`)
+
 ## 2026-03-14 - Documentation Policy Slice: Clarify Unlimited Nested Composition Wording
 ## Summary
 Clarified the roadmap and user-guide policy for method-like DSL nesting: unlimited nested method composition in method arguments is an explicit supported capability, but the docs should present that capability with representative examples rather than trying to enumerate every legal nesting form.

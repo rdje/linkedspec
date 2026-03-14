@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for action-edge fluent/block equivalence on the supported collection-hash shape:
+  - `-> rule .m1(...).m2(...)` and `-> rule { m1(...); m2(...); }` now have regression coverage for the same supported collection-hash method chain,
+  - and those action-edge forms now agree on compiled action output plus zero-unresolved / zero-fallback migration metadata.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice broadens fluent/block equivalence coverage on supported action-edge surfaces without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=251`)
+
+## Current Session Snapshot (2026-03-14)
 - Clarified the method-DSL documentation policy:
   - unlimited nested method composition in arguments is now stated explicitly as a supported capability in the roadmap and relevant guides,
   - and the guides now say they use representative examples rather than trying to enumerate every nesting combination.
