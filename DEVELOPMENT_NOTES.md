@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Landed the next method-DSL branch-local equivalence follow-up on action-edge surfaces:
+  - supported multi-step helper sequences inside `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` bodies are now regression-locked between fluent and structured forms,
+  - and those action-edge forms now explicitly agree on compiled `ACODE`, canonical action-IR coverage, and zero-fallback migration metadata.
+- The method-like DSL track still stays `in progress`; this slice broadens supported action-edge branch-local equivalence coverage without moving the tracker level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=257`)
+
+## Current Session Notes (2026-03-14)
 - Landed the next method-DSL branch-local equivalence follow-up on lifecycle surfaces:
   - supported `LX` fluent control-flow forms now have regression locks against their structured lifecycle-block equivalents for both `if(...)` / `elseif(...)` and `switch(...)` / `case(...)`,
   - and those lifecycle forms now explicitly agree on lowered `LXCODE`, canonical action-IR coverage, and zero-fallback migration metadata.

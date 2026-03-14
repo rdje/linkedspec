@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for multi-step action-edge branch-local control-flow equivalence:
+  - supported multi-step helper sequences inside action-edge `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` bodies now have regression coverage between fluent and structured forms,
+  - and those action-edge surfaces now agree on compiled `ACODE` plus matching zero-unresolved / zero-fallback migration metadata.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice broadens supported action-edge branch-local equivalence coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=257`)
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for lifecycle branch-local control-flow equivalence:
   - supported `LX` fluent `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms now have regression coverage against their structured lifecycle-block equivalents,
   - and those lifecycle surfaces now agree on lowered `LXCODE` plus matching zero-unresolved / zero-fallback migration metadata.

@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Multi-Step Action-Edge Branch Bodies
+## Summary
+Extended the method-like DSL migration track by regression-locking supported multi-step method sequences inside action-edge control-flow bodies. Fluent and structured forms now agree inside `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` branch bodies even when those bodies contain supported helper sequences rather than only a single return payload call.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge equivalence locks for supported multi-step branch-local control-flow forms in:
+  - `if(...)` / `elseif(...)` / `else()` / `endif()` bodies,
+  - and `switch(...)` / `case(...)` / `default()` / `endswitch()` bodies.
+- The locked branch-local helper sequences include supported combinations of:
+  - `declare(...)`,
+  - `push_value(...)`,
+  - `say(...)`,
+  - and `return_*` helpers.
+- Locked parity on:
+  - identical `ACODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported action-edge branch-local equivalence coverage inside the active track rather than changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Lifecycle Branch-Local Control-Flow Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking the same supported branch-local fluent-versus-structured control-flow equivalence on lifecycle surfaces too. Supported `LX` `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms now agree between fluent chains and structured lifecycle blocks on lowered lifecycle code and migration metadata.

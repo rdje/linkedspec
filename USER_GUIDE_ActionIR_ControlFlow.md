@@ -9,6 +9,7 @@ Method-DSL migration note:
 - so `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same method-like DSL equivalence target,
 - and supported general-`return(...)` branch-local method slices are now regression-locked on both the fluent and structured surfaces,
 - including the corresponding lifecycle surfaces (`LX.if(...).m(...).endif()` versus `LX { if(...); m(...); endif() }` and the parallel switch/case forms),
+- and supported multi-step helper sequences inside action-edge branch bodies are regression-locked there too,
 - even when the docs show only representative branch examples.
 
 ## What this module is responsible for

@@ -190,6 +190,8 @@ Supported branch-local control-flow slices are now locked too: fluent and struct
 
 That supported branch-local control-flow equivalence is now locked on lifecycle surfaces too, not just action edges: chained forms like `LX.if(...).m(...).endif()` and structured lifecycle blocks like `LX { if(...); m(...); endif() }` now agree on lowering and migration metadata for the supported payload shapes.
 
+Supported multi-step method sequences inside action-edge control-flow bodies are locked too, not just single payload-return branches: fluent and structured forms now agree on compiled output and migration metadata when branch bodies contain supported helper sequences such as `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` combinations.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 
