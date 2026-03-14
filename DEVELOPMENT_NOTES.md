@@ -9,6 +9,21 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Recorded the agreed pre-implementation design note for composite control-flow syntax:
+  - keep current inline composite `switch(expr, case(...), default(...))` action-list syntax as the composite baseline,
+  - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
+  - require one branch header and one body carrier only,
+  - prefer `case(value, { ... })` as the first structured inline-switch extension,
+  - reserve attached-block `case(value) { ... }` / `default() { ... }` as later syntax sugar,
+  - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible now while leaving attached-block composite `if(cond) { ... }` for a later syntax pass.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a tracked design-note slice rather than an implementation slice.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Notes (2026-03-14)
 - Recorded a control-flow syntax ergonomics clarification:
   - current guide examples still document the syntax that is supported today,
   - but forms like `else();` and `endif()` are not being treated as the final UX target,

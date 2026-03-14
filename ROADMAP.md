@@ -193,6 +193,21 @@ Status interpretation note:
    - Preserve order, scope, and backend-neutral lowering semantics across both surfaces.
    - Require that this equivalence also holds inside control-flow branch bodies, including `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies.
    - Revisit the control-flow concrete syntax itself so supported `if` / `else` / `switch` authoring feels natural rather than mechanically marker-driven; investigate lower-friction surfaces such as semicolon-light marker forms, brace-delimited branch blocks, and inline composite `if(...)` forms parallel to inline composite `switch(...)`.
+   - Control-flow design note agreed before implementation:
+     - for inline composite `switch(...)`, keep the current canonical action-list form `switch(expr, case(value, action1(...), action2(...)), default(actiond1(...), actiond2(...)))` as the baseline composite surface,
+     - do not pursue a chained branch-body form like `case(value, m1(...).m2(...))`,
+     - permit future structured branch-body extensions only when a branch uses exactly one body carrier,
+     - preferred staged switch direction is:
+       - first `case(value, { ... })` and `default({ ... })` or `default() { ... }`-style structured bodies,
+       - later attached-block sugar like `case(value) { ... }` and `default() { ... }`,
+     - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
+     - because one branch header must map to one body carrier only,
+     - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too.
+   - Inline composite `if(...)` design note agreed before implementation:
+     - this is considered feasible on the current lowering architecture,
+     - the recommended first implementation target is an argument-list composite form such as `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
+     - attached-block forms like `if(cond) { ... } elseif(cond2) { ... } else() { ... }` remain desirable long-term ergonomics targets,
+     - but they are intentionally treated as a later control-flow concrete-syntax step rather than the first implementation slice.
 4. Unlimited method composition in arguments (Planned)
    - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
@@ -421,6 +436,13 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: those same supported canonical `assign(scalar(retv), call(rule))` capture forms are now regression-locked inside control-flow branch bodies too, so branch-local `if/elseif` and `switch/case` flows preserve the same lowering and zero-fallback migration metadata across fluent and structured authoring on both action-edge and lifecycle surfaces.
   - Landed follow-up: nested accessor payload forms built from `scalaref(base, path)` plus indexed/keyed `scalar(...)` reads are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported path-following payload composition stays inside the same backend-neutral method-like DSL contract too.
   - Clarification: the current documented control-flow examples reflect the currently supported syntax, not a frozen end-state UX; a dedicated follow-up is still planned to revisit `if` / `else` / `switch` concrete syntax and reduce punctuation friction around forms such as `else();` and `endif()`.
+  - Clarification: that control-flow syntax revisit now has an agreed design note too, before implementation starts:
+    - keep current inline composite `switch(expr, case(...), default(...))` action-list syntax as the canonical composite baseline,
+    - do not add chained branch-body forms like `case(value, m1(...).m2(...))`,
+    - keep a strict one-branch-header / one-body-carrier rule,
+    - prefer `case(value, { ... })` as the first structured switch extension,
+    - allow attached-block `case(value) { ... }` / `default() { ... }` only as later syntax sugar,
+    - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass.
   - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now resolves its `ControlFlow` callback bundle through `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)` instead of hand-building that map locally, so the extracted control-flow owner now defines the active callback contract for both direct owner calls and emit-context lowering.
   - Landed follow-up: `LinkedSpec::ActionRewriter` now owns the extracted FlowExpr/ValueExpr/MethodLowering/ArrayPipeline/ControlFlow callback surface it needs for declare/scanner/lowering work, so `LinkedSpec::Deps` no longer resolves those action-rewriter callbacks through `LinkedSpec.pm`.
   - Landed follow-up: `LinkedSpec::ParserFactory` now receives trace/config/compile dependencies from `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly, so `get_parser(...)` no longer relies on `LinkedSpec.pm` parser-factory façade callbacks for tracing or compilation.

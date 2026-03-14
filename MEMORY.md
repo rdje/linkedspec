@@ -10,6 +10,21 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Recorded the agreed pre-implementation design note for composite control-flow syntax:
+  - keep current inline composite `switch(expr, case(...), default(...))` action-list syntax as the baseline composite surface,
+  - do not support chained branch-body forms like `case(value, m1(...).m2(...))`,
+  - enforce one branch header and one body carrier only,
+  - prefer `case(value, { ... })` as the first structured inline-switch extension,
+  - leave attached-block `case(value) { ... }` / `default() { ... }` as later syntax sugar,
+  - and treat argument-list composite `if(cond, ..., elseif(...), else(...))` as the earlier feasible `if(...)` direction, with attached-block composite `if(cond) { ... }` reserved for a later syntax pass.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a tracked design-note slice rather than a landed implementation.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Snapshot (2026-03-14)
 - Recorded a control-flow syntax ergonomics clarification:
   - current docs still describe the syntax that is supported now,
   - but marker-heavy forms like `else();` and `endif()` are not being treated as the final UX target,

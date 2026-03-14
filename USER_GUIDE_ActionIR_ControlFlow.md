@@ -20,6 +20,13 @@ Syntax status note:
 - and the roadmap now explicitly keeps a control-flow syntax revisit open so we can reduce friction around marker-style forms like `else();` and `endif()`,
 - investigate more natural semicolon-light or brace-delimited branch syntax,
 - and evaluate inline composite `if(...)` forms similar in spirit to inline composite `switch(...)`.
+- an agreed pre-implementation design note is now also tracked:
+  - keep one branch header mapped to one body carrier,
+  - do not mix inline branch actions and attached branch blocks on the same `case(...)`, `default()`, `if(...)`, or `elseif(...)`,
+  - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
+  - treat `case(value, { ... })` as the preferred first structured inline-switch extension,
+  - treat `case(value) { ... }` and `default() { ... }` as possible later syntax sugar,
+  - and treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as a feasible earlier step than attached-block composite `if(cond) { ... }`.
 
 ## What this module is responsible for
 This module lowers:
@@ -173,6 +180,45 @@ Use this when:
 - the branch actions are short,
 - the branch structure is simple,
 - you want the dispatch logic compact and local.
+
+Design direction note, not current syntax:
+- the current composite baseline remains `switch(expr, case(...), default(...))` with explicit action lists,
+- a future structured extension may allow `case(value, { ... })`,
+- later sugar may allow `case(value) { ... }` and `default() { ... }`,
+- but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
+- because each branch should have exactly one body carrier.
+
+## Inline composite `if(...)` design direction
+Inline composite `if(...)` is being treated as feasible, but not implemented yet.
+
+The agreed first-step target is an argument-list composite shape:
+
+```text
+if(
+  scalar(on),
+  action1(...),
+  action2(...),
+  elseif(scalar(alt_on), action3(...), action4(...)),
+  else(action5(...), action6(...))
+)
+```
+
+Longer-term ergonomics may move toward attached-block forms:
+
+```text
+if(scalar(on)) {
+  action1(...);
+  action2(...)
+} elseif(scalar(alt_on)) {
+  action3(...);
+  action4(...)
+} else() {
+  action5(...);
+  action6(...)
+}
+```
+
+That attached-block direction is intentionally tracked as a later concrete-syntax step rather than the first implementation slice.
 
 ## `say(...)`
 `say(...)` is the newline-terminating output helper.

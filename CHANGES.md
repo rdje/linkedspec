@@ -1,5 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Design Note: Track Composite Control-Flow Syntax Direction
+## Summary
+Recorded the agreed pre-implementation design direction for composite control-flow syntax. The roadmap and control-flow guide now distinguish clearly between currently supported syntax and the next intended control-flow forms, including the one-header / one-body-carrier rule, structured inline switch branch bodies, and staged inline composite `if(...)` exploration.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Explicitly kept current inline composite `switch(expr, case(...), default(...))` action-list syntax as the composite baseline.
+- Explicitly ruled out chained branch-body forms like `case(value, m1(...).m2(...))`.
+- Recorded the branch syntax contract:
+  - one branch header,
+  - one body carrier,
+  - no mixed `default(actions...) { ... }` or equivalent mixed-body forms.
+- Recorded the staged switch plan:
+  - first prefer structured branch bodies like `case(value, { ... })`,
+  - later consider attached-block sugar like `case(value) { ... }` and `default() { ... }`.
+- Recorded the staged `if(...)` plan:
+  - first prefer an argument-list composite form like `if(cond, ..., elseif(...), else(...))`,
+  - later treat attached-block `if(cond) { ... }` ergonomics as a larger syntax pass.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this is a design-note slice rather than a landed syntax implementation.
+
 ## 2026-03-14 - Docs Clarification: Track Control-Flow Syntax Revisit
 ## Summary
 Recorded a design clarification that the currently documented `if(...)` / `else()` / `endif()` and `switch(...)` marker syntax is the current supported surface, but not the final ergonomics target. The roadmap now explicitly tracks a future control-flow syntax revisit to reduce punctuation friction and evaluate more natural block-style and inline-composite authoring forms.
