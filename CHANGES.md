@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Roadmap/Docs Slice: Add `ROADMAP_V2` and Name Full Lifecycle Family Contract
+## Summary
+Added `ROADMAP_V2.md` as a shorter execution-oriented companion to the primary roadmap, and tightened the semicolon-light lifecycle policy so it explicitly names the full lifecycle family instead of reading like an `I`/`LX`-only convention.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Added: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `ROADMAP_V2.md` to keep:
+  - the live four-level tracker,
+  - execution-order rules,
+  - raw-Perl-free `.spec` policy,
+  - documentation contract,
+  - and near-term priorities
+  in one shorter operational document.
+- Clarified that the semicolon-light structured lifecycle policy covers the full lifecycle family:
+  - `I`
+  - `LS`
+  - `LE`
+  - `E`
+  - `EX`
+  - `IT`
+  - `LX`
+- Clarified that `I { ... }` and `LX { ... }` are current regression anchors only, not the intended boundary of the lifecycle-wide policy.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this slice improves roadmap/doc precision and execution tracking without changing current status levels.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Semicolonless Generic `LX` Blocks
 ## Summary
 Extended the semicolon-light structured-block work to generic non-control-flow `LX { ... }` blocks too. Structured `LX` helper sequences can now be authored without `;` separators between top-level method statements while preserving the same lifecycle lowering and migration metadata as the fluent baseline.

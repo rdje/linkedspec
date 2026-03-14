@@ -166,7 +166,7 @@ If a `{...}` block contains raw Perl, that is migration debt to remove rather th
 Inside those method-only structured blocks, semicolons are accepted but no longer required between top-level method statements.
 That same optional-semicolon rule now applies on lifecycle structured blocks too, including `LX { if(...) ... endif() }` and `LX { switch(...) ... endswitch() }` marker-style control flow.
 It is also now regression-locked on generic helper-only blocks, not just control-flow examples, so both `{ m1(...)\n m2(...) }` and lifecycle forms like `I { m1(...)\n m2(...) }` and `LX { m1(...)\n m2(...) }` are part of the supported semicolon-light surface.
-Treat those `I { ... }` and `LX { ... }` examples as current locked representatives of a broader rule, not as the intended limit: if semicolon-light structured authoring applies to one lifecycle block family, it is intended to apply to the others too unless an explicit documented exception is introduced.
+Treat those `I { ... }` and `LX { ... }` examples as current locked representatives of a broader rule, not as the intended limit. The lifecycle families covered by that rule are `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`: if semicolon-light structured authoring applies to one lifecycle block family, it is intended to apply to the others too unless an explicit documented exception is introduced.
 
 ### Nested method composition should be unlimited
 Method arguments are intended to support unlimited nested method composition.

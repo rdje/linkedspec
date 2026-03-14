@@ -1,0 +1,88 @@
+# ROADMAP V2
+Execution-oriented companion to `ROADMAP.md`.
+
+This file exists to make the active plan easier to follow without replacing the fuller historical and architectural roadmap in `ROADMAP.md`.
+
+## Purpose
+- Keep a concise execution view of what we are doing now.
+- Keep the live four-level tracker easy to inspect.
+- Make the active policy contracts explicit enough that future slices do not drift.
+
+## Operating Rules
+- Status levels are limited to:
+  - `done`
+  - `mostly done`
+  - `in progress`
+  - `not started`
+- Execution is dependency-first by default, not strict waterfall by phase number.
+- If strict phase-by-phase execution is desired, it must be requested explicitly.
+- Before every commit, update the tracker if the completed slice materially changes what is done, what is left, or which area is active.
+- In commit close-outs:
+  - show changed tracker rows when a level changes,
+  - otherwise show only the tracker rows affected by the slice,
+  - show the full tracker only when explicitly requested.
+
+## Core Policy Contracts
+- `.spec` authoring is intended to become permanently raw-Perl-free.
+- Raw Perl inside `.spec` is obsolete compatibility debt, not an acceptable long-term authoring surface.
+- Remaining raw Perl occurrences in `.spec` should be flagged loudly and migrated to canonical method-like DSL equivalents.
+- Documentation is a product contract:
+  - optimize for readability,
+  - remove ambiguity directly,
+  - explain semantics plainly,
+  - use representative examples when they help,
+  - do not intentionally obfuscate behavior or tradeoffs.
+
+## Lifecycle-Wide Structured DSL Contract
+Semicolon-light structured authoring is intended to apply across the full lifecycle family:
+- `I`
+- `LS`
+- `LE`
+- `E`
+- `EX`
+- `IT`
+- `LX`
+
+Current regression anchors are `I { ... }` and `LX { ... }`, but those are only proof points. They are not the intended limit of the policy. If semicolon-light structured authoring applies to one lifecycle block family, it should apply to the others too unless an explicit documented exception is introduced.
+
+## Current Live Tracker
+| Area | Status | What it covers | Remaining focus |
+| --- | --- | --- | --- |
+| Overall roadmap | `in progress` | Whole-project delivery across parser core, semantics, runtime, docs, and future self-hosting. | Finish the remaining Backbone Item 3 cleanup, then drive the later semantic/runtime/self-hosting phases. |
+| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; `tclite.spec` remains the only explicitly deferred known issue. |
+| Phase 1 | `mostly done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams. |
+| Phase 1A | `mostly done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Finish shrinking `LinkedSpec.pm` and the remaining thin compatibility wrappers down to stable owner paths. |
+| Phase 2 | `not started` | DSL frontend hardening, stricter validation, and clearer token/error handling. | DSL frontend hardening still has not begun as a dedicated phase. |
+| Phase 3 | `not started` | Formal parse-mode semantics, especially `seek` versus `consume` behavior. | Execution-semantics clarification work is still ahead. |
+| Phase 4 | `not started` | Capture/mark API formalization and clearer staged-extraction authoring primitives. | Capture/mark API formalization is still ahead. |
+| Phase 5 | `in progress` | Runtime modernization, diagnostics consistency, and reduced dynamic-eval fragility. | Runtime/diagnostic modernization has landed refactor groundwork, but the phase-level behavior work is not complete yet. |
+| Phase 6 | `in progress` | User/developer documentation, architecture rationale, and live project-state upkeep. | Documentation is being maintained live, but adoption/consolidation work is still active. |
+| Phase 7 | `not started` | Self-hosted `spec.spec` grammar and `.spec` evolution through the DSL itself. | Self-hosted `.spec` grammar work has not begun yet. |
+| Backbone refactor track | `mostly done` | Cross-cutting structural cleanup needed to make LinkedSpec robust, modular, and extensible. | Item 3 remains active; Items 1 and 2 are already landed. |
+| Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
+| Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
+| Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
+| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Extend fluent/block equivalence coverage, deepen nested-composition coverage, finish lifecycle-family parity, and continue reducing raw Perl dependence without collapsing structured DSL blocks. |
+| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement and decoupling are still ahead. |
+
+## Near-Term Execution Priorities
+1. Finish the lifecycle-family follow-through for semicolon-light structured authoring:
+   - add explicit regression coverage beyond `I` and `LX`,
+   - keep the policy lifecycle-wide unless an exception is documented.
+2. Continue the method-like DSL migration track:
+   - broaden fluent/block equivalence on supported surfaces,
+   - keep unlimited nested composition canonical and backend-neutral,
+   - keep raw-Perl-free `.spec` authoring as the target.
+3. Finish the remaining Backbone Item 3 cleanup:
+   - reduce leftover compatibility seams,
+   - keep `EmitContext` and extracted ActionIR owners as the stable lowering surface.
+4. Keep documentation synchronized with every meaningful slice:
+   - roadmap,
+   - execution notes,
+   - user guide,
+   - session memory.
+
+## Relationship to ROADMAP.md
+- `ROADMAP.md` remains the primary long-form roadmap and historical planning document.
+- `ROADMAP_V2.md` is the shorter execution-focused companion.
+- If the two ever drift, update both in the same slice.

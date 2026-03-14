@@ -9,6 +9,18 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Added `ROADMAP_V2.md` as a shorter execution-oriented companion to `ROADMAP.md` so the active plan is easier to inspect without collapsing the long-form roadmap.
+- Tightened the semicolon-light lifecycle policy wording:
+  - the lifecycle family is explicitly `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - and `I { ... }` plus `LX { ... }` are now documented clearly as current regression anchors rather than the boundary of the intended policy.
+- Tracker impact:
+  - no live-status row changes,
+  - because this slice strengthens execution tracking and documentation precision without moving any roadmap level.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md ROADMAP_V2.md USER_GUIDE.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Notes (2026-03-14)
 - Landed the generic `LX` follow-up for semicolon-light lifecycle blocks:
   - semicolonless non-control-flow `LX { ... }` helper sequences are now regression-locked too,
   - including a supported `declare(...)` / `assign(...)` / `call(...)` / `return(...)` chain,

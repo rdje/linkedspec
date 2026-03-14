@@ -1,6 +1,8 @@
 # ROADMAP
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 
+Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.
+
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.
 - Preserve the current strengths:
@@ -454,6 +456,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: that same semicolon-free marker-style control-flow surface is now regression-locked on lifecycle blocks too, so `LX { if(...) ... else() ... endif() }` and `LX { switch(...) ... case(...) ... default() ... endswitch() }` preserve the same lifecycle lowering and migration metadata as the fluent baseline without requiring `;` separators between top-level method statements.
   - Landed follow-up: the broader semicolon-light structured-block rule is now regression-locked on generic helper-only blocks too, so action-edge `{ ... }` chains and lifecycle `I { ... }` as well as generic `LX { ... }` chains can be authored without `;` separators between top-level method statements while preserving the same lowering and migration metadata as the fluent baseline.
   - Clarification: semicolon-light structured authoring is intended to apply across lifecycle block families by default, not only to `I { ... }` or `LX { ... }`.
+    - The lifecycle families covered by this policy are `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
     - If it applies to one structured lifecycle block family, it should apply to the others too unless an explicit documented exception is introduced.
     - `I { ... }` and `LX { ... }` are current regression locks for that broader lifecycle-wide direction, not the intended limit of the policy.
   - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now resolves its `ControlFlow` callback bundle through `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)` instead of hand-building that map locally, so the extracted control-flow owner now defines the active callback contract for both direct owner calls and emit-context lowering.

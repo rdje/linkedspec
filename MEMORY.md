@@ -10,6 +10,18 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Added `ROADMAP_V2.md` as a shorter execution-oriented companion to `ROADMAP.md` so the active plan is easier to inspect without flattening the long-form roadmap into one file.
+- Tightened the semicolon-light lifecycle policy wording:
+  - the lifecycle family is explicitly `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - and `I { ... }` plus `LX { ... }` are documented as current regression anchors rather than the boundary of the intended lifecycle-wide rule.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a roadmap/doc precision slice rather than a new implementation slice.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md ROADMAP_V2.md USER_GUIDE.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Snapshot (2026-03-14)
 - Landed the generic `LX` follow-up for semicolon-light lifecycle blocks:
   - semicolonless non-control-flow `LX { ... }` helper sequences are now regression-locked too,
   - including a supported `declare(...)` / `assign(...)` / `call(...)` / `return(...)` chain,
