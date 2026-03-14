@@ -3,7 +3,15 @@ This guide explains LinkedSpec in two layers:
 1. as a progressive extraction parser DSL, and
 2. as a lowering-driven action DSL whose helper forms are rewritten into canonical ActionIR and then emitted into backend code.
 
-For current LinkedSpec work, the second layer matters the most. If you want `.spec` files that stay backend-neutral and portable across future non-Perl backends, you should understand the lowering surface and prefer canonical helper forms over raw Perl fragments.
+For current LinkedSpec work, the second layer matters the most. If you want `.spec` files that stay backend-neutral and portable across future non-Perl backends, you should understand the lowering surface and keep `.spec` authoring on the canonical method-like DSL rather than on raw Perl fragments.
+
+## Authoring Contract
+The project direction is now explicit:
+- `.spec` files are intended to become 100% raw-Perl-free,
+- raw Perl inside `.spec` is obsolete compatibility debt, not an acceptable long-term authoring surface,
+- and any remaining raw Perl occurrences should be treated as migration blockers to flag and replace with language-agnostic DSL equivalents.
+
+That matters because the long-term goal is not “Perl, but cleaner.” It is a backend-neutral `.spec` language that can be implemented by LinkedSpec backends in Rust and other languages too.
 
 ## Why this guide is split
 The lowering surface is now large enough that a single giant guide becomes hard to navigate. This top-level guide is the map; the detailed lowering references live in focused module-oriented guides.
@@ -47,7 +55,7 @@ LinkedSpec does **not** treat that as opaque text. Instead it tries to:
 That distinction matters because not all syntactically valid Perl inside a `{ ... }` block is equally portable.
 
 ### Portability tiers
-Think about authoring styles in three tiers:
+Think about authoring styles in three tiers, but read tiers 2 and 3 as migration reality rather than desirable end-state authoring:
 
 1. **Canonical helper-only lowering**
    - Best choice.
@@ -55,15 +63,15 @@ Think about authoring styles in three tiers:
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
-   - Still useful and often unavoidable today.
+   - Transitional only.
    - Example: `assign(scalar(pos_begin), pos $$STRING)` or `assign(scalar(part), substr($$STRING, ...))`.
    - The outer statement is canonical, but the inner expression is still host-language flavored.
-   - Use when no dedicated helper exists yet, but do it consciously.
+   - Use only when no dedicated helper exists yet, and treat it as migration debt to remove rather than a desirable steady-state pattern.
 
 3. **Legacy or raw compatibility forms**
-   - Works for existing Perl specs.
+   - Compatibility only.
    - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
-   - These are important for compatibility, but new backend-neutral specs should prefer the newer helper surface where possible.
+   - These are important for migration and compatibility, but they are not the target authoring surface for a backend-neutral `.spec`.
 
 ## Typical Workflow
 1. Write or update a `.spec` grammar.
@@ -154,6 +162,7 @@ Long-term, the backend-neutral goal is not "remove braces." It is:
 ```
 
 If a `{...}` block contains only method-like DSL statements, it is part of the intended backend-neutral surface, not a legacy escape hatch.
+If a `{...}` block contains raw Perl, that is migration debt to remove rather than syntax we want to preserve.
 
 ### Nested method composition should be unlimited
 Method arguments are intended to support unlimited nested method composition.

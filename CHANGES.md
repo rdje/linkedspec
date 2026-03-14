@@ -1,5 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Design Note: Lock Raw-Perl-Free `.spec` Policy
+## Summary
+Recorded an explicit project policy that `.spec` authoring is intended to become permanently raw-Perl-free. Raw Perl in `.spec` is now tracked as obsolete compatibility debt to reject and migrate away, and the semicolon-light control-flow design direction is explicitly scoped only to canonical method-like DSL blocks rather than to any mixed Perl/DSL model.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Strengthened the roadmap raw-Perl policy from gradual reduction language to an explicit raw-Perl-free `.spec` end-state.
+- Clarified that remaining raw Perl in `.spec` should be:
+  - flagged loudly,
+  - treated as migration blockers,
+  - and replaced with language-agnostic DSL equivalents.
+- Clarified that structured `{...}` blocks remain supported only when they contain method-like DSL statements rather than embedded raw Perl.
+- Clarified that semicolon-optional control-flow work is scoped to canonical DSL parsing only, not to preserving mixed raw-Perl authoring.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this is a policy/design-note slice rather than a landed enforcement implementation.
+
 ## 2026-03-14 - Design Note: Track Composite Control-Flow Syntax Direction
 ## Summary
 Recorded the agreed pre-implementation design direction for composite control-flow syntax. The roadmap and control-flow guide now distinguish clearly between currently supported syntax and the next intended control-flow forms, including the one-header / one-body-carrier rule, structured inline switch branch bodies, and staged inline composite `if(...)` exploration.

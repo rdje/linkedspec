@@ -20,6 +20,9 @@ Syntax status note:
 - and the roadmap now explicitly keeps a control-flow syntax revisit open so we can reduce friction around marker-style forms like `else();` and `endif()`,
 - investigate more natural semicolon-light or brace-delimited branch syntax,
 - and evaluate inline composite `if(...)` forms similar in spirit to inline composite `switch(...)`.
+- that semicolon-light direction is only for canonical method-like DSL blocks,
+- not for a mixed raw-Perl-plus-DSL authoring model,
+- because raw Perl in `.spec` is now being treated as obsolete authoring that should be rejected and migrated away.
 - an agreed pre-implementation design note is now also tracked:
   - keep one branch header mapped to one body carrier,
   - do not mix inline branch actions and attached branch blocks on the same `case(...)`, `default()`, `if(...)`, or `elseif(...)`,
@@ -326,7 +329,8 @@ endswitch()
 ```
 
 ## Recommendations
-- Use helper flow markers, not raw Perl `if (...) { ... }`, when the branch logic is part of canonical DSL migration work.
+- Use helper flow markers, not raw Perl `if (...) { ... }`, when authoring `.spec` control flow.
+- Raw Perl control-flow bodies are legacy migration debt, not part of the intended long-term `.spec` surface.
 - Keep nested `if(...)` blocks readable; deeply nested branch stacks are still harder to maintain than assigning an intermediate flag.
 - Prefer inline switch only when each branch is short. Use marker-style switch for longer bodies.
 - Use `say(...)` and `print(...)` for diagnostics instead of embedding raw output statements if backend-neutrality matters.

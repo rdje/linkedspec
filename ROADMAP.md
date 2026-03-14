@@ -219,11 +219,15 @@ Status interpretation note:
    - Keep compatibility helper APIs during migration so existing specs stay functional.
    - Parsing and lowering stay IR-first: each method maps to a typed IR node (not opaque string rewrite).
 6. Raw-Perl reduction policy (Planned)
-   - Reduce and eventually eliminate raw Perl dependence in action bodies.
-   - Distinguish clearly between:
-     - raw Perl blocks/fragments,
-     - and structured `{...}` blocks that contain only method-like DSL statements.
-   - Only the raw Perl dependency is a deprecation target; structured DSL blocks remain a supported surface.
+   - `.spec` authoring is intended to become permanently raw-Perl-free.
+   - Raw Perl blocks/fragments inside `.spec` are obsolete compatibility debt, not a supported long-term authoring surface.
+   - New roadmap work should not introduce new raw Perl dependence in `.spec`.
+   - Existing raw Perl occurrences should be treated as migration blockers:
+     - flag them loudly,
+     - replace them with backend-neutral method-like DSL equivalents,
+     - and move the owning rules toward zero raw-Perl dependency.
+   - Structured `{...}` blocks remain a supported surface only when they contain method-like DSL statements rather than embedded raw Perl.
+   - Long-term backend portability depends on this: future Rust and other backend implementations need `.spec` semantics to be fully language-agnostic rather than Perl-dependent.
 7. Tracking policy (Planned)
    - Track progress through existing migration readiness/blocker metadata and regression locks.
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
@@ -443,6 +447,9 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
     - prefer `case(value, { ... })` as the first structured switch extension,
     - allow attached-block `case(value) { ... }` / `default() { ... }` only as later syntax sugar,
     - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass.
+  - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.
+    - It is not a mixed Perl/DSL parsing model.
+    - Raw Perl in `.spec` is now tracked as obsolete authoring that should be rejected and migrated away, not as a co-equal syntax surface to preserve.
   - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now resolves its `ControlFlow` callback bundle through `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)` instead of hand-building that map locally, so the extracted control-flow owner now defines the active callback contract for both direct owner calls and emit-context lowering.
   - Landed follow-up: `LinkedSpec::ActionRewriter` now owns the extracted FlowExpr/ValueExpr/MethodLowering/ArrayPipeline/ControlFlow callback surface it needs for declare/scanner/lowering work, so `LinkedSpec::Deps` no longer resolves those action-rewriter callbacks through `LinkedSpec.pm`.
   - Landed follow-up: `LinkedSpec::ParserFactory` now receives trace/config/compile dependencies from `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly, so `get_parser(...)` no longer relies on `LinkedSpec.pm` parser-factory façade callbacks for tracing or compilation.

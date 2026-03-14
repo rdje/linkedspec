@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Recorded an explicit raw-Perl-free `.spec` policy design note:
+  - `.spec` authoring is intended to become permanently raw-Perl-free,
+  - raw Perl in `.spec` is obsolete compatibility debt rather than syntax to preserve,
+  - remaining raw Perl occurrences should be flagged and migrated to canonical method-like DSL equivalents,
+  - and semicolon-optional control-flow work is scoped only to canonical DSL blocks rather than to a mixed Perl/DSL model.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a policy/design-note slice rather than a landed enforcement implementation.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Snapshot (2026-03-14)
 - Recorded the agreed pre-implementation design note for composite control-flow syntax:
   - keep current inline composite `switch(expr, case(...), default(...))` action-list syntax as the baseline composite surface,
   - do not support chained branch-body forms like `case(value, m1(...).m2(...))`,
