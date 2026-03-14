@@ -10,6 +10,18 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-14)
+- Recorded a control-flow syntax ergonomics clarification:
+  - current docs still describe the syntax that is supported now,
+  - but marker-heavy forms like `else();` and `endif()` are not being treated as the final UX target,
+  - and the roadmap now explicitly tracks a future revisit of `if` / `else` / `switch` concrete syntax, including lower-friction block forms and inline composite `if(...)` exploration.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a design-direction clarification rather than a landed syntax implementation.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for nested accessor payload equivalence:
   - supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads now have regression coverage between fluent and structured authoring on both action-edge and lifecycle surfaces,
   - and those forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.

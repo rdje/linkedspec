@@ -14,6 +14,13 @@ Method-DSL migration note:
 - and inline composite `switch(..., case(...), default(...))` method forms are regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces,
 - even when the docs show only representative branch examples.
 
+Syntax status note:
+- the examples in this guide show the currently supported control-flow surface,
+- but that surface is not being treated as final UX law,
+- and the roadmap now explicitly keeps a control-flow syntax revisit open so we can reduce friction around marker-style forms like `else();` and `endif()`,
+- investigate more natural semicolon-light or brace-delimited branch syntax,
+- and evaluate inline composite `if(...)` forms similar in spirit to inline composite `switch(...)`.
+
 ## What this module is responsible for
 This module lowers:
 - `if(...)` and alias `i(...)`

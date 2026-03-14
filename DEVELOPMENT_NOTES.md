@@ -9,6 +9,18 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Recorded a control-flow syntax ergonomics clarification:
+  - current guide examples still document the syntax that is supported today,
+  - but forms like `else();` and `endif()` are not being treated as the final UX target,
+  - and the roadmap now explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, including lower-friction block forms and inline composite `if(...)` exploration.
+- Tracker impact:
+  - no live-status row changes,
+  - because this is a design-direction clarification rather than a landed syntax feature.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md USER_GUIDE.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Notes (2026-03-14)
 - Landed the next method-DSL lowering-equivalence follow-up on nested accessor payload composition:
   - supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces,
   - and those forms now explicitly agree on lowered output, canonical action-IR coverage, and zero-fallback migration metadata.

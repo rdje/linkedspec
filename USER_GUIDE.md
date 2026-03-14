@@ -214,6 +214,8 @@ That same supported call-value equivalence is now locked inside control-flow bra
 
 Nested accessor payloads are locked too: fluent and structured authoring now agree on supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads on both action-edge and lifecycle surfaces, so path-following value composition stays inside the same backend-neutral method-like DSL equivalence contract.
 
+Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

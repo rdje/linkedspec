@@ -1,5 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Docs Clarification: Track Control-Flow Syntax Revisit
+## Summary
+Recorded a design clarification that the currently documented `if(...)` / `else()` / `endif()` and `switch(...)` marker syntax is the current supported surface, but not the final ergonomics target. The roadmap now explicitly tracks a future control-flow syntax revisit to reduce punctuation friction and evaluate more natural block-style and inline-composite authoring forms.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Clarified in the roadmap that method-like DSL work still includes a planned control-flow concrete-syntax revisit.
+- Explicitly called out likely exploration areas:
+  - less punctuation-heavy marker forms,
+  - brace-delimited branch syntax,
+  - and inline composite `if(...)` forms analogous to inline composite `switch(...)`.
+- Clarified in the guides that current examples document what is supported now, not what must remain the final UX forever.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this is a design-direction clarification rather than a landed syntax implementation slice.
+
 ## 2026-03-14 - Method-Like DSL Slice: Lock Nested Accessor Payload Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking nested accessor payload composition between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `scalaref(base, path)` plus indexed/keyed `scalar(...)` payload reads now preserve the same lowering and migration metadata across both concrete syntaxes.
