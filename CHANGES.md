@@ -1,5 +1,44 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Semicolonless Remaining Lifecycle Helper Blocks
+## Summary
+Extended the semicolon-light structured-block regression coverage from `I` and `LX` to the remaining lifecycle families too. Generic helper-only `LS`, `LE`, `E`, `EX`, and `IT` blocks are now regression-locked in semicolonless structured form against their fluent baselines.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused semicolonless structured-block regressions for:
+  - `LS`
+  - `LE`
+  - `E`
+  - `EX`
+  - `IT`
+- Locked parity against the fluent lifecycle baselines on:
+  - identical canonical action-IR node coverage,
+  - identical canonical action-IR hit counts,
+  - expected `DECLARE` / `ASSIGN` / `RETURN` / `RETURN_A` helper coverage,
+  - zero canonical fallback,
+  - and language-agnostic readiness.
+- Clarified in the roadmap and user guide that generic helper-only semicolon-light lifecycle coverage now spans the full family:
+  - `I`
+  - `LS`
+  - `LE`
+  - `E`
+  - `EX`
+  - `IT`
+  - `LX`
+- Clarified the remaining narrower seam too: control-flow-heavy semicolon-light lifecycle coverage is still the more `LX`-anchored slice for now.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens lifecycle-family regression coverage without moving the track level.
+
 ## 2026-03-14 - Roadmap/Docs Slice: Add `ROADMAP_V2` and Name Full Lifecycle Family Contract
 ## Summary
 Added `ROADMAP_V2.md` as a shorter execution-oriented companion to the primary roadmap, and tightened the semicolon-light lifecycle policy so it explicitly names the full lifecycle family instead of reading like an `I`/`LX`-only convention.

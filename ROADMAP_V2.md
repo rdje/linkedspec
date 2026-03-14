@@ -67,8 +67,8 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 
 ## Near-Term Execution Priorities
 1. Finish the lifecycle-family follow-through for semicolon-light structured authoring:
-   - add explicit regression coverage beyond `I` and `LX`,
-   - keep the policy lifecycle-wide unless an exception is documented.
+   - generic helper-only regression coverage now spans `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+   - keep extending the narrower lifecycle-specific slices, especially control-flow-heavy ones, unless an exception is documented.
 2. Continue the method-like DSL migration track:
    - broaden fluent/block equivalence on supported surfaces,
    - keep unlimited nested composition canonical and backend-neutral,

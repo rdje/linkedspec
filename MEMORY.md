@@ -9,6 +9,21 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Representative examples are encouraged whenever they make semantics easier to learn or verify.
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
+## Current Session Snapshot (2026-03-15)
+- Landed the lifecycle-family follow-up for semicolon-light generic helper blocks:
+  - semicolonless structured `LS`, `LE`, `E`, `EX`, and `IT` helper sequences are now regression-locked too,
+  - and those lifecycle blocks match their fluent baselines on canonical action-IR node coverage, canonical hit counts, expected `DECLARE` / `ASSIGN` / `RETURN` / `RETURN_A` helper coverage, zero fallback, and language-agnostic readiness.
+- Clarified the exact lifecycle-wide state in the docs:
+  - generic helper-only semicolon-light regression coverage now spans `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - while control-flow-heavy semicolon-light lifecycle coverage is still the narrower `LX`-anchored slice for now.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens lifecycle-family regression coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## Current Session Snapshot (2026-03-14)
 - Added `ROADMAP_V2.md` as a shorter execution-oriented companion to `ROADMAP.md` so the active plan is easier to inspect without flattening the long-form roadmap into one file.
 - Tightened the semicolon-light lifecycle policy wording:

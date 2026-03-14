@@ -8,6 +8,21 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Use representative examples generously when they reduce ambiguity or help adoption.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
+## Current Session Notes (2026-03-15)
+- Landed the lifecycle-family follow-up for semicolon-light generic helper blocks:
+  - semicolonless structured `LS`, `LE`, `E`, `EX`, and `IT` helper sequences are now regression-locked too,
+  - and those lifecycle blocks match their fluent baselines on canonical action-IR node coverage, canonical hit counts, expected `DECLARE` / `ASSIGN` / `RETURN` / `RETURN_A` helper coverage, zero fallback, and language-agnostic readiness.
+- Clarified the exact lifecycle-wide state in the roadmap/docs:
+  - generic helper-only semicolon-light regression coverage now spans `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - while the control-flow-heavy semicolon-light lifecycle slice is still the narrower `LX`-anchored coverage for now.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens lifecycle-family regression coverage without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## Current Session Notes (2026-03-14)
 - Added `ROADMAP_V2.md` as a shorter execution-oriented companion to `ROADMAP.md` so the active plan is easier to inspect without collapsing the long-form roadmap.
 - Tightened the semicolon-light lifecycle policy wording:

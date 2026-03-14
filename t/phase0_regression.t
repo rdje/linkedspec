@@ -8074,6 +8074,66 @@ SPEC
         'semicolonless structured LX helper block stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_structured_remaining_lifecycle_blocks_accept_optional_semicolons' => sub {
+    my @cases = (
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    my $expected_hits = {
+        ASSIGN   => 1,
+        DECLARE  => 1,
+        RETURN   => 1,
+        RETURN_A => 1,
+    };
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "semicolonless structured $tag lifecycle helper block" => sub {
+            plan tests => 8;
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.declare(scalar, retv).assign(scalar(retv), CAPTURE).return(hash("item", scalar(retv)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $block_spec = <<"SPEC";
+Top::&
+$tag { declare(scalar, retv)
+ assign(scalar(retv), CAPTURE)
+ return(hash("item", scalar(retv))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle helper chain used as semicolonless comparison baseline");
+            ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle helper block");
+
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+            my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($block_meta->{canonical_action_ir_fallback_count}, 0, "semicolonless structured $tag lifecycle helper block avoids RAW_PERL fallback");
+            is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR node coverage from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR hit counts from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_hits, "fluent $tag lifecycle helper chain exposes the expected DECLARE/ASSIGN/RETURN/RETURN_A helper mix");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_hits, "semicolonless structured $tag lifecycle helper block exposes the expected DECLARE/ASSIGN/RETURN/RETURN_A helper mix");
+            ok(
+                $block_meta->{unresolved_helper_count} == 0 &&
+                $block_meta->{language_agnostic_action_ir_ready},
+                "semicolonless structured $tag lifecycle helper block stays fully language-agnostic-ready",
+            );
+        };
+    }
+};
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 
