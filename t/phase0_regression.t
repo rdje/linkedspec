@@ -1780,6 +1780,40 @@ subtest 'emit_context_declare_method_deps_route_through_owner_default_map' => su
     ok(LinkedSpec::RuleIR::EmitContext->can('_declare_method_deps'), 'EmitContext still exposes the local declare-method dep entrypoint');
 };
 
+subtest 'emit_context_scanner_deps_route_through_owner_default_map' => sub {
+    plan tests => 4;
+
+    no warnings 'redefine';
+    require LinkedSpec::RuleIR::EmitContext;
+    require LinkedSpec::ActionIR::Scanner;
+
+    my $captured_pkg;
+    local *LinkedSpec::ActionIR::Scanner::default_deps_for_package = sub {
+        my ($pkg) = @_;
+        $captured_pkg = $pkg;
+        return {
+            split_action_ir_statements => sub { return ['split_ok'] },
+            trim_action_ir_value => sub { return 'trim_ok' },
+            parse_method_function_expr => sub { return { method => 'assign', args => ['items', 'scalar(flag)'] } },
+            normalize_method_args_with_optional_scope => sub { return ['items', 'scalar(flag)'] },
+            build_array_pipeline_plan_from_expr => sub { return { target => 'items' } },
+            extract_declare_statement_from_method_expr => sub { return { declaration_type => 'scalar', entries => ['flag'] } },
+            parse_declare_binding_entry => sub { return { owner => "scanner_for_$pkg" } },
+        };
+    };
+    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {
+        my ($contract, $code, $deps) = @_;
+        return { owner_pkg => $deps->{parse_declare_binding_entry}->('items = scalar(flag)')->{owner} };
+    };
+
+    $@ = "__SAVED_ERR__\n";
+    my $ret = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events({ id => 'assign' }, 'assign(items, scalar(flag))');
+    is_deeply($ret, { owner_pkg => 'scanner_for_LinkedSpec::RuleIR::EmitContext' }, 'EmitContext scanner helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the scanner owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext scanner helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_scan_contract_ir_event_deps'), 'EmitContext still exposes the local scanner dep entrypoint');
+};
+
 subtest 'spec_entry_helper_wrappers_preserve_eval_error_state' => sub {
     plan tests => 12;
 

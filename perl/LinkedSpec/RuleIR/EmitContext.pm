@@ -216,15 +216,10 @@ sub _control_flow_deps {
 }
 
 sub _scan_contract_ir_event_deps {
- return {
-  split_action_ir_statements => sub { return _split_action_ir_statements(@_) },
-  trim_action_ir_value => sub { return _trim_action_ir_value(@_) },
-  parse_method_function_expr => sub { return _parse_method_function_expr(@_) },
-  normalize_method_args_with_optional_scope => sub { return _normalize_method_args_with_optional_scope(@_) },
-  build_array_pipeline_plan_from_expr => sub { return _build_array_pipeline_plan_from_expr(@_) },
-  extract_declare_statement_from_method_expr => sub { return _extract_declare_statement_from_method_expr(@_) },
-  parse_declare_binding_entry => sub { return _parse_declare_binding_entry(@_) },
- }
+ return _call_preserving_err(sub {
+  _require_scanner_pkg();
+  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
+ })
 }
 
 sub _diagnostics_deps {
