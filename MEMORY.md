@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for collection-valued hash/object composition:
+  - `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` now have regression coverage for helper-only nested array-pipeline composition inside hash/object-valued shapes,
+  - and fluent versus structured lifecycle surfaces now agree on that supported collection-hash shape too.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice broadens supported collection-hash coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=250`)
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for collection-valued nested composition:
   - `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values now have regression coverage for helper-only nested array-pipeline composition,
   - and fluent versus structured lifecycle surfaces now agree on that supported collection-value shape too.

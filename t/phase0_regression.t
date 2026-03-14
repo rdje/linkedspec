@@ -5768,6 +5768,60 @@ SPEC
     is($block_meta->{unresolved_helper_count}, 0, 'structured collection-value pipeline lifecycle form avoids unresolved-helper hits');
     ok($fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready}, 'fluent and structured collection-value pipeline lifecycle forms remain language-agnostic action-IR ready');
 };
+subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
+    plan tests => 14;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        'my %by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }])',
+        'declare(hash, name=hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(items))), /^B/))))'),
+        '%by_name = ("A" => [@items = grep { $_ =~ /^B/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @items }])',
+        'assign(hash(...), hash(... array(pipeline(...)))) lowers nested collection-valued hash source'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}',
+        'push_value accepts hash payloads with nested collection-valued array-pipeline composition'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return_array(Top, semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}]',
+        'return_array accepts hash payloads with nested collection-valued array-pipeline composition'
+    );
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+I.declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+I { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent collection-hash pipeline lifecycle form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured collection-hash pipeline lifecycle form');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent collection-hash pipeline lifecycle form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured collection-hash pipeline lifecycle form avoids RAW_PERL fallback');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent collection-hash pipeline lifecycle form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured collection-hash pipeline lifecycle form avoids unresolved-helper hits');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent collection-hash pipeline lifecycle form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured collection-hash pipeline lifecycle form avoids raw Perl dependency');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured collection-hash pipeline lifecycle forms produce identical canonical action-IR node coverage');
+    ok($fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready}, 'fluent and structured collection-hash pipeline lifecycle forms remain language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

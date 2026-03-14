@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Landed another method-like DSL follow-up for collection-valued hash/object composition:
+  - `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return_array(..., hash(...))` now have regression coverage for helper-only nested array-pipeline composition inside hash/object-valued shapes,
+  - and fluent versus structured lifecycle surfaces now report matching zero-unresolved / zero-fallback metadata for that supported collection-hash shape too.
+- The method-like DSL track still stays `in progress`; this slice broadens supported collection-hash coverage but does not change the tracker level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=250`)
+
+## Current Session Notes (2026-03-14)
 - Landed another method-like DSL follow-up for collection-valued nested composition:
   - `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values now have regression coverage for helper-only nested array-pipeline composition,
   - and fluent versus structured lifecycle surfaces now report matching zero-unresolved / zero-fallback metadata for that supported collection-value shape too.
