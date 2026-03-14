@@ -163,8 +163,8 @@ Goal: converge `.spec` semantics on backend-neutral method-like operations while
 The long-term goal is to eliminate raw Perl dependence, not to eliminate structured `{...}` blocks when those blocks contain method-like DSL statements.
 
 Status interpretation note:
-- This track stays `not started` until dedicated user-facing migration work lands for this track itself.
-- Backbone Item 3 groundwork, owner extraction, ActionIR cleanup, and compatibility-surface reduction are prerequisites for this track, but they do not count as starting the method-like DSL migration track on their own.
+- This track moved out of `not started` only once dedicated user-facing migration work landed for the track itself.
+- Backbone Item 3 groundwork, owner extraction, ActionIR cleanup, and compatibility-surface reduction remain prerequisites, but they do not count as starting the method-like DSL migration track on their own.
 
 1. Canonical method IR vocabulary (Planned)
    - Define backend-neutral method ops for declaration/assignment/call/push/return/scalar-array-object construction/regex-substitution/capture-backtrack surfaces.
@@ -229,7 +229,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - With `tkgui.spec` now cleared, the current non-deferred migration scan reports zero blocked specs; shift the next Backbone #3 work away from deterministic per-spec blocker cleanup and back toward broader lowering/DSL follow-up unless a deferred spec is explicitly resumed.
 - Continue Backbone Refactor Track action rewriter follow-up by reducing `RAW_PERL` fallback usage through broader structured action-IR coverage, but do this via action-IR/lowering improvements rather than additional `_split_action_ir_statements(...)` delimiter hardening for now.
 - With `Lispish::parenthesis` now cleared, the tracked `Lispish`, `vhdl`, `ds_vhistory`, and `ebnf` descriptor summaries no longer report a remaining top blocked rule; shift the next Backbone item #3 work away from per-rule blocker removal in those families and back toward broader ActionIR-first lowering improvements and compatibility-surface cleanup.
-- Start Method-Like DSL Migration Track implementation in small slices:
+- Continue Method-Like DSL Migration Track implementation in small slices:
   - introduce canonical method ops incrementally and validate each slice with focused regressions,
   - keep helper-compatibility lowering active while fluent-chain and structured-block coverage grow together,
   - support unlimited nested method composition in argument lists,
@@ -274,7 +274,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
-| Method-like DSL migration track | `not started` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Groundwork under Backbone Item 3 does not count as this track having started. | Still queued behind the current Backbone Item 3 cleanup; only dedicated fluent/block equivalence, nested-composition, and raw-Perl-reduction work will move this row out of `not started`. |
+| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Extend fluent/block equivalence coverage, deepen nested-composition coverage, and continue reducing raw Perl dependence without collapsing structured DSL blocks. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
 
 ### Detailed Status Notes
@@ -386,6 +386,8 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
   - Landed follow-up: `LinkedSpec::ActionRewriter` now installs that remaining compatibility surface through one shared `_delegate_emit_context_call(...)` helper instead of a long wall of near-identical wrapper bodies, and `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now explicitly preserves the historical two-argument ActionRewriter rewrite-helper call shape while still routing through `RewritePipeline`-owned deps.
   - Landed follow-up: the stale local `LinkedSpec::ActionRewriter::_trim_action_ir_value(...)` helper has been removed, so the compatibility module no longer carries dead pre-EmitContext trim scaffolding and whitespace trimming now stays local to `LinkedSpec::RuleIR::EmitContext` plus the extracted `ActionIR::*` owners.
   - Clarification: this Backbone Item 3 groundwork is a prerequisite for the Method-like DSL migration track, but it does not by itself mean that the migration track has started.
+- Method-like DSL migration track: `in progress`.
+  - Landed start slice: helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical action lowering, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lifecycle lowering. This makes fluent/block equivalence an explicit tracked contract on supported surfaces rather than an implicit side effect of Backbone Item 3 groundwork, without yet claiming blanket equivalence for every nested return-payload shape.
   - Landed follow-up: `LinkedSpec::RuleIR::EmitContext` now resolves its `ControlFlow` callback bundle through `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)` instead of hand-building that map locally, so the extracted control-flow owner now defines the active callback contract for both direct owner calls and emit-context lowering.
   - Landed follow-up: `LinkedSpec::ActionRewriter` now owns the extracted FlowExpr/ValueExpr/MethodLowering/ArrayPipeline/ControlFlow callback surface it needs for declare/scanner/lowering work, so `LinkedSpec::Deps` no longer resolves those action-rewriter callbacks through `LinkedSpec.pm`.
   - Landed follow-up: `LinkedSpec::ParserFactory` now receives trace/config/compile dependencies from `LinkedSpec::Trace`, `LinkedSpec::Resolver`, and `LinkedSpec::Runtime` directly, so `get_parser(...)` no longer relies on `LinkedSpec.pm` parser-factory façade callbacks for tracing or compilation.

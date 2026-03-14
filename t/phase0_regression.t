@@ -6046,6 +6046,69 @@ SPEC
     ok(grep { $_ eq 'RETURN_M' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include RETURN_M from chained action methods');
     ok($meta->{language_agnostic_action_ir_ready}, 'chained method-like action block remains language-agnostic action-IR ready');
 };
+subtest 'method_like_fluent_and_structured_blocks_lower_equivalently' => sub {
+    plan tests => 21;
+
+    my $fluent_action_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .return_a().return_m()
+SPEC
+
+    my $block_action_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { return_a(Top); return_m(Top) }
+SPEC
+
+    my $fluent_lifecycle_spec = <<'SPEC';
+Top::&
+I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/)
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_lifecycle_spec = <<'SPEC';
+Top::&
+I { lowercase_each(array(parts)); filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+\$4/) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descr => 1);
+    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descr => 1);
+    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descr => 1);
+    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descr => 1);
+
+    ok(defined($fluent_action_descr) && ref($fluent_action_descr) eq 'HASH', 'descriptor build succeeds for fluent method-like action chain');
+    ok(defined($block_action_descr) && ref($block_action_descr) eq 'HASH', 'descriptor build succeeds for structured helper-only action block');
+
+    is_deeply($fluent_action_descr->{spec}{Top}{ACODE}, $block_action_descr->{spec}{Top}{ACODE}, 'fluent and structured helper-only action forms lower to identical ACODE output');
+
+    my $fluent_action_meta = $fluent_action_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_action_meta = $block_action_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_action_meta->{canonical_action_ir_fallback_count}, 0, 'fluent helper-only action chain avoids RAW_PERL fallback');
+    is($block_action_meta->{canonical_action_ir_fallback_count}, 0, 'structured helper-only action block avoids RAW_PERL fallback');
+    is($fluent_action_meta->{raw_perl_dependency_count}, 0, 'fluent helper-only action chain avoids raw Perl dependency');
+    is($block_action_meta->{raw_perl_dependency_count}, 0, 'structured helper-only action block avoids raw Perl dependency');
+    is($fluent_action_meta->{unresolved_helper_count}, 0, 'fluent helper-only action chain avoids unresolved-helper hits');
+    is($block_action_meta->{unresolved_helper_count}, 0, 'structured helper-only action block avoids unresolved-helper hits');
+    is_deeply($fluent_action_meta->{canonical_action_ir_nodes}, $block_action_meta->{canonical_action_ir_nodes}, 'fluent and structured helper-only action forms produce identical canonical action-IR node coverage');
+    ok($fluent_action_meta->{language_agnostic_action_ir_ready} && $block_action_meta->{language_agnostic_action_ir_ready}, 'fluent and structured helper-only action forms remain language-agnostic action-IR ready');
+
+    ok(defined($fluent_lifecycle_descr) && ref($fluent_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for fluent nested-composition lifecycle chain');
+    ok(defined($block_lifecycle_descr) && ref($block_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for structured nested-composition lifecycle block');
+
+    is($fluent_lifecycle_descr->{spec}{Top}{ICODE}, $block_lifecycle_descr->{spec}{Top}{ICODE}, 'fluent and structured nested-composition lifecycle forms lower to identical ICODE output');
+
+    my $fluent_lifecycle_meta = $fluent_lifecycle_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_lifecycle_meta = $block_lifecycle_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_lifecycle_meta->{canonical_action_ir_fallback_count}, 0, 'fluent nested-composition lifecycle chain avoids RAW_PERL fallback');
+    is($block_lifecycle_meta->{canonical_action_ir_fallback_count}, 0, 'structured nested-composition lifecycle block avoids RAW_PERL fallback');
+    is($fluent_lifecycle_meta->{raw_perl_dependency_count}, 0, 'fluent nested-composition lifecycle chain avoids raw Perl dependency');
+    is($block_lifecycle_meta->{raw_perl_dependency_count}, 0, 'structured nested-composition lifecycle block avoids raw Perl dependency');
+    is($fluent_lifecycle_meta->{unresolved_helper_count}, 0, 'fluent nested-composition lifecycle chain avoids unresolved-helper hits');
+    is($block_lifecycle_meta->{unresolved_helper_count}, 0, 'structured nested-composition lifecycle block avoids unresolved-helper hits');
+    ok($fluent_lifecycle_meta->{language_agnostic_action_ir_ready} && $block_lifecycle_meta->{language_agnostic_action_ir_ready}, 'fluent and structured nested-composition lifecycle forms remain language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_ir_lowering_preserves_helper_and_raw_behavior' => sub {
     plan tests => 3;
 

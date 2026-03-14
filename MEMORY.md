@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Started the dedicated Method-like DSL migration track in roadmap terms.
+- Helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical action lowering, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lifecycle lowering on the currently supported lifecycle surface.
+- `ROADMAP.md` now marks the `Method-like DSL migration track` row as `in progress` because dedicated migration work has landed, not just prerequisite Backbone Item 3 groundwork.
+- This start slice is intentionally scoped and does not yet claim blanket equivalence for every nested composition inside every return-payload shape.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=247`)
+
+## Current Session Snapshot (2026-03-14)
 - Corrected the method-like DSL end-state wording:
   - the target is to remove raw Perl dependence,
   - not to remove structured `{...}` blocks when those blocks contain method-like DSL statements.

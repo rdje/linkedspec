@@ -1,5 +1,38 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Fluent/Structured Equivalence For Helper-Only Forms
+## Summary
+Started the dedicated method-like DSL migration track by locking a concrete user-facing contract on supported surfaces: helper-only fluent action chains and structured `{...}` action blocks now have explicit regression coverage proving identical action lowering, and helper-only lifecycle chains with nested composed arguments now have explicit regression coverage proving identical lifecycle lowering.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a dedicated method-like migration regression:
+  - `method_like_fluent_and_structured_blocks_lower_equivalently`
+  - compares fluent and structured authoring surfaces directly on two supported surfaces,
+  - asserts identical lowered `ACODE` for helper-only action chains and identical lowered `ICODE` for lifecycle chains with nested composed arguments,
+  - asserts zero raw-Perl dependency / zero unresolved helpers / zero fallback for both,
+  - and asserts identical canonical action-IR node coverage for the helper-only action-chain surface.
+- Updated roadmap interpretation:
+  - the method-like DSL migration track now moves to `in progress`,
+  - because dedicated user-facing migration work has landed,
+  - while still keeping Backbone Item 3 prerequisite work conceptually separate.
+- Updated the guide to say this equivalence is now an explicit locked contract on supported surfaces, not a blanket claim for every nested return-payload shape yet.
+
+## Validation
+- Ran:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=247`)
+
 ## 2026-03-14 - Process Slice: Clarify Backend-Neutral Method DSL Goal
 ## Summary
 Corrected the roadmap and guide language so the backend-neutral goal is no longer framed as removing `{...}` blocks entirely. The clarified target is to remove raw Perl dependence while supporting two equivalent structured DSL surfaces: fluent method chains and structured `{...}` method blocks, both with unlimited nested method composition in arguments.

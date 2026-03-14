@@ -168,6 +168,10 @@ That means the backend-neutral target surface includes both:
 
 Those two dimensions are meant to lower into the same canonical IR regardless of whether the outer surface is fluent chaining or a structured `{...}` block.
 
+That equivalence is no longer just aspirational wording: helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical lowered action output, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lowered lifecycle output.
+
+This first lock is intentionally scoped. It does not yet claim that every nested method-composition shape is already equivalent across every possible return-payload or helper context.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

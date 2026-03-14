@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Started the dedicated Method-like DSL migration track in roadmap terms.
+- Landed a focused equivalence lock showing that helper-only fluent action chains and structured `{...}` action blocks already lower identically, and that helper-only lifecycle chains with nested composed arguments already lower identically on the currently supported lifecycle surface.
+- `ROADMAP.md` now marks `Method-like DSL migration track` as `in progress` on the strength of that dedicated migration work, while keeping Backbone Item 3 groundwork explicitly separate from the migration-track status.
+- The claim is intentionally narrow: this start slice does not yet assert blanket fluent/block equivalence for every nested composition inside every return-payload shape.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=247`)
+
+## Current Session Notes (2026-03-14)
 - Corrected an important roadmap semantic point:
   - the long-term goal is to eliminate raw Perl dependence,
   - not to eliminate structured `{...}` blocks when those blocks contain method-like DSL statements.
