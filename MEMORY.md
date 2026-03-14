@@ -10,6 +10,21 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Landed the lifecycle-family follow-up for semicolon-light structured control flow:
+  - semicolonless structured `LS`, `LE`, `E`, `EX`, and `IT` `if/else/endif` plus `switch/case/default/endswitch` blocks are now regression-locked too,
+  - and those lifecycle blocks match their fluent baselines on canonical action-IR node coverage, canonical hit counts, expected control-flow helper coverage, zero fallback, and language-agnostic readiness.
+- Clarified the docs accordingly:
+  - semicolon-light marker-style control-flow coverage now spans `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - so the base optional-semicolon marker syntax is no longer documented as effectively `LX`-only.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens lifecycle-family control-flow coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Landed the lifecycle-family follow-up for semicolon-light generic helper blocks:
   - semicolonless structured `LS`, `LE`, `E`, `EX`, and `IT` helper sequences are now regression-locked too,
   - and those lifecycle blocks match their fluent baselines on canonical action-IR node coverage, canonical hit counts, expected `DECLARE` / `ASSIGN` / `RETURN` / `RETURN_A` helper coverage, zero fallback, and language-agnostic readiness.

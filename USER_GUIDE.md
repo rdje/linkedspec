@@ -164,9 +164,9 @@ Long-term, the backend-neutral goal is not "remove braces." It is:
 If a `{...}` block contains only method-like DSL statements, it is part of the intended backend-neutral surface, not a legacy escape hatch.
 If a `{...}` block contains raw Perl, that is migration debt to remove rather than syntax we want to preserve.
 Inside those method-only structured blocks, semicolons are accepted but no longer required between top-level method statements.
-That same optional-semicolon rule now applies on lifecycle structured blocks too, including `LX { if(...) ... endif() }` and `LX { switch(...) ... endswitch() }` marker-style control flow.
+That same optional-semicolon rule now applies on lifecycle structured blocks too, including marker-style control flow across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
 It is also now regression-locked on generic helper-only blocks, not just control-flow examples, so both `{ m1(...)\n m2(...) }` and lifecycle forms across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` are part of the supported semicolon-light surface.
-Treat the current examples as representative, not as the intended limit. The lifecycle families covered by that rule are `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`: if semicolon-light structured authoring applies to one lifecycle block family, it is intended to apply to the others too unless an explicit documented exception is introduced. Generic helper-only semicolon-light coverage is now regression-locked across that full family, while the control-flow-heavy semicolon-light examples remain the narrower `LX`-anchored slice for now.
+Treat the current examples as representative, not as the intended limit. The lifecycle families covered by that rule are `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`: if semicolon-light structured authoring applies to one lifecycle block family, it is intended to apply to the others too unless an explicit documented exception is introduced. Generic helper-only semicolon-light coverage is now regression-locked across that full family, and marker-style semicolon-light control-flow coverage is now regression-locked across that full family too.
 
 ### Nested method composition should be unlimited
 Method arguments are intended to support unlimited nested method composition.

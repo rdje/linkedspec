@@ -8,7 +8,7 @@ Method-DSL migration note:
 - fluent-versus-structured authoring equivalence is intended to hold inside these branch bodies too,
 - so `if(...)` / `elseif(...)` branches and `switch(...)` / `case(...)` action bodies are part of the same method-like DSL equivalence target,
 - and supported general-`return(...)` branch-local method slices are now regression-locked on both the fluent and structured surfaces,
-- including the corresponding lifecycle surfaces (`LX.if(...).m(...).endif()` versus `LX { if(...); m(...); endif() }` and the parallel switch/case forms),
+- including the corresponding lifecycle surfaces (`I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, with `LX.if(...).m(...).endif()` versus `LX { if(...); m(...); endif() }` as representative examples, plus the parallel switch/case forms),
 - and supported multi-step helper sequences inside action-edge branch bodies are regression-locked there too,
 - and that same supported multi-step helper-sequence equivalence is regression-locked on lifecycle branch bodies too,
 - and inline composite `switch(..., case(...), default(...))` method forms are regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces,
@@ -47,12 +47,12 @@ This module lowers:
 - `return_undef()`
 
 It also supports two switch styles:
-1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `LX { ... }` blocks), and
+1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), and
 2. inline composite switch arguments (`switch(expr, case(...), default(...))`).
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.
-In structured helper-only blocks and structured lifecycle `LX { ... }` blocks, semicolons are accepted but not required between top-level method statements.
+In structured helper-only blocks and structured lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks, semicolons are accepted but not required between top-level method statements.
 
 ### Basic form
 

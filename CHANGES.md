@@ -1,5 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Semicolonless Remaining Lifecycle Control-Flow Blocks
+## Summary
+Extended the semicolon-light structured control-flow regression coverage from `LX` to the remaining lifecycle families too. Structured `LS`, `LE`, `E`, `EX`, and `IT` `if/else/endif` and `switch/case/default/endswitch` blocks are now regression-locked in semicolonless form against their fluent baselines.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused semicolonless structured control-flow regressions for the remaining lifecycle families:
+  - `LS`
+  - `LE`
+  - `E`
+  - `EX`
+  - `IT`
+- Locked parity against the fluent lifecycle baselines on:
+  - identical canonical action-IR node coverage,
+  - identical canonical action-IR hit counts,
+  - expected `IF` / `ELSE` / `ENDIF` helper coverage for marker-style `if(...)` blocks,
+  - expected `SWITCH` / `CASE` / `DEFAULT` / `ENDSWITCH` helper coverage for marker-style switch blocks,
+  - zero canonical fallback,
+  - and language-agnostic readiness.
+- Clarified in the roadmap and guides that semicolon-light marker-style lifecycle control-flow coverage now spans the full lifecycle family:
+  - `I`
+  - `LS`
+  - `LE`
+  - `E`
+  - `EX`
+  - `IT`
+  - `LX`
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens lifecycle-family control-flow coverage without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Semicolonless Remaining Lifecycle Helper Blocks
 ## Summary
 Extended the semicolon-light structured-block regression coverage from `I` and `LX` to the remaining lifecycle families too. Generic helper-only `LS`, `LE`, `E`, `EX`, and `IT` blocks are now regression-locked in semicolonless structured form against their fluent baselines.

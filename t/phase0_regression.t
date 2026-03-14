@@ -6672,6 +6672,119 @@ SPEC
         'semicolonless structured lifecycle switch/case branch form stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_structured_remaining_lifecycle_control_flow_blocks_accept_optional_semicolons' => sub {
+    my @cases = (
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+    );
+
+    plan tests => scalar(@cases) * 2;
+
+    my $expected_if_hits = {
+        ELSE     => 1,
+        ENDIF    => 1,
+        IF       => 1,
+        RETURN   => 2,
+        RETURN_A => 1,
+    };
+
+    my $expected_switch_hits = {
+        CASE      => 1,
+        DEFAULT   => 1,
+        ENDSWITCH => 1,
+        RETURN    => 2,
+        RETURN_A  => 1,
+        SWITCH    => 1,
+    };
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "semicolonless structured $tag lifecycle if/else block" => sub {
+            plan tests => 8;
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $block_spec = <<"SPEC";
+Top::&
+$tag { if(scalar(on))
+ return(hash("item", scalar(retv)))
+ else()
+ return_undef()
+ endif() }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain used as semicolonless comparison baseline");
+            ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle if/else block");
+
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+            my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($block_meta->{canonical_action_ir_fallback_count}, 0, "semicolonless structured $tag lifecycle if/else block avoids RAW_PERL fallback");
+            is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "semicolonless structured $tag lifecycle if/else block preserves canonical action-IR node coverage from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "semicolonless structured $tag lifecycle if/else block preserves canonical action-IR hit counts from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_if_hits, "fluent $tag lifecycle if/else chain exposes the expected IF/ELSE/ENDIF helper mix");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_if_hits, "semicolonless structured $tag lifecycle if/else block exposes the expected IF/ELSE/ENDIF helper mix");
+            ok(
+                $block_meta->{unresolved_helper_count} == 0 &&
+                $block_meta->{language_agnostic_action_ir_ready},
+                "semicolonless structured $tag lifecycle if/else block stays fully language-agnostic-ready",
+            );
+        };
+
+        subtest "semicolonless structured $tag lifecycle switch/case block" => sub {
+            plan tests => 8;
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).default().return_undef().endswitch()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $block_spec = <<"SPEC";
+Top::&
+$tag { switch(scalar(kind))
+ case("A")
+ return(hash("item", scalar(retv)))
+ default()
+ return_undef()
+ endswitch() }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain used as semicolonless comparison baseline");
+            ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle switch/case block");
+
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+            my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($block_meta->{canonical_action_ir_fallback_count}, 0, "semicolonless structured $tag lifecycle switch/case block avoids RAW_PERL fallback");
+            is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "semicolonless structured $tag lifecycle switch/case block preserves canonical action-IR node coverage from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "semicolonless structured $tag lifecycle switch/case block preserves canonical action-IR hit counts from the fluent baseline");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_switch_hits, "fluent $tag lifecycle switch/case chain exposes the expected SWITCH/CASE/DEFAULT helper mix");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_switch_hits, "semicolonless structured $tag lifecycle switch/case block exposes the expected SWITCH/CASE/DEFAULT helper mix");
+            ok(
+                $block_meta->{unresolved_helper_count} == 0 &&
+                $block_meta->{language_agnostic_action_ir_ready},
+                "semicolonless structured $tag lifecycle switch/case block stays fully language-agnostic-ready",
+            );
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 
