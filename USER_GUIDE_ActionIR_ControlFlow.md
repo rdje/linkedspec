@@ -47,16 +47,17 @@ This module lowers:
 - `return_undef()`
 
 It also supports two switch styles:
-1. marker-style flow (`switch(); case(); default(); endswitch()`), and
+1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons), and
 2. inline composite switch arguments (`switch(expr, case(...), default(...))`).
 
 ## `if / elseif / else / endif`
-These are statement markers, not Perl block keywords. In helper flow, you normally write them as statement-like calls with semicolons.
+These are statement markers, not Perl block keywords.
+In structured helper-only blocks, semicolons are accepted but not required between top-level method statements.
 
 ### Basic form
 
 ```text
-if(condition);
+if(condition)
   ...
 endif()
 ```
@@ -64,9 +65,9 @@ endif()
 ### With else branch
 
 ```text
-if(condition);
+if(condition)
   ...
-else();
+else()
   ...
 endif()
 ```
@@ -74,11 +75,11 @@ endif()
 ### With elseif/elif
 
 ```text
-if(condition_a);
+if(condition_a)
   ...
-elseif(condition_b);
+elseif(condition_b)
   ...
-else();
+else()
   ...
 endif()
 ```
@@ -86,9 +87,9 @@ endif()
 Alias form:
 
 ```text
-i(condition_a);
+i(condition_a)
   ...
-elif(condition_b);
+elif(condition_b)
   ...
 endif()
 ```
@@ -97,7 +98,7 @@ endif()
 ### Flush a working array only when it has content
 
 ```text
-if(is_nonempty(array(word)));
+if(is_nonempty(array(word)))
   push_value(array(tail), join_values("", array(word)));
   assign(array(word), array());
 endif()
@@ -106,9 +107,9 @@ endif()
 ### Return different payloads depending on accumulator state
 
 ```text
-if(is_nonempty(array(tail)));
+if(is_nonempty(array(tail)))
   return(array(scalar(head), array_copy(array(tail))));
-else();
+else()
   return(array(scalar(head), undef));
 endif()
 ```
@@ -116,9 +117,9 @@ endif()
 ### Optional return
 
 ```text
-if(is_nonempty(array(items)));
+if(is_nonempty(array(items)))
   return(array_copy(array(items)));
-else();
+else()
   return_undef();
 endif()
 ```
@@ -129,12 +130,12 @@ Switch is useful when the same driving value controls multiple branches.
 ### Marker-style switch
 
 ```text
-switch(scalar(kind));
-  case("SPACE");
+switch(scalar(kind))
+  case("SPACE")
     ...
-  case("COMMENTS");
+  case("COMMENTS")
     ...
-  default();
+  default()
     ...
 endswitch()
 ```
@@ -147,12 +148,12 @@ Optional `endcase()` is supported when you want to close a case explicitly befor
 Example:
 
 ```text
-switch(scalar(token));
-  case(/^BEGIN_/);
+switch(scalar(token))
+  case(/^BEGIN_/)
     say("begin token");
-  case(/^END_/);
+  case(/^END_/)
     say("end token");
-  default();
+  default()
     say("other token");
 endswitch()
 ```
@@ -257,9 +258,9 @@ This is the explicit helper for returning `undef` in canonical control-flow.
 Example:
 
 ```text
-if(is_nonempty(array(assigns)));
+if(is_nonempty(array(assigns)))
   return(hash("name", scalar(block_namei), "content", array_copy(array(assigns))));
-else();
+else()
   return_undef();
 endif()
 ```
@@ -270,9 +271,9 @@ Use it when the “no result” case is a deliberate branch outcome.
 ### Example: simple presence guard
 
 ```text
-if(is_nonempty(array(items)));
+if(is_nonempty(array(items)))
   return(array_copy(array(items)));
-else();
+else()
   return_undef();
 endif()
 ```
@@ -280,13 +281,13 @@ endif()
 ### Example: recursive-head/tail finalizer
 
 ```text
-if(scalar(has_head));
-  if(is_nonempty(array(tail)));
+if(scalar(has_head))
+  if(is_nonempty(array(tail)))
     return(array(scalar(head), array_copy(array(tail))));
-  else();
+  else()
     return(array(scalar(head), undef));
-  endif();
-else();
+  endif()
+else()
   return(array(undef));
 endif()
 ```
@@ -294,12 +295,12 @@ endif()
 ### Example: classify child return types
 
 ```text
-switch(scalaref(retv, {type}));
-  case("SPACE");
+switch(scalaref(retv, {type}))
+  case("SPACE")
     assign(array(word), array());
-  case("COMMENTS");
+  case("COMMENTS")
     return_undef();
-  default();
+  default()
     push_value(array(word), scalaref(retv, {content}));
 endswitch()
 ```
@@ -318,12 +319,12 @@ switch(
 ### Example: regex-driven switch
 
 ```text
-switch(scalar(token));
-  case(/^\\?/);
+switch(scalar(token))
+  case(/^\\?/)
     say("tag token");
-  case(/^[A-Z_]+$/);
+  case(/^[A-Z_]+$/)
     say("identifier-like token");
-  default();
+  default()
     say("fallback token");
 endswitch()
 ```

@@ -1,5 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Accept Semicolonless Structured Control-Flow Blocks
+## Summary
+Extended the method-like DSL migration work by teaching structured helper-only blocks to split top-level control-flow statements without requiring `;` delimiters. Marker-style `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` blocks now compile cleanly in semicolonless structured form while preserving the same lowering and migration metadata as the existing fluent and semicolon-delimited structured surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended `LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(...)` so it can split adjacent top-level method-like statements even when no `;` is present between them.
+- Kept semicolon-delimited blocks valid; this is an additive syntax relaxation for canonical method-only structured blocks.
+- Added focused regressions for:
+  - direct splitter handling of worst-case single-line semicolonless `if/else` and `switch/case` helper blocks,
+  - and end-to-end semicolonless structured action-edge control-flow blocks lowering identically to the fluent baseline.
+- Updated the control-flow guide to show semicolon-light structured examples and to state that semicolons remain accepted but no longer required in method-only structured blocks.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported structured control-flow authoring surface without changing the track level.
+
 ## 2026-03-14 - Design Note: Lock Raw-Perl-Free `.spec` Policy
 ## Summary
 Recorded an explicit project policy that `.spec` authoring is intended to become permanently raw-Perl-free. Raw Perl in `.spec` is now tracked as obsolete compatibility debt to reject and migrate away, and the semicolon-light control-flow design direction is explicitly scoped only to canonical method-like DSL blocks rather than to any mixed Perl/DSL model.

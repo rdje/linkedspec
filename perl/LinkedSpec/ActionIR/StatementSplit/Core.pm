@@ -22,6 +22,10 @@ sub _require_statement_split_mode_pkg {
  return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Mode')
 }
 
+sub _require_method_expr_pkg {
+ return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
+}
+
 sub _build_initial_state {
  return {
   statement => '',
@@ -44,6 +48,33 @@ sub _build_initial_state {
   in_line_comment => 0,
   escape_next => 0,
  }
+}
+
+sub _looks_like_complete_method_statement {
+ my ($statement, $trim_action_ir_value) = @_;
+ my $trimmed = $trim_action_ir_value->($statement);
+ return 0 unless defined($trimmed) && length($trimmed);
+ _require_method_expr_pkg();
+ my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
+ return $call ? 1 : 0
+}
+
+sub _next_nonspace_char_index {
+ my ($chars, $start_idx) = @_;
+ my $idx = $start_idx;
+ while ($idx < @$chars && $chars->[$idx] =~ /\s/o) {
+  ++$idx;
+ }
+ return $idx < @$chars ? $idx : undef
+}
+
+sub _should_split_on_method_boundary {
+ my ($state, $chars, $idx, $trim_action_ir_value) = @_;
+ return 0 if $state->{paren_depth} || $state->{brace_depth} || $state->{bracket_depth};
+ return 0 unless _looks_like_complete_method_statement($state->{statement}, $trim_action_ir_value);
+ my $next_idx = _next_nonspace_char_index($chars, $idx + 1);
+ return 0 unless defined $next_idx;
+ return ($chars->[$next_idx] =~ /[A-Za-z_]/o) ? 1 : 0
 }
 
 sub _push_trimmed_statement {
@@ -110,8 +141,10 @@ sub split_action_ir_statements {
  _require_statement_split_mode_pkg();
  my $state = _build_initial_state();
  my @statements;
+ my @chars = split //, ($code // '');
 
- foreach my $char (split //, $code) {
+ for (my $idx = 0; $idx < @chars; ++$idx) {
+  my $char = $chars[$idx];
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_line_comment($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_single_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_double_quote($state, $char)) { next; }
@@ -126,8 +159,18 @@ sub split_action_ir_statements {
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_angle_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_pipe_quote($state, $char)) { next; }
-  if (_consume_nesting_or_terminator($state, $char, \@statements, $trim_action_ir_value)) { next; }
+  if (_consume_nesting_or_terminator($state, $char, \@statements, $trim_action_ir_value)) {
+   if (_should_split_on_method_boundary($state, \@chars, $idx, $trim_action_ir_value)) {
+    _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});
+    $state->{statement} = '';
+   }
+   next;
+  }
   $state->{statement} .= $char;
+  if (_should_split_on_method_boundary($state, \@chars, $idx, $trim_action_ir_value)) {
+   _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});
+   $state->{statement} = '';
+  }
  }
 
  _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});

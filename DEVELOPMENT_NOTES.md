@@ -9,6 +9,20 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-14)
+- Landed the first semicolon-light structured control-flow follow-up:
+  - `StatementSplit::Core` now accepts adjacent top-level method-like statements without `;` separators,
+  - structured helper-only `if(...)` / `else()` / `endif()` and `switch(...)` / `case(...)` / `default()` / `endswitch()` blocks now compile cleanly without trailing semicolons,
+  - and the semicolonless structured action-edge control-flow forms now match the fluent baseline on lowered output plus language-agnostic migration metadata.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported structured control-flow authoring without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-14)
 - Recorded an explicit raw-Perl-free `.spec` policy design note:
   - `.spec` authoring is intended to become permanently raw-Perl-free,
   - raw Perl in `.spec` is obsolete compatibility debt, not a co-equal syntax surface to preserve,
