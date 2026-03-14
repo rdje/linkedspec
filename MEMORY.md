@@ -5,6 +5,17 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Method-like DSL follow-up landed for flat-list insertion helper equivalence:
+  - supported `flat_array(...)` and `flat_hash(...)` payload forms now have regression coverage between fluent and structured authoring on both action-edge and lifecycle surfaces,
+  - and those forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata.
+- Tracker impact: `Method-like DSL migration track` stays `in progress`; this slice deepens supported list-context insertion equivalence coverage without moving the level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=263`)
+
+## Current Session Snapshot (2026-03-14)
 - Method-like DSL follow-up landed for inline composite switch equivalence:
   - supported inline composite `switch(..., case(...), default(...))` forms now have regression coverage between fluent and structured authoring on both action-edge and lifecycle surfaces,
   - and those forms now agree on lowered output plus matching zero-unresolved / zero-fallback migration metadata even when inline `case(...)` and `default(...)` bodies contain supported helper sequences.

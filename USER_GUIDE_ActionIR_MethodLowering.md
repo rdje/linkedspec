@@ -191,6 +191,11 @@ Use cases:
 
 The shorter `flat_array(...)` / `flat_hash(...)` spellings are just more direct aliases for the same idea.
 
+Method-DSL migration note:
+- fluent and structured authoring are now regression-locked on supported `flat_array(...)` / `flat_hash(...)` payload forms too,
+- on both action-edge and lifecycle surfaces,
+- so list-context insertion is part of the same equivalence contract as the rest of the method-like DSL surface.
+
 ### Snapshot versus flatten
 This distinction is easy to get wrong, so it is worth repeating.
 
