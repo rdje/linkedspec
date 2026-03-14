@@ -200,6 +200,7 @@ The shorter `flat_array(...)` / `flat_hash(...)` spellings are just more direct 
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on supported `flat_array(...)` / `flat_hash(...)` payload forms too,
 - on both action-edge and lifecycle surfaces,
+- and that same supported flat-list equivalence is now regression-locked inside control-flow branch bodies too,
 - so list-context insertion is part of the same equivalence contract as the rest of the method-like DSL surface.
 
 ### Snapshot versus flatten

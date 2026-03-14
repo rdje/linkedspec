@@ -198,6 +198,8 @@ Inline composite `switch(..., case(...), default(...))` forms are now locked on 
 
 List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk.
 
+That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.
+
 Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `array_copy(...)` and compatibility `array_values(...)` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract as the preferred and compatibility spellings evolve.
 
 That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` and `array_values(...)` return payloads on both action-edge and lifecycle surfaces.
