@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Method-Like DSL Slice: Lock Lifecycle Branch-Local Control-Flow Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking the same supported branch-local fluent-versus-structured control-flow equivalence on lifecycle surfaces too. Supported `LX` `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms now agree between fluent chains and structured lifecycle blocks on lowered lifecycle code and migration metadata.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused lifecycle equivalence locks for supported branch-local control-flow forms in:
+  - `LX.if(...) ... elseif(...) ... else() ... endif()`,
+  - `LX.switch(...) ... case(...) ... default() ... endswitch()`,
+  - and their structured lifecycle-block equivalents.
+- Locked parity on:
+  - identical `LXCODE`,
+  - zero fallback,
+  - zero unresolved helpers,
+  - zero raw Perl dependency,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported lifecycle control-flow equivalence coverage inside the active track rather than changing the track level.
+
 ## 2026-03-14 - Method-Like DSL Slice: Fix Branch-Local Fluent Return Chains
 ## Summary
 Fixed a real method-like DSL branch-local equivalence bug: fluent control-flow chains were being truncated at the first general `return(...)` payload inside `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` branch bodies. Supported fluent and structured branch-local forms now stay aligned on canonical action-IR coverage and migration metadata.

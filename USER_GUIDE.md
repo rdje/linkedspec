@@ -188,6 +188,8 @@ That supported collection-hash shape is now locked on action-edge surfaces too: 
 
 Supported branch-local control-flow slices are now locked too: fluent and structured method-like forms agree on migration metadata inside `if(...)` / `elseif(...)` / `else()` branches and `switch(...)` / `case(...)` / `default()` bodies for supported general-`return(...)` payload chains.
 
+That supported branch-local control-flow equivalence is now locked on lifecycle surfaces too, not just action edges: chained forms like `LX.if(...).m(...).endif()` and structured lifecycle blocks like `LX { if(...); m(...); endif() }` now agree on lowering and migration metadata for the supported payload shapes.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

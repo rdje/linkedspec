@@ -2,6 +2,17 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Landed the next method-DSL branch-local equivalence follow-up on lifecycle surfaces:
+  - supported `LX` fluent control-flow forms now have regression locks against their structured lifecycle-block equivalents for both `if(...)` / `elseif(...)` and `switch(...)` / `case(...)`,
+  - and those lifecycle forms now explicitly agree on lowered `LXCODE`, canonical action-IR coverage, and zero-fallback migration metadata.
+- The method-like DSL track still stays `in progress`; this slice broadens supported lifecycle control-flow equivalence coverage without moving the tracker level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=255`)
+
+## Current Session Notes (2026-03-14)
 - Landed a real method-DSL branch-local fix rather than just a wording clarification:
   - the bootstrap fluent-chain renderer no longer truncates a chain when a general-payload `return(...)` appears inside `if(...)` / `elseif(...)` or `switch(...)` / `case(...)` branch bodies,
   - and supported fluent versus structured branch-local control-flow forms are now regression-locked to the same canonical action-IR coverage and zero-fallback migration metadata.
