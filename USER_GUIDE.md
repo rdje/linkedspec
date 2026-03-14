@@ -209,6 +209,8 @@ That same supported multi-step branch-local equivalence is now locked on lifecyc
 
 Inline composite `switch(..., case(...), default(...))` forms are now locked on both action-edge and lifecycle surfaces too: fluent and structured authoring agree not only for marker-style `case()/default()/endswitch()` flow, but also for supported inline `case(...)` and `default(...)` action sequences inside the `switch(...)` argument list itself.
 
+That inline-composite switch surface now has its first structured branch-body extension too: `case(value, { ... })` and `default({ ... })` are supported alongside the older explicit action-list form, so compact inline dispatch can still carry semicolonless structured helper sequences without falling back to raw Perl.
+
 List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk.
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.

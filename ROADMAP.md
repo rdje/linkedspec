@@ -200,7 +200,7 @@ Status interpretation note:
      - do not pursue a chained branch-body form like `case(value, m1(...).m2(...))`,
      - permit future structured branch-body extensions only when a branch uses exactly one body carrier,
      - preferred staged switch direction is:
-       - first `case(value, { ... })` and `default({ ... })` or `default() { ... }`-style structured bodies,
+       - first `case(value, { ... })` and `default({ ... })`, now landed as the first structured inline-switch branch-body extension,
        - later attached-block sugar like `case(value) { ... }` and `default() { ... }`,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
@@ -455,6 +455,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - Landed follow-up: supported multi-step method sequences inside action-edge control-flow bodies are now regression-locked too, so branch-local `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` chains remain equivalent between fluent and structured forms inside both `if/elseif` and `switch/case` bodies.
   - Landed follow-up: supported multi-step method sequences inside lifecycle control-flow bodies are now regression-locked too, so `LX` branch-local `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` chains remain equivalent between fluent and structured forms inside both `if/elseif` and `switch/case` bodies.
   - Landed follow-up: inline composite `switch(..., case(...), default(...))` forms are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, including supported inline helper sequences inside `case(...)` and `default(...)`.
+  - Landed follow-up: the first structured inline composite switch branch-body extension is now supported too, so `case(value, { ... })` and `default({ ... })` lower through the same canonical inline-switch path as the existing action-list baseline on both action-edge and lifecycle surfaces, including semicolonless structured helper sequences inside those branch bodies.
   - Landed follow-up: list-context insertion helpers `flat_array(...)` and `flat_hash(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported flat-list payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.
   - Landed follow-up: those same supported `flat_array(...)` and `flat_hash(...)` payload forms are now regression-locked inside control-flow branch bodies too, so branch-local `if/elseif` and `switch/case` returns preserve the same lowering and zero-fallback migration metadata across fluent and structured authoring on both action-edge and lifecycle surfaces.
   - Landed follow-up: snapshot payload helpers `array_copy(...)` and compatibility `array_values(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported snapshot-array payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.

@@ -185,9 +185,25 @@ Use this when:
 - the branch structure is simple,
 - you want the dispatch logic compact and local.
 
-Design direction note, not current syntax:
+The first structured branch-body extension is supported too:
+
+```text
+switch(
+  scalar(op),
+  case("|", {
+    push(pipe_operator, rule)
+    say("pipe")
+  }),
+  default({
+    say("Error")
+    return_undef()
+  })
+)
+```
+
+Current direction note:
 - the current composite baseline remains `switch(expr, case(...), default(...))` with explicit action lists,
-- a future structured extension may allow `case(value, { ... })`,
+- `case(value, { ... })` and `default({ ... })` are now supported as the first structured inline-switch branch-body extension,
 - later sugar may allow `case(value) { ... }` and `default() { ... }`,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.

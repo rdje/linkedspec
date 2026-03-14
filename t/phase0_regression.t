@@ -5300,7 +5300,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'ControlFlow',
             module      => 'LinkedSpec::ActionIR::ControlFlow',
-            callbacks   => [qw(_trim_action_ir_value _normalize_method_tag_expr _lower_flow_composite_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            callbacks   => [qw(_trim_action_ir_value _split_action_ir_statements _normalize_method_tag_expr _lower_flow_composite_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
             sample_key  => 'normalize_method_tag_expr',
             sample_name => '_normalize_method_tag_expr',
         },
@@ -6307,6 +6307,120 @@ SPEC
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle inline composite switch fluent form preserves switch plus helper nodes across inline case/default action sequences'
+    );
+};
+subtest 'method_like_action_inline_composite_switch_branch_blocks_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $list_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|", {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    }),
+    default({
+      say("miss")
+      return_undef()
+    })
+  )
+ }
+SPEC
+
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch action-list form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch branch-block form');
+    is_deeply($list_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'action-edge inline composite switch branch blocks lower to identical ACODE output as the canonical action-list baseline');
+
+    my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($list_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch action-list form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch branch-block form avoids RAW_PERL fallback');
+    is($list_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch action-list form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch branch-block form avoids raw Perl dependency');
+    is($list_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch action-list form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch branch-block form avoids unresolved-helper hits');
+    is_deeply($list_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'action-edge inline composite switch branch blocks preserve canonical action-IR node coverage');
+    ok(
+        $list_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'action-edge inline composite switch branch blocks remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite switch branch-block form preserves switch plus helper nodes across semicolonless structured branch bodies'
+    );
+};
+subtest 'method_like_lifecycle_inline_composite_switch_branch_blocks_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $list_spec = <<'SPEC';
+Top::&
+LX { switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX {
+  switch(
+    scalar(op),
+    case("|", {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    }),
+    default({
+      say("miss")
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch action-list form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch branch-block form');
+    is($list_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'lifecycle inline composite switch branch blocks lower to identical LXCODE output as the canonical action-list baseline');
+
+    my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($list_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite switch action-list form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite switch branch-block form avoids RAW_PERL fallback');
+    is($list_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite switch action-list form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite switch branch-block form avoids raw Perl dependency');
+    is($list_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite switch action-list form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite switch branch-block form avoids unresolved-helper hits');
+    is_deeply($list_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'lifecycle inline composite switch branch blocks preserve canonical action-IR node coverage');
+    ok(
+        $list_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'lifecycle inline composite switch branch blocks remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
+        'lifecycle inline composite switch branch-block form preserves switch plus helper nodes across semicolonless structured branch bodies'
     );
 };
 subtest 'method_like_fluent_and_structured_action_flat_list_helpers_lower_equivalently' => sub {

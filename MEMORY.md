@@ -10,6 +10,23 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Landed the first structured inline-composite switch branch-body extension:
+  - `case(value, { ... })` and `default({ ... })` now lower through the same inline composite switch owner path as the existing action-list baseline,
+  - semicolonless structured helper sequences inside those branch bodies are now supported on both action-edge and lifecycle surfaces,
+  - and inline branch actions now share one rewrite context across the whole branch body so nested flow bookkeeping stays coherent.
+- Clarified the docs accordingly:
+  - the first structured inline-switch branch-body extension is now supported,
+  - while attached-block sugar such as `case(value) { ... }` and `default() { ... }` remains deferred.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens the structured control-flow surface without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Logged a deferred future-enhancement note for richer grouped rule semantics:
   - keep the current default repeated-alternative rule model as the active baseline,
   - treat the rough `OR+` framing only as brainstorming shorthand rather than as a formal language contract,

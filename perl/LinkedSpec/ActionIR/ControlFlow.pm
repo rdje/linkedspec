@@ -59,6 +59,7 @@ sub default_deps_for_package {
  return _call_preserving_err(sub {
   return {
    trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
+   split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
    normalize_method_tag_expr => _require_pkg_cb($pkg, '_normalize_method_tag_expr'),
    lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
    parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
@@ -212,41 +213,86 @@ sub _lower_endif_flow_statement {
  return '}'
 }
 
-#------------------------------------------------------------------------------
-# Function: _lower_flow_branch_action_expr
-# Purpose : Lower one branch action expression used in inline-composite switch
-#           branch arguments (`case(..., action1, action2, ...)`).
-# Args    : ($expr, $ctx, $deps)
-# Returns : lowered Perl statement string or undef
-#------------------------------------------------------------------------------
-sub _lower_flow_branch_action_expr {
- my ($expr, $ctx, $deps) = @_;
+sub _new_flow_branch_rewrite_ctx {
+ my ($ctx) = @_;
+ return {
+  if_stack       => [],
+  switch_stack   => [],
+  switch_counter => ($ctx->{switch_counter} || 0),
+  rewrite_rules  => $ctx->{rewrite_rules},
+ }
+}
+
+sub _clone_flow_branch_rewrite_ctx {
+ my ($ctx) = @_;
+ return {
+  if_stack       => [map { +{%$_} } @{$ctx->{if_stack} || []}],
+  switch_stack   => [map { +{%$_} } @{$ctx->{switch_stack} || []}],
+  switch_counter => ($ctx->{switch_counter} || 0),
+  rewrite_rules  => $ctx->{rewrite_rules},
+ }
+}
+
+sub _expand_flow_branch_action_exprs {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $split_action_ir_statements = _require_dep($deps, 'split_action_ir_statements');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+ return [$trimmed] unless $trimmed =~ /^\{(?<body>.*)\}$/s;
+
+ my $statements = $split_action_ir_statements->($+{body});
+ return undef unless ref($statements) eq 'ARRAY';
+ return $statements
+}
+
+sub _lower_flow_branch_single_statement {
+ my ($expr, $branch_ctx, $deps) = @_;
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- my $rules = $ctx->{rewrite_rules};
+ my $rules = $branch_ctx->{rewrite_rules};
  return $trimmed unless $rules && ref($rules) eq 'ARRAY';
 
  foreach my $rule (@$rules) {
-  my $sub_ctx = {
-   if_stack       => [],
-   switch_stack   => [],
-   switch_counter => ($ctx->{switch_counter} || 0),
-   rewrite_rules  => $ctx->{rewrite_rules},
-  };
-  my $lowered = $rule->{apply}->($trimmed, $sub_ctx);
+  my $candidate_ctx = _clone_flow_branch_rewrite_ctx($branch_ctx);
+  my $lowered = $rule->{apply}->($trimmed, $candidate_ctx);
   next unless defined($lowered) && length($lowered);
   next if $lowered eq $trimmed;
-  next if @{$sub_ctx->{if_stack} || []};
-  next if @{$sub_ctx->{switch_stack} || []};
-  $ctx->{switch_counter} = $sub_ctx->{switch_counter} if defined $sub_ctx->{switch_counter};
+  %$branch_ctx = %$candidate_ctx;
   return $lowered;
  }
 
  return $trimmed
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_flow_branch_action_expr
+# Purpose : Lower one branch action expression used in inline-composite switch
+#           branch arguments (`case(..., action1, action2, ...)`).
+# Args    : ($expr, $ctx, $deps)
+# Returns : arrayref of lowered Perl statements or undef
+#------------------------------------------------------------------------------
+sub _lower_flow_branch_action_expr {
+ my ($expr, $ctx, $deps, $branch_ctx) = @_;
+ $branch_ctx //= _new_flow_branch_rewrite_ctx($ctx);
+
+ my $action_exprs = _expand_flow_branch_action_exprs($expr, $deps);
+ return undef unless ref($action_exprs) eq 'ARRAY';
+
+ my @lowered_actions;
+ foreach my $action_expr (@$action_exprs) {
+  my $lowered_action = _lower_flow_branch_single_statement($action_expr, $branch_ctx, $deps);
+  return undef unless defined($lowered_action) && length($lowered_action);
+  push @lowered_actions, $lowered_action;
+ }
+
+ return \@lowered_actions
 }
 
 #------------------------------------------------------------------------------
@@ -272,16 +318,20 @@ sub _lower_inline_switch_branch_expr {
 
   my $case_value = _lower_switch_case_value_expr($effective_args->[0], $deps);
   return undef unless $case_value && defined($case_value->{expr});
-  my $match_expr = $case_value->{mode} eq 'regex'
-   ? "\$$switch_var =~ $case_value->{expr}"
-   : "\$$switch_var eq $case_value->{expr}";
+ my $match_expr = $case_value->{mode} eq 'regex'
+  ? "\$$switch_var =~ $case_value->{expr}"
+  : "\$$switch_var eq $case_value->{expr}";
 
+  my $branch_ctx = _new_flow_branch_rewrite_ctx($ctx);
   my @actions;
   foreach my $action_expr (@$effective_args[1 .. $#$effective_args]) {
-   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx, $deps);
-   return undef unless defined($lowered_action) && length($lowered_action);
-   push @actions, $lowered_action;
+   my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
+   return undef unless ref($lowered_actions) eq 'ARRAY';
+   push @actions, @$lowered_actions;
   }
+  return undef if @{$branch_ctx->{if_stack} || []};
+  return undef if @{$branch_ctx->{switch_stack} || []};
+  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
   my $body = @actions ? '; '.join('; ', @actions) : '';
   return "if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
  }
@@ -292,12 +342,16 @@ sub _lower_inline_switch_branch_expr {
   return undef if $switch_state->{default_seen};
   $switch_state->{default_seen} = 1;
 
+  my $branch_ctx = _new_flow_branch_rewrite_ctx($ctx);
   my @actions;
   foreach my $action_expr (@$effective_args) {
-   my $lowered_action = _lower_flow_branch_action_expr($action_expr, $ctx, $deps);
-   return undef unless defined($lowered_action) && length($lowered_action);
-   push @actions, $lowered_action;
+   my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
+   return undef unless ref($lowered_actions) eq 'ARRAY';
+   push @actions, @$lowered_actions;
   }
+  return undef if @{$branch_ctx->{if_stack} || []};
+  return undef if @{$branch_ctx->{switch_stack} || []};
+  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
   my $body = @actions ? '; '.join('; ', @actions) : '';
   return "if (!\$$hit_var) { \$$hit_var = 1$body }";
  }

@@ -9,6 +9,23 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Landed the first structured inline-composite switch branch-body extension:
+  - `case(value, { ... })` and `default({ ... })` now lower through the same owner-local composite switch path as the existing action-list baseline,
+  - semicolonless structured helper sequences inside those branch bodies are now supported on both action-edge and lifecycle surfaces,
+  - and inline branch actions now share one rewrite context across the whole branch body so nested flow-state bookkeeping stays coherent.
+- Clarified the docs accordingly:
+  - the first structured inline-switch branch-body extension is now an active supported surface,
+  - while attached-block sugar such as `case(value) { ... }` and `default() { ... }` remains deferred.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens the structured control-flow surface without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Logged a deferred future-enhancement note for richer grouped rule semantics:
   - keep the current default repeated-alternative rule model as the active baseline,
   - treat the rough `OR+` framing only as brainstorming shorthand rather than as a formal language contract,

@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Support Structured Inline Composite Switch Branch Bodies
+## Summary
+Landed the first structured inline-composite switch branch-body extension. `case(value, { ... })` and `default({ ... })` now lower through the same owner-local composite switch path as the existing action-list baseline, including semicolonless structured helper sequences inside those branch bodies.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended `LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(...)` so the control-flow owner can pull in `_split_action_ir_statements(...)` from the owning package when inline branch bodies need structured-block splitting.
+- Reworked inline composite switch branch lowering so branch actions now share one rewrite context across the whole branch body instead of lowering each branch argument in isolation.
+  - This keeps nested flow state coherent within one branch body.
+  - It also lets `{ ... }` branch bodies reuse the normal semicolon-light structured statement splitter instead of inventing a second parsing path.
+- Added focused regressions for both action-edge and lifecycle surfaces:
+  - canonical inline action-list branch bodies remain the baseline,
+  - `case(value, { ... })` and `default({ ... })` now lower to identical `ACODE` or `LXCODE`,
+  - canonical action-IR metadata stays aligned,
+  - fallback stays at zero,
+  - and language-agnostic readiness stays true.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens the supported structured control-flow surface without moving the overall track level.
+
 ## 2026-03-15 - Roadmap/Notes Slice: Log Deferred Rule-Grouping Exploration
 ## Summary
 Logged a deferred future-enhancement note for richer rule-grouping ideas after the current default repeated-alternative rule model is considered solid. The note keeps the brainstorming outcome without turning it into an active implementation item.
