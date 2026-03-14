@@ -1,5 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Roadmap/Notes Slice: Log Deferred Rule-Grouping Exploration
+## Summary
+Logged a deferred future-enhancement note for richer rule-grouping ideas after the current default repeated-alternative rule model is considered solid. The note keeps the brainstorming outcome without turning it into an active implementation item.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a dedicated deferred roadmap note that:
+  - keeps the current default rule body semantics as the active baseline,
+  - records the rough `OR+`-like design shorthand only as a heuristic, not as a formal current-language claim,
+  - and queues possible future grouped-rule work such as explicit `AND`, bounded `OR`, exact repetition, and related rule-strategy templates.
+- Clarified the sequencing constraint:
+  - this family stays deferred until the current repeated-alternative rule semantics are explicit and stable,
+  - and until later execution-semantics work is better defined.
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this is a saved future-enhancement note rather than an active roadmap slice.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Semicolonless Remaining Lifecycle Control-Flow Blocks
 ## Summary
 Extended the semicolon-light structured control-flow regression coverage from `LX` to the remaining lifecycle families too. Structured `LS`, `LE`, `E`, `EX`, and `IT` `if/else/endif` and `switch/case/default/endswitch` blocks are now regression-locked in semicolonless form against their fluent baselines.

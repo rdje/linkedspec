@@ -83,6 +83,14 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - user guide,
    - session memory.
 
+## Deferred Future Note
+- A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
+  - explicit `AND`,
+  - bounded or exact `OR`,
+  - bounded or exact `AND`,
+  - and related grouped rule strategies.
+- This is intentionally deferred until the current default rule semantics are considered solid.
+
 ## Relationship to ROADMAP.md
 - `ROADMAP.md` remains the primary long-form roadmap and historical planning document.
 - `ROADMAP_V2.md` is the shorter execution-focused companion.

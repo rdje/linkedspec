@@ -9,6 +9,18 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Logged a deferred future-enhancement note for richer grouped rule semantics:
+  - keep the current default repeated-alternative rule model as the active baseline,
+  - treat the rough `OR+` framing only as brainstorming shorthand rather than as a formal language contract,
+  - and defer explicit grouped-rule work such as `AND`, bounded `OR`, exact repetition, and related rule strategies until the current rule model is solid.
+- Tracker impact:
+  - no live-status row changes,
+  - because this slice records deferred design intent rather than landing active roadmap work.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md ROADMAP_V2.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Notes (2026-03-15)
 - Landed the lifecycle-family follow-up for semicolon-light structured control flow:
   - semicolonless structured `LS`, `LE`, `E`, `EX`, and `IT` `if/else/endif` plus `switch/case/default/endswitch` blocks are now regression-locked too,
   - and those lifecycle blocks match their fluent baselines on canonical action-IR node coverage, canonical hit counts, expected control-flow helper coverage, zero fallback, and language-agnostic readiness.

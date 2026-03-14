@@ -277,6 +277,29 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 - Keep `specs/tclite.spec` deferred until explicitly resumed.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
+## Deferred Future Rule-Grouping Exploration
+This is a saved future-enhancement note, not an active implementation item.
+
+- Current rule bodies remain anchored on the existing repeated-alternative extraction model:
+  - a rule such as
+    - `ruleX: -> subrule_a -> subrule_b -> subrule_c -> subrule_d`
+  - should continue to be treated as today’s baseline semantics rather than being silently reinterpreted as a richer combinator language.
+- Working interpretation note:
+  - the current rule shape is closer to repeated alternative extraction over subrules than to a full grammar-combinator algebra,
+  - so it can be thought of as roughly `OR+`-like in intent,
+  - but this is only a design shorthand, not a promise that LinkedSpec currently implements full regex-style or parser-combinator `OR+` semantics.
+- Deferred enhancement direction, only after the current rule model is explicit and rock solid:
+  - explicit `AND`-style grouped sequencing,
+  - bounded or exact `OR` repetition such as `OR{N,M}` and `OR{N}`,
+  - bounded or exact `AND` repetition such as `AND+`, `AND{N,M}`, and `AND{N}`,
+  - and possibly other explicit rule-grouping forms if they prove useful.
+- Architectural expectation if this work is resumed later:
+  - richer grouping should likely be implemented through explicit rule strategies or handler templates,
+  - not by overloading the current default rule body syntax until it becomes ambiguous.
+- Sequencing rule:
+  - do not start this enhancement family until LinkedSpec is considered solid on the current default repeated-alternative rule semantics,
+  - and until the related execution-semantics work (`seek` vs `consume`, rule execution shape) is better defined.
+
 ## Status
 - This dashboard is the canonical live status source for roadmap progress.
 - Execution-order rule: roadmap phases are tracked in numbered order, but execution is dependency-first by default rather than strictly sequential.
