@@ -2,6 +2,21 @@
 Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-14)
+- Completed a bounded Backbone Item 3 compatibility-surface cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` now installs its remaining `EmitContext` compatibility wrappers through one shared `_delegate_emit_context_call(...)` helper instead of carrying a long wall of near-identical wrapper bodies.
+- `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now explicitly threads the optional rewrite-rules slot when calling `LinkedSpec::ActionIR::RewritePipeline`, so the historical two-argument `ActionRewriter` rewrite-helper call shape stays intact through the owner path.
+- Added the focused regression lock:
+  - `action_rewriter_compat_wrappers_share_emit_context_delegator`
+    to pin representative helper families to the shared delegator surface.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=246`)
+
+## Current Session Notes (2026-03-14)
 - Clarified the roadmap execution policy explicitly in the repo:
   - phase numbering is not a hard waterfall contract,
   - the default execution mode is dependency-first, bounded slices,

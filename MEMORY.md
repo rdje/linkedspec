@@ -5,6 +5,19 @@ Compact, actionable session memory for interruption-safe continuation.
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 
 ## Current Session Snapshot (2026-03-14)
+- Completed a Backbone Item 3 compatibility-surface cleanup slice inside `LinkedSpec::*`.
+- `LinkedSpec::ActionRewriter` now funnels its remaining `EmitContext` compatibility wrappers through one shared `_delegate_emit_context_call(...)` helper instead of a large wall of repeated wrapper bodies.
+- `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now passes the optional rewrite-rules slot explicitly into `LinkedSpec::ActionIR::RewritePipeline`, preserving the old two-argument `ActionRewriter` rewrite-helper behavior through the extracted owner path.
+- Added the focused regression lock `action_rewriter_compat_wrappers_share_emit_context_delegator` so representative helper families stay pinned to the shared delegator path.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+  - PASS (`Files=1, Tests=246`)
+
+## Current Session Snapshot (2026-03-14)
 - Clarified the roadmap execution policy explicitly in the repo:
   - phase numbering is not a hard waterfall contract,
   - the default execution mode is dependency-first, bounded slices,

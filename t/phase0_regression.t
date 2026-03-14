@@ -1019,6 +1019,52 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     );
     is($@, "__SAVED_ERR__\n", 'CanonicalEvents owner wrapper preserves caller $@ on successful delegation');
 };
+
+subtest 'action_rewriter_compat_wrappers_share_emit_context_delegator' => sub {
+    plan tests => 5;
+
+    no warnings 'redefine';
+    require LinkedSpec::ActionRewriter;
+
+    my @seen;
+    local *LinkedSpec::ActionRewriter::_delegate_emit_context_call = sub {
+        my ($method, @args) = @_;
+        push @seen, [$method, [@args]];
+        return "delegated:$method";
+    };
+
+    is(
+        LinkedSpec::ActionRewriter::_parse_method_function_expr('call(Leaf)'),
+        'delegated:_parse_method_function_expr',
+        'ActionRewriter method parser wrapper now routes through the shared EmitContext delegator',
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_print_statement('print(scalar(foo))'),
+        'delegated:_lower_print_statement',
+        'ActionRewriter print wrapper now routes through the shared EmitContext delegator',
+    );
+    is(
+        LinkedSpec::ActionRewriter::_build_action_rewrite_rules('Top'),
+        'delegated:_build_action_rewrite_rules',
+        'ActionRewriter rewrite-rule wrapper now routes through the shared EmitContext delegator',
+    );
+    is(
+        LinkedSpec::ActionRewriter::call_spec_handler_subst('Top', 'call(Leaf)'),
+        'delegated:rewrite_action_code_for_compat',
+        'ActionRewriter compatibility helper now routes through the shared EmitContext delegator too',
+    );
+    is_deeply(
+        [map { $_->[0] } @seen],
+        [
+            '_parse_method_function_expr',
+            '_lower_print_statement',
+            '_build_action_rewrite_rules',
+            'rewrite_action_code_for_compat',
+        ],
+        'ActionRewriter forwards representative helper families through one shared delegator',
+    );
+};
+
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     plan tests => 113;
 

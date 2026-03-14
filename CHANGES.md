@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-14 - Backbone Item 3 Slice: Collapse `ActionRewriter` Compatibility Wrappers Through A Shared `EmitContext` Delegator
+## Summary
+Collapsed the remaining `LinkedSpec::ActionRewriter` compatibility-wrapper wall into one shared `EmitContext` delegator, while preserving the legacy two-argument rewrite-helper call shape through the active `EmitContext` owner path.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionRewriter.pm`
+- Updated: `perl/LinkedSpec/RuleIR/EmitContext.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Replaced the long manual `LinkedSpec::ActionRewriter` wrapper wall with:
+  - a shared `_delegate_emit_context_call(...)` helper,
+  - generated wrapper installation for the remaining compatibility entrypoints,
+  - and a focused direct `call_spec_handler_subst(...)` handoff to `EmitContext::rewrite_action_code_for_compat(...)`.
+- Preserved compatibility semantics:
+  - the legacy ActionRewriter helper surface still exists,
+  - helper families still lazy-load `LinkedSpec::RuleIR::EmitContext` on demand,
+  - and `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(...)` now explicitly threads the optional rewrite-rules argument so the historical two-argument `ActionRewriter` rewrite-helper entrypoint continues to work.
+- Added focused seam coverage:
+  - `action_rewriter_compat_wrappers_share_emit_context_delegator`
+    to lock representative helper families to the shared delegator path.
+
+## Validation
+- Ran:
+  - `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+- Result:
+  - PASS (`Files=1, Tests=246`)
+
 ## 2026-03-14 - Process Slice: Document Dependency-First Roadmap Execution
 ## Summary
 Made the roadmap execution policy explicit: phase numbering is a tracking/progression aid, but default execution is dependency-first rather than strict phase-by-phase waterfall ordering.

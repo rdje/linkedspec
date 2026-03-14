@@ -619,10 +619,15 @@ sub _canonicalize_helper_action_ir_event {
 }
 
 sub _rewrite_action_code_with_diagnostics {
- my @args = @_;
+ my ($label, $code, $rewrite_rules) = @_;
  return _call_preserving_err(sub {
   _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(@args, _rewrite_pipeline_deps())
+  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
+   $label,
+   $code,
+   $rewrite_rules,
+   _rewrite_pipeline_deps(),
+  )
  })
 }
 
