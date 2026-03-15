@@ -70,7 +70,7 @@ That same composite-`if(...)` nested marker-switch contract now explicitly inclu
 That same deeper composite-`if/elseif/else` branch shape is now regression-locked for nested inline-composite `switch(...)` flow too, not only nested marker-style `switch(...) ... endswitch()` flow.
 That same deeper composite-`if/elseif/else` branch shape now explicitly includes the broader multi-`case(...)` nested inline-composite `switch(...)` form too, not only the simpler single-`case(...)` nested inline-switch shape.
 That same deeper composite-`if/elseif/else` branch shape now explicitly includes the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` form too, not only the simpler single-`case(...)` marker-switch shape.
-Marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are also intended to allow arbitrarily deep mutual nesting in structured block contexts. The current regression suite locks a representative deeper alternating chain across action-edge and the full lifecycle family, so there is no DSL-fixed semantic nesting cap here beyond normal recursion/resource limits.
+Marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are also intended to allow arbitrarily deep mutual nesting in structured block contexts. The current regression suite locks a representative deeper alternating chain across action-edge and the full lifecycle family, and that same deeper alternating contract is now pinned inside attached switch branch blocks too, so there is no DSL-fixed semantic nesting cap here beyond normal recursion/resource limits.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.

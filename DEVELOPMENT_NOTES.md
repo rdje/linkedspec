@@ -9,6 +9,21 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Extended the deep mutual marker-flow contract into attached switch branch blocks:
+  - marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` now have a representative deeper alternating nesting regression inside marker-style switch attached branch blocks too,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the no-DSL-fixed-cap marker-nesting contract covers those attached switch branch blocks as structured subcontexts too,
+  - not only outermost action-edge or lifecycle structured blocks.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice extends the same deep marker-nesting contract into an already-supported structured subcontext without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Locked the explicit deep mutual marker-flow contract:
   - marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` are intended to allow arbitrarily deep mutual nesting in structured block contexts,
   - and the suite now carries a representative deeper alternating `if -> switch -> if -> switch -> if -> switch` regression across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.

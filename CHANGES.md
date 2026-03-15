@@ -1,5 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Deep Mutual Marker Nesting In Attached Switch Branch Blocks
+## Summary
+Extended the deep mutual marker-flow contract into attached switch branch blocks. Marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are now regression-locked for a deeper alternating nesting chain inside marker-style switch attached branch blocks too, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a deeper alternating marker-flow regression inside marker-style switch attached branch blocks on action-edge structured blocks.
+- Added the same deeper alternating marker-flow regression inside marker-style switch attached branch blocks across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - zero RAW_PERL fallback
+  - zero raw-Perl dependency on action-edge surfaces
+  - zero unresolved-helper hits
+  - language-agnostic readiness
+  - repeated IF/SWITCH/CASE/DEFAULT helper coverage
+  - canonical IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH node presence
+- Clarified in the roadmap and guides that the no-DSL-fixed-cap marker-nesting contract also covers attached switch branch blocks as structured subcontexts, not only outermost action-edge or lifecycle structured blocks.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Deep Mutual Marker If/Switch Nesting
 ## Summary
 Locked the explicit deep-nesting contract for marker-style control flow: marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` are now tracked as allowing arbitrarily deep mutual nesting in structured block contexts, and the regression suite now includes a representative deeper alternating chain across action-edge and the full lifecycle family.
