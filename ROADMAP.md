@@ -217,6 +217,7 @@ Status interpretation note:
        - and those composite `if(...)` branch-body contracts are now regression-locked for the deeper `if/elseif/else` branch shape with nested marker-style `switch(...) ... endswitch()` flow too, not only the simpler `if/else` shape,
        - and those same deeper composite `if/elseif/else` branch bodies are now regression-locked for nested inline-composite `switch(...)` flow too, not only nested marker-style `switch(...) ... endswitch()` flow,
        - and that same deeper composite `if/elseif/else` branch shape is now regression-locked for the broader multi-`case(...)` nested inline-composite `switch(...)` shape too, not only the simpler single-`case(...)` nested inline-switch shape,
+       - and that same deeper composite `if/elseif/else` branch shape is now regression-locked for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
      - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too,
