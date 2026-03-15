@@ -82,6 +82,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep that same attached-switch parity aligned for nested marker-style `switch(...) ... endswitch()` flow inside those deeper `if/elseif/else` branches too, not only nested inline-composite `switch(...)` flow,
    - keep that attached-switch parity aligned for the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside those deeper `if/elseif/else` branches too, not only the simpler single-`case(...)` nested inline-switch shape,
    - keep that broader multi-`case(...)` nested inline-switch parity aligned across both inline composite and marker-style outer switch families too, not only the inline composite outer switch family,
+   - keep the same deeper attached-switch parity aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, across both inline composite and marker-style outer switch families, not only the simpler single-`case(...)` marker-switch shape,
    - keep attached-block switch branch bodies aligned for nested inline-composite `switch(...)` forms too, on both inline composite and marker-style outer switch surfaces,
    - keep the attached-switch nested composite-`if(...)` contract aligned for the deeper `elseif(...)` branch shape too, not only the simple `if/else` shape,
    - keep the attached-switch nested inline-composite `switch(...)` contract aligned for broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` shape,

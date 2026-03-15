@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Regression-locked the broader multi-`case(...)` marker-switch parity seam inside attached switch branch blocks:
+  - attached switch branch blocks now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies on both outer switch families,
+  - when those deeper `if/elseif/else` branches carry nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow parity without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Regression-locked the marker-style outer-switch follow-up for the attached-switch nested composite-if multi-case inline-switch parity seam:
   - attached switch branch blocks now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies on both outer switch families,
   - including the marker-style outer `switch(...) ... endswitch()` family, not only the inline composite outer switch family,

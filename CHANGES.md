@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Parity in Attached Switch Branches
+## Summary
+Regression-locked the broader multi-`case(...)` marker-switch parity seam inside attached switch branch blocks: the deeper inner composite `if/elseif/else` parity now covers nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms too, not only the simpler single-`case(...)` marker-switch shape, across both the inline composite and marker-style outer switch families.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that compare:
+  - inline composite outer switch attached branch blocks carrying nested structured inline composite `if(...)` branch-block bodies with nested multi-`case(...)` marker-style `switch(...) ... endswitch()` flow,
+  - against the same inline composite outer switch surface carrying nested attached-block composite `if(...)` branch bodies with the same broader marker-switch flow.
+- Added the matching marker-style outer switch follow-up regressions too:
+  - marker-style outer switch attached branch blocks carrying nested structured inline composite `if(...)` branch-block bodies with nested multi-`case(...)` marker-style `switch(...) ... endswitch()` flow,
+  - against the same marker-style outer switch surface carrying nested attached-block composite `if(...)` branch bodies with the same broader marker-switch flow.
+- Added the same regression locks across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked parity on:
+  - descriptor build success
+  - current descriptor code-slot shape equality
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - zero raw-Perl dependency on action-edge surfaces
+  - language-agnostic readiness
+  - canonical node and hit-count equality across both inner composite-`if(...)` surfaces for the broader multi-`case(...)` nested marker-switch shape on both outer switch families
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Marker-Switch Multi-Case Inline-Switch Parity in Attached Switch Branches
 ## Summary
 Regression-locked the matching marker-style outer-switch variant for the broader multi-`case(...)` nested inline-switch parity seam: attached switch branch blocks now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies on both outer switch families, not only the inline composite outer switch family, when those deeper `if/elseif/else` branches carry nested inline-composite `switch(...)` flow with multiple `case(...)` arms.
