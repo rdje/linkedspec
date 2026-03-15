@@ -8309,6 +8309,172 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_inline_composite_switch_attached_branch_blocks_accept_nested_composite_if_elseif_flow' => sub {
+    plan tests => 10;
+
+    my $spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      if(
+        scalar(on),
+        {
+          return_undef()
+        },
+        elseif(scalar(mid), {
+          return_undef()
+        }),
+        else({
+          return_undef()
+        })
+      )
+    },
+    default() {
+      if(scalar(on)) {
+        return_undef()
+      }
+      elseif(scalar(mid)) {
+        return_undef()
+      }
+      else() {
+        return_undef()
+      }
+    }
+  )
+ }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested composite if/elseif flow');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch attached branch block with nested composite if/elseif flow avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch attached branch block with nested composite if/elseif flow avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch attached branch block with nested composite if/elseif flow avoids unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready}, 'action-edge inline composite switch attached branch block with nested composite if/elseif flow stays language-agnostic action-IR ready');
+    is_deeply(
+        $meta->{canonical_action_ir_hits},
+        {
+            CASE    => 1,
+            DEFAULT => 1,
+            ELIF    => 2,
+            ELSE    => 2,
+            IF      => 2,
+            RETURN  => 6,
+            SWITCH  => 1,
+        },
+        'action-edge inline composite switch attached branch block with nested composite if/elseif flow preserves the expected helper mix',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes',
+    );
+    is($descr->{spec}{Top}{ACODE}, undef, 'action-edge inline composite switch attached branch block with nested composite if/elseif flow keeps the current descriptor ACODE slot shape');
+    ok(
+        !defined($meta->{unresolved_helpers}) || !@{$meta->{unresolved_helpers}},
+        'action-edge inline composite switch attached branch block with nested composite if/elseif flow exposes no unresolved helper names',
+    );
+    ok(
+        !defined($meta->{unresolved_helper_statements}) || !@{$meta->{unresolved_helper_statements}},
+        'action-edge inline composite switch attached branch block with nested composite if/elseif flow exposes no unresolved helper statements',
+    );
+};
+subtest 'method_like_full_lifecycle_inline_composite_switch_attached_branch_blocks_accept_nested_composite_if_elseif_flow' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow" => sub {
+            plan tests => 7;
+
+            my $spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      if(
+        scalar(on),
+        {
+          return_undef()
+        },
+        elseif(scalar(mid), {
+          return_undef()
+        }),
+        else({
+          return_undef()
+        })
+      )
+    },
+    default() {
+      if(scalar(on)) {
+        return_undef()
+      }
+      elseif(scalar(mid)) {
+        return_undef()
+      }
+      else() {
+        return_undef()
+      }
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow");
+
+            my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+            is($meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow avoids RAW_PERL fallback");
+            is($meta->{unresolved_helper_count}, 0, "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow avoids unresolved-helper hits");
+            ok($meta->{language_agnostic_action_ir_ready}, "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow stays language-agnostic action-IR ready");
+            is_deeply(
+                $meta->{canonical_action_ir_hits},
+                {
+                    CASE     => 1,
+                    DEFAULT  => 1,
+                    ELIF     => 2,
+                    ELSE     => 2,
+                    IF       => 2,
+                    RETURN   => 6,
+                    RETURN_A => 1,
+                    SWITCH   => 1,
+                },
+                "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow preserves the expected helper mix",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes",
+            );
+            is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow keeps the current descriptor $code_key slot shape");
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_action_flat_list_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
@@ -9492,6 +9658,174 @@ SPEC
                 "$tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow preserves CASE/DEFAULT/ENDSWITCH/SWITCH canonical nodes",
             );
             is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow keeps the current descriptor $code_key slot shape");
+        };
+    }
+};
+subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_composite_if_elseif_flow' => sub {
+    plan tests => 10;
+
+    my $spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    if(
+      scalar(on),
+      {
+        return_undef()
+      },
+      elseif(scalar(mid), {
+        return_undef()
+      }),
+      else({
+        return_undef()
+      })
+    )
+  }
+  default() {
+    if(scalar(on)) {
+      return_undef()
+    }
+    elseif(scalar(mid)) {
+      return_undef()
+    }
+    else() {
+      return_undef()
+    }
+  }
+  endswitch()
+ }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested composite if/elseif flow');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch attached branch block with nested composite if/elseif flow avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch attached branch block with nested composite if/elseif flow avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch attached branch block with nested composite if/elseif flow avoids unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready}, 'action-edge marker-style switch attached branch block with nested composite if/elseif flow stays language-agnostic action-IR ready');
+    is_deeply(
+        $meta->{canonical_action_ir_hits},
+        {
+            CASE      => 1,
+            DEFAULT   => 1,
+            ELIF      => 2,
+            ELSE      => 2,
+            ENDSWITCH => 1,
+            IF        => 2,
+            RETURN    => 6,
+            SWITCH    => 1,
+        },
+        'action-edge marker-style switch attached branch block with nested composite if/elseif flow preserves the expected helper mix',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}),
+        'action-edge marker-style switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes',
+    );
+    is($descr->{spec}{Top}{ACODE}, undef, 'action-edge marker-style switch attached branch block with nested composite if/elseif flow keeps the current descriptor ACODE slot shape');
+    ok(
+        !defined($meta->{unresolved_helpers}) || !@{$meta->{unresolved_helpers}},
+        'action-edge marker-style switch attached branch block with nested composite if/elseif flow exposes no unresolved helper names',
+    );
+    ok(
+        !defined($meta->{unresolved_helper_statements}) || !@{$meta->{unresolved_helper_statements}},
+        'action-edge marker-style switch attached branch block with nested composite if/elseif flow exposes no unresolved helper statements',
+    );
+};
+subtest 'method_like_full_lifecycle_marker_switch_attached_branch_blocks_accept_nested_composite_if_elseif_flow' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow" => sub {
+            plan tests => 7;
+
+            my $spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    if(
+      scalar(on),
+      {
+        return_undef()
+      },
+      elseif(scalar(mid), {
+        return_undef()
+      }),
+      else({
+        return_undef()
+      })
+    )
+  }
+  default() {
+    if(scalar(on)) {
+      return_undef()
+    }
+    elseif(scalar(mid)) {
+      return_undef()
+    }
+    else() {
+      return_undef()
+    }
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow");
+
+            my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+            is($meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow avoids RAW_PERL fallback");
+            is($meta->{unresolved_helper_count}, 0, "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow avoids unresolved-helper hits");
+            ok($meta->{language_agnostic_action_ir_ready}, "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow stays language-agnostic action-IR ready");
+            is_deeply(
+                $meta->{canonical_action_ir_hits},
+                {
+                    CASE      => 1,
+                    DEFAULT   => 1,
+                    ELIF      => 2,
+                    ELSE      => 2,
+                    ENDSWITCH => 1,
+                    IF        => 2,
+                    RETURN    => 6,
+                    RETURN_A  => 1,
+                    SWITCH    => 1,
+                },
+                "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow preserves the expected helper mix",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow preserves CASE/DEFAULT/ENDSWITCH plus nested IF/ELIF/ELSE/SWITCH canonical nodes",
+            );
+            is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow keeps the current descriptor $code_key slot shape");
         };
     }
 };

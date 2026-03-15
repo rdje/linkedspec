@@ -225,6 +225,7 @@ Current direction note:
 - and they now have explicit regression coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
 - and they now have explicit regression coverage for nested composite `if(...)` forms too, including both inline composite and attached-block inner `if` surfaces,
 - and they now have explicit regression coverage for nested inline-composite `switch(...)` forms too, on both inline composite and marker-style outer switch surfaces,
+- and that nested composite-`if(...)` coverage now explicitly includes the deeper `elseif(...)` branch shape too,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.
 
