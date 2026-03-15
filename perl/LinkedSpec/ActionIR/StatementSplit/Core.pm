@@ -58,13 +58,164 @@ sub _looks_like_complete_method_statement {
  my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
  return 1 if $call;
 
- if ($trimmed =~ /^(?<head>.+\))\s*(?<block>\{.*\})\s*$/s) {
-  my $head = $trim_action_ir_value->($+{head});
-  my $block = $trim_action_ir_value->($+{block});
-  return 0 unless defined($head) && length($head);
-  return 0 unless defined($block) && $block =~ /^\{.*\}$/s;
+ my @chars = split //, $trimmed;
+ my $paren_depth = 0;
+ my $brace_depth = 0;
+ my $bracket_depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $in_slash_quote = 0;
+ my $slash_escape_next = 0;
+ my $escape_next = 0;
+
+ for (my $idx = 0; $idx < @chars; ++$idx) {
+  my $char = $chars[$idx];
+
+  if ($in_slash_quote) {
+   if ($slash_escape_next) {
+    $slash_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $slash_escape_next = 1;
+   } elsif ($char eq '/') {
+    $in_slash_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_single_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq "'") {
+    $in_single_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_double_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '"') {
+    $in_double_quote = 0;
+   }
+   next;
+  }
+
+  if ($char eq "'") {
+   $in_single_quote = 1;
+   next;
+  }
+  if ($char eq '"') {
+   $in_double_quote = 1;
+   next;
+  }
+  if ($char eq '/') {
+   my $prefix = substr($trimmed, 0, $idx);
+   $prefix =~ s/\s+$//o;
+   if (!length($prefix)) {
+    $in_slash_quote = 1;
+    $slash_escape_next = 0;
+    next;
+   }
+  }
+  if ($char eq '(') {
+   ++$paren_depth;
+   next;
+  }
+  if ($char eq ')') {
+   --$paren_depth if $paren_depth > 0;
+   next;
+  }
+  if ($char eq '[') {
+   ++$bracket_depth;
+   next;
+  }
+  if ($char eq ']') {
+   --$bracket_depth if $bracket_depth > 0;
+   next;
+  }
+  next unless $char eq '{';
+  next if $paren_depth || $brace_depth || $bracket_depth;
+
+  my $head = $trim_action_ir_value->(substr($trimmed, 0, $idx));
+  next unless defined($head) && length($head);
   $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($head);
-  return $call ? 1 : 0;
+  next unless $call;
+
+  my $body_depth = 0;
+  my $body_in_single_quote = 0;
+  my $body_in_double_quote = 0;
+  my $body_in_slash_quote = 0;
+  my $body_slash_escape_next = 0;
+  my $body_escape_next = 0;
+
+  for (my $body_idx = $idx; $body_idx < @chars; ++$body_idx) {
+   my $body_char = $chars[$body_idx];
+
+   if ($body_in_slash_quote) {
+    if ($body_slash_escape_next) {
+     $body_slash_escape_next = 0;
+    } elsif ($body_char eq '\\') {
+     $body_slash_escape_next = 1;
+    } elsif ($body_char eq '/') {
+     $body_in_slash_quote = 0;
+    }
+    next;
+   }
+
+   if ($body_in_single_quote) {
+    if ($body_escape_next) {
+     $body_escape_next = 0;
+    } elsif ($body_char eq '\\') {
+     $body_escape_next = 1;
+    } elsif ($body_char eq "'") {
+     $body_in_single_quote = 0;
+    }
+    next;
+   }
+
+   if ($body_in_double_quote) {
+    if ($body_escape_next) {
+     $body_escape_next = 0;
+    } elsif ($body_char eq '\\') {
+     $body_escape_next = 1;
+    } elsif ($body_char eq '"') {
+     $body_in_double_quote = 0;
+    }
+    next;
+   }
+
+   if ($body_char eq "'") {
+    $body_in_single_quote = 1;
+    next;
+   }
+   if ($body_char eq '"') {
+    $body_in_double_quote = 1;
+    next;
+   }
+   if ($body_char eq '/') {
+    my $body_prefix = substr($trimmed, $idx, $body_idx - $idx);
+    $body_prefix =~ s/\s+$//o;
+    if ($body_depth == 0 || !length($body_prefix)) {
+     $body_in_slash_quote = 1;
+     $body_slash_escape_next = 0;
+     next;
+    }
+   }
+   if ($body_char eq '{') {
+    ++$body_depth;
+    next;
+   }
+   if ($body_char eq '}') {
+    --$body_depth if $body_depth > 0;
+    next unless $body_depth == 0;
+    my $tail = $trim_action_ir_value->(substr($trimmed, $body_idx + 1));
+    return (!defined($tail) || !length($tail)) ? 1 : 0;
+   }
+  }
  }
 
  return 0

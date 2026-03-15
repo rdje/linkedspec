@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Keep Composite If Branch Blocks Rewrite-Ready For Nested Marker Switch Flow
+## Summary
+Fixed the remaining structured-`if(...)` branch-body rewrite gap. Nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow now stays fully rewrite-ready inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks, on action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Tightened `StatementSplit::Core` so attached-block method statements are recognized by balanced parsing instead of the older greedy attached-block regex.
+- Taught branch-local control-flow lowering to prioritize direct control-flow markers before generic nested helper rewrites:
+  - `if(...)`, `elseif(...)`, `else()`, `endif()`
+  - `switch(...)`, `case(...)`, `default()`, `endcase()`, `endswitch()`
+- That closes the case where a nested attached-block `case(...) { return_undef() }` or `default() { return_undef() }` inside a composite-`if` branch body could accept a partial nested helper rewrite before the correct switch-branch lowering ran.
+- Added focused splitter seam coverage for attached `if/else` statements whose attached branches carry nested marker-style `if(...) ... endif()` and nested marker-style `switch(...) ... endswitch()` flow.
+- Added focused action-edge and lifecycle regressions that lock both:
+  - structured inline composite `if(cond, { ... }, else({ ... }))`, and
+  - structured attached-block composite `if(cond) { ... } else() { ... }`
+  against nested marker-style switch flow inside those branch bodies.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported structured control-flow behavior without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Support Attached-Block Composite If
 ## Summary
 Landed structured attached-block composite `if(...)` support on the method-like DSL surfaces that had been tracked as the next control-flow follow-up. `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now lowers cleanly on action-edge and lifecycle block surfaces and matches the existing structured inline-composite `if(...)` baseline.

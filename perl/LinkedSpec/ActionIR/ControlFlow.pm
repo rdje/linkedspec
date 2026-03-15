@@ -447,6 +447,32 @@ sub _flush_implicit_if_closures {
  return join(' ', @closures)
 }
 
+sub _lower_flow_branch_direct_control_flow_statement {
+ my ($expr, $ctx, $deps) = @_;
+
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $method = $parsed_expr->{call}{method} // '';
+
+ my %dispatch = (
+  if        => \&_lower_if_flow_statement,
+  i         => \&_lower_if_flow_statement,
+  elif      => \&_lower_elseif_flow_statement,
+  elseif    => \&_lower_elseif_flow_statement,
+  else      => \&_lower_else_flow_statement,
+  endif     => \&_lower_endif_flow_statement,
+  switch    => \&_lower_switch_flow_statement,
+  case      => \&_lower_case_flow_statement,
+  default   => \&_lower_default_flow_statement,
+  endcase   => \&_lower_endcase_flow_statement,
+  endswitch => \&_lower_endswitch_flow_statement,
+ );
+
+ my $lower = $dispatch{$method};
+ return undef unless ref($lower) eq 'CODE';
+ return $lower->($expr, $ctx, $deps)
+}
+
 sub _lower_flow_branch_single_statement {
  my ($expr, $branch_ctx, $deps) = @_;
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
@@ -458,6 +484,11 @@ sub _lower_flow_branch_single_statement {
  my $prefix = '';
  if (@{$branch_ctx->{if_stack} || []} && !_statement_continues_attached_if_flow($trimmed, $deps)) {
   $prefix = _flush_implicit_if_closures($branch_ctx);
+ }
+
+ my $direct_flow_lowered = _lower_flow_branch_direct_control_flow_statement($trimmed, $branch_ctx, $deps);
+ if (defined($direct_flow_lowered) && length($direct_flow_lowered) && $direct_flow_lowered ne $trimmed) {
+  return length($prefix) ? "$prefix $direct_flow_lowered" : $direct_flow_lowered;
  }
 
  my $rules = $branch_ctx->{rewrite_rules};

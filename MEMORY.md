@@ -142,6 +142,24 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
   - `bash tools/run_ci_local.sh`
 
 ## Current Session Snapshot (2026-03-15)
+- Landed the next composite-`if(...)` control-flow follow-up:
+  - nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow now stays fully rewrite-ready inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks,
+  - action-edge and full lifecycle-family coverage are now regression-locked for that nested switch shape,
+  - and `StatementSplit::Core` now recognizes attached-block method statements with balanced parsing so attached `if/else` boundaries remain intact even when the branch body itself carries nested marker flow.
+- Clarified the docs accordingly:
+  - composite-`if(...)` structured branch bodies are now documented as supporting nested marker-style switch flow too,
+  - not only flat helper sequences or nested marker-style `if(...) ... endif()` flow.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported structured control-flow behavior without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Landed the first structured inline-composite switch branch-body extension:
   - `case(value, { ... })` and `default({ ... })` now lower through the same inline composite switch owner path as the existing action-list baseline,
   - semicolonless structured helper sequences inside those branch bodies are now supported on both action-edge and lifecycle surfaces,

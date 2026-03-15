@@ -78,6 +78,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep attached-block switch branch bodies fully aligned with structured-block-context flow semantics, including nested marker flow such as `if(...) ... endif()` inside those branch bodies,
    - keep attached-block switch branch bodies fully aligned with nested marker-style switch flow semantics too, not only nested marker-style `if(...) ... endif()` flow,
    - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` aligned with the now-landed structured-block-context attached form `if(cond) { ... } elseif(cond2) { ... } else() { ... }`,
+   - keep structured inline and attached composite `if(...)` branch bodies aligned for nested marker-style `switch(...) ... endswitch()` flow too, not only for flat helper sequences or nested marker-style `if(...) ... endif()` flow,
    - keep those inline composite control-flow surfaces lifecycle-wide across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, not only on the earlier `LX` proof point,
    - treat marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface, including nested structured branch bodies when those land as supported contexts,
    - keep unlimited nested composition canonical and backend-neutral,

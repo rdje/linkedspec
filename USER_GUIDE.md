@@ -243,6 +243,8 @@ That follow-up is no longer only about future `switch(...)` work: the first inli
 
 That inline-composite `if(...)` surface now has its first structured branch-body extension too: `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is supported alongside the older explicit action-list form, so compact conditional flow can still carry semicolonless structured helper sequences without falling back to raw Perl.
 
+That same structured branch-block path now keeps full rewrite readiness for nested marker-style switch flow too. In practice that means both `if(cond, { switch(...) ... endswitch() }, else({ ... }))` and `if(cond) { switch(...) ... endswitch() } else() { ... }` preserve zero fallback, zero unresolved-helper hits, and the same lifecycle-family parity as the simpler flat helper sequences.
+
 Those inline composite control-flow forms are now regression-locked across the full lifecycle family too, not only on the earlier `LX` proof point. That means `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` all now carry the same lifecycle-wide support for:
 - inline composite `if(cond, ..., elseif(...), else(...))`
 - structured inline-composite `if(cond, { ... }, elseif(..., { ... }), else({ ... }))`
