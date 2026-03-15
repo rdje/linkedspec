@@ -10,6 +10,18 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Regression-locked the deeper composite-if nested inline-switch follow-up:
+  - structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit coverage for nested inline-composite `switch(...)` flow in the deeper `if/elseif/else` branch shape too,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow coverage without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Regression-locked the deeper composite-if nested marker-switch follow-up:
   - structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit coverage for nested marker-style `switch(...) ... endswitch()` flow in the deeper `if/elseif/else` branch shape too,
   - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
