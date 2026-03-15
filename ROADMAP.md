@@ -206,6 +206,7 @@ Status interpretation note:
        - and attached-block switch branch bodies are now regression-locked for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
        - and attached-block switch branch bodies are now regression-locked for nested composite `if(...)` forms too, including both inline composite `if(cond, ..., else(...))` and attached-block `if(cond) { ... } else() { ... }` inner surfaces on both outer switch families,
        - and those attached switch branch bodies are now regression-locked for parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow,
+       - and that same attached-switch parity is now regression-locked for nested marker-style `switch(...) ... endswitch()` flow inside those deeper `if/elseif/else` branches too, not only nested inline-composite `switch(...)` flow,
        - and attached-block switch branch bodies are now regression-locked for nested inline-composite `switch(...)` forms too, on both inline composite and marker-style outer switch families,
        - and that nested composite-`if(...)` contract is now regression-locked for the deeper `elseif(...)` branch shape too inside those attached switch branch bodies,
        - and the nested inline-composite `switch(...)` contract there is now regression-locked for a broader multi-`case(...)` shape too, not only the simpler single-`case(...)` form,
