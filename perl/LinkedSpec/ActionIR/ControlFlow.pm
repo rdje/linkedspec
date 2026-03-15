@@ -127,10 +127,42 @@ sub _lower_if_flow_statement {
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i');
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
+ my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
  return undef unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return undef unless defined($cond_expr) && length($cond_expr);
+
+ if (@$effective_args > 1) {
+  my @if_action_exprs;
+  my @clauses;
+  my $seen_branch_header = 0;
+  my $else_seen = 0;
+
+  foreach my $arg (@$effective_args[1 .. $#$effective_args]) {
+   my $arg_call = $parse_method_function_expr->($arg);
+   my $arg_method = $arg_call ? ($arg_call->{method} // '') : '';
+
+   if ($arg_method eq 'elseif' || $arg_method eq 'elif' || $arg_method eq 'else') {
+    return undef if $else_seen;
+    my $clause = _lower_inline_if_branch_expr($arg, $ctx, $deps);
+    return undef unless defined($clause) && length($clause);
+    push @clauses, $clause;
+    $seen_branch_header = 1;
+    $else_seen = 1 if $arg_method eq 'else';
+    next;
+   }
+
+   return undef if $seen_branch_header;
+   push @if_action_exprs, $arg;
+  }
+
+  my $actions = _lower_flow_branch_action_list(\@if_action_exprs, $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  my $suffix = @clauses ? ' '.join(' ', @clauses) : '';
+  return "do { if ($cond_expr) {$body$suffix } }";
+ }
 
  $ctx->{if_stack} ||= [];
  push @{$ctx->{if_stack}}, {else_seen => 0};
@@ -295,6 +327,59 @@ sub _lower_flow_branch_action_expr {
  return \@lowered_actions
 }
 
+sub _lower_flow_branch_action_list {
+ my ($action_exprs, $ctx, $deps, $branch_ctx) = @_;
+ $branch_ctx //= _new_flow_branch_rewrite_ctx($ctx);
+ return undef unless ref($action_exprs) eq 'ARRAY';
+
+ my @actions;
+ foreach my $action_expr (@$action_exprs) {
+  my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
+  return undef unless ref($lowered_actions) eq 'ARRAY';
+  push @actions, @$lowered_actions;
+ }
+
+ return undef if @{$branch_ctx->{if_stack} || []};
+ return undef if @{$branch_ctx->{switch_stack} || []};
+ $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
+ return \@actions
+}
+
+sub _lower_inline_if_branch_expr {
+ my ($branch_expr, $ctx, $deps) = @_;
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+
+ my $branch_call = $parse_method_function_expr->($branch_expr);
+ return undef unless $branch_call;
+ my $method = $branch_call->{method} // '';
+
+ if ($method eq 'elseif' || $method eq 'elif') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 1, undef);
+  return undef unless $effective_args && @$effective_args >= 1;
+
+  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
+  return undef unless defined($cond_expr) && length($cond_expr);
+
+  my $actions = _lower_flow_branch_action_list([@$effective_args[1 .. $#$effective_args]], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  return "} elsif ($cond_expr) {$body";
+ }
+
+ if ($method eq 'else') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 0, undef);
+  return undef unless $effective_args;
+
+  my $actions = _lower_flow_branch_action_list($effective_args, $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  return "} else {$body";
+ }
+
+ return undef
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_inline_switch_branch_expr
 # Purpose : Lower a single inline switch branch expression (`case(...)` or
@@ -316,43 +401,27 @@ sub _lower_inline_switch_branch_expr {
   return undef unless $effective_args && @$effective_args >= 1;
   return undef if $switch_state->{default_seen};
 
-  my $case_value = _lower_switch_case_value_expr($effective_args->[0], $deps);
-  return undef unless $case_value && defined($case_value->{expr});
- my $match_expr = $case_value->{mode} eq 'regex'
-  ? "\$$switch_var =~ $case_value->{expr}"
-  : "\$$switch_var eq $case_value->{expr}";
+ my $case_value = _lower_switch_case_value_expr($effective_args->[0], $deps);
+ return undef unless $case_value && defined($case_value->{expr});
+  my $match_expr = $case_value->{mode} eq 'regex'
+   ? "\$$switch_var =~ $case_value->{expr}"
+   : "\$$switch_var eq $case_value->{expr}";
 
-  my $branch_ctx = _new_flow_branch_rewrite_ctx($ctx);
-  my @actions;
-  foreach my $action_expr (@$effective_args[1 .. $#$effective_args]) {
-   my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
-   return undef unless ref($lowered_actions) eq 'ARRAY';
-   push @actions, @$lowered_actions;
-  }
-  return undef if @{$branch_ctx->{if_stack} || []};
-  return undef if @{$branch_ctx->{switch_stack} || []};
-  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
-  my $body = @actions ? '; '.join('; ', @actions) : '';
+  my $actions = _lower_flow_branch_action_list([@$effective_args[1 .. $#$effective_args]], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? '; '.join('; ', @$actions) : '';
   return "if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
  }
 
  if ($method eq 'default') {
   my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 0, undef);
-  return undef unless $effective_args;
-  return undef if $switch_state->{default_seen};
-  $switch_state->{default_seen} = 1;
+ return undef unless $effective_args;
+ return undef if $switch_state->{default_seen};
+ $switch_state->{default_seen} = 1;
 
-  my $branch_ctx = _new_flow_branch_rewrite_ctx($ctx);
-  my @actions;
-  foreach my $action_expr (@$effective_args) {
-   my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
-   return undef unless ref($lowered_actions) eq 'ARRAY';
-   push @actions, @$lowered_actions;
-  }
-  return undef if @{$branch_ctx->{if_stack} || []};
-  return undef if @{$branch_ctx->{switch_stack} || []};
-  $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
-  my $body = @actions ? '; '.join('; ', @actions) : '';
+  my $actions = _lower_flow_branch_action_list($effective_args, $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? '; '.join('; ', @$actions) : '';
   return "if (!\$$hit_var) { \$$hit_var = 1$body }";
  }
 

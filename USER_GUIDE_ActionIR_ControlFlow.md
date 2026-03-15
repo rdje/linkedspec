@@ -209,9 +209,9 @@ Current direction note:
 - because each branch should have exactly one body carrier.
 
 ## Inline composite `if(...)` design direction
-Inline composite `if(...)` is being treated as feasible, but not implemented yet.
+The first inline composite `if(...)` slice is now supported.
 
-The agreed first-step target is an argument-list composite shape:
+Supported form:
 
 ```text
 if(
@@ -221,6 +221,21 @@ if(
   elseif(scalar(alt_on), action3(...), action4(...)),
   else(action5(...), action6(...))
 )
+```
+
+This is the supported first-step compact form. It lowers through the same control-flow path as the older marker-style baseline:
+
+```text
+if(scalar(on))
+  action1(...)
+  action2(...)
+elseif(scalar(alt_on))
+  action3(...)
+  action4(...)
+else()
+  action5(...)
+  action6(...)
+endif()
 ```
 
 Longer-term ergonomics may move toward attached-block forms:

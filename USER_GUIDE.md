@@ -231,6 +231,8 @@ Nested accessor payloads are locked too: fluent and structured authoring now agr
 
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
+That follow-up is no longer only about future `switch(...)` work: the first inline composite `if(...)` slice is now supported too, so compact forms like `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` already lower through the same canonical control-flow path as the older marker-style `if()/elseif()/else()/endif()` baseline.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

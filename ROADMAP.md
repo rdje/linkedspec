@@ -206,8 +206,7 @@ Status interpretation note:
      - because one branch header must map to one body carrier only,
      - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too.
    - Inline composite `if(...)` design note agreed before implementation:
-     - this is considered feasible on the current lowering architecture,
-     - the recommended first implementation target is an argument-list composite form such as `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
+     - the argument-list composite first step is now landed, in the form `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
      - attached-block forms like `if(cond) { ... } elseif(cond2) { ... } else() { ... }` remain desirable long-term ergonomics targets,
      - but they are intentionally treated as a later control-flow concrete-syntax step rather than the first implementation slice.
 4. Unlimited method composition in arguments (Planned)
@@ -456,6 +455,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - Landed follow-up: supported multi-step method sequences inside lifecycle control-flow bodies are now regression-locked too, so `LX` branch-local `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` chains remain equivalent between fluent and structured forms inside both `if/elseif` and `switch/case` bodies.
   - Landed follow-up: inline composite `switch(..., case(...), default(...))` forms are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, including supported inline helper sequences inside `case(...)` and `default(...)`.
   - Landed follow-up: the first structured inline composite switch branch-body extension is now supported too, so `case(value, { ... })` and `default({ ... })` lower through the same canonical inline-switch path as the existing action-list baseline on both action-edge and lifecycle surfaces, including semicolonless structured helper sequences inside those branch bodies.
+  - Landed follow-up: the first inline composite `if(...)` slice is now supported too, so `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` lowers through the same canonical control-flow path as the existing marker-style `if()/elseif()/else()/endif()` baseline on both action-edge and lifecycle surfaces.
   - Landed follow-up: list-context insertion helpers `flat_array(...)` and `flat_hash(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported flat-list payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.
   - Landed follow-up: those same supported `flat_array(...)` and `flat_hash(...)` payload forms are now regression-locked inside control-flow branch bodies too, so branch-local `if/elseif` and `switch/case` returns preserve the same lowering and zero-fallback migration metadata across fluent and structured authoring on both action-edge and lifecycle surfaces.
   - Landed follow-up: snapshot payload helpers `array_copy(...)` and compatibility `array_values(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported snapshot-array payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.

@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Support Inline Composite If
+## Summary
+Landed the first inline composite `if(...)` slice. Argument-list forms such as `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` now lower through the same canonical control-flow path as the existing marker-style `if()/elseif()/else()/endif()` baseline.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended `LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(...)` with an owner-local inline composite path:
+  - keep the existing marker-style single-condition form unchanged,
+  - detect the new argument-list composite shape when extra top-level arguments are present,
+  - lower plain first-branch actions directly from the `if(...)` argument list,
+  - and lower later `elseif(...)` / `elif(...)` / `else(...)` branch descriptors from the remaining argument list.
+- Reused the shared branch-action lowering machinery already used by inline composite `switch(...)`:
+  - one branch action list shares one rewrite context,
+  - nested flow bookkeeping remains coherent within that branch,
+  - and the resulting code path stays language-agnostic and zero-fallback.
+- Extended the flow scanner contract so inline composite `if(...)`, `elseif(...)`, and `else(...)` forms are recognized as the same canonical control-flow family for migration metadata, even when their branch actions stay inline in the argument list.
+- Added focused action-edge and lifecycle regressions that lock the new inline composite `if(...)` form against the existing semicolonless marker-style baseline on:
+  - identical `ACODE` or `LXCODE`,
+  - matching canonical action-IR node coverage apart from the marker-only explicit `ENDIF` close node,
+  - zero fallback,
+  - zero unresolved helper hits,
+  - and language-agnostic readiness.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens supported control-flow authoring without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Support Structured Inline Composite Switch Branch Bodies
 ## Summary
 Landed the first structured inline-composite switch branch-body extension. `case(value, { ... })` and `default({ ... })` now lower through the same owner-local composite switch path as the existing action-list baseline, including semicolonless structured helper sequences inside those branch bodies.

@@ -40,8 +40,8 @@ sub _scan_contract_if_flow {
 while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- next unless $effective_args;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ next unless $effective_args && @$effective_args >= 1;
  push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
  return \@events
@@ -53,8 +53,8 @@ sub _scan_contract_elseif_flow {
 while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- next unless $effective_args;
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
+ next unless $effective_args && @$effective_args >= 1;
  push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
  return \@events
@@ -66,7 +66,7 @@ sub _scan_contract_else_flow {
 while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, undef);
  next unless $effective_args;
  push @events, {raw => $+{expr}, args => {}};
 }

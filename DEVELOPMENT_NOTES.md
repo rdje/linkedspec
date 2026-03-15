@@ -9,6 +9,26 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Landed the first inline composite `if(...)` slice:
+  - argument-list forms such as `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` now lower through the same control-flow owner path as the existing marker-style `if()/elseif()/else()/endif()` baseline,
+  - action-edge and lifecycle surfaces are both regression-locked,
+  - the new branch bodies reuse the same shared branch-action rewrite context as inline composite `switch(...)`,
+  - and the flow scanner now recognizes those compact `if(...)` / `elseif(...)` / `else(...)` forms as the same canonical control-flow family for migration metadata.
+- Clarified the docs accordingly:
+  - inline composite `if(...)` is no longer only a feasibility note,
+  - the first-step argument-list form is now a supported surface,
+  - while attached-block composite `if(cond) { ... }` remains deferred,
+  - and the compact form is documented as semantically equivalent to the marker baseline even though it does not materialize a separate explicit `ENDIF` helper node in metadata.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported control-flow authoring without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Landed the first structured inline-composite switch branch-body extension:
   - `case(value, { ... })` and `default({ ... })` now lower through the same owner-local composite switch path as the existing action-list baseline,
   - semicolonless structured helper sequences inside those branch bodies are now supported on both action-edge and lifecycle surfaces,

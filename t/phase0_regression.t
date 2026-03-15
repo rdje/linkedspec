@@ -6423,6 +6423,100 @@ SPEC
         'lifecycle inline composite switch branch-block form preserves switch plus helper nodes across semicolonless structured branch bodies'
     );
 };
+subtest 'method_like_action_inline_composite_if_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
+SPEC
+
+    my $marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if form');
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style if baseline');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $marker_descr->{spec}{Top}{ACODE}, 'action-edge inline composite if form lowers to identical ACODE output as the marker-style baseline');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite if form avoids RAW_PERL fallback');
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style if baseline avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite if form avoids raw Perl dependency');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style if baseline avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite if form avoids unresolved-helper hits');
+    is($marker_meta->{unresolved_helper_count}, 0, 'action-edge marker-style if baseline avoids unresolved-helper hits');
+    my @inline_nodes = grep { $_ ne 'ENDIF' } @{$inline_meta->{canonical_action_ir_nodes}};
+    my @marker_nodes = grep { $_ ne 'ENDIF' } @{$marker_meta->{canonical_action_ir_nodes}};
+    is_deeply(\@inline_nodes, \@marker_nodes, 'action-edge inline composite if form preserves canonical action-IR node coverage apart from the marker-only ENDIF close node');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $marker_meta->{language_agnostic_action_ir_ready},
+        'action-edge inline composite if form remains language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$inline_meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite if form preserves IF/ELIF/ELSE plus helper nodes across inline branch action lists'
+    );
+};
+subtest 'method_like_lifecycle_inline_composite_if_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+LX { if(scalar(on), declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(scalar(alt_on), say("alt"), return_undef()), else(return_undef())) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $marker_spec = <<'SPEC';
+Top::&
+LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if form');
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for lifecycle marker-style if baseline');
+    is($inline_descr->{spec}{Top}{LXCODE}, $marker_descr->{spec}{Top}{LXCODE}, 'lifecycle inline composite if form lowers to identical LXCODE output as the marker-style baseline');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite if form avoids RAW_PERL fallback');
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle marker-style if baseline avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite if form avoids raw Perl dependency');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'lifecycle marker-style if baseline avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite if form avoids unresolved-helper hits');
+    is($marker_meta->{unresolved_helper_count}, 0, 'lifecycle marker-style if baseline avoids unresolved-helper hits');
+    my @inline_nodes = grep { $_ ne 'ENDIF' } @{$inline_meta->{canonical_action_ir_nodes}};
+    my @marker_nodes = grep { $_ ne 'ENDIF' } @{$marker_meta->{canonical_action_ir_nodes}};
+    is_deeply(\@inline_nodes, \@marker_nodes, 'lifecycle inline composite if form preserves canonical action-IR node coverage apart from the marker-only ENDIF close node');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $marker_meta->{language_agnostic_action_ir_ready},
+        'lifecycle inline composite if form remains language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$inline_meta->{canonical_action_ir_nodes}}),
+        'lifecycle inline composite if form preserves IF/ELIF/ELSE plus helper nodes across inline branch action lists'
+    );
+};
 subtest 'method_like_fluent_and_structured_action_flat_list_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
