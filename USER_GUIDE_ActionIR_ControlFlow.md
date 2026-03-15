@@ -68,6 +68,7 @@ Those nested switch forms can now live inside composite-`if(...)` branch bodies 
 That nested inline-composite `switch(...)` coverage inside composite-`if(...)` branch bodies now explicitly includes broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` form.
 That same composite-`if(...)` nested marker-switch contract now explicitly includes the deeper `if/elseif/else` branch shape too, not only the simpler `if/else` shape.
 That same deeper composite-`if/elseif/else` branch shape is now regression-locked for nested inline-composite `switch(...)` flow too, not only nested marker-style `switch(...) ... endswitch()` flow.
+That same deeper composite-`if/elseif/else` branch shape now explicitly includes the broader multi-`case(...)` nested inline-composite `switch(...)` form too, not only the simpler single-`case(...)` nested inline-switch shape.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.

@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Inline-Switch Parity in Composite If/Elseif Blocks
+## Summary
+Regression-locked the combined deeper composite-`if/elseif/else` plus broader multi-`case(...)` nested inline-switch seam: composite `if(...)` branch-block parity now covers the deeper `if/elseif/else` branch shape when those branches carry inline-composite `switch(...)` flow with multiple `case(...)` arms, not only the simpler single-`case(...)` nested inline-switch shape.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that compare:
+  - structured inline composite `if(...)` branch-block bodies carrying a deeper `if/elseif/else` shape with nested multi-`case(...)` inline-composite `switch(...)` flow,
+  - against the attached-block composite `if(...)` surface carrying the same deeper multi-`case(...)` nested inline-switch flow.
+- Added the same regression locks across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked parity on:
+  - descriptor build success
+  - current descriptor code-slot shape equality
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - zero raw-Perl dependency on action-edge surfaces
+  - language-agnostic readiness
+  - canonical node and hit-count equality across both inner composite-`if/elseif/else` surfaces for the broader multi-`case(...)` nested inline-switch shape
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Parity in Attached Switch Branches
 ## Summary
 Regression-locked the broader multi-`case(...)` marker-switch parity seam inside attached switch branch blocks: the deeper inner composite `if/elseif/else` parity now covers nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms too, not only the simpler single-`case(...)` marker-switch shape, across both the inline composite and marker-style outer switch families.
