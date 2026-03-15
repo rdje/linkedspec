@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Made structured inline-composite `if(...)` branch bodies an explicit supported contract:
+  - `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is now regression-locked on both action-edge and lifecycle surfaces,
+  - those branch-body forms match the canonical inline action-list baseline on `ACODE` or `LXCODE`, canonical action-IR node coverage, fallback counts, and language-agnostic readiness,
+  - and the guides now document them as the first structured branch-body extension for inline composite `if(...)`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice expands supported control-flow surface area without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Logged a control-flow design clarification before further syntax work:
   - marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are now explicitly treated as structured-block-context syntax,
   - they are not intended to remain a permanently free-standing fluent surface,

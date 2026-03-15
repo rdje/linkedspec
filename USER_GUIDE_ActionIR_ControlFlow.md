@@ -243,6 +243,28 @@ else()
 endif()
 ```
 
+Structured branch-body extension:
+
+```text
+if(
+  scalar(on),
+  {
+    action1(...)
+    action2(...)
+  },
+  elseif(scalar(alt_on), {
+    action3(...)
+    action4(...)
+  }),
+  else({
+    action5(...)
+    action6(...)
+  })
+)
+```
+
+That structured inline-composite `if(...)` form is now supported too. It uses the same one-header / one-body-carrier rule as the structured inline-composite `switch(...)` branch-body extension, and it reuses the normal semicolon-light structured statement splitter inside each branch body.
+
 Longer-term ergonomics may move toward attached-block forms:
 
 ```text

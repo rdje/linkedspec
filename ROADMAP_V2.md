@@ -73,7 +73,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 2. Continue the method-like DSL migration track:
    - broaden fluent/block equivalence on supported surfaces,
    - keep the newly landed structured inline-switch branch-body extension `case(value, { ... })` / `default({ ... })` as the supported first step while attached-block sugar remains deferred,
-   - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form as the supported first step while attached-block composite `if(cond) { ... }` remains deferred,
+   - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` as the supported first steps while attached-block composite `if(cond) { ... }` remains deferred,
    - treat marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface, including nested structured branch bodies when those land as supported contexts,
    - keep unlimited nested composition canonical and backend-neutral,
    - keep raw-Perl-free `.spec` authoring as the target.

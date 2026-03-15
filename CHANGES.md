@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Structured Inline Composite If Branch Bodies
+## Summary
+Made the already-working structured inline-composite `if(...)` branch-body form an explicit supported contract. `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is now regression-locked against the canonical inline action-list baseline on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge and lifecycle regressions proving that structured inline-composite `if(...)` branch bodies preserve:
+  - identical `ACODE` or `LXCODE` as the canonical inline action-list baseline,
+  - identical canonical action-IR node coverage,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency,
+  - zero unresolved-helper hits,
+  - and language-agnostic readiness.
+- Clarified the control-flow docs accordingly:
+  - the first inline-composite `if(...)` slice is no longer only the action-list form,
+  - branch-body blocks `{ ... }` are also now an explicitly supported first-step extension,
+  - while attached-block `if(cond) { ... }` remains deferred.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice expands regression-locked control-flow surface area without changing the track level.
+
 ## 2026-03-15 - Design Note Slice: Restrict Marker Flow To Structured Block Contexts
 ## Summary
 Logged a control-flow design clarification before further implementation work: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface.
