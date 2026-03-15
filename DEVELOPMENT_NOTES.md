@@ -10,6 +10,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-15)
 - Regression-locked the next attached-switch structured-context follow-up:
+  - attached `case(value) { ... }` and `default() { ... }` branch bodies now have explicit coverage for nested inline-composite `switch(...)` flow too,
+  - on both inline composite outer switch surfaces and marker-style outer switch surfaces,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow coverage without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
+- Regression-locked the next attached-switch structured-context follow-up:
   - attached `case(value) { ... }` and `default() { ... }` branch bodies now have explicit coverage for nested composite `if(...)` flow too,
   - on both inline composite outer switch surfaces and marker-style outer switch surfaces,
   - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
