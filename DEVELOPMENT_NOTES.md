@@ -9,6 +9,24 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Regression-locked the matching marker-style outer-switch parity seam on the broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` shape:
+  - plain marker branches `case(value)` / `default()`, and
+  - attached switch branch-block sugar `case(value) { ... }` / `default() { ... }`
+- That parity is now pinned across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - not only on the earlier flat helper-only branch-body baseline,
+  - but on the broader nested multi-`case(...)` marker-switch shape too.
+- Landed by normalizing scanner-side switch branch accounting too, so:
+  - attached outer `case(value) { ... }` / `default() { ... }` branches no longer hide nested same-type marker events inside their attached blocks, and
+  - inline-composite structured-argument carriers `case(value, { ... })` / `default({ ... })` now surface those same nested marker events through the branch-body carrier path too.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens parity coverage on already-supported marker-style outer switch surfaces without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Regression-locked the deeper parity seam between the two supported inline-switch structured branch-body carriers:
   - `case(value, { ... })` / `default({ ... })`, and
   - `case(value) { ... }` / `default() { ... }`

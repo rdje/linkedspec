@@ -55,6 +55,11 @@ sub _scan_inline_switch_branch_events {
      raw  => _trim_action_ir_value($branch_expr),
      args => {value => _trim_action_ir_value($effective_args->[0])},
     };
+    if (@$effective_args > 1) {
+     foreach my $nested_expr (@{$effective_args}[1 .. $#$effective_args]) {
+      push @events, @{_scan_contract_case_marker_events($nested_expr)};
+     }
+    }
     next;
    }
 
@@ -65,10 +70,43 @@ sub _scan_inline_switch_branch_events {
      raw  => _trim_action_ir_value($branch_expr),
      args => {},
     };
+    foreach my $nested_expr (@$effective_args) {
+     push @events, @{_scan_contract_default_marker_events($nested_expr)};
+    }
    }
   }
  }
 
+ return \@events
+}
+
+sub _scan_contract_case_marker_events {
+ my ($code) = @_;
+ my @events;
+ while ($code =~ /\b(?<head>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my $call = _parse_method_function_expr($+{head});
+  next unless $call;
+  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
+  next unless $effective_args;
+  my $raw = $+{head}.($+{block} // '');
+  push @events, {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}};
+  push @events, @{_scan_contract_case_marker_events($+{block})} if defined $+{block};
+ }
+ return \@events
+}
+
+sub _scan_contract_default_marker_events {
+ my ($code) = @_;
+ my @events;
+ while ($code =~ /\b(?<head>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my $call = _parse_method_function_expr($+{head});
+  next unless $call;
+  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
+  next unless $effective_args;
+  my $raw = $+{head}.($+{block} // '');
+  push @events, {raw => $raw, args => {}};
+  push @events, @{_scan_contract_default_marker_events($+{block})} if defined $+{block};
+ }
  return \@events
 }
 
@@ -142,30 +180,14 @@ while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*
 
 sub _scan_contract_case_flow {
  my ($code) = @_;
- my @events;
-while ($code =~ /\b(?<head>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
- my $call = _parse_method_function_expr($+{head});
- next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
- next unless $effective_args;
- my $raw = $+{head}.($+{block} // '');
- push @events, {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}};
-}
+ my @events = @{_scan_contract_case_marker_events($code)};
  push @events, @{_scan_inline_switch_branch_events($code, 'case')};
  return \@events
 }
 
 sub _scan_contract_default_flow {
  my ($code) = @_;
- my @events;
-while ($code =~ /\b(?<head>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
- my $call = _parse_method_function_expr($+{head});
- next unless $call;
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
- next unless $effective_args;
- my $raw = $+{head}.($+{block} // '');
- push @events, {raw => $raw, args => {}};
-}
+ my @events = @{_scan_contract_default_marker_events($code)};
  push @events, @{_scan_inline_switch_branch_events($code, 'default')};
  return \@events
 }
