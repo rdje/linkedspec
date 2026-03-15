@@ -15181,6 +15181,258 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_marker_switch_structured_branch_surfaces_keep_deep_marker_nesting_parity' => sub {
+    plan tests => 13;
+
+    my $marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|")
+    if(scalar(level1))
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    else()
+      return_undef()
+    endif()
+  default()
+    return_undef()
+  endswitch()
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    if(scalar(level1))
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    else()
+      return_undef()
+    endif()
+  }
+  default() {
+    return_undef()
+  }
+  endswitch()
+ }
+SPEC
+
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with deeper alternating marker if/switch nesting');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting');
+    is_deeply($marker_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge marker-style switch structured branch-body surfaces keep identical ACODE output across deeper alternating marker if/switch nesting');
+
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch plain branch baseline with deeper alternating marker if/switch nesting avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting avoids RAW_PERL fallback');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch plain branch baseline with deeper alternating marker if/switch nesting avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting avoids raw Perl dependency');
+    is($marker_meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch plain branch baseline with deeper alternating marker if/switch nesting avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting avoids unresolved-helper hits');
+    is_deeply($marker_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge marker-style switch structured branch-body surfaces preserve canonical node coverage across deeper alternating marker if/switch nesting');
+    is_deeply($marker_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, 'action-edge marker-style switch structured branch-body surfaces preserve canonical hit counts across deeper alternating marker if/switch nesting');
+    ok(
+        $marker_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge marker-style switch structured branch-body surfaces stay language-agnostic action-IR ready across deeper alternating marker if/switch nesting',
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge marker-style switch structured branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting',
+    );
+};
+subtest 'method_like_full_lifecycle_marker_switch_structured_branch_surfaces_keep_deep_marker_nesting_parity' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle marker-style switch structured branch-body surfaces with deeper alternating marker if/switch nesting" => sub {
+            plan tests => 9;
+
+            my $marker_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|")
+    if(scalar(level1))
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    else()
+      return_undef()
+    endif()
+  default()
+    return_undef()
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    if(scalar(level1))
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    else()
+      return_undef()
+    endif()
+  }
+  default() {
+    return_undef()
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with deeper alternating marker if/switch nesting");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting");
+
+            my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($marker_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle marker-style switch structured branch-body surfaces keep identical $code_key output across deeper alternating marker if/switch nesting");
+            is($marker_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style switch plain branch baseline with deeper alternating marker if/switch nesting avoids RAW_PERL fallback");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting avoids RAW_PERL fallback");
+            is_deeply($marker_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle marker-style switch structured branch-body surfaces preserve canonical node coverage across deeper alternating marker if/switch nesting");
+            is_deeply($marker_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle marker-style switch structured branch-body surfaces preserve canonical hit counts across deeper alternating marker if/switch nesting");
+            ok(
+                $marker_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $marker_meta->{language_agnostic_action_ir_ready} &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle marker-style switch structured branch-body surfaces stay language-agnostic action-IR ready across deeper alternating marker if/switch nesting",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle marker-style switch structured branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_structured_branch_surfaces_keep_nested_multi_case_marker_switch_parity' => sub {
     plan tests => 13;
 

@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Deep Marker Parity On Marker Switch Branch Carriers
+## Summary
+Extended the deep mutual marker-flow contract across the marker-style outer switch structured branch-body carriers. Plain `case(value)` / `default()` branches and attached `case(value) { ... }` / `default() { ... }` branches are now regression-locked in parity for a representative deeper alternating marker `if/switch` nesting chain, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added deeper alternating marker-flow parity coverage across the marker-style outer switch structured branch-body carriers on action-edge surfaces:
+  - plain branch-marker carrier `case(value)` / `default()`
+  - attached-block carrier `case(value) { ... }` / `default() { ... }`
+- Added the same parity coverage across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - identical output shape across the two supported marker-style outer-switch branch carriers
+  - zero RAW_PERL fallback
+  - zero raw-Perl dependency on action-edge surfaces
+  - zero unresolved-helper hits
+  - language-agnostic readiness
+  - identical canonical node coverage and hit counts across the two carrier forms
+  - IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical node presence for the deeper alternating nesting shape
+- Clarified in the roadmap and guides that marker-style outer switch branch-body parity now covers the deeper alternating marker-nesting contract too, not only the broader nested marker-switch shape.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Deep Marker-Nesting Parity On Inline Switch Branch Carriers
 ## Summary
 Extended the deep mutual marker-flow contract across the two supported inline composite switch branch-body carriers. `case(value, { ... })` / `default({ ... })` and `case(value) { ... }` / `default() { ... }` are now regression-locked in parity for a representative deeper alternating marker `if/switch` nesting chain, across action-edge and the full lifecycle family.

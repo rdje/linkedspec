@@ -10,6 +10,22 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Extended the deep mutual marker-flow contract across the marker-style outer switch structured branch-body carriers:
+  - plain branch-marker carrier `case(value)` / `default()`,
+  - attached-block carrier `case(value) { ... }` / `default() { ... }`,
+  - and the representative deeper alternating marker `if/switch` nesting chain is now regression-locked in parity across those two carriers on action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - marker-style outer switch branch-body parity now covers the deeper alternating marker-nesting contract too,
+  - not only the broader nested marker-switch shape.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice extends parity coverage inside an already-supported control-flow surface without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Extended the deep mutual marker-flow contract across the two inline composite switch structured branch-body carriers:
   - `case(value, { ... })` / `default({ ... })`,
   - `case(value) { ... }` / `default() { ... }`,

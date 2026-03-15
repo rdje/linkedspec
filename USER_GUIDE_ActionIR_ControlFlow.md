@@ -232,6 +232,7 @@ Current direction note:
 - and they now have explicit regression coverage for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too,
 - and the two supported inline-switch structured branch-body carriers `case(value, { ... })` / `default({ ... })` and `case(value) { ... }` / `default() { ... }` are now regression-locked in parity for that broader nested marker-switch shape too,
 - and those same two inline-switch structured branch-body carriers are now regression-locked in parity for the deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape too,
+- and the marker-style outer switch structured branch-body surfaces are now regression-locked in parity for that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape too, across plain branch markers and attached branch blocks,
 - and the structured marker-style outer switch surface is now regression-locked in parity across its plain branch-marker form and attached-block switch branch sugar for that broader nested marker-switch shape too,
 - and they now have explicit regression coverage for nested composite `if(...)` forms too, including both inline composite and attached-block inner `if` surfaces,
 - and they now have explicit regression coverage for parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies too, even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow,
