@@ -66,6 +66,7 @@ For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested s
 
 Those nested switch forms can now live inside composite-`if(...)` branch bodies without dropping out of canonical rewrite readiness.
 That nested inline-composite `switch(...)` coverage inside composite-`if(...)` branch bodies now explicitly includes broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` form.
+That same composite-`if(...)` nested marker-switch contract now explicitly includes the deeper `if/elseif/else` branch shape too, not only the simpler `if/else` shape.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.
@@ -229,6 +230,7 @@ Current direction note:
 - and that nested composite-`if(...)` coverage now explicitly includes the deeper `elseif(...)` branch shape too,
 - and that nested inline-composite `switch(...)` coverage now explicitly includes broader multi-`case(...)` shapes too,
 - and composite `if(...)` branch bodies now also have explicit regression coverage for broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` flow, across both structured inline branch-block and attached-block `if(...)` forms,
+- and those same composite `if(...)` branch bodies now also have explicit regression coverage for the deeper `if/elseif/else` branch shape with nested marker-style `switch(...) ... endswitch()` flow,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.
 

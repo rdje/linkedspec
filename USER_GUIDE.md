@@ -257,6 +257,8 @@ That same structured branch-block path now keeps full rewrite readiness for nest
 
 That nested marker-style `switch(...) ... endswitch()` coverage inside composite-`if(...)` branch bodies now explicitly includes broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` form.
 
+That same composite-`if(...)` nested marker-switch contract now explicitly includes the deeper `if/elseif/else` branch shape too, not only the simpler `if/else` shape.
+
 That nested-switch support is broader than marker-style `switch(...) ... endswitch()` now. The same composite-`if(...)` branch-body surfaces are regression-locked for nested inline-composite `switch(...)` forms too, including the attached switch-branch sugar `case(value) { ... }` / `default() { ... }`.
 
 Those inline composite control-flow forms are now regression-locked across the full lifecycle family too, not only on the earlier `LX` proof point. That means `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` all now carry the same lifecycle-wide support for:
