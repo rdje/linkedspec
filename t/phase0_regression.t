@@ -15139,6 +15139,152 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_marker_if_and_switch_support_deep_mutual_nesting' => sub {
+    plan tests => 7;
+
+    my $spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(scalar(level1))
+    switch(scalar(kind1))
+    case("A")
+      if(scalar(level2))
+        switch(scalar(kind2))
+        case("B")
+          if(scalar(level3))
+            switch(scalar(kind3))
+            case("C")
+              return_undef()
+            default()
+              return_undef()
+            endswitch()
+          else()
+            return_undef()
+          endif()
+        default()
+          return_undef()
+        endswitch()
+      else()
+        return_undef()
+      endif()
+    default()
+      return_undef()
+    endswitch()
+  else()
+    return_undef()
+  endif()
+ }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge deeper alternating marker if/switch nesting');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'action-edge deeper alternating marker if/switch nesting avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'action-edge deeper alternating marker if/switch nesting avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'action-edge deeper alternating marker if/switch nesting avoids unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready}, 'action-edge deeper alternating marker if/switch nesting stays language-agnostic action-IR ready');
+    ok(
+        ($meta->{canonical_action_ir_hits}{IF} // 0) >= 3 &&
+        ($meta->{canonical_action_ir_hits}{SWITCH} // 0) >= 3 &&
+        ($meta->{canonical_action_ir_hits}{CASE} // 0) >= 3 &&
+        ($meta->{canonical_action_ir_hits}{DEFAULT} // 0) >= 3,
+        'action-edge deeper alternating marker if/switch nesting preserves repeated IF/SWITCH/CASE/DEFAULT helper coverage',
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'action-edge deeper alternating marker if/switch nesting preserves IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes',
+    );
+};
+subtest 'method_like_full_lifecycle_marker_if_and_switch_support_deep_mutual_nesting' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle deeper alternating marker if/switch nesting" => sub {
+            plan tests => 6;
+
+            my $spec = <<"SPEC";
+Top::&
+$tag {
+  if(scalar(level1))
+    switch(scalar(kind1))
+    case("A")
+      if(scalar(level2))
+        switch(scalar(kind2))
+        case("B")
+          if(scalar(level3))
+            switch(scalar(kind3))
+            case("C")
+              return_undef()
+            default()
+              return_undef()
+            endswitch()
+          else()
+            return_undef()
+          endif()
+        default()
+          return_undef()
+        endswitch()
+      else()
+        return_undef()
+      endif()
+    default()
+      return_undef()
+    endswitch()
+  else()
+    return_undef()
+  endif()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle deeper alternating marker if/switch nesting");
+
+            my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+            is($meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle deeper alternating marker if/switch nesting avoids RAW_PERL fallback");
+            is($meta->{unresolved_helper_count}, 0, "$tag lifecycle deeper alternating marker if/switch nesting avoids unresolved-helper hits");
+            ok($meta->{language_agnostic_action_ir_ready}, "$tag lifecycle deeper alternating marker if/switch nesting stays language-agnostic action-IR ready");
+            ok(
+                ($meta->{canonical_action_ir_hits}{IF} // 0) >= 3 &&
+                ($meta->{canonical_action_ir_hits}{SWITCH} // 0) >= 3 &&
+                ($meta->{canonical_action_ir_hits}{CASE} // 0) >= 3 &&
+                ($meta->{canonical_action_ir_hits}{DEFAULT} // 0) >= 3,
+                "$tag lifecycle deeper alternating marker if/switch nesting preserves repeated IF/SWITCH/CASE/DEFAULT helper coverage",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDIF' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle deeper alternating marker if/switch nesting preserves IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 

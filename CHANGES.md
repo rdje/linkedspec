@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Deep Mutual Marker If/Switch Nesting
+## Summary
+Locked the explicit deep-nesting contract for marker-style control flow: marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` are now tracked as allowing arbitrarily deep mutual nesting in structured block contexts, and the regression suite now includes a representative deeper alternating chain across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added a deeper alternating marker-flow regression on action-edge structured blocks:
+  - `if(...) -> switch(...) -> if(...) -> switch(...) -> if(...) -> switch(...)`
+- Added the same deeper alternating marker-flow regression across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - zero RAW_PERL fallback
+  - zero raw-Perl dependency on action-edge surfaces
+  - zero unresolved-helper hits
+  - language-agnostic readiness
+  - repeated IF/SWITCH/CASE/DEFAULT helper coverage
+  - canonical IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH node presence
+- Clarified in the roadmap and guides that this is a semantic intent statement:
+  - there is no DSL-fixed nesting cap for mutual marker `if`/`switch` nesting in structured block contexts,
+  - practical limits come from normal runtime recursion and resource ceilings instead.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Marker-Style Outer Switch Parity For Broader Nested Marker Flow
 ## Summary
 Regression-locked the matching marker-style outer-switch parity seam on the broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` shape: plain marker branches `case(value)` / `default()` and attached switch branch-block sugar `case(value) { ... }` / `default() { ... }` now stay aligned there too, not only on the earlier flat helper-only branch-body baseline.

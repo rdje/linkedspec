@@ -10,6 +10,21 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Locked the explicit deep mutual marker-flow contract:
+  - marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` are intended to allow arbitrarily deep mutual nesting in structured block contexts,
+  - and the suite now carries a representative deeper alternating `if -> switch -> if -> switch -> if -> switch` regression across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the intended limit precisely:
+  - there is no DSL-fixed semantic nesting cap here,
+  - practical limits come from normal runtime recursion and resource ceilings instead.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice makes the marker-flow nesting contract explicit and regression-locked without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Regression-locked the matching marker-style outer-switch parity seam on the broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` shape:
   - plain marker branches `case(value)` / `default()`, and
   - attached switch branch-block sugar `case(value) { ... }` / `default() { ... }`
