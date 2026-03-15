@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Marker Switch Flow Inside Attached Switch Branch Blocks
+## Summary
+Regression-locked the next structured-block-context follow-up for attached switch branch sugar. Attached `case(value) { ... }` / `default() { ... }` branch bodies now have explicit coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow on both inline composite and marker-style outer switch surfaces, across action-edge and lifecycle coverage.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions for:
+  - inline composite outer switch with attached branch blocks containing nested marker-style switch flow,
+  - marker-style outer switch with attached branch blocks containing nested marker-style switch flow.
+- Added lifecycle-family regression loops for the same nested attached-branch-block switch shape across:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked the expected canonical helper mix for those supported shapes:
+  - nested `SWITCH` / `CASE` / `DEFAULT` / `ENDSWITCH`,
+  - plus the surrounding outer switch nodes,
+  - while preserving zero RAW_PERL fallback, zero unresolved-helper hits, and language-agnostic readiness.
+- Clarified in the roadmap and guides that attached switch branch blocks should now be treated as structured block contexts for nested marker-style switch flow as well as nested marker-style `if(...) ... endif()`.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow coverage without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Support Nested Marker Flow Inside Attached Switch Branch Blocks
 ## Summary
 Fixed the compile-path rewrite bug that was still leaving inline and marker-style attached switch branch bodies unresolved when those branch blocks contained nested marker flow like `if(...) ... endif()`. Attached-block switch sugar now supports nested structured control flow cleanly on both action-edge and lifecycle surfaces.

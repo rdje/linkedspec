@@ -9,6 +9,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Regression-locked the next attached-switch structured-context follow-up:
+  - attached `case(value) { ... }` and `default() { ... }` branch bodies now have explicit action-edge and lifecycle coverage for nested marker-style `switch(...) ... endswitch()` flow,
+  - on both inline composite outer switch surfaces and marker-style outer switch surfaces,
+  - with expected nested `SWITCH` / `CASE` / `DEFAULT` / `ENDSWITCH` helper coverage and zero unresolved-helper hits.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression coverage for already-supported structured control-flow contexts without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Fixed the compile-path rewrite gap for attached-block switch branch bodies that contain nested marker flow:
   - inline composite `switch(expr, case(value) { if(...) ... endif() }, default() { ... })` now keeps zero unresolved-helper hits,
   - structured marker-style `switch(expr) case(value) { if(...) ... endif() } default() { ... } endswitch()` now does the same,

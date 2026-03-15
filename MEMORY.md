@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Regression-locked the next attached-switch structured-context follow-up:
+  - attached `case(value) { ... }` and `default() { ... }` branch bodies now have explicit coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow,
+  - on both inline composite outer switch surfaces and marker-style outer switch surfaces,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow coverage without moving the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Fixed the compile-path rewrite gap for attached-block switch branch bodies that contain nested marker flow:
   - inline composite `switch(expr, case(value) { if(...) ... endif() }, default() { ... })` now stays zero-fallback and zero-unresolved,
   - structured marker-style `switch(expr) case(value) { if(...) ... endif() } default() { ... } endswitch()` now does the same,

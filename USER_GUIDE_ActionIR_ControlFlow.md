@@ -211,6 +211,7 @@ Current direction note:
 - `case(value, { ... })` and `default({ ... })` are now supported as the first structured inline-switch branch-body extension,
 - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now supported too, on both inline composite and structured marker-style switch surfaces,
 - and those attached switch branch blocks can now carry nested marker-style flow such as `if(...) ... endif()` while staying fully language-agnostic-ready,
+- and they now have explicit regression coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.
 
@@ -249,6 +250,26 @@ switch(scalar(op))
     return_undef()
   }
 endswitch()
+```
+
+Nested marker-style switch inside an attached branch block is also supported:
+
+```text
+switch(
+  scalar(op),
+  case("|") {
+    switch(scalar(mode))
+      case("x")
+        say("x")
+        return_undef()
+      default()
+        return_undef()
+    endswitch()
+  },
+  default() {
+    return_undef()
+  }
+)
 ```
 
 ## Inline composite `if(...)` design direction
