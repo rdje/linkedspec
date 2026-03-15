@@ -230,6 +230,7 @@ Current direction note:
 - and they now have explicit regression coverage for parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies too, even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow,
 - and that same deeper attached-switch parity now has explicit regression coverage for nested marker-style `switch(...) ... endswitch()` flow inside those deeper `if/elseif/else` branches too,
 - and that same attached-switch parity now has explicit regression coverage for the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside those deeper `if/elseif/else` branches too,
+- and that broader multi-`case(...)` nested inline-switch parity now spans both inline composite and marker-style outer switch families too,
 - and they now have explicit regression coverage for nested inline-composite `switch(...)` forms too, on both inline composite and marker-style outer switch surfaces,
 - and that nested composite-`if(...)` coverage now explicitly includes the deeper `elseif(...)` branch shape too,
 - and that nested inline-composite `switch(...)` coverage now explicitly includes broader multi-`case(...)` shapes too,
