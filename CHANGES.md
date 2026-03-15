@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Composite If Flow Inside Attached Switch Branch Blocks
+## Summary
+Regression-locked the next attached-switch structured-context follow-up. Attached `case(value) { ... }` and `default() { ... }` switch branch bodies now have explicit coverage for nested composite `if(...)` flow too, on both inline composite and marker-style outer switch surfaces, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions for attached switch branch bodies containing nested composite `if(...)` flow on both:
+  - inline composite outer `switch(expr, case(...), default(...))`, and
+  - marker-style outer `switch(expr) ... case(...) ... default() ... endswitch()` surfaces.
+- Added lifecycle-family regression loops for the same nested composite-`if(...)` branch-body contract across:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked the expected contract there:
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency,
+  - zero unresolved-helper hits,
+  - expected nested `IF` / `ELSE` plus outer `SWITCH` / `CASE` / `DEFAULT` helper coverage,
+  - and lifecycle-family parity across both outer switch families.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow coverage without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Nested Inline Switch Flow Inside Composite If Branch Blocks
 ## Summary
 Regression-locked the broader nested-switch contract for structured composite `if(...)` branch bodies. Nested inline-composite `switch(...)` forms now have explicit coverage inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks, including the attached switch-branch sugar `case(value) { ... }` / `default() { ... }`.

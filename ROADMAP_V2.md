@@ -77,6 +77,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
      - `case(value) { ... }` / `default() { ... }`,
    - keep attached-block switch branch bodies fully aligned with structured-block-context flow semantics, including nested marker flow such as `if(...) ... endif()` inside those branch bodies,
    - keep attached-block switch branch bodies fully aligned with nested marker-style switch flow semantics too, not only nested marker-style `if(...) ... endif()` flow,
+   - keep attached-block switch branch bodies aligned for nested composite `if(...)` forms too, including both inline composite and attached-block inner `if` surfaces, on both inline composite and marker-style outer switch surfaces,
    - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` aligned with the now-landed structured-block-context attached form `if(cond) { ... } elseif(cond2) { ... } else() { ... }`,
    - keep structured inline and attached composite `if(...)` branch bodies aligned for nested marker-style `switch(...) ... endswitch()` flow too, not only for flat helper sequences or nested marker-style `if(...) ... endif()` flow,
    - keep those same composite-`if(...)` branch bodies aligned for nested inline-composite `switch(...)` forms too, including attached switch-branch sugar such as `case(value) { ... }` / `default() { ... }`,

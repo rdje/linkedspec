@@ -204,6 +204,7 @@ Status interpretation note:
        - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now landed too, on both inline composite `switch(...)` and structured marker-style `switch(...) ... endswitch()` surfaces,
        - attached-block switch branch bodies now also support nested marker-style flow such as `if(...) ... endif()` without losing language-agnostic rewrite readiness,
        - and attached-block switch branch bodies are now regression-locked for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
+       - and attached-block switch branch bodies are now regression-locked for nested composite `if(...)` forms too, including both inline composite `if(cond, ..., else(...))` and attached-block `if(cond) { ... } else() { ... }` inner surfaces on both outer switch families,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
      - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too,
