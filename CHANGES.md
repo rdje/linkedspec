@@ -1,5 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Support Nested Marker Flow Inside Attached Switch Branch Blocks
+## Summary
+Fixed the compile-path rewrite bug that was still leaving inline and marker-style attached switch branch bodies unresolved when those branch blocks contained nested marker flow like `if(...) ... endif()`. Attached-block switch sugar now supports nested structured control flow cleanly on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Fixed the rewrite pipeline so later nested helper events are skipped once an earlier parent rewrite has already replaced the source statement.
+- That prevents stale child `if` / `else` / `endif` / `case` / `default` / `switch` events from mutating flow stacks after the parent `switch(...)` form has already been lowered.
+- With that fix in place, these attached-block switch surfaces now stay fully language-agnostic-ready even when branch bodies contain nested marker flow:
+  - inline composite `switch(expr, case(value) { if(...) ... endif() }, default() { ... })`
+  - structured marker-style `switch(expr) case(value) { if(...) ... endif() } default() { ... } endswitch()`
+- Added focused action-edge and lifecycle regressions to lock those supported nested-flow branch-body forms.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice fixes and expands a supported control-flow surface without changing the overall track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Support Attached-Block Switch Branch Sugar
 ## Summary
 Supported attached-block switch branch sugar on the switch surfaces that were explicitly discussed and agreed first. `case(value) { ... }` and `default() { ... }` now lower cleanly on both inline composite `switch(...)` forms and structured marker-style `switch(...) ... case(...) ... default() ... endswitch()` blocks, across action-edge and lifecycle surfaces.

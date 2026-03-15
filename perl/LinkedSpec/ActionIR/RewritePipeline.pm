@@ -81,17 +81,17 @@ sub _lower_action_code_from_canonical_ir {
   my $kind = $event->{kind} // '';
   next if $kind eq 'RAW_PERL';
 
-  my $contract_id = $event->{contract_id};
-  next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
+ my $contract_id = $event->{contract_id};
+ next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
 
-  my $source_stmt = $event->{raw};
-  next unless defined($source_stmt) && length($source_stmt);
+ my $source_stmt = $event->{raw};
+ next unless defined($source_stmt) && length($source_stmt);
+  my $pos = index($rewritten, $source_stmt);
+  next if $pos < 0;
+
   my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
   next unless defined($lowered_stmt) && length($lowered_stmt);
   next if $lowered_stmt eq $source_stmt;
-
-  my $pos = index($rewritten, $source_stmt);
-  next if $pos < 0;
   substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
  }
  if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {

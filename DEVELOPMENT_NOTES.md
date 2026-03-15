@@ -9,6 +9,24 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Fixed the compile-path rewrite gap for attached-block switch branch bodies that contain nested marker flow:
+  - inline composite `switch(expr, case(value) { if(...) ... endif() }, default() { ... })` now keeps zero unresolved-helper hits,
+  - structured marker-style `switch(expr) case(value) { if(...) ... endif() } default() { ... } endswitch()` now does the same,
+  - and the lifecycle family is regression-locked for those supported nested-flow switch branch bodies too.
+- Root cause and fix:
+  - the rewrite pipeline was still executing nested child helper lowerers after a parent statement had already been replaced,
+  - that stale child processing dirtied flow stacks and forced the pipeline to fall back to the original code,
+  - the fix now skips later helper applications when the original source statement is no longer present in the rewritten code.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice fixes and broadens a supported attached-block switch surface without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Landed attached-block switch branch sugar on the two switch surfaces that were explicitly staged first:
   - inline composite `switch(expr, case(value) { ... }, default() { ... })`,
   - and structured marker-style `switch(expr) case(value) { ... } default() { ... } endswitch()`,

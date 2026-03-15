@@ -210,8 +210,46 @@ Current direction note:
 - the current composite baseline remains `switch(expr, case(...), default(...))` with explicit action lists,
 - `case(value, { ... })` and `default({ ... })` are now supported as the first structured inline-switch branch-body extension,
 - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now supported too, on both inline composite and structured marker-style switch surfaces,
+- and those attached switch branch blocks can now carry nested marker-style flow such as `if(...) ... endif()` while staying fully language-agnostic-ready,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.
+
+Nested structured flow example:
+
+```text
+switch(
+  scalar(op),
+  case("|") {
+    if(scalar(on))
+      say("pipe")
+      return_undef()
+    else()
+      return_undef()
+    endif()
+  },
+  default() {
+    return_undef()
+  }
+)
+```
+
+That same nested marker-flow pattern is also supported on the marker-style switch surface:
+
+```text
+switch(scalar(op))
+  case("|") {
+    if(scalar(on))
+      say("pipe")
+      return_undef()
+    else()
+      return_undef()
+    endif()
+  }
+  default() {
+    return_undef()
+  }
+endswitch()
+```
 
 ## Inline composite `if(...)` design direction
 The first inline composite `if(...)` slice is now supported.
