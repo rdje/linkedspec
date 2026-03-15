@@ -1,5 +1,35 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Composite-If/Switch Parity Inside Attached Switch Branch Blocks
+## Summary
+Regression-locked attached switch branch blocks one level deeper: both inline composite and marker-style outer switch surfaces now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies, even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that compare:
+  - inline composite outer switch attached branch blocks carrying nested structured inline composite `if(...)` branch-block bodies with nested inline-composite `switch(...)` flow,
+  - against the same outer switch surface carrying nested attached-block composite `if(...)` branch bodies with the same nested inline-switch flow,
+  - and the same parity lock on marker-style outer switch attached branch blocks.
+- Added the same regression locks across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked parity on:
+  - descriptor build success
+  - current descriptor code-slot shape equality
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - zero raw-Perl dependency on action-edge surfaces
+  - language-agnostic readiness
+  - canonical node and hit-count equality across both inner composite-`if(...)` surfaces
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Nested Inline Switch Flow Inside Composite If/Elseif Branch Blocks
 ## Summary
 Regression-locked the deeper composite-`if(...)` `elseif(...)` branch shape when branch bodies carry nested inline-composite `switch(...)` flow. Structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit `if/elseif/else` coverage for that nested inline-switch shape across action-edge and the full lifecycle family.
