@@ -10,6 +10,19 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Extended lifecycle-family regression coverage for inline composite control flow:
+  - inline composite `if(...)` and `switch(...)` action-list forms are now regression-locked across `I`, `LS`, `LE`, `E`, `EX`, and `IT`,
+  - the structured branch-block variants of those same inline composite forms are now regression-locked across that same remaining lifecycle family too,
+  - and the docs now state explicitly that inline composite control-flow support is lifecycle-wide across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, with `LX` kept only as the representative example family.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice extends lifecycle-family regression coverage without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Made structured inline-composite `if(...)` branch bodies an explicit supported contract:
   - `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is now regression-locked on both action-edge and lifecycle surfaces,
   - those branch-body forms match the canonical inline action-list baseline on `ACODE` or `LXCODE`, canonical action-IR node coverage, fallback counts, and language-agnostic readiness,

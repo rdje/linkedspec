@@ -235,6 +235,12 @@ That follow-up is no longer only about future `switch(...)` work: the first inli
 
 That inline-composite `if(...)` surface now has its first structured branch-body extension too: `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is supported alongside the older explicit action-list form, so compact conditional flow can still carry semicolonless structured helper sequences without falling back to raw Perl.
 
+Those inline composite control-flow forms are now regression-locked across the full lifecycle family too, not only on the earlier `LX` proof point. That means `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` all now carry the same lifecycle-wide support for:
+- inline composite `if(cond, ..., elseif(...), else(...))`
+- structured inline-composite `if(cond, { ... }, elseif(..., { ... }), else({ ... }))`
+- inline composite `switch(expr, case(...), default(...))`
+- structured inline-composite `switch(expr, case(value, { ... }), default({ ... }))`
+
 One boundary is now explicit in the roadmap too: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface. That means they belong inside method-only structured blocks such as action-edge `{ ... }`, lifecycle blocks like `I { ... }` / `LS { ... }` / `LE { ... }` / `E { ... }` / `EX { ... }` / `IT { ... }` / `LX { ... }`, and future nested structured branch bodies like `case(value, { ... })`. By contrast, self-contained composite forms such as `switch(expr, case(...), default(...))` and `if(cond, ..., elseif(...), else(...))` remain single-call control-flow forms.
 
 ## Runtime Match Values You Will See Repeatedly

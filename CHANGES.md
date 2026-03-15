@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Extend Inline Composite Lifecycle Parity
+## Summary
+Extended inline composite control-flow regression coverage across the remaining lifecycle family. Inline composite `if(...)` / `switch(...)` forms and their structured branch-block variants are now regression-locked on `I`, `LS`, `LE`, `E`, `EX`, and `IT`, not only on the earlier `LX` proof point.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added lifecycle-family regression loops for the remaining lifecycle sections:
+  - inline composite `if(cond, ..., elseif(...), else(...))`
+  - inline composite `switch(expr, case(...), default(...))`
+  - structured inline-composite `if(cond, { ... }, elseif(..., { ... }), else({ ... }))`
+  - structured inline-composite `switch(expr, case(value, { ... }), default({ ... }))`
+- Locked those forms across `I`, `LS`, `LE`, `E`, `EX`, and `IT` to preserve:
+  - identical lifecycle code output versus the fluent or action-list baselines,
+  - identical canonical action-IR node coverage and hit counts,
+  - zero RAW_PERL fallback,
+  - zero unresolved-helper hits,
+  - and language-agnostic readiness.
+- Clarified in the roadmap and guides that inline composite control-flow support is now lifecycle-wide across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, with `LX` remaining only the representative example family in the docs.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice extends lifecycle-family regression coverage without changing the overall track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Structured Inline Composite If Branch Bodies
 ## Summary
 Made the already-working structured inline-composite `if(...)` branch-body form an explicit supported contract. `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is now regression-locked against the canonical inline action-list baseline on both action-edge and lifecycle surfaces.

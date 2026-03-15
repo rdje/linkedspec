@@ -265,6 +265,11 @@ if(
 
 That structured inline-composite `if(...)` form is now supported too. It uses the same one-header / one-body-carrier rule as the structured inline-composite `switch(...)` branch-body extension, and it reuses the normal semicolon-light structured statement splitter inside each branch body.
 
+Lifecycle-family note:
+- the inline composite control-flow surfaces in this guide are no longer only `LX` proof points,
+- action-list and structured branch-block forms for inline composite `if(...)` and `switch(...)` are now regression-locked across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+- and the guide continues to show `LX` examples only because they are representative, not because the support stops there.
+
 Longer-term ergonomics may move toward attached-block forms:
 
 ```text
