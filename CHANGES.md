@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Structured Switch-Branch Parity For Broader Nested Marker Flow
+## Summary
+Regression-locked the deeper parity seam between the two supported inline-switch structured branch-body carriers: `case(value, { ... })` / `default({ ... })` and `case(value) { ... }` / `default() { ... }` now stay aligned on the broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` shape too, not only on the earlier flat helper-only branch-body baseline.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Normalized scanner-side inline-switch branch event accounting in `LinkedSpec::ActionIR::Scanner::FlowRules` so inline-composite `case(...)` / `default(...)` branch expressions contribute the same outer CASE/DEFAULT canonical metadata across action-list, structured-argument, and attached-block branch-body carriers.
+- Added focused action-edge parity regressions that compare:
+  - inline composite switch structured-argument branch bodies `case(value, { ... })` / `default({ ... })`, and
+  - inline composite switch attached branch bodies `case(value) { ... }` / `default() { ... }`
+- Locked those two surfaces against each other on the broader nested multi-`case(...)` marker-style `switch(...) ... endswitch()` shape.
+- Added the same parity lock across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - identical emitted code-slot shape
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - zero raw-Perl dependency on action-edge surfaces
+  - identical canonical node coverage
+  - identical canonical helper-hit counts
+  - language-agnostic readiness
+  - nested SWITCH/CASE/DEFAULT/ENDSWITCH node presence
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Flow in Attached Switch Branches
 ## Summary
 Regression-locked the broader plain nested marker-switch seam inside attached switch branch blocks: both inline composite and marker-style outer switch surfaces now cover nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms too, not only the simpler single-`case(...)` marker-switch shape.

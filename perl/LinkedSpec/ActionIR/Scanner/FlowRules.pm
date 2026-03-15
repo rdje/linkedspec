@@ -34,6 +34,44 @@ sub try_scan_contract_ir_events {
  return $handler->($code)
 }
 
+sub _scan_inline_switch_branch_events {
+ my ($code, $target_method) = @_;
+ my @events;
+
+ while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+  my $switch_call = _parse_method_function_expr($+{expr});
+  next unless $switch_call;
+  my $switch_args = _normalize_method_args_with_optional_scope($switch_call->{args} || [], 1, undef);
+  next unless $switch_args && @$switch_args >= 2;
+
+  foreach my $branch_expr (@{$switch_args}[1 .. $#$switch_args]) {
+   my $branch_call = _parse_method_function_expr($branch_expr);
+   next unless $branch_call && ($branch_call->{method} // '') eq $target_method;
+
+   if ($target_method eq 'case') {
+    my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 1, undef);
+    next unless $effective_args && @$effective_args >= 1;
+    push @events, {
+     raw  => _trim_action_ir_value($branch_expr),
+     args => {value => _trim_action_ir_value($effective_args->[0])},
+    };
+    next;
+   }
+
+   if ($target_method eq 'default') {
+    my $effective_args = _normalize_method_args_with_optional_scope($branch_call->{args} || [], 0, undef);
+    next unless $effective_args;
+    push @events, {
+     raw  => _trim_action_ir_value($branch_expr),
+     args => {},
+    };
+   }
+  }
+ }
+
+ return \@events
+}
+
 sub _scan_contract_if_flow {
  my ($code) = @_;
  my @events;
@@ -113,6 +151,7 @@ while ($code =~ /\b(?<head>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"
  my $raw = $+{head}.($+{block} // '');
  push @events, {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}};
 }
+ push @events, @{_scan_inline_switch_branch_events($code, 'case')};
  return \@events
 }
 
@@ -127,6 +166,7 @@ while ($code =~ /\b(?<head>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])
  my $raw = $+{head}.($+{block} // '');
  push @events, {raw => $raw, args => {}};
 }
+ push @events, @{_scan_inline_switch_branch_events($code, 'default')};
  return \@events
 }
 

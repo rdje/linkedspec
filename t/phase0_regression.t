@@ -14695,6 +14695,232 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_inline_composite_switch_structured_branch_surfaces_keep_nested_multi_case_marker_switch_parity' => sub {
+    plan tests => 13;
+
+    my $list_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|", {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }),
+    default({
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    })
+  )
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    },
+    default() {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }
+  )
+ }
+SPEC
+
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested multi-case marker switch flow');
+    is_deeply($list_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge inline composite switch structured branch-body surfaces keep identical ACODE output across nested multi-case marker switch flow');
+
+    my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($list_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch attached-branch-block sugar with nested multi-case marker switch flow avoids RAW_PERL fallback');
+    is($list_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch attached-branch-block sugar with nested multi-case marker switch flow avoids raw Perl dependency');
+    is($list_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch attached-branch-block sugar with nested multi-case marker switch flow avoids unresolved-helper hits');
+    is_deeply($list_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge inline composite switch structured branch-body surfaces preserve canonical node coverage across nested multi-case marker switch flow');
+    is_deeply($list_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, 'action-edge inline composite switch structured branch-body surfaces preserve canonical hit counts across nested multi-case marker switch flow');
+    ok(
+        $list_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge inline composite switch structured branch-body surfaces stay language-agnostic action-IR ready across nested multi-case marker switch flow',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite switch structured branch-body surfaces preserve nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across the broader multi-case marker switch shape',
+    );
+};
+subtest 'method_like_full_lifecycle_inline_composite_switch_structured_branch_surfaces_keep_nested_multi_case_marker_switch_parity' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle inline composite switch structured branch-body surfaces with nested multi-case marker switch flow" => sub {
+            plan tests => 9;
+
+            my $list_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|", {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }),
+    default({
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    },
+    default() {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested multi-case marker switch flow");
+
+            my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($list_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle inline composite switch structured branch-body surfaces keep identical $code_key output across nested multi-case marker switch flow");
+            is($list_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow avoids RAW_PERL fallback");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch attached-branch-block sugar with nested multi-case marker switch flow avoids RAW_PERL fallback");
+            is_deeply($list_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle inline composite switch structured branch-body surfaces preserve canonical node coverage across nested multi-case marker switch flow");
+            is_deeply($list_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle inline composite switch structured branch-body surfaces preserve canonical hit counts across nested multi-case marker switch flow");
+            ok(
+                $list_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $list_meta->{language_agnostic_action_ir_ready} &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle inline composite switch structured branch-body surfaces stay language-agnostic action-IR ready across nested multi-case marker switch flow",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle inline composite switch structured branch-body surfaces preserve nested SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across the broader multi-case marker switch shape",
+            );
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 
