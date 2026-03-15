@@ -9829,6 +9829,328 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_inline_composite_switch_attached_branch_blocks_accept_nested_multi_case_inline_switch_flow' => sub {
+    plan tests => 10;
+
+    my $spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(
+        scalar(mode),
+        case("x") {
+          return_undef()
+        },
+        case("y") {
+          return_undef()
+        },
+        default() {
+          return_undef()
+        }
+      )
+    },
+    default() {
+      switch(
+        scalar(mode),
+        case("x") {
+          return_undef()
+        },
+        case("y") {
+          return_undef()
+        },
+        default() {
+          return_undef()
+        }
+      )
+    }
+  )
+ }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow avoids unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready}, 'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow stays language-agnostic action-IR ready');
+    is_deeply(
+        $meta->{canonical_action_ir_hits},
+        {
+            CASE    => 3,
+            DEFAULT => 2,
+            RETURN  => 6,
+            SWITCH  => 1,
+        },
+        'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/SWITCH canonical nodes',
+    );
+    is($descr->{spec}{Top}{ACODE}, undef, 'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor ACODE slot shape');
+    ok(
+        !defined($meta->{unresolved_helpers}) || !@{$meta->{unresolved_helpers}},
+        'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow exposes no unresolved helper names',
+    );
+    ok(
+        !defined($meta->{unresolved_helper_statements}) || !@{$meta->{unresolved_helper_statements}},
+        'action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow exposes no unresolved helper statements',
+    );
+};
+subtest 'method_like_full_lifecycle_inline_composite_switch_attached_branch_blocks_accept_nested_multi_case_inline_switch_flow' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow" => sub {
+            plan tests => 7;
+
+            my $spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(
+        scalar(mode),
+        case("x") {
+          return_undef()
+        },
+        case("y") {
+          return_undef()
+        },
+        default() {
+          return_undef()
+        }
+      )
+    },
+    default() {
+      switch(
+        scalar(mode),
+        case("x") {
+          return_undef()
+        },
+        case("y") {
+          return_undef()
+        },
+        default() {
+          return_undef()
+        }
+      )
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow");
+
+            my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+            is($meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow avoids RAW_PERL fallback");
+            is($meta->{unresolved_helper_count}, 0, "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow avoids unresolved-helper hits");
+            ok($meta->{language_agnostic_action_ir_ready}, "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow stays language-agnostic action-IR ready");
+            is_deeply(
+                $meta->{canonical_action_ir_hits},
+                {
+                    CASE     => 3,
+                    DEFAULT  => 2,
+                    RETURN   => 6,
+                    RETURN_A => 1,
+                    SWITCH   => 1,
+                },
+                "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/SWITCH canonical nodes",
+            );
+            is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor $code_key slot shape");
+        };
+    }
+};
+subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_multi_case_inline_switch_flow' => sub {
+    plan tests => 10;
+
+    my $spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    switch(
+      scalar(mode),
+      case("x") {
+        return_undef()
+      },
+      case("y") {
+        return_undef()
+      },
+      default() {
+        return_undef()
+      }
+    )
+  }
+  default() {
+    switch(
+      scalar(mode),
+      case("x") {
+        return_undef()
+      },
+      case("y") {
+        return_undef()
+      },
+      default() {
+        return_undef()
+      }
+    )
+  }
+  endswitch()
+ }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow avoids RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow avoids unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready}, 'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow stays language-agnostic action-IR ready');
+    is_deeply(
+        $meta->{canonical_action_ir_hits},
+        {
+            CASE      => 3,
+            DEFAULT   => 2,
+            ENDSWITCH => 1,
+            RETURN    => 6,
+            SWITCH    => 3,
+        },
+        'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}),
+        'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/ENDSWITCH/SWITCH canonical nodes',
+    );
+    is($descr->{spec}{Top}{ACODE}, undef, 'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor ACODE slot shape');
+    ok(
+        !defined($meta->{unresolved_helpers}) || !@{$meta->{unresolved_helpers}},
+        'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow exposes no unresolved helper names',
+    );
+    ok(
+        !defined($meta->{unresolved_helper_statements}) || !@{$meta->{unresolved_helper_statements}},
+        'action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow exposes no unresolved helper statements',
+    );
+};
+subtest 'method_like_full_lifecycle_marker_switch_attached_branch_blocks_accept_nested_multi_case_inline_switch_flow' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow" => sub {
+            plan tests => 7;
+
+            my $spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    switch(
+      scalar(mode),
+      case("x") {
+        return_undef()
+      },
+      case("y") {
+        return_undef()
+      },
+      default() {
+        return_undef()
+      }
+    )
+  }
+  default() {
+    switch(
+      scalar(mode),
+      case("x") {
+        return_undef()
+      },
+      case("y") {
+        return_undef()
+      },
+      default() {
+        return_undef()
+      }
+    )
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow");
+
+            my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+            is($meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow avoids RAW_PERL fallback");
+            is($meta->{unresolved_helper_count}, 0, "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow avoids unresolved-helper hits");
+            ok($meta->{language_agnostic_action_ir_ready}, "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow stays language-agnostic action-IR ready");
+            is_deeply(
+                $meta->{canonical_action_ir_hits},
+                {
+                    CASE      => 3,
+                    DEFAULT   => 2,
+                    ENDSWITCH => 1,
+                    RETURN    => 6,
+                    RETURN_A  => 1,
+                    SWITCH    => 3,
+                },
+                "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves the expected nested helper mix",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow preserves CASE/DEFAULT/ENDSWITCH/SWITCH canonical nodes",
+            );
+            is($descr->{spec}{Top}{$code_key}, undef, "$tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow keeps the current descriptor $code_key slot shape");
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 

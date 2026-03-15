@@ -207,6 +207,7 @@ Status interpretation note:
        - and attached-block switch branch bodies are now regression-locked for nested composite `if(...)` forms too, including both inline composite `if(cond, ..., else(...))` and attached-block `if(cond) { ... } else() { ... }` inner surfaces on both outer switch families,
        - and attached-block switch branch bodies are now regression-locked for nested inline-composite `switch(...)` forms too, on both inline composite and marker-style outer switch families,
        - and that nested composite-`if(...)` contract is now regression-locked for the deeper `elseif(...)` branch shape too inside those attached switch branch bodies,
+       - and the nested inline-composite `switch(...)` contract there is now regression-locked for a broader multi-`case(...)` shape too, not only the simpler single-`case(...)` form,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
      - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too,
