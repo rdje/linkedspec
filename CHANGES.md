@@ -1,5 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Multi-Case Marker Switch Flow Inside Composite If Branch Blocks
+## Summary
+Regression-locked the broader nested marker-style switch shape inside composite `if(...)` branch bodies. Structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit coverage for nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms too, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that compare:
+  - structured inline composite `if(...)` branch blocks carrying nested multi-`case(...)` marker-style `switch(...) ... endswitch()` flow
+  - against the attached-block composite `if(...)` baseline carrying the same nested marker-style switch shape
+- Added the same regression lock across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked parity on:
+  - descriptor build success
+  - output equality between inline branch-block and attached-block composite `if(...)`
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - language-agnostic readiness
+  - canonical node and hit-count equality
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Nested Multi-Case Inline Switch Flow Inside Composite If Branch Blocks
 ## Summary
 Regression-locked the broader nested inline-composite switch shape inside composite `if(...)` branch bodies. Structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit coverage for nested inline-composite `switch(...)` flow with multiple `case(...)` arms too, across action-edge and the full lifecycle family.
