@@ -56,7 +56,18 @@ sub _looks_like_complete_method_statement {
  return 0 unless defined($trimmed) && length($trimmed);
  _require_method_expr_pkg();
  my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
- return $call ? 1 : 0
+ return 1 if $call;
+
+ if ($trimmed =~ /^(?<head>.+\))\s*(?<block>\{.*\})\s*$/s) {
+  my $head = $trim_action_ir_value->($+{head});
+  my $block = $trim_action_ir_value->($+{block});
+  return 0 unless defined($head) && length($head);
+  return 0 unless defined($block) && $block =~ /^\{.*\}$/s;
+  $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($head);
+  return $call ? 1 : 0;
+ }
+
+ return 0
 }
 
 sub _next_nonspace_char_index {

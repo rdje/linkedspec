@@ -28,13 +28,13 @@ Syntax status note:
   - do not mix inline branch actions and attached branch blocks on the same `case(...)`, `default()`, `if(...)`, or `elseif(...)`,
   - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
   - treat `case(value, { ... })` as the preferred first structured inline-switch extension,
-  - treat `case(value) { ... }` and `default() { ... }` as possible later syntax sugar,
+  - `case(value) { ... }` and `default() { ... }` are now supported switch sugar on both inline composite and structured marker-style switch surfaces,
   - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as a feasible earlier step than attached-block composite `if(cond) { ... }`,
   - and treat marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface.
 - Structured block contexts for those marker-style forms include:
   - top-level action-edge `{ ... }` blocks,
   - lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and `LX { ... }`,
-  - and nested structured branch bodies such as `case(value, { ... })`.
+  - and nested structured branch bodies such as `case(value, { ... })` and `case(value) { ... }`.
 
 ## What this module is responsible for
 This module lowers:
@@ -52,8 +52,8 @@ This module lowers:
 - `return_undef()`
 
 It also supports two switch styles:
-1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), and
-2. inline composite switch arguments (`switch(expr, case(...), default(...))`).
+1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }` and `default() { ... }`, and
+2. inline composite switch arguments (`switch(expr, case(...), default(...))`), including both `case(value, { ... })` / `default({ ... })` and attached `case(value) { ... }` / `default() { ... }` branch-body forms.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.
@@ -209,7 +209,7 @@ switch(
 Current direction note:
 - the current composite baseline remains `switch(expr, case(...), default(...))` with explicit action lists,
 - `case(value, { ... })` and `default({ ... })` are now supported as the first structured inline-switch branch-body extension,
-- later sugar may allow `case(value) { ... }` and `default() { ... }`,
+- attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now supported too, on both inline composite and structured marker-style switch surfaces,
 - but mixed forms like `default(action1(...)) { action2(...) }` are intentionally out of scope,
 - because each branch should have exactly one body carrier.
 

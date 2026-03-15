@@ -6423,6 +6423,171 @@ SPEC
         'lifecycle inline composite switch branch-block form preserves switch plus helper nodes across semicolonless structured branch bodies'
     );
 };
+subtest 'method_like_action_inline_composite_switch_attached_branch_blocks_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $list_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|", {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    }),
+    default({
+      say("miss")
+      return_undef()
+    })
+  )
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    default() {
+      say("miss")
+      return_undef()
+    }
+  )
+ }
+SPEC
+
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar');
+    is_deeply($list_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge inline composite switch attached branch blocks lower to identical ACODE output as the structured-argument branch-block baseline');
+
+    my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($list_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch attached-branch-block sugar avoids RAW_PERL fallback');
+    is($list_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch attached-branch-block sugar avoids raw Perl dependency');
+    is($list_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch structured-argument branch-block baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch attached-branch-block sugar avoids unresolved-helper hits');
+    is_deeply(
+        $attached_meta->{canonical_action_ir_hits},
+        {
+            CASE    => 1,
+            DECLARE => 1,
+            DEFAULT => 1,
+            PUSH    => 1,
+            RETURN  => 2,
+            SAY     => 1,
+            SWITCH  => 1,
+        },
+        'action-edge inline composite switch attached-branch-block sugar preserves the expected SWITCH/CASE/DEFAULT helper mix alongside the nested helper body',
+    );
+    ok(
+        $list_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge inline composite switch attached branch blocks remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge inline composite switch attached-branch-block sugar preserves switch plus helper nodes across semicolonless structured branch bodies'
+    );
+};
+subtest 'method_like_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $list_spec = <<'SPEC';
+Top::&
+LX {
+  switch(
+    scalar(op),
+    case("|", {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    }),
+    default({
+      say("miss")
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+LX {
+  switch(
+    scalar(op),
+    case("|") {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    default() {
+      say("miss")
+      return_undef()
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch structured-argument branch-block baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch attached-branch-block sugar');
+    is($list_descr->{spec}{Top}{LXCODE}, $attached_descr->{spec}{Top}{LXCODE}, 'lifecycle inline composite switch attached branch blocks lower to identical LXCODE output as the structured-argument branch-block baseline');
+
+    my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($list_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite switch structured-argument branch-block baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite switch attached-branch-block sugar avoids RAW_PERL fallback');
+    is($list_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite switch structured-argument branch-block baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite switch attached-branch-block sugar avoids raw Perl dependency');
+    is($list_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite switch structured-argument branch-block baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite switch attached-branch-block sugar avoids unresolved-helper hits');
+    is_deeply(
+        $attached_meta->{canonical_action_ir_hits},
+        {
+            CASE    => 1,
+            DECLARE => 1,
+            DEFAULT => 1,
+            PUSH    => 1,
+            RETURN  => 2,
+            RETURN_A => 1,
+            SAY     => 1,
+            SWITCH  => 1,
+        },
+        'lifecycle inline composite switch attached-branch-block sugar preserves the expected SWITCH/CASE/DEFAULT helper mix alongside the nested helper body',
+    );
+    ok(
+        $list_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'lifecycle inline composite switch attached branch blocks remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'lifecycle inline composite switch attached-branch-block sugar preserves switch plus helper nodes across semicolonless structured branch bodies'
+    );
+};
 subtest 'method_like_action_inline_composite_if_lower_equivalently' => sub {
     plan tests => 12;
 
@@ -6887,6 +7052,96 @@ SPEC
                 scalar(grep { $_ eq 'SWITCH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}),
                 "$tag lifecycle inline composite switch branch-block form preserves SWITCH plus helper canonical nodes",
+            );
+        };
+    }
+};
+subtest 'method_like_full_lifecycle_inline_composite_switch_attached_branch_blocks_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle inline composite switch attached-branch-block form" => sub {
+            plan tests => 8;
+
+            my $list_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|", {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }),
+    default({
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    default() {
+      return_undef()
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar");
+
+            my $list_meta = $list_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($list_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle inline composite switch attached branch blocks lower to identical $code_key output as the structured-argument branch-block baseline");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch attached-branch-block sugar avoids RAW_PERL fallback");
+            is($list_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite switch structured-argument branch-block baseline avoids RAW_PERL fallback");
+            is_deeply(
+                $attached_meta->{canonical_action_ir_hits},
+                {
+                    CASE    => 1,
+                    DECLARE => 1,
+                    DEFAULT => 1,
+                    RETURN  => 2,
+                    RETURN_A => 1,
+                    SWITCH  => 1,
+                },
+                "$tag lifecycle inline composite switch attached-branch-block sugar preserves the expected SWITCH/CASE/DEFAULT helper mix",
+            );
+            ok(
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle inline composite switch attached-branch-block sugar stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle inline composite switch attached-branch-block sugar preserves SWITCH plus helper canonical nodes",
             );
         };
     }
@@ -7363,6 +7618,146 @@ SPEC
                 $block_meta->{unresolved_helper_count} == 0 &&
                 $block_meta->{language_agnostic_action_ir_ready},
                 "semicolonless structured $tag lifecycle switch/case block stays fully language-agnostic-ready",
+            );
+        };
+    }
+};
+subtest 'method_like_action_marker_switch_attached_branch_blocks_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|")
+  declare(array, events)
+  return_array(semantic_annotation, hash("items", array(events)))
+  default()
+  say("miss")
+  return_undef()
+  endswitch()
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  default() {
+    say("miss")
+    return_undef()
+  }
+  endswitch()
+ }
+SPEC
+
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar');
+    is_deeply($marker_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge marker-style switch attached branch blocks lower to identical ACODE output as the canonical marker-style baseline');
+
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style switch attached-branch-block sugar avoids RAW_PERL fallback');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style switch attached-branch-block sugar avoids raw Perl dependency');
+    is($marker_meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge marker-style switch attached-branch-block sugar avoids unresolved-helper hits');
+    is_deeply($marker_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge marker-style switch attached branch blocks preserve canonical action-IR node coverage from the canonical marker-style baseline');
+    ok(
+        $marker_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge marker-style switch attached branch blocks remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge marker-style switch attached-branch-block sugar preserves switch plus helper nodes across semicolonless structured branch bodies'
+    );
+};
+subtest 'method_like_full_lifecycle_marker_switch_attached_branch_blocks_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle marker-style switch attached-branch-block form" => sub {
+            plan tests => 8;
+
+            my $marker_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|")
+  declare(array, events)
+  return_array(semantic_annotation, hash("items", array(events)))
+  default()
+  return_undef()
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  default() {
+    return_undef()
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch baseline");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar");
+
+            my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($marker_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle marker-style switch attached branch blocks lower to identical $code_key output as the canonical marker-style baseline");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style switch attached-branch-block sugar avoids RAW_PERL fallback");
+            is_deeply($marker_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle marker-style switch attached-branch-block sugar preserves canonical action-IR node coverage");
+            is_deeply($marker_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle marker-style switch attached-branch-block sugar preserves canonical action-IR hit counts");
+            ok(
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle marker-style switch attached-branch-block sugar stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle marker-style switch attached-branch-block sugar preserves SWITCH/CASE/DEFAULT canonical nodes",
             );
         };
     }

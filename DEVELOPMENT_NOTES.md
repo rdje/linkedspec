@@ -9,6 +9,27 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Landed attached-block switch branch sugar on the two switch surfaces that were explicitly staged first:
+  - inline composite `switch(expr, case(value) { ... }, default() { ... })`,
+  - and structured marker-style `switch(expr) case(value) { ... } default() { ... } endswitch()`,
+  - both now lower cleanly on action-edge and lifecycle surfaces with zero fallback and zero unresolved-helper hits.
+- Supporting work landed in the same slice:
+  - statement splitting now treats `case(value) { ... }` and `default() { ... }` as complete top-level method-like statements in semicolon-light structured blocks,
+  - flow scanning and contract rewrites now keep attached-block switch branches together as single branch statements,
+  - and attached-block composite `if(cond) { ... }` was intentionally kept deferred to stay aligned with the tracked design note.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens supported switch syntax without changing the overall track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Extended lifecycle-family regression coverage for inline composite control flow:
   - inline composite `if(...)` and `switch(...)` action-list forms are now regression-locked across `I`, `LS`, `LE`, `E`, `EX`, and `IT`,
   - the structured branch-block variants of those same inline composite forms are now regression-locked across that same remaining lifecycle family too,
@@ -74,7 +95,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   - and inline branch actions now share one rewrite context across the whole branch body so nested flow-state bookkeeping stays coherent.
 - Clarified the docs accordingly:
   - the first structured inline-switch branch-body extension is now an active supported surface,
-  - while attached-block sugar such as `case(value) { ... }` and `default() { ... }` remains deferred.
+  - and, at that stage, attached-block sugar such as `case(value) { ... }` and `default() { ... }` was still deferred.
 - Tracker impact:
   - `Method-like DSL migration track` stays `in progress`,
   - because this slice deepens the structured control-flow surface without changing the track level.
@@ -211,7 +232,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
   - require one branch header and one body carrier only,
   - prefer `case(value, { ... })` as the first structured inline-switch extension,
-  - reserve attached-block `case(value) { ... }` / `default() { ... }` as later syntax sugar,
+  - reserve attached-block `case(value) { ... }` / `default() { ... }` as later syntax sugar at that stage,
   - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible now while leaving attached-block composite `if(cond) { ... }` for a later syntax pass.
 - Tracker impact:
   - no live-status row changes,

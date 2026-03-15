@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Support Attached-Block Switch Branch Sugar
+## Summary
+Supported attached-block switch branch sugar on the switch surfaces that were explicitly discussed and agreed first. `case(value) { ... }` and `default() { ... }` now lower cleanly on both inline composite `switch(...)` forms and structured marker-style `switch(...) ... case(...) ... default() ... endswitch()` blocks, across action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added attached-block switch parsing/lowering support in the control-flow owner for:
+  - inline composite `switch(expr, case(value) { ... }, default() { ... })`
+  - structured marker-style `switch(expr) case(value) { ... } default() { ... } endswitch()`
+- Tightened statement splitting so `case(value) { ... }` and `default() { ... }` count as complete top-level method-like statements in semicolon-light structured blocks.
+- Extended flow scanning and contract rewrites so attached-block `case(...)` and `default()` statements are treated as single switch-branch carriers rather than partial headers plus leftover RAW_PERL tails.
+- Kept the slice aligned with the control-flow design note:
+  - switch attached-block sugar is now supported,
+  - mixed branch-body carriers remain rejected,
+  - attached-block composite `if(cond) { ... }` remains deferred for a later syntax pass.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported switch surface without changing the overall track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Extend Inline Composite Lifecycle Parity
 ## Summary
 Extended inline composite control-flow regression coverage across the remaining lifecycle family. Inline composite `if(...)` / `switch(...)` forms and their structured branch-block variants are now regression-locked on `I`, `LS`, `LE`, `E`, `EX`, and `IT`, not only on the earlier `LX` proof point.

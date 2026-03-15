@@ -280,6 +280,117 @@ sub _expand_flow_branch_action_exprs {
  return $statements
 }
 
+sub _parse_method_expr_with_optional_attached_block {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $call = $parse_method_function_expr->($trimmed);
+ return { call => $call, attached_block => undef } if $call;
+
+ my @chars = split //, $trimmed;
+ my $paren_depth = 0;
+ my $brace_depth = 0;
+ my $bracket_depth = 0;
+ my $in_single_quote = 0;
+ my $in_double_quote = 0;
+ my $in_slash_quote = 0;
+ my $slash_escape_next = 0;
+ my $escape_next = 0;
+
+ for (my $idx = 0; $idx < @chars; ++$idx) {
+  my $char = $chars[$idx];
+
+  if ($in_slash_quote) {
+   if ($slash_escape_next) {
+    $slash_escape_next = 0;
+   } elsif ($char eq '\\') {
+    $slash_escape_next = 1;
+   } elsif ($char eq '/') {
+    $in_slash_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_single_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq "'") {
+    $in_single_quote = 0;
+   }
+   next;
+  }
+
+  if ($in_double_quote) {
+   if ($escape_next) {
+    $escape_next = 0;
+   } elsif ($char eq '\\') {
+    $escape_next = 1;
+   } elsif ($char eq '"') {
+    $in_double_quote = 0;
+   }
+   next;
+  }
+
+  if ($char eq "'") {
+   $in_single_quote = 1;
+   next;
+  }
+  if ($char eq '"') {
+   $in_double_quote = 1;
+   next;
+  }
+  if ($char eq '/') {
+   my $prefix = substr($trimmed, 0, $idx);
+   $prefix =~ s/\s+$//o;
+   if (!length($prefix)) {
+    $in_slash_quote = 1;
+    $slash_escape_next = 0;
+    next;
+   }
+  }
+  if ($char eq '(') {
+   ++$paren_depth;
+   next;
+  }
+  if ($char eq ')') {
+   --$paren_depth if $paren_depth > 0;
+   next;
+  }
+  if ($char eq '[') {
+   ++$bracket_depth;
+   next;
+  }
+  if ($char eq ']') {
+   --$bracket_depth if $bracket_depth > 0;
+   next;
+  }
+  next unless $char eq '{';
+  next if $paren_depth || $brace_depth || $bracket_depth;
+
+  my $head = $trim_action_ir_value->(substr($trimmed, 0, $idx));
+  next unless defined($head) && length($head);
+  my $body = substr($trimmed, $idx);
+  next unless $body =~ /^\{(?<inner>.*)\}$/s;
+
+  $call = $parse_method_function_expr->($head);
+  next unless $call;
+
+  return {
+   call => $call,
+   attached_block => '{' . $+{inner} . '}',
+  };
+ }
+
+ return undef
+}
+
 sub _lower_flow_branch_single_statement {
  my ($expr, $branch_ctx, $deps) = @_;
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
@@ -361,7 +472,8 @@ sub _lower_inline_if_branch_expr {
   my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
   return undef unless defined($cond_expr) && length($cond_expr);
 
-  my $actions = _lower_flow_branch_action_list([@$effective_args[1 .. $#$effective_args]], $ctx, $deps);
+  my @branch_action_exprs = @$effective_args > 1 ? @$effective_args[1 .. $#$effective_args] : ();
+  my $actions = _lower_flow_branch_action_list(\@branch_action_exprs, $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
   return "} elsif ($cond_expr) {$body";
@@ -389,11 +501,12 @@ sub _lower_inline_if_branch_expr {
 #------------------------------------------------------------------------------
 sub _lower_inline_switch_branch_expr {
  my ($branch_expr, $switch_var, $hit_var, $ctx, $switch_state, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $branch_call = $parse_method_function_expr->($branch_expr);
- return undef unless $branch_call;
+ my $parsed_branch = _parse_method_expr_with_optional_attached_block($branch_expr, $deps);
+ return undef unless $parsed_branch && ref($parsed_branch->{call}) eq 'HASH';
+ my $branch_call = $parsed_branch->{call};
+ my $attached_block = $parsed_branch->{attached_block};
  my $method = $branch_call->{method} // '';
 
  if ($method eq 'case') {
@@ -407,7 +520,12 @@ sub _lower_inline_switch_branch_expr {
    ? "\$$switch_var =~ $case_value->{expr}"
    : "\$$switch_var eq $case_value->{expr}";
 
-  my $actions = _lower_flow_branch_action_list([@$effective_args[1 .. $#$effective_args]], $ctx, $deps);
+  return undef if defined($attached_block) && @$effective_args > 1;
+  my @branch_action_exprs = defined($attached_block)
+   ? ($attached_block)
+   : (@$effective_args > 1 ? @$effective_args[1 .. $#$effective_args] : ());
+
+  my $actions = _lower_flow_branch_action_list(\@branch_action_exprs, $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? '; '.join('; ', @$actions) : '';
   return "if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
@@ -415,11 +533,13 @@ sub _lower_inline_switch_branch_expr {
 
  if ($method eq 'default') {
   my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 0, undef);
- return undef unless $effective_args;
- return undef if $switch_state->{default_seen};
- $switch_state->{default_seen} = 1;
+  return undef unless $effective_args;
+  return undef if $switch_state->{default_seen};
+  $switch_state->{default_seen} = 1;
+  return undef if defined($attached_block) && @$effective_args;
 
-  my $actions = _lower_flow_branch_action_list($effective_args, $ctx, $deps);
+  my @branch_action_exprs = defined($attached_block) ? ($attached_block) : @$effective_args;
+  my $actions = _lower_flow_branch_action_list(\@branch_action_exprs, $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? '; '.join('; ', @$actions) : '';
   return "if (!\$$hit_var) { \$$hit_var = 1$body }";
@@ -484,10 +604,12 @@ sub _lower_switch_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_case_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && $call->{method} eq 'case';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
@@ -510,8 +632,16 @@ sub _lower_case_flow_statement {
  if ($switch_state->{open_case}) {
   $prefix = '} ';
  }
- $switch_state->{open_case} = 1;
 
+ if (defined $attached_block) {
+  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? '; '.join('; ', @$actions) : '';
+  $switch_state->{open_case} = 0;
+  return $prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1$body }";
+ }
+
+ $switch_state->{open_case} = 1;
  return $prefix."if (!\$$hit_var && $match_expr) { \$$hit_var = 1"
 }
 
@@ -523,10 +653,12 @@ sub _lower_case_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_default_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && $call->{method} eq 'default';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
@@ -541,10 +673,18 @@ sub _lower_default_flow_statement {
  if ($switch_state->{open_case}) {
   $prefix = '} ';
  }
- $switch_state->{open_case} = 1;
  $switch_state->{default_seen} = 1;
 
  my $hit_var = $switch_state->{hit_var};
+ if (defined $attached_block) {
+  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? '; '.join('; ', @$actions) : '';
+  $switch_state->{open_case} = 0;
+  return $prefix."if (!\$$hit_var) { \$$hit_var = 1$body }";
+ }
+
+ $switch_state->{open_case} = 1;
  return $prefix."if (!\$$hit_var) { \$$hit_var = 1"
 }
 

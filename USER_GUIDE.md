@@ -211,6 +211,8 @@ Inline composite `switch(..., case(...), default(...))` forms are now locked on 
 
 That inline-composite switch surface now has its first structured branch-body extension too: `case(value, { ... })` and `default({ ... })` are supported alongside the older explicit action-list form, so compact inline dispatch can still carry semicolonless structured helper sequences without falling back to raw Perl.
 
+That same switch surface now supports attached-block branch sugar too: `case(value) { ... }` and `default() { ... }` lower to the same canonical result as the structured-argument `case(value, { ... })` / `default({ ... })` form, and structured marker-style `switch(...) ... case(...) ... default() ... endswitch()` blocks now accept the same attached branch bodies on both action-edge and lifecycle surfaces.
+
 List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk.
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.
@@ -240,8 +242,10 @@ Those inline composite control-flow forms are now regression-locked across the f
 - structured inline-composite `if(cond, { ... }, elseif(..., { ... }), else({ ... }))`
 - inline composite `switch(expr, case(...), default(...))`
 - structured inline-composite `switch(expr, case(value, { ... }), default({ ... }))`
+- attached-block inline-composite `switch(expr, case(value) { ... }, default() { ... })`
+- attached-block marker-style `switch(expr) case(value) { ... } default() { ... } endswitch()`
 
-One boundary is now explicit in the roadmap too: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface. That means they belong inside method-only structured blocks such as action-edge `{ ... }`, lifecycle blocks like `I { ... }` / `LS { ... }` / `LE { ... }` / `E { ... }` / `EX { ... }` / `IT { ... }` / `LX { ... }`, and future nested structured branch bodies like `case(value, { ... })`. By contrast, self-contained composite forms such as `switch(expr, case(...), default(...))` and `if(cond, ..., elseif(...), else(...))` remain single-call control-flow forms.
+One boundary is now explicit in the roadmap too: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface. That means they belong inside method-only structured blocks such as action-edge `{ ... }`, lifecycle blocks like `I { ... }` / `LS { ... }` / `LE { ... }` / `E { ... }` / `EX { ... }` / `IT { ... }` / `LX { ... }`, and nested structured branch bodies like `case(value, { ... })` or `case(value) { ... }`. By contrast, self-contained composite forms such as `switch(expr, case(...), default(...))` and `if(cond, ..., elseif(...), else(...))` remain single-call control-flow forms.
 
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.

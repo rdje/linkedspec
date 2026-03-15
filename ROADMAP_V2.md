@@ -72,7 +72,9 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
 2. Continue the method-like DSL migration track:
    - broaden fluent/block equivalence on supported surfaces,
-   - keep the newly landed structured inline-switch branch-body extension `case(value, { ... })` / `default({ ... })` as the supported first step while attached-block sugar remains deferred,
+   - keep both supported inline-switch structured branch-body surfaces in sync:
+     - `case(value, { ... })` / `default({ ... })`,
+     - `case(value) { ... }` / `default() { ... }`,
    - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` as the supported first steps while attached-block composite `if(cond) { ... }` remains deferred,
    - keep those inline composite control-flow surfaces lifecycle-wide across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`, not only on the earlier `LX` proof point,
    - treat marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface, including nested structured branch bodies when those land as supported contexts,

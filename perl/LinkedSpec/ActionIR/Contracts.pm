@@ -675,7 +675,7 @@ sub _build_flow_control_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_case_flow_statement};
-    $code =~ s/\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -687,7 +687,7 @@ sub _build_flow_control_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_default_flow_statement};
-    $code =~ s/\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },

@@ -201,7 +201,7 @@ Status interpretation note:
      - permit future structured branch-body extensions only when a branch uses exactly one body carrier,
      - preferred staged switch direction is:
        - first `case(value, { ... })` and `default({ ... })`, now landed as the first structured inline-switch branch-body extension,
-       - later attached-block sugar like `case(value) { ... }` and `default() { ... }`,
+       - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now landed too, on both inline composite `switch(...)` and structured marker-style `switch(...) ... endswitch()` surfaces,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
      - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too,
@@ -209,7 +209,7 @@ Status interpretation note:
      - where a structured block context may be:
        - a top-level action-edge `{ ... }`,
        - a lifecycle block such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, or `LX { ... }`,
-       - or a nested structured branch body such as `case(value, { ... })`,
+       - or a nested structured branch body such as `case(value, { ... })` or `case(value) { ... }`,
      - so marker-style flow is not limited to the outermost block, but it is also not intended to remain an unconstrained fluent surface.
    - Inline composite `if(...)` design note agreed before implementation:
      - the argument-list composite first step is now landed, in the form `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
@@ -461,6 +461,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - Landed follow-up: supported multi-step method sequences inside lifecycle control-flow bodies are now regression-locked too, so `LX` branch-local `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` chains remain equivalent between fluent and structured forms inside both `if/elseif` and `switch/case` bodies.
   - Landed follow-up: inline composite `switch(..., case(...), default(...))` forms are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, including supported inline helper sequences inside `case(...)` and `default(...)`.
   - Landed follow-up: the first structured inline composite switch branch-body extension is now supported too, so `case(value, { ... })` and `default({ ... })` lower through the same canonical inline-switch path as the existing action-list baseline on both action-edge and lifecycle surfaces, including semicolonless structured helper sequences inside those branch bodies.
+  - Landed follow-up: attached-block switch branch sugar is now supported too, so `case(value) { ... }` and `default() { ... }` lower through the same canonical path as both the structured-argument inline-switch baseline and the canonical marker-style `switch(...) ... case(...) ... default() ... endswitch()` baseline on action-edge and lifecycle surfaces.
   - Landed follow-up: the first inline composite `if(...)` slice is now supported too, so `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` lowers through the same canonical control-flow path as the existing marker-style `if()/elseif()/else()/endif()` baseline on both action-edge and lifecycle surfaces.
   - Landed follow-up: structured inline-composite `if(...)` branch bodies are now supported too, so `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` lowers through the same canonical inline-if path as the existing action-list baseline on both action-edge and lifecycle surfaces, including semicolonless structured helper sequences inside those branch bodies.
   - Landed follow-up: lifecycle-family regression coverage for inline composite control flow is no longer effectively `LX`-only. Action-list and structured branch-block forms for inline composite `if(...)` and `switch(...)` are now regression-locked across `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
@@ -479,7 +480,7 @@ This is a saved future-enhancement note, not an active implementation item.
     - do not add chained branch-body forms like `case(value, m1(...).m2(...))`,
     - keep a strict one-branch-header / one-body-carrier rule,
     - prefer `case(value, { ... })` as the first structured switch extension,
-    - allow attached-block `case(value) { ... }` / `default() { ... }` only as later syntax sugar,
+    - now also support attached-block switch sugar `case(value) { ... }` / `default() { ... }` on both inline composite and structured marker-style switch surfaces,
     - treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass,
     - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.
