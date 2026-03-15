@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Inline Switch Flow Inside Composite If Branch Blocks
+## Summary
+Regression-locked the broader nested-switch contract for structured composite `if(...)` branch bodies. Nested inline-composite `switch(...)` forms now have explicit coverage inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks, including the attached switch-branch sugar `case(value) { ... }` / `default() { ... }`.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused splitter seam coverage for attached `if/else` statements whose attached branch carries nested inline-composite `switch(...)` flow with attached switch-branch sugar.
+- Added focused action-edge regressions that compare:
+  - structured inline composite `if(cond, { ... }, else({ ... }))`, and
+  - structured attached-block composite `if(cond) { ... } else() { ... }`
+  when the branch body carries a nested inline-composite `switch(...)` using attached switch-branch sugar.
+- Added lifecycle-family regression loops for the same nested inline-composite switch shape across:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked the expected contract there:
+  - zero RAW_PERL fallback,
+  - zero unresolved-helper hits,
+  - matching canonical node coverage and hit counts between the inline-branch-block and attached-branch-block outer `if(...)` forms,
+  - and lifecycle-family parity for the nested inline switch shape.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens regression-locked control-flow coverage without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Keep Composite If Branch Blocks Rewrite-Ready For Nested Marker Switch Flow
 ## Summary
 Fixed the remaining structured-`if(...)` branch-body rewrite gap. Nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow now stays fully rewrite-ready inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks, on action-edge and lifecycle surfaces.

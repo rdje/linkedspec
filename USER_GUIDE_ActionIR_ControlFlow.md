@@ -60,7 +60,11 @@ It also supports three `if(...)` surfaces:
 2. inline composite flow (`if(cond, action1(...), ..., elseif(cond2, ...), else(...))`) plus its structured branch-body form `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))`, and
 3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces.
 
-For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested marker-style switch flow is now part of the supported structured-context contract too. That means branch bodies can contain `switch(...) ... case(...) ... default() ... endswitch()` without dropping out of canonical rewrite readiness.
+For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested switch flow is now part of the supported structured-context contract too. That includes:
+- marker-style `switch(...) ... case(...) ... default() ... endswitch()`, and
+- inline-composite `switch(...)` forms, including attached switch-branch sugar such as `case(value) { ... }` / `default() { ... }`.
+
+Those nested switch forms can now live inside composite-`if(...)` branch bodies without dropping out of canonical rewrite readiness.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.

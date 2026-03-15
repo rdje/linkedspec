@@ -142,6 +142,22 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   - `bash tools/run_ci_local.sh`
 
 ## Current Session Notes (2026-03-15)
+- Landed the next composite-`if(...)` branch-body regression follow-up:
+  - nested inline-composite `switch(...)` forms now have explicit regression coverage inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks,
+  - including the attached switch-branch sugar `case(value) { ... }` / `default() { ... }`,
+  - and the same nested switch contract is now locked across the full lifecycle family too.
+- Clarified the docs accordingly:
+  - composite-`if(...)` structured branch bodies are now documented as supporting nested switch flow generally,
+  - not only the marker-style `switch(...) ... endswitch()` variant.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens regression-locked control-flow coverage without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Landed the next composite-`if(...)` control-flow follow-up:
   - nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow now stays fully rewrite-ready inside both structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` branch blocks,
   - action-edge and full lifecycle-family coverage are now regression-locked for that nested switch shape,
