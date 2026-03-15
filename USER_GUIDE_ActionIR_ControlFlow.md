@@ -65,6 +65,7 @@ For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested s
 - inline-composite `switch(...)` forms, including attached switch-branch sugar such as `case(value) { ... }` / `default() { ... }`.
 
 Those nested switch forms can now live inside composite-`if(...)` branch bodies without dropping out of canonical rewrite readiness.
+That nested inline-composite `switch(...)` coverage inside composite-`if(...)` branch bodies now explicitly includes broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` form.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.

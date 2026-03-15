@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Nested Multi-Case Inline Switch Flow Inside Composite If Branch Blocks
+## Summary
+Regression-locked the broader nested inline-composite switch shape inside composite `if(...)` branch bodies. Structured inline composite `if(...)` branch blocks and attached-block composite `if(...)` forms now have explicit coverage for nested inline-composite `switch(...)` flow with multiple `case(...)` arms too, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that compare:
+  - structured inline composite `if(cond, { ... }, else({ ... }))`, and
+  - structured attached-block composite `if(cond) { ... } else() { ... }`
+  when the branch bodies carry nested inline-composite `switch(...)` flow with multiple `case(...)` arms plus `default(...)`.
+- Added lifecycle-family regression loops for the same broader nested inline-switch branch-body contract across:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked the expected contract there:
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on the attached-block side,
+  - zero unresolved-helper hits,
+  - matching canonical node coverage and hit counts between the inline-branch-block and attached-branch-block outer `if(...)` forms,
+  - and lifecycle-family parity for the broader nested inline-switch shape.
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked control-flow coverage without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Nested Multi-Case Inline Switch Flow Inside Attached Switch Branch Blocks
 ## Summary
 Regression-locked the broader nested inline-composite switch shape inside attached switch branch blocks. Attached `case(value) { ... }` and `default() { ... }` switch branch bodies now have explicit coverage for nested inline-composite `switch(...)` flow with multiple `case(...)` arms too, on both inline composite and marker-style outer switch surfaces, across action-edge and the full lifecycle family.
