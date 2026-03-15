@@ -1,5 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Design Note Slice: Restrict Marker Flow To Structured Block Contexts
+## Summary
+Logged a control-flow design clarification before further implementation work: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Clarified the roadmap and guides so marker-style control flow is now scoped to method-only structured block contexts such as:
+  - top-level action-edge `{ ... }` blocks,
+  - lifecycle blocks `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`,
+  - and nested structured branch bodies like `case(value, { ... })`.
+- Kept the existing one-branch-header / one-body-carrier rule unchanged.
+- Kept self-contained composite forms separate:
+  - `switch(expr, case(...), default(...))`
+  - `if(cond, ..., elseif(...), else(...))`
+- Tracker interpretation:
+  - no live-status row changes,
+  - because this slice records design intent and syntax boundaries rather than landing new executable behavior.
+
 ## 2026-03-15 - Method-Like DSL Slice: Support Inline Composite If
 ## Summary
 Landed the first inline composite `if(...)` slice. Argument-list forms such as `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` now lower through the same canonical control-flow path as the existing marker-style `if()/elseif()/else()/endif()` baseline.

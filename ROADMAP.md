@@ -204,7 +204,13 @@ Status interpretation note:
        - later attached-block sugar like `case(value) { ... }` and `default() { ... }`,
      - explicitly reject mixed forms such as `default(action1(...)) { action2(...) }`,
      - because one branch header must map to one body carrier only,
-     - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too.
+     - and the same one-header / one-body-carrier rule should govern future inline composite `if(...)` syntax too,
+     - while marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` should be treated as structured-block-context syntax rather than free-standing fluent syntax,
+     - where a structured block context may be:
+       - a top-level action-edge `{ ... }`,
+       - a lifecycle block such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, or `LX { ... }`,
+       - or a nested structured branch body such as `case(value, { ... })`,
+     - so marker-style flow is not limited to the outermost block, but it is also not intended to remain an unconstrained fluent surface.
    - Inline composite `if(...)` design note agreed before implementation:
      - the argument-list composite first step is now landed, in the form `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
      - attached-block forms like `if(cond) { ... } elseif(cond2) { ... } else() { ... }` remain desirable long-term ergonomics targets,
@@ -472,7 +478,8 @@ This is a saved future-enhancement note, not an active implementation item.
     - keep a strict one-branch-header / one-body-carrier rule,
     - prefer `case(value, { ... })` as the first structured switch extension,
     - allow attached-block `case(value) { ... }` / `default() { ... }` only as later syntax sugar,
-    - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass.
+    - treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass,
+    - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.
     - It is not a mixed Perl/DSL parsing model.
     - Raw Perl in `.spec` is now tracked as obsolete authoring that should be rejected and migrated away, not as a co-equal syntax surface to preserve.

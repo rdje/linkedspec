@@ -29,7 +29,12 @@ Syntax status note:
   - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
   - treat `case(value, { ... })` as the preferred first structured inline-switch extension,
   - treat `case(value) { ... }` and `default() { ... }` as possible later syntax sugar,
-  - and treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as a feasible earlier step than attached-block composite `if(cond) { ... }`.
+  - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as a feasible earlier step than attached-block composite `if(cond) { ... }`,
+  - and treat marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface.
+- Structured block contexts for those marker-style forms include:
+  - top-level action-edge `{ ... }` blocks,
+  - lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, `E { ... }`, `EX { ... }`, `IT { ... }`, and `LX { ... }`,
+  - and nested structured branch bodies such as `case(value, { ... })`.
 
 ## What this module is responsible for
 This module lowers:

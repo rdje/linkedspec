@@ -233,6 +233,8 @@ Control-flow syntax itself is still open for ergonomics work. The guides current
 
 That follow-up is no longer only about future `switch(...)` work: the first inline composite `if(...)` slice is now supported too, so compact forms like `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` already lower through the same canonical control-flow path as the older marker-style `if()/elseif()/else()/endif()` baseline.
 
+One boundary is now explicit in the roadmap too: marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are being treated as structured-block-context syntax, not as a permanently free-standing fluent surface. That means they belong inside method-only structured blocks such as action-edge `{ ... }`, lifecycle blocks like `I { ... }` / `LS { ... }` / `LE { ... }` / `E { ... }` / `EX { ... }` / `IT { ... }` / `LX { ... }`, and future nested structured branch bodies like `case(value, { ... })`. By contrast, self-contained composite forms such as `switch(expr, case(...), default(...))` and `if(cond, ..., elseif(...), else(...))` remain single-call control-flow forms.
+
 ## Runtime Match Values You Will See Repeatedly
 A lot of lowering examples refer to a small set of parser runtime values.
 

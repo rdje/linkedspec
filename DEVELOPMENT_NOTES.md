@@ -9,6 +9,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Logged a control-flow design clarification before further syntax work:
+  - marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` are now explicitly treated as structured-block-context syntax,
+  - they are not intended to remain a permanently free-standing fluent surface,
+  - valid structured contexts include top-level action-edge `{ ... }` blocks, lifecycle blocks (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`), and nested structured branch bodies such as `case(value, { ... })`,
+  - while self-contained composite forms like `switch(expr, case(...), default(...))` and `if(cond, ..., elseif(...), else(...))` remain distinct single-call surfaces.
+- Tracker impact:
+  - no live-status row changes,
+  - because this slice records a design boundary rather than landing executable behavior.
+- Validation snapshot for this slice:
+  - `git diff --stat -- ROADMAP.md ROADMAP_V2.md USER_GUIDE.md USER_GUIDE_ActionIR_ControlFlow.md CHANGES.md DEVELOPMENT_NOTES.md MEMORY.md`
+  - `git status --short`
+
+## Current Session Notes (2026-03-15)
 - Landed the first inline composite `if(...)` slice:
   - argument-list forms such as `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` now lower through the same control-flow owner path as the existing marker-style `if()/elseif()/else()/endif()` baseline,
   - action-edge and lifecycle surfaces are both regression-locked,

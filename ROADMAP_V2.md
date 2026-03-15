@@ -74,6 +74,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - broaden fluent/block equivalence on supported surfaces,
    - keep the newly landed structured inline-switch branch-body extension `case(value, { ... })` / `default({ ... })` as the supported first step while attached-block sugar remains deferred,
    - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form as the supported first step while attached-block composite `if(cond) { ... }` remains deferred,
+   - treat marker-style `if(...) ... endif()` and `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface, including nested structured branch bodies when those land as supported contexts,
    - keep unlimited nested composition canonical and backend-neutral,
    - keep raw-Perl-free `.spec` authoring as the target.
 3. Finish the remaining Backbone Item 3 cleanup:
