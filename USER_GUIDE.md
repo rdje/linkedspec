@@ -223,6 +223,8 @@ That same attached-switch structured-context rule is now locked one level deeper
 
 That same deeper attached-switch parity now covers nested marker-style `switch(...) ... endswitch()` flow inside those deeper `if/elseif/else` branches too, not only nested inline-composite `switch(...)` flow.
 
+That same attached-switch parity now covers the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside those deeper `if/elseif/else` branches too, not only the simpler single-`case(...)` nested inline-switch shape.
+
 That same attached-switch structured-context rule now covers nested inline-composite `switch(...)` forms there too. An attached `case(value) { ... }` or `default() { ... }` branch block can itself carry inline-composite `switch(...)` flow on both outer switch families and still preserve the same language-agnostic rewrite readiness.
 
 That nested composite-`if(...)` contract is now locked more deeply too. Inside attached switch branch blocks, both outer switch families now have explicit regression coverage not only for simple nested `if/else` composite forms, but also for the deeper `if/elseif/else` composite shape.

@@ -9,6 +9,19 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-15)
+- Regression-locked the attached-switch nested composite-if multi-case inline-switch parity follow-up:
+  - inline composite outer switch attached branch blocks now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies,
+  - even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow with multiple `case(...)` arms,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice deepens regression-locked structured control-flow parity without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
 - Regression-locked the attached-switch nested composite-if marker-switch parity follow-up:
   - inline composite and marker-style outer switch attached branch blocks now preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies,
   - even when those deeper `if/elseif/else` branches themselves carry nested marker-style `switch(...) ... endswitch()` flow,
