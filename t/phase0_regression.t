@@ -15435,6 +15435,243 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_composite_if_branch_blocks_accept_deep_mutual_marker_nesting' => sub {
+    plan tests => 11;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(
+    scalar(on),
+    {
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    },
+    else({
+      return_undef()
+    })
+  )
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(scalar(on)) {
+    switch(scalar(kind1))
+    case("A")
+      if(scalar(level2))
+        switch(scalar(kind2))
+        case("B")
+          if(scalar(level3))
+            switch(scalar(kind3))
+            case("C")
+              return_undef()
+            default()
+              return_undef()
+            endswitch()
+          else()
+            return_undef()
+          endif()
+        default()
+          return_undef()
+        endswitch()
+      else()
+        return_undef()
+      endif()
+    default()
+      return_undef()
+    endswitch()
+  }
+  else() {
+    return_undef()
+  }
+ }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with deeper alternating marker if/switch nesting');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with deeper alternating marker if/switch nesting');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge composite if branch-body surfaces keep identical ACODE output across deeper alternating marker if/switch nesting');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite if branch-block form with deeper alternating marker if/switch nesting avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block composite if form with deeper alternating marker if/switch nesting avoids RAW_PERL fallback');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite if branch-block form with deeper alternating marker if/switch nesting avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge attached-block composite if form with deeper alternating marker if/switch nesting avoids unresolved-helper hits');
+    is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge composite if branch-body surfaces preserve canonical node coverage across deeper alternating marker if/switch nesting');
+    is_deeply($inline_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, 'action-edge composite if branch-body surfaces preserve canonical hit counts across deeper alternating marker if/switch nesting');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} &&
+        $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge composite if branch-body surfaces stay language-agnostic action-IR ready across deeper alternating marker if/switch nesting',
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge composite if branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting',
+    );
+};
+subtest 'method_like_full_lifecycle_composite_if_branch_blocks_accept_deep_mutual_marker_nesting' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle composite if branch bodies with deeper alternating marker if/switch nesting" => sub {
+            plan tests => 9;
+
+            my $inline_spec = <<"SPEC";
+Top::&
+$tag {
+  if(
+    scalar(on),
+    {
+      switch(scalar(kind1))
+      case("A")
+        if(scalar(level2))
+          switch(scalar(kind2))
+          case("B")
+            if(scalar(level3))
+              switch(scalar(kind3))
+              case("C")
+                return_undef()
+              default()
+                return_undef()
+              endswitch()
+            else()
+              return_undef()
+            endif()
+          default()
+            return_undef()
+          endswitch()
+        else()
+          return_undef()
+        endif()
+      default()
+        return_undef()
+      endswitch()
+    },
+    else({
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  if(scalar(on)) {
+    switch(scalar(kind1))
+    case("A")
+      if(scalar(level2))
+        switch(scalar(kind2))
+        case("B")
+          if(scalar(level3))
+            switch(scalar(kind3))
+            case("C")
+              return_undef()
+            default()
+              return_undef()
+            endswitch()
+          else()
+            return_undef()
+          endif()
+        default()
+          return_undef()
+        endswitch()
+      else()
+        return_undef()
+      endif()
+    default()
+      return_undef()
+    endswitch()
+  }
+  else() {
+    return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with deeper alternating marker if/switch nesting");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with deeper alternating marker if/switch nesting");
+
+            my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($inline_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle composite if branch-body surfaces keep identical $code_key output across deeper alternating marker if/switch nesting");
+            is($inline_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite if branch-block form with deeper alternating marker if/switch nesting avoids RAW_PERL fallback");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle attached-block composite if form with deeper alternating marker if/switch nesting avoids RAW_PERL fallback");
+            is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle composite if branch-body surfaces preserve canonical node coverage across deeper alternating marker if/switch nesting");
+            is_deeply($inline_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle composite if branch-body surfaces preserve canonical hit counts across deeper alternating marker if/switch nesting");
+            ok(
+                $inline_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $inline_meta->{language_agnostic_action_ir_ready} &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle composite if branch-body surfaces stay language-agnostic action-IR ready across deeper alternating marker if/switch nesting",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle composite if branch-body surfaces preserve IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across deeper alternating marker nesting",
+            );
+        };
+    }
+};
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
     plan tests => 12;
 

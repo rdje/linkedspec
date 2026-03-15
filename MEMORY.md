@@ -10,6 +10,21 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-15)
+- Extended the deep mutual marker-flow contract into composite `if(...)` branch bodies:
+  - marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` now have a representative deeper alternating nesting regression inside both structured inline composite-`if` branch blocks and attached-block composite-`if` branch bodies too,
+  - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the no-DSL-fixed-cap marker-nesting contract covers those composite `if(...)` branch bodies as structured subcontexts too,
+  - not only outermost action-edge or lifecycle structured blocks and attached switch branch blocks.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice extends the same deep marker-nesting contract into another already-supported structured subcontext without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Snapshot (2026-03-15)
 - Extended the deep mutual marker-flow contract into attached switch branch blocks:
   - marker `if(...) ... endif()` and marker `switch(...) ... endswitch()` now have a representative deeper alternating nesting regression inside marker-style switch attached branch blocks too,
   - across action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.

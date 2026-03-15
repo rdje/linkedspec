@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Deep Mutual Marker Nesting In Composite If Branch Bodies
+## Summary
+Extended the deep mutual marker-flow contract into composite `if(...)` branch bodies. Marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are now regression-locked for a representative deeper alternating nesting chain inside both structured inline composite-`if` branch blocks and attached-block composite-`if` branch bodies, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added deeper alternating marker-flow parity coverage inside action-edge composite `if(...)` branch bodies:
+  - structured inline branch-block carrier `if(cond, { ... }, else({ ... }))`
+  - attached-block carrier `if(cond) { ... } else() { ... }`
+- Added the same composite-`if` deeper alternating marker-flow parity coverage across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - language-agnostic readiness
+  - identical canonical node coverage and hit counts across the two supported composite-`if` branch-body carriers
+  - canonical IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH node presence
+- Clarified in the roadmap and guides that the no-DSL-fixed-cap marker-nesting contract covers composite `if(...)` branch bodies as structured subcontexts too, not only outermost blocks and attached switch branch blocks.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Deep Mutual Marker Nesting In Attached Switch Branch Blocks
 ## Summary
 Extended the deep mutual marker-flow contract into attached switch branch blocks. Marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are now regression-locked for a deeper alternating nesting chain inside marker-style switch attached branch blocks too, across action-edge and the full lifecycle family.
