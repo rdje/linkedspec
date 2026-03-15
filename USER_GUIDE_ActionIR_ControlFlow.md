@@ -29,7 +29,7 @@ Syntax status note:
   - do not pursue chained branch-body syntax like `case(value, m1(...).m2(...))`,
   - treat `case(value, { ... })` as the preferred first structured inline-switch extension,
   - `case(value) { ... }` and `default() { ... }` are now supported switch sugar on both inline composite and structured marker-style switch surfaces,
-  - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as a feasible earlier step than attached-block composite `if(cond) { ... }`,
+  - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as the first `if(...)` step, with the matching structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces,
   - and treat marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface.
 - Structured block contexts for those marker-style forms include:
   - top-level action-edge `{ ... }` blocks,
@@ -54,6 +54,11 @@ This module lowers:
 It also supports two switch styles:
 1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }` and `default() { ... }`, and
 2. inline composite switch arguments (`switch(expr, case(...), default(...))`), including both `case(value, { ... })` / `default({ ... })` and attached `case(value) { ... }` / `default() { ... }` branch-body forms.
+
+It also supports three `if(...)` surfaces:
+1. marker-style flow (`if(...) ... elseif(...) ... else() ... endif()`) in structured block contexts,
+2. inline composite flow (`if(cond, action1(...), ..., elseif(cond2, ...), else(...))`) plus its structured branch-body form `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))`, and
+3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces.
 
 ## `if / elseif / else / endif`
 These are statement markers, not Perl block keywords.

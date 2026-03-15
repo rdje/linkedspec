@@ -37,12 +37,13 @@ sub try_scan_contract_ir_events {
 sub _scan_contract_if_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
- my $call = _parse_method_function_expr($+{expr});
+while ($code =~ /\b(?<head>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my $call = _parse_method_function_expr($+{head});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
  next unless $effective_args && @$effective_args >= 1;
- push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+ my $raw = $+{head}.($+{block} // '');
+ push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
  return \@events
 }
@@ -50,12 +51,13 @@ while ($code =~ /\b(?<expr>(?:if|i)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"]
 sub _scan_contract_elseif_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?!\s*\{))/g) {
- my $call = _parse_method_function_expr($+{expr});
+while ($code =~ /\b(?<head>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my $call = _parse_method_function_expr($+{head});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
  next unless $effective_args && @$effective_args >= 1;
- push @events, {raw => $+{expr}, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+ my $raw = $+{head}.($+{block} // '');
+ push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
 }
  return \@events
 }
@@ -63,12 +65,13 @@ while ($code =~ /\b(?<expr>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\
 sub _scan_contract_else_flow {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $call = _parse_method_function_expr($+{expr});
+while ($code =~ /\b(?<head>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my $call = _parse_method_function_expr($+{head});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, undef);
  next unless $effective_args;
- push @events, {raw => $+{expr}, args => {}};
+ my $raw = $+{head}.($+{block} // '');
+ push @events, {raw => $raw, args => {}};
 }
  return \@events
 }

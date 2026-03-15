@@ -108,13 +108,35 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Clarified the docs accordingly:
   - inline composite `if(...)` is no longer only a feasibility note,
   - the first-step argument-list form is now a supported surface,
-  - while attached-block composite `if(cond) { ... }` remains deferred,
+  - the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` is now supported on action-edge and lifecycle block surfaces too,
   - and the compact form is documented as semantically equivalent to the marker baseline even though it does not materialize a separate explicit `ENDIF` helper node in metadata.
 - Tracker impact:
   - `Method-like DSL migration track` stays `in progress`,
   - because this slice broadens supported control-flow authoring without changing the track level.
 - Validation snapshot for this slice:
   - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
+## Current Session Notes (2026-03-15)
+- Landed the structured attached-block composite `if(...)` follow-up:
+  - `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now lowers cleanly on action-edge and lifecycle block surfaces,
+  - canonical scanning now treats attached-block `if/elseif/else` statements as part of the normal control-flow helper family,
+  - the rewrite pipeline auto-closes attached-block `if` chains at the next statement boundary or end of block,
+  - and branch-local structured lowering now preserves those same implicit closures inside nested branch contexts too.
+- Regression coverage now locks the new attached-block `if(...)` surface against the structured inline-composite branch-block baseline on:
+  - action-edge `{ ... }`,
+  - `LX { ... }`,
+  - and the remaining lifecycle family `I`, `LS`, `LE`, `E`, `EX`, and `IT`.
+- Tracker impact:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice lands another supported method-like control-flow surface without changing the track level.
+- Validation snapshot for this slice:
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
   - `perl -c -Iperl t/phase0_regression.t`
   - `prove -v -Iperl t/phase0_regression.t`
   - `bash tools/run_ci_local.sh`
@@ -264,7 +286,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   - require one branch header and one body carrier only,
   - prefer `case(value, { ... })` as the first structured inline-switch extension,
   - reserve attached-block `case(value) { ... }` / `default() { ... }` as later syntax sugar at that stage,
-  - and treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible now while leaving attached-block composite `if(cond) { ... }` for a later syntax pass.
+  - and treat inline composite `if(cond, ..., elseif(...), else(...))` as the first landed `if(...)` step, with the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces too.
 - Tracker impact:
   - no live-status row changes,
   - because this is a tracked design-note slice rather than an implementation slice.

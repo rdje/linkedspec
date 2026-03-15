@@ -6804,6 +6804,154 @@ SPEC
         'lifecycle inline composite if branch-block form preserves IF/ELIF/ELSE plus helper nodes across semicolonless structured branch bodies'
     );
 };
+subtest 'method_like_action_attached_block_composite_if_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(
+    scalar(on),
+    {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    elseif(scalar(alt_on), {
+      say("alt")
+      return_undef()
+    }),
+    else({
+      return_undef()
+    })
+  )
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(scalar(on)) {
+    declare(array, events)
+    push_value(array(events), hash("items", array(IMATCH_LIST)))
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  elseif(scalar(alt_on)) {
+    say("alt")
+    return_undef()
+  }
+  else() {
+    return_undef()
+  }
+ }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge attached-block composite if form lowers to identical ACODE output as the structured inline branch-block baseline');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite if branch-block baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block composite if form avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite if branch-block baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block composite if form avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite if branch-block baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge attached-block composite if form avoids unresolved-helper hits');
+    is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge attached-block composite if form preserves canonical action-IR node coverage');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge attached-block composite if form remains language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge attached-block composite if form preserves IF/ELIF/ELSE plus helper nodes across attached branch bodies'
+    );
+};
+subtest 'method_like_lifecycle_attached_block_composite_if_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+LX {
+  if(
+    scalar(on),
+    {
+      declare(array, events)
+      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    elseif(scalar(alt_on), {
+      say("alt")
+      return_undef()
+    }),
+    else({
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+LX {
+  if(scalar(on)) {
+    declare(array, events)
+    push_value(array(events), hash("items", array(IMATCH_LIST)))
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  elseif(scalar(alt_on)) {
+    say("alt")
+    return_undef()
+  }
+  else() {
+    return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if branch-block baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for lifecycle attached-block composite if form');
+    is($inline_descr->{spec}{Top}{LXCODE}, $attached_descr->{spec}{Top}{LXCODE}, 'lifecycle attached-block composite if form lowers to identical LXCODE output as the structured inline branch-block baseline');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle inline composite if branch-block baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'lifecycle attached-block composite if form avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'lifecycle inline composite if branch-block baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'lifecycle attached-block composite if form avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'lifecycle inline composite if branch-block baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'lifecycle attached-block composite if form avoids unresolved-helper hits');
+    is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'lifecycle attached-block composite if form preserves canonical action-IR node coverage');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'lifecycle attached-block composite if form remains language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'lifecycle attached-block composite if form preserves IF/ELIF/ELSE plus helper nodes across attached branch bodies'
+    );
+};
 subtest 'method_like_remaining_lifecycle_inline_composite_if_lower_equivalently' => sub {
     my @cases = (
         [I  => 'ICODE'],
@@ -6857,6 +7005,90 @@ SPEC
                 scalar(grep { $_ eq 'ELIF' } @{$block_meta->{canonical_action_ir_nodes}}) &&
                 scalar(grep { $_ eq 'ELSE' } @{$block_meta->{canonical_action_ir_nodes}}),
                 "structured $tag lifecycle inline composite if form preserves IF/ELIF/ELSE canonical nodes",
+            );
+        };
+    }
+};
+subtest 'method_like_remaining_lifecycle_attached_block_composite_if_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle attached-block composite if form" => sub {
+            plan tests => 8;
+
+            my $inline_spec = <<"SPEC";
+Top::&
+$tag {
+  if(
+    scalar(on),
+    {
+      declare(array, events)
+      return_undef()
+    },
+    elseif(scalar(alt_on), {
+      say("alt")
+      return_undef()
+    }),
+    else({
+      return_undef()
+    })
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  if(scalar(on)) {
+    declare(array, events)
+    return_undef()
+  }
+  elseif(scalar(alt_on)) {
+    say("alt")
+    return_undef()
+  }
+  else() {
+    return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block baseline");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form");
+
+            my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($inline_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle attached-block composite if form lowers to identical $code_key output as the structured inline branch-block baseline");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle attached-block composite if form avoids RAW_PERL fallback");
+            is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle attached-block composite if form preserves canonical action-IR node coverage");
+            is_deeply($inline_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle attached-block composite if form preserves canonical action-IR hit counts");
+            ok(
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle attached-block composite if form stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle attached-block composite if form preserves IF/ELIF/ELSE canonical nodes",
             );
         };
     }

@@ -215,8 +215,8 @@ Status interpretation note:
      - so marker-style flow is not limited to the outermost block, but it is also not intended to remain an unconstrained fluent surface.
    - Inline composite `if(...)` design note agreed before implementation:
      - the argument-list composite first step is now landed, in the form `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
-     - attached-block forms like `if(cond) { ... } elseif(cond2) { ... } else() { ... }` remain desirable long-term ergonomics targets,
-     - but they are intentionally treated as a later control-flow concrete-syntax step rather than the first implementation slice.
+     - the attached-block structured-block-context form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` is now landed too on action-edge and lifecycle surfaces,
+     - and it belongs to structured block contexts rather than the free-standing fluent surface.
 4. Unlimited method composition in arguments (Planned)
    - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
@@ -485,7 +485,7 @@ This is a saved future-enhancement note, not an active implementation item.
     - keep a strict one-branch-header / one-body-carrier rule,
     - prefer `case(value, { ... })` as the first structured switch extension,
     - now also support attached-block switch sugar `case(value) { ... }` / `default() { ... }` on both inline composite and structured marker-style switch surfaces,
-    - treat inline composite `if(cond, ..., elseif(...), else(...))` as feasible, with attached-block `if(cond) { ... }` reserved for a later syntax pass,
+    - treat inline composite `if(cond, ..., elseif(...), else(...))` as the first landed `if(...)` step, with the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces too,
     - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.
     - It is not a mixed Perl/DSL parsing model.

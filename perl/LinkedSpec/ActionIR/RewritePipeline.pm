@@ -54,6 +54,40 @@ sub _require_pkg_cb {
  })
 }
 
+sub _event_continues_implicit_if_flow {
+ my ($event) = @_;
+ my $contract_id = $event->{contract_id} // '';
+ return ($contract_id eq 'elseif_flow' || $contract_id eq 'else_flow') ? 1 : 0
+}
+
+sub _flush_implicit_if_closures {
+ my ($ctx) = @_;
+ my $if_stack = $ctx->{if_stack} || [];
+ my @closures;
+ while (@$if_stack && $if_stack->[-1]{implicit_close}) {
+  pop @$if_stack;
+  push @closures, '}';
+ }
+ return join(' ', @closures)
+}
+
+sub _insert_pending_implicit_if_closures_before_stmt {
+ my ($rewritten_ref, $ctx, $source_stmt, $event) = @_;
+ return unless @{$ctx->{if_stack} || []};
+ return if _event_continues_implicit_if_flow($event);
+
+ my $closures = _flush_implicit_if_closures($ctx);
+ return unless defined($closures) && length($closures);
+
+ my $pos = index($$rewritten_ref, $source_stmt);
+ if ($pos >= 0) {
+  substr($$rewritten_ref, $pos, 0, $closures.' ');
+  return;
+ }
+
+ $$rewritten_ref .= ' '.$closures;
+}
+
 sub default_deps_for_package {
  my ($pkg) = @_;
  return _call_preserving_err(sub {
@@ -75,17 +109,20 @@ sub _lower_action_code_from_canonical_ir {
   if_stack      => [],
   switch_stack  => [],
   switch_counter => 0,
-  rewrite_rules => $rewrite_rules,
+ rewrite_rules => $rewrite_rules,
  };
  foreach my $event (@{$canonical_ir_diag->{canonical_action_ir_events}}) {
+  my $source_stmt = $event->{raw};
+  next unless defined($source_stmt) && length($source_stmt);
+
+  _insert_pending_implicit_if_closures_before_stmt(\$rewritten, $lower_ctx, $source_stmt, $event);
+
   my $kind = $event->{kind} // '';
   next if $kind eq 'RAW_PERL';
 
- my $contract_id = $event->{contract_id};
- next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
+  my $contract_id = $event->{contract_id};
+  next unless defined $contract_id && exists $rewrite_by_id{$contract_id};
 
- my $source_stmt = $event->{raw};
- next unless defined($source_stmt) && length($source_stmt);
   my $pos = index($rewritten, $source_stmt);
   next if $pos < 0;
 
@@ -94,6 +131,8 @@ sub _lower_action_code_from_canonical_ir {
   next if $lowered_stmt eq $source_stmt;
   substr($rewritten, $pos, length($source_stmt), $lowered_stmt);
  }
+ my $implicit_closures = _flush_implicit_if_closures($lower_ctx);
+ $rewritten .= ' '.$implicit_closures if defined($implicit_closures) && length($implicit_closures);
  if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {
   return $code;
  }

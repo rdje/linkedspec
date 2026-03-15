@@ -124,13 +124,26 @@ sub _lower_if_flow_statement {
  my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i');
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
  return undef unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return undef unless defined($cond_expr) && length($cond_expr);
+ return undef if defined($attached_block) && @$effective_args > 1;
+
+ if (defined $attached_block) {
+  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  $ctx->{if_stack} ||= [];
+  push @{$ctx->{if_stack}}, {else_seen => 0, implicit_close => 1, body_carrier => 'attached'};
+  return "if ($cond_expr) {$body";
+ }
 
  if (@$effective_args > 1) {
   my @if_action_exprs;
@@ -165,7 +178,7 @@ sub _lower_if_flow_statement {
  }
 
  $ctx->{if_stack} ||= [];
- push @{$ctx->{if_stack}}, {else_seen => 0};
+ push @{$ctx->{if_stack}}, {else_seen => 0, implicit_close => 0, body_carrier => 'marker'};
  return "if ($cond_expr) {"
 }
 
@@ -177,10 +190,12 @@ sub _lower_if_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_elseif_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && ($call->{method} eq 'elif' || $call->{method} eq 'elseif');
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
@@ -192,6 +207,15 @@ sub _lower_elseif_flow_statement {
  return undef unless @$if_stack;
  my $current_if = $if_stack->[-1];
  return undef if $current_if->{else_seen};
+ if (defined $attached_block) {
+  return undef unless ($current_if->{body_carrier} || '') eq 'attached';
+  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  return "} elsif ($cond_expr) {$body";
+ }
+
+ return undef if ($current_if->{body_carrier} || '') eq 'attached';
 
  return "} elsif ($cond_expr) {"
 }
@@ -204,10 +228,12 @@ sub _lower_elseif_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_else_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && $call->{method} eq 'else';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
@@ -218,6 +244,16 @@ sub _lower_else_flow_statement {
  my $current_if = $if_stack->[-1];
  return undef if $current_if->{else_seen};
  $current_if->{else_seen} = 1;
+ if (defined $attached_block) {
+  return undef unless ($current_if->{body_carrier} || '') eq 'attached';
+  my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  pop @$if_stack;
+  return "} else {$body }";
+ }
+
+ return undef if ($current_if->{body_carrier} || '') eq 'attached';
 
  return '} else {'
 }
@@ -241,6 +277,7 @@ sub _lower_endif_flow_statement {
 
  my $if_stack = $ctx->{if_stack} || [];
  return undef unless @$if_stack;
+ return undef if ($if_stack->[-1]{body_carrier} || '') eq 'attached';
  pop @$if_stack;
  return '}'
 }
@@ -391,6 +428,25 @@ sub _parse_method_expr_with_optional_attached_block {
  return undef
 }
 
+sub _statement_continues_attached_if_flow {
+ my ($expr, $deps) = @_;
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return 0 unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $method = $parsed_expr->{call}{method} // '';
+ return ($method eq 'elif' || $method eq 'elseif' || $method eq 'else') ? 1 : 0
+}
+
+sub _flush_implicit_if_closures {
+ my ($ctx) = @_;
+ my $if_stack = $ctx->{if_stack} || [];
+ my @closures;
+ while (@$if_stack && $if_stack->[-1]{implicit_close}) {
+  pop @$if_stack;
+  push @closures, '}';
+ }
+ return join(' ', @closures)
+}
+
 sub _lower_flow_branch_single_statement {
  my ($expr, $branch_ctx, $deps) = @_;
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
@@ -399,8 +455,15 @@ sub _lower_flow_branch_single_statement {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
+ my $prefix = '';
+ if (@{$branch_ctx->{if_stack} || []} && !_statement_continues_attached_if_flow($trimmed, $deps)) {
+  $prefix = _flush_implicit_if_closures($branch_ctx);
+ }
+
  my $rules = $branch_ctx->{rewrite_rules};
- return $trimmed unless $rules && ref($rules) eq 'ARRAY';
+ unless ($rules && ref($rules) eq 'ARRAY') {
+  return length($prefix) ? "$prefix $trimmed" : $trimmed;
+ }
 
  foreach my $rule (@$rules) {
   my $candidate_ctx = _clone_flow_branch_rewrite_ctx($branch_ctx);
@@ -408,10 +471,10 @@ sub _lower_flow_branch_single_statement {
   next unless defined($lowered) && length($lowered);
   next if $lowered eq $trimmed;
   %$branch_ctx = %$candidate_ctx;
-  return $lowered;
+  return length($prefix) ? "$prefix $lowered" : $lowered;
  }
 
- return $trimmed
+ return length($prefix) ? "$prefix $trimmed" : $trimmed
 }
 
 #------------------------------------------------------------------------------
@@ -447,8 +510,11 @@ sub _lower_flow_branch_action_list {
  foreach my $action_expr (@$action_exprs) {
   my $lowered_actions = _lower_flow_branch_action_expr($action_expr, $ctx, $deps, $branch_ctx);
   return undef unless ref($lowered_actions) eq 'ARRAY';
-  push @actions, @$lowered_actions;
+ push @actions, @$lowered_actions;
  }
+
+ my $implicit_closures = _flush_implicit_if_closures($branch_ctx);
+ push @actions, $implicit_closures if length($implicit_closures);
 
  return undef if @{$branch_ctx->{if_stack} || []};
  return undef if @{$branch_ctx->{switch_stack} || []};
@@ -458,10 +524,12 @@ sub _lower_flow_branch_action_list {
 
 sub _lower_inline_if_branch_expr {
  my ($branch_expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $branch_call = $parse_method_function_expr->($branch_expr);
+ my $parsed_branch = _parse_method_expr_with_optional_attached_block($branch_expr, $deps);
+ return undef unless $parsed_branch && ref($parsed_branch->{call}) eq 'HASH';
+ my $branch_call = $parsed_branch->{call};
+ my $attached_block = $parsed_branch->{attached_block};
  return undef unless $branch_call;
  my $method = $branch_call->{method} // '';
 
@@ -472,7 +540,10 @@ sub _lower_inline_if_branch_expr {
   my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
   return undef unless defined($cond_expr) && length($cond_expr);
 
-  my @branch_action_exprs = @$effective_args > 1 ? @$effective_args[1 .. $#$effective_args] : ();
+  return undef if defined($attached_block) && @$effective_args > 1;
+  my @branch_action_exprs = defined($attached_block)
+   ? ($attached_block)
+   : (@$effective_args > 1 ? @$effective_args[1 .. $#$effective_args] : ());
   my $actions = _lower_flow_branch_action_list(\@branch_action_exprs, $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
@@ -483,7 +554,9 @@ sub _lower_inline_if_branch_expr {
   my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 0, undef);
   return undef unless $effective_args;
 
-  my $actions = _lower_flow_branch_action_list($effective_args, $ctx, $deps);
+  return undef if defined($attached_block) && @$effective_args;
+  my @branch_action_exprs = defined($attached_block) ? ($attached_block) : @$effective_args;
+  my $actions = _lower_flow_branch_action_list(\@branch_action_exprs, $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
   return "} else {$body";

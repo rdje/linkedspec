@@ -217,6 +217,8 @@ Those attached switch branch blocks are real structured block contexts, not just
 
 That same structured-context rule now has explicit regression coverage for nested marker-style switch flow too. An attached switch branch block can itself contain `switch(...) ... case(...) ... default() ... endswitch()` and still preserve the same language-agnostic rewrite readiness on both action-edge and lifecycle surfaces.
 
+The `if(...)` family now has the matching structured attached-block form too. Inside an action-edge `{ ... }` block or any lifecycle block (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`), you can now write `if(cond) { ... } elseif(cond2) { ... } else() { ... }` and get the same canonical lowering and migration metadata as the already-supported inline composite `if(cond, ..., elseif(...), else(...))` surfaces. Like marker-style flow, that attached-block form is a structured-block-context syntax, not a free-standing fluent surface.
+
 List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk.
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.

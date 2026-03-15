@@ -1,5 +1,39 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Support Attached-Block Composite If
+## Summary
+Landed structured attached-block composite `if(...)` support on the method-like DSL surfaces that had been tracked as the next control-flow follow-up. `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now lowers cleanly on action-edge and lifecycle block surfaces and matches the existing structured inline-composite `if(...)` baseline.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended control-flow lowering to accept structured attached-block `if/elseif/else` statements:
+  - `if(cond) { ... }`
+  - `elseif(cond2) { ... }`
+  - `else() { ... }`
+- Kept the one-header / one-body-carrier rule intact:
+  - inline branch actions and attached branch blocks remain mutually exclusive on the same branch header.
+- Added implicit close handling for attached-block `if` chains:
+  - top-level rewrite now closes pending attached-block `if` chains at the next statement boundary or end of block,
+  - branch-local structured lowering now applies the same closure behavior inside nested structured branch contexts.
+- Extended flow scanning and contract rewrites so attached-block `if/elseif/else` statements participate in canonical helper metadata rather than falling outside the control-flow contract family.
+- Added focused regressions that lock the attached-block form against the structured inline-composite branch-block baseline on action-edge, `LX`, and the remaining lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`).
+- Tracker interpretation:
+  - `Method-like DSL migration track` stays `in progress`,
+  - because this slice broadens the supported control-flow surface without changing the track level.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Nested Marker Switch Flow Inside Attached Switch Branch Blocks
 ## Summary
 Regression-locked the next structured-block-context follow-up for attached switch branch sugar. Attached `case(value) { ... }` / `default() { ... }` branch bodies now have explicit coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow on both inline composite and marker-style outer switch surfaces, across action-edge and lifecycle coverage.
@@ -82,7 +116,7 @@ Supported attached-block switch branch sugar on the switch surfaces that were ex
 - Kept the slice aligned with the control-flow design note:
   - switch attached-block sugar is now supported,
   - mixed branch-body carriers remain rejected,
-  - attached-block composite `if(cond) { ... }` remains deferred for a later syntax pass.
+  - and the matching attached-block composite `if(cond) { ... } elseif(cond2) { ... } else() { ... }` follow-up is now landed too.
 - Tracker interpretation:
   - `Method-like DSL migration track` stays `in progress`,
   - because this slice broadens the supported switch surface without changing the overall track level.
@@ -143,7 +177,7 @@ Made the already-working structured inline-composite `if(...)` branch-body form 
 - Clarified the control-flow docs accordingly:
   - the first inline-composite `if(...)` slice is no longer only the action-list form,
   - branch-body blocks `{ ... }` are also now an explicitly supported first-step extension,
-  - while attached-block `if(cond) { ... }` remains deferred.
+  - and the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` is now supported on structured block surfaces too.
 - Tracker interpretation:
   - `Method-like DSL migration track` stays `in progress`,
   - because this slice expands regression-locked control-flow surface area without changing the track level.
