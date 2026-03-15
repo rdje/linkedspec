@@ -228,6 +228,7 @@ Current direction note:
 - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now supported too, on both inline composite and structured marker-style switch surfaces,
 - and those attached switch branch blocks can now carry nested marker-style flow such as `if(...) ... endif()` while staying fully language-agnostic-ready,
 - and they now have explicit regression coverage for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
+- and they now have explicit regression coverage for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too,
 - and they now have explicit regression coverage for nested composite `if(...)` forms too, including both inline composite and attached-block inner `if` surfaces,
 - and they now have explicit regression coverage for parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies too, even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow,
 - and that same deeper attached-switch parity now has explicit regression coverage for nested marker-style `switch(...) ... endswitch()` flow inside those deeper `if/elseif/else` branches too,

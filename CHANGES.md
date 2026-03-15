@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Flow in Attached Switch Branches
+## Summary
+Regression-locked the broader plain nested marker-switch seam inside attached switch branch blocks: both inline composite and marker-style outer switch surfaces now cover nested marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms too, not only the simpler single-`case(...)` marker-switch shape.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused action-edge regressions that lock the plain attached-branch-body surface for nested multi-`case(...)` marker-style `switch(...) ... endswitch()` flow on:
+  - inline composite outer `switch(...)`, and
+  - marker-style outer `switch(...) ... endswitch()`
+- Added the same regression locks across the full lifecycle family:
+  - `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`
+- Locked:
+  - descriptor build success
+  - zero RAW_PERL fallback
+  - zero unresolved-helper hits
+  - zero raw-Perl dependency on action-edge surfaces
+  - language-agnostic readiness
+  - expected canonical helper-mix counts
+  - canonical SWITCH/CASE/DEFAULT/ENDSWITCH node coverage
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Parity in Composite If/Elseif Blocks
 ## Summary
 Regression-locked the combined deeper composite-`if/elseif/else` plus broader multi-`case(...)` nested marker-switch seam: composite `if(...)` branch-block parity now covers the deeper `if/elseif/else` branch shape when those branches carry marker-style `switch(...) ... endswitch()` flow with multiple `case(...)` arms, not only the simpler single-`case(...)` marker-switch shape.
