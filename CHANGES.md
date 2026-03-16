@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Structured Switch-Branch Composite-If Parity
+## Summary
+Extended local structured-branch parity for both switch families. Inline composite switch structured branch-body carriers and marker-style outer switch structured branch-body surfaces are now regression-locked for nested composite `if(...)` / `elseif(...)` flow too, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused `phase0_regression.t` parity locks for nested composite `if(...)` / `elseif(...)` flow on the two structured branch-body carrier pairs:
+  - inline composite switch `case(value, { ... })` / `default({ ... })` versus `case(value) { ... }` / `default() { ... }`,
+  - marker-style outer switch plain branch markers versus attached branch-block sugar.
+- Covered both:
+  - action-edge surfaces,
+  - and the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked:
+  - descriptor build success,
+  - identical output shape within each switch family,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on action-edge surfaces,
+  - zero unresolved-helper hits,
+  - language-agnostic readiness,
+  - and identical canonical node coverage and hit counts within each same-family structured branch-body carrier pair.
+- Clarified in the roadmap and guides that nested composite `if(...)` / `elseif(...)` flow is now parity-locked not only across the two outer switch families, but also within each switch family's own structured branch-body carriers.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Nested Composite-If Parity Across Outer Switch Families
 ## Summary
 Extended the nested composite `if(...)` / `elseif(...)` contract across the two outer switch families themselves. Attached branch blocks `case(value) { ... }` / `default() { ... }` are now regression-locked in parity between inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` for nested composite `if/elseif` flow, across action-edge and the full lifecycle family.

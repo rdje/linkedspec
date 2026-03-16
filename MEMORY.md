@@ -11,6 +11,12 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Method-DSL / control-flow follow-up:
+  - `t/phase0_regression.t` now parity-locks the two local structured branch-body carrier pairs for nested composite `if(...)` / `elseif(...)` flow:
+    - inline composite switch `case(value, { ... })` / `default({ ... })` versus `case(value) { ... }` / `default() { ... }`,
+    - and marker-style outer switch plain branch markers versus attached branch-block sugar.
+  - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
+  - roadmap/user-guide wording now says that nested composite `if/elseif` parity holds within each switch family's own structured branch-body carriers too, not only across the two outer switch families.
+- Method-DSL / control-flow follow-up:
   - `t/phase0_regression.t` now parity-locks inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on attached branch blocks `case(value) { ... }` / `default() { ... }` for nested composite `if/elseif` flow.
   - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
   - roadmap/user-guide wording now says that nested composite-`if` contract spans both outer switch families too, not only same-family outer-switch surfaces.
