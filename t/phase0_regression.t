@@ -11536,6 +11536,304 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_attached_block_switch_accepts_mixed_branch_carriers' => sub {
+    plan tests => 12;
+
+    my $attached_branch_block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&") {
+      say("amp")
+      return_undef()
+    }
+    default {
+      return_undef()
+    }
+  }
+ }
+SPEC
+
+    my $mixed_carrier_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&")
+      say("amp")
+      return_undef()
+    default {
+      return_undef()
+    }
+  }
+ }
+SPEC
+
+    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
+    my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descr => 1);
+
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with all-attached branch blocks');
+    ok(defined($mixed_descr) && ref($mixed_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with mixed branch carriers');
+    is_deeply($attached_descr->{spec}{Top}{ACODE}, $mixed_descr->{spec}{Top}{ACODE}, 'action-edge attached-block outer switch mixed branch carriers lower to identical ACODE output as the all-attached branch baseline');
+
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+    my $mixed_meta = $mixed_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block outer switch with all-attached branch blocks avoids RAW_PERL fallback');
+    is($mixed_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block outer switch with mixed branch carriers avoids RAW_PERL fallback');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block outer switch with all-attached branch blocks avoids raw Perl dependency');
+    is($mixed_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block outer switch with mixed branch carriers avoids raw Perl dependency');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge attached-block outer switch with all-attached branch blocks avoids unresolved-helper hits');
+    is($mixed_meta->{unresolved_helper_count}, 0, 'action-edge attached-block outer switch with mixed branch carriers avoids unresolved-helper hits');
+    is_deeply($attached_meta->{canonical_action_ir_nodes}, $mixed_meta->{canonical_action_ir_nodes}, 'action-edge attached-block outer switch mixed branch carriers preserve canonical action-IR node coverage from the all-attached branch baseline');
+    ok(
+        $attached_meta->{language_agnostic_action_ir_ready} && $mixed_meta->{language_agnostic_action_ir_ready},
+        'action-edge attached-block outer switch mixed branch carriers remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$mixed_meta->{canonical_action_ir_nodes}}),
+        'action-edge attached-block outer switch mixed branch carriers preserve SWITCH/CASE/DEFAULT plus helper nodes'
+    );
+};
+subtest 'method_like_full_lifecycle_attached_block_switch_accepts_mixed_branch_carriers' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle attached-block outer switch mixed branch carriers" => sub {
+            plan tests => 8;
+
+            my $attached_branch_block_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&") {
+      return_undef()
+    }
+    default {
+      return_undef()
+    }
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $mixed_carrier_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&")
+      return_undef()
+    default {
+      return_undef()
+    }
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
+            my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descr => 1);
+
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with all-attached branch blocks");
+            ok(defined($mixed_descr) && ref($mixed_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with mixed branch carriers");
+
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+            my $mixed_meta = $mixed_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($attached_descr->{spec}{Top}{$code_key}, $mixed_descr->{spec}{Top}{$code_key}, "$tag lifecycle attached-block outer switch mixed branch carriers lower to identical $code_key output as the all-attached branch baseline");
+            is($mixed_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle attached-block outer switch with mixed branch carriers avoids RAW_PERL fallback");
+            is_deeply($attached_meta->{canonical_action_ir_nodes}, $mixed_meta->{canonical_action_ir_nodes}, "$tag lifecycle attached-block outer switch mixed branch carriers preserve canonical action-IR node coverage");
+            is_deeply($attached_meta->{canonical_action_ir_hits}, $mixed_meta->{canonical_action_ir_hits}, "$tag lifecycle attached-block outer switch mixed branch carriers preserve canonical action-IR hit counts");
+            ok(
+                $mixed_meta->{unresolved_helper_count} == 0 &&
+                $mixed_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle attached-block outer switch mixed branch carriers stay fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$mixed_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle attached-block outer switch mixed branch carriers preserve SWITCH/CASE/DEFAULT canonical nodes",
+            );
+        };
+    }
+};
+subtest 'method_like_fluent_action_attached_block_switch_accepts_mixed_branch_carriers' => sub {
+    plan tests => 11;
+
+    my $structured_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&")
+      say("amp")
+      return_undef()
+    default {
+      return_undef()
+    }
+  }
+ }
+SPEC
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top.switch(scalar(op)) {
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  case("&")
+    say("amp")
+    return_undef()
+  default {
+    return_undef()
+  }
+ }
+SPEC
+
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+    ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured outer attached-block switch with mixed branch carriers');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent outer attached-block switch with mixed branch carriers');
+    is_deeply($structured_descr->{spec}{Top}{ACODE}, $fluent_descr->{spec}{Top}{ACODE}, 'action-edge fluent outer attached-block switch mixed branch carriers lower to identical ACODE output as the structured mixed-carrier baseline');
+
+    my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($structured_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge structured outer attached-block switch with mixed branch carriers avoids RAW_PERL fallback');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge fluent outer attached-block switch with mixed branch carriers avoids RAW_PERL fallback');
+    is($structured_meta->{unresolved_helper_count}, 0, 'action-edge structured outer attached-block switch with mixed branch carriers avoids unresolved-helper hits');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'action-edge fluent outer attached-block switch with mixed branch carriers avoids unresolved-helper hits');
+    is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, 'action-edge fluent outer attached-block switch mixed branch carriers preserve canonical action-IR node coverage from the structured mixed-carrier baseline');
+    is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, 'action-edge fluent outer attached-block switch mixed branch carriers preserve canonical action-IR hit counts from the structured mixed-carrier baseline');
+    ok(
+        $structured_meta->{language_agnostic_action_ir_ready} && $fluent_meta->{language_agnostic_action_ir_ready},
+        'action-edge fluent outer attached-block switch mixed branch carriers remain language-agnostic action-IR ready alongside the structured mixed-carrier baseline'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge fluent outer attached-block switch mixed branch carriers preserve SWITCH/CASE/DEFAULT canonical nodes'
+    );
+};
+subtest 'method_like_full_lifecycle_fluent_attached_block_switch_accepts_mixed_branch_carriers' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle fluent outer attached-block switch mixed branch carriers" => sub {
+            plan tests => 8;
+
+            my $structured_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    case("&")
+      return_undef()
+    default {
+      return_undef()
+    }
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(op)) {
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  case("&")
+    return_undef()
+  default {
+    return_undef()
+  }
+ }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+            ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured outer attached-block switch with mixed branch carriers");
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent outer attached-block switch with mixed branch carriers");
+
+            my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($structured_descr->{spec}{Top}{$code_key}, $fluent_descr->{spec}{Top}{$code_key}, "$tag lifecycle fluent outer attached-block switch mixed branch carriers lower to identical $code_key output as the structured mixed-carrier baseline");
+            is($fluent_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle fluent outer attached-block switch with mixed branch carriers avoids RAW_PERL fallback");
+            is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, "$tag lifecycle fluent outer attached-block switch mixed branch carriers preserve canonical action-IR node coverage");
+            is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, "$tag lifecycle fluent outer attached-block switch mixed branch carriers preserve canonical action-IR hit counts");
+            ok(
+                $fluent_meta->{unresolved_helper_count} == 0 &&
+                $fluent_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle fluent outer attached-block switch mixed branch carriers stay fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle fluent outer attached-block switch mixed branch carriers preserve SWITCH/CASE/DEFAULT canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_marker_flow' => sub {
     plan tests => 10;
 

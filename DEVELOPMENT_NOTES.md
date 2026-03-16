@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-16: Regression-locked mixed per-branch carriers on the outer attached-block switch family, so forms like `case("A") { ... } case("B") ... default { ... }` are now explicit supported surfaces on both structured and final-call fluent action-edge/lifecycle contexts.
 - 2026-03-16: Regression-locked the representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so `split_each(...)` now sits inside the explicit method-like DSL contract instead of living mostly as a VHDL migration detail.
 - 2026-03-16: Made zero-arg fluent control-flow markers explicit in the bootstrap renderer so `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` are now an intentional supported fluent surface rather than an accidental byproduct of later optional-scope normalization.
 - 2026-03-16: Added mixed-carrier composite `if(...)` support so attached-block `if` chains can mix attached branch blocks with lighter plain marker bodies across one `if/elseif/else` chain, including the final-call fluent action-edge/lifecycle surface.
@@ -14,6 +15,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Feature follow-up:
+  - the outer attached-block switch family now explicitly supports mixed per-branch carriers such as `case("A") { ... } case("B") ... default { ... }`,
+  - that contract is now regression-locked on both structured and final-call fluent surfaces across action-edge and the full lifecycle family,
+  - and the control-flow guide now teaches the mixed-carrier shape with fuller worked examples instead of leaving it implicit.
 - Feature follow-up:
   - representative array-normalization pipelines using `split(...)`, `split_each(...)`, `trim_each(...)`, `filter_nonempty(...)`, and `return(array_copy(...))` are now explicitly regression-locked between fluent and structured authoring,
   - that contract now spans both action-edge and lifecycle surfaces,

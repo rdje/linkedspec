@@ -31,6 +31,7 @@ Syntax status note:
   - `case(value) { ... }` and `default() { ... }` are now supported switch sugar on both inline composite and structured marker-style switch surfaces,
   - `switch(expr) { case(value) { ... } default { ... } }` is now supported too as the block-bodied outer sibling of the inline composite switch attached-branch-block surface,
   - and that same outer switch form now also accepts plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
+  - and that same outer switch form now also allows mixed per-branch carriers such as `case("A") { ... } case("B") ... default { ... }` on both structured and final-call fluent surfaces,
   - and that same outer switch form is now also available as the final call on fluent action-edge and lifecycle chains, not only inside structured outer blocks,
   - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as the first `if(...)` step, with the matching attached-block composite form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces and as the final call on fluent action-edge and lifecycle chains,
   - that same attached-block composite `if(...)` family now also allows mixed per-branch carriers such as `if(cond) { ... } elseif(cond2) ... else { ... }`,
@@ -58,7 +59,7 @@ This module lowers:
 It also supports three switch surfaces:
 1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }`, `default() { ... }`, and `default { ... }`, and
 2. inline composite switch arguments (`switch(expr, case(...), default(...))`), including both `case(value, { ... })` / `default({ ... })` and attached `case(value) { ... }` / `default() { ... }` / `default { ... }` branch-body forms, and
-3. a block-bodied outer switch form (`switch(expr) { case(value) { ... } default { ... } }`) that lowers through the same canonical path as the inline composite switch attached-branch-block baseline, while also accepting plain marker branches such as `case(value) ... default ...` inside the same outer block and as the final call on fluent action-edge and lifecycle chains.
+3. a block-bodied outer switch form (`switch(expr) { case(value) { ... } default { ... } }`) that lowers through the same canonical path as the inline composite switch attached-branch-block baseline, while also accepting plain marker branches such as `case(value) ... default ...`, mixed per-branch carrier chains such as `case("A") { ... } case("B") ... default { ... }`, and the same outer block as the final call on fluent action-edge and lifecycle chains.
 
 It also supports three `if(...)` surfaces:
 1. marker-style flow (`if(...) ... elseif(...) ... else() ... endif()`) in structured block contexts,
@@ -310,6 +311,40 @@ I.switch(scalar(op)) {
     return_undef()
   default
     return_undef()
+}
+```
+
+And mixed per-branch carriers are supported too:
+
+```text
+switch(scalar(op)) {
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  case("&")
+    say("amp")
+    return_undef()
+  default {
+    return_undef()
+  }
+}
+```
+
+The same mixed-carrier outer switch also works as the final fluent call:
+
+```text
+/a/ -> Top.switch(scalar(op)) {
+  case("|") {
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  }
+  case("&")
+    say("amp")
+    return_undef()
+  default {
+    return_undef()
+  }
 }
 ```
 - and the marker-style outer switch structured branch-body surfaces are now regression-locked in parity for that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape too, across plain branch markers and attached branch blocks,

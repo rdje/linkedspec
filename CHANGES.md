@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Mixed-Carrier Outer Switch Branches
+## Summary
+Extended the outer attached-block switch family so mixed per-branch carriers are now explicit and regression-locked. Forms like `switch(expr) { case("A") { ... } case("B") ... default { ... } }` now preserve the same canonical lowering on both structured and final-call fluent surfaces across action-edge and lifecycle coverage.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused regression locks for mixed-carrier outer-switch forms on:
+  - structured action-edge outer-block switch surfaces,
+  - full lifecycle outer-block switch surfaces,
+  - fluent final-call action-edge outer-block switch surfaces,
+  - and fluent final-call lifecycle outer-block switch surfaces.
+- Locked parity on:
+  - identical `ACODE` or lifecycle code output,
+  - zero fallback,
+  - zero unresolved helpers,
+  - identical canonical action-IR node coverage,
+  - identical canonical action-IR hit counts on lifecycle and fluent parity checks,
+  - and language-agnostic readiness metadata.
+- Expanded the control-flow guides with fuller mixed-carrier outer-switch examples instead of leaving the feature implied by the looser “plain or attached branches are accepted” wording.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Array-Normalization Pipeline Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking a representative multi-stage array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` flows now preserve the same lowering and migration metadata across both concrete syntaxes.

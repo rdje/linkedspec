@@ -217,6 +217,8 @@ That same family now has a block-bodied outer switch form too: `switch(expr) { c
 
 Inside that outer block, you can now use either attached branch blocks or plain marker branches. In other words, both `case(value) { ... }` / `default { ... }` and the lighter `case(value) ... default ...` style are part of the supported outer attached-block switch surface.
 
+That same outer attached-block switch family now allows mixed per-branch carriers too. In practice that means shapes like `switch(expr) { case("A") { ... } case("B") ... default { ... } }` are supported on both structured and final-call fluent surfaces, so one branch can use an attached block while the next uses a lighter plain marker body without forcing the whole switch into one carrier style.
+
 That same outer attached-block switch surface is now available as the final call on fluent action-edge and lifecycle chains too. In practice that means surfaces like `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` now lower through the same canonical switch path as the structured outer-block baseline instead of dropping the branch body.
 
 The attached-block composite `if(...)` surface got the same punctuation-light follow-up: `if(cond) { ... } elseif(cond2) { ... } else() { ... }` still works, and `else { ... }` is now accepted as an equivalent lower-friction alias for the final branch body. That same attached-block composite `if(...)` surface is now available as the final call on fluent action-edge and lifecycle chains too, so surfaces like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the structured baseline instead of dropping the trailing branches.
