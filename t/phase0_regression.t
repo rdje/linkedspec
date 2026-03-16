@@ -6499,7 +6499,7 @@ Top::&
       push_value(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
-    default() {
+    default {
       say("miss")
       return_undef()
     }
@@ -6581,7 +6581,7 @@ LX {
       push_value(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
-    default() {
+    default {
       say("miss")
       return_undef()
     }
@@ -6885,7 +6885,7 @@ Top::&
     say("alt")
     return_undef()
   }
-  else() {
+  else {
     return_undef()
   }
  }
@@ -6959,7 +6959,7 @@ LX {
     say("alt")
     return_undef()
   }
-  else() {
+  else {
     return_undef()
   }
 }
@@ -7104,7 +7104,7 @@ $tag {
     say("alt")
     return_undef()
   }
-  else() {
+  else {
     return_undef()
   }
 }
@@ -7171,7 +7171,7 @@ Top::&
     case("|") {
       return_undef()
     }
-    default() {
+    default {
       return_undef()
     }
     endswitch()
@@ -10682,7 +10682,7 @@ $tag {
     declare(array, events)
     return_array(semantic_annotation, hash("items", array(events)))
   }
-  default() {
+  default {
     return_undef()
   }
   endswitch()

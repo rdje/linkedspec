@@ -72,7 +72,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
 2. Continue the method-like DSL migration track:
    - priority shift: finish the current last scoped marker `if(...)` / marker `switch(...)` hardening slice, then switch to missing user-facing DSL features before returning to any deeper cross-nesting parity expansion,
-   - landed punctuation-reduction follow-up: structured marker-style zero-arg terminators now accept bare keyword form (`else`, `endif`, `default`, `endcase`, `endswitch`) in addition to the older `...()` spellings,
+   - landed punctuation-reduction follow-up: structured marker-style zero-arg terminators now accept bare keyword form (`else`, `endif`, `default`, `endcase`, `endswitch`) in addition to the older `...()` spellings, and attached branch blocks now also accept `else { ... }` / `default { ... }` alongside `else() { ... }` / `default() { ... }`,
    - broaden fluent/block equivalence on supported surfaces,
    - keep both supported inline-switch structured branch-body surfaces in sync:
      - `case(value, { ... })` / `default({ ... })`,
@@ -114,7 +114,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep that same deeper composite `if/elseif/else` branch shape aligned for the broader multi-`case(...)` nested inline-composite `switch(...)` shape too, not only the simpler single-`case(...)` nested inline-switch shape,
    - keep that same deeper composite `if/elseif/else` branch shape aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,
    - keep marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` mutually nestable without a DSL-fixed depth cap in structured block contexts, including attached switch branch blocks plus structured inline and attached-block composite `if(...)` branch bodies, with practical limits coming only from normal recursion/resource ceilings,
-   - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` aligned with the now-landed structured-block-context attached form `if(cond) { ... } elseif(cond2) { ... } else() { ... }`,
+   - keep the newly landed inline composite `if(cond, ..., elseif(...), else(...))` form plus its structured branch-body extension `if(cond, { ... }, elseif(..., { ... }), else({ ... }))` aligned with the now-landed structured-block-context attached form `if(cond) { ... } elseif(cond2) { ... } else() { ... }`, including its lower-friction `else { ... }` alias,
    - keep structured inline and attached composite `if(...)` branch bodies aligned for nested marker-style `switch(...) ... endswitch()` flow too, not only for flat helper sequences or nested marker-style `if(...) ... endif()` flow,
    - keep those same composite-`if(...)` branch bodies aligned for nested inline-composite `switch(...)` forms too, including attached switch-branch sugar such as `case(value) { ... }` / `default() { ... }`,
    - keep that nested inline-composite `switch(...)` contract inside composite-`if(...)` branch bodies aligned for broader multi-`case(...)` shapes too, not only the simpler single-`case(...)` shape,

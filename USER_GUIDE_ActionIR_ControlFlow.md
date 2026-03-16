@@ -40,11 +40,11 @@ Syntax status note:
 This module lowers:
 - `if(...)` and alias `i(...)`
 - `elseif(...)` and alias `elif(...)`
-- `else()`
+- `else()` / bare `else` in structured block contexts
 - `endif()`
 - `switch(...)`
 - `case(...)`
-- `default()`
+- `default()` / bare `default` in structured block contexts
 - `endcase()`
 - `endswitch()`
 - `say(...)`
@@ -52,13 +52,13 @@ This module lowers:
 - `return_undef()`
 
 It also supports two switch styles:
-1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }` and `default() { ... }`, and
-2. inline composite switch arguments (`switch(expr, case(...), default(...))`), including both `case(value, { ... })` / `default({ ... })` and attached `case(value) { ... }` / `default() { ... }` branch-body forms.
+1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }`, `default() { ... }`, and `default { ... }`, and
+2. inline composite switch arguments (`switch(expr, case(...), default(...))`), including both `case(value, { ... })` / `default({ ... })` and attached `case(value) { ... }` / `default() { ... }` / `default { ... }` branch-body forms.
 
 It also supports three `if(...)` surfaces:
 1. marker-style flow (`if(...) ... elseif(...) ... else() ... endif()`) in structured block contexts,
 2. inline composite flow (`if(cond, action1(...), ..., elseif(cond2, ...), else(...))`) plus its structured branch-body form `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))`, and
-3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces.
+3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces, with `else { ... }` accepted as the lighter final-branch alias.
 
 For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested switch flow is now part of the supported structured-context contract too. That includes:
 - marker-style `switch(...) ... case(...) ... default() ... endswitch()`, and

@@ -211,7 +211,9 @@ Inline composite `switch(..., case(...), default(...))` forms are now locked on 
 
 That inline-composite switch surface now has its first structured branch-body extension too: `case(value, { ... })` and `default({ ... })` are supported alongside the older explicit action-list form, so compact inline dispatch can still carry semicolonless structured helper sequences without falling back to raw Perl.
 
-That same switch surface now supports attached-block branch sugar too: `case(value) { ... }` and `default() { ... }` lower to the same canonical result as the structured-argument `case(value, { ... })` / `default({ ... })` form, and structured marker-style `switch(...) ... case(...) ... default() ... endswitch()` blocks now accept the same attached branch bodies on both action-edge and lifecycle surfaces.
+That same switch surface now supports attached-block branch sugar too: `case(value) { ... }`, `default() { ... }`, and the lighter `default { ... }` alias all lower to the same canonical result as the structured-argument `case(value, { ... })` / `default({ ... })` form, and structured marker-style `switch(...) ... case(...) ... default() ... endswitch()` blocks now accept the same attached branch bodies on both action-edge and lifecycle surfaces.
+
+The attached-block composite `if(...)` surface got the same punctuation-light follow-up: `if(cond) { ... } elseif(cond2) { ... } else() { ... }` still works, and `else { ... }` is now accepted as an equivalent lower-friction alias for the final branch body.
 
 Those attached switch branch blocks are real structured block contexts, not just flat helper carriers. In practice that means they can now hold nested marker-style flow such as `if(...) ... endif()` while preserving the same zero-fallback, zero-unresolved migration metadata as the already-supported flat branch-body forms.
 

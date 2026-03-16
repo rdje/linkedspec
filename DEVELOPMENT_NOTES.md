@@ -5118,3 +5118,4 @@ Before each commit:
 3. Update `USER_GUIDE.md` for user-visible behavior changes.
 4. Update `ROADMAP.md` status and milestones.
 5. Update `MEMORY.md` with resumable session context.
+- Control-flow punctuation-reduction now covers attached branch bodies too: `else { ... }` and `default { ... }` are supported aliases for `else() { ... }` and `default() { ... }`. Keep unresolved-helper matching conservative so rewritten Perl `else { ... }` / `default { ... }` output is not misclassified as leftover DSL.

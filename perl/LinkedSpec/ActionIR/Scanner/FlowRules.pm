@@ -108,7 +108,6 @@ sub _scan_contract_default_marker_events {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<head>default(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
-  next if defined($+{block}) && $+{head} =~ /^\s*default\s*$/o;
   my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{head}));
   next unless $call;
   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
@@ -152,7 +151,6 @@ sub _scan_contract_else_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<head>else(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
-  next if defined($+{block}) && $+{head} =~ /^\s*else\s*$/o;
  my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{head}));
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, undef);

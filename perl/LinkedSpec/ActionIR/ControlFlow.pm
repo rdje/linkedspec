@@ -429,7 +429,8 @@ sub _parse_method_expr_with_optional_attached_block {
   my $body = substr($trimmed, $idx);
   next unless $body =~ /^\{(?<inner>.*)\}$/s;
 
-  $call = $parse_method_function_expr->($head);
+  my $normalized_head = _normalize_bare_zero_arg_flow_marker_expr($head, $deps);
+  $call = $parse_method_function_expr->($normalized_head);
   next unless $call;
 
   return {

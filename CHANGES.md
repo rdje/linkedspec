@@ -12701,3 +12701,4 @@ Added a dedicated regression lock confirming that explicit missing-path inputs c
 - Result:
   - PASS
   - all 36 top-level test blocks pass.
+Accepted punctuation-light attached branch aliases on the method-like control-flow surfaces. Structured attached-block composite `if(...)` now accepts `else { ... }` alongside `else() { ... }`, and both inline-composite and marker-style switch branch-body surfaces now accept `default { ... }` alongside `default() { ... }`, while preserving the same canonical lowering, zero-fallback behavior, and lifecycle-wide regression coverage.

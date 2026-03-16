@@ -4503,3 +4503,4 @@ Update this file after every meaningful exchange/task completion with:
 - What remains,
 - Exact next step.
 - If a commit was created, append hash + subject in `Recent Commit Ledger (Newest First)`.
+- Method-like DSL control-flow now accepts punctuation-light attached branch aliases too: `else { ... }` and `default { ... }` lower the same as `else() { ... }` and `default() { ... }` on composite-`if(...)`, inline-composite switch, and marker-style switch branch-body surfaces.
