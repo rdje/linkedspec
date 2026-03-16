@@ -313,6 +313,8 @@ Nested accessor payloads are locked too: fluent and structured authoring now agr
 
 Array-normalization pipelines are locked too: fluent and structured authoring now agree on representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` flows on both action-edge and lifecycle surfaces, so multi-stage token cleanup stays inside the same backend-neutral method-like DSL equivalence contract instead of feeling like a one-off migration detail from the VHDL corpus.
 
+Case-normalization and filter pipelines are locked too: fluent and structured authoring now agree on representative `assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)) -> lowercase_each(array(parts)) -> return(array_copy(array(parts)))` flows on both action-edge and lifecycle surfaces, so uppercase/uniq/filter/lowercase cleanup is also part of the explicit backend-neutral method-like DSL contract rather than only low-level array-pipeline lowering machinery.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

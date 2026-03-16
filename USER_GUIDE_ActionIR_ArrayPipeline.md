@@ -196,6 +196,55 @@ Read that pipeline in order:
 4. remove empty entries,
 5. return a snapshot array payload of the normalized list.
 
+## Method-like DSL case-normalization/filter contract
+The representative case-normalization/filter pipeline below is also part of the explicit method-like DSL support contract on both action-edge and lifecycle surfaces:
+
+```text
+assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+lowercase_each(array(parts))
+return(array_copy(array(parts)))
+```
+
+This matters because it exercises the “functional composition inside an assignment source, then continue with ordinary statements” shape that users tend to reach for in real cleanup flows. The current contract is that fluent and structured authoring for this pipeline lower through the same canonical ActionIR path, with the same zero-fallback and zero-unresolved-helper expectations.
+
+Worked fluent action-edge example:
+
+```text
+/a/ -> Top .declare(array, parts)
+           .assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+           .lowercase_each(array(parts))
+           .return(array_copy(array(parts)))
+```
+
+Equivalent structured action-edge example:
+
+```text
+/a/ -> Top {
+  declare(array, parts)
+  assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+  lowercase_each(array(parts))
+  return(array_copy(array(parts)))
+}
+```
+
+Equivalent lifecycle example:
+
+```text
+LX {
+  declare(array, parts)
+  assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+  lowercase_each(array(parts))
+  return(array_copy(array(parts)))
+}
+```
+
+Read that pipeline in order:
+1. uppercase the incoming values so matching and deduplication happen on a normalized case surface,
+2. remove duplicates,
+3. keep only entries that match the target pattern,
+4. lowercase the surviving values into the final canonical form,
+5. return a snapshot array payload of the normalized result.
+
 ## Nested functional composition
 You can also compose them functionally.
 

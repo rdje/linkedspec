@@ -1,5 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Lock Case-Normalization Filter Pipeline Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking a representative case-normalization/filter pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `assign(array(...), filter_match(uniq(uppercase_each(array(...))), /.../)) -> lowercase_each(...) -> return(array_copy(...))` flows now preserve the same lowering and migration metadata across both concrete syntaxes.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ArrayPipeline.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for a representative case-normalization/filter pipeline on:
+  - action-edge method chains,
+  - and lifecycle `LX` method chains.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero raw Perl dependency,
+  - zero unresolved helpers,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Made the user-facing docs state the intended contract directly instead of leaving `lowercase_each(...)`, `uppercase_each(...)`, `uniq(...)`, and `filter_match(...)` primarily as low-level array-pipeline lowering details.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Mixed-Carrier Outer Switch Branches
 ## Summary
 Extended the outer attached-block switch family so mixed per-branch carriers are now explicit and regression-locked. Forms like `switch(expr) { case("A") { ... } case("B") ... default { ... } }` now preserve the same canonical lowering on both structured and final-call fluent surfaces across action-edge and lifecycle coverage.
