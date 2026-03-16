@@ -257,7 +257,11 @@ That same attached-switch parity now covers the broader multi-`case(...)` nested
 
 That broader multi-`case(...)` nested inline-switch parity now spans both outer switch families too: inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms now both preserve the same inner composite-`if/elseif/else` parity on that broader nested shape.
 
+That same broader nested inline-switch shape now has a direct outer-family lock too on the common attached branch-block carrier: an attached `case(value) { ... }` or `default() { ... }` branch block now stays aligned between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms even when those deeper branch bodies mix inline composite and attached-block composite `if/elseif` surfaces around that multi-`case(...)` nested inline switch shape.
+
 That same deeper attached-switch parity now covers the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, across both outer switch families, not only the simpler single-`case(...)` marker-switch shape.
+
+That same broader nested marker-switch shape now has the matching direct outer-family lock too on the common attached branch-block carrier: an attached `case(value) { ... }` or `default() { ... }` branch block now stays aligned between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms even when those deeper branch bodies mix inline composite and attached-block composite `if/elseif` surfaces around that multi-`case(...)` nested marker-style switch shape.
 
 More generally, marker-style `if(...) ... endif()` and marker-style `switch(...) ... endswitch()` are intended to allow arbitrarily deep mutual nesting in structured block contexts. The current regression suite now locks a representative deeper alternating chain across action-edge and the full lifecycle family, and the same deeper alternating contract is now also pinned inside attached switch branch blocks plus both structured inline and attached-block composite `if(...)` branch bodies. In other words, the language does not impose a fixed semantic nesting cap here; the only practical limits are the usual runtime recursion and resource ceilings.
 

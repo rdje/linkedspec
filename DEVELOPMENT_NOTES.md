@@ -9,6 +9,14 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Extended direct outer-switch-family parity on the common attached branch-block carrier for nested composite `if(...)` / `elseif(...)` flow.
+- `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly when attached `case(value) { ... }` / `default() { ... }` branch blocks carry:
+  - the broader multi-`case(...)` nested inline-composite `switch(...)` shape,
+  - and the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape.
+- That direct outer-family parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - those broader multi-`case(...)` nested switch shapes now have direct cross-family outer-switch parity coverage too,
+  - not only same-family structured-branch parity or within-family attached-switch parity.
 - Extended local structured-branch parity one level deeper for nested composite `if(...)` / `elseif(...)` flow on both switch families.
 - `t/phase0_regression.t` now compares the same two local structured branch-body carrier pairs:
   - inline composite switch structured-argument branch blocks versus attached branch-block sugar,

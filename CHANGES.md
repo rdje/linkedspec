@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Outer-Switch Composite-If Multi-Case Parity
+## Summary
+Extended direct outer-switch-family parity for attached branch blocks one level deeper. Inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms are now regression-locked against each other on the common attached branch-block carrier when nested composite `if(...)` / `elseif(...)` flow carries the broader multi-`case(...)` inline-composite or marker-style nested switch shapes, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused `phase0_regression.t` outer-family parity locks on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for nested composite `if(...)` / `elseif(...)` flow when those deeper branches carry:
+  - the broader multi-`case(...)` inline-composite `switch(...)` shape,
+  - and the broader multi-`case(...)` marker-style `switch(...) ... endswitch()` shape.
+- Compared inline composite outer `switch(...)` forms directly against marker-style outer `switch(...) ... endswitch()` forms.
+- Covered both:
+  - action-edge surfaces,
+  - and the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked:
+  - descriptor build success,
+  - identical output shape across the two outer switch families,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on action-edge surfaces,
+  - zero unresolved-helper hits,
+  - and language-agnostic readiness.
+- Clarified in the roadmap and guides that these broader multi-`case(...)` nested switch shapes now have direct cross-family outer-switch parity coverage too, not only same-family branch-carrier parity or within-family attached-switch parity.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Structured Switch-Branch Composite-If Multi-Case Inline Parity
 ## Summary
 Extended local structured-branch parity one level deeper for both switch families. Inline composite switch structured branch-body carriers and marker-style outer switch structured branch-body surfaces are now regression-locked for nested composite `if(...)` / `elseif(...)` flow when those deeper branches carry the broader multi-`case(...)` inline-composite `switch(...)` shape, across action-edge and the full lifecycle family.
