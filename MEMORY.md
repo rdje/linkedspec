@@ -10,6 +10,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-16)
+- Feature follow-up:
+  - the block-bodied outer switch surface `switch(expr) { case(value) { ... } default { ... } }` is now supported,
+  - it is tracked as the structured outer-body sibling of the inline composite switch attached-branch-block surface rather than as marker-style `endswitch()` sugar,
+  - and the implementation depended on switch-flow scanner widening so the whole attached outer-switch statement now counts as canonical ActionIR instead of a fallback RAW_PERL statement.
 - Feature-priority follow-up:
   - structured marker-style control-flow now accepts bare zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch`,
   - regression coverage now pins that surface in statement splitting plus structured action-edge/lifecycle lowering,

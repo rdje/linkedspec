@@ -62,7 +62,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
-| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Finish the current last scoped control-flow hardening slice, then prioritize missing user-facing DSL features; defer further cross-nesting parity expansion beyond that point until the broader feature set is in place. |
+| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement and decoupling are still ahead. |
 
 ## Near-Term Execution Priorities
@@ -71,12 +71,15 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - marker-style semicolon-light control-flow coverage now spans that same full lifecycle family too,
    - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
 2. Continue the method-like DSL migration track:
-   - priority shift: finish the current last scoped marker `if(...)` / marker `switch(...)` hardening slice, then switch to missing user-facing DSL features before returning to any deeper cross-nesting parity expansion,
+   - priority shift is now active: continue missing user-facing DSL features first, and return to deeper marker `if(...)` / marker `switch(...)` cross-nesting parity expansion only when a concrete feature or bug requires it,
    - landed punctuation-reduction follow-up: structured marker-style zero-arg terminators now accept bare keyword form (`else`, `endif`, `default`, `endcase`, `endswitch`) in addition to the older `...()` spellings, and attached branch blocks now also accept `else { ... }` / `default { ... }` alongside `else() { ... }` / `default() { ... }`,
    - broaden fluent/block equivalence on supported surfaces,
    - keep both supported inline-switch structured branch-body surfaces in sync:
      - `case(value, { ... })` / `default({ ... })`,
      - `case(value) { ... }` / `default() { ... }`,
+   - keep the newly landed block-bodied outer switch surface in sync too:
+     - `switch(expr) { case(value) { ... } default { ... } }`,
+     - lowering equivalently to the inline composite switch attached-branch-block surface on action-edge and lifecycle blocks,
    - keep attached-block switch branch bodies fully aligned with structured-block-context flow semantics, including nested marker flow such as `if(...) ... endif()` inside those branch bodies,
    - keep attached-block switch branch bodies fully aligned with nested marker-style switch flow semantics too, not only nested marker-style `if(...) ... endif()` flow,
    - keep attached-block switch branch bodies aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,

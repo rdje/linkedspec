@@ -663,7 +663,7 @@ sub _build_flow_control_contracts {
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_switch_flow_statement};
-    $code =~ s/\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },

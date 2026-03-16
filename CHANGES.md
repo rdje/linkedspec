@@ -1,5 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Outer Attached-Block Switch
+## Summary
+Added the block-bodied outer switch surface `switch(expr) { case(value) { ... } default { ... } }` as a user-facing method-DSL feature. This new form lowers equivalently to the existing inline composite switch attached-branch-block surface rather than being treated as marker-style `endswitch()` sugar.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/Contracts.pm`
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended switch-flow lowering to accept `switch(expr)` with an attached outer block and lower that block through the same control-flow owner path used by the existing switch family.
+- Widened switch-flow scanning so canonical ActionIR now recognizes the whole attached outer-switch statement rather than only the `switch(...)` head.
+- Regression-locked the new outer attached-block switch surface against the inline composite switch attached-branch-block baseline on both action-edge and lifecycle surfaces.
+- Documented the new form as the structured outer-body sibling of inline composite switch, not as marker-style `endswitch()` metadata sugar.
+
 ## 2026-03-16 - Method-Like DSL Slice: Accept Bare Zero-Arg Control-Flow Markers
 ## Summary
 Structured marker-style control-flow blocks now accept bare zero-arg marker keywords, so `else`, `endif`, `default`, `endcase`, and `endswitch` work without mandatory `()`. This is an intentionally feature-focused punctuation-reduction slice rather than another deeper marker `if/switch` cross-nesting hardening slice.

@@ -202,6 +202,7 @@ Status interpretation note:
      - preferred staged switch direction is:
        - first `case(value, { ... })` and `default({ ... })`, now landed as the first structured inline-switch branch-body extension,
        - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now landed too, on both inline composite `switch(...)` and structured marker-style `switch(...) ... endswitch()` surfaces,
+       - and the block-bodied outer switch form `switch(expr) { case(value) { ... } default { ... } }` is now landed too, lowering equivalently to the inline composite switch attached-branch-block surface on both action-edge and lifecycle blocks,
        - attached-block switch branch bodies now also support nested marker-style flow such as `if(...) ... endif()` without losing language-agnostic rewrite readiness,
        - and attached-block switch branch bodies are now regression-locked for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
        - and attached-block switch branch bodies are now regression-locked for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,
@@ -374,7 +375,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
-| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Finish the current last scoped control-flow hardening slice, then prioritize adding missing user-facing DSL features; defer further cross-nesting parity expansion beyond that point until the broader feature set is in place. |
+| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
 
 ### Detailed Status Notes
@@ -524,6 +525,7 @@ This is a saved future-enhancement note, not an active implementation item.
     - keep a strict one-branch-header / one-body-carrier rule,
     - prefer `case(value, { ... })` as the first structured switch extension,
     - now also support attached-block switch sugar `case(value) { ... }` plus both `default() { ... }` and the lower-friction alias `default { ... }` on both inline composite and structured marker-style switch surfaces,
+    - and now also support the block-bodied outer switch form `switch(expr) { case(value) { ... } default { ... } }` as the structured sibling of the inline composite switch attached-branch-block surface,
     - treat inline composite `if(cond, ..., elseif(...), else(...))` as the first landed `if(...)` step, with the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces too, alongside the lower-friction `else { ... }` alias,
     - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.

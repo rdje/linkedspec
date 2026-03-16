@@ -10717,6 +10717,152 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_attached_block_switch_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    default {
+      say("miss")
+      return_undef()
+    }
+  )
+ }
+SPEC
+
+    my $attached_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    default {
+      say("miss")
+      return_undef()
+    }
+  }
+ }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block baseline');
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch form');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $attached_descr->{spec}{Top}{ACODE}, 'action-edge attached-block outer switch form lowers to identical ACODE output as the inline composite switch attached-branch-block baseline');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite switch attached-branch-block baseline avoids RAW_PERL fallback');
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block outer switch form avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite switch attached-branch-block baseline avoids raw Perl dependency');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block outer switch form avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite switch attached-branch-block baseline avoids unresolved-helper hits');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge attached-block outer switch form avoids unresolved-helper hits');
+    is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, 'action-edge attached-block outer switch form preserves canonical action-IR node coverage from the inline composite switch baseline');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $attached_meta->{language_agnostic_action_ir_ready},
+        'action-edge attached-block outer switch form remains language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
+        'action-edge attached-block outer switch form preserves SWITCH/CASE/DEFAULT plus helper nodes'
+    );
+};
+subtest 'method_like_full_lifecycle_attached_block_switch_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle attached-block outer switch form" => sub {
+            plan tests => 8;
+
+            my $inline_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    },
+    default {
+      return_undef()
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    default {
+      return_undef()
+    }
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+
+            ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block baseline");
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch form");
+
+            my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($inline_descr->{spec}{Top}{$code_key}, $attached_descr->{spec}{Top}{$code_key}, "$tag lifecycle attached-block outer switch form lowers to identical $code_key output as the inline composite switch attached-branch-block baseline");
+            is($attached_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle attached-block outer switch form avoids RAW_PERL fallback");
+            is_deeply($inline_meta->{canonical_action_ir_nodes}, $attached_meta->{canonical_action_ir_nodes}, "$tag lifecycle attached-block outer switch form preserves canonical action-IR node coverage");
+            is_deeply($inline_meta->{canonical_action_ir_hits}, $attached_meta->{canonical_action_ir_hits}, "$tag lifecycle attached-block outer switch form preserves canonical action-IR hit counts");
+            ok(
+                $attached_meta->{unresolved_helper_count} == 0 &&
+                $attached_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle attached-block outer switch form stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle attached-block outer switch form preserves SWITCH/CASE/DEFAULT canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_marker_flow' => sub {
     plan tests => 10;
 

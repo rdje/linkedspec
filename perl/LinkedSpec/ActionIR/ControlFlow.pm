@@ -666,6 +666,37 @@ sub _lower_inline_switch_branch_expr {
  return undef
 }
 
+sub _lower_attached_switch_body {
+ my ($attached_block, $ctx, $switch_state, $deps) = @_;
+
+ my $action_exprs = _expand_flow_branch_action_exprs($attached_block, $deps);
+ return undef unless ref($action_exprs) eq 'ARRAY';
+
+ my $branch_ctx = _new_flow_branch_rewrite_ctx($ctx);
+ push @{$branch_ctx->{switch_stack}}, $switch_state;
+
+ my @actions;
+ foreach my $action_expr (@$action_exprs) {
+  my $lowered_action = _lower_flow_branch_single_statement($action_expr, $branch_ctx, $deps);
+  return undef unless defined($lowered_action) && length($lowered_action);
+  push @actions, $lowered_action;
+ }
+
+ my $implicit_if_closures = _flush_implicit_if_closures($branch_ctx);
+ push @actions, $implicit_if_closures if length($implicit_if_closures);
+ return undef if @{$branch_ctx->{if_stack} || []};
+
+ my $switch_stack = $branch_ctx->{switch_stack} || [];
+ return undef unless @$switch_stack;
+ my $active_switch = pop @$switch_stack;
+ return undef unless ref($active_switch) eq 'HASH';
+ return undef if @$switch_stack;
+
+ push @actions, '}' if $active_switch->{open_case};
+ $ctx->{switch_counter} = $branch_ctx->{switch_counter} if defined $branch_ctx->{switch_counter};
+ return \@actions
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_switch_flow_statement
 # Purpose : Lower `switch(...)` fluent control-flow markers.
@@ -674,14 +705,16 @@ sub _lower_inline_switch_branch_expr {
 #------------------------------------------------------------------------------
 sub _lower_switch_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ my $call = $parsed_expr->{call};
+ my $attached_block = $parsed_expr->{attached_block};
  return undef unless $call && $call->{method} eq 'switch';
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
  return undef unless $effective_args && @$effective_args >= 1;
- return undef unless $effective_args;
+ return undef if defined($attached_block) && @$effective_args > 1;
  my $switch_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return undef unless defined($switch_expr) && length($switch_expr);
 
@@ -705,6 +738,13 @@ sub _lower_switch_flow_statement {
    push @clauses, $clause;
   }
   my $body = @clauses ? '; '.join('; ', @clauses) : '';
+  return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
+ }
+
+ if (defined $attached_block) {
+  my $actions = _lower_attached_switch_body($attached_block, $ctx, $switch_state, $deps);
+  return undef unless ref($actions) eq 'ARRAY';
+  my $body = @$actions ? '; '.join('; ', @$actions) : '';
   return "do { my \$$switch_var = $switch_expr; my \$$hit_var = 0$body }";
  }
 

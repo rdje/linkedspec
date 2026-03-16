@@ -9,6 +9,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Feature follow-up:
+  - added the block-bodied outer switch surface `switch(expr) { case(value) { ... } default { ... } }`,
+  - it lowers equivalently to the inline composite switch attached-branch-block surface rather than to the marker-style `endswitch()` surface,
+  - and the fix required widening switch-flow scanning so the whole attached outer-switch statement is recognized as canonical ActionIR instead of falling back as one RAW_PERL statement.
 - Feature-priority follow-up:
   - structured marker-style control-flow now accepts bare zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch`,
   - the implementation went through `MethodExpr` plus `FlowRules`,
