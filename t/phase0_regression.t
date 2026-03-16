@@ -16137,6 +16137,226 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_switch_outer_families_keep_attached_branch_nested_composite_if_elseif_parity' => sub {
+    plan tests => 11;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      if(
+        scalar(on),
+        {
+          return_undef()
+        },
+        elseif(scalar(mid), {
+          return_undef()
+        }),
+        else({
+          return_undef()
+        })
+      )
+    },
+    default() {
+      if(scalar(on)) {
+        return_undef()
+      }
+      elseif(scalar(mid)) {
+        return_undef()
+      }
+      else() {
+        return_undef()
+      }
+    }
+  )
+ }
+SPEC
+
+    my $marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    if(
+      scalar(on),
+      {
+        return_undef()
+      },
+      elseif(scalar(mid), {
+        return_undef()
+      }),
+      else({
+        return_undef()
+      })
+    )
+  }
+  default() {
+    if(scalar(on)) {
+      return_undef()
+    }
+    elseif(scalar(mid)) {
+      return_undef()
+    }
+    else() {
+      return_undef()
+    }
+  }
+  endswitch()
+ }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif flow');
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif flow');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $marker_descr->{spec}{Top}{ACODE}, 'action-edge outer switch families keep identical ACODE output across attached branch blocks with nested composite if/elseif flow');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif flow avoids RAW_PERL fallback');
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif flow avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif flow avoids raw Perl dependency');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif flow avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif flow avoids unresolved-helper hits');
+    is($marker_meta->{unresolved_helper_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif flow avoids unresolved-helper hits');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $marker_meta->{language_agnostic_action_ir_ready},
+        'action-edge outer switch families stay language-agnostic action-IR ready across attached branch blocks with nested composite if/elseif flow',
+    );
+    ok(
+        scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}),
+        'action-edge outer switch families preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif flow',
+    );
+};
+subtest 'method_like_full_lifecycle_switch_outer_families_keep_attached_branch_nested_composite_if_elseif_parity' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle outer switch families with attached branch blocks and nested composite if/elseif flow" => sub {
+            plan tests => 7;
+
+            my $inline_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      if(
+        scalar(on),
+        {
+          return_undef()
+        },
+        elseif(scalar(mid), {
+          return_undef()
+        }),
+        else({
+          return_undef()
+        })
+      )
+    },
+    default() {
+      if(scalar(on)) {
+        return_undef()
+      }
+      elseif(scalar(mid)) {
+        return_undef()
+      }
+      else() {
+        return_undef()
+      }
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $marker_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    if(
+      scalar(on),
+      {
+        return_undef()
+      },
+      elseif(scalar(mid), {
+        return_undef()
+      }),
+      else({
+        return_undef()
+      })
+    )
+  }
+  default() {
+    if(scalar(on)) {
+      return_undef()
+    }
+    elseif(scalar(mid)) {
+      return_undef()
+    }
+    else() {
+      return_undef()
+    }
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+            ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif flow");
+            ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif flow");
+
+            my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+            my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($inline_descr->{spec}{Top}{$code_key}, $marker_descr->{spec}{Top}{$code_key}, "$tag lifecycle outer switch families keep identical $code_key output across attached branch blocks with nested composite if/elseif flow");
+            is($inline_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif flow avoids RAW_PERL fallback");
+            is($marker_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif flow avoids RAW_PERL fallback");
+            ok(
+                $inline_meta->{unresolved_helper_count} == 0 &&
+                $marker_meta->{unresolved_helper_count} == 0 &&
+                $inline_meta->{language_agnostic_action_ir_ready} &&
+                $marker_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle outer switch families stay language-agnostic action-IR ready across attached branch blocks with nested composite if/elseif flow",
+            );
+            ok(
+                scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'IF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELIF' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle outer switch families preserve CASE/DEFAULT plus nested IF/ELIF/ELSE/SWITCH canonical nodes across attached branch blocks with nested composite if/elseif flow",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_structured_branch_surfaces_keep_nested_multi_case_marker_switch_parity' => sub {
     plan tests => 13;
 

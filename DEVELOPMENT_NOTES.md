@@ -9,6 +9,12 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Extended the nested composite `if(...)` / `elseif(...)` contract across the two outer switch families themselves.
+- `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for nested composite `if/elseif` flow.
+- That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the nested composite-`if` contract now spans both outer switch families too,
+  - not only same-family outer-switch surfaces.
 - Extended the broader nested multi-`case(...)` inline-composite switch contract across the two outer switch families themselves.
 - `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for nested multi-`case(...)` inline-composite `switch(...)` flow.
 - That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.

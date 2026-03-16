@@ -233,6 +233,8 @@ That same broader nested multi-`case(...)` marker-switch shape now spans the two
 
 That same cross-family parity now covers the broader nested multi-`case(...)` inline-composite `switch(...)` shape too. Attached branch blocks `case(value) { ... }` and `default() { ... }` now stay aligned there between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces.
 
+That same cross-family parity now covers nested composite `if(...)` / `elseif(...)` flow too. Attached branch blocks `case(value) { ... }` and `default() { ... }` now stay aligned there between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces, not only on bare nested-switch bodies.
+
 That same structured-context rule now covers nested composite `if(...)` forms there too. An attached switch branch block can hold either inline composite `if(cond, ..., elseif(...), else(...))` flow or the attached-block composite form `if(cond) { ... } elseif(cond2) { ... } else() { ... }`, on both inline composite and marker-style outer switch surfaces, while preserving the same zero-fallback, zero-unresolved migration metadata.
 
 That same attached-switch structured-context rule is now locked one level deeper too. On both outer switch families, attached switch branch blocks preserve parity between structured inline composite `if(...)` branch-block bodies and attached-block composite `if(...)` branch bodies even when those deeper `if/elseif/else` branches themselves carry nested inline-composite `switch(...)` flow.
