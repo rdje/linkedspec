@@ -11,6 +11,16 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Method-DSL / control-flow follow-up:
+  - `t/phase0_regression.t` now parity-locks each switch family’s own structured branch-body carriers for nested composite `if(...)` / `elseif(...)` flow when those inner branches themselves carry the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
+  - that now covers:
+    - inline composite switch `case(value, { ... })` / `default({ ... })` versus `case(value) { ... }` / `default() { ... }`,
+    - and marker-style outer switch plain branch markers versus attached branch-block sugar.
+  - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
+  - roadmap/user-guide wording now says this combined nested composite-`if` plus deeper alternating marker seam preserves parity within each switch family’s own structured branch-body carriers too, not only across the two outer switch families.
+- Priority shift after this slice:
+  - deeper marker `if(...)` / marker `switch(...)` cross-nesting hardening is no longer the near-term focus,
+  - next slices should focus on adding missing user-facing DSL features first.
+- Method-DSL / control-flow follow-up:
   - `t/phase0_regression.t` now directly parity-locks inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` on the common attached branch-block carrier for nested composite `if(...)` / `elseif(...)` flow when those inner branches themselves carry the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
   - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
   - roadmap/user-guide wording now says this combined nested composite-`if` plus deeper alternating marker seam has direct cross-family outer-switch parity coverage too, not only the plain nested composite-if seam or the switch-only deep-marker seam.

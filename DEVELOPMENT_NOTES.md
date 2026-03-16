@@ -9,6 +9,18 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Extended same-family structured switch-branch parity into the combined deep marker seam.
+- `t/phase0_regression.t` now compares each switch family’s own structured branch-body carriers when nested composite `if(...)` / `elseif(...)` flow carries the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape:
+  - inline composite switch structured-argument branch blocks versus attached branch-block sugar,
+  - and marker-style outer switch plain branch markers versus attached branch-block sugar.
+- That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - this combined nested composite-`if` plus deeper alternating marker seam now preserves parity within each switch family’s own structured branch-body carriers too,
+  - not only across the two outer switch families.
+- Priority shift after this slice:
+  - deeper marker `if(...)` / marker `switch(...)` cross-nesting hardening is no longer the near-term focus,
+  - the next execution priority is adding missing user-facing DSL features first,
+  - with additional hardening to resume later only if needed.
 - Extended direct outer-switch-family parity on the common attached branch-block carrier for nested composite `if(...)` / `elseif(...)` flow one layer deeper into the deep marker contract.
 - `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly when attached `case(value) { ... }` / `default() { ... }` branch blocks carry nested composite `if/elseif` flow whose inner branches themselves carry the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
 - That direct outer-family parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.

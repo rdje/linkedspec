@@ -62,7 +62,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
-| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Extend fluent/block equivalence coverage, deepen nested-composition coverage, finish lifecycle-family parity, and continue reducing raw Perl dependence without collapsing structured DSL blocks. |
+| Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Finish the current last scoped control-flow hardening slice, then prioritize missing user-facing DSL features; defer further cross-nesting parity expansion beyond that point until the broader feature set is in place. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement and decoupling are still ahead. |
 
 ## Near-Term Execution Priorities
@@ -71,6 +71,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - marker-style semicolon-light control-flow coverage now spans that same full lifecycle family too,
    - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
 2. Continue the method-like DSL migration track:
+   - priority shift: finish the current last scoped marker `if(...)` / marker `switch(...)` hardening slice, then switch to missing user-facing DSL features before returning to any deeper cross-nesting parity expansion,
    - broaden fluent/block equivalence on supported surfaces,
    - keep both supported inline-switch structured branch-body surfaces in sync:
      - `case(value, { ... })` / `default({ ... })`,
@@ -80,11 +81,13 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep attached-block switch branch bodies aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,
    - keep the two supported inline-switch structured branch-body carriers aligned for that broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only for flat helper-only branch bodies,
    - keep those same two inline-switch structured branch-body carriers aligned for nested composite `if(...)` / `elseif(...)` flow too, not only for nested switch-only shapes,
+   - keep those same two inline-switch structured branch-body carriers aligned for nested composite `if(...)` / `elseif(...)` flow carrying the deeper alternating marker `if(...) ... switch(...) ... endif()` nesting contract too, not only for the plain nested composite-if surface or the switch-only deep-marker surface,
    - keep those same two inline-switch structured branch-body carriers aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape inside nested composite `if(...)` / `elseif(...)` flow too, not only for the plain nested composite-if shape,
    - keep those same two inline-switch structured branch-body carriers aligned for the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside nested composite `if(...)` / `elseif(...)` flow too, not only across attached switch branch blocks,
    - keep those same two inline-switch structured branch-body carriers aligned for the deeper alternating marker `if(...) ... switch(...) ... endif()` nesting contract too, across action-edge and the full lifecycle family,
    - keep the marker-style outer switch structured branch-body surfaces aligned for that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting contract too, across the plain branch-marker form and attached-block branch sugar,
    - keep those same marker-style outer switch structured branch-body surfaces aligned for nested composite `if(...)` / `elseif(...)` flow too, not only for nested switch-only shapes or the deeper alternating marker chain,
+   - keep those same marker-style outer switch structured branch-body surfaces aligned for nested composite `if(...)` / `elseif(...)` flow carrying that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting contract too, not only for the plain nested composite-if surface or the switch-only deep-marker surface,
    - keep those same marker-style outer switch structured branch-body surfaces aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape inside nested composite `if(...)` / `elseif(...)` flow too, not only for the plain nested composite-if shape,
    - keep those same marker-style outer switch structured branch-body surfaces aligned for that same broader multi-`case(...)` nested inline-composite `switch(...)` shape inside nested composite `if(...)` / `elseif(...)` flow too, not only across attached switch branch blocks,
    - keep attached switch branch blocks aligned across the two outer switch families themselves for that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting contract too, not only within each outer switch family,
