@@ -9,6 +9,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Prefer explicit wording over compressed expert shorthand when the shorter phrasing risks ambiguity.
 - Explain semantics, constraints, and tradeoffs directly instead of implying them.
 - Use representative examples generously when they reduce ambiguity or help adoption.
+- Use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)

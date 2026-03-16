@@ -517,17 +517,49 @@ else {
 
 One punctuation-reduction slice has already landed for marker-style flow too: in structured block contexts, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
 
-That same punctuation-light treatment now explicitly covers fluent chains too. Representative supported forms include:
+That same punctuation-light treatment now explicitly covers fluent chains too. The shorter marker spellings are not limited to tiny toy cases; they are meant to be readable in ordinary multi-step flows as well.
+
+Worked fluent `if / elseif / else / endif` example:
 
 ```text
-LX.if(scalar(on)).return_undef().else.return_undef().endif
+/a/ -> Top
+  .if(scalar(on))
+  .declare(array, events)
+  .push_value(array(events), hash("kind", "on"))
+  .return(array_copy(array(events)))
+  .elseif(scalar(alt_on))
+  .say("alt branch")
+  .return(hash("kind", "alt"))
+  .else
+  .say("no branch matched")
+  .return_undef()
+  .endif
 ```
+
+That example uses the lighter `.else` and `.endif` spellings, but it lowers through the same canonical path as the older `.else()` and `.endif()` forms.
+
+Worked fluent `switch / case / default / endcase / endswitch` example:
 
 ```text
-LX.switch(scalar(kind)).case("A").return_undef().default.return_undef().endswitch
+LX
+  .switch(scalar(kind))
+  .case("OPEN")
+  .declare(array, parts)
+  .push_value(array(parts), hash("kind", "open"))
+  .return(hash("parts", array_copy(array(parts))))
+  .endcase
+  .case("CLOSE")
+  .say("closing token")
+  .return(hash("kind", "close"))
+  .endcase
+  .default
+  .say("unexpected token")
+  .return_undef()
+  .endcase
+  .endswitch
 ```
 
-Those bare fluent zero-arg markers lower through the same canonical path as `.else()`, `.endif()`, `.default()`, `.endcase()`, and `.endswitch()`.
+That example uses the lighter `.default`, `.endcase`, and `.endswitch` spellings. They lower through the same canonical path as `.default()`, `.endcase()`, and `.endswitch()`. `endcase` remains optional in many flows, but it is shown here deliberately because explicit branch closeout can make longer fluent switch chains easier to read.
 
 ## `say(...)`
 `say(...)` is the newline-terminating output helper.

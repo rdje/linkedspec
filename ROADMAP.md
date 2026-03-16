@@ -37,6 +37,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
    - remove ambiguity instead of hand-waving over it,
    - explain semantics plainly,
    - use representative examples generously,
+   - use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape,
    - and avoid obfuscation in both user-facing docs and architecture notes.
 
 ## Work Phases

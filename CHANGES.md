@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Documentation Slice: Expand Fluent Bare-Marker Control-Flow Examples
+## Summary
+Expanded `USER_GUIDE_ActionIR_ControlFlow.md` so the recent bare fluent marker surface is taught with fuller worked examples instead of only terse proof snippets. The documentation contract was also tightened to say that newly landed user-facing surfaces should get fuller examples when short snippets would obscure the real supported shape.
+
+## Changed Files
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `ROADMAP.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added explicit fluent `if / elseif / else / endif` and `switch / case / default / endcase / endswitch` worked examples for the bare-marker aliases.
+- Clarified that the lighter `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` forms are intended for ordinary multi-step flows, not only minimal toy examples.
+- Logged the doc-policy refinement that recent user-facing feature slices should get fuller examples when terse snippets are not enough.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Bare Fluent Zero-Arg Control-Flow Markers
 ## Summary
 Zero-arg fluent control-flow markers now have an explicit punctuation-light surface. Fluent chains can now use `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` as supported aliases for the older parenthesized forms.

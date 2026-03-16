@@ -10,6 +10,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 ## Documentation Contract
 - Project docs are expected to optimize for readability, non-ambiguity, and clear explanations.
 - Representative examples are encouraged whenever they make semantics easier to learn or verify.
+- Newly landed user-facing surfaces should get fuller worked examples when terse snippets would undersell or obscure the real supported shape.
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-16)
