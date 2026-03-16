@@ -15689,6 +15689,228 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_switch_outer_families_keep_attached_branch_nested_multi_case_marker_switch_parity' => sub {
+    plan tests => 12;
+
+    my $inline_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    },
+    default() {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }
+  )
+ }
+SPEC
+
+    my $marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op))
+  case("|") {
+    switch(scalar(mode))
+    case("x") {
+      return_undef()
+    }
+    case("y") {
+      return_undef()
+    }
+    default() {
+      return_undef()
+    }
+    endswitch()
+  }
+  default() {
+    switch(scalar(mode))
+    case("x") {
+      return_undef()
+    }
+    case("y") {
+      return_undef()
+    }
+    default() {
+      return_undef()
+    }
+    endswitch()
+  }
+  endswitch()
+ }
+SPEC
+
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+    ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested multi-case marker switch flow');
+    ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested multi-case marker switch flow');
+    is_deeply($inline_descr->{spec}{Top}{ACODE}, $marker_descr->{spec}{Top}{ACODE}, 'action-edge outer switch families keep identical ACODE output across attached branch blocks with nested multi-case marker switch flow');
+
+    my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+    my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($inline_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested multi-case marker switch flow avoids RAW_PERL fallback');
+    is($marker_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested multi-case marker switch flow avoids RAW_PERL fallback');
+    is($inline_meta->{raw_perl_dependency_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested multi-case marker switch flow avoids raw Perl dependency');
+    is($marker_meta->{raw_perl_dependency_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested multi-case marker switch flow avoids raw Perl dependency');
+    is($inline_meta->{unresolved_helper_count}, 0, 'action-edge inline composite outer switch with attached branch blocks and nested multi-case marker switch flow avoids unresolved-helper hits');
+    is($marker_meta->{unresolved_helper_count}, 0, 'action-edge marker-style outer switch with attached branch blocks and nested multi-case marker switch flow avoids unresolved-helper hits');
+    is_deeply($inline_meta->{canonical_action_ir_nodes}, $marker_meta->{canonical_action_ir_nodes}, 'action-edge outer switch families preserve canonical node coverage across attached branch blocks with nested multi-case marker switch flow');
+    ok(
+        $inline_meta->{language_agnostic_action_ir_ready} && $marker_meta->{language_agnostic_action_ir_ready},
+        'action-edge outer switch families stay language-agnostic action-IR ready across attached branch blocks with nested multi-case marker switch flow',
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}),
+        'action-edge outer switch families preserve SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across attached branch blocks with nested multi-case marker switch flow',
+    );
+};
+subtest 'method_like_full_lifecycle_switch_outer_families_keep_attached_branch_nested_multi_case_marker_switch_parity' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle outer switch families with attached branch blocks and nested multi-case marker switch flow" => sub {
+            plan tests => 8;
+
+            my $inline_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(
+    scalar(op),
+    case("|") {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    },
+    default() {
+      switch(scalar(mode))
+      case("x") {
+        return_undef()
+      }
+      case("y") {
+        return_undef()
+      }
+      default() {
+        return_undef()
+      }
+      endswitch()
+    }
+  )
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $marker_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op))
+  case("|") {
+    switch(scalar(mode))
+    case("x") {
+      return_undef()
+    }
+    case("y") {
+      return_undef()
+    }
+    default() {
+      return_undef()
+    }
+    endswitch()
+  }
+  default() {
+    switch(scalar(mode))
+    case("x") {
+      return_undef()
+    }
+    case("y") {
+      return_undef()
+    }
+    default() {
+      return_undef()
+    }
+    endswitch()
+  }
+  endswitch()
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+
+            ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested multi-case marker switch flow");
+            ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested multi-case marker switch flow");
+
+            my $inline_meta = $inline_descr->{spec}{Top}{meta}{action_rewriter};
+            my $marker_meta = $marker_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($inline_descr->{spec}{Top}{$code_key}, $marker_descr->{spec}{Top}{$code_key}, "$tag lifecycle outer switch families keep identical $code_key output across attached branch blocks with nested multi-case marker switch flow");
+            is($inline_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle inline composite outer switch with attached branch blocks and nested multi-case marker switch flow avoids RAW_PERL fallback");
+            is($marker_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle marker-style outer switch with attached branch blocks and nested multi-case marker switch flow avoids RAW_PERL fallback");
+            is_deeply($inline_meta->{canonical_action_ir_nodes}, $marker_meta->{canonical_action_ir_nodes}, "$tag lifecycle outer switch families preserve canonical node coverage across attached branch blocks with nested multi-case marker switch flow");
+            ok(
+                $inline_meta->{unresolved_helper_count} == 0 &&
+                $marker_meta->{unresolved_helper_count} == 0 &&
+                $inline_meta->{language_agnostic_action_ir_ready} &&
+                $marker_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle outer switch families stay language-agnostic action-IR ready across attached branch blocks with nested multi-case marker switch flow",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$marker_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'RETURN_A' } @{$marker_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle outer switch families preserve SWITCH/CASE/DEFAULT/ENDSWITCH canonical nodes across attached branch blocks with nested multi-case marker switch flow",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_structured_branch_surfaces_keep_nested_multi_case_marker_switch_parity' => sub {
     plan tests => 13;
 

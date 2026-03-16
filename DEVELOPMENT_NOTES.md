@@ -9,6 +9,12 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Extended the broader nested multi-`case(...)` marker-switch contract across the two outer switch families themselves.
+- `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for nested multi-`case(...)` marker-style switch flow.
+- That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the broader multi-`case(...)` nested marker-switch contract now spans both outer switch families too,
+  - not only the branch-body carriers or same-family surfaces.
 - Extended the deep mutual marker-flow contract across the two outer switch families themselves.
 - `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for the representative deeper alternating marker `if/switch` nesting shape.
 - That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.

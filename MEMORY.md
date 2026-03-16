@@ -11,6 +11,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Method-DSL / control-flow follow-up:
+  - `t/phase0_regression.t` now parity-locks inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on attached branch blocks `case(value) { ... }` / `default() { ... }` for broader nested multi-`case(...)` marker-style switch flow.
+  - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
+  - roadmap/user-guide wording now says that broader multi-`case(...)` nested marker-switch contract spans both outer switch families too, not only the branch-body carriers or same-family surfaces.
+- Method-DSL / control-flow follow-up:
   - `t/phase0_regression.t` now parity-locks inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on attached branch blocks `case(value) { ... }` / `default() { ... }` for the deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape.
   - coverage spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
   - roadmap/user-guide wording now says that same deeper alternating marker contract spans both outer switch families too, not only the branch-body carriers within each family.
