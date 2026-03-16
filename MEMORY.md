@@ -11,6 +11,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Feature follow-up:
+  - the outer attached-block switch surface now works as the final call on fluent action-edge and lifecycle chains too,
+  - so surfaces like `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` are now tracked as supported,
+  - and the bootstrap chain parser now preserves that final attached block instead of dropping it.
+- Feature follow-up:
   - the outer attached-block switch surface is now explicitly regression-locked for plain marker branches too,
   - so `switch(expr) { case(value) ... default ... }` is now tracked as supported alongside the per-branch attached-block variant,
   - and that parity lock now spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).

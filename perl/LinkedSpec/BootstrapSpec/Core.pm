@@ -112,16 +112,19 @@ sub _method_chain_return_uses_general_payload {
 #------------------------------------------------------------------------------
 # Function: _render_method_call_chain
 # Purpose : Render parsed method-chain calls into semicolon-joined helper-style
-#           calls with entry label injected as first argument.
-# Args    : ($entry_label, $chain)
+#           calls with entry label injected as first argument, optionally
+#           preserving an attached block on the final fluent call.
+# Args    : ($entry_label, $chain, $attached_block)
 # Returns : rendered code string or undef
 #------------------------------------------------------------------------------
 sub _render_method_call_chain {
- my ($entry_label, $chain) = @_;
+ my ($entry_label, $chain, $attached_block) = @_;
  my $calls = _parse_method_call_chain($chain);
  return undef unless $calls && @$calls;
+ my $normalized_attached_block = _trim_bootstrap_value($attached_block);
  my @rendered;
- foreach my $call (@$calls) {
+ for my $idx (0 .. $#$calls) {
+  my $call = $calls->[$idx];
   my $method = $call->{method};
   my $args = $call->{args};
   my $rendered;
@@ -131,6 +134,9 @@ sub _render_method_call_chain {
    $rendered = $method . '(' . $args . ')';
   } else {
    $rendered = $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')';
+  }
+  if (defined($normalized_attached_block) && length($normalized_attached_block) && $idx == $#$calls) {
+   $rendered .= ' ' . $normalized_attached_block;
   }
   push @rendered, $rendered;
  }
@@ -261,11 +267,11 @@ sub _build_method_empty_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)/o],
+  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
    my ($info, $descr, $string, $gdata) = @_;
-   my ($entry_label, $reidx, $chain) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN/};
-   my $code = _render_method_call_chain($entry_label, $chain);
+   my ($entry_label, $reidx, $chain, $block) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN BLOCK/};
+   my $code = _render_method_call_chain($entry_label, $chain, $block);
    return undef unless defined $code;
    return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>$code}]
   },
@@ -378,11 +384,11 @@ sub _build_method_empty_non_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_NON_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)/o],
+  re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
    my ($info, $descr, $string, $gdata) = @_;
-   my ($type, $chain) = @{$$info{match_hash}}{qw/TYPE CHAIN/};
-   my $code = _render_method_call_chain($gdata->{_current_entry}, $chain);
+   my ($type, $chain, $block) = @{$$info{match_hash}}{qw/TYPE CHAIN BLOCK/};
+   my $code = _render_method_call_chain($gdata->{_current_entry}, $chain, $block);
    return undef unless defined $code;
    return ["${type}CODE", $code]
   },

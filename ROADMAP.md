@@ -204,6 +204,7 @@ Status interpretation note:
        - attached-block switch sugar `case(value) { ... }` and `default() { ... }` is now landed too, on both inline composite `switch(...)` and structured marker-style `switch(...) ... endswitch()` surfaces,
        - and the block-bodied outer switch form `switch(expr) { case(value) { ... } default { ... } }` is now landed too, lowering equivalently to the inline composite switch attached-branch-block surface on both action-edge and lifecycle blocks,
        - and that same outer switch form now also has explicit support for plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
+       - and that same outer switch form is now also available as the final call on fluent action-edge and lifecycle chains, not only inside structured outer blocks,
        - attached-block switch branch bodies now also support nested marker-style flow such as `if(...) ... endif()` without losing language-agnostic rewrite readiness,
        - and attached-block switch branch bodies are now regression-locked for nested marker-style `switch(...) ... case(...) ... default() ... endswitch()` flow too,
        - and attached-block switch branch bodies are now regression-locked for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,
@@ -528,6 +529,7 @@ This is a saved future-enhancement note, not an active implementation item.
     - now also support attached-block switch sugar `case(value) { ... }` plus both `default() { ... }` and the lower-friction alias `default { ... }` on both inline composite and structured marker-style switch surfaces,
     - and now also support the block-bodied outer switch form `switch(expr) { case(value) { ... } default { ... } }` as the structured sibling of the inline composite switch attached-branch-block surface,
     - and that same outer switch surface now also supports plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
+    - and now also support that same outer attached-block switch form as the final call on fluent action-edge and lifecycle chains,
     - treat inline composite `if(cond, ..., elseif(...), else(...))` as the first landed `if(...)` step, with the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces too, alongside the lower-friction `else { ... }` alias,
     - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.

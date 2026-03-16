@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Fluent Outer Attached-Block Switch
+## Summary
+Extended the outer attached-block switch surface onto fluent action-edge and lifecycle chains. Final-call forms like `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` now lower through the same canonical switch path as the already-landed structured outer-block baseline instead of dropping the attached branch body.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended the bootstrap method-chain start rules so they can bind an optional attached block to the final fluent call on both action-edge and lifecycle chain surfaces.
+- Updated fluent chain rendering so the attached block stays attached to the last lowered helper call instead of being dropped at bootstrap time.
+- Added action-edge and full-lifecycle regression locks comparing fluent outer attached-block switch forms against the already-supported structured outer-switch baseline.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Plain Marker Branches In Outer Attached-Block Switch
 ## Summary
 Extended the newly landed outer attached-block switch surface so its support is explicit and regression-locked for plain marker branches too. `switch(expr) { case(value) ... default ... }` is now tracked as a supported user-facing form, not just the per-branch attached-block variant.

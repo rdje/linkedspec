@@ -11003,6 +11003,129 @@ SPEC
         };
     }
 };
+subtest 'method_like_fluent_action_attached_block_switch_lower_equivalently' => sub {
+    plan tests => 11;
+
+    my $structured_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|")
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    default
+      say("miss")
+      return_undef()
+  }
+ }
+SPEC
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top.switch(scalar(op)) {
+  case("|")
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  default
+    say("miss")
+    return_undef()
+ }
+SPEC
+
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+    ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured outer attached-block switch baseline');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent outer attached-block switch');
+
+    my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($structured_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge structured outer attached-block switch baseline avoids RAW_PERL fallback');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge fluent outer attached-block switch avoids RAW_PERL fallback');
+    is($structured_meta->{raw_perl_dependency_count}, 0, 'action-edge structured outer attached-block switch baseline avoids raw Perl dependency');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'action-edge fluent outer attached-block switch avoids raw Perl dependency');
+    is($structured_meta->{unresolved_helper_count}, 0, 'action-edge structured outer attached-block switch baseline avoids unresolved-helper hits');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'action-edge fluent outer attached-block switch avoids unresolved-helper hits');
+    is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, 'action-edge fluent outer attached-block switch preserves canonical action-IR node coverage from the structured outer-switch baseline');
+    is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, 'action-edge fluent outer attached-block switch preserves canonical action-IR hit counts from the structured outer-switch baseline');
+    ok(
+        $structured_meta->{language_agnostic_action_ir_ready} && $fluent_meta->{language_agnostic_action_ir_ready},
+        'action-edge fluent outer attached-block switch remains language-agnostic action-IR ready alongside the structured outer-switch baseline'
+    );
+};
+subtest 'method_like_full_lifecycle_fluent_attached_block_switch_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle fluent outer attached-block switch" => sub {
+            plan tests => 8;
+
+            my $structured_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|")
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    default
+      return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(op)) {
+  case("|")
+    declare(array, events)
+    return_array(semantic_annotation, hash("items", array(events)))
+  default
+    return_undef()
+ }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+            ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured outer attached-block switch baseline");
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent outer attached-block switch");
+
+            my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($structured_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle structured outer attached-block switch baseline avoids RAW_PERL fallback");
+            is($fluent_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle fluent outer attached-block switch avoids RAW_PERL fallback");
+            is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, "$tag lifecycle fluent outer attached-block switch preserves canonical action-IR node coverage from the structured outer-switch baseline");
+            is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, "$tag lifecycle fluent outer attached-block switch preserves canonical action-IR hit counts from the structured outer-switch baseline");
+            ok(
+                $fluent_meta->{unresolved_helper_count} == 0 &&
+                $fluent_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle fluent outer attached-block switch stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle fluent outer attached-block switch preserves SWITCH/CASE/DEFAULT canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_marker_flow' => sub {
     plan tests => 10;
 

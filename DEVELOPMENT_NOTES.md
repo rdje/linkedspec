@@ -10,6 +10,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-16)
 - Feature follow-up:
+  - the outer attached-block switch surface is now available as the final call on fluent action-edge and lifecycle chains too,
+  - so `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` now lower through the same canonical path as the structured outer-switch baseline,
+  - and the bootstrap chain parser now binds an optional attached block to the final fluent call instead of dropping it.
+- Feature follow-up:
   - the outer attached-block switch surface is now explicitly regression-locked for plain marker branches too,
   - so `switch(expr) { case(value) ... default ... }` is tracked as supported alongside the per-branch attached-block variant,
   - and the regression baseline now compares those two outer-switch branch carriers directly on action-edge plus the full lifecycle family.
