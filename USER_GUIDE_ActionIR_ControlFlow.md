@@ -240,6 +240,7 @@ Current direction note:
 - and those same marker-style outer switch structured branch-body surfaces are now regression-locked in parity for the broader multi-`case(...)` nested marker-switch shape inside nested composite `if(...)` / `elseif(...)` flow too,
 - and those same marker-style outer switch structured branch-body surfaces are now regression-locked in parity for that same broader multi-`case(...)` nested inline-composite `switch(...)` shape inside nested composite `if(...)` / `elseif(...)` flow too,
 - and attached switch branch blocks are now regression-locked in parity across the two outer switch families themselves for that same deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape too,
+- and that same outer-switch-family attached-branch parity is now regression-locked for nested composite `if(...)` / `elseif(...)` flow carrying that deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape too,
 - and the structured marker-style outer switch surface is now regression-locked in parity across its plain branch-marker form and attached-block switch branch sugar for that broader nested marker-switch shape too,
 - and attached switch branch blocks are now regression-locked in parity across the two outer switch families themselves for that broader multi-`case(...)` nested marker-switch shape too,
 - and attached switch branch blocks are now regression-locked in parity across the two outer switch families themselves for the broader multi-`case(...)` nested inline-composite `switch(...)` shape too,

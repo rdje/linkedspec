@@ -227,6 +227,8 @@ The marker-style outer switch surface now has the matching parity lock too. Plai
 
 That same deeper alternating marker contract now spans the two outer switch families themselves too. An attached `case(value) { ... }` or `default() { ... }` branch block now stays aligned between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces.
 
+That same outer-switch-family parity contract now also covers nested composite `if(...)` / `elseif(...)` flow when those inner branches themselves carry the deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape. Attached `case(value) { ... }` and `default() { ... }` branch blocks stay aligned there too between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces.
+
 That same broader nested marker-switch shape is now parity-locked on structured marker-style outer switch surfaces too. Plain marker branches like `case(value)` / `default()` and attached branch-block sugar like `case(value) { ... }` / `default() { ... }` now lower identically there on both action-edge and lifecycle surfaces, not just on the earlier flat helper-only branch-body baseline.
 
 That same broader nested multi-`case(...)` marker-switch shape now spans the two outer switch families themselves too. Attached branch blocks `case(value) { ... }` and `default() { ... }` now stay aligned there between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces.

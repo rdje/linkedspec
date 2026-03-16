@@ -9,6 +9,12 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Extended direct outer-switch-family parity on the common attached branch-block carrier for nested composite `if(...)` / `elseif(...)` flow one layer deeper into the deep marker contract.
+- `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly when attached `case(value) { ... }` / `default() { ... }` branch blocks carry nested composite `if/elseif` flow whose inner branches themselves carry the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
+- That direct outer-family parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - this combined nested composite-`if` plus deeper alternating marker seam now has direct cross-family outer-switch parity coverage too,
+  - not only the plain nested composite-if seam or the switch-only deep-marker seam.
 - Extended direct outer-switch-family parity on the common attached branch-block carrier for nested composite `if(...)` / `elseif(...)` flow.
 - `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly when attached `case(value) { ... }` / `default() { ... }` branch blocks carry:
   - the broader multi-`case(...)` nested inline-composite `switch(...)` shape,

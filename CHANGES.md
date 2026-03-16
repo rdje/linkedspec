@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Outer-Switch Composite-If Deep-Marker Parity
+## Summary
+Extended direct outer-switch-family parity for attached branch blocks one more layer into the deep marker-nesting contract. Inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms are now regression-locked against each other on the common attached branch-block carrier when nested composite `if(...)` / `elseif(...)` flow itself carries the deeper alternating marker `if(...) ... switch(...) ... endif()` shape, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused `phase0_regression.t` outer-family parity locks on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for nested composite `if(...)` / `elseif(...)` flow when that inner flow itself carries the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
+- Compared inline composite outer `switch(...)` forms directly against marker-style outer `switch(...) ... endswitch()` forms.
+- Covered both:
+  - action-edge surfaces,
+  - and the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked:
+  - descriptor build success,
+  - identical output shape across the two outer switch families,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on action-edge surfaces,
+  - zero unresolved-helper hits,
+  - and language-agnostic readiness.
+- Clarified in the roadmap and guides that this combined nested-composite-if plus deeper alternating marker seam now has direct cross-family outer-switch parity coverage too, not only the plain nested composite-if seam or the switch-only deep-marker seam.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Outer-Switch Composite-If Multi-Case Parity
 ## Summary
 Extended direct outer-switch-family parity for attached branch blocks one level deeper. Inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms are now regression-locked against each other on the common attached branch-block carrier when nested composite `if(...)` / `elseif(...)` flow carries the broader multi-`case(...)` inline-composite or marker-style nested switch shapes, across action-edge and the full lifecycle family.
