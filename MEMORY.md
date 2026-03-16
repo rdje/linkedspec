@@ -10,6 +10,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-16)
+- Feature-priority follow-up:
+  - structured marker-style control-flow now accepts bare zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch`,
+  - regression coverage now pins that surface in statement splitting plus structured action-edge/lifecycle lowering,
+  - and this is the first punctuation-reduction feature slice after the last scoped deep marker hardening checkpoint.
 - Method-DSL / control-flow follow-up:
   - `t/phase0_regression.t` now parity-locks each switch family’s own structured branch-body carriers for nested composite `if(...)` / `elseif(...)` flow when those inner branches themselves carry the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape.
   - that now covers:

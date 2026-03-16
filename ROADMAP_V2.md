@@ -72,6 +72,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep extending any remaining narrower lifecycle-specific semantics only when a real gap or exception is found.
 2. Continue the method-like DSL migration track:
    - priority shift: finish the current last scoped marker `if(...)` / marker `switch(...)` hardening slice, then switch to missing user-facing DSL features before returning to any deeper cross-nesting parity expansion,
+   - landed punctuation-reduction follow-up: structured marker-style zero-arg terminators now accept bare keyword form (`else`, `endif`, `default`, `endcase`, `endswitch`) in addition to the older `...()` spellings,
    - broaden fluent/block equivalence on supported surfaces,
    - keep both supported inline-switch structured branch-body surfaces in sync:
      - `case(value, { ... })` / `default({ ... })`,

@@ -9,6 +9,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Feature-priority follow-up:
+  - structured marker-style control-flow now accepts bare zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch`,
+  - the implementation went through `MethodExpr` plus `FlowRules`,
+  - and `t/phase0_regression.t` now locks that surface in statement splitting plus structured action-edge/lifecycle lowering.
 - Extended same-family structured switch-branch parity into the combined deep marker seam.
 - `t/phase0_regression.t` now compares each switch family’s own structured branch-body carriers when nested composite `if(...)` / `elseif(...)` flow carries the representative deeper alternating marker `if(...) ... switch(...) ... endif()` shape:
   - inline composite switch structured-argument branch blocks versus attached branch-block sugar,

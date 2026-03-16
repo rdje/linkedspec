@@ -113,6 +113,18 @@ sub _lower_switch_case_value_expr {
  return {mode => 'eq', expr => $lowered}
 }
 
+sub _normalize_bare_zero_arg_flow_marker_expr {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ return "$1()" if $trimmed =~ /^(else|endif|default|endcase|endswitch)$/o;
+ return $trimmed
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_if_flow_statement
 # Purpose : Lower `if(...)`/`i(...)` fluent control-flow markers.
@@ -266,10 +278,12 @@ sub _lower_else_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endif_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return undef if defined $parsed_expr->{attached_block};
+ my $call = $parsed_expr->{call};
  return undef unless $call && $call->{method} eq 'endif';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
@@ -322,8 +336,7 @@ sub _parse_method_expr_with_optional_attached_block {
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
  my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
 
- return undef unless defined $expr;
- my $trimmed = $trim_action_ir_value->($expr);
+ my $trimmed = _normalize_bare_zero_arg_flow_marker_expr($expr, $deps);
  return undef unless defined($trimmed) && length($trimmed);
 
  my $call = $parse_method_function_expr->($trimmed);
@@ -800,10 +813,12 @@ sub _lower_default_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endcase_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return undef if defined $parsed_expr->{attached_block};
+ my $call = $parsed_expr->{call};
  return undef unless $call && $call->{method} eq 'endcase';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);
@@ -825,10 +840,12 @@ sub _lower_endcase_flow_statement {
 #------------------------------------------------------------------------------
 sub _lower_endswitch_flow_statement {
  my ($expr, $ctx, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
 
- my $call = $parse_method_function_expr->($expr);
+ my $parsed_expr = _parse_method_expr_with_optional_attached_block($expr, $deps);
+ return undef unless $parsed_expr && ref($parsed_expr->{call}) eq 'HASH';
+ return undef if defined $parsed_expr->{attached_block};
+ my $call = $parsed_expr->{call};
  return undef unless $call && $call->{method} eq 'endswitch';
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 0, 0);

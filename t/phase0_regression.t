@@ -744,7 +744,7 @@ PERL
     is($err, '', 'ActionIR::StatementSplit::Core require/split subprocess does not emit stderr');
 };
 subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $trim = sub {
         my ($value) = @_;
@@ -770,6 +770,24 @@ subtest 'actionir_statement_split_core_accepts_semicolonless_method_boundaries' 
         ),
         ['switch(scalar(kind))', 'case("A")', 'return_undef()', 'default()', 'say("miss")', 'endswitch()'],
         'statement-split core accepts semicolonless single-line switch/case helper blocks',
+    );
+
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+            'if(scalar(on)) return_undef() else say("no") endif',
+            $trim,
+        ),
+        ['if(scalar(on))', 'return_undef()', 'else', 'say("no")', 'endif'],
+        'statement-split core accepts semicolonless single-line if/else helper blocks when zero-arg markers omit parentheses',
+    );
+
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+            'switch(scalar(kind)) case("A") return_undef() endcase default say("miss") endcase endswitch',
+            $trim,
+        ),
+        ['switch(scalar(kind))', 'case("A")', 'return_undef()', 'endcase', 'default', 'say("miss")', 'endcase', 'endswitch'],
+        'statement-split core accepts semicolonless single-line switch/case helper blocks when zero-arg markers omit parentheses',
     );
 
     is_deeply(
@@ -10206,6 +10224,66 @@ SPEC
         'semicolonless structured action-edge switch/case branch form stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_structured_action_control_flow_blocks_accept_bare_zero_arg_markers' => sub {
+    plan tests => 10;
+
+    my $if_fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+SPEC
+
+    my $if_block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { if(scalar(on))
+ return(array_copy(array(items)))
+ elseif(scalar(alt_on))
+ return(hash("content", array_values(array(assigns))))
+ else
+ return_undef()
+ endif }
+SPEC
+
+    my $switch_fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).default().return(hash("content", array_values(array(assigns)))).endswitch()
+SPEC
+
+    my $switch_block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { switch(scalar(kind))
+ case("A")
+ return(array_copy(array(items)))
+ endcase
+ default
+ return(hash("content", array_values(array(assigns))))
+ endcase
+ endswitch }
+SPEC
+
+    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descr => 1);
+    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descr => 1);
+    ok(defined($if_fluent_descr) && ref($if_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif branch form used as bare-marker comparison baseline');
+    ok(defined($if_block_descr) && ref($if_block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif block with bare zero-arg markers');
+    is_deeply($if_fluent_descr->{spec}{Top}{ACODE}, $if_block_descr->{spec}{Top}{ACODE}, 'structured action-edge if/elseif block with bare zero-arg markers lowers to the same ACODE as the fluent baseline');
+    is($if_block_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'structured action-edge if/elseif block with bare zero-arg markers avoids RAW_PERL fallback');
+    ok(
+        $if_block_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $if_block_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'structured action-edge if/elseif block with bare zero-arg markers stays fully language-agnostic-ready',
+    );
+
+    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descr => 1);
+    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descr => 1);
+    ok(defined($switch_fluent_descr) && ref($switch_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case branch form used as bare-marker comparison baseline');
+    ok(defined($switch_block_descr) && ref($switch_block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case block with bare zero-arg markers');
+    is_deeply($switch_fluent_descr->{spec}{Top}{ACODE}, $switch_block_descr->{spec}{Top}{ACODE}, 'structured action-edge switch/case block with bare zero-arg markers lowers to the same ACODE as the fluent baseline');
+    is($switch_block_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'structured action-edge switch/case block with bare zero-arg markers avoids RAW_PERL fallback');
+    ok(
+        $switch_block_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $switch_block_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'structured action-edge switch/case block with bare zero-arg markers stays fully language-agnostic-ready',
+    );
+};
 subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_semicolons' => sub {
     plan tests => 10;
 
@@ -10267,6 +10345,124 @@ SPEC
         $switch_block_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
         'semicolonless structured lifecycle switch/case branch form stays fully language-agnostic-ready',
     );
+};
+subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_bare_zero_arg_markers' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases) * 2;
+
+    my $expected_if_hits = {
+        ELSE     => 1,
+        ENDIF    => 1,
+        IF       => 1,
+        RETURN   => 2,
+        RETURN_A => 1,
+    };
+
+    my $expected_switch_hits = {
+        CASE      => 1,
+        DEFAULT   => 1,
+        ENDCASE   => 2,
+        ENDSWITCH => 1,
+        RETURN    => 2,
+        RETURN_A  => 1,
+        SWITCH    => 1,
+    };
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "structured $tag lifecycle if/else block accepts bare zero-arg markers" => sub {
+            plan tests => 8;
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $block_spec = <<"SPEC";
+Top::&
+$tag { if(scalar(on))
+ return(hash("item", scalar(retv)))
+ else
+ return_undef()
+ endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain used as bare-marker comparison baseline");
+            ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle if/else block with bare zero-arg markers");
+
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+            my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($block_descr->{spec}{Top}{$code_key}, $fluent_descr->{spec}{Top}{$code_key}, "structured $tag lifecycle if/else block with bare zero-arg markers lowers to the same $code_key output as the fluent baseline");
+            is($block_meta->{canonical_action_ir_fallback_count}, 0, "structured $tag lifecycle if/else block with bare zero-arg markers avoids RAW_PERL fallback");
+            is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "structured $tag lifecycle if/else block with bare zero-arg markers preserves canonical action-IR node coverage");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "structured $tag lifecycle if/else block with bare zero-arg markers preserves canonical action-IR hit counts");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_if_hits, "structured $tag lifecycle if/else block with bare zero-arg markers exposes the expected IF/ELSE/ENDIF helper mix");
+            ok(
+                $block_meta->{unresolved_helper_count} == 0 &&
+                $block_meta->{language_agnostic_action_ir_ready},
+                "structured $tag lifecycle if/else block with bare zero-arg markers stays fully language-agnostic-ready",
+            );
+        };
+
+        subtest "structured $tag lifecycle switch/case block accepts bare zero-arg markers" => sub {
+            plan tests => 8;
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase().default().return_undef().endcase().endswitch()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $block_spec = <<"SPEC";
+Top::&
+$tag { switch(scalar(kind))
+ case("A")
+ return(hash("item", scalar(retv)))
+ endcase
+ default
+ return_undef()
+ endcase
+ endswitch }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain used as bare-marker comparison baseline");
+            ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle switch/case block with bare zero-arg markers");
+
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+            my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($block_descr->{spec}{Top}{$code_key}, $fluent_descr->{spec}{Top}{$code_key}, "structured $tag lifecycle switch/case block with bare zero-arg markers lowers to the same $code_key output as the fluent baseline");
+            is($block_meta->{canonical_action_ir_fallback_count}, 0, "structured $tag lifecycle switch/case block with bare zero-arg markers avoids RAW_PERL fallback");
+            is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "structured $tag lifecycle switch/case block with bare zero-arg markers preserves canonical action-IR node coverage");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "structured $tag lifecycle switch/case block with bare zero-arg markers preserves canonical action-IR hit counts");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_switch_hits, "structured $tag lifecycle switch/case block with bare zero-arg markers exposes the expected SWITCH/CASE/DEFAULT/ENDCASE helper mix");
+            ok(
+                $block_meta->{unresolved_helper_count} == 0 &&
+                $block_meta->{language_agnostic_action_ir_ready},
+                "structured $tag lifecycle switch/case block with bare zero-arg markers stays fully language-agnostic-ready",
+            );
+        };
+    }
 };
 subtest 'method_like_structured_remaining_lifecycle_control_flow_blocks_accept_optional_semicolons' => sub {
     my @cases = (

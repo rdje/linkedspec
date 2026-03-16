@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Accept Bare Zero-Arg Control-Flow Markers
+## Summary
+Structured marker-style control-flow blocks now accept bare zero-arg marker keywords, so `else`, `endif`, `default`, `endcase`, and `endswitch` work without mandatory `()`. This is an intentionally feature-focused punctuation-reduction slice rather than another deeper marker `if/switch` cross-nesting hardening slice.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Taught method-expression parsing to accept bare zero-arg control-flow marker names.
+- Widened flow-rule scanning so marker-style `else/default/endif/endcase/endswitch` are recognized with or without `()`.
+- Regression-locked semicolonless statement splitting plus action-edge and lifecycle structured control-flow lowering for the new bare-marker surface.
+- Documented the new low-friction spellings as supported structured-block aliases rather than replacements for the older `...()` forms.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Structured Composite-If Deep-Marker Parity
 ## Summary
 Extended same-family structured switch-branch parity into the combined deep marker seam. Both inline composite switch structured branch-body carriers and marker-style outer switch structured branch-body surfaces are now regression-locked for nested composite `if(...)` / `elseif(...)` flow when those inner branches themselves carry the deeper alternating marker `if(...) ... switch(...) ... endif()` shape, across action-edge and the full lifecycle family. This also records that deeper cross-nesting hardening beyond this slice moves behind user-facing feature work.

@@ -635,11 +635,11 @@ sub _build_flow_control_contracts {
    id                 => 'else_flow',
    ir_node            => 'ELSE',
    diag_name          => 'else',
-   unresolved_pattern => qr/\belse\((?<PAREN>(?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|\((?&PAREN)*\))*)\)(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/o,
+   unresolved_pattern => qr/(?:^\s*else\b\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?\s*$|^\s*else\s*$)/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_else_flow_statement};
-    $code =~ s/\b(?<expr>else\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>(?:else\b\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?|else))\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -647,11 +647,11 @@ sub _build_flow_control_contracts {
    id                 => 'endif_flow',
    ir_node            => 'ENDIF',
    diag_name          => 'endif',
-   unresolved_pattern => qr/\bendif\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/^\s*endif\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?\s*$/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endif_flow_statement};
-    $code =~ s/\b(?<expr>endif\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>endif\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -683,11 +683,11 @@ sub _build_flow_control_contracts {
    id                 => 'default_flow',
    ir_node            => 'DEFAULT',
    diag_name          => 'default',
-   unresolved_pattern => qr/\bdefault\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/(?:^\s*default\b\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?\s*$|^\s*default\s*$)/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_default_flow_statement};
-    $code =~ s/\b(?<expr>default\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?)/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>(?:default\b\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))(?:\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?|default))\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -695,11 +695,11 @@ sub _build_flow_control_contracts {
    id                 => 'endcase_flow',
    ir_node            => 'ENDCASE',
    diag_name          => 'endcase',
-   unresolved_pattern => qr/\bendcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/^\s*endcase\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?\s*$/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endcase_flow_statement};
-    $code =~ s/\b(?<expr>endcase\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>endcase\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },
@@ -707,11 +707,11 @@ sub _build_flow_control_contracts {
    id                 => 'endswitch_flow',
    ir_node            => 'ENDSWITCH',
    diag_name          => 'endswitch',
-   unresolved_pattern => qr/\bendswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   unresolved_pattern => qr/^\s*endswitch\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?\s*$/o,
    lower              => sub {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_endswitch_flow_statement};
-    $code =~ s/\b(?<expr>endswitch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $ctx) || $&/ge;
+    $code =~ s/^\s*(?<expr>endswitch\b(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)\s*$/$lower->($+{expr}, $ctx) || $&/ge;
     return $code
    },
   },

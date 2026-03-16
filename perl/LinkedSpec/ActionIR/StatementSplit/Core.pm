@@ -50,10 +50,19 @@ sub _build_initial_state {
  }
 }
 
+sub _is_bare_zero_arg_flow_marker_statement {
+ my ($statement, $trim_action_ir_value) = @_;
+ my $trimmed = $trim_action_ir_value->($statement);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 1 if $trimmed =~ /^(?:else|endif|default|endcase|endswitch)$/o;
+ return 0
+}
+
 sub _looks_like_complete_method_statement {
  my ($statement, $trim_action_ir_value) = @_;
  my $trimmed = $trim_action_ir_value->($statement);
  return 0 unless defined($trimmed) && length($trimmed);
+ return 1 if _is_bare_zero_arg_flow_marker_statement($trimmed, $trim_action_ir_value);
  _require_method_expr_pkg();
  my $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($trimmed);
  return 1 if $call;
@@ -143,7 +152,7 @@ sub _looks_like_complete_method_statement {
   my $head = $trim_action_ir_value->(substr($trimmed, 0, $idx));
   next unless defined($head) && length($head);
   $call = LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($head);
-  next unless $call;
+  next unless $call || _is_bare_zero_arg_flow_marker_statement($head, $trim_action_ir_value);
 
   my $body_depth = 0;
   my $body_in_single_quote = 0;
@@ -236,6 +245,12 @@ sub _should_split_on_method_boundary {
  return 0 unless _looks_like_complete_method_statement($state->{statement}, $trim_action_ir_value);
  my $next_idx = _next_nonspace_char_index($chars, $idx + 1);
  return 0 unless defined $next_idx;
+ if (
+  _is_bare_zero_arg_flow_marker_statement($state->{statement}, $trim_action_ir_value) &&
+  $next_idx == ($idx + 1)
+ ) {
+  return 0;
+ }
  return ($chars->[$next_idx] =~ /[A-Za-z_]/o) ? 1 : 0
 }
 

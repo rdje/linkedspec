@@ -301,6 +301,8 @@ Nested accessor payloads are locked too: fluent and structured authoring now agr
 
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
+One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
+
 That follow-up is no longer only about future `switch(...)` work: the first inline composite `if(...)` slice is now supported too, so compact forms like `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` already lower through the same canonical control-flow path as the older marker-style `if()/elseif()/else()/endif()` baseline.
 
 That inline-composite `if(...)` surface now has its first structured branch-body extension too: `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is supported alongside the older explicit action-list form, so compact conditional flow can still carry semicolonless structured helper sequences without falling back to raw Perl.
@@ -495,23 +497,23 @@ This is the shape now used in `Lispish::parenthesis`:
 I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
 
 -> parenthesis {
-  if(is_nonempty(array(word)));
-    if(is_empty(scalar(has_head)));
-      assign(scalar(head), join_values("", array(word)));
-      assign(scalar(has_head), 1);
-    else();
-      push_value(array(tail), join_values("", array(word)));
-    endif();
-    assign(array(word), array());
-  endif();
+  if(is_nonempty(array(word)))
+    if(is_empty(scalar(has_head)))
+      assign(scalar(head), join_values("", array(word)))
+      assign(scalar(has_head), 1)
+    else
+      push_value(array(tail), join_values("", array(word)))
+    endif
+    assign(array(word), array())
+  endif
 
-  assign(scalar(retv), call(parenthesis));
-  if(is_empty(scalar(has_head)));
-    assign(scalar(head), scalar(retv));
-    assign(scalar(has_head), 1);
-  else();
-    push_value(array(tail), scalar(retv));
-  endif()
+  assign(scalar(retv), call(parenthesis))
+  if(is_empty(scalar(has_head)))
+    assign(scalar(head), scalar(retv))
+    assign(scalar(has_head), 1)
+  else
+    push_value(array(tail), scalar(retv))
+  endif
 }
 ```
 

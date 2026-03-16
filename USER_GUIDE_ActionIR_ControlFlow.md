@@ -393,7 +393,9 @@ if(scalar(on)) {
 }
 ```
 
-That attached-block direction is intentionally tracked as a later concrete-syntax step rather than the first implementation slice.
+That attached-block form is now part of the supported structured-block surface. The later syntax work that still remains is mainly about further punctuation cleanup and other ergonomics, not about whether attached-block `if(...)` exists at all.
+
+One punctuation-reduction slice has already landed for marker-style flow too: in structured block contexts, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
 
 ## `say(...)`
 `say(...)` is the newline-terminating output helper.
@@ -471,9 +473,9 @@ switch(scalaref(retv, {type}))
     assign(array(word), array());
   case("COMMENTS")
     return_undef();
-  default()
+  default
     push_value(array(word), scalaref(retv, {content}));
-endswitch()
+endswitch
 ```
 
 ### Example: compact inline switch
