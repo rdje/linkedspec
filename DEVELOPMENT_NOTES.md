@@ -8,7 +8,13 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Use representative examples generously when they reduce ambiguity or help adoption.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
-## Current Session Notes (2026-03-15)
+## Current Session Notes (2026-03-16)
+- Extended the deep mutual marker-flow contract across the two outer switch families themselves.
+- `t/phase0_regression.t` now compares inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` directly on the common attached branch-block carrier `case(value) { ... }` / `default() { ... }` for the representative deeper alternating marker `if/switch` nesting shape.
+- That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the deeper alternating marker-nesting contract now spans both outer switch families too,
+  - not only the branch-body carriers within each family.
 - Extended the deep mutual marker-flow contract across the marker-style outer switch structured branch-body carriers:
   - plain branch-marker carrier `case(value)` / `default()`,
   - attached-block carrier `case(value) { ... }` / `default() { ... }`,

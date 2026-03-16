@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Deep Marker Parity Across Outer Switch Families
+## Summary
+Extended the deep mutual marker-flow contract across the two outer switch families themselves. Attached branch blocks `case(value) { ... }` / `default() { ... }` are now regression-locked in parity between inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` for a representative deeper alternating marker `if/switch` nesting chain, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused `phase0_regression.t` parity locks comparing the two outer switch families directly on the common attached branch-block carrier:
+  - inline composite outer `switch(...)`,
+  - and marker-style outer `switch(...) ... endswitch()`.
+- Covered the representative deeper alternating marker `if(...) ... switch(...) ... endif()` nesting shape on:
+  - action-edge surfaces,
+  - and the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked:
+  - descriptor build success,
+  - identical output shape across the two outer switch families,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on action-edge surfaces,
+  - zero unresolved-helper hits,
+  - language-agnostic readiness,
+  - identical canonical node coverage and hit counts across the two outer switch families,
+  - IF/ELSE/ENDIF and SWITCH/CASE/DEFAULT/ENDSWITCH canonical node presence for the deeper alternating nesting shape.
+- Clarified in the roadmap and guides that the deeper alternating marker-nesting contract now spans both outer switch families too, not only the branch-body carriers within each family.
+
 ## 2026-03-15 - Method-Like DSL Slice: Lock Deep Marker Parity On Marker Switch Branch Carriers
 ## Summary
 Extended the deep mutual marker-flow contract across the marker-style outer switch structured branch-body carriers. Plain `case(value)` / `default()` branches and attached `case(value) { ... }` / `default() { ... }` branches are now regression-locked in parity for a representative deeper alternating marker `if/switch` nesting chain, across action-edge and the full lifecycle family.
