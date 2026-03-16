@@ -221,6 +221,8 @@ That same outer attached-block switch surface is now available as the final call
 
 The attached-block composite `if(...)` surface got the same punctuation-light follow-up: `if(cond) { ... } elseif(cond2) { ... } else() { ... }` still works, and `else { ... }` is now accepted as an equivalent lower-friction alias for the final branch body. That same attached-block composite `if(...)` surface is now available as the final call on fluent action-edge and lifecycle chains too, so surfaces like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the structured baseline instead of dropping the trailing branches.
 
+That same attached-block composite `if(...)` family now allows mixed per-branch carriers too. In practice that means shapes like `if(cond) { ... } elseif(cond2) ... else { ... }` are supported on both structured and final-call fluent surfaces, so each branch can choose either an attached block or a lighter plain marker body without forcing the whole chain into one carrier style.
+
 Those attached switch branch blocks are real structured block contexts, not just flat helper carriers. In practice that means they can now hold nested marker-style flow such as `if(...) ... endif()` while preserving the same zero-fallback, zero-unresolved migration metadata as the already-supported flat branch-body forms.
 
 That same structured-context rule now has explicit regression coverage for nested marker-style switch flow too. An attached switch branch block can itself contain `switch(...) ... case(...) ... default() ... endswitch()` and still preserve the same language-agnostic rewrite readiness on both action-edge and lifecycle surfaces.

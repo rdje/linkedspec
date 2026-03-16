@@ -220,14 +220,16 @@ sub _lower_elseif_flow_statement {
  my $current_if = $if_stack->[-1];
  return undef if $current_if->{else_seen};
  if (defined $attached_block) {
-  return undef unless ($current_if->{body_carrier} || '') eq 'attached';
   my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
+  $current_if->{body_carrier} = 'attached';
+  $current_if->{implicit_close} = 1;
   return "} elsif ($cond_expr) {$body";
  }
 
- return undef if ($current_if->{body_carrier} || '') eq 'attached';
+ $current_if->{body_carrier} = 'marker';
+ $current_if->{implicit_close} = 0;
 
  return "} elsif ($cond_expr) {"
 }
@@ -257,7 +259,6 @@ sub _lower_else_flow_statement {
  return undef if $current_if->{else_seen};
  $current_if->{else_seen} = 1;
  if (defined $attached_block) {
-  return undef unless ($current_if->{body_carrier} || '') eq 'attached';
   my $actions = _lower_flow_branch_action_list([$attached_block], $ctx, $deps);
   return undef unless ref($actions) eq 'ARRAY';
   my $body = @$actions ? ' '.join('; ', @$actions) : '';
@@ -265,7 +266,8 @@ sub _lower_else_flow_statement {
   return "} else {$body }";
  }
 
- return undef if ($current_if->{body_carrier} || '') eq 'attached';
+ $current_if->{body_carrier} = 'marker';
+ $current_if->{implicit_close} = 0;
 
  return '} else {'
 }

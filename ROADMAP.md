@@ -531,6 +531,7 @@ This is a saved future-enhancement note, not an active implementation item.
     - and that same outer switch surface now also supports plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
     - and now also support that same outer attached-block switch form as the final call on fluent action-edge and lifecycle chains,
     - treat inline composite `if(cond, ..., elseif(...), else(...))` as the first landed `if(...)` step, with the later structured attached-block form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces too, alongside the lower-friction `else { ... }` alias,
+    - and now also support mixed per-branch carriers across that attached-block composite `if(...)` family, so one branch can use an attached block while a later branch uses the lighter plain marker body,
     - and confine marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` to structured block contexts rather than letting them remain a free-standing fluent surface.
   - Clarification: the planned semicolon-light control-flow direction applies only to canonical method-like DSL blocks.
     - It is not a mixed Perl/DSL parsing model.

@@ -33,6 +33,7 @@ Syntax status note:
   - and that same outer switch form now also accepts plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
   - and that same outer switch form is now also available as the final call on fluent action-edge and lifecycle chains, not only inside structured outer blocks,
   - treat inline composite `if(cond, action1(...), ..., elseif(cond2, ...), else(...))` as the first `if(...)` step, with the matching attached-block composite form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` now landed on structured block surfaces and as the final call on fluent action-edge and lifecycle chains,
+  - that same attached-block composite `if(...)` family now also allows mixed per-branch carriers such as `if(cond) { ... } elseif(cond2) ... else { ... }`,
   - and treat marker-style `if(...) ... endif()` / `switch(...) ... endswitch()` as structured-block-context syntax rather than as a free-standing fluent surface.
 - Structured block contexts for those marker-style forms include:
   - top-level action-edge `{ ... }` blocks,
@@ -62,7 +63,7 @@ It also supports three switch surfaces:
 It also supports three `if(...)` surfaces:
 1. marker-style flow (`if(...) ... elseif(...) ... else() ... endif()`) in structured block contexts,
 2. inline composite flow (`if(cond, action1(...), ..., elseif(cond2, ...), else(...))`) plus its structured branch-body form `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))`, and
-3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces, with `else { ... }` accepted as the lighter final-branch alias and the same shape available as the final call on fluent action-edge and lifecycle chains.
+3. structured attached-block composite flow (`if(cond) { ... } elseif(cond2) { ... } else() { ... }`) on action-edge and lifecycle block surfaces, with `else { ... }` accepted as the lighter final-branch alias, mixed per-branch carrier chains such as `if(cond) { ... } elseif(cond2) ... else { ... }` supported too, and the same family available as the final call on fluent action-edge and lifecycle chains.
 
 For the structured branch-body `if(...)` surfaces in items `2` and `3`, nested switch flow is now part of the supported structured-context contract too. That includes:
 - marker-style `switch(...) ... case(...) ... default() ... endswitch()`, and
@@ -491,6 +492,28 @@ I.if(scalar(on)) {
 ```
 
 The later syntax work that still remains is mainly about further punctuation cleanup and other ergonomics, not about whether attached-block `if(...)` exists at all.
+
+That same attached-block composite family is no longer all-or-nothing about branch carriers. Representative supported shapes now include:
+
+```text
+if(scalar(on)) {
+  action1(...)
+} elseif(scalar(alt_on))
+  action2(...)
+else {
+  action3(...)
+}
+```
+
+```text
+/a/ -> Top.if(scalar(on)) {
+  action1(...)
+} elseif(scalar(alt_on))
+  action2(...)
+else {
+  action3(...)
+}
+```
 
 One punctuation-reduction slice has already landed for marker-style flow too: in structured block contexts, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
 

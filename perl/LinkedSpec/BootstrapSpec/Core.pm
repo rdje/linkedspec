@@ -155,31 +155,178 @@ sub _parse_optional_attached_if_clause_tail {
  return ('', $start_pos) unless ref($string_ref) eq 'SCALAR' && defined $start_pos;
 
  my $source = $$string_ref;
- pos($source) = $start_pos;
+ my $source_len = length($source);
+ my $pos = $start_pos;
  my $tail = '';
  my $else_seen = 0;
+ my $needs_explicit_endif = 0;
 
- while (
-  $source =~ /\G\s*(?<head>(?:(?:elseif|elif)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))|else(?!\w)(?:\s*(?<ZPAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&ZPAREN))*\)))?))(?<block>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))/gc
- ) {
-  my $head = _trim_bootstrap_value($+{head});
-  my $block = _trim_bootstrap_value($+{block});
-  last unless defined($head) && length($head) && defined($block) && length($block);
+ my $skip_ws = sub {
+  my ($scan_pos) = @_;
+  ++$scan_pos while $scan_pos < $source_len && substr($source, $scan_pos, 1) =~ /\s/o;
+  return $scan_pos
+ };
 
-  if ($head =~ /^(?:elseif|elif)\b/o) {
-   return ('', $start_pos) if $else_seen;
-  } else {
-   return ('', $start_pos) if $else_seen;
-   $else_seen = 1;
+ my $parse_balanced = sub {
+  my ($scan_pos, $open, $close) = @_;
+  return (undef, $scan_pos) unless $scan_pos < $source_len && substr($source, $scan_pos, 1) eq $open;
+
+  my $depth = 0;
+  my $in_single_quote = 0;
+  my $in_double_quote = 0;
+  my $in_slash_quote = 0;
+  my $slash_escape_next = 0;
+  my $escape_next = 0;
+
+  for (my $idx = $scan_pos; $idx < $source_len; ++$idx) {
+   my $char = substr($source, $idx, 1);
+
+   if ($in_slash_quote) {
+    if ($slash_escape_next) {
+     $slash_escape_next = 0;
+    } elsif ($char eq '\\') {
+     $slash_escape_next = 1;
+    } elsif ($char eq '/') {
+     $in_slash_quote = 0;
+    }
+    next;
+   }
+
+   if ($in_single_quote) {
+    if ($escape_next) {
+     $escape_next = 0;
+    } elsif ($char eq '\\') {
+     $escape_next = 1;
+    } elsif ($char eq "'") {
+     $in_single_quote = 0;
+    }
+    next;
+   }
+
+   if ($in_double_quote) {
+    if ($escape_next) {
+     $escape_next = 0;
+    } elsif ($char eq '\\') {
+     $escape_next = 1;
+    } elsif ($char eq '"') {
+     $in_double_quote = 0;
+    }
+    next;
+   }
+
+   if ($char eq "'") {
+    $in_single_quote = 1;
+    next;
+   }
+   if ($char eq '"') {
+    $in_double_quote = 1;
+    next;
+   }
+   if ($char eq '/') {
+    my $prefix = substr($source, $scan_pos, $idx - $scan_pos);
+    $prefix =~ s/\s+$//o;
+    if (!length($prefix)) {
+     $in_slash_quote = 1;
+     $slash_escape_next = 0;
+     next;
+    }
+   }
+
+   if ($char eq $open) {
+    ++$depth;
+    next;
+   }
+
+   next unless $char eq $close;
+   --$depth if $depth > 0;
+   return (substr($source, $scan_pos, $idx - $scan_pos + 1), $idx + 1) if $depth == 0;
   }
 
+  return (undef, $scan_pos)
+ };
+
+ my $parse_method_stmt = sub {
+  my ($scan_pos) = @_;
+  $scan_pos = $skip_ws->($scan_pos);
+  return (undef, $scan_pos) if $scan_pos >= $source_len;
+
+  return (undef, $scan_pos) unless substr($source, $scan_pos) =~ /\A(?<method>\w+)/o;
+  my $method = $+{method};
+  my $stmt_start = $scan_pos;
+  $scan_pos += length($method);
+  my $has_paren = 0;
+  my $has_block = 0;
+
+  my $next_pos = $skip_ws->($scan_pos);
+  if ($next_pos < $source_len && substr($source, $next_pos, 1) eq '(') {
+   my ($segment, $segment_end) = $parse_balanced->($next_pos, '(', ')');
+   return (undef, $stmt_start) unless defined $segment;
+   $scan_pos = $segment_end;
+   $has_paren = 1;
+   $next_pos = $skip_ws->($scan_pos);
+  }
+
+  if ($next_pos < $source_len && substr($source, $next_pos, 1) eq '{') {
+   my ($segment, $segment_end) = $parse_balanced->($next_pos, '{', '}');
+   return (undef, $stmt_start) unless defined $segment;
+   $scan_pos = $segment_end;
+   $has_block = 1;
+  }
+
+  my $text = _trim_bootstrap_value(substr($source, $stmt_start, $scan_pos - $stmt_start));
+  return (undef, $stmt_start) unless defined($text) && length($text);
+
+  return ({
+   text      => $text,
+   method    => $method,
+   has_paren => $has_paren,
+   has_block => $has_block,
+  }, $scan_pos)
+ };
+
+ my $is_if_clause_boundary = sub {
+  my ($stmt) = @_;
+  return 0 unless ref($stmt) eq 'HASH';
+  my $method = $stmt->{method} // '';
+  return ($method eq 'elseif' || $method eq 'elif' || $method eq 'else' || $method eq 'endif') ? 1 : 0
+ };
+
+ while (1) {
+  my ($head_stmt, $head_end) = $parse_method_stmt->($pos);
+  last unless $head_stmt;
+
+  my $head_method = $head_stmt->{method} // '';
+  last unless $head_method eq 'elseif' || $head_method eq 'elif' || $head_method eq 'else';
+
+  return ('', $start_pos) if $else_seen;
+  $else_seen = 1 if $head_method eq 'else';
+
   $tail .= ' ' if length($tail);
-  $tail .= $head . ' ' . $block;
+  $tail .= $head_stmt->{text};
+  $pos = $head_end;
+
+  next if $head_stmt->{has_block};
+
+  $needs_explicit_endif = 1;
+  while (1) {
+   my ($body_stmt, $body_end) = $parse_method_stmt->($pos);
+   last if $body_stmt && $is_if_clause_boundary->($body_stmt);
+   last unless $body_stmt;
+   $tail .= ' ' . $body_stmt->{text};
+   $pos = $body_end;
+  }
  }
 
- my $new_pos = pos($source);
- $new_pos = $start_pos unless defined $new_pos;
- return ($tail, $new_pos)
+ if ($needs_explicit_endif) {
+  my ($end_stmt, $end_pos) = $parse_method_stmt->($pos);
+  if ($end_stmt && ($end_stmt->{method} // '') eq 'endif') {
+   $tail .= ' ' if length($tail);
+   $tail .= $end_stmt->{text};
+   $pos = $end_pos;
+  }
+ }
+
+ return ($tail, $pos)
 }
 
 sub _build_bootstrap_node_type_map {

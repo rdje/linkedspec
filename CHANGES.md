@@ -1,5 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Mixed-Carrier Composite If Branches
+## Summary
+Attached-block composite `if(...)` chains now allow mixed per-branch body carriers. Shapes like `if(cond) { ... } elseif(cond2) ... else { ... }` now lower canonically on both structured block surfaces and the final-call fluent action-edge/lifecycle surface.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Removed the old all-or-nothing `body_carrier` restriction inside `LinkedSpec::ActionIR::ControlFlow`, so later `elseif(...)` / `else` branches can now switch between attached blocks and lighter marker bodies within one composite chain.
+- Extended the bootstrap fluent final-call tail parser so attached fluent `if(...) { ... }` chains can preserve trailing mixed marker/attached `elseif(...)` / `else` clauses instead of only the fully attached variants.
+- Added action-edge and full-lifecycle regression locks comparing representative structured and fluent mixed-carrier composite-`if` surfaces.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Fluent Outer Attached-Block Composite If
 ## Summary
 Extended the attached-block composite `if(...)` surface onto fluent action-edge and lifecycle chains. Final-call forms like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the already-supported structured attached-block baseline instead of dropping the trailing `elseif` / `else` clauses.

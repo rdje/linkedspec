@@ -7271,6 +7271,137 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_mixed_branch_carrier_composite_if_lower_equivalently' => sub {
+    plan tests => 11;
+
+    my $structured_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  if(scalar(on)) {
+    declare(array, events)
+    return_undef()
+  }
+  elseif(scalar(alt_on))
+    say("alt")
+    return_undef()
+  else {
+    return_undef()
+  }
+ }
+SPEC
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top.if(scalar(on)) {
+  declare(array, events)
+  return_undef()
+ } elseif(scalar(alt_on))
+  say("alt")
+  return_undef()
+ else {
+  return_undef()
+ }
+SPEC
+
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+    ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured mixed-branch-carrier composite if baseline');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent mixed-branch-carrier composite if');
+
+    my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($structured_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge structured mixed-branch-carrier composite if baseline avoids RAW_PERL fallback');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge fluent mixed-branch-carrier composite if avoids RAW_PERL fallback');
+    is($structured_meta->{raw_perl_dependency_count}, 0, 'action-edge structured mixed-branch-carrier composite if baseline avoids raw Perl dependency');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'action-edge fluent mixed-branch-carrier composite if avoids raw Perl dependency');
+    is($structured_meta->{unresolved_helper_count}, 0, 'action-edge structured mixed-branch-carrier composite if baseline avoids unresolved-helper hits');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'action-edge fluent mixed-branch-carrier composite if avoids unresolved-helper hits');
+    is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, 'action-edge fluent mixed-branch-carrier composite if preserves canonical action-IR node coverage from the structured baseline');
+    is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, 'action-edge fluent mixed-branch-carrier composite if preserves canonical action-IR hit counts from the structured baseline');
+    ok(
+        $structured_meta->{language_agnostic_action_ir_ready} && $fluent_meta->{language_agnostic_action_ir_ready},
+        'action-edge mixed-branch-carrier composite if remains language-agnostic action-IR ready on both structured and fluent surfaces'
+    );
+};
+subtest 'method_like_full_lifecycle_mixed_branch_carrier_composite_if_lower_equivalently' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle mixed-branch-carrier composite if" => sub {
+            plan tests => 8;
+
+            my $structured_spec = <<"SPEC";
+Top::&
+$tag {
+  if(scalar(on)) {
+    declare(array, events)
+    return_undef()
+  }
+  elseif(scalar(alt_on))
+    say("alt")
+    return_undef()
+  else {
+    return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $fluent_spec = <<"SPEC";
+Top::&
+$tag.if(scalar(on)) {
+  declare(array, events)
+  return_undef()
+ } elseif(scalar(alt_on))
+  say("alt")
+  return_undef()
+ else {
+  return_undef()
+ }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+
+            ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured mixed-branch-carrier composite if baseline");
+            ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent mixed-branch-carrier composite if");
+
+            my $structured_meta = $structured_descr->{spec}{Top}{meta}{action_rewriter};
+            my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($structured_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle structured mixed-branch-carrier composite if baseline avoids RAW_PERL fallback");
+            is($fluent_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle fluent mixed-branch-carrier composite if avoids RAW_PERL fallback");
+            is_deeply($structured_meta->{canonical_action_ir_nodes}, $fluent_meta->{canonical_action_ir_nodes}, "$tag lifecycle fluent mixed-branch-carrier composite if preserves canonical action-IR node coverage from the structured baseline");
+            is_deeply($structured_meta->{canonical_action_ir_hits}, $fluent_meta->{canonical_action_ir_hits}, "$tag lifecycle fluent mixed-branch-carrier composite if preserves canonical action-IR hit counts from the structured baseline");
+            ok(
+                $fluent_meta->{unresolved_helper_count} == 0 &&
+                $fluent_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle fluent mixed-branch-carrier composite if stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle fluent mixed-branch-carrier composite if preserves IF/ELIF/ELSE canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_action_composite_if_branch_blocks_accept_nested_marker_switch_flow' => sub {
     plan tests => 12;
 

@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-16: Added mixed-carrier composite `if(...)` support so attached-block `if` chains can mix attached branch blocks with lighter plain marker bodies across one `if/elseif/else` chain, including the final-call fluent action-edge/lifecycle surface.
+
 ## Mission Context
 LinkedSpec is being evolved into a serious progressive extraction parser tool (alternative to strict EBNF workflows in niche use-cases), with recursion and staged coarse-to-fine parsing as core strengths.
 

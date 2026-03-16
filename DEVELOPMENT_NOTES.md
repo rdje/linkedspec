@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-16: Added mixed-carrier composite `if(...)` support so attached-block `if` chains can mix attached branch blocks with lighter plain marker bodies across one `if/elseif/else` chain, including the final-call fluent action-edge/lifecycle surface.
+
 ## Documentation Contract
 - Treat readability as a first-class engineering requirement, not a cosmetic nice-to-have.
 - Prefer explicit wording over compressed expert shorthand when the shorter phrasing risks ambiguity.
