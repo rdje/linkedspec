@@ -1,5 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Multi-Case Inline-Switch Parity Across Outer Switch Families
+## Summary
+Extended the broader nested multi-`case(...)` inline-composite switch contract across the two outer switch families themselves. Attached branch blocks `case(value) { ... }` / `default() { ... }` are now regression-locked in parity between inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` for nested multi-`case(...)` inline-composite `switch(...)` flow, across action-edge and the full lifecycle family.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused `phase0_regression.t` parity locks comparing the two outer switch families directly on the common attached branch-block carrier:
+  - inline composite outer `switch(...)`,
+  - and marker-style outer `switch(...) ... endswitch()`.
+- Covered the broader nested multi-`case(...)` inline-composite `switch(...)` shape on:
+  - action-edge surfaces,
+  - and the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Locked:
+  - descriptor build success,
+  - identical output shape across the two outer switch families,
+  - zero RAW_PERL fallback,
+  - zero raw-Perl dependency on action-edge surfaces,
+  - zero unresolved-helper hits,
+  - language-agnostic readiness,
+  - stable shared nested-switch node presence across the two outer switch families,
+  - specifically SWITCH/CASE/DEFAULT canonical node presence for the broader nested multi-case inline-switch shape.
+- Clarified in the roadmap and guides that the broader multi-`case(...)` nested inline-switch contract now spans both outer switch families too, not only same-family outer-switch surfaces.
+
 ## 2026-03-16 - Method-Like DSL Slice: Lock Multi-Case Marker-Switch Parity Across Outer Switch Families
 ## Summary
 Extended the broader nested multi-`case(...)` marker-switch contract across the two outer switch families themselves. Attached branch blocks `case(value) { ... }` / `default() { ... }` are now regression-locked in parity between inline composite outer `switch(...)` and marker-style outer `switch(...) ... endswitch()` for nested multi-`case(...)` marker-style switch flow, across action-edge and the full lifecycle family.
