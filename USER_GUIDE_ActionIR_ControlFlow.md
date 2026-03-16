@@ -517,6 +517,18 @@ else {
 
 One punctuation-reduction slice has already landed for marker-style flow too: in structured block contexts, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
 
+That same punctuation-light treatment now explicitly covers fluent chains too. Representative supported forms include:
+
+```text
+LX.if(scalar(on)).return_undef().else.return_undef().endif
+```
+
+```text
+LX.switch(scalar(kind)).case("A").return_undef().default.return_undef().endswitch
+```
+
+Those bare fluent zero-arg markers lower through the same canonical path as `.else()`, `.endif()`, `.default()`, `.endcase()`, and `.endswitch()`.
+
 ## `say(...)`
 `say(...)` is the newline-terminating output helper.
 

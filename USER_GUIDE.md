@@ -313,6 +313,8 @@ Control-flow syntax itself is still open for ergonomics work. The guides current
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.
 
+That same punctuation-light treatment now explicitly covers fluent chains too: `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` are supported as lower-friction aliases for `.else()`, `.endif()`, `.default()`, `.endcase()`, and `.endswitch()` on both action-edge and lifecycle surfaces.
+
 That follow-up is no longer only about future `switch(...)` work: the first inline composite `if(...)` slice is now supported too, so compact forms like `if(cond, action1(...), action2(...), elseif(cond2, ...), else(...))` already lower through the same canonical control-flow path as the older marker-style `if()/elseif()/else()/endif()` baseline.
 
 That inline-composite `if(...)` surface now has its first structured branch-body extension too: `if(cond, { ... }, elseif(cond2, { ... }), else({ ... }))` is supported alongside the older explicit action-list form, so compact conditional flow can still carry semicolonless structured helper sequences without falling back to raw Perl.

@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Bare Fluent Zero-Arg Control-Flow Markers
+## Summary
+Zero-arg fluent control-flow markers now have an explicit punctuation-light surface. Fluent chains can now use `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` as supported aliases for the older parenthesized forms.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Made the bootstrap fluent method-chain renderer normalize bare zero-arg control-flow markers directly to `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()` instead of relying on later optional-scope stripping to make those bare fluent chains work.
+- Added action-edge and full-lifecycle regression coverage comparing the new bare fluent marker forms against the older explicit parenthesized fluent baseline.
+- Updated the roadmap and user guides so the punctuation-light fluent aliases are described as an intentional supported surface rather than a hidden side effect.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Mixed-Carrier Composite If Branches
 ## Summary
 Attached-block composite `if(...)` chains now allow mixed per-branch body carriers. Shapes like `if(cond) { ... } elseif(cond2) ... else { ... }` now lower canonically on both structured block surfaces and the final-call fluent action-edge/lifecycle surface.

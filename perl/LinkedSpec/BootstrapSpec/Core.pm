@@ -109,6 +109,14 @@ sub _method_chain_return_uses_general_payload {
  return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
 }
 
+sub _method_chain_uses_bare_zero_arg_flow_marker {
+ my ($method, $args) = @_;
+ return 0 unless defined($method) && $method =~ /^(?:else|endif|default|endcase|endswitch)$/o;
+ return 1 unless defined $args;
+ my $trimmed = _trim_bootstrap_value($args);
+ return (!defined($trimmed) || !length($trimmed)) ? 1 : 0
+}
+
 #------------------------------------------------------------------------------
 # Function: _render_method_call_chain
 # Purpose : Render parsed method-chain calls into semicolon-joined helper-style
@@ -130,7 +138,9 @@ sub _render_method_call_chain {
   my $rendered;
   # Keep rendering the whole fluent chain even when a general-payload
   # return(...) appears in the middle of control-flow branch bodies.
-  if ($method eq 'return' && _method_chain_return_uses_general_payload($args)) {
+  if (_method_chain_uses_bare_zero_arg_flow_marker($method, $args)) {
+   $rendered = $method . '()';
+  } elsif ($method eq 'return' && _method_chain_return_uses_general_payload($args)) {
    $rendered = $method . '(' . $args . ')';
   } else {
    $rendered = $method . "($entry_label" . ((defined($args) && length($args)) ? ",$args" : '') . ')';

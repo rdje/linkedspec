@@ -10548,6 +10548,53 @@ SPEC
         'structured action-edge switch/case block with bare zero-arg markers stays fully language-agnostic-ready',
     );
 };
+subtest 'method_like_fluent_action_control_flow_chains_accept_bare_zero_arg_markers' => sub {
+    plan tests => 10;
+
+    my $if_explicit_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else().return_undef().endif()
+SPEC
+
+    my $if_bare_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .if(scalar(on)).return(array_copy(array(items))).elseif(scalar(alt_on)).return(hash("content", array_values(array(assigns)))).else.return_undef().endif
+SPEC
+
+    my $switch_explicit_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase().default().return(hash("content", array_values(array(assigns)))).endcase().endswitch()
+SPEC
+
+    my $switch_bare_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase.default.return(hash("content", array_values(array(assigns)))).endcase.endswitch
+SPEC
+
+    my $if_explicit_descr = LinkedSpec::Get(\$if_explicit_spec, return_descr => 1);
+    my $if_bare_descr = LinkedSpec::Get(\$if_bare_spec, return_descr => 1);
+    ok(defined($if_explicit_descr) && ref($if_explicit_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif chain with explicit zero-arg markers');
+    ok(defined($if_bare_descr) && ref($if_bare_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif chain with bare zero-arg markers');
+    is_deeply($if_explicit_descr->{spec}{Top}{ACODE}, $if_bare_descr->{spec}{Top}{ACODE}, 'fluent action-edge if/elseif chain with bare zero-arg markers lowers to the same ACODE as the explicit baseline');
+    is($if_bare_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'fluent action-edge if/elseif chain with bare zero-arg markers avoids RAW_PERL fallback');
+    ok(
+        $if_bare_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $if_bare_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'fluent action-edge if/elseif chain with bare zero-arg markers stays fully language-agnostic-ready',
+    );
+
+    my $switch_explicit_descr = LinkedSpec::Get(\$switch_explicit_spec, return_descr => 1);
+    my $switch_bare_descr = LinkedSpec::Get(\$switch_bare_spec, return_descr => 1);
+    ok(defined($switch_explicit_descr) && ref($switch_explicit_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case chain with explicit zero-arg markers');
+    ok(defined($switch_bare_descr) && ref($switch_bare_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case chain with bare zero-arg markers');
+    is_deeply($switch_explicit_descr->{spec}{Top}{ACODE}, $switch_bare_descr->{spec}{Top}{ACODE}, 'fluent action-edge switch/case chain with bare zero-arg markers lowers to the same ACODE as the explicit baseline');
+    is($switch_bare_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_fallback_count}, 0, 'fluent action-edge switch/case chain with bare zero-arg markers avoids RAW_PERL fallback');
+    ok(
+        $switch_bare_descr->{spec}{Top}{meta}{action_rewriter}{unresolved_helper_count} == 0 &&
+        $switch_bare_descr->{spec}{Top}{meta}{action_rewriter}{language_agnostic_action_ir_ready},
+        'fluent action-edge switch/case chain with bare zero-arg markers stays fully language-agnostic-ready',
+    );
+};
 subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_semicolons' => sub {
     plan tests => 10;
 
@@ -10724,6 +10771,105 @@ SPEC
                 $block_meta->{unresolved_helper_count} == 0 &&
                 $block_meta->{language_agnostic_action_ir_ready},
                 "structured $tag lifecycle switch/case block with bare zero-arg markers stays fully language-agnostic-ready",
+            );
+        };
+    }
+};
+subtest 'method_like_fluent_lifecycle_control_flow_chains_accept_bare_zero_arg_markers' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases) * 2;
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "fluent $tag lifecycle if/else chain accepts bare zero-arg markers" => sub {
+            plan tests => 8;
+
+            my $explicit_spec = <<"SPEC";
+Top::&
+$tag.if(scalar(on)).return(hash("item", scalar(retv))).else().return_undef().endif()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $bare_spec = <<"SPEC";
+Top::&
+$tag.if(scalar(on)).return(hash("item", scalar(retv))).else.return_undef().endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descr => 1);
+            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descr => 1);
+
+            ok(defined($explicit_descr) && ref($explicit_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain with explicit zero-arg markers");
+            ok(defined($bare_descr) && ref($bare_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain with bare zero-arg markers");
+
+            my $explicit_meta = $explicit_descr->{spec}{Top}{meta}{action_rewriter};
+            my $bare_meta = $bare_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($bare_descr->{spec}{Top}{$code_key}, $explicit_descr->{spec}{Top}{$code_key}, "fluent $tag lifecycle if/else chain with bare zero-arg markers lowers to the same $code_key output as the explicit baseline");
+            is($bare_meta->{canonical_action_ir_fallback_count}, 0, "fluent $tag lifecycle if/else chain with bare zero-arg markers avoids RAW_PERL fallback");
+            is_deeply($explicit_meta->{canonical_action_ir_nodes}, $bare_meta->{canonical_action_ir_nodes}, "fluent $tag lifecycle if/else chain with bare zero-arg markers preserves canonical action-IR node coverage");
+            is_deeply($explicit_meta->{canonical_action_ir_hits}, $bare_meta->{canonical_action_ir_hits}, "fluent $tag lifecycle if/else chain with bare zero-arg markers preserves canonical action-IR hit counts");
+            ok(
+                $bare_meta->{unresolved_helper_count} == 0 &&
+                $bare_meta->{language_agnostic_action_ir_ready},
+                "fluent $tag lifecycle if/else chain with bare zero-arg markers stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'IF' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ELSE' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDIF' } @{$bare_meta->{canonical_action_ir_nodes}}),
+                "fluent $tag lifecycle if/else chain with bare zero-arg markers preserves IF/ELSE/ENDIF canonical nodes",
+            );
+        };
+
+        subtest "fluent $tag lifecycle switch/case chain accepts bare zero-arg markers" => sub {
+            plan tests => 8;
+
+            my $explicit_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase().default().return_undef().endcase().endswitch()
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $bare_spec = <<"SPEC";
+Top::&
+$tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase.default.return_undef().endcase.endswitch
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descr => 1);
+            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descr => 1);
+
+            ok(defined($explicit_descr) && ref($explicit_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain with explicit zero-arg markers");
+            ok(defined($bare_descr) && ref($bare_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain with bare zero-arg markers");
+
+            my $explicit_meta = $explicit_descr->{spec}{Top}{meta}{action_rewriter};
+            my $bare_meta = $bare_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($bare_descr->{spec}{Top}{$code_key}, $explicit_descr->{spec}{Top}{$code_key}, "fluent $tag lifecycle switch/case chain with bare zero-arg markers lowers to the same $code_key output as the explicit baseline");
+            is($bare_meta->{canonical_action_ir_fallback_count}, 0, "fluent $tag lifecycle switch/case chain with bare zero-arg markers avoids RAW_PERL fallback");
+            is_deeply($explicit_meta->{canonical_action_ir_nodes}, $bare_meta->{canonical_action_ir_nodes}, "fluent $tag lifecycle switch/case chain with bare zero-arg markers preserves canonical action-IR node coverage");
+            is_deeply($explicit_meta->{canonical_action_ir_hits}, $bare_meta->{canonical_action_ir_hits}, "fluent $tag lifecycle switch/case chain with bare zero-arg markers preserves canonical action-IR hit counts");
+            ok(
+                $bare_meta->{unresolved_helper_count} == 0 &&
+                $bare_meta->{language_agnostic_action_ir_ready},
+                "fluent $tag lifecycle switch/case chain with bare zero-arg markers stays fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'ENDSWITCH' } @{$bare_meta->{canonical_action_ir_nodes}}),
+                "fluent $tag lifecycle switch/case chain with bare zero-arg markers preserves SWITCH/DEFAULT/ENDSWITCH canonical nodes",
             );
         };
     }
