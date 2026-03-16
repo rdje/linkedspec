@@ -215,6 +215,8 @@ That same switch surface now supports attached-block branch sugar too: `case(val
 
 That same family now has a block-bodied outer switch form too: `switch(expr) { case(value) { ... } default { ... } }` lowers equivalently to the inline composite switch attached-branch-block surface on both action-edge and lifecycle blocks. Treat it as the structured outer-body sibling of the already-supported inline composite switch forms rather than as marker-style `endswitch()` sugar.
 
+Inside that outer block, you can now use either attached branch blocks or plain marker branches. In other words, both `case(value) { ... }` / `default { ... }` and the lighter `case(value) ... default ...` style are part of the supported outer attached-block switch surface.
+
 The attached-block composite `if(...)` surface got the same punctuation-light follow-up: `if(cond) { ... } elseif(cond2) { ... } else() { ... }` still works, and `else { ... }` is now accepted as an equivalent lower-friction alias for the final branch body.
 
 Those attached switch branch blocks are real structured block contexts, not just flat helper carriers. In practice that means they can now hold nested marker-style flow such as `if(...) ... endif()` while preserving the same zero-fallback, zero-unresolved migration metadata as the already-supported flat branch-body forms.

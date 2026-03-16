@@ -11,6 +11,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Feature follow-up:
+  - the outer attached-block switch surface is now explicitly regression-locked for plain marker branches too,
+  - so `switch(expr) { case(value) ... default ... }` is now tracked as supported alongside the per-branch attached-block variant,
+  - and that parity lock now spans action-edge plus the full lifecycle family (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`).
+- Feature follow-up:
   - the block-bodied outer switch surface `switch(expr) { case(value) { ... } default { ... } }` is now supported,
   - it is tracked as the structured outer-body sibling of the inline composite switch attached-branch-block surface rather than as marker-style `endswitch()` sugar,
   - and the implementation depended on switch-flow scanner widening so the whole attached outer-switch statement now counts as canonical ActionIR instead of a fallback RAW_PERL statement.

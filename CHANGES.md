@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Plain Marker Branches In Outer Attached-Block Switch
+## Summary
+Extended the newly landed outer attached-block switch surface so its support is explicit and regression-locked for plain marker branches too. `switch(expr) { case(value) ... default ... }` is now tracked as a supported user-facing form, not just the per-branch attached-block variant.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added action-edge and lifecycle regression locks comparing outer attached-block switch plain marker branches against the already-landed outer attached-block switch attached-branch-block variant.
+- Locked identical lowered output plus canonical node/hit parity for those two outer-switch branch carriers.
+- Documented the outer attached-block switch surface as supporting both attached branch blocks and plain marker branches inside the same outer block.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Outer Attached-Block Switch
 ## Summary
 Added the block-bodied outer switch surface `switch(expr) { case(value) { ... } default { ... } }` as a user-facing method-DSL feature. This new form lowers equivalently to the existing inline composite switch attached-branch-block surface rather than being treated as marker-style `endswitch()` sugar.

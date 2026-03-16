@@ -80,6 +80,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - keep the newly landed block-bodied outer switch surface in sync too:
      - `switch(expr) { case(value) { ... } default { ... } }`,
      - lowering equivalently to the inline composite switch attached-branch-block surface on action-edge and lifecycle blocks,
+     - and now also supporting plain marker branches such as `case(value) ... default ...` inside the outer block, not only per-branch attached blocks,
    - keep attached-block switch branch bodies fully aligned with structured-block-context flow semantics, including nested marker flow such as `if(...) ... endif()` inside those branch bodies,
    - keep attached-block switch branch bodies fully aligned with nested marker-style switch flow semantics too, not only nested marker-style `if(...) ... endif()` flow,
    - keep attached-block switch branch bodies aligned for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape too, not only the simpler single-`case(...)` marker-switch shape,

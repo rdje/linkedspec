@@ -10863,6 +10863,146 @@ SPEC
         };
     }
 };
+subtest 'method_like_action_attached_block_switch_accepts_plain_marker_branches' => sub {
+    plan tests => 12;
+
+    my $attached_branch_block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    default {
+      say("miss")
+      return_undef()
+    }
+  }
+ }
+SPEC
+
+    my $plain_marker_spec = <<'SPEC';
+Top::&
+ /a/ -> Top {
+  switch(scalar(op)) {
+    case("|")
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    default
+      say("miss")
+      return_undef()
+  }
+ }
+SPEC
+
+    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
+    my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descr => 1);
+
+    ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with attached branch blocks');
+    ok(defined($plain_descr) && ref($plain_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with plain marker branches');
+    is_deeply($attached_descr->{spec}{Top}{ACODE}, $plain_descr->{spec}{Top}{ACODE}, 'action-edge attached-block outer switch plain marker branches lower to identical ACODE output as the attached-branch-block variant');
+
+    my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+    my $plain_meta = $plain_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($attached_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block outer switch with attached branch blocks avoids RAW_PERL fallback');
+    is($plain_meta->{canonical_action_ir_fallback_count}, 0, 'action-edge attached-block outer switch with plain marker branches avoids RAW_PERL fallback');
+    is($attached_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block outer switch with attached branch blocks avoids raw Perl dependency');
+    is($plain_meta->{raw_perl_dependency_count}, 0, 'action-edge attached-block outer switch with plain marker branches avoids raw Perl dependency');
+    is($attached_meta->{unresolved_helper_count}, 0, 'action-edge attached-block outer switch with attached branch blocks avoids unresolved-helper hits');
+    is($plain_meta->{unresolved_helper_count}, 0, 'action-edge attached-block outer switch with plain marker branches avoids unresolved-helper hits');
+    is_deeply($attached_meta->{canonical_action_ir_nodes}, $plain_meta->{canonical_action_ir_nodes}, 'action-edge attached-block outer switch plain marker branches preserve canonical action-IR node coverage from the attached-branch-block variant');
+    ok(
+        $attached_meta->{language_agnostic_action_ir_ready} && $plain_meta->{language_agnostic_action_ir_ready},
+        'action-edge attached-block outer switch plain marker branches remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'SWITCH' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CASE' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DEFAULT' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SAY' } @{$plain_meta->{canonical_action_ir_nodes}}),
+        'action-edge attached-block outer switch plain marker branches preserve SWITCH/CASE/DEFAULT plus helper nodes'
+    );
+};
+subtest 'method_like_full_lifecycle_attached_block_switch_accepts_plain_marker_branches' => sub {
+    my @cases = (
+        [I  => 'ICODE'],
+        [LS => 'LSCODE'],
+        [LE => 'LECODE'],
+        [E  => 'ECODE'],
+        [EX => 'EXCODE'],
+        [IT => 'ITCODE'],
+        [LX => 'LXCODE'],
+    );
+
+    plan tests => scalar(@cases);
+
+    for my $case (@cases) {
+        my ($tag, $code_key) = @$case;
+
+        subtest "$tag lifecycle attached-block outer switch plain marker branches" => sub {
+            plan tests => 8;
+
+            my $attached_branch_block_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|") {
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    }
+    default {
+      return_undef()
+    }
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $plain_marker_spec = <<"SPEC";
+Top::&
+$tag {
+  switch(scalar(op)) {
+    case("|")
+      declare(array, events)
+      return_array(semantic_annotation, hash("items", array(events)))
+    default
+      return_undef()
+  }
+}
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
+            my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descr => 1);
+
+            ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with attached branch blocks");
+            ok(defined($plain_descr) && ref($plain_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with plain marker branches");
+
+            my $attached_meta = $attached_descr->{spec}{Top}{meta}{action_rewriter};
+            my $plain_meta = $plain_descr->{spec}{Top}{meta}{action_rewriter};
+
+            is($attached_descr->{spec}{Top}{$code_key}, $plain_descr->{spec}{Top}{$code_key}, "$tag lifecycle attached-block outer switch plain marker branches lower to identical $code_key output as the attached-branch-block variant");
+            is($plain_meta->{canonical_action_ir_fallback_count}, 0, "$tag lifecycle attached-block outer switch with plain marker branches avoids RAW_PERL fallback");
+            is_deeply($attached_meta->{canonical_action_ir_nodes}, $plain_meta->{canonical_action_ir_nodes}, "$tag lifecycle attached-block outer switch plain marker branches preserve canonical action-IR node coverage");
+            is_deeply($attached_meta->{canonical_action_ir_hits}, $plain_meta->{canonical_action_ir_hits}, "$tag lifecycle attached-block outer switch plain marker branches preserve canonical action-IR hit counts");
+            ok(
+                $plain_meta->{unresolved_helper_count} == 0 &&
+                $plain_meta->{language_agnostic_action_ir_ready},
+                "$tag lifecycle attached-block outer switch plain marker branches stay fully language-agnostic-ready",
+            );
+            ok(
+                scalar(grep { $_ eq 'SWITCH' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'CASE' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+                scalar(grep { $_ eq 'DEFAULT' } @{$plain_meta->{canonical_action_ir_nodes}}),
+                "$tag lifecycle attached-block outer switch plain marker branches preserve SWITCH/CASE/DEFAULT canonical nodes",
+            );
+        };
+    }
+};
 subtest 'method_like_action_marker_switch_attached_branch_blocks_accept_nested_marker_flow' => sub {
     plan tests => 10;
 
