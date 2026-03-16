@@ -13,6 +13,15 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - `t/phase0_regression.t` now compares the same two local structured branch-body carrier pairs:
   - inline composite switch structured-argument branch blocks versus attached branch-block sugar,
   - and marker-style outer switch plain branch markers versus attached branch-block sugar,
+  - for the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside nested composite `if/elseif` flow.
+- That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
+- Clarified the scope precisely:
+  - the broader multi-`case(...)` nested inline-composite switch shape now preserves parity within each switch family's own structured branch-body carriers when it appears inside nested composite `if(...)` / `elseif(...)` flow too,
+  - not only across attached switch branch blocks.
+- Extended local structured-branch parity one level deeper for nested composite `if(...)` / `elseif(...)` flow on both switch families.
+- `t/phase0_regression.t` now compares the same two local structured branch-body carrier pairs:
+  - inline composite switch structured-argument branch blocks versus attached branch-block sugar,
+  - and marker-style outer switch plain branch markers versus attached branch-block sugar,
   - for the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape inside nested composite `if/elseif` flow.
 - That parity lock spans action-edge plus the full lifecycle family `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX`.
 - Clarified the scope precisely:

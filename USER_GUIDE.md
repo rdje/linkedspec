@@ -237,9 +237,13 @@ That same local structured-branch parity now covers nested composite `if(...)` /
 
 That same local structured-branch parity now covers the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape inside those nested composite `if(...)` / `elseif(...)` branches on inline composite switch surfaces too. The two inline composite switch branch-body carriers now stay aligned there on both action-edge and lifecycle surfaces, not only on the plain nested composite-if shape.
 
+That same local structured-branch parity now also covers the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside those nested composite `if(...)` / `elseif(...)` branches on inline composite switch surfaces too. The two inline composite switch branch-body carriers now stay aligned there on both action-edge and lifecycle surfaces, not only across attached switch branch blocks.
+
 That same local structured-branch parity now covers nested composite `if(...)` / `elseif(...)` flow on marker-style outer switch surfaces too. Plain marker branches like `case(value)` / `default()` and attached branch-block sugar like `case(value) { ... }` / `default() { ... }` now stay aligned there on both action-edge and lifecycle surfaces, not only on nested switch-only bodies.
 
 That same local structured-branch parity now covers the broader multi-`case(...)` nested marker-style `switch(...) ... endswitch()` shape inside those nested composite `if(...)` / `elseif(...)` branches on marker-style outer switch surfaces too. Plain marker branches and attached branch-block sugar now stay aligned there on both action-edge and lifecycle surfaces, not only on the plain nested composite-if shape.
+
+That same local structured-branch parity now also covers the broader multi-`case(...)` nested inline-composite `switch(...)` shape inside those nested composite `if(...)` / `elseif(...)` branches on marker-style outer switch surfaces too. Plain marker branches and attached branch-block sugar now stay aligned there on both action-edge and lifecycle surfaces, not only across attached switch branch blocks.
 
 That same cross-family parity now covers nested composite `if(...)` / `elseif(...)` flow too. Attached branch blocks `case(value) { ... }` and `default() { ... }` now stay aligned there between inline composite outer `switch(...)` forms and marker-style outer `switch(...) ... endswitch()` forms on both action-edge and lifecycle surfaces, not only on bare nested-switch bodies.
 
