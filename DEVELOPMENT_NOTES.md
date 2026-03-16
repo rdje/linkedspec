@@ -10,6 +10,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 ## Current Session Notes (2026-03-16)
 - Feature follow-up:
+  - the attached-block composite `if(...)` surface is now available as the final call on fluent action-edge and lifecycle chains too,
+  - so `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the structured attached-block baseline,
+  - and the bootstrap chain parser now preserves trailing attached `elseif(...) { ... }` / `else { ... }` clauses after a fluent final-call `if(...)` branch block instead of dropping them.
+- Feature follow-up:
   - the outer attached-block switch surface is now available as the final call on fluent action-edge and lifecycle chains too,
   - so `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` now lower through the same canonical path as the structured outer-switch baseline,
   - and the bootstrap chain parser now binds an optional attached block to the final fluent call instead of dropping it.

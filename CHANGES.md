@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Support Fluent Outer Attached-Block Composite If
+## Summary
+Extended the attached-block composite `if(...)` surface onto fluent action-edge and lifecycle chains. Final-call forms like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the already-supported structured attached-block baseline instead of dropping the trailing `elseif` / `else` clauses.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ControlFlow.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Extended the bootstrap chain parser so an attached fluent `if(...)` final call can keep trailing attached `elseif(...) { ... }` and `else { ... }` clauses instead of dropping them after the first branch block.
+- Added action-edge and full-lifecycle regression locks comparing the new fluent outer attached-block composite-`if` surface against the already-supported structured attached-block baseline.
+- Documented the exact contract: this is a supported final-call fluent surface, not a general reopening of unconstrained marker-style flow.
+
 ## 2026-03-16 - Method-Like DSL Slice: Support Fluent Outer Attached-Block Switch
 ## Summary
 Extended the outer attached-block switch surface onto fluent action-edge and lifecycle chains. Final-call forms like `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` now lower through the same canonical switch path as the already-landed structured outer-block baseline instead of dropping the attached branch body.

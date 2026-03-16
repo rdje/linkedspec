@@ -254,7 +254,7 @@ Status interpretation note:
    - Inline composite `if(...)` design note agreed before implementation:
      - the argument-list composite first step is now landed, in the form `if(cond, action1(...), action2(...), elseif(cond2, action3(...)), else(action4(...)))`,
      - the attached-block structured-block-context form `if(cond) { ... } elseif(cond2) { ... } else() { ... }` is now landed too on action-edge and lifecycle surfaces,
-     - and it belongs to structured block contexts rather than the free-standing fluent surface.
+     - and that same attached-block composite `if(...)` surface is now also supported as the final call on fluent action-edge and lifecycle chains, rather than as an unconstrained free-standing fluent surface.
 4. Unlimited method composition in arguments (Planned)
    - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.

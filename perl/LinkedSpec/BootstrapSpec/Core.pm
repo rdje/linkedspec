@@ -143,6 +143,45 @@ sub _render_method_call_chain {
  return join '; ', @rendered
 }
 
+#------------------------------------------------------------------------------
+# Function: _parse_optional_attached_if_clause_tail
+# Purpose : Parse trailing attached `elseif(...) { ... }` / `else { ... }`
+#           clauses that continue an attached-block fluent `if(...)` chain.
+# Args    : ($string_ref, $start_pos)
+# Returns : ($tail_text, $new_pos)
+#------------------------------------------------------------------------------
+sub _parse_optional_attached_if_clause_tail {
+ my ($string_ref, $start_pos) = @_;
+ return ('', $start_pos) unless ref($string_ref) eq 'SCALAR' && defined $start_pos;
+
+ my $source = $$string_ref;
+ pos($source) = $start_pos;
+ my $tail = '';
+ my $else_seen = 0;
+
+ while (
+  $source =~ /\G\s*(?<head>(?:(?:elseif|elif)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))|else(?!\w)(?:\s*(?<ZPAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&ZPAREN))*\)))?))(?<block>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))/gc
+ ) {
+  my $head = _trim_bootstrap_value($+{head});
+  my $block = _trim_bootstrap_value($+{block});
+  last unless defined($head) && length($head) && defined($block) && length($block);
+
+  if ($head =~ /^(?:elseif|elif)\b/o) {
+   return ('', $start_pos) if $else_seen;
+  } else {
+   return ('', $start_pos) if $else_seen;
+   $else_seen = 1;
+  }
+
+  $tail .= ' ' if length($tail);
+  $tail .= $head . ' ' . $block;
+ }
+
+ my $new_pos = pos($source);
+ $new_pos = $start_pos unless defined $new_pos;
+ return ($tail, $new_pos)
+}
+
 sub _build_bootstrap_node_type_map {
  return {
   '&' => 'AND',
@@ -273,6 +312,17 @@ sub _build_method_empty_action_code_block_rule {
    my ($entry_label, $reidx, $chain, $block) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN BLOCK/};
    my $code = _render_method_call_chain($entry_label, $chain, $block);
    return undef unless defined $code;
+   my $calls = _parse_method_call_chain($chain);
+   if ($calls && @$calls && defined($block) && length($block)) {
+    my $tail_method = $calls->[-1]{method} || '';
+    if ($tail_method eq 'if' || $tail_method eq 'i') {
+     my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
+     if (defined($tail) && length($tail)) {
+      $code .= ' ' . $tail;
+      pos($$string) = $new_pos;
+     }
+    }
+   }
    return ['ACODE', {relabel=>$entry_label, reidx=> $reidx // 0, code=>$code}]
   },
  }
@@ -390,6 +440,17 @@ sub _build_method_empty_non_action_code_block_rule {
    my ($type, $chain, $block) = @{$$info{match_hash}}{qw/TYPE CHAIN BLOCK/};
    my $code = _render_method_call_chain($gdata->{_current_entry}, $chain, $block);
    return undef unless defined $code;
+   my $calls = _parse_method_call_chain($chain);
+   if ($calls && @$calls && defined($block) && length($block)) {
+    my $tail_method = $calls->[-1]{method} || '';
+    if ($tail_method eq 'if' || $tail_method eq 'i') {
+     my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
+     if (defined($tail) && length($tail)) {
+      $code .= ' ' . $tail;
+      pos($$string) = $new_pos;
+     }
+    }
+   }
    return ["${type}CODE", $code]
   },
  }

@@ -11,6 +11,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 
 ## Current Session Snapshot (2026-03-16)
 - Feature follow-up:
+  - the attached-block composite `if(...)` surface now works as the final call on fluent action-edge and lifecycle chains too,
+  - so surfaces like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` are now tracked as supported,
+  - and the bootstrap chain parser now preserves the trailing attached `elseif(...)` / `else` clauses instead of dropping them after the first fluent `if(...)` block.
+- Feature follow-up:
   - the outer attached-block switch surface now works as the final call on fluent action-edge and lifecycle chains too,
   - so surfaces like `-> rule .switch(expr) { ... }` and `I.switch(expr) { ... }` are now tracked as supported,
   - and the bootstrap chain parser now preserves that final attached block instead of dropping it.
