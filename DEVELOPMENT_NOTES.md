@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-16: Regression-locked the representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so `split_each(...)` now sits inside the explicit method-like DSL contract instead of living mostly as a VHDL migration detail.
 - 2026-03-16: Made zero-arg fluent control-flow markers explicit in the bootstrap renderer so `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` are now an intentional supported fluent surface rather than an accidental byproduct of later optional-scope normalization.
 - 2026-03-16: Added mixed-carrier composite `if(...)` support so attached-block `if` chains can mix attached branch blocks with lighter plain marker bodies across one `if/elseif/else` chain, including the final-call fluent action-edge/lifecycle surface.
 
@@ -13,6 +14,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)
+- Feature follow-up:
+  - representative array-normalization pipelines using `split(...)`, `split_each(...)`, `trim_each(...)`, `filter_nonempty(...)`, and `return(array_copy(...))` are now explicitly regression-locked between fluent and structured authoring,
+  - that contract now spans both action-edge and lifecycle surfaces,
+  - and the guides now present `split_each(...)` as part of a supported backend-neutral normalization pipeline rather than mostly as a corpus-specific migration anecdote.
 - Feature follow-up:
   - the attached-block composite `if(...)` surface is now available as the final call on fluent action-edge and lifecycle chains too,
   - so `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` now lower through the same canonical path as the structured attached-block baseline,

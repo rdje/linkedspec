@@ -133,6 +133,69 @@ Example:
 I.split(array(parts), scalar(text), /,/).trim_each(array(parts)).filter_nonempty(array(parts))
 ```
 
+## Method-like DSL equivalence note
+The representative normalization pipeline below is now part of the explicit method-like DSL support contract on both action-edge and lifecycle surfaces:
+
+```text
+split(array(parts), scalar(args), /,\s*/)
+split_each(array(parts), /:/)
+trim_each(array(parts))
+filter_nonempty(array(parts))
+return(array_copy(array(parts)))
+```
+
+That matters because `split_each(...)` is often the point where a pipeline stops feeling like a trivial one-step cleanup and starts looking like real staged token normalization. The current contract is that fluent and structured authoring for that kind of multi-stage cleanup pipeline lower through the same canonical ActionIR path, with the same zero-fallback and zero-unresolved-helper expectations.
+
+Worked fluent action-edge example:
+
+```text
+/a/ -> Top .declare(array, parts)
+           .declare(scalar, args)
+           .assign(scalar(args), "left:1, right:2")
+           .split(array(parts), scalar(args), /,\s*/)
+           .split_each(array(parts), /:/)
+           .trim_each(array(parts))
+           .filter_nonempty(array(parts))
+           .return(array_copy(array(parts)))
+```
+
+Equivalent structured action-edge example:
+
+```text
+/a/ -> Top {
+  declare(array, parts)
+  declare(scalar, args)
+  assign(scalar(args), "left:1, right:2")
+  split(array(parts), scalar(args), /,\s*/)
+  split_each(array(parts), /:/)
+  trim_each(array(parts))
+  filter_nonempty(array(parts))
+  return(array_copy(array(parts)))
+}
+```
+
+Equivalent lifecycle example:
+
+```text
+LX {
+  declare(array, parts)
+  declare(scalar, args)
+  assign(scalar(args), "left:1, right:2")
+  split(array(parts), scalar(args), /,\s*/)
+  split_each(array(parts), /:/)
+  trim_each(array(parts))
+  filter_nonempty(array(parts))
+  return(array_copy(array(parts)))
+}
+```
+
+Read that pipeline in order:
+1. split the original scalar into coarse pieces,
+2. split each surviving piece again,
+3. trim whitespace from the flattened result,
+4. remove empty entries,
+5. return a snapshot array payload of the normalized list.
+
 ## Nested functional composition
 You can also compose them functionally.
 

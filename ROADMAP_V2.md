@@ -73,6 +73,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 2. Continue the method-like DSL migration track:
    - priority shift is now active: continue missing user-facing DSL features first, and return to deeper marker `if(...)` / marker `switch(...)` cross-nesting parity expansion only when a concrete feature or bug requires it,
    - landed punctuation-reduction follow-up: structured marker-style zero-arg terminators now accept bare keyword form (`else`, `endif`, `default`, `endcase`, `endswitch`) in addition to the older `...()` spellings, and attached branch blocks now also accept `else { ... }` / `default { ... }` alongside `else() { ... }` / `default() { ... }`,
+   - landed helper-contract follow-up: representative array-normalization pipelines using `split(...)`, `split_each(...)`, `trim_each(...)`, `filter_nonempty(...)`, and `return(array_copy(...))` are now explicitly regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces,
    - broaden fluent/block equivalence on supported surfaces,
    - keep both supported inline-switch structured branch-body surfaces in sync:
      - `case(value, { ... })` / `default({ ... })`,

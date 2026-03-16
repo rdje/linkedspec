@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-16: Regression-locked the representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so `split_each(...)` is now explicitly part of the method-like DSL contract.
 - 2026-03-16: Made zero-arg fluent control-flow markers explicit in the bootstrap renderer so `.else`, `.endif`, `.default`, `.endcase`, and `.endswitch` are now an intentional supported fluent surface rather than an accidental byproduct of later optional-scope normalization.
 - 2026-03-16: Added mixed-carrier composite `if(...)` support so attached-block `if` chains can mix attached branch blocks with lighter plain marker bodies across one `if/elseif/else` chain, including the final-call fluent action-edge/lifecycle surface.
 
@@ -14,6 +15,10 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-16)
+- Feature follow-up:
+  - representative array-normalization pipelines using `split(...)`, `split_each(...)`, `trim_each(...)`, `filter_nonempty(...)`, and `return(array_copy(...))` now have explicit fluent-versus-structured regression coverage,
+  - that coverage spans both action-edge and lifecycle surfaces,
+  - and roadmap/guide wording now treats `split_each(...)` as part of a supported backend-neutral normalization pipeline instead of mostly as a corpus-migration detail.
 - Feature follow-up:
   - the attached-block composite `if(...)` surface now works as the final call on fluent action-edge and lifecycle chains too,
   - so surfaces like `-> rule .if(cond) { ... } elseif(cond2) { ... } else { ... }` and `I.if(cond) { ... } elseif(cond2) { ... } else { ... }` are now tracked as supported,

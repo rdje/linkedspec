@@ -1,5 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-16 - Method-Like DSL Slice: Lock Array-Normalization Pipeline Equivalence
+## Summary
+Extended the method-like DSL migration track by regression-locking a representative multi-stage array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` flows now preserve the same lowering and migration metadata across both concrete syntaxes.
+
+## Changed Files
+- Updated: `t/phase0_regression.t`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_ArrayPipeline.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added focused fluent-versus-structured equivalence locks for a representative array-normalization pipeline on:
+  - action-edge method chains,
+  - and lifecycle `LX` method chains.
+- Locked parity on:
+  - identical `ACODE` or `LXCODE`,
+  - zero fallback,
+  - zero raw Perl dependency,
+  - zero unresolved helpers,
+  - identical canonical action-IR node coverage,
+  - and language-agnostic readiness metadata.
+- Made the user-facing docs state the intended contract directly instead of leaving `split_each(...)` primarily as a VHDL-specific migration detail.
+
 ## 2026-03-16 - Documentation Slice: Expand Fluent Bare-Marker Control-Flow Examples
 ## Summary
 Expanded `USER_GUIDE_ActionIR_ControlFlow.md` so the recent bare fluent marker surface is taught with fuller worked examples instead of only terse proof snippets. The documentation contract was also tightened to say that newly landed user-facing surfaces should get fuller examples when short snippets would obscure the real supported shape.
