@@ -16,6 +16,9 @@ In practical terms, this is the guide you want when you need to understand:
 - `scalaref(...)`
 - `array(...)`
 - `hash(...)`
+- `trim(...)`
+- `lowercase(...)`
+- `uppercase(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -264,6 +267,67 @@ Method-DSL migration note:
 - on both action-edge and lifecycle surfaces,
 - and that same supported `join_values(...)` equivalence is now regression-locked inside control-flow branch bodies too,
 - so string-join payload construction is part of the same equivalence contract as the rest of the method-like DSL surface.
+
+## Scalar normalization helpers
+These are parser-oriented scalar transforms:
+- `trim(value)`
+- `lowercase(value)`
+- `uppercase(value)`
+
+They are meant for scalar text normalization inside value composition, not as standalone raw-string escape hatches.
+
+### `trim(value)`
+Use `trim(...)` when you want leading/trailing whitespace removed while keeping the expression inside the canonical method-like DSL surface.
+
+Examples:
+
+```text
+trim(scalar(IMATCH))
+trim(scalaref(retv, {content}))
+trim(coalesce(scalaref(retv, {type}), " UNKNOWN "))
+```
+
+### `lowercase(value)`
+Use `lowercase(...)` when the rule needs a normalized lower-case scalar.
+
+Examples:
+
+```text
+lowercase(scalar(name))
+lowercase(trim(scalar(IMATCH)))
+lowercase(coalesce(scalaref(retv, {type}), "WORD"))
+```
+
+### `uppercase(value)`
+Use `uppercase(...)` when the rule needs a normalized upper-case scalar.
+
+Examples:
+
+```text
+uppercase(scalar(name))
+uppercase(trim(scalaref(retv, {type})))
+uppercase(coalesce(scalaref(retv, {kind}), "unknown"))
+```
+
+Important semantic note:
+- these helpers preserve `undef` rather than silently turning it into `""`,
+- so `lowercase(undef)` stays undefined,
+- `uppercase(undef)` stays undefined,
+- and `trim(undef)` stays undefined too.
+
+Typical uses:
+- normalize a child payload field before comparison,
+- clean captured text before storing it,
+- build canonical return payloads with normalized casing,
+- keep string normalization expression-oriented rather than expanding it into marker-style branch ladders.
+
+Examples in context:
+
+```text
+assign(scalar(chosen_name), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))
+return(hash("type", uppercase(trim(coalesce(scalaref(retv, {type}), "word")))))
+if(eq(lowercase(trim(scalaref(retv, {type}))), "word")); ... endif()
+```
 
 ## `coalesce(value1, value2, ..., valueN)`
 Use `coalesce(...)` when you want the first **defined** value from a fallback chain.

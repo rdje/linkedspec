@@ -257,11 +257,12 @@ ne(scalaref(retv, {type}), "COMMENTS")
 is_defined(scalaref(retv, {content}))
 is_undefined(scalaref(retv, {type}))
 is_nonempty(scalaref(retv, {content}))
+eq(lowercase(trim(scalaref(retv, {type}))), "word")
 eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
 ```
 
 This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
-It is also useful when the rule wants one parser-oriented defaulting step before the comparison.
+It is also useful when the rule wants one parser-oriented defaulting or normalization step before the comparison.
 
 ## Worked examples
 ### Example: flush a pending word only if it exists
@@ -312,6 +313,16 @@ if(is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH))));
   return(hash("kind", "CLASSIFIED", "type", coalesce(scalaref(retv, {type}), scalar(IMATCH))));
 else;
   return(hash("kind", "UNCLASSIFIED"));
+endif()
+```
+
+### Example: normalize before comparing
+
+```text
+if(eq(lowercase(trim(coalesce(scalaref(retv, {type}), " WORD "))), "word"));
+  return(hash("kind", "WORD"));
+else;
+  return(hash("kind", "OTHER"));
 endif()
 ```
 

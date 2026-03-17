@@ -322,6 +322,8 @@ Defaulting/coalescing value helpers are now part of that explicit contract too: 
 
 Definedness flow helpers are part of that same contract too: `is_defined(...)` and `is_undefined(...)` now give the DSL an explicit way to distinguish “missing” from “empty” across scalar fields, nested payload access, and fallback chains, instead of forcing users to blur presence checks together with `is_empty(...)` / `is_nonempty(...)`.
 
+Scalar normalization helpers are part of that explicit contract too: `trim(...)`, `lowercase(...)`, and `uppercase(...)` now compose canonically across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so ordinary text cleanup can stay inside the backend-neutral value-expression layer instead of leaking into ad hoc raw string handling.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

@@ -303,7 +303,37 @@ sub _lower_method_value_expr {
   if (defined $hash_symbol) {
    return '$'.$hash_symbol.'{'.$key_lowered.'}';
   }
-  return undef;
+ return undef;
+}
+ if ($method_call && $method_call->{method} eq 'trim') {
+  my $trim_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $trim_args;
+
+  my $value_expr = _lower_method_value_expr($trim_args->[0], $deps);
+  $value_expr = $trim_action_ir_value->($trim_args->[0]) unless defined($value_expr) && length($value_expr);
+  return undef unless defined($value_expr) && length($value_expr);
+
+  return 'do { my $__ls_trim = '.$value_expr.'; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }';
+ }
+ if ($method_call && $method_call->{method} eq 'lowercase') {
+  my $lower_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $lower_args;
+
+  my $value_expr = _lower_method_value_expr($lower_args->[0], $deps);
+  $value_expr = $trim_action_ir_value->($lower_args->[0]) unless defined($value_expr) && length($value_expr);
+  return undef unless defined($value_expr) && length($value_expr);
+
+  return 'do { my $__ls_lower = '.$value_expr.'; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }';
+ }
+ if ($method_call && $method_call->{method} eq 'uppercase') {
+  my $upper_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $upper_args;
+
+  my $value_expr = _lower_method_value_expr($upper_args->[0], $deps);
+  $value_expr = $trim_action_ir_value->($upper_args->[0]) unless defined($value_expr) && length($value_expr);
+  return undef unless defined($value_expr) && length($value_expr);
+
+  return 'do { my $__ls_upper = '.$value_expr.'; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }';
  }
  if ($method_call && $method_call->{method} eq 'join_values') {
   my $join_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -413,7 +443,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -421,7 +451,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

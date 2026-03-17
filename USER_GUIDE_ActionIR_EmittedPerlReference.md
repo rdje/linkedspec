@@ -52,6 +52,9 @@ They take effect when the expression appears inside a statement or helper that c
 - `hash("kind", "node", "item", scalar(name))` -> `{"kind" => "node", "item" => $name}`
 - `array_copy(array(items))` -> `[@items]`
 - `array_values(array(items))` -> `[@items]` (compatibility alias for `array_copy(...)`)
+- `trim(scalar(IMATCH))` -> `do { my $__ls_trim = $IMATCH; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }`
+- `lowercase(trim(scalaref(retv, {content})))` -> `do { my $__ls_lower = do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }`
+- `uppercase(coalesce(scalaref(retv, {type}), "word"))` -> `do { my $__ls_upper = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }`
 - `coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")` -> `do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `coalesce(scalaref(retv, {parts}), array("empty"))` -> `do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }`
 - `flat_array(items)` -> `@items`
@@ -72,6 +75,7 @@ Important nuance:
 - `assign(scalar(token), IMATCH)` -> `$token = $IMATCH`
 - `assign(scalar(closing_token), LMATCH)` -> `$closing_token = $LMATCH`
 - `assign(scalar(flag), or(scalar(on), scalar(off)))` -> `$flag = (($on) || ($off))`
+- `assign(scalar(name), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))` -> `$name = do { my $__ls_lower = do { my $__ls_trim = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : " UNKNOWN " } }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }`
 - `assign(scalar(capt_joined), join_values('', array(capt)))` -> `$capt_joined = join('', @capt)`
 - `assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))` -> `$name = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `assign(scalar(retv), call(Leaf))` -> `$retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)`
@@ -118,6 +122,7 @@ Important nuance:
 - `is_defined(scalaref(retv, {content}))` -> `defined($retv->{content})`
 - `is_undefined(scalaref(retv, {type}))` -> `(!defined($retv->{type}))`
 - `is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`
+- `eq(lowercase(trim(scalaref(retv, {type}))), "word")` -> `(do { my $__ls_lower = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower } eq "word")`
 - `is_empty(array(items))` -> `(!@items)`
 - `is_empty(scalar(name))` -> `(!defined($name) || $name eq '')`
 - `is_nonempty(array(items))` -> `(!((!@items)))`

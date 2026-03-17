@@ -131,6 +131,38 @@ assign(scalar(csv_text), join_values(", ", array(parts)))
 return(hash("text", join_values("", array(chars))))
 ```
 
+### Scalar text normalization
+These helpers keep common string cleanup inside the canonical value-expression layer:
+- `trim(value)`
+- `lowercase(value)`
+- `uppercase(value)`
+
+Examples:
+
+```text
+trim(scalar(IMATCH))
+lowercase(trim(scalaref(retv, {content})))
+uppercase(coalesce(scalaref(retv, {type}), "word"))
+```
+
+Use cases:
+- strip outer whitespace from captures,
+- normalize case before comparisons,
+- store canonical lower-case or upper-case payload fields,
+- keep scalar cleanup expression-oriented instead of expanding it into a branch ladder.
+
+Examples in context:
+
+```text
+assign(scalar(clean_name), trim(scalar(IMATCH)))
+assign(scalar(norm_type), lowercase(trim(coalesce(scalaref(retv, {type}), " WORD "))))
+return(hash("kind", uppercase(trim(coalesce(scalaref(retv, {kind}), "unknown")))))
+```
+
+Important semantic note:
+- these helpers preserve `undef`,
+- so they do not quietly invent an empty string where no value existed.
+
 ### Defaulting and coalescing scalar values
 
 ```text
@@ -706,6 +738,33 @@ What this example teaches:
 - `coalesce(...)` keeps the rule expression-oriented,
 - it avoids an extra ladder of marker-style fallback branches when the logic is just “pick the first defined value,”
 - and it works for both scalar payload fields and aggregate payload fields.
+
+## Worked example: normalize type/content text before returning
+This is the common parser shape where one rule wants to:
+- pick the best available source,
+- trim it,
+- normalize its casing,
+- and return the normalized result.
+
+```text
+I {
+  declare(scalar, chosen_type, chosen_content)
+}
+
+-> child[1] {
+  assign(scalar(chosen_type), uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))
+  assign(scalar(chosen_content), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))
+  return(hash(
+    "type", scalar(chosen_type),
+    "content", scalar(chosen_content)
+  ))
+}
+```
+
+What this example teaches:
+- scalar normalization helpers compose directly with `coalesce(...)`,
+- they stay inside the canonical value-expression surface,
+- and they work naturally in assignment sources and returned payloads.
 
 ## Worked example: presence versus emptiness
 This is the pattern to use when the parser needs to keep three states distinct:

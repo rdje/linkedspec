@@ -84,6 +84,10 @@ Expanded the user-facing method-DSL documentation with a dedicated scalar-and-ag
 - Updated: `DEVELOPMENT_NOTES.md`
 - Updated: `MEMORY.md`
 
+2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented Scalar Normalization Helpers
+
+Added parser-oriented scalar normalization helpers `trim(...)`, `lowercase(...)`, and `uppercase(...)` so `.spec` rules can normalize text inside canonical value expressions instead of dropping into ad hoc raw string handling. The lowering now works across assignment sources, return payloads, and comparison inputs, and fluent-versus-structured authoring is regression-locked on both action-edge and lifecycle surfaces. The user guides were expanded with worked examples in `USER_GUIDE_ActionIR_MethodLowering.md`, `USER_GUIDE_ActionIR_FlowExpr.md`, `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`, `USER_GUIDE_ActionIR_EmittedPerlReference.md`, and `USER_GUIDE.md`.
+
 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented Definedness Flow Helpers
 
 Added parser-oriented `is_defined(...)` and `is_undefined(...)` flow helpers so `.spec` rules can distinguish “missing” from “empty” without dropping back to ad hoc truthiness. The lowering now works canonically across scalar fields, nested payload reads, and fallback chains such as `coalesce(...)`, and fluent-versus-structured authoring is regression-locked on both action-edge and lifecycle surfaces. The user guides were expanded with direct definedness-versus-emptiness explanations plus fuller worked examples in `USER_GUIDE_ActionIR_FlowExpr.md`, `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`, `USER_GUIDE_ActionIR_EmittedPerlReference.md`, and `USER_GUIDE.md`.
