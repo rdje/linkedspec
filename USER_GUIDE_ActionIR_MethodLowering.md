@@ -20,6 +20,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `length(...)`
+- `num_abs(...)`
 - `num_add(...)`
 - `num_sub(...)`
 - `num_mul(...)`
@@ -412,12 +413,14 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
 
-## `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
+## `num_abs(value_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
 Use these when you want parser-oriented numeric composition without leaving the canonical method-like DSL surface.
 
 Examples:
 
 ```text
+num_abs(num_sub(scalar(depth), scalar(limit)))
+num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))
 num_add(scalar(depth), 1)
 num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
 num_sub(count(array(parts)), 1)
@@ -429,6 +432,7 @@ num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))
 ```
 
 These helpers are intentionally narrow:
+- `num_abs(...)` is the canonical numeric “absolute value of this operand” helper and is currently unary,
 - `num_add(...)` is the canonical numeric “sum these operands” helper and accepts two or more operands,
 - `num_sub(...)` is the canonical numeric “subtract rhs from lhs” helper and is currently binary,
 - `num_mul(...)` is the canonical numeric “multiply these operands” helper and accepts two or more operands,
@@ -441,6 +445,7 @@ These helpers are intentionally narrow:
 Examples in context:
 
 ```text
+assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit))))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor)))
@@ -449,10 +454,12 @@ assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset))
 assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)))
 assign(scalar(total), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
 if(num_gt(num_add(count(array(parts)), scalar(offset)), 3)); ... endif()
+if(num_gt(num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset))), 3)); ... endif()
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3)); ... endif()
 if(num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)); ... endif()
 return(hash(
   "next_depth", num_add(scalar(depth), 1),
+  "distance", num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit))),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
   "floor_value", num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10),
@@ -464,6 +471,7 @@ Important semantic notes:
 - these helpers expect defined numeric-looking operands,
 - supported numeric-looking forms are simple integer/decimal values such as `0`, `-3`, `0.75`, and `12.5`,
 - if any operand is still undefined or not numeric-looking, the arithmetic helper returns `undef`,
+- `num_abs(...)` evaluates its single operand under that same numeric-looking contract,
 - `num_div(...)` also returns `undef` when the divisor is `0`,
 - `num_min(...)` and `num_max(...)` evaluate all provided operands under that same numeric-looking contract,
 - and when the rule wants “missing means zero,” that should be stated explicitly with `coalesce(...)`.
@@ -471,6 +479,7 @@ Important semantic notes:
 Examples:
 
 ```text
+num_abs(coalesce(num_sub(scalar(depth), scalar(limit)), 0))
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))

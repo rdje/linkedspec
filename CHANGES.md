@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_abs(...)`
+
+Extended the method-like DSL migration track with the unary numeric absolute-value helper. Fluent and structured authoring now agree on representative magnitude/absolute-distance flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `num_abs(value_expr)` lowering for:
+  - nested arithmetic chains such as `num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))`,
+  - normalized scalar distance expressions such as `num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset)))`,
+  - and direct return payloads where one canonical absolute numeric value is needed without staging through temporary scalars.
+- Kept the parser-oriented arithmetic contract:
+  - `num_abs(...)` is currently unary,
+  - it stays a pure scalar value helper,
+  - and missing or non-numeric-looking operands preserve `undef` instead of silently inventing a value.
+- Expanded the user guides with fuller examples showing `num_abs(...)` in reducer composition, normalized scalar flows, direct returns, and numeric comparisons.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_min(...)` And `num_max(...)`
 
 Extended the method-like DSL migration track with the next standardized arithmetic helpers. Fluent and structured authoring now agree on representative numeric floor/ceiling-style composition flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
