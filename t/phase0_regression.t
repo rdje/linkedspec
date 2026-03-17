@@ -5324,7 +5324,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'FlowExpr',
             module      => 'LinkedSpec::ActionIR::FlowExpr',
-            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
+            callbacks   => [qw(_trim_action_ir_value _extract_array_symbol_name _extract_hash_symbol_name _extract_scalar_symbol_name _lower_method_value_expr _parse_method_function_expr _normalize_method_args_with_optional_scope)],
             sample_key  => 'trim_action_ir_value',
             sample_name => '_trim_action_ir_value',
         },
@@ -23472,6 +23472,131 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'action_rewriter_lowers_aggregate_expression_emptiness_flow_helpers' => sub {
+    plan tests => 5;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(hash(meta))'),
+        '(!scalar(keys %meta))',
+        'is_empty(hash(name)) lowers working hashes into a direct zero-key check'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(sorted_values(hash(meta)))'),
+        'do { my $__ls_empty_array = [map { $meta{$_} } sort keys %meta]; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }',
+        'is_empty(...) treats array-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(pick_keys(hash(meta), "kind"))'),
+        'do { my $__ls_empty_hash = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }',
+        'is_empty(...) treats hash-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
+    );
+
+    my $array_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(is_empty(coalesce(scalaref(retv, {parts}), array()))); return_undef(); endif()'
+    );
+    like(
+        $array_if,
+        qr/if \(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{parts\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \{/s,
+        'if(is_empty(...)) lowers aggregate fallback arrays through the canonical empty-array flow path'
+    );
+
+    my $hash_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(is_nonempty(pick_keys(hash(meta), "kind"))); return(hash("kind", "present")); endif()'
+    );
+    like(
+        $hash_if,
+        qr/if \(\(!\(do \{ my \$__ls_empty_hash = do \{ my \$__ls_pick_source = \\%meta; if \(defined\(\$__ls_pick_source\)\) \{ my %__ls_pick; foreach my \$__ls_pick_key \("kind"\) \{ \$__ls_pick\{\$__ls_pick_key\} = \$__ls_pick_source->\{\$__ls_pick_key\} if exists \$__ls_pick_source->\{\$__ls_pick_key\}; \} \\%__ls_pick \} else \{ \{\} \} \}; \(!defined\(\$__ls_empty_hash\) \|\| !scalar\(keys %\{\$__ls_empty_hash\}\)\) \}\)\)\) \{/s,
+        'if(is_nonempty(...)) lowers projected hash expressions through the same aggregate-emptiness flow path'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_aggregate_emptiness_flow_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge aggregate-emptiness helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge aggregate-emptiness helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge aggregate-emptiness helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge aggregate-emptiness helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge aggregate-emptiness helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge aggregate-emptiness helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge aggregate-emptiness helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge aggregate-emptiness helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge aggregate-emptiness helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge aggregate-emptiness helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge aggregate-emptiness helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge aggregate-emptiness fluent form preserves DECLARE/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_aggregate_emptiness_flow_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle aggregate-emptiness helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle aggregate-emptiness helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle aggregate-emptiness helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle aggregate-emptiness helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle aggregate-emptiness helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle aggregate-emptiness helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle aggregate-emptiness helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle aggregate-emptiness helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle aggregate-emptiness helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle aggregate-emptiness helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle aggregate-emptiness helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle aggregate-emptiness fluent form preserves DECLARE/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'action_rewriter_lowers_scalar_normalization_value_helpers' => sub {

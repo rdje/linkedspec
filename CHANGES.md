@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Aggregate-Expression Emptiness In Flow
+
+Extended the method-like DSL migration track so `is_empty(...)` / `is_nonempty(...)` now treat composed array-valued and hash-valued helper expressions as real aggregates instead of falling back to Perl reference truthiness.
+
+- Added canonical aggregate-emptiness lowering for:
+  - array-valued helper expressions such as `sorted_values(...)`, `sorted_keys(...)`, array constructors, array snapshots, array pipelines, and aggregate `coalesce(...)` chains,
+  - hash-valued helper expressions such as `hash(...)`, `merge_hash(...)`, `drop_keys(...)`, `pick_keys(...)`, and aggregate `coalesce(...)` chains.
+- Direct hash-variable emptiness now lowers through `scalar(keys %hash)` rather than plain truthiness.
+- Flow conditions like these are now first-class supported surfaces:
+  - `if(is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))))`
+  - `if(is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))`
+  - `if(is_empty(coalesce(scalaref(retv, {parts}), array())))`
+- Added regression coverage for:
+  - direct aggregate-emptiness lowering,
+  - action-edge fluent-versus-structured parity,
+  - and lifecycle fluent-versus-structured parity.
+- Expanded the user guides with fuller examples so users can see aggregate emptiness as part of the supported functional-expression surface rather than as a Perl-specific quirk.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `sorted_values(...)` Helper
 ## Summary
 Extended the method-like DSL migration track with parser-oriented `sorted_values(...)` value helpers. Fluent and structured authoring now agree on representative stable hash/object-to-array value-projection flows across array assignment sources, return payloads, and array-reducer composition on both action-edge and lifecycle surfaces.

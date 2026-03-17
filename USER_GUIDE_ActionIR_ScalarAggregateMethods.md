@@ -211,13 +211,16 @@ if(is_defined(scalaref(retv, {content})))
 if(is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH))))
 if(is_empty(scalaref(retv, {content})))
 if(is_nonempty(join_values("", array(word))))
+if(is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))))
+if(is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
 ```
 
 Important semantic difference:
 - `""` is still **defined**,
 - `0` is still **defined**,
 - an empty array/hash ref is still **defined**,
-- but those may still be empty for the purposes of `is_empty(...)`.
+- but those may still be empty for the purposes of `is_empty(...)`,
+- so projected arrays from helpers like `sorted_values(...)` and projected hashes from helpers like `pick_keys(...)` should still be tested with `is_empty(...)` / `is_nonempty(...)`, not raw truthiness.
 
 ### String scalars read from returned payloads
 

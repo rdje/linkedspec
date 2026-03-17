@@ -105,7 +105,7 @@ Use it when the rule should take a missing-value branch only if no defined value
 
 ## Emptiness helpers
 ### `is_empty(...)`
-Use it for scalars, arrays, or general expressions.
+Use it for scalars, arrays, hashes/objects, or composed aggregate expressions.
 
 Examples:
 
@@ -113,16 +113,21 @@ Examples:
 is_empty(scalar(name))
 is_empty(array(items))
 is_empty(join_values("", array(word)))
+is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))
+is_empty(drop_keys(hash(meta), "kind", "source", "debug"))
 ```
 
 Typical meanings:
 - scalar is undefined or empty string,
 - array has no elements,
-- general expression evaluates false/empty.
+- projected array expression has no elements,
+- projected hash/object expression has no keys,
+- and only the remaining non-aggregate fallback expressions use plain truthiness.
 
 This is intentionally different from `is_defined(...)`:
 - `is_empty(scalar(name))` treats both `undef` and `""` as empty,
-- `is_defined(scalar(name))` treats `""` as already present.
+- `is_defined(scalar(name))` treats `""` as already present,
+- and `is_empty(pick_keys(hash(meta), "kind"))` can still be true even though that projected hash ref is defined.
 
 ### `is_nonempty(...)`
 This is the inverse convenience helper.
@@ -134,6 +139,8 @@ is_nonempty(array(word))
 is_nonempty(array(tail))
 is_nonempty(scalar(content))
 is_nonempty(join_values("", array(word)))
+is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source")))
+is_nonempty(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage"))
 ```
 
 ## String comparisons
@@ -263,6 +270,8 @@ has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
 has_key(drop_keys(hash(meta), "debug"), "kind")
 has_key(pick_keys(hash(meta), "kind", "source"), "kind")
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
+is_empty(sorted_values(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source")))
+is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))
 num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
@@ -422,7 +431,7 @@ endif()
 - Prefer `pick_keys(...)` inside a flow condition when you need to branch on one small, stable projected object shape instead of a larger working object.
 - Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
 - Prefer `sorted_values(...)` when you need one deterministic value-list view derived from one projected object shape before using array reducers or returning value summaries.
-- Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
+- Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness, especially after `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, or aggregate `coalesce(...)` have already built one value for you.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
 - Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.
 - Prefer `eq(...)` / `ne(...)` over raw string comparisons when the logic is part of canonical helper flow.

@@ -60,12 +60,111 @@ sub default_deps_for_package {
   return {
    trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
    extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
+   extract_hash_symbol_name => _require_pkg_cb($pkg, '_extract_hash_symbol_name'),
    extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
    lower_method_value_expr => _require_pkg_cb($pkg, '_lower_method_value_expr'),
    parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
    normalize_method_args_with_optional_scope => _require_pkg_cb($pkg, '_normalize_method_args_with_optional_scope'),
   }
  })
+}
+
+#------------------------------------------------------------------------------
+# Function: _looks_like_array_value_expr
+# Purpose : Infer whether a method-like value expression should be treated as an
+#           array-valued aggregate for emptiness checks.
+# Args    : ($expr, $deps)
+# Returns : 1 when the expression is array-like, else 0
+#------------------------------------------------------------------------------
+sub _looks_like_array_value_expr {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+
+ return 0 unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+
+ if ($trimmed =~ /^array\s*\(/o) {
+  return 1;
+ }
+
+ my $array_symbol = $extract_array_symbol_name->($trimmed);
+ if (defined($array_symbol) && length($array_symbol) && $trimmed =~ /^\w+$/o) {
+  return 1;
+ }
+
+ my $call = $parse_method_function_expr->($trimmed);
+ return 0 unless $call;
+
+ my $method = $call->{method} // '';
+ return 1 if $method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+
+ if ($method eq 'coalesce') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
+  return 0 unless $effective_args && @$effective_args;
+
+  my $saw_array_like = 0;
+  foreach my $arg (@$effective_args) {
+   next unless defined $arg;
+   return 0 if _looks_like_hash_value_expr($arg, $deps);
+   $saw_array_like ||= _looks_like_array_value_expr($arg, $deps);
+  }
+  return $saw_array_like ? 1 : 0;
+ }
+
+ return 0;
+}
+
+#------------------------------------------------------------------------------
+# Function: _looks_like_hash_value_expr
+# Purpose : Infer whether a method-like value expression should be treated as a
+#           hash-valued aggregate for emptiness checks.
+# Args    : ($expr, $deps)
+# Returns : 1 when the expression is hash-like, else 0
+#------------------------------------------------------------------------------
+sub _looks_like_hash_value_expr {
+ my ($expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
+
+ return 0 unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+
+ if ($trimmed =~ /^hash\s*\(/o) {
+  return 1;
+ }
+
+ my $hash_symbol = $extract_hash_symbol_name->($trimmed);
+ if (defined($hash_symbol) && length($hash_symbol) && $trimmed =~ /^\w+$/o) {
+  return 1;
+ }
+
+ my $call = $parse_method_function_expr->($trimmed);
+ return 0 unless $call;
+
+ my $method = $call->{method} // '';
+ return 1 if $method =~ /^(?:hash|merge_hash|drop_keys|pick_keys)$/o;
+
+ if ($method eq 'coalesce') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
+  return 0 unless $effective_args && @$effective_args;
+
+  my $saw_hash_like = 0;
+  foreach my $arg (@$effective_args) {
+   next unless defined $arg;
+   return 0 if _looks_like_array_value_expr($arg, $deps);
+   $saw_hash_like ||= _looks_like_hash_value_expr($arg, $deps);
+  }
+  return $saw_hash_like ? 1 : 0;
+ }
+
+ return 0;
 }
 
 #------------------------------------------------------------------------------
@@ -79,6 +178,7 @@ sub _lower_is_empty_expr {
  my ($arg_expr, $deps) = @_;
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
  my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+ my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
  my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
  my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
 
@@ -91,6 +191,11 @@ sub _lower_is_empty_expr {
   return "(!\@$array_symbol)" if defined $array_symbol;
  }
 
+ if ($trimmed =~ /^hash\s*\(/o) {
+  my $hash_symbol = $extract_hash_symbol_name->($trimmed);
+  return "(!scalar(keys %$hash_symbol))" if defined $hash_symbol;
+ }
+
  my $scalar_symbol = $extract_scalar_symbol_name->($trimmed);
  if (defined $scalar_symbol) {
   return "(!defined(\$$scalar_symbol) || \$$scalar_symbol eq '')";
@@ -98,6 +203,15 @@ sub _lower_is_empty_expr {
 
  my $lowered = $lower_method_value_expr->($trimmed);
  $lowered = $trimmed unless defined($lowered) && length($lowered);
+
+ if (_looks_like_array_value_expr($trimmed, $deps)) {
+  return 'do { my $__ls_empty_array = '.$lowered.'; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }';
+ }
+
+ if (_looks_like_hash_value_expr($trimmed, $deps)) {
+  return 'do { my $__ls_empty_hash = '.$lowered.'; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }';
+ }
+
  return "(!($lowered))"
 }
 
