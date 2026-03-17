@@ -21,6 +21,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `uppercase(...)`
 - `count(...)`
 - `count_keys(...)`
+- `sorted_keys(...)`
 - `has_key(...)`
 - `merge_hash(...)`
 - `drop_keys(...)`
@@ -393,6 +394,42 @@ assign(scalar(meta_key_count), count_keys(hash(meta)))
 assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))
 if(num_gt(count_keys(hash(meta)), 1)); ... endif()
 return(hash("meta_key_count", count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))))
+```
+
+## `sorted_keys(hash_or_hash_expr)`
+Use `sorted_keys(...)` when you want one new array value containing the keys from a hash/object value in stable lexical order.
+
+Examples:
+
+```text
+sorted_keys(hash(meta))
+sorted_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+sorted_keys(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage"))
+```
+
+Typical uses:
+- derive one deterministic key list from a richer object before returning it,
+- project one stable field-order summary for debugging or downstream normalization,
+- bridge from hash/object helpers into array helpers like `count(...)`, `array_copy(...)`, and array pipelines.
+
+Important semantic note:
+- `sorted_keys(...)` returns one new array value,
+- it does **not** mutate the source hash on its own,
+- key order is lexical and stable,
+- and undefined hash-valued expressions simply turn into one empty returned array.
+
+That means:
+- `sorted_keys(hash(meta))` gives one deterministic key list instead of relying on host hash iteration order,
+- `sorted_keys(pick_keys(...))` works well after one projection step when only a few public fields matter,
+- and `count(sorted_keys(...))` is a valid way to ask how many projected keys survived one normalization path.
+
+Examples in context:
+
+```text
+assign(array(projected_keys), sorted_keys(hash(meta)))
+assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))
+assign(scalar(key_count), count(sorted_keys(hash(meta))))
+return(hash("keys", sorted_keys(pick_keys(hash(meta), "kind", "source"))))
 ```
 
 ## `has_key(hash_or_hash_expr, key_expr)`

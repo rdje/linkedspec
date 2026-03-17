@@ -24253,6 +24253,118 @@ SPEC
         'lifecycle pick_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_sorted_keys_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('sorted_keys(hash(meta))'),
+        '[sort keys %meta]',
+        'sorted_keys(hash(name)) lowers working hashes into a stable sorted key-array expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(sorted_keys(hash(meta))), 1)'),
+        '(do { my $__ls_count = [sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',
+        'sorted_keys(...) composes inside array reducers and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("keys", sorted_keys(merge_hash(hash(meta), hash("stage", "normalized")))))'),
+        'return {"keys" => do { my $__ls_sorted_keys = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }}',
+        'sorted_keys(...) lowers inside general return payloads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(array(keys_out), sorted_keys(merge_hash(hash(meta), hash("stage", "normalized"))))'),
+        '@keys_out = (do { my $__ls_array_init = do { my $__ls_sorted_keys = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })',
+        'sorted_keys(...) lowers inside array assignment sources with list-context flattening'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_sorted_keys_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge sorted_keys helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge sorted_keys helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge sorted_keys helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge sorted_keys helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge sorted_keys helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge sorted_keys helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge sorted_keys helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge sorted_keys helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge sorted_keys helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge sorted_keys helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge sorted_keys helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge sorted_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_sorted_keys_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(key_count), count(array(projected_keys))).if(num_gt(scalar(key_count), 0)).return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle sorted_keys helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle sorted_keys helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle sorted_keys helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle sorted_keys helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle sorted_keys helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle sorted_keys helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle sorted_keys helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle sorted_keys helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle sorted_keys helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle sorted_keys helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle sorted_keys helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle sorted_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

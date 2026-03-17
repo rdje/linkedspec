@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `sorted_keys(...)` Helper
+## Summary
+Extended the method-like DSL migration track with parser-oriented `sorted_keys(...)` value helpers. Fluent and structured authoring now agree on representative stable hash/object-to-array projection flows across array assignment sources, return payloads, and array-reducer composition on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `sorted_keys(hash_or_hash_expr)` to method-value lowering as a pure stable hash/object-to-array projection helper:
+  - returns one new lexically sorted array of keys,
+  - keeps source hashes untouched unless the caller explicitly assigns the result back,
+  - avoids depending on host-language hash iteration order,
+  - and treats undefined hash-valued expressions as one empty returned array.
+- Extended flow/value/payload paths so `sorted_keys(...)` lowers correctly in:
+  - array assignment sources,
+  - general `return(payload)` payloads,
+  - and array-reducer composition such as `count(sorted_keys(...))`.
+- Extended fluent `.return(sorted_keys(...))` payload detection so the general-return path recognizes `sorted_keys(...)` as one helper-valued payload rather than misclassifying it as a non-general return shape.
+- Extended array initializer lowering so array targets flatten `sorted_keys(...)` arrayref payloads back into list context instead of assigning one arrayref scalar into the target slot.
+- Added focused regression locks for:
+  - direct emitted lowering of representative stable key-list forms,
+  - fluent-versus-structured action-edge parity,
+  - and fluent-versus-structured lifecycle parity.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `pick_keys(...)` Helper
 ## Summary
 Extended the method-like DSL migration track with parser-oriented `pick_keys(...)` value helpers. Fluent and structured authoring now agree on representative hash/object projection flows across assignment sources, return payloads, and flow-helper composition on both action-edge and lifecycle surfaces.

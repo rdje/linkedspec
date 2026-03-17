@@ -262,6 +262,7 @@ has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
 has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
 has_key(drop_keys(hash(meta), "debug"), "kind")
 has_key(pick_keys(hash(meta), "kind", "source"), "kind")
+num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
 num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
@@ -393,12 +394,23 @@ else;
 endif()
 ```
 
+### Example: branch on one stable projected key list
+
+```text
+if(num_gt(count(sorted_keys(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage"))), 1));
+  return(hash("kind", "RICH_PROJECTED_META"));
+else;
+  return(hash("kind", "MIN_PROJECTED_META"));
+endif()
+```
+
 ## Recommendations
 - Prefer `is_defined(...)` / `is_undefined(...)` when the real question is presence versus absence.
 - Prefer `has_key(...)` when the real question is object shape: “does this key exist at all?”
 - Prefer `merge_hash(...)` inside a flow condition when you need to branch on one normalized or layered object shape without mutating the original working hash first.
 - Prefer `drop_keys(...)` inside a flow condition when you need to ignore debug or transport-only fields before asking one object-shape question.
 - Prefer `pick_keys(...)` inside a flow condition when you need to branch on one small, stable projected object shape instead of a larger working object.
+- Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
 - Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.

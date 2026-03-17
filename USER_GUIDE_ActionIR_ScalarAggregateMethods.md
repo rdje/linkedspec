@@ -1103,6 +1103,47 @@ What this example teaches:
 - the projected object can still feed `has_key(...)` and `count_keys(...)`,
 - and whole-object projection stays inside the same parser-oriented expression layer without ad hoc host-language field copying.
 
+## Worked example: derive one stable key list from a normalized object
+This is the pattern to use when the parser wants one deterministic array summary of object shape instead of returning or inspecting the whole object directly.
+
+```text
+-> metadata_key_summary[1] {
+  declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "span", "12:14"))
+  declare(array, projected_keys)
+  declare(scalar, key_count)
+
+  assign(
+    array(projected_keys),
+    sorted_keys(
+      pick_keys(
+        merge_hash(hash(meta), hash("stage", "normalized")),
+        "kind",
+        "source",
+        "stage"
+      )
+    )
+  )
+
+  assign(scalar(key_count), count(array(projected_keys)))
+
+  if(num_gt(scalar(key_count), 0))
+    return(hash(
+      "kind", "KEY_SUMMARY",
+      "key_count", scalar(key_count),
+      "keys", array_copy(array(projected_keys))
+    ))
+  else
+    return(hash("kind", "NO_KEYS"))
+  endif
+}
+```
+
+What this example teaches:
+- `sorted_keys(...)` is the stable hash/object-to-array bridge,
+- it pairs naturally with `pick_keys(...)` when only a public subset of fields matters,
+- the returned order is deterministic lexical order rather than host hash iteration order,
+- and the resulting array can immediately feed `count(...)`, `array_copy(...)`, or later array pipelines without leaving the DSL.
+
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.
 

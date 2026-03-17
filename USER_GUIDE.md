@@ -336,6 +336,8 @@ Hash/object cleanup is part of that contract too: `drop_keys(...)` now lets `.sp
 
 Hash/object projection is part of that contract too: `pick_keys(...)` now lets `.spec` rules keep only one explicit field set from richer working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so stable outward-facing payload shapes can stay inside that same functional, parser-oriented expression layer instead of relying on ad hoc field-copy code.
 
+Stable hash/object-to-array projection is part of that contract too: `sorted_keys(...)` now lets `.spec` rules derive one deterministic key-list array from working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so object-shape summaries can flow back into the array-oriented helper family without leaning on host-language hash iteration behavior.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

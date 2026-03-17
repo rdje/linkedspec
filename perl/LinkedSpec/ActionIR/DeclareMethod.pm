@@ -140,6 +140,12 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
    return '('.$+{payload}.')';
   }
+  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'array_values' || $array_ctor->{method} eq 'sorted_keys')) {
+   my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
+   return undef unless defined($derived_expr) && length($derived_expr);
+   return '('.$+{payload}.')' if $derived_expr =~ /^\[(?<payload>.*)\]$/s;
+   return '(do { my $__ls_array_init = '.$derived_expr.'; defined($__ls_array_init) ? @{$__ls_array_init} : () })';
+  }
  }
 
  if ($type eq 'hash') {
