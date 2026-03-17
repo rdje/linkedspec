@@ -38,6 +38,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
    - explain semantics plainly,
    - use representative examples generously,
    - use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape,
+   - add cross-cutting cookbook guides when one module-focused reference would fragment a high-frequency user-facing surface too much,
    - and avoid obfuscation in both user-facing docs and architecture notes.
 
 ## Work Phases
@@ -116,7 +117,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - Better performance predictability and debuggability.
 
 ## Phase 6: Documentation and Adoption
-- Expand `USER_GUIDE.md` with practical patterns and anti-patterns, and maintain module-focused lowering references when the user-facing surface becomes too large for one file.
+- Expand `USER_GUIDE.md` with practical patterns and anti-patterns, and maintain module-focused lowering references plus cross-cutting cookbook guides when the user-facing surface becomes too large for one file.
+- Keep major high-frequency families, such as scalar and aggregate method composition, documented with one teaching-oriented guide that shows many worked examples rather than scattering the full story across only module-owner references.
 - Maintain architecture rationale in `DEVELOPMENT_NOTES.md`.
 - Keep live state in `MEMORY.md`.
 - Documentation quality contract:

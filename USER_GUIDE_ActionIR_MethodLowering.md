@@ -8,6 +8,8 @@ Documentation note:
 - nested method composition in arguments is intended to be supported with no fixed depth limit,
 - but this guide uses representative examples only rather than enumerating every possible nesting combination.
 
+For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
+
 ## What this module is responsible for
 In practical terms, this is the guide you want when you need to understand:
 - `scalar(...)`
@@ -400,6 +402,7 @@ This shows multiple important surfaces in one place:
 - helper-only control flow.
 
 ## Related guides
+- Cross-cutting scalar/aggregate cookbook: [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md)
 - Declarations: [`USER_GUIDE_ActionIR_DeclareMethod.md`](USER_GUIDE_ActionIR_DeclareMethod.md)
 - Assignment and sources: [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md)
 - Legacy/compatibility helpers: [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md)

@@ -3,6 +3,7 @@ This guide covers the expression-lowering surface implemented by `perl/LinkedSpe
 
 This is the guide to read when you need conditions, boolean composition, comparisons, emptiness checks, and expression nesting.
 For exact DSL-to-Perl examples for every boolean/comparison helper discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
+For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
 
 ## What this module is responsible for
 `FlowExpr.pm` is the shared expression language used by helper control-flow and some value contexts.
@@ -236,5 +237,6 @@ endif()
 - Keep nested expressions readable; if one condition becomes too large, split the logic by first assigning a temporary flag.
 
 ## Related guides
+- Cross-cutting scalar/aggregate cookbook: [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md)
 - Control-flow markers: [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md)
 - Assignments and value sources: [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md)

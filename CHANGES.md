@@ -1,5 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Documentation Slice: Add Scalar and Aggregate Composition Cookbook
+## Summary
+Expanded the user-facing method-DSL documentation with a dedicated scalar-and-aggregate cookbook. The docs now teach string, integer, float-like, array, and hash helper composition in one place, with explicit no-DSL-fixed-depth composition guidance and many worked `.spec` examples instead of leaving that story fragmented across only module-owner references.
+
+## Changed Files
+- Added: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ValueExpr.md`
+- Updated: `USER_GUIDE_ActionIR_DeclareMethod.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added one cross-cutting teaching guide for scalar and aggregate method usage rather than forcing users to reconstruct the full story from several module-owner references.
+- Made the documentation contract more explicit:
+  - scalar and aggregate method composition has no DSL-fixed nesting cap by design,
+  - practical limits come only from ordinary runtime/resource ceilings,
+  - and the docs should prefer fuller worked examples for high-frequency user-facing surfaces.
+- Added many worked examples for:
+  - string scalar handling via `scalar(...)`, `CAPTURE`, `scalaref(...)`, and `join_values(...)`,
+  - integer and float-like scalar storage/comparison via raw numeric literals plus `num_*` helpers,
+  - arrays and hashes via `array(...)`, `hash(...)`, `array_copy(...)`, and `flat_*` helpers,
+  - and deeper Lisp-style composition inside `declare(...)`, `assign(...)`, `return(...)`, `if(...)`, and `switch(...)`.
+
 ## 2026-03-17 - Method-Like DSL Slice: Lock Case-Normalization Filter Pipeline Equivalence
 ## Summary
 Extended the method-like DSL migration track by regression-locking a representative case-normalization/filter pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces. Supported `assign(array(...), filter_match(uniq(uppercase_each(array(...))), /.../)) -> lowercase_each(...) -> return(array_copy(...))` flows now preserve the same lowering and migration metadata across both concrete syntaxes.

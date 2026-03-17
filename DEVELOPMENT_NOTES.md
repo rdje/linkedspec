@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-17: Added a dedicated scalar-and-aggregate composition cookbook so string, integer, float-like, array, and hash helper usage is now taught in one place with many worked `.spec` examples and explicit no-DSL-fixed-depth composition guidance instead of leaving that story fragmented across only module-owner references.
 - 2026-03-17: Regression-locked the representative `assign(array(...), filter_match(uniq(uppercase_each(array(...))), /.../)) -> lowercase_each(...) -> return(array_copy(...))` case-normalization/filter pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so the uppercase/uniq/filter/lowercase family now sits inside the explicit method-like DSL contract too.
 - 2026-03-16: Regression-locked mixed per-branch carriers on the outer attached-block switch family, so forms like `case("A") { ... } case("B") ... default { ... }` are now explicit supported surfaces on both structured and final-call fluent action-edge/lifecycle contexts.
 - 2026-03-16: Regression-locked the representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so `split_each(...)` now sits inside the explicit method-like DSL contract instead of living mostly as a VHDL migration detail.
@@ -13,6 +14,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Explain semantics, constraints, and tradeoffs directly instead of implying them.
 - Use representative examples generously when they reduce ambiguity or help adoption.
 - Use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape.
+- Add cross-cutting cookbook guides when a high-frequency user-facing surface would become too fragmented if it lived only in module-owner references.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 
 ## Current Session Notes (2026-03-16)

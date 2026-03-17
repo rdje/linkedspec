@@ -187,6 +187,8 @@ Documentation policy note:
 - and use representative examples where helpful,
 - not try to enumerate every possible nesting shape.
 
+If you want the long-form teaching guide for that policy, read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md). That guide focuses specifically on string, integer, float-like, array, and hash composition with many worked examples rather than module-by-module lowering notes.
+
 That equivalence is no longer just aspirational wording: helper-only fluent action chains and structured `{...}` action blocks are now regression-locked to identical lowered action output, and helper-only lifecycle chains with nested composed arguments are now regression-locked to identical lowered lifecycle output.
 
 This first lock is intentionally scoped. It does not yet claim that every nested method-composition shape is already equivalent across every possible return-payload or helper context.
@@ -399,6 +401,17 @@ Typical patterns:
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
 - `return(array(...))`
+
+### I need a long scalar/array/hash composition cookbook with many examples
+Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
+
+Typical patterns:
+- string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
+- integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
+- array constructors and snapshots via `array(...)` and `array_copy(...)`
+- hash/object constructors via `hash(...)`
+- nested reads via `scalar(array(...), idx)` and `scalaref(...)`
+- deep Lisp-style composition inside `declare(...)`, `assign(...)`, `return(...)`, `if(...)`, and `switch(...)`
 
 ### I need assignment semantics or special assignment sources
 Start with [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md).

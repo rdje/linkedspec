@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Added a dedicated scalar-and-aggregate composition cookbook so string, integer, float-like, array, and hash helper usage is now taught in one place with many worked `.spec` examples and explicit no-DSL-fixed-depth composition guidance.
 - 2026-03-17: Regression-locked the representative `assign(array(...), filter_match(uniq(uppercase_each(array(...))), /.../)) -> lowercase_each(...) -> return(array_copy(...))` case-normalization/filter pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so the uppercase/uniq/filter/lowercase family is now explicitly part of the method-like DSL contract.
 - 2026-03-16: Regression-locked mixed per-branch carriers on the outer attached-block switch family, so forms like `case("A") { ... } case("B") ... default { ... }` are now explicit supported surfaces on both structured and final-call fluent action-edge/lifecycle contexts.
 - 2026-03-16: Regression-locked the representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` array-normalization pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so `split_each(...)` is now explicitly part of the method-like DSL contract.
@@ -14,6 +15,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Project docs are expected to optimize for readability, non-ambiguity, and clear explanations.
 - Representative examples are encouraged whenever they make semantics easier to learn or verify.
 - Newly landed user-facing surfaces should get fuller worked examples when terse snippets would undersell or obscure the real supported shape.
+- Cross-cutting cookbook guides should be added when one high-frequency user-facing family would be too fragmented across only module-owner references.
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
 ## Current Session Snapshot (2026-03-16)

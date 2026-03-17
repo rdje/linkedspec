@@ -16,6 +16,8 @@ Documentation note:
 - assignment/value expressions may consume arbitrarily nested method composition in arguments,
 - but this guide documents that capability with representative shapes rather than listing every nesting permutation.
 
+For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
+
 ## `assign(target, source)`
 This is the canonical assignment helper.
 
@@ -272,5 +274,6 @@ assign(array(items), array())
 ```
 
 ## Related guides
+- Cross-cutting scalar/aggregate cookbook: [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md)
 - Constructors and payload helpers: [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md)
 - Boolean/comparison expressions: [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md)

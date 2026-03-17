@@ -8,6 +8,8 @@ Documentation note:
 - declaration initializer arguments may use nested method composition with no fixed depth limit,
 - but this guide keeps examples representative instead of attempting a full nesting catalog.
 
+For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
+
 ## Why declarations matter
 A lot of backend-neutral migration work starts by replacing raw Perl declarations such as:
 
@@ -216,5 +218,6 @@ The second form may still work in Perl, but the first form is much easier to mig
 - Prefer initialized declarations only when the initialization is easy to read. If the initializer becomes dense, declare first and assign later.
 
 ## Related guides
+- Cross-cutting scalar/aggregate cookbook: [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md)
 - Value access, constructors, and payloads: [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md)
 - Assignment behavior: [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md)
