@@ -119,17 +119,35 @@ Example:
 ```text
 join_values("", array(word))
 join_values(", ", array(parts))
+join_values(", ", sorted_keys(hash(meta)))
+join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source")))
 ```
 
-Use `join_values(...)` when the source material already lives in an array and the result you need is one final string scalar.
+Use `join_values(...)` when the source material already lives in an array, or can be projected into one array value, and the result you need is one final string scalar.
 
 Examples:
 
 ```text
 assign(scalar(word_text), join_values("", array(word)))
 assign(scalar(csv_text), join_values(", ", array(parts)))
+assign(scalar(public_fields), join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(public_values), join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
 return(hash("text", join_values("", array(chars))))
+return(join_values(", ", sorted_keys(drop_keys(hash(meta), "debug"))))
 ```
+
+That broader shape matters because `join_values(...)` is not just “join one named array variable” anymore. It can now sit on top of the same array-valued helper expressions the rest of the DSL already uses:
+
+```text
+join_values(", ", sorted_keys(hash(meta)))
+join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source")))
+join_values(", ", coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+So the usual parser-oriented pattern can stay compact:
+- project or normalize one aggregate,
+- reduce it to one scalar,
+- keep the whole chain inside one composable value expression.
 
 ### Scalar text normalization
 These helpers keep common string cleanup inside the canonical value-expression layer:

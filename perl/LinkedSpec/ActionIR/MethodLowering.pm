@@ -544,9 +544,15 @@ sub _lower_method_value_expr {
   my $array_expr = $trim_action_ir_value->($join_args->[1]);
   return undef unless defined($array_expr) && length($array_expr);
   my $array_symbol = $extract_array_symbol_name->($array_expr);
-  return undef unless defined($array_symbol) && length($array_symbol);
+  if (defined($array_symbol) && length($array_symbol) && $array_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   return "join($delimiter_expr, \@$array_symbol)";
+  }
 
-  return "join($delimiter_expr, \@$array_symbol)";
+  my $lowered_array = _lower_method_value_expr($array_expr, $deps);
+  $lowered_array = $array_expr unless defined($lowered_array) && length($lowered_array);
+  return undef unless defined($lowered_array) && length($lowered_array);
+
+  return 'do { my $__ls_join_values = '.$lowered_array.'; defined($__ls_join_values) ? join('.$delimiter_expr.', @{$__ls_join_values}) : $__ls_join_values }';
  }
  if ($method_call && $method_call->{method} eq 'coalesce') {
   my $coalesce_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);

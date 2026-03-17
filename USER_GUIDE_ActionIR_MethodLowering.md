@@ -250,7 +250,7 @@ return(array("?node:", flat_array(IMATCH_LIST)))
 
 This becomes the semantic equivalent of a constructor that directly inserts the match-list elements.
 
-## `join_values(delimiter, array(name))`
+## `join_values(delimiter, array_expr)`
 Use `join_values(...)` when you want to combine array elements into a single scalar string.
 
 Examples:
@@ -258,24 +258,39 @@ Examples:
 ```text
 join_values("", array(word))
 join_values(", ", array(parts))
+join_values(", ", sorted_keys(hash(meta)))
+join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source")))
+join_values(", ", coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
 
 Typical uses:
 - flushing a temporary character/token array into a final word,
-- turning token arrays into diagnostics or normalized text fragments.
+- turning token arrays into diagnostics or normalized text fragments,
+- converting projected key/value arrays into one canonical summary string,
+- and reducing fallback array expressions without leaving the value-expression layer.
 
 Examples in context:
 
 ```text
 assign(scalar(word_text), join_values("", array(word)))
+assign(scalar(public_fields), join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(public_values), join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
 push_value(array(tail), join_values("", array(word)))
+return(join_values(", ", sorted_keys(drop_keys(hash(meta), "debug"))))
 ```
 
 Method-DSL migration note:
-- fluent and structured authoring are now regression-locked on supported `join_values(delimiter, array(...))` payload forms too,
+- fluent and structured authoring are now regression-locked on supported `join_values(delimiter, array_expr)` payload forms too,
 - on both action-edge and lifecycle surfaces,
+- direct working arrays and composed array-valued helper expressions now share the same lowering contract,
 - and that same supported `join_values(...)` equivalence is now regression-locked inside control-flow branch bodies too,
 - so string-join payload construction is part of the same equivalence contract as the rest of the method-like DSL surface.
+
+Important semantic note:
+- if the source is one normal working array, `join_values(...)` behaves like ordinary join over that array,
+- if the source is one composed array-valued helper expression, the helper result is joined directly,
+- stable projections like `sorted_keys(...)` and `sorted_values(...)` therefore join cleanly without temporary array variables,
+- and if an outer array-valued expression is still undefined, `join_values(...)` preserves that undefined result instead of silently inventing one fallback string.
 
 ## Scalar normalization helpers
 These are parser-oriented scalar transforms:

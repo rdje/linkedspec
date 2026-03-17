@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Broaden `join_values(...)` to Projected Arrays
+
+Extended the method-like DSL migration track by broadening parser-oriented `join_values(...)` lowering from direct working arrays to full array-valued expressions. Fluent and structured authoring now agree on representative joined-string flows that start from projected arrays such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and array-valued `coalesce(...)` chains on both action-edge and lifecycle surfaces.
+
+- Extended `join_values(delimiter, array_expr)` lowering so the second argument can now be:
+  - one direct working array such as `array(parts)`,
+  - one projected deterministic array such as `sorted_keys(hash(meta))`,
+  - one projected value array such as `sorted_values(pick_keys(hash(meta), "kind", "source"))`,
+  - or one broader array-valued fallback chain such as `coalesce(scalaref(retv, {parts}), array("fallback"))`.
+- Extended fluent `.return(join_values(...))` payload detection so final-call fluent surfaces treat direct joined projected-array payloads as general value returns instead of misclassifying them as non-general return shapes.
+- Added focused regression locks covering:
+  - direct lowering from projected arrays into assignment and flow-comparison contexts,
+  - fluent-versus-structured action-edge equivalence for projected-array `join_values(...)`,
+  - and fluent-versus-structured lifecycle equivalence for projected-array `join_values(...)`.
+- Expanded the user guides with denser examples showing joined-string reduction over `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and array-valued fallback chains.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `contains(...)` Helper
 
 Extended the method-like DSL migration track with parser-oriented `contains(...)` value helpers. Fluent and structured authoring now agree on representative array-membership flows across assignment sources, return payloads, and flow conditions on both action-edge and lifecycle surfaces.

@@ -304,9 +304,9 @@ Snapshot payload helpers are locked too: fluent and structured authoring now agr
 
 That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` and `array_values(...)` return payloads on both action-edge and lifecycle surfaces.
 
-String-join payload helpers are locked too: fluent and structured authoring now agree on supported `join_values(delimiter, array(...))` payload forms on both action-edge and lifecycle surfaces, so joined-string payload construction stays inside the same method-like DSL equivalence contract rather than acting like a one-off scalar shortcut.
+String-join payload helpers are locked too: fluent and structured authoring now agree on supported `join_values(delimiter, array_expr)` payload forms on both action-edge and lifecycle surfaces, so joined-string payload construction stays inside the same method-like DSL equivalence contract rather than acting like a one-off scalar shortcut.
 
-That same supported `join_values(...)` equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on joined-string return payloads on both action-edge and lifecycle surfaces.
+That same supported `join_values(...)` equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on joined-string return payloads on both action-edge and lifecycle surfaces. The supported source side is broader than one named array variable: projected arrays like `sorted_keys(...)`, `sorted_values(...)`, and array-valued fallback chains can now reduce straight into one scalar string as well.
 
 Canonical `call(rule)` value capture is locked too: fluent and structured authoring now agree on supported `assign(scalar(retv), call(rule))` helper forms on both action-edge and lifecycle surfaces, so child-result capture stays inside the same backend-neutral method-like DSL equivalence contract rather than depending on raw assignment wrappers.
 
