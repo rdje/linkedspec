@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `contains(...)` Helper
+
+Extended the method-like DSL migration track with parser-oriented `contains(...)` value helpers. Fluent and structured authoring now agree on representative array-membership flows across assignment sources, return payloads, and flow conditions on both action-edge and lifecycle surfaces.
+
+- Added `contains(array_or_array_expr, value_expr)` lowering for:
+  - working arrays such as `contains(array(parts), "foo")`,
+  - projected arrays such as `contains(sorted_keys(hash(meta)), "kind")`,
+  - and fallback array expressions such as `contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))`.
+- Semantics are explicit:
+  - membership is exact scalar equality,
+  - the helper returns `1` or `0`,
+  - and undefined array-valued expressions fall back to `0`.
+- Extended flow/value/payload paths so `contains(...)` lowers correctly in:
+  - scalar assignment sources,
+  - `return(payload)` expressions,
+  - and direct flow conditions.
+- Expanded the user guides with worked examples showing how `contains(...)` pairs with `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and `coalesce(...)`.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Aggregate-Expression Emptiness In Flow
 
 Extended the method-like DSL migration track so `is_empty(...)` / `is_nonempty(...)` now treat composed array-valued and hash-valued helper expressions as real aggregates instead of falling back to Perl reference truthiness.

@@ -432,6 +432,7 @@ Typical patterns:
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`
 - stable hash/object summaries via `sorted_keys(...)` and `sorted_values(...)`
+- array membership flags via `contains(array_expr, value_expr)`
 - aggregate-shape emptiness checks via `is_empty(sorted_values(...))` and `is_nonempty(pick_keys(...))`
 - nested reads via `scalar(array(...), idx)` and `scalaref(...)`
 - deep Lisp-style composition inside `declare(...)`, `assign(...)`, `return(...)`, `if(...)`, and `switch(...)`

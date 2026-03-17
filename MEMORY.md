@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Added parser-oriented `contains(...)` array-membership lowering so `.spec` rules can derive one canonical boolean-like membership flag from working arrays and projected array expressions such as `sorted_keys(...)`, `sorted_values(...)`, and aggregate `coalesce(...)` chains across assignment sources, return payloads, and flow conditions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented aggregate-emptiness flow lowering so `is_empty(...)` / `is_nonempty(...)` now treat composed array-valued and hash-valued helper expressions as real aggregates instead of Perl reference truthiness, covering direct projections like `sorted_values(...)`, object-shape helpers like `pick_keys(...)` / `drop_keys(...)`, and aggregate `coalesce(...)` chains with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `sorted_values(...)` stable hash/object-to-array projection lowering so `.spec` rules can derive deterministic value-list arrays from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Logged a deferred architecture-risk note so future slices keep four concrete seams visible without reprioritizing away from feature work yet:

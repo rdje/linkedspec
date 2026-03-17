@@ -481,6 +481,37 @@ Important semantic note:
 - not about string length,
 - and if an array-valued expression is still undefined, `count(...)` falls back to `0`.
 
+### Array membership as a scalar flag with `contains(...)`
+`contains(...)` is the parser-oriented helper for “does this array currently contain this scalar value?”
+
+Examples:
+
+```text
+contains(array(parts), "foo")
+contains(sorted_keys(hash(meta)), "kind")
+contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))
+```
+
+Use cases:
+- store one working membership flag in a scalar,
+- branch on whether one projected key/value list already contains a required item,
+- return one canonical boolean-like metadata field about an array or projected array expression.
+
+Examples in context:
+
+```text
+assign(scalar(has_kind), contains(sorted_keys(hash(meta)), "kind"))
+assign(scalar(has_node_value), contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE"))
+return(hash("has_match", contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))))
+if(contains(sorted_keys(drop_keys(hash(meta), "debug")), "kind"))
+```
+
+Important semantic note:
+- `contains(...)` is about exact array membership,
+- it returns `1` or `0`,
+- it works on both working arrays and array-valued helper expressions,
+- and if an array-valued expression is still undefined, `contains(...)` falls back to `0`.
+
 ### Hash/object size as a scalar with `count_keys(...)`
 `count_keys(...)` is the parser-oriented reducer for “how many keys does this hash/object currently have?”
 

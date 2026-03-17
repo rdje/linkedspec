@@ -20,6 +20,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `count(...)`
+- `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
 - `sorted_values(...)`
@@ -365,6 +366,37 @@ assign(scalar(part_count), count(array(parts)))
 assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
 if(num_gt(count(array(parts)), 0)); ... endif()
 return(hash("part_count", count(coalesce(scalaref(retv, {parts}), array("empty")))))
+```
+
+## `contains(array_or_array_expr, value_expr)`
+Use `contains(...)` when you want one scalar flag answering “does this array currently contain this value?”
+
+Examples:
+
+```text
+contains(array(parts), "foo")
+contains(sorted_keys(hash(meta)), "kind")
+contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))
+```
+
+Typical uses:
+- branch on whether one token list already contains a marker,
+- store one canonical membership flag in a scalar slot,
+- return “has this projected field/value” metadata without dropping into raw host-language loops.
+
+Important semantic note:
+- `contains(...)` is about exact scalar membership in an array,
+- it works on working arrays and array-valued helper expressions,
+- it returns `1` or `0`,
+- and when an array-valued expression is still undefined, `contains(...)` returns `0`.
+
+Examples in context:
+
+```text
+assign(scalar(has_kind), contains(sorted_keys(hash(meta)), "kind"))
+assign(scalar(has_node_value), contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE"))
+if(contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))); ... endif()
+return(hash("has_kind", contains(sorted_keys(hash(meta)), "kind")))
 ```
 
 ## `count_keys(hash_or_hash_expr)`

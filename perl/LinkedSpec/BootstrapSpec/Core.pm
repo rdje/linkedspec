@@ -106,7 +106,7 @@ sub _method_chain_return_uses_general_payload {
  return 0 unless defined $args;
  my $trimmed = _trim_bootstrap_value($args);
  return 0 unless defined($trimmed) && length($trimmed);
- return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|trim\s*\(|lowercase\s*\(|uppercase\s*\(|count\s*\(|count_keys\s*\(|sorted_keys\s*\(|sorted_values\s*\(|has_key\s*\(|merge_hash\s*\(|drop_keys\s*\(|pick_keys\s*\(|coalesce\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
+ return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|trim\s*\(|lowercase\s*\(|uppercase\s*\(|count\s*\(|contains\s*\(|count_keys\s*\(|sorted_keys\s*\(|sorted_values\s*\(|has_key\s*\(|merge_hash\s*\(|drop_keys\s*\(|pick_keys\s*\(|coalesce\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
 }
 
 sub _method_chain_uses_bare_zero_arg_flow_marker {

@@ -269,6 +269,8 @@ has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
 has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
 has_key(drop_keys(hash(meta), "debug"), "kind")
 has_key(pick_keys(hash(meta), "kind", "source"), "kind")
+contains(sorted_keys(hash(meta)), "kind")
+contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE")
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
 is_empty(sorted_values(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source")))
 is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))
@@ -431,6 +433,7 @@ endif()
 - Prefer `pick_keys(...)` inside a flow condition when you need to branch on one small, stable projected object shape instead of a larger working object.
 - Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
 - Prefer `sorted_values(...)` when you need one deterministic value-list view derived from one projected object shape before using array reducers or returning value summaries.
+- Prefer `contains(...)` when the real question is “does this array or projected array contain one exact scalar value?”
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness, especially after `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, or aggregate `coalesce(...)` have already built one value for you.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
 - Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.

@@ -23818,6 +23818,118 @@ SPEC
         'lifecycle count fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_contains_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains(array(parts), "foo")'),
+        'do { my $__ls_contains_needle = "foo"; ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @parts) : scalar(grep { !defined($_) } @parts)) ? 1 : 0) }',
+        'contains(array(name), value) lowers working arrays into a boolean-like membership expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
+        'do { my $__ls_contains_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = $IMATCH; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
+        'contains(...) lowers array-valued fallback expressions into guarded membership checks'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('contains(sorted_keys(hash(meta)), "kind")'),
+        'do { my $__ls_contains_array = [sort keys %meta]; my $__ls_contains_needle = "kind"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
+        'contains(...) composes inside flow conditions over projected arrays'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", contains(sorted_keys(hash(meta)), "kind")))'),
+        'return {"has_kind" => do { my $__ls_contains_array = [sort keys %meta]; my $__ls_contains_needle = "kind"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }}',
+        'contains(...) lowers inside general return payloads'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_contains_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).declare(scalar, has_kind).assign(scalar(has_kind), contains(array(projected_keys), "kind")).if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))).else.return(hash("has_kind", scalar(has_kind), "keys", array())).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); assign(scalar(has_kind), contains(array(projected_keys), "kind")); if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", scalar(has_kind), "keys", array())); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge contains helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge contains helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge contains helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge contains helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge contains helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge contains helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge contains helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge contains helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge contains helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge contains helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge contains helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_contains_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).declare(scalar, has_kind).assign(scalar(has_kind), contains(array(projected_keys), "kind")).if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))).else.return(hash("has_kind", scalar(has_kind), "keys", array())).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); assign(scalar(has_kind), contains(array(projected_keys), "kind")); if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", scalar(has_kind), "keys", array())); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle contains helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle contains helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle contains helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle contains helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle contains helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle contains helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle contains helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle contains helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle contains helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle contains helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle contains helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_count_keys_value_helpers' => sub {
     plan tests => 4;
 
