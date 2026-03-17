@@ -776,6 +776,64 @@ Important semantic note:
 - a non-positive count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
+### String boundary checks with `starts_with(...)` and `ends_with(...)`
+These are the parser-oriented scalar helpers for “does this value begin with this prefix?” and “does it end with this suffix?”
+
+Examples:
+
+```text
+starts_with(scalar(name), "pre")
+ends_with(scalar(name), "fix")
+starts_with(lowercase(trim(scalar(name))), "node_")
+ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+```
+
+Useful when:
+- one rule wants a clear prefix/suffix decision without raw host-language string code,
+- you want to keep normalization and boundary checking inside one nested value expression,
+- you want to assign one reusable flag and return it later,
+- or you want to branch on a prefix/suffix rule while staying inside the same method-like expression vocabulary.
+
+Worked example:
+
+```text
+token_shape:
+ -> /\w+/
+ => Top {
+      declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix)
+
+      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(lowered_name), lowercase(trim(scalar(raw_name))))
+      assign(scalar(has_node_prefix), starts_with(scalar(lowered_name), "node_"))
+      assign(scalar(has_end_suffix), ends_with(scalar(lowered_name), "_end"))
+
+      return(hash(
+        "name", scalar(lowered_name),
+        "has_node_prefix", scalar(has_node_prefix),
+        "has_end_suffix", scalar(has_end_suffix)
+      ))
+    }
+```
+
+Representative shorter patterns:
+
+```text
+assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
+assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+return(hash(
+  "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
+  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end")
+))
+if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end")))
+```
+
+Semantic notes:
+- both helpers return scalar `1` or `0`,
+- they compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
+- undefined main values return `0`,
+- undefined prefix/suffix expressions return `0`,
+- and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
+
 ### Drop the trailing array suffix with `drop_last(...)` or `drop_back(...)`
 `drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”. `drop_back(...)` is the exact alias for the same lowering contract.
 

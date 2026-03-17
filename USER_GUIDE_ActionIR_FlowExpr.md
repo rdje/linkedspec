@@ -177,6 +177,8 @@ Examples:
 num_eq(scalar(count), 0)
 num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
+starts_with(lowercase(trim(scalar(name))), "node_")
+ends_with(lowercase(trim(scalar(name))), "_end")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
@@ -225,6 +227,18 @@ and(is_nonempty(array(items)), not(scalar(disabled)))
 or(scalar(enabled), is_nonempty(scalar(name)))
 ```
 
+### Example: normalized name starts with a known parser prefix
+
+```text
+starts_with(lowercase(trim(scalar(name))), "node_")
+```
+
+### Example: normalized name ends with a known parser suffix
+
+```text
+ends_with(lowercase(trim(scalar(name))), "_end")
+```
+
 ### Example: projected object still has keys after skipping the first stable key
 
 ```text
@@ -260,6 +274,7 @@ num_gt(count(drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stag
 - reducers like `count(...)` can wrap composed array helpers such as `take_last(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
+- scalar predicate helpers like `starts_with(...)` and `ends_with(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
 - the same pattern works when you want one trimmed leading array via `count(drop_last(sorted_keys(...), scalar(drop_count)))`,
 - the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), scalar(take_last_count)))`,
 - the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,

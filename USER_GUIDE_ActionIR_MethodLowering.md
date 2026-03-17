@@ -20,6 +20,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `length(...)`
+- `starts_with(...)`
+- `ends_with(...)`
 - `count(...)`
 - `first(...)`
 - `last(...)`
@@ -403,6 +405,44 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 ```
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
+
+## `starts_with(value_expr, prefix_expr)` and `ends_with(value_expr, suffix_expr)`
+Use these when you want one scalar flag answering “does this normalized string begin with this prefix?” or “does it end with this suffix?”
+
+Examples:
+
+```text
+starts_with(scalar(name), "pre")
+ends_with(scalar(name), "fix")
+starts_with(lowercase(trim(scalar(name))), "node_")
+ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+```
+
+Typical uses:
+- keep one parser-oriented prefix/suffix check inside value lowering instead of dropping to host-language `index(...)` or `substr(...)`,
+- assign one canonical boolean-ish scalar flag into the working state,
+- return one boundary-check flag in payload metadata,
+- and branch on the same helper inside `if(...)`, `elseif(...)`, or `switch(...)` expressions.
+
+Important semantic note:
+- both helpers return `1` or `0`,
+- they preserve composability with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
+- if the main value is undefined, the result is `0`,
+- if the prefix/suffix expression is undefined, the result is `0`,
+- and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
+
+Examples in context:
+
+```text
+assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
+assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+if(starts_with(lowercase(trim(scalar(name))), "node_")); ... endif()
+if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end"))); ... endif()
+return(hash(
+  "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
+  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end")
+))
+```
 
 ## `count(array_or_array_expr)`
 Use `count(...)` when you want one scalar size/count result from an array variable or array-valued expression.

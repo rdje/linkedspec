@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `starts_with(...)` And `ends_with(...)`
+
+Extended the method-like DSL migration track with parser-oriented scalar boundary predicates. Fluent and structured authoring now agree on representative normalized string-prefix and string-suffix checks across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.
+
+- Added `starts_with(value_expr, prefix_expr)` lowering for:
+  - direct scalar values such as `starts_with(scalar(name), "pre")`,
+  - normalized scalar expressions such as `starts_with(lowercase(trim(scalar(name))), "node_")`,
+  - and composed fallback reads such as `starts_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node_")`.
+- Added `ends_with(value_expr, suffix_expr)` lowering for:
+  - direct scalar values such as `ends_with(scalar(name), "fix")`,
+  - normalized scalar expressions such as `ends_with(lowercase(trim(scalar(name))), "_end")`,
+  - and composed fallback reads such as `ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")`.
+- Preserved the scalar-valued predicate contract:
+  - both helpers return scalar `1` or `0`,
+  - both helpers compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
+  - and both helpers can be used directly in assignments, `return(payload)`, and flow conditions.
+- Expanded the user guides with fuller examples showing `starts_with(...)` and `ends_with(...)` in scalar normalization flows, returns, and boolean conditions.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `take_last(...)` And Drop Aliases
 
 Extended the method-like DSL migration track with one new parser-oriented array suffix helper plus one explicit naming-alias pass for the existing drop helpers. Fluent and structured authoring now agree on representative “keep the trailing item or trailing `N` items” flows via `take_last(...)`, and the more explicit drop aliases `drop_front(...)` / `drop_back(...)` now lower exactly like `tail(...)` / `drop_last(...)` on both action-edge and lifecycle surfaces.
