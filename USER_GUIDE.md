@@ -328,6 +328,8 @@ Array-to-scalar reduction is part of that contract too: `count(...)` now lets `.
 
 Hash/object-to-scalar reduction is part of that contract too: `count_keys(...)` now lets `.spec` rules derive canonical key-count metadata from working hashes and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary object-shape branching and return metadata can stay inside that same parser-oriented expression layer.
 
+Hash/object key-presence checks are part of that contract too: `has_key(...)` now lets `.spec` rules ask whether a field exists at all, across working hashes and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so object-shape checks no longer need to blur together with value-definedness checks.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

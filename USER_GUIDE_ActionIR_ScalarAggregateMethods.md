@@ -508,6 +508,40 @@ Important semantic note:
 - not about array size,
 - and if a hash-valued expression is still undefined, `count_keys(...)` falls back to `0`.
 
+### Hash/object key presence as a scalar flag with `has_key(...)`
+`has_key(...)` is the parser-oriented helper for “does this object contain this key at all?”
+
+Examples:
+
+```text
+has_key(hash(meta), "kind")
+has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+has_key(hash("kind", "NODE", "source", "Top"), "source")
+```
+
+Use cases:
+- store one working “has this field” flag in a scalar,
+- branch on object shape instead of on one field value,
+- return one canonical boolean-like metadata field about object structure.
+
+Examples in context:
+
+```text
+assign(scalar(has_kind), has_key(hash(meta), "kind"))
+assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+return(hash("has_kind", has_key(hash(meta), "kind")))
+if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+```
+
+Important semantic note:
+- `has_key(...)` is about key existence,
+- not about whether the current value stored at that key is defined,
+- so it complements rather than replaces `is_defined(...)`.
+
+That means:
+- use `has_key(...)` when the parser is asking “does this shape include this field?”,
+- use `is_defined(scalaref(...))` when the parser is asking “is the resolved field value defined?”.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -900,6 +934,32 @@ That is a good example of the LinkedSpec direction:
 - keep the expression layer functional and composable,
 - keep the semantics parser-oriented,
 - and avoid dropping out to raw host-language counting just to ask one simple question about a returned object.
+
+## Worked example: key existence versus defined value
+This is the pattern to use when the parser cares about object shape first and value definedness second.
+
+```text
+-> metadata_shape_check[1] {
+  if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+    return(hash(
+      "kind", "HAS_KIND_KEY",
+      "has_kind", has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+    ))
+  elseif(is_defined(scalaref(retv, {kind})))
+    return(hash(
+      "kind", "DEFINED_KIND_VALUE",
+      "value", scalaref(retv, {kind})
+    ))
+  else
+    return(hash("kind", "NO_KIND_INFORMATION"))
+  endif
+}
+```
+
+What this example teaches:
+- `has_key(...)` asks about the object’s field layout,
+- `is_defined(...)` asks about the resolved field value,
+- and the two questions should stay separate when the parser’s semantics care about both.
 
 ## Worked example: presence versus emptiness
 This is the pattern to use when the parser needs to keep three states distinct:

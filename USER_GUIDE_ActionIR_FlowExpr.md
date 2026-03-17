@@ -257,6 +257,8 @@ ne(scalaref(retv, {type}), "COMMENTS")
 is_defined(scalaref(retv, {content}))
 is_undefined(scalaref(retv, {type}))
 is_nonempty(scalaref(retv, {content}))
+has_key(hash(meta), "kind")
+has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
 num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
@@ -348,10 +350,22 @@ else;
 endif()
 ```
 
+### Example: branch on key existence rather than value definedness
+
+```text
+if(has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"));
+  return(hash("kind", "HAS_KIND_KEY"));
+else;
+  return(hash("kind", "NO_KIND_KEY"));
+endif()
+```
+
 ## Recommendations
 - Prefer `is_defined(...)` / `is_undefined(...)` when the real question is presence versus absence.
+- Prefer `has_key(...)` when the real question is object shape: “does this key exist at all?”
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
+- Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.
 - Prefer `eq(...)` / `ne(...)` over raw string comparisons when the logic is part of canonical helper flow.
 - Prefer `num_*` helpers over string comparisons for counters, indices, and numeric depths.
 - Keep nested expressions readable; if one condition becomes too large, split the logic by first assigning a temporary flag.

@@ -21,6 +21,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `uppercase(...)`
 - `count(...)`
 - `count_keys(...)`
+- `has_key(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -389,6 +390,40 @@ assign(scalar(meta_key_count), count_keys(hash(meta)))
 assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))
 if(num_gt(count_keys(hash(meta)), 1)); ... endif()
 return(hash("meta_key_count", count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))))
+```
+
+## `has_key(hash_or_hash_expr, key_expr)`
+Use `has_key(...)` when you want one boolean-like scalar result for “does this hash/object currently contain this key?”
+
+Examples:
+
+```text
+has_key(hash(meta), "kind")
+has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+has_key(hash("kind", "NODE", "source", "Top"), "source")
+```
+
+Typical uses:
+- branch on object shape rather than on one field’s definedness,
+- store one canonical “has this key” flag in a scalar slot,
+- return one presence flag inside a canonical payload without dropping into raw host-language `exists(...)`.
+
+Important semantic note:
+- `has_key(...)` is about key existence,
+- not about whether the key’s value is defined,
+- so it answers a different question from `is_defined(scalaref(...))`.
+
+That distinction matters:
+- `has_key(hash(meta), "kind")` asks whether the object has a `kind` field at all,
+- while `is_defined(scalaref(retv, {kind}))` asks whether the retrieved `kind` value is defined.
+
+Examples in context:
+
+```text
+assign(scalar(has_kind), has_key(hash(meta), "kind"))
+assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
+if(has_key(hash(meta), "kind")); ... endif()
+return(hash("has_kind", has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`
