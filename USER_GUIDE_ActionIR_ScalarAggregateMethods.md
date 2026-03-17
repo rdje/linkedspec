@@ -645,6 +645,69 @@ Important semantic note:
 - a source shorter than the requested drop count also becomes one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
+### Array prefix as an array with `take(...)`
+`take(...)` is the parser-oriented helper for “give me the first part of this array”, and `take(array_expr, take_count)` extends that to “give me the first `N` elements as one canonical array value”.
+
+Examples:
+
+```text
+take(array(parts))
+take(array(parts), 2)
+take(sorted_keys(hash(meta)))
+take(sorted_keys(hash(meta)), scalar(take_count))
+take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+take(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Use cases:
+- keep one bounded prefix array while another part of the rule handles the remainder,
+- preserve the first few normalized keys or values as one summary array in a return payload,
+- express “take the first `N` tokens/items” without raw Perl slicing,
+- and keep array-prefix work composable with `count(...)`, `scalar(container, index)`, `join_values(...)`, `if(...)`, and `switch(...)`.
+
+Examples in context:
+
+```text
+assign(array(first_parts), take(array(parts)))
+assign(array(first_parts), take(array(parts), 2))
+assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_count)))
+assign(scalar(first_count), count(take(sorted_keys(hash(meta)), 2)))
+return(hash("first_parts", take(array(parts)), "first_keys", take(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
+```
+
+Worked example:
+
+```text
+I {
+  declare(array, keys, first_keys)
+  declare(scalar, take_count=2, first_count=0)
+}
+
+-> header[1] {
+  assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
+  assign(array(first_keys), take(array(keys), scalar(take_count)))
+  assign(scalar(first_count), count(array(first_keys)))
+  return(
+    hash(
+      "first_keys", array_copy(array(first_keys)),
+      "first_count", scalar(first_count),
+      "first_key", scalar(array(first_keys), 0)
+    )
+  )
+}
+```
+
+Important semantic note:
+- `take(array_expr)` defaults to keeping `1` entry when no explicit count is supplied,
+- `take(...)` returns one array value, not one scalar,
+- it works on both direct working arrays and composed array-valued helper expressions,
+- an explicit `take_count` can be a literal like `2` or one scalar-valued expression such as `scalar(take_count)`,
+- a source shorter than the requested take count returns the whole source as one array,
+- a non-positive take count returns one empty array,
+- and an undefined array-valued expression also becomes one empty array rather than `undef`.
+
 ### Array membership as a scalar flag with `contains(...)`
 `contains(...)` is the parser-oriented helper for “does this array currently contain this scalar value?”
 

@@ -100,7 +100,7 @@ sub _looks_like_array_value_expr {
  return 0 unless $call;
 
  my $method = $call->{method} // '';
- return 1 if $method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|tail|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+ return 1 if $method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|tail|take|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
  if ($method eq 'coalesce') {
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
@@ -261,7 +261,7 @@ sub _lower_flow_composite_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|count|first|last|tail|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|count|first|last|tail|take|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }

@@ -23,6 +23,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `count(...)`
 - `first(...)`
 - `last(...)`
+- `take(...)`
 - `tail(...)`
 - `contains(...)`
 - `count_keys(...)`
@@ -496,6 +497,46 @@ assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source"
 assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
 if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
 return(hash("rest_keys", tail(sorted_keys(hash(meta))), "rest_count", count(tail(sorted_keys(hash(meta))))))
+```
+
+## `take(array_or_array_expr)` and `take(array_or_array_expr, take_count)`
+Use `take(...)` when you want one array value containing the first element, or the first `N` elements when an explicit take count is supplied.
+
+Examples:
+
+```text
+take(array(parts))
+take(array(parts), 2)
+take(sorted_keys(hash(meta)))
+take(sorted_keys(hash(meta)), scalar(take_count))
+take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+take(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Typical uses:
+- keep a canonical prefix array while the rule keeps processing the remaining structure elsewhere,
+- preserve the first few stable projected keys or values as one explicit summary payload,
+- express “take the first `N` tokens/items” without raw Perl slicing,
+- and feed one bounded prefix array directly into reducers like `count(...)` or nested reads like `scalar(take(...), 0)`.
+
+Important semantic note:
+- `take(array_expr)` is shorthand for `take(array_expr, 1)`,
+- `take(array(name))` returns one new array value containing the first live element when present,
+- `take(array_expr, take_count)` keeps the first `take_count` entries when that count is one explicit integer-like scalar expression,
+- `take(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
+- `take(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, the requested take count is non-positive, or the array-valued expression is still undefined, `take(...)` returns one empty array instead of `undef`.
+
+Examples in context:
+
+```text
+assign(array(first_parts), take(array(parts)))
+assign(array(first_parts), take(array(parts), 2))
+assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_count)))
+assign(scalar(first_count), count(take(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
+return(hash("first_keys", take(sorted_keys(hash(meta))), "first_count", count(take(sorted_keys(hash(meta)), 2))))
 ```
 
 ## `contains(array_or_array_expr, value_expr)`

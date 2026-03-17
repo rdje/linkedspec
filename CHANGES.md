@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `take(...)` Helper
+
+Extended the method-like DSL migration track with parser-oriented array `take(...)` value helpers. Fluent and structured authoring now agree on representative “keep the first item or first `N` items” flows across array assignment sources, direct `return(payload)` expressions, reducer composition, and nested scalar(container, index) reads on both action-edge and lifecycle surfaces.
+
+- Added `take(array_expr)` and `take(array_expr, n)` lowering for:
+  - direct working arrays such as `take(array(parts))` and `take(array(parts), 2)`,
+  - projected array expressions such as `take(sorted_keys(hash(meta)), 2)`,
+  - scalar-valued count expressions such as `take(sorted_keys(...), scalar(take_count))`,
+  - and array-valued fallback chains such as `take(coalesce(scalaref(retv, {parts}), array("fallback")), 2)`.
+- Semantics are explicit:
+  - omitted take count defaults to keeping `1` entry,
+  - explicit non-positive or undefined take counts sanitize to “keep 0 entries” rather than warning,
+  - sources shorter than the requested take count return the whole source as one array,
+  - and `take(...)` remains one real array-valued helper that can feed `count(...)`, `scalar(container, index)`, `return(payload)`, and array assignment lowering directly.
+- Expanded the user guides with fuller examples showing `take(...)` side by side with `tail(...)`, including literal-count and scalar-count examples inside assignments, returns, and flow expressions.
+
 ## 2026-03-17 - Method-Like DSL Slice: Extend Parser-Oriented `tail(...)` With Explicit Drop Counts
 
 Extended the method-like DSL migration track by broadening parser-oriented `tail(...)` from “drop the first 1 entry” to an optional counted form too. Fluent and structured authoring now agree on representative counted-tail flows across array assignment sources, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.

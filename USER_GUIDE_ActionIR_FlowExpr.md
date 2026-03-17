@@ -177,6 +177,7 @@ Examples:
 num_eq(scalar(count), 0)
 num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
+num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(tail(sorted_keys(hash(meta)))), 0)
 num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 ```
@@ -234,8 +235,16 @@ num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
 num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
 ```
 
+### Example: projected object still has at least two stable keys in its prefix view
+
+```text
+num_gt(count(take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 1)
+```
+
 ### Practical guidance
+- reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
+- the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,
 - the same pattern works with explicit counts like `count(tail(sorted_keys(...), scalar(skip_count)))`,
 - so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
 - and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.
@@ -462,6 +471,7 @@ endif()
 - Prefer `length(...)` when the real question is “how long is this scalar after normalization/defaulting?” rather than “is it empty?” or “is it defined?”.
 - Prefer `scalar(array_expr, index)` or `scalar(hash_expr, key)` on top of composed aggregate helpers when the real question is “read one canonical item from this normalized aggregate” rather than “materialize a temporary aggregate variable first”.
 - Prefer `first(...)` / `last(...)` when the real question is “what is the boundary item of this array or projected array?” rather than “how many?” or “does it contain?”.
+- Prefer `take(...)` when the real question is “what is the first bounded prefix array I want to keep and keep composing?” rather than “what is the first single item?” or “what is the remainder?”.
 - Prefer `join_values(...)` on top of `sorted_keys(...)`, `sorted_values(...)`, or other array-valued helpers when the real question is “does this projected aggregate reduce to one exact scalar string?”
 - Prefer `contains(...)` when the real question is “does this array or projected array contain one exact scalar value?”
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness, especially after `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, or aggregate `coalesce(...)` have already built one value for you.
