@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_mul(...)` And `num_div(...)`
+
+Extended the method-like DSL migration track with the next standardized arithmetic helpers. Fluent and structured authoring now agree on representative numeric product/division flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `num_mul(value_expr, value_expr, ...)` lowering for:
+  - direct numeric reducer expressions such as `num_mul(count(array(parts)), scalar(factor))`,
+  - normalized scalar metadata expressions such as `num_mul(coalesce(length(trim(scalar(name))), 0), 2, scalar(factor))`,
+  - and float-like scalar values such as `num_mul(scalar(confidence), 1.5)`.
+- Added `num_div(lhs, rhs)` lowering for:
+  - direct numeric reducer expressions such as `num_div(num_mul(count(array(parts)), scalar(factor)), 2)`,
+  - and nested arithmetic chains such as `num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))`.
+- Preserved the parser-oriented arithmetic contract:
+  - `num_mul(...)` is variadic and requires two or more operands,
+  - `num_div(...)` is currently binary,
+  - both helpers stay pure scalar value helpers,
+  - missing or non-numeric-looking operands preserve `undef`,
+  - and `num_div(...)` also preserves `undef` for divide-by-zero instead of silently inventing a value.
+- Expanded the user guides with fuller examples showing `num_mul(...)` and `num_div(...)` in integer/float metadata flows, reducer composition, direct returns, and numeric comparisons.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_add(...)` And `num_sub(...)`
 
 Extended the method-like DSL migration track with the first standardized parser-oriented arithmetic helpers. Fluent and structured authoring now agree on representative numeric composition flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.

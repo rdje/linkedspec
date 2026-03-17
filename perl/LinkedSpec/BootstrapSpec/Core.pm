@@ -106,7 +106,7 @@ sub _method_chain_return_uses_general_payload {
  return 0 unless defined $args;
  my $trimmed = _trim_bootstrap_value($args);
  return 0 unless defined($trimmed) && length($trimmed);
- return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|trim\s*\(|lowercase\s*\(|uppercase\s*\(|length\s*\(|num_add\s*\(|num_sub\s*\(|count\s*\(|first\s*\(|last\s*\(|tail\s*\(|contains\s*\(|count_keys\s*\(|sorted_keys\s*\(|sorted_values\s*\(|has_key\s*\(|merge_hash\s*\(|drop_keys\s*\(|pick_keys\s*\(|join_values\s*\(|coalesce\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
+ return $trimmed =~ /^(?:\[|\{|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|scalar\s*\(|array\s*\(|hash\s*\(|trim\s*\(|lowercase\s*\(|uppercase\s*\(|length\s*\(|num_add\s*\(|num_sub\s*\(|num_mul\s*\(|num_div\s*\(|count\s*\(|first\s*\(|last\s*\(|tail\s*\(|contains\s*\(|count_keys\s*\(|sorted_keys\s*\(|sorted_values\s*\(|has_key\s*\(|merge_hash\s*\(|drop_keys\s*\(|pick_keys\s*\(|join_values\s*\(|coalesce\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\()/o ? 1 : 0
 }
 
 sub _method_chain_uses_bare_zero_arg_flow_marker {

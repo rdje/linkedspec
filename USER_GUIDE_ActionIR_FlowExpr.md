@@ -179,6 +179,8 @@ num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
 num_gt(num_add(count(array(parts)), scalar(offset)), 3)
 num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
+num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
+num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
@@ -190,7 +192,7 @@ num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
-Arithmetic helpers such as `num_add(...)` and `num_sub(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
+Arithmetic helpers such as `num_add(...)`, `num_sub(...)`, `num_mul(...)`, and `num_div(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
 
 ## Regex predicate
 ### `matches(lhs, /regex/)`

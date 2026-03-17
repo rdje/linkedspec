@@ -304,6 +304,7 @@ declare(scalar, count=0, depth=1, max_depth=8)
 if(num_eq(scalar(count), 0))
 if(num_lt(scalar(depth), scalar(max_depth)))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
+assign(scalar(weighted_count), num_mul(scalar(count), 2))
 return(hash("depth", scalar(depth), "limit", scalar(max_depth)))
 ```
 
@@ -344,6 +345,7 @@ assign(scalar(remaining), num_sub(count(array(parts)), 1))
 ```
 
 The current arithmetic surface is intentionally narrow: `num_add(...)` and `num_sub(...)` are supported, while broader arithmetic families are still future work.
+The next standardized arithmetic helpers `num_mul(...)` and `num_div(...)` now extend that same narrow parser-oriented contract without turning the DSL into a general-purpose math language.
 
 ## Float scalar methods
 Float-like scalars follow the same rule as integer-like scalars: carry them through canonical helpers, compare them with `num_*`, compose them with the standardized arithmetic helpers, and return or store them in canonical payload constructors.
@@ -354,6 +356,7 @@ Examples:
 declare(scalar, threshold=0.75, confidence=0.98)
 if(num_ge(scalar(confidence), 0.95))
 assign(scalar(next_threshold), num_add(scalar(threshold), 0.05))
+assign(scalar(weighted_confidence), num_mul(scalar(confidence), 1.5))
 return(hash("threshold", scalar(threshold), "confidence", scalar(confidence)))
 ```
 
@@ -376,10 +379,10 @@ I {
 Again, the current contract is:
 - float literals can participate as scalar values,
 - numeric comparisons on those scalars are part of the supported expression family,
-- and the first standardized arithmetic helpers `num_add(...)` and `num_sub(...)` can compose with numeric-looking float values too.
+- and the standardized arithmetic helpers `num_add(...)`, `num_sub(...)`, `num_mul(...)`, and `num_div(...)` can compose with numeric-looking float values too.
 
-## Numeric arithmetic with `num_add(...)` and `num_sub(...)`
-`num_add(...)` and `num_sub(...)` are the first standardized numeric value helpers in the method DSL.
+## Numeric arithmetic with `num_add(...)`, `num_sub(...)`, `num_mul(...)`, and `num_div(...)`
+These are the standardized numeric value helpers in the method DSL today.
 
 Examples:
 
@@ -390,6 +393,10 @@ num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
 num_sub(count(array(parts)), 1)
 num_sub(num_add(count(array(parts)), scalar(offset)), 1)
 num_sub(scalar(confidence), scalar(threshold))
+num_mul(count(array(parts)), scalar(factor))
+num_mul(scalar(confidence), 1.5)
+num_div(num_mul(count(array(parts)), scalar(factor)), 2)
+num_div(scalar(confidence), scalar(threshold))
 ```
 
 Use cases:
@@ -405,13 +412,18 @@ assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(total_length), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(adjusted_confidence), num_sub(scalar(confidence), 0.05))
+assign(scalar(weighted_count), num_mul(count(array(parts)), scalar(factor)))
+assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), 2))
 return(hash(
   "next_depth", num_add(scalar(depth), 1),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
-  "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold))
+  "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold)),
+  "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), 2)
 ))
 if(num_gt(num_add(count(array(parts)), scalar(offset)), 3))
 if(num_ge(num_sub(scalar(confidence), scalar(threshold)), 0))
+if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3))
+if(num_ge(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 1))
 ```
 
 Worked example:
@@ -419,16 +431,18 @@ Worked example:
 ```text
 I {
   declare(array, parts=array("A", "B", "C"))
-  declare(scalar, depth=1.25, offset=0.75, next_depth, remaining)
+  declare(scalar, depth=1.25, offset=0.75, factor=1.5, divisor=2, next_depth, remaining, average_count)
 }
 
 -> node[1] {
   assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset)))
   assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1))
+  assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)))
 
   return(hash(
     "next_depth", scalar(next_depth),
     "remaining", scalar(remaining),
+    "average_count", scalar(average_count),
     "enough_parts", num_gt(scalar(remaining), 1)
   ))
 }
@@ -437,16 +451,21 @@ I {
 Important semantic notes:
 - `num_add(...)` accepts two or more operands,
 - `num_sub(...)` is currently binary,
+- `num_mul(...)` accepts two or more operands,
+- `num_div(...)` is currently binary,
 - operands must be defined numeric-looking scalars,
 - supported numeric-looking forms are simple integers/decimals such as `0`, `-3`, `0.75`, and `12.5`,
 - if any operand is undefined or not numeric-looking, the arithmetic helper returns `undef`,
-- and callers that want “missing means zero” should say that explicitly with `coalesce(...)`.
+- and `num_div(...)` also returns `undef` when the divisor is `0`.
+- Callers that want “missing means zero” should say that explicitly with `coalesce(...)`.
 
 Examples:
 
 ```text
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
+num_mul(coalesce(count(array(parts)), 0), scalar(factor))
+coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0)
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 ```
 
