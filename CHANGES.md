@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_add(...)` And `num_sub(...)`
+
+Extended the method-like DSL migration track with the first standardized parser-oriented arithmetic helpers. Fluent and structured authoring now agree on representative numeric composition flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `num_add(value_expr, value_expr, ...)` lowering for:
+  - direct numeric scalar values such as `num_add(scalar(depth), 1)`,
+  - normalized metadata expressions such as `num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))`,
+  - and reducer-driven numeric chains such as `num_add(count(array(parts)), scalar(offset))`.
+- Added `num_sub(lhs, rhs)` lowering for:
+  - direct numeric reducer expressions such as `num_sub(count(array(parts)), 1)`,
+  - and nested arithmetic chains such as `num_sub(num_add(count(array(parts)), scalar(offset)), 1)`.
+- Preserved the parser-oriented arithmetic contract:
+  - `num_add(...)` is variadic and requires two or more operands,
+  - `num_sub(...)` is currently binary,
+  - both helpers stay pure scalar value helpers,
+  - and missing or non-numeric-looking operands preserve `undef` unless the caller explicitly uses `coalesce(...)`.
+- Expanded the user guides with fuller examples showing `num_add(...)` and `num_sub(...)` in integer/float metadata flows, reducer composition, direct returns, and numeric comparisons.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `starts_with(...)` And `ends_with(...)`
 
 Extended the method-like DSL migration track with parser-oriented scalar boundary predicates. Fluent and structured authoring now agree on representative normalized string-prefix and string-suffix checks across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.

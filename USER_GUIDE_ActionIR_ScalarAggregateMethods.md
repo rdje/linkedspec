@@ -295,7 +295,7 @@ return(hash("head_name", scalaref(tree, [0]{name})))
 ```
 
 ## Integer scalar methods
-Integer-like scalars are already part of the supported surface when you want to carry numeric literals, keep numeric-looking fields, or branch with numeric comparison helpers.
+Integer-like scalars are already part of the supported surface when you want to carry numeric literals, keep numeric-looking fields, branch with numeric comparison helpers, or compose simple parser-oriented arithmetic values.
 
 Examples:
 
@@ -303,6 +303,7 @@ Examples:
 declare(scalar, count=0, depth=1, max_depth=8)
 if(num_eq(scalar(count), 0))
 if(num_lt(scalar(depth), scalar(max_depth)))
+assign(scalar(next_depth), num_add(scalar(depth), 1))
 return(hash("depth", scalar(depth), "limit", scalar(max_depth)))
 ```
 
@@ -330,26 +331,29 @@ I {
 ```
 
 Important clarification:
-- this guide is documenting integer-valued storage and comparison,
-- not inventing arithmetic helpers that the DSL has not standardized yet.
+- this guide is documenting integer-valued storage, comparison, and the first standardized arithmetic helpers,
+- not claiming a broad general-purpose arithmetic language.
 
 So this is in scope today:
 
 ```text
 declare(scalar, count=0)
 if(num_gt(scalar(count), 3))
+assign(scalar(next_depth), num_add(scalar(depth), 1))
+assign(scalar(remaining), num_sub(count(array(parts)), 1))
 ```
 
-But arithmetic-helper design is a separate future topic and should not be implied here.
+The current arithmetic surface is intentionally narrow: `num_add(...)` and `num_sub(...)` are supported, while broader arithmetic families are still future work.
 
 ## Float scalar methods
-Float-like scalars follow the same rule as integer-like scalars: carry them through canonical helpers, compare them with `num_*`, and return or store them in canonical payload constructors.
+Float-like scalars follow the same rule as integer-like scalars: carry them through canonical helpers, compare them with `num_*`, compose them with the standardized arithmetic helpers, and return or store them in canonical payload constructors.
 
 Examples:
 
 ```text
 declare(scalar, threshold=0.75, confidence=0.98)
 if(num_ge(scalar(confidence), 0.95))
+assign(scalar(next_threshold), num_add(scalar(threshold), 0.05))
 return(hash("threshold", scalar(threshold), "confidence", scalar(confidence)))
 ```
 
@@ -372,7 +376,79 @@ I {
 Again, the current contract is:
 - float literals can participate as scalar values,
 - numeric comparisons on those scalars are part of the supported expression family,
-- but this guide is not claiming a separate arithmetic-helper family that does not yet exist.
+- and the first standardized arithmetic helpers `num_add(...)` and `num_sub(...)` can compose with numeric-looking float values too.
+
+## Numeric arithmetic with `num_add(...)` and `num_sub(...)`
+`num_add(...)` and `num_sub(...)` are the first standardized numeric value helpers in the method DSL.
+
+Examples:
+
+```text
+num_add(scalar(depth), 1)
+num_add(scalar(depth), 1, scalar(offset))
+num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
+num_sub(count(array(parts)), 1)
+num_sub(num_add(count(array(parts)), scalar(offset)), 1)
+num_sub(scalar(confidence), scalar(threshold))
+```
+
+Use cases:
+- increment one depth or count without dropping into raw Perl,
+- derive one remaining-item count from an array reducer,
+- carry one adjusted threshold or confidence value,
+- keep numeric metadata inside the same composable value-expression layer as `count(...)`, `length(...)`, and `coalesce(...)`.
+
+Examples in context:
+
+```text
+assign(scalar(next_depth), num_add(scalar(depth), 1))
+assign(scalar(total_length), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
+assign(scalar(window_size), num_sub(count(array(parts)), 1))
+assign(scalar(adjusted_confidence), num_sub(scalar(confidence), 0.05))
+return(hash(
+  "next_depth", num_add(scalar(depth), 1),
+  "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
+  "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold))
+))
+if(num_gt(num_add(count(array(parts)), scalar(offset)), 3))
+if(num_ge(num_sub(scalar(confidence), scalar(threshold)), 0))
+```
+
+Worked example:
+
+```text
+I {
+  declare(array, parts=array("A", "B", "C"))
+  declare(scalar, depth=1.25, offset=0.75, next_depth, remaining)
+}
+
+-> node[1] {
+  assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset)))
+  assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1))
+
+  return(hash(
+    "next_depth", scalar(next_depth),
+    "remaining", scalar(remaining),
+    "enough_parts", num_gt(scalar(remaining), 1)
+  ))
+}
+```
+
+Important semantic notes:
+- `num_add(...)` accepts two or more operands,
+- `num_sub(...)` is currently binary,
+- operands must be defined numeric-looking scalars,
+- supported numeric-looking forms are simple integers/decimals such as `0`, `-3`, `0.75`, and `12.5`,
+- if any operand is undefined or not numeric-looking, the arithmetic helper returns `undef`,
+- and callers that want “missing means zero” should say that explicitly with `coalesce(...)`.
+
+Examples:
+
+```text
+num_add(coalesce(scalar(depth), 0), 1)
+num_sub(coalesce(length(trim(scalar(name))), 0), 1)
+num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
+```
 
 ## Flag-like scalar methods
 Many practical rules keep one or more scalar flags that record readiness, emptiness, or branch decisions.

@@ -20,6 +20,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `length(...)`
+- `num_add(...)`
+- `num_sub(...)`
 - `starts_with(...)`
 - `ends_with(...)`
 - `count(...)`
@@ -405,6 +407,53 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 ```
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
+
+## `num_add(value_expr, value_expr, ...)` and `num_sub(lhs, rhs)`
+Use these when you want parser-oriented numeric composition without leaving the canonical method-like DSL surface.
+
+Examples:
+
+```text
+num_add(scalar(depth), 1)
+num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
+num_sub(count(array(parts)), 1)
+num_sub(num_add(count(array(parts)), scalar(offset)), 1)
+```
+
+These helpers are intentionally narrow:
+- `num_add(...)` is the canonical numeric “sum these operands” helper and accepts two or more operands,
+- `num_sub(...)` is the canonical numeric “subtract rhs from lhs” helper and is currently binary,
+- both helpers return one scalar numeric value,
+- and both stay pure value helpers, so they compose inside `assign(...)`, `return(payload)`, and `num_*` flow comparisons.
+
+Examples in context:
+
+```text
+assign(scalar(next_depth), num_add(scalar(depth), 1))
+assign(scalar(window_size), num_sub(count(array(parts)), 1))
+assign(scalar(total), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
+if(num_gt(num_add(count(array(parts)), scalar(offset)), 3)); ... endif()
+return(hash(
+  "next_depth", num_add(scalar(depth), 1),
+  "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1)
+)))
+```
+
+Important semantic notes:
+- these helpers expect defined numeric-looking operands,
+- supported numeric-looking forms are simple integer/decimal values such as `0`, `-3`, `0.75`, and `12.5`,
+- if any operand is still undefined or not numeric-looking, the arithmetic helper returns `undef`,
+- and when the rule wants “missing means zero,” that should be stated explicitly with `coalesce(...)`.
+
+Examples:
+
+```text
+num_add(coalesce(scalar(depth), 0), 1)
+num_sub(coalesce(length(trim(scalar(name))), 0), 1)
+num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
+```
+
+This is deliberate. The arithmetic surface is now standardized, but it is still parser-oriented and small rather than a full general-purpose math language.
 
 ## `starts_with(value_expr, prefix_expr)` and `ends_with(value_expr, suffix_expr)`
 Use these when you want one scalar flag answering “does this normalized string begin with this prefix?” or “does it end with this suffix?”

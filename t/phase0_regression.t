@@ -5541,7 +5541,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 52;
+    plan tests => 57;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -5592,6 +5592,31 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(coalesce(length(trim(scalar(name))), 0), 3)}),
         q{(do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 } > 3)},
         'length(...) composes inside coalesce(...) and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(total), num_add(coalesce(length(trim(scalar(raw_name))), 0), 2, scalar(offset)))}),
+        q{$total = do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, 2, $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }},
+        'assign helper accepts num_add(...) over normalized scalar expressions'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(length(trim(scalar(raw_name))), 2, scalar(offset)))}),
+        q{return do { my @__ls_num_add_terms = (do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }, 2, $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }},
+        'return(payload) accepts num_add(...) with nested scalar helpers'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(num_sub(num_add(count(array(parts)), scalar(offset)), 1))}),
+        q{return do { my $__ls_num_sub_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; my $__ls_num_sub_rhs = 1; (defined($__ls_num_sub_lhs) && defined($__ls_num_sub_rhs) && $__ls_num_sub_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_sub_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_sub_lhs - $__ls_num_sub_rhs) : undef }},
+        'return(payload) accepts num_sub(...) nested around num_add(...) reducers'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(num_add(coalesce(length(trim(scalar(name))), 0), scalar(offset)), 3)}),
+        q{(do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef } > 3)},
+        'num_add(...) composes inside numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)}),
+        q{(do { my $__ls_num_sub_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); my $__ls_num_add_sum = 0; my $__ls_num_add_ok = 1; for my $__ls_num_add_term (@__ls_num_add_terms) { if (!(defined($__ls_num_add_term) && $__ls_num_add_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_add_ok = 0; last; } $__ls_num_add_sum += $__ls_num_add_term; } $__ls_num_add_ok ? $__ls_num_add_sum : undef }; my $__ls_num_sub_rhs = 1; (defined($__ls_num_sub_lhs) && defined($__ls_num_sub_rhs) && $__ls_num_sub_lhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_sub_rhs =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/) ? ($__ls_num_sub_lhs - $__ls_num_sub_rhs) : undef } == 4)},
+        'num_sub(...) composes inside numeric flow comparisons'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(has_prefix), starts_with(lowercase(trim(scalar(raw_name))), "pre"))}),
@@ -23218,6 +23243,90 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle scalar boundary helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_numeric_arithmetic_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, parts=array("A", "B", "C")).declare(scalar, depth=1.25, offset=0.75, next_depth, remaining).assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))).assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)).return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))); assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)); return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric arithmetic helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric arithmetic helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge numeric arithmetic helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge numeric arithmetic helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge numeric arithmetic helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge numeric arithmetic helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge numeric arithmetic helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge numeric arithmetic helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge numeric arithmetic helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge numeric arithmetic helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge numeric arithmetic helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge numeric arithmetic helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_numeric_arithmetic_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, parts=array("A", "B", "C")).declare(scalar, depth=1.25, offset=0.75, next_depth, remaining).assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))).assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)).return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))); assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)); return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric arithmetic helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric arithmetic helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle numeric arithmetic helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle numeric arithmetic helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle numeric arithmetic helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle numeric arithmetic helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle numeric arithmetic helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle numeric arithmetic helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle numeric arithmetic helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle numeric arithmetic helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle numeric arithmetic helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle numeric arithmetic helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_drop_last_array_helpers_lower_equivalently' => sub {
