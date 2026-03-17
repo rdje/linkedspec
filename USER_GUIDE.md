@@ -326,6 +326,8 @@ Scalar normalization helpers are part of that explicit contract too: `trim(...)`
 
 Array-to-scalar reduction is part of that contract too: `count(...)` now lets `.spec` rules derive canonical size metadata from array variables and array-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary size-based branching and return metadata can stay inside the same parser-oriented expression layer.
 
+Hash/object-to-scalar reduction is part of that contract too: `count_keys(...)` now lets `.spec` rules derive canonical key-count metadata from working hashes and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary object-shape branching and return metadata can stay inside that same parser-oriented expression layer.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

@@ -57,6 +57,8 @@ They take effect when the expression appears inside a statement or helper that c
 - `uppercase(coalesce(scalaref(retv, {type}), "word"))` -> `do { my $__ls_upper = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }`
 - `count(array(parts))` -> `scalar(@parts)`
 - `count(coalesce(scalaref(retv, {parts}), array("empty")))` -> `do { my $__ls_count = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }`
+- `count_keys(hash(meta))` -> `scalar(keys %meta)`
+- `count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))` -> `do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }`
 - `coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")` -> `do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `coalesce(scalaref(retv, {parts}), array("empty"))` -> `do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }`
 - `flat_array(items)` -> `@items`
@@ -79,6 +81,7 @@ Important nuance:
 - `assign(scalar(flag), or(scalar(on), scalar(off)))` -> `$flag = (($on) || ($off))`
 - `assign(scalar(name), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))` -> `$name = do { my $__ls_lower = do { my $__ls_trim = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : " UNKNOWN " } }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }`
 - `assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))` -> `$part_count = do { my $__ls_count = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }`
+- `assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))` -> `$meta_key_count = do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }`
 - `assign(scalar(capt_joined), join_values('', array(capt)))` -> `$capt_joined = join('', @capt)`
 - `assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))` -> `$name = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `assign(scalar(retv), call(Leaf))` -> `$retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)`
@@ -126,6 +129,7 @@ Important nuance:
 - `is_undefined(scalaref(retv, {type}))` -> `(!defined($retv->{type}))`
 - `is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`
 - `num_gt(count(array(parts)), 0)` -> `(scalar(@parts) > 0)`
+- `num_gt(count_keys(hash(meta)), 1)` -> `(scalar(keys %meta) > 1)`
 - `eq(lowercase(trim(scalaref(retv, {type}))), "word")` -> `(do { my $__ls_lower = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower } eq "word")`
 - `is_empty(array(items))` -> `(!@items)`
 - `is_empty(scalar(name))` -> `(!defined($name) || $name eq '')`

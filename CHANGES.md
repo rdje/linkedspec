@@ -13040,3 +13040,4 @@ Added a dedicated regression lock confirming that explicit missing-path inputs c
   - PASS
   - all 36 top-level test blocks pass.
 Accepted punctuation-light attached branch aliases on the method-like control-flow surfaces. Structured attached-block composite `if(...)` now accepts `else { ... }` alongside `else() { ... }`, and both inline-composite and marker-style switch branch-body surfaces now accept `default { ... }` alongside `default() { ... }`, while preserving the same canonical lowering, zero-fallback behavior, and lifecycle-wide regression coverage.
+- 2026-03-17: Added parser-oriented `count_keys(...)` hash/object-size reducer lowering so `.spec` rules can derive one scalar key-count value from working hashes and hash-valued expressions across assignment sources, return payloads, and numeric comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.

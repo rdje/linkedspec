@@ -5163,3 +5163,4 @@ Before each commit:
 4. Update `ROADMAP.md` status and milestones.
 5. Update `MEMORY.md` with resumable session context.
 - Control-flow punctuation-reduction now covers attached branch bodies too: `else { ... }` and `default { ... }` are supported aliases for `else() { ... }` and `default() { ... }`. Keep unresolved-helper matching conservative so rewritten Perl `else { ... }` / `default { ... }` output is not misclassified as leftover DSL.
+- 2026-03-17: Added parser-oriented `count_keys(...)` hash/object-size reducer lowering so `.spec` rules can derive one scalar key-count value from working hashes and hash-valued expressions across assignment sources, return payloads, and numeric comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.

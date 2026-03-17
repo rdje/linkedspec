@@ -20,6 +20,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `count(...)`
+- `count_keys(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -358,6 +359,36 @@ assign(scalar(part_count), count(array(parts)))
 assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
 if(num_gt(count(array(parts)), 0)); ... endif()
 return(hash("part_count", count(coalesce(scalaref(retv, {parts}), array("empty")))))
+```
+
+## `count_keys(hash_or_hash_expr)`
+Use `count_keys(...)` when you want one scalar key-count result from a hash/object variable or hash-valued expression.
+
+Examples:
+
+```text
+count_keys(hash(meta))
+count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+count_keys(hash("kind", "NODE", "source", "Top"))
+```
+
+Typical uses:
+- branch on whether one returned metadata object is richer than a minimal fallback,
+- store one canonical object-field count in a scalar slot,
+- return hash/object size metadata without dropping into raw host-language code.
+
+Important semantic note:
+- `count_keys(hash(name))` lowers to the live hash-variable key count,
+- `count_keys(hash-valued expression)` lowers by counting keys from the referenced hash payload,
+- and when a hash-valued expression is still undefined, `count_keys(...)` returns `0`.
+
+Examples in context:
+
+```text
+assign(scalar(meta_key_count), count_keys(hash(meta)))
+assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))
+if(num_gt(count_keys(hash(meta)), 1)); ... endif()
+return(hash("meta_key_count", count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`

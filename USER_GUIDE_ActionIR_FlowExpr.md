@@ -258,6 +258,7 @@ is_defined(scalaref(retv, {content}))
 is_undefined(scalaref(retv, {type}))
 is_nonempty(scalaref(retv, {content}))
 num_gt(count(array(parts)), 0)
+num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
 eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
 ```
@@ -334,6 +335,16 @@ if(num_gt(count(coalesce(scalaref(retv, {parts}), array("empty"))), 1));
   return(hash("kind", "MULTI_PART"));
 else;
   return(hash("kind", "SINGLE_PART"));
+endif()
+```
+
+### Example: branch on hash/object richness
+
+```text
+if(num_gt(count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))), 1));
+  return(hash("kind", "RICH_META"));
+else;
+  return(hash("kind", "MIN_META"));
 endif()
 ```
 

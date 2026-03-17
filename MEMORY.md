@@ -4548,3 +4548,4 @@ Update this file after every meaningful exchange/task completion with:
 - Exact next step.
 - If a commit was created, append hash + subject in `Recent Commit Ledger (Newest First)`.
 - Method-like DSL control-flow now accepts punctuation-light attached branch aliases too: `else { ... }` and `default { ... }` lower the same as `else() { ... }` and `default() { ... }` on composite-`if(...)`, inline-composite switch, and marker-style switch branch-body surfaces.
+- 2026-03-17: Added parser-oriented `count_keys(...)` hash/object-size reducer lowering so `.spec` rules can derive one scalar key-count value from working hashes and hash-valued expressions across assignment sources, return payloads, and numeric comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.

@@ -478,6 +478,36 @@ Important semantic note:
 - not about string length,
 - and if an array-valued expression is still undefined, `count(...)` falls back to `0`.
 
+### Hash/object size as a scalar with `count_keys(...)`
+`count_keys(...)` is the parser-oriented reducer for “how many keys does this hash/object currently have?”
+
+Examples:
+
+```text
+count_keys(hash(meta))
+count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+count_keys(hash("kind", "NODE", "source", "Top"))
+```
+
+Use cases:
+- store one working hash/object size in a scalar,
+- branch on metadata richness with `num_*` helpers,
+- return object-field count metadata in one canonical payload field.
+
+Examples in context:
+
+```text
+assign(scalar(meta_key_count), count_keys(hash(meta)))
+assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))
+return(hash("meta_key_count", count_keys(hash(meta))))
+if(num_gt(count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))), 1))
+```
+
+Important semantic note:
+- `count_keys(...)` is about hash/object key count,
+- not about array size,
+- and if a hash-valued expression is still undefined, `count_keys(...)` falls back to `0`.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -829,6 +859,47 @@ What this example teaches:
 - `count(...)` turns an aggregate into one scalar metadata value,
 - it composes directly with `coalesce(...)`,
 - and it keeps array-size logic inside the same canonical method-expression layer.
+
+## Worked example: hash/object fallback plus key-count metadata
+This is the common parser shape where one rule wants:
+- one canonical hash/object payload,
+- one scalar key count derived from it,
+- and one richness-based branch without raw host-language counting.
+
+```text
+-> metadata_summary[1] {
+  declare(scalar, meta_key_count)
+  assign(
+    scalar(meta_key_count),
+    count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))
+  )
+
+  if(num_gt(scalar(meta_key_count), 1))
+    return(hash(
+      "kind", "RICH_META",
+      "meta_key_count", scalar(meta_key_count),
+      "meta", coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+    ))
+  else
+    return(hash(
+      "kind", "MIN_META",
+      "meta_key_count", scalar(meta_key_count),
+      "meta", coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+    ))
+  endif
+}
+```
+
+What this example teaches:
+- `coalesce(...)` can default one missing hash/object payload to a canonical fallback object,
+- `count_keys(...)` can reduce that whole hash/object to one scalar metadata value,
+- the reduced scalar can drive the branch,
+- and the original fallback object can still be returned unchanged alongside the metadata.
+
+That is a good example of the LinkedSpec direction:
+- keep the expression layer functional and composable,
+- keep the semantics parser-oriented,
+- and avoid dropping out to raw host-language counting just to ask one simple question about a returned object.
 
 ## Worked example: presence versus emptiness
 This is the pattern to use when the parser needs to keep three states distinct:
