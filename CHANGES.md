@@ -84,6 +84,10 @@ Expanded the user-facing method-DSL documentation with a dedicated scalar-and-ag
 - Updated: `DEVELOPMENT_NOTES.md`
 - Updated: `MEMORY.md`
 
+2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `count(...)` Array Reducer
+
+Added parser-oriented `count(...)` so `.spec` rules can derive one scalar size result from array variables and array-valued expressions without dropping into ad hoc host-language counting. The lowering now works across assignment sources, return payloads, and numeric comparison inputs, and fluent-versus-structured authoring is regression-locked on both action-edge and lifecycle surfaces. The user guides were expanded with worked examples in `USER_GUIDE_ActionIR_MethodLowering.md`, `USER_GUIDE_ActionIR_FlowExpr.md`, `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`, `USER_GUIDE_ActionIR_EmittedPerlReference.md`, and `USER_GUIDE.md`.
+
 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented Scalar Normalization Helpers
 
 Added parser-oriented scalar normalization helpers `trim(...)`, `lowercase(...)`, and `uppercase(...)` so `.spec` rules can normalize text inside canonical value expressions instead of dropping into ad hoc raw string handling. The lowering now works across assignment sources, return payloads, and comparison inputs, and fluent-versus-structured authoring is regression-locked on both action-edge and lifecycle surfaces. The user guides were expanded with worked examples in `USER_GUIDE_ActionIR_MethodLowering.md`, `USER_GUIDE_ActionIR_FlowExpr.md`, `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`, `USER_GUIDE_ActionIR_EmittedPerlReference.md`, and `USER_GUIDE.md`.

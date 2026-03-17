@@ -448,6 +448,36 @@ if(is_defined(scalaref(retv, {parts})))
 if(is_undefined(scalaref(retv, {meta})))
 ```
 
+### Aggregate size as a scalar with `count(...)`
+`count(...)` is the parser-oriented reducer for “how many items does this array currently have?”
+
+Examples:
+
+```text
+count(array(parts))
+count(coalesce(scalaref(retv, {parts}), array("empty")))
+count(array("a", "b", "c"))
+```
+
+Use cases:
+- store one working array size in a scalar,
+- branch on array size with `num_*` helpers,
+- return size metadata in one canonical payload field.
+
+Examples in context:
+
+```text
+assign(scalar(part_count), count(array(parts)))
+assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
+return(hash("part_count", count(array(parts))))
+if(num_gt(count(array(parts)), 0))
+```
+
+Important semantic note:
+- `count(...)` is about array size,
+- not about string length,
+- and if an array-valued expression is still undefined, `count(...)` falls back to `0`.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -765,6 +795,40 @@ What this example teaches:
 - scalar normalization helpers compose directly with `coalesce(...)`,
 - they stay inside the canonical value-expression surface,
 - and they work naturally in assignment sources and returned payloads.
+
+## Worked example: count fallback parts before returning
+This is the common parser shape where one rule wants:
+- one canonical array payload,
+- one scalar count derived from it,
+- and one size-based branch without raw host-language code.
+
+```text
+I {
+  declare(scalar, part_count)
+}
+
+-> child[1] {
+  assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
+  if(num_gt(scalar(part_count), 1))
+    return(hash(
+      "kind", "MULTI_PART",
+      "part_count", scalar(part_count),
+      "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+    ))
+  else
+    return(hash(
+      "kind", "SINGLE_PART",
+      "part_count", scalar(part_count),
+      "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+    ))
+  endif
+}
+```
+
+What this example teaches:
+- `count(...)` turns an aggregate into one scalar metadata value,
+- it composes directly with `coalesce(...)`,
+- and it keeps array-size logic inside the same canonical method-expression layer.
 
 ## Worked example: presence versus emptiness
 This is the pattern to use when the parser needs to keep three states distinct:

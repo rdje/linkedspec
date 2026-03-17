@@ -19,6 +19,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `trim(...)`
 - `lowercase(...)`
 - `uppercase(...)`
+- `count(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -327,6 +328,36 @@ Examples in context:
 assign(scalar(chosen_name), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))
 return(hash("type", uppercase(trim(coalesce(scalaref(retv, {type}), "word")))))
 if(eq(lowercase(trim(scalaref(retv, {type}))), "word")); ... endif()
+```
+
+## `count(array_or_array_expr)`
+Use `count(...)` when you want one scalar size/count result from an array variable or array-valued expression.
+
+Examples:
+
+```text
+count(array(parts))
+count(coalesce(scalaref(retv, {parts}), array("empty")))
+count(array("a", "b", "c"))
+```
+
+Typical uses:
+- branch on whether one working array has elements,
+- store one canonical item count in a scalar slot,
+- return array size metadata without dropping into raw host-language code.
+
+Important semantic note:
+- `count(array(name))` lowers to the live array-variable size,
+- `count(array-valued expression)` lowers by counting the referenced array payload,
+- and when an array-valued expression is still undefined, `count(...)` returns `0`.
+
+Examples in context:
+
+```text
+assign(scalar(part_count), count(array(parts)))
+assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
+if(num_gt(count(array(parts)), 0)); ... endif()
+return(hash("part_count", count(coalesce(scalaref(retv, {parts}), array("empty")))))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`

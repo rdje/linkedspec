@@ -257,6 +257,7 @@ ne(scalaref(retv, {type}), "COMMENTS")
 is_defined(scalaref(retv, {content}))
 is_undefined(scalaref(retv, {type}))
 is_nonempty(scalaref(retv, {content}))
+num_gt(count(array(parts)), 0)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
 eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
 ```
@@ -323,6 +324,16 @@ if(eq(lowercase(trim(coalesce(scalaref(retv, {type}), " WORD "))), "word"));
   return(hash("kind", "WORD"));
 else;
   return(hash("kind", "OTHER"));
+endif()
+```
+
+### Example: branch on array size
+
+```text
+if(num_gt(count(coalesce(scalaref(retv, {parts}), array("empty"))), 1));
+  return(hash("kind", "MULTI_PART"));
+else;
+  return(hash("kind", "SINGLE_PART"));
 endif()
 ```
 

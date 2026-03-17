@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Added parser-oriented `count(...)` array-reducer lowering so `.spec` rules can derive one scalar size value from array variables and array-valued expressions across assignment sources, return payloads, and numeric comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented scalar-normalization helper lowering for `trim(...)`, `lowercase(...)`, and `uppercase(...)` so `.spec` rules can normalize text canonically across assignment sources, return payloads, and comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `is_defined(...)` / `is_undefined(...)` flow-helper lowering so `.spec` rules can distinguish “missing” from “empty” across scalar fields, nested payload reads, and fallback chains, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `coalesce(...)` value-helper lowering so first-defined fallback chains now work canonically across assignment sources, return payloads, and comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
