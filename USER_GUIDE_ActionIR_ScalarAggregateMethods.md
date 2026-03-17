@@ -580,14 +580,16 @@ Important semantic note:
 - they work on both working arrays and composed array-valued helper expressions,
 - and if an array-valued expression is still undefined or empty, both helpers return `undef`.
 
-### Array tail as an array with `tail(...)`
-`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `tail(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”.
+### Array tail as an array with `tail(...)` or `drop_front(...)`
+`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `tail(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”. `drop_front(...)` is the exact alias for the same lowering contract.
 
 Examples:
 
 ```text
 tail(array(parts))
 tail(array(parts), 2)
+drop_front(array(parts))
+drop_front(array(parts), 2)
 tail(sorted_keys(hash(meta)))
 tail(sorted_keys(hash(meta)), scalar(skip_count))
 tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
@@ -605,6 +607,7 @@ Examples in context:
 ```text
 assign(array(rest_parts), tail(array(parts)))
 assign(array(rest_parts), tail(array(parts), 2))
+assign(array(rest_parts), drop_front(array(parts), 2))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
 assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
@@ -637,9 +640,11 @@ I {
 
 Important semantic note:
 - `tail(array_expr)` defaults to dropping `1` entry when no explicit count is supplied,
+- `drop_front(array_expr)` is the exact alias of `tail(array_expr)`,
 - `tail(...)` returns one array value, not one scalar,
 - it works on both direct working arrays and composed array-valued helper expressions,
 - an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(skip_count)`,
+- `drop_front(array_expr, drop_count)` is the exact alias of `tail(array_expr, drop_count)`,
 - a one-element source becomes one empty array,
 - an empty source becomes one empty array,
 - a source shorter than the requested drop count also becomes one empty array,
@@ -708,14 +713,79 @@ Important semantic note:
 - a non-positive take count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
-### Drop the trailing array suffix with `drop_last(...)`
-`drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”.
+### Keep the trailing array suffix with `take_last(...)`
+`take_last(...)` is the parser-oriented helper for “give me the last part of this array”, and `take_last(array_expr, take_last_count)` extends that to “keep the last `N` elements as one canonical array value”.
+
+Examples:
+
+```text
+take_last(array(parts))
+take_last(array(parts), 2)
+take_last(sorted_keys(hash(meta)))
+take_last(sorted_keys(hash(meta)), scalar(take_last_count))
+take_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+take_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Use cases:
+- keep a trailing suffix array while earlier parsing logic has already consumed or summarized the leading part,
+- preserve the final few normalized keys or values as one summary array in a return payload,
+- express “take the last `N` tokens/items” without raw Perl slicing,
+- and keep array-suffix work composable with `count(...)`, `scalar(container, index)`, `join_values(...)`, `if(...)`, and `switch(...)`.
+
+Examples in context:
+
+```text
+assign(array(last_parts), take_last(array(parts)))
+assign(array(last_parts), take_last(array(parts), 2))
+assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_last_count)))
+assign(scalar(last_count), count(take_last(sorted_keys(hash(meta)), 2)))
+return(hash("last_parts", take_last(array(parts)), "last_keys", take_last(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(take_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
+```
+
+Worked example:
+
+```text
+I {
+  declare(array, keys, last_keys)
+  declare(scalar, take_last_count=2, last_count=0)
+}
+
+-> header[1] {
+  assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage", "owner")))
+  assign(array(last_keys), take_last(array(keys), scalar(take_last_count)))
+  assign(scalar(last_count), count(array(last_keys)))
+  return(
+    hash(
+      "last_keys", array_copy(array(last_keys)),
+      "last_count", scalar(last_count),
+      "first_suffix_key", scalar(array(last_keys), 0)
+    )
+  )
+}
+```
+
+Important semantic note:
+- `take_last(array_expr)` defaults to keeping `1` trailing entry when no explicit count is supplied,
+- `take_last(...)` returns one array value, not one scalar,
+- it works on both direct working arrays and composed array-valued helper expressions,
+- an explicit `take_last_count` can be a literal like `2` or one scalar-valued expression such as `scalar(take_last_count)`,
+- a source shorter than the requested count returns the whole source as one array,
+- a non-positive count returns one empty array,
+- and an undefined array-valued expression also becomes one empty array rather than `undef`.
+
+### Drop the trailing array suffix with `drop_last(...)` or `drop_back(...)`
+`drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”. `drop_back(...)` is the exact alias for the same lowering contract.
 
 Examples:
 
 ```text
 drop_last(array(parts))
 drop_last(array(parts), 2)
+drop_back(array(parts))
+drop_back(array(parts), 2)
 drop_last(sorted_keys(hash(meta)))
 drop_last(sorted_keys(hash(meta)), scalar(drop_count))
 drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
@@ -733,6 +803,7 @@ Examples in context:
 ```text
 assign(array(leading_parts), drop_last(array(parts)))
 assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_parts), drop_back(array(parts), 2))
 assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
 assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
 assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))
@@ -764,9 +835,11 @@ I {
 
 Important semantic note:
 - `drop_last(array_expr)` defaults to dropping `1` trailing entry when no explicit count is supplied,
+- `drop_back(array_expr)` is the exact alias of `drop_last(array_expr)`,
 - `drop_last(...)` returns one array value, not one scalar,
 - it works on both direct working arrays and composed array-valued helper expressions,
 - an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(drop_count)`,
+- `drop_back(array_expr, drop_count)` is the exact alias of `drop_last(array_expr, drop_count)`,
 - a source shorter than the requested drop count returns one empty array,
 - a non-positive drop count keeps the whole source array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.

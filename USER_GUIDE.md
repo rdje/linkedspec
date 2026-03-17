@@ -425,10 +425,16 @@ Typical patterns:
 - `last(...)`
 - `take(...)`
 - `take(..., n)`
+- `take_last(...)`
+- `take_last(..., n)`
 - `drop_last(...)`
 - `drop_last(..., n)`
+- `drop_back(...)`
+- `drop_back(..., n)`
 - `tail(...)`
 - `tail(..., n)`
+- `drop_front(...)`
+- `drop_front(..., n)`
 - `array_copy(...)`
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
@@ -443,8 +449,11 @@ Typical patterns:
 - scalar metadata from `length(scalar_expr)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
+- suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
 - trailing-drop arrays from `drop_last(array_expr)` and counted trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
+- trailing-drop aliases from `drop_back(array_expr)` and counted trailing-drop aliases from `drop_back(array_expr, scalar(drop_count))`
 - tail arrays from `tail(array_expr)` and counted tail arrays from `tail(array_expr, scalar(skip_count))`
+- front-drop aliases from `drop_front(array_expr)` and counted front-drop aliases from `drop_front(array_expr, scalar(skip_count))`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`

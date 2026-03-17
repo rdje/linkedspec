@@ -24,8 +24,11 @@ In practical terms, this is the guide you want when you need to understand:
 - `first(...)`
 - `last(...)`
 - `take(...)`
+- `take_last(...)`
 - `drop_last(...)`
 - `tail(...)`
+- `drop_front(...)` as an alias of `tail(...)`
+- `drop_back(...)` as an alias of `drop_last(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -460,14 +463,17 @@ if(eq(first(sorted_keys(hash(meta))), "kind")); ... endif()
 return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
 ```
 
-## `tail(array_or_array_expr)` and `tail(array_or_array_expr, drop_count)`
-Use `tail(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied.
+## `tail(array_or_array_expr)` / `drop_front(array_or_array_expr)`
+## `tail(array_or_array_expr, drop_count)` / `drop_front(array_or_array_expr, drop_count)`
+Use `tail(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied. `drop_front(...)` is the exact alias for the same lowering contract.
 
 Examples:
 
 ```text
 tail(array(parts))
 tail(array(parts), 2)
+drop_front(array(parts))
+drop_front(array(parts), 2)
 tail(sorted_keys(hash(meta)))
 tail(sorted_keys(hash(meta)), scalar(skip_count))
 tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
@@ -482,8 +488,10 @@ Typical uses:
 
 Important semantic note:
 - `tail(array_expr)` is shorthand for `tail(array_expr, 1)`,
+- `drop_front(array_expr)` is the exact alias of `tail(array_expr)`,
 - `tail(array(name))` returns one new array value containing every live element after index `0`,
 - `tail(array_expr, drop_count)` drops the first `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `drop_front(array_expr, drop_count)` is the exact alias of `tail(array_expr, drop_count)`,
 - `tail(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
 - `tail(...)` always returns an array value rather than one scalar boundary element,
 - and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `tail(...)` returns one empty array instead of `undef`.
@@ -493,6 +501,7 @@ Examples in context:
 ```text
 assign(array(rest_parts), tail(array(parts)))
 assign(array(rest_parts), tail(array(parts), 2))
+assign(array(rest_parts), drop_front(array(parts), 2))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
 assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
@@ -540,14 +549,57 @@ if(num_gt(count(take(sorted_values(pick_keys(hash(meta), "kind", "source", "stag
 return(hash("first_keys", take(sorted_keys(hash(meta))), "first_count", count(take(sorted_keys(hash(meta)), 2))))
 ```
 
-## `drop_last(array_or_array_expr)` and `drop_last(array_or_array_expr, drop_count)`
-Use `drop_last(...)` when you want one array value that contains everything except the last element, or except the last `N` elements when an explicit drop count is supplied.
+## `take_last(array_or_array_expr)` and `take_last(array_or_array_expr, take_last_count)`
+Use `take_last(...)` when you want one array value containing the last element, or the last `N` elements when an explicit count is supplied.
+
+Examples:
+
+```text
+take_last(array(parts))
+take_last(array(parts), 2)
+take_last(sorted_keys(hash(meta)))
+take_last(sorted_keys(hash(meta)), scalar(take_last_count))
+take_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+take_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Typical uses:
+- keep a canonical suffix array while earlier parsing logic has already consumed or summarized the leading part,
+- preserve the final few stable projected keys or values as one explicit summary payload,
+- express “take the last `N` tokens/items” without raw Perl slicing,
+- and feed one bounded suffix array directly into reducers like `count(...)` or nested reads like `scalar(take_last(...), 0)`.
+
+Important semantic note:
+- `take_last(array_expr)` is shorthand for `take_last(array_expr, 1)`,
+- `take_last(array(name))` returns one new array value containing the last live element when present,
+- `take_last(array_expr, take_last_count)` keeps the last `take_last_count` entries when that count is one explicit integer-like scalar expression,
+- `take_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
+- `take_last(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, the requested count is non-positive, or the array-valued expression is still undefined, `take_last(...)` returns one empty array instead of `undef`.
+
+Examples in context:
+
+```text
+assign(array(last_parts), take_last(array(parts)))
+assign(array(last_parts), take_last(array(parts), 2))
+assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_last_count)))
+assign(scalar(last_count), count(take_last(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(take_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
+return(hash("last_keys", take_last(sorted_keys(hash(meta))), "last_count", count(take_last(sorted_keys(hash(meta)), 2))))
+```
+
+## `drop_last(array_or_array_expr)` / `drop_back(array_or_array_expr)`
+## `drop_last(array_or_array_expr, drop_count)` / `drop_back(array_or_array_expr, drop_count)`
+Use `drop_last(...)` when you want one array value that contains everything except the last element, or except the last `N` elements when an explicit drop count is supplied. `drop_back(...)` is the exact alias for the same lowering contract.
 
 Examples:
 
 ```text
 drop_last(array(parts))
 drop_last(array(parts), 2)
+drop_back(array(parts))
+drop_back(array(parts), 2)
 drop_last(sorted_keys(hash(meta)))
 drop_last(sorted_keys(hash(meta)), scalar(drop_count))
 drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
@@ -562,8 +614,10 @@ Typical uses:
 
 Important semantic note:
 - `drop_last(array_expr)` is shorthand for `drop_last(array_expr, 1)`,
+- `drop_back(array_expr)` is the exact alias of `drop_last(array_expr)`,
 - `drop_last(array(name))` returns one new array value containing every live element before the last one,
 - `drop_last(array_expr, drop_count)` drops the final `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `drop_back(array_expr, drop_count)` is the exact alias of `drop_last(array_expr, drop_count)`,
 - `drop_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, `drop_last(...)`, and array-valued `coalesce(...)` chains,
 - `drop_last(...)` always returns an array value rather than one scalar boundary element,
 - and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `drop_last(...)` returns one empty array instead of `undef`.
@@ -573,6 +627,7 @@ Examples in context:
 ```text
 assign(array(leading_parts), drop_last(array(parts)))
 assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_parts), drop_back(array(parts), 2))
 assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
 assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
 assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))

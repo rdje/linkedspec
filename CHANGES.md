@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `take_last(...)` And Drop Aliases
+
+Extended the method-like DSL migration track with one new parser-oriented array suffix helper plus one explicit naming-alias pass for the existing drop helpers. Fluent and structured authoring now agree on representative “keep the trailing item or trailing `N` items” flows via `take_last(...)`, and the more explicit drop aliases `drop_front(...)` / `drop_back(...)` now lower exactly like `tail(...)` / `drop_last(...)` on both action-edge and lifecycle surfaces.
+
+- Added `take_last(array_expr)` and `take_last(array_expr, n)` lowering for:
+  - direct working arrays such as `take_last(array(parts))` and `take_last(array(parts), 2)`,
+  - projected array expressions such as `take_last(sorted_keys(hash(meta)), 2)`,
+  - scalar-valued count expressions such as `take_last(sorted_keys(...), scalar(take_last_count))`,
+  - and array-valued fallback chains such as `take_last(coalesce(scalaref(retv, {parts}), array("fallback")), 2)`.
+- Kept the shorthand surface stable:
+  - `take_last(array_expr)` still means “keep the last 1 entry”,
+  - while `take_last(array_expr, n)` makes the count explicit when the rule needs it.
+- Added explicit naming aliases:
+  - `drop_front(array_expr)` / `drop_front(array_expr, n)` now lower exactly like `tail(array_expr)` / `tail(array_expr, n)`,
+  - `drop_back(array_expr)` / `drop_back(array_expr, n)` now lower exactly like `drop_last(array_expr)` / `drop_last(array_expr, n)`.
+- Preserved the array-valued contract:
+  - `take_last(...)`, `drop_front(...)`, and `drop_back(...)` remain real array-valued helpers/aliases that can feed `count(...)`, `scalar(container, index)`, `return(payload)`, and array assignment lowering directly.
+- Expanded the user guides with fuller examples showing `take_last(...)`, `drop_front(...)`, and `drop_back(...)` next to `take(...)`, `tail(...)`, and `drop_last(...)`.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `drop_last(...)` Helper
 
 Extended the method-like DSL migration track with parser-oriented array `drop_last(...)` value helpers. Fluent and structured authoring now agree on representative “drop the trailing item or trailing `N` items” flows across array assignment sources, direct `return(payload)` expressions, reducer composition, and nested scalar(container, index) reads on both action-edge and lifecycle surfaces.

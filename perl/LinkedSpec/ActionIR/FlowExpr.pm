@@ -100,7 +100,7 @@ sub _looks_like_array_value_expr {
  return 0 unless $call;
 
  my $method = $call->{method} // '';
- return 1 if $method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|tail|take|drop_last|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+ return 1 if $method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|tail|drop_front|take|take_last|drop_last|drop_back|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
  if ($method eq 'coalesce') {
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
