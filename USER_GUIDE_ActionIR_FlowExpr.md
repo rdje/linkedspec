@@ -272,6 +272,7 @@ has_key(pick_keys(hash(meta), "kind", "source"), "kind")
 contains(sorted_keys(hash(meta)), "kind")
 contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE")
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
+num_gt(coalesce(length(trim(scalaref(retv, {content}))), 0), 3)
 eq(first(sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind")
 eq(last(sorted_values(pick_keys(hash(meta), "kind", "source"))), "rule")
 eq(join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind, source")
@@ -436,6 +437,7 @@ endif()
 - Prefer `pick_keys(...)` inside a flow condition when you need to branch on one small, stable projected object shape instead of a larger working object.
 - Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
 - Prefer `sorted_values(...)` when you need one deterministic value-list view derived from one projected object shape before using array reducers or returning value summaries.
+- Prefer `length(...)` when the real question is “how long is this scalar after normalization/defaulting?” rather than “is it empty?” or “is it defined?”.
 - Prefer `first(...)` / `last(...)` when the real question is “what is the boundary item of this array or projected array?” rather than “how many?” or “does it contain?”.
 - Prefer `join_values(...)` on top of `sorted_keys(...)`, `sorted_values(...)`, or other array-valued helpers when the real question is “does this projected aggregate reduce to one exact scalar string?”
 - Prefer `contains(...)` when the real question is “does this array or projected array contain one exact scalar value?”

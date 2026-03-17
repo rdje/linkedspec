@@ -417,6 +417,7 @@ Typical patterns:
 - `array(...)`
 - `hash(...)`
 - `scalaref(...)`
+- `length(...)`
 - `join_values(...)`
 - `first(...)`
 - `last(...)`
@@ -430,6 +431,7 @@ Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR
 
 Typical patterns:
 - string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
+- scalar metadata from `length(scalar_expr)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`

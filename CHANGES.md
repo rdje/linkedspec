@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `length(...)` Helper
+
+Extended the method-like DSL migration track with parser-oriented scalar `length(...)` value helpers. Fluent and structured authoring now agree on representative scalar-length flows across assignment sources, return payloads, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `length(scalar_expr)` lowering for:
+  - direct scalar normalization chains such as `length(trim(scalar(name)))`,
+  - nested payload reads such as `length(trim(scalaref(retv, {content})))`,
+  - and fallback chains such as `coalesce(length(trim(scalaref(retv, {content}))), 0)`.
+- Semantics are explicit:
+  - `length(...)` preserves `undef` for missing scalar expressions instead of silently converting them to `0`,
+  - and callers that want “missing means zero” can state that explicitly with `coalesce(length(...), 0)`.
+- Extended flow/value/payload paths so `length(...)` lowers correctly in:
+  - scalar assignment sources,
+  - direct `return(payload)` expressions,
+  - and numeric flow comparisons such as `num_gt(coalesce(length(trim(scalar(name))), 0), 3)`.
+- Expanded the user guides with fuller examples showing how `length(...)` composes with `trim(...)`, `lowercase(...)`, `uppercase(...)`, and `coalesce(...)` inside parser-oriented value expressions.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `first(...)` and `last(...)`
 
 Extended the method-like DSL migration track with parser-oriented `first(...)` / `last(...)` value helpers. Fluent and structured authoring now agree on representative array-boundary flows across assignment sources, return payloads, and flow comparisons on both action-edge and lifecycle surfaces.

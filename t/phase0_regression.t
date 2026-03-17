@@ -5541,7 +5541,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 17;
+    plan tests => 20;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -5577,6 +5577,21 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
         q{(do { my $__ls_join_values = [sort keys %meta]; defined($__ls_join_values) ? join(", ", @{$__ls_join_values}) : $__ls_join_values } eq "kind, source")},
         'join_values(...) over projected arrays composes inside flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(clean_length), length(trim(scalar(raw_name))))}),
+        q{$clean_length = do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }},
+        'assign helper accepts length(trim(...)) scalar source lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(length(trim(scalar(raw_name))))}),
+        q{return do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }},
+        'return(payload) accepts length(trim(...)) scalar source lowering'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(coalesce(length(trim(scalar(name))), 0), 3)}),
+        q{(do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? length($__ls_length) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 } > 3)},
+        'length(...) composes inside coalesce(...) and numeric flow comparisons'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(first_key), first(sorted_keys(hash(meta))))}),
@@ -22539,6 +22554,90 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle first/last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_length_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge length helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge length helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge length helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge length helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge length helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge length helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge length helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge length helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge length helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge length helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge length helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge length fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_length_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(scalar, clean_name).declare(scalar, clean_length).assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))).assign(scalar(clean_length), length(scalar(clean_name))).return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH))))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle length helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle length helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle length helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle length helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle length helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle length helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle length helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle length helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle length helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle length helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle length helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle length fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_join_values_branches_lower_equivalently' => sub {

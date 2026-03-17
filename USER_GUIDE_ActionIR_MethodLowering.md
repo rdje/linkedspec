@@ -19,6 +19,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `trim(...)`
 - `lowercase(...)`
 - `uppercase(...)`
+- `length(...)`
 - `count(...)`
 - `first(...)`
 - `last(...)`
@@ -354,6 +355,38 @@ assign(scalar(chosen_name), lowercase(trim(coalesce(scalaref(retv, {content}), s
 return(hash("type", uppercase(trim(coalesce(scalaref(retv, {type}), "word")))))
 if(eq(lowercase(trim(scalaref(retv, {type}))), "word")); ... endif()
 ```
+
+## `length(scalar_expr)`
+Use `length(...)` when you want one scalar length value from a scalar expression without leaving the canonical method-like DSL surface.
+
+Examples:
+
+```text
+length(scalar(name))
+length(trim(scalaref(retv, {content})))
+length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+```
+
+Typical uses:
+- branch on whether normalized text is longer than one threshold,
+- store one canonical text-length field in a scalar slot,
+- return string-length metadata without dropping into raw host-language code.
+
+Important semantic note:
+- `length(...)` is about scalar/string length,
+- not about array size,
+- and if the scalar expression is still undefined, `length(...)` preserves `undef` rather than collapsing it to `0`.
+
+Examples in context:
+
+```text
+assign(scalar(clean_length), length(trim(scalar(raw_name))))
+assign(scalar(content_length), length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))
+if(num_gt(coalesce(length(trim(scalar(name))), 0), 3)); ... endif()
+return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))))
+```
+
+Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
 
 ## `count(array_or_array_expr)`
 Use `count(...)` when you want one scalar size/count result from an array variable or array-valued expression.

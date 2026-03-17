@@ -181,6 +181,42 @@ Important semantic note:
 - these helpers preserve `undef`,
 - so they do not quietly invent an empty string where no value existed.
 
+### Scalar text length with `length(...)`
+`length(...)` is the parser-oriented helper for “how long is this scalar text value?”
+
+Examples:
+
+```text
+length(scalar(name))
+length(trim(scalaref(retv, {content})))
+length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+```
+
+Use cases:
+- store one text-length metadata field in a scalar,
+- branch on whether normalized text is longer than one threshold,
+- keep string-length logic inside the same composable value-expression layer as normalization and defaulting.
+
+Examples in context:
+
+```text
+assign(scalar(clean_length), length(trim(scalar(IMATCH))))
+assign(scalar(content_length), length(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))
+return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))))
+if(num_gt(coalesce(length(trim(scalar(name))), 0), 3))
+```
+
+Important semantic note:
+- `length(...)` is about scalar/string length,
+- not about array size,
+- and if the scalar expression is still undefined, `length(...)` preserves `undef`.
+
+That last point matters. If the rule wants “missing text counts as zero length,” write that explicitly:
+
+```text
+coalesce(length(trim(scalar(name))), 0)
+```
+
 ### Defaulting and coalescing scalar values
 
 ```text
