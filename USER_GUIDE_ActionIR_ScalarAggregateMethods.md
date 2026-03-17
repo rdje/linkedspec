@@ -1144,6 +1144,47 @@ What this example teaches:
 - the returned order is deterministic lexical order rather than host hash iteration order,
 - and the resulting array can immediately feed `count(...)`, `array_copy(...)`, or later array pipelines without leaving the DSL.
 
+## Worked example: derive one stable value list from a normalized object
+This is the pattern to use when the parser wants one deterministic array summary of object content rather than of object keys.
+
+```text
+-> metadata_value_summary[1] {
+  declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "stage", "raw"))
+  declare(array, projected_values)
+  declare(scalar, value_count)
+
+  assign(
+    array(projected_values),
+    sorted_values(
+      pick_keys(
+        merge_hash(hash(meta), hash("stage", "normalized")),
+        "kind",
+        "source",
+        "stage"
+      )
+    )
+  )
+
+  assign(scalar(value_count), count(array(projected_values)))
+
+  if(num_gt(scalar(value_count), 0))
+    return(hash(
+      "kind", "VALUE_SUMMARY",
+      "value_count", scalar(value_count),
+      "values", array_copy(array(projected_values))
+    ))
+  else
+    return(hash("kind", "NO_VALUES"))
+  endif
+}
+```
+
+What this example teaches:
+- `sorted_values(...)` is the stable value-list companion to `sorted_keys(...)`,
+- it keeps deterministic ordering by sorting keys first and then projecting values,
+- it pairs naturally with `pick_keys(...)` when only a public subset of fields should participate,
+- and the resulting array can immediately feed `count(...)`, `array_copy(...)`, or later array pipelines without leaving the DSL.
+
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.
 

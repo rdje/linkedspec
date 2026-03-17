@@ -1,5 +1,43 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `sorted_values(...)` Helper
+## Summary
+Extended the method-like DSL migration track with parser-oriented `sorted_values(...)` value helpers. Fluent and structured authoring now agree on representative stable hash/object-to-array value-projection flows across array assignment sources, return payloads, and array-reducer composition on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `sorted_values(hash_or_hash_expr)` to method-value lowering as a pure stable hash/object-to-array value projection helper:
+  - returns one new array of values,
+  - orders that array by lexical sort of keys first and then projects the matching values,
+  - keeps source hashes untouched unless the caller explicitly assigns the result back,
+  - and treats undefined hash-valued expressions as one empty returned array.
+- Extended flow/value/payload paths so `sorted_values(...)` lowers correctly in:
+  - array assignment sources,
+  - general `return(payload)` payloads,
+  - and array-reducer composition such as `count(sorted_values(...))`.
+- Extended fluent `.return(sorted_values(...))` payload detection so the general-return path recognizes `sorted_values(...)` as one helper-valued payload rather than misclassifying it as a non-general return shape.
+- Extended array initializer lowering so array targets flatten `sorted_values(...)` arrayref payloads back into list context instead of assigning one arrayref scalar into the target slot.
+- Added focused regression locks for:
+  - direct emitted lowering of representative stable value-list forms,
+  - fluent-versus-structured action-edge parity,
+  - and fluent-versus-structured lifecycle parity.
+
 ## 2026-03-17 - Docs Slice: Track Deferred Architectural Concerns
 ## Summary
 Captured the current non-blocking architecture concerns as explicit tracked notes instead of leaving them implicit in conversation or code review memory.

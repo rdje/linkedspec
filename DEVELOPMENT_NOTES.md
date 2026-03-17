@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-17: Added parser-oriented `sorted_values(...)` stable hash/object-to-array projection lowering so `.spec` rules can derive deterministic value-list arrays from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Captured a deferred architecture-risk note so future implementation work keeps four concrete seams visible without treating them as current blockers:
   - `BootstrapSpec::Core` is still the main syntax/frontend concentration point,
   - semicolon-light and attached-block control flow still crosses a tight `StatementSplit` / `Scanner::FlowRules` / `ControlFlow` / `RewritePipeline` seam,

@@ -419,7 +419,7 @@ This is a saved future-enhancement note, not an active implementation item.
 These are tracked implementation concerns, not immediate blockers.
 
 - Bootstrap frontend concentration:
-  - [BootstrapSpec/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/BootstrapSpec/Core.pm) still owns too many syntax-front-end responsibilities in one file:
+  - `perl/LinkedSpec/BootstrapSpec/Core.pm` still owns too many syntax-front-end responsibilities in one file:
     - hardcoded bootstrap rule descriptors,
     - fluent-chain rendering,
     - attached-block `if(...)` tail parsing,
@@ -427,18 +427,18 @@ These are tracked implementation concerns, not immediate blockers.
   - Future work should keep splitting syntax-owner responsibilities there so new DSL surfaces do not keep accumulating in one bootstrap monolith.
 - Control-flow parsing and rewrite seam:
   - semicolon-light and attached-block control-flow now depends on a tight seam across:
-    - [StatementSplit/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm),
-    - [Scanner/FlowRules.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm),
-    - [ControlFlow.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/ControlFlow.pm),
-    - and [RewritePipeline.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/RewritePipeline.pm).
+    - `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`,
+    - `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`,
+    - `perl/LinkedSpec/ActionIR/ControlFlow.pm`,
+    - and `perl/LinkedSpec/ActionIR/RewritePipeline.pm`.
   - The current behavior is working, but several balanced-delimiter and flow-state concepts are still implemented in multiple places.
   - Future cleanup should reduce duplicated parsing/state logic and strengthen shared normalization contracts there.
 - Backend portability ceiling:
-  - final runtime handler generation in [SpecEntry.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/SpecEntry.pm) and [Compiler.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Compiler.pm) still depends on Perl string assembly plus dynamic eval.
+  - final runtime handler generation in `perl/LinkedSpec/SpecEntry.pm` and `perl/LinkedSpec/Compiler.pm` still depends on Perl string assembly plus dynamic eval.
   - That remains the clearest backend-portability and runtime-fragility ceiling even though the ActionIR/value-expression layer is becoming much more backend-neutral.
   - Future work should move toward a cleaner backend emission boundary or a more explicit emitted-handler IR.
 - Frontend hardening gap:
-  - [Validation.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Validation.pm) is still much shallower than the currently supported DSL surface.
+  - `perl/LinkedSpec/Validation.pm` is still much shallower than the currently supported DSL surface.
   - Phase 2 should close that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
 - Sequencing rule for these concerns:
   - keep them tracked and visible,
@@ -584,6 +584,7 @@ These are tracked implementation concerns, not immediate blockers.
   - Landed follow-up: parser-oriented pure hash/object cleanup helper `drop_keys(...)` is now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so canonical payload cleanup can stay inside the same canonical expression layer without mutating source hashes or dropping into ad hoc host-language delete logic.
   - Landed follow-up: parser-oriented pure hash/object projection helper `pick_keys(...)` is now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so stable outward-facing payload shapes can stay inside the same canonical expression layer without mutating source hashes or dropping into ad hoc host-language field-copy logic.
   - Landed follow-up: parser-oriented stable hash/object-to-array projection helper `sorted_keys(...)` is now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so deterministic object-shape summaries can stay inside the same canonical expression layer without leaning on host-language hash iteration order.
+  - Landed follow-up: parser-oriented stable hash/object-to-array projection helper `sorted_values(...)` is now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so deterministic object-content summaries can stay inside the same canonical expression layer without leaning on host-language hash iteration order.
   - Landed follow-up: list-context insertion helpers `flat_array(...)` and `flat_hash(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported flat-list payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.
   - Landed follow-up: those same supported `flat_array(...)` and `flat_hash(...)` payload forms are now regression-locked inside control-flow branch bodies too, so branch-local `if/elseif` and `switch/case` returns preserve the same lowering and zero-fallback migration metadata across fluent and structured authoring on both action-edge and lifecycle surfaces.
   - Landed follow-up: snapshot payload helpers `array_copy(...)` and compatibility `array_values(...)` are now regression-locked between fluent and structured authoring on both action-edge and lifecycle surfaces, so supported snapshot-array payload forms preserve the same lowering and zero-fallback migration metadata across both concrete syntaxes.

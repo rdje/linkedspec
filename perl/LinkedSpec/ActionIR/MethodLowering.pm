@@ -169,7 +169,8 @@ sub _normalize_method_tag_expr {
 # Function: _lower_method_value_expr
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `merge_hash(...)`, `drop_keys(...)`,
-#           `pick_keys(...)`, `sorted_keys(...)`, `flat(...)`)
+#           `pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`,
+#           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -390,6 +391,24 @@ sub _lower_method_value_expr {
 
   return 'do { my $__ls_sorted_keys = '.$lowered_target.'; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }';
  }
+ if ($method_call && $method_call->{method} eq 'sorted_values') {
+  my $sorted_values_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $sorted_values_args;
+
+  my $target_expr = $trim_action_ir_value->($sorted_values_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $hash_symbol = $extract_hash_symbol_name->($target_expr);
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+   return '[map { $'.$hash_symbol.'{$_} } sort keys %'.$hash_symbol.']';
+  }
+
+  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  return 'do { my $__ls_sorted_values = '.$lowered_target.'; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }';
+ }
  if ($method_call && $method_call->{method} eq 'has_key') {
   my $has_key_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
   return undef unless $has_key_args;
@@ -600,7 +619,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|count_keys|sorted_keys|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -608,7 +627,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|count_keys|sorted_keys|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Added parser-oriented `sorted_values(...)` stable hash/object-to-array projection lowering so `.spec` rules can derive deterministic value-list arrays from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Logged a deferred architecture-risk note so future slices keep four concrete seams visible without reprioritizing away from feature work yet:
   - `BootstrapSpec::Core` remains the main bootstrap/frontend syntax hotspot,
   - semicolon-light plus attached-block control flow still crosses a tight `StatementSplit` / `Scanner::FlowRules` / `ControlFlow` / `RewritePipeline` seam,
