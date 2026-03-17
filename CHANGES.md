@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `merge_hash(...)` Helper
+## Summary
+Extended the method-like DSL migration track with parser-oriented `merge_hash(...)` value helpers. Fluent and structured authoring now agree on representative hash/object layering flows across assignment sources, return payloads, and flow-helper composition on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `merge_hash(hash_or_hash_expr1, ..., hash_or_hash_exprN)` to method-value lowering as a pure hash/object layering helper:
+  - returns one new merged hash/object value,
+  - keeps source hashes untouched unless the caller explicitly assigns the result back,
+  - lets later arguments override earlier keys,
+  - and treats undefined hash-valued expressions as contributing no key/value pairs.
+- Extended flow/value/payload paths so `merge_hash(...)` lowers correctly in:
+  - hash assignment sources,
+  - general `return(payload)` payloads,
+  - and flow-helper composition such as `has_key(merge_hash(...), "kind")`.
+- Extended fluent `.return(merge_hash(...))` payload detection so the general-return path recognizes `merge_hash(...)` as one helper-valued payload rather than misclassifying it as a non-general return shape.
+- Added focused regression locks for:
+  - direct emitted lowering of representative merge forms,
+  - fluent-versus-structured action-edge parity,
+  - and fluent-versus-structured lifecycle parity.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `coalesce(...)` Value Helpers
 ## Summary
 Extended the method-like DSL migration track with parser-oriented `coalesce(...)` value helpers. Fluent and structured authoring now agree on representative first-defined fallback chains across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces.

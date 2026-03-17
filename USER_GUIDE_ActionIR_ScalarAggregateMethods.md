@@ -542,6 +542,37 @@ That means:
 - use `has_key(...)` when the parser is asking “does this shape include this field?”,
 - use `is_defined(scalaref(...))` when the parser is asking “is the resolved field value defined?”.
 
+### Hash/object layering with `merge_hash(...)`
+`merge_hash(...)` is the parser-oriented helper for “build one new object from several object layers.”
+
+Examples:
+
+```text
+merge_hash(hash(meta), hash("stage", "normalized"))
+merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name)))
+merge_hash(hash(base_meta), hash(overrides), hash("kind", "NODE"))
+```
+
+Use cases:
+- keep one original working hash untouched while building one normalized view,
+- overlay canonical metadata fields after a fallback object has been chosen,
+- compose hash/object construction the same way we already compose scalar and array expressions.
+
+Examples in context:
+
+```text
+assign(hash(merged_meta), merge_hash(hash(base_meta), hash("stage", "normalized")))
+assign(hash(merged_meta), merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name))))
+return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta)))))
+if(has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind"))
+```
+
+Important semantic note:
+- `merge_hash(...)` returns one new hash/object value,
+- later arguments override earlier keys,
+- undefined hash-valued expressions simply contribute no pairs,
+- and the helper itself does not mutate the source hashes.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -934,6 +965,43 @@ That is a good example of the LinkedSpec direction:
 - keep the expression layer functional and composable,
 - keep the semantics parser-oriented,
 - and avoid dropping out to raw host-language counting just to ask one simple question about a returned object.
+
+## Worked example: layer object metadata with `merge_hash(...)`
+This is the pattern to use when a parser wants one canonical metadata object built from:
+- a stable base layer,
+- a possibly missing returned metadata layer,
+- and one final normalization layer.
+
+```text
+-> metadata_layering[1] {
+  declare(hash, base_meta=hash("kind", "NODE", "source", "rule"))
+  declare(hash, merged_meta)
+
+  assign(
+    hash(merged_meta),
+    merge_hash(
+      hash(base_meta),
+      coalesce(scalaref(retv, {meta}), hash("kind", "fallback")),
+      hash("stage", "normalized")
+    )
+  )
+
+  if(has_key(hash(merged_meta), "kind"))
+    return(merge_hash(
+      hash(merged_meta),
+      hash("meta_key_count", count_keys(hash(merged_meta)))
+    ))
+  else
+    return(hash("kind", "BROKEN_META"))
+  endif
+}
+```
+
+What this example teaches:
+- `merge_hash(...)` layers whole object values the same way `coalesce(...)` layers scalar or aggregate fallbacks,
+- the result can be stored in one working hash and reused later in the rule,
+- `has_key(...)` can branch on the merged object shape,
+- and `count_keys(...)` can derive summary metadata from that merged object without leaving the DSL.
 
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.

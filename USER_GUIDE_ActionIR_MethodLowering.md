@@ -22,6 +22,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `count(...)`
 - `count_keys(...)`
 - `has_key(...)`
+- `merge_hash(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -424,6 +425,41 @@ assign(scalar(has_kind), has_key(hash(meta), "kind"))
 assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
 if(has_key(hash(meta), "kind")); ... endif()
 return(hash("has_kind", has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")))
+```
+
+## `merge_hash(hash_or_hash_expr1, hash_or_hash_expr2, ..., hash_or_hash_exprN)`
+Use `merge_hash(...)` when you want one new layered hash/object value built from working hashes, constructor hashes, and other hash-valued expressions.
+
+Examples:
+
+```text
+merge_hash(hash(meta), hash("stage", "normalized"))
+merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name)))
+merge_hash(hash(base_meta), hash(overrides), hash("kind", "NODE"))
+```
+
+Typical uses:
+- layer parser-owned metadata over one base object without mutating the inputs,
+- add canonical fields like `"stage"` or `"kind"` after one fallback chain has chosen the base object,
+- return one merged object directly from `return(...)` instead of allocating several temporary hashes first.
+
+Important semantic note:
+- `merge_hash(...)` returns one new hash/object value,
+- it does **not** mutate any source hash on its own,
+- later arguments override earlier keys when the same key appears more than once,
+- and undefined hash-valued expressions contribute nothing rather than throwing one error.
+
+That means:
+- `merge_hash(hash(meta), hash("kind", "NODE"))` keeps all existing `meta` keys but forces `kind` to `NODE`,
+- `merge_hash(hash(base_meta), hash(overrides))` lets `overrides` win for overlapping keys,
+- and `merge_hash(coalesce(...), hash("stage", "normalized"))` works well when one base object may be missing entirely.
+
+Examples in context:
+
+```text
+assign(hash(merged_meta), merge_hash(hash(base_meta), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized")))
+if(has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")); ... endif()
+return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta)))))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`
