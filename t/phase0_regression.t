@@ -24029,6 +24029,118 @@ SPEC
         'lifecycle merge_hash fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_drop_keys_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('drop_keys(hash(meta), "debug", "span")'),
+        'do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug", "span"}; \%__ls_drop } else { {} } }',
+        'drop_keys(...) lowers working hashes into a pure filtered hashref expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('has_key(drop_keys(hash(meta), "debug"), "kind")'),
+        'do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        'drop_keys(...) composes inside flow expressions through other hash/object helpers'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(drop_keys(merge_hash(hash(meta), hash("kind", "node"), hash("debug", 1)), "debug"))'),
+        'return do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }',
+        'drop_keys(...) lowers inside general return payloads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(hash(meta), drop_keys(merge_hash(hash(meta), hash("kind", "node"), hash("debug", 1)), "debug"))'),
+        '%meta = (do { my $__ls_hash_init = do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        'drop_keys(...) lowers inside hash assignment sources'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_drop_keys_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_keys helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_keys helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge drop_keys helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge drop_keys helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge drop_keys helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge drop_keys helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge drop_keys helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge drop_keys helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge drop_keys helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge drop_keys helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge drop_keys helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge drop_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_drop_keys_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")).assign(scalar(has_kind), has_key(hash(cleaned), "kind")).if(scalar(has_kind)).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_keys helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_keys helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle drop_keys helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle drop_keys helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle drop_keys helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle drop_keys helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle drop_keys helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle drop_keys helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle drop_keys helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle drop_keys helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle drop_keys helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle drop_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

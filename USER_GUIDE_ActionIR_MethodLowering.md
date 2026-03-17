@@ -23,6 +23,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `count_keys(...)`
 - `has_key(...)`
 - `merge_hash(...)`
+- `drop_keys(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -460,6 +461,42 @@ Examples in context:
 assign(hash(merged_meta), merge_hash(hash(base_meta), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized")))
 if(has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")); ... endif()
 return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta)))))
+```
+
+## `drop_keys(hash_or_hash_expr, key_expr1, key_expr2, ..., key_exprN)`
+Use `drop_keys(...)` when you want one new hash/object value with selected keys removed from an existing working hash or hash-valued expression.
+
+Examples:
+
+```text
+drop_keys(hash(meta), "debug")
+drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug", "span")
+drop_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "raw_text")
+```
+
+Typical uses:
+- strip debug-only or span-only fields before returning one canonical object,
+- build one branch-local normalized view without mutating the original working hash,
+- combine omission with `merge_hash(...)`, `count_keys(...)`, and `has_key(...)` in one composed expression tree.
+
+Important semantic note:
+- `drop_keys(...)` returns one new hash/object value,
+- it does **not** mutate the source hash on its own,
+- each named key is removed from the returned value if present,
+- and undefined hash-valued expressions simply turn into one empty returned object.
+
+That means:
+- `drop_keys(hash(meta), "debug")` preserves all of `meta` except `debug`,
+- `drop_keys(merge_hash(...), "span", "raw_text")` works well after one normalization merge,
+- and `has_key(drop_keys(hash(meta), "debug"), "kind")` lets a flow condition branch on the cleaned object shape directly.
+
+Examples in context:
+
+```text
+assign(hash(cleaned_meta), drop_keys(hash(meta), "debug", "span"))
+assign(hash(cleaned_meta), drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))
+if(has_key(drop_keys(hash(meta), "debug"), "kind")); ... endif()
+return(drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`

@@ -63,6 +63,8 @@ They take effect when the expression appears inside a statement or helper that c
 - `has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")` -> `do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }`
 - `merge_hash(hash(meta), hash("stage", "normalized"))` -> `{%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}`
 - `merge_hash(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("source", scalar(rule_name)))` -> `{do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => $rule_name}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}`
+- `drop_keys(hash(meta), "debug")` -> `do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }`
+- `drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug", "span")` -> `do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug", "span"}; \%__ls_drop } else { {} } }`
 - `coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")` -> `do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `coalesce(scalaref(retv, {parts}), array("empty"))` -> `do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }`
 - `flat_array(items)` -> `@items`
@@ -88,6 +90,7 @@ Important nuance:
 - `assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))))` -> `$meta_key_count = do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }`
 - `assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))` -> `$has_kind = do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{meta}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }`
 - `assign(hash(merged_meta), merge_hash(hash(meta), hash("stage", "normalized")))` -> `%merged_meta = (%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () })`
+- `assign(hash(cleaned_meta), drop_keys(hash(meta), "debug", "span"))` -> `%cleaned_meta = (do { my $__ls_hash_init = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug", "span"}; \%__ls_drop } else { {} } }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })`
 - `assign(scalar(capt_joined), join_values('', array(capt)))` -> `$capt_joined = join('', @capt)`
 - `assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))` -> `$name = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `assign(scalar(retv), call(Leaf))` -> `$retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)`
@@ -115,6 +118,7 @@ Important nuance:
 - `return(array_copy(array(items)))` -> `return [@items]`
 - `return(hash("content", coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))` -> `return {"content" => do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }}`
 - `return(merge_hash(hash(meta), hash("stage", "normalized")))` -> `return {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}`
+- `return(drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))` -> `return do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }`
 - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))` -> `return ["?subprogram_declaration:", @IMATCH_LIST]`
 - `return(array("semantic", flat(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
 - `return(array("semantic", flatten(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
@@ -137,6 +141,7 @@ Important nuance:
 - `is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`
 - `has_key(hash(meta), "kind")` -> `((exists $meta{"kind"}) ? 1 : 0)`
 - `has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")` -> `do { my $__ls_has_key = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }`
+- `has_key(drop_keys(hash(meta), "debug"), "kind")` -> `do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }`
 - `num_gt(count(array(parts)), 0)` -> `(scalar(@parts) > 0)`
 - `num_gt(count_keys(hash(meta)), 1)` -> `(scalar(keys %meta) > 1)`
 - `eq(lowercase(trim(scalaref(retv, {type}))), "word")` -> `(do { my $__ls_lower = do { my $__ls_trim = $retv->{type}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower } eq "word")`

@@ -168,7 +168,7 @@ sub _normalize_method_tag_expr {
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
-#           `array(...)`, `merge_hash(...)`, `flat(...)`)
+#           `array(...)`, `merge_hash(...)`, `drop_keys(...)`, `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -418,6 +418,34 @@ sub _lower_method_value_expr {
 
   return '{'.join(', ', @parts).'}';
  }
+ if ($method_call && $method_call->{method} eq 'drop_keys') {
+  my $drop_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  return undef unless $drop_args && @$drop_args >= 2;
+
+  my $target_expr = $trim_action_ir_value->($drop_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $lowered_target;
+  my $hash_symbol = $extract_hash_symbol_name->($target_expr);
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+   $lowered_target = '\\%'.$hash_symbol;
+  } else {
+   $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  }
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  my @lowered_keys;
+  foreach my $arg (@{$drop_args}[1 .. $#$drop_args]) {
+   my $key_expr = $trim_action_ir_value->($arg);
+   return undef unless defined($key_expr) && length($key_expr);
+   my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+   return undef unless defined($key_lowered) && length($key_lowered);
+   push @lowered_keys, $key_lowered;
+  }
+
+  return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{'.join(', ', @lowered_keys).'}; \%__ls_drop } else { {} } }';
+ }
  if ($method_call && $method_call->{method} eq 'join_values') {
   my $join_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
   return undef unless $join_args;
@@ -526,7 +554,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|count_keys|has_key|merge_hash|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|count_keys|has_key|merge_hash|drop_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -534,7 +562,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|count_keys|has_key|merge_hash|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|count_keys|has_key|merge_hash|drop_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

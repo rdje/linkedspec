@@ -573,6 +573,37 @@ Important semantic note:
 - undefined hash-valued expressions simply contribute no pairs,
 - and the helper itself does not mutate the source hashes.
 
+### Hash/object omission with `drop_keys(...)`
+`drop_keys(...)` is the parser-oriented helper for “build one cleaned object by removing selected fields.”
+
+Examples:
+
+```text
+drop_keys(hash(meta), "debug")
+drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug", "span")
+drop_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "raw_text")
+```
+
+Use cases:
+- strip debug-only or transport-only fields before one canonical return,
+- branch on one cleaned object shape without mutating the working hash,
+- compose omission directly after one `merge_hash(...)` layer instead of allocating manual temporary hashes.
+
+Examples in context:
+
+```text
+assign(hash(cleaned_meta), drop_keys(hash(meta), "debug", "span"))
+assign(hash(cleaned_meta), drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))
+return(drop_keys(merge_hash(hash(cleaned_meta), hash("meta_key_count", count_keys(hash(cleaned_meta)))), "debug"))
+if(has_key(drop_keys(hash(meta), "debug"), "kind"))
+```
+
+Important semantic note:
+- `drop_keys(...)` returns one new hash/object value,
+- the source hash stays untouched unless you explicitly assign the result back,
+- each listed key is removed if present,
+- and if the incoming hash-valued expression is undefined, the helper returns one empty object.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -1002,6 +1033,40 @@ What this example teaches:
 - the result can be stored in one working hash and reused later in the rule,
 - `has_key(...)` can branch on the merged object shape,
 - and `count_keys(...)` can derive summary metadata from that merged object without leaving the DSL.
+
+## Worked example: drop noisy object fields before returning
+This is the pattern to use when a parser wants to preserve one rich working object internally but expose one cleaner external payload.
+
+```text
+-> metadata_cleanup[1] {
+  declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "span", "12:14"))
+  declare(hash, cleaned_meta)
+
+  assign(
+    hash(cleaned_meta),
+    drop_keys(
+      merge_hash(hash(meta), hash("stage", "normalized")),
+      "debug",
+      "span"
+    )
+  )
+
+  if(has_key(hash(cleaned_meta), "kind"))
+    return(merge_hash(
+      hash(cleaned_meta),
+      hash("meta_key_count", count_keys(hash(cleaned_meta)))
+    ))
+  else
+    return(hash("kind", "BROKEN_META"))
+  endif
+}
+```
+
+What this example teaches:
+- `merge_hash(...)` can add canonical fields before cleanup,
+- `drop_keys(...)` can remove transport/debug noise without mutating the original working hash,
+- the cleaned object can still drive `has_key(...)` and `count_keys(...)`,
+- and the whole normalization story stays inside the same parser-oriented expression layer.
 
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.

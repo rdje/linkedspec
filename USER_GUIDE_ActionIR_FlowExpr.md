@@ -260,6 +260,7 @@ is_nonempty(scalaref(retv, {content}))
 has_key(hash(meta), "kind")
 has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
 has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
+has_key(drop_keys(hash(meta), "debug"), "kind")
 num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
@@ -371,10 +372,21 @@ else;
 endif()
 ```
 
+### Example: branch on one cleaned object shape
+
+```text
+if(has_key(drop_keys(merge_hash(hash(meta), hash("stage", "normalized"), hash("debug", 1)), "debug"), "kind"));
+  return(hash("kind", "HAS_CLEAN_KIND"));
+else;
+  return(hash("kind", "NO_CLEAN_KIND"));
+endif()
+```
+
 ## Recommendations
 - Prefer `is_defined(...)` / `is_undefined(...)` when the real question is presence versus absence.
 - Prefer `has_key(...)` when the real question is object shape: “does this key exist at all?”
 - Prefer `merge_hash(...)` inside a flow condition when you need to branch on one normalized or layered object shape without mutating the original working hash first.
+- Prefer `drop_keys(...)` inside a flow condition when you need to ignore debug or transport-only fields before asking one object-shape question.
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
 - Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
 - Do not use `is_defined(scalaref(...))` as a substitute for `has_key(...)` when you specifically need key existence semantics.

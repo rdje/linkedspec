@@ -161,11 +161,11 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
    return '('.$+{payload}.')';
   }
-  if ($hash_ctor && $hash_ctor->{method} eq 'merge_hash') {
-   my $merged_expr = _lower_declare_value_expr($trimmed, $deps);
-   return undef unless defined($merged_expr) && length($merged_expr);
-   return '('.$+{payload}.')' if $merged_expr =~ /^\{(?<payload>.*)\}$/s;
-   return undef;
+  if ($hash_ctor && ($hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'drop_keys')) {
+   my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
+   return undef unless defined($derived_expr) && length($derived_expr);
+   return '('.$+{payload}.')' if $derived_expr =~ /^\{(?<payload>.*)\}$/s;
+   return '(do { my $__ls_hash_init = '.$derived_expr.'; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })';
   }
  }
 
