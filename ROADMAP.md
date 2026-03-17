@@ -415,6 +415,35 @@ This is a saved future-enhancement note, not an active implementation item.
 | Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
 | Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
 
+## Deferred Architectural Concern Notes
+These are tracked implementation concerns, not immediate blockers.
+
+- Bootstrap frontend concentration:
+  - [BootstrapSpec/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/BootstrapSpec/Core.pm) still owns too many syntax-front-end responsibilities in one file:
+    - hardcoded bootstrap rule descriptors,
+    - fluent-chain rendering,
+    - attached-block `if(...)` tail parsing,
+    - and several balanced-text parsing helpers.
+  - Future work should keep splitting syntax-owner responsibilities there so new DSL surfaces do not keep accumulating in one bootstrap monolith.
+- Control-flow parsing and rewrite seam:
+  - semicolon-light and attached-block control-flow now depends on a tight seam across:
+    - [StatementSplit/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm),
+    - [Scanner/FlowRules.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm),
+    - [ControlFlow.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/ControlFlow.pm),
+    - and [RewritePipeline.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/RewritePipeline.pm).
+  - The current behavior is working, but several balanced-delimiter and flow-state concepts are still implemented in multiple places.
+  - Future cleanup should reduce duplicated parsing/state logic and strengthen shared normalization contracts there.
+- Backend portability ceiling:
+  - final runtime handler generation in [SpecEntry.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/SpecEntry.pm) and [Compiler.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Compiler.pm) still depends on Perl string assembly plus dynamic eval.
+  - That remains the clearest backend-portability and runtime-fragility ceiling even though the ActionIR/value-expression layer is becoming much more backend-neutral.
+  - Future work should move toward a cleaner backend emission boundary or a more explicit emitted-handler IR.
+- Frontend hardening gap:
+  - [Validation.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Validation.pm) is still much shallower than the currently supported DSL surface.
+  - Phase 2 should close that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
+- Sequencing rule for these concerns:
+  - keep them tracked and visible,
+  - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.
+
 ### Detailed Status Notes
 - Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
 - Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).

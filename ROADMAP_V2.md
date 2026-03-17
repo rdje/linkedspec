@@ -155,6 +155,14 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
    - user guide,
    - session memory.
 
+## Deferred Architectural Risk Notes
+- Keep feature addition ahead of broad refactors unless a concrete bug forces reprioritization.
+- Still track these seams explicitly:
+  - [BootstrapSpec/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/BootstrapSpec/Core.pm) remains the main bootstrap/frontend syntax hotspot.
+  - [StatementSplit/Core.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm), [Scanner/FlowRules.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm), [ControlFlow.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/ControlFlow.pm), and [RewritePipeline.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/ActionIR/RewritePipeline.pm) form one correctness-critical semicolon-light/attached-block flow seam.
+  - [SpecEntry.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/SpecEntry.pm) plus [Compiler.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Compiler.pm) still define the main backend-portability ceiling because runtime handlers are emitted as Perl source strings and evaled.
+  - [Validation.pm](/Users/richarddje/Documents/github/linkedspec/perl/LinkedSpec/Validation.pm) still trails the supported DSL surface and remains a Phase 2 hardening target.
+
 ## Deferred Future Note
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
   - explicit `AND`,

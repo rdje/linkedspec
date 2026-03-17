@@ -1,5 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Docs Slice: Track Deferred Architectural Concerns
+## Summary
+Captured the current non-blocking architecture concerns as explicit tracked notes instead of leaving them implicit in conversation or code review memory.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Logged four concrete deferred concerns:
+  - `BootstrapSpec::Core` remains the main bootstrap/frontend syntax concentration point.
+  - semicolon-light and attached-block control flow still depends on a tight `StatementSplit` / `Scanner::FlowRules` / `ControlFlow` / `RewritePipeline` seam.
+  - final runtime handler generation in `SpecEntry` / `Compiler` still uses Perl source-string assembly plus eval and remains the clearest backend-portability ceiling.
+  - `Validation.pm` still trails the currently supported DSL surface enough to stay a clear Phase 2 hardening target.
+- Recorded the sequencing rule too:
+  - keep these risks visible,
+  - but continue prioritizing missing user-facing DSL features unless one of those seams turns into a concrete bug or blocks a planned feature.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `sorted_keys(...)` Helper
 ## Summary
 Extended the method-like DSL migration track with parser-oriented `sorted_keys(...)` value helpers. Fluent and structured authoring now agree on representative stable hash/object-to-array projection flows across array assignment sources, return payloads, and array-reducer composition on both action-edge and lifecycle surfaces.

@@ -1,6 +1,11 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Logged a deferred architecture-risk note so future slices keep four concrete seams visible without reprioritizing away from feature work yet:
+  - `BootstrapSpec::Core` remains the main bootstrap/frontend syntax hotspot,
+  - semicolon-light plus attached-block control flow still crosses a tight `StatementSplit` / `Scanner::FlowRules` / `ControlFlow` / `RewritePipeline` seam,
+  - final runtime handler generation in `SpecEntry` / `Compiler` is still Perl source-string assembly plus eval and therefore the clearest backend-portability ceiling,
+  - and `Validation.pm` still lags the supported DSL surface enough to remain a clear Phase 2 hardening target.
 - 2026-03-17: Added parser-oriented `drop_keys(...)` pure hash/object-cleanup lowering so `.spec` rules can remove debug or transport-only fields from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `pick_keys(...)` pure hash/object-projection lowering so `.spec` rules can keep only one explicit field set from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `sorted_keys(...)` stable hash/object-to-array projection lowering so `.spec` rules can derive deterministic key-list arrays from working hashes and hash-valued expressions inside canonical value expressions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
