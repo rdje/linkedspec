@@ -52,6 +52,8 @@ They take effect when the expression appears inside a statement or helper that c
 - `hash("kind", "node", "item", scalar(name))` -> `{"kind" => "node", "item" => $name}`
 - `array_copy(array(items))` -> `[@items]`
 - `array_values(array(items))` -> `[@items]` (compatibility alias for `array_copy(...)`)
+- `coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")` -> `do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
+- `coalesce(scalaref(retv, {parts}), array("empty"))` -> `do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }`
 - `flat_array(items)` -> `@items`
 - `flat(array(parts))` -> `@parts`
 - `flatten(array(parts))` -> `@parts`
@@ -71,6 +73,7 @@ Important nuance:
 - `assign(scalar(closing_token), LMATCH)` -> `$closing_token = $LMATCH`
 - `assign(scalar(flag), or(scalar(on), scalar(off)))` -> `$flag = (($on) || ($off))`
 - `assign(scalar(capt_joined), join_values('', array(capt)))` -> `$capt_joined = join('', @capt)`
+- `assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))` -> `$name = do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }`
 - `assign(scalar(retv), call(Leaf))` -> `$retv = &{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)`
 - `assign(array(items), array(scalar(retv)))` -> `@items = ($retv)`
 - `assign(array(items), array())` -> `@items = ()`
@@ -94,6 +97,7 @@ Important nuance:
 - `return({ item => scalar(foo_hash, key), list => [scalar(name), 123] })` -> `return { item => $foo_hash{$key}, list => [$name, 123] }`
 - `return(hash("kind", "node", "item", scalar(foo_hash, key), "list", array(scalar(name), 123)))` -> `return {"kind" => "node", "item" => $foo_hash{$key}, "list" => [$name, 123]}`
 - `return(array_copy(array(items)))` -> `return [@items]`
+- `return(hash("content", coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))` -> `return {"content" => do { my $__ls_coalesce = $retv->{content}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = $IMATCH; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }}`
 - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))` -> `return ["?subprogram_declaration:", @IMATCH_LIST]`
 - `return(array("semantic", flat(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
 - `return(array("semantic", flatten(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
@@ -125,6 +129,7 @@ Important nuance:
 - `num_ne(scalar(count), 0)` -> `($count != 0)`
 - `num_gt(scalar(index), 3)` -> `($index > 3)`
 - `num_ge(scalar(index), 3)` -> `($index >= 3)`
+- `eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")` -> `(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } eq "WORD")`
 - `num_lt(scalar(index), 3)` -> `($index < 3)`
 - `num_le(scalar(depth), 8)` -> `($depth <= 8)`
 - `matches(scalar(token), /^[A-Z_]+$/)` -> `($token =~ /^[A-Z_]+$/)`

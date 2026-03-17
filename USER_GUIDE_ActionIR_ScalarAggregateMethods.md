@@ -131,6 +131,30 @@ assign(scalar(csv_text), join_values(", ", array(parts)))
 return(hash("text", join_values("", array(chars))))
 ```
 
+### Defaulting and coalescing scalar values
+
+```text
+coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")
+coalesce(scalar(explicit_name), scalar(fallback_name), "unnamed")
+```
+
+Use `coalesce(...)` when you want the first **defined** value in a fallback chain.
+
+This is an important semantic detail:
+- `coalesce(...)` does **not** skip `0`,
+- it does **not** skip `""`,
+- and it does **not** skip a defined empty aggregate reference.
+
+So it behaves like a parser-oriented "first defined value wins" helper, not a generic truthiness filter.
+
+Examples:
+
+```text
+assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+return(hash("name", coalesce(scalar(explicit_name), scalar(fallback_name), "unnamed")))
+if(eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD"))
+```
+
 ### String scalars read from returned payloads
 
 ```text
@@ -339,6 +363,20 @@ return(hash("items", array_copy(array(items))))
 push_value(array(nodes), array_copy(array(keyval_pairs)))
 ```
 
+### Defaulting aggregate values with `coalesce(...)`
+`coalesce(...)` also works when the values are aggregate refs rather than plain scalars.
+
+Examples:
+
+```text
+coalesce(scalaref(retv, {parts}), array("empty"))
+coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
+```
+
+That is useful when:
+- a child payload may or may not provide one structured field,
+- but the current rule still wants a canonical array/hash value to return downstream.
+
 ### Array flattening and list-context insertion
 
 ```text
@@ -447,6 +485,7 @@ declare(hash, meta=hash("kind", "node", "depth", scalar(depth)))
 
 ```text
 assign(scalar(token), scalaref(retv, {content}))
+assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
 assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
 assign(hash(meta), hash("head", scalar(items, 0), "content", scalaref(retv, {content})))
 ```
@@ -463,6 +502,7 @@ push_value(array(payloads), array_copy(array(parts)))
 
 ```text
 return(hash("type", "NODE", "content", scalar(name)))
+return(hash("type", "NODE", "content", coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")))
 return(array("?node:", scalar(name), array_copy(array(parts))))
 return(hash("meta", hash("depth", scalar(depth)), "items", array_copy(array(items))))
 ```
@@ -600,6 +640,33 @@ What this example teaches:
 - hashes are pushed into one accumulator array,
 - strings are pushed into another accumulator array,
 - the final return wraps both arrays in one object payload.
+
+## Worked example: parser-oriented defaulting with `coalesce(...)`
+This example shows the most common coalescing pattern:
+- prefer a returned field,
+- then prefer the immediate match,
+- then fall back to one explicit literal.
+
+```text
+I {
+  declare(scalar, chosen_type, chosen_content)
+}
+
+-> child {
+  assign(scalar(chosen_type), coalesce(scalaref(retv, {type}), "UNKNOWN"))
+  assign(scalar(chosen_content), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+  return(hash(
+    "type", scalar(chosen_type),
+    "content", scalar(chosen_content),
+    "parts", coalesce(scalaref(retv, {parts}), array("empty"))
+  ))
+}
+```
+
+What this example teaches:
+- `coalesce(...)` keeps the rule expression-oriented,
+- it avoids an extra ladder of marker-style fallback branches when the logic is just “pick the first defined value,”
+- and it works for both scalar payload fields and aggregate payload fields.
 
 ## Worked example: array snapshot versus flatten
 This distinction matters enough to show side by side.

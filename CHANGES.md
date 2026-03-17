@@ -1,5 +1,41 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `coalesce(...)` Value Helpers
+## Summary
+Extended the method-like DSL migration track with parser-oriented `coalesce(...)` value helpers. Fluent and structured authoring now agree on representative first-defined fallback chains across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_ValueExpr.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `coalesce(value1, value2, ..., valueN)` to method-value lowering as a first-defined fallback helper:
+  - evaluates left to right,
+  - returns the first defined value,
+  - preserves defined `0`, `""`, and defined aggregate refs as valid chosen values,
+  - and therefore acts as a parser-oriented defaulting helper rather than a generic truthiness filter.
+- Extended flow/value/payload paths so `coalesce(...)` lowers correctly in:
+  - assignment sources,
+  - general `return(payload)` payloads,
+  - and comparison inputs inside control-flow expressions.
+- Extended fluent `.return(coalesce(...))` payload detection so the general-return path recognizes `coalesce(...)` as a helper-valued payload rather than misclassifying it as a non-general return shape.
+- Added focused regression locks for:
+  - direct emitted lowering of scalar and aggregate coalescing forms,
+  - fluent-versus-structured action-edge parity,
+  - and fluent-versus-structured lifecycle parity.
+
 ## 2026-03-17 - Design Note: Functional Expression Direction for Scalar and Aggregate Methods
 ## Summary
 Captured the agreed design direction for future scalar and aggregate helper growth. The roadmap now says clearly that LinkedSpec should become more functionally expressive at the value-expression layer, with unlimited composition, clear helper signatures, and parser-oriented semantics, while explicitly avoiding scope creep into lambdas, closures, currying, or a general-purpose FP sublanguage.

@@ -16,6 +16,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `scalaref(...)`
 - `array(...)`
 - `hash(...)`
+- `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
 - `flat(...)`, `flatten(...)`, `flat_array(...)`, `flat_hash(...)`
@@ -263,6 +264,43 @@ Method-DSL migration note:
 - on both action-edge and lifecycle surfaces,
 - and that same supported `join_values(...)` equivalence is now regression-locked inside control-flow branch bodies too,
 - so string-join payload construction is part of the same equivalence contract as the rest of the method-like DSL surface.
+
+## `coalesce(value1, value2, ..., valueN)`
+Use `coalesce(...)` when you want the first **defined** value from a fallback chain.
+
+Examples:
+
+```text
+coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")
+coalesce(scalaref(retv, {parts}), array("empty"))
+coalesce(scalar(explicit_name), scalar(fallback_name), "unnamed")
+```
+
+Important semantic note:
+- `coalesce(...)` is about the first **defined** value,
+- not the first truthy value,
+- and not the first nonempty string.
+
+So these values still count as already chosen if they are defined:
+- `0`
+- `""`
+- `[]`
+- `{}`
+
+That makes `coalesce(...)` a good parser-oriented defaulting helper for explicit values without quietly discarding valid empty-or-zero payloads.
+
+Typical uses:
+- prefer a returned field, but fall back to the current match,
+- prefer a child payload array, but fall back to a constructed default array,
+- keep one canonical "chosen name" or "chosen content" variable without nested marker flow.
+
+Examples in context:
+
+```text
+assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+return(hash("parts", coalesce(scalaref(retv, {parts}), array("empty"))))
+if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); ... endif()
+```
 
 ## `call(rule)` as a value source
 This is one of the most important newer canonical patterns.

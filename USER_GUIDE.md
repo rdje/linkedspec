@@ -317,6 +317,8 @@ Array-normalization pipelines are locked too: fluent and structured authoring no
 
 Case-normalization and filter pipelines are locked too: fluent and structured authoring now agree on representative `assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)) -> lowercase_each(array(parts)) -> return(array_copy(array(parts)))` flows on both action-edge and lifecycle surfaces, so uppercase/uniq/filter/lowercase cleanup is also part of the explicit backend-neutral method-like DSL contract rather than only low-level array-pipeline lowering machinery.
 
+Defaulting/coalescing value helpers are now part of that explicit contract too: fluent and structured authoring now agree on representative `coalesce(...)` fallback chains across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so parser-oriented “first defined value wins” logic no longer needs to hide inside ad hoc raw fallback expressions.
+
 Control-flow syntax itself is still open for ergonomics work. The guides currently show the syntax that is supported today, but that does not mean forms like `else();` and `endif()` are the final UX target; the roadmap explicitly keeps a follow-up open to revisit `if` / `else` / `switch` concrete syntax, reduce punctuation friction, and evaluate more natural block-style and inline-composite authoring forms.
 
 One punctuation-reduction slice has already landed: in structured marker-style control-flow blocks, the zero-arg markers `else`, `endif`, `default`, `endcase`, and `endswitch` are now accepted as bare-keyword aliases for `else()`, `endif()`, `default()`, `endcase()`, and `endswitch()`.

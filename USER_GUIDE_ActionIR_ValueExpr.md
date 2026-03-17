@@ -144,12 +144,26 @@ Examples:
 ```text
 assign(scalar(flag), not(is_empty(scalar(name))))
 assign(scalar(msi_lsi), join_values("", array(capt)))
+assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
 assign(scalar(first_capt), scalar(array(capt), 0))
 assign(scalar(token), scalaref(retv, {content}))
 assign(scalar(retv), call(Leaf))
 ```
 
 This is important because it means you do not need different assignment syntax for different source kinds. One `assign(...)` surface covers many cases.
+
+`coalesce(...)` is now part of that same source family too when you need a parser-oriented default chain.
+
+Example:
+
+```text
+assign(scalar(chosen_name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
+```
+
+Read that as:
+- use the child payload field if it exists,
+- otherwise use the current match,
+- otherwise use the explicit fallback literal.
 
 ## Assignment from raw pass-through expressions
 Today, helper assignment shells can still carry raw host expressions when no dedicated helper exists yet.

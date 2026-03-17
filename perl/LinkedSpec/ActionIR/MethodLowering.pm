@@ -320,6 +320,30 @@ sub _lower_method_value_expr {
 
   return "join($delimiter_expr, \@$array_symbol)";
  }
+ if ($method_call && $method_call->{method} eq 'coalesce') {
+  my $coalesce_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  return undef unless $coalesce_args && @$coalesce_args >= 2;
+
+  my @lowered_args;
+  foreach my $arg (@$coalesce_args) {
+   my $lowered_arg = _lower_method_value_expr($arg, $deps);
+   $lowered_arg = $trim_action_ir_value->($arg) unless defined($lowered_arg) && length($lowered_arg);
+   return undef unless defined($lowered_arg) && length($lowered_arg);
+   push @lowered_args, $lowered_arg;
+  }
+
+  my $build_coalesce_expr;
+  $build_coalesce_expr = sub {
+   my (@parts) = @_;
+   return $parts[0] if @parts == 1;
+
+   my $head = shift @parts;
+   my $tail_expr = $build_coalesce_expr->(@parts);
+   return 'do { my $__ls_coalesce = '.$head.'; defined($__ls_coalesce) ? $__ls_coalesce : '.$tail_expr.' }';
+  };
+
+  return $build_coalesce_expr->(@lowered_args);
+ }
  my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
  return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);
  if ($method_call && ($method_call->{method} eq 'array_values' || $method_call->{method} eq 'array_copy')) {
@@ -389,7 +413,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -397,7 +421,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|join_values|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

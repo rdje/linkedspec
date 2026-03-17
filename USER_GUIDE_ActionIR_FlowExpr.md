@@ -196,9 +196,11 @@ Examples:
 eq(scalaref(retv, {type}), "SPACE")
 ne(scalaref(retv, {type}), "COMMENTS")
 is_nonempty(scalaref(retv, {content}))
+eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
 ```
 
 This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
+It is also useful when the rule wants one parser-oriented defaulting step before the comparison.
 
 ## Worked examples
 ### Example: flush a pending word only if it exists
