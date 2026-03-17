@@ -170,7 +170,7 @@ sub _normalize_method_tag_expr {
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `merge_hash(...)`, `drop_keys(...)`,
 #           `pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`,
-#           `contains(...)`,
+#           `first(...)`, `last(...)`, `contains(...)`,
 #           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
@@ -355,6 +355,42 @@ sub _lower_method_value_expr {
   return undef unless defined($lowered_target) && length($lowered_target);
 
   return 'do { my $__ls_count = '.$lowered_target.'; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }';
+ }
+ if ($method_call && $method_call->{method} eq 'first') {
+  my $first_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $first_args;
+
+  my $target_expr = $trim_action_ir_value->($first_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $array_symbol = $extract_array_symbol_name->($target_expr);
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   return '$'.$array_symbol.'[0]';
+  }
+
+  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  return 'do { my $__ls_first = '.$lowered_target.'; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }';
+ }
+ if ($method_call && $method_call->{method} eq 'last') {
+  my $last_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $last_args;
+
+  my $target_expr = $trim_action_ir_value->($last_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $array_symbol = $extract_array_symbol_name->($target_expr);
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   return '$'.$array_symbol.'[$#'.$array_symbol.']';
+  }
+
+  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  return 'do { my $__ls_last = '.$lowered_target.'; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }';
  }
  if ($method_call && $method_call->{method} eq 'contains') {
   my $contains_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -647,7 +683,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|count|first|last|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -655,7 +691,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|count|first|last|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

@@ -5541,7 +5541,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 14;
+    plan tests => 17;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -5577,6 +5577,21 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(join_values(", ", sorted_keys(hash(meta))), "kind, source")}),
         q{(do { my $__ls_join_values = [sort keys %meta]; defined($__ls_join_values) ? join(", ", @{$__ls_join_values}) : $__ls_join_values } eq "kind, source")},
         'join_values(...) over projected arrays composes inside flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(first_key), first(sorted_keys(hash(meta))))}),
+        q{$first_key = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }},
+        'assign helper accepts first(projected-array-expression) source lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(last(sorted_values(pick_keys(hash(meta), "kind", "source"))))}),
+        q{return do { my $__ls_last = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }},
+        'return(payload) accepts last(projected-array-expression) lowering'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{eq(first(sorted_keys(hash(meta))), "kind")}),
+        q{(do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef } eq "kind")},
+        'first(...) over projected arrays composes inside flow comparisons'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(retv), call(Leaf))'),
@@ -22440,6 +22455,90 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle projected-array join_values fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_first_last_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, first_key).declare(scalar, last_value).assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", scalar(first_key), "last_value", scalar(last_value)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", scalar(first_key), "last_value", scalar(last_value))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge first/last helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge first/last helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge first/last helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge first/last helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge first/last helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge first/last helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge first/last helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge first/last helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge first/last helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge first/last helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge first/last helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge first/last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_first_last_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, first_key).declare(scalar, last_value).assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", scalar(first_key), "last_value", scalar(last_value)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", scalar(first_key), "last_value", scalar(last_value))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle first/last helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle first/last helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle first/last helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle first/last helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle first/last helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle first/last helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle first/last helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle first/last helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle first/last helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle first/last helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle first/last helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle first/last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_join_values_branches_lower_equivalently' => sub {

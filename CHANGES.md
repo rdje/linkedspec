@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `first(...)` and `last(...)`
+
+Extended the method-like DSL migration track with parser-oriented `first(...)` / `last(...)` value helpers. Fluent and structured authoring now agree on representative array-boundary flows across assignment sources, return payloads, and flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `first(array_or_array_expr)` and `last(array_or_array_expr)` lowering for:
+  - direct working arrays such as `first(array(parts))`,
+  - projected arrays such as `last(sorted_values(pick_keys(hash(meta), "kind", "source")))`,
+  - and array-valued fallback chains such as `first(coalesce(scalaref(retv, {parts}), array("fallback")))`.
+- Extended flow/value/payload paths so `first(...)` / `last(...)` lower correctly in:
+  - scalar assignment sources,
+  - direct `return(payload)` payloads,
+  - and comparison inputs such as `eq(first(sorted_keys(hash(meta))), "kind")`.
+- Expanded the user guides with fuller examples showing how boundary reducers pair with `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, and array-valued fallback chains.
+
 ## 2026-03-17 - Method-Like DSL Slice: Broaden `join_values(...)` to Projected Arrays
 
 Extended the method-like DSL migration track by broadening parser-oriented `join_values(...)` lowering from direct working arrays to full array-valued expressions. Fluent and structured authoring now agree on representative joined-string flows that start from projected arrays such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and array-valued `coalesce(...)` chains on both action-edge and lifecycle surfaces.

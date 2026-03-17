@@ -418,6 +418,8 @@ Typical patterns:
 - `hash(...)`
 - `scalaref(...)`
 - `join_values(...)`
+- `first(...)`
+- `last(...)`
 - `array_copy(...)`
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
@@ -428,6 +430,7 @@ Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR
 
 Typical patterns:
 - string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
+- boundary scalars from `first(array_expr)` and `last(array_expr)`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`

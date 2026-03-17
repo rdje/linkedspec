@@ -20,6 +20,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `count(...)`
+- `first(...)`
+- `last(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -381,6 +383,35 @@ assign(scalar(part_count), count(array(parts)))
 assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty"))))
 if(num_gt(count(array(parts)), 0)); ... endif()
 return(hash("part_count", count(coalesce(scalaref(retv, {parts}), array("empty")))))
+```
+
+## `first(array_or_array_expr)` and `last(array_or_array_expr)`
+Use `first(...)` and `last(...)` when you want one scalar boundary value from an array variable or array-valued expression.
+
+Examples:
+
+```text
+first(array(parts))
+last(array(parts))
+first(sorted_keys(hash(meta)))
+last(sorted_values(pick_keys(hash(meta), "kind", "source")))
+first(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Important semantic note:
+- `first(array(name))` reads the first live array element,
+- `last(array(name))` reads the last live array element,
+- `first(projected_array_expr)` and `last(projected_array_expr)` work directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, and array-valued `coalesce(...)` chains,
+- and if the array-valued expression is undefined or empty, both helpers return `undef`.
+
+Examples in context:
+
+```text
+assign(scalar(first_part), first(array(parts)))
+assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
+if(eq(first(sorted_keys(hash(meta))), "kind")); ... endif()
+return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
 ```
 
 ## `contains(array_or_array_expr, value_expr)`

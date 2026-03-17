@@ -499,6 +499,39 @@ Important semantic note:
 - not about string length,
 - and if an array-valued expression is still undefined, `count(...)` falls back to `0`.
 
+### Array boundary values as scalars with `first(...)` and `last(...)`
+`first(...)` and `last(...)` are the parser-oriented reducers for “what is the first item?” and “what is the last item?” when the source is one array or one array-valued helper expression.
+
+Examples:
+
+```text
+first(array(parts))
+last(array(parts))
+first(sorted_keys(hash(meta)))
+last(sorted_values(pick_keys(hash(meta), "kind", "source")))
+first(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Use cases:
+- store one boundary item from a working array in a scalar,
+- branch on the first normalized key or the last normalized value of a projected aggregate,
+- return one canonical summary payload without introducing temporary loop logic.
+
+Examples in context:
+
+```text
+assign(scalar(first_part), first(array(parts)))
+assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
+return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
+if(eq(first(sorted_keys(drop_keys(hash(meta), "debug"))), "kind"))
+```
+
+Important semantic note:
+- `first(...)` and `last(...)` preserve the array-oriented meaning of boundary access,
+- they work on both working arrays and composed array-valued helper expressions,
+- and if an array-valued expression is still undefined or empty, both helpers return `undef`.
+
 ### Array membership as a scalar flag with `contains(...)`
 `contains(...)` is the parser-oriented helper for “does this array currently contain this scalar value?”
 
