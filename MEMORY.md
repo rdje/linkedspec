@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-17: Captured a design note that future scalar and aggregate helper growth should follow a disciplined functional-expression style: unlimited composition, clear helper signatures, pure-expression preference at the value layer, and parser-oriented semantics, while explicitly avoiding scope creep into lambdas, closures, currying, or a general-purpose FP sublanguage.
 - 2026-03-17: Added a dedicated scalar-and-aggregate composition cookbook so string, integer, float-like, array, and hash helper usage is now taught in one place with many worked `.spec` examples and explicit no-DSL-fixed-depth composition guidance.
 - 2026-03-17: Regression-locked the representative `assign(array(...), filter_match(uniq(uppercase_each(array(...))), /.../)) -> lowercase_each(...) -> return(array_copy(...))` case-normalization/filter pipeline between fluent and structured authoring on both action-edge and lifecycle surfaces, so the uppercase/uniq/filter/lowercase family is now explicitly part of the method-like DSL contract.
 - 2026-03-16: Regression-locked mixed per-branch carriers on the outer attached-block switch family, so forms like `case("A") { ... } case("B") ... default { ... }` are now explicit supported surfaces on both structured and final-call fluent action-edge/lifecycle contexts.

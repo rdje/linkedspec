@@ -262,6 +262,35 @@ Status interpretation note:
    - Support nested method composition inside arguments with no fixed depth limit.
    - Keep nested argument composition canonical and backend-neutral across both fluent and structured-block surfaces.
    - Document this as a supported capability plus representative examples; do not try to catalog every legal nesting combination in the roadmap or guides.
+   - Functional-expression direction note:
+     - scalar and aggregate methods should increasingly follow a disciplined functional-expression style,
+     - with pure composable value helpers as the preferred expression layer,
+     - and no DSL-fixed composition cap by design.
+   - Scope guard:
+     - this does **not** mean turning LinkedSpec into a general-purpose functional programming language,
+     - and it does **not** imply near-term support for lambdas, closures, currying, or user-defined higher-order functions.
+   - Design preference:
+     - keep the expression layer elegant, composable, and parser-oriented,
+     - while keeping lowering deterministic across Perl, Rust, and future backends.
+   - Helper-classification note:
+     - prefer method families whose signatures stay clear and teachable, such as:
+       - `scalar -> scalar`,
+       - `scalar -> array`,
+       - `array -> array`,
+       - `array -> scalar`,
+       - `hash -> scalar`,
+       - `hash -> hash`,
+       - and `expr -> bool`.
+     - document helpers as either:
+       - pure expression-producing methods,
+       - or stateful statement-level methods.
+   - Future helper-family direction:
+     - expand missing helper families systematically rather than ad hoc, especially for:
+       - scalar transforms,
+       - array transforms and reducers,
+       - hash/object access and update helpers,
+       - defaulting/coalescing helpers,
+       - and pure aggregate construction/update helpers.
 5. Unified lowering path (Planned)
    - Lower both legacy helpers (`return_a`, `return_m`, etc.) and new method-chain forms into the same canonical IR/lowering pipeline.
    - Lower fluent chains, structured method blocks, and nested composed arguments into the same canonical IR/lowering pipeline.

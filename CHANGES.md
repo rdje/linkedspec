@@ -1,5 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Design Note: Functional Expression Direction for Scalar and Aggregate Methods
+## Summary
+Captured the agreed design direction for future scalar and aggregate helper growth. The roadmap now says clearly that LinkedSpec should become more functionally expressive at the value-expression layer, with unlimited composition, clear helper signatures, and parser-oriented semantics, while explicitly avoiding scope creep into lambdas, closures, currying, or a general-purpose FP sublanguage.
+
+## Changed Files
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Recorded the design preference for:
+  - pure composable scalar/array/hash helper expressions,
+  - no DSL-fixed composition cap by design,
+  - and deterministic backend-neutral lowering across Perl, Rust, and future backends.
+- Recorded the scope guard that this direction does **not** imply:
+  - lambdas,
+  - closures,
+  - currying,
+  - or a full general-purpose functional programming layer.
+- Recorded the helper-design guidance to classify methods by clear value signatures and to distinguish:
+  - pure expression-producing methods,
+  - from stateful statement-level methods.
+- Logged the future helper-family expansion direction for:
+  - scalar transforms,
+  - array transforms and reducers,
+  - hash/object access and update helpers,
+  - defaulting/coalescing helpers,
+  - and pure aggregate construction/update helpers.
+
 ## 2026-03-17 - Documentation Slice: Add Scalar and Aggregate Composition Cookbook
 ## Summary
 Expanded the user-facing method-DSL documentation with a dedicated scalar-and-aggregate cookbook. The docs now teach string, integer, float-like, array, and hash helper composition in one place, with explicit no-DSL-fixed-depth composition guidance and many worked `.spec` examples instead of leaving that story fragmented across only module-owner references.
