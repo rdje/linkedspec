@@ -155,6 +155,38 @@ return(hash("name", coalesce(scalar(explicit_name), scalar(fallback_name), "unna
 if(eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD"))
 ```
 
+### Presence checks versus emptiness checks
+Once you start composing scalar helpers deeply, it becomes important to distinguish:
+- "is a value present at all?"
+- from "is a value nonempty?"
+
+That is the difference between:
+
+```text
+is_defined(scalaref(retv, {content}))
+is_undefined(scalaref(retv, {content}))
+is_empty(scalaref(retv, {content}))
+is_nonempty(scalaref(retv, {content}))
+```
+
+Use `is_defined(...)` / `is_undefined(...)` when presence matters.
+Use `is_empty(...)` / `is_nonempty(...)` when content size matters.
+
+Examples:
+
+```text
+if(is_defined(scalaref(retv, {content})))
+if(is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH))))
+if(is_empty(scalaref(retv, {content})))
+if(is_nonempty(join_values("", array(word))))
+```
+
+Important semantic difference:
+- `""` is still **defined**,
+- `0` is still **defined**,
+- an empty array/hash ref is still **defined**,
+- but those may still be empty for the purposes of `is_empty(...)`.
+
 ### String scalars read from returned payloads
 
 ```text
@@ -376,6 +408,13 @@ coalesce(scalaref(retv, {meta}), hash("kind", "fallback"))
 That is useful when:
 - a child payload may or may not provide one structured field,
 - but the current rule still wants a canonical array/hash value to return downstream.
+
+When you need to branch on presence rather than build a fallback value immediately, pair that with `is_defined(...)` or `is_undefined(...)`:
+
+```text
+if(is_defined(scalaref(retv, {parts})))
+if(is_undefined(scalaref(retv, {meta})))
+```
 
 ### Array flattening and list-context insertion
 
@@ -667,6 +706,29 @@ What this example teaches:
 - `coalesce(...)` keeps the rule expression-oriented,
 - it avoids an extra ladder of marker-style fallback branches when the logic is just “pick the first defined value,”
 - and it works for both scalar payload fields and aggregate payload fields.
+
+## Worked example: presence versus emptiness
+This is the pattern to use when the parser needs to keep three states distinct:
+- field is missing,
+- field is present but empty,
+- field is present and nonempty.
+
+```text
+-> child[1] {
+  if(is_undefined(scalaref(retv, {content})))
+    return(hash("kind", "MISSING_CONTENT"))
+  elseif(is_empty(scalaref(retv, {content})))
+    return(hash("kind", "EMPTY_CONTENT", "content", scalaref(retv, {content})))
+  else
+    return(hash("kind", "HAS_CONTENT", "content", scalaref(retv, {content})))
+  endif
+}
+```
+
+What this example teaches:
+- `is_undefined(...)` is for true absence,
+- `is_empty(...)` is for present-but-empty values,
+- and the two should not be collapsed into one truthiness check.
 
 ## Worked example: array snapshot versus flatten
 This distinction matters enough to show side by side.

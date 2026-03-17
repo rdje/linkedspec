@@ -102,6 +102,33 @@ sub _lower_is_empty_expr {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_defined_target_expr
+# Purpose : Lower `is_defined(...)` / `is_undefined(...)` targets into Perl
+#           value expressions whose definedness can then be tested directly.
+# Args    : ($arg_expr, $deps)
+# Returns : Perl value expression string or undef
+#------------------------------------------------------------------------------
+sub _lower_defined_target_expr {
+ my ($arg_expr, $deps) = @_;
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+
+ return undef unless defined $arg_expr;
+ my $trimmed = $trim_action_ir_value->($arg_expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my $call = $parse_method_function_expr->($trimmed);
+ if ($call) {
+  my $lowered = $lower_method_value_expr->($trimmed);
+  return undef unless defined($lowered) && length($lowered);
+  return $lowered;
+ }
+
+ return $trimmed;
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_flow_composite_expr
 # Purpose : Recursively lower Lisp-like fluent expression trees so control-flow
 #           conditions (`if`, `elseif`, `switch`) and value surfaces share one
@@ -161,6 +188,22 @@ sub _lower_flow_composite_expr {
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
   return undef unless $effective_args;
   return _lower_is_empty_expr($effective_args->[0], $deps);
+ }
+
+ if ($method eq 'is_defined') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
+  return undef unless $effective_args;
+  my $target_expr = _lower_defined_target_expr($effective_args->[0], $deps);
+  return undef unless defined($target_expr) && length($target_expr);
+  return "defined($target_expr)";
+ }
+
+ if ($method eq 'is_undefined') {
+  my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
+  return undef unless $effective_args;
+  my $target_expr = _lower_defined_target_expr($effective_args->[0], $deps);
+  return undef unless defined($target_expr) && length($target_expr);
+  return "(!defined($target_expr))";
  }
 
  if ($method eq 'is_nonempty') {

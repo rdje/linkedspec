@@ -84,6 +84,10 @@ Expanded the user-facing method-DSL documentation with a dedicated scalar-and-ag
 - Updated: `DEVELOPMENT_NOTES.md`
 - Updated: `MEMORY.md`
 
+2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented Definedness Flow Helpers
+
+Added parser-oriented `is_defined(...)` and `is_undefined(...)` flow helpers so `.spec` rules can distinguish “missing” from “empty” without dropping back to ad hoc truthiness. The lowering now works canonically across scalar fields, nested payload reads, and fallback chains such as `coalesce(...)`, and fluent-versus-structured authoring is regression-locked on both action-edge and lifecycle surfaces. The user guides were expanded with direct definedness-versus-emptiness explanations plus fuller worked examples in `USER_GUIDE_ActionIR_FlowExpr.md`, `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`, `USER_GUIDE_ActionIR_EmittedPerlReference.md`, and `USER_GUIDE.md`.
+
 2026-03-17 - Documentation Contract: Treat Clarified Expectations as Standing Policy
 
 Refined the documentation/adoption contract again so that once the user clarifies a project-level expectation for documentation quality, adoption readiness, or example density, that expectation is treated as a standing rule rather than something that should need repeated reminders. This was recorded in `ROADMAP.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md`.

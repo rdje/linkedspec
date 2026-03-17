@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-17: Added parser-oriented `is_defined(...)` / `is_undefined(...)` flow-helper lowering so `.spec` rules can distinguish “missing” from “empty” across scalar fields, nested payload reads, and fallback chains, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Added parser-oriented `coalesce(...)` value-helper lowering so first-defined fallback chains now work canonically across assignment sources, return payloads, and comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - 2026-03-17: Captured a design note that future scalar and aggregate helper growth should follow a disciplined functional-expression style: unlimited composition, clear helper signatures, pure-expression preference at the value layer, and parser-oriented semantics, while explicitly avoiding scope creep into lambdas, closures, currying, or a general-purpose FP sublanguage.
 - 2026-03-17: Added a dedicated scalar-and-aggregate composition cookbook so string, integer, float-like, array, and hash helper usage is now taught in one place with many worked `.spec` examples and explicit no-DSL-fixed-depth composition guidance instead of leaving that story fragmented across only module-owner references.

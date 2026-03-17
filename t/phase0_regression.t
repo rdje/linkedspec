@@ -23350,6 +23350,130 @@ SPEC
         'lifecycle coalesce fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across value fallback usage'
     );
 };
+subtest 'action_rewriter_lowers_definedness_flow_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_defined(scalaref(retv, {content}))'),
+        'defined($retv->{content})',
+        'is_defined(...) lowers nested payload access into a direct defined() check'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))'),
+        '(!defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }))',
+        'is_undefined(...) lowers parser-oriented fallback chains into a negated defined() check'
+    );
+
+    my $defined_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(is_defined(scalaref(retv, {content}))); return(hash("content", scalaref(retv, {content}))); else; return_undef(); endif()'
+    );
+    like(
+        $defined_if,
+        qr/if \(defined\(\$retv->\{content\}\)\) \{/s,
+        'if(is_defined(...)) lowers through the canonical flow-expression path inside branch conditions'
+    );
+
+    my $undefined_if = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'if(is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))); return_undef(); endif()'
+    );
+    like(
+        $undefined_if,
+        qr/if \(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{type\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \$IMATCH \}\)\)\) \{/s,
+        'if(is_undefined(...)) lowers nested coalesce(...) targets inside the same canonical flow-expression path'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_definedness_flow_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(scalar, chosen).if(is_defined(scalaref(retv, {content}))).assign(scalar(chosen), scalaref(retv, {content})).elseif(is_undefined(scalaref(retv, {type}))).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge definedness-helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge definedness-helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge definedness-helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge definedness-helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge definedness-helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge definedness-helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge definedness-helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge definedness-helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge definedness-helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge definedness-helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge definedness-helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_definedness_flow_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(scalar, chosen).if(is_defined(scalaref(retv, {content}))).assign(scalar(chosen), scalaref(retv, {content})).elseif(is_undefined(scalaref(retv, {type}))).assign(scalar(chosen), "MISSING_TYPE").else.assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")).endif.return(hash("chosen", scalar(chosen)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle definedness-helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle definedness-helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle definedness-helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle definedness-helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle definedness-helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle definedness-helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle definedness-helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle definedness-helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle definedness-helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle definedness-helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle definedness-helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

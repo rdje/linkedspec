@@ -1,7 +1,7 @@
 # USER GUIDE - ActionIR `FlowExpr.pm`
 This guide covers the expression-lowering surface implemented by `perl/LinkedSpec/ActionIR/FlowExpr.pm`.
 
-This is the guide to read when you need conditions, boolean composition, comparisons, emptiness checks, and expression nesting.
+This is the guide to read when you need conditions, boolean composition, comparisons, definedness checks, emptiness checks, and expression nesting.
 For exact DSL-to-Perl examples for every boolean/comparison helper discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
 
@@ -12,6 +12,8 @@ In practice, it covers:
 - `or(...)`
 - `and(...)`
 - `not(...)`
+- `is_defined(...)`
+- `is_undefined(...)`
 - `is_empty(...)`
 - `is_nonempty(...)`
 - string comparisons: `eq`, `ne`, `gt`, `ge`, `lt`, `le`
@@ -62,6 +64,45 @@ not(eq(scalar(kind), "ignore"))
 
 Use it to invert one condition.
 
+## Definedness helpers
+### `is_defined(...)`
+Use this when the rule needs to distinguish "missing/undefined" from "defined but empty".
+
+Examples:
+
+```text
+is_defined(scalar(name))
+is_defined(scalaref(retv, {content}))
+is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))
+```
+
+Typical meanings:
+- scalar slot currently has a defined value,
+- child payload field is present,
+- fallback chain has produced a defined result.
+
+Important distinction:
+- `is_defined(...)` is about presence,
+- not about nonempty text or nonempty arrays.
+
+So these still count as defined:
+- `0`
+- `""`
+- `[]`
+- `{}`
+
+### `is_undefined(...)`
+This is the direct inverse convenience helper.
+
+Examples:
+
+```text
+is_undefined(scalaref(retv, {type}))
+is_undefined(coalesce(scalaref(retv, {content}), scalar(IMATCH)))
+```
+
+Use it when the rule should take a missing-value branch only if no defined value is available yet.
+
 ## Emptiness helpers
 ### `is_empty(...)`
 Use it for scalars, arrays, or general expressions.
@@ -79,6 +120,10 @@ Typical meanings:
 - array has no elements,
 - general expression evaluates false/empty.
 
+This is intentionally different from `is_defined(...)`:
+- `is_empty(scalar(name))` treats both `undef` and `""` as empty,
+- `is_defined(scalar(name))` treats `""` as already present.
+
 ### `is_nonempty(...)`
 This is the inverse convenience helper.
 
@@ -88,6 +133,7 @@ Examples:
 is_nonempty(array(word))
 is_nonempty(array(tail))
 is_nonempty(scalar(content))
+is_nonempty(join_values("", array(word)))
 ```
 
 ## String comparisons
@@ -143,6 +189,18 @@ Use this when a branch depends on regex membership rather than equality.
 ## Nested examples
 This expression language is designed for nesting.
 
+### Example: field must exist, even if it is empty
+
+```text
+is_defined(scalaref(retv, {content}))
+```
+
+### Example: child type is still missing after fallback
+
+```text
+is_undefined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))
+```
+
 ### Example: nonempty and not disabled
 
 ```text
@@ -184,6 +242,7 @@ Examples:
 ```text
 declare(scalar, flag=or(scalar(on), scalar(off)))
 assign(scalar(flag), and(is_nonempty(array(items)), scalar(enabled)))
+assign(scalar(has_type), is_defined(scalaref(retv, {type})))
 if(not(is_empty(scalar(name)))); ... endif()
 ```
 
@@ -195,6 +254,8 @@ Examples:
 ```text
 eq(scalaref(retv, {type}), "SPACE")
 ne(scalaref(retv, {type}), "COMMENTS")
+is_defined(scalaref(retv, {content}))
+is_undefined(scalaref(retv, {type}))
 is_nonempty(scalaref(retv, {content}))
 eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
 ```
@@ -232,8 +293,32 @@ elseif(ne(scalaref(retv, {type}), "COMMENTS"));
 endif()
 ```
 
+### Example: separate "missing" from "empty"
+
+```text
+if(is_undefined(scalaref(retv, {content})));
+  return(hash("kind", "MISSING_CONTENT"));
+elseif(is_empty(scalaref(retv, {content})));
+  return(hash("kind", "EMPTY_CONTENT"));
+else;
+  return(hash("kind", "HAS_CONTENT", "content", scalaref(retv, {content})));
+endif()
+```
+
+### Example: fallback branch only when no defined value survives
+
+```text
+if(is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH))));
+  return(hash("kind", "CLASSIFIED", "type", coalesce(scalaref(retv, {type}), scalar(IMATCH))));
+else;
+  return(hash("kind", "UNCLASSIFIED"));
+endif()
+```
+
 ## Recommendations
+- Prefer `is_defined(...)` / `is_undefined(...)` when the real question is presence versus absence.
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness.
+- Do not use `is_defined(...)` as a substitute for `is_nonempty(...)`; an empty string is still defined.
 - Prefer `eq(...)` / `ne(...)` over raw string comparisons when the logic is part of canonical helper flow.
 - Prefer `num_*` helpers over string comparisons for counters, indices, and numeric depths.
 - Keep nested expressions readable; if one condition becomes too large, split the logic by first assigning a temporary flag.

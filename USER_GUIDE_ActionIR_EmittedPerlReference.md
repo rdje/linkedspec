@@ -115,6 +115,9 @@ Important nuance:
 - `or(scalar(on), scalar(off))` -> `(($on) || ($off))`
 - `and(scalar(enabled), scalar(flag))` -> `(($enabled) && ($flag))`
 - `not(scalar(off))` -> `(!($off))`
+- `is_defined(scalaref(retv, {content}))` -> `defined($retv->{content})`
+- `is_undefined(scalaref(retv, {type}))` -> `(!defined($retv->{type}))`
+- `is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH)))` -> `defined(do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH })`
 - `is_empty(array(items))` -> `(!@items)`
 - `is_empty(scalar(name))` -> `(!defined($name) || $name eq '')`
 - `is_nonempty(array(items))` -> `(!((!@items)))`
@@ -136,6 +139,7 @@ Important nuance:
 
 Important nuance:
 - Nested forms compose recursively.
+- `is_defined(...)` and `is_undefined(...)` are presence checks, not emptiness checks, so `""` and `0` remain defined.
 - `if(or(scalar(on), and(not(scalar(off)), is_empty(scalar(name)))))` emits one Perl condition built from the same lowerings listed above.
 
 ### Structured control flow and output (`ControlFlow.pm`)
