@@ -425,6 +425,8 @@ Typical patterns:
 - `last(...)`
 - `take(...)`
 - `take(..., n)`
+- `drop_last(...)`
+- `drop_last(..., n)`
 - `tail(...)`
 - `tail(..., n)`
 - `array_copy(...)`
@@ -441,6 +443,7 @@ Typical patterns:
 - scalar metadata from `length(scalar_expr)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
+- trailing-drop arrays from `drop_last(array_expr)` and counted trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
 - tail arrays from `tail(array_expr)` and counted tail arrays from `tail(array_expr, scalar(skip_count))`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`

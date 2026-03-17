@@ -24,6 +24,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `first(...)`
 - `last(...)`
 - `take(...)`
+- `drop_last(...)`
 - `tail(...)`
 - `contains(...)`
 - `count_keys(...)`
@@ -537,6 +538,46 @@ assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source
 assign(scalar(first_count), count(take(sorted_keys(hash(meta)), 2)))
 if(num_gt(count(take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
 return(hash("first_keys", take(sorted_keys(hash(meta))), "first_count", count(take(sorted_keys(hash(meta)), 2))))
+```
+
+## `drop_last(array_or_array_expr)` and `drop_last(array_or_array_expr, drop_count)`
+Use `drop_last(...)` when you want one array value that contains everything except the last element, or except the last `N` elements when an explicit drop count is supplied.
+
+Examples:
+
+```text
+drop_last(array(parts))
+drop_last(array(parts), 2)
+drop_last(sorted_keys(hash(meta)))
+drop_last(sorted_keys(hash(meta)), scalar(drop_count))
+drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Typical uses:
+- strip one trailing delimiter or terminator from one token array without raw Perl slicing,
+- keep the stable leading part of one projected key/value list while discarding one trailing suffix,
+- express “drop the last `N` items” without temporary arrays,
+- and feed the resulting leading array directly into reducers like `count(...)` or nested reads like `scalar(drop_last(...), 0)`.
+
+Important semantic note:
+- `drop_last(array_expr)` is shorthand for `drop_last(array_expr, 1)`,
+- `drop_last(array(name))` returns one new array value containing every live element before the last one,
+- `drop_last(array_expr, drop_count)` drops the final `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `drop_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, `drop_last(...)`, and array-valued `coalesce(...)` chains,
+- `drop_last(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `drop_last(...)` returns one empty array instead of `undef`.
+
+Examples in context:
+
+```text
+assign(array(leading_parts), drop_last(array(parts)))
+assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
+assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
+return(hash("leading_keys", drop_last(sorted_keys(hash(meta))), "kept_count", count(drop_last(sorted_keys(hash(meta)), 2))))
 ```
 
 ## `contains(array_or_array_expr, value_expr)`

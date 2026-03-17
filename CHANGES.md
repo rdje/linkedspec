@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `drop_last(...)` Helper
+
+Extended the method-like DSL migration track with parser-oriented array `drop_last(...)` value helpers. Fluent and structured authoring now agree on representative “drop the trailing item or trailing `N` items” flows across array assignment sources, direct `return(payload)` expressions, reducer composition, and nested scalar(container, index) reads on both action-edge and lifecycle surfaces.
+
+- Added `drop_last(array_expr)` and `drop_last(array_expr, n)` lowering for:
+  - direct working arrays such as `drop_last(array(parts))` and `drop_last(array(parts), 2)`,
+  - projected array expressions such as `drop_last(sorted_keys(hash(meta)), 2)`,
+  - scalar-valued count expressions such as `drop_last(sorted_keys(...), scalar(drop_count))`,
+  - and array-valued fallback chains such as `drop_last(coalesce(scalaref(retv, {parts}), array("fallback")), 2)`.
+- Semantics are explicit:
+  - omitted drop count defaults to dropping `1` trailing entry,
+  - explicit non-positive or undefined drop counts sanitize to “drop 0 trailing entries” rather than warning,
+  - sources shorter than the requested drop count return one empty array,
+  - and `drop_last(...)` remains one real array-valued helper that can feed `count(...)`, `scalar(container, index)`, `return(payload)`, and array assignment lowering directly.
+- Expanded the user guides with fuller examples showing `drop_last(...)` alongside `take(...)` and `tail(...)`, including literal-count and scalar-count examples inside assignments, returns, and flow expressions.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `take(...)` Helper
 
 Extended the method-like DSL migration track with parser-oriented array `take(...)` value helpers. Fluent and structured authoring now agree on representative “keep the first item or first `N` items” flows across array assignment sources, direct `return(payload)` expressions, reducer composition, and nested scalar(container, index) reads on both action-edge and lifecycle surfaces.

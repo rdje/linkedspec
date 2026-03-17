@@ -708,6 +708,69 @@ Important semantic note:
 - a non-positive take count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
+### Drop the trailing array suffix with `drop_last(...)`
+`drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”.
+
+Examples:
+
+```text
+drop_last(array(parts))
+drop_last(array(parts), 2)
+drop_last(sorted_keys(hash(meta)))
+drop_last(sorted_keys(hash(meta)), scalar(drop_count))
+drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Use cases:
+- strip one trailing delimiter, suffix token, or terminator from one array without raw Perl slicing,
+- preserve the stable leading part of one projected key/value list while ignoring one trailing field,
+- keep one normalized leading array summary in a return payload,
+- and keep suffix-dropping fully composable with `count(...)`, `scalar(container, index)`, `join_values(...)`, `if(...)`, and `switch(...)`.
+
+Examples in context:
+
+```text
+assign(array(leading_parts), drop_last(array(parts)))
+assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
+assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))
+return(hash("leading_parts", drop_last(array(parts)), "leading_keys", drop_last(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
+```
+
+Worked example:
+
+```text
+I {
+  declare(array, keys, leading_keys)
+  declare(scalar, drop_count=1, kept_count=0)
+}
+
+-> header[1] {
+  assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
+  assign(array(leading_keys), drop_last(array(keys), scalar(drop_count)))
+  assign(scalar(kept_count), count(array(leading_keys)))
+  return(
+    hash(
+      "leading_keys", array_copy(array(leading_keys)),
+      "kept_count", scalar(kept_count),
+      "first_kept_key", scalar(array(leading_keys), 0)
+    )
+  )
+}
+```
+
+Important semantic note:
+- `drop_last(array_expr)` defaults to dropping `1` trailing entry when no explicit count is supplied,
+- `drop_last(...)` returns one array value, not one scalar,
+- it works on both direct working arrays and composed array-valued helper expressions,
+- an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(drop_count)`,
+- a source shorter than the requested drop count returns one empty array,
+- a non-positive drop count keeps the whole source array,
+- and an undefined array-valued expression also becomes one empty array rather than `undef`.
+
 ### Array membership as a scalar flag with `contains(...)`
 `contains(...)` is the parser-oriented helper for “does this array currently contain this scalar value?”
 
