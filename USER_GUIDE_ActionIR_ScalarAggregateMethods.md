@@ -344,8 +344,8 @@ assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(remaining), num_sub(count(array(parts)), 1))
 ```
 
-The current arithmetic surface is intentionally narrow: `num_abs(...)`, `num_add(...)`, and `num_sub(...)` are supported, while broader arithmetic families are still future work.
-The next standardized arithmetic helpers `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` extend that same narrow parser-oriented contract without turning the DSL into a general-purpose math language.
+The current arithmetic surface is still intentionally disciplined rather than broad: `num_abs(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` are supported, but the DSL is still not trying to become a general-purpose math language.
+That broader arithmetic family still follows the same narrow parser-oriented contract rather than opening the door to arbitrary host-language numeric code.
 
 ## Float scalar methods
 Float-like scalars follow the same rule as integer-like scalars: carry them through canonical helpers, compare them with `num_*`, compose them with the standardized arithmetic helpers, and return or store them in canonical payload constructors.
@@ -896,8 +896,8 @@ Important semantic note:
 - a non-positive count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
-### String boundary checks with `starts_with(...)` and `ends_with(...)`
-These are the parser-oriented scalar helpers for “does this value begin with this prefix?” and “does it end with this suffix?”
+### String boundary checks with `starts_with(...)`, `ends_with(...)`, and `matches(...)`
+These are the parser-oriented scalar helpers for “does this value begin with this prefix?”, “does it end with this suffix?”, and “does it match this regex?”
 
 Examples:
 
@@ -906,10 +906,13 @@ starts_with(scalar(name), "pre")
 ends_with(scalar(name), "fix")
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+matches(lowercase(trim(scalar(name))), /^node_/)
+matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ```
 
 Useful when:
 - one rule wants a clear prefix/suffix decision without raw host-language string code,
+- one rule wants a regex-membership flag without dropping to ad hoc host-language `=~` code in assignments or return payloads,
 - you want to keep normalization and boundary checking inside one nested value expression,
 - you want to assign one reusable flag and return it later,
 - or you want to branch on a prefix/suffix rule while staying inside the same method-like expression vocabulary.
@@ -920,17 +923,19 @@ Worked example:
 token_shape:
  -> /\w+/
  => Top {
-      declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix)
+      declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix, is_wordish)
 
       assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
       assign(scalar(lowered_name), lowercase(trim(scalar(raw_name))))
       assign(scalar(has_node_prefix), starts_with(scalar(lowered_name), "node_"))
       assign(scalar(has_end_suffix), ends_with(scalar(lowered_name), "_end"))
+      assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
 
       return(hash(
         "name", scalar(lowered_name),
         "has_node_prefix", scalar(has_node_prefix),
-        "has_end_suffix", scalar(has_end_suffix)
+        "has_end_suffix", scalar(has_end_suffix),
+        "is_wordish", scalar(is_wordish)
       ))
     }
 ```
@@ -940,18 +945,22 @@ Representative shorter patterns:
 ```text
 assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
 assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
 return(hash(
   "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
-  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end")
+  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end"),
+  "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
 if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end")))
+if(matches(lowercase(trim(scalar(name))), /^node_/))
 ```
 
 Semantic notes:
-- both helpers return scalar `1` or `0`,
+- all three helpers return scalar `1` or `0`,
 - they compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
 - undefined main values return `0`,
 - undefined prefix/suffix expressions return `0`,
+- `matches(...)` is designed around the same regex literal surface already used by flow predicates, so `/.../flags` remains the standard spelling there too,
 - and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
 
 ### Drop the trailing array suffix with `drop_last(...)` or `drop_back(...)`

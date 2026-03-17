@@ -29,6 +29,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `num_max(...)`
 - `starts_with(...)`
 - `ends_with(...)`
+- `matches(...)`
 - `count(...)`
 - `first(...)`
 - `last(...)`
@@ -491,8 +492,8 @@ num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 
 This is deliberate. The arithmetic surface is now standardized, but it is still parser-oriented and small rather than a full general-purpose math language.
 
-## `starts_with(value_expr, prefix_expr)` and `ends_with(value_expr, suffix_expr)`
-Use these when you want one scalar flag answering “does this normalized string begin with this prefix?” or “does it end with this suffix?”
+## `starts_with(value_expr, prefix_expr)`, `ends_with(value_expr, suffix_expr)`, and `matches(value_expr, /regex/)`
+Use these when you want one scalar flag answering “does this normalized string begin with this prefix?”, “does it end with this suffix?”, or “does it match this regex?”
 
 Examples:
 
@@ -501,19 +502,23 @@ starts_with(scalar(name), "pre")
 ends_with(scalar(name), "fix")
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+matches(lowercase(trim(scalar(name))), /^node_/)
+matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)
 ```
 
 Typical uses:
 - keep one parser-oriented prefix/suffix check inside value lowering instead of dropping to host-language `index(...)` or `substr(...)`,
+- keep one parser-oriented regex-membership check inside value lowering instead of dropping to host-language regex conditionals in assignment or return code,
 - assign one canonical boolean-ish scalar flag into the working state,
 - return one boundary-check flag in payload metadata,
 - and branch on the same helper inside `if(...)`, `elseif(...)`, or `switch(...)` expressions.
 
 Important semantic note:
-- both helpers return `1` or `0`,
+- all three helpers return `1` or `0`,
 - they preserve composability with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
 - if the main value is undefined, the result is `0`,
 - if the prefix/suffix expression is undefined, the result is `0`,
+- `matches(...)` is designed around the same regex surface already used in flow predicates such as `matches(lhs, /regex/)`,
 - and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
 
 Examples in context:
@@ -521,11 +526,14 @@ Examples in context:
 ```text
 assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
 assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {type}), scalar(IMATCH)))), /^[A-Z_]+$/))
 if(starts_with(lowercase(trim(scalar(name))), "node_")); ... endif()
+if(matches(lowercase(trim(scalar(name))), /^node_/)); ... endif()
 if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end"))); ... endif()
 return(hash(
   "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
-  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end")
+  "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end"),
+  "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {type}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
 ```
 

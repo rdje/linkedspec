@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `matches(...)`
+
+Extended the method-like DSL migration track with the scalar regex-membership helper that was already familiar on the flow-predicate side. Fluent and structured authoring now agree on representative regex-membership flag flows across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.
+
+- Added `matches(value_expr, /regex/)` lowering for:
+  - normalized scalar expressions such as `matches(lowercase(trim(scalar(raw_name))), /^prefix/)`,
+  - composed fallback reads such as `matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)`,
+  - and direct return payloads where one canonical regex-membership flag is needed without dropping into host-language `=~` code.
+- Kept the parser-oriented predicate contract:
+  - `matches(...)` stays a pure scalar value helper,
+  - it returns `1` or `0`,
+  - and undefined main values preserve a clean `0` result instead of inventing one truthy fallback.
+- Expanded the user guides with fuller examples showing `matches(...)` in assignment, return, normalized string flows, and value/flow composition.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_abs(...)`
 
 Extended the method-like DSL migration track with the unary numeric absolute-value helper. Fluent and structured authoring now agree on representative magnitude/absolute-distance flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.

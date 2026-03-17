@@ -170,7 +170,7 @@ sub _normalize_method_tag_expr {
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `merge_hash(...)`, `drop_keys(...)`,
 #           `pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`,
-#           `length(...)`, `num_abs(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `contains(...)`,
+#           `length(...)`, `num_abs(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `matches(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `contains(...)`,
 #           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
@@ -549,7 +549,21 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $suffix_expr = $trim_action_ir_value->($ends_with_args->[1]) unless defined($suffix_expr) && length($suffix_expr);
   return undef unless defined($suffix_expr) && length($suffix_expr);
 
-  return 'do { my $__ls_ends_with_value = '.$value_expr.'; my $__ls_ends_with_suffix = '.$suffix_expr.'; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }';
+ return 'do { my $__ls_ends_with_value = '.$value_expr.'; my $__ls_ends_with_suffix = '.$suffix_expr.'; (defined($__ls_ends_with_value) && defined($__ls_ends_with_suffix) && ((length($__ls_ends_with_suffix) == 0) ? 1 : (length($__ls_ends_with_value) >= length($__ls_ends_with_suffix) && substr($__ls_ends_with_value, -length($__ls_ends_with_suffix)) eq $__ls_ends_with_suffix))) ? 1 : 0 }';
+ }
+ if ($method_call && $method_call->{method} eq 'matches') {
+  my $matches_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
+  return undef unless $matches_args;
+
+  my $value_expr = _lower_method_value_expr($matches_args->[0], $deps);
+  $value_expr = $trim_action_ir_value->($matches_args->[0]) unless defined($value_expr) && length($value_expr);
+  return undef unless defined($value_expr) && length($value_expr);
+
+  my $pattern_expr = _lower_method_value_expr($matches_args->[1], $deps);
+  $pattern_expr = $trim_action_ir_value->($matches_args->[1]) unless defined($pattern_expr) && length($pattern_expr);
+  return undef unless defined($pattern_expr) && length($pattern_expr);
+
+  return 'do { my $__ls_matches_value = '.$value_expr.'; defined($__ls_matches_value) ? (($__ls_matches_value =~ '.$pattern_expr.') ? 1 : 0) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'count') {
   my $count_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -1016,7 +1030,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_abs|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_abs|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -1024,7 +1038,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|num_abs|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|num_abs|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

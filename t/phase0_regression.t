@@ -23290,6 +23290,90 @@ SPEC
         'lifecycle scalar boundary helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
+subtest 'method_like_fluent_and_structured_action_scalar_regex_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha).assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)).assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)).return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)); assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)); return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar regex helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar regex helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge scalar regex helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge scalar regex helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge scalar regex helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge scalar regex helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge scalar regex helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge scalar regex helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge scalar regex helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge scalar regex helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge scalar regex helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge scalar regex helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_scalar_regex_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha).assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)).assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)).return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)); assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)); return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar regex helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar regex helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle scalar regex helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle scalar regex helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle scalar regex helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle scalar regex helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle scalar regex helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle scalar regex helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle scalar regex helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle scalar regex helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle scalar regex helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle scalar regex helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'method_like_fluent_and_structured_action_numeric_arithmetic_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
@@ -25202,6 +25286,30 @@ subtest 'action_rewriter_lowers_contains_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", contains(sorted_keys(hash(meta)), "kind")))'),
         'return {"has_kind" => do { my $__ls_contains_array = [sort keys %meta]; my $__ls_contains_needle = "kind"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }}',
         'contains(...) lowers inside general return payloads'
+    );
+};
+subtest 'action_rewriter_lowers_matches_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
+        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
+        'matches(normalized-scalar, /regex/) lowers into a boolean-like regex-membership expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)'),
+        'do { my $__ls_matches_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
+        'matches(...) lowers composed fallback expressions into guarded regex-membership checks'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('matches(lowercase(trim(scalar(raw_name))), /^pre/)'),
+        'do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }',
+        'matches(...) composes inside flow conditions over normalized scalar expressions'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("is_prefixed", matches(lowercase(trim(scalar(raw_name))), /^pre/)))'),
+        'return {"is_prefixed" => do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }}',
+        'matches(...) lowers inside general return payloads'
     );
 };
 subtest 'method_like_fluent_and_structured_action_contains_value_helpers_lower_equivalently' => sub {

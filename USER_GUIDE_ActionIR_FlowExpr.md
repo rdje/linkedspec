@@ -209,6 +209,8 @@ matches(scalar(name), /foo/i)
 
 Use this when a branch depends on regex membership rather than equality.
 
+This same `matches(...)` surface now also exists in value lowering, so the identical regex-membership helper can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
+
 ## Nested examples
 This expression language is designed for nesting.
 
