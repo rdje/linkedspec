@@ -458,14 +458,16 @@ if(eq(first(sorted_keys(hash(meta))), "kind")); ... endif()
 return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
 ```
 
-## `tail(array_or_array_expr)`
-Use `tail(...)` when you want one array value that contains everything except the first element.
+## `tail(array_or_array_expr)` and `tail(array_or_array_expr, drop_count)`
+Use `tail(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied.
 
 Examples:
 
 ```text
 tail(array(parts))
+tail(array(parts), 2)
 tail(sorted_keys(hash(meta)))
+tail(sorted_keys(hash(meta)), scalar(skip_count))
 tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
 tail(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
@@ -473,21 +475,26 @@ tail(coalesce(scalaref(retv, {parts}), array("fallback")))
 Typical uses:
 - implement head/tail style recursive parsing without dropping into host-language slicing,
 - keep one leading token separate while carrying the remainder as a canonical array value,
+- skip the first few stable projected keys or values when the rule has already consumed them elsewhere,
 - skip one normalized projected key and continue working on the rest of the projected array.
 
 Important semantic note:
+- `tail(array_expr)` is shorthand for `tail(array_expr, 1)`,
 - `tail(array(name))` returns one new array value containing every live element after index `0`,
-- `tail(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and array-valued `coalesce(...)` chains,
+- `tail(array_expr, drop_count)` drops the first `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `tail(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
 - `tail(...)` always returns an array value rather than one scalar boundary element,
-- and if the source array is empty, has one element, or the array-valued expression is still undefined, `tail(...)` returns one empty array instead of `undef`.
+- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `tail(...)` returns one empty array instead of `undef`.
 
 Examples in context:
 
 ```text
 assign(array(rest_parts), tail(array(parts)))
+assign(array(rest_parts), tail(array(parts), 2))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
 assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
-if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))), 0)); ... endif()
+if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
 return(hash("rest_keys", tail(sorted_keys(hash(meta))), "rest_count", count(tail(sorted_keys(hash(meta))))))
 ```
 

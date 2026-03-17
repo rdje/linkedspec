@@ -424,6 +424,7 @@ Typical patterns:
 - `first(...)`
 - `last(...)`
 - `tail(...)`
+- `tail(..., n)`
 - `array_copy(...)`
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
@@ -437,7 +438,7 @@ Typical patterns:
 - one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
 - scalar metadata from `length(scalar_expr)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
-- tail arrays from `tail(array_expr)` and projected-array helpers like `tail(sorted_keys(...))`
+- tail arrays from `tail(array_expr)` and counted tail arrays from `tail(array_expr, scalar(skip_count))`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`

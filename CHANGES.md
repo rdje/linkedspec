@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Extend Parser-Oriented `tail(...)` With Explicit Drop Counts
+
+Extended the method-like DSL migration track by broadening parser-oriented `tail(...)` from “drop the first 1 entry” to an optional counted form too. Fluent and structured authoring now agree on representative counted-tail flows across array assignment sources, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.
+
+- Added the explicit counted form:
+  - `tail(array_expr, n)`
+  - while preserving `tail(array_expr)` as the shorthand that still means “drop the first 1 entry”.
+- Representative counted-tail lowering now covers:
+  - direct working arrays such as `tail(array(parts), 2)`,
+  - projected array expressions such as `tail(sorted_keys(hash(meta)), 2)`,
+  - scalar-valued count expressions such as `tail(sorted_keys(...), scalar(skip_count))`,
+  - and nested array-valued composition such as `scalar(tail(sorted_keys(hash(meta)), 1), 0)`.
+- Semantics are explicit:
+  - omitted drop count still defaults to `1`,
+  - explicit non-positive or undefined drop counts sanitize to “drop 0 entries” rather than warning,
+  - sources shorter than the requested drop count return one empty array,
+  - and counted `tail(...)` remains one real array-valued helper that can feed `count(...)`, `scalar(container, index)`, `return(payload)`, and array assignment lowering directly.
+- Expanded the user guides with fuller examples showing both the short form and the counted form side by side, including literal-count and scalar-count examples inside assignments, returns, and flow expressions.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `tail(...)` Helper
 
 Extended the method-like DSL migration track with parser-oriented array `tail(...)` value helpers. Fluent and structured authoring now agree on representative “everything after the first item” flows across array assignment sources, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.

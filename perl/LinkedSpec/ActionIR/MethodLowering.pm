@@ -256,7 +256,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|tail|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -484,22 +484,34 @@ sub _lower_method_value_expr {
   return 'do { my $__ls_last = '.$lowered_target.'; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }';
  }
  if ($method_call && $method_call->{method} eq 'tail') {
-  my $tail_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  my $tail_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
   return undef unless $tail_args;
 
   my $target_expr = $trim_action_ir_value->($tail_args->[0]);
   return undef unless defined($target_expr) && length($target_expr);
 
+  my $tail_has_explicit_count = (@{$tail_args} > 1 && defined($tail_args->[1])) ? 1 : 0;
+  my $tail_skip_expr = '1';
+  if ($tail_has_explicit_count) {
+   $tail_skip_expr = _lower_method_value_expr($tail_args->[1], $deps);
+   $tail_skip_expr = $trim_action_ir_value->($tail_args->[1]) unless defined($tail_skip_expr) && length($tail_skip_expr);
+   return undef unless defined($tail_skip_expr) && length($tail_skip_expr);
+  }
+
   my $array_symbol = $extract_array_symbol_name->($target_expr);
   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
-   return 'do { my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > 1 ? [@'.$array_symbol.'[1 .. $__ls_tail_len - 1]] : [] }';
+   return 'do { my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > 1 ? [@'.$array_symbol.'[1 .. $__ls_tail_len - 1]] : [] }'
+    unless $tail_has_explicit_count;
+   return 'do { my $__ls_tail_skip = '.$tail_skip_expr.'; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > $__ls_tail_skip ? [@'.$array_symbol.'[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] }';
   }
 
   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_tail = '.$lowered_target.'; if (defined($__ls_tail) && ref($__ls_tail) eq \'ARRAY\') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }';
+  return 'do { my $__ls_tail = '.$lowered_target.'; if (defined($__ls_tail) && ref($__ls_tail) eq \'ARRAY\') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }'
+   unless $tail_has_explicit_count;
+  return 'do { my $__ls_tail = '.$lowered_target.'; if (defined($__ls_tail) && ref($__ls_tail) eq \'ARRAY\') { my $__ls_tail_skip = '.$tail_skip_expr.'; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'contains') {
   my $contains_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

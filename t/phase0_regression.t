@@ -5541,7 +5541,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 26;
+    plan tests => 30;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -5607,6 +5607,26 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(tail(sorted_keys(hash(meta)))), 0)}),
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
         'tail(...) composes inside count(...) and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(tail(sorted_keys(hash(meta)), 2))}),
+        q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        'return(payload) accepts tail(projected-array-expression, literal-count) lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))}),
+        q{@rest_keys = (do { my $__ls_array_init = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = $skip_count; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
+        'assign helper accepts tail(projected-array-expression, scalar-count) array source lowering'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)}),
+        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        'tail(..., count) composes inside count(...) and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(tail(sorted_keys(hash(meta)), 1), 0))}),
+        q{return do { my $__ls_scalar_source = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 1; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
+        'tail(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(first_key), scalar(sorted_keys(hash(meta)), 0))}),
@@ -22759,12 +22779,12 @@ subtest 'method_like_fluent_and_structured_action_tail_array_helpers_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, rest_keys).declare(scalar, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
+ /a/ -> Top .declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, rest_keys); declare(scalar, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
+ /a/ -> Top { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
@@ -22800,13 +22820,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_tail_array_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, rest_keys).declare(scalar, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
+LX.declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, rest_keys); declare(scalar, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
+LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
  /a/ -> Top { return_a(Top) }
 SPEC
 

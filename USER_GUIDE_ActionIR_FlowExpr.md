@@ -178,6 +178,7 @@ num_eq(scalar(count), 0)
 num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
 num_gt(count(tail(sorted_keys(hash(meta)))), 0)
+num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 ```
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
@@ -227,8 +228,15 @@ or(scalar(enabled), is_nonempty(scalar(name)))
 num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))), 0)
 ```
 
+### Example: projected object still has keys after skipping the first two stable keys
+
+```text
+num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
+```
+
 ### Practical guidance
 - reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
+- the same pattern works with explicit counts like `count(tail(sorted_keys(...), scalar(skip_count)))`,
 - so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
 - and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.
 

@@ -581,13 +581,15 @@ Important semantic note:
 - and if an array-valued expression is still undefined or empty, both helpers return `undef`.
 
 ### Array tail as an array with `tail(...)`
-`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element” when the source is one array or one array-valued helper expression.
+`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `tail(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”.
 
 Examples:
 
 ```text
 tail(array(parts))
+tail(array(parts), 2)
 tail(sorted_keys(hash(meta)))
+tail(sorted_keys(hash(meta)), scalar(skip_count))
 tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
 tail(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
@@ -595,16 +597,19 @@ tail(coalesce(scalaref(retv, {parts}), array("fallback")))
 Use cases:
 - keep a “head” item in one scalar while carrying the remaining items as one canonical array value,
 - express recursive head/tail decomposition in `.spec` without raw Perl slicing,
+- skip the first `N` projected keys or values after some earlier parse step has already consumed them,
 - skip one projected key/value and keep processing the remainder through the same aggregate helper family.
 
 Examples in context:
 
 ```text
 assign(array(rest_parts), tail(array(parts)))
+assign(array(rest_parts), tail(array(parts), 2))
 assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
 assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
 return(hash("rest_parts", tail(array(parts)), "rest_keys", tail(sorted_keys(hash(meta)))))
-if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))), 0))
+if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
 ```
 
 Worked example:
@@ -612,13 +617,13 @@ Worked example:
 ```text
 I {
   declare(array, keys, rest_keys)
-  declare(scalar, first_key, rest_count=0)
+  declare(scalar, first_key, skip_count=2, rest_count=0)
 }
 
 -> header[1] {
   assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
   assign(scalar(first_key), first(array(keys)))
-  assign(array(rest_keys), tail(array(keys)))
+  assign(array(rest_keys), tail(array(keys), scalar(skip_count)))
   assign(scalar(rest_count), count(array(rest_keys)))
   return(
     hash(
@@ -631,10 +636,13 @@ I {
 ```
 
 Important semantic note:
+- `tail(array_expr)` defaults to dropping `1` entry when no explicit count is supplied,
 - `tail(...)` returns one array value, not one scalar,
 - it works on both direct working arrays and composed array-valued helper expressions,
+- an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(skip_count)`,
 - a one-element source becomes one empty array,
 - an empty source becomes one empty array,
+- a source shorter than the requested drop count also becomes one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
 ### Array membership as a scalar flag with `contains(...)`
