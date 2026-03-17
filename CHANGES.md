@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_min(...)` And `num_max(...)`
+
+Extended the method-like DSL migration track with the next standardized arithmetic helpers. Fluent and structured authoring now agree on representative numeric floor/ceiling-style composition flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `num_min(value_expr, value_expr, ...)` lowering for:
+  - reducer-driven numeric chains such as `num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10)`,
+  - normalized scalar compositions such as `num_min(coalesce(length(trim(scalar(name))), 0), scalar(limit), 3)`,
+  - and direct return payloads where one canonical minimum value is needed without staging through temporary scalars.
+- Added `num_max(value_expr, value_expr, ...)` lowering for:
+  - reducer-driven numeric chains such as `num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))`,
+  - normalized scalar compositions such as `num_max(coalesce(length(trim(scalar(name))), 0), scalar(limit), 2)`,
+  - and direct return payloads where one canonical maximum value is needed without staging through temporary scalars.
+- Kept the parser-oriented arithmetic contract:
+  - `num_min(...)` is variadic and requires two or more operands,
+  - `num_max(...)` is variadic and requires two or more operands,
+  - both helpers stay pure scalar value helpers,
+  - and missing or non-numeric-looking operands preserve `undef` instead of silently inventing a value.
+- Expanded the user guides with fuller examples showing `num_min(...)` and `num_max(...)` in reducer composition, normalized scalar flows, direct returns, and numeric comparisons.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `num_mul(...)` And `num_div(...)`
 
 Extended the method-like DSL migration track with the next standardized arithmetic helpers. Fluent and structured authoring now agree on representative numeric product/division flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.

@@ -261,7 +261,7 @@ sub _lower_flow_composite_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_add|num_sub|num_mul|num_div|starts_with|ends_with|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
