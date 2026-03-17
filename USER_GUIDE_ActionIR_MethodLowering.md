@@ -23,6 +23,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `count(...)`
 - `first(...)`
 - `last(...)`
+- `tail(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -455,6 +456,39 @@ assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "sourc
 assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
 if(eq(first(sorted_keys(hash(meta))), "kind")); ... endif()
 return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
+```
+
+## `tail(array_or_array_expr)`
+Use `tail(...)` when you want one array value that contains everything except the first element.
+
+Examples:
+
+```text
+tail(array(parts))
+tail(sorted_keys(hash(meta)))
+tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+tail(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Typical uses:
+- implement head/tail style recursive parsing without dropping into host-language slicing,
+- keep one leading token separate while carrying the remainder as a canonical array value,
+- skip one normalized projected key and continue working on the rest of the projected array.
+
+Important semantic note:
+- `tail(array(name))` returns one new array value containing every live element after index `0`,
+- `tail(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and array-valued `coalesce(...)` chains,
+- `tail(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, has one element, or the array-valued expression is still undefined, `tail(...)` returns one empty array instead of `undef`.
+
+Examples in context:
+
+```text
+assign(array(rest_parts), tail(array(parts)))
+assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
+if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))), 0)); ... endif()
+return(hash("rest_keys", tail(sorted_keys(hash(meta))), "rest_count", count(tail(sorted_keys(hash(meta))))))
 ```
 
 ## `contains(array_or_array_expr, value_expr)`

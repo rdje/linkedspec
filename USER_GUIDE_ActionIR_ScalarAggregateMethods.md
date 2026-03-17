@@ -580,6 +580,63 @@ Important semantic note:
 - they work on both working arrays and composed array-valued helper expressions,
 - and if an array-valued expression is still undefined or empty, both helpers return `undef`.
 
+### Array tail as an array with `tail(...)`
+`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element” when the source is one array or one array-valued helper expression.
+
+Examples:
+
+```text
+tail(array(parts))
+tail(sorted_keys(hash(meta)))
+tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+tail(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+Use cases:
+- keep a “head” item in one scalar while carrying the remaining items as one canonical array value,
+- express recursive head/tail decomposition in `.spec` without raw Perl slicing,
+- skip one projected key/value and keep processing the remainder through the same aggregate helper family.
+
+Examples in context:
+
+```text
+assign(array(rest_parts), tail(array(parts)))
+assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
+return(hash("rest_parts", tail(array(parts)), "rest_keys", tail(sorted_keys(hash(meta)))))
+if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))), 0))
+```
+
+Worked example:
+
+```text
+I {
+  declare(array, keys, rest_keys)
+  declare(scalar, first_key, rest_count=0)
+}
+
+-> header[1] {
+  assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
+  assign(scalar(first_key), first(array(keys)))
+  assign(array(rest_keys), tail(array(keys)))
+  assign(scalar(rest_count), count(array(rest_keys)))
+  return(
+    hash(
+      "first_key", scalar(first_key),
+      "rest_keys", array_copy(array(rest_keys)),
+      "rest_count", scalar(rest_count)
+    )
+  )
+}
+```
+
+Important semantic note:
+- `tail(...)` returns one array value, not one scalar,
+- it works on both direct working arrays and composed array-valued helper expressions,
+- a one-element source becomes one empty array,
+- an empty source becomes one empty array,
+- and an undefined array-valued expression also becomes one empty array rather than `undef`.
+
 ### Array membership as a scalar flag with `contains(...)`
 `contains(...)` is the parser-oriented helper for “does this array currently contain this scalar value?”
 

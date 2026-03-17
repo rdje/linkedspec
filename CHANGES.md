@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `tail(...)` Helper
+
+Extended the method-like DSL migration track with parser-oriented array `tail(...)` value helpers. Fluent and structured authoring now agree on representative “everything after the first item” flows across array assignment sources, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.
+
+- Added `tail(array_expr)` lowering for:
+  - direct working arrays such as `tail(array(parts))`,
+  - projected array expressions such as `tail(sorted_keys(hash(meta)))`,
+  - deeper compositions such as `tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))`,
+  - and array-valued fallback chains such as `tail(coalesce(scalaref(retv, {parts}), array("fallback")))`.
+- Semantics are explicit:
+  - `tail(...)` returns one array value rather than one scalar boundary element,
+  - direct working arrays lower to one guarded slice over the live array,
+  - composed array-valued expressions lower through one guarded arrayref slice,
+  - and empty, one-element, or undefined array-valued expressions all produce one empty array rather than `undef`.
+- Extended flow/value/payload paths so `tail(...)` now lowers correctly in:
+  - array assignment sources,
+  - direct `return(payload)` expressions,
+  - and reducer composition such as `num_gt(count(tail(sorted_keys(hash(meta)))), 0)`.
+- Expanded the user guides with fuller examples showing how `tail(...)` composes with `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `coalesce(...)`, `count(...)`, and direct working arrays without forcing temporary slicing variables first.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Composed Aggregate Entry Reads Via `scalar(...)`
 
 Extended the method-like DSL migration track by broadening `scalar(container, key_or_index)` from direct working arrays and hashes to composed aggregate expressions too. Fluent and structured authoring now agree on representative one-step aggregate-entry flows across assignment sources, return payloads, and flow comparisons on both action-edge and lifecycle surfaces.

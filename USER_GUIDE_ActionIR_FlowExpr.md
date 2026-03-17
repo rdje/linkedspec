@@ -177,6 +177,7 @@ Examples:
 num_eq(scalar(count), 0)
 num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
+num_gt(count(tail(sorted_keys(hash(meta)))), 0)
 ```
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
@@ -219,6 +220,17 @@ and(is_nonempty(array(items)), not(scalar(disabled)))
 ```text
 or(scalar(enabled), is_nonempty(scalar(name)))
 ```
+
+### Example: projected object still has keys after skipping the first stable key
+
+```text
+num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))), 0)
+```
+
+### Practical guidance
+- reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
+- so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
+- and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.
 
 ### Example: check an entry inside a working array
 
