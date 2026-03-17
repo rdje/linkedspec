@@ -417,6 +417,8 @@ Typical patterns:
 - `array(...)`
 - `hash(...)`
 - `scalaref(...)`
+- `scalar(sorted_keys(...), 0)`
+- `scalar(merge_hash(...), "kind")`
 - `length(...)`
 - `join_values(...)`
 - `first(...)`
@@ -431,6 +433,7 @@ Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR
 
 Typical patterns:
 - string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
+- one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
 - scalar metadata from `length(scalar_expr)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons

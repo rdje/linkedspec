@@ -238,6 +238,75 @@ sub _lower_method_value_expr {
 
   return undef;
  };
+ my ($looks_like_array_value_expr, $looks_like_hash_value_expr);
+ $looks_like_array_value_expr = sub {
+  my ($candidate_expr) = @_;
+  return 0 unless defined $candidate_expr;
+  my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
+  return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
+
+  return 1 if $candidate_trimmed =~ /^array\s*\(/o;
+
+  my $array_symbol = $extract_array_symbol_name->($candidate_trimmed);
+  if (defined($array_symbol) && length($array_symbol) && $candidate_trimmed =~ /^\w+$/o) {
+   return 1;
+  }
+
+  my $candidate_call = $parse_method_function_expr->($candidate_trimmed);
+  return 0 unless $candidate_call;
+
+  my $candidate_method = $candidate_call->{method} // '';
+  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted_keys|sorted_values|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+
+  if ($candidate_method eq 'coalesce') {
+   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
+   return 0 unless $candidate_args && @$candidate_args;
+
+   my $saw_array_like = 0;
+   foreach my $arg (@$candidate_args) {
+    next unless defined $arg;
+    return 0 if $looks_like_hash_value_expr->($arg);
+    $saw_array_like ||= $looks_like_array_value_expr->($arg);
+   }
+   return $saw_array_like ? 1 : 0;
+  }
+
+  return 0;
+ };
+ $looks_like_hash_value_expr = sub {
+  my ($candidate_expr) = @_;
+  return 0 unless defined $candidate_expr;
+  my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
+  return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
+
+  return 1 if $candidate_trimmed =~ /^hash\s*\(/o;
+
+  my $hash_symbol = $extract_hash_symbol_name->($candidate_trimmed);
+  if (defined($hash_symbol) && length($hash_symbol) && $candidate_trimmed =~ /^\w+$/o) {
+   return 1;
+  }
+
+  my $candidate_call = $parse_method_function_expr->($candidate_trimmed);
+  return 0 unless $candidate_call;
+
+  my $candidate_method = $candidate_call->{method} // '';
+  return 1 if $candidate_method =~ /^(?:hash|merge_hash|drop_keys|pick_keys)$/o;
+
+  if ($candidate_method eq 'coalesce') {
+   my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
+   return 0 unless $candidate_args && @$candidate_args;
+
+   my $saw_hash_like = 0;
+   foreach my $arg (@$candidate_args) {
+    next unless defined $arg;
+    return 0 if $looks_like_array_value_expr->($arg);
+    $saw_hash_like ||= $looks_like_hash_value_expr->($arg);
+   }
+   return $saw_hash_like ? 1 : 0;
+  }
+
+  return 0;
+ };
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -305,6 +374,18 @@ sub _lower_method_value_expr {
   }
   if (defined $hash_symbol) {
    return '$'.$hash_symbol.'{'.$key_lowered.'}';
+  }
+  if ($looks_like_array_value_expr->($container_trimmed)) {
+   my $lowered_container = _lower_method_value_expr($container_trimmed, $deps);
+   $lowered_container = $container_trimmed unless defined($lowered_container) && length($lowered_container);
+   return undef unless defined($lowered_container) && length($lowered_container);
+   return 'do { my $__ls_scalar_source = '.$lowered_container.'; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq \'ARRAY\') ? $__ls_scalar_source->['.$key_lowered.'] : undef }';
+  }
+  if ($looks_like_hash_value_expr->($container_trimmed)) {
+   my $lowered_container = _lower_method_value_expr($container_trimmed, $deps);
+   $lowered_container = $container_trimmed unless defined($lowered_container) && length($lowered_container);
+   return undef unless defined($lowered_container) && length($lowered_container);
+   return 'do { my $__ls_scalar_source = '.$lowered_container.'; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq \'HASH\') ? $__ls_scalar_source->{'.$key_lowered.'} : undef }';
   }
  return undef;
 }

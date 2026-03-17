@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Composed Aggregate Entry Reads Via `scalar(...)`
+
+Extended the method-like DSL migration track by broadening `scalar(container, key_or_index)` from direct working arrays and hashes to composed aggregate expressions too. Fluent and structured authoring now agree on representative one-step aggregate-entry flows across assignment sources, return payloads, and flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added composed aggregate entry lowering for:
+  - array-valued helper expressions such as `scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0)`,
+  - hash-valued helper expressions such as `scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")`,
+  - and aggregate fallback chains such as `scalar(coalesce(scalaref(retv, {parts}), array("fallback")), 0)`.
+- Semantics are explicit:
+  - one-step entry reads over direct working arrays and hashes still lower to direct Perl indexing,
+  - composed array-valued expressions lower through one guarded arrayref dereference,
+  - composed hash-valued expressions lower through one guarded hashref dereference,
+  - and missing or mistyped composed aggregate expressions still preserve `undef` rather than inventing one fallback value implicitly.
+- Extended flow/value/payload paths so composed aggregate `scalar(...)` reads lower correctly in:
+  - scalar assignment sources,
+  - direct `return(payload)` expressions,
+  - and flow comparisons such as `eq(scalar(sorted_keys(hash(meta)), 0), "kind")`.
+- Expanded the user guides with fuller examples showing how one-step `scalar(...)` reads now compose on top of `sorted_keys(...)`, `merge_hash(...)`, `pick_keys(...)`, `drop_keys(...)`, and aggregate `coalesce(...)` chains instead of forcing temporary working variables first.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `length(...)` Helper
 
 Extended the method-like DSL migration track with parser-oriented scalar `length(...)` value helpers. Fluent and structured authoring now agree on representative scalar-length flows across assignment sources, return payloads, and numeric comparison inputs on both action-edge and lifecycle surfaces.

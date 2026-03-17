@@ -84,16 +84,26 @@ assign(scalar(rule_name), scalar(IMATCH_LIST, 0))
 scalar(container, key_or_index)
 scalar(array(items), idx)
 scalar(hash(by_name), key)
+scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0)
+scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage")
 ```
 
 This is useful for array/hash entry lookup without falling back to raw Perl indexing syntax.
+
+The supported surface is broader than only direct working variables:
+- direct arrays and hashes still work,
+- and composed array-valued or hash-valued helper expressions now work too,
+- so you do not need one temporary assignment just to read one first item from `sorted_keys(...)` or one field from `merge_hash(...)`.
 
 Examples:
 
 ```text
 assign(scalar(first_item), scalar(items, 0))
 assign(scalar(value), scalar(hash(by_name), key))
+assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0))
+assign(scalar(stage), scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage"))
 if(eq(scalar(items, 0), "?branch:")); ... endif()
+if(eq(scalar(sorted_keys(hash(meta)), 0), "kind")); ... endif()
 ```
 
 ## `scalaref(base, path)`

@@ -412,17 +412,29 @@ There are two important helper families here.
 scalar(array(items), 0)
 scalar(hash(by_name), key)
 scalar(items, 0)
+scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0)
+scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")
 ```
 
 Use this when the read is conceptually one step:
 - one array index,
 - or one hash entry.
 
+That one step can now start from:
+- one direct working array,
+- one direct working hash,
+- one composed array-valued helper expression such as `sorted_keys(...)`,
+- or one composed hash-valued helper expression such as `merge_hash(...)`, `pick_keys(...)`, `drop_keys(...)`, or hash-valued `coalesce(...)`.
+
 Examples:
 
 ```text
 assign(scalar(head), scalar(array(items), 0))
 assign(scalar(found), scalar(hash(by_name), key))
+assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0))
+assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind"))
+assign(scalar(fallback_part), scalar(coalesce(scalaref(retv, {parts}), array("fallback")), 0))
+assign(scalar(fallback_kind), scalar(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
 return(hash("head", scalar(items, 0)))
 ```
 
