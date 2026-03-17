@@ -31,6 +31,8 @@ This file exists to make the active plan easier to follow without replacing the 
   - remove ambiguity directly,
   - explain semantics plainly,
   - use representative examples when they help,
+  - add thorough worked examples for every newly landed user-facing surface,
+  - treat documented examples as part of the end-user contract we should not casually weaken,
   - do not intentionally obfuscate behavior or tradeoffs.
 
 ## Lifecycle-Wide Structured DSL Contract

@@ -185,6 +185,7 @@ should support the same fluent-versus-structured method-like authoring equivalen
 Documentation policy note:
 - the guides should state this capability explicitly,
 - and use representative examples where helpful,
+- treat the guides and worked examples as part of the end-user contract for supported surfaces,
 - not try to enumerate every possible nesting shape.
 
 If you want the long-form teaching guide for that policy, read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md). That guide focuses specifically on string, integer, float-like, array, and hash composition with many worked examples rather than module-by-module lowering notes.

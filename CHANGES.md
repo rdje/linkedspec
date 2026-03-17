@@ -84,6 +84,10 @@ Expanded the user-facing method-DSL documentation with a dedicated scalar-and-ag
 - Updated: `DEVELOPMENT_NOTES.md`
 - Updated: `MEMORY.md`
 
+2026-03-17 - Documentation Contract: Treat Guides and Examples as End-User Contract
+
+Reinforced the project documentation policy so every newly landed user-facing feature is expected to come with thorough guide coverage and many worked examples. The roadmap and internal project notes now state more explicitly that user-facing guides and examples are part of the end-user contract for supported surfaces, not optional after-the-fact polish. That adoption-oriented rule is now tracked in `ROADMAP.md`, `ROADMAP_V2.md`, `USER_GUIDE.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md`.
+
 ## Technical Details
 - Added one cross-cutting teaching guide for scalar and aggregate method usage rather than forcing users to reconstruct the full story from several module-owner references.
 - Made the documentation contract more explicit:

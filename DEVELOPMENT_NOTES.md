@@ -16,6 +16,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Explain semantics, constraints, and tradeoffs directly instead of implying them.
 - Use representative examples generously when they reduce ambiguity or help adoption.
 - Use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape.
+- Treat user-facing guides and worked examples as part of the end-user contract for supported surfaces, not as optional after-the-fact polish.
 - Add cross-cutting cookbook guides when a high-frequency user-facing surface would become too fragmented if it lived only in module-owner references.
 - Do not intentionally obfuscate user-facing behavior, lowering contracts, or project goals.
 

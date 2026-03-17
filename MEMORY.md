@@ -17,6 +17,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Project docs are expected to optimize for readability, non-ambiguity, and clear explanations.
 - Representative examples are encouraged whenever they make semantics easier to learn or verify.
 - Newly landed user-facing surfaces should get fuller worked examples when terse snippets would undersell or obscure the real supported shape.
+- User-facing guides and worked examples are part of the end-user contract for supported surfaces and should not be treated as optional polish.
 - Cross-cutting cookbook guides should be added when one high-frequency user-facing family would be too fragmented across only module-owner references.
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 

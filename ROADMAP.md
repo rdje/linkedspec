@@ -124,6 +124,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Documentation quality contract:
   - optimize for readability, non-ambiguity, and clear explanations,
   - use many representative examples where they materially improve understanding,
+  - for every newly landed user-facing feature, add thorough user-guide coverage with many worked examples in the same slice or immediately adjacent follow-up,
+  - treat user-facing documentation and examples as part of the end-user compatibility contract and do not silently narrow or underdocument supported surfaces,
   - prefer direct wording over expert-only shorthand,
   - and do not intentionally obfuscate semantics, constraints, or tradeoffs.
 - Exit criteria:
