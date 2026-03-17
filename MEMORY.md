@@ -18,6 +18,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Representative examples are encouraged whenever they make semantics easier to learn or verify.
 - Newly landed user-facing surfaces should get fuller worked examples when terse snippets would undersell or obscure the real supported shape.
 - User-facing guides and worked examples are part of the end-user contract for supported surfaces and should not be treated as optional polish.
+- Once the user clarifies a project-level documentation or adoption expectation, treat it as a standing rule and do not wait for repeated reminders.
 - Cross-cutting cookbook guides should be added when one high-frequency user-facing family would be too fragmented across only module-owner references.
 - Obfuscation is explicitly out of scope for both user-facing guidance and architecture rationale.
 
