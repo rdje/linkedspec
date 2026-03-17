@@ -1068,6 +1068,41 @@ What this example teaches:
 - the cleaned object can still drive `has_key(...)` and `count_keys(...)`,
 - and the whole normalization story stays inside the same parser-oriented expression layer.
 
+## Worked example: project one canonical object shape with `pick_keys(...)`
+This is the pattern to use when the parser keeps one richer working object internally but wants to expose only one small, stable public shape.
+
+```text
+-> metadata_projection[1] {
+  declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "span", "12:14"))
+  declare(hash, projected_meta)
+
+  assign(
+    hash(projected_meta),
+    pick_keys(
+      merge_hash(hash(meta), hash("stage", "normalized")),
+      "kind",
+      "source",
+      "stage"
+    )
+  )
+
+  if(has_key(hash(projected_meta), "kind"))
+    return(merge_hash(
+      hash(projected_meta),
+      hash("meta_key_count", count_keys(hash(projected_meta)))
+    ))
+  else
+    return(hash("kind", "BROKEN_META"))
+  endif
+}
+```
+
+What this example teaches:
+- `pick_keys(...)` is the positive-selection companion to `drop_keys(...)`,
+- it keeps one explicit field set instead of removing one blacklist of fields,
+- the projected object can still feed `has_key(...)` and `count_keys(...)`,
+- and whole-object projection stays inside the same parser-oriented expression layer without ad hoc host-language field copying.
+
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.
 

@@ -1,5 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `pick_keys(...)` Helper
+## Summary
+Extended the method-like DSL migration track with parser-oriented `pick_keys(...)` value helpers. Fluent and structured authoring now agree on representative hash/object projection flows across assignment sources, return payloads, and flow-helper composition on both action-edge and lifecycle surfaces.
+
+## Changed Files
+- Updated: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- Updated: `perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- Updated: `perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- Updated: `perl/LinkedSpec/BootstrapSpec/Core.pm`
+- Updated: `t/phase0_regression.t`
+- Updated: `USER_GUIDE.md`
+- Updated: `USER_GUIDE_ActionIR_MethodLowering.md`
+- Updated: `USER_GUIDE_ActionIR_FlowExpr.md`
+- Updated: `USER_GUIDE_ActionIR_ScalarAggregateMethods.md`
+- Updated: `USER_GUIDE_ActionIR_EmittedPerlReference.md`
+- Updated: `ROADMAP.md`
+- Updated: `ROADMAP_V2.md`
+- Updated: `CHANGES.md`
+- Updated: `DEVELOPMENT_NOTES.md`
+- Updated: `MEMORY.md`
+
+## Technical Details
+- Added `pick_keys(hash_or_hash_expr, key1, ..., keyN)` to method-value lowering as a pure hash/object projection helper:
+  - returns one new projected hash/object value,
+  - keeps source hashes untouched unless the caller explicitly assigns the result back,
+  - copies only the listed keys when they exist,
+  - and treats undefined hash-valued expressions as one empty returned object.
+- Extended flow/value/payload paths so `pick_keys(...)` lowers correctly in:
+  - hash assignment sources,
+  - general `return(payload)` payloads,
+  - and flow-helper composition such as `has_key(pick_keys(...), "kind")`.
+- Extended fluent `.return(pick_keys(...))` payload detection so the general-return path recognizes `pick_keys(...)` as one helper-valued payload rather than misclassifying it as a non-general return shape.
+- Added focused regression locks for:
+  - direct emitted lowering of representative projection forms,
+  - fluent-versus-structured action-edge parity,
+  - and fluent-versus-structured lifecycle parity.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `drop_keys(...)` Helper
 ## Summary
 Extended the method-like DSL migration track with parser-oriented `drop_keys(...)` value helpers. Fluent and structured authoring now agree on representative hash/object cleanup flows across assignment sources, return payloads, and flow-helper composition on both action-edge and lifecycle surfaces.

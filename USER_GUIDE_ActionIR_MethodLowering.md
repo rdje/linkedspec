@@ -24,6 +24,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `has_key(...)`
 - `merge_hash(...)`
 - `drop_keys(...)`
+- `pick_keys(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -497,6 +498,42 @@ assign(hash(cleaned_meta), drop_keys(hash(meta), "debug", "span"))
 assign(hash(cleaned_meta), drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))
 if(has_key(drop_keys(hash(meta), "debug"), "kind")); ... endif()
 return(drop_keys(merge_hash(hash(meta), hash("stage", "normalized")), "debug"))
+```
+
+## `pick_keys(hash_or_hash_expr, key_expr1, key_expr2, ..., key_exprN)`
+Use `pick_keys(...)` when you want one new hash/object value that keeps only the selected keys from an existing working hash or hash-valued expression.
+
+Examples:
+
+```text
+pick_keys(hash(meta), "kind", "source")
+pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage")
+pick_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
+```
+
+Typical uses:
+- project one larger working object down to one stable external payload shape,
+- keep only parser-owned keys before branching or returning,
+- combine positive field selection with `merge_hash(...)`, `count_keys(...)`, and `has_key(...)` in one composed expression tree.
+
+Important semantic note:
+- `pick_keys(...)` returns one new hash/object value,
+- it does **not** mutate the source hash on its own,
+- keys are copied into the returned value only if they exist in the source object,
+- and undefined hash-valued expressions simply turn into one empty returned object.
+
+That means:
+- `pick_keys(hash(meta), "kind", "source")` keeps only those two fields when present,
+- `pick_keys(merge_hash(...), "kind", "stage")` works well after one normalization merge,
+- and `has_key(pick_keys(hash(meta), "kind"), "kind")` lets a flow condition branch on the projected object shape directly.
+
+Examples in context:
+
+```text
+assign(hash(projected_meta), pick_keys(hash(meta), "kind", "source"))
+assign(hash(projected_meta), pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage"))
+if(has_key(pick_keys(hash(meta), "kind"), "kind")); ... endif()
+return(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage"))
 ```
 
 ## `coalesce(value1, value2, ..., valueN)`
