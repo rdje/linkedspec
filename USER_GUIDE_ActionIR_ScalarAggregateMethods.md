@@ -378,7 +378,7 @@ assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(remaining), num_sub(count(array(parts)), 1))
 ```
 
-The current arithmetic surface is still intentionally disciplined rather than broad: `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` are supported, but the DSL is still not trying to become a general-purpose math language.
+The current arithmetic surface is still intentionally disciplined rather than broad: `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_min(...)`, and `num_max(...)` are supported, but the DSL is still not trying to become a general-purpose math language.
 That broader arithmetic family still follows the same narrow parser-oriented contract rather than opening the door to arbitrary host-language numeric code.
 
 ## Float scalar methods
@@ -413,9 +413,9 @@ I {
 Again, the current contract is:
 - float literals can participate as scalar values,
 - numeric comparisons on those scalars are part of the supported expression family,
-- and the standardized arithmetic helpers `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can compose with numeric-looking float values too.
+- and the standardized arithmetic helpers `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can compose with numeric-looking float values too, while `num_mod(...)` stays intentionally integer-oriented.
 
-## Numeric arithmetic with `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)`
+## Numeric arithmetic with `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_min(...)`, and `num_max(...)`
 These are the standardized numeric value helpers in the method DSL today.
 
 Examples:
@@ -436,6 +436,7 @@ num_mul(count(array(parts)), scalar(factor))
 num_mul(scalar(confidence), 1.5)
 num_div(num_mul(count(array(parts)), scalar(factor)), 2)
 num_div(scalar(confidence), scalar(threshold))
+num_mod(num_add(count(array(parts)), scalar(offset)), 3)
 num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)
 num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))
 ```
@@ -459,6 +460,7 @@ assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(adjusted_confidence), num_sub(scalar(confidence), 0.05))
 assign(scalar(weighted_count), num_mul(count(array(parts)), scalar(factor)))
 assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), 2))
+assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), 3))
 assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
 assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)))
 return(hash(
@@ -470,6 +472,7 @@ return(hash(
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold)),
   "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), 2),
+  "bucket", num_mod(num_add(count(array(parts)), scalar(offset)), 3),
   "floor_value", num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10),
   "ceiling_value", num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))
 ))
@@ -481,6 +484,7 @@ if(num_gt(num_add(count(array(parts)), scalar(offset)), 3))
 if(num_ge(num_sub(scalar(confidence), scalar(threshold)), 0))
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3))
 if(num_ge(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 1))
+if(num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1))
 if(num_le(num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10), 4))
 if(num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)), 6))
 ```
@@ -490,7 +494,7 @@ Worked example:
 ```text
 I {
   declare(array, parts=array("A", "B", "C"))
-  declare(scalar, raw_name="  score  ", depth=1.25, offset=0.75, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, next_depth, remaining, average_count, floor_value, ceiling_value)
+  declare(scalar, raw_name="  score  ", depth=1.25, offset=3, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, next_depth, remaining, average_count, bucket, floor_value, ceiling_value)
 }
 
 -> node[1] {
@@ -501,6 +505,7 @@ I {
   assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset)))
   assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1))
   assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)))
+  assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), 3))
   assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
   assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)))
 
@@ -512,6 +517,7 @@ I {
     "next_depth", scalar(next_depth),
     "remaining", scalar(remaining),
     "average_count", scalar(average_count),
+    "bucket", scalar(bucket),
     "floor_value", scalar(floor_value),
     "ceiling_value", scalar(ceiling_value),
     "enough_parts", num_gt(scalar(remaining), 1)
@@ -528,13 +534,15 @@ Important semantic notes:
 - `num_sub(...)` is currently binary,
 - `num_mul(...)` accepts two or more operands,
 - `num_div(...)` is currently binary,
+- `num_mod(...)` is currently binary,
 - `num_min(...)` accepts two or more operands,
 - `num_max(...)` accepts two or more operands,
 - operands must be defined numeric-looking scalars,
 - supported numeric-looking forms are simple integers/decimals such as `0`, `-3`, `0.75`, and `12.5`,
+- `num_mod(...)` is intentionally stricter and currently expects integer-looking operands such as `0`, `3`, or `-7`,
 - if any operand is undefined or not numeric-looking, the arithmetic helper returns `undef`,
 - `num_round(...)` rounds halves away from zero so one `.spec` file does not depend on backend-specific rounding defaults,
-- and `num_div(...)` also returns `undef` when the divisor is `0`.
+- and both `num_div(...)` and `num_mod(...)` also return `undef` when the divisor is `0`.
 - Callers that want “missing means zero” should say that explicitly with `coalesce(...)`.
 
 Examples:
@@ -548,6 +556,7 @@ num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
 coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0)
+num_mod(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 3)
 num_min(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
 num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(upper_limit))
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)

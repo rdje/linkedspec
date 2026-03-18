@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_mod(...)`
+
+Extended the method-like DSL migration track with the missing integer-oriented remainder helper. Fluent and structured authoring now agree on representative `num_mod(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `num_mod(lhs, rhs)` lowering for:
+  - integer-like reducer composition such as `num_mod(num_add(count(array(parts)), scalar(offset)), 3)`,
+  - bucket/wraparound-style scalar compositions such as `num_mod(num_add(scalar(bucket), 5), 4)`,
+  - and numeric comparison inputs such as `num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor)), 1)`.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - `num_mod(...)` stays a pure scalar value helper,
+  - it is currently binary,
+  - it is intentionally integer-oriented rather than float-like,
+  - and it returns `undef` when either operand is missing, not integer-looking, or when the divisor is `0`.
+- Expanded the user guides with fuller examples showing `num_mod(...)` in assignments, direct returns, flow comparisons, and emitted Perl reference output, with explicit guidance that it is the remainder/parity member of the arithmetic family.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `coalesce_nonempty(...)`
 
 Extended the method-like DSL migration track with the missing scalar-side “first defined nonempty value wins” helper. Fluent and structured authoring now agree on representative `coalesce_nonempty(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.

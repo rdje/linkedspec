@@ -217,6 +217,7 @@ num_gt(num_add(count(array(parts)), scalar(offset)), 3)
 num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
 num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
 num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)
+num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1)
 num_gt(num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset))), 3)
 num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 1)
 num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)), 2)
@@ -236,7 +237,7 @@ num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
-Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
+Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging. `num_mod(...)` is the intentionally integer-oriented member of that family, so it is the right choice for parity and bucket checks rather than float-like remainder math.
 
 Array-valued helpers such as `concat_arrays(...)` can feed reducers like `count(...)` the same way, so layered aggregate construction can stay inside one expression layer before the final numeric comparison.
 
