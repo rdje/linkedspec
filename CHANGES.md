@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `set_key(...)`
+
+Extended the method-like DSL migration track with the missing one-field pure hash/object update helper. Fluent and structured authoring now agree on representative `set_key(...)` flows across hash declarations, hash assignments, direct `return(payload)` expressions, and flow-helper composition on both action-edge and lifecycle surfaces.
+
+- Added `set_key(hash_expr, key_expr, value_expr)` lowering for:
+  - direct working hashes such as `set_key(hash(meta), "stage", "normalized")`,
+  - composed hash-valued expressions such as `set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", "normalized")`,
+  - and fallback/update chains such as `set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name))`.
+- Kept the parser-oriented aggregate-update contract:
+  - `set_key(...)` stays a pure hash/object-valued helper,
+  - it does not mutate the source hash on its own,
+  - undefined hash-valued inputs behave like one empty base object,
+  - and the named key is always present in the returned object even when the assigned value resolves to `undef`.
+- Expanded the user guides with fuller examples showing `set_key(...)` in assignments, direct returns, nested scalar reads such as `scalar(set_key(...), "stage")`, and flow composition like `has_key(set_key(...), "stage")`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `concat_arrays(...)`
 
 Extended the method-like DSL migration track with the missing pure array-layering helper on the aggregate-update side. Fluent and structured authoring now agree on representative `concat_arrays(...)` flows across array declarations, array assignments, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.

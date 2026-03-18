@@ -567,6 +567,7 @@ scalar(hash(by_name), key)
 scalar(items, 0)
 scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0)
 scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")
+scalar(set_key(hash(meta), "stage", "normalized"), "stage")
 ```
 
 Use this when the read is conceptually one step:
@@ -577,7 +578,7 @@ That one step can now start from:
 - one direct working array,
 - one direct working hash,
 - one composed array-valued helper expression such as `sorted_keys(...)`,
-- or one composed hash-valued helper expression such as `merge_hash(...)`, `pick_keys(...)`, `drop_keys(...)`, or hash-valued `coalesce(...)`.
+- or one composed hash-valued helper expression such as `merge_hash(...)`, `set_key(...)`, `pick_keys(...)`, `drop_keys(...)`, or hash-valued `coalesce(...)`.
 
 Examples:
 
@@ -586,6 +587,7 @@ assign(scalar(head), scalar(array(items), 0))
 assign(scalar(found), scalar(hash(by_name), key))
 assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0))
 assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind"))
+assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
 assign(scalar(fallback_part), scalar(coalesce(scalaref(retv, {parts}), array("fallback")), 0))
 assign(scalar(fallback_kind), scalar(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind"))
 return(hash("head", scalar(items, 0)))
@@ -1292,6 +1294,38 @@ Important semantic note:
 - later arguments override earlier keys,
 - undefined hash-valued expressions simply contribute no pairs,
 - and the helper itself does not mutate the source hashes.
+
+### Hash/object single-field updates with `set_key(...)`
+`set_key(...)` is the parser-oriented helper for “build one new object by setting one field on top of one existing object value.”
+
+Examples:
+
+```text
+set_key(hash(meta), "stage", "normalized")
+set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))
+set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name))
+```
+
+Use cases:
+- add one canonical metadata field after one base object has already been chosen,
+- overwrite one specific field without wrapping that tiny change in one one-key `merge_hash(...)`,
+- and feed one updated object directly into `has_key(...)`, `count_keys(...)`, `sorted_keys(...)`, or `scalar(hash_expr, key)`.
+
+Examples in context:
+
+```text
+assign(hash(normalized_meta), set_key(hash(meta), "stage", "normalized"))
+assign(hash(normalized_meta), set_key(merge_hash(hash(meta), hash("kind", "NODE")), "owner", scalar(rule_name)))
+assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
+return(set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name)))
+if(has_key(set_key(hash(meta), "stage", "normalized"), "stage"))
+```
+
+Important semantic note:
+- `set_key(...)` returns one new hash/object value,
+- the source hash stays untouched unless you explicitly assign the result back,
+- undefined incoming hash-valued expressions behave like one empty base object,
+- and the named key is always present on the returned object even when the assigned value resolves to `undef`.
 
 ### Hash/object omission with `drop_keys(...)`
 `drop_keys(...)` is the parser-oriented helper for “build one cleaned object by removing selected fields.”

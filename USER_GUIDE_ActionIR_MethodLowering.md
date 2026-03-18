@@ -53,6 +53,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `sorted_values(...)`
 - `has_key(...)`
 - `merge_hash(...)`
+- `set_key(...)`
 - `drop_keys(...)`
 - `pick_keys(...)`
 - `coalesce(...)`
@@ -110,6 +111,7 @@ scalar(array(items), idx)
 scalar(hash(by_name), key)
 scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0)
 scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage")
+scalar(set_key(hash(meta), "stage", "normalized"), "stage")
 ```
 
 This is useful for array/hash entry lookup without falling back to raw Perl indexing syntax.
@@ -117,7 +119,7 @@ This is useful for array/hash entry lookup without falling back to raw Perl inde
 The supported surface is broader than only direct working variables:
 - direct arrays and hashes still work,
 - and composed array-valued or hash-valued helper expressions now work too,
-- so you do not need one temporary assignment just to read one first item from `sorted_keys(...)` or one field from `merge_hash(...)`.
+- so you do not need one temporary assignment just to read one first item from `sorted_keys(...)`, one field from `merge_hash(...)`, or one normalized field from `set_key(...)`.
 
 Examples:
 
@@ -126,6 +128,7 @@ assign(scalar(first_item), scalar(items, 0))
 assign(scalar(value), scalar(hash(by_name), key))
 assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0))
 assign(scalar(stage), scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage"))
+assign(scalar(stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
 if(eq(scalar(items, 0), "?branch:")); ... endif()
 if(eq(scalar(sorted_keys(hash(meta)), 0), "kind")); ... endif()
 ```
@@ -1119,6 +1122,44 @@ Examples in context:
 assign(hash(merged_meta), merge_hash(hash(base_meta), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized")))
 if(has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")); ... endif()
 return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta)))))
+```
+
+## `set_key(hash_or_hash_expr, key_expr, value_expr)`
+Use `set_key(...)` when you want one new hash/object value that is just like the incoming one except for one explicitly assigned key.
+
+Examples:
+
+```text
+set_key(hash(meta), "stage", "normalized")
+set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))
+set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "source", scalar(rule_name))
+```
+
+Typical uses:
+- add or overwrite one canonical field without wrapping that small update in one one-key `merge_hash(...)`,
+- normalize one field after a fallback object has already been chosen,
+- and feed one updated object straight into `has_key(...)`, `count_keys(...)`, or `scalar(hash_expr, key)` without staging a temporary working hash first.
+
+Important semantic note:
+- `set_key(...)` returns one new hash/object value,
+- it does **not** mutate the source hash on its own,
+- the named key is always written on the returned object,
+- undefined incoming hash-valued expressions behave like one empty base object,
+- and if the assigned value resolves to `undef`, the key still exists on the returned object with an undefined value.
+
+That means:
+- `set_key(hash(meta), "stage", "normalized")` preserves the rest of `meta` while forcing `stage`,
+- `set_key(coalesce(...), "source", scalar(rule_name))` works even when the chosen base object was missing,
+- and `has_key(set_key(hash(meta), "stage", "normalized"), "stage")` is always a valid way to branch on the updated shape directly.
+
+Examples in context:
+
+```text
+assign(hash(normalized_meta), set_key(hash(meta), "stage", "normalized"))
+assign(hash(normalized_meta), set_key(merge_hash(hash(meta), hash("kind", "NODE")), "owner", scalar(rule_name)))
+assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
+if(has_key(set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "stage", "normalized"), "stage")); ... endif()
+return(set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized")))))
 ```
 
 ## `drop_keys(hash_or_hash_expr, key_expr1, key_expr2, ..., key_exprN)`

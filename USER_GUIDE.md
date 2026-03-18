@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `set_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -332,6 +332,8 @@ Hash/object key-presence checks are part of that contract too: `has_key(...)` no
 
 Hash/object layering is part of that contract too: `merge_hash(...)` now lets `.spec` rules build one canonical merged object from working hashes, constructor hashes, and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so parser-owned metadata normalization can stay inside the same functional, parser-oriented expression layer instead of leaking into ad hoc host-language object merging.
 
+Hash/object single-field update is part of that contract too: `set_key(...)` now lets `.spec` rules set one canonical field on working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so small object-shape adjustments can stay inside the same functional, parser-oriented expression layer instead of forcing a one-key merge wrapper or dropping into ad hoc host-language field assignment.
+
 Hash/object cleanup is part of that contract too: `drop_keys(...)` now lets `.spec` rules remove noisy fields from working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so canonical return-payload cleanup can stay inside the same functional, parser-oriented expression layer instead of mutating one source hash or dropping into ad hoc host-language delete logic.
 
 Hash/object projection is part of that contract too: `pick_keys(...)` now lets `.spec` rules keep only one explicit field set from richer working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so stable outward-facing payload shapes can stay inside that same functional, parser-oriented expression layer instead of relying on ad hoc field-copy code.
@@ -419,6 +421,7 @@ Typical patterns:
 - `scalaref(...)`
 - `scalar(sorted_keys(...), 0)`
 - `scalar(merge_hash(...), "kind")`
+- `scalar(set_key(...), "stage")`
 - `length(...)`
 - `replace_substr(...)`
 - `starts_with(...)`
@@ -451,6 +454,7 @@ Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR
 Typical patterns:
 - string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
 - one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
+- single-field object updates via `set_key(hash_expr, key_expr, value_expr)`
 - scalar metadata from `length(scalar_expr)`
 - scalar literal rewrites from `replace_substr(scalar_expr, needle_expr, replacement_expr)`
 - scalar prefix/suffix flags from `starts_with(scalar_expr, prefix_expr)` and `ends_with(scalar_expr, suffix_expr)`

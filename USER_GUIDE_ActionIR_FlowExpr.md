@@ -375,6 +375,7 @@ is_nonempty(scalaref(retv, {content}))
 has_key(hash(meta), "kind")
 has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")
 has_key(merge_hash(hash(meta), hash("stage", "normalized")), "kind")
+has_key(set_key(hash(meta), "stage", "normalized"), "stage")
 has_key(drop_keys(hash(meta), "debug"), "kind")
 has_key(pick_keys(hash(meta), "kind", "source"), "kind")
 contains(sorted_keys(hash(meta)), "kind")
@@ -543,6 +544,7 @@ endif()
 - Prefer `is_defined(...)` / `is_undefined(...)` when the real question is presence versus absence.
 - Prefer `has_key(...)` when the real question is object shape: “does this key exist at all?”
 - Prefer `merge_hash(...)` inside a flow condition when you need to branch on one normalized or layered object shape without mutating the original working hash first.
+- Prefer `set_key(...)` inside a flow condition when you need to branch on one targeted field update without spelling a whole one-key merge wrapper first.
 - Prefer `drop_keys(...)` inside a flow condition when you need to ignore debug or transport-only fields before asking one object-shape question.
 - Prefer `pick_keys(...)` inside a flow condition when you need to branch on one small, stable projected object shape instead of a larger working object.
 - Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
