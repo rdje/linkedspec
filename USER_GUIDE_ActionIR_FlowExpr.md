@@ -215,9 +215,12 @@ Examples:
 num_eq(scalar(count), 0)
 num_gt(scalar(index), 3)
 num_le(scalar(depth), 8)
+num_gt(num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)), 10)
 num_gt(num_add(count(array(parts)), scalar(offset)), 3)
 num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
 num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
+
+That same numeric comparison family also accepts the newer arithmetic reducer/value helpers directly. In practice that means array-to-scalar totals such as `num_sum(...)` and scalar-normalization helpers such as `num_round(...)` can feed `num_gt(...)`, `num_eq(...)`, and the other `num_*` comparisons without staging one temporary scalar first.
 num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)
 num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1)
 num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)), 5)

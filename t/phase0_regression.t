@@ -27522,6 +27522,114 @@ SPEC
         'lifecycle reversed array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_num_sum_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_sum(concat_arrays(array(parts), array(4, 5)))'),
+        q{do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        'num_sum(...) lowers composed array-valued expressions into one numeric aggregate reducer'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(num_sum(concat_arrays(array(parts), array(4, 5))), 10)'),
+        q{(do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } } > 10)},
+        'num_sum(...) composes inside numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(total), num_sum(concat_arrays(array(parts), array(4, 5))))'),
+        q{$total = do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        'assign helper accepts num_sum(...) over composed array-valued expressions'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(num_sum(concat_arrays(array(parts), array(4, 5))))'),
+        q{return do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        'return(payload) accepts num_sum(...) nested around composed array reducers'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_num_sum_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)).declare(scalar, total, bounded_total).assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)).return(hash("total", scalar(total), "bounded_total", scalar(bounded_total)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)); return(hash("total", scalar(total), "bounded_total", scalar(bounded_total))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge num_sum helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge num_sum helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge num_sum helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge num_sum helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge num_sum helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge num_sum helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge num_sum helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge num_sum helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge num_sum helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge num_sum helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge num_sum helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge num_sum fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_num_sum_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)).declare(scalar, total, bounded_total).assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)).return(hash("total", scalar(total), "bounded_total", scalar(bounded_total)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)); return(hash("total", scalar(total), "bounded_total", scalar(bounded_total))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle num_sum helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle num_sum helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle num_sum helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle num_sum helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle num_sum helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle num_sum helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle num_sum helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle num_sum helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle num_sum helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle num_sum helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle num_sum helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle num_sum fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

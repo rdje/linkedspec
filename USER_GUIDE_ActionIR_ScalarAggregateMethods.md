@@ -448,9 +448,9 @@ I {
 Again, the current contract is:
 - float literals can participate as scalar values,
 - numeric comparisons on those scalars are part of the supported expression family,
-- and the standardized arithmetic helpers `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, and `num_clamp(...)` can compose with numeric-looking float values too, while `num_mod(...)` stays intentionally integer-oriented.
+- and the standardized arithmetic helpers `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, and `num_clamp(...)` can compose with numeric-looking float values too, while `num_mod(...)` stays intentionally integer-oriented.
 
-## Numeric arithmetic with `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, and `num_max(...)`
+## Numeric arithmetic with `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, and `num_max(...)`
 These are the standardized numeric value helpers in the method DSL today.
 
 Examples:
@@ -461,6 +461,8 @@ num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(upper_limit
 num_floor(num_sub(scalar(depth), scalar(offset)))
 num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))
 num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5))
+num_sum(array(scores))
+num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_add(scalar(depth), 1)
 num_add(scalar(depth), 1, scalar(offset))
 num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
@@ -479,6 +481,7 @@ num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))
 
 Use cases:
 - increment one depth or count without dropping into raw Perl,
+- reduce one numeric-looking array into one scalar total without dropping into raw Perl,
 - derive one remaining-item count from an array reducer,
 - carry one adjusted threshold or confidence value,
 - keep numeric metadata inside the same composable value-expression layer as `count(...)`, `length(...)`, and `coalesce(...)`.
@@ -490,6 +493,7 @@ assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(off
 assign(scalar(floored_depth), num_floor(num_sub(scalar(depth), scalar(offset))))
 assign(scalar(ceiled_average), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)))
 assign(scalar(rounded_name_length), num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)))
+assign(scalar(total_score), num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(total_length), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
@@ -505,6 +509,7 @@ return(hash(
   "floored_depth", num_floor(num_sub(scalar(depth), scalar(offset))),
   "ceiled_average", num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)),
   "rounded_name_length", num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)),
+  "total_score", num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "next_depth", num_add(scalar(depth), 1),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold)),
@@ -518,6 +523,7 @@ if(num_gt(num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(u
 if(num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 1))
 if(num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)), 2))
 if(num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6))
+if(num_gt(num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)), 10))
 if(num_gt(num_add(count(array(parts)), scalar(offset)), 3))
 if(num_ge(num_sub(scalar(confidence), scalar(threshold)), 0))
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3))
@@ -533,7 +539,8 @@ Worked example:
 ```text
 I {
   declare(array, parts=array("A", "B", "C"))
-  declare(scalar, raw_name="  score  ", depth=1.25, offset=3, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, next_depth, remaining, average_count, bucket, clamped_total, floor_value, ceiling_value)
+  declare(array, scores=array(1, 2.5, 3), extra_scores=array(4, 5), parts=array("A", "B", "C"))
+  declare(scalar, raw_name="  score  ", depth=1.25, offset=3, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, total_score, next_depth, remaining, average_count, bucket, clamped_total, floor_value, ceiling_value)
 }
 
 -> node[1] {
@@ -541,6 +548,7 @@ I {
   assign(scalar(floored_depth), num_floor(num_sub(scalar(depth), scalar(offset))))
   assign(scalar(ceiled_average), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))))
   assign(scalar(rounded_name_length), num_round(num_add(coalesce(length(trim(scalar(raw_name))), 0), scalar(offset))))
+  assign(scalar(total_score), num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)))
   assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset)))
   assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1))
   assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)))
@@ -554,6 +562,7 @@ I {
     "floored_depth", scalar(floored_depth),
     "ceiled_average", scalar(ceiled_average),
     "rounded_name_length", scalar(rounded_name_length),
+    "total_score", scalar(total_score),
     "next_depth", scalar(next_depth),
     "remaining", scalar(remaining),
     "average_count", scalar(average_count),
@@ -571,6 +580,7 @@ Important semantic notes:
 - `num_floor(...)` is currently unary,
 - `num_ceil(...)` is currently unary,
 - `num_round(...)` is currently unary,
+- `num_sum(...)` is currently unary over one array-valued source,
 - `num_add(...)` accepts two or more operands,
 - `num_sub(...)` is currently binary,
 - `num_mul(...)` accepts two or more operands,
@@ -579,6 +589,8 @@ Important semantic notes:
 - `num_clamp(...)` is currently ternary,
 - `num_min(...)` accepts two or more operands,
 - `num_max(...)` accepts two or more operands,
+- `num_sum(...)` returns `0` for an empty array but `undef` when the source is not array-valued or when any element is missing/non-numeric-looking,
+- `num_sum(array_expr)` is the array-to-scalar numeric reducer, while `num_add(...)` remains the scalar-to-scalar combiner for already scalar numeric terms,
 - operands must be defined numeric-looking scalars,
 - supported numeric-looking forms are simple integers/decimals such as `0`, `-3`, `0.75`, and `12.5`,
 - `num_mod(...)` is intentionally stricter and currently expects integer-looking operands such as `0`, `3`, or `-7`,
@@ -595,6 +607,7 @@ num_abs(coalesce(num_sub(scalar(depth), scalar(upper_limit)), 0))
 num_floor(coalesce(num_sub(scalar(depth), scalar(offset)), 0))
 num_ceil(coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0))
 num_round(coalesce(num_add(length(trim(scalar(name))), 0.5), 0))
+num_sum(coalesce(scalaref(retv, {scores}), array()))
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))

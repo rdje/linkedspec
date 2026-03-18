@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_sum(...)`
+
+Extended the method-like DSL migration track with the missing numeric array reducer. Fluent and structured authoring now agree on representative `num_sum(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `num_sum(array_expr)` lowering for:
+  - direct numeric-looking arrays such as `num_sum(array(scores))`,
+  - composed array reducers such as `num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4))`,
+  - and numeric comparison inputs such as `num_gt(num_sum(take(concat_arrays(...), 4)), 10)`.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - `num_sum(...)` stays a pure scalar value helper,
+  - it is currently unary over one array-valued source,
+  - it returns `0` for empty arrays,
+  - and it returns `undef` when the source is not array-valued or when any item is missing/non-numeric-looking.
+- Expanded the user guides with fuller examples showing `num_sum(...)` in assignments, direct returns, flow comparisons, emitted Perl reference output, and side-by-side guidance against `num_add(...)` as the scalar combiner.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `reversed(...)`
 
 Extended the method-like DSL migration track with the missing pure array order-inversion helper. Fluent and structured authoring now agree on representative `reversed(...)` flows across array assignments, direct `return(payload)` expressions, and reducer inputs on both action-edge and lifecycle surfaces.
