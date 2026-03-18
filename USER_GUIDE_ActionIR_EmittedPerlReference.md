@@ -52,6 +52,7 @@ They take effect when the expression appears inside a statement or helper that c
 - `hash("kind", "node", "item", scalar(name))` -> `{"kind" => "node", "item" => $name}`
 - `array_copy(array(items))` -> `[@items]`
 - `array_values(array(items))` -> `[@items]` (compatibility alias for `array_copy(...)`)
+- `concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail"))` -> `[@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]`
 - `trim(scalar(IMATCH))` -> `do { my $__ls_trim = $IMATCH; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }`
 - `lowercase(trim(scalaref(retv, {content})))` -> `do { my $__ls_lower = do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }`
 - `uppercase(coalesce(scalaref(retv, {type}), "word"))` -> `do { my $__ls_upper = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }`

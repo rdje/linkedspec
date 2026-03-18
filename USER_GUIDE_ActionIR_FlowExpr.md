@@ -231,11 +231,14 @@ num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(tail(sorted_keys(hash(meta)))), 0)
 num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
+num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)
 ```
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
 Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
+
+Array-valued helpers such as `concat_arrays(...)` can feed reducers like `count(...)` the same way, so layered aggregate construction can stay inside one expression layer before the final numeric comparison.
 
 ## Nested examples
 This expression language is designed for nesting.

@@ -649,6 +649,46 @@ return(hash("items", array_copy(array(items))))
 push_value(array(nodes), array_copy(array(keyval_pairs)))
 ```
 
+### Pure array layering with `concat_arrays(...)`
+`concat_arrays(...)` is the pure array-valued helper for “take these array sources and build one combined array value from them”.
+
+Examples:
+
+```text
+concat_arrays(array(parts), array("tail"))
+concat_arrays(array(parts), sorted_keys(hash(meta)))
+concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))
+concat_arrays(
+  coalesce(scalaref(retv, {parts}), array("fallback")),
+  take(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 1),
+  array("done")
+)
+```
+
+Use cases:
+- add one literal suffix array onto one working array,
+- combine one working array with one projected array like `sorted_keys(...)`,
+- keep array construction/update pure instead of mutating one staging array with repeated `push_value(...)`,
+- or build one canonical array for `declare(...)`, `assign(...)`, `return(...)`, `count(...)`, `contains(...)`, and later slicing helpers.
+
+Examples in context:
+
+```text
+declare(array, combined=concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail")))
+assign(array(combined), concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail")))
+return(hash("combined", concat_arrays(array(parts), sorted_keys(hash(meta)))))
+assign(scalar(combined_count), count(concat_arrays(array(parts), sorted_keys(hash(meta)))))
+assign(scalar(first_combined), scalar(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2)), 0))
+```
+
+Important semantic notes:
+- `concat_arrays(...)` always returns one array value,
+- it accepts one or more array-valued operands,
+- supported operands include direct working arrays, `array(...)`, `sorted_keys(...)`, `sorted_values(...)`, array slicing helpers such as `take(...)` / `take_last(...)` / `tail(...)` / `drop_last(...)`, and array-valued `coalesce(...)`,
+- items are appended from left to right,
+- undefined array-valued operands contribute nothing,
+- and if you want one nested array snapshot of one working array rather than a layered concatenation, `array_copy(...)` is usually the better tool.
+
 ### Defaulting aggregate values with `coalesce(...)`
 `coalesce(...)` also works when the values are aggregate refs rather than plain scalars.
 

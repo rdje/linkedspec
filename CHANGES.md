@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `concat_arrays(...)`
+
+Extended the method-like DSL migration track with the missing pure array-layering helper on the aggregate-update side. Fluent and structured authoring now agree on representative `concat_arrays(...)` flows across array declarations, array assignments, direct `return(payload)` expressions, and reducer composition on both action-edge and lifecycle surfaces.
+
+- Added `concat_arrays(array_expr, array_expr, ...)` lowering for:
+  - direct working arrays such as `concat_arrays(array(parts), array("tail"))`,
+  - projected arrays such as `concat_arrays(array(parts), sorted_keys(hash(meta)))`,
+  - and composed array-valued expressions such as `concat_arrays(coalesce(scalaref(retv, {parts}), array("fallback")), take(sorted_values(...), 1), array("done"))`.
+- Kept the parser-oriented aggregate-update contract:
+  - `concat_arrays(...)` stays a pure array-valued helper,
+  - operands are appended left-to-right,
+  - supported array-valued operands that are undefined contribute no items,
+  - and clearly non-array helper forms are rejected at lowering time instead of being guessed.
+- Expanded the user guides with fuller examples showing `concat_arrays(...)` in declarations, assignments, direct returns, nested aggregate composition, and reducer composition such as `count(concat_arrays(...))`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `replace_substr(...)`
 
 Extended the method-like DSL migration track with a pure scalar rewrite helper for literal substring normalization. Fluent and structured authoring now agree on representative separator-cleanup and canonical-name rewrite flows across assignments, direct `return(payload)` expressions, and flow comparisons on both action-edge and lifecycle surfaces.

@@ -46,6 +46,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `tail(...)`
 - `drop_front(...)` as an alias of `tail(...)`
 - `drop_back(...)` as an alias of `drop_last(...)`
+- `concat_arrays(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -225,6 +226,48 @@ This is one of the most important distinctions in the DSL.
 
 ### Do **not** use it when you want list insertion into a surrounding constructor.
 For list insertion, use `flat_array(...)` or `flat(...)` instead.
+
+## `concat_arrays(array_expr, array_expr, ...)`
+Use `concat_arrays(...)` when you want one pure array value that appends multiple array-valued sources together without mutating any working array.
+
+Examples:
+
+```text
+concat_arrays(array(parts), array("tail"))
+concat_arrays(array(parts), sorted_keys(hash(meta)))
+concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))
+concat_arrays(
+  coalesce(scalaref(retv, {parts}), array("fallback")),
+  take(sorted_values(pick_keys(hash(meta), "kind", "source")), 1)
+)
+```
+
+Typical contexts:
+
+```text
+declare(array, combined=concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail")))
+assign(array(combined), concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail")))
+return(hash("combined", concat_arrays(array(parts), sorted_keys(hash(meta)))))
+assign(scalar(combined_count), count(concat_arrays(array(parts), sorted_keys(hash(meta)))))
+```
+
+Use it when you want:
+- one canonical array value built from several existing array-valued sources,
+- projected arrays such as `sorted_keys(...)` or `sorted_values(...)` to feed straight into later array helpers,
+- one direct array initializer or assignment source without temporary staging arrays,
+- or one parser-oriented equivalent of “append these arrays together” that stays inside the DSL.
+
+Important semantics:
+- `concat_arrays(...)` accepts one or more operands,
+- operands must be supported array-valued expressions such as direct working arrays, `array(...)`, projected arrays like `sorted_keys(...)` / `sorted_values(...)`, array slicing helpers like `take(...)` / `tail(...)`, or array-valued `coalesce(...)`,
+- operands contribute their items in order from left to right,
+- undefined array-valued operands contribute nothing rather than crashing or inventing a fallback,
+- and clearly non-array helper forms are rejected at lowering time instead of being guessed.
+
+Method-DSL migration note:
+- fluent and structured authoring are now regression-locked on representative `concat_arrays(...)` declaration, assignment, `return(payload)`, and reducer-composition forms too,
+- on both action-edge and lifecycle surfaces,
+- so pure array layering is now part of the same explicit method-like DSL contract as `sorted_keys(...)`, `take(...)`, `tail(...)`, and the other parser-oriented array helpers.
 
 ## `flat(...)`, `flatten(...)`, `flat_array(...)`, `flat_hash(...)`
 These helpers mean “splice this collection into the surrounding constructor.”
