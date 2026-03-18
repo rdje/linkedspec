@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_avg(...)`
+
+Extended the method-like DSL migration track with the missing numeric array-average reducer. Fluent and structured authoring now agree on representative `num_avg(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `num_avg(array_expr)` lowering for:
+  - direct numeric-looking arrays such as `num_avg(array(scores))`,
+  - composed array reducers such as `num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4))`,
+  - and numeric comparison inputs such as `num_ge(num_avg(take(concat_arrays(...), 4)), 5)`.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - `num_avg(...)` stays a pure scalar value helper,
+  - it is currently unary over one array-valued source,
+  - it returns `undef` for empty arrays,
+  - and it returns `undef` when the source is not array-valued or when any item is missing/non-numeric-looking.
+- Expanded the user guides with fuller examples showing `num_avg(...)` in assignments, direct returns, flow comparisons, emitted Perl reference output, and side-by-side guidance against `num_sum(...)` and `num_add(...)`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_sum(...)`
 
 Extended the method-like DSL migration track with the missing numeric array reducer. Fluent and structured authoring now agree on representative `num_sum(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
