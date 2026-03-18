@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_floor(...)`, `num_ceil(...)`, And `num_round(...)`
+
+Extended the method-like DSL migration track with the next float-friendly arithmetic helpers. Fluent and structured authoring now agree on representative rounding and integer-boundary normalization flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `num_floor(value_expr)` lowering for:
+  - direct numeric expressions such as `num_floor(num_sub(scalar(depth), scalar(offset)))`,
+  - and normalized scalar compositions such as `num_floor(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset)))`.
+- Added `num_ceil(value_expr)` lowering for:
+  - reducer-driven arithmetic such as `num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))`,
+  - and direct return payloads where one canonical rounded-up value is needed without temporary staging.
+- Added `num_round(value_expr)` lowering for:
+  - normalized scalar compositions such as `num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5))`,
+  - and mixed float/integer metadata flows where one canonical nearest-integer value is needed without host-language fallback code.
+- Kept the parser-oriented arithmetic contract:
+  - `num_floor(...)`, `num_ceil(...)`, and `num_round(...)` are currently unary,
+  - all three stay pure scalar value helpers,
+  - missing or non-numeric-looking operands preserve `undef`,
+  - and `num_round(...)` uses explicit half-away-from-zero semantics so rounding behavior stays stable and backend-portable.
+- Expanded the user guides with fuller examples showing the new helpers in normalized scalar flows, reducer composition, direct returns, and numeric comparisons.
+
 ## 2026-03-17 - Method-Like DSL Slice: Support Parser-Oriented `matches(...)`
 
 Extended the method-like DSL migration track with the scalar regex-membership helper that was already familiar on the flow-predicate side. Fluent and structured authoring now agree on representative regex-membership flag flows across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.

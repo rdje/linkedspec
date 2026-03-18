@@ -182,6 +182,9 @@ num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
 num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
 num_eq(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 3)
 num_gt(num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset))), 3)
+num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 1)
+num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)), 2)
+num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)
 num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)
 num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)
 starts_with(lowercase(trim(scalar(name))), "node_")
@@ -195,7 +198,7 @@ num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
-Arithmetic helpers such as `num_abs(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
+Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
 
 ## Regex predicate
 ### `matches(lhs, /regex/)`

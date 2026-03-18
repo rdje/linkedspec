@@ -21,6 +21,9 @@ In practical terms, this is the guide you want when you need to understand:
 - `uppercase(...)`
 - `length(...)`
 - `num_abs(...)`
+- `num_floor(...)`
+- `num_ceil(...)`
+- `num_round(...)`
 - `num_add(...)`
 - `num_sub(...)`
 - `num_mul(...)`
@@ -414,7 +417,7 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
 
-## `num_abs(value_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
+## `num_abs(value_expr)`, `num_floor(value_expr)`, `num_ceil(value_expr)`, `num_round(value_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
 Use these when you want parser-oriented numeric composition without leaving the canonical method-like DSL surface.
 
 Examples:
@@ -422,6 +425,9 @@ Examples:
 ```text
 num_abs(num_sub(scalar(depth), scalar(limit)))
 num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))
+num_floor(num_sub(scalar(depth), scalar(offset)))
+num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))
+num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5))
 num_add(scalar(depth), 1)
 num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
 num_sub(count(array(parts)), 1)
@@ -434,6 +440,9 @@ num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))
 
 These helpers are intentionally narrow:
 - `num_abs(...)` is the canonical numeric “absolute value of this operand” helper and is currently unary,
+- `num_floor(...)` is the canonical numeric “round down to the nearest integer” helper and is currently unary,
+- `num_ceil(...)` is the canonical numeric “round up to the nearest integer” helper and is currently unary,
+- `num_round(...)` is the canonical numeric “round to the nearest integer” helper and is currently unary,
 - `num_add(...)` is the canonical numeric “sum these operands” helper and accepts two or more operands,
 - `num_sub(...)` is the canonical numeric “subtract rhs from lhs” helper and is currently binary,
 - `num_mul(...)` is the canonical numeric “multiply these operands” helper and accepts two or more operands,
@@ -447,6 +456,9 @@ Examples in context:
 
 ```text
 assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit))))
+assign(scalar(floored_depth), num_floor(num_sub(scalar(depth), scalar(offset))))
+assign(scalar(ceiled_average), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))))
+assign(scalar(rounded_name_length), num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor)))
@@ -456,11 +468,17 @@ assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset
 assign(scalar(total), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
 if(num_gt(num_add(count(array(parts)), scalar(offset)), 3)); ... endif()
 if(num_gt(num_abs(num_sub(coalesce(length(trim(scalar(name))), 0), scalar(offset))), 3)); ... endif()
+if(num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 2)); ... endif()
+if(num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))), 3)); ... endif()
+if(num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)); ... endif()
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3)); ... endif()
 if(num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)); ... endif()
 return(hash(
   "next_depth", num_add(scalar(depth), 1),
   "distance", num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit))),
+  "floored_depth", num_floor(num_sub(scalar(depth), scalar(offset))),
+  "ceiled_average", num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))),
+  "rounded_name_length", num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
   "floor_value", num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10),
@@ -473,6 +491,8 @@ Important semantic notes:
 - supported numeric-looking forms are simple integer/decimal values such as `0`, `-3`, `0.75`, and `12.5`,
 - if any operand is still undefined or not numeric-looking, the arithmetic helper returns `undef`,
 - `num_abs(...)` evaluates its single operand under that same numeric-looking contract,
+- `num_floor(...)`, `num_ceil(...)`, and `num_round(...)` also evaluate one numeric-looking operand under that same contract,
+- `num_round(...)` rounds halves away from zero so the intent stays explicit and host-portable,
 - `num_div(...)` also returns `undef` when the divisor is `0`,
 - `num_min(...)` and `num_max(...)` evaluate all provided operands under that same numeric-looking contract,
 - and when the rule wants “missing means zero,” that should be stated explicitly with `coalesce(...)`.
@@ -481,6 +501,9 @@ Examples:
 
 ```text
 num_abs(coalesce(num_sub(scalar(depth), scalar(limit)), 0))
+num_floor(coalesce(num_sub(scalar(depth), scalar(offset)), 0))
+num_ceil(coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0))
+num_round(coalesce(num_add(length(trim(scalar(name))), 0.5), 0))
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
@@ -490,7 +513,7 @@ num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(lim
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 ```
 
-This is deliberate. The arithmetic surface is now standardized, but it is still parser-oriented and small rather than a full general-purpose math language.
+This is deliberate. The arithmetic surface is now standardized, including the float-friendly unary rounding helpers, but it is still parser-oriented and small rather than a full general-purpose math language.
 
 ## `starts_with(value_expr, prefix_expr)`, `ends_with(value_expr, suffix_expr)`, and `matches(value_expr, /regex/)`
 Use these when you want one scalar flag answering “does this normalized string begin with this prefix?”, “does it end with this suffix?”, or “does it match this regex?”
