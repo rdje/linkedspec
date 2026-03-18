@@ -929,6 +929,61 @@ Important semantic note:
 - a non-positive count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
+### Literal string rewrite with `replace_substr(...)`
+`replace_substr(...)` is the parser-oriented helper for “take this scalar-like value and replace every literal occurrence of one substring with another substring”.
+
+Examples:
+
+```text
+replace_substr(scalar(name), "-", "_")
+replace_substr(lowercase(trim(scalar(name))), " ", "_")
+replace_substr(coalesce(scalaref(retv, {kind}), scalar(IMATCH)), "::", ".")
+replace_substr(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "-", "_")
+```
+
+Use it when:
+- one rule wants canonical separator cleanup without raw host-language `s///` code,
+- one rule wants to normalize parser-facing names like `Node-Item` into `node_item`,
+- one rule wants to make one fallback payload field more machine-friendly before comparing or returning it,
+- or you want to keep one literal rewrite inside the same composable value-expression layer as `trim(...)`, `lowercase(...)`, `coalesce(...)`, `starts_with(...)`, and `contains_substr(...)`.
+
+Worked example:
+
+```text
+normalized_name:
+ -> /\w+(?:[- ]\w+)*/
+ => Top {
+      declare(scalar, raw_name, normalized_name, normalized_kind)
+
+      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(normalized_name), replace_substr(lowercase(trim(scalar(raw_name))), "-", "_"))
+      assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), "node type"))), " ", "_"))
+
+      return(hash(
+        "raw_name", scalar(raw_name),
+        "normalized_name", scalar(normalized_name),
+        "normalized_kind", scalar(normalized_kind)
+      ))
+    }
+```
+
+Representative shorter patterns:
+
+```text
+assign(scalar(normalized_name), replace_substr(lowercase(trim(scalar(name))), "-", "_"))
+assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_"))
+return(hash("normalized_name", replace_substr(lowercase(trim(scalar(name))), "-", "_")))
+if(eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item"))
+if(starts_with(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"))
+if(contains_substr(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "item"))
+```
+
+Semantic notes:
+- `replace_substr(...)` is a literal substring rewrite helper, not a regex helper,
+- all three operands must be defined or the result stays `undef`,
+- an empty needle leaves the source value unchanged,
+- and the helper stays pure, so you can nest it as deeply as needed inside other scalar helpers and flow comparisons.
+
 ### String boundary checks with `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)`
 These are the parser-oriented scalar helpers for “does this value begin with this prefix?”, “does it end with this suffix?”, “does it contain this substring anywhere?”, and “does it match this regex?”
 

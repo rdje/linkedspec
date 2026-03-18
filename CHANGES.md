@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `replace_substr(...)`
+
+Extended the method-like DSL migration track with a pure scalar rewrite helper for literal substring normalization. Fluent and structured authoring now agree on representative separator-cleanup and canonical-name rewrite flows across assignments, direct `return(payload)` expressions, and flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `replace_substr(value_expr, needle_expr, replacement_expr)` lowering for:
+  - normalized scalar expressions such as `replace_substr(lowercase(trim(scalar(raw_name))), "-", "_")`,
+  - composed fallback reads such as `replace_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), " ", "_")`,
+  - and flow comparisons such as `eq(replace_substr(...), "node_item")` without staging a temporary scalar first.
+- Kept the parser-oriented rewrite contract:
+  - `replace_substr(...)` stays a pure scalar value helper,
+  - it performs literal substring replacement rather than regex replacement,
+  - all three operands must be defined or the result stays `undef`,
+  - and an empty needle leaves the source value unchanged instead of doing between-character insertion.
+- Expanded the user guides with fuller examples showing `replace_substr(...)` in normalized-name cleanup, direct returns, and value/flow composition, with explicit positioning against mutation-oriented `regex_subst(...)`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `contains_substr(...)`
 
 Extended the method-like DSL migration track with the missing middle string-membership predicate between `starts_with(...)` / `ends_with(...)` and `matches(...)`. Fluent and structured authoring now agree on representative substring-membership flag flows across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.

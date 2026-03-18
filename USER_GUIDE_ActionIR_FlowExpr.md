@@ -188,6 +188,16 @@ Use these when a branch depends on string shape or string membership rather than
 
 This same scalar-predicate family now also exists in value lowering, so the identical helper spellings can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
 
+One closely related value helper is `replace_substr(...)`. It is not itself a predicate, but it is meant to feed comparisons and predicates directly:
+
+```text
+eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")
+starts_with(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_")
+contains_substr(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "item")
+```
+
+That keeps literal string rewrites in the same expression layer as the later branch decision.
+
 ## Numeric comparisons
 Supported helpers:
 - `num_eq(lhs, rhs)`

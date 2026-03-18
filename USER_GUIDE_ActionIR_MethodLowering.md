@@ -20,6 +20,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `lowercase(...)`
 - `uppercase(...)`
 - `length(...)`
+- `replace_substr(...)`
 - `num_abs(...)`
 - `num_floor(...)`
 - `num_ceil(...)`
@@ -332,6 +333,7 @@ These are parser-oriented scalar transforms:
 - `trim(value)`
 - `lowercase(value)`
 - `uppercase(value)`
+- `replace_substr(value, needle, replacement)`
 
 They are meant for scalar text normalization inside value composition, not as standalone raw-string escape hatches.
 
@@ -386,6 +388,41 @@ Examples in context:
 assign(scalar(chosen_name), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))))
 return(hash("type", uppercase(trim(coalesce(scalaref(retv, {type}), "word")))))
 if(eq(lowercase(trim(scalaref(retv, {type}))), "word")); ... endif()
+```
+
+## `replace_substr(value_expr, needle_expr, replacement_expr)`
+Use `replace_substr(...)` when you want one pure literal substring rewrite inside the canonical method-like DSL surface.
+
+Examples:
+
+```text
+replace_substr(scalar(name), "-", "_")
+replace_substr(lowercase(trim(scalar(name))), " ", "_")
+replace_substr(coalesce(scalaref(retv, {kind}), scalar(IMATCH)), "::", ".")
+```
+
+Typical uses:
+- normalize one parser-facing name without dropping into raw host-language `s///` code,
+- rewrite separators like `-`, space, `/`, or `::` inside one nested value expression,
+- keep string cleanup pure and composable inside assignments, direct `return(payload)` expressions, and comparisons,
+- and avoid using statement-style `regex_subst(...)` when the intent is “produce one new normalized scalar value” rather than “mutate one existing scalar slot”.
+
+Important semantic note:
+- `replace_substr(...)` is a literal substring rewrite helper, not a regex helper,
+- all three operands must be defined or the result stays `undef`,
+- an empty needle returns the original value unchanged instead of doing between-character insertion,
+- and the helper stays pure, so it can be nested inside `eq(...)`, `starts_with(...)`, `contains_substr(...)`, `hash(...)`, `coalesce(...)`, and other value helpers.
+
+Examples in context:
+
+```text
+assign(scalar(normalized_name), replace_substr(lowercase(trim(scalar(name))), "-", "_"))
+assign(scalar(normalized_kind), replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_"))
+if(eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")); ... endif()
+return(hash(
+  "normalized_name", replace_substr(lowercase(trim(scalar(name))), "-", "_"),
+  "normalized_kind", replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_")
+))
 ```
 
 ## `length(scalar_expr)`
