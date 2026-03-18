@@ -30,6 +30,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `num_round(...)`
 - `num_sum(...)`
 - `num_avg(...)`
+- `num_median(...)`
 - `num_add(...)`
 - `num_sub(...)`
 - `num_mul(...)`
@@ -589,7 +590,7 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
 
-## `num_abs(value_expr)`, `num_floor(value_expr)`, `num_ceil(value_expr)`, `num_round(value_expr)`, `num_sum(array_expr)`, `num_avg(array_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_mod(lhs, rhs)`, `num_clamp(value_expr, lower_bound, upper_bound)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
+## `num_abs(value_expr)`, `num_floor(value_expr)`, `num_ceil(value_expr)`, `num_round(value_expr)`, `num_sum(array_expr)`, `num_avg(array_expr)`, `num_median(array_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_mod(lhs, rhs)`, `num_clamp(value_expr, lower_bound, upper_bound)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
 Use these when you want parser-oriented numeric composition without leaving the canonical method-like DSL surface.
 
 Examples:
@@ -604,6 +605,8 @@ num_sum(array(scores))
 num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_avg(array(scores))
 num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4))
+num_median(array(scores))
+num_median(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_add(scalar(depth), 1)
 num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
 num_sub(count(array(parts)), 1)
@@ -623,6 +626,7 @@ These helpers are intentionally narrow:
 - `num_round(...)` is the canonical numeric “round to the nearest integer” helper and is currently unary,
 - `num_sum(...)` is the canonical numeric “sum the numeric-looking items in this array-valued expression” helper and is currently unary on one array source,
 - `num_avg(...)` is the canonical numeric “average the numeric-looking items in this array-valued expression” helper and is currently unary on one array source,
+- `num_median(...)` is the canonical numeric “median of the numeric-looking items in this array-valued expression” helper and is currently unary on one array source,
 - `num_add(...)` is the canonical numeric “sum these operands” helper and accepts two or more operands,
 - `num_sub(...)` is the canonical numeric “subtract rhs from lhs” helper and is currently binary,
 - `num_mul(...)` is the canonical numeric “multiply these operands” helper and accepts two or more operands,
@@ -643,6 +647,7 @@ assign(scalar(ceiled_average), num_ceil(num_div(num_mul(count(array(parts)), sca
 assign(scalar(rounded_name_length), num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)))
 assign(scalar(total_score), num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(average_score), num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)))
+assign(scalar(median_score), num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor)))
@@ -658,6 +663,7 @@ if(num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 2)); ... endif()
 if(num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))), 3)); ... endif()
 if(num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)); ... endif()
 if(num_ge(num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)); ... endif()
+if(num_ge(num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)); ... endif()
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3)); ... endif()
 if(num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1)); ... endif()
 if(num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(limit)), 5)); ... endif()
@@ -669,6 +675,7 @@ return(hash(
   "ceiled_average", num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))),
   "rounded_name_length", num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)),
   "average_score", num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)),
+  "median_score", num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
   "bucket", num_mod(num_add(count(array(parts)), scalar(offset)), 3),
@@ -687,6 +694,9 @@ Important semantic notes:
 - `num_round(...)` rounds halves away from zero so the intent stays explicit and host-portable,
 - `num_sum(...)` reduces one array-valued expression and returns `0` for an empty array but `undef` when the source is not array-valued or when any element is missing/non-numeric-looking,
 - `num_avg(...)` reduces one array-valued expression and returns `undef` for an empty array, for a non-array source, or when any element is missing/non-numeric-looking,
+- `num_median(...)` reduces one array-valued expression and returns `undef` for an empty array, for a non-array source, or when any element is missing/non-numeric-looking,
+- `num_median(...)` sorts the numeric-looking items numerically before choosing the middle,
+- for odd-length arrays `num_median(...)` returns the single middle item, and for even-length arrays it returns the average of the two middle items,
 - `num_div(...)` also returns `undef` when the divisor is `0`,
 - `num_mod(...)` is intentionally stricter than the other arithmetic helpers and currently expects integer-looking operands such as `0`, `3`, or `-7`,
 - `num_mod(...)` also returns `undef` when the divisor is `0`,
@@ -703,6 +713,7 @@ num_ceil(coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(d
 num_round(coalesce(num_add(length(trim(scalar(name))), 0.5), 0))
 num_sum(coalesce(scalaref(retv, {scores}), array()))
 coalesce(num_avg(coalesce(scalaref(retv, {scores}), array())), 0)
+coalesce(num_median(coalesce(scalaref(retv, {scores}), array())), 0)
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
@@ -714,7 +725,7 @@ num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(lim
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 ```
 
-This is deliberate. The arithmetic surface is now standardized, including the array-to-scalar reducers `num_sum(...)` and `num_avg(...)`, the float-friendly unary rounding helpers, and the integer-oriented remainder helper `num_mod(...)`, but it is still parser-oriented and small rather than a full general-purpose math language.
+This is deliberate. The arithmetic surface is now standardized, including the array-to-scalar reducers `num_sum(...)`, `num_avg(...)`, and `num_median(...)`, the float-friendly unary rounding helpers, and the integer-oriented remainder helper `num_mod(...)`, but it is still parser-oriented and small rather than a full general-purpose math language.
 
 ## `starts_with(value_expr, prefix_expr)`, `ends_with(value_expr, suffix_expr)`, `contains_substr(value_expr, needle_expr)`, and `matches(value_expr, /regex/)`
 Use these when you want one scalar flag answering “does this normalized string begin with this prefix?”, “does it end with this suffix?”, “does it contain this substring anywhere?”, or “does it match this regex?”
