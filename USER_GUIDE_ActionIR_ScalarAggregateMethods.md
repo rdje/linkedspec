@@ -181,6 +181,41 @@ Important semantic note:
 - these helpers preserve `undef`,
 - so they do not quietly invent an empty string where no value existed.
 
+### Scalar string assembly with `concat(...)`
+`concat(...)` is the parser-oriented helper for “take these scalar fragments and build one canonical scalar string”.
+
+Examples:
+
+```text
+concat(scalar(name), "_", scalar(stage))
+concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))
+concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))
+```
+
+Use cases:
+- build one canonical key, label, or normalized identifier from several scalar fragments,
+- keep string assembly inside the same composable expression layer as `trim(...)`, `lowercase(...)`, `replace_substr(...)`, and `coalesce_nonempty(...)`,
+- avoid staging through `array(...)` plus `join_values(...)` when the rule already knows the exact scalar pieces it wants,
+- and keep direct `return(payload)` fields expression-oriented instead of falling back to host-language string interpolation.
+
+Examples in context:
+
+```text
+assign(scalar(full_name), concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_")))
+assign(scalar(stage_key), concat(scalar(full_name), "::", scalar(stage)))
+return(hash(
+  "full_name", concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_")),
+  "stage_key", concat(scalar(full_name), "::", scalar(stage))
+))
+if(eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init"))
+```
+
+Important semantic note:
+- `concat(...)` is variadic and currently requires two or more operands,
+- all operands must resolve to defined non-reference scalar values or the result stays `undef`,
+- numeric-looking scalar operands are accepted and stringified naturally,
+- and aggregate references are rejected instead of being silently stringified into host-language ref text.
+
 ### Scalar text length with `length(...)`
 `length(...)` is the parser-oriented helper for “how long is this scalar text value?”
 

@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -326,6 +326,8 @@ Definedness flow helpers are part of that same contract too: `is_defined(...)` a
 
 Scalar normalization helpers are part of that explicit contract too: `trim(...)`, `lowercase(...)`, and `uppercase(...)` now compose canonically across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so ordinary text cleanup can stay inside the backend-neutral value-expression layer instead of leaking into ad hoc raw string handling.
 
+Pure scalar assembly is part of that same contract too: `concat(...)` now lets `.spec` rules build canonical string values from normalized scalar fragments across assignment sources, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces, so string construction no longer needs temporary array staging or ad hoc host-language interpolation.
+
 Array-to-scalar reduction is part of that contract too: `count(...)` now lets `.spec` rules derive canonical size metadata from array variables and array-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary size-based branching and return metadata can stay inside the same parser-oriented expression layer.
 
 Hash/object-to-scalar reduction is part of that contract too: `count_keys(...)` now lets `.spec` rules derive canonical key-count metadata from working hashes and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary object-shape branching and return metadata can stay inside that same parser-oriented expression layer.
@@ -429,6 +431,7 @@ Typical patterns:
 - `scalar(rename_key(...), "stage")`
 - `length(...)`
 - `replace_substr(...)`
+- `concat(...)`
 - `starts_with(...)`
 - `ends_with(...)`
 - `contains_substr(...)`
@@ -457,7 +460,7 @@ Typical patterns:
 Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
 
 Typical patterns:
-- string scalars from `scalar(...)`, `CAPTURE`, and `join_values(...)`
+- string scalars from `scalar(...)`, `CAPTURE`, `concat(...)`, and `join_values(...)`
 - one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
 - single-field object updates via `set_key(hash_expr, key_expr, value_expr)`
 - single-field object renames via `rename_key(hash_expr, old_key_expr, new_key_expr)`

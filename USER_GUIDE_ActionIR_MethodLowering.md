@@ -21,6 +21,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `uppercase(...)`
 - `length(...)`
 - `replace_substr(...)`
+- `concat(...)`
 - `num_abs(...)`
 - `num_floor(...)`
 - `num_ceil(...)`
@@ -474,6 +475,41 @@ if(eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")); ..
 return(hash(
   "normalized_name", replace_substr(lowercase(trim(scalar(name))), "-", "_"),
   "normalized_kind", replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_")
+))
+```
+
+## `concat(value_expr, value_expr, ...)`
+Use `concat(...)` when you want to build one scalar string value from multiple scalar fragments without staging through an array helper first.
+
+Examples:
+
+```text
+concat(scalar(name), "_", scalar(stage))
+concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))
+concat(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "::", uppercase(trim(scalar(kind))))
+```
+
+Typical uses:
+- build one canonical key or normalized identifier from multiple parser-facing scalar fragments,
+- keep string assembly pure and composable inside assignments, direct `return(payload)` expressions, and comparisons,
+- avoid temporary array staging when the rule already knows the exact scalar pieces it wants to join,
+- and keep string construction inside the same parser-oriented expression layer as `trim(...)`, `replace_substr(...)`, `coalesce_nonempty(...)`, and `scalar(...)`.
+
+Important semantic note:
+- `concat(...)` is variadic and currently requires two or more operands,
+- all operands must resolve to defined non-reference scalar values or the result stays `undef`,
+- numeric-looking scalar values are accepted and stringified naturally,
+- and aggregate references are rejected instead of being silently stringified into host-language ref text.
+
+Examples in context:
+
+```text
+assign(scalar(full_name), concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_")))
+assign(scalar(stage_key), concat(scalar(full_name), "::", scalar(stage)))
+if(eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init")); ... endif()
+return(hash(
+  "full_name", concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_")),
+  "stage_key", concat(scalar(full_name), "::", scalar(stage))
 ))
 ```
 

@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `concat(...)`
+
+Extended the method-like DSL migration track with the missing pure scalar-assembly helper. Fluent and structured authoring now agree on representative `concat(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `concat(value_expr, value_expr, ...)` lowering for:
+  - normalized identifier construction such as `concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))`,
+  - staged key construction such as `concat(scalar(full_name), "::", scalar(stage))`,
+  - and comparison inputs such as `eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init")`.
+- Kept the parser-oriented scalar contract disciplined:
+  - `concat(...)` stays a pure scalar value helper,
+  - it is variadic and currently requires two or more operands,
+  - numeric-looking scalar operands are accepted and stringified naturally,
+  - and it returns `undef` when an operand is missing or is an aggregate/reference operand rather than silently stringifying host-language ref text.
+- Expanded the user guides with fuller examples showing `concat(...)` in assignments, direct returns, flow comparisons, and emitted Perl reference output, with explicit guidance that it is the pure scalar-string assembly companion to array-side `join_values(...)`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_clamp(...)`
 
 Extended the method-like DSL migration track with the missing bounded-result arithmetic helper. Fluent and structured authoring now agree on representative `num_clamp(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
