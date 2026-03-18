@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_clamp(...)`
+
+Extended the method-like DSL migration track with the missing bounded-result arithmetic helper. Fluent and structured authoring now agree on representative `num_clamp(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `num_clamp(value_expr, lower_bound, upper_bound)` lowering for:
+  - reducer-based bounded arithmetic such as `num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)`,
+  - explicit negative/positive bound windows such as `num_clamp(num_sub(scalar(offset), 5), -4, 0)`,
+  - and numeric comparison inputs such as `num_eq(num_clamp(...), 5)` without staging one temporary scalar first.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - `num_clamp(...)` stays a pure scalar value helper,
+  - it is currently ternary,
+  - it accepts numeric-looking value/bound operands,
+  - and it returns `undef` when an operand is missing or not numeric-looking, or when the lower bound is greater than the upper bound.
+- Expanded the user guides with fuller examples showing `num_clamp(...)` in assignments, direct returns, flow comparisons, and emitted Perl reference output, with explicit guidance that it is the bounded-result member of the arithmetic family.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_mod(...)`
 
 Extended the method-like DSL migration track with the missing integer-oriented remainder helper. Fluent and structured authoring now agree on representative `num_mod(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.

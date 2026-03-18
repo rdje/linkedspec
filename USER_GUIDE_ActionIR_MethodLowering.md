@@ -30,6 +30,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `num_mul(...)`
 - `num_div(...)`
 - `num_mod(...)`
+- `num_clamp(...)`
 - `num_min(...)`
 - `num_max(...)`
 - `starts_with(...)`
@@ -508,7 +509,7 @@ return(hash("content_length", length(trim(coalesce(scalaref(retv, {content}), sc
 
 Use `coalesce(length(...), 0)` when the rule explicitly wants “missing text counts as zero length” rather than “missing text stays undefined”.
 
-## `num_abs(value_expr)`, `num_floor(value_expr)`, `num_ceil(value_expr)`, `num_round(value_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_mod(lhs, rhs)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
+## `num_abs(value_expr)`, `num_floor(value_expr)`, `num_ceil(value_expr)`, `num_round(value_expr)`, `num_add(value_expr, value_expr, ...)`, `num_sub(lhs, rhs)`, `num_mul(value_expr, value_expr, ...)`, `num_div(lhs, rhs)`, `num_mod(lhs, rhs)`, `num_clamp(value_expr, lower_bound, upper_bound)`, `num_min(value_expr, value_expr, ...)`, and `num_max(value_expr, value_expr, ...)`
 Use these when you want parser-oriented numeric composition without leaving the canonical method-like DSL surface.
 
 Examples:
@@ -526,6 +527,7 @@ num_sub(num_add(count(array(parts)), scalar(offset)), 1)
 num_mul(count(array(parts)), scalar(factor))
 num_div(num_mul(count(array(parts)), scalar(factor)), 2)
 num_mod(num_add(count(array(parts)), scalar(offset)), 3)
+num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)
 num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10)
 num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))
 ```
@@ -540,6 +542,7 @@ These helpers are intentionally narrow:
 - `num_mul(...)` is the canonical numeric “multiply these operands” helper and accepts two or more operands,
 - `num_div(...)` is the canonical numeric “divide lhs by rhs” helper and is currently binary,
 - `num_mod(...)` is the canonical numeric “integer remainder after dividing lhs by rhs” helper and is currently binary,
+- `num_clamp(...)` is the canonical numeric “keep this value inside the provided lower/upper bounds” helper and is currently ternary,
 - `num_min(...)` is the canonical numeric “pick the smallest operand” helper and accepts two or more operands,
 - `num_max(...)` is the canonical numeric “pick the largest operand” helper and accepts two or more operands,
 - both helpers return one scalar numeric value,
@@ -557,6 +560,7 @@ assign(scalar(window_size), num_sub(count(array(parts)), 1))
 assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor)))
 assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)))
 assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), 3))
+assign(scalar(clamped_total), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
 assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10))
 assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)))
 assign(scalar(total), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
@@ -567,6 +571,7 @@ if(num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(
 if(num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)); ... endif()
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3)); ... endif()
 if(num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1)); ... endif()
+if(num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(limit)), 5)); ... endif()
 if(num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)); ... endif()
 return(hash(
   "next_depth", num_add(scalar(depth), 1),
@@ -577,6 +582,7 @@ return(hash(
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "average_count", num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
   "bucket", num_mod(num_add(count(array(parts)), scalar(offset)), 3),
+  "clamped_total", num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(limit)),
   "floor_value", num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10),
   "ceiling_value", num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))
 )))
@@ -592,6 +598,7 @@ Important semantic notes:
 - `num_div(...)` also returns `undef` when the divisor is `0`,
 - `num_mod(...)` is intentionally stricter than the other arithmetic helpers and currently expects integer-looking operands such as `0`, `3`, or `-7`,
 - `num_mod(...)` also returns `undef` when the divisor is `0`,
+- `num_clamp(...)` accepts numeric-looking scalar value/bound operands and returns `undef` when the lower bound is greater than the upper bound instead of silently swapping them,
 - `num_min(...)` and `num_max(...)` evaluate all provided operands under that same numeric-looking contract,
 - and when the rule wants “missing means zero,” that should be stated explicitly with `coalesce(...)`.
 
@@ -607,6 +614,7 @@ num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
 coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)), 0)
 num_mod(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 3)
+num_clamp(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
 num_min(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(limit), 10)
 num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(limit))
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
