@@ -52,6 +52,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `drop_front(...)` as an alias of `tail(...)`
 - `drop_back(...)` as an alias of `drop_last(...)`
 - `concat_arrays(...)`
+- `sorted(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -1150,6 +1151,44 @@ assign(array(projected_values), sorted_values(hash(meta)))
 assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))
 assign(scalar(value_count), count(sorted_values(hash(meta))))
 return(hash("values", sorted_values(pick_keys(hash(meta), "kind", "source"))))
+```
+
+## `sorted(array_expr)`
+Use `sorted(...)` when you want one new array value containing the items from an array-valued expression in deterministic lexical order.
+
+Examples:
+
+```text
+sorted(array(parts))
+sorted(concat_arrays(array(parts), array("delta"), array("alpha")))
+sorted(coalesce(scalaref(retv, {parts}), array("fallback")))
+sorted(take(sorted_keys(hash(meta)), 3))
+```
+
+Typical uses:
+- canonicalize one token list before counting or joining it,
+- stabilize one composed array value before returning it,
+- feed one deterministic lexical array into `first(...)`, `scalar(array_expr, idx)`, `count(...)`, or `join_values(...)`.
+
+Important semantic note:
+- `sorted(...)` returns one new array value,
+- it does **not** mutate the source array on its own,
+- ordering is lexical ascending order,
+- and undefined array-valued expressions simply turn into one empty returned array.
+
+That means:
+- `sorted(array(parts))` gives one deterministic lexical ordering of the current working array,
+- `sorted(concat_arrays(...))` works well after one array-layering step when the rule wants one canonical merged list,
+- and `count(sorted(...))` is a valid way to ask how many items remain after one canonical sort step.
+
+Examples in context:
+
+```text
+assign(array(ordered_parts), sorted(array(parts)))
+assign(array(ordered_parts), sorted(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("delta"))))
+assign(scalar(first_item), scalar(sorted(array(parts)), 0))
+assign(scalar(ordered_count), count(sorted(concat_arrays(array(parts), array("delta")))))
+return(hash("ordered_parts", sorted(concat_arrays(array(parts), array("delta")))))
 ```
 
 ## `has_key(hash_or_hash_expr, key_expr)`

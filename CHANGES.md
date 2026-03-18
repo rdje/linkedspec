@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `sorted(...)`
+
+Extended the method-like DSL migration track with the missing pure array-ordering helper. Fluent and structured authoring now agree on representative `sorted(...)` flows across array assignments, direct `return(payload)` expressions, and reducer inputs on both action-edge and lifecycle surfaces.
+
+- Added `sorted(array_expr)` lowering for:
+  - direct working-array normalization such as `sorted(array(parts))`,
+  - composed array normalization such as `sorted(concat_arrays(array(parts), array("delta"), array("alpha")))`,
+  - and reducer inputs such as `count(sorted(concat_arrays(...)))`.
+- Kept the helper pure and parser-oriented:
+  - it returns one new lexical-order array value,
+  - it does not mutate the source array,
+  - and undefined/non-array sources collapse to `[]`.
+- Expanded the user guides with fuller examples showing `sorted(...)` in assignments, nested scalar reads, joined-string summaries, reducer composition, and emitted Perl reference output.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `rm_prefix(...)` And `rm_suffix(...)`
 
 Extended the method-like DSL migration track with the missing scalar boundary-transform family. Fluent and structured authoring now agree on representative `rm_prefix(...)` and `rm_suffix(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.

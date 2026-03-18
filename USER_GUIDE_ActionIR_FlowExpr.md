@@ -239,6 +239,7 @@ num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(tail(sorted_keys(hash(meta)))), 0)
 num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)
+num_gt(count(sorted(concat_arrays(array(parts), array("delta"), array("alpha")))), 2)
 ```
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
@@ -247,7 +248,7 @@ Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `n
 
 Pure scalar helpers such as `concat(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `trim(...)`, `lowercase(...)`, `uppercase(...)`, and `coalesce_nonempty(...)` can feed `eq(...)`, `ne(...)`, prefix/suffix checks, and regex predicates the same way, so canonical string assembly, boundary cleanup, and normalization can stay inside one expression layer too.
 
-Array-valued helpers such as `concat_arrays(...)` can feed reducers like `count(...)` the same way, so layered aggregate construction can stay inside one expression layer before the final numeric comparison.
+Array-valued helpers such as `concat_arrays(...)` and `sorted(...)` can feed reducers like `count(...)` the same way, so layered aggregate construction and later deterministic ordering can stay inside one expression layer before the final numeric comparison.
 
 ## Nested examples
 This expression language is designed for nesting.

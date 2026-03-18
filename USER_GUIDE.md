@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -483,6 +483,7 @@ Typical patterns:
 - tail arrays from `tail(array_expr)` and counted tail arrays from `tail(array_expr, scalar(skip_count))`
 - front-drop aliases from `drop_front(array_expr)` and counted front-drop aliases from `drop_front(array_expr, scalar(skip_count))`
 - pure array layering via `concat_arrays(array_expr, array_expr, ...)`
+- deterministic array sorting via `sorted(array_expr)` over direct or composed array-valued expressions
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`

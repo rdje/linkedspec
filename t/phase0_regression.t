@@ -27306,6 +27306,114 @@ SPEC
         'lifecycle concat_arrays fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_sorted_array_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('sorted(concat_arrays(array(parts), array("delta"), array("alpha")))'),
+        q{do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
+        'sorted(...) lowers composed array-valued expressions into one deterministic lexical array value'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_gt(count(sorted(concat_arrays(array(parts), array("delta"), array("alpha")))), 2)'),
+        q{(do { my $__ls_count = do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 2)},
+        'sorted(...) composes inside array reducers and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(sorted(concat_arrays(array(parts), array("delta"))))'),
+        q{return do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
+        'sorted(...) lowers inside general return payloads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(array(ordered), sorted(concat_arrays(array(parts), array("delta"))))'),
+        q{@ordered = (do { my $__ls_array_init = do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
+        'sorted(...) lowers inside array assignment sources with list-context flattening'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_sorted_array_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, parts=array("beta", "alpha", "gamma"), ordered).declare(scalar, first_item, ordered_count, joined).assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))).assign(scalar(first_item), scalar(array(ordered), 0)).assign(scalar(ordered_count), count(array(ordered))).assign(scalar(joined), join_values("|", array(ordered))).return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))); assign(scalar(first_item), scalar(array(ordered), 0)); assign(scalar(ordered_count), count(array(ordered))); assign(scalar(joined), join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge sorted array helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge sorted array helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge sorted array helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge sorted array helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge sorted array helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge sorted array helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge sorted array helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge sorted array helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge sorted array helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge sorted array helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge sorted array helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge sorted array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_sorted_array_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, parts=array("beta", "alpha", "gamma"), ordered).declare(scalar, first_item, ordered_count, joined).assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))).assign(scalar(first_item), scalar(array(ordered), 0)).assign(scalar(ordered_count), count(array(ordered))).assign(scalar(joined), join_values("|", array(ordered))).return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))); assign(scalar(first_item), scalar(array(ordered), 0)); assign(scalar(ordered_count), count(array(ordered))); assign(scalar(joined), join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle sorted array helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle sorted array helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle sorted array helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle sorted array helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle sorted array helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle sorted array helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle sorted array helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle sorted array helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle sorted array helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle sorted array helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle sorted array helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle sorted array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

@@ -2111,6 +2111,44 @@ What this example teaches:
 - it pairs naturally with `pick_keys(...)` when only a public subset of fields should participate,
 - and the resulting array can immediately feed `count(...)`, `array_copy(...)`, or later array pipelines without leaving the DSL.
 
+## Worked example: canonicalize one composed array into lexical order
+This is the pattern to use when the parser wants one deterministic array summary of already-array-shaped data rather than one deterministic projection out of a hash/object.
+
+```text
+-> ordered_name_parts[1] {
+  declare(array, parts=array("beta", "alpha", "gamma"))
+  declare(array, ordered_parts)
+  declare(scalar, first_part, joined_parts)
+
+  assign(
+    array(ordered_parts),
+    sorted(
+      concat_arrays(
+        array(parts),
+        take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2),
+        array("delta")
+      )
+    )
+  )
+
+  assign(scalar(first_part), scalar(array(ordered_parts), 0))
+  assign(scalar(joined_parts), join_values("|", array(ordered_parts)))
+
+  return(hash(
+    "kind", "ORDERED_PARTS",
+    "ordered_parts", array_copy(array(ordered_parts)),
+    "first_part", scalar(first_part),
+    "joined_parts", scalar(joined_parts)
+  ))
+}
+```
+
+What this example teaches:
+- `sorted(...)` is the array-side deterministic ordering helper,
+- it pairs naturally with `concat_arrays(...)` when one rule builds a list from several array-valued sources first,
+- it works just as well on direct working arrays as on composed array-valued expressions,
+- and the resulting array can immediately feed `scalar(array_expr, idx)`, `count(...)`, `join_values(...)`, `array_copy(...)`, or later array slices without leaving the DSL.
+
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.
 
