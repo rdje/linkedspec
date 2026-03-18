@@ -241,6 +241,32 @@ return(hash("name", coalesce(scalar(explicit_name), scalar(fallback_name), "unna
 if(eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD"))
 ```
 
+### Defaulting nonempty scalar values with `coalesce_nonempty(...)`
+
+```text
+coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN")
+coalesce_nonempty(trim(scalar(explicit_name)), trim(scalar(fallback_name)), "unnamed")
+coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")
+```
+
+Use `coalesce_nonempty(...)` when you want the first **defined nonempty scalar** value in a fallback chain.
+
+This is the important semantic difference from `coalesce(...)`:
+- `coalesce_nonempty(...)` skips `undef`,
+- it also skips `""`,
+- but it still does **not** skip `0`,
+- and it will only treat whitespace-only strings as empty if you explicitly normalize them with `trim(...)`.
+
+So `coalesce_nonempty(...)` is the parser-oriented helper for “first real text wins” rather than “first defined value wins”.
+
+Examples:
+
+```text
+assign(scalar(chosen_name), coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN"))
+return(hash("chosen_type", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")))
+if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD"))
+```
+
 ### Presence checks versus emptiness checks
 Once you start composing scalar helpers deeply, it becomes important to distinguish:
 - "is a value present at all?"

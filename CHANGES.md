@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `coalesce_nonempty(...)`
+
+Extended the method-like DSL migration track with the missing scalar-side “first defined nonempty value wins” helper. Fluent and structured authoring now agree on representative `coalesce_nonempty(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `coalesce_nonempty(value1, value2, ..., valueN)` lowering for:
+  - normalized scalar fallback chains such as `coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN")`,
+  - comparison inputs such as `eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")`,
+  - and return payload fields that should skip blank strings without discarding defined numeric values such as `0`.
+- Kept the parser-oriented scalar-defaulting contract:
+  - `coalesce_nonempty(...)` stays a pure value helper,
+  - it skips only `undef` and `""`,
+  - it does not skip `0`,
+  - and callers that want whitespace-only strings treated as empty should say that explicitly with `trim(...)`.
+- Expanded the user guides with fuller examples showing `coalesce_nonempty(...)` in assignments, direct returns, flow comparisons, emitted Perl reference output, and side-by-side guidance against `coalesce(...)`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `rename_key(...)`
 
 Extended the method-like DSL migration track with the missing pure one-field rename helper on the hash/object-shaping side. Fluent and structured authoring now agree on representative `rename_key(...)` flows across hash declarations, hash assignments, direct `return(payload)` expressions, and flow-helper composition on both action-edge and lifecycle surfaces.

@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -320,6 +320,8 @@ Case-normalization and filter pipelines are locked too: fluent and structured au
 
 Defaulting/coalescing value helpers are now part of that explicit contract too: fluent and structured authoring now agree on representative `coalesce(...)` fallback chains across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so parser-oriented “first defined value wins” logic no longer needs to hide inside ad hoc raw fallback expressions.
 
+That scalar-defaulting family is broader now too: `coalesce_nonempty(...)` lets `.spec` rules skip only missing or blank scalar values while still preserving `0` and other defined nonempty values, so “use the first real text after normalization” can stay inside the same functional expression layer without branching.
+
 Definedness flow helpers are part of that same contract too: `is_defined(...)` and `is_undefined(...)` now give the DSL an explicit way to distinguish “missing” from “empty” across scalar fields, nested payload access, and fallback chains, instead of forcing users to blur presence checks together with `is_empty(...)` / `is_nonempty(...)`.
 
 Scalar normalization helpers are part of that explicit contract too: `trim(...)`, `lowercase(...)`, and `uppercase(...)` now compose canonically across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so ordinary text cleanup can stay inside the backend-neutral value-expression layer instead of leaking into ad hoc raw string handling.
@@ -459,6 +461,7 @@ Typical patterns:
 - one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
 - single-field object updates via `set_key(hash_expr, key_expr, value_expr)`
 - single-field object renames via `rename_key(hash_expr, old_key_expr, new_key_expr)`
+- nonempty scalar fallback chains via `coalesce_nonempty(value1, value2, ..., valueN)`
 - scalar metadata from `length(scalar_expr)`
 - scalar literal rewrites from `replace_substr(scalar_expr, needle_expr, replacement_expr)`
 - scalar prefix/suffix flags from `starts_with(scalar_expr, prefix_expr)` and `ends_with(scalar_expr, suffix_expr)`

@@ -57,6 +57,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `rename_key(...)`
 - `drop_keys(...)`
 - `pick_keys(...)`
+- `coalesce_nonempty(...)`
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
@@ -1310,6 +1311,38 @@ Examples in context:
 assign(scalar(name), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN"))
 return(hash("parts", coalesce(scalaref(retv, {parts}), array("empty"))))
 if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); ... endif()
+```
+
+## `coalesce_nonempty(value1, value2, ..., valueN)`
+Use `coalesce_nonempty(...)` when you want the first **defined nonempty scalar** value from a fallback chain.
+
+Examples:
+
+```text
+coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN")
+coalesce_nonempty(trim(scalar(explicit_name)), trim(scalar(fallback_name)), "unnamed")
+coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")
+```
+
+Important semantic note:
+- `coalesce_nonempty(...)` skips `undef`,
+- it also skips `""`,
+- but it does **not** skip `0`,
+- and if you want whitespace-only strings treated as empty, say that explicitly with `trim(...)` around the candidate values.
+
+That makes `coalesce_nonempty(...)` the parser-oriented fallback helper for “first real text wins” rather than “first defined value wins”.
+
+Typical uses:
+- prefer a returned text field, but ignore it when it is blank after normalization,
+- prefer one explicit name variable, then one fallback variable, then one literal default,
+- keep “blank means keep searching” logic inside one composable value expression instead of opening a small marker `if`.
+
+Examples in context:
+
+```text
+assign(scalar(name), coalesce_nonempty(trim(scalaref(retv, {content})), scalar(IMATCH), "UNKNOWN"))
+return(hash("chosen_type", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD")))
+if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); ... endif()
 ```
 
 ## `call(rule)` as a value source

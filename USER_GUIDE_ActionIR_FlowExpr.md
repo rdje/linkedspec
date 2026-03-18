@@ -394,6 +394,7 @@ num_gt(count(array(parts)), 0)
 num_gt(count_keys(hash(meta)), 1)
 eq(lowercase(trim(scalaref(retv, {type}))), "word")
 eq(coalesce(scalaref(retv, {type}), "UNKNOWN"), "WORD")
+eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")
 ```
 
 This is very useful when a child rule returns a structured hash payload and the current rule wants to branch on one field.
@@ -448,6 +449,16 @@ if(is_defined(coalesce(scalaref(retv, {type}), scalar(IMATCH))));
   return(hash("kind", "CLASSIFIED", "type", coalesce(scalaref(retv, {type}), scalar(IMATCH))));
 else;
   return(hash("kind", "UNCLASSIFIED"));
+endif()
+```
+
+### Example: fallback branch only when no nonempty scalar survives
+
+```text
+if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD"));
+  return(hash("kind", "WORDISH"));
+else;
+  return(hash("kind", "OTHER"));
 endif()
 ```
 
@@ -562,6 +573,7 @@ endif()
 - Prefer `sorted_keys(...)` when you need one deterministic key-list view of object shape before using array reducers or returning a key summary.
 - Prefer `sorted_values(...)` when you need one deterministic value-list view derived from one projected object shape before using array reducers or returning value summaries.
 - Prefer `length(...)` when the real question is “how long is this scalar after normalization/defaulting?” rather than “is it empty?” or “is it defined?”.
+- Prefer `coalesce_nonempty(...)` when the real question is “what is the first defined nonblank scalar value after normalization?” rather than “what is the first merely defined value?”.
 - Prefer `scalar(array_expr, index)` or `scalar(hash_expr, key)` on top of composed aggregate helpers when the real question is “read one canonical item from this normalized aggregate” rather than “materialize a temporary aggregate variable first”.
 - Prefer `first(...)` / `last(...)` when the real question is “what is the boundary item of this array or projected array?” rather than “how many?” or “does it contain?”.
 - Prefer `take(...)` when the real question is “what is the first bounded prefix array I want to keep and keep composing?” rather than “what is the first single item?” or “what is the remainder?”.
