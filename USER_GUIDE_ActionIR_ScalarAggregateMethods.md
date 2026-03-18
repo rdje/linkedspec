@@ -1107,6 +1107,64 @@ Semantic notes:
 - an empty needle leaves the source value unchanged,
 - and the helper stays pure, so you can nest it as deeply as needed inside other scalar helpers and flow comparisons.
 
+### Literal boundary cleanup with `rm_prefix(...)` and `rm_suffix(...)`
+`rm_prefix(...)` and `rm_suffix(...)` are the parser-oriented helpers for “remove this literal prefix if present” and “remove this literal suffix if present”.
+
+Examples:
+
+```text
+rm_prefix(lowercase(trim(scalar(name))), "node_")
+rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end")
+rm_prefix(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "raw_word"), "raw_")
+rm_suffix(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "_draft")
+```
+
+Useful when:
+- one rule wants to strip a known parser-facing marker such as `node_`, `raw_`, or `tmp_`,
+- one rule wants to strip a known trailing marker such as `_end`, `_draft`, or `_tail`,
+- you want to keep boundary cleanup inside the same composable value-expression layer as `trim(...)`, `replace_substr(...)`, `concat(...)`, and `coalesce_nonempty(...)`,
+- you want the cleanup to be pure rather than mutation-oriented,
+- or you want the same cleanup logic to feed assignments, returned metadata, and comparisons without branching.
+
+Worked example:
+
+```text
+normalized_boundary_name:
+ -> /\w+(?: \w+)*/
+ => Top {
+      declare(scalar, raw_name, underscored_name, core_name, base_name)
+
+      assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
+      assign(scalar(underscored_name), replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"))
+      assign(scalar(core_name), rm_prefix(scalar(underscored_name), "node_"))
+      assign(scalar(base_name), rm_suffix(scalar(underscored_name), "_end"))
+
+      return(hash(
+        "raw_name", scalar(raw_name),
+        "underscored_name", scalar(underscored_name),
+        "core_name", scalar(core_name),
+        "base_name", scalar(base_name)
+      ))
+    }
+```
+
+Representative shorter patterns:
+
+```text
+assign(scalar(core_name), rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"))
+assign(scalar(base_name), rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"))
+return(hash("core_name", rm_prefix(lowercase(trim(scalar(name))), "node_")))
+if(eq(rm_prefix(lowercase(trim(scalar(name))), "node_"), "item_end"))
+if(eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item"))
+```
+
+Semantic notes:
+- both helpers are literal boundary transforms, not regex helpers,
+- both operands must be defined or the result stays `undef`,
+- an empty prefix or suffix leaves the source value unchanged,
+- if the requested boundary is not present, the source value is returned unchanged,
+- and the helpers stay pure, so you can nest them as deeply as needed inside other scalar helpers and flow comparisons.
+
 ### String boundary checks with `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)`
 These are the parser-oriented scalar helpers for “does this value begin with this prefix?”, “does it end with this suffix?”, “does it contain this substring anywhere?”, and “does it match this regex?”
 

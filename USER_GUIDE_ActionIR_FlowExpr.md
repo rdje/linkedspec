@@ -188,15 +188,17 @@ Use these when a branch depends on string shape or string membership rather than
 
 This same scalar-predicate family now also exists in value lowering, so the identical helper spellings can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
 
-One closely related value helper is `replace_substr(...)`. It is not itself a predicate, but it is meant to feed comparisons and predicates directly:
+Closely related value helpers such as `replace_substr(...)`, `rm_prefix(...)`, and `rm_suffix(...)` are not themselves predicates, but they are meant to feed comparisons and predicates directly:
 
 ```text
 eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")
 starts_with(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_")
 contains_substr(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "item")
+eq(rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"), "item_end")
+eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item")
 ```
 
-That keeps literal string rewrites in the same expression layer as the later branch decision.
+That keeps literal string rewrites and boundary cleanup in the same expression layer as the later branch decision.
 
 ## Numeric comparisons
 Supported helpers:
@@ -226,6 +228,8 @@ num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)
 num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)
 num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)
 eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init")
+eq(rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"), "item_end")
+eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item")
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
 contains_substr(lowercase(trim(scalar(name))), "node")
@@ -241,7 +245,7 @@ Use these when the values are numeric and you want numeric ordering/comparison, 
 
 Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging. `num_mod(...)` is the intentionally integer-oriented member of that family, while `num_clamp(...)` is the “bounded result” member for rules that want one explicit numeric ceiling/floor without spelling nested `num_min(num_max(...))`.
 
-Pure scalar helpers such as `concat(...)`, `replace_substr(...)`, `trim(...)`, `lowercase(...)`, `uppercase(...)`, and `coalesce_nonempty(...)` can feed `eq(...)`, `ne(...)`, prefix/suffix checks, and regex predicates the same way, so canonical string assembly and normalization can stay inside one expression layer too.
+Pure scalar helpers such as `concat(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `trim(...)`, `lowercase(...)`, `uppercase(...)`, and `coalesce_nonempty(...)` can feed `eq(...)`, `ne(...)`, prefix/suffix checks, and regex predicates the same way, so canonical string assembly, boundary cleanup, and normalization can stay inside one expression layer too.
 
 Array-valued helpers such as `concat_arrays(...)` can feed reducers like `count(...)` the same way, so layered aggregate construction can stay inside one expression layer before the final numeric comparison.
 

@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -328,6 +328,8 @@ Scalar normalization helpers are part of that explicit contract too: `trim(...)`
 
 Pure scalar assembly is part of that same contract too: `concat(...)` now lets `.spec` rules build canonical string values from normalized scalar fragments across assignment sources, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces, so string construction no longer needs temporary array staging or ad hoc host-language interpolation.
 
+Scalar boundary transforms are part of that same contract too: `rm_prefix(...)` and `rm_suffix(...)` now let `.spec` rules strip one literal leading or trailing marker from normalized scalar values across assignments, direct `return(payload)` expressions, and comparison inputs, so common name-cleanup work can stay inside pure value expressions instead of leaking into ad hoc raw string code.
+
 Array-to-scalar reduction is part of that contract too: `count(...)` now lets `.spec` rules derive canonical size metadata from array variables and array-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary size-based branching and return metadata can stay inside the same parser-oriented expression layer.
 
 Hash/object-to-scalar reduction is part of that contract too: `count_keys(...)` now lets `.spec` rules derive canonical key-count metadata from working hashes and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so ordinary object-shape branching and return metadata can stay inside that same parser-oriented expression layer.
@@ -431,6 +433,8 @@ Typical patterns:
 - `scalar(rename_key(...), "stage")`
 - `length(...)`
 - `replace_substr(...)`
+- `rm_prefix(...)`
+- `rm_suffix(...)`
 - `concat(...)`
 - `starts_with(...)`
 - `ends_with(...)`
@@ -467,6 +471,7 @@ Typical patterns:
 - nonempty scalar fallback chains via `coalesce_nonempty(value1, value2, ..., valueN)`
 - scalar metadata from `length(scalar_expr)`
 - scalar literal rewrites from `replace_substr(scalar_expr, needle_expr, replacement_expr)`
+- scalar boundary rewrites from `rm_prefix(scalar_expr, prefix_expr)` and `rm_suffix(scalar_expr, suffix_expr)`
 - scalar prefix/suffix flags from `starts_with(scalar_expr, prefix_expr)` and `ends_with(scalar_expr, suffix_expr)`
 - scalar substring-membership flags from `contains_substr(scalar_expr, needle_expr)`
 - scalar emptiness flags from `is_empty(value_expr)` and `is_nonempty(value_expr)` inside both assignments and `return(payload)`

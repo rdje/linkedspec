@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `rm_prefix(...)` And `rm_suffix(...)`
+
+Extended the method-like DSL migration track with the missing scalar boundary-transform family. Fluent and structured authoring now agree on representative `rm_prefix(...)` and `rm_suffix(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `rm_prefix(value_expr, prefix_expr)` lowering for:
+  - normalized marker cleanup such as `rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_")`,
+  - fallback-normalized scalar cleanup such as `rm_prefix(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "raw_word"), "raw_")`,
+  - and comparison inputs such as `eq(rm_prefix(...), "item_end")`.
+- Added `rm_suffix(value_expr, suffix_expr)` lowering for:
+  - normalized trailing-marker cleanup such as `rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end")`,
+  - concat-fed scalar cleanup such as `rm_suffix(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "_draft")`,
+  - and comparison inputs such as `eq(rm_suffix(...), "node_item")`.
+- Kept the parser-oriented scalar contract disciplined:
+  - both helpers are pure literal boundary transforms rather than regex helpers,
+  - both preserve `undef` for missing operands,
+  - both leave the source value unchanged when the requested boundary is absent,
+  - and empty prefix/suffix operands leave the source value unchanged too.
+- Expanded the user guides with fuller examples showing `rm_prefix(...)` and `rm_suffix(...)` in assignments, direct returns, flow comparisons, and emitted Perl reference output, with explicit guidance that they are the transform-side companions to `starts_with(...)` and `ends_with(...)`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `concat(...)`
 
 Extended the method-like DSL migration track with the missing pure scalar-assembly helper. Fluent and structured authoring now agree on representative `concat(...)` flows across scalar assignments, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces.

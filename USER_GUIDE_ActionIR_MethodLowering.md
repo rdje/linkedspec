@@ -21,6 +21,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `uppercase(...)`
 - `length(...)`
 - `replace_substr(...)`
+- `rm_prefix(...)`
+- `rm_suffix(...)`
 - `concat(...)`
 - `num_abs(...)`
 - `num_floor(...)`
@@ -475,6 +477,44 @@ if(eq(replace_substr(lowercase(trim(scalar(name))), "-", "_"), "node_item")); ..
 return(hash(
   "normalized_name", replace_substr(lowercase(trim(scalar(name))), "-", "_"),
   "normalized_kind", replace_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), " ", "_")
+))
+```
+
+## `rm_prefix(value_expr, prefix_expr)` and `rm_suffix(value_expr, suffix_expr)`
+Use these when you want one pure literal boundary trim inside the canonical method-like DSL surface.
+
+Examples:
+
+```text
+rm_prefix(lowercase(trim(scalar(name))), "node_")
+rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end")
+rm_prefix(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(IMATCH), "word"), "raw_")
+rm_suffix(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "_draft")
+```
+
+Typical uses:
+- strip one leading parser marker such as `node_`, `raw_`, or `tmp_` after normalization,
+- strip one trailing marker such as `_end`, `_draft`, or `_tail` without dropping into regexes,
+- keep one boundary cleanup step pure and composable inside assignments, direct `return(payload)` expressions, and comparisons,
+- and avoid expanding common prefix/suffix cleanup into branch ladders or raw host-language string code.
+
+Important semantic note:
+- both helpers are literal boundary transforms, not regex helpers,
+- both require defined scalar operands or the result stays `undef`,
+- an empty prefix/suffix leaves the source value unchanged,
+- if the requested boundary is not present, the original value is returned unchanged,
+- and the helpers stay pure, so they can be nested inside `eq(...)`, `concat(...)`, `hash(...)`, `coalesce_nonempty(...)`, `starts_with(...)`, and other value helpers.
+
+Examples in context:
+
+```text
+assign(scalar(core_name), rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"))
+assign(scalar(base_name), rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"))
+if(eq(rm_prefix(lowercase(trim(scalar(name))), "node_"), "item_end")); ... endif()
+if(eq(rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end"), "node_item")); ... endif()
+return(hash(
+  "core_name", rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"),
+  "base_name", rm_suffix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "_end")
 ))
 ```
 
