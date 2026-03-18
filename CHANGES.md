@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Method-Like DSL Slice: Broaden Parser-Oriented `num_min(...)` / `num_max(...)`
+
+Extended the method-like DSL migration track by broadening the already-landed numeric boundary helpers. Fluent and structured authoring now agree on unary array-reducer `num_min(...)` / `num_max(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Broadened `num_min(...)` so it now accepts:
+  - one array-valued source such as `num_min(array(scores))` or `num_min(take(concat_arrays(array(scores), array(extra_scores)), 4))`,
+  - while preserving the older scalar variadic form such as `num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10)`.
+- Broadened `num_max(...)` so it now accepts:
+  - one array-valued source such as `num_max(array(scores))` or `num_max(take(concat_arrays(array(scores), array(extra_scores)), 4))`,
+  - while preserving the older scalar variadic form such as `num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit))`.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - unary array-reducer mode returns `undef` for empty arrays,
+  - it returns `undef` when the source is not array-valued or when any item is missing/non-numeric-looking,
+  - and the older two-or-more operand scalar forms remain unchanged.
+- Expanded the user guides with fuller examples showing both modes side by side in assignments, direct returns, flow comparisons, and emitted Perl reference output.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_median(...)`
 
 Extended the method-like DSL migration track with the missing numeric array-median reducer. Fluent and structured authoring now agree on representative `num_median(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.

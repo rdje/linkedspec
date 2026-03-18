@@ -467,6 +467,8 @@ num_avg(array(scores))
 num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_median(array(scores))
 num_median(take(concat_arrays(array(scores), array(extra_scores)), 4))
+num_min(array(scores))
+num_min(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_add(scalar(depth), 1)
 num_add(scalar(depth), 1, scalar(offset))
 num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset))
@@ -480,6 +482,8 @@ num_div(scalar(confidence), scalar(threshold))
 num_mod(num_add(count(array(parts)), scalar(offset)), 3)
 num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)
 num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)
+num_max(array(scores))
+num_max(take(concat_arrays(array(scores), array(extra_scores)), 4))
 num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))
 ```
 
@@ -488,6 +492,7 @@ Use cases:
 - reduce one numeric-looking array into one scalar total without dropping into raw Perl,
 - reduce one numeric-looking array into one scalar average without dropping into raw Perl,
 - reduce one numeric-looking array into one scalar median without dropping into raw Perl,
+- reduce one numeric-looking array into one scalar minimum/maximum without dropping into raw Perl,
 - derive one remaining-item count from an array reducer,
 - carry one adjusted threshold or confidence value,
 - keep numeric metadata inside the same composable value-expression layer as `count(...)`, `length(...)`, and `coalesce(...)`.
@@ -502,6 +507,7 @@ assign(scalar(rounded_name_length), num_round(num_add(coalesce(length(trim(scala
 assign(scalar(total_score), num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(average_score), num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(median_score), num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)))
+assign(scalar(lowest_score), num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(next_depth), num_add(scalar(depth), 1))
 assign(scalar(total_length), num_add(coalesce(length(trim(scalar(name))), 0), 2, scalar(offset)))
 assign(scalar(window_size), num_sub(count(array(parts)), 1))
@@ -511,6 +517,7 @@ assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor
 assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), 3))
 assign(scalar(clamped_total), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
 assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
+assign(scalar(highest_score), num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)))
 assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)))
 return(hash(
   "distance", num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(upper_limit))),
@@ -520,6 +527,7 @@ return(hash(
   "total_score", num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "average_score", num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "median_score", num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)),
+  "lowest_score", num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "next_depth", num_add(scalar(depth), 1),
   "remaining", num_sub(num_add(count(array(parts)), scalar(offset)), 1),
   "adjusted_confidence", num_sub(scalar(confidence), scalar(threshold)),
@@ -527,6 +535,7 @@ return(hash(
   "bucket", num_mod(num_add(count(array(parts)), scalar(offset)), 3),
   "clamped_total", num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10),
   "floor_value", num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10),
+  "highest_score", num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)),
   "ceiling_value", num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))
 ))
 if(num_gt(num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(upper_limit))), 1))
@@ -536,6 +545,7 @@ if(num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6))
 if(num_gt(num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)), 10))
 if(num_ge(num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5))
 if(num_ge(num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5))
+if(num_ge(num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)), 2))
 if(num_gt(num_add(count(array(parts)), scalar(offset)), 3))
 if(num_ge(num_sub(scalar(confidence), scalar(threshold)), 0))
 if(num_gt(num_mul(count(array(parts)), scalar(factor)), 3))
@@ -543,6 +553,7 @@ if(num_ge(num_div(num_mul(count(array(parts)), scalar(factor)), 2), 1))
 if(num_eq(num_mod(num_add(count(array(parts)), scalar(offset)), 3), 1))
 if(num_eq(num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)), 5))
 if(num_le(num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10), 4))
+if(num_ge(num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)), 8))
 if(num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)), 6))
 ```
 
@@ -551,7 +562,7 @@ Worked example:
 ```text
 I {
   declare(array, scores=array(1, 2.5, 3), extra_scores=array(4, 5), parts=array("A", "B", "C"))
-  declare(scalar, raw_name="  score  ", depth=1.25, offset=3, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, total_score, average_score, median_score, next_depth, remaining, average_count, bucket, clamped_total, floor_value, ceiling_value)
+  declare(scalar, raw_name="  score  ", depth=1.25, offset=3, factor=1.5, divisor=2, lower_limit=3, upper_limit=6, distance, floored_depth, ceiled_average, rounded_name_length, total_score, average_score, median_score, lowest_score, next_depth, remaining, average_count, bucket, clamped_total, floor_value, highest_score, ceiling_value)
 }
 
 -> node[1] {
@@ -562,12 +573,14 @@ I {
   assign(scalar(total_score), num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)))
   assign(scalar(average_score), num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)))
   assign(scalar(median_score), num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)))
+  assign(scalar(lowest_score), num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)))
   assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset)))
   assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1))
   assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)))
   assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), 3))
   assign(scalar(clamped_total), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit)))
   assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10))
+  assign(scalar(highest_score), num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)))
   assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit)))
 
   return(hash(
@@ -578,12 +591,14 @@ I {
     "total_score", scalar(total_score),
     "average_score", scalar(average_score),
     "median_score", scalar(median_score),
+    "lowest_score", scalar(lowest_score),
     "next_depth", scalar(next_depth),
     "remaining", scalar(remaining),
     "average_count", scalar(average_count),
     "bucket", scalar(bucket),
     "clamped_total", scalar(clamped_total),
     "floor_value", scalar(floor_value),
+    "highest_score", scalar(highest_score),
     "ceiling_value", scalar(ceiling_value),
     "enough_parts", num_gt(scalar(remaining), 1)
   ))
@@ -604,14 +619,16 @@ Important semantic notes:
 - `num_div(...)` is currently binary,
 - `num_mod(...)` is currently binary,
 - `num_clamp(...)` is currently ternary,
-- `num_min(...)` accepts two or more operands,
-- `num_max(...)` accepts two or more operands,
+- `num_min(...)` accepts either one array-valued source or two or more operands,
+- `num_max(...)` accepts either one array-valued source or two or more operands,
 - `num_sum(...)` returns `0` for an empty array but `undef` when the source is not array-valued or when any element is missing/non-numeric-looking,
 - `num_avg(...)` returns `undef` for an empty array, for a non-array source, or when any element is missing/non-numeric-looking,
 - `num_median(...)` returns `undef` for an empty array, for a non-array source, or when any element is missing/non-numeric-looking,
+- `num_min(array_expr)` and `num_max(array_expr)` return `undef` for an empty array, for a non-array source, or when any element is missing/non-numeric-looking,
 - `num_sum(array_expr)` is the array-to-scalar numeric reducer, while `num_add(...)` remains the scalar-to-scalar combiner for already scalar numeric terms,
 - `num_avg(array_expr)` is the array-to-scalar numeric average reducer when the rule wants “mean-like summary of this array,” not just “sum these already scalar terms,”
 - `num_median(array_expr)` is the array-to-scalar numeric median reducer when the rule wants “middle value after numeric ordering of this array,” not just “sum/average these items,”
+- `num_min(array_expr)` and `num_max(array_expr)` are the array-to-scalar boundary reducers when the rule wants “smallest numeric-looking item in this array” or “largest numeric-looking item in this array,” not just a scalar floor/ceiling composition,
 - `num_median(...)` returns the single middle item for odd-length arrays and the average of the two middle items for even-length arrays,
 - operands must be defined numeric-looking scalars,
 - supported numeric-looking forms are simple integers/decimals such as `0`, `-3`, `0.75`, and `12.5`,
@@ -632,6 +649,7 @@ num_round(coalesce(num_add(length(trim(scalar(name))), 0.5), 0))
 num_sum(coalesce(scalaref(retv, {scores}), array()))
 coalesce(num_avg(coalesce(scalaref(retv, {scores}), array())), 0)
 coalesce(num_median(coalesce(scalaref(retv, {scores}), array())), 0)
+coalesce(num_min(coalesce(scalaref(retv, {scores}), array())), 0)
 num_add(coalesce(scalar(depth), 0), 1)
 num_sub(coalesce(length(trim(scalar(name))), 0), 1)
 num_mul(coalesce(count(array(parts)), 0), scalar(factor))
@@ -639,6 +657,7 @@ coalesce(num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor)),
 num_mod(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 3)
 num_clamp(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
 num_min(coalesce(num_add(count(array(parts)), scalar(offset)), 0), scalar(lower_limit), 10)
+coalesce(num_max(coalesce(scalaref(retv, {scores}), array())), 0)
 num_max(coalesce(num_add(count(array(parts)), scalar(offset)), 0), 2, scalar(upper_limit))
 num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 ```

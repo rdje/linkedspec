@@ -27846,6 +27846,124 @@ SPEC
         'lifecycle num_median fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_num_minmax_array_reducer_helpers' => sub {
+    plan tests => 6;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_min(concat_arrays(array(parts), array(4, 8, 10)))'),
+        q{do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }},
+        'num_min(...) accepts one composed array-valued source as a numeric minimum reducer'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('num_max(concat_arrays(array(parts), array(4, 8, 10)))'),
+        q{do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }},
+        'num_max(...) accepts one composed array-valued source as a numeric maximum reducer'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(num_min(concat_arrays(array(parts), array(4, 8, 10))), 4)'),
+        q{(do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } } == 4)},
+        'num_min(...) unary array-reducer mode composes inside numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(num_max(concat_arrays(array(parts), array(4, 8, 10))), 10)'),
+        q{(do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } } == 10)},
+        'num_max(...) unary array-reducer mode composes inside numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(scalar(lowest), num_min(concat_arrays(array(parts), array(4, 8, 10))))'),
+        q{$lowest = do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }},
+        'assign helper accepts unary-array num_min(...) over composed array-valued expressions'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(num_max(concat_arrays(array(parts), array(4, 8, 10))))'),
+        q{return do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }},
+        'return(payload) accepts unary-array num_max(...) nested around composed array reducers'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_num_minmax_array_reducer_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, lowest, highest).assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", scalar(lowest), "highest", scalar(highest)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", scalar(lowest), "highest", scalar(highest))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge unary-array num_min/max helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge unary-array num_min/max helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge unary-array num_min/max helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge unary-array num_min/max helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge unary-array num_min/max helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge unary-array num_min/max helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge unary-array num_min/max helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge unary-array num_min/max helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge unary-array num_min/max helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge unary-array num_min/max helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge unary-array num_min/max helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge unary-array num_min/max fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_num_minmax_array_reducer_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, lowest, highest).assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))).assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", scalar(lowest), "highest", scalar(highest)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", scalar(lowest), "highest", scalar(highest))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle unary-array num_min/max helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle unary-array num_min/max helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle unary-array num_min/max helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle unary-array num_min/max helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle unary-array num_min/max helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle unary-array num_min/max helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle unary-array num_min/max helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle unary-array num_min/max helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle unary-array num_min/max helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle unary-array num_min/max helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle unary-array num_min/max helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle unary-array num_min/max fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
     plan tests => 10;
 

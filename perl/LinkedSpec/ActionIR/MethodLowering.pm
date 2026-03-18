@@ -672,11 +672,27 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $upper_expr = $trim_action_ir_value->($num_clamp_args->[2]) unless defined($upper_expr) && length($upper_expr);
   return undef unless defined($upper_expr) && length($upper_expr);
 
-  return 'do { my $__ls_num_clamp_value = '.$value_expr.'; my $__ls_num_clamp_lower = '.$lower_expr.'; my $__ls_num_clamp_upper = '.$upper_expr.'; (defined($__ls_num_clamp_value) && defined($__ls_num_clamp_lower) && defined($__ls_num_clamp_upper) && $__ls_num_clamp_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_upper =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower <= $__ls_num_clamp_upper) ? ($__ls_num_clamp_value < $__ls_num_clamp_lower ? $__ls_num_clamp_lower : ($__ls_num_clamp_value > $__ls_num_clamp_upper ? $__ls_num_clamp_upper : $__ls_num_clamp_value)) : undef }';
+ return 'do { my $__ls_num_clamp_value = '.$value_expr.'; my $__ls_num_clamp_lower = '.$lower_expr.'; my $__ls_num_clamp_upper = '.$upper_expr.'; (defined($__ls_num_clamp_value) && defined($__ls_num_clamp_lower) && defined($__ls_num_clamp_upper) && $__ls_num_clamp_value =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_upper =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/ && $__ls_num_clamp_lower <= $__ls_num_clamp_upper) ? ($__ls_num_clamp_value < $__ls_num_clamp_lower ? $__ls_num_clamp_lower : ($__ls_num_clamp_value > $__ls_num_clamp_upper ? $__ls_num_clamp_upper : $__ls_num_clamp_value)) : undef }';
  }
  if ($method_call && $method_call->{method} eq 'num_min') {
-  my $num_min_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $num_min_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
   return undef unless $num_min_args && @$num_min_args;
+
+  if (@$num_min_args == 1) {
+   my $target_expr = $trim_action_ir_value->($num_min_args->[0]);
+   return undef unless defined($target_expr) && length($target_expr);
+
+   my $array_symbol = $extract_array_symbol_name->($target_expr);
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+    return 'do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@'.$array_symbol.') { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
+   }
+
+   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+   return undef unless defined($lowered_target) && length($lowered_target);
+
+   return 'do { my $__ls_num_min_source = '.$lowered_target.'; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq \'ARRAY\') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }';
+  }
 
   my @lowered_terms;
   foreach my $arg (@$num_min_args) {
@@ -689,8 +705,24 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my @__ls_num_min_terms = ('.join(', ', @lowered_terms).'); my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@__ls_num_min_terms) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
  }
  if ($method_call && $method_call->{method} eq 'num_max') {
-  my $num_max_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+  my $num_max_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, undef);
   return undef unless $num_max_args && @$num_max_args;
+
+  if (@$num_max_args == 1) {
+   my $target_expr = $trim_action_ir_value->($num_max_args->[0]);
+   return undef unless defined($target_expr) && length($target_expr);
+
+   my $array_symbol = $extract_array_symbol_name->($target_expr);
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+    return 'do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@'.$array_symbol.') { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
+   }
+
+   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+   return undef unless defined($lowered_target) && length($lowered_target);
+
+   return 'do { my $__ls_num_max_source = '.$lowered_target.'; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq \'ARRAY\') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }';
+  }
 
   my @lowered_terms;
   foreach my $arg (@$num_max_args) {

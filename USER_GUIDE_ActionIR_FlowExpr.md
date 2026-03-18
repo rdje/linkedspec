@@ -230,7 +230,9 @@ num_ge(num_floor(num_sub(scalar(depth), scalar(offset))), 1)
 num_ge(num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2)), 2)
 num_eq(num_round(num_add(coalesce(length(trim(scalar(name))), 0), 0.5)), 6)
 num_ge(num_median(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)
+num_ge(num_min(take(concat_arrays(array(scores), array(extra_scores)), 4)), 2)
 num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10), 4)
+num_ge(num_max(take(concat_arrays(array(scores), array(extra_scores)), 4)), 8)
 num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)
 eq(concat(lowercase(trim(scalar(name))), "_", scalar(stage)), "node_init")
 eq(rm_prefix(replace_substr(lowercase(trim(scalar(name))), " ", "_"), "node_"), "item_end")
@@ -250,7 +252,7 @@ num_gt(count(reversed(concat_arrays(array(parts), array("delta"), array("tail"))
 
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
-Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging. `num_mod(...)` is the intentionally integer-oriented member of that family, while `num_clamp(...)` is the “bounded result” member for rules that want one explicit numeric ceiling/floor without spelling nested `num_min(num_max(...))`.
+Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging. `num_min(...)` and `num_max(...)` now cover both variadic scalar floor/ceiling-style composition and unary array-reducer mode, `num_mod(...)` is the intentionally integer-oriented member of that family, and `num_clamp(...)` is the “bounded result” member for rules that want one explicit numeric ceiling/floor without spelling nested `num_min(num_max(...))`.
 
 Pure scalar helpers such as `concat(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `trim(...)`, `lowercase(...)`, `uppercase(...)`, and `coalesce_nonempty(...)` can feed `eq(...)`, `ne(...)`, prefix/suffix checks, and regex predicates the same way, so canonical string assembly, boundary cleanup, and normalization can stay inside one expression layer too.
 
