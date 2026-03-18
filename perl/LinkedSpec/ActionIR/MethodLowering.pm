@@ -170,7 +170,7 @@ sub _normalize_method_tag_expr {
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `merge_hash(...)`, `drop_keys(...)`,
 #           `pick_keys(...)`, `sorted_keys(...)`, `sorted_values(...)`,
-#           `length(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `matches(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `contains(...)`,
+#           `length(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `matches(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `contains(...)`,
 #           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
@@ -184,6 +184,7 @@ sub _lower_method_value_expr {
  my $lower_scalaref_value_expr = _require_dep($deps, 'lower_scalaref_value_expr');
  my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
  my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
+ my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
  my $lower_scalar_access_key_expr = _require_dep($deps, 'lower_scalar_access_key_expr');
  my $infer_scalar_container_kind = _require_dep($deps, 'infer_scalar_container_kind');
  my $split_top_level_csv = _require_dep($deps, 'split_top_level_csv');
@@ -594,6 +595,44 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($pattern_expr) && length($pattern_expr);
 
   return 'do { my $__ls_matches_value = '.$value_expr.'; defined($__ls_matches_value) ? (($__ls_matches_value =~ '.$pattern_expr.') ? 1 : 0) : 0 }';
+ }
+ if ($method_call && ($method_call->{method} eq 'is_empty' || $method_call->{method} eq 'is_nonempty')) {
+  my $emptiness_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $emptiness_args;
+
+  my $target_expr = $trim_action_ir_value->($emptiness_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $empty_expr;
+  if ($target_expr =~ /^array\s*\(/o) {
+   my $array_symbol = $extract_array_symbol_name->($target_expr);
+   return undef unless defined($array_symbol) && length($array_symbol);
+   $empty_expr = '((!@'.$array_symbol.') ? 1 : 0)';
+  } elsif ($target_expr =~ /^hash\s*\(/o) {
+   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
+   return undef unless defined($hash_symbol) && length($hash_symbol);
+   $empty_expr = '((!scalar(keys %'.$hash_symbol.')) ? 1 : 0)';
+  } else {
+   my $scalar_symbol = $extract_scalar_symbol_name->($target_expr);
+   if (defined($scalar_symbol) && length($scalar_symbol)) {
+    $empty_expr = '((!defined($'.$scalar_symbol.') || $'.$scalar_symbol.' eq \'\') ? 1 : 0)';
+   } else {
+    my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+    return undef unless defined($lowered_target) && length($lowered_target);
+
+    if ($looks_like_array_value_expr->($target_expr)) {
+     $empty_expr = 'do { my $__ls_is_empty_array = '.$lowered_target.'; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }';
+    } elsif ($looks_like_hash_value_expr->($target_expr)) {
+     $empty_expr = 'do { my $__ls_is_empty_hash = '.$lowered_target.'; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }';
+    } else {
+     $empty_expr = 'do { my $__ls_is_empty_value = '.$lowered_target.'; (!($__ls_is_empty_value)) ? 1 : 0 }';
+    }
+   }
+  }
+
+  return $empty_expr if $method_call->{method} eq 'is_empty';
+  return 'do { my $__ls_is_nonempty_empty = '.$empty_expr.'; $__ls_is_nonempty_empty ? 0 : 1 }';
  }
  if ($method_call && $method_call->{method} eq 'count') {
   my $count_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -1060,7 +1099,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|is_empty|is_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -1068,7 +1107,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_min|num_max|starts_with|ends_with|matches|is_empty|is_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

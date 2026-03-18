@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Value-Layer `is_empty(...)` And `is_nonempty(...)`
+
+Extended the method-like DSL migration track so the aggregate-emptiness family is no longer limited to flow predicates. Fluent and structured authoring now agree on representative value-layer emptiness flag flows across direct `return(payload)` expressions and scalar assignments on both action-edge and lifecycle surfaces.
+
+- Added value-layer lowering for `is_empty(value_expr)` and `is_nonempty(value_expr)` over:
+  - projected array expressions such as `sorted_values(pick_keys(hash(meta), "kind", "source"))`,
+  - projected hash expressions such as `pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")`,
+  - and the same composed aggregate helper chains that were already supported in flow conditions.
+- Kept the aggregate-aware emptiness contract:
+  - array-valued helper expressions still check real item count rather than Perl reference truthiness,
+  - hash-valued helper expressions still check real key count rather than Perl reference truthiness,
+  - and the existing flow-only lowering shape was left stable rather than silently rewritten as part of this slice.
+- Extended the payload and fluent bootstrap paths so `.return(is_empty(...))` and nested `return(hash(..., is_nonempty(...)))` lower through the canonical general-payload path too.
+- Expanded the user guides with fuller examples showing `is_empty(...)` / `is_nonempty(...)` as assigned scalar flags, returned payload fields, and shared emptiness vocabulary across both value and flow layers.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `num_floor(...)`, `num_ceil(...)`, And `num_round(...)`
 
 Extended the method-like DSL migration track with the next float-friendly arithmetic helpers. Fluent and structured authoring now agree on representative rounding and integer-boundary normalization flows across assignments, direct `return(payload)` expressions, and numeric flow comparisons on both action-edge and lifecycle surfaces.

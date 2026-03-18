@@ -33,6 +33,8 @@ In practical terms, this is the guide you want when you need to understand:
 - `starts_with(...)`
 - `ends_with(...)`
 - `matches(...)`
+- `is_empty(...)`
+- `is_nonempty(...)`
 - `count(...)`
 - `first(...)`
 - `last(...)`
@@ -559,6 +561,43 @@ return(hash(
   "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {type}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
 ```
+
+## `is_empty(value_expr)` and `is_nonempty(value_expr)`
+Use these when you want one scalar emptiness flag inside the value layer, not only inside `if(...)` / `elseif(...)` / `switch(...)` conditions.
+
+Examples:
+
+```text
+is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))
+is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))
+is_empty(join_values("", array(word)))
+is_nonempty(coalesce(scalaref(retv, {parts}), array("fallback")))
+```
+
+This is the value-layer companion to the already-supported flow-predicate surface:
+- you can assign these flags into scalars,
+- return them inside `hash(...)` payloads,
+- and keep the same aggregate-aware emptiness semantics when the argument is a projected array/hash expression rather than one direct working variable.
+
+Examples in context:
+
+```text
+assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))))
+assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
+return(hash(
+  "values_empty", is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))),
+  "meta_nonempty", is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
+))
+return(hash(
+  "content_empty", is_empty(join_values("", array(word))),
+  "fallback_nonempty", is_nonempty(coalesce(scalaref(retv, {parts}), array("fallback")))
+))
+```
+
+Important semantic note:
+- this slice does not replace the existing flow lowering,
+- it extends the same emptiness family into general value lowering,
+- so `is_empty(...)` / `is_nonempty(...)` can now be used consistently in assignments, direct `return(payload)` expressions, and flow conditions.
 
 ## `count(array_or_array_expr)`
 Use `count(...)` when you want one scalar size/count result from an array variable or array-valued expression.

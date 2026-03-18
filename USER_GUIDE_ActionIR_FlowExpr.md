@@ -129,6 +129,8 @@ This is intentionally different from `is_defined(...)`:
 - `is_defined(scalar(name))` treats `""` as already present,
 - and `is_empty(pick_keys(hash(meta), "kind"))` can still be true even though that projected hash ref is defined.
 
+This same helper family now also has value-layer support, so the identical `is_empty(...)` spelling can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
+
 ### `is_nonempty(...)`
 This is the inverse convenience helper.
 
@@ -142,6 +144,8 @@ is_nonempty(join_values("", array(word)))
 is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source")))
 is_nonempty(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage"))
 ```
+
+This same helper family now also has value-layer support, so the identical `is_nonempty(...)` spelling can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in branch conditions.
 
 ## String comparisons
 Supported helpers:

@@ -267,6 +267,9 @@ if(is_empty(scalaref(retv, {content})))
 if(is_nonempty(join_values("", array(word))))
 if(is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))))
 if(is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
+assign(scalar(content_empty), is_empty(scalaref(retv, {content})))
+assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))
+return(hash("content_empty", is_empty(scalaref(retv, {content})), "meta_nonempty", is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))))
 ```
 
 Important semantic difference:
@@ -275,6 +278,11 @@ Important semantic difference:
 - an empty array/hash ref is still **defined**,
 - but those may still be empty for the purposes of `is_empty(...)`,
 - so projected arrays from helpers like `sorted_values(...)` and projected hashes from helpers like `pick_keys(...)` should still be tested with `is_empty(...)` / `is_nonempty(...)`, not raw truthiness.
+
+One more practical point now matters too:
+- `is_empty(...)` / `is_nonempty(...)` are no longer only “branch helpers,”
+- they can also be carried as explicit scalar flags inside `assign(...)` and `return(payload)`,
+- which makes metadata like `"content_empty"`, `"has_projected_values"`, or `"meta_nonempty"` stay inside the same parser-oriented value layer instead of forcing users to branch only to recover a boolean.
 
 ### String scalars read from returned payloads
 

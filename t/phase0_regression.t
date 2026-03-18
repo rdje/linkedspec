@@ -25327,6 +25327,30 @@ subtest 'action_rewriter_lowers_matches_value_helpers' => sub {
         'matches(...) lowers inside general return payloads'
     );
 };
+subtest 'action_rewriter_lowers_value_layer_emptiness_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
+        'do { my $__ls_is_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }',
+        'is_empty(...) lowers projected array expressions into value-layer emptiness flags'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))'),
+        'do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }',
+        'is_nonempty(...) lowers projected hash expressions into value-layer nonempty flags'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))'),
+        'do { my $__ls_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }',
+        'existing flow lowering for is_empty(...) remains stable while value-layer support is added'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values_empty", is_empty(sorted_values(pick_keys(hash(meta), "kind", "source"))), "meta_nonempty", is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))))'),
+        'return {"values_empty" => do { my $__ls_is_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }, "meta_nonempty" => do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }}',
+        'is_empty(...) and is_nonempty(...) lower inside general return payloads as value helpers'
+    );
+};
 subtest 'method_like_fluent_and_structured_action_contains_value_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
@@ -28768,6 +28792,93 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle numeric rounding helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_value_emptiness_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty), "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug"))))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty), "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug")))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action value-emptiness helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action value-emptiness helper form');
+    is_deeply($fluent_descr->{spec}{Top}{CODE}, $block_descr->{spec}{Top}{CODE}, 'fluent and structured action value-emptiness helper forms lower to identical CODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action value-emptiness helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action value-emptiness helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action value-emptiness helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action value-emptiness helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action value-emptiness helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action value-emptiness helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action value-emptiness helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action value-emptiness helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action value-emptiness helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_value_emptiness_helpers_lower_equivalently' => sub {
+    plan tests => 11;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))).return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top
+LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle value-emptiness helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle value-emptiness helper form');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle value-emptiness helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle value-emptiness helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle value-emptiness helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle value-emptiness helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle value-emptiness helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle value-emptiness helper form avoids unresolved-helper hits');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle value-emptiness helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle value-emptiness helper fluent form preserves DECLARE/ASSIGN coverage'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}),
+        'structured lifecycle value-emptiness helper form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 
