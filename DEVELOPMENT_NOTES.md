@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-18: Added parser-oriented scalar substring predicate helper `contains_substr(...)` so `.spec` rules can keep normalized substring-membership flags inside canonical value expressions across assignment sources, direct return payloads, and flow conditions, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.
 - Deferred hardening note: fluent lifecycle descriptor metadata still under-reports `RETURN` coverage for the new value-layer aggregate emptiness helper family `is_empty(...)` / `is_nonempty(...)` even though the feature is otherwise rewrite-ready and regression-green; keep future lifecycle metadata-parity work separate from the landed feature contract.
 - 2026-03-18: Added value-layer lowering for parser-oriented aggregate emptiness helpers `is_empty(...)` / `is_nonempty(...)` so the same aggregate-aware emptiness family now works inside assignments and direct `return(payload)` expressions too, not only in flow predicates; this intentionally preserved the existing flow-lowering shape instead of changing older flow semantics as part of the same slice.
 - 2026-03-17: Added parser-oriented arithmetic helper `num_abs(...)` so `.spec` rules can keep absolute-distance and magnitude-style numeric composition inside canonical value expressions across assignment sources, direct return payloads, and numeric comparison inputs, with fluent-versus-structured parity locked on both action-edge and lifecycle surfaces.

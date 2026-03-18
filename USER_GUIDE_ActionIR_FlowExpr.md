@@ -17,8 +17,8 @@ In practice, it covers:
 - `is_empty(...)`
 - `is_nonempty(...)`
 - string comparisons: `eq`, `ne`, `gt`, `ge`, `lt`, `le`
+- scalar substring/pattern predicates: `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`
 - numeric comparisons: `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, `num_le`
-- regex predicates: `matches(lhs, /regex/)`
 - nested composition of those helpers
 
 ## Why this expression family matters
@@ -51,6 +51,7 @@ Use it when any one of the conditions should pass.
 ```text
 and(scalar(enabled), is_nonempty(scalar(name)))
 and(not(is_empty(array(items))), matches(scalar(token), /^[A-Z_]+$/))
+and(contains_substr(lowercase(trim(scalar(name))), "node"), ends_with(lowercase(trim(scalar(name))), "_end"))
 ```
 
 Use it when all conditions must pass.
@@ -166,6 +167,27 @@ gt(scalar(name), "M")
 
 Use these when you mean Perl-style string comparison semantics.
 
+## Scalar substring/pattern predicates
+Supported helpers:
+- `starts_with(lhs, prefix)`
+- `ends_with(lhs, suffix)`
+- `contains_substr(lhs, needle)`
+- `matches(lhs, /regex/)`
+
+Examples:
+
+```text
+starts_with(lowercase(trim(scalar(name))), "node_")
+ends_with(lowercase(trim(scalar(name))), "_end")
+contains_substr(lowercase(trim(scalar(name))), "node")
+contains_substr(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "NODE")
+matches(scalar(token), /^[A-Z_]+$/)
+```
+
+Use these when a branch depends on string shape or string membership rather than exact equality.
+
+This same scalar-predicate family now also exists in value lowering, so the identical helper spellings can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
+
 ## Numeric comparisons
 Supported helpers:
 - `num_eq(lhs, rhs)`
@@ -193,6 +215,7 @@ num_eq(num_min(num_add(count(array(parts)), scalar(offset)), scalar(limit), 10),
 num_ge(num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(limit)), 6)
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
+contains_substr(lowercase(trim(scalar(name))), "node")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
@@ -203,20 +226,6 @@ num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 Use these when the values are numeric and you want numeric ordering/comparison, not string ordering.
 
 Arithmetic helpers such as `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, and `num_max(...)` can feed these comparisons directly, so numeric reducer chains can stay inside one expression layer instead of being expanded into temporary scalar staging.
-
-## Regex predicate
-### `matches(lhs, /regex/)`
-
-Examples:
-
-```text
-matches(scalar(token), /^[A-Z_]+$/)
-matches(scalar(name), /foo/i)
-```
-
-Use this when a branch depends on regex membership rather than equality.
-
-This same `matches(...)` surface now also exists in value lowering, so the identical regex-membership helper can be assigned or returned through `assign(...)` and `return(payload)` too, not only used directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.
 
 ## Nested examples
 This expression language is designed for nesting.
@@ -257,6 +266,12 @@ starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
 ```
 
+### Example: normalized name contains one known parser substring
+
+```text
+contains_substr(lowercase(trim(scalar(name))), "node")
+```
+
 ### Example: projected object still has keys after skipping the first stable key
 
 ```text
@@ -292,7 +307,7 @@ num_gt(count(drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stag
 - reducers like `count(...)` can wrap composed array helpers such as `take_last(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
-- scalar predicate helpers like `starts_with(...)` and `ends_with(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
+- scalar predicate helpers like `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
 - the same pattern works when you want one trimmed leading array via `count(drop_last(sorted_keys(...), scalar(drop_count)))`,
 - the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), scalar(take_last_count)))`,
 - the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,

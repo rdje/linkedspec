@@ -32,6 +32,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `num_max(...)`
 - `starts_with(...)`
 - `ends_with(...)`
+- `contains_substr(...)`
 - `matches(...)`
 - `is_empty(...)`
 - `is_nonempty(...)`
@@ -517,22 +518,25 @@ num_gt(coalesce(num_add(scalar(depth), scalar(offset)), 0), 3)
 
 This is deliberate. The arithmetic surface is now standardized, including the float-friendly unary rounding helpers, but it is still parser-oriented and small rather than a full general-purpose math language.
 
-## `starts_with(value_expr, prefix_expr)`, `ends_with(value_expr, suffix_expr)`, and `matches(value_expr, /regex/)`
-Use these when you want one scalar flag answering “does this normalized string begin with this prefix?”, “does it end with this suffix?”, or “does it match this regex?”
+## `starts_with(value_expr, prefix_expr)`, `ends_with(value_expr, suffix_expr)`, `contains_substr(value_expr, needle_expr)`, and `matches(value_expr, /regex/)`
+Use these when you want one scalar flag answering “does this normalized string begin with this prefix?”, “does it end with this suffix?”, “does it contain this substring anywhere?”, or “does it match this regex?”
 
 Examples:
 
 ```text
 starts_with(scalar(name), "pre")
 ends_with(scalar(name), "fix")
+contains_substr(scalar(name), "efi")
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+contains_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node")
 matches(lowercase(trim(scalar(name))), /^node_/)
 matches(coalesce(scalaref(retv, {type}), scalar(IMATCH)), /^[A-Z_]+$/)
 ```
 
 Typical uses:
 - keep one parser-oriented prefix/suffix check inside value lowering instead of dropping to host-language `index(...)` or `substr(...)`,
+- keep one parser-oriented substring-membership check inside value lowering instead of dropping to host-language `index(...) >= 0` tests,
 - keep one parser-oriented regex-membership check inside value lowering instead of dropping to host-language regex conditionals in assignment or return code,
 - assign one canonical boolean-ish scalar flag into the working state,
 - return one boundary-check flag in payload metadata,
@@ -540,24 +544,29 @@ Typical uses:
 
 Important semantic note:
 - all three helpers return `1` or `0`,
+- all four helpers return `1` or `0`,
 - they preserve composability with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
 - if the main value is undefined, the result is `0`,
 - if the prefix/suffix expression is undefined, the result is `0`,
+- if the substring needle expression is undefined, the result is `0`,
 - `matches(...)` is designed around the same regex surface already used in flow predicates such as `matches(lhs, /regex/)`,
-- and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
+- and empty string prefixes/suffixes/substrings therefore still behave consistently once both sides are defined.
 
 Examples in context:
 
 ```text
 assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
 assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+assign(scalar(has_mid_node), contains_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node"))
 assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {type}), scalar(IMATCH)))), /^[A-Z_]+$/))
 if(starts_with(lowercase(trim(scalar(name))), "node_")); ... endif()
+if(contains_substr(lowercase(trim(scalar(name))), "node")); ... endif()
 if(matches(lowercase(trim(scalar(name))), /^node_/)); ... endif()
-if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end"))); ... endif()
+if(and(starts_with(lowercase(trim(scalar(name))), "node_"), contains_substr(lowercase(trim(scalar(name))), "node"))); ... endif()
 return(hash(
   "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
   "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end"),
+  "has_mid_node", contains_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node"),
   "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {type}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
 ```

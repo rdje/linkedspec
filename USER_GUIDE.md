@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `join_values(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `matches(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `join_values(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -422,6 +422,7 @@ Typical patterns:
 - `length(...)`
 - `starts_with(...)`
 - `ends_with(...)`
+- `contains_substr(...)`
 - `join_values(...)`
 - `first(...)`
 - `last(...)`
@@ -450,6 +451,7 @@ Typical patterns:
 - one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
 - scalar metadata from `length(scalar_expr)`
 - scalar prefix/suffix flags from `starts_with(scalar_expr, prefix_expr)` and `ends_with(scalar_expr, suffix_expr)`
+- scalar substring-membership flags from `contains_substr(scalar_expr, needle_expr)`
 - scalar emptiness flags from `is_empty(value_expr)` and `is_nonempty(value_expr)` inside both assignments and `return(payload)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
@@ -485,6 +487,7 @@ Typical patterns:
 - `eq/ne/gt/ge/lt/le`
 - `num_eq/...`
 - `matches(...)`
+- `contains_substr(...)`
 
 ### I need `if/else` or `switch/case` lowering
 Start with [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md).

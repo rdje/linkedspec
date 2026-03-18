@@ -23305,6 +23305,90 @@ SPEC
         'lifecycle scalar boundary helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
+subtest 'method_like_fluent_and_structured_action_scalar_contains_substr_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node).assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")).assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")).return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")); assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")); return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar contains_substr helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar contains_substr helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge scalar contains_substr helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge scalar contains_substr helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge scalar contains_substr helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge scalar contains_substr helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge scalar contains_substr helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge scalar contains_substr helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge scalar contains_substr helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge scalar contains_substr helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge scalar contains_substr helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge scalar contains_substr helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_scalar_contains_substr_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node).assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")).assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")).return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")); assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")); return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar contains_substr helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar contains_substr helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle scalar contains_substr helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle scalar contains_substr helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle scalar contains_substr helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle scalar contains_substr helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle scalar contains_substr helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle scalar contains_substr helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle scalar contains_substr helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle scalar contains_substr helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle scalar contains_substr helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle scalar contains_substr helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
 subtest 'method_like_fluent_and_structured_action_scalar_regex_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
@@ -25325,6 +25409,30 @@ subtest 'action_rewriter_lowers_matches_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("is_prefixed", matches(lowercase(trim(scalar(raw_name))), /^pre/)))'),
         'return {"is_prefixed" => do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }}',
         'matches(...) lowers inside general return payloads'
+    );
+};
+subtest 'action_rewriter_lowers_contains_substr_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
+        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'contains_substr(normalized-scalar, needle) lowers into a boolean-like substring-membership expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('contains_substr(coalesce(scalaref(retv, {type}), scalar(IMATCH)), "WORD")'),
+        'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = $retv->{type}; defined($__ls_coalesce) ? $__ls_coalesce : $IMATCH }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'contains_substr(...) lowers composed fallback expressions into guarded substring-membership checks'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('contains_substr(lowercase(trim(scalar(raw_name))), "fix")'),
+        'do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'contains_substr(...) composes inside flow conditions over normalized scalar expressions'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_fix", contains_substr(lowercase(trim(scalar(raw_name))), "fix")))'),
+        'return {"has_fix" => do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }}',
+        'contains_substr(...) lowers inside general return payloads'
     );
 };
 subtest 'action_rewriter_lowers_value_layer_emptiness_helpers' => sub {

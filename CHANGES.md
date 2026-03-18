@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `contains_substr(...)`
+
+Extended the method-like DSL migration track with the missing middle string-membership predicate between `starts_with(...)` / `ends_with(...)` and `matches(...)`. Fluent and structured authoring now agree on representative substring-membership flag flows across assignments, direct `return(payload)` expressions, and flow conditions on both action-edge and lifecycle surfaces.
+
+- Added `contains_substr(value_expr, needle_expr)` lowering for:
+  - normalized scalar expressions such as `contains_substr(lowercase(trim(scalar(raw_name))), "fix")`,
+  - composed fallback reads such as `contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")`,
+  - and direct return payloads where one canonical substring-membership flag is needed without dropping into host-language `index(...) >= 0` code.
+- Kept the parser-oriented predicate contract:
+  - `contains_substr(...)` stays a pure scalar value helper,
+  - it returns `1` or `0`,
+  - undefined main values preserve a clean `0` result,
+  - undefined needle values preserve a clean `0` result,
+  - and empty needles still behave consistently once both sides are defined.
+- Expanded the user guides with fuller examples showing `contains_substr(...)` in normalized string flows, assignments, direct returns, and value/flow composition.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Value-Layer `is_empty(...)` And `is_nonempty(...)`
 
 Extended the method-like DSL migration track so the aggregate-emptiness family is no longer limited to flow predicates. Fluent and structured authoring now agree on representative value-layer emptiness flag flows across direct `return(payload)` expressions and scalar assignments on both action-edge and lifecycle surfaces.

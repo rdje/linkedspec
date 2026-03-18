@@ -929,22 +929,25 @@ Important semantic note:
 - a non-positive count returns one empty array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
 
-### String boundary checks with `starts_with(...)`, `ends_with(...)`, and `matches(...)`
-These are the parser-oriented scalar helpers for “does this value begin with this prefix?”, “does it end with this suffix?”, and “does it match this regex?”
+### String boundary checks with `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)`
+These are the parser-oriented scalar helpers for “does this value begin with this prefix?”, “does it end with this suffix?”, “does it contain this substring anywhere?”, and “does it match this regex?”
 
 Examples:
 
 ```text
 starts_with(scalar(name), "pre")
 ends_with(scalar(name), "fix")
+contains_substr(scalar(name), "efi")
 starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "_end")
+contains_substr(lowercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), "node")
 matches(lowercase(trim(scalar(name))), /^node_/)
 matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ```
 
 Useful when:
 - one rule wants a clear prefix/suffix decision without raw host-language string code,
+- one rule wants a clear substring-membership decision without raw host-language `index(...) >= 0` code,
 - one rule wants a regex-membership flag without dropping to ad hoc host-language `=~` code in assignments or return payloads,
 - you want to keep normalization and boundary checking inside one nested value expression,
 - you want to assign one reusable flag and return it later,
@@ -956,18 +959,20 @@ Worked example:
 token_shape:
  -> /\w+/
  => Top {
-      declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix, is_wordish)
+      declare(scalar, raw_name, lowered_name, has_node_prefix, has_end_suffix, has_mid_node, is_wordish)
 
       assign(scalar(raw_name), coalesce(scalaref(retv, {name}), scalar(IMATCH), ""))
       assign(scalar(lowered_name), lowercase(trim(scalar(raw_name))))
       assign(scalar(has_node_prefix), starts_with(scalar(lowered_name), "node_"))
       assign(scalar(has_end_suffix), ends_with(scalar(lowered_name), "_end"))
+      assign(scalar(has_mid_node), contains_substr(scalar(lowered_name), "node"))
       assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
 
       return(hash(
         "name", scalar(lowered_name),
         "has_node_prefix", scalar(has_node_prefix),
         "has_end_suffix", scalar(has_end_suffix),
+        "has_mid_node", scalar(has_mid_node),
         "is_wordish", scalar(is_wordish)
       ))
     }
@@ -978,23 +983,26 @@ Representative shorter patterns:
 ```text
 assign(scalar(has_node_prefix), starts_with(lowercase(trim(scalar(name))), "node_"))
 assign(scalar(has_end_suffix), ends_with(lowercase(trim(scalar(name))), "_end"))
+assign(scalar(has_mid_node), contains_substr(lowercase(trim(scalar(name))), "node"))
 assign(scalar(is_wordish), matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/))
 return(hash(
   "has_node_prefix", starts_with(lowercase(trim(scalar(name))), "node_"),
   "has_end_suffix", ends_with(lowercase(trim(scalar(name))), "_end"),
+  "has_mid_node", contains_substr(lowercase(trim(scalar(name))), "node"),
   "is_wordish", matches(uppercase(trim(coalesce(scalaref(retv, {kind}), scalar(IMATCH)))), /^[A-Z_]+$/)
 ))
-if(and(starts_with(lowercase(trim(scalar(name))), "node_"), ends_with(lowercase(trim(scalar(name))), "_end")))
+if(and(starts_with(lowercase(trim(scalar(name))), "node_"), contains_substr(lowercase(trim(scalar(name))), "node")))
 if(matches(lowercase(trim(scalar(name))), /^node_/))
 ```
 
 Semantic notes:
-- all three helpers return scalar `1` or `0`,
+- all four helpers return scalar `1` or `0`,
 - they compose directly with `trim(...)`, `lowercase(...)`, `uppercase(...)`, `coalesce(...)`, `scalar(...)`, and `scalaref(...)`,
 - undefined main values return `0`,
 - undefined prefix/suffix expressions return `0`,
+- undefined substring needles return `0`,
 - `matches(...)` is designed around the same regex literal surface already used by flow predicates, so `/.../flags` remains the standard spelling there too,
-- and empty string prefixes/suffixes therefore still behave consistently once both sides are defined.
+- and empty string prefixes/suffixes/substrings therefore still behave consistently once both sides are defined.
 
 ### Drop the trailing array suffix with `drop_last(...)` or `drop_back(...)`
 `drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”. `drop_back(...)` is the exact alias for the same lowering contract.
