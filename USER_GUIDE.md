@@ -484,6 +484,7 @@ Typical patterns:
 - front-drop aliases from `drop_front(array_expr)` and counted front-drop aliases from `drop_front(array_expr, scalar(skip_count))`
 - pure array layering via `concat_arrays(array_expr, array_expr, ...)`
 - deterministic array sorting via `sorted(array_expr)` over direct or composed array-valued expressions
+- pure array order inversion via `reversed(array_expr)` over direct or composed array-valued expressions
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
 - hash/object constructors via `hash(...)`

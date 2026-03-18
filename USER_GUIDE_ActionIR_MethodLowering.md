@@ -53,6 +53,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `drop_back(...)` as an alias of `drop_last(...)`
 - `concat_arrays(...)`
 - `sorted(...)`
+- `reversed(...)`
 - `contains(...)`
 - `count_keys(...)`
 - `sorted_keys(...)`
@@ -1189,6 +1190,44 @@ assign(array(ordered_parts), sorted(concat_arrays(array(parts), take(sorted_keys
 assign(scalar(first_item), scalar(sorted(array(parts)), 0))
 assign(scalar(ordered_count), count(sorted(concat_arrays(array(parts), array("delta")))))
 return(hash("ordered_parts", sorted(concat_arrays(array(parts), array("delta")))))
+```
+
+## `reversed(array_expr)`
+Use `reversed(...)` when you want one new array value containing the items from an array-valued expression in the opposite order from the incoming array.
+
+Examples:
+
+```text
+reversed(array(parts))
+reversed(concat_arrays(array(parts), array("delta"), array("tail")))
+reversed(coalesce(scalaref(retv, {parts}), array("fallback")))
+reversed(take(sorted_keys(hash(meta)), 3))
+```
+
+Typical uses:
+- keep one parser-visible “last item wins first” view without mutating the source array,
+- inspect the newest or trailing entries first after one composed array build step,
+- feed one reversed array into `scalar(array_expr, idx)`, `first(...)`, `count(...)`, or `join_values(...)`.
+
+Important semantic note:
+- `reversed(...)` returns one new array value,
+- it does **not** mutate the source array on its own,
+- it preserves the existing values and only flips the order,
+- and undefined array-valued expressions simply turn into one empty returned array.
+
+That means:
+- `reversed(array(parts))` gives one pure opposite-order snapshot of the current working array,
+- `reversed(concat_arrays(...))` works well after one array-layering step when later logic wants the newest or last-added items first,
+- and `scalar(reversed(...), 0)` is a valid way to read the last source item through one pure array transformation.
+
+Examples in context:
+
+```text
+assign(array(reversed_parts), reversed(array(parts)))
+assign(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))))
+assign(scalar(last_source_item), scalar(reversed(array(parts)), 0))
+assign(scalar(reversed_count), count(reversed(concat_arrays(array(parts), array("tail")))))
+return(hash("reversed_parts", reversed(concat_arrays(array(parts), array("tail")))))
 ```
 
 ## `has_key(hash_or_hash_expr, key_expr)`

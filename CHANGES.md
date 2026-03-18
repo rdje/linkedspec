@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `reversed(...)`
+
+Extended the method-like DSL migration track with the missing pure array order-inversion helper. Fluent and structured authoring now agree on representative `reversed(...)` flows across array assignments, direct `return(payload)` expressions, and reducer inputs on both action-edge and lifecycle surfaces.
+
+- Added `reversed(array_expr)` lowering for:
+  - direct working-array inversion such as `reversed(array(parts))`,
+  - composed array inversion such as `reversed(concat_arrays(array(parts), array("delta"), array("tail")))`,
+  - and reducer inputs such as `count(reversed(concat_arrays(...)))`.
+- Kept the helper pure and parser-oriented:
+  - it returns one new opposite-order array value,
+  - it does not mutate the source array,
+  - and undefined/non-array sources collapse to `[]`.
+- Expanded the user guides with fuller examples showing `reversed(...)` in assignments, nested scalar reads, joined-string summaries, reducer composition, and emitted Perl reference output.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `sorted(...)`
 
 Extended the method-like DSL migration track with the missing pure array-ordering helper. Fluent and structured authoring now agree on representative `sorted(...)` flows across array assignments, direct `return(payload)` expressions, and reducer inputs on both action-edge and lifecycle surfaces.

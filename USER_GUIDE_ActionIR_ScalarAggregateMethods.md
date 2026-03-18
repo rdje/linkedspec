@@ -2149,6 +2149,44 @@ What this example teaches:
 - it works just as well on direct working arrays as on composed array-valued expressions,
 - and the resulting array can immediately feed `scalar(array_expr, idx)`, `count(...)`, `join_values(...)`, `array_copy(...)`, or later array slices without leaving the DSL.
 
+## Worked example: flip one composed array so the newest items come first
+This is the pattern to use when the parser wants one pure “last-added-first” view without mutating the original array.
+
+```text
+-> newest_parts_first[1] {
+  declare(array, parts=array("alpha", "beta", "gamma"))
+  declare(array, newest_first)
+  declare(scalar, first_visible, joined_view)
+
+  assign(
+    array(newest_first),
+    reversed(
+      concat_arrays(
+        array(parts),
+        take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2),
+        array("tail")
+      )
+    )
+  )
+
+  assign(scalar(first_visible), scalar(array(newest_first), 0))
+  assign(scalar(joined_view), join_values("|", array(newest_first)))
+
+  return(hash(
+    "kind", "NEWEST_FIRST",
+    "newest_first", array_copy(array(newest_first)),
+    "first_visible", scalar(first_visible),
+    "joined_view", scalar(joined_view)
+  ))
+}
+```
+
+What this example teaches:
+- `reversed(...)` is the pure array-side order-flip helper,
+- it pairs naturally with `concat_arrays(...)` when one rule first assembles one larger list from several array-valued sources,
+- it works on direct working arrays and composed array-valued expressions the same way,
+- and the resulting array can immediately feed `scalar(array_expr, idx)`, `count(...)`, `join_values(...)`, `array_copy(...)`, or later `take(...)` / `tail(...)` slices without leaving the DSL.
+
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.
 

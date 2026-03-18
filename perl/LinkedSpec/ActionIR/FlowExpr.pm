@@ -100,7 +100,7 @@ sub _looks_like_array_value_expr {
  return 0 unless $call;
 
  my $method = $call->{method} // '';
- return 1 if $method =~ /^(?:array|array_copy|array_values|sorted|sorted_keys|sorted_values|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+ return 1 if $method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
  if ($method eq 'coalesce') {
   my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, undef);
@@ -261,7 +261,7 @@ sub _lower_flow_composite_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|sorted|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
