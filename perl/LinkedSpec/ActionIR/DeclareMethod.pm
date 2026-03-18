@@ -167,7 +167,7 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
    return '('.$+{payload}.')';
   }
-  if ($hash_ctor && ($hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys')) {
+  if ($hash_ctor && ($hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return undef unless defined($derived_expr) && length($derived_expr);
    return '('.$+{payload}.')' if $derived_expr =~ /^\{(?<payload>.*)\}$/s;

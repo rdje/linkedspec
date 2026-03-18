@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `rename_key(...)`
+
+Extended the method-like DSL migration track with the missing pure one-field rename helper on the hash/object-shaping side. Fluent and structured authoring now agree on representative `rename_key(...)` flows across hash declarations, hash assignments, direct `return(payload)` expressions, and flow-helper composition on both action-edge and lifecycle surfaces.
+
+- Added `rename_key(hash_expr, old_key_expr, new_key_expr)` lowering for:
+  - direct working hashes such as `rename_key(hash(meta), "old_stage", "stage")`,
+  - composed hash-valued expressions such as `rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage")`,
+  - and layered objects such as `rename_key(merge_hash(hash(meta), hash("old_stage", "normalized")), "old_stage", "stage")`.
+- Kept the parser-oriented aggregate-shaping contract:
+  - `rename_key(...)` stays a pure hash/object-valued helper,
+  - it does not mutate the source hash on its own,
+  - undefined hash-valued inputs still lower to one empty returned object,
+  - renaming happens only when the old key exists,
+  - and when the old key exists its value is moved to the new key while the old key is removed.
+- Expanded the user guides with fuller examples showing `rename_key(...)` in assignments, direct returns, nested scalar reads such as `scalar(rename_key(...), "stage")`, and flow composition like `has_key(rename_key(...), "stage")`.
+
 ## 2026-03-18 - Method-Like DSL Slice: Support Parser-Oriented `set_key(...)`
 
 Extended the method-like DSL migration track with the missing one-field pure hash/object update helper. Fluent and structured authoring now agree on representative `set_key(...)` flows across hash declarations, hash assignments, direct `return(payload)` expressions, and flow-helper composition on both action-edge and lifecycle surfaces.

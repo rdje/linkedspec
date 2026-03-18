@@ -54,6 +54,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `has_key(...)`
 - `merge_hash(...)`
 - `set_key(...)`
+- `rename_key(...)`
 - `drop_keys(...)`
 - `pick_keys(...)`
 - `coalesce(...)`
@@ -112,6 +113,7 @@ scalar(hash(by_name), key)
 scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0)
 scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage")
 scalar(set_key(hash(meta), "stage", "normalized"), "stage")
+scalar(rename_key(hash(meta), "old_stage", "stage"), "stage")
 ```
 
 This is useful for array/hash entry lookup without falling back to raw Perl indexing syntax.
@@ -119,7 +121,7 @@ This is useful for array/hash entry lookup without falling back to raw Perl inde
 The supported surface is broader than only direct working variables:
 - direct arrays and hashes still work,
 - and composed array-valued or hash-valued helper expressions now work too,
-- so you do not need one temporary assignment just to read one first item from `sorted_keys(...)`, one field from `merge_hash(...)`, or one normalized field from `set_key(...)`.
+- so you do not need one temporary assignment just to read one first item from `sorted_keys(...)`, one field from `merge_hash(...)`, one normalized field from `set_key(...)`, or one renamed field from `rename_key(...)`.
 
 Examples:
 
@@ -129,6 +131,7 @@ assign(scalar(value), scalar(hash(by_name), key))
 assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source")), 0))
 assign(scalar(stage), scalar(merge_hash(hash(meta), hash("stage", "normalized")), "stage"))
 assign(scalar(stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
+assign(scalar(stage), scalar(rename_key(hash(meta), "old_stage", "stage"), "stage"))
 if(eq(scalar(items, 0), "?branch:")); ... endif()
 if(eq(scalar(sorted_keys(hash(meta)), 0), "kind")); ... endif()
 ```
@@ -1160,6 +1163,44 @@ assign(hash(normalized_meta), set_key(merge_hash(hash(meta), hash("kind", "NODE"
 assign(scalar(chosen_stage), scalar(set_key(hash(meta), "stage", "normalized"), "stage"))
 if(has_key(set_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "stage", "normalized"), "stage")); ... endif()
 return(set_key(merge_hash(hash(meta), hash("kind", "NODE")), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized")))))
+```
+
+## `rename_key(hash_or_hash_expr, old_key_expr, new_key_expr)`
+Use `rename_key(...)` when you want one new hash/object value where one existing key is moved to a new name.
+
+Examples:
+
+```text
+rename_key(hash(meta), "old_stage", "stage")
+rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage")
+rename_key(merge_hash(hash(meta), hash("old_stage", "normalized")), "old_stage", "stage")
+```
+
+Typical uses:
+- normalize one incoming field name to one canonical exported field name,
+- move one value to a new public name without writing a manual delete-plus-set sequence,
+- and feed one renamed object straight into `has_key(...)`, `count_keys(...)`, `sorted_keys(...)`, or `scalar(hash_expr, key)` without staging a temporary working hash first.
+
+Important semantic note:
+- `rename_key(...)` returns one new hash/object value,
+- it does **not** mutate the source hash on its own,
+- undefined incoming hash-valued expressions behave like one empty returned object,
+- the rename happens only when the old key exists,
+- and when the old key exists its value is moved to the new key while the old key is removed.
+
+That means:
+- `rename_key(hash(meta), "old_stage", "stage")` preserves the rest of `meta` while moving `old_stage` to `stage`,
+- `rename_key(set_key(...), "old_stage", "stage")` works naturally after one small shape update,
+- and `has_key(rename_key(hash(meta), "old_stage", "stage"), "stage")` is a valid way to branch on the renamed shape directly.
+
+Examples in context:
+
+```text
+assign(hash(normalized_meta), rename_key(hash(meta), "old_stage", "stage"))
+assign(hash(normalized_meta), rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage"))
+assign(scalar(stage), scalar(rename_key(hash(meta), "old_stage", "stage"), "stage"))
+if(has_key(rename_key(merge_hash(hash(meta), hash("old_stage", "normalized")), "old_stage", "stage"), "stage")); ... endif()
+return(rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage"))
 ```
 
 ## `drop_keys(hash_or_hash_expr, key_expr1, key_expr2, ..., key_exprN)`
