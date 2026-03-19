@@ -385,6 +385,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - so future implementation should not reinterpret bare `rule:` as implicit `AND` just because a rule body uses blind calls,
   - mixing `-> child_rule` and `=> child_rule` inside one rule remains invalid,
   - blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) now follows the same label-driven repeated-choice contract too, with bare `rule:` kept as the historical shorthand baseline for that family rather than being silently reinterpreted as ordered sequence,
+  - repeated blind-call loops now also guard against zero-progress child success so lower-bound-zero child rules can return empty collections without sending repeated parents into infinite loops,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - Deferred enhancement direction, only after the current rule model is explicit and rock solid:

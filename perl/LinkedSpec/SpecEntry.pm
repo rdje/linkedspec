@@ -435,8 +435,18 @@ sub _build_rep_bcode_variant {
    my $or_code = sub {eval \''.$or_code.'\'};
 
    while(1) {
+    my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
     my $or_ret = $or_code->();
     unless ($or_ret) {
+     if ($ccount >= $min) {
+      '.($actual_excode || 'return \@'.$label.'_collect').'
+     } else {
+      return undef
+     }
+    }
+
+    my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
+    if ($loop_end_pos == $loop_start_pos) {
      if ($ccount >= $min) {
       '.($actual_excode || 'return \@'.$label.'_collect').'
      } else {
@@ -480,8 +490,18 @@ sub _build_rep_and_bcode_variant {
    my $and_code = sub {eval \''.$and_code.'\'};
 
    while(1) {
+    my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
     my $and_ret = $and_code->();
     unless ($and_ret) {
+     if ($ccount >= $min) {
+      '.($actual_excode || 'return \@'.$label.'_collect').'
+     } else {
+      return undef
+     }
+    }
+
+    my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
+    if ($loop_end_pos == $loop_start_pos) {
      if ($ccount >= $min) {
       '.($actual_excode || 'return \@'.$label.'_collect').'
      } else {

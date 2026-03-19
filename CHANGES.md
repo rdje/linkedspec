@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Rule Modes: Lock Bounded Blind-Call Repeated-Choice Variants
+
+Followed up the repeated-choice blind-call hardening with the bounded/open/shorthand variants and a zero-progress safety fix.
+
+- Added regression coverage in `t/phase0_regression.t` for:
+  - shorthand blind-call repeated-choice `:+`,
+  - bounded blind-call repeated-choice `:OR{2,3}`,
+  - optional blind-call repeated-choice `:OR{,2}`,
+  - and the parent-wrapper case where a repeated blind-call parent delegates to a lower-bound-zero child.
+- Updated `perl/LinkedSpec/SpecEntry.pm` so repeated blind-call handlers now stop cleanly on zero-progress child success instead of looping forever.
+  - This lets a standalone `:OR{,2}` blind-call rule legitimately return `[]`,
+  - while repeated parents fail cleanly when their own minimum is not satisfied instead of spinning forever on the child’s empty success.
+- Expanded `USER_GUIDE_RuleModesAndSplit.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` with fuller bounded/shorthand repeated-choice blind-call examples and the new progress-guard contract.
+
 ## 2026-03-19 - Rule Modes: Harden Repeated-Choice Blind-Call Semantics
 
 Turned the previously tracked repeated-choice blind-call seam into explicit supported behavior.

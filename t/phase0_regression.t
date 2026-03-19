@@ -4425,6 +4425,142 @@ SPEC
     is($descr->{spec}{Explicit}{meta}{rep_min}, 1, 'explicit OR blind-call rule preserves the repeated-choice lower bound');
     is($descr->{spec}{Explicit}{meta}{rep_max}, 10**9, 'explicit OR blind-call rule preserves the open upper bound sentinel');
 };
+subtest 'blind_call_bounded_and_shorthand_repeated_choice_meta' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::
+ => Plus
+ => Bounded
+ => Optional
+
+Plus:+
+ => First
+ => Second
+
+Bounded:OR{2,3}
+ => First
+ => Second
+
+Optional:OR{,2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for shorthand and bounded repeated-choice blind-call rules');
+
+    is($descr->{spec}{Plus}{meta}{handler_variant}, 'REP_BCODE', 'blind-call plus rule maps to REP_BCODE');
+    is($descr->{spec}{Plus}{meta}{node_type}, 'REP_PLUS', 'blind-call plus rule preserves REP_PLUS node type');
+    is($descr->{spec}{Plus}{meta}{execution_shape}, 'repeat_loop', 'blind-call plus rule reports repeated-choice execution shape');
+    is($descr->{spec}{Plus}{meta}{action_mode}, 'blind_call', 'blind-call plus rule keeps blind_call action mode');
+
+    is($descr->{spec}{Bounded}{meta}{handler_variant}, 'REP_BCODE', 'bounded blind-call repeated-choice rule maps to REP_BCODE');
+    is($descr->{spec}{Bounded}{meta}{node_type}, 'REP_OR_BOUNDED', 'bounded blind-call repeated-choice rule preserves REP_OR_BOUNDED node type');
+    is($descr->{spec}{Bounded}{meta}{rep_min}, 2, 'bounded blind-call repeated-choice rule preserves lower bound');
+    is($descr->{spec}{Bounded}{meta}{rep_max}, 3, 'bounded blind-call repeated-choice rule preserves upper bound');
+
+    is($descr->{spec}{Optional}{meta}{handler_variant}, 'REP_BCODE', 'optional blind-call repeated-choice rule maps to REP_BCODE');
+    is($descr->{spec}{Optional}{meta}{node_type}, 'REP_OR_BOUNDED', 'optional blind-call repeated-choice rule preserves REP_OR_BOUNDED node type');
+    is($descr->{spec}{Optional}{meta}{rep_min}, 0, 'optional blind-call repeated-choice rule preserves zero lower bound');
+    is($descr->{spec}{Optional}{meta}{rep_max}, 2, 'optional blind-call repeated-choice rule preserves upper bound');
+    ok($descr->{spec}{Optional}{meta}{uses_loop}, 'optional blind-call repeated-choice rule reports loop execution');
+};
+subtest 'blind_call_bounded_and_shorthand_repeated_choice_runtime' => sub {
+    plan tests => 14;
+
+    my $plus_spec = <<'SPEC';
+Choice::+
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $bounded_spec = <<'SPEC';
+Choice::OR{2,3}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $optional_spec = <<'SPEC';
+Choice::OR{,2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $wrapped_optional_spec = <<'SPEC';
+Top::
+ => Choice
+
+Choice:OR{,2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $plus_parser = LinkedSpec::Get(\$plus_spec);
+    my $bounded_parser = LinkedSpec::Get(\$bounded_spec);
+    my $optional_parser = LinkedSpec::Get(\$optional_spec);
+    my $wrapped_optional_parser = LinkedSpec::Get(\$wrapped_optional_spec);
+
+    ok(ref($plus_parser) eq 'CODE', 'blind-call plus parser builds');
+    ok(ref($bounded_parser) eq 'CODE', 'bounded blind-call repeated-choice parser builds');
+    ok(ref($optional_parser) eq 'CODE', 'optional blind-call repeated-choice parser builds');
+    ok(ref($wrapped_optional_parser) eq 'CODE', 'wrapped optional blind-call repeated-choice parser builds');
+
+    my $plus_input = "ab";
+    my $plus_ast = eval { $plus_parser->(\$plus_input) };
+    ok(!$@, 'blind-call plus parser handles repeated-choice input without die') or diag(normalize_error($@));
+    is_deeply($plus_ast, [['?First:', []], ['?Second:', []]], 'blind-call plus parser collects one-or-more repeated child-choice hits');
+
+    my $bounded_ok_input = "ab";
+    my $bounded_ok_ast = eval { $bounded_parser->(\$bounded_ok_input) };
+    ok(!$@, 'bounded blind-call repeated-choice parser handles lower-bound input without die') or diag(normalize_error($@));
+    is_deeply($bounded_ok_ast, [['?First:', []], ['?Second:', []]], 'bounded blind-call repeated-choice parser accepts the lower-bound number of successful iterations');
+
+    my $bounded_short_input = "a";
+    my $bounded_short_ast = eval { $bounded_parser->(\$bounded_short_input) };
+    ok(!$@, 'bounded blind-call repeated-choice parser short input does not die') or diag(normalize_error($@));
+    ok(!defined($bounded_short_ast), 'bounded blind-call repeated-choice parser rejects input below the lower bound');
+
+    my $optional_empty_input = "";
+    my $optional_empty_ast = eval { $optional_parser->(\$optional_empty_input) };
+    ok(!$@, 'optional blind-call repeated-choice parser empty-input execution does not die') or diag(normalize_error($@));
+    is_deeply($optional_empty_ast, [], 'optional blind-call repeated-choice parser can return an empty collection when zero iterations are allowed');
+
+    my $wrapped_empty_input = "";
+    my $wrapped_empty_ast = eval { $wrapped_optional_parser->(\$wrapped_empty_input) };
+    ok(!$@, 'wrapped optional blind-call repeated-choice parser empty-input execution does not die') or diag(normalize_error($@));
+    ok(!defined($wrapped_empty_ast), 'repeated blind-call parents no longer loop forever on zero-progress optional child success and instead fail cleanly when their own minimum is not met');
+};
 subtest 'bootstrap_action_edge_default_index_matches_explicit_zero_index' => sub {
     plan tests => 8;
 

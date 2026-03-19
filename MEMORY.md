@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-19: Hardened bounded/shorthand repeated-choice blind-call behavior further. `:+`, `:OR{2,3}`, and `:OR{,2}` now have focused regression coverage, and repeat blind-call handlers now stop cleanly on zero-progress child success so lower-bound-zero child rules can return `[]` standalone without sending repeated parents into infinite loops.
 - 2026-03-19: Hardened repeated-choice blind-call semantics. `REP_BCODE` now repeats one child-choice step rather than reusing the ordered-sequence blind-call body, so explicit `:OR` blind-call rules and historical bare `rule:` blind-call rules now both follow repeated-choice semantics instead of accidentally behaving like repeated `AND` sequences.
 - 2026-03-19: Captured the blind-call mode-selection rule explicitly. `=> child_rule` makes a rule parser-step oriented, but it does not itself mean ordered sequence. The rule label must still decide whether the blind-call body behaves as sequence, choice, or repeated choice, so future implementation should not silently reinterpret bare `rule:` as implicit `AND` just because the body uses blind calls.
 - 2026-03-19: Added the rationale for the “do not mix `->` and `=>` in one rule” contract. The current model treats `->` as regex-slot-driven execution and `=>` as parser-step orchestration/composition, so mixing them in one rule muddies input-ownership, grouping semantics, and return-shape meaning; current policy therefore remains one rule, one execution model.

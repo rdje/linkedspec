@@ -668,6 +668,41 @@ That means:
 - collect that child result,
 - then repeat until no child parser succeeds or the rule hits its upper bound.
 
+Worked bounded/shorthand examples:
+
+```text
+entry_stream:+
+ => header_line
+ => body_line
+```
+
+This means:
+- run one-or-more repeated-choice iterations,
+- each iteration picks the first child parser that succeeds,
+- and the rule fails if even the first iteration cannot find a successful child.
+
+```text
+pair_or_triplet:OR{2,3}
+ => digit_pair
+ => hex_pair
+```
+
+This means:
+- at least two successful child-choice iterations are required,
+- at most three successful child-choice iterations are collected,
+- and if only one child-choice iteration succeeds, the whole rule fails.
+
+```text
+optional_prefixes:OR{,2}
+ => plus_prefix
+ => minus_prefix
+```
+
+This means:
+- zero, one, or two successful child-choice iterations are allowed,
+- the standalone rule may legitimately return an empty collection,
+- but a repeated parent rule will now stop cleanly instead of looping forever if such an optional child succeeds without advancing the input.
+
 So repeated-choice blind-call is real supported surface now, even if `:AND` and `:|` are still often the clearest starting points for day-to-day authoring.
 
 ## What Is Still Deferred

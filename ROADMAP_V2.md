@@ -216,6 +216,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - blind-call `=> child_rule` is now treated as a documented advanced rule-body surface, with ordered-sequence wrappers and single-choice wrappers as the clearest current forms,
   - blind-call behavior still follows the rule label rather than the edge kind alone, so explicit `:AND` remains the preferred sequential spelling instead of making blind-call sequence the silent default,
   - repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` is now locked to the same label-driven repeated-choice family too, including the historical bare `rule:` shorthand,
+  - repeated blind-call loops now guard against zero-progress child success so lower-bound-zero child rules do not send repeated parents into infinite loops,
   - `@capture_from_here` is the preferred split-boundary cursor feature for staged capture flows,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
