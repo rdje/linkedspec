@@ -123,6 +123,25 @@ That is not the style most people should prefer for readability, but it illustra
 - all following paragraph members still belong to `pair`,
 - and the rule still ends only when the next rule label starts or the file ends.
 
+### The same paragraph model on one line
+
+Because the rule body is paragraph-based rather than line-based, the same rule can also be written on one physical line:
+
+```text
+pair:& /[A-Za-z_]\w*/ /\s*=\s*/ /[^,\n]+/ I {declare(scalar, retv)} -> child_rule LX {return(scalar(retv))}
+```
+
+The same thing is true for blind-call rules:
+
+```text
+wrapper::AND I {declare(scalar, retv)} => header => body => trailer LX {return(scalar(retv))}
+```
+
+That is usually less readable than the multiline form, so it should not be the default house style. But it is still real supported syntax:
+- the rule still starts at the leading `pair:&` or `wrapper::AND`,
+- the rest of the line is still just that same rule paragraph,
+- and same-line versus multiline layout does not change the structural meaning of the rule.
+
 ### Why this matters
 This paragraph-oriented view demystifies `.spec` files:
 - they are not trying to be hard to parse,

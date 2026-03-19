@@ -5174,6 +5174,130 @@ SPEC
 
     is_deeply($conv_descr->{spec}{Top}{gdata}, $free_descr->{spec}{Top}{gdata}, 'blind-call gdata stays stable across paragraph member order variants');
 };
+subtest 'same_line_action_rule_paragraph_members_match_multiline_form' => sub {
+    plan tests => 9;
+
+    my $multiline_spec = <<'SPEC';
+Top::
+ /a/ -> Leaf { return_a(Leaf) }
+ I { declare(scalar, retv) }
+ LX { return(scalar(retv)) }
+
+Leaf:
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $same_line_spec = <<'SPEC';
+Top:: /a/ -> Leaf { return_a(Leaf) } I { declare(scalar, retv) } LX { return(scalar(retv)) }
+
+Leaf: /b/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my ($multi_ok, $multi_bootstrap, $multi_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$multiline_spec);
+    ok($multi_ok, 'bootstrap parse accepts multiline action-rule paragraph form') or diag(normalize_error($multi_err));
+
+    my ($same_ok, $same_bootstrap, $same_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$same_line_spec);
+    ok($same_ok, 'bootstrap parse accepts same-line action-rule paragraph form') or diag(normalize_error($same_err));
+
+    my $multi_top = $multi_bootstrap->[0];
+    my $same_top = $same_bootstrap->[0];
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'RE' } @$multi_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'RE' } @$same_top ],
+        'same-line action-rule paragraph preserves regex slots',
+    );
+    is_deeply(
+        [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } grep { $_->[0] eq 'ACODE' } @$multi_top ],
+        [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } grep { $_->[0] eq 'ACODE' } @$same_top ],
+        'same-line action-rule paragraph preserves action-edge dispatch payload',
+    );
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$multi_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$same_top ],
+        'same-line action-rule paragraph preserves I lifecycle payloads',
+    );
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$multi_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$same_top ],
+        'same-line action-rule paragraph preserves LX lifecycle payloads',
+    );
+
+    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descr => 1);
+    ok(defined($multi_descr) && ref($multi_descr) eq 'HASH', 'descriptor build succeeds for multiline action-rule paragraph form');
+
+    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descr => 1);
+    ok(defined($same_descr) && ref($same_descr) eq 'HASH', 'descriptor build succeeds for same-line action-rule paragraph form');
+
+    is_deeply(
+        { map { $_ => $multi_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant/ },
+        { map { $_ => $same_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant/ },
+        'compiled action-rule metadata stays stable between same-line and multiline paragraph forms',
+    );
+};
+subtest 'same_line_blind_call_rule_paragraph_members_match_multiline_form' => sub {
+    plan tests => 9;
+
+    my $multiline_spec = <<'SPEC';
+Top::AND
+ I { declare(scalar, retv) }
+ => First
+ => Second
+ LX { return(scalar(retv)) }
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $same_line_spec = <<'SPEC';
+Top::AND I { declare(scalar, retv) } => First => Second LX { return(scalar(retv)) }
+
+First: /a/ -> First { return_a(First) }
+Second: /b/ -> Second { return_a(Second) }
+SPEC
+
+    my ($multi_ok, $multi_bootstrap, $multi_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$multiline_spec);
+    ok($multi_ok, 'bootstrap parse accepts multiline blind-call paragraph form') or diag(normalize_error($multi_err));
+
+    my ($same_ok, $same_bootstrap, $same_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$same_line_spec);
+    ok($same_ok, 'bootstrap parse accepts same-line blind-call paragraph form') or diag(normalize_error($same_err));
+
+    my $multi_top = $multi_bootstrap->[0];
+    my $same_top = $same_bootstrap->[0];
+
+    is_deeply(
+        [ map { +{ call => $_->[1]{call}, code => $_->[1]{code} } } grep { $_->[0] eq 'BCODE' } @$multi_top ],
+        [ map { +{ call => $_->[1]{call}, code => $_->[1]{code} } } grep { $_->[0] eq 'BCODE' } @$same_top ],
+        'same-line blind-call paragraph preserves blind-call dispatch payload',
+    );
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$multi_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$same_top ],
+        'same-line blind-call paragraph preserves I lifecycle payloads',
+    );
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$multi_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$same_top ],
+        'same-line blind-call paragraph preserves LX lifecycle payloads',
+    );
+
+    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descr => 1);
+    ok(defined($multi_descr) && ref($multi_descr) eq 'HASH', 'descriptor build succeeds for multiline blind-call paragraph form');
+
+    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descr => 1);
+    ok(defined($same_descr) && ref($same_descr) eq 'HASH', 'descriptor build succeeds for same-line blind-call paragraph form');
+
+    is_deeply(
+        { map { $_ => $multi_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant execution_shape/ },
+        { map { $_ => $same_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant execution_shape/ },
+        'compiled blind-call metadata stays stable between same-line and multiline paragraph forms',
+    );
+
+    is_deeply($multi_descr->{spec}{Top}{gdata}, $same_descr->{spec}{Top}{gdata}, 'same-line blind-call paragraph preserves gdata');
+};
 subtest 'validation_rejects_duplicate_regular_rule_labels_with_current_modes' => sub {
     plan tests => 4;
 

@@ -208,6 +208,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 - Current baseline rule-mode contract is now explicit:
   - `:&`, `:|`, `:+`, `:*`, and `:?` are the current supported rule-label suffixes,
   - `.spec` files remain paragraph-based too: after the leading `rule:` / `rule::` token, regexes, lifecycles, and edges belong to the same rule paragraph and can be interleaved without changing their structural meaning, and that paragraph-member flexibility is now regression-locked for representative action and blind-call rules,
+  - that same paragraph contract now explicitly includes same-line rule bodies too, with representative action and blind-call rules regression-locked for multiline-versus-same-line equivalence rather than only freer multiline ordering,
   - action-edge target indexing is explicit current contract too: `-> rule` means `-> rule[0]`, while `-> rule[N]` selects the later regex slot and is mainly used for same-rule recursive entry selection, with representative four-slot rules now regression-locked so the regex-slot model does not silently cap out at three entries,
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence rule model,
   - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,

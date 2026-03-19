@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Tests: Lock Same-Line Rule Paragraph Form
+
+Turned same-line rule paragraphs into explicit supported file-format contract.
+
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - representative action-rule paragraphs written both multiline and same-line,
+  - representative blind-call rule paragraphs written both multiline and same-line,
+  - bootstrap payload parity across those layouts,
+  - and descriptor/meta stability across those layouts.
+- Expanded `USER_GUIDE.md` with explicit same-line action-rule and blind-call examples so users can see that one-line packing is still just the same paragraph model, not a separate sublanguage.
+- Updated `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future implementation work treats same-line rule paragraphs as tracked supported format rather than accidental parser tolerance.
+
 ## 2026-03-19 - Docs/Tests: Lock Open-Ended Regex Slot Indexing
 
 Turned the “no artificial regex-slot cap” wording into explicit supported contract.

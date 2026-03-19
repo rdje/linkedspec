@@ -376,6 +376,7 @@ This is a saved future-enhancement note, not an active implementation item.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
   - `.spec` files remain paragraph-based: after the leading `rule:` / `rule::` token, regexes, lifecycles, and edges belong to the same rule paragraph and can be interleaved without changing their structural meaning, and that paragraph-member flexibility is now regression-locked for representative action and blind-call rules,
+  - the same paragraph contract also applies to same-line rule bodies, so representative action and blind-call rules are now regression-locked for multiline-versus-same-line equivalence rather than only freer multiline ordering,
   - action-edge target indexing is explicit current contract: `-> rule` means `-> rule[0]`, `-> rule[N]` selects regex slot `N`, indexed forms are mainly the same-rule recursive entry-selection tool for later regex slots, and representative four-slot rules are now regression-locked so the regex-slot model is not accidentally capped at three entries,
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence model,
   - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,
