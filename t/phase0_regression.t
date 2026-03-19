@@ -4209,6 +4209,86 @@ SPEC
     ok(!defined($explicit_short), 'explicit AND parser rejects incomplete ordered sequence');
     ok(!defined($sigil_short), 'ampersand AND parser rejects incomplete ordered sequence');
 };
+subtest 'get_return_descr_rule_meta_and_plus_repetition_strategy' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::AND+
+ /a/ -> Top { return_a(Top) }
+ /b/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for AND+ repetition rules');
+    ok(exists $descr->{spec}{Top}{meta}, 'Top AND+ rule includes execution metadata');
+    is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_AND_ACODE', 'Top AND+ rule maps to REP_AND_ACODE');
+    is($descr->{spec}{Top}{meta}{node_type}, 'REP_AND_PLUS', 'Top metadata preserves explicit AND+ node type');
+    is($descr->{spec}{Top}{meta}{rep_min}, 1, 'Top metadata preserves implicit minimum bound');
+    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');
+    ok($descr->{spec}{Top}{meta}{uses_loop}, 'Top AND+ metadata reports loop strategy');
+};
+subtest 'and_plus_rule_label_matches_open_ended_bounded_and' => sub {
+    plan tests => 10;
+
+    my $and_plus = <<'SPEC';
+Sequence::AND+
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $bounded_and = <<'SPEC';
+Sequence::AND{1,}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $and_plus_parser = LinkedSpec::Get(\$and_plus);
+    ok(ref($and_plus_parser) eq 'CODE', 'AND+ parser builds');
+
+    my $bounded_parser = LinkedSpec::Get(\$bounded_and);
+    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded AND parser builds');
+
+    my $and_plus_full_input = "abab";
+    my $and_plus_full = eval { $and_plus_parser->(\$and_plus_full_input) };
+    ok(!$@, 'AND+ parser full-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_full_input = "abab";
+    my $bounded_full = eval { $bounded_parser->(\$bounded_full_input) };
+    ok(!$@, 'open-ended bounded AND parser full-input execution does not die') or diag(normalize_error($@));
+
+    is_deeply(
+        $and_plus_full,
+        [
+            [['?First:', []], ['?Second:', []]],
+            [['?First:', []], ['?Second:', []]],
+        ],
+        'AND+ parser collects repeated ordered sequence groups',
+    );
+    is_deeply($bounded_full, $and_plus_full, 'AND+ parser matches the open-ended bounded AND behavior');
+
+    my $and_plus_short_input = "";
+    my $and_plus_short = eval { $and_plus_parser->(\$and_plus_short_input) };
+    ok(!$@, 'AND+ parser empty-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_short_input = "";
+    my $bounded_short = eval { $bounded_parser->(\$bounded_short_input) };
+    ok(!$@, 'open-ended bounded AND parser empty-input execution does not die') or diag(normalize_error($@));
+
+    ok(!defined($and_plus_short), 'AND+ parser rejects empty input below the implicit minimum');
+    ok(!defined($bounded_short), 'open-ended bounded AND parser rejects empty input below the implicit minimum');
+};
 subtest 'get_return_descr_rule_meta_bounded_and_repetition_strategies' => sub {
     plan tests => 21;
 

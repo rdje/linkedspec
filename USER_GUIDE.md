@@ -202,6 +202,7 @@ Most important syntax elements:
 - Current rule-mode suffixes:
   - `name:&`
   - `name:AND`
+  - `name:AND+`
   - `name:|`
   - `name:+`
   - `name:*`
@@ -281,7 +282,7 @@ So the mechanical rule is general, but the normal authoring pattern is narrower:
 
 That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
-For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias and leaving only the extra `AND+` follow-on as future work.
+For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.

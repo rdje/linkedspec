@@ -1,5 +1,5 @@
 # USER GUIDE: Rule Modes And Split Boundaries
-This guide covers the current rule-shape surface, including explicit `OR`, bounded `OR{...}`, and bounded `AND{...}` labels.
+This guide covers the current rule-shape surface, including explicit `OR`, explicit `AND+`, bounded `OR{...}`, and bounded `AND{...}` labels.
 
 Read this when you want to understand:
 - what rule-label sigils already mean today,
@@ -25,6 +25,7 @@ one_or_more_rule:+
 zero_or_more_rule:*
 optional_rule:?
 explicit_sequence:AND
+explicit_repeated_sequence:AND+
 explicit_repeated_choice:OR
 bounded_choice_exact:OR{2}
 bounded_choice_range:OR{2,4}
@@ -128,6 +129,20 @@ pair:AND
 ```
 
 Use it when you want the ordered-sequence family spelled out explicitly instead of using the shorter `:&` sigil. It is the worded sibling of the existing ordered-sequence baseline, not a repeated-sequence form.
+
+### `:AND+` explicit open-ended repeated sequence
+`AND+` means open-ended repeated ordered sequence with the same min-one repetition contract as `AND{1,}`.
+
+Representative shape:
+
+```text
+assignment_stream:AND+
+ /[A-Za-z_]\w*/ -> assignment_stream
+ /\s*=\s*/
+ /[^,\n]+/ -> assignment_stream
+```
+
+Use it when you want the whole ordered sequence to repeat one or more times and you want that grouped repetition spelled out explicitly without switching to numeric bounds.
 
 ### `:|` choice
 `:|` means single-choice dispatch.
@@ -411,14 +426,24 @@ What this means:
 - one or two full groups are also acceptable,
 - but the rule will not keep consuming beyond two complete ordered groups.
 
-## What Is Still Deferred
-These are still future work, not current syntax:
+### Example: explicit open-ended repeated sequence shorthand
 
 ```text
-AND+
+assignment_stream:AND+
+ /[A-Za-z_]\w*/ -> assignment_stream { $assignment_stream = $LMATCH }
+ /\s*=\s*/
+ /[^,\n]+/ -> assignment_stream { $assignment_stream = $LMATCH }
 ```
 
-The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Explicit `AND`, explicit `OR`, bounded `OR{...}`, and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
+What this means:
+- the whole ordered sequence must succeed at least once,
+- after the first full sequence group it keeps repeating the same ordered-sequence contract,
+- and this is the shorthand grouped spelling for the same family as `AND{1,}`.
+
+## What Is Still Deferred
+There is no extra shorthand in this immediate rule-mode family still waiting to land.
+
+The remaining deferred work is broader grouped-rule exploration that should only move when real authoring needs justify it, not because the DSL needs every possible combinator spelling up front.
 
 ## `@capture_from_here`: The Split Boundary Cursor
 `@capture_from_here` is now the preferred grammar surface for this feature.
@@ -513,11 +538,12 @@ That pattern is especially valuable when:
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
 - explicit ordered-sequence label `AND` is now supported on top of the same ordered-sequence family,
+- explicit repeated-sequence label `AND+` is now supported on top of the same repeated-sequence family as `AND{1,}`,
 - explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
-- and extra grouped shorthands like `AND+` remain future work.
+- and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
 
 That gives us a stable baseline before we expand the remaining rule-grouping surface further.

@@ -368,20 +368,21 @@ This is a saved future-enhancement note, not an active implementation item.
   - the current rule shape is closer to repeated alternative extraction over subrules than to a full grammar-combinator algebra,
   - the authoring-level reading should now be treated as implicit `OR+`,
   - `rule:AND` is now the explicit worded spelling for the ordered-sequence family that `rule:&` already represented,
+  - `rule:AND+` is now the explicit shorthand spelling for the open-ended repeated-sequence family that `rule:AND{1,}` represented,
   - `rule:OR` is now the explicit worded spelling for that repeated-choice family,
   - and `rule:OR{1,}` is the open-ended bounded spelling for the same family,
   - while still avoiding any claim that LinkedSpec implements a full general parser-combinator algebra.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence model,
+  - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - Deferred enhancement direction, only after the current rule model is explicit and rock solid:
-  - shorthand grouped repetition such as `AND+`,
-  - and possibly other explicit rule-grouping forms if they prove useful.
+  - possibly other explicit rule-grouping forms if they prove useful.
 - Architectural expectation if this work is resumed later:
   - richer grouping should likely be implemented through explicit rule strategies or handler templates,
   - not by overloading the current default rule body syntax until it becomes ambiguous.
