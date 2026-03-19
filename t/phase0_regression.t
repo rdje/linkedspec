@@ -4473,6 +4473,79 @@ subtest 'bootstrap_rejects_invalid_bounded_and_labels' => sub {
         ok(defined($parse_error) || !$parse_success, "invalid bounded AND label for $label reports a parse failure");
     }
 };
+subtest 'validation_accepts_current_supported_rule_label_surface' => sub {
+    plan tests => 2;
+
+    require LinkedSpec::Validation;
+
+    my $spec_content = <<'SPEC';
+Sequence::AND+
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+
+Anchor:OR{2,4}
+ /x/ -> Anchor { return_a(Anchor) }
+
+Chunk: /@foo\s*\(/ /\s*\)/ @capture_from_here
+ -> Chunk[1] { return_a(Chunk) }
+SPEC
+
+    ok(LinkedSpec::Validation::validate_spec_content(\$spec_content), 'validation accepts current top-rule envelope with explicit AND+ label');
+    ok(LinkedSpec::Validation::validate_dsl_syntax(\$spec_content), 'validation accepts explicit AND+, bounded OR, blind-call, and inline capture-from-here rule surfaces');
+};
+subtest 'validation_rejects_duplicate_regular_rule_labels_with_current_modes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ -> Pair
+
+Pair:AND
+ /a/ -> Pair { return_a(Pair) }
+ /b/ -> Pair { return_a(Pair) }
+
+Pair:OR{2}
+ /c/ -> Pair { return_a(Pair) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'duplicate-rule validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects duplicate regular rule labels even when they use current mode suffixes');
+    like($out, qr/Duplicate rule definition: 'Pair'/, 'duplicate regular rule label diagnostic names the duplicated rule');
+    is($err, '', 'duplicate-rule validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_malformed_current_rule_mode_labels' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ -> Broken
+
+Broken:AND{,}
+ /a/ -> Broken { return_a(Broken) }
+ /b/ -> Broken { return_a(Broken) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'malformed-rule-label validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed current rule-mode labels');
+    like($out, qr/Malformed rule label syntax/, 'malformed rule label diagnostic is reported before bootstrap parse');
+    is($err, '', 'malformed-rule-label validation subprocess does not emit stderr');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

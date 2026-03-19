@@ -45,6 +45,58 @@ sub _trace_log_output {
  })
 }
 
+sub _parse_rule_label_line {
+ my ($line) = @_;
+ return undef unless defined $line;
+ return undef unless $line =~ /\A\s*(?<LABEL>\w+)\s*(?<COLON>::|:)(?<TAIL>.*)\z/o;
+
+ my $label = $+{LABEL};
+ my $is_top = $+{COLON} eq '::' ? 1 : 0;
+ my $tail = defined($+{TAIL}) ? $+{TAIL} : '';
+ $tail =~ s/^\s+//o;
+
+ my ($mode, $rhs, $invalid_mode) = ('', $tail, 0);
+
+ if ($tail =~ /\A(?<MODE>OR\s*\{[^}]+\}|AND\s*\{[^}]+\})(?<REST>\s.*|\z)/o) {
+  ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
+  my $normalized = $mode;
+  $normalized =~ s/\s+//go;
+  if ($normalized =~ /\A(?<KIND>OR|AND)\{(?<BODY>[^}]*)\}\z/o) {
+   my $body = $+{BODY};
+   if ($body =~ /\A\d+\z/o) {
+    $invalid_mode = 0;
+   } elsif ($body =~ /\A\d*,\d*\z/o && $body ne ',') {
+    my ($min, $max) = split /,/, $body, 2;
+    $min = length($min) ? $min : 0;
+    $max = length($max) ? $max : 10**9;
+    $invalid_mode = $max < $min ? 1 : 0;
+   } else {
+    $invalid_mode = 1;
+   }
+  }
+ } elsif ($tail =~ /\A(?<MODE>AND\+|AND|OR)(?<REST>\s.*|\z)/o) {
+  ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
+ } elsif ($tail =~ /\A(?<MODE>[&|\+\*\?])(?<REST>\s.*|\z)/o) {
+  ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
+ } elsif ($tail =~ /\A(?:[&|\+\*\?]|AND(?:\b|\{|\+)|OR(?:\b|\{))/o) {
+  $invalid_mode = 1;
+ }
+
+ return {
+  label        => $label,
+  is_top       => $is_top,
+  mode         => $mode,
+  rhs          => defined($rhs) ? $rhs : '',
+  invalid_mode => $invalid_mode ? 1 : 0,
+ }
+}
+
+sub _looks_like_malformed_rule_label_line {
+ my ($line) = @_;
+ my $parsed = _parse_rule_label_line($line);
+ return ref($parsed) eq 'HASH' && $parsed->{invalid_mode} ? 1 : 0
+}
+
 sub get_dsl_context {
  my ($spec_content, $position) = @_;
 
@@ -105,14 +157,17 @@ sub validate_spec_content {
 
  my @lines = split(/\n/, $$spec_content);
  my $found_rule = 0;
+ my $found_top_rule = 0;
 
  foreach my $line (@lines) {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
 
-  if ($line =~ /^\s*\w+::/) {
+  my $parsed = _parse_rule_label_line($line);
+  if ($parsed) {
    $found_rule = 1;
-   last;
+   $found_top_rule = 1 if $parsed->{is_top};
+   last if $found_top_rule;
   }
  }
 
@@ -120,6 +175,13 @@ sub validate_spec_content {
   report_dsl_error($spec_content, 0,
    "Spec file must start with a rule definition",
    "Add a rule like 'RuleName::' at the beginning");
+  return 0;
+ }
+
+ unless ($found_top_rule) {
+  report_dsl_error($spec_content, 0,
+   "Spec file must define a top rule with '::'",
+   "Add a top rule like 'RuleName::' so the parser has an entrypoint");
   return 0;
  }
 
@@ -224,27 +286,44 @@ sub validate_dsl_syntax {
  my @lines = split(/\n/, $$spec_content);
  my @defined_rules = ();
  my @used_rules = ();
+ my %seen_defined_rules;
 
  for my $line (@lines) {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
 
-  if ($line =~ /^\s*(\w+)::/) {
-   my $rule_name = $1;
+  my $rule_label = _parse_rule_label_line($line);
+  if ($rule_label) {
+   if ($rule_label->{invalid_mode}) {
+    my $position = index($$spec_content, $line);
+    report_dsl_error($spec_content, $position,
+     "Malformed rule label syntax",
+     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', or 'RuleName:OR{2,4}'");
+    return 0;
+   }
+   my $rule_name = $rule_label->{label};
    push @defined_rules, $rule_name;
 
-   if (grep { $_ eq $rule_name } @defined_rules[0..$#defined_rules-1]) {
+   if ($seen_defined_rules{$rule_name}++) {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
      "Duplicate rule definition: '$rule_name'",
      "Remove the duplicate rule or rename one of them");
     return 0;
    }
+  } elsif (_looks_like_malformed_rule_label_line($line)) {
+   my $position = index($$spec_content, $line);
+   report_dsl_error($spec_content, $position,
+    "Malformed rule label syntax",
+    "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', or 'RuleName:OR{2,4}'");
+   return 0;
   }
 
-  if ($line =~ /->\s*(\w+)(?:\[(\d+)\])?/) {
-   my $rule_name = $1;
-   push @used_rules, $rule_name;
+  while ($line =~ /->\s*(\w+)(?:\[(\d+)\])?/g) {
+   push @used_rules, $1;
+  }
+  while ($line =~ /=>\s*(\w+)/g) {
+   push @used_rules, $1;
   }
  }
 
@@ -252,8 +331,9 @@ sub validate_dsl_syntax {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
 
-  my ($rhs) = $line =~ /^\s*\w+\s*:\s*(.*)$/;
-  next unless defined $rhs;
+  my $rule_label = _parse_rule_label_line($line);
+  next unless $rule_label;
+  my $rhs = $rule_label->{rhs};
 
   my @regex_literals = extract_regex_literals_from_rule_rhs($rhs);
   for my $regex_literal (@regex_literals) {

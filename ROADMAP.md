@@ -448,7 +448,7 @@ These are tracked implementation concerns, not immediate blockers.
   - That remains the clearest backend-portability and runtime-fragility ceiling even though the ActionIR/value-expression layer is becoming much more backend-neutral.
   - Future work should move toward a cleaner backend emission boundary or a more explicit emitted-handler IR.
 - Frontend hardening gap:
-  - `perl/LinkedSpec/Validation.pm` is still much shallower than the currently supported DSL surface.
+  - `perl/LinkedSpec/Validation.pm` still trails parts of the currently supported DSL surface, even though current rule-label syntax is now recognized there more faithfully than before.
   - Phase 2 should close that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
 - Sequencing rule for these concerns:
   - keep them tracked and visible,

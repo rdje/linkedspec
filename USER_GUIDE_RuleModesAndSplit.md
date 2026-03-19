@@ -542,6 +542,7 @@ The current supported contract is:
 - explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
+- the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
