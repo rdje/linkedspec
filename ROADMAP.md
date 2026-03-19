@@ -366,10 +366,13 @@ This is a saved future-enhancement note, not an active implementation item.
   - should continue to be treated as today’s baseline semantics rather than being silently reinterpreted as a richer combinator language.
 - Working interpretation note:
   - the current rule shape is closer to repeated alternative extraction over subrules than to a full grammar-combinator algebra,
-  - and the authoring-level reading should now be treated as implicit `OR+`, i.e. the same repeated-choice baseline as `OR{1,}`,
+  - the authoring-level reading should now be treated as implicit `OR+`,
+  - `rule:OR` is now the explicit worded spelling for that repeated-choice family,
+  - and `rule:OR{1,}` is the open-ended bounded spelling for the same family,
   - while still avoiding any claim that LinkedSpec implements a full general parser-combinator algebra.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
+  - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,

@@ -1,5 +1,5 @@
 # USER GUIDE: Rule Modes And Split Boundaries
-This guide covers the current rule-shape surface, including the newly landed bounded `OR{...}` and bounded `AND{...}` labels.
+This guide covers the current rule-shape surface, including explicit `OR`, bounded `OR{...}`, and bounded `AND{...}` labels.
 
 Read this when you want to understand:
 - what rule-label sigils already mean today,
@@ -24,6 +24,7 @@ choice_rule:|
 one_or_more_rule:+
 zero_or_more_rule:*
 optional_rule:?
+explicit_repeated_choice:OR
 bounded_choice_exact:OR{2}
 bounded_choice_range:OR{2,4}
 bounded_choice_open_max:OR{2,}
@@ -58,15 +59,10 @@ token_stream:
 
 Treat that as the current baseline LinkedSpec rule model. It is the baseline we should keep explicit and stable before layering richer grouped repetition on top.
 
-For authoring purposes, the clearest mental model is:
+For authoring purposes, the clearest mental model is that bare `rule:` belongs to the same repeated-choice family as:
 
 ```text
-rule:
-```
-
-means implicit repeated choice:
-
-```text
+rule:OR
 rule:OR{1,}
 ```
 
@@ -74,10 +70,9 @@ and conceptually corresponds to `OR+`.
 
 That mapping matters because:
 - bare `rule:` is the historical default repeated-alternative behavior,
+- `rule:OR` is now the explicit worded spelling for that same repeated-choice family when you want to say it out loud without adding numeric bounds,
 - `rule:|` is the separate single-choice dispatch surface,
-- and the worded `OR{...}` family now makes the repeated-choice baseline explicit when you need bounds.
-
-Plain standalone `OR` is not a separate supported rule-label spelling today. If that spelling is introduced later, it should follow this same repeated-choice reading rather than the single-choice `rule:|` behavior.
+- and the worded `OR{...}` family makes the same repeated-choice family explicit when you need bounds.
 
 Representative equivalence example:
 
@@ -90,10 +85,20 @@ item_list:
 is the same repeated-choice idea as:
 
 ```text
+item_list:OR
+ /[A-Za-z_]\w*/ -> item_list
+ /"(?:[^"\\]|\\.)*"/ -> item_list
+```
+
+and:
+
+```text
 item_list:OR{1,}
  /[A-Za-z_]\w*/ -> item_list
  /"(?:[^"\\]|\\.)*"/ -> item_list
 ```
+
+`rule:OR` and `rule:OR{1,}` are explicit grouped-rule spellings. Bare `rule:` remains the historical default surface for that same repeated-choice baseline rather than a promise that every low-level emitted handler path is textually identical.
 
 ### `:&` ordered sequence
 `:&` means ordered sequence.
@@ -159,6 +164,20 @@ optional_trailing_comment:?
 ```
 
 Use it when the rule should either match once or not match at all.
+
+### `:OR` explicit repeated choice
+`OR` means open-ended repeated choice with the same min-one repeated-choice contract as `OR{1,}`.
+
+Representative shape:
+
+```text
+token_stream:OR
+ /[A-Za-z_]\w*/ -> token_stream
+ /"(?:[^"\\]|\\.)*"/ -> token_stream
+ /'(?:[^'\\]|\\.)*'/ -> token_stream
+```
+
+Use it when you want the repeated-choice family spelled out explicitly without adding numeric bounds. It is the explicit worded sibling of the historical bare `rule:` baseline and the bounded `OR{1,}` form.
 
 ### `:OR{N}` exact bounded repeated choice
 `OR{N}` means repeated alternative extraction with an exact required count.
@@ -267,7 +286,21 @@ optional_pairs:AND{,2}
 
 Use it when zero full sequence iterations are allowed but you still want a hard cap on how many whole sequence groups get consumed.
 
-## Worked Bounded-OR Examples
+## Worked Repeated-Choice Examples
+### Example: explicit open-ended repeated choice
+
+```text
+token_stream:OR
+ /[A-Za-z_]\w*/ -> token_stream { $token_stream = $LMATCH }
+ /"(?:[^"\\]|\\.)*"/ -> token_stream { $token_stream = $LMATCH }
+ /'(?:[^'\\]|\\.)*'/ -> token_stream { $token_stream = $LMATCH }
+```
+
+What this means:
+- at least one alternative hit is required,
+- the rule keeps collecting repeated choice matches until no configured alternative matches any longer,
+- and this is the explicit worded spelling for the same repeated-choice family that the historical bare `token_stream:` label belongs to.
+
 ### Example: exact repeated token pair
 
 ```text
@@ -368,11 +401,10 @@ These are still future work, not current syntax:
 
 ```text
 AND+
-OR
 AND
 ```
 
-The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Bounded `OR{...}` and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
+The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Explicit `OR` plus bounded `OR{...}` and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
 
 ## `@capture_from_here`: The Split Boundary Cursor
 `@capture_from_here` is now the preferred grammar surface for this feature.
@@ -466,10 +498,11 @@ That pattern is especially valuable when:
 ## Current Contract
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
+- explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
-- and extra grouped shorthands like standalone `OR`, standalone `AND`, and `AND+` remain future work.
+- and extra grouped shorthands like standalone `AND` and `AND+` remain future work.
 
 That gives us a stable baseline before we expand the remaining rule-grouping surface further.

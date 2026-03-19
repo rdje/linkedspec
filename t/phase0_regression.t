@@ -3962,6 +3962,64 @@ SPEC
     is($descr->{spec}{Opt}{meta}{node_type}, 'REP_OPT', 'Opt metadata preserves REP_OPT node type');
     ok($descr->{spec}{Opt}{meta}{uses_loop}, 'Opt repetition metadata reports loop strategy');
 };
+subtest 'get_return_descr_rule_meta_explicit_or_repetition_strategy' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::OR
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for explicit OR repetition rules');
+    ok(exists $descr->{spec}{Top}{meta}, 'Top explicit OR rule includes execution metadata');
+    is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_ACODE', 'Top explicit OR rule maps to REP_ACODE');
+    is($descr->{spec}{Top}{meta}{node_type}, 'REP_OR_EXPLICIT', 'Top metadata preserves explicit OR node type');
+    is($descr->{spec}{Top}{meta}{rep_min}, 1, 'Top metadata preserves implicit minimum bound');
+    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');
+    ok($descr->{spec}{Top}{meta}{uses_loop}, 'Top explicit OR metadata reports loop strategy');
+};
+subtest 'explicit_or_rule_label_matches_open_ended_bounded_or' => sub {
+    plan tests => 10;
+
+    my $explicit_or = <<'SPEC';
+Top::OR
+ /a/ -> Top { $Top = $LMATCH }
+SPEC
+
+    my $bounded_or = <<'SPEC';
+Top::OR{1,}
+ /a/ -> Top { $Top = $LMATCH }
+SPEC
+
+    my $explicit_parser = LinkedSpec::Get(\$explicit_or);
+    ok(ref($explicit_parser) eq 'CODE', 'explicit OR parser builds');
+
+    my $bounded_parser = LinkedSpec::Get(\$bounded_or);
+    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded OR parser builds');
+
+    my $explicit_full_input = "aaa";
+    my $explicit_full = eval { $explicit_parser->(\$explicit_full_input) };
+    ok(!$@, 'explicit OR parser full-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_full_input = "aaa";
+    my $bounded_full = eval { $bounded_parser->(\$bounded_full_input) };
+    ok(!$@, 'open-ended bounded OR parser full-input execution does not die') or diag(normalize_error($@));
+
+    is_deeply($explicit_full, ['a', 'a', 'a'], 'explicit OR parser collects repeated alternative matches');
+    is_deeply($bounded_full, $explicit_full, 'explicit OR parser matches the open-ended bounded OR behavior');
+
+    my $explicit_empty_input = "";
+    my $explicit_empty = eval { $explicit_parser->(\$explicit_empty_input) };
+    ok(!$@, 'explicit OR parser empty-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_empty_input = "";
+    my $bounded_empty = eval { $bounded_parser->(\$bounded_empty_input) };
+    ok(!$@, 'open-ended bounded OR parser empty-input execution does not die') or diag(normalize_error($@));
+
+    ok(!defined($explicit_empty), 'explicit OR parser rejects empty input below the implicit minimum');
+    ok(!defined($bounded_empty), 'open-ended bounded OR parser rejects empty input below the implicit minimum');
+};
 subtest 'get_return_descr_rule_meta_bounded_or_repetition_strategies' => sub {
     plan tests => 21;
 
@@ -4074,6 +4132,21 @@ subtest 'bootstrap_rejects_invalid_bounded_or_labels' => sub {
         ok(!$parse_success, "bootstrap parse rejects invalid bounded OR label for $label");
         ok(defined($parse_error) || !$parse_success, "invalid bounded OR label for $label reports a parse failure");
     }
+};
+subtest 'bootstrap_rejects_still_deferred_plain_and_label' => sub {
+    plan tests => 2;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> Sequence
+
+Sequence:AND
+ /a/ -> Sequence { return_a(Sequence) }
+SPEC
+
+    my ($parse_success, undef, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok(!$parse_success, 'bootstrap parse rejects still-deferred plain AND label');
+    ok(defined($parse_error) || !$parse_success, 'still-deferred plain AND label reports a parse failure');
 };
 subtest 'get_return_descr_rule_meta_bounded_and_repetition_strategies' => sub {
     plan tests => 21;

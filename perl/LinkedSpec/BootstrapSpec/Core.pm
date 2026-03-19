@@ -349,9 +349,16 @@ sub _build_bootstrap_node_type_map {
  }
 }
 
-sub _parse_bounded_group_mode {
+sub _parse_group_mode {
  my ($mode) = @_;
  return undef unless defined $mode;
+ if ($mode =~ /\AOR\z/o) {
+  return {
+   node_type => 'REP_OR_EXPLICIT',
+   rep_min   => 1,
+   rep_max   => 10**9,
+  }
+ }
  return undef unless $mode =~ /\A(?<KIND>OR|AND)\s*\{\s*(?<BODY>[^}]*)\s*\}\z/o;
 
  my $kind = $+{KIND};
@@ -382,7 +389,7 @@ sub _parse_entry_label_token {
  my ($text, $ctx) = @_;
  return undef unless defined $text;
  return undef unless ref($ctx) eq 'HASH';
- return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|(?:OR|AND)\s*\{[^}]+\})?)\z/o;
+ return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR(?:\s*\{[^}]+\})?|AND\s*\{[^}]+\})?)\z/o;
 
  my ($label, $colons, $mode) = @+{qw/LABEL COLON MODE/};
  my $target = $colons eq '::' ? '_INITIAL' : '';
@@ -393,11 +400,11 @@ sub _parse_entry_label_token {
   if (exists $ctx->{node_type}{$mode}) {
    $node_type = $ctx->{node_type}{$mode};
   } else {
-   my $bounded = _parse_bounded_group_mode($mode);
-   return undef unless ref($bounded) eq 'HASH';
-   $node_type = $bounded->{node_type};
-   $rep_min = $bounded->{rep_min};
-   $rep_max = $bounded->{rep_max};
+   my $group_mode = _parse_group_mode($mode);
+   return undef unless ref($group_mode) eq 'HASH';
+   $node_type = $group_mode->{node_type};
+   $rep_min = $group_mode->{rep_min};
+   $rep_max = $group_mode->{rep_max};
   }
  }
 
@@ -464,7 +471,7 @@ sub _build_entry_label_rule {
  return {
   id => 'ENTRY_LABEL',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*::?\s*(?:&|\||\+|\*|\?|(?:OR|AND)\s*\{[^}]+\})?/o],
+  re=> [qr/\w+\s*::?\s*(?:(?:&|\||\+|\*|\?|OR(?:\s*\{[^}]+\})?|AND(?:\s*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
   handler=> sub {
    my ($info, undef, undef, $gdata) = @_;
    my $parsed = _parse_entry_label_token($$info{match}, $ctx);
