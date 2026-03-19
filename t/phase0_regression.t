@@ -5867,6 +5867,52 @@ PERL
     unlike($out, qr/Malformed action-edge target syntax|Blind-call targets do not support regex-slot indexing/, 'edge-like text inside action code does not trigger top-level edge target diagnostics');
     is($err, '', 'edge-like text inside action code validation subprocess does not emit stderr');
 };
+subtest 'validation_only_treats_rule_starts_as_top_level_inside_open_action_blocks' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Next {
+label:
+ return_a(Top)
+ }
+Next::
+ /b/ { return_a(Next) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'nested rule-like line validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation keeps rule-like lines inside open action blocks as block content rather than new rule starts');
+    unlike($out, qr/Malformed rule label syntax|Unsupported top-level rule paragraph content/, 'nested rule-like block lines do not trigger top-level rule-paragraph diagnostics');
+    is($err, '', 'nested rule-like line validation subprocess does not emit stderr');
+};
+subtest 'parser_build_allows_rule_like_lines_inside_open_action_blocks' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Next {
+label:
+ return_a(Top)
+ }
+Next::
+ /b/ { return_a(Next) }
+SPEC
+require LinkedSpec;
+my $parser = LinkedSpec::Get(\$spec_content);
+print ref($parser) eq 'CODE' ? "__PARSER_OK__\n" : "__PARSER_BAD__\n";
+PERL
+
+    is($exit_code, 0, 'nested rule-like line parser-build subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PARSER_OK__/, 'compile pipeline still accepts label-like lines inside open action blocks');
+    unlike($out, qr/DSL Error at line|Spec file must start with a rule definition|Malformed rule label syntax/, 'compile pipeline no longer misclassifies nested rule-like block lines as top-level rule starts');
+    is($err, '', 'nested rule-like line parser-build subprocess does not emit stderr');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Keep Rule Starts Top-Level Inside Open Blocks
+
+Extended the Phase 2 frontend-hardening track so rule-start detection stays top-level aware during DSL validation instead of reinterpreting label-like lines inside open action/lifecycle/code blocks as new rule paragraphs.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now only treats `rule:` / `rule::` starts as real rule labels when the validator is back at top level.
+- Kept regex-token validation aligned with that same boundary, so nested block lines are no longer reinterpreted as top-level rule headers while the validator walks the file.
+- Added focused regression coverage in `t/phase0_regression.t` proving that a label-like line such as `label:` inside an open action block:
+  - remains block content during validation,
+  - and still allows the full compile pipeline to build the parser successfully.
+- Expanded `USER_GUIDE.md` so the paragraph-based `.spec` explanation now says plainly that top-level rule starts do not restart from inside open code blocks.
+
 ## 2026-03-19 - Validation: Reject Malformed Glued Edge Target Suffixes
 
 Extended the Phase 2 frontend-hardening track so malformed glued edge-target suffixes are rejected during DSL validation instead of being prefix-parsed as shorter valid target names.

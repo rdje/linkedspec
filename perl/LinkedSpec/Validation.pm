@@ -314,10 +314,11 @@ sub validate_dsl_syntax {
  my $seen_first_rule = 0;
 
  for my $line (@lines) {
-  next if $line =~ /^\s*$/;
-  next if $line =~ /^\s*#/;
+ next if $line =~ /^\s*$/;
+ next if $line =~ /^\s*#/;
 
-  my $rule_label = _parse_rule_label_line($line);
+  my $at_rule_top_level = !($current_rule && (($current_rule->{edge_scan_depth} // 0) > 0));
+  my $rule_label = $at_rule_top_level ? _parse_rule_label_line($line) : undef;
   if ($rule_label) {
    $seen_first_rule = 1;
    if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
@@ -362,7 +363,7 @@ sub validate_dsl_syntax {
     bcode_count => $bcode_count,
     edge_scan_depth => $edge_scan->{depth} // 0,
    };
-  } elsif (_looks_like_malformed_rule_label_line($line)) {
+  } elsif ($at_rule_top_level && _looks_like_malformed_rule_label_line($line)) {
    my $position = index($$spec_content, $line);
    report_dsl_error($spec_content, $position,
     "Malformed rule label syntax",
@@ -417,14 +418,16 @@ sub validate_dsl_syntax {
   );
  }
 
+ my $regex_depth = 0;
  for my $line (@lines) {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
 
-  my $rule_label = _parse_rule_label_line($line);
-  my @regex_literals = $rule_label
-   ? _extract_leading_regex_literals_from_fragment($rule_label->{rhs})
-   : _extract_leading_regex_literals_from_fragment($line);
+  my $rule_label = $regex_depth == 0 ? _parse_rule_label_line($line) : undef;
+  my $regex_fragment = $rule_label ? $rule_label->{rhs} : $line;
+  my @regex_literals = $regex_depth == 0
+   ? _extract_leading_regex_literals_from_fragment($regex_fragment)
+   : ();
 
   for my $regex_literal (@regex_literals) {
    my $regex_pattern = $regex_literal;
@@ -438,6 +441,9 @@ sub validate_dsl_syntax {
     return 0;
    };
   }
+
+  my $regex_scan = _scan_rule_edges_in_fragment($regex_fragment, $regex_depth);
+  $regex_depth = $regex_scan->{depth} // 0;
  }
 
  my %defined_rules = map { $_ => 1 } @defined_rules;

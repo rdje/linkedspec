@@ -56,8 +56,26 @@ top_rule::
 
 Once that rule-start token appears, the rest of the paragraph belongs to that same rule until another rule starts.
 
+That top-level rule-start idea matters literally. A `word:` line only starts a new rule paragraph when the parser is back at top level. If you are still inside an open action/lifecycle/code block, label-like lines stay part of that block instead of silently starting a new rule.
+
+Example:
+
+```text
+Top::
+ /a/ -> Next {
+label:
+ return_a(Top)
+ }
+
+Next::
+ /b/ { return_a(Next) }
+```
+
+Here `label:` is block content inside `Top`, not the start of a new `label` rule paragraph.
+
 Current frontend validation also rejects malformed extra-colon starts like `rule_name:::` before bootstrap parse. Supported rule starts remain the normal `rule_name:` and `rule_name::` forms plus their documented rule-mode suffixes.
 Current frontend validation also rejects stray preamble text before the first rule paragraph: after leading blank lines and `#` comments, the first real line must be a rule start.
+Current frontend validation also treats rule starts as top-level only, so rule-like lines inside open `{ ... }` blocks are no longer misclassified as new rules.
 
 Worded rule modes must also use their exact supported spellings:
 - `AND`
