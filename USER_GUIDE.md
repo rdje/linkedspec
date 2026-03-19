@@ -226,6 +226,48 @@ Most important syntax elements:
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
+### Action-edge target indexing
+One important rule-body detail is that action edges target regex slots by index.
+
+The first regex of a rule has a special default meaning:
+
+```text
+-> rule
+```
+
+means the same thing as:
+
+```text
+-> rule[0]
+```
+
+In other words:
+- `-> rule` means “match the first regex of `rule`,”
+- `-> rule[0]` is the explicit spelling of that same default,
+- `-> rule[1]` means “match the second regex of `rule`,”
+- and in general `-> rule[N]` means “match the `(N+1)`th regex of `rule`.”
+
+Representative example:
+
+```text
+value:
+ /[A-Za-z_]\w*/
+ /"(?:[^"\\]|\\.)*"/
+ /\d+/
+
+parent:
+ -> value
+ -> value[1]
+ -> value[2]
+```
+
+The practical reading is:
+- `-> value` targets the identifier regex,
+- `-> value[1]` targets the quoted-string regex,
+- `-> value[2]` targets the integer regex.
+
+That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint.”
+
 For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias and leaving only the extra standalone `AND` / `AND+` follow-ons as future work.
 
 ## Where Lowered Constructs Can Appear
