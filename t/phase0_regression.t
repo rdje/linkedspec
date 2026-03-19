@@ -3962,36 +3962,53 @@ SPEC
     is($descr->{spec}{Opt}{meta}{node_type}, 'REP_OPT', 'Opt metadata preserves REP_OPT node type');
     ok($descr->{spec}{Opt}{meta}{uses_loop}, 'Opt repetition metadata reports loop strategy');
 };
-subtest 'bootstrap_move_pos_builds_split_boundary_lecode' => sub {
-    plan tests => 8;
+subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
+    my @cases = (
+        {
+            directive     => '@capture_from_here',
+            label         => 'capture_from_here',
+            preferred     => 1,
+            capture_label => 'capture_from_here',
+        },
+        {
+            directive     => '@move_pos',
+            label         => 'move_pos',
+            preferred     => 0,
+            capture_label => 'move_pos',
+        },
+    );
 
-    my $spec_content = <<'SPEC';
+    plan tests => scalar(@cases) * 8;
+
+    for my $case (@cases) {
+        my $spec_content = <<"SPEC";
 Top::
  -> MoveTop
 
-MoveTop: /foo/ /bar/ @move_pos
+MoveTop: /foo/ /bar/ $case->{directive}
 SPEC
 
-    my ($parse_success, $parsed, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for move_pos rule-mode coverage') or diag(normalize_error($parse_error));
-    ok(ref($parsed) eq 'ARRAY', 'bootstrap parse returns parsed entry array for move_pos coverage');
+        my ($parse_success, $parsed, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+        ok($parse_success, "bootstrap parse succeeds for $case->{label} rule-mode coverage") or diag(normalize_error($parse_error));
+        ok(ref($parsed) eq 'ARRAY', "bootstrap parse returns parsed entry array for $case->{label} coverage");
 
-    my ($move_entry) = grep { ref($_) eq 'ARRAY' && ref($_->[0]) eq 'ARRAY' && $_->[0][1] eq 'MoveTop' } @$parsed;
-    ok(ref($move_entry) eq 'ARRAY', 'parsed entries include MoveTop rule');
-    ok(grep { ref($_) eq 'ARRAY' && $_->[0] eq 'MOVE_POS' } @$move_entry, 'MoveTop parsed entry preserves MOVE_POS token');
+        my ($move_entry) = grep { ref($_) eq 'ARRAY' && ref($_->[0]) eq 'ARRAY' && $_->[0][1] eq 'MoveTop' } @$parsed;
+        ok(ref($move_entry) eq 'ARRAY', "parsed entries include MoveTop rule for $case->{label}");
+        ok(grep { ref($_) eq 'ARRAY' && $_->[0] eq 'MOVE_POS' } @$move_entry, "MoveTop parsed entry preserves MOVE_POS token for $case->{label}");
 
-    my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
-    is_deeply($rule_ir->{code_blocks}{LECODE}, ['$IPOS = pos $$STRING'], 'MOVE_POS compiles into the expected split-boundary LECODE cursor shift');
+        my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
+        is_deeply($rule_ir->{code_blocks}{LECODE}, ['$IPOS = pos $$STRING'], "MOVE_POS compiles into the expected split-boundary LECODE cursor shift for $case->{label}");
 
-    my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
-    is($emit_ctx->{lecode}, '$IPOS = pos $$STRING', 'emit context preserves move_pos split-boundary cursor shift');
+        my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+        is($emit_ctx->{lecode}, '$IPOS = pos $$STRING', "emit context preserves $case->{capture_label} split-boundary cursor shift");
 
-    is(
-        LinkedSpec::call_spec_handler_subst('MoveTop', '$CAPTURE'),
-        'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
-        '$CAPTURE lowering stays aligned with the move_pos-adjusted split boundary cursor',
-    );
-    is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], 'MoveTop rule preserves the anchor regex list used around the split-boundary cursor move');
+        is(
+            LinkedSpec::call_spec_handler_subst('MoveTop', '$CAPTURE'),
+            'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
+            "\$CAPTURE lowering stays aligned with the $case->{capture_label}-adjusted split boundary cursor",
+        );
+        is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], "MoveTop rule preserves the anchor regex list used around the split-boundary cursor move for $case->{label}");
+    }
 };
 subtest 'ruleir_pipeline_preserves_acode_gdata_mapping_order' => sub {
     plan tests => 7;

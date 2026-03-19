@@ -566,7 +566,7 @@ sub _build_split_like_code_rule {
  return {
   id => 'SPLIT_LIKE_CODE',
   tags => { start_token => 1 },
-  re=> [qr/@\s*move_pos\b/o],
+  re=> [qr/@\s*(?:capture_from_here|move_pos)\b/o],
   handler=> sub {
    return ['MOVE_POS']
   },

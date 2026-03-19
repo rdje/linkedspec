@@ -206,7 +206,8 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 ## Deferred Future Note
 - Current baseline rule-mode contract is now explicit:
   - `:&`, `:|`, `:+`, `:*`, and `:?` are the current supported rule-label suffixes,
-  - and `@move_pos` is the current split-boundary cursor feature for staged capture flows.
+  - `@capture_from_here` is the preferred split-boundary cursor feature for staged capture flows,
+  - and `@move_pos` remains the compatibility alias for the same lowering.
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
   - explicit `AND`,
   - bounded or exact `OR`,

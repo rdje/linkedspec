@@ -4,7 +4,7 @@ This guide covers the current rule-shape surface that exists before any future `
 Read this when you want to understand:
 - what rule-label sigils already mean today,
 - how much of that surface is already part of the supported contract,
-- and what `@move_pos` actually does when you need split-like staged extraction.
+- and what `@capture_from_here` actually does when you need split-like staged extraction.
 
 ## Current Rule Label Surface
 Today, rule labels support a small, explicit set of suffix modes.
@@ -132,8 +132,10 @@ AND{,M}
 
 The roadmap still treats those as future grouped-rule exploration, not current authoring syntax.
 
-## `@move_pos`: The Split Boundary Cursor
-`@move_pos` is already part of the current grammar surface.
+## `@capture_from_here`: The Split Boundary Cursor
+`@capture_from_here` is now the preferred grammar surface for this feature.
+
+The older spelling `@move_pos` is still supported as a compatibility alias.
 
 It is easy to misunderstand what it does, so here is the precise version:
 - it does not collect text by itself,
@@ -147,13 +149,13 @@ $IPOS = pos $$STRING
 ```
 
 That means:
-- before `@move_pos`, a later capture starts from the earlier rule-entry boundary,
-- after `@move_pos`, a later capture starts from the point where the parser had already advanced,
+- before `@capture_from_here`, a later capture starts from the earlier rule-entry boundary,
+- after `@capture_from_here`, a later capture starts from the point where the parser had already advanced,
 - so the next capture becomes “text since the last anchor” instead of “text since the beginning of the rule.”
 
 That is why it is useful for split-like staged parsing.
 
-## Why `@move_pos` Matters
+## Why `@capture_from_here` Matters
 This feature is especially useful when:
 - the full structure is awkward to parse in one pass,
 - but the file has reliable anchors,
@@ -170,7 +172,7 @@ This is exactly the kind of coarse-to-fine workflow LinkedSpec is good at.
 A real current example already exists in [`specs/ebnf.spec`](specs/ebnf.spec):
 
 ```text
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@move_pos
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_from_here
 I {$IMATCH =~ s/@|\s*\(//go}
 
 -> quoted_string {
@@ -185,14 +187,17 @@ I {$IMATCH =~ s/@|\s*\(//go}
 
 Why that shape matters:
 - the outer anchors find the logging annotation and its closing `)`,
-- `@move_pos` moves the capture baseline forward,
+- `@capture_from_here` moves the capture baseline forward,
 - later capture logic can treat the content between anchors as the meaningful span,
 - and the rule can build a coarse structured result from that anchored slice.
+
+If you are reading older specs or older notes, this may still appear as `@move_pos`. That legacy spelling still works and lowers to the same internal `MOVE_POS` event.
 
 ## Split-Style Mental Model
 If you like a more intuitive description, this is a good one:
 
-- `@move_pos` turns the current parser position into the new left edge of the next capture span.
+- `@capture_from_here` turns the current parser position into the new left edge of the next capture span.
+- older specs may still say `@move_pos`, but the meaning is the same.
 
 That makes it useful as a split-boundary marker.
 
@@ -219,7 +224,8 @@ That pattern is especially valuable when:
 ## Current Contract
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
-- `@move_pos` is a real current split-boundary cursor feature,
+- `@capture_from_here` is the preferred split-boundary cursor feature,
+- `@move_pos` remains a supported compatibility alias for the same lowering,
 - and richer grouped forms like `OR{N,M}` or `AND{N,M}` are still future work.
 
 That gives us a stable baseline before we expand the rule-grouping surface further.

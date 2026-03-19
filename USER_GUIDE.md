@@ -112,7 +112,8 @@ Most important syntax elements:
   - `name:?`
 - Regex pattern(s): `/.../`
 - Split-boundary cursor:
-  - `@move_pos`
+  - `@capture_from_here`
+  - compatibility alias: `@move_pos`
 - Branch edges:
   - `-> rule`
   - `-> rule[idx]`
@@ -125,7 +126,7 @@ Most important syntax elements:
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
-For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, and `@move_pos` surface in one place before any future grouped-rule extensions such as `OR{N,M}` or `AND{N,M}` are attempted.
+For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias before any future grouped-rule extensions such as `OR{N,M}` or `AND{N,M}` are attempted.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.
