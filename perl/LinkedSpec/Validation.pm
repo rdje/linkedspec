@@ -559,6 +559,24 @@ sub _report_edge_target_syntax_error {
  my $kind = $error->{kind} || 'action';
  my $reason = $error->{reason} || '';
 
+ if ($kind eq 'blind_call' && $reason eq 'missing_target') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Blind-call edge is missing a target rule",
+   "Use '=> RuleName' or '=> RuleName { ... }'; blind calls must name a child rule explicitly",
+  );
+ }
+
+ if ($kind eq 'action' && $reason eq 'missing_target') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Action edge is missing a target rule",
+   "Use '-> RuleName', '-> RuleName[idx]', or '-> RuleName { ... }'; action edges must name a target rule explicitly",
+  );
+ }
+
  if ($kind eq 'blind_call' && $reason eq 'indexed_target_not_supported') {
   return report_dsl_error(
    $spec_content,

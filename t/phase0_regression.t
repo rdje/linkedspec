@@ -5525,6 +5525,43 @@ PERL
     like($out, qr/Blind-call targets do not support regex-slot indexing/, 'indexed blind-call diagnostic is reported early');
     is($err, '', 'indexed blind-call validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_action_edges_with_missing_targets' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'missing action-edge target validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects action edges with no target rule before bootstrap parse');
+    like($out, qr/Action edge is missing a target rule/, 'missing action-edge target diagnostic is reported early');
+    is($err, '', 'missing action-edge target validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_blind_calls_with_missing_targets' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:AND
+ => { return 1 }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'missing blind-call target validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects blind-call edges with no target rule before bootstrap parse');
+    like($out, qr/Blind-call edge is missing a target rule/, 'missing blind-call target diagnostic is reported early');
+    is($err, '', 'missing blind-call target validation subprocess does not emit stderr');
+};
 subtest 'validation_does_not_treat_edge_like_text_inside_action_code_as_real_edge_targets' => sub {
     plan tests => 4;
 

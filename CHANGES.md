@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Missing Edge Targets Earlier
+
+Extended the Phase 2 frontend-hardening track so incomplete top-level edge arrows are rejected during DSL validation instead of surfacing later through generic bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now rejects missing-target edge forms like:
+  - `-> { ... }`,
+  - and `=> { ... }`.
+- Validation now reports clearer early diagnostics that distinguish:
+  - missing action-edge targets,
+  - and missing blind-call targets.
+- Added focused regression coverage in `t/phase0_regression.t` for both malformed action-edge and blind-call missing-target forms.
+- Expanded `USER_GUIDE.md` and `USER_GUIDE_RuleModesAndSplit.md` so the edge syntax contract now says plainly that both action edges and blind calls must still name a target rule.
+
 ## 2026-03-19 - Validation: Reject Malformed Edge Target Syntax Earlier
 
 Extended the Phase 2 frontend-hardening track so malformed top-level edge targets are rejected during DSL validation instead of surfacing later through generic bootstrap parse failure.
