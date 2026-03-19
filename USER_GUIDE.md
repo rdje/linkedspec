@@ -247,26 +247,38 @@ In other words:
 - `-> rule[1]` means “match the second regex of `rule`,”
 - and in general `-> rule[N]` means “match the `(N+1)`th regex of `rule`.”
 
+The important practical nuance is how this is normally used in real specs:
+- `rule[N]` is usually used inside the definition of that same rule,
+- because it is mainly a way to choose among that rule’s own regex entry slots during self-recursive parsing,
+- while cross-rule edges usually stay on the first entrypoint and are written simply as `-> other_rule` or, less commonly, `-> other_rule[0]`.
+
 Representative example:
 
 ```text
-value:
+A:
  /[A-Za-z_]\w*/
  /"(?:[^"\\]|\\.)*"/
  /\d+/
+ -> A
+ -> A[1]
+ -> A[2]
 
-parent:
- -> value
- -> value[1]
- -> value[2]
+B:
+ -> A
 ```
 
 The practical reading is:
-- `-> value` targets the identifier regex,
-- `-> value[1]` targets the quoted-string regex,
-- `-> value[2]` targets the integer regex.
+- inside `A`, plain `-> A` means `-> A[0]`, so it recurses through the first regex,
+- `-> A[1]` targets the second regex of `A`,
+- `-> A[2]` targets the third regex of `A`,
+- and a different rule such as `B` will usually just use `-> A` to enter `A` through its first regex entrypoint.
 
-That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint.”
+So the mechanical rule is general, but the normal authoring pattern is narrower:
+- use `-> A`, `-> A[1]`, `-> A[2]`, ... inside rule `A` when `A` is recursive and needs to choose among its own regex slots,
+- use `-> B` or `-> B[0]` from another rule when you simply want rule `B`'s default first entrypoint,
+- and treat cross-rule `-> B[N]` with `N > 0` as unusual rather than normal authoring style.
+
+That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
 For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias and leaving only the extra standalone `AND` / `AND+` follow-ons as future work.
 
