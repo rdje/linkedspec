@@ -632,9 +632,20 @@ That makes blind-call useful for the kind of multi-pass extraction workflow wher
 ### Current Caution On Repeated-Choice Blind Calls
 Blind-call repetition on the repeated-choice family exists in the runtime, but it is not yet the cleanest or best-explained starting point.
 
+One important design point is already clear, though:
+- blind-call does **not** implicitly switch a rule into ordered-sequence behavior,
+- `=> child_rule` only says “compose by calling child parsers as parser steps,”
+- and the rule label still decides whether those steps are composed as sequence, choice, or repeated choice.
+
+So:
+- if you want sequential orchestration, say it explicitly with `:&`, `:AND`, `:AND+`, or `:AND{...}`,
+- if you want wrapper choice, say it explicitly with `:|`,
+- and do not treat bare `rule:` with blind calls as meaning “AND by default.”
+
 So the current guidance is:
 - if you want blind-call orchestration, prefer the ordered-sequence blind-call family (`:&`, `:AND`, `:AND+`, `:AND{...}`),
 - if you want one wrapper choice among child parsers, prefer `:|`,
+- if you do need repeated-choice blind-call behavior, prefer the explicit `:OR` / `:OR{...}` spellings over relying on bare `rule:` as shorthand,
 - and treat blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) as an advanced compatibility surface until that contract is clarified more explicitly.
 
 ## What Is Still Deferred

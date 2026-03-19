@@ -1,5 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Test Slice: Clarify Blind-Call Mode Selection
+
+Expanded the rule-mode contract again so future implementation does not silently drift into “blind-call means ordered sequence by default.”
+
+- Updated `USER_GUIDE_RuleModesAndSplit.md` to say explicitly that:
+  - `=> child_rule` makes a rule parser-step oriented,
+  - but the rule label still decides whether that blind-call body behaves as ordered sequence, single-choice dispatch, or repeated choice,
+  - so bare `rule:` should not be reinterpreted as implicit `AND` just because the body uses blind calls.
+- Recorded the same design rule in `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future hardening work keeps rule-label semantics independent from edge kind.
+
 ## 2026-03-19 - Docs Slice: Capture `->` Versus `=>` Mixing Rationale
 
 Expanded the rule-mode guide again to record the design reason behind the existing “do not mix `->` and `=>` in one rule” contract instead of leaving it as a bare prohibition.

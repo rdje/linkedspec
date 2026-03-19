@@ -4256,6 +4256,44 @@ SPEC
     is($choice_descr->{spec}{Choice}{meta}{regex_count}, 0, 'Choice blind-call rule does not report regex slots on the blind-call wrapper rule itself');
     ok($choice_descr->{spec}{Choice}{meta}{uses_loop}, 'Choice blind-call rule reports loop execution');
 };
+subtest 'blind_call_rule_modes_follow_label_semantics' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Sequence::AND
+ => First
+ => Second
+
+Choice::|
+ => First
+ => Second
+
+RepeatChoice::OR
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for worded blind-call rule-mode variants');
+
+    is($descr->{spec}{Sequence}{meta}{handler_variant}, 'AND_BCODE', 'blind-call ordered-sequence rule still follows explicit AND label');
+    is($descr->{spec}{Sequence}{meta}{execution_shape}, 'and_call_loop', 'blind-call ordered-sequence rule reports ordered call-loop execution');
+    is($descr->{spec}{Sequence}{meta}{action_mode}, 'blind_call', 'blind-call ordered-sequence rule keeps blind_call action mode');
+
+    is($descr->{spec}{Choice}{meta}{handler_variant}, 'OR_BCODE', 'blind-call single-choice rule still follows explicit choice label');
+    is($descr->{spec}{Choice}{meta}{execution_shape}, 'or_call_loop', 'blind-call single-choice rule reports choice call-loop execution');
+    is($descr->{spec}{Choice}{meta}{action_mode}, 'blind_call', 'blind-call single-choice rule keeps blind_call action mode');
+
+    is($descr->{spec}{RepeatChoice}{meta}{handler_variant}, 'REP_BCODE', 'blind-call repeated-choice rule still follows explicit OR label');
+    is($descr->{spec}{RepeatChoice}{meta}{execution_shape}, 'repeat_loop', 'blind-call repeated-choice rule reports repeated blind-call execution');
+    is($descr->{spec}{RepeatChoice}{meta}{action_mode}, 'blind_call', 'blind-call repeated-choice rule keeps blind_call action mode');
+};
 subtest 'blind_call_choice_rule_dispatches_across_child_rules' => sub {
     plan tests => 7;
 
