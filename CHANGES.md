@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Tests: Lock Paragraph-Based Rule Body Ordering Contract
+
+Turned the recently clarified `.spec` file-structure explanation into explicit supported contract.
+
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - representative action-rule paragraphs where `RE`, `ICODE`, `ACODE`, and `LXCODE` are interleaved after the rule label,
+  - representative blind-call rule paragraphs where `ICODE`, `BCODE`, and `LXCODE` are interleaved after the rule label,
+  - and descriptor/meta stability across those conventional-versus-freer paragraph layouts.
+- Expanded `USER_GUIDE.md` so the paragraph-based explanation now says plainly that this flexibility is part of the supported file format rather than accidental parser tolerance.
+- Updated `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future implementation work treats paragraph-member interleaving as a tracked contract and not something that can be tightened casually.
+
 ## 2026-03-19 - Rule Modes: Support Explicit OR Plus Label
 
 Added explicit repeated-choice shorthand `OR+` as a current supported rule-label surface.

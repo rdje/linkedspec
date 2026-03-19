@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-19: Locked the paragraph-based `.spec` rule-body contract in docs/tests. Representative action-rule and blind-call rule paragraphs now prove that after the leading `rule:` / `rule::` token, regexes, lifecycles, and edges can be interleaved without changing their structural meaning; the guide now says that flexibility is supported format, not accidental parser tolerance.
 - 2026-03-19: Added explicit repeated-choice shorthand `OR+` as supported current rule-label surface. `rule:OR+` now lowers with the same min-one repeated-choice contract as `rule:OR` and `rule:OR{1,}`, validation accepts it, regression coverage locks metadata plus runtime parity, and the guide now treats it as explicit shorthand rather than a distinct execution family.
 - 2026-03-19: Hardened bounded/shorthand repeated-choice blind-call behavior further. `:+`, `:OR{2,3}`, and `:OR{,2}` now have focused regression coverage, and repeat blind-call handlers now stop cleanly on zero-progress child success so lower-bound-zero child rules can return `[]` standalone without sending repeated parents into infinite loops.
 - 2026-03-19: Hardened repeated-choice blind-call semantics. `REP_BCODE` now repeats one child-choice step rather than reusing the ordered-sequence blind-call body, so explicit `:OR` blind-call rules and historical bare `rule:` blind-call rules now both follow repeated-choice semantics instead of accidentally behaving like repeated `AND` sequences.

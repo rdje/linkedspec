@@ -5010,6 +5010,147 @@ SPEC
     ok(LinkedSpec::Validation::validate_spec_content(\$spec_content), 'validation accepts current top-rule envelope with explicit AND+ label');
     ok(LinkedSpec::Validation::validate_dsl_syntax(\$spec_content), 'validation accepts explicit AND+, explicit OR+, bounded OR, blind-call, and inline capture-from-here rule surfaces');
 };
+subtest 'action_rule_paragraph_members_can_be_interleaved_after_rule_label' => sub {
+    plan tests => 9;
+
+    my $conventional_spec = <<'SPEC';
+Top::
+ /a/ -> Leaf { return_a(Leaf) }
+ I { declare(scalar, retv) }
+ LX { return(scalar(retv)) }
+
+Leaf:
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $free_order_spec = <<'SPEC';
+Top::
+ LX { return(scalar(retv)) }
+ -> Leaf { return_a(Leaf) }
+ /a/
+ I { declare(scalar, retv) }
+
+Leaf:
+ /b/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my ($conv_ok, $conv_bootstrap, $conv_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$conventional_spec);
+    ok($conv_ok, 'bootstrap parse accepts conventional action-rule paragraph order') or diag(normalize_error($conv_err));
+
+    my ($free_ok, $free_bootstrap, $free_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$free_order_spec);
+    ok($free_ok, 'bootstrap parse accepts freer interleaved action-rule paragraph order') or diag(normalize_error($free_err));
+
+    my $conv_top = $conv_bootstrap->[0];
+    my $free_top = $free_bootstrap->[0];
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'RE' } @$conv_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'RE' } @$free_top ],
+        'bootstrap parse preserves the same regex slots across action-rule paragraph order variants',
+    );
+
+    is_deeply(
+        [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } grep { $_->[0] eq 'ACODE' } @$conv_top ],
+        [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } grep { $_->[0] eq 'ACODE' } @$free_top ],
+        'bootstrap parse preserves the same action-edge dispatch payload across action-rule paragraph order variants',
+    );
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$conv_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$free_top ],
+        'bootstrap parse preserves I lifecycle payloads across action-rule paragraph order variants',
+    );
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$conv_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$free_top ],
+        'bootstrap parse preserves LX lifecycle payloads across action-rule paragraph order variants',
+    );
+
+    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descr => 1);
+    ok(defined($conv_descr) && ref($conv_descr) eq 'HASH', 'descriptor build succeeds for conventional action-rule paragraph order');
+
+    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descr => 1);
+    ok(defined($free_descr) && ref($free_descr) eq 'HASH', 'descriptor build succeeds for freer interleaved action-rule paragraph order');
+
+    is_deeply(
+        { map { $_ => $conv_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant/ },
+        { map { $_ => $free_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant/ },
+        'compiled action-rule metadata stays stable across paragraph member order variants',
+    );
+};
+subtest 'blind_call_rule_paragraph_members_can_be_interleaved_after_rule_label' => sub {
+    plan tests => 9;
+
+    my $conventional_spec = <<'SPEC';
+Top::AND
+ I { declare(scalar, retv) }
+ => First
+ => Second
+ LX { return(scalar(retv)) }
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $free_order_spec = <<'SPEC';
+Top::AND
+ LX { return(scalar(retv)) }
+ => First
+ I { declare(scalar, retv) }
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my ($conv_ok, $conv_bootstrap, $conv_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$conventional_spec);
+    ok($conv_ok, 'bootstrap parse accepts conventional blind-call paragraph order') or diag(normalize_error($conv_err));
+
+    my ($free_ok, $free_bootstrap, $free_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$free_order_spec);
+    ok($free_ok, 'bootstrap parse accepts freer interleaved blind-call paragraph order') or diag(normalize_error($free_err));
+
+    my $conv_top = $conv_bootstrap->[0];
+    my $free_top = $free_bootstrap->[0];
+
+    is_deeply(
+        [ map { +{ call => $_->[1]{call}, code => $_->[1]{code} } } grep { $_->[0] eq 'BCODE' } @$conv_top ],
+        [ map { +{ call => $_->[1]{call}, code => $_->[1]{code} } } grep { $_->[0] eq 'BCODE' } @$free_top ],
+        'bootstrap parse preserves the same blind-call dispatch payload across paragraph order variants',
+    );
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$conv_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'ICODE' } @$free_top ],
+        'bootstrap parse preserves I lifecycle payloads across blind-call paragraph order variants',
+    );
+
+    is_deeply(
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$conv_top ],
+        [ map { $_->[1] } grep { $_->[0] eq 'LXCODE' } @$free_top ],
+        'bootstrap parse preserves LX lifecycle payloads across blind-call paragraph order variants',
+    );
+
+    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descr => 1);
+    ok(defined($conv_descr) && ref($conv_descr) eq 'HASH', 'descriptor build succeeds for conventional blind-call paragraph order');
+
+    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descr => 1);
+    ok(defined($free_descr) && ref($free_descr) eq 'HASH', 'descriptor build succeeds for freer interleaved blind-call paragraph order');
+
+    is_deeply(
+        { map { $_ => $conv_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant execution_shape/ },
+        { map { $_ => $free_descr->{spec}{Top}{meta}{$_} } qw/node_type regex_count acode_count bcode_count action_mode handler_variant execution_shape/ },
+        'compiled blind-call metadata stays stable across paragraph member order variants',
+    );
+
+    is_deeply($conv_descr->{spec}{Top}{gdata}, $free_descr->{spec}{Top}{gdata}, 'blind-call gdata stays stable across paragraph member order variants');
+};
 subtest 'validation_rejects_duplicate_regular_rule_labels_with_current_modes' => sub {
     plan tests => 4;
 

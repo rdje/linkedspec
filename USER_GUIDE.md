@@ -79,6 +79,8 @@ But the real grammar is more flexible:
 - regexes, lifecycles, and edges belong to the same rule paragraph,
 - and their order is not artificially locked down by the file format.
 
+That flexibility is part of the supported contract, not an accidental side effect. Regression coverage now explicitly locks representative action-rule and blind-call rule paragraphs where those members are interleaved after the leading rule label.
+
 The regex count should stay open-ended too:
 - most rules use one regex,
 - many use two,
