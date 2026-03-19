@@ -69,6 +69,11 @@ Worded rule modes must also use their exact supported spellings:
 
 Malformed glued forms like `rule_name:ORX` and `rule_name::ANDX` are rejected early too, rather than being treated as “close enough” prefixes of the supported labels.
 
+Edge target names follow that same exactness rule:
+- `-> rule-extra` is invalid,
+- `=> rule-extra` is invalid,
+- and current frontend validation rejects those malformed glued target suffixes early instead of silently prefix-parsing them as `rule`.
+
 In practice that means a rule paragraph can contain:
 - one or more regex tokens like `/.../`,
 - lifecycle blocks like `I { ... }`, `LS { ... }`, `LE { ... }`, `LX { ... }`,
@@ -331,9 +336,16 @@ There is no tiny DSL-fixed cap here. If a rule genuinely needs four, five, or mo
 Current frontend validation now rejects malformed edge-target indexing before bootstrap parse too:
 - `-> rule[]` is invalid,
 - `-> rule[abc]` is invalid,
+- `-> rule-extra` is invalid because action-edge target names use word characters only unless they continue with a supported fluent/action suffix,
 - `-> { ... }` is invalid because action edges must name a target rule,
 - `=> { ... }` is invalid because blind calls must name a child rule,
+- `=> rule-extra` is invalid because blind-call target names must stay plain rule identifiers,
 - and `=> rule[0]` is invalid because regex-slot indexing belongs to action edges, not blind calls.
+
+That exactness rule is intentional:
+- supported action-edge continuations like `-> rule[idx]`, `-> rule.method`, and `-> rule { ... }` are still valid,
+- but glued punctuation suffixes like `-> rule-extra` are rejected early instead of being misread as plain `-> rule`,
+- and blind-call targets stay even narrower, so `=> rule` and `=> rule { ... }` are valid while glued punctuation forms are not.
 
 An explicit side-by-side equivalence example can help:
 

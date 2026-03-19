@@ -556,6 +556,7 @@ The two edge families describe two different execution models.
 Blind calls do not use regex-slot indexing:
 - `=> child_rule` is valid,
 - `=> { ... }` is invalid because a blind call must still name a child rule,
+- `=> child_rule-extra` is invalid because blind-call targets stay plain word rule names,
 - `=> child_rule[0]` is invalid,
 - and regex-slot selection stays on the action-edge side as `-> child_rule[idx]`.
 

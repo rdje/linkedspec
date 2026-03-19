@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Malformed Glued Edge Target Suffixes
+
+Extended the Phase 2 frontend-hardening track so malformed glued edge-target suffixes are rejected during DSL validation instead of being prefix-parsed as shorter valid target names.
+
+- Updated `perl/LinkedSpec/Validation.pm` so malformed top-level edge targets like:
+  - `-> Rule-extra`,
+  - and `=> Rule-extra`,
+  now report targeted early diagnostics.
+- Kept the supported edge-target surface explicit:
+  - `-> RuleName`,
+  - `-> RuleName[idx]`,
+  - `-> RuleName.method`,
+  - `-> RuleName { ... }`,
+  - `=> RuleName`,
+  - and `=> RuleName { ... }`.
+- Preserved the existing indexed blind-call diagnostic path, so `=> RuleName[0]` still reports as unsupported blind-call indexing rather than being swallowed by the new glued-suffix check.
+- Added focused regression coverage in `t/phase0_regression.t` for malformed glued action-edge and blind-call target suffixes.
+- Expanded `USER_GUIDE.md` and `USER_GUIDE_RuleModesAndSplit.md` so the edge-target contract now says plainly that rule target names must stay exact and are not silently prefix-matched.
+
 ## 2026-03-19 - Validation: Reject Malformed Split Marker Syntax
 
 Extended the Phase 2 frontend-hardening track so malformed `@...` split-boundary markers are rejected during DSL validation instead of falling through to generic unsupported-content handling or later bootstrap parse failure.

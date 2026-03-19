@@ -634,7 +634,23 @@ sub _scan_rule_edges_in_fragment {
     };
    }
 
-   my $label = substr($fragment, $label_start, $cursor - $label_start);
+  my $label = substr($fragment, $label_start, $cursor - $label_start);
+   if ($cursor < $len) {
+    my $label_suffix = substr($fragment, $cursor, 1);
+    my $label_suffix_ok = $kind eq 'action'
+     ? ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{' || $label_suffix eq '.')
+     : ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{');
+    unless ($label_suffix_ok) {
+     return {
+      error => {
+       kind   => $kind,
+       reason => 'malformed_target_suffix',
+       label  => $label,
+      },
+     };
+    }
+   }
+
    my $lookahead = $cursor;
    ++$lookahead while $lookahead < $len && substr($fragment, $lookahead, 1) =~ /\s/;
 
@@ -664,6 +680,18 @@ sub _scan_rule_edges_in_fragment {
     }
 
     $lookahead = $index_cursor + 1;
+    if ($lookahead < $len) {
+     my $post_index = substr($fragment, $lookahead, 1);
+     unless ($post_index =~ /\s/o || $post_index eq '{' || $post_index eq '.') {
+      return {
+       error => {
+        kind   => $kind,
+        reason => 'malformed_target_suffix',
+        label  => $label,
+       },
+      };
+     }
+    }
    }
 
    push @edges, {
@@ -725,6 +753,24 @@ sub _report_edge_target_syntax_error {
    $position,
    "Blind-call targets do not support regex-slot indexing",
    "Use '=> RuleName' for blind calls, or use '-> RuleName[idx]' when you need a regex-slot action edge",
+  );
+ }
+
+ if ($kind eq 'blind_call' && $reason eq 'malformed_target_suffix') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Malformed blind-call target syntax",
+   "Use '=> RuleName' or '=> RuleName { ... }'; blind-call target names use word characters only and cannot have glued punctuation suffixes",
+  );
+ }
+
+ if ($kind eq 'action' && $reason eq 'malformed_target_suffix') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Malformed action-edge target syntax",
+   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
   );
  }
 
