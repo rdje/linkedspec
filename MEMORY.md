@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-19: Started Phase 2 frontend hardening with stricter rule-paragraph regex validation. `validate_dsl_syntax(...)` now checks leading regex tokens on both multiline and same-line rule paragraphs, regression coverage now locks current packed paragraph acceptance plus malformed-regex rejection before bootstrap parse, and the roadmap Phase 2 row now moves to `in progress`.
 - 2026-03-19: Locked same-line rule paragraphs as explicit supported format. Representative action-rule and blind-call examples are now regression-covered in both multiline and same-line layout, and the user guide now states plainly that same-line packing is still just the same paragraph model rather than a different sublanguage.
 - 2026-03-19: Locked the open-ended regex-slot indexing contract more explicitly. Regression coverage now proves that action-edge indexing continues through a representative four-regex rule (`-> A[3]` targeting the fourth regex), and the user guide now states plainly that the regex-slot model is not artificially capped at one, two, or three entries.
 - 2026-03-19: Locked the paragraph-based `.spec` rule-body contract in docs/tests. Representative action-rule and blind-call rule paragraphs now prove that after the leading `rule:` / `rule::` token, regexes, lifecycles, and edges can be interleaved without changing their structural meaning; the guide now says that flexibility is supported format, not accidental parser tolerance.

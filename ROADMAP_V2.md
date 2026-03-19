@@ -54,7 +54,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 | Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; `tclite.spec` remains the only explicitly deferred known issue. |
 | Phase 1 | `mostly done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams. |
 | Phase 1A | `mostly done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Finish shrinking `LinkedSpec.pm` and the remaining thin compatibility wrappers down to stable owner paths. |
-| Phase 2 | `not started` | DSL frontend hardening, stricter validation, and clearer token/error handling. | DSL frontend hardening still has not begun as a dedicated phase. |
+| Phase 2 | `in progress` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Continue expanding syntax-aware validation from the current rule-paragraph regex checks into broader token/error hardening and clearer diagnostics. |
 | Phase 3 | `not started` | Formal parse-mode semantics, especially `seek` versus `consume` behavior. | Execution-semantics clarification work is still ahead. |
 | Phase 4 | `not started` | Capture/mark API formalization and clearer staged-extraction authoring primitives. | Capture/mark API formalization is still ahead. |
 | Phase 5 | `in progress` | Runtime modernization, diagnostics consistency, and reduced dynamic-eval fragility. | Runtime/diagnostic modernization has landed refactor groundwork, but the phase-level behavior work is not complete yet. |
@@ -201,7 +201,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - `perl/LinkedSpec/BootstrapSpec/Core.pm` remains the main bootstrap/frontend syntax hotspot.
   - `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`, `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`, `perl/LinkedSpec/ActionIR/ControlFlow.pm`, and `perl/LinkedSpec/ActionIR/RewritePipeline.pm` form one correctness-critical semicolon-light/attached-block flow seam.
   - `perl/LinkedSpec/SpecEntry.pm` plus `perl/LinkedSpec/Compiler.pm` still define the main backend-portability ceiling because runtime handlers are emitted as Perl source strings and evaled.
-  - `perl/LinkedSpec/Validation.pm` still trails parts of the supported DSL surface and remains a Phase 2 hardening target, even though current rule-label syntax is now aligned there more closely.
+  - `perl/LinkedSpec/Validation.pm` still trails parts of the supported DSL surface and remains a Phase 2 hardening target, even though current rule-label syntax plus rule-paragraph regex validation are now aligned there more closely.
   - blind-call should remain mode-driven by the rule label: `=> child` must not silently make bare `rule:` mean ordered sequence just because the body is parser-step oriented.
 
 ## Deferred Future Note

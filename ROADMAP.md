@@ -89,6 +89,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Replace permissive/spec-skipping behavior with explicit token handling.
 - Provide high-quality errors with line/column context.
 - Keep a compatibility mode for legacy permissive behavior where needed.
+- Phase 2 has now started with stricter rule-paragraph regex-token validation across both multiline and same-line rule bodies, but broader token/error hardening is still ahead.
 - Exit criteria:
   - Deterministic DSL validation.
   - No silent token-loss in strict mode.
@@ -423,7 +424,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; `tclite.spec` remains the only explicitly deferred known issue. |
 | Phase 1 | `mostly done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams. |
 | Phase 1A | `mostly done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Finish shrinking `LinkedSpec.pm` and the remaining thin compatibility wrappers down to stable owner paths. |
-| Phase 2 | `not started` | DSL frontend hardening, stricter validation, and clearer token/error handling. | DSL frontend hardening still has not begun as a dedicated phase. |
+| Phase 2 | `in progress` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Continue expanding syntax-aware validation from the current rule-paragraph regex checks into broader token/error hardening and clearer diagnostics. |
 | Phase 3 | `not started` | Formal parse-mode semantics, especially `seek` versus `consume` behavior. | Execution-semantics clarification work is still ahead. |
 | Phase 4 | `not started` | Capture/mark API formalization and clearer staged-extraction authoring primitives. | Capture/mark API formalization is still ahead. |
 | Phase 5 | `in progress` | Runtime modernization, diagnostics consistency, and reduced dynamic-eval fragility. | Runtime/diagnostic modernization has landed refactor groundwork, but the phase-level behavior work is not complete yet. |
@@ -459,8 +460,8 @@ These are tracked implementation concerns, not immediate blockers.
   - That remains the clearest backend-portability and runtime-fragility ceiling even though the ActionIR/value-expression layer is becoming much more backend-neutral.
   - Future work should move toward a cleaner backend emission boundary or a more explicit emitted-handler IR.
 - Frontend hardening gap:
-  - `perl/LinkedSpec/Validation.pm` still trails parts of the currently supported DSL surface, even though current rule-label syntax is now recognized there more faithfully than before.
-  - Phase 2 should close that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
+  - `perl/LinkedSpec/Validation.pm` now covers current rule-label syntax plus rule-paragraph regex-token validation more faithfully than before, but it still trails other parts of the supported DSL surface.
+  - Phase 2 should keep closing that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
 - Sequencing rule for these concerns:
   - keep them tracked and visible,
   - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.

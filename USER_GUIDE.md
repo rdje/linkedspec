@@ -142,6 +142,11 @@ That is usually less readable than the multiline form, so it should not be the d
 - the rest of the line is still just that same rule paragraph,
 - and same-line versus multiline layout does not change the structural meaning of the rule.
 
+The same validation rule now applies across both layouts too:
+- current DSL validation checks regex-token syntax on multiline rule paragraphs,
+- current DSL validation checks regex-token syntax on same-line rule paragraphs,
+- so malformed `/.../` rule tokens are reported before bootstrap parse instead of only surfacing later as parser failure.
+
 ### Why this matters
 This paragraph-oriented view demystifies `.spec` files:
 - they are not trying to be hard to parse,

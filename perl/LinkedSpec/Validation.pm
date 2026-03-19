@@ -332,10 +332,10 @@ sub validate_dsl_syntax {
   next if $line =~ /^\s*#/;
 
   my $rule_label = _parse_rule_label_line($line);
-  next unless $rule_label;
-  my $rhs = $rule_label->{rhs};
+  my @regex_literals = $rule_label
+   ? _extract_leading_regex_literals_from_fragment($rule_label->{rhs})
+   : _extract_leading_regex_literals_from_fragment($line);
 
-  my @regex_literals = extract_regex_literals_from_rule_rhs($rhs);
   for my $regex_literal (@regex_literals) {
    my $regex_pattern = $regex_literal;
    $regex_pattern =~ s{^/|/$}{}g;
@@ -365,6 +365,19 @@ sub validate_dsl_syntax {
  }
 
  return 1;
+}
+
+sub _extract_leading_regex_literals_from_fragment {
+ my ($fragment) = @_;
+ my @regex_literals;
+ return @regex_literals unless defined $fragment;
+
+ pos($fragment) = 0;
+ while ($fragment =~ /\G\s*(\/(?:\\\\.|[^\/])*?(?<!\\)\/)/gc) {
+  push @regex_literals, $1;
+ }
+
+ return @regex_literals;
 }
 
 sub extract_regex_literals_from_rule_rhs {

@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Harden Rule-Paragraph Regex Checks
+
+Started the Phase 2 frontend-hardening track with stricter regex-token validation on full rule paragraphs.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now validates leading regex tokens on both:
+  - same-line rule paragraphs like `Top:: /a/ /b/ ...`,
+  - and multiline rule paragraphs where regex tokens appear on later paragraph lines.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - acceptance of current same-line action/blind-call paragraph forms under validation,
+  - rejection of malformed multiline rule regex tokens before bootstrap parse,
+  - and rejection of malformed same-line rule regex tokens before bootstrap parse.
+- Expanded `USER_GUIDE.md` so the file-structure explanation now says explicitly that current validation covers regex-token syntax on both multiline and same-line rule paragraphs.
+- Updated `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` to mark Phase 2 as `in progress` and record rule-paragraph regex validation as the first dedicated frontend-hardening slice.
+
 ## 2026-03-19 - Docs/Tests: Lock Same-Line Rule Paragraph Form
 
 Turned same-line rule paragraphs into explicit supported file-format contract.
