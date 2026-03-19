@@ -287,6 +287,7 @@ sub validate_dsl_syntax {
  my @defined_rules = ();
  my @used_rules = ();
  my %seen_defined_rules;
+ my $current_rule;
 
  for my $line (@lines) {
   next if $line =~ /^\s*$/;
@@ -294,6 +295,13 @@ sub validate_dsl_syntax {
 
   my $rule_label = _parse_rule_label_line($line);
   if ($rule_label) {
+   if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
+    return _report_mixed_rule_action_modes(
+     $current_rule->{label},
+     $current_rule->{acode_count},
+     $current_rule->{bcode_count},
+    );
+   }
    if ($rule_label->{invalid_mode}) {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
@@ -311,12 +319,30 @@ sub validate_dsl_syntax {
      "Remove the duplicate rule or rename one of them");
     return 0;
    }
+
+   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs});
+   $current_rule = {
+    label => $rule_name,
+    acode_count => $acode_count,
+    bcode_count => $bcode_count,
+   };
   } elsif (_looks_like_malformed_rule_label_line($line)) {
    my $position = index($$spec_content, $line);
    report_dsl_error($spec_content, $position,
     "Malformed rule label syntax",
     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
    return 0;
+  } elsif ($current_rule) {
+   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($line);
+   $current_rule->{acode_count} += $acode_count;
+   $current_rule->{bcode_count} += $bcode_count;
+   if ($current_rule->{acode_count} && $current_rule->{bcode_count}) {
+    return _report_mixed_rule_action_modes(
+     $current_rule->{label},
+     $current_rule->{acode_count},
+     $current_rule->{bcode_count},
+    );
+   }
   }
 
   while ($line =~ /->\s*(\w+)(?:\[(\d+)\])?/g) {
@@ -325,6 +351,14 @@ sub validate_dsl_syntax {
   while ($line =~ /=>\s*(\w+)/g) {
    push @used_rules, $1;
   }
+ }
+
+ if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
+  return _report_mixed_rule_action_modes(
+   $current_rule->{label},
+   $current_rule->{acode_count},
+   $current_rule->{bcode_count},
+  );
  }
 
  for my $line (@lines) {
@@ -365,6 +399,99 @@ sub validate_dsl_syntax {
  }
 
  return 1;
+}
+
+sub _count_rule_edge_kinds_in_fragment {
+ my ($fragment) = @_;
+ my ($acode_count, $bcode_count) = (0, 0);
+ return ($acode_count, $bcode_count) unless defined $fragment;
+ my $len = length($fragment);
+ my $depth = 0;
+ my $i = 0;
+
+ while ($i < $len) {
+  my $ch = substr($fragment, $i, 1);
+
+  if ($ch eq q{'}) {
+   ++$i;
+   while ($i < $len) {
+    my $inner = substr($fragment, $i, 1);
+    if ($inner eq q{\\}) {
+     $i += 2;
+     next;
+    }
+    ++$i;
+    last if $inner eq q{'};
+   }
+   next;
+  }
+
+  if ($ch eq q{"}) {
+   ++$i;
+   while ($i < $len) {
+    my $inner = substr($fragment, $i, 1);
+    if ($inner eq q{\\}) {
+     $i += 2;
+     next;
+    }
+    ++$i;
+    last if $inner eq q{"};
+   }
+   next;
+  }
+
+  if ($ch eq q{/}) {
+   ++$i;
+   while ($i < $len) {
+    my $inner = substr($fragment, $i, 1);
+    if ($inner eq q{\\}) {
+     $i += 2;
+     next;
+    }
+    ++$i;
+    last if $inner eq q{/};
+   }
+   next;
+  }
+
+  if ($ch eq '{' || $ch eq '(' || $ch eq '[') {
+   ++$depth;
+   ++$i;
+   next;
+  }
+
+  if (($ch eq '}' || $ch eq ')' || $ch eq ']') && $depth > 0) {
+   --$depth;
+   ++$i;
+   next;
+  }
+
+  if ($depth == 0 && substr($fragment, $i, 2) eq '->' && substr($fragment, $i + 2) =~ /\A\s*\w/) {
+   ++$acode_count;
+   $i += 2;
+   next;
+  }
+
+  if ($depth == 0 && substr($fragment, $i, 2) eq '=>' && substr($fragment, $i + 2) =~ /\A\s*\w/) {
+   ++$bcode_count;
+   $i += 2;
+   next;
+  }
+
+  ++$i;
+ }
+
+ return ($acode_count, $bcode_count);
+}
+
+sub _report_mixed_rule_action_modes {
+ my ($label, $acode_count, $bcode_count) = @_;
+ my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
+ my $context = "ACTION blocks: ".($acode_count // 0)." found, BLIND CALL blocks: ".($bcode_count // 0)." found";
+ _trace_log_output(DUMP_NONE, $error_msg, $context);
+ print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
+ print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";
+ return 0;
 }
 
 sub _extract_leading_regex_literals_from_fragment {

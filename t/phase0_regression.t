@@ -5406,6 +5406,68 @@ PERL
     like($out, qr/Invalid regex pattern: \/\(foo\//, 'same-line invalid-regex diagnostic names the malformed regex token');
     is($err, '', 'same-line-regex validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_mixed_action_and_blind_call_rule_paragraphs' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> Top { return_a(Top) }
+ => helper
+
+helper:
+ /a/
+ -> helper { return_a(helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'mixed action/blind-call validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects mixed action and blind-call rule paragraphs before RuleIR');
+    like($out, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/, 'mixed action/blind-call validation preserves the established diagnostic text');
+    like($out, qr/Solution: Use either ACTION blocks OR BLIND CALL blocks, not both/, 'mixed action/blind-call validation preserves remediation guidance');
+    is($err, '', 'mixed action/blind-call validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_same_line_mixed_action_and_blind_call_rule_paragraphs' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ -> Top { return_a(Top) } => helper
+helper: /a/ -> helper { return_a(helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'same-line mixed action/blind-call validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects same-line mixed action and blind-call rule paragraphs before RuleIR');
+    like($out, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/, 'same-line mixed action/blind-call validation preserves the established diagnostic text');
+    like($out, qr/Solution: Use either ACTION blocks OR BLIND CALL blocks, not both/, 'same-line mixed action/blind-call validation preserves remediation guidance');
+    is($err, '', 'same-line mixed action/blind-call validation subprocess does not emit stderr');
+};
+subtest 'validation_does_not_treat_hash_rocket_inside_action_code_as_blind_call' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return { kind => "atom" } }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'hash-rocket validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation keeps top-level action edges distinct from hash rockets inside action code');
+    unlike($out, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/, 'hash rockets inside action code do not trigger mixed-edge diagnostics');
+    is($err, '', 'hash-rocket validation subprocess does not emit stderr');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Mixed Edge Families Earlier
+
+Extended the first Phase 2 frontend-hardening pass so mixed `->` / `=>` rule bodies are rejected during DSL validation instead of only later in RuleIR.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now tracks paragraph-level edge families per rule and rejects rules that mix:
+  - regex-slot action edges `-> child_rule`,
+  - and blind-call edges `=> child_rule`.
+- Preserved the established diagnostic text and remediation guidance:
+  - `Rule 'X': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`
+  - plus the existing “Use either ACTION blocks OR BLIND CALL blocks, not both” guidance.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - multiline mixed-edge rule paragraphs,
+  - and same-line mixed-edge rule paragraphs.
+- Expanded `USER_GUIDE_RuleModesAndSplit.md` so the one-edge-family-per-rule contract now says explicitly that current frontend validation rejects the mixed shape before bootstrap parse on both multiline and same-line rule paragraphs.
+- Updated `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future frontend hardening work treats earlier mixed-edge rejection as already landed rather than as a remaining validation gap.
+
 ## 2026-03-19 - Validation: Harden Rule-Paragraph Regex Checks
 
 Started the Phase 2 frontend-hardening track with stricter regex-token validation on full rule paragraphs.

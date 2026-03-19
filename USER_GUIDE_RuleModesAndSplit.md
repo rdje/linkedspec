@@ -534,6 +534,10 @@ bad_rule:
 
 Use one style or the other for a given rule body.
 
+Current frontend validation now rejects that mixed rule shape before bootstrap parse on both:
+- multiline rule paragraphs,
+- and same-line packed rule paragraphs.
+
 ### Why Mixing `->` And `=>` Is A Bad Fit
 This rule is not just stylistic.
 
