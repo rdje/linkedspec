@@ -359,6 +359,11 @@ sub _parse_group_mode {
    rep_max   => 10**9,
   }
  }
+ if ($mode =~ /\AAND\z/o) {
+  return {
+   node_type => 'AND_EXPLICIT',
+  }
+ }
  return undef unless $mode =~ /\A(?<KIND>OR|AND)\s*\{\s*(?<BODY>[^}]*)\s*\}\z/o;
 
  my $kind = $+{KIND};
@@ -389,7 +394,7 @@ sub _parse_entry_label_token {
  my ($text, $ctx) = @_;
  return undef unless defined $text;
  return undef unless ref($ctx) eq 'HASH';
- return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR(?:\s*\{[^}]+\})?|AND\s*\{[^}]+\})?)\z/o;
+ return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR(?:\s*\{[^}]+\})?|AND(?:\s*\{[^}]+\})?)?)\z/o;
 
  my ($label, $colons, $mode) = @+{qw/LABEL COLON MODE/};
  my $target = $colons eq '::' ? '_INITIAL' : '';

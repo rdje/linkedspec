@@ -4133,20 +4133,81 @@ subtest 'bootstrap_rejects_invalid_bounded_or_labels' => sub {
         ok(defined($parse_error) || !$parse_success, "invalid bounded OR label for $label reports a parse failure");
     }
 };
-subtest 'bootstrap_rejects_still_deferred_plain_and_label' => sub {
-    plan tests => 2;
+subtest 'get_return_descr_rule_meta_explicit_and_strategy' => sub {
+    plan tests => 7;
 
     my $spec_content = <<'SPEC';
 Top::
- -> Sequence
+ -> Pair
 
-Sequence:AND
- /a/ -> Sequence { return_a(Sequence) }
+Pair:AND
+ /a/ -> Pair { return_a(Pair) }
+ /b/ -> Pair { return_a(Pair) }
 SPEC
 
-    my ($parse_success, undef, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok(!$parse_success, 'bootstrap parse rejects still-deferred plain AND label');
-    ok(defined($parse_error) || !$parse_success, 'still-deferred plain AND label reports a parse failure');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for explicit AND rules');
+    ok(exists $descr->{spec}{Pair}{meta}, 'Pair explicit AND rule includes execution metadata');
+    is($descr->{spec}{Pair}{meta}{handler_variant}, 'AND_ACODE', 'Pair explicit AND rule maps to AND_ACODE');
+    is($descr->{spec}{Pair}{meta}{node_type}, 'AND_EXPLICIT', 'Pair metadata preserves explicit AND node type');
+    is($descr->{spec}{Pair}{meta}{regex_count}, 2, 'Pair explicit AND metadata preserves regex count');
+    ok($descr->{spec}{Pair}{meta}{uses_loop}, 'Pair explicit AND metadata reports loop strategy');
+    is($descr->{spec}{Pair}{meta}{execution_shape}, 'and_sequence_loop', 'Pair explicit AND metadata preserves ordered-sequence execution shape');
+};
+subtest 'explicit_and_rule_label_matches_ampersand_sequence_baseline' => sub {
+    plan tests => 10;
+
+    my $explicit_and = <<'SPEC';
+Sequence::AND
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $sigil_and = <<'SPEC';
+Sequence::&
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $explicit_parser = LinkedSpec::Get(\$explicit_and);
+    ok(ref($explicit_parser) eq 'CODE', 'explicit AND parser builds');
+
+    my $sigil_parser = LinkedSpec::Get(\$sigil_and);
+    ok(ref($sigil_parser) eq 'CODE', 'ampersand AND parser builds');
+
+    my $explicit_full_input = "ab";
+    my $explicit_full = eval { $explicit_parser->(\$explicit_full_input) };
+    ok(!$@, 'explicit AND parser full-input execution does not die') or diag(normalize_error($@));
+
+    my $sigil_full_input = "ab";
+    my $sigil_full = eval { $sigil_parser->(\$sigil_full_input) };
+    ok(!$@, 'ampersand AND parser full-input execution does not die') or diag(normalize_error($@));
+
+    is_deeply($explicit_full, [['?First:', []], ['?Second:', []]], 'explicit AND parser preserves ordered sequence collection shape');
+    is_deeply($sigil_full, $explicit_full, 'explicit AND parser matches the ampersand ordered-sequence behavior');
+
+    my $explicit_short_input = "a";
+    my $explicit_short = eval { $explicit_parser->(\$explicit_short_input) };
+    ok(!$@, 'explicit AND parser short-input execution does not die') or diag(normalize_error($@));
+
+    my $sigil_short_input = "a";
+    my $sigil_short = eval { $sigil_parser->(\$sigil_short_input) };
+    ok(!$@, 'ampersand AND parser short-input execution does not die') or diag(normalize_error($@));
+
+    ok(!defined($explicit_short), 'explicit AND parser rejects incomplete ordered sequence');
+    ok(!defined($sigil_short), 'ampersand AND parser rejects incomplete ordered sequence');
 };
 subtest 'get_return_descr_rule_meta_bounded_and_repetition_strategies' => sub {
     plan tests => 21;

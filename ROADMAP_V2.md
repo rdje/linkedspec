@@ -206,13 +206,13 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 ## Deferred Future Note
 - Current baseline rule-mode contract is now explicit:
   - `:&`, `:|`, `:+`, `:*`, and `:?` are the current supported rule-label suffixes,
+  - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence rule model,
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative rule model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative rule model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
   - `@capture_from_here` is the preferred split-boundary cursor feature for staged capture flows,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
-  - explicit `AND`,
   - shorthand grouped repetition such as `AND+`,
   - and related grouped rule strategies.
 - This is intentionally deferred until the current default rule semantics are considered solid.

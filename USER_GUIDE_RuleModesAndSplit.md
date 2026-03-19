@@ -24,6 +24,7 @@ choice_rule:|
 one_or_more_rule:+
 zero_or_more_rule:*
 optional_rule:?
+explicit_sequence:AND
 explicit_repeated_choice:OR
 bounded_choice_exact:OR{2}
 bounded_choice_range:OR{2,4}
@@ -113,6 +114,20 @@ pair:&
 ```
 
 Use it when the rule should succeed only if the expected pieces arrive in sequence.
+
+### `:AND` explicit ordered sequence
+`AND` means ordered sequence too, with the same ordered-sequence contract as `:&`.
+
+Representative shape:
+
+```text
+pair:AND
+ /[A-Za-z_]\w*/ -> key
+ /\s*=\s*/
+ /[^,\n]+/ -> value
+```
+
+Use it when you want the ordered-sequence family spelled out explicitly instead of using the shorter `:&` sigil. It is the worded sibling of the existing ordered-sequence baseline, not a repeated-sequence form.
 
 ### `:|` choice
 `:|` means single-choice dispatch.
@@ -401,10 +416,9 @@ These are still future work, not current syntax:
 
 ```text
 AND+
-AND
 ```
 
-The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Explicit `OR` plus bounded `OR{...}` and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
+The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Explicit `AND`, explicit `OR`, bounded `OR{...}`, and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
 
 ## `@capture_from_here`: The Split Boundary Cursor
 `@capture_from_here` is now the preferred grammar surface for this feature.
@@ -498,11 +512,12 @@ That pattern is especially valuable when:
 ## Current Contract
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
+- explicit ordered-sequence label `AND` is now supported on top of the same ordered-sequence family,
 - explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
-- and extra grouped shorthands like standalone `AND` and `AND+` remain future work.
+- and extra grouped shorthands like `AND+` remain future work.
 
 That gives us a stable baseline before we expand the remaining rule-grouping surface further.
