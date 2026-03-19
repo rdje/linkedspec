@@ -74,11 +74,11 @@ sub _parse_rule_label_line {
     $invalid_mode = 1;
    }
   }
- } elsif ($tail =~ /\A(?<MODE>AND\+|AND|OR)(?<REST>\s.*|\z)/o) {
+ } elsif ($tail =~ /\A(?<MODE>AND\+|AND|OR\+|OR)(?<REST>\s.*|\z)/o) {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
  } elsif ($tail =~ /\A(?<MODE>[&|\+\*\?])(?<REST>\s.*|\z)/o) {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
- } elsif ($tail =~ /\A(?:[&|\+\*\?]|AND(?:\b|\{|\+)|OR(?:\b|\{))/o) {
+ } elsif ($tail =~ /\A(?:[&|\+\*\?]|AND(?:\b|\{|\+)|OR(?:\b|\{|\+))/o) {
   $invalid_mode = 1;
  }
 
@@ -298,7 +298,7 @@ sub validate_dsl_syntax {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
      "Malformed rule label syntax",
-     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', or 'RuleName:OR{2,4}'");
+     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
     return 0;
    }
    my $rule_name = $rule_label->{label};
@@ -315,7 +315,7 @@ sub validate_dsl_syntax {
    my $position = index($$spec_content, $line);
    report_dsl_error($spec_content, $position,
     "Malformed rule label syntax",
-    "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', or 'RuleName:OR{2,4}'");
+    "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
    return 0;
   }
 

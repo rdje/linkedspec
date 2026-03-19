@@ -1,5 +1,5 @@
 # USER GUIDE: Rule Modes And Split Boundaries
-This guide covers the current rule-shape surface, including explicit `OR`, explicit `AND+`, bounded `OR{...}`, and bounded `AND{...}` labels.
+This guide covers the current rule-shape surface, including explicit `OR`, explicit `OR+`, explicit `AND+`, bounded `OR{...}`, and bounded `AND{...}` labels.
 
 Read this when you want to understand:
 - what rule-label sigils already mean today,
@@ -25,6 +25,7 @@ one_or_more_rule:+
 zero_or_more_rule:*
 optional_rule:?
 explicit_sequence:AND
+explicit_repeated_choice_shorthand:OR+
 explicit_repeated_sequence:AND+
 explicit_repeated_choice:OR
 bounded_choice_exact:OR{2}
@@ -65,6 +66,7 @@ For authoring purposes, the clearest mental model is that bare `rule:` belongs t
 
 ```text
 rule:OR
+rule:OR+
 rule:OR{1,}
 ```
 
@@ -73,6 +75,7 @@ and conceptually corresponds to `OR+`.
 That mapping matters because:
 - bare `rule:` is the historical default repeated-alternative behavior,
 - `rule:OR` is now the explicit worded spelling for that same repeated-choice family when you want to say it out loud without adding numeric bounds,
+- `rule:OR+` is now the explicit shorthand spelling for that same repeated-choice family when you want repetition punctuation made visible in the label,
 - `rule:|` is the separate single-choice dispatch surface,
 - and the worded `OR{...}` family makes the same repeated-choice family explicit when you need bounds.
 
@@ -88,6 +91,14 @@ is the same repeated-choice idea as:
 
 ```text
 item_list:OR
+/[A-Za-z_]\w*/ -> item_list
+/"(?:[^"\\]|\\.)*"/ -> item_list
+```
+
+and:
+
+```text
+item_list:OR+
  /[A-Za-z_]\w*/ -> item_list
  /"(?:[^"\\]|\\.)*"/ -> item_list
 ```
@@ -100,7 +111,7 @@ item_list:OR{1,}
  /"(?:[^"\\]|\\.)*"/ -> item_list
 ```
 
-`rule:OR` and `rule:OR{1,}` are explicit grouped-rule spellings. Bare `rule:` remains the historical default surface for that same repeated-choice baseline rather than a promise that every low-level emitted handler path is textually identical.
+`rule:OR`, `rule:OR+`, and `rule:OR{1,}` are explicit grouped-rule spellings. Bare `rule:` remains the historical default surface for that same repeated-choice baseline rather than a promise that every low-level emitted handler path is textually identical.
 
 ### `:&` ordered sequence
 `:&` means ordered sequence.
@@ -208,6 +219,20 @@ token_stream:OR
 ```
 
 Use it when you want the repeated-choice family spelled out explicitly without adding numeric bounds. It is the explicit worded sibling of the historical bare `rule:` baseline and the bounded `OR{1,}` form.
+
+### `:OR+` explicit open-ended repeated choice shorthand
+`OR+` means open-ended repeated choice too, with the same min-one repeated-choice contract as `OR` and `OR{1,}`.
+
+Representative shape:
+
+```text
+token_stream:OR+
+ /[A-Za-z_]\w*/ -> token_stream
+ /"(?:[^"\\]|\\.)*"/ -> token_stream
+ /'(?:[^'\\]|\\.)*'/ -> token_stream
+```
+
+Use it when you want the repeated-choice family spelled out with repetition punctuation instead of the bare worded `OR` form. It does not introduce a different execution model; it is the explicit shorthand sibling of `OR` and `OR{1,}`.
 
 ### `:OR{N}` exact bounded repeated choice
 `OR{N}` means repeated alternative extraction with an exact required count.
@@ -645,11 +670,12 @@ So:
 So the current guidance is:
 - if you want blind-call orchestration, prefer the ordered-sequence blind-call family (`:&`, `:AND`, `:AND+`, `:AND{...}`),
 - if you want one wrapper choice among child parsers, prefer `:|`,
-- and if you want repeated-choice blind-call behavior, prefer the explicit `:OR` / `:OR{...}` spellings when you want to make that intent obvious at a glance.
+- and if you want repeated-choice blind-call behavior, prefer the explicit `:OR`, `:OR+`, or `:OR{...}` spellings when you want to make that intent obvious at a glance.
 
 The repeated-choice blind-call family now means:
 - bare `rule:` with `=> child_rule` follows the repeated-choice baseline,
 - `rule:OR` is the explicit worded repeated-choice blind-call spelling,
+- `rule:OR+` is the explicit shorthand repeated-choice blind-call spelling,
 - `rule:OR{...}` is the bounded repeated-choice blind-call spelling,
 - and `rule:+` stays the compact one-or-more repeated-choice spelling.
 
@@ -805,11 +831,12 @@ The current supported contract is:
 - explicit ordered-sequence label `AND` is now supported on top of the same ordered-sequence family,
 - explicit repeated-sequence label `AND+` is now supported on top of the same repeated-sequence family as `AND{1,}`,
 - explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
+- explicit repeated-choice shorthand `OR+` is now supported on top of the same repeated-choice family as `OR` and `OR{1,}`,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - blind-call `=> child_rule` is a real current advanced rule-body surface and should not be mixed with `-> child_rule` inside one rule,
 - the clearest documented blind-call shapes today are ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`),
-- repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
+- repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,

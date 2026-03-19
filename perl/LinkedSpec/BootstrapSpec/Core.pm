@@ -359,6 +359,13 @@ sub _parse_group_mode {
    rep_max   => 10**9,
   }
  }
+ if ($mode =~ /\AOR\+\z/o) {
+  return {
+   node_type => 'REP_OR_PLUS',
+   rep_min   => 1,
+   rep_max   => 10**9,
+  }
+ }
  if ($mode =~ /\AAND\+\z/o) {
   return {
    node_type => 'REP_AND_PLUS',
@@ -401,7 +408,7 @@ sub _parse_entry_label_token {
  my ($text, $ctx) = @_;
  return undef unless defined $text;
  return undef unless ref($ctx) eq 'HASH';
- return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR(?:\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)?)\z/o;
+ return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR(?:\+|\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)?)\z/o;
 
  my ($label, $colons, $mode) = @+{qw/LABEL COLON MODE/};
  my $target = $colons eq '::' ? '_INITIAL' : '';
@@ -483,7 +490,7 @@ sub _build_entry_label_rule {
  return {
   id => 'ENTRY_LABEL',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*::?\s*(?:(?:&|\||\+|\*|\?|OR(?:\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
+  re=> [qr/\w+\s*::?\s*(?:(?:&|\||\+|\*|\?|OR(?:\+|\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
   handler=> sub {
    my ($info, undef, undef, $gdata) = @_;
    my $parsed = _parse_entry_label_token($$info{match}, $ctx);

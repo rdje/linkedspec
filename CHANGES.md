@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Rule Modes: Support Explicit OR Plus Label
+
+Added explicit repeated-choice shorthand `OR+` as a current supported rule-label surface.
+
+- Updated `perl/LinkedSpec/BootstrapSpec/Core.pm` so `rule:OR+` parses as a real grouped repeated-choice label with the same min-one/open-ended repetition contract as `rule:OR` and `rule:OR{1,}`.
+- Updated `perl/LinkedSpec/Validation.pm` and `perl/LinkedSpec/SpecEntry.pm` so validation accepts the new spelling and runtime repetition-bound resolution treats `REP_OR_PLUS` as a real first-class repetition node instead of an undocumented alias.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - `return_descr` metadata on `rule:OR+`,
+  - runtime parity between `rule:OR+` and `rule:OR{1,}` on blind-call repeated-choice rules,
+  - and validation acceptance of the current rule-label surface including explicit `OR+`.
+- Expanded `USER_GUIDE_RuleModesAndSplit.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so `OR+` is taught as explicit repeated-choice shorthand rather than being left implicit through the older “bare `rule:` is conceptually OR+” wording alone.
+
 ## 2026-03-19 - Rule Modes: Lock Bounded Blind-Call Repeated-Choice Variants
 
 Followed up the repeated-choice blind-call hardening with the bounded/open/shorthand variants and a zero-progress safety fix.

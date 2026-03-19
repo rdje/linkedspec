@@ -370,6 +370,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - `rule:AND` is now the explicit worded spelling for the ordered-sequence family that `rule:&` already represented,
   - `rule:AND+` is now the explicit shorthand spelling for the open-ended repeated-sequence family that `rule:AND{1,}` represented,
   - `rule:OR` is now the explicit worded spelling for that repeated-choice family,
+  - `rule:OR+` is now the explicit shorthand spelling for that repeated-choice family,
   - and `rule:OR{1,}` is the open-ended bounded spelling for the same family,
   - while still avoiding any claim that LinkedSpec implements a full general parser-combinator algebra.
 - Current baseline support that should now be treated as explicit contract:
@@ -378,13 +379,14 @@ This is a saved future-enhancement note, not an active implementation item.
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence model,
   - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative model,
+  - explicit repeated-choice shorthand `OR+` is now supported on top of the current repeated-alternative model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
   - blind-call `=> child_rule` remains a real advanced direct rule-call surface, with ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`) now the clearest documented forms,
   - blind-call does not silently rewrite rule-label meaning: `=>` makes a rule parser-step oriented, but the label still decides whether the rule behaves as ordered sequence, choice, or repeated choice,
   - so future implementation should not reinterpret bare `rule:` as implicit `AND` just because a rule body uses blind calls,
   - mixing `-> child_rule` and `=> child_rule` inside one rule remains invalid,
-  - blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) now follows the same label-driven repeated-choice contract too, with bare `rule:` kept as the historical shorthand baseline for that family rather than being silently reinterpreted as ordered sequence,
+  - blind-call use on the repeated-choice family (`rule:`, `:OR`, `:OR+`, `:+`, `:OR{...}`) now follows the same label-driven repeated-choice contract too, with bare `rule:` kept as the historical shorthand baseline for that family rather than being silently reinterpreted as ordered sequence,
   - repeated blind-call loops now also guard against zero-progress child success so lower-bound-zero child rules can return empty collections without sending repeated parents into infinite loops,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,
   - and `@move_pos` remains the compatibility alias for the same lowering.

@@ -17,9 +17,10 @@ use constant {
 };
 
 my $rep_nodes_minmax = {
- REP_PLUS=> [1, 10**9],
- REP_STAR=> [0, 10**9],
- REP_OPT => [0, 1]
+ REP_PLUS   => [1, 10**9],
+ REP_STAR   => [0, 10**9],
+ REP_OPT    => [0, 1],
+ REP_OR_PLUS => [1, 10**9],
 };
 
 sub _resolve_rep_bounds {

@@ -3979,6 +3979,23 @@ SPEC
     is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');
     ok($descr->{spec}{Top}{meta}{uses_loop}, 'Top explicit OR metadata reports loop strategy');
 };
+subtest 'get_return_descr_rule_meta_or_plus_repetition_strategy' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::OR+
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for OR+ repetition rules');
+    ok(exists $descr->{spec}{Top}{meta}, 'Top OR+ rule includes execution metadata');
+    is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_ACODE', 'Top OR+ rule maps to REP_ACODE');
+    is($descr->{spec}{Top}{meta}{node_type}, 'REP_OR_PLUS', 'Top metadata preserves explicit OR+ node type');
+    is($descr->{spec}{Top}{meta}{rep_min}, 1, 'Top metadata preserves implicit minimum bound');
+    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');
+    ok($descr->{spec}{Top}{meta}{uses_loop}, 'Top OR+ metadata reports loop strategy');
+};
 subtest 'explicit_or_rule_label_matches_open_ended_bounded_or' => sub {
     plan tests => 10;
 
@@ -4019,6 +4036,61 @@ SPEC
 
     ok(!defined($explicit_empty), 'explicit OR parser rejects empty input below the implicit minimum');
     ok(!defined($bounded_empty), 'open-ended bounded OR parser rejects empty input below the implicit minimum');
+};
+subtest 'or_plus_blind_call_rule_label_matches_open_ended_bounded_or' => sub {
+    plan tests => 10;
+
+    my $or_plus = <<'SPEC';
+Choice::OR+
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $bounded_or = <<'SPEC';
+Choice::OR{1,}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $or_plus_parser = LinkedSpec::Get(\$or_plus);
+    ok(ref($or_plus_parser) eq 'CODE', 'OR+ blind-call parser builds');
+
+    my $bounded_parser = LinkedSpec::Get(\$bounded_or);
+    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded OR blind-call parser builds');
+
+    my $or_plus_full_input = "ab";
+    my $or_plus_full = eval { $or_plus_parser->(\$or_plus_full_input) };
+    ok(!$@, 'OR+ blind-call parser full-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_full_input = "ab";
+    my $bounded_full = eval { $bounded_parser->(\$bounded_full_input) };
+    ok(!$@, 'open-ended bounded OR blind-call parser full-input execution does not die') or diag(normalize_error($@));
+
+    is_deeply($or_plus_full, [['?First:', []], ['?Second:', []]], 'OR+ blind-call parser collects repeated choice child hits');
+    is_deeply($bounded_full, $or_plus_full, 'OR+ blind-call parser matches the open-ended bounded OR blind-call behavior');
+
+    my $or_plus_empty_input = "";
+    my $or_plus_empty = eval { $or_plus_parser->(\$or_plus_empty_input) };
+    ok(!$@, 'OR+ blind-call parser empty-input execution does not die') or diag(normalize_error($@));
+
+    my $bounded_empty_input = "";
+    my $bounded_empty = eval { $bounded_parser->(\$bounded_empty_input) };
+    ok(!$@, 'open-ended bounded OR blind-call parser empty-input execution does not die') or diag(normalize_error($@));
+
+    ok(!defined($or_plus_empty), 'OR+ blind-call parser rejects empty input below the implicit minimum');
+    ok(!defined($bounded_empty), 'open-ended bounded OR blind-call parser rejects empty input below the implicit minimum');
 };
 subtest 'get_return_descr_rule_meta_bounded_or_repetition_strategies' => sub {
     plan tests => 21;
@@ -4928,12 +5000,15 @@ Second:
 Anchor:OR{2,4}
  /x/ -> Anchor { return_a(Anchor) }
 
+Stream:OR+
+ /y/ -> Stream { return_a(Stream) }
+
 Chunk: /@foo\s*\(/ /\s*\)/ @capture_from_here
  -> Chunk[1] { return_a(Chunk) }
 SPEC
 
     ok(LinkedSpec::Validation::validate_spec_content(\$spec_content), 'validation accepts current top-rule envelope with explicit AND+ label');
-    ok(LinkedSpec::Validation::validate_dsl_syntax(\$spec_content), 'validation accepts explicit AND+, bounded OR, blind-call, and inline capture-from-here rule surfaces');
+    ok(LinkedSpec::Validation::validate_dsl_syntax(\$spec_content), 'validation accepts explicit AND+, explicit OR+, bounded OR, blind-call, and inline capture-from-here rule surfaces');
 };
 subtest 'validation_rejects_duplicate_regular_rule_labels_with_current_modes' => sub {
     plan tests => 4;
