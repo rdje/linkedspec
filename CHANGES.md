@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `num_range(...)`
+
+Extended the method-like DSL migration track with the missing numeric array-span reducer. Fluent and structured authoring now agree on representative `num_range(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
+
+- Added `num_range(array_expr)` lowering for:
+  - direct numeric-looking arrays such as `num_range(array(scores))`,
+  - composed array reducers such as `num_range(take(concat_arrays(array(scores), array(extra_scores)), 4))`,
+  - and numeric comparison inputs such as `num_eq(num_range(take(concat_arrays(...), 4)), 6)`.
+- Kept the parser-oriented arithmetic contract disciplined:
+  - `num_range(...)` stays a pure scalar value helper,
+  - it is currently unary over one array-valued source,
+  - it returns `undef` for empty arrays,
+  - it returns `undef` when the source is not array-valued or when any item is missing/non-numeric-looking,
+  - and otherwise it returns the numeric maximum minus the numeric minimum, so a one-item array yields `0`.
+- Expanded the user guides with fuller examples showing `num_range(...)` in assignments, direct returns, flow comparisons, emitted Perl reference output, and side-by-side guidance against `num_median(...)`, `num_min(...)`, and `num_max(...)`.
+
 ## 2026-03-19 - Method-Like DSL Slice: Broaden Parser-Oriented `num_min(...)` / `num_max(...)`
 
 Extended the method-like DSL migration track by broadening the already-landed numeric boundary helpers. Fluent and structured authoring now agree on unary array-reducer `num_min(...)` / `num_max(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.
