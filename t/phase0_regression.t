@@ -4289,6 +4289,90 @@ SPEC
     ok(!$@, 'blind-call choice parser miss execution does not die') or diag(normalize_error($@));
     ok(!defined($miss_ast), 'blind-call choice parser returns undef when no child parser succeeds');
 };
+subtest 'bootstrap_action_edge_default_index_matches_explicit_zero_index' => sub {
+    plan tests => 8;
+
+    my $implicit_spec = <<'SPEC';
+A:
+ /a/ -> A { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+SPEC
+
+    my $explicit_spec = <<'SPEC';
+A:
+ /a/ -> A[0] { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+SPEC
+
+    my ($implicit_ok, $implicit_parse, $implicit_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$implicit_spec);
+    my ($explicit_ok, $explicit_parse, $explicit_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$explicit_spec);
+
+    ok($implicit_ok, 'bootstrap parse succeeds for same-rule implicit zero-index action-edge target');
+    ok($explicit_ok, 'bootstrap parse succeeds for same-rule explicit zero-index action-edge target');
+    is($implicit_err, '', 'implicit zero-index action-edge target parse reports no bootstrap error');
+    is($explicit_err, '', 'explicit zero-index action-edge target parse reports no bootstrap error');
+    is_deeply($implicit_parse, $explicit_parse, 'bootstrap parse output for -> A matches -> A[0] on the same recursive rule');
+    is($implicit_parse->[0][2][1]{reidx}, 0, 'plain -> A lowers to regex slot index 0');
+    is($implicit_parse->[0][4][1]{reidx}, 1, '-> A[1] lowers to regex slot index 1');
+    is($implicit_parse->[0][2][1]{relabel}, 'A', 'same-rule implicit zero-index edge still targets rule A');
+};
+subtest 'bootstrap_action_edge_indexed_slots_target_later_regexes' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+A:
+ /a/ -> A { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+ /c/ -> A[2] { return_a(A) }
+SPEC
+
+    my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($ok, 'bootstrap parse succeeds for multi-regex indexed action-edge targets');
+    is($err, '', 'multi-regex indexed action-edge target parse reports no bootstrap error');
+    is($parse->[0][2][1]{reidx}, 0, 'plain -> A targets the first regex slot');
+    is($parse->[0][4][1]{reidx}, 1, '-> A[1] targets the second regex slot');
+    is($parse->[0][6][1]{reidx}, 2, '-> A[2] targets the third regex slot');
+    is($parse->[0][2][1]{relabel}, 'A', 'first regex-slot action-edge still targets rule A');
+    is($parse->[0][4][1]{relabel}, 'A', 'second regex-slot action-edge still targets rule A');
+    is($parse->[0][6][1]{relabel}, 'A', 'third regex-slot action-edge still targets rule A');
+};
+subtest 'action_edge_default_index_matches_explicit_zero_index_at_runtime' => sub {
+    plan tests => 8;
+
+    my $implicit_spec = <<'SPEC';
+A::
+ /a/ -> A { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+SPEC
+
+    my $explicit_spec = <<'SPEC';
+A::
+ /a/ -> A[0] { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+SPEC
+
+    my $implicit_parser = LinkedSpec::Get(\$implicit_spec);
+    my $explicit_parser = LinkedSpec::Get(\$explicit_spec);
+
+    ok(ref($implicit_parser) eq 'CODE', 'runtime parser builds for same-rule implicit zero-index recursion');
+    ok(ref($explicit_parser) eq 'CODE', 'runtime parser builds for same-rule explicit zero-index recursion');
+
+    my $implicit_single_input = "b";
+    my $implicit_single = eval { $implicit_parser->(\$implicit_single_input) };
+    ok(!$@, 'implicit zero-index recursion parser executes for second-regex base case without die') or diag(normalize_error($@));
+    my $explicit_single_input = "b";
+    my $explicit_single = eval { $explicit_parser->(\$explicit_single_input) };
+    ok(!$@, 'explicit zero-index recursion parser executes for second-regex base case without die') or diag(normalize_error($@));
+    is_deeply($implicit_single, $explicit_single, 'plain -> A and explicit -> A[0] produce the same AST on the second-regex base case');
+
+    my $implicit_recursive_input = "aaab";
+    my $implicit_recursive = eval { $implicit_parser->(\$implicit_recursive_input) };
+    ok(!$@, 'implicit zero-index recursion parser executes for recursive input without die') or diag(normalize_error($@));
+    my $explicit_recursive_input = "aaab";
+    my $explicit_recursive = eval { $explicit_parser->(\$explicit_recursive_input) };
+    ok(!$@, 'explicit zero-index recursion parser executes for recursive input without die') or diag(normalize_error($@));
+    is_deeply($implicit_recursive, $explicit_recursive, 'plain -> A and explicit -> A[0] produce the same AST on recursive input too');
+};
 subtest 'get_return_descr_rule_meta_and_plus_repetition_strategy' => sub {
     plan tests => 7;
 

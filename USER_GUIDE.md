@@ -280,6 +280,27 @@ So the mechanical rule is general, but the normal authoring pattern is narrower:
 - use `-> B` or `-> B[0]` from another rule when you simply want rule `B`'s default first entrypoint,
 - and treat cross-rule `-> B[N]` with `N > 0` as unusual rather than normal authoring style.
 
+An explicit side-by-side equivalence example can help:
+
+```text
+A::
+ /a/ -> A   { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+```
+
+and:
+
+```text
+A::
+ /a/ -> A[0] { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+```
+
+mean the same thing for the recursive first slot:
+- both use the first regex as the recursive entry,
+- both use the second regex as the later terminating entry,
+- and the only difference is whether the first-slot index is written implicitly or explicitly.
+
 That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
 For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias.

@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Test Slice: Lock Action-Edge Regex-Slot Indexing Contract
+
+Turned the recently clarified action-edge indexing rules into explicit regression-covered contract instead of leaving them only in prose.
+
+- Added bootstrap regression coverage for the default-first-slot rule:
+  - `-> A` now has explicit regression coverage showing it parses identically to `-> A[0]` on the same rule,
+  - and both lower to regex-slot index `0`.
+- Added bootstrap regression coverage for later-slot selection:
+  - `-> A[1]` now has explicit regression coverage for the second regex slot,
+  - `-> A[2]` now has explicit regression coverage for the third regex slot,
+  - and the tests pin the exact `reidx` values emitted by bootstrap parse.
+- Added runtime parity coverage for the recursive equivalence:
+  - a same-rule recursive top rule using `-> A` now has direct runtime parity coverage against the same rule written with `-> A[0]`,
+  - including both the second-regex base case and a recursive input case.
+- Expanded `USER_GUIDE.md` with a fuller side-by-side example showing that:
+  - `-> A` and `-> A[0]` are equivalent inside recursive rule `A`,
+  - `-> A[1]` targets the second regex slot,
+  - and indexed later-slot forms are mainly the same-rule recursion escape hatch rather than the common cross-rule pattern.
+
 ## 2026-03-19 - Docs/Test Slice: Lock Blind-Call Contract And Track Repeat Seam
 
 Made the current blind-call surface explicit for users instead of leaving it mostly as runtime-owner knowledge.

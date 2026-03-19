@@ -374,6 +374,7 @@ This is a saved future-enhancement note, not an active implementation item.
   - while still avoiding any claim that LinkedSpec implements a full general parser-combinator algebra.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
+  - action-edge target indexing is explicit current contract: `-> rule` means `-> rule[0]`, `-> rule[N]` selects regex slot `N`, and indexed forms are mainly the same-rule recursive entry-selection tool for later regex slots,
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence model,
   - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative model,

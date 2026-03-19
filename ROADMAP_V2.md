@@ -207,6 +207,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 ## Deferred Future Note
 - Current baseline rule-mode contract is now explicit:
   - `:&`, `:|`, `:+`, `:*`, and `:?` are the current supported rule-label suffixes,
+  - action-edge target indexing is explicit current contract too: `-> rule` means `-> rule[0]`, while `-> rule[N]` selects the later regex slot and is mainly used for same-rule recursive entry selection,
   - explicit ordered-sequence label `AND` is now supported on top of the current ordered-sequence rule model,
   - explicit repeated-sequence label `AND+` is now supported on top of the current ordered-sequence repetition model,
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative rule model,
