@@ -314,6 +314,11 @@ There is no tiny DSL-fixed cap here. If a rule genuinely needs four, five, or mo
 - `-> rule[4]` means the fifth regex,
 - and so on.
 
+Current frontend validation now rejects malformed edge-target indexing before bootstrap parse too:
+- `-> rule[]` is invalid,
+- `-> rule[abc]` is invalid,
+- and `=> rule[0]` is invalid because regex-slot indexing belongs to action edges, not blind calls.
+
 An explicit side-by-side equivalence example can help:
 
 ```text

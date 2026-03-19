@@ -5468,6 +5468,81 @@ PERL
     unlike($out, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/, 'hash rockets inside action code do not trigger mixed-edge diagnostics');
     is($err, '', 'hash-rocket validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_malformed_action_edge_regex_slot_indexes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> Top[] { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'malformed action-edge index validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed action-edge regex-slot indexes before bootstrap parse');
+    like($out, qr/Malformed action-edge target syntax/, 'malformed action-edge regex-slot diagnostic is reported early');
+    is($err, '', 'malformed action-edge index validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_same_line_non_numeric_action_edge_indexes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ -> Top[abc] { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'same-line malformed action-edge index validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects same-line non-numeric action-edge indexes before bootstrap parse');
+    like($out, qr/Malformed action-edge target syntax/, 'same-line malformed action-edge regex-slot diagnostic is reported early');
+    is($err, '', 'same-line malformed action-edge index validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_indexed_blind_call_targets' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:AND
+ => Helper[0]
+
+Helper:
+ /a/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'indexed blind-call validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects indexed blind-call targets before bootstrap parse');
+    like($out, qr/Blind-call targets do not support regex-slot indexing/, 'indexed blind-call diagnostic is reported early');
+    is($err, '', 'indexed blind-call validation subprocess does not emit stderr');
+};
+subtest 'validation_does_not_treat_edge_like_text_inside_action_code_as_real_edge_targets' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return "-> Fake[abc] => Helper[0]" }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'edge-like text inside action code validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation ignores edge-like text inside action code while checking top-level edge target syntax');
+    unlike($out, qr/Malformed action-edge target syntax|Blind-call targets do not support regex-slot indexing/, 'edge-like text inside action code does not trigger top-level edge target diagnostics');
+    is($err, '', 'edge-like text inside action code validation subprocess does not emit stderr');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

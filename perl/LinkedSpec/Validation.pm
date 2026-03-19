@@ -320,11 +320,18 @@ sub validate_dsl_syntax {
     return 0;
    }
 
-   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs});
+   my $edge_scan = _scan_rule_edges_in_fragment($rule_label->{rhs});
+   if ($edge_scan->{error}) {
+    my $position = index($$spec_content, $line);
+    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error});
+   }
+   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs}, $edge_scan);
+   push @used_rules, map { $_->{label} } @{$edge_scan->{edges} || []};
    $current_rule = {
     label => $rule_name,
     acode_count => $acode_count,
     bcode_count => $bcode_count,
+    edge_scan_depth => $edge_scan->{depth} // 0,
    };
   } elsif (_looks_like_malformed_rule_label_line($line)) {
    my $position = index($$spec_content, $line);
@@ -333,9 +340,16 @@ sub validate_dsl_syntax {
     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
    return 0;
   } elsif ($current_rule) {
-   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($line);
+   my $edge_scan = _scan_rule_edges_in_fragment($line, $current_rule->{edge_scan_depth} // 0);
+   if ($edge_scan->{error}) {
+    my $position = index($$spec_content, $line);
+    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error});
+   }
+   my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($line, $edge_scan);
    $current_rule->{acode_count} += $acode_count;
    $current_rule->{bcode_count} += $bcode_count;
+   $current_rule->{edge_scan_depth} = $edge_scan->{depth} // 0;
+   push @used_rules, map { $_->{label} } @{$edge_scan->{edges} || []};
    if ($current_rule->{acode_count} && $current_rule->{bcode_count}) {
     return _report_mixed_rule_action_modes(
      $current_rule->{label},
@@ -345,12 +359,6 @@ sub validate_dsl_syntax {
    }
   }
 
-  while ($line =~ /->\s*(\w+)(?:\[(\d+)\])?/g) {
-   push @used_rules, $1;
-  }
-  while ($line =~ /=>\s*(\w+)/g) {
-   push @used_rules, $1;
-  }
  }
 
  if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
@@ -401,12 +409,13 @@ sub validate_dsl_syntax {
  return 1;
 }
 
-sub _count_rule_edge_kinds_in_fragment {
- my ($fragment) = @_;
- my ($acode_count, $bcode_count) = (0, 0);
- return ($acode_count, $bcode_count) unless defined $fragment;
+sub _scan_rule_edges_in_fragment {
+ my ($fragment, $start_depth) = @_;
+ my @edges;
+ return { edges => \@edges } unless defined $fragment;
+
  my $len = length($fragment);
- my $depth = 0;
+ my $depth = $start_depth // 0;
  my $i = 0;
 
  while ($i < $len) {
@@ -466,22 +475,105 @@ sub _count_rule_edge_kinds_in_fragment {
    next;
   }
 
-  if ($depth == 0 && substr($fragment, $i, 2) eq '->' && substr($fragment, $i + 2) =~ /\A\s*\w/) {
-   ++$acode_count;
-   $i += 2;
-   next;
-  }
+  if ($depth == 0 && (substr($fragment, $i, 2) eq '->' || substr($fragment, $i, 2) eq '=>')) {
+   my $kind = substr($fragment, $i, 2) eq '->' ? 'action' : 'blind_call';
+   my $cursor = $i + 2;
 
-  if ($depth == 0 && substr($fragment, $i, 2) eq '=>' && substr($fragment, $i + 2) =~ /\A\s*\w/) {
-   ++$bcode_count;
-   $i += 2;
+   ++$cursor while $cursor < $len && substr($fragment, $cursor, 1) =~ /\s/;
+   my $label_start = $cursor;
+   ++$cursor while $cursor < $len && substr($fragment, $cursor, 1) =~ /\w/;
+
+   if ($cursor == $label_start) {
+    return {
+     error => {
+      kind   => $kind,
+      reason => 'missing_target',
+     },
+    };
+   }
+
+   my $label = substr($fragment, $label_start, $cursor - $label_start);
+   my $lookahead = $cursor;
+   ++$lookahead while $lookahead < $len && substr($fragment, $lookahead, 1) =~ /\s/;
+
+   if ($lookahead < $len && substr($fragment, $lookahead, 1) eq '[') {
+    if ($kind eq 'blind_call') {
+     return {
+      error => {
+       kind   => $kind,
+       reason => 'indexed_target_not_supported',
+       label  => $label,
+      },
+     };
+    }
+
+    my $index_cursor = $lookahead + 1;
+    my $digit_start = $index_cursor;
+    ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/;
+
+    if ($index_cursor == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
+     return {
+      error => {
+       kind   => $kind,
+       reason => 'malformed_index',
+       label  => $label,
+      },
+     };
+    }
+
+    $lookahead = $index_cursor + 1;
+   }
+
+   push @edges, {
+    kind  => $kind,
+    label => $label,
+   };
+   $i = $lookahead;
    next;
   }
 
   ++$i;
  }
 
+ return { edges => \@edges, depth => $depth };
+}
+
+sub _count_rule_edge_kinds_in_fragment {
+ my ($fragment, $edge_scan) = @_;
+ my ($acode_count, $bcode_count) = (0, 0);
+ return ($acode_count, $bcode_count) unless defined $fragment;
+ $edge_scan ||= _scan_rule_edges_in_fragment($fragment);
+ for my $edge (@{$edge_scan->{edges} || []}) {
+  if (($edge->{kind} || '') eq 'action') {
+   ++$acode_count;
+  } elsif (($edge->{kind} || '') eq 'blind_call') {
+   ++$bcode_count;
+  }
+ }
+
  return ($acode_count, $bcode_count);
+}
+
+sub _report_edge_target_syntax_error {
+ my ($spec_content, $position, $error) = @_;
+ my $kind = $error->{kind} || 'action';
+ my $reason = $error->{reason} || '';
+
+ if ($kind eq 'blind_call' && $reason eq 'indexed_target_not_supported') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Blind-call targets do not support regex-slot indexing",
+   "Use '=> RuleName' for blind calls, or use '-> RuleName[idx]' when you need a regex-slot action edge",
+  );
+ }
+
+ return report_dsl_error(
+  $spec_content,
+  $position,
+  "Malformed action-edge target syntax",
+  "Use '-> RuleName', '-> RuleName[0]', or '-> RuleName { ... }'; regex-slot indexes must be unsigned integers in brackets",
+ );
 }
 
 sub _report_mixed_rule_action_modes {

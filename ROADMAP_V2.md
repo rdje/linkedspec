@@ -201,7 +201,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - `perl/LinkedSpec/BootstrapSpec/Core.pm` remains the main bootstrap/frontend syntax hotspot.
   - `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`, `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`, `perl/LinkedSpec/ActionIR/ControlFlow.pm`, and `perl/LinkedSpec/ActionIR/RewritePipeline.pm` form one correctness-critical semicolon-light/attached-block flow seam.
   - `perl/LinkedSpec/SpecEntry.pm` plus `perl/LinkedSpec/Compiler.pm` still define the main backend-portability ceiling because runtime handlers are emitted as Perl source strings and evaled.
-  - `perl/LinkedSpec/Validation.pm` still trails parts of the supported DSL surface and remains a Phase 2 hardening target, even though current rule-label syntax, rule-paragraph regex validation, and earlier mixed-edge rejection are now aligned there more closely.
+  - `perl/LinkedSpec/Validation.pm` still trails parts of the supported DSL surface and remains a Phase 2 hardening target, even though current rule-label syntax, rule-paragraph regex validation, earlier mixed-edge rejection, and malformed top-level edge-target indexing are now aligned there more closely.
   - blind-call should remain mode-driven by the rule label: `=> child` must not silently make bare `rule:` mean ordered sequence just because the body is parser-step oriented.
 
 ## Deferred Future Note

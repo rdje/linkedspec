@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Malformed Edge Target Syntax Earlier
+
+Extended the Phase 2 frontend-hardening track so malformed top-level edge targets are rejected during DSL validation instead of surfacing later through generic bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now rejects malformed action-edge slot forms like:
+  - `-> Rule[]`,
+  - and `-> Rule[abc]`.
+- Validation now also rejects indexed blind-call targets like:
+  - `=> Rule[0]`,
+  - because regex-slot indexing belongs only to `-> Rule[idx]`.
+- The validation-side edge scanner now stays top-level aware so edge-looking text inside action-code strings or nested code blocks does not get misclassified as a real rule edge.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - multiline malformed action-edge slot syntax,
+  - same-line malformed action-edge slot syntax,
+  - indexed blind-call target rejection,
+  - and the non-regression case where edge-like text appears inside action code.
+
 ## 2026-03-19 - Validation: Reject Mixed Edge Families Earlier
 
 Extended the first Phase 2 frontend-hardening pass so mixed `->` / `=>` rule bodies are rejected during DSL validation instead of only later in RuleIR.

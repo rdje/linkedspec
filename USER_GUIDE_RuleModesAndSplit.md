@@ -553,6 +553,11 @@ The two edge families describe two different execution models.
 - the parent directly invokes another parser step,
 - and the child rule, not the parent regex list, is doing the real match work for that step.
 
+Blind calls do not use regex-slot indexing:
+- `=> child_rule` is valid,
+- `=> child_rule[0]` is invalid,
+- and regex-slot selection stays on the action-edge side as `-> child_rule[idx]`.
+
 So if one rule mixes both families, several semantic questions become muddy very quickly:
 - is the rule mainly regex-slot driven or parser-call driven?
 - what is supposed to own input progress at that point: the parent regex slot or the child parser?
