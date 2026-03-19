@@ -3925,6 +3925,74 @@ SPEC
     is($descr->{spec}{Choice}{meta}{handler_variant}, 'OR_ACODE', 'Choice OR rule maps to OR_ACODE');
     ok(!$descr->{spec}{Choice}{meta}{uses_loop}, 'Choice OR metadata reports non-loop dispatch');
 };
+subtest 'get_return_descr_rule_meta_repetition_strategies' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> Plus
+ -> Star
+ -> Opt
+
+Plus:+
+ /a/ -> Plus { return_a(Plus) }
+
+Star:*
+ /b/ -> Star { return_a(Star) }
+
+Opt:?
+ /c/ -> Opt { return_a(Opt) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for repetition-strategy rules');
+
+    ok(exists $descr->{spec}{Plus}{meta}, 'Plus rule includes execution metadata');
+    is($descr->{spec}{Plus}{meta}{handler_variant}, 'REP_ACODE', 'Plus repetition rule maps to REP_ACODE');
+    is($descr->{spec}{Plus}{meta}{node_type}, 'REP_PLUS', 'Plus metadata preserves REP_PLUS node type');
+    ok($descr->{spec}{Plus}{meta}{uses_loop}, 'Plus repetition metadata reports loop strategy');
+
+    ok(exists $descr->{spec}{Star}{meta}, 'Star rule includes execution metadata');
+    is($descr->{spec}{Star}{meta}{handler_variant}, 'REP_ACODE', 'Star repetition rule maps to REP_ACODE');
+    is($descr->{spec}{Star}{meta}{node_type}, 'REP_STAR', 'Star metadata preserves REP_STAR node type');
+    ok($descr->{spec}{Star}{meta}{uses_loop}, 'Star repetition metadata reports loop strategy');
+
+    ok(exists $descr->{spec}{Opt}{meta}, 'Opt rule includes execution metadata');
+    is($descr->{spec}{Opt}{meta}{handler_variant}, 'REP_ACODE', 'Opt repetition rule maps to REP_ACODE');
+    is($descr->{spec}{Opt}{meta}{node_type}, 'REP_OPT', 'Opt metadata preserves REP_OPT node type');
+    ok($descr->{spec}{Opt}{meta}{uses_loop}, 'Opt repetition metadata reports loop strategy');
+};
+subtest 'bootstrap_move_pos_builds_split_boundary_lecode' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> MoveTop
+
+MoveTop: /foo/ /bar/ @move_pos
+SPEC
+
+    my ($parse_success, $parsed, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for move_pos rule-mode coverage') or diag(normalize_error($parse_error));
+    ok(ref($parsed) eq 'ARRAY', 'bootstrap parse returns parsed entry array for move_pos coverage');
+
+    my ($move_entry) = grep { ref($_) eq 'ARRAY' && ref($_->[0]) eq 'ARRAY' && $_->[0][1] eq 'MoveTop' } @$parsed;
+    ok(ref($move_entry) eq 'ARRAY', 'parsed entries include MoveTop rule');
+    ok(grep { ref($_) eq 'ARRAY' && $_->[0] eq 'MOVE_POS' } @$move_entry, 'MoveTop parsed entry preserves MOVE_POS token');
+
+    my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
+    is_deeply($rule_ir->{code_blocks}{LECODE}, ['$IPOS = pos $$STRING'], 'MOVE_POS compiles into the expected split-boundary LECODE cursor shift');
+
+    my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+    is($emit_ctx->{lecode}, '$IPOS = pos $$STRING', 'emit context preserves move_pos split-boundary cursor shift');
+
+    is(
+        LinkedSpec::call_spec_handler_subst('MoveTop', '$CAPTURE'),
+        'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
+        '$CAPTURE lowering stays aligned with the move_pos-adjusted split boundary cursor',
+    );
+    is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], 'MoveTop rule preserves the anchor regex list used around the split-boundary cursor move');
+};
 subtest 'ruleir_pipeline_preserves_acode_gdata_mapping_order' => sub {
     plan tests => 7;
 

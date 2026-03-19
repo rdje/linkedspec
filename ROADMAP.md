@@ -368,6 +368,9 @@ This is a saved future-enhancement note, not an active implementation item.
   - the current rule shape is closer to repeated alternative extraction over subrules than to a full grammar-combinator algebra,
   - so it can be thought of as roughly `OR+`-like in intent,
   - but this is only a design shorthand, not a promise that LinkedSpec currently implements full regex-style or parser-combinator `OR+` semantics.
+- Current baseline support that should now be treated as explicit contract:
+  - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
+  - and `@move_pos` is a current supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector.
 - Deferred enhancement direction, only after the current rule model is explicit and rock solid:
   - explicit `AND`-style grouped sequencing,
   - bounded or exact `OR` repetition such as `OR{N,M}` and `OR{N}`,

@@ -25,6 +25,7 @@ Detailed lowering references:
 - [`USER_GUIDE_ActionIR_ControlFlow.md`](USER_GUIDE_ActionIR_ControlFlow.md)
 - [`USER_GUIDE_ActionIR_ArrayPipeline.md`](USER_GUIDE_ActionIR_ArrayPipeline.md)
 - [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md)
+- [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md)
 
 Read this file first, then jump into the specific module guide that matches the lowering family you are using.
 For exhaustive review of the current lowering contract, including emitted Perl for every supported helper and compatibility construct, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside the module guides.
@@ -103,7 +104,15 @@ subrule_b: /.../
 Most important syntax elements:
 - Entry rule: `name::`
 - Regular rule: `name:`
+- Current rule-mode suffixes:
+  - `name:&`
+  - `name:|`
+  - `name:+`
+  - `name:*`
+  - `name:?`
 - Regex pattern(s): `/.../`
+- Split-boundary cursor:
+  - `@move_pos`
 - Branch edges:
   - `-> rule`
   - `-> rule[idx]`
@@ -115,6 +124,8 @@ Most important syntax elements:
   - `LE { ... }`
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
+
+For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, and `@move_pos` surface in one place before any future grouped-rule extensions such as `OR{N,M}` or `AND{N,M}` are attempted.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.

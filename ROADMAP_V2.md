@@ -204,6 +204,9 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - `perl/LinkedSpec/Validation.pm` still trails the supported DSL surface and remains a Phase 2 hardening target.
 
 ## Deferred Future Note
+- Current baseline rule-mode contract is now explicit:
+  - `:&`, `:|`, `:+`, `:*`, and `:?` are the current supported rule-label suffixes,
+  - and `@move_pos` is the current split-boundary cursor feature for staged capture flows.
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:
   - explicit `AND`,
   - bounded or exact `OR`,
