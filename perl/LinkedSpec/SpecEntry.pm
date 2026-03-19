@@ -22,6 +22,22 @@ my $rep_nodes_minmax = {
  REP_OPT => [0, 1]
 };
 
+sub _resolve_rep_bounds {
+ my (%args) = @_;
+ my $node_type = $args{node_type};
+ my $rep_min = $args{rep_min};
+ my $rep_max = $args{rep_max};
+
+ if (defined($rep_min) || defined($rep_max)) {
+  $rep_min = defined($rep_min) ? $rep_min : 0;
+  $rep_max = defined($rep_max) ? $rep_max : 10**9;
+  return ($rep_min, $rep_max);
+ }
+
+ return unless defined($node_type) && exists $rep_nodes_minmax->{$node_type};
+ return @{$rep_nodes_minmax->{$node_type}};
+}
+
 sub _require_pkg {
  my ($pkg) = @_;
  my $file = $pkg;
@@ -378,8 +394,8 @@ sub _build_rep_bcode_variant {
  my $bcodes = $args{bcodes} // '';
  return undef unless length $bcodes;
  my $label = $args{label};
- my $node_type = $args{node_type};
- return undef unless defined($node_type) && exists $rep_nodes_minmax->{$node_type};
+ my ($min, $max) = _resolve_rep_bounds(%args);
+ return undef unless defined $min && defined $max;
 
  my $actual_lxcode = $args{actual_lxcode} // '';
  my $actual_lecode = $args{actual_lecode} // '';
@@ -387,7 +403,6 @@ sub _build_rep_bcode_variant {
  my $actual_excode = $args{actual_excode} // '';
  my $actual_ecode = $args{actual_ecode} // '';
  my $bcalls = $args{bcalls} // '';
- my ($min, $max) = @{$rep_nodes_minmax->{$node_type}};
  my $and_code = '
 
   my $'.$label.';
@@ -442,15 +457,14 @@ sub _build_rep_acode_variant {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
- my $node_type = $args{node_type};
- return undef unless defined($node_type) && exists $rep_nodes_minmax->{$node_type};
+ my ($min, $max) = _resolve_rep_bounds(%args);
+ return undef unless defined $min && defined $max;
 
  my $actual_lscode = $args{actual_lscode} // '';
  my $actual_lecode = $args{actual_lecode} // '';
  my $actual_itcode = $args{actual_itcode} // '';
  my $actual_excode = $args{actual_excode} // '';
  my $actual_ecode = $args{actual_ecode} // '';
- my ($min, $max) = @{$rep_nodes_minmax->{$node_type}};
 
  return '
 
@@ -696,6 +710,8 @@ sub compile_spec_entry {
   my $variants = _build_handler_variants(
    label          => $label,
    node_type      => $node_type,
+   rep_min        => $rule_meta->{rep_min},
+   rep_max        => $rule_meta->{rep_max},
    acodes_ref     => \@ACODEs,
    bcodes_ref     => \%BCODEs,
    bcalls_ref     => \@BCALLs,

@@ -1,5 +1,5 @@
 # USER GUIDE: Rule Modes And Split Boundaries
-This guide covers the current rule-shape surface that exists before any future `OR{N,M}` or `AND{N,M}` extension work.
+This guide covers the current rule-shape surface, including the newly landed bounded `OR{...}` labels and the still-deferred `AND{...}` family.
 
 Read this when you want to understand:
 - what rule-label sigils already mean today,
@@ -24,6 +24,10 @@ choice_rule:|
 one_or_more_rule:+
 zero_or_more_rule:*
 optional_rule:?
+bounded_choice_exact:OR{2}
+bounded_choice_range:OR{2,4}
+bounded_choice_open_max:OR{2,}
+bounded_choice_open_min:OR{,4}
 ```
 
 Those are the current supported sigils. They are not placeholders for future grouped syntax. They are the current surface.
@@ -115,14 +119,114 @@ optional_trailing_comment:?
 
 Use it when the rule should either match once or not match at all.
 
+### `:OR{N}` exact bounded repeated choice
+`OR{N}` means repeated alternative extraction with an exact required count.
+
+Representative shape:
+
+```text
+pair_of_hex_digits:OR{2}
+ /[0-9A-Fa-f]/ -> pair_of_hex_digits
+```
+
+Use it when the rule should match exactly `N` repeated choice iterations.
+
+### `:OR{N,M}` bounded repeated choice
+`OR{N,M}` means repeated alternative extraction with both a lower and upper bound.
+
+Representative shape:
+
+```text
+up_to_three_flags:OR{1,3}
+ /--debug/ -> up_to_three_flags
+ /--trace/ -> up_to_three_flags
+ /--strict/ -> up_to_three_flags
+```
+
+Use it when the rule should succeed only after at least `N` iterations and should stop collecting after `M`.
+
+### `:OR{N,}` open-ended repeated choice
+`OR{N,}` means repeated alternative extraction with a required minimum and no DSL-level upper bound beyond the current large internal repeat sentinel.
+
+Representative shape:
+
+```text
+two_or_more_items:OR{2,}
+ /[A-Za-z_]\w*/ -> two_or_more_items
+ /"(?:[^"\\]|\\.)*"/ -> two_or_more_items
+```
+
+Use it when the rule should require at least `N` iterations but otherwise behave like the current repeated-alternative model.
+
+### `:OR{,M}` upper-bounded repeated choice
+`OR{,M}` means repeated alternative extraction with an implicit lower bound of `0` and an explicit upper bound of `M`.
+
+Representative shape:
+
+```text
+optional_pair:OR{,2}
+ /[A-Za-z_]\w*/ -> optional_pair
+```
+
+Use it when zero matches are allowed but you still want to cap how many alternative hits can be collected.
+
+## Worked Bounded-OR Examples
+### Example: exact repeated token pair
+
+```text
+hex_pair::OR{2}
+ /[0-9A-Fa-f]/ -> hex_pair { $hex_pair = $LMATCH }
+```
+
+What this means:
+- the rule runs the current alternative-choice machinery repeatedly,
+- it must succeed exactly two times,
+- and the returned collected value reflects exactly two matched iterations.
+
+### Example: bounded repeated directive list
+
+```text
+directive_group:OR{2,4}
+ /@include\b/ -> directive_group { $directive_group = $LMATCH }
+ /@define\b/ -> directive_group { $directive_group = $LMATCH }
+ /@pragma\b/ -> directive_group { $directive_group = $LMATCH }
+```
+
+What this means:
+- fewer than two successful iterations fail the rule,
+- two, three, or four successful iterations pass,
+- the fifth possible match is not consumed by this rule because the configured maximum has already been reached.
+
+### Example: coarse repeated extraction with open upper bound
+
+```text
+coarse_segment:OR{2,}
+ /BEGIN\b/ -> coarse_segment { $coarse_segment = $LMATCH }
+ /END\b/   -> coarse_segment { $coarse_segment = $LMATCH }
+```
+
+What this means:
+- the rule needs at least two anchor hits,
+- after that it keeps behaving like repeated alternative extraction,
+- and it stays useful for coarse first-pass segmentation before a second-pass parse.
+
+### Example: zero-to-two optional capture anchors
+
+```text
+optional_markers:OR{,2}
+ /START\b/ -> optional_markers { $optional_markers = $LMATCH }
+ /STOP\b/  -> optional_markers { $optional_markers = $LMATCH }
+```
+
+What this means:
+- zero matches are acceptable,
+- one or two matches are also acceptable,
+- but the rule will not keep collecting beyond two matches.
+
 ## What Is Not Supported Yet
 These are still deferred future work, not current syntax:
 
 ```text
-OR{N,M}
-OR{N}
-OR{N,}
-OR{,M}
 AND+
 AND{N,M}
 AND{N}
@@ -130,7 +234,7 @@ AND{N,}
 AND{,M}
 ```
 
-The roadmap still treats those as future grouped-rule exploration, not current authoring syntax.
+The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Bounded `OR{...}` is now landed; bounded `AND{...}` is not.
 
 ## `@capture_from_here`: The Split Boundary Cursor
 `@capture_from_here` is now the preferred grammar surface for this feature.
@@ -224,8 +328,9 @@ That pattern is especially valuable when:
 ## Current Contract
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
+- bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
-- and richer grouped forms like `OR{N,M}` or `AND{N,M}` are still future work.
+- and richer grouped forms like `AND{N,M}` remain future work.
 
-That gives us a stable baseline before we expand the rule-grouping surface further.
+That gives us a stable baseline before we expand the remaining rule-grouping surface further.

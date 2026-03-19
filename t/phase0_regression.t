@@ -3962,6 +3962,119 @@ SPEC
     is($descr->{spec}{Opt}{meta}{node_type}, 'REP_OPT', 'Opt metadata preserves REP_OPT node type');
     ok($descr->{spec}{Opt}{meta}{uses_loop}, 'Opt repetition metadata reports loop strategy');
 };
+subtest 'get_return_descr_rule_meta_bounded_or_repetition_strategies' => sub {
+    plan tests => 21;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> ExactTwo
+ -> BetweenTwoAndThree
+ -> TwoOrMore
+ -> UpToTwo
+
+ExactTwo:OR{2}
+ /a/ -> ExactTwo { return_a(ExactTwo) }
+
+BetweenTwoAndThree:OR{2, 3}
+ /b/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
+
+TwoOrMore:OR{2,}
+ /c/ -> TwoOrMore { return_a(TwoOrMore) }
+
+UpToTwo:OR{,2}
+ /d/ -> UpToTwo { return_a(UpToTwo) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded OR repetition rules');
+
+    ok(exists $descr->{spec}{ExactTwo}{meta}, 'ExactTwo rule includes execution metadata');
+    is($descr->{spec}{ExactTwo}{meta}{handler_variant}, 'REP_ACODE', 'ExactTwo bounded OR rule maps to REP_ACODE');
+    is($descr->{spec}{ExactTwo}{meta}{node_type}, 'REP_OR_BOUNDED', 'ExactTwo metadata preserves bounded OR node type');
+    is($descr->{spec}{ExactTwo}{meta}{rep_min}, 2, 'ExactTwo metadata preserves exact minimum bound');
+    is($descr->{spec}{ExactTwo}{meta}{rep_max}, 2, 'ExactTwo metadata preserves exact maximum bound');
+
+    ok(exists $descr->{spec}{BetweenTwoAndThree}{meta}, 'BetweenTwoAndThree rule includes execution metadata');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{handler_variant}, 'REP_ACODE', 'BetweenTwoAndThree bounded OR rule maps to REP_ACODE');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{node_type}, 'REP_OR_BOUNDED', 'BetweenTwoAndThree metadata preserves bounded OR node type');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{rep_min}, 2, 'BetweenTwoAndThree metadata preserves lower bound');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{rep_max}, 3, 'BetweenTwoAndThree metadata preserves upper bound');
+
+    ok(exists $descr->{spec}{TwoOrMore}{meta}, 'TwoOrMore rule includes execution metadata');
+    is($descr->{spec}{TwoOrMore}{meta}{handler_variant}, 'REP_ACODE', 'TwoOrMore bounded OR rule maps to REP_ACODE');
+    is($descr->{spec}{TwoOrMore}{meta}{node_type}, 'REP_OR_BOUNDED', 'TwoOrMore metadata preserves bounded OR node type');
+    is($descr->{spec}{TwoOrMore}{meta}{rep_min}, 2, 'TwoOrMore metadata preserves lower bound');
+    is($descr->{spec}{TwoOrMore}{meta}{rep_max}, 10**9, 'TwoOrMore metadata preserves open upper bound sentinel');
+
+    ok(exists $descr->{spec}{UpToTwo}{meta}, 'UpToTwo rule includes execution metadata');
+    is($descr->{spec}{UpToTwo}{meta}{handler_variant}, 'REP_ACODE', 'UpToTwo bounded OR rule maps to REP_ACODE');
+    is($descr->{spec}{UpToTwo}{meta}{node_type}, 'REP_OR_BOUNDED', 'UpToTwo metadata preserves bounded OR node type');
+    is($descr->{spec}{UpToTwo}{meta}{rep_min}, 0, 'UpToTwo metadata preserves implicit zero lower bound');
+    is($descr->{spec}{UpToTwo}{meta}{rep_max}, 2, 'UpToTwo metadata preserves upper bound');
+};
+subtest 'bounded_or_rule_labels_repeat_current_alternative_model' => sub {
+    plan tests => 11;
+
+    my $exact_two = <<'SPEC';
+Top::OR{2}
+ /a/ -> Top { $Top = $LMATCH }
+SPEC
+
+    my $between_two_and_three = <<'SPEC';
+Top::OR{2,3}
+ /a/ -> Top { $Top = $LMATCH }
+SPEC
+
+    my $up_to_two = <<'SPEC';
+Top::OR{,2}
+ /a/ -> Top { $Top = $LMATCH }
+SPEC
+
+    my $exact_parser = LinkedSpec::Get(\$exact_two);
+    ok(ref($exact_parser) eq 'CODE', 'exact bounded OR parser builds');
+
+    my $exact_short_input = "a";
+    my $exact_short = eval { $exact_parser->(\$exact_short_input) };
+    ok(!$@, 'exact bounded OR parser short-input execution does not die') or diag(normalize_error($@));
+    ok(!defined($exact_short), 'exact bounded OR parser rejects input below the lower bound');
+
+    my $exact_full_input = "aa";
+    my $exact_full = eval { $exact_parser->(\$exact_full_input) };
+    ok(!$@, 'exact bounded OR parser exact-count execution does not die') or diag(normalize_error($@));
+    is_deeply($exact_full, ['a', 'a'], 'exact bounded OR parser collects the exact required number of matches');
+
+    my $between_parser = LinkedSpec::Get(\$between_two_and_three);
+    ok(ref($between_parser) eq 'CODE', 'range bounded OR parser builds');
+
+    my $between_full_input = "aaa";
+    my $between_full = eval { $between_parser->(\$between_full_input) };
+    ok(!$@, 'range bounded OR parser in-range execution does not die') or diag(normalize_error($@));
+    is_deeply($between_full, ['a', 'a', 'a'], 'range bounded OR parser collects repeated alternative matches within the configured bounds');
+
+    my $upto_parser = LinkedSpec::Get(\$up_to_two);
+    ok(ref($upto_parser) eq 'CODE', 'upper-bounded OR parser builds');
+
+    my $upto_limited_input = "aaa";
+    my $upto_limited = eval { $upto_parser->(\$upto_limited_input) };
+    ok(!$@, 'upper-bounded OR parser capped execution does not die') or diag(normalize_error($@));
+    is_deeply($upto_limited, ['a', 'a'], 'upper-bounded OR parser stops collecting once it reaches the configured maximum');
+};
+subtest 'bootstrap_rejects_invalid_bounded_or_labels' => sub {
+    plan tests => 4;
+
+    my @cases = (
+        ['BadEmpty',      "BadEmpty:OR{,}\n /a/\n"],
+        ['BadDescending', "BadDescending:OR{3,2}\n /a/\n"],
+    );
+
+    for my $case (@cases) {
+        my ($label, $body) = @$case;
+        my $spec_content = "Top::\n -> $label\n\n$body";
+        my ($parse_success, undef, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+        ok(!$parse_success, "bootstrap parse rejects invalid bounded OR label for $label");
+        ok(defined($parse_error) || !$parse_success, "invalid bounded OR label for $label reports a parse failure");
+    }
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

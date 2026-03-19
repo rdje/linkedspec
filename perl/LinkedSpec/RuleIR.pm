@@ -25,6 +25,8 @@ sub _select_rule_handler_variant {
  $regex_count = $regex_count // 0;
 
  return 'MIXED_ACTIONS' if $acode_count && $bcode_count;
+ return 'REP_ACODE' if $node_type =~ /REP_/o && $acode_count;
+ return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
 
  if ($node_type =~ /AND/o && $acode_count) {
   return $regex_count == 1 ? 'AND_SINGLE_ACODE' : 'AND_ACODE';
@@ -32,8 +34,6 @@ sub _select_rule_handler_variant {
  return 'AND_BCODE' if $node_type =~ /AND/o && $bcode_count;
  return 'OR_ACODE'  if $node_type =~ /OR/o  && $acode_count;
  return 'OR_BCODE'  if $node_type =~ /OR/o  && $bcode_count;
- return 'REP_ACODE' if $node_type =~ /REP_/o && $acode_count;
- return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
 
  return '_default'
 }
@@ -117,6 +117,8 @@ sub _build_rule_execution_meta {
  my $regex_count = $args{regex_count} // 0;
  my $acode_count = $args{acode_count} // 0;
  my $bcode_count = $args{bcode_count} // 0;
+ my $rep_min = $args{rep_min};
+ my $rep_max = $args{rep_max};
  my $handler_variant = _select_rule_handler_variant($node_type, $acode_count, $bcode_count, $regex_count);
 
  my $action_mode =
@@ -148,6 +150,8 @@ sub _build_rule_execution_meta {
   regex_count     => $regex_count,
   acode_count     => $acode_count,
   bcode_count     => $bcode_count,
+  rep_min        => $rep_min,
+  rep_max        => $rep_max,
   action_mode     => $action_mode,
   handler_variant => $handler_variant,
   execution_shape => $execution_shape,
@@ -167,6 +171,8 @@ sub _collect_rule_ir {
  my $rule_ir = {
   label         => undef,
   node_type     => 'default',
+  rep_min       => undef,
+  rep_max       => undef,
   top_rule      => undef,
   REs           => [],
   code_blocks   => {
@@ -183,7 +189,9 @@ sub _collect_rule_ir {
  };
 
  foreach my $centry (@$einfo) {
-  ($rule_ir->{label}, $rule_ir->{node_type}) = @$centry[1 .. 2] if $$centry[0] =~ /ELABEL/o;
+  if ($$centry[0] =~ /ELABEL/o) {
+   ($rule_ir->{label}, $rule_ir->{node_type}, $rule_ir->{rep_min}, $rule_ir->{rep_max}) = @$centry[1 .. 4];
+  }
 
   my $entry_type = $$centry[0];
   if ($entry_type =~ /ELABEL_INITIAL/o) {
@@ -222,6 +230,8 @@ sub _plan_rule_ir_meta {
  return _build_rule_execution_meta(
   label       => $rule_ir->{label},
   node_type   => $rule_ir->{node_type},
+  rep_min     => $rule_ir->{rep_min},
+  rep_max     => $rule_ir->{rep_max},
   regex_count => scalar(@{$rule_ir->{REs}}),
   acode_count => scalar(@{$rule_ir->{acode_entries}}),
   bcode_count => scalar(@{$rule_ir->{bcode_entries}}),

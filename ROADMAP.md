@@ -370,11 +370,11 @@ This is a saved future-enhancement note, not an active implementation item.
   - but this is only a design shorthand, not a promise that LinkedSpec currently implements full regex-style or parser-combinator `OR+` semantics.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
+  - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - Deferred enhancement direction, only after the current rule model is explicit and rock solid:
   - explicit `AND`-style grouped sequencing,
-  - bounded or exact `OR` repetition such as `OR{N,M}` and `OR{N}`,
   - bounded or exact `AND` repetition such as `AND+`, `AND{N,M}`, and `AND{N}`,
   - and possibly other explicit rule-grouping forms if they prove useful.
 - Architectural expectation if this work is resumed later:

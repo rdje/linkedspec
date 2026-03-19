@@ -349,6 +349,66 @@ sub _build_bootstrap_node_type_map {
  }
 }
 
+sub _parse_bounded_or_mode {
+ my ($mode) = @_;
+ return undef unless defined $mode;
+ return undef unless $mode =~ /\AOR\s*\{\s*(?<BODY>[^}]*)\s*\}\z/o;
+
+ my $body = $+{BODY};
+ my ($rep_min, $rep_max);
+
+ if ($body =~ /\A\s*(?<COUNT>\d+)\s*\z/o) {
+  $rep_min = $+{COUNT};
+  $rep_max = $+{COUNT};
+ } elsif ($body =~ /\A\s*(?<MIN>\d*)\s*,\s*(?<MAX>\d*)\s*\z/o) {
+  return undef unless length($+{MIN}) || length($+{MAX});
+  $rep_min = length($+{MIN}) ? $+{MIN} : 0;
+  $rep_max = length($+{MAX}) ? $+{MAX} : 10**9;
+ } else {
+  return undef
+ }
+
+ return undef if $rep_max < $rep_min;
+
+ return {
+  node_type => 'REP_OR_BOUNDED',
+  rep_min   => 0 + $rep_min,
+  rep_max   => 0 + $rep_max,
+ }
+}
+
+sub _parse_entry_label_token {
+ my ($text, $ctx) = @_;
+ return undef unless defined $text;
+ return undef unless ref($ctx) eq 'HASH';
+ return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR\s*\{[^}]+\})?)\z/o;
+
+ my ($label, $colons, $mode) = @+{qw/LABEL COLON MODE/};
+ my $target = $colons eq '::' ? '_INITIAL' : '';
+ my $node_type = 'default';
+ my ($rep_min, $rep_max);
+
+ if (defined($mode) && length($mode)) {
+  if (exists $ctx->{node_type}{$mode}) {
+   $node_type = $ctx->{node_type}{$mode};
+  } else {
+   my $bounded = _parse_bounded_or_mode($mode);
+   return undef unless ref($bounded) eq 'HASH';
+   $node_type = $bounded->{node_type};
+   $rep_min = $bounded->{rep_min};
+   $rep_max = $bounded->{rep_max};
+  }
+ }
+
+ return {
+  label     => $label,
+  target    => $target,
+  node_type => $node_type,
+  rep_min   => $rep_min,
+  rep_max   => $rep_max,
+ }
+}
+
 sub _dispatch_curly_brace_handler {
  my ($ctx, $minfo, $descr, $string, $gdata) = @_;
  my $brace_rule_idx = $ctx->{bootstrap_rule_index}{CURLY_BRACE};
@@ -403,17 +463,20 @@ sub _build_entry_label_rule {
  return {
   id => 'ENTRY_LABEL',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*::?(?:&|\||\+|\*|\?)?/o],
+  re=> [qr/\w+\s*::?\s*(?:&|\||\+|\*|\?|OR\s*\{[^}]+\})?/o],
   handler=> sub {
    my ($info, undef, undef, $gdata) = @_;
-   $$info{match} =~ s/\s*://o;
+   my $parsed = _parse_entry_label_token($$info{match}, $ctx);
+   return undef unless ref($parsed) eq 'HASH';
 
-   my $target = $$info{match} =~ /:/ ? '_INITIAL' : '';
-   $$info{match} =~ s/://o;
-
-   $$info{match} =~ s/(\W)//o;
-   $gdata->{_current_entry} = $$info{match};
-   return ["ELABEL$target", $$info{match}, $1 ? $ctx->{node_type}{$1} : "default"]
+   $gdata->{_current_entry} = $parsed->{label};
+   return [
+    "ELABEL$parsed->{target}",
+    $parsed->{label},
+    $parsed->{node_type},
+    $parsed->{rep_min},
+    $parsed->{rep_max},
+   ]
   },
  }
 }
