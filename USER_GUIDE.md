@@ -56,6 +56,8 @@ top_rule::
 
 Once that rule-start token appears, the rest of the paragraph belongs to that same rule until another rule starts.
 
+Current frontend validation also rejects malformed extra-colon starts like `rule_name:::` before bootstrap parse. Supported rule starts remain the normal `rule_name:` and `rule_name::` forms plus their documented rule-mode suffixes.
+
 In practice that means a rule paragraph can contain:
 - one or more regex tokens like `/.../`,
 - lifecycle blocks like `I { ... }`, `LS { ... }`, `LE { ... }`, `LX { ... }`,

@@ -78,6 +78,8 @@ sub _parse_rule_label_line {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
  } elsif ($tail =~ /\A(?<MODE>[&|\+\*\?])(?<REST>\s.*|\z)/o) {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
+ } elsif ($tail =~ /\A:/o) {
+  $invalid_mode = 1;
  } elsif ($tail =~ /\A(?:[&|\+\*\?]|AND(?:\b|\{|\+)|OR(?:\b|\{|\+))/o) {
   $invalid_mode = 1;
  }

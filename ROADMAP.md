@@ -460,7 +460,7 @@ These are tracked implementation concerns, not immediate blockers.
   - That remains the clearest backend-portability and runtime-fragility ceiling even though the ActionIR/value-expression layer is becoming much more backend-neutral.
   - Future work should move toward a cleaner backend emission boundary or a more explicit emitted-handler IR.
 - Frontend hardening gap:
-  - `perl/LinkedSpec/Validation.pm` now covers current rule-label syntax, rule-paragraph regex-token validation, earlier mixed `->` / `=>` rule rejection, malformed top-level edge-target indexing, and missing top-level edge targets more faithfully than before, but it still trails other parts of the supported DSL surface.
+  - `perl/LinkedSpec/Validation.pm` now covers current rule-label syntax, malformed extra-colon rule starts, rule-paragraph regex-token validation, earlier mixed `->` / `=>` rule rejection, malformed top-level edge-target indexing, and missing top-level edge targets more faithfully than before, but it still trails other parts of the supported DSL surface.
   - Phase 2 should keep closing that gap with stricter syntax-aware diagnostics instead of leaving more cases to bootstrap parse failure or later compile-stage rejection.
 - Sequencing rule for these concerns:
   - keep them tracked and visible,

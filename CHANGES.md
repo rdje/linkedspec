@@ -1,5 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Extra-Colon Rule Labels Earlier
+
+Extended the Phase 2 frontend-hardening track so malformed extra-colon rule labels are rejected during DSL validation instead of falling through to later bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so malformed rule starts like `RuleName:::` are now reported as invalid current rule-label syntax.
+- Added focused regression coverage in `t/phase0_regression.t` for early rejection of extra-colon rule labels.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that supported rule starts remain `rule_name:` and `rule_name::` (plus documented mode suffixes), and that malformed extra-colon starts are rejected early.
+
 ## 2026-03-19 - Validation: Reject Missing Edge Targets Earlier
 
 Extended the Phase 2 frontend-hardening track so incomplete top-level edge arrows are rejected during DSL validation instead of surfacing later through generic bootstrap parse failure.

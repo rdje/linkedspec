@@ -5345,6 +5345,24 @@ PERL
     like($out, qr/Malformed rule label syntax/, 'malformed rule label diagnostic is reported before bootstrap parse');
     is($err, '', 'malformed-rule-label validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_extra_colon_rule_labels' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:::
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'extra-colon rule-label validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed extra-colon rule labels');
+    like($out, qr/Malformed rule label syntax/, 'extra-colon rule-label diagnostic is reported before bootstrap parse');
+    is($err, '', 'extra-colon rule-label validation subprocess does not emit stderr');
+};
 subtest 'validation_accepts_same_line_rule_paragraph_forms' => sub {
     plan tests => 4;
 
