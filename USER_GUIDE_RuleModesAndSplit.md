@@ -509,6 +509,36 @@ bad_rule:
 
 Use one style or the other for a given rule body.
 
+### Why Mixing `->` And `=>` Is A Bad Fit
+This rule is not just stylistic.
+
+The two edge families describe two different execution models.
+
+`-> child_rule` means:
+- this rule is still driven by its own regex-slot machinery,
+- a local regex hit decides which slot matched,
+- and the action edge then follows that regex-slot decision.
+
+`=> child_rule` means:
+- this rule is acting as a composition shell,
+- the parent directly invokes another parser step,
+- and the child rule, not the parent regex list, is doing the real match work for that step.
+
+So if one rule mixes both families, several semantic questions become muddy very quickly:
+- is the rule mainly regex-slot driven or parser-call driven?
+- what is supposed to own input progress at that point: the parent regex slot or the child parser?
+- what should repeated grouping mean when one step is a local regex dispatch and the next step is a direct child-rule call?
+- what should the parent return shape mean when part of the rule is edge-following and part of it is direct orchestration?
+
+That is why the current contract stays strict:
+- one rule, one execution model.
+
+If the rule is mainly choosing among its own regex slots, use `->`.
+
+If the rule is mainly orchestrating child parsers as building blocks, use `=>`.
+
+That division keeps the authoring model easier to read, the runtime handler families simpler, and the resulting parser behavior much less surprising.
+
 ### Best Current Blind-Call Shapes
 The most clearly documented blind-call shapes today are:
 - ordered-sequence wrappers,

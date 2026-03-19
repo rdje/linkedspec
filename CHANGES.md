@@ -1,5 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs Slice: Capture `->` Versus `=>` Mixing Rationale
+
+Expanded the rule-mode guide again to record the design reason behind the existing “do not mix `->` and `=>` in one rule” contract instead of leaving it as a bare prohibition.
+
+- Added a dedicated explanation in `USER_GUIDE_RuleModesAndSplit.md`:
+  - `-> child_rule` is documented as regex-slot-driven rule execution,
+  - `=> child_rule` is documented as parser-step orchestration/composition,
+  - and the guide now explains that mixing them in one rule muddies input-progress ownership, grouped execution semantics, and return-shape meaning.
+- Recorded the same rationale in `DEVELOPMENT_NOTES.md` and `MEMORY.md` so the design reason does not get lost again even if the old historical motivation had faded.
+
 ## 2026-03-19 - Docs/Test Slice: Lock Action-Edge Regex-Slot Indexing Contract
 
 Turned the recently clarified action-edge indexing rules into explicit regression-covered contract instead of leaving them only in prose.
