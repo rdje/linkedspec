@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Malformed Split Marker Syntax
+
+Extended the Phase 2 frontend-hardening track so malformed `@...` split-boundary markers are rejected during DSL validation instead of falling through to generic unsupported-content handling or later bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so malformed split-marker spellings now report a targeted early diagnostic on both:
+  - top-level rule paragraph lines,
+  - and same-line rule headers after the rule start or leading regex cluster.
+- Added focused regression coverage in `t/phase0_regression.t` for malformed top-level and same-line split-marker spellings like `@capture_here`.
+- Kept the supported split-boundary contract explicit:
+  - canonical `@capture_from_here`,
+  - compatibility alias `@move_pos`.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that malformed `@...` marker spellings are rejected early.
+
 ## 2026-03-19 - Validation: Reject Unsupported Same-Line Rule Header Content
 
 Extended the Phase 2 frontend-hardening track so same-line rule headers cannot hide arbitrary filler text after `rule:` / `rule::` or after a leading same-line regex cluster.

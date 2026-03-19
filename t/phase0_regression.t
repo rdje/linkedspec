@@ -5417,6 +5417,25 @@ PERL
     unlike($out, qr/Unsupported top-level rule paragraph content/, 'split markers do not trigger the new top-level paragraph-content diagnostic');
     is($err, '', 'split-marker paragraph validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_malformed_top_level_split_markers' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ @capture_here
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'malformed top-level split-marker validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed top-level split markers before bootstrap parse');
+    like($out, qr/Malformed split marker syntax/, 'malformed top-level split-marker diagnostic is reported early');
+    is($err, '', 'malformed top-level split-marker validation subprocess does not emit stderr');
+};
 subtest 'validation_accepts_dot_prefixed_multiline_fluent_continuations' => sub {
     plan tests => 4;
 
@@ -5526,6 +5545,23 @@ PERL
     like($out, qr/__VALID_DSL__/, 'validation accepts same-line action and blind-call rule paragraphs');
     unlike($out, qr/Invalid regex pattern/, 'same-line paragraph validation does not misclassify the packed rule forms as malformed regex syntax');
     is($err, '', 'same-line paragraph validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_malformed_same_line_split_markers' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ @capture_here
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'malformed same-line split-marker validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed same-line split markers before bootstrap parse');
+    like($out, qr/Malformed split marker syntax/, 'malformed same-line split-marker diagnostic is reported early');
+    is($err, '', 'malformed same-line split-marker validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_unsupported_same_line_rule_header_content' => sub {
     plan tests => 5;

@@ -376,6 +376,10 @@ sub validate_dsl_syntax {
    return 0;
   } elsif ($current_rule) {
    my $start_depth = $current_rule->{edge_scan_depth} // 0;
+   if ($start_depth == 0 && _looks_like_split_marker_prefix($line) && !_looks_like_supported_split_marker_start($line)) {
+    my $position = index($$spec_content, $line);
+    return _report_split_marker_syntax_error($spec_content, $position);
+   }
    if ($start_depth == 0 && !_looks_like_supported_rule_paragraph_member_line($line)) {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
@@ -471,6 +475,18 @@ sub _looks_like_supported_rule_paragraph_member_line {
   return 0;
 }
 
+sub _looks_like_split_marker_prefix {
+ my ($fragment) = @_;
+ return 0 unless defined $fragment;
+ return $fragment =~ /^\s*@/o ? 1 : 0;
+}
+
+sub _looks_like_supported_split_marker_start {
+ my ($fragment) = @_;
+ return 0 unless defined $fragment;
+ return $fragment =~ /^\s*@\s*(?:capture_from_here|move_pos)\b/o ? 1 : 0;
+}
+
 sub _trim_leading_rule_header_regex_cluster {
  my ($fragment) = @_;
  return '' unless defined $fragment;
@@ -510,6 +526,11 @@ sub _validate_rule_header_rhs_start {
  return 1 unless length($trimmed_rhs);
 
  my $remaining = _trim_leading_rule_header_regex_cluster($trimmed_rhs);
+
+ if (length($remaining) && _looks_like_split_marker_prefix($remaining) && !_looks_like_supported_split_marker_start($remaining)) {
+  my $position = index($$spec_content, $line);
+  return _report_split_marker_syntax_error($spec_content, $position);
+ }
 
  if (length($remaining) && $remaining =~ m{\A/}o) {
   my $position = index($$spec_content, $line);
@@ -712,6 +733,16 @@ sub _report_edge_target_syntax_error {
   $position,
   "Malformed action-edge target syntax",
   "Use '-> RuleName', '-> RuleName[0]', or '-> RuleName { ... }'; regex-slot indexes must be unsigned integers in brackets",
+ );
+}
+
+sub _report_split_marker_syntax_error {
+ my ($spec_content, $position) = @_;
+ return report_dsl_error(
+  $spec_content,
+  $position,
+  "Malformed split marker syntax",
+  "Use '@capture_from_here' or compatibility alias '@move_pos' when you need a split-boundary cursor marker",
  );
 }
 
