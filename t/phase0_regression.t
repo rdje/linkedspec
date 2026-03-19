@@ -5345,6 +5345,33 @@ PERL
     like($out, qr/Malformed rule label syntax/, 'malformed rule label diagnostic is reported before bootstrap parse');
     is($err, '', 'malformed-rule-label validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_glued_word_rule_mode_suffixes' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my @specs = (
+    <<'SPEC1',
+Top:ORX
+ /a/ -> Top { return_a(Top) }
+SPEC1
+    <<'SPEC2',
+Top::ANDX
+ /a/ -> Top { return_a(Top) }
+SPEC2
+);
+require LinkedSpec::Validation;
+for my $spec_content (@specs) {
+    my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+    print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+}
+PERL
+
+    is($exit_code, 0, 'glued word-mode validation subprocess exits cleanly') or diag($err || $out);
+    is(scalar(() = $out =~ /__INVALID_DSL__/g), 2, 'validation rejects both malformed glued word-mode spellings');
+    unlike($out, qr/__VALID_DSL__/, 'glued word-mode spellings do not pass validation');
+    like($out, qr/Malformed rule label syntax/, 'glued word-mode diagnostic is reported before bootstrap parse');
+    is($err, '', 'glued word-mode validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_extra_colon_rule_labels' => sub {
     plan tests => 4;
 

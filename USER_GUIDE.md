@@ -58,6 +58,16 @@ Once that rule-start token appears, the rest of the paragraph belongs to that sa
 
 Current frontend validation also rejects malformed extra-colon starts like `rule_name:::` before bootstrap parse. Supported rule starts remain the normal `rule_name:` and `rule_name::` forms plus their documented rule-mode suffixes.
 
+Worded rule modes must also use their exact supported spellings:
+- `AND`
+- `AND+`
+- `AND{...}`
+- `OR`
+- `OR+`
+- `OR{...}`
+
+Malformed glued forms like `rule_name:ORX` and `rule_name::ANDX` are rejected early too, rather than being treated as “close enough” prefixes of the supported labels.
+
 In practice that means a rule paragraph can contain:
 - one or more regex tokens like `/.../`,
 - lifecycle blocks like `I { ... }`, `LS { ... }`, `LE { ... }`, `LX { ... }`,

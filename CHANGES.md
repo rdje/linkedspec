@@ -1,5 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Glued Word-Mode Labels Earlier
+
+Extended the Phase 2 frontend-hardening track so malformed glued worded rule-mode suffixes are rejected during DSL validation instead of falling through to later bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so malformed rule starts like `RuleName:ORX` and `RuleName::ANDX` are now reported as invalid current rule-label syntax instead of being accepted as prefix matches on supported worded modes.
+- Added focused regression coverage in `t/phase0_regression.t` for early rejection of malformed glued word-mode spellings on both regular-rule and top-rule labels.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that supported worded rule modes must use their exact documented spellings (`AND`, `AND+`, `AND{...}`, `OR`, `OR+`, `OR{...}`), and that glued variants like `ORX` / `ANDX` are rejected early.
+
 ## 2026-03-19 - Validation: Reject Extra-Colon Rule Labels Earlier
 
 Extended the Phase 2 frontend-hardening track so malformed extra-colon rule labels are rejected during DSL validation instead of falling through to later bootstrap parse failure.

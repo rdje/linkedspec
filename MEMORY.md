@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-19: Extended Phase 2 frontend hardening so malformed glued worded rule-mode suffixes are rejected during `validate_dsl_syntax(...)` too. Validation now treats forms like `RuleName:ORX` and `RuleName::ANDX` as invalid rule-label syntax instead of accepting them as prefix matches on supported worded modes, and focused regression coverage now locks that early diagnostic.
 - 2026-03-19: Extended Phase 2 frontend hardening so malformed extra-colon rule starts are rejected during `validate_dsl_syntax(...)` too. Validation now treats forms like `RuleName:::` as invalid rule-label syntax instead of letting them drift into later bootstrap parse failure, and focused regression coverage now locks that early diagnostic.
 - 2026-03-19: Extended Phase 2 frontend hardening so missing top-level edge targets are rejected during `validate_dsl_syntax(...)` too. Validation now reports early targeted diagnostics for malformed forms like `-> { ... }` and `=> { ... }`, instead of letting incomplete action-edge or blind-call arrows fall through to generic bootstrap parse failure.
 - 2026-03-19: Extended Phase 2 frontend hardening so malformed top-level edge-target syntax is rejected during `validate_dsl_syntax(...)` too. Validation now rejects malformed action-edge slot forms like `-> Rule[]` / `-> Rule[abc]`, rejects indexed blind-call targets like `=> Rule[0]`, and keeps those checks top-level aware so action-code strings and nested code do not get misread as real edges.

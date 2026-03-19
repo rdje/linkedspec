@@ -76,6 +76,8 @@ sub _parse_rule_label_line {
   }
  } elsif ($tail =~ /\A(?<MODE>AND\+|AND|OR\+|OR)(?<REST>\s.*|\z)/o) {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
+ } elsif ($tail =~ /\A(?:AND|OR)\w/o) {
+  $invalid_mode = 1;
  } elsif ($tail =~ /\A(?<MODE>[&|\+\*\?])(?<REST>\s.*|\z)/o) {
   ($mode, $rhs) = ($+{MODE}, defined($+{REST}) ? $+{REST} : '');
  } elsif ($tail =~ /\A:/o) {
