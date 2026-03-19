@@ -333,15 +333,19 @@ sub validate_dsl_syntax {
      "Malformed rule label syntax",
      "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
     return 0;
-   }
-   my $rule_name = $rule_label->{label};
-   push @defined_rules, $rule_name;
+  }
+  my $rule_name = $rule_label->{label};
+  push @defined_rules, $rule_name;
 
-   if ($seen_defined_rules{$rule_name}++) {
+  if ($seen_defined_rules{$rule_name}++) {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
      "Duplicate rule definition: '$rule_name'",
      "Remove the duplicate rule or rename one of them");
+    return 0;
+   }
+
+   unless (_validate_rule_header_rhs_start($spec_content, $line, $rule_label->{rhs})) {
     return 0;
    }
 
@@ -455,7 +459,7 @@ sub _looks_like_supported_rule_paragraph_member_line {
  return 1 if $line =~ /^\s*$/o;
  return 1 if $line =~ /^\s*#/o;
  return 1 if _parse_rule_label_line($line);
- return 1 if $line =~ /^\s*\/(?:\\\\.|[^\/])*?(?<!\\)\//o;
+ return 1 if $line =~ /^\s*\/(?:\\.|[^\/])*?(?<!\\)\//o;
  return 1 if $line =~ /^\s*->/o;
  return 1 if $line =~ /^\s*=>/o;
  return 1 if $line =~ /^\s*@\s*(?:capture_from_here|move_pos)\b/o;
@@ -465,6 +469,65 @@ sub _looks_like_supported_rule_paragraph_member_line {
   return 1 if $line =~ /^\s*\w+\s*\{/o;
   return 1 if $line =~ /^\s*\w+\s*\./o;
   return 0;
+}
+
+sub _trim_leading_rule_header_regex_cluster {
+ my ($fragment) = @_;
+ return '' unless defined $fragment;
+
+ my $trimmed = $fragment;
+ $trimmed =~ s/^\s+//o;
+ return '' unless length($trimmed);
+
+ pos($trimmed) = 0;
+ while ($trimmed =~ /\G\s*(\/(?:\\.|[^\/])*?(?<!\\)\/)/gc) {
+ }
+
+ my $offset = pos($trimmed);
+ $offset = 0 unless defined $offset;
+ my $rest = substr($trimmed, $offset);
+ $rest =~ s/^\s+//o;
+ return $rest;
+}
+
+sub _invalid_regex_token_prefix {
+ my ($fragment) = @_;
+ return '/' unless defined $fragment;
+
+ if ($fragment =~ /^\s*(\/[^\s]*)/o) {
+  return $1;
+ }
+
+ return '/';
+}
+
+sub _validate_rule_header_rhs_start {
+ my ($spec_content, $line, $rhs) = @_;
+ return 1 unless defined $rhs;
+
+ my $trimmed_rhs = $rhs;
+ $trimmed_rhs =~ s/^\s+//o;
+ return 1 unless length($trimmed_rhs);
+
+ my $remaining = _trim_leading_rule_header_regex_cluster($trimmed_rhs);
+
+ if (length($remaining) && $remaining =~ m{\A/}o) {
+  my $position = index($$spec_content, $line);
+  my $bad_regex = _invalid_regex_token_prefix($remaining);
+  report_dsl_error($spec_content, $position,
+   "Invalid regex pattern: $bad_regex",
+   "Check the regex syntax and ensure proper escaping");
+  return 0;
+ }
+
+ return 1 unless length($remaining);
+ return 1 if _looks_like_supported_rule_paragraph_member_line($remaining);
+
+ my $position = index($$spec_content, $line);
+ report_dsl_error($spec_content, $position,
+  "Unsupported same-line rule header content",
+  "After a rule start or leading regex cluster, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or end the line");
+ return 0;
 }
 
 sub _scan_rule_edges_in_fragment {
@@ -668,7 +731,7 @@ sub _extract_leading_regex_literals_from_fragment {
  return @regex_literals unless defined $fragment;
 
  pos($fragment) = 0;
- while ($fragment =~ /\G\s*(\/(?:\\\\.|[^\/])*?(?<!\\)\/)/gc) {
+ while ($fragment =~ /\G\s*(\/(?:\\.|[^\/])*?(?<!\\)\/)/gc) {
   push @regex_literals, $1;
  }
 
@@ -679,7 +742,7 @@ sub extract_regex_literals_from_rule_rhs {
  my ($rhs) = @_;
  my @regex_literals;
 
- while ($rhs =~ /(?<!\\)\/(?:\\\\.|[^\/])*?(?<!\\)\//g) {
+ while ($rhs =~ /(?<!\\)\/(?:\\.|[^\/])*?(?<!\\)\//g) {
   push @regex_literals, $&;
  }
 

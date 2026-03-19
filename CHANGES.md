@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Unsupported Same-Line Rule Header Content
+
+Extended the Phase 2 frontend-hardening track so same-line rule headers cannot hide arbitrary filler text after `rule:` / `rule::` or after a leading same-line regex cluster.
+
+- Updated `perl/LinkedSpec/Validation.pm` so same-line rule headers now reject unsupported content like `Top:: random garbage` and `Top:: /a/ random garbage` during DSL validation instead of leaving those shapes to later bootstrap parse failure.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - unsupported same-line header filler directly after a rule start,
+  - unsupported same-line filler after a leading regex,
+  - and malformed followup same-line regex tokens after a valid first regex.
+- Tightened the validation-side regex literal matcher so escaped-slash literals like `/\/.+\//` remain accepted while the new same-line header checks run.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that same-line rule headers must also continue with supported paragraph members after the rule start and any leading regex cluster.
+
 ## 2026-03-19 - Validation: Reject Unsupported Top-Level Rule Paragraph Content
 
 Extended the Phase 2 frontend-hardening track so arbitrary top-level garbage inside a rule paragraph is rejected during DSL validation instead of being silently tolerated.

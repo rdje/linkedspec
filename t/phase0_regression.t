@@ -5527,6 +5527,42 @@ PERL
     unlike($out, qr/Invalid regex pattern/, 'same-line paragraph validation does not misclassify the packed rule forms as malformed regex syntax');
     is($err, '', 'same-line paragraph validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_unsupported_same_line_rule_header_content' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: random garbage
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unsupported same-line header validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects unsupported same-line rule header content before bootstrap parse');
+    like($out, qr/Unsupported same-line rule header content/, 'same-line header diagnostic is reported early');
+    like($out, qr/After a rule start or leading regex cluster, use regexes, lifecycle\/code blocks, action edges, blind calls, split markers, or end the line/, 'same-line header guidance explains the allowed header member families');
+    is($err, '', 'unsupported same-line header validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_unsupported_same_line_post_regex_content' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ random garbage
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unsupported same-line post-regex validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects unsupported same-line post-regex content before bootstrap parse');
+    like($out, qr/Unsupported same-line rule header content/, 'same-line post-regex diagnostic is reported early');
+    is($err, '', 'unsupported same-line post-regex validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_invalid_multiline_rule_regex_tokens' => sub {
     plan tests => 4;
 
@@ -5565,6 +5601,24 @@ PERL
     like($out, qr/__INVALID_DSL__/, 'validation rejects invalid same-line rule regex tokens before bootstrap parse');
     like($out, qr/Invalid regex pattern: \/\(foo\//, 'same-line invalid-regex diagnostic names the malformed regex token');
     is($err, '', 'same-line-regex validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_invalid_followup_same_line_rule_regex_tokens' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ /(foo/ -> Broken { return_a(Broken) }
+Broken: /bar/ -> Broken { return_a(Broken) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'followup same-line-regex validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed followup same-line rule regex tokens before bootstrap parse');
+    like($out, qr/Invalid regex pattern: \/\(foo\//, 'followup same-line invalid-regex diagnostic names the malformed regex token');
+    is($err, '', 'followup same-line-regex validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_mixed_action_and_blind_call_rule_paragraphs' => sub {
     plan tests => 5;
