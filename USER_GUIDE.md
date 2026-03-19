@@ -39,6 +39,101 @@ LinkedSpec is intentionally strong at:
 - staged coarse-to-fine parsing,
 - extraction-oriented parsing where anchor rules and follow-up passes matter more than strict token-by-token grammar purity.
 
+## `.spec` Files Are Paragraph-Oriented
+One of the easiest ways to understand LinkedSpec is to stop thinking of a `.spec` file as a line-oriented mini-language.
+
+The better mental model is:
+- a `.spec` file is a sequence of rule paragraphs,
+- each rule paragraph starts with one rule-start token,
+- and that rule paragraph continues until the next rule-start token or end of file.
+
+The only hard structural anchor for a rule paragraph is the first token:
+
+```text
+rule_name:
+top_rule::
+```
+
+Once that rule-start token appears, the rest of the paragraph belongs to that same rule until another rule starts.
+
+In practice that means a rule paragraph can contain:
+- one or more regex tokens like `/.../`,
+- lifecycle blocks like `I { ... }`, `LS { ... }`, `LE { ... }`, `LX { ... }`,
+- action edges like `-> child`, `-> child[idx]`, `-> child { ... }`,
+- and blind-call edges like `=> helper`.
+
+The important point is that, after the rule-start token, those elements are paragraph members, not a rigid line-by-line grammar with one forced ordering.
+
+### The natural convention versus the real grammar
+There is a natural house style that most specs follow:
+- rule start token first,
+- then one or more regexes,
+- then `I`,
+- then action edges,
+- then later lifecycle blocks where they make sense.
+
+That style is natural because it reads well and mirrors how people think about the rule.
+
+But the real grammar is more flexible:
+- after the leading `rule:` or `rule::`,
+- regexes, lifecycles, and edges belong to the same rule paragraph,
+- and their order is not artificially locked down by the file format.
+
+The regex count should stay open-ended too:
+- most rules use one regex,
+- many use two,
+- some use three,
+- and the format should not pretend there is a tiny fixed maximum.
+
+### A conventional rule paragraph
+
+```text
+pair:&
+ /[A-Za-z_]\w*/
+ /\s*=\s*/
+ /[^,\n]+/
+ I {declare(scalar, retv)}
+ -> child_rule
+ LX {return(scalar(retv))}
+```
+
+This is the common style:
+- rule label,
+- regexes,
+- setup lifecycle,
+- edges,
+- later lifecycle.
+
+### The same paragraph model in freer order
+
+```text
+pair:&
+ I {declare(scalar, retv)}
+ /[A-Za-z_]\w*/
+ -> child_rule
+ /\s*=\s*/
+ LX {return(scalar(retv))}
+ /[^,\n]+/
+```
+
+That is not the style most people should prefer for readability, but it illustrates the real file model:
+- the rule still starts at `pair:&`,
+- all following paragraph members still belong to `pair`,
+- and the rule still ends only when the next rule label starts or the file ends.
+
+### Why this matters
+This paragraph-oriented view demystifies `.spec` files:
+- they are not trying to be hard to parse,
+- they are not a deeply context-sensitive line grammar,
+- and they are easier to reason about when you first identify rule starts and then treat everything until the next rule start as one rule body.
+
+So the practical reading rule is simple:
+1. find `rule:` or `rule::`,
+2. keep collecting that rule’s regexes, lifecycles, and edges,
+3. stop only when the next rule starts or the file ends.
+
+That is a large part of why LinkedSpec specs are easy to parse structurally even when the rules themselves are doing sophisticated extraction work.
+
 ## The Most Important Concept: Lowering
 When you write helper-style action code such as:
 

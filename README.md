@@ -17,6 +17,7 @@ Read these in order for fastest onboarding:
    - Strategy, phases, priorities, and current execution direction.
 3. `USER_GUIDE.md`
    - How to write and use `.spec` grammars and parser workflows.
+   - Includes the plain paragraph-based mental model for `.spec` file structure.
 4. `DEVELOPMENT_NOTES.md`
    - Architecture rationale and implementation decisions.
 5. `CHANGES.md`
