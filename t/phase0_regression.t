@@ -4075,6 +4075,190 @@ subtest 'bootstrap_rejects_invalid_bounded_or_labels' => sub {
         ok(defined($parse_error) || !$parse_success, "invalid bounded OR label for $label reports a parse failure");
     }
 };
+subtest 'get_return_descr_rule_meta_bounded_and_repetition_strategies' => sub {
+    plan tests => 21;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> ExactTwo
+ -> BetweenTwoAndThree
+ -> TwoOrMore
+ -> UpToTwo
+
+ExactTwo:AND{2}
+ /a/ -> ExactTwo { return_a(ExactTwo) }
+ /b/ -> ExactTwo { return_a(ExactTwo) }
+
+BetweenTwoAndThree:AND{2, 3}
+ /c/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
+ /d/ -> BetweenTwoAndThree { return_a(BetweenTwoAndThree) }
+
+TwoOrMore:AND{2,}
+ /e/ -> TwoOrMore { return_a(TwoOrMore) }
+ /f/ -> TwoOrMore { return_a(TwoOrMore) }
+
+UpToTwo:AND{,2}
+ /g/ -> UpToTwo { return_a(UpToTwo) }
+ /h/ -> UpToTwo { return_a(UpToTwo) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded AND repetition rules');
+
+    ok(exists $descr->{spec}{ExactTwo}{meta}, 'ExactTwo bounded AND rule includes execution metadata');
+    is($descr->{spec}{ExactTwo}{meta}{handler_variant}, 'REP_AND_ACODE', 'ExactTwo bounded AND rule maps to REP_AND_ACODE');
+    is($descr->{spec}{ExactTwo}{meta}{node_type}, 'REP_AND_BOUNDED', 'ExactTwo metadata preserves bounded AND node type');
+    is($descr->{spec}{ExactTwo}{meta}{rep_min}, 2, 'ExactTwo metadata preserves exact minimum bound');
+    is($descr->{spec}{ExactTwo}{meta}{rep_max}, 2, 'ExactTwo metadata preserves exact maximum bound');
+
+    ok(exists $descr->{spec}{BetweenTwoAndThree}{meta}, 'BetweenTwoAndThree bounded AND rule includes execution metadata');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{handler_variant}, 'REP_AND_ACODE', 'BetweenTwoAndThree bounded AND rule maps to REP_AND_ACODE');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{node_type}, 'REP_AND_BOUNDED', 'BetweenTwoAndThree metadata preserves bounded AND node type');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{rep_min}, 2, 'BetweenTwoAndThree metadata preserves lower bound');
+    is($descr->{spec}{BetweenTwoAndThree}{meta}{rep_max}, 3, 'BetweenTwoAndThree metadata preserves upper bound');
+
+    ok(exists $descr->{spec}{TwoOrMore}{meta}, 'TwoOrMore bounded AND rule includes execution metadata');
+    is($descr->{spec}{TwoOrMore}{meta}{handler_variant}, 'REP_AND_ACODE', 'TwoOrMore bounded AND rule maps to REP_AND_ACODE');
+    is($descr->{spec}{TwoOrMore}{meta}{node_type}, 'REP_AND_BOUNDED', 'TwoOrMore metadata preserves bounded AND node type');
+    is($descr->{spec}{TwoOrMore}{meta}{rep_min}, 2, 'TwoOrMore metadata preserves lower bound');
+    is($descr->{spec}{TwoOrMore}{meta}{rep_max}, 10**9, 'TwoOrMore metadata preserves open upper bound sentinel');
+
+    ok(exists $descr->{spec}{UpToTwo}{meta}, 'UpToTwo bounded AND rule includes execution metadata');
+    is($descr->{spec}{UpToTwo}{meta}{handler_variant}, 'REP_AND_ACODE', 'UpToTwo bounded AND rule maps to REP_AND_ACODE');
+    is($descr->{spec}{UpToTwo}{meta}{node_type}, 'REP_AND_BOUNDED', 'UpToTwo metadata preserves bounded AND node type');
+    is($descr->{spec}{UpToTwo}{meta}{rep_min}, 0, 'UpToTwo metadata preserves implicit zero lower bound');
+    is($descr->{spec}{UpToTwo}{meta}{rep_max}, 2, 'UpToTwo metadata preserves upper bound');
+};
+subtest 'get_return_descr_rule_meta_bounded_and_blind_call_strategy' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Sequence::AND{2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded AND blind-call rules');
+    ok(exists $descr->{spec}{Sequence}{meta}, 'Sequence bounded AND blind-call rule includes execution metadata');
+    is($descr->{spec}{Sequence}{meta}{handler_variant}, 'REP_AND_BCODE', 'Sequence bounded AND blind-call rule maps to REP_AND_BCODE');
+    is($descr->{spec}{Sequence}{meta}{node_type}, 'REP_AND_BOUNDED', 'Sequence blind-call metadata preserves bounded AND node type');
+    is($descr->{spec}{Sequence}{meta}{rep_min}, 2, 'Sequence blind-call metadata preserves lower bound');
+    is($descr->{spec}{Sequence}{meta}{rep_max}, 2, 'Sequence blind-call metadata preserves upper bound');
+    ok($descr->{spec}{Sequence}{meta}{uses_loop}, 'Sequence bounded AND blind-call metadata reports loop strategy');
+};
+subtest 'bounded_and_rule_labels_repeat_current_sequence_model' => sub {
+    plan tests => 11;
+
+    my $exact_two = <<'SPEC';
+Sequence::AND{2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $between_two_and_three = <<'SPEC';
+Sequence::AND{2,3}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $up_to_two = <<'SPEC';
+Sequence::AND{,2}
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $exact_parser = LinkedSpec::Get(\$exact_two);
+    ok(ref($exact_parser) eq 'CODE', 'exact bounded AND parser builds');
+
+    my $exact_short_input = "ab";
+    my $exact_short = eval { $exact_parser->(\$exact_short_input) };
+    ok(!$@, 'exact bounded AND parser short-input execution does not die') or diag(normalize_error($@));
+    ok(!defined($exact_short), 'exact bounded AND parser rejects input below the lower bound');
+
+    my $exact_full_input = "abab";
+    my $exact_full = eval { $exact_parser->(\$exact_full_input) };
+    ok(!$@, 'exact bounded AND parser exact-count execution does not die') or diag(normalize_error($@));
+    is_deeply(
+        $exact_full,
+        [
+            [['?First:', []], ['?Second:', []]],
+            [['?First:', []], ['?Second:', []]],
+        ],
+        'exact bounded AND parser collects the required number of ordered sequence groups',
+    );
+
+    my $between_parser = LinkedSpec::Get(\$between_two_and_three);
+    ok(ref($between_parser) eq 'CODE', 'range bounded AND parser builds');
+
+    my $between_full_input = "ababab";
+    my $between_full = eval { $between_parser->(\$between_full_input) };
+    ok(!$@, 'range bounded AND parser in-range execution does not die') or diag(normalize_error($@));
+    is_deeply(
+        $between_full,
+        [
+            [['?First:', []], ['?Second:', []]],
+            [['?First:', []], ['?Second:', []]],
+            [['?First:', []], ['?Second:', []]],
+        ],
+        'range bounded AND parser repeats the full ordered sequence within the configured bounds',
+    );
+
+    my $upto_parser = LinkedSpec::Get(\$up_to_two);
+    ok(ref($upto_parser) eq 'CODE', 'upper-bounded AND parser builds');
+
+    my $upto_limited_input = "ababab";
+    my $upto_limited = eval { $upto_parser->(\$upto_limited_input) };
+    ok(!$@, 'upper-bounded AND parser capped execution does not die') or diag(normalize_error($@));
+    is_deeply(
+        $upto_limited,
+        [
+            [['?First:', []], ['?Second:', []]],
+            [['?First:', []], ['?Second:', []]],
+        ],
+        'upper-bounded AND parser stops after the configured maximum number of ordered sequence groups',
+    );
+};
+subtest 'bootstrap_rejects_invalid_bounded_and_labels' => sub {
+    plan tests => 4;
+
+    my @cases = (
+        ['BadEmpty',      "BadEmpty:AND{,}\n /a/\n /b/\n"],
+        ['BadDescending', "BadDescending:AND{3,2}\n /a/\n /b/\n"],
+    );
+
+    for my $case (@cases) {
+        my ($label, $body) = @$case;
+        my $spec_content = "Top::\n -> $label\n\n$body";
+        my ($parse_success, undef, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+        ok(!$parse_success, "bootstrap parse rejects invalid bounded AND label for $label");
+        ok(defined($parse_error) || !$parse_success, "invalid bounded AND label for $label reports a parse failure");
+    }
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {

@@ -660,7 +660,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Logged a deferred future-enhancement note for richer grouped rule semantics:
   - keep the current default repeated-alternative rule model as the active baseline,
   - treat bare `rule:` as the author-facing implicit `OR+` / `OR{1,}` reading for that baseline,
-  - and defer explicit grouped-rule work such as `AND`, bounded `OR`, exact repetition, and related rule strategies until the current rule model is solid.
+  - and defer only the remaining grouped-rule follow-ons such as standalone `AND`, shorthand `AND+`, and related rule strategies until the current rule model is solid.
 - Tracker impact:
   - no live-status row changes,
   - because this slice records deferred design intent rather than landing active roadmap work.
@@ -4603,3 +4603,4 @@ Update this file after every meaningful exchange/task completion with:
 - 2026-03-19: Re-confirmed that `@move_pos` still exists in the extracted code path and should be documented as a split-boundary cursor move, not a free-standing collector. Its practical value is staged parsing: use stable anchors to isolate raw inner regions first, then parse those regions in a second pass with another `.spec` or follow-up parser.
 - 2026-03-19: Agreed naming cleanup for the split-boundary cursor: `@capture_from_here` is now the preferred author-facing spelling, while `@move_pos` stays as the compatibility alias. The internal lowering remains `MOVE_POS` / `$IPOS = pos $$STRING`.
 - 2026-03-19: Landed bounded repeated-choice rule labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` as the first explicit grouped-rule extension. The implementation threads `rep_min` / `rep_max` through bootstrap label parsing, RuleIR metadata, and the existing repetition handlers; bounded `AND` remains deliberately deferred because it needs sequence-repetition semantics rather than reused choice-repetition machinery.
+- 2026-03-19: Landed bounded repeated-sequence rule labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` as the next explicit grouped-rule extension. The implementation threads `rep_min` / `rep_max` through bootstrap label parsing, RuleIR metadata, and dedicated repeated-sequence handler variants, with metadata locked on both action and blind-call sequence paths plus representative runtime checks for bounded ordered repetition, so ordered repetition now has an explicit user-facing contract too.

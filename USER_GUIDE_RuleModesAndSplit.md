@@ -1,5 +1,5 @@
 # USER GUIDE: Rule Modes And Split Boundaries
-This guide covers the current rule-shape surface, including the newly landed bounded `OR{...}` labels and the still-deferred `AND{...}` family.
+This guide covers the current rule-shape surface, including the newly landed bounded `OR{...}` and bounded `AND{...}` labels.
 
 Read this when you want to understand:
 - what rule-label sigils already mean today,
@@ -28,6 +28,10 @@ bounded_choice_exact:OR{2}
 bounded_choice_range:OR{2,4}
 bounded_choice_open_max:OR{2,}
 bounded_choice_open_min:OR{,4}
+bounded_sequence_exact:AND{2}
+bounded_sequence_range:AND{2,4}
+bounded_sequence_open_max:AND{2,}
+bounded_sequence_open_min:AND{,4}
 ```
 
 Those are the current supported sigils. They are not placeholders for future grouped syntax. They are the current surface.
@@ -207,6 +211,62 @@ optional_pair:OR{,2}
 
 Use it when zero matches are allowed but you still want to cap how many alternative hits can be collected.
 
+### `:AND{N}` exact bounded repeated sequence
+`AND{N}` means ordered-sequence matching with an exact required repetition count.
+
+Representative shape:
+
+```text
+pair_twice:AND{2}
+ /[A-Za-z_]\w*/ -> pair_twice
+ /\s*=\s*/
+ /[^,\n]+/ -> pair_twice
+```
+
+Use it when the same ordered sequence must succeed exactly `N` times in a row.
+
+### `:AND{N,M}` bounded repeated sequence
+`AND{N,M}` means ordered-sequence matching with both a lower and upper repetition bound.
+
+Representative shape:
+
+```text
+directive_triplets:AND{2,4}
+ /BEGIN\b/ -> directive_triplets
+ /\s+/
+ /END\b/ -> directive_triplets
+```
+
+Use it when the whole sequence must repeat at least `N` times and at most `M` times.
+
+### `:AND{N,}` open-ended repeated sequence
+`AND{N,}` means ordered-sequence matching with a required minimum and no DSL-level upper bound beyond the current large internal repeat sentinel.
+
+Representative shape:
+
+```text
+two_or_more_pairs:AND{2,}
+ /[A-Za-z_]\w*/ -> two_or_more_pairs
+ /\s*=\s*/
+ /[^,\n]+/ -> two_or_more_pairs
+```
+
+Use it when at least `N` full sequence iterations are required but more are allowed.
+
+### `:AND{,M}` upper-bounded repeated sequence
+`AND{,M}` means ordered-sequence matching with an implicit lower bound of `0` and an explicit upper bound of `M`.
+
+Representative shape:
+
+```text
+optional_pairs:AND{,2}
+ /[A-Za-z_]\w*/ -> optional_pairs
+ /\s*=\s*/
+ /[^,\n]+/ -> optional_pairs
+```
+
+Use it when zero full sequence iterations are allowed but you still want a hard cap on how many whole sequence groups get consumed.
+
 ## Worked Bounded-OR Examples
 ### Example: exact repeated token pair
 
@@ -260,18 +320,59 @@ What this means:
 - one or two matches are also acceptable,
 - but the rule will not keep collecting beyond two matches.
 
-## What Is Not Supported Yet
-These are still deferred future work, not current syntax:
+## Worked Bounded-AND Examples
+### Example: exact repeated key/value pairs
+
+```text
+pair_list:AND{2}
+ /[A-Za-z_]\w*/ -> pair_list { $pair_list = $LMATCH }
+ /\s*=\s*/
+ /[^,\n]+/ -> pair_list { $pair_list = $LMATCH }
+```
+
+What this means:
+- the rule does not repeat individual alternatives,
+- it repeats the whole ordered sequence,
+- and the returned collected value is grouped by full sequence iteration rather than flattened as one repeated-choice stream.
+
+### Example: two-to-four repeated BEGIN/END marker groups
+
+```text
+segments:AND{2,4}
+ /BEGIN\b/ -> segments { $segments = $LMATCH }
+ /.*?\n/
+ /END\b/   -> segments { $segments = $LMATCH }
+```
+
+What this means:
+- fewer than two full `BEGIN ... END` groups fail the rule,
+- two, three, or four full groups pass,
+- and the fifth possible group is left for later parsing because this rule has already reached its configured maximum.
+
+### Example: zero-to-two optional sequence groups
+
+```text
+optional_assignments:AND{,2}
+ /[A-Za-z_]\w*/ -> optional_assignments { $optional_assignments = $LMATCH }
+ /\s*=\s*/
+ /[^,\n]+/ -> optional_assignments { $optional_assignments = $LMATCH }
+```
+
+What this means:
+- zero full sequence groups are acceptable,
+- one or two full groups are also acceptable,
+- but the rule will not keep consuming beyond two complete ordered groups.
+
+## What Is Still Deferred
+These are still future work, not current syntax:
 
 ```text
 AND+
-AND{N,M}
-AND{N}
-AND{N,}
-AND{,M}
+OR
+AND
 ```
 
-The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Bounded `OR{...}` is now landed; bounded `AND{...}` is not.
+The roadmap still treats those as future grouped-rule exploration, not current authoring syntax. Bounded `OR{...}` and bounded `AND{...}` are now landed; the remaining deferred work is about extra shorthand spellings and other grouped rule strategies.
 
 ## `@capture_from_here`: The Split Boundary Cursor
 `@capture_from_here` is now the preferred grammar surface for this feature.
@@ -366,8 +467,9 @@ That pattern is especially valuable when:
 The current supported contract is:
 - `:&`, `:|`, `:+`, `:*`, and `:?` are real current rule-mode sigils,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
+- bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
-- and richer grouped forms like `AND{N,M}` remain future work.
+- and extra grouped shorthands like standalone `OR`, standalone `AND`, and `AND+` remain future work.
 
 That gives us a stable baseline before we expand the remaining rule-grouping surface further.

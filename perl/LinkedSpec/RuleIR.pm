@@ -25,6 +25,8 @@ sub _select_rule_handler_variant {
  $regex_count = $regex_count // 0;
 
  return 'MIXED_ACTIONS' if $acode_count && $bcode_count;
+ return 'REP_AND_ACODE' if $node_type =~ /REP_AND/o && $acode_count;
+ return 'REP_AND_BCODE' if $node_type =~ /REP_AND/o && $bcode_count;
  return 'REP_ACODE' if $node_type =~ /REP_/o && $acode_count;
  return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
 
@@ -138,6 +140,10 @@ sub _build_rule_execution_meta {
   ($execution_shape, $uses_loop) = ('or_choice_dispatch', 0);
  } elsif ($handler_variant eq 'OR_BCODE') {
   ($execution_shape, $uses_loop) = ('or_call_loop', 1);
+ } elsif ($handler_variant eq 'REP_AND_ACODE') {
+  ($execution_shape, $uses_loop) = ('repeat_and_sequence_loop', 1);
+ } elsif ($handler_variant eq 'REP_AND_BCODE') {
+  ($execution_shape, $uses_loop) = ('repeat_and_call_loop', 1);
  } elsif ($handler_variant eq 'REP_ACODE' || $handler_variant eq 'REP_BCODE') {
   ($execution_shape, $uses_loop) = ('repeat_loop', 1);
  } elsif ($handler_variant eq 'MIXED_ACTIONS') {

@@ -349,11 +349,12 @@ sub _build_bootstrap_node_type_map {
  }
 }
 
-sub _parse_bounded_or_mode {
+sub _parse_bounded_group_mode {
  my ($mode) = @_;
  return undef unless defined $mode;
- return undef unless $mode =~ /\AOR\s*\{\s*(?<BODY>[^}]*)\s*\}\z/o;
+ return undef unless $mode =~ /\A(?<KIND>OR|AND)\s*\{\s*(?<BODY>[^}]*)\s*\}\z/o;
 
+ my $kind = $+{KIND};
  my $body = $+{BODY};
  my ($rep_min, $rep_max);
 
@@ -371,7 +372,7 @@ sub _parse_bounded_or_mode {
  return undef if $rep_max < $rep_min;
 
  return {
-  node_type => 'REP_OR_BOUNDED',
+  node_type => $kind eq 'AND' ? 'REP_AND_BOUNDED' : 'REP_OR_BOUNDED',
   rep_min   => 0 + $rep_min,
   rep_max   => 0 + $rep_max,
  }
@@ -381,7 +382,7 @@ sub _parse_entry_label_token {
  my ($text, $ctx) = @_;
  return undef unless defined $text;
  return undef unless ref($ctx) eq 'HASH';
- return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|OR\s*\{[^}]+\})?)\z/o;
+ return undef unless $text =~ /\A(?<LABEL>\w+)\s*(?<COLON>::|:)\s*(?<MODE>(?:[&|\+\*\?]|(?:OR|AND)\s*\{[^}]+\})?)\z/o;
 
  my ($label, $colons, $mode) = @+{qw/LABEL COLON MODE/};
  my $target = $colons eq '::' ? '_INITIAL' : '';
@@ -392,7 +393,7 @@ sub _parse_entry_label_token {
   if (exists $ctx->{node_type}{$mode}) {
    $node_type = $ctx->{node_type}{$mode};
   } else {
-   my $bounded = _parse_bounded_or_mode($mode);
+   my $bounded = _parse_bounded_group_mode($mode);
    return undef unless ref($bounded) eq 'HASH';
    $node_type = $bounded->{node_type};
    $rep_min = $bounded->{rep_min};
@@ -463,7 +464,7 @@ sub _build_entry_label_rule {
  return {
   id => 'ENTRY_LABEL',
   tags => { start_token => 1 },
-  re=> [qr/\w+\s*::?\s*(?:&|\||\+|\*|\?|OR\s*\{[^}]+\})?/o],
+  re=> [qr/\w+\s*::?\s*(?:&|\||\+|\*|\?|(?:OR|AND)\s*\{[^}]+\})?/o],
   handler=> sub {
    my ($info, undef, undef, $gdata) = @_;
    my $parsed = _parse_entry_label_token($$info{match}, $ctx);

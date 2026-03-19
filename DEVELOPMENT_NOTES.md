@@ -684,7 +684,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - Logged a deferred future-enhancement note for richer grouped rule semantics:
   - keep the current default repeated-alternative rule model as the active baseline,
   - treat bare `rule:` as the author-facing implicit `OR+` / `OR{1,}` reading for that baseline,
-  - and defer explicit grouped-rule work such as `AND`, bounded `OR`, exact repetition, and related rule strategies until the current rule model is solid.
+  - and defer only the remaining grouped-rule follow-ons such as standalone `AND`, shorthand `AND+`, and related rule strategies until the current rule model is solid.
 - Tracker impact:
   - no live-status row changes,
   - because this slice records deferred design intent rather than landing active roadmap work.
@@ -5219,3 +5219,4 @@ Before each commit:
 - 2026-03-19: Tightened the split-capture contract too: `@move_pos` is preserved as a real supported parser feature and should be described as a capture-boundary cursor move, not as a standalone collector. It lowers to `$IPOS = pos $$STRING`, which is exactly why it is useful for staged coarse-to-fine parsing where stable anchors isolate harder inner substrings for a second pass.
 - 2026-03-19: Naming cleanup for the split-boundary cursor is now in flight too: `@capture_from_here` is the preferred DSL spelling because it describes user intent rather than Perl mechanism, while `@move_pos` stays supported as a compatibility alias that still lowers to the same internal `MOVE_POS` event.
 - 2026-03-19: First grouped-rule extension is now real: bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` now lower through explicit `rep_min` / `rep_max` metadata into the existing repeat-loop handler family. This keeps the scope intentionally narrow: bounded `AND` still needs a separate sequence-repetition design instead of being inferred from the repeated-choice implementation.
+- 2026-03-19: The next grouped-rule slice is now real too: bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` now lower through explicit `rep_min` / `rep_max` metadata into dedicated repeated-sequence handler variants. Metadata is now locked on both action and blind-call sequence paths, with representative runtime checks on bounded ordered repetition too, so repeated ordered sequences are explicit supported surface instead of being hand-waved as future work or mis-modeled as repeated choice.

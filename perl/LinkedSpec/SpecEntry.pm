@@ -232,7 +232,7 @@ sub _build_default_handler_variant {
  }'
 }
 
-sub _build_and_bcode_variant {
+sub _build_and_bcode_sequence_body {
  my (%args) = @_;
  my $bcodes = $args{bcodes} // '';
  return undef unless length $bcodes;
@@ -259,6 +259,11 @@ sub _build_and_bcode_variant {
 
   '.($actual_ecode || 'return \@'.$label.'_collect').'
  '
+}
+
+sub _build_and_bcode_variant {
+ my (%args) = @_;
+ return _build_and_bcode_sequence_body(%args)
 }
 
 sub _build_and_single_acode_variant {
@@ -297,7 +302,7 @@ sub _build_and_single_acode_variant {
  '
 }
 
-sub _build_and_acode_variant {
+sub _build_and_acode_sequence_body {
  my (%args) = @_;
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
@@ -339,6 +344,11 @@ sub _build_and_acode_variant {
 
  return \@'.$label.'_collect;
  '
+}
+
+sub _build_and_acode_variant {
+ my (%args) = @_;
+ return _build_and_acode_sequence_body(%args)
 }
 
 sub _build_or_acode_variant {
@@ -391,36 +401,18 @@ sub _build_or_bcode_variant {
 
 sub _build_rep_bcode_variant {
  my (%args) = @_;
- my $bcodes = $args{bcodes} // '';
- return undef unless length $bcodes;
- my $label = $args{label};
  my ($min, $max) = _resolve_rep_bounds(%args);
  return undef unless defined $min && defined $max;
 
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_lecode = $args{actual_lecode} // '';
+ my $label = $args{label};
  my $actual_itcode = $args{actual_itcode} // '';
  my $actual_excode = $args{actual_excode} // '';
  my $actual_ecode = $args{actual_ecode} // '';
- my $bcalls = $args{bcalls} // '';
- my $and_code = '
-
-  my $'.$label.';
-  my @'.$label.'_collect;
-  foreach my $call (qw('.$bcalls.')) {
-   my $current_call = $call;
-
-   '.$bcodes.'
-
-   unless ($'.$label.') {
-    '.($actual_lxcode || 'return undef').'
-   }
-
-   '.($actual_lecode || 'push @'.$label.'_collect, $'.$label).'
-  }
-
-  return \@'.$label.'_collect
- ';
+ my $and_code = _build_and_bcode_sequence_body(
+  %args,
+  actual_ecode => 'return \@'.$label.'_collect',
+ );
+ return undef unless defined $and_code;
 
  return '
    my $min='.$min.';
@@ -450,6 +442,59 @@ sub _build_rep_bcode_variant {
 
    '.($actual_ecode || 'return \@'.$label.'_collect').'
    '
+}
+
+sub _build_rep_and_bcode_variant {
+ my (%args) = @_;
+ return _build_rep_bcode_variant(%args)
+}
+
+sub _build_rep_and_acode_variant {
+ my (%args) = @_;
+ my ($min, $max) = _resolve_rep_bounds(%args);
+ return undef unless defined $min && defined $max;
+
+ my $label = $args{label};
+ my $actual_itcode = $args{actual_itcode} // '';
+ my $actual_excode = $args{actual_excode} // '';
+ my $actual_ecode = $args{actual_ecode} // '';
+ my $acode_count = (ref($args{acodes_ref}) eq 'ARRAY') ? scalar(@{$args{acodes_ref}}) : 0;
+ return undef unless $acode_count;
+
+ my $and_code = _build_and_acode_sequence_body(
+  %args,
+  acode_count  => $acode_count,
+  actual_ecode => 'return \@'.$label.'_collect',
+ );
+ return undef unless defined $and_code;
+
+ return '
+
+   my $min='.$min.';
+   my $max='.$max.';
+   my @'.$label.'_collect;
+   my $ccount = 0;
+   my $and_code = sub {eval \''.$and_code.'\'};
+
+   while(1) {
+    my $and_ret = $and_code->();
+    unless ($and_ret) {
+     if ($ccount >= $min) {
+      '.($actual_excode || 'return \@'.$label.'_collect').'
+     } else {
+      return undef
+     }
+    }
+
+    ++$ccount;
+
+    '.($actual_itcode || 'push @'.$label.'_collect, $and_ret;').'
+
+    last unless $ccount < $max
+   }
+
+   '.($actual_ecode || 'return \@'.$label.'_collect').'
+ '
 }
 
 sub _build_rep_acode_variant {
@@ -522,6 +567,7 @@ sub _build_handler_variants {
  my $isAND = $node_type =~ /AND/o;
  my $isOR  = $node_type =~ /OR/o;
  my $isREP = $node_type =~ /REP_/o;
+ my $isREP_AND = $node_type =~ /REP_AND/o;
 
  my %handlers;
  my $default = _build_default_handler_variant(
@@ -584,6 +630,16 @@ sub _build_handler_variants {
   );
   $handlers{REP_BCODE} = $v if defined $v;
  }
+ if ($isREP_AND && length($bcodes)) {
+  my $v = _build_rep_and_bcode_variant(
+   %args,
+   label     => $label,
+   node_type => $node_type,
+   bcodes    => $bcodes,
+   bcalls    => $bcalls,
+  );
+  $handlers{REP_AND_BCODE} = $v if defined $v;
+ }
  if ($isREP && length($acodes)) {
   my $v = _build_rep_acode_variant(
    %args,
@@ -592,6 +648,15 @@ sub _build_handler_variants {
    acodes    => $acodes,
   );
   $handlers{REP_ACODE} = $v if defined $v;
+ }
+ if ($isREP_AND && length($acodes)) {
+  my $v = _build_rep_and_acode_variant(
+   %args,
+   label     => $label,
+   node_type => $node_type,
+   acodes    => $acodes,
+  );
+  $handlers{REP_AND_ACODE} = $v if defined $v;
  }
  return \%handlers
 }

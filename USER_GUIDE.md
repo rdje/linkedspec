@@ -130,7 +130,7 @@ Most important syntax elements:
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
-For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, bounded `OR{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias and leaving bounded `AND{...}` as explicit future work.
+For the worked long-form guide to the current rule-label sigils and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, `:|`, `:+`, `:*`, `:?`, bounded `OR{...}` forms, bounded `AND{...}` forms, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias and leaving only the extra shorthand/grouping follow-ons as future work.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.
