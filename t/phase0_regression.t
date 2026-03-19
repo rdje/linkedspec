@@ -4327,6 +4327,104 @@ SPEC
     ok(!$@, 'blind-call choice parser miss execution does not die') or diag(normalize_error($@));
     ok(!defined($miss_ast), 'blind-call choice parser returns undef when no child parser succeeds');
 };
+subtest 'blind_call_repeated_choice_rule_dispatches_across_child_rules' => sub {
+    plan tests => 10;
+
+    my $explicit_spec = <<'SPEC';
+Choice::OR
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $default_spec = <<'SPEC';
+Choice::
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $explicit_parser = LinkedSpec::Get(\$explicit_spec);
+    my $default_parser = LinkedSpec::Get(\$default_spec);
+    ok(ref($explicit_parser) eq 'CODE', 'explicit OR blind-call repeated-choice parser builds');
+    ok(ref($default_parser) eq 'CODE', 'default blind-call repeated-choice parser builds');
+
+    my $ab_input = "ab";
+    my $explicit_ab = eval { $explicit_parser->(\$ab_input) };
+    ok(!$@, 'explicit OR blind-call repeated-choice parser handles two-step choice input without die') or diag(normalize_error($@));
+    is_deeply(
+        $explicit_ab,
+        [
+            ['?First:', []],
+            ['?Second:', []],
+        ],
+        'explicit OR blind-call repeated-choice parser collects first-success child results across repeated iterations',
+    );
+
+    my $b_input = "b";
+    my $default_b = eval { $default_parser->(\$b_input) };
+    ok(!$@, 'default blind-call repeated-choice parser handles second-child hit without die') or diag(normalize_error($@));
+    is_deeply(
+        $default_b,
+        [
+            ['?Second:', []],
+        ],
+        'default bare blind-call repeated-choice parser still dispatches to later child parsers within the repeated-choice family',
+    );
+
+    my $single_input = "a";
+    my $default_single = eval { $default_parser->(\$single_input) };
+    ok(!$@, 'default blind-call repeated-choice parser handles single child hit without die') or diag(normalize_error($@));
+    is_deeply($default_single, [['?First:', []]], 'default blind-call repeated-choice parser returns one collected child result for one successful iteration');
+
+    my $miss_input = "c";
+    my $explicit_miss = eval { $explicit_parser->(\$miss_input) };
+    ok(!$@, 'explicit OR blind-call repeated-choice miss execution does not die') or diag(normalize_error($@));
+    ok(!defined($explicit_miss), 'explicit OR blind-call repeated-choice parser returns undef when no child parser succeeds at the required first iteration');
+};
+subtest 'blind_call_default_rule_meta_matches_repeated_choice_family' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Choice::
+ => First
+ => Second
+
+Explicit:OR
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for default and explicit repeated-choice blind-call rules');
+
+    is($descr->{spec}{Choice}{meta}{handler_variant}, 'REP_BCODE', 'default blind-call rule maps to REP_BCODE');
+    is($descr->{spec}{Choice}{meta}{action_mode}, 'blind_call', 'default blind-call rule keeps blind_call action mode');
+    is($descr->{spec}{Choice}{meta}{execution_shape}, 'repeat_loop', 'default blind-call rule reports repeated-choice execution shape');
+    is($descr->{spec}{Choice}{meta}{node_type}, 'default', 'default blind-call rule keeps default node type while selecting repeated-choice blind-call runtime');
+
+    is($descr->{spec}{Explicit}{meta}{handler_variant}, 'REP_BCODE', 'explicit OR blind-call rule maps to REP_BCODE');
+    is($descr->{spec}{Explicit}{meta}{action_mode}, 'blind_call', 'explicit OR blind-call rule keeps blind_call action mode');
+    is($descr->{spec}{Explicit}{meta}{execution_shape}, 'repeat_loop', 'explicit OR blind-call rule reports repeated-choice execution shape');
+    is($descr->{spec}{Explicit}{meta}{rep_min}, 1, 'explicit OR blind-call rule preserves the repeated-choice lower bound');
+    is($descr->{spec}{Explicit}{meta}{rep_max}, 10**9, 'explicit OR blind-call rule preserves the open upper bound sentinel');
+};
 subtest 'bootstrap_action_edge_default_index_matches_explicit_zero_index' => sub {
     plan tests => 8;
 

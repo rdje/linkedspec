@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Rule Modes: Harden Repeated-Choice Blind-Call Semantics
+
+Turned the previously tracked repeated-choice blind-call seam into explicit supported behavior.
+
+- Updated `perl/LinkedSpec/SpecEntry.pm` so `REP_BCODE` now repeats one child-choice step rather than reusing the ordered-sequence blind-call body.
+  - `:OR`, `:OR{...}`, and `:+` blind-call rules now use repeated-choice semantics instead of accidentally behaving like repeated `AND` sequences.
+  - historical bare `rule:` blind-call rules now also select the repeated-choice blind-call handler family at runtime rather than falling through without a matching handler variant.
+- Updated `perl/LinkedSpec/RuleIR.pm` so bare blind-call rules plan into the repeated-choice blind-call handler family consistently.
+- Added regression coverage in `t/phase0_regression.t` for:
+  - explicit `:OR` blind-call runtime behavior,
+  - bare `rule:` blind-call runtime behavior,
+  - and metadata/runtime parity across the repeated-choice blind-call family.
+- Expanded `USER_GUIDE_RuleModesAndSplit.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so repeated-choice blind-call is no longer described as only a clarification seam.
+
 ## 2026-03-19 - Docs/Test Slice: Clarify Blind-Call Mode Selection
 
 Expanded the rule-mode contract again so future implementation does not silently drift into “blind-call means ordered sequence by default.”

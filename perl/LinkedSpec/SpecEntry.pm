@@ -351,6 +351,31 @@ sub _build_and_acode_variant {
  return _build_and_acode_sequence_body(%args)
 }
 
+sub _build_or_bcode_choice_body {
+ my (%args) = @_;
+ my $bcodes = $args{bcodes} // '';
+ return undef unless length $bcodes;
+ my $label = $args{label};
+ my $actual_lxcode = $args{actual_lxcode} // '';
+ my $actual_ecode = $args{actual_ecode} // '';
+ my $bcalls = $args{bcalls} // '';
+ return '
+
+  my $'.$label.';
+  foreach my $call (qw('.$bcalls.')) {
+   my $current_call = $call;
+
+   '.$bcodes.'
+
+   if ($'.$label.') {
+    '.($actual_lxcode || 'return $'.$label).'
+   }
+  }
+
+  '.($actual_ecode || 'return undef').'
+ '
+}
+
 sub _build_or_acode_variant {
  my (%args) = @_;
  my $acodes = $args{acodes} // '';
@@ -376,30 +401,61 @@ sub _build_or_acode_variant {
 
 sub _build_or_bcode_variant {
  my (%args) = @_;
- my $bcodes = $args{bcodes} // '';
- return undef unless length $bcodes;
- my $label = $args{label};
- my $actual_lxcode = $args{actual_lxcode} // '';
- my $actual_ecode = $args{actual_ecode} // '';
- my $bcalls = $args{bcalls} // '';
- return '
-
-  my $'.$label.';
-  foreach my $call (qw('.$bcalls.')) {
-   my $current_call = $call;
-
-   '.$bcodes.'
-
-   if ($'.$label.') {
-    '.($actual_lxcode || 'return $'.$label).'
-   }
-  }
-
-  '.($actual_ecode || 'return undef').'
- '
+ return _build_or_bcode_choice_body(%args)
 }
 
 sub _build_rep_bcode_variant {
+ my (%args) = @_;
+ my ($min, $max) = _resolve_rep_bounds(%args);
+ if (!defined($min) || !defined($max)) {
+  my $node_type = $args{node_type} // '';
+  if ($node_type eq 'default') {
+   ($min, $max) = (1, 10**9);
+  }
+ }
+ return undef unless defined $min && defined $max;
+
+ my $label = $args{label};
+ my $actual_itcode = $args{actual_itcode} // '';
+ my $actual_excode = $args{actual_excode} // '';
+ my $actual_ecode = $args{actual_ecode} // '';
+ my $or_code = _build_or_bcode_choice_body(
+  %args,
+  actual_ecode => 'return undef',
+ );
+ return undef unless defined $or_code;
+
+ return '
+   my $min='.$min.';
+   my $max='.$max.';
+   my $'.$label.';
+   my @'.$label.'_collect;
+
+   my $ccount = 0;
+   my $or_code = sub {eval \''.$or_code.'\'};
+
+   while(1) {
+    my $or_ret = $or_code->();
+    unless ($or_ret) {
+     if ($ccount >= $min) {
+      '.($actual_excode || 'return \@'.$label.'_collect').'
+     } else {
+      return undef
+     }
+    }
+
+    ++$ccount;
+
+    '.($actual_itcode || 'push @'.$label.'_collect, $or_ret;').'
+
+    last unless $ccount < $max
+   }
+
+   '.($actual_ecode || 'return \@'.$label.'_collect').'
+   '
+}
+
+sub _build_rep_and_bcode_variant {
  my (%args) = @_;
  my ($min, $max) = _resolve_rep_bounds(%args);
  return undef unless defined $min && defined $max;
@@ -442,11 +498,6 @@ sub _build_rep_bcode_variant {
 
    '.($actual_ecode || 'return \@'.$label.'_collect').'
    '
-}
-
-sub _build_rep_and_bcode_variant {
- my (%args) = @_;
- return _build_rep_bcode_variant(%args)
 }
 
 sub _build_rep_and_acode_variant {
@@ -568,6 +619,7 @@ sub _build_handler_variants {
  my $isOR  = $node_type =~ /OR/o;
  my $isREP = $node_type =~ /REP_/o;
  my $isREP_AND = $node_type =~ /REP_AND/o;
+ my $isDEFAULT_BCODE_REP = !$isAND && !$isOR && !$isREP && length($bcodes);
 
  my %handlers;
  my $default = _build_default_handler_variant(
@@ -620,7 +672,7 @@ sub _build_handler_variants {
   );
   $handlers{OR_BCODE} = $v if defined $v;
  }
- if ($isREP && length($bcodes)) {
+ if (($isREP || $isDEFAULT_BCODE_REP) && length($bcodes)) {
   my $v = _build_rep_bcode_variant(
    %args,
    label     => $label,

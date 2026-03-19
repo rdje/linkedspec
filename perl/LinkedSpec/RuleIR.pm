@@ -29,6 +29,7 @@ sub _select_rule_handler_variant {
  return 'REP_AND_BCODE' if $node_type =~ /REP_AND/o && $bcode_count;
  return 'REP_ACODE' if $node_type =~ /REP_/o && $acode_count;
  return 'REP_BCODE' if $node_type =~ /REP_/o && $bcode_count;
+ return 'REP_BCODE' if $node_type eq 'default' && $bcode_count;
 
  if ($node_type =~ /AND/o && $acode_count) {
   return $regex_count == 1 ? 'AND_SINGLE_ACODE' : 'AND_ACODE';

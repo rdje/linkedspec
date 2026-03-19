@@ -629,8 +629,8 @@ The point is that:
 
 That makes blind-call useful for the kind of multi-pass extraction workflow where you first isolate chunks and then parse those chunks more deeply in a second pass.
 
-### Current Caution On Repeated-Choice Blind Calls
-Blind-call repetition on the repeated-choice family exists in the runtime, but it is not yet the cleanest or best-explained starting point.
+### Repeated-Choice Blind Calls
+Repeated-choice blind-call is now part of the supported current surface too.
 
 One important design point is already clear, though:
 - blind-call does **not** implicitly switch a rule into ordered-sequence behavior,
@@ -645,8 +645,30 @@ So:
 So the current guidance is:
 - if you want blind-call orchestration, prefer the ordered-sequence blind-call family (`:&`, `:AND`, `:AND+`, `:AND{...}`),
 - if you want one wrapper choice among child parsers, prefer `:|`,
-- if you do need repeated-choice blind-call behavior, prefer the explicit `:OR` / `:OR{...}` spellings over relying on bare `rule:` as shorthand,
-- and treat blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) as an advanced compatibility surface until that contract is clarified more explicitly.
+- and if you want repeated-choice blind-call behavior, prefer the explicit `:OR` / `:OR{...}` spellings when you want to make that intent obvious at a glance.
+
+The repeated-choice blind-call family now means:
+- bare `rule:` with `=> child_rule` follows the repeated-choice baseline,
+- `rule:OR` is the explicit worded repeated-choice blind-call spelling,
+- `rule:OR{...}` is the bounded repeated-choice blind-call spelling,
+- and `rule:+` stays the compact one-or-more repeated-choice spelling.
+
+Representative repeated-choice blind-call shape:
+
+```text
+chunk_stream:OR
+ => chunk_header
+ => chunk_body
+ => chunk_footer
+```
+
+That means:
+- on each iteration, try the child rules in order,
+- keep the first child parser that succeeds for that iteration,
+- collect that child result,
+- then repeat until no child parser succeeds or the rule hits its upper bound.
+
+So repeated-choice blind-call is real supported surface now, even if `:AND` and `:|` are still often the clearest starting points for day-to-day authoring.
 
 ## What Is Still Deferred
 There is no extra shorthand in this immediate rule-mode family still waiting to land.
@@ -752,7 +774,7 @@ The current supported contract is:
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
 - blind-call `=> child_rule` is a real current advanced rule-body surface and should not be mixed with `-> child_rule` inside one rule,
 - the clearest documented blind-call shapes today are ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`),
-- repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` is still a tracked clarification seam rather than the recommended starting point,
+- repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
