@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `slice(...)`
+
+Extended the method-like DSL migration track with the missing middle-window array helper. Fluent and structured authoring now agree on representative `slice(...)` flows across array assignments, direct `return(payload)` expressions, reducer composition, and nested `scalar(container, index)` reads on both action-edge and lifecycle surfaces.
+
+- Added `slice(array_expr, start)` and `slice(array_expr, start, count)` lowering for:
+  - direct working arrays such as `slice(array(parts), 1)` and `slice(array(parts), 1, 2)`,
+  - projected arrays such as `slice(sorted_keys(hash(meta)), 1, 2)`,
+  - composed array-valued expressions such as `slice(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))`,
+  - and reducer/nested-read compositions such as `count(slice(sorted_keys(hash(meta)), 1, 2))` and `scalar(slice(sorted_keys(hash(meta)), 1, 1), 0)`.
+- Explicit semantics:
+  - `slice(...)` stays a pure array-valued helper,
+  - `slice(array_expr, start)` keeps every entry from `start` through the end,
+  - `slice(array_expr, start, count)` keeps at most `count` entries from that start,
+  - invalid or negative `start` / `count` values clamp to `0`,
+  - and undefined sources, out-of-range starts, or non-positive counts yield `[]` instead of `undef`.
+- Expanded the user guides with fuller examples showing `slice(...)` in assignments, direct returns, flow comparisons, the scalar/aggregate cookbook, and the emitted Perl reference.
+
 ## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `index_of(...)`
 
 Extended the method-like DSL migration track with the missing first-match array lookup helper. Fluent and structured authoring now agree on representative `index_of(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric/definedness flow comparisons on both action-edge and lifecycle surfaces.

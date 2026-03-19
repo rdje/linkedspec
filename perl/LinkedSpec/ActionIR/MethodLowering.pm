@@ -170,7 +170,7 @@ sub _normalize_method_tag_expr {
 # Purpose : Lower method DSL value expressions (`call(...)`, `scalar(...)`,
 #           `array(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
-#           `length(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
+#           `length(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
 #           `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
@@ -257,7 +257,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -958,7 +958,41 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   return 'do { my $__ls_take = '.$lowered_target.'; if (defined($__ls_take) && ref($__ls_take) eq \'ARRAY\') { my $__ls_take_len = scalar(@{$__ls_take}); $__ls_take_len ? [@{$__ls_take}[0 .. 0]] : [] } else { [] } }'
    unless $take_has_explicit_count;
-  return 'do { my $__ls_take = '.$lowered_target.'; if (defined($__ls_take) && ref($__ls_take) eq \'ARRAY\') { my $__ls_take_count = '.$take_count_expr.'; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }';
+ return 'do { my $__ls_take = '.$lowered_target.'; if (defined($__ls_take) && ref($__ls_take) eq \'ARRAY\') { my $__ls_take_count = '.$take_count_expr.'; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }';
+ }
+ if ($method_call && $method_call->{method} eq 'slice') {
+  my $slice_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 3);
+  return undef unless $slice_args;
+
+  my $target_expr = $trim_action_ir_value->($slice_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+
+  my $slice_start_expr = _lower_method_value_expr($slice_args->[1], $deps);
+  $slice_start_expr = $trim_action_ir_value->($slice_args->[1]) unless defined($slice_start_expr) && length($slice_start_expr);
+  return undef unless defined($slice_start_expr) && length($slice_start_expr);
+
+  my $slice_has_explicit_count = (@{$slice_args} > 2 && defined($slice_args->[2])) ? 1 : 0;
+  my $slice_count_expr;
+  if ($slice_has_explicit_count) {
+   $slice_count_expr = _lower_method_value_expr($slice_args->[2], $deps);
+   $slice_count_expr = $trim_action_ir_value->($slice_args->[2]) unless defined($slice_count_expr) && length($slice_count_expr);
+   return undef unless defined($slice_count_expr) && length($slice_count_expr);
+  }
+
+  my $array_symbol = $extract_array_symbol_name->($target_expr);
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); $__ls_slice_len > $__ls_slice_start ? [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_len - 1]] : [] }'
+    unless $slice_has_explicit_count;
+   return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = '.$slice_count_expr.'; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_end]] } else { [] } }';
+  }
+
+  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+  return undef unless defined($lowered_target) && length($lowered_target);
+
+  return 'do { my $__ls_slice = '.$lowered_target.'; if (defined($__ls_slice) && ref($__ls_slice) eq \'ARRAY\') { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); $__ls_slice_len > $__ls_slice_start ? [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_len - 1]] : [] } else { [] } }'
+   unless $slice_has_explicit_count;
+  return 'do { my $__ls_slice = '.$lowered_target.'; if (defined($__ls_slice) && ref($__ls_slice) eq \'ARRAY\') { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = '.$slice_count_expr.'; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }';
  }
  if ($method_call && $method_call->{method} eq 'take_last') {
   my $take_last_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 2);
@@ -1478,7 +1512,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -1486,7 +1520,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

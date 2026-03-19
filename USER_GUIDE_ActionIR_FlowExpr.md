@@ -246,6 +246,7 @@ contains_substr(lowercase(trim(scalar(name))), "node")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
+num_gt(count(slice(sorted_keys(hash(meta)), 1, 2)), 0)
 num_gt(count(tail(sorted_keys(hash(meta)))), 0)
 num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)
@@ -324,6 +325,12 @@ num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")),
 num_gt(count(take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 1)
 ```
 
+### Example: projected object still has any stable keys in one middle slice view
+
+```text
+num_gt(count(slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 1, 2)), 0)
+```
+
 ### Example: projected object still has any stable keys in its suffix view
 
 ```text
@@ -340,11 +347,13 @@ num_gt(count(drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stag
 - reducers like `count(...)` can wrap composed array helpers such as `drop_last(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take_last(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
+- reducers like `count(...)` can wrap composed array helpers such as `slice(sorted_keys(...), 1, 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
 - scalar predicate helpers like `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
 - the same pattern works when you want one trimmed leading array via `count(drop_last(sorted_keys(...), scalar(drop_count)))`,
 - the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), scalar(take_last_count)))`,
 - the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,
+- the same pattern works when you want one bounded middle window via `count(slice(sorted_keys(...), scalar(slice_start), scalar(slice_count)))`,
 - the same pattern works with explicit counts like `count(tail(sorted_keys(...), scalar(skip_count)))`,
 - so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
 - and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.

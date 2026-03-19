@@ -445,6 +445,8 @@ Typical patterns:
 - `index_of(...)`
 - `take(...)`
 - `take(..., n)`
+- `slice(..., start)`
+- `slice(..., start, n)`
 - `take_last(...)`
 - `take_last(..., n)`
 - `drop_last(...)`
@@ -479,6 +481,7 @@ Typical patterns:
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - first-match scalar indices from `index_of(array_expr, needle_expr)` over direct and composed array-valued expressions
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
+- middle-window arrays from `slice(array_expr, scalar(slice_start))` and bounded middle-window arrays from `slice(array_expr, scalar(slice_start), scalar(slice_count))`
 - suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
 - trailing-drop arrays from `drop_last(array_expr)` and counted trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
 - trailing-drop aliases from `drop_back(array_expr)` and counted trailing-drop aliases from `drop_back(array_expr, scalar(drop_count))`

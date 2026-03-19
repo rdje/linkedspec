@@ -5541,7 +5541,7 @@ SPEC
     ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
-    plan tests => 75;
+    plan tests => 80;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return_imatch(Top, group_open)'),
@@ -5792,6 +5792,31 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(take(sorted_keys(hash(meta)), 2), 0))}),
         q{return do { my $__ls_scalar_source = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
         'take(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(slice(sorted_keys(hash(meta)), 1))}),
+        q{return do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); $__ls_slice_len > $__ls_slice_start ? [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_len - 1]] : [] } else { [] } }},
+        'return(payload) accepts slice(projected-array-expression, start) lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(slice(sorted_keys(hash(meta)), 1, 2))}),
+        q{return do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }},
+        'return(payload) accepts slice(projected-array-expression, start, literal-count) lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(start_idx), scalar(slice_count)))}),
+        q{@middle_keys = do { my $__ls_slice = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = $start_idx; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = $slice_count; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }},
+        'assign helper accepts slice(projected-array-expression, scalar-start, scalar-count) array source lowering'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(slice(sorted_keys(hash(meta)), 1, 2)), 0)}),
+        q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        'slice(..., start, count) composes inside count(...) and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(slice(sorted_keys(hash(meta)), 1, 1), 0))}),
+        q{return do { my $__ls_scalar_source = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 1; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
+        'slice(..., start, count) remains a real array-valued helper for nested scalar(container, index) reads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(take_last(sorted_keys(hash(meta))))}),
@@ -23165,6 +23190,90 @@ SPEC
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle take fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_slice_array_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, middle_keys).declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle).assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))).assign(scalar(middle_count), count(array(middle_keys))).assign(scalar(first_middle), scalar(array(middle_keys), 0)).return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle)))
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))); assign(scalar(middle_count), count(array(middle_keys))); assign(scalar(first_middle), scalar(array(middle_keys), 0)); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle))) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge slice helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge slice helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge slice helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge slice helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge slice helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge slice helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge slice helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge slice helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge slice helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge slice helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge slice helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge slice fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_slice_array_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, middle_keys).declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle).assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))).assign(scalar(middle_count), count(array(middle_keys))).assign(scalar(first_middle), scalar(array(middle_keys), 0)).return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle)))
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))); assign(scalar(middle_count), count(array(middle_keys))); assign(scalar(first_middle), scalar(array(middle_keys), 0)); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle))) }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle slice helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle slice helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle slice helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle slice helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle slice helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle slice helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle slice helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle slice helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle slice helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle slice helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle slice helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle slice fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_take_last_array_helpers_lower_equivalently' => sub {

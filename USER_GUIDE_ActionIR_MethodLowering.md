@@ -1018,6 +1018,46 @@ if(num_gt(count(take(sorted_values(pick_keys(hash(meta), "kind", "source", "stag
 return(hash("first_keys", take(sorted_keys(hash(meta))), "first_count", count(take(sorted_keys(hash(meta)), 2))))
 ```
 
+## `slice(array_or_array_expr, start_index)` and `slice(array_or_array_expr, start_index, take_count)`
+Use `slice(...)` when you want one middle array value that starts at one explicit zero-based position, optionally bounded to one explicit item count.
+
+Examples:
+
+```text
+slice(array(parts), 1)
+slice(array(parts), 1, 2)
+slice(sorted_keys(hash(meta)), 1)
+slice(sorted_keys(hash(meta)), scalar(slice_start), scalar(slice_count))
+slice(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 1, 2)
+slice(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(slice_start))
+```
+
+Typical uses:
+- keep one middle window of tokens/items without spelling raw Perl slicing,
+- preserve one stable interior subset of projected keys or values as one explicit summary payload,
+- derive one bounded subarray that still composes with reducers like `count(...)`,
+- and feed one middle array directly into nested reads like `scalar(slice(...), 0)` when one later step needs the first kept item.
+
+Important semantic note:
+- `slice(array_expr, start_index)` keeps every entry from `start_index` through the end of the source array,
+- `slice(array_expr, start_index, take_count)` keeps at most `take_count` entries starting at `start_index`,
+- `start_index` and `take_count` must be integer-like scalar expressions when supplied,
+- negative or otherwise invalid `start_index` / `take_count` values clamp to `0`,
+- `slice(projected_array_expr, ...)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, `concat_arrays(...)`, and array-valued `coalesce(...)` chains,
+- `slice(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, the start position is already beyond the end, or the requested count is non-positive, `slice(...)` returns one empty array instead of `undef`.
+
+Examples in context:
+
+```text
+assign(array(middle_parts), slice(array(parts), 1))
+assign(array(middle_parts), slice(array(parts), 1, 2))
+assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count)))
+assign(scalar(middle_count), count(slice(sorted_keys(hash(meta)), 1, 2)))
+assign(scalar(first_middle_key), scalar(slice(sorted_keys(hash(meta)), 1, 1), 0))
+return(hash("middle_keys", slice(sorted_keys(hash(meta)), 1, 2), "middle_count", count(slice(sorted_keys(hash(meta)), 1, 2))))
+```
+
 ## `take_last(array_or_array_expr)` and `take_last(array_or_array_expr, take_last_count)`
 Use `take_last(...)` when you want one array value containing the last element, or the last `N` elements when an explicit count is supplied.
 

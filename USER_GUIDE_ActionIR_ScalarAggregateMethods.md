@@ -149,6 +149,46 @@ So the usual parser-oriented pattern can stay compact:
 - reduce it to one scalar,
 - keep the whole chain inside one composable value expression.
 
+### Middle-array extraction with `slice(...)`
+`slice(...)` is the parser-oriented helper for “start at this array position, and optionally keep only this many items”.
+
+Examples:
+
+```text
+slice(array(parts), 1)
+slice(array(parts), 1, 2)
+slice(sorted_keys(hash(meta)), 1)
+slice(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))
+slice(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(slice_start))
+```
+
+Use `slice(...)` when:
+- `tail(...)` is too coarse because you need one later starting point rather than only “drop the first one or first `N`,”
+- `take(...)` is too coarse because you need one middle window rather than a prefix,
+- one rule wants to keep processing one canonical middle subarray without temporary staging arrays,
+- or one later reducer / nested read still needs to compose directly on that kept middle array.
+
+Examples in context:
+
+```text
+assign(array(middle_parts), slice(array(parts), 1))
+assign(array(middle_parts), slice(array(parts), 1, 2))
+assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count)))
+assign(scalar(middle_count), count(slice(sorted_keys(hash(meta)), 1, 2)))
+assign(scalar(first_middle_key), scalar(slice(sorted_keys(hash(meta)), 1, 1), 0))
+return(hash(
+  "middle_keys", slice(sorted_keys(hash(meta)), 1, 2),
+  "middle_count", count(slice(sorted_keys(hash(meta)), 1, 2))
+))
+```
+
+Important semantic note:
+- `slice(array_expr, start_index)` keeps everything from `start_index` through the end,
+- `slice(array_expr, start_index, take_count)` keeps at most `take_count` items starting there,
+- negative or invalid `start_index` / `take_count` values clamp to `0`,
+- if the source is undefined, the start is already out of range, or the count is non-positive, the result is `[]`,
+- and `slice(...)` stays array-valued, so it composes naturally with `count(...)`, `join_values(...)`, `concat_arrays(...)`, `take(...)`, `tail(...)`, and nested `scalar(container, index)` reads.
+
 ### Scalar text normalization
 These helpers keep common string cleanup inside the canonical value-expression layer:
 - `trim(value)`
