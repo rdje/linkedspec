@@ -54,6 +54,43 @@ token_stream:
 
 Treat that as the current baseline LinkedSpec rule model. It is the baseline we should keep explicit and stable before layering richer grouped repetition on top.
 
+For authoring purposes, the clearest mental model is:
+
+```text
+rule:
+```
+
+means implicit repeated choice:
+
+```text
+rule:OR{1,}
+```
+
+and conceptually corresponds to `OR+`.
+
+That mapping matters because:
+- bare `rule:` is the historical default repeated-alternative behavior,
+- `rule:|` is the separate single-choice dispatch surface,
+- and the worded `OR{...}` family now makes the repeated-choice baseline explicit when you need bounds.
+
+Plain standalone `OR` is not a separate supported rule-label spelling today. If that spelling is introduced later, it should follow this same repeated-choice reading rather than the single-choice `rule:|` behavior.
+
+Representative equivalence example:
+
+```text
+item_list:
+ /[A-Za-z_]\w*/ -> item_list
+ /"(?:[^"\\]|\\.)*"/ -> item_list
+```
+
+is the same repeated-choice idea as:
+
+```text
+item_list:OR{1,}
+ /[A-Za-z_]\w*/ -> item_list
+ /"(?:[^"\\]|\\.)*"/ -> item_list
+```
+
 ### `:&` ordered sequence
 `:&` means ordered sequence.
 

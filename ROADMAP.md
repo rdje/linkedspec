@@ -366,8 +366,8 @@ This is a saved future-enhancement note, not an active implementation item.
   - should continue to be treated as today’s baseline semantics rather than being silently reinterpreted as a richer combinator language.
 - Working interpretation note:
   - the current rule shape is closer to repeated alternative extraction over subrules than to a full grammar-combinator algebra,
-  - so it can be thought of as roughly `OR+`-like in intent,
-  - but this is only a design shorthand, not a promise that LinkedSpec currently implements full regex-style or parser-combinator `OR+` semantics.
+  - and the authoring-level reading should now be treated as implicit `OR+`, i.e. the same repeated-choice baseline as `OR{1,}`,
+  - while still avoiding any claim that LinkedSpec implements a full general parser-combinator algebra.
 - Current baseline support that should now be treated as explicit contract:
   - rule-label suffixes `:&`, `:|`, `:+`, `:*`, and `:?` are current supported surfaces,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
