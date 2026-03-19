@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Tests: Lock Open-Ended Regex Slot Indexing
+
+Turned the “no artificial regex-slot cap” wording into explicit supported contract.
+
+- Added focused regression coverage in `t/phase0_regression.t` for a representative four-regex rule using:
+  - `-> A`
+  - `-> A[1]`
+  - `-> A[2]`
+  - `-> A[3]`
+- The new test locks the bootstrap-lowered `reidx` values `0`, `1`, `2`, and `3`, so the slot-indexing model is explicitly protected beyond the earlier three-slot examples.
+- Expanded `USER_GUIDE.md` with a fuller action-edge indexing example that now includes a fourth regex slot and states plainly that `-> rule[3]`, `-> rule[4]`, and higher follow the same `(N+1)`th-regex rule without a tiny DSL-fixed maximum.
+- Updated `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future implementation work treats open-ended regex-slot indexing as a tracked contract rather than a parser-owner assumption.
+
 ## 2026-03-19 - Docs/Tests: Lock Paragraph-Based Rule Body Ordering Contract
 
 Turned the recently clarified `.spec` file-structure explanation into explicit supported contract.

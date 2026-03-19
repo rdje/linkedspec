@@ -263,9 +263,11 @@ A:
  /[A-Za-z_]\w*/
  /"(?:[^"\\]|\\.)*"/
  /\d+/
+ /[^\s,;]+/
  -> A
  -> A[1]
  -> A[2]
+ -> A[3]
 
 B:
  -> A
@@ -275,12 +277,18 @@ The practical reading is:
 - inside `A`, plain `-> A` means `-> A[0]`, so it recurses through the first regex,
 - `-> A[1]` targets the second regex of `A`,
 - `-> A[2]` targets the third regex of `A`,
+- `-> A[3]` targets the fourth regex of `A`,
 - and a different rule such as `B` will usually just use `-> A` to enter `A` through its first regex entrypoint.
 
 So the mechanical rule is general, but the normal authoring pattern is narrower:
-- use `-> A`, `-> A[1]`, `-> A[2]`, ... inside rule `A` when `A` is recursive and needs to choose among its own regex slots,
+- use `-> A`, `-> A[1]`, `-> A[2]`, `-> A[3]`, ... inside rule `A` when `A` is recursive and needs to choose among its own regex slots,
 - use `-> B` or `-> B[0]` from another rule when you simply want rule `B`'s default first entrypoint,
 - and treat cross-rule `-> B[N]` with `N > 0` as unusual rather than normal authoring style.
+
+There is no tiny DSL-fixed cap here. If a rule genuinely needs four, five, or more regex slots, the indexing model stays the same:
+- `-> rule[3]` means the fourth regex,
+- `-> rule[4]` means the fifth regex,
+- and so on.
 
 An explicit side-by-side equivalence example can help:
 

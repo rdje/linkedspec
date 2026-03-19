@@ -4680,6 +4680,29 @@ SPEC
     is($parse->[0][4][1]{relabel}, 'A', 'second regex-slot action-edge still targets rule A');
     is($parse->[0][6][1]{relabel}, 'A', 'third regex-slot action-edge still targets rule A');
 };
+subtest 'bootstrap_action_edge_indexed_slots_stay_open_ended_beyond_three_regexes' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+A:
+ /a/ -> A { return_a(A) }
+ /b/ -> A[1] { return_a(A) }
+ /c/ -> A[2] { return_a(A) }
+ /d/ -> A[3] { return_a(A) }
+SPEC
+
+    my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($ok, 'bootstrap parse succeeds for four-regex indexed action-edge targets');
+    is($err, '', 'four-regex indexed action-edge target parse reports no bootstrap error');
+    is($parse->[0][2][1]{reidx}, 0, 'plain -> A still targets the first regex slot');
+    is($parse->[0][4][1]{reidx}, 1, '-> A[1] targets the second regex slot');
+    is($parse->[0][6][1]{reidx}, 2, '-> A[2] targets the third regex slot');
+    is($parse->[0][8][1]{reidx}, 3, '-> A[3] targets the fourth regex slot');
+    is($parse->[0][2][1]{relabel}, 'A', 'first regex-slot action-edge still targets rule A in four-slot rules');
+    is($parse->[0][4][1]{relabel}, 'A', 'second regex-slot action-edge still targets rule A in four-slot rules');
+    is($parse->[0][6][1]{relabel}, 'A', 'third regex-slot action-edge still targets rule A in four-slot rules');
+    is($parse->[0][8][1]{relabel}, 'A', 'fourth regex-slot action-edge still targets rule A in four-slot rules');
+};
 subtest 'action_edge_default_index_matches_explicit_zero_index_at_runtime' => sub {
     plan tests => 8;
 
