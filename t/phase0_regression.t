@@ -5398,6 +5398,95 @@ PERL
     like($out, qr/DSL Error at line 3:/, 'non-rule preamble diagnostic points at the first non-comment preamble line');
     is($err, '', 'non-rule preamble validation subprocess does not emit stderr');
 };
+subtest 'validation_accepts_split_markers_as_supported_rule_paragraph_members' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ @capture_from_here
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'split-marker paragraph validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation still accepts split markers as supported top-level rule paragraph members');
+    unlike($out, qr/Unsupported top-level rule paragraph content/, 'split markers do not trigger the new top-level paragraph-content diagnostic');
+    is($err, '', 'split-marker paragraph validation subprocess does not emit stderr');
+};
+subtest 'validation_accepts_dot_prefixed_multiline_fluent_continuations' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ -> Leaf
+   .if(scalar(on))
+     .return_undef()
+   .endif()
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'dot-continuation validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation still accepts dot-prefixed multiline fluent continuation lines as supported rule paragraph members');
+    unlike($out, qr/Unsupported top-level rule paragraph content/, 'dot-prefixed multiline continuations do not trigger the new top-level paragraph-content diagnostic');
+    is($err, '', 'dot-continuation validation subprocess does not emit stderr');
+};
+subtest 'validation_accepts_multiline_fluent_control_and_body_continuations' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top.if(scalar(on)) {
+  declare(array, events)
+  return_undef()
+ } elseif(scalar(alt_on))
+  say("alt")
+  return_undef()
+ else {
+  return_undef()
+ }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'multiline fluent control/body continuation validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts multiline fluent control/body continuation lines as supported rule paragraph members');
+    unlike($out, qr/Unsupported top-level rule paragraph content/, 'multiline fluent control/body continuation lines do not trigger the new top-level paragraph-content diagnostic');
+    is($err, '', 'multiline fluent control/body continuation validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_unsupported_top_level_rule_paragraph_content' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ random garbage
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unsupported paragraph-content validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects unsupported top-level rule paragraph content before bootstrap parse');
+    like($out, qr/Unsupported top-level rule paragraph content/, 'unsupported paragraph-content diagnostic is reported early');
+    like($out, qr/After a rule start, use regexes, lifecycle\/code blocks, action edges, blind calls, split markers, or start the next rule/, 'unsupported paragraph-content guidance explains the allowed top-level paragraph member families');
+    is($err, '', 'unsupported paragraph-content validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_extra_colon_rule_labels' => sub {
     plan tests => 4;
 

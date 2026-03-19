@@ -76,6 +76,7 @@ In practice that means a rule paragraph can contain:
 - and blind-call edges like `=> helper`, which directly invoke another rule as a parser step instead of selecting one of the current rule's regex slots.
 
 The important point is that, after the rule-start token, those elements are paragraph members, not a rigid line-by-line grammar with one forced ordering.
+That still does not mean “arbitrary text is valid there.” At top level inside a rule paragraph, validation now expects supported paragraph members such as regexes, lifecycle/code blocks, action edges, blind calls, split markers, multiline fluent continuation lines (including dot-prefixed carrier lines and method-like continuation body/control lines), or the next rule start. Stray text like `random garbage` at top level inside a rule paragraph is rejected early.
 
 ### The natural convention versus the real grammar
 There is a natural house style that most specs follow:

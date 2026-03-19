@@ -371,7 +371,16 @@ sub validate_dsl_syntax {
     "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'");
    return 0;
   } elsif ($current_rule) {
-   my $edge_scan = _scan_rule_edges_in_fragment($line, $current_rule->{edge_scan_depth} // 0);
+   my $start_depth = $current_rule->{edge_scan_depth} // 0;
+   if ($start_depth == 0 && !_looks_like_supported_rule_paragraph_member_line($line)) {
+    my $position = index($$spec_content, $line);
+    report_dsl_error($spec_content, $position,
+     "Unsupported top-level rule paragraph content",
+     "After a rule start, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or start the next rule");
+    return 0;
+   }
+
+   my $edge_scan = _scan_rule_edges_in_fragment($line, $start_depth);
    if ($edge_scan->{error}) {
     my $position = index($$spec_content, $line);
     return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error});
@@ -438,6 +447,24 @@ sub validate_dsl_syntax {
  }
 
  return 1;
+}
+
+sub _looks_like_supported_rule_paragraph_member_line {
+ my ($line) = @_;
+ return 0 unless defined $line;
+ return 1 if $line =~ /^\s*$/o;
+ return 1 if $line =~ /^\s*#/o;
+ return 1 if _parse_rule_label_line($line);
+ return 1 if $line =~ /^\s*\/(?:\\\\.|[^\/])*?(?<!\\)\//o;
+ return 1 if $line =~ /^\s*->/o;
+ return 1 if $line =~ /^\s*=>/o;
+ return 1 if $line =~ /^\s*@\s*(?:capture_from_here|move_pos)\b/o;
+ return 1 if $line =~ /^\s*-\?\s+\w+\b/o;
+ return 1 if $line =~ /^\s*\.\s*\w/o;
+ return 1 if $line =~ /^\s*\w+\s*\(/o;
+  return 1 if $line =~ /^\s*\w+\s*\{/o;
+  return 1 if $line =~ /^\s*\w+\s*\./o;
+  return 0;
 }
 
 sub _scan_rule_edges_in_fragment {

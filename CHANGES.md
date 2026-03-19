@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Unsupported Top-Level Rule Paragraph Content
+
+Extended the Phase 2 frontend-hardening track so arbitrary top-level garbage inside a rule paragraph is rejected during DSL validation instead of being silently tolerated.
+
+- Updated `perl/LinkedSpec/Validation.pm` so, once validation is at top level inside a rule paragraph, only supported paragraph-member starts are accepted:
+  - regex literals,
+  - lifecycle/code blocks,
+  - action edges,
+  - blind calls,
+  - split markers,
+  - multiline fluent continuation lines,
+  - or the next rule start.
+- Added focused regression coverage in `t/phase0_regression.t` so `@capture_from_here`, dot-prefixed multiline fluent carrier lines, and multiline fluent control/body continuation lines remain accepted as supported top-level paragraph members while stray lines like `random garbage` are now rejected early with targeted guidance.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that free-form rule-body ordering does not mean arbitrary top-level text is valid.
+
 ## 2026-03-19 - Validation: Reject Non-Rule Preamble Before First Rule
 
 Extended the Phase 2 frontend-hardening track so stray preamble text before the first rule paragraph is rejected during validation instead of being silently tolerated.
