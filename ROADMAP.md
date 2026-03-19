@@ -379,6 +379,9 @@ This is a saved future-enhancement note, not an active implementation item.
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
+  - blind-call `=> child_rule` remains a real advanced direct rule-call surface, with ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`) now the clearest documented forms,
+  - mixing `-> child_rule` and `=> child_rule` inside one rule remains invalid,
+  - blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) remains a tracked contract-clarification seam rather than the recommended starting point,
   - `@capture_from_here` is the preferred supported split-boundary cursor that advances the later capture baseline rather than acting as a standalone collector,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - Deferred enhancement direction, only after the current rule model is explicit and rock solid:

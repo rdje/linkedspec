@@ -440,6 +440,173 @@ What this means:
 - after the first full sequence group it keeps repeating the same ordered-sequence contract,
 - and this is the shorthand grouped spelling for the same family as `AND{1,}`.
 
+## Blind Calls: Direct Rule Invocation with `=>`
+Blind calls are the other rule-body edge family.
+
+They look like this:
+
+```text
+=> child_rule
+```
+
+and they mean something different from:
+
+```text
+-> child_rule
+```
+
+The short version is:
+- `-> child_rule` is regex-slot oriented,
+- `=> child_rule` is parser-step oriented.
+
+### What `=> child_rule` does
+When a rule uses blind calls, the parent rule is not selecting one of its own regex entry slots for that step.
+
+Instead, it directly invokes another rule as a parser step and works with that child rule's result.
+
+That is why blind calls are useful for wrapper and orchestration rules.
+
+Representative shape:
+
+```text
+record:AND
+ => header
+ => body
+ => trailer
+```
+
+The practical reading is:
+- first call `header`,
+- then call `body`,
+- then call `trailer`,
+- and treat the parent rule as the composition shell around those child parsers.
+
+### `-> child_rule` versus `=> child_rule`
+This distinction is worth keeping very explicit.
+
+`-> child_rule` means:
+- match through the current rule's regex/edge machinery,
+- and use `child_rule` as the action-edge target for that regex slot.
+
+`=> child_rule` means:
+- invoke `child_rule` directly as a parser step,
+- without treating this step as one of the current rule's own regex-slot action edges.
+
+That is why blind calls feel more like parser orchestration than regex-slot dispatch.
+
+### One Rule Should Use One Edge Family
+One current contract rule is strict:
+- do not mix `-> ...` action edges and `=> ...` blind calls inside the same rule.
+
+This is invalid today:
+
+```text
+bad_rule:
+ /.../
+ -> child_a
+ => child_b
+```
+
+Use one style or the other for a given rule body.
+
+### Best Current Blind-Call Shapes
+The most clearly documented blind-call shapes today are:
+- ordered-sequence wrappers,
+- repeated ordered-sequence wrappers,
+- and single-choice wrappers.
+
+#### Ordered sequence wrapper
+
+```text
+record:&
+ => header
+ => body
+ => trailer
+```
+
+or, spelled out:
+
+```text
+record:AND
+ => header
+ => body
+ => trailer
+```
+
+This is the cleanest blind-call authoring pattern today.
+
+It is a good fit when:
+- each child rule already owns its own anchors and local parsing,
+- and the parent rule exists mainly to say “these child parsers must succeed in this order.”
+
+#### Repeated ordered-sequence wrapper
+
+```text
+chunk_stream:AND+
+ => chunk_header
+ => chunk_body
+```
+
+or with bounds:
+
+```text
+chunk_stream:AND{2,4}
+ => chunk_header
+ => chunk_body
+```
+
+This is the natural continuation of the sequence-wrapper family when the whole blind-call sequence should repeat as one group.
+
+#### Single-choice wrapper
+
+```text
+atom:|
+ => quoted_string
+ => integer_literal
+ => bare_identifier
+```
+
+This is the cleanest blind-call choice pattern today.
+
+It is a good fit when:
+- the parent rule is really a wrapper around several child parsers,
+- the children already know how to parse themselves,
+- and the parent just needs to try them in order and keep the first one that succeeds.
+
+### Why Blind Calls Exist
+Blind calls make the most sense when the parent rule is mainly composition logic.
+
+That happens in patterns like:
+- wrapper rules,
+- staged outer orchestration,
+- coarse-to-fine parsing where child rules own the real local anchors,
+- and “super split” or segmentation passes where the parent rule coordinates child parsers instead of owning all the regex slots itself.
+
+Representative staged-orchestration sketch:
+
+```text
+segment_pass:AND
+ => segment_open
+ => segment_payload
+ => segment_close
+```
+
+The point of that shape is not that the parent has its own rich regex story.
+
+The point is that:
+- `segment_open`, `segment_payload`, and `segment_close` already know how to parse their own anchored regions,
+- and the parent rule exists to compose those parser steps into one coarser result.
+
+That makes blind-call useful for the kind of multi-pass extraction workflow where you first isolate chunks and then parse those chunks more deeply in a second pass.
+
+### Current Caution On Repeated-Choice Blind Calls
+Blind-call repetition on the repeated-choice family exists in the runtime, but it is not yet the cleanest or best-explained starting point.
+
+So the current guidance is:
+- if you want blind-call orchestration, prefer the ordered-sequence blind-call family (`:&`, `:AND`, `:AND+`, `:AND{...}`),
+- if you want one wrapper choice among child parsers, prefer `:|`,
+- and treat blind-call use on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}`) as an advanced compatibility surface until that contract is clarified more explicitly.
+
 ## What Is Still Deferred
 There is no extra shorthand in this immediate rule-mode family still waiting to land.
 
@@ -542,6 +709,9 @@ The current supported contract is:
 - explicit repeated-choice label `OR` is now supported on top of the same repeated-choice family,
 - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are supported on top of the current repeated-alternative model,
 - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are supported on top of the current ordered-sequence model,
+- blind-call `=> child_rule` is a real current advanced rule-body surface and should not be mixed with `-> child_rule` inside one rule,
+- the clearest documented blind-call shapes today are ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`),
+- repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` is still a tracked clarification seam rather than the recommended starting point,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
 - `@move_pos` remains a supported compatibility alias for the same lowering,

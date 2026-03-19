@@ -202,6 +202,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm`, `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`, `perl/LinkedSpec/ActionIR/ControlFlow.pm`, and `perl/LinkedSpec/ActionIR/RewritePipeline.pm` form one correctness-critical semicolon-light/attached-block flow seam.
   - `perl/LinkedSpec/SpecEntry.pm` plus `perl/LinkedSpec/Compiler.pm` still define the main backend-portability ceiling because runtime handlers are emitted as Perl source strings and evaled.
   - `perl/LinkedSpec/Validation.pm` still trails parts of the supported DSL surface and remains a Phase 2 hardening target, even though current rule-label syntax is now aligned there more closely.
+  - blind-call repetition on the repeated-choice family (`rule:`, `:OR`, `:+`, `:OR{...}` with `=> child`) still needs a crisper author-facing contract before it should be treated as a recommended first-choice surface.
 
 ## Deferred Future Note
 - Current baseline rule-mode contract is now explicit:
@@ -211,6 +212,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
   - explicit repeated-choice label `OR` is now supported on top of the current repeated-alternative rule model,
   - bounded repeated-choice labels `OR{N,M}`, `OR{N}`, `OR{N,}`, and `OR{,M}` are now supported on top of the current repeated-alternative rule model,
   - bounded repeated-sequence labels `AND{N,M}`, `AND{N}`, `AND{N,}`, and `AND{,M}` are now supported on top of the current ordered-sequence model,
+  - blind-call `=> child_rule` is now treated as a documented advanced rule-body surface, with ordered-sequence wrappers and single-choice wrappers as the clearest current forms,
   - `@capture_from_here` is the preferred split-boundary cursor feature for staged capture flows,
   - and `@move_pos` remains the compatibility alias for the same lowering.
 - A possible later enhancement is explicit rule-grouping beyond today’s default repeated-alternative rule model:

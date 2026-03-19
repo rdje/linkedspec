@@ -4209,6 +4209,86 @@ SPEC
     ok(!defined($explicit_short), 'explicit AND parser rejects incomplete ordered sequence');
     ok(!defined($sigil_short), 'ampersand AND parser rejects incomplete ordered sequence');
 };
+subtest 'get_return_descr_rule_meta_blind_call_sequence_and_choice_strategies' => sub {
+    plan tests => 15;
+
+    my $sequence_spec = <<'SPEC';
+Sequence::&
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $choice_spec = <<'SPEC';
+Choice::|
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $sequence_descr = LinkedSpec::Get(\$sequence_spec, return_descr => 1);
+    ok(defined($sequence_descr) && ref($sequence_descr) eq 'HASH', 'return_descr mode returns descriptor hash for blind-call sequence rules');
+
+    ok(exists $sequence_descr->{spec}{Sequence}{meta}, 'Sequence blind-call rule includes execution metadata');
+    is($sequence_descr->{spec}{Sequence}{meta}{handler_variant}, 'AND_BCODE', 'Sequence blind-call rule maps to AND_BCODE');
+    is($sequence_descr->{spec}{Sequence}{meta}{action_mode}, 'blind_call', 'Sequence blind-call rule reports blind_call action mode');
+    is($sequence_descr->{spec}{Sequence}{meta}{execution_shape}, 'and_call_loop', 'Sequence blind-call rule reports ordered blind-call loop execution shape');
+    is($sequence_descr->{spec}{Sequence}{meta}{bcode_count}, 2, 'Sequence blind-call rule preserves blind-call count');
+    is($sequence_descr->{spec}{Sequence}{meta}{regex_count}, 0, 'Sequence blind-call rule does not report regex slots on the blind-call wrapper rule itself');
+    ok($sequence_descr->{spec}{Sequence}{meta}{uses_loop}, 'Sequence blind-call rule reports loop execution');
+
+    my $choice_descr = LinkedSpec::Get(\$choice_spec, return_descr => 1);
+    ok(defined($choice_descr) && ref($choice_descr) eq 'HASH', 'return_descr mode returns descriptor hash for blind-call choice rules');
+    is($choice_descr->{spec}{Choice}{meta}{handler_variant}, 'OR_BCODE', 'Choice blind-call rule maps to OR_BCODE');
+    is($choice_descr->{spec}{Choice}{meta}{action_mode}, 'blind_call', 'Choice blind-call rule reports blind_call action mode');
+    is($choice_descr->{spec}{Choice}{meta}{execution_shape}, 'or_call_loop', 'Choice blind-call rule reports child-parser choice loop execution shape');
+    is($choice_descr->{spec}{Choice}{meta}{bcode_count}, 2, 'Choice blind-call rule preserves blind-call count');
+    is($choice_descr->{spec}{Choice}{meta}{regex_count}, 0, 'Choice blind-call rule does not report regex slots on the blind-call wrapper rule itself');
+    ok($choice_descr->{spec}{Choice}{meta}{uses_loop}, 'Choice blind-call rule reports loop execution');
+};
+subtest 'blind_call_choice_rule_dispatches_across_child_rules' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Choice::|
+ => First
+ => Second
+
+First:
+ /a/ -> First { return_a(First) }
+
+Second:
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    ok(ref($parser) eq 'CODE', 'blind-call choice parser builds');
+
+    my $first_input = "a";
+    my $first_ast = eval { $parser->(\$first_input) };
+    ok(!$@, 'blind-call choice parser first-branch execution does not die') or diag(normalize_error($@));
+    is_deeply($first_ast, ['?First:', []], 'blind-call choice parser returns the first child-rule result when the first child succeeds');
+
+    my $second_input = "b";
+    my $second_ast = eval { $parser->(\$second_input) };
+    ok(!$@, 'blind-call choice parser second-branch execution does not die') or diag(normalize_error($@));
+    is_deeply($second_ast, ['?Second:', []], 'blind-call choice parser returns the later child-rule result when the earlier child fails and the later child succeeds');
+
+    my $miss_input = "c";
+    my $miss_ast = eval { $parser->(\$miss_input) };
+    ok(!$@, 'blind-call choice parser miss execution does not die') or diag(normalize_error($@));
+    ok(!defined($miss_ast), 'blind-call choice parser returns undef when no child parser succeeds');
+};
 subtest 'get_return_descr_rule_meta_and_plus_repetition_strategy' => sub {
     plan tests => 7;
 

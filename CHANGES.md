@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Docs/Test Slice: Lock Blind-Call Contract And Track Repeat Seam
+
+Made the current blind-call surface explicit for users instead of leaving it mostly as runtime-owner knowledge.
+
+- Added focused regression coverage for the currently clear blind-call handler families:
+  - `:&` / `:AND` style blind-call sequence wrappers now have explicit descriptor checks for `AND_BCODE`, `blind_call` action mode, zero local regex slots, and ordered call-loop execution shape.
+  - `:|` blind-call wrappers now have explicit descriptor checks for `OR_BCODE`, `blind_call` action mode, zero local regex slots, and choice-loop execution shape.
+  - `:|` blind-call runtime behavior is now locked for the simple author-facing contract: first child success, later child fallback, and clean `undef` on total miss.
+- Expanded `USER_GUIDE_RuleModesAndSplit.md` with a real blind-call section:
+  - explained `=> child_rule` as parser-step composition rather than regex-slot dispatch,
+  - contrasted it directly with `-> child_rule`,
+  - documented the “do not mix `->` and `=>` in one rule” contract,
+  - and added fuller wrapper/orchestration examples for `:&` / `:AND`, `:AND+` / `:AND{...}`, and `:|`.
+- Recorded the remaining blind-call caveat honestly:
+  - repeated-choice blind-call use on `rule:`, `:OR`, `:+`, and `:OR{...}` still exists in the runtime,
+  - but it remains a tracked contract-clarification seam rather than the recommended first-choice authoring surface until its semantics are documented more crisply.
+
 ## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `slice(...)`
 
 Extended the method-like DSL migration track with the missing middle-window array helper. Fluent and structured authoring now agree on representative `slice(...)` flows across array assignments, direct `return(payload)` expressions, reducer composition, and nested `scalar(container, index)` reads on both action-edge and lifecycle surfaces.
