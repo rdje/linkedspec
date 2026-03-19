@@ -5372,6 +5372,32 @@ PERL
     like($out, qr/Malformed rule label syntax/, 'glued word-mode diagnostic is reported before bootstrap parse');
     is($err, '', 'glued word-mode validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_non_rule_preamble_before_first_rule' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+# leading comment
+
+junk preamble
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+require LinkedSpec::Validation;
+my $spec_ok = LinkedSpec::Validation::validate_spec_content(\$spec_content);
+print $spec_ok ? "__SPEC_VALID__\n" : "__SPEC_INVALID__\n";
+my $dsl_ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $dsl_ok ? "__DSL_VALID__\n" : "__DSL_INVALID__\n";
+PERL
+
+    is($exit_code, 0, 'non-rule preamble validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__SPEC_INVALID__/, 'validate_spec_content rejects stray preamble before the first rule paragraph');
+    like($out, qr/__DSL_INVALID__/, 'validate_dsl_syntax rejects stray preamble before the first rule paragraph');
+    unlike($out, qr/__SPEC_VALID__|__DSL_VALID__/, 'non-rule preamble does not pass either validation layer');
+    like($out, qr/Spec file must start with a rule definition/, 'non-rule preamble diagnostic is reported early');
+    like($out, qr/DSL Error at line 3:/, 'non-rule preamble diagnostic points at the first non-comment preamble line');
+    is($err, '', 'non-rule preamble validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_extra_colon_rule_labels' => sub {
     plan tests => 4;
 

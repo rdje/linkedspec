@@ -1,5 +1,13 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Validation: Reject Non-Rule Preamble Before First Rule
+
+Extended the Phase 2 frontend-hardening track so stray preamble text before the first rule paragraph is rejected during validation instead of being silently tolerated.
+
+- Updated `perl/LinkedSpec/Validation.pm` so both `validate_spec_content(...)` and `validate_dsl_syntax(...)` now require the first non-comment line of a `.spec` file to be a supported rule start.
+- Added focused regression coverage in `t/phase0_regression.t` for a spec with leading comments followed by stray preamble text, proving both validation layers now reject that shape and point at the first real offending line.
+- Expanded `USER_GUIDE.md` so the paragraph-based file-structure section now says plainly that, after leading blank lines and `#` comments, the first real line must start a rule paragraph.
+
 ## 2026-03-19 - Validation: Reject Glued Word-Mode Labels Earlier
 
 Extended the Phase 2 frontend-hardening track so malformed glued worded rule-mode suffixes are rejected during DSL validation instead of falling through to later bootstrap parse failure.

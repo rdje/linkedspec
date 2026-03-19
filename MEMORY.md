@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-19: Extended Phase 2 frontend hardening so stray preamble text before the first rule paragraph is rejected during both `validate_spec_content(...)` and `validate_dsl_syntax(...)`. Validation now enforces the documented paragraph-based file contract more literally: after leading blank lines and `#` comments, the first real line must be a supported rule start.
 - 2026-03-19: Extended Phase 2 frontend hardening so malformed glued worded rule-mode suffixes are rejected during `validate_dsl_syntax(...)` too. Validation now treats forms like `RuleName:ORX` and `RuleName::ANDX` as invalid rule-label syntax instead of accepting them as prefix matches on supported worded modes, and focused regression coverage now locks that early diagnostic.
 - 2026-03-19: Extended Phase 2 frontend hardening so malformed extra-colon rule starts are rejected during `validate_dsl_syntax(...)` too. Validation now treats forms like `RuleName:::` as invalid rule-label syntax instead of letting them drift into later bootstrap parse failure, and focused regression coverage now locks that early diagnostic.
 - 2026-03-19: Extended Phase 2 frontend hardening so missing top-level edge targets are rejected during `validate_dsl_syntax(...)` too. Validation now reports early targeted diagnostics for malformed forms like `-> { ... }` and `=> { ... }`, instead of letting incomplete action-edge or blind-call arrows fall through to generic bootstrap parse failure.

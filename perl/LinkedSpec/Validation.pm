@@ -162,10 +162,29 @@ sub validate_spec_content {
  my @lines = split(/\n/, $$spec_content);
  my $found_rule = 0;
  my $found_top_rule = 0;
+ my $first_significant_line_seen = 0;
 
  foreach my $line (@lines) {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
+
+   unless ($first_significant_line_seen) {
+    $first_significant_line_seen = 1;
+    my $first_rule = _parse_rule_label_line($line);
+    unless ($first_rule && !$first_rule->{invalid_mode}) {
+     my $position = index($$spec_content, $line);
+     if (_looks_like_malformed_rule_label_line($line)) {
+      report_dsl_error($spec_content, $position,
+       "Malformed rule label syntax",
+       "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
+     } else {
+      report_dsl_error($spec_content, $position,
+       "Spec file must start with a rule definition",
+       "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'");
+     }
+     return 0;
+    }
+   }
 
   my $parsed = _parse_rule_label_line($line);
   if ($parsed) {
@@ -292,6 +311,7 @@ sub validate_dsl_syntax {
  my @used_rules = ();
  my %seen_defined_rules;
  my $current_rule;
+ my $seen_first_rule = 0;
 
  for my $line (@lines) {
   next if $line =~ /^\s*$/;
@@ -299,6 +319,7 @@ sub validate_dsl_syntax {
 
   my $rule_label = _parse_rule_label_line($line);
   if ($rule_label) {
+   $seen_first_rule = 1;
    if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
     return _report_mixed_rule_action_modes(
      $current_rule->{label},
@@ -342,6 +363,12 @@ sub validate_dsl_syntax {
    report_dsl_error($spec_content, $position,
     "Malformed rule label syntax",
     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
+   return 0;
+  } elsif (!$seen_first_rule) {
+   my $position = index($$spec_content, $line);
+   report_dsl_error($spec_content, $position,
+    "Spec file must start with a rule definition",
+    "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'");
    return 0;
   } elsif ($current_rule) {
    my $edge_scan = _scan_rule_edges_in_fragment($line, $current_rule->{edge_scan_depth} // 0);

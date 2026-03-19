@@ -57,6 +57,7 @@ top_rule::
 Once that rule-start token appears, the rest of the paragraph belongs to that same rule until another rule starts.
 
 Current frontend validation also rejects malformed extra-colon starts like `rule_name:::` before bootstrap parse. Supported rule starts remain the normal `rule_name:` and `rule_name::` forms plus their documented rule-mode suffixes.
+Current frontend validation also rejects stray preamble text before the first rule paragraph: after leading blank lines and `#` comments, the first real line must be a rule start.
 
 Worded rule modes must also use their exact supported spellings:
 - `AND`
