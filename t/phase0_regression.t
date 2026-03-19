@@ -26190,6 +26190,118 @@ SPEC
         'lifecycle contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_index_of_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('index_of(array(parts), "foo")'),
+        q{do { my $__ls_index_of_needle = "foo"; my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@parts); $__ls_index_of_i++) { my $__ls_index_of_item = $parts[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found }},
+        'index_of(array(name), value) lowers working arrays into a first-match index expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('index_of(coalesce(scalaref(retv, {parts}), array("empty")), scalar(IMATCH))'),
+        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = $IMATCH; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
+        'index_of(...) lowers array-valued fallback expressions into guarded first-match index checks'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)'),
+        q{(do { my $__ls_index_of_array = [sort keys %meta]; my $__ls_index_of_needle = "kind"; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } } == 0)},
+        'index_of(...) composes inside numeric flow comparisons over projected arrays'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind_index", index_of(sorted_keys(hash(meta)), "kind")))'),
+        q{return {"kind_index" => do { my $__ls_index_of_array = [sort keys %meta]; my $__ls_index_of_needle = "kind"; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }}},
+        'index_of(...) lowers inside general return payloads'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_index_of_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).declare(scalar, kind_index).assign(scalar(kind_index), index_of(array(projected_keys), "kind")).if(is_defined(scalar(kind_index))).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); assign(scalar(kind_index), index_of(array(projected_keys), "kind")); if(is_defined(scalar(kind_index))); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge index_of helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge index_of helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge index_of helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge index_of helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge index_of helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge index_of helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge index_of helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge index_of helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge index_of helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge index_of helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge index_of helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge index_of fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_index_of_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).declare(scalar, kind_index).assign(scalar(kind_index), index_of(array(projected_keys), "kind")).if(is_defined(scalar(kind_index))).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); assign(scalar(kind_index), index_of(array(projected_keys), "kind")); if(is_defined(scalar(kind_index))); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle index_of helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle index_of helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle index_of helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle index_of helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle index_of helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle index_of helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle index_of helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle index_of helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle index_of helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle index_of helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle index_of helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle index_of fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_count_keys_value_helpers' => sub {
     plan tests => 4;
 

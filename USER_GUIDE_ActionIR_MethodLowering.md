@@ -896,6 +896,42 @@ if(eq(first(sorted_keys(hash(meta))), "kind")); ... endif()
 return(hash("first_key", first(sorted_keys(hash(meta))), "last_value", last(sorted_values(hash(meta)))))
 ```
 
+## `index_of(array_or_array_expr, needle_expr)`
+Use `index_of(...)` when you want one scalar first-match index from an array variable or one composed array-valued expression.
+
+Examples:
+
+```text
+index_of(array(parts), "kind")
+index_of(sorted_keys(hash(meta)), "kind")
+index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")
+index_of(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(IMATCH))
+index_of(concat_arrays(array(parts), array("tail")), "tail")
+```
+
+Important semantic note:
+- `index_of(array(name), needle)` searches the live working array from left to right,
+- `index_of(projected_array_expr, needle)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `concat_arrays(...)`, and array-valued `coalesce(...)`,
+- the result is one scalar index, using the same zero-based indexing model as `scalar(array_expr, 0)`,
+- if the first match is at the first position, the result is `0`,
+- if there is no matching item, the result is `undef`,
+- if the source expression is undefined or not array-valued, the result is `undef`,
+- and when the needle itself is `undef`, `index_of(...)` searches for the first undefined array item rather than coercing everything to strings.
+
+Examples in context:
+
+```text
+assign(scalar(kind_index), index_of(array(parts), "kind"))
+assign(scalar(kind_index), index_of(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), "kind"))
+assign(scalar(stage_index), index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized"))
+if(is_defined(index_of(sorted_keys(hash(meta)), "kind"))); ... endif()
+if(num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)); ... endif()
+return(hash(
+  "kind_index", index_of(sorted_keys(hash(meta)), "kind"),
+  "stage_index", index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")
+))
+```
+
 ## `tail(array_or_array_expr)` / `drop_front(array_or_array_expr)`
 ## `tail(array_or_array_expr, drop_count)` / `drop_front(array_or_array_expr, drop_count)`
 Use `tail(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied. `drop_front(...)` is the exact alias for the same lowering contract.

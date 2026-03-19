@@ -218,6 +218,7 @@ num_le(scalar(depth), 8)
 num_ge(num_avg(take(concat_arrays(array(scores), array(extra_scores)), 4)), 5)
 num_gt(num_sum(take(concat_arrays(array(scores), array(extra_scores)), 4)), 10)
 num_eq(num_range(take(concat_arrays(array(scores), array(extra_scores)), 4)), 6)
+num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)
 num_gt(num_add(count(array(parts)), scalar(offset)), 3)
 num_eq(num_sub(num_add(count(array(parts)), scalar(offset)), 1), 4)
 num_gt(num_mul(count(array(parts)), scalar(factor)), 3)
@@ -401,6 +402,7 @@ has_key(drop_keys(hash(meta), "debug"), "kind")
 has_key(pick_keys(hash(meta), "kind", "source"), "kind")
 contains(sorted_keys(hash(meta)), "kind")
 contains(sorted_values(pick_keys(hash(meta), "kind", "source")), "NODE")
+num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)
 num_gt(count(sorted_keys(pick_keys(hash(meta), "kind", "source"))), 1)
 num_gt(coalesce(length(trim(scalaref(retv, {content}))), 0), 3)
 eq(first(sorted_keys(pick_keys(hash(meta), "kind", "source"))), "kind")
@@ -596,6 +598,7 @@ endif()
 - Prefer `coalesce_nonempty(...)` when the real question is “what is the first defined nonblank scalar value after normalization?” rather than “what is the first merely defined value?”.
 - Prefer `scalar(array_expr, index)` or `scalar(hash_expr, key)` on top of composed aggregate helpers when the real question is “read one canonical item from this normalized aggregate” rather than “materialize a temporary aggregate variable first”.
 - Prefer `first(...)` / `last(...)` when the real question is “what is the boundary item of this array or projected array?” rather than “how many?” or “does it contain?”.
+- Prefer `index_of(...)` when the real question is “where is the first matching item in this array or projected array?” rather than only “does it contain?” or “what is the boundary item?”.
 - Prefer `take(...)` when the real question is “what is the first bounded prefix array I want to keep and keep composing?” rather than “what is the first single item?” or “what is the remainder?”.
 - Prefer `take_last(...)` when the real question is “what is the final bounded suffix array I want to keep and keep composing?” rather than “what is the last single item?” or “what is the leading array after discarding a suffix?”.
 - Prefer `drop_last(...)` when the real question is “what is the leading array after I discard one trailing delimiter or suffix?” rather than “what is the first bounded prefix?” or “what is the remainder after the head?”.

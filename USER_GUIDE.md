@@ -59,7 +59,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -442,6 +442,7 @@ Typical patterns:
 - `join_values(...)`
 - `first(...)`
 - `last(...)`
+- `index_of(...)`
 - `take(...)`
 - `take(..., n)`
 - `take_last(...)`
@@ -476,6 +477,7 @@ Typical patterns:
 - scalar substring-membership flags from `contains_substr(scalar_expr, needle_expr)`
 - scalar emptiness flags from `is_empty(value_expr)` and `is_nonempty(value_expr)` inside both assignments and `return(payload)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
+- first-match scalar indices from `index_of(array_expr, needle_expr)` over direct and composed array-valued expressions
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
 - suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
 - trailing-drop arrays from `drop_last(array_expr)` and counted trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`

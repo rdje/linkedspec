@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `index_of(...)`
+
+Extended the method-like DSL migration track with the missing first-match array lookup helper. Fluent and structured authoring now agree on representative `index_of(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric/definedness flow comparisons on both action-edge and lifecycle surfaces.
+
+- Added `index_of(array_expr, needle_expr)` lowering for:
+  - direct working arrays such as `index_of(array(parts), "kind")`,
+  - projected arrays such as `index_of(sorted_keys(hash(meta)), "kind")`,
+  - composed projected value arrays such as `index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")`,
+  - and flow comparisons such as `num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0)`.
+- Explicit semantics:
+  - `index_of(...)` stays a pure scalar value helper,
+  - it returns one zero-based index when a first match exists,
+  - it returns `undef` for no-match cases, missing/non-array sources, and other invalid aggregate sources,
+  - and it preserves the important distinction that a match at the first position yields `0`, so callers should use `is_defined(...)` or numeric comparisons rather than plain truthiness when that distinction matters.
+- Expanded the user guides with fuller examples showing `index_of(...)` in assignments, direct returns, flow comparisons, emitted Perl reference output, and side-by-side guidance against `contains(...)`, `first(...)`, and `scalar(array_expr, idx)`.
+
 ## 2026-03-19 - Method-Like DSL Slice: Support Parser-Oriented `num_range(...)`
 
 Extended the method-like DSL migration track with the missing numeric array-span reducer. Fluent and structured authoring now agree on representative `num_range(...)` flows across scalar assignments, direct `return(payload)` expressions, and numeric comparison inputs on both action-edge and lifecycle surfaces.

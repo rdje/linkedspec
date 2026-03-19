@@ -925,6 +925,47 @@ Important semantic note:
 - they work on both working arrays and composed array-valued helper expressions,
 - and if an array-valued expression is still undefined or empty, both helpers return `undef`.
 
+### First-match scalar indices with `index_of(...)`
+`index_of(...)` is the parser-oriented helper for “where is the first matching item in this array-shaped value?” when the source is one array or one array-valued helper expression.
+
+Examples:
+
+```text
+index_of(array(parts), "kind")
+index_of(sorted_keys(hash(meta)), "kind")
+index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")
+index_of(concat_arrays(array(parts), array("tail")), "tail")
+index_of(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(IMATCH))
+```
+
+Use cases:
+- store one first-match location from a working array in a scalar,
+- branch on whether one projected key list starts with `kind` at index `0`,
+- derive one canonical location from one normalized array before later slicing or boundary extraction,
+- and keep first-match lookup in the DSL instead of dropping into host-language loops or `for` scans.
+
+Examples in context:
+
+```text
+assign(scalar(kind_index), index_of(array(parts), "kind"))
+assign(scalar(kind_index), index_of(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), "kind"))
+assign(scalar(stage_index), index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized"))
+return(hash(
+  "kind_index", index_of(sorted_keys(hash(meta)), "kind"),
+  "stage_index", index_of(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), "normalized")
+))
+if(is_defined(index_of(sorted_keys(hash(meta)), "kind")))
+if(num_eq(index_of(sorted_keys(hash(meta)), "kind"), 0))
+```
+
+Important semantic notes:
+- `index_of(...)` returns one scalar index using the same zero-based model as `scalar(array_expr, 0)`,
+- if the first match is at the first position, the result is `0`,
+- when no match exists, the result is `undef`,
+- when the source expression is undefined or not array-valued, the result is `undef`,
+- when the needle is `undef`, `index_of(...)` looks for the first undefined array item,
+- and `index_of(...)` complements `contains(...)`: use `contains(...)` for yes/no membership, use `index_of(...)` when you need the actual location.
+
 ### Array tail as an array with `tail(...)` or `drop_front(...)`
 `tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `tail(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”. `drop_front(...)` is the exact alias for the same lowering contract.
 
