@@ -6623,6 +6623,52 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-owned default pipeline callbacks still return descriptor hash through Runtime::run_get');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through Runtime::run_get still preserves compiled handler coderef');
 };
+subtest 'runtime_run_get_exposes_runtime_ctx_ref_on_success' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $parser_source = '';
+    my $descr = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            return_descr => 1,
+            dump_parser_source => 1,
+            parser_source_ref => \$parser_source,
+            runtime_ctx_ref => \$runtime_ctx,
+        },
+    );
+
+    ok(defined($descr) && ref($descr) eq 'HASH', 'Runtime::run_get still returns descriptor hash when runtime_ctx_ref capture is enabled');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{top_rule}, 'Top', 'captured runtime context records top rule on success');
+    ok(!exists $runtime_ctx->{last_error}, 'captured runtime context exposes no stale last_error on success');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'captured runtime context preserves parser-source chunk capture');
+    like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'Runtime::run_get still emits parser source while exposing runtime_ctx_ref');
+};
+subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
+    plan tests => 6;
+
+    my $spec_content = "this is not a valid LinkedSpec rule line\n";
+    my $runtime_ctx;
+
+    my $ret = LinkedSpec::Get(
+        \$spec_content,
+        return_descr => 1,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok(!defined($ret), 'LinkedSpec::Get still returns undef for malformed rule-paragraph input');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get passes runtime_ctx_ref through to the runtime owner');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'captured runtime context exposes structured last_error after compile failure');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'captured runtime context records validation stage through the public Get facade');
+    is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'captured runtime context records validation summary through the public Get facade');
+    like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'captured runtime context records validation detail through the public Get facade');
+};
 subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
     plan tests => 4;
 

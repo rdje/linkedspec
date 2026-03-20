@@ -66,10 +66,20 @@ sub _build_runtime_context {
  return $ctx
 }
 
+sub _capture_runtime_ctx_ref {
+ my ($option, $runtime_ctx) = @_;
+ return unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
+ my $runtime_ctx_ref = $option->{runtime_ctx_ref};
+ die "(LinkedSpec::Runtime::run_get) -E- option 'runtime_ctx_ref' must be SCALAR ref"
+  unless ref($runtime_ctx_ref) eq 'SCALAR';
+ $$runtime_ctx_ref = $runtime_ctx;
+ return
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
-#           and compiler pipeline invocation against injected bootstrap parsing.
+#           and compiler pipeline invocation against injected runtime state.
 # Args    : ($spec_content_ref, $option_hashref)
 # Returns : parser coderef | descriptor hashref | undef
 #------------------------------------------------------------------------------
@@ -78,6 +88,7 @@ sub run_get {
  $option = {} unless ref($option) eq 'HASH';
 
  my $runtime_ctx = _build_runtime_context($option);
+ _capture_runtime_ctx_ref($option, $runtime_ctx);
  return _call_preserving_err(sub {
   _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
   return LinkedSpec::Compiler::run_get_pipeline(

@@ -979,6 +979,35 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 - `return_descr => 1`
 - `dump_parser_source => 1`
 - `parser_source_ref => \$out`
+- `runtime_ctx_ref => \$ctx` for advanced runtime-state capture
+
+`runtime_ctx_ref` is an opt-in diagnostics/introspection hook. When you pass a scalar reference, LinkedSpec stores the live per-run runtime context there before compilation continues.
+
+Typical uses:
+- inspect `top_rule` after successful descriptor/parser generation,
+- inspect `parser_source_chunks_ref` when you are already using parser-source capture,
+- inspect structured failure context at `$ctx->{last_error}` after a compile failure.
+
+The current structured failure payload is intentionally small and stable:
+- `$ctx->{last_error}{type}`
+- `$ctx->{last_error}{stage}`
+- `$ctx->{last_error}{summary}`
+- `$ctx->{last_error}{detail}`
+
+Example:
+
+```perl
+my $ctx;
+my $descr = LinkedSpec::Get(
+  \$spec_content,
+  return_descr => 1,
+  runtime_ctx_ref => \$ctx,
+);
+
+if (!defined $descr && ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH') {
+  warn "compile failed at stage $ctx->{last_error}{stage}: $ctx->{last_error}{summary}\n";
+}
+```
 
 ## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:
