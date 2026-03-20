@@ -1,5 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-20 - Validation: Reject Unclosed Rule Blocks At EOF
+
+Extended the Phase 2 frontend-hardening track so rule paragraphs with open `{`, `(`, or `[` constructs no longer reach end of file as if they were valid.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now reports an early EOF diagnostic when a rule paragraph still has open block depth at the end of the spec.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - a multiline rule body with an unclosed open block,
+  - and the same failure mode starting from a same-line rule header.
+- Expanded `USER_GUIDE.md` so the paragraph-based `.spec` file-format section now says plainly that open rule-paragraph blocks must close before EOF.
+
 ## 2026-03-19 - Validation: Keep Rule Starts Top-Level Inside Open Blocks
 
 Extended the Phase 2 frontend-hardening track so rule-start detection stays top-level aware during DSL validation instead of reinterpreting label-like lines inside open action/lifecycle/code blocks as new rule paragraphs.

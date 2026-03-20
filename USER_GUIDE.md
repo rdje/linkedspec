@@ -76,6 +76,7 @@ Here `label:` is block content inside `Top`, not the start of a new `label` rule
 Current frontend validation also rejects malformed extra-colon starts like `rule_name:::` before bootstrap parse. Supported rule starts remain the normal `rule_name:` and `rule_name::` forms plus their documented rule-mode suffixes.
 Current frontend validation also rejects stray preamble text before the first rule paragraph: after leading blank lines and `#` comments, the first real line must be a rule start.
 Current frontend validation also treats rule starts as top-level only, so rule-like lines inside open `{ ... }` blocks are no longer misclassified as new rules.
+Current frontend validation also rejects rule paragraphs that leave an open `{`, `(`, or `[` construct unclosed by end of file, instead of silently treating that unfinished block as acceptable paragraph content.
 
 Worded rule modes must also use their exact supported spellings:
 - `AND`

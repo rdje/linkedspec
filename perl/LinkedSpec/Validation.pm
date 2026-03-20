@@ -322,12 +322,13 @@ sub validate_dsl_syntax {
   if ($rule_label) {
    $seen_first_rule = 1;
    if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
-    return _report_mixed_rule_action_modes(
-     $current_rule->{label},
-     $current_rule->{acode_count},
-     $current_rule->{bcode_count},
-    );
-   }
+ return _report_mixed_rule_action_modes(
+  $current_rule->{label},
+  $current_rule->{acode_count},
+  $current_rule->{bcode_count},
+ );
+}
+
    if ($rule_label->{invalid_mode}) {
     my $position = index($$spec_content, $line);
     report_dsl_error($spec_content, $position,
@@ -411,14 +412,18 @@ sub validate_dsl_syntax {
  }
 
  if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
-  return _report_mixed_rule_action_modes(
-   $current_rule->{label},
-   $current_rule->{acode_count},
-   $current_rule->{bcode_count},
-  );
+ return _report_mixed_rule_action_modes(
+  $current_rule->{label},
+  $current_rule->{acode_count},
+  $current_rule->{bcode_count},
+ );
+}
+
+ if ($current_rule && (($current_rule->{edge_scan_depth} // 0) > 0)) {
+  return _report_unclosed_rule_block_error($spec_content, length($$spec_content));
  }
 
- my $regex_depth = 0;
+my $regex_depth = 0;
  for my $line (@lines) {
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
@@ -598,17 +603,11 @@ sub _scan_rule_edges_in_fragment {
   }
 
   if ($ch eq q{/}) {
-   ++$i;
-   while ($i < $len) {
-    my $inner = substr($fragment, $i, 1);
-    if ($inner eq q{\\}) {
-     $i += 2;
-     next;
-    }
-    ++$i;
-    last if $inner eq q{/};
+   my $slash_cursor = _consume_slash_construct($fragment, $i, $len);
+   if (defined $slash_cursor) {
+    $i = $slash_cursor;
+    next;
    }
-   next;
   }
 
   if ($ch eq '{' || $ch eq '(' || $ch eq '[') {
@@ -714,6 +713,85 @@ sub _scan_rule_edges_in_fragment {
  return { edges => \@edges, depth => $depth };
 }
 
+sub _consume_slash_construct {
+ my ($fragment, $i, $len) = @_;
+ return undef unless defined $fragment;
+ $len = length($fragment) unless defined $len;
+ return undef if $i >= $len || substr($fragment, $i, 1) ne q{/};
+
+ my $prev_immediate = $i > 0 ? substr($fragment, $i - 1, 1) : '';
+ my $prev_nonspace_idx = $i - 1;
+ --$prev_nonspace_idx while $prev_nonspace_idx >= 0 && substr($fragment, $prev_nonspace_idx, 1) =~ /\s/o;
+ my $prev_nonspace = $prev_nonspace_idx >= 0 ? substr($fragment, $prev_nonspace_idx, 1) : '';
+
+ my $mode = '';
+ if ($prev_nonspace eq 's' && ($prev_nonspace_idx == 0 || substr($fragment, $prev_nonspace_idx - 1, 1) !~ /[\w\$]/o)) {
+  $mode = 'substitute';
+ } elsif ($prev_nonspace eq 'y' && ($prev_nonspace_idx == 0 || substr($fragment, $prev_nonspace_idx - 1, 1) !~ /[\w\$]/o)) {
+  $mode = 'translate';
+ } elsif ($prev_nonspace eq 'r'
+       && $prev_nonspace_idx > 0
+       && substr($fragment, $prev_nonspace_idx - 1, 1) eq 't'
+       && ($prev_nonspace_idx == 1 || substr($fragment, $prev_nonspace_idx - 2, 1) !~ /[\w\$]/o)) {
+  $mode = 'translate';
+ } elsif ($prev_nonspace eq 'r'
+       && $prev_nonspace_idx > 0
+       && substr($fragment, $prev_nonspace_idx - 1, 1) eq 'q'
+       && ($prev_nonspace_idx == 1 || substr($fragment, $prev_nonspace_idx - 2, 1) !~ /[\w\$]/o)) {
+  $mode = 'regex';
+ } elsif ($prev_nonspace eq 'm' && ($prev_nonspace_idx == 0 || substr($fragment, $prev_nonspace_idx - 1, 1) !~ /[\w\$]/o)) {
+  $mode = 'regex';
+ } elsif ($i == 0 || $prev_immediate =~ /\s/o || $prev_nonspace =~ /[=~!,;:\(\[\{]/o) {
+  $mode = 'regex';
+ } else {
+  return undef;
+ }
+
+ my $cursor = _consume_slash_segment($fragment, $i, $len);
+ return $len if $cursor >= $len;
+
+ if ($mode eq 'substitute' || $mode eq 'translate') {
+  $cursor = _consume_until_next_unescaped_slash($fragment, $cursor, $len);
+  return $len if $cursor >= $len;
+ }
+
+ ++$cursor while $cursor < $len && substr($fragment, $cursor, 1) =~ /[A-Za-z]/o;
+ return $cursor;
+}
+
+sub _consume_slash_segment {
+ my ($fragment, $i, $len) = @_;
+ return $i unless defined $fragment;
+ $len = length($fragment) unless defined $len;
+ ++$i;
+ while ($i < $len) {
+  my $inner = substr($fragment, $i, 1);
+  if ($inner eq q{\\}) {
+   $i += 2;
+   next;
+  }
+  ++$i;
+  last if $inner eq q{/};
+ }
+ return $i;
+}
+
+sub _consume_until_next_unescaped_slash {
+ my ($fragment, $i, $len) = @_;
+ return $i unless defined $fragment;
+ $len = length($fragment) unless defined $len;
+ while ($i < $len) {
+  my $inner = substr($fragment, $i, 1);
+  if ($inner eq q{\\}) {
+   $i += 2;
+   next;
+  }
+  ++$i;
+  last if $inner eq q{/};
+ }
+ return $i;
+}
+
 sub _count_rule_edge_kinds_in_fragment {
  my ($fragment, $edge_scan) = @_;
  my ($acode_count, $bcode_count) = (0, 0);
@@ -795,6 +873,20 @@ sub _report_split_marker_syntax_error {
   $position,
   "Malformed split marker syntax",
   "Use '@capture_from_here' or compatibility alias '@move_pos' when you need a split-boundary cursor marker",
+ );
+}
+
+sub _report_unclosed_rule_block_error {
+ my ($spec_content, $position) = @_;
+ $position = 0 unless defined $position;
+ while ($position > 0 && substr($$spec_content, $position - 1, 1) eq "\n") {
+  --$position;
+ }
+ return report_dsl_error(
+  $spec_content,
+  $position,
+  "Unclosed rule block before end of file",
+  "Close the still-open '{', '(', or '[' construct before the end of the spec",
  );
 }
 

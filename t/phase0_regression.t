@@ -5913,6 +5913,43 @@ PERL
     unlike($out, qr/DSL Error at line|Spec file must start with a rule definition|Malformed rule label syntax/, 'compile pipeline no longer misclassifies nested rule-like block lines as top-level rule starts');
     is($err, '', 'nested rule-like line parser-build subprocess does not emit stderr');
 };
+subtest 'validation_rejects_unclosed_multiline_rule_blocks_at_eof' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Next {
+ return_a(Top)
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unclosed multiline block validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects multiline rule blocks that stay open through EOF');
+    like($out, qr/Unclosed rule block before end of file/, 'unclosed multiline block diagnostic is reported early');
+    is($err, '', 'unclosed multiline block validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_unclosed_same_line_rule_blocks_at_eof' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ -> Next {
+ return_a(Top)
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unclosed same-line block validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects same-line rule blocks that stay open through EOF');
+    like($out, qr/Unclosed rule block before end of file/, 'unclosed same-line block diagnostic is reported early');
+    is($err, '', 'unclosed same-line block validation subprocess does not emit stderr');
+};
 subtest 'bootstrap_split_boundary_aliases_build_split_boundary_lecode' => sub {
     my @cases = (
         {
