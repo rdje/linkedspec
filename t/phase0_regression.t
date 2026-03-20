@@ -6590,6 +6590,34 @@ SPEC
     ok(!exists $runtime_ctx->{last_error}, 'successful compiler pipeline clears stale runtime_ctx last_error state');
     is($runtime_ctx->{top_rule}, 'Top', 'successful compiler pipeline still records top rule while clearing stale runtime error state');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_for_resolution_failure' => sub {
+    plan tests => 6;
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'missing_spec_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return undef },
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when spec resolution fails');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref on resolution failure');
+    is($runtime_ctx->{spec_name}, 'missing_spec_name', 'ParserFactory runtime context records requested spec name');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory runtime context records structured last_error on resolution failure');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'ParserFactory resolution failure records resolve_spec_path stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'ParserFactory resolution failure records summary');
+};
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
 
@@ -6650,6 +6678,24 @@ SPEC
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'captured runtime context preserves parser-source chunk capture');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'Runtime::run_get still emits parser source while exposing runtime_ctx_ref');
 };
+subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
+    plan tests => 7;
+
+    my $missing_spec_name = 'phase5_runtime_ctx_missing_dot_spec_' . $$ . '.spec';
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        $missing_spec_name,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_call, 'get_parser resolution-failure call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for missing explicit dot-spec name with runtime_ctx_ref enabled');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on resolution failure');
+    is($runtime_ctx->{spec_name}, $missing_spec_name, 'get_parser runtime context records requested spec name');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'get_parser runtime context records parser-factory resolution stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'get_parser runtime context records parser-factory resolution summary');
+    like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
+};
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 6;
 
@@ -6668,6 +6714,31 @@ subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' 
     is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'captured runtime context records validation stage through the public Get facade');
     is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'captured runtime context records validation summary through the public Get facade');
     like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'captured runtime context records validation detail through the public Get facade');
+};
+subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure' => sub {
+    plan tests => 8;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_invalid_runtime_ctx.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create invalid spec '$tmp_spec': $!";
+    print {$fh} "this is not a valid LinkedSpec rule line\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        $tmp_spec,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_call, 'get_parser compile-failure call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for invalid spec content');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on compile failure');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'shared runtime context preserves requested explicit spec path as spec_name');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'shared runtime context preserves resolved spec path across compiler delegation');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compile failure upgrades shared runtime context to compiler_pipeline last_error');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'compile failure records compiler validation stage in shared runtime context');
+    like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
 subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
     plan tests => 4;

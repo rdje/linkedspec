@@ -87,6 +87,41 @@ sub _default_deps {
  }
 }
 
+sub _get_runtime_ctx_ref {
+ my ($option) = @_;
+ return undef unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
+ my $runtime_ctx_ref = $option->{runtime_ctx_ref};
+ my $is_scalar_slot = ref($runtime_ctx_ref) eq 'SCALAR';
+ my $is_shared_hash_slot = ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH';
+ die "(LinkedSpec::ParserFactory::run_get_parser) -E- option 'runtime_ctx_ref' must be SCALAR ref"
+  unless $is_scalar_slot || $is_shared_hash_slot;
+ return $runtime_ctx_ref
+}
+
+sub _ensure_runtime_ctx {
+ my ($runtime_ctx_ref, %seed) = @_;
+ return undef unless ref($runtime_ctx_ref);
+ my $runtime_ctx = (ref($$runtime_ctx_ref) eq 'HASH') ? $$runtime_ctx_ref : {};
+ foreach my $key (keys %seed) {
+  $runtime_ctx->{$key} = $seed{$key};
+ }
+ $$runtime_ctx_ref = $runtime_ctx if ref($runtime_ctx_ref) eq 'SCALAR';
+ return $runtime_ctx
+}
+
+sub _set_runtime_ctx_last_error {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $error = {
+  type    => 'parser_factory',
+  stage   => defined($args{stage}) ? $args{stage} : '',
+  summary => defined($args{summary}) ? $args{summary} : '',
+  detail  => defined($args{detail}) ? $args{detail} : '',
+ };
+ $runtime_ctx->{last_error} = $error;
+ return $error
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
@@ -98,6 +133,8 @@ sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
  return _call_preserving_err(sub {
   my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
+  my $runtime_ctx_ref = _get_runtime_ctx_ref(\%opt_hash);
+  my $runtime_ctx = _ensure_runtime_ctx($runtime_ctx_ref, spec_name => $spec_name);
   $deps = _default_deps() unless ref($deps) eq 'HASH';
 
   my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
@@ -118,17 +155,48 @@ sub run_get_parser {
   }, $dump_low);
 
   unless ($validate_spec_name->($spec_name, $trace_scope)) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'validate_spec_name',
+    summary => 'Invalid spec name',
+    detail => 'validate_spec_name rejected the requested parser name',
+   );
    return undef
   }
 
   my $spec_path = $resolve_spec_path->($spec_name, $trace_scope);
-  return undef unless defined $spec_path;
+  unless (defined $spec_path) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'resolve_spec_path',
+    summary => 'Spec resolution failed',
+    detail => 'resolve_spec_path returned undef for the requested parser name',
+   );
+   return undef;
+  }
+  $runtime_ctx->{spec_path} = $spec_path if ref($runtime_ctx) eq 'HASH';
 
   my $content = $load_spec_content->($spec_path, $trace_scope);
-  return undef unless defined $content;
+  unless (defined $content) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'load_spec_content',
+    summary => 'Spec file load failed',
+    detail => "load_spec_content returned undef for '$spec_path'",
+   );
+   return undef;
+  }
   my %forward_opt_hash = %opt_hash;
   delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
   my $parser = $compile_spec->(\$content, \%forward_opt_hash);
+  if (!defined($parser) && ref($runtime_ctx) eq 'HASH' && ref($runtime_ctx->{last_error}) ne 'HASH') {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'compile_spec',
+    summary => 'Spec compilation failed',
+    detail => 'compile_spec returned undef without structured runtime context',
+   );
+  }
   $trace_decision->('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', $dump_medium);
   $trace_exit->(
    $trace_scope,
