@@ -3829,6 +3829,34 @@ SPEC
 
     unlink($tmp_spec);
 };
+subtest 'runtime_handler_linkedre_failure_returns_eval_error_without_exit' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for forced LinkedRE failure runtime test');
+
+    my $input = 'a';
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err);
+    {
+        no warnings 'redefine';
+        local *LinkedRE::or = sub { die "__FORCED_LINKEDRE_OR_FAILURE__\n" };
+        ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+            run_parser_with_captured_io($parser, \$input);
+    }
+
+    ok($ok_run, 'forced LinkedRE failure parser invocation returns without outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast), 'forced LinkedRE failure parser invocation returns undef AST');
+    ok(length($inner_eval_err) > 0, 'forced LinkedRE failure surfaces inner eval error');
+    like($inner_eval_err, qr/Error during handler code generation/, 'forced LinkedRE failure reports handler-generation banner through eval error');
+    like($inner_eval_err, qr/__FORCED_LINKEDRE_OR_FAILURE__/, 'forced LinkedRE failure preserves underlying runtime error detail');
+    unlike($inner_eval_err, qr/__EXIT__\(/, 'forced LinkedRE failure no longer propagates through the exit trap');
+    unlike(($out_run // '') . ($warn_run // ''), qr/__EXIT__\(/, 'forced LinkedRE failure does not trigger the exit trap through trace output either');
+};
 subtest 'get_parser_mixed_action_blind_call_returns_undef_without_exit' => sub {
     plan tests => 7;
 
