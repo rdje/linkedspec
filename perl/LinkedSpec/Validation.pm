@@ -699,6 +699,20 @@ sub _scan_rule_edges_in_fragment {
     }
    }
 
+   if ($kind eq 'action' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
+    my $fluent_cursor = $lookahead + 1;
+    ++$fluent_cursor while $fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\s/o;
+    unless ($fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\w/o) {
+     return {
+      error => {
+       kind   => $kind,
+       reason => 'malformed_fluent_suffix',
+       label  => $label,
+      },
+     };
+    }
+   }
+
    push @edges, {
     kind  => $kind,
     label => $label,
@@ -851,10 +865,19 @@ sub _report_edge_target_syntax_error {
 
  if ($kind eq 'action' && $reason eq 'malformed_target_suffix') {
   return report_dsl_error(
+  $spec_content,
+  $position,
+  "Malformed action-edge target syntax",
+   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
+  );
+ }
+
+ if ($kind eq 'action' && $reason eq 'malformed_fluent_suffix') {
+  return report_dsl_error(
    $spec_content,
    $position,
-   "Malformed action-edge target syntax",
-   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
+   "Malformed action-edge fluent suffix syntax",
+   "Use a method-style continuation like '-> RuleName.method' or '-> RuleName.method(args)'; the '.' must be followed by a method name",
   );
  }
 

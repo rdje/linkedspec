@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-20: Extended Phase 2 frontend hardening so malformed action-edge fluent starts are rejected during `validate_dsl_syntax(...)` too. Validation now reports an early targeted diagnostic for empty method hops like `-> Rule.` and `-> Rule..push(...)`, instead of leaving those malformed fluent continuations to later bootstrap parse failure.
 - 2026-03-20: Extended Phase 2 frontend hardening so rule paragraphs with open `{`, `(`, or `[` constructs are rejected at EOF during `validate_dsl_syntax(...)`. Validation now reports an explicit early “unclosed rule block” diagnostic instead of silently accepting unfinished open blocks at the end of the spec.
 - 2026-03-19: Extended Phase 2 frontend hardening so rule-start detection stays top-level only inside open action/lifecycle/code blocks. Validation now keeps label-like lines such as `label:` inside open `{ ... }` blocks as block content instead of misclassifying them as new rule paragraphs, and the regex-token validation pass now follows that same block-depth boundary.
 - 2026-03-19: Extended Phase 2 frontend hardening so malformed glued edge-target suffixes are rejected during `validate_dsl_syntax(...)` too. Validation now treats forms like `-> Rule-extra` and `=> Rule-extra` as invalid edge-target syntax instead of prefix-parsing them as `Rule`, while still preserving supported action-edge fluent suffixes and the separate indexed blind-call diagnostic for `=> Rule[0]`.

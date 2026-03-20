@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-20 - Validation: Reject Malformed Action-Edge Fluent Starts
+
+Extended the Phase 2 frontend-hardening track so malformed action-edge fluent continuations are rejected during DSL validation instead of drifting into later bootstrap parse failure.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now reports an early fluent-suffix diagnostic for malformed shapes like:
+  - `-> Rule.`
+  - `-> Rule..push(...)`
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - a multiline action edge with an empty fluent suffix,
+  - and the same failure mode in a same-line rule paragraph using a double-dot fluent start.
+- Expanded `USER_GUIDE.md` so the action-edge continuation contract now says plainly that a `.` continuation must be followed by a method name.
+
 ## 2026-03-20 - Validation: Reject Unclosed Rule Blocks At EOF
 
 Extended the Phase 2 frontend-hardening track so rule paragraphs with open `{`, `(`, or `[` constructs no longer reach end of file as if they were valid.

@@ -5794,6 +5794,48 @@ PERL
     like($out, qr/Malformed action-edge target syntax/, 'glued action-edge target suffix diagnostic is reported early');
     is($err, '', 'glued action-edge target suffix validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_empty_action_edge_fluent_suffixes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> Helper. { return_a(Top) }
+
+Helper:
+ /b/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'empty action-edge fluent suffix validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects action-edge fluent suffixes whose dot is not followed by a method name before bootstrap parse');
+    like($out, qr/Malformed action-edge fluent suffix syntax/, 'empty action-edge fluent suffix diagnostic is reported early');
+    is($err, '', 'empty action-edge fluent suffix validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_double_dot_action_edge_fluent_starts' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ -> Helper..push(items) { return_a(Top) }
+
+Helper:
+ /b/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'double-dot action-edge fluent validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects action-edge fluent continuations with an empty first method hop before bootstrap parse');
+    like($out, qr/Malformed action-edge fluent suffix syntax/, 'double-dot action-edge fluent diagnostic is reported early');
+    is($err, '', 'double-dot action-edge fluent validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_glued_blind_call_target_suffixes' => sub {
     plan tests => 4;
 
