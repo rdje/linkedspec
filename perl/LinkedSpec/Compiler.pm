@@ -424,6 +424,26 @@ sub _emit_runtime_ctx_parser_source_line {
  return
 }
 
+sub _clear_runtime_ctx_last_error {
+ my ($runtime_ctx) = @_;
+ return unless ref($runtime_ctx) eq 'HASH';
+ delete $runtime_ctx->{last_error};
+ return
+}
+
+sub _set_runtime_ctx_last_error {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $error = {
+  type    => 'compiler_pipeline',
+  stage   => defined($args{stage}) ? $args{stage} : '',
+  summary => defined($args{summary}) ? $args{summary} : '',
+  detail  => defined($args{detail}) ? $args{detail} : '',
+ };
+ $runtime_ctx->{last_error} = $error;
+ return $error
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
@@ -461,9 +481,11 @@ sub run_get_pipeline {
   parse_only => $parse_only ? 1 : 0,
   generate_only => $generate_only ? 1 : 0,
   return_descr => $return_descr ? 1 : 0,
-  dump_parser_source => $dump_parser_source ? 1 : 0,
+ dump_parser_source => $dump_parser_source ? 1 : 0,
   trace_level => _trace_level_name_for_current_verbosity(),
  }, DUMP_LOW);
+
+ _clear_runtime_ctx_last_error($runtime_ctx);
 
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
@@ -474,8 +496,20 @@ sub run_get_pipeline {
   _trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
   if ($parse_only && $test_expectation eq 'fail') {
    $validation_failed = 1;
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'validate_spec_content',
+    summary => 'Spec content validation failed',
+    detail => 'Input envelope validation failed',
+   );
    _trace_log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
   } else {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'validate_spec_content',
+    summary => 'Spec content validation failed',
+    detail => 'Input envelope validation failed',
+   );
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
    _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
    return undef;
@@ -489,8 +523,20 @@ sub run_get_pipeline {
    _trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
    if ($parse_only && $test_expectation eq 'fail') {
     $validation_failed = 1;
+    _set_runtime_ctx_last_error(
+     $runtime_ctx,
+     stage => 'validate_dsl_syntax',
+     summary => 'DSL syntax validation failed',
+     detail => 'Rule-level DSL syntax validation failed',
+    );
     _trace_log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
    } else {
+    _set_runtime_ctx_last_error(
+     $runtime_ctx,
+     stage => 'validate_dsl_syntax',
+     summary => 'DSL syntax validation failed',
+     detail => 'Rule-level DSL syntax validation failed',
+    );
     _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
     _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
     return undef;
@@ -526,6 +572,14 @@ sub run_get_pipeline {
  }
 
  unless ($parse_success && defined $retv) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'bootstrap_parse',
+   summary => 'Spec parsing did not produce a valid intermediate representation',
+   detail => defined($parse_error) && length($parse_error)
+    ? $parse_error
+    : 'Hardcoded parser did not return a valid parsed spec result',
+  );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
   return undef;
@@ -544,6 +598,12 @@ sub run_get_pipeline {
 
  my $auto_descr_spec = spec_descr($retv, $compile_spec_entry);
  unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'spec_descr',
+   summary => 'Spec descriptor generation failed',
+   detail => 'Rule descriptor build failed while compiling parsed spec entries',
+  );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
@@ -551,6 +611,12 @@ sub run_get_pipeline {
  my $final_descr = _build_final_descr($auto_descr_spec);
 
  unless (LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'validate_gdata_references',
+   summary => 'Generated parser validation failed',
+   detail => 'validate_gdata_references returned false for the generated descriptor',
+  );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
   return undef;

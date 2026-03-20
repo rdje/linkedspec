@@ -6506,6 +6506,90 @@ SPEC
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
+subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failure' => sub {
+    plan tests => 6;
+
+    my $spec_content = "this is not a valid LinkedSpec rule line\n";
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my $ret = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        { return_descr => 1 },
+        { runtime_ctx => $runtime_ctx },
+    );
+
+    ok(!defined($ret), 'compiler pipeline returns undef for malformed leading non-rule content');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiler pipeline records structured error context for validation failure');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validation failure error context records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'validation failure error context records validation stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'validation failure error context records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'validation failure error context records detail');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_for_generated_descriptor_validation_failure' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my $ret = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        { return_descr => 1 },
+        {
+            runtime_ctx => $runtime_ctx,
+            bootstrap_parse => sub { return (1, ['__ENTRY__'], ''); },
+            compile_spec_entry => sub {
+                return ('Top', { gdata => [], meta => {} }, 'Top');
+            },
+        },
+    );
+
+    ok(!defined($ret), 'compiler pipeline returns undef when generated descriptor validation fails');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiler pipeline records structured error context for generated descriptor validation failure');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'generated descriptor validation failure records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'generated descriptor validation failure records gdata-validation stage');
+    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/validate_gdata_references returned false/, 'generated descriptor validation failure records detail');
+};
+subtest 'compiler_run_get_pipeline_clears_stale_runtime_ctx_error_on_success' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+        last_error => {
+            type => 'compiler_pipeline',
+            stage => 'stale',
+            summary => 'stale',
+            detail => 'stale',
+        },
+    };
+
+    my $descr = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        { return_descr => 1 },
+        { runtime_ctx => $runtime_ctx },
+    );
+
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor on success with stale runtime error present');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'successful compiler pipeline still exposes runtime handler coderef');
+    ok(!exists $runtime_ctx->{last_error}, 'successful compiler pipeline clears stale runtime_ctx last_error state');
+    is($runtime_ctx->{top_rule}, 'Top', 'successful compiler pipeline still records top rule while clearing stale runtime error state');
+};
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
 
