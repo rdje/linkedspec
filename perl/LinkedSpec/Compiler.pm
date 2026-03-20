@@ -671,7 +671,10 @@ sub run_get_pipeline {
  _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $runtime_ctx->{top_rule}, rule_count => $rule_count }, DUMP_LOW);
 
  my $top_rule = $runtime_ctx->{top_rule};
- return sub {&{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])}
+ return sub {
+  _clear_runtime_ctx_last_error($runtime_ctx);
+  return &{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])
+ }
 }
 
 1;

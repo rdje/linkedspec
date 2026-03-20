@@ -6757,6 +6757,95 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'compile failure last_error preserves detail alongside preserved spec metadata');
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
+subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clears_on_success' => sub {
+    plan tests => 17;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $parser = LinkedSpec::Get(
+        \$spec_content,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok(defined($parser) && ref($parser) eq 'CODE', 'LinkedSpec::Get still returns parser coderef with runtime_ctx_ref enabled for runtime failure capture');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get exposes runtime context before parser invocation');
+
+    my $input = 'a';
+    my ($ok_fail, $ast_fail, $err_fail, $out_fail, $warn_fail, $inner_eval_err_fail);
+    {
+        no warnings 'redefine';
+        local *LinkedRE::or = sub { die "__FORCED_RUNTIME_CTX_HANDLER_FAILURE__\n" };
+        ($ok_fail, $ast_fail, $err_fail, $out_fail, $warn_fail, $inner_eval_err_fail) =
+            run_parser_with_captured_io($parser, \$input);
+    }
+
+    ok($ok_fail, 'forced runtime handler failure still returns through parser invocation without outer die') or diag(normalize_error($err_fail));
+    ok(!defined($ast_fail), 'forced runtime handler failure returns undef AST');
+    like($inner_eval_err_fail, qr/__FORCED_RUNTIME_CTX_HANDLER_FAILURE__/, 'forced runtime handler failure still surfaces through inner eval error');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'runtime context records structured runtime handler failure');
+    is($runtime_ctx->{last_error}{type}, 'runtime_handler', 'runtime handler failure records runtime_handler type');
+    is($runtime_ctx->{last_error}{stage}, 'rule_handler_eval', 'runtime handler failure records rule_handler_eval stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_eval', 'runtime handler failure records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Rule handler execution failed', 'runtime handler failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RUNTIME_CTX_HANDLER_FAILURE__/, 'runtime handler failure records detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'runtime handler failure leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'runtime handler failure leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'runtime handler failure records failing rule label');
+    ok(length($runtime_ctx->{last_error}{handler_variant} // '') > 0, 'runtime handler failure records handler variant');
+
+    my ($ok_recover, $ast_recover, $err_recover, $out_recover, $warn_recover, $inner_eval_err_recover) =
+        run_parser_with_captured_io($parser, \$input);
+    ok($ok_recover && defined($ast_recover), 'successful parser invocation still returns defined AST after a prior runtime handler failure') or diag(normalize_error($err_recover));
+    ok(!exists $runtime_ctx->{last_error}, 'successful parser invocation clears stale runtime last_error state');
+};
+subtest 'get_parser_runtime_ctx_ref_records_runtime_handler_failure_with_spec_identity' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_handler_ctx.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create runtime handler spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_get, $parser, $err_get, $out_get, $warn_get) = run_get_parser_with_captured_io(
+        $tmp_spec,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_get, 'get_parser runtime-handler setup call returns without die') or diag(normalize_error($err_get));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser returns parser coderef for runtime-handler diagnostics capture');
+
+    my $input = 'a';
+    my ($ok_run, $ast_run, $err_run, $out_run, $warn_run, $inner_eval_err_run);
+    {
+        no warnings 'redefine';
+        local *LinkedRE::or = sub { die "__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__\n" };
+        ($ok_run, $ast_run, $err_run, $out_run, $warn_run, $inner_eval_err_run) =
+            run_parser_with_captured_io($parser, \$input);
+    }
+
+    ok($ok_run, 'forced get_parser runtime handler failure returns without outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast_run), 'forced get_parser runtime handler failure returns undef AST');
+    like($inner_eval_err_run, qr/__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__/, 'forced get_parser runtime handler failure still surfaces through inner eval error');
+    is($runtime_ctx->{last_error}{type}, 'runtime_handler', 'get_parser runtime handler failure records runtime_handler type');
+    is($runtime_ctx->{last_error}{stage}, 'rule_handler_eval', 'get_parser runtime handler failure records rule_handler_eval stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_eval', 'get_parser runtime handler failure records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser runtime handler failure preserves spec_name');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser runtime handler failure preserves spec_path');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'get_parser runtime handler failure records rule label');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__/, 'get_parser runtime handler failure preserves runtime detail');
+};
 subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
     plan tests => 4;
 

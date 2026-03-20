@@ -986,7 +986,8 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 Typical uses:
 - inspect `top_rule` after successful descriptor/parser generation,
 - inspect `parser_source_chunks_ref` when you are already using parser-source capture,
-- inspect structured failure context at `$ctx->{last_error}` after a compile failure.
+- inspect structured failure context at `$ctx->{last_error}` after a compile failure,
+- and inspect structured runtime execution failures there after a returned parser coderef hits a handler error.
 
 The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{type}`
@@ -996,6 +997,10 @@ The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{detail}`
 - `$ctx->{last_error}{spec_name}`
 - `$ctx->{last_error}{spec_path}`
+
+Runtime handler failures may also add:
+- `$ctx->{last_error}{rule_label}`
+- `$ctx->{last_error}{handler_variant}`
 
 Example:
 
@@ -1008,19 +1013,25 @@ my $descr = LinkedSpec::Get(
 );
 
 if (!defined $descr && ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH') {
-  warn "compile failed at stage $ctx->{last_error}{stage}: $ctx->{last_error}{summary}\n";
+  warn "compile failed at stage $ctx->{last_error}{owner_stage}: $ctx->{last_error}{summary}\n";
 }
 ```
 
 The same hook also works through `LinkedSpec::get_parser(...)`. On that file-oriented path it now covers both:
 - parser-factory failures before compilation starts, such as invalid spec names, missing spec files, or file-load failures,
-- and compiler/runtime failures after the spec file has been loaded.
+- compiler failures after the spec file has been loaded,
+- and runtime handler failures after the returned parser coderef is invoked.
 
 That means the `last_error` payload is now largely self-contained:
 - `type` tells you which owner family raised the error (`parser_factory` or `compiler_pipeline` today),
 - `stage` gives the owner-local failure step,
 - `owner_stage` gives the stable combined identifier,
 - and `spec_name` / `spec_path` travel with the payload when that information is known.
+
+For runtime execution failures, the same payload also tells you which compiled rule failed:
+- `type` is currently `runtime_handler`,
+- `rule_label` names the failing compiled rule,
+- and `handler_variant` tells you which handler family was active when the eval-visible failure happened.
 
 ## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:
@@ -1031,7 +1042,7 @@ That means the `last_error` payload is now largely self-contained:
 
 `LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility.
 
-`get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload.
+`get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload; and if a returned parser later hits a handler execution failure, that same shared context is upgraded again to a `runtime_handler` payload.
 
 Public callers should continue to treat `LinkedSpec::get_parser(...)` as the stable entrypoint. Trace/spec-resolution/compile defaults are owned internally by `LinkedSpec::ParserFactory`, and local/module-relative lookup is owned by `LinkedSpec::Resolver`, so callers do not need to wire those dependencies themselves. The older `LinkedSpec::Deps` module is no longer part of the active parser-factory path, `Resolver` is loaded lazily only when parser-factory default deps are actually resolved, and the broader compile/plugin pipeline (`ParserFactory`, `Runtime`, `Compiler`, `PluginBridge`, plus `RuleIR::EmitContext` for the compatibility rewrite shim) is now lazy-loaded from the façade only when the corresponding public entrypoints actually need it.
 

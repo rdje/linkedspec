@@ -144,6 +144,26 @@ sub _runtime_ctx_from_deps {
  return undef
 }
 
+sub _set_runtime_ctx_last_error {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $type = defined($args{type}) ? $args{type} : 'runtime_handler';
+ my $stage = defined($args{stage}) ? $args{stage} : '';
+ my $error = {
+  type    => $type,
+  stage   => $stage,
+  owner_stage => length($stage) ? "$type:$stage" : $type,
+  summary => defined($args{summary}) ? $args{summary} : '',
+  detail  => defined($args{detail}) ? $args{detail} : '',
+  spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
+  spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
+ };
+ $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
+ $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};
+ $runtime_ctx->{last_error} = $error;
+ return $error
+}
+
 sub _emit_parser_source_line {
  my ($deps, $chunk) = @_;
  my $emit = (ref($deps) eq 'HASH') ? $deps->{emit_parser_source_line} : undef;
@@ -749,6 +769,7 @@ sub _build_runtime_handler {
  my $label = $args{label};
  my $handler = $args{handler};
  my $rule_meta = $args{rule_meta};
+ my $runtime_ctx = $args{runtime_ctx};
 
  return sub {
   my ($descr, $STRING, $info) = @_;
@@ -764,6 +785,14 @@ sub _build_runtime_handler {
   my $retv = eval $handler;
   my $eval_error = $@;
   if ($eval_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'rule_handler_eval',
+    summary => 'Rule handler execution failed',
+    detail => $eval_error,
+    rule_label => $label,
+    handler_variant => $rule_meta->{selected_handler_variant},
+   );
    _trace_decision("rule_handler_eval:$label", 0, $eval_error, DUMP_NONE);
   } else {
    _trace_decision("rule_handler_eval:$label", 1, 'handler eval completed', DUMP_DEBUG);
@@ -881,6 +910,7 @@ sub compile_spec_entry {
   label => $label,
   handler => $handler,
   rule_meta => $rule_meta,
+  runtime_ctx => $runtime_ctx,
  );
  $info{gdata} = [@GDATA];
  $info{meta} = $rule_meta;
