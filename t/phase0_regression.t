@@ -5875,7 +5875,7 @@ PERL
     like($out, qr/Malformed blind-call target syntax/, 'glued blind-call target suffix diagnostic is reported early');
     is($err, '', 'glued blind-call target suffix validation subprocess does not emit stderr');
 };
-subtest 'validation_rejects_spaced_blind_call_fluent_suffixes' => sub {
+subtest 'validation_accepts_spaced_blind_call_fluent_suffixes' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -5892,9 +5892,52 @@ print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
 PERL
 
     is($exit_code, 0, 'spaced blind-call fluent validation subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__INVALID_DSL__/, 'validation rejects blind-call targets with spaced fluent suffixes before bootstrap parse');
-    like($out, qr/Blind-call targets do not support fluent suffixes/, 'spaced blind-call fluent diagnostic is reported early');
+    like($out, qr/__VALID_DSL__/, 'validation accepts the supported spaced blind-call fluent surface');
+    unlike($out, qr/Malformed blind-call fluent suffix syntax|Malformed blind-call target syntax/, 'supported spaced blind-call fluent surface does not trigger blind-call fluent diagnostics');
     is($err, '', 'spaced blind-call fluent validation subprocess does not emit stderr');
+};
+subtest 'blind_call_fluent_post_call_chain_matches_block_form' => sub {
+    plan tests => 3;
+
+    my $fluent_spec = <<'SPEC';
+Top::AND
+ => Helper .return_a()
+
+Helper:
+ /a/ -> Helper { return_a(Helper) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::AND
+ => Helper { return_a(Top) }
+
+Helper:
+ /a/ -> Helper { return_a(Helper) }
+SPEC
+
+    my ($fluent_ok, $fluent_bootstrap, $fluent_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$fluent_spec);
+    ok($fluent_ok, 'bootstrap parse accepts blind-call fluent post-call chaining') or diag(normalize_error($fluent_err));
+
+    my ($block_ok, $block_bootstrap, $block_err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$block_spec);
+    ok($block_ok, 'bootstrap parse accepts equivalent blind-call block form') or diag(normalize_error($block_err));
+
+    my $fluent_top = $fluent_bootstrap->[0];
+    my $block_top = $block_bootstrap->[0];
+    my $normalize_bcode = sub {
+        my ($entries) = @_;
+        return [
+            map {
+                my $code = $_->[1]{code};
+                $code =~ s/^[ \t]+|[ \t]+$//mg;
+                +{ call => $_->[1]{call}, code => $code }
+            } grep { $_->[0] eq 'BCODE' } @$entries
+        ];
+    };
+    is_deeply(
+        $normalize_bcode->($fluent_top),
+        $normalize_bcode->($block_top),
+        'blind-call fluent post-call chaining lowers to the same BCODE payload as the equivalent explicit post-call block',
+    );
 };
 subtest 'validation_rejects_action_edges_with_missing_targets' => sub {
     plan tests => 4;

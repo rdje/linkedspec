@@ -652,6 +652,32 @@ sub _build_blind_call_code_block_rule {
  }
 }
 
+sub _build_method_empty_blind_code_block_rule {
+ return {
+  id => 'METHOD_EMPTY_BLIND_CODE_BLOCK',
+  tags => { start_token => 1 },
+  re=> [qr/=>\s*(?<CALL>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
+  handler=> sub {
+   my ($info, $descr, $string, $gdata) = @_;
+   my ($call, $chain, $block) = @{$$info{match_hash}}{qw/CALL CHAIN BLOCK/};
+   my $code = _render_method_call_chain($gdata->{_current_entry}, $chain, $block);
+   return undef unless defined $code;
+   my $calls = _parse_method_call_chain($chain);
+   if ($calls && @$calls && defined($block) && length($block)) {
+    my $tail_method = $calls->[-1]{method} || '';
+    if ($tail_method eq 'if' || $tail_method eq 'i') {
+     my ($tail, $new_pos) = _parse_optional_attached_if_clause_tail($string, pos($$string));
+     if (defined($tail) && length($tail)) {
+      $code .= ' ' . $tail;
+      pos($$string) = $new_pos;
+     }
+    }
+   }
+   return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call);\n" . $code}]
+  },
+ }
+}
+
 sub _build_split_like_code_rule {
  return {
   id => 'SPLIT_LIKE_CODE',
@@ -741,6 +767,7 @@ sub _build_bootstrap_rule_descriptors {
   _build_non_action_code_block_rule($ctx),
   _build_comment_rule(),
   _build_blind_call_code_block_rule($ctx),
+  _build_method_empty_blind_code_block_rule(),
   _build_split_like_code_rule(),
   _build_empty_blind_code_block_rule(),
   _build_method_empty_non_action_code_block_rule(),

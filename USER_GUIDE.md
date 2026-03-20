@@ -364,8 +364,9 @@ Current frontend validation now rejects malformed edge-target indexing before bo
 That exactness rule is intentional:
 - supported action-edge continuations like `-> rule[idx]`, `-> rule.method`, and `-> rule { ... }` are still valid,
 - action-edge fluent continuations must actually name a method after the dot, so malformed starts like `-> rule.` and `-> rule..push(...)` are rejected during validation,
+- blind-call fluent continuations must also actually name a method after the dot, so malformed starts like `=> rule.` and `=> rule..return_a()` are rejected during validation,
 - but glued punctuation suffixes like `-> rule-extra` are rejected early instead of being misread as plain `-> rule`,
-- and blind-call targets stay even narrower, so `=> rule` and `=> rule { ... }` are valid while glued punctuation forms and fluent continuations like `=> rule .method(...)` are not.
+- while blind-call targets stay plain rule names, so `=> rule`, `=> rule { ... }`, `=> rule.method(...)`, and `=> rule .method(...)` are valid but glued punctuation forms like `=> rule-extra` are not.
 
 An explicit side-by-side equivalence example can help:
 

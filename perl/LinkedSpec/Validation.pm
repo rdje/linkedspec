@@ -641,10 +641,10 @@ sub _scan_rule_edges_in_fragment {
 
   my $label = substr($fragment, $label_start, $cursor - $label_start);
    if ($cursor < $len) {
-    my $label_suffix = substr($fragment, $cursor, 1);
+   my $label_suffix = substr($fragment, $cursor, 1);
     my $label_suffix_ok = $kind eq 'action'
      ? ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{' || $label_suffix eq '.')
-     : ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{');
+     : ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{' || $label_suffix eq '.');
     unless ($label_suffix_ok) {
      return {
       error => {
@@ -699,25 +699,15 @@ sub _scan_rule_edges_in_fragment {
     }
    }
 
-   if ($kind eq 'blind_call' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
-    return {
-     error => {
-      kind   => $kind,
-      reason => 'fluent_suffix_not_supported',
-      label  => $label,
-     },
-    };
-   }
-
-   if ($kind eq 'action' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
+   if ($lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
     my $fluent_cursor = $lookahead + 1;
     ++$fluent_cursor while $fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\s/o;
     unless ($fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\w/o) {
      return {
       error => {
        kind   => $kind,
-       reason => 'malformed_fluent_suffix',
-       label  => $label,
+        reason => 'malformed_fluent_suffix',
+        label  => $label,
       },
      };
     }
@@ -873,12 +863,12 @@ sub _report_edge_target_syntax_error {
   );
  }
 
- if ($kind eq 'blind_call' && $reason eq 'fluent_suffix_not_supported') {
+ if ($kind eq 'blind_call' && $reason eq 'malformed_fluent_suffix') {
   return report_dsl_error(
    $spec_content,
    $position,
-   "Blind-call targets do not support fluent suffixes",
-   "Use '=> RuleName' or '=> RuleName { ... }' for blind calls; fluent '.method(...)' continuations belong to action edges like '-> RuleName .method(...)'",
+   "Malformed blind-call fluent suffix syntax",
+   "Use '=> RuleName.method(...)', '=> RuleName .method(...)', or '=> RuleName { ... }'; the '.' must be followed by a method name",
   );
  }
 

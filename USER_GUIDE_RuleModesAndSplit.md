@@ -506,6 +506,40 @@ The practical reading is:
 - then call `trailer`,
 - and treat the parent rule as the composition shell around those child parsers.
 
+### Post-call processing after `=> child_rule`
+Blind calls can also postprocess the AST/value returned by the child call.
+
+These supported forms now all belong to the blind-call surface:
+- `=> child_rule`
+- `=> child_rule { ... }`
+- `=> child_rule.method(...)`
+- `=> child_rule .method(...).method2(...)`
+
+The semantic center is still the same:
+- first do `call(child_rule)`,
+- store that child result as the current blind-call entry,
+- then run any attached block or fluent post-call steps against that current entry.
+
+So a fluent blind-call chain is now explicit sugar for post-call processing that would otherwise live in a block.
+
+Example:
+
+```text
+wrapper:AND
+ => child .return_a()
+```
+
+is equivalent in lowered meaning to:
+
+```text
+wrapper:AND
+ => child { return_a(wrapper) }
+```
+
+The same idea extends to longer chains:
+- `=> child .m1(...).m2(...)`
+- means “call `child`, then run `m1(...)`, then run `m2(...)` on the current blind-call entry”.
+
 ### `-> child_rule` versus `=> child_rule`
 This distinction is worth keeping very explicit.
 

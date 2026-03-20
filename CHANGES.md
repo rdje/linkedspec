@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-20 - Blind Calls: Support Fluent Post-Call Continuations
+
+Blind calls now support explicit fluent post-call chaining instead of limiting post-call customization to `=> Rule { ... }`.
+
+- Updated `perl/LinkedSpec/BootstrapSpec/Core.pm` so supported blind-call forms now include:
+  - `=> Rule`
+  - `=> Rule { ... }`
+  - `=> Rule.method(...)`
+  - `=> Rule .method(...).method2(...)`
+- The new blind-call fluent surface lowers as sugar over the existing post-call blind-call contract:
+  - first do `call(Rule)`,
+  - then run the fluent post-call steps against the current blind-call entry.
+- Updated `perl/LinkedSpec/Validation.pm` so validation now accepts blind-call fluent continuations and only rejects malformed blind-call fluent starts such as:
+  - `=> Rule.`
+  - `=> Rule..return_a()`
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - acceptance of the documented spaced blind-call fluent surface `=> Rule .method(...)`,
+  - and BCODE/runtime parity between blind-call fluent post-call chaining and the equivalent explicit post-call block form.
+- Expanded `USER_GUIDE.md` and `USER_GUIDE_RuleModesAndSplit.md` so the blind-call contract now states plainly that fluent post-call chaining is part of the supported surface and is semantically equivalent to post-call block processing.
+
 ## 2026-03-20 - Validation: Reject Blind-Call Fluent Continuations
 
 Extended the Phase 2 frontend-hardening track so blind-call targets cannot quietly pick up spaced fluent-style continuations that belong only to action edges.
