@@ -445,6 +445,8 @@ sub _set_runtime_ctx_last_error {
   spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
   spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
  };
+ $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
+ $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};
  $runtime_ctx->{last_error} = $error;
  return $error
 }
@@ -671,9 +673,27 @@ sub run_get_pipeline {
  _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $runtime_ctx->{top_rule}, rule_count => $rule_count }, DUMP_LOW);
 
  my $top_rule = $runtime_ctx->{top_rule};
+ my $top_rule_meta = (ref($final_descr->{spec}{$top_rule}) eq 'HASH') ? $final_descr->{spec}{$top_rule}{meta} : undef;
  return sub {
   _clear_runtime_ctx_last_error($runtime_ctx);
-  return &{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0])
+  my $retv = eval { &{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0]) };
+  my $eval_error = $@;
+  if ($eval_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    type => 'runtime_parser',
+    stage => 'invoke_top_rule',
+    summary => 'Top-level parser invocation failed',
+    detail => $eval_error,
+    rule_label => $top_rule,
+    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+   );
+   die $eval_error;
+  }
+  if (ref($runtime_ctx->{last_error}) eq 'HASH' && ($runtime_ctx->{last_error}{type} // '') eq 'runtime_handler') {
+   $@ = defined($runtime_ctx->{last_error}{detail}) ? $runtime_ctx->{last_error}{detail} : '';
+  }
+  return $retv
  }
 }
 

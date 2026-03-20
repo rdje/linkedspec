@@ -1029,7 +1029,7 @@ That means the `last_error` payload is now largely self-contained:
 - and `spec_name` / `spec_path` travel with the payload when that information is known.
 
 For runtime execution failures, the same payload also tells you which compiled rule failed:
-- `type` is currently `runtime_handler`,
+- `type` is currently `runtime_handler` for inner compiled-handler eval failures or `runtime_parser` for higher-level top-rule invocation failures,
 - `rule_label` names the failing compiled rule,
 - and `handler_variant` tells you which handler family was active when the eval-visible failure happened.
 
@@ -1042,7 +1042,7 @@ For runtime execution failures, the same payload also tells you which compiled r
 
 `LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility.
 
-`get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload; and if a returned parser later hits a handler execution failure, that same shared context is upgraded again to a `runtime_handler` payload.
+`get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload; and if a returned parser later hits a runtime execution failure, that same shared context is upgraded again to a `runtime_handler` or `runtime_parser` payload depending on where the failure surfaced.
 
 Public callers should continue to treat `LinkedSpec::get_parser(...)` as the stable entrypoint. Trace/spec-resolution/compile defaults are owned internally by `LinkedSpec::ParserFactory`, and local/module-relative lookup is owned by `LinkedSpec::Resolver`, so callers do not need to wire those dependencies themselves. The older `LinkedSpec::Deps` module is no longer part of the active parser-factory path, `Resolver` is loaded lazily only when parser-factory default deps are actually resolved, and the broader compile/plugin pipeline (`ParserFactory`, `Runtime`, `Compiler`, `PluginBridge`, plus `RuleIR::EmitContext` for the compatibility rewrite shim) is now lazy-loaded from the façade only when the corresponding public entrypoints actually need it.
 
