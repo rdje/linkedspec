@@ -699,6 +699,16 @@ sub _scan_rule_edges_in_fragment {
     }
    }
 
+   if ($kind eq 'blind_call' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
+    return {
+     error => {
+      kind   => $kind,
+      reason => 'fluent_suffix_not_supported',
+      label  => $label,
+     },
+    };
+   }
+
    if ($kind eq 'action' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
     my $fluent_cursor = $lookahead + 1;
     ++$fluent_cursor while $fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\s/o;
@@ -860,6 +870,15 @@ sub _report_edge_target_syntax_error {
    $position,
    "Malformed blind-call target syntax",
    "Use '=> RuleName' or '=> RuleName { ... }'; blind-call target names use word characters only and cannot have glued punctuation suffixes",
+  );
+ }
+
+ if ($kind eq 'blind_call' && $reason eq 'fluent_suffix_not_supported') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Blind-call targets do not support fluent suffixes",
+   "Use '=> RuleName' or '=> RuleName { ... }' for blind calls; fluent '.method(...)' continuations belong to action edges like '-> RuleName .method(...)'",
   );
  }
 

@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-20 - Validation: Reject Blind-Call Fluent Continuations
+
+Extended the Phase 2 frontend-hardening track so blind-call targets cannot quietly pick up spaced fluent-style continuations that belong only to action edges.
+
+- Updated `perl/LinkedSpec/Validation.pm` so `validate_dsl_syntax(...)` now reports an early targeted diagnostic for malformed blind-call shapes like:
+  - `=> Rule .method(...)`
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - acceptance of the documented spaced action-edge fluent surface `-> Rule .method(...)`,
+  - and rejection of spaced blind-call fluent continuations before bootstrap parse.
+- Expanded `USER_GUIDE.md` so the edge-family contract now states plainly that fluent `.method(...)` continuations belong to action edges, not blind calls.
+
 ## 2026-03-20 - Validation: Reject Malformed Action-Edge Fluent Starts
 
 Extended the Phase 2 frontend-hardening track so malformed action-edge fluent continuations are rejected during DSL validation instead of drifting into later bootstrap parse failure.

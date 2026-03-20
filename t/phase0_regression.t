@@ -5836,6 +5836,27 @@ PERL
     like($out, qr/Malformed action-edge fluent suffix syntax/, 'double-dot action-edge fluent diagnostic is reported early');
     is($err, '', 'double-dot action-edge fluent validation subprocess does not emit stderr');
 };
+subtest 'validation_accepts_spaced_action_edge_fluent_suffixes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Helper .push(items) { return_a(Top) }
+
+Helper:
+ /b/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'spaced action-edge fluent validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation preserves the documented spaced action-edge fluent surface');
+    unlike($out, qr/Malformed action-edge fluent suffix syntax|Malformed action-edge target syntax/, 'spaced action-edge fluent surface does not trigger action-edge fluent diagnostics');
+    is($err, '', 'spaced action-edge fluent validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_glued_blind_call_target_suffixes' => sub {
     plan tests => 4;
 
@@ -5853,6 +5874,27 @@ PERL
     like($out, qr/__INVALID_DSL__/, 'validation rejects glued punctuation suffixes on blind-call target names before bootstrap parse');
     like($out, qr/Malformed blind-call target syntax/, 'glued blind-call target suffix diagnostic is reported early');
     is($err, '', 'glued blind-call target suffix validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_spaced_blind_call_fluent_suffixes' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:AND
+ => Helper .push(items)
+
+Helper:
+ /a/ -> Helper { return_a(Helper) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'spaced blind-call fluent validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects blind-call targets with spaced fluent suffixes before bootstrap parse');
+    like($out, qr/Blind-call targets do not support fluent suffixes/, 'spaced blind-call fluent diagnostic is reported early');
+    is($err, '', 'spaced blind-call fluent validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_action_edges_with_missing_targets' => sub {
     plan tests => 4;
