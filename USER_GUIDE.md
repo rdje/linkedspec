@@ -991,8 +991,11 @@ Typical uses:
 The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{type}`
 - `$ctx->{last_error}{stage}`
+- `$ctx->{last_error}{owner_stage}`
 - `$ctx->{last_error}{summary}`
 - `$ctx->{last_error}{detail}`
+- `$ctx->{last_error}{spec_name}`
+- `$ctx->{last_error}{spec_path}`
 
 Example:
 
@@ -1012,6 +1015,12 @@ if (!defined $descr && ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH')
 The same hook also works through `LinkedSpec::get_parser(...)`. On that file-oriented path it now covers both:
 - parser-factory failures before compilation starts, such as invalid spec names, missing spec files, or file-load failures,
 - and compiler/runtime failures after the spec file has been loaded.
+
+That means the `last_error` payload is now largely self-contained:
+- `type` tells you which owner family raised the error (`parser_factory` or `compiler_pipeline` today),
+- `stage` gives the owner-local failure step,
+- `owner_stage` gives the stable combined identifier,
+- and `spec_name` / `spec_path` travel with the payload when that information is known.
 
 ## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:

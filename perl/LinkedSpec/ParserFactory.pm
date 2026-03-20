@@ -112,11 +112,16 @@ sub _ensure_runtime_ctx {
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
+ my $type = defined($args{type}) ? $args{type} : 'parser_factory';
+ my $stage = defined($args{stage}) ? $args{stage} : '';
  my $error = {
-  type    => 'parser_factory',
-  stage   => defined($args{stage}) ? $args{stage} : '',
+  type    => $type,
+  stage   => $stage,
+  owner_stage => length($stage) ? "$type:$stage" : $type,
   summary => defined($args{summary}) ? $args{summary} : '',
   detail  => defined($args{detail}) ? $args{detail} : '',
+  spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
+  spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
  };
  $runtime_ctx->{last_error} = $error;
  return $error
