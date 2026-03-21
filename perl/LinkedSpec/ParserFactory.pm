@@ -118,20 +118,9 @@ sub _ensure_runtime_ctx {
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- return undef unless ref($runtime_ctx) eq 'HASH';
- my $type = defined($args{type}) ? $args{type} : 'parser_factory';
- my $stage = defined($args{stage}) ? $args{stage} : '';
- my $error = {
-  type    => $type,
-  stage   => $stage,
-  owner_stage => length($stage) ? "$type:$stage" : $type,
-  summary => defined($args{summary}) ? $args{summary} : '',
-  detail  => defined($args{detail}) ? $args{detail} : '',
-  spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
-  spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
- };
- $runtime_ctx->{last_error} = $error;
- return $error
+ $args{type} = 'parser_factory' unless defined $args{type};
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
 #------------------------------------------------------------------------------
