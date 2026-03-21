@@ -6850,6 +6850,181 @@ subtest 'parser_factory_run_get_parser_records_structured_error_for_resolution_f
     is($runtime_ctx->{last_error}{spec_name}, 'missing_spec_name', 'ParserFactory resolution failure records spec_name inside last_error');
     is($runtime_ctx->{last_error}{spec_path}, '', 'ParserFactory resolution failure leaves spec_path empty inside last_error');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_when_validate_spec_name_dies' => sub {
+    plan tests => 10;
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_invalid_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { die "__FORCED_VALIDATE_SPEC_NAME_DIE__\n" },
+            resolve_spec_path => sub { die "__UNEXPECTED_RESOLVE_SPEC_PATH__\n" },
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when validate_spec_name dies');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when validate_spec_name dies');
+    is($runtime_ctx->{spec_name}, 'forced_invalid_name', 'ParserFactory runtime context preserves requested spec name when validate_spec_name dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when validate_spec_name dies');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'validate_spec_name die records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_name', 'validate_spec_name die records validate_spec_name stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:validate_spec_name', 'validate_spec_name die records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec name validation failed', 'validate_spec_name die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_SPEC_NAME_DIE__/, 'validate_spec_name die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_name die leaves spec_path empty');
+};
+subtest 'parser_factory_run_get_parser_records_structured_error_when_resolve_spec_path_dies' => sub {
+    plan tests => 10;
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_resolve_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { die "__FORCED_RESOLVE_SPEC_PATH_DIE__\n" },
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when resolve_spec_path dies');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when resolve_spec_path dies');
+    is($runtime_ctx->{spec_name}, 'forced_resolve_name', 'ParserFactory runtime context preserves requested spec name when resolve_spec_path dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when resolve_spec_path dies');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'resolve_spec_path die records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'resolve_spec_path die records resolve_spec_path stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'resolve_spec_path die records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'resolve_spec_path die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RESOLVE_SPEC_PATH_DIE__/, 'resolve_spec_path die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'resolve_spec_path die leaves spec_path empty');
+};
+subtest 'parser_factory_run_get_parser_records_structured_error_when_load_spec_content_dies' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_load_spec_content.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_load_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { die "__FORCED_LOAD_SPEC_CONTENT_DIE__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when load_spec_content dies');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when load_spec_content dies');
+    is($runtime_ctx->{spec_name}, 'forced_load_name', 'ParserFactory runtime context preserves requested spec name when load_spec_content dies');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when load_spec_content dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when load_spec_content dies');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'load_spec_content die records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'load_spec_content', 'load_spec_content die records load_spec_content stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'load_spec_content die records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec file load failed', 'load_spec_content die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LOAD_SPEC_CONTENT_DIE__/, 'load_spec_content die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'load_spec_content die preserves resolved spec_path inside last_error');
+};
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_dies_without_runtime_error_payload' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { die "__FORCED_COMPILE_SPEC_DIE__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec dies without structured runtime error payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec dies');
+    is($runtime_ctx->{spec_name}, 'forced_compile_name', 'ParserFactory runtime context preserves requested spec name when compile_spec dies');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec dies without runtime payload');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec die without runtime payload records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec die without runtime payload records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec die without runtime payload records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec die without runtime payload records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_DIE__/, 'compile_spec die without runtime payload records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec die without runtime payload preserves resolved spec_path inside last_error');
+};
+subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_dies' => sub {
+    plan tests => 9;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_preserve.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_preserve_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub {
+                $runtime_ctx->{last_error} = {
+                    type => 'compiler_pipeline',
+                    stage => 'spec_descr',
+                    owner_stage => 'compiler_pipeline:spec_descr',
+                    summary => 'Spec descriptor generation failed',
+                    detail => '__FORCED_INNER_COMPILE_ERROR__',
+                    spec_name => 'forced_compile_preserve_name',
+                    spec_path => $spec_path,
+                };
+                die "__FORCED_COMPILE_SPEC_DIE_WITH_RUNTIME_PAYLOAD__\n";
+            },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec dies after writing a structured runtime error payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec dies after writing runtime payload');
+    is($runtime_ctx->{spec_name}, 'forced_compile_preserve_name', 'ParserFactory runtime context preserves requested spec name when compile_spec dies after writing runtime payload');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec dies after writing runtime payload');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory preserves structured runtime error payload when compile_spec dies after writing one');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compile_spec die after runtime payload preserves deeper owner type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compile_spec die after runtime payload preserves deeper owner stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec die after runtime payload preserves deeper owner_stage');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_INNER_COMPILE_ERROR__/, 'compile_spec die after runtime payload preserves deeper owner detail');
+};
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
 

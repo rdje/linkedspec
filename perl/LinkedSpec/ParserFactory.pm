@@ -159,7 +159,19 @@ sub run_get_parser {
    option_keys => [sort keys %opt_hash],
   }, $dump_low);
 
-  unless ($validate_spec_name->($spec_name, $trace_scope)) {
+  my $spec_name_ok = eval { $validate_spec_name->($spec_name, $trace_scope) };
+  my $validate_spec_name_error = $@;
+  if ($validate_spec_name_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'validate_spec_name',
+    summary => 'Spec name validation failed',
+    detail => $validate_spec_name_error,
+   );
+   return undef
+  }
+
+  unless ($spec_name_ok) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_spec_name',
@@ -169,7 +181,17 @@ sub run_get_parser {
    return undef
   }
 
-  my $spec_path = $resolve_spec_path->($spec_name, $trace_scope);
+  my $spec_path = eval { $resolve_spec_path->($spec_name, $trace_scope) };
+  my $resolve_spec_path_error = $@;
+  if ($resolve_spec_path_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'resolve_spec_path',
+    summary => 'Spec resolution failed',
+    detail => $resolve_spec_path_error,
+   );
+   return undef;
+  }
   unless (defined $spec_path) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
@@ -181,7 +203,17 @@ sub run_get_parser {
   }
   $runtime_ctx->{spec_path} = $spec_path if ref($runtime_ctx) eq 'HASH';
 
-  my $content = $load_spec_content->($spec_path, $trace_scope);
+  my $content = eval { $load_spec_content->($spec_path, $trace_scope) };
+  my $load_spec_content_error = $@;
+  if ($load_spec_content_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'load_spec_content',
+    summary => 'Spec file load failed',
+    detail => $load_spec_content_error,
+   );
+   return undef;
+  }
   unless (defined $content) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
@@ -193,7 +225,19 @@ sub run_get_parser {
   }
   my %forward_opt_hash = %opt_hash;
   delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
-  my $parser = $compile_spec->(\$content, \%forward_opt_hash);
+  my $parser = eval { $compile_spec->(\$content, \%forward_opt_hash) };
+  my $compile_spec_error = $@;
+  if ($compile_spec_error) {
+   if (!ref($runtime_ctx->{last_error}) || ref($runtime_ctx->{last_error}) ne 'HASH') {
+    _set_runtime_ctx_last_error(
+     $runtime_ctx,
+     stage => 'compile_spec',
+     summary => 'Spec compilation failed',
+     detail => $compile_spec_error,
+    );
+   }
+   return undef;
+  }
   if (!defined($parser) && ref($runtime_ctx) eq 'HASH' && ref($runtime_ctx->{last_error}) ne 'HASH') {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
