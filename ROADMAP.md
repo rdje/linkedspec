@@ -117,6 +117,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: parser-factory setup failures now normalize into `parser_factory:prepare_parser_factory` when the file-oriented owner cannot prepare its dependency/trace surface cleanly before normal validation/resolution begins.
 - Recent landed follow-up: compiler-owner setup failures before the main validation/parse flow now normalize into `compiler_pipeline:prepare_pipeline` when a runtime context exists, instead of drifting outward as raw dies and relying on the generic runtime-owner fallback.
 - Recent landed follow-up: `LinkedSpec::Runtime::run_get(...)` now also normalizes raw compiler-delegation dies into a structured fallback `runtime_owner:run_get_pipeline` payload when no deeper owner payload exists yet, while preserving richer deeper `last_error` payloads when they do.
+- Recent landed follow-up: `SpecEntry.pm` now compiles generated rule-handler source at most once per rule and reuses the compiled coderef across later invocations, instead of string-evaling the full handler on every call; invalid generated handler source now records explicit `runtime_handler:rule_handler_compile` failure context on first invocation.
 - Exit criteria:
   - Better performance predictability and debuggability.
 

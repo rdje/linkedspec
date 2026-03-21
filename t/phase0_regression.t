@@ -7662,6 +7662,67 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'get_parser runtime handler failure records rule label');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__/, 'get_parser runtime handler failure preserves runtime detail');
 };
+subtest 'spec_entry_runtime_handler_compiles_generated_source_once_per_rule' => sub {
+    plan tests => 5;
+
+    my $runtime_ctx = {};
+    my $rule_meta = {
+        selected_handler_variant => 'FORCED_COMPILE_ONCE',
+    };
+    my $handler_source = <<'PERL';
+my ($descr, $STRING, $info) = @_;
+BEGIN {
+ no warnings 'once';
+ ++$LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT;
+}
+return ['ok'];
+PERL
+
+    local $LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT = 0;
+    my $handler = LinkedSpec::SpecEntry::_build_runtime_handler(
+        label => 'Top',
+        handler => $handler_source,
+        rule_meta => $rule_meta,
+        runtime_ctx => $runtime_ctx,
+    );
+
+    my $input = 'a';
+    my $info = {};
+    my $ret1 = $handler->({}, \$input, $info);
+    my $ret2 = $handler->({}, \$input, $info);
+
+    ok(ref($handler) eq 'CODE', 'SpecEntry still builds runtime handler coderef');
+    ok(ref($ret1) eq 'ARRAY', 'first runtime handler invocation still returns handler payload');
+    ok(ref($ret2) eq 'ARRAY', 'second runtime handler invocation still returns handler payload');
+    is($LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT, 1, 'generated runtime handler source compiles once and is reused across invocations');
+    ok(!exists $runtime_ctx->{last_error}, 'successful cached runtime handler invocations leave runtime error context empty');
+};
+subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
+    plan tests => 8;
+
+    my $runtime_ctx = {};
+    my $rule_meta = {
+        selected_handler_variant => 'FORCED_COMPILE_ERROR',
+    };
+    my $handler = LinkedSpec::SpecEntry::_build_runtime_handler(
+        label => 'Top',
+        handler => "my (\$descr, \$STRING, \$info) = \@_;\nmy = ;\n",
+        rule_meta => $rule_meta,
+        runtime_ctx => $runtime_ctx,
+    );
+
+    my $input = 'a';
+    my $ret = $handler->({}, \$input, {});
+
+    ok(ref($handler) eq 'CODE', 'SpecEntry still returns runtime handler coderef for invalid generated source');
+    ok(!defined($ret), 'invalid generated runtime handler source returns undef at invocation time');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid generated runtime handler source records structured last_error');
+    is($runtime_ctx->{last_error}{type}, 'runtime_handler', 'invalid generated runtime handler source records runtime_handler type');
+    is($runtime_ctx->{last_error}{stage}, 'rule_handler_compile', 'invalid generated runtime handler source records rule_handler_compile stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_compile', 'invalid generated runtime handler source records combined compile owner stage');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid generated runtime handler source records failing rule label');
+    like($runtime_ctx->{last_error}{detail}, qr/syntax error|Bareword/, 'invalid generated runtime handler source preserves compile failure detail');
+};
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_die' => sub {
     plan tests => 15;
 

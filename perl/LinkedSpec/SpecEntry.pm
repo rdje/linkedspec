@@ -770,6 +770,9 @@ sub _build_runtime_handler {
  my $handler = $args{handler};
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
+ my $compiled_handler;
+ my $compile_error;
+ my $handler_source = "sub {\n$handler\n}";
 
  return sub {
   my ($descr, $STRING, $info) = @_;
@@ -782,7 +785,32 @@ sub _build_runtime_handler {
    },
    DUMP_HIGH
   );
-  my $retv = eval $handler;
+  if (!defined($compiled_handler) && !defined($compile_error)) {
+   $compiled_handler = eval $handler_source;
+   $compile_error = $@ unless ref($compiled_handler) eq 'CODE';
+  }
+  if ($compile_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'rule_handler_compile',
+    summary => 'Rule handler compilation failed',
+    detail => $compile_error,
+    rule_label => $label,
+    handler_variant => $rule_meta->{selected_handler_variant},
+   );
+   _trace_decision("rule_handler_compile:$label", 0, $compile_error, DUMP_NONE);
+   _trace_exit(
+    $runtime_scope,
+    {
+     returned_defined => 0,
+     return_ref => '',
+     return_size => undef,
+    },
+    DUMP_HIGH
+   );
+   return undef
+  }
+  my $retv = eval { $compiled_handler->($descr, $STRING, $info) };
   my $eval_error = $@;
   if ($eval_error) {
    _set_runtime_ctx_last_error(
