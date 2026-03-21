@@ -1061,9 +1061,13 @@ That means the `last_error` payload is now largely self-contained:
 - and `spec_name` / `spec_path` travel with the payload when that information is known.
 
 For runtime execution failures, the same payload also tells you which compiled rule failed:
-- `type` is currently `runtime_handler` for inner compiled-handler eval failures or `runtime_parser` for higher-level top-rule invocation failures,
+- `type` is currently `runtime_handler` for inner compiled-handler eval failures or `runtime_parser` for higher-level top-rule resolution/invocation failures,
 - `rule_label` names the failing compiled rule,
 - and `handler_variant` tells you which handler family was active when the eval-visible failure happened.
+
+That `runtime_parser` family now covers both:
+- `resolve_top_rule_handler` when a returned parser coderef cannot find a usable selected top rule or handler coderef to invoke,
+- and `invoke_top_rule` when the selected top-rule handler itself dies at the outer parser-call boundary.
 
 ## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:

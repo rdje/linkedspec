@@ -7590,6 +7590,7 @@ SPEC
         {},
         {
             runtime_ctx => $runtime_ctx,
+            validate_gdata_references => sub { return 1 },
             compile_spec_entry => sub {
                 $runtime_ctx->{top_rule} = 'Top';
                 return (
@@ -7627,6 +7628,118 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'forced outer parser die leaves inline-spec spec_path empty');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'forced outer parser die records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_OUTER_DIE', 'forced outer parser die records handler variant');
+};
+subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_label' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+    my $parser = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        {},
+        {
+            runtime_ctx => $runtime_ctx,
+            compile_spec_entry => sub {
+                return (
+                    'Top',
+                    {
+                        handler => sub { return ['ok'] },
+                        gdata => [],
+                        meta => {
+                            selected_handler_variant => 'FORCED_MISSING_TOP_RULE_LABEL',
+                        },
+                    },
+                    'Top',
+                );
+            },
+        },
+    );
+
+    ok(defined($parser) && ref($parser) eq 'CODE', 'compiler pipeline still returns parser coderef for missing top-rule-label test');
+
+    my $input = 'a';
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+        run_parser_with_captured_io($parser, \$input);
+
+    ok(!$ok_run, 'missing top-rule label still propagates as outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast), 'missing top-rule label returns no AST');
+    like($err_run, qr/No top-level rule label is available for parser invocation/, 'missing top-rule label preserves targeted outer die text');
+    is($inner_eval_err, '', 'missing top-rule label does not masquerade as inner eval error');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'missing top-rule label records structured runtime_parser failure');
+    is($runtime_ctx->{last_error}{type}, 'runtime_parser', 'missing top-rule label records runtime_parser type');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_top_rule_handler', 'missing top-rule label records resolve_top_rule_handler stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_parser:resolve_top_rule_handler', 'missing top-rule label records combined runtime parser owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Top-level parser invocation failed', 'missing top-rule label records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/No top-level rule label is available for parser invocation/, 'missing top-rule label records detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'missing top-rule label leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'missing top-rule label leaves inline-spec spec_path empty');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'missing top-rule label leaves rule_label absent');
+};
+subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_handler' => sub {
+    plan tests => 15;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+    my $parser;
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_gdata_references = sub { return 1 };
+        $parser = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            {},
+            {
+                runtime_ctx => $runtime_ctx,
+                compile_spec_entry => sub {
+                    $runtime_ctx->{top_rule} = 'Top';
+                    return (
+                        'Top',
+                        {
+                            gdata => [],
+                            meta => {
+                                selected_handler_variant => 'FORCED_MISSING_TOP_HANDLER',
+                            },
+                        },
+                        'Top',
+                    );
+                },
+            },
+        );
+    }
+
+    ok(defined($parser) && ref($parser) eq 'CODE', 'compiler pipeline still returns parser coderef for missing top-rule-handler test');
+
+    my $input = 'a';
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+        run_parser_with_captured_io($parser, \$input);
+
+    ok(!$ok_run, 'missing top-rule handler still propagates as outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast), 'missing top-rule handler returns no AST');
+    like($err_run, qr/No handler coderef found for top-level rule 'Top'/, 'missing top-rule handler preserves targeted outer die text');
+    is($inner_eval_err, '', 'missing top-rule handler does not masquerade as inner eval error');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'missing top-rule handler records structured runtime_parser failure');
+    is($runtime_ctx->{last_error}{type}, 'runtime_parser', 'missing top-rule handler records runtime_parser type');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_top_rule_handler', 'missing top-rule handler records resolve_top_rule_handler stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_parser:resolve_top_rule_handler', 'missing top-rule handler records combined runtime parser owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Top-level parser invocation failed', 'missing top-rule handler records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/No handler coderef found for top-level rule 'Top'/, 'missing top-rule handler records detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'missing top-rule handler leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'missing top-rule handler leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'missing top-rule handler records top rule label');
+    is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_MISSING_TOP_HANDLER', 'missing top-rule handler records handler variant');
 };
 subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
     plan tests => 4;

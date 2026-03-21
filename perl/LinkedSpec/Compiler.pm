@@ -770,10 +770,50 @@ sub run_get_pipeline {
  _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $runtime_ctx->{top_rule}, rule_count => $rule_count }, DUMP_LOW);
 
  my $top_rule = $runtime_ctx->{top_rule};
- my $top_rule_meta = (ref($final_descr->{spec}{$top_rule}) eq 'HASH') ? $final_descr->{spec}{$top_rule}{meta} : undef;
  return sub {
   _clear_runtime_ctx_last_error($runtime_ctx);
-  my $retv = eval { &{$final_descr->{spec}{$top_rule}{handler}}($final_descr, $_[0]) };
+  my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')
+   ? $final_descr->{spec}{$top_rule}
+   : undef;
+  my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
+  my $handler = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{handler} : undef;
+  if (!defined($top_rule) || !length($top_rule)) {
+   my $detail = "No top-level rule label is available for parser invocation";
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    type => 'runtime_parser',
+    stage => 'resolve_top_rule_handler',
+    summary => 'Top-level parser invocation failed',
+    detail => $detail,
+   );
+   die "$detail\n";
+  }
+  if (ref($top_rule_entry) ne 'HASH') {
+   my $detail = "No compiled descriptor entry found for top-level rule '$top_rule'";
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    type => 'runtime_parser',
+    stage => 'resolve_top_rule_handler',
+    summary => 'Top-level parser invocation failed',
+    detail => $detail,
+    rule_label => $top_rule,
+   );
+   die "$detail\n";
+  }
+  if (ref($handler) ne 'CODE') {
+   my $detail = "No handler coderef found for top-level rule '$top_rule'";
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    type => 'runtime_parser',
+    stage => 'resolve_top_rule_handler',
+    summary => 'Top-level parser invocation failed',
+    detail => $detail,
+    rule_label => $top_rule,
+    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+   );
+   die "$detail\n";
+  }
+  my $retv = eval { &$handler($final_descr, $_[0]) };
   my $eval_error = $@;
   if ($eval_error) {
    _set_runtime_ctx_last_error(
