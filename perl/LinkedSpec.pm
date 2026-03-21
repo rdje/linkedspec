@@ -47,10 +47,7 @@ our ($DUMP_VERBOSITY, $TRACE_LOG_FILE, $TRACE_LOG_MODE, $TRACE_EMOJI, $TRACE_IND
 #------------------------------------------------------------------------------
 sub configure_trace {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::configure_trace(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'configure_trace', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -61,10 +58,7 @@ sub configure_trace {
 #------------------------------------------------------------------------------
 sub trace_enter {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::trace_enter(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'trace_enter', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -75,10 +69,7 @@ sub trace_enter {
 #------------------------------------------------------------------------------
 sub trace_exit {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::trace_exit(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'trace_exit', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -89,10 +80,7 @@ sub trace_exit {
 #------------------------------------------------------------------------------
 sub trace_decision {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::trace_decision(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'trace_decision', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -104,10 +92,7 @@ sub trace_decision {
 #------------------------------------------------------------------------------
 sub log_output {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::log_output(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'log_output', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -118,10 +103,7 @@ sub log_output {
 #------------------------------------------------------------------------------
 sub log_dump {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::log_dump(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'log_dump', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -132,10 +114,7 @@ sub log_dump {
 #------------------------------------------------------------------------------
 sub should_dump {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::should_dump(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Trace', 'should_dump', @args)
 }
 
 sub _require_pkg {
@@ -145,11 +124,6 @@ sub _require_pkg {
  $file .= '.pm';
  my $ok = eval { require $file; 1 };
  die "(LinkedSpec::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
-}
-
-sub _require_trace_pkg {
- _require_pkg('LinkedSpec::Trace');
  return 1
 }
 
@@ -172,6 +146,15 @@ sub _call_preserving_err {
  return
 }
 
+sub _dispatch_owner_call {
+ my ($pkg, $subname, @args) = @_;
+ return _call_preserving_err(sub {
+  _require_pkg($pkg) unless $pkg->can($subname);
+  no strict 'refs';
+  return &{"${pkg}::${subname}"}(@args);
+ })
+}
+
 
 
 #------------------------------------------------------------------------------
@@ -185,10 +168,7 @@ sub Get {
  my @args = @_;
  my $spec_content_ref = shift @args;
  my %option = (@args % 2 == 0) ? @args : ();
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::Runtime');
-  return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
- })
+ return _dispatch_owner_call('LinkedSpec::Runtime', 'run_get', $spec_content_ref, \%option)
 }
 
 #------------------------------------------------------------------------------
@@ -200,10 +180,7 @@ sub Get {
 #------------------------------------------------------------------------------
 sub spec_descr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::Compiler');
-  return LinkedSpec::Compiler::spec_descr(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::Compiler', 'spec_descr', @args)
 }
 
 #------------------------------------------------------------------------------
@@ -216,10 +193,7 @@ sub spec_descr {
 #------------------------------------------------------------------------------
 sub call_spec_handler_subst {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::RuleIR::EmitContext');
-  return LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(@args)
- })
+ return _dispatch_owner_call('LinkedSpec::RuleIR::EmitContext', 'rewrite_action_code_for_compat', @args)
 }
 
 
@@ -233,10 +207,7 @@ sub call_spec_handler_subst {
 sub get_parser {
  my ($spec_name, @opts) = @_;
  my %opt_hash = (@opts % 2 == 0) ? @opts : ();
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::ParserFactory') unless LinkedSpec::ParserFactory->can('run_get_parser');
-  return LinkedSpec::ParserFactory::run_get_parser($spec_name, \%opt_hash)
- })
+ return _dispatch_owner_call('LinkedSpec::ParserFactory', 'run_get_parser', $spec_name, \%opt_hash)
 }
 
 #------------------------------------------------------------------------------
@@ -247,10 +218,7 @@ sub get_parser {
 #------------------------------------------------------------------------------
 sub AUTOLOAD {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::PluginBridge') unless LinkedSpec::PluginBridge->can('_dispatch_autoload');
-  return LinkedSpec::PluginBridge::_dispatch_autoload($AUTOLOAD, \@args)
- })
+ return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_autoload', $AUTOLOAD, \@args)
 }
 
 1;
