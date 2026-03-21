@@ -110,6 +110,13 @@ sub _set_runtime_ctx_last_error {
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
+sub _set_runtime_ctx_last_error_unless_present {
+ my ($runtime_ctx, %args) = @_;
+ $args{type} = 'parser_factory' unless defined $args{type};
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error_unless_present');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
@@ -227,18 +234,16 @@ sub run_get_parser {
   my $parser = eval { $compile_spec->(\$content, \%forward_opt_hash) };
   my $compile_spec_error = $@;
   if ($compile_spec_error) {
-   if (!ref($runtime_ctx->{last_error}) || ref($runtime_ctx->{last_error}) ne 'HASH') {
-    _set_runtime_ctx_last_error(
-     $runtime_ctx,
-     stage => 'compile_spec',
-     summary => 'Spec compilation failed',
-     detail => $compile_spec_error,
-    );
-   }
+   _set_runtime_ctx_last_error_unless_present(
+    $runtime_ctx,
+    stage => 'compile_spec',
+    summary => 'Spec compilation failed',
+    detail => $compile_spec_error,
+   );
    return undef;
   }
-  if (!defined($parser) && ref($runtime_ctx) eq 'HASH' && ref($runtime_ctx->{last_error}) ne 'HASH') {
-   _set_runtime_ctx_last_error(
+  if (!defined($parser)) {
+   _set_runtime_ctx_last_error_unless_present(
     $runtime_ctx,
     stage => 'compile_spec',
     summary => 'Spec compilation failed',

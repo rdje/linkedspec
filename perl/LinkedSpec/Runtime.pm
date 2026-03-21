@@ -66,6 +66,13 @@ sub _set_runtime_ctx_last_error {
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
+sub _set_runtime_ctx_last_error_unless_present {
+ my ($runtime_ctx, %args) = @_;
+ $args{type} = 'runtime_owner' unless defined $args{type};
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error_unless_present');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
@@ -91,14 +98,12 @@ sub run_get {
   };
   my $runtime_owner_error = $@;
   if ($runtime_owner_error) {
-   unless (ref($runtime_ctx->{last_error}) eq 'HASH') {
-    _set_runtime_ctx_last_error(
-     $runtime_ctx,
-     stage => 'run_get_pipeline',
-     summary => 'Runtime compile delegation failed',
-     detail => $runtime_owner_error,
-    );
-   }
+   _set_runtime_ctx_last_error_unless_present(
+    $runtime_ctx,
+    stage => 'run_get_pipeline',
+    summary => 'Runtime compile delegation failed',
+    detail => $runtime_owner_error,
+   );
    return undef;
   }
   return $ret

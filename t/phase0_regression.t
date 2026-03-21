@@ -6488,6 +6488,45 @@ subtest 'runtime_context_helpers_manage_top_rule_and_spec_path' => sub {
     is(LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, '/tmp/fresh.spec'), '/tmp/fresh.spec', 'RuntimeContext set spec-path helper returns the stored spec path');
     is($runtime_ctx->{spec_path}, '/tmp/fresh.spec', 'RuntimeContext set spec-path helper stores the new spec path');
 };
+subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub {
+    plan tests => 8;
+
+    my $runtime_ctx = {};
+
+    ok(!LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext helper reports no structured last_error when context starts empty');
+
+    my $fresh_error = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present(
+        $runtime_ctx,
+        type => 'runtime_owner',
+        stage => 'fresh_stage',
+        summary => 'fresh summary',
+        detail => 'fresh detail',
+    );
+    ok(ref($fresh_error) eq 'HASH', 'RuntimeContext fallback helper creates structured last_error when none is present');
+    ok(LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext helper reports structured last_error after fallback creation');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:fresh_stage', 'RuntimeContext fallback helper records combined owner stage');
+
+    my $preserved = {
+        type => 'compiler_pipeline',
+        stage => 'existing_stage',
+        owner_stage => 'compiler_pipeline:existing_stage',
+        summary => 'existing summary',
+        detail => 'existing detail',
+    };
+    $runtime_ctx->{last_error} = $preserved;
+
+    my $same_error = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present(
+        $runtime_ctx,
+        type => 'parser_factory',
+        stage => 'replacement_stage',
+        summary => 'replacement summary',
+        detail => 'replacement detail',
+    );
+    is($same_error, $preserved, 'RuntimeContext fallback helper returns the existing structured last_error when one is already present');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:existing_stage', 'RuntimeContext fallback helper preserves the existing owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'existing summary', 'RuntimeContext fallback helper preserves the existing summary');
+    is($runtime_ctx->{last_error}{detail}, 'existing detail', 'RuntimeContext fallback helper preserves the existing detail');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

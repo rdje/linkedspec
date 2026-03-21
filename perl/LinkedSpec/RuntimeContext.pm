@@ -92,6 +92,12 @@ sub clear_runtime_ctx_last_error {
  return
 }
 
+sub has_structured_runtime_ctx_last_error {
+ my ($runtime_ctx) = @_;
+ return 0 unless ref($runtime_ctx) eq 'HASH';
+ return ref($runtime_ctx->{last_error}) eq 'HASH' ? 1 : 0
+}
+
 sub set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
@@ -110,6 +116,13 @@ sub set_runtime_ctx_last_error {
  $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};
  $runtime_ctx->{last_error} = $error;
  return $error
+}
+
+sub set_runtime_ctx_last_error_unless_present {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{last_error} if has_structured_runtime_ctx_last_error($runtime_ctx);
+ return set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
 1;
