@@ -603,7 +603,19 @@ sub run_get_pipeline {
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
- my $auto_descr_spec = spec_descr($retv, $compile_spec_entry);
+ my $auto_descr_spec = eval { spec_descr($retv, $compile_spec_entry) };
+ my $spec_descr_error = $@;
+ if ($spec_descr_error) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'spec_descr',
+   summary => 'Spec descriptor generation failed',
+   detail => $spec_descr_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed - trapped exception while compiling parsed spec entries");
+  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
+  return undef;
+ }
  unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -615,7 +627,19 @@ sub run_get_pipeline {
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
- my $final_descr = _build_final_descr($auto_descr_spec);
+ my $final_descr = eval { _build_final_descr($auto_descr_spec) };
+ my $build_final_descr_error = $@;
+ if ($build_final_descr_error) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'build_final_descr',
+   summary => 'Final descriptor assembly failed',
+   detail => $build_final_descr_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building gdata/final descriptor state");
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
+  return undef;
+ }
 
  unless (LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
   _set_runtime_ctx_last_error(

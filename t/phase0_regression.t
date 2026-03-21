@@ -6564,6 +6564,81 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/validate_gdata_references returned false/, 'generated descriptor validation failure records detail');
 };
+subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                compile_spec_entry => sub { die "__FORCED_COMPILE_SPEC_ENTRY_DIE__\n" },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps compile_spec_entry die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when compile_spec_entry dies during spec descriptor generation');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compile_spec_entry die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compile_spec_entry die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compile_spec_entry die records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec_entry die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compile_spec_entry die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_ENTRY_DIE__/, 'compile_spec_entry die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'compile_spec_entry die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compile_spec_entry die leaves inline-spec spec_path empty');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_when_final_descriptor_build_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_SPEC_GDATA_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps final descriptor assembly die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when final descriptor assembly dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'final descriptor assembly die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'final descriptor assembly die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'final descriptor assembly die records build_final_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'final descriptor assembly die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'final descriptor assembly die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_DIE__/, 'final descriptor assembly die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'final descriptor assembly die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_clears_stale_runtime_ctx_error_on_success' => sub {
     plan tests => 4;
 
