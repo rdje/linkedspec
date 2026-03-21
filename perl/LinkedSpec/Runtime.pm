@@ -50,7 +50,7 @@ sub _build_runtime_context {
   : undef;
  my $ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($runtime_ctx_ref);
  $ctx = {} unless ref($ctx) eq 'HASH';
- $ctx->{top_rule} = undef;
+ LinkedSpec::RuntimeContext::clear_runtime_ctx_top_rule($ctx);
  LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($ctx);
  LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
   $ctx,

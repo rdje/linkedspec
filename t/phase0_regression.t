@@ -6470,6 +6470,24 @@ subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
     LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'gamma');
     is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper becomes a no-op when parser-source capture is disabled');
 };
+subtest 'runtime_context_helpers_manage_top_rule_and_spec_path' => sub {
+    plan tests => 7;
+
+    my $runtime_ctx = {
+        top_rule => 'StaleTop',
+        spec_path => '/tmp/stale.spec',
+    };
+
+    is(LinkedSpec::RuntimeContext::clear_runtime_ctx_top_rule($runtime_ctx), undef, 'RuntimeContext clear top-rule helper resets top_rule to undef');
+    ok(exists $runtime_ctx->{top_rule}, 'RuntimeContext clear top-rule helper keeps the top_rule key present');
+    is($runtime_ctx->{top_rule}, undef, 'RuntimeContext clear top-rule helper leaves top_rule undefined');
+
+    is(LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, 'FreshTop'), 'FreshTop', 'RuntimeContext set top-rule helper returns the stored top rule');
+    is($runtime_ctx->{top_rule}, 'FreshTop', 'RuntimeContext set top-rule helper stores the new top rule');
+
+    is(LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, '/tmp/fresh.spec'), '/tmp/fresh.spec', 'RuntimeContext set spec-path helper returns the stored spec path');
+    is($runtime_ctx->{spec_path}, '/tmp/fresh.spec', 'RuntimeContext set spec-path helper stores the new spec path');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

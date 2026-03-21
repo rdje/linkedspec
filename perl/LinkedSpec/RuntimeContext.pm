@@ -64,6 +64,27 @@ sub emit_runtime_ctx_parser_source_line {
  return
 }
 
+sub clear_runtime_ctx_top_rule {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{top_rule} = undef;
+ return $runtime_ctx->{top_rule}
+}
+
+sub set_runtime_ctx_top_rule {
+ my ($runtime_ctx, $top_rule) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{top_rule} = $top_rule if defined $top_rule;
+ return $runtime_ctx->{top_rule}
+}
+
+sub set_runtime_ctx_spec_path {
+ my ($runtime_ctx, $spec_path) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{spec_path} = $spec_path if defined $spec_path;
+ return $runtime_ctx->{spec_path}
+}
+
 sub clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
  return unless ref($runtime_ctx) eq 'HASH';

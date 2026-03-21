@@ -942,11 +942,12 @@ sub compile_spec_entry {
   _trace_log_dump(_dump_value(\%info));
   _trace_log_dump("=== END RULE INFO DUMP for $label ===\n");
   _trace_log_dump("=== HANDLER DUMP for $label ===\n");
-  _trace_log_dump("{\n$handler\n}\n");
-  _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
+ _trace_log_dump("{\n$handler\n}\n");
+ _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
  }
- if (ref($runtime_ctx) eq 'HASH' && defined $rule_ir->{top_rule}) {
-  $runtime_ctx->{top_rule} = $rule_ir->{top_rule};
+ if (defined $rule_ir->{top_rule}) {
+  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_top_rule');
+  LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, $rule_ir->{top_rule});
  }
  _trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 

@@ -196,10 +196,11 @@ sub run_get_parser {
     stage => 'resolve_spec_path',
     summary => 'Spec resolution failed',
     detail => 'resolve_spec_path returned undef for the requested parser name',
-   );
-   return undef;
-  }
-  $runtime_ctx->{spec_path} = $spec_path if ref($runtime_ctx) eq 'HASH';
+  );
+  return undef;
+ }
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_spec_path');
+ LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
 
   my $content = eval { $load_spec_content->($spec_path, $trace_scope) };
   my $load_spec_content_error = $@;
