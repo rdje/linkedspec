@@ -82,6 +82,24 @@ sub _capture_runtime_ctx_ref {
  return
 }
 
+sub _set_runtime_ctx_last_error {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $type = defined($args{type}) ? $args{type} : 'runtime_owner';
+ my $stage = defined($args{stage}) ? $args{stage} : '';
+ my $error = {
+  type    => $type,
+  stage   => $stage,
+  owner_stage => length($stage) ? "$type:$stage" : $type,
+  summary => defined($args{summary}) ? $args{summary} : '',
+  detail  => defined($args{detail}) ? $args{detail} : '',
+  spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
+  spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
+ };
+ $runtime_ctx->{last_error} = $error;
+ return $error
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
@@ -96,14 +114,29 @@ sub run_get {
  my $runtime_ctx = _build_runtime_context($option);
  _capture_runtime_ctx_ref($option, $runtime_ctx);
  return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
-  return LinkedSpec::Compiler::run_get_pipeline(
-   $spec_content_ref,
-   $option,
-   {
-    runtime_ctx => $runtime_ctx,
+  my $ret = eval {
+   _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
+   return LinkedSpec::Compiler::run_get_pipeline(
+    $spec_content_ref,
+    $option,
+    {
+     runtime_ctx => $runtime_ctx,
+    }
+   )
+  };
+  my $runtime_owner_error = $@;
+  if ($runtime_owner_error) {
+   unless (ref($runtime_ctx->{last_error}) eq 'HASH') {
+    _set_runtime_ctx_last_error(
+     $runtime_ctx,
+     stage => 'run_get_pipeline',
+     summary => 'Runtime compile delegation failed',
+     detail => $runtime_owner_error,
+    );
    }
-  )
+   return undef;
+  }
+  return $ret
  })
 }
 

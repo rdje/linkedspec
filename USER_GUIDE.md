@@ -1024,8 +1024,10 @@ The same hook also works through `LinkedSpec::get_parser(...)`. On that file-ori
 
 Compiler-owned exceptions that happen while turning parsed rule entries into the compiled descriptor now also flow through that same channel instead of bypassing it as raw dies. In practice, if a validation callback throws, if bootstrap parse throws, if `compile_spec_entry(...)` throws while `spec_descr(...)` is building rule descriptors, or if final descriptor assembly / generated-descriptor validation throws while building `gdata`, `last_error` is populated with the same `compiler_pipeline` payload family and the relevant `stage` (`validate_spec_content`, `validate_dsl_syntax`, `bootstrap_parse`, `spec_descr`, `build_final_descr`, or `validate_gdata_references`).
 
+The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)` before the deeper compiler owner had a chance to write its own structured payload, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying, that deeper payload is preserved and not overwritten by the runtime wrapper.
+
 That means the `last_error` payload is now largely self-contained:
-- `type` tells you which owner family raised the error (`parser_factory` or `compiler_pipeline` today),
+- `type` tells you which owner family raised the error (`parser_factory`, `compiler_pipeline`, or `runtime_owner` on compile-time failure paths today),
 - `stage` gives the owner-local failure step,
 - `owner_stage` gives the stable combined identifier,
 - and `spec_name` / `spec_path` travel with the payload when that information is known.

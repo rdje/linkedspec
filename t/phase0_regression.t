@@ -7085,6 +7085,87 @@ SPEC
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'captured runtime context preserves parser-source chunk capture');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'Runtime::run_get still emits parser source while exposing runtime_ctx_ref');
 };
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_dies_without_runtime_payload' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { die "__FORCED_RUNTIME_RUN_GET_PIPELINE_DIE__\n" };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                return_descr => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get traps run_get_pipeline die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation dies without structured payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation dies');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation die records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation die records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation die records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RUNTIME_RUN_GET_PIPELINE_DIE__/, 'compiler delegation die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation die leaves spec_path empty in inline runtime context');
+};
+subtest 'runtime_run_get_preserves_existing_runtime_error_when_run_get_pipeline_dies' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub {
+            my ($spec_content_ref, $option, $deps) = @_;
+            $deps->{runtime_ctx}{last_error} = {
+                type => 'compiler_pipeline',
+                stage => 'spec_descr',
+                owner_stage => 'compiler_pipeline:spec_descr',
+                summary => 'Spec descriptor generation failed',
+                detail => '__FORCED_PRESERVED_RUNTIME_ERROR__',
+                spec_name => '',
+                spec_path => '',
+            };
+            die "__FORCED_RUNTIME_RUN_GET_PIPELINE_DIE_WITH_PAYLOAD__\n";
+        };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                return_descr => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation dies after writing structured payload') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation dies after writing structured payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context when compiler delegation dies after writing structured payload');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get preserves structured last_error when compiler delegation dies after writing one');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compiler delegation die after payload preserves deeper owner type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compiler delegation die after payload preserves deeper owner stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compiler delegation die after payload preserves deeper owner_stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compiler delegation die after payload preserves deeper owner summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_PRESERVED_RUNTIME_ERROR__/, 'compiler delegation die after payload preserves deeper owner detail');
+};
 subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     plan tests => 11;
 
@@ -7106,6 +7187,38 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
+};
+subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_compiler_die' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { die "__FORCED_LINKEDSPEC_GET_RUNTIME_OWNER_DIE__\n" };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when Runtime catches compiler delegation die') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when Runtime catches compiler delegation die');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when Runtime catches compiler delegation die');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get exposes structured runtime_owner last_error when Runtime catches compiler delegation die');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'LinkedSpec::Get runtime owner failure records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'LinkedSpec::Get runtime owner failure records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get runtime owner failure records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get runtime owner failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LINKEDSPEC_GET_RUNTIME_OWNER_DIE__/, 'LinkedSpec::Get runtime owner failure records original thrown detail');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 7;
