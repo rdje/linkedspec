@@ -7846,6 +7846,66 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'forced outer parser die records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_OUTER_DIE', 'forced outer parser die records handler variant');
 };
+subtest 'compiler_pipeline_clears_stale_runtime_handler_error_after_successful_parse' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+    my $parser = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        {},
+        {
+            runtime_ctx => $runtime_ctx,
+            validate_gdata_references => sub { return 1 },
+            compile_spec_entry => sub {
+                $runtime_ctx->{top_rule} = 'Top';
+                return (
+                    'Top',
+                    {
+                        handler => sub {
+                            $runtime_ctx->{last_error} = {
+                                type => 'runtime_handler',
+                                stage => 'rule_handler_eval',
+                                owner_stage => 'runtime_handler:rule_handler_eval',
+                                summary => 'Rule handler execution failed',
+                                detail => '__STALE_RUNTIME_HANDLER__',
+                                rule_label => 'Top',
+                                handler_variant => 'FORCED_STALE_RUNTIME_HANDLER',
+                            };
+                            return ['ok'];
+                        },
+                        gdata => [],
+                        meta => {
+                            selected_handler_variant => 'FORCED_STALE_RUNTIME_HANDLER',
+                        },
+                    },
+                    'Top',
+                );
+            },
+        },
+    );
+
+    ok(defined($parser) && ref($parser) eq 'CODE', 'compiler pipeline still returns parser coderef for stale runtime-handler-success test');
+
+    my $input = 'a';
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+        run_parser_with_captured_io($parser, \$input);
+
+    ok($ok_run, 'successful top-level parse returns without outer die even if a stale runtime_handler payload was set internally') or diag(normalize_error($err_run));
+    is_deeply($ast, ['ok'], 'successful top-level parse still returns AST payload');
+    is($err_run, '', 'successful top-level parse leaves outer die text empty');
+    is($inner_eval_err, '', 'successful top-level parse clears stale inner eval error text');
+    ok(!exists $runtime_ctx->{last_error}, 'successful top-level parse clears stale runtime_handler last_error state');
+    is($out_run, '', 'successful top-level parse emits no stdout in stale runtime-handler success test');
+    is($warn_run, '', 'successful top-level parse emits no stderr in stale runtime-handler success test');
+};
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_label' => sub {
     plan tests => 14;
 

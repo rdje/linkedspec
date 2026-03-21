@@ -1087,6 +1087,8 @@ That `runtime_parser` family now covers both:
 - `resolve_top_rule_handler` when a returned parser coderef cannot find a usable selected top rule or handler coderef to invoke,
 - and `invoke_top_rule` when the selected top-rule handler itself dies at the outer parser-call boundary.
 
+On the successful path, `runtime_ctx->{last_error}` should be treated as a failure-only channel. The returned parser now clears stale inner `runtime_handler` payloads if a later path in the same top-level invocation succeeds and returns a defined AST, so callers do not have to special-case old inner backtracking failures after a successful parse.
+
 ## `get_parser(...)` Lookup Behavior
 `LinkedSpec::get_parser('name')` resolves parser specs in this order:
 1. If argument is already a valid file path, use it directly.

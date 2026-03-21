@@ -828,7 +828,12 @@ sub run_get_pipeline {
    die $eval_error;
   }
   if (ref($runtime_ctx->{last_error}) eq 'HASH' && ($runtime_ctx->{last_error}{type} // '') eq 'runtime_handler') {
-   $@ = defined($runtime_ctx->{last_error}{detail}) ? $runtime_ctx->{last_error}{detail} : '';
+   if (defined($retv)) {
+    _clear_runtime_ctx_last_error($runtime_ctx);
+    $@ = '';
+   } else {
+    $@ = defined($runtime_ctx->{last_error}{detail}) ? $runtime_ctx->{last_error}{detail} : '';
+   }
   }
   return $retv
  }
