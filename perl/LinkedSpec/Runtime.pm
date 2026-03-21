@@ -51,16 +51,17 @@ sub _emit_parser_source_line {
 sub _build_runtime_context {
  my ($option) = @_;
  $option = {} unless ref($option) eq 'HASH';
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('normalize_runtime_ctx_ref');
 
  my @parser_source_chunks;
- my $runtime_ctx_ref = (exists $option->{runtime_ctx_ref}) ? $option->{runtime_ctx_ref} : undef;
- my $ctx = (ref($runtime_ctx_ref) eq 'HASH')
-  ? $runtime_ctx_ref
-  : (ref($runtime_ctx_ref) eq 'SCALAR' && ref($$runtime_ctx_ref) eq 'HASH')
-   ? $$runtime_ctx_ref
-   : (ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH')
-    ? $$runtime_ctx_ref
-    : {};
+ my $runtime_ctx_ref = exists($option->{runtime_ctx_ref})
+  ? LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref(
+     $option->{runtime_ctx_ref},
+     owner => 'LinkedSpec::Runtime::run_get',
+    )
+  : undef;
+ my $ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($runtime_ctx_ref);
+ $ctx = {} unless ref($ctx) eq 'HASH';
  $ctx->{top_rule} = undef;
  $ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
  if ($option->{dump_parser_source}) {
@@ -72,19 +73,6 @@ sub _build_runtime_context {
   delete $ctx->{emit_parser_source_line};
  }
  return $ctx
-}
-
-sub _capture_runtime_ctx_ref {
- my ($option, $runtime_ctx) = @_;
- return unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
- my $runtime_ctx_ref = $option->{runtime_ctx_ref};
- my $is_direct_hashref = ref($runtime_ctx_ref) eq 'HASH';
- my $is_scalar_slot = ref($runtime_ctx_ref) eq 'SCALAR';
- my $is_shared_hash_slot = ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH';
- die "(LinkedSpec::Runtime::run_get) -E- option 'runtime_ctx_ref' must be SCALAR ref or HASH ref"
-  unless $is_direct_hashref || $is_scalar_slot || $is_shared_hash_slot;
- $$runtime_ctx_ref = $runtime_ctx if $is_scalar_slot;
- return
 }
 
 sub _set_runtime_ctx_last_error {
@@ -106,7 +94,6 @@ sub run_get {
  $option = {} unless ref($option) eq 'HASH';
 
  my $runtime_ctx = _build_runtime_context($option);
- _capture_runtime_ctx_ref($option, $runtime_ctx);
  return _call_preserving_err(sub {
   my $ret = eval {
    _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
