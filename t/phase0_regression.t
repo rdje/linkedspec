@@ -6336,6 +6336,47 @@ SPEC
     ok(defined($parser) && ref($parser) eq 'CODE', 'Get still returns parser coderef through direct Runtime::run_get delegation');
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser created through direct Runtime::run_get delegation still executes');
 };
+subtest 'get_normalizes_option_pairs_before_runtime_owner' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($ok_run, $even_ret, $odd_ret, $err) = (0, undef, undef, '');
+    my (@captured_spec_refs, @captured_options);
+    $ok_run = eval {
+        no warnings 'redefine';
+        require LinkedSpec::Runtime;
+        local *LinkedSpec::Runtime::run_get = sub {
+            my ($spec_ref, $option) = @_;
+            push @captured_spec_refs, $spec_ref;
+            push @captured_options, (ref($option) eq 'HASH') ? { %{$option} } : undef;
+            return @captured_options == 1 ? '__EVEN_OPTION_RET__' : '__ODD_OPTION_RET__';
+        };
+
+        $even_ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            dump_parser_source => 1,
+        );
+        $odd_ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            '__ODD_TRAILING_OPTION__',
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Get succeeds while Runtime option contract is trapped') or diag(normalize_error($err));
+    is($even_ret, '__EVEN_OPTION_RET__', 'Get still returns Runtime-owned value for normalized even option list');
+    is_deeply([sort keys %{ $captured_options[0] || {} }], [qw(dump_parser_source return_descr)], 'Get forwards the expected normalized option keys into Runtime');
+    is($odd_ret, '__ODD_OPTION_RET__', 'Get still returns Runtime-owned value for odd trailing option list');
+    is_deeply($captured_options[1], {}, 'Get falls back to an empty option hash for odd trailing option lists');
+    is_deeply([map { ref($_) } @captured_spec_refs], [qw(SCALAR SCALAR)], 'Get forwards spec scalar refs into Runtime on both calls');
+};
 subtest 'runtime_run_get_avoids_legacy_raw_arg_wrapper' => sub {
     plan tests => 4;
 

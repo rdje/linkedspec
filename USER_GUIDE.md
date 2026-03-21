@@ -1004,6 +1004,8 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 - `parser_source_ref => \$out`
 - `runtime_ctx_ref => \$ctx` or `runtime_ctx_ref => \%ctx` for advanced runtime-state capture
 
+`LinkedSpec::Get(\$spec, %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before runtime dispatch; odd trailing option lists fall back to an empty option set for backward compatibility.
+
 `runtime_ctx_ref` is an opt-in diagnostics/introspection hook. You can pass either:
 - a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
 - or a direct shared hashref like `\%ctx` / `$ctx_hashref`, in which case LinkedSpec reuses and updates that existing hash in place.

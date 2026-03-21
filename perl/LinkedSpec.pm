@@ -184,7 +184,7 @@ sub _call_preserving_err {
 sub Get {
  my @args = @_;
  my $spec_content_ref = shift @args;
- my %option = @args;
+ my %option = (@args % 2 == 0) ? @args : ();
  return _call_preserving_err(sub {
   _require_pkg('LinkedSpec::Runtime');
   return LinkedSpec::Runtime::run_get($spec_content_ref, \%option)
