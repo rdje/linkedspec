@@ -225,7 +225,7 @@ sub _build_default_handler_variant {
  return '
 
  while (1) {
-  my $minfo; eval q/$minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'})/;
+  my $minfo = eval { LinkedRE::or($STRING, $$descr{gdata}{'.$label.'}) };
   if($@) {
    die join("",
     "\n(LinkedSpec) -E- Rule \''.$label.'\': Error during handler code generation\n",

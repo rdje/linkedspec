@@ -119,6 +119,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `LinkedSpec::Runtime::run_get(...)` now also normalizes raw compiler-delegation dies into a structured fallback `runtime_owner:run_get_pipeline` payload when no deeper owner payload exists yet, while preserving richer deeper `last_error` payloads when they do.
 - Recent landed follow-up: `SpecEntry.pm` now compiles generated rule-handler source at most once per rule and reuses the compiled coderef across later invocations, instead of string-evaling the full handler on every call; invalid generated handler source now records explicit `runtime_handler:rule_handler_compile` failure context on first invocation.
 - Recent landed follow-up: repeated blind-call and repeated ordered-sequence helper closures inside generated handlers now emit plain nested anonymous subs instead of `eval`-wrapped string fragments, so `REP_BCODE`, `REP_AND_BCODE`, and `REP_AND_ACODE` no longer carry that inner per-invocation eval seam in emitted parser source.
+- Recent landed follow-up: the default `LinkedRE::or(...)` dispatch inside generated handlers now uses a normal block `eval { ... }` wrapper instead of quoted-string `eval q/.../`, preserving the existing failure banner while removing another runtime string-eval seam from emitted handler source.
 - Exit criteria:
   - Better performance predictability and debuggability.
 
