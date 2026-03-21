@@ -6445,6 +6445,31 @@ SPEC
     is($runtime_ctx->{top_rule}, 'Top', 'SpecEntry compile_spec_entry writes discovered top rule into injected runtime context');
     like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'SpecEntry compile_spec_entry emits parser source through injected runtime context');
 };
+subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
+    plan tests => 7;
+
+    my $runtime_ctx = {};
+    my $chunks_ref = LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
+        $runtime_ctx,
+        enabled => 1,
+    );
+
+    ok(ref($chunks_ref) eq 'ARRAY', 'RuntimeContext configure helper returns parser-source chunk arrayref');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext configure helper stores parser-source chunk arrayref in runtime context');
+    is($runtime_ctx->{parser_source_chunks_ref}, $chunks_ref, 'RuntimeContext configure helper reuses the same parser-source chunk arrayref');
+
+    LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'alpha');
+    LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'beta');
+    is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper appends parser-source chunks through configured capture callback');
+
+    my $same_chunks_ref = LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+    is($same_chunks_ref, $chunks_ref, 'RuntimeContext ensure helper preserves the existing parser-source chunk arrayref');
+
+    LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture($runtime_ctx, enabled => 0);
+    ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext configure helper removes emit callback when parser-source capture is disabled');
+    LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'gamma');
+    is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper becomes a no-op when parser-source capture is disabled');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

@@ -37,41 +37,25 @@ sub _call_preserving_err {
  return
 }
 
-#------------------------------------------------------------------------------
-# Runtime parser state helpers (per-run mutable context only)
-#------------------------------------------------------------------------------
-sub _emit_parser_source_line {
- my ($runtime_ctx, $chunk) = @_;
- my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
- return unless ref($emit) eq 'CODE';
- $emit->($chunk);
- return
-}
-
 sub _build_runtime_context {
  my ($option) = @_;
  $option = {} unless ref($option) eq 'HASH';
  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('normalize_runtime_ctx_ref');
 
- my @parser_source_chunks;
  my $runtime_ctx_ref = exists($option->{runtime_ctx_ref})
   ? LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref(
      $option->{runtime_ctx_ref},
-     owner => 'LinkedSpec::Runtime::run_get',
+    owner => 'LinkedSpec::Runtime::run_get',
     )
   : undef;
  my $ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($runtime_ctx_ref);
  $ctx = {} unless ref($ctx) eq 'HASH';
  $ctx->{top_rule} = undef;
- $ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
- if ($option->{dump_parser_source}) {
-  $ctx->{emit_parser_source_line} = sub {
-   my ($chunk) = @_;
-   push @parser_source_chunks, $chunk;
-  };
- } else {
-  delete $ctx->{emit_parser_source_line};
- }
+ LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($ctx);
+ LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
+  $ctx,
+  enabled => $option->{dump_parser_source} ? 1 : 0,
+ );
  return $ctx
 }
 

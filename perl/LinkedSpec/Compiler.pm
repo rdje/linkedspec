@@ -409,19 +409,15 @@ sub _require_runtime_ctx {
  my $runtime_ctx = _require_dep($deps, 'runtime_ctx');
  die "(LinkedSpec::Compiler::_require_runtime_ctx) -E- dependency 'runtime_ctx' must be HASH ref"
   unless ref($runtime_ctx) eq 'HASH';
- if (ref($runtime_ctx->{parser_source_chunks_ref}) ne 'ARRAY') {
-  my @parser_source_chunks;
-  $runtime_ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
- }
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('ensure_runtime_ctx_parser_source_chunks_ref');
+ LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  return $runtime_ctx
 }
 
 sub _emit_runtime_ctx_parser_source_line {
  my ($runtime_ctx, $chunk) = @_;
- my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
- return unless ref($emit) eq 'CODE';
- $emit->($chunk);
- return
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('emit_runtime_ctx_parser_source_line');
+ return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
 sub _clear_runtime_ctx_last_error {

@@ -154,13 +154,13 @@ sub _set_runtime_ctx_last_error {
 sub _emit_parser_source_line {
  my ($deps, $chunk) = @_;
  my $emit = (ref($deps) eq 'HASH') ? $deps->{emit_parser_source_line} : undef;
- unless (ref($emit) eq 'CODE') {
-  my $runtime_ctx = _runtime_ctx_from_deps($deps);
-  $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
+ if (ref($emit) eq 'CODE') {
+  $emit->($chunk);
+  return
  }
- return unless ref($emit) eq 'CODE';
- $emit->($chunk);
- return
+ my $runtime_ctx = _runtime_ctx_from_deps($deps);
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('emit_runtime_ctx_parser_source_line');
+ return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
 sub _build_handler_preamble {

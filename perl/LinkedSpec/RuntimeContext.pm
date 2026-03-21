@@ -31,6 +31,39 @@ sub ensure_runtime_ctx {
  return $runtime_ctx
 }
 
+sub ensure_runtime_ctx_parser_source_chunks_ref {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ if (ref($runtime_ctx->{parser_source_chunks_ref}) ne 'ARRAY') {
+  my @parser_source_chunks;
+  $runtime_ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
+ }
+ return $runtime_ctx->{parser_source_chunks_ref}
+}
+
+sub configure_runtime_ctx_parser_source_capture {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $parser_source_chunks_ref = ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ if ($args{enabled}) {
+  $runtime_ctx->{emit_parser_source_line} = sub {
+   my ($chunk) = @_;
+   push @$parser_source_chunks_ref, $chunk;
+  };
+ } else {
+  delete $runtime_ctx->{emit_parser_source_line};
+ }
+ return $parser_source_chunks_ref
+}
+
+sub emit_runtime_ctx_parser_source_line {
+ my ($runtime_ctx, $chunk) = @_;
+ my $emit = (ref($runtime_ctx) eq 'HASH') ? $runtime_ctx->{emit_parser_source_line} : undef;
+ return unless ref($emit) eq 'CODE';
+ $emit->($chunk);
+ return
+}
+
 sub clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
  return unless ref($runtime_ctx) eq 'HASH';
