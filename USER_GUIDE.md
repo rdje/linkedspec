@@ -1022,7 +1022,7 @@ The same hook also works through `LinkedSpec::get_parser(...)`. On that file-ori
 - compiler failures after the spec file has been loaded,
 - and runtime handler failures after the returned parser coderef is invoked.
 
-Compiler-owned exceptions that happen while turning parsed rule entries into the compiled descriptor now also flow through that same channel instead of bypassing it as raw dies. In practice, if `compile_spec_entry(...)` throws while `spec_descr(...)` is building rule descriptors, or if final descriptor assembly throws while building `gdata`, `last_error` is populated with the same `compiler_pipeline` payload family and the relevant `stage` (`spec_descr` or `build_final_descr`).
+Compiler-owned exceptions that happen while turning parsed rule entries into the compiled descriptor now also flow through that same channel instead of bypassing it as raw dies. In practice, if a validation callback throws, if bootstrap parse throws, if `compile_spec_entry(...)` throws while `spec_descr(...)` is building rule descriptors, or if final descriptor assembly / generated-descriptor validation throws while building `gdata`, `last_error` is populated with the same `compiler_pipeline` payload family and the relevant `stage` (`validate_spec_content`, `validate_dsl_syntax`, `bootstrap_parse`, `spec_descr`, `build_final_descr`, or `validate_gdata_references`).
 
 That means the `last_error` payload is now largely self-contained:
 - `type` tells you which owner family raised the error (`parser_factory` or `compiler_pipeline` today),

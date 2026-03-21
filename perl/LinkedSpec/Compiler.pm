@@ -499,7 +499,21 @@ sub run_get_pipeline {
  my $validation_failed = 0;
  _require_validation_pkg();
 
- unless (LinkedSpec::Validation::validate_spec_content($spec_content_ref)) {
+ my $spec_content_valid = eval { LinkedSpec::Validation::validate_spec_content($spec_content_ref) };
+ my $validate_spec_content_error = $@;
+ if ($validate_spec_content_error) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'validate_spec_content',
+   summary => 'Spec content validation failed',
+   detail => $validate_spec_content_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - trapped exception during validation");
+  _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
+  return undef;
+ }
+
+ unless ($spec_content_valid) {
   _trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
   if ($parse_only && $test_expectation eq 'fail') {
    $validation_failed = 1;
@@ -526,7 +540,21 @@ sub run_get_pipeline {
  }
 
  unless ($validation_failed) {
-  unless (LinkedSpec::Validation::validate_dsl_syntax($spec_content_ref)) {
+  my $dsl_valid = eval { LinkedSpec::Validation::validate_dsl_syntax($spec_content_ref) };
+  my $validate_dsl_syntax_error = $@;
+  if ($validate_dsl_syntax_error) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'validate_dsl_syntax',
+    summary => 'DSL syntax validation failed',
+    detail => $validate_dsl_syntax_error,
+   );
+   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - trapped exception during validation");
+   _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
+   return undef;
+  }
+
+  unless ($dsl_valid) {
    _trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
    if ($parse_only && $test_expectation eq 'fail') {
     $validation_failed = 1;
@@ -558,7 +586,22 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
  my $parse_error = '';
- ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
+ my $bootstrap_parse_eval_ok = eval {
+  ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
+  1;
+ };
+ my $bootstrap_parse_error = $@;
+ unless ($bootstrap_parse_eval_ok) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'bootstrap_parse',
+   summary => 'Spec parsing failed',
+   detail => $bootstrap_parse_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing failed - trapped exception during bootstrap parse");
+  _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
+  return undef;
+ }
  unless ($parse_success) {
   _trace_log_output(DUMP_NONE, "SPEC PARSING FAILED", "Hardcoded parser failed with error: $parse_error");
  }
@@ -641,7 +684,23 @@ sub run_get_pipeline {
   return undef;
  }
 
- unless (LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})) {
+ my $gdata_refs_valid = eval {
+  LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})
+ };
+ my $validate_gdata_references_error = $@;
+ if ($validate_gdata_references_error) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'validate_gdata_references',
+   summary => 'Generated parser validation failed',
+   detail => $validate_gdata_references_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - trapped exception during generated-descriptor validation");
+  _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+  return undef;
+ }
+
+ unless ($gdata_refs_valid) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'validate_gdata_references',

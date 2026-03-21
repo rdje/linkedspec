@@ -6531,6 +6531,118 @@ subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failu
     is($runtime_ctx->{last_error}{spec_name}, '', 'validation failure error context leaves spec_name empty when no file-oriented context exists');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validation failure error context leaves spec_path empty when no file-oriented context exists');
 };
+subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_spec_content_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_spec_content = sub { die "__FORCED_VALIDATE_SPEC_CONTENT_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps validate_spec_content die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_spec_content dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_spec_content die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_spec_content die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'validate_spec_content die records validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'validate_spec_content die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'validate_spec_content die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_SPEC_CONTENT_DIE__/, 'validate_spec_content die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'validate_spec_content die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_content die leaves inline-spec spec_path empty');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_dsl_syntax_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_dsl_syntax = sub { die "__FORCED_VALIDATE_DSL_SYNTAX_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps validate_dsl_syntax die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_dsl_syntax dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_dsl_syntax die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_dsl_syntax die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dsl_syntax', 'validate_dsl_syntax die records validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dsl_syntax', 'validate_dsl_syntax die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'DSL syntax validation failed', 'validate_dsl_syntax die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_DSL_SYNTAX_DIE__/, 'validate_dsl_syntax die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'validate_dsl_syntax die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_dsl_syntax die leaves inline-spec spec_path empty');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_when_bootstrap_parse_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                bootstrap_parse => sub { die "__FORCED_BOOTSTRAP_PARSE_DIE__\n" },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps bootstrap_parse die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when bootstrap_parse dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'bootstrap_parse die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'bootstrap_parse die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'bootstrap_parse', 'bootstrap_parse die records bootstrap_parse stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:bootstrap_parse', 'bootstrap_parse die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec parsing failed', 'bootstrap_parse die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_BOOTSTRAP_PARSE_DIE__/, 'bootstrap_parse die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'bootstrap_parse die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'bootstrap_parse die leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_records_structured_error_for_generated_descriptor_validation_failure' => sub {
     plan tests => 7;
 
@@ -6563,6 +6675,43 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'generated descriptor validation failure records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/validate_gdata_references returned false/, 'generated descriptor validation failure records detail');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_gdata_references_dies' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_gdata_references = sub { die "__FORCED_VALIDATE_GDATA_REFERENCES_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps validate_gdata_references die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_gdata_references dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_gdata_references die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_gdata_references die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'validate_gdata_references die records validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'validate_gdata_references die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'validate_gdata_references die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_GDATA_REFERENCES_DIE__/, 'validate_gdata_references die records original thrown detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'validate_gdata_references die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_dies' => sub {
     plan tests => 10;
