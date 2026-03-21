@@ -773,9 +773,9 @@ sub _build_runtime_handler {
  my $handler = $args{handler};
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
- my $compiled_handler;
- my $compile_error;
  my $handler_source = "sub {\n$handler\n}";
+ my $compiled_handler = eval $handler_source;
+ my $compile_error = ref($compiled_handler) eq 'CODE' ? undef : $@;
 
  return sub {
   my ($descr, $STRING, $info) = @_;
@@ -788,10 +788,6 @@ sub _build_runtime_handler {
    },
    DUMP_HIGH
   );
-  if (!defined($compiled_handler) && !defined($compile_error)) {
-   $compiled_handler = eval $handler_source;
-   $compile_error = $@ unless ref($compiled_handler) eq 'CODE';
-  }
   if ($compile_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,

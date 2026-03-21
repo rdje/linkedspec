@@ -7719,7 +7719,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__/, 'get_parser runtime handler failure preserves runtime detail');
 };
 subtest 'spec_entry_runtime_handler_compiles_generated_source_once_per_rule' => sub {
-    plan tests => 5;
+    plan tests => 6;
 
     my $runtime_ctx = {};
     my $rule_meta = {
@@ -7742,6 +7742,8 @@ PERL
         runtime_ctx => $runtime_ctx,
     );
 
+    is($LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT, 1, 'generated runtime handler source compiles during handler construction');
+
     my $input = 'a';
     my $info = {};
     my $ret1 = $handler->({}, \$input, $info);
@@ -7750,11 +7752,11 @@ PERL
     ok(ref($handler) eq 'CODE', 'SpecEntry still builds runtime handler coderef');
     ok(ref($ret1) eq 'ARRAY', 'first runtime handler invocation still returns handler payload');
     ok(ref($ret2) eq 'ARRAY', 'second runtime handler invocation still returns handler payload');
-    is($LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT, 1, 'generated runtime handler source compiles once and is reused across invocations');
+    is($LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT, 1, 'generated runtime handler source still compiles once and is reused across invocations');
     ok(!exists $runtime_ctx->{last_error}, 'successful cached runtime handler invocations leave runtime error context empty');
 };
 subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
-    plan tests => 8;
+    plan tests => 9;
 
     my $runtime_ctx = {};
     my $rule_meta = {
@@ -7766,6 +7768,8 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
         rule_meta => $rule_meta,
         runtime_ctx => $runtime_ctx,
     );
+
+    ok(!exists $runtime_ctx->{last_error}, 'invalid generated runtime handler source does not populate runtime error context before invocation');
 
     my $input = 'a';
     my $ret = $handler->({}, \$input, {});
