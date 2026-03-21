@@ -420,6 +420,12 @@ sub _emit_runtime_ctx_parser_source_line {
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
+sub _get_runtime_ctx_parser_source_chunks_ref {
+ my ($runtime_ctx) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_parser_source_chunks_ref');
+ return LinkedSpec::RuntimeContext::get_runtime_ctx_parser_source_chunks_ref($runtime_ctx)
+}
+
 sub _clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('clear_runtime_ctx_last_error');
@@ -496,7 +502,7 @@ sub run_get_pipeline {
   $compile_spec_entry = exists $deps->{compile_spec_entry}
    ? _require_dep($deps, 'compile_spec_entry')
    : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
-  $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
+  $parser_source_chunks_ref = _get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
   _require_validation_pkg();
   1;
  };

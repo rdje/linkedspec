@@ -41,6 +41,12 @@ sub ensure_runtime_ctx_parser_source_chunks_ref {
  return $runtime_ctx->{parser_source_chunks_ref}
 }
 
+sub get_runtime_ctx_parser_source_chunks_ref {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{parser_source_chunks_ref}
+}
+
 sub configure_runtime_ctx_parser_source_capture {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';

@@ -6446,7 +6446,7 @@ SPEC
     like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'SpecEntry compile_spec_entry emits parser source through injected runtime context');
 };
 subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
-    plan tests => 7;
+    plan tests => 8;
 
     my $runtime_ctx = {};
     my $chunks_ref = LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
@@ -6464,6 +6464,7 @@ subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
 
     my $same_chunks_ref = LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
     is($same_chunks_ref, $chunks_ref, 'RuntimeContext ensure helper preserves the existing parser-source chunk arrayref');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_parser_source_chunks_ref($runtime_ctx), $chunks_ref, 'RuntimeContext read helper returns the existing parser-source chunk arrayref');
 
     LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture($runtime_ctx, enabled => 0);
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext configure helper removes emit callback when parser-source capture is disabled');
