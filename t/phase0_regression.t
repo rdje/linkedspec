@@ -6888,6 +6888,37 @@ subtest 'parser_factory_run_get_parser_records_structured_error_for_resolution_f
     is($runtime_ctx->{last_error}{spec_name}, 'missing_spec_name', 'ParserFactory resolution failure records spec_name inside last_error');
     is($runtime_ctx->{last_error}{spec_path}, '', 'ParserFactory resolution failure leaves spec_path empty inside last_error');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
+    plan tests => 9;
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'setup_fail_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => '__NOT_A_CALLBACK__',
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { die "__UNEXPECTED_VALIDATE_SPEC_NAME__\n" },
+            resolve_spec_path => sub { die "__UNEXPECTED_RESOLVE_SPEC_PATH__\n" },
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when parser-factory setup fails');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when setup fails');
+    is($runtime_ctx->{spec_name}, 'setup_fail_name', 'ParserFactory runtime context preserves requested spec name when setup fails');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when setup fails');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'setup failure records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_parser_factory', 'setup failure records prepare_parser_factory stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:prepare_parser_factory', 'setup failure records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Parser factory setup failed', 'setup failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/missing dependency callback 'trace_enter'/, 'setup failure records original dependency-contract detail');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_validate_spec_name_dies' => sub {
     plan tests => 10;
 
@@ -7225,6 +7256,43 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
+};
+subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
+    plan tests => 9;
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::ParserFactory::_default_deps = sub {
+            return {
+                apply_trace_options => sub { return 1 },
+                trace_enter => '__NOT_A_CALLBACK__',
+                trace_exit => sub { return 1 },
+                trace_decision => sub { return 1 },
+                validate_spec_name => sub { die "__UNEXPECTED_VALIDATE_SPEC_NAME__\n" },
+                resolve_spec_path => sub { die "__UNEXPECTED_RESOLVE_SPEC_PATH__\n" },
+                load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+                compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+                dump_low => 100,
+                dump_medium => 200,
+            };
+        };
+        ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            'Lispish',
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when parser-factory setup fails') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef when parser-factory setup fails');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when parser-factory setup fails');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'get_parser exposes structured parser-factory setup failure context');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser setup failure records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_parser_factory', 'get_parser setup failure records prepare_parser_factory stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:prepare_parser_factory', 'get_parser setup failure records combined parser-factory owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Parser factory setup failed', 'get_parser setup failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/missing dependency callback 'trace_enter'/, 'get_parser setup failure records setup-contract detail');
 };
 subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_compiler_die' => sub {
     plan tests => 9;

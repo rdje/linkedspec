@@ -140,24 +140,39 @@ sub run_get_parser {
   my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
   my $runtime_ctx_ref = _get_runtime_ctx_ref(\%opt_hash);
   my $runtime_ctx = _ensure_runtime_ctx($runtime_ctx_ref, spec_name => $spec_name);
-  $deps = _default_deps() unless ref($deps) eq 'HASH';
+  my ($apply_trace_options, $trace_enter, $trace_exit, $trace_decision, $validate_spec_name,
+      $resolve_spec_path, $load_spec_content, $compile_spec, $dump_low, $dump_medium, $trace_scope);
+  my $setup_ok = eval {
+   $deps = _default_deps() unless ref($deps) eq 'HASH';
 
-  my $apply_trace_options = _require_dep($deps, 'apply_trace_options');
-  my $trace_enter = _require_dep($deps, 'trace_enter');
-  my $trace_exit = _require_dep($deps, 'trace_exit');
-  my $trace_decision = _require_dep($deps, 'trace_decision');
-  my $validate_spec_name = _require_dep($deps, 'validate_spec_name');
-  my $resolve_spec_path = _require_dep($deps, 'resolve_spec_path');
-  my $load_spec_content = _require_dep($deps, 'load_spec_content');
-  my $compile_spec = _require_dep($deps, 'compile_spec');
-  my $dump_low = _require_value_dep($deps, 'dump_low');
-  my $dump_medium = _require_value_dep($deps, 'dump_medium');
+   $apply_trace_options = _require_dep($deps, 'apply_trace_options');
+   $trace_enter = _require_dep($deps, 'trace_enter');
+   $trace_exit = _require_dep($deps, 'trace_exit');
+   $trace_decision = _require_dep($deps, 'trace_decision');
+   $validate_spec_name = _require_dep($deps, 'validate_spec_name');
+   $resolve_spec_path = _require_dep($deps, 'resolve_spec_path');
+   $load_spec_content = _require_dep($deps, 'load_spec_content');
+   $compile_spec = _require_dep($deps, 'compile_spec');
+   $dump_low = _require_value_dep($deps, 'dump_low');
+   $dump_medium = _require_value_dep($deps, 'dump_medium');
 
-  $apply_trace_options->(\%opt_hash) if %opt_hash;
-  my $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
-   spec_name => $spec_name,
-   option_keys => [sort keys %opt_hash],
-  }, $dump_low);
+   $apply_trace_options->(\%opt_hash) if %opt_hash;
+   $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
+    spec_name => $spec_name,
+    option_keys => [sort keys %opt_hash],
+   }, $dump_low);
+   1;
+  };
+  my $setup_error = $@;
+  unless ($setup_ok) {
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'prepare_parser_factory',
+    summary => 'Parser factory setup failed',
+    detail => $setup_error,
+   );
+   return undef;
+  }
 
   my $spec_name_ok = eval { $validate_spec_name->($spec_name, $trace_scope) };
   my $validate_spec_name_error = $@;

@@ -1018,6 +1018,7 @@ if (!defined $descr && ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH')
 ```
 
 The same hook also works through `LinkedSpec::get_parser(...)`. On that file-oriented path it now covers both:
+- parser-factory setup failures before normal validation/resolution starts, such as invalid injected callback/dependency wiring,
 - parser-factory failures before compilation starts, such as invalid spec names, missing spec files, or file-load failures,
 - compiler failures after the spec file has been loaded,
 - and runtime handler failures after the returned parser coderef is invoked.
@@ -1027,6 +1028,8 @@ Compiler-owned exceptions that happen while turning parsed rule entries into the
 Compiler-owned setup failures before that main validation/parse flow now use the same channel too. If the compiler cannot prepare its callback/runtime-owner surface cleanly, for example because `bootstrap_parse` resolved to an invalid non-CODE value, `last_error` is populated as `compiler_pipeline` at stage `prepare_pipeline` instead of falling through to the generic runtime-owner fallback.
 
 The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)` before the deeper compiler owner had a chance to write its own structured payload, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying, that deeper payload is preserved and not overwritten by the runtime wrapper.
+
+The parser-factory owner now has the same kind of explicit setup stage too. If `LinkedSpec::ParserFactory::run_get_parser(...)` cannot prepare its callback/trace/dependency surface cleanly, for example because `trace_enter` or another required callback resolved to a non-CODE value, `last_error` is populated as `parser_factory` at stage `prepare_parser_factory` instead of letting that setup seam escape as a raw owner die.
 
 That means the `last_error` payload is now largely self-contained:
 - `type` tells you which owner family raised the error (`parser_factory`, `compiler_pipeline`, or `runtime_owner` on compile-time failure paths today),
