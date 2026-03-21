@@ -454,7 +454,8 @@ sub _build_rep_bcode_variant {
    my @'.$label.'_collect;
 
    my $ccount = 0;
-   my $or_code = sub {eval \''.$or_code.'\'};
+   my $or_code = sub {'.$or_code.'
+   };
 
    while(1) {
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
@@ -509,7 +510,8 @@ sub _build_rep_and_bcode_variant {
    my @'.$label.'_collect;
 
    my $ccount = 0;
-   my $and_code = sub {eval \''.$and_code.'\'};
+   my $and_code = sub {'.$and_code.'
+   };
 
    while(1) {
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
@@ -567,7 +569,8 @@ sub _build_rep_and_acode_variant {
    my $max='.$max.';
    my @'.$label.'_collect;
    my $ccount = 0;
-   my $and_code = sub {eval \''.$and_code.'\'};
+   my $and_code = sub {'.$and_code.'
+   };
 
    while(1) {
     my $and_ret = $and_code->();

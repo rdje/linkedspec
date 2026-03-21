@@ -6624,6 +6624,60 @@ SPEC
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
+subtest 'compiler_run_get_pipeline_emits_nested_repeat_helpers_without_eval_wrappers' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /x/ -> Top { return_a(Top) }
+RepeatChoice:OR+
+ => First
+ => Second
+RepeatSeq:AND+
+ /a/ -> RepeatSeq { return_a(RepeatSeq) }
+ /b/ -> RepeatSeq { return_a(RepeatSeq) }
+RepeatBlindSeq:AND+
+ => First
+ => Second
+First::
+ /a/ -> First { return_a(First) }
+Second::
+ /b/ -> Second { return_a(Second) }
+SPEC
+
+    my @parser_source_chunks;
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => \@parser_source_chunks,
+        emit_parser_source_line => sub {
+            my ($chunk) = @_;
+            push @parser_source_chunks, $chunk;
+        },
+    };
+    my $parser_source = '';
+    my $descr = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        {
+            return_descr => 1,
+            dump_parser_source => 1,
+            parser_source_ref => \$parser_source,
+        },
+        {
+            runtime_ctx => $runtime_ctx,
+        },
+    );
+
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash for repeat-helper parser-source inspection');
+    is($descr->{spec}{RepeatChoice}{meta}{handler_variant}, 'REP_BCODE', 'repeat-choice blind-call rule still selects REP_BCODE');
+    is($descr->{spec}{RepeatSeq}{meta}{handler_variant}, 'REP_AND_ACODE', 'repeat ordered-sequence action rule still selects REP_AND_ACODE');
+    is($descr->{spec}{RepeatBlindSeq}{meta}{handler_variant}, 'REP_AND_BCODE', 'repeat ordered-sequence blind-call rule still selects REP_AND_BCODE');
+    like($parser_source, qr/my \$or_code = sub \{/s, 'parser source now emits a plain nested OR helper sub for repeated blind-call choice');
+    like($parser_source, qr/my \$and_code = sub \{/s, 'parser source now emits a plain nested AND helper sub for repeated ordered-sequence helpers');
+    unlike($parser_source, qr/my \$or_code = sub \{eval '/s, 'parser source no longer emits eval-wrapped nested OR helper subs');
+    unlike($parser_source, qr/my \$and_code = sub \{eval '/s, 'parser source no longer emits eval-wrapped nested AND helper subs');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'repeat-helper parser-source inspection still records emitted source chunks');
+    ok(!exists $runtime_ctx->{last_error}, 'repeat-helper parser-source inspection leaves runtime context error state clear');
+};
 subtest 'compiler_run_get_pipeline_records_structured_error_when_pipeline_setup_fails' => sub {
     plan tests => 10;
 
