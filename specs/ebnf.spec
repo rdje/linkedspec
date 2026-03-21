@@ -196,8 +196,7 @@ include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {
 }
 
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation 	{BACKTRACK(); my $c = $CAPTURE; $c =~ s/\s*$//o; $c =~ s/^"|"$//go; return ['semantic_annotation', [$IMATCH_LIST[0], $c]]}
--> grammar_rule		{BACKTRACK(); my $c = $CAPTURE; $c =~ s/\s*$//o; $c =~ s/^"|"$//go; return ['semantic_annotation', [$IMATCH_LIST[0], $c]]}
+-> semantic_annotation | grammar_rule {BACKTRACK(); my $c = $CAPTURE; $c =~ s/\s*$//o; $c =~ s/^"|"$//go; return ['semantic_annotation', [$IMATCH_LIST[0], $c]]}
 
 logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_from_here
 I {$IMATCH =~ s/@|\s*\(//go}

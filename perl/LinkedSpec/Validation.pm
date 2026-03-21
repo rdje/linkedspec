@@ -625,81 +625,111 @@ sub _scan_rule_edges_in_fragment {
   if ($depth == 0 && (substr($fragment, $i, 2) eq '->' || substr($fragment, $i, 2) eq '=>')) {
    my $kind = substr($fragment, $i, 2) eq '->' ? 'action' : 'blind_call';
    my $cursor = $i + 2;
+   my @edge_targets;
 
-   ++$cursor while $cursor < $len && substr($fragment, $cursor, 1) =~ /\s/;
-   my $label_start = $cursor;
-   ++$cursor while $cursor < $len && substr($fragment, $cursor, 1) =~ /\w/;
+   my $parse_target = sub {
+    my ($target_cursor) = @_;
 
-   if ($cursor == $label_start) {
+    ++$target_cursor while $target_cursor < $len && substr($fragment, $target_cursor, 1) =~ /\s/;
+    my $label_start = $target_cursor;
+    ++$target_cursor while $target_cursor < $len && substr($fragment, $target_cursor, 1) =~ /\w/;
+
+    if ($target_cursor == $label_start) {
+     return {
+      error => {
+       kind   => $kind,
+       reason => 'missing_target',
+      },
+     };
+    }
+
+    my $label = substr($fragment, $label_start, $target_cursor - $label_start);
+    my $suffix_cursor = $target_cursor;
+    ++$target_cursor while $target_cursor < $len && substr($fragment, $target_cursor, 1) =~ /\s/;
+
+    if ($target_cursor < $len && substr($fragment, $target_cursor, 1) eq '[') {
+     if ($kind eq 'blind_call') {
+      return {
+       error => {
+        kind   => $kind,
+        reason => 'indexed_target_not_supported',
+        label  => $label,
+       },
+      };
+     }
+
+     my $index_cursor = $target_cursor + 1;
+     my $digit_start = $index_cursor;
+     ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/;
+
+     if ($index_cursor == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
+      return {
+       error => {
+        kind   => $kind,
+        reason => 'malformed_index',
+        label  => $label,
+       },
+      };
+     }
+
+     $target_cursor = $index_cursor + 1;
+     $suffix_cursor = $target_cursor;
+     ++$target_cursor while $target_cursor < $len && substr($fragment, $target_cursor, 1) =~ /\s/;
+    }
+
     return {
-     error => {
-      kind   => $kind,
-      reason => 'missing_target',
-     },
+     label         => $label,
+     cursor        => $target_cursor,
+     suffix_cursor => $suffix_cursor,
     };
-   }
+   };
 
-  my $label = substr($fragment, $label_start, $cursor - $label_start);
-   if ($cursor < $len) {
-   my $label_suffix = substr($fragment, $cursor, 1);
-    my $label_suffix_ok = $kind eq 'action'
-     ? ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{' || $label_suffix eq '.')
-     : ($label_suffix =~ /\s/o || $label_suffix eq '[' || $label_suffix eq '{' || $label_suffix eq '.');
-    unless ($label_suffix_ok) {
+   my $first_target = $parse_target->($cursor);
+   return { error => $first_target->{error} } if $first_target->{error};
+   if ($first_target->{suffix_cursor} < $len) {
+    my $immediate_suffix = substr($fragment, $first_target->{suffix_cursor}, 1);
+    my $immediate_ok = $immediate_suffix =~ /\s/o || $immediate_suffix eq '{' || $immediate_suffix eq '.';
+    $immediate_ok = 1 if $kind eq 'action' && $immediate_suffix eq '|';
+    unless ($immediate_ok) {
      return {
       error => {
        kind   => $kind,
        reason => 'malformed_target_suffix',
-       label  => $label,
+       label  => $first_target->{label},
       },
      };
+    }
+   }
+   push @edge_targets, { kind => $kind, label => $first_target->{label} };
+   $cursor = $first_target->{cursor};
+
+   if ($kind eq 'action') {
+    while (1) {
+     my $pipe_cursor = $cursor;
+     ++$pipe_cursor while $pipe_cursor < $len && substr($fragment, $pipe_cursor, 1) =~ /\s/;
+     last unless $pipe_cursor < $len && substr($fragment, $pipe_cursor, 1) eq '|';
+
+     my $next_target = $parse_target->($pipe_cursor + 1);
+     return { error => $next_target->{error} } if $next_target->{error};
+     push @edge_targets, { kind => $kind, label => $next_target->{label} };
+     $cursor = $next_target->{cursor};
     }
    }
 
    my $lookahead = $cursor;
    ++$lookahead while $lookahead < $len && substr($fragment, $lookahead, 1) =~ /\s/;
 
-   if ($lookahead < $len && substr($fragment, $lookahead, 1) eq '[') {
-    if ($kind eq 'blind_call') {
+   if (@edge_targets > 1) {
+    if ($lookahead >= $len || substr($fragment, $lookahead, 1) ne '{') {
      return {
       error => {
        kind   => $kind,
-       reason => 'indexed_target_not_supported',
-       label  => $label,
+       reason => 'grouped_targets_require_block',
+       label  => $edge_targets[0]{label},
       },
      };
     }
-
-    my $index_cursor = $lookahead + 1;
-    my $digit_start = $index_cursor;
-    ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/;
-
-    if ($index_cursor == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
-     return {
-      error => {
-       kind   => $kind,
-       reason => 'malformed_index',
-       label  => $label,
-      },
-     };
-    }
-
-    $lookahead = $index_cursor + 1;
-    if ($lookahead < $len) {
-     my $post_index = substr($fragment, $lookahead, 1);
-     unless ($post_index =~ /\s/o || $post_index eq '{' || $post_index eq '.') {
-      return {
-       error => {
-        kind   => $kind,
-        reason => 'malformed_target_suffix',
-        label  => $label,
-       },
-      };
-     }
-    }
-   }
-
-   if ($lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
+   } elsif ($lookahead < $len && substr($fragment, $lookahead, 1) eq '.') {
     my $fluent_cursor = $lookahead + 1;
     ++$fluent_cursor while $fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\s/o;
     unless ($fluent_cursor < $len && substr($fragment, $fluent_cursor, 1) =~ /\w/o) {
@@ -707,16 +737,21 @@ sub _scan_rule_edges_in_fragment {
       error => {
        kind   => $kind,
         reason => 'malformed_fluent_suffix',
-        label  => $label,
+        label  => $edge_targets[0]{label},
       },
      };
     }
+   } elsif ($kind eq 'blind_call' && $lookahead < $len && substr($fragment, $lookahead, 1) eq '|') {
+    return {
+     error => {
+      kind   => $kind,
+      reason => 'malformed_target_suffix',
+      label  => $edge_targets[0]{label},
+     },
+    };
    }
 
-   push @edges, {
-    kind  => $kind,
-    label => $label,
-   };
+   push @edges, @edge_targets;
    $i = $lookahead;
    next;
   }
@@ -837,11 +872,20 @@ sub _report_edge_target_syntax_error {
  }
 
  if ($kind eq 'action' && $reason eq 'missing_target') {
-  return report_dsl_error(
+ return report_dsl_error(
    $spec_content,
    $position,
    "Action edge is missing a target rule",
-   "Use '-> RuleName', '-> RuleName[idx]', or '-> RuleName { ... }'; action edges must name a target rule explicitly",
+   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleA | RuleB { ... }', or '-> RuleName { ... }'; action edges must name target rule(s) explicitly",
+  );
+ }
+
+ if ($kind eq 'action' && $reason eq 'grouped_targets_require_block') {
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Grouped action-edge targets require a shared code block",
+   "Use '-> RuleA | RuleB { ... }' when multiple action-edge targets need to share one code block",
   );
  }
 
@@ -873,11 +917,11 @@ sub _report_edge_target_syntax_error {
  }
 
  if ($kind eq 'action' && $reason eq 'malformed_target_suffix') {
-  return report_dsl_error(
+ return report_dsl_error(
   $spec_content,
   $position,
   "Malformed action-edge target syntax",
-   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
+   "Use '-> RuleName', '-> RuleName[idx]', '-> RuleA | RuleB { ... }', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
   );
  }
 

@@ -347,6 +347,28 @@ So the mechanical rule is general, but the normal authoring pattern is narrower:
 - use `-> B` or `-> B[0]` from another rule when you simply want rule `B`'s default first entrypoint,
 - and treat cross-rule `-> B[N]` with `N > 0` as unusual rather than normal authoring style.
 
+When multiple action-edge targets need the same structured code block, you can factor them into one grouped target list:
+
+```text
+semantic_annotation: /@(\w+)\s*:\s*/
+-> semantic_annotation | grammar_rule {
+  BACKTRACK()
+  my $c = $CAPTURE
+  $c =~ s/\s*$//o
+  return ['semantic_annotation', [$IMATCH_LIST[0], $c]]
+}
+```
+
+That grouped surface is now part of the supported `.spec` contract:
+- `-> A | B { ... }` means “attach this same code block to both action-edge targets,”
+- `-> A[1] | B[2] { ... }` uses the same idea when later regex slots need the shared block,
+- and the bootstrap/compiler path expands that grouped form into ordinary separate action edges internally, so runtime semantics stay the same as if you had written one `-> ... { ... }` line per target.
+
+The current scope is intentionally explicit:
+- grouped action-edge targets are supported for the shared structured code-block form,
+- they count as multiple action edges for rule planning and validation purposes,
+- and they are meant for code-block factorization rather than for introducing a new action-edge execution model.
+
 There is no tiny DSL-fixed cap here. If a rule genuinely needs four, five, or more regex slots, the indexing model stays the same:
 - `-> rule[3]` means the fourth regex,
 - `-> rule[4]` means the fifth regex,
@@ -356,13 +378,14 @@ Current frontend validation now rejects malformed edge-target indexing before bo
 - `-> rule[]` is invalid,
 - `-> rule[abc]` is invalid,
 - `-> rule-extra` is invalid because action-edge target names use word characters only unless they continue with a supported fluent/action suffix,
+- `-> rule_a | rule_b` is invalid unless the grouped targets share an explicit `{ ... }` code block,
 - `-> { ... }` is invalid because action edges must name a target rule,
 - `=> { ... }` is invalid because blind calls must name a child rule,
 - `=> rule-extra` is invalid because blind-call target names must stay plain rule identifiers,
 - and `=> rule[0]` is invalid because regex-slot indexing belongs to action edges, not blind calls.
 
 That exactness rule is intentional:
-- supported action-edge continuations like `-> rule[idx]`, `-> rule.method`, and `-> rule { ... }` are still valid,
+- supported action-edge continuations like `-> rule[idx]`, `-> rule.method`, `-> rule { ... }`, and grouped shared-block forms like `-> rule_a | rule_b { ... }` are still valid,
 - action-edge fluent continuations must actually name a method after the dot, so malformed starts like `-> rule.` and `-> rule..push(...)` are rejected during validation,
 - blind-call fluent continuations must also actually name a method after the dot, so malformed starts like `=> rule.` and `=> rule..return_a()` are rejected during validation,
 - but glued punctuation suffixes like `-> rule-extra` are rejected early instead of being misread as plain `-> rule`,

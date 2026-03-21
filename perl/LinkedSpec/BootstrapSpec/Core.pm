@@ -153,6 +153,36 @@ sub _render_method_call_chain {
  return join '; ', @rendered
 }
 
+sub _parse_action_edge_targets {
+ my ($targets_text) = @_;
+ my $trimmed = _trim_bootstrap_value($targets_text);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ my @targets;
+ pos($trimmed) = 0;
+ while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*(\d+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+  push @targets, {
+   label => $1,
+   reidx => defined($2) ? $2 : 0,
+  };
+ }
+
+ return undef unless @targets;
+ return undef unless defined(pos($trimmed)) && pos($trimmed) == length($trimmed);
+ return \@targets
+}
+
+sub _build_action_edge_entries {
+ my ($targets, $code) = @_;
+ return undef unless ref($targets) eq 'ARRAY' && @$targets;
+
+ my @entries = map {
+  ['ACODE', { relabel => $_->{label}, reidx => $_->{reidx}, code => $code }]
+ } @$targets;
+
+ return @entries == 1 ? $entries[0] : \@entries
+}
+
 #------------------------------------------------------------------------------
 # Function: _parse_optional_attached_if_clause_tail
 # Purpose : Parse trailing attached `elseif(...) { ... }` / `else { ... }`
@@ -467,16 +497,18 @@ sub _build_spec_root_rule {
     my $retv = &{$$descr[$dispatch_idx]{handler}}($minfo, $descr, $string, $gdata);
     return undef unless $retv;
 
-    unless ($$retv[0] eq 'COMMENT') {
-     if ($$retv[0] =~ /ELABEL/o) {
+    my @ret_entries = ref($$retv[0]) eq 'ARRAY' ? @$retv : ($retv);
+    for my $entry (@ret_entries) {
+     next if $$entry[0] eq 'COMMENT';
+     if ($$entry[0] =~ /ELABEL/o) {
       if (@specentry) {
        push @specs, [@specentry];
-       @specentry = $retv
+       @specentry = ($entry)
       } else {
-       push @specentry, $retv;
+       push @specentry, $entry;
       }
      } else {
-      push @specentry, $retv;
+      push @specentry, $entry;
      }
     }
 
@@ -526,20 +558,20 @@ sub _build_action_code_block_rule {
  return {
   id => 'ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*\w+(?:\[\d+\])?\s*\{/o, qr/\}/o],
+  re=> [qr/->\s*(?<TARGETS>(?:\w+\s*(?:\[\s*\d+\s*\]\s*)?)(?:\s*\|\s*\w+\s*(?:\[\s*\d+\s*\]\s*)?)*)\s*\{/o, qr/\}/o],
   handler=> sub {
    my ($info, $descr, $string, $gdata) = @_;
 
    my $ipos = pos($$string);
-   my ($entry_label, $reidx) = $$info{match} =~ /(\w+)(?:\[(\d+)\])?/o;
-   $reidx = $reidx || 0;
+   my $targets = _parse_action_edge_targets($$info{match_hash}{TARGETS});
+   return undef unless ref($targets) eq 'ARRAY' && @$targets;
 
    while (1) {
     my $minfo = _linkedre_or($string, $$gdata{cbrace});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
-     return ['ACODE', {relabel=>$entry_label, reidx=>$reidx, code=>substr($$string, $ipos, pos($$string) - $ipos - 1)}]
+     return _build_action_edge_entries($targets, substr($$string, $ipos, pos($$string) - $ipos - 1))
     } elsif ($$minfo{index} == 0) {
      _dispatch_curly_brace_handler($ctx, $minfo, $descr, $string, $gdata);
     } else {

@@ -4768,6 +4768,39 @@ SPEC
     ok(!$@, 'explicit zero-index recursion parser executes for recursive input without die') or diag(normalize_error($@));
     is_deeply($implicit_recursive, $explicit_recursive, 'plain -> A and explicit -> A[0] produce the same AST on recursive input too');
 };
+subtest 'bootstrap_grouped_action_edge_targets_share_one_code_block' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /(?:left|right)/
+ -> semantic_annotation | grammar_rule {return_a(Top)}
+
+semantic_annotation:
+ /left/ -> semantic_annotation { return_a(semantic_annotation) }
+
+grammar_rule:
+ /right/ -> grammar_rule { return_a(grammar_rule) }
+SPEC
+
+    my ($ok, $parse, $err) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($ok, 'bootstrap parse succeeds for grouped action-edge targets with one shared code block');
+    is($err, '', 'grouped action-edge target parse reports no bootstrap error');
+
+    my @acodes = grep { $_->[0] eq 'ACODE' } @{$parse->[0]};
+    is(scalar(@acodes), 2, 'grouped action-edge block expands into two ordinary ACODE entries');
+    is_deeply(
+        [ map { +{ relabel => $_->[1]{relabel}, reidx => $_->[1]{reidx}, code => $_->[1]{code} } } @acodes ],
+        [
+            { relabel => 'semantic_annotation', reidx => 0, code => 'return_a(Top)' },
+            { relabel => 'grammar_rule',        reidx => 0, code => 'return_a(Top)' },
+        ],
+        'grouped action-edge block duplicates the same code across each target label'
+    );
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    ok(ref($parser) eq 'CODE', 'runtime parser builds for grouped action-edge target syntax');
+};
 subtest 'get_return_descr_rule_meta_and_plus_repetition_strategy' => sub {
     plan tests => 7;
 
@@ -5884,6 +5917,50 @@ PERL
     like($out, qr/__VALID_DSL__/, 'validation preserves the documented spaced action-edge fluent surface');
     unlike($out, qr/Malformed action-edge fluent suffix syntax|Malformed action-edge target syntax/, 'spaced action-edge fluent surface does not trigger action-edge fluent diagnostics');
     is($err, '', 'spaced action-edge fluent validation subprocess does not emit stderr');
+};
+subtest 'validation_accepts_grouped_action_edge_targets_with_shared_code_block' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> semantic_annotation | grammar_rule { return_a(Top) }
+
+semantic_annotation:
+ /left/ -> semantic_annotation { return_a(semantic_annotation) }
+
+grammar_rule:
+ /right/ -> grammar_rule { return_a(grammar_rule) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'grouped action-edge target validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__VALID_DSL__/, 'validation accepts grouped action-edge targets when they share one code block');
+    unlike($out, qr/Grouped action-edge targets require a shared code block|Malformed action-edge target syntax/, 'grouped action-edge shared-block surface does not trigger grouped-target diagnostics');
+    is($err, '', 'grouped action-edge target validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_grouped_action_edge_targets_without_shared_code_block' => sub {
+    plan tests => 4;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ /a/
+ -> semantic_annotation | grammar_rule
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'grouped action-edge without block validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects grouped action-edge targets that do not share an explicit code block');
+    like($out, qr/Grouped action-edge targets require a shared code block/, 'grouped action-edge missing-block diagnostic is reported early');
+    is($err, '', 'grouped action-edge without block validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_glued_blind_call_target_suffixes' => sub {
     plan tests => 4;
