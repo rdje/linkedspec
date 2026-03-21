@@ -464,18 +464,6 @@ sub run_get_pipeline {
  $deps = {} unless ref($deps) eq 'HASH';
 
  my $runtime_ctx = _require_runtime_ctx($deps);
- my $bootstrap_parse = exists $deps->{bootstrap_parse}
-  ? _require_dep($deps, 'bootstrap_parse')
-  : _default_bootstrap_parse_cb();
- my $default_compile_spec_entry = _default_compile_spec_entry_cb();
- my $compile_spec_entry = exists $deps->{compile_spec_entry}
-  ? _require_dep($deps, 'compile_spec_entry')
-  : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
- my $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
-
- die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"
-  unless ref($bootstrap_parse) eq 'CODE';
-
  _trace_apply_trace_options($option);
  my $parse_only = $option->{parse_only};
  my $generate_only = $option->{generate_only};
@@ -497,7 +485,33 @@ sub run_get_pipeline {
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
  my $validation_failed = 0;
- _require_validation_pkg();
+ my ($bootstrap_parse, $compile_spec_entry, $parser_source_chunks_ref);
+ my $pipeline_setup_ok = eval {
+  $bootstrap_parse = exists $deps->{bootstrap_parse}
+   ? _require_dep($deps, 'bootstrap_parse')
+   : _default_bootstrap_parse_cb();
+  die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"
+   unless ref($bootstrap_parse) eq 'CODE';
+  my $default_compile_spec_entry = _default_compile_spec_entry_cb();
+  $compile_spec_entry = exists $deps->{compile_spec_entry}
+   ? _require_dep($deps, 'compile_spec_entry')
+   : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
+  $parser_source_chunks_ref = $runtime_ctx->{parser_source_chunks_ref};
+  _require_validation_pkg();
+  1;
+ };
+ my $pipeline_setup_error = $@;
+ unless ($pipeline_setup_ok) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'prepare_pipeline',
+   summary => 'Compiler pipeline setup failed',
+   detail => $pipeline_setup_error,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiler pipeline setup failed");
+  _trace_exit($trace_scope, { status => 'error', stage => 'prepare_pipeline' }, DUMP_LOW);
+  return undef;
+ }
 
  my $spec_content_valid = eval { LinkedSpec::Validation::validate_spec_content($spec_content_ref) };
  my $validate_spec_content_error = $@;

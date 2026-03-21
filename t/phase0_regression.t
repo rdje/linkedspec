@@ -6506,6 +6506,44 @@ SPEC
     like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
+subtest 'compiler_run_get_pipeline_records_structured_error_when_pipeline_setup_fails' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                bootstrap_parse => '__NOT_A_CALLBACK__',
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps callback-setup contract failure and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when callback setup fails');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'callback-setup failure records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'callback-setup failure records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_pipeline', 'callback-setup failure records prepare_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'callback-setup failure records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiler pipeline setup failed', 'callback-setup failure records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/dependency 'bootstrap_parse' must be CODE/, 'callback-setup failure records original setup-contract detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'callback-setup failure leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'callback-setup failure leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failure' => sub {
     plan tests => 9;
 
@@ -7219,6 +7257,38 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get runtime owner failure records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get runtime owner failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LINKEDSPEC_GET_RUNTIME_OWNER_DIE__/, 'LinkedSpec::Get runtime owner failure records original thrown detail');
+};
+subtest 'linkedspec_get_preserves_compiler_setup_failure_context_when_compiler_traps_invalid_bootstrap_callback' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_default_bootstrap_parse_cb = sub { return '__NOT_A_CALLBACK__' };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when compiler traps invalid bootstrap callback setup') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when compiler callback setup fails');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when compiler callback setup fails');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured compiler setup failure context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get compiler setup failure preserves compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_pipeline', 'LinkedSpec::Get compiler setup failure preserves prepare_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'LinkedSpec::Get compiler setup failure preserves combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiler pipeline setup failed', 'LinkedSpec::Get compiler setup failure preserves summary');
+    like($runtime_ctx->{last_error}{detail}, qr/dependency 'bootstrap_parse' must be CODE/, 'LinkedSpec::Get compiler setup failure preserves setup-contract detail');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 7;
