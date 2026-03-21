@@ -7756,18 +7756,24 @@ PERL
     ok(!exists $runtime_ctx->{last_error}, 'successful cached runtime handler invocations leave runtime error context empty');
 };
 subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $runtime_ctx = {};
     my $rule_meta = {
         selected_handler_variant => 'FORCED_COMPILE_ERROR',
     };
-    my $handler = LinkedSpec::SpecEntry::_build_runtime_handler(
-        label => 'Top',
-        handler => "my (\$descr, \$STRING, \$info) = \@_;\nmy = ;\n",
-        rule_meta => $rule_meta,
-        runtime_ctx => $runtime_ctx,
-    );
+    my $stderr = '';
+    my $handler;
+    {
+        local *STDERR;
+        open(STDERR, '>', \$stderr) or die "unable to capture STDERR: $!";
+        $handler = LinkedSpec::SpecEntry::_build_runtime_handler(
+            label => 'Top',
+            handler => "my (\$descr, \$STRING, \$info) = \@_;\nmy \@parts = (1)\n\@parts\n",
+            rule_meta => $rule_meta,
+            runtime_ctx => $runtime_ctx,
+        );
+    }
 
     ok(!exists $runtime_ctx->{last_error}, 'invalid generated runtime handler source does not populate runtime error context before invocation');
 
@@ -7781,7 +7787,8 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
     is($runtime_ctx->{last_error}{stage}, 'rule_handler_compile', 'invalid generated runtime handler source records rule_handler_compile stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_compile', 'invalid generated runtime handler source records combined compile owner stage');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid generated runtime handler source records failing rule label');
-    like($runtime_ctx->{last_error}{detail}, qr/syntax error|Bareword/, 'invalid generated runtime handler source preserves compile failure detail');
+    is($stderr, '', 'invalid generated runtime handler source does not leak compile warnings to STDERR');
+    like($runtime_ctx->{last_error}{detail}, qr/Missing operator|syntax error|Bareword/, 'invalid generated runtime handler source preserves captured compile warning/detail text');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_die' => sub {
     plan tests => 15;

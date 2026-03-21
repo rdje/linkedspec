@@ -774,8 +774,16 @@ sub _build_runtime_handler {
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
  my $handler_source = "sub {\n$handler\n}";
- my $compiled_handler = eval $handler_source;
- my $compile_error = ref($compiled_handler) eq 'CODE' ? undef : $@;
+ my $compiled_handler;
+ my $compile_warning = '';
+ {
+  local $SIG{__WARN__} = sub { $compile_warning .= join('', @_); };
+  $compiled_handler = eval $handler_source;
+ }
+ warn $compile_warning if ref($compiled_handler) eq 'CODE' && length($compile_warning);
+ my $compile_error = ref($compiled_handler) eq 'CODE'
+  ? undef
+  : ((length($compile_warning) ? $compile_warning : '') . ($@ || 'Unknown rule handler compilation failure'));
 
  return sub {
   my ($descr, $STRING, $info) = @_;
