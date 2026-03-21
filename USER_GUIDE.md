@@ -1002,9 +1002,11 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 - `return_descr => 1`
 - `dump_parser_source => 1`
 - `parser_source_ref => \$out`
-- `runtime_ctx_ref => \$ctx` for advanced runtime-state capture
+- `runtime_ctx_ref => \$ctx` or `runtime_ctx_ref => \%ctx` for advanced runtime-state capture
 
-`runtime_ctx_ref` is an opt-in diagnostics/introspection hook. When you pass a scalar reference, LinkedSpec stores the live per-run runtime context there before compilation continues.
+`runtime_ctx_ref` is an opt-in diagnostics/introspection hook. You can pass either:
+- a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
+- or a direct shared hashref like `\%ctx` / `$ctx_hashref`, in which case LinkedSpec reuses and updates that existing hash in place.
 
 Typical uses:
 - inspect `top_rule` after successful descriptor/parser generation,
@@ -1037,6 +1039,20 @@ my $descr = LinkedSpec::Get(
 
 if (!defined $descr && ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH') {
   warn "compile failed at stage $ctx->{last_error}{owner_stage}: $ctx->{last_error}{summary}\n";
+}
+```
+
+Direct shared-hashref form is useful when you want to seed caller-owned fields and keep them in the same structure:
+
+```perl
+my %ctx = (request_id => 'abc123');
+my $parser = LinkedSpec::get_parser(
+  'grammar_name',
+  runtime_ctx_ref => \%ctx,
+);
+
+if (ref($ctx{last_error}) eq 'HASH') {
+  warn "request $ctx{request_id} failed at $ctx{last_error}{owner_stage}\n";
 }
 ```
 

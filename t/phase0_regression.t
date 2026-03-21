@@ -7231,6 +7231,31 @@ SPEC
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'captured runtime context preserves parser-source chunk capture');
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'Runtime::run_get still emits parser source while exposing runtime_ctx_ref');
 };
+subtest 'runtime_run_get_accepts_direct_hashref_runtime_ctx_ref_on_success' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my %runtime_ctx = (seed => 'kept');
+    my $descr = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            return_descr => 1,
+            runtime_ctx_ref => \%runtime_ctx,
+        },
+    );
+
+    ok(defined($descr) && ref($descr) eq 'HASH', 'Runtime::run_get still returns descriptor hash when runtime_ctx_ref is a direct hashref');
+    is($runtime_ctx{seed}, 'kept', 'Runtime::run_get preserves existing caller fields in direct runtime_ctx_ref hashref');
+    is($runtime_ctx{top_rule}, 'Top', 'direct runtime_ctx_ref hashref records top rule on success');
+    ok(ref($runtime_ctx{parser_source_chunks_ref}) eq 'ARRAY', 'direct runtime_ctx_ref hashref records parser_source_chunks_ref');
+    ok(!exists $runtime_ctx{last_error}, 'direct runtime_ctx_ref hashref exposes no stale last_error on success');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through direct runtime_ctx_ref hashref still preserves compiled handler coderef');
+    is(ref(\%runtime_ctx), 'HASH', 'direct runtime_ctx_ref remains a shared hashref container');
+};
 subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_dies_without_runtime_payload' => sub {
     plan tests => 10;
 
@@ -7333,6 +7358,29 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
+};
+subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failure' => sub {
+    plan tests => 12;
+
+    my $missing_spec_name = 'phase5_runtime_ctx_hashref_missing_dot_spec_' . $$ . '.spec';
+    my %runtime_ctx = (seed => 'kept');
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        $missing_spec_name,
+        runtime_ctx_ref => \%runtime_ctx,
+    );
+
+    ok($ok_call, 'get_parser direct-hashref resolution-failure call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for missing explicit dot-spec name with direct runtime_ctx_ref hashref enabled');
+    is($runtime_ctx{seed}, 'kept', 'get_parser preserves existing caller fields in direct runtime_ctx_ref hashref');
+    is($runtime_ctx{spec_name}, $missing_spec_name, 'get_parser direct runtime_ctx_ref hashref records requested spec name');
+    ok(ref($runtime_ctx{last_error}) eq 'HASH', 'get_parser direct runtime_ctx_ref hashref records structured last_error on resolution failure');
+    is($runtime_ctx{last_error}{type}, 'parser_factory', 'get_parser direct runtime_ctx_ref hashref records parser_factory type on resolution failure');
+    is($runtime_ctx{last_error}{stage}, 'resolve_spec_path', 'get_parser direct runtime_ctx_ref hashref records parser-factory resolution stage');
+    is($runtime_ctx{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'get_parser direct runtime_ctx_ref hashref records combined parser-factory owner stage');
+    is($runtime_ctx{last_error}{summary}, 'Spec resolution failed', 'get_parser direct runtime_ctx_ref hashref records parser-factory resolution summary');
+    is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser direct runtime_ctx_ref hashref records requested spec name in last_error');
+    is($runtime_ctx{last_error}{spec_path}, '', 'get_parser direct runtime_ctx_ref hashref leaves spec_path empty when resolution never succeeds');
+    like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing direct runtime_ctx_ref hashref');
 };
 subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
     plan tests => 9;

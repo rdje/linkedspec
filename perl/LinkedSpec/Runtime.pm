@@ -54,9 +54,13 @@ sub _build_runtime_context {
 
  my @parser_source_chunks;
  my $runtime_ctx_ref = (exists $option->{runtime_ctx_ref}) ? $option->{runtime_ctx_ref} : undef;
- my $ctx = (ref($runtime_ctx_ref) && ref($$runtime_ctx_ref) eq 'HASH')
-  ? $$runtime_ctx_ref
-  : {};
+ my $ctx = (ref($runtime_ctx_ref) eq 'HASH')
+  ? $runtime_ctx_ref
+  : (ref($runtime_ctx_ref) eq 'SCALAR' && ref($$runtime_ctx_ref) eq 'HASH')
+   ? $$runtime_ctx_ref
+   : (ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH')
+    ? $$runtime_ctx_ref
+    : {};
  $ctx->{top_rule} = undef;
  $ctx->{parser_source_chunks_ref} = \@parser_source_chunks;
  if ($option->{dump_parser_source}) {
@@ -74,10 +78,11 @@ sub _capture_runtime_ctx_ref {
  my ($option, $runtime_ctx) = @_;
  return unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
  my $runtime_ctx_ref = $option->{runtime_ctx_ref};
+ my $is_direct_hashref = ref($runtime_ctx_ref) eq 'HASH';
  my $is_scalar_slot = ref($runtime_ctx_ref) eq 'SCALAR';
  my $is_shared_hash_slot = ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH';
- die "(LinkedSpec::Runtime::run_get) -E- option 'runtime_ctx_ref' must be SCALAR ref"
-  unless $is_scalar_slot || $is_shared_hash_slot;
+ die "(LinkedSpec::Runtime::run_get) -E- option 'runtime_ctx_ref' must be SCALAR ref or HASH ref"
+  unless $is_direct_hashref || $is_scalar_slot || $is_shared_hash_slot;
  $$runtime_ctx_ref = $runtime_ctx if $is_scalar_slot;
  return
 }

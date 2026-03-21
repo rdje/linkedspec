@@ -91,17 +91,24 @@ sub _get_runtime_ctx_ref {
  my ($option) = @_;
  return undef unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
  my $runtime_ctx_ref = $option->{runtime_ctx_ref};
+ my $is_direct_hashref = ref($runtime_ctx_ref) eq 'HASH';
  my $is_scalar_slot = ref($runtime_ctx_ref) eq 'SCALAR';
  my $is_shared_hash_slot = ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH';
- die "(LinkedSpec::ParserFactory::run_get_parser) -E- option 'runtime_ctx_ref' must be SCALAR ref"
-  unless $is_scalar_slot || $is_shared_hash_slot;
+ die "(LinkedSpec::ParserFactory::run_get_parser) -E- option 'runtime_ctx_ref' must be SCALAR ref or HASH ref"
+  unless $is_direct_hashref || $is_scalar_slot || $is_shared_hash_slot;
  return $runtime_ctx_ref
 }
 
 sub _ensure_runtime_ctx {
  my ($runtime_ctx_ref, %seed) = @_;
  return undef unless ref($runtime_ctx_ref);
- my $runtime_ctx = (ref($$runtime_ctx_ref) eq 'HASH') ? $$runtime_ctx_ref : {};
+ my $runtime_ctx = (ref($runtime_ctx_ref) eq 'HASH')
+  ? $runtime_ctx_ref
+  : (ref($runtime_ctx_ref) eq 'SCALAR' && ref($$runtime_ctx_ref) eq 'HASH')
+   ? $$runtime_ctx_ref
+   : (ref($runtime_ctx_ref) eq 'REF' && ref($$runtime_ctx_ref) eq 'HASH')
+    ? $$runtime_ctx_ref
+    : {};
  foreach my $key (keys %seed) {
   $runtime_ctx->{$key} = $seed{$key};
  }
