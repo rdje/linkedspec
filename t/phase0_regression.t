@@ -6527,6 +6527,33 @@ subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub 
     is($runtime_ctx->{last_error}{summary}, 'existing summary', 'RuntimeContext fallback helper preserves the existing summary');
     is($runtime_ctx->{last_error}{detail}, 'existing detail', 'RuntimeContext fallback helper preserves the existing detail');
 };
+subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx = {
+        top_rule => 'Top',
+        last_error => {
+            type => 'runtime_handler',
+            detail => 'handler detail',
+            summary => 'handler summary',
+        },
+    };
+
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule($runtime_ctx), 'Top', 'RuntimeContext read helper returns current top rule');
+    ok(LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext read helper reports structured last_error when one is present');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_last_error($runtime_ctx), $runtime_ctx->{last_error}, 'RuntimeContext read helper returns the structured last_error hashref');
+    ok(LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler'), 'RuntimeContext read helper matches the current last_error type');
+    ok(!LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_parser'), 'RuntimeContext read helper rejects a non-matching last_error type');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx), 'handler detail', 'RuntimeContext read helper returns the last_error detail text');
+
+    delete $runtime_ctx->{last_error};
+    ok(!LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext read helper reports no structured last_error after deletion');
+    ok(!defined(LinkedSpec::RuntimeContext::get_runtime_ctx_last_error($runtime_ctx)), 'RuntimeContext read helper returns undef when last_error is absent');
+    ok(!LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler'), 'RuntimeContext type helper returns false when last_error is absent');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx), '', 'RuntimeContext detail helper returns empty string when last_error is absent');
+
+    ok(!defined(LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule(undef)), 'RuntimeContext top-rule reader returns undef for non-hash runtime context input');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

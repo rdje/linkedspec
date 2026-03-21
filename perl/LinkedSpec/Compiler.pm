@@ -426,11 +426,29 @@ sub _clear_runtime_ctx_last_error {
  return LinkedSpec::RuntimeContext::clear_runtime_ctx_last_error($runtime_ctx)
 }
 
+sub _get_runtime_ctx_top_rule {
+ my ($runtime_ctx) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_top_rule');
+ return LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule($runtime_ctx)
+}
+
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  $args{type} = 'compiler_pipeline' unless defined $args{type};
  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error');
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
+}
+
+sub _has_runtime_ctx_last_error_type {
+ my ($runtime_ctx, $type) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('has_runtime_ctx_last_error_type');
+ return LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, $type)
+}
+
+sub _get_runtime_ctx_last_error_detail {
+ my ($runtime_ctx) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_last_error_detail');
+ return LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx)
 }
 
 #------------------------------------------------------------------------------
@@ -719,7 +737,7 @@ sub run_get_pipeline {
    my $prefix = $i ? ",\n" : '';
    _emit_runtime_ctx_parser_source_line($runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }
-  my $top_rule = $runtime_ctx->{top_rule};
+  my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
   my $parser_source = join('', @$parser_source_chunks_ref);
   if (ref($parser_source_ref) eq 'SCALAR') {
@@ -730,7 +748,7 @@ sub run_get_pipeline {
  }
 
  if (_trace_should_dump(DUMP_LOW)) {
-  my $top_rule = $runtime_ctx->{top_rule};
+  my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
   _trace_log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
   _trace_log_dump(_dump_value($final_descr));
   _trace_log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
@@ -749,9 +767,9 @@ sub run_get_pipeline {
  }
 
  _trace_log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
- _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => $runtime_ctx->{top_rule}, rule_count => $rule_count }, DUMP_LOW);
+ _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => _get_runtime_ctx_top_rule($runtime_ctx), rule_count => $rule_count }, DUMP_LOW);
 
- my $top_rule = $runtime_ctx->{top_rule};
+ my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
  return sub {
   _clear_runtime_ctx_last_error($runtime_ctx);
   my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')
@@ -809,12 +827,12 @@ sub run_get_pipeline {
    );
    die $eval_error;
   }
-  if (ref($runtime_ctx->{last_error}) eq 'HASH' && ($runtime_ctx->{last_error}{type} // '') eq 'runtime_handler') {
+  if (_has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler')) {
    if (defined($retv)) {
     _clear_runtime_ctx_last_error($runtime_ctx);
     $@ = '';
    } else {
-    $@ = defined($runtime_ctx->{last_error}{detail}) ? $runtime_ctx->{last_error}{detail} : '';
+    $@ = _get_runtime_ctx_last_error_detail($runtime_ctx);
    }
   }
   return $retv

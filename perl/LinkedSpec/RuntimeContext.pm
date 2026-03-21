@@ -71,6 +71,12 @@ sub clear_runtime_ctx_top_rule {
  return $runtime_ctx->{top_rule}
 }
 
+sub get_runtime_ctx_top_rule {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{top_rule}
+}
+
 sub set_runtime_ctx_top_rule {
  my ($runtime_ctx, $top_rule) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
@@ -92,10 +98,31 @@ sub clear_runtime_ctx_last_error {
  return
 }
 
+sub get_runtime_ctx_last_error {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{last_error}
+}
+
 sub has_structured_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
- return 0 unless ref($runtime_ctx) eq 'HASH';
- return ref($runtime_ctx->{last_error}) eq 'HASH' ? 1 : 0
+ my $last_error = get_runtime_ctx_last_error($runtime_ctx);
+ return ref($last_error) eq 'HASH' ? 1 : 0
+}
+
+sub has_runtime_ctx_last_error_type {
+ my ($runtime_ctx, $type) = @_;
+ return 0 unless defined $type && length $type;
+ my $last_error = get_runtime_ctx_last_error($runtime_ctx);
+ return 0 unless ref($last_error) eq 'HASH';
+ return (($last_error->{type} // '') eq $type) ? 1 : 0
+}
+
+sub get_runtime_ctx_last_error_detail {
+ my ($runtime_ctx) = @_;
+ my $last_error = get_runtime_ctx_last_error($runtime_ctx);
+ return '' unless ref($last_error) eq 'HASH';
+ return defined($last_error->{detail}) ? $last_error->{detail} : ''
 }
 
 sub set_runtime_ctx_last_error {
