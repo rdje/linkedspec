@@ -6587,6 +6587,21 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext run_get preparation helper removes parser-source emit callback when dumping is disabled');
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
 };
+subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub {
+    plan tests => 5;
+
+    my $runtime_ctx = {};
+
+    my $prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline($runtime_ctx);
+    is($prepared, $runtime_ctx, 'RuntimeContext run_get_pipeline preparation helper reuses the supplied hashref');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext run_get_pipeline preparation helper ensures parser-source chunk storage exists');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper starts with an empty parser-source chunk arrayref when none exists');
+
+    push @{$runtime_ctx->{parser_source_chunks_ref}}, 'seed';
+    my $same = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline($runtime_ctx);
+    is($same->{parser_source_chunks_ref}, $runtime_ctx->{parser_source_chunks_ref}, 'RuntimeContext run_get_pipeline preparation helper preserves the existing parser-source chunk arrayref');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, ['seed'], 'RuntimeContext run_get_pipeline preparation helper preserves existing parser-source chunks');
+};
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
     plan tests => 6;
 

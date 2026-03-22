@@ -56,6 +56,13 @@ sub prepare_runtime_ctx_for_get_parser {
  return ensure_runtime_ctx($runtime_ctx_ref, %seed)
 }
 
+sub prepare_runtime_ctx_for_run_get_pipeline {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ return $runtime_ctx
+}
+
 sub ensure_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';

@@ -409,9 +409,8 @@ sub _require_runtime_ctx {
  my $runtime_ctx = _require_dep($deps, 'runtime_ctx');
  die "(LinkedSpec::Compiler::_require_runtime_ctx) -E- dependency 'runtime_ctx' must be HASH ref"
   unless ref($runtime_ctx) eq 'HASH';
- _require_runtime_ctx_can('ensure_runtime_ctx_parser_source_chunks_ref');
- LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
- return $runtime_ctx
+ _require_runtime_ctx_can('prepare_runtime_ctx_for_run_get_pipeline');
+ return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline($runtime_ctx)
 }
 
 sub _require_runtime_ctx_can {
