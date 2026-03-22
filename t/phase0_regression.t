@@ -34967,6 +34967,36 @@ subtest 'trace_output_includes_metadata_and_decisions' => sub {
     like($out, qr/DECISION [^\n]+ => (?:TAKEN|SKIPPED)/, 'trace includes decision/branch events');
 };
 
+subtest 'trace_output_includes_parser_invocation_scope_and_rule_handler_scope' => sub {
+    plan tests => 11;
+
+    my ($ok_get, $parser, $err_get, $out_get, $warn_get) = run_get_parser_with_captured_io(
+        'Lispish',
+        trace_level => 'debug',
+        trace_log_mode => 'stdout',
+        trace_topic_spacing => 0,
+    );
+
+    ok($ok_get, 'get_parser with debug tracing returns without die for parser-invocation trace check')
+        or diag(normalize_error($err_get));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser with debug tracing returns parser coderef for parser-invocation trace check');
+
+    my $input = "(a (b c) d)";
+    my ($ok_run, $ast, $err_run, $stdout, $stderr, $inner_eval_err) = run_parser_with_captured_io($parser, \$input);
+
+    ok($ok_run, 'parser invocation with trace capture returns without outer die')
+        or diag(normalize_error($err_run));
+    ok(!length($inner_eval_err), 'parser invocation with trace capture leaves no inner eval error')
+        or diag(normalize_error($inner_eval_err));
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'parser invocation with trace capture still returns the expected AST shape');
+    is($stderr, '', 'parser invocation with trace capture leaves stderr empty');
+    like($stdout, qr/ENTER LinkedSpec::parser_invoke:/, 'parser invocation trace includes a top-level parser invocation scope');
+    like($stdout, qr/DECISION resolve_top_rule_handler => TAKEN/, 'parser invocation trace includes top-rule resolution decisions');
+    like($stdout, qr/DECISION invoke_top_rule:[^\n]+ => TAKEN/, 'parser invocation trace includes top-rule invocation decisions');
+    like($stdout, qr/ENTER LinkedSpec::rule_handler:/, 'parser invocation trace includes nested rule-handler scopes');
+    like($stdout, qr/EXIT LinkedSpec::parser_invoke:/, 'parser invocation trace includes a parser invocation exit scope');
+};
+
 subtest 'trace_log_file_route_redirects_stdout_to_trace_log' => sub {
     plan tests => 6;
 

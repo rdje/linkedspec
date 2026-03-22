@@ -776,6 +776,17 @@ sub run_get_pipeline {
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
   my $handler = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{handler} : undef;
+  my $runtime_scope = _trace_enter(
+   defined($top_rule) && length($top_rule)
+    ? "LinkedSpec::parser_invoke:$top_rule"
+    : 'LinkedSpec::parser_invoke:<missing_top_rule>',
+   {
+    top_rule => $top_rule,
+    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+    input_ref => ref($_[0]) || '',
+   },
+   DUMP_HIGH
+  );
   if (!defined($top_rule) || !length($top_rule)) {
    my $detail = "No top-level rule label is available for parser invocation";
    _set_runtime_ctx_last_error(
@@ -785,6 +796,8 @@ sub run_get_pipeline {
     summary => 'Top-level parser invocation failed',
     detail => $detail,
    );
+   _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
+   _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
    die "$detail\n";
   }
   if (ref($top_rule_entry) ne 'HASH') {
@@ -797,6 +810,8 @@ sub run_get_pipeline {
     detail => $detail,
     rule_label => $top_rule,
    );
+   _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
+   _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
    die "$detail\n";
   }
   if (ref($handler) ne 'CODE') {
@@ -810,8 +825,11 @@ sub run_get_pipeline {
     rule_label => $top_rule,
     handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
    );
+   _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
+   _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
    die "$detail\n";
   }
+  _trace_decision('resolve_top_rule_handler', 1, "Resolved top-level rule '$top_rule'", DUMP_DEBUG);
   my $retv = eval { &$handler($final_descr, $_[0]) };
   my $eval_error = $@;
   if ($eval_error) {
@@ -824,16 +842,32 @@ sub run_get_pipeline {
     rule_label => $top_rule,
     handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
    );
+   _trace_decision("invoke_top_rule:$top_rule", 0, $eval_error, DUMP_NONE);
+   _trace_exit($runtime_scope, { status => 'error', stage => 'invoke_top_rule', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
    die $eval_error;
   }
+  my $invoke_reason = defined($retv) ? 'top-level handler returned defined AST' : 'top-level handler returned undef';
   if (_has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler')) {
    if (defined($retv)) {
     _clear_runtime_ctx_last_error($runtime_ctx);
     $@ = '';
+    $invoke_reason = 'top-level handler returned defined AST and cleared stale runtime_handler context';
    } else {
     $@ = _get_runtime_ctx_last_error_detail($runtime_ctx);
+    $invoke_reason = 'top-level handler returned undef while preserving runtime_handler context';
    }
   }
+  _trace_decision("invoke_top_rule:$top_rule", defined($retv) ? 1 : 0, $invoke_reason, defined($retv) ? DUMP_DEBUG : DUMP_LOW);
+  _trace_exit(
+   $runtime_scope,
+   {
+    status => 'ok',
+    returned_defined => defined($retv) ? 1 : 0,
+    return_ref => ref($retv) || '',
+    return_size => (ref($retv) eq 'ARRAY') ? scalar(@$retv) : undef,
+   },
+   DUMP_HIGH
+  );
   return $retv
  }
 }

@@ -1154,6 +1154,15 @@ Trace messages include:
 - indentation for nested flow scopes,
 - decision events (`TAKEN` / `SKIPPED`).
 
+When you invoke a returned parser coderef, trace output now also includes an explicit top-level parser invocation scope:
+- `ENTER LinkedSpec::parser_invoke:<top_rule>`
+- `DECISION resolve_top_rule_handler => TAKEN|SKIPPED`
+- `DECISION invoke_top_rule:<top_rule> => TAKEN|SKIPPED`
+- nested `LinkedSpec::rule_handler:<rule_label>` scopes for the actual rule execution
+- `EXIT LinkedSpec::parser_invoke:<top_rule>`
+
+That gives runtime traces one clean bridge between compile-time tracing and the inner rule-handler scopes, which makes top-level parser invocation problems much easier to follow.
+
 ## Strong Recommendations for New Specs
 If backend neutrality matters, these are the defaults you should follow.
 
