@@ -6587,6 +6587,35 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext run_get preparation helper removes parser-source emit callback when dumping is disabled');
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
 };
+subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
+    plan tests => 8;
+
+    my %runtime_ctx = (
+        top_rule => 'StaleTop',
+        parser_source_chunks_ref => ['seed'],
+    );
+    my %option = (
+        runtime_ctx_ref => \%runtime_ctx,
+        dump_parser_source => 1,
+    );
+
+    my $prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(
+        \%option,
+        owner => 't::runtime_context_helper',
+    );
+
+    is($prepared, \%runtime_ctx, 'RuntimeContext run_get option helper reuses the supplied runtime context hashref');
+    ok(exists $runtime_ctx{top_rule}, 'RuntimeContext run_get option helper keeps the top_rule key present');
+    is($runtime_ctx{top_rule}, undef, 'RuntimeContext run_get option helper clears stale top_rule state');
+    ok(ref($runtime_ctx{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext run_get option helper preserves parser-source chunk arrayref storage');
+    is_deeply($runtime_ctx{parser_source_chunks_ref}, ['seed'], 'RuntimeContext run_get option helper preserves existing parser-source chunks');
+    ok(ref($runtime_ctx{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get option helper installs parser-source emit callback when dumping is enabled');
+
+    %option = (runtime_ctx_ref => \%runtime_ctx, dump_parser_source => 0);
+    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(\%option, owner => 't::runtime_context_helper');
+    ok(!exists $runtime_ctx{emit_parser_source_line}, 'RuntimeContext run_get option helper removes parser-source emit callback when dumping is disabled');
+    is($runtime_ctx{top_rule}, undef, 'RuntimeContext run_get option helper keeps top_rule cleared across repeated option preparation');
+};
 subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub {
     plan tests => 5;
 

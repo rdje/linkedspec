@@ -39,20 +39,11 @@ sub _call_preserving_err {
 
 sub _build_runtime_context {
  my ($option) = @_;
- $option = {} unless ref($option) eq 'HASH';
- _require_runtime_ctx_can('normalize_runtime_ctx_ref');
-
- my $runtime_ctx_ref = exists($option->{runtime_ctx_ref})
-  ? LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref(
-     $option->{runtime_ctx_ref},
-    owner => 'LinkedSpec::Runtime::run_get',
-    )
-  : undef;
- my $ctx = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get(
-  $runtime_ctx_ref,
-  dump_parser_source => $option->{dump_parser_source} ? 1 : 0,
- );
- return $ctx
+ _require_runtime_ctx_can('prepare_runtime_ctx_for_run_get_option');
+ return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(
+  $option,
+  owner => 'LinkedSpec::Runtime::run_get',
+ )
 }
 
 sub _require_runtime_ctx_can {
