@@ -5827,7 +5827,7 @@ subtest 'validation_rejects_indexed_blind_call_targets' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:AND
+Top::AND
  => Helper[0]
 
 Helper:
@@ -5974,7 +5974,7 @@ subtest 'validation_rejects_glued_blind_call_target_suffixes' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:AND
+Top::AND
  => Helper-extra
 SPEC
 require LinkedSpec::Validation;
@@ -5992,7 +5992,7 @@ subtest 'validation_accepts_spaced_blind_call_fluent_suffixes' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:AND
+Top::AND
  => Helper .push(items)
 
 Helper:
@@ -6236,6 +6236,40 @@ SPEC
         );
         is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], "MoveTop rule preserves the anchor regex list used around the split-boundary cursor move for $case->{label}");
     }
+};
+subtest 'bootstrap_named_mark_builds_named_mark_lecode' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ -> MoveTop
+
+MoveTop: /foo/ /bar/ @mark(body_start)
+SPEC
+
+    my ($parse_success, $parsed, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for named mark coverage') or diag(normalize_error($parse_error));
+    ok(ref($parsed) eq 'ARRAY', 'bootstrap parse returns parsed entry array for named mark coverage');
+
+    my ($move_entry) = grep { ref($_) eq 'ARRAY' && ref($_->[0]) eq 'ARRAY' && $_->[0][1] eq 'MoveTop' } @$parsed;
+    ok(ref($move_entry) eq 'ARRAY', 'parsed entries include MoveTop rule for named mark');
+    ok(grep { ref($_) eq 'ARRAY' && $_->[0] eq 'MARK_POS' && ref($_->[1]) eq 'HASH' && $_->[1]{name} eq 'body_start' } @$move_entry,
+        'MoveTop parsed entry preserves MARK_POS token with the expected mark name');
+
+    my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
+    is_deeply($rule_ir->{code_blocks}{LECODE}, ['$$info{marks}{\'body_start\'} = pos $$STRING'],
+        'MARK_POS compiles into the expected named-mark LECODE cursor shift');
+
+    my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
+    is($emit_ctx->{lecode}, '$$info{marks}{\'body_start\'} = pos $$STRING',
+        'emit context preserves named-mark split-boundary cursor shift');
+
+    is(
+        LinkedSpec::call_spec_handler_subst('MoveTop', 'capture_from(body_start)'),
+        q{do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
+        'capture_from(name) helper rewrite stays aligned with named-mark cursor storage',
+    );
+    is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], 'MoveTop rule preserves the anchor regex list used around the named mark');
 };
 subtest 'ruleir_pipeline_preserves_acode_gdata_mapping_order' => sub {
     plan tests => 7;
@@ -7058,7 +7092,7 @@ SPEC
     is($descr->{spec}{RepeatChoice}{meta}{handler_variant}, 'REP_BCODE', 'repeat-choice blind-call rule still selects REP_BCODE');
     is($descr->{spec}{RepeatSeq}{meta}{handler_variant}, 'REP_AND_ACODE', 'repeat ordered-sequence action rule still selects REP_AND_ACODE');
     is($descr->{spec}{RepeatBlindSeq}{meta}{handler_variant}, 'REP_AND_BCODE', 'repeat ordered-sequence blind-call rule still selects REP_AND_BCODE');
-    like($parser_source, qr/my \$minfo = LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}\);/s, 'parser source now emits direct LinkedRE dispatch for default handler source');
+    like($parser_source, qr/my \$minfo = LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}, \$info\);/s, 'parser source now emits direct LinkedRE dispatch for default handler source while preserving shared match context');
     like($parser_source, qr/my \$or_code = sub \{/s, 'parser source now emits a plain nested OR helper sub for repeated blind-call choice');
     like($parser_source, qr/my \$and_code = sub \{/s, 'parser source now emits a plain nested AND helper sub for repeated ordered-sequence helpers');
     unlike($parser_source, qr/eval q\/\$minfo = LinkedRE::or/s, 'parser source no longer emits quoted-string eval around default LinkedRE dispatch');
@@ -9738,7 +9772,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $label = 'Top';
 
@@ -9761,6 +9795,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, '$CAPTURE'),
         'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)',
         '$CAPTURE helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_from(body_start)'),
+        q{do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
+        'capture_from(name) helper rewrite preserved'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -9793,6 +9832,35 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         qr/push \@Top, \$capt if \$capt/,
         'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
+};
+subtest 'named_mark_capture_from_survives_child_rule_calls' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(/ @mark(body_start) /\w+/
+ -> Top[0] { my $noop = 1 }
+ -> Top[1] { return call(Child) }
+
+Child:
+ /\)/
+ -> Child[0] { my $body = capture_from(body_start); return ['?Child:', $body] }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark child-call coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply($ast, ['?Child:', 'bar'], 'named mark remains visible after child-rule matching and capture_from(name) returns the inner span');
+    ok(!defined($runtime_ctx{last_error}), 'named-mark child-call parse leaves runtime_ctx last_error clear on success');
+
+    my $bad_input = 'xxfoo(bar)';
+    my $bad_ast = $parser->(\$bad_input);
+    ok(!defined($bad_ast), 'consume mode still rejects leading junk for named-mark child-call parser');
+    ok(!defined($runtime_ctx{last_error}) || $runtime_ctx{last_error}{type} ne 'runtime_handler',
+        'consume rejection does not turn named-mark child-call coverage into a runtime-handler failure');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;
@@ -35383,7 +35451,7 @@ PERL
     is($source_exit, 0, 'consume parse mode dump_parser_source subprocess exits cleanly') or diag($source_err || $source_out);
     like(
         $source_out,
-        qr/LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}, 'consume'\)/,
+        qr/LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}, 'consume', \$info\)/,
         'consume parse mode parser source emits explicit contiguous LinkedRE dispatch'
     );
 };

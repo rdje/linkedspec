@@ -33,6 +33,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  return_m                         => 'RETURN_M',
  capture_macro                    => 'CAPTURE_MACRO',
  capture                          => 'CAPTURE',
+ capture_from_mark                => 'CAPTURE_FROM_MARK',
  if_flow                          => 'IF',
  elseif_flow                      => 'ELIF',
  else_flow                        => 'ELSE',

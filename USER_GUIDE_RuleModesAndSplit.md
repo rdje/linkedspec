@@ -786,6 +786,11 @@ The remaining deferred work is broader grouped-rule exploration that should only
 
 The older spelling `@move_pos` is still supported as a compatibility alias.
 
+There is now also a named checkpoint form:
+- `@mark(name)`
+
+That named form stores the current parser position under `name` so later `capture_from(name)` helpers can extract text from that named checkpoint to the current match boundary.
+
 It is easy to misunderstand what it does, so here is the precise version:
 - it does not collect text by itself,
 - it does not return an AST node by itself,
@@ -842,6 +847,22 @@ Why that shape matters:
 
 If you are reading older specs or older notes, this may still appear as `@move_pos`. That legacy spelling still works and lowers to the same internal `MOVE_POS` event.
 
+## `@mark(name)`: Named Checkpoints
+`@mark(name)` is the first named checkpoint surface in the capture/mark API.
+
+In compiler terms, it lowers to:
+
+```text
+$$info{marks}{'name'} = pos $$STRING
+```
+
+That means:
+- it does not capture text by itself,
+- it records the current parser position under a stable name,
+- and later `capture_from(name)` can recover “text since that named point” even after more matching has happened.
+
+This is especially useful for staged extraction flows where one anonymous split cursor is not enough, or where a child rule should keep using a mark established earlier by a parent rule.
+
 ## Split-Style Mental Model
 If you like a more intuitive description, this is a good one:
 
@@ -884,6 +905,7 @@ The current supported contract is:
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_from_here` is the preferred split-boundary cursor feature,
+- `@mark(name)` is the preferred named checkpoint surface,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
 

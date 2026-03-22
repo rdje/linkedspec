@@ -195,8 +195,8 @@ sub _linkedre_or_expr {
   ? $args{parse_mode}
   : 'seek';
  return $parse_mode eq 'consume'
-  ? "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, 'consume')"
-  : "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label})"
+  ? "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, 'consume', \$info)"
+  : "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, \$info)"
 }
 
 sub _build_handler_preamble {
@@ -208,6 +208,7 @@ my @IMATCH_LIST = @{$$info{match_list} // []};
 my %IMATCH_HASH = %{$$info{match_hash} // {}};
 my $IINDEX      = $$info{index};
 my $IPOS        = pos $$STRING;
+$$info{marks} = {} unless ref($$info{marks}) eq "HASH";
 
 my @'.$label.';
 

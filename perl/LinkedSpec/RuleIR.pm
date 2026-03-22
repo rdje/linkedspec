@@ -226,6 +226,10 @@ sub _collect_rule_ir {
   elsif ($entry_type eq 'MOVE_POS') {
    push @{$rule_ir->{code_blocks}{LECODE}}, '$IPOS = pos $$STRING';
   }
+  elsif ($entry_type eq 'MARK_POS') {
+   my $mark_name = $$centry[1]{name};
+   push @{$rule_ir->{code_blocks}{LECODE}}, '$$info{marks}{\''.$mark_name.'\'} = pos $$STRING';
+  }
  }
 
  return $rule_ir

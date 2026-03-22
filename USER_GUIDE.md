@@ -100,7 +100,7 @@ In practice that means a rule paragraph can contain:
 - and blind-call edges like `=> helper`, which directly invoke another rule as a parser step instead of selecting one of the current rule's regex slots.
 
 The important point is that, after the rule-start token, those elements are paragraph members, not a rigid line-by-line grammar with one forced ordering.
-That still does not mean “arbitrary text is valid there.” At top level inside a rule paragraph, validation now expects supported paragraph members such as regexes, lifecycle/code blocks, action edges, blind calls, split markers, multiline fluent continuation lines (including dot-prefixed carrier lines and method-like continuation body/control lines), or the next rule start. Stray text like `random garbage` at top level inside a rule paragraph is rejected early, and the same rule now applies to same-line rule headers too: after `rule:` / `rule::` and any leading same-line regex cluster, the rest of that header must also begin with a supported paragraph member rather than arbitrary filler text. The current split-marker spellings are also explicit there now: valid forms are `@capture_from_here` and compatibility `@move_pos`; malformed `@...` marker spellings are rejected early.
+That still does not mean “arbitrary text is valid there.” At top level inside a rule paragraph, validation now expects supported paragraph members such as regexes, lifecycle/code blocks, action edges, blind calls, split markers, multiline fluent continuation lines (including dot-prefixed carrier lines and method-like continuation body/control lines), or the next rule start. Stray text like `random garbage` at top level inside a rule paragraph is rejected early, and the same rule now applies to same-line rule headers too: after `rule:` / `rule::` and any leading same-line regex cluster, the rest of that header must also begin with a supported paragraph member rather than arbitrary filler text. The current split-marker spellings are also explicit there now: valid forms are `@capture_from_here`, named `@mark(name)`, and compatibility `@move_pos`; malformed `@...` marker spellings are rejected early.
 
 ### The natural convention versus the real grammar
 There is a natural house style that most specs follow:
@@ -230,7 +230,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 3. **Legacy or raw compatibility forms**
    - Compatibility only.
-   - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
+   - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `capture_from(name)`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
    - These are important for migration and compatibility, but they are not the target authoring surface for a backend-neutral `.spec`.
 
 ## Typical Workflow
@@ -279,6 +279,7 @@ Most important syntax elements:
 - Regex pattern(s): `/.../`
 - Split-boundary cursor:
   - `@capture_from_here`
+  - `@mark(name)`
   - compatibility alias: `@move_pos`
 - Branch edges:
   - `-> rule`
@@ -414,7 +415,7 @@ mean the same thing for the recursive first slot:
 
 That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
-For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, and `@capture_from_here` surface in one place, while also documenting `@move_pos` as the preserved compatibility alias.
+For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, `@capture_from_here`, and named `@mark(name)` in one place, while also documenting `@move_pos` as the preserved compatibility alias.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.

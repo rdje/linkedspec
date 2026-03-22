@@ -8,28 +8,38 @@ package LinkedRE;
 use re 'eval';
 
 sub _build_match_info {
- my ($pos) = @_;
- return {
+ my ($pos, $parent_info) = @_;
+ my $info = {
   index      => $pos,
   match      => ${^MATCH},
   match_list => [grep {defined} map {eval "\$$_"} 1 .. scalar @+],
   match_hash => {%+}
+ };
+ if (ref($parent_info) eq 'HASH' && ref($parent_info->{marks}) eq 'HASH') {
+  $info->{marks} = $parent_info->{marks};
  }
+ return $info
 }
 
 sub or {
-my ($stref, $oredRE, $mode) = @_;
- $mode = defined($mode) && length($mode) ? $mode : 'seek';
+my ($stref, $oredRE, $mode_or_parent, $parent_info) = @_;
+ my $mode;
+ if (ref($mode_or_parent) eq 'HASH' && !defined $parent_info) {
+  $mode = 'seek';
+  $parent_info = $mode_or_parent;
+ } else {
+  $mode = defined($mode_or_parent) && length($mode_or_parent) ? $mode_or_parent : 'seek';
+ }
 
  if ($mode eq 'seek') {
   return undef unless $$stref =~ /(?{my $pos=0})$oredRE/gcp;
-  return _build_match_info($pos);
+  return _build_match_info($pos, $parent_info);
  }
 
  if ($mode eq 'consume') {
   pos($$stref) = 0 unless defined(pos($$stref));
   return undef unless $$stref =~ /\G(?{my $pos=0})$oredRE/gcp;
-  return _build_match_info($pos);
+  return _build_match_info($pos, $parent_info);
  }
 
  die "(LinkedRE::or) -E- unsupported parse mode '$mode'"

@@ -477,7 +477,7 @@ sub _looks_like_supported_rule_paragraph_member_line {
  return 1 if $line =~ /^\s*\/(?:\\.|[^\/])*?(?<!\\)\//o;
  return 1 if $line =~ /^\s*->/o;
  return 1 if $line =~ /^\s*=>/o;
- return 1 if $line =~ /^\s*@\s*(?:capture_from_here|move_pos)\b/o;
+ return 1 if $line =~ /^\s*@\s*(?:(?:capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o;
  return 1 if $line =~ /^\s*-\?\s+\w+\b/o;
  return 1 if $line =~ /^\s*\.\s*\w/o;
  return 1 if $line =~ /^\s*\w+\s*\(/o;
@@ -495,7 +495,7 @@ sub _looks_like_split_marker_prefix {
 sub _looks_like_supported_split_marker_start {
  my ($fragment) = @_;
  return 0 unless defined $fragment;
- return $fragment =~ /^\s*@\s*(?:capture_from_here|move_pos)\b/o ? 1 : 0;
+ return $fragment =~ /^\s*@\s*(?:(?:capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o ? 1 : 0;
 }
 
 sub _trim_leading_rule_header_regex_cluster {
@@ -948,7 +948,7 @@ sub _report_split_marker_syntax_error {
   $spec_content,
   $position,
   "Malformed split marker syntax",
-  "Use '@capture_from_here' or compatibility alias '@move_pos' when you need a split-boundary cursor marker",
+  "Use '@capture_from_here', '@mark(name)', or compatibility alias '@move_pos' when you need a split-boundary cursor marker",
  );
 }
 

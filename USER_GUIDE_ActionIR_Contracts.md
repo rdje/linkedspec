@@ -174,6 +174,17 @@ CAPTURE_IF()
 
 These remain useful when migrating older capture-heavy specs.
 
+### `capture_from(name)`
+Return the captured substring from a named `@mark(name)` checkpoint to the current match boundary.
+
+Example:
+
+```text
+assign(scalar(body), capture_from(body_start))
+```
+
+Use it when one anonymous split cursor is not enough and you want a later action block or child rule to refer back to a specific named checkpoint.
+
 ## Backtrack helpers
 ### `IBACKTRACK()` / `ibacktrack(label)`
 Backtrack to the immediate-match side.

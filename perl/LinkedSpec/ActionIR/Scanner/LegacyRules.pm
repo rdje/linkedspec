@@ -26,6 +26,7 @@ sub try_scan_contract_ir_events {
   'capture' => \&_scan_contract_capture,
   'capture_if' => \&_scan_contract_capture_if,
   'capture_if_macro' => \&_scan_contract_capture_if_macro,
+  'capture_from_mark' => \&_scan_contract_capture_from_mark,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
   'backtrack_macro' => \&_scan_contract_backtrack_macro,
   'ibacktrack' => \&_scan_contract_ibacktrack,
@@ -153,6 +154,15 @@ sub _scan_contract_capture_if_macro {
  my @events;
 while ($code =~ /\bCAPTURE_IF\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
 }
  return \@events
 }

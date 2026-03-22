@@ -325,6 +325,7 @@ Important nuance:
 
 ### Capture and backtrack helpers
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
+- `capture_from(body_start)` -> `do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture(Top)` -> `push @Top, substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_if(Top)` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
 - `CAPTURE_IF()` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
@@ -336,6 +337,7 @@ Important nuance:
 Important nuance:
 - The label argument on `capture(...)`, `capture_if(...)`, `ibacktrack(...)`, and `backtrack(...)` is compatibility syntax.
 - Lowering uses the current rule context, not the literal label text inside the call.
+- `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
 
 ## Classified pass-through compatibility patterns
 These forms are recognized by the ActionIR scanner, contribute canonical ActionIR nodes, and avoid `RAW_PERL` fallback, but the emitted Perl is intentionally preserved verbatim.
