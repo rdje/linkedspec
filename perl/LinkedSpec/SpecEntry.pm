@@ -144,10 +144,16 @@ sub _runtime_ctx_from_deps {
  return undef
 }
 
+sub _require_runtime_ctx_can {
+ my ($name) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
+ return 1
+}
+
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  $args{type} = 'runtime_handler' unless defined $args{type};
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error');
+ _require_runtime_ctx_can('set_runtime_ctx_last_error');
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
@@ -159,7 +165,7 @@ sub _emit_parser_source_line {
   return
  }
  my $runtime_ctx = _runtime_ctx_from_deps($deps);
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('emit_runtime_ctx_parser_source_line');
+ _require_runtime_ctx_can('emit_runtime_ctx_parser_source_line');
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
@@ -946,7 +952,7 @@ sub compile_spec_entry {
  _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
  }
  if (defined $rule_ir->{top_rule}) {
-  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_top_rule');
+  _require_runtime_ctx_can('set_runtime_ctx_top_rule');
   LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, $rule_ir->{top_rule});
  }
  _trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);

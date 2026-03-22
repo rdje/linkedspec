@@ -89,7 +89,7 @@ sub _default_deps {
 
 sub _prepare_runtime_ctx_for_get_parser {
  my ($option, %args) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('prepare_runtime_ctx_for_get_parser');
+ _require_runtime_ctx_can('prepare_runtime_ctx_for_get_parser');
  return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
   $option,
   owner => 'LinkedSpec::ParserFactory::run_get_parser',
@@ -97,17 +97,23 @@ sub _prepare_runtime_ctx_for_get_parser {
  )
 }
 
+sub _require_runtime_ctx_can {
+ my ($name) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
+ return 1
+}
+
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  $args{type} = 'parser_factory' unless defined $args{type};
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error');
+ _require_runtime_ctx_can('set_runtime_ctx_last_error');
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
  $args{type} = 'parser_factory' unless defined $args{type};
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error_unless_present');
+ _require_runtime_ctx_can('set_runtime_ctx_last_error_unless_present');
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
 }
 
@@ -199,7 +205,7 @@ sub run_get_parser {
   );
   return undef;
  }
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_spec_path');
+ _require_runtime_ctx_can('set_runtime_ctx_spec_path');
  LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
 
   my $content = eval { $load_spec_content->($spec_path, $trace_scope) };

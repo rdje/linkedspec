@@ -409,51 +409,57 @@ sub _require_runtime_ctx {
  my $runtime_ctx = _require_dep($deps, 'runtime_ctx');
  die "(LinkedSpec::Compiler::_require_runtime_ctx) -E- dependency 'runtime_ctx' must be HASH ref"
   unless ref($runtime_ctx) eq 'HASH';
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('ensure_runtime_ctx_parser_source_chunks_ref');
+ _require_runtime_ctx_can('ensure_runtime_ctx_parser_source_chunks_ref');
  LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  return $runtime_ctx
 }
 
+sub _require_runtime_ctx_can {
+ my ($name) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
+ return 1
+}
+
 sub _emit_runtime_ctx_parser_source_line {
  my ($runtime_ctx, $chunk) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('emit_runtime_ctx_parser_source_line');
+ _require_runtime_ctx_can('emit_runtime_ctx_parser_source_line');
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
 sub _get_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_parser_source_chunks_ref');
+ _require_runtime_ctx_can('get_runtime_ctx_parser_source_chunks_ref');
  return LinkedSpec::RuntimeContext::get_runtime_ctx_parser_source_chunks_ref($runtime_ctx)
 }
 
 sub _clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('clear_runtime_ctx_last_error');
+ _require_runtime_ctx_can('clear_runtime_ctx_last_error');
  return LinkedSpec::RuntimeContext::clear_runtime_ctx_last_error($runtime_ctx)
 }
 
 sub _get_runtime_ctx_top_rule {
  my ($runtime_ctx) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_top_rule');
+ _require_runtime_ctx_can('get_runtime_ctx_top_rule');
  return LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule($runtime_ctx)
 }
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  $args{type} = 'compiler_pipeline' unless defined $args{type};
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('set_runtime_ctx_last_error');
+ _require_runtime_ctx_can('set_runtime_ctx_last_error');
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
 sub _has_runtime_ctx_last_error_type {
  my ($runtime_ctx, $type) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('has_runtime_ctx_last_error_type');
+ _require_runtime_ctx_can('has_runtime_ctx_last_error_type');
  return LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, $type)
 }
 
 sub _get_runtime_ctx_last_error_detail {
  my ($runtime_ctx) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('get_runtime_ctx_last_error_detail');
+ _require_runtime_ctx_can('get_runtime_ctx_last_error_detail');
  return LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx)
 }
 
