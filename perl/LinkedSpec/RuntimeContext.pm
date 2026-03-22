@@ -265,11 +265,23 @@ sub set_runtime_ctx_last_error {
  return $error
 }
 
+sub set_runtime_ctx_last_error_for_owner {
+ my ($runtime_ctx, $default_type, %args) = @_;
+ $args{type} = $default_type if defined($default_type) && length($default_type) && !defined($args{type});
+ return set_runtime_ctx_last_error($runtime_ctx, %args)
+}
+
 sub set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
  return $runtime_ctx->{last_error} if has_structured_runtime_ctx_last_error($runtime_ctx);
  return set_runtime_ctx_last_error($runtime_ctx, %args)
+}
+
+sub set_runtime_ctx_last_error_unless_present_for_owner {
+ my ($runtime_ctx, $default_type, %args) = @_;
+ $args{type} = $default_type if defined($default_type) && length($default_type) && !defined($args{type});
+ return set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
 }
 
 1;

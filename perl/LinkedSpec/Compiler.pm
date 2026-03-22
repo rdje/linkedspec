@@ -439,9 +439,8 @@ sub _get_runtime_ctx_top_rule {
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- $args{type} = 'compiler_pipeline' unless defined $args{type};
- _require_runtime_ctx_can('set_runtime_ctx_last_error');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
+ _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'compiler_pipeline', %args)
 }
 
 sub _has_runtime_ctx_last_error_type {

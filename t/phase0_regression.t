@@ -6585,6 +6585,51 @@ subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub 
     is($runtime_ctx->{last_error}{summary}, 'existing summary', 'RuntimeContext fallback helper preserves the existing summary');
     is($runtime_ctx->{last_error}{detail}, 'existing detail', 'RuntimeContext fallback helper preserves the existing detail');
 };
+subtest 'runtime_context_helpers_apply_owner_default_last_error_types' => sub {
+    plan tests => 6;
+
+    my $runtime_ctx = {};
+
+    my $owner_error = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner(
+        $runtime_ctx,
+        'compiler_pipeline',
+        stage => 'owner_stage',
+        summary => 'owner summary',
+        detail => 'owner detail',
+    );
+    is($owner_error->{type}, 'compiler_pipeline', 'RuntimeContext owner helper applies the default last_error type when none is provided');
+    is($owner_error->{owner_stage}, 'compiler_pipeline:owner_stage', 'RuntimeContext owner helper builds owner_stage from the default type');
+
+    my $override_error = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner(
+        $runtime_ctx,
+        'compiler_pipeline',
+        type => 'runtime_handler',
+        stage => 'override_stage',
+        summary => 'override summary',
+        detail => 'override detail',
+    );
+    is($override_error->{type}, 'runtime_handler', 'RuntimeContext owner helper preserves an explicit last_error type override');
+
+    LinkedSpec::RuntimeContext::clear_runtime_ctx_last_error($runtime_ctx);
+    my $owner_fallback = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(
+        $runtime_ctx,
+        'parser_factory',
+        stage => 'fallback_stage',
+        summary => 'fallback summary',
+        detail => 'fallback detail',
+    );
+    is($owner_fallback->{type}, 'parser_factory', 'RuntimeContext owner fallback helper applies the default last_error type when creating a fresh payload');
+    is($owner_fallback->{owner_stage}, 'parser_factory:fallback_stage', 'RuntimeContext owner fallback helper builds owner_stage from the default type');
+
+    my $preserved = LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(
+        $runtime_ctx,
+        'runtime_owner',
+        stage => 'ignored_stage',
+        summary => 'ignored summary',
+        detail => 'ignored detail',
+    );
+    is($preserved->{owner_stage}, 'parser_factory:fallback_stage', 'RuntimeContext owner fallback helper preserves an existing structured last_error');
+};
 subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
     plan tests => 15;
 

@@ -152,9 +152,8 @@ sub _require_runtime_ctx_can {
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- $args{type} = 'runtime_handler' unless defined $args{type};
- _require_runtime_ctx_can('set_runtime_ctx_last_error');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
+ _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'runtime_handler', %args)
 }
 
 sub _emit_runtime_ctx_parser_source_line {

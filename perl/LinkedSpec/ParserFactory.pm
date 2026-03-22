@@ -105,16 +105,14 @@ sub _require_runtime_ctx_can {
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- $args{type} = 'parser_factory' unless defined $args{type};
- _require_runtime_ctx_can('set_runtime_ctx_last_error');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
+ _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'parser_factory', %args)
 }
 
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
- $args{type} = 'parser_factory' unless defined $args{type};
- _require_runtime_ctx_can('set_runtime_ctx_last_error_unless_present');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
+ _require_runtime_ctx_can('set_runtime_ctx_last_error_unless_present_for_owner');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner($runtime_ctx, 'parser_factory', %args)
 }
 
 sub _set_runtime_ctx_spec_path {
