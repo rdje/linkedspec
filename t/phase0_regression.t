@@ -6478,6 +6478,42 @@ subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
     LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'gamma');
     is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper becomes a no-op when parser-source capture is disabled');
 };
+subtest 'runtime_context_helpers_flush_parser_source_output' => sub {
+    plan tests => 7;
+
+    my $runtime_ctx = {
+        parser_source_chunks_ref => ['alpha', 'beta'],
+    };
+    my $captured = '';
+    is(
+        LinkedSpec::RuntimeContext::flush_runtime_ctx_parser_source($runtime_ctx, \$captured),
+        'alphabeta',
+        'RuntimeContext flush helper returns joined parser source text'
+    );
+    is($captured, 'alphabeta', 'RuntimeContext flush helper writes joined parser source into scalar refs');
+
+    my $stdout = '';
+    my $ok = eval {
+        local *STDOUT;
+        open STDOUT, '>', \$stdout or die "open stdout scalar failed: $!";
+        LinkedSpec::RuntimeContext::flush_runtime_ctx_parser_source($runtime_ctx, undef);
+        1;
+    };
+    ok($ok, 'RuntimeContext flush helper can print parser source to stdout fallback')
+        or diag(normalize_error($@ // ''));
+    is($stdout, 'alphabeta', 'RuntimeContext flush helper prints joined parser source when no scalar ref is provided');
+
+    $runtime_ctx = {};
+    $captured = 'stale';
+    is(
+        LinkedSpec::RuntimeContext::flush_runtime_ctx_parser_source($runtime_ctx, \$captured),
+        '',
+        'RuntimeContext flush helper returns empty string when no parser-source chunks exist'
+    );
+    is($captured, '', 'RuntimeContext flush helper clears scalar-ref output when no parser-source chunks exist');
+
+    ok(!defined(LinkedSpec::RuntimeContext::flush_runtime_ctx_parser_source(undef, undef)), 'RuntimeContext flush helper returns undef for non-hash runtime context input');
+};
 subtest 'runtime_context_helpers_manage_top_rule_and_spec_path' => sub {
     plan tests => 7;
 

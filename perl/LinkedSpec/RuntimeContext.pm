@@ -117,6 +117,19 @@ sub emit_runtime_ctx_parser_source_line {
  return
 }
 
+sub flush_runtime_ctx_parser_source {
+ my ($runtime_ctx, $parser_source_ref) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $parser_source_chunks_ref = get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ my $parser_source = (ref($parser_source_chunks_ref) eq 'ARRAY') ? join('', @$parser_source_chunks_ref) : '';
+ if (ref($parser_source_ref) eq 'SCALAR') {
+  $$parser_source_ref = $parser_source;
+ } else {
+  print $parser_source;
+ }
+ return $parser_source
+}
+
 sub clear_runtime_ctx_top_rule {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';

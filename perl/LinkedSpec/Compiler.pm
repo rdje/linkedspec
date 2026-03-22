@@ -425,12 +425,6 @@ sub _emit_runtime_ctx_parser_source_line {
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
-sub _get_runtime_ctx_parser_source_chunks_ref {
- my ($runtime_ctx) = @_;
- _require_runtime_ctx_can('get_runtime_ctx_parser_source_chunks_ref');
- return LinkedSpec::RuntimeContext::get_runtime_ctx_parser_source_chunks_ref($runtime_ctx)
-}
-
 sub _clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
  _require_runtime_ctx_can('clear_runtime_ctx_last_error');
@@ -460,6 +454,12 @@ sub _get_runtime_ctx_last_error_detail {
  my ($runtime_ctx) = @_;
  _require_runtime_ctx_can('get_runtime_ctx_last_error_detail');
  return LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx)
+}
+
+sub _flush_runtime_ctx_parser_source {
+ my ($runtime_ctx, $parser_source_ref) = @_;
+ _require_runtime_ctx_can('flush_runtime_ctx_parser_source');
+ return LinkedSpec::RuntimeContext::flush_runtime_ctx_parser_source($runtime_ctx, $parser_source_ref)
 }
 
 #------------------------------------------------------------------------------
@@ -496,7 +496,7 @@ sub run_get_pipeline {
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Processing .spec file");
 
  my $validation_failed = 0;
- my ($bootstrap_parse, $compile_spec_entry, $parser_source_chunks_ref);
+ my ($bootstrap_parse, $compile_spec_entry);
  my $pipeline_setup_ok = eval {
   $bootstrap_parse = exists $deps->{bootstrap_parse}
    ? _require_dep($deps, 'bootstrap_parse')
@@ -507,7 +507,6 @@ sub run_get_pipeline {
   $compile_spec_entry = exists $deps->{compile_spec_entry}
    ? _require_dep($deps, 'compile_spec_entry')
    : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
-  $parser_source_chunks_ref = _get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
   _require_validation_pkg();
   1;
  };
@@ -750,12 +749,7 @@ sub run_get_pipeline {
   }
   my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
-  my $parser_source = join('', @$parser_source_chunks_ref);
-  if (ref($parser_source_ref) eq 'SCALAR') {
-   $$parser_source_ref = $parser_source;
-  } else {
-   print $parser_source;
-  }
+  _flush_runtime_ctx_parser_source($runtime_ctx, $parser_source_ref);
  }
 
  if (_trace_should_dump(DUMP_LOW)) {
