@@ -851,6 +851,11 @@ Typical patterns:
 - `return_imatch`, `return_array`
 - `$CAPTURE`, `capture_if(...)`, `BACKTRACK()`, `IBACKTRACK()`
 
+Important boundary:
+- `BACKTRACK()` and `IBACKTRACK()` are local cursor-rewind helpers.
+- They are not a full parser-engine backtracking facility.
+- LinkedSpec currently assumes a mostly forward-moving rule/runtime model, so well-written `.spec` files should rely on explicit rule structure and only use local backtrack helpers where needed.
+
 ### I need the exact emitted Perl for every currently supported construct
 Start with [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
