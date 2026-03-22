@@ -104,7 +104,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - public `parse_mode => 'seek' | 'consume'` is now supported through `LinkedSpec::Get(...)`, `LinkedSpec::get_parser(...)`, and `return_descr => 1`,
   - the default remains backward-compatible `seek`,
   - `consume` now drives contiguous `LinkedRE::or(...)` matching from the current input position,
-  - and generated descriptors now expose the selected mode at `meta->{parse_mode}`.
+  - generated descriptors now expose the selected mode at `meta->{parse_mode}`,
+  - and the documented contract now states explicitly that `seek` / `consume` is cursor discipline while `OR` / `AND` is rule composition, so those axes should stay orthogonal as Phase 3 continues.
 - Exit criteria:
   - Clear documented behavior contract for each mode.
 

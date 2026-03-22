@@ -1015,6 +1015,24 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
   - contiguous matching at the current input position
   - later anchors are not searched automatically if the current position does not match
 
+`parse_mode` is a different axis from rule mode:
+- `seek` / `consume`
+  - cursor discipline: may it scan forward to the next anchor, or must it start exactly here?
+- `OR` / `AND`
+  - rule composition: are alternatives being tried, or are ordered steps being composed?
+
+So future implementation should keep these concepts independent:
+- `OR + seek`
+  - try alternatives, and let matching scan forward to the next anchor
+- `OR + consume`
+  - try alternatives, but require one of them to match at the current position
+- `AND + seek`
+  - require ordered steps, while still allowing the next step to scan forward
+- `AND + consume`
+  - require ordered steps, and require each next step to continue contiguously
+
+At the intuition level, `seek` can feel more extraction-like and `consume` can feel more grammar-like, but they are not aliases for `OR` and `AND`.
+
 If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
 If you ask for `return_descr => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
 
