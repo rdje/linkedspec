@@ -338,6 +338,8 @@ Important nuance:
 - The label argument on `capture(...)`, `capture_if(...)`, `ibacktrack(...)`, and `backtrack(...)` is compatibility syntax.
 - Lowering uses the current rule context, not the literal label text inside the call.
 - `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
+- `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so the current regex or child rule usually acts as the right delimiter.
+- `@mark(name)` lowers into later `LECODE`, so same-slot actions should not expect a freshly written mark yet; later slots and later child calls are the intended readers.
 
 ## Classified pass-through compatibility patterns
 These forms are recognized by the ActionIR scanner, contribute canonical ActionIR nodes, and avoid `RAW_PERL` fallback, but the emitted Perl is intentionally preserved verbatim.

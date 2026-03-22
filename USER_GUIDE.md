@@ -293,6 +293,8 @@ Most important syntax elements:
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
+Use `@capture_from_here` when one anonymous capture baseline is enough. Use `@mark(name)` when the checkpoint meaning deserves a real name, when more than one checkpoint may coexist, or when a later child rule should keep using a checkpoint established earlier by a parent rule. The long-form split/rule-mode guide now includes worked examples for parent-to-child named capture, separator-delimited capture, and missing-mark behavior.
+
 ### Action-edge target indexing
 One important rule-body detail is that action edges target regex slots by index.
 
@@ -415,7 +417,7 @@ mean the same thing for the recursive first slot:
 
 That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
-For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, `@capture_from_here`, and named `@mark(name)` in one place, while also documenting `@move_pos` as the preserved compatibility alias.
+For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, `@capture_from_here`, and named `@mark(name)` in one place, while also documenting `@move_pos` as the preserved compatibility alias and giving several worked checkpoint/capture examples.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.

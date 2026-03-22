@@ -175,12 +175,47 @@ CAPTURE_IF()
 These remain useful when migrating older capture-heavy specs.
 
 ### `capture_from(name)`
-Return the captured substring from a named `@mark(name)` checkpoint to the current match boundary.
+Return the captured substring from a named `@mark(name)` checkpoint to the left edge of the current match.
 
-Example:
+Practical reading:
+- the earlier `@mark(name)` establishes the left boundary,
+- the current regex or current child rule establishes the right boundary,
+- the current local match itself is not included in the returned substring.
+
+If the mark is absent, the helper returns `undef`.
+
+One timing rule matters:
+- `@mark(name)` becomes visible after the slot that carries it completes,
+- so `capture_from(name)` is meant for later slots or later child calls, not the same slot that just established the mark.
+
+Examples:
 
 ```text
 assign(scalar(body), capture_from(body_start))
+```
+
+```text
+Top::AND
+ /foo\(/ @mark(body_start) /\w+/
+ -> Top[0] { my $noop = 1 }
+ -> Top[1] { return call(Child) }
+
+Child:
+ /\)/
+ -> Child[0] { my $body = capture_from(body_start); return ['?Child:', $body] }
+```
+
+```text
+LeftSeparator:
+ /,/
+ -> LeftSeparator[0] { my $left = capture_from(left_start); return ['?left:', $left] }
+```
+
+```text
+-> rule[0] {
+     my $maybe_body = capture_from(body_start);
+     return defined($maybe_body) ? ['?body:', $maybe_body] : ['?body:', undef]
+   }
 ```
 
 Use it when one anonymous split cursor is not enough and you want a later action block or child rule to refer back to a specific named checkpoint.
