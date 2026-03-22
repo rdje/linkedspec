@@ -7450,6 +7450,30 @@ subtest 'parser_factory_run_get_parser_records_structured_error_for_resolution_f
     is($runtime_ctx->{last_error}{spec_name}, 'missing_spec_name', 'ParserFactory resolution failure records spec_name inside last_error');
     is($runtime_ctx->{last_error}{spec_path}, '', 'ParserFactory resolution failure leaves spec_path empty inside last_error');
 };
+subtest 'parser_factory_prepare_runtime_ctx_routes_through_runtime_context_owner' => sub {
+    plan tests => 4;
+
+    my $called = 0;
+    my ($captured_option, $captured_owner, $captured_spec_name);
+    my $expected = { prepared => 'runtime_ctx' };
+
+    no warnings 'redefine';
+    local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser = sub {
+        my ($option, %args) = @_;
+        $called++;
+        $captured_option = $option;
+        $captured_owner = $args{owner};
+        $captured_spec_name = $args{spec_name};
+        return $expected;
+    };
+
+    my $option = {};
+    my $prepared = LinkedSpec::ParserFactory::_prepare_runtime_ctx_for_get_parser($option, spec_name => 'CapturedSpec');
+    is($prepared, $expected, 'ParserFactory private prepare helper returns the RuntimeContext-owned result');
+    is($called, 1, 'ParserFactory private prepare helper routes through RuntimeContext exactly once');
+    is($captured_option, $option, 'ParserFactory private prepare helper forwards the original option hashref');
+    is_deeply([$captured_owner, $captured_spec_name], ['LinkedSpec::ParserFactory::run_get_parser', 'CapturedSpec'], 'ParserFactory private prepare helper forwards owner metadata and spec name into RuntimeContext');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
     plan tests => 9;
 

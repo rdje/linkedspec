@@ -89,36 +89,35 @@ sub _default_deps {
 
 sub _prepare_runtime_ctx_for_get_parser {
  my ($option, %args) = @_;
- _require_runtime_ctx_can('prepare_runtime_ctx_for_get_parser');
- return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+ return _call_runtime_ctx('prepare_runtime_ctx_for_get_parser',
   $option,
   owner => 'LinkedSpec::ParserFactory::run_get_parser',
   %args,
  )
 }
 
-sub _require_runtime_ctx_can {
- my ($name) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
- return 1
+sub _call_runtime_ctx {
+ my ($subname, @args) = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
+  no strict 'refs';
+  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
+ })
 }
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'parser_factory', %args)
+ return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'parser_factory', %args)
 }
 
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_last_error_unless_present_for_owner');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner($runtime_ctx, 'parser_factory', %args)
+ return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'parser_factory', %args)
 }
 
 sub _set_runtime_ctx_spec_path {
  my ($runtime_ctx, $spec_path) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_spec_path');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, $spec_path)
+ return _call_runtime_ctx('set_runtime_ctx_spec_path', $runtime_ctx, $spec_path)
 }
 
 #------------------------------------------------------------------------------
