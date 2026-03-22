@@ -39,29 +39,29 @@ sub _call_preserving_err {
 
 sub _build_runtime_context {
  my ($option) = @_;
- _require_runtime_ctx_can('prepare_runtime_ctx_for_run_get_option');
- return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(
+ return _call_runtime_ctx('prepare_runtime_ctx_for_run_get_option',
   $option,
   owner => 'LinkedSpec::Runtime::run_get',
  )
 }
 
-sub _require_runtime_ctx_can {
- my ($name) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
- return 1
+sub _call_runtime_ctx {
+ my ($subname, @args) = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
+  no strict 'refs';
+  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
+ })
 }
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'runtime_owner', %args)
+ return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_owner', %args)
 }
 
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_last_error_unless_present_for_owner');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner($runtime_ctx, 'runtime_owner', %args)
+ return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'runtime_owner', %args)
 }
 
 #------------------------------------------------------------------------------

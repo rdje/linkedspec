@@ -7474,6 +7474,29 @@ subtest 'parser_factory_prepare_runtime_ctx_routes_through_runtime_context_owner
     is($captured_option, $option, 'ParserFactory private prepare helper forwards the original option hashref');
     is_deeply([$captured_owner, $captured_spec_name], ['LinkedSpec::ParserFactory::run_get_parser', 'CapturedSpec'], 'ParserFactory private prepare helper forwards owner metadata and spec name into RuntimeContext');
 };
+subtest 'runtime_build_runtime_context_routes_through_runtime_context_owner' => sub {
+    plan tests => 4;
+
+    my $called = 0;
+    my ($captured_option, $captured_owner);
+    my $expected = { prepared => 'runtime_ctx' };
+
+    no warnings 'redefine';
+    local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option = sub {
+        my ($option, %args) = @_;
+        $called++;
+        $captured_option = $option;
+        $captured_owner = $args{owner};
+        return $expected;
+    };
+
+    my $option = {};
+    my $prepared = LinkedSpec::Runtime::_build_runtime_context($option);
+    is($prepared, $expected, 'Runtime private context builder returns the RuntimeContext-owned result');
+    is($called, 1, 'Runtime private context builder routes through RuntimeContext exactly once');
+    is($captured_option, $option, 'Runtime private context builder forwards the original option hashref');
+    is($captured_owner, 'LinkedSpec::Runtime::run_get', 'Runtime private context builder forwards owner metadata into RuntimeContext');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
     plan tests => 9;
 
