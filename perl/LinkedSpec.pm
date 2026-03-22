@@ -154,6 +154,11 @@ sub _dispatch_owner_call {
  })
 }
 
+sub _normalize_flat_option_pairs {
+ my @args = @_;
+ return (@args % 2 == 0) ? @args : ()
+}
+
 
 
 #------------------------------------------------------------------------------
@@ -166,7 +171,7 @@ sub _dispatch_owner_call {
 sub Get {
  my @args = @_;
  my $spec_content_ref = shift @args;
- my %option = (@args % 2 == 0) ? @args : ();
+ my %option = _normalize_flat_option_pairs(@args);
  return _dispatch_owner_call('LinkedSpec::Runtime', 'run_get', $spec_content_ref, \%option)
 }
 
@@ -205,7 +210,7 @@ sub call_spec_handler_subst {
 #------------------------------------------------------------------------------
 sub get_parser {
  my ($spec_name, @opts) = @_;
- my %opt_hash = (@opts % 2 == 0) ? @opts : ();
+ my %opt_hash = _normalize_flat_option_pairs(@opts);
  return _dispatch_owner_call('LinkedSpec::ParserFactory', 'run_get_parser', $spec_name, \%opt_hash)
 }
 

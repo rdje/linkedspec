@@ -84,6 +84,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - `LinkedSpec.pm` delegates most internal work to extracted modules.
   - Existing behavior and regression baseline preserved.
   - Public API compatibility maintained.
+- Recent landed follow-up: `LinkedSpec.pm` now centralizes the flat key/value option-pair normalization used by both `Get(...)` and `get_parser(...)` behind one tiny façade helper instead of duplicating the same even-pair / odd-trailing-fallback logic in both public wrappers. This is a no-behavior-change cleanup, but it keeps the remaining façade surface smaller and more uniform.
 
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.
