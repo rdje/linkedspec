@@ -168,6 +168,20 @@ sub _set_runtime_ctx_top_rule {
  return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
 }
 
+sub _runtime_handler_source_label {
+ my (%args) = @_;
+ my $label = defined($args{label}) && length($args{label}) ? $args{label} : '<unknown_rule>';
+ my $rule_meta = $args{rule_meta};
+ my $variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
+ my $source_label = defined($variant) && length($variant)
+  ? "LinkedSpec::generated_handler:$label:$variant"
+  : "LinkedSpec::generated_handler:$label";
+ $source_label =~ s/\\/\\\\/g;
+ $source_label =~ s/"/\\"/g;
+ $source_label =~ s/[\r\n]+/ /g;
+ return $source_label
+}
+
 sub _build_handler_preamble {
  my ($label, $actual_icode) = @_;
  return
@@ -757,7 +771,11 @@ sub _build_runtime_handler {
  my $handler = $args{handler};
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
- my $handler_source = "sub {\n$handler\n}";
+ my $handler_source_label = _runtime_handler_source_label(
+  label => $label,
+  rule_meta => $rule_meta,
+ );
+ my $handler_source = qq{#line 1 "$handler_source_label"\nsub {\n$handler\n}};
  my $compiled_handler;
  my $compile_warning = '';
  {

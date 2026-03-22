@@ -1091,6 +1091,8 @@ For runtime execution failures, the same payload also tells you which compiled r
 - `rule_label` names the failing compiled rule,
 - and `handler_variant` tells you which handler family was active when the eval-visible failure happened.
 
+For generated-handler compile failures specifically (`runtime_handler` at stage `rule_handler_compile`), the preserved `detail` text now also includes a stable synthetic source label of the form `LinkedSpec::generated_handler:<rule_label>:<handler_variant>`. That makes malformed generated-handler code much easier to attribute than anonymous eval text.
+
 That `runtime_parser` family now covers both:
 - `resolve_top_rule_handler` when a returned parser coderef cannot find a usable selected top rule or handler coderef to invoke,
 - and `invoke_top_rule` when the selected top-rule handler itself dies at the outer parser-call boundary.

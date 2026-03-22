@@ -8348,7 +8348,7 @@ PERL
     ok(!exists $runtime_ctx->{last_error}, 'successful cached runtime handler invocations leave runtime error context empty');
 };
 subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $runtime_ctx = {};
     my $rule_meta = {
@@ -8380,6 +8380,7 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_compile', 'invalid generated runtime handler source records combined compile owner stage');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid generated runtime handler source records failing rule label');
     is($stderr, '', 'invalid generated runtime handler source does not leak compile warnings to STDERR');
+    like($runtime_ctx->{last_error}{detail}, qr/LinkedSpec::generated_handler:Top:FORCED_COMPILE_ERROR/, 'invalid generated runtime handler source detail includes the synthetic generated-handler source label');
     like($runtime_ctx->{last_error}{detail}, qr/Missing operator|syntax error|Bareword/, 'invalid generated runtime handler source preserves captured compile warning/detail text');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_die' => sub {
