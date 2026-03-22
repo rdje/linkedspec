@@ -7497,6 +7497,27 @@ subtest 'runtime_build_runtime_context_routes_through_runtime_context_owner' => 
     is($captured_option, $option, 'Runtime private context builder forwards the original option hashref');
     is($captured_owner, 'LinkedSpec::Runtime::run_get', 'Runtime private context builder forwards owner metadata into RuntimeContext');
 };
+subtest 'compiler_require_runtime_ctx_routes_through_runtime_context_owner' => sub {
+    plan tests => 3;
+
+    my $called = 0;
+    my $captured_runtime_ctx;
+    my $expected = { prepared => 'compiler_runtime_ctx' };
+
+    no warnings 'redefine';
+    local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline = sub {
+        my ($runtime_ctx) = @_;
+        $called++;
+        $captured_runtime_ctx = $runtime_ctx;
+        return $expected;
+    };
+
+    my $runtime_ctx = {};
+    my $prepared = LinkedSpec::Compiler::_require_runtime_ctx({ runtime_ctx => $runtime_ctx });
+    is($prepared, $expected, 'Compiler runtime-context requirement returns the RuntimeContext-owned result');
+    is($called, 1, 'Compiler runtime-context requirement routes through RuntimeContext exactly once');
+    is($captured_runtime_ctx, $runtime_ctx, 'Compiler runtime-context requirement forwards the injected runtime context hashref');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
     plan tests => 9;
 
