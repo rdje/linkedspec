@@ -144,28 +144,28 @@ sub _runtime_ctx_from_deps {
  return undef
 }
 
-sub _require_runtime_ctx_can {
- my ($name) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($name);
- return 1
+sub _call_runtime_ctx {
+ my ($subname, @args) = @_;
+ return _call_preserving_err(sub {
+  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
+  no strict 'refs';
+  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
+ })
 }
 
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_last_error_for_owner');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_for_owner($runtime_ctx, 'runtime_handler', %args)
+ return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_handler', %args)
 }
 
 sub _emit_runtime_ctx_parser_source_line {
  my ($runtime_ctx, $chunk) = @_;
- _require_runtime_ctx_can('emit_runtime_ctx_parser_source_line');
- return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
+ return _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $chunk)
 }
 
 sub _set_runtime_ctx_top_rule {
  my ($runtime_ctx, $top_rule) = @_;
- _require_runtime_ctx_can('set_runtime_ctx_top_rule');
- return LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, $top_rule)
+ return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
 }
 
 sub _build_handler_preamble {

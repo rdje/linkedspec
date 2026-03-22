@@ -7518,6 +7518,29 @@ subtest 'compiler_require_runtime_ctx_routes_through_runtime_context_owner' => s
     is($called, 1, 'Compiler runtime-context requirement routes through RuntimeContext exactly once');
     is($captured_runtime_ctx, $runtime_ctx, 'Compiler runtime-context requirement forwards the injected runtime context hashref');
 };
+subtest 'spec_entry_set_runtime_ctx_top_rule_routes_through_runtime_context_owner' => sub {
+    plan tests => 4;
+
+    my $called = 0;
+    my ($captured_runtime_ctx, $captured_top_rule);
+    my $expected = { updated => 'top_rule' };
+
+    no warnings 'redefine';
+    local *LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule = sub {
+        my ($runtime_ctx, $top_rule) = @_;
+        $called++;
+        $captured_runtime_ctx = $runtime_ctx;
+        $captured_top_rule = $top_rule;
+        return $expected;
+    };
+
+    my $runtime_ctx = {};
+    my $ret = LinkedSpec::SpecEntry::_set_runtime_ctx_top_rule($runtime_ctx, 'CapturedTop');
+    is($ret, $expected, 'SpecEntry top-rule helper returns the RuntimeContext-owned result');
+    is($called, 1, 'SpecEntry top-rule helper routes through RuntimeContext exactly once');
+    is($captured_runtime_ctx, $runtime_ctx, 'SpecEntry top-rule helper forwards the injected runtime context hashref');
+    is($captured_top_rule, 'CapturedTop', 'SpecEntry top-rule helper forwards the discovered top rule');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
     plan tests => 9;
 
