@@ -6708,12 +6708,15 @@ subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub 
     is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper clears stale parser-source chunks');
 };
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
-    plan tests => 8;
+    plan tests => 12;
 
+    my @stale_parser_source_chunks = ('old parser source');
     my %runtime_ctx = (
         top_rule => 'StaleTop',
         spec_name => 'OldSpec',
         spec_path => '/tmp/stale.spec',
+        parser_source_chunks_ref => \@stale_parser_source_chunks,
+        emit_parser_source_line => sub { push @stale_parser_source_chunks, $_[0] },
     );
     my %option = (runtime_ctx_ref => \%runtime_ctx);
 
@@ -6728,7 +6731,19 @@ subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
     ok(exists $runtime_ctx{top_rule}, 'RuntimeContext get_parser preparation helper keeps the top_rule key present when clearing stale state');
     is($runtime_ctx{top_rule}, undef, 'RuntimeContext get_parser preparation helper clears stale top_rule state');
     is($runtime_ctx{spec_path}, undef, 'RuntimeContext get_parser preparation helper clears stale spec_path before resolution');
-    ok(!exists $runtime_ctx{parser_source_chunks_ref}, 'RuntimeContext get_parser preparation helper does not add parser-source capture state');
+    is($runtime_ctx{parser_source_chunks_ref}, \@stale_parser_source_chunks, 'RuntimeContext get_parser preparation helper preserves the existing parser-source chunk arrayref');
+    is_deeply($runtime_ctx{parser_source_chunks_ref}, [], 'RuntimeContext get_parser preparation helper clears stale parser-source chunks');
+    ok(!exists $runtime_ctx{emit_parser_source_line}, 'RuntimeContext get_parser preparation helper clears stale parser-source emit callback');
+
+    my %fresh_runtime_ctx;
+    my %fresh_option = (runtime_ctx_ref => \%fresh_runtime_ctx);
+    my $fresh = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+        \%fresh_option,
+        owner => 't::runtime_context_helper',
+        spec_name => 'FreshSpec',
+    );
+    is($fresh, \%fresh_runtime_ctx, 'RuntimeContext get_parser preparation helper still supports fresh runtime contexts');
+    ok(!exists $fresh_runtime_ctx{parser_source_chunks_ref}, 'RuntimeContext get_parser preparation helper does not add parser-source capture state when none exists');
 
     my $empty = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
         {},
@@ -7846,6 +7861,28 @@ subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub
     ok(ref($runtime_ctx{last_error}) eq 'HASH', 'get_parser reused-context resolution failure still records structured last_error');
     is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser reused-context last_error records the refreshed spec_name');
     is($runtime_ctx{last_error}{spec_path}, '', 'get_parser reused-context last_error does not inherit stale spec_path');
+};
+subtest 'get_parser_resolution_failure_clears_stale_parser_source_capture' => sub {
+    plan tests => 7;
+
+    my $missing_spec_name = 'phase5_runtime_ctx_stale_parser_source_' . $$ . '.spec';
+    my @stale_parser_source_chunks = ('old parser source');
+    my %runtime_ctx = (
+        parser_source_chunks_ref => \@stale_parser_source_chunks,
+        emit_parser_source_line => sub { push @stale_parser_source_chunks, $_[0] },
+    );
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        $missing_spec_name,
+        runtime_ctx_ref => \%runtime_ctx,
+    );
+
+    ok($ok_call, 'get_parser reused-context resolution-failure call with stale parser-source state returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for reused-context resolution failure with stale parser-source state');
+    is($runtime_ctx{parser_source_chunks_ref}, \@stale_parser_source_chunks, 'get_parser preserves the existing parser-source chunk arrayref on reused-context resolution failure');
+    is_deeply($runtime_ctx{parser_source_chunks_ref}, [], 'get_parser clears stale parser-source chunks before reused-context resolution failure');
+    ok(!exists $runtime_ctx{emit_parser_source_line}, 'get_parser clears stale parser-source emit callback before parser-factory resolution starts');
+    ok(ref($runtime_ctx{last_error}) eq 'HASH', 'get_parser reused-context resolution failure with stale parser-source state still records structured last_error');
+    is($runtime_ctx{last_error}{stage}, 'resolve_spec_path', 'get_parser reused-context resolution failure with stale parser-source state still records the parser-factory resolution stage');
 };
 subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failure' => sub {
     plan tests => 12;

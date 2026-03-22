@@ -77,6 +77,9 @@ sub prepare_runtime_ctx_for_get_parser {
  clear_runtime_ctx_top_rule($runtime_ctx);
  clear_runtime_ctx_spec_path($runtime_ctx);
  clear_runtime_ctx_spec_name($runtime_ctx);
+ my $parser_source_chunks_ref = get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ @$parser_source_chunks_ref = () if ref($parser_source_chunks_ref) eq 'ARRAY';
+ delete $runtime_ctx->{emit_parser_source_line};
  set_runtime_ctx_spec_name($runtime_ctx, $args{spec_name}) if defined $args{spec_name};
  return $runtime_ctx
 }
