@@ -6555,6 +6555,31 @@ subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
 
     ok(!defined(LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule(undef)), 'RuntimeContext top-rule reader returns undef for non-hash runtime context input');
 };
+subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
+    plan tests => 8;
+
+    my $runtime_ctx = {
+        top_rule => 'StaleTop',
+        parser_source_chunks_ref => ['stale'],
+        emit_parser_source_line => sub { die '__SHOULD_BE_REPLACED__' },
+    };
+
+    my $prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get(
+        $runtime_ctx,
+        dump_parser_source => 1,
+    );
+
+    is($prepared, $runtime_ctx, 'RuntimeContext run_get preparation helper reuses the supplied hashref');
+    ok(exists $runtime_ctx->{top_rule}, 'RuntimeContext run_get preparation helper keeps the top_rule key present');
+    is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper clears stale top_rule state');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext run_get preparation helper preserves parser-source chunk arrayref storage');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, ['stale'], 'RuntimeContext run_get preparation helper preserves existing parser-source chunks');
+    ok(ref($runtime_ctx->{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get preparation helper installs parser-source emit callback when dumping is enabled');
+
+    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get($runtime_ctx, dump_parser_source => 0);
+    ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext run_get preparation helper removes parser-source emit callback when dumping is disabled');
+    is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

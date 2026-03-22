@@ -31,6 +31,19 @@ sub ensure_runtime_ctx {
  return $runtime_ctx
 }
 
+sub prepare_runtime_ctx_for_run_get {
+ my ($runtime_ctx_ref, %args) = @_;
+ my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
+ $runtime_ctx = {} unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_top_rule($runtime_ctx);
+ ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ configure_runtime_ctx_parser_source_capture(
+  $runtime_ctx,
+  enabled => $args{dump_parser_source} ? 1 : 0,
+ );
+ return $runtime_ctx
+}
+
 sub ensure_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';

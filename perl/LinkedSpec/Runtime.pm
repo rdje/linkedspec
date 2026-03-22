@@ -48,13 +48,9 @@ sub _build_runtime_context {
     owner => 'LinkedSpec::Runtime::run_get',
     )
   : undef;
- my $ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($runtime_ctx_ref);
- $ctx = {} unless ref($ctx) eq 'HASH';
- LinkedSpec::RuntimeContext::clear_runtime_ctx_top_rule($ctx);
- LinkedSpec::RuntimeContext::ensure_runtime_ctx_parser_source_chunks_ref($ctx);
- LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
-  $ctx,
-  enabled => $option->{dump_parser_source} ? 1 : 0,
+ my $ctx = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get(
+  $runtime_ctx_ref,
+  dump_parser_source => $option->{dump_parser_source} ? 1 : 0,
  );
  return $ctx
 }
