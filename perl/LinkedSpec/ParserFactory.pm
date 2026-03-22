@@ -87,20 +87,14 @@ sub _default_deps {
  }
 }
 
-sub _get_runtime_ctx_ref {
- my ($option) = @_;
- return undef unless ref($option) eq 'HASH' && exists $option->{runtime_ctx_ref};
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('normalize_runtime_ctx_ref');
- return LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref(
-  $option->{runtime_ctx_ref},
+sub _prepare_runtime_ctx_for_get_parser {
+ my ($option, %args) = @_;
+ _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('prepare_runtime_ctx_for_get_parser');
+ return LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+  $option,
   owner => 'LinkedSpec::ParserFactory::run_get_parser',
+  %args,
  )
-}
-
-sub _ensure_runtime_ctx {
- my ($runtime_ctx_ref, %seed) = @_;
- _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can('ensure_runtime_ctx');
- return LinkedSpec::RuntimeContext::ensure_runtime_ctx($runtime_ctx_ref, %seed)
 }
 
 sub _set_runtime_ctx_last_error {
@@ -128,8 +122,7 @@ sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
  return _call_preserving_err(sub {
   my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
-  my $runtime_ctx_ref = _get_runtime_ctx_ref(\%opt_hash);
-  my $runtime_ctx = _ensure_runtime_ctx($runtime_ctx_ref, spec_name => $spec_name);
+  my $runtime_ctx = _prepare_runtime_ctx_for_get_parser(\%opt_hash, spec_name => $spec_name);
   my ($apply_trace_options, $trace_enter, $trace_exit, $trace_decision, $validate_spec_name,
       $resolve_spec_path, $load_spec_content, $compile_spec, $dump_low, $dump_medium, $trace_scope);
   my $setup_ok = eval {

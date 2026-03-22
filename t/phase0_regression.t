@@ -6580,6 +6580,31 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext run_get preparation helper removes parser-source emit callback when dumping is disabled');
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
 };
+subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
+    plan tests => 6;
+
+    my %runtime_ctx;
+    my %option = (runtime_ctx_ref => \%runtime_ctx);
+
+    my $prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+        \%option,
+        owner => 't::runtime_context_helper',
+        spec_name => 'SeededSpec',
+    );
+
+    is($prepared, \%runtime_ctx, 'RuntimeContext get_parser preparation helper reuses the supplied hashref');
+    is($runtime_ctx{spec_name}, 'SeededSpec', 'RuntimeContext get_parser preparation helper seeds spec_name');
+    ok(!exists $runtime_ctx{top_rule}, 'RuntimeContext get_parser preparation helper does not add run_get top_rule reset state');
+    ok(!exists $runtime_ctx{parser_source_chunks_ref}, 'RuntimeContext get_parser preparation helper does not add parser-source capture state');
+
+    my $empty = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+        {},
+        owner => 't::runtime_context_helper',
+        spec_name => 'NoHookSpec',
+    );
+    ok(!defined($empty), 'RuntimeContext get_parser preparation helper returns undef when no runtime_ctx_ref hook is provided');
+    is($runtime_ctx{spec_name}, 'SeededSpec', 'RuntimeContext get_parser preparation helper leaves the previously seeded context untouched');
+};
 subtest 'spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper' => sub {
     plan tests => 9;
 

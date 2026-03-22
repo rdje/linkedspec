@@ -44,6 +44,18 @@ sub prepare_runtime_ctx_for_run_get {
  return $runtime_ctx
 }
 
+sub prepare_runtime_ctx_for_get_parser {
+ my ($option, %args) = @_;
+ my $runtime_ctx_ref = (ref($option) eq 'HASH' && exists($option->{runtime_ctx_ref}))
+  ? normalize_runtime_ctx_ref(
+     $option->{runtime_ctx_ref},
+     owner => defined($args{owner}) ? $args{owner} : 'LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser',
+    )
+  : undef;
+ my %seed = defined($args{spec_name}) ? (spec_name => $args{spec_name}) : ();
+ return ensure_runtime_ctx($runtime_ctx_ref, %seed)
+}
+
 sub ensure_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
