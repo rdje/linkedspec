@@ -162,6 +162,12 @@ sub _emit_runtime_ctx_parser_source_line {
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
 
+sub _set_runtime_ctx_top_rule {
+ my ($runtime_ctx, $top_rule) = @_;
+ _require_runtime_ctx_can('set_runtime_ctx_top_rule');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, $top_rule)
+}
+
 sub _build_handler_preamble {
  my ($label, $actual_icode) = @_;
  return
@@ -937,8 +943,7 @@ sub compile_spec_entry {
  _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
  }
  if (defined $rule_ir->{top_rule}) {
-  _require_runtime_ctx_can('set_runtime_ctx_top_rule');
-  LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule($runtime_ctx, $rule_ir->{top_rule});
+  _set_runtime_ctx_top_rule($runtime_ctx, $rule_ir->{top_rule});
  }
  _trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 

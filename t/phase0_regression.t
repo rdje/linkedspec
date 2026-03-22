@@ -6630,6 +6630,33 @@ subtest 'runtime_context_helpers_apply_owner_default_last_error_types' => sub {
     );
     is($preserved->{owner_stage}, 'parser_factory:fallback_stage', 'RuntimeContext owner fallback helper preserves an existing structured last_error');
 };
+subtest 'spec_entry_compile_spec_entry_routes_top_rule_state_through_runtime_ctx_helper' => sub {
+    plan tests => 4;
+
+    my $spec = <<'SPEC';
+Top::
+/^top/
+SPEC
+
+    my ($parse_success, $parsed, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec);
+    ok($parse_success && ref($parsed) eq 'ARRAY' && @$parsed, 'bootstrap parse succeeds for top-rule routing check')
+        or diag($parse_error // '(no bootstrap parse error detail)');
+
+    my $runtime_ctx = {};
+    my $called = 0;
+    no warnings 'redefine';
+    local *LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule = sub {
+        my ($ctx, $top_rule) = @_;
+        $called++;
+        $ctx->{top_rule} = $top_rule;
+        return $top_rule;
+    };
+
+    my ($label, $info, $top_rule) = LinkedSpec::SpecEntry::compile_spec_entry($parsed->[0], { runtime_ctx => $runtime_ctx });
+    is($label, 'Top', 'compile_spec_entry still returns the expected rule label');
+    is($top_rule, 'Top', 'compile_spec_entry still reports the top_rule tuple value');
+    is($called, 1, 'compile_spec_entry routes top_rule state through the RuntimeContext setter helper');
+};
 subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
     plan tests => 15;
 
