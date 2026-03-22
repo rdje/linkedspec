@@ -212,15 +212,7 @@ sub _build_default_handler_variant {
  return '
 
  while (1) {
-  my $minfo = eval { LinkedRE::or($STRING, $$descr{gdata}{'.$label.'}) };
-  if($@) {
-   die join("",
-    "\n(LinkedSpec) -E- Rule \''.$label.'\': Error during handler code generation\n",
-    "  Error: $@\n",
-    "  This usually indicates a syntax error in the generated Perl code\n",
-    "  Check your .spec file for malformed code blocks or invalid syntax\n",
-   )
-  }
+  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
 
   unless($minfo) {
   '.($actual_lxcode || 'return undef').'

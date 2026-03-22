@@ -3859,7 +3859,7 @@ SPEC
     ok($ok_run, 'forced LinkedRE failure parser invocation returns without outer die') or diag(normalize_error($err_run));
     ok(!defined($ast), 'forced LinkedRE failure parser invocation returns undef AST');
     ok(length($inner_eval_err) > 0, 'forced LinkedRE failure surfaces inner eval error');
-    like($inner_eval_err, qr/Error during handler code generation/, 'forced LinkedRE failure reports handler-generation banner through eval error');
+    unlike($inner_eval_err, qr/Error during handler code generation/, 'forced LinkedRE failure no longer reports the stale inner handler-generation banner');
     like($inner_eval_err, qr/__FORCED_LINKEDRE_OR_FAILURE__/, 'forced LinkedRE failure preserves underlying runtime error detail');
     unlike($inner_eval_err, qr/__EXIT__\(/, 'forced LinkedRE failure no longer propagates through the exit trap');
     unlike(($out_run // '') . ($warn_run // ''), qr/__EXIT__\(/, 'forced LinkedRE failure does not trigger the exit trap through trace output either');
@@ -6940,7 +6940,7 @@ SPEC
     like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
 };
 subtest 'compiler_run_get_pipeline_emits_nested_repeat_helpers_without_eval_wrappers' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -6986,10 +6986,11 @@ SPEC
     is($descr->{spec}{RepeatChoice}{meta}{handler_variant}, 'REP_BCODE', 'repeat-choice blind-call rule still selects REP_BCODE');
     is($descr->{spec}{RepeatSeq}{meta}{handler_variant}, 'REP_AND_ACODE', 'repeat ordered-sequence action rule still selects REP_AND_ACODE');
     is($descr->{spec}{RepeatBlindSeq}{meta}{handler_variant}, 'REP_AND_BCODE', 'repeat ordered-sequence blind-call rule still selects REP_AND_BCODE');
-    like($parser_source, qr/my \$minfo = eval \{ LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}\) \}/s, 'parser source now emits block-eval regex dispatch for default handler source');
+    like($parser_source, qr/my \$minfo = LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}\);/s, 'parser source now emits direct LinkedRE dispatch for default handler source');
     like($parser_source, qr/my \$or_code = sub \{/s, 'parser source now emits a plain nested OR helper sub for repeated blind-call choice');
     like($parser_source, qr/my \$and_code = sub \{/s, 'parser source now emits a plain nested AND helper sub for repeated ordered-sequence helpers');
     unlike($parser_source, qr/eval q\/\$minfo = LinkedRE::or/s, 'parser source no longer emits quoted-string eval around default LinkedRE dispatch');
+    unlike($parser_source, qr/my \$minfo = eval \{ LinkedRE::or/s, 'parser source no longer emits block-eval regex dispatch around default LinkedRE dispatch');
     unlike($parser_source, qr/my \$or_code = sub \{eval '/s, 'parser source no longer emits eval-wrapped nested OR helper subs');
     unlike($parser_source, qr/my \$and_code = sub \{eval '/s, 'parser source no longer emits eval-wrapped nested AND helper subs');
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'repeat-helper parser-source inspection still records emitted source chunks');
