@@ -35286,6 +35286,133 @@ SPEC
     );
 };
 
+subtest 'parse_mode_default_and_explicit_seek_preserve_progressive_matching' => sub {
+    plan tests => 6;
+
+    my $snippet = <<'PERL';
+use LinkedSpec;
+my ($mode, $input) = @ARGV;
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+my @opt = defined($mode) && length($mode) ? (parse_mode => $mode) : ();
+my $parser = LinkedSpec::Get(\$spec_content, @opt);
+print(ref($parser) || "<undef>", "\n");
+my $ast = $parser->(\$input);
+require Data::Dumper;
+print defined($ast) ? Data::Dumper::Dumper($ast) : "__AST_UNDEF__\n";
+PERL
+
+    my ($default_exit, $default_out, $default_err) = run_perl_snippet_in_subprocess($snippet, '', 'xxa');
+    my ($seek_exit, $seek_out, $seek_err) = run_perl_snippet_in_subprocess($snippet, 'seek', 'xxa');
+
+    is($default_exit, 0, 'default parse mode subprocess exits cleanly') or diag($default_err || $default_out);
+    is($seek_exit, 0, 'explicit seek parse mode subprocess exits cleanly') or diag($seek_err || $seek_out);
+    like($default_out, qr/^CODE\n/s, 'default parse mode still builds parser coderef');
+    like($seek_out, qr/^CODE\n/s, 'explicit seek parse mode still builds parser coderef');
+    like($default_out, qr/\?Top:/, 'default parse mode still seeks forward to a later anchor');
+    is($seek_out, $default_out, 'explicit seek parse mode matches the default parser result end to end');
+};
+
+subtest 'parse_mode_consume_requires_contiguous_match' => sub {
+    plan tests => 5;
+
+    my $snippet = <<'PERL';
+use LinkedSpec;
+my ($input) = @ARGV;
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume');
+print(ref($parser) || "<undef>", "\n");
+my $ast = $parser->(\$input);
+require Data::Dumper;
+print defined($ast) ? Data::Dumper::Dumper($ast) : "__AST_UNDEF__\n";
+PERL
+
+    my ($reject_exit, $reject_out, $reject_err) = run_perl_snippet_in_subprocess($snippet, 'xxa');
+    my ($accept_exit, $accept_out, $accept_err) = run_perl_snippet_in_subprocess($snippet, 'a');
+
+    is($reject_exit, 0, 'consume parse mode leading-junk subprocess exits cleanly') or diag($reject_err || $reject_out);
+    is($accept_exit, 0, 'consume parse mode contiguous-input subprocess exits cleanly') or diag($accept_err || $accept_out);
+    like($reject_out, qr/^CODE\n__AST_UNDEF__\n\z/s, 'consume parse mode rejects leading junk before the first anchor');
+    like($accept_out, qr/^CODE\n/s, 'consume parse mode still builds parser coderef');
+    like($accept_out, qr/\?Top:/, 'consume parse mode still accepts contiguous matching input');
+};
+
+subtest 'return_descr_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $default_descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descr still builds descriptor hash');
+    is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
+
+    my $consume_descr = LinkedSpec::Get(
+        \$spec_content,
+        return_descr => 1,
+        parse_mode => 'consume',
+    );
+    ok(defined($consume_descr) && ref($consume_descr) eq 'HASH', 'consume parse mode return_descr still builds descriptor hash');
+    is($consume_descr->{meta}{parse_mode}, 'consume', 'consume parse mode is recorded in descriptor metadata');
+
+    my $snippet = <<'PERL';
+use LinkedSpec;
+my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+my $parser_source = '';
+my $descr = LinkedSpec::Get(
+  \$spec_content,
+  return_descr => 1,
+  dump_parser_source => 1,
+  parser_source_ref => \$parser_source,
+  parse_mode => 'consume',
+);
+die "__NO_DESCR__\n" unless defined($descr) && ref($descr) eq 'HASH';
+print $parser_source;
+PERL
+    my ($source_exit, $source_out, $source_err) = run_perl_snippet_in_subprocess($snippet);
+    is($source_exit, 0, 'consume parse mode dump_parser_source subprocess exits cleanly') or diag($source_err || $source_out);
+    like(
+        $source_out,
+        qr/LinkedRE::or\(\$STRING, \$\$descr\{gdata\}\{Top\}, 'consume'\)/,
+        'consume parse mode parser source emits explicit contiguous LinkedRE dispatch'
+    );
+};
+
+subtest 'invalid_parse_mode_records_structured_prepare_pipeline_error' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::Get(
+        \$spec_content,
+        return_descr => 1,
+        parse_mode => 'sideways',
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok(!defined($ret), 'invalid parse mode returns undef');
+    ok(ref($runtime_ctx) eq 'HASH', 'invalid parse mode still exposes runtime context through runtime_ctx_ref');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid parse mode records structured last_error');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid parse mode records compiler_pipeline error type');
+    is($runtime_ctx->{last_error}{stage}, 'prepare_pipeline', 'invalid parse mode records prepare_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'invalid parse mode records combined compiler owner stage');
+    like($runtime_ctx->{last_error}{detail}, qr/option 'parse_mode' must be 'seek' or 'consume'/, 'invalid parse mode preserves parse-mode contract detail');
+};
+
 done_testing();
 
 sub discover_specs {

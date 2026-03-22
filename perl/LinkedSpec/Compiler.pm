@@ -392,7 +392,7 @@ sub spec_gdata {
 }
 
 sub _build_final_descr {
- my ($auto_descr_spec, $spec_gdata_cb) = @_;
+ my ($auto_descr_spec, $spec_gdata_cb, %args) = @_;
  $spec_gdata_cb ||= \&spec_gdata;
 
  my $final_descr = {
@@ -400,8 +400,16 @@ sub _build_final_descr {
   gdata => $spec_gdata_cb->($auto_descr_spec),
  };
  $final_descr->{meta} ||= {};
+ $final_descr->{meta}{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
  $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
  return $final_descr;
+}
+
+sub _normalize_parse_mode {
+ my ($parse_mode) = @_;
+ return 'seek' unless defined($parse_mode) && length($parse_mode);
+ return $parse_mode if $parse_mode eq 'seek' || $parse_mode eq 'consume';
+ die "(LinkedSpec::Compiler::_normalize_parse_mode) -E- option 'parse_mode' must be 'seek' or 'consume'"
 }
 
 sub _require_runtime_ctx {
@@ -481,12 +489,16 @@ sub run_get_pipeline {
  my $test_expectation = $option->{test_expectation};
  my $dump_parser_source = $option->{dump_parser_source};
  my $parser_source_ref = $option->{parser_source_ref};
+ my $parse_mode = defined($option->{parse_mode}) && length($option->{parse_mode})
+  ? $option->{parse_mode}
+  : 'seek';
 
  my $trace_scope = _trace_enter('LinkedSpec::Get', {
   parse_only => $parse_only ? 1 : 0,
   generate_only => $generate_only ? 1 : 0,
   return_descr => $return_descr ? 1 : 0,
- dump_parser_source => $dump_parser_source ? 1 : 0,
+  dump_parser_source => $dump_parser_source ? 1 : 0,
+  parse_mode => $parse_mode,
   trace_level => _trace_level_name_for_current_verbosity(),
  }, DUMP_LOW);
 
@@ -497,6 +509,7 @@ sub run_get_pipeline {
  my $validation_failed = 0;
  my ($bootstrap_parse, $compile_spec_entry);
  my $pipeline_setup_ok = eval {
+  $parse_mode = _normalize_parse_mode($option->{parse_mode});
   $bootstrap_parse = exists $deps->{bootstrap_parse}
    ? _require_dep($deps, 'bootstrap_parse')
    : _default_bootstrap_parse_cb();
@@ -505,7 +518,7 @@ sub run_get_pipeline {
   my $default_compile_spec_entry = _default_compile_spec_entry_cb();
   $compile_spec_entry = exists $deps->{compile_spec_entry}
    ? _require_dep($deps, 'compile_spec_entry')
-   : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx }) };
+   : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx, parse_mode => $parse_mode }) };
   _require_validation_pkg();
   1;
  };
@@ -693,7 +706,7 @@ sub run_get_pipeline {
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
- my $final_descr = eval { _build_final_descr($auto_descr_spec) };
+ my $final_descr = eval { _build_final_descr($auto_descr_spec, undef, parse_mode => $parse_mode) };
  my $build_final_descr_error = $@;
  if ($build_final_descr_error) {
   _set_runtime_ctx_last_error(

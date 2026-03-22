@@ -7,14 +7,32 @@
 package LinkedRE;
 use re 'eval';
 
-sub or {
-my ($stref, $oredRE) = @_;
+sub _build_match_info {
+ my ($pos) = @_;
+ return {
+  index      => $pos,
+  match      => ${^MATCH},
+  match_list => [grep {defined} map {eval "\$$_"} 1 .. scalar @+],
+  match_hash => {%+}
+ }
+}
 
- return undef unless $$stref =~ /(?{my $pos=0})$oredRE/gcp;
- return {index=>$pos, match      => ${^MATCH}, 
-	              match_list => [grep {defined} map {eval "\$$_"} 1 .. scalar @+], 
-		      match_hash => {%+}
-	};
+sub or {
+my ($stref, $oredRE, $mode) = @_;
+ $mode = defined($mode) && length($mode) ? $mode : 'seek';
+
+ if ($mode eq 'seek') {
+  return undef unless $$stref =~ /(?{my $pos=0})$oredRE/gcp;
+  return _build_match_info($pos);
+ }
+
+ if ($mode eq 'consume') {
+  pos($$stref) = 0 unless defined(pos($$stref));
+  return undef unless $$stref =~ /\G(?{my $pos=0})$oredRE/gcp;
+  return _build_match_info($pos);
+ }
+
+ die "(LinkedRE::or) -E- unsupported parse mode '$mode'"
 }
 
 sub oredRE {

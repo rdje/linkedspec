@@ -188,6 +188,17 @@ sub _quote_source_label_for_line_directive {
  return $source_label
 }
 
+sub _linkedre_or_expr {
+ my (%args) = @_;
+ my $label = $args{label};
+ my $parse_mode = defined($args{parse_mode}) && length($args{parse_mode})
+  ? $args{parse_mode}
+  : 'seek';
+ return $parse_mode eq 'consume'
+  ? "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, 'consume')"
+  : "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label})"
+}
+
 sub _build_handler_preamble {
  my ($label, $actual_icode) = @_;
  return
@@ -231,13 +242,14 @@ sub _build_default_handler_variant {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
+ my $match_expr = _linkedre_or_expr(%args, label => $label);
  my $actual_lxcode = $args{actual_lxcode} // '';
  my $actual_lscode = $args{actual_lscode} // '';
  my $actual_lecode = $args{actual_lecode} // '';
  return '
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+  my $minfo = '.$match_expr.';
 
   unless($minfo) {
   '.($actual_lxcode || 'return undef').'
@@ -297,13 +309,14 @@ sub _build_and_single_acode_variant {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
+ my $match_expr = _linkedre_or_expr(%args, label => $label);
  my $actual_lxcode = $args{actual_lxcode} // '';
  my $actual_lscode = $args{actual_lscode} // '';
  my $actual_lecode = $args{actual_lecode} // '';
  return '
 
  my @'.$label.'_collect;
- my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+ my $minfo = '.$match_expr.';
  unless($minfo) {
   '.($actual_lxcode || 'return undef').'
  }
@@ -333,6 +346,7 @@ sub _build_and_acode_sequence_body {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
+ my $match_expr = _linkedre_or_expr(%args, label => $label);
  my $actual_lxcode = $args{actual_lxcode} // '';
  my $actual_lscode = $args{actual_lscode} // '';
  my $actual_lecode = $args{actual_lecode} // '';
@@ -343,7 +357,7 @@ sub _build_and_acode_sequence_body {
  my $idx = 0;
 
  while ($idx < '.$acode_count.') {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+  my $minfo = '.$match_expr.';
   unless($minfo) {
    '.($actual_lxcode || 'return undef').'
   }
@@ -407,10 +421,11 @@ sub _build_or_acode_variant {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
+ my $match_expr = _linkedre_or_expr(%args, label => $label);
  my $actual_lxcode = $args{actual_lxcode} // '';
  return '
 
- my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+ my $minfo = '.$match_expr.';
  unless($minfo) {
  '.($actual_lxcode || 'return undef').'
  }
@@ -602,6 +617,7 @@ sub _build_rep_acode_variant {
  my $acodes = $args{acodes} // '';
  return undef unless length $acodes;
  my $label = $args{label};
+ my $match_expr = _linkedre_or_expr(%args, label => $label);
  my ($min, $max) = _resolve_rep_bounds(%args);
  return undef unless defined $min && defined $max;
 
@@ -619,7 +635,7 @@ sub _build_rep_acode_variant {
    my $ccount = 0;
 
    while(1) {
-    my $minfo = LinkedRE::or($STRING, $$descr{gdata}{'.$label.'});
+    my $minfo = '.$match_expr.';
     unless($minfo) {
      if ($ccount >= $min) {
       '.($actual_excode || 'return \@'.$label.'_collect').'
@@ -924,6 +940,7 @@ sub compile_spec_entry {
   my $actual_lecode = $lecode && "$lecode;" || "";
   my $variants = _build_handler_variants(
    label          => $label,
+   parse_mode     => (defined($deps->{parse_mode}) && length($deps->{parse_mode})) ? $deps->{parse_mode} : 'seek',
    node_type      => $node_type,
    rep_min        => $rule_meta->{rep_min},
    rep_max        => $rule_meta->{rep_max},

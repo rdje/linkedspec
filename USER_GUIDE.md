@@ -1000,11 +1000,23 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 - `parse_only => 1`
 - `generate_only => 1`
 - `return_descr => 1`
+- `parse_mode => 'seek' | 'consume'`
 - `dump_parser_source => 1`
 - `parser_source_ref => \$out`
 - `runtime_ctx_ref => \$ctx` or `runtime_ctx_ref => \%ctx` for advanced runtime-state capture
 
 `LinkedSpec::Get(\$spec, %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before runtime dispatch; odd trailing option lists fall back to an empty option set for backward compatibility.
+
+`parse_mode` now controls the runtime matching discipline for generated handlers:
+- `seek`
+  - the historical default
+  - progressive matching that can skip forward to a later anchor
+- `consume`
+  - contiguous matching at the current input position
+  - later anchors are not searched automatically if the current position does not match
+
+If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
+If you ask for `return_descr => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
 
 `runtime_ctx_ref` is an opt-in diagnostics/introspection hook. You can pass either:
 - a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
@@ -1111,7 +1123,7 @@ On the successful path, `runtime_ctx->{last_error}` should be treated as a failu
 3. Try module-relative `../specs/name.spec`.
 4. If still unresolved, fall back to `PathSearch`.
 
-`LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility.
+`LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility. File-oriented callers can use the same `parse_mode => 'seek' | 'consume'` option there too, and it flows into the generated descriptor/runtime handler behavior the same way as on `LinkedSpec::Get(...)`.
 
 `get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload; and if a returned parser later hits a runtime execution failure, that same shared context is upgraded again to a `runtime_handler` or `runtime_parser` payload depending on where the failure surfaced.
 
