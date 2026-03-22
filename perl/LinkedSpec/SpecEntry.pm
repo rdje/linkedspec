@@ -157,14 +157,8 @@ sub _set_runtime_ctx_last_error {
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error($runtime_ctx, %args)
 }
 
-sub _emit_parser_source_line {
- my ($deps, $chunk) = @_;
- my $emit = (ref($deps) eq 'HASH') ? $deps->{emit_parser_source_line} : undef;
- if (ref($emit) eq 'CODE') {
-  $emit->($chunk);
-  return
- }
- my $runtime_ctx = _runtime_ctx_from_deps($deps);
+sub _emit_runtime_ctx_parser_source_line {
+ my ($runtime_ctx, $chunk) = @_;
  _require_runtime_ctx_can('emit_runtime_ctx_parser_source_line');
  return LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, $chunk)
 }
@@ -932,7 +926,7 @@ sub compile_spec_entry {
 
  my $external_handler = $handler;
  $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
- _emit_parser_source_line($deps, "\n $label => sub {\n$external_handler\n },\n");
+ _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n $label => sub {\n$external_handler\n },\n");
 
  $info{handler} = _build_runtime_handler(
   label => $label,

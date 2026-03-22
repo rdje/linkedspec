@@ -6278,7 +6278,7 @@ SPEC
         $retv,
         sub {
             ++$compile_spec_entry_count;
-            return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { emit_parser_source_line => sub {} });
+            return LinkedSpec::SpecEntry::compile_spec_entry($_[0], { runtime_ctx => {} });
         }
     );
 
@@ -6407,7 +6407,7 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'Runtime::run_get still preserves compiled handler coderef');
 };
 subtest 'spec_entry_compile_spec_entry_uses_injected_runtime_context' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -6431,7 +6431,13 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::_emit_parser_source_line = sub { die "__UNEXPECTED_LINKEDSPEC_EMIT_PARSER_SOURCE_LINE__\n" };
-        ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry($retv->[0], { runtime_ctx => $runtime_ctx });
+        ($label, $info) = LinkedSpec::SpecEntry::compile_spec_entry(
+            $retv->[0],
+            {
+                runtime_ctx => $runtime_ctx,
+                emit_parser_source_line => sub { die "__UNEXPECTED_DIRECT_SPECENTRY_EMIT_DEP__\n" },
+            },
+        );
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -6439,6 +6445,7 @@ SPEC
     ok($ok_run, 'SpecEntry compile_spec_entry succeeds without the removed LinkedSpec emit-parser-source wrapper')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_EMIT_PARSER_SOURCE_LINE__/, 'SpecEntry compile_spec_entry does not call the trapped removed LinkedSpec emit-parser-source wrapper');
+    unlike($err, qr/__UNEXPECTED_DIRECT_SPECENTRY_EMIT_DEP__/, 'SpecEntry compile_spec_entry no longer uses the legacy direct emit_parser_source_line dependency');
     is($label, 'Top', 'SpecEntry compile_spec_entry still returns rule label through injected runtime context');
     ok(defined($info) && ref($info) eq 'HASH', 'SpecEntry compile_spec_entry still returns rule info through injected runtime context');
     ok(ref($info->{handler}) eq 'CODE', 'SpecEntry compile_spec_entry still exposes runtime handler coderef');
