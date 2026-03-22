@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-22 - Phase 5: Surface Structured Generated-Handler Source Labels
+
+Extended the Phase 5 runtime diagnostics contract so generated-handler source identity is available as explicit structured data instead of only appearing inside preserved Perl error text.
+
+- Updated `perl/LinkedSpec/RuntimeContext.pm` so structured `last_error` payloads can now carry:
+  - `handler_source_label`
+- Updated `perl/LinkedSpec/SpecEntry.pm` so runtime-handler failures now attach the stable generated-handler label of the form:
+  - `LinkedSpec::generated_handler:<rule_label>:<handler_variant>`
+  both on:
+  - `runtime_handler:rule_handler_compile`
+  - and `runtime_handler:rule_handler_eval`
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - runtime handler eval failures exposing a structured `handler_source_label`,
+  - and generated-handler compile failures exposing the exact expected structured label.
+- Expanded `USER_GUIDE.md` so the `runtime_ctx_ref` diagnostics section now documents `handler_source_label` as part of the runtime-handler payload surface.
+
 ## 2026-03-20 - Blind Calls: Support Fluent Post-Call Continuations
 
 Blind calls now support explicit fluent post-call chaining instead of limiting post-call customization to `=> Rule { ... }`.

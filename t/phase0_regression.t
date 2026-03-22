@@ -8222,7 +8222,7 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
 subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clears_on_success' => sub {
-    plan tests => 17;
+    plan tests => 18;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8260,6 +8260,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'runtime handler failure leaves inline-spec spec_path empty');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'runtime handler failure records failing rule label');
     ok(length($runtime_ctx->{last_error}{handler_variant} // '') > 0, 'runtime handler failure records handler variant');
+    like($runtime_ctx->{last_error}{handler_source_label} // '', qr/^LinkedSpec::generated_handler:Top:/, 'runtime handler failure records generated handler source label');
 
     my ($ok_recover, $ast_recover, $err_recover, $out_recover, $warn_recover, $inner_eval_err_recover) =
         run_parser_with_captured_io($parser, \$input);
@@ -8348,7 +8349,7 @@ PERL
     ok(!exists $runtime_ctx->{last_error}, 'successful cached runtime handler invocations leave runtime error context empty');
 };
 subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx = {};
     my $rule_meta = {
@@ -8379,6 +8380,7 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
     is($runtime_ctx->{last_error}{stage}, 'rule_handler_compile', 'invalid generated runtime handler source records rule_handler_compile stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_handler:rule_handler_compile', 'invalid generated runtime handler source records combined compile owner stage');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid generated runtime handler source records failing rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_COMPILE_ERROR', 'invalid generated runtime handler source records explicit structured handler source label');
     is($stderr, '', 'invalid generated runtime handler source does not leak compile warnings to STDERR');
     like($runtime_ctx->{last_error}{detail}, qr/LinkedSpec::generated_handler:Top:FORCED_COMPILE_ERROR/, 'invalid generated runtime handler source detail includes the synthetic generated-handler source label');
     like($runtime_ctx->{last_error}{detail}, qr/Missing operator|syntax error|Bareword/, 'invalid generated runtime handler source preserves captured compile warning/detail text');

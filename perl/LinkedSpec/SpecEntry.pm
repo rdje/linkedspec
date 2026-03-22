@@ -771,6 +771,7 @@ sub _build_runtime_handler {
  my $handler = $args{handler};
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
+ my $handler_variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
  my $handler_source_label = _runtime_handler_source_label(
   label => $label,
   rule_meta => $rule_meta,
@@ -790,9 +791,9 @@ sub _build_runtime_handler {
  return sub {
   my ($descr, $STRING, $info) = @_;
   my $runtime_scope = _trace_enter(
-   "LinkedSpec::rule_handler:$label",
+  "LinkedSpec::rule_handler:$label",
    {
-    handler_variant => $rule_meta->{selected_handler_variant},
+    handler_variant => $handler_variant,
     index => (ref($info) eq 'HASH') ? $info->{index} : undef,
     match => (ref($info) eq 'HASH') ? $info->{match} : undef,
    },
@@ -805,7 +806,8 @@ sub _build_runtime_handler {
     summary => 'Rule handler compilation failed',
     detail => $compile_error,
     rule_label => $label,
-    handler_variant => $rule_meta->{selected_handler_variant},
+    handler_variant => $handler_variant,
+    handler_source_label => $handler_source_label,
    );
    _trace_decision("rule_handler_compile:$label", 0, $compile_error, DUMP_NONE);
    _trace_exit(
@@ -828,7 +830,8 @@ sub _build_runtime_handler {
     summary => 'Rule handler execution failed',
     detail => $eval_error,
     rule_label => $label,
-    handler_variant => $rule_meta->{selected_handler_variant},
+    handler_variant => $handler_variant,
+    handler_source_label => $handler_source_label,
    );
    _trace_decision("rule_handler_eval:$label", 0, $eval_error, DUMP_NONE);
   } else {
