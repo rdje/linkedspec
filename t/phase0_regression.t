@@ -8386,7 +8386,7 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
     like($runtime_ctx->{last_error}{detail}, qr/Missing operator|syntax error|Bareword/, 'invalid generated runtime handler source preserves captured compile warning/detail text');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_die' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8440,6 +8440,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'forced outer parser die leaves inline-spec spec_path empty');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'forced outer parser die records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_OUTER_DIE', 'forced outer parser die records handler variant');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_OUTER_DIE', 'forced outer parser die records generated handler source label');
 };
 subtest 'compiler_pipeline_clears_stale_runtime_handler_error_after_successful_parse' => sub {
     plan tests => 8;
@@ -8555,7 +8556,7 @@ SPEC
     ok(!exists $runtime_ctx->{last_error}{rule_label}, 'missing top-rule label leaves rule_label absent');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_handler' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8612,6 +8613,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'missing top-rule handler leaves inline-spec spec_path empty');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'missing top-rule handler records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_MISSING_TOP_HANDLER', 'missing top-rule handler records handler variant');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_MISSING_TOP_HANDLER', 'missing top-rule handler records generated handler source label');
 };
 subtest 'compiler_pipeline_avoids_legacy_run_bootstrap_parse_helper' => sub {
     plan tests => 4;

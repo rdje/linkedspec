@@ -245,6 +245,15 @@ sub get_runtime_ctx_last_error_detail {
  return defined($last_error->{detail}) ? $last_error->{detail} : ''
 }
 
+sub build_generated_handler_source_label {
+ my (%args) = @_;
+ my $label = defined($args{label}) && length($args{label}) ? $args{label} : '<unknown_rule>';
+ my $handler_variant = defined($args{handler_variant}) ? $args{handler_variant} : undef;
+ return defined($handler_variant) && length($handler_variant)
+  ? "LinkedSpec::generated_handler:$label:$handler_variant"
+  : "LinkedSpec::generated_handler:$label"
+}
+
 sub set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';

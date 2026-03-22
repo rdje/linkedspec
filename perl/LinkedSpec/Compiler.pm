@@ -456,6 +456,11 @@ sub _flush_runtime_ctx_parser_source {
  return _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref)
 }
 
+sub _build_generated_handler_source_label {
+ my (%args) = @_;
+ return _call_runtime_ctx('build_generated_handler_source_label', %args)
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
@@ -771,10 +776,17 @@ sub run_get_pipeline {
  my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
  return sub {
   _clear_runtime_ctx_last_error($runtime_ctx);
-  my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')
+ my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')
    ? $final_descr->{spec}{$top_rule}
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
+  my $top_handler_variant = (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef;
+  my $top_handler_source_label = (defined($top_rule) && length($top_rule) && defined($top_handler_variant) && length($top_handler_variant))
+   ? _build_generated_handler_source_label(
+      label => $top_rule,
+      handler_variant => $top_handler_variant,
+     )
+   : undef;
   my $handler = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{handler} : undef;
   my $runtime_scope = _trace_enter(
    defined($top_rule) && length($top_rule)
@@ -782,7 +794,7 @@ sub run_get_pipeline {
     : 'LinkedSpec::parser_invoke:<missing_top_rule>',
    {
     top_rule => $top_rule,
-    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+    handler_variant => $top_handler_variant,
     input_ref => ref($_[0]) || '',
    },
    DUMP_HIGH
@@ -823,7 +835,8 @@ sub run_get_pipeline {
     summary => 'Top-level parser invocation failed',
     detail => $detail,
     rule_label => $top_rule,
-    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+    handler_variant => $top_handler_variant,
+    handler_source_label => $top_handler_source_label,
    );
    _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
    _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
@@ -840,7 +853,8 @@ sub run_get_pipeline {
     summary => 'Top-level parser invocation failed',
     detail => $eval_error,
     rule_label => $top_rule,
-    handler_variant => (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef,
+    handler_variant => $top_handler_variant,
+    handler_source_label => $top_handler_source_label,
    );
    _trace_decision("invoke_top_rule:$top_rule", 0, $eval_error, DUMP_NONE);
    _trace_exit($runtime_scope, { status => 'error', stage => 'invoke_top_rule', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);

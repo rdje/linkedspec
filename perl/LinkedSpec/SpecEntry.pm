@@ -168,14 +168,20 @@ sub _set_runtime_ctx_top_rule {
  return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
 }
 
-sub _runtime_handler_source_label {
+sub _generated_handler_source_label {
  my (%args) = @_;
- my $label = defined($args{label}) && length($args{label}) ? $args{label} : '<unknown_rule>';
  my $rule_meta = $args{rule_meta};
  my $variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
- my $source_label = defined($variant) && length($variant)
-  ? "LinkedSpec::generated_handler:$label:$variant"
-  : "LinkedSpec::generated_handler:$label";
+ return _call_runtime_ctx(
+  'build_generated_handler_source_label',
+  label => $args{label},
+  handler_variant => $variant,
+ )
+}
+
+sub _quote_source_label_for_line_directive {
+ my ($source_label) = @_;
+ $source_label = '' unless defined $source_label;
  $source_label =~ s/\\/\\\\/g;
  $source_label =~ s/"/\\"/g;
  $source_label =~ s/[\r\n]+/ /g;
@@ -772,11 +778,12 @@ sub _build_runtime_handler {
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
  my $handler_variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
- my $handler_source_label = _runtime_handler_source_label(
+ my $handler_source_label = _generated_handler_source_label(
   label => $label,
   rule_meta => $rule_meta,
  );
- my $handler_source = qq{#line 1 "$handler_source_label"\nsub {\n$handler\n}};
+ my $handler_source_directive_label = _quote_source_label_for_line_directive($handler_source_label);
+ my $handler_source = qq{#line 1 "$handler_source_directive_label"\nsub {\n$handler\n}};
  my $compiled_handler;
  my $compile_warning = '';
  {

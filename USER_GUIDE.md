@@ -1033,7 +1033,7 @@ The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{spec_name}`
 - `$ctx->{last_error}{spec_path}`
 
-Runtime handler failures may also add:
+Runtime execution failures may also add:
 - `$ctx->{last_error}{rule_label}`
 - `$ctx->{last_error}{handler_variant}`
 - `$ctx->{last_error}{handler_source_label}`
@@ -1092,9 +1092,11 @@ For runtime execution failures, the same payload also tells you which compiled r
 - `rule_label` names the failing compiled rule,
 - and `handler_variant` tells you which handler family was active when the eval-visible failure happened.
 
-For runtime-handler failures, the structured payload now also carries `handler_source_label` when the failing path came from generated rule-handler source. That value uses a stable synthetic label of the form `LinkedSpec::generated_handler:<rule_label>:<handler_variant>`.
+For runtime execution failures, the structured payload now also carries `handler_source_label` when the failing path can still be tied to generated rule-handler source. That value uses a stable synthetic label of the form `LinkedSpec::generated_handler:<rule_label>:<handler_variant>`.
 
 For generated-handler compile failures specifically (`runtime_handler` at stage `rule_handler_compile`), the preserved `detail` text still includes that same synthetic source label too. That keeps the raw Perl compile text easier to read while also exposing the label directly as structured data instead of forcing callers to scrape `detail`.
+
+That same `handler_source_label` is now also carried on `runtime_parser` failures when the top-level parser still knows which compiled rule handler it was resolving or invoking. So if a top-rule handler is missing or dies at the outer parser boundary, callers can still recover the same generated-handler identity directly from structured diagnostics.
 
 That `runtime_parser` family now covers both:
 - `resolve_top_rule_handler` when a returned parser coderef cannot find a usable selected top rule or handler coderef to invoke,

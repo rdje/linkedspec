@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-22 - Phase 5: Carry Handler Source Labels Through Runtime Parser Failures
+
+Extended the Phase 5 runtime diagnostics contract so top-level parser failures expose the same generated-handler source identity as inner runtime-handler failures.
+
+- Updated `perl/LinkedSpec/RuntimeContext.pm` so generated-handler source-label construction now lives in one shared helper:
+  - `build_generated_handler_source_label(...)`
+- Updated `perl/LinkedSpec/SpecEntry.pm` so runtime-handler source labels now come from that shared helper and are quoted separately only for Perl `#line` directive use.
+- Updated `perl/LinkedSpec/Compiler.pm` so structured `runtime_parser` failures now also preserve:
+  - `handler_source_label`
+  when the top-level parser still knows the selected compiled rule handler variant.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - outer top-rule invocation die preserving `handler_source_label`,
+  - and missing top-rule handler failures preserving `handler_source_label`.
+- Expanded `USER_GUIDE.md` so the runtime diagnostics section now states that `handler_source_label` can appear on both `runtime_handler` and `runtime_parser` failures when generated-handler identity is known.
+
 ## 2026-03-22 - Phase 5: Surface Structured Generated-Handler Source Labels
 
 Extended the Phase 5 runtime diagnostics contract so generated-handler source identity is available as explicit structured data instead of only appearing inside preserved Perl error text.
