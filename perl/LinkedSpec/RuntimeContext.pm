@@ -40,7 +40,7 @@ sub prepare_runtime_ctx_for_run_get {
   clear_runtime_ctx_spec_name($runtime_ctx);
   clear_runtime_ctx_spec_path($runtime_ctx);
  }
- ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ clear_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  configure_runtime_ctx_parser_source_capture(
   $runtime_ctx,
   enabled => $args{dump_parser_source} ? 1 : 0,
@@ -84,7 +84,7 @@ sub prepare_runtime_ctx_for_get_parser {
 sub prepare_runtime_ctx_for_run_get_pipeline {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
- ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ clear_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  return $runtime_ctx
 }
 
@@ -102,6 +102,14 @@ sub get_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
  return $runtime_ctx->{parser_source_chunks_ref}
+}
+
+sub clear_runtime_ctx_parser_source_chunks_ref {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $parser_source_chunks_ref = ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ @$parser_source_chunks_ref = ();
+ return $parser_source_chunks_ref
 }
 
 sub configure_runtime_ctx_parser_source_capture {

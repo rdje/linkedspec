@@ -1019,6 +1019,7 @@ Typical uses:
 When you reuse the same shared runtime context across multiple calls, LinkedSpec now refreshes that identity state deliberately instead of letting older file-oriented fields bleed forward:
 - inline `LinkedSpec::Get(...)` / `LinkedSpec::Runtime::run_get(...)` clears stale `spec_name` and `spec_path` before compiling inline spec text,
 - file-oriented `LinkedSpec::get_parser(...)` refreshes `spec_name`, clears stale `spec_path`, and clears stale `top_rule` before parser-factory resolution starts.
+- if parser-source capture is enabled, the shared `parser_source_chunks_ref` buffer is cleared at the start of each compile while keeping the same shared arrayref alive, so a later run reports only the current parser source instead of appending stale chunks from an earlier compile.
 
 That means a later inline failure will not accidentally report the `spec_name` / `spec_path` from an earlier `get_parser(...)` call, and a later `get_parser(...)` resolution failure will not accidentally inherit the `spec_path` from a previously resolved parser.
 

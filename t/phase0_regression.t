@@ -6640,7 +6640,7 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     is($runtime_ctx->{spec_name}, undef, 'RuntimeContext run_get preparation helper clears stale spec_name by default');
     is($runtime_ctx->{spec_path}, undef, 'RuntimeContext run_get preparation helper clears stale spec_path by default');
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext run_get preparation helper preserves parser-source chunk arrayref storage');
-    is_deeply($runtime_ctx->{parser_source_chunks_ref}, ['stale'], 'RuntimeContext run_get preparation helper preserves existing parser-source chunks');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get preparation helper clears stale parser-source chunks');
     ok(ref($runtime_ctx->{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get preparation helper installs parser-source emit callback when dumping is enabled');
 
     LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get($runtime_ctx, dump_parser_source => 0);
@@ -6672,7 +6672,7 @@ subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
     is($runtime_ctx{spec_name}, undef, 'RuntimeContext run_get option helper clears stale spec_name by default');
     is($runtime_ctx{spec_path}, undef, 'RuntimeContext run_get option helper clears stale spec_path by default');
     ok(ref($runtime_ctx{parser_source_chunks_ref}) eq 'ARRAY', 'RuntimeContext run_get option helper preserves parser-source chunk arrayref storage');
-    is_deeply($runtime_ctx{parser_source_chunks_ref}, ['seed'], 'RuntimeContext run_get option helper preserves existing parser-source chunks');
+    is_deeply($runtime_ctx{parser_source_chunks_ref}, [], 'RuntimeContext run_get option helper clears stale parser-source chunks');
     ok(ref($runtime_ctx{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get option helper installs parser-source emit callback when dumping is enabled');
 
     %option = (runtime_ctx_ref => \%runtime_ctx, dump_parser_source => 0);
@@ -6705,7 +6705,7 @@ subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub 
     push @{$runtime_ctx->{parser_source_chunks_ref}}, 'seed';
     my $same = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline($runtime_ctx);
     is($same->{parser_source_chunks_ref}, $runtime_ctx->{parser_source_chunks_ref}, 'RuntimeContext run_get_pipeline preparation helper preserves the existing parser-source chunk arrayref');
-    is_deeply($runtime_ctx->{parser_source_chunks_ref}, ['seed'], 'RuntimeContext run_get_pipeline preparation helper preserves existing parser-source chunks');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper clears stale parser-source chunks');
 };
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
     plan tests => 8;
@@ -7652,6 +7652,48 @@ SPEC
     ok(!exists $runtime_ctx{last_error}, 'direct runtime_ctx_ref hashref exposes no stale last_error on success');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through direct runtime_ctx_ref hashref still preserves compiled handler coderef');
     is(ref(\%runtime_ctx), 'HASH', 'direct runtime_ctx_ref remains a shared hashref container');
+};
+subtest 'runtime_run_get_reused_context_replaces_parser_source_capture' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser_source_one = '';
+    my $spec_content_first = $spec_content;
+    my $descr_one = LinkedSpec::Runtime::run_get(
+        \$spec_content_first,
+        {
+            return_descr => 1,
+            dump_parser_source => 1,
+            parser_source_ref => \$parser_source_one,
+            runtime_ctx_ref => \%runtime_ctx,
+        },
+    );
+    ok(defined($descr_one) && ref($descr_one) eq 'HASH', 'first Runtime::run_get call succeeds for reused parser-source capture test');
+    ok(length($parser_source_one) > 0, 'first Runtime::run_get call captures parser source');
+    my $joined_after_first = join('', @{$runtime_ctx{parser_source_chunks_ref} // []});
+    is($joined_after_first, $parser_source_one, 'runtime context parser-source chunks match the first captured parser source');
+
+    my $parser_source_two = '';
+    my $spec_content_second = $spec_content;
+    my $descr_two = LinkedSpec::Runtime::run_get(
+        \$spec_content_second,
+        {
+            return_descr => 1,
+            dump_parser_source => 1,
+            parser_source_ref => \$parser_source_two,
+            runtime_ctx_ref => \%runtime_ctx,
+        },
+    );
+    ok(defined($descr_two) && ref($descr_two) eq 'HASH', 'second Runtime::run_get call succeeds with the same shared runtime context');
+    is($parser_source_two, $parser_source_one, 'second Runtime::run_get call replaces parser-source output instead of appending stale prior output');
+    my $joined_after_second = join('', @{$runtime_ctx{parser_source_chunks_ref} // []});
+    is($joined_after_second, $parser_source_two, 'runtime context parser-source chunks are refreshed for the second compile');
+    is($joined_after_second, $joined_after_first, 'refreshed parser-source capture remains stable for identical repeated input without duplication');
 };
 subtest 'runtime_run_get_clears_stale_file_identity_in_reused_runtime_ctx' => sub {
     plan tests => 7;
