@@ -117,6 +117,12 @@ sub _set_runtime_ctx_last_error_unless_present {
  return LinkedSpec::RuntimeContext::set_runtime_ctx_last_error_unless_present($runtime_ctx, %args)
 }
 
+sub _set_runtime_ctx_spec_path {
+ my ($runtime_ctx, $spec_path) = @_;
+ _require_runtime_ctx_can('set_runtime_ctx_spec_path');
+ return LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, $spec_path)
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
@@ -205,8 +211,7 @@ sub run_get_parser {
   );
   return undef;
  }
- _require_runtime_ctx_can('set_runtime_ctx_spec_path');
- LinkedSpec::RuntimeContext::set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
+ _set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
 
   my $content = eval { $load_spec_content->($spec_path, $trace_scope) };
   my $load_spec_content_error = $@;
@@ -230,6 +235,7 @@ sub run_get_parser {
   }
   my %forward_opt_hash = %opt_hash;
   delete $forward_opt_hash{trace_reset_log} if exists $forward_opt_hash{trace_reset_log};
+  $forward_opt_hash{_preserve_runtime_ctx_spec_identity} = 1 if defined $runtime_ctx;
   my $parser = eval { $compile_spec->(\$content, \%forward_opt_hash) };
   my $compile_spec_error = $@;
   if ($compile_spec_error) {

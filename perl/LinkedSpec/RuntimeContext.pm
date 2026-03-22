@@ -36,6 +36,10 @@ sub prepare_runtime_ctx_for_run_get {
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  $runtime_ctx = {} unless ref($runtime_ctx) eq 'HASH';
  clear_runtime_ctx_top_rule($runtime_ctx);
+ unless ($args{preserve_spec_identity}) {
+  clear_runtime_ctx_spec_name($runtime_ctx);
+  clear_runtime_ctx_spec_path($runtime_ctx);
+ }
  ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  configure_runtime_ctx_parser_source_capture(
   $runtime_ctx,
@@ -56,6 +60,7 @@ sub prepare_runtime_ctx_for_run_get_option {
  return prepare_runtime_ctx_for_run_get(
   $runtime_ctx_ref,
   dump_parser_source => $option->{dump_parser_source} ? 1 : 0,
+  preserve_spec_identity => $option->{_preserve_runtime_ctx_spec_identity} ? 1 : 0,
  )
 }
 
@@ -67,8 +72,13 @@ sub prepare_runtime_ctx_for_get_parser {
      owner => defined($args{owner}) ? $args{owner} : 'LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser',
     )
   : undef;
- my %seed = defined($args{spec_name}) ? (spec_name => $args{spec_name}) : ();
- return ensure_runtime_ctx($runtime_ctx_ref, %seed)
+ my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_top_rule($runtime_ctx);
+ clear_runtime_ctx_spec_path($runtime_ctx);
+ clear_runtime_ctx_spec_name($runtime_ctx);
+ set_runtime_ctx_spec_name($runtime_ctx, $args{spec_name}) if defined $args{spec_name};
+ return $runtime_ctx
 }
 
 sub prepare_runtime_ctx_for_run_get_pipeline {
@@ -137,6 +147,26 @@ sub clear_runtime_ctx_top_rule {
  return $runtime_ctx->{top_rule}
 }
 
+sub clear_runtime_ctx_spec_name {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{spec_name} = undef;
+ return $runtime_ctx->{spec_name}
+}
+
+sub get_runtime_ctx_spec_name {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{spec_name}
+}
+
+sub set_runtime_ctx_spec_name {
+ my ($runtime_ctx, $spec_name) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{spec_name} = $spec_name if defined $spec_name;
+ return $runtime_ctx->{spec_name}
+}
+
 sub get_runtime_ctx_top_rule {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
@@ -148,6 +178,19 @@ sub set_runtime_ctx_top_rule {
  return undef unless ref($runtime_ctx) eq 'HASH';
  $runtime_ctx->{top_rule} = $top_rule if defined $top_rule;
  return $runtime_ctx->{top_rule}
+}
+
+sub clear_runtime_ctx_spec_path {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ $runtime_ctx->{spec_path} = undef;
+ return $runtime_ctx->{spec_path}
+}
+
+sub get_runtime_ctx_spec_path {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ return $runtime_ctx->{spec_path}
 }
 
 sub set_runtime_ctx_spec_path {
@@ -202,8 +245,8 @@ sub set_runtime_ctx_last_error {
   owner_stage => length($stage) ? "$type:$stage" : $type,
   summary => defined($args{summary}) ? $args{summary} : '',
   detail  => defined($args{detail}) ? $args{detail} : '',
-  spec_name => defined($runtime_ctx->{spec_name}) ? $runtime_ctx->{spec_name} : '',
-  spec_path => defined($runtime_ctx->{spec_path}) ? $runtime_ctx->{spec_path} : '',
+  spec_name => defined(get_runtime_ctx_spec_name($runtime_ctx)) ? get_runtime_ctx_spec_name($runtime_ctx) : '',
+  spec_path => defined(get_runtime_ctx_spec_path($runtime_ctx)) ? get_runtime_ctx_spec_path($runtime_ctx) : '',
  };
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
  $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};

@@ -1016,6 +1016,12 @@ Typical uses:
 - inspect structured failure context at `$ctx->{last_error}` after a compile failure,
 - and inspect structured runtime execution failures there after a returned parser coderef hits a handler error.
 
+When you reuse the same shared runtime context across multiple calls, LinkedSpec now refreshes that identity state deliberately instead of letting older file-oriented fields bleed forward:
+- inline `LinkedSpec::Get(...)` / `LinkedSpec::Runtime::run_get(...)` clears stale `spec_name` and `spec_path` before compiling inline spec text,
+- file-oriented `LinkedSpec::get_parser(...)` refreshes `spec_name`, clears stale `spec_path`, and clears stale `top_rule` before parser-factory resolution starts.
+
+That means a later inline failure will not accidentally report the `spec_name` / `spec_path` from an earlier `get_parser(...)` call, and a later `get_parser(...)` resolution failure will not accidentally inherit the `spec_path` from a previously resolved parser.
+
 The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{type}`
 - `$ctx->{last_error}{stage}`
