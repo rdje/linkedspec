@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-23: Extended Phase 4 so full positional capture-group lists now have explicit backend-neutral read helpers too. `entry_groups()` and `match_groups()` now snapshot the current immediate/local capture-group lists without raw `array(IMATCH_LIST)` / `array(LMATCH_LIST)` spellings in normal user-facing `.spec` examples.
 - 2026-03-23: Extended Phase 4 so named regex captures now have explicit backend-neutral read helpers too. `entry_named(name)` and `match_named(name)` now expose the current immediate/local named-capture hash surfaces without raw `%IMATCH_HASH` / `%LMATCH_HASH` access, and `specs/pplugin.spec` now uses `entry_named(subname)` as the first migrated live use-site of that surface.
 - 2026-03-20: Added explicit blind-call fluent post-call chaining as supported surface. `=> Rule.method(...)` and `=> Rule .method(...).method2(...)` now lower as sugar over the existing post-call `=> Rule { ... }` form, while `validate_dsl_syntax(...)` now rejects only malformed blind-call fluent starts such as `=> Rule.` or `=> Rule..return_a()` instead of rejecting blind-call fluent continuations outright.
 - 2026-03-20: Extended Phase 2 frontend hardening so malformed action-edge fluent starts are rejected during `validate_dsl_syntax(...)` too. Validation now reports an early targeted diagnostic for empty method hops like `-> Rule.` and `-> Rule..push(...)`, instead of leaving those malformed fluent continuations to later bootstrap parse failure.

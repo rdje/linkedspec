@@ -673,6 +673,37 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants one capture group from the immediate entry match that led into the current rule instead of the capture groups of the currently active local match.
 
+### `entry_groups()`
+Return a snapshot of the whole current immediate-match capture-group list directly.
+
+Practical reading:
+- use it when the rule wants the whole positional capture-group list from the entry/immediate match that led into the current rule,
+- prefer it over spelling `array(IMATCH_LIST)` directly in normal user-facing `.spec` examples when an explicit helper name is clearer,
+- and treat it as the list-level companion to `entry_group(index)`.
+
+Example:
+
+```text
+entry_groups()
+```
+
+```text
+Top::AND
+ /(foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(array, entry_groups_seen, body_groups_seen) }
+ /(\w)(\w+)/
+ /(\))/
+ -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
+ -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the whole immediate entry capture-group list that led into the current rule instead of only one indexed group or the currently active local match groups.
+
 ### `entry_named(name)`
 Return one named capture from the current immediate match directly.
 
@@ -830,6 +861,37 @@ Top::AND
 ```
 
 Use it when the rule wants capture-group data from the currently active local match immediately instead of from the immediate entry match or from a previously stored checkpoint span.
+
+### `match_groups()`
+Return a snapshot of the whole current local-match capture-group list directly.
+
+Practical reading:
+- use it when the rule wants the whole positional capture-group list from the current local match as data,
+- prefer it over spelling `array(LMATCH_LIST)` directly in normal user-facing `.spec` examples when an explicit helper name is clearer,
+- and treat it as the list-level companion to `match_group(index)`.
+
+Example:
+
+```text
+match_groups()
+```
+
+```text
+Top::AND
+ /(foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(array, entry_groups_seen, body_groups_seen) }
+ /(\w)(\w+)/
+ /(\))/
+ -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
+ -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the whole current local capture-group list immediately instead of only one indexed group or the earlier immediate entry capture groups.
 
 ### `match_named(name)`
 Return one named capture from the current local match directly.

@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-23 - Phase 4: Add Explicit Capture-Group List Helpers
+
+Extended the Phase 4 current-match helper surface so full positional capture-group lists now have the same explicit helper-style access as the earlier single-group readers.
+
+- Updated `perl/LinkedSpec/ActionIR/Contracts.pm` so the current-match helper surface now also recognizes:
+  - `entry_groups()`
+  - `match_groups()`
+  and lowers them to immediate/local capture-group list snapshot reads.
+- Updated `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so those new helpers now register explicit ActionIR events:
+  - `IMATCH_GROUPS_READ`
+  - `MATCH_GROUPS_READ`
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - exact helper rewrite parity of `entry_groups()` and `match_groups()`,
+  - and an end-to-end multi-rule parse that proves immediate capture-group lists stay visible through `entry_groups()` while current local capture-group lists continue to follow the active local match through `match_groups()`.
+- Expanded the user guides so Phase 4 documentation now teaches:
+  - single positional group reads with `entry_group(index)` / `match_group(index)`,
+  - whole positional group-list reads with `entry_groups()` / `match_groups()`,
+  - and named-capture reads with `entry_named(name)` / `match_named(name)`
+  as one explicit family.
+
 ## 2026-03-23 - Phase 4: Add Explicit Named-Capture Hash Helpers
 
 Extended the Phase 4 current-match helper surface so named regex captures no longer require raw `%IMATCH_HASH` / `%LMATCH_HASH` access in user-facing `.spec` code.

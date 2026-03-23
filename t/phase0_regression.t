@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 34;
+    plan tests => 36;
 
     my $label = 'Top';
 
@@ -9878,6 +9878,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'entry_group(index) helper rewrite preserves explicit current-immediate-match capture-group semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_groups()'),
+        q{do { [@IMATCH_LIST] }},
+        'entry_groups() helper rewrite preserves explicit current-immediate-match capture-group-list semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_named(prefix)'),
         q{do { exists $IMATCH_HASH{'prefix'} ? $IMATCH_HASH{'prefix'} : undef }},
         'entry_named(name) helper rewrite preserves explicit current-immediate-match named-capture semantics'
@@ -9911,6 +9916,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'match_group(1)'),
         q{do { scalar(@LMATCH_LIST) > 1 ? $LMATCH_LIST[1] : undef }},
         'match_group(index) helper rewrite preserves explicit current-local-match capture-group semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_groups()'),
+        q{do { [@LMATCH_LIST] }},
+        'match_groups() helper rewrite preserves explicit current-local-match capture-group-list semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_named(rest)'),
@@ -10408,6 +10418,39 @@ SPEC
 
     my $group_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_group(0).'."\n".'match_group(1)');
     like($group_rewrite, qr/\@IMATCH_LIST.*\@LMATCH_LIST/s, 'entry_group(index) and match_group(index) lowering read immediate and local capture groups directly without consulting stored marks');
+};
+subtest 'entry_and_match_groups_helpers_read_immediate_and_local_capture_group_lists' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /(foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(array, entry_groups_seen, body_groups_seen) }
+ /(\w)(\w+)/
+ /(\))/
+ -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
+ -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_groups() and match_groups() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', ['foo'], ['b', 'ar'], [')']],
+        'entry_groups() keeps the rule-entry capture-group list visible while match_groups() follows the active local capture-group list'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match groups helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match groups helper parse leaves runtime_ctx last_error clear on success');
+
+    my $groups_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_groups().'."\n".'match_groups()');
+    like($groups_rewrite, qr/\[\@IMATCH_LIST\].*\[\@LMATCH_LIST\]/s, 'entry_groups() and match_groups() lowering snapshot immediate and local capture-group lists directly without consulting stored marks');
 };
 subtest 'entry_and_match_named_helpers_read_immediate_and_local_named_capture_groups' => sub {
     plan tests => 5;

@@ -600,6 +600,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_groups',
+   ir_node            => 'IMATCH_GROUPS_READ',
+   diag_name          => 'entry_groups',
+   unresolved_pattern => qr/\bentry_groups\s*\(\s*\)/o,
+  lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_groups\s*\(\s*\)/do { [\@IMATCH_LIST] }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_named',
    ir_node            => 'IMATCH_NAMED_READ',
    diag_name          => 'entry_named',
@@ -681,6 +692,17 @@ sub _build_capture_and_backtrack_contracts {
     }{
      'do { scalar(@LMATCH_LIST) > '.$+{index}.' ? $LMATCH_LIST['.$+{index}.'] : undef }'
     }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_groups',
+   ir_node            => 'MATCH_GROUPS_READ',
+   diag_name          => 'match_groups',
+   unresolved_pattern => qr/\bmatch_groups\s*\(\s*\)/o,
+  lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_groups\s*\(\s*\)/do { [\@LMATCH_LIST] }/g;
     return $code
    },
   },

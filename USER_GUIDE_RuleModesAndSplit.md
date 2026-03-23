@@ -881,12 +881,14 @@ The most important semantic detail is this:
 - `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
 - `entry_text()` returns the current immediate match text directly without storing or reading a named mark first,
 - `entry_group(index)` returns one capture group from the current immediate match directly without storing or reading a named mark first,
+- `entry_groups()` snapshots the whole current immediate-match capture-group list directly without storing or reading a named mark first,
 - `entry_named(name)` returns one named capture from the current immediate match directly without storing or reading a named mark first,
 - `entry_len()` returns the width of the current immediate match directly without storing or reading a named mark first,
 - `entry_start_pos()` returns the left edge of the current immediate match directly without storing or reading a named mark first,
 - `entry_end_pos()` returns the right edge of the current immediate match directly without storing or reading a named mark first,
 - `match_text()` returns the current local match text directly without storing or reading a named mark first,
 - `match_group(index)` returns one capture group from the current local match directly without storing or reading a named mark first,
+- `match_groups()` snapshots the whole current local-match capture-group list directly without storing or reading a named mark first,
 - `match_named(name)` returns one named capture from the current local match directly without storing or reading a named mark first,
 - `match_len()` returns the width of the current local match directly without storing or reading a named mark first,
 - `match_start_pos()` returns the left edge of the current local match directly without storing or reading a named mark first,
@@ -916,11 +918,13 @@ That means the usual authoring shape is:
 - or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself,
 - or call `entry_text()` if the rule should expose the entry/immediate match that led into the rule without first round-tripping through a named mark,
 - or call `entry_group(index)` if the rule should expose one capture group from that same entry/immediate match without first round-tripping through a named mark,
+- or call `entry_groups()` if the rule should expose the whole capture-group list from that same entry/immediate match without first round-tripping through a named mark,
 - or call `entry_named(name)` if the rule should expose one named capture from that same entry/immediate match without first round-tripping through a named mark,
 - or call `entry_len()` if the rule should expose the width of that same entry/immediate match without first round-tripping through a named mark,
 - or call `entry_start_pos()` / `entry_end_pos()` if the rule should expose the entry/immediate match boundaries that led into the rule without first round-tripping through a named mark,
 - or call `match_text()` if the current local match text itself should be returned as data without first round-tripping through a named mark,
 - or call `match_group(index)` if one capture group from that same current local match should be returned as data without first round-tripping through a named mark,
+- or call `match_groups()` if the whole capture-group list from that same current local match should be returned as data without first round-tripping through a named mark,
 - or call `match_named(name)` if one named capture from that same current local match should be returned as data without first round-tripping through a named mark,
 - or call `match_len()` if the width of that same current local match should be returned as data without first round-tripping through a named mark,
 - or call `match_start_pos()` / `match_end_pos()` if the current local match boundaries themselves should be returned as data without first round-tripping through a named mark.
@@ -1518,8 +1522,48 @@ the practical reading is:
 
 This is the direct-entry-group pattern:
 - use `entry_group(index)` when the rule wants one capture group from the immediate entry match that led into the current rule,
+- use `entry_groups()` when the rule wants that whole immediate-entry capture-group list as one snapshot value,
 - use `match_group(index)` when the rule wants one capture group from the currently active local match instead,
+- use `match_groups()` when the rule wants that whole current-local capture-group list as one snapshot value instead,
 - and use `entry_text()` / `match_text()` when whole-match text is clearer than group-level reads.
+
+## Worked Example: Current Immediate And Local Capture Group Lists
+Sometimes a child rule wants the whole immediate entry capture-group list that led into the rule, while still watching the current local capture-group list change as later local matches happen inside that child rule.
+
+That is what `entry_groups()` and `match_groups()` are for.
+
+```text
+entry_vs_local_group_lists::AND
+ /(foo)\(/
+ -> entry_vs_local_group_lists[0] { return(call(entry_vs_local_group_lists_body)) }
+
+entry_vs_local_group_lists_body::AND
+ I { declare(array, entry_groups_seen, body_groups_seen) }
+ /(\w)(\w+)/
+ /(\))/
+ -> entry_vs_local_group_lists_body[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
+ -> entry_vs_local_group_lists_body[1] { return(array("?entry_vs_local_group_lists_body:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+```
+
+When building this exact inline example directly, select `top_rule => entry_vs_local_group_lists` so the entry rule is explicit.
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- when `entry_vs_local_group_lists_body` starts, its immediate entry capture-group list is still `["foo"]`, so `entry_groups()` snapshots that whole list,
+- at `-> entry_vs_local_group_lists_body[0]`, the current local match is `bar`, so `match_groups()` snapshots `["b", "ar"]`,
+- at `-> entry_vs_local_group_lists_body[1]`, the current local match is `)`, so `match_groups()` now snapshots `[")"]`,
+- and the earlier saved snapshots stay stable because they were copied into ordinary rule arrays.
+
+This is the direct-group-list pattern:
+- use `entry_groups()` when the rule wants the whole immediate entry capture-group list that led into the current rule,
+- use `match_groups()` when the rule wants the whole currently active local capture-group list instead,
+- use `entry_group(index)` / `match_group(index)` when one positional capture is clearer than the whole list,
+- and use `entry_named(name)` / `match_named(name)` when named captures are clearer than positional group snapshots.
 
 ## Worked Example: Current Immediate And Local Named Capture Read
 Sometimes a child rule wants named regex captures from both the immediate entry match that led into the rule and the currently active local match inside that child rule.
@@ -1975,12 +2019,14 @@ The current supported contract is:
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
 - `entry_text()` means “return the current immediate match text directly,”
 - `entry_group(index)` means “return one capture group from the current immediate match directly,”
+- `entry_groups()` means “return the whole current immediate-match capture-group list directly,”
 - `entry_named(name)` means “return one named capture from the current immediate match directly,”
 - `entry_len()` means “return the width of the current immediate match directly,”
 - `entry_start_pos()` means “return the left edge of the current immediate match directly,”
 - `entry_end_pos()` means “return the right edge of the current immediate match directly,”
 - `match_text()` means “return the current local match text directly,”
 - `match_group(index)` means “return one capture group from the current local match directly,”
+- `match_groups()` means “return the whole current local-match capture-group list directly,”
 - `match_named(name)` means “return one named capture from the current local match directly,”
 - `match_len()` means “return the width of the current local match directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
