@@ -305,6 +305,38 @@ Top::AND
 
 Use it when the rule wants an explicit two-mark span instead of the usual “named mark to current match edge” capture shape.
 
+### `capture_take_between(start_mark, end_mark)`
+Return the substring between two explicit rule-local named marks, then advance the start mark to the stored end mark.
+
+Practical reading:
+- use it when the rule wants an explicit remembered right boundary,
+- but also wants the start mark to roll forward to that boundary after the read,
+- and treat it as the advancing two-mark companion to stable `capture_between(start_mark, end_mark)`.
+
+If either mark is absent, or if the end mark is before the start mark, the helper returns `undef` and leaves the start mark unchanged.
+
+Example:
+
+```text
+capture_take_between(body_start, first_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_segment), capture_take_between(body_start, first_end)) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_segment), capture_between(body_start, final_end))) }
+```
+
+Use it when the rule should keep the clarity of explicit remembered boundaries but also wants the left boundary to advance after the read, instead of hand-composing that advance outside the helper.
+
 ### `mark_here(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
 

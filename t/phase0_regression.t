@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 17;
+    plan tests => 18;
 
     my $label = 'Top';
 
@@ -9816,6 +9816,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_between(body_start, first_end)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? substr($$STRING, $__ls_start, $__ls_end - $__ls_start) : undef }},
         'capture_between(start_mark,end_mark) helper rewrite preserves explicit two-mark span semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_between(body_start, first_end)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = substr($$STRING, $__ls_start, $__ls_end - $__ls_start); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_between', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }},
+        'capture_take_between(start_mark,end_mark) helper rewrite preserves explicit two-mark span plus advancing-start semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
@@ -10001,6 +10006,39 @@ SPEC
 
     my $between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_between(body_start, first_end)');
     like($between_rewrite, qr/\$__ls_end >= \$__ls_start/, 'capture_between(start_mark,end_mark) lowering guards against reversed or missing mark positions');
+};
+subtest 'named_mark_capture_take_between_reads_and_advances_explicit_start_mark' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_segment), capture_take_between(body_start, first_end)) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_segment), capture_between(body_start, final_end))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_take_between(start_mark,end_mark) coverage');
+
+    my $input = 'fooalphabetaEND';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', 'beta'],
+        'capture_take_between(start_mark,end_mark) returns the explicit first span and advances the start mark to the stored end mark for the next explicit two-mark read'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_take_between(start_mark,end_mark) parse leaves runtime_ctx last_error clear on success');
+
+    my $take_between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_between(body_start, first_end)');
+    like($take_between_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_between(start_mark,end_mark) lowering advances the start mark to the stored end-mark position after returning the captured span');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

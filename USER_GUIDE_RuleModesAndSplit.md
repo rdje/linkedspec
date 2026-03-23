@@ -870,6 +870,7 @@ The most important semantic detail is this:
 - `capture_from(name)` is a pure read and does not move the mark,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
+- `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
 - `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
@@ -877,7 +878,7 @@ The most important semantic detail is this:
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
-- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing write inside `capture_take(name)` emit a short visible excerpt of the input string,
+- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
 - and the trace prints a caret on the next line under the stored checkpoint position,
 - so you can see immediately whether the rule stored a post-match parser position or the left edge of the current match.
 
@@ -888,6 +889,7 @@ That means the usual authoring shape is:
 - then on a later closing delimiter or separator in that same rule call `capture_from(name)` if the mark should stay stable,
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
 - or call `capture_between(start_mark, end_mark)` if both edges should come from explicit named checkpoints,
+- or call `capture_take_between(start_mark, end_mark)` if that explicit two-mark span should also advance the start mark to the remembered end mark,
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
 - or call `mark_match_start(name)` if a later action block should remember where the current match begins instead of where it ends,
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
@@ -1043,6 +1045,45 @@ This is the explicit-two-mark pattern:
 - `capture_from(name)` uses one named checkpoint plus the current match edge,
 - `capture_between(start_mark, end_mark)` uses two named checkpoints,
 - and `mark_here(name)` is the usual way to establish the second explicit post-match right boundary.
+
+## Worked Example: Explicit Two-Mark Span with Advancing Start
+Sometimes the rule wants the clarity of an explicit remembered right boundary and also wants the start mark to roll forward to that remembered boundary after the read.
+
+That is what `capture_take_between(start_mark, end_mark)` is for.
+
+```text
+explicit_two_mark_take::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> explicit_two_mark_take[0] { assign(scalar(stage), "open") }
+ -> explicit_two_mark_take[1] { assign(scalar(stage), "body") }
+ -> explicit_two_mark_take[2] { mark_match_start(first_end); assign(scalar(first_segment), capture_take_between(body_start, first_end)) }
+ -> explicit_two_mark_take[3] { mark_match_start(final_end); return(array("?explicit_two_mark_take:", scalar(first_segment), capture_between(body_start, final_end))) }
+```
+
+On input:
+
+```text
+fooalphabetaEND
+```
+
+the practical reading is:
+- the opening `-> explicit_two_mark_take[0]` action keeps the `/foo/` anchor inside the action-bearing sequence, so `@mark(body_start)` becomes visible at the right point for later same-rule reads,
+- the next `-> explicit_two_mark_take[1]` action keeps the `/alpha/` body token inside that same explicit sequence, so the later `beta` and `END` boundaries are reached in order rather than skipping the body token entirely,
+- `@mark(body_start)` stores the left edge before `alpha`,
+- `mark_match_start(first_end)` stores the explicit boundary at the left edge of the `beta` match,
+- `capture_take_between(body_start, first_end)` returns `alpha` and advances `body_start` to that stored `first_end` boundary,
+- `mark_match_start(final_end)` stores the next explicit boundary at the left edge of the `END` match,
+- `capture_between(body_start, final_end)` now returns `beta` because `body_start` already rolled forward to the stored first boundary.
+
+This is the explicit-two-mark rolling pattern:
+- `capture_between(start_mark, end_mark)` is the stable two-mark read,
+- `capture_take_between(start_mark, end_mark)` is the advancing two-mark read,
+- and `mark_match_start(name)` is a clean way to establish remembered left-edge boundaries for later two-mark reads.
 
 ## Worked Example: Left Edge of a Closing Match
 Sometimes the right boundary should be the left edge of the current closing token, not the post-match parser position after that token.
@@ -1370,6 +1411,7 @@ The current supported contract is:
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
+- `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
