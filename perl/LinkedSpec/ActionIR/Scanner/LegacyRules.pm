@@ -43,6 +43,7 @@ sub try_scan_contract_ir_events {
   'entry_start_pos' => \&_scan_contract_entry_start_pos,
   'entry_end_pos' => \&_scan_contract_entry_end_pos,
   'match_text' => \&_scan_contract_match_text,
+  'match_len' => \&_scan_contract_match_len,
   'match_start_pos' => \&_scan_contract_match_start_pos,
   'match_end_pos' => \&_scan_contract_match_end_pos,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
@@ -324,6 +325,15 @@ sub _scan_contract_match_text {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_text\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_len\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

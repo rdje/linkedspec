@@ -367,6 +367,7 @@ Important nuance:
 - `entry_start_pos()` reads the current immediate match left edge directly as `do { $IPOS - length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_end_pos()` reads the current immediate match right edge directly as `do { $IPOS }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.
+- `match_len()` reads the current local match width directly as `do { length $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_start_pos()` reads the current local match left edge directly as `do { $LSPOS - length $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_end_pos()` reads the current local match right edge directly as `do { $LSPOS }`, without consulting the rule-local mark bucket.
 - named marks are scoped under the current rule label in runtime storage, so different rules can reuse the same mark name safely.

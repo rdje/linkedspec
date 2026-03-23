@@ -640,6 +640,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'match_len',
+   ir_node            => 'MATCH_LEN_READ',
+   diag_name          => 'match_len',
+   unresolved_pattern => qr/\bmatch_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_len\s*\(\s*\)/do { length \$LMATCH }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'match_end_pos',
    ir_node            => 'MATCH_END_POS_READ',
    diag_name          => 'match_end_pos',

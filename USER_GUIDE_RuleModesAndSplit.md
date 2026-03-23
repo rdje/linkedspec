@@ -884,6 +884,7 @@ The most important semantic detail is this:
 - `entry_start_pos()` returns the left edge of the current immediate match directly without storing or reading a named mark first,
 - `entry_end_pos()` returns the right edge of the current immediate match directly without storing or reading a named mark first,
 - `match_text()` returns the current local match text directly without storing or reading a named mark first,
+- `match_len()` returns the width of the current local match directly without storing or reading a named mark first,
 - `match_start_pos()` returns the left edge of the current local match directly without storing or reading a named mark first,
 - `match_end_pos()` returns the right edge of the current local match directly without storing or reading a named mark first,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
@@ -913,6 +914,7 @@ That means the usual authoring shape is:
 - or call `entry_len()` if the rule should expose the width of that same entry/immediate match without first round-tripping through a named mark,
 - or call `entry_start_pos()` / `entry_end_pos()` if the rule should expose the entry/immediate match boundaries that led into the rule without first round-tripping through a named mark,
 - or call `match_text()` if the current local match text itself should be returned as data without first round-tripping through a named mark,
+- or call `match_len()` if the width of that same current local match should be returned as data without first round-tripping through a named mark,
 - or call `match_start_pos()` / `match_end_pos()` if the current local match boundaries themselves should be returned as data without first round-tripping through a named mark.
 
 ## Mark Timing: Later Slot, Not Same Slot
@@ -1583,6 +1585,39 @@ This is the direct-current-text pattern:
 - use `match_text()` when the rule wants the current local match text only,
 - and use `match_start_pos()` / `match_end_pos()` when the rule wants the current local match boundaries as numbers.
 
+## Worked Example: Current Local Match Width Read
+Sometimes the rule wants the width of the current local match itself, not a stored checkpoint span and not the immediate entry-match width.
+
+That is what `match_len()` is for.
+
+```text
+explicit_match_width::AND
+ I { declare(scalar, stage, body_width) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> explicit_match_width[0] { assign(scalar(stage), "open") }
+ -> explicit_match_width[1] { assign(scalar(stage), "body"); assign(scalar(body_width), match_len()) }
+ -> explicit_match_width[2] { return(array("?explicit_match_width:", scalar(body_width), match_len())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- at `-> explicit_match_width[1]`, the current local match is `bar`, so `match_len()` returns `3`,
+- at `-> explicit_match_width[2]`, the current local match is `)`, so `match_len()` returns `1`,
+- and those reads do not consult or mutate the named-mark bucket.
+
+This is the direct-current-width pattern:
+- use `entry_len()` when the rule wants the width of the immediate entry match that led into the current rule,
+- use `capture_len_from(name)` when the rule wants the width of a remembered span from a stored checkpoint,
+- use `match_len()` when the rule wants the width of the current local match only,
+- and use `match_start_pos()` / `match_end_pos()` when the rule wants the current local match boundaries as numbers.
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 
@@ -1741,6 +1776,11 @@ Use `match_text()` when:
 - there is no need to store a named checkpoint for later reuse,
 - or the rule wants a backend-neutral replacement for raw `$LMATCH` in normal user-facing `.spec` code.
 
+Use `match_len()` when:
+- the rule wants the width of the current local match itself as data,
+- there is no need to store a named checkpoint for later reuse,
+- or the rule wants a backend-neutral replacement for raw `length($LMATCH)` in normal user-facing `.spec` code.
+
 Use `match_start_pos()` and `match_end_pos()` when:
 - the rule wants the current local match boundaries themselves as data,
 - there is no need to store a named checkpoint for later reuse,
@@ -1811,6 +1851,7 @@ The current supported contract is:
 - `entry_start_pos()` means “return the left edge of the current immediate match directly,”
 - `entry_end_pos()` means “return the right edge of the current immediate match directly,”
 - `match_text()` means “return the current local match text directly,”
+- `match_len()` means “return the width of the current local match directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,

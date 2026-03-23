@@ -724,7 +724,7 @@ Return the current local match text directly.
 Practical reading:
 - use it when the rule wants the current local match content as data,
 - prefer it over raw `$LMATCH` in normal user-facing `.spec` examples,
-- and treat it as the direct-text companion to `match_start_pos()` / `match_end_pos()`.
+- and treat it as the direct-text companion to `match_len()` / `match_start_pos()` / `match_end_pos()`.
 
 Example:
 
@@ -745,13 +745,40 @@ Top::AND
 
 Use it when the rule wants the current local match text immediately instead of reading a previously stored checkpoint or a larger remembered span.
 
+### `match_len()`
+Return the width of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the current local match width as data,
+- prefer it over raw `length($LMATCH)` in normal user-facing `.spec` examples,
+- and treat it as the direct-width companion to `match_text()` / `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_len()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, body_width) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(body_width), match_len()) }
+ -> Top[2] { return(array("?Top:", scalar(body_width), match_len())) }
+```
+
+Use it when the rule wants the current local match width immediately instead of the width of a previously stored checkpoint span.
+
 ### `match_start_pos()`
 Return the left edge of the current local match directly.
 
 Practical reading:
 - use it when the rule wants the current match start as data,
 - prefer it over `mark_pos(name)` when there is no reason to store a checkpoint first,
-- and treat it as the direct-boundary companion to `mark_match_start(name)`.
+- and treat it as the direct-boundary companion to `match_text()` / `match_len()` / `mark_match_start(name)`.
 
 Example:
 
