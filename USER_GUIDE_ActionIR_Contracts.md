@@ -335,6 +335,34 @@ Top::AND
 
 Use it when the rule should decide explicitly when the named checkpoint moves, instead of tying that movement to `capture_take(name)`.
 
+### `mark_match_start(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the left edge of the current match.
+
+Practical reading:
+- use it when the rule should remember where the current match begins rather than where it ends,
+- combine it with `capture_between(start_mark, end_mark)` when an end marker should exclude the current closing token or delimiter,
+- and treat it as the left-edge companion to post-match `mark_here(name)`.
+
+Example:
+
+```text
+mark_match_start(end_mark)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(end_mark); mark_here(after_end); return(array("?Top:", capture_between(body_start, end_mark), capture_between(body_start, after_end))) }
+```
+
+Use it when the rule wants a left-edge checkpoint for the current match instead of the usual post-match parser position stored by `@mark(name)` or `mark_here(name)`.
+
 ### `clear_mark(name)`
 Delete a rule-local named mark explicitly.
 

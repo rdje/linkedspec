@@ -441,6 +441,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_match_start',
+   ir_node            => 'MARK_MATCH_START',
+   diag_name          => 'mark_match_start',
+   unresolved_pattern => qr/\bmark_match_start\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS - length $LMATCH }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'clear_mark',
    ir_node            => 'CLEAR_MARK',
    diag_name          => 'clear_mark',

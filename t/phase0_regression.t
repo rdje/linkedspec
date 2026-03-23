@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 16;
+    plan tests => 17;
 
     my $label = 'Top';
 
@@ -9821,6 +9821,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
         q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = pos $$STRING }},
         'mark_here(name) helper rewrite preserves explicit rule-local named-mark update semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_match_start(end_mark)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'end_mark'} = $LSPOS - length $LMATCH }},
+        'mark_match_start(name) helper rewrite preserves explicit current-match left-edge semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'clear_mark(body_start)'),
@@ -9996,6 +10001,37 @@ SPEC
 
     my $between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_between(body_start, first_end)');
     like($between_rewrite, qr/\$__ls_end >= \$__ls_start/, 'capture_between(start_mark,end_mark) lowering guards against reversed or missing mark positions');
+};
+subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(end_mark); mark_here(after_end); return(array("?Top:", capture_between(body_start, end_mark), capture_between(body_start, after_end))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_match_start(name) left-edge coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'bar', 'bar)'],
+        'mark_match_start(name) captures the left edge of the current match while mark_here(name) keeps the post-match parser position'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_match_start(name) parse leaves runtime_ctx last_error clear on success');
+
+    my $start_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_match_start(end_mark)');
+    like($start_rewrite, qr/\$LSPOS - length \$LMATCH/, 'mark_match_start(name) lowering records the current-match left edge rather than post-match pos $$STRING');
 };
 subtest 'named_mark_mark_here_updates_named_checkpoint_without_reading' => sub {
     plan tests => 4;

@@ -871,6 +871,7 @@ The most important semantic detail is this:
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
+- `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
@@ -883,6 +884,7 @@ That means the usual authoring shape is:
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
 - or call `capture_between(start_mark, end_mark)` if both edges should come from explicit named checkpoints,
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
+- or call `mark_match_start(name)` if a later action block should remember where the current match begins instead of where it ends,
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present.
 
@@ -1035,7 +1037,41 @@ the practical reading is:
 This is the explicit-two-mark pattern:
 - `capture_from(name)` uses one named checkpoint plus the current match edge,
 - `capture_between(start_mark, end_mark)` uses two named checkpoints,
-- and `mark_here(name)` is the usual way to establish the second explicit right boundary.
+- and `mark_here(name)` is the usual way to establish the second explicit post-match right boundary.
+
+## Worked Example: Left Edge of a Closing Match
+Sometimes the right boundary should be the left edge of the current closing token, not the post-match parser position after that token.
+
+That is what `mark_match_start(name)` is for.
+
+```text
+explicit_left_edge_end_mark::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> explicit_left_edge_end_mark[0] { assign(scalar(stage), "open") }
+ -> explicit_left_edge_end_mark[1] { assign(scalar(stage), "body") }
+ -> explicit_left_edge_end_mark[2] { mark_match_start(end_mark); mark_here(after_end); return(array("?explicit_left_edge_end_mark:", capture_between(body_start, end_mark), capture_between(body_start, after_end))) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- `mark_match_start(end_mark)` records the left edge of the current `)` match,
+- `mark_here(after_end)` records the post-match parser position just after `)`,
+- `capture_between(body_start, end_mark)` returns `bar`,
+- `capture_between(body_start, after_end)` returns `bar)`.
+
+This is the left-edge end-marker pattern:
+- `mark_here(name)` stores post-match `pos $$STRING`,
+- `mark_match_start(name)` stores `$LSPOS - length $LMATCH`,
+- and `capture_between(...)` makes that distinction visible immediately.
 
 ## Worked Example: Stable Read, Explicit Advance
 Sometimes the rule wants to read from a stable named checkpoint first and only then decide to move it.
@@ -1263,6 +1299,11 @@ Use `mark_here(name)` when:
 - you want stable read first and explicit advance second,
 - or the mark should be updated even when no current capture string is being returned.
 
+Use `mark_match_start(name)` when:
+- the mark should store the left edge of the current match,
+- a closing token or delimiter should be excluded from a later `capture_between(...)` span,
+- or the rule needs both the left edge and the post-match edge of the same current match.
+
 Use `clear_mark(name)` when:
 - the rule should decide explicitly when a named checkpoint disappears,
 - one stable read should be followed by an explicit drop,
@@ -1325,6 +1366,7 @@ The current supported contract is:
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
+- `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,
