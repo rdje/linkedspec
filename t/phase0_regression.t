@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     my $label = 'Top';
 
@@ -9811,6 +9811,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; $__ls_capture } else { undef } }},
         'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = pos $$STRING }},
+        'mark_here(name) helper rewrite preserves explicit rule-local named-mark update semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -9941,6 +9946,41 @@ SPEC
 
     my $take_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take(body_start)');
     like($take_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = pos \$\$STRING;/, 'capture_take(name) lowering updates the rule-local mark to the current parser position after returning the captured span');
+};
+subtest 'named_mark_mark_here_updates_named_checkpoint_without_reading' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_from(body_start)); mark_here(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first), capture_from(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit mark-here coverage');
+
+    my $input = 'foo(alpha,beta)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', 'beta'],
+        'mark_here(name) lets the rule advance a named checkpoint explicitly after a stable capture_from(name) read'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'explicit mark-here parse leaves runtime_ctx last_error clear on success');
+
+    my $mark_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_here(body_start)');
+    like($mark_rewrite, qr/\$\$info\{marks\}\{'Top'\}\{'body_start'\} = pos \$\$STRING/, 'mark_here(name) lowering writes the rule-local mark directly to the current parser position');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;

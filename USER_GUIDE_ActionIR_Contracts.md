@@ -269,6 +269,38 @@ Top::AND
 
 Use it when the same rule should keep consuming successive named spans instead of reading repeatedly from one stable checkpoint.
 
+### `mark_here(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
+
+Practical reading:
+- use `@mark(name)` when a rule paragraph member should establish the mark,
+- use `mark_here(name)` when a later action block in that same rule should move that mark explicitly,
+- and combine it with `capture_from(name)` when you want stable read first, explicit advance second.
+
+Example:
+
+```text
+mark_here(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_from(body_start)); mark_here(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first), capture_from(body_start))) }
+```
+
+Use it when the rule should decide explicitly when the named checkpoint moves, instead of tying that movement to `capture_take(name)`.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.

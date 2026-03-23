@@ -327,6 +327,7 @@ Important nuance:
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture_take(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; $__ls_capture } else { undef } }`
+- `mark_here(body_start)` -> `do { $$info{marks}{'current_rule'} = {} unless ref($$info{marks}{'current_rule'}) eq 'HASH'; $$info{marks}{'current_rule'}{'body_start'} = pos $$STRING }`
 - `capture(Top)` -> `push @Top, substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_if(Top)` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
 - `CAPTURE_IF()` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
@@ -341,6 +342,7 @@ Important nuance:
 - `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so a later regex slot in the same rule usually acts as the right delimiter.
 - `capture_take(name)` returns that same span and then updates the rule-local named mark to `pos $$STRING`, so later same-rule reads continue from the current parser position.
+- `mark_here(name)` updates the rule-local named mark to `pos $$STRING` directly, so later same-rule reads start from that new explicit checkpoint even if no capture string was returned at the update site.
 - named marks are scoped under the current rule label in runtime storage, so different rules can reuse the same mark name safely.
 - `@mark(name)` lowers into later `LECODE`, so same-slot actions should not expect a freshly written mark yet; later slots in that same rule are the intended readers.
 
