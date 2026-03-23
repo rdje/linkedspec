@@ -346,6 +346,40 @@ Top::AND
 
 Use it when the rule wants an explicit two-mark span instead of the usual “named mark to current match edge” capture shape.
 
+### `capture_len_between(start_mark, end_mark)`
+Return the numeric length of the same explicit two-mark span that `capture_between(start_mark, end_mark)` would read.
+
+Practical reading:
+- use it when the left edge and right edge should both come from named checkpoints instead of from the current match,
+- keep the same explicit remembered-boundary model as `capture_between(start_mark, end_mark)`,
+- but return the width of that span instead of materializing the substring.
+
+If either mark is absent, or if the end mark is before the start mark, the helper returns `undef`.
+
+Example:
+
+```text
+capture_len_between(body_start, first_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value"); mark_here(first_end) }
+ -> Top[2] { assign(scalar(stage), "separator"); assign(scalar(first_segment), capture_between(body_start, first_end)) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first_segment), capture_len_between(body_start, first_end), capture_len_between(body_start, missing_end))) }
+```
+
+Use it when the rule wants explicit remembered-boundary width metadata instead of the actual two-mark substring.
+
 ### `capture_take_between(start_mark, end_mark)`
 Return the substring between two explicit rule-local named marks, then advance the start mark to the stored end mark.
 

@@ -871,6 +871,7 @@ The most important semantic detail is this:
 - `capture_len_from(name)` returns the numeric length of that same current-edge span without materializing the substring,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
+- `capture_len_between(start_mark, end_mark)` returns the numeric length of that same explicit two-mark span without materializing the substring,
 - `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
 - `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
@@ -892,6 +893,7 @@ That means the usual authoring shape is:
 - or call `capture_len_from(name)` if the rule should read the numeric width of that same current-edge span instead of the substring itself,
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
 - or call `capture_between(start_mark, end_mark)` if both edges should come from explicit named checkpoints,
+- or call `capture_len_between(start_mark, end_mark)` if the rule should read the numeric width of that same explicit two-mark span instead of the substring itself,
 - or call `capture_take_between(start_mark, end_mark)` if that explicit two-mark span should also advance the start mark to the remembered end mark,
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
 - or call `mark_match_start(name)` if a later action block should remember where the current match begins instead of where it ends,
@@ -1049,6 +1051,43 @@ This is the explicit-two-mark pattern:
 - `capture_from(name)` uses one named checkpoint plus the current match edge,
 - `capture_between(start_mark, end_mark)` uses two named checkpoints,
 - and `mark_here(name)` is the usual way to establish the second explicit post-match right boundary.
+
+## Worked Example: Explicit Two-Mark Span Length
+Sometimes the rule wants explicit remembered boundaries, but only as width metadata rather than as a substring.
+
+That is what `capture_len_between(start_mark, end_mark)` is for.
+
+```text
+explicit_two_mark_span_length::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> explicit_two_mark_span_length[0] { assign(scalar(stage), "open") }
+ -> explicit_two_mark_span_length[1] { assign(scalar(stage), "first_value"); mark_here(first_end) }
+ -> explicit_two_mark_span_length[2] { assign(scalar(stage), "separator"); assign(scalar(first_segment), capture_between(body_start, first_end)) }
+ -> explicit_two_mark_span_length[3] { assign(scalar(stage), "second_value") }
+ -> explicit_two_mark_span_length[4] { return(array("?explicit_two_mark_span_length:", scalar(first_segment), capture_len_between(body_start, first_end), capture_len_between(body_start, missing_end))) }
+```
+
+On input:
+
+```text
+foo(alpha,beta)
+```
+
+the practical reading is:
+- `capture_between(body_start, first_end)` returns `alpha`,
+- `capture_len_between(body_start, first_end)` returns `5`,
+- `capture_len_between(body_start, missing_end)` returns `undef` because the right boundary is absent.
+
+This is the explicit-two-mark length pattern:
+- `capture_between(start_mark, end_mark)` returns the substring,
+- `capture_len_between(start_mark, end_mark)` returns the width of that same remembered-boundary span,
+- and neither helper mutates the stored marks.
 
 ## Worked Example: Explicit Two-Mark Span with Advancing Start
 Sometimes the rule wants the clarity of an explicit remembered right boundary and also wants the start mark to roll forward to that remembered boundary after the read.
@@ -1416,6 +1455,11 @@ Use `capture_between(start_mark, end_mark)` when:
 - the rule wants to compare an explicit two-mark span with a current-match-edge span,
 - or the right edge should be remembered earlier than the final read site.
 
+Use `capture_len_between(start_mark, end_mark)` when:
+- the rule wants the numeric width of an explicit remembered-boundary span instead of the substring itself,
+- later logic should compare or record two-mark span length metadata,
+- or the rule wants the same two-mark boundary semantics as `capture_between(start_mark, end_mark)` but in numeric form.
+
 Use `mark_here(name)` when:
 - the rule should decide explicitly when a named checkpoint moves,
 - you want stable read first and explicit advance second,
@@ -1493,6 +1537,7 @@ The current supported contract is:
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
+- `capture_len_between(start_mark, end_mark)` means “the numeric length of that same explicit two-mark span or `undef` when either mark is absent or reversed,”
 - `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
