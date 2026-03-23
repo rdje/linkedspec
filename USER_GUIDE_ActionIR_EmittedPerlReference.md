@@ -325,7 +325,7 @@ Important nuance:
 
 ### Capture and backtrack helpers
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
-- `capture_from(body_start)` -> `do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
+- `capture_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture(Top)` -> `push @Top, substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_if(Top)` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
 - `CAPTURE_IF()` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
@@ -338,8 +338,9 @@ Important nuance:
 - The label argument on `capture(...)`, `capture_if(...)`, `ibacktrack(...)`, and `backtrack(...)` is compatibility syntax.
 - Lowering uses the current rule context, not the literal label text inside the call.
 - `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
-- `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so the current regex or child rule usually acts as the right delimiter.
-- `@mark(name)` lowers into later `LECODE`, so same-slot actions should not expect a freshly written mark yet; later slots and later child calls are the intended readers.
+- `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so a later regex slot in the same rule usually acts as the right delimiter.
+- named marks are scoped under the current rule label in runtime storage, so different rules can reuse the same mark name safely.
+- `@mark(name)` lowers into later `LECODE`, so same-slot actions should not expect a freshly written mark yet; later slots in that same rule are the intended readers.
 
 ## Classified pass-through compatibility patterns
 These forms are recognized by the ActionIR scanner, contribute canonical ActionIR nodes, and avoid `RAW_PERL` fallback, but the emitted Perl is intentionally preserved verbatim.

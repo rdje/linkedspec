@@ -228,7 +228,13 @@ sub _collect_rule_ir {
   }
   elsif ($entry_type eq 'MARK_POS') {
    my $mark_name = $$centry[1]{name};
-   push @{$rule_ir->{code_blocks}{LECODE}}, '$$info{marks}{\''.$mark_name.'\'} = pos $$STRING';
+   my $rule_label = defined($rule_ir->{label}) ? $rule_ir->{label} : '<unknown_rule>';
+   my $mark_reidx = scalar(@{$rule_ir->{REs}}) - 1;
+   $mark_reidx = 0 if $mark_reidx < 0;
+   push @{$rule_ir->{code_blocks}{LECODE}},
+    'if ($$minfo{index} == '.$mark_reidx.') { '.
+    '$$info{marks}{\''.$rule_label.'\'} = {} unless ref($$info{marks}{\''.$rule_label.'\'}) eq "HASH"; '.
+    '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'} = pos $$STRING; }';
   }
  }
 

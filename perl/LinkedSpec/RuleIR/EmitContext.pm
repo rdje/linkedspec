@@ -126,6 +126,15 @@ sub _trim_action_ir_value {
  return $value
 }
 
+sub _preserve_terminal_block_statement_separator {
+ my ($original, $rewritten) = @_;
+ return $rewritten unless defined($original) && defined($rewritten);
+ return $rewritten unless $original =~ /;\s*\}$/o;
+ return $rewritten if $rewritten =~ /;\s*\}$/o;
+ $rewritten =~ s/\s*\}$/; }/o;
+ return $rewritten
+}
+
 sub _parse_method_function_expr {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -670,6 +679,7 @@ sub _normalize_rule_code_chunks {
  foreach my $chunk (@$chunks) {
   my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
+  $rewritten = _preserve_terminal_block_statement_separator($chunk, $rewritten);
   $rewritten =~ s/\s*;\s*$//o;
   push @normalized, $rewritten;
  }

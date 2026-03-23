@@ -390,7 +390,7 @@ sub _build_capture_and_backtrack_contracts {
     $code =~ s{
      \bcapture_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = (ref($$info{marks}) eq \'HASH\') ? $$info{marks}{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }'
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }'
     }gex;
     return $code
    },

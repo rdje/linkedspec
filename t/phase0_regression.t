@@ -6257,17 +6257,23 @@ SPEC
         'MoveTop parsed entry preserves MARK_POS token with the expected mark name');
 
     my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
-    is_deeply($rule_ir->{code_blocks}{LECODE}, ['$$info{marks}{\'body_start\'} = pos $$STRING'],
-        'MARK_POS compiles into the expected named-mark LECODE cursor shift');
+    is_deeply(
+        $rule_ir->{code_blocks}{LECODE},
+        ['if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; }'],
+        'MARK_POS compiles into the expected rule-local, slot-local named-mark LECODE cursor shift'
+    );
 
     my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
-    is($emit_ctx->{lecode}, '$$info{marks}{\'body_start\'} = pos $$STRING',
-        'emit context preserves named-mark split-boundary cursor shift');
+    is(
+        $emit_ctx->{lecode},
+        'if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; }',
+        'emit context preserves rule-local, slot-local named-mark split-boundary cursor shift'
+    );
 
     is(
         LinkedSpec::call_spec_handler_subst('MoveTop', 'capture_from(body_start)'),
-        q{do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
-        'capture_from(name) helper rewrite stays aligned with named-mark cursor storage',
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'MoveTop'}) eq 'HASH') ? $$info{marks}{'MoveTop'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
+        'capture_from(name) helper rewrite stays aligned with rule-local named-mark storage',
     );
     is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], 'MoveTop rule preserves the anchor regex list used around the named mark');
 };
@@ -9798,7 +9804,7 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_from(body_start)'),
-        q{do { my $__ls_mark = (ref($$info{marks}) eq 'HASH') ? $$info{marks}{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
         'capture_from(name) helper rewrite preserved'
     );
     is(
@@ -9833,34 +9839,64 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
 };
-subtest 'named_mark_capture_from_survives_child_rule_calls' => sub {
+subtest 'named_mark_capture_from_reads_rule_local_checkpoint' => sub {
     plan tests => 5;
 
     my $spec_content = <<'SPEC';
 Top::AND
- /foo\(/ @mark(body_start) /\w+/
- -> Top[0] { my $noop = 1 }
- -> Top[1] { return call(Child) }
-
-Child:
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
  /\)/
- -> Child[0] { my $body = capture_from(body_start); return ['?Child:', $body] }
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_from(body_start))) }
 SPEC
 
     my %runtime_ctx;
     my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
-    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark child-call coverage');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for rule-local named-mark coverage');
 
     my $input = 'foo(bar)';
     my $ast = $parser->(\$input);
-    is_deeply($ast, ['?Child:', 'bar'], 'named mark remains visible after child-rule matching and capture_from(name) returns the inner span');
-    ok(!defined($runtime_ctx{last_error}), 'named-mark child-call parse leaves runtime_ctx last_error clear on success');
+    is_deeply($ast, ['?Top:', 'bar'], 'capture_from(name) returns the inner span from the current rule-local checkpoint');
+    ok(!defined($runtime_ctx{last_error}), 'rule-local named-mark parse leaves runtime_ctx last_error clear on success');
 
     my $bad_input = 'xxfoo(bar)';
     my $bad_ast = $parser->(\$bad_input);
-    ok(!defined($bad_ast), 'consume mode still rejects leading junk for named-mark child-call parser');
+    ok(!defined($bad_ast), 'consume mode still rejects leading junk for rule-local named-mark parser');
     ok(!defined($runtime_ctx{last_error}) || $runtime_ctx{last_error}{type} ne 'runtime_handler',
-        'consume rejection does not turn named-mark child-call coverage into a runtime-handler failure');
+        'consume rejection does not turn rule-local named-mark coverage into a runtime-handler failure');
+};
+subtest 'named_mark_scope_is_rule_local_and_not_visible_to_child_rules' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { return(call(Child)) }
+
+Child:
+ /\)/
+ -> Child[0] { return(array("?Child:", capture_from(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds when a child rule references a same-name mark');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply($ast, ['?Child:', undef], 'child rule does not inherit a parent rule mark with the same name');
+    ok(!defined($runtime_ctx{last_error}), 'rule-local mark isolation leaves runtime_ctx last_error clear on success');
+
+    my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'capture_from(body_start)');
+    like($capture_rewrite, qr/\$\$info\{marks\}\{'Child'\}/, 'capture_from(name) lowering is explicitly scoped to the current rule label');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;

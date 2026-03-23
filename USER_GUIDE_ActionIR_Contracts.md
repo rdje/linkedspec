@@ -179,14 +179,18 @@ Return the captured substring from a named `@mark(name)` checkpoint to the left 
 
 Practical reading:
 - the earlier `@mark(name)` establishes the left boundary,
-- the current regex or current child rule establishes the right boundary,
+- a later regex slot in that same rule establishes the right boundary,
 - the current local match itself is not included in the returned substring.
 
 If the mark is absent, the helper returns `undef`.
 
+The mark name is scoped to the current rule label:
+- different rules can reuse the same mark name safely,
+- child rules do not inherit a parent rule's named marks automatically.
+
 One timing rule matters:
 - `@mark(name)` becomes visible after the slot that carries it completes,
-- so `capture_from(name)` is meant for later slots or later child calls, not the same slot that just established the mark.
+- so `capture_from(name)` is meant for later slots in that same rule, not the same slot that just established the mark.
 
 Examples:
 
@@ -196,30 +200,26 @@ assign(scalar(body), capture_from(body_start))
 
 ```text
 Top::AND
- /foo\(/ @mark(body_start)
- -> Top[0] { return(call(Inner)) }
-
-Inner::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
  /\w+/
- -> Inner[0] { return(call(Child)) }
-
-Child:
  /\)/
- -> Child[0] { return(array("?Child:", capture_from(body_start))) }
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_from(body_start))) }
 ```
 
 ```text
 Left::AND
- /\(/ @mark(left_start)
- -> Left[0] { return(call(LeftContent)) }
-
-LeftContent::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(left_start)
  /[^,]+/
- -> LeftContent[0] { return(call(LeftSeparator)) }
-
-LeftSeparator:
  /,/
- -> LeftSeparator[0] { return(array("?left:", capture_from(left_start))) }
+ -> Left[0] { assign(scalar(stage), "open") }
+ -> Left[1] { assign(scalar(stage), "content") }
+ -> Left[2] { return(array("?left:", capture_from(left_start))) }
 ```
 
 ```text
@@ -228,7 +228,7 @@ LeftSeparator:
    }
 ```
 
-Use it when one anonymous split cursor is not enough and you want a later action block or child rule to refer back to a specific named checkpoint.
+Use it when one anonymous split cursor is not enough and you want a later action block in that same rule to refer back to a specific named checkpoint.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,

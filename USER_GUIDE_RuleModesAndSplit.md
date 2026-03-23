@@ -789,7 +789,7 @@ The older spelling `@move_pos` is still supported as a compatibility alias.
 There is now also a named checkpoint form:
 - `@mark(name)`
 
-That named form stores the current parser position under `name` so later `capture_from(name)` helpers can extract text from that named checkpoint up to the left edge of the current match.
+That named form stores the current parser position under `name` so later `capture_from(name)` calls return the substring from that named checkpoint up to the left edge of the current match.
 
 It is easy to misunderstand what it does, so here is the precise version:
 - it does not collect text by itself,
@@ -853,53 +853,53 @@ If you are reading older specs or older notes, this may still appear as `@move_p
 In compiler terms, it lowers to:
 
 ```text
-$$info{marks}{'name'} = pos $$STRING
+if ($$minfo{index} == slot_idx) {
+  $$info{marks}{'current_rule'}{'name'} = pos $$STRING
+}
 ```
 
 That means:
 - it does not capture text by itself,
 - it records the current parser position under a stable name,
-- and later `capture_from(name)` can recover “text since that named point” even after more matching has happened.
-
-This is especially useful for staged extraction flows where one anonymous split cursor is not enough, or where a child rule should keep using a mark established earlier by a parent rule.
+- the name is scoped to the current rule label,
+- and later `capture_from(name)` in that same rule can recover the span that starts at that named point.
 
 The most important semantic detail is this:
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current match,
 - it does not include the current local match itself,
-- so the current regex or current child rule often acts as the right delimiter of the captured span.
+- so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 That means the usual authoring shape is:
 - match an opening anchor,
 - set `@mark(name)`,
 - keep matching forward,
-- then on a later closing delimiter or separator call `capture_from(name)`.
+- then on a later closing delimiter or separator in that same rule call `capture_from(name)`.
 
 ## Mark Timing: Later Slot, Not Same Slot
 There is one timing rule that matters a lot in practice:
 
 - `@mark(name)` becomes visible after the regex slot that carries it completes,
 - so an action on that same slot should not expect the new mark yet,
-- if you want to use the mark, do it from a later regex slot or from a child rule called later.
+- if you want to use the mark, do it from a later regex slot in the same rule,
+- child rules do not inherit that named mark automatically.
 
 That follows the current lowering shape:
 - the mark lowers into `LECODE`,
 - and `LECODE` is a later phase than the action attached to that same slot.
 
-## Worked Example: Parent Mark, Child Capture
-This is the clearest end-to-end checkpoint example today:
+## Worked Example: Same-Rule Delimited Capture
+This is the clearest safe checkpoint example today:
 
 ```text
 semantic_chunk::AND
- /foo\(/ @mark(body_start)
- -> semantic_chunk[0] { return(call(chunk_body)) }
-
-chunk_body::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
  /\w+/
- -> chunk_body[0] { return(call(chunk_end)) }
-
-chunk_end:
  /\)/
- -> chunk_end[0] { return(array("?semantic_chunk:", capture_from(body_start))) }
+ -> semantic_chunk[0] { assign(scalar(stage), "open") }
+ -> semantic_chunk[1] { assign(scalar(stage), "body") }
+ -> semantic_chunk[2] { return(array("?semantic_chunk:", capture_from(body_start))) }
 ```
 
 On input:
@@ -911,30 +911,28 @@ foo(bar)
 the practical reading is:
 - `/foo\(/` matches the stable opening anchor,
 - `@mark(body_start)` remembers the start of the inner span,
-- `chunk_body` consumes the inner content,
-- `chunk_end` matches the closing `)`,
+- `/\w+/` consumes the inner content,
+- `/\)/` is the right delimiter,
 - `capture_from(body_start)` returns `bar`.
 
 This is the easiest checkpoint pattern to teach:
-- the parent owns the left boundary,
-- the later child owns the right boundary,
+- the rule owns the left boundary,
+- the later slot in that same rule owns the right boundary,
 - and the captured text is the span between them.
 
-## Worked Example: Separator as the Right Boundary
+## Worked Example: Same-Rule Separator Capture
 The current match does not have to be a closing delimiter. A separator works too.
 
 ```text
 left_item::AND
- /\(/ @mark(left_start)
- -> left_item[0] { return(call(left_content)) }
-
-left_content::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(left_start)
  /[^,]+/
- -> left_content[0] { return(call(left_separator)) }
-
-left_separator:
  /,/
- -> left_separator[0] { return(array("?left_item:", capture_from(left_start))) }
+ -> left_item[0] { assign(scalar(stage), "open") }
+ -> left_item[1] { assign(scalar(stage), "content") }
+ -> left_item[2] { return(array("?left_item:", capture_from(left_start))) }
 ```
 
 On input shaped like:
@@ -943,12 +941,12 @@ On input shaped like:
 (alpha,beta)
 ```
 
-the current match in `left_separator` is the comma. That means `capture_from(left_start)` returns the text before the comma, not including the comma itself.
+the current match at the final comma slot is the comma. That means `capture_from(left_start)` returns the text before the comma, not including the comma itself.
 
 This is the key generalization:
 - the current match acts as the right edge,
 - not only closing delimiters,
-- but any later separator or anchor rule can play that role.
+- but any later separator or anchor slot in the same rule can play that role.
 
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
@@ -958,7 +956,7 @@ You can treat them as separate named left edges:
 - `@mark(body_start)`
 - `@mark(argument_start)`
 
-Then later actions or child rules can ask for exactly the span they want:
+Then later actions in that same rule can ask for exactly the span they want:
 
 ```text
 capture_from(header_start)
@@ -969,7 +967,34 @@ capture_from(argument_start)
 That is the main reason to choose `@mark(name)` over anonymous `@capture_from_here`:
 - anonymous split is good when one moving capture baseline is enough,
 - named marks are better when multiple checkpoints may coexist,
-- named marks are also better when a later child rule should keep using a checkpoint established earlier by a parent rule.
+- named marks are also better when the same rule needs several stable named left edges.
+
+## Worked Example: Same Name in Different Rules
+Named marks are rule-local, so different rules can reuse the same mark name safely.
+
+```text
+header::AND
+ I { declare(scalar, stage) }
+ /\[/
+ @mark(body_start)
+ /\w+/
+ /\]/
+ -> header[0] { assign(scalar(stage), "open") }
+ -> header[1] { assign(scalar(stage), "body") }
+ -> header[2] { return(array("?header:", capture_from(body_start))) }
+
+payload::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> payload[0] { assign(scalar(stage), "open") }
+ -> payload[1] { assign(scalar(stage), "body") }
+ -> payload[2] { return(array("?payload:", capture_from(body_start))) }
+```
+
+Both rules use `body_start`, but they do not collide because each rule keeps its own named-mark bucket.
 
 ## Worked Example: Missing Marks Are Safe
 `capture_from(name)` is intentionally safe if the mark does not exist yet.
@@ -1002,7 +1027,7 @@ Use `@capture_from_here` when:
 Use `@mark(name)` when:
 - more than one checkpoint may be alive at once,
 - the checkpoint meaning benefits from a real name,
-- or a later child rule should keep using a checkpoint established earlier by a parent rule.
+- or the same rule needs more than one named left edge.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
@@ -1053,6 +1078,7 @@ The current supported contract is:
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
+- named marks are rule-local, so different rules can reuse the same mark name without colliding,
 - and marks are a later-slot surface, so same-slot actions should not expect a freshly written mark yet,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
 
