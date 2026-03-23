@@ -366,6 +366,7 @@ Important nuance:
 - `entry_group(0)` reads one capture group from the current immediate match directly as `do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }`, without consulting the rule-local mark bucket.
 - `entry_groups()` snapshots the whole current immediate-match capture-group list directly as `do { [@IMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `entry_named(name)` reads one named capture from the current immediate match directly as `do { exists $IMATCH_HASH{'name'} ? $IMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.
+- `entry_has(name)` probes immediate named-capture presence directly as `do { exists $IMATCH_HASH{'name'} ? 1 : 0 }`, without consulting the rule-local mark bucket.
 - `entry_map()` snapshots the whole current immediate-match named-capture hash directly as `do { +{%IMATCH_HASH} }`, without consulting the rule-local mark bucket.
 - `entry_named_map()` is the compatibility alias for that same immediate named-capture-hash snapshot.
 - `entry_len()` reads the current immediate match width directly as `do { length $IMATCH }`, without consulting the rule-local mark bucket.
@@ -375,6 +376,7 @@ Important nuance:
 - `match_group(1)` reads one capture group from the current local match directly as `do { scalar(@LMATCH_LIST) > 1 ? $LMATCH_LIST[1] : undef }`, without consulting the rule-local mark bucket.
 - `match_groups()` snapshots the whole current local-match capture-group list directly as `do { [@LMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `match_named(name)` reads one named capture from the current local match directly as `do { exists $LMATCH_HASH{'name'} ? $LMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.
+- `match_has(name)` probes current local named-capture presence directly as `do { exists $LMATCH_HASH{'name'} ? 1 : 0 }`, without consulting the rule-local mark bucket.
 - `match_map()` snapshots the whole current local named-capture hash directly as `do { +{%LMATCH_HASH} }`, without consulting the rule-local mark bucket.
 - `match_named_map()` is the compatibility alias for that same local named-capture-hash snapshot.
 - `match_len()` reads the current local match width directly as `do { length $LMATCH }`, without consulting the rule-local mark bucket.

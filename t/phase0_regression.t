@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 40;
+    plan tests => 42;
 
     my $label = 'Top';
 
@@ -9888,6 +9888,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'entry_named(name) helper rewrite preserves explicit current-immediate-match named-capture semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_has(prefix)'),
+        q{do { exists $IMATCH_HASH{'prefix'} ? 1 : 0 }},
+        'entry_has(name) helper rewrite preserves explicit current-immediate-match named-capture presence semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_map()'),
         q{do { +{%IMATCH_HASH} }},
         'entry_map() helper rewrite preserves preferred current-immediate-match named-capture-hash snapshot semantics'
@@ -9936,6 +9941,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'match_named(rest)'),
         q{do { exists $LMATCH_HASH{'rest'} ? $LMATCH_HASH{'rest'} : undef }},
         'match_named(name) helper rewrite preserves explicit current-local-match named-capture semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_has(rest)'),
+        q{do { exists $LMATCH_HASH{'rest'} ? 1 : 0 }},
+        'match_has(name) helper rewrite preserves explicit current-local-match named-capture presence semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_map()'),
@@ -10504,6 +10514,39 @@ SPEC
 
     my $named_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_named(prefix).'."\n".'match_named(rest)');
     like($named_rewrite, qr/\$IMATCH_HASH.*\$LMATCH_HASH/s, 'entry_named(name) and match_named(name) lowering read immediate and local named captures directly without consulting stored marks');
+};
+subtest 'entry_and_match_presence_helpers_probe_immediate_and_local_named_capture_presence' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /(?<prefix>foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_has_prefix, entry_has_missing, body_has_first, body_has_close) }
+ /(?<first>\w)(?<rest>\w+)/
+ /(?<close>\))/
+ -> Child[0] { assign(scalar(entry_has_prefix), entry_has(prefix)); assign(scalar(entry_has_missing), entry_has(missing_name)); assign(scalar(body_has_first), match_has(first)); assign(scalar(body_has_close), match_has(close)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_has_prefix), scalar(entry_has_missing), scalar(body_has_first), scalar(body_has_close), entry_has(prefix), entry_has(missing_name), match_has(close), match_has(rest))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_has(name) and match_has(name) coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 1, 0, 1, 0, 1, 0, 1, 0],
+        'entry_has(name) keeps immediate named-capture presence stable while match_has(name) follows the active local named-capture presence'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match presence helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match presence helper parse leaves runtime_ctx last_error clear on success');
+
+    my $presence_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_has(prefix).'."\n".'match_has(rest)');
+    like($presence_rewrite, qr/\$IMATCH_HASH.*\$LMATCH_HASH/s, 'entry_has(name) and match_has(name) lowering probe immediate and local named-capture presence directly without consulting stored marks');
 };
 subtest 'entry_and_match_map_helpers_snapshot_immediate_and_local_named_capture_hashes' => sub {
     plan tests => 5;

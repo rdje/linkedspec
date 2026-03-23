@@ -1966,6 +1966,11 @@ Use `entry_group(index)` when:
 - child-rule logic should keep that entry capture-group data visible while local match groups continue to move forward,
 - or the rule wants a backend-neutral replacement for raw `scalar(IMATCH_LIST, index)` in normal user-facing `.spec` code.
 
+Use `entry_has(name)` when:
+- the rule wants to know whether one named capture exists on the immediate entry match that led into the current rule,
+- child-rule logic should keep that entry named-capture presence visible while local named captures continue to move forward,
+- or the rule wants a backend-neutral shortcut instead of spelling `has_key(entry_map(), "name")` just to ask a simple presence question.
+
 Use `entry_len()` when:
 - the rule wants the width of the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry width visible while local match widths continue to move forward,
@@ -1985,6 +1990,11 @@ Use `match_group(index)` when:
 - the rule wants one capture group from the current local match itself as data,
 - there is no need to store a named checkpoint for later reuse,
 - or the rule wants a backend-neutral replacement for raw `scalar(LMATCH_LIST, index)` in normal user-facing `.spec` code.
+
+Use `match_has(name)` when:
+- the rule wants to know whether one named capture exists on the current local match itself,
+- there is no need to snapshot the whole named-capture hash just to ask that presence question,
+- or the rule wants a backend-neutral shortcut instead of spelling `has_key(match_map(), "name")` just to test a current local named capture.
 
 Use `match_len()` when:
 - the rule wants the width of the current local match itself as data,
@@ -2060,6 +2070,7 @@ The current supported contract is:
 - `entry_group(index)` means “return one capture group from the current immediate match directly,”
 - `entry_groups()` means “return the whole current immediate-match capture-group list directly,”
 - `entry_named(name)` means “return one named capture from the current immediate match directly,”
+- `entry_has(name)` means “return `1` when that named capture exists on the current immediate match, otherwise `0`,”
 - `entry_map()` means “return the whole current immediate-match named-capture hash directly,”
 - `entry_named_map()` is the compatibility alias for that same immediate named-capture-hash read,
 - `entry_len()` means “return the width of the current immediate match directly,”
@@ -2069,6 +2080,7 @@ The current supported contract is:
 - `match_group(index)` means “return one capture group from the current local match directly,”
 - `match_groups()` means “return the whole current local-match capture-group list directly,”
 - `match_named(name)` means “return one named capture from the current local match directly,”
+- `match_has(name)` means “return `1` when that named capture exists on the current local match, otherwise `0`,”
 - `match_map()` means “return the whole current local named-capture hash directly,”
 - `match_named_map()` is the compatibility alias for that same local named-capture-hash read,
 - `match_len()` means “return the width of the current local match directly,”

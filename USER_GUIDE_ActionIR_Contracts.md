@@ -735,6 +735,37 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants one named capture from the immediate entry match that led into the current rule instead of the named captures of the currently active local match.
 
+### `entry_has(name)`
+Return `1` when that named capture is present in the current immediate match and `0` when it is absent.
+
+Practical reading:
+- use it when the rule wants immediate-match named-capture presence metadata rather than the captured value itself,
+- prefer it over spelling `has_key(entry_map(), "name")` directly in normal user-facing `.spec` examples when the simpler intent is “does this named entry capture exist?”,
+- and treat it as the presence-check companion to `entry_named(name)` / `entry_map()`.
+
+Example:
+
+```text
+entry_has(prefix)
+```
+
+```text
+Top::AND
+ /(?<prefix>foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_has_prefix, entry_has_missing, body_has_first, body_has_close) }
+ /(?<first>\w)(?<rest>\w+)/
+ /(?<close>\))/
+ -> Child[0] { assign(scalar(entry_has_prefix), entry_has(prefix)); assign(scalar(entry_has_missing), entry_has(missing_name)); assign(scalar(body_has_first), match_has(first)); assign(scalar(body_has_close), match_has(close)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_has_prefix), scalar(entry_has_missing), scalar(body_has_first), scalar(body_has_close), entry_has(prefix), entry_has(missing_name), match_has(close), match_has(rest))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule needs to know whether a named capture exists on the immediate entry match without first snapshotting the whole named-capture hash.
+
 ### `entry_map()`
 Return the whole named-capture hash from the current immediate match directly.
 
@@ -961,6 +992,37 @@ Child::AND
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants one named capture from the current local match itself instead of the immediate entry match that led into the current rule.
+
+### `match_has(name)`
+Return `1` when that named capture is present in the current local match and `0` when it is absent.
+
+Practical reading:
+- use it when the rule wants current-local named-capture presence metadata rather than the captured value itself,
+- prefer it over spelling `has_key(match_map(), "name")` directly in normal user-facing `.spec` examples when the simpler intent is “does this local named capture exist right now?”,
+- and treat it as the presence-check companion to `match_named(name)` / `match_map()`.
+
+Example:
+
+```text
+match_has(rest)
+```
+
+```text
+Top::AND
+ /(?<prefix>foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_has_prefix, entry_has_missing, body_has_first, body_has_close) }
+ /(?<first>\w)(?<rest>\w+)/
+ /(?<close>\))/
+ -> Child[0] { assign(scalar(entry_has_prefix), entry_has(prefix)); assign(scalar(entry_has_missing), entry_has(missing_name)); assign(scalar(body_has_first), match_has(first)); assign(scalar(body_has_close), match_has(close)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_has_prefix), scalar(entry_has_missing), scalar(body_has_first), scalar(body_has_close), entry_has(prefix), entry_has(missing_name), match_has(close), match_has(rest))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule needs to know whether a named capture exists on the current local match without first snapshotting the whole named-capture hash.
 
 ### `match_map()`
 Return the whole named-capture hash from the current local match directly.

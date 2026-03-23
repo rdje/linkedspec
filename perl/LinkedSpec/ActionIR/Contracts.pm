@@ -626,6 +626,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_has',
+   ir_node            => 'IMATCH_NAMED_EXISTS',
+   diag_name          => 'entry_has',
+   unresolved_pattern => qr/\bentry_has\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bentry_has\s*\(\s*(?<name>\w+)\s*\)
+    }{
+     'do { exists $IMATCH_HASH{\''.$+{name}.'\'} ? 1 : 0 }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_map',
    ir_node            => 'IMATCH_NAMED_MAP_READ',
    diag_name          => 'entry_map',
@@ -739,6 +754,21 @@ sub _build_capture_and_backtrack_contracts {
      \bmatch_named\s*\(\s*(?<name>\w+)\s*\)
     }{
      'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_has',
+   ir_node            => 'MATCH_NAMED_EXISTS',
+   diag_name          => 'match_has',
+   unresolved_pattern => qr/\bmatch_has\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmatch_has\s*\(\s*(?<name>\w+)\s*\)
+    }{
+     'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? 1 : 0 }'
     }gex;
     return $code
    },

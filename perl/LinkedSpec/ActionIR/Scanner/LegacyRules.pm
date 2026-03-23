@@ -42,6 +42,7 @@ sub try_scan_contract_ir_events {
   'entry_group' => \&_scan_contract_entry_group,
   'entry_groups' => \&_scan_contract_entry_groups,
   'entry_named' => \&_scan_contract_entry_named,
+  'entry_has' => \&_scan_contract_entry_has,
   'entry_map' => \&_scan_contract_entry_map,
   'entry_named_map' => \&_scan_contract_entry_named_map,
   'entry_len' => \&_scan_contract_entry_len,
@@ -51,6 +52,7 @@ sub try_scan_contract_ir_events {
   'match_group' => \&_scan_contract_match_group,
   'match_groups' => \&_scan_contract_match_groups,
   'match_named' => \&_scan_contract_match_named,
+  'match_has' => \&_scan_contract_match_has,
   'match_map' => \&_scan_contract_match_map,
   'match_named_map' => \&_scan_contract_match_named_map,
   'match_len' => \&_scan_contract_match_len,
@@ -331,6 +333,15 @@ while ($code =~ /\bentry_named\s*\(\s*(?<name>\w+)\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_entry_has {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_has\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
 sub _scan_contract_entry_map {
  my ($code) = @_;
  my @events;
@@ -407,6 +418,15 @@ sub _scan_contract_match_named {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_named\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_has {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_has\s*\(\s*(?<name>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {name => $+{name}}};
 }
  return \@events

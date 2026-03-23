@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-23 - Phase 4: Add Named-Capture Presence Helpers
+
+Added explicit backend-neutral named-capture presence probes:
+- `entry_has(name)`
+- `match_has(name)`
+
+This keeps the immediate/local named-capture surface more balanced:
+- value reads still use `entry_named(name)` / `match_named(name)`,
+- whole-hash snapshots still use `entry_map()` / `match_map()`,
+- and simple presence questions no longer need to spell `has_key(entry_map(), ...)` or `has_key(match_map(), ...)` unless the broader hash surface is actually needed.
+
+Regression coverage now locks:
+- exact helper rewrite parity for `entry_has(name)` and `match_has(name)`,
+- and an end-to-end multi-rule parse showing immediate named-capture presence staying stable through `entry_has(...)` while current local named-capture presence keeps following the active local match through `match_has(...)`.
+
+The guides now teach these helpers as the direct presence companions to `entry_named(...)` / `match_named(...)`.
+
 ## 2026-03-23 - Phase 4: Add Short Named-Capture Map Aliases
 
 Refined the just-landed named-capture map helper surface so the shorter names are now the preferred teaching surface.
