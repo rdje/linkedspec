@@ -1108,6 +1108,18 @@ This is the explicit-presence pattern:
 - `clear_mark(name)` still owns deletion,
 - and later same-rule logic can branch on mark presence directly instead of encoding that question through a read helper.
 
+That branching use is part of the supported surface too. In other words, this is intentionally valid:
+
+```text
+if(mark_exists(body_start)); assign(scalar(state), "present"); else; assign(scalar(state), "missing"); endif
+```
+
+and so is:
+
+```text
+if(not(mark_exists(body_start))); return(array("?state:", "gone")); endif
+```
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 

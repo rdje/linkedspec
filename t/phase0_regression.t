@@ -10062,6 +10062,37 @@ SPEC
     my $exists_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_exists(body_start)');
     like($exists_rewrite, qr/exists \$__ls_mark_bucket->\{'body_start'\}/, 'mark_exists(name) lowering checks rule-local mark presence without reading or mutating the checkpoint');
 };
+subtest 'named_mark_mark_exists_is_supported_inside_flow_conditions' => sub {
+    plan tests => 3;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, seen) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(seen), "open") }
+ -> Top[1] { if(mark_exists(body_start)); assign(scalar(seen), "yes"); else; assign(scalar(seen), "no"); endif }
+ -> Top[2] { clear_mark(body_start) }
+ -> Top[3] { if(mark_exists(body_start)); return(array("?Top:", scalar(seen), "still")); else; return(array("?Top:", scalar(seen), "gone")); endif }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds when mark_exists(name) is used inside if(...) flow conditions');
+
+    my $input = 'foo(alpha,beta)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'yes', 'gone'],
+        'mark_exists(name) can drive backend-neutral flow branching before and after clear_mark(name) in the same rule'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_exists(name) flow-branch parse leaves runtime_ctx last_error clear on success');
+};
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;
 

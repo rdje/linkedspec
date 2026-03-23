@@ -365,6 +365,12 @@ Top::AND
 
 Use it when the rule should expose whether a named checkpoint is present without reading or mutating the captured span itself.
 
+It is also supported inside backend-neutral flow conditions, for example:
+
+```text
+if(mark_exists(body_start)); assign(scalar(state), "present"); else; assign(scalar(state), "missing"); endif
+```
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.
