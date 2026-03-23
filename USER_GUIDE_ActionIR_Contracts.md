@@ -735,18 +735,19 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants one named capture from the immediate entry match that led into the current rule instead of the named captures of the currently active local match.
 
-### `entry_named_map()`
+### `entry_map()`
 Return the whole named-capture hash from the current immediate match directly.
 
 Practical reading:
 - use it when the rule wants the whole immediate entry named-capture hash that led into the current rule,
 - prefer it over raw `%IMATCH_HASH` access in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
-- and treat it as the hash-snapshot companion to `entry_named(name)`.
+- treat it as the hash-snapshot companion to `entry_named(name)`,
+- and keep `entry_named_map()` only as a compatibility alias when older examples already use the longer name.
 
 Example:
 
 ```text
-entry_named_map()
+entry_map()
 ```
 
 ```text
@@ -757,14 +758,20 @@ Top::AND
 Child::AND
  I { declare(hash, entry_named_seen, body_named_seen) }
  /(?<first>\w)(?<rest>\w+)/
- -> Child[0] { assign(hash(entry_named_seen), entry_named_map()); assign(hash(body_named_seen), match_named_map()) }
+ -> Child[0] { assign(hash(entry_named_seen), entry_map()); assign(hash(body_named_seen), match_map()) }
  /(?<close>\))/
- -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(match_named_map(), "close"), join_values(",", sorted_keys(entry_named_map())), join_values(",", sorted_keys(match_named_map())))) }
+ -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(match_map(), "close"), join_values(",", sorted_keys(entry_map())), join_values(",", sorted_keys(match_map())))) }
 ```
 
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the whole immediate entry named-capture hash that led into the current rule instead of just one named key.
+
+Compatibility alias:
+
+```text
+entry_named_map()
+```
 
 ### `entry_len()`
 Return the width of the current immediate match directly.
@@ -955,18 +962,19 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants one named capture from the current local match itself instead of the immediate entry match that led into the current rule.
 
-### `match_named_map()`
+### `match_map()`
 Return the whole named-capture hash from the current local match directly.
 
 Practical reading:
 - use it when the rule wants the whole current local named-capture hash itself,
 - prefer it over raw `%LMATCH_HASH` access in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
-- and treat it as the hash-snapshot companion to `match_named(name)`.
+- treat it as the hash-snapshot companion to `match_named(name)`,
+- and keep `match_named_map()` only as a compatibility alias when older examples already use the longer name.
 
 Example:
 
 ```text
-match_named_map()
+match_map()
 ```
 
 ```text
@@ -977,14 +985,20 @@ Top::AND
 Child::AND
  I { declare(hash, entry_named_seen, body_named_seen) }
  /(?<first>\w)(?<rest>\w+)/
- -> Child[0] { assign(hash(entry_named_seen), entry_named_map()); assign(hash(body_named_seen), match_named_map()) }
+ -> Child[0] { assign(hash(entry_named_seen), entry_map()); assign(hash(body_named_seen), match_map()) }
  /(?<close>\))/
- -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(match_named_map(), "close"), join_values(",", sorted_keys(entry_named_map())), join_values(",", sorted_keys(match_named_map())))) }
+ -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(match_map(), "close"), join_values(",", sorted_keys(entry_map())), join_values(",", sorted_keys(match_map())))) }
 ```
 
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the whole current local named-capture hash itself instead of just one named key from that active local match.
+
+Compatibility alias:
+
+```text
+match_named_map()
+```
 
 ### `match_len()`
 Return the width of the current local match directly.

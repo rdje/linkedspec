@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 38;
+    plan tests => 40;
 
     my $label = 'Top';
 
@@ -9888,9 +9888,14 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'entry_named(name) helper rewrite preserves explicit current-immediate-match named-capture semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_map()'),
+        q{do { +{%IMATCH_HASH} }},
+        'entry_map() helper rewrite preserves preferred current-immediate-match named-capture-hash snapshot semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_named_map()'),
         q{do { +{%IMATCH_HASH} }},
-        'entry_named_map() helper rewrite preserves explicit current-immediate-match named-capture-hash snapshot semantics'
+        'entry_named_map() helper rewrite preserves compatibility current-immediate-match named-capture-hash snapshot semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_len()'),
@@ -9933,9 +9938,14 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'match_named(name) helper rewrite preserves explicit current-local-match named-capture semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_map()'),
+        q{do { +{%LMATCH_HASH} }},
+        'match_map() helper rewrite preserves preferred current-local-match named-capture-hash snapshot semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'match_named_map()'),
         q{do { +{%LMATCH_HASH} }},
-        'match_named_map() helper rewrite preserves explicit current-local-match named-capture-hash snapshot semantics'
+        'match_named_map() helper rewrite preserves compatibility current-local-match named-capture-hash snapshot semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_len()'),
@@ -10495,7 +10505,7 @@ SPEC
     my $named_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_named(prefix).'."\n".'match_named(rest)');
     like($named_rewrite, qr/\$IMATCH_HASH.*\$LMATCH_HASH/s, 'entry_named(name) and match_named(name) lowering read immediate and local named captures directly without consulting stored marks');
 };
-subtest 'entry_and_match_named_map_helpers_snapshot_immediate_and_local_named_capture_hashes' => sub {
+subtest 'entry_and_match_map_helpers_snapshot_immediate_and_local_named_capture_hashes' => sub {
     plan tests => 5;
 
     my $spec_content = <<'SPEC';
@@ -10506,27 +10516,27 @@ Top::AND
 Child::AND
  I { declare(hash, entry_named_seen, body_named_seen) }
  /(?<first>\w)(?<rest>\w+)/
- -> Child[0] { assign(hash(entry_named_seen), entry_named_map()); assign(hash(body_named_seen), match_named_map()) }
+ -> Child[0] { assign(hash(entry_named_seen), entry_map()); assign(hash(body_named_seen), match_map()) }
  /(?<close>\))/
- -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(hash(body_named_seen), "close"), scalar(match_named_map(), "close"), join_values(",", sorted_keys(entry_named_map())), join_values(",", sorted_keys(match_named_map())))) }
+ -> Child[1] { return(array("?Child:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(hash(body_named_seen), "close"), scalar(match_map(), "close"), join_values(",", sorted_keys(entry_map())), join_values(",", sorted_keys(match_map())))) }
 SPEC
 
     my %runtime_ctx;
     my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
-    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_named_map() and match_named_map() coverage');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_map() and match_map() coverage');
 
     my $input = 'foo(bar)';
     my $ast = $parser->(\$input);
     is_deeply(
         $ast,
         ['?Child:', 'foo', 'b', 'ar', undef, ')', 'prefix', 'close'],
-        'entry_named_map() snapshots the immediate named-capture hash while match_named_map() snapshots the active local named-capture hash'
+        'entry_map() snapshots the immediate named-capture hash while match_map() snapshots the active local named-capture hash'
     );
-    is($runtime_ctx{top_rule}, 'Top', 'entry/match named-map helper coverage honors explicit top_rule selection for the multi-rule inline parser');
-    ok(!defined($runtime_ctx{last_error}), 'entry/match named-map helper parse leaves runtime_ctx last_error clear on success');
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match map helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match map helper parse leaves runtime_ctx last_error clear on success');
 
-    my $named_map_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_named_map().'."\n".'match_named_map()');
-    like($named_map_rewrite, qr/\%IMATCH_HASH.*\%LMATCH_HASH/s, 'entry_named_map() and match_named_map() lowering snapshot immediate and local named-capture hashes directly without consulting stored marks');
+    my $named_map_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_map().'."\n".'match_map()');
+    like($named_map_rewrite, qr/\%IMATCH_HASH.*\%LMATCH_HASH/s, 'entry_map() and match_map() lowering snapshot immediate and local named-capture hashes directly without consulting stored marks');
 };
 subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
     plan tests => 5;

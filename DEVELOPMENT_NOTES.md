@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-23: Refined the new Phase 4 named-capture-hash helper surface so `entry_map()` / `match_map()` are now the preferred short spellings, while `entry_named_map()` / `match_named_map()` remain supported as compatibility aliases. The hash-lowering path recognizes both pairs equally.
 - 2026-03-23: Extended Phase 4 so full positional capture-group lists now have explicit backend-neutral read helpers too. `entry_groups()` and `match_groups()` now snapshot the current immediate/local capture-group lists without raw `array(IMATCH_LIST)` / `array(LMATCH_LIST)` spellings in normal user-facing `.spec` examples.
 - 2026-03-23: Extended Phase 4 so full named-capture hashes now have explicit backend-neutral read helpers too. `entry_named_map()` and `match_named_map()` now snapshot the current immediate/local named-capture hashes without raw `%IMATCH_HASH` / `%LMATCH_HASH` access, and the hash-lowering path now treats those helpers as real hash-valued expressions instead of rewrite-only curiosities.
 - 2026-03-23: Extended Phase 4 so named regex captures now have explicit backend-neutral read helpers too. `entry_named(name)` and `match_named(name)` now expose the current immediate/local named-capture hash surfaces without raw `%IMATCH_HASH` / `%LMATCH_HASH` access, and `specs/pplugin.spec` now uses `entry_named(subname)` as the first migrated live use-site of that surface.

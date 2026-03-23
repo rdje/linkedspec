@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-23 - Phase 4: Add Short Named-Capture Map Aliases
+
+Refined the just-landed named-capture map helper surface so the shorter names are now the preferred teaching surface.
+
+- Added:
+  - `entry_map()`
+  - `match_map()`
+  as first-class aliases for the earlier:
+  - `entry_named_map()`
+  - `match_named_map()`
+- Updated `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so those shorter aliases now lower and scan exactly like the longer compatibility forms.
+- Updated `perl/LinkedSpec/ActionIR/MethodLowering.pm` and `perl/LinkedSpec/ActionIR/DeclareMethod.pm` so the shorter aliases behave like real hash-valued expressions in `assign(hash(...), ...)`, `scalar(..., "key")`, and `sorted_keys(...)` flows too.
+- Added regression coverage in `t/phase0_regression.t` for:
+  - exact rewrite parity of `entry_map()` / `match_map()`,
+  - while keeping the earlier exact rewrite checks for `entry_named_map()` / `match_named_map()` as compatibility coverage,
+  - and switching the end-to-end whole-map example to the shorter preferred names.
+- Updated the user guides and roadmap notes so:
+  - `entry_map()` / `match_map()` are now taught as the preferred surface,
+  - while `entry_named_map()` / `match_named_map()` remain documented as supported compatibility aliases.
+
 ## 2026-03-23 - Phase 4: Add Explicit Named-Capture Map Helpers
 
 Extended the Phase 4 current-match helper surface so whole named-capture hashes now have the same explicit helper-style access as the earlier single-key readers.
