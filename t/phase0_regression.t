@@ -6259,14 +6259,14 @@ SPEC
     my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($move_entry);
     is_deeply(
         $rule_ir->{code_blocks}{LECODE},
-        ['if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; }'],
+        ['if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; _trace_runtime_mark_event(operation => \'@mark\', rule_label => \'MoveTop\', mark_name => \'body_start\', string_ref => $STRING, mark_pos => $$info{marks}{\'MoveTop\'}{\'body_start\'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); }'],
         'MARK_POS compiles into the expected rule-local, slot-local named-mark LECODE cursor shift'
     );
 
     my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
     is(
         $emit_ctx->{lecode},
-        'if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; }',
+        'if ($$minfo{index} == 1) { $$info{marks}{\'MoveTop\'} = {} unless ref($$info{marks}{\'MoveTop\'}) eq "HASH"; $$info{marks}{\'MoveTop\'}{\'body_start\'} = pos $$STRING; _trace_runtime_mark_event(operation => \'@mark\', rule_label => \'MoveTop\', mark_name => \'body_start\', string_ref => $STRING, mark_pos => $$info{marks}{\'MoveTop\'}{\'body_start\'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); }',
         'emit context preserves rule-local, slot-local named-mark split-boundary cursor shift'
     );
 
@@ -9809,7 +9809,7 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
-        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; $__ls_capture } else { undef } }},
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }},
         'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
     );
     is(
@@ -9819,12 +9819,12 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
-        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = pos $$STRING }},
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = pos $$STRING; _trace_runtime_mark_event(operation => 'mark_here', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'body_start'} }},
         'mark_here(name) helper rewrite preserves explicit rule-local named-mark update semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_match_start(end_mark)'),
-        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'end_mark'} = $LSPOS - length $LMATCH }},
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'end_mark'} = $LSPOS - length $LMATCH; _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'end_mark', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'end_mark'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'end_mark'} }},
         'mark_match_start(name) helper rewrite preserves explicit current-match left-edge semantics'
     );
     is(
@@ -35375,6 +35375,61 @@ subtest 'trace_output_includes_parser_invocation_scope_and_rule_handler_scope' =
     like($stdout, qr/DECISION invoke_top_rule:[^\n]+ => TAKEN/, 'parser invocation trace includes top-rule invocation decisions');
     like($stdout, qr/ENTER LinkedSpec::rule_handler:/, 'parser invocation trace includes nested rule-handler scopes');
     like($stdout, qr/EXIT LinkedSpec::parser_invoke:/, 'parser invocation trace includes a parser invocation exit scope');
+};
+
+subtest 'trace_output_shows_mark_helper_positions_with_input_pointer_excerpt' => sub {
+    plan tests => 13;
+
+    my $spec = <<'SPEC';
+Top::AND
+ I { declare(scalar, first) }
+ /foo\(/
+ -> Top[0] { mark_here(body_start) }
+ /\w+/
+ @mark(first_value_end)
+ /,/
+ -> Top[2] { assign(scalar(first), capture_take(body_start)) }
+ /\w+/
+ /\)/
+ -> Top[4] { mark_match_start(end_mark); mark_here(after_end); return(array("?Top:", scalar(first), capture_between(body_start, end_mark), capture_between(body_start, after_end))) }
+SPEC
+
+    my ($parser, $build_err, $build_stdout, $build_stderr) = (undef, '', '', '');
+    my $ok_build = eval {
+        local *STDOUT;
+        local *STDERR;
+        open(STDOUT, '>', \$build_stdout) or die "Unable to capture STDOUT: $!";
+        open(STDERR, '>', \$build_stderr) or die "Unable to capture STDERR: $!";
+        $parser = LinkedSpec::Get(
+            \$spec,
+            trace_level => 'high',
+            trace_log_mode => 'stdout',
+            trace_topic_spacing => 0,
+        );
+        1;
+    };
+    $build_err = $@ // '' unless $ok_build;
+
+    ok($ok_build, 'inline parser build with high tracing returns without die for mark trace coverage')
+        or diag(normalize_error($build_err));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'inline parser build with high tracing returns parser coderef for mark trace coverage');
+
+    my $input = 'foo(alpha,beta)';
+    my ($ok_run, $ast, $err_run, $stdout, $stderr, $inner_eval_err) = run_parser_with_captured_io($parser, \$input);
+
+    ok($ok_run, 'parser invocation with mark tracing returns without outer die')
+        or diag(normalize_error($err_run));
+    ok(!length($inner_eval_err), 'parser invocation with mark tracing leaves no inner eval error')
+        or diag(normalize_error($inner_eval_err));
+    is_deeply($ast, ['?Top:', 'alpha', 'beta', 'beta)'], 'mark-trace coverage parser still returns the expected AST');
+    is($stderr, '', 'parser invocation with mark tracing leaves stderr empty');
+    like($stdout, qr/MARK \@mark\(first_value_end\) => pos=\d+/, 'trace output reports @mark(name) writes with an explicit position');
+    like($stdout, qr/MARK capture_take\(body_start\) => pos=\d+/, 'trace output reports capture_take(name) mark advancement with an explicit position');
+    like($stdout, qr/MARK mark_match_start\(end_mark\) => pos=\d+/, 'trace output reports mark_match_start(name) writes with an explicit position');
+    like($stdout, qr/MARK mark_here\(after_end\) => pos=\d+/, 'trace output reports mark_here(name) writes with an explicit position');
+    like($stdout, qr/input: foo\(alpha,beta\)/, 'trace output includes a visible input excerpt for mark helper positions');
+    like($stdout, qr/mark : [^\n]*\^ pos=\d+/, 'trace output includes a caret pointer line below the input excerpt');
+    like($stdout, qr/rule=Top[^\n]*\n[^\n]*match_left_edge=\d+[^\n]*\n[^\n]*parser_pos=\d+/s, 'trace output includes rule plus left-edge/parser-position metadata for mark helper events');
 };
 
 subtest 'trace_log_file_route_redirects_stdout_to_trace_log' => sub {

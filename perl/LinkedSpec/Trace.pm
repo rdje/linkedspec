@@ -117,6 +117,58 @@ sub _trace_timestamp {
  return sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year + 1900, $mon + 1, $mday, $hour, $min, $sec)
 }
 
+sub _trace_visible_char {
+ my ($ch) = @_;
+ return ('\\n', 2) if defined($ch) && $ch eq "\n";
+ return ('\\r', 2) if defined($ch) && $ch eq "\r";
+ return ('\\t', 2) if defined($ch) && $ch eq "\t";
+ return ('\\0', 2) if defined($ch) && $ch eq "\0";
+ my $ord = defined($ch) ? ord($ch) : 0;
+ if (!defined($ch) || $ord < 32 || $ord == 127) {
+  my $visible = sprintf('\\x{%02X}', $ord);
+  return ($visible, length($visible))
+ }
+ return ($ch, 1)
+}
+
+sub _trace_mark_excerpt {
+ my (%args) = @_;
+ my $string_ref = $args{string_ref};
+ return undef unless ref($string_ref) eq 'SCALAR';
+
+ my $string = defined($$string_ref) ? $$string_ref : '';
+ my $len = length($string);
+ my $mark_pos = defined($args{mark_pos}) ? int($args{mark_pos}) : 0;
+ $mark_pos = 0 if $mark_pos < 0;
+ $mark_pos = $len if $mark_pos > $len;
+
+ my $radius = defined($args{radius}) && $args{radius} =~ /^\d+$/o ? $args{radius} : 24;
+ my $start = $mark_pos - $radius;
+ $start = 0 if $start < 0;
+ my $end = $mark_pos + $radius;
+ $end = $len if $end > $len;
+
+ my $raw_excerpt = substr($string, $start, $end - $start);
+ my $excerpt = '';
+ my $caret_col = 0;
+
+ if ($start > 0) {
+  $excerpt .= '...';
+  $caret_col += 3;
+ }
+
+ for (my $i = 0; $i < length($raw_excerpt); ++$i) {
+  my $ch = substr($raw_excerpt, $i, 1);
+  my ($visible, $visible_width) = _trace_visible_char($ch);
+  $caret_col += $visible_width if ($start + $i) < $mark_pos;
+  $excerpt .= $visible;
+ }
+
+ $excerpt .= '...' if $end < $len;
+
+ return "input: $excerpt\nmark : ".(' ' x $caret_col)."^ pos=$mark_pos"
+}
+
 sub _trace_location {
  my ($caller_depth) = @_;
  my $depth = defined($caller_depth) ? $caller_depth : 1;
@@ -355,6 +407,32 @@ sub trace_decision {
  my $status = $taken ? 'TAKEN' : 'SKIPPED';
  log_output($level, 'DECISION '.($decision_name // '<decision>')." => $status", $reason, { caller_depth => 2 });
  return $taken ? 1 : 0
+}
+
+sub trace_mark_event {
+ my (%args) = @_;
+ _trace_initialize();
+
+ my $level = exists($args{level}) ? (_trace_parse_level($args{level}) // DUMP_HIGH) : DUMP_HIGH;
+ return undef unless should_dump($level);
+
+ my $operation = defined($args{operation}) && length($args{operation}) ? $args{operation} : 'mark';
+ my $mark_name = defined($args{mark_name}) && length($args{mark_name}) ? $args{mark_name} : '<mark>';
+ my $mark_pos = defined($args{mark_pos}) ? int($args{mark_pos}) : undef;
+
+ my $message = 'MARK '.$operation.'('.$mark_name.')';
+ $message .= " => pos=$mark_pos" if defined $mark_pos;
+
+ my @context;
+ push @context, 'rule=' . $args{rule_label} if defined($args{rule_label}) && length($args{rule_label});
+ push @context, 'match_left_edge=' . $args{left_edge} if defined $args{left_edge};
+ push @context, 'parser_pos=' . $args{parser_pos} if defined $args{parser_pos};
+ my $excerpt = _trace_mark_excerpt(%args);
+ push @context, $excerpt if defined $excerpt && length $excerpt;
+
+ my $caller_depth = defined($args{caller_depth}) ? $args{caller_depth} : 2;
+ log_output($level, $message, @context ? join("\n", @context) : undef, { caller_depth => $caller_depth });
+ return $mark_pos
 }
 
 sub log_output {

@@ -108,6 +108,19 @@ sub _require_lowering_deps {
  }
 }
 
+sub _build_mark_trace_call {
+ my (%args) = @_;
+ return '_trace_runtime_mark_event('
+  ."operation => '$args{operation}', "
+  ."rule_label => '$args{label}', "
+  ."mark_name => '$args{mark_name}', "
+  ."string_ref => \$STRING, "
+  ."mark_pos => $args{mark_pos_expr}, "
+  ."left_edge => \$LSPOS - length \$LMATCH, "
+  ."parser_pos => pos \$\$STRING"
+  .')'
+}
+
 #------------------------------------------------------------------------------
 # Function: _build_call_and_dispatch_contracts
 # Purpose : Contracts that dispatch/call parser handlers and push results.
@@ -400,12 +413,12 @@ sub _build_capture_and_backtrack_contracts {
    ir_node            => 'CAPTURE_TAKE_FROM_MARK',
    diag_name          => 'capture_take',
    unresolved_pattern => qr/\bcapture_take\s*\(\s*\w+\s*\)/o,
-   lower              => sub {
+  lower              => sub {
     my ($code) = @_;
     $code =~ s{
      \bcapture_take\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{\''.$+{mark}.'\'} = pos $$STRING; $__ls_capture } else { undef } }'
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{\''.$+{mark}.'\'} = pos $$STRING; '. _build_mark_trace_call(operation => 'capture_take', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -430,12 +443,12 @@ sub _build_capture_and_backtrack_contracts {
    ir_node            => 'MARK_HERE',
    diag_name          => 'mark_here',
    unresolved_pattern => qr/\bmark_here\s*\(\s*\w+\s*\)/o,
-   lower              => sub {
+  lower              => sub {
     my ($code) = @_;
     $code =~ s{
      \bmark_here\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = pos $$STRING }'
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = pos $$STRING; '. _build_mark_trace_call(operation => 'mark_here', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
     }gex;
     return $code
    },
@@ -445,12 +458,12 @@ sub _build_capture_and_backtrack_contracts {
    ir_node            => 'MARK_MATCH_START',
    diag_name          => 'mark_match_start',
    unresolved_pattern => qr/\bmark_match_start\s*\(\s*\w+\s*\)/o,
-   lower              => sub {
+  lower              => sub {
     my ($code) = @_;
     $code =~ s{
      \bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS - length $LMATCH }'
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS - length $LMATCH; '. _build_mark_trace_call(operation => 'mark_match_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
     }gex;
     return $code
    },

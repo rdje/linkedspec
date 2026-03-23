@@ -168,6 +168,15 @@ sub _set_runtime_ctx_top_rule {
  return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
 }
 
+sub _trace_runtime_mark_event {
+ my (%args) = @_;
+ return _call_preserving_err(sub {
+  return undef unless exists $INC{'LinkedSpec/Trace.pm'};
+  return undef unless LinkedSpec::Trace::should_dump(DUMP_HIGH);
+  return LinkedSpec::Trace::trace_mark_event(%args, caller_depth => 3);
+ })
+}
+
 sub _generated_handler_source_label {
  my (%args) = @_;
  my $rule_meta = $args{rule_meta};

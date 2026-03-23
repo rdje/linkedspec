@@ -876,6 +876,11 @@ The most important semantic detail is this:
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
+In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
+- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing write inside `capture_take(name)` emit a short visible excerpt of the input string,
+- and the trace prints a caret on the next line under the stored checkpoint position,
+- so you can see immediately whether the rule stored a post-match parser position or the left edge of the current match.
+
 That means the usual authoring shape is:
 - match an opening anchor,
 - set `@mark(name)`,

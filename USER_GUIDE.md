@@ -1210,6 +1210,14 @@ When you invoke a returned parser coderef, trace output now also includes an exp
 
 That gives runtime traces one clean bridge between compile-time tracing and the inner rule-handler scopes, which makes top-level parser invocation problems much easier to follow.
 
+At high/debug trace levels, named-mark writes now also expose their exact stored checkpoint position visually:
+- `@mark(name)`,
+- `mark_here(name)`,
+- `mark_match_start(name)`,
+- and the advancing write inside `capture_take(name)`
+
+all emit a short input excerpt plus a caret on the next line under the stored position, so staged-extraction rules are easier to inspect when you need to confirm whether a checkpoint is post-match or current-match-left-edge.
+
 ## Strong Recommendations for New Specs
 If backend neutrality matters, these are the defaults you should follow.
 

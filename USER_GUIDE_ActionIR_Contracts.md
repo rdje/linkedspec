@@ -233,6 +233,8 @@ Use it when one anonymous split cursor is not enough and you want a later action
 ### `capture_take(name)`
 Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.
 
+In high/debug trace mode, that advancing write now also emits a short input excerpt plus a caret under the new stored position.
+
 Practical reading:
 - the earlier `@mark(name)` establishes the left boundary,
 - the current match still establishes the right boundary,
@@ -306,6 +308,8 @@ Use it when the rule wants an explicit two-mark span instead of the usual “nam
 ### `mark_here(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
 
+In high/debug trace mode, this explicit write now also emits a short input excerpt plus a caret under the stored checkpoint position.
+
 Practical reading:
 - use `@mark(name)` when a rule paragraph member should establish the mark,
 - use `mark_here(name)` when a later action block in that same rule should move that mark explicitly,
@@ -337,6 +341,8 @@ Use it when the rule should decide explicitly when the named checkpoint moves, i
 
 ### `mark_match_start(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the left edge of the current match.
+
+In high/debug trace mode, this explicit left-edge write now also emits a short input excerpt plus a caret under the stored checkpoint position.
 
 Practical reading:
 - use it when the rule should remember where the current match begins rather than where it ends,

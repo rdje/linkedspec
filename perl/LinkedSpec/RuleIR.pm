@@ -172,6 +172,19 @@ sub _build_rule_execution_meta {
  return $meta
 }
 
+sub _build_mark_trace_stmt {
+ my (%args) = @_;
+ return '_trace_runtime_mark_event('
+  ."operation => '$args{operation}', "
+  ."rule_label => '$args{rule_label}', "
+  ."mark_name => '$args{mark_name}', "
+  ."string_ref => \$STRING, "
+  ."mark_pos => $args{mark_pos_expr}, "
+  ."left_edge => \$LSPOS - length \$LMATCH, "
+  ."parser_pos => pos \$\$STRING"
+  .')'
+}
+
 sub _collect_rule_ir {
  my ($einfo) = @_;
 
@@ -234,7 +247,13 @@ sub _collect_rule_ir {
    push @{$rule_ir->{code_blocks}{LECODE}},
     'if ($$minfo{index} == '.$mark_reidx.') { '.
     '$$info{marks}{\''.$rule_label.'\'} = {} unless ref($$info{marks}{\''.$rule_label.'\'}) eq "HASH"; '.
-    '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'} = pos $$STRING; }';
+    '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'} = pos $$STRING; '.
+    _build_mark_trace_stmt(
+     operation => '@mark',
+     rule_label => $rule_label,
+     mark_name => $mark_name,
+     mark_pos_expr => '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'}',
+    ).'; }';
   }
  }
 
