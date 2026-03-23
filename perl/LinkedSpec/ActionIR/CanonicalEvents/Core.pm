@@ -41,6 +41,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  mark_match_start                 => 'MARK_MATCH_START',
  clear_mark                       => 'CLEAR_MARK',
  mark_exists                      => 'MARK_EXISTS',
+ mark_pos                         => 'MARK_POS_READ',
  if_flow                          => 'IF',
  elseif_flow                      => 'ELIF',
  else_flow                        => 'ELSE',

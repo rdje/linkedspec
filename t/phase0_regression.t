@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 18;
+    plan tests => 19;
 
     my $label = 'Top';
 
@@ -9841,6 +9841,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_exists(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? 1 : 0 }},
         'mark_exists(name) helper rewrite preserves explicit rule-local named-mark presence semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_pos(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? $__ls_mark_bucket->{'body_start'} : undef }},
+        'mark_pos(name) helper rewrite preserves explicit rule-local named-mark position-read semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -10039,6 +10044,37 @@ SPEC
 
     my $take_between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_between(body_start, first_end)');
     like($take_between_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_between(start_mark,end_mark) lowering advances the start mark to the stored end-mark position after returning the captured span');
+};
+subtest 'named_mark_mark_pos_reads_rule_local_checkpoint_position' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, begin_pos, end_pos) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_pos), mark_pos(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_pos), mark_pos(end_mark)); return(array("?Top:", scalar(begin_pos), scalar(end_pos), capture_between(body_start, end_mark), mark_pos(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_pos(name) position-read coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 4, 7, 'bar', undef],
+        'mark_pos(name) returns the stored rule-local checkpoint position or undef when the mark is absent'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_pos(name) parse leaves runtime_ctx last_error clear on success');
+
+    my $pos_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_pos(body_start)');
+    like($pos_rewrite, qr/\? \$__ls_mark_bucket->\{'body_start'\} : undef/, 'mark_pos(name) lowering reads the stored rule-local mark position without mutating it');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

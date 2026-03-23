@@ -471,6 +471,36 @@ It is also supported inside backend-neutral flow conditions, for example:
 if(mark_exists(body_start)); assign(scalar(state), "present"); else; assign(scalar(state), "missing"); endif
 ```
 
+### `mark_pos(name)`
+Return the stored numeric position of a rule-local named mark.
+
+Practical reading:
+- use it when the rule wants the checkpoint itself as data,
+- combine it with `mark_match_start(name)` or `mark_here(name)` when the rule wants to report or compare stored boundaries explicitly,
+- and treat it as the position-read companion to `mark_exists(name)`.
+
+If the named mark is absent, the helper returns `undef`.
+
+Example:
+
+```text
+mark_pos(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, begin_pos, end_pos) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_pos), mark_pos(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_pos), mark_pos(end_mark)); return(array("?Top:", scalar(begin_pos), scalar(end_pos), capture_between(body_start, end_mark), mark_pos(missing_mark))) }
+```
+
+Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.

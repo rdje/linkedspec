@@ -34,6 +34,7 @@ sub try_scan_contract_ir_events {
   'mark_match_start' => \&_scan_contract_mark_match_start,
   'clear_mark' => \&_scan_contract_clear_mark,
   'mark_exists' => \&_scan_contract_mark_exists,
+  'mark_pos' => \&_scan_contract_mark_pos,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
   'backtrack_macro' => \&_scan_contract_backtrack_macro,
   'ibacktrack' => \&_scan_contract_ibacktrack,
@@ -232,6 +233,15 @@ sub _scan_contract_mark_exists {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmark_exists\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_pos\s*\(\s*(?<mark>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {mark => $+{mark}}};
 }
  return \@events

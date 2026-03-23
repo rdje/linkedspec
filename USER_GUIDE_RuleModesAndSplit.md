@@ -875,6 +875,7 @@ The most important semantic detail is this:
 - `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
+- `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
@@ -893,7 +894,8 @@ That means the usual authoring shape is:
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
 - or call `mark_match_start(name)` if a later action block should remember where the current match begins instead of where it ends,
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
-- or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present.
+- or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present,
+- or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself.
 
 ## Mark Timing: Later Slot, Not Same Slot
 There is one timing rule that matters a lot in practice:
@@ -1242,6 +1244,40 @@ and so is:
 if(not(mark_exists(body_start))); return(array("?state:", "gone")); endif
 ```
 
+## Worked Example: Explicit Position Read
+Sometimes the rule wants the checkpoint itself as data rather than only as a later span boundary.
+
+That is what `mark_pos(name)` is for.
+
+```text
+explicit_mark_position::AND
+ I { declare(scalar, stage, begin_pos, end_pos) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> explicit_mark_position[0] { assign(scalar(stage), "open") }
+ -> explicit_mark_position[1] { assign(scalar(stage), "body"); assign(scalar(begin_pos), mark_pos(body_start)) }
+ -> explicit_mark_position[2] { mark_match_start(end_mark); assign(scalar(end_pos), mark_pos(end_mark)); return(array("?explicit_mark_position:", scalar(begin_pos), scalar(end_pos), capture_between(body_start, end_mark), mark_pos(missing_mark))) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- `mark_pos(body_start)` returns the stored left-boundary position of the inner span,
+- `mark_match_start(end_mark)` stores the left edge of the closing `)` match,
+- `mark_pos(end_mark)` returns that stored numeric position,
+- `mark_pos(missing_mark)` returns `undef` because no such named checkpoint is currently present.
+
+This is the explicit-position pattern:
+- `mark_exists(name)` answers “is this mark present?”,
+- `mark_pos(name)` answers “what numeric position is stored there right now?”,
+- and neither helper mutates the mark bucket.
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 
@@ -1360,6 +1396,11 @@ Use `mark_exists(name)` when:
 - later logic should distinguish “mark still alive” from “mark already cleared,”
 - or the rule wants explicit presence metadata without reading or mutating the capture span itself.
 
+Use `mark_pos(name)` when:
+- the rule should expose the numeric stored checkpoint position directly,
+- later logic should compare or report mark positions rather than only captured spans,
+- or the rule needs explicit position metadata without mutating the checkpoint.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is the place that shows the Perl lowering explicitly.
@@ -1416,6 +1457,7 @@ The current supported contract is:
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
+- `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,
 - and marks are a later-slot surface, so same-slot actions should not expect a freshly written mark yet,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
