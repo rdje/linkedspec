@@ -46,6 +46,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  mark_exists                      => 'MARK_EXISTS',
  mark_pos                         => 'MARK_POS_READ',
  entry_text                       => 'IMATCH_TEXT_READ',
+ entry_len                        => 'IMATCH_LEN_READ',
  entry_start_pos                  => 'IMATCH_START_POS_READ',
  entry_end_pos                    => 'IMATCH_END_POS_READ',
  match_text                       => 'MATCH_TEXT_READ',

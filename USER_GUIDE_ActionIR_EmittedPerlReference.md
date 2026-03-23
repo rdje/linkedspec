@@ -363,6 +363,7 @@ Important nuance:
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
+- `entry_len()` reads the current immediate match width directly as `do { length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_start_pos()` reads the current immediate match left edge directly as `do { $IPOS - length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_end_pos()` reads the current immediate match right edge directly as `do { $IPOS }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.

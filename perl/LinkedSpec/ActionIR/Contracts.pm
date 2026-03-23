@@ -585,6 +585,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_len',
+   ir_node            => 'IMATCH_LEN_READ',
+   diag_name          => 'entry_len',
+   unresolved_pattern => qr/\bentry_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_len\s*\(\s*\)/do { length \$IMATCH }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_start_pos',
    ir_node            => 'IMATCH_START_POS_READ',
    diag_name          => 'entry_start_pos',

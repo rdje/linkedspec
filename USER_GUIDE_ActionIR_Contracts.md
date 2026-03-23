@@ -616,7 +616,7 @@ Return the current immediate match text directly.
 Practical reading:
 - use it when the rule wants the entry/immediate match that led into the current rule,
 - prefer it over raw `$IMATCH` in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
-- and treat it as the direct-immediate-text companion to `entry_start_pos()` / `entry_end_pos()`.
+- and treat it as the direct-immediate-text companion to `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
 
 Example:
 
@@ -642,13 +642,45 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants the immediate entry match that led into the current rule instead of the currently active local match or a previously stored checkpoint.
 
+### `entry_len()`
+Return the width of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the entry/immediate match width as data,
+- prefer it over raw `length($IMATCH)` in normal user-facing `.spec` examples,
+- and treat it as the direct-width companion to `entry_text()` / `entry_start_pos()` / `entry_end_pos()`.
+
+Example:
+
+```text
+entry_len()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_len_value, body_len_value) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_len_value), entry_len()); assign(scalar(body_len_value), length(match_text())) }
+ -> Child[1] { return(array("?Child:", scalar(entry_len_value), scalar(body_len_value), entry_len(), length(match_text()))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the width of the immediate entry match that led into the current rule instead of the width of the currently active local match.
+
 ### `entry_start_pos()`
 Return the left edge of the current immediate match directly.
 
 Practical reading:
 - use it when the rule wants the entry/immediate match start as data,
 - prefer it over raw `$IPOS - length($IMATCH)` in normal user-facing `.spec` examples,
-- and treat it as the direct-boundary companion to `entry_text()`.
+- and treat it as the direct-boundary companion to `entry_text()` / `entry_len()`.
 
 Example:
 
@@ -680,7 +712,7 @@ Return the right edge of the current immediate match directly.
 Practical reading:
 - use it when the rule wants the entry/immediate match end as data,
 - prefer it over raw `$IPOS` in normal user-facing `.spec` examples,
-- and treat it as the direct-boundary companion to `entry_text()` / `entry_start_pos()`.
+- and treat it as the direct-boundary companion to `entry_text()` / `entry_len()` / `entry_start_pos()`.
 
 If the immediate entry match is `foo(` inside `foo(bar)`, then `entry_end_pos()` returns `4`.
 

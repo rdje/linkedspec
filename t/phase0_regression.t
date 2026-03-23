@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 28;
+    plan tests => 29;
 
     my $label = 'Top';
 
@@ -9871,6 +9871,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
         q{do { $IMATCH }},
         'entry_text() helper rewrite preserves explicit current-immediate-match text semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_len()'),
+        q{do { length $IMATCH }},
+        'entry_len() helper rewrite preserves explicit current-immediate-match width semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_start_pos()'),
@@ -10315,6 +10320,40 @@ SPEC
 
     my $text_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_text()');
     like($text_rewrite, qr/\$IMATCH/, 'entry_text() lowering reads the current immediate match text directly without consulting stored marks');
+};
+subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_len_value, body_len_value) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_len_value), entry_len()); assign(scalar(body_len_value), length(match_text())) }
+ -> Child[1] { return(array("?Child:", scalar(entry_len_value), scalar(body_len_value), entry_len(), length(match_text()))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_len() current-immediate-match width coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 4, 3, 4, 1],
+        'entry_len() keeps the rule-entry immediate match width available while local match width continues to follow the active local child match'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry length helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry length helper parse leaves runtime_ctx last_error clear on success');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_len()');
+    like($len_rewrite, qr/length \$IMATCH/, 'entry_len() lowering reads the current immediate match width directly without consulting stored marks');
 };
 subtest 'entry_position_helpers_read_rule_entry_match_boundaries' => sub {
     plan tests => 5;
