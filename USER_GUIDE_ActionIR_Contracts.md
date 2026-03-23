@@ -269,6 +269,40 @@ Top::AND
 
 Use it when the same rule should keep consuming successive named spans instead of reading repeatedly from one stable checkpoint.
 
+### `capture_between(start_mark, end_mark)`
+Return the substring between two explicit rule-local named marks.
+
+Practical reading:
+- use it when the left edge and right edge should both come from named checkpoints instead of from the current match,
+- combine `@mark(name)` or `mark_here(name)` to establish those checkpoints deliberately,
+- and treat it as the two-mark companion to `capture_from(name)`.
+
+If either mark is absent, or if the end mark is before the start mark, the helper returns `undef`.
+
+Example:
+
+```text
+capture_between(body_start, first_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value"); mark_here(first_end) }
+ -> Top[2] { assign(scalar(stage), "separator"); assign(scalar(first_segment), capture_between(body_start, first_end)) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first_segment), capture_from(body_start))) }
+```
+
+Use it when the rule wants an explicit two-mark span instead of the usual “named mark to current match edge” capture shape.
+
 ### `mark_here(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
 

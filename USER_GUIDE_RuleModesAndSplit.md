@@ -869,6 +869,7 @@ The most important semantic detail is this:
 - it does not include the current local match itself,
 - `capture_from(name)` is a pure read and does not move the mark,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
+- `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
@@ -880,6 +881,7 @@ That means the usual authoring shape is:
 - keep matching forward,
 - then on a later closing delimiter or separator in that same rule call `capture_from(name)` if the mark should stay stable,
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
+- or call `capture_between(start_mark, end_mark)` if both edges should come from explicit named checkpoints,
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present.
@@ -996,6 +998,44 @@ the practical reading is:
 This is the named split-cursor pattern:
 - `capture_from(name)` is the stable read,
 - `capture_take(name)` is the advancing read.
+
+## Worked Example: Explicit Two-Mark Span
+Sometimes the right edge should not come from the current match at all. Instead, the rule may want to remember a second explicit checkpoint and later capture the span between those two named positions.
+
+That is what `capture_between(start_mark, end_mark)` is for.
+
+```text
+explicit_two_mark_span::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> explicit_two_mark_span[0] { assign(scalar(stage), "open") }
+ -> explicit_two_mark_span[1] { assign(scalar(stage), "first_value"); mark_here(first_end) }
+ -> explicit_two_mark_span[2] { assign(scalar(stage), "separator"); assign(scalar(first_segment), capture_between(body_start, first_end)) }
+ -> explicit_two_mark_span[3] { assign(scalar(stage), "second_value") }
+ -> explicit_two_mark_span[4] { return(array("?explicit_two_mark_span:", scalar(first_segment), capture_from(body_start))) }
+```
+
+On input:
+
+```text
+foo(alpha,beta)
+```
+
+the practical reading is:
+- `@mark(body_start)` stores the left edge just after `(`,
+- `mark_here(first_end)` stores a second checkpoint just after `alpha`,
+- `capture_between(body_start, first_end)` returns `alpha`,
+- and the final `capture_from(body_start)` still returns `alpha,beta` because that helper still uses the current match edge.
+
+This is the explicit-two-mark pattern:
+- `capture_from(name)` uses one named checkpoint plus the current match edge,
+- `capture_between(start_mark, end_mark)` uses two named checkpoints,
+- and `mark_here(name)` is the usual way to establish the second explicit right boundary.
 
 ## Worked Example: Stable Read, Explicit Advance
 Sometimes the rule wants to read from a stable named checkpoint first and only then decide to move it.
@@ -1213,6 +1253,11 @@ Use `capture_take(name)` when:
 - the rule behaves like a named split cursor,
 - or a repeated separator/delimiter pattern should keep consuming successive fields.
 
+Use `capture_between(start_mark, end_mark)` when:
+- both span boundaries should come from named checkpoints,
+- the rule wants to compare an explicit two-mark span with a current-match-edge span,
+- or the right edge should be remembered earlier than the final read site.
+
 Use `mark_here(name)` when:
 - the rule should decide explicitly when a named checkpoint moves,
 - you want stable read first and explicit advance second,
@@ -1278,6 +1323,7 @@ The current supported contract is:
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
+- `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”

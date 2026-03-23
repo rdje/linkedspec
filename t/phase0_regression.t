@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $label = 'Top';
 
@@ -9811,6 +9811,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; $__ls_capture } else { undef } }},
         'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_between(body_start, first_end)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? substr($$STRING, $__ls_start, $__ls_end - $__ls_start) : undef }},
+        'capture_between(start_mark,end_mark) helper rewrite preserves explicit two-mark span semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
@@ -9956,6 +9961,41 @@ SPEC
 
     my $take_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take(body_start)');
     like($take_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = pos \$\$STRING;/, 'capture_take(name) lowering updates the rule-local mark to the current parser position after returning the captured span');
+};
+subtest 'named_mark_capture_between_reads_span_between_two_rule_local_checkpoints' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first_segment) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value"); mark_here(first_end) }
+ -> Top[2] { assign(scalar(stage), "separator"); assign(scalar(first_segment), capture_between(body_start, first_end)) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first_segment), capture_from(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for two-mark capture_between coverage');
+
+    my $input = 'foo(alpha,beta)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', 'alpha,beta'],
+        'capture_between(start_mark,end_mark) returns the explicit two-mark span while capture_from(name) still uses the current match edge'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'two-mark capture_between parse leaves runtime_ctx last_error clear on success');
+
+    my $between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_between(body_start, first_end)');
+    like($between_rewrite, qr/\$__ls_end >= \$__ls_start/, 'capture_between(start_mark,end_mark) lowering guards against reversed or missing mark positions');
 };
 subtest 'named_mark_mark_here_updates_named_checkpoint_without_reading' => sub {
     plan tests => 4;
