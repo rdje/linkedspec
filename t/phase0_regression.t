@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my $label = 'Top';
 
@@ -9821,6 +9821,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'clear_mark(body_start)'),
         q{do { if (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') { delete $$info{marks}{'Top'}{'body_start'}; } undef }},
         'clear_mark(name) helper rewrite preserves explicit rule-local named-mark clear semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_exists(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? 1 : 0 }},
+        'mark_exists(name) helper rewrite preserves explicit rule-local named-mark presence semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -10021,6 +10026,41 @@ SPEC
 
     my $clear_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'clear_mark(body_start)');
     like($clear_rewrite, qr/delete \$\$info\{marks\}\{'Top'\}\{'body_start'\};/, 'clear_mark(name) lowering deletes the rule-local mark entry explicitly');
+};
+subtest 'named_mark_mark_exists_reports_rule_local_checkpoint_presence' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, before_clear) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(before_clear), mark_exists(body_start)); clear_mark(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(before_clear), mark_exists(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit mark-exists coverage');
+
+    my $input = 'foo(alpha,beta)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 1, 0],
+        'mark_exists(name) reports rule-local mark presence before clear_mark(name) and absence after it'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'explicit mark-exists parse leaves runtime_ctx last_error clear on success');
+
+    my $exists_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_exists(body_start)');
+    like($exists_rewrite, qr/exists \$__ls_mark_bucket->\{'body_start'\}/, 'mark_exists(name) lowering checks rule-local mark presence without reading or mutating the checkpoint');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;

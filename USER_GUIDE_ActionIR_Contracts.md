@@ -333,6 +333,38 @@ Top::AND
 
 Use it when the rule should make a named checkpoint unavailable to later same-rule reads instead of merely moving it.
 
+### `mark_exists(name)`
+Check whether a rule-local named mark is currently present.
+
+Practical reading:
+- use it when a rule should branch on whether a checkpoint still exists,
+- combine it with `clear_mark(name)` when one action should both drop a checkpoint and later report that it is gone,
+- and treat it as the presence-check companion to `capture_from(name)`.
+
+Example:
+
+```text
+mark_exists(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, before_clear) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(before_clear), mark_exists(body_start)); clear_mark(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(before_clear), mark_exists(body_start))) }
+```
+
+Use it when the rule should expose whether a named checkpoint is present without reading or mutating the captured span itself.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.
