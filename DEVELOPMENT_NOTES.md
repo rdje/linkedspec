@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-24: Continued the same “spend the new helper surface on real specs” line after `ebnf.spec`. The grouped entry-reader band in `specs/lib_reader.spec` now uses `entry_group(0)` / `entry_group(1)` instead of `scalar(IMATCH_LIST, ...)`, and regression coverage now locks one representative `lib_reader` runtime parse so the AST shape is preserved while the live spec gets less Perl-shaped.
 - 2026-03-24: Started spending the newer Phase 4 immediate-match helper surface on a real core grammar instead of only adding helper contracts. The simple terminal-reader band in `specs/ebnf.spec` now uses `entry_text()` / `entry_group(0)` plus helper-method cleanup instead of raw `$IMATCH` reads, and regression coverage now locks those token rules as language-agnostic-ready.
 - 2026-03-23: Extended the Phase 4 named-capture read surface again so it now has explicit direct presence probes too. `entry_has(name)` and `match_has(name)` now cover the common “does this named capture exist right now?” question without forcing specs through `has_key(entry_map(), ...)` or `has_key(match_map(), ...)` when the whole hash is not otherwise needed.
 - 2026-03-23: Refined the new Phase 4 named-capture-hash helper surface so `entry_map()` / `match_map()` are now the preferred short spellings, while `entry_named_map()` / `match_named_map()` remain supported as compatibility aliases. The hash-lowering path recognizes both pairs equally.

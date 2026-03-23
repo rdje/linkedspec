@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate lib_reader Group Readers To entry_group
+
+Moved the grouped entry-reader band in `specs/lib_reader.spec` from the older positional capture-group surface:
+- `scalar(IMATCH_LIST, 0)`
+- `scalar(IMATCH_LIST, 1)`
+
+to the explicit immediate-match helper surface instead:
+- `entry_group(0)`
+- `entry_group(1)`
+
+This covers:
+- `group`
+- `sattribute`
+- `cattribute`
+
+Regression coverage now also locks one runtime `lib_reader` parse after the migration, so the grouped attribute AST shape is preserved while the live spec spends the newer helper surface directly.
+
 ## 2026-03-24 - Phase 4: Migrate ebnf Token Readers To Explicit Entry Helpers
 
 Moved the simple terminal-reader band in `specs/ebnf.spec` off raw `$IMATCH`-style reads and onto the explicit immediate-match helper surface instead:

@@ -35573,7 +35573,26 @@ subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     ok(ref($summary) eq 'HASH', 'lib_reader descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'lib_reader blocked-rule count drops to zero after helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'lib_reader exposes no prioritized blocked-rule list after helper migration');
-    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
+   ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
+};
+subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
+    plan tests => 4;
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::get_parser('lib_reader', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'lib_reader parser builds after entry_group migration');
+
+    my $input = qq{cell("foo"){ attr : "bar"; }};
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        [
+            ['GROUP', 'cell', 'foo', [['SATTRIBUTE', 'attr', 'bar']]]
+        ],
+        'lib_reader parser preserves grouped attribute AST after entry_group migration'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'lib_reader entry_group migration leaves runtime_ctx last_error clear on success');
+    ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
