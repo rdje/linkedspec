@@ -585,6 +585,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_group',
+   ir_node            => 'IMATCH_GROUP_READ',
+   diag_name          => 'entry_group',
+   unresolved_pattern => qr/\bentry_group\s*\(\s*\d+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bentry_group\s*\(\s*(?<index>\d+)\s*\)
+    }{
+     'do { scalar(@IMATCH_LIST) > '.$+{index}.' ? $IMATCH_LIST['.$+{index}.'] : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_len',
    ir_node            => 'IMATCH_LEN_READ',
    diag_name          => 'entry_len',
@@ -636,6 +651,21 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bmatch_text\s*\(\s*\)/do { \$LMATCH }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_group',
+   ir_node            => 'MATCH_GROUP_READ',
+   diag_name          => 'match_group',
+   unresolved_pattern => qr/\bmatch_group\s*\(\s*\d+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmatch_group\s*\(\s*(?<index>\d+)\s*\)
+    }{
+     'do { scalar(@LMATCH_LIST) > '.$+{index}.' ? $LMATCH_LIST['.$+{index}.'] : undef }'
+    }gex;
     return $code
    },
   },

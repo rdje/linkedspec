@@ -363,10 +363,12 @@ Important nuance:
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
+- `entry_group(0)` reads one capture group from the current immediate match directly as `do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }`, without consulting the rule-local mark bucket.
 - `entry_len()` reads the current immediate match width directly as `do { length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_start_pos()` reads the current immediate match left edge directly as `do { $IPOS - length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_end_pos()` reads the current immediate match right edge directly as `do { $IPOS }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.
+- `match_group(1)` reads one capture group from the current local match directly as `do { scalar(@LMATCH_LIST) > 1 ? $LMATCH_LIST[1] : undef }`, without consulting the rule-local mark bucket.
 - `match_len()` reads the current local match width directly as `do { length $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_start_pos()` reads the current local match left edge directly as `do { $LSPOS - length $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_end_pos()` reads the current local match right edge directly as `do { $LSPOS }`, without consulting the rule-local mark bucket.

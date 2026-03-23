@@ -642,6 +642,37 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants the immediate entry match that led into the current rule instead of the currently active local match or a previously stored checkpoint.
 
+### `entry_group(index)`
+Return one capture group from the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants one capture group from the entry/immediate match that led into the current rule,
+- prefer it over raw `scalar(IMATCH_LIST, index)` in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
+- and treat it as the direct capture-group companion to `entry_text()` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
+
+Example:
+
+```text
+entry_group(0)
+```
+
+```text
+Top::AND
+ /(foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_group_0, body_group_0, body_group_1) }
+ /(\w)(\w+)/
+ /(\))/
+ -> Child[0] { assign(scalar(entry_group_0), entry_group(0)); assign(scalar(body_group_0), match_group(0)); assign(scalar(body_group_1), match_group(1)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_group_0), scalar(body_group_0), scalar(body_group_1), match_group(0), entry_group(0), entry_group(1), match_group(1))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants one capture group from the immediate entry match that led into the current rule instead of the capture groups of the currently active local match.
+
 ### `entry_len()`
 Return the width of the current immediate match directly.
 
@@ -744,6 +775,30 @@ Top::AND
 ```
 
 Use it when the rule wants the current local match text immediately instead of reading a previously stored checkpoint or a larger remembered span.
+
+### `match_group(index)`
+Return one capture group from the current local match directly.
+
+Practical reading:
+- use it when the rule wants one capture group from the current local match as data,
+- prefer it over raw `scalar(LMATCH_LIST, index)` in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
+- and treat it as the direct capture-group companion to `match_text()` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_group(0)
+```
+
+```text
+Top::AND
+ /(\w)(\w+)/
+ /(\))/
+ -> Top[0] { assign(scalar(first_piece), match_group(0)); assign(scalar(second_piece), match_group(1)) }
+ -> Top[1] { return(array("?Top:", scalar(first_piece), scalar(second_piece), match_group(0), match_group(1))) }
+```
+
+Use it when the rule wants capture-group data from the currently active local match immediately instead of from the immediate entry match or from a previously stored checkpoint span.
 
 ### `match_len()`
 Return the width of the current local match directly.
