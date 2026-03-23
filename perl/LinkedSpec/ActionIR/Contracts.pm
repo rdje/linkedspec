@@ -574,6 +574,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_text',
+   ir_node            => 'IMATCH_TEXT_READ',
+   diag_name          => 'entry_text',
+   unresolved_pattern => qr/\bentry_text\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_text\s*\(\s*\)/do { \$IMATCH }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'match_start_pos',
    ir_node            => 'MATCH_START_POS_READ',
    diag_name          => 'match_start_pos',

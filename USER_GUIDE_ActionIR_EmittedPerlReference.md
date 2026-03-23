@@ -362,6 +362,7 @@ Important nuance:
 - `clear_mark(name)` deletes the rule-local named mark directly, so later same-rule reads see it as absent and return `undef` until the mark is re-established.
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
+- `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_start_pos()` reads the current local match left edge directly as `do { $LSPOS - length $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_end_pos()` reads the current local match right edge directly as `do { $LSPOS }`, without consulting the rule-local mark bucket.

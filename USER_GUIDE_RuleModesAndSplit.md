@@ -879,6 +879,7 @@ The most important semantic detail is this:
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
+- `entry_text()` returns the current immediate match text directly without storing or reading a named mark first,
 - `match_text()` returns the current local match text directly without storing or reading a named mark first,
 - `match_start_pos()` returns the left edge of the current local match directly without storing or reading a named mark first,
 - `match_end_pos()` returns the right edge of the current local match directly without storing or reading a named mark first,
@@ -905,6 +906,7 @@ That means the usual authoring shape is:
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present,
 - or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself,
+- or call `entry_text()` if the rule should expose the entry/immediate match that led into the rule without first round-tripping through a named mark,
 - or call `match_text()` if the current local match text itself should be returned as data without first round-tripping through a named mark,
 - or call `match_start_pos()` / `match_end_pos()` if the current local match boundaries themselves should be returned as data without first round-tripping through a named mark.
 
@@ -1428,8 +1430,46 @@ This is the direct-current-boundary pattern:
 - use `match_start_pos()` when the rule wants the current local match left edge immediately,
 - and use `match_end_pos()` when the rule wants the current local match right edge immediately.
 
+## Worked Example: Current Immediate Match Text Read
+Sometimes a child rule wants to keep the entry match that led into the rule, even while later local matches inside that child rule keep changing.
+
+That is what `entry_text()` is for.
+
+```text
+entry_vs_local_text::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> entry_vs_local_text[0] { assign(scalar(stage), "open"); return(call(entry_vs_local_text_body)) }
+
+entry_vs_local_text_body::AND
+ I { declare(scalar, entry_token, body_token) }
+ /\w+/
+ /\)/
+ -> entry_vs_local_text_body[0] { assign(scalar(entry_token), entry_text()); assign(scalar(body_token), match_text()) }
+ -> entry_vs_local_text_body[1] { return(array("?entry_vs_local_text_body:", scalar(entry_token), scalar(body_token), match_text())) }
+```
+
+When building this exact inline example directly, select `top_rule => entry_vs_local_text` so the entry rule is explicit.
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- when `entry_vs_local_text_body` starts, its immediate entry match is still `foo(` because that is the match from the parent edge that called it,
+- at `-> entry_vs_local_text_body[0]`, the current local match is `bar`, so `entry_text()` returns `foo(` while `match_text()` returns `bar`,
+- at `-> entry_vs_local_text_body[1]`, the current local match is `)`, so `match_text()` returns `)` while `entry_text()` would still keep the same entry match,
+- and none of those direct match-text reads consult or mutate the named-mark bucket.
+
+This is the direct-entry-text pattern:
+- use `entry_text()` when the rule wants the immediate entry match that led into the current rule,
+- use `match_text()` when the rule wants the current local match that is active right now inside the current rule,
+- and use `capture_from(name)` when the rule wants a larger remembered span between rule-local boundaries instead.
+
 ## Worked Example: Current Local Match Text Read
-Sometimes the rule wants the current local match text itself, not a stored checkpoint and not a larger captured span.
+Sometimes the rule wants the current local match text itself, not a stored checkpoint, not the immediate entry match, and not a larger captured span.
 
 That is what `match_text()` is for.
 
@@ -1456,6 +1496,7 @@ the practical reading is:
 - and those reads do not consult or mutate the named-mark bucket.
 
 This is the direct-current-text pattern:
+- use `entry_text()` when the rule wants the immediate entry match that led into the current rule,
 - use `capture_from(name)` when the rule wants a span from a remembered left edge,
 - use `match_text()` when the rule wants the current local match text only,
 - and use `match_start_pos()` / `match_end_pos()` when the rule wants the current local match boundaries as numbers.
@@ -1598,6 +1639,11 @@ Use `mark_pos(name)` when:
 - later logic should compare or report mark positions rather than only captured spans,
 - or the rule needs explicit position metadata without mutating the checkpoint.
 
+Use `entry_text()` when:
+- the rule wants the immediate entry match that led into the current rule,
+- child-rule logic should keep that entry token visible while local matches continue to move forward,
+- or the rule wants a backend-neutral replacement for raw `$IMATCH` in normal user-facing `.spec` code.
+
 Use `match_text()` when:
 - the rule wants the current local match text itself as data,
 - there is no need to store a named checkpoint for later reuse,
@@ -1668,6 +1714,7 @@ The current supported contract is:
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
+- `entry_text()` means “return the current immediate match text directly,”
 - `match_text()` means “return the current local match text directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”

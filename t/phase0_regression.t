@@ -8554,26 +8554,31 @@ SPEC
         top_rule => undef,
         parser_source_chunks_ref => [],
     };
-    my $parser = LinkedSpec::Compiler::run_get_pipeline(
-        \$spec_content,
-        {},
-        {
-            runtime_ctx => $runtime_ctx,
-            compile_spec_entry => sub {
-                return (
-                    'Top',
-                    {
-                        handler => sub { return ['ok'] },
-                        gdata => [],
-                        meta => {
-                            selected_handler_variant => 'FORCED_MISSING_TOP_RULE_LABEL',
+    my $parser;
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_set_runtime_ctx_top_rule = sub { return undef };
+        $parser = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            {},
+            {
+                runtime_ctx => $runtime_ctx,
+                compile_spec_entry => sub {
+                    return (
+                        'Top',
+                        {
+                            handler => sub { return ['ok'] },
+                            gdata => [],
+                            meta => {
+                                selected_handler_variant => 'FORCED_MISSING_TOP_RULE_LABEL',
+                            },
                         },
-                    },
-                    'Top',
-                );
+                        'Top',
+                    );
+                },
             },
-        },
-    );
+        );
+    }
 
     ok(defined($parser) && ref($parser) eq 'CODE', 'compiler pipeline still returns parser coderef for missing top-rule-label test');
 
@@ -9778,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 25;
+    plan tests => 26;
 
     my $label = 'Top';
 
@@ -9863,6 +9868,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'mark_pos(name) helper rewrite preserves explicit rule-local named-mark position-read semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
+        q{do { $IMATCH }},
+        'entry_text() helper rewrite preserves explicit current-immediate-match text semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'match_start_pos()'),
         q{do { $LSPOS - length $LMATCH }},
         'match_start_pos() helper rewrite preserves explicit current-local-match left-edge position semantics'
@@ -9925,7 +9935,7 @@ Top::AND
 SPEC
 
     my %runtime_ctx;
-    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
     ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for rule-local named-mark coverage');
 
     my $input = 'foo(bar)';
@@ -10261,6 +10271,65 @@ SPEC
 
     my $text_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_text()');
     like($text_rewrite, qr/\$LMATCH/, 'match_text() lowering reads the current local match text directly without consulting stored marks');
+};
+subtest 'entry_text_helper_reads_rule_entry_match_content' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_token, body_token) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_token), entry_text()); assign(scalar(body_token), match_text()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_token), scalar(body_token), match_text())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_text() current-immediate-match coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 'foo(', 'bar', ')'],
+        'entry_text() keeps the rule-entry immediate match available while match_text() continues to follow the active local child match'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry_text() coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry_text() parse leaves runtime_ctx last_error clear on success');
+
+    my $text_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_text()');
+    like($text_rewrite, qr/\$IMATCH/, 'entry_text() lowering reads the current immediate match text directly without consulting stored marks');
+};
+subtest 'multi_rule_parsers_default_to_first_rule_and_honor_explicit_top_rule_option' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo/
+ -> Top[0] { return(array("?Top:", match_text())) }
+
+Child::AND
+ /bar/
+ -> Child[0] { return(array("?Child:", match_text())) }
+SPEC
+
+    my %default_ctx;
+    my $default_parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%default_ctx);
+    my $foo_input = 'foo';
+    is_deeply($default_parser->(\$foo_input), ['?Top:', 'foo'], 'multi-rule parser defaults to the first parsed rule as the top-level entry');
+    is($default_ctx{top_rule}, 'Top', 'runtime context records the first parsed rule as the selected top rule by default');
+
+    my %explicit_ctx;
+    my $explicit_parser = LinkedSpec::Get(\$spec_content, top_rule => 'Child', parse_mode => 'consume', runtime_ctx_ref => \%explicit_ctx);
+    my $bar_input = 'bar';
+    is_deeply($explicit_parser->(\$bar_input), ['?Child:', 'bar'], 'explicit top_rule option selects a later rule as the parser entry');
+    is($explicit_ctx{top_rule}, 'Child', 'runtime context records the explicit top_rule selection');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

@@ -610,6 +610,38 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `entry_text()`
+Return the current immediate match text directly.
+
+Practical reading:
+- use it when the rule wants the entry/immediate match that led into the current rule,
+- prefer it over raw `$IMATCH` in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
+- and treat it as the direct-immediate-text companion to `match_text()`.
+
+Example:
+
+```text
+entry_text()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_token, body_token) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_token), entry_text()); assign(scalar(body_token), match_text()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_token), scalar(body_token), match_text())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the immediate entry match that led into the current rule instead of the currently active local match or a previously stored checkpoint.
+
 ### `match_text()`
 Return the current local match text directly.
 

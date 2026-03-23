@@ -444,6 +444,11 @@ sub _get_runtime_ctx_top_rule {
  return _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx)
 }
 
+sub _set_runtime_ctx_top_rule {
+ my ($runtime_ctx, $top_rule) = @_;
+ return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
+}
+
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
@@ -469,6 +474,26 @@ sub _build_generated_handler_source_label {
  return _call_runtime_ctx('build_generated_handler_source_label', %args)
 }
 
+sub _reset_spec_content_pos {
+ my ($spec_content_ref) = @_;
+ return unless ref($spec_content_ref) eq 'SCALAR';
+ pos($$spec_content_ref) = 0;
+ return 0
+}
+
+sub _first_parsed_rule_label {
+ my ($parsed_spec_entries) = @_;
+ return undef unless ref($parsed_spec_entries) eq 'ARRAY' && @$parsed_spec_entries;
+ my $first_entry = $parsed_spec_entries->[0];
+ return undef unless ref($first_entry) eq 'ARRAY';
+ foreach my $centry (@$first_entry) {
+  next unless ref($centry) eq 'ARRAY';
+  next unless defined($centry->[0]) && $centry->[0] =~ /ELABEL/o;
+  return $centry->[1] if defined($centry->[1]) && length($centry->[1]);
+ }
+ return undef
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
@@ -489,6 +514,9 @@ sub run_get_pipeline {
  my $test_expectation = $option->{test_expectation};
  my $dump_parser_source = $option->{dump_parser_source};
  my $parser_source_ref = $option->{parser_source_ref};
+ my $requested_top_rule = defined($option->{top_rule}) && length($option->{top_rule})
+  ? $option->{top_rule}
+  : undef;
  my $parse_mode = defined($option->{parse_mode}) && length($option->{parse_mode})
   ? $option->{parse_mode}
   : 'seek';
@@ -576,6 +604,7 @@ sub run_get_pipeline {
  }
 
  unless ($validation_failed) {
+  _reset_spec_content_pos($spec_content_ref);
   my $dsl_valid = eval { LinkedSpec::Validation::validate_dsl_syntax($spec_content_ref) };
   my $validate_dsl_syntax_error = $@;
   if ($validate_dsl_syntax_error) {
@@ -622,6 +651,7 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
  my $parse_error = '';
+ _reset_spec_content_pos($spec_content_ref);
  my $bootstrap_parse_eval_ok = eval {
   ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
   1;
@@ -747,6 +777,11 @@ sub run_get_pipeline {
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
   return undef;
  }
+
+ my $selected_top_rule =
+    defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
+  : _first_parsed_rule_label($retv);
+ _set_runtime_ctx_top_rule($runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
  my $rule_count = scalar(keys %$auto_descr_spec);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
