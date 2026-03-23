@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 24;
+    plan tests => 25;
 
     my $label = 'Top';
 
@@ -9866,6 +9866,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'match_start_pos()'),
         q{do { $LSPOS - length $LMATCH }},
         'match_start_pos() helper rewrite preserves explicit current-local-match left-edge position semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_text()'),
+        q{do { $LMATCH }},
+        'match_text() helper rewrite preserves explicit current-local-match text semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_end_pos()'),
@@ -10226,6 +10231,36 @@ SPEC
     my $start_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_start_pos()');
     my $end_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_end_pos()');
     like($start_rewrite . "\n" . $end_rewrite, qr/\$LSPOS - length \$LMATCH.*\$LSPOS/s, 'current match position helper lowering reads the current local match left and right edges directly');
+};
+subtest 'current_match_text_helper_reads_local_match_content' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, body_token) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(body_token), match_text()) }
+ -> Top[2] { return(array("?Top:", scalar(body_token), match_text())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for match_text() current-local-match content coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'bar', ')'],
+        'match_text() returns the current local match text directly and changes with the active edge match'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'match_text() parse leaves runtime_ctx last_error clear on success');
+
+    my $text_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_text()');
+    like($text_rewrite, qr/\$LMATCH/, 'match_text() lowering reads the current local match text directly without consulting stored marks');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

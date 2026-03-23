@@ -879,6 +879,7 @@ The most important semantic detail is this:
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
+- `match_text()` returns the current local match text directly without storing or reading a named mark first,
 - `match_start_pos()` returns the left edge of the current local match directly without storing or reading a named mark first,
 - `match_end_pos()` returns the right edge of the current local match directly without storing or reading a named mark first,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
@@ -904,6 +905,7 @@ That means the usual authoring shape is:
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present,
 - or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself,
+- or call `match_text()` if the current local match text itself should be returned as data without first round-tripping through a named mark,
 - or call `match_start_pos()` / `match_end_pos()` if the current local match boundaries themselves should be returned as data without first round-tripping through a named mark.
 
 ## Mark Timing: Later Slot, Not Same Slot
@@ -1426,6 +1428,38 @@ This is the direct-current-boundary pattern:
 - use `match_start_pos()` when the rule wants the current local match left edge immediately,
 - and use `match_end_pos()` when the rule wants the current local match right edge immediately.
 
+## Worked Example: Current Local Match Text Read
+Sometimes the rule wants the current local match text itself, not a stored checkpoint and not a larger captured span.
+
+That is what `match_text()` is for.
+
+```text
+explicit_match_text::AND
+ I { declare(scalar, stage, body_token) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> explicit_match_text[0] { assign(scalar(stage), "open") }
+ -> explicit_match_text[1] { assign(scalar(stage), "body"); assign(scalar(body_token), match_text()) }
+ -> explicit_match_text[2] { return(array("?explicit_match_text:", scalar(body_token), match_text())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- at `-> explicit_match_text[1]`, the current local match is `bar`, so `match_text()` returns `bar`,
+- at `-> explicit_match_text[2]`, the current local match is `)`, so `match_text()` returns `)`,
+- and those reads do not consult or mutate the named-mark bucket.
+
+This is the direct-current-text pattern:
+- use `capture_from(name)` when the rule wants a span from a remembered left edge,
+- use `match_text()` when the rule wants the current local match text only,
+- and use `match_start_pos()` / `match_end_pos()` when the rule wants the current local match boundaries as numbers.
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 
@@ -1564,6 +1598,11 @@ Use `mark_pos(name)` when:
 - later logic should compare or report mark positions rather than only captured spans,
 - or the rule needs explicit position metadata without mutating the checkpoint.
 
+Use `match_text()` when:
+- the rule wants the current local match text itself as data,
+- there is no need to store a named checkpoint for later reuse,
+- or the rule wants a backend-neutral replacement for raw `$LMATCH` in normal user-facing `.spec` code.
+
 Use `match_start_pos()` and `match_end_pos()` when:
 - the rule wants the current local match boundaries themselves as data,
 - there is no need to store a named checkpoint for later reuse,
@@ -1629,6 +1668,7 @@ The current supported contract is:
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
+- `match_text()` means “return the current local match text directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,

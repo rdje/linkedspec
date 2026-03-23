@@ -585,6 +585,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'match_text',
+   ir_node            => 'MATCH_TEXT_READ',
+   diag_name          => 'match_text',
+   unresolved_pattern => qr/\bmatch_text\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_text\s*\(\s*\)/do { \$LMATCH }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'match_end_pos',
    ir_node            => 'MATCH_END_POS_READ',
    diag_name          => 'match_end_pos',

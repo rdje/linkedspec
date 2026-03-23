@@ -610,6 +610,33 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `match_text()`
+Return the current local match text directly.
+
+Practical reading:
+- use it when the rule wants the current local match content as data,
+- prefer it over raw `$LMATCH` in normal user-facing `.spec` examples,
+- and treat it as the direct-text companion to `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_text()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, body_token) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(body_token), match_text()) }
+ -> Top[2] { return(array("?Top:", scalar(body_token), match_text())) }
+```
+
+Use it when the rule wants the current local match text immediately instead of reading a previously stored checkpoint or a larger remembered span.
+
 ### `match_start_pos()`
 Return the left edge of the current local match directly.
 
