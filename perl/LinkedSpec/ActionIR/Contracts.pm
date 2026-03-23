@@ -585,6 +585,28 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_start_pos',
+   ir_node            => 'IMATCH_START_POS_READ',
+   diag_name          => 'entry_start_pos',
+   unresolved_pattern => qr/\bentry_start_pos\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { \$IPOS - length \$IMATCH }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'entry_end_pos',
+   ir_node            => 'IMATCH_END_POS_READ',
+   diag_name          => 'entry_end_pos',
+   unresolved_pattern => qr/\bentry_end_pos\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_end_pos\s*\(\s*\)/do { \$IPOS }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'match_start_pos',
    ir_node            => 'MATCH_START_POS_READ',
    diag_name          => 'match_start_pos',

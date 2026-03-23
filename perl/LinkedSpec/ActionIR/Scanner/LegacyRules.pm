@@ -39,6 +39,8 @@ sub try_scan_contract_ir_events {
   'mark_exists' => \&_scan_contract_mark_exists,
   'mark_pos' => \&_scan_contract_mark_pos,
   'entry_text' => \&_scan_contract_entry_text,
+  'entry_start_pos' => \&_scan_contract_entry_start_pos,
+  'entry_end_pos' => \&_scan_contract_entry_end_pos,
   'match_text' => \&_scan_contract_match_text,
   'match_start_pos' => \&_scan_contract_match_start_pos,
   'match_end_pos' => \&_scan_contract_match_end_pos,
@@ -285,6 +287,24 @@ sub _scan_contract_entry_text {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bentry_text\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_start_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_end_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_pos\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

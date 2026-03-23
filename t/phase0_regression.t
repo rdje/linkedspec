@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 26;
+    plan tests => 28;
 
     my $label = 'Top';
 
@@ -9871,6 +9871,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
         q{do { $IMATCH }},
         'entry_text() helper rewrite preserves explicit current-immediate-match text semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_start_pos()'),
+        q{do { $IPOS - length $IMATCH }},
+        'entry_start_pos() helper rewrite preserves explicit current-immediate-match left-edge position semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'entry_end_pos()'),
+        q{do { $IPOS }},
+        'entry_end_pos() helper rewrite preserves explicit current-immediate-match right-edge position semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_start_pos()'),
@@ -10305,6 +10315,41 @@ SPEC
 
     my $text_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_text()');
     like($text_rewrite, qr/\$IMATCH/, 'entry_text() lowering reads the current immediate match text directly without consulting stored marks');
+};
+subtest 'entry_position_helpers_read_rule_entry_match_boundaries' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start, entry_end, body_start, body_end) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_start), entry_start_pos()); assign(scalar(entry_end), entry_end_pos()); assign(scalar(body_start), match_start_pos()); assign(scalar(body_end), match_end_pos()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start), scalar(entry_end), scalar(body_start), scalar(body_end), entry_start_pos(), entry_end_pos(), match_start_pos(), match_end_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_pos() and entry_end_pos() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 0, 4, 4, 7, 0, 4, 7, 8],
+        'entry_start_pos() and entry_end_pos() keep the rule-entry immediate match boundaries available while local match boundaries continue to move'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry position helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry position helper parse leaves runtime_ctx last_error clear on success');
+
+    my $start_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_start_pos()');
+    my $end_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_end_pos()');
+    like($start_rewrite . "\n" . $end_rewrite, qr/\$IPOS - length \$IMATCH.*\$IPOS/s, 'entry position helper lowering reads the current immediate match left and right edges directly');
 };
 subtest 'multi_rule_parsers_default_to_first_rule_and_honor_explicit_top_rule_option' => sub {
     plan tests => 4;

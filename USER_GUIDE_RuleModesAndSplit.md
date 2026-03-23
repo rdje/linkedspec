@@ -880,6 +880,8 @@ The most important semantic detail is this:
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
 - `entry_text()` returns the current immediate match text directly without storing or reading a named mark first,
+- `entry_start_pos()` returns the left edge of the current immediate match directly without storing or reading a named mark first,
+- `entry_end_pos()` returns the right edge of the current immediate match directly without storing or reading a named mark first,
 - `match_text()` returns the current local match text directly without storing or reading a named mark first,
 - `match_start_pos()` returns the left edge of the current local match directly without storing or reading a named mark first,
 - `match_end_pos()` returns the right edge of the current local match directly without storing or reading a named mark first,
@@ -907,6 +909,7 @@ That means the usual authoring shape is:
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present,
 - or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself,
 - or call `entry_text()` if the rule should expose the entry/immediate match that led into the rule without first round-tripping through a named mark,
+- or call `entry_start_pos()` / `entry_end_pos()` if the rule should expose the entry/immediate match boundaries that led into the rule without first round-tripping through a named mark,
 - or call `match_text()` if the current local match text itself should be returned as data without first round-tripping through a named mark,
 - or call `match_start_pos()` / `match_end_pos()` if the current local match boundaries themselves should be returned as data without first round-tripping through a named mark.
 
@@ -1468,6 +1471,44 @@ This is the direct-entry-text pattern:
 - use `match_text()` when the rule wants the current local match that is active right now inside the current rule,
 - and use `capture_from(name)` when the rule wants a larger remembered span between rule-local boundaries instead.
 
+## Worked Example: Current Immediate Match Boundary Reads
+Sometimes a child rule wants to keep the boundaries of the immediate entry match that led into the rule, even while the current local match boundaries keep moving.
+
+That is what `entry_start_pos()` and `entry_end_pos()` are for.
+
+```text
+entry_vs_local_boundaries::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> entry_vs_local_boundaries[0] { assign(scalar(stage), "open"); return(call(entry_vs_local_boundaries_body)) }
+
+entry_vs_local_boundaries_body::AND
+ I { declare(scalar, entry_start, entry_end, body_start, body_end) }
+ /\w+/
+ /\)/
+ -> entry_vs_local_boundaries_body[0] { assign(scalar(entry_start), entry_start_pos()); assign(scalar(entry_end), entry_end_pos()); assign(scalar(body_start), match_start_pos()); assign(scalar(body_end), match_end_pos()) }
+ -> entry_vs_local_boundaries_body[1] { return(array("?entry_vs_local_boundaries_body:", scalar(entry_start), scalar(entry_end), scalar(body_start), scalar(body_end), entry_start_pos(), entry_end_pos(), match_start_pos(), match_end_pos())) }
+```
+
+When building this exact inline example directly, select `top_rule => entry_vs_local_boundaries` so the entry rule is explicit.
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- when `entry_vs_local_boundaries_body` starts, its immediate entry match is still `foo(`, so `entry_start_pos()` is `0` and `entry_end_pos()` is `4`,
+- at `-> entry_vs_local_boundaries_body[0]`, the current local match is `bar`, so `match_start_pos()` is `4` and `match_end_pos()` is `7`,
+- at `-> entry_vs_local_boundaries_body[1]`, the current local match is `)`, so `match_start_pos()` is `7` and `match_end_pos()` is `8`,
+- and the immediate entry boundaries remain `0` / `4` throughout the child rule.
+
+This is the direct-entry-boundary pattern:
+- use `entry_start_pos()` / `entry_end_pos()` when the rule wants the immediate entry match boundaries that led into the current rule,
+- use `match_start_pos()` / `match_end_pos()` when the rule wants the currently active local match boundaries instead,
+- and use `mark_pos(name)` when the rule wants a previously stored named checkpoint.
+
 ## Worked Example: Current Local Match Text Read
 Sometimes the rule wants the current local match text itself, not a stored checkpoint, not the immediate entry match, and not a larger captured span.
 
@@ -1497,6 +1538,7 @@ the practical reading is:
 
 This is the direct-current-text pattern:
 - use `entry_text()` when the rule wants the immediate entry match that led into the current rule,
+- use `entry_start_pos()` / `entry_end_pos()` when the rule wants the immediate entry-match boundaries that led into the current rule,
 - use `capture_from(name)` when the rule wants a span from a remembered left edge,
 - use `match_text()` when the rule wants the current local match text only,
 - and use `match_start_pos()` / `match_end_pos()` when the rule wants the current local match boundaries as numbers.
@@ -1644,6 +1686,11 @@ Use `entry_text()` when:
 - child-rule logic should keep that entry token visible while local matches continue to move forward,
 - or the rule wants a backend-neutral replacement for raw `$IMATCH` in normal user-facing `.spec` code.
 
+Use `entry_start_pos()` and `entry_end_pos()` when:
+- the rule wants the immediate entry match boundaries that led into the current rule,
+- child-rule logic should keep those entry boundaries visible while local match boundaries continue to move forward,
+- or the rule wants backend-neutral replacements for raw `$IPOS - length($IMATCH)` and `$IPOS` in normal user-facing `.spec` code.
+
 Use `match_text()` when:
 - the rule wants the current local match text itself as data,
 - there is no need to store a named checkpoint for later reuse,
@@ -1715,6 +1762,8 @@ The current supported contract is:
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
 - `entry_text()` means “return the current immediate match text directly,”
+- `entry_start_pos()` means “return the left edge of the current immediate match directly,”
+- `entry_end_pos()` means “return the right edge of the current immediate match directly,”
 - `match_text()` means “return the current local match text directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”

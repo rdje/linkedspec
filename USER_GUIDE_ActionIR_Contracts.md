@@ -616,7 +616,7 @@ Return the current immediate match text directly.
 Practical reading:
 - use it when the rule wants the entry/immediate match that led into the current rule,
 - prefer it over raw `$IMATCH` in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
-- and treat it as the direct-immediate-text companion to `match_text()`.
+- and treat it as the direct-immediate-text companion to `entry_start_pos()` / `entry_end_pos()`.
 
 Example:
 
@@ -641,6 +641,50 @@ Child::AND
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the immediate entry match that led into the current rule instead of the currently active local match or a previously stored checkpoint.
+
+### `entry_start_pos()`
+Return the left edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the entry/immediate match start as data,
+- prefer it over raw `$IPOS - length($IMATCH)` in normal user-facing `.spec` examples,
+- and treat it as the direct-boundary companion to `entry_text()`.
+
+Example:
+
+```text
+entry_start_pos()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ -> Top[0] { assign(scalar(stage), "open"); return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start, entry_end, body_start, body_end) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_start), entry_start_pos()); assign(scalar(entry_end), entry_end_pos()); assign(scalar(body_start), match_start_pos()); assign(scalar(body_end), match_end_pos()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start), scalar(entry_end), scalar(body_start), scalar(body_end), entry_start_pos(), entry_end_pos(), match_start_pos(), match_end_pos())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the left boundary of the immediate entry match that led into the current rule instead of the left boundary of the currently active local match.
+
+### `entry_end_pos()`
+Return the right edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the entry/immediate match end as data,
+- prefer it over raw `$IPOS` in normal user-facing `.spec` examples,
+- and treat it as the direct-boundary companion to `entry_text()` / `entry_start_pos()`.
+
+If the immediate entry match is `foo(` inside `foo(bar)`, then `entry_end_pos()` returns `4`.
+
+Use it when the rule wants the right boundary of the immediate entry match that led into the current rule instead of the right boundary of the currently active local match.
 
 ### `match_text()`
 Return the current local match text directly.
