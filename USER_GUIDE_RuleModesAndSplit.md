@@ -890,13 +890,16 @@ This is the clearest end-to-end checkpoint example today:
 
 ```text
 semantic_chunk::AND
- /foo\(/ @mark(body_start) /\w+/
- -> semantic_chunk[0] { my $noop = 1 }
- -> semantic_chunk[1] { return call(chunk_end) }
+ /foo\(/ @mark(body_start)
+ -> semantic_chunk[0] { return(call(chunk_body)) }
+
+chunk_body::AND
+ /\w+/
+ -> chunk_body[0] { return(call(chunk_end)) }
 
 chunk_end:
  /\)/
- -> chunk_end[0] { my $body = capture_from(body_start); return ['?semantic_chunk:', $body] }
+ -> chunk_end[0] { return(array("?semantic_chunk:", capture_from(body_start))) }
 ```
 
 On input:
@@ -908,7 +911,7 @@ foo(bar)
 the practical reading is:
 - `/foo\(/` matches the stable opening anchor,
 - `@mark(body_start)` remembers the start of the inner span,
-- `/\w+/` consumes the inner content,
+- `chunk_body` consumes the inner content,
 - `chunk_end` matches the closing `)`,
 - `capture_from(body_start)` returns `bar`.
 
@@ -922,13 +925,16 @@ The current match does not have to be a closing delimiter. A separator works too
 
 ```text
 left_item::AND
- /\(/ @mark(left_start) /[^,]+/
- -> left_item[0] { my $noop = 1 }
- -> left_item[1] { return call(left_separator) }
+ /\(/ @mark(left_start)
+ -> left_item[0] { return(call(left_content)) }
+
+left_content::AND
+ /[^,]+/
+ -> left_content[0] { return(call(left_separator)) }
 
 left_separator:
  /,/
- -> left_separator[0] { my $left = capture_from(left_start); return ['?left_item:', $left] }
+ -> left_separator[0] { return(array("?left_item:", capture_from(left_start))) }
 ```
 
 On input shaped like:
@@ -977,9 +983,14 @@ That means this is legal:
 
 ```text
 -> rule[0] {
-     my $maybe_body = capture_from(body_start);
-     return defined($maybe_body) ? ['?body:', $maybe_body] : ['?body:', undef]
+     return(array("?body:", capture_from(body_start)))
    }
+```
+
+If the mark is absent, the payload becomes:
+
+```text
+["?body:", undef]
 ```
 
 ## Choosing Between Anonymous and Named Checkpoints
@@ -992,6 +1003,10 @@ Use `@mark(name)` when:
 - more than one checkpoint may be alive at once,
 - the checkpoint meaning benefits from a real name,
 - or a later child rule should keep using a checkpoint established earlier by a parent rule.
+
+Documentation note:
+- this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
+- while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is the place that shows the Perl lowering explicitly.
 
 ## Split-Style Mental Model
 If you like a more intuitive description, this is a good one:

@@ -295,6 +295,8 @@ Most important syntax elements:
 
 Use `@capture_from_here` when one anonymous capture baseline is enough. Use `@mark(name)` when the checkpoint meaning deserves a real name, when more than one checkpoint may coexist, or when a later child rule should keep using a checkpoint established earlier by a parent rule. The long-form split/rule-mode guide now includes worked examples for parent-to-child named capture, separator-delimited capture, and missing-mark behavior.
 
+Documentation style note: the user guides should prefer backend-neutral helper syntax in code blocks where possible. Perl-specific lowering is still documented, but it belongs in the emitted-reference guides rather than being the default teaching surface for normal usage examples.
+
 ### Action-edge target indexing
 One important rule-body detail is that action edges target regex slots by index.
 

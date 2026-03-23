@@ -196,29 +196,43 @@ assign(scalar(body), capture_from(body_start))
 
 ```text
 Top::AND
- /foo\(/ @mark(body_start) /\w+/
- -> Top[0] { my $noop = 1 }
- -> Top[1] { return call(Child) }
+ /foo\(/ @mark(body_start)
+ -> Top[0] { return(call(Inner)) }
+
+Inner::AND
+ /\w+/
+ -> Inner[0] { return(call(Child)) }
 
 Child:
  /\)/
- -> Child[0] { my $body = capture_from(body_start); return ['?Child:', $body] }
+ -> Child[0] { return(array("?Child:", capture_from(body_start))) }
 ```
 
 ```text
+Left::AND
+ /\(/ @mark(left_start)
+ -> Left[0] { return(call(LeftContent)) }
+
+LeftContent::AND
+ /[^,]+/
+ -> LeftContent[0] { return(call(LeftSeparator)) }
+
 LeftSeparator:
  /,/
- -> LeftSeparator[0] { my $left = capture_from(left_start); return ['?left:', $left] }
+ -> LeftSeparator[0] { return(array("?left:", capture_from(left_start))) }
 ```
 
 ```text
 -> rule[0] {
-     my $maybe_body = capture_from(body_start);
-     return defined($maybe_body) ? ['?body:', $maybe_body] : ['?body:', undef]
+     return(array("?body:", capture_from(body_start)))
    }
 ```
 
 Use it when one anonymous split cursor is not enough and you want a later action block or child rule to refer back to a specific named checkpoint.
+
+Documentation note:
+- this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
+- while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.
 
 ## Backtrack helpers
 ### `IBACKTRACK()` / `ibacktrack(label)`
