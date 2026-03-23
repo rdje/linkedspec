@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 13;
+    plan tests => 14;
 
     my $label = 'Top';
 
@@ -9816,6 +9816,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
         q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = pos $$STRING }},
         'mark_here(name) helper rewrite preserves explicit rule-local named-mark update semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'clear_mark(body_start)'),
+        q{do { if (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') { delete $$info{marks}{'Top'}{'body_start'}; } undef }},
+        'clear_mark(name) helper rewrite preserves explicit rule-local named-mark clear semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -9981,6 +9986,41 @@ SPEC
 
     my $mark_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_here(body_start)');
     like($mark_rewrite, qr/\$\$info\{marks\}\{'Top'\}\{'body_start'\} = pos \$\$STRING/, 'mark_here(name) lowering writes the rule-local mark directly to the current parser position');
+};
+subtest 'named_mark_clear_mark_removes_rule_local_checkpoint_explicitly' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_from(body_start)); clear_mark(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first), capture_from(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit clear-mark coverage');
+
+    my $input = 'foo(alpha,beta)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', undef],
+        'clear_mark(name) lets the rule drop a named checkpoint explicitly so later same-rule capture_from(name) reads return undef'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'explicit clear-mark parse leaves runtime_ctx last_error clear on success');
+
+    my $clear_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'clear_mark(body_start)');
+    like($clear_rewrite, qr/delete \$\$info\{marks\}\{'Top'\}\{'body_start'\};/, 'clear_mark(name) lowering deletes the rule-local mark entry explicitly');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;

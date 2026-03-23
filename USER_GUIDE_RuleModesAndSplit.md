@@ -870,6 +870,7 @@ The most important semantic detail is this:
 - `capture_from(name)` is a pure read and does not move the mark,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
+- `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 That means the usual authoring shape is:
@@ -878,7 +879,8 @@ That means the usual authoring shape is:
 - keep matching forward,
 - then on a later closing delimiter or separator in that same rule call `capture_from(name)` if the mark should stay stable,
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
-- or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read.
+- or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
+- or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads.
 
 ## Mark Timing: Later Slot, Not Same Slot
 There is one timing rule that matters a lot in practice:
@@ -1030,6 +1032,43 @@ This is the explicit-control pattern:
 - `mark_here(name)` moves without reading,
 - `capture_take(name)` combines those two operations when that is what the rule really wants.
 
+## Worked Example: Stable Read, Explicit Clear
+Sometimes the rule wants to consume one stable named span and then make that mark unavailable to later reads in the same rule.
+
+That is what `clear_mark(name)` is for.
+
+```text
+explicit_mark_clear::AND
+ I { declare(scalar, stage, first) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> explicit_mark_clear[0] { assign(scalar(stage), "open") }
+ -> explicit_mark_clear[1] { assign(scalar(stage), "first_value") }
+ -> explicit_mark_clear[2] { assign(scalar(first), capture_from(body_start)); clear_mark(body_start) }
+ -> explicit_mark_clear[3] { assign(scalar(stage), "second_value") }
+ -> explicit_mark_clear[4] { return(array("?explicit_mark_clear:", scalar(first), capture_from(body_start))) }
+```
+
+On input:
+
+```text
+foo(alpha,beta)
+```
+
+the practical reading is:
+- `capture_from(body_start)` reads `alpha` from the stable mark,
+- `clear_mark(body_start)` removes that named mark,
+- the final `capture_from(body_start)` returns `undef` because the mark is no longer present.
+
+This is the explicit-reset pattern:
+- `capture_from(name)` reads without moving,
+- `clear_mark(name)` drops the checkpoint,
+- later same-rule reads see that the mark is gone.
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 
@@ -1086,6 +1125,7 @@ If the named mark is absent:
 - it does not throw by itself,
 - and `capture_take(name)` also leaves the missing mark untouched,
 - and `mark_here(name)` can still initialize the rule-local mark explicitly at the current parser position,
+- and `clear_mark(name)` stays a harmless no-op,
 - so action code can branch explicitly if the mark is optional in that rule family.
 
 That means this is legal:
@@ -1126,6 +1166,11 @@ Use `mark_here(name)` when:
 - the rule should decide explicitly when a named checkpoint moves,
 - you want stable read first and explicit advance second,
 - or the mark should be updated even when no current capture string is being returned.
+
+Use `clear_mark(name)` when:
+- the rule should decide explicitly when a named checkpoint disappears,
+- one stable read should be followed by an explicit drop,
+- or later same-rule reads should see that the mark is no longer present.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
@@ -1178,6 +1223,7 @@ The current supported contract is:
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
+- `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,
 - and marks are a later-slot surface, so same-slot actions should not expect a freshly written mark yet,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.

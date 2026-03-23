@@ -36,6 +36,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  capture_from_mark                => 'CAPTURE_FROM_MARK',
  capture_take_from_mark           => 'CAPTURE_TAKE_FROM_MARK',
  mark_here                        => 'MARK_HERE',
+ clear_mark                       => 'CLEAR_MARK',
  if_flow                          => 'IF',
  elseif_flow                      => 'ELIF',
  else_flow                        => 'ELSE',

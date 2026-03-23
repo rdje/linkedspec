@@ -301,6 +301,38 @@ Top::AND
 
 Use it when the rule should decide explicitly when the named checkpoint moves, instead of tying that movement to `capture_take(name)`.
 
+### `clear_mark(name)`
+Delete a rule-local named mark explicitly.
+
+Practical reading:
+- use it when a named checkpoint should no longer be visible to later reads in the same rule,
+- combine it with `capture_from(name)` when you want one stable read and then an explicit drop,
+- and treat it as the clear/reset companion to `mark_here(name)`.
+
+Example:
+
+```text
+clear_mark(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_from(body_start)); clear_mark(body_start) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { return(array("?Top:", scalar(first), capture_from(body_start))) }
+```
+
+Use it when the rule should make a named checkpoint unavailable to later same-rule reads instead of merely moving it.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.

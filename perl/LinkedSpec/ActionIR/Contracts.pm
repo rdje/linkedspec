@@ -426,6 +426,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'clear_mark',
+   ir_node            => 'CLEAR_MARK',
+   diag_name          => 'clear_mark',
+   unresolved_pattern => qr/\bclear_mark\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bclear_mark\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { if (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') { delete $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}; } undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'ibacktrack_macro',
    ir_node            => 'IBACKTRACK',
    diag_name          => 'IBACKTRACK',
