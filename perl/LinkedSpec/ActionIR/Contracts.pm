@@ -396,6 +396,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_take_from_mark',
+   ir_node            => 'CAPTURE_TAKE_FROM_MARK',
+   diag_name          => 'capture_take',
+   unresolved_pattern => qr/\bcapture_take\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{\''.$+{mark}.'\'} = pos $$STRING; $__ls_capture } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'ibacktrack_macro',
    ir_node            => 'IBACKTRACK',
    diag_name          => 'IBACKTRACK',

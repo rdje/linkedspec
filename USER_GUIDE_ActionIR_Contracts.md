@@ -230,6 +230,45 @@ Left::AND
 
 Use it when one anonymous split cursor is not enough and you want a later action block in that same rule to refer back to a specific named checkpoint.
 
+### `capture_take(name)`
+Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.
+
+Practical reading:
+- the earlier `@mark(name)` establishes the left boundary,
+- the current match still establishes the right boundary,
+- the returned substring still excludes the current local match,
+- and after the read, the named mark moves forward like a named split cursor.
+
+If the mark is absent, the helper returns `undef` and leaves the mark unchanged.
+
+Examples:
+
+```text
+assign(scalar(part), capture_take(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first, second) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_take(body_start)) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { assign(scalar(second), capture_take(body_start)) }
+ -> Top[5] { assign(scalar(stage), "third_value") }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_from(body_start))) }
+```
+
+Use it when the same rule should keep consuming successive named spans instead of reading repeatedly from one stable checkpoint.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.

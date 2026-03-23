@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $label = 'Top';
 
@@ -9806,6 +9806,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_from(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
         'capture_from(name) helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; $__ls_capture } else { undef } }},
+        'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -9897,6 +9902,45 @@ SPEC
 
     my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'capture_from(body_start)');
     like($capture_rewrite, qr/\$\$info\{marks\}\{'Child'\}/, 'capture_from(name) lowering is explicitly scoped to the current rule label');
+};
+subtest 'named_mark_capture_take_advances_named_checkpoint_like_split_cursor' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first, second) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { assign(scalar(first), capture_take(body_start)) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { assign(scalar(second), capture_take(body_start)) }
+ -> Top[5] { assign(scalar(stage), "third_value") }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_from(body_start))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for advancing named-mark coverage');
+
+    my $input = 'foo(alpha, beta, gamma)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', 'beta', 'gamma'],
+        'capture_take(name) returns the current span and advances the named mark to the current parser position for later same-rule captures'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'advancing named-mark parse leaves runtime_ctx last_error clear on success');
+
+    my $take_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take(body_start)');
+    like($take_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = pos \$\$STRING;/, 'capture_take(name) lowering updates the rule-local mark to the current parser position after returning the captured span');
 };
 subtest 'action_rewriter_lowers_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;

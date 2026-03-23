@@ -230,7 +230,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 3. **Legacy or raw compatibility forms**
    - Compatibility only.
-   - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `capture_from(name)`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
+   - Examples: `return call(rule)`, `push(rule)`, `$CAPTURE`, `capture_from(name)`, `capture_take(name)`, `BACKTRACK()`, or older raw wrappers such as `$retv = call(rule)`.
    - These are important for migration and compatibility, but they are not the target authoring surface for a backend-neutral `.spec`.
 
 ## Typical Workflow
@@ -293,7 +293,7 @@ Most important syntax elements:
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
-Use `@capture_from_here` when one anonymous capture baseline is enough. Use `@mark(name)` when the checkpoint meaning deserves a real name, when more than one checkpoint may coexist inside the same rule, or when the same rule needs several stable named left edges. The long-form split/rule-mode guide now includes worked examples for same-rule named capture, separator-delimited capture, same-name reuse across different rules, and missing-mark behavior.
+Use `@capture_from_here` when one anonymous capture baseline is enough. Use `@mark(name)` when the checkpoint meaning deserves a real name, when more than one checkpoint may coexist inside the same rule, or when the same rule needs several stable named left edges. Use `capture_from(name)` when that named checkpoint should stay stable, and `capture_take(name)` when a later same-rule action should both return the current span and advance that named checkpoint like a named split cursor. The long-form split/rule-mode guide now includes worked examples for same-rule named capture, advancing separator-delimited capture, same-name reuse across different rules, and missing-mark behavior.
 
 Documentation style note: the user guides should prefer backend-neutral helper syntax in code blocks where possible. Perl-specific lowering is still documented, but it belongs in the emitted-reference guides rather than being the default teaching surface for normal usage examples.
 
@@ -419,7 +419,7 @@ mean the same thing for the recursive first slot:
 
 That is why the first regex of a rule matters so much in practice: plain `-> rule` is shorthand for “use that rule’s first regex entrypoint,” and indexed forms are mainly the self-recursive escape hatch for the other regex slots of that same rule.
 
-For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, `@capture_from_here`, and named `@mark(name)` in one place, while also documenting `@move_pos` as the preserved compatibility alias and giving several worked checkpoint/capture examples.
+For the worked long-form guide to the current rule-label sigils, blind-call `=> child_rule` orchestration patterns, and split-boundary behavior, read [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md). That guide explains today’s supported `:&`, explicit `AND`, explicit `AND+`, `:|`, `:+`, `:*`, `:?`, explicit `OR`, bounded `OR{...}` forms, bounded `AND{...}` forms, advanced blind-call wrapper shapes, `@capture_from_here`, and named `@mark(name)` in one place, while also documenting `@move_pos` as the preserved compatibility alias, `capture_from(name)` as the stable named-read helper, `capture_take(name)` as the advancing named-read helper, and several worked checkpoint/capture examples.
 
 ## Where Lowered Constructs Can Appear
 Lowered constructs are not limited to one place.

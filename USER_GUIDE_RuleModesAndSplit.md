@@ -862,18 +862,21 @@ That means:
 - it does not capture text by itself,
 - it records the current parser position under a stable name,
 - the name is scoped to the current rule label,
-- and later `capture_from(name)` in that same rule can recover the span that starts at that named point.
+- and later `capture_from(name)` or `capture_take(name)` in that same rule can recover the span that starts at that named point.
 
 The most important semantic detail is this:
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current match,
 - it does not include the current local match itself,
+- `capture_from(name)` is a pure read and does not move the mark,
+- `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 That means the usual authoring shape is:
 - match an opening anchor,
 - set `@mark(name)`,
 - keep matching forward,
-- then on a later closing delimiter or separator in that same rule call `capture_from(name)`.
+- then on a later closing delimiter or separator in that same rule call `capture_from(name)` if the mark should stay stable,
+- or call `capture_take(name)` if the mark should roll forward like a named split cursor.
 
 ## Mark Timing: Later Slot, Not Same Slot
 There is one timing rule that matters a lot in practice:
@@ -948,6 +951,46 @@ This is the key generalization:
 - not only closing delimiters,
 - but any later separator or anchor slot in the same rule can play that role.
 
+## Worked Example: Advancing Named Capture
+Sometimes a stable named checkpoint is not enough. In repeated separator-style parsing, you often want to read the current span and then move the named checkpoint forward so the next capture starts after the current separator.
+
+That is what `capture_take(name)` does.
+
+```text
+csv_triplet::AND
+ I { declare(scalar, stage, first, second) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> csv_triplet[0] { assign(scalar(stage), "open") }
+ -> csv_triplet[1] { assign(scalar(stage), "first_value") }
+ -> csv_triplet[2] { assign(scalar(first), capture_take(body_start)) }
+ -> csv_triplet[3] { assign(scalar(stage), "second_value") }
+ -> csv_triplet[4] { assign(scalar(second), capture_take(body_start)) }
+ -> csv_triplet[5] { assign(scalar(stage), "third_value") }
+ -> csv_triplet[6] { return(array("?csv_triplet:", scalar(first), scalar(second), capture_from(body_start))) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- the first `capture_take(body_start)` returns `alpha` and moves `body_start` to just after the first comma,
+- the second `capture_take(body_start)` returns `beta` and moves `body_start` to just after the second comma,
+- the final `capture_from(body_start)` returns `gamma` without moving the mark again.
+
+This is the named split-cursor pattern:
+- `capture_from(name)` is the stable read,
+- `capture_take(name)` is the advancing read.
+
 ## Worked Example: Several Independent Checkpoints
 Named checkpoints become more useful once one anonymous split cursor is no longer enough.
 
@@ -997,11 +1040,12 @@ payload::AND
 Both rules use `body_start`, but they do not collide because each rule keeps its own named-mark bucket.
 
 ## Worked Example: Missing Marks Are Safe
-`capture_from(name)` is intentionally safe if the mark does not exist yet.
+`capture_from(name)` and `capture_take(name)` are intentionally safe if the mark does not exist yet.
 
 If the named mark is absent:
-- the helper returns `undef`,
+- either helper returns `undef`,
 - it does not throw by itself,
+- and `capture_take(name)` also leaves the missing mark untouched,
 - so action code can branch explicitly if the mark is optional in that rule family.
 
 That means this is legal:
@@ -1028,6 +1072,15 @@ Use `@mark(name)` when:
 - more than one checkpoint may be alive at once,
 - the checkpoint meaning benefits from a real name,
 - or the same rule needs more than one named left edge.
+
+Use `capture_from(name)` when:
+- the named checkpoint should stay stable for more than one later read,
+- or you want to compare more than one later right boundary against the same named left edge.
+
+Use `capture_take(name)` when:
+- you want the named checkpoint to roll forward after each read,
+- the rule behaves like a named split cursor,
+- or a repeated separator/delimiter pattern should keep consuming successive fields.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
@@ -1078,6 +1131,7 @@ The current supported contract is:
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
+- `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,
 - and marks are a later-slot surface, so same-slot actions should not expect a freshly written mark yet,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.
