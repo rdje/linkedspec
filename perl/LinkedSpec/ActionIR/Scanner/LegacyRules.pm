@@ -34,6 +34,7 @@ sub try_scan_contract_ir_events {
   'capture_take_between_marks' => \&_scan_contract_capture_take_between_marks,
   'mark_here' => \&_scan_contract_mark_here,
   'mark_match_start' => \&_scan_contract_mark_match_start,
+  'mark_copy' => \&_scan_contract_mark_copy,
   'clear_mark' => \&_scan_contract_clear_mark,
   'mark_exists' => \&_scan_contract_mark_exists,
   'mark_pos' => \&_scan_contract_mark_pos,
@@ -236,6 +237,15 @@ sub _scan_contract_mark_match_start {
  my @events;
 while ($code =~ /\bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_copy {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {target => $+{target}, source => $+{source}}};
 }
  return \@events
 }

@@ -875,13 +875,14 @@ The most important semantic detail is this:
 - `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
 - `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
+- `mark_copy(target_mark, source_mark)` copies one explicit named checkpoint into another and clears the target if the source is absent,
 - `clear_mark(name)` removes that named mark from the current rule-local mark bucket,
 - `mark_exists(name)` reports whether that named mark is currently present in the current rule-local mark bucket,
 - `mark_pos(name)` returns the stored numeric position of that named mark from the current rule-local mark bucket,
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
-- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
+- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, `mark_copy(target_mark, source_mark)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
 - and the trace prints a caret on the next line under the stored checkpoint position,
 - so you can see immediately whether the rule stored a post-match parser position or the left edge of the current match.
 
@@ -897,6 +898,7 @@ That means the usual authoring shape is:
 - or call `capture_take_between(start_mark, end_mark)` if that explicit two-mark span should also advance the start mark to the remembered end mark,
 - or call `mark_here(name)` if a later action block should move the named checkpoint explicitly without bundling the write into the read,
 - or call `mark_match_start(name)` if a later action block should remember where the current match begins instead of where it ends,
+- or call `mark_copy(target_mark, source_mark)` if a later action block should copy one remembered boundary into another named checkpoint explicitly,
 - or call `clear_mark(name)` if the named checkpoint should stop being visible to later same-rule reads,
 - or call `mark_exists(name)` if a later action block should branch on whether the named checkpoint is still present,
 - or call `mark_pos(name)` if a later action block should expose the stored numeric checkpoint position itself.
@@ -1088,6 +1090,43 @@ This is the explicit-two-mark length pattern:
 - `capture_between(start_mark, end_mark)` returns the substring,
 - `capture_len_between(start_mark, end_mark)` returns the width of that same remembered-boundary span,
 - and neither helper mutates the stored marks.
+
+## Worked Example: Explicit Mark Copy After Length Read
+Sometimes the rule wants a pure numeric two-mark read first, and only afterward wants to move one named checkpoint to the remembered boundary it just measured.
+
+That is what `mark_copy(target_mark, source_mark)` is for.
+
+```text
+explicit_mark_copy::AND
+ I { declare(scalar, stage, first_len) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> explicit_mark_copy[0] { assign(scalar(stage), "open") }
+ -> explicit_mark_copy[1] { assign(scalar(stage), "body") }
+ -> explicit_mark_copy[2] { mark_match_start(first_end); assign(scalar(first_len), capture_len_between(body_start, first_end)); mark_copy(body_start, first_end) }
+ -> explicit_mark_copy[3] { mark_match_start(final_end); return(array("?explicit_mark_copy:", scalar(first_len), capture_between(body_start, final_end), mark_copy(after_end, missing_end), mark_pos(after_end))) }
+```
+
+On input:
+
+```text
+fooalphabetaEND
+```
+
+the practical reading is:
+- `capture_len_between(body_start, first_end)` returns `5`,
+- `mark_copy(body_start, first_end)` advances `body_start` to the remembered `first_end` boundary without requiring a string-returning helper,
+- `capture_between(body_start, final_end)` now returns `beta`,
+- `mark_copy(after_end, missing_end)` clears `after_end` because the source mark is absent,
+- and `mark_pos(after_end)` returns `undef`.
+
+This is the explicit mark-copy pattern:
+- pure length reads stay pure,
+- `mark_copy(target_mark, source_mark)` owns explicit remembered-boundary moves,
+- and missing-source copies clear the target instead of leaving stale checkpoint state behind.
 
 ## Worked Example: Explicit Two-Mark Span with Advancing Start
 Sometimes the rule wants the clarity of an explicit remembered right boundary and also wants the start mark to roll forward to that remembered boundary after the read.
@@ -1470,6 +1509,11 @@ Use `mark_match_start(name)` when:
 - a closing token or delimiter should be excluded from a later `capture_between(...)` span,
 - or the rule needs both the left edge and the post-match edge of the same current match.
 
+Use `mark_copy(target_mark, source_mark)` when:
+- the rule should copy one remembered boundary into another named checkpoint explicitly,
+- a pure read helper like `capture_len_between(...)` should be followed by an explicit remembered-boundary move,
+- or missing-source copies should clear the target instead of leaving stale state behind.
+
 Use `clear_mark(name)` when:
 - the rule should decide explicitly when a named checkpoint disappears,
 - one stable read should be followed by an explicit drop,
@@ -1541,6 +1585,7 @@ The current supported contract is:
 - `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
+- `mark_copy(target_mark, source_mark)` means “set or overwrite the target checkpoint from the source checkpoint when the source exists, otherwise clear the target and return `undef`,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”

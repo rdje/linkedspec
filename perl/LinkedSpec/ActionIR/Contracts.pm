@@ -514,6 +514,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_copy',
+   ir_node            => 'MARK_COPY',
+   diag_name          => 'mark_copy',
+   unresolved_pattern => qr/\bmark_copy\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; my $__ls_mark_bucket = $$info{marks}{\''.$label.'\'}; if (exists $__ls_mark_bucket->{\''.$+{source}.'\'}) { $__ls_mark_bucket->{\''.$+{target}.'\'} = $__ls_mark_bucket->{\''.$+{source}.'\'}; '. _build_mark_trace_call(operation => 'mark_copy', label => $label, mark_name => $+{target}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{target}.'\'}') .'; $__ls_mark_bucket->{\''.$+{target}.'\'} } else { delete $__ls_mark_bucket->{\''.$+{target}.'\'}; undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'clear_mark',
    ir_node            => 'CLEAR_MARK',
    diag_name          => 'clear_mark',

@@ -476,6 +476,40 @@ Top::AND
 
 Use it when the rule wants a left-edge checkpoint for the current match instead of the usual post-match parser position stored by `@mark(name)` or `mark_here(name)`.
 
+### `mark_copy(target_mark, source_mark)`
+Copy one explicit rule-local named mark position into another named mark.
+
+In high/debug trace mode, this explicit write also emits a short input excerpt plus a caret under the copied target position.
+
+Practical reading:
+- use it when the rule already remembered a boundary under one mark name,
+- and a later action block should move or duplicate another named checkpoint to that remembered boundary,
+- especially after a pure numeric span read like `capture_len_between(...)` that should not mutate marks on its own.
+
+If the source mark is absent, the helper clears the target mark and returns `undef`.
+
+Example:
+
+```text
+mark_copy(body_start, first_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first_len) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_len), capture_len_between(body_start, first_end)); mark_copy(body_start, first_end) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_len), capture_between(body_start, final_end), mark_copy(after_end, missing_end), mark_pos(after_end))) }
+```
+
+Use it when the rule needs an explicit “target becomes source” checkpoint operation instead of bundling that state move into another capture helper.
+
 ### `clear_mark(name)`
 Delete a rule-local named mark explicitly.
 

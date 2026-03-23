@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 21;
+    plan tests => 22;
 
     my $label = 'Top';
 
@@ -9841,6 +9841,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_match_start(end_mark)'),
         q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'end_mark'} = $LSPOS - length $LMATCH; _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'end_mark', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'end_mark'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'end_mark'} }},
         'mark_match_start(name) helper rewrite preserves explicit current-match left-edge semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_copy(body_start, first_end)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; my $__ls_mark_bucket = $$info{marks}{'Top'}; if (exists $__ls_mark_bucket->{'first_end'}) { $__ls_mark_bucket->{'body_start'} = $__ls_mark_bucket->{'first_end'}; _trace_runtime_mark_event(operation => 'mark_copy', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_mark_bucket->{'body_start'} } else { delete $__ls_mark_bucket->{'body_start'}; undef } }},
+        'mark_copy(target_mark,source_mark) helper rewrite preserves explicit rule-local named-mark copy semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'clear_mark(body_start)'),
@@ -10083,6 +10088,39 @@ SPEC
 
     my $between_len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_len_between(body_start, first_end)');
     like($between_len_rewrite, qr/\(\$__ls_end - \$__ls_start\)/, 'capture_len_between(start_mark,end_mark) lowering reads the explicit two-mark span length without mutating either mark');
+};
+subtest 'named_mark_mark_copy_advances_or_clears_explicit_boundary' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first_len) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_len), capture_len_between(body_start, first_end)); mark_copy(body_start, first_end) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_len), capture_between(body_start, final_end), mark_copy(after_end, missing_end), mark_pos(after_end))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_copy(target_mark,source_mark) coverage');
+
+    my $input = 'fooalphabetaEND';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 5, 'beta', undef, undef],
+        'mark_copy(target_mark,source_mark) copies a remembered boundary for later reads and clears the target when the source mark is absent'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_copy(target_mark,source_mark) parse leaves runtime_ctx last_error clear on success');
+
+    my $copy_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_copy(body_start, first_end)');
+    like($copy_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_mark_bucket->\{'first_end'\}/, 'mark_copy(target_mark,source_mark) lowering copies the rule-local stored position directly');
 };
 subtest 'named_mark_capture_take_between_reads_and_advances_explicit_start_mark' => sub {
     plan tests => 4;

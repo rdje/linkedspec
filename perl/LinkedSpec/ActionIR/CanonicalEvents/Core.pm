@@ -41,6 +41,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  capture_take_between_marks       => 'CAPTURE_TAKE_BETWEEN_MARKS',
  mark_here                        => 'MARK_HERE',
  mark_match_start                 => 'MARK_MATCH_START',
+ mark_copy                        => 'MARK_COPY',
  clear_mark                       => 'CLEAR_MARK',
  mark_exists                      => 'MARK_EXISTS',
  mark_pos                         => 'MARK_POS_READ',
