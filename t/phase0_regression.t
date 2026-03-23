@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 22;
+    plan tests => 24;
 
     my $label = 'Top';
 
@@ -9861,6 +9861,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_pos(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? $__ls_mark_bucket->{'body_start'} : undef }},
         'mark_pos(name) helper rewrite preserves explicit rule-local named-mark position-read semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_start_pos()'),
+        q{do { $LSPOS - length $LMATCH }},
+        'match_start_pos() helper rewrite preserves explicit current-local-match left-edge position semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'match_end_pos()'),
+        q{do { $LSPOS }},
+        'match_end_pos() helper rewrite preserves explicit current-local-match right-edge position semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -10185,6 +10195,37 @@ SPEC
 
     my $pos_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_pos(body_start)');
     like($pos_rewrite, qr/\? \$__ls_mark_bucket->\{'body_start'\} : undef/, 'mark_pos(name) lowering reads the stored rule-local mark position without mutating it');
+};
+subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, body_start_pos, body_end_pos) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(body_start_pos), match_start_pos()); assign(scalar(body_end_pos), match_end_pos()) }
+ -> Top[2] { return(array("?Top:", scalar(body_start_pos), scalar(body_end_pos), match_start_pos(), match_end_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for match_start_pos() and match_end_pos() boundary-read coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 4, 7, 7, 8],
+        'match_start_pos() and match_end_pos() return the current local match boundaries without relying on stored named marks'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'current match position helper parse leaves runtime_ctx last_error clear on success');
+
+    my $start_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_start_pos()');
+    my $end_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'match_end_pos()');
+    like($start_rewrite . "\n" . $end_rewrite, qr/\$LSPOS - length \$LMATCH.*\$LSPOS/s, 'current match position helper lowering reads the current local match left and right edges directly');
 };
 subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub {
     plan tests => 4;

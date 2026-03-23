@@ -610,6 +610,45 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `match_start_pos()`
+Return the left edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the current match start as data,
+- prefer it over `mark_pos(name)` when there is no reason to store a checkpoint first,
+- and treat it as the direct-boundary companion to `mark_match_start(name)`.
+
+Example:
+
+```text
+match_start_pos()
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, body_start_pos, body_end_pos) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(body_start_pos), match_start_pos()); assign(scalar(body_end_pos), match_end_pos()) }
+ -> Top[2] { return(array("?Top:", scalar(body_start_pos), scalar(body_end_pos), match_start_pos(), match_end_pos())) }
+```
+
+Use it when the rule wants the current local match left edge immediately instead of reading a previously stored checkpoint.
+
+### `match_end_pos()`
+Return the right edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the current match end as data,
+- prefer it over `mark_pos(name)` when there is no reason to store a checkpoint first,
+- and treat it as the direct-boundary companion to `mark_here(name)` for post-match positions.
+
+If the current local match is `bar` inside `foo(bar)`, then `match_end_pos()` returns the position just after `bar`.
+
+Use it when the rule wants the current local match right edge immediately instead of reading a previously stored checkpoint.
+
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,
 - while [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) is where the Perl lowering is shown explicitly.
