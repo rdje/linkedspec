@@ -9778,7 +9778,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 19;
+    plan tests => 20;
 
     my $label = 'Top';
 
@@ -9806,6 +9806,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_from(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }},
         'capture_from(name) helper rewrite preserved'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_len_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? ($LSPOS - $__ls_mark - length $LMATCH) : undef }},
+        'capture_len_from(name) helper rewrite preserves explicit current-edge length-read semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
@@ -9908,6 +9913,33 @@ SPEC
     ok(!defined($bad_ast), 'consume mode still rejects leading junk for rule-local named-mark parser');
     ok(!defined($runtime_ctx{last_error}) || $runtime_ctx{last_error}{type} ne 'runtime_handler',
         'consume rejection does not turn rule-local named-mark coverage into a runtime-handler failure');
+};
+subtest 'named_mark_capture_len_from_reads_current_edge_span_length' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_len_from(body_start), capture_len_from(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_len_from(name) coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply($ast, ['?Top:', 3, undef], 'capture_len_from(name) returns the current-edge span length from the named checkpoint or undef when the mark is absent');
+    ok(!defined($runtime_ctx{last_error}), 'capture_len_from(name) parse leaves runtime_ctx last_error clear on success');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_len_from(body_start)');
+    like($len_rewrite, qr/\$LSPOS - \$__ls_mark - length \$LMATCH/, 'capture_len_from(name) lowering reads the current-edge span length without mutating the mark');
 };
 subtest 'named_mark_scope_is_rule_local_and_not_visible_to_child_rules' => sub {
     plan tests => 4;

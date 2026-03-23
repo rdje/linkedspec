@@ -789,7 +789,7 @@ The older spelling `@move_pos` is still supported as a compatibility alias.
 There is now also a named checkpoint form:
 - `@mark(name)`
 
-That named form stores the current parser position under `name` so later `capture_from(name)` calls return the substring from that named checkpoint up to the left edge of the current match.
+That named form stores the current parser position under `name` so later `capture_from(name)` and `capture_len_from(name)` calls can read the current-edge span that starts at that named checkpoint.
 
 It is easy to misunderstand what it does, so here is the precise version:
 - it does not collect text by itself,
@@ -862,12 +862,13 @@ That means:
 - it does not capture text by itself,
 - it records the current parser position under a stable name,
 - the name is scoped to the current rule label,
-- and later `capture_from(name)` or `capture_take(name)` in that same rule can recover the span that starts at that named point.
+- and later `capture_from(name)`, `capture_len_from(name)`, or `capture_take(name)` in that same rule can recover information about the span that starts at that named point.
 
 The most important semantic detail is this:
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current match,
 - it does not include the current local match itself,
 - `capture_from(name)` is a pure read and does not move the mark,
+- `capture_len_from(name)` returns the numeric length of that same current-edge span without materializing the substring,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
 - `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
@@ -888,6 +889,7 @@ That means the usual authoring shape is:
 - set `@mark(name)`,
 - keep matching forward,
 - then on a later closing delimiter or separator in that same rule call `capture_from(name)` if the mark should stay stable,
+- or call `capture_len_from(name)` if the rule should read the numeric width of that same current-edge span instead of the substring itself,
 - or call `capture_take(name)` if the mark should roll forward like a named split cursor,
 - or call `capture_between(start_mark, end_mark)` if both edges should come from explicit named checkpoints,
 - or call `capture_take_between(start_mark, end_mark)` if that explicit two-mark span should also advance the start mark to the remembered end mark,
@@ -1195,6 +1197,39 @@ This is the explicit-reset pattern:
 - `clear_mark(name)` drops the checkpoint,
 - later same-rule reads see that the mark is gone.
 
+## Worked Example: Explicit Current-Edge Length Read
+Sometimes the rule wants metadata about the current span width rather than the substring itself.
+
+That is what `capture_len_from(name)` is for.
+
+```text
+span_length::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> span_length[0] { assign(scalar(stage), "open") }
+ -> span_length[1] { assign(scalar(stage), "body") }
+ -> span_length[2] { return(array("?span_length:", capture_len_from(body_start), capture_len_from(missing_mark))) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- `capture_len_from(body_start)` returns `3` because the current-edge span is `bar`,
+- `capture_len_from(missing_mark)` returns `undef` because that named checkpoint was never established,
+- and neither read mutates the named mark.
+
+This is the explicit current-edge length pattern:
+- `capture_from(name)` returns the substring,
+- `capture_len_from(name)` returns the width of that same current-edge span,
+- and `capture_take(name)` is still the only one of those three helpers that advances the mark.
+
 ## Worked Example: Explicit Presence Check
 Sometimes the rule wants to know whether a named checkpoint is still alive without reading or moving it.
 
@@ -1366,6 +1401,11 @@ Use `capture_from(name)` when:
 - the named checkpoint should stay stable for more than one later read,
 - or you want to compare more than one later right boundary against the same named left edge.
 
+Use `capture_len_from(name)` when:
+- the rule wants the numeric width of the current-edge span instead of the substring itself,
+- later logic should record or compare span length metadata without materializing that text,
+- or the rule wants the same boundary semantics as `capture_from(name)` but in numeric form.
+
 Use `capture_take(name)` when:
 - you want the named checkpoint to roll forward after each read,
 - the rule behaves like a named split cursor,
@@ -1450,6 +1490,7 @@ The current supported contract is:
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@move_pos` remains a supported compatibility alias for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
+- `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”

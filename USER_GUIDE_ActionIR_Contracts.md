@@ -230,6 +230,47 @@ Left::AND
 
 Use it when one anonymous split cursor is not enough and you want a later action block in that same rule to refer back to a specific named checkpoint.
 
+### `capture_len_from(name)`
+Return the numeric length of the same current-edge span that `capture_from(name)` would read.
+
+Practical reading:
+- the earlier `@mark(name)` establishes the left boundary,
+- a later regex slot in that same rule still establishes the right boundary,
+- the current local match itself is not included in that span,
+- and the helper returns the width of that span instead of materializing the substring.
+
+If the mark is absent, the helper returns `undef`.
+
+The mark name is scoped to the current rule label:
+- different rules can reuse the same mark name safely,
+- child rules do not inherit a parent rule's named marks automatically.
+
+Examples:
+
+```text
+assign(scalar(width), capture_len_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /foo\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_len_from(body_start), capture_len_from(missing_mark))) }
+```
+
+```text
+-> rule[2] {
+     return(array("?meta:", capture_len_from(body_start)))
+   }
+```
+
+Use it when the rule needs the same current-edge boundary semantics as `capture_from(name)` but only wants length metadata, not the substring itself.
+
 ### `capture_take(name)`
 Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.
 

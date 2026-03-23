@@ -409,6 +409,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_len_from_mark',
+   ir_node            => 'CAPTURE_LEN_FROM_MARK',
+   diag_name          => 'capture_len_from',
+   unresolved_pattern => qr/\bcapture_len_from\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_len_from\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? ($LSPOS - $__ls_mark - length $LMATCH) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_take_from_mark',
    ir_node            => 'CAPTURE_TAKE_FROM_MARK',
    diag_name          => 'capture_take',
