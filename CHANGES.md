@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate ebnf Token Readers To Explicit Entry Helpers
+
+Moved the simple terminal-reader band in `specs/ebnf.spec` off raw `$IMATCH`-style reads and onto the explicit immediate-match helper surface instead:
+- `entry_text()`
+- `entry_group(0)`
+- plus helper-method cleanup where the token reader still strips delimiters or punctuation
+
+This slice covers rules like:
+- `grammar_rule`
+- `rule_name`
+- `quoted_string`
+- `quantifier`
+- `probability`
+- `regex`
+
+Regression coverage now locks those `ebnf` token readers as language-agnostic-ready at the rule metadata level, while the existing end-to-end `ebnf` invariants continue to guard the real parser behavior.
+
 ## 2026-03-23 - Phase 4: Add Named-Capture Presence Helpers
 
 Added explicit backend-neutral named-capture presence probes:

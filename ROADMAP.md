@@ -144,6 +144,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - explicit helper `match_map()` now lets a later action block snapshot the whole current local-match named-capture hash directly without first storing a named checkpoint, with `match_named_map()` retained as a compatibility alias,
   - explicit helper `match_start_pos()` now lets a later action block read the left edge of the current local match directly without first storing a named checkpoint,
   - explicit helper `match_end_pos()` now lets a later action block read the right edge of the current local match directly without first storing a named checkpoint,
+  - core token readers in `specs/ebnf.spec` now also use the explicit immediate-match helper surface directly (`entry_text()` / `entry_group(0)` plus helper-method cleanup) instead of raw `$IMATCH`-style reads for that simple terminal-reader band,
   - named marks are now scoped to the current rule label rather than shared across child-rule calls,
   - mark writes now fire only when the regex slot that actually carries the `@mark(name)` paragraph member matches,
   - high/debug trace output now shows mark-write positions for `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` as a short input excerpt plus a caret under the stored checkpoint position,

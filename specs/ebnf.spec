@@ -161,23 +161,23 @@ LX {
 -> whitespace
 -> comment
 
-grammar_rule: /(?m)^\s*[[:alpha:]_]\w*\s*:{,2}=/  I {return ["rule", ($IMATCH =~ /([[:alpha:]_]\w*)/o)[0]]}
-rule_name: /\b[[:alpha:]_]\w*/                    I {return ["rule_reference", $IMATCH]}
+grammar_rule: /(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/  I.return(array("rule", entry_group(0)))
+rule_name: /\b[[:alpha:]_]\w*/                      I.return(array("rule_reference", entry_text()))
 
-quoted_string: /"[^"]*"|'[^']*'/    I {$IMATCH =~ s/^(?:'|")|(?:'|")$//g; return ["quoted_string", $IMATCH]}
-number: /\b\d+\b/                   I {return ["number", $IMATCH]}
-quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I {$IMATCH =~ s/\{|\}//go; return ["quantifier", $IMATCH]}
-pipe_operator: /\|/                 I {return ["operator", $IMATCH]}
-plus_operator: /\+/                 I {return ["operator", $IMATCH]}
-star_operator: /\*/                 I {return ["operator", $IMATCH]}
-question_operator: /\?/             I {return ["operator", $IMATCH]}
-return_scalar: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/       I {return ["return_scalar", $IMATCH]}
-return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/     I {return ["return_array", $IMATCH]}
-return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I {return ["return_object", $IMATCH]}
-open_paren: /\(/                    I {return ["group_open", $IMATCH]}
-close_paren: /\)/                   I {return ["group_close", $IMATCH]}
-probability: /@\d+%?/               I {$IMATCH =~ s/@|%//g; return ["probability", $IMATCH]}
-regex: /(?<!\\)\/.+?(?<!\\)\//      I {$IMATCH =~ s/^\/|\/$//g; return ["regex", $IMATCH]}
+quoted_string: /"[^"]*"|'[^']*'/  I.declare(scalar, value=entry_text()).substr(scalar(value), "^(?:'|\")|(?:'|\")$", "", go).return(array("quoted_string", scalar(value)))
+number: /\b\d+\b/                 I.return(array("number", entry_text()))
+quantifier: /\{\s*(?:\d+(?:\s*,\s*\d*)?|,\s*\d+)\s*\}/  I.declare(scalar, value=entry_text()).substr(scalar(value), "\\{|\\}", "", go).return(array("quantifier", scalar(value)))
+pipe_operator: /\|/               I.return(array("operator", entry_text()))
+plus_operator: /\+/               I.return(array("operator", entry_text()))
+star_operator: /\*/               I.return(array("operator", entry_text()))
+question_operator: /\?/           I.return(array("operator", entry_text()))
+return_scalar: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/  I.return(array("return_scalar", entry_text()))
+return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I.return(array("return_array", entry_text()))
+return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/ I.return(array("return_object", entry_text()))
+open_paren: /\(/                  I.return(array("group_open", entry_text()))
+close_paren: /\)/                 I.return(array("group_close", entry_text()))
+probability: /@\d+%?/             I.declare(scalar, value=entry_text()).substr(scalar(value), "@|%", "", go).return(array("probability", scalar(value)))
+regex: /(?<!\\)\/.+?(?<!\\)\//    I.declare(scalar, value=entry_text()).substr(scalar(value), "^/|/$", "", go).return(array("regex", scalar(value)))
 whitespace: /\s+/
 comment: /#.*/
 include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {

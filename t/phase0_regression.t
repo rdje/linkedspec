@@ -35084,6 +35084,21 @@ subtest 'ebnf_grammar_file_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ebnf exposes no prioritized blocked-rule list after grammar_file migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after grammar_file migration');
 };
+subtest 'ebnf_terminal_token_rules_helper_flow_eliminates_raw_fallback' => sub {
+    my @rules = qw(grammar_rule rule_name quoted_string quantifier probability regex);
+    plan tests => 1 + @rules * 4;
+
+    my $descr = LinkedSpec::get_parser('ebnf', return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ebnf terminal token helper migration check');
+
+    for my $rule (@rules) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "ebnf $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "ebnf $rule no longer reports raw-Perl fallback dependency");
+        is($meta->{unresolved_helper_count}, 0, "ebnf $rule avoids unresolved-helper hits");
+        ok($meta->{language_agnostic_action_ir_ready}, "ebnf $rule is language-agnostic action-IR ready");
+    }
+};
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 

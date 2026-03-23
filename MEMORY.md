@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-24: Began using the newer Phase 4 immediate-match helper surface in a live core grammar. The simple terminal-reader band in `specs/ebnf.spec` now uses `entry_text()` / `entry_group(0)` plus helper-method cleanup instead of raw `$IMATCH` reads, and the regression suite now locks those token rules as language-agnostic-ready so future resume work can keep migrating real specs, not just the helper catalog.
 - 2026-03-23: Extended the Phase 4 named-capture read surface again so future resume work can see the next intended shape clearly. `entry_has(name)` and `match_has(name)` now answer the common immediate/local named-capture presence question directly, without forcing rules through `has_key(entry_map(), ...)` or `has_key(match_map(), ...)` when the whole hash is not otherwise needed.
 - 2026-03-23: Refined the Phase 4 named-capture-hash surface so `entry_map()` / `match_map()` are now the preferred short spellings, while `entry_named_map()` / `match_named_map()` remain supported compatibility aliases. The hash-lowering path recognizes both pairs equally.
 - 2026-03-23: Extended Phase 4 so full positional capture-group lists now have explicit backend-neutral read helpers too. `entry_groups()` and `match_groups()` now snapshot the current immediate/local capture-group lists without raw `array(IMATCH_LIST)` / `array(LMATCH_LIST)` spellings in normal user-facing `.spec` examples.
