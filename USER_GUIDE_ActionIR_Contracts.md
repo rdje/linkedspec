@@ -673,6 +673,37 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants one capture group from the immediate entry match that led into the current rule instead of the capture groups of the currently active local match.
 
+### `entry_named(name)`
+Return one named capture from the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants one named capture from the entry/immediate match that led into the current rule,
+- prefer it over raw `%IMATCH_HASH` access in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
+- and treat it as the direct named-capture companion to `entry_text()` / `entry_group(index)` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
+
+Example:
+
+```text
+entry_named(prefix)
+```
+
+```text
+Top::AND
+ /(?<prefix>foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_prefix, body_first, body_rest) }
+ /(?<first>\w)(?<rest>\w+)/
+ /(?<close>\))/
+ -> Child[0] { assign(scalar(entry_prefix), entry_named(prefix)); assign(scalar(body_first), match_named(first)); assign(scalar(body_rest), match_named(rest)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_prefix), scalar(body_first), scalar(body_rest), match_named(close), entry_named(prefix), entry_named(missing_name), match_named(rest))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants one named capture from the immediate entry match that led into the current rule instead of the named captures of the currently active local match.
+
 ### `entry_len()`
 Return the width of the current immediate match directly.
 
@@ -799,6 +830,37 @@ Top::AND
 ```
 
 Use it when the rule wants capture-group data from the currently active local match immediately instead of from the immediate entry match or from a previously stored checkpoint span.
+
+### `match_named(name)`
+Return one named capture from the current local match directly.
+
+Practical reading:
+- use it when the rule wants one named capture from the current local match itself,
+- prefer it over raw `%LMATCH_HASH` access in normal user-facing `.spec` examples when an explicit helper spelling is clearer,
+- and treat it as the direct named-capture companion to `match_text()` / `match_group(index)` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_named(rest)
+```
+
+```text
+Top::AND
+ /(?<prefix>foo)\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_prefix, body_first, body_rest) }
+ /(?<first>\w)(?<rest>\w+)/
+ /(?<close>\))/
+ -> Child[0] { assign(scalar(entry_prefix), entry_named(prefix)); assign(scalar(body_first), match_named(first)); assign(scalar(body_rest), match_named(rest)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_prefix), scalar(body_first), scalar(body_rest), match_named(close), entry_named(prefix), entry_named(missing_name), match_named(rest))) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants one named capture from the current local match itself instead of the immediate entry match that led into the current rule.
 
 ### `match_len()`
 Return the width of the current local match directly.

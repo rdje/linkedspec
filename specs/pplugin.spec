@@ -11,7 +11,7 @@ subdef: /(?<subname>\w\S*)\s*(?<!\\)\{/ /(?<!\\)\}/
  -> curlyb
  -> dquotes
  -> squotes
- -> subdef[1]	{return [$IMATCH_HASH{subname}, sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}]}
+ -> subdef[1]	{return [entry_named(subname), sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}]}
 
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/
@@ -25,4 +25,3 @@ curlyb: /(?<!\\)\{/ /(?<!\\)\}/
 comment: /#.*/
 dquotes: /(?<!\\)".*?(?<!\\)"/
 squotes: /(?<!\\)'.*?(?<!\\)'/
-

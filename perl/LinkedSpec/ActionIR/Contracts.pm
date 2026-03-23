@@ -600,6 +600,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_named',
+   ir_node            => 'IMATCH_NAMED_READ',
+   diag_name          => 'entry_named',
+   unresolved_pattern => qr/\bentry_named\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bentry_named\s*\(\s*(?<name>\w+)\s*\)
+    }{
+     'do { exists $IMATCH_HASH{\''.$+{name}.'\'} ? $IMATCH_HASH{\''.$+{name}.'\'} : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_len',
    ir_node            => 'IMATCH_LEN_READ',
    diag_name          => 'entry_len',
@@ -665,6 +680,21 @@ sub _build_capture_and_backtrack_contracts {
      \bmatch_group\s*\(\s*(?<index>\d+)\s*\)
     }{
      'do { scalar(@LMATCH_LIST) > '.$+{index}.' ? $LMATCH_LIST['.$+{index}.'] : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_named',
+   ir_node            => 'MATCH_NAMED_READ',
+   diag_name          => 'match_named',
+   unresolved_pattern => qr/\bmatch_named\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmatch_named\s*\(\s*(?<name>\w+)\s*\)
+    }{
+     'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef }'
     }gex;
     return $code
    },

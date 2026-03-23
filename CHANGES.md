@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-23 - Phase 4: Add Explicit Named-Capture Hash Helpers
+
+Extended the Phase 4 current-match helper surface so named regex captures no longer require raw `%IMATCH_HASH` / `%LMATCH_HASH` access in user-facing `.spec` code.
+
+- Updated `perl/LinkedSpec/ActionIR/Contracts.pm` so the current-match helper surface now also recognizes:
+  - `entry_named(name)`
+  - `match_named(name)`
+  and lowers them to direct immediate/local named-capture hash reads with `undef` fallback when the named capture is absent.
+- Updated `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so those new helpers now register explicit ActionIR events:
+  - `IMATCH_NAMED_READ`
+  - `MATCH_NAMED_READ`
+- Updated `specs/pplugin.spec` so the live `subdef` rule now uses:
+  - `entry_named(subname)`
+  instead of raw `$IMATCH_HASH{subname}` for its immediate named capture read.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - exact helper rewrite parity of `entry_named(name)` and `match_named(name)`,
+  - and an end-to-end multi-rule parse that proves immediate named captures stay visible through `entry_named(...)` while current local named captures continue to follow the active local match through `match_named(...)`.
+- Expanded the user guides so Phase 4 documentation now teaches named-capture hash reads alongside the earlier positional capture-group helpers, with explicit guidance about when to choose:
+  - `entry_group(index)` / `match_group(index)`
+  versus
+  - `entry_named(name)` / `match_named(name)`.
+
 ## 2026-03-22 - Phase 5: Carry Handler Source Labels Through Runtime Parser Failures
 
 Extended the Phase 5 runtime diagnostics contract so top-level parser failures expose the same generated-handler source identity as inner runtime-handler failures.
