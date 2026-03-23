@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-23 - Phase 4: Add Explicit Named-Capture Map Helpers
+
+Extended the Phase 4 current-match helper surface so whole named-capture hashes now have the same explicit helper-style access as the earlier single-key readers.
+
+- Updated `perl/LinkedSpec/ActionIR/Contracts.pm` so the current-match helper surface now also recognizes:
+  - `entry_named_map()`
+  - `match_named_map()`
+  and lowers them to immediate/local named-capture hash snapshot reads.
+- Updated `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so those new helpers now register explicit ActionIR events:
+  - `IMATCH_NAMED_MAP_READ`
+  - `MATCH_NAMED_MAP_READ`
+- Updated `perl/LinkedSpec/ActionIR/MethodLowering.pm` and `perl/LinkedSpec/ActionIR/DeclareMethod.pm` so those new helpers now participate cleanly in hash-valued expressions and `assign(hash(...), ...)` lowering instead of staying rewrite-only surfaces.
+- Added focused regression coverage in `t/phase0_regression.t` for:
+  - exact helper rewrite parity of `entry_named_map()` and `match_named_map()`,
+  - and an end-to-end multi-rule parse that proves immediate named-capture hashes stay visible through `entry_named_map()` while current local named-capture hashes continue to follow the active local match through `match_named_map()`.
+- Expanded the user guides so Phase 4 documentation now teaches:
+  - single named-capture reads with `entry_named(name)` / `match_named(name)`,
+  - whole named-capture-hash snapshots with `entry_named_map()` / `match_named_map()`,
+  - and how those map helpers relate to the earlier positional group readers.
+
 ## 2026-03-23 - Phase 4: Add Explicit Capture-Group List Helpers
 
 Extended the Phase 4 current-match helper surface so full positional capture-group lists now have the same explicit helper-style access as the earlier single-group readers.

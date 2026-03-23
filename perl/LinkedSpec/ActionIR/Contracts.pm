@@ -626,6 +626,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_named_map',
+   ir_node            => 'IMATCH_NAMED_MAP_READ',
+   diag_name          => 'entry_named_map',
+   unresolved_pattern => qr/\bentry_named_map\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_named_map\s*\(\s*\)/do { +{\%IMATCH_HASH} }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_len',
    ir_node            => 'IMATCH_LEN_READ',
    diag_name          => 'entry_len',
@@ -718,6 +729,17 @@ sub _build_capture_and_backtrack_contracts {
     }{
      'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef }'
     }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_named_map',
+   ir_node            => 'MATCH_NAMED_MAP_READ',
+   diag_name          => 'match_named_map',
+   unresolved_pattern => qr/\bmatch_named_map\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_named_map\s*\(\s*\)/do { +{\%LMATCH_HASH} }/g;
     return $code
    },
   },

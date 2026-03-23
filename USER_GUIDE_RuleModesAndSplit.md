@@ -1563,7 +1563,8 @@ This is the direct-group-list pattern:
 - use `entry_groups()` when the rule wants the whole immediate entry capture-group list that led into the current rule,
 - use `match_groups()` when the rule wants the whole currently active local capture-group list instead,
 - use `entry_group(index)` / `match_group(index)` when one positional capture is clearer than the whole list,
-- and use `entry_named(name)` / `match_named(name)` when named captures are clearer than positional group snapshots.
+- use `entry_named(name)` / `match_named(name)` when one named capture is clearer than positional group snapshots,
+- and use `entry_named_map()` / `match_named_map()` when the whole named-capture hash is the clearer boundary snapshot.
 
 ## Worked Example: Current Immediate And Local Named Capture Read
 Sometimes a child rule wants named regex captures from both the immediate entry match that led into the rule and the currently active local match inside that child rule.
@@ -1602,6 +1603,44 @@ This is the direct-named-group pattern:
 - use `match_named(name)` when the rule wants one named capture from the currently active local match instead,
 - use `entry_group(index)` / `match_group(index)` when positional numbering is clearer than names,
 - and use `entry_text()` / `match_text()` when whole-match text is clearer than either group form.
+
+## Worked Example: Current Immediate And Local Named Capture Maps
+Sometimes a child rule wants to snapshot the whole named-capture hash from both the immediate entry match and the currently active local match.
+
+That is what `entry_named_map()` and `match_named_map()` are for.
+
+```text
+entry_vs_local_named_maps::AND
+ /(?<prefix>foo)\(/
+ -> entry_vs_local_named_maps[0] { return(call(entry_vs_local_named_maps_body)) }
+
+entry_vs_local_named_maps_body::AND
+ I { declare(hash, entry_named_seen, body_named_seen) }
+ /(?<first>\w)(?<rest>\w+)/
+ -> entry_vs_local_named_maps_body[0] { assign(hash(entry_named_seen), entry_named_map()); assign(hash(body_named_seen), match_named_map()) }
+ /(?<close>\))/
+ -> entry_vs_local_named_maps_body[1] { return(array("?entry_vs_local_named_maps_body:", scalar(hash(entry_named_seen), "prefix"), scalar(hash(body_named_seen), "first"), scalar(hash(body_named_seen), "rest"), scalar(match_named_map(), "close"), join_values(",", sorted_keys(entry_named_map())), join_values(",", sorted_keys(match_named_map())))) }
+```
+
+When building this exact inline example directly, select `top_rule => entry_vs_local_named_maps` so the entry rule is explicit.
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- when `entry_vs_local_named_maps_body` starts, its immediate entry named-capture hash still contains `prefix => foo`, so `entry_named_map()` snapshots that entry-side named boundary directly,
+- at `-> entry_vs_local_named_maps_body[0]`, the current local match is `bar`, so `match_named_map()` snapshots `first => b` and `rest => ar`,
+- at `-> entry_vs_local_named_maps_body[1]`, the current local match is now `)`, so `match_named_map()` has moved on to `close => )`,
+- and the earlier stored `body_named_seen` snapshot stays on the earlier `bar` match because it was copied into an ordinary rule-local hash.
+
+This is the direct-named-map pattern:
+- use `entry_named_map()` when the rule wants the whole immediate entry named-capture hash that led into the current rule,
+- use `match_named_map()` when the rule wants the whole currently active local named-capture hash instead,
+- use `entry_named(name)` / `match_named(name)` when one key is clearer than the full hash,
+- and use `entry_groups()` / `match_groups()` when positional capture-group lists are the clearer representation.
 
 ## Worked Example: Current Immediate Match Width Read
 Sometimes a child rule wants to keep the width of the immediate entry match that led into the rule, even while later local match widths inside that child rule keep changing.
@@ -2021,6 +2060,7 @@ The current supported contract is:
 - `entry_group(index)` means “return one capture group from the current immediate match directly,”
 - `entry_groups()` means “return the whole current immediate-match capture-group list directly,”
 - `entry_named(name)` means “return one named capture from the current immediate match directly,”
+- `entry_named_map()` means “return the whole current immediate-match named-capture hash directly,”
 - `entry_len()` means “return the width of the current immediate match directly,”
 - `entry_start_pos()` means “return the left edge of the current immediate match directly,”
 - `entry_end_pos()` means “return the right edge of the current immediate match directly,”
@@ -2028,6 +2068,7 @@ The current supported contract is:
 - `match_group(index)` means “return one capture group from the current local match directly,”
 - `match_groups()` means “return the whole current local-match capture-group list directly,”
 - `match_named(name)` means “return one named capture from the current local match directly,”
+- `match_named_map()` means “return the whole current local named-capture hash directly,”
 - `match_len()` means “return the width of the current local match directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”
