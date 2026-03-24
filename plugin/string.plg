@@ -11,11 +11,12 @@ my ($string, $subst_re, %subst_data) = @_;
 #}
 
 var_subst_test {
+  use LinkedSpec;
   open (my $f, $_[0]{_argv}[0]); local $/; my $file = <$f>;
  Global->set ('cgi') = HUtils::Conf(PathSearch->go('cgi'));
   
   set_http_localhost ();
-  my $fo = PPlugin->exec_plugin_name('file_list_path2http', $file);
+  my $fo = LinkedSpec::run_plugin('file_list_path2http', $file);
 
   print "var_subst_test: ($fo)\n";
 }

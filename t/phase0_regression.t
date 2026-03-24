@@ -3502,6 +3502,40 @@ subtest 'repo_owned_perl_modules_no_longer_advertise_legacy_pplugin_inheritance'
     is($lispml_exit, 0, 'LispML require-only subprocess exits cleanly') or diag($lispml_err || $lispml_out);
     like($lispml_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring LispML no longer loads the legacy PPlugin runtime');
 };
+subtest 'repo_owned_plugin_callers_prefer_linkedspec_run_plugin' => sub {
+    plan tests => 8;
+
+    my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
+    my $string_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'));
+
+    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for explicit-dispatch inspection');
+    ok(defined($string_plugin) && length($string_plugin), 'string.plg source is available for explicit-dispatch inspection');
+    unlike($regtest_plugin, qr/\bnew PPlugin\b/, 'regtest plugin no longer instantiates the legacy PPlugin runtime directly');
+    unlike($regtest_plugin, qr/\$pl->exec\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through legacy PPlugin exec');
+    like($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute', \\%subh\)/, 'regtest plugin now dispatches hvalue_substitute through LinkedSpec::run_plugin');
+    unlike($string_plugin, qr/PPlugin->exec_plugin_name\('file_list_path2http'/, 'string plugin no longer routes file_list_path2http through legacy PPlugin explicit-name exec');
+    like($string_plugin, qr/LinkedSpec::run_plugin\('file_list_path2http', \$file\)/, 'string plugin now dispatches file_list_path2http through LinkedSpec::run_plugin');
+    like($string_plugin, qr/use LinkedSpec;/, 'string plugin now loads LinkedSpec explicitly before using run_plugin');
+};
+subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
+    plan tests => 8;
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for migrated plugin-file smoke');
+
+    my $regtest_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
+    my $regtest_ast = eval { $parser->(\$regtest_input) };
+    ok(!$@, 'regtest plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($regtest_ast) && ref($regtest_ast) eq 'HASH', 'regtest plugin still returns a hash AST under pplugin');
+    is(ref($regtest_ast->{register_test}), 'CODE', 'regtest plugin still exposes register_test as a coderef');
+
+    my $string_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'));
+    my $string_ast = eval { $parser->(\$string_input) };
+    ok(!$@, 'string plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($string_ast) && ref($string_ast) eq 'HASH', 'string plugin still returns a hash AST under pplugin');
+    is_deeply([sort keys %$string_ast], [qw(var_subst var_subst_test)], 'string plugin still exposes the expected subdef names');
+    is(ref($string_ast->{var_subst_test}), 'CODE', 'string plugin still exposes var_subst_test as a coderef');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 

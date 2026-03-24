@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Retire Direct `PPlugin` Exec Calls in Repo-Owned `.plg` Files
+
+Continued the plugin/runtime modernization track by moving the last repo-owned direct `PPlugin` exec callsites in lightweight plugin files onto the public explicit dispatch API:
+- `plugin/regtest.plg` no longer instantiates `PPlugin` just to run `hvalue_substitute`; it now calls `LinkedSpec::run_plugin('hvalue_substitute', ...)` directly,
+- `plugin/string.plg` no longer calls `PPlugin->exec_plugin_name('file_list_path2http', ...)`; it now loads `LinkedSpec` explicitly and calls `LinkedSpec::run_plugin(...)`,
+- and regression coverage now also parses both updated plugin files through `pplugin` so this migration is not locked only by source regexes.
+
+Regression coverage now locks:
+- that those repo-owned plugin files no longer use the direct legacy exec forms,
+- that they now prefer `LinkedSpec::run_plugin(...)`,
+- and that both files still parse successfully under `pplugin` with the expected exported subdef names.
+
 ## 2026-03-24 - Plugin Track: Remove Stale Repo-Owned `PPlugin` Inheritance
 
 Continued the plugin/runtime modernization track by removing legacy `PPlugin` inheritance from repo-owned Perl packages that no longer depend on inherited plugin behavior:

@@ -4,7 +4,6 @@ my ($conf) = @_;
 
  my $parse_info  = Storable::retrieve($$conf{_argv}[0]);
 
- my $pl = new PPlugin;
  my $ru = new RTLUtils;
 
  my $h = {};
@@ -61,7 +60,7 @@ my ($conf) = @_;
    }
 
    my %subh = map {$_, $h->{package}{$$pkg[1]}{constant}{$_}} grep {$h->{package}{$$pkg[1]}{constant}{$_} !~ /\(|--|\&/o} keys %{$h->{package}{$$pkg[1]}{constant}};
-   $pl->exec('hvalue_substitute', \%subh);
+   LinkedSpec::run_plugin('hvalue_substitute', \%subh);
    HUtils::Merge($h->{package}{$$pkg[1]}{constant}, \%subh);
 
    #print "---------------------\n";
@@ -343,4 +342,3 @@ my ($sz, $pat) = @_;
  my $cv = $pat;
  join "", "$sz\'b", map {($cv+$_)%2} 0 .. $sz-1;
 }
-
