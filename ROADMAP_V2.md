@@ -66,7 +66,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
 | Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
-| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Explicit registered-plugin entrypoints now exist and the bridge now prefers that registry before legacy `.plg` fallback, but full runtime replacement and decoupling are still ahead. |
+| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Explicit registered-plugin entrypoints and public `run_plugin(...)` now exist, and the bridge now prefers that registry before legacy `.plg` fallback, but full runtime replacement and decoupling are still ahead. |
 
 ## Near-Term Execution Priorities
 1. Finish the lifecycle-family follow-through for semicolon-light structured authoring:

@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Add Explicit `run_plugin(...)` Dispatch
+
+Continued the explicit plugin-runtime migration immediately after the first registry slice:
+- LinkedSpec now exposes public `run_plugin(name, @args)` as the preferred explicit plugin-dispatch API,
+- that entrypoint reuses the same `PluginBridge` explicit-name owner path as the legacy autoload bridge, so registered plugins still run first and legacy `.plg` fallback still stays intact when needed,
+- and `AUTOLOAD` is now documented more plainly as compatibility glue rather than the intended long-term primary surface.
+
+Regression coverage now locks:
+- lazy `PluginBridge` loading until explicit `run_plugin(...)` use,
+- registered-plugin dispatch through the new public API without loading `PPlugin`,
+- and the public façade wrapper contract for `run_plugin(...)`.
+
 ## 2026-03-24 - Plugin Track: Add Explicit Registered Plugin API
 
 Started the next real plugin/runtime modernization slice instead of more helper-spending:

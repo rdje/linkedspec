@@ -943,6 +943,32 @@ PERL
     like($out, qr/__RET__=plugin_ok\n__PLUGIN_BRIDGE_AFTER_AUTOLOAD__/, 'AUTOLOAD lazy-loads PluginBridge on demand and preserves return payload');
     is($err, '', 'LinkedSpec require/AUTOLOAD subprocess with lazy PluginBridge does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_plugin_bridge_load_until_run_plugin' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec;
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_EAGER__\n" : "__PLUGIN_BRIDGE_STILL_LAZY__\n";
+LinkedSpec::register_plugin('synthetic_plugin', sub {
+    my @args = @_;
+    print "__REGISTERED_ARGS__=" . join(',', @args) . "\n";
+    return 'registered_ok';
+});
+my $ret = LinkedSpec::run_plugin('synthetic_plugin', 'alpha', 'beta');
+print "__RET__=$ret\n";
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_AFTER_RUN_PLUGIN__\n" : "__PLUGIN_BRIDGE_STILL_UNLOADED__\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_AFTER_RUN_PLUGIN__\n" : "__PPLUGIN_STILL_UNLOADED_AFTER_RUN_PLUGIN__\n";
+LinkedSpec::clear_registered_plugins();
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/run_plugin subprocess exits cleanly with lazy PluginBridge') or diag($err || $out);
+    like($out, qr/__PLUGIN_BRIDGE_STILL_LAZY__/, 'require LinkedSpec keeps PluginBridge unloaded before explicit run_plugin dispatch');
+    like($out, qr/__REGISTERED_ARGS__=alpha,beta/, 'run_plugin preserves registered plugin arguments');
+    like($out, qr/__RET__=registered_ok/, 'run_plugin preserves registered plugin return payload');
+    like($out, qr/__PLUGIN_BRIDGE_AFTER_RUN_PLUGIN__/, 'run_plugin lazy-loads PluginBridge on demand');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_RUN_PLUGIN__/, 'run_plugin avoids loading PPlugin when a registered plugin is available');
+    is($err, '', 'LinkedSpec require/run_plugin subprocess with registered plugin does not emit stderr');
+};
 subtest 'linkedspec_registered_plugin_dispatch_avoids_legacy_runtime_load' => sub {
     plan tests => 7;
 
@@ -970,7 +996,7 @@ PERL
     is($err, '', 'registered plugin AUTOLOAD subprocess does not emit stderr');
 };
 subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 16;
+    plan tests => 18;
 
     no warnings 'redefine';
 
@@ -982,6 +1008,13 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::PluginRegistry::register_plugin = sub { return 'registered_ok' };
     local *LinkedSpec::PluginRegistry::register_plugins = sub { return 2 };
     local *LinkedSpec::PluginRegistry::clear_registered_plugins = sub { return 2 };
+    local *LinkedSpec::PluginBridge::_dispatch_plugin_name = sub {
+        my ($plugin_name, $args) = @_;
+        return {
+            plugin_name => $plugin_name,
+            args => [@$args],
+        };
+    };
     local *LinkedSpec::PluginBridge::_dispatch_autoload = sub {
         my ($autoload_name, $args) = @_;
         return {
@@ -1017,6 +1050,10 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::clear_registered_plugins(), 2, 'clear_registered_plugins still delegates through the plugin-registry owner');
     is($@, "__SAVED_ERR__\n", 'clear_registered_plugins preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::run_plugin('synthetic_plugin', 'alpha', 'beta'), { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'run_plugin still delegates through the plugin-bridge explicit-name owner');
+    is($@, "__SAVED_ERR__\n", 'run_plugin preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::synthetic_plugin('alpha', 'beta'), { autoload_name => 'LinkedSpec::synthetic_plugin', args => [qw(alpha beta)] }, 'AUTOLOAD still delegates through the plugin-bridge owner');

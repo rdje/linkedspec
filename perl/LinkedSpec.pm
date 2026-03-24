@@ -248,6 +248,18 @@ sub clear_registered_plugins {
 }
 
 #------------------------------------------------------------------------------
+# Function: run_plugin
+# Purpose : Explicit named plugin dispatch entrypoint for registered or legacy
+#           plugin handlers without relying on AUTOLOAD name extraction.
+# Args    : ($plugin_name, @plugin_args)
+# Returns : whatever plugin call returns
+#------------------------------------------------------------------------------
+sub run_plugin {
+ my ($plugin_name, @args) = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_plugin_name', $plugin_name, \@args)
+}
+
+#------------------------------------------------------------------------------
 # Function: AUTOLOAD
 # Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
 # Args    : standard Perl AUTOLOAD args
