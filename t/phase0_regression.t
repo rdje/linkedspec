@@ -35599,6 +35599,18 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'hlink_substitution exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'hlink_substitution exposes no top blocked rule after helper migration');
 };
+subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for alias migration inspection');
+    like($source_content, qr/assign\(s\(retv\), call\(substitute_statement2\)\)/, 'hlink_substitution top band now prefers s(retv) in substitute_statement2 assignment');
+    like($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution top band now prefers a(word_items) plus s(retv) in accumulator pushes');
+    ok(index($source_content, 'return(array_values(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) in aggregate return flow');
+    unlike($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution migrated band no longer uses the older array()/scalar() form in accumulator pushes');
+};
 subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;
 

@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `hlink_substitution.spec` Top Band To Concise Container Aliases
+
+Spent the concise `s(...)` / `a(...)` surface on another live spec:
+- the `substitute_top` orchestration band in `specs/hlink_substitution.spec` now prefers `s(retv)` for call-result assignment and `a(word_items)` for accumulator pushes and aggregate return flow,
+- the parser behavior stays identical while that already-helperized band gets less verbose and less tied to the longer `scalar(...)` / `array(...)` spellings,
+- and the slice stays deliberately narrow by leaving the existing raw string return surface and other non-alias concerns alone.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `hlink_substitution` helper-flow regression still pins preserved behavior,
+- and a focused source-level regression now confirms the migrated top band prefers `s(...)` / `a(...)` instead of drifting back to the longer forms.
+
 ## 2026-03-24 - Phase 4: Migrate `sdce.spec` Split Band To Concise Container Aliases
 
 Spent the concise `s(...)` / `a(...)` surface on another live spec:
