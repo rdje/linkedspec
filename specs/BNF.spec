@@ -16,24 +16,28 @@ description::			I {print("HELLO\n")}
  -> g_repetition
  
 construction_start:	/[a-zA-Z_]\w*\s*->/	I {
-	$IMATCH =~ s/\s*->//;
-	print("(construction_start)         -I- seen(", scalar(IMATCH), ")\n")
+	declare(scalar, text=entry_text());
+	substr(scalar(text), "\\s*->$", "", o);
+	print("(construction_start)         -I- seen(", scalar(text), ")\n")
 }
 
-node: 			/[a-zA-Z_]\w*/		I {print("(node)         -I- <", scalar(IMATCH), ">\n")}
+node: 			/[a-zA-Z_]\w*/		I {print("(node)         -I- <", entry_text(), ">\n")}
 dquote_str:		/"[^"]+"/		I {
-	$IMATCH =~ s/^"|"$//g;
-	print("(dquote_str)         -I- seen(", scalar(IMATCH), ")\n")
+	declare(scalar, text=entry_text());
+	substr(scalar(text), "^(?:\")|(?:\")$", "", go);
+	print("(dquote_str)         -I- seen(", scalar(text), ")\n")
 }
 
 squote_str:		/'[^']+?'/		I {
-	$IMATCH =~ s/^'|'$//g;
-	print("(squote_str)         -I- seen(", scalar(IMATCH), ")\n")
+	declare(scalar, text=entry_text());
+	substr(scalar(text), "^'|'$", "", go);
+	print("(squote_str)         -I- seen(", scalar(text), ")\n")
 }
 
 regex:			/\/.+\//		I {
-	$IMATCH =~ s/\///g;
-	print("(regex)         -I- seen#", scalar(IMATCH), "#\n")
+	declare(scalar, text=entry_text());
+	substr(scalar(text), "^/|/$", "", go);
+	print("(regex)         -I- seen#", scalar(text), "#\n")
 }
 
 group: 			/\(/ /\)/		I {print("(group)        -I-  ****************************************** Entering\n")}
@@ -54,7 +58,7 @@ LE {print("LOOP END Message\n")}
 	 return 1;
  }
 
-g_repetition: 		/\{(?:\d+(?:,\d*)?|,\d+)\}/	I {print("(g_repetition) -I- <", scalar(IMATCH), ">\n")}
+g_repetition: 		/\{(?:\d+(?:,\d*)?|,\d+)\}/	I {print("(g_repetition) -I- <", entry_text(), ">\n")}
 q_mark: 		/\?/			I {print("(q_mark)       -I- ?\n")}
 plus: 			/\+/			I {print("(plus)         -I- +\n")}
 star: 			/\*/			I {print("(start)        -I- *\n")}

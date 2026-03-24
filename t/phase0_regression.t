@@ -35532,6 +35532,18 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "BNF $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'bnf_token_readers_prefer_entry_text' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'BNF.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'BNF source spec text is available for token-reader helper inspection');
+    ok(index($source_content, 'declare(scalar, text=entry_text());') >= 0, 'BNF migrated token readers now prefer entry_text() before cleanup');
+    like($source_content, qr/node:\s+.*?entry_text\(\)/s, 'BNF node now prefers entry_text() for the immediate token read');
+    ok(index($source_content, 'substr(scalar(text), "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
+    unlike($source_content, qr/scalar\(IMATCH\)/, 'BNF migrated token readers no longer rely on scalar(IMATCH)');
+};
 subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 70;
 
