@@ -34707,6 +34707,31 @@ SPEC
     is($rewritten, 'my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g', 'prefix-newline line-count statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'prefix-newline-linecount-only rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_line_number_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("cursor", cursor_line(), "entry", entry_line(), "match", match_line())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit line-number helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit line-number helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit line-number helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit line-number helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CURSOR_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_LINE_READ');
+    ok(grep { $_ eq 'IMATCH_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include IMATCH_LINE_READ');
+    ok(grep { $_ eq 'MATCH_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MATCH_LINE_READ');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("cursor", cursor_line(), "entry", entry_line(), "match", match_line()))');
+    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS) =~ /\n/g) }') >= 0, 'cursor_line() lowers to a direct current-cursor line-number read');
+    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }') >= 0, 'entry_line() lowers to a direct immediate-match line-number read');
+    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_line() lowers to a direct local-match line-number read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit-line-number-helper rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;
 
@@ -35497,8 +35522,9 @@ subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub 
         scalar(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'LINE_COUNT' } @{$meta->{canonical_action_ir_nodes}}),
-        'simenv begin_end_blocks canonical action-IR nodes include PRINT/EXIT/REGEX_SUBST/LINE_COUNT'
+        scalar(grep { $_ eq 'CURSOR_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'MATCH_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}),
+        'simenv begin_end_blocks canonical action-IR nodes include PRINT/EXIT/REGEX_SUBST/CURSOR_LINE_READ/MATCH_LINE_READ'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'simenv begin_end_blocks is now language-agnostic action-IR ready');
 };
@@ -36044,6 +36070,18 @@ subtest 'simenv_token_readers_prefer_entry_text' => sub {
     like($source_content, qr/variable_substitution: .*?declare\(scalar, variable_name=entry_text\(\)\);/s, 'simenv variable_substitution now prefers entry_text() for the immediate token read');
     like($source_content, qr/comments: .*?declare\(scalar, comment_text=entry_text\(\)\);/s, 'simenv comments now prefers entry_text() for the immediate token read');
     unlike($source_content, qr/declare\(scalar, variable_name=scalar\(IMATCH\)\);/, 'simenv migrated token readers no longer rely on scalar(IMATCH) for variable-name capture');
+};
+subtest 'simenv_begin_end_blocks_prefers_line_helpers' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'simenv.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'simenv source spec text is available for begin/end line-helper inspection');
+    like($source_content, qr/begin_end_blocks: .*?BEGIN statement is on line ", cursor_line\(\), " while END statement is on line ", match_line\(\)/s, 'simenv begin_end_blocks mismatch path now prefers cursor_line() and match_line()');
+    like($source_content, qr/LX \{print\("\(simenv\) -E- END Block statement not found for \*begin_end_blocks\* starting on line ", cursor_line\(\), "\\n"\);/s, 'simenv begin_end_blocks LX path now prefers cursor_line()');
+    unlike($source_content, qr/begin_end_blocks: .*?my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;.*?BEGIN statement is on line/s, 'simenv begin_end_blocks mismatch path no longer relies on raw prefix-newline line-count Perl');
+    unlike($source_content, qr/LX \{my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;.*?END Block statement not found/s, 'simenv begin_end_blocks LX path no longer relies on raw prefix-newline line-count Perl');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 47;

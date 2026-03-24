@@ -362,7 +362,9 @@ Important nuance:
 - `clear_mark(name)` deletes the rule-local named mark directly, so later same-rule reads see it as absent and return `undef` until the mark is re-established.
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
+- `cursor_line()` reads the current parser cursor line directly as `do { 1 + (() = substr($$STRING, 0, $IPOS) =~ /\n/g) }`, without consulting the rule-local mark bucket.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
+- `entry_line()` reads the current immediate match line directly as `do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
 - `entry_group(0)` reads one capture group from the current immediate match directly as `do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }`, without consulting the rule-local mark bucket.
 - `entry_groups()` snapshots the whole current immediate-match capture-group list directly as `do { [@IMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `entry_named(name)` reads one named capture from the current immediate match directly as `do { exists $IMATCH_HASH{'name'} ? $IMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.
@@ -373,6 +375,7 @@ Important nuance:
 - `entry_start_pos()` reads the current immediate match left edge directly as `do { $IPOS - length $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_end_pos()` reads the current immediate match right edge directly as `do { $IPOS }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.
+- `match_line()` reads the current local match line directly as `do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
 - `match_group(1)` reads one capture group from the current local match directly as `do { scalar(@LMATCH_LIST) > 1 ? $LMATCH_LIST[1] : undef }`, without consulting the rule-local mark bucket.
 - `match_groups()` snapshots the whole current local-match capture-group list directly as `do { [@LMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `match_named(name)` reads one named capture from the current local match directly as `do { exists $LMATCH_HASH{'name'} ? $LMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.

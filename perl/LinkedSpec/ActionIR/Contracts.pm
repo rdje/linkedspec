@@ -574,6 +574,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'cursor_line',
+   ir_node            => 'CURSOR_LINE_READ',
+   diag_name          => 'cursor_line',
+   unresolved_pattern => qr/\bcursor_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcursor_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_text',
    ir_node            => 'IMATCH_TEXT_READ',
    diag_name          => 'entry_text',
@@ -659,6 +670,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bentry_named_map\s*\(\s*\)/do { +{\%IMATCH_HASH} }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'entry_line',
+   ir_node            => 'IMATCH_LINE_READ',
+   diag_name          => 'entry_line',
+   unresolved_pattern => qr/\bentry_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS - length \$IMATCH) =~ \/\\n\/g) }/g;
     return $code
    },
   },
@@ -814,6 +836,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bmatch_end_pos\s*\(\s*\)/do { \$LSPOS }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_line',
+   ir_node            => 'MATCH_LINE_READ',
+   diag_name          => 'match_line',
+   unresolved_pattern => qr/\bmatch_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
     return $code
    },
   },

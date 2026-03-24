@@ -38,6 +38,7 @@ sub try_scan_contract_ir_events {
   'clear_mark' => \&_scan_contract_clear_mark,
   'mark_exists' => \&_scan_contract_mark_exists,
   'mark_pos' => \&_scan_contract_mark_pos,
+  'cursor_line' => \&_scan_contract_cursor_line,
   'entry_text' => \&_scan_contract_entry_text,
   'entry_group' => \&_scan_contract_entry_group,
   'entry_groups' => \&_scan_contract_entry_groups,
@@ -45,9 +46,11 @@ sub try_scan_contract_ir_events {
   'entry_has' => \&_scan_contract_entry_has,
   'entry_map' => \&_scan_contract_entry_map,
   'entry_named_map' => \&_scan_contract_entry_named_map,
+  'entry_line' => \&_scan_contract_entry_line,
   'entry_len' => \&_scan_contract_entry_len,
   'entry_start_pos' => \&_scan_contract_entry_start_pos,
   'entry_end_pos' => \&_scan_contract_entry_end_pos,
+  'match_line' => \&_scan_contract_match_line,
   'match_text' => \&_scan_contract_match_text,
   'match_group' => \&_scan_contract_match_group,
   'match_groups' => \&_scan_contract_match_groups,
@@ -297,6 +300,15 @@ while ($code =~ /\bmark_pos\s*\(\s*(?<mark>\w+)\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_cursor_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
 sub _scan_contract_entry_text {
  my ($code) = @_;
  my @events;
@@ -355,6 +367,15 @@ sub _scan_contract_entry_named_map {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bentry_named_map\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_line\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
@@ -472,6 +493,15 @@ sub _scan_contract_match_end_pos {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_end_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_line\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

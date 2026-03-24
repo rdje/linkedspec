@@ -626,6 +626,33 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `cursor_line()`
+Return the 1-based line number at the current parser cursor directly.
+
+Practical reading:
+- use it when the rule wants the current parser-position line as data,
+- prefer it over manual `substr($$STRING, 0, $IPOS) =~ /\n/g` counting in normal user-facing `.spec` examples,
+- and treat it as the direct cursor-side line helper when no checkpoint or match-boundary helper is needed first.
+
+Example:
+
+```text
+cursor_line()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_line, close_line) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(open_line), cursor_line()) }
+ -> Top[1] { assign(scalar(close_line), match_line()) }
+ -> Top[2] { return(array("?Top:", scalar(open_line), scalar(close_line), cursor_line(), match_line())) }
+```
+
+Use it when the rule wants the current parser cursor line directly instead of spelling raw prefix-newline counting inline.
+
 ### `entry_text()`
 Return the current immediate match text directly.
 
@@ -657,6 +684,37 @@ Child::AND
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the immediate entry match that led into the current rule instead of the currently active local match or a previously stored checkpoint.
+
+### `entry_line()`
+Return the 1-based line number of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the line where the immediate entry match started,
+- prefer it over manual newline counting around `$IMATCH`,
+- and treat it as the direct line-number companion to `entry_text()` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
+
+Example:
+
+```text
+entry_line()
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_line_num, body_line_num) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_line_num), entry_line()); assign(scalar(body_line_num), match_line()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_line_num), scalar(body_line_num), entry_line(), match_line())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the line where the immediate entry match began instead of the line of the currently active local match.
 
 ### `entry_group(index)`
 Return one capture group from the current immediate match directly.
@@ -922,6 +980,33 @@ Top::AND
 ```
 
 Use it when the rule wants the current local match text immediately instead of reading a previously stored checkpoint or a larger remembered span.
+
+### `match_line()`
+Return the 1-based line number of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the line where the current local match started,
+- prefer it over manual newline counting around `$LMATCH`,
+- and treat it as the direct line-number companion to `match_text()` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_line()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_line, body_line) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(open_line), cursor_line()) }
+ -> Top[1] { assign(scalar(body_line), match_line()) }
+ -> Top[2] { return(array("?Top:", scalar(open_line), scalar(body_line), match_line())) }
+```
+
+Use it when the rule wants the line where the current local match began instead of the current parser cursor line or a previously stored checkpoint position.
 
 ### `match_group(index)`
 Return one capture group from the current local match directly.

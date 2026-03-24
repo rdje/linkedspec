@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Add Explicit Line-Number Read Helpers
+
+Spent the next substantive Phase 4 slice on parser-state line-number reads instead of another compatibility-pattern migration:
+- explicit `cursor_line()` / `entry_line()` / `match_line()` helpers are now part of the current backend-neutral read surface,
+- they expose the current cursor line, the current immediate-match line, and the current local-match line directly as 1-based values,
+- and they replace the older need to spell raw `substr(...)=~/\n/g` counting inline when rules want readable diagnostics or line-aware payload data.
+
+That feature is now also spent in a real live spec:
+- `specs/simenv.spec::begin_end_blocks` now prefers `cursor_line()` / `match_line()` for its begin/end mismatch and missing-end diagnostics,
+- while keeping the rest of the rule behavior unchanged.
+
+Regression coverage now locks:
+- explicit helper lowering and canonical ActionIR classification for `cursor_line()` / `entry_line()` / `match_line()`,
+- the updated `simenv` metadata contract,
+- and the source-level migration in `specs/simenv.spec::begin_end_blocks`.
+
 ## 2026-03-24 - Phase 4: Migrate `DT.spec` Token Readers To `entry_text()`
 
 Spent the newer immediate-match helper surface on another live spec:

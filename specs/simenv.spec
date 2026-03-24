@@ -17,7 +17,7 @@ LX {
    }
 
 
-begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=scalar(IMATCH), retv); declare(array, assigns, keyval_pairs); substr(scalar(block_namei), /^.*\s+/, "", o); print("begin_end_blocks: BEGIN   (", scalar(IMATCH), "\n")}
+begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=entry_text(), retv); declare(array, assigns, keyval_pairs); print("begin_end_blocks: BEGIN   (", entry_text(), "\n"); substr(scalar(block_namei), "^.*\\s+", "", o)}
 
  -> comments
  -> anyvariable                       {
@@ -31,21 +31,19 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
  -> multiline_value                   {push @keyval_pairs, call(multiline_value)}
  -> singleline_value                  {push @keyval_pairs, call(singleline_value)}
  -> begin_end_blocks[1]               {
-                                       declare(scalar, block_namee=scalar(LMATCH));
-                                       substr(scalar(block_namee), /^.*\s+/, "", o);
+                                       declare(scalar, block_namee=match_text());
+                                       substr(scalar(block_namee), "^.*\\s+", "", o);
 
                                        if(ne(scalar(block_namee), scalar(block_namei)));
-                                         my @startline = substr($$STRING, 0, $IPOS)  =~ /\n/g;  
-                                         my @endline   = substr($$STRING, 0, $LSPOS-length($LMATCH)) =~ /\n/g;  
                                          print("(simenv) -E- BEGIN Block Name '", scalar(block_namei), "' and END Block name '", scalar(block_namee), "' do not match.\n");
-                                         print("             BEGIN statement is on line ", (@startline +1), " while END statement is on line ", (@endline +1), "\n");
+                                         print("             BEGIN statement is on line ", cursor_line(), " while END statement is on line ", match_line(), "\n");
                                          exit;
                                        endif();
 
                                        if(is_nonempty(array(keyval_pairs)));
                                          push_value(array(assigns), array_values(array(keyval_pairs)));
                                        endif();
-                                       print("begin_end_blocks: END    (", scalar(LMATCH), "\n");
+                                       print("begin_end_blocks: END    (", match_text(), "\n");
                                        if(is_nonempty(array(assigns)));
                                          return({name=>scalar(block_namei), content=>array_values(array(assigns))});
                                        else();
@@ -53,8 +51,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
                                        endif()
 			              }
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- END Block statement not found for *begin_end_blocks* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- END Block statement not found for *begin_end_blocks* starting on line ", cursor_line(), "\n");
      exit}
 
       

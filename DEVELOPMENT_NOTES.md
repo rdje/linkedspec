@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-24: Pivoted away from another token-reader/helper-spending slice and landed a more semantic Phase 4 feature instead. Explicit `cursor_line()` / `entry_line()` / `match_line()` helpers now expose 1-based parser-state line numbers directly, and `specs/simenv.spec::begin_end_blocks` now spends `cursor_line()` / `match_line()` in its begin/end diagnostics instead of spelling raw prefix-newline counting inline.
 - 2026-03-24: Kept the post-shorthand helper migration line moving in another debug-print grammar. The token-reader rules in `specs/DT.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `DT` helper-flow checks.
 - 2026-03-24: Kept the post-shorthand helper migration line moving in another debug-print grammar. The token-reader rules in `specs/operators_try.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `operators_try` helper-flow checks.
 - 2026-03-24: Kept the post-shorthand work moving on substantive helper migration. The debug-print token-reader rules in `specs/BNF.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `BNF` helper-flow checks.
