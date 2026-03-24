@@ -1,9 +1,11 @@
+#------------------------------------------------------------------------------
+# Package: LispML
+# Purpose: Lightweight Lispish-driven markup/object renderer that builds its
+#          own model helpers without depending on legacy plugin inheritance.
+#------------------------------------------------------------------------------
 package LispML;
 
 use 5.010;
-
-
-our @ISA = PPlugin;
 
 use HUtils;
 use Storable;

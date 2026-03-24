@@ -3483,6 +3483,25 @@ PERL
     like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_SINGLE__/, 'Lispish single no longer loads PPlugin when parsing through direct LinkedSpec lookup');
     unlike($err, qr/PPlugin|_get_parser/, 'Lispish single subprocess does not emit legacy plugin-lookup stderr');
 };
+subtest 'repo_owned_perl_modules_no_longer_advertise_legacy_pplugin_inheritance' => sub {
+    plan tests => 8;
+
+    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
+    my $lispml_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LispML.pm'));
+
+    ok(defined($rtlutils_pm) && length($rtlutils_pm), 'RTLUtils.pm source is available for inheritance inspection');
+    ok(defined($lispml_pm) && length($lispml_pm), 'LispML.pm source is available for inheritance inspection');
+    unlike($rtlutils_pm, qr/\bour \@ISA = 'PPlugin';/, 'RTLUtils.pm no longer advertises legacy PPlugin inheritance');
+    unlike($lispml_pm, qr/\bour \@ISA = PPlugin;/, 'LispML.pm no longer advertises legacy PPlugin inheritance');
+
+    my ($rtl_exit, $rtl_out, $rtl_err) = run_perl_snippet_in_subprocess('require RTLUtils; print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";');
+    is($rtl_exit, 0, 'RTLUtils require-only subprocess exits cleanly') or diag($rtl_err || $rtl_out);
+    like($rtl_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring RTLUtils no longer loads the legacy PPlugin runtime');
+
+    my ($lispml_exit, $lispml_out, $lispml_err) = run_perl_snippet_in_subprocess('require LispML; print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";');
+    is($lispml_exit, 0, 'LispML require-only subprocess exits cleanly') or diag($lispml_err || $lispml_out);
+    like($lispml_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring LispML no longer loads the legacy PPlugin runtime');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 

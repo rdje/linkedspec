@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Remove Stale Repo-Owned `PPlugin` Inheritance
+
+Continued the plugin/runtime modernization track by removing legacy `PPlugin` inheritance from repo-owned Perl packages that no longer depend on inherited plugin behavior:
+- `perl/RTLUtils.pm` no longer advertises `our @ISA = 'PPlugin';`,
+- `perl/LispML.pm` no longer advertises `our @ISA = PPlugin;`,
+- and both touched packages now also carry short package-purpose doc blocks as part of the new Perl documentation convention.
+
+Regression coverage now locks:
+- that `RTLUtils.pm` and `LispML.pm` no longer advertise legacy `PPlugin` inheritance in source,
+- and that requiring either module no longer eager-loads `PPlugin.pm`.
+
 ## 2026-03-24 - Plugin Track: Retire Repo-Owned `_get_parser(...)` Plugin Usage
 
 Continued the plugin/runtime modernization track by removing one of the remaining “parser lookup through plugin magic” seams from repo-owned code:

@@ -1,3 +1,9 @@
+#------------------------------------------------------------------------------
+# Package: RTLUtils
+# Purpose: RTL-oriented parsing and emission helpers that consume LinkedSpec
+#          parsers and explicit plugin APIs without depending on legacy plugin
+#          inheritance.
+#------------------------------------------------------------------------------
 package RTLUtils;
 
 use 5.010;
@@ -10,8 +16,6 @@ use Cwd qw(chdir);
 use HUtils;
 use Table;
 use LinkedSpec;
-
-our @ISA = 'PPlugin';
 
 sub new {bless {}, $_[0]}
 
