@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Spend `run_plugin(...)` In Repo Callers
+
+Continued the plugin/runtime modernization track by spending the newer explicit dispatch API in repo-owned explicit-name callers:
+- `HUtils::GenericFilter(...)`, `TableScript::http_exec(...)`, and the header-generation paths in `RTLUtils` now call `LinkedSpec::run_plugin(...)` instead of routing known plugin names through the legacy `PPlugin::exec_plugin_name(...)` owner,
+- which means repo code that already knows the plugin name now uses the same explicit public API the roadmap is steering toward,
+- while `PPlugin.pm` and `.plg` fallback remain intact behind `LinkedSpec::PluginBridge` for compatibility.
+
+Regression coverage now locks:
+- `TableScript::http_exec(...)` dispatch through `LinkedSpec::run_plugin(...)`,
+- `HUtils::GenericFilter(...)` dispatch through `LinkedSpec::run_plugin(...)`,
+- and both explicit `add_header_n_context_clause` call sites in `RTLUtils`, including a live `drive_entity_component(...)` runtime path.
+
 ## 2026-03-24 - Plugin Track: Add Explicit `run_plugin(...)` Dispatch
 
 Continued the explicit plugin-runtime migration immediately after the first registry slice:

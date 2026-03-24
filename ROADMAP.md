@@ -430,6 +430,7 @@ Historical rationale note:
    - `LinkedSpec::PluginBridge` should remain only as a compatibility shim while legacy callers are migrated.
    - Landed follow-up: explicit registered-plugin entrypoints now exist through `LinkedSpec::PluginRegistry` plus public `LinkedSpec::register_plugin(...)` / `register_plugins(...)`, and `LinkedSpec::PluginBridge` now consults that registry before loading the legacy `.plg` runtime.
    - Landed follow-up: public explicit dispatch now also exists through `LinkedSpec::run_plugin(name, @args)`, so new callers no longer need `AUTOLOAD` name extraction when they already know the plugin name.
+   - Landed follow-up: repo-owned explicit-name callers are now starting to spend that public API too; `HUtils::GenericFilter(...)`, `TableScript::http_exec(...)`, and the header-generation paths in `RTLUtils` now dispatch through `LinkedSpec::run_plugin(...)` instead of calling `PPlugin::exec_plugin_name(...)` directly.
    - Current direction note: the end-state plugin architecture should not depend on `AUTOLOAD` as a primary API. `AUTOLOAD` remains a transition-only shim, while the intended long-term surface is explicit plugin dispatch plus normal package/registry ownership.
 3. Replace implicit discovery/loading
    - Move away from method-name extraction plus cwd/project-root `.plg` globbing as the primary runtime plugin contract.
@@ -546,7 +547,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
 | Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
-| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Explicit registered-plugin entrypoints and public `run_plugin(...)` now exist, and the bridge now prefers that registry before legacy `.plg` fallback, but full runtime replacement/decoupling is still ahead. |
+| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Explicit registered-plugin entrypoints and public `run_plugin(...)` now exist, the bridge now prefers that registry before legacy `.plg` fallback, and repo-owned explicit-name callers have started migrating onto `run_plugin(...)`, but full runtime replacement/decoupling is still ahead. |
 
 ## Deferred Architectural Concern Notes
 These are tracked implementation concerns, not immediate blockers.

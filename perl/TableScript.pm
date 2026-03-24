@@ -9,6 +9,7 @@ package TableScript;
 use File::Glob ':glob';
 
 use HUtils;
+use LinkedSpec;
 
 my @script_list = bsd_glob(q({).join(',', map {"$_/*.ts"} @{Global->search_path}).q(}), GLOB_BRACE | GLOB_TILDE);
 
@@ -381,7 +382,7 @@ my ($conf, $args) = @_;
 
  my ($filename, $label) = map {node_exec $conf, $_} @$args[0,1];
 
- PPlugin->exec_plugin_name('httplink', $filename).'@'.$label
+ LinkedSpec::run_plugin('httplink', $filename).'@'.$label
 }
 
 sub get_index {

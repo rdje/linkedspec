@@ -68,7 +68,7 @@ my ($conf, $modules, $mod, %option) = @_;
  }
 
 
- print PPlugin->exec_plugin_name('add_header_n_context_clause', $conf, %option) unless $option{component};
+ print LinkedSpec::run_plugin('add_header_n_context_clause', $conf, %option) unless $option{component};
 
  print "$entity_or_component  $mod  IS";
 
@@ -315,7 +315,7 @@ my ($conf, $modules, $top, %options) = @_;
  open (my $mb, "> Entities/$options{macroname}".($options{entity} || "_a").".vhd") || die "-E- Can't write architecture of *$options{macroname}*,";
  select $mb;
 
- print PPlugin->exec_plugin_name('add_header_n_context_clause', $conf, %options);
+ print LinkedSpec::run_plugin('add_header_n_context_clause', $conf, %options);
 
  print "ARCHITECTURE $options{macroname}_arch OF $options{macroname} IS\n";
  foreach (sort {$a cmp $b} keys %{$modules->{$top}{hierarchy}}) {

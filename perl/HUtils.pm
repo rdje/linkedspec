@@ -10,9 +10,9 @@ use 5.010;
 
 use HLinkSubst;
 use Lispish;
+use LinkedSpec;
 use PathSearch;
 use TableGrep;
-use PPlugin;
 
 
 sub new {
@@ -340,7 +340,7 @@ my ($conf, $a2d_ref, $filter_seq) = @_;
 			      my @varargs;
 
 			      push @varargs, $conf, $info, $a2d_ref, $maptable, \@args;
-			      $filteredata = PPlugin->exec_plugin_name("genericfilter_$action", @varargs);
+			      $filteredata = LinkedSpec::run_plugin("genericfilter_$action", @varargs);
 			      die "$@, " if $@;
 
 			     } else {
