@@ -9701,7 +9701,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -9783,7 +9783,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 42;
+    plan tests => 45;
 
     my $label = 'Top';
 
@@ -9966,6 +9966,21 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'match_end_pos()'),
         q{do { $LSPOS }},
         'match_end_pos() helper rewrite preserves explicit current-local-match right-edge position semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 's(foo)'),
+        q{$foo},
+        's(name) shorthand rewrite preserves scalar(name) semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'a("A", "B")'),
+        q{["A", "B"]},
+        'a(...) shorthand rewrite preserves array(...) constructor semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'h("kind", "node")'),
+        q{{"kind" => "node"}},
+        'h(...) shorthand rewrite preserves hash(...) constructor semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
@@ -10580,6 +10595,47 @@ SPEC
 
     my $named_map_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_map().'."\n".'match_map()');
     like($named_map_rewrite, qr/\%IMATCH_HASH.*\%LMATCH_HASH/s, 'entry_map() and match_map() lowering snapshot immediate and local named-capture hashes directly without consulting stored marks');
+};
+subtest 'short_container_aliases_behave_like_full_container_forms' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ I { declare(array, parts); declare(hash, meta); declare(scalar, name) }
+ /(\w+)/
+ -> Top[0] {
+     assign(a(parts), a("A", "B"));
+     assign(h(meta), h("kind", match_text()));
+     assign(s(name), scalar(h(meta), "kind"));
+     return(h("match", s(name), "group0", match_group(0), "parts_count", count(a(parts)), "kind_present", has_key(h(meta), "kind")))
+ }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for s()/a()/h() shorthand coverage');
+
+    my $input = 'foo';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        {
+            match        => 'foo',
+            group0       => 'foo',
+            kind_present => 1,
+            parts_count  => 2,
+        },
+        's()/a()/h() shorthand aliases preserve scalar/array/hash behavior across assignment, container access, and generalized return payloads'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 's()/a()/h() shorthand coverage keeps the selected top rule visible in runtime context');
+    ok(!defined($runtime_ctx{last_error}), 's()/a()/h() shorthand parse leaves runtime_ctx last_error clear on success');
+
+    my $alias_rewrite = LinkedSpec::call_spec_handler_subst(
+        'Top',
+        'assign(s(name), scalar(h(meta), "kind")); return(h("parts_count", count(a(parts))))'
+    );
+    like($alias_rewrite, qr/\$name.*\$meta\{\"kind\"\}.*\{\"parts_count\" => scalar\(\@parts\)\}/s,
+        's()/a()/h() shorthand lowering reuses the same scalar/hash/array Perl shapes as the long forms');
 };
 subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
     plan tests => 5;

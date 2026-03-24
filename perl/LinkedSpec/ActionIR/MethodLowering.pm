@@ -189,6 +189,10 @@ sub _lower_method_value_expr {
  my $infer_scalar_container_kind = _require_dep($deps, 'infer_scalar_container_kind');
  my $split_top_level_csv = _require_dep($deps, 'split_top_level_csv');
  my $lower_array_pipeline_expr = _require_dep($deps, 'lower_array_pipeline_expr');
+ my $array_container_prefix_re = qr/^(?:array|a)\s*\(/;
+ my $hash_container_prefix_re = qr/^(?:hash|h)\s*\(/;
+ my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
+ my $hash_symbol_expr_re = qr/^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/;
  my $lower_flat_list_value_expr = sub {
   my ($flat_expr) = @_;
   return undef unless defined $flat_expr;
@@ -204,12 +208,12 @@ sub _lower_method_value_expr {
    my $container_expr = $trim_action_ir_value->($flat_args->[0]);
    return undef unless defined($container_expr) && length($container_expr);
 
-   if ($container_expr =~ /^array\s*\(/o) {
+   if ($container_expr =~ $array_container_prefix_re) {
     my $array_symbol = $extract_array_symbol_name->($container_expr);
     return undef unless defined($array_symbol) && length($array_symbol);
     return '@'.$array_symbol;
    }
-   if ($container_expr =~ /^hash\s*\(/o) {
+   if ($container_expr =~ $hash_container_prefix_re) {
     my $hash_symbol = $extract_hash_symbol_name->($container_expr);
     return undef unless defined($hash_symbol) && length($hash_symbol);
     return '%'.$hash_symbol;
@@ -246,7 +250,7 @@ sub _lower_method_value_expr {
   my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
   return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
 
-  return 1 if $candidate_trimmed =~ /^array\s*\(/o;
+  return 1 if $candidate_trimmed =~ $array_container_prefix_re;
 
   my $array_symbol = $extract_array_symbol_name->($candidate_trimmed);
   if (defined($array_symbol) && length($array_symbol) && $candidate_trimmed =~ /^\w+$/o) {
@@ -280,7 +284,7 @@ sub _lower_method_value_expr {
   my $candidate_trimmed = $trim_action_ir_value->($candidate_expr);
   return 0 unless defined($candidate_trimmed) && length($candidate_trimmed);
 
-  return 1 if $candidate_trimmed =~ /^hash\s*\(/o;
+  return 1 if $candidate_trimmed =~ $hash_container_prefix_re;
 
   my $hash_symbol = $extract_hash_symbol_name->($candidate_trimmed);
   if (defined($hash_symbol) && length($hash_symbol) && $candidate_trimmed =~ /^\w+$/o) {
@@ -351,8 +355,8 @@ sub _lower_method_value_expr {
    return '$IMATCH_LIST['.$key_trimmed.']';
   }
 
-  my ($explicit_array_symbol) = $container_trimmed =~ /^array\s*\(\s*(\w+)\s*\)$/o;
-  my ($explicit_hash_symbol) = $container_trimmed =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
+  my ($explicit_array_symbol) = $container_trimmed =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
+  my ($explicit_hash_symbol) = $container_trimmed =~ /^(?:hash|h)\s*\(\s*(\w+)\s*\)$/o;
   my $array_symbol = $explicit_array_symbol || $extract_array_symbol_name->($container_trimmed);
   my $hash_symbol = $explicit_hash_symbol || $extract_hash_symbol_name->($container_trimmed);
   my $key_lowered = $lower_scalar_access_key_expr->($key_trimmed);
@@ -539,7 +543,7 @@ if ($method_call && $method_call->{method} eq 'num_sum') {
  return undef unless $looks_like_array_value_expr->($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+ if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@'.$array_symbol.') { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }';
  }
 
@@ -558,7 +562,7 @@ if ($method_call && $method_call->{method} eq 'num_avg') {
  return undef unless $looks_like_array_value_expr->($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+ if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@'.$array_symbol.') { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef }';
  }
 
@@ -576,7 +580,7 @@ if ($method_call && $method_call->{method} eq 'num_median') {
  return undef unless defined($target_expr) && length($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+ if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my @__ls_num_median_terms = @'.$array_symbol.'; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } }';
  }
 
@@ -594,7 +598,7 @@ if ($method_call && $method_call->{method} eq 'num_range') {
  return undef unless defined($target_expr) && length($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+ if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@'.$array_symbol.') { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef }';
  }
 
@@ -701,7 +705,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
     return 'do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@'.$array_symbol.') { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
    }
 
@@ -731,7 +735,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
     return 'do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@'.$array_symbol.') { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
    }
 
@@ -816,11 +820,11 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $empty_expr;
-  if ($target_expr =~ /^array\s*\(/o) {
+  if ($target_expr =~ $array_container_prefix_re) {
    my $array_symbol = $extract_array_symbol_name->($target_expr);
    return undef unless defined($array_symbol) && length($array_symbol);
    $empty_expr = '((!@'.$array_symbol.') ? 1 : 0)';
-  } elsif ($target_expr =~ /^hash\s*\(/o) {
+  } elsif ($target_expr =~ $hash_container_prefix_re) {
    my $hash_symbol = $extract_hash_symbol_name->($target_expr);
    return undef unless defined($hash_symbol) && length($hash_symbol);
    $empty_expr = '((!scalar(keys %'.$hash_symbol.')) ? 1 : 0)';
@@ -854,7 +858,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'scalar(@'.$array_symbol.')';
   }
 
@@ -872,7 +876,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return '$'.$array_symbol.'[0]';
   }
 
@@ -890,7 +894,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return '$'.$array_symbol.'[$#'.$array_symbol.']';
   }
 
@@ -916,7 +920,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > 1 ? [@'.$array_symbol.'[1 .. $__ls_tail_len - 1]] : [] }'
     unless $tail_has_explicit_count;
    return 'do { my $__ls_tail_skip = '.$tail_skip_expr.'; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > $__ls_tail_skip ? [@'.$array_symbol.'[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] }';
@@ -946,7 +950,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_take_len = scalar(@'.$array_symbol.'); $__ls_take_len ? [@'.$array_symbol.'[0 .. 0]] : [] }'
     unless $take_has_explicit_count;
    return 'do { my $__ls_take_count = '.$take_count_expr.'; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@'.$array_symbol.'); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@'.$array_symbol.'[0 .. $__ls_take_end]] } else { [] } }';
@@ -980,7 +984,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); $__ls_slice_len > $__ls_slice_start ? [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_len - 1]] : [] }'
     unless $slice_has_explicit_count;
    return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = '.$slice_count_expr.'; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_end]] } else { [] } }';
@@ -1010,7 +1014,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_take_last_len = scalar(@'.$array_symbol.'); $__ls_take_last_len ? [@'.$array_symbol.'[$__ls_take_last_len - 1 .. $__ls_take_last_len - 1]] : [] }'
     unless $take_last_has_explicit_count;
    return 'do { my $__ls_take_last_count = '.$take_last_count_expr.'; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@'.$array_symbol.'); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@'.$array_symbol.'[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } }';
@@ -1040,7 +1044,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_drop_last_len = scalar(@'.$array_symbol.'); $__ls_drop_last_len > 1 ? [@'.$array_symbol.'[0 .. $__ls_drop_last_len - 2]] : [] }'
     unless $drop_last_has_explicit_count;
    return 'do { my $__ls_drop_last_count = '.$drop_last_count_expr.'; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@'.$array_symbol.'); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@'.$array_symbol.'[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@'.$array_symbol.'[0 .. $__ls_drop_last_len - 1]] } else { [] } }';
@@ -1064,7 +1068,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
     push @parts, '@'.$array_symbol;
     next;
    }
@@ -1089,7 +1093,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless $looks_like_array_value_expr->($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return '[sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @'.$array_symbol.']';
   }
 
@@ -1108,7 +1112,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless $looks_like_array_value_expr->($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return '[reverse @'.$array_symbol.']';
   }
 
@@ -1129,7 +1133,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($needle_expr) && length($needle_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
    return 'do { my $__ls_contains_needle = '.$needle_expr.'; ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @'.$array_symbol.') : scalar(grep { !defined($_) } @'.$array_symbol.')) ? 1 : 0) }';
   }
 
@@ -1150,7 +1154,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  return undef unless defined($needle_expr) && length($needle_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+ if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_index_of_needle = '.$needle_expr.'; my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@'.$array_symbol.'); $__ls_index_of_i++) { my $__ls_index_of_item = $'.$array_symbol.'[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found }';
  }
 
@@ -1168,7 +1172,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    return 'scalar(keys %'.$hash_symbol.')';
   }
 
@@ -1186,7 +1190,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    return '[sort keys %'.$hash_symbol.']';
   }
 
@@ -1204,7 +1208,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    return '[map { $'.$hash_symbol.'{$_} } sort keys %'.$hash_symbol.']';
   }
 
@@ -1227,7 +1231,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($key_lowered) && length($key_lowered);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    return '((exists $'.$hash_symbol.'{'.$key_lowered.'}) ? 1 : 0)';
   }
 
@@ -1247,7 +1251,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
     push @parts, '%'.$hash_symbol;
     next;
    }
@@ -1281,7 +1285,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -1309,7 +1313,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -1328,7 +1332,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -1355,7 +1359,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
   my $lowered_target;
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ /^(?:hash\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -1385,7 +1389,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   my $array_expr = $trim_action_ir_value->($join_args->[1]);
   return undef unless defined($array_expr) && length($array_expr);
   my $array_symbol = $extract_array_symbol_name->($array_expr);
-  if (defined($array_symbol) && length($array_symbol) && $array_expr =~ /^(?:array\s*\(\s*\w+\s*\)|\w+)$/o) {
+  if (defined($array_symbol) && length($array_symbol) && $array_expr =~ $array_symbol_expr_re) {
    return "join($delimiter_expr, \@$array_symbol)";
   }
 
@@ -1458,7 +1462,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
  }
  my $pipeline_expr = $lower_array_pipeline_expr->($trimmed);
  return $pipeline_expr if defined($pipeline_expr) && length($pipeline_expr);
- if ($trimmed =~ /^hash\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
+ if ($trimmed =~ /^(?:hash|h)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
@@ -1482,7 +1486,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return '{'.join(', ', @pairs).'}';
  }
- if ($trimmed =~ /^array\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
+ if ($trimmed =~ /^(?:array|a)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};
   $payload =~ s/^\(|\)$//go;
   my $args = $split_top_level_csv->($payload);
@@ -1512,7 +1516,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -1520,7 +1524,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|array_copy|array_values|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|array_values|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

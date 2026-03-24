@@ -148,6 +148,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - the compact token-reader band in `specs/Lispish.spec` now also uses `entry_text()` / `entry_group(0)` directly instead of the older `scalar(IMATCH)` / `scalar(IMATCH_LIST, 0)` surface for those simple token payload readers,
   - grouped attribute readers in `specs/lib_reader.spec` now also use `entry_group(...)` directly instead of the older `scalar(IMATCH_LIST, ...)` surface for those simple grouped entry captures,
   - `specs/portmap.spec::bare_bit_slice` now also uses `entry_text()` / `entry_group(...)` / `entry_groups()` directly instead of the older `scalar(IMATCH)` / `scalar(IMATCH_LIST, ...)` / `flat_array(IMATCH_LIST)` surface for that live classification rule,
+  - concise container aliases `s(...)` / `a(...)` / `h(...)` are now supported as exact short spellings for `scalar(...)` / `array(...)` / `hash(...)` without introducing Perl-sigil syntax,
   - named marks are now scoped to the current rule label rather than shared across child-rule calls,
   - mark writes now fire only when the regex slot that actually carries the `@mark(name)` paragraph member matches,
   - high/debug trace output now shows mark-write positions for `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` as a short input excerpt plus a caret under the stored checkpoint position,

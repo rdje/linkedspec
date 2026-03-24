@@ -12,6 +12,22 @@ Not every user-facing construct looks like a modern method DSL call. LinkedSpec 
 
 For new backend-neutral authoring, many of these are still valid, but some are better treated as compatibility forms rather than defaults.
 
+## Concise container aliases
+The core container/value wrappers also accept short aliases:
+- `s(...)` = `scalar(...)`
+- `a(...)` = `array(...)`
+- `h(...)` = `hash(...)`
+
+These are concise DSL spellings only. They do not introduce Perl-style sigil syntax.
+
+Examples:
+
+```text
+assign(s(name), entry_text())
+assign(a(parts), a("A", "B"))
+return(h("kind", entry_named(kind), "count", count(a(parts))))
+```
+
 ## `call(rule)`
 This is the core dispatch helper.
 

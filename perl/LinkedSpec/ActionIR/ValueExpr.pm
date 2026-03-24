@@ -77,7 +77,7 @@ sub _extract_scalar_symbol_name {
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
- return $1 if $token =~ /^scalar\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(?:scalar|s)\s*\(\s*(\w+)\s*\)$/o;
  return $1 if $token =~ /^(\w+)$/o;
  return undef
 }
@@ -94,7 +94,7 @@ sub _extract_array_symbol_name {
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
- return $1 if $token =~ /^array\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
  return $1 if $token =~ /^(\w+)$/o;
  return undef
 }
@@ -111,7 +111,7 @@ sub _extract_hash_symbol_name {
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
- return $1 if $token =~ /^hash\s*\(\s*(\w+)\s*\)$/o;
+ return $1 if $token =~ /^(?:hash|h)\s*\(\s*(\w+)\s*\)$/o;
  return $1 if $token =~ /^(\w+)$/o;
  return undef
 }

@@ -752,6 +752,19 @@ return(array("?node:", scalar(IMATCH_LIST, 0), scalar(IMATCH_LIST, 1)))
 assign(scalar(pos_begin), pos $$STRING)
 ```
 
+Concise container aliases are supported too:
+- `s(...)` = `scalar(...)`
+- `a(...)` = `array(...)`
+- `h(...)` = `hash(...)`
+
+These are still LinkedSpec DSL forms, not Perl sigils.
+
+```text
+assign(s(name), entry_text())
+assign(a(parts), entry_groups())
+return(h("kind", entry_named(kind), "parts", a("A", "B")))
+```
+
 ## Quick Navigation by Task
 If you are trying to do one of these jobs, read the matching guide first.
 

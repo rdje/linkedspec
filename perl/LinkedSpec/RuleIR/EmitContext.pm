@@ -668,6 +668,19 @@ sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
  return _call_preserving_err(sub {
   my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
+  my $trimmed = _trim_action_ir_value($code);
+  if (
+   defined($trimmed) &&
+   length($trimmed) &&
+   $rewritten eq $code &&
+   $trimmed =~ /^(?:s|a|h)\s*\(/o
+  ) {
+   my $call = _parse_method_function_expr($trimmed);
+   if ($call && ($call->{method} // '') =~ /^(?:scalar|array|hash)$/o) {
+    my $lowered = _lower_method_value_expr($trimmed);
+    return $lowered if defined($lowered) && length($lowered);
+   }
+  }
   return $rewritten
  })
 }

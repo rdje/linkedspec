@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Add Concise `s(...)` / `a(...)` / `h(...)` Container Aliases
+
+Added short DSL aliases for the three core container/value wrappers:
+- `s(...)` as a concise alias for `scalar(...)`
+- `a(...)` as a concise alias for `array(...)`
+- `h(...)` as a concise alias for `hash(...)`
+
+This is intentionally limited to the method-like DSL surface. It does not introduce Perl-style sigil syntax.
+
+Implementation notes:
+- method-expression parsing now normalizes those short spellings at the ActionIR seam,
+- scalar/array/hash symbol extractors now accept the short forms too,
+- direct container-shape lowering paths now treat `a(name)` / `h(name)` as first-class array/hash references,
+- and generalized `return(payload)` detection now recognizes the short forms too.
+
+Regression coverage now locks both exact rewrite behavior and an end-to-end parser using:
+- `assign(s(name), ...)`
+- `assign(a(parts), a(...))`
+- `assign(h(meta), h(...))`
+- `count(a(parts))`
+- `has_key(h(meta), ...)`
+
 ## 2026-03-24 - Phase 4: Migrate Lispish Token Readers To Entry Helpers
 
 Moved the compact token-reader band in `specs/Lispish.spec` off the older immediate-match read surface:

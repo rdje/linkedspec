@@ -16,6 +16,15 @@ sub _trim_method_expr_value {
  return $value
 }
 
+sub _normalize_method_name {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'scalar' if $method eq 's';
+ return 'array' if $method eq 'a';
+ return 'hash' if $method eq 'h';
+ return $method
+}
+
 #------------------------------------------------------------------------------
 # Function: _split_top_level_csv
 # Purpose : Split comma-separated argument lists while honoring nested scopes
@@ -150,7 +159,7 @@ sub _parse_method_function_expr {
  my $trimmed = _trim_method_expr_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
  return undef unless $trimmed =~ /^(?<method>\w+)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
- my $method = $+{method};
+ my $method = _normalize_method_name($+{method});
 
  my $payload = $+{PAREN};
  $payload =~ s/^\(|\)$//go;

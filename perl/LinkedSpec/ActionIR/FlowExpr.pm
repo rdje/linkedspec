@@ -87,7 +87,7 @@ sub _looks_like_array_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return 0 unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^array\s*\(/o) {
+ if ($trimmed =~ /^(?:array|a)\s*\(/o) {
   return 1;
  }
 
@@ -136,7 +136,7 @@ sub _looks_like_hash_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return 0 unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^hash\s*\(/o) {
+ if ($trimmed =~ /^(?:hash|h)\s*\(/o) {
   return 1;
  }
 
@@ -186,12 +186,12 @@ sub _lower_is_empty_expr {
  my $trimmed = $trim_action_ir_value->($arg_expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^array\s*\(/o) {
+ if ($trimmed =~ /^(?:array|a)\s*\(/o) {
   my $array_symbol = $extract_array_symbol_name->($trimmed);
   return "(!\@$array_symbol)" if defined $array_symbol;
  }
 
- if ($trimmed =~ /^hash\s*\(/o) {
+ if ($trimmed =~ /^(?:hash|h)\s*\(/o) {
   my $hash_symbol = $extract_hash_symbol_name->($trimmed);
   return "(!scalar(keys %$hash_symbol))" if defined $hash_symbol;
  }
@@ -261,7 +261,7 @@ sub _lower_flow_composite_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
- if ($trimmed =~ /^(?:scalaref|scalar|array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
+ if ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $lowered_value if defined($lowered_value) && length($lowered_value);
  }
