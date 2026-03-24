@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate portmap Classification Reads To Entry Helpers
+
+Moved `specs/portmap.spec::bare_bit_slice` off the older immediate-match read surface:
+- `scalar(IMATCH)`
+- `scalar(IMATCH_LIST, ...)`
+- `flat_array(IMATCH_LIST)`
+
+and onto the explicit immediate-match helper surface instead:
+- `entry_text()`
+- `entry_group(...)`
+- `entry_groups()`
+
+This keeps the existing helper-flow classification logic intact while making the live rule itself less Perl-shaped:
+- `?slice`
+- `?bit`
+- `?constant`
+- `?bare`
+
+Existing regression coverage already locks both the metadata and runtime behavior for this rule:
+- `portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback`
+- `portmap_bare_bit_slice_classification_smoke`
+
 ## 2026-03-24 - Phase 4: Migrate lib_reader Group Readers To entry_group
 
 Moved the grouped entry-reader band in `specs/lib_reader.spec` from the older positional capture-group surface:
