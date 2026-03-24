@@ -417,6 +417,11 @@ Status interpretation note:
 ## Plugin and Resource-Resolution Modernization Track (Planned)
 Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explicit module-based plugin architecture, while making path/resource lookup deterministic and easier to reason about.
 
+Historical rationale note:
+- the original `.plg` idea solved a real ergonomics problem: low-ceremony extension code that could be dropped into a lightweight file without forcing the author through `.pm` / `.pl` module packaging ceremony,
+- the framework could then locate those files under the hood and return executable `sub { ... }` payloads without burdening callers with path-fiddling,
+- so the value worth preserving is low-friction discovered extensibility and resource lookup, not the specific `AUTOLOAD` + `.plg` + `PPlugin` implementation shape.
+
 1. Freeze the current compatibility surface
    - Document the current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge::_dispatch_autoload(...)` -> `LinkedSpec::PluginBridge::_dispatch_plugin_name(...)` -> `PPlugin->exec_plugin_name(...)`) and keep corpus coverage for `plugin/*.plg`.
    - Treat current `.plg` behavior as legacy compatibility that must be preserved during migration, not as the desired end-state architecture.
@@ -436,6 +441,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 5. Deprecation gate
    - Only deprecate `AUTOLOAD` / `.plg` execution after explicit module-based plugins reach practical parity and migration tooling exists.
    - Until then, treat `PPlugin.pm` and `.plg` loading strictly as legacy compatibility behavior rather than target architecture.
+   - Design caution note: the old stack often felt "magical" because it mixed discovery, parsing, caching, and execution behind implicit dispatch. The replacement should preserve low ceremony while separating resource lookup from plugin execution and making dispatch explicit.
    - Keep this track orthogonal to Backbone item #3: clearing `pplugin.spec` is parser-grammar work, not a commitment to preserve the current plugin runtime forever.
 
 ## Immediate Next Steps
