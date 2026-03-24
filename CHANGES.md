@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `sdce.spec` Split Band To Concise Container Aliases
+
+Spent the concise `s(...)` / `a(...)` surface on another live spec:
+- `specs/sdce.spec::sdc_esplit` and `get_pinport` now prefer `s(...)` / `a(...)` in their cursor, accumulator, split, and return payload paths,
+- the parsing behavior stays identical while the method-like DSL gets less verbose in those live split/accumulation flows,
+- and the slice remains narrowly focused on the already-helperized band that the existing regression suite knows well.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `sdce` helper-flow regression still pins preserved behavior,
+- and a focused source-level regression now confirms the migrated split band prefers `s(...)` / `a(...)` instead of drifting back to the longer forms.
+
 ## 2026-03-24 - Phase 4: Migrate `pplugin.spec` Top Aggregation Band To Concise Container Aliases
 
 Spent the concise `a(...)` surface on another live spec:

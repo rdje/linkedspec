@@ -35715,6 +35715,18 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'sdce exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
+subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'sdce source spec text is available for alias migration inspection');
+    like($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band now prefers s(IPOS) in cursor initialization');
+    like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
+    ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
+    unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
+};
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 
