@@ -35825,7 +35825,18 @@ PPLUGIN
     is(ref($ast->{foo}), 'CODE', 'pplugin foo entry is a coderef');
     is(ref($ast->{bar}), 'CODE', 'pplugin bar entry is a coderef');
     is($ast->{foo}->(), 3, 'pplugin foo coderef preserves evaluated body behavior');
-    is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
+   is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
+};
+subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' => sub {
+    plan tests => 4;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'pplugin.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'pplugin source spec text is available for alias migration inspection');
+    like($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation now prefers the short array alias in assign and constructor positions');
+    unlike($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation no longer uses the older array()/array() form in the migrated band');
+    like($source_content, qr/^LE \{return undef unless defined \$retv; assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)\}/m, 'pplugin migrated alias use stays anchored in the LE aggregation line');
 };
 subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;

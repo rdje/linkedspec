@@ -2,7 +2,7 @@ pplugin_top::   I {my @defs; my $retv}
  -> comment       {next}
  -> subdef        {$retv = call(subdef)}
 
-LE {return undef unless defined $retv; assign(array(defs), array(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])))}
+LE {return undef unless defined $retv; assign(a(defs), a(flat_array(defs), scalaref(retv, [0]), scalaref(retv, [1])))}
 LX {return {@defs}}
 
 

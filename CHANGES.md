@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `pplugin.spec` Top Aggregation Band To Concise Container Aliases
+
+Spent the concise `a(...)` surface on another live spec:
+- the `LE` aggregation line in `specs/pplugin.spec::pplugin_top` now prefers `a(defs)` plus an `a(...)` constructor when accumulating discovered subdefs,
+- the parser behavior stays identical while the method-like DSL gets less verbose in that live aggregation path,
+- and the slice stays intentionally narrow by leaving the existing raw-Perl body-eval semantics in `subdef` untouched.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `pplugin` helper-flow and parser-smoke regressions still pin preserved behavior,
+- and a focused source-level regression now confirms the migrated aggregation band prefers `a(...)` instead of drifting back to the longer form.
+
 ## 2026-03-24 - Phase 4: Migrate `portmap.spec` Classification Band To Concise Container Aliases
 
 Spent the concise `a(...)` surface on another live spec:
