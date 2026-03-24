@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `ebnf.spec` Core Method-DSL Band To Concise Container Aliases
+
+Spent the new concise `s(...)` / `a(...)` surface on a real core grammar:
+- the `grammar_file` orchestration band in `specs/ebnf.spec` now prefers `s(rule)` / `a(rules)` / `a(...)`,
+- the repeated `.if(s(on))` guard band now prefers the short scalar alias instead of `scalar(on)`,
+- and the simple terminal-reader rules now prefer `a(...)` returns plus `s(value)` inside the small normalization helpers.
+
+Regression coverage now locks both behavior and source migration intent:
+- existing `ebnf` descriptor/runtime invariants still cover compile/runtime behavior,
+- and a focused source-level regression now confirms the migrated `ebnf.spec` band prefers `s(...)` / `a(...)` rather than drifting back to the long forms.
+
 ## 2026-03-24 - Phase 4: Add Concise `s(...)` / `a(...)` / `h(...)` Container Aliases
 
 Added short DSL aliases for the three core container/value wrappers:

@@ -35155,6 +35155,18 @@ subtest 'ebnf_terminal_token_rules_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "ebnf $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for alias migration inspection');
+    like($source_content, qr/\.if\(s\(on\)\)/, 'ebnf core method-DSL band now prefers s(on) in fluent guard checks');
+    unlike($source_content, qr/\.if\(scalar\(on\)\)/, 'ebnf fluent guard checks no longer use scalar(on) in the migrated band');
+    like($source_content, qr/I\.return\(a\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now prefers the short array constructor alias');
+    like($source_content, qr/push_value\(a\(rules\), a\(s\(rule\), flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now prefers combined s()/a() aliases');
+};
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 

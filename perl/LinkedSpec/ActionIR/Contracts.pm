@@ -920,11 +920,11 @@ sub _build_assignment_and_regex_contracts {
    id                 => 'regex_subst',
    ir_node            => 'REGEX_SUBST',
    diag_name          => 'substr',
-   unresolved_pattern => qr/\b(?:substr|regex_subst)\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:scalar\s*\(\s*\w+\s*\)|\w+)\s*,/o,
+   unresolved_pattern => qr/\b(?:substr|regex_subst)\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:(?:scalar|s)\s*\(\s*\w+\s*\)|\w+)\s*,/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_regex_subst_statement};
-    $code =~ s/\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:scalar\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/$lower->($+{target}, $+{pattern}, $+{replacement}, $+{flags}) || $&/ge;
+    $code =~ s/\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>(?:(?:scalar|s)\s*\(\s*\w+\s*\)|\w+))\s*,\s*(?<pattern>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/$lower->($+{target}, $+{pattern}, $+{replacement}, $+{flags}) || $&/ge;
     return $code
    },
   },
@@ -942,7 +942,7 @@ sub _build_array_pipeline_contracts {
    id                 => 'split_array',
    ir_node            => 'SPLIT',
    diag_name          => 'split',
-   unresolved_pattern => qr/\bsplit\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:array\s*\(\s*\w+\s*\)|\w+)\s*,\s*(?:scalar\s*\(\s*\w+\s*\)|\w+)/o,
+   unresolved_pattern => qr/\bsplit\s*\(\s*(?:(?:\w+)\s*,\s*)?(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)\s*,\s*(?:(?:scalar|s)\s*\(\s*\w+\s*\)|\w+)/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_array_pipeline_expr};
