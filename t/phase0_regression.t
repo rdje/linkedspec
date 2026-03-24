@@ -35565,6 +35565,18 @@ subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'operators_try exposes no prioritized blocked-rule list after debug-print migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'operators_try exposes no top blocked rule after debug-print migration');
 };
+subtest 'operators_try_token_readers_prefer_entry_text' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'operators_try.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'operators_try source spec text is available for token-reader helper inspection');
+    like($source_content, qr/function_call: .*?entry_text\(\)/s, 'operators_try function_call now prefers entry_text() for the immediate token read');
+    like($source_content, qr/auto_inc_op: .*?entry_text\(\)/s, 'operators_try simple operator token readers now prefer entry_text()');
+    like($source_content, qr/variable: .*?entry_text\(\)/s, 'operators_try variable token reader now prefers entry_text()');
+    unlike($source_content, qr/scalar\(IMATCH\)/, 'operators_try migrated token readers no longer rely on scalar(IMATCH)');
+};
 subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 60;
 

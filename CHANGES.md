@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `operators_try.spec` Token Readers To `entry_text()`
+
+Spent the newer immediate-match helper surface on another live spec:
+- the debug-print token-reader rules in `specs/operators_try.spec` now prefer `entry_text()` instead of `scalar(IMATCH)` for their immediate token reads,
+- the preserved debug-print behavior for `function_call`, the simple operator rules, `variable`, and `integer` stays unchanged while those live rules get less tied to the older raw immediate-match surface,
+- and the slice stays deliberately narrow by leaving the rest of the grammar structure alone.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `operators_try` debug-print helper-flow regression still pins preserved behavior,
+- and a focused source-level regression now confirms those migrated token readers prefer `entry_text()` instead of drifting back to `scalar(IMATCH)`.
+
 ## 2026-03-24 - Phase 4: Migrate `BNF.spec` Token Readers To `entry_text()`
 
 Spent the newer immediate-match helper surface on another live spec:
