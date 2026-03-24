@@ -851,6 +851,7 @@ These are tracked implementation concerns, not immediate blockers.
   - Landed follow-up: repo-owned lightweight plugin files `regtest.plg` and `string.plg` now also prefer `LinkedSpec::run_plugin(...)` for known plugin names instead of instantiating/calling `PPlugin` directly.
   - Landed follow-up: repo-owned packages `RTLUtils.pm` and `LispML.pm` no longer advertise stale `PPlugin` inheritance in `@ISA`, and regression coverage now locks that simply requiring those modules keeps the legacy runtime unloaded.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
+  - Long-term migration shape: current `.plg` behavior should move into `.pm` package ownership first, then be simplified; not every `.plg` needs to survive as a permanent one-to-one `.pm` wrapper once explicit APIs and registration exist.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.
   - Item 1 (`$spec_descr` declarative registry): Landed.
