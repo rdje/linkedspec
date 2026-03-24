@@ -969,6 +969,32 @@ PERL
     like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_RUN_PLUGIN__/, 'run_plugin avoids loading PPlugin when a registered plugin is available');
     is($err, '', 'LinkedSpec require/run_plugin subprocess with registered plugin does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_plugin_bridge_load_until_dispatch_plugin_autoload_name' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec;
+require PPlugin;
+no warnings 'redefine';
+local *PPlugin::exec_plugin_name = sub {
+    my ($class_or_self, $plugin_name, @args) = @_;
+    print "__PLUGIN_NAME__=$plugin_name\n";
+    print "__ARGS__=" . join(',', @args) . "\n";
+    return 'plugin_ok';
+};
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_EAGER__\n" : "__PLUGIN_BRIDGE_STILL_LAZY__\n";
+my $ret = LinkedSpec::dispatch_plugin_autoload_name('Synthetic::synthetic_plugin', 'alpha', 'beta');
+print "__RET__=$ret\n";
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_AFTER_DISPATCH_AUTOLOAD_NAME__\n" : "__PLUGIN_BRIDGE_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/dispatch_plugin_autoload_name subprocess exits cleanly with lazy PluginBridge') or diag($err || $out);
+    like($out, qr/__PLUGIN_BRIDGE_STILL_LAZY__/, 'require LinkedSpec keeps PluginBridge unloaded before explicit autoload-name dispatch');
+    like($out, qr/__PLUGIN_NAME__=synthetic_plugin/, 'dispatch_plugin_autoload_name still normalizes the supplied autoload name through PluginBridge');
+    like($out, qr/__ARGS__=alpha,beta/, 'dispatch_plugin_autoload_name still forwards plugin arguments after lazy PluginBridge loading');
+    like($out, qr/__RET__=plugin_ok\n__PLUGIN_BRIDGE_AFTER_DISPATCH_AUTOLOAD_NAME__/, 'dispatch_plugin_autoload_name lazy-loads PluginBridge on demand and preserves return payload');
+    is($err, '', 'LinkedSpec require/dispatch_plugin_autoload_name subprocess does not emit stderr');
+};
 subtest 'linkedspec_registered_plugin_dispatch_avoids_legacy_runtime_load' => sub {
     plan tests => 7;
 
@@ -996,7 +1022,7 @@ PERL
     is($err, '', 'registered plugin AUTOLOAD subprocess does not emit stderr');
 };
 subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 18;
+    plan tests => 20;
 
     no warnings 'redefine';
 
@@ -1054,6 +1080,10 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::run_plugin('synthetic_plugin', 'alpha', 'beta'), { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'run_plugin still delegates through the plugin-bridge explicit-name owner');
     is($@, "__SAVED_ERR__\n", 'run_plugin preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is_deeply(LinkedSpec::dispatch_plugin_autoload_name('Synthetic::synthetic_plugin', 'alpha', 'beta'), { autoload_name => 'Synthetic::synthetic_plugin', args => [qw(alpha beta)] }, 'dispatch_plugin_autoload_name still delegates through the plugin-bridge autoload owner');
+    is($@, "__SAVED_ERR__\n", 'dispatch_plugin_autoload_name preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::synthetic_plugin('alpha', 'beta'), { autoload_name => 'LinkedSpec::synthetic_plugin', args => [qw(alpha beta)] }, 'AUTOLOAD still delegates through the plugin-bridge owner');
@@ -3237,6 +3267,35 @@ PERL
     like($out, qr/__COMPONENT__=<undef>/, 'RTLUtils drive_entity_component preserves the existing non-component option shape when dispatching through run_plugin');
     like($out, qr/-- HEADER --/, 'RTLUtils drive_entity_component prints the run_plugin header payload');
     like($out, qr/ENTITY\s+Top\s+IS/, 'RTLUtils drive_entity_component preserves the surrounding entity output after the run_plugin header');
+};
+subtest 'fsmgen_autoload_uses_linkedspec_dispatch_plugin_autoload_name' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    package Table2SS;
+    1;
+    $INC{'Table2SS.pm'} = 1;
+}
+require PPlugin;
+require FSMGen;
+no warnings 'redefine';
+local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
+local *LinkedSpec::dispatch_plugin_autoload_name = sub {
+    my ($autoload_name, @args) = @_;
+    print "__AUTOLOAD_NAME__=$autoload_name\n";
+    print "__ARGS__=" . join(',', @args) . "\n";
+    return 'plugin_ok';
+};
+my $ret = FSMGen::synthetic_plugin('alpha', 'beta');
+print "__RET__=$ret\n";
+PERL
+
+    is($exit_code, 0, 'FSMGen AUTOLOAD subprocess exits cleanly') or diag($err || $out);
+    unlike($err, qr/__UNEXPECTED_PPLUGIN_EXEC__/, 'FSMGen AUTOLOAD avoids the legacy PPlugin mixed-name exec wrapper');
+    like($out, qr/__AUTOLOAD_NAME__=FSMGen::synthetic_plugin/, 'FSMGen AUTOLOAD now forwards its fully-qualified autoload name into LinkedSpec dispatch_plugin_autoload_name');
+    like($out, qr/__ARGS__=alpha,beta/, 'FSMGen AUTOLOAD preserves plugin arguments through LinkedSpec dispatch_plugin_autoload_name');
+    like($out, qr/__RET__=plugin_ok/, 'FSMGen AUTOLOAD preserves the LinkedSpec dispatch_plugin_autoload_name return payload');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;

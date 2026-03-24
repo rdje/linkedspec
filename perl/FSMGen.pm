@@ -13,10 +13,10 @@ use Storable;
 use File::Path;
 
 use HUtils;
+use LinkedSpec;
 use RTLUtils;
 use Table;
 use Lispish;
-use PPlugin;
 use Table2SS;
 
 use Digest::MD5;
@@ -3520,6 +3520,6 @@ sub size {my ($lst) = @_;
 }
 
 
-sub AUTOLOAD {PPlugin->exec($AUTOLOAD, @_)}
+sub AUTOLOAD {LinkedSpec::dispatch_plugin_autoload_name($AUTOLOAD, @_)}
 
 1;

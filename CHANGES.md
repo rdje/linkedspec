@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Add Explicit AUTOLOAD Compatibility Handoff
+
+Continued the plugin/runtime modernization track by adding a small explicit compatibility handoff for legacy module-owned AUTOLOAD shims:
+- LinkedSpec now exposes `dispatch_plugin_autoload_name($autoload_name, @args)` as a public compatibility helper that routes through `LinkedSpec::PluginBridge::_dispatch_autoload(...)`,
+- `FSMGen.pm` now spends that helper instead of calling `PPlugin->exec(...)` directly from its own `AUTOLOAD`,
+- and `FSMGen` no longer depends on `PPlugin` at module import time for that compatibility handoff.
+
+Regression coverage now locks:
+- lazy `PluginBridge` loading until explicit `dispatch_plugin_autoload_name(...)` use,
+- public façade wrapper preservation for `dispatch_plugin_autoload_name(...)`,
+- and `FSMGen::AUTOLOAD` forwarding through `LinkedSpec::dispatch_plugin_autoload_name(...)` while avoiding the legacy mixed-name `PPlugin::exec(...)` wrapper.
+
 ## 2026-03-24 - Plugin Track: Spend `run_plugin(...)` In Repo Callers
 
 Continued the plugin/runtime modernization track by spending the newer explicit dispatch API in repo-owned explicit-name callers:

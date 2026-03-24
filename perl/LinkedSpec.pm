@@ -260,6 +260,19 @@ sub run_plugin {
 }
 
 #------------------------------------------------------------------------------
+# Function: dispatch_plugin_autoload_name
+# Purpose : Compatibility helper for legacy module-owned AUTOLOAD shims that
+#           still need bridge normalization but should not call PPlugin
+#           directly anymore.
+# Args    : ($autoload_name, @plugin_args)
+# Returns : whatever plugin call returns
+#------------------------------------------------------------------------------
+sub dispatch_plugin_autoload_name {
+ my ($autoload_name, @args) = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginBridge', '_dispatch_autoload', $autoload_name, \@args)
+}
+
+#------------------------------------------------------------------------------
 # Function: AUTOLOAD
 # Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
 # Args    : standard Perl AUTOLOAD args
