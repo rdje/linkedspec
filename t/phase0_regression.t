@@ -3536,6 +3536,42 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     is_deeply([sort keys %$string_ast], [qw(var_subst var_subst_test)], 'string plugin still exposes the expected subdef names');
     is(ref($string_ast->{var_subst_test}), 'CODE', 'string plugin still exposes var_subst_test as a coderef');
 };
+subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
+    plan tests => 10;
+
+    my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
+    my $skew_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
+
+    ok(defined($qc_summary_plugin) && length($qc_summary_plugin), 'qc_summary.plg source is available for explicit lookup inspection');
+    ok(defined($skew_plugin) && length($skew_plugin), 'skew.plg source is available for explicit lookup inspection');
+    unlike($qc_summary_plugin, qr/PPlugin->get \('qc_summary_merge'\)/, 'qc_summary plugin no longer routes qc_summary_merge through legacy PPlugin lookup');
+    like($qc_summary_plugin, qr/LinkedSpec::get_plugin\('qc_summary_merge'\)/, 'qc_summary plugin now resolves qc_summary_merge through LinkedSpec::get_plugin');
+    like($qc_summary_plugin, qr/my \$qc_summary_merge = LinkedSpec::get_plugin\('qc_summary_merge'\);/, 'qc_summary plugin caches the explicit lookup for reuse');
+    unlike($skew_plugin, qr/PPlugin->get \('stan_backend_start'\)/, 'skew plugin no longer routes stan_backend_start through legacy PPlugin lookup');
+    like($skew_plugin, qr/LinkedSpec::get_plugin\('stan_backend_start'\)->\(\$conf\)/, 'skew plugin now resolves stan_backend_start through LinkedSpec::get_plugin');
+    like($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin now loads LinkedSpec explicitly before using get_plugin');
+    like($skew_plugin, qr/use LinkedSpec;/, 'skew plugin now loads LinkedSpec explicitly before using get_plugin');
+    unlike($qc_summary_plugin . $skew_plugin, qr/PPlugin->get \('/, 'migrated small repo-owned plugin lookup callers avoid direct PPlugin->get(...) use');
+};
+subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
+    plan tests => 8;
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for migrated get_plugin plugin-file smoke');
+
+    my $qc_summary_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
+    my $qc_summary_ast = eval { $parser->(\$qc_summary_input) };
+    ok(!$@, 'qc_summary plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($qc_summary_ast) && ref($qc_summary_ast) eq 'HASH', 'qc_summary plugin still returns a hash AST under pplugin');
+    is(ref($qc_summary_ast->{qc_summary}), 'CODE', 'qc_summary plugin still exposes qc_summary as a coderef');
+
+    my $skew_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
+    my $skew_ast = eval { $parser->(\$skew_input) };
+    ok(!$@, 'skew plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($skew_ast) && ref($skew_ast) eq 'HASH', 'skew plugin still returns a hash AST under pplugin');
+    is_deeply([sort keys %$skew_ast], [qw(skew)], 'skew plugin still exposes the expected subdef name');
+    is(ref($skew_ast->{skew}), 'CODE', 'skew plugin still exposes skew as a coderef');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 

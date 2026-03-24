@@ -1,7 +1,8 @@
 skew {
 my ($conf) = @_;
+ use LinkedSpec;
 
- PPlugin->get ('stan_backend_start')->($conf); 
+ LinkedSpec::get_plugin('stan_backend_start')->($conf);
 
  my $filtered           = HUtils::GenericFilter($conf, TcFlow::GetAll($conf->{_argv}), "$conf->{_action}_sequence",  maptable=>'reportiming');
  my $arrival_time_index = TableGrep::IndexOf("arrival_time");
@@ -168,4 +169,3 @@ my ($conf) = @_;
  }
 
 }
-

@@ -1,5 +1,6 @@
 qc_summary  {
 my ($qconf) = @_;
+ use LinkedSpec;
 
  unless (@ARGV) {
   print "(qc_summary) -E- No CSV file provided,";
@@ -49,14 +50,15 @@ my ($qconf) = @_;
  system("mkdir -p $od;");
 
  my @summary;
- HUtils::Recurse(\%myexcel, [PPlugin->get ('qc_summary_merge'), \@summary, $comment, $io_type, $cts_tpd, $slack]); 
+ my $qc_summary_merge = LinkedSpec::get_plugin('qc_summary_merge');
+ HUtils::Recurse(\%myexcel, [$qc_summary_merge, \@summary, $comment, $io_type, $cts_tpd, $slack]);
  my $qcwb        = Table2SS::AddWorkBook("$od/qcsummary.xls");
  my $rca_summary = Table2SS::RCAllocate(1, 1, 2, [@summary], 'qcsummary');
  Table2SS::DriveSheet($qcwb, 'summary',  $rca_summary);
  
  HUtils::Recurse(\%myclone_excel, sub {my ($info, $data) = @_;
   my $mysummary = [];
-  PPlugin->get ('qc_summary_merge')->($info, $data, $mysummary, $comment, $io_type, $cts_tpd, $slack);
+  $qc_summary_merge->($info, $data, $mysummary, $comment, $io_type, $cts_tpd, $slack);
   my $c_rca = Table2SS::RCAllocate(1, 1, 2, $mysummary, 'qcsummary');
   my ($sheetname) = $info->[0] =~ /(.+)\./;
   Table2SS::DriveSheet($qcwb, $sheetname,  $c_rca);

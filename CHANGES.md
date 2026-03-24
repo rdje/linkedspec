@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Spend `get_plugin(...)` in Small Repo-Owned `.plg` Callers
+
+Continued the plugin/runtime modernization track by moving smaller repo-owned lightweight plugin files off direct legacy lookup:
+- `plugin/qc_summary.plg` now resolves `qc_summary_merge` through `LinkedSpec::get_plugin(...)` once and reuses that coderef instead of calling `PPlugin->get(...)`,
+- `plugin/skew.plg` now resolves `stan_backend_start` through `LinkedSpec::get_plugin(...)` instead of `PPlugin->get(...)`,
+- and both plugin files now load `LinkedSpec` explicitly before using the new public lookup API.
+
+Regression coverage now locks:
+- that those repo-owned plugin files no longer call direct `PPlugin->get(...)` for the migrated names,
+- that they now prefer `LinkedSpec::get_plugin(...)`,
+- and that both files still parse successfully under `pplugin` with the expected exported subdef names.
+
 ## 2026-03-24 - Plugin Track: Retire Direct `PPlugin` Exec Calls in Repo-Owned `.plg` Files
 
 Continued the plugin/runtime modernization track by moving the last repo-owned direct `PPlugin` exec callsites in lightweight plugin files onto the public explicit dispatch API:
