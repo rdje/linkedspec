@@ -59,7 +59,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
 
       
 anyvariable: /\S+\s*(?==)/ I {
-	                                       declare(scalar, variable_name=scalar(IMATCH));
+	                                       declare(scalar, variable_name=entry_text());
 	                                       substr(scalar(variable_name), /\s+$/, "", o);
 	                                       print("anyvariable: VARIABLE NAME (", scalar(variable_name), ")\n");
 	                                       return({type=>'anyvariable', content=>scalar(variable_name)})
@@ -192,7 +192,7 @@ bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: ST
  
 
 variable_substitution: /(?<!\\)\$\w+/       I {
-	                                       declare(scalar, variable_name=scalar(IMATCH));
+	                                       declare(scalar, variable_name=entry_text());
 	                                       substr(scalar(variable_name), /^\$/, "", o);
 	                                       print("variable_substitution: (", scalar(variable_name), ")\n");
 					       return({type=>'variable_substitution', content=>scalar(variable_name)})
@@ -216,5 +216,4 @@ parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Paren
      exit}
 
 
-comments: /#.*\n/                           I {declare(scalar, comment_text=scalar(IMATCH)); substr(scalar(comment_text), /\n$/, "", o); print("comments: <", scalar(comment_text), ">\n")}
-
+comments: /#.*\n/                           I {declare(scalar, comment_text=entry_text()); substr(scalar(comment_text), /\n$/, "", o); print("comments: <", scalar(comment_text), ">\n")}

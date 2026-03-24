@@ -35997,6 +35997,18 @@ subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub 
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'simenv exposes no prioritized blocked-rule list after top/anyvariable migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'simenv exposes no top blocked rule after top/anyvariable migration');
 };
+subtest 'simenv_token_readers_prefer_entry_text' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'simenv.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'simenv source spec text is available for token-reader helper inspection');
+    like($source_content, qr/anyvariable: .*?declare\(scalar, variable_name=entry_text\(\)\);/s, 'simenv anyvariable now prefers entry_text() for the immediate token read');
+    like($source_content, qr/variable_substitution: .*?declare\(scalar, variable_name=entry_text\(\)\);/s, 'simenv variable_substitution now prefers entry_text() for the immediate token read');
+    like($source_content, qr/comments: .*?declare\(scalar, comment_text=entry_text\(\)\);/s, 'simenv comments now prefers entry_text() for the immediate token read');
+    unlike($source_content, qr/declare\(scalar, variable_name=scalar\(IMATCH\)\);/, 'simenv migrated token readers no longer rely on scalar(IMATCH) for variable-name capture');
+};
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 47;
 

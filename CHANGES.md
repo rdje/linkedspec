@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `simenv.spec` Token Readers To `entry_text()`
+
+Spent the newer immediate-match helper surface on another live spec:
+- the `anyvariable`, `variable_substitution`, and `comments` token-reader rules in `specs/simenv.spec` now prefer `entry_text()` instead of `scalar(IMATCH)` for the immediate token read,
+- their preserved cleanup, debug print, and return payload behavior stays unchanged while the live spec gets less tied to the older raw immediate-match surface,
+- and the slice stays deliberately narrow by leaving the broader `simenv` orchestration and delimiter/substitution flows alone.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `simenv` helper-flow regressions still pin preserved behavior,
+- and a focused source-level regression now confirms those migrated token readers prefer `entry_text()` instead of drifting back to `scalar(IMATCH)`.
+
 ## 2026-03-24 - Phase 4: Migrate `tablegrep.spec` Terminal Token Reads To `entry_group(...)`
 
 Spent the newer immediate-match helper surface on another live spec:
