@@ -35662,6 +35662,18 @@ subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     ok(!defined($runtime_ctx{last_error}), 'lib_reader entry_group migration leaves runtime_ctx last_error clear on success');
     ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
+subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'lib_reader.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for alias migration inspection');
+    ok(index($source_content, '.substr(s(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now prefers s(groupname) in regex-subst cleanup');
+    like($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_values\(a\(group\)\)\)\)/, 'lib_reader group return now prefers combined s()/a() aliases');
+    like($source_content, qr/\.split\(a\(value_items\), s\(value\), \/,\//, 'lib_reader cattribute splitter now prefers short array/scalar aliases');
+    unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_values\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
+};
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
 

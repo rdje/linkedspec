@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `lib_reader.spec` Reader Band To Concise Container Aliases
+
+Spent the concise `s(...)` / `a(...)` surface on another live spec:
+- `specs/lib_reader.spec::group`, `sattribute`, and `cattribute` now prefer `s(...)` / `a(...)` in the cleanup, split, and return payload paths,
+- the grammar stays behaviorally identical while the method-like DSL gets less verbose and less Perl-shaped,
+- and the migration now covers both grouped aggregate payload assembly and small token cleanup in a representative non-trivial spec.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `lib_reader` helper-flow and runtime AST regressions still pin preserved behavior,
+- and a focused source-level regression now confirms the migrated reader band prefers `s(...)` / `a(...)` instead of drifting back to the longer forms.
+
 ## 2026-03-24 - Phase 4: Migrate `ebnf.spec` Core Method-DSL Band To Concise Container Aliases
 
 Spent the new concise `s(...)` / `a(...)` surface on a real core grammar:
