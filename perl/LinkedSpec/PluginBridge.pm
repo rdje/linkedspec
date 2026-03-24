@@ -50,6 +50,13 @@ sub _exec_legacy_plugin {
  })
 }
 
+sub _get_legacy_plugin {
+ my @args = @_;
+ return _call_preserving_err(sub {
+  return PPlugin->get(@args)
+ })
+}
+
 sub _resolve_registered_plugin {
  my ($plugin_name) = @_;
  return _call_preserving_err(sub {
@@ -63,6 +70,7 @@ sub _default_deps {
  return {
   resolve_registered_plugin => \&_resolve_registered_plugin,
   load_plugin_runtime => \&_load_legacy_plugin_runtime,
+  get_plugin => \&_get_legacy_plugin,
   exec_plugin => \&_exec_legacy_plugin,
  }
 }
@@ -82,6 +90,25 @@ sub _require_plugin_name {
  die "(LinkedSpec::PluginBridge::_require_plugin_name) -E- invalid plugin name '$display_name'"
   unless defined($plugin_name) && $plugin_name =~ /\A\w+\z/o;
  return $plugin_name
+}
+
+sub _lookup_plugin_name {
+ my ($plugin_name, $deps) = @_;
+ $deps = _default_deps() unless ref($deps) eq 'HASH';
+
+ my $resolve_registered_plugin = (ref($deps->{resolve_registered_plugin}) eq 'CODE')
+  ? $deps->{resolve_registered_plugin}
+  : undef;
+ my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
+ my $get_plugin = _require_dep($deps, 'get_plugin');
+ $plugin_name = _require_plugin_name($plugin_name);
+
+ return _call_preserving_err(sub {
+  my $registered_plugin = $resolve_registered_plugin ? $resolve_registered_plugin->($plugin_name) : undef;
+  return $registered_plugin if ref($registered_plugin) eq 'CODE';
+  $load_plugin_runtime->();
+  return $get_plugin->($plugin_name)
+ })
 }
 
 sub _dispatch_plugin_name {

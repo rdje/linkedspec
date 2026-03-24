@@ -260,6 +260,18 @@ sub run_plugin {
 }
 
 #------------------------------------------------------------------------------
+# Function: get_plugin
+# Purpose : Explicit named plugin handler lookup entrypoint for registered or
+#           legacy plugin handlers without relying on PPlugin directly.
+# Args    : ($plugin_name)
+# Returns : coderef | undef
+#------------------------------------------------------------------------------
+sub get_plugin {
+ my ($plugin_name) = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginBridge', '_lookup_plugin_name', $plugin_name)
+}
+
+#------------------------------------------------------------------------------
 # Function: dispatch_plugin_autoload_name
 # Purpose : Compatibility helper for legacy module-owned AUTOLOAD shims that
 #           still need bridge normalization but should not call PPlugin

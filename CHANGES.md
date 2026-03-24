@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Add Explicit `get_plugin(...)` Lookup
+
+Continued the plugin/runtime modernization track by adding the missing explicit plugin-handler lookup API:
+- LinkedSpec now exposes `get_plugin(name)` as the public registry-first / legacy-fallback handler lookup companion to `run_plugin(name, @args)`,
+- `LinkedSpec::PluginBridge` now owns `_get_legacy_plugin(...)` plus `_lookup_plugin_name(...)` so handler lookup follows the same explicit policy as plugin execution,
+- and `TableSort::GenericFilter(...)` now spends `LinkedSpec::get_plugin(...)` instead of calling `PPlugin->get(...)` directly.
+
+Regression coverage now locks:
+- lazy `PluginBridge` loading until explicit `get_plugin(...)` use,
+- public façade wrapper preservation for `get_plugin(...)`,
+- bridge-level plugin lookup through injected deps and the default legacy `PPlugin::get(...)` owner,
+- and `TableSort::GenericFilter(...)` dispatch through `LinkedSpec::get_plugin(...)`.
+
 ## 2026-03-24 - Plugin Track: Add Explicit AUTOLOAD Compatibility Handoff
 
 Continued the plugin/runtime modernization track by adding a small explicit compatibility handoff for legacy module-owned AUTOLOAD shims:

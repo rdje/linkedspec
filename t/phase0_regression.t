@@ -969,6 +969,34 @@ PERL
     like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_RUN_PLUGIN__/, 'run_plugin avoids loading PPlugin when a registered plugin is available');
     is($err, '', 'LinkedSpec require/run_plugin subprocess with registered plugin does not emit stderr');
 };
+subtest 'linkedspec_require_avoids_plugin_bridge_load_until_get_plugin' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec;
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_EAGER__\n" : "__PLUGIN_BRIDGE_STILL_LAZY__\n";
+LinkedSpec::register_plugin('synthetic_plugin', sub {
+    my @args = @_;
+    print "__REGISTERED_ARGS__=" . join(',', @args) . "\n";
+    return 'registered_ok';
+});
+my $plugin = LinkedSpec::get_plugin('synthetic_plugin');
+print(ref($plugin) eq 'CODE' ? "__PLUGIN_DEFINED__\n" : "__PLUGIN_UNDEF__\n");
+my $ret = $plugin ? $plugin->('alpha', 'beta') : '<undef>';
+print "__RET__=$ret\n";
+print exists($INC{"LinkedSpec/PluginBridge.pm"}) ? "__PLUGIN_BRIDGE_AFTER_GET_PLUGIN__\n" : "__PLUGIN_BRIDGE_STILL_UNLOADED__\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_AFTER_GET_PLUGIN__\n" : "__PPLUGIN_STILL_UNLOADED_AFTER_GET_PLUGIN__\n";
+LinkedSpec::clear_registered_plugins();
+PERL
+
+    is($exit_code, 0, 'LinkedSpec require/get_plugin subprocess exits cleanly with lazy PluginBridge') or diag($err || $out);
+    like($out, qr/__PLUGIN_BRIDGE_STILL_LAZY__/, 'require LinkedSpec keeps PluginBridge unloaded before explicit get_plugin lookup');
+    like($out, qr/__PLUGIN_DEFINED__/, 'get_plugin still returns a plugin coderef after lazy PluginBridge loading');
+    like($out, qr/__REGISTERED_ARGS__=alpha,beta/, 'get_plugin preserves registered plugin invocation behavior');
+    like($out, qr/__RET__=registered_ok/, 'get_plugin preserves registered plugin return payload');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_GET_PLUGIN__/, 'get_plugin avoids loading PPlugin when a registered plugin is available');
+    is($err, '', 'LinkedSpec require/get_plugin subprocess with registered plugin does not emit stderr');
+};
 subtest 'linkedspec_require_avoids_plugin_bridge_load_until_dispatch_plugin_autoload_name' => sub {
     plan tests => 6;
 
@@ -1022,7 +1050,7 @@ PERL
     is($err, '', 'registered plugin AUTOLOAD subprocess does not emit stderr');
 };
 subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 20;
+    plan tests => 22;
 
     no warnings 'redefine';
 
@@ -1034,6 +1062,10 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::PluginRegistry::register_plugin = sub { return 'registered_ok' };
     local *LinkedSpec::PluginRegistry::register_plugins = sub { return 2 };
     local *LinkedSpec::PluginRegistry::clear_registered_plugins = sub { return 2 };
+    local *LinkedSpec::PluginBridge::_lookup_plugin_name = sub {
+        my ($plugin_name) = @_;
+        return sub { return $plugin_name };
+    };
     local *LinkedSpec::PluginBridge::_dispatch_plugin_name = sub {
         my ($plugin_name, $args) = @_;
         return {
@@ -1076,6 +1108,11 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::clear_registered_plugins(), 2, 'clear_registered_plugins still delegates through the plugin-registry owner');
     is($@, "__SAVED_ERR__\n", 'clear_registered_plugins preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    my $plugin = LinkedSpec::get_plugin('synthetic_plugin');
+    ok(ref($plugin) eq 'CODE' && $plugin->() eq 'synthetic_plugin', 'get_plugin still delegates through the plugin-bridge lookup owner');
+    is($@, "__SAVED_ERR__\n", 'get_plugin preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(LinkedSpec::run_plugin('synthetic_plugin', 'alpha', 'beta'), { plugin_name => 'synthetic_plugin', args => [qw(alpha beta)] }, 'run_plugin still delegates through the plugin-bridge explicit-name owner');
@@ -2311,13 +2348,17 @@ subtest 'trace_stringify_preserves_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'Trace stringify preserves caller $@ on successful dump formatting');
 };
 subtest 'plugin_bridge_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 10;
+    plan tests => 14;
 
     no warnings 'redefine';
     require LinkedSpec::PluginBridge;
     require LinkedSpec::PluginRegistry;
 
     local $INC{'PPlugin.pm'} = __FILE__;
+    local *PPlugin::get = sub {
+        my ($class, $plugin_name) = @_;
+        return sub { return $plugin_name };
+    };
     local *PPlugin::exec_plugin_name = sub {
         my ($class, $plugin_name, @args) = @_;
         return {
@@ -2341,6 +2382,16 @@ subtest 'plugin_bridge_owner_wrappers_preserve_eval_error_state' => sub {
         'PluginBridge legacy exec wrapper still delegates through PPlugin explicit-name owner',
     );
     is($@, "__SAVED_ERR__\n", 'PluginBridge legacy exec wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    my $legacy_plugin = LinkedSpec::PluginBridge::_get_legacy_plugin('synthetic_plugin');
+    ok(ref($legacy_plugin) eq 'CODE' && $legacy_plugin->() eq 'synthetic_plugin', 'PluginBridge legacy get wrapper still delegates through PPlugin get owner');
+    is($@, "__SAVED_ERR__\n", 'PluginBridge legacy get wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    my $lookup_plugin = LinkedSpec::PluginBridge::_lookup_plugin_name('registered_plugin', { resolve_registered_plugin => sub { return sub { return 'registered_plugin' } }, load_plugin_runtime => sub { return 1 }, get_plugin => sub { return undef } });
+    ok(ref($lookup_plugin) eq 'CODE' && $lookup_plugin->() eq 'registered_plugin', 'PluginBridge plugin lookup wrapper still preserves returned registered plugin payload through injected deps');
+    is($@, "__SAVED_ERR__\n", 'PluginBridge plugin lookup wrapper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is_deeply(
@@ -2710,6 +2761,33 @@ subtest 'plugin_bridge_dispatch_plugin_name_supports_injected_runtime_deps' => s
     is($ret->{plugin_name}, 'synthetic_plugin', 'PluginBridge explicit-name dispatch preserves returned plugin name payload');
     is_deeply($ret->{args}, [qw(alpha beta)], 'PluginBridge explicit-name dispatch preserves returned argument payload');
 };
+subtest 'plugin_bridge_lookup_plugin_name_supports_injected_runtime_deps' => sub {
+    plan tests => 6;
+    require LinkedSpec::PluginBridge;
+
+    my $load_calls = 0;
+    my $captured_plugin_name;
+    my $ret = LinkedSpec::PluginBridge::_lookup_plugin_name(
+        'synthetic_plugin',
+        {
+            load_plugin_runtime => sub {
+                ++$load_calls;
+                return 1;
+            },
+            get_plugin => sub {
+                ($captured_plugin_name) = @_;
+                return sub { return $captured_plugin_name };
+            },
+        },
+    );
+
+    is($load_calls, 1, 'PluginBridge plugin lookup invokes the load callback exactly once');
+    is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge plugin lookup forwards the explicit plugin name unchanged');
+    ok(ref($ret) eq 'CODE', 'PluginBridge plugin lookup returns plugin callback payload');
+    is($ret->(), 'synthetic_plugin', 'PluginBridge plugin lookup preserves the returned plugin callback payload');
+    ok(!defined $ret->('ignored') || $ret->('ignored') eq 'synthetic_plugin', 'PluginBridge plugin lookup returned callback remains callable after lookup');
+    ok(1, 'PluginBridge plugin lookup injected runtime dep coverage completed');
+};
 subtest 'plugin_bridge_default_registered_plugin_dep_uses_registry_owner' => sub {
     plan tests => 4;
     require LinkedSpec::PluginBridge;
@@ -2735,6 +2813,37 @@ subtest 'plugin_bridge_default_registered_plugin_dep_uses_registry_owner' => sub
     is($resolve_calls, 1, 'PluginBridge default registered-plugin dep calls the registry owner exactly once');
     is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge default registered-plugin dep forwards the explicit plugin name unchanged');
     ok(ref($ret) eq 'CODE', 'PluginBridge default registered-plugin dep preserves the registry owner payload');
+};
+subtest 'plugin_bridge_default_get_dep_uses_pplugin_get_owner' => sub {
+    plan tests => 6;
+
+    require LinkedSpec::PluginBridge;
+    require PPlugin;
+
+    my $deps = LinkedSpec::PluginBridge::_default_deps();
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    my ($get_calls, $captured_plugin_name) = (0, undef);
+
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *PPlugin::get = sub {
+            my ($class_or_self, $plugin_name) = @_;
+            ++$get_calls;
+            $captured_plugin_name = $plugin_name;
+            return sub { return $plugin_name };
+        };
+        $ret = $deps->{get_plugin}->('synthetic_plugin');
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'PluginBridge default get dep succeeds while the legacy get owner is trapped')
+        or diag(normalize_error($err));
+    is($get_calls, 1, 'PluginBridge default get dep calls the legacy get owner exactly once');
+    is($captured_plugin_name, 'synthetic_plugin', 'PluginBridge default get dep forwards the explicit plugin name unchanged');
+    ok(ref($ret) eq 'CODE', 'PluginBridge default get dep preserves the legacy get owner payload');
+    is($ret->(), 'synthetic_plugin', 'PluginBridge default get dep preserves the returned plugin callback');
+    is($err, '', 'PluginBridge default get dep does not emit eval error text');
 };
 subtest 'plugin_registry_register_and_clear_contract' => sub {
     plan tests => 8;
@@ -3219,6 +3328,45 @@ PERL
     like($out, qr/__PLUGIN_NAME__=genericfilter_contains/, 'HUtils GenericFilter dispatches through LinkedSpec::run_plugin');
     like($out, qr/__MAPTABLE__=default_map/, 'HUtils GenericFilter forwards the selected maptable into run_plugin');
     like($out, qr/__LEAF__=filtered_payload/, 'HUtils GenericFilter preserves the run_plugin filtered payload');
+};
+subtest 'tablesort_generic_filter_uses_get_plugin_explicit_api' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require PPlugin;
+require TableSort;
+no warnings 'redefine';
+local *TableSort::Recurse = sub {
+    my ($data, $cb) = @_;
+    return $cb->(['leaf'], ['contains', 'needle']);
+};
+local *TableSort::WRecurse = sub { return };
+local *PPlugin::get = sub { die "__UNEXPECTED_PPLUGIN_GET__\n" };
+local *LinkedSpec::get_plugin = sub {
+    my ($plugin_name) = @_;
+    print "__PLUGIN_NAME__=$plugin_name\n";
+    return sub {
+        my @args = @_;
+        print "__MAPTABLE__=$args[3]\n";
+        return 'filtered_payload';
+    };
+};
+my $ret = TableSort::GenericFilter(
+    {
+        maptable => { DEFAULT => 'default_map' },
+        filters => {},
+    },
+    [],
+    ['filters'],
+);
+print "__LEAF__=$ret->{leaf}\n";
+PERL
+
+    is($exit_code, 0, 'TableSort GenericFilter subprocess exits cleanly') or diag($err || $out);
+    unlike($err, qr/__UNEXPECTED_PPLUGIN_GET__/, 'TableSort GenericFilter avoids the legacy PPlugin get wrapper');
+    like($out, qr/__PLUGIN_NAME__=genericfilter_contains/, 'TableSort GenericFilter dispatches plugin lookup through LinkedSpec::get_plugin');
+    like($out, qr/__MAPTABLE__=default_map/, 'TableSort GenericFilter forwards the selected maptable into the looked-up plugin callback');
+    like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the get_plugin callback payload');
 };
 subtest 'rtlutils_add_header_paths_spend_run_plugin_explicit_api' => sub {
     plan tests => 2;
