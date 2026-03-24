@@ -35767,6 +35767,18 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
         is_deeply($ast, $expected, "portmap classification matches expected AST for `$input`");
     }
 };
+subtest 'portmap_spec_prefers_short_container_aliases_in_bare_bit_slice_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'portmap.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'portmap source spec text is available for alias migration inspection');
+    like($source_content, qr/assign\(a\(entry_parts\), entry_groups\(\)\);/, 'portmap bare_bit_slice now prefers a(entry_parts) for immediate group snapshot assignment');
+    like($source_content, qr/return\(a\("\?slice:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now prefers nested short array aliases');
+    like($source_content, qr/return\(a\("\?bare:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now prefers nested short array aliases');
+    unlike($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap migrated band no longer uses the older array()/array() form for slice returns');
+};
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
 

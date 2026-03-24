@@ -1,5 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `portmap.spec` Classification Band To Concise Container Aliases
+
+Spent the concise `a(...)` surface on another live spec:
+- `specs/portmap.spec::bare_bit_slice` now prefers `a(entry_parts)` for the immediate capture-group snapshot,
+- and the `?slice` / `?bit` / `?constant` / `?bare` classification returns now prefer nested short array aliases instead of the longer `array(...)` form.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `portmap` helper-flow and runtime classification regressions still pin preserved behavior,
+- and a focused source-level regression now confirms the migrated classification band prefers `a(...)` instead of drifting back to the longer form.
+
 ## 2026-03-24 - Phase 4: Migrate `Lispish.spec` Parenthesis And Reader Band To Concise Container Aliases
 
 Spent the concise `s(...)` / `a(...)` / `h(...)` surface on another live spec:

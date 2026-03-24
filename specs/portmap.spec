@@ -14,14 +14,14 @@ concatenation: /\{/ /\}/
 -> concatenation[1]    {return ['?concat:', [@concatenation]]} 
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
 	declare(array, entry_parts);
-	assign(array(entry_parts), entry_groups());
+	assign(a(entry_parts), entry_groups());
 	if(matches(entry_text(), /:/));
-		return(array("?slice:", array(flat_array(entry_parts))));
+		return(a("?slice:", a(flat_array(entry_parts))));
 	elseif(or(eq(entry_group(1), "0"), is_nonempty(entry_group(1))));
-		return(array("?bit:", array(flat_array(entry_parts))));
+		return(a("?bit:", a(flat_array(entry_parts))));
 	elseif(matches(entry_group(0), /^\d/io));
-		return(array("?constant:", array(flat_array(entry_parts))));
+		return(a("?constant:", a(flat_array(entry_parts))));
 	else();
-		return(array("?bare:", array(flat_array(entry_parts))));
+		return(a("?bare:", a(flat_array(entry_parts))));
 	endif()
 }
