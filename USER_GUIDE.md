@@ -1076,9 +1076,21 @@ Contract scanning internals are now owned by `LinkedSpec::ActionIR::Scanner` and
 Likewise, validation and DSL-error handling now stay on `LinkedSpec::Validation`; normal callers should not depend on the older `LinkedSpec::get_dsl_context(...)`, `report_dsl_error(...)`, `validate_*`, or `extract_regex_literals_from_rule_rhs(...)` facade wrappers.
 
 ## Legacy Plugin Bridge
+LinkedSpec now also has an explicit registered-plugin surface for the modernization track:
+
+```text
+LinkedSpec::register_plugin('synthetic_plugin', sub { ... })
+LinkedSpec::register_plugins({
+  plugin_one => sub { ... },
+  plugin_two => sub { ... },
+})
+```
+
+When generated parser code later calls `LinkedSpec::synthetic_plugin(...)`, `LinkedSpec::AUTOLOAD` still goes through `LinkedSpec::PluginBridge`, but the bridge now checks `LinkedSpec::PluginRegistry` first. If an explicit registered handler exists, that handler runs directly and the legacy `.plg` runtime is not loaded for that dispatch. `LinkedSpec::clear_registered_plugins()` is also available when tests or embedding code want to reset the explicit registry.
+
 Generated parsers may still call legacy plugin handlers through `LinkedSpec::AUTOLOAD`. That compatibility path now delegates straight into `LinkedSpec::PluginBridge::_dispatch_autoload(...)`, which normalizes `LinkedSpec::method_name` into the explicit plugin name `method_name` and then delegates runtime execution through the bridge's explicit-name owner path `_dispatch_plugin_name(...)`. The bridge's default legacy load/exec behavior is also now named explicitly inside `LinkedSpec::PluginBridge` via `_load_legacy_plugin_runtime(...)` and `_exec_legacy_plugin(...)`, rather than being hidden in inline closures. The bridge remains legacy-only while the project moves toward explicit package-based plugin APIs.
 
-The current legacy `.plg` adapter in `PPlugin` still searches the working directory and the project `plugin/` directory, but it now enumerates those roots explicitly, lists `.plg` files in deterministic cwd-first sorted order, builds the cached registry through an explicit `_build_plugin_registry(...)` helper, initializes that cache through `_load_legacy_registry()` plus explicit default deps, lazy-loads `LinkedSpec` only when the default `pplugin` parser callback is actually needed, and exposes normalized-name execution through `exec_plugin_name(...)`. Repo-owned callers that already know explicit plugin names now use that owner path directly. The older `PPlugin::exec(...)` entry remains compatibility glue for mixed-name callers. Treat that as compatibility behavior, not the long-term plugin architecture.
+The current legacy `.plg` adapter in `PPlugin` still searches the working directory and the project `plugin/` directory, but it now enumerates those roots explicitly, lists `.plg` files in deterministic cwd-first sorted order, builds the cached registry through an explicit `_build_plugin_registry(...)` helper, initializes that cache through `_load_legacy_registry()` plus explicit default deps, lazy-loads `LinkedSpec` only when the default `pplugin` parser callback is actually needed, and exposes normalized-name execution through `exec_plugin_name(...)`. Repo-owned callers that already know explicit plugin names now use that owner path directly, and the bridge now prefers the explicit registered-plugin registry before falling back to this legacy `.plg` path. The older `PPlugin::exec(...)` entry remains compatibility glue for mixed-name callers. Treat that as compatibility behavior, not the long-term plugin architecture.
 
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:

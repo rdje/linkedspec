@@ -50,8 +50,18 @@ sub _exec_legacy_plugin {
  })
 }
 
+sub _resolve_registered_plugin {
+ my ($plugin_name) = @_;
+ return _call_preserving_err(sub {
+  my $ok = eval { require LinkedSpec::PluginRegistry; 1 };
+  die "(LinkedSpec::PluginBridge::_resolve_registered_plugin) -E- Unable to load LinkedSpec::PluginRegistry: $@" unless $ok;
+  return LinkedSpec::PluginRegistry::get_plugin($plugin_name)
+ })
+}
+
 sub _default_deps {
  return {
+  resolve_registered_plugin => \&_resolve_registered_plugin,
   load_plugin_runtime => \&_load_legacy_plugin_runtime,
   exec_plugin => \&_exec_legacy_plugin,
  }
@@ -79,11 +89,18 @@ sub _dispatch_plugin_name {
  $args = [] unless ref($args) eq 'ARRAY';
  $deps = _default_deps() unless ref($deps) eq 'HASH';
 
+ my $resolve_registered_plugin = (ref($deps->{resolve_registered_plugin}) eq 'CODE')
+  ? $deps->{resolve_registered_plugin}
+  : undef;
  my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
  my $exec_plugin = _require_dep($deps, 'exec_plugin');
  $plugin_name = _require_plugin_name($plugin_name);
 
  return _call_preserving_err(sub {
+  my $registered_plugin = $resolve_registered_plugin ? $resolve_registered_plugin->($plugin_name) : undef;
+  if (ref($registered_plugin) eq 'CODE') {
+   return $registered_plugin->(@$args)
+  }
   $load_plugin_runtime->();
   return $exec_plugin->($plugin_name, @$args)
  })

@@ -423,6 +423,7 @@ Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explici
 2. Introduce an explicit plugin API
    - New plugin entrypoints should live in normal Perl packages with explicit names and registration/loading semantics.
    - `LinkedSpec::PluginBridge` should remain only as a compatibility shim while legacy callers are migrated.
+   - Landed follow-up: explicit registered-plugin entrypoints now exist through `LinkedSpec::PluginRegistry` plus public `LinkedSpec::register_plugin(...)` / `register_plugins(...)`, and `LinkedSpec::PluginBridge` now consults that registry before loading the legacy `.plg` runtime.
 3. Replace implicit discovery/loading
    - Move away from method-name extraction plus cwd/project-root `.plg` globbing as the primary runtime plugin contract.
    - Prefer explicit module discovery/loading and a deterministic registry interface; keep a `.plg` adapter only until parity is reached.
@@ -536,7 +537,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `mostly done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Finish the remaining ActionIR/EmitContext owner-contract cleanup and compatibility-surface reduction. |
 | Method-like DSL migration track | `in progress` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. Backbone Item 3 groundwork alone does not define this track. | Continue adding missing user-facing DSL features on top of the latest control-flow baseline; keep deeper cross-nesting parity expansion deferred unless a concrete feature or bug requires it. |
-| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Compatibility bridge work has started, but full runtime replacement/decoupling is still ahead. |
+| Plugin/resource-resolution modernization track | `in progress` | Explicit plugin/runtime boundary and deterministic path/resource lookup. | Explicit registered-plugin entrypoints now exist and the bridge now prefers that registry before legacy `.plg` fallback, but full runtime replacement/decoupling is still ahead. |
 
 ## Deferred Architectural Concern Notes
 These are tracked implementation concerns, not immediate blockers.
@@ -830,6 +831,7 @@ These are tracked implementation concerns, not immediate blockers.
   - Landed follow-up: `PPlugin::new(...)` now initializes its cached legacy registry through `_load_legacy_registry()` plus explicit default dependency callbacks (`load_plugin_parser`, `discover_plugin_files`, `build_plugin_registry`), so parser loading and registry setup are no longer hardwired inline in the constructor.
   - Landed follow-up: `PPlugin.pm` no longer eager-loads `LinkedSpec` at module import time; the default parser dependency now lazy-loads `LinkedSpec` only when the compatibility `pplugin` parser callback is actually needed.
   - Landed follow-up: repo-owned callers that already have explicit plugin names (`HUtils`, `RTLUtils`, `TableScript`, and `plugin/string.plg`) now dispatch through `PPlugin::exec_plugin_name(...)` directly, narrowing the remaining mixed-name compatibility surface to autoload-style and external legacy callers.
+  - Landed follow-up: explicit registered-plugin entrypoints now exist through `LinkedSpec::PluginRegistry` plus public `LinkedSpec::register_plugin(...)` / `register_plugins(...)` / `clear_registered_plugins()`, and `LinkedSpec::PluginBridge` now consults that registry before loading the legacy `.plg` runtime.
   - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.

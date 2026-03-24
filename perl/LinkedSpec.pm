@@ -215,6 +215,39 @@ sub get_parser {
 }
 
 #------------------------------------------------------------------------------
+# Function: register_plugin
+# Purpose : Register an explicit named plugin handler for AUTOLOAD dispatch.
+# Args    : ($plugin_name, $coderef)
+# Returns : registered coderef
+#------------------------------------------------------------------------------
+sub register_plugin {
+ my @args = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'register_plugin', @args)
+}
+
+#------------------------------------------------------------------------------
+# Function: register_plugins
+# Purpose : Register multiple explicit named plugin handlers at once.
+# Args    : (\%plugin_name_to_coderef) | (%plugin_name_to_coderef)
+# Returns : count of registered plugin handlers
+#------------------------------------------------------------------------------
+sub register_plugins {
+ my @args = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'register_plugins', @args)
+}
+
+#------------------------------------------------------------------------------
+# Function: clear_registered_plugins
+# Purpose : Clear the explicit named plugin registry.
+# Args    : ()
+# Returns : number of cleared plugin handlers
+#------------------------------------------------------------------------------
+sub clear_registered_plugins {
+ my @args = @_;
+ return _dispatch_owner_call('LinkedSpec::PluginRegistry', 'clear_registered_plugins', @args)
+}
+
+#------------------------------------------------------------------------------
 # Function: AUTOLOAD
 # Purpose : Lazy plugin bridge used by generated parsers for plugin dispatch.
 # Args    : standard Perl AUTOLOAD args

@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Add Explicit Registered Plugin API
+
+Started the next real plugin/runtime modernization slice instead of more helper-spending:
+- LinkedSpec now has an explicit `LinkedSpec::PluginRegistry` owner with public `LinkedSpec::register_plugin(...)`, `register_plugins(...)`, and `clear_registered_plugins()` entrypoints,
+- `LinkedSpec::PluginBridge` now consults that explicit registry before loading the legacy `.plg` runtime, so generated parser calls can execute registered plugins directly without pulling in `PPlugin`,
+- and the older `.plg` runtime remains as compatibility fallback when no explicit registered plugin is present.
+
+Regression coverage now locks:
+- the public registry façade wrappers,
+- the “registered plugin avoids legacy runtime load” contract,
+- the bridge preference order between explicit registered plugins and legacy runtime fallback,
+- and the default dependency ownership for the new registered-plugin resolver path.
+
 ## 2026-03-24 - Phase 4: Extend Compatibility Metadata To Legacy Helper Wrappers
 
 Extended the new compatibility telemetry so it matches the documented migration policy instead of only flagging Perl-shaped pass-through syntax:
