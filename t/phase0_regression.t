@@ -35202,6 +35202,18 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ds_vhistory exposes no prioritized blocked-rule list after vhistory migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
+subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for alias migration inspection');
+    like($source_content, qr/assign\(s\(first_capt\), scalar\(a\(capt\), 0\)\)/, 'ds_vhistory vhistory band now prefers s(first_capt) plus a(capt) in first captured-entry reads');
+    like($source_content, qr/push_value\(a\(object_hier\), a\(s\(entry_tag\), array_values\(a\(capt\)\)\)\)/, 'ds_vhistory vhistory band now prefers nested a()/s() aliases in object_hier pushes');
+    ok(index($source_content, 'return(a("?ds_vhistory:", array_values(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias in top-level return construction');
+    unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_values\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() form in object aggregation pushes');
+};
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 9;
 

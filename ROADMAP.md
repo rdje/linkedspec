@@ -156,6 +156,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - the `LE` aggregation line in `specs/pplugin.spec::pplugin_top` now also spends the concise array alias on its live subdef accumulator path,
   - the split/accumulation band in `specs/sdce.spec` now also spends those concise aliases on cursor state, accumulator pushes, split targets/sources, and return payloads,
   - the `substitute_top` orchestration band in `specs/hlink_substitution.spec` now also spends the concise scalar/array aliases on call-result assignment, accumulator pushes, and aggregate return flow,
+  - the main `vhistory` orchestration band in `specs/ds_vhistory.spec` now also spends those concise aliases on captured-entry reads, object-hierarchy accumulation, reset paths, and top-level return payload construction,
   - named marks are now scoped to the current rule label rather than shared across child-rule calls,
   - mark writes now fire only when the regex slot that actually carries the `@mark(name)` paragraph member matches,
   - high/debug trace output now shows mark-write positions for `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` as a short input excerpt plus a caret under the stored checkpoint position,

@@ -9,41 +9,41 @@ declare(array, vhistory, capt, object_hier);
 declare(scalar, cur_object, first_capt, entry_tag, current_object_name)
 }
 LX  {
- if(is_nonempty(array(capt)));
-  assign(scalar(first_capt), scalar(array(capt), 0));
+ if(is_nonempty(a(capt)));
+  assign(s(first_capt), scalar(a(capt), 0));
   if(eq(scalaref(first_capt, [0]), "?branch:"));
-   assign(scalar(entry_tag), "?branch_entry:");
+   assign(s(entry_tag), "?branch_entry:");
   else();
-   assign(scalar(entry_tag), "?version_entry:");
+   assign(s(entry_tag), "?version_entry:");
   endif();
-  push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
+  push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
  endif();
 
- if(is_nonempty(array(object_hier)));
-  assign(scalar(current_object_name), scalaref(cur_object, [1]));
-  push_value(array(vhistory), array("?object:", scalar(current_object_name), array_values(array(object_hier))));
+ if(is_nonempty(a(object_hier)));
+  assign(s(current_object_name), scalaref(cur_object, [1]));
+  push_value(a(vhistory), a("?object:", s(current_object_name), array_values(a(object_hier))));
  endif();
 
- return(array("?ds_vhistory:", array_values(array(vhistory))))
+ return(a("?ds_vhistory:", array_values(a(vhistory))))
 } 
 
 -> object             {
-  if(is_nonempty(array(capt)));
-   assign(scalar(first_capt), scalar(array(capt), 0));
+  if(is_nonempty(a(capt)));
+   assign(s(first_capt), scalar(a(capt), 0));
    if(eq(scalaref(first_capt, [0]), "?branch:"));
-    assign(scalar(entry_tag), "?branch_entry:");
+    assign(s(entry_tag), "?branch_entry:");
    else();
-    assign(scalar(entry_tag), "?version_entry:");
+    assign(s(entry_tag), "?version_entry:");
    endif();
-   push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
-   assign(array(capt), array());
+   push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
+   assign(a(capt), a());
 
   endif();
 
-  if(is_nonempty(array(object_hier)));
-   assign(scalar(current_object_name), scalaref(cur_object, [1]));
-   push_value(array(vhistory), array("?object:", scalar(current_object_name), array_values(array(object_hier))));
-   assign(array(object_hier), array());
+  if(is_nonempty(a(object_hier)));
+   assign(s(current_object_name), scalaref(cur_object, [1]));
+   push_value(a(vhistory), a("?object:", s(current_object_name), array_values(a(object_hier))));
+   assign(a(object_hier), a());
   endif();
 
   $cur_object  = call(object);
@@ -52,15 +52,15 @@ LX  {
 
 
 -> separator          {
-  if(is_nonempty(array(capt)));
-   assign(scalar(first_capt), scalar(array(capt), 0));
+  if(is_nonempty(a(capt)));
+   assign(s(first_capt), scalar(a(capt), 0));
    if(eq(scalaref(first_capt, [0]), "?branch:"));
-    assign(scalar(entry_tag), "?branch_entry:");
+    assign(s(entry_tag), "?branch_entry:");
    else();
-    assign(scalar(entry_tag), "?version_entry:");
+    assign(s(entry_tag), "?version_entry:");
    endif();
-   push_value(array(object_hier), array(scalar(entry_tag), array_values(array(capt))));
-   assign(array(capt), array());
+   push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
+   assign(a(capt), a());
   endif();
 }
 

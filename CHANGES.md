@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `ds_vhistory.spec` Vhistory Band To Concise Container Aliases
+
+Spent the concise `s(...)` / `a(...)` surface on another live spec:
+- the main `vhistory` orchestration band in `specs/ds_vhistory.spec` now prefers `s(...)` / `a(...)` for captured-entry reads, object-hierarchy accumulation, reset paths, and top-level return payload construction,
+- the parsing behavior stays identical while that already-helperized live rule becomes less verbose and less tied to the longer `scalar(...)` / `array(...)` spellings,
+- and the slice stays intentionally narrow by leaving the token-return rules and unrelated raw-array shorthand surfaces alone.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `ds_vhistory` helper-flow regression still pins preserved behavior,
+- and a focused source-level regression now confirms the migrated `vhistory` band prefers `s(...)` / `a(...)` instead of drifting back to the longer forms.
+
 ## 2026-03-24 - Phase 4: Migrate `hlink_substitution.spec` Top Band To Concise Container Aliases
 
 Spent the concise `s(...)` / `a(...)` surface on another live spec:
