@@ -7,80 +7,80 @@ parenthesis: /\(/ /\)/
 I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
 
  -> parenthesis       {
-   if(is_nonempty(array(word)));
-    if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+   if(is_nonempty(a(word)));
+    if(is_empty(s(has_head)));
+     assign(s(head), join_values("", a(word)));
+     assign(s(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push_value(a(tail), join_values("", a(word)));
     endif();
-    assign(array(word), array());
+    assign(a(word), a());
    endif();
-   assign(scalar(retv), call(parenthesis));
-   if(is_empty(scalar(has_head)));
-    assign(scalar(head), scalar(retv));
-    assign(scalar(has_head), 1);
+   assign(s(retv), call(parenthesis));
+   if(is_empty(s(has_head)));
+    assign(s(head), s(retv));
+    assign(s(has_head), 1);
    else();
-    push_value(array(tail), scalar(retv));
+    push_value(a(tail), s(retv));
    endif()
 }
 
  -> spaces            {
    call(spaces);
-   if(is_nonempty(array(word)));
-    if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+   if(is_nonempty(a(word)));
+    if(is_empty(s(has_head)));
+     assign(s(head), join_values("", a(word)));
+     assign(s(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push_value(a(tail), join_values("", a(word)));
     endif();
-    assign(array(word), array());
+    assign(a(word), a());
    endif()
 }
- -> dquotes           {assign(scalar(retv), call(dquotes)); push_value(array(word), scalaref(retv, {content}))}
- -> sbrackets         {assign(scalar(retv), call(sbrackets)); push_value(array(word), scalaref(retv, {content}))}
- -> curlyb            {assign(scalar(retv), call(curlyb)); push_value(array(word), scalaref(retv, {content}))}
- -> others            {assign(scalar(retv), call(others)); push_value(array(word), scalaref(retv, {content}))}
+ -> dquotes           {assign(s(retv), call(dquotes)); push_value(a(word), scalaref(retv, {content}))}
+ -> sbrackets         {assign(s(retv), call(sbrackets)); push_value(a(word), scalaref(retv, {content}))}
+ -> curlyb            {assign(s(retv), call(curlyb)); push_value(a(word), scalaref(retv, {content}))}
+ -> others            {assign(s(retv), call(others)); push_value(a(word), scalaref(retv, {content}))}
  -> comments          {call(comments)}
 
  -> parenthesis[1]    {
-   if(is_nonempty(array(word)));
-    if(is_empty(scalar(has_head)));
-     assign(scalar(head), join_values("", array(word)));
-     assign(scalar(has_head), 1);
+   if(is_nonempty(a(word)));
+    if(is_empty(s(has_head)));
+     assign(s(head), join_values("", a(word)));
+     assign(s(has_head), 1);
     else();
-     push_value(array(tail), join_values("", array(word)));
+     push_value(a(tail), join_values("", a(word)));
     endif();
    endif();
 
-   if(scalar(has_head));
-    if(is_nonempty(array(tail)));
-     return(array(scalar(head), array_values(array(tail))));
+   if(s(has_head));
+    if(is_nonempty(a(tail)));
+     return(a(s(head), array_values(a(tail))));
     else();
-     return(array(scalar(head), undef));
+     return(a(s(head), undef));
     endif();
    else();
-    return(array(undef));
+    return(a(undef));
    endif()
 }
 
-sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", entry_text()))
+sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(h("type", "SBRACKETS", "content", entry_text()))
 
-dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
+dquotes: /"(.*?)(?<!\\)"/     I.return(h("type", "DQUOTES", "content", entry_group(0)))
 
-squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
+squotes: /'(.*?)(?<!\\)'/     I.return(h("type", "SQUOTES", "content", entry_group(0)))
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
  -> curlyb
  -> dquotes
  -> squotes
  -> curlyb[1]                 {
- assign(scalar(content), CAPTURE);
- return(hash("type", "CBRACE", "content", scalar(content)))
+ assign(s(content), CAPTURE);
+ return(h("type", "CBRACE", "content", s(content)))
 }
 
-spaces: /\s+/               I.return(hash("type", "SPACE", "content", entry_text()))
+spaces: /\s+/               I.return(h("type", "SPACE", "content", entry_text()))
 
-others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", entry_text()))
+others: /[^\s\"\{\}\(\)\[\];]+/  I.return(h("type", "OTHERS", "content", entry_text()))
 			      
-comments: /;.*\n/           I.return(hash("type", "COMMENTS", "content", entry_text()))
+comments: /;.*\n/           I.return(h("type", "COMMENTS", "content", entry_text()))

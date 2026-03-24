@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `Lispish.spec` Parenthesis And Reader Band To Concise Container Aliases
+
+Spent the concise `s(...)` / `a(...)` / `h(...)` surface on another live spec:
+- the dense `parenthesis` orchestration band in `specs/Lispish.spec` now prefers `s(...)` / `a(...)` for working-state flow, accumulation, and return payload construction,
+- the compact token-reader band now also prefers `h(...)` for typed object-like payload returns,
+- and the grammar stays behaviorally identical while the method-like DSL gets notably less verbose.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `Lispish` helper-flow and runtime AST regressions still pin preserved behavior,
+- and a focused source-level regression now confirms the migrated `Lispish.spec` band prefers `s(...)` / `a(...)` / `h(...)` instead of drifting back to the longer forms.
+
 ## 2026-03-24 - Phase 4: Migrate `lib_reader.spec` Reader Band To Concise Container Aliases
 
 Spent the concise `s(...)` / `a(...)` surface on another live spec:

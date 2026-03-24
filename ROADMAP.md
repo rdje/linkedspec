@@ -151,6 +151,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - concise container aliases `s(...)` / `a(...)` / `h(...)` are now supported as exact short spellings for `scalar(...)` / `array(...)` / `hash(...)` without introducing Perl-sigil syntax,
   - the core method-DSL band in `specs/ebnf.spec` now also spends those concise aliases on real grammar orchestration and terminal readers, preferring `s(...)` / `a(...)` over the longer `scalar(...)` / `array(...)` spellings in that migrated band,
   - the grouped reader band in `specs/lib_reader.spec` now also spends those concise aliases on real grouped cleanup, split, and return payload paths,
+  - the dense `parenthesis` orchestration plus token-reader band in `specs/Lispish.spec` now also spends those concise aliases on real working-state flow and typed payload returns,
   - named marks are now scoped to the current rule label rather than shared across child-rule calls,
   - mark writes now fire only when the regex slot that actually carries the `@mark(name)` paragraph member matches,
   - high/debug trace output now shows mark-write positions for `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` as a short input excerpt plus a caret under the stored checkpoint position,

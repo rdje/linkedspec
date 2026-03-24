@@ -35980,6 +35980,19 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
+subtest 'lispish_spec_prefers_short_container_aliases_in_parenthesis_and_reader_band' => sub {
+    plan tests => 6;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for alias migration inspection');
+    like($source_content, qr/if\(is_nonempty\(a\(word\)\)\);/, 'Lispish parenthesis band now prefers a(word) in aggregate flow guards');
+    like($source_content, qr/assign\(s\(head\), join_values\("", a\(word\)\)\);/, 'Lispish parenthesis band now prefers s(head) plus a(word) in head assignment');
+    like($source_content, qr/return\(a\(s\(head\), array_values\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path now prefers combined s()/a() aliases');
+    like($source_content, qr/I\.return\(h\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now also spend the short hash constructor alias');
+    unlike($source_content, qr/return\(array\(scalar\(head\), array_values\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses the older scalar()/array() form in the migrated band');
+};
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');
     ok(defined($parser) && ref($parser) eq 'CODE', 'Lispish parser created');
