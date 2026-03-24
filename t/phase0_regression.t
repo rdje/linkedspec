@@ -3503,19 +3503,16 @@ subtest 'repo_owned_perl_modules_no_longer_advertise_legacy_pplugin_inheritance'
     like($lispml_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring LispML no longer loads the legacy PPlugin runtime');
 };
 subtest 'repo_owned_plugin_callers_prefer_linkedspec_run_plugin' => sub {
-    plan tests => 8;
+    plan tests => 6;
 
     my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
-    my $string_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'));
 
     ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for explicit-dispatch inspection');
-    ok(defined($string_plugin) && length($string_plugin), 'string.plg source is available for explicit-dispatch inspection');
     unlike($regtest_plugin, qr/\bnew PPlugin\b/, 'regtest plugin no longer instantiates the legacy PPlugin runtime directly');
     unlike($regtest_plugin, qr/\$pl->exec\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through legacy PPlugin exec');
     like($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute', \\%subh\)/, 'regtest plugin now dispatches hvalue_substitute through LinkedSpec::run_plugin');
-    unlike($string_plugin, qr/PPlugin->exec_plugin_name\('file_list_path2http'/, 'string plugin no longer routes file_list_path2http through legacy PPlugin explicit-name exec');
-    like($string_plugin, qr/LinkedSpec::run_plugin\('file_list_path2http', \$file\)/, 'string plugin now dispatches file_list_path2http through LinkedSpec::run_plugin');
-    like($string_plugin, qr/use LinkedSpec;/, 'string plugin now loads LinkedSpec explicitly before using run_plugin');
+    unlike($regtest_plugin, qr/PPlugin->exec_plugin_name\('/, 'regtest plugin no longer routes known plugin names through PPlugin explicit-name exec');
+    unlike($regtest_plugin, qr/PPlugin->exec\('/, 'regtest plugin no longer routes known plugin names through legacy mixed-name PPlugin exec');
 };
 subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
     plan tests => 8;
@@ -3571,6 +3568,61 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(defined($skew_ast) && ref($skew_ast) eq 'HASH', 'skew plugin still returns a hash AST under pplugin');
     is_deeply([sort keys %$skew_ast], [qw(skew)], 'skew plugin still exposes the expected subdef name');
     is(ref($skew_ast->{skew}), 'CODE', 'skew plugin still exposes skew as a coderef');
+};
+subtest 'string_plugin_logic_moves_into_package_owner' => sub {
+    plan tests => 12;
+
+    my $string_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Plugin', 'String.pm'));
+    my $string_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'));
+    my $cgi_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'));
+
+    ok(defined($string_plugin_pm) && length($string_plugin_pm), 'package-backed string plugin owner source is available');
+    ok(defined($string_plugin_plg) && length($string_plugin_plg), 'string.plg compatibility wrapper source is available');
+    ok(defined($cgi_plugin) && length($cgi_plugin), 'cgi.plg source is available for package-owned helper inspection');
+    like($string_plugin_pm, qr/package LinkedSpec::Plugin::String;/, 'package-backed string plugin owner declares the expected package');
+    like($string_plugin_pm, qr/sub var_subst\b/, 'package-backed string plugin owner defines var_subst');
+    like($string_plugin_pm, qr/sub var_subst_test\b/, 'package-backed string plugin owner defines var_subst_test');
+    like($string_plugin_plg, qr/use LinkedSpec::Plugin::String;/, 'string.plg now loads the package-backed string plugin owner');
+    like($string_plugin_plg, qr/LinkedSpec::Plugin::String::var_subst\(\@_\);/, 'string.plg now delegates var_subst to the package-backed owner');
+    like($string_plugin_plg, qr/LinkedSpec::Plugin::String::var_subst_test\(\@_\);/, 'string.plg now delegates var_subst_test to the package-backed owner');
+    unlike($string_plugin_plg, qr/s\{\$subst_re\}\{\$h\{\$1\} \|\| \$1\}ge/, 'string.plg no longer carries the inline substitution implementation');
+    like($cgi_plugin, qr/use LinkedSpec::Plugin::String;/, 'cgi.plg now loads the package-backed string plugin owner explicitly');
+    like($cgi_plugin, qr/LinkedSpec::Plugin::String::var_subst \(/, 'cgi.plg now calls the package-backed var_subst directly');
+};
+subtest 'string_package_owner_avoids_pplugin_and_preserves_var_subst_contract' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require LinkedSpec::Plugin::String;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $ret = LinkedSpec::Plugin::String::var_subst('prefix $NAME suffix', qr/\$(\w+)/, NAME => 'VALUE');
+print "__VAR_SUBST__=$ret\n";
+PERL
+
+    is($exit_code, 0, 'string package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the string package owner keeps PPlugin unloaded');
+    like($out, qr/__VAR_SUBST__=prefix VALUE suffix/, 'string package owner preserves the historical var_subst behavior');
+    unlike($err, qr/PPlugin/, 'string package-owner subprocess does not emit legacy PPlugin stderr');
+    unlike($err, qr/Can't locate LinkedSpec\/Plugin\/String\.pm/, 'string package-owner subprocess resolves the new package file');
+};
+subtest 'package_extracted_string_related_plugins_still_parse_under_pplugin' => sub {
+    plan tests => 8;
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
+
+    my $string_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'));
+    my $string_ast = eval { $parser->(\$string_input) };
+    ok(!$@, 'string compatibility wrapper still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($string_ast) && ref($string_ast) eq 'HASH', 'string compatibility wrapper still returns a hash AST under pplugin');
+    is($string_ast->{var_subst}->('prefix $NAME suffix', qr/\$(\w+)/, NAME => 'VALUE'), 'prefix VALUE suffix', 'string compatibility wrapper preserves var_subst behavior through the package owner');
+    is(ref($string_ast->{var_subst_test}), 'CODE', 'string compatibility wrapper still exposes var_subst_test as a coderef');
+
+    my $cgi_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'));
+    my $cgi_ast = eval { $parser->(\$cgi_input) };
+    ok(!$@, 'cgi plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
+    ok(defined($cgi_ast) && ref($cgi_ast) eq 'HASH', 'cgi plugin still returns a hash AST under pplugin');
+    is(ref($cgi_ast->{file_list_path2http}), 'CODE', 'cgi plugin still exposes file_list_path2http as a coderef');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;

@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Start Package-Backed `.plg` Extraction with String Helpers
+
+Started the first real `.plg`-to-`.pm` extraction slice on the plugin/runtime modernization track:
+- added `perl/LinkedSpec/Plugin/String.pm` as the new package-backed owner for `var_subst(...)` and `var_subst_test(...)`,
+- reduced `plugin/string.plg` to thin compatibility wrappers that delegate into that package owner,
+- and updated `plugin/cgi.plg` to call `LinkedSpec::Plugin::String::var_subst(...)` directly instead of depending on the legacy plugin-defined helper body.
+
+Regression coverage now locks:
+- that the new package owner exists and preserves the historical `var_subst(...)` behavior without loading `PPlugin`,
+- that `string.plg` is now a thin wrapper instead of the implementation owner,
+- and that both `string.plg` and `cgi.plg` still parse successfully under `pplugin`, with the wrapped `var_subst(...)` behavior preserved end to end.
+
 ## 2026-03-24 - Plugin Track: Spend `get_plugin(...)` in Small Repo-Owned `.plg` Callers
 
 Continued the plugin/runtime modernization track by moving smaller repo-owned lightweight plugin files off direct legacy lookup:

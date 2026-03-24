@@ -1,6 +1,7 @@
 file_list_path2http {
+   use LinkedSpec::Plugin::String;
    join "", map {!/#/o ? join ("", map {m/\//o ? do {
-				                        my $subst = var_subst ($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
+				                        my $subst = LinkedSpec::Plugin::String::var_subst ($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
 							my $http  = httplink ($subst);
 
 							qq{<A HREF="$http">$_</A>};
@@ -11,4 +12,3 @@ file_list_path2http {
 		   } split /(#.*)/o, $_[0];
 
 }
-

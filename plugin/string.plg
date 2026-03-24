@@ -1,7 +1,6 @@
 var_subst  {
-my ($string, $subst_re, %subst_data) = @_;
-
- sub {local $_ = shift; my %h = map {!ref($_) ? $_ : (ref eq 'HASH' ? %$_ : @$_)} @_; s{$subst_re}{$h{$1} || $1}ge; s/"/\\"/go; eval(qq("$_"))} -> ($string, %subst_data);
+ use LinkedSpec::Plugin::String;
+ LinkedSpec::Plugin::String::var_subst(@_);
 }
 
 #string_subst  {
@@ -11,12 +10,6 @@ my ($string, $subst_re, %subst_data) = @_;
 #}
 
 var_subst_test {
-  use LinkedSpec;
-  open (my $f, $_[0]{_argv}[0]); local $/; my $file = <$f>;
- Global->set ('cgi') = HUtils::Conf(PathSearch->go('cgi'));
-  
-  set_http_localhost ();
-  my $fo = LinkedSpec::run_plugin('file_list_path2http', $file);
-
-  print "var_subst_test: ($fo)\n";
+  use LinkedSpec::Plugin::String;
+  LinkedSpec::Plugin::String::var_subst_test(@_);
 }
