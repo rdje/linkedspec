@@ -64,11 +64,11 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
    endif()
 }
 
-sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", scalar(IMATCH)))
+sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", entry_text()))
 
-dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", scalar(IMATCH_LIST, 0)))
+dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
 
-squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", scalar(IMATCH_LIST, 0)))
+squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
  -> curlyb
@@ -79,8 +79,8 @@ curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {declare(scalar, content)}
  return(hash("type", "CBRACE", "content", scalar(content)))
 }
 
-spaces: /\s+/               I.return(hash("type", "SPACE", "content", scalar(IMATCH)))
+spaces: /\s+/               I.return(hash("type", "SPACE", "content", entry_text()))
 
-others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", scalar(IMATCH)))
+others: /[^\s\"\{\}\(\)\[\];]+/  I.return(hash("type", "OTHERS", "content", entry_text()))
 			      
-comments: /;.*\n/           I.return(hash("type", "COMMENTS", "content", scalar(IMATCH)))
+comments: /;.*\n/           I.return(hash("type", "COMMENTS", "content", entry_text()))

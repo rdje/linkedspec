@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate Lispish Token Readers To Entry Helpers
+
+Moved the compact token-reader band in `specs/Lispish.spec` off the older immediate-match read surface:
+- `scalar(IMATCH)`
+- `scalar(IMATCH_LIST, 0)`
+
+and onto the explicit immediate-match helper surface instead:
+- `entry_text()`
+- `entry_group(0)`
+
+This covers:
+- `sbrackets`
+- `dquotes`
+- `squotes`
+- `spaces`
+- `others`
+- `comments`
+
+No new regression block was needed for this slice because the existing `lispish_small_helper_flow_eliminates_raw_fallback` metadata lock and `lispish_ast_smoke` runtime lock already cover the affected rule band and overall parser behavior.
+
 ## 2026-03-24 - Phase 4: Migrate portmap Classification Reads To Entry Helpers
 
 Moved `specs/portmap.spec::bare_bit_slice` off the older immediate-match read surface:
