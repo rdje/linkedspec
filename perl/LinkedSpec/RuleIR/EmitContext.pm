@@ -773,6 +773,43 @@ sub _collect_raw_perl_dependency_statements {
  return @raw_perl_dependency_statements
 }
 
+sub _build_compatibility_surface_diag {
+ my ($rewrite_rules, $rewrite_diag_acc) = @_;
+
+ my %compatibility_contract_ids = map {
+  my $id = $_->{id};
+  defined($id) && length($id) ? ($id => 1) : ()
+ } grep { $_->{compatibility_surface} } @$rewrite_rules;
+
+ my %compatibility_surface_hits;
+ my @compatibility_surface_events;
+ my @compatibility_surface_statements;
+ my %seen_compatibility_surface_statement;
+
+ foreach my $event (@{$rewrite_diag_acc->{helper_action_ir_events}}) {
+  my $contract_id = $event->{contract_id} // '';
+  next unless length($contract_id) && $compatibility_contract_ids{$contract_id};
+
+  push @compatibility_surface_events, $event;
+  ++$compatibility_surface_hits{$contract_id};
+
+  my $raw_code = _trim_action_ir_value($event->{raw});
+  next unless defined($raw_code) && length($raw_code);
+  next if $seen_compatibility_surface_statement{$raw_code}++;
+  push @compatibility_surface_statements, $raw_code;
+ }
+
+ my @compatibility_surface_contract_ids = sort keys %compatibility_surface_hits;
+ return {
+  compatibility_surface_count => scalar(@compatibility_surface_events),
+  compatibility_surface_contract_ids => \@compatibility_surface_contract_ids,
+  compatibility_surface_hits => \%compatibility_surface_hits,
+  compatibility_surface_events => [@compatibility_surface_events],
+  compatibility_surface_statement_count => scalar(@compatibility_surface_statements),
+  compatibility_surface_statements => \@compatibility_surface_statements,
+ };
+}
+
 sub _build_language_agnostic_blocker_statements {
  my ($raw_perl_dependency_statements, $unresolved_helper_statements) = @_;
 
@@ -794,9 +831,10 @@ sub _build_action_rewriter_meta {
  my @raw_perl_dependency_statements = _collect_raw_perl_dependency_statements($rewrite_diag_acc);
  my $raw_perl_dependency_count = $rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0;
  my @language_agnostic_action_ir_blocker_statements = _build_language_agnostic_blocker_statements(
-  \@raw_perl_dependency_statements,
+ \@raw_perl_dependency_statements,
   \@unresolved_helper_statements,
  );
+ my $compatibility_surface_diag = _build_compatibility_surface_diag($rewrite_rules, $rewrite_diag_acc);
  my $language_agnostic_action_ir_blocker_statement_count = scalar @language_agnostic_action_ir_blocker_statements;
  my $language_agnostic_action_ir_ready = (
   $raw_perl_dependency_count == 0 &&
@@ -820,6 +858,12 @@ sub _build_action_rewriter_meta {
   canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
   raw_perl_dependency_count => $raw_perl_dependency_count,
   raw_perl_dependency_statements => \@raw_perl_dependency_statements,
+  compatibility_surface_count => $compatibility_surface_diag->{compatibility_surface_count},
+  compatibility_surface_contract_ids => [@{$compatibility_surface_diag->{compatibility_surface_contract_ids}}],
+  compatibility_surface_hits => {%{$compatibility_surface_diag->{compatibility_surface_hits}}},
+  compatibility_surface_events => [@{$compatibility_surface_diag->{compatibility_surface_events}}],
+  compatibility_surface_statement_count => $compatibility_surface_diag->{compatibility_surface_statement_count},
+  compatibility_surface_statements => [@{$compatibility_surface_diag->{compatibility_surface_statements}}],
   language_agnostic_action_ir_blocker_statement_count => $language_agnostic_action_ir_blocker_statement_count,
   language_agnostic_action_ir_blocker_statements => \@language_agnostic_action_ir_blocker_statements,
   language_agnostic_action_ir_ready => $language_agnostic_action_ir_ready,

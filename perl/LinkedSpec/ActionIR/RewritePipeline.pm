@@ -149,6 +149,7 @@ sub _build_action_rewrite_rules {
   id                 => $_->{id},
   ir_node            => $_->{ir_node},
   diag_name          => $_->{diag_name},
+  compatibility_surface => $_->{compatibility_surface} ? 1 : 0,
   unresolved_pattern => $_->{unresolved_pattern},
   apply              => $_->{lower},
  }} @$contracts]

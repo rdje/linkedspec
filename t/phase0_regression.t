@@ -34491,6 +34491,37 @@ SPEC
     is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_meta_exposes_compatibility_surface_without_demoting_ready_rules' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(CompatReady); return_a(Top) }
+
+CompatReady::&
+ /b/ -> CompatReady { return 1; exit }
+
+CompatBlocked::&
+ /c/ -> CompatBlocked { return 1; return_a(CompatReady) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for compatibility-surface metadata check');
+
+    my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($top_meta->{compatibility_surface_count}, 0, 'canonical helper-only rule exposes zero compatibility-surface events');
+    is_deeply($top_meta->{compatibility_surface_statements}, [], 'canonical helper-only rule exposes no compatibility-surface statements');
+
+    my $compat_meta = $descr->{spec}{CompatReady}{meta}{action_rewriter};
+    is($compat_meta->{raw_perl_dependency_count}, 0, 'compatibility-surface rule still avoids raw-Perl fallback');
+    is($compat_meta->{unresolved_helper_count}, 0, 'compatibility-surface rule still avoids unresolved-helper hits');
+    ok($compat_meta->{language_agnostic_action_ir_ready}, 'compatibility-surface rule stays language-agnostic action-IR ready');
+    is($compat_meta->{compatibility_surface_count}, 2, 'compatibility-surface rule tracks compatibility event count separately');
+    is($compat_meta->{compatibility_surface_statement_count}, 2, 'compatibility-surface rule tracks unique compatibility statement count');
+    is_deeply($compat_meta->{compatibility_surface_contract_ids}, ['exit_bare', 'return_bare'], 'compatibility-surface rule exposes deterministic compatibility contract ids');
+    is_deeply($compat_meta->{compatibility_surface_statements}, ['return 1', 'exit'], 'compatibility-surface rule exposes deterministic compatibility statements');
+    is_deeply($compat_meta->{compatibility_surface_hits}, { exit_bare => 1, return_bare => 1 }, 'compatibility-surface rule exposes per-contract hit counts');
+};
 subtest 'return_descr_exposes_action_rewriter_migration_summary' => sub {
     plan tests => 15;
 
@@ -34531,6 +34562,40 @@ SPEC
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['Unresolved', 'Mixed'], 'migration summary sorts blocked rules by deterministic blocker priority');
     is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
     is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
+};
+subtest 'return_descr_exposes_action_rewriter_compatibility_surface_summary' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(CompatReady); return_a(Top) }
+
+CompatReady::&
+ /b/ -> CompatReady { return 1; exit }
+
+CompatBlocked::&
+ /c/ -> CompatBlocked { return 1; return_a(CompatReady) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for compatibility-surface migration summary check');
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'descriptor exposes migration summary for compatibility-surface check');
+    is($summary->{language_agnostic_blocked_rule_count}, 1, 'compatibility-surface summary keeps blocked-rule count unchanged');
+    is($summary->{compatibility_surface_rule_count}, 2, 'compatibility-surface summary tracks rules that still depend on compatibility syntax');
+    is($summary->{compatibility_surface_ready_rule_count}, 1, 'compatibility-surface summary distinguishes ready compatibility-surface rules');
+    is($summary->{compatibility_surface_statement_total_count}, 3, 'compatibility-surface summary tracks total compatibility statement count across rules');
+    is_deeply($summary->{compatibility_surface_ready_rules}, ['CompatReady'], 'compatibility-surface summary exposes deterministic ready compatibility-rule list');
+    is_deeply($summary->{compatibility_surface_rules_by_priority}, ['CompatReady', 'CompatBlocked'], 'compatibility-surface summary sorts compatibility rules by deterministic statement priority');
+    is($summary->{compatibility_surface_top_rule}, 'CompatReady', 'compatibility-surface summary exposes top compatibility rule');
+
+    my ($ready_row) = grep { $_->{rule} eq 'CompatReady' } @{$summary->{compatibility_surface_rules}};
+    my ($blocked_row) = grep { $_->{rule} eq 'CompatBlocked' } @{$summary->{compatibility_surface_rules}};
+    is_deeply($ready_row->{compatibility_surface_contract_ids}, ['exit_bare', 'return_bare'], 'compatibility-surface summary preserves contract ids for ready compatibility rule');
+    is_deeply($ready_row->{compatibility_surface_statements}, ['return 1', 'exit'], 'compatibility-surface summary preserves statements for ready compatibility rule');
+    is($blocked_row->{compatibility_surface_statement_count}, 1, 'compatibility-surface summary preserves per-rule statement counts for blocked compatibility rule');
+    is_deeply($blocked_row->{compatibility_surface_statements}, ['return 1'], 'compatibility-surface summary preserves statements for blocked compatibility rule');
 };
 subtest 'return_descr_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
     plan tests => 13;

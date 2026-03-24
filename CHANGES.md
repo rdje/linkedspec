@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Surface Compatibility Syntax In Migration Metadata
+
+Turned the roadmap’s “flag remaining raw Perl loudly” policy into explicit descriptor metadata rather than only a social/documentation rule:
+- `meta.action_rewriter` now exposes a separate compatibility-surface lane (`compatibility_surface_count`, `compatibility_surface_contract_ids`, `compatibility_surface_statements`, and related hits/events) for rules that are ActionIR-ready but still rely on older Perl-shaped compatibility syntax such as bare `return` or raw `$IMATCH` assignment wrappers,
+- `meta.action_rewriter_migration` now also summarizes those rules separately (`compatibility_surface_rule_count`, `compatibility_surface_ready_rule_count`, prioritized compatibility-rule lists, and top compatibility rule),
+- and `language_agnostic_action_ir_ready` remains unchanged, so “ready” still means zero RAW_PERL fallback and zero unresolved helpers rather than “fully canonical method-like surface.”
+
+Regression coverage now locks:
+- per-rule compatibility-surface metadata for a ready rule and a blocked rule,
+- and top-level migration-summary reporting for ready-but-compatibility-shaped rules.
+
 ## 2026-03-24 - Phase 4: Add Explicit Line-Number Read Helpers
 
 Spent the next substantive Phase 4 slice on parser-state line-number reads instead of another compatibility-pattern migration:

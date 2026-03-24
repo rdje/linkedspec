@@ -297,6 +297,7 @@ sub _build_return_contracts {
    id                 => 'return_bare',
    ir_node            => 'RETURN',
    diag_name          => 'return',
+   compatibility_surface => 1,
    unresolved_pattern => undef,
    lower              => sub {
     my ($code) = @_;
@@ -903,18 +904,18 @@ sub _build_capture_and_backtrack_contracts {
 #------------------------------------------------------------------------------
 sub _build_passthrough_ir_contracts {
  return [
-  { id => 'exit_bare',                       ir_node => 'EXIT',           diag_name => 'exit',              unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'linecount_prefix_newline_matches',ir_node => 'LINE_COUNT',     diag_name => 'line_count',        unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'print_capture_substr',            ir_node => 'PRINT',          diag_name => 'print',             unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'my_declare_bare',                 ir_node => 'DECLARE',        diag_name => 'declare',           unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'assign_match_my',                 ir_node => 'ASSIGN',         diag_name => 'assign',            unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'destructure_imatch_list_my',      ir_node => 'ASSIGN',         diag_name => 'assign',            unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'regex_subst_assignment',          ir_node => 'REGEX_SUBST',    diag_name => 'substr',            unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'next_bare',                       ir_node => 'NEXT',           diag_name => 'next',              unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'ref_field_assign',                ir_node => 'ASSIGN',         diag_name => 'assign',            unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'position_tracking',               ir_node => 'POSITION_TRACK', diag_name => 'position_tracking', unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'print_foreach_iterable',          ir_node => 'PRINT',          diag_name => 'print',             unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
-  { id => 'split_trim_filter_assignment',    ir_node => 'ASSIGN',         diag_name => 'assign',            unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'exit_bare',                       ir_node => 'EXIT',           diag_name => 'exit',              compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'linecount_prefix_newline_matches',ir_node => 'LINE_COUNT',     diag_name => 'line_count',        compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'print_capture_substr',            ir_node => 'PRINT',          diag_name => 'print',             compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'my_declare_bare',                 ir_node => 'DECLARE',        diag_name => 'declare',           compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'assign_match_my',                 ir_node => 'ASSIGN',         diag_name => 'assign',            compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'destructure_imatch_list_my',      ir_node => 'ASSIGN',         diag_name => 'assign',            compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'regex_subst_assignment',          ir_node => 'REGEX_SUBST',    diag_name => 'substr',            compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'next_bare',                       ir_node => 'NEXT',           diag_name => 'next',              compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'ref_field_assign',                ir_node => 'ASSIGN',         diag_name => 'assign',            compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'position_tracking',               ir_node => 'POSITION_TRACK', diag_name => 'position_tracking', compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'print_foreach_iterable',          ir_node => 'PRINT',          diag_name => 'print',             compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
+  { id => 'split_trim_filter_assignment',    ir_node => 'ASSIGN',         diag_name => 'assign',            compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
  ]
 }
 

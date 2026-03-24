@@ -166,22 +166,29 @@ sub _build_action_rewriter_migration_summary {
  my ($spec) = @_;
 
  my $summary = {
-  total_rules => 0,
-  rules_with_action_rewriter_meta => 0,
-  language_agnostic_ready_rule_count => 0,
-  language_agnostic_blocked_rule_count => 0,
-  language_agnostic_blocker_statement_total_count => 0,
- language_agnostic_blocked_raw_perl_only_rule_count => 0,
- language_agnostic_blocked_unresolved_helper_only_rule_count => 0,
- language_agnostic_blocked_mixed_rule_count => 0,
- language_agnostic_blocked_raw_perl_only_ratio => '0.0000',
- language_agnostic_blocked_unresolved_helper_only_ratio => '0.0000',
- language_agnostic_blocked_mixed_ratio => '0.0000',
+ total_rules => 0,
+ rules_with_action_rewriter_meta => 0,
+ language_agnostic_ready_rule_count => 0,
+ language_agnostic_blocked_rule_count => 0,
+ language_agnostic_blocker_statement_total_count => 0,
+  language_agnostic_blocked_raw_perl_only_rule_count => 0,
+  language_agnostic_blocked_unresolved_helper_only_rule_count => 0,
+  language_agnostic_blocked_mixed_rule_count => 0,
+  language_agnostic_blocked_raw_perl_only_ratio => '0.0000',
+  language_agnostic_blocked_unresolved_helper_only_ratio => '0.0000',
+  language_agnostic_blocked_mixed_ratio => '0.0000',
+  compatibility_surface_rule_count => 0,
+  compatibility_surface_ready_rule_count => 0,
+  compatibility_surface_statement_total_count => 0,
   language_agnostic_ready_rules => [],
   language_agnostic_blocked_rules => [],
- language_agnostic_blocked_raw_perl_only_rules => [],
- language_agnostic_blocked_unresolved_helper_only_rules => [],
- language_agnostic_blocked_mixed_rules => [],
+  language_agnostic_blocked_raw_perl_only_rules => [],
+  language_agnostic_blocked_unresolved_helper_only_rules => [],
+  language_agnostic_blocked_mixed_rules => [],
+  compatibility_surface_rules => [],
+  compatibility_surface_ready_rules => [],
+  compatibility_surface_rules_by_priority => [],
+  compatibility_surface_top_rule => undef,
   language_agnostic_blocked_rules_by_priority => [],
   language_agnostic_top_blocked_rule => undef,
  };
@@ -201,6 +208,29 @@ sub _build_action_rewriter_migration_summary {
   ++$summary->{rules_with_action_rewriter_meta};
 
   my $is_ready = $rewriter_meta->{language_agnostic_action_ir_ready} ? 1 : 0;
+  my $compatibility_surface_count = $rewriter_meta->{compatibility_surface_count} || 0;
+  if ($compatibility_surface_count > 0) {
+   my @compatibility_surface_statements = ref($rewriter_meta->{compatibility_surface_statements}) eq 'ARRAY'
+    ? @{$rewriter_meta->{compatibility_surface_statements}}
+    : ();
+   my @compatibility_surface_contract_ids = ref($rewriter_meta->{compatibility_surface_contract_ids}) eq 'ARRAY'
+    ? @{$rewriter_meta->{compatibility_surface_contract_ids}}
+    : ();
+   ++$summary->{compatibility_surface_rule_count};
+   push @{$summary->{compatibility_surface_rules}}, {
+    rule => $rule_name,
+    compatibility_surface_count => $compatibility_surface_count,
+    compatibility_surface_statement_count => scalar @compatibility_surface_statements,
+    compatibility_surface_statements => \@compatibility_surface_statements,
+    compatibility_surface_contract_ids => \@compatibility_surface_contract_ids,
+   };
+   $summary->{compatibility_surface_statement_total_count} += scalar @compatibility_surface_statements;
+   if ($is_ready) {
+    ++$summary->{compatibility_surface_ready_rule_count};
+    push @{$summary->{compatibility_surface_ready_rules}}, $rule_name;
+   }
+  }
+
   if ($is_ready) {
    ++$summary->{language_agnostic_ready_rule_count};
    push @{$summary->{language_agnostic_ready_rules}}, $rule_name;
@@ -208,8 +238,8 @@ sub _build_action_rewriter_migration_summary {
   }
 
   ++$summary->{language_agnostic_blocked_rule_count};
- my $unresolved_helper_count = $rewriter_meta->{unresolved_helper_count} || 0;
- my $raw_perl_dependency_count = $rewriter_meta->{raw_perl_dependency_count} || 0;
+  my $unresolved_helper_count = $rewriter_meta->{unresolved_helper_count} || 0;
+  my $raw_perl_dependency_count = $rewriter_meta->{raw_perl_dependency_count} || 0;
   my @blocker_statements = ref($rewriter_meta->{language_agnostic_action_ir_blocker_statements}) eq 'ARRAY'
    ? @{$rewriter_meta->{language_agnostic_action_ir_blocker_statements}}
    : ();
@@ -217,23 +247,23 @@ sub _build_action_rewriter_migration_summary {
    rule => $rule_name,
    blocker_statement_count => scalar @blocker_statements,
    blocker_statements => \@blocker_statements,
-  unresolved_helper_count => $unresolved_helper_count,
-  raw_perl_dependency_count => $raw_perl_dependency_count,
+   unresolved_helper_count => $unresolved_helper_count,
+   raw_perl_dependency_count => $raw_perl_dependency_count,
   };
   $summary->{language_agnostic_blocker_statement_total_count} += scalar @blocker_statements;
 
- if ($raw_perl_dependency_count > 0 && $unresolved_helper_count > 0) {
-  ++$summary->{language_agnostic_blocked_mixed_rule_count};
-  push @{$summary->{language_agnostic_blocked_mixed_rules}}, $rule_name;
- }
- elsif ($raw_perl_dependency_count > 0) {
-  ++$summary->{language_agnostic_blocked_raw_perl_only_rule_count};
-  push @{$summary->{language_agnostic_blocked_raw_perl_only_rules}}, $rule_name;
- }
- elsif ($unresolved_helper_count > 0) {
-  ++$summary->{language_agnostic_blocked_unresolved_helper_only_rule_count};
-  push @{$summary->{language_agnostic_blocked_unresolved_helper_only_rules}}, $rule_name;
- }
+  if ($raw_perl_dependency_count > 0 && $unresolved_helper_count > 0) {
+   ++$summary->{language_agnostic_blocked_mixed_rule_count};
+   push @{$summary->{language_agnostic_blocked_mixed_rules}}, $rule_name;
+  }
+  elsif ($raw_perl_dependency_count > 0) {
+   ++$summary->{language_agnostic_blocked_raw_perl_only_rule_count};
+   push @{$summary->{language_agnostic_blocked_raw_perl_only_rules}}, $rule_name;
+  }
+  elsif ($unresolved_helper_count > 0) {
+   ++$summary->{language_agnostic_blocked_unresolved_helper_only_rule_count};
+   push @{$summary->{language_agnostic_blocked_unresolved_helper_only_rules}}, $rule_name;
+  }
  }
 
  my @blocked_by_priority = sort {
@@ -244,6 +274,14 @@ sub _build_action_rewriter_migration_summary {
  } @{$summary->{language_agnostic_blocked_rules}};
  $summary->{language_agnostic_blocked_rules_by_priority} = [map { $_->{rule} } @blocked_by_priority];
  $summary->{language_agnostic_top_blocked_rule} = @blocked_by_priority ? $blocked_by_priority[0]{rule} : undef;
+
+ my @compatibility_by_priority = sort {
+  $b->{compatibility_surface_statement_count} <=> $a->{compatibility_surface_statement_count}
+   || $b->{compatibility_surface_count} <=> $a->{compatibility_surface_count}
+   || $a->{rule} cmp $b->{rule}
+ } @{$summary->{compatibility_surface_rules}};
+ $summary->{compatibility_surface_rules_by_priority} = [map { $_->{rule} } @compatibility_by_priority];
+ $summary->{compatibility_surface_top_rule} = @compatibility_by_priority ? $compatibility_by_priority[0]{rule} : undef;
 
  if ($summary->{rules_with_action_rewriter_meta} > 0) {
   $summary->{language_agnostic_ready_ratio} = sprintf(

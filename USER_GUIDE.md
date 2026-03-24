@@ -1033,6 +1033,9 @@ High-value fields:
 - `raw_perl_dependency_count`
 - `raw_perl_dependency_statements`
 - `unresolved_helper_count`
+- `compatibility_surface_count`
+- `compatibility_surface_statements`
+- `compatibility_surface_contract_ids`
 - `canonical_action_ir_nodes`
 - `helper_action_ir_nodes`
 - `language_agnostic_action_ir_ready`
@@ -1041,6 +1044,14 @@ Descriptor summary fields:
 - `meta.action_rewriter_migration.language_agnostic_blocked_rule_count`
 - `meta.action_rewriter_migration.language_agnostic_blocked_rules_by_priority`
 - `meta.action_rewriter_migration.language_agnostic_top_blocked_rule`
+- `meta.action_rewriter_migration.compatibility_surface_rule_count`
+- `meta.action_rewriter_migration.compatibility_surface_ready_rule_count`
+- `meta.action_rewriter_migration.compatibility_surface_rules_by_priority`
+- `meta.action_rewriter_migration.compatibility_surface_top_rule`
+
+That distinction is intentional:
+- `language_agnostic_action_ir_ready = 1` means the rule no longer depends on RAW_PERL fallback or unresolved helpers,
+- but a nonzero `compatibility_surface_count` still means the rule is relying on older compatibility-shaped syntax that should eventually move to canonical method-like DSL forms.
 
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 
