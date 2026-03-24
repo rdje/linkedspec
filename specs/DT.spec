@@ -24,14 +24,14 @@ group: 			/\(/ /\)/				I {print("(group) -I- Entering\n")}
  -> logical_operator
  -> group[1]							{print("(group) -I- Leaving\n"); return 1}
 
-identifier: 		/[a-zA-Z_]\w*/				I {print("(identifier)(", scalar(IMATCH), ")\n")}
-if_binary: 		/[01]\s*:/				I {print("(if_binary)(", scalar(IMATCH), ")\n")}
-if_vector: 		/[!=><]+\d+\s*:/			I {print("(if_vector)(", scalar(IMATCH), ")\n")}
-reg_assignment_lhs: 	/\w+(?:\[\d+(?::\d+)?\])?\s*\=/ 	I {print("(reg_assignment)(", scalar(IMATCH), ")\n")}
+identifier: 		/[a-zA-Z_]\w*/				I {print("(identifier)(", entry_text(), ")\n")}
+if_binary: 		/[01]\s*:/				I {print("(if_binary)(", entry_text(), ")\n")}
+if_vector: 		/[!=><]+\d+\s*:/			I {print("(if_vector)(", entry_text(), ")\n")}
+reg_assignment_lhs: 	/\w+(?:\[\d+(?::\d+)?\])?\s*\=/ 	I {print("(reg_assignment)(", entry_text(), ")\n")}
 
-state_transition:	/\=\>\s*\w+/				I {print("(state_transition)(", scalar(IMATCH), ")\n")}
-dtree_call:		/->\s*\w+(?:\(.+\))?/			I {print("(dtree_call)(", scalar(IMATCH), ")\n")}
-logical_operator:	/\&|\||!/				I {print("(logical_operator)(", scalar(IMATCH), ")\n")}
+state_transition:	/\=\>\s*\w+/				I {print("(state_transition)(", entry_text(), ")\n")}
+dtree_call:		/->\s*\w+(?:\(.+\))?/			I {print("(dtree_call)(", entry_text(), ")\n")}
+logical_operator:	/\&|\||!/				I {print("(logical_operator)(", entry_text(), ")\n")}
 
 inline_dt_definition:	/\(:/ /\)/				I {print("(inline_dt_definition) -I- Entering\n")}
  -> inline_dt_definition

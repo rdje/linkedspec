@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-24: Kept the post-shorthand helper migration line moving in another debug-print grammar. The token-reader rules in `specs/DT.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `DT` helper-flow checks.
 - 2026-03-24: Kept the post-shorthand helper migration line moving in another debug-print grammar. The token-reader rules in `specs/operators_try.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `operators_try` helper-flow checks.
 - 2026-03-24: Kept the post-shorthand work moving on substantive helper migration. The debug-print token-reader rules in `specs/BNF.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `BNF` helper-flow checks.
 - 2026-03-24: Kept the post-shorthand work focused on substantive helper migration. The `anyvariable`, `variable_substitution`, and `comments` token-reader rules in `specs/simenv.spec` now prefer `entry_text()` instead of `scalar(IMATCH)`, and the regression suite now locks that source-level migration intent alongside the pre-existing `simenv` helper-flow checks.

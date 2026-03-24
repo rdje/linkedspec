@@ -35598,6 +35598,18 @@ subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'DT exposes no prioritized blocked-rule list after debug-print migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'DT exposes no top blocked rule after debug-print migration');
 };
+subtest 'dt_token_readers_prefer_entry_text' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'DT.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'DT source spec text is available for token-reader helper inspection');
+    like($source_content, qr/identifier:\s+.*?entry_text\(\)/s, 'DT identifier now prefers entry_text() for the immediate token read');
+    like($source_content, qr/reg_assignment_lhs:\s+.*?entry_text\(\)/s, 'DT register-assignment token reader now prefers entry_text()');
+    like($source_content, qr/logical_operator:\s+.*?entry_text\(\)/s, 'DT logical_operator token reader now prefers entry_text()');
+    unlike($source_content, qr/scalar\(IMATCH\)/, 'DT migrated token readers no longer rely on scalar(IMATCH)');
+};
 subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;
 
