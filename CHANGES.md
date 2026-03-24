@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Docs: Formalize Perl Package And Routine Docstring Convention
+
+Captured and spent a repo-wide Perl documentation convention in the active plugin/runtime owner set:
+- touched Perl packages should now carry one short package-level block describing what the package owns or is responsible for,
+- and routines in those touched packages should now carry a Perl-style block comment with `Function`, `Purpose`, `Args`, and `Returns` fields so reader intent is clear without jumping through call sites.
+
+The first backfill slice now covers:
+- `perl/LinkedSpec.pm` for the remaining private facade helpers,
+- `perl/LinkedSpec/PluginBridge.pm`,
+- `perl/LinkedSpec/PluginRegistry.pm`,
+- `perl/PPlugin.pm`,
+- and `perl/TableSort.pm`.
+
+This is intentionally a standard-plus-incremental-backfill change, not a claim that every Perl package in the whole repo is already fully annotated.
+
 ## 2026-03-24 - Plugin Track: Add Explicit `get_plugin(...)` Lookup
 
 Continued the plugin/runtime modernization track by adding the missing explicit plugin-handler lookup API:

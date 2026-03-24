@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::PluginBridge
+# Purpose: Compatibility bridge between the modern explicit LinkedSpec plugin
+#          APIs and the legacy `PPlugin` / `.plg` runtime.
+#------------------------------------------------------------------------------
 package LinkedSpec::PluginBridge;
 
 use 5.010;
@@ -8,6 +13,12 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+ #------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Validate and return one injected dependency callback by name.
+# Args    : ($deps, $name)
+# Returns : coderef dependency callback
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -16,6 +27,12 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute callback without clobbering caller-visible successful `$@`.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
  my $saved_err = $@;
@@ -35,6 +52,12 @@ sub _call_preserving_err {
  return
 }
 
+#------------------------------------------------------------------------------
+# Function: _load_legacy_plugin_runtime
+# Purpose : Lazy-load the legacy `PPlugin` runtime for compatibility dispatch.
+# Args    : ()
+# Returns : true on successful load
+#------------------------------------------------------------------------------
 sub _load_legacy_plugin_runtime {
  return _call_preserving_err(sub {
   my $ok = eval { require PPlugin; 1 };
@@ -43,6 +66,12 @@ sub _load_legacy_plugin_runtime {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _exec_legacy_plugin
+# Purpose : Execute one legacy plugin by explicit normalized plugin name.
+# Args    : ($plugin_name, @args)
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub _exec_legacy_plugin {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -50,6 +79,12 @@ sub _exec_legacy_plugin {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _get_legacy_plugin
+# Purpose : Look up one legacy plugin callback by explicit normalized name.
+# Args    : ($plugin_name)
+# Returns : plugin coderef | undef
+#------------------------------------------------------------------------------
 sub _get_legacy_plugin {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -57,6 +92,13 @@ sub _get_legacy_plugin {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _resolve_registered_plugin
+# Purpose : Resolve one explicitly registered plugin callback from the modern
+#           in-memory registry.
+# Args    : ($plugin_name)
+# Returns : plugin coderef | undef
+#------------------------------------------------------------------------------
 sub _resolve_registered_plugin {
  my ($plugin_name) = @_;
  return _call_preserving_err(sub {
@@ -66,6 +108,13 @@ sub _resolve_registered_plugin {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _default_deps
+# Purpose : Build the default dependency callback map used by bridge lookup and
+#           dispatch operations.
+# Args    : ()
+# Returns : hashref dependency map
+#------------------------------------------------------------------------------
 sub _default_deps {
  return {
   resolve_registered_plugin => \&_resolve_registered_plugin,
@@ -75,6 +124,12 @@ sub _default_deps {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _normalize_plugin_name
+# Purpose : Normalize a fully-qualified AUTOLOAD name into the bare plugin name.
+# Args    : ($autoload_name)
+# Returns : normalized plugin name
+#------------------------------------------------------------------------------
 sub _normalize_plugin_name {
  my ($autoload_name) = @_;
  my $display_name = defined($autoload_name) ? $autoload_name : '<undef>';
@@ -84,6 +139,12 @@ sub _normalize_plugin_name {
  return $plugin_name
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_plugin_name
+# Purpose : Validate a bare explicit plugin name before lookup/dispatch.
+# Args    : ($plugin_name)
+# Returns : validated plugin name
+#------------------------------------------------------------------------------
 sub _require_plugin_name {
  my ($plugin_name) = @_;
  my $display_name = defined($plugin_name) ? $plugin_name : '<undef>';
@@ -92,6 +153,13 @@ sub _require_plugin_name {
  return $plugin_name
 }
 
+#------------------------------------------------------------------------------
+# Function: _lookup_plugin_name
+# Purpose : Resolve a plugin callback through the registry-first / legacy-
+#           fallback policy without invoking it.
+# Args    : ($plugin_name, $deps)
+# Returns : plugin coderef | undef
+#------------------------------------------------------------------------------
 sub _lookup_plugin_name {
  my ($plugin_name, $deps) = @_;
  $deps = _default_deps() unless ref($deps) eq 'HASH';
@@ -111,6 +179,13 @@ sub _lookup_plugin_name {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _dispatch_plugin_name
+# Purpose : Execute a plugin through the registry-first / legacy-fallback
+#           policy using an explicit plugin name.
+# Args    : ($plugin_name, $args, $deps)
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub _dispatch_plugin_name {
  my ($plugin_name, $args, $deps) = @_;
  $args = [] unless ref($args) eq 'ARRAY';
@@ -133,6 +208,13 @@ sub _dispatch_plugin_name {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _dispatch_autoload
+# Purpose : Normalize an AUTOLOAD name and execute it through the explicit-name
+#           bridge dispatch policy.
+# Args    : ($autoload_name, $args, $deps)
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub _dispatch_autoload {
  my ($autoload_name, $args, $deps) = @_;
  my $plugin_name = _normalize_plugin_name($autoload_name);

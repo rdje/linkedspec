@@ -4,6 +4,11 @@
 # This Perl module is free software, you may redistribute it and/or 
 # modify it under the same terms as Perl itself.
 #===================================================================
+#------------------------------------------------------------------------------
+# Package: LinkedSpec
+# Purpose: Public facade for parser compilation, trace control, and the modern
+#          plugin/runtime entrypoints while lazy-loading the heavier owners.
+#------------------------------------------------------------------------------
 package LinkedSpec;
 
 use 5.010;
@@ -116,6 +121,12 @@ sub should_dump {
  return _dispatch_owner_call('LinkedSpec::Trace', 'should_dump', @args)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one owner package by package name.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
  my $file = $pkg;
@@ -126,6 +137,12 @@ sub _require_pkg {
  return 1
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute callback without clobbering caller-visible successful `$@`.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
  my $saved_err = $@;
@@ -145,6 +162,13 @@ sub _call_preserving_err {
  return
 }
 
+#------------------------------------------------------------------------------
+# Function: _dispatch_owner_call
+# Purpose : Shared facade delegator that lazy-loads an owner package and calls
+#           one named routine through it.
+# Args    : ($pkg, $subname, @args)
+# Returns : delegated owner return value
+#------------------------------------------------------------------------------
 sub _dispatch_owner_call {
  my ($pkg, $subname, @args) = @_;
  return _call_preserving_err(sub {
@@ -154,6 +178,12 @@ sub _dispatch_owner_call {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _normalize_flat_option_pairs
+# Purpose : Normalize variadic public wrapper options into even key/value pairs.
+# Args    : (@args)
+# Returns : normalized flat key/value list or empty list on odd input
+#------------------------------------------------------------------------------
 sub _normalize_flat_option_pairs {
  my @args = @_;
  return (@args % 2 == 0) ? @args : ()

@@ -4,12 +4,25 @@
 # This Perl module is free software, you may redistribute it and/or 
 # modify it under the same terms as Perl itself.
 #===================================================================
+#------------------------------------------------------------------------------
+# Package: TableSort
+# Purpose: Table-oriented filtering helpers that combine `TableGrep` with
+#          plugin-discovered filter callbacks.
+#------------------------------------------------------------------------------
 package TableSort;
 
 use LinkedSpec;
 use TableGrep;
 
 
+#------------------------------------------------------------------------------
+# Function: GenericFilter
+# Purpose : Apply one configured filter sequence over table-like input data,
+#           resolving plugin-backed filter actions through the explicit
+#           LinkedSpec plugin lookup API.
+# Args    : ($conf, $a2d_ref, $filter_seq, %option)
+# Returns : hashref filtered result tree
+#------------------------------------------------------------------------------
 sub GenericFilter {
 my ($conf, $a2d_ref, $filter_seq) = @_;
 

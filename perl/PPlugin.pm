@@ -4,6 +4,11 @@
 # This Perl module is free software, you may redistribute it and/or 
 # modify it under the same terms as Perl itself.
 #===================================================================
+#------------------------------------------------------------------------------
+# Package: PPlugin
+# Purpose: Legacy `.plg` discovery, parsing, lookup, and execution adapter kept
+#          for compatibility while LinkedSpec grows explicit plugin APIs.
+#------------------------------------------------------------------------------
 package PPlugin;
 
 use 5.010;
@@ -11,6 +16,12 @@ use Cwd ();
 use File::Basename ();
 use File::Spec ();
 
+ #------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Validate and return one injected legacy runtime dependency callback.
+# Args    : ($deps, $name)
+# Returns : coderef dependency callback
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -19,12 +30,24 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _plugin_project_root
+# Purpose : Resolve the project root used for legacy plugin-file discovery.
+# Args    : ()
+# Returns : absolute project-root path
+#------------------------------------------------------------------------------
 sub _plugin_project_root {
  my $module_path = Cwd::abs_path($INC{__PACKAGE__.'.pm'});
  my $module_dir = (File::Basename::fileparse($module_path))[1];
  return Cwd::realpath(File::Spec->catdir($module_dir, File::Spec->updir()))
 }
 
+#------------------------------------------------------------------------------
+# Function: _legacy_plugin_search_roots
+# Purpose : Build the ordered legacy search roots for `.plg` file discovery.
+# Args    : ($cwd_root, $project_root)
+# Returns : ordered deduped root list
+#------------------------------------------------------------------------------
 sub _legacy_plugin_search_roots {
  my ($cwd_root, $project_root) = @_;
  $cwd_root = File::Spec->rel2abs('.') unless defined $cwd_root;
@@ -38,6 +61,12 @@ sub _legacy_plugin_search_roots {
  return grep { defined($_) && length($_) && !$seen{$_}++ } @roots
 }
 
+#------------------------------------------------------------------------------
+# Function: _legacy_plugin_files
+# Purpose : Enumerate legacy `.plg` files across the configured search roots.
+# Args    : (@roots)
+# Returns : ordered deduped absolute plugin-file list
+#------------------------------------------------------------------------------
 sub _legacy_plugin_files {
  my @roots = @_;
  @roots = _legacy_plugin_search_roots() unless @roots;
@@ -55,6 +84,13 @@ sub _legacy_plugin_files {
  return grep { !$seen{$_}++ } @plugin_list
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_plugin_registry
+# Purpose : Parse discovered `.plg` files and build the legacy name-to-coderef
+#           registry consumed by compatibility callers.
+# Args    : ($get, @plugin_list)
+# Returns : hashref plugin registry
+#------------------------------------------------------------------------------
 sub _build_plugin_registry {
  my ($get, @plugin_list) = @_;
  die "(PPlugin::_build_plugin_registry) -E- parser callback must be CODE"
@@ -77,6 +113,13 @@ sub _build_plugin_registry {
  return \%plugins
 }
 
+#------------------------------------------------------------------------------
+# Function: _default_deps
+# Purpose : Build the default dependency callback map used by the legacy plugin
+#           registry loader.
+# Args    : ()
+# Returns : hashref dependency map
+#------------------------------------------------------------------------------
 sub _default_deps {
  return {
   load_plugin_parser => sub {
@@ -89,6 +132,12 @@ sub _default_deps {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _load_legacy_registry
+# Purpose : Build the cached legacy plugin registry through explicit owner deps.
+# Args    : ($deps)
+# Returns : hashref plugin registry
+#------------------------------------------------------------------------------
 sub _load_legacy_registry {
  my ($deps) = @_;
  $deps = _default_deps() unless ref($deps) eq 'HASH';
@@ -104,6 +153,12 @@ sub _load_legacy_registry {
  return $build_plugin_registry->($get, @$plugin_list)
 }
 
+#------------------------------------------------------------------------------
+# Function: _normalize_plugin_name
+# Purpose : Normalize a mixed subname/AUTOLOAD value into a bare plugin name.
+# Args    : ($autoload_or_subname)
+# Returns : normalized plugin name
+#------------------------------------------------------------------------------
 sub _normalize_plugin_name {
  my ($autoload_or_subname) = @_;
  my $display_name = defined($autoload_or_subname) ? $autoload_or_subname : '<undef>';
@@ -113,6 +168,12 @@ sub _normalize_plugin_name {
  return $plugin_name
 }
 
+#------------------------------------------------------------------------------
+# Function: new
+# Purpose : Construct the cached legacy plugin registry adapter object.
+# Args    : ($class)
+# Returns : blessed plugin-registry adapter
+#------------------------------------------------------------------------------
 sub new {
 my $class = ref $_[0] || $_[0];
 
@@ -123,7 +184,20 @@ state $main_str = _load_legacy_registry();
 }
 
 
+#------------------------------------------------------------------------------
+# Function: get
+# Purpose : Look up one legacy plugin callback by normalized plugin name.
+# Args    : ($self_or_class, $plugin_name)
+# Returns : plugin coderef | undef
+#------------------------------------------------------------------------------
 sub get  {(ref $_[0] ? $_[0] : __PACKAGE__->new)->{$_[1]}}
+
+#------------------------------------------------------------------------------
+# Function: exec_plugin_name
+# Purpose : Execute one legacy plugin by explicit normalized plugin name.
+# Args    : ($self_or_class, $plugin_name, @args)
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub exec_plugin_name {
 my ($this, $plugin_name) = splice @_, 0, 2;
    $this = ref($this) ? $this : __PACKAGE__->new;
@@ -137,6 +211,14 @@ my ($this, $plugin_name) = splice @_, 0, 2;
 
  goto &$plugin
 }
+
+#------------------------------------------------------------------------------
+# Function: exec
+# Purpose : Compatibility mixed-name execution wrapper that normalizes names
+#           before delegating to `exec_plugin_name(...)`.
+# Args    : ($self_or_class, $autoload_or_subname, @args)
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub exec {
 my ($this, $autoload_or_subname) = splice @_, 0, 2;
  my $plugin_name = _normalize_plugin_name($autoload_or_subname);
@@ -144,7 +226,20 @@ my ($this, $autoload_or_subname) = splice @_, 0, 2;
  return $this->exec_plugin_name($plugin_name, @_)
 }
 
+#------------------------------------------------------------------------------
+# Function: AUTOLOAD
+# Purpose : Legacy AUTOLOAD compatibility entrypoint for `.plg` plugin calls.
+# Args    : standard Perl AUTOLOAD args
+# Returns : plugin return payload
+#------------------------------------------------------------------------------
 sub AUTOLOAD {__PACKAGE__->new->exec_plugin_name(_normalize_plugin_name($AUTOLOAD), @_)}
+
+#------------------------------------------------------------------------------
+# Function: DESTROY
+# Purpose : No-op destructor that prevents AUTOLOAD from trapping object teardown.
+# Args    : ()
+# Returns : undef
+#------------------------------------------------------------------------------
 sub DESTROY  {}
 
 1;
