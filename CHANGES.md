@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Extend Compatibility Metadata To Legacy Helper Wrappers
+
+Extended the new compatibility telemetry so it matches the documented migration policy instead of only flagging Perl-shaped pass-through syntax:
+- `meta.action_rewriter.compatibility_surface_*` now also includes older helper wrappers such as raw call wrappers (`assign_call_*`, `push ... call(...)`, `return call(...)`), tagged return helpers (`return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array`), and legacy capture helpers (`capture_if`, `CAPTURE_IF()`),
+- `meta.action_rewriter_migration.compatibility_surface_*` therefore now reports both ready and blocked rules that still rely on those helper families,
+- and readiness semantics still stay unchanged: the new slice does not demote those rules to blocked, it just makes the compatibility debt visible.
+
+Regression coverage now locks:
+- rule-level compatibility metadata for the legacy helper family,
+- and descriptor-summary priority/reporting for ready rules that still depend on legacy helper wrappers.
+
 ## 2026-03-24 - Phase 4: Surface Compatibility Syntax In Migration Metadata
 
 Turned the roadmap’s “flag remaining raw Perl loudly” policy into explicit descriptor metadata rather than only a social/documentation rule:

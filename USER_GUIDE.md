@@ -1053,6 +1053,10 @@ That distinction is intentional:
 - `language_agnostic_action_ir_ready = 1` means the rule no longer depends on RAW_PERL fallback or unresolved helpers,
 - but a nonzero `compatibility_surface_count` still means the rule is relying on older compatibility-shaped syntax that should eventually move to canonical method-like DSL forms.
 
+That compatibility lane now covers both:
+- Perl-shaped pass-through syntax such as bare `return` / `exit` and other classified compatibility idioms,
+- and older helper wrappers such as `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array`, `capture_if`, and raw call-wrapper forms.
+
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 
 Likewise, final descriptor assembly keeps its `gdata` compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `spec_gdata` callback or depend on an older `LinkedSpec::spec_gdata(...)` façade helper.

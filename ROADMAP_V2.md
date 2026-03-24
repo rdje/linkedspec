@@ -26,7 +26,7 @@ This file exists to make the active plan easier to follow without replacing the 
 - `.spec` authoring is intended to become permanently raw-Perl-free.
 - Raw Perl inside `.spec` is obsolete compatibility debt, not an acceptable long-term authoring surface.
 - Remaining raw Perl occurrences in `.spec` should be flagged loudly and migrated to canonical method-like DSL equivalents.
-- Descriptor migration metadata should also surface compatibility-shaped ready rules separately, so “ready” never hides older Perl-shaped syntax that still needs migration.
+- Descriptor migration metadata should also surface compatibility-shaped ready rules separately, so “ready” never hides older Perl-shaped syntax or legacy helper wrappers that still need migration.
 - Documentation is a product contract:
   - optimize for readability,
   - remove ambiguity directly,

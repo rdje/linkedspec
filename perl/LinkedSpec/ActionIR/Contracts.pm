@@ -176,6 +176,7 @@ sub _build_call_and_dispatch_contracts {
    id                 => 'assign_call_my',
    ir_node            => 'CALL',
    diag_name          => 'assign_call_my',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bmy\s+\$\w+\s*=\s*call\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -187,6 +188,7 @@ sub _build_call_and_dispatch_contracts {
    id                 => 'assign_call',
    ir_node            => 'CALL',
    diag_name          => 'assign_call',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\$\w+\s*=\s*call\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -198,6 +200,7 @@ sub _build_call_and_dispatch_contracts {
    id                 => 'push_call_indexed_builtin',
    ir_node            => 'CALL',
    diag_name          => 'push_call_indexed_builtin',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)\s*->\s*\[\s*\d+\s*\]/o,
    lower              => sub {
     my ($code) = @_;
@@ -209,6 +212,7 @@ sub _build_call_and_dispatch_contracts {
    id                 => 'push_call_builtin',
    ir_node            => 'CALL',
    diag_name          => 'push_call_builtin',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bpush\s+\@\w+\s*,\s*call\s*\(\s*\w+\s*\)(?!\s*->\s*\[)/o,
    lower              => sub {
     my ($code) = @_;
@@ -220,6 +224,7 @@ sub _build_call_and_dispatch_contracts {
    id                 => 'return_call',
    ir_node            => 'CALL',
    diag_name          => 'return_call',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn\s+call\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -241,6 +246,7 @@ sub _build_return_contracts {
    id                 => 'return_a',
    ir_node            => 'RETURN_A',
    diag_name          => 'return_a',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn_a\s*\(/o,
    lower              => sub {
     my ($code) = @_;
@@ -275,6 +281,7 @@ sub _build_return_contracts {
    id                 => 'return_ma',
    ir_node            => 'RETURN_MA',
    diag_name          => 'return_ma',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn_ma\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -286,6 +293,7 @@ sub _build_return_contracts {
    id                 => 'return_m',
    ir_node            => 'RETURN_M',
    diag_name          => 'return_m',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn_m\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -308,6 +316,7 @@ sub _build_return_contracts {
    id                 => 'return_imatch',
    ir_node            => 'RETURN',
    diag_name          => 'return_imatch',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn_im(?:atch)?\s*\(/o,
    lower              => sub {
     my ($code) = @_;
@@ -332,6 +341,7 @@ sub _build_return_contracts {
    id                 => 'return_array',
    ir_node            => 'RETURN',
    diag_name          => 'return_array',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\breturn_array\s*\(/o,
    lower              => sub {
     my ($code) = @_;
@@ -376,6 +386,7 @@ sub _build_capture_and_backtrack_contracts {
    id                 => 'capture_if',
    ir_node            => 'CAPTURE_IF',
    diag_name          => 'capture_if',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bcapture_if\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -387,6 +398,7 @@ sub _build_capture_and_backtrack_contracts {
    id                 => 'capture_if_macro',
    ir_node            => 'CAPTURE_IF',
    diag_name          => 'CAPTURE_IF',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bCAPTURE_IF\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;

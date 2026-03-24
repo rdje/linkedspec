@@ -412,7 +412,7 @@ Status interpretation note:
    - Long-term backend portability depends on this: future Rust and other backend implementations need `.spec` semantics to be fully language-agnostic rather than Perl-dependent.
 7. Tracking policy (Planned)
    - Track progress through existing migration readiness/blocker metadata and regression locks.
-   - “Ready” and “already canonical” are no longer the same thing: migration metadata should also surface compatibility-shaped ready rules separately so remaining Perl-shaped syntax does not disappear behind a green readiness flag.
+   - “Ready” and “already canonical” are no longer the same thing: migration metadata should also surface compatibility-shaped ready rules separately so remaining Perl-shaped syntax and older compatibility helper wrappers do not disappear behind a green readiness flag.
    - Prioritize real blocker reduction over telemetry expansion unless explicitly requested.
 ## Plugin and Resource-Resolution Modernization Track (Planned)
 Goal: replace the current `AUTOLOAD` + `.plg` plugin runtime with a more explicit module-based plugin architecture, while making path/resource lookup deterministic and easier to reason about.

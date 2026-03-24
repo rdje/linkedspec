@@ -34496,13 +34496,13 @@ subtest 'action_rewriter_meta_exposes_compatibility_surface_without_demoting_rea
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(CompatReady); return_a(Top) }
+ /a/ -> Top { call(CompatReady); return(a("?Top:")) }
 
 CompatReady::&
  /b/ -> CompatReady { return 1; exit }
 
 CompatBlocked::&
- /c/ -> CompatBlocked { return 1; return_a(CompatReady) }
+ /c/ -> CompatBlocked { return 1; my $tmp = 2 }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -34568,13 +34568,13 @@ subtest 'return_descr_exposes_action_rewriter_compatibility_surface_summary' => 
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { call(CompatReady); return_a(Top) }
+ /a/ -> Top { call(CompatReady); return(a("?Top:")) }
 
 CompatReady::&
  /b/ -> CompatReady { return 1; exit }
 
 CompatBlocked::&
- /c/ -> CompatBlocked { return 1; return_a(CompatReady) }
+ /c/ -> CompatBlocked { return 1; my $tmp = 2 }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -34596,6 +34596,45 @@ SPEC
     is_deeply($ready_row->{compatibility_surface_statements}, ['return 1', 'exit'], 'compatibility-surface summary preserves statements for ready compatibility rule');
     is($blocked_row->{compatibility_surface_statement_count}, 1, 'compatibility-surface summary preserves per-rule statement counts for blocked compatibility rule');
     is_deeply($blocked_row->{compatibility_surface_statements}, ['return 1'], 'compatibility-surface summary preserves statements for blocked compatibility rule');
+};
+subtest 'compatibility_surface_metadata_includes_legacy_helper_wrappers' => sub {
+    plan tests => 12;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /(\w+)/ -> Top { my $retv = call(Leaf); capture_if(Top); return_m(Top) }
+
+Leaf:
+ /(\w+)/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for legacy helper compatibility-surface check');
+
+    my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    my $leaf_meta = $descr->{spec}{Leaf}{meta}{action_rewriter};
+    ok($top_meta->{language_agnostic_action_ir_ready}, 'legacy helper wrapper rule still stays action-IR ready');
+    ok($leaf_meta->{language_agnostic_action_ir_ready}, 'legacy tagged-return helper rule still stays action-IR ready');
+    is_deeply(
+        $top_meta->{compatibility_surface_contract_ids},
+        ['assign_call_my', 'capture_if', 'return_m'],
+        'legacy helper wrapper rule exposes deterministic compatibility helper ids',
+    );
+    is_deeply(
+        $leaf_meta->{compatibility_surface_contract_ids},
+        ['return_a'],
+        'legacy tagged-return helper rule exposes deterministic compatibility helper ids',
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    is($summary->{compatibility_surface_rule_count}, 2, 'migration summary counts rules that still use legacy helper wrappers');
+    is($summary->{compatibility_surface_ready_rule_count}, 2, 'migration summary keeps legacy helper wrappers in the ready subset when they avoid blockers');
+    is_deeply($summary->{compatibility_surface_ready_rules}, ['Leaf', 'Top'], 'migration summary exposes deterministic ready legacy-helper rule list');
+    is_deeply($summary->{compatibility_surface_rules_by_priority}, ['Top', 'Leaf'], 'migration summary prioritizes the denser legacy-helper rule first');
+    is($summary->{compatibility_surface_top_rule}, 'Top', 'migration summary exposes the top legacy-helper compatibility rule');
+    my ($top_row) = grep { $_->{rule} eq 'Top' } @{$summary->{compatibility_surface_rules}};
+    is_deeply($top_row->{compatibility_surface_contract_ids}, ['assign_call_my', 'capture_if', 'return_m'], 'migration summary preserves legacy helper contract ids per rule');
+    is($top_row->{compatibility_surface_statement_count}, 3, 'migration summary preserves per-rule statement count for legacy helper wrappers');
 };
 subtest 'return_descr_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
     plan tests => 13;
