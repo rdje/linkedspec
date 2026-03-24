@@ -1,5 +1,6 @@
 ds_vhistory  {
- my $ps  = _get_parser('ds_vhistory');
+ use LinkedSpec;
+ my $ps  = LinkedSpec::get_parser('ds_vhistory');
 
  my $p   = defined $_[0]{_argv}[0] ? 
           do {

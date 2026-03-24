@@ -94,7 +94,8 @@ portlist_2hash {my ($pt, %opt) = @_;
  my $k2c = Global->set(qw/rtl port_key2col/);
 
  if ($opt{thrumap}) {
-  $$_{replace}   = mapspec_atree_2signame ($$_{replace_atree} = _get_parser ('portmap')->(\$$_{replace})) foreach @{$opt{thrumap}}; 
+  use LinkedSpec;
+  $$_{replace}   = mapspec_atree_2signame ($$_{replace_atree} = LinkedSpec::get_parser('portmap')->(\$$_{replace})) foreach @{$opt{thrumap}};
  }
 
  my %all_porthash;

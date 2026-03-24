@@ -1,5 +1,6 @@
 register_test {
 my ($conf) = @_;
+ use LinkedSpec;
 
  my $parse_info  = Storable::retrieve($$conf{_argv}[0]);
 
@@ -72,7 +73,7 @@ my ($conf) = @_;
 
  # For not hard-coding the file path
  my ($regdefile)   = slurp("reg_def_file_path.txt") =~ /(\S+)/o;
- my $regdef_parser = $pl->_get_parser('regdef');
+ my $regdef_parser = LinkedSpec::get_parser('regdef');
 
  my $reg_def = $regdef_parser->(\(my $foo= slurp((slurp("reg_def_file_path.txt") =~ /(\S+)/o)[0])));
 
@@ -342,5 +343,4 @@ my ($sz, $pat) = @_;
  my $cv = $pat;
  join "", "$sz\'b", map {($cv+$_)%2} 0 .. $sz-1;
 }
-
 

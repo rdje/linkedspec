@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Plugin Track: Retire Repo-Owned `_get_parser(...)` Plugin Usage
+
+Continued the plugin/runtime modernization track by removing one of the remaining “parser lookup through plugin magic” seams from repo-owned code:
+- `perl/Lispish.pm` now uses `LinkedSpec::get_parser('Lispish')` directly instead of `PPlugin->_get_parser('Lispish')`,
+- the remaining repo-owned `.plg` callers that were still using `_get_parser(...)` (`plugin/ds_vhistory.plg`, `plugin/fsmgen.plg`, and `plugin/regtest.plg`) now also call `LinkedSpec::get_parser(...)` explicitly,
+- and `plugin/spec.plg::_get_parser` is now left only as compatibility surface for older external callers rather than as the preferred parser-lookup contract for repo-owned code.
+
+Regression coverage now locks:
+- that repo-owned module/plugin callers avoid `_get_parser(...)` while `plugin/spec.plg` remains present as compatibility,
+- and that `Lispish::single(...)` still parses successfully while keeping `PPlugin` unloaded.
+
 ## 2026-03-24 - Docs: Formalize Perl Package And Routine Docstring Convention
 
 Captured and spent a repo-wide Perl documentation convention in the active plugin/runtime owner set:

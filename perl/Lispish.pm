@@ -4,13 +4,31 @@
 # This Perl module is free software, you may redistribute it and/or 
 # modify it under the same terms as Perl itself.
 #===================================================================
+#------------------------------------------------------------------------------
+# Package: Lispish
+# Purpose: Lightweight convenience helpers around the `Lispish.spec` parser plus
+#          recursive array-tree traversal utilities used by older consumers.
+#------------------------------------------------------------------------------
 package Lispish;
 
 use 5.010;
 
-use PPlugin;
+use LinkedSpec;
 
-sub single  {state $code = PPlugin->_get_parser('Lispish'); $code->($_[0])}
+#------------------------------------------------------------------------------
+# Function: single
+# Purpose : Parse one Lispish form from the current scalar-ref input cursor.
+# Args    : ($string_ref)
+# Returns : parsed array-tree node or undef
+#------------------------------------------------------------------------------
+sub single  {state $code = LinkedSpec::get_parser('Lispish'); $code->($_[0])}
+
+#------------------------------------------------------------------------------
+# Function: multi
+# Purpose : Parse all Lispish forms from one file path or scalar-ref input.
+# Args    : ($path_or_string_ref)
+# Returns : list of parsed nodes or arrayref in scalar context
+#------------------------------------------------------------------------------
 sub multi   {my $hread = shift;
 
  unless (ref $hread) {
@@ -22,10 +40,17 @@ sub multi   {my $hread = shift;
 
  my @listo; 
  while(my $lite = single($hread)) {push @listo, $lite} 
- 
+
  wantarray ? @listo : \@listo
 }
 
+#------------------------------------------------------------------------------
+# Function: recurse
+# Purpose : Walk one Lispish array-tree recursively with optional pre/it/post
+#           callbacks while tracking traversal depth.
+# Args    : ($raw, %opt)
+# Returns : transformed array-tree or callback-derived payload
+#------------------------------------------------------------------------------
 sub recurse {my ($raw, @opt) = @_;
  my $it   = shift @opt if 'CODE' ~~ ref $opt[0];
  my %opt  = @opt;
@@ -52,8 +77,29 @@ sub recurse {my ($raw, @opt) = @_;
  $opt{post} ? ((!$opt{postcheck} || $opt{postcheck}->($raw, \@capt)) ? $opt{post}->($raw, \@capt, $opt{level}) : @capt) : $raw;
 }
 
+#------------------------------------------------------------------------------
+# Function: flatten
+# Purpose : Flatten one Lispish array-tree into a plain scalar list.
+# Args    : ($raw)
+# Returns : flattened list/arrayref depending on caller context
+#------------------------------------------------------------------------------
 sub flatten    {recurse ($_[0], sub {$_[0]}, post=>sub {@{$_[1]}})}
+
+#------------------------------------------------------------------------------
+# Function: substitute
+# Purpose : Walk one Lispish array-tree and replace scalar leaves through a
+#           caller-supplied substitution callback.
+# Args    : ($context, $raw, $subst_code)
+# Returns : transformed array-tree
+#------------------------------------------------------------------------------
 sub substitute {my ($context, $raw, $subst_code) = @_; recurse ($raw, sub {$_[0] = $subst_code->($context, @_)})}
+
+#------------------------------------------------------------------------------
+# Function: ascii
+# Purpose : Print one Lispish array-tree as a simple indented ASCII form.
+# Args    : ($raw)
+# Returns : original array-tree
+#------------------------------------------------------------------------------
 sub ascii  {
 # recurse ($_[0], sub {print "$_[0] "}, pre=>  sub {return if ref $_[0][0]; print "\n", ' ' x $_[1], '('}, 
 #                                      post=> sub {return if ref $_[0][0]; say '', (ref $_[0][-1] ? ' ' x $_[2] : ''), ')'}) 
@@ -64,6 +110,12 @@ sub ascii  {
  $_[0]
 }
 
+#------------------------------------------------------------------------------
+# Function: grep
+# Purpose : Collect Lispish nodes whose head symbol matches one regex.
+# Args    : ($raw, $node_re, %opt)
+# Returns : matched node list or transformed match list
+#------------------------------------------------------------------------------
 sub grep {my ($raw, $node_re, @opt) = @_;
  my $itcode = shift @opt if 'CODE' ~~ ref $opt[0];
  my %opt    = @opt;
@@ -86,6 +138,13 @@ sub grep {my ($raw, $node_re, @opt) = @_;
 #                     ...
 #                     nodeN_re=>nodeN_foreach_code
 #                    ]
+#------------------------------------------------------------------------------
+# Function: bottom_up
+# Purpose : Walk one Lispish array-tree bottom-up and fire callbacks keyed by
+#           node-head regex/type matches.
+# Args    : ($context, $array_tree, %pattern_action)
+# Returns : traversal result from recurse(...)
+#------------------------------------------------------------------------------
 sub bottom_up {my ($cr, $at, %pattern_action) = @_;
    recurse ($at, 
        #pre=> sub {say "PRE (@{$_[0]})"},

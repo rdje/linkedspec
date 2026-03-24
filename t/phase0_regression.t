@@ -3445,6 +3445,44 @@ PERL
     like($out, qr/__ARGS__=alpha,beta/, 'FSMGen AUTOLOAD preserves plugin arguments through LinkedSpec dispatch_plugin_autoload_name');
     like($out, qr/__RET__=plugin_ok/, 'FSMGen AUTOLOAD preserves the LinkedSpec dispatch_plugin_autoload_name return payload');
 };
+subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub {
+    plan tests => 7;
+
+    my $lispish_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Lispish.pm'));
+    my $ds_vhistory_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'ds_vhistory.plg'));
+    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
+    my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
+    my $spec_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'spec.plg'));
+
+    ok(defined($lispish_pm) && length($lispish_pm), 'Lispish.pm source is available for parser-lookup compatibility inspection');
+    unlike($lispish_pm, qr/PPlugin->_get_parser\('Lispish'\)/, 'Lispish.pm no longer routes parser lookup through the legacy _get_parser plugin');
+    like($lispish_pm, qr/LinkedSpec::get_parser\('Lispish'\)/, 'Lispish.pm now uses LinkedSpec::get_parser(...) directly');
+    unlike($ds_vhistory_plugin . $fsmgen_plugin . $regtest_plugin, qr/\b_get_parser\s*\(/, 'repo-owned plugin files no longer use the legacy _get_parser helper plugin');
+    like($ds_vhistory_plugin, qr/LinkedSpec::get_parser\('ds_vhistory'\)/, 'ds_vhistory plugin now uses LinkedSpec::get_parser(...) directly');
+    like($fsmgen_plugin, qr/LinkedSpec::get_parser\('portmap'\)/, 'fsmgen plugin now uses LinkedSpec::get_parser(...) directly');
+    like($spec_plugin, qr/_get_parser\s*\{/, 'legacy spec plugin still exists as compatibility surface for older callers');
+};
+subtest 'lispish_single_uses_linkedspec_parser_lookup_without_pplugin' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require Lispish;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $input = "(a (b c) d)";
+my $ast = eval { Lispish::single(\$input) };
+my $eval_err = $@ // '';
+print defined($ast) ? "__AST_DEFINED__\n" : "__AST_UNDEF__\n";
+print $eval_err eq '' ? "__INNER_ERR_EMPTY__\n" : "__INNER_ERR__=$eval_err\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_AFTER_SINGLE__\n" : "__PPLUGIN_STILL_UNLOADED_AFTER_SINGLE__\n";
+PERL
+
+    is($exit_code, 0, 'Lispish single subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring Lispish no longer eager-loads the legacy PPlugin runtime');
+    like($out, qr/__AST_DEFINED__/, 'Lispish single still returns a parsed AST after direct LinkedSpec parser lookup');
+    like($out, qr/__INNER_ERR_EMPTY__/, 'Lispish single parse still completes without inner eval error');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_SINGLE__/, 'Lispish single no longer loads PPlugin when parsing through direct LinkedSpec lookup');
+    unlike($err, qr/PPlugin|_get_parser/, 'Lispish single subprocess does not emit legacy plugin-lookup stderr');
+};
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
 
