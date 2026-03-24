@@ -1,5 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-24 - Phase 4: Migrate `tablegrep.spec` Terminal Token Reads To `entry_group(...)`
+
+Spent the newer immediate-match helper surface on another live spec:
+- the terminal token band in `specs/tablegrep.spec` now prefers `entry_group(0..2)` instead of `scalar(IMATCH_LIST, ...)` for the `re_term` capture reads,
+- the preserved return payload shape for `TERM` / `STERM` tokens stays unchanged while the live spec gets less tied to the older positional-capture surface,
+- and the slice stays deliberately narrow by leaving the broader group/accumulator orchestration alone.
+
+Regression coverage now locks both behavior and source migration intent:
+- the existing `tablegrep` terminal/token helper-flow regression still pins preserved behavior,
+- and a focused source-level regression now confirms the migrated terminal-token band prefers `entry_group(...)` instead of drifting back to `scalar(IMATCH_LIST, ...)`.
+
 ## 2026-03-24 - Phase 4: Migrate `ds_vhistory.spec` Vhistory Band To Concise Container Aliases
 
 Spent the concise `s(...)` / `a(...)` surface on another live spec:

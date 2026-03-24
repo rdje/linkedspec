@@ -35282,6 +35282,18 @@ subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'tablegrep exposes no prioritized blocked-rule list after terminal/token migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tablegrep exposes no top blocked rule after terminal/token migration');
 };
+subtest 'tablegrep_terminal_token_band_prefers_entry_group_reads' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'tablegrep.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for terminal-token reader inspection');
+    like($source_content, qr/declare\(scalar,\s*field=entry_group\(0\),\s*sens=entry_group\(1\),\s*re=entry_group\(2\)\);/, 'tablegrep re_term now prefers entry_group(0..2) for immediate capture reads');
+    like($source_content, qr/return\(hash\("type", "STERM", "field", scalar\(subscript\), "sens", scalar\(sens\), "re", scalar\(re\)\)\)/, 'tablegrep subscript terminal return shape remains preserved after entry_group migration');
+    like($source_content, qr/or_op:\s*\/\\\|\\\|\//, 'tablegrep operator token rules remain present after terminal-token migration');
+    unlike($source_content, qr/declare\(scalar,\s*field=scalar\(IMATCH_LIST,\s*0\),\s*sens=scalar\(IMATCH_LIST,\s*1\),\s*re=scalar\(IMATCH_LIST,\s*2\)\);/, 'tablegrep re_term no longer uses scalar(IMATCH_LIST, ...) in the migrated terminal-token band');
+};
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
     plan tests => 11;
 

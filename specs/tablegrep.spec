@@ -64,7 +64,7 @@ LE {
 
 re_term: /((?:\w+|\[\d+\]))\s*([!=])~\s*\/(.+?)(?<!\\)\//
 I {
- declare(scalar, field=scalar(IMATCH_LIST, 0), sens=scalar(IMATCH_LIST, 1), re=scalar(IMATCH_LIST, 2));
+ declare(scalar, field=entry_group(0), sens=entry_group(1), re=entry_group(2));
  if(matches(scalar(field), /^\[\d+\]$/o));
   declare(scalar, subscript=scalar(field));
   substr(scalar(subscript), /^\[(\d+)\]$/, "$1", o);
