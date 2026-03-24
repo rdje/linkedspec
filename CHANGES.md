@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Plugin Track: Start Package-Backed CGI Extraction
+
+Continued the package-backed `.plg` extraction line with the next small plugin:
+- added `perl/LinkedSpec/Plugin/CGI.pm` as the new package-backed owner for `file_list_path2http(...)`,
+- reduced `plugin/cgi.plg` to a thin compatibility wrapper that delegates into that package owner,
+- and kept URL generation on the explicit plugin API by routing the internal dependency through `LinkedSpec::run_plugin('httplink', ...)` rather than a raw implicit plugin call.
+
+Regression coverage now locks:
+- that the new package owner exists and preserves the historical link-wrapping contract without loading `PPlugin`,
+- that `cgi.plg` is now a thin wrapper instead of the implementation owner,
+- and that the wrapper still parses successfully under `pplugin` with the expected exported coderef.
+
 ## 2026-03-24 - Plugin Track: Start Package-Backed `.plg` Extraction with String Helpers
 
 Started the first real `.plg`-to-`.pm` extraction slice on the plugin/runtime modernization track:
