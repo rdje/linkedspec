@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::Validation
+# Purpose: Frontend validation owner for early `.spec` envelope, rule-paragraph,
+#          edge-target, and reference diagnostics before bootstrap/runtime work.
+#------------------------------------------------------------------------------
 package LinkedSpec::Validation;
 
 use 5.010;
@@ -562,6 +567,13 @@ sub _validate_rule_header_rhs_start {
  return 0;
 }
 
+#------------------------------------------------------------------------------
+# Function: _scan_rule_edges_in_fragment
+# Purpose : Scan one rule fragment for action/blind-call edges while tracking
+#           cross-line block depth and reporting malformed target/balance state.
+# Args    : ($fragment, $start_depth)
+# Returns : hashref with `edges`, `depth`, and optional `error`
+#------------------------------------------------------------------------------
 sub _scan_rule_edges_in_fragment {
  my ($fragment, $start_depth) = @_;
  my @edges;
@@ -616,10 +628,20 @@ sub _scan_rule_edges_in_fragment {
    next;
   }
 
-  if (($ch eq '}' || $ch eq ')' || $ch eq ']') && $depth > 0) {
-   --$depth;
-   ++$i;
-   next;
+  if ($ch eq '}' || $ch eq ')' || $ch eq ']') {
+   if ($depth > 0) {
+    --$depth;
+    ++$i;
+    next;
+   }
+
+   return {
+    error => {
+     kind   => 'structure',
+     reason => 'unexpected_closer',
+     closer => $ch,
+    },
+   };
   }
 
   if ($depth == 0 && (substr($fragment, $i, 2) eq '->' || substr($fragment, $i, 2) eq '=>')) {
@@ -857,10 +879,27 @@ sub _count_rule_edge_kinds_in_fragment {
  return ($acode_count, $bcode_count);
 }
 
+#------------------------------------------------------------------------------
+# Function: _report_edge_target_syntax_error
+# Purpose : Convert low-level edge-scan syntax/balance failures into one
+#           user-facing DSL diagnostic with targeted guidance.
+# Args    : ($spec_content, $position, $error_hashref)
+# Returns : undef/false through report_dsl_error
+#------------------------------------------------------------------------------
 sub _report_edge_target_syntax_error {
  my ($spec_content, $position, $error) = @_;
  my $kind = $error->{kind} || 'action';
  my $reason = $error->{reason} || '';
+
+ if ($reason eq 'unexpected_closer') {
+  my $closer = $error->{closer} || '?';
+  return report_dsl_error(
+   $spec_content,
+   $position,
+   "Unexpected closing delimiter '$closer' in rule paragraph",
+   "Remove the stray '$closer' or add the matching opening delimiter earlier in the same rule paragraph",
+  );
+ }
 
  if ($kind eq 'blind_call' && $reason eq 'missing_target') {
   return report_dsl_error(

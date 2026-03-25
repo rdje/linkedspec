@@ -6422,6 +6422,47 @@ PERL
     like($out, qr/Unsupported same-line rule header content/, 'same-line post-regex diagnostic is reported early');
     is($err, '', 'unsupported same-line post-regex validation subprocess does not emit stderr');
 };
+subtest 'validation_rejects_unexpected_multiline_rule_closers' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top::
+ -> Leaf { return_a(Leaf) } }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unexpected multiline closer validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects stray multiline closing delimiters before bootstrap parse');
+    like($out, qr/Unexpected closing delimiter '\}' in rule paragraph/, 'unexpected multiline closer diagnostic names the stray delimiter');
+    like($out, qr/Remove the stray '\}' or add the matching opening delimiter earlier in the same rule paragraph/, 'unexpected multiline closer guidance explains how to fix the balance error');
+    is($err, '', 'unexpected multiline closer validation subprocess does not emit stderr');
+};
+subtest 'validation_rejects_unexpected_same_line_rule_header_closers' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $spec_content = <<'SPEC';
+Top:: /a/ -> Leaf { return_a(Leaf) } ]
+Leaf: /b/ -> Leaf { return_a(Leaf) }
+SPEC
+require LinkedSpec::Validation;
+my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
+print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
+PERL
+
+    is($exit_code, 0, 'unexpected same-line closer validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects stray same-line closing delimiters before bootstrap parse');
+    like($out, qr/Unexpected closing delimiter '\]' in rule paragraph/, 'unexpected same-line closer diagnostic names the stray delimiter');
+    like($out, qr/Remove the stray '\]' or add the matching opening delimiter earlier in the same rule paragraph/, 'unexpected same-line closer guidance explains how to fix the balance error');
+    is($err, '', 'unexpected same-line closer validation subprocess does not emit stderr');
+};
 subtest 'validation_rejects_invalid_multiline_rule_regex_tokens' => sub {
     plan tests => 4;
 
@@ -37491,7 +37532,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_value_emptiness_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
  /a/ -> Top
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source")))).return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty)))
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty)))
 SPEC
 
     my $block_spec = <<'SPEC';
