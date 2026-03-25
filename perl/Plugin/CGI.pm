@@ -1,15 +1,15 @@
 #------------------------------------------------------------------------------
-# Package: LinkedSpec::Plugin::CGI
+# Package: Plugin::CGI
 # Purpose: Package-backed owner for lightweight CGI/link-formatting plugin
 #          behavior being migrated out of legacy `.plg` files.
 #------------------------------------------------------------------------------
-package LinkedSpec::Plugin::CGI;
+package Plugin::CGI;
 
 use 5.010;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
- my $perl_root = File::Basename::dirname(File::Basename::dirname($module_dir));
+ my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
@@ -23,12 +23,12 @@ BEGIN {
 sub file_list_path2http {
  require Global;
  require LinkedSpec;
- require LinkedSpec::Plugin::String;
+ require Plugin::String;
 
  return join "", map {
   !/#/o ? join("", map {
    m/\//o ? do {
-    my $subst = LinkedSpec::Plugin::String::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
+    my $subst = Plugin::String::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
     my $http = LinkedSpec::run_plugin('httplink', $subst);
     qq{<A HREF="$http">$_</A>};
    } : $_

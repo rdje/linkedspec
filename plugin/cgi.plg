@@ -1,4 +1,4 @@
 file_list_path2http {
-   use LinkedSpec::Plugin::CGI;
-   LinkedSpec::Plugin::CGI::file_list_path2http(@_);
+   use Plugin::CGI;
+   Plugin::CGI::file_list_path2http(@_);
 }

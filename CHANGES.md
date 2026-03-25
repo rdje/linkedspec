@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Plugin Track: Move Extracted Packages Out Of `LinkedSpec::*`
+
+Corrected the package ownership of the first extracted plugin bodies so they no longer live under `LinkedSpec/Plugin/`:
+- moved the extracted string helper owner to `perl/Plugin/String.pm`,
+- moved the extracted CGI/link helper owner to `perl/Plugin/CGI.pm`,
+- deleted `perl/LinkedSpec/Plugin/String.pm` and `perl/LinkedSpec/Plugin/CGI.pm`,
+- and retargeted `plugin/string.plg`, `plugin/cgi.plg`, and the regression suite to the new `Plugin::*` namespace.
+
+Regression coverage now locks:
+- that the extracted package owners live under `perl/Plugin/`,
+- that the thin `.plg` wrappers point at `Plugin::String` and `Plugin::CGI`,
+- and that the package-backed runtime behavior still preserves the historical substitution and link-wrapping contracts without loading `PPlugin`.
+
 ## 2026-03-25 - Plugin Track: Start Package-Backed CGI Extraction
 
 Continued the package-backed `.plg` extraction line with the next small plugin:

@@ -1,6 +1,6 @@
 var_subst  {
- use LinkedSpec::Plugin::String;
- LinkedSpec::Plugin::String::var_subst(@_);
+ use Plugin::String;
+ Plugin::String::var_subst(@_);
 }
 
 #string_subst  {
@@ -10,6 +10,6 @@ var_subst  {
 #}
 
 var_subst_test {
-  use LinkedSpec::Plugin::String;
-  LinkedSpec::Plugin::String::var_subst_test(@_);
+  use Plugin::String;
+  Plugin::String::var_subst_test(@_);
 }

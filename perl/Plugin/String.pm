@@ -1,15 +1,15 @@
 #------------------------------------------------------------------------------
-# Package: LinkedSpec::Plugin::String
+# Package: Plugin::String
 # Purpose: Package-backed owner for lightweight string-substitution plugin
 #          behavior that is being migrated out of legacy `.plg` files.
 #------------------------------------------------------------------------------
-package LinkedSpec::Plugin::String;
+package Plugin::String;
 
 use 5.010;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
- my $perl_root = File::Basename::dirname(File::Basename::dirname($module_dir));
+ my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
