@@ -35,23 +35,24 @@ sub var_subst {
 #------------------------------------------------------------------------------
 # Function: var_subst_test
 # Purpose : Preserve the historical string-plugin smoke helper while routing
-#           its plugin calls through explicit LinkedSpec dispatch.
+#           its helper calls through package-backed owners.
 # Args    : ($conf_hashref)
 # Returns : undef after printing test output
 #------------------------------------------------------------------------------
 sub var_subst_test {
  require Global;
  require HUtils;
- require LinkedSpec;
  require PathSearch;
+ require Plugin::CGI;
+ require Plugin::HTTP;
 
  open(my $f, $_[0]{_argv}[0]);
  local $/;
  my $file = <$f>;
 
  Global->set('cgi') = HUtils::Conf(PathSearch->go('cgi'));
- LinkedSpec::run_plugin('set_http_localhost');
- my $fo = LinkedSpec::run_plugin('file_list_path2http', $file);
+ Plugin::HTTP::set_http_localhost();
+ my $fo = Plugin::CGI::file_list_path2http($file);
 
  print "var_subst_test: ($fo)\n";
  return

@@ -13,5 +13,11 @@ lighttpd {
 }
 
 
-set_http_hostport  {Global->set ('http_hostport') = ($_[0] || Sys::Hostname::hostname.Global->http_hostail).":".($_[1] || Global->http_default_port)}
-set_http_localhost {set_http_hostport (undef, $_[0])}
+set_http_hostport  {
+ use Plugin::HTTP;
+ Plugin::HTTP::set_http_hostport(@_);
+}
+set_http_localhost {
+ use Plugin::HTTP;
+ Plugin::HTTP::set_http_localhost(@_);
+}

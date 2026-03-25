@@ -37,4 +37,32 @@ sub httplink {
  return "http://" . Global->http_hostport . "/cgi-bin/getfile.cgi?$file_desc&$id";
 }
 
+#------------------------------------------------------------------------------
+# Function: set_http_hostport
+# Purpose : Preserve the historical helper that sets the active
+#           `Global->http_hostport` value from an optional host and port.
+# Args    : ($host, $port)
+# Returns : assigned "<host>:<port>" value
+#------------------------------------------------------------------------------
+sub set_http_hostport : lvalue {
+ my ($host, $port) = @_;
+
+ require Global;
+ require Sys::Hostname;
+
+ Global->set('http_hostport') =
+  ($host || Sys::Hostname::hostname() . Global->http_hostail) . ":" . ($port || Global->http_default_port)
+}
+
+#------------------------------------------------------------------------------
+# Function: set_http_localhost
+# Purpose : Preserve the historical helper that sets `http_hostport` using the
+#           default host logic and one optional explicit port.
+# Args    : ($port)
+# Returns : assigned "<host>:<port>" value
+#------------------------------------------------------------------------------
+sub set_http_localhost : lvalue {
+ set_http_hostport(undef, $_[0])
+}
+
 1;
