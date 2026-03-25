@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `RuleIR::EmitContext`, so the RuleIR-to-ActionIR bridge owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat EmitContext as covered by that same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `SpecEntry.pm`, so the rule-entry compile owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat SpecEntry as covered by that same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `RuleIR.pm`, so the rule-planning owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat RuleIR as covered by that same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `Compiler.pm`, so the compile-pipeline owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat Compiler as covered by that same owner-dispatch cleanup line now.

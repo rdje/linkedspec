@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::RuleIR::EmitContext
+# Purpose: Build the rule-emission context that bridges RuleIR planning into
+#          ActionIR scanning, diagnostics, and lowering.
+#------------------------------------------------------------------------------
 package LinkedSpec::RuleIR::EmitContext;
 
 use 5.010;
@@ -10,14 +15,22 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
 use constant {
  DUMP_LOW => 100,
 };
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one emit-context dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : requested package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
@@ -77,23 +90,16 @@ sub _require_trace_pkg {
  return _require_pkg('LinkedSpec::Trace')
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one
+#           emit-context helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _trace_log_output {
