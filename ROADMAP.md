@@ -852,8 +852,8 @@ These are tracked implementation concerns, not immediate blockers.
   - Landed follow-up: the first package-backed extraction is now real too: `LinkedSpec::Plugin::String` owns the old `string.plg` behavior, `string.plg` is reduced to thin compatibility wrappers, and `cgi.plg` now calls the package-owned `var_subst(...)` directly.
   - Landed follow-up: the next package-backed extraction is now real too: `LinkedSpec::Plugin::CGI` owns the old `cgi.plg` behavior, `cgi.plg` is reduced to a thin compatibility wrapper, and the extracted package keeps its still-legacy `httplink` dependency explicit through `LinkedSpec::run_plugin(...)`.
   - Landed follow-up: repo-owned packages `RTLUtils.pm` and `LispML.pm` no longer advertise stale `PPlugin` inheritance in `@ISA`, and regression coverage now locks that simply requiring those modules keeps the legacy runtime unloaded.
-  - Long-term plugin direction: explicit module/package plugins replace `AUTOLOAD` + `.plg` as the primary runtime contract.
-  - Long-term migration shape: current `.plg` behavior should move into `.pm` package ownership first, then be simplified; not every `.plg` needs to survive as a permanent one-to-one `.pm` wrapper once explicit APIs and registration exist.
+  - Updated architecture direction: spec/resource lookup remains a real framework responsibility, but dynamic plugin loading does not. Future work should preserve `get_parser('name')`-style spec resolution while retiring `.plg`/plugin execution support instead of preserving it under a new long-term plugin architecture.
+  - Transitional migration shape: current `.plg` behavior may still move through `.pm` package ownership as a temporary extraction path, but that is a retirement strategy, not a new permanent plugin subsystem.
   - Near-term `PathSearch` direction: keep `PathSearch->go(...)` as compatibility surface, but harden/rework internals before any caller-visible removal.
 - Backbone Refactor Track: In progress.
   - Item 1 (`$spec_descr` declarative registry): Landed.
