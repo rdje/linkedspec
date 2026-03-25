@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `RuleIR.pm`, so the rule-planning owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat RuleIR as covered by that same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `Compiler.pm`, so the compile-pipeline owner now uses the same shared package-loading and eval-error-preservation seam as the other reduced thin wrappers. Future resume should treat Compiler as covered by that same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `Resolver.pm` and `Validation.pm`, so the active parser/frontend trace-wrapper seam now uses the same shared Trace-loading and eval-error-preservation helper as the other reduced thin wrappers. Future resume should treat those two modules as covered by the same owner-dispatch cleanup line now.
 - 2026-03-25: Extended `LinkedSpec::OwnerDispatch` into `BootstrapSpec.pm`, so the hardcoded bootstrap owner now uses the same shared package-loading and eval-error-preservation seam as the other active compile-path thin wrappers. Future resume should treat BootstrapSpec as covered by that same owner-dispatch cleanup line now.

@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::RuleIR
+# Purpose: Rule-IR planning owner for handler-shape selection, execution
+#          metadata assembly, and emit-context preparation.
+#------------------------------------------------------------------------------
 package LinkedSpec::RuleIR;
 
 use 5.010;
@@ -7,6 +12,8 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+
+use LinkedSpec::OwnerDispatch ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -41,14 +48,16 @@ sub _select_rule_handler_variant {
  return '_default'
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one RuleIR dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::RuleIR::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
 sub _require_trace_pkg {
@@ -61,23 +70,16 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one RuleIR
+#           helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _trace_should_dump {
