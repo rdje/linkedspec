@@ -18,13 +18,16 @@ Read these in order for fastest onboarding:
 3. `USER_GUIDE.md`
    - How to write and use `.spec` grammars and parser workflows.
    - Includes the plain paragraph-based mental model for `.spec` file structure.
-4. `DEVELOPMENT_NOTES.md`
+4. `ARCHITECTURE_STATE.md`
+   - Live architectural reading of the current codebase shape.
+   - Use this to re-enter the project with the current implementation model and main hotspots in mind.
+5. `DEVELOPMENT_NOTES.md`
    - Architecture rationale and implementation decisions.
-5. `CHANGES.md`
+6. `CHANGES.md`
    - Technical change history, validation records, and migration slices.
-6. `MEMORY.md`
+7. `MEMORY.md`
    - Interruption-safe continuation context and recent execution state.
-7. `COMMIT.md`
+8. `COMMIT.md`
    - Commit workflow and commit hygiene conventions.
 
 ## Project File/Path Map
@@ -54,6 +57,7 @@ Top-level project docs:
 - `README.md`
 - `ROADMAP.md`
 - `USER_GUIDE.md`
+- `ARCHITECTURE_STATE.md`
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
@@ -67,6 +71,7 @@ Top-level project docs:
 - `README.md` must remain the single project entry point.
 - Update `README.md` whenever project objective, onboarding flow, key doc links, or key path layout changes.
 - `README.md` does **not** need to be updated on every commit—only when such updates are needed.
+- Keep `ARCHITECTURE_STATE.md` in the doc map when it remains the live architecture snapshot for future sessions.
 
 ## Git Version-Control Status
 - `README.md` is intended to remain git-tracked at all times.

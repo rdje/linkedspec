@@ -220,6 +220,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Expand `USER_GUIDE.md` with practical patterns and anti-patterns, and maintain module-focused lowering references plus cross-cutting cookbook guides when the user-facing surface becomes too large for one file.
 - Keep major high-frequency families, such as scalar and aggregate method composition, documented with one teaching-oriented guide that shows many worked examples rather than scattering the full story across only module-owner references.
 - Maintain architecture rationale in `DEVELOPMENT_NOTES.md`.
+- Maintain a live architecture snapshot in `ARCHITECTURE_STATE.md` and refresh it when a new session or a new deep code pass changes the best current reading of the project shape.
 - Keep live state in `MEMORY.md`.
 - Documentation quality contract:
   - optimize for readability, non-ambiguity, and clear explanations,

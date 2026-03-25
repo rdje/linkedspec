@@ -34,7 +34,8 @@ This file exists to make the active plan easier to follow without replacing the 
   - use representative examples when they help,
   - add thorough worked examples for every newly landed user-facing surface,
   - treat documented examples as part of the end-user contract we should not casually weaken,
-  - do not intentionally obfuscate behavior or tradeoffs.
+  - do not intentionally obfuscate behavior or tradeoffs,
+  - maintain `ARCHITECTURE_STATE.md` as the live architecture snapshot and refresh it when a new deep reading changes the best current model of the project.
 
 ## Lifecycle-Wide Structured DSL Contract
 Semicolon-light structured authoring is intended to apply across the full lifecycle family:
