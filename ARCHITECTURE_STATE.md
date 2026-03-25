@@ -23,7 +23,7 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Executive Summary
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
-- `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading and delegated owner calls.
+- `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
 - The frontend syntax/bootstrapping truth still concentrates in:
@@ -74,6 +74,8 @@ The facade surface currently falls into three groups.
 - `AUTOLOAD`
 
 The important conclusion is that `LinkedSpec.pm` should be read as a facade and routing layer, not as the place where most semantics live anymore.
+
+One supporting detail matters now: the repeated thin-wrapper plumbing for lazy package loading, callback/value lookup, delegated owner calls, and `$@` preservation is no longer reimplemented separately in each owner. `LinkedSpec.pm`, `Runtime.pm`, `ParserFactory.pm`, and `ActionRewriter.pm` now share that seam through `LinkedSpec::OwnerDispatch`.
 
 ## Current Owner Tree
 The current practical owner tree is:

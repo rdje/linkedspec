@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into ParserFactory
+
+Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the parser-factory path:
+- extended `perl/LinkedSpec/OwnerDispatch.pm` with shared callback/value lookup helpers,
+- updated `perl/LinkedSpec/ParserFactory.pm` to route its repeated package loading, callback/value lookup, runtime-context dispatch, and `$@` preservation through that shared helper,
+- and broadened the source-level architecture lock in `t/phase0_regression.t` so `ParserFactory.pm` is now part of the explicitly tracked shared owner-dispatch seam.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/OwnerDispatch.pm`
+- `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Phase 1A: Centralize Shared Owner-Dispatch Plumbing
 
 Reduced one remaining compile-path / compatibility seam by introducing a shared internal owner-dispatch helper:

@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ParserFactory
+# Purpose: Public parser-factory owner that validates spec names, resolves
+#          `.spec` files, loads source content, and delegates compilation.
+#------------------------------------------------------------------------------
 package LinkedSpec::ParserFactory;
 
 use 5.010;
@@ -7,6 +12,14 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Validate and return one injected dependency callback by name.
+# Args    : ($deps, $name)
+# Returns : coderef dependency callback
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -15,56 +28,57 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute callback without clobbering caller-visible successful `$@`.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one owner package through the shared dispatch helper.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  my $file = $pkg;
-  $file =~ s{::}{/}go;
-  $file .= '.pm';
-  my $ok = eval { require $file; 1 };
-  die "(LinkedSpec::ParserFactory::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
-  return 1
- })
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Resolve one named callback from a lazily loaded owner package.
+# Args    : ($pkg, $name)
+# Returns : coderef for the requested callback
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  my $code = $pkg->can($name);
-  die "(LinkedSpec::ParserFactory::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-   unless ref($code) eq 'CODE';
-  return $code
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_value
+# Purpose : Resolve one named callback from a lazily loaded owner package and
+#           invoke it to obtain a dependency value.
+# Args    : ($pkg, $name)
+# Returns : callback return value
+#------------------------------------------------------------------------------
 sub _require_pkg_value {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  my $cb = _require_pkg_cb($pkg, $name);
-  return $cb->()
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_value(__PACKAGE__, $pkg, $name)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_value_dep
+# Purpose : Validate and return one injected dependency value by name.
+# Args    : ($deps, $name)
+# Returns : dependency value
+#------------------------------------------------------------------------------
 sub _require_value_dep {
  my ($deps, $name) = @_;
  die "(LinkedSpec::ParserFactory::_require_value_dep) -E- missing dependency value '$name'"
@@ -72,6 +86,13 @@ sub _require_value_dep {
  return $deps->{$name}
 }
 
+#------------------------------------------------------------------------------
+# Function: _default_deps
+# Purpose : Build the default parser-factory dependency map for trace, resolve,
+#           load, and compile ownership.
+# Args    : ()
+# Returns : hashref default dependency map
+#------------------------------------------------------------------------------
 sub _default_deps {
  return {
   apply_trace_options => _require_pkg_cb('LinkedSpec::Trace', '_apply_trace_options'),
@@ -87,6 +108,12 @@ sub _default_deps {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _prepare_runtime_ctx_for_get_parser
+# Purpose : Prepare the runtime context for `get_parser(...)` orchestration.
+# Args    : ($option_hashref, %args)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _prepare_runtime_ctx_for_get_parser {
  my ($option, %args) = @_;
  return _call_runtime_ctx('prepare_runtime_ctx_for_get_parser',
@@ -96,25 +123,47 @@ sub _prepare_runtime_ctx_for_get_parser {
  )
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_runtime_ctx
+# Purpose : Lazy-load and invoke one `RuntimeContext` helper through the shared
+#           owner-dispatch seam.
+# Args    : ($subname, @args)
+# Returns : delegated helper return value
+#------------------------------------------------------------------------------
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
-  no strict 'refs';
-  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
+#------------------------------------------------------------------------------
+# Function: _set_runtime_ctx_last_error
+# Purpose : Write one structured parser-factory error into the active context.
+# Args    : ($runtime_ctx, %args)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'parser_factory', %args)
 }
 
+#------------------------------------------------------------------------------
+# Function: _set_runtime_ctx_last_error_unless_present
+# Purpose : Preserve an existing structured parser-factory error while writing
+#           one fallback error payload only when none exists yet.
+# Args    : ($runtime_ctx, %args)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'parser_factory', %args)
 }
 
+#------------------------------------------------------------------------------
+# Function: _set_runtime_ctx_spec_path
+# Purpose : Record the resolved spec path in the active runtime context.
+# Args    : ($runtime_ctx, $spec_path)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _set_runtime_ctx_spec_path {
  my ($runtime_ctx, $spec_path) = @_;
  return _call_runtime_ctx('set_runtime_ctx_spec_path', $runtime_ctx, $spec_path)

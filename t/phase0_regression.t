@@ -1127,25 +1127,32 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_facade_runtime_and_action_rewriter_wrapper_plumbing' => sub {
-    plan tests => 14;
+    plan tests => 20;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
     my $runtime_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Runtime.pm'));
+    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));
     my $action_rewriter_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionRewriter.pm'));
 
     ok(defined($owner_dispatch_pm) && length($owner_dispatch_pm), 'OwnerDispatch source is available for architecture inspection');
     ok(defined($linkedspec_pm) && length($linkedspec_pm), 'LinkedSpec.pm source is available for architecture inspection');
     ok(defined($runtime_pm) && length($runtime_pm), 'Runtime.pm source is available for architecture inspection');
+    ok(defined($parser_factory_pm) && length($parser_factory_pm), 'ParserFactory.pm source is available for architecture inspection');
     ok(defined($action_rewriter_pm) && length($action_rewriter_pm), 'ActionRewriter.pm source is available for architecture inspection');
     like($owner_dispatch_pm, qr/package LinkedSpec::OwnerDispatch;/, 'OwnerDispatch declares the shared owner-dispatch package');
     like($owner_dispatch_pm, qr/sub call_preserving_err\b/, 'OwnerDispatch defines the shared $@ preservation helper');
     like($owner_dispatch_pm, qr/sub require_pkg\b/, 'OwnerDispatch defines the shared lazy package loader');
+    like($owner_dispatch_pm, qr/sub require_pkg_cb\b/, 'OwnerDispatch defines the shared callback loader');
+    like($owner_dispatch_pm, qr/sub require_pkg_value\b/, 'OwnerDispatch defines the shared callback-value loader');
     like($owner_dispatch_pm, qr/sub dispatch_owner_call\b/, 'OwnerDispatch defines the shared delegated owner-call helper');
     like($linkedspec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'LinkedSpec.pm now loads the shared owner-dispatch helper');
     like($linkedspec_pm, qr/sub _dispatch_owner_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, \$pkg, \$subname, \@args\)/s, 'LinkedSpec.pm now routes facade owner dispatch through OwnerDispatch');
     like($runtime_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Runtime.pm now loads the shared owner-dispatch helper');
     like($runtime_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Runtime.pm now routes lazy package loading through OwnerDispatch');
+    like($parser_factory_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ParserFactory.pm now loads the shared owner-dispatch helper');
+    like($parser_factory_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'ParserFactory.pm now routes callback lookup through OwnerDispatch');
+    like($parser_factory_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'ParserFactory.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($action_rewriter_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ActionRewriter.pm now loads the shared owner-dispatch helper');
     like($action_rewriter_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'ActionRewriter.pm now routes $@ preservation through OwnerDispatch');
 };
