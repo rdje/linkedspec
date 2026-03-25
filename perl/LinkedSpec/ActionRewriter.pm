@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionRewriter
+# Purpose: Backward-compatible compatibility wrapper that forwards legacy
+#          ActionRewriter helper entrypoints into `RuleIR::EmitContext`.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionRewriter;
 
 use 5.010;
@@ -7,37 +12,48 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one owner package through the shared dispatch utility.
+# Args    : ($pkg)
+# Returns : target package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_emit_context_pkg
+# Purpose : Lazy-load the extracted rewrite/emit-context owner.
+# Args    : ()
+# Returns : package name `LinkedSpec::RuleIR::EmitContext`
+#------------------------------------------------------------------------------
 sub _require_emit_context_pkg {
  return _require_pkg('LinkedSpec::RuleIR::EmitContext')
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute callback without clobbering caller-visible successful `$@`.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _delegate_emit_context_call
+# Purpose : Forward one historical ActionRewriter helper entrypoint into the
+#           extracted `RuleIR::EmitContext` owner.
+# Args    : ($method, @args)
+# Returns : delegated helper return value
+#------------------------------------------------------------------------------
 sub _delegate_emit_context_call {
  my ($method, @args) = @_;
  return _call_preserving_err(sub {
@@ -118,6 +134,13 @@ my @EMIT_CONTEXT_FORWARDERS = qw(
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: call_spec_handler_subst
+# Purpose : Backward-compatible helper-rewrite entrypoint retained for direct
+#           legacy ActionRewriter callers.
+# Args    : ($label, $code)
+# Returns : rewritten code string
+#------------------------------------------------------------------------------
 sub call_spec_handler_subst {
  my @args = @_;
  return _delegate_emit_context_call('rewrite_action_code_for_compat', @args)

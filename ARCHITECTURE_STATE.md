@@ -23,6 +23,7 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Executive Summary
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
+- `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading and delegated owner calls.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
 - The frontend syntax/bootstrapping truth still concentrates in:
@@ -42,7 +43,7 @@ This document is the current high-level technical reading of the project shape. 
 
 - expose the public API,
 - lazily load owner modules,
-- preserve `$@` across owner dispatch,
+- preserve `$@` across owner dispatch through `LinkedSpec::OwnerDispatch`,
 - normalize flat option pairs,
 - re-export trace-oriented globals from `LinkedSpec::Trace`.
 
@@ -79,6 +80,7 @@ The current practical owner tree is:
 
 ```text
 LinkedSpec
+├─ LinkedSpec::OwnerDispatch
 ├─ LinkedSpec::Trace
 ├─ LinkedSpec::Runtime
 │  ├─ LinkedSpec::RuntimeContext

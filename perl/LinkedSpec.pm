@@ -17,6 +17,7 @@ BEGIN {
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
  unshift @INC, $module_dir unless grep { defined($_) && $_ eq $module_dir } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
 # UVM-style verbosity levels
 use constant {
@@ -129,12 +130,7 @@ sub should_dump {
 #------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
 #------------------------------------------------------------------------------
@@ -145,21 +141,7 @@ sub _require_pkg {
 #------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 #------------------------------------------------------------------------------
@@ -171,11 +153,7 @@ sub _call_preserving_err {
 #------------------------------------------------------------------------------
 sub _dispatch_owner_call {
  my ($pkg, $subname, @args) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($subname);
-  no strict 'refs';
-  return &{"${pkg}::${subname}"}(@args);
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, $pkg, $subname, @args)
 }
 
 #------------------------------------------------------------------------------

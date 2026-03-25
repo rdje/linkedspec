@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Phase 1A: Centralize Shared Owner-Dispatch Plumbing
+
+Reduced one remaining compile-path / compatibility seam by introducing a shared internal owner-dispatch helper:
+- added `perl/LinkedSpec/OwnerDispatch.pm` as the common home for lazy package loading, delegated owner calls, and `$@` preservation,
+- updated `perl/LinkedSpec.pm` to route its thin façade dispatch through that shared helper,
+- updated `perl/LinkedSpec/Runtime.pm` to route its remaining lazy package loading and `$@` preservation through the same helper,
+- updated `perl/LinkedSpec/ActionRewriter.pm` to route its compatibility wrapper plumbing through that same helper too,
+- and locked the new architecture seam in `t/phase0_regression.t` with a focused source-level regression.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/OwnerDispatch.pm`
+- `perl -Iperl -c perl/LinkedSpec.pm`
+- `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Docs: Tighten Commit Workflow Continuity Rules
 
 Clarified the standing commit workflow so future slices do not drift:

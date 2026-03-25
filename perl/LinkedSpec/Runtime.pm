@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::Runtime
+# Purpose: Public `Get(...)` runtime owner that prepares runtime context state
+#          and delegates the real compile pipeline into `Compiler.pm`.
+#------------------------------------------------------------------------------
 package LinkedSpec::Runtime;
 
 use 5.010;
@@ -7,36 +12,36 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one owner package through the shared dispatch utility.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::Runtime::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute callback without clobbering caller-visible successful `$@`.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _build_runtime_context
+# Purpose : Prepare the runtime-owned mutable context used by `run_get(...)`.
+# Args    : ($option_hashref)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _build_runtime_context {
  my ($option) = @_;
  return _call_runtime_ctx('prepare_runtime_ctx_for_run_get_option',
@@ -45,6 +50,13 @@ sub _build_runtime_context {
  )
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_runtime_ctx
+# Purpose : Lazy-load and invoke one `RuntimeContext` helper through the local
+#           runtime-owner compatibility seam.
+# Args    : ($subname, @args)
+# Returns : delegated helper return value
+#------------------------------------------------------------------------------
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
  return _call_preserving_err(sub {
@@ -54,11 +66,24 @@ sub _call_runtime_ctx {
  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _set_runtime_ctx_last_error
+# Purpose : Write one structured runtime-owner error into the active context.
+# Args    : ($runtime_ctx, %args)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_owner', %args)
 }
 
+#------------------------------------------------------------------------------
+# Function: _set_runtime_ctx_last_error_unless_present
+# Purpose : Preserve an existing structured runtime-owner error while providing
+#           a fallback error payload when none has been recorded yet.
+# Args    : ($runtime_ctx, %args)
+# Returns : runtime_ctx hashref
+#------------------------------------------------------------------------------
 sub _set_runtime_ctx_last_error_unless_present {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'runtime_owner', %args)
