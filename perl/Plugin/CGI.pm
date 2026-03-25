@@ -16,20 +16,20 @@ BEGIN {
 #------------------------------------------------------------------------------
 # Function: file_list_path2http
 # Purpose : Convert path-like tokens in one string into HTML links using the
-#           existing `httplink` plugin contract for URL generation.
+#           package-backed HTTP owner for URL generation.
 # Args    : ($text)
 # Returns : linked HTML text
 #------------------------------------------------------------------------------
 sub file_list_path2http {
  require Global;
- require LinkedSpec;
+ require Plugin::HTTP;
  require Plugin::String;
 
  return join "", map {
   !/#/o ? join("", map {
    m/\//o ? do {
     my $subst = Plugin::String::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
-    my $http = LinkedSpec::run_plugin('httplink', $subst);
+    my $http = Plugin::HTTP::httplink($subst);
     qq{<A HREF="$http">$_</A>};
    } : $_
   } split /(\S*\/\S+)/o, $_) : $_

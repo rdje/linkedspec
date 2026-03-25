@@ -3258,7 +3258,7 @@ subtest 'pplugin_default_parser_dep_lazy_loads_linkedspec' => sub {
     like($out, qr/__LINKEDSPEC_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads LinkedSpec only on callback execution');
     is($err, '', 'PPlugin default parser-dep subprocess does not emit stderr');
 };
-subtest 'tablescript_http_exec_uses_run_plugin_explicit_api' => sub {
+subtest 'tablescript_http_exec_uses_plugin_http_directly' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -3266,16 +3266,13 @@ BEGIN {
     package Global;
     sub search_path { return [] }
 }
-require PPlugin;
 require TableScript;
 no warnings 'redefine';
 local *TableScript::node_exec = sub { return $_[1] };
-local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
-local *PPlugin::exec_plugin_name = sub { die "__UNEXPECTED_PPLUGIN_EXEC_PLUGIN_NAME__\n" };
-local *LinkedSpec::run_plugin = sub {
-    my ($plugin_name, @args) = @_;
-    print "__PLUGIN_NAME__=$plugin_name\n";
-    print "__ARGS__=" . join(',', @args) . "\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+local *Plugin::HTTP::httplink = sub {
+    my ($path) = @_;
+    print "__PATH__=$path\n";
     return 'http://example.test/file';
 };
 my $ret = TableScript::http_exec({}, ['report.txt', 'Report']);
@@ -3283,10 +3280,10 @@ print "__RET__=$ret\n";
 PERL
 
     is($exit_code, 0, 'TableScript http_exec subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_PPLUGIN/, 'TableScript http_exec avoids the legacy PPlugin dispatch paths');
-    like($out, qr/__PLUGIN_NAME__=httplink/, 'TableScript http_exec dispatches through LinkedSpec::run_plugin');
-    like($out, qr/__ARGS__=report\.txt/, 'TableScript http_exec forwards the resolved filename into run_plugin');
-    like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the run_plugin return payload');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'TableScript http_exec keeps the legacy PPlugin runtime unloaded');
+    like($out, qr/__PATH__=report\.txt/, 'TableScript http_exec forwards the resolved filename into Plugin::HTTP::httplink');
+    like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the Plugin::HTTP return payload');
+    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'TableScript http_exec resolves the package-backed HTTP owner');
 };
 subtest 'hutils_generic_filter_uses_run_plugin_explicit_api' => sub {
     plan tests => 5;
@@ -3612,7 +3609,7 @@ subtest 'cgi_plugin_logic_moves_into_package_owner' => sub {
     like($cgi_plugin_pm, qr/package Plugin::CGI;/, 'package-backed cgi plugin owner declares the expected package');
     like($cgi_plugin_pm, qr/sub file_list_path2http\b/, 'package-backed cgi plugin owner defines file_list_path2http');
     like($cgi_plugin_pm, qr/Plugin::String::var_subst\(/, 'package-backed cgi plugin owner reuses the extracted string package owner');
-    like($cgi_plugin_pm, qr/LinkedSpec::run_plugin\('httplink', \$subst\)/, 'package-backed cgi plugin owner uses explicit plugin dispatch for httplink');
+    like($cgi_plugin_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'package-backed cgi plugin owner uses the package-backed HTTP owner for httplink');
     like($cgi_plugin_plg, qr/use Plugin::CGI;/, 'cgi.plg now loads the package-backed cgi plugin owner');
     like($cgi_plugin_plg, qr/Plugin::CGI::file_list_path2http\(\@_\);/, 'cgi.plg now delegates file_list_path2http to the package-backed owner');
     unlike($cgi_plugin_plg, qr/httplink \(\$subst\)/, 'cgi.plg no longer carries the inline httplink call implementation');
@@ -3623,14 +3620,13 @@ subtest 'cgi_package_owner_avoids_pplugin_and_preserves_link_wrapping_contract' 
     plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require LinkedSpec;
 require Plugin::CGI;
+require Plugin::HTTP;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
  no warnings 'redefine';
- local *LinkedSpec::run_plugin = sub {
-  my ($plugin_name, $arg) = @_;
-  print "__PLUGIN_NAME__=$plugin_name\n";
+ local *Plugin::HTTP::httplink = sub {
+  my ($arg) = @_;
   print "__PLUGIN_ARG__=$arg\n";
   return "http://example$arg";
  };
@@ -3641,14 +3637,60 @@ PERL
 
     is($exit_code, 0, 'cgi package-owner subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the cgi package owner keeps PPlugin unloaded');
-    like($out, qr/__PLUGIN_NAME__=httplink/, 'cgi package owner still resolves URLs through the httplink plugin contract');
-    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'cgi package owner passes the substituted path into the httplink plugin contract');
+    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'cgi package owner passes the substituted path into Plugin::HTTP::httplink');
     like($out, qr/__RET__=<A HREF="http:\/\/example\/tmp\/demo\.txt">\/tmp\/demo\.txt<\/A>/, 'cgi package owner preserves the historical link-wrapping behavior');
     unlike($err, qr/PPlugin/, 'cgi package-owner subprocess does not emit legacy PPlugin stderr');
     unlike($err, qr/Can't locate Plugin\/CGI\.pm/, 'cgi package-owner subprocess resolves the new package file');
+    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
 };
-subtest 'package_extracted_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 8;
+subtest 'http_plugin_logic_moves_httplink_into_package_owner' => sub {
+    plan tests => 9;
+
+    my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
+    my $http_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
+
+    ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
+    ok(defined($http_plugin_plg) && length($http_plugin_plg), 'http.plg compatibility wrapper source is available');
+    like($http_plugin_pm, qr/package Plugin::HTTP;/, 'package-backed http plugin owner declares the expected package');
+    like($http_plugin_pm, qr/sub httplink\b/, 'package-backed http plugin owner defines httplink');
+    like($http_plugin_plg, qr/use Plugin::HTTP;/, 'http.plg now loads the package-backed HTTP owner');
+    like($http_plugin_plg, qr/Plugin::HTTP::httplink\(\@_\);/, 'http.plg now delegates httplink to the package-backed owner');
+    unlike($http_plugin_plg, qr/Digest::MD5::md5_hex/, 'http.plg no longer carries the inline signed URL implementation');
+    unlike($http_plugin_plg, qr/File::Spec->rel2abs/, 'http.plg no longer carries the inline absolute-path conversion logic');
+    unlike($http_plugin_plg, qr/http:\/\/".Global->http_hostport/, 'http.plg no longer owns the inline final URL concatenation logic');
+};
+subtest 'http_package_owner_avoids_pplugin_and_preserves_httplink_contract' => sub {
+    plan tests => 5;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    package Global;
+    my %STORE = (
+        cgi => { sepc => 'salt' },
+        md5_encode => 'pepper',
+        http_hostport => 'example.test:8080',
+    );
+    sub set {
+        my ($class, $slot, $key) = @_;
+        return defined($key) ? $STORE{$slot}{$key} : $STORE{$slot};
+    }
+    sub md5_encode { return $STORE{md5_encode} }
+    sub http_hostport { return $STORE{http_hostport} }
+}
+require Plugin::HTTP;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $ret = Plugin::HTTP::httplink('demo.txt');
+print "__RET__=$ret\n";
+PERL
+
+    is($exit_code, 0, 'http package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the http package owner keeps PPlugin unloaded');
+    like($out, qr/__RET__=http:\/\/example\.test:8080\/cgi-bin\/getfile\.cgi\?file=.*demo\.txt&id=[0-9a-f]{32}/, 'http package owner preserves the signed httplink URL contract');
+    unlike($err, qr/PPlugin/, 'http package-owner subprocess does not emit legacy PPlugin stderr');
+    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'http package-owner subprocess resolves the new package file');
+};
+subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
+    plan tests => 12;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
@@ -3665,6 +3707,13 @@ subtest 'package_extracted_string_related_plugins_still_parse_under_pplugin' => 
     ok(!$@, 'cgi plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
     ok(defined($cgi_ast) && ref($cgi_ast) eq 'HASH', 'cgi plugin still returns a hash AST under pplugin');
     is(ref($cgi_ast->{file_list_path2http}), 'CODE', 'cgi plugin still exposes file_list_path2http as a coderef');
+
+    my $http_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
+    my $http_ast = eval { $parser->(\$http_input) };
+    ok(!$@, 'http plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
+    ok(defined($http_ast) && ref($http_ast) eq 'HASH', 'http plugin still returns a hash AST under pplugin');
+    is(ref($http_ast->{http}), 'CODE', 'http plugin still exposes http as a coderef');
+    is(ref($http_ast->{httplink}), 'CODE', 'http plugin still exposes httplink as a coderef');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;

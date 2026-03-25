@@ -4,12 +4,17 @@
 # This Perl module is free software, you may redistribute it and/or 
 # modify it under the same terms as Perl itself.
 #===================================================================
+#------------------------------------------------------------------------------
+# Package: TableScript
+# Purpose: Execute table-script command trees over row-oriented data and
+#          provide the built-in command helpers used by `.ts` scripts.
+#------------------------------------------------------------------------------
 package TableScript;
 
 use File::Glob ':glob';
 
 use HUtils;
-use LinkedSpec;
+use Plugin::HTTP;
 
 my @script_list = bsd_glob(q({).join(',', map {"$_/*.ts"} @{Global->search_path}).q(}), GLOB_BRACE | GLOB_TILDE);
 
@@ -377,12 +382,19 @@ sub sprintf_exec {my ($conf, $args) = @_; sprintf node_exec ($conf, $args->[0]),
 sub print_exec   {my ($conf, $args) = @_; print node_exec $conf, $args->[0]; $conf->{_script}{last_output}}
 sub exit_exec    {my ($conf, $args) = @_; exit}
 
+#------------------------------------------------------------------------------
+# Function: http_exec
+# Purpose : Build the historical `httplink` URL for one filename and append
+#           the existing label suffix used by table-script HTTP output.
+# Args    : ($conf, $args)
+# Returns : "<url>@<label>"
+#------------------------------------------------------------------------------
 sub http_exec    {
 my ($conf, $args) = @_;
 
  my ($filename, $label) = map {node_exec $conf, $_} @$args[0,1];
 
- LinkedSpec::run_plugin('httplink', $filename).'@'.$label
+ Plugin::HTTP::httplink($filename).'@'.$label
 }
 
 sub get_index {

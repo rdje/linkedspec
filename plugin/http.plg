@@ -17,14 +17,6 @@ http {
 }
 
 httplink {
-my ($path) = @_;
-
-  my $file_desc = "file=".File::Spec->rel2abs($path);
-  # Think TCL
-  #
-  # 'set VARNAME' w/o a value just returns the current value of VARNAME if any
-  #
-  my $id        = "id=".Digest::MD5::md5_hex($file_desc, Global->set ('cgi', 'sepc'), Global->md5_encode);
-
-  "http://".Global->http_hostport."/cgi-bin/getfile.cgi?$file_desc&$id";
+ use Plugin::HTTP;
+ Plugin::HTTP::httplink(@_);
 }
