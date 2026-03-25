@@ -30,7 +30,13 @@ This document defines the standard commit workflow for this repository so any ne
 - **Lifecycle:** update whenever meaningful technical understanding or workflow-relevant implementation details are added.
 - **Important:** this file is cumulative and not reset.
 
-### 4) Source/test/docs changed by the task
+### 4) `MEMORY.md`
+- **Type:** persistent, git-tracked continuity log.
+- **Purpose:** preserve interruption-safe continuation context after session loss, crash, or handoff.
+- **Lifecycle:** update for each accepted implementation slice so the latest execution state and decisions are recoverable.
+- **Important:** this file is cumulative and not reset.
+
+### 5) Source/test/docs changed by the task
 - Examples: `perl/LinkedSpec.pm`, `t/phase0_regression.t`, `USER_GUIDE.md`, etc.
 - Stage only files that belong to the completed task slice.
 
@@ -56,14 +62,14 @@ This document defines the standard commit workflow for this repository so any ne
    - Add concise but precise entries to:
      - `CHANGES.md`
      - `DEVELOPMENT_NOTES.md`
+     - `MEMORY.md`
    - Include validation commands/results.
 
 3. **Prepare commit message**
    - Populate `git_message_brief.txt` with:
      - Short subject line.
      - Focused body (what changed).
-     - Attribution line:
-       - `Co-Authored-By: Oz <oz-agent@warp.dev>`
+   - Do **not** add an automatic `Co-Authored-By` line unless it is explicitly requested for the current contribution.
 
 4. **Stage intended files only**
    - Stage source/test/docs for the slice.
@@ -80,5 +86,5 @@ This document defines the standard commit workflow for this repository so any ne
 ## Guardrails
 - Do not bundle unrelated changes in the same commit.
 - Keep commit messages specific and technically descriptive.
-- Keep `CHANGES.md` and `DEVELOPMENT_NOTES.md` synchronized with the actual committed slice.
+- Keep `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` synchronized with the actual committed slice.
 - If `git_message_brief.txt` is accidentally committed, remove it from index and amend.

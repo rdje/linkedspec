@@ -1,5 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Docs: Tighten Commit Workflow Continuity Rules
+
+Clarified the standing commit workflow so future slices do not drift:
+- removed the stale automatic `Co-Authored-By: Oz <oz-agent@warp.dev>` requirement from `COMMIT.md`,
+- made `MEMORY.md` an explicit required update alongside `CHANGES.md` and `DEVELOPMENT_NOTES.md`,
+- and recorded that `MEMORY.md` is mandatory because it is the interruption-safe continuity log used after crashes or session loss.
+
+Validation for this doc-only slice is the formatting sanity pass on the touched workflow documents.
+
 ## 2026-03-25 - Plugin Track: Move Extracted Packages Out Of `LinkedSpec::*`
 
 Corrected the package ownership of the first extracted plugin bodies so they no longer live under `LinkedSpec/Plugin/`:
