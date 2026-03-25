@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into BootstrapSpec
+
+Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the hardcoded bootstrap owner:
+- updated `perl/LinkedSpec/BootstrapSpec.pm` to route its shared package loading and eval-error preservation through `LinkedSpec::OwnerDispatch`,
+- widened the source-level architecture lock in `t/phase0_regression.t` so `BootstrapSpec.pm` is now explicitly tracked as part of the shared compile-path owner-dispatch seam,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match the new coverage of that helper.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/BootstrapSpec.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into ParserFactory
 
 Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the parser-factory path:
