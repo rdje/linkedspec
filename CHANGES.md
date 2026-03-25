@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into Resolver and Validation
+
+Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the parser/frontend trace-wrapper seam:
+- updated `perl/LinkedSpec/Resolver.pm` to route shared Trace loading and eval-error preservation through `LinkedSpec::OwnerDispatch`,
+- updated `perl/LinkedSpec/Validation.pm` to do the same for its trace-wrapper boundary,
+- widened the source-level architecture lock in `t/phase0_regression.t` so both modules are now explicitly tracked as part of the shared active compile-path owner-dispatch seam,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+- `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into BootstrapSpec
 
 Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the hardcoded bootstrap owner:
