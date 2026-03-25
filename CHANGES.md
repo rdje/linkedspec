@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into Compiler
+
+Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the compile-pipeline owner:
+- updated `perl/LinkedSpec/Compiler.pm` to route shared package loading and eval-error preservation through `LinkedSpec::OwnerDispatch`,
+- widened the source-level architecture lock in `t/phase0_regression.t` so `Compiler.pm` is now explicitly tracked as part of the shared active compile-path owner-dispatch seam,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Phase 1A: Extend Shared Owner Dispatch into Resolver and Validation
 
 Continued the same Phase 1A / Backbone Item 3 owner-dispatch cleanup into the parser/frontend trace-wrapper seam:

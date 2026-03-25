@@ -1127,13 +1127,14 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 32;
+    plan tests => 36;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
     my $runtime_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Runtime.pm'));
     my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));
     my $bootstrap_spec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec.pm'));
+    my $compiler_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Compiler.pm'));
     my $resolver_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Resolver.pm'));
     my $validation_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Validation.pm'));
     my $action_rewriter_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionRewriter.pm'));
@@ -1143,6 +1144,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     ok(defined($runtime_pm) && length($runtime_pm), 'Runtime.pm source is available for architecture inspection');
     ok(defined($parser_factory_pm) && length($parser_factory_pm), 'ParserFactory.pm source is available for architecture inspection');
     ok(defined($bootstrap_spec_pm) && length($bootstrap_spec_pm), 'BootstrapSpec.pm source is available for architecture inspection');
+    ok(defined($compiler_pm) && length($compiler_pm), 'Compiler.pm source is available for architecture inspection');
     ok(defined($resolver_pm) && length($resolver_pm), 'Resolver.pm source is available for architecture inspection');
     ok(defined($validation_pm) && length($validation_pm), 'Validation.pm source is available for architecture inspection');
     ok(defined($action_rewriter_pm) && length($action_rewriter_pm), 'ActionRewriter.pm source is available for architecture inspection');
@@ -1162,6 +1164,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($bootstrap_spec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'BootstrapSpec.pm now loads the shared owner-dispatch helper');
     like($bootstrap_spec_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'BootstrapSpec.pm now routes lazy package loading through OwnerDispatch');
     like($bootstrap_spec_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'BootstrapSpec.pm now routes $@ preservation through OwnerDispatch');
+    like($compiler_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Compiler.pm now loads the shared owner-dispatch helper');
+    like($compiler_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Compiler.pm now routes lazy package loading through OwnerDispatch');
+    like($compiler_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Compiler.pm now routes $@ preservation through OwnerDispatch');
     like($resolver_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Resolver.pm now loads the shared owner-dispatch helper');
     like($resolver_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Resolver.pm now routes Trace loading through OwnerDispatch');
     like($resolver_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Resolver.pm now routes $@ preservation through OwnerDispatch');

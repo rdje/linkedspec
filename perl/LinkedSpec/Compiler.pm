@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::Compiler
+# Purpose: Compile-pipeline owner for validation, bootstrap parsing, descriptor
+#          assembly, and generated parser source orchestration.
+#------------------------------------------------------------------------------
 package LinkedSpec::Compiler;
 
 use 5.010;
@@ -8,6 +13,8 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
 use constant {
  DUMP_NONE   => 0,
  DUMP_LOW    => 100,
@@ -16,6 +23,12 @@ use constant {
  DUMP_DEBUG  => 500,
 };
 
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Fetch one named dependency from the compile-pipeline dependency map.
+# Args    : ($deps, $name)
+# Returns : dependency value
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $value = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -24,14 +37,16 @@ sub _require_dep {
  return $value
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one compile-pipeline owner package through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::Compiler::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
 sub _require_trace_pkg {
@@ -49,23 +64,16 @@ sub _require_linkedre_pkg {
  return 1
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one compile
+#           helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _dump_value {
