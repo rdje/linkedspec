@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Extend Shared Owner Dispatch into Trace
+
+Continued the same owner-dispatch cleanup into another active runtime/diagnostic owner:
+- updated `perl/LinkedSpec/Trace.pm` to route shared `Data::Dumper` loading and eval-error preservation through `LinkedSpec::OwnerDispatch`,
+- added package/routine Perl-style doc blocks on the touched trace owner so the owner contract is clearer in-file,
+- widened the source-level architecture lock in `t/phase0_regression.t` so `Trace.pm` is now explicitly tracked as part of the shared owner-dispatch seam,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/Trace.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Extend Shared Owner Dispatch into BootstrapSpec::Core
 
 Continued the same owner-dispatch cleanup into another active parser-core owner:

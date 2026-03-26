@@ -1,6 +1,13 @@
 package LinkedSpec::Trace;
 
 use 5.010;
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::Trace
+# Purpose : Shared trace/dump owner for runtime diagnostics, formatted logging,
+#           and on-demand reference stringification.
+#------------------------------------------------------------------------------
 
 # UVM-style verbosity levels
 use constant {
@@ -21,28 +28,27 @@ our $TRACE_INDENT_WIDTH = 2;
 our $TRACE_TOPIC_SPACING = 1;
 our $TRACE_INITIALIZED = 0;
 
+#------------------------------------------------------------------------------
+# Function: _require_data_dumper_pkg
+# Purpose : Lazy-load `Data::Dumper` through the shared owner-dispatch helper
+#           before structured trace stringification.
+# Args    : none
+# Returns : true on success
+#------------------------------------------------------------------------------
 sub _require_data_dumper_pkg {
- require Data::Dumper;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper')
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute a callback while preserving caller `$@` through successful
+#           completion.
+# Args    : ($cb)
+# Returns : callback result in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _trace_trim {
