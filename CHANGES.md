@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Route Rule Dump Loaders Through Owner Dispatch
+
+Continued the same owner-dispatch cleanup on the active rule-compilation path:
+- updated `perl/LinkedSpec/SpecEntry.pm` and `perl/LinkedSpec/RuleIR.pm` so their `Data::Dumper` loaders now route through the existing shared package-loading seam instead of hand-running bare `require Data::Dumper`,
+- widened the source-level architecture lock in `t/phase0_regression.t` so both rule-compilation owners stay pinned to that shared package-loading shape,
+- and refreshed the continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+- `perl -Iperl -c perl/LinkedSpec/RuleIR.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Extend Shared Owner Dispatch into Trace
 
 Continued the same owner-dispatch cleanup into another active runtime/diagnostic owner:

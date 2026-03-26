@@ -75,7 +75,7 @@ sub _require_trace_pkg {
 }
 
 sub _require_data_dumper_pkg {
- require Data::Dumper;
+ _require_pkg('Data::Dumper');
  return 1
 }
 

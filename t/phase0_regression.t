@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 123;
+    plan tests => 125;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1214,9 +1214,11 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($compiler_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Compiler.pm now routes $@ preservation through OwnerDispatch');
     like($spec_entry_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'SpecEntry.pm now loads the shared owner-dispatch helper');
     like($spec_entry_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'SpecEntry.pm now routes lazy package loading through OwnerDispatch');
+    like($spec_entry_pm, qr/sub _require_data_dumper_pkg\b.*_require_pkg\('Data::Dumper'\)/s, 'SpecEntry.pm now routes Data::Dumper loading through its shared owner-dispatch package seam');
     like($spec_entry_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'SpecEntry.pm now routes $@ preservation through OwnerDispatch');
     like($rule_ir_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RuleIR.pm now loads the shared owner-dispatch helper');
     like($rule_ir_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'RuleIR.pm now routes lazy package loading through OwnerDispatch');
+    like($rule_ir_pm, qr/sub _require_data_dumper_pkg\b.*_require_pkg\('Data::Dumper'\)/s, 'RuleIR.pm now routes Data::Dumper loading through its shared owner-dispatch package seam');
     like($rule_ir_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'RuleIR.pm now routes $@ preservation through OwnerDispatch');
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     like($emit_context_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'EmitContext.pm now routes lazy package loading through OwnerDispatch');

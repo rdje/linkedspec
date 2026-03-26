@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-27: `LinkedSpec::SpecEntry` and `LinkedSpec::RuleIR` now route `Data::Dumper` loading through their existing shared package-loading seam instead of keeping direct bare `require Data::Dumper` helpers. Future resume should treat those rule-compilation owners as aligned with the broader owner-dispatch cleanup now.
 - 2026-03-27: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::Trace`, so that active trace owner now uses the same shared `Data::Dumper` loading and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat Trace as covered by that same owner-dispatch cleanup line now.
 - 2026-03-27: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::BootstrapSpec::Core`, so that active bootstrap grammar core owner now uses the same shared package-loading and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat BootstrapSpec::Core as covered by that same owner-dispatch cleanup line now.
 - 2026-03-27: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::ActionIR::StatementSplit::Core`, so that active ActionIR statement-split core owner now uses the same shared package-loading seam as the reduced compile-path owners. Future resume should treat StatementSplit::Core as covered by that same owner-dispatch cleanup line now.
