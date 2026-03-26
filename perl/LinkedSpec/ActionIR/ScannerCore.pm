@@ -8,14 +8,32 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::ActionIR::ScannerCore
+# Purpose : ActionIR scanner core owner that binds shared scanner-rule deps and
+#           dispatches contract scanning across the rule-family scanners.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load a package through the shared owner-dispatch helper.
+# Args    : ($pkg)
+# Returns : package name string
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Resolve a required callback from a dependency hash.
+# Args    : ($deps, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
