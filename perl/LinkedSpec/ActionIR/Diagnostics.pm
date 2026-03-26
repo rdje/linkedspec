@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::Diagnostics
+# Purpose: ActionIR diagnostic owner for unresolved-helper, helper-node, and
+#          canonical-event telemetry assembly.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::Diagnostics;
 
 use 5.010;
@@ -9,13 +14,28 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one diagnostics dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : requested package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Resolve one required diagnostics dependency callback from the
+#           provided dependency map.
+# Args    : ($deps, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -24,36 +44,37 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one
+#           diagnostics helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Lazy-load one diagnostics dependency owner and resolve one callback
+#           from it through the shared owner-dispatch seam.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  my $code = $pkg->can($name);
-  die "(LinkedSpec::ActionIR::Diagnostics::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-   unless ref($code) eq 'CODE';
-  return $code
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
+#------------------------------------------------------------------------------
+# Function: default_deps_for_package
+# Purpose : Build the default diagnostics dependency bundle for one owner
+#           package.
+# Args    : ($pkg)
+# Returns : hashref of dependency callbacks
+#------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
  return _call_preserving_err(sub {
@@ -61,9 +82,16 @@ sub default_deps_for_package {
    split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
    scan_contract_ir_events    => _require_pkg_cb($pkg, '_scan_contract_ir_events'),
   }
- })
+  })
 }
 
+#------------------------------------------------------------------------------
+# Function: _find_unresolved_action_helpers
+# Purpose : Count unresolved helper-like statement hits across the current
+#           rewrite rules and split ActionIR statements.
+# Args    : ($code, $rewrite_rules, $deps)
+# Returns : hashref unresolved-helper diagnostics payload
+#------------------------------------------------------------------------------
 sub _find_unresolved_action_helpers {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
@@ -94,6 +122,13 @@ sub _find_unresolved_action_helpers {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _collect_action_helper_ir_nodes
+# Purpose : Collect helper ActionIR node telemetry by replaying scanner rule
+#           hits over the current action code.
+# Args    : ($code, $rewrite_rules, $deps)
+# Returns : hashref helper-node diagnostics payload
+#------------------------------------------------------------------------------
 sub _collect_action_helper_ir_nodes {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
@@ -126,6 +161,13 @@ sub _collect_action_helper_ir_nodes {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _accumulate_action_rewrite_diagnostics
+# Purpose : Merge one per-rule ActionIR diagnostics payload into the running
+#           aggregate diagnostics bucket.
+# Args    : ($acc, $diag)
+# Returns : updated aggregate diagnostics hashref
+#------------------------------------------------------------------------------
 sub _accumulate_action_rewrite_diagnostics {
  my ($acc, $diag) = @_;
  return $acc unless $acc && $diag && ref($diag) eq 'HASH';
