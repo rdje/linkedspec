@@ -10,11 +10,23 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::ActionIR::StatementSplit::Core
+# Purpose : Core ActionIR statement-splitting owner that tracks parser state
+#           and lazily loads the helper packages needed for split heuristics.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load a package through the shared owner-dispatch helper.
+# Args    : ($pkg)
+# Returns : package name string
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 

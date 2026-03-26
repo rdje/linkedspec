@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 111;
+    plan tests => 114;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1142,6 +1142,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     my $scanner_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Scanner.pm'));
     my $scanner_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ScannerCore.pm'));
     my $statement_split_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit.pm'));
+    my $statement_split_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit', 'Core.pm'));
     my $canonical_events_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'CanonicalEvents.pm'));
     my $diagnostics_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Diagnostics.pm'));
     my $value_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ValueExpr.pm'));
@@ -1168,6 +1169,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     ok(defined($scanner_pm) && length($scanner_pm), 'Scanner.pm source is available for architecture inspection');
     ok(defined($scanner_core_pm) && length($scanner_core_pm), 'ScannerCore.pm source is available for architecture inspection');
     ok(defined($statement_split_pm) && length($statement_split_pm), 'StatementSplit.pm source is available for architecture inspection');
+    ok(defined($statement_split_core_pm) && length($statement_split_core_pm), 'StatementSplit/Core.pm source is available for architecture inspection');
     ok(defined($canonical_events_pm) && length($canonical_events_pm), 'CanonicalEvents.pm source is available for architecture inspection');
     ok(defined($diagnostics_pm) && length($diagnostics_pm), 'Diagnostics.pm source is available for architecture inspection');
     ok(defined($value_expr_pm) && length($value_expr_pm), 'ValueExpr.pm source is available for architecture inspection');
@@ -1222,6 +1224,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($statement_split_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit.pm now routes lazy package loading through OwnerDispatch');
     like($statement_split_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'StatementSplit.pm now routes $@ preservation through OwnerDispatch');
     like($statement_split_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'StatementSplit.pm now routes callback lookup through OwnerDispatch');
+    like($statement_split_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit/Core.pm now loads the shared owner-dispatch helper');
+    like($statement_split_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit/Core.pm now routes lazy package loading through OwnerDispatch');
     like($canonical_events_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'CanonicalEvents.pm now loads the shared owner-dispatch helper');
     like($canonical_events_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'CanonicalEvents.pm now routes lazy package loading through OwnerDispatch');
     like($canonical_events_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'CanonicalEvents.pm now routes $@ preservation through OwnerDispatch');
