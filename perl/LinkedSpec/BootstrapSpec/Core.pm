@@ -7,39 +7,46 @@ BEGIN {
  my $perl_root = File::Basename::dirname(File::Basename::dirname($module_dir));
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::BootstrapSpec::Core
+# Purpose : Hardcoded bootstrap grammar core for `.spec` parsing, including
+#           bootstrap regex helper access and method-chain preprocessing.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load a package through the shared owner-dispatch helper.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- my $file = $pkg;
- $file =~ s{::}{/}go;
- $file .= '.pm';
- my $ok = eval { require $file; 1 };
- die "(LinkedSpec::BootstrapSpec::Core::_require_pkg) -E- unable to load '$pkg': $@" unless $ok;
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_linkedre_pkg
+# Purpose : Ensure `LinkedRE` is loaded before bootstrap regex helper use.
+# Args    : none
+# Returns : true on success
+#------------------------------------------------------------------------------
 sub _require_linkedre_pkg {
  _require_pkg('LinkedRE');
  return 1
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute a callback while preserving caller `$@` through successful
+#           completion.
+# Args    : ($cb)
+# Returns : callback result in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _linkedre_or {
