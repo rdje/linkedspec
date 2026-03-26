@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 125;
+    plan tests => 129;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1233,6 +1233,10 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'Scanner.pm now routes callback lookup through OwnerDispatch');
     like($scanner_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ScannerCore.pm now loads the shared owner-dispatch helper');
     like($scanner_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now routes lazy package loading through OwnerDispatch');
+    like($scanner_core_pm, qr/sub _scanner_rule_family_packages\b/s, 'ScannerCore.pm now defines the shared scanner-rule family registry');
+    like($scanner_core_pm, qr/sub _scanner_rule_binding_symbols\b/s, 'ScannerCore.pm now defines the shared scanner-rule binding symbol registry');
+    like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\)/s, 'ScannerCore.pm now loads scanner rule families through the shared family registry');
+    like($scanner_core_pm, qr/sub _with_scanner_rule_deps\b.*reverse _scanner_rule_family_packages\(\)/s, 'ScannerCore.pm now rebinds scanner-rule helpers by iterating the shared family registry');
     like($statement_split_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit.pm now loads the shared owner-dispatch helper');
     like($statement_split_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit.pm now routes lazy package loading through OwnerDispatch');
     like($statement_split_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'StatementSplit.pm now routes $@ preservation through OwnerDispatch');

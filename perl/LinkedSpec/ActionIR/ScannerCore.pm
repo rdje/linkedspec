@@ -38,10 +38,52 @@ sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
  die "(LinkedSpec::ActionIR::ScannerCore::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
+ unless ref($cb) eq 'CODE';
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _scanner_rule_family_packages
+# Purpose : Return the ordered scanner-rule family package list used for both
+#           lazy loading and shared dependency rebinding.
+# Args    : none
+# Returns : ordered package-name list
+#------------------------------------------------------------------------------
+sub _scanner_rule_family_packages {
+ return (
+  'LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules',
+  'LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules',
+  'LinkedSpec::ActionIR::Scanner::FlowRules',
+  'LinkedSpec::ActionIR::Scanner::LegacyRules',
+ )
+}
+
+#------------------------------------------------------------------------------
+# Function: _scanner_rule_binding_symbols
+# Purpose : Return the shared helper symbol list rebound into each scanner-rule
+#           family while contract scanning runs.
+# Args    : none
+# Returns : ordered helper-symbol list
+#------------------------------------------------------------------------------
+sub _scanner_rule_binding_symbols {
+ return (
+  '_split_action_ir_statements',
+  '_trim_action_ir_value',
+  '_parse_method_function_expr',
+  '_normalize_method_args_with_optional_scope',
+  '_build_array_pipeline_plan_from_expr',
+  '_extract_declare_statement_from_method_expr',
+  '_parse_declare_binding_entry',
+ )
+}
+
+#------------------------------------------------------------------------------
+# Function: _scanner_rule_dep_bindings
+# Purpose : Normalize the dependency callback bundle into the exact symbol map
+#           rebound into each scanner-rule family package.
+# Args    : ($deps)
+# Returns : hashref of helper-symbol => callback bindings
+#------------------------------------------------------------------------------
 sub _scanner_rule_dep_bindings {
  my ($deps) = @_;
  return {
@@ -55,19 +97,62 @@ sub _scanner_rule_dep_bindings {
  }
 }
 
+#------------------------------------------------------------------------------
+# Function: _scanner_dispatchers
+# Purpose : Lazy-load the scanner-rule families and return their public
+#           dispatcher callbacks in the canonical family order.
+# Args    : none
+# Returns : ordered list of dispatcher coderefs
+#------------------------------------------------------------------------------
 sub _scanner_dispatchers {
- _require_pkg('LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules');
- _require_pkg('LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules');
- _require_pkg('LinkedSpec::ActionIR::Scanner::FlowRules');
- _require_pkg('LinkedSpec::ActionIR::Scanner::LegacyRules');
- return (
-  \&LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::try_scan_contract_ir_events,
-  \&LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::try_scan_contract_ir_events,
-  \&LinkedSpec::ActionIR::Scanner::FlowRules::try_scan_contract_ir_events,
-  \&LinkedSpec::ActionIR::Scanner::LegacyRules::try_scan_contract_ir_events,
- )
+ my @dispatchers;
+ no strict 'refs';
+ foreach my $pkg (_scanner_rule_family_packages()) {
+  _require_pkg($pkg);
+  push @dispatchers, \&{"${pkg}::try_scan_contract_ir_events"};
+ }
+ return @dispatchers
 }
 
+#------------------------------------------------------------------------------
+# Function: _with_scanner_rule_family_deps
+# Purpose : Rebind the shared helper symbols into one scanner-rule family for
+#           the duration of one callback body.
+# Args    : ($pkg, $bindings, $body)
+# Returns : callback return value
+#------------------------------------------------------------------------------
+sub _with_scanner_rule_family_deps {
+ my ($pkg, $bindings, $body) = @_;
+ die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_family_deps) -E- scanner-rule package must be provided"
+  unless defined($pkg) && length($pkg);
+ die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_family_deps) -E- scanner dep bindings must be HASH"
+  unless ref($bindings) eq 'HASH';
+ die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_family_deps) -E- body callback must be CODE"
+  unless ref($body) eq 'CODE';
+
+ my $runner = $body;
+ foreach my $symbol (reverse _scanner_rule_binding_symbols()) {
+  my $cb = $bindings->{$symbol};
+  die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_family_deps) -E- missing bound scanner helper '$symbol'"
+   unless ref($cb) eq 'CODE';
+  my $next = $runner;
+  $runner = sub {
+   no strict 'refs';
+   local *{"${pkg}::$symbol"} = $cb;
+   return $next->();
+  };
+ }
+
+ return $runner->()
+}
+
+#------------------------------------------------------------------------------
+# Function: _with_scanner_rule_deps
+# Purpose : Rebind the shared helper symbols into all scanner-rule families for
+#           the duration of one callback body.
+# Args    : ($bindings, $body)
+# Returns : callback return value
+#------------------------------------------------------------------------------
 sub _with_scanner_rule_deps {
  my ($bindings, $body) = @_;
  die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_deps) -E- scanner dep bindings must be HASH"
@@ -75,39 +160,15 @@ sub _with_scanner_rule_deps {
  die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_deps) -E- body callback must be CODE"
   unless ref($body) eq 'CODE';
 
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_split_action_ir_statements = $bindings->{_split_action_ir_statements};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_trim_action_ir_value = $bindings->{_trim_action_ir_value};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_parse_method_function_expr = $bindings->{_parse_method_function_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_normalize_method_args_with_optional_scope = $bindings->{_normalize_method_args_with_optional_scope};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_build_array_pipeline_plan_from_expr = $bindings->{_build_array_pipeline_plan_from_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_extract_declare_statement_from_method_expr = $bindings->{_extract_declare_statement_from_method_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules::_parse_declare_binding_entry = $bindings->{_parse_declare_binding_entry};
+ my $runner = $body;
+ foreach my $pkg (reverse _scanner_rule_family_packages()) {
+  my $next = $runner;
+  $runner = sub {
+   return _with_scanner_rule_family_deps($pkg, $bindings, $next)
+  };
+ }
 
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_split_action_ir_statements = $bindings->{_split_action_ir_statements};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_trim_action_ir_value = $bindings->{_trim_action_ir_value};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_parse_method_function_expr = $bindings->{_parse_method_function_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_normalize_method_args_with_optional_scope = $bindings->{_normalize_method_args_with_optional_scope};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_build_array_pipeline_plan_from_expr = $bindings->{_build_array_pipeline_plan_from_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_extract_declare_statement_from_method_expr = $bindings->{_extract_declare_statement_from_method_expr};
- local *LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules::_parse_declare_binding_entry = $bindings->{_parse_declare_binding_entry};
-
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_split_action_ir_statements = $bindings->{_split_action_ir_statements};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_trim_action_ir_value = $bindings->{_trim_action_ir_value};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_parse_method_function_expr = $bindings->{_parse_method_function_expr};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_normalize_method_args_with_optional_scope = $bindings->{_normalize_method_args_with_optional_scope};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_build_array_pipeline_plan_from_expr = $bindings->{_build_array_pipeline_plan_from_expr};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_extract_declare_statement_from_method_expr = $bindings->{_extract_declare_statement_from_method_expr};
- local *LinkedSpec::ActionIR::Scanner::FlowRules::_parse_declare_binding_entry = $bindings->{_parse_declare_binding_entry};
-
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_split_action_ir_statements = $bindings->{_split_action_ir_statements};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_trim_action_ir_value = $bindings->{_trim_action_ir_value};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_parse_method_function_expr = $bindings->{_parse_method_function_expr};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_normalize_method_args_with_optional_scope = $bindings->{_normalize_method_args_with_optional_scope};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_build_array_pipeline_plan_from_expr = $bindings->{_build_array_pipeline_plan_from_expr};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_extract_declare_statement_from_method_expr = $bindings->{_extract_declare_statement_from_method_expr};
- local *LinkedSpec::ActionIR::Scanner::LegacyRules::_parse_declare_binding_entry = $bindings->{_parse_declare_binding_entry};
-
- return $body->()
+ return $runner->()
 }
 
 #------------------------------------------------------------------------------
