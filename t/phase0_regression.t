@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 129;
+    plan tests => 132;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1231,8 +1231,11 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Scanner.pm now routes lazy package loading through OwnerDispatch');
     like($scanner_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Scanner.pm now routes $@ preservation through OwnerDispatch');
     like($scanner_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'Scanner.pm now routes callback lookup through OwnerDispatch');
+    like($scanner_pm, qr/sub default_deps_for_package\b.*_require_scanner_core_pkg\(\).*LinkedSpec::ActionIR::ScannerCore::_scanner_dep_specs\(\)/s, 'Scanner.pm now assembles scanner deps from ScannerCore shared dependency specs');
     like($scanner_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ScannerCore.pm now loads the shared owner-dispatch helper');
     like($scanner_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now routes lazy package loading through OwnerDispatch');
+    like($scanner_core_pm, qr/sub _scanner_dep_specs\b/s, 'ScannerCore.pm now defines the shared scanner dependency contract');
+    like($scanner_core_pm, qr/sub _scanner_rule_dep_bindings\b.*foreach my \$spec \(_scanner_dep_specs\(\)\)/s, 'ScannerCore.pm now builds scanner-rule bindings from the shared dependency contract');
     like($scanner_core_pm, qr/sub _scanner_rule_family_packages\b/s, 'ScannerCore.pm now defines the shared scanner-rule family registry');
     like($scanner_core_pm, qr/sub _scanner_rule_binding_symbols\b/s, 'ScannerCore.pm now defines the shared scanner-rule binding symbol registry');
     like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\)/s, 'ScannerCore.pm now loads scanner rule families through the shared family registry');

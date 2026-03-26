@@ -223,6 +223,7 @@ Current reading:
 - `ScannerCore`
   - now also uses `LinkedSpec::OwnerDispatch` in its thin owner wrapper for lazy loading of scanner-rule families.
   - now also centralizes the scanner-rule family registry and shared helper rebinding symbol list, so package-family loading and dependency rebinding no longer hardcode the same scanner-family contract in parallel.
+  - now also centralizes the scanner dependency contract consumed by `Scanner::default_deps_for_package(...)`, so dependency assembly and dependency rebinding stay aligned under one owner instead of drifting in parallel.
 - `Contracts`
   - is the contract catalog for supported helper surfaces and how they lower.
   - now also uses `LinkedSpec::OwnerDispatch` in its thin owner wrapper for lazy loading, callback lookup, and `$@` preservation.

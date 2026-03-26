@@ -78,6 +78,25 @@ sub _scanner_rule_binding_symbols {
 }
 
 #------------------------------------------------------------------------------
+# Function: _scanner_dep_specs
+# Purpose : Return the canonical scanner dependency contract shared by the
+#           scanner owner and the scanner-core rebinding path.
+# Args    : none
+# Returns : ordered list of dependency spec hashes
+#------------------------------------------------------------------------------
+sub _scanner_dep_specs {
+ return (
+  { dep_name => 'split_action_ir_statements', binding_symbol => '_split_action_ir_statements' },
+  { dep_name => 'trim_action_ir_value', binding_symbol => '_trim_action_ir_value' },
+  { dep_name => 'parse_method_function_expr', binding_symbol => '_parse_method_function_expr', provider_pkg => 'LinkedSpec::ActionIR::MethodExpr' },
+  { dep_name => 'normalize_method_args_with_optional_scope', binding_symbol => '_normalize_method_args_with_optional_scope', provider_pkg => 'LinkedSpec::ActionIR::MethodExpr' },
+  { dep_name => 'build_array_pipeline_plan_from_expr', binding_symbol => '_build_array_pipeline_plan_from_expr' },
+  { dep_name => 'extract_declare_statement_from_method_expr', binding_symbol => '_extract_declare_statement_from_method_expr' },
+  { dep_name => 'parse_declare_binding_entry', binding_symbol => '_parse_declare_binding_entry' },
+ )
+}
+
+#------------------------------------------------------------------------------
 # Function: _scanner_rule_dep_bindings
 # Purpose : Normalize the dependency callback bundle into the exact symbol map
 #           rebound into each scanner-rule family package.
@@ -86,15 +105,11 @@ sub _scanner_rule_binding_symbols {
 #------------------------------------------------------------------------------
 sub _scanner_rule_dep_bindings {
  my ($deps) = @_;
- return {
-  _split_action_ir_statements => _require_dep($deps, 'split_action_ir_statements'),
-  _trim_action_ir_value => _require_dep($deps, 'trim_action_ir_value'),
-  _parse_method_function_expr => _require_dep($deps, 'parse_method_function_expr'),
-  _normalize_method_args_with_optional_scope => _require_dep($deps, 'normalize_method_args_with_optional_scope'),
-  _build_array_pipeline_plan_from_expr => _require_dep($deps, 'build_array_pipeline_plan_from_expr'),
-  _extract_declare_statement_from_method_expr => _require_dep($deps, 'extract_declare_statement_from_method_expr'),
-  _parse_declare_binding_entry => _require_dep($deps, 'parse_declare_binding_entry'),
+ my %bindings;
+ foreach my $spec (_scanner_dep_specs()) {
+  $bindings{$spec->{binding_symbol}} = _require_dep($deps, $spec->{dep_name});
  }
+ return \%bindings
 }
 
 #------------------------------------------------------------------------------
