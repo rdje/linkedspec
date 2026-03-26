@@ -8,14 +8,33 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::ActionIR::DeclareMethod
+# Purpose : ActionIR owner for declare/assign helper parsing and lowering plus
+#           the default callback map that exposes those helpers to active
+#           callers.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load a package through the shared owner-dispatch helper.
+# Args    : ($pkg)
+# Returns : package name string
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Resolve a required callback from a dependency hash.
+# Args    : ($deps, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -24,36 +43,37 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Execute a callback while preserving caller `$@` through successful
+#           completion.
+# Args    : ($cb)
+# Returns : callback result in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Resolve a named callback from a package through the shared
+#           owner-dispatch helper.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  my $code = $pkg->can($name);
-  die "(LinkedSpec::ActionIR::DeclareMethod::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-   unless ref($code) eq 'CODE';
-  return $code
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
+#------------------------------------------------------------------------------
+# Function: default_deps_for_package
+# Purpose : Build the default callback map exported by this owner for active
+#           ActionIR declare/assign lowering callers.
+# Args    : ($pkg)
+# Returns : hashref dependency map
+#------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
  return _call_preserving_err(sub {

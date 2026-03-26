@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 103;
+    plan tests => 108;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1149,6 +1149,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     my $control_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ControlFlow.pm'));
     my $contracts_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Contracts.pm'));
     my $method_lowering_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'MethodLowering.pm'));
+    my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));
     my $resolver_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Resolver.pm'));
     my $validation_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Validation.pm'));
     my $action_rewriter_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionRewriter.pm'));
@@ -1173,6 +1174,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     ok(defined($control_flow_pm) && length($control_flow_pm), 'ControlFlow.pm source is available for architecture inspection');
     ok(defined($contracts_pm) && length($contracts_pm), 'Contracts.pm source is available for architecture inspection');
     ok(defined($method_lowering_pm) && length($method_lowering_pm), 'MethodLowering.pm source is available for architecture inspection');
+    ok(defined($declare_method_pm) && length($declare_method_pm), 'DeclareMethod.pm source is available for architecture inspection');
     ok(defined($resolver_pm) && length($resolver_pm), 'Resolver.pm source is available for architecture inspection');
     ok(defined($validation_pm) && length($validation_pm), 'Validation.pm source is available for architecture inspection');
     ok(defined($action_rewriter_pm) && length($action_rewriter_pm), 'ActionRewriter.pm source is available for architecture inspection');
@@ -1248,6 +1250,10 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($method_lowering_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'MethodLowering.pm now routes lazy package loading through OwnerDispatch');
     like($method_lowering_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'MethodLowering.pm now routes $@ preservation through OwnerDispatch');
     like($method_lowering_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'MethodLowering.pm now routes callback lookup through OwnerDispatch');
+    like($declare_method_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'DeclareMethod.pm now loads the shared owner-dispatch helper');
+    like($declare_method_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'DeclareMethod.pm now routes lazy package loading through OwnerDispatch');
+    like($declare_method_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'DeclareMethod.pm now routes $@ preservation through OwnerDispatch');
+    like($declare_method_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'DeclareMethod.pm now routes callback lookup through OwnerDispatch');
     like($resolver_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Resolver.pm now loads the shared owner-dispatch helper');
     like($resolver_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Resolver.pm now routes Trace loading through OwnerDispatch');
     like($resolver_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Resolver.pm now routes $@ preservation through OwnerDispatch');
