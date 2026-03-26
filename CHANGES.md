@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-26 - Backbone Item 3: Extend Shared Owner Dispatch into RewritePipeline
+
+Continued the same owner-dispatch cleanup into an active ActionIR owner:
+- updated `perl/LinkedSpec/ActionIR/RewritePipeline.pm` to route shared package loading, callback lookup, and eval-error preservation through `LinkedSpec::OwnerDispatch`,
+- widened the source-level architecture lock in `t/phase0_regression.t` so `ActionIR/RewritePipeline.pm` is now explicitly tracked as part of the shared owner-dispatch seam,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-25 - Backbone Item 3: Extend Shared Owner Dispatch into EmitContext
 
 Continued the same owner-dispatch cleanup into the RuleIR-to-ActionIR bridge owner:

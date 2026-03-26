@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::RewritePipeline
+# Purpose: Canonical ActionIR rewrite owner for dependency assembly and
+#          statement-level lowering orchestration.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::RewritePipeline;
 
 use 5.010;
@@ -9,10 +14,18 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one rewrite-pipeline dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : requested package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
@@ -24,34 +37,28 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one
+#           rewrite-pipeline helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Lazy-load one rewrite-pipeline dependency owner and resolve one
+#           callback from it through the shared owner-dispatch seam.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  my $code = $pkg->can($name);
-  die "(LinkedSpec::ActionIR::RewritePipeline::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-   unless ref($code) eq 'CODE';
-  return $code
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
 sub _event_continues_implicit_if_flow {
