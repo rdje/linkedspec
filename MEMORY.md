@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-26: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::ActionIR::CanonicalEvents`, so that active ActionIR owner now uses the same shared package-loading, callback-lookup, and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat CanonicalEvents as covered by that same owner-dispatch cleanup line now.
 - 2026-03-26: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::ActionIR::StatementSplit`, so that active ActionIR owner now uses the same shared package-loading, callback-lookup, and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat StatementSplit as covered by that same owner-dispatch cleanup line now.
 - 2026-03-26: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::ActionIR::Scanner`, so that active ActionIR owner now uses the same shared package-loading, callback-lookup, and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat Scanner as covered by that same owner-dispatch cleanup line now.
 - 2026-03-26: Extended `LinkedSpec::OwnerDispatch` into `LinkedSpec::ActionIR::RewritePipeline`, so that active ActionIR owner now uses the same shared package-loading, callback-lookup, and eval-error-preservation seam as the reduced compile-path owners. Future resume should treat RewritePipeline as covered by that same owner-dispatch cleanup line now.
