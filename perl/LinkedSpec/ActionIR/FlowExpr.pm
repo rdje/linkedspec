@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::FlowExpr
+# Purpose: Flow-expression lowering owner for composite truthiness checks,
+#          emptiness predicates, and method-like condition assembly.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::FlowExpr;
 
 use 5.010;
@@ -9,13 +14,28 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one flow-expression dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : requested package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_dep
+# Purpose : Resolve one required flow-expression dependency callback from the
+#           provided dependency map.
+# Args    : ($deps, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -24,36 +44,37 @@ sub _require_dep {
  return $cb
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one
+#           flow-expression helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Lazy-load one flow-expression dependency owner and resolve one
+#           callback from it through the shared owner-dispatch seam.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  my $code = $pkg->can($name);
-  die "(LinkedSpec::ActionIR::FlowExpr::_require_pkg_cb) -E- missing callback '$pkg\::$name'"
-   unless ref($code) eq 'CODE';
-  return $code
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
+#------------------------------------------------------------------------------
+# Function: default_deps_for_package
+# Purpose : Build the default flow-expression dependency bundle for one owner
+#           package.
+# Args    : ($pkg)
+# Returns : hashref of dependency callbacks
+#------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
  return _call_preserving_err(sub {
