@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::StatementSplit
+# Purpose: ActionIR statement-splitting owner for dependency assembly and
+#          statement segmentation orchestration.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::StatementSplit;
 
 use 5.010;
@@ -9,10 +14,18 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one statement-split dependency owner through the shared
+#           owner-dispatch seam.
+# Args    : ($pkg)
+# Returns : requested package name
+#------------------------------------------------------------------------------
 sub _require_pkg {
  my ($pkg) = @_;
- (my $path = "$pkg.pm") =~ s{::}{/}g;
- require $path;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
  return $pkg
 }
 
@@ -20,35 +33,28 @@ sub _require_statement_split_core_pkg {
  return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Core')
 }
 
+#------------------------------------------------------------------------------
+# Function: _call_preserving_err
+# Purpose : Preserve caller-visible successful `$@` while executing one
+#           statement-split helper callback.
+# Args    : ($cb)
+# Returns : callback return value in caller context
+#------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Lazy-load one statement-split dependency owner and resolve one
+#           callback through the shared owner-dispatch seam.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
- return _call_preserving_err(sub {
-  _require_pkg($pkg) unless $pkg->can($name);
-  no strict 'refs';
-  my $cb = *{"${pkg}::${name}"}{CODE};
-  die "(LinkedSpec::ActionIR::StatementSplit::_require_pkg_cb) -E- missing callback ${pkg}::${name}"
-   unless ref($cb) eq 'CODE';
-  return $cb
- })
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
 sub _require_dep {
