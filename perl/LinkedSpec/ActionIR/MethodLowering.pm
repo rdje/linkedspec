@@ -75,26 +75,28 @@ sub _require_pkg_cb {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-   split_declare_symbol_names => _require_pkg_cb($pkg, '_split_declare_symbol_names'),
-   parse_declare_binding_entry => _require_pkg_cb($pkg, '_parse_declare_binding_entry'),
-   lower_declare_initializer_expr => _require_pkg_cb($pkg, '_lower_declare_initializer_expr'),
-   parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
-   normalize_method_args_with_optional_scope => _require_pkg_cb($pkg, '_normalize_method_args_with_optional_scope'),
-   lower_scalaref_value_expr => _require_pkg_cb($pkg, '_lower_scalaref_value_expr'),
-   extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
-   extract_hash_symbol_name => _require_pkg_cb($pkg, '_extract_hash_symbol_name'),
-   extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
-   lower_scalar_access_key_expr => _require_pkg_cb($pkg, '_lower_scalar_access_key_expr'),
-   infer_scalar_container_kind => _require_pkg_cb($pkg, '_infer_scalar_container_kind'),
-   split_top_level_csv => _require_pkg_cb($pkg, '_split_top_level_csv'),
-   lower_array_pipeline_expr => _require_pkg_cb($pkg, '_lower_array_pipeline_expr'),
-   lower_assignment_source_expr => _require_pkg_cb($pkg, '_lower_assignment_source_expr'),
-   strip_literal_delimiters => _require_pkg_cb($pkg, '_strip_literal_delimiters'),
-  }
- })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'trim_action_ir_value',
+   'split_declare_symbol_names',
+   'parse_declare_binding_entry',
+   'lower_declare_initializer_expr',
+   'parse_method_function_expr',
+   'normalize_method_args_with_optional_scope',
+   'lower_scalaref_value_expr',
+   'extract_array_symbol_name',
+   'extract_hash_symbol_name',
+   'extract_scalar_symbol_name',
+   'lower_scalar_access_key_expr',
+   'infer_scalar_container_kind',
+   'split_top_level_csv',
+   'lower_array_pipeline_expr',
+   'lower_assignment_source_expr',
+   'strip_literal_delimiters',
+  ],
+ )
 }
 
 #------------------------------------------------------------------------------

@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 134;
+    plan tests => 139;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1191,6 +1191,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($owner_dispatch_pm, qr/sub require_pkg\b/, 'OwnerDispatch defines the shared lazy package loader');
     like($owner_dispatch_pm, qr/sub require_pkg_cb\b/, 'OwnerDispatch defines the shared callback loader');
     like($owner_dispatch_pm, qr/sub require_pkg_value\b/, 'OwnerDispatch defines the shared callback-value loader');
+    like($owner_dispatch_pm, qr/sub build_dep_map\b/, 'OwnerDispatch defines the shared dependency-map builder');
     like($owner_dispatch_pm, qr/sub dispatch_owner_call\b/, 'OwnerDispatch defines the shared delegated owner-call helper');
     like($linkedspec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'LinkedSpec.pm now loads the shared owner-dispatch helper');
     like($linkedspec_pm, qr/sub _dispatch_owner_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, \$pkg, \$subname, \@args\)/s, 'LinkedSpec.pm now routes facade owner dispatch through OwnerDispatch');
@@ -1260,10 +1261,12 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($value_expr_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ValueExpr.pm now routes lazy package loading through OwnerDispatch');
     like($value_expr_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'ValueExpr.pm now routes $@ preservation through OwnerDispatch');
     like($value_expr_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'ValueExpr.pm now routes callback lookup through OwnerDispatch');
+    like($value_expr_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'ValueExpr.pm now assembles its default dependency map through OwnerDispatch');
     like($flow_expr_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'FlowExpr.pm now loads the shared owner-dispatch helper');
     like($flow_expr_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'FlowExpr.pm now routes lazy package loading through OwnerDispatch');
     like($flow_expr_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'FlowExpr.pm now routes $@ preservation through OwnerDispatch');
     like($flow_expr_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'FlowExpr.pm now routes callback lookup through OwnerDispatch');
+    like($flow_expr_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'FlowExpr.pm now assembles its default dependency map through OwnerDispatch');
     like($array_pipeline_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ArrayPipeline.pm now loads the shared owner-dispatch helper');
     like($array_pipeline_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ArrayPipeline.pm now routes lazy package loading through OwnerDispatch');
     like($array_pipeline_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'ArrayPipeline.pm now routes $@ preservation through OwnerDispatch');
@@ -1280,10 +1283,12 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($method_lowering_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'MethodLowering.pm now routes lazy package loading through OwnerDispatch');
     like($method_lowering_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'MethodLowering.pm now routes $@ preservation through OwnerDispatch');
     like($method_lowering_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'MethodLowering.pm now routes callback lookup through OwnerDispatch');
+    like($method_lowering_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'MethodLowering.pm now assembles its default dependency map through OwnerDispatch');
     like($declare_method_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'DeclareMethod.pm now loads the shared owner-dispatch helper');
     like($declare_method_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'DeclareMethod.pm now routes lazy package loading through OwnerDispatch');
     like($declare_method_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'DeclareMethod.pm now routes $@ preservation through OwnerDispatch');
     like($declare_method_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'DeclareMethod.pm now routes callback lookup through OwnerDispatch');
+    like($declare_method_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'DeclareMethod.pm now assembles its default dependency map through OwnerDispatch');
     like($resolver_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Resolver.pm now loads the shared owner-dispatch helper');
     like($resolver_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Resolver.pm now routes Trace loading through OwnerDispatch');
     like($resolver_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Resolver.pm now routes $@ preservation through OwnerDispatch');
@@ -1292,6 +1297,31 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($validation_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Validation.pm now routes $@ preservation through OwnerDispatch');
     like($action_rewriter_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ActionRewriter.pm now loads the shared owner-dispatch helper');
     like($action_rewriter_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'ActionRewriter.pm now routes $@ preservation through OwnerDispatch');
+};
+subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
+    plan tests => 5;
+
+    {
+        no warnings 'redefine';
+        local *Synthetic::DepOwner::_trim_action_ir_value = sub { return 'trim_ok' };
+        local *Synthetic::OtherOwner::_parse_method_function_expr = sub { return { method => 'call', args => [] } };
+
+        $@ = "__SAVED_ERR__\n";
+        my $deps = LinkedSpec::OwnerDispatch::build_dep_map(
+            'Synthetic::Caller',
+            'Synthetic::DepOwner',
+            [
+                'trim_action_ir_value',
+                { dep => 'parse_method_function_expr', pkg => 'Synthetic::OtherOwner' },
+            ],
+        );
+
+        is(ref($deps), 'HASH', 'build_dep_map returns a dependency hashref');
+        is($deps->{trim_action_ir_value}->(), 'trim_ok', 'build_dep_map resolves default-owner callbacks');
+        is($deps->{parse_method_function_expr}->()->{method}, 'call', 'build_dep_map resolves explicit alternate-owner callbacks');
+        ok(!exists($deps->{missing}), 'build_dep_map only returns requested dependency callbacks');
+        is($@, "__SAVED_ERR__\n", 'build_dep_map preserves caller $@ on successful callback lookup');
+    }
 };
 subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     plan tests => 9;

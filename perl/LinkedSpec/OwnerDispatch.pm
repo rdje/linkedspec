@@ -93,6 +93,53 @@ sub require_pkg_value {
 }
 
 #------------------------------------------------------------------------------
+# Function: build_dep_map
+# Purpose : Build one dependency callback map by resolving a list of callback
+#           specs through the shared owner-dispatch seam.
+# Args    : ($owner_pkg, $default_target_pkg, $dep_specs)
+# Returns : hashref of dependency callbacks
+#------------------------------------------------------------------------------
+sub build_dep_map {
+ my ($owner_pkg, $default_target_pkg, $dep_specs) = @_;
+ my $owner = defined($owner_pkg) && length($owner_pkg) ? $owner_pkg : __PACKAGE__;
+ my $default_target = defined($default_target_pkg) && length($default_target_pkg)
+  ? $default_target_pkg
+  : undef;
+
+ return call_preserving_err(sub {
+  my $specs = (ref($dep_specs) eq 'ARRAY') ? $dep_specs : [];
+  my %deps;
+
+  foreach my $spec (@{$specs}) {
+   my ($dep_name, $target_pkg, $cb_name);
+
+   if (!ref($spec)) {
+    $dep_name = $spec;
+    $target_pkg = $default_target;
+   }
+   elsif (ref($spec) eq 'HASH') {
+    $dep_name = $spec->{dep};
+    $target_pkg = defined($spec->{pkg}) ? $spec->{pkg} : $default_target;
+    $cb_name = $spec->{cb};
+   }
+   else {
+    die "(${owner}::build_dep_map) -E- malformed dependency spec";
+   }
+
+   die "(${owner}::build_dep_map) -E- dependency spec missing dep name"
+    unless defined($dep_name) && length($dep_name);
+   die "(${owner}::build_dep_map) -E- dependency spec missing target package for '$dep_name'"
+    unless defined($target_pkg) && length($target_pkg);
+
+   $cb_name = '_'.$dep_name unless defined($cb_name) && length($cb_name);
+   $deps{$dep_name} = require_pkg_cb($owner, $target_pkg, $cb_name);
+  }
+
+  return \%deps
+ })
+}
+
+#------------------------------------------------------------------------------
 # Function: dispatch_owner_call
 # Purpose : Shared thin-wrapper delegator that lazy-loads one owner package and
 #           invokes a named routine through it.

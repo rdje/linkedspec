@@ -1,5 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Centralize Core ActionIR Dep-Map Builders
+
+Continued the owner-contract cleanup across the active ActionIR lowering path:
+- updated `perl/LinkedSpec/OwnerDispatch.pm` with a shared `build_dep_map(...)` helper for assembling callback dependency maps through the same lazy owner-dispatch seam,
+- updated `perl/LinkedSpec/ActionIR/FlowExpr.pm`, `perl/LinkedSpec/ActionIR/ValueExpr.pm`, `perl/LinkedSpec/ActionIR/MethodLowering.pm`, and `perl/LinkedSpec/ActionIR/DeclareMethod.pm` so their `default_deps_for_package(...)` builders now use that shared helper instead of hand-building parallel callback maps inline,
+- widened `t/phase0_regression.t` with both source-level architecture locks and a direct helper contract test for `build_dep_map(...)`,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/OwnerDispatch.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Centralize `EmitContext` ActionIR Owner Registry
 
 Continued the owner-contract cleanup at the RuleIR-to-ActionIR bridge:

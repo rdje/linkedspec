@@ -25,6 +25,7 @@ This document is the current high-level technical reading of the project shape. 
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
 - Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
+- `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners, so callback-map building is starting to centralize too.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
 - The frontend syntax/bootstrapping truth still concentrates in:
@@ -240,6 +241,7 @@ Current reading:
   - now also uses `LinkedSpec::OwnerDispatch` in its thin owner wrapper for lazy loading, callback lookup, and `$@` preservation.
 - `FlowExpr`, `ArrayPipeline`, `ControlFlow`, `MethodLowering`, `DeclareMethod`, and `ValueExpr`
   - make up the main lowering families.
+- core lowering owners such as `FlowExpr`, `ValueExpr`, `MethodLowering`, and `DeclareMethod` now also assemble their default callback maps through one shared `OwnerDispatch::build_dep_map(...)` helper instead of hand-building those callback registries inline.
 - `FlowExpr`
   - now also uses `LinkedSpec::OwnerDispatch` in its thin owner wrapper for lazy loading, callback lookup, and `$@` preservation.
 - `ArrayPipeline`

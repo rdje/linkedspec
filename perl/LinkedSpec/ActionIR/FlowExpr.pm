@@ -77,17 +77,19 @@ sub _require_pkg_cb {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-   extract_array_symbol_name => _require_pkg_cb($pkg, '_extract_array_symbol_name'),
-   extract_hash_symbol_name => _require_pkg_cb($pkg, '_extract_hash_symbol_name'),
-   extract_scalar_symbol_name => _require_pkg_cb($pkg, '_extract_scalar_symbol_name'),
-   lower_method_value_expr => _require_pkg_cb($pkg, '_lower_method_value_expr'),
-   parse_method_function_expr => _require_pkg_cb($pkg, '_parse_method_function_expr'),
-   normalize_method_args_with_optional_scope => _require_pkg_cb($pkg, '_normalize_method_args_with_optional_scope'),
-  }
- })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'trim_action_ir_value',
+   'extract_array_symbol_name',
+   'extract_hash_symbol_name',
+   'extract_scalar_symbol_name',
+   'lower_method_value_expr',
+   'parse_method_function_expr',
+   'normalize_method_args_with_optional_scope',
+  ],
+ )
 }
 
 #------------------------------------------------------------------------------

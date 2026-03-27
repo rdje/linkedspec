@@ -77,13 +77,15 @@ sub _require_pkg_cb {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   trim_action_ir_value      => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-   lower_flow_composite_expr => _require_pkg_cb($pkg, '_lower_flow_composite_expr'),
-   lower_method_value_expr   => _require_pkg_cb($pkg, '_lower_method_value_expr'),
-  }
- })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'trim_action_ir_value',
+   'lower_flow_composite_expr',
+   'lower_method_value_expr',
+  ],
+ )
 }
 
 #------------------------------------------------------------------------------
