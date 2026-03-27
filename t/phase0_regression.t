@@ -11352,6 +11352,36 @@ SPEC
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_pos()');
     like($rewrite, qr/do \{ pos \$\$STRING \}/, 'cursor_pos() lowering reads the live current parser position directly');
 };
+subtest 'cursor_line_reads_live_current_parser_line_without_named_mark' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_line, second_line, third_line) }
+ /foo\n/
+ /bar\n/
+ /baz/
+ -> Top[0] { assign(scalar(first_line), cursor_line()) }
+ -> Top[1] { assign(scalar(second_line), cursor_line()) }
+ -> Top[2] { assign(scalar(third_line), cursor_line()); return(array("?Top:", scalar(first_line), scalar(second_line), scalar(third_line), cursor_line(), match_line())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_line() coverage');
+
+    my $input = "foo\nbar\nbaz";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 2, 3, 3, 3, 3],
+        'cursor_line() tracks the live parser line across successive same-rule slots without relying on stored named marks'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'cursor_line() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_line()');
+    like($rewrite, qr/pos \$\$STRING.*defined\(\$__ls_cursor_pos\) \? \$__ls_cursor_pos : 0/s, 'cursor_line() lowering reads the live current parser position before counting line breaks');
+};
 subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
     plan tests => 4;
 
@@ -36013,7 +36043,7 @@ SPEC
 
     my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("cursor_pos", cursor_pos(), "cursor_line", cursor_line(), "entry", entry_line(), "match", match_line()))');
     ok(index($rewritten, 'do { pos $$STRING }') >= 0, 'cursor_pos() lowers to a direct live current-cursor position read');
-    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS) =~ /\n/g) }') >= 0, 'cursor_line() lowers to a direct current-cursor line-number read');
+    ok(index($rewritten, 'my $__ls_cursor_pos = pos $$STRING;') >= 0 && index($rewritten, 'defined($__ls_cursor_pos) ? $__ls_cursor_pos : 0') >= 0, 'cursor_line() lowers to a direct live current-cursor line-number read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }') >= 0, 'entry_line() lowers to a direct immediate-match line-number read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_line() lowers to a direct local-match line-number read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');

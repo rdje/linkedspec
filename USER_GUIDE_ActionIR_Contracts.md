@@ -660,6 +660,7 @@ Return the 1-based line number at the current parser cursor directly.
 Practical reading:
 - use it when the rule wants the current parser-position line as data,
 - prefer it over manual `substr($$STRING, 0, $IPOS) =~ /\n/g` counting in normal user-facing `.spec` examples,
+- expect it to track the live parser cursor as same-rule slots advance, not just the rule-entry snapshot,
 - and treat it as the direct cursor-side line helper when no checkpoint or match-boundary helper is needed first.
 
 Example:
@@ -679,7 +680,7 @@ Top::AND
  -> Top[2] { return(array("?Top:", scalar(open_line), scalar(close_line), cursor_line(), match_line())) }
 ```
 
-Use it when the rule wants the current parser cursor line directly instead of spelling raw prefix-newline counting inline.
+Use it when the rule wants the live current parser cursor line directly instead of spelling raw prefix-newline counting inline.
 
 ### `entry_text()`
 Return the current immediate match text directly.

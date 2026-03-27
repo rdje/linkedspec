@@ -627,7 +627,7 @@ sub _build_capture_and_backtrack_contracts {
    unresolved_pattern => qr/\bcursor_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS) =~ \/\\n\/g) }/g;
+    $code =~ s/\bcursor_line\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; 1 + (() = substr(\$\$STRING, 0, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0) =~ \/\\n\/g) }/g;
     return $code
    },
   },

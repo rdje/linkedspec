@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Phase 4: Fix `cursor_line()` Live Cursor Semantics
+
+Corrected the direct current-cursor line helper so it now follows the live parser cursor instead of a stale rule-entry snapshot:
+- updated `perl/LinkedSpec/ActionIR/Contracts.pm` so `cursor_line()` now counts newlines from the live `pos $$STRING` cursor rather than the static rule-entry `$IPOS` snapshot,
+- widened `t/phase0_regression.t` with real runtime cursor-line coverage across successive same-rule slots plus the updated rewrite-level expectation,
+- and refreshed the user-facing contract/reference docs plus the roadmap/continuity notes so the helper is described as a live cursor-line read rather than only a snapshot-style rewrite form.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Phase 4: Add `cursor_pos()` Direct Cursor Read Helper
 
 Advanced the first-class capture/mark helper surface with a direct current-cursor position read:
