@@ -190,6 +190,60 @@ CAPTURE_IF()
 
 These remain useful when migrating older capture-heavy specs.
 
+### `capture_from_rule_start()`
+Return the captured substring from the current rule-entry start to the same slot-local right boundary that the old raw `$IPOS` / `$LSPOS` / `$LMATCH` pattern used.
+
+Practical reading:
+- the left boundary is the current rule-entry `$IPOS` snapshot,
+- the right boundary is exactly the same slot-local boundary that raw `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)` would have used,
+- the current local match itself is not included in the returned substring,
+- and unlike `capture_from(name)`, this helper does not depend on any named mark.
+
+Examples:
+
+```text
+assign(scalar(segment), capture_from_rule_start())
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_span) }
+ /\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(first_span), capture_from_rule_start()) }
+ -> Top[1] { return(array("?Top:", scalar(first_span), capture_from_rule_start())) }
+```
+
+Use it when the rule wants the old raw `$IPOS` capture pattern explicitly, but the left boundary is just “where this rule started” rather than one named checkpoint.
+
+### `capture_len_from_rule_start()`
+Return the numeric length of the same rule-entry span that `capture_from_rule_start()` would read.
+
+Practical reading:
+- the left boundary is still the current rule-entry `$IPOS` snapshot,
+- the right boundary is exactly the same slot-local boundary that raw `$LSPOS - $IPOS - length $LMATCH` would have used,
+- the current local match itself is not included in that span,
+- and the helper returns the width of that span instead of materializing the substring.
+
+Examples:
+
+```text
+assign(scalar(width), capture_len_from_rule_start())
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_width) }
+ /\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(first_width), capture_len_from_rule_start()) }
+ -> Top[1] { return(array("?Top:", scalar(first_width), capture_len_from_rule_start())) }
+```
+
+Use it when the rule needs that same rule-entry-to-current-edge boundary model as `capture_from_rule_start()` but only wants length metadata.
+
 ### `capture_from(name)`
 Return the captured substring from a named `@mark(name)` checkpoint to the left edge of the current match.
 

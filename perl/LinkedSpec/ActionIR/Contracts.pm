@@ -430,6 +430,36 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_from_rule_start',
+   ir_node            => 'CAPTURE_FROM_RULE_START',
+   diag_name          => 'capture_from_rule_start',
+   unresolved_pattern => qr/\bcapture_from_rule_start\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_from_rule_start\s*\(\s*\)
+    }{
+     'do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_len_from_rule_start',
+   ir_node            => 'CAPTURE_LEN_FROM_RULE_START',
+   diag_name          => 'capture_len_from_rule_start',
+   unresolved_pattern => qr/\bcapture_len_from_rule_start\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_len_from_rule_start\s*\(\s*\)
+    }{
+     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_from_mark',
    ir_node            => 'CAPTURE_FROM_MARK',
    diag_name          => 'capture_from',

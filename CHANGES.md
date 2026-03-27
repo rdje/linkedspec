@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Phase 4: Add Rule-Entry Capture Read Helpers
+
+Advanced the first-class capture helper surface with explicit current rule-entry span readers:
+- updated `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_from_rule_start()` and `capture_len_from_rule_start()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- spent `capture_from_rule_start()` in `specs/sdce.spec` so its live split bands no longer need the raw `$IPOS` capture substring shape there,
+- widened `t/phase0_regression.t` with rewrite-level coverage, runtime semantic coverage, canonical action-IR coverage, and focused source-level coverage for the `sdce` spend,
+- and refreshed the user-facing contract/reference docs plus the roadmap/continuity notes so the current rule-entry helper split is described explicitly rather than only through raw `$IPOS` examples.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Phase 4: Fix `cursor_line()` Live Cursor Semantics
 
 Corrected the direct current-cursor line helper so it now follows the live parser cursor instead of a stale rule-entry snapshot:

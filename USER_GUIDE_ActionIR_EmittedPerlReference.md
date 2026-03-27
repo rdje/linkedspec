@@ -333,6 +333,8 @@ Important nuance:
 
 ### Capture and backtrack helpers
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
+- `capture_from_rule_start()` -> `do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }`
+- `capture_len_from_rule_start()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
 - `capture_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture_len_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? ($LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture_take(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'current_rule', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }`
@@ -357,6 +359,8 @@ Important nuance:
 - The label argument on `capture(...)`, `capture_if(...)`, `ibacktrack(...)`, and `backtrack(...)` is compatibility syntax.
 - Lowering uses the current rule context, not the literal label text inside the call.
 - `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
+- `capture_from_rule_start()` is the explicit helper form of the common raw `$IPOS` capture pattern, so it always uses the current rule-entry start as its left boundary and never depends on mark storage.
+- `capture_len_from_rule_start()` returns the numeric width of that same rule-entry span, so later logic can compare or record it without materializing the substring.
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so a later regex slot in the same rule usually acts as the right delimiter.
 - `capture_len_from(name)` returns the numeric length of that same current-edge span, so later logic can record or compare span-width metadata without materializing the substring.
 - `capture_take(name)` returns that same span and then updates the rule-local named mark to `pos $$STRING`, so later same-rule reads continue from the current parser position.
