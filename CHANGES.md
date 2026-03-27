@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Centralize ParserFactory Mixed Dep Bundle
+
+Continued the same owner-contract cleanup on the active parser-factory path:
+- updated `perl/LinkedSpec/OwnerDispatch.pm` with a shared `build_dep_bundle(...)` helper so one owner can assemble mixed callback/value dependency bundles through the same lazy owner-dispatch seam,
+- updated `perl/LinkedSpec/ParserFactory.pm` so `_default_deps()` now uses that shared bundle builder instead of hand-building another mixed trace/resolve/compile callback plus trace dump-level value registry inline,
+- widened `t/phase0_regression.t` with both a source-level architecture lock and a direct helper contract test for the new mixed dependency-bundle builder,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/OwnerDispatch.pm`
+- `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Spend Shared Dep-Map Builder Across Secondary ActionIR Owners
 
 Continued the same ActionIR owner-contract cleanup across the remaining secondary owners:

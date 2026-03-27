@@ -25,7 +25,7 @@ This document is the current high-level technical reading of the project shape. 
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
 - Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
-- `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners, so callback-map building is starting to centralize too.
+- `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
 - The frontend syntax/bootstrapping truth still concentrates in:
@@ -86,6 +86,7 @@ The facade surface currently falls into four bands.
 The important conclusion is that `LinkedSpec.pm` should be read as a facade and routing layer, not as the place where most semantics live anymore.
 
 One supporting detail matters now: the repeated thin-wrapper plumbing for lazy package loading, callback/value lookup, delegated owner calls, and `$@` preservation is no longer reimplemented separately in each owner. `LinkedSpec.pm`, `LinkedSpec::Trace`, `Runtime.pm`, `ParserFactory.pm`, `BootstrapSpec.pm`, `BootstrapSpec::Core`, `Compiler.pm`, `SpecEntry.pm`, `RuleIR.pm`, `RuleIR::EmitContext.pm`, `Resolver.pm`, `Validation.pm`, and `ActionRewriter.pm` now share that seam through `LinkedSpec::OwnerDispatch`, and the same seam is now also being spent inside active ActionIR owners such as `LinkedSpec::ActionIR::RewritePipeline`, `LinkedSpec::ActionIR::Scanner`, `LinkedSpec::ActionIR::ScannerCore`, `LinkedSpec::ActionIR::StatementSplit`, `LinkedSpec::ActionIR::StatementSplit::Core`, `LinkedSpec::ActionIR::CanonicalEvents`, `LinkedSpec::ActionIR::Diagnostics`, `LinkedSpec::ActionIR::ValueExpr`, `LinkedSpec::ActionIR::FlowExpr`, `LinkedSpec::ActionIR::ArrayPipeline`, `LinkedSpec::ActionIR::ControlFlow`, `LinkedSpec::ActionIR::Contracts`, `LinkedSpec::ActionIR::MethodLowering`, and `LinkedSpec::ActionIR::DeclareMethod`.
+One more concrete consequence of that shift is now visible on the parser-factory path too: `ParserFactory.pm` no longer hand-builds its mixed trace/resolve/compile callback plus trace-verbosity value bundle locally, because `LinkedSpec::OwnerDispatch` now owns a shared mixed dependency-bundle builder for that active compile-path surface.
 
 ## Current Owner Tree
 The current practical owner tree is:
@@ -167,6 +168,7 @@ LinkedSpec
 - resolves the target `.spec`,
 - loads file content,
 - prepares trace/runtime context,
+- now assembles its default trace/resolve/compile callback dependencies plus trace dump-level values through one shared `OwnerDispatch` bundle helper instead of another owner-local registry,
 - delegates actual compilation to the runtime/compiler path.
 
 ### `LinkedSpec::Resolver`

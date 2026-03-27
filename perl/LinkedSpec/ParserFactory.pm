@@ -94,18 +94,18 @@ sub _require_value_dep {
 # Returns : hashref default dependency map
 #------------------------------------------------------------------------------
 sub _default_deps {
- return {
-  apply_trace_options => _require_pkg_cb('LinkedSpec::Trace', '_apply_trace_options'),
-  trace_enter => _require_pkg_cb('LinkedSpec::Trace', 'trace_enter'),
-  trace_exit => _require_pkg_cb('LinkedSpec::Trace', 'trace_exit'),
-  trace_decision => _require_pkg_cb('LinkedSpec::Trace', 'trace_decision'),
-  validate_spec_name => _require_pkg_cb('LinkedSpec::Resolver', 'validate_spec_name'),
-  resolve_spec_path => _require_pkg_cb('LinkedSpec::Resolver', 'resolve_spec_path'),
-  load_spec_content => _require_pkg_cb('LinkedSpec::Resolver', 'load_spec_content'),
-  compile_spec => _require_pkg_cb('LinkedSpec::Runtime', 'run_get'),
-  dump_low => _require_pkg_value('LinkedSpec::Trace', 'DUMP_LOW'),
-  dump_medium => _require_pkg_value('LinkedSpec::Trace', 'DUMP_MEDIUM'),
- }
+ return LinkedSpec::OwnerDispatch::build_dep_bundle(__PACKAGE__, undef, [
+  { dep => 'apply_trace_options', pkg => 'LinkedSpec::Trace', cb => '_apply_trace_options' },
+  { dep => 'trace_enter', pkg => 'LinkedSpec::Trace', cb => 'trace_enter' },
+  { dep => 'trace_exit', pkg => 'LinkedSpec::Trace', cb => 'trace_exit' },
+  { dep => 'trace_decision', pkg => 'LinkedSpec::Trace', cb => 'trace_decision' },
+  { dep => 'validate_spec_name', pkg => 'LinkedSpec::Resolver', cb => 'validate_spec_name' },
+  { dep => 'resolve_spec_path', pkg => 'LinkedSpec::Resolver', cb => 'resolve_spec_path' },
+  { dep => 'load_spec_content', pkg => 'LinkedSpec::Resolver', cb => 'load_spec_content' },
+  { dep => 'compile_spec', pkg => 'LinkedSpec::Runtime', cb => 'run_get' },
+  { type => 'value', dep => 'dump_low', pkg => 'LinkedSpec::Trace', cb => 'DUMP_LOW' },
+  { type => 'value', dep => 'dump_medium', pkg => 'LinkedSpec::Trace', cb => 'DUMP_MEDIUM' },
+ ])
 }
 
 #------------------------------------------------------------------------------

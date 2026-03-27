@@ -140,6 +140,67 @@ sub build_dep_map {
 }
 
 #------------------------------------------------------------------------------
+# Function: build_dep_bundle
+# Purpose : Build one mixed dependency bundle by resolving callback specs and
+#           value specs through the shared owner-dispatch seam.
+# Args    : ($owner_pkg, $default_target_pkg, $dep_specs)
+# Returns : hashref of dependency callbacks and values
+#------------------------------------------------------------------------------
+sub build_dep_bundle {
+ my ($owner_pkg, $default_target_pkg, $dep_specs) = @_;
+ my $owner = defined($owner_pkg) && length($owner_pkg) ? $owner_pkg : __PACKAGE__;
+ my $default_target = defined($default_target_pkg) && length($default_target_pkg)
+  ? $default_target_pkg
+  : undef;
+
+ return call_preserving_err(sub {
+  my $specs = (ref($dep_specs) eq 'ARRAY') ? $dep_specs : [];
+  my %deps;
+
+  foreach my $spec (@{$specs}) {
+   my ($dep_name, $target_pkg, $cb_name, $dep_type);
+
+   if (!ref($spec)) {
+    $dep_name = $spec;
+    $target_pkg = $default_target;
+    $dep_type = 'cb';
+   }
+   elsif (ref($spec) eq 'HASH') {
+    $dep_name = $spec->{dep};
+    $target_pkg = defined($spec->{pkg}) ? $spec->{pkg} : $default_target;
+    $cb_name = $spec->{cb};
+    $dep_type = defined($spec->{type}) ? $spec->{type} : 'cb';
+   }
+   else {
+    die "(${owner}::build_dep_bundle) -E- malformed dependency spec";
+   }
+
+   die "(${owner}::build_dep_bundle) -E- dependency spec missing dep name"
+    unless defined($dep_name) && length($dep_name);
+   die "(${owner}::build_dep_bundle) -E- dependency spec missing target package for '$dep_name'"
+    unless defined($target_pkg) && length($target_pkg);
+
+   if ($dep_type eq 'cb') {
+    $cb_name = '_'.$dep_name unless defined($cb_name) && length($cb_name);
+    $deps{$dep_name} = require_pkg_cb($owner, $target_pkg, $cb_name);
+    next;
+   }
+
+   if ($dep_type eq 'value') {
+    die "(${owner}::build_dep_bundle) -E- value dependency spec missing callback name for '$dep_name'"
+     unless defined($cb_name) && length($cb_name);
+    $deps{$dep_name} = require_pkg_value($owner, $target_pkg, $cb_name);
+    next;
+   }
+
+   die "(${owner}::build_dep_bundle) -E- unsupported dependency spec type '$dep_type' for '$dep_name'";
+  }
+
+  return \%deps
+ })
+}
+
+#------------------------------------------------------------------------------
 # Function: dispatch_owner_call
 # Purpose : Shared thin-wrapper delegator that lazy-loads one owner package and
 #           invokes a named routine through it.
