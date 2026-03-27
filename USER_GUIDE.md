@@ -219,7 +219,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, compatibility `array_values(...)`, `hash_copy(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
@@ -645,6 +645,8 @@ Hash/object key-presence checks are part of that contract too: `has_key(...)` no
 
 Hash/object layering is part of that contract too: `merge_hash(...)` now lets `.spec` rules build one canonical merged object from working hashes, constructor hashes, and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so parser-owned metadata normalization can stay inside the same functional, parser-oriented expression layer instead of leaking into ad hoc host-language object merging.
 
+Hash/object snapshotting is part of that contract too: `hash_copy(...)` now lets `.spec` rules keep one stable nested object snapshot from a working hash or composed hash-valued expression on both action-edge and lifecycle surfaces, so nested payload construction and later helper composition can stay inside the same functional, parser-oriented expression layer instead of dropping into ad hoc host-language `{%hash}` copies.
+
 Hash/object single-field update is part of that contract too: `set_key(...)` now lets `.spec` rules set one canonical field on working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so small object-shape adjustments can stay inside the same functional, parser-oriented expression layer instead of forcing a one-key merge wrapper or dropping into ad hoc host-language field assignment.
 
 Hash/object single-field rename is part of that contract too: `rename_key(...)` now lets `.spec` rules rename one canonical field on working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so field-name normalization can stay inside the same functional, parser-oriented expression layer instead of forcing a manual delete-plus-set sequence or dropping into ad hoc host-language field reassignment.
@@ -824,6 +826,7 @@ Typical patterns:
 - `drop_front(..., n)`
 - `concat_arrays(...)`
 - `array_copy(...)`
+- `hash_copy(...)`
 - `flat_array(...)`
 - `assign(scalar(retv), call(rule))`
 - `return(array(...))`
@@ -857,7 +860,7 @@ Typical patterns:
 - pure array order inversion via `reversed(array_expr)` over direct or composed array-valued expressions
 - integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
 - array constructors and snapshots via `array(...)` and `array_copy(...)`
-- hash/object constructors via `hash(...)`
+- hash/object constructors and snapshots via `hash(...)` and `hash_copy(...)`
 - stable hash/object summaries via `sorted_keys(...)` and `sorted_values(...)`
 - array membership flags via `contains(array_expr, value_expr)`
 - aggregate-shape emptiness checks via `is_empty(sorted_values(...))` and `is_nonempty(pick_keys(...))`
@@ -1320,9 +1323,9 @@ If backend neutrality matters, these are the defaults you should follow.
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `array_copy(array(name))` for snapshot payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(name)` / `flat_hash(name)` for list-context insertion.
+7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(name)` / `flat_hash(name)` for list-context insertion.
 8. Use snippet inspection and `return_descr` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances

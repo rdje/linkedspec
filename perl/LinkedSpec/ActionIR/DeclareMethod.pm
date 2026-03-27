@@ -187,7 +187,7 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\{(?<payload>.*)\}$/s) {
    return '('.$+{payload}.')';
   }
-  if ($hash_ctor && ($hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
+  if ($hash_ctor && ($hash_ctor->{method} eq 'hash_copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return undef unless defined($derived_expr) && length($derived_expr);
    return '('.$+{payload}.')' if $derived_expr =~ /^\{(?<payload>.*)\}$/s;

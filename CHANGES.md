@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Method DSL: Add `hash_copy(...)` Snapshot Helper
+
+Extended the method-like DSL with a first-class pure hash/object snapshot helper:
+- updated `perl/LinkedSpec/ActionIR/MethodLowering.pm` so `hash_copy(...)` lowers as one new copied hash/object value from either a direct working hash or a composed hash-valued helper expression,
+- updated `perl/LinkedSpec/ActionIR/FlowExpr.pm` so `is_empty(...)` / `is_nonempty(...)` treat `hash_copy(...)` as a real hash-valued expression,
+- updated `perl/LinkedSpec/ActionIR/DeclareMethod.pm` so `assign(hash(...), hash_copy(...))` and related hash-target declaration/assignment flows accept the new helper cleanly,
+- widened `t/phase0_regression.t` with direct lowering checks plus fluent-versus-structured parity locks on both action-edge and lifecycle surfaces,
+- and refreshed the user guides plus roadmap/continuity files so `hash_copy(...)` is documented as the preferred object-snapshot helper.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Route Rule Dump Loaders Through Owner Dispatch
 
 Continued the same owner-dispatch cleanup on the active rule-compilation path:

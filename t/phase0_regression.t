@@ -33116,6 +33116,118 @@ SPEC
         'lifecycle merge_hash fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
+subtest 'action_rewriter_lowers_hash_copy_value_helpers' => sub {
+    plan tests => 4;
+
+    is(
+        LinkedSpec::ActionRewriter::_lower_method_value_expr('hash_copy(hash(meta))'),
+        '{%meta}',
+        'hash_copy(...) lowers working hashes into a pure snapshot hashref expression'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr('is_nonempty(hash_copy(hash(meta)))'),
+        '(!(do { my $__ls_empty_hash = {%meta}; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }))',
+        'hash_copy(...) composes inside aggregate emptiness flow checks as a hash-valued expression'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash_copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
+        'return do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }',
+        'hash_copy(...) lowers inside general return payloads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'assign(hash(meta_out), hash_copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
+        '%meta_out = (do { my $__ls_hash_init = do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        'hash_copy(...) lowers inside hash assignment sources'
+    );
+};
+subtest 'method_like_fluent_and_structured_action_hash_copy_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge hash_copy helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge hash_copy helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge hash_copy helper forms lower to identical ACODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge hash_copy helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge hash_copy helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge hash_copy helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge hash_copy helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge hash_copy helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge hash_copy helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge hash_copy helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured action-edge hash_copy helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'action-edge hash_copy fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
+subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_lower_equivalently' => sub {
+    plan tests => 12;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))).assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle hash_copy helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle hash_copy helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle hash_copy helper forms lower to identical LXCODE output');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle hash_copy helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle hash_copy helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle hash_copy helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle hash_copy helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle hash_copy helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle hash_copy helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle hash_copy helper forms produce identical canonical action-IR node coverage');
+    ok(
+        $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
+        'fluent and structured lifecycle hash_copy helper forms remain language-agnostic action-IR ready'
+    );
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
+        'lifecycle hash_copy fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+    );
+};
 subtest 'action_rewriter_lowers_set_key_value_helpers' => sub {
     plan tests => 4;
 

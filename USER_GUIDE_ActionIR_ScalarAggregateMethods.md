@@ -1584,6 +1584,38 @@ Important semantic note:
 - undefined hash-valued expressions simply contribute no pairs,
 - and the helper itself does not mutate the source hashes.
 
+### Hash/object snapshotting with `hash_copy(...)`
+`hash_copy(...)` is the parser-oriented helper for “take one hash/object snapshot right now as one nested value.”
+
+Examples:
+
+```text
+hash_copy(hash(meta))
+hash_copy(pick_keys(hash(meta), "kind", "source"))
+hash_copy(merge_hash(hash(meta), hash("stage", "normalized")))
+```
+
+Use cases:
+- keep one nested object snapshot inside one larger return payload,
+- copy one normalized or projected object before later helper composition,
+- and feed one copied object directly into `scalar(hash_expr, key)`, `count_keys(...)`, `has_key(...)`, or `is_nonempty(...)` without mutating the source hash.
+
+Examples in context:
+
+```text
+assign(hash(snapshot_meta), hash_copy(hash(meta)))
+assign(hash(snapshot_meta), hash_copy(pick_keys(hash(meta), "kind", "source")))
+assign(scalar(kind_seen), scalar(hash_copy(hash(meta)), "kind"))
+return(hash("meta", hash_copy(merge_hash(hash(meta), hash("stage", "normalized")))))
+if(is_nonempty(hash_copy(hash(meta))))
+```
+
+Important semantic note:
+- `hash_copy(...)` returns one new hash/object value,
+- the source hash stays untouched unless you explicitly assign the result back,
+- direct working hashes lower to one immediate snapshot,
+- and composed hash-valued expressions are copied too so later helper composition sees one stable nested object value instead of a live working hash alias.
+
 ### Hash/object single-field updates with `set_key(...)`
 `set_key(...)` is the parser-oriented helper for “build one new object by setting one field on top of one existing object value.”
 

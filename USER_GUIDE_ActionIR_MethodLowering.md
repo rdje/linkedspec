@@ -63,6 +63,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `sorted_values(...)`
 - `has_key(...)`
 - `merge_hash(...)`
+- `hash_copy(...)`
 - `set_key(...)`
 - `rename_key(...)`
 - `drop_keys(...)`
@@ -243,6 +244,27 @@ This is one of the most important distinctions in the DSL.
 
 ### Do **not** use it when you want list insertion into a surrounding constructor.
 For list insertion, use `flat_array(...)` or `flat(...)` instead.
+
+## `hash_copy(hash_expr)`
+This helper creates a **snapshot hash/object payload**.
+
+Examples:
+
+```text
+return(hash_copy(hash(meta)))
+return(hash("meta", hash_copy(hash(normalized_meta))))
+assign(hash(snapshot_meta), hash_copy(pick_keys(hash(meta), "kind", "source")))
+```
+
+Use it when you want:
+- one nested hash/object payload,
+- one copy/snapshot of the current object shape,
+- or one pure hash-valued expression that composes with `scalar(...)`, `count_keys(...)`, or `is_nonempty(...)` without mutating the source hash.
+
+Method-DSL migration note:
+- fluent and structured authoring are now regression-locked on supported `hash_copy(...)` value forms too,
+- on both action-edge and lifecycle surfaces,
+- and the helper now composes through hash assignment, nested scalar reads, aggregate emptiness checks, and general `return(payload)` lowering.
 
 ## `concat_arrays(array_expr, array_expr, ...)`
 Use `concat_arrays(...)` when you want one pure array value that appends multiple array-valued sources together without mutating any working array.
