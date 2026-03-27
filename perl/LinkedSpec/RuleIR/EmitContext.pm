@@ -34,60 +34,92 @@ sub _require_pkg {
  return $pkg
 }
 
+#------------------------------------------------------------------------------
+# Function: _actionir_owner_package
+# Purpose : Resolve one local ActionIR owner key to its package name and
+#           lazy-load it through the shared owner-dispatch seam.
+# Args    : ($owner_key)
+# Returns : loaded package name
+#------------------------------------------------------------------------------
+sub _actionir_owner_package {
+ my ($owner_key) = @_;
+ state $owner_pkgs = {
+  rewrite_pipeline => 'LinkedSpec::ActionIR::RewritePipeline',
+  method_expr => 'LinkedSpec::ActionIR::MethodExpr',
+  scanner => 'LinkedSpec::ActionIR::Scanner',
+  canonical_events => 'LinkedSpec::ActionIR::CanonicalEvents',
+  diagnostics => 'LinkedSpec::ActionIR::Diagnostics',
+  statement_split => 'LinkedSpec::ActionIR::StatementSplit',
+  contracts => 'LinkedSpec::ActionIR::Contracts',
+  flow_expr => 'LinkedSpec::ActionIR::FlowExpr',
+  array_pipeline => 'LinkedSpec::ActionIR::ArrayPipeline',
+  control_flow => 'LinkedSpec::ActionIR::ControlFlow',
+  method_lowering => 'LinkedSpec::ActionIR::MethodLowering',
+  declare_method => 'LinkedSpec::ActionIR::DeclareMethod',
+  value_expr => 'LinkedSpec::ActionIR::ValueExpr',
+  trace => 'LinkedSpec::Trace',
+ };
+
+ my $pkg = $owner_pkgs->{$owner_key};
+ die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_package) -E- unknown owner key '$owner_key'"
+  unless defined($pkg) && length($pkg);
+ return _require_pkg($pkg)
+}
+
 sub _require_rewrite_pipeline_pkg {
- return _require_pkg('LinkedSpec::ActionIR::RewritePipeline')
+ return _actionir_owner_package('rewrite_pipeline')
 }
 
 sub _require_method_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
+ return _actionir_owner_package('method_expr')
 }
 
 sub _require_scanner_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Scanner')
+ return _actionir_owner_package('scanner')
 }
 
 sub _require_canonical_events_pkg {
- return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents')
+ return _actionir_owner_package('canonical_events')
 }
 
 sub _require_diagnostics_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Diagnostics')
+ return _actionir_owner_package('diagnostics')
 }
 
 sub _require_statement_split_pkg {
- return _require_pkg('LinkedSpec::ActionIR::StatementSplit')
+ return _actionir_owner_package('statement_split')
 }
 
 sub _require_contracts_pkg {
- return _require_pkg('LinkedSpec::ActionIR::Contracts')
+ return _actionir_owner_package('contracts')
 }
 
 sub _require_flow_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::FlowExpr')
+ return _actionir_owner_package('flow_expr')
 }
 
 sub _require_array_pipeline_pkg {
- return _require_pkg('LinkedSpec::ActionIR::ArrayPipeline')
+ return _actionir_owner_package('array_pipeline')
 }
 
 sub _require_control_flow_pkg {
- return _require_pkg('LinkedSpec::ActionIR::ControlFlow')
+ return _actionir_owner_package('control_flow')
 }
 
 sub _require_method_lowering_pkg {
- return _require_pkg('LinkedSpec::ActionIR::MethodLowering')
+ return _actionir_owner_package('method_lowering')
 }
 
 sub _require_declare_method_pkg {
- return _require_pkg('LinkedSpec::ActionIR::DeclareMethod')
+ return _actionir_owner_package('declare_method')
 }
 
 sub _require_value_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::ValueExpr')
+ return _actionir_owner_package('value_expr')
 }
 
 sub _require_trace_pkg {
- return _require_pkg('LinkedSpec::Trace')
+ return _actionir_owner_package('trace')
 }
 
 #------------------------------------------------------------------------------
@@ -102,12 +134,64 @@ sub _call_preserving_err {
  return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+#------------------------------------------------------------------------------
+# Function: _actionir_owner_default_deps
+# Purpose : Ask one local ActionIR owner for its default dependency bundle as
+#           seen from this emit-context package.
+# Args    : ($owner_key)
+# Returns : hashref dependency map
+#------------------------------------------------------------------------------
+sub _actionir_owner_default_deps {
+ my ($owner_key) = @_;
+ return _call_preserving_err(sub {
+  my $pkg = _actionir_owner_package($owner_key);
+  my $code = $pkg->can('default_deps_for_package');
+  die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_default_deps) -E- owner '$pkg' does not define default_deps_for_package(...)"
+   unless ref($code) eq 'CODE';
+  return $code->(__PACKAGE__)
+ })
+}
+
+#------------------------------------------------------------------------------
+# Function: _call_actionir_owner
+# Purpose : Dispatch one helper callback to a local ActionIR owner without
+#           appending that owner's default dependency bundle.
+# Args    : ($owner_key, $method, @args)
+# Returns : callback return value
+#------------------------------------------------------------------------------
+sub _call_actionir_owner {
+ my ($owner_key, $method, @args) = @_;
+ return _call_preserving_err(sub {
+  my $pkg = _actionir_owner_package($owner_key);
+  my $code = $pkg->can($method);
+  die "(LinkedSpec::RuleIR::EmitContext::_call_actionir_owner) -E- owner '$pkg' missing callback '$method'"
+   unless ref($code) eq 'CODE';
+  return $code->(@args)
+ })
+}
+
+#------------------------------------------------------------------------------
+# Function: _call_actionir_owner_with_deps
+# Purpose : Dispatch one helper callback to a local ActionIR owner and append
+#           that owner's default dependency bundle automatically.
+# Args    : ($owner_key, $method, @args)
+# Returns : callback return value
+#------------------------------------------------------------------------------
+sub _call_actionir_owner_with_deps {
+ my ($owner_key, $method, @args) = @_;
+ return _call_preserving_err(sub {
+  my $pkg = _actionir_owner_package($owner_key);
+  my $code = $pkg->can($method);
+  die "(LinkedSpec::RuleIR::EmitContext::_call_actionir_owner_with_deps) -E- owner '$pkg' missing callback '$method'"
+   unless ref($code) eq 'CODE';
+  my $deps = _actionir_owner_default_deps($owner_key);
+  return $code->(@args, $deps)
+ })
+}
+
 sub _trace_log_output {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
-  return LinkedSpec::Trace::log_output(@args)
- })
+ return _call_actionir_owner('trace', 'log_output', @args)
 }
 
 sub _build_rewrite_diag_acc {
@@ -143,507 +227,310 @@ sub _preserve_terminal_block_statement_separator {
 
 sub _parse_method_function_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr(@args)
- })
+ return _call_actionir_owner('method_expr', '_parse_method_function_expr', @args)
 }
 
 sub _is_bare_method_scope_token {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token(@args)
- })
+ return _call_actionir_owner('method_expr', '_is_bare_method_scope_token', @args)
 }
 
 sub _normalize_method_args_with_optional_scope {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope(@args)
- })
+ return _call_actionir_owner('method_expr', '_normalize_method_args_with_optional_scope', @args)
 }
 
 sub _split_top_level_csv {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_expr_pkg();
-  return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv(@args)
- })
+ return _call_actionir_owner('method_expr', '_split_top_level_csv', @args)
 }
 
 sub _statement_split_deps {
- return _call_preserving_err(sub {
-  _require_statement_split_pkg();
-  return LinkedSpec::ActionIR::StatementSplit::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('statement_split')
 }
 
 sub _split_action_ir_statements {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_statement_split_pkg();
-  return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(@args, _statement_split_deps())
- })
+ return _call_actionir_owner_with_deps('statement_split', '_split_action_ir_statements', @args)
 }
 
 sub _flow_expr_deps {
- return _call_preserving_err(sub {
-  _require_flow_expr_pkg();
-  return LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('flow_expr')
 }
 
 sub _value_expr_deps {
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('value_expr')
 }
 
 sub _method_lowering_deps {
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('method_lowering')
 }
 
 sub _declare_method_deps {
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('declare_method')
 }
 
 sub _array_pipeline_deps {
- return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('array_pipeline')
 }
 
 sub _control_flow_deps {
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('control_flow')
 }
 
 sub _scan_contract_ir_event_deps {
- return _call_preserving_err(sub {
-  _require_scanner_pkg();
-  return LinkedSpec::ActionIR::Scanner::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('scanner')
 }
 
 sub _diagnostics_deps {
- return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('diagnostics')
 }
 
 sub _canonical_event_deps {
- return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('canonical_events')
 }
 
 sub _action_contract_deps {
- return _call_preserving_err(sub {
-  _require_contracts_pkg();
-  return LinkedSpec::ActionIR::Contracts::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('contracts')
 }
 
 sub _rewrite_pipeline_deps {
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::default_deps_for_package(__PACKAGE__)
- })
+ return _actionir_owner_default_deps('rewrite_pipeline')
 }
 
 sub _lower_flow_composite_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_flow_expr_pkg();
-  return LinkedSpec::ActionIR::FlowExpr::_lower_flow_composite_expr(@args, _flow_expr_deps())
- })
+ return _call_actionir_owner_with_deps('flow_expr', '_lower_flow_composite_expr', @args)
 }
 
 sub _extract_scalar_symbol_name {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_scalar_symbol_name(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_extract_scalar_symbol_name', @args)
 }
 
 sub _extract_array_symbol_name {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_array_symbol_name(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_extract_array_symbol_name', @args)
 }
 
 sub _extract_hash_symbol_name {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_extract_hash_symbol_name(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_extract_hash_symbol_name', @args)
 }
 
 sub _lower_scalar_access_key_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_scalar_access_key_expr(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_lower_scalar_access_key_expr', @args)
 }
 
 sub _lower_scalaref_value_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_scalaref_value_expr(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_lower_scalaref_value_expr', @args)
 }
 
 sub _infer_scalar_container_kind {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_infer_scalar_container_kind(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_infer_scalar_container_kind', @args)
 }
 
 sub _lower_assignment_source_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_lower_assignment_source_expr(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_lower_assignment_source_expr', @args)
 }
 
 sub _strip_literal_delimiters {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_value_expr_pkg();
-  return LinkedSpec::ActionIR::ValueExpr::_strip_literal_delimiters(@args, _value_expr_deps())
- })
+ return _call_actionir_owner_with_deps('value_expr', '_strip_literal_delimiters', @args)
 }
 
 sub _split_declare_symbol_names {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_split_declare_symbol_names(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_split_declare_symbol_names', @args)
 }
 
 sub _parse_declare_binding_entry {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_parse_declare_binding_entry(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_parse_declare_binding_entry', @args)
 }
 
 sub _lower_declare_value_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_value_expr(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_lower_declare_value_expr', @args)
 }
 
 sub _lower_declare_initializer_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_initializer_expr(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_lower_declare_initializer_expr', @args)
 }
 
 sub _lower_typed_declare_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_typed_declare_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_typed_declare_statement', @args)
 }
 
 sub _declare_alias_to_type {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_declare_alias_to_type(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_declare_alias_to_type', @args)
 }
 
 sub _lower_assign_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_assign_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_assign_statement', @args)
 }
 
 sub _lower_method_value_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_method_value_expr', @args)
 }
 
 sub _lower_return_general_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_general_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_return_general_statement', @args)
 }
 
 sub _lower_return_imatch_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_imatch_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_return_imatch_statement', @args)
 }
 
 sub _lower_push_value_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_push_value_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_push_value_statement', @args)
 }
 
 sub _lower_regex_subst_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_regex_subst_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_regex_subst_statement', @args)
 }
 
 sub _lower_return_undef_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_undef_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_return_undef_statement', @args)
 }
 
 sub _lower_return_array_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_lower_return_array_statement(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_return_array_statement', @args)
 }
 
 sub _extract_declare_statement_from_method_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_extract_declare_statement_from_method_expr', @args)
 }
 
 sub _lower_declare_method_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_declare_method_statement(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_lower_declare_method_statement', @args)
 }
 
 sub _lower_assign_method_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_declare_method_pkg();
-  return LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement(@args, _declare_method_deps())
- })
+ return _call_actionir_owner_with_deps('declare_method', '_lower_assign_method_statement', @args)
 }
 
 sub _build_array_pipeline_plan_from_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::_build_array_pipeline_plan_from_expr(@args, _array_pipeline_deps())
- })
+ return _call_actionir_owner_with_deps('array_pipeline', '_build_array_pipeline_plan_from_expr', @args)
 }
 
 sub _lower_array_pipeline_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_array_pipeline_pkg();
-  return LinkedSpec::ActionIR::ArrayPipeline::_lower_array_pipeline_expr(@args, _array_pipeline_deps())
- })
+ return _call_actionir_owner_with_deps('array_pipeline', '_lower_array_pipeline_expr', @args)
 }
 
 sub _lower_if_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_if_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_if_flow_statement', @args)
 }
 
 sub _lower_elseif_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_elseif_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_elseif_flow_statement', @args)
 }
 
 sub _lower_else_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_else_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_else_flow_statement', @args)
 }
 
 sub _lower_endif_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_endif_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_endif_flow_statement', @args)
 }
 
 sub _lower_switch_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_switch_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_switch_flow_statement', @args)
 }
 
 sub _lower_case_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_case_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_case_flow_statement', @args)
 }
 
 sub _lower_default_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_default_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_default_flow_statement', @args)
 }
 
 sub _lower_endcase_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_endcase_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_endcase_flow_statement', @args)
 }
 
 sub _lower_endswitch_flow_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_endswitch_flow_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_endswitch_flow_statement', @args)
 }
 
 sub _lower_say_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_say_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_say_statement', @args)
 }
 
 sub _lower_print_statement {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_control_flow_pkg();
-  return LinkedSpec::ActionIR::ControlFlow::_lower_print_statement(@args, _control_flow_deps())
- })
+ return _call_actionir_owner_with_deps('control_flow', '_lower_print_statement', @args)
 }
 
 sub _normalize_method_tag_expr {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_method_lowering_pkg();
-  return LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr(@args, _method_lowering_deps())
- })
+ return _call_actionir_owner_with_deps('method_lowering', '_normalize_method_tag_expr', @args)
 }
 
 sub _build_action_lowering_contracts {
  my ($label) = @_;
- return _call_preserving_err(sub {
-  _require_contracts_pkg();
-  return LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts($label, _action_contract_deps())
- })
+ return _call_actionir_owner_with_deps('contracts', 'build_action_lowering_contracts', $label)
 }
 
 sub _scan_contract_ir_events {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_scanner_pkg();
-  return LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(@args, _scan_contract_ir_event_deps())
- })
+ return _call_actionir_owner_with_deps('scanner', 'scan_contract_ir_events', @args)
 }
 
 sub _find_unresolved_action_helpers {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(@args, _diagnostics_deps())
- })
+ return _call_actionir_owner_with_deps('diagnostics', '_find_unresolved_action_helpers', @args)
 }
 
 sub _collect_action_helper_ir_nodes {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_collect_action_helper_ir_nodes(@args, _diagnostics_deps())
- })
+ return _call_actionir_owner_with_deps('diagnostics', '_collect_action_helper_ir_nodes', @args)
 }
 
 sub _build_canonical_action_ir_events {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::_build_canonical_action_ir_events(@args, _canonical_event_deps())
- })
+ return _call_actionir_owner_with_deps('canonical_events', '_build_canonical_action_ir_events', @args)
 }
 
 sub _canonicalize_helper_action_ir_event {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_canonical_events_pkg();
-  return LinkedSpec::ActionIR::CanonicalEvents::_canonicalize_helper_action_ir_event(@args, _canonical_event_deps())
- })
+ return _call_actionir_owner_with_deps('canonical_events', '_canonicalize_helper_action_ir_event', @args)
 }
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules) = @_;
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_rewrite_action_code_with_diagnostics(
-   $label,
-   $code,
-   $rewrite_rules,
-   _rewrite_pipeline_deps(),
-  )
- })
+ return _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules)
 }
 
 sub _accumulate_action_rewrite_diagnostics {
@@ -656,18 +543,12 @@ sub _accumulate_action_rewrite_diagnostics {
 
 sub _lower_action_code_from_canonical_ir {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_lower_action_code_from_canonical_ir(@args)
- })
+ return _call_actionir_owner('rewrite_pipeline', '_lower_action_code_from_canonical_ir', @args)
 }
 
 sub _build_action_rewrite_rules {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_rewrite_pipeline_pkg();
-  return LinkedSpec::ActionIR::RewritePipeline::_build_action_rewrite_rules(@args, _rewrite_pipeline_deps())
- })
+ return _call_actionir_owner_with_deps('rewrite_pipeline', '_build_action_rewrite_rules', @args)
 }
 
 sub rewrite_action_code_for_compat {

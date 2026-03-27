@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Centralize `EmitContext` ActionIR Owner Registry
+
+Continued the owner-contract cleanup at the RuleIR-to-ActionIR bridge:
+- updated `perl/LinkedSpec/RuleIR/EmitContext.pm` so local ActionIR owner package resolution, owner default-dependency lookup, and owner callback dispatch now flow through one shared internal registry/helpers instead of repeating that package/dependency contract across dozens of local wrappers,
+- added Perl-style routine doc blocks on the new internal helpers so the bridge contract is clearer in-file,
+- widened the source-level architecture lock in `t/phase0_regression.t` so the new internal owner-registry seam is pinned directly,
+- and refreshed `ARCHITECTURE_STATE.md`, both roadmap files, plus the continuity notes so future slices treat that bridge registry as the current single source of truth.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Method DSL: Broaden `flat_array(...)` / `flat_hash(...)` Composition
 
 Extended the method-like DSL so list-context insertion helpers are no longer limited to one named working aggregate:

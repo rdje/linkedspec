@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-03-25`
+- Last refreshed: `2026-03-27`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -23,6 +23,7 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Executive Summary
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
+- Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
@@ -47,7 +48,13 @@ This document is the current high-level technical reading of the project shape. 
 - normalize flat option pairs,
 - re-export trace-oriented globals from `LinkedSpec::Trace`.
 
-The facade surface currently falls into three groups.
+Its direct static imports are intentionally narrow:
+- `File::Basename` at `BEGIN` time for local path setup,
+- `LinkedSpec::OwnerDispatch` for shared lazy owner dispatch.
+
+That means the important import tree is the runtime owner tree, not the `use` list in `LinkedSpec.pm` itself.
+
+The facade surface currently falls into four bands.
 
 ### Trace Surface
 - `configure_trace`
@@ -64,10 +71,12 @@ The facade surface currently falls into three groups.
 - `call_spec_handler_subst`
 - `get_parser`
 
-### Legacy Transition Surface
+### Registry Maintenance Surface
 - `register_plugin`
 - `register_plugins`
 - `clear_registered_plugins`
+
+### Legacy Transition Surface
 - `run_plugin`
 - `get_plugin`
 - `dispatch_plugin_autoload_name`
@@ -176,6 +185,7 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 ### `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core`
 - own the hardcoded bootstrap grammar,
 - parse `.spec` syntax before self-hosting is fully realized,
+- also carry bootstrap-side parsing/rendering intelligence for method-chain and attached control-flow syntax normalization,
 - remain a major syntax and safety hotspot.
 
 ### `LinkedSpec::Validation`
@@ -194,7 +204,8 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 
 ### `LinkedSpec::RuleIR::EmitContext`
 - is the bridge from rule IR into ActionIR scanning and lowering,
-- is the main gateway into backend-neutral action rewriting.
+- is the main gateway into backend-neutral action rewriting,
+- now also centralizes its internal ActionIR owner package registry and owner default-dependency lookup instead of hardwiring those contracts separately across dozens of local wrappers.
 
 ## ActionIR Reading
 The ActionIR subtree is now large, but structurally it is much healthier than the older monolithic style.
@@ -305,7 +316,8 @@ The lowering stack is big, but it now has real sub-owners instead of one giant m
 
 ### Repeated owner-dispatch boilerplate
 - the lazy owner-dispatch style is working,
-- but repeated `_require_pkg` / owner-call boilerplate across modules is still a maintenance smell.
+- and the broad thin-wrapper reduction has paid off,
+- but a few internal owner registries and compatibility wrappers still need the same kind of consolidation when they surface as obvious duplication.
 
 ## Current Strategic Judgments
 ### 1. LinkedSpec is no longer best understood as a plugin-hosting framework

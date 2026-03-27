@@ -85,6 +85,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - Existing behavior and regression baseline preserved.
   - Public API compatibility maintained.
 - Recent landed follow-up: `LinkedSpec.pm` now centralizes the flat key/value option-pair normalization used by both `Get(...)` and `get_parser(...)` behind one tiny façade helper instead of duplicating the same even-pair / odd-trailing-fallback logic in both public wrappers. This is a no-behavior-change cleanup, but it keeps the remaining façade surface smaller and more uniform.
+- Recent landed follow-up: `LinkedSpec::RuleIR::EmitContext` now centralizes its internal ActionIR owner-package registry plus `default_deps_for_package(...)` lookup through shared local helpers instead of repeating that package/dependency contract across dozens of local wrappers. This is still a no-behavior-change Backbone Item 3 cleanup slice, but it keeps the RuleIR-to-ActionIR bridge easier to audit as the lowering surface keeps growing.
 
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.

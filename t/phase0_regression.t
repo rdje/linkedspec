@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 132;
+    plan tests => 134;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1223,6 +1223,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     like($emit_context_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'EmitContext.pm now routes lazy package loading through OwnerDispatch');
     like($emit_context_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'EmitContext.pm now routes $@ preservation through OwnerDispatch');
+    like($emit_context_pm, qr/sub _actionir_owner_package\b/s, 'EmitContext.pm now defines the shared ActionIR owner-package registry helper');
+    like($emit_context_pm, qr/sub _actionir_owner_default_deps\b.*default_deps_for_package/s, 'EmitContext.pm now centralizes ActionIR owner default-dependency lookup');
     like($rewrite_pipeline_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RewritePipeline.pm now loads the shared owner-dispatch helper');
     like($rewrite_pipeline_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'RewritePipeline.pm now routes lazy package loading through OwnerDispatch');
     like($rewrite_pipeline_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'RewritePipeline.pm now routes $@ preservation through OwnerDispatch');
