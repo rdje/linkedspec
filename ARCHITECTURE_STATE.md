@@ -228,6 +228,8 @@ Current reading:
 - `Diagnostics`
   - tracks unresolved helpers, readiness, and compatibility-surface telemetry.
   - its thin owner wrapper now also uses `LinkedSpec::OwnerDispatch` for lazy loading, callback lookup, and `$@` preservation.
+- `Diagnostics`, `StatementSplit`, `CanonicalEvents`, `ArrayPipeline`, `ControlFlow`, `Contracts`, `RewritePipeline`, and `Scanner`
+  - now also assemble their default callback maps through the shared `OwnerDispatch::build_dep_map(...)` seam instead of hand-building those maps inline.
 - `StatementSplit`
   - owns safe statement splitting.
 - `StatementSplit::Core`

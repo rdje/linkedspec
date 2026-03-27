@@ -97,14 +97,16 @@ sub _insert_pending_implicit_if_closures_before_stmt {
 
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   build_action_lowering_contracts => _require_pkg_cb($pkg, '_build_action_lowering_contracts'),
-   collect_action_helper_ir_nodes  => _require_pkg_cb($pkg, '_collect_action_helper_ir_nodes'),
-   build_canonical_action_ir_events => _require_pkg_cb($pkg, '_build_canonical_action_ir_events'),
-   find_unresolved_action_helpers  => _require_pkg_cb($pkg, '_find_unresolved_action_helpers'),
-  }
- })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'build_action_lowering_contracts',
+   'collect_action_helper_ir_nodes',
+   'build_canonical_action_ir_events',
+   'find_unresolved_action_helpers',
+  ],
+ )
 }
 
 sub _lower_action_code_from_canonical_ir {

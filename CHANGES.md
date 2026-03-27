@@ -1,5 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Backbone Item 3: Spend Shared Dep-Map Builder Across Secondary ActionIR Owners
+
+Continued the same ActionIR owner-contract cleanup across the remaining secondary owners:
+- updated `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`, `ControlFlow.pm`, `Contracts.pm`, `RewritePipeline.pm`, `Diagnostics.pm`, `StatementSplit.pm`, `CanonicalEvents.pm`, and `Scanner.pm` so their `default_deps_for_package(...)` builders now also use the shared `LinkedSpec::OwnerDispatch::build_dep_map(...)` seam instead of hand-building inline callback registries,
+- kept the scanner-side shared dependency contract in `ScannerCore.pm` as the source of truth while switching `Scanner.pm` to translate those specs through the shared dep-map builder,
+- widened `t/phase0_regression.t` with source-level architecture locks so those secondary owners are now pinned to the shared dep-map-builder path too,
+- and refreshed the roadmap, architecture snapshot, and continuity files to match.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/ArrayPipeline.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/RewritePipeline.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Diagnostics.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/StatementSplit.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Centralize Core ActionIR Dep-Map Builders
 
 Continued the owner-contract cleanup across the active ActionIR lowering path:

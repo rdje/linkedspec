@@ -61,12 +61,14 @@ sub default_deps_for_package {
  my ($pkg) = @_;
  return _call_preserving_err(sub {
   _require_scanner_core_pkg();
-  my %deps;
-  foreach my $spec (LinkedSpec::ActionIR::ScannerCore::_scanner_dep_specs()) {
-   my $source_pkg = $spec->{provider_pkg} // $pkg;
-   $deps{$spec->{dep_name}} = _require_pkg_cb($source_pkg, $spec->{binding_symbol});
-  }
-  return \%deps
+  my @dep_specs = map {
+   +{
+    dep => $_->{dep_name},
+    pkg => ($_->{provider_pkg} // $pkg),
+    cb  => $_->{binding_symbol},
+   }
+  } LinkedSpec::ActionIR::ScannerCore::_scanner_dep_specs();
+  return LinkedSpec::OwnerDispatch::build_dep_map(__PACKAGE__, $pkg, \@dep_specs)
  })
 }
 

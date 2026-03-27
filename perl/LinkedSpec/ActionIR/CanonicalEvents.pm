@@ -73,12 +73,14 @@ sub _require_dep {
 
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   trim_action_ir_value => _require_pkg_cb($pkg, '_trim_action_ir_value'),
-   split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
-  }
- })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'trim_action_ir_value',
+   'split_action_ir_statements',
+  ],
+ )
 }
 
 sub _canonicalize_helper_action_ir_event {

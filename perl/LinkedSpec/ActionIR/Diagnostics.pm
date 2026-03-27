@@ -77,12 +77,14 @@ sub _require_pkg_cb {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
-  return {
-   split_action_ir_statements => _require_pkg_cb($pkg, '_split_action_ir_statements'),
-   scan_contract_ir_events    => _require_pkg_cb($pkg, '_scan_contract_ir_events'),
-  }
-  })
+ return LinkedSpec::OwnerDispatch::build_dep_map(
+  __PACKAGE__,
+  $pkg,
+  [
+   'split_action_ir_statements',
+   'scan_contract_ir_events',
+  ],
+ )
 }
 
 #------------------------------------------------------------------------------
