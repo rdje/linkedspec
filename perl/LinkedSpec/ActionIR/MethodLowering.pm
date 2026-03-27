@@ -212,6 +212,7 @@ sub _lower_method_value_expr {
  my $hash_container_prefix_re = qr/^(?:hash|h)\s*\(/;
  my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
  my $hash_symbol_expr_re = qr/^(?:(?:hash|h)\s*\(\s*\w+\s*\)|\w+)$/;
+ my ($looks_like_array_value_expr, $looks_like_hash_value_expr);
  my $lower_flat_list_value_expr = sub {
   my ($flat_expr) = @_;
   return undef unless defined $flat_expr;
@@ -229,13 +230,21 @@ sub _lower_method_value_expr {
 
    if ($container_expr =~ $array_container_prefix_re) {
     my $array_symbol = $extract_array_symbol_name->($container_expr);
-    return undef unless defined($array_symbol) && length($array_symbol);
-    return '@'.$array_symbol;
+    return '@'.$array_symbol if defined($array_symbol) && length($array_symbol);
+   }
+   if ($looks_like_array_value_expr->($container_expr)) {
+    my $lowered_array = _lower_method_value_expr($container_expr, $deps);
+    return undef unless defined($lowered_array) && length($lowered_array);
+    return 'do { my $__ls_flat_array = '.$lowered_array.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
    }
    if ($container_expr =~ $hash_container_prefix_re) {
     my $hash_symbol = $extract_hash_symbol_name->($container_expr);
-    return undef unless defined($hash_symbol) && length($hash_symbol);
-    return '%'.$hash_symbol;
+    return '%'.$hash_symbol if defined($hash_symbol) && length($hash_symbol);
+   }
+   if ($looks_like_hash_value_expr->($container_expr)) {
+    my $lowered_hash = _lower_method_value_expr($container_expr, $deps);
+    return undef unless defined($lowered_hash) && length($lowered_hash);
+    return 'do { my $__ls_flat_hash = '.$lowered_hash.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
    }
    return undef;
   }
@@ -246,8 +255,11 @@ sub _lower_method_value_expr {
    my $array_expr = $trim_action_ir_value->($flat_args->[0]);
    return undef unless defined($array_expr) && length($array_expr);
    my $array_symbol = $extract_array_symbol_name->($array_expr);
-   return undef unless defined($array_symbol) && length($array_symbol);
-   return '@'.$array_symbol;
+   return '@'.$array_symbol if defined($array_symbol) && length($array_symbol);
+   return undef unless $looks_like_array_value_expr->($array_expr);
+   my $lowered_array = _lower_method_value_expr($array_expr, $deps);
+   return undef unless defined($lowered_array) && length($lowered_array);
+   return 'do { my $__ls_flat_array = '.$lowered_array.'; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }';
   }
 
   if ($method eq 'flat_hash') {
@@ -256,13 +268,15 @@ sub _lower_method_value_expr {
    my $hash_expr = $trim_action_ir_value->($flat_args->[0]);
    return undef unless defined($hash_expr) && length($hash_expr);
    my $hash_symbol = $extract_hash_symbol_name->($hash_expr);
-   return undef unless defined($hash_symbol) && length($hash_symbol);
-   return '%'.$hash_symbol;
+   return '%'.$hash_symbol if defined($hash_symbol) && length($hash_symbol);
+   return undef unless $looks_like_hash_value_expr->($hash_expr);
+   my $lowered_hash = _lower_method_value_expr($hash_expr, $deps);
+   return undef unless defined($lowered_hash) && length($lowered_hash);
+   return 'do { my $__ls_flat_hash = '.$lowered_hash.'; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }';
   }
 
   return undef;
  };
- my ($looks_like_array_value_expr, $looks_like_hash_value_expr);
  $looks_like_array_value_expr = sub {
   my ($candidate_expr) = @_;
   return 0 unless defined $candidate_expr;

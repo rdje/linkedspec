@@ -16901,12 +16901,12 @@ subtest 'method_like_fluent_and_structured_action_flat_list_helpers_lower_equiva
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .return(hash(flat_hash(extra_pairs), "kind", "node")).return(array("?node:", flat_array(IMATCH_LIST)))
+ /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail"))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash(flat_hash(extra_pairs), "kind", "node")); return(array("?node:", flat_array(IMATCH_LIST))) }
+ /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
@@ -16931,8 +16931,9 @@ SPEC
         'fluent and structured action-edge flat-list helper forms remain language-agnostic action-IR ready'
     );
     ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge flat-list helper fluent form preserves canonical RETURN coverage while keeping list-context insertion helper lowering'
+        'action-edge flat-list helper fluent form preserves DECLARE/RETURN coverage while keeping composed list-context insertion helper lowering'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_flat_list_helpers_lower_equivalently' => sub {
@@ -16940,13 +16941,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_flat_list_helpers_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.return(hash(flat_hash(extra_pairs), "kind", "node")).return(array("?node:", flat_array(IMATCH_LIST)))
+LX.declare(hash, meta=hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail"))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { return(hash(flat_hash(extra_pairs), "kind", "node")); return(array("?node:", flat_array(IMATCH_LIST))) }
+LX { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
  /a/ -> Top { return_a(Top) }
 SPEC
 
@@ -16972,8 +16973,9 @@ SPEC
         'fluent and structured lifecycle flat-list helper forms remain language-agnostic action-IR ready'
     );
     ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle flat-list helper fluent form preserves canonical RETURN coverage while keeping list-context insertion helper lowering'
+        'lifecycle flat-list helper fluent form preserves DECLARE/RETURN coverage while keeping composed list-context insertion helper lowering'
     );
 };
 subtest 'method_like_fluent_and_structured_action_array_snapshot_helpers_lower_equivalently' => sub {
@@ -34775,7 +34777,7 @@ SPEC
     );
 };
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
-    plan tests => 10;
+    plan tests => 14;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
@@ -34801,6 +34803,26 @@ subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(flat_array(items))'),
         'return @items',
         'return(payload) accepts flat_array(name) as a direct flat list payload'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("keys", flat_array(sorted_keys(hash(meta)))))'),
+        'return ["keys", do { my $__ls_flat_array = [sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }]',
+        'flat_array(...) now flattens composed array-valued helper expressions into surrounding array constructors'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(hash_copy(hash(meta))), "kind", "node"))'),
+        'return {do { my $__ls_flat_hash = {%meta}; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }, "kind" => "node"}',
+        'flat_hash(...) now flattens composed hash-valued helper expressions into surrounding hash constructors'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(flat_array(sorted_values(hash(meta))))'),
+        'return do { my $__ls_flat_array = [map { $meta{$_} } sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }',
+        'return(payload) now accepts flat_array(...) over composed array-valued helper expressions too'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage")), "item", scalar(name)))'),
+        'return {do { my $__ls_flat_hash = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }, "item" => $name}',
+        'flat_hash(...) composes with projected hash-valued helper expressions without raw Perl fallback'
     );
 
     my $spec_content = <<'SPEC';

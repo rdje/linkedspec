@@ -603,7 +603,7 @@ That same deeper nested inline-switch coverage now exists inside composite `if(.
 
 The `if(...)` family now has the matching structured attached-block form too. Inside an action-edge `{ ... }` block or any lifecycle block (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`), you can write `if(cond) { ... } elseif(cond2) { ... } else() { ... }` and get the same canonical lowering and migration metadata as the already-supported inline composite `if(cond, ..., elseif(...), else(...))` surfaces. That same attached-block composite surface is now also available as the final call on fluent action-edge and lifecycle chains. Treat it as a supported final-call fluent control-flow surface, not as permission for unconstrained marker-style flow outside structured contexts.
 
-List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk.
+List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk. The supported source side now also includes composed aggregate helpers such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and `hash_copy(...)`, not only one named working array or hash.
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.
 
@@ -976,11 +976,12 @@ Prefer `array_copy(array(parts))` when you want a **snapshot array payload**.
 return(array("?node:", flat_array(IMATCH_LIST)))
 ```
 
-Use `flat_array(...)` when you want **list-context insertion**, not an array snapshot.
+Use `flat_array(...)` when you want **list-context insertion**, not an array snapshot. That now works both for one named working array and for composed array-valued helper expressions such as `sorted_keys(...)`.
 
 That distinction is important:
 - `array_copy(array(items))` means “make an array payload from the current array contents.”
 - `flat_array(items)` means “splice the array elements into the surrounding constructor.”
+- `flat_array(sorted_keys(hash(meta)))` means “compute a stable key-list array first, then splice those items into the surrounding constructor.”
 
 ### Pattern 5: backend-neutral recursive accumulator flow
 This is the shape now used in `Lispish::parenthesis`:
@@ -1325,7 +1326,7 @@ If backend neutrality matters, these are the defaults you should follow.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
 5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(name)` / `flat_hash(name)` for list-context insertion.
+7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
 8. Use snippet inspection and `return_descr` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances

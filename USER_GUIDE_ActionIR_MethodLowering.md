@@ -317,6 +317,8 @@ Examples:
 array("?subprogram_declaration:", flat_array(IMATCH_LIST))
 hash(flat_hash(extra_pairs), "kind", "node")
 array(flat_array(semantic_annotations))
+array("keys", flat_array(sorted_keys(hash(meta))))
+hash(flat_hash(pick_keys(hash(meta), "kind", "source")), "stage", "normalized")
 ```
 
 Equivalent generic forms:
@@ -331,14 +333,18 @@ array(flatten(array(semantic_annotations)))
 Use cases:
 - inserting `@IMATCH_LIST` into a surrounding `array(...)`,
 - inserting an existing hash's key/value pairs into a larger `hash(...)`,
+- inserting the items from a composed array-valued helper such as `sorted_keys(...)` into a surrounding `array(...)`,
+- inserting the pairs from a composed hash-valued helper such as `pick_keys(...)` or `hash_copy(...)` into a surrounding `hash(...)`,
 - rebuilding list-shaped payloads without raw Perl `@array` / `%hash` insertion syntax.
 
 The shorter `flat_array(...)` / `flat_hash(...)` spellings are just more direct aliases for the same idea.
+They are no longer limited to one named working aggregate either: supported composed array-valued and hash-valued helper expressions can now flatten directly into surrounding constructors and direct `return(payload)` forms too.
 
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on supported `flat_array(...)` / `flat_hash(...)` payload forms too,
 - on both action-edge and lifecycle surfaces,
 - and that same supported flat-list equivalence is now regression-locked inside control-flow branch bodies too,
+- while the supported source side now also includes composed aggregate helpers such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and `hash_copy(...)`,
 - so list-context insertion is part of the same equivalence contract as the rest of the method-like DSL surface.
 
 ### Snapshot versus flatten
@@ -359,6 +365,14 @@ flat_array(items)
 ```
 
 Meaning: “inject the array elements directly into the surrounding constructor.”
+
+Composed example:
+
+```text
+flat_array(sorted_keys(hash(meta)))
+```
+
+Meaning: “compute one array value first, then inject its items directly into the surrounding constructor.”
 
 Example:
 

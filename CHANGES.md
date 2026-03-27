@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Method DSL: Broaden `flat_array(...)` / `flat_hash(...)` Composition
+
+Extended the method-like DSL so list-context insertion helpers are no longer limited to one named working aggregate:
+- updated `perl/LinkedSpec/ActionIR/MethodLowering.pm` so `flat_array(...)`, `flat_hash(...)`, `flat(...)`, and `flatten(...)` now accept supported composed array-valued and hash-valued helper expressions in addition to direct working arrays/hashes,
+- widened `t/phase0_regression.t` with exact lowering checks for composed flattening plus fluent-versus-structured parity locks on both action-edge and lifecycle surfaces,
+- refreshed `USER_GUIDE.md`, `USER_GUIDE_ActionIR_MethodLowering.md`, and `USER_GUIDE_ActionIR_EmittedPerlReference.md` so the new constructor-splicing contract is documented with concrete composed examples,
+- and updated the roadmap/continuity files so future work treats composed list-context insertion as part of the supported canonical helper surface.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Method DSL: Add `hash_copy(...)` Snapshot Helper
 
 Extended the method-like DSL with a first-class pure hash/object snapshot helper:
