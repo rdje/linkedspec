@@ -45,6 +45,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  clear_mark                       => 'CLEAR_MARK',
  mark_exists                      => 'MARK_EXISTS',
  mark_pos                         => 'MARK_POS_READ',
+ cursor_pos                       => 'CURSOR_POS_READ',
  cursor_line                      => 'CURSOR_LINE_READ',
  entry_text                       => 'IMATCH_TEXT_READ',
  entry_group                      => 'IMATCH_GROUP_READ',

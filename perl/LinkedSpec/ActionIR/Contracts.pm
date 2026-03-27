@@ -610,6 +610,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'cursor_pos',
+   ir_node            => 'CURSOR_POS_READ',
+   diag_name          => 'cursor_pos',
+   unresolved_pattern => qr/\bcursor_pos\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcursor_pos\s*\(\s*\)/do { pos \$\$STRING }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'cursor_line',
    ir_node            => 'CURSOR_LINE_READ',
    diag_name          => 'cursor_line',

@@ -626,6 +626,34 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `cursor_pos()`
+Return the current parser cursor position directly.
+
+Practical reading:
+- use it when the rule wants the current parser-position offset as data,
+- prefer it over spelling raw `pos $$STRING` inline in normal user-facing `.spec` examples,
+- prefer it over `mark_pos(name)` when there is no reason to store a checkpoint first,
+- and treat it as the direct cursor-side position helper paired with `cursor_line()`.
+
+Example:
+
+```text
+cursor_pos()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_end, body_end, close_end) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(open_end), cursor_pos()) }
+ -> Top[1] { assign(scalar(body_end), cursor_pos()) }
+ -> Top[2] { assign(scalar(close_end), cursor_pos()); return(array("?Top:", scalar(open_end), scalar(body_end), scalar(close_end), cursor_pos(), entry_end_pos())) }
+```
+
+Use it when the rule should expose the current parser position directly without storing a named checkpoint first.
+
 ### `cursor_line()`
 Return the 1-based line number at the current parser cursor directly.
 

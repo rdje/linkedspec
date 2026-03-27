@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-27 - Phase 4: Add `cursor_pos()` Direct Cursor Read Helper
+
+Advanced the first-class capture/mark helper surface with a direct current-cursor position read:
+- updated `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `cursor_pos()` is now a first-class helper contract scanned, canonicalized, and lowered as a direct current parser-position read,
+- spent that helper in `specs/sdce.spec` so the migrated split bands now use `cursor_pos()` instead of raw `pos $$STRING` in their direct parser-position reads,
+- widened `t/phase0_regression.t` with rewrite-level coverage, runtime semantic coverage, and source-level coverage for the new helper and the `sdce` spend,
+- and refreshed the user guides, roadmap files, and continuity notes so the new helper is documented as part of the live Phase 4 surface.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Backbone Item 3: Centralize ParserFactory Mixed Dep Bundle
 
 Continued the same owner-contract cleanup on the active parser-factory path:

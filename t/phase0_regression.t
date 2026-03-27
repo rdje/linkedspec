@@ -11322,6 +11322,36 @@ SPEC
     my $pos_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_pos(body_start)');
     like($pos_rewrite, qr/\? \$__ls_mark_bucket->\{'body_start'\} : undef/, 'mark_pos(name) lowering reads the stored rule-local mark position without mutating it');
 };
+subtest 'cursor_pos_reads_current_parser_position_without_named_mark' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_pos, second_pos, third_pos) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(first_pos), cursor_pos()) }
+ -> Top[1] { assign(scalar(second_pos), cursor_pos()) }
+ -> Top[2] { assign(scalar(third_pos), cursor_pos()); return(array("?Top:", scalar(first_pos), scalar(second_pos), scalar(third_pos), cursor_pos(), match_end_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_pos() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 4, 7, 8, 8, 8],
+        'cursor_pos() tracks the live parser cursor position across successive same-rule slots without relying on stored named marks'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'cursor_pos() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_pos()');
+    like($rewrite, qr/do \{ pos \$\$STRING \}/, 'cursor_pos() lowering reads the live current parser position directly');
+};
 subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
     plan tests => 4;
 
@@ -35961,30 +35991,32 @@ SPEC
     is($rewritten, 'my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g', 'prefix-newline line-count statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'prefix-newline-linecount-only rule remains language-agnostic action-IR ready');
 };
-subtest 'action_rewriter_line_number_helpers_lower_without_raw_fallback' => sub {
-    plan tests => 11;
+subtest 'action_rewriter_cursor_and_line_number_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 13;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash("cursor", cursor_line(), "entry", entry_line(), "match", match_line())) }
+ /a/ -> Top { return(hash("cursor_pos", cursor_pos(), "cursor_line", cursor_line(), "entry", entry_line(), "match", match_line())) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit line-number helper coverage');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit cursor/line helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit line-number helpers');
-    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit line-number helpers');
-    is($meta->{unresolved_helper_count}, 0, 'explicit line-number helpers keep unresolved-helper count at zero');
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit cursor/line helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit cursor/line helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit cursor/line helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CURSOR_POS_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_POS_READ');
     ok(grep { $_ eq 'CURSOR_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_LINE_READ');
     ok(grep { $_ eq 'IMATCH_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include IMATCH_LINE_READ');
     ok(grep { $_ eq 'MATCH_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MATCH_LINE_READ');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("cursor", cursor_line(), "entry", entry_line(), "match", match_line()))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("cursor_pos", cursor_pos(), "cursor_line", cursor_line(), "entry", entry_line(), "match", match_line()))');
+    ok(index($rewritten, 'do { pos $$STRING }') >= 0, 'cursor_pos() lowers to a direct live current-cursor position read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS) =~ /\n/g) }') >= 0, 'cursor_line() lowers to a direct current-cursor line-number read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }') >= 0, 'entry_line() lowers to a direct immediate-match line-number read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_line() lowers to a direct local-match line-number read');
-    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit-line-number-helper rule remains language-agnostic action-IR ready');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;
@@ -37068,13 +37100,15 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'sdce source spec text is available for alias migration inspection');
     like($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band now prefers s(IPOS) in cursor initialization');
+    like($source_content, qr/LE\s+\{assign\(s\(IPOS\), cursor_pos\(\)\)\}/, 'sdce split bands now prefer cursor_pos() for direct parser-position reads');
+    unlike($source_content, qr/assign\(s\(IPOS\), pos \$\$STRING\)/, 'sdce split bands no longer use raw pos $$STRING in the migrated direct parser-position reads');
     like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
     ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
