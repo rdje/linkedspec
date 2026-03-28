@@ -190,11 +190,11 @@ CAPTURE_IF()
 
 These remain useful when migrating older capture-heavy specs.
 
-### `capture_from_rule_start()`
-Return the captured substring from the current rule-entry start to the same slot-local right boundary that the old raw `$IPOS` / `$LSPOS` / `$LMATCH` pattern used.
+### `capture_slice()`
+Return the captured substring from the current anonymous capture boundary to the same slot-local right boundary that the old raw `$IPOS` / `$LSPOS` / `$LMATCH` pattern used.
 
 Practical reading:
-- the left boundary is the current rule-entry `$IPOS` snapshot,
+- the left boundary is the current anonymous capture boundary stored in `$IPOS`,
 - the right boundary is exactly the same slot-local boundary that raw `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)` would have used,
 - the current local match itself is not included in the returned substring,
 - and unlike `capture_from(name)`, this helper does not depend on any named mark.
@@ -202,7 +202,7 @@ Practical reading:
 Examples:
 
 ```text
-assign(scalar(segment), capture_from_rule_start())
+assign(scalar(segment), capture_slice())
 ```
 
 ```text
@@ -211,17 +211,17 @@ Top::AND
  /\(/
  /\w+/
  /\)/
- -> Top[0] { assign(scalar(first_span), capture_from_rule_start()) }
- -> Top[1] { return(array("?Top:", scalar(first_span), capture_from_rule_start())) }
+ -> Top[0] { assign(scalar(first_span), capture_slice()) }
+ -> Top[1] { return(array("?Top:", scalar(first_span), capture_slice())) }
 ```
 
-Use it when the rule wants the old raw `$IPOS` capture pattern explicitly, but the left boundary is just “where this rule started” rather than one named checkpoint.
+Use it when the rule wants the old raw `$IPOS` capture pattern explicitly, but the left boundary is the current anonymous capture cursor rather than one named checkpoint. `capture_from_rule_start()` remains supported as a compatibility alias for older migration slices.
 
-### `capture_len_from_rule_start()`
-Return the numeric length of the same rule-entry span that `capture_from_rule_start()` would read.
+### `capture_slice_len()`
+Return the numeric length of the same anonymous capture-boundary span that `capture_slice()` would read.
 
 Practical reading:
-- the left boundary is still the current rule-entry `$IPOS` snapshot,
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
 - the right boundary is exactly the same slot-local boundary that raw `$LSPOS - $IPOS - length $LMATCH` would have used,
 - the current local match itself is not included in that span,
 - and the helper returns the width of that span instead of materializing the substring.
@@ -229,7 +229,7 @@ Practical reading:
 Examples:
 
 ```text
-assign(scalar(width), capture_len_from_rule_start())
+assign(scalar(width), capture_slice_len())
 ```
 
 ```text
@@ -238,11 +238,11 @@ Top::AND
  /\(/
  /\w+/
  /\)/
- -> Top[0] { assign(scalar(first_width), capture_len_from_rule_start()) }
- -> Top[1] { return(array("?Top:", scalar(first_width), capture_len_from_rule_start())) }
+ -> Top[0] { assign(scalar(first_width), capture_slice_len()) }
+ -> Top[1] { return(array("?Top:", scalar(first_width), capture_slice_len())) }
 ```
 
-Use it when the rule needs that same rule-entry-to-current-edge boundary model as `capture_from_rule_start()` but only wants length metadata.
+Use it when the rule needs that same anonymous-capture-boundary model as `capture_slice()` but only wants length metadata. `capture_slice_length()` remains supported as a longer compatibility alias, and `capture_len_from_rule_start()` remains supported for older migration slices.
 
 ### `capture_from(name)`
 Return the captured substring from a named `@mark(name)` checkpoint to the left edge of the current match.

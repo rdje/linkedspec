@@ -430,9 +430,56 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_slice',
+   ir_node            => 'CAPTURE_SLICE',
+   diag_name          => 'capture_slice',
+   unresolved_pattern => qr/\bcapture_slice\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_slice\s*\(\s*\)
+    }{
+     'do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_slice_len',
+   ir_node            => 'CAPTURE_SLICE_LEN',
+   diag_name          => 'capture_slice_len',
+   unresolved_pattern => qr/\bcapture_slice_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_slice_len\s*\(\s*\)
+    }{
+     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_slice_length',
+   ir_node            => 'CAPTURE_SLICE_LEN',
+   diag_name          => 'capture_slice_len',
+   compatibility_surface => 1,
+   unresolved_pattern => qr/\bcapture_slice_length\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_slice_length\s*\(\s*\)
+    }{
+     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_from_rule_start',
-   ir_node            => 'CAPTURE_FROM_RULE_START',
-   diag_name          => 'capture_from_rule_start',
+   ir_node            => 'CAPTURE_SLICE',
+   diag_name          => 'capture_slice',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bcapture_from_rule_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
@@ -446,8 +493,9 @@ sub _build_capture_and_backtrack_contracts {
   },
   {
    id                 => 'capture_len_from_rule_start',
-   ir_node            => 'CAPTURE_LEN_FROM_RULE_START',
-   diag_name          => 'capture_len_from_rule_start',
+   ir_node            => 'CAPTURE_SLICE_LEN',
+   diag_name          => 'capture_slice_len',
+   compatibility_surface => 1,
    unresolved_pattern => qr/\bcapture_len_from_rule_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;

@@ -1,5 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Rename Anonymous Capture Slice Surface
+
+Renamed the misleading anonymous capture-boundary surface to reflect its real `$IPOS` semantics:
+- updated `perl/LinkedSpec/BootstrapSpec/Core.pm` and `perl/LinkedSpec/Validation.pm` so preferred `@capture_slice` is now accepted as the anonymous split-boundary marker, while `@capture_from_here` and `@move_pos` remain supported compatibility aliases,
+- updated `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so preferred `capture_slice()` / `capture_slice_len()` now lower and classify as first-class helpers, with `capture_slice_length()` and older `capture_from_rule_start()` / `capture_len_from_rule_start()` retained as compatibility aliases,
+- spent the preferred names in `specs/sdce.spec` and `specs/ebnf.spec`,
+- widened `t/phase0_regression.t` so both preferred and compatibility spellings stay locked, and
+- refreshed the user-facing docs plus roadmap/continuity notes so the DSL now teaches anonymous capture-boundary slices instead of the misleading “rule start” wording.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+- `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-27 - Phase 4: Add Rule-Entry Capture Read Helpers
 
 Advanced the first-class capture helper surface with explicit current rule-entry span readers:

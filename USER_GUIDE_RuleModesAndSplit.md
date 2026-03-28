@@ -4,7 +4,7 @@ This guide covers the current rule-shape surface, including explicit `OR`, expli
 Read this when you want to understand:
 - what rule-label sigils already mean today,
 - how much of that surface is already part of the supported contract,
-- and what `@capture_from_here` actually does when you need split-like staged extraction.
+- and what `@capture_slice` actually does when you need split-like staged extraction.
 
 ## Current Rule Label Surface
 Today, rule labels support a small, explicit set of suffix modes.
@@ -781,10 +781,10 @@ There is no extra shorthand in this immediate rule-mode family still waiting to 
 
 The remaining deferred work is broader grouped-rule exploration that should only move when real authoring needs justify it, not because the DSL needs every possible combinator spelling up front.
 
-## `@capture_from_here`: The Split Boundary Cursor
-`@capture_from_here` is now the preferred grammar surface for this feature.
+## `@capture_slice`: The Split Boundary Cursor
+`@capture_slice` is now the preferred grammar surface for this feature.
 
-The older spelling `@move_pos` is still supported as a compatibility alias.
+Older spellings `@capture_from_here` and `@move_pos` are still supported as compatibility aliases.
 
 There is now also a named checkpoint form:
 - `@mark(name)`
@@ -803,13 +803,13 @@ $IPOS = pos $$STRING
 ```
 
 That means:
-- before `@capture_from_here`, a later capture starts from the earlier rule-entry boundary,
-- after `@capture_from_here`, a later capture starts from the point where the parser had already advanced,
+- before `@capture_slice`, a later capture starts from the earlier rule-entry boundary,
+- after `@capture_slice`, a later capture starts from the point where the parser had already advanced,
 - so the next capture becomes “text since the last anchor” instead of “text since the beginning of the rule.”
 
 That is why it is useful for split-like staged parsing.
 
-## Why `@capture_from_here` Matters
+## Why `@capture_slice` Matters
 This feature is especially useful when:
 - the full structure is awkward to parse in one pass,
 - but the file has reliable anchors,
@@ -826,7 +826,7 @@ This is exactly the kind of coarse-to-fine workflow LinkedSpec is good at.
 A real current example already exists in [`specs/ebnf.spec`](specs/ebnf.spec):
 
 ```text
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_from_here
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_slice
 I {$IMATCH =~ s/@|\s*\(//go}
 
 -> quoted_string {
@@ -841,11 +841,11 @@ I {$IMATCH =~ s/@|\s*\(//go}
 
 Why that shape matters:
 - the outer anchors find the logging annotation and its closing `)`,
-- `@capture_from_here` moves the capture baseline forward,
+- `@capture_slice` moves the capture baseline forward,
 - later capture logic can treat the content between anchors as the meaningful span,
 - and the rule can build a coarse structured result from that anchored slice.
 
-If you are reading older specs or older notes, this may still appear as `@move_pos`. That legacy spelling still works and lowers to the same internal `MOVE_POS` event.
+If you are reading older specs or older notes, this may still appear as `@capture_from_here` or `@move_pos`. Those legacy spellings still work and lower to the same internal `MOVE_POS` event.
 
 ## `@mark(name)`: Named Checkpoints
 `@mark(name)` is the first named checkpoint surface in the capture/mark API.
@@ -1834,7 +1834,7 @@ capture_from(body_start)
 capture_from(argument_start)
 ```
 
-That is the main reason to choose `@mark(name)` over anonymous `@capture_from_here`:
+That is the main reason to choose `@mark(name)` over anonymous `@capture_slice`:
 - anonymous split is good when one moving capture baseline is enough,
 - named marks are better when multiple checkpoints may coexist,
 - named marks are also better when the same rule needs several stable named left edges.
@@ -1892,7 +1892,7 @@ If the mark is absent, the payload becomes:
 ```
 
 ## Choosing Between Anonymous and Named Checkpoints
-Use `@capture_from_here` when:
+Use `@capture_slice` when:
 - one moving anonymous capture baseline is enough,
 - you do not need to keep more than one checkpoint alive at once,
 - and the capture flow is local enough that naming the checkpoint adds no clarity.
@@ -2013,8 +2013,8 @@ Documentation note:
 ## Split-Style Mental Model
 If you like a more intuitive description, this is a good one:
 
-- `@capture_from_here` turns the current parser position into the new left edge of the next capture span.
-- older specs may still say `@move_pos`, but the meaning is the same.
+- `@capture_slice` turns the current parser position into the new left edge of the next capture span.
+- older specs may still say `@capture_from_here` or `@move_pos`, but the meaning is the same.
 
 That makes it useful as a split-boundary marker.
 
@@ -2051,9 +2051,9 @@ The current supported contract is:
 - the clearest documented blind-call shapes today are ordered-sequence wrappers (`:&`, `:AND`, `:AND+`, `:AND{...}`) and single-choice wrappers (`:|`),
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
-- `@capture_from_here` is the preferred split-boundary cursor feature,
+- `@capture_slice` is the preferred split-boundary cursor feature,
 - `@mark(name)` is the preferred named checkpoint surface,
-- `@move_pos` remains a supported compatibility alias for the same lowering,
+- `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”

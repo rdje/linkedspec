@@ -721,7 +721,7 @@ sub _build_split_like_code_rule {
  return {
   id => 'SPLIT_LIKE_CODE',
   tags => { start_token => 1 },
-  re=> [qr/@\s*(?:(?:capture_from_here|move_pos)\b|mark\s*\(\s*(?<MARK>\w+)\s*\))/o],
+  re=> [qr/@\s*(?:(?:capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*(?<MARK>\w+)\s*\))/o],
   handler=> sub {
    my ($info) = @_;
    my $mark = $info->{match_hash}{MARK};
