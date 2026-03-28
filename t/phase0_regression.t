@@ -1308,7 +1308,11 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($validation_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Validation.pm now routes Trace loading through OwnerDispatch');
     like($validation_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Validation.pm now routes $@ preservation through OwnerDispatch');
     like($action_rewriter_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ActionRewriter.pm now loads the shared owner-dispatch helper');
-    like($action_rewriter_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'ActionRewriter.pm now routes $@ preservation through OwnerDispatch');
+    like(
+        $action_rewriter_pm,
+        qr/sub _delegate_emit_context_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec::RuleIR::EmitContext',\s*\$method,\s*\@args,\s*\)/s,
+        'ActionRewriter.pm now routes EmitContext compatibility dispatch through OwnerDispatch',
+    );
 };
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 5;
@@ -1505,8 +1509,6 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
-
-    local *LinkedSpec::ActionRewriter::_require_emit_context_pkg = sub { return 1 };
 
     local *LinkedSpec::RuleIR::EmitContext::_parse_method_function_expr = sub {
         my ($expr) = @_;

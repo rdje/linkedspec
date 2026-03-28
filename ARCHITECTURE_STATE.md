@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-03-27`
+- Last refreshed: `2026-03-28`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -26,6 +26,7 @@ This document is the current high-level technical reading of the project shape. 
 - Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
+- The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
 - The frontend syntax/bootstrapping truth still concentrates in:

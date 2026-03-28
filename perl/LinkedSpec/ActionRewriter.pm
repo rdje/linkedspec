@@ -15,39 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one owner package through the shared dispatch utility.
-# Args    : ($pkg)
-# Returns : target package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
-# Function: _require_emit_context_pkg
-# Purpose : Lazy-load the extracted rewrite/emit-context owner.
-# Args    : ()
-# Returns : package name `LinkedSpec::RuleIR::EmitContext`
-#------------------------------------------------------------------------------
-sub _require_emit_context_pkg {
- return _require_pkg('LinkedSpec::RuleIR::EmitContext')
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _delegate_emit_context_call
 # Purpose : Forward one historical ActionRewriter helper entrypoint into the
 #           extracted `RuleIR::EmitContext` owner.
@@ -56,13 +23,12 @@ sub _call_preserving_err {
 #------------------------------------------------------------------------------
 sub _delegate_emit_context_call {
  my ($method, @args) = @_;
- return _call_preserving_err(sub {
-  _require_emit_context_pkg();
-  my $code = LinkedSpec::RuleIR::EmitContext->can($method);
-  die "(LinkedSpec::ActionRewriter::_delegate_emit_context_call) -E- missing delegate '$method'"
-   unless ref($code) eq 'CODE';
-  return $code->(@args)
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::RuleIR::EmitContext',
+  $method,
+  @args,
+ )
 }
 
 my @EMIT_CONTEXT_FORWARDERS = qw(

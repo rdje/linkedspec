@@ -1,5 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 1A: Collapse ActionRewriter EmitContext Delegation
+
+Continued the remaining thin compatibility-wrapper cleanup in one bounded slice:
+- updated `perl/LinkedSpec/ActionRewriter.pm` so its shared `_delegate_emit_context_call(...)` helper now routes straight through `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` into `LinkedSpec::RuleIR::EmitContext`, instead of carrying its own local lazy-load / `can(...)` / symbol-call implementation,
+- removed the now-redundant local `ActionRewriter` compatibility scaffolding around `_require_emit_context_pkg(...)` and `_call_preserving_err(...)`,
+- widened `t/phase0_regression.t` so the shared architecture lock now pins `ActionRewriter` to the direct owner-dispatch seam and the compatibility-wrapper regression no longer relies on the removed local require helper,
+- and refreshed the roadmap, architecture snapshot, and continuity notes so this remaining thin compatibility seam is recorded accurately.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionRewriter.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 5: Centralize RuntimeContext Dispatch Through OwnerDispatch
 
 Continued the same runtime modernization/owner-cleanup line with one tighter shared dispatch seam:

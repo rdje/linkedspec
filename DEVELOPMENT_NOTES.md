@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-28: Continued the remaining Phase 1A compatibility-wrapper cleanup in one bounded slice. `LinkedSpec::ActionRewriter::_delegate_emit_context_call(...)` now routes directly through `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` into `LinkedSpec::RuleIR::EmitContext`, so that legacy compatibility owner no longer carries a second local lazy-load / `can(...)` / symbol-call implementation on top of the shared owner-dispatch seam. Future resume should keep `ActionRewriter` shrinking toward a thin compatibility map over `EmitContext`, not as a separate delegation style.
+
 - 2026-03-28: Continued the same Phase 5 runtime-owner cleanup line in a bounded way. `Runtime.pm`, `Compiler.pm`, and `SpecEntry.pm` now route their private `RuntimeContext` helper calls through the same shared `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` seam that `ParserFactory.pm` already used, so the active runtime/compile owners no longer carry a second local lazy-load-plus-symbol-call implementation for shared runtime-context dispatch. Future resume should keep runtime-context delegation on that one shared owner-dispatch shape instead of reintroducing ad hoc local wrappers.
 
 - 2026-03-28: Renamed the preferred anonymous capture-boundary surface to `@capture_slice`, `capture_slice()`, and `capture_slice_len()`. `@capture_from_here`, `@move_pos`, `capture_slice_length()`, `capture_from_rule_start()`, and `capture_len_from_rule_start()` now remain as compatibility aliases only. Future resume should treat the new `capture_slice*` names as the honest description of the mutable `$IPOS` capture-boundary semantics.
