@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with another bounded live-spec token-reader spend. The simple token-return seams in `specs/regdef.spec` now use `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST` returns. Future resume should keep live-spec immediate-match group-list reads on `entry_groups()` rather than reintroducing raw `@IMATCH_LIST`.
 - 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend. The simple token readers in `specs/ds_vhistory.spec` now use `entry_groups()` plus `flat_array(...)` instead of returning raw `@IMATCH_LIST`. Future resume should keep direct immediate-match group-list reads on `entry_groups()` in live specs instead of reintroducing raw `@IMATCH_LIST` returns.
 
 - 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec spend. `specs/sdce.spec::sdc_esplit` now starts its anonymous capture boundary with `start_capture_slice()` instead of direct `assign(s(IPOS), 0)` initialization. Future resume should keep new anonymous boundary setup on the explicit helper surface instead of reintroducing direct `IPOS` writes in live specs.

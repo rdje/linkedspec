@@ -9,9 +9,9 @@ reg_def: /(?is)\breg_def\s+(\w+).+?(?<!\\)\{/  /(?<!\\)\}/  I {my @capt}
 -> comment
 -> ml_dquotes
 -> ob_cb
--> reg_def[1]      {return ['?reg_def:', @IMATCH_LIST, \@capt]}
+-> reg_def[1]      {return ['?reg_def:', flat_array(entry_groups()), \@capt]}
 
-reg_fld: /(?is)\breg_fld\s+(\w+).+?:\s*(\w+)\s*:.+?;/  I {return ['?reg_fld:', @IMATCH_LIST]}
+reg_fld: /(?is)\breg_fld\s+(\w+).+?:\s*(\w+)\s*:.+?;/  I {return ['?reg_fld:', flat_array(entry_groups())]}
 
 ob_cb:    /(?<!\\)\{/   /(?<!\\)\}/     
 -> ob_cb  

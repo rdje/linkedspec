@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Spend entry_groups in regdef token readers
+
+- migrated the simple token-return seams in `specs/regdef.spec` from raw `@IMATCH_LIST` returns onto `entry_groups()` plus `flat_array(...)`,
+- widened `t/phase0_regression.t` with a focused `regdef` source-level migration lock,
+- refreshed roadmap/continuity notes for the additional Phase 4 live-spec helper spend.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Spend entry_groups in ds_vhistory token readers
 
 Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend:

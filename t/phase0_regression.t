@@ -36893,6 +36893,17 @@ subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     like($source_content, qr/derived_from:\s+.*?I\.return\(a\("\?derived_from:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory derived_from token reader now prefers entry_groups()');
     unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
 };
+subtest 'regdef_token_readers_prefer_entry_groups' => sub {
+    plan tests => 4;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'regdef.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'regdef source spec text is available for entry_groups migration inspection');
+    like($source_content, qr/-> reg_def\[1\]\s+\{return \['\?reg_def:', flat_array\(entry_groups\(\)\), \\\@capt\]\}/, 'regdef reg_def return now prefers entry_groups()');
+    like($source_content, qr/reg_fld: .*?I \{return \['\?reg_fld:', flat_array\(entry_groups\(\)\)\]\}/, 'regdef reg_fld return now prefers entry_groups()');
+    unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
+};
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 9;
 
