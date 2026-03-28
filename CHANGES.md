@@ -1,5 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Docs: add session bootstrap handoff
+
+Added a small but explicit new-session bootstrap contract:
+- created `SESSION_BOOTSTRAP.md` with the standing startup instruction to read `README.md` plus the referenced `.md` files, analyze `LinkedSpec.pm` and its import tree, refresh `ARCHITECTURE_STATE.md` if needed, and then continue from the roadmap,
+- appended the exact final-line handoff `Read SESSION_BOOTSTRAP.md and start from there.` to `README.md`,
+- and refreshed the continuity notes so future sessions preserve that startup behavior deliberately instead of relying on implicit memory.
+
+Validation for this slice:
+- `git diff --check -- README.md SESSION_BOOTSTRAP.md DEVELOPMENT_NOTES.md CHANGES.md MEMORY.md`
+
 ## 2026-03-28 - Phase 4: Spend capture/cursor helpers in remaining obvious VHDL bands
 
 Continued the Phase 4 staged-extraction authoring line with a bounded live-spec helper-spend slice:

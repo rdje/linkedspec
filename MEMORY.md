@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Added `SESSION_BOOTSTRAP.md` and appended the explicit final-line handoff in `README.md`: `Read SESSION_BOOTSTRAP.md and start from there.` Future resume should treat `SESSION_BOOTSTRAP.md` as the first-task contract for a new session before doing anything else.
+
 - 2026-03-28: Refreshed `ARCHITECTURE_STATE.md` after a new deep doc-plus-code pass. Current best reading stays: `LinkedSpec.pm` is a thin façade over `OwnerDispatch`, `ParserFactory` is the real named `.spec` resolution owner, `RuntimeContext` is still the strongest shared-state seam, and the legacy plugin branch still forms a lazy compatibility cycle through `PluginBridge`, `PPlugin`, and `LinkedSpec::get_parser('pplugin')`. Future resume should reuse that owner-tree reading rather than overfocusing on the shallow static import list.
 - 2026-03-28: Continued the Phase 4 helper-adoption line in one bounded live-spec slice. The remaining obvious raw live-cursor and anonymous capture-boundary reads in `specs/vhdl.spec` now spend `cursor_pos()`, `capture_slice()`, and `start_capture_slice()` directly instead of raw `pos $$STRING`, raw anonymous-boundary `substr(...)`, and direct `assign(scalar(IPOS), pos $$STRING)`. Future resume should keep obvious same-shape VHDL-style cursor/boundary flows on the current helper family before inventing more helper spellings.
 

@@ -75,3 +75,5 @@ Top-level project docs:
 
 ## Git Version-Control Status
 - `README.md` is intended to remain git-tracked at all times.
+
+Read SESSION_BOOTSTRAP.md and start from there.
