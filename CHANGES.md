@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: spend entry_text in vhdl top token readers
+
+- migrated the top `comment` and `space` token readers in `specs/vhdl.spec` from raw `$IMATCH` reads onto `entry_text()`,
+- widened `t/phase0_regression.t` with a focused `vhdl` source-level lock for those token readers,
+- refreshed roadmap/continuity notes for the additional Phase 4 live-spec helper spend.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: spend entry_group in tkgui sub_gui
 
 - migrated `specs/tkgui.spec::sub_gui` off raw `@IMATCH_LIST` destructuring and onto `entry_group(0)` for the entry-point name read,

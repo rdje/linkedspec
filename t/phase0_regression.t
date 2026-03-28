@@ -37174,6 +37174,18 @@ subtest 'vhdl_remaining_cursor_and_capture_boundary_reads_prefer_phase4_helpers'
     like($source_content, qr/signal_decl_range: .*?LE \{start_capture_slice\(\)\}/s, 'vhdl signal_decl_range now prefers start_capture_slice() for the anonymous capture-boundary write');
     unlike($source_content, qr/signal_decl_range: .*?LE \{assign\(scalar\(IPOS\), pos \$\$STRING\)\}/s, 'vhdl signal_decl_range no longer uses the raw IPOS assignment plus pos $$STRING write');
 };
+subtest 'vhdl_top_token_readers_prefer_entry_text' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for top token-reader helper inspection');
+    like($source_content, qr{comment:\s+/--\.\*/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(s\(text\)\)}, 'vhdl comment token reader now prefers entry_text() through an explicit scalar helper flow');
+    like($source_content, qr{space:\s+/\\s\+/\s+I\.declare\(scalar, text=entry_text\(\)\)\.return\(s\(text\)\)}, 'vhdl space token reader now prefers entry_text() through an explicit scalar helper flow');
+    unlike($source_content, qr{comment:\s+/--\.\*/\s+I\.return\(\$IMATCH\)}, 'vhdl comment token reader no longer uses raw $IMATCH');
+    unlike($source_content, qr{space:\s+/\\s\+/\s+I\.return\(\$IMATCH\)}, 'vhdl space token reader no longer uses raw $IMATCH');
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 

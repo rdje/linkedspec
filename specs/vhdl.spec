@@ -12,8 +12,8 @@ vhdl_file::
 LX {return \@vhdl_file}
 
 
-comment:        /--.*/                         I.return($IMATCH)
-space:          /\s+/                          I.return($IMATCH)
+comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(s(text))
+space:          /\s+/                          I.declare(scalar, text=entry_text()).return(s(text))
 dquote_string:  /"(.+?)(?<!")"/                I.return_m       
 library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return_m       
 use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return_m       
