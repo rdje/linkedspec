@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 anonymous capture-boundary spend line in one bounded live-spec slice. `specs/tkgui.spec::sub_gui`, `specs/hlink_substitution.spec::{substitute_statement2,curlyb}`, and the obvious delimiter-reader return/debug bands in `specs/simenv.spec` now spend `capture_slice()` directly instead of raw anonymous-boundary `substr($$STRING, $IPOS, $LSPOS - $IPOS - ...)` reads. Future resume should keep using `capture_slice()` for that simple “current anonymous capture body” case before inventing more helper spellings.
+
 - 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one bounded slice. `capture_slice_line()` is now the first-class helper for reporting the 1-based line of the current anonymous capture boundary, and `specs/simenv.spec` now spends it in the repeated unmatched-delimiter LX diagnostics instead of raw prefix-newline counting from `$IPOS`. Future resume should keep anonymous capture-boundary line reporting on `capture_slice_line()` rather than raw `substr($$STRING, 0, $IPOS) =~ /\n/g`.
 
 - 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one coherent slice. The preferred explicit lifecycle/action-block write helper is now `start_capture_slice()` and the new explicit tail readers are `capture_rest()` / `capture_rest_len()`. `capture_slice_here()` stays supported only as a compatibility alias because it misleadingly sounded like a read helper. Future resume should keep new live spends on `start_capture_slice()` plus `capture_rest()` / `capture_rest_len()` rather than on raw `assign(s(IPOS), cursor_pos())` or raw tail `substr(...)`.

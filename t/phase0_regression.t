@@ -37239,6 +37239,38 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'hlink_substitution exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'hlink_substitution exposes no top blocked rule after helper migration');
 };
+subtest 'hlink_substitution_parser_smoke' => sub {
+    plan tests => 7;
+
+    my $parser = LinkedSpec::get_parser('hlink_substitution');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'hlink_substitution parser created');
+
+    my @cases = (
+        ['[abc]', [\'abc']],
+        ['{abc}', ['{abc}']],
+        ['foo[bar]{baz}', ['foo', \'bar', '{baz}']],
+    );
+
+    for my $case (@cases) {
+        my ($input, $expected) = @$case;
+        my $copy = $input;
+        my $ast = eval { $parser->(\$copy) };
+        ok(!$@, "hlink_substitution parse completed for `$input`") or diag(normalize_error($@));
+        is_deeply($ast, $expected, "hlink_substitution preserves expected AST for `$input`");
+    }
+};
+subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for delimiter-helper inspection');
+    like($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = capture_slice\(\)\)\}/, 'hlink_substitution substitute_statement2 now prefers capture_slice() for the bracket body read');
+    unlike($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\)\}/, 'hlink_substitution substitute_statement2 no longer uses the raw anonymous-boundary substr read');
+    like($source_content, qr/curlyb\[1\]\s+\{return '\{'\.capture_slice\(\)\.'\}'\}/, 'hlink_substitution curlyb now rebuilds the wrapped brace body from capture_slice()');
+    unlike($source_content, qr/curlyb\[1\]\s+\{return substr\(\$\$STRING, \$IPOS-1, \$LSPOS - \$IPOS \+ 1\)\}/, 'hlink_substitution curlyb no longer uses the raw wrapped-brace substr read');
+};
 subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' => sub {
     plan tests => 5;
 
@@ -37561,6 +37593,17 @@ subtest 'tkgui_parser_smoke' => sub {
     is($stderr, '', 'tkgui parser emits no stderr for the smoke input');
     is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
 };
+subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
+    plan tests => 4;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'tkgui.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
+    like($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.capture_slice\(\)\.'\)'\)\}/, 'tkgui sub_gui now prefers capture_slice() for the inner parenthesized body read');
+    unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\.'\)'\)\}/, 'tkgui sub_gui no longer uses the raw anonymous-boundary substr read');
+    unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(/, 'tkgui sub_gui source no longer spells the old raw substr helper pattern');
+};
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
@@ -37666,6 +37709,21 @@ subtest 'simenv_delimited_lx_paths_prefer_capture_slice_line' => sub {
     like($source_content, qr/singleline_value: .*?starting on line ", capture_slice_line\(\), "\\n"\);/s, 'simenv singleline_value LX path now prefers capture_slice_line()');
     like($source_content, qr/parenthesis: .*?starting on line ", capture_slice_line\(\), "\\n"\);/s, 'simenv parenthesis LX path now prefers capture_slice_line()');
     unlike($source_content, qr/my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;/, 'simenv LX paths no longer rely on raw prefix-newline line-count Perl for anonymous capture-boundary line reporting');
+};
+subtest 'simenv_delimiter_readers_prefer_capture_slice' => sub {
+    plan tests => 8;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'simenv.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'simenv source spec text is available for delimiter-reader helper inspection');
+    like($source_content, qr/multiline_value: .*?content=>capture_slice\(\)/s, 'simenv multiline_value now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/singleline_value: .*?print\("<", capture_slice\(\), ">\\n"\);/s, 'simenv singleline_value now prefers capture_slice() for the delimiter-body debug print');
+    like($source_content, qr/squotes: .*?content=>capture_slice\(\)/s, 'simenv squotes now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/bvariable_substitution: .*?content=>capture_slice\(\)/s, 'simenv bvariable_substitution now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/parenthesis: .*?print\("<", capture_slice\(\), ">\\n"\);/s, 'simenv parenthesis now prefers capture_slice() for the delimiter-body debug print');
+    unlike($source_content, qr/multiline_value: .*?content=>substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)/s, 'simenv multiline_value no longer uses the raw anonymous-boundary substr read');
+    unlike($source_content, qr/parenthesis: .*?print\("<", substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\), ">\\n"\);/s, 'simenv parenthesis no longer uses the raw anonymous-boundary substr debug print');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 47;

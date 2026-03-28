@@ -28,13 +28,13 @@ substitute_statement2: /(?<!\\)\[/ /(?<!\\)\]/
  -> substitute_statement2 
 # -> substitute_statement1 
  -> curlyb
- -> substitute_statement2[1] {return \(my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - 1))}
+ -> substitute_statement2[1] {return \(my $capt = capture_slice())}
 
  LX {print("(HLinkSubst) -E- Unmatched closing bracket\n"); exit 2}
 
 curlyb: /\{/ /\}/
  -> curlyb
- -> curlyb[1]   {return substr($$STRING, $IPOS-1, $LSPOS - $IPOS + 1)}
+ -> curlyb[1]   {return '{'.capture_slice().'}'}
 
  LX {print("(HLinkSubst) -E- Unmatched closing brace\n"); exit 2}
 

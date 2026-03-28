@@ -66,8 +66,8 @@ multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
  -> curlybrace
  -> multiline_value[1]	     {
 	                      print("multiline_value: CLOSING curly brace\n"); 
-			      print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
-			      return {type=>'multiline_value', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
+			      print("<", capture_slice(), ">\n");
+			      return {type=>'multiline_value', content=>capture_slice()}
 		             }
 
  LX {print("(simenv) -E- Closing parenthesis not found for *multiline_value* starting on line ", capture_slice_line(), "\n");
@@ -84,7 +84,7 @@ singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {my $last_pos=$IPOS; my @
  -> perl_squotes                       {push @matches, call(perl_squotes);                $last_pos = pos($$STRING)}
  -> perl_dquotes                       {push @matches, call(perl_dquotes);                $last_pos = pos($$STRING)}
  -> bs_nl                              {push @matches, call(bs_nl);                       $last_pos = pos($$STRING)}
- -> singleline_value[1]     {print("singleline_value: END\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n");
+ -> singleline_value[1]     {print("singleline_value: END\n");  print("<", capture_slice(), ">\n");
 	 print "singleline_value:<<$_>>\n" foreach (@matches);
 	 return {type=>'singleline_value', content=> @matches ? \@matches : undef}
    }
@@ -98,8 +98,8 @@ bs_nl: /\\\n\s*/                            I {print("bs_nl: SEEN\n"); return "*
 squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
  -> squotes[1]                                {
 	                                       print("squotes: END\n");  
-					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
-					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
+					       print("<", capture_slice(), ">\n");
+					       return {type=>'squotes', content=>capture_slice()}
 				              }
 
  LX {print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", capture_slice_line(), "\n");
@@ -108,7 +108,7 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
 dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); my @matches; my $last_pos=$IPOS}
  -> bvariable_substitution                    {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
  -> variable_substitution                     {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
- -> dquotes[1]                                {print("dquotes: END\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
+ -> dquotes[1]                                {print("dquotes: END\n");  print("<", capture_slice(), ">\n");
 	 print "perl_dquotes:<<$_>>\n" foreach (@matches);
          return {type=>'dquotes', content=> @matches ? \@matches : undef}}
 
@@ -121,8 +121,8 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
  -> parenthesis
  -> perl_squotes[1]                           {
 	                                       print("perl_squotes: END\n"); 
-					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
-					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
+					       print("<", capture_slice(), ">\n");
+					       return {type=>'squotes', content=>capture_slice()}
 				              }
 
  LX {print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", capture_slice_line(), "\n");
@@ -132,7 +132,7 @@ perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); m
  -> parenthesis
  -> bvariable_substitution                    {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
  -> variable_substitution                     {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
- -> perl_dquotes[1]                           {print("perl_dquotes: END\n"); print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
+ -> perl_dquotes[1]                           {print("perl_dquotes: END\n"); print("<", capture_slice(), ">\n");
 	 print "perl_dquotes:<<$_>>\n" foreach (@matches);
          return {type=>'dquotes', content=> @matches ? \@matches : undef}}
 
@@ -145,7 +145,7 @@ command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: STAR
  -> bvariable_substitution                    {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
  -> variable_substitution                     {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
  -> command_substitution[1]                   {
-	                                       print("command_substitution: END\n"); print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
+	                                       print("command_substitution: END\n"); print("<", capture_slice(), ">\n");
 	                                       print "command_substitution:<<$_>>\n" foreach (@matches);
                                                return {type=>'command_substitution', content=> @matches ? \@matches : undef}
 				              }
@@ -158,7 +158,7 @@ command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: STAR
 perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution: START\n"); my @matches; my $last_pos=$IPOS}
  -> bvariable_substitution		      {push @matches, call(bvariable_substitution);   $last_pos = pos($$STRING)}
  -> variable_substitution                     {push @matches, call(variable_substitution);    $last_pos = pos($$STRING)}
- -> perl_command_substitution[1]              {print("perl_command_substitution: END\n"); print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
+ -> perl_command_substitution[1]              {print("perl_command_substitution: END\n"); print("<", capture_slice(), ">\n");
 	 print "perl_command_substitution:<<$_>>\n" foreach (@matches);
 	 return {type=>'command_substitution', content=> @matches ? \@matches : undef}}
 
@@ -171,8 +171,8 @@ bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: ST
  -> curlybrace
  -> bvariable_substitution[1]                 {
 	                                       print("bvariable_substitution: END\n"); 
-					       print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); 
-					       return {type=>'bvariable_substitution', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
+					       print("<", capture_slice(), ">\n");
+					       return {type=>'bvariable_substitution', content=>capture_slice()}
 				              }
 
  LX {print("(simenv) -E- Closing Curly Brace not found for *bvariable_substitution* starting on line ", capture_slice_line(), "\n");
@@ -188,7 +188,7 @@ variable_substitution: /(?<!\\)\$\w+/       I {
 
 curlybrace: /\{/   /\}/                     I {print("curlybrace: OPENING Brace\n")}
  -> curlybrace
- -> curlybrace[1]                             {print("curlybrace: CLOSING Brace\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
+ -> curlybrace[1]                             {print("curlybrace: CLOSING Brace\n");  print("<", capture_slice(), ">\n"); return}
 
  LX {print("(simenv) -E- Closing Curly Brace not found for *curlybrace* starting on line ", capture_slice_line(), "\n");
      exit}
@@ -196,7 +196,7 @@ curlybrace: /\{/   /\}/                     I {print("curlybrace: OPENING Brace\
 
 parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Parenthesis\n")}
  -> parenthesis
- -> parenthesis[1]                            {print("parenthesis: CLOSING Parenthesis\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
+ -> parenthesis[1]                            {print("parenthesis: CLOSING Parenthesis\n");  print("<", capture_slice(), ">\n"); return}
 
  LX {print("(simenv) -E- Closing Parenthesis not found for *parenthesis* starting on line ", capture_slice_line(), "\n");
      exit}

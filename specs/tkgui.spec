@@ -12,7 +12,7 @@ I {
 }
 
  -> curlyb
- -> sub_gui[1]	  {return ($subgui_name => '('.substr($$STRING, $IPOS, $LSPOS - $IPOS - 1).')')}
+ -> sub_gui[1]	  {return ($subgui_name => '('.capture_slice().')')}
 
 curlyb: /\{/ /\}/
  -> curlyb

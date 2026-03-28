@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Spend `capture_slice()` In Live Delimiter Readers
+
+Continued the Phase 4 capture/checkpoint line with a bounded live-spec helper-spend slice:
+- migrated `specs/tkgui.spec::sub_gui`, `specs/hlink_substitution.spec::substitute_statement2`, `specs/hlink_substitution.spec::curlyb`, and the obvious delimiter-reader return/debug bands in `specs/simenv.spec` to use `capture_slice()` directly instead of spelling raw anonymous-boundary `substr($$STRING, $IPOS, $LSPOS - $IPOS - ...)` reads by hand,
+- added focused regression coverage in `t/phase0_regression.t` so `hlink_substitution` now has a runtime smoke lock for the preserved AST shape and the migrated live-source bands in `tkgui`, `hlink_substitution`, and `simenv` are all source-locked to the preferred helper spelling,
+- and refreshed the roadmap/continuity notes so future resume work treats this as a live Phase 4 helper-spend slice rather than a new helper-surface change.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Add anonymous capture-boundary line helper
 
 Continued the Phase 4 capture/checkpoint line with one bounded helper slice:
