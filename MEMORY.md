@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with another bounded live-spec token-reader spend. `specs/tkgui.spec::sub_gui` now reads its entry-point name through `entry_group(0)` instead of raw `@IMATCH_LIST` destructuring. Future resume should keep simple live-spec immediate-match scalar reads on `entry_text()` / `entry_group(...)` rather than raw `IMATCH` or `@IMATCH_LIST`.
 - 2026-03-28: Continued the Phase 4 helper-adoption line with another bounded live-spec token-reader spend. The simple token-return seams in `specs/regdef.spec` now return through `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST`. Future resume should keep live-spec immediate-match group-list reads on `entry_groups()` rather than raw `@IMATCH_LIST`.
 - 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend. The simple token-reader rules in `specs/ds_vhistory.spec` now return through `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST`. Future resume should keep live-spec immediate-match group-list reads on `entry_groups()` rather than raw `@IMATCH_LIST`.
 

@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with another bounded live-spec token-reader spend. `specs/tkgui.spec::sub_gui` now uses `entry_group(0)` instead of raw `@IMATCH_LIST` destructuring for the sub-gui entry-point name read. Future resume should keep simple immediate-match scalar reads on `entry_text()` / `entry_group(...)` rather than reintroducing raw `IMATCH` or `@IMATCH_LIST` access in live specs.
 - 2026-03-28: Continued the Phase 4 helper-adoption line with another bounded live-spec token-reader spend. The simple token-return seams in `specs/regdef.spec` now use `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST` returns. Future resume should keep live-spec immediate-match group-list reads on `entry_groups()` rather than reintroducing raw `@IMATCH_LIST`.
 - 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend. The simple token readers in `specs/ds_vhistory.spec` now use `entry_groups()` plus `flat_array(...)` instead of returning raw `@IMATCH_LIST`. Future resume should keep direct immediate-match group-list reads on `entry_groups()` in live specs instead of reintroducing raw `@IMATCH_LIST` returns.
 

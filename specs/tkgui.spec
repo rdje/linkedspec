@@ -7,8 +7,8 @@ sub_gui_list::
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {
- my ($subgui_name) = @IMATCH_LIST;
- print("Found a SUB GUI entry point <", scalar(subgui_name), ">\n")
+ assign(scalar(subgui_name), entry_group(0));
+ print("Found a SUB GUI entry point <", scalar($subgui_name), ">\n")
 }
 
  -> curlyb

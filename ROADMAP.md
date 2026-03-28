@@ -164,6 +164,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - the debug-print token-reader rules in `specs/DT.spec` now also use `entry_text()` directly instead of the older `scalar(IMATCH)` surface for those simple token reads,
   - the debug-print token-reader rules in `specs/operators_try.spec` now also use `entry_text()` directly instead of the older `scalar(IMATCH)` surface for those simple token reads,
   - the compact token-reader band in `specs/Lispish.spec` now also uses `entry_text()` / `entry_group(0)` directly instead of the older `scalar(IMATCH)` / `scalar(IMATCH_LIST, 0)` surface for those simple token payload readers,
+  - `specs/tkgui.spec::sub_gui` now also uses `entry_group(0)` directly instead of raw `@IMATCH_LIST` destructuring for its simple entry-point name read,
   - the `anyvariable`, `variable_substitution`, and `comments` token-reader rules in `specs/simenv.spec` now also use `entry_text()` directly instead of the older `scalar(IMATCH)` surface for those simple token reads,
   - grouped attribute readers in `specs/lib_reader.spec` now also use `entry_group(...)` directly instead of the older `scalar(IMATCH_LIST, ...)` surface for those simple grouped entry captures,
   - the terminal token band in `specs/tablegrep.spec` now also uses `entry_group(0..2)` directly instead of the older `scalar(IMATCH_LIST, ...)` surface for those simple regex-token capture reads,

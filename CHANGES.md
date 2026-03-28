@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: spend entry_group in tkgui sub_gui
+
+- migrated `specs/tkgui.spec::sub_gui` off raw `@IMATCH_LIST` destructuring and onto `entry_group(0)` for the entry-point name read,
+- widened the existing `tkgui` source lock in `t/phase0_regression.t` so it now covers both the `capture_slice()` delimiter read and the `entry_group(0)` immediate-match read,
+- refreshed roadmap/continuity notes for the additional Phase 4 live-spec helper spend.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Spend entry_groups in regdef token readers
 
 - migrated the simple token-return seams in `specs/regdef.spec` from raw `@IMATCH_LIST` returns onto `entry_groups()` plus `flat_array(...)`,

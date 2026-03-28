@@ -37722,13 +37722,15 @@ subtest 'tkgui_parser_smoke' => sub {
     is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
 };
 subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
-    plan tests => 4;
+    plan tests => 6;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'tkgui.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
+    like($source_content, qr/assign\(scalar\(subgui_name\), entry_group\(0\)\);/, 'tkgui sub_gui now prefers entry_group(0) for the entry-point name read');
     like($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.capture_slice\(\)\.'\)'\)\}/, 'tkgui sub_gui now prefers capture_slice() for the inner parenthesized body read');
+    unlike($source_content, qr/my \(\$subgui_name\) = \@IMATCH_LIST;/, 'tkgui sub_gui no longer destructures raw @IMATCH_LIST for the entry-point name read');
     unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\.'\)'\)\}/, 'tkgui sub_gui no longer uses the raw anonymous-boundary substr read');
     unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(/, 'tkgui sub_gui source no longer spells the old raw substr helper pattern');
 };
