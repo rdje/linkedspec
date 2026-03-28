@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one coherent slice. The preferred explicit lifecycle/action-block write helper is now `start_capture_slice()` and the new explicit tail readers are `capture_rest()` / `capture_rest_len()`. `capture_slice_here()` stays supported only as a compatibility alias because it misleadingly sounded like a read helper. Future resume should keep new live spends on `start_capture_slice()` plus `capture_rest()` / `capture_rest_len()` rather than on raw `assign(s(IPOS), cursor_pos())` or raw tail `substr(...)`.
+
 - 2026-03-28: Continued the Phase 5 diagnostics-continuity line in one bounded runtime-context slice. Structured `runtime_ctx->{last_error}` payloads now also carry `top_rule` when the shared runtime context already knows the selected parser entrypoint, so runtime/parser failures are more self-contained and callers no longer have to recover parser identity from separate context fields. Future resume should treat `top_rule` as part of the structured diagnostics contract alongside `owner_stage`, `spec_name`, and `spec_path`.
 
 - 2026-03-28: Continued the remaining Phase 1A compatibility-wrapper cleanup in one bounded slice. `LinkedSpec::ActionRewriter::_delegate_emit_context_call(...)` now routes directly through `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` into `LinkedSpec::RuleIR::EmitContext`, so that legacy compatibility owner no longer carries a second local lazy-load / `can(...)` / symbol-call implementation on top of the shared owner-dispatch seam. Future resume should keep `ActionRewriter` shrinking toward a thin compatibility map over `EmitContext`, not as a separate delegation style.

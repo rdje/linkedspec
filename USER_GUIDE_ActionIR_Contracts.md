@@ -244,6 +244,90 @@ Top::AND
 
 Use it when the rule needs that same anonymous-capture-boundary model as `capture_slice()` but only wants length metadata. `capture_slice_length()` remains supported as a longer compatibility alias, and `capture_len_from_rule_start()` remains supported for older migration slices.
 
+### `start_capture_slice()`
+Move the current anonymous capture boundary to the current parser position.
+
+Practical reading:
+- this is the explicit code-block form of the same anonymous-boundary move that `@capture_slice` expresses at the paragraph level,
+- it writes the current parser position into the anonymous capture-boundary slot,
+- it does not return captured text by itself,
+- and later `capture_slice()`, `capture_slice_len()`, `capture_rest()`, and `capture_rest_len()` reads start from that new boundary.
+
+Examples:
+
+```text
+start_capture_slice()
+```
+
+```text
+Top::AND
+ I { declare(scalar, tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(tail), capture_rest()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(tail), capture_rest_len())) }
+```
+
+Use it when the rule should begin a new anonymous capture slice explicitly from inside a lifecycle or action block, instead of spelling `assign(s(IPOS), cursor_pos())` directly. `capture_slice_here()` remains supported as a compatibility alias.
+
+### `capture_rest()`
+Return the substring from the current anonymous capture boundary through end-of-input.
+
+Practical reading:
+- the left boundary is the current anonymous capture boundary stored in `$IPOS`,
+- the right boundary is the end of the current input string,
+- the current local match is included if it lies to the right of that anonymous boundary,
+- and unlike `capture_from(name)`, this helper does not depend on any named mark.
+
+Examples:
+
+```text
+assign(scalar(tail), capture_rest())
+```
+
+```text
+Top::AND
+ I { declare(scalar, tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(tail), capture_rest()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(tail), capture_rest())) }
+```
+
+Use it when the rule wants the current anonymous capture-boundary tail directly, rather than a current-slot slice. This is the explicit helper form of the old raw `substr($$STRING, $IPOS, length($$STRING) - $IPOS)` pattern.
+
+### `capture_rest_len()`
+Return the numeric length of the same anonymous capture-boundary tail that `capture_rest()` would read.
+
+Practical reading:
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
+- the right boundary is the end of the current input string,
+- the helper returns the remaining width from that anonymous boundary instead of materializing the substring,
+- and `capture_rest_length()` remains supported as a longer compatibility alias.
+
+Examples:
+
+```text
+assign(scalar(width), capture_rest_len())
+```
+
+```text
+Top::AND
+ I { declare(scalar, width) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(width), capture_rest_len()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(width), capture_rest_len())) }
+```
+
+Use it when the rule needs the width of that same anonymous-boundary tail but does not need the tail text itself.
+
 ### `capture_from(name)`
 Return the captured substring from a named `@mark(name)` checkpoint to the left edge of the current match.
 

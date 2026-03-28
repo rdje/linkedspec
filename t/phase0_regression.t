@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 50;
+    plan tests => 55;
 
     my $label = 'Top';
 
@@ -10876,6 +10876,31 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_length()'),
         q{do { ($LSPOS - $IPOS - length $LMATCH) }},
         'capture_slice_length() compatibility alias rewrites to the same explicit capture-slice length semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'start_capture_slice()'),
+        q{do { $IPOS = pos $$STRING }},
+        'start_capture_slice() helper rewrite preserves explicit anonymous capture-boundary movement semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_slice_here()'),
+        q{do { $IPOS = pos $$STRING }},
+        'capture_slice_here() compatibility alias rewrites to the same anonymous capture-boundary movement semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_rest()'),
+        q{do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }},
+        'capture_rest() helper rewrite preserves explicit capture-boundary tail semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_rest_len()'),
+        q{do { (length($$STRING) - $IPOS) }},
+        'capture_rest_len() helper rewrite preserves explicit capture-boundary tail-length semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_rest_length()'),
+        q{do { (length($$STRING) - $IPOS) }},
+        'capture_rest_length() compatibility alias rewrites to the same explicit capture-boundary tail-length semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_from_rule_start()'),
@@ -11386,6 +11411,39 @@ SPEC
 
     my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_len()');
     like($len_rewrite, qr/\(\$LSPOS - \$IPOS - length \$LMATCH\)/, 'capture_slice_len() lowering reads the current capture-boundary span length without materializing the substring');
+};
+subtest 'capture_rest_helpers_read_current_capture_boundary_tail_without_named_mark' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, tail_before_close, tail_width) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(tail_before_close), capture_rest()); assign(scalar(tail_width), capture_rest_len()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(tail_before_close), scalar(tail_width), capture_rest(), capture_rest_len())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_rest helper coverage');
+
+    my $input = '(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'bar)', 4, 'bar)', 4],
+        'start_capture_slice() can advance the anonymous capture boundary, and capture_rest() / capture_rest_len() then read from that moved boundary through end-of-input without relying on named marks'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_rest helper parse leaves runtime_ctx last_error clear on success');
+
+    my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest()');
+    like($capture_rewrite, qr/substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)/, 'capture_rest() lowering reads the current capture-boundary tail through end-of-input');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest_len()');
+    like($len_rewrite, qr/\(length\(\$\$STRING\) - \$IPOS\)/, 'capture_rest_len() lowering reads the current capture-boundary tail length through end-of-input');
 };
 subtest 'named_mark_mark_pos_reads_rule_local_checkpoint_position' => sub {
     plan tests => 4;
@@ -36167,6 +36225,31 @@ SPEC
     ok(index($rewritten, '($LSPOS - $IPOS - length $LMATCH)') >= 0, 'capture_slice_len() lowers to a direct capture-boundary span-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_slice helper rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_capture_rest_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { start_capture_slice(); return(hash("tail", capture_rest(), "width", capture_rest_len())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit capture_rest helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit capture_rest helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit capture_rest helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit capture_rest helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_SLICE_START' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_START');
+    ok(grep { $_ eq 'CAPTURE_REST' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST');
+    ok(grep { $_ eq 'CAPTURE_REST_LEN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST_LEN');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'start_capture_slice(); return(hash("tail", capture_rest(), "width", capture_rest_len()))');
+    ok(index($rewritten, '$IPOS = pos $$STRING') >= 0, 'start_capture_slice() lowers to a direct anonymous capture-boundary movement');
+    ok(index($rewritten, 'substr($$STRING, $IPOS, length($$STRING) - $IPOS)') >= 0, 'capture_rest() lowers to a direct capture-boundary tail read');
+    ok(index($rewritten, '(length($$STRING) - $IPOS)') >= 0, 'capture_rest_len() lowers to a direct capture-boundary tail-length read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_rest helper rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;
 
@@ -37249,7 +37332,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 11;
+    plan tests => 13;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -37258,8 +37341,10 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     like($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band now prefers s(IPOS) in cursor initialization');
     like($source_content, qr/LS\s+\{assign\(s\(retv\), capture_slice\(\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/LS\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
-    like($source_content, qr/LE\s+\{assign\(s\(IPOS\), cursor_pos\(\)\)\}/, 'sdce split bands now prefer cursor_pos() for direct parser-position reads');
-    unlike($source_content, qr/assign\(s\(IPOS\), pos \$\$STRING\)/, 'sdce split bands no longer use raw pos $$STRING in the migrated direct parser-position reads');
+    like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
+    unlike($source_content, qr/assign\(s\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
+    like($source_content, qr/LX\s+\{assign\(s\(retv\), capture_rest\(\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_values\(a\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() for anonymous capture-boundary tail reads');
+    unlike($source_content, qr/LX\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_values\(a\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
     like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
     like($source_content, qr/assign\(s\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(s\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');

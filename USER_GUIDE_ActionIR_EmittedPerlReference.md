@@ -336,6 +336,11 @@ Important nuance:
 - `capture_slice()` -> `do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }`
 - `capture_slice_len()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
 - `capture_slice_length()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
+- `start_capture_slice()` -> `do { $IPOS = pos $$STRING }`
+- `capture_slice_here()` -> `do { $IPOS = pos $$STRING }`
+- `capture_rest()` -> `do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }`
+- `capture_rest_len()` -> `do { (length($$STRING) - $IPOS) }`
+- `capture_rest_length()` -> `do { (length($$STRING) - $IPOS) }`
 - `capture_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture_len_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? ($LSPOS - $__ls_mark - length $LMATCH) : undef }`
 - `capture_take(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'current_rule', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }`
@@ -363,6 +368,10 @@ Important nuance:
 - `capture_slice()` is the preferred explicit helper form of the common raw `$IPOS` capture pattern, so it uses the current anonymous capture boundary as its left edge and never depends on named mark storage.
 - `capture_slice_len()` returns the numeric width of that same anonymous capture-boundary span, so later logic can compare or record it without materializing the substring.
 - `capture_slice_length()` is a longer compatibility alias for `capture_slice_len()`, and older migration helpers `capture_from_rule_start()` / `capture_len_from_rule_start()` still lower to the same code.
+- `start_capture_slice()` is the preferred explicit code-block write form for that same anonymous capture boundary, so later anonymous capture helpers start from the current parser position without spelling `assign(s(IPOS), cursor_pos())` directly.
+- `capture_slice_here()` remains supported as a compatibility alias for `start_capture_slice()`.
+- `capture_rest()` reads from that same anonymous capture boundary through end-of-input, so it is the explicit helper form of the old raw tail-capture pattern `substr($$STRING, $IPOS, length($$STRING) - $IPOS)`.
+- `capture_rest_len()` returns the numeric width of that same anonymous-boundary tail, and `capture_rest_length()` is a longer compatibility alias for it.
 - `capture_from(name)` returns text from the saved mark up to the left edge of the current local match, so a later regex slot in the same rule usually acts as the right delimiter.
 - `capture_len_from(name)` returns the numeric length of that same current-edge span, so later logic can record or compare span-width metadata without materializing the substring.
 - `capture_take(name)` returns that same span and then updates the rule-local named mark to `pos $$STRING`, so later same-rule reads continue from the current parser position.

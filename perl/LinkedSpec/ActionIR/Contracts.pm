@@ -476,6 +476,83 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'start_capture_slice',
+   ir_node            => 'CAPTURE_SLICE_START',
+   diag_name          => 'start_capture_slice',
+   unresolved_pattern => qr/\bstart_capture_slice\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bstart_capture_slice\s*\(\s*\)
+    }{
+     'do { $IPOS = pos $$STRING }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_slice_here',
+   ir_node            => 'CAPTURE_SLICE_START',
+   diag_name          => 'start_capture_slice',
+   compatibility_surface => 1,
+   unresolved_pattern => qr/\bcapture_slice_here\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_slice_here\s*\(\s*\)
+    }{
+     'do { $IPOS = pos $$STRING }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_rest',
+   ir_node            => 'CAPTURE_REST',
+   diag_name          => 'capture_rest',
+   unresolved_pattern => qr/\bcapture_rest\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_rest\s*\(\s*\)
+    }{
+     'do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_rest_len',
+   ir_node            => 'CAPTURE_REST_LEN',
+   diag_name          => 'capture_rest_len',
+   unresolved_pattern => qr/\bcapture_rest_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_rest_len\s*\(\s*\)
+    }{
+     'do { (length($$STRING) - $IPOS) }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_rest_length',
+   ir_node            => 'CAPTURE_REST_LEN',
+   diag_name          => 'capture_rest_len',
+   compatibility_surface => 1,
+   unresolved_pattern => qr/\bcapture_rest_length\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_rest_length\s*\(\s*\)
+    }{
+     'do { (length($$STRING) - $IPOS) }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_from_rule_start',
    ir_node            => 'CAPTURE_SLICE',
    diag_name          => 'capture_slice',

@@ -1,5 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Add explicit anonymous capture-boundary move and tail helpers
+
+Continued the Phase 4 capture/checkpoint line with one coherent anonymous-boundary slice:
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so the preferred explicit write helper is now `start_capture_slice()` and the new explicit tail readers are `capture_rest()` / `capture_rest_len()`, all lowering without raw-Perl fallback,
+- kept `capture_slice_here()` as a compatibility alias only, because the old name misleadingly read like a text-capture helper even though it only moves the anonymous capture boundary to the current parser position,
+- migrated `specs/sdce.spec` so its split bands now prefer `start_capture_slice()` plus `capture_rest()` instead of direct `assign(s(IPOS), cursor_pos())` plus raw tail `substr(...)`,
+- widened `t/phase0_regression.t` so the helper rewrite, canonical ActionIR metadata, runtime semantics, and live-source migration locks all cover the renamed write helper and the new anonymous-boundary tail readers,
+- and refreshed the user guides plus roadmap/continuity notes so the preferred teaching surface now matches the actual semantics more honestly.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 5: Include `top_rule` in Structured Runtime Diagnostics
 
 Continued the Phase 5 diagnostics-continuity line with one bounded runtime-context slice:
