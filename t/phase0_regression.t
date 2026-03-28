@@ -7761,7 +7761,7 @@ subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
     ok(!defined(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path(undef)), 'RuntimeContext spec-path reader returns undef for non-hash runtime context input');
 };
 subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $runtime_ctx = {
         top_rule => 'StaleTop',
@@ -7785,12 +7785,15 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get preparation helper clears stale parser-source chunks');
     ok(ref($runtime_ctx->{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get preparation helper installs parser-source emit callback when dumping is enabled');
 
-    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get($runtime_ctx, dump_parser_source => 0);
+    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get($runtime_ctx, dump_parser_source => 0, top_rule => 'RequestedTop');
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext run_get preparation helper removes parser-source emit callback when dumping is disabled');
+    is($runtime_ctx->{top_rule}, 'RequestedTop', 'RuntimeContext run_get preparation helper seeds requested top_rule when one is provided');
+
+    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get($runtime_ctx, dump_parser_source => 0);
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
 };
 subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     my %runtime_ctx = (
         top_rule => 'StaleTop',
@@ -7817,10 +7820,14 @@ subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
     is_deeply($runtime_ctx{parser_source_chunks_ref}, [], 'RuntimeContext run_get option helper clears stale parser-source chunks');
     ok(ref($runtime_ctx{emit_parser_source_line}) eq 'CODE', 'RuntimeContext run_get option helper installs parser-source emit callback when dumping is enabled');
 
-    %option = (runtime_ctx_ref => \%runtime_ctx, dump_parser_source => 0);
+    %option = (runtime_ctx_ref => \%runtime_ctx, dump_parser_source => 0, top_rule => 'RequestedTop');
     LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(\%option, owner => 't::runtime_context_helper');
     ok(!exists $runtime_ctx{emit_parser_source_line}, 'RuntimeContext run_get option helper removes parser-source emit callback when dumping is disabled');
-    is($runtime_ctx{top_rule}, undef, 'RuntimeContext run_get option helper keeps top_rule cleared across repeated option preparation');
+    is($runtime_ctx{top_rule}, 'RequestedTop', 'RuntimeContext run_get option helper seeds requested top_rule when one is provided');
+
+    %option = (runtime_ctx_ref => \%runtime_ctx, dump_parser_source => 0);
+    LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option(\%option, owner => 't::runtime_context_helper');
+    is($runtime_ctx{top_rule}, undef, 'RuntimeContext run_get option helper clears previously seeded top_rule when a later request omits it');
 
     %runtime_ctx = (
         spec_name => 'PreservedSpec',
@@ -7850,7 +7857,7 @@ subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub 
     is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper clears stale parser-source chunks');
 };
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
-    plan tests => 12;
+    plan tests => 14;
 
     my @stale_parser_source_chunks = ('old parser source');
     my %runtime_ctx = (
@@ -7886,6 +7893,16 @@ subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
     );
     is($fresh, \%fresh_runtime_ctx, 'RuntimeContext get_parser preparation helper still supports fresh runtime contexts');
     ok(!exists $fresh_runtime_ctx{parser_source_chunks_ref}, 'RuntimeContext get_parser preparation helper does not add parser-source capture state when none exists');
+
+    my %requested_runtime_ctx = (top_rule => 'OldTop');
+    my %requested_option = (runtime_ctx_ref => \%requested_runtime_ctx, top_rule => 'RequestedTop');
+    my $requested = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
+        \%requested_option,
+        owner => 't::runtime_context_helper',
+        spec_name => 'RequestedSpec',
+    );
+    is($requested, \%requested_runtime_ctx, 'RuntimeContext get_parser preparation helper still reuses the supplied hashref when seeding requested top_rule');
+    is($requested_runtime_ctx{top_rule}, 'RequestedTop', 'RuntimeContext get_parser preparation helper seeds requested top_rule when one is provided');
 
     my $empty = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser(
         {},
@@ -9052,12 +9069,13 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_PRESERVED_RUNTIME_ERROR__/, 'compiler delegation die after payload preserves deeper owner detail');
 };
 subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
-    plan tests => 11;
+    plan tests => 13;
 
     my $missing_spec_name = 'phase5_runtime_ctx_missing_dot_spec_' . $$ . '.spec';
     my $runtime_ctx;
     my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
         $missing_spec_name,
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
@@ -9065,16 +9083,18 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     ok(!defined($parser), 'get_parser returns undef for missing explicit dot-spec name with runtime_ctx_ref enabled');
     ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on resolution failure');
     is($runtime_ctx->{spec_name}, $missing_spec_name, 'get_parser runtime context records requested spec name');
+    is($runtime_ctx->{top_rule}, 'RequestedTop', 'get_parser runtime context records requested top_rule before resolution failure');
     is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser runtime context records parser_factory type on resolution failure');
     is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'get_parser runtime context records parser-factory resolution stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'get_parser runtime context records combined parser-factory owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'get_parser runtime context records parser-factory resolution summary');
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'get_parser runtime error payload records requested top_rule before resolution failure');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
 };
 subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub {
-    plan tests => 8;
+    plan tests => 9;
 
     my $missing_spec_name = 'phase5_runtime_ctx_stale_identity_' . $$ . '.spec';
     my %runtime_ctx = (
@@ -9084,6 +9104,7 @@ subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub
     );
     my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
         $missing_spec_name,
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \%runtime_ctx,
     );
 
@@ -9091,10 +9112,11 @@ subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub
     ok(!defined($parser), 'get_parser returns undef for reused-context resolution failure');
     is($runtime_ctx{spec_name}, $missing_spec_name, 'get_parser refreshes spec_name before reused-context resolution failure');
     is($runtime_ctx{spec_path}, undef, 'get_parser clears stale spec_path before reused-context resolution failure');
-    is($runtime_ctx{top_rule}, undef, 'get_parser clears stale top_rule before reused-context resolution failure');
+    is($runtime_ctx{top_rule}, 'RequestedTop', 'get_parser replaces stale top_rule with the requested one before reused-context resolution failure');
     ok(ref($runtime_ctx{last_error}) eq 'HASH', 'get_parser reused-context resolution failure still records structured last_error');
     is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser reused-context last_error records the refreshed spec_name');
     is($runtime_ctx{last_error}{spec_path}, '', 'get_parser reused-context last_error does not inherit stale spec_path');
+    is($runtime_ctx{last_error}{top_rule}, 'RequestedTop', 'get_parser reused-context last_error records the requested top_rule instead of stale state');
 };
 subtest 'get_parser_resolution_failure_clears_stale_parser_source_capture' => sub {
     plan tests => 7;
@@ -38205,7 +38227,7 @@ PERL
 };
 
 subtest 'invalid_parse_mode_records_structured_prepare_pipeline_error' => sub {
-    plan tests => 7;
+    plan tests => 9;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -38216,17 +38238,20 @@ SPEC
     my $ret = LinkedSpec::Get(
         \$spec_content,
         return_descr => 1,
+        top_rule => 'RequestedTop',
         parse_mode => 'sideways',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
     ok(!defined($ret), 'invalid parse mode returns undef');
     ok(ref($runtime_ctx) eq 'HASH', 'invalid parse mode still exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{top_rule}, 'RequestedTop', 'invalid parse mode keeps the requested top_rule visible in runtime context before parser selection');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid parse mode records structured last_error');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid parse mode records compiler_pipeline error type');
     is($runtime_ctx->{last_error}{stage}, 'prepare_pipeline', 'invalid parse mode records prepare_pipeline stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'invalid parse mode records combined compiler owner stage');
     like($runtime_ctx->{last_error}{detail}, qr/option 'parse_mode' must be 'seek' or 'consume'/, 'invalid parse mode preserves parse-mode contract detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'invalid parse mode records the requested top_rule in structured diagnostics');
 };
 
 done_testing();

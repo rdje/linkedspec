@@ -1155,12 +1155,12 @@ Typical uses:
 - and inspect structured runtime execution failures there after a returned parser coderef hits a handler error.
 
 When you reuse the same shared runtime context across multiple calls, LinkedSpec now refreshes that identity state deliberately instead of letting older file-oriented fields bleed forward:
-- inline `LinkedSpec::Get(...)` / `LinkedSpec::Runtime::run_get(...)` clears stale `spec_name` and `spec_path` before compiling inline spec text,
-- file-oriented `LinkedSpec::get_parser(...)` refreshes `spec_name`, clears stale `spec_path`, and clears stale `top_rule` before parser-factory resolution starts.
+- inline `LinkedSpec::Get(...)` / `LinkedSpec::Runtime::run_get(...)` clears stale `spec_name` and `spec_path` before compiling inline spec text, and it reseeds the requested `top_rule` early when one is provided so setup/validation failures can still report the intended parser entrypoint,
+- file-oriented `LinkedSpec::get_parser(...)` refreshes `spec_name`, clears stale `spec_path`, and replaces stale `top_rule` with the requested one when provided before parser-factory resolution starts.
 - if parser-source capture is enabled, the shared `parser_source_chunks_ref` buffer is cleared at the start of each compile while keeping the same shared arrayref alive, so a later run reports only the current parser source instead of appending stale chunks from an earlier compile.
 - if a reused shared context already carries stale parser-source capture and `LinkedSpec::get_parser(...)` then fails before compilation even begins, that stale parser-source buffer is cleared during parser-factory preparation too, so an early file-resolution failure does not leave old parser source looking like output from the current call.
 
-That means a later inline failure will not accidentally report the `spec_name` / `spec_path` from an earlier `get_parser(...)` call, and a later `get_parser(...)` resolution failure will not accidentally inherit the `spec_path` from a previously resolved parser.
+That means a later inline failure will not accidentally report the `spec_name` / `spec_path` from an earlier `get_parser(...)` call, a later `get_parser(...)` resolution failure will not accidentally inherit the `spec_path` from a previously resolved parser, and early failure payloads can still carry the caller-requested `top_rule` when one was already known before parser selection.
 
 The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{type}`

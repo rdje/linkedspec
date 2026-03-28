@@ -41,6 +41,8 @@ sub prepare_runtime_ctx_for_run_get {
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  $runtime_ctx = {} unless ref($runtime_ctx) eq 'HASH';
  clear_runtime_ctx_top_rule($runtime_ctx);
+ set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
+  if defined($args{top_rule}) && length($args{top_rule});
  unless ($args{preserve_spec_identity}) {
   clear_runtime_ctx_spec_name($runtime_ctx);
   clear_runtime_ctx_spec_path($runtime_ctx);
@@ -65,6 +67,7 @@ sub prepare_runtime_ctx_for_run_get_option {
  return prepare_runtime_ctx_for_run_get(
   $runtime_ctx_ref,
   dump_parser_source => $option->{dump_parser_source} ? 1 : 0,
+  top_rule => $option->{top_rule},
   preserve_spec_identity => $option->{_preserve_runtime_ctx_spec_identity} ? 1 : 0,
  )
 }
@@ -86,6 +89,8 @@ sub prepare_runtime_ctx_for_get_parser {
  @$parser_source_chunks_ref = () if ref($parser_source_chunks_ref) eq 'ARRAY';
  delete $runtime_ctx->{emit_parser_source_line};
  set_runtime_ctx_spec_name($runtime_ctx, $args{spec_name}) if defined $args{spec_name};
+ set_runtime_ctx_top_rule($runtime_ctx, $option->{top_rule})
+  if ref($option) eq 'HASH' && defined($option->{top_rule}) && length($option->{top_rule});
  return $runtime_ctx
 }
 
