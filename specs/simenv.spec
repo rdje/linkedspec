@@ -70,8 +70,7 @@ multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
 			      return {type=>'multiline_value', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 		             }
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g; 
-     print("(simenv) -E- Closing parenthesis not found for *multiline_value* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing parenthesis not found for *multiline_value* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -91,8 +90,7 @@ singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {my $last_pos=$IPOS; my @
    }
 
  LS {my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, {type=>'verbatim', content=>substr($$STRING, $last_pos, $shift)} if $shift}
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- End of Line not found for *singleline_value* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- End of Line not found for *singleline_value* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -104,8 +102,7 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
 					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", capture_slice_line(), "\n");
      exit}
 
 dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); my @matches; my $last_pos=$IPOS}
@@ -116,8 +113,7 @@ dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); my @ma
          return {type=>'dquotes', content=> @matches ? \@matches : undef}}
 
  LS {my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift}
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing parenthesis not found for *dquotes* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing parenthesis not found for *dquotes* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -129,8 +125,7 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
 					       return {type=>'squotes', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", capture_slice_line(), "\n");
      exit}
 
 perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); my @matches; my $last_pos=$IPOS}
@@ -142,8 +137,7 @@ perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); m
          return {type=>'dquotes', content=> @matches ? \@matches : undef}}
 
  LS {my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift}
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing parenthesis not found for *perl_dquotes* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing parenthesis not found for *perl_dquotes* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -157,8 +151,7 @@ command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: STAR
 				              }
 
  LS {my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift}
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Unmatched back-tick for *command_substitution* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Unmatched back-tick for *command_substitution* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -170,8 +163,7 @@ perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution:
 	 return {type=>'command_substitution', content=> @matches ? \@matches : undef}}
 
  LS {my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift}
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing parenthesis not found for *perl_command_substitution* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing parenthesis not found for *perl_command_substitution* starting on line ", capture_slice_line(), "\n");
      exit}
  
 
@@ -183,8 +175,7 @@ bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: ST
 					       return {type=>'bvariable_substitution', content=>substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}
 				              }
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing Curly Brace not found for *bvariable_substitution* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing Curly Brace not found for *bvariable_substitution* starting on line ", capture_slice_line(), "\n");
      exit}
  
 
@@ -199,8 +190,7 @@ curlybrace: /\{/   /\}/                     I {print("curlybrace: OPENING Brace\
  -> curlybrace
  -> curlybrace[1]                             {print("curlybrace: CLOSING Brace\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing Curly Brace not found for *curlybrace* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing Curly Brace not found for *curlybrace* starting on line ", capture_slice_line(), "\n");
      exit}
 
 
@@ -208,8 +198,7 @@ parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Paren
  -> parenthesis
  -> parenthesis[1]                            {print("parenthesis: CLOSING Parenthesis\n");  print("<", substr($$STRING, $IPOS, $LSPOS - $IPOS -1), ">\n"); return}
 
- LX {my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g;  
-     print("(simenv) -E- Closing Parenthesis not found for *parenthesis* starting on line ", (@startline +1), "\n"); 
+ LX {print("(simenv) -E- Closing Parenthesis not found for *parenthesis* starting on line ", capture_slice_line(), "\n");
      exit}
 
 

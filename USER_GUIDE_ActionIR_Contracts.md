@@ -244,6 +244,32 @@ Top::AND
 
 Use it when the rule needs that same anonymous-capture-boundary model as `capture_slice()` but only wants length metadata. `capture_slice_length()` remains supported as a longer compatibility alias, and `capture_len_from_rule_start()` remains supported for older migration slices.
 
+### `capture_slice_line()`
+Return the 1-based line number of the current anonymous capture boundary.
+
+Practical reading:
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
+- the helper counts line breaks from the beginning of the current input through that stored boundary,
+- it reports where the current anonymous capture slice starts,
+- and unlike `cursor_line()`, it does not follow the live parser cursor after that boundary is established.
+
+Examples:
+
+```text
+print("starting on line ", capture_slice_line(), "\n")
+```
+
+```text
+Top::AND
+ /prefix\n/
+ -> Top[0] { start_capture_slice() }
+ /\(/
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_line())) }
+```
+
+Use it when the rule wants diagnostics or metadata about where the current anonymous capture slice began, especially in later `LX` or action-edge code that used to count newlines from `$IPOS` by hand.
+
 ### `start_capture_slice()`
 Move the current anonymous capture boundary to the current parser position.
 

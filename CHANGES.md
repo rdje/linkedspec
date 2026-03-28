@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Add anonymous capture-boundary line helper
+
+Continued the Phase 4 capture/checkpoint line with one bounded helper slice:
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_line()` is now a first-class anonymous capture-boundary line reader with canonical ActionIR coverage and no raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata coverage now lock `capture_slice_line()` explicitly,
+- migrated the repeated anonymous capture-boundary error paths in `specs/simenv.spec` from raw `substr($$STRING, 0, $IPOS) =~ /\n/g` counting to `capture_slice_line()`,
+- and refreshed the user guides plus roadmap/continuity notes so the preferred Phase 4 surface now teaches anonymous slice-start line reporting directly.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Add explicit anonymous capture-boundary move and tail helpers
 
 Continued the Phase 4 capture/checkpoint line with one coherent anonymous-boundary slice:

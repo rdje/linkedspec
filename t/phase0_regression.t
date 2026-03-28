@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 55;
+    plan tests => 56;
 
     my $label = 'Top';
 
@@ -10871,6 +10871,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_len()'),
         q{do { ($LSPOS - $IPOS - length $LMATCH) }},
         'capture_slice_len() helper rewrite preserves explicit capture-slice length semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_slice_line()'),
+        q{do { my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0; 1 + (() = substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g) }},
+        'capture_slice_line() helper rewrite preserves explicit capture-slice line semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_length()'),
@@ -11535,6 +11540,35 @@ SPEC
 
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_line()');
     like($rewrite, qr/pos \$\$STRING.*defined\(\$__ls_cursor_pos\) \? \$__ls_cursor_pos : 0/s, 'cursor_line() lowering reads the live current parser position before counting line breaks');
+};
+subtest 'capture_slice_line_reads_current_anonymous_capture_boundary_line' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /prefix\n/
+ -> Top[0] { start_capture_slice() }
+ /\(/
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_line())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_line() coverage');
+
+    my $input = "prefix\n(foo";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 2],
+        'capture_slice_line() reports the current anonymous capture-boundary line after start_capture_slice() moves that boundary'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_slice_line() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_line()');
+    like($rewrite, qr/defined\(\$IPOS\) \? \$IPOS : 0/s, 'capture_slice_line() lowering normalizes the current anonymous capture-boundary position before counting line breaks');
+    like($rewrite, qr/substr\(\$\$STRING, 0, \$__ls_capture_pos\) =~ \/\\n\/g/, 'capture_slice_line() lowering counts line breaks from the current anonymous capture-boundary position');
 };
 subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
     plan tests => 4;
@@ -36203,11 +36237,11 @@ SPEC
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_slice_helpers_lower_without_raw_fallback' => sub {
-    plan tests => 9;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash("capture", capture_slice(), "width", capture_slice_len())) }
+ /a/ -> Top { return(hash("capture", capture_slice(), "width", capture_slice_len(), "line", capture_slice_line())) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -36219,10 +36253,12 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'explicit capture_slice helpers keep unresolved-helper count at zero');
     ok(grep { $_ eq 'CAPTURE_SLICE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE');
     ok(grep { $_ eq 'CAPTURE_SLICE_LEN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_LEN');
+    ok(grep { $_ eq 'CAPTURE_SLICE_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_LINE_READ');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("capture", capture_slice(), "width", capture_slice_len()))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("capture", capture_slice(), "width", capture_slice_len(), "line", capture_slice_line()))');
     ok(index($rewritten, 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)') >= 0, 'capture_slice() lowers to a direct capture-boundary span read');
     ok(index($rewritten, '($LSPOS - $IPOS - length $LMATCH)') >= 0, 'capture_slice_len() lowers to a direct capture-boundary span-length read');
+    ok(index($rewritten, 'my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0;') >= 0 && index($rewritten, 'substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g') >= 0, 'capture_slice_line() lowers to a direct anonymous capture-boundary line read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_slice helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_rest_helpers_lower_without_raw_fallback' => sub {
@@ -37618,6 +37654,18 @@ subtest 'simenv_begin_end_blocks_prefers_line_helpers' => sub {
     like($source_content, qr/LX \{print\("\(simenv\) -E- END Block statement not found for \*begin_end_blocks\* starting on line ", cursor_line\(\), "\\n"\);/s, 'simenv begin_end_blocks LX path now prefers cursor_line()');
     unlike($source_content, qr/begin_end_blocks: .*?my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;.*?BEGIN statement is on line/s, 'simenv begin_end_blocks mismatch path no longer relies on raw prefix-newline line-count Perl');
     unlike($source_content, qr/LX \{my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;.*?END Block statement not found/s, 'simenv begin_end_blocks LX path no longer relies on raw prefix-newline line-count Perl');
+};
+subtest 'simenv_delimited_lx_paths_prefer_capture_slice_line' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'simenv.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'simenv source spec text is available for anonymous capture-boundary line-helper inspection');
+    like($source_content, qr/multiline_value: .*?starting on line ", capture_slice_line\(\), "\\n"\);/s, 'simenv multiline_value LX path now prefers capture_slice_line()');
+    like($source_content, qr/singleline_value: .*?starting on line ", capture_slice_line\(\), "\\n"\);/s, 'simenv singleline_value LX path now prefers capture_slice_line()');
+    like($source_content, qr/parenthesis: .*?starting on line ", capture_slice_line\(\), "\\n"\);/s, 'simenv parenthesis LX path now prefers capture_slice_line()');
+    unlike($source_content, qr/my \@startline = substr\(\$\$STRING, 0, \$IPOS\) =~ \/\\n\/g;/, 'simenv LX paths no longer rely on raw prefix-newline line-count Perl for anonymous capture-boundary line reporting');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 47;

@@ -809,6 +809,19 @@ That means:
 
 That is why it is useful for split-like staged parsing.
 
+There is now also a small explicit helper family for the same anonymous boundary:
+- `capture_slice()` reads the current anonymous slice text up to the left edge of the current local match,
+- `capture_slice_len()` reads the width of that same slice,
+- `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
+- `start_capture_slice()` moves that anonymous boundary explicitly from inside lifecycle or action code,
+- and `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input.
+
+That means the full current mental model is:
+- `@capture_slice` moves the anonymous boundary at paragraph level,
+- `start_capture_slice()` moves it inside code blocks,
+- `capture_slice()` / `capture_slice_len()` / `capture_slice_line()` read metadata about the current slice,
+- and `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary.
+
 ## Why `@capture_slice` Matters
 This feature is especially useful when:
 - the full structure is awkward to parse in one pass,
@@ -2052,6 +2065,9 @@ The current supported contract is:
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_slice` is the preferred split-boundary cursor feature,
+- `capture_slice()`, `capture_slice_len()`, and `capture_slice_line()` are the preferred anonymous split-boundary read helpers,
+- `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
+- `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”

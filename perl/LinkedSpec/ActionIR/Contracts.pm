@@ -460,6 +460,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_slice_line',
+   ir_node            => 'CAPTURE_SLICE_LINE_READ',
+   diag_name          => 'capture_slice_line',
+   unresolved_pattern => qr/\bcapture_slice_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcapture_slice_line\s*\(\s*\)/do { my \$__ls_capture_pos = defined(\$IPOS) ? \$IPOS : 0; 1 + (() = substr(\$\$STRING, 0, \$__ls_capture_pos) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_slice_length',
    ir_node            => 'CAPTURE_SLICE_LEN',
    diag_name          => 'capture_slice_len',

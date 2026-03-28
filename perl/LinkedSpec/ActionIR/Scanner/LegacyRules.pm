@@ -28,6 +28,7 @@ sub try_scan_contract_ir_events {
   'capture_if_macro' => \&_scan_contract_capture_if_macro,
   'capture_slice' => \&_scan_contract_capture_slice,
   'capture_slice_len' => \&_scan_contract_capture_slice_len,
+  'capture_slice_line' => \&_scan_contract_capture_slice_line,
   'capture_slice_length' => \&_scan_contract_capture_slice_length,
   'start_capture_slice' => \&_scan_contract_start_capture_slice,
   'capture_slice_here' => \&_scan_contract_capture_slice_here,
@@ -216,6 +217,15 @@ sub _scan_contract_capture_slice_len {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_slice_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_line\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
