@@ -1,4 +1,4 @@
-sdc_esplit:: I.declare(array, pieces).declare(scalar, retv).assign(s(IPOS), 0)
+sdc_esplit:: I {declare(array, pieces); declare(scalar, retv); start_capture_slice()}
 -> get_pinport  {assign(s(retv), call(get_pinport)); push_value(a(pieces), s(retv))}
 LS   {assign(s(retv), capture_slice()); push_value(a(pieces), s(retv))}
 LE   {start_capture_slice()}

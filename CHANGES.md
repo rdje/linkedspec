@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Spend start_capture_slice in sdce top setup
+
+Continued the Phase 4 helper-adoption line with one bounded live-spec spend:
+- migrated `specs/sdce.spec::sdc_esplit` so its top-rule setup now uses `start_capture_slice()` directly instead of explicit `assign(s(IPOS), 0)` initialization,
+- widened the existing `sdce` source-level migration lock in `t/phase0_regression.t` so future resume keeps that top-rule setup on the preferred anonymous capture-boundary helper surface,
+- and refreshed the roadmap/continuity notes so future work treats this as another live-spec helper spend rather than a new helper-surface change.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Add named checkpoint line helper
 
 Added the next bounded Phase 4 helper in the named-checkpoint family:

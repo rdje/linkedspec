@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec spend. `specs/sdce.spec::sdc_esplit` now starts its anonymous capture boundary with `start_capture_slice()` instead of direct `assign(s(IPOS), 0)` initialization. Future resume should keep new anonymous boundary setup on the explicit helper surface instead of reintroducing direct `IPOS` writes in live specs.
+
 - 2026-03-28: Continued the Phase 4 named-checkpoint line in one bounded helper-surface slice. `mark_line(name)` is now the direct 1-based line-read companion to `mark_pos(name)`, so rules no longer need to round-trip a stored named checkpoint through raw newline counting just to report where that remembered boundary landed. Future resume should keep named-checkpoint line reporting on `mark_line(name)` instead of reintroducing raw `substr($$STRING, 0, mark_pos(...)) =~ /\n/g` patterns.
 
 - 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one bounded helper-surface slice. `capture_slice_pos()` is now the direct numeric read helper for the current anonymous capture boundary, which makes the write/read pair around that surface much clearer: `start_capture_slice()` moves the boundary and `capture_slice_pos()` reads it back as data. Future resume should keep direct anonymous-boundary position reads on `capture_slice_pos()` instead of reintroducing raw `$IPOS` reads in new `.spec` authoring.

@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec spend. `specs/sdce.spec::sdc_esplit` now initializes its anonymous capture boundary with `start_capture_slice()` instead of direct `assign(s(IPOS), 0)` setup. Future resume should keep live-spec anonymous boundary initialization on `start_capture_slice()` rather than direct `IPOS` writes.
+
 - 2026-03-28: Continued the Phase 4 named-checkpoint line in one bounded helper-surface slice. `mark_line(name)` is now the direct 1-based line-read companion to `mark_pos(name)`, so rules can report where a stored named checkpoint landed without round-tripping through raw newline counting from the numeric mark position. Future resume should keep named-checkpoint line reads on `mark_line(name)` instead of reintroducing raw prefix-newline counting around `mark_pos(...)`.
 
 - 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one bounded helper-surface slice. `capture_slice_pos()` is now the direct numeric read helper for the current anonymous capture boundary, so the honest preferred pair is now `start_capture_slice()` to move that boundary and `capture_slice_pos()` to read it back. Future resume should keep new direct anonymous-boundary position reads on `capture_slice_pos()` rather than raw `$IPOS`.

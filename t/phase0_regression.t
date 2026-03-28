@@ -37504,13 +37504,14 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 13;
+    plan tests => 14;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'sdce source spec text is available for alias migration inspection');
-    like($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band now prefers s(IPOS) in cursor initialization');
+    like($source_content, qr/sdc_esplit:: I \{declare\(array, pieces\); declare\(scalar, retv\); start_capture_slice\(\)\}/, 'sdce top band now prefers start_capture_slice() for explicit anonymous capture-boundary initialization');
+    unlike($source_content, qr/assign\(s\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
     like($source_content, qr/LS\s+\{assign\(s\(retv\), capture_slice\(\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/LS\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
