@@ -1970,6 +1970,11 @@ Use `mark_pos(name)` when:
 - later logic should compare or report mark positions rather than only captured spans,
 - or the rule needs explicit position metadata without mutating the checkpoint.
 
+Use `mark_line(name)` when:
+- the rule should expose the stored checkpoint line directly,
+- later diagnostics should report where a named checkpoint landed without first round-tripping through `mark_pos(name)`,
+- or the rule needs explicit line metadata for one remembered boundary without mutating the checkpoint.
+
 Use `entry_text()` when:
 - the rule wants the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry token visible while local matches continue to move forward,

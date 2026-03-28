@@ -355,6 +355,7 @@ Important nuance:
 - `clear_mark(body_start)` -> `do { if (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') { delete $$info{marks}{'current_rule'}{'body_start'}; } undef }`
 - `mark_exists(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? 1 : 0 }`
 - `mark_pos(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? $__ls_mark_bucket->{'body_start'} : undef }`
+- `mark_line(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\n/g)) : undef }`
 - `capture(Top)` -> `push @Top, substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_if(Top)` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
 - `CAPTURE_IF()` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
@@ -389,6 +390,7 @@ Important nuance:
 - `clear_mark(name)` deletes the rule-local named mark directly, so later same-rule reads see it as absent and return `undef` until the mark is re-established.
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
+- `mark_line(name)` checks that same rule-local named mark bucket and returns the 1-based line number of the stored mark when it is present or `undef` when it is absent, without reading or mutating the mark.
 - `cursor_pos()` reads the current parser cursor position directly as `do { pos $$STRING }`, without consulting the rule-local mark bucket.
 - `cursor_line()` reads the current parser cursor line directly as one live `pos $$STRING`-based newline count, without consulting the rule-local mark bucket.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.

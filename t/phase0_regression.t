@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 56;
+    plan tests => 57;
 
     my $label = 'Top';
 
@@ -10976,6 +10976,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_pos(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? $__ls_mark_bucket->{'body_start'} : undef }},
         'mark_pos(name) helper rewrite preserves explicit rule-local named-mark position-read semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_line(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\n/g)) : undef }},
+        'mark_line(name) helper rewrite preserves explicit rule-local named-mark line-read semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
@@ -11480,6 +11485,37 @@ SPEC
 
     my $pos_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_pos(body_start)');
     like($pos_rewrite, qr/\? \$__ls_mark_bucket->\{'body_start'\} : undef/, 'mark_pos(name) lowering reads the stored rule-local mark position without mutating it');
+};
+subtest 'named_mark_mark_line_reads_rule_local_checkpoint_line' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, begin_line, end_line) }
+ /foo\n/
+ @mark(body_start)
+ /bar\n/
+ /baz/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_line), mark_line(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_line), mark_line(end_mark)); return(array("?Top:", scalar(begin_line), scalar(end_line), mark_line(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_line(name) line-read coverage');
+
+    my $input = "foo\nbar\nbaz";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 2, 3, undef],
+        'mark_line(name) returns the stored rule-local checkpoint line or undef when the mark is absent'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_line(name) parse leaves runtime_ctx last_error clear on success');
+
+    my $line_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_line(body_start)');
+    like($line_rewrite, qr/defined\(\$__ls_mark\) \? \(1 \+ \(\(\) = substr\(\$\$STRING, 0, \$__ls_mark\) =~ \/\\n\/g\)\) : undef/, 'mark_line(name) lowering reads the stored rule-local mark line without mutating it');
 };
 subtest 'cursor_pos_reads_current_parser_position_without_named_mark' => sub {
     plan tests => 4;
@@ -36289,6 +36325,29 @@ SPEC
     ok(index($rewritten, 'do { $IPOS }') >= 0, 'capture_slice_pos() lowers to a direct anonymous capture-boundary position read');
     ok(index($rewritten, 'my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0;') >= 0 && index($rewritten, 'substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g') >= 0, 'capture_slice_line() lowers to a direct anonymous capture-boundary line read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_slice helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_named_mark_read_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("pos", mark_pos(body_start), "line", mark_line(body_start))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named mark read helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit named mark read helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit named mark read helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit named mark read helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'MARK_POS_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_POS_READ');
+    ok(grep { $_ eq 'MARK_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_LINE_READ');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("pos", mark_pos(body_start), "line", mark_line(body_start)))');
+    ok(index($rewritten, q{? $__ls_mark_bucket->{'body_start'} : undef}) >= 0, 'mark_pos(name) lowers to a direct rule-local named-mark position read');
+    ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0 && index($rewritten, q{substr($$STRING, 0, $__ls_mark) =~ /\n/g}) >= 0, 'mark_line(name) lowers to a direct rule-local named-mark line read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named mark read helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;

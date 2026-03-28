@@ -787,6 +787,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_line',
+   ir_node            => 'MARK_LINE_READ',
+   diag_name          => 'mark_line',
+   unresolved_pattern => qr/\bmark_line\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_line\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\\n/g)) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'cursor_pos',
    ir_node            => 'CURSOR_POS_READ',
    diag_name          => 'cursor_pos',

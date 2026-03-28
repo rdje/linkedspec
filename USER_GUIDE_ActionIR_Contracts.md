@@ -816,6 +816,36 @@ Top::AND
 
 Use it when the rule should expose explicit numeric checkpoint metadata without mutating the mark bucket.
 
+### `mark_line(name)`
+Return the 1-based line number of a rule-local named mark.
+
+Practical reading:
+- use it when the rule wants checkpoint line metadata rather than only the raw numeric position,
+- combine it with `@mark(name)`, `mark_here(name)`, or `mark_match_start(name)` when the rule wants to report where a remembered boundary landed,
+- and treat it as the line-read companion to `mark_pos(name)`.
+
+If the named mark is absent, the helper returns `undef`.
+
+Example:
+
+```text
+mark_line(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, begin_line, end_line) }
+ /foo\n/
+ @mark(body_start)
+ /bar\n/
+ /baz/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_line), mark_line(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_line), mark_line(end_mark)); return(array("?Top:", scalar(begin_line), scalar(end_line), mark_line(missing_mark))) }
+```
+
+Use it when the rule should expose explicit checkpoint line metadata without mutating the mark bucket.
+
 ### `cursor_pos()`
 Return the current parser cursor position directly.
 

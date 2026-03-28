@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Add named checkpoint line helper
+
+Added the next bounded Phase 4 helper in the named-checkpoint family:
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `mark_line(name)` is now a first-class helper contract scanned, canonicalized, and lowered as a direct read of the 1-based line number of a stored rule-local named checkpoint,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock `mark_line(name)` explicitly alongside the existing `mark_pos(name)` surface,
+- refreshed the user guides so the named-checkpoint surface now teaches `mark_line(name)` as the direct line-read companion to `mark_pos(name)`,
+- and refreshed the roadmap/continuity notes so future resume treats this as another real Phase 4 helper-surface slice rather than raw mark-position folklore.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Add anonymous capture-boundary position helper
 
 Added the next bounded Phase 4 helper in the anonymous capture-boundary family:
