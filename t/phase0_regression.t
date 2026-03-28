@@ -37047,6 +37047,22 @@ subtest 'vhdl_subprogram_body_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'vhdl blocked-rule priority list is empty after subprogram_body migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after subprogram_body migration');
 };
+subtest 'vhdl_remaining_cursor_and_capture_boundary_reads_prefer_phase4_helpers' => sub {
+    plan tests => 9;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for helper-spend inspection');
+    like($source_content, qr/process_statement\[1\]\s+\{assign\(scalar\(pos_begin\), cursor_pos\(\)\)\}/, 'vhdl process_statement now prefers cursor_pos() for the live begin-position read');
+    unlike($source_content, qr/process_statement\[1\]\s+\{assign\(scalar\(pos_begin\), pos \$\$STRING\)\}/, 'vhdl process_statement no longer uses the raw pos $$STRING begin-position read');
+    like($source_content, qr/subprogram_body\[1\]\s+\{assign\(scalar\(pos_begin\), cursor_pos\(\)\)\}/, 'vhdl subprogram_body now prefers cursor_pos() for the live begin-position read');
+    unlike($source_content, qr/subprogram_body\[1\]\s+\{assign\(scalar\(pos_begin\), pos \$\$STRING\)\}/, 'vhdl subprogram_body no longer uses the raw pos $$STRING begin-position read');
+    like($source_content, qr/signal_decl_range: .*?LS \{push_value\(array\(capt\), capture_slice\(\)\)\}/s, 'vhdl signal_decl_range now prefers capture_slice() for the anonymous capture-boundary read');
+    unlike($source_content, qr/signal_decl_range: .*?LS \{push_value\(array\(capt\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)\}/s, 'vhdl signal_decl_range no longer uses the raw anonymous capture-boundary substr read');
+    like($source_content, qr/signal_decl_range: .*?LE \{start_capture_slice\(\)\}/s, 'vhdl signal_decl_range now prefers start_capture_slice() for the anonymous capture-boundary write');
+    unlike($source_content, qr/signal_decl_range: .*?LE \{assign\(scalar\(IPOS\), pos \$\$STRING\)\}/s, 'vhdl signal_decl_range no longer uses the raw IPOS assignment plus pos $$STRING write');
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 

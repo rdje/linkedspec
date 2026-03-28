@@ -133,7 +133,7 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 -> if_endif 
 -> case_endcase 
 -> loop_endloop
--> process_statement[1]                 {assign(scalar(pos_begin), pos $$STRING)}
+-> process_statement[1]                 {assign(scalar(pos_begin), cursor_pos())}
 
 -> process_statement[2]                 {
    assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
@@ -235,7 +235,7 @@ I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprog
 -> group_template_declaration
 -> group_declaration
 
--> subprogram_body[1] {assign(scalar(pos_begin), pos $$STRING)}
+-> subprogram_body[1] {assign(scalar(pos_begin), cursor_pos())}
 
 -> subprogram_body[2] {
    assign(scalar(subprogram_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
@@ -282,14 +282,14 @@ interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
 
 
 signal_decl_range: /\(/ /\)/ I {declare(array, capt, msi_lsi)}
-LS {push_value(array(capt), substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH))}
-LE {assign(scalar(IPOS), pos $$STRING)}
+LS {push_value(array(capt), capture_slice())}
+LE {start_capture_slice()}
 
 -> opar_cpar              {
    declare(scalar, pos1, pos2);
    assign(scalar(pos1), pos($$STRING)-1);
    call(opar_cpar);
-   assign(scalar(pos2), pos $$STRING);
+   assign(scalar(pos2), cursor_pos());
    push_value(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
 }
 -> downto_or_to           {

@@ -179,6 +179,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - mark writes now fire only when the regex slot that actually carries the `@mark(name)` paragraph member matches,
   - high/debug trace output now shows mark-write positions for `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` as a short input excerpt plus a caret under the stored checkpoint position,
   - and the docs now spell out the rule-local scope, same-slot versus later-slot timing rule, stored-mark-versus-current-local-match-boundary reads, stable versus advancing versus explicit-two-mark versus explicit-write versus explicit-clear named-capture helpers, trace-visible checkpoint writes, and several worked examples.
+- Recent landed follow-up:
+  - the remaining obvious raw live-cursor and anonymous capture-boundary reads in `specs/vhdl.spec` now also spend `cursor_pos()`, `capture_slice()`, and `start_capture_slice()` directly instead of raw `pos $$STRING`, raw anonymous-boundary `substr(...)`, and direct `assign(scalar(IPOS), pos $$STRING)` in those migrated bands.
 - Exit criteria:
   - Cleaner author experience for staged extraction patterns.
 

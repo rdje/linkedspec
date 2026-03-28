@@ -24,6 +24,7 @@ This document is the current high-level technical reading of the project shape. 
 ## Executive Summary
 - `perl/LinkedSpec.pm` is now a deliberately thin lazy facade rather than the real implementation center.
 - Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
+- In practice that static tree is now almost just `File::Basename` plus `LinkedSpec::OwnerDispatch`; even the public trace globals are simple aliases into `LinkedSpec::Trace`.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
@@ -278,13 +279,16 @@ The current public facade still exposes a plugin/runtime branch, but the archite
 ### `LinkedSpec::PluginBridge`
 - is the transition bridge,
 - checks explicit registration first,
-- falls back to legacy behavior only when needed.
+- falls back to legacy behavior only when needed,
+- and does not own discovery itself; it is a registry-first dispatch shim over the older `.plg` runtime.
 
 ### `PPlugin`
 - owns legacy `.plg` discovery,
 - parses `.plg` files through the `pplugin` parser,
 - caches discovered handlers,
-- executes them dynamically.
+- executes them dynamically,
+- and still closes the remaining lazy compatibility cycle:
+  - `LinkedSpec -> PluginBridge -> PPlugin -> LinkedSpec::get_parser('pplugin')`
 
 Current project direction does not treat that branch as a target architecture.
 
@@ -324,10 +328,10 @@ The lowering stack is big, but it now has real sub-owners instead of one giant m
 - `run_plugin`, `get_plugin`, `dispatch_plugin_autoload_name`, and `AUTOLOAD` still sit in `LinkedSpec.pm`,
 - even though the project direction now says dynamic plugin loading is not a core target to preserve.
 
-### Repeated owner-dispatch boilerplate
-- the lazy owner-dispatch style is working,
-- and the broad thin-wrapper reduction has paid off,
-- but a few internal owner registries and compatibility wrappers still need the same kind of consolidation when they surface as obvious duplication.
+### Remaining compatibility drag
+- the broad owner-dispatch cleanup has paid off and Backbone Item 3 is much thinner now than it was,
+- but the public plugin compatibility surface still over-advertises a branch the docs already treat as transition/removal machinery,
+- and future effort should bias back toward semantic/runtime/self-hosting milestones unless fresh duplication is clearly material.
 
 ## Current Strategic Judgments
 ### 1. LinkedSpec is no longer best understood as a plugin-hosting framework

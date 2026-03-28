@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Spend capture/cursor helpers in remaining obvious VHDL bands
+
+Continued the Phase 4 staged-extraction authoring line with a bounded live-spec helper-spend slice:
+- migrated the remaining obvious raw live-cursor and anonymous capture-boundary bands in `specs/vhdl.spec` so `process_statement` and `subprogram_body` now read their live begin positions through `cursor_pos()`, while `signal_decl_range` now uses `capture_slice()` plus `start_capture_slice()` instead of raw anonymous-boundary `substr(...)` plus direct `assign(scalar(IPOS), pos $$STRING)`,
+- refreshed `ARCHITECTURE_STATE.md` after a new deep pass through `README.md`, the referenced docs, `perl/LinkedSpec.pm`, and the active owner tree so the live snapshot now explicitly captures the very shallow static façade import tree, the stronger role of `OwnerDispatch`, and the still-present lazy plugin cycle through `PPlugin` and the `pplugin` parser,
+- added focused source-level regression coverage in `t/phase0_regression.t` so those VHDL helper spends are locked to the preferred helper spellings,
+- and refreshed the roadmap/continuity notes so future resume treats this as another live Phase 4 helper-adoption slice rather than as a new helper-surface change.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Spend `capture_slice()` In Live Delimiter Readers
 
 Continued the Phase 4 capture/checkpoint line with a bounded live-spec helper-spend slice:
