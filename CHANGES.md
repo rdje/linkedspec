@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 5: Centralize RuntimeContext Dispatch Through OwnerDispatch
+
+Continued the same runtime modernization/owner-cleanup line with one tighter shared dispatch seam:
+- updated `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/Compiler.pm`, and `perl/LinkedSpec/SpecEntry.pm` so their private `_call_runtime_ctx(...)` helpers now route through `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)`, matching the already-landed `ParserFactory.pm` shape instead of carrying a second local lazy-load-plus-symbol-call implementation,
+- widened `t/phase0_regression.t` so the shared owner-dispatch architecture lock now explicitly guards that `Runtime.pm`, `Compiler.pm`, and `SpecEntry.pm` all route `RuntimeContext` helper dispatch through the shared `OwnerDispatch` seam too,
+- and refreshed the roadmap, architecture snapshot, and continuity notes so the current runtime-context delegation shape is recorded as one shared owner-dispatch path across the active runtime/compile owners.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+- `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+- `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Rename Anonymous Capture Slice Surface
 
 Renamed the misleading anonymous capture-boundary surface to reflect its real `$IPOS` semantics:

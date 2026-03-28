@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 148;
+    plan tests => 151;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1201,6 +1201,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($trace_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Trace.pm now routes $@ preservation through OwnerDispatch');
     like($runtime_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Runtime.pm now loads the shared owner-dispatch helper');
     like($runtime_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Runtime.pm now routes lazy package loading through OwnerDispatch');
+    like($runtime_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'Runtime.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($parser_factory_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ParserFactory.pm now loads the shared owner-dispatch helper');
     like($parser_factory_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'ParserFactory.pm now routes callback lookup through OwnerDispatch');
     like($parser_factory_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_bundle/s, 'ParserFactory.pm now assembles its mixed default dependency bundle through OwnerDispatch');
@@ -1215,10 +1216,12 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($compiler_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Compiler.pm now loads the shared owner-dispatch helper');
     like($compiler_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Compiler.pm now routes lazy package loading through OwnerDispatch');
     like($compiler_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Compiler.pm now routes $@ preservation through OwnerDispatch');
+    like($compiler_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'Compiler.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($spec_entry_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'SpecEntry.pm now loads the shared owner-dispatch helper');
     like($spec_entry_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'SpecEntry.pm now routes lazy package loading through OwnerDispatch');
     like($spec_entry_pm, qr/sub _require_data_dumper_pkg\b.*_require_pkg\('Data::Dumper'\)/s, 'SpecEntry.pm now routes Data::Dumper loading through its shared owner-dispatch package seam');
     like($spec_entry_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'SpecEntry.pm now routes $@ preservation through OwnerDispatch');
+    like($spec_entry_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'SpecEntry.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($rule_ir_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RuleIR.pm now loads the shared owner-dispatch helper');
     like($rule_ir_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'RuleIR.pm now routes lazy package loading through OwnerDispatch');
     like($rule_ir_pm, qr/sub _require_data_dumper_pkg\b.*_require_pkg\('Data::Dumper'\)/s, 'RuleIR.pm now routes Data::Dumper loading through its shared owner-dispatch package seam');

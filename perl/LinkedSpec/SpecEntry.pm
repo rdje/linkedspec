@@ -148,11 +148,7 @@ sub _runtime_ctx_from_deps {
 
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
-  no strict 'refs';
-  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
 sub _set_runtime_ctx_last_error {

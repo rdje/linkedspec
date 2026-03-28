@@ -59,11 +59,7 @@ sub _build_runtime_context {
 #------------------------------------------------------------------------------
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
- return _call_preserving_err(sub {
-  _require_pkg('LinkedSpec::RuntimeContext') unless LinkedSpec::RuntimeContext->can($subname);
-  no strict 'refs';
-  return &{"LinkedSpec::RuntimeContext::${subname}"}(@args);
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
 #------------------------------------------------------------------------------
