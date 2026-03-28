@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend. The simple token-reader rules in `specs/ds_vhistory.spec` now return through `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST`. Future resume should keep live-spec immediate-match group-list reads on `entry_groups()` rather than raw `@IMATCH_LIST`.
+
 - 2026-03-28: Continued the Phase 4 helper-adoption line with one bounded live-spec spend. `specs/sdce.spec::sdc_esplit` now initializes its anonymous capture boundary with `start_capture_slice()` instead of direct `assign(s(IPOS), 0)` setup. Future resume should keep live-spec anonymous boundary initialization on `start_capture_slice()` rather than direct `IPOS` writes.
 
 - 2026-03-28: Continued the Phase 4 named-checkpoint line in one bounded helper-surface slice. `mark_line(name)` is now the direct 1-based line-read companion to `mark_pos(name)`, so rules can report where a stored named checkpoint landed without round-tripping through raw newline counting from the numeric mark position. Future resume should keep named-checkpoint line reads on `mark_line(name)` instead of reintroducing raw prefix-newline counting around `mark_pos(...)`.

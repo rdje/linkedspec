@@ -78,13 +78,13 @@ LX  {
 
 
 separator:    /-{20,}/
-object:       /(?i)\nobject:\s+(\S+)/                                             I {return  ['?object:',       @IMATCH_LIST]}
-branch:       /(?i)\nbranch:\s+(\S+)/                                             I {return  ['?branch:',       @IMATCH_LIST]}
-branch_tags:  /(?is)\nbranch\s+tags:\s+(?:([^:]+?),\s*(.+?)\s*,\s*(\w+)|(\S+))/   I {return  ['?branch_tags:',  @IMATCH_LIST]}
-version_tags: /(?is)\nversion\s+tags:\s+(?:([^:]+?),\s*(.+?)\s*,\s*(\w+)|(\S+))/  I {return  ['?version_tags:', @IMATCH_LIST]}
-version:      /(?i)\nversion:\s+(\S+)/                                            I {return  ['?version:',      @IMATCH_LIST]}
-date:         /(?i)\ndate:\s+(.+)/                                                I {return  ['?date:',         @IMATCH_LIST]}
-comment:      /(?i)\ncomment:\s+(.+)/                                             I {return  ['?comment:',      @IMATCH_LIST]}
-author:       /(?i)\nauthor:\s+(.+)/                                              I {return  ['?author:',       @IMATCH_LIST]}
-derived_from: /(?i)\nderived_from:\s+(\S+)/                                       I {return  ['?derived_from:', @IMATCH_LIST]}
+object:       /(?i)\nobject:\s+(\S+)/                                             I.return(a("?object:", flat_array(entry_groups())))
+branch:       /(?i)\nbranch:\s+(\S+)/                                             I.return(a("?branch:", flat_array(entry_groups())))
+branch_tags:  /(?is)\nbranch\s+tags:\s+(?:([^:]+?),\s*(.+?)\s*,\s*(\w+)|(\S+))/   I.return(a("?branch_tags:", flat_array(entry_groups())))
+version_tags: /(?is)\nversion\s+tags:\s+(?:([^:]+?),\s*(.+?)\s*,\s*(\w+)|(\S+))/  I.return(a("?version_tags:", flat_array(entry_groups())))
+version:      /(?i)\nversion:\s+(\S+)/                                            I.return(a("?version:", flat_array(entry_groups())))
+date:         /(?i)\ndate:\s+(.+)/                                                I.return(a("?date:", flat_array(entry_groups())))
+comment:      /(?i)\ncomment:\s+(.+)/                                             I.return(a("?comment:", flat_array(entry_groups())))
+author:       /(?i)\nauthor:\s+(.+)/                                              I.return(a("?author:", flat_array(entry_groups())))
+derived_from: /(?i)\nderived_from:\s+(\S+)/                                       I.return(a("?derived_from:", flat_array(entry_groups())))
 manifest:     /(?is)\nmanifest:\s+.+?\n\n/                                        I {return  ['?manifest:']}

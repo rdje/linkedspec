@@ -36881,6 +36881,18 @@ subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => s
     ok(index($source_content, 'return(a("?ds_vhistory:", array_values(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias in top-level return construction');
     unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_values\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() form in object aggregation pushes');
 };
+subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for entry_groups migration inspection');
+    like($source_content, qr/object:\s+.*?I\.return\(a\("\?object:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory object token reader now prefers entry_groups()');
+    like($source_content, qr/branch_tags:\s+.*?I\.return\(a\("\?branch_tags:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory branch_tags token reader now prefers entry_groups()');
+    like($source_content, qr/derived_from:\s+.*?I\.return\(a\("\?derived_from:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory derived_from token reader now prefers entry_groups()');
+    unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
+};
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 9;
 

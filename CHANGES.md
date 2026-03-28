@@ -1,5 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Spend entry_groups in ds_vhistory token readers
+
+Continued the Phase 4 helper-adoption line with one bounded live-spec token-reader spend:
+- migrated the simple token-reader rules in `specs/ds_vhistory.spec` from raw `@IMATCH_LIST` returns onto `entry_groups()` plus `flat_array(...)`,
+- widened `t/phase0_regression.t` with a focused `ds_vhistory` source-level migration lock so those token readers stay on the explicit immediate-match helper surface,
+- and refreshed the roadmap/continuity notes so future resume treats this as another live-spec helper spend rather than a new helper-surface change.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: Spend start_capture_slice in sdce top setup
 
 Continued the Phase 4 helper-adoption line with one bounded live-spec spend:
