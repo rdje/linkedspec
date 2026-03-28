@@ -1,3 +1,8 @@
+ #------------------------------------------------------------------------------
+ # Package: LinkedSpec::RuntimeContext
+ # Purpose: Own shared runtime context state, structured last_error payloads,
+ #          and parser-source capture helpers across the compile/runtime path.
+ #------------------------------------------------------------------------------
 package LinkedSpec::RuntimeContext;
 
 use 5.010;
@@ -254,6 +259,13 @@ sub build_generated_handler_source_label {
   : "LinkedSpec::generated_handler:$label"
 }
 
+#------------------------------------------------------------------------------
+# Function: set_runtime_ctx_last_error
+# Purpose : Store one normalized structured failure payload on the shared
+#           runtime context, including known spec and top-rule identity.
+# Args    : ($runtime_ctx, %error_fields)
+# Returns : $error_hashref | undef
+#------------------------------------------------------------------------------
 sub set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
@@ -267,6 +279,7 @@ sub set_runtime_ctx_last_error {
   detail  => defined($args{detail}) ? $args{detail} : '',
   spec_name => defined(get_runtime_ctx_spec_name($runtime_ctx)) ? get_runtime_ctx_spec_name($runtime_ctx) : '',
   spec_path => defined(get_runtime_ctx_spec_path($runtime_ctx)) ? get_runtime_ctx_spec_path($runtime_ctx) : '',
+  top_rule => defined(get_runtime_ctx_top_rule($runtime_ctx)) ? get_runtime_ctx_top_rule($runtime_ctx) : '',
  };
  $error->{rule_label} = $args{rule_label} if defined $args{rule_label};
  $error->{handler_variant} = $args{handler_variant} if defined $args{handler_variant};

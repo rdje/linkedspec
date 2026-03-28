@@ -1,5 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 5: Include `top_rule` in Structured Runtime Diagnostics
+
+Continued the Phase 5 diagnostics-continuity line with one bounded runtime-context slice:
+- updated `perl/LinkedSpec/RuntimeContext.pm` so `set_runtime_ctx_last_error(...)` now copies the current `top_rule` into every structured `last_error` payload, alongside the already-self-contained `owner_stage`, `spec_name`, and `spec_path` fields when that rule identity is known,
+- widened `t/phase0_regression.t` so the shared runtime-context helper coverage now locks that fresh fallback payloads capture the current top rule, preserved fallback payloads keep an existing `top_rule`, and runtime-parser failures such as outer top-rule dies or missing top-rule handlers expose the selected `top_rule` as explicit structured data too,
+- refreshed the user/runtime docs, roadmap rows, architecture snapshot, and continuity notes so the runtime failure contract now teaches `top_rule` as part of the self-contained structured diagnostics payload.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/RuntimeContext.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 1A: Collapse ActionRewriter EmitContext Delegation
 
 Continued the remaining thin compatibility-wrapper cleanup in one bounded slice:

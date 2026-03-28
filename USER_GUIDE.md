@@ -1170,6 +1170,7 @@ The current structured failure payload is intentionally small and stable:
 - `$ctx->{last_error}{detail}`
 - `$ctx->{last_error}{spec_name}`
 - `$ctx->{last_error}{spec_path}`
+- `$ctx->{last_error}{top_rule}`
 
 Runtime execution failures may also add:
 - `$ctx->{last_error}{rule_label}`
@@ -1223,9 +1224,10 @@ That means the `last_error` payload is now largely self-contained:
 - `type` tells you which owner family raised the error (`parser_factory`, `compiler_pipeline`, or `runtime_owner` on compile-time failure paths today),
 - `stage` gives the owner-local failure step,
 - `owner_stage` gives the stable combined identifier,
-- and `spec_name` / `spec_path` travel with the payload when that information is known.
+- and `spec_name` / `spec_path` / `top_rule` travel with the payload when that information is known.
 
 For runtime execution failures, the same payload also tells you which compiled rule failed:
+- `top_rule` names the selected parser entrypoint when one was available,
 - `type` is currently `runtime_handler` for inner compiled-handler eval failures or `runtime_parser` for higher-level top-rule resolution/invocation failures,
 - `rule_label` names the failing compiled rule,
 - and `handler_variant` tells you which handler family was active when the eval-visible failure happened.

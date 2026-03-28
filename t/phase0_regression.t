@@ -7614,9 +7614,9 @@ subtest 'runtime_context_helpers_manage_top_rule_and_spec_identity' => sub {
     is(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path($runtime_ctx), '/tmp/fresh.spec', 'RuntimeContext get spec-path helper returns the stored spec path');
 };
 subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub {
-    plan tests => 8;
+    plan tests => 10;
 
-    my $runtime_ctx = {};
+    my $runtime_ctx = { top_rule => 'Top' };
 
     ok(!LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext helper reports no structured last_error when context starts empty');
 
@@ -7630,6 +7630,7 @@ subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub 
     ok(ref($fresh_error) eq 'HASH', 'RuntimeContext fallback helper creates structured last_error when none is present');
     ok(LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext helper reports structured last_error after fallback creation');
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:fresh_stage', 'RuntimeContext fallback helper records combined owner stage');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'RuntimeContext fallback helper records current top_rule when it is known');
 
     my $preserved = {
         type => 'compiler_pipeline',
@@ -7637,6 +7638,7 @@ subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub 
         owner_stage => 'compiler_pipeline:existing_stage',
         summary => 'existing summary',
         detail => 'existing detail',
+        top_rule => 'PreservedTop',
     };
     $runtime_ctx->{last_error} = $preserved;
 
@@ -7651,6 +7653,7 @@ subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub 
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:existing_stage', 'RuntimeContext fallback helper preserves the existing owner stage');
     is($runtime_ctx->{last_error}{summary}, 'existing summary', 'RuntimeContext fallback helper preserves the existing summary');
     is($runtime_ctx->{last_error}{detail}, 'existing detail', 'RuntimeContext fallback helper preserves the existing detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'PreservedTop', 'RuntimeContext fallback helper preserves the existing top_rule field');
 };
 subtest 'runtime_context_helpers_apply_owner_default_last_error_types' => sub {
     plan tests => 6;
@@ -9453,7 +9456,7 @@ subtest 'spec_entry_runtime_handler_records_compile_failure_context' => sub {
     like($runtime_ctx->{last_error}{detail}, qr/Missing operator|syntax error|Bareword/, 'invalid generated runtime handler source preserves captured compile warning/detail text');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_outer_die' => sub {
-    plan tests => 16;
+    plan tests => 17;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9505,6 +9508,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_OUTER_PARSER_DIE__/, 'forced outer parser die records detail');
     is($runtime_ctx->{last_error}{spec_name}, '', 'forced outer parser die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'forced outer parser die leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'forced outer parser die records selected top_rule in structured diagnostics');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'forced outer parser die records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_OUTER_DIE', 'forced outer parser die records handler variant');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_OUTER_DIE', 'forced outer parser die records generated handler source label');
@@ -9570,7 +9574,7 @@ SPEC
     is($warn_run, '', 'successful top-level parse emits no stderr in stale runtime-handler success test');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_label' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9625,10 +9629,11 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/No top-level rule label is available for parser invocation/, 'missing top-rule label records detail');
     is($runtime_ctx->{last_error}{spec_name}, '', 'missing top-rule label leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'missing top-rule label leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{top_rule}, '', 'missing top-rule label records empty top_rule when no selected top rule is available');
     ok(!exists $runtime_ctx->{last_error}{rule_label}, 'missing top-rule label leaves rule_label absent');
 };
 subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_missing_top_rule_handler' => sub {
-    plan tests => 16;
+    plan tests => 17;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9683,6 +9688,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/No handler coderef found for top-level rule 'Top'/, 'missing top-rule handler records detail');
     is($runtime_ctx->{last_error}{spec_name}, '', 'missing top-rule handler leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'missing top-rule handler leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'missing top-rule handler records selected top_rule in structured diagnostics');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'missing top-rule handler records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_MISSING_TOP_HANDLER', 'missing top-rule handler records handler variant');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_MISSING_TOP_HANDLER', 'missing top-rule handler records generated handler source label');

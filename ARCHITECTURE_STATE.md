@@ -161,6 +161,7 @@ LinkedSpec
 - owns shared runtime state and structured error payload helpers,
 - owns parser-source chunk capture helpers,
 - carries `spec_name`, `spec_path`, `top_rule`, and `last_error`,
+- now also keeps `last_error` more self-contained by copying the known `top_rule` into the structured payload alongside `spec_name` and `spec_path`,
 - is now reached through one shared `OwnerDispatch::dispatch_owner_call(...)` delegation shape across the active runtime/compile owners instead of one dispatch style in `ParserFactory.pm` and another in `Runtime.pm` / `Compiler.pm` / `SpecEntry.pm`,
 - is one of the cleanest and highest-value seams in the project.
 
