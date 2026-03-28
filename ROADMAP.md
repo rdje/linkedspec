@@ -123,6 +123,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - named split/checkpoint marker `@mark(name)` is now supported alongside preferred anonymous marker `@capture_slice`, with `@capture_from_here` and `@move_pos` retained as compatibility aliases,
   - explicit helper `capture_slice()` now reads the current anonymous capture-boundary span directly without requiring a named checkpoint first,
   - explicit helper `capture_slice_len()` now reads the numeric width of that same current anonymous capture-boundary span without materializing the substring, with `capture_slice_length()` and older `capture_from_rule_start()` / `capture_len_from_rule_start()` retained as compatibility aliases,
+  - explicit helper `capture_slice_pos()` now reads the numeric position of that same current anonymous capture boundary directly without falling back to raw `$IPOS`,
   - explicit helper `capture_slice_line()` now reads the 1-based line number of that same current anonymous capture boundary for later diagnostics without counting newlines from `$IPOS` by hand,
   - explicit helper `start_capture_slice()` now begins a new anonymous capture slice from inside lifecycle/action code without spelling `assign(s(IPOS), cursor_pos())`, with `capture_slice_here()` retained as a compatibility alias,
   - explicit helpers `capture_rest()` / `capture_rest_len()` now read the current anonymous capture-boundary tail through end-of-input, with `capture_rest_length()` retained as a compatibility alias,

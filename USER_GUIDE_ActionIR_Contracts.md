@@ -244,6 +244,32 @@ Top::AND
 
 Use it when the rule needs that same anonymous-capture-boundary model as `capture_slice()` but only wants length metadata. `capture_slice_length()` remains supported as a longer compatibility alias, and `capture_len_from_rule_start()` remains supported for older migration slices.
 
+### `capture_slice_pos()`
+Return the numeric position of the current anonymous capture boundary.
+
+Practical reading:
+- the returned value is the current anonymous capture boundary stored in `$IPOS`,
+- unlike `cursor_pos()`, it does not follow the live parser cursor after that boundary is established,
+- unlike `mark_pos(name)`, it does not depend on any named checkpoint being present,
+- and it pairs naturally with `@capture_slice` or `start_capture_slice()` when the rule wants to expose the remembered slice start directly as data.
+
+Examples:
+
+```text
+assign(scalar(slice_begin), capture_slice_pos())
+```
+
+```text
+Top::AND
+ /prefix/
+ -> Top[0] { start_capture_slice() }
+ /\(/
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_pos(), cursor_pos())) }
+```
+
+Use it when the rule wants to report or store where the current anonymous capture slice began numerically, instead of spelling raw `$IPOS` reads inline.
+
 ### `capture_slice_line()`
 Return the 1-based line number of the current anonymous capture boundary.
 

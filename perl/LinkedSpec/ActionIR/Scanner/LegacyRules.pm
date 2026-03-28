@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::Scanner::LegacyRules
+# Purpose: Direct helper-pattern scanner for legacy and compatibility DSL
+#          surfaces before canonical ActionIR lowering.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::Scanner::LegacyRules;
 
 use 5.010;
@@ -28,6 +33,7 @@ sub try_scan_contract_ir_events {
   'capture_if_macro' => \&_scan_contract_capture_if_macro,
   'capture_slice' => \&_scan_contract_capture_slice,
   'capture_slice_len' => \&_scan_contract_capture_slice_len,
+  'capture_slice_pos' => \&_scan_contract_capture_slice_pos,
   'capture_slice_line' => \&_scan_contract_capture_slice_line,
   'capture_slice_length' => \&_scan_contract_capture_slice_length,
   'start_capture_slice' => \&_scan_contract_start_capture_slice,
@@ -217,6 +223,21 @@ sub _scan_contract_capture_slice_len {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_slice_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+#------------------------------------------------------------------------------
+# Function: _scan_contract_capture_slice_pos
+# Purpose : Scan explicit anonymous capture-boundary position reads.
+# Args    : ($code)
+# Returns : arrayref of discovered helper events
+#------------------------------------------------------------------------------
+sub _scan_contract_capture_slice_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_pos\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

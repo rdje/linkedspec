@@ -1,3 +1,8 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::CanonicalEvents::Core
+# Purpose: Canonical ActionIR event-kind mapping shared by the direct
+#          contract-event normalization path.
+#------------------------------------------------------------------------------
 package LinkedSpec::ActionIR::CanonicalEvents::Core;
 
 use 5.010;
@@ -35,6 +40,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  capture                          => 'CAPTURE',
  capture_slice                    => 'CAPTURE_SLICE',
  capture_slice_len                => 'CAPTURE_SLICE_LEN',
+ capture_slice_pos                => 'CAPTURE_SLICE_POS_READ',
  capture_slice_line               => 'CAPTURE_SLICE_LINE_READ',
  capture_slice_length             => 'CAPTURE_SLICE_LEN',
  start_capture_slice              => 'CAPTURE_SLICE_START',

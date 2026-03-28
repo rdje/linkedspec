@@ -1,5 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-28 - Phase 4: Add anonymous capture-boundary position helper
+
+Added the next bounded Phase 4 helper in the anonymous capture-boundary family:
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_pos()` is now a first-class helper contract scanned, canonicalized, and lowered as a direct read of the current anonymous capture-boundary position,
+- widened `t/phase0_regression.t` so runtime helper coverage and ActionIR metadata/rewrite coverage now lock `capture_slice_pos()` explicitly alongside the existing `capture_slice()` / `capture_slice_len()` / `capture_slice_line()` family,
+- refreshed the user guides so the anonymous capture-boundary surface now teaches `capture_slice_pos()` as the direct read complement to `start_capture_slice()` rather than more raw `$IPOS` folklore,
+- and refreshed the roadmap/continuity notes so future resume treats this as another real Phase 4 helper-surface slice.
+
+Validation for this slice:
+- `git diff --check`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+- `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+- `perl -c -Iperl t/phase0_regression.t`
+- `prove -Iperl t/phase0_regression.t`
+- `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Docs: add session bootstrap handoff
 
 Added a small but explicit new-session bootstrap contract:

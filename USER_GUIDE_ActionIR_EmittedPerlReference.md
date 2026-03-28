@@ -335,6 +335,7 @@ Important nuance:
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_slice()` -> `do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }`
 - `capture_slice_len()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
+- `capture_slice_pos()` -> `do { $IPOS }`
 - `capture_slice_line()` -> `do { my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0; 1 + (() = substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g) }`
 - `capture_slice_length()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
 - `start_capture_slice()` -> `do { $IPOS = pos $$STRING }`
@@ -368,6 +369,7 @@ Important nuance:
 - `capture_from(name)` depends on a prior `@mark(name)` checkpoint; if the mark is absent, the lowered helper returns `undef`.
 - `capture_slice()` is the preferred explicit helper form of the common raw `$IPOS` capture pattern, so it uses the current anonymous capture boundary as its left edge and never depends on named mark storage.
 - `capture_slice_len()` returns the numeric width of that same anonymous capture-boundary span, so later logic can compare or record it without materializing the substring.
+- `capture_slice_pos()` returns the numeric position of that same anonymous capture boundary directly, so later logic can expose or compare the remembered slice start without reading a named mark or the live parser cursor.
 - `capture_slice_line()` returns the 1-based line number of that same anonymous capture boundary, so later diagnostics can report where the current slice started without counting newlines from `$IPOS` by hand.
 - `capture_slice_length()` is a longer compatibility alias for `capture_slice_len()`, and older migration helpers `capture_from_rule_start()` / `capture_len_from_rule_start()` still lower to the same code.
 - `start_capture_slice()` is the preferred explicit code-block write form for that same anonymous capture boundary, so later anonymous capture helpers start from the current parser position without spelling `assign(s(IPOS), cursor_pos())` directly.

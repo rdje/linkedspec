@@ -11570,6 +11570,33 @@ SPEC
     like($rewrite, qr/defined\(\$IPOS\) \? \$IPOS : 0/s, 'capture_slice_line() lowering normalizes the current anonymous capture-boundary position before counting line breaks');
     like($rewrite, qr/substr\(\$\$STRING, 0, \$__ls_capture_pos\) =~ \/\\n\/g/, 'capture_slice_line() lowering counts line breaks from the current anonymous capture-boundary position');
 };
+subtest 'capture_slice_pos_reads_current_anonymous_capture_boundary_position' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+/prefix/
+-> Top[0] { start_capture_slice() }
+/\(/
+-> Top[1] { return(array("?Top:", capture_slice_pos(), cursor_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_pos() coverage');
+
+    my $input = 'prefix(foo';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 6, 7],
+        'capture_slice_pos() reports the current anonymous capture-boundary position after start_capture_slice() moves that boundary and the rule advances one later slot'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_slice_pos() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_pos()');
+    like($rewrite, qr/do \{ \$IPOS \}/, 'capture_slice_pos() lowering reads the current anonymous capture-boundary position directly');
+};
 subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
     plan tests => 4;
 
@@ -36237,11 +36264,11 @@ SPEC
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_slice_helpers_lower_without_raw_fallback' => sub {
-    plan tests => 11;
+    plan tests => 13;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash("capture", capture_slice(), "width", capture_slice_len(), "line", capture_slice_line())) }
+/a/ -> Top { return(hash("capture", capture_slice(), "width", capture_slice_len(), "pos", capture_slice_pos(), "line", capture_slice_line())) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -36253,11 +36280,13 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'explicit capture_slice helpers keep unresolved-helper count at zero');
     ok(grep { $_ eq 'CAPTURE_SLICE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE');
     ok(grep { $_ eq 'CAPTURE_SLICE_LEN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_LEN');
+    ok(grep { $_ eq 'CAPTURE_SLICE_POS_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_POS_READ');
     ok(grep { $_ eq 'CAPTURE_SLICE_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_LINE_READ');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("capture", capture_slice(), "width", capture_slice_len(), "line", capture_slice_line()))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("capture", capture_slice(), "width", capture_slice_len(), "pos", capture_slice_pos(), "line", capture_slice_line()))');
     ok(index($rewritten, 'substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)') >= 0, 'capture_slice() lowers to a direct capture-boundary span read');
     ok(index($rewritten, '($LSPOS - $IPOS - length $LMATCH)') >= 0, 'capture_slice_len() lowers to a direct capture-boundary span-length read');
+    ok(index($rewritten, 'do { $IPOS }') >= 0, 'capture_slice_pos() lowers to a direct anonymous capture-boundary position read');
     ok(index($rewritten, 'my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0;') >= 0 && index($rewritten, 'substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g') >= 0, 'capture_slice_line() lowers to a direct anonymous capture-boundary line read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_slice helper rule remains language-agnostic action-IR ready');
 };

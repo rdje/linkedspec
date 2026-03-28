@@ -471,6 +471,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_slice_pos',
+   ir_node            => 'CAPTURE_SLICE_POS_READ',
+   diag_name          => 'capture_slice_pos',
+   unresolved_pattern => qr/\bcapture_slice_pos\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcapture_slice_pos\s*\(\s*\)/do { \$IPOS }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_slice_length',
    ir_node            => 'CAPTURE_SLICE_LEN',
    diag_name          => 'capture_slice_len',

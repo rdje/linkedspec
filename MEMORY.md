@@ -1,6 +1,8 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-03-28: Continued the Phase 4 anonymous capture-boundary line in one bounded helper-surface slice. `capture_slice_pos()` is now the direct numeric read helper for the current anonymous capture boundary, so the honest preferred pair is now `start_capture_slice()` to move that boundary and `capture_slice_pos()` to read it back. Future resume should keep new direct anonymous-boundary position reads on `capture_slice_pos()` rather than raw `$IPOS`.
+
 - 2026-03-28: Added `SESSION_BOOTSTRAP.md` and appended the explicit final-line handoff in `README.md`: `Read SESSION_BOOTSTRAP.md and start from there.` Future resume should treat `SESSION_BOOTSTRAP.md` as the first-task contract for a new session before doing anything else.
 
 - 2026-03-28: Refreshed `ARCHITECTURE_STATE.md` after a new deep doc-plus-code pass. Current best reading stays: `LinkedSpec.pm` is a thin façade over `OwnerDispatch`, `ParserFactory` is the real named `.spec` resolution owner, `RuntimeContext` is still the strongest shared-state seam, and the legacy plugin branch still forms a lazy compatibility cycle through `PluginBridge`, `PPlugin`, and `LinkedSpec::get_parser('pplugin')`. Future resume should reuse that owner-tree reading rather than overfocusing on the shallow static import list.
