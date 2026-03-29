@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-29 - Phase 4: spend entry_groups in vhdl helper returns
+
+- migrated `specs/vhdl.spec::subprogram_declaration`, `subprogram_body`, and `type_declaration` from `flat_array(IMATCH_LIST)` onto `flat_array(entry_groups())`,
+- widened `t/phase0_regression.t` with a focused `vhdl` source-level lock for those helper-return spends,
+- refreshed roadmap/continuity notes for the additional Phase 4 live-spec helper spend.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-29 - Phase 4: spend entry_group in vhdl package-name reads
 
 - migrated the package-name reads in `specs/vhdl.spec::package_declaration[1]` and `specs/vhdl.spec::package_body[1]` from `scalar(IMATCH_LIST, 0)` onto `entry_group(0)`,

@@ -37198,6 +37198,20 @@ subtest 'vhdl_package_rules_prefer_entry_group' => sub {
     unlike($source_content, qr/assign\(array\(imatch_copy\), array\(scalar\(IMATCH_LIST, 0\)\)\);/, 'vhdl package_declaration no longer uses scalar(IMATCH_LIST, 0)');
     unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
 };
+subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
+    plan tests => 7;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for helper-return entry_groups migration inspection');
+    like($source_content, qr/subprogram_declaration: .*?I\.return\(array\("\?subprogram_declaration:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl subprogram_declaration now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
+    unlike($source_content, qr/subprogram_declaration: .*?flat_array\(IMATCH_LIST\)/, 'vhdl subprogram_declaration no longer uses flat_array(IMATCH_LIST)');
+    unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
+    unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 

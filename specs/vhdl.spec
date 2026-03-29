@@ -208,7 +208,7 @@ block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 -> block_configuration
 -> block_configuration[1]        .return([])
 
-subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I.return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))
+subprogram_declaration:    /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s*;/ I.return(array("?subprogram_declaration:", flat_array(entry_groups())))
 
 subprogram_body:           /(?i)(?:\b(procedure)|(?:\b(?:pure|impure)\s+)?\b(?<ISFUNC>function))\s+(\w+)(\s*\((?:[^\(\)]++|(?-1))+\))?(?(<ISFUNC>)\s*return\s+(\w+))\s+is\b/   /(?i)\bbegin\b/ /(?is)\bend\b.*?;/
 I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprogram_statement_tokens)}
@@ -242,7 +242,7 @@ I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprog
    split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
    split_each(array(subprogram_statement_tokens), /^(\s+)/);
    filter_nonempty(array(subprogram_statement_tokens));
-   return(array("?subprogram_body:", flat_array(IMATCH_LIST), array_values(array(subprogram_statement_tokens))))
+   return(array("?subprogram_body:", flat_array(entry_groups()), array_values(array(subprogram_statement_tokens))))
 }
 
 
@@ -319,7 +319,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 -> type_declaration[1]      {
 	declare(scalar, type_definition);
 	assign(scalar(type_definition), CAPTURE);
-	return(array("?type_declaration:", flat_array(IMATCH_LIST), scalar(type_definition)))}
+	return(array("?type_declaration:", flat_array(entry_groups()), scalar(type_definition)))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 
