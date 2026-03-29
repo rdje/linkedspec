@@ -37186,6 +37186,18 @@ subtest 'vhdl_top_token_readers_prefer_entry_text' => sub {
     unlike($source_content, qr{comment:\s+/--\.\*/\s+I\.return\(\$IMATCH\)}, 'vhdl comment token reader no longer uses raw $IMATCH');
     unlike($source_content, qr{space:\s+/\\s\+/\s+I\.return\(\$IMATCH\)}, 'vhdl space token reader no longer uses raw $IMATCH');
 };
+subtest 'vhdl_package_rules_prefer_entry_group' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for package-name helper inspection');
+    like($source_content, qr/assign\(array\(imatch_copy\), array\(entry_group\(0\)\)\);/, 'vhdl package_declaration now prefers entry_group(0) for the package-name snapshot');
+    like($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", entry_group\(0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body now prefers entry_group(0) for the package-name return');
+    unlike($source_content, qr/assign\(array\(imatch_copy\), array\(scalar\(IMATCH_LIST, 0\)\)\);/, 'vhdl package_declaration no longer uses scalar(IMATCH_LIST, 0)');
+    unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 

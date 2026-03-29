@@ -171,7 +171,7 @@ I {declare(array, imatch_copy)}
 -> group_template_declaration .push
 -> group_declaration          .push
 -> package_declaration[1]        {
-	assign(array(imatch_copy), array(scalar(IMATCH_LIST, 0)));
+	assign(array(imatch_copy), array(entry_group(0)));
 	lowercase_each(array(imatch_copy));
 	return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_values(array(package_declaration))))
 }
@@ -193,7 +193,7 @@ package_body: /(?i)\bpackage\s+body\s+(\w+)\s+is\b/ /(?i)\bend(?:\s+package\s+bo
 -> use_clause                .push     
 -> group_template_declaration.push     
 -> group_declaration         .push              
--> package_body[1]                .return(array("?package_body:", scalar(IMATCH_LIST, 0), array_values(array(package_body))))
+-> package_body[1]                .return(array("?package_body:", entry_group(0), array_values(array(package_body))))
 
 
 configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(?i)\bend\b(?:\s+configuration\b)?(?:\s+(\w+))?\s*;/

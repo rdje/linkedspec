@@ -1,5 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-29 - Phase 4: spend entry_group in vhdl package-name reads
+
+- migrated the package-name reads in `specs/vhdl.spec::package_declaration[1]` and `specs/vhdl.spec::package_body[1]` from `scalar(IMATCH_LIST, 0)` onto `entry_group(0)`,
+- widened `t/phase0_regression.t` with a focused `vhdl` source-level lock for those package-name helper spends,
+- refreshed roadmap/continuity notes for the additional Phase 4 live-spec helper spend.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-28 - Phase 4: spend entry_text in vhdl top token readers
 
 - migrated the top `comment` and `space` token readers in `specs/vhdl.spec` from raw `$IMATCH` reads onto `entry_text()`,
