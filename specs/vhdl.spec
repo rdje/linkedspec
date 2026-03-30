@@ -19,13 +19,19 @@ library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return_m
 use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return_m       
 
 entity_declaration:    /(?i)\bentity\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+entity\b)?(?:\s+\w+)?\s*;/
+I {declare(array, entity_header_parts)}
 -? push
 -> comment               .push
 -> dquote_string         .push
 -> port_clause           .push
--> entity_declaration[1] .return_a(map {lc} @IMATCH_LIST)
+-> entity_declaration[1] {
+   assign(array(entity_header_parts), entry_groups());
+   lowercase_each(array(entity_header_parts));
+   return(array("?entity_declaration:", flat_array(entity_header_parts), array_copy(array(entity_declaration))))
+}
 
 architecture_body: /(?i)\barchitecture\s+(\w+)\s+of\s+(\w+)\s+is\b/ /(?i)\bbegin\b/ /(?i)\bend\b(?:\s+architecture\b)?(?:\s+\w+)?\s*;/
+I {declare(array, architecture_header_parts)}
 -> comment                              .push
 -> dquote_string                        .push
 -> space                                .push
@@ -47,7 +53,11 @@ architecture_body: /(?i)\barchitecture\s+(\w+)\s+of\s+(\w+)\s+is\b/ /(?i)\bbegin
 -> group_declaration                    .push
 -> disconnection_specification          .push
 
--> architecture_body[1]                 .return ((map {lc} @IMATCH_LIST), \@architecture_body, call(architecture_statement_part))
+-> architecture_body[1]                 {
+   assign(array(architecture_header_parts), entry_groups());
+   lowercase_each(array(architecture_header_parts));
+   return(array(flat_array(architecture_header_parts), array_copy(array(architecture_body)), call(architecture_statement_part)))
+}
 
 architecture_statement_part:
 -? push
@@ -87,12 +97,17 @@ block_statement: /(?i)(?:(\w+)\s*:\s*)?\bblock\b/ /(?i)\bend\s+block\b.*?;/
 -> block_statement[1]  .return_m
 
 component_instantiation_statement: /(?i)(\w+)\s*:\s*(?:entity\s+(\S+)(?:\s+\(\s*(\S+)\s*\))?|configuration\s+(\w+)|(?:component\s+)?(\w+))/  /;/
+I {declare(array, instantiation_parts)}
 -> comment                                 .push
 -> dquote_string                           .push
 -> space                                   .push
 -> generic_map_aspect                      .push
 -> port_map_aspect                         .push
--> component_instantiation_statement[1]    .return_a (map {lc} @IMATCH_LIST)
+-> component_instantiation_statement[1]    {
+   assign(array(instantiation_parts), entry_groups());
+   lowercase_each(array(instantiation_parts));
+   return(array("?component_instantiation_statement:", flat_array(instantiation_parts), array_copy(array(component_instantiation_statement))))
+}
 
 
 generic_map_aspect: /(?i)generic\s+map\s*\(/  /\)/

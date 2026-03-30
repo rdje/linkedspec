@@ -37212,6 +37212,20 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
 };
+subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
+    plan tests => 7;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for lowercase helper-return inspection');
+    ok(index($source_content, "assign(array(entity_header_parts), entry_groups());\n   lowercase_each(array(entity_header_parts));\n   return(array(\"?entity_declaration:\", flat_array(entity_header_parts), array_copy(array(entity_declaration))))") >= 0, 'vhdl entity_declaration now prefers entry_groups() plus lowercase_each() while preserving the tagged return_a-style shape');
+    ok(index($source_content, "assign(array(architecture_header_parts), entry_groups());\n   lowercase_each(array(architecture_header_parts));\n   return(array(flat_array(architecture_header_parts), array_copy(array(architecture_body)), call(architecture_statement_part)))") >= 0, 'vhdl architecture_body now prefers entry_groups() plus lowercase_each() for the lowercase header return');
+    ok(index($source_content, "assign(array(instantiation_parts), entry_groups());\n   lowercase_each(array(instantiation_parts));\n   return(array(\"?component_instantiation_statement:\", flat_array(instantiation_parts), array_copy(array(component_instantiation_statement))))") >= 0, 'vhdl component_instantiation_statement now prefers entry_groups() plus lowercase_each() while preserving the tagged return_a-style shape');
+    ok(index($source_content, '.return_a(map {lc} @IMATCH_LIST)') < 0, 'vhdl entity_declaration no longer uses raw map {lc} @IMATCH_LIST');
+    ok(index($source_content, '.return ((map {lc} @IMATCH_LIST), \@architecture_body, call(architecture_statement_part))') < 0, 'vhdl architecture_body no longer uses raw map {lc} @IMATCH_LIST in its architecture header return');
+    ok(index($source_content, '.return_a (map {lc} @IMATCH_LIST)') < 0, 'vhdl component_instantiation_statement no longer uses raw map {lc} @IMATCH_LIST');
+};
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 
