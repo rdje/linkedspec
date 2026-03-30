@@ -37199,7 +37199,7 @@ subtest 'vhdl_package_rules_prefer_entry_group' => sub {
     unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
 };
 subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
-    plan tests => 7;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
     my $source_content = slurp($source_spec);
@@ -37208,9 +37208,11 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     like($source_content, qr/subprogram_declaration: .*?I\.return\(array\("\?subprogram_declaration:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl subprogram_declaration now prefers entry_groups() in its helper return');
     like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() in its helper return');
     like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), array_values\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement now prefers entry_groups() in its helper return');
     unlike($source_content, qr/subprogram_declaration: .*?flat_array\(IMATCH_LIST\)/, 'vhdl subprogram_declaration no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
+    unlike($source_content, qr/return\(array\("\?process_statement:", flat_array\(IMATCH_LIST\), array_values\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement no longer uses flat_array(IMATCH_LIST)');
 };
 subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
     plan tests => 7;

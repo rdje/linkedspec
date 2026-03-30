@@ -152,7 +152,7 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 
 -> process_statement[2]                 {
    assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
-   return(array("?process_statement:", flat_array(IMATCH_LIST), array_values(array(process_statement)), scalar(process_statement_part)))
+   return(array("?process_statement:", flat_array(entry_groups()), array_values(array(process_statement)), scalar(process_statement_part)))
 }
 
 
