@@ -179,6 +179,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - `specs/portmap.spec::bare_bit_slice` now also spends the concise array alias on its group snapshot and classification return payloads,
   - the `LE` aggregation line in `specs/pplugin.spec::pplugin_top` now also spends the concise array alias on its live subdef accumulator path,
   - the split/accumulation band in `specs/sdce.spec` now also spends those concise aliases on cursor state, direct cursor-position reads, anonymous capture-boundary reads via `capture_slice()`, accumulator pushes, split targets/sources, and return payloads,
+  - `specs/sdce.spec::get_pinport` now also uses `entry_groups()` inside `flat_array(...)` instead of `IMATCH_LIST` in its helper return,
   - the `substitute_top` orchestration band in `specs/hlink_substitution.spec` now also spends the concise scalar/array aliases on call-result assignment, accumulator pushes, and aggregate return flow,
   - the main `vhistory` orchestration band in `specs/ds_vhistory.spec` now also spends those concise aliases on captured-entry reads, object-hierarchy accumulation, reset paths, and top-level return payload construction,
   - the simple token-return seams in `specs/regdef.spec` now also spend `entry_groups()` plus `flat_array(...)` instead of raw `@IMATCH_LIST` returns,

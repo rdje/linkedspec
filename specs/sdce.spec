@@ -7,7 +7,7 @@ LX   {assign(s(retv), capture_rest()); push_value(a(pieces), s(retv)); return(ar
 
 get_pinport: /\[\s*((?:get_port|get_pin)\w?\s+)/ /\]/ I.declare(array, pieces)
 -> oc_brace        {declare(scalar, segment); declare(array, segment_parts); assign(s(segment), substr($$STRING, $LSPOS, call(oc_brace))); split(a(segment_parts), s(segment), /\s+/); filter_nonempty(a(segment_parts)); assign(a(pieces), a(flat_array(pieces), flat_array(segment_parts)))}
--> get_pinport[1]  {return(a(flat_array(IMATCH_LIST), array_values(a(pieces))))}
+-> get_pinport[1]  {return(a(flat_array(entry_groups()), array_values(a(pieces))))}
 
 LS   {declare(scalar, segment); declare(array, segment_parts); assign(s(segment), capture_slice()); split(a(segment_parts), s(segment), /(\s+)/); filter_nonempty(a(segment_parts)); assign(a(pieces), a(flat_array(pieces), flat_array(segment_parts)))}
 LE   {start_capture_slice()}

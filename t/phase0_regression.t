@@ -37581,7 +37581,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 14;
+    plan tests => 16;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -37599,6 +37599,8 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     like($source_content, qr/assign\(s\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(s\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
     ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
+    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(entry_groups\(\)\), array_values\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() in its helper return');
+    unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(IMATCH_LIST\), array_values\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
