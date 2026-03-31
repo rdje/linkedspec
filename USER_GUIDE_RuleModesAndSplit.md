@@ -812,6 +812,8 @@ That is why it is useful for split-like staged parsing.
 There is now also a small explicit helper family for the same anonymous boundary:
 - `capture_slice()` reads the current anonymous slice text up to the left edge of the current local match,
 - `capture_slice_len()` reads the width of that same slice,
+- `capture_slice_until_cursor()` reads from that same anonymous boundary through the live parser cursor,
+- `capture_slice_until_cursor_len()` reads the width of that same anonymous through-cursor span,
 - `capture_slice_pos()` reads the numeric position where that same slice starts,
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
 - `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
@@ -821,7 +823,7 @@ There is now also a small explicit helper family for the same anonymous boundary
 That means the full current mental model is:
 - `@capture_slice` moves the anonymous boundary at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
-- `capture_slice()` / `capture_slice_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata about the current slice,
+- `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
 - and `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary.
 
 ## Why `@capture_slice` Matters
@@ -884,6 +886,8 @@ The most important semantic detail is this:
 - it does not include the current local match itself,
 - `capture_from(name)` is a pure read and does not move the mark,
 - `capture_len_from(name)` returns the numeric length of that same current-edge span without materializing the substring,
+- `capture_until_cursor_from(name)` returns text from the saved mark through the live parser cursor instead of stopping at the current match edge,
+- `capture_until_cursor_len_from(name)` returns the numeric width of that same named-mark through-cursor span,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_rest_from(name)` returns text from the saved mark through end-of-input instead of stopping at the current match edge,
 - `capture_rest_len_from(name)` returns the numeric width of that same remembered tail through end-of-input,
@@ -2138,13 +2142,15 @@ The current supported contract is:
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_slice` is the preferred split-boundary cursor feature,
-- `capture_slice()`, `capture_slice_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
+- `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
+- `capture_until_cursor_from(name)` means “text from the named checkpoint through the live parser cursor,”
+- `capture_until_cursor_len_from(name)` means “the numeric length of that same named-mark through-cursor span or `undef` when the mark is absent,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `capture_len_between(start_mark, end_mark)` means “the numeric length of that same explicit two-mark span or `undef` when either mark is absent or reversed,”

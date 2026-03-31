@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-31 - Phase 4: add through-cursor capture helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_until_cursor_from(name)`, and `capture_until_cursor_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock the new through-cursor span semantics explicitly for both anonymous capture boundaries and named checkpoints,
+- refreshed the user guides so the capture surface now teaches the missing right-edge distinction between current match edge, live parser cursor, and end-of-input,
+- refreshed roadmap/continuity notes so future resume treats through-cursor reads as another real Phase 4 feature slice rather than falling back to raw `pos $$STRING` plus `substr(...)` math.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-31 - Phase 4: add named-mark tail helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_rest_from(name)` and `capture_rest_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

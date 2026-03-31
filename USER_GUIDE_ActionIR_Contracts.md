@@ -244,6 +244,56 @@ Top::AND
 
 Use it when the rule needs that same anonymous-capture-boundary model as `capture_slice()` but only wants length metadata. `capture_slice_length()` remains supported as a longer compatibility alias, and `capture_len_from_rule_start()` remains supported for older migration slices.
 
+### `capture_slice_until_cursor()`
+Return the substring from the current anonymous capture boundary through the live parser cursor.
+
+Practical reading:
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
+- the right boundary is the current parser cursor from `pos $$STRING`,
+- unlike `capture_slice()`, this helper includes text that the parser has already consumed through the current slot,
+- and unlike `capture_rest()`, it stops at the current parser cursor instead of running through end-of-input.
+
+Examples:
+
+```text
+assign(scalar(segment), capture_slice_until_cursor())
+```
+
+```text
+Top::AND
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_until_cursor(), capture_slice_until_cursor_len())) }
+```
+
+Use it when the rule wants the current anonymous slice through the live parser cursor explicitly, instead of stopping at the current match edge or extending all the way through end-of-input.
+
+### `capture_slice_until_cursor_len()`
+Return the numeric length of the same anonymous capture-boundary through-cursor span that `capture_slice_until_cursor()` would read.
+
+Practical reading:
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
+- the right boundary is still the live parser cursor,
+- the helper returns the through-cursor width instead of materializing the substring,
+- and unlike `capture_slice_len()`, it measures through the current parser cursor rather than stopping at the current match edge.
+
+Examples:
+
+```text
+assign(scalar(width), capture_slice_until_cursor_len())
+```
+
+```text
+Top::AND
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_until_cursor_len())) }
+```
+
+Use it when the rule needs the width of that same anonymous through-cursor span but does not need the span text itself.
+
 ### `capture_slice_pos()`
 Return the numeric position of the current anonymous capture boundary.
 
@@ -502,6 +552,62 @@ Top::AND
 ```
 
 Use it when the rule needs the same current-edge boundary semantics as `capture_from(name)` but only wants length metadata, not the substring itself.
+
+### `capture_until_cursor_from(name)`
+Return the substring from a named `@mark(name)` checkpoint through the live parser cursor.
+
+Practical reading:
+- the earlier `@mark(name)` establishes the left boundary,
+- the right boundary is the current parser cursor from `pos $$STRING`,
+- unlike `capture_from(name)`, this helper does not stop at the left edge of the current match,
+- and unlike `capture_rest_from(name)`, it stops at the live parser cursor instead of extending through end-of-input.
+
+If the mark is absent, the helper returns `undef`.
+
+Examples:
+
+```text
+assign(scalar(segment), capture_until_cursor_from(body_start))
+```
+
+```text
+Top::AND
+ /\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { }
+ -> Top[1] { return(array("?Top:", capture_until_cursor_from(body_start), capture_until_cursor_len_from(body_start))) }
+```
+
+Use it when the rule wants a stable named checkpoint as the left edge but wants the right edge to be the current live parser cursor rather than the current match edge or end-of-input.
+
+### `capture_until_cursor_len_from(name)`
+Return the numeric length of the same named-mark through-cursor span that `capture_until_cursor_from(name)` would read.
+
+Practical reading:
+- the earlier `@mark(name)` still establishes the left boundary,
+- the right boundary is still the live parser cursor,
+- the helper returns the through-cursor width instead of materializing the substring,
+- and unlike `capture_rest_len_from(name)`, it stops at the current parser cursor instead of extending through end-of-input.
+
+If the mark is absent, the helper returns `undef`.
+
+Examples:
+
+```text
+assign(scalar(width), capture_until_cursor_len_from(body_start))
+```
+
+```text
+Top::AND
+ /\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { }
+ -> Top[1] { return(array("?Top:", capture_until_cursor_len_from(body_start), capture_until_cursor_len_from(missing_mark))) }
+```
+
+Use it when the rule needs the width of that same named-mark through-cursor span but does not need the span text itself.
 
 ### `capture_take(name)`
 Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.

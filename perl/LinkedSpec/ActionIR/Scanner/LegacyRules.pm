@@ -33,6 +33,8 @@ sub try_scan_contract_ir_events {
   'capture_if_macro' => \&_scan_contract_capture_if_macro,
   'capture_slice' => \&_scan_contract_capture_slice,
   'capture_slice_len' => \&_scan_contract_capture_slice_len,
+  'capture_slice_until_cursor' => \&_scan_contract_capture_slice_until_cursor,
+  'capture_slice_until_cursor_len' => \&_scan_contract_capture_slice_until_cursor_len,
   'capture_slice_pos' => \&_scan_contract_capture_slice_pos,
   'capture_slice_line' => \&_scan_contract_capture_slice_line,
   'capture_slice_col' => \&_scan_contract_capture_slice_col,
@@ -49,6 +51,8 @@ sub try_scan_contract_ir_events {
   'capture_take_from_mark' => \&_scan_contract_capture_take_from_mark,
   'capture_rest_from_mark' => \&_scan_contract_capture_rest_from_mark,
   'capture_rest_len_from_mark' => \&_scan_contract_capture_rest_len_from_mark,
+  'capture_until_cursor_from_mark' => \&_scan_contract_capture_until_cursor_from_mark,
+  'capture_until_cursor_len_from_mark' => \&_scan_contract_capture_until_cursor_len_from_mark,
   'capture_between_marks' => \&_scan_contract_capture_between_marks,
   'capture_len_between_marks' => \&_scan_contract_capture_len_between_marks,
   'capture_take_between_marks' => \&_scan_contract_capture_take_between_marks,
@@ -240,6 +244,24 @@ while ($code =~ /\bcapture_slice_len\s*\(\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_capture_slice_until_cursor {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_until_cursor\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_until_cursor_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_until_cursor_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
 #------------------------------------------------------------------------------
 # Function: _scan_contract_capture_slice_pos
 # Purpose : Scan explicit anonymous capture-boundary position reads.
@@ -385,6 +407,24 @@ sub _scan_contract_capture_rest_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_cursor_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_cursor_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {mark => $+{mark}}};
 }
  return \@events
