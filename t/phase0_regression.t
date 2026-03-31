@@ -37208,6 +37208,18 @@ subtest 'vhdl_concurrent_signal_assignment_prefers_entry_group_reorder' => sub {
     like($source_content, qr/concurrent_signal_assignment_statement: .*?I\.return\(array\(entry_group\(1\), entry_group\(2\), entry_group\(0\)\)\)/, 'vhdl concurrent_signal_assignment_statement now prefers explicit entry_group(...) reads for reordered immediate groups');
     unlike($source_content, qr/concurrent_signal_assignment_statement: .*?\@IMATCH_LIST\[-2, -1, 0\]/, 'vhdl concurrent_signal_assignment_statement no longer uses raw reordered @IMATCH_LIST access');
 };
+subtest 'vhdl_interface_port_decl_prefers_helper_array_flow' => sub {
+    plan tests => 5;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for interface port helper-array inspection');
+    like($source_content, qr/interface_signal_declaration: .*?\nI \{declare\(array, port_decl_parts\)\}/s, 'vhdl interface_signal_declaration now declares an explicit helper array for port declaration parts');
+    like($source_content, qr/-> signal_decl_range\s+\{assign\(array\(port_decl_parts\), entry_groups\(\)\); push_value\(array\(port_decl_parts\), call\(signal_decl_range\)\)\}/, 'vhdl interface_signal_declaration now snapshots entry_groups() before appending the optional signal_decl_range child result');
+    like($source_content, qr/-> interface_signal_declaration\[1\]\s+\{assign\(array\(port_decl_parts\), entry_groups\(\)\); return\(array\("\?port_decl:", array_copy\(array\(port_decl_parts\)\)\)\)\}/, 'vhdl interface_signal_declaration now returns the helper array copy instead of raw @IMATCH_LIST');
+    unlike($source_content, qr/-> signal_decl_range\s+\{push \@IMATCH_LIST, call\(signal_decl_range\)\}/, 'vhdl interface_signal_declaration no longer pushes child results directly into raw @IMATCH_LIST');
+};
 subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
     plan tests => 11;
 

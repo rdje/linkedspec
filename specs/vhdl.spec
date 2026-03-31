@@ -292,8 +292,9 @@ port_clause:   /(?i)\bport\s*\(/ /\)\s*;/
 
 
 interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
--> signal_decl_range                 {push @IMATCH_LIST, call(signal_decl_range)}
--> interface_signal_declaration[1]   {return ['?port_decl:', [@IMATCH_LIST]]}
+I {declare(array, port_decl_parts)}
+-> signal_decl_range                 {assign(array(port_decl_parts), entry_groups()); push_value(array(port_decl_parts), call(signal_decl_range))}
+-> interface_signal_declaration[1]   {assign(array(port_decl_parts), entry_groups()); return(array("?port_decl:", array_copy(array(port_decl_parts))))}
 
 
 signal_decl_range: /\(/ /\)/ I {declare(array, capt, msi_lsi)}
