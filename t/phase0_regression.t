@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 57;
+    plan tests => 59;
 
     my $label = 'Top';
 
@@ -10931,6 +10931,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{'body_start'} = pos $$STRING; _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }},
         'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_rest_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark) : undef }},
+        'capture_rest_from(name) helper rewrite preserves explicit named-mark tail semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_rest_len_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }},
+        'capture_rest_len_from(name) helper rewrite preserves explicit named-mark tail-length semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_between(body_start, first_end)'),
@@ -11253,6 +11263,40 @@ SPEC
 
     my $take_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take(body_start)');
     like($take_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = pos \$\$STRING;/, 'capture_take(name) lowering updates the rule-local mark to the current parser position after returning the captured span');
+};
+subtest 'named_mark_capture_rest_helpers_read_tail_through_end_of_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_rest_from(body_start), capture_rest_len_from(body_start), capture_rest_from(missing_mark), capture_rest_len_from(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark tail helper coverage');
+
+    my $input = '(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'bar)', 4, undef, undef],
+        'capture_rest_from(name) and capture_rest_len_from(name) read from the named checkpoint through end-of-input, including the current closing-token slot when it lies to the right'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'named-mark tail helper parse leaves runtime_ctx last_error clear on success');
+
+    my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest_from(body_start)');
+    like($capture_rewrite, qr/substr\(\$\$STRING, \$__ls_mark, length\(\$\$STRING\) - \$__ls_mark\)/, 'capture_rest_from(name) lowering reads from the stored mark through end-of-input');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest_len_from(body_start)');
+    like($len_rewrite, qr/\(length\(\$\$STRING\) - \$__ls_mark\)/, 'capture_rest_len_from(name) lowering reads the named-mark tail width through end-of-input');
 };
 subtest 'named_mark_capture_between_reads_span_between_two_rule_local_checkpoints' => sub {
     plan tests => 4;
@@ -36590,6 +36634,30 @@ SPEC
     ok(index($rewritten, 'substr($$STRING, $IPOS, length($$STRING) - $IPOS)') >= 0, 'capture_rest() lowers to a direct capture-boundary tail read');
     ok(index($rewritten, '(length($$STRING) - $IPOS)') >= 0, 'capture_rest_len() lowers to a direct capture-boundary tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_rest helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_named_mark_capture_rest_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("tail", capture_rest_from(body_start), "width", capture_rest_len_from(body_start))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named-mark tail helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit named-mark tail helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit named-mark tail helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit named-mark tail helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_REST_FROM_MARK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST_FROM_MARK');
+    ok(grep { $_ eq 'CAPTURE_REST_LEN_FROM_MARK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST_LEN_FROM_MARK');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("tail", capture_rest_from(body_start), "width", capture_rest_len_from(body_start)))');
+    ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'named-mark tail helpers lower through the stored rule-local mark bucket');
+    ok(index($rewritten, 'substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark)') >= 0, 'capture_rest_from(name) lowers to a direct named-mark tail read');
+    ok(index($rewritten, '(length($$STRING) - $__ls_mark)') >= 0, 'capture_rest_len_from(name) lowers to a direct named-mark tail-length read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark tail helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;

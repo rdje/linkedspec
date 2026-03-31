@@ -885,6 +885,8 @@ The most important semantic detail is this:
 - `capture_from(name)` is a pure read and does not move the mark,
 - `capture_len_from(name)` returns the numeric length of that same current-edge span without materializing the substring,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
+- `capture_rest_from(name)` returns text from the saved mark through end-of-input instead of stopping at the current match edge,
+- `capture_rest_len_from(name)` returns the numeric width of that same remembered tail through end-of-input,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
 - `capture_len_between(start_mark, end_mark)` returns the numeric length of that same explicit two-mark span without materializing the substring,
 - `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
@@ -1056,6 +1058,40 @@ the practical reading is:
 This is the named split-cursor pattern:
 - `capture_from(name)` is the stable read,
 - `capture_take(name)` is the advancing read.
+
+## Worked Example: Named Tail Through End Of Input
+Sometimes the left edge should come from a remembered named checkpoint, but the right edge should be the real end of the input string rather than the current match boundary.
+
+That is what `capture_rest_from(name)` and `capture_rest_len_from(name)` are for.
+
+```text
+tail_from_named_mark::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> tail_from_named_mark[0] { assign(scalar(stage), "open") }
+ -> tail_from_named_mark[1] { assign(scalar(stage), "body") }
+ -> tail_from_named_mark[2] { return(array("?tail_from_named_mark:", capture_rest_from(body_start), capture_rest_len_from(body_start))) }
+```
+
+On input:
+
+```text
+(bar)
+```
+
+the practical reading is:
+- `@mark(body_start)` stores the position just after `(`,
+- `capture_rest_from(body_start)` returns `bar)` because its right edge is end-of-input, not the left edge of the current `)` match,
+- and `capture_rest_len_from(body_start)` returns `4` for that same remembered tail.
+
+This is the named-tail pattern:
+- `capture_from(name)` stops at the current match edge,
+- `capture_rest_from(name)` goes through end-of-input,
+- `capture_len_from(name)` reports the width of the current-edge span,
+- `capture_rest_len_from(name)` reports the width of the end-of-input tail from the same named checkpoint.
 
 ## Worked Example: Explicit Two-Mark Span
 Sometimes the right edge should not come from the current match at all. Instead, the rule may want to remember a second explicit checkpoint and later capture the span between those two named positions.

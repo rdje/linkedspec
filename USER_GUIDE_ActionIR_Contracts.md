@@ -544,6 +544,68 @@ Top::AND
 
 Use it when the same rule should keep consuming successive named spans instead of reading repeatedly from one stable checkpoint.
 
+### `capture_rest_from(name)`
+Return the substring from a named `@mark(name)` checkpoint through end-of-input.
+
+Practical reading:
+- the earlier `@mark(name)` establishes the left boundary,
+- the right boundary is the end of the current input string rather than the current match edge,
+- the current local match is included if it lies to the right of that named checkpoint,
+- and unlike `capture_from(name)`, this helper does not stop at the left edge of the current match.
+
+If the mark is absent, the helper returns `undef`.
+
+Examples:
+
+```text
+assign(scalar(tail), capture_rest_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_rest_from(body_start))) }
+```
+
+Use it when the rule wants a remembered named checkpoint as the left edge but wants the right edge to be the real end of input, not the current match boundary.
+
+### `capture_rest_len_from(name)`
+Return the numeric length of the same named-mark tail that `capture_rest_from(name)` would read.
+
+Practical reading:
+- the earlier `@mark(name)` still establishes the left boundary,
+- the right boundary is still the end of the current input string,
+- the helper returns the remaining width from that named checkpoint instead of materializing the substring,
+- and unlike `capture_len_from(name)`, it does not stop at the current match edge.
+
+If the mark is absent, the helper returns `undef`.
+
+Examples:
+
+```text
+assign(scalar(width), capture_rest_len_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { return(array("?Top:", capture_rest_len_from(body_start), capture_rest_len_from(missing_mark))) }
+```
+
+Use it when the rule needs the width of that same named-checkpoint tail through end-of-input but does not need the tail text itself.
+
 ### `capture_between(start_mark, end_mark)`
 Return the substring between two explicit rule-local named marks.
 
