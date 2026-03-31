@@ -1,5 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-31 - Docs policy: require extensive DSL documentation and backfill
+
+- tightened the standing project policy so user-facing DSL methods are not considered fully delivered without clear semantics documentation plus extensive worked examples,
+- clarified that this bar applies both to newly landed DSL methods and to already-implemented helper families whose documentation is still too thin for confident adoption,
+- recorded that policy in the roadmap, execution roadmap, commit workflow, and continuity notes so future resume work treats DSL documentation backfill as required product work rather than optional polish.
+
+- Validation:
+  - `git diff --check -- ROADMAP.md ROADMAP_V2.md COMMIT.md DEVELOPMENT_NOTES.md MEMORY.md CHANGES.md`
+
 ## 2026-03-31 - Phase 4: add through-cursor capture helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_until_cursor_from(name)`, and `capture_until_cursor_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

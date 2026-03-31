@@ -38,6 +38,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
    - explain semantics plainly,
    - use representative examples generously,
    - use fuller worked examples for newly landed user-facing surfaces when terse snippets would undersell or obscure the real supported shape,
+   - hold already-landed user-facing DSL methods to that same documentation bar too, backfilling semantics notes and extensive worked examples when an older surface is still thinly documented,
    - add cross-cutting cookbook guides when one module-focused reference would fragment a high-frequency user-facing surface too much,
    - and avoid obfuscation in both user-facing docs and architecture notes.
 

@@ -64,6 +64,7 @@ This document defines the standard commit workflow for this repository so any ne
      - `DEVELOPMENT_NOTES.md`
      - `MEMORY.md`
    - Include validation commands/results.
+   - If a slice adds, renames, or materially clarifies DSL methods, treat user-facing documentation as required completion work: update the relevant guides with clear semantics and extensive worked examples, and backfill older methods in that same user-facing family when the documentation is still too thin for confident adoption.
 
 3. **Prepare commit message**
    - Populate `git_message_brief.txt` with:
