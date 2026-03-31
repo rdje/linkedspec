@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-04-01 - Phase 4: add live-cursor tail helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `cursor_rest()` and `cursor_rest_len()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock the new live-cursor-through-end-of-input semantics explicitly,
+- expanded the user guides with worked examples so the cursor helper family now teaches the missing distinction between anonymous-boundary tails, named-mark tails, and live parser-cursor tails,
+- refreshed roadmap/continuity notes so future resume treats live-cursor “through end-of-input” reads as covered helper surface now instead of falling back to raw `pos $$STRING` plus `substr(...)` math.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-31 - Docs policy: require extensive DSL documentation and backfill
 
 - tightened the standing project policy so user-facing DSL methods are not considered fully delivered without clear semantics documentation plus extensive worked examples,

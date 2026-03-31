@@ -67,6 +67,8 @@ sub try_scan_contract_ir_events {
   'cursor_pos' => \&_scan_contract_cursor_pos,
   'cursor_line' => \&_scan_contract_cursor_line,
   'cursor_col' => \&_scan_contract_cursor_col,
+  'cursor_rest' => \&_scan_contract_cursor_rest,
+  'cursor_rest_len' => \&_scan_contract_cursor_rest_len,
   'entry_text' => \&_scan_contract_entry_text,
   'entry_group' => \&_scan_contract_entry_group,
   'entry_groups' => \&_scan_contract_entry_groups,
@@ -551,6 +553,24 @@ sub _scan_contract_cursor_col {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_rest {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_rest\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_rest_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_rest_len\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

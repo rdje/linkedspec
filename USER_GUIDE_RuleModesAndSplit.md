@@ -818,13 +818,15 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
 - `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
 - `start_capture_slice()` moves that anonymous boundary explicitly from inside lifecycle or action code,
-- and `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input.
+- `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input,
+- and `cursor_rest()` / `cursor_rest_len()` read from the live parser cursor through end-of-input.
 
 That means the full current mental model is:
 - `@capture_slice` moves the anonymous boundary at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
-- and `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary.
+- `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary,
+- and `cursor_rest()` / `cursor_rest_len()` answer the different question “what remains from the live parser cursor right now?” without consulting that anonymous boundary.
 
 ## Why `@capture_slice` Matters
 This feature is especially useful when:
@@ -1096,6 +1098,40 @@ This is the named-tail pattern:
 - `capture_rest_from(name)` goes through end-of-input,
 - `capture_len_from(name)` reports the width of the current-edge span,
 - `capture_rest_len_from(name)` reports the width of the end-of-input tail from the same named checkpoint.
+
+## Worked Example: Live Cursor Tail Through End Of Input
+Sometimes the left edge should not come from an anonymous capture boundary or a named mark at all. The rule may simply want to ask what remains from the live parser cursor right now.
+
+That is what `cursor_rest()` and `cursor_rest_len()` are for.
+
+```text
+tail_from_cursor::AND
+ I { declare(scalar, after_open_tail, after_body_tail) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> tail_from_cursor[0] { assign(scalar(after_open_tail), cursor_rest()) }
+ -> tail_from_cursor[1] { assign(scalar(after_body_tail), cursor_rest()) }
+ -> tail_from_cursor[2] { return(array("?tail_from_cursor:", scalar(after_open_tail), scalar(after_body_tail), cursor_rest(), cursor_rest_len())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- after `/foo\(/`, the live parser cursor is just after `(`, so `cursor_rest()` returns `bar)`,
+- after `/\w+/`, the live parser cursor is just after `bar`, so `cursor_rest()` returns `)`,
+- after `/\)/`, the live parser cursor is at end-of-input, so `cursor_rest()` returns the empty string and `cursor_rest_len()` returns `0`,
+- and none of those reads depend on `@capture_slice`, `start_capture_slice()`, or `@mark(name)` because the left edge is always the live parser cursor itself.
+
+This is the live-cursor-tail pattern:
+- `capture_rest()` goes from the anonymous capture boundary through end-of-input,
+- `capture_rest_from(name)` goes from a named checkpoint through end-of-input,
+- `cursor_rest()` goes from the live parser cursor through end-of-input,
+- and `cursor_rest_len()` is the numeric width companion to that same live-cursor tail.
 
 ## Worked Example: Explicit Two-Mark Span
 Sometimes the right edge should not come from the current match at all. Instead, the rule may want to remember a second explicit checkpoint and later capture the span between those two named positions.
@@ -2026,6 +2062,12 @@ Use `cursor_col()` when:
 - later logic should compare or report same-line cursor movement without storing a checkpoint first,
 - or the rule wants a backend-neutral replacement for raw `pos $$STRING` plus newline math in normal user-facing `.spec` code.
 
+Use `cursor_rest()` and `cursor_rest_len()` when:
+- the rule should expose what remains from the live parser cursor through end-of-input,
+- the left edge should be the live parser cursor rather than an anonymous or named checkpoint,
+- later logic should compare or report “remaining input” directly instead of current match boundaries,
+- or the rule wants backend-neutral replacements for raw `substr($$STRING, pos $$STRING, ...)` and `length($$STRING) - pos $$STRING` in normal user-facing `.spec` code.
+
 Use `entry_text()` when:
 - the rule wants the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry token visible while local matches continue to move forward,
@@ -2145,6 +2187,7 @@ The current supported contract is:
 - `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
+- `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
 - `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
@@ -2166,6 +2209,8 @@ The current supported contract is:
 - `cursor_pos()` means “return the live current parser cursor position directly,”
 - `cursor_line()` means “return the live current parser cursor line directly,”
 - `cursor_col()` means “return the live current parser cursor column directly,”
+- `cursor_rest()` means “return the remaining text from the live current parser cursor through end-of-input,”
+- `cursor_rest_len()` means “return the width of that same live current parser-cursor tail or `undef` when the live cursor itself is unavailable,”
 - `entry_text()` means “return the current immediate match text directly,”
 - `entry_line()` means “return the 1-based line number of the current immediate match directly,”
 - `entry_col()` means “return the 1-based column number of the current immediate match directly,”

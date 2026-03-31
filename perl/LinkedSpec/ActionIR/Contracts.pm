@@ -967,6 +967,36 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'cursor_rest',
+   ir_node            => 'CURSOR_REST',
+   diag_name          => 'cursor_rest',
+   unresolved_pattern => qr/\bcursor_rest\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcursor_rest\s*\(\s*\)
+    }{
+     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'cursor_rest_len',
+   ir_node            => 'CURSOR_REST_LEN',
+   diag_name          => 'cursor_rest_len',
+   unresolved_pattern => qr/\bcursor_rest_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcursor_rest_len\s*\(\s*\)
+    }{
+     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_text',
    ir_node            => 'IMATCH_TEXT_READ',
    diag_name          => 'entry_text',

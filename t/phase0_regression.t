@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 63;
+    plan tests => 65;
 
     my $label = 'Top';
 
@@ -11011,6 +11011,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_line(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\n/g)) : undef }},
         'mark_line(name) helper rewrite preserves explicit rule-local named-mark line-read semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'cursor_rest()'),
+        q{do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor) : undef }},
+        'cursor_rest() helper rewrite preserves explicit live-cursor tail semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'cursor_rest_len()'),
+        q{do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }},
+        'cursor_rest_len() helper rewrite preserves explicit live-cursor tail-length semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
@@ -11762,6 +11772,39 @@ SPEC
 
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_col()');
     like($rewrite, qr/my \$__ls_col_pos = pos \$\$STRING;.*rindex\(\$__ls_col_prefix, "\\n"\)/s, 'cursor_col() lowering reads the live current parser position before computing the current column');
+};
+subtest 'cursor_rest_helpers_read_live_current_parser_tail_without_named_mark' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, after_open_tail, after_body_tail) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(after_open_tail), cursor_rest()) }
+ -> Top[1] { assign(scalar(after_body_tail), cursor_rest()) }
+ -> Top[2] { return(array("?Top:", scalar(after_open_tail), scalar(after_body_tail), cursor_rest(), cursor_rest_len())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_rest() and cursor_rest_len() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'bar)', ')', '', 0],
+        'cursor_rest() and cursor_rest_len() read from the live parser cursor through end-of-input across successive same-rule slots'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'cursor_rest() and cursor_rest_len() parse leaves runtime_ctx last_error clear on success');
+
+    my $tail_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_rest()');
+    like($tail_rewrite, qr/substr\(\$\$STRING, \$__ls_cursor, length\(\$\$STRING\) - \$__ls_cursor\)/, 'cursor_rest() lowering reads from the live parser cursor through end-of-input');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_rest_len()');
+    like($len_rewrite, qr/\(length\(\$\$STRING\) - \$__ls_cursor\)/, 'cursor_rest_len() lowering reads the live parser-cursor tail width directly');
 };
 subtest 'capture_slice_line_reads_current_anonymous_capture_boundary_line' => sub {
     plan tests => 5;
@@ -36640,6 +36683,30 @@ SPEC
     ok(index($rewritten, 'my $__ls_col_pos = $IPOS - length $IMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'entry_col() lowers to a direct immediate-match column read');
     ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'match_col() lowers to a direct local-match column read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit column helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_cursor_tail_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("tail", cursor_rest(), "width", cursor_rest_len())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit cursor-tail helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit cursor-tail helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit cursor-tail helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit cursor-tail helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CURSOR_REST' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_REST');
+    ok(grep { $_ eq 'CURSOR_REST_LEN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_REST_LEN');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("tail", cursor_rest(), "width", cursor_rest_len()))');
+    ok(index($rewritten, 'my $__ls_cursor = pos $$STRING;') >= 0, 'cursor-tail helpers lower through an explicit live parser-cursor read');
+    ok(index($rewritten, 'substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor)') >= 0, 'cursor_rest() lowers to a direct live-cursor tail read');
+    ok(index($rewritten, '(length($$STRING) - $__ls_cursor)') >= 0, 'cursor_rest_len() lowers to a direct live-cursor tail-length read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor-tail helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_slice_helpers_lower_without_raw_fallback' => sub {
     plan tests => 13;

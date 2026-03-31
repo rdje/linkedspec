@@ -1154,6 +1154,92 @@ Top::AND
 
 Use it when the rule wants the live current parser cursor column directly instead of spelling raw same-line position math inline.
 
+### `cursor_rest()`
+Return the remaining input from the live parser cursor through end-of-input.
+
+Practical reading:
+- use it when the rule wants “what remains right now?” as text,
+- prefer it over raw `substr($$STRING, pos $$STRING, ...)` in normal user-facing `.spec` examples,
+- prefer it over `capture_rest()` when the left edge should be the live parser cursor rather than the anonymous capture boundary,
+- prefer it over `capture_rest_from(name)` when there is no reason to store a named checkpoint first,
+- and treat it as the direct live-cursor tail helper paired with `cursor_rest_len()`.
+
+Simple form:
+
+```text
+cursor_rest()
+```
+
+Worked same-rule example:
+
+```text
+Top::AND
+ I { declare(scalar, after_open_tail, after_body_tail) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(after_open_tail), cursor_rest()) }
+ -> Top[1] { assign(scalar(after_body_tail), cursor_rest()) }
+ -> Top[2] { return(array("?Top:", scalar(after_open_tail), scalar(after_body_tail), cursor_rest())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- after `/foo\(/`, the live parser cursor is just after `(`, so `cursor_rest()` returns `bar)`,
+- after `/\w+/`, the live parser cursor is just after `bar`, so `cursor_rest()` returns `)`,
+- after `/\)/`, the live parser cursor is at end-of-input, so `cursor_rest()` returns the empty string,
+- and no anonymous or named checkpoint needs to be stored first because the helper reads directly from the live parser cursor.
+
+Use it when the rule wants the live parser-cursor tail text directly without first storing a named or anonymous checkpoint.
+
+### `cursor_rest_len()`
+Return the numeric width of the remaining input from the live parser cursor through end-of-input.
+
+Practical reading:
+- use it when the rule wants “how much input remains right now?” as a number,
+- prefer it over raw `length($$STRING) - pos $$STRING` in normal user-facing `.spec` examples,
+- treat it as the width-only companion to `cursor_rest()`,
+- prefer it over `capture_rest_len()` when the left edge should be the live parser cursor rather than the anonymous capture boundary,
+- and prefer it over `capture_rest_len_from(name)` when there is no reason to store a named checkpoint first.
+
+Simple form:
+
+```text
+cursor_rest_len()
+```
+
+Worked same-rule example:
+
+```text
+Top::AND
+ I { declare(scalar, after_open_width, after_body_width) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(after_open_width), cursor_rest_len()) }
+ -> Top[1] { assign(scalar(after_body_width), cursor_rest_len()) }
+ -> Top[2] { return(array("?Top:", scalar(after_open_width), scalar(after_body_width), cursor_rest_len())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- after `/foo\(/`, `cursor_rest_len()` returns `4` for `bar)`,
+- after `/\w+/`, it returns `1` for `)`,
+- after `/\)/`, it returns `0` because the parser cursor is already at end-of-input,
+- and the helper tracks the live cursor directly rather than a remembered mark or anonymous capture boundary.
+
+Use it when the rule wants the live parser-cursor tail width directly instead of materializing that tail as text.
+
 ### `entry_text()`
 Return the current immediate match text directly.
 

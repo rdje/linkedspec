@@ -346,6 +346,8 @@ Important nuance:
 - `capture_rest()` -> `do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }`
 - `capture_rest_len()` -> `do { (length($$STRING) - $IPOS) }`
 - `capture_rest_length()` -> `do { (length($$STRING) - $IPOS) }`
+- `cursor_rest()` -> `do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor) : undef }`
+- `cursor_rest_len()` -> `do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }`
 - `capture_rest_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark) : undef }`
 - `capture_rest_len_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }`
 - `capture_until_cursor_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? substr($$STRING, $__ls_mark, $__ls_cursor - $__ls_mark) : undef }`
@@ -391,6 +393,8 @@ Important nuance:
 - `capture_slice_here()` remains supported as a compatibility alias for `start_capture_slice()`.
 - `capture_rest()` reads from that same anonymous capture boundary through end-of-input, so it is the explicit helper form of the old raw tail-capture pattern `substr($$STRING, $IPOS, length($$STRING) - $IPOS)`.
 - `capture_rest_len()` returns the numeric width of that same anonymous-boundary tail, and `capture_rest_length()` is a longer compatibility alias for it.
+- `cursor_rest()` reads from the live parser cursor through end-of-input, so it is the explicit helper form of the old raw live-cursor tail pattern `substr($$STRING, pos $$STRING, length($$STRING) - pos $$STRING)`.
+- `cursor_rest_len()` returns the numeric width of that same live-cursor tail, so later logic can compare or report “remaining input” without materializing the substring first.
 - `capture_rest_from(name)` reads from a stored named checkpoint through end-of-input, so it is the explicit named-mark tail companion to anonymous `capture_rest()`.
 - `capture_rest_len_from(name)` returns the numeric width of that same remembered tail through end-of-input without materializing the substring.
 - `capture_until_cursor_from(name)` reads from a stored named checkpoint through the live parser cursor, so it sits between `capture_from(name)` and `capture_rest_from(name)` on the right-edge axis.
@@ -413,6 +417,8 @@ Important nuance:
 - `cursor_pos()` reads the current parser cursor position directly as `do { pos $$STRING }`, without consulting the rule-local mark bucket.
 - `cursor_line()` reads the current parser cursor line directly as one live `pos $$STRING`-based newline count, without consulting the rule-local mark bucket.
 - `cursor_col()` reads the current parser cursor column directly from the live `pos $$STRING` position, without consulting the rule-local mark bucket.
+- `cursor_rest()` reads the current parser-cursor tail directly from one live `pos $$STRING` read through end-of-input, without consulting the rule-local mark bucket.
+- `cursor_rest_len()` reads the width of that same current parser-cursor tail directly from one live `pos $$STRING` read, without consulting the rule-local mark bucket.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_line()` reads the current immediate match line directly as `do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
 - `entry_col()` reads the current immediate match column directly from `$IPOS - length $IMATCH`, without consulting the rule-local mark bucket.
