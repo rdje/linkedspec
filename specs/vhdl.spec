@@ -340,19 +340,19 @@ record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 subtype_declaration:  /(?is)\bsubtype\s+(\w+)\s+is\s+(.+?)\s*;/                     I.return_m
 constant_declaration: /(?is)\bconstant\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/   I {
-  my ($identifier_list, $subtype_indication, $expression) = @IMATCH_LIST;
+  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
 
   return [map {['?constant_declaration:', $_, $subtype_indication, $expression]} split /\s*,\s*/o, $identifier_list]
 }
 
 variable_declaration: /(?is)\b(?:shared\s+)?variable\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/ I {
-  my ($identifier_list, $subtype_indication, $expression) = @IMATCH_LIST;
+  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
 
   return [map {['?variable_declaration:', $_, $subtype_indication, $expression]} split /\s*,\s*/o, $identifier_list]
 }
 
 file_declaration: /(?is)\bfile\s+(.+?)\s*:\s*(.+?)\s*;/ I {
-  my ($identifier_list, $remainder_info) = @IMATCH_LIST;
+  declare(scalar, identifier_list=entry_group(0), remainder_info=entry_group(1));
 
   return [map {['?file_declaration:', $_, $remainder_info]} split /\s*,\s*/o, $identifier_list]
 }
@@ -364,13 +364,13 @@ group_template_declaration: /(?is)group\s+(\w+)\s+is\s+\(\s*(.+?)\s*\)\s*;/     
 group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*;/    I.return_m
 
 signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\s*:=\s*(.+?))?\s*;/ I {
-  my ($identifier_list, $subtype_indication, $signal_kind, $expression) = @IMATCH_LIST;
+  declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), signal_kind=entry_group(2), expression=entry_group(3));
 
   return [map {['?signal_declaration:', $_, $subtype_indication, $signal_kind, $expression]} split /\s*,\s*/o, $identifier_list],
 }
 
 configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
-  my ($instantiation_list, $component_name, $binding_indication) = @IMATCH_LIST;
+  declare(scalar, instantiation_list=entry_group(0), component_name=entry_group(1), binding_indication=entry_group(2));
 
   return [map {['?configuration_specification:', $_, $component_name, $binding_indication]} split /\s*,\s*/o, $instantiation_list]
 }

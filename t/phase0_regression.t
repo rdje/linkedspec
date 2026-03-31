@@ -37208,6 +37208,24 @@ subtest 'vhdl_concurrent_signal_assignment_prefers_entry_group_reorder' => sub {
     like($source_content, qr/concurrent_signal_assignment_statement: .*?I\.return\(array\(entry_group\(1\), entry_group\(2\), entry_group\(0\)\)\)/, 'vhdl concurrent_signal_assignment_statement now prefers explicit entry_group(...) reads for reordered immediate groups');
     unlike($source_content, qr/concurrent_signal_assignment_statement: .*?\@IMATCH_LIST\[-2, -1, 0\]/, 'vhdl concurrent_signal_assignment_statement no longer uses raw reordered @IMATCH_LIST access');
 };
+subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
+    plan tests => 11;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for declaration-reader helper inspection');
+    like($source_content, qr/constant_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), expression=entry_group\(2\)\);/s, 'vhdl constant_declaration now prefers entry_group(...) locals');
+    like($source_content, qr/variable_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), expression=entry_group\(2\)\);/s, 'vhdl variable_declaration now prefers entry_group(...) locals');
+    like($source_content, qr/file_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), remainder_info=entry_group\(1\)\);/s, 'vhdl file_declaration now prefers entry_group(...) locals');
+    like($source_content, qr/signal_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), signal_kind=entry_group\(2\), expression=entry_group\(3\)\);/s, 'vhdl signal_declaration now prefers entry_group(...) locals');
+    like($source_content, qr/configuration_specification: .*?declare\(scalar, instantiation_list=entry_group\(0\), component_name=entry_group\(1\), binding_indication=entry_group\(2\)\);/s, 'vhdl configuration_specification now prefers entry_group(...) locals');
+    unlike($source_content, qr/constant_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl constant_declaration no longer destructures raw @IMATCH_LIST');
+    unlike($source_content, qr/variable_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl variable_declaration no longer destructures raw @IMATCH_LIST');
+    unlike($source_content, qr/file_declaration: .*?my \(\$identifier_list, \$remainder_info\) = \@IMATCH_LIST;/s, 'vhdl file_declaration no longer destructures raw @IMATCH_LIST');
+    unlike($source_content, qr/signal_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$signal_kind, \$expression\) = \@IMATCH_LIST;/s, 'vhdl signal_declaration no longer destructures raw @IMATCH_LIST');
+    unlike($source_content, qr/configuration_specification: .*?my \(\$instantiation_list, \$component_name, \$binding_indication\) = \@IMATCH_LIST;/s, 'vhdl configuration_specification no longer destructures raw @IMATCH_LIST');
+};
 subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     plan tests => 9;
 
