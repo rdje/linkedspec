@@ -74,7 +74,7 @@ architecture_statement_part:
 -> concurrent_signal_assignment_statement  .push
 
 
-concurrent_signal_assignment_statement: /(?is)(?:\bwith\s+(.+?)\s+select\s+)?(\w+.*?)\s*<=\s*(.+?)\s*;/  I.return (@IMATCH_LIST[-2, -1, 0])
+concurrent_signal_assignment_statement: /(?is)(?:\bwith\s+(.+?)\s+select\s+)?(\w+.*?)\s*<=\s*(.+?)\s*;/  I.return(array(entry_group(1), entry_group(2), entry_group(0)))
 generate_statement: /(?is)(?:\w+\s*:\s*(?:(for|if)\s+(.+?))\s*)?\bgenerate\b/ /(?is)\bend\s+generate\b.*?;/
 -? push
 -> comment                                 .push

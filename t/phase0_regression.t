@@ -37198,6 +37198,16 @@ subtest 'vhdl_package_rules_prefer_entry_group' => sub {
     unlike($source_content, qr/assign\(array\(imatch_copy\), array\(scalar\(IMATCH_LIST, 0\)\)\);/, 'vhdl package_declaration no longer uses scalar(IMATCH_LIST, 0)');
     unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
 };
+subtest 'vhdl_concurrent_signal_assignment_prefers_entry_group_reorder' => sub {
+    plan tests => 3;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for concurrent signal assignment entry-group inspection');
+    like($source_content, qr/concurrent_signal_assignment_statement: .*?I\.return\(array\(entry_group\(1\), entry_group\(2\), entry_group\(0\)\)\)/, 'vhdl concurrent_signal_assignment_statement now prefers explicit entry_group(...) reads for reordered immediate groups');
+    unlike($source_content, qr/concurrent_signal_assignment_statement: .*?\@IMATCH_LIST\[-2, -1, 0\]/, 'vhdl concurrent_signal_assignment_statement no longer uses raw reordered @IMATCH_LIST access');
+};
 subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     plan tests => 9;
 
