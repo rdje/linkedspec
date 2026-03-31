@@ -51,6 +51,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  capture_rest                     => 'CAPTURE_REST',
  capture_rest_len                 => 'CAPTURE_REST_LEN',
  capture_rest_length              => 'CAPTURE_REST_LEN',
+ capture_take_slice               => 'CAPTURE_SLICE_TAKE',
  capture_from_rule_start          => 'CAPTURE_SLICE',
  capture_len_from_rule_start      => 'CAPTURE_SLICE_LEN',
  capture_from_mark                => 'CAPTURE_FROM_MARK',

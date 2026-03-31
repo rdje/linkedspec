@@ -632,6 +632,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_take_slice',
+   ir_node            => 'CAPTURE_SLICE_TAKE',
+   diag_name          => 'capture_take',
+   unresolved_pattern => qr/\bcapture_take\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take\s*\(\s*\)
+    }{
+     'do { my $__ls_capture = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $IPOS = pos $$STRING; $__ls_capture }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_from_rule_start',
    ir_node            => 'CAPTURE_SLICE',
    diag_name          => 'capture_slice',

@@ -44,6 +44,7 @@ sub try_scan_contract_ir_events {
   'capture_rest' => \&_scan_contract_capture_rest,
   'capture_rest_len' => \&_scan_contract_capture_rest_len,
   'capture_rest_length' => \&_scan_contract_capture_rest_length,
+  'capture_take_slice' => \&_scan_contract_capture_take_slice,
   'capture_from_rule_start' => \&_scan_contract_capture_from_rule_start,
   'capture_len_from_rule_start' => \&_scan_contract_capture_len_from_rule_start,
   'capture_from_mark' => \&_scan_contract_capture_from_mark,
@@ -364,6 +365,15 @@ sub _scan_contract_capture_len_from_rule_start {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_len_from_rule_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

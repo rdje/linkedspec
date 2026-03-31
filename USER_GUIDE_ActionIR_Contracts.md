@@ -456,6 +456,52 @@ Top::AND
 
 Use it when the rule needs the width of that same anonymous-boundary tail but does not need the tail text itself.
 
+### `capture_take()`
+Return the same anonymous capture-boundary span that `capture_slice()` would read, then advance that anonymous boundary to the current parser position.
+
+Practical reading:
+- use it when one anonymous capture boundary is enough, but later same-rule reads should continue from the current parser position,
+- treat it as the anonymous advancing-read companion to stable `capture_slice()`,
+- compare it with `capture_take(name)` on the named-checkpoint side when the rule does need more than one stable remembered boundary,
+- and prefer it over hand-spelling `capture_slice()` plus a separate `start_capture_slice()` or raw `$IPOS = pos $$STRING` update when the rule really wants “read and advance” as one step.
+
+Example:
+
+```text
+capture_take()
+```
+
+```text
+Top::AND
+ I { declare(scalar, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { start_capture_slice() }
+ -> Top[2] { assign(scalar(first), capture_take()) }
+ -> Top[4] { assign(scalar(second), capture_take()) }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_slice())) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- `start_capture_slice()` establishes the anonymous left boundary just after `(`,
+- the first `capture_take()` returns `alpha` and advances that anonymous boundary to just after the first comma,
+- the second `capture_take()` returns `beta` and advances that anonymous boundary to just after the second comma,
+- the final `capture_slice()` then returns `gamma` from the advanced anonymous boundary through the left edge of `)`,
+- and no named checkpoint is needed because the rule only needs one rolling anonymous boundary.
+
+Use it when the rule wants split-cursor-style advancing capture semantics without introducing a named checkpoint just to move a single rolling boundary forward.
+
 ### `capture_from(name)`
 Return the captured substring from a named `@mark(name)` checkpoint to the left edge of the current match.
 

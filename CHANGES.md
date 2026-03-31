@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-04-01 - Phase 4: add anonymous advancing capture helper
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take()` is now a first-class anonymous capture-boundary helper scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock the new anonymous advancing-read semantics explicitly alongside the existing named `capture_take(name)` helper,
+- expanded the user guides with worked examples so the capture surface now teaches the missing distinction between stable anonymous reads (`capture_slice()`), advancing anonymous reads (`capture_take()`), stable named reads (`capture_from(name)`), and advancing named reads (`capture_take(name)`),
+- refreshed roadmap/continuity notes so future resume treats anonymous rolling split-cursor reads as covered helper surface now instead of falling back to raw “capture current `$IPOS` span, then move `$IPOS` forward” Perl.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add live-cursor tail helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `cursor_rest()` and `cursor_rest_len()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

@@ -346,6 +346,7 @@ Important nuance:
 - `capture_rest()` -> `do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }`
 - `capture_rest_len()` -> `do { (length($$STRING) - $IPOS) }`
 - `capture_rest_length()` -> `do { (length($$STRING) - $IPOS) }`
+- `capture_take()` -> `do { my $__ls_capture = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $IPOS = pos $$STRING; $__ls_capture }`
 - `cursor_rest()` -> `do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor) : undef }`
 - `cursor_rest_len()` -> `do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }`
 - `capture_rest_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark) : undef }`
@@ -393,6 +394,7 @@ Important nuance:
 - `capture_slice_here()` remains supported as a compatibility alias for `start_capture_slice()`.
 - `capture_rest()` reads from that same anonymous capture boundary through end-of-input, so it is the explicit helper form of the old raw tail-capture pattern `substr($$STRING, $IPOS, length($$STRING) - $IPOS)`.
 - `capture_rest_len()` returns the numeric width of that same anonymous-boundary tail, and `capture_rest_length()` is a longer compatibility alias for it.
+- `capture_take()` reads the same anonymous-boundary span that `capture_slice()` would read and then advances `$IPOS` to the current parser position, so it is the explicit helper form of the old rolling split-cursor pattern “capture current span, then move the anonymous boundary forward”.
 - `cursor_rest()` reads from the live parser cursor through end-of-input, so it is the explicit helper form of the old raw live-cursor tail pattern `substr($$STRING, pos $$STRING, length($$STRING) - pos $$STRING)`.
 - `cursor_rest_len()` returns the numeric width of that same live-cursor tail, so later logic can compare or report “remaining input” without materializing the substring first.
 - `capture_rest_from(name)` reads from a stored named checkpoint through end-of-input, so it is the explicit named-mark tail companion to anonymous `capture_rest()`.

@@ -818,6 +818,7 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
 - `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
 - `start_capture_slice()` moves that anonymous boundary explicitly from inside lifecycle or action code,
+- `capture_take()` reads that same anonymous-boundary span and then advances the boundary to the current parser position,
 - `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input,
 - and `cursor_rest()` / `cursor_rest_len()` read from the live parser cursor through end-of-input.
 
@@ -825,6 +826,7 @@ That means the full current mental model is:
 - `@capture_slice` moves the anonymous boundary at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
+- `capture_take()` reads the current slice and also advances that anonymous boundary,
 - `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary,
 - and `cursor_rest()` / `cursor_rest_len()` answer the different question “what remains from the live parser cursor right now?” without consulting that anonymous boundary.
 
@@ -840,6 +842,45 @@ That is a real LinkedSpec strength:
 3. parse those substrings with a second `.spec` or another follow-up parser.
 
 This is exactly the kind of coarse-to-fine workflow LinkedSpec is good at.
+
+## Worked Example: Advancing Anonymous Boundary
+Sometimes a rule does not need a named checkpoint at all. It only needs one rolling anonymous boundary that should move forward after each captured segment.
+
+That is what `capture_take()` is for.
+
+```text
+csv_triplet_anon::AND
+ I { declare(scalar, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> csv_triplet_anon[0] { start_capture_slice() }
+ -> csv_triplet_anon[2] { assign(scalar(first), capture_take()) }
+ -> csv_triplet_anon[4] { assign(scalar(second), capture_take()) }
+ -> csv_triplet_anon[6] { return(array("?csv_triplet_anon:", scalar(first), scalar(second), capture_slice())) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- `start_capture_slice()` stores the anonymous boundary just after `(`,
+- the first `capture_take()` returns `alpha` and advances that anonymous boundary to just after the first comma,
+- the second `capture_take()` returns `beta` and advances that anonymous boundary to just after the second comma,
+- the final `capture_slice()` returns `gamma` from the advanced anonymous boundary through the left edge of `)`,
+- and no named checkpoint is needed because the whole rule only uses one rolling capture boundary.
+
+This is the anonymous advancing-boundary pattern:
+- `capture_slice()` is the stable anonymous read,
+- `capture_take()` is the advancing anonymous read,
+- and `start_capture_slice()` is the explicit anonymous-boundary write when the rule wants to establish or reset that rolling boundary directly.
 
 ## Real In-Tree Example
 A real current example already exists in [`specs/ebnf.spec`](specs/ebnf.spec):
@@ -2062,6 +2103,12 @@ Use `cursor_col()` when:
 - later logic should compare or report same-line cursor movement without storing a checkpoint first,
 - or the rule wants a backend-neutral replacement for raw `pos $$STRING` plus newline math in normal user-facing `.spec` code.
 
+Use `capture_take()` when:
+- one rolling anonymous capture boundary is enough for the whole rule,
+- the rule should read the current anonymous slice and then continue later same-rule reads from the current parser position,
+- the rule wants the anonymous-boundary counterpart to named `capture_take(name)`,
+- or the rule wants a backend-neutral replacement for raw “capture current `$IPOS` span, then set `$IPOS = pos $$STRING`” flow in normal user-facing `.spec` code.
+
 Use `cursor_rest()` and `cursor_rest_len()` when:
 - the rule should expose what remains from the live parser cursor through end-of-input,
 - the left edge should be the live parser cursor rather than an anonymous or named checkpoint,
@@ -2186,6 +2233,7 @@ The current supported contract is:
 - `@capture_slice` is the preferred split-boundary cursor feature,
 - `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
+- `capture_take()` is the preferred anonymous split-boundary advancing-read helper,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
@@ -2194,6 +2242,7 @@ The current supported contract is:
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_until_cursor_from(name)` means “text from the named checkpoint through the live parser cursor,”
 - `capture_until_cursor_len_from(name)` means “the numeric length of that same named-mark through-cursor span or `undef` when the mark is absent,”
+- `capture_take()` means “return the current anonymous split-boundary span and then advance that anonymous boundary to the current parser position,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `capture_len_between(start_mark, end_mark)` means “the numeric length of that same explicit two-mark span or `undef` when either mark is absent or reversed,”
