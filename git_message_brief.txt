@@ -1,8 +1,0 @@
-Phase 4: spend reordered entry_group reads in vhdl
-
-Move specs/vhdl.spec::concurrent_signal_assignment_statement off
-raw @IMATCH_LIST[-2, -1, 0] access and onto explicit reordered
-entry_group(1), entry_group(2), and entry_group(0) reads.
-
-Lock the migration in t/phase0_regression.t and refresh the
-continuity docs for clean resume.

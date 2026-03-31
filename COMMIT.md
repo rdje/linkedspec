@@ -87,4 +87,4 @@ This document defines the standard commit workflow for this repository so any ne
 - Do not bundle unrelated changes in the same commit.
 - Keep commit messages specific and technically descriptive.
 - Keep `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` synchronized with the actual committed slice.
-- If `git_message_brief.txt` is accidentally committed, remove it from index and amend.
+- If `git_message_brief.txt` is accidentally committed, remove it from index immediately and restore the untracked-temp-file invariant. Amend when appropriate; otherwise make the corrective follow-up commit right away.
