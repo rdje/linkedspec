@@ -35,6 +35,7 @@ sub try_scan_contract_ir_events {
   'capture_slice_len' => \&_scan_contract_capture_slice_len,
   'capture_slice_pos' => \&_scan_contract_capture_slice_pos,
   'capture_slice_line' => \&_scan_contract_capture_slice_line,
+  'capture_slice_col' => \&_scan_contract_capture_slice_col,
   'capture_slice_length' => \&_scan_contract_capture_slice_length,
   'start_capture_slice' => \&_scan_contract_start_capture_slice,
   'capture_slice_here' => \&_scan_contract_capture_slice_here,
@@ -56,8 +57,10 @@ sub try_scan_contract_ir_events {
   'mark_exists' => \&_scan_contract_mark_exists,
   'mark_pos' => \&_scan_contract_mark_pos,
   'mark_line' => \&_scan_contract_mark_line,
+  'mark_col' => \&_scan_contract_mark_col,
   'cursor_pos' => \&_scan_contract_cursor_pos,
   'cursor_line' => \&_scan_contract_cursor_line,
+  'cursor_col' => \&_scan_contract_cursor_col,
   'entry_text' => \&_scan_contract_entry_text,
   'entry_group' => \&_scan_contract_entry_group,
   'entry_groups' => \&_scan_contract_entry_groups,
@@ -66,10 +69,10 @@ sub try_scan_contract_ir_events {
   'entry_map' => \&_scan_contract_entry_map,
   'entry_named_map' => \&_scan_contract_entry_named_map,
   'entry_line' => \&_scan_contract_entry_line,
+  'entry_col' => \&_scan_contract_entry_col,
   'entry_len' => \&_scan_contract_entry_len,
   'entry_start_pos' => \&_scan_contract_entry_start_pos,
   'entry_end_pos' => \&_scan_contract_entry_end_pos,
-  'match_line' => \&_scan_contract_match_line,
   'match_text' => \&_scan_contract_match_text,
   'match_group' => \&_scan_contract_match_group,
   'match_groups' => \&_scan_contract_match_groups,
@@ -80,6 +83,8 @@ sub try_scan_contract_ir_events {
   'match_len' => \&_scan_contract_match_len,
   'match_start_pos' => \&_scan_contract_match_start_pos,
   'match_end_pos' => \&_scan_contract_match_end_pos,
+  'match_line' => \&_scan_contract_match_line,
+  'match_col' => \&_scan_contract_match_col,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
   'backtrack_macro' => \&_scan_contract_backtrack_macro,
   'ibacktrack' => \&_scan_contract_ibacktrack,
@@ -248,6 +253,15 @@ sub _scan_contract_capture_slice_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_slice_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
@@ -442,6 +456,15 @@ while ($code =~ /\bmark_line\s*\(\s*(?<mark>\w+)\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_mark_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_col\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
 sub _scan_contract_cursor_pos {
  my ($code) = @_;
  my @events;
@@ -455,6 +478,15 @@ sub _scan_contract_cursor_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
@@ -527,6 +559,15 @@ sub _scan_contract_entry_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bentry_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
@@ -653,6 +694,15 @@ sub _scan_contract_match_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

@@ -296,6 +296,32 @@ Top::AND
 
 Use it when the rule wants diagnostics or metadata about where the current anonymous capture slice began, especially in later `LX` or action-edge code that used to count newlines from `$IPOS` by hand.
 
+### `capture_slice_col()`
+Return the 1-based column number of the current anonymous capture boundary.
+
+Practical reading:
+- the left boundary is still the current anonymous capture boundary stored in `$IPOS`,
+- the helper computes a 1-based column from that stored boundary relative to the most recent preceding newline,
+- it reports where the current anonymous capture slice starts on its line,
+- and unlike `cursor_col()`, it does not follow the live parser cursor after that boundary is established.
+
+Examples:
+
+```text
+print("starting in column ", capture_slice_col(), "\n")
+```
+
+```text
+Top::AND
+ /foo /
+ -> Top[0] { start_capture_slice() }
+ /\(/
+ /\w+/
+ -> Top[1] { return(array("?Top:", capture_slice_col())) }
+```
+
+Use it when the rule wants diagnostics or metadata about where the current anonymous capture slice began horizontally, especially in later same-rule code that used to carry raw `$IPOS`-based column math inline.
+
 ### `start_capture_slice()`
 Move the current anonymous capture boundary to the current parser position.
 
@@ -846,6 +872,36 @@ Top::AND
 
 Use it when the rule should expose explicit checkpoint line metadata without mutating the mark bucket.
 
+### `mark_col(name)`
+Return the 1-based column number of a rule-local named mark.
+
+Practical reading:
+- use it when the rule wants checkpoint column metadata rather than only the raw numeric position,
+- combine it with `@mark(name)`, `mark_here(name)`, or `mark_match_start(name)` when the rule wants to report where a remembered boundary landed on its line,
+- and treat it as the column-read companion to `mark_pos(name)` and `mark_line(name)`.
+
+If the named mark is absent, the helper returns `undef`.
+
+Example:
+
+```text
+mark_col(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, begin_col, end_col) }
+ /foo /
+ @mark(body_start)
+ /bar /
+ /baz/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_col), mark_col(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_col), mark_col(end_mark)); return(array("?Top:", scalar(begin_col), scalar(end_col), mark_col(missing_mark))) }
+```
+
+Use it when the rule should expose explicit checkpoint column metadata without mutating the mark bucket.
+
 ### `cursor_pos()`
 Return the current parser cursor position directly.
 
@@ -901,6 +957,34 @@ Top::AND
 ```
 
 Use it when the rule wants the live current parser cursor line directly instead of spelling raw prefix-newline counting inline.
+
+### `cursor_col()`
+Return the 1-based column number at the current parser cursor directly.
+
+Practical reading:
+- use it when the rule wants the current parser-position column as data,
+- prefer it over manual `pos $$STRING` plus newline math in normal user-facing `.spec` examples,
+- expect it to track the live parser cursor as same-rule slots advance, not just the rule-entry snapshot,
+- and treat it as the direct cursor-side column helper when no checkpoint or match-boundary helper is needed first.
+
+Example:
+
+```text
+cursor_col()
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_col, second_col, third_col) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(first_col), cursor_col()) }
+ -> Top[1] { assign(scalar(second_col), cursor_col()) }
+ -> Top[2] { assign(scalar(third_col), cursor_col()); return(array("?Top:", scalar(first_col), scalar(second_col), scalar(third_col), cursor_col(), match_col())) }
+```
+
+Use it when the rule wants the live current parser cursor column directly instead of spelling raw same-line position math inline.
 
 ### `entry_text()`
 Return the current immediate match text directly.
@@ -964,6 +1048,37 @@ Child::AND
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the line where the immediate entry match began instead of the line of the currently active local match.
+
+### `entry_col()`
+Return the 1-based column number of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the column where the immediate entry match started,
+- prefer it over manual column math around `$IPOS - length($IMATCH)`,
+- and treat it as the direct column-number companion to `entry_text()` / `entry_line()` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
+
+Example:
+
+```text
+entry_col()
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_col_num, body_col_num) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_col_num), entry_col()); assign(scalar(body_col_num), match_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_col_num), scalar(body_col_num), entry_col(), match_col())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the column where the immediate entry match began instead of the column of the currently active local match.
 
 ### `entry_group(index)`
 Return one capture group from the current immediate match directly.
@@ -1256,6 +1371,33 @@ Top::AND
 ```
 
 Use it when the rule wants the line where the current local match began instead of the current parser cursor line or a previously stored checkpoint position.
+
+### `match_col()`
+Return the 1-based column number of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the column where the current local match started,
+- prefer it over manual column math around `$LSPOS - length($LMATCH)`,
+- and treat it as the direct column-number companion to `match_text()` / `match_line()` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
+
+Example:
+
+```text
+match_col()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_col, body_col) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(open_col), cursor_col()) }
+ -> Top[1] { assign(scalar(body_col), match_col()) }
+ -> Top[2] { return(array("?Top:", scalar(open_col), scalar(body_col), match_col())) }
+```
+
+Use it when the rule wants the column where the current local match began instead of the current parser cursor column or a previously stored checkpoint.
 
 ### `match_group(index)`
 Return one capture group from the current local match directly.

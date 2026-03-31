@@ -337,6 +337,7 @@ Important nuance:
 - `capture_slice_len()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
 - `capture_slice_pos()` -> `do { $IPOS }`
 - `capture_slice_line()` -> `do { my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0; 1 + (() = substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g) }`
+- `capture_slice_col()` -> `do { my $__ls_col_pos = defined($IPOS) ? $IPOS : 0; my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) }`
 - `capture_slice_length()` -> `do { ($LSPOS - $IPOS - length $LMATCH) }`
 - `start_capture_slice()` -> `do { $IPOS = pos $$STRING }`
 - `capture_slice_here()` -> `do { $IPOS = pos $$STRING }`
@@ -356,6 +357,10 @@ Important nuance:
 - `mark_exists(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? 1 : 0 }`
 - `mark_pos(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; (ref($__ls_mark_bucket) eq 'HASH' && exists $__ls_mark_bucket->{'body_start'}) ? $__ls_mark_bucket->{'body_start'} : undef }`
 - `mark_line(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\n/g)) : undef }`
+- `mark_col(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? do { my $__ls_col_prefix = substr($$STRING, 0, $__ls_mark); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_mark - $__ls_col_last_newline) : ($__ls_mark + 1) } : undef }`
+- `cursor_col()` -> `do { my $__ls_col_pos = pos $$STRING; my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) }`
+- `entry_col()` -> `do { my $__ls_col_pos = $IPOS - length $IMATCH; my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) }`
+- `match_col()` -> `do { my $__ls_col_pos = $LSPOS - length $LMATCH; my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) }`
 - `capture(Top)` -> `push @Top, substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`
 - `capture_if(Top)` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
 - `CAPTURE_IF()` -> `my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @Top, $capt if $capt`
@@ -372,6 +377,7 @@ Important nuance:
 - `capture_slice_len()` returns the numeric width of that same anonymous capture-boundary span, so later logic can compare or record it without materializing the substring.
 - `capture_slice_pos()` returns the numeric position of that same anonymous capture boundary directly, so later logic can expose or compare the remembered slice start without reading a named mark or the live parser cursor.
 - `capture_slice_line()` returns the 1-based line number of that same anonymous capture boundary, so later diagnostics can report where the current slice started without counting newlines from `$IPOS` by hand.
+- `capture_slice_col()` returns the 1-based column number of that same anonymous capture boundary, so later diagnostics can report where the current slice started on its line without spelling raw `$IPOS`-plus-newline math inline.
 - `capture_slice_length()` is a longer compatibility alias for `capture_slice_len()`, and older migration helpers `capture_from_rule_start()` / `capture_len_from_rule_start()` still lower to the same code.
 - `start_capture_slice()` is the preferred explicit code-block write form for that same anonymous capture boundary, so later anonymous capture helpers start from the current parser position without spelling `assign(s(IPOS), cursor_pos())` directly.
 - `capture_slice_here()` remains supported as a compatibility alias for `start_capture_slice()`.
@@ -391,10 +397,13 @@ Important nuance:
 - `mark_exists(name)` checks the rule-local named mark bucket directly and returns `1` when that mark is present or `0` when it is absent, without reading or mutating the mark.
 - `mark_pos(name)` checks that same rule-local named mark bucket and returns the stored numeric position when the mark is present or `undef` when it is absent, without reading or mutating the mark.
 - `mark_line(name)` checks that same rule-local named mark bucket and returns the 1-based line number of the stored mark when it is present or `undef` when it is absent, without reading or mutating the mark.
+- `mark_col(name)` checks that same rule-local named mark bucket and returns the 1-based column number of the stored mark when it is present or `undef` when it is absent, without reading or mutating the mark.
 - `cursor_pos()` reads the current parser cursor position directly as `do { pos $$STRING }`, without consulting the rule-local mark bucket.
 - `cursor_line()` reads the current parser cursor line directly as one live `pos $$STRING`-based newline count, without consulting the rule-local mark bucket.
+- `cursor_col()` reads the current parser cursor column directly from the live `pos $$STRING` position, without consulting the rule-local mark bucket.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_line()` reads the current immediate match line directly as `do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
+- `entry_col()` reads the current immediate match column directly from `$IPOS - length $IMATCH`, without consulting the rule-local mark bucket.
 - `entry_group(0)` reads one capture group from the current immediate match directly as `do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }`, without consulting the rule-local mark bucket.
 - `entry_groups()` snapshots the whole current immediate-match capture-group list directly as `do { [@IMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `entry_named(name)` reads one named capture from the current immediate match directly as `do { exists $IMATCH_HASH{'name'} ? $IMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.
@@ -406,6 +415,7 @@ Important nuance:
 - `entry_end_pos()` reads the current immediate match right edge directly as `do { $IPOS }`, without consulting the rule-local mark bucket.
 - `match_text()` reads the current local match text directly as `do { $LMATCH }`, without consulting the rule-local mark bucket.
 - `match_line()` reads the current local match line directly as `do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
+- `match_col()` reads the current local match column directly from `$LSPOS - length $LMATCH`, without consulting the rule-local mark bucket.
 - `match_group(1)` reads one capture group from the current local match directly as `do { scalar(@LMATCH_LIST) > 1 ? $LMATCH_LIST[1] : undef }`, without consulting the rule-local mark bucket.
 - `match_groups()` snapshots the whole current local-match capture-group list directly as `do { [@LMATCH_LIST] }`, without consulting the rule-local mark bucket.
 - `match_named(name)` reads one named capture from the current local match directly as `do { exists $LMATCH_HASH{'name'} ? $LMATCH_HASH{'name'} : undef }`, without consulting the rule-local mark bucket.

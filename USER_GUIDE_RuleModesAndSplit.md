@@ -814,13 +814,14 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_len()` reads the width of that same slice,
 - `capture_slice_pos()` reads the numeric position where that same slice starts,
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
+- `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
 - `start_capture_slice()` moves that anonymous boundary explicitly from inside lifecycle or action code,
 - and `capture_rest()` / `capture_rest_len()` read from that anonymous boundary through end-of-input.
 
 That means the full current mental model is:
 - `@capture_slice` moves the anonymous boundary at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
-- `capture_slice()` / `capture_slice_len()` / `capture_slice_pos()` / `capture_slice_line()` read metadata about the current slice,
+- `capture_slice()` / `capture_slice_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata about the current slice,
 - and `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary.
 
 ## Why `@capture_slice` Matters
@@ -1975,10 +1976,25 @@ Use `mark_line(name)` when:
 - later diagnostics should report where a named checkpoint landed without first round-tripping through `mark_pos(name)`,
 - or the rule needs explicit line metadata for one remembered boundary without mutating the checkpoint.
 
+Use `mark_col(name)` when:
+- the rule should expose the stored checkpoint column directly,
+- later diagnostics should report where a named checkpoint landed on its line without first round-tripping through `mark_pos(name)`,
+- or the rule needs explicit column metadata for one remembered boundary without mutating the checkpoint.
+
+Use `cursor_col()` when:
+- the rule should expose the live current parser column directly,
+- later logic should compare or report same-line cursor movement without storing a checkpoint first,
+- or the rule wants a backend-neutral replacement for raw `pos $$STRING` plus newline math in normal user-facing `.spec` code.
+
 Use `entry_text()` when:
 - the rule wants the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry token visible while local matches continue to move forward,
 - or the rule wants a backend-neutral replacement for raw `$IMATCH` in normal user-facing `.spec` code.
+
+Use `entry_col()` when:
+- the rule wants the column where the immediate entry match that led into the current rule began,
+- child-rule logic should keep that entry column visible while local match columns continue to move forward,
+- or the rule wants a backend-neutral replacement for raw `$IPOS - length($IMATCH)` plus newline math in normal user-facing `.spec` code.
 
 Use `entry_group(index)` when:
 - the rule wants one capture group from the immediate entry match that led into the current rule,
@@ -2004,6 +2020,11 @@ Use `match_text()` when:
 - the rule wants the current local match text itself as data,
 - there is no need to store a named checkpoint for later reuse,
 - or the rule wants a backend-neutral replacement for raw `$LMATCH` in normal user-facing `.spec` code.
+
+Use `match_col()` when:
+- the rule wants the column where the current local match began,
+- there is no need to store a named checkpoint for later reuse,
+- or the rule wants a backend-neutral replacement for raw `$LSPOS - length($LMATCH)` plus newline math in normal user-facing `.spec` code.
 
 Use `match_group(index)` when:
 - the rule wants one capture group from the current local match itself as data,
@@ -2071,7 +2092,7 @@ The current supported contract is:
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_slice` is the preferred split-boundary cursor feature,
-- `capture_slice()`, `capture_slice_len()`, and `capture_slice_line()` are the preferred anonymous split-boundary read helpers,
+- `capture_slice()`, `capture_slice_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
@@ -2088,7 +2109,14 @@ The current supported contract is:
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”
 - `mark_pos(name)` means “return the numeric stored position of that named checkpoint or `undef` if it is absent,”
+- `mark_line(name)` means “return the 1-based line number of that named checkpoint or `undef` if it is absent,”
+- `mark_col(name)` means “return the 1-based column number of that named checkpoint or `undef` if it is absent,”
+- `cursor_pos()` means “return the live current parser cursor position directly,”
+- `cursor_line()` means “return the live current parser cursor line directly,”
+- `cursor_col()` means “return the live current parser cursor column directly,”
 - `entry_text()` means “return the current immediate match text directly,”
+- `entry_line()` means “return the 1-based line number of the current immediate match directly,”
+- `entry_col()` means “return the 1-based column number of the current immediate match directly,”
 - `entry_group(index)` means “return one capture group from the current immediate match directly,”
 - `entry_groups()` means “return the whole current immediate-match capture-group list directly,”
 - `entry_named(name)` means “return one named capture from the current immediate match directly,”
@@ -2099,6 +2127,8 @@ The current supported contract is:
 - `entry_start_pos()` means “return the left edge of the current immediate match directly,”
 - `entry_end_pos()` means “return the right edge of the current immediate match directly,”
 - `match_text()` means “return the current local match text directly,”
+- `match_line()` means “return the 1-based line number of the current local match directly,”
+- `match_col()` means “return the 1-based column number of the current local match directly,”
 - `match_group(index)` means “return one capture group from the current local match directly,”
 - `match_groups()` means “return the whole current local-match capture-group list directly,”
 - `match_named(name)` means “return one named capture from the current local match directly,”

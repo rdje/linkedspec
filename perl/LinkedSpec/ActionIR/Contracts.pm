@@ -145,6 +145,22 @@ sub _build_mark_trace_call {
 }
 
 #------------------------------------------------------------------------------
+# Function: _build_column_read_expr
+# Purpose : Build one shared 1-based column-read expression from a position
+#           expression over the current input string.
+# Args    : (%args)
+# Returns : emitted Perl expression string
+#------------------------------------------------------------------------------
+sub _build_column_read_expr {
+ my (%args) = @_;
+ my $pos_expr = $args{pos_expr};
+ my $undef_to_zero = $args{undef_to_zero} ? 1 : 0;
+ return 'do { my $__ls_col_pos = '.$pos_expr.'; '
+  .($undef_to_zero ? '$__ls_col_pos = 0 unless defined($__ls_col_pos); ' : '')
+  .'if (defined($__ls_col_pos)) { my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) } else { undef } }'
+}
+
+#------------------------------------------------------------------------------
 # Function: _build_call_and_dispatch_contracts
 # Purpose : Contracts that dispatch/call parser handlers and push results.
 #------------------------------------------------------------------------------
@@ -467,6 +483,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bcapture_slice_line\s*\(\s*\)/do { my \$__ls_capture_pos = defined(\$IPOS) ? \$IPOS : 0; 1 + (() = substr(\$\$STRING, 0, \$__ls_capture_pos) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_slice_col',
+   ir_node            => 'CAPTURE_SLICE_COL_READ',
+   diag_name          => 'capture_slice_col',
+   unresolved_pattern => qr/\bcapture_slice_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcapture_slice_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS', undef_to_zero => 1)/gex;
     return $code
    },
   },
@@ -802,6 +829,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_col',
+   ir_node            => 'MARK_COL_READ',
+   diag_name          => 'mark_col',
+   unresolved_pattern => qr/\bmark_col\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_col\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; '. _build_column_read_expr(pos_expr => '$__ls_mark') .' }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'cursor_pos',
    ir_node            => 'CURSOR_POS_READ',
    diag_name          => 'cursor_pos',
@@ -820,6 +862,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bcursor_line\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; 1 + (() = substr(\$\$STRING, 0, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'cursor_col',
+   ir_node            => 'CURSOR_COL_READ',
+   diag_name          => 'cursor_col',
+   unresolved_pattern => qr/\bcursor_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bcursor_col\s*\(\s*\)/_build_column_read_expr(pos_expr => 'pos $$STRING', undef_to_zero => 1)/gex;
     return $code
    },
   },
@@ -920,6 +973,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bentry_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS - length \$IMATCH) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'entry_col',
+   ir_node            => 'IMATCH_COL_READ',
+   diag_name          => 'entry_col',
+   unresolved_pattern => qr/\bentry_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS - length $IMATCH')/gex;
     return $code
    },
   },
@@ -1086,6 +1150,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bmatch_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_col',
+   ir_node            => 'MATCH_COL_READ',
+   diag_name          => 'match_col',
+   unresolved_pattern => qr/\bmatch_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS - length $LMATCH')/gex;
     return $code
    },
   },

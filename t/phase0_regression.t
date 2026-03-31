@@ -11517,6 +11517,37 @@ SPEC
     my $line_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_line(body_start)');
     like($line_rewrite, qr/defined\(\$__ls_mark\) \? \(1 \+ \(\(\) = substr\(\$\$STRING, 0, \$__ls_mark\) =~ \/\\n\/g\)\) : undef/, 'mark_line(name) lowering reads the stored rule-local mark line without mutating it');
 };
+subtest 'named_mark_mark_col_reads_rule_local_checkpoint_column' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, begin_col, end_col) }
+/foo /
+ @mark(body_start)
+/bar /
+/baz/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body"); assign(scalar(begin_col), mark_col(body_start)) }
+ -> Top[2] { mark_match_start(end_mark); assign(scalar(end_col), mark_col(end_mark)); return(array("?Top:", scalar(begin_col), scalar(end_col), mark_col(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for mark_col(name) column-read coverage');
+
+    my $input = 'foo bar baz';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 5, 9, undef],
+        'mark_col(name) returns the stored rule-local checkpoint column or undef when the mark is absent'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'mark_col(name) parse leaves runtime_ctx last_error clear on success');
+
+    my $col_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_col(body_start)');
+    like($col_rewrite, qr/rindex\(\$__ls_col_prefix, "\\n"\).*\(\$__ls_col_pos - \$__ls_col_last_newline\)/s, 'mark_col(name) lowering reads the stored rule-local mark column without mutating it');
+};
 subtest 'cursor_pos_reads_current_parser_position_without_named_mark' => sub {
     plan tests => 4;
 
@@ -11577,6 +11608,36 @@ SPEC
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_line()');
     like($rewrite, qr/pos \$\$STRING.*defined\(\$__ls_cursor_pos\) \? \$__ls_cursor_pos : 0/s, 'cursor_line() lowering reads the live current parser position before counting line breaks');
 };
+subtest 'cursor_col_reads_live_current_parser_column_without_named_mark' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_col, second_col, third_col) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(first_col), cursor_col()) }
+ -> Top[1] { assign(scalar(second_col), cursor_col()) }
+ -> Top[2] { assign(scalar(third_col), cursor_col()); return(array("?Top:", scalar(first_col), scalar(second_col), scalar(third_col), cursor_col(), match_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for cursor_col() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 5, 8, 9, 9, 8],
+        'cursor_col() tracks the live parser column across successive same-rule slots without relying on stored named marks'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'cursor_col() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'cursor_col()');
+    like($rewrite, qr/my \$__ls_col_pos = pos \$\$STRING;.*rindex\(\$__ls_col_prefix, "\\n"\)/s, 'cursor_col() lowering reads the live current parser position before computing the current column');
+};
 subtest 'capture_slice_line_reads_current_anonymous_capture_boundary_line' => sub {
     plan tests => 5;
 
@@ -11605,6 +11666,34 @@ SPEC
     my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_line()');
     like($rewrite, qr/defined\(\$IPOS\) \? \$IPOS : 0/s, 'capture_slice_line() lowering normalizes the current anonymous capture-boundary position before counting line breaks');
     like($rewrite, qr/substr\(\$\$STRING, 0, \$__ls_capture_pos\) =~ \/\\n\/g/, 'capture_slice_line() lowering counts line breaks from the current anonymous capture-boundary position');
+};
+subtest 'capture_slice_col_reads_current_anonymous_capture_boundary_column' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+/foo /
+-> Top[0] { start_capture_slice() }
+/\(/
+/\w+/
+-> Top[1] { return(array("?Top:", capture_slice_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_slice_col() coverage');
+
+    my $input = 'foo (bar';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 5],
+        'capture_slice_col() reports the current anonymous capture-boundary column after start_capture_slice() moves that boundary'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_slice_col() parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_col()');
+    like($rewrite, qr/my \$__ls_col_pos = \$IPOS;.*rindex\(\$__ls_col_prefix, "\\n"\)/s, 'capture_slice_col() lowering computes the current anonymous capture-boundary column from the stored boundary');
 };
 subtest 'capture_slice_pos_reads_current_anonymous_capture_boundary_position' => sub {
     plan tests => 4;
@@ -11757,6 +11846,39 @@ SPEC
 
     my $text_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_text()');
     like($text_rewrite, qr/\$IMATCH/, 'entry_text() lowering reads the current immediate match text directly without consulting stored marks');
+};
+subtest 'entry_and_match_column_helpers_read_immediate_and_local_match_columns' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_col_num, body_col_num) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_col_num), entry_col()); assign(scalar(body_col_num), match_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_col_num), scalar(body_col_num), entry_col(), match_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_col() and match_col() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 1, 5, 1, 8],
+        'entry_col() keeps the rule-entry column visible while match_col() follows the active local match column'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match column helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match column helper parse leaves runtime_ctx last_error clear on success');
+
+    my $column_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_col().'."\n".'match_col()');
+    like($column_rewrite, qr/\$IPOS - length \$IMATCH.*\$LSPOS - length \$LMATCH/s, 'entry_col() and match_col() lowering compute immediate and local columns directly from current match boundaries');
 };
 subtest 'entry_and_match_group_helpers_read_immediate_and_local_capture_groups' => sub {
     plan tests => 5;
@@ -36298,6 +36420,35 @@ SPEC
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }') >= 0, 'entry_line() lowers to a direct immediate-match line-number read');
     ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_line() lowers to a direct local-match line-number read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit cursor/line helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_column_number_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 15;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("capture", capture_slice_col(), "mark", mark_col(body_start), "cursor", cursor_col(), "entry", entry_col(), "match", match_col())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit column helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit column helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit column helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit column helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_SLICE_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_COL_READ');
+    ok(grep { $_ eq 'MARK_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_COL_READ');
+    ok(grep { $_ eq 'CURSOR_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CURSOR_COL_READ');
+    ok(grep { $_ eq 'IMATCH_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include IMATCH_COL_READ');
+    ok(grep { $_ eq 'MATCH_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MATCH_COL_READ');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("capture", capture_slice_col(), "mark", mark_col(body_start), "cursor", cursor_col(), "entry", entry_col(), "match", match_col()))');
+    ok(index($rewritten, 'my $__ls_col_pos = $IPOS;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'capture_slice_col() lowers to a direct anonymous capture-boundary column read');
+    ok(index($rewritten, q{body_start}) >= 0 && index($rewritten, 'my $__ls_col_pos = $__ls_mark;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'mark_col(name) lowers to a direct rule-local named-mark column read');
+    ok(index($rewritten, 'my $__ls_col_pos = pos $$STRING;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'cursor_col() lowers to a direct live current-cursor column read');
+    ok(index($rewritten, 'my $__ls_col_pos = $IPOS - length $IMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'entry_col() lowers to a direct immediate-match column read');
+    ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'match_col() lowers to a direct local-match column read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit column helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_slice_helpers_lower_without_raw_fallback' => sub {
     plan tests => 13;

@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-31 - Phase 4: add column helper family
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_col()`, `mark_col(name)`, `cursor_col()`, `entry_col()`, and `match_col()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock the new column-read family explicitly alongside the existing line-read helpers,
+- refreshed the user guides so the anonymous capture-boundary, named-checkpoint, live-cursor, immediate-match, and local-match surfaces now teach the new 1-based column helpers directly,
+- refreshed roadmap/continuity notes so future resume treats the new column family as another real Phase 4 helper-surface slice rather than ad hoc position math.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-29 - Phase 4: spend entry_groups in vhdl helper returns
 
 - migrated `specs/vhdl.spec::subprogram_declaration`, `subprogram_body`, and `type_declaration` from `flat_array(IMATCH_LIST)` onto `flat_array(entry_groups())`,
