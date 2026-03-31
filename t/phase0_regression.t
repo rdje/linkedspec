@@ -12155,6 +12155,72 @@ SPEC
     my $end_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_end_pos()');
     like($start_rewrite . "\n" . $end_rewrite, qr/\$IPOS - length \$IMATCH.*\$IPOS/s, 'entry position helper lowering reads the current immediate match left and right edges directly');
 };
+subtest 'entry_and_match_end_line_helpers_read_immediate_and_local_right_edge_lines' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_end_line_seen, body_end_line_seen) }
+ /\w+\n/
+ /\w+/
+ -> Child[0] { assign(scalar(entry_end_line_seen), entry_end_line()); assign(scalar(body_end_line_seen), match_end_line()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_end_line_seen), scalar(body_end_line_seen), entry_end_line(), match_end_line())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_end_line() and match_end_line() coverage');
+
+    my $input = "foo\nbar\nbaz";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 2, 3, 2, 3],
+        'entry_end_line() keeps the immediate right-edge line stable while match_end_line() follows the active local right edge'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match end-line helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match end-line helper parse leaves runtime_ctx last_error clear on success');
+
+    my $line_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_end_line().'."\n".'match_end_line()');
+    like($line_rewrite, qr/substr\(\$\$STRING, 0, \$IPOS\).*\bsubstr\(\$\$STRING, 0, \$LSPOS\)/s, 'entry_end_line() and match_end_line() lowering count line breaks from the immediate and local right-edge positions directly');
+};
+subtest 'entry_and_match_end_col_helpers_read_immediate_and_local_right_edge_columns' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_end_col_seen, body_end_col_seen) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_end_col_seen), entry_end_col()); assign(scalar(body_end_col_seen), match_end_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_end_col_seen), scalar(body_end_col_seen), entry_end_col(), match_end_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_end_col() and match_end_col() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 5, 8, 5, 9],
+        'entry_end_col() keeps the immediate right-edge column stable while match_end_col() follows the active local right edge'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match end-column helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match end-column helper parse leaves runtime_ctx last_error clear on success');
+
+    my $col_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_end_col().'."\n".'match_end_col()');
+    like($col_rewrite, qr/my \$__ls_col_pos = \$IPOS;.*my \$__ls_col_pos = \$LSPOS;/s, 'entry_end_col() and match_end_col() lowering compute immediate and local right-edge columns directly');
+};
 subtest 'multi_rule_parsers_default_to_first_rule_and_honor_explicit_top_rule_option' => sub {
     plan tests => 4;
 

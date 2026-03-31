@@ -1318,6 +1318,72 @@ If the immediate entry match is `foo(` inside `foo(bar)`, then `entry_end_pos()`
 
 Use it when the rule wants the right boundary of the immediate entry match that led into the current rule instead of the right boundary of the currently active local match.
 
+### `entry_end_line()`
+Return the 1-based line number of the right edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the line where the immediate entry match ended,
+- prefer it over manual newline counting around `entry_end_pos()`,
+- and treat it as the direct right-edge line companion to `entry_start_pos()` / `entry_end_pos()`.
+
+If the immediate entry match is `foo\n` inside `foo\nbar\nbaz`, then `entry_end_line()` returns `2`.
+
+Example:
+
+```text
+entry_end_line()
+```
+
+```text
+Top::AND
+ /foo\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_end_line_seen, body_end_line_seen) }
+ /\w+\n/
+ /\w+/
+ -> Child[0] { assign(scalar(entry_end_line_seen), entry_end_line()); assign(scalar(body_end_line_seen), match_end_line()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_end_line_seen), scalar(body_end_line_seen), entry_end_line(), match_end_line())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the line containing the parser position just after the immediate entry match that led into the current rule.
+
+### `entry_end_col()`
+Return the 1-based column number of the right edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the column where the immediate entry match ended,
+- prefer it over manual same-line arithmetic around `entry_end_pos()`,
+- and treat it as the direct right-edge column companion to `entry_start_pos()` / `entry_end_pos()`.
+
+If the immediate entry match is `foo(` inside `foo(bar)`, then `entry_end_col()` returns `5`.
+
+Example:
+
+```text
+entry_end_col()
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_end_col_seen, body_end_col_seen) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_end_col_seen), entry_end_col()); assign(scalar(body_end_col_seen), match_end_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_end_col_seen), scalar(body_end_col_seen), entry_end_col(), match_end_col())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants the column containing the parser position just after the immediate entry match that led into the current rule.
+
 ### `match_text()`
 Return the current local match text directly.
 
@@ -1619,6 +1685,63 @@ Practical reading:
 If the current local match is `bar` inside `foo(bar)`, then `match_end_pos()` returns the position just after `bar`.
 
 Use it when the rule wants the current local match right edge immediately instead of reading a previously stored checkpoint.
+
+### `match_end_line()`
+Return the 1-based line number of the right edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the line where the current local match ended,
+- prefer it over manual newline counting around `match_end_pos()`,
+- and treat it as the direct right-edge line companion to `match_start_pos()` / `match_end_pos()`.
+
+If the current local match is `bar\n` inside `foo\nbar\nbaz`, then `match_end_line()` returns `3`.
+
+Example:
+
+```text
+match_end_line()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_end_line, body_end_line) }
+ /foo\n/
+ /\w+\n/
+ /\w+/
+ -> Top[0] { assign(scalar(open_end_line), match_end_line()) }
+ -> Top[1] { assign(scalar(body_end_line), match_end_line()) }
+ -> Top[2] { return(array("?Top:", scalar(open_end_line), scalar(body_end_line), match_end_line())) }
+```
+
+Use it when the rule wants the line containing the parser position just after the current local match.
+
+### `match_end_col()`
+Return the 1-based column number of the right edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the column where the current local match ended,
+- prefer it over manual same-line arithmetic around `match_end_pos()`,
+- and treat it as the direct right-edge column companion to `match_start_pos()` / `match_end_pos()`.
+
+If the current local match is `bar` inside `foo(bar)`, then `match_end_col()` returns `8`.
+
+Example:
+
+```text
+match_end_col()
+```
+
+```text
+Top::AND
+ I { declare(scalar, body_end_col) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[1] { assign(scalar(body_end_col), match_end_col()) }
+ -> Top[2] { return(array("?Top:", scalar(body_end_col), match_end_col())) }
+```
+
+Use it when the rule wants the column containing the parser position just after the current local match.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` inside code blocks,

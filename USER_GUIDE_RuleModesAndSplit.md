@@ -2016,6 +2016,11 @@ Use `entry_start_pos()` and `entry_end_pos()` when:
 - child-rule logic should keep those entry boundaries visible while local match boundaries continue to move forward,
 - or the rule wants backend-neutral replacements for raw `$IPOS - length($IMATCH)` and `$IPOS` in normal user-facing `.spec` code.
 
+Use `entry_end_line()` and `entry_end_col()` when:
+- the rule wants the human-readable line or column of the immediate entry-match right edge that led into the current rule,
+- child-rule logic should keep that entry right-edge location visible while local right-edge location continues to move forward,
+- or the rule wants backend-neutral replacements for manual line/column math around `entry_end_pos()` in normal user-facing `.spec` code.
+
 Use `match_text()` when:
 - the rule wants the current local match text itself as data,
 - there is no need to store a named checkpoint for later reuse,
@@ -2045,6 +2050,11 @@ Use `match_start_pos()` and `match_end_pos()` when:
 - the rule wants the current local match boundaries themselves as data,
 - there is no need to store a named checkpoint for later reuse,
 - or the rule wants to teach or debug the distinction between the current match and a separately remembered mark.
+
+Use `match_end_line()` and `match_end_col()` when:
+- the rule wants the human-readable line or column of the current local-match right edge,
+- there is no need to store a named checkpoint for later reuse,
+- or the rule wants backend-neutral replacements for manual line/column math around `match_end_pos()` in normal user-facing `.spec` code.
 
 Documentation note:
 - this guide prefers backend-neutral helper forms such as `return(payload)`, `assign(...)`, and `call(rule)` in code blocks,
@@ -2126,6 +2136,8 @@ The current supported contract is:
 - `entry_len()` means “return the width of the current immediate match directly,”
 - `entry_start_pos()` means “return the left edge of the current immediate match directly,”
 - `entry_end_pos()` means “return the right edge of the current immediate match directly,”
+- `entry_end_line()` means “return the 1-based line number of the current immediate-match right edge directly,”
+- `entry_end_col()` means “return the 1-based column number of the current immediate-match right edge directly,”
 - `match_text()` means “return the current local match text directly,”
 - `match_line()` means “return the 1-based line number of the current local match directly,”
 - `match_col()` means “return the 1-based column number of the current local match directly,”
@@ -2138,6 +2150,8 @@ The current supported contract is:
 - `match_len()` means “return the width of the current local match directly,”
 - `match_start_pos()` means “return the left edge of the current local match directly,”
 - `match_end_pos()` means “return the right edge of the current local match directly,”
+- `match_end_line()` means “return the 1-based line number of the current local-match right edge directly,”
+- `match_end_col()` means “return the 1-based column number of the current local-match right edge directly,”
 - named marks are rule-local, so different rules can reuse the same mark name without colliding,
 - and marks are a later-slot surface, so same-slot actions should not expect a freshly written mark yet,
 - and any further grouped-rule strategy expansion is demand-driven future work rather than part of the current syntax contract.

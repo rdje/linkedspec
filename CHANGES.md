@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-03-31 - Phase 4: add immediate/local right-edge line and column helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `entry_end_line()`, `entry_end_col()`, `match_end_line()`, and `match_end_col()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so runtime helper coverage now locks both the multi-line right-edge line semantics and the same-line right-edge column semantics for immediate-entry versus current-local match reads,
+- refreshed the user guides so the immediate/local match helper families now expose a full right-edge location surface: position, line, and column,
+- refreshed roadmap/continuity notes so future resume treats these right-edge line/column readers as another real Phase 4 feature slice rather than ad hoc `entry_end_pos()` / `match_end_pos()` follow-up math.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-03-31 - Phase 4: add column helper family
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_slice_col()`, `mark_col(name)`, `cursor_col()`, `entry_col()`, and `match_col()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

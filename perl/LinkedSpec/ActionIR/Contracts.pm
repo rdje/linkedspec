@@ -1021,6 +1021,28 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_end_line',
+   ir_node            => 'IMATCH_END_LINE_READ',
+   diag_name          => 'entry_end_line',
+   unresolved_pattern => qr/\bentry_end_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'entry_end_col',
+   ir_node            => 'IMATCH_END_COL_READ',
+   diag_name          => 'entry_end_col',
+   unresolved_pattern => qr/\bentry_end_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS', undef_to_zero => 1)/gex;
+    return $code
+   },
+  },
+  {
    id                 => 'match_start_pos',
    ir_node            => 'MATCH_START_POS_READ',
    diag_name          => 'match_start_pos',
@@ -1139,6 +1161,28 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bmatch_end_pos\s*\(\s*\)/do { \$LSPOS }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_end_line',
+   ir_node            => 'MATCH_END_LINE_READ',
+   diag_name          => 'match_end_line',
+   unresolved_pattern => qr/\bmatch_end_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_end_col',
+   ir_node            => 'MATCH_END_COL_READ',
+   diag_name          => 'match_end_col',
+   unresolved_pattern => qr/\bmatch_end_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS', undef_to_zero => 1)/gex;
     return $code
    },
   },

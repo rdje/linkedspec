@@ -73,6 +73,8 @@ sub try_scan_contract_ir_events {
   'entry_len' => \&_scan_contract_entry_len,
   'entry_start_pos' => \&_scan_contract_entry_start_pos,
   'entry_end_pos' => \&_scan_contract_entry_end_pos,
+  'entry_end_line' => \&_scan_contract_entry_end_line,
+  'entry_end_col' => \&_scan_contract_entry_end_col,
   'match_text' => \&_scan_contract_match_text,
   'match_group' => \&_scan_contract_match_group,
   'match_groups' => \&_scan_contract_match_groups,
@@ -83,6 +85,8 @@ sub try_scan_contract_ir_events {
   'match_len' => \&_scan_contract_match_len,
   'match_start_pos' => \&_scan_contract_match_start_pos,
   'match_end_pos' => \&_scan_contract_match_end_pos,
+  'match_end_line' => \&_scan_contract_match_end_line,
+  'match_end_col' => \&_scan_contract_match_end_col,
   'match_line' => \&_scan_contract_match_line,
   'match_col' => \&_scan_contract_match_col,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
@@ -600,6 +604,24 @@ while ($code =~ /\bentry_end_pos\s*\(\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_entry_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
 sub _scan_contract_match_text {
  my ($code) = @_;
  my @events;
@@ -685,6 +707,24 @@ sub _scan_contract_match_end_pos {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_end_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_end_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
