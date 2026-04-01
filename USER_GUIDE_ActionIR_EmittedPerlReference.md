@@ -357,6 +357,8 @@ Important nuance:
 - `cursor_rest_len()` -> `do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }`
 - `input_text()` -> `do { $$STRING }`
 - `input_len()` -> `do { length($$STRING) }`
+- `input_end_line()` -> `do { 1 + (() = substr($$STRING, 0, length($$STRING)) =~ /\n/g) }`
+- `input_end_col()` -> `do { my $__ls_col_pos = length($$STRING); my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) }`
 - `capture_rest_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark) : undef }`
 - `capture_rest_len_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }`
 - `capture_until_cursor_from(body_start)` -> `do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'current_rule'}) eq 'HASH') ? $$info{marks}{'current_rule'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? substr($$STRING, $__ls_mark, $__ls_cursor - $__ls_mark) : undef }`
@@ -462,6 +464,8 @@ Important nuance:
 - `cursor_rest_len()` reads the width of that same current parser-cursor tail directly from one live `pos $$STRING` read, without consulting the rule-local mark bucket.
 - `input_text()` reads the whole current input directly as `do { $$STRING }`, so it ignores the live parser cursor, the rule-local mark bucket, and the narrower entry/local match surfaces completely.
 - `input_len()` reads the width of that same whole current input directly as `do { length($$STRING) }`, so it is the whole-input numeric companion to `input_text()`.
+- `input_end_line()` reads the 1-based line number of the whole-input right edge directly from the full current `$$STRING`, so it stays fixed even when the live parser cursor is still earlier in the input.
+- `input_end_col()` reads the 1-based column number of that same whole-input right edge directly from `length($$STRING)`, so it is the right-edge whole-input column companion to `input_end_line()`.
 - `entry_text()` reads the current immediate match text directly as `do { $IMATCH }`, without consulting the rule-local mark bucket.
 - `entry_line()` reads the current immediate match line directly as `do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }`, without consulting the rule-local mark bucket.
 - `entry_start_line()` reads that same immediate-match left-edge line directly with a more explicit start-edge name, lowering identically to `entry_line()`.

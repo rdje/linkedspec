@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-01 - Phase 4: add whole-input end-location helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `input_end_line()` and `input_end_col()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so exact rewrite coverage now locks both whole-input end-location lowerings, runtime coverage now locks the “whole-input right-edge location stays stable even inside child-rule code where entry/local right-edge helpers expose narrower boundaries” semantics, and ActionIR coverage now locks the new canonical nodes plus no-raw-fallback lowering,
+- expanded the user guides with rationale plus worked examples so the whole-input family now teaches text, width, and right-edge line/column together instead of leaving users to infer end-of-input location from raw `length($$STRING)` plus newline math or from explicit absolute marks,
+- refreshed roadmap/continuity notes so future resume treats whole-input right-edge line/column reads as covered Phase 4 helper surface now rather than as another reason to fall back to raw whole-input math.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add whole-input read helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `input_text()` and `input_len()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

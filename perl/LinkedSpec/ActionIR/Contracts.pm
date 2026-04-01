@@ -1304,6 +1304,28 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'input_end_line',
+   ir_node            => 'INPUT_END_LINE_READ',
+   diag_name          => 'input_end_line',
+   unresolved_pattern => qr/\binput_end_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\binput_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, length(\$\$STRING)) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'input_end_col',
+   ir_node            => 'INPUT_END_COL_READ',
+   diag_name          => 'input_end_col',
+   unresolved_pattern => qr/\binput_end_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\binput_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => 'length($$STRING)', undef_to_zero => 1)/gex;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_text',
    ir_node            => 'IMATCH_TEXT_READ',
    diag_name          => 'entry_text',

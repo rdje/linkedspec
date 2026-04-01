@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 86;
+    plan tests => 88;
 
     my $label = 'Top';
 
@@ -11126,6 +11126,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'input_len()'),
         q{do { length($$STRING) }},
         'input_len() helper rewrite preserves explicit whole-input width-read semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'input_end_line()'),
+        q{do { 1 + (() = substr($$STRING, 0, length($$STRING)) =~ /\n/g) }},
+        'input_end_line() helper rewrite preserves explicit whole-input right-edge line-read semantics'
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'input_end_col()'),
+        qr/my \$__ls_col_pos = length\(\$\$STRING\);.*rindex\(\$__ls_col_prefix, "\\n"\)/s,
+        'input_end_col() helper rewrite preserves explicit whole-input right-edge column-read semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_text()'),
@@ -11420,6 +11430,38 @@ SPEC
 
     my $len_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'input_len()');
     like($len_rewrite, qr/length\(\$\$STRING\)/, 'input_len() lowering reads the whole input width directly from $$STRING');
+};
+subtest 'whole_input_end_location_helpers_ignore_cursor_and_rule_entry' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, whole_end_line, whole_end_col) }
+ /bar/
+ /\n\)/
+ -> Child[0] { assign(scalar(whole_end_line), input_end_line()); assign(scalar(whole_end_col), input_end_col()) }
+ -> Child[1] { return(array("?Child:", scalar(whole_end_line), scalar(whole_end_col), input_end_line(), input_end_col(), entry_end_line(), entry_end_col(), match_end_line(), match_end_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for whole-input end-location helper coverage');
+
+    my $input = "foo(\nbar\n)";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 3, 2, 3, 2, 2, 1, 3, 2],
+        'input_end_line() and input_end_col() keep reading the whole-input right edge even inside child-rule code where entry/local right-edge helpers expose narrower boundaries'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'whole-input end-location helper parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Child', 'input_end_line().'."\n".'input_end_col()');
+    like($rewrite, qr/length\(\$\$STRING\).*\bmy \$__ls_col_pos = length\(\$\$STRING\);/s, 'whole-input end-location helper lowering reads the whole-input right edge directly from $$STRING');
 };
 subtest 'anonymous_capture_take_advances_capture_boundary_like_split_cursor' => sub {
     plan tests => 4;
@@ -37672,11 +37714,11 @@ SPEC
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit absolute input-boundary mark helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_whole_input_read_helpers_lower_without_raw_fallback' => sub {
-    plan tests => 10;
+    plan tests => 14;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash("text", input_text(), "width", input_len())) }
+ /a/ -> Top { return(hash("text", input_text(), "width", input_len(), "end_line", input_end_line(), "end_col", input_end_col())) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -37688,11 +37730,15 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'explicit whole-input read helpers keep unresolved-helper count at zero');
     ok(grep { $_ eq 'INPUT_TEXT_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_TEXT_READ');
     ok(grep { $_ eq 'INPUT_LEN_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_LEN_READ');
+    ok(grep { $_ eq 'INPUT_END_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_END_LINE_READ');
+    ok(grep { $_ eq 'INPUT_END_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_END_COL_READ');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("text", input_text(), "width", input_len()))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("text", input_text(), "width", input_len(), "end_line", input_end_line(), "end_col", input_end_col()))');
     ok(index($rewritten, q{do { $$STRING }}) >= 0, 'input_text() lowers to a direct whole-input string read');
     ok(index($rewritten, q{do { length($$STRING) }}) >= 0, 'input_len() lowers to a direct whole-input width read');
-    ok(index($rewritten, q{input_text()}) < 0 && index($rewritten, q{input_len()}) < 0, 'whole-input helper reads are fully lowered inside the same return block');
+    ok(index($rewritten, q{substr($$STRING, 0, length($$STRING)) =~ /\n/g}) >= 0, 'input_end_line() lowers to a direct whole-input right-edge line read');
+    ok(index($rewritten, q{my $__ls_col_pos = length($$STRING);}) >= 0, 'input_end_col() lowers to a direct whole-input right-edge column read');
+    ok(index($rewritten, q{input_text()}) < 0 && index($rewritten, q{input_len()}) < 0 && index($rewritten, q{input_end_line()}) < 0 && index($rewritten, q{input_end_col()}) < 0, 'whole-input helper reads are fully lowered inside the same return block');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit whole-input read helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {

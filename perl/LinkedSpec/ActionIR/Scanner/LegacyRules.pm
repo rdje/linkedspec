@@ -90,6 +90,8 @@ sub try_scan_contract_ir_events {
   'cursor_rest_len' => \&_scan_contract_cursor_rest_len,
   'input_text' => \&_scan_contract_input_text,
   'input_len' => \&_scan_contract_input_len,
+  'input_end_line' => \&_scan_contract_input_end_line,
+  'input_end_col' => \&_scan_contract_input_end_col,
   'entry_text' => \&_scan_contract_entry_text,
   'entry_group' => \&_scan_contract_entry_group,
   'entry_groups' => \&_scan_contract_entry_groups,
@@ -785,6 +787,24 @@ sub _scan_contract_input_len {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_end_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events

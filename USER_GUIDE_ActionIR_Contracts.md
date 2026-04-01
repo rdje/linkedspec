@@ -2095,6 +2095,100 @@ the practical reading is:
 
 Use it when the rule wants the width of the whole current input directly, even in code that is otherwise reasoning about narrower entry or local-match widths.
 
+### `input_end_line()`
+Return the 1-based line number of the whole-input right edge directly.
+
+Practical reading:
+- use it when the rule wants to report or compare the end-of-input line even while the live parser cursor is still earlier,
+- prefer it over raw newline counting across `$$STRING` in normal user-facing `.spec` examples,
+- prefer it over `cursor_line()` when the rule wants the fixed whole-input end location rather than the live current parser position,
+- prefer it over `mark_input_end(name)` plus `mark_line(name)` when the rule does not need to store that absolute end boundary under a reusable named checkpoint first,
+- and treat it as the whole-input right-edge line companion to `input_end_col()`.
+
+Simple form:
+
+```text
+input_end_line()
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, file_end_line, entry_end_line_seen, body_end_line_seen) }
+ /bar/
+ /\n\)/
+ -> Child[0] { assign(scalar(file_end_line), input_end_line()); assign(scalar(entry_end_line_seen), entry_end_line()); assign(scalar(body_end_line_seen), match_end_line()) }
+ -> Child[1] { return(array("?Child:", scalar(file_end_line), input_end_line(), scalar(entry_end_line_seen), scalar(body_end_line_seen), entry_end_line(), match_end_line())) }
+```
+
+On input:
+
+```text
+foo(
+bar
+)
+```
+
+the practical reading is:
+- `input_end_line()` returns `3` because the whole current input ends on line 3,
+- `entry_end_line()` returns `2` because the immediate entry match `foo(\n` ends at the start of line 2,
+- `match_end_line()` later returns `3` because the current local right edge has moved to the `\n)` match,
+- and `input_end_line()` stays fixed at `3` the whole time because whole-input end reads ignore the advancing live cursor and narrower local/entry boundaries.
+
+Use it when diagnostics or metadata should refer to where the whole current input ends, not where the parser currently is.
+
+### `input_end_col()`
+Return the 1-based column number of the whole-input right edge directly.
+
+Practical reading:
+- use it when the rule wants the end-of-input column even while the live parser cursor is still earlier,
+- prefer it over raw end-of-input same-line math in normal user-facing `.spec` examples,
+- prefer it over `cursor_col()` when the rule wants the fixed whole-input end location rather than the live current parser position,
+- prefer it over `mark_input_end(name)` plus `mark_col(name)` when the rule does not need a reusable named checkpoint first,
+- and treat it as the whole-input right-edge column companion to `input_end_line()`.
+
+Simple form:
+
+```text
+input_end_col()
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, file_end_col, entry_end_col_seen, body_end_col_seen) }
+ /bar/
+ /\n\)/
+ -> Child[0] { assign(scalar(file_end_col), input_end_col()); assign(scalar(entry_end_col_seen), entry_end_col()); assign(scalar(body_end_col_seen), match_end_col()) }
+ -> Child[1] { return(array("?Child:", scalar(file_end_col), input_end_col(), scalar(entry_end_col_seen), scalar(body_end_col_seen), entry_end_col(), match_end_col())) }
+```
+
+On input:
+
+```text
+foo(
+bar
+)
+```
+
+the practical reading is:
+- `input_end_col()` returns `2` because the whole current input ends just after `)` on line 3,
+- `entry_end_col()` returns `1` because the immediate entry match `foo(\n` ends at the start of line 2,
+- `match_end_col()` later returns `2` because the current local right edge has moved to just after the final `)` match,
+- and `input_end_col()` stays fixed at `2` even while the rule’s live cursor and local right edge move independently.
+
+Use it when diagnostics or metadata should point to the column where the whole current input ends, not merely to the current parser cursor or one immediate/local match boundary.
+
 ### `entry_text()`
 Return the current immediate match text directly.
 
