@@ -1009,6 +1009,36 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_input_start',
+   ir_node            => 'MARK_INPUT_START',
+   diag_name          => 'mark_input_start',
+   unresolved_pattern => qr/\bmark_input_start\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_input_start\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = 0; '. _build_mark_trace_call(operation => 'mark_input_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; 1 }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'mark_input_end',
+   ir_node            => 'MARK_INPUT_END',
+   diag_name          => 'mark_input_end',
+   unresolved_pattern => qr/\bmark_input_end\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_input_end\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = length($$STRING); '. _build_mark_trace_call(operation => 'mark_input_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; 1 }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'mark_here',
    ir_node            => 'MARK_HERE',
    diag_name          => 'mark_here',

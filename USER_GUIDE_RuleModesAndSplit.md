@@ -2214,6 +2214,18 @@ Use `mark_col(name)` when:
 - later diagnostics should report where a named checkpoint landed on its line without first round-tripping through `mark_pos(name)`,
 - or the rule needs explicit column metadata for one remembered boundary without mutating the checkpoint.
 
+Use `mark_input_start(name)` when:
+- the rule should remember the absolute start of the current input string under an explicit named checkpoint,
+- later same-rule logic should reason about whole-input spans without inferring that left edge from rule entry or the anonymous capture boundary,
+- the helper should remain safe as a standalone writer statement even when that stored boundary is `0`,
+- or the rule wants a backend-neutral replacement for manually writing `0` into one named mark slot.
+
+Use `mark_input_end(name)` when:
+- the rule should remember the absolute end of the current input string under an explicit named checkpoint,
+- later same-rule logic should reason about whole-input right edges without inferring that boundary from the current parser cursor,
+- the helper should remain safe as a standalone writer statement even when that stored boundary happens to be `0`,
+- or the rule wants a backend-neutral replacement for manually writing `length($$STRING)` into one named mark slot.
+
 Use `cursor_col()` when:
 - the rule should expose the live current parser column directly,
 - later logic should compare or report same-line cursor movement without storing a checkpoint first,
@@ -2423,6 +2435,7 @@ The current supported contract is:
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
+- `mark_input_start(name)` and `mark_input_end(name)` are the preferred absolute whole-input boundary writers when the rule wants explicit named checkpoints for the input start or input end,
 - `@capture_from_here` and `@move_pos` remain supported compatibility aliases for the same lowering,
 - `capture_from(name)` currently means “text from the named checkpoint up to the left edge of the current match,”
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
@@ -2441,6 +2454,9 @@ The current supported contract is:
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `capture_len_between(start_mark, end_mark)` means “the numeric length of that same explicit two-mark span or `undef` when either mark is absent or reversed,”
 - `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”
+- `mark_input_start(name)` means “set or overwrite that named checkpoint at the absolute start of the current input string,”
+- `mark_input_end(name)` means “set or overwrite that named checkpoint at the absolute end of the current input string,”
+- `mark_input_start(name)` and `mark_input_end(name)` are meant to be followed by explicit readers like `mark_pos(name)` or `capture_between(...)`, and they now lower as safe standalone writer statements even when the stored boundary itself is `0`,
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
 - `mark_capture_slice(name)` means “set or overwrite that named checkpoint from the current anonymous split-boundary position,”

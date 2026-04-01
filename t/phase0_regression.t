@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 82;
+    plan tests => 84;
 
     my $label = 'Top';
 
@@ -11041,6 +11041,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_take_between_len(body_start, first_end)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = ($__ls_end - $__ls_start); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_between_len', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture_len } else { undef } }},
         'capture_take_between_len(start_mark,end_mark) helper rewrite preserves explicit two-mark span-length plus advancing-start semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_input_start(file_start)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'file_start'} = 0; _trace_runtime_mark_event(operation => 'mark_input_start', rule_label => 'Top', mark_name => 'file_start', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'file_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); 1 }},
+        'mark_input_start(name) helper rewrite preserves explicit absolute input-start mark semantics while remaining safe as a standalone writer statement'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_input_end(file_end)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'file_end'} = length($$STRING); _trace_runtime_mark_event(operation => 'mark_input_end', rule_label => 'Top', mark_name => 'file_end', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'file_end'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); 1 }},
+        'mark_input_end(name) helper rewrite preserves explicit absolute input-end mark semantics while remaining safe as a standalone writer statement'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
@@ -11339,6 +11349,35 @@ SPEC
 
     my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'capture_from(body_start)');
     like($capture_rewrite, qr/\$\$info\{marks\}\{'Child'\}/, 'capture_from(name) lowering is explicitly scoped to the current rule label');
+};
+subtest 'absolute_input_boundary_mark_writers_seed_named_checkpoints' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, input_start_seen, input_end_seen) }
+ /foo\(/
+ @mark(body_start)
+ /bar\)/
+ -> Top[0] { mark_input_start(file_start); mark_input_end(file_end); assign(scalar(input_start_seen), mark_pos(file_start)); assign(scalar(input_end_seen), mark_pos(file_end)) }
+ -> Top[1] { return(array("?Top:", scalar(input_start_seen), scalar(input_end_seen), capture_between(file_start, file_end), capture_between(body_start, file_end))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for absolute input-boundary mark writer coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 0, 8, 'foo(bar)', 'bar)'],
+        'mark_input_start(name) and mark_input_end(name) seed stable named checkpoints for absolute whole-input boundaries independently of the current cursor or current match'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'absolute input-boundary mark writer parse leaves runtime_ctx last_error clear on success');
+
+    my $end_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_input_end(file_end)');
+    like($end_rewrite, qr/\{'file_end'\} = length\(\$\$STRING\)/, 'mark_input_end(name) lowering stores the absolute input end instead of the current parser cursor');
 };
 subtest 'anonymous_capture_take_advances_capture_boundary_like_split_cursor' => sub {
     plan tests => 4;
@@ -37563,6 +37602,32 @@ SPEC
     ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'start_capture_slice_from(name) lowers through the stored rule-local named mark bucket');
     ok(index($rewritten, q{defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef}) >= 0, 'start_capture_slice_from(name) lowers to a direct anonymous-boundary restore from the named mark');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous/named boundary bridge helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_absolute_input_mark_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 12;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { mark_input_start(file_start); mark_input_end(file_end); return(hash("start", mark_pos(file_start), "end", mark_pos(file_end))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit absolute input-boundary mark helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit absolute input-boundary mark helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit absolute input-boundary mark helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit absolute input-boundary mark helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'MARK_INPUT_START' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_INPUT_START');
+    ok(grep { $_ eq 'MARK_INPUT_END' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_INPUT_END');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'mark_input_start(file_start); mark_input_end(file_end); return(hash("start", mark_pos(file_start), "end", mark_pos(file_end)))');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'file_start'} = 0;}) >= 0, 'mark_input_start(name) lowers to a direct absolute input-start mark write');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'file_end'} = length($$STRING);}) >= 0, 'mark_input_end(name) lowers to a direct absolute input-end mark write');
+    ok(index($rewritten, q{operation => 'mark_input_start'}) >= 0, 'mark_input_start(name) retains mark trace instrumentation');
+    ok(index($rewritten, q{operation => 'mark_input_end'}) >= 0, 'mark_input_end(name) retains mark trace instrumentation');
+    ok(index($rewritten, q{mark_pos(file_start)}) < 0 && index($rewritten, q{mark_pos(file_end)}) < 0, 'mark_pos(name) helper reads are fully lowered inside the same explicit writer/read return block');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit absolute input-boundary mark helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;

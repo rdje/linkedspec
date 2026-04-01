@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-01 - Phase 4: add absolute input-boundary mark writers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `mark_input_start(name)` and `mark_input_end(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback, with safe standalone-writer semantics even when the stored absolute boundary is `0`,
+- widened `t/phase0_regression.t` so exact rewrite coverage now locks the new absolute-boundary mark writes, runtime coverage now locks the “remember absolute input start/end under stable named checkpoints” semantics, and ActionIR coverage now locks the new canonical nodes plus no-raw-fallback lowering,
+- expanded the user guides with rationale plus worked examples so the mark family now teaches absolute whole-input boundary writers explicitly instead of leaving users to infer them from `mark_here(name)`, `mark_entry_*()`, or raw `0` / `length($$STRING)` plumbing,
+- refreshed roadmap/continuity notes so future resume treats absolute input-boundary writers as covered Phase 4 helper surface now rather than as another remaining checkpoint gap.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add advancing current-edge width helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take_len()` and `capture_take_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

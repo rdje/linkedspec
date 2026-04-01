@@ -1356,6 +1356,88 @@ On input `fooalphabetaEND`:
 
 Use it when the rule wants explicit remembered-boundary width metadata plus the same rolling-start behavior as `capture_take_between(start_mark, end_mark)`.
 
+### `mark_input_start(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the absolute start of the current input string.
+
+In practice, that means the stored mark becomes `0` even if the current rule has already consumed text, entered from a child-rule handoff, or moved the live parser cursor elsewhere.
+
+In high/debug trace mode, this explicit write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+This helper is designed first as a write helper. In practice, that means:
+- use `mark_pos(name)`, `capture_between(...)`, or `capture_len_between(...)` when later code should read the stored checkpoint back explicitly,
+- and treat the helper's own direct result as a successful standalone writer signal rather than as the preferred way to read the stored absolute boundary.
+
+Practical reading:
+- use it when the rule wants a stable whole-input left boundary under an explicit name,
+- unlike `mark_entry_start(name)`, it does not mean “where this rule was entered”; it means “the absolute beginning of the current input string,”
+- unlike `mark_here(name)`, it ignores the live parser cursor completely,
+- and pair it with `capture_between(start_mark, end_mark)` or `capture_len_between(start_mark, end_mark)` when later same-rule logic should reason about whole-input or file-level spans explicitly.
+
+Example:
+
+```text
+mark_input_start(file_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, input_start_seen, input_end_seen) }
+ /foo\(/
+ @mark(body_start)
+ /bar\)/
+ -> Top[0] { mark_input_start(file_start); mark_input_end(file_end); assign(scalar(input_start_seen), mark_pos(file_start)); assign(scalar(input_end_seen), mark_pos(file_end)) }
+ -> Top[1] { return(array("?Top:", scalar(input_start_seen), scalar(input_end_seen), capture_between(file_start, file_end), capture_between(body_start, file_end))) }
+```
+
+On input `foo(bar)`:
+- `mark_input_start(file_start)` stores `0`,
+- `mark_input_end(file_end)` stores `8`,
+- `capture_between(file_start, file_end)` returns the whole input `foo(bar)`,
+- and `capture_between(body_start, file_end)` returns `bar)` because `body_start` was the post-`foo(` mark while `file_end` stayed anchored to the absolute input end.
+
+Use it when the rule needs an explicit stable “beginning of the current input” checkpoint instead of reusing the anonymous capture boundary or inferring that meaning from the current rule-entry position.
+
+### `mark_input_end(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the absolute end of the current input string.
+
+In practice, that means the stored mark becomes `length($$STRING)` even if the current parser cursor is still somewhere in the middle of the input.
+
+In high/debug trace mode, this explicit write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+This helper is designed first as a write helper. In practice, that means:
+- use `mark_pos(name)`, `capture_between(...)`, or `capture_len_between(...)` when later code should read the stored checkpoint back explicitly,
+- and treat the helper's own direct result as a successful standalone writer signal rather than as the preferred way to read the stored absolute boundary.
+
+Practical reading:
+- use it when the rule wants a stable whole-input right boundary under an explicit name,
+- unlike `mark_here(name)`, it does not depend on where the parser cursor currently is,
+- unlike `mark_match_end(name)`, it does not mean “the right edge of the current match”; it means “the absolute end of the current input string,”
+- and pair it with `capture_between(start_mark, end_mark)`, `capture_len_between(start_mark, end_mark)`, or `mark_pos(name)` when later same-rule logic should reason about full-input end boundaries explicitly.
+
+Example:
+
+```text
+mark_input_end(file_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, input_start_seen, input_end_seen) }
+ /foo\(/
+ @mark(body_start)
+ /bar\)/
+ -> Top[0] { mark_input_start(file_start); mark_input_end(file_end); assign(scalar(input_start_seen), mark_pos(file_start)); assign(scalar(input_end_seen), mark_pos(file_end)) }
+ -> Top[1] { return(array("?Top:", scalar(input_start_seen), scalar(input_end_seen), capture_between(file_start, file_end), capture_between(body_start, file_end))) }
+```
+
+On input `foo(bar)`:
+- `mark_input_end(file_end)` stores `8` immediately, even though that write happened much earlier in the rule,
+- so later same-rule reads can still refer to the full-input right edge without manually spelling `length($$STRING)`,
+- `capture_between(file_start, file_end)` returns the whole input,
+- and `capture_between(body_start, file_end)` returns the named-mark tail `bar)` without requiring a separate “tail through end-of-input” helper when the rule already wants explicit two-mark boundaries.
+
+Use it when the rule wants an explicit stable “end of the current input” checkpoint rather than tying that meaning to the current local match, the rule-entry match, or the current parser cursor.
+
 ### `mark_here(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
 
