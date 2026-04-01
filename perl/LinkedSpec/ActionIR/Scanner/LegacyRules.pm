@@ -61,7 +61,10 @@ sub try_scan_contract_ir_events {
   'capture_len_between_marks' => \&_scan_contract_capture_len_between_marks,
   'capture_take_between_marks' => \&_scan_contract_capture_take_between_marks,
   'mark_here' => \&_scan_contract_mark_here,
+  'mark_entry_start' => \&_scan_contract_mark_entry_start,
+  'mark_entry_end' => \&_scan_contract_mark_entry_end,
   'mark_match_start' => \&_scan_contract_mark_match_start,
+  'mark_match_end' => \&_scan_contract_mark_match_end,
   'mark_copy' => \&_scan_contract_mark_copy,
   'mark_capture_slice' => \&_scan_contract_mark_capture_slice,
   'clear_mark' => \&_scan_contract_clear_mark,
@@ -509,10 +512,37 @@ while ($code =~ /\bmark_here\s*\(\s*(?<mark>\w+)\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_mark_entry_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_entry_end {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_entry_end\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
 sub _scan_contract_mark_match_start {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_match_end {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_match_end\s*\(\s*(?<mark>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {mark => $+{mark}}};
 }
  return \@events

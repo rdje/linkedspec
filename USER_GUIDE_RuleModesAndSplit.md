@@ -1041,7 +1041,7 @@ The most important semantic detail is this:
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
-- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, `mark_copy(target_mark, source_mark)`, `mark_capture_slice(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
+- `@mark(name)`, `mark_here(name)`, `mark_entry_start(name)`, `mark_entry_end(name)`, `mark_match_start(name)`, `mark_match_end(name)`, `mark_copy(target_mark, source_mark)`, `mark_capture_slice(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
 - and the trace prints a caret on the next line under the stored checkpoint position,
 - so you can see immediately whether the rule stored a post-match parser position or the left edge of the current match.
 
@@ -2144,10 +2144,25 @@ Use `mark_here(name)` when:
 - you want stable read first and explicit advance second,
 - or the mark should be updated even when no current capture string is being returned.
 
+Use `mark_entry_start(name)` when:
+- the rule should remember where the immediate entry match that led into this rule began,
+- later same-rule logic should still be able to refer back to that entry boundary after local matches have advanced,
+- or the rule wants a stable named writer-side companion to `entry_start_pos()`.
+
+Use `mark_entry_end(name)` when:
+- the rule should remember where the immediate entry match that led into this rule ended,
+- later same-rule logic should still be able to refer back to that entry right edge after the live parser cursor has moved on,
+- or the rule wants a stable named writer-side companion to `entry_end_pos()`.
+
 Use `mark_match_start(name)` when:
 - the mark should store the left edge of the current match,
 - a closing token or delimiter should be excluded from a later `capture_between(...)` span,
 - or the rule needs both the left edge and the post-match edge of the same current match.
+
+Use `mark_match_end(name)` when:
+- the mark should store the right edge of the current local match,
+- later same-rule logic should still be able to refer back to that current-match right edge even if the live parser cursor advances further,
+- or the rule wants a stable named writer-side companion to `match_end_pos()`.
 
 Use `mark_copy(target_mark, source_mark)` when:
 - the rule should copy one remembered boundary into another named checkpoint explicitly,

@@ -889,6 +889,36 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'mark_entry_start',
+   ir_node            => 'MARK_ENTRY_START',
+   diag_name          => 'mark_entry_start',
+   unresolved_pattern => qr/\bmark_entry_start\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS - length $IMATCH; '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'mark_entry_end',
+   ir_node            => 'MARK_ENTRY_END',
+   diag_name          => 'mark_entry_end',
+   unresolved_pattern => qr/\bmark_entry_end\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_entry_end\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS; '. _build_mark_trace_call(operation => 'mark_entry_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'mark_match_start',
    ir_node            => 'MARK_MATCH_START',
    diag_name          => 'mark_match_start',
@@ -899,6 +929,21 @@ sub _build_capture_and_backtrack_contracts {
      \bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
      'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS - length $LMATCH; '. _build_mark_trace_call(operation => 'mark_match_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'mark_match_end',
+   ir_node            => 'MARK_MATCH_END',
+   diag_name          => 'mark_match_end',
+   unresolved_pattern => qr/\bmark_match_end\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_match_end\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS; '. _build_mark_trace_call(operation => 'mark_match_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
     }gex;
     return $code
    },

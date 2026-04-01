@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 70;
+    plan tests => 73;
 
     my $label = 'Top';
 
@@ -11003,9 +11003,24 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'mark_here(name) helper rewrite preserves explicit rule-local named-mark update semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_entry_start(entry_start)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'entry_start'} = $IPOS - length $IMATCH; _trace_runtime_mark_event(operation => 'mark_entry_start', rule_label => 'Top', mark_name => 'entry_start', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'entry_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'entry_start'} }},
+        'mark_entry_start(name) helper rewrite preserves explicit immediate-entry left-edge semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_entry_end(entry_end)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'entry_end'} = $IPOS; _trace_runtime_mark_event(operation => 'mark_entry_end', rule_label => 'Top', mark_name => 'entry_end', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'entry_end'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'entry_end'} }},
+        'mark_entry_end(name) helper rewrite preserves explicit immediate-entry right-edge semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_match_start(end_mark)'),
         q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'end_mark'} = $LSPOS - length $LMATCH; _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'end_mark', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'end_mark'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'end_mark'} }},
         'mark_match_start(name) helper rewrite preserves explicit current-match left-edge semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_match_end(body_end)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_end'} = $LSPOS; _trace_runtime_mark_event(operation => 'mark_match_end', rule_label => 'Top', mark_name => 'body_end', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'body_end'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'body_end'} }},
+        'mark_match_end(name) helper rewrite preserves explicit current-match right-edge semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_copy(body_start, first_end)'),
@@ -12611,6 +12626,44 @@ SPEC
 
     my $start_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_match_start(end_mark)');
     like($start_rewrite, qr/\$LSPOS - length \$LMATCH/, 'mark_match_start(name) lowering records the current-match left edge rather than post-match pos $$STRING');
+};
+subtest 'named_mark_entry_and_match_end_helpers_snapshot_stable_boundaries' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_seen, entry_end_seen, body_end_seen) }
+ /bar/
+ /\)/
+ -> Child[0] { mark_entry_start(entry_start); mark_entry_end(entry_end); mark_match_end(body_end); assign(scalar(entry_start_seen), mark_pos(entry_start)); assign(scalar(entry_end_seen), mark_pos(entry_end)); assign(scalar(body_end_seen), mark_pos(body_end)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_seen), scalar(entry_end_seen), scalar(body_end_seen), mark_pos(entry_start), mark_pos(entry_end), mark_pos(body_end), entry_start_pos(), entry_end_pos(), match_end_pos(), cursor_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit entry/match boundary mark coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 0, 4, 7, 0, 4, 7, 0, 4, 8, 8],
+        'mark_entry_start(name), mark_entry_end(name), and mark_match_end(name) snapshot stable entry/current-match boundaries even when a later slot advances both the live cursor and the later current-match boundary'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'entry/match boundary mark parse leaves runtime_ctx last_error clear on success');
+
+    my $entry_start_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'mark_entry_start(entry_start)');
+    like($entry_start_rewrite, qr/\$IPOS - length \$IMATCH/, 'mark_entry_start(name) lowering records the immediate-entry left edge directly');
+
+    my $entry_end_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'mark_entry_end(entry_end)');
+    like($entry_end_rewrite, qr/\$\$info\{marks\}\{'Child'\}\{'entry_end'\} = \$IPOS;/, 'mark_entry_end(name) lowering records the immediate-entry right edge directly');
+
+    my $match_end_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'mark_match_end(body_end)');
+    like($match_end_rewrite, qr/\$\$info\{marks\}\{'Child'\}\{'body_end'\} = \$LSPOS;/, 'mark_match_end(name) lowering records the current-match right edge directly');
 };
 subtest 'named_mark_mark_here_updates_named_checkpoint_without_reading' => sub {
     plan tests => 4;
@@ -37002,6 +37055,31 @@ SPEC
     ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'start_capture_slice_from(name) lowers through the stored rule-local named mark bucket');
     ok(index($rewritten, q{defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef}) >= 0, 'start_capture_slice_from(name) lowers to a direct anonymous-boundary restore from the named mark');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous/named boundary bridge helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("entry_start", mark_entry_start(entry_start), "entry_end", mark_entry_end(entry_end), "match_end", mark_match_end(match_end))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named-mark boundary write helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit named-mark boundary write helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit named-mark boundary write helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit named-mark boundary write helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'MARK_ENTRY_START' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_ENTRY_START');
+    ok(grep { $_ eq 'MARK_ENTRY_END' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_ENTRY_END');
+    ok(grep { $_ eq 'MARK_MATCH_END' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_MATCH_END');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("entry_start", mark_entry_start(entry_start), "entry_end", mark_entry_end(entry_end), "match_end", mark_match_end(match_end)))');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'entry_start'} = $IPOS - length $IMATCH;}) >= 0, 'mark_entry_start(name) lowers to a direct immediate-entry left-edge mark write');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'entry_end'} = $IPOS;}) >= 0, 'mark_entry_end(name) lowers to a direct immediate-entry right-edge mark write');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'match_end'} = $LSPOS;}) >= 0, 'mark_match_end(name) lowers to a direct current-match right-edge mark write');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark boundary write helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_named_mark_capture_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 10;

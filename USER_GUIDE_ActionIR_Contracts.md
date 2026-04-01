@@ -1012,6 +1012,74 @@ Top::AND
 
 Use it when the rule should decide explicitly when the named checkpoint moves, instead of tying that movement to `capture_take(name)`.
 
+### `mark_entry_start(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the left edge of the immediate entry match that led into the current rule.
+
+In high/debug trace mode, this explicit boundary write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+Practical reading:
+- use it when a child rule needs a stable named checkpoint for where the parent handoff began,
+- unlike `mark_match_start(name)`, it does not depend on the current local match inside this rule,
+- unlike `mark_here(name)`, it does not follow later cursor movement inside the rule,
+- and treat it as the writer-side companion to `entry_start_pos()`.
+
+Example:
+
+```text
+mark_entry_start(entry_start)
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_seen) }
+ /bar/
+ /\)/
+ -> Child[0] { mark_entry_start(entry_start); assign(scalar(entry_start_seen), mark_pos(entry_start)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_seen), mark_pos(entry_start), entry_start_pos())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when later same-rule reads should stay anchored to the rule-entry left boundary even after the current local match and live parser cursor have moved on.
+
+### `mark_entry_end(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the right edge of the immediate entry match that led into the current rule.
+
+In high/debug trace mode, this explicit boundary write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+Practical reading:
+- use it when the rule wants a stable named checkpoint for where the entry handoff ended,
+- unlike `mark_here(name)`, it does not follow the live parser cursor after later slots advance,
+- unlike `mark_match_end(name)`, it refers to the immediate entry match that entered this rule rather than the current local match,
+- and treat it as the writer-side companion to `entry_end_pos()`.
+
+Example:
+
+```text
+mark_entry_end(entry_end)
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_end_seen) }
+ /bar/
+ /\)/
+ -> Child[0] { mark_entry_end(entry_end); assign(scalar(entry_end_seen), mark_pos(entry_end)) }
+ -> Child[1] { return(array("?Child:", scalar(entry_end_seen), mark_pos(entry_end), entry_end_pos(), cursor_pos())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when later same-rule logic should still be able to refer back to the immediate entry right edge after the current local match and live parser cursor have advanced further.
+
 ### `mark_match_start(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the left edge of the current match.
 
@@ -1041,6 +1109,36 @@ Top::AND
 ```
 
 Use it when the rule wants a left-edge checkpoint for the current match instead of the usual post-match parser position stored by `@mark(name)` or `mark_here(name)`.
+
+### `mark_match_end(name)`
+Set or overwrite a named `@mark(name)` checkpoint to the right edge of the current local match.
+
+In high/debug trace mode, this explicit boundary write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+Practical reading:
+- use it when the rule wants the current local-match end as a stable named checkpoint,
+- unlike `mark_here(name)`, it stores the current local-match right edge even if later statements move the live parser cursor before the rule returns,
+- unlike `mark_entry_end(name)`, it follows the current local match rather than the immediate entry match that entered this rule,
+- and treat it as the writer-side companion to `match_end_pos()`.
+
+Example:
+
+```text
+mark_match_end(body_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, body_end_seen) }
+ /foo\(/
+ /bar/
+ /\)/
+ -> Top[0] { assign(scalar(body_end_seen), "open") }
+ -> Top[1] { mark_match_end(body_end); assign(scalar(body_end_seen), mark_pos(body_end)) }
+ -> Top[2] { return(array("?Top:", scalar(body_end_seen), mark_pos(body_end), match_end_pos(), cursor_pos())) }
+```
+
+Use it when a later slot should still be able to refer back to the current match end even though the live parser cursor has since advanced to a later position.
 
 ### `mark_copy(target_mark, source_mark)`
 Copy one explicit rule-local named mark position into another named mark.
