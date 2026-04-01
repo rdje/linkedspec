@@ -816,6 +816,8 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_until_cursor_len()` reads the width of that same anonymous through-cursor span,
 - `capture_take_until_cursor()` reads that same anonymous through-cursor span and then advances the boundary to the live parser cursor,
 - `capture_take_until_cursor_len()` reads the width of that same anonymous through-cursor span and then advances the boundary to the live parser cursor,
+- `capture_take_rest()` reads that same anonymous boundary through end-of-input and then advances the boundary to end-of-input,
+- `capture_take_rest_len()` reads the width of that same anonymous tail and then advances the boundary to end-of-input,
 - `capture_slice_pos()` reads the numeric position where that same slice starts,
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
 - `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
@@ -830,6 +832,8 @@ That means the full current mental model is:
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
 - `capture_take_until_cursor()` reads the current anonymous through-cursor span and also advances that anonymous boundary,
 - `capture_take_until_cursor_len()` reads the width of that same current anonymous through-cursor span and also advances that anonymous boundary,
+- `capture_take_rest()` reads the current anonymous tail through end-of-input and also advances that anonymous boundary to end-of-input,
+- `capture_take_rest_len()` reads the width of that same current anonymous tail and also advances that anonymous boundary to end-of-input,
 - `capture_take()` reads the current slice and also advances that anonymous boundary,
 - `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary,
 - and `cursor_rest()` / `cursor_rest_len()` answer the different question “what remains from the live parser cursor right now?” without consulting that anonymous boundary.
@@ -2229,6 +2233,16 @@ Use `capture_take_until_cursor_len()` when:
 - the rule only needs the width of that through-cursor span instead of the span text,
 - and the anonymous boundary should still roll forward after the read.
 
+Use `capture_take_rest()` when:
+- one rolling anonymous capture boundary is enough for the whole rule,
+- the returned span should extend all the way through end-of-input instead of stopping at the current match edge or current cursor,
+- and the anonymous boundary should still roll forward afterward so later same-rule tail reads see end-of-input.
+
+Use `capture_take_rest_len()` when:
+- one rolling anonymous capture boundary is enough for the whole rule,
+- the rule only needs the width of that end-of-input tail instead of the tail text,
+- and the anonymous boundary should still roll forward afterward so later same-rule tail-width reads see zero.
+
 Use `capture_take_until_cursor_from(name)` when:
 - the rule wants a stable named checkpoint model rather than the anonymous boundary model,
 - the returned span should extend through the live parser cursor instead of stopping at the current match edge,
@@ -2238,6 +2252,16 @@ Use `capture_take_until_cursor_len_from(name)` when:
 - the rule wants a stable named checkpoint model rather than the anonymous boundary model,
 - the rule only needs the width of that through-cursor span instead of the span text,
 - and the named checkpoint should still roll forward after the read.
+
+Use `capture_take_rest_from(name)` when:
+- the rule wants a stable named checkpoint model rather than the anonymous boundary model,
+- the returned span should extend all the way through end-of-input instead of stopping at the current match edge or current cursor,
+- and the named checkpoint should still roll forward afterward so later same-rule tail reads start from end-of-input.
+
+Use `capture_take_rest_len_from(name)` when:
+- the rule wants a stable named checkpoint model rather than the anonymous boundary model,
+- the rule only needs the width of that end-of-input tail instead of the tail text,
+- and the named checkpoint should still roll forward afterward so later same-rule tail-width reads see zero.
 
 Use `capture_take_between_len(start_mark, end_mark)` when:
 - both boundaries should come from explicit named checkpoints rather than from the current match,

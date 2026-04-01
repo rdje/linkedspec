@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-01 - Phase 4: add advancing end-of-input tail helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take_rest()` / `capture_take_rest_len()` plus `capture_take_rest_from(name)` / `capture_take_rest_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so exact rewrite coverage now locks the new anonymous and named helper lowerings, runtime coverage now locks the “return tail or width and then advance the anonymous boundary or named checkpoint to end-of-input” semantics, and ActionIR coverage now locks the new canonical nodes plus no-raw-fallback lowering,
+- expanded the user guides with rationale plus worked examples so the end-of-input family now teaches the stable anonymous and named tail reads together with their new advancing companions instead of leaving users to infer that symmetry,
+- refreshed roadmap/continuity notes so future resume treats advancing anonymous and named end-of-input tail reads as covered helper surface now rather than as an obvious remaining Phase 4 symmetry gap.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add advancing explicit two-mark width helper
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take_between_len(start_mark, end_mark)` is now a first-class helper contract scanned, canonicalized, and lowered without raw-Perl fallback,

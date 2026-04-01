@@ -573,6 +573,85 @@ Top::AND
 
 Use it when the rule needs the width of that same anonymous-boundary tail but does not need the tail text itself.
 
+### `capture_take_rest()`
+Return the same anonymous capture-boundary tail that `capture_rest()` would read, then advance that anonymous capture boundary to end-of-input.
+
+Practical reading:
+- keep the same anonymous left-edge model as `capture_rest()`,
+- keep the same right edge at end-of-input,
+- return the tail text itself,
+- and then move the anonymous capture boundary to `length($$STRING)` so later same-rule anonymous reads start from end-of-input instead of the older boundary.
+
+Compare the nearby helpers:
+- `capture_rest()` keeps the anonymous boundary stable while reading through end-of-input,
+- `capture_take_rest()` returns that same tail and then advances the anonymous boundary to end-of-input,
+- and `capture_take()` still stops at the current match edge and only advances to the current parser position instead of to end-of-input.
+
+Examples:
+
+```text
+assign(scalar(tail), capture_take_rest())
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_tail, after_first_tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail), capture_take_rest()); assign(scalar(after_first_tail), capture_slice_pos()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail), scalar(after_first_tail), capture_take_rest(), capture_slice_pos())) }
+```
+
+On input `(alpha)`:
+- `start_capture_slice()` establishes the anonymous boundary just after `(`,
+- `capture_take_rest()` returns `alpha)` because the right edge is real end-of-input,
+- `capture_slice_pos()` then reports `7` because the anonymous boundary has advanced to end-of-input,
+- the later `capture_take_rest()` returns the empty string because the boundary is already at end-of-input,
+- and the final `capture_slice_pos()` still reports `7`.
+
+Use it when the rule wants one final anonymous tail read and also wants later same-rule anonymous capture logic to observe that the boundary has been consumed all the way to end-of-input.
+
+### `capture_take_rest_len()`
+Return the numeric width of the same anonymous capture-boundary tail that `capture_take_rest()` would read, then advance that anonymous capture boundary to end-of-input.
+
+Practical reading:
+- keep the same anonymous left-edge model as `capture_rest_len()`,
+- keep the same right edge at end-of-input,
+- return width metadata instead of the tail text,
+- and then move the anonymous capture boundary to `length($$STRING)` for later same-rule reads.
+
+Compare the nearby helpers:
+- `capture_rest_len()` keeps the anonymous boundary stable while returning the tail width,
+- `capture_take_rest_len()` returns that same width and then advances the anonymous boundary to end-of-input,
+- and `capture_take_rest()` returns the actual tail text before making the same anonymous-boundary update.
+
+Examples:
+
+```text
+assign(scalar(width), capture_take_rest_len())
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_tail_width, after_first_tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail_width), capture_take_rest_len()); assign(scalar(after_first_tail), capture_slice_pos()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail_width), scalar(after_first_tail), capture_take_rest_len(), capture_slice_pos())) }
+```
+
+On input `(alpha)`:
+- the first `capture_take_rest_len()` returns `6` for `alpha)`,
+- `capture_slice_pos()` then reports `7` because the anonymous boundary moved to end-of-input,
+- the later `capture_take_rest_len()` returns `0`,
+- and the final `capture_slice_pos()` still reports `7`.
+
+Use it when the rule wants the width of the remaining anonymous tail, not the tail text itself, and that same rule should then treat the anonymous boundary as consumed through end-of-input.
+
 ### `capture_take()`
 Return the same anonymous capture-boundary span that `capture_slice()` would read, then advance that anonymous boundary to the current parser position.
 
@@ -958,6 +1037,89 @@ Top::AND
 ```
 
 Use it when the rule needs the width of that same named-checkpoint tail through end-of-input but does not need the tail text itself.
+
+### `capture_take_rest_from(name)`
+Return the same named-mark tail that `capture_rest_from(name)` would read, then advance that named mark to end-of-input.
+
+Practical reading:
+- keep the same named checkpoint as the left edge,
+- keep the same right edge at end-of-input,
+- return the remembered tail text itself,
+- and then move that stored named mark to `length($$STRING)` so later same-rule reads start from end-of-input instead of the older mark position.
+
+Compare the nearby helpers:
+- `capture_rest_from(name)` keeps the named mark stable while reading through end-of-input,
+- `capture_take_rest_from(name)` returns that same tail and then advances the named mark to end-of-input,
+- and `capture_take(name)` still stops at the current match edge and advances the mark only to the current parser position.
+
+If the mark is absent, the helper returns `undef` and leaves the mark unchanged.
+
+Examples:
+
+```text
+assign(scalar(tail), capture_take_rest_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_tail, after_first_tail) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { assign(scalar(first_tail), capture_take_rest_from(body_start)); assign(scalar(after_first_tail), mark_pos(body_start)) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail), scalar(after_first_tail), capture_take_rest_from(body_start), mark_pos(body_start), capture_take_rest_from(missing_mark))) }
+```
+
+On input `(alpha)`:
+- `@mark(body_start)` establishes the named checkpoint just after `(`,
+- `capture_take_rest_from(body_start)` returns `alpha)` because the right edge is end-of-input,
+- `mark_pos(body_start)` then reports `7` because the stored named checkpoint advanced to end-of-input,
+- the later `capture_take_rest_from(body_start)` returns the empty string,
+- and `capture_take_rest_from(missing_mark)` still returns `undef`.
+
+Use it when the rule wants a remembered named checkpoint model, but the next read should consume that remembered tail all the way through end-of-input and leave the named checkpoint at the end afterward.
+
+### `capture_take_rest_len_from(name)`
+Return the numeric width of the same named-mark tail that `capture_take_rest_from(name)` would read, then advance that named mark to end-of-input.
+
+Practical reading:
+- keep the same named checkpoint as the left edge,
+- keep the same right edge at end-of-input,
+- return width metadata instead of the tail text,
+- and then move that stored named mark to `length($$STRING)` for later same-rule reads.
+
+Compare the nearby helpers:
+- `capture_rest_len_from(name)` keeps the named mark stable while returning the tail width,
+- `capture_take_rest_len_from(name)` returns that same width and then advances the named mark to end-of-input,
+- and `capture_take_rest_from(name)` returns the actual tail text before making the same named-mark update.
+
+If the mark is absent, the helper returns `undef` and leaves the mark unchanged.
+
+Examples:
+
+```text
+assign(scalar(width), capture_take_rest_len_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_tail_width, after_first_tail) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { assign(scalar(first_tail_width), capture_take_rest_len_from(body_start)); assign(scalar(after_first_tail), mark_pos(body_start)) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail_width), scalar(after_first_tail), capture_take_rest_len_from(body_start), mark_pos(body_start), capture_take_rest_len_from(missing_mark))) }
+```
+
+On input `(alpha)`:
+- the first `capture_take_rest_len_from(body_start)` returns `6` for `alpha)`,
+- `mark_pos(body_start)` then reports `7` because the named checkpoint advanced to end-of-input,
+- the later `capture_take_rest_len_from(body_start)` returns `0`,
+- and `capture_take_rest_len_from(missing_mark)` still returns `undef`.
+
+Use it when the rule wants the width of a remembered named-mark tail, not the tail text itself, and that same rule should then treat that named checkpoint as consumed through end-of-input.
 
 ### `capture_between(start_mark, end_mark)`
 Return the substring between two explicit rule-local named marks.

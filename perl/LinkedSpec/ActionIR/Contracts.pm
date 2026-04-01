@@ -677,6 +677,36 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_take_rest',
+   ir_node            => 'CAPTURE_REST_TAKE',
+   diag_name          => 'capture_take_rest',
+   unresolved_pattern => qr/\bcapture_take_rest\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_rest\s*\(\s*\)
+    }{
+     'do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture = substr($$STRING, $IPOS, $__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_take_rest_len',
+   ir_node            => 'CAPTURE_REST_TAKE_LEN',
+   diag_name          => 'capture_take_rest_len',
+   unresolved_pattern => qr/\bcapture_take_rest_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_rest_len\s*\(\s*\)
+    }{
+     'do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = ($__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture_len } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_take_slice',
    ir_node            => 'CAPTURE_SLICE_TAKE',
    diag_name          => 'capture_take',
@@ -794,6 +824,36 @@ sub _build_capture_and_backtrack_contracts {
      \bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
      'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_take_rest_from_mark',
+   ir_node            => 'CAPTURE_TAKE_REST_FROM_MARK',
+   diag_name          => 'capture_take_rest_from',
+   unresolved_pattern => qr/\bcapture_take_rest_from\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_rest_from\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = substr($$STRING, $__ls_mark, $__ls_end - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_rest_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_take_rest_len_from_mark',
+   ir_node            => 'CAPTURE_TAKE_REST_LEN_FROM_MARK',
+   diag_name          => 'capture_take_rest_len_from',
+   unresolved_pattern => qr/\bcapture_take_rest_len_from\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = ($__ls_end - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_rest_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },

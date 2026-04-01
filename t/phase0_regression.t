@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 76;
+    plan tests => 80;
 
     my $label = 'Top';
 
@@ -10933,6 +10933,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'capture_rest_length() compatibility alias rewrites to the same explicit capture-boundary tail-length semantics'
     );
     is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_rest()'),
+        q{do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture = substr($$STRING, $IPOS, $__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture } else { undef } }},
+        'capture_take_rest() helper rewrite preserves explicit anonymous-boundary tail plus advancing-end semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_rest_len()'),
+        q{do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = ($__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture_len } else { undef } }},
+        'capture_take_rest_len() helper rewrite preserves explicit anonymous-boundary tail-length plus advancing-end semantics'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take()'),
         q{do { my $__ls_capture = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $IPOS = pos $$STRING; $__ls_capture }},
         'capture_take() helper rewrite preserves explicit anonymous-boundary advancing capture semantics'
@@ -10971,6 +10981,16 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_rest_len_from(body_start)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }},
         'capture_rest_len_from(name) helper rewrite preserves explicit named-mark tail-length semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_rest_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = substr($$STRING, $__ls_mark, $__ls_end - $__ls_mark); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_rest_from', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }},
+        'capture_take_rest_from(name) helper rewrite preserves explicit named-mark tail plus advancing-end semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_rest_len_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = ($__ls_end - $__ls_mark); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_rest_len_from', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture_len } else { undef } }},
+        'capture_take_rest_len_from(name) helper rewrite preserves explicit named-mark tail-length plus advancing-end semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_until_cursor_from(body_start)'),
@@ -11462,6 +11482,68 @@ SPEC
     my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest_len_from(body_start)');
     like($len_rewrite, qr/\(length\(\$\$STRING\) - \$__ls_mark\)/, 'capture_rest_len_from(name) lowering reads the named-mark tail width through end-of-input');
 };
+subtest 'named_mark_capture_take_rest_helper_reads_tail_and_advances_mark_to_end_of_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_tail, after_first_tail) }
+ /\(/
+ -> Top[0] { mark_here(body_start) }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail), capture_take_rest_from(body_start)); assign(scalar(after_first_tail), mark_pos(body_start)) }
+/\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail), scalar(after_first_tail), capture_take_rest_from(body_start), mark_pos(body_start), capture_take_rest_from(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing tail helper coverage');
+
+    my $input = '(alpha)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha)', 7, '', 7, undef],
+        'capture_take_rest_from(name) returns the named-mark tail through end-of-input and then advances that named checkpoint to end-of-input while absent marks still return undef'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'named-mark advancing tail helper parse leaves runtime_ctx last_error clear on success');
+
+    my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_rest_from(body_start)');
+    like($capture_rewrite, qr/substr\(\$\$STRING, \$__ls_mark, \$__ls_end - \$__ls_mark\)/, 'capture_take_rest_from(name) lowering reads from the stored named checkpoint through end-of-input');
+    like($capture_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_rest_from(name) lowering advances the named checkpoint to end-of-input after returning the tail');
+};
+subtest 'named_mark_capture_take_rest_len_helper_reads_tail_width_and_advances_mark_to_end_of_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_tail_width, after_first_tail) }
+ /\(/
+ -> Top[0] { mark_here(body_start) }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail_width), capture_take_rest_len_from(body_start)); assign(scalar(after_first_tail), mark_pos(body_start)) }
+/\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail_width), scalar(after_first_tail), capture_take_rest_len_from(body_start), mark_pos(body_start), capture_take_rest_len_from(missing_mark))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for named-mark advancing tail-width helper coverage');
+
+    my $input = '(alpha)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 6, 7, 0, 7, undef],
+        'capture_take_rest_len_from(name) returns the named-mark tail width through end-of-input and then advances that named checkpoint to end-of-input while absent marks still return undef'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'named-mark advancing tail-width helper parse leaves runtime_ctx last_error clear on success');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_rest_len_from(body_start)');
+    like($len_rewrite, qr/\(\$__ls_end - \$__ls_mark\)/, 'capture_take_rest_len_from(name) lowering reads the named-mark tail width directly');
+    like($len_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_rest_len_from(name) lowering advances the named checkpoint to end-of-input after returning the width');
+};
 subtest 'anonymous_capture_slice_until_cursor_helpers_read_through_current_parser_position' => sub {
     plan tests => 5;
 
@@ -11882,6 +11964,68 @@ SPEC
 
     my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_rest_len()');
     like($len_rewrite, qr/\(length\(\$\$STRING\) - \$IPOS\)/, 'capture_rest_len() lowering reads the current capture-boundary tail length through end-of-input');
+};
+subtest 'capture_take_rest_helpers_read_tail_and_advance_anonymous_boundary_to_end_of_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_tail, after_first_tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail), capture_take_rest()); assign(scalar(after_first_tail), capture_slice_pos()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail), scalar(after_first_tail), capture_take_rest(), capture_slice_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing tail helper coverage');
+
+    my $input = '(alpha)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha)', 7, '', 7],
+        'capture_take_rest() returns the current anonymous tail through end-of-input and then advances that anonymous boundary to end-of-input for later same-rule reads'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'anonymous advancing tail helper parse leaves runtime_ctx last_error clear on success');
+
+    my $capture_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_rest()');
+    like($capture_rewrite, qr/substr\(\$\$STRING, \$IPOS, \$__ls_end - \$IPOS\)/, 'capture_take_rest() lowering reads from the current anonymous boundary through end-of-input');
+    like($capture_rewrite, qr/\$IPOS = \$__ls_end;/, 'capture_take_rest() lowering advances the anonymous boundary to end-of-input after returning the tail');
+};
+subtest 'capture_take_rest_len_helpers_read_tail_width_and_advance_anonymous_boundary_to_end_of_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, first_tail_width, after_first_tail) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(first_tail_width), capture_take_rest_len()); assign(scalar(after_first_tail), capture_slice_pos()) }
+ /\)/
+ -> Top[2] { return(array("?Top:", scalar(first_tail_width), scalar(after_first_tail), capture_take_rest_len(), capture_slice_pos())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for anonymous advancing tail-width helper coverage');
+
+    my $input = '(alpha)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 6, 7, 0, 7],
+        'capture_take_rest_len() returns the current anonymous tail width through end-of-input and then advances that anonymous boundary to end-of-input for later same-rule reads'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'anonymous advancing tail-width helper parse leaves runtime_ctx last_error clear on success');
+
+    my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_rest_len()');
+    like($len_rewrite, qr/\(\$__ls_end - \$IPOS\)/, 'capture_take_rest_len() lowering reads the current anonymous tail width directly');
+    like($len_rewrite, qr/\$IPOS = \$__ls_end;/, 'capture_take_rest_len() lowering advances the anonymous boundary to end-of-input after returning the width');
 };
 subtest 'named_mark_mark_pos_reads_rule_local_checkpoint_position' => sub {
     plan tests => 4;
@@ -37223,6 +37367,34 @@ SPEC
     ok(index($rewritten, '(length($$STRING) - $IPOS)') >= 0, 'capture_rest_len() lowers to a direct capture-boundary tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_rest helper rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { start_capture_slice(); return(hash("tail", capture_take_rest(), "width", capture_take_rest_len())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing anonymous tail helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit advancing anonymous tail helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit advancing anonymous tail helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit advancing anonymous tail helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_SLICE_START' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_START');
+    ok(grep { $_ eq 'CAPTURE_REST_TAKE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST_TAKE');
+    ok(grep { $_ eq 'CAPTURE_REST_TAKE_LEN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_REST_TAKE_LEN');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'start_capture_slice(); return(hash("tail", capture_take_rest(), "width", capture_take_rest_len()))');
+    ok(index($rewritten, '$IPOS = pos $$STRING') >= 0, 'start_capture_slice() lowers to a direct anonymous capture-boundary movement');
+    ok(index($rewritten, 'my $__ls_end = length($$STRING);') >= 0, 'advancing anonymous tail helpers lower through an explicit end-of-input boundary read');
+    ok(index($rewritten, 'substr($$STRING, $IPOS, $__ls_end - $IPOS)') >= 0, 'capture_take_rest() lowers to a direct anonymous tail read through end-of-input');
+    ok(index($rewritten, '$IPOS = $__ls_end; $__ls_capture') >= 0, 'capture_take_rest() lowers to the matching anonymous-boundary advance to end-of-input after returning the tail');
+    ok(index($rewritten, 'my $__ls_capture_len = ($__ls_end - $IPOS);') >= 0, 'capture_take_rest_len() lowers to a direct anonymous tail-width read before advancing');
+    ok(index($rewritten, '$IPOS = $__ls_end; $__ls_capture_len') >= 0, 'capture_take_rest_len() lowers to the matching anonymous-boundary advance to end-of-input after returning the width');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing anonymous tail helper rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_capture_take_helper_lower_without_raw_fallback' => sub {
     plan tests => 10;
 
@@ -37324,6 +37496,34 @@ SPEC
     ok(index($rewritten, 'substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark)') >= 0, 'capture_rest_from(name) lowers to a direct named-mark tail read');
     ok(index($rewritten, '(length($$STRING) - $__ls_mark)') >= 0, 'capture_rest_len_from(name) lowers to a direct named-mark tail-length read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit named-mark tail helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_named_mark_capture_take_rest_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("tail", capture_take_rest_from(body_start), "width", capture_take_rest_len_from(body_start))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing named-mark tail helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit advancing named-mark tail helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit advancing named-mark tail helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit advancing named-mark tail helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_TAKE_REST_FROM_MARK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_TAKE_REST_FROM_MARK');
+    ok(grep { $_ eq 'CAPTURE_TAKE_REST_LEN_FROM_MARK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_TAKE_REST_LEN_FROM_MARK');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("tail", capture_take_rest_from(body_start), "width", capture_take_rest_len_from(body_start)))');
+    ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'advancing named-mark tail helpers lower through the stored rule-local mark bucket');
+    ok(index($rewritten, 'my $__ls_end = length($$STRING);') >= 0, 'advancing named-mark tail helpers lower through an explicit end-of-input boundary read');
+    ok(index($rewritten, 'substr($$STRING, $__ls_mark, $__ls_end - $__ls_mark)') >= 0, 'capture_take_rest_from(name) lowers to a direct named-mark tail read through end-of-input');
+    ok(index($rewritten, q{$__ls_mark_bucket->{'body_start'} = $__ls_end;}) >= 0, 'advancing named-mark tail helpers lower to the matching named-mark advance to end-of-input');
+    ok(index($rewritten, 'my $__ls_capture_len = ($__ls_end - $__ls_mark);') >= 0, 'capture_take_rest_len_from(name) lowers to a direct named-mark tail-width read before advancing');
+    ok(index($rewritten, q{operation => 'capture_take_rest_from'}) >= 0, 'capture_take_rest_from(name) retains mark trace instrumentation');
+    ok(index($rewritten, q{operation => 'capture_take_rest_len_from'}) >= 0, 'capture_take_rest_len_from(name) retains mark trace instrumentation');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing named-mark tail helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_capture_until_cursor_helpers_lower_without_raw_fallback' => sub {
     plan tests => 15;
