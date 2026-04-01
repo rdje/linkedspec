@@ -234,16 +234,37 @@ sub validate_rule_definition {
  return 1;
 }
 
+sub _notify_gdata_validation_failure {
+ my ($option, %info) = @_;
+ return undef unless ref($option) eq 'HASH';
+ my $cb = $option->{on_failure};
+ return undef unless ref($cb) eq 'CODE';
+ return $cb->(%info)
+}
+
 sub validate_gdata_references {
- my ($gdata, $spec) = @_;
+ my ($gdata, $spec, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
 
  unless (ref($gdata) eq 'HASH') {
-  _trace_log_output(DUMP_NONE, "Invalid gdata structure", "Expected HASH reference, got " . ref($gdata));
+  my $detail = "Expected HASH reference, got " . ref($gdata);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid gdata structure',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, "Invalid gdata structure", $detail);
   return 0;
  }
 
  unless (ref($spec) eq 'HASH') {
-  _trace_log_output(DUMP_NONE, "Invalid spec structure", "Expected HASH reference, got " . ref($spec));
+  my $detail = "Expected HASH reference, got " . ref($spec);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid spec structure',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, "Invalid spec structure", $detail);
   return 0;
  }
 
@@ -251,12 +272,28 @@ sub validate_gdata_references {
   my $gdata_entry = $gdata->{$rule_name};
 
   unless (exists $spec->{$rule_name}) {
-   _trace_log_output(DUMP_NONE, "Gdata references non-existent rule '$rule_name'", "Rule not found in spec");
+   my $summary = "Gdata references non-existent rule '$rule_name'";
+   my $detail = 'Rule not found in spec';
+   _notify_gdata_validation_failure(
+    $option,
+    summary => $summary,
+    detail => $detail,
+    rule_label => $rule_name,
+   );
+   _trace_log_output(DUMP_NONE, $summary, $detail);
    return 0;
   }
 
   unless (ref($gdata_entry) eq 'Regexp') {
-   _trace_log_output(DUMP_NONE, "Invalid gdata entry for rule '$rule_name'", "Expected compiled regex, got " . ref($gdata_entry));
+   my $summary = "Invalid gdata entry for rule '$rule_name'";
+   my $detail = "Expected compiled regex, got " . ref($gdata_entry);
+   _notify_gdata_validation_failure(
+    $option,
+    summary => $summary,
+    detail => $detail,
+    rule_label => $rule_name,
+   );
+   _trace_log_output(DUMP_NONE, $summary, $detail);
    return 0;
   }
  }
@@ -265,6 +302,12 @@ sub validate_gdata_references {
   my $rule_def = $spec->{$rule_name};
 
   unless (validate_rule_definition($rule_name, $rule_def)) {
+   _notify_gdata_validation_failure(
+    $option,
+    summary => "Invalid rule definition for rule '$rule_name'",
+    detail => "validate_rule_definition returned false for rule '$rule_name'",
+    rule_label => $rule_name,
+   );
    return 0;
   }
 
@@ -272,20 +315,44 @@ sub validate_gdata_references {
    for my $i (0..$#{$rule_def->{gdata}}) {
     my $element = $rule_def->{gdata}[$i];
     unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
-     _trace_log_output(DUMP_NONE, "Invalid gdata element at index $i for rule '$rule_name'", "Expected HASH with 'label' and 'idx' keys");
+     my $summary = "Invalid gdata element at index $i for rule '$rule_name'";
+     my $detail = "Expected HASH with 'label' and 'idx' keys";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
      return 0;
     }
 
     my $ref_rule = $element->{label};
     unless (exists $spec->{$ref_rule}) {
-     _trace_log_output(DUMP_NONE, "Gdata element references non-existent rule '$ref_rule'", "Rule not found in spec");
+     my $summary = "Gdata element references non-existent rule '$ref_rule'";
+     my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
      return 0;
     }
 
     my $ref_idx = $element->{idx};
     my $ref_rule_def = $spec->{$ref_rule};
     unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
-     _trace_log_output(DUMP_NONE, "Invalid regex index $ref_idx for rule '$ref_rule'", "Index out of bounds");
+     my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
+     my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
      return 0;
     }
    }

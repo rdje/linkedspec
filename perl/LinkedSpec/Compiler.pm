@@ -822,8 +822,18 @@ sub run_get_pipeline {
   return undef;
  }
 
+ my %validate_gdata_failure;
  my $gdata_refs_valid = eval {
-  LinkedSpec::Validation::validate_gdata_references($final_descr->{gdata}, $final_descr->{spec})
+  LinkedSpec::Validation::validate_gdata_references(
+   $final_descr->{gdata},
+   $final_descr->{spec},
+   {
+    on_failure => sub {
+     %validate_gdata_failure = @_;
+     return 1;
+    },
+   },
+  )
  };
  my $validate_gdata_references_error = $@;
  if ($validate_gdata_references_error) {
@@ -832,6 +842,7 @@ sub run_get_pipeline {
    stage => 'validate_gdata_references',
    summary => 'Generated parser validation failed',
    detail => $validate_gdata_references_error,
+   rule_label => $validate_gdata_failure{rule_label},
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - trapped exception during generated-descriptor validation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
@@ -843,7 +854,10 @@ sub run_get_pipeline {
    $runtime_ctx,
    stage => 'validate_gdata_references',
    summary => 'Generated parser validation failed',
-   detail => 'validate_gdata_references returned false for the generated descriptor',
+   detail => defined($validate_gdata_failure{detail}) && length($validate_gdata_failure{detail})
+    ? $validate_gdata_failure{detail}
+    : 'validate_gdata_references returned false for the generated descriptor',
+   rule_label => $validate_gdata_failure{rule_label},
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);

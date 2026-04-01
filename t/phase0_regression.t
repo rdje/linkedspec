@@ -8330,8 +8330,8 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'bootstrap_parse die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'bootstrap_parse die leaves inline-spec spec_path empty');
 };
-subtest 'compiler_run_get_pipeline_records_structured_error_for_generated_descriptor_validation_failure' => sub {
-    plan tests => 7;
+subtest 'compiler_run_get_pipeline_records_structured_rule_label_for_generated_descriptor_validation_failure' => sub {
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8348,20 +8348,43 @@ SPEC
         { return_descr => 1 },
         {
             runtime_ctx => $runtime_ctx,
-            bootstrap_parse => sub { return (1, ['__ENTRY__'], ''); },
+            bootstrap_parse => sub { return (1, [['__TOP__'], ['__LEAF__']], ''); },
             compile_spec_entry => sub {
-                return ('Top', { gdata => [], meta => {} }, 'Top');
+                my ($entry) = @_;
+                return (
+                    'Top',
+                    {
+                        handler => sub { return ['?Top:']; },
+                        re => ['a'],
+                        gdata => [{ label => 'Leaf', idx => 1 }],
+                        meta => {},
+                    },
+                    'Top',
+                ) if ref($entry) eq 'ARRAY' && defined($entry->[0]) && $entry->[0] eq '__TOP__';
+                return (
+                    'Leaf',
+                    {
+                        handler => sub { return ['?Leaf:']; },
+                        re => ['b'],
+                        gdata => [],
+                        meta => {},
+                    },
+                    'Leaf',
+                );
             },
         },
     );
 
-    ok(!defined($ret), 'compiler pipeline returns undef when generated descriptor validation fails');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiler pipeline records structured error context for generated descriptor validation failure');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'generated descriptor validation failure records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'generated descriptor validation failure records gdata-validation stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'generated descriptor validation failure records combined owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation failure records summary');
-    like($runtime_ctx->{last_error}{detail}, qr/validate_gdata_references returned false/, 'generated descriptor validation failure records detail');
+    ok(!defined($ret), 'compiler pipeline returns undef when generated descriptor validation rejects a rule gdata reference');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiler pipeline records structured error context for generated descriptor validation rejection');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'generated descriptor validation rejection records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'generated descriptor validation rejection records gdata-validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'generated descriptor validation rejection records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation rejection records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/Rule 'Top' references out-of-bounds regex index 1 on rule 'Leaf'/, 'generated descriptor validation rejection records owning-rule detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'generated descriptor validation rejection records the owning compiled rule label');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'generated descriptor validation rejection leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'generated descriptor validation rejection leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_gdata_references_dies' => sub {
     plan tests => 10;
