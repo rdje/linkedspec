@@ -1582,6 +1582,7 @@ Return the 1-based line number of the current immediate match directly.
 Practical reading:
 - use it when the rule wants the line where the immediate entry match started,
 - prefer it over manual newline counting around `$IMATCH`,
+- prefer `entry_start_line()` when the user-facing story should emphasize “this is explicitly the immediate-match start edge” rather than the shorter historical name,
 - and treat it as the direct line-number companion to `entry_text()` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
 
 Example:
@@ -1607,12 +1608,44 @@ When building this exact inline example directly, select `top_rule => Top` so th
 
 Use it when the rule wants the line where the immediate entry match began instead of the line of the currently active local match.
 
+### `entry_start_line()`
+Return the 1-based line number of the left edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the same start-edge value as `entry_line()` but with fully explicit naming,
+- prefer it over `entry_line()` when the surrounding code already talks in terms of `entry_start_pos()` and `entry_end_*()` and the helper family should read symmetrically,
+- and treat it as the explicit start-edge alias for the older shorter `entry_line()` spelling.
+
+Example:
+
+```text
+entry_start_line()
+```
+
+```text
+Top::AND
+ /foo\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_line_num, body_start_line_num, entry_line_num, body_line_num) }
+ /\w+\n/
+ /\w+/
+ -> Child[0] { assign(scalar(entry_start_line_num), entry_start_line()); assign(scalar(body_start_line_num), match_start_line()); assign(scalar(entry_line_num), entry_line()); assign(scalar(body_line_num), match_line()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_line_num), scalar(body_start_line_num), scalar(entry_line_num), scalar(body_line_num), entry_start_line(), match_start_line(), entry_line(), match_line())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants an explicit “start-line” name for the immediate match that entered the current rule and the shorter `entry_line()` spelling would undersell that left-edge meaning.
+
 ### `entry_col()`
 Return the 1-based column number of the current immediate match directly.
 
 Practical reading:
 - use it when the rule wants the column where the immediate entry match started,
 - prefer it over manual column math around `$IPOS - length($IMATCH)`,
+- prefer `entry_start_col()` when the user-facing story should emphasize “this is explicitly the immediate-match start edge” rather than the shorter historical name,
 - and treat it as the direct column-number companion to `entry_text()` / `entry_line()` / `entry_len()` / `entry_start_pos()` / `entry_end_pos()`.
 
 Example:
@@ -1637,6 +1670,37 @@ Child::AND
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
 
 Use it when the rule wants the column where the immediate entry match began instead of the column of the currently active local match.
+
+### `entry_start_col()`
+Return the 1-based column number of the left edge of the current immediate match directly.
+
+Practical reading:
+- use it when the rule wants the same start-edge value as `entry_col()` but with fully explicit naming,
+- prefer it over `entry_col()` when the surrounding code already talks in terms of `entry_start_pos()` and `entry_end_*()` and the helper family should read symmetrically,
+- and treat it as the explicit start-edge alias for the older shorter `entry_col()` spelling.
+
+Example:
+
+```text
+entry_start_col()
+```
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_col_num, body_start_col_num, entry_col_num, body_col_num) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_start_col_num), entry_start_col()); assign(scalar(body_start_col_num), match_start_col()); assign(scalar(entry_col_num), entry_col()); assign(scalar(body_col_num), match_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_col_num), scalar(body_start_col_num), scalar(entry_col_num), scalar(body_col_num), entry_start_col(), match_start_col(), entry_col(), match_col())) }
+```
+
+When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
+
+Use it when the rule wants an explicit “start-column” name for the immediate match that entered the current rule and the shorter `entry_col()` spelling would undersell that left-edge meaning.
 
 ### `entry_group(index)`
 Return one capture group from the current immediate match directly.
@@ -1975,6 +2039,7 @@ Return the 1-based line number of the current local match directly.
 Practical reading:
 - use it when the rule wants the line where the current local match started,
 - prefer it over manual newline counting around `$LMATCH`,
+- prefer `match_start_line()` when the user-facing story should emphasize “this is explicitly the current local-match start edge” rather than the shorter historical name,
 - and treat it as the direct line-number companion to `match_text()` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
 
 Example:
@@ -1996,12 +2061,40 @@ Top::AND
 
 Use it when the rule wants the line where the current local match began instead of the current parser cursor line or a previously stored checkpoint position.
 
+### `match_start_line()`
+Return the 1-based line number of the left edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the same start-edge value as `match_line()` but with fully explicit naming,
+- prefer it over `match_line()` when the surrounding code already talks in terms of `match_start_pos()` and `match_end_*()` and the helper family should read symmetrically,
+- and treat it as the explicit start-edge alias for the older shorter `match_line()` spelling.
+
+Example:
+
+```text
+match_start_line()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_line, body_start_line, later_line, later_short_name) }
+ /foo\n/
+ /\w+\n/
+ /\w+/
+ -> Top[0] { assign(scalar(open_line), match_start_line()) }
+ -> Top[1] { assign(scalar(body_start_line), match_start_line()); assign(scalar(later_short_name), match_line()) }
+ -> Top[2] { return(array("?Top:", scalar(open_line), scalar(body_start_line), scalar(later_short_name), match_start_line(), match_line())) }
+```
+
+Use it when the rule wants an explicit “start-line” name for the current local match and the shorter `match_line()` spelling would undersell that left-edge meaning.
+
 ### `match_col()`
 Return the 1-based column number of the current local match directly.
 
 Practical reading:
 - use it when the rule wants the column where the current local match started,
 - prefer it over manual column math around `$LSPOS - length($LMATCH)`,
+- prefer `match_start_col()` when the user-facing story should emphasize “this is explicitly the current local-match start edge” rather than the shorter historical name,
 - and treat it as the direct column-number companion to `match_text()` / `match_line()` / `match_len()` / `match_start_pos()` / `match_end_pos()`.
 
 Example:
@@ -2022,6 +2115,33 @@ Top::AND
 ```
 
 Use it when the rule wants the column where the current local match began instead of the current parser cursor column or a previously stored checkpoint.
+
+### `match_start_col()`
+Return the 1-based column number of the left edge of the current local match directly.
+
+Practical reading:
+- use it when the rule wants the same start-edge value as `match_col()` but with fully explicit naming,
+- prefer it over `match_col()` when the surrounding code already talks in terms of `match_start_pos()` and `match_end_*()` and the helper family should read symmetrically,
+- and treat it as the explicit start-edge alias for the older shorter `match_col()` spelling.
+
+Example:
+
+```text
+match_start_col()
+```
+
+```text
+Top::AND
+ I { declare(scalar, open_col, body_start_col, later_col, later_short_name) }
+ /foo\(/
+ /\w+/
+ /\)/
+ -> Top[0] { assign(scalar(open_col), match_start_col()) }
+ -> Top[1] { assign(scalar(body_start_col), match_start_col()); assign(scalar(later_short_name), match_col()) }
+ -> Top[2] { return(array("?Top:", scalar(open_col), scalar(body_start_col), scalar(later_short_name), match_start_col(), match_col())) }
+```
+
+Use it when the rule wants an explicit “start-column” name for the current local match and the shorter `match_col()` spelling would undersell that left-edge meaning.
 
 ### `match_group(index)`
 Return one capture group from the current local match directly.

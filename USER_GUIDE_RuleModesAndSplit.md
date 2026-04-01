@@ -2241,6 +2241,11 @@ Use `entry_col()` when:
 - child-rule logic should keep that entry column visible while local match columns continue to move forward,
 - or the rule wants a backend-neutral replacement for raw `$IPOS - length($IMATCH)` plus newline math in normal user-facing `.spec` code.
 
+Use `entry_start_line()` and `entry_start_col()` when:
+- the rule wants those same immediate-match left-edge line/column values,
+- the surrounding code already uses explicit `entry_start_pos()` / `entry_end_*()` wording and the helper family should read symmetrically,
+- or the shorter `entry_line()` / `entry_col()` names would undersell that these are explicitly start-edge reads.
+
 Use `entry_group(index)` when:
 - the rule wants one capture group from the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry capture-group data visible while local match groups continue to move forward,
@@ -2275,6 +2280,11 @@ Use `match_col()` when:
 - the rule wants the column where the current local match began,
 - there is no need to store a named checkpoint for later reuse,
 - or the rule wants a backend-neutral replacement for raw `$LSPOS - length($LMATCH)` plus newline math in normal user-facing `.spec` code.
+
+Use `match_start_line()` and `match_start_col()` when:
+- the rule wants those same current local-match left-edge line/column values,
+- the surrounding code already uses explicit `match_start_pos()` / `match_end_*()` wording and the helper family should read symmetrically,
+- or the shorter `match_line()` / `match_col()` names would undersell that these are explicitly start-edge reads.
 
 Use `match_group(index)` when:
 - the rule wants one capture group from the current local match itself as data,
@@ -2384,7 +2394,9 @@ The current supported contract is:
 - `cursor_rest_len()` means “return the width of that same live current parser-cursor tail or `undef` when the live cursor itself is unavailable,”
 - `entry_text()` means “return the current immediate match text directly,”
 - `entry_line()` means “return the 1-based line number of the current immediate match directly,”
+- `entry_start_line()` means “return the 1-based line number of the current immediate-match left edge directly,”
 - `entry_col()` means “return the 1-based column number of the current immediate match directly,”
+- `entry_start_col()` means “return the 1-based column number of the current immediate-match left edge directly,”
 - `entry_group(index)` means “return one capture group from the current immediate match directly,”
 - `entry_groups()` means “return the whole current immediate-match capture-group list directly,”
 - `entry_named(name)` means “return one named capture from the current immediate match directly,”
@@ -2398,7 +2410,9 @@ The current supported contract is:
 - `entry_end_col()` means “return the 1-based column number of the current immediate-match right edge directly,”
 - `match_text()` means “return the current local match text directly,”
 - `match_line()` means “return the 1-based line number of the current local match directly,”
+- `match_start_line()` means “return the 1-based line number of the current local-match left edge directly,”
 - `match_col()` means “return the 1-based column number of the current local match directly,”
+- `match_start_col()` means “return the 1-based column number of the current local-match left edge directly,”
 - `match_group(index)` means “return one capture group from the current local match directly,”
 - `match_groups()` means “return the whole current local-match capture-group list directly,”
 - `match_named(name)` means “return one named capture from the current local match directly,”

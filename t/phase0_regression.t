@@ -12571,6 +12571,88 @@ SPEC
     my $col_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_end_col().'."\n".'match_end_col()');
     like($col_rewrite, qr/my \$__ls_col_pos = \$IPOS;.*my \$__ls_col_pos = \$LSPOS;/s, 'entry_end_col() and match_end_col() lowering compute immediate and local right-edge columns directly');
 };
+subtest 'entry_and_match_start_line_helpers_read_immediate_and_local_left_edge_lines' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_line_seen, body_start_line_seen, entry_line_seen, body_line_seen) }
+ /\w+\n/
+ /\w+/
+ -> Child[0] { assign(scalar(entry_start_line_seen), entry_start_line()); assign(scalar(body_start_line_seen), match_start_line()); assign(scalar(entry_line_seen), entry_line()); assign(scalar(body_line_seen), match_line()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_line_seen), scalar(body_start_line_seen), scalar(entry_line_seen), scalar(body_line_seen), entry_start_line(), match_start_line(), entry_line(), match_line())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_line() and match_start_line() coverage');
+
+    my $input = "foo\nbar\nbaz";
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 1, 2, 1, 2, 1, 3, 1, 3],
+        'entry_start_line() and match_start_line() expose explicit left-edge line reads while entry_line() and match_line() keep the same start-edge semantics'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match start-line helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match start-line helper parse leaves runtime_ctx last_error clear on success');
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Child', 'entry_start_line()'),
+        LinkedSpec::call_spec_handler_subst('Child', 'entry_line()'),
+        'entry_start_line() lowering matches the existing entry_line() left-edge semantics exactly'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Child', 'match_start_line()'),
+        LinkedSpec::call_spec_handler_subst('Child', 'match_line()'),
+        'match_start_line() lowering matches the existing match_line() left-edge semantics exactly'
+    );
+};
+subtest 'entry_and_match_start_col_helpers_read_immediate_and_local_left_edge_columns' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, entry_start_col_seen, body_start_col_seen, entry_col_seen, body_col_seen) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(entry_start_col_seen), entry_start_col()); assign(scalar(body_start_col_seen), match_start_col()); assign(scalar(entry_col_seen), entry_col()); assign(scalar(body_col_seen), match_col()) }
+ -> Child[1] { return(array("?Child:", scalar(entry_start_col_seen), scalar(body_start_col_seen), scalar(entry_col_seen), scalar(body_col_seen), entry_start_col(), match_start_col(), entry_col(), match_col())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, top_rule => 'Top', parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for entry_start_col() and match_start_col() coverage');
+
+    my $input = 'foo(bar)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Child:', 1, 5, 1, 5, 1, 8, 1, 8],
+        'entry_start_col() and match_start_col() expose explicit left-edge column reads while entry_col() and match_col() keep the same start-edge semantics'
+    );
+    is($runtime_ctx{top_rule}, 'Top', 'entry/match start-column helper coverage honors explicit top_rule selection for the multi-rule inline parser');
+    ok(!defined($runtime_ctx{last_error}), 'entry/match start-column helper parse leaves runtime_ctx last_error clear on success');
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Child', 'entry_start_col()'),
+        LinkedSpec::call_spec_handler_subst('Child', 'entry_col()'),
+        'entry_start_col() lowering matches the existing entry_col() left-edge semantics exactly'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Child', 'match_start_col()'),
+        LinkedSpec::call_spec_handler_subst('Child', 'match_col()'),
+        'match_start_col() lowering matches the existing match_col() left-edge semantics exactly'
+    );
+};
 subtest 'multi_rule_parsers_default_to_first_rule_and_honor_explicit_top_rule_option' => sub {
     plan tests => 4;
 
@@ -36903,6 +36985,33 @@ SPEC
     ok(index($rewritten, 'my $__ls_col_pos = $IPOS - length $IMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'entry_col() lowers to a direct immediate-match column read');
     ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0 && index($rewritten, 'rindex($__ls_col_prefix, "\n")') >= 0, 'match_col() lowers to a direct local-match column read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit column helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_explicit_start_edge_line_and_col_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("entry_start_line", entry_start_line(), "entry_start_col", entry_start_col(), "match_start_line", match_start_line(), "match_start_col", match_start_col())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit start-edge line/column helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit start-edge line/column helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit start-edge line/column helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit start-edge line/column helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'IMATCH_START_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include IMATCH_START_LINE_READ');
+    ok(grep { $_ eq 'IMATCH_START_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include IMATCH_START_COL_READ');
+    ok(grep { $_ eq 'MATCH_START_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MATCH_START_LINE_READ');
+    ok(grep { $_ eq 'MATCH_START_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MATCH_START_COL_READ');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("entry_start_line", entry_start_line(), "entry_start_col", entry_start_col(), "match_start_line", match_start_line(), "match_start_col", match_start_col()))');
+    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $IPOS - length $IMATCH) =~ /\n/g) }') >= 0, 'entry_start_line() lowers to a direct immediate-match left-edge line read');
+    ok(index($rewritten, 'my $__ls_col_pos = $IPOS - length $IMATCH;') >= 0, 'entry_start_col() lowers to a direct immediate-match left-edge column read');
+    ok(index($rewritten, 'do { 1 + (() = substr($$STRING, 0, $LSPOS - length $LMATCH) =~ /\n/g) }') >= 0, 'match_start_line() lowers to a direct local-match left-edge line read');
+    ok(index($rewritten, 'my $__ls_col_pos = $LSPOS - length $LMATCH;') >= 0, 'match_start_col() lowers to a direct local-match left-edge column read');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit start-edge line/column helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_cursor_tail_helpers_lower_without_raw_fallback' => sub {
     plan tests => 10;

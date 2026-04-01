@@ -1217,6 +1217,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'entry_start_line',
+   ir_node            => 'IMATCH_START_LINE_READ',
+   diag_name          => 'entry_start_line',
+   unresolved_pattern => qr/\bentry_start_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_start_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS - length \$IMATCH) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_col',
    ir_node            => 'IMATCH_COL_READ',
    diag_name          => 'entry_col',
@@ -1224,6 +1235,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bentry_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS - length $IMATCH')/gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'entry_start_col',
+   ir_node            => 'IMATCH_START_COL_READ',
+   diag_name          => 'entry_start_col',
+   unresolved_pattern => qr/\bentry_start_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bentry_start_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS - length $IMATCH')/gex;
     return $code
    },
   },
@@ -1427,6 +1449,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'match_start_line',
+   ir_node            => 'MATCH_START_LINE_READ',
+   diag_name          => 'match_start_line',
+   unresolved_pattern => qr/\bmatch_start_line\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_start_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'match_line',
    ir_node            => 'MATCH_LINE_READ',
    diag_name          => 'match_line',
@@ -1434,6 +1467,17 @@ sub _build_capture_and_backtrack_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bmatch_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'match_start_col',
+   ir_node            => 'MATCH_START_COL_READ',
+   diag_name          => 'match_start_col',
+   unresolved_pattern => qr/\bmatch_start_col\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bmatch_start_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS - length $LMATCH')/gex;
     return $code
    },
   },

@@ -85,7 +85,9 @@ sub try_scan_contract_ir_events {
   'entry_map' => \&_scan_contract_entry_map,
   'entry_named_map' => \&_scan_contract_entry_named_map,
   'entry_line' => \&_scan_contract_entry_line,
+  'entry_start_line' => \&_scan_contract_entry_start_line,
   'entry_col' => \&_scan_contract_entry_col,
+  'entry_start_col' => \&_scan_contract_entry_start_col,
   'entry_len' => \&_scan_contract_entry_len,
   'entry_start_pos' => \&_scan_contract_entry_start_pos,
   'entry_end_pos' => \&_scan_contract_entry_end_pos,
@@ -103,7 +105,9 @@ sub try_scan_contract_ir_events {
   'match_end_pos' => \&_scan_contract_match_end_pos,
   'match_end_line' => \&_scan_contract_match_end_line,
   'match_end_col' => \&_scan_contract_match_end_col,
+  'match_start_line' => \&_scan_contract_match_start_line,
   'match_line' => \&_scan_contract_match_line,
+  'match_start_col' => \&_scan_contract_match_start_col,
   'match_col' => \&_scan_contract_match_col,
   'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
   'backtrack_macro' => \&_scan_contract_backtrack_macro,
@@ -728,10 +732,28 @@ while ($code =~ /\bentry_line\s*\(\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_entry_start_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
 sub _scan_contract_entry_col {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bentry_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_start_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
@@ -890,10 +912,28 @@ while ($code =~ /\bmatch_end_col\s*\(\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_match_start_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_start_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
 sub _scan_contract_match_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmatch_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_start_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_start_col\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
