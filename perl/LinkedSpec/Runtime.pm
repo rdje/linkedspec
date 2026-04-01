@@ -118,6 +118,15 @@ sub run_get {
    );
    return undef;
   }
+  if (!defined($ret)) {
+   _set_runtime_ctx_last_error_unless_present(
+    $runtime_ctx,
+    stage => 'run_get_pipeline',
+    summary => 'Runtime compile delegation failed',
+    detail => 'run_get_pipeline returned undef without structured runtime context',
+   );
+   return undef;
+  }
   return $ret
  })
 }

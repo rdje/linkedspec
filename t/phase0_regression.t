@@ -8982,6 +8982,40 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec die after runtime payload preserves deeper owner_stage');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_INNER_COMPILE_ERROR__/, 'compile_spec die after runtime payload preserves deeper owner detail');
 };
+subtest 'get_parser_preserves_runtime_owner_error_when_runtime_returns_undef_without_payload' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_owner_undef.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return undef };
+        ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when Runtime records fallback undef compiler payload') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef when Runtime fallback handles silent compiler undef');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'get_parser preserves deeper runtime_owner type when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'get_parser preserves deeper runtime_owner stage when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'get_parser preserves deeper runtime_owner owner_stage when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'get_parser preserves deeper runtime_owner summary when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'get_parser preserves deeper runtime_owner detail when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser runtime_owner payload preserves requested spec name when Runtime fallback handles silent compiler undef');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser runtime_owner payload preserves resolved spec path when Runtime fallback handles silent compiler undef');
+};
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
 
@@ -9169,6 +9203,41 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RUNTIME_RUN_GET_PIPELINE_DIE__/, 'compiler delegation die records original thrown detail');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation die leaves spec_path empty in inline runtime context');
+};
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_undef_without_runtime_payload' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return undef };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                return_descr => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation yields undef without structured payload') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation yields undef without structured payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation yields undef');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation yields undef without payload');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation undef records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation undef records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation undef records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation undef records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'compiler delegation undef records stable fallback detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation undef leaves spec_path empty in inline runtime context');
 };
 subtest 'runtime_run_get_preserves_existing_runtime_error_when_run_get_pipeline_dies' => sub {
     plan tests => 9;
