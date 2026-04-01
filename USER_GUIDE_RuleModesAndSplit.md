@@ -814,6 +814,7 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_len()` reads the width of that same slice,
 - `capture_slice_until_cursor()` reads from that same anonymous boundary through the live parser cursor,
 - `capture_slice_until_cursor_len()` reads the width of that same anonymous through-cursor span,
+- `capture_take_until_cursor()` reads that same anonymous through-cursor span and then advances the boundary to the live parser cursor,
 - `capture_slice_pos()` reads the numeric position where that same slice starts,
 - `capture_slice_line()` reads the 1-based line number where that same anonymous slice starts,
 - `capture_slice_col()` reads the 1-based column number where that same anonymous slice starts,
@@ -826,6 +827,7 @@ That means the full current mental model is:
 - `@capture_slice` moves the anonymous boundary at paragraph level,
 - `start_capture_slice()` moves it inside code blocks,
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
+- `capture_take_until_cursor()` reads the current anonymous through-cursor span and also advances that anonymous boundary,
 - `capture_take()` reads the current slice and also advances that anonymous boundary,
 - `capture_rest()` / `capture_rest_len()` read the remaining tail from that same boundary,
 - and `cursor_rest()` / `cursor_rest_len()` answer the different question “what remains from the live parser cursor right now?” without consulting that anonymous boundary.
@@ -879,8 +881,47 @@ the practical reading is:
 
 This is the anonymous advancing-boundary pattern:
 - `capture_slice()` is the stable anonymous read,
+- `capture_take_until_cursor()` is the advancing anonymous read that includes everything through the live parser cursor,
 - `capture_take()` is the advancing anonymous read,
 - and `start_capture_slice()` is the explicit anonymous-boundary write when the rule wants to establish or reset that rolling boundary directly.
+
+## Worked Example: Advancing Through-Cursor Reads
+Sometimes the rule wants the right edge to be the live parser cursor, not the left edge of the current match, and it still wants that boundary to roll forward afterward.
+
+That is what `capture_take_until_cursor()` and `capture_take_until_cursor_from(name)` are for.
+
+```text
+advancing_through_cursor::AND
+ I { declare(scalar, anon_first, named_first) }
+ /\(/
+ @mark(named_start)
+ -> advancing_through_cursor[0] { start_capture_slice() }
+ /\w+/
+ -> advancing_through_cursor[1] { assign(scalar(anon_first), capture_take_until_cursor()); assign(scalar(named_first), capture_take_until_cursor_from(named_start)) }
+ /,\s*/
+ /\w+/
+ -> advancing_through_cursor[3] { return(array("?advancing_through_cursor:", scalar(anon_first), scalar(named_first), capture_take_until_cursor(), capture_take_until_cursor_from(named_start))) }
+```
+
+On input:
+
+```text
+(alpha, beta)
+```
+
+the practical reading is:
+- `start_capture_slice()` establishes the anonymous left edge just after `(`,
+- `@mark(named_start)` establishes the named left edge at that same position,
+- the first `capture_take_until_cursor()` returns `alpha` and advances the anonymous boundary to just after `alpha`,
+- the first `capture_take_until_cursor_from(named_start)` also returns `alpha` and advances `named_start` to just after `alpha`,
+- the second calls then both return `, beta` because the right edge is the live parser cursor after `beta`,
+- and both boundary models are now rolled forward to the current cursor rather than left at the earlier start point.
+
+This is the through-cursor advancing pattern:
+- `capture_slice_until_cursor()` is the stable anonymous through-cursor read,
+- `capture_take_until_cursor()` is the advancing anonymous through-cursor read,
+- `capture_until_cursor_from(name)` is the stable named through-cursor read,
+- and `capture_take_until_cursor_from(name)` is the advancing named through-cursor read.
 
 ## Worked Example: Bridging Anonymous and Named Boundaries
 Sometimes a rule starts with one anonymous rolling capture boundary, but later realizes that one of those anonymous positions should survive under a stable explicit name.
@@ -970,6 +1011,7 @@ The most important semantic detail is this:
 - `capture_len_from(name)` returns the numeric length of that same current-edge span without materializing the substring,
 - `capture_until_cursor_from(name)` returns text from the saved mark through the live parser cursor instead of stopping at the current match edge,
 - `capture_until_cursor_len_from(name)` returns the numeric width of that same named-mark through-cursor span,
+- `capture_take_until_cursor_from(name)` returns that same named-mark through-cursor span and then advances the named mark to the current parser position,
 - `capture_take(name)` returns that same span and then advances the named mark to the current parser position,
 - `capture_rest_from(name)` returns text from the saved mark through end-of-input instead of stopping at the current match edge,
 - `capture_rest_len_from(name)` returns the numeric width of that same remembered tail through end-of-input,
@@ -2158,6 +2200,16 @@ Use `capture_take()` when:
 - the rule wants the anonymous-boundary counterpart to named `capture_take(name)`,
 - or the rule wants a backend-neutral replacement for raw “capture current `$IPOS` span, then set `$IPOS = pos $$STRING`” flow in normal user-facing `.spec` code.
 
+Use `capture_take_until_cursor()` when:
+- one rolling anonymous capture boundary is enough for the whole rule,
+- the returned span should extend through the live parser cursor instead of stopping at the current match edge,
+- and the anonymous boundary should still roll forward after the read.
+
+Use `capture_take_until_cursor_from(name)` when:
+- the rule wants a stable named checkpoint model rather than the anonymous boundary model,
+- the returned span should extend through the live parser cursor instead of stopping at the current match edge,
+- and the named checkpoint should still roll forward after the read.
+
 Use `cursor_rest()` and `cursor_rest_len()` when:
 - the rule should expose what remains from the live parser cursor through end-of-input,
 - the left edge should be the live parser cursor rather than an anonymous or named checkpoint,
@@ -2280,10 +2332,11 @@ The current supported contract is:
 - repeated-choice blind-call use on `rule:`, `:OR`, `:OR+`, `:+`, and `:OR{...}` is now supported current surface too, with label-driven repeated-choice semantics rather than implicit sequence semantics,
 - the validation layer now recognizes that same current rule-label surface for earlier syntax diagnostics instead of only understanding the older `name::` subset,
 - `@capture_slice` is the preferred split-boundary cursor feature,
-- `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
+- `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_take_until_cursor()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `start_capture_slice_from(name)` is the preferred named-to-anonymous bridge helper when one stored named checkpoint should become the active anonymous split boundary again,
 - `capture_take()` is the preferred anonymous split-boundary advancing-read helper,
+- `capture_take_until_cursor_from(name)` is the preferred advancing named-mark through-cursor helper when the right edge should be the live parser cursor,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
@@ -2292,6 +2345,8 @@ The current supported contract is:
 - `capture_len_from(name)` means “the numeric length of that same current-edge span or `undef` when the mark is absent,”
 - `capture_until_cursor_from(name)` means “text from the named checkpoint through the live parser cursor,”
 - `capture_until_cursor_len_from(name)` means “the numeric length of that same named-mark through-cursor span or `undef` when the mark is absent,”
+- `capture_take_until_cursor()` means “return the current anonymous through-cursor span and then advance that anonymous boundary to the live parser cursor,”
+- `capture_take_until_cursor_from(name)` means “return the current named-mark through-cursor span and then advance that named mark to the live parser cursor,”
 - `capture_take()` means “return the current anonymous split-boundary span and then advance that anonymous boundary to the current parser position,”
 - `start_capture_slice_from(name)` means “look up that stored named checkpoint and make it the active anonymous split-boundary start again,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”

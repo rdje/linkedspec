@@ -294,6 +294,44 @@ Top::AND
 
 Use it when the rule needs the width of that same anonymous through-cursor span but does not need the span text itself.
 
+### `capture_take_until_cursor()`
+Return the same anonymous through-cursor span that `capture_slice_until_cursor()` would read, then advance that anonymous capture boundary to the live parser cursor.
+
+Practical reading:
+- use it when the left edge should still come from the current anonymous capture boundary in `$IPOS`,
+- but the right edge should be the live parser cursor instead of the left edge of the current local match,
+- and after the read the anonymous boundary should roll forward to that same live parser cursor for later same-rule reads.
+
+Compare the nearby helpers:
+- `capture_slice_until_cursor()` keeps the anonymous boundary stable,
+- `capture_take_until_cursor()` reads through the live cursor and also advances the anonymous boundary to that live cursor,
+- and `capture_take()` still stops at the left edge of the current local match before advancing.
+
+Examples:
+
+```text
+assign(scalar(segment), capture_take_until_cursor())
+```
+
+```text
+Top::AND
+ I { declare(scalar, first, second) }
+ /\(/
+ -> Top[0] { start_capture_slice() }
+ /\w+/
+ -> Top[1] { assign(scalar(first), capture_take_until_cursor()) }
+ /,\s*/
+ /\w+/
+ -> Top[3] { return(array("?Top:", scalar(first), capture_take_until_cursor(), capture_slice_pos())) }
+```
+
+On input `(alpha, beta)`:
+- the first `capture_take_until_cursor()` returns `alpha` and advances the anonymous boundary to just after `alpha`,
+- the second `capture_take_until_cursor()` returns `, beta` because the right edge is the live parser cursor after `beta`,
+- and the final `capture_slice_pos()` reports the new anonymous boundary after that second advancing read.
+
+Use it when the rule wants a rolling anonymous boundary but the captured unit should include everything through the live parser cursor, not stop at the current match edge.
+
 ### `capture_slice_pos()`
 Return the numeric position of the current anonymous capture boundary.
 
@@ -694,6 +732,48 @@ Top::AND
 ```
 
 Use it when the rule needs the width of that same named-mark through-cursor span but does not need the span text itself.
+
+### `capture_take_until_cursor_from(name)`
+Return the same named-mark through-cursor span that `capture_until_cursor_from(name)` would read, then advance that named mark to the live parser cursor.
+
+Practical reading:
+- use it when a stable named checkpoint is still the right left-edge model,
+- but after the read the named checkpoint itself should roll forward to the current parser cursor,
+- and compare it with `capture_take(name)` when the captured span should stop at the left edge of the current local match instead of running through the live cursor.
+
+Compare the nearby helpers:
+- `capture_until_cursor_from(name)` keeps the named mark stable while reading through the live parser cursor,
+- `capture_take_until_cursor_from(name)` reads that same through-cursor span and then advances the named mark to that live cursor,
+- and `capture_take(name)` still excludes the current local match from the returned span before advancing the mark.
+
+If the mark is absent, the helper returns `undef` and leaves the mark unchanged.
+
+Examples:
+
+```text
+assign(scalar(segment), capture_take_until_cursor_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, first, second) }
+ /\(/
+ @mark(body_start)
+ /\w+/
+ -> Top[0] { }
+ -> Top[1] { assign(scalar(first), capture_take_until_cursor_from(body_start)) }
+ /,\s*/
+ /\w+/
+ -> Top[3] { return(array("?Top:", scalar(first), capture_take_until_cursor_from(body_start), mark_pos(body_start))) }
+```
+
+On input `(alpha, beta)`:
+- `@mark(body_start)` establishes the named checkpoint just after `(`,
+- the first `capture_take_until_cursor_from(body_start)` returns `alpha` and advances `body_start` to just after `alpha`,
+- the second `capture_take_until_cursor_from(body_start)` returns `, beta`,
+- and `mark_pos(body_start)` then reports the new stored named checkpoint at the live parser cursor after `beta`.
+
+Use it when the rule wants a rolling remembered checkpoint, but the captured unit should extend through the live parser cursor instead of stopping at the current match edge.
 
 ### `capture_take(name)`
 Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.

@@ -506,6 +506,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_take_until_cursor',
+   ir_node            => 'CAPTURE_SLICE_TAKE_UNTIL_CURSOR',
+   diag_name          => 'capture_take_until_cursor',
+   unresolved_pattern => qr/\bcapture_take_until_cursor\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_until_cursor\s*\(\s*\)
+    }{
+     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture = substr($$STRING, $IPOS, $__ls_cursor - $IPOS); $IPOS = $__ls_cursor; $__ls_capture } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_slice_line',
    ir_node            => 'CAPTURE_SLICE_LINE_READ',
    diag_name          => 'capture_slice_line',
@@ -794,6 +809,21 @@ sub _build_capture_and_backtrack_contracts {
      \bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
      'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? ($__ls_cursor - $__ls_mark) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'capture_take_until_cursor_from_mark',
+   ir_node            => 'CAPTURE_TAKE_UNTIL_CURSOR_FROM_MARK',
+   diag_name          => 'capture_take_until_cursor_from',
+   unresolved_pattern => qr/\bcapture_take_until_cursor_from\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture = substr($$STRING, $__ls_mark, $__ls_cursor - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_cursor; '. _build_mark_trace_call(operation => 'capture_take_until_cursor', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
