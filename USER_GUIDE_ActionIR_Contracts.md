@@ -1059,6 +1059,49 @@ Top::AND
 
 Use it when the rule should keep the clarity of explicit remembered boundaries but also wants the left boundary to advance after the read, instead of hand-composing that advance outside the helper.
 
+### `capture_take_between_len(start_mark, end_mark)`
+Return the numeric width of the same explicit two-mark span that `capture_take_between(start_mark, end_mark)` would read, then advance the start mark to the stored end mark.
+
+Practical reading:
+- use it when both boundaries should still come from explicit named checkpoints rather than from the current match,
+- the rule only needs the width of that two-mark span rather than the span text itself,
+- and after the read the start mark should still roll forward to the stored end mark.
+
+Compare the nearby helpers:
+- `capture_len_between(start_mark, end_mark)` keeps both marks stable while returning the width,
+- `capture_take_between(start_mark, end_mark)` returns the actual two-mark text and then advances the start mark,
+- and `capture_take_between_len(start_mark, end_mark)` returns the same two-mark width and then advances the start mark.
+
+If either mark is absent, or if the end mark is before the start mark, the helper returns `undef` and leaves the start mark unchanged.
+
+Example:
+
+```text
+capture_take_between_len(body_start, first_end)
+```
+
+```text
+Top::AND
+ I { declare(scalar, stage, first_width) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_width), capture_take_between_len(body_start, first_end)) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_width), capture_len_between(body_start, final_end), capture_take_between_len(body_start, missing_end))) }
+```
+
+On input `fooalphabetaEND`:
+- `capture_take_between_len(body_start, first_end)` returns `5` for `alpha`,
+- the helper then advances `body_start` to the stored `first_end` mark,
+- the later `capture_len_between(body_start, final_end)` therefore reports `4` for `beta`,
+- and `capture_take_between_len(body_start, missing_end)` still returns `undef` because no such end mark was stored.
+
+Use it when the rule wants explicit remembered-boundary width metadata plus the same rolling-start behavior as `capture_take_between(start_mark, end_mark)`.
+
 ### `mark_here(name)`
 Set or overwrite a named `@mark(name)` checkpoint to the current parser position without reading from it first.
 

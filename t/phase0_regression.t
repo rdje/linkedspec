@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 75;
+    plan tests => 76;
 
     my $label = 'Top';
 
@@ -11006,6 +11006,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'capture_take_between(body_start, first_end)'),
         q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = substr($$STRING, $__ls_start, $__ls_end - $__ls_start); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_between', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture } else { undef } }},
         'capture_take_between(start_mark,end_mark) helper rewrite preserves explicit two-mark span plus advancing-start semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'capture_take_between_len(body_start, first_end)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = ($__ls_end - $__ls_start); $__ls_mark_bucket->{'body_start'} = $__ls_end; _trace_runtime_mark_event(operation => 'capture_take_between_len', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_capture_len } else { undef } }},
+        'capture_take_between_len(start_mark,end_mark) helper rewrite preserves explicit two-mark span-length plus advancing-start semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_here(body_start)'),
@@ -11779,6 +11784,39 @@ SPEC
 
     my $take_between_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_between(body_start, first_end)');
     like($take_between_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_between(start_mark,end_mark) lowering advances the start mark to the stored end-mark position after returning the captured span');
+};
+subtest 'named_mark_capture_take_between_len_reads_and_advances_explicit_start_mark' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first_width) }
+ /foo/
+ @mark(body_start)
+ /alpha/
+ /beta/
+ /END/
+ -> Top[0] { assign(scalar(stage), "open") }
+ -> Top[1] { assign(scalar(stage), "body") }
+ -> Top[2] { mark_match_start(first_end); assign(scalar(first_width), capture_take_between_len(body_start, first_end)) }
+ -> Top[3] { mark_match_start(final_end); return(array("?Top:", scalar(first_width), capture_len_between(body_start, final_end), capture_take_between_len(body_start, missing_end))) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_take_between_len(start_mark,end_mark) coverage');
+
+    my $input = 'fooalphabetaEND';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 5, 4, undef],
+        'capture_take_between_len(start_mark,end_mark) returns the explicit first span width, advances the start mark to the stored end mark, and leaves missing-end reads undefined'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_take_between_len(start_mark,end_mark) parse leaves runtime_ctx last_error clear on success');
+
+    my $take_between_len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take_between_len(body_start, first_end)');
+    like($take_between_len_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = \$__ls_end;/, 'capture_take_between_len(start_mark,end_mark) lowering advances the start mark to the stored end-mark position after returning the captured width');
 };
 subtest 'capture_slice_helpers_read_current_capture_boundary_span_without_named_mark' => sub {
     plan tests => 5;
@@ -37345,6 +37383,34 @@ SPEC
     ok(index($rewritten, q{$__ls_mark_bucket->{'body_start'} = $__ls_cursor;}) >= 0, 'capture_take_until_cursor_from(name) lowers to the matching named-mark advance after returning the captured span');
     ok(index($rewritten, 'my $__ls_capture_len = ($__ls_cursor - $__ls_mark);') >= 0, 'capture_take_until_cursor_len_from(name) lowers to a direct named-mark through-cursor width read before advancing');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing through-cursor helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_capture_take_between_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("slice", capture_take_between(body_start, first_end), "slice_width", capture_take_between_len(body_start, first_end))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing two-mark helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit advancing two-mark helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit advancing two-mark helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit advancing two-mark helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'CAPTURE_TAKE_BETWEEN_MARKS' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_TAKE_BETWEEN_MARKS');
+    ok(grep { $_ eq 'CAPTURE_TAKE_BETWEEN_LEN_MARKS' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_TAKE_BETWEEN_LEN_MARKS');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("slice", capture_take_between(body_start, first_end), "slice_width", capture_take_between_len(body_start, first_end)))');
+    ok(index($rewritten, q{my $__ls_start = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'advancing two-mark helpers lower through the stored start mark');
+    ok(index($rewritten, q{my $__ls_end = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'first_end'} : undef;}) >= 0, 'advancing two-mark helpers lower through the stored end mark');
+    ok(index($rewritten, 'substr($$STRING, $__ls_start, $__ls_end - $__ls_start)') >= 0, 'capture_take_between(start_mark,end_mark) lowers to a direct explicit two-mark span read');
+    ok(index($rewritten, q{$__ls_mark_bucket->{'body_start'} = $__ls_end;}) >= 0, 'advancing two-mark helpers lower to the matching start-mark advance');
+    ok(index($rewritten, 'my $__ls_capture_len = ($__ls_end - $__ls_start);') >= 0, 'capture_take_between_len(start_mark,end_mark) lowers to a direct explicit two-mark width read before advancing');
+    ok(index($rewritten, q{operation => 'capture_take_between'}) >= 0, 'capture_take_between(start_mark,end_mark) retains mark trace instrumentation');
+    ok(index($rewritten, q{operation => 'capture_take_between_len'}) >= 0, 'capture_take_between_len(start_mark,end_mark) retains mark trace instrumentation');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit advancing two-mark helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_canonical_action_ir_classifies_capture_substr_print_without_raw_fallback' => sub {
     plan tests => 7;

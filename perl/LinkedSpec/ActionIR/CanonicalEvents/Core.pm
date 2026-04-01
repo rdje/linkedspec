@@ -69,6 +69,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  capture_between_marks            => 'CAPTURE_BETWEEN_MARKS',
  capture_len_between_marks        => 'CAPTURE_LEN_BETWEEN_MARKS',
  capture_take_between_marks       => 'CAPTURE_TAKE_BETWEEN_MARKS',
+ capture_take_between_len_marks   => 'CAPTURE_TAKE_BETWEEN_LEN_MARKS',
  mark_here                        => 'MARK_HERE',
  mark_entry_start                 => 'MARK_ENTRY_START',
  mark_entry_end                   => 'MARK_ENTRY_END',

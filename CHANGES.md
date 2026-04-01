@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-01 - Phase 4: add advancing explicit two-mark width helper
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take_between_len(start_mark, end_mark)` is now a first-class helper contract scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so exact rewrite coverage now locks the new helper lowering, runtime coverage now locks the “return width and advance the start mark to the stored end mark” semantics, and ActionIR coverage now locks the new canonical node plus no-raw-fallback lowering,
+- expanded the user guides with rationale plus worked examples so the explicit two-mark family now teaches the stable text read, stable width read, advancing text read, and advancing width read together as one coherent surface,
+- refreshed roadmap/continuity notes so future resume treats advancing explicit two-mark width reads as covered helper surface now rather than as a remaining symmetry gap in the Phase 4 capture family.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add advancing through-cursor width helpers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take_until_cursor_len()` and `capture_take_until_cursor_len_from(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,

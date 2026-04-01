@@ -1020,6 +1020,7 @@ The most important semantic detail is this:
 - `capture_rest_len_from(name)` returns the numeric width of that same remembered tail through end-of-input,
 - `capture_between(start_mark, end_mark)` returns text between two explicit named checkpoints without using the current match edge as the right boundary,
 - `capture_len_between(start_mark, end_mark)` returns the numeric length of that same explicit two-mark span without materializing the substring,
+- `capture_take_between_len(start_mark, end_mark)` returns the numeric width of that same explicit two-mark span and then advances the start mark to the stored end mark,
 - `capture_take_between(start_mark, end_mark)` returns that same explicit two-mark span and then advances `start_mark` to the stored `end_mark`,
 - `mark_here(name)` updates the named mark to the current parser position without first reading a span from it,
 - `mark_match_start(name)` updates the named mark to the left edge of the current match instead of to the current parser position,
@@ -2238,6 +2239,11 @@ Use `capture_take_until_cursor_len_from(name)` when:
 - the rule only needs the width of that through-cursor span instead of the span text,
 - and the named checkpoint should still roll forward after the read.
 
+Use `capture_take_between_len(start_mark, end_mark)` when:
+- both boundaries should come from explicit named checkpoints rather than from the current match,
+- the rule only needs the width of that explicit two-mark span instead of the span text,
+- and the start mark should still roll forward to the stored end mark after the read.
+
 Use `cursor_rest()` and `cursor_rest_len()` when:
 - the rule should expose what remains from the live parser cursor through end-of-input,
 - the left edge should be the live parser cursor rather than an anonymous or named checkpoint,
@@ -2375,6 +2381,7 @@ The current supported contract is:
 - `start_capture_slice_from(name)` is the preferred named-to-anonymous bridge helper when one stored named checkpoint should become the active anonymous split boundary again,
 - `capture_take()` is the preferred anonymous split-boundary advancing-read helper,
 - `capture_take_until_cursor_from(name)` and `capture_take_until_cursor_len_from(name)` are the preferred advancing named-mark through-cursor helpers when the right edge should be the live parser cursor,
+- `capture_take_between_len(start_mark, end_mark)` is the preferred advancing explicit two-mark width helper when both boundaries should stay fully explicit,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
 - `@mark(name)` is the preferred named checkpoint surface,
@@ -2387,6 +2394,7 @@ The current supported contract is:
 - `capture_take_until_cursor_len()` means “return the numeric width of the current anonymous through-cursor span and then advance that anonymous boundary to the live parser cursor,”
 - `capture_take_until_cursor_from(name)` means “return the current named-mark through-cursor span and then advance that named mark to the live parser cursor,”
 - `capture_take_until_cursor_len_from(name)` means “return the numeric width of the current named-mark through-cursor span and then advance that named mark to the live parser cursor,”
+- `capture_take_between_len(start_mark, end_mark)` means “return the numeric width of the current explicit two-mark span and then advance the start mark to the stored end mark,”
 - `capture_take()` means “return the current anonymous split-boundary span and then advance that anonymous boundary to the current parser position,”
 - `start_capture_slice_from(name)` means “look up that stored named checkpoint and make it the active anonymous split-boundary start again,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”

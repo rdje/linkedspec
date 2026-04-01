@@ -904,6 +904,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'capture_take_between_len_marks',
+   ir_node            => 'CAPTURE_TAKE_BETWEEN_LEN_MARKS',
+   diag_name          => 'capture_take_between_len',
+   unresolved_pattern => qr/\bcapture_take_between_len\s*\(\s*\w+\s*,\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_take_between_len\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{start}.'\'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{end}.'\'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = ($__ls_end - $__ls_start); $__ls_mark_bucket->{\''.$+{start}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_between_len', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{start}.'\'}') .'; $__ls_capture_len } else { undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'mark_here',
    ir_node            => 'MARK_HERE',
    diag_name          => 'mark_here',
