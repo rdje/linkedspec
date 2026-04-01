@@ -301,7 +301,19 @@ sub validate_gdata_references {
  for my $rule_name (keys %$spec) {
   my $rule_def = $spec->{$rule_name};
 
-  unless (validate_rule_definition($rule_name, $rule_def)) {
+  my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
+  my $validate_rule_definition_error = $@;
+  if ($validate_rule_definition_error) {
+   _notify_gdata_validation_failure(
+    $option,
+    summary => "Rule definition validation failed for rule '$rule_name'",
+    detail => $validate_rule_definition_error,
+    rule_label => $rule_name,
+   );
+   die $validate_rule_definition_error;
+  }
+
+  unless ($rule_valid) {
    _notify_gdata_validation_failure(
     $option,
     summary => "Invalid rule definition for rule '$rule_name'",

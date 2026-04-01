@@ -8423,6 +8423,44 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'validate_gdata_references die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
 };
+subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_gdata_references_dies_mid_rule' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_rule_definition = sub { die "__FORCED_VALIDATE_RULE_DEFINITION_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps nested validate_rule_definition die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_gdata_references dies while validating one rule');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'nested validate_rule_definition die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'nested validate_rule_definition die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'nested validate_rule_definition die records validate_gdata_references stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'nested validate_rule_definition die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'nested validate_rule_definition die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_RULE_DEFINITION_DIE__/, 'nested validate_rule_definition die records original thrown detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'nested validate_rule_definition die records the owning compiled rule label');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'nested validate_rule_definition die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'nested validate_rule_definition die leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_dies' => sub {
     plan tests => 11;
 
