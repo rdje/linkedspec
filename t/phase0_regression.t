@@ -8401,7 +8401,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_dies' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8435,8 +8435,48 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec_entry die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compile_spec_entry die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_ENTRY_DIE__/, 'compile_spec_entry die records original thrown detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'compile_spec_entry die records the active parsed rule label');
     is($runtime_ctx->{last_error}{spec_name}, '', 'compile_spec_entry die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compile_spec_entry die leaves inline-spec spec_path empty');
+};
+subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_returns_invalid_tuple' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                compile_spec_entry => sub { return () },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline treats invalid compile_spec_entry tuple as a structured failure without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when compile_spec_entry yields an invalid descriptor tuple');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid compile_spec_entry tuple records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid compile_spec_entry tuple records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'invalid compile_spec_entry tuple records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'invalid compile_spec_entry tuple records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'invalid compile_spec_entry tuple records summary');
+    is($runtime_ctx->{last_error}{detail}, 'Rule descriptor build failed while compiling parsed spec entries', 'invalid compile_spec_entry tuple records the stable descriptor-build detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid compile_spec_entry tuple records the active parsed rule label');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_final_descriptor_build_dies' => sub {
     plan tests => 10;

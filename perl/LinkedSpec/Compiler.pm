@@ -526,9 +526,13 @@ sub _reset_spec_content_pos {
 sub _first_parsed_rule_label {
  my ($parsed_spec_entries) = @_;
  return undef unless ref($parsed_spec_entries) eq 'ARRAY' && @$parsed_spec_entries;
- my $first_entry = $parsed_spec_entries->[0];
- return undef unless ref($first_entry) eq 'ARRAY';
- foreach my $centry (@$first_entry) {
+ return _parsed_rule_label($parsed_spec_entries->[0])
+}
+
+sub _parsed_rule_label {
+ my ($parsed_entry) = @_;
+ return undef unless ref($parsed_entry) eq 'ARRAY';
+ foreach my $centry (@$parsed_entry) {
   next unless ref($centry) eq 'ARRAY';
   next unless defined($centry->[0]) && $centry->[0] =~ /ELABEL/o;
   return $centry->[1] if defined($centry->[1]) && length($centry->[1]);
@@ -754,7 +758,14 @@ sub run_get_pipeline {
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
- my $auto_descr_spec = eval { spec_descr($retv, $compile_spec_entry) };
+ my $active_spec_descr_rule_label = undef;
+ my $auto_descr_spec = eval {
+  spec_descr($retv, sub {
+   my ($entry) = @_;
+   $active_spec_descr_rule_label = _parsed_rule_label($entry);
+   return $compile_spec_entry->($entry)
+  })
+ };
  my $spec_descr_error = $@;
  if ($spec_descr_error) {
   _set_runtime_ctx_last_error(
@@ -762,6 +773,7 @@ sub run_get_pipeline {
    stage => 'spec_descr',
    summary => 'Spec descriptor generation failed',
    detail => $spec_descr_error,
+   rule_label => $active_spec_descr_rule_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed - trapped exception while compiling parsed spec entries");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
@@ -773,6 +785,7 @@ sub run_get_pipeline {
    stage => 'spec_descr',
    summary => 'Spec descriptor generation failed',
    detail => 'Rule descriptor build failed while compiling parsed spec entries',
+   rule_label => $active_spec_descr_rule_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
