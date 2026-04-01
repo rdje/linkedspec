@@ -816,6 +816,7 @@ There is now also a small explicit helper family for the same anonymous boundary
 - `capture_slice_until_cursor_len()` reads the width of that same anonymous through-cursor span,
 - `capture_take_until_cursor()` reads that same anonymous through-cursor span and then advances the boundary to the live parser cursor,
 - `capture_take_until_cursor_len()` reads the width of that same anonymous through-cursor span and then advances the boundary to the live parser cursor,
+- `capture_take_len()` reads the width of that same anonymous current-edge span and then advances the boundary to the current parser position,
 - `capture_take_rest()` reads that same anonymous boundary through end-of-input and then advances the boundary to end-of-input,
 - `capture_take_rest_len()` reads the width of that same anonymous tail and then advances the boundary to end-of-input,
 - `capture_slice_pos()` reads the numeric position where that same slice starts,
@@ -832,6 +833,7 @@ That means the full current mental model is:
 - `capture_slice()` / `capture_slice_len()` / `capture_slice_until_cursor()` / `capture_slice_until_cursor_len()` / `capture_slice_pos()` / `capture_slice_line()` / `capture_slice_col()` read metadata or text about the current slice,
 - `capture_take_until_cursor()` reads the current anonymous through-cursor span and also advances that anonymous boundary,
 - `capture_take_until_cursor_len()` reads the width of that same current anonymous through-cursor span and also advances that anonymous boundary,
+- `capture_take_len()` reads the width of that same current anonymous current-edge span and also advances that anonymous boundary,
 - `capture_take_rest()` reads the current anonymous tail through end-of-input and also advances that anonymous boundary to end-of-input,
 - `capture_take_rest_len()` reads the width of that same current anonymous tail and also advances that anonymous boundary to end-of-input,
 - `capture_take()` reads the current slice and also advances that anonymous boundary,
@@ -2233,6 +2235,11 @@ Use `capture_take_until_cursor_len()` when:
 - the rule only needs the width of that through-cursor span instead of the span text,
 - and the anonymous boundary should still roll forward after the read.
 
+Use `capture_take_len()` when:
+- one rolling anonymous capture boundary is enough for the whole rule,
+- the rule only needs the width of the current-edge span instead of the span text,
+- and the anonymous boundary should still roll forward after the read.
+
 Use `capture_take_rest()` when:
 - one rolling anonymous capture boundary is enough for the whole rule,
 - the returned span should extend all the way through end-of-input instead of stopping at the current match edge or current cursor,
@@ -2251,6 +2258,11 @@ Use `capture_take_until_cursor_from(name)` when:
 Use `capture_take_until_cursor_len_from(name)` when:
 - the rule wants a stable named checkpoint model rather than the anonymous boundary model,
 - the rule only needs the width of that through-cursor span instead of the span text,
+- and the named checkpoint should still roll forward after the read.
+
+Use `capture_take_len_from(name)` when:
+- the rule wants a stable named checkpoint model rather than the anonymous boundary model,
+- the rule only needs the width of the current-edge span instead of the span text,
 - and the named checkpoint should still roll forward after the read.
 
 Use `capture_take_rest_from(name)` when:
@@ -2404,7 +2416,9 @@ The current supported contract is:
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
 - `start_capture_slice_from(name)` is the preferred named-to-anonymous bridge helper when one stored named checkpoint should become the active anonymous split boundary again,
 - `capture_take()` is the preferred anonymous split-boundary advancing-read helper,
+- `capture_take_len()` is the preferred anonymous split-boundary advancing-width helper,
 - `capture_take_until_cursor_from(name)` and `capture_take_until_cursor_len_from(name)` are the preferred advancing named-mark through-cursor helpers when the right edge should be the live parser cursor,
+- `capture_take_len_from(name)` is the preferred advancing named-mark current-edge width helper when the right edge should still be the current match edge,
 - `capture_take_between_len(start_mark, end_mark)` is the preferred advancing explicit two-mark width helper when both boundaries should stay fully explicit,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
@@ -2416,8 +2430,10 @@ The current supported contract is:
 - `capture_until_cursor_len_from(name)` means “the numeric length of that same named-mark through-cursor span or `undef` when the mark is absent,”
 - `capture_take_until_cursor()` means “return the current anonymous through-cursor span and then advance that anonymous boundary to the live parser cursor,”
 - `capture_take_until_cursor_len()` means “return the numeric width of the current anonymous through-cursor span and then advance that anonymous boundary to the live parser cursor,”
+- `capture_take_len()` means “return the numeric width of the current anonymous current-edge span and then advance that anonymous boundary to the current parser position,”
 - `capture_take_until_cursor_from(name)` means “return the current named-mark through-cursor span and then advance that named mark to the live parser cursor,”
 - `capture_take_until_cursor_len_from(name)` means “return the numeric width of the current named-mark through-cursor span and then advance that named mark to the live parser cursor,”
+- `capture_take_len_from(name)` means “return the numeric width of the current named-mark current-edge span and then advance that named mark to the current parser position,”
 - `capture_take_between_len(start_mark, end_mark)` means “return the numeric width of the current explicit two-mark span and then advance the start mark to the stored end mark,”
 - `capture_take()` means “return the current anonymous split-boundary span and then advance that anonymous boundary to the current parser position,”
 - `start_capture_slice_from(name)` means “look up that stored named checkpoint and make it the active anonymous split-boundary start again,”

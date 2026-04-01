@@ -652,6 +652,51 @@ On input `(alpha)`:
 
 Use it when the rule wants the width of the remaining anonymous tail, not the tail text itself, and that same rule should then treat the anonymous boundary as consumed through end-of-input.
 
+### `capture_take_len()`
+Return the numeric width of the same anonymous capture-boundary span that `capture_take()` would read, then advance that anonymous boundary to the current parser position.
+
+Practical reading:
+- use it when one anonymous capture boundary is enough, but later same-rule reads should continue from the current parser position,
+- treat it as the width-only advancing companion to `capture_take()`,
+- compare it with stable `capture_slice_len()` when the rule should not advance the boundary yet,
+- and compare it with `capture_take_len_from(name)` on the named-checkpoint side when the rule does need more than one stable remembered boundary.
+
+Example:
+
+```text
+capture_take_len()
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_width, second_width) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { start_capture_slice() }
+ -> Top[2] { assign(scalar(first_width), capture_take_len()) }
+ -> Top[4] { assign(scalar(second_width), capture_take_len()) }
+ -> Top[6] { return(array("?Top:", scalar(first_width), scalar(second_width), capture_slice())) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- `start_capture_slice()` establishes the anonymous left boundary just after `(`,
+- the first `capture_take_len()` returns `5` for `alpha` and advances that anonymous boundary to just after the first comma,
+- the second `capture_take_len()` returns `4` for `beta` and advances that anonymous boundary to just after the second comma,
+- and the final `capture_slice()` still returns `gamma` from the advanced anonymous boundary through the left edge of `)`.
+
+Use it when the rule wants split-cursor-style advancing capture semantics but only needs width metadata, not the captured text itself.
+
 ### `capture_take()`
 Return the same anonymous capture-boundary span that `capture_slice()` would read, then advance that anonymous boundary to the current parser position.
 
@@ -934,6 +979,53 @@ On input `(alpha, beta)`:
 - and `capture_take_until_cursor_len_from(missing_mark)` still returns `undef` because no such mark was established.
 
 Use it when the rule wants a rolling remembered checkpoint and width-only metadata for each through-cursor span, without materializing the captured text itself.
+
+### `capture_take_len_from(name)`
+Return the numeric width of the same current-edge span that `capture_take(name)` would read, then advance that named mark to the current parser position.
+
+Practical reading:
+- the earlier `@mark(name)` still establishes the left boundary,
+- the current match still establishes the right boundary,
+- the returned width still excludes the current local match,
+- and after the read, the named mark still moves forward like a named split cursor.
+
+If the mark is absent, the helper returns `undef` and leaves the mark unchanged.
+
+Examples:
+
+```text
+assign(scalar(width), capture_take_len_from(body_start))
+```
+
+```text
+Top::AND
+ I { declare(scalar, first_width, second_width) }
+ /foo\(/
+ @mark(body_start)
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[2] { assign(scalar(first_width), capture_take_len_from(body_start)) }
+ -> Top[4] { assign(scalar(second_width), capture_take_len_from(body_start)) }
+ -> Top[6] { return(array("?Top:", scalar(first_width), scalar(second_width), capture_from(body_start))) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- the first `capture_take_len_from(body_start)` returns `5` for `alpha` and moves `body_start` to just after the first comma,
+- the second `capture_take_len_from(body_start)` returns `4` for `beta` and moves `body_start` to just after the second comma,
+- the final `capture_from(body_start)` then returns `gamma` from the advanced named checkpoint,
+- and the rule keeps one stable remembered boundary model instead of switching to the anonymous boundary model.
+
+Use it when the same rule should keep consuming successive named spans and only needs width metadata for each one.
 
 ### `capture_take(name)`
 Return the same substring that `capture_from(name)` would return, then advance that named mark to the current parser position.
