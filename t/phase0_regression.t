@@ -8380,7 +8380,7 @@ SPEC
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'generated descriptor validation rejection records compiler_pipeline type');
     is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'generated descriptor validation rejection records gdata-validation stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'generated descriptor validation rejection records combined owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'generated descriptor validation rejection records summary');
+    is($runtime_ctx->{last_error}{summary}, "Invalid regex index 1 for rule 'Leaf'", 'generated descriptor validation rejection records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/Rule 'Top' references out-of-bounds regex index 1 on rule 'Leaf'/, 'generated descriptor validation rejection records owning-rule detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'generated descriptor validation rejection records the owning compiled rule label');
     is($runtime_ctx->{last_error}{spec_name}, '', 'generated descriptor validation rejection leaves inline-spec spec_name empty');
@@ -8455,7 +8455,7 @@ SPEC
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'nested validate_rule_definition die records compiler_pipeline type');
     is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'nested validate_rule_definition die records validate_gdata_references stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'nested validate_rule_definition die records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'nested validate_rule_definition die records summary');
+    is($runtime_ctx->{last_error}{summary}, "Rule definition validation failed for rule 'Top'", 'nested validate_rule_definition die records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_RULE_DEFINITION_DIE__/, 'nested validate_rule_definition die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'nested validate_rule_definition die records the owning compiled rule label');
     is($runtime_ctx->{last_error}{spec_name}, '', 'nested validate_rule_definition die leaves inline-spec spec_name empty');

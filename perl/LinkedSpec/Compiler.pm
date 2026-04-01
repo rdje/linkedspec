@@ -840,8 +840,12 @@ sub run_get_pipeline {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'validate_gdata_references',
-   summary => 'Generated parser validation failed',
-   detail => $validate_gdata_references_error,
+   summary => defined($validate_gdata_failure{summary}) && length($validate_gdata_failure{summary})
+    ? $validate_gdata_failure{summary}
+    : 'Generated parser validation failed',
+   detail => defined($validate_gdata_failure{detail}) && length($validate_gdata_failure{detail})
+    ? $validate_gdata_failure{detail}
+    : $validate_gdata_references_error,
    rule_label => $validate_gdata_failure{rule_label},
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - trapped exception during generated-descriptor validation");
@@ -853,7 +857,9 @@ sub run_get_pipeline {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'validate_gdata_references',
-   summary => 'Generated parser validation failed',
+   summary => defined($validate_gdata_failure{summary}) && length($validate_gdata_failure{summary})
+    ? $validate_gdata_failure{summary}
+    : 'Generated parser validation failed',
    detail => defined($validate_gdata_failure{detail}) && length($validate_gdata_failure{detail})
     ? $validate_gdata_failure{detail}
     : 'validate_gdata_references returned false for the generated descriptor',
