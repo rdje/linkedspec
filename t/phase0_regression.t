@@ -8515,6 +8515,53 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'final descriptor assembly die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
 };
+subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_spec_gdata_dies_mid_rule' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_ored_re = sub { die "__FORCED_SPEC_GDATA_ORED_RE_DIE__\n" };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                bootstrap_parse => sub { return (1, [['__TOP__'], ['__LEAF__']], '') },
+                compile_spec_entry => sub {
+                    my ($entry) = @_;
+                    return ('Top', { re => ['a'], gdata => [{ label => 'Leaf', idx => 0 }], meta => {} }, 'Top')
+                        if ref($entry) eq 'ARRAY' && defined($entry->[0]) && $entry->[0] eq '__TOP__';
+                    return ('Leaf', { re => ['b'], gdata => [], meta => {} });
+                },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps default spec_gdata die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when default spec_gdata dies during final descriptor assembly');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'default spec_gdata die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'default spec_gdata die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'default spec_gdata die records build_final_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'default spec_gdata die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'default spec_gdata die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_ORED_RE_DIE__/, 'default spec_gdata die records original thrown detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'default spec_gdata die records the active gdata-compilation rule label');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'default spec_gdata die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'default spec_gdata die leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_clears_stale_runtime_ctx_error_on_success' => sub {
     plan tests => 4;
 

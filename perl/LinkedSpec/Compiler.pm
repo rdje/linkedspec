@@ -92,6 +92,17 @@ sub _ored_re {
  })
 }
 
+my $ACTIVE_SPEC_GDATA_RULE_LABEL;
+
+sub _clear_active_spec_gdata_rule_label {
+ $ACTIVE_SPEC_GDATA_RULE_LABEL = undef;
+ return undef
+}
+
+sub _get_active_spec_gdata_rule_label {
+ return $ACTIVE_SPEC_GDATA_RULE_LABEL
+}
+
 sub _trace_log_output {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -393,8 +404,9 @@ sub spec_gdata {
   _trace_log_dump("=== END SPEC GDATA DUMP ===\n");
  }
 
- my %gdata;
- foreach my $label (keys %$sg) {
+my %gdata;
+foreach my $label (keys %$sg) {
+  $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
   my @lgdata;
   foreach my $gde (@{$$sg{$label}{gdata}}) {
    if (exists $$sg{$$gde{label}}{re}[$$gde{idx}]) {
@@ -424,11 +436,12 @@ sub spec_gdata {
   else {
    _trace_decision("spec_gdata:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
   }
- }
+}
 
- my $result = \%gdata;
+my $result = \%gdata;
+ _clear_active_spec_gdata_rule_label();
 
- if (_trace_should_dump(DUMP_MEDIUM)) {
+if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED GDATA DUMP ===\n");
   _trace_log_dump(_dump_value($result));
   _trace_log_dump("=== END GENERATED GDATA DUMP ===\n");
@@ -791,14 +804,18 @@ sub run_get_pipeline {
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
+ _clear_active_spec_gdata_rule_label();
  my $final_descr = eval { _build_final_descr($auto_descr_spec, undef, parse_mode => $parse_mode) };
  my $build_final_descr_error = $@;
+ my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
+ _clear_active_spec_gdata_rule_label();
  if ($build_final_descr_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'build_final_descr',
    summary => 'Final descriptor assembly failed',
    detail => $build_final_descr_error,
+   rule_label => $build_final_descr_rule_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building gdata/final descriptor state");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
