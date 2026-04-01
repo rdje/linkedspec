@@ -8939,6 +8939,40 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_DIE__/, 'compile_spec die without runtime payload records original thrown detail');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec die without runtime payload preserves resolved spec_path inside last_error');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_undef_without_runtime_error_payload' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec_undef.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_undef_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return undef },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns undef without structured runtime error payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns undef');
+    is($runtime_ctx->{spec_name}, 'forced_compile_undef_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns undef');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns undef');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns undef without runtime payload');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec undef without runtime payload records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec undef without runtime payload records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec undef without runtime payload records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec undef without runtime payload records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned undef without structured runtime context', 'compile_spec undef without runtime payload records stable fallback detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec undef without runtime payload preserves resolved spec_path inside last_error');
+};
 subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_dies' => sub {
     plan tests => 9;
 
@@ -8981,6 +9015,49 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
     is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compile_spec die after runtime payload preserves deeper owner stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec die after runtime payload preserves deeper owner_stage');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_INNER_COMPILE_ERROR__/, 'compile_spec die after runtime payload preserves deeper owner detail');
+};
+subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_returns_undef' => sub {
+    plan tests => 9;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_preserve_undef.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_preserve_undef_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub {
+                $runtime_ctx->{last_error} = {
+                    type => 'runtime_owner',
+                    stage => 'run_get_pipeline',
+                    owner_stage => 'runtime_owner:run_get_pipeline',
+                    summary => 'Runtime compile delegation failed',
+                    detail => 'run_get_pipeline returned undef without structured runtime context',
+                    spec_name => 'forced_compile_preserve_undef_name',
+                    spec_path => $spec_path,
+                };
+                return undef;
+            },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns undef after writing a structured runtime error payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns undef after writing runtime payload');
+    is($runtime_ctx->{spec_name}, 'forced_compile_preserve_undef_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns undef after writing runtime payload');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns undef after writing runtime payload');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory preserves structured runtime error payload when compile_spec returns undef after writing one');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compile_spec undef after runtime payload preserves deeper owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compile_spec undef after runtime payload preserves deeper owner stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compile_spec undef after runtime payload preserves deeper owner_stage');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'compile_spec undef after runtime payload preserves deeper owner detail');
 };
 subtest 'get_parser_preserves_runtime_owner_error_when_runtime_returns_undef_without_payload' => sub {
     plan tests => 12;
