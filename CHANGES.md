@@ -1,5 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
+## 2026-04-01 - Phase 4: add anonymous and named boundary bridge helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `mark_capture_slice(name)` and `start_capture_slice_from(name)` are now first-class bridge helpers scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so helper substitution coverage, runtime helper coverage, and ActionIR metadata/rewrite coverage now lock the new anonymous-to-named and named-to-anonymous boundary bridge semantics explicitly,
+- expanded the user guides with rationale plus worked examples so the capture surface now teaches when to stay in the anonymous rolling-boundary model, when to promote one anonymous boundary into a stable named checkpoint, and when to restore that remembered named checkpoint back into the anonymous helper flow,
+- refreshed roadmap/continuity notes so future resume treats anonymous/named boundary bridging as covered helper surface now instead of falling back to raw `$IPOS` plus `mark_pos(...)` plumbing.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add anonymous advancing capture helper
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `capture_take()` is now a first-class anonymous capture-boundary helper scanned, canonicalized, and lowered without raw-Perl fallback,

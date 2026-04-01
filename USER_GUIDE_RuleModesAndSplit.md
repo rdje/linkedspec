@@ -882,6 +882,45 @@ This is the anonymous advancing-boundary pattern:
 - `capture_take()` is the advancing anonymous read,
 - and `start_capture_slice()` is the explicit anonymous-boundary write when the rule wants to establish or reset that rolling boundary directly.
 
+## Worked Example: Bridging Anonymous and Named Boundaries
+Sometimes a rule starts with one anonymous rolling capture boundary, but later realizes that one of those anonymous positions should survive under a stable explicit name.
+
+That is what `mark_capture_slice(name)` and `start_capture_slice_from(name)` are for.
+
+```text
+bridge_anon_and_named::AND
+ I { declare(scalar, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> bridge_anon_and_named[0] { start_capture_slice() }
+ -> bridge_anon_and_named[2] { mark_capture_slice(body_start); assign(scalar(first), capture_take()) }
+ -> bridge_anon_and_named[4] { assign(scalar(second), capture_take()); start_capture_slice_from(body_start) }
+ -> bridge_anon_and_named[6] { return(array("?bridge_anon_and_named:", scalar(first), scalar(second), capture_slice())) }
+```
+
+On input:
+
+```text
+foo(alpha, beta, gamma)
+```
+
+the practical reading is:
+- `start_capture_slice()` stores the anonymous boundary just after `(`,
+- `mark_capture_slice(body_start)` copies that anonymous boundary into the stable named mark `body_start`,
+- the two `capture_take()` calls advance the anonymous boundary forward across `alpha` and `beta`,
+- `start_capture_slice_from(body_start)` restores the anonymous boundary back to the remembered `body_start`,
+- and the final `capture_slice()` returns `alpha, beta, gamma`.
+
+This is the anonymous/named bridge pattern:
+- `mark_capture_slice(name)` promotes the current anonymous boundary into a stable named checkpoint,
+- `start_capture_slice_from(name)` restores that stored named checkpoint back into the anonymous rolling-boundary slot,
+- and together they let one rule move between “one rolling anonymous boundary” and “one stable explicit checkpoint” without raw `$IPOS` plumbing.
+
 ## Real In-Tree Example
 A real current example already exists in [`specs/ebnf.spec`](specs/ebnf.spec):
 
@@ -960,7 +999,7 @@ The most important semantic detail is this:
 - so a later regex slot in the same rule usually acts as the right delimiter of the captured span.
 
 In high/debug trace mode, mark writes now also show where that checkpoint lands inside the input:
-- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, `mark_copy(target_mark, source_mark)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
+- `@mark(name)`, `mark_here(name)`, `mark_match_start(name)`, `mark_copy(target_mark, source_mark)`, `mark_capture_slice(name)`, and the advancing writes inside `capture_take(name)` and `capture_take_between(start_mark, end_mark)` emit a short visible excerpt of the input string,
 - and the trace prints a caret on the next line under the stored checkpoint position,
 - so you can see immediately whether the rule stored a post-match parser position or the left edge of the current match.
 
@@ -2073,6 +2112,16 @@ Use `mark_copy(target_mark, source_mark)` when:
 - a pure read helper like `capture_len_between(...)` should be followed by an explicit remembered-boundary move,
 - or missing-source copies should clear the target instead of leaving stale state behind.
 
+Use `mark_capture_slice(name)` when:
+- the rule starts in the anonymous rolling-boundary model,
+- one current anonymous boundary should be preserved under a stable explicit name before later anonymous reads move again,
+- or a later action block will need to restore that current anonymous boundary explicitly through `start_capture_slice_from(name)`.
+
+Use `start_capture_slice_from(name)` when:
+- the rule already has a named checkpoint that should become the active anonymous rolling boundary again,
+- later logic still wants the concise anonymous helper family after restoring that remembered left edge,
+- or the rule wants an explicit named-to-anonymous bridge instead of raw `$IPOS = mark_pos(name)` plumbing.
+
 Use `clear_mark(name)` when:
 - the rule should decide explicitly when a named checkpoint disappears,
 - one stable read should be followed by an explicit drop,
@@ -2233,6 +2282,7 @@ The current supported contract is:
 - `@capture_slice` is the preferred split-boundary cursor feature,
 - `capture_slice()`, `capture_slice_len()`, `capture_slice_until_cursor()`, `capture_slice_until_cursor_len()`, `capture_slice_pos()`, `capture_slice_line()`, and `capture_slice_col()` are the preferred anonymous split-boundary read helpers,
 - `start_capture_slice()` is the preferred anonymous split-boundary move helper inside lifecycle/action code,
+- `start_capture_slice_from(name)` is the preferred named-to-anonymous bridge helper when one stored named checkpoint should become the active anonymous split boundary again,
 - `capture_take()` is the preferred anonymous split-boundary advancing-read helper,
 - `capture_rest()` and `capture_rest_len()` are the preferred anonymous split-boundary tail helpers,
 - `cursor_rest()` and `cursor_rest_len()` are the preferred live-cursor tail helpers,
@@ -2243,12 +2293,14 @@ The current supported contract is:
 - `capture_until_cursor_from(name)` means “text from the named checkpoint through the live parser cursor,”
 - `capture_until_cursor_len_from(name)` means “the numeric length of that same named-mark through-cursor span or `undef` when the mark is absent,”
 - `capture_take()` means “return the current anonymous split-boundary span and then advance that anonymous boundary to the current parser position,”
+- `start_capture_slice_from(name)` means “look up that stored named checkpoint and make it the active anonymous split-boundary start again,”
 - `capture_take(name)` means “return that same span and then advance the named checkpoint to the current parser position,”
 - `capture_between(start_mark, end_mark)` means “text between two explicit named checkpoints in the current rule-local mark bucket,”
 - `capture_len_between(start_mark, end_mark)` means “the numeric length of that same explicit two-mark span or `undef` when either mark is absent or reversed,”
 - `capture_take_between(start_mark, end_mark)` means “return that same explicit two-mark span and then advance the start checkpoint to the remembered end checkpoint,”
 - `mark_here(name)` means “set or overwrite that named checkpoint at the current parser position without first reading from it,”
 - `mark_match_start(name)` means “set or overwrite that named checkpoint at the left edge of the current match,”
+- `mark_capture_slice(name)` means “set or overwrite that named checkpoint from the current anonymous split-boundary position,”
 - `mark_copy(target_mark, source_mark)` means “set or overwrite the target checkpoint from the source checkpoint when the source exists, otherwise clear the target and return `undef`,”
 - `clear_mark(name)` means “delete that named checkpoint from the current rule-local mark bucket,”
 - `mark_exists(name)` means “return `1` if that named checkpoint is currently present in the current rule-local mark bucket, otherwise `0`,”

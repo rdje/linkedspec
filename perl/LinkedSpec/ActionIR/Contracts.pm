@@ -570,6 +570,21 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'start_capture_slice_from_mark',
+   ir_node            => 'CAPTURE_SLICE_START_FROM_MARK',
+   diag_name          => 'start_capture_slice_from',
+   unresolved_pattern => qr/\bstart_capture_slice_from\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_slice_here',
    ir_node            => 'CAPTURE_SLICE_START',
    diag_name          => 'start_capture_slice',
@@ -869,6 +884,21 @@ sub _build_capture_and_backtrack_contracts {
      \bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)
     }{
      'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; my $__ls_mark_bucket = $$info{marks}{\''.$label.'\'}; if (exists $__ls_mark_bucket->{\''.$+{source}.'\'}) { $__ls_mark_bucket->{\''.$+{target}.'\'} = $__ls_mark_bucket->{\''.$+{source}.'\'}; '. _build_mark_trace_call(operation => 'mark_copy', label => $label, mark_name => $+{target}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{target}.'\'}') .'; $__ls_mark_bucket->{\''.$+{target}.'\'} } else { delete $__ls_mark_bucket->{\''.$+{target}.'\'}; undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
+   id                 => 'mark_capture_slice',
+   ir_node            => 'MARK_CAPTURE_SLICE',
+   diag_name          => 'mark_capture_slice',
+   unresolved_pattern => qr/\bmark_capture_slice\s*\(\s*\w+\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bmark_capture_slice\s*\(\s*(?<mark>\w+)\s*\)
+    }{
+     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS; '. _build_mark_trace_call(operation => 'mark_capture_slice', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
     }gex;
     return $code
    },

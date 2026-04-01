@@ -10838,7 +10838,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
-    plan tests => 66;
+    plan tests => 68;
 
     my $label = 'Top';
 
@@ -10896,6 +10896,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'start_capture_slice()'),
         q{do { $IPOS = pos $$STRING }},
         'start_capture_slice() helper rewrite preserves explicit anonymous capture-boundary movement semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'start_capture_slice_from(body_start)'),
+        q{do { my $__ls_mark_bucket = (ref($$info{marks}) eq 'HASH' && ref($$info{marks}{'Top'}) eq 'HASH') ? $$info{marks}{'Top'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef; defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef }},
+        'start_capture_slice_from(name) helper rewrite preserves explicit named-mark to anonymous-boundary bridge semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_here()'),
@@ -10996,6 +11001,11 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         LinkedSpec::call_spec_handler_subst($label, 'mark_copy(body_start, first_end)'),
         q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; my $__ls_mark_bucket = $$info{marks}{'Top'}; if (exists $__ls_mark_bucket->{'first_end'}) { $__ls_mark_bucket->{'body_start'} = $__ls_mark_bucket->{'first_end'}; _trace_runtime_mark_event(operation => 'mark_copy', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_mark_bucket->{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $__ls_mark_bucket->{'body_start'} } else { delete $__ls_mark_bucket->{'body_start'}; undef } }},
         'mark_copy(target_mark,source_mark) helper rewrite preserves explicit rule-local named-mark copy semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'mark_capture_slice(body_start)'),
+        q{do { $$info{marks}{'Top'} = {} unless ref($$info{marks}{'Top'}) eq 'HASH'; $$info{marks}{'Top'}{'body_start'} = $IPOS; _trace_runtime_mark_event(operation => 'mark_capture_slice', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $$info{marks}{'Top'}{'body_start'}, left_edge => $LSPOS - length $LMATCH, parser_pos => pos $$STRING); $$info{marks}{'Top'}{'body_start'} }},
+        'mark_capture_slice(name) helper rewrite preserves explicit anonymous-boundary to named-mark bridge semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'clear_mark(body_start)'),
@@ -11336,6 +11346,47 @@ SPEC
 
     my $take_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_take(body_start)');
     like($take_rewrite, qr/\$__ls_mark_bucket->\{'body_start'\} = pos \$\$STRING;/, 'capture_take(name) lowering updates the rule-local mark to the current parser position after returning the captured span');
+};
+subtest 'anonymous_and_named_capture_boundaries_can_bridge_explicitly' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::AND
+ I { declare(scalar, stage, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { start_capture_slice() }
+ -> Top[1] { assign(scalar(stage), "first_value") }
+ -> Top[2] { mark_capture_slice(body_start); assign(scalar(first), capture_take()) }
+ -> Top[3] { assign(scalar(stage), "second_value") }
+ -> Top[4] { assign(scalar(second), capture_take()); start_capture_slice_from(body_start) }
+ -> Top[5] { assign(scalar(stage), "third_value") }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_slice())) }
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'consume', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for explicit anonymous/named boundary bridge coverage');
+
+    my $input = 'foo(alpha, beta, gamma)';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        ['?Top:', 'alpha', 'beta', 'alpha, beta, gamma'],
+        'mark_capture_slice(name) snapshots the current anonymous boundary into a named mark, and start_capture_slice_from(name) later restores that named boundary back into the anonymous capture slice'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'anonymous/named boundary bridge parse leaves runtime_ctx last_error clear on success');
+
+    my $mark_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'mark_capture_slice(body_start)');
+    like($mark_rewrite, qr/\$\$info\{marks\}\{'Top'\}\{'body_start'\} = \$IPOS;/, 'mark_capture_slice(name) lowering stores the current anonymous capture-boundary position into the rule-local named mark');
+
+    my $start_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'start_capture_slice_from(body_start)');
+    like($start_rewrite, qr/defined\(\$__ls_mark\) \? \(\$IPOS = \$__ls_mark\) : undef/, 'start_capture_slice_from(name) lowering restores the anonymous capture boundary from the stored rule-local named mark');
 };
 subtest 'named_mark_capture_rest_helpers_read_tail_through_end_of_input' => sub {
     plan tests => 5;
@@ -36853,6 +36904,31 @@ SPEC
     ok(index($rewritten, 'my $__ls_capture = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH);') >= 0, 'capture_take() lowers to a direct anonymous capture-boundary span read');
     ok(index($rewritten, '$IPOS = pos $$STRING; $__ls_capture') >= 0, 'capture_take() lowers to an advancing anonymous capture-boundary update after returning the captured span');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous capture_take helper rule remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_capture_boundary_bridge_helpers_lower_without_raw_fallback' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { return(hash("mark", mark_capture_slice(body_start), "reset", start_capture_slice_from(body_start))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit anonymous/named capture-boundary bridge helper coverage');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes explicit anonymous/named boundary bridge helpers');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit anonymous/named boundary bridge helpers');
+    is($meta->{unresolved_helper_count}, 0, 'explicit anonymous/named boundary bridge helpers keep unresolved-helper count at zero');
+    ok(grep { $_ eq 'MARK_CAPTURE_SLICE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include MARK_CAPTURE_SLICE');
+    ok(grep { $_ eq 'CAPTURE_SLICE_START_FROM_MARK' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include CAPTURE_SLICE_START_FROM_MARK');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("mark", mark_capture_slice(body_start), "reset", start_capture_slice_from(body_start)))');
+    ok(index($rewritten, q{$$info{marks}{'Top'}{'body_start'} = $IPOS;}) >= 0, 'mark_capture_slice(name) lowers to a direct anonymous-boundary snapshot into the rule-local named mark bucket');
+    ok(index($rewritten, q{operation => 'mark_capture_slice'}) >= 0, 'mark_capture_slice(name) lowering reports the named-mark write through runtime trace instrumentation');
+    ok(index($rewritten, q{my $__ls_mark = (ref($__ls_mark_bucket) eq 'HASH') ? $__ls_mark_bucket->{'body_start'} : undef;}) >= 0, 'start_capture_slice_from(name) lowers through the stored rule-local named mark bucket');
+    ok(index($rewritten, q{defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef}) >= 0, 'start_capture_slice_from(name) lowers to a direct anonymous-boundary restore from the named mark');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit anonymous/named boundary bridge helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_named_mark_capture_rest_helpers_lower_without_raw_fallback' => sub {
     plan tests => 10;

@@ -400,6 +400,46 @@ Top::AND
 
 Use it when the rule should begin a new anonymous capture slice explicitly from inside a lifecycle or action block, instead of spelling `assign(s(IPOS), cursor_pos())` directly. `capture_slice_here()` remains supported as a compatibility alias.
 
+### `start_capture_slice_from(name)`
+Reset the current anonymous capture boundary from a stored rule-local named mark.
+
+Practical reading:
+- use it when the rule already has a meaningful named checkpoint and wants the anonymous rolling capture model to resume from that exact stored boundary,
+- treat it as the named-to-anonymous bridge companion to `mark_capture_slice(name)`,
+- compare it with `start_capture_slice()` when the new anonymous boundary should come from the live parser cursor instead of a stored mark,
+- and expect `undef` when the named mark is absent.
+
+Examples:
+
+```text
+start_capture_slice_from(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { start_capture_slice() }
+ -> Top[2] { mark_capture_slice(body_start); assign(scalar(first), capture_take()) }
+ -> Top[4] { assign(scalar(second), capture_take()); start_capture_slice_from(body_start) }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_slice())) }
+```
+
+On input `foo(alpha, beta, gamma)`:
+- `start_capture_slice()` establishes the anonymous boundary just after `(`,
+- `mark_capture_slice(body_start)` snapshots that anonymous boundary under the stable named mark `body_start`,
+- the two `capture_take()` calls roll the anonymous boundary forward across `alpha` and `beta`,
+- `start_capture_slice_from(body_start)` restores the anonymous boundary back to the original stored `body_start`,
+- and the final `capture_slice()` returns `alpha, beta, gamma`.
+
+Use it when the rule wants one stable named checkpoint for later recovery, but also wants to keep using the concise anonymous rolling-boundary helpers after restoring that remembered left edge.
+
 ### `capture_rest()`
 Return the substring from the current anonymous capture boundary through end-of-input.
 
@@ -955,6 +995,46 @@ Top::AND
 ```
 
 Use it when the rule needs an explicit “target becomes source” checkpoint operation instead of bundling that state move into another capture helper.
+
+### `mark_capture_slice(name)`
+Copy the current anonymous capture boundary into a rule-local named mark.
+
+In high/debug trace mode, this explicit write also emits a short input excerpt plus a caret under the stored checkpoint position.
+
+Practical reading:
+- use it when one anonymous rolling boundary is still the convenient active model,
+- but a later same-rule action will need to recover that anonymous boundary under a stable explicit name,
+- treat it as the anonymous-to-named bridge companion to `start_capture_slice_from(name)`,
+- and compare it with `mark_here(name)` when the stored boundary should come from the live parser cursor rather than the current anonymous capture slice.
+
+Example:
+
+```text
+mark_capture_slice(body_start)
+```
+
+```text
+Top::AND
+ I { declare(scalar, first, second) }
+ /foo\(/
+ /alpha/
+ /,\s*(?=beta)/
+ /beta/
+ /,\s*(?=gamma)/
+ /gamma/
+ /\)/
+ -> Top[0] { start_capture_slice() }
+ -> Top[2] { mark_capture_slice(body_start); assign(scalar(first), capture_take()) }
+ -> Top[4] { assign(scalar(second), capture_take()); start_capture_slice_from(body_start) }
+ -> Top[6] { return(array("?Top:", scalar(first), scalar(second), capture_slice())) }
+```
+
+On input `foo(alpha, beta, gamma)`:
+- `mark_capture_slice(body_start)` stores the current anonymous capture-boundary position, not the live parser cursor,
+- so the named mark keeps the original left edge even after later `capture_take()` calls advance the anonymous boundary,
+- and `start_capture_slice_from(body_start)` can later restore that original boundary for one more anonymous `capture_slice()` read.
+
+Use it when the rule starts in the anonymous rolling-boundary model but later discovers that one of those anonymous boundaries deserves a stable explicit name.
 
 ### `clear_mark(name)`
 Delete a rule-local named mark explicitly.

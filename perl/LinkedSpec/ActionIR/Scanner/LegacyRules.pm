@@ -40,6 +40,7 @@ sub try_scan_contract_ir_events {
   'capture_slice_col' => \&_scan_contract_capture_slice_col,
   'capture_slice_length' => \&_scan_contract_capture_slice_length,
   'start_capture_slice' => \&_scan_contract_start_capture_slice,
+  'start_capture_slice_from_mark' => \&_scan_contract_start_capture_slice_from_mark,
   'capture_slice_here' => \&_scan_contract_capture_slice_here,
   'capture_rest' => \&_scan_contract_capture_rest,
   'capture_rest_len' => \&_scan_contract_capture_rest_len,
@@ -60,6 +61,7 @@ sub try_scan_contract_ir_events {
   'mark_here' => \&_scan_contract_mark_here,
   'mark_match_start' => \&_scan_contract_mark_match_start,
   'mark_copy' => \&_scan_contract_mark_copy,
+  'mark_capture_slice' => \&_scan_contract_mark_capture_slice,
   'clear_mark' => \&_scan_contract_clear_mark,
   'mark_exists' => \&_scan_contract_mark_exists,
   'mark_pos' => \&_scan_contract_mark_pos,
@@ -379,6 +381,15 @@ while ($code =~ /\bcapture_take\s*\(\s*\)/g) {
  return \@events
 }
 
+sub _scan_contract_start_capture_slice_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
 sub _scan_contract_capture_from_mark {
  my ($code) = @_;
  my @events;
@@ -492,6 +503,15 @@ sub _scan_contract_mark_copy {
  my @events;
 while ($code =~ /\bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {target => $+{target}, source => $+{source}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_capture_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_capture_slice\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
 }
  return \@events
 }
