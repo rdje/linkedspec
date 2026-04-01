@@ -2298,6 +2298,16 @@ Use `cursor_rest()` and `cursor_rest_len()` when:
 - later logic should compare or report “remaining input” directly instead of current match boundaries,
 - or the rule wants backend-neutral replacements for raw `substr($$STRING, pos $$STRING, ...)` and `length($$STRING) - pos $$STRING` in normal user-facing `.spec` code.
 
+Use `input_text()` when:
+- the rule should expose the whole current input string directly instead of a narrower live-cursor, entry-match, or local-match view,
+- child-rule logic should keep the full source visible even while `entry_text()` and `match_text()` answer different narrower questions,
+- or the rule wants a backend-neutral replacement for raw `$$STRING` in normal user-facing `.spec` code.
+
+Use `input_len()` when:
+- the rule should expose the width of the whole current input directly instead of a narrower live-cursor, entry-match, or local-match width,
+- child-rule logic should keep the full source width visible even while `entry_len()` and `match_len()` answer different narrower questions,
+- or the rule wants a backend-neutral replacement for raw `length($$STRING)` in normal user-facing `.spec` code.
+
 Use `entry_text()` when:
 - the rule wants the immediate entry match that led into the current rule,
 - child-rule logic should keep that entry token visible while local matches continue to move forward,
@@ -2471,6 +2481,8 @@ The current supported contract is:
 - `cursor_col()` means “return the live current parser cursor column directly,”
 - `cursor_rest()` means “return the remaining text from the live current parser cursor through end-of-input,”
 - `cursor_rest_len()` means “return the width of that same live current parser-cursor tail or `undef` when the live cursor itself is unavailable,”
+- `input_text()` means “return the whole current input string directly,”
+- `input_len()` means “return the width of the whole current input string directly,”
 - `entry_text()` means “return the current immediate match text directly,”
 - `entry_line()` means “return the 1-based line number of the current immediate match directly,”
 - `entry_start_line()` means “return the 1-based line number of the current immediate-match left edge directly,”

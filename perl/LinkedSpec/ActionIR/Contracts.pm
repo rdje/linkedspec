@@ -1282,6 +1282,28 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'input_text',
+   ir_node            => 'INPUT_TEXT_READ',
+   diag_name          => 'input_text',
+   unresolved_pattern => qr/\binput_text\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\binput_text\s*\(\s*\)/do { \$\$STRING }/g;
+    return $code
+   },
+  },
+  {
+   id                 => 'input_len',
+   ir_node            => 'INPUT_LEN_READ',
+   diag_name          => 'input_len',
+   unresolved_pattern => qr/\binput_len\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\binput_len\s*\(\s*\)/do { length\(\$\$STRING\) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'entry_text',
    ir_node            => 'IMATCH_TEXT_READ',
    diag_name          => 'entry_text',

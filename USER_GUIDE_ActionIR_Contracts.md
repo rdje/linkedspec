@@ -2004,6 +2004,97 @@ the practical reading is:
 
 Use it when the rule wants the live parser-cursor tail width directly instead of materializing that tail as text.
 
+### `input_text()`
+Return the whole current input string directly.
+
+Practical reading:
+- use it when the rule wants the whole source text, not just what remains from the live cursor,
+- prefer it over raw `$$STRING` in normal user-facing `.spec` examples,
+- prefer it over `cursor_rest()` when the left edge should stay at the absolute input start instead of the live parser cursor,
+- prefer it over `capture_between(file_start, file_end)` when the rule does not need to store explicit absolute named checkpoints first,
+- and treat it as the whole-input text companion to `input_len()`.
+
+Simple form:
+
+```text
+input_text()
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, whole_text, entry_token, local_token) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(whole_text), input_text()); assign(scalar(entry_token), entry_text()); assign(scalar(local_token), match_text()) }
+ -> Child[1] { return(array("?Child:", scalar(whole_text), scalar(entry_token), scalar(local_token), input_text(), entry_text(), match_text())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- at `-> Child[0]`, `input_text()` returns the whole input `foo(bar)`,
+- at that same point, `entry_text()` returns the narrower entry token `foo(` because that is the immediate match that entered `Child`,
+- and `match_text()` returns the narrower current local match `bar`,
+- at `-> Child[1]`, `input_text()` still returns `foo(bar)` because whole-input reads ignore the advancing cursor and local-match changes,
+- while `entry_text()` still keeps the same entry token `foo(` and `match_text()` has now moved to `)`.
+
+Use it when the rule wants the full current input string directly, even inside child rules or later same-rule slots where entry and local match helpers have become narrower views.
+
+### `input_len()`
+Return the numeric width of the whole current input string directly.
+
+Practical reading:
+- use it when the rule wants whole-input width metadata rather than the whole-input text itself,
+- prefer it over raw `length($$STRING)` in normal user-facing `.spec` examples,
+- treat it as the width-only companion to `input_text()`,
+- prefer it over `cursor_rest_len()` when the width should stay anchored to the absolute input instead of the live parser cursor,
+- and prefer it over `capture_len_between(file_start, file_end)` when the rule does not need explicit absolute named checkpoints first.
+
+Simple form:
+
+```text
+input_len()
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, whole_width, entry_width, local_width) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(whole_width), input_len()); assign(scalar(entry_width), entry_len()); assign(scalar(local_width), match_len()) }
+ -> Child[1] { return(array("?Child:", scalar(whole_width), scalar(entry_width), scalar(local_width), input_len(), entry_len(), match_len())) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- at `-> Child[0]`, `input_len()` returns `8` for the whole input `foo(bar)`,
+- at that same point, `entry_len()` returns `4` for `foo(` and `match_len()` returns `3` for `bar`,
+- at `-> Child[1]`, `input_len()` still returns `8` because the whole-input width does not depend on the live parser cursor or the current local match,
+- while `entry_len()` still returns the same entry-match width `4` and `match_len()` has moved to `1` for `)`.
+
+Use it when the rule wants the width of the whole current input directly, even in code that is otherwise reasoning about narrower entry or local-match widths.
+
 ### `entry_text()`
 Return the current immediate match text directly.
 

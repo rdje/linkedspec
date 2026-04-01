@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-01 - Phase 4: add whole-input read helpers
+
+- extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `input_text()` and `input_len()` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback,
+- widened `t/phase0_regression.t` so exact rewrite coverage now locks both whole-input helper lowerings, runtime coverage now locks the “whole-input reads stay stable even inside child-rule code where entry/local helpers expose narrower views” semantics, and ActionIR coverage now locks the new canonical nodes plus no-raw-fallback lowering,
+- expanded the user guides with rationale plus worked examples so the read-helper family now teaches whole-input text/width reads explicitly as a separate layer beside live-cursor, entry-match, and local-match reads instead of leaving users to infer that distinction,
+- refreshed roadmap/continuity notes so future resume treats whole-input direct reads as covered Phase 4 helper surface now rather than as a remaining reason to fall back to raw `$$STRING` / `length($$STRING)`.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-01 - Phase 4: add absolute input-boundary mark writers
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `mark_input_start(name)` and `mark_input_end(name)` are now first-class helper contracts scanned, canonicalized, and lowered without raw-Perl fallback, with safe standalone-writer semantics even when the stored absolute boundary is `0`,
