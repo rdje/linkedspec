@@ -978,6 +978,7 @@ if ($validate_gdata_references_error) {
     summary => 'Top-level parser invocation failed',
     detail => $detail,
     rule_label => $top_rule,
+    handler_source_label => $top_handler_source_label,
    );
    _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
    _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);

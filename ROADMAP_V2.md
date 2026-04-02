@@ -73,6 +73,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 Runtime/diagnostic continuity note:
 - `LinkedSpec::RuntimeContext` preparation now reseeds an explicit requested `top_rule` during both inline `run_get(...)` and file-oriented `get_parser(...)` setup, so earlier compiler/parser-factory failures still report the caller’s intended parser entrypoint instead of an empty or stale `top_rule`.
 - compiler-attributed `runtime_ctx->{last_error}` payloads at `compiler_pipeline:spec_descr`, `compiler_pipeline:build_final_descr`, and attributed `compiler_pipeline:validate_gdata_references` now also preserve a synthetic `handler_source_label` like `LinkedSpec::generated_handler:<rule_label>` whenever the failing rule is already known even before an exact handler variant has been selected, and top-level `runtime_parser` failures now keep that same label whenever the parser boundary still knows at least the selected top-rule label.
+- the remaining `runtime_parser:resolve_top_rule_handler` missing-descriptor-entry seam now follows that same rule too, so callers still get `LinkedSpec::generated_handler:<top_rule>` even when the selected top-rule label is known but no compiled descriptor entry exists yet.
 
 ## Near-Term Execution Priorities
 1. Finish the lifecycle-family follow-through for semicolon-light structured authoring:
