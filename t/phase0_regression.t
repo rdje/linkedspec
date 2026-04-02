@@ -9316,6 +9316,52 @@ SPEC
     is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'compiler delegation undef records stable fallback detail');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation undef leaves spec_path empty in inline runtime context');
 };
+subtest 'runtime_run_get_parse_only_success_leaves_failure_channel_clear' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            parse_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        },
+    );
+
+    ok(!defined($ret), 'Runtime::run_get parse_only success still returns undef by design');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get parse_only success still exposes runtime context through runtime_ctx_ref');
+    ok(!defined($runtime_ctx->{last_error}), 'Runtime::run_get parse_only success leaves runtime_ctx last_error clear');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'Runtime::run_get parse_only success still prepares parser-source chunk storage');
+    is($runtime_ctx->{top_rule}, undef, 'Runtime::run_get parse_only success does not synthesize a top_rule before parser generation');
+};
+subtest 'runtime_run_get_generate_only_success_leaves_failure_channel_clear' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            generate_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        },
+    );
+
+    ok(!defined($ret), 'Runtime::run_get generate_only success still returns undef by design');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get generate_only success still exposes runtime context through runtime_ctx_ref');
+    ok(!defined($runtime_ctx->{last_error}), 'Runtime::run_get generate_only success leaves runtime_ctx last_error clear');
+    ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'Runtime::run_get generate_only success still prepares parser-source chunk storage');
+    is($runtime_ctx->{top_rule}, 'Top', 'Runtime::run_get generate_only success still records the selected top_rule');
+};
 subtest 'runtime_run_get_preserves_existing_runtime_error_when_run_get_pipeline_dies' => sub {
     plan tests => 9;
 

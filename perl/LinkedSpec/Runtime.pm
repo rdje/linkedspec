@@ -95,6 +95,8 @@ sub _set_runtime_ctx_last_error_unless_present {
 sub run_get {
  my ($spec_content_ref, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
+ my $parse_only = $option->{parse_only} ? 1 : 0;
+ my $generate_only = $option->{generate_only} ? 1 : 0;
 
  my $runtime_ctx = _build_runtime_context($option);
  return _call_preserving_err(sub {
@@ -119,6 +121,7 @@ sub run_get {
    return undef;
   }
   if (!defined($ret)) {
+   return undef if $parse_only || $generate_only;
    _set_runtime_ctx_last_error_unless_present(
     $runtime_ctx,
     stage => 'run_get_pipeline',

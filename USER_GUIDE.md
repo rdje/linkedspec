@@ -1136,6 +1136,7 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 
 `LinkedSpec::Get(\$spec, %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before runtime dispatch; odd trailing option lists fall back to an empty option set for backward compatibility.
 If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry.
+`parse_only` and `generate_only` are successful introspection modes, not failure signals. They intentionally return `undef` on success, and when `runtime_ctx_ref` is present they should leave `$ctx->{last_error}` clear unless some earlier compile stage actually failed.
 
 `parse_mode` now controls the runtime matching discipline for generated handlers:
 - `seek`
@@ -1243,7 +1244,7 @@ When the failure happens during `compiler_pipeline:spec_descr`, the structured p
 
 Compiler-owned setup failures before that main validation/parse flow now use the same channel too. If the compiler cannot prepare its callback/runtime-owner surface cleanly, for example because `bootstrap_parse` resolved to an invalid non-CODE value, `last_error` is populated as `compiler_pipeline` at stage `prepare_pipeline` instead of falling through to the generic runtime-owner fallback.
 
-The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)`, or if that delegated compiler path returns `undef` without writing its own structured payload first, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying or before returning `undef`, that deeper payload is preserved and not overwritten by the runtime wrapper.
+The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)`, or if that delegated compiler path returns `undef` on a real failure path without writing its own structured payload first, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying or before returning `undef`, that deeper payload is preserved and not overwritten by the runtime wrapper. Successful `parse_only` and `generate_only` calls are excluded from that fallback rule: they still return `undef` by design, but they should leave the failure channel clear.
 
 The parser-factory owner now has the same kind of explicit setup stage too. If `LinkedSpec::ParserFactory::run_get_parser(...)` cannot prepare its callback/trace/dependency surface cleanly, for example because `trace_enter` or another required callback resolved to a non-CODE value, `last_error` is populated as `parser_factory` at stage `prepare_parser_factory` instead of letting that setup seam escape as a raw owner die.
 
