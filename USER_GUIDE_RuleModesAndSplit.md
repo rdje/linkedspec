@@ -2308,6 +2308,12 @@ Use `input_len()` when:
 - child-rule logic should keep the full source width visible even while `entry_len()` and `match_len()` answer different narrower questions,
 - or the rule wants a backend-neutral replacement for raw `length($$STRING)` in normal user-facing `.spec` code.
 
+Use `input_end_pos()` when:
+- the rule should expose the whole-input right edge as one explicit absolute position rather than as a width,
+- later logic will compare that whole-input end boundary against marks, capture boundaries, cursor positions, or match boundaries,
+- child-rule logic should keep that absolute whole-input right edge visible even while entry and local-match right-edge helpers expose narrower boundaries,
+- or the rule wants a backend-neutral replacement for raw `length($$STRING)` when the surrounding code is reasoning in position terms rather than width terms.
+
 Use `input_end_line()` and `input_end_col()` when:
 - the rule should expose where the whole current input ends in human-readable line/column terms,
 - the live parser cursor may still be earlier but diagnostics should still point at the final end-of-input location,
@@ -2488,6 +2494,7 @@ The current supported contract is:
 - `cursor_rest_len()` means “return the width of that same live current parser-cursor tail or `undef` when the live cursor itself is unavailable,”
 - `input_text()` means “return the whole current input string directly,”
 - `input_len()` means “return the width of the whole current input string directly,”
+- `input_end_pos()` means “return the absolute position of the whole-input right edge directly,”
 - `input_end_line()` means “return the 1-based line number of the whole-input right edge directly,”
 - `input_end_col()` means “return the 1-based column number of the whole-input right edge directly,”
 - `entry_text()` means “return the current immediate match text directly,”

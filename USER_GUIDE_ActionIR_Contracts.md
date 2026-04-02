@@ -2095,6 +2095,54 @@ the practical reading is:
 
 Use it when the rule wants the width of the whole current input directly, even in code that is otherwise reasoning about narrower entry or local-match widths.
 
+### `input_end_pos()`
+Return the absolute position of the whole-input right edge directly.
+
+Practical reading:
+- use it when the rule wants one explicit whole-input end boundary position rather than a width,
+- prefer it over raw `length($$STRING)` in normal user-facing `.spec` examples when the surrounding logic is phrased in terms of positions, boundaries, or checkpoints,
+- prefer it over `input_len()` when the number is being used as “the input ends here” rather than “the input is this wide,”
+- prefer it over `mark_input_end(name)` plus `mark_pos(name)` when the rule only needs the whole-input end boundary once and does not need to store it under a reusable named checkpoint first,
+- and treat it as the whole-input right-edge position companion to `input_end_line()` and `input_end_col()`.
+
+Simple form:
+
+```text
+input_end_pos()
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(\n/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, file_end_pos, entry_right_edge, local_right_edge) }
+ /bar/
+ /\n\)/
+ -> Child[0] { assign(scalar(file_end_pos), input_end_pos()); assign(scalar(entry_right_edge), entry_end_pos()); assign(scalar(local_right_edge), match_end_pos()) }
+ -> Child[1] { return(array("?Child:", scalar(file_end_pos), input_end_pos(), scalar(entry_right_edge), scalar(local_right_edge), entry_end_pos(), match_end_pos())) }
+```
+
+On input:
+
+```text
+foo(
+bar
+)
+```
+
+the practical reading is:
+- `input_end_pos()` returns `10` because the whole current input ends at absolute position `10`,
+- `entry_end_pos()` returns `5` because the immediate entry match `foo(\n` ended there when the child rule began,
+- `match_end_pos()` later returns `10` because the current local right edge has moved to the final `\n)` match,
+- at `-> Child[1]`, `input_end_pos()` still returns `10` because whole-input right-edge reads ignore the advancing live cursor and narrower entry/local match boundaries,
+- and the helper reads more honestly than `input_len()` whenever the surrounding code is really reasoning about one absolute end boundary instead of one width.
+
+Use it when the rule wants the whole-input end boundary as an explicit absolute position, especially for diagnostics, comparisons against marks or cursor positions, or position-oriented calculations.
+
 ### `input_end_line()`
 Return the 1-based line number of the whole-input right edge directly.
 
@@ -2102,6 +2150,7 @@ Practical reading:
 - use it when the rule wants to report or compare the end-of-input line even while the live parser cursor is still earlier,
 - prefer it over raw newline counting across `$$STRING` in normal user-facing `.spec` examples,
 - prefer it over `cursor_line()` when the rule wants the fixed whole-input end location rather than the live current parser position,
+- prefer it over `input_end_pos()` when the rule wants a human-readable line rather than an absolute boundary position,
 - prefer it over `mark_input_end(name)` plus `mark_line(name)` when the rule does not need to store that absolute end boundary under a reusable named checkpoint first,
 - and treat it as the whole-input right-edge line companion to `input_end_col()`.
 
@@ -2149,6 +2198,7 @@ Practical reading:
 - use it when the rule wants the end-of-input column even while the live parser cursor is still earlier,
 - prefer it over raw end-of-input same-line math in normal user-facing `.spec` examples,
 - prefer it over `cursor_col()` when the rule wants the fixed whole-input end location rather than the live current parser position,
+- prefer it over `input_end_pos()` when the rule wants a human-readable column rather than an absolute boundary position,
 - prefer it over `mark_input_end(name)` plus `mark_col(name)` when the rule does not need a reusable named checkpoint first,
 - and treat it as the whole-input right-edge column companion to `input_end_line()`.
 

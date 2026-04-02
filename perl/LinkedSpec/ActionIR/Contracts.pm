@@ -1304,6 +1304,17 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'input_end_pos',
+   ir_node            => 'INPUT_END_POS_READ',
+   diag_name          => 'input_end_pos',
+   unresolved_pattern => qr/\binput_end_pos\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\binput_end_pos\s*\(\s*\)/do { length\(\$\$STRING\) }/g;
+    return $code
+   },
+  },
+  {
    id                 => 'input_end_line',
    ir_node            => 'INPUT_END_LINE_READ',
    diag_name          => 'input_end_line',
