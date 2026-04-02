@@ -771,22 +771,27 @@ sub run_get_pipeline {
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
- my $active_spec_descr_rule_label = undef;
- my $auto_descr_spec = eval {
-  spec_descr($retv, sub {
+my $active_spec_descr_rule_label = undef;
+my $auto_descr_spec = eval {
+ spec_descr($retv, sub {
    my ($entry) = @_;
    $active_spec_descr_rule_label = _parsed_rule_label($entry);
    return $compile_spec_entry->($entry)
   })
- };
- my $spec_descr_error = $@;
- if ($spec_descr_error) {
+};
+my $spec_descr_error = $@;
+ my $active_spec_descr_handler_source_label =
+  (defined($active_spec_descr_rule_label) && length($active_spec_descr_rule_label))
+   ? _build_generated_handler_source_label(label => $active_spec_descr_rule_label)
+   : undef;
+if ($spec_descr_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'spec_descr',
    summary => 'Spec descriptor generation failed',
    detail => $spec_descr_error,
    rule_label => $active_spec_descr_rule_label,
+   handler_source_label => $active_spec_descr_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed - trapped exception while compiling parsed spec entries");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
@@ -799,6 +804,7 @@ sub run_get_pipeline {
    summary => 'Spec descriptor generation failed',
    detail => 'Rule descriptor build failed while compiling parsed spec entries',
    rule_label => $active_spec_descr_rule_label,
+   handler_source_label => $active_spec_descr_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
@@ -806,16 +812,21 @@ sub run_get_pipeline {
  }
  _clear_active_spec_gdata_rule_label();
  my $final_descr = eval { _build_final_descr($auto_descr_spec, undef, parse_mode => $parse_mode) };
- my $build_final_descr_error = $@;
- my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
- _clear_active_spec_gdata_rule_label();
- if ($build_final_descr_error) {
+my $build_final_descr_error = $@;
+my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
+ my $build_final_descr_handler_source_label =
+  (defined($build_final_descr_rule_label) && length($build_final_descr_rule_label))
+   ? _build_generated_handler_source_label(label => $build_final_descr_rule_label)
+   : undef;
+_clear_active_spec_gdata_rule_label();
+if ($build_final_descr_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'build_final_descr',
    summary => 'Final descriptor assembly failed',
    detail => $build_final_descr_error,
    rule_label => $build_final_descr_rule_label,
+   handler_source_label => $build_final_descr_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building gdata/final descriptor state");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
@@ -834,9 +845,13 @@ sub run_get_pipeline {
     },
    },
   )
- };
- my $validate_gdata_references_error = $@;
- if ($validate_gdata_references_error) {
+};
+my $validate_gdata_references_error = $@;
+ my $validate_gdata_handler_source_label =
+  (defined($validate_gdata_failure{rule_label}) && length($validate_gdata_failure{rule_label}))
+   ? _build_generated_handler_source_label(label => $validate_gdata_failure{rule_label})
+   : undef;
+if ($validate_gdata_references_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'validate_gdata_references',
@@ -847,6 +862,7 @@ sub run_get_pipeline {
     ? $validate_gdata_failure{detail}
     : $validate_gdata_references_error,
    rule_label => $validate_gdata_failure{rule_label},
+   handler_source_label => $validate_gdata_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - trapped exception during generated-descriptor validation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
@@ -864,6 +880,7 @@ sub run_get_pipeline {
     ? $validate_gdata_failure{detail}
     : 'validate_gdata_references returned false for the generated descriptor',
    rule_label => $validate_gdata_failure{rule_label},
+   handler_source_label => $validate_gdata_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
@@ -921,7 +938,7 @@ sub run_get_pipeline {
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
   my $top_handler_variant = (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef;
-  my $top_handler_source_label = (defined($top_rule) && length($top_rule) && defined($top_handler_variant) && length($top_handler_variant))
+  my $top_handler_source_label = (defined($top_rule) && length($top_rule))
    ? _build_generated_handler_source_label(
       label => $top_rule,
       handler_variant => $top_handler_variant,

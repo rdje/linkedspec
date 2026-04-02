@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-02 - Phase 5: preserve generated handler labels on attributed compile failures
+
+- extended `perl/LinkedSpec/Compiler.pm` so structured `runtime_ctx->{last_error}` payloads now also preserve `handler_source_label` on `compiler_pipeline:spec_descr`, attributed `compiler_pipeline:build_final_descr`, and attributed `compiler_pipeline:validate_gdata_references` failures whenever the failing rule label is already known, instead of reserving that generated-handler identity only for exact runtime-handler/runtime-parser variant-known paths,
+- widened `t/phase0_regression.t` so compile-entry, final-descriptor, and generated-descriptor validation attribution seams now all lock the new label-preservation contract with the stable label-only form `LinkedSpec::generated_handler:<rule_label>` when the exact handler variant is not known yet,
+- expanded the diagnostics guide so `USER_GUIDE.md` now teaches that compile-time attributed failures can carry `handler_source_label` too, not only runtime execution failures, and clarifies that top-level parser failures now keep the shorter label-only form when only the selected top-rule label is known,
+- refreshed roadmap/continuity notes so future resume treats synthetic generated-handler labels on attributed compile failures as part of the active Phase 5 diagnostics contract rather than a runtime-only detail.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-02 - Phase 4: add whole-input end-position helper
 
 - extended `perl/LinkedSpec/ActionIR/Contracts.pm`, `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`, and `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` so `input_end_pos()` is now a first-class helper contract scanned, canonicalized, and lowered without raw-Perl fallback,

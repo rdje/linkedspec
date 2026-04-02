@@ -8331,7 +8331,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'bootstrap_parse die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_for_generated_descriptor_validation_failure' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8383,6 +8383,7 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, "Invalid regex index 1 for rule 'Leaf'", 'generated descriptor validation rejection records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/Rule 'Top' references out-of-bounds regex index 1 on rule 'Leaf'/, 'generated descriptor validation rejection records owning-rule detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'generated descriptor validation rejection records the owning compiled rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'generated descriptor validation rejection records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'generated descriptor validation rejection leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'generated descriptor validation rejection leaves inline-spec spec_path empty');
 };
@@ -8424,7 +8425,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_gdata_references_dies_mid_rule' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8458,11 +8459,12 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, "Rule definition validation failed for rule 'Top'", 'nested validate_rule_definition die records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_RULE_DEFINITION_DIE__/, 'nested validate_rule_definition die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'nested validate_rule_definition die records the owning compiled rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'nested validate_rule_definition die records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'nested validate_rule_definition die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'nested validate_rule_definition die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_dies' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8497,11 +8499,12 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compile_spec_entry die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_ENTRY_DIE__/, 'compile_spec_entry die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'compile_spec_entry die records the active parsed rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec_entry die records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'compile_spec_entry die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compile_spec_entry die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_compile_spec_entry_returns_invalid_tuple' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8536,6 +8539,7 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'invalid compile_spec_entry tuple records summary');
     is($runtime_ctx->{last_error}{detail}, 'Rule descriptor build failed while compiling parsed spec entries', 'invalid compile_spec_entry tuple records the stable descriptor-build detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid compile_spec_entry tuple records the active parsed rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'invalid compile_spec_entry tuple records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_path empty');
 };
@@ -8577,7 +8581,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_spec_gdata_dies_mid_rule' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8620,6 +8624,7 @@ SPEC
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'default spec_gdata die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_ORED_RE_DIE__/, 'default spec_gdata die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'default spec_gdata die records the active gdata-compilation rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'default spec_gdata die records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'default spec_gdata die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'default spec_gdata die leaves inline-spec spec_path empty');
 };
