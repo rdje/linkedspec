@@ -146,7 +146,8 @@ sub report_dsl_error {
 }
 
 sub validate_spec_content {
- my ($spec_content) = @_;
+ my ($spec_content, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
 
  unless (ref($spec_content) eq 'SCALAR') {
   _trace_log_output(DUMP_NONE, "Invalid spec content type", "Expected SCALAR reference, got " . ref($spec_content));
@@ -169,17 +170,24 @@ sub validate_spec_content {
 
    unless ($first_significant_line_seen) {
     $first_significant_line_seen = 1;
-    my $first_rule = _parse_rule_label_line($line);
+   my $first_rule = _parse_rule_label_line($line);
     unless ($first_rule && !$first_rule->{invalid_mode}) {
      my $position = index($$spec_content, $line);
      if (_looks_like_malformed_rule_label_line($line)) {
-      report_dsl_error($spec_content, $position,
+      _report_dsl_validation_failure($spec_content, $position,
        "Malformed rule label syntax",
-       "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
+       "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'",
+       $option,
+       summary => 'Malformed rule label syntax',
+       rule_label => (ref($first_rule) eq 'HASH' ? $first_rule->{label} : undef),
+      );
      } else {
-      report_dsl_error($spec_content, $position,
+      _report_dsl_validation_failure($spec_content, $position,
        "Spec file must start with a rule definition",
-       "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'");
+       "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'",
+       $option,
+       summary => 'Spec file must start with a rule definition',
+      );
      }
      return 0;
     }
@@ -194,16 +202,22 @@ sub validate_spec_content {
  }
 
  unless ($found_rule) {
-  report_dsl_error($spec_content, 0,
+  _report_dsl_validation_failure($spec_content, 0,
    "Spec file must start with a rule definition",
-   "Add a rule like 'RuleName::' at the beginning");
+   "Add a rule like 'RuleName::' at the beginning",
+   $option,
+   summary => 'Spec file must start with a rule definition',
+  );
   return 0;
  }
 
  unless ($found_top_rule) {
-  report_dsl_error($spec_content, 0,
+  _report_dsl_validation_failure($spec_content, 0,
    "Spec file must define a top rule with '::'",
-   "Add a top rule like 'RuleName::' so the parser has an entrypoint");
+   "Add a top rule like 'RuleName::' so the parser has an entrypoint",
+   $option,
+   summary => "Spec file must define a top rule with '::'",
+  );
   return 0;
  }
 

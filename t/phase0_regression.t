@@ -8194,7 +8194,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'callback-setup failure leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failure' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $spec_content = "this is not a valid LinkedSpec rule line\n";
     my $runtime_ctx = {
@@ -8213,10 +8213,42 @@ subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failu
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validation failure error context records compiler_pipeline type');
     is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'validation failure error context records validation stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'validation failure error context records combined owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'validation failure error context records summary');
-    like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'validation failure error context records detail');
+    is($runtime_ctx->{last_error}{summary}, 'Spec file must start with a rule definition', 'validation failure error context records the specific validator summary');
+    like($runtime_ctx->{last_error}{detail}, qr/DSL Error at line 1:/, 'validation failure error context records the formatted validator detail');
+    like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'validation failure error context records the specific validator message');
     is($runtime_ctx->{last_error}{spec_name}, '', 'validation failure error context leaves spec_name empty when no file-oriented context exists');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validation failure error context leaves spec_path empty when no file-oriented context exists');
+};
+subtest 'compiler_run_get_pipeline_preserves_rule_label_when_validate_spec_content_returns_false' => sub {
+    plan tests => 12;
+
+    my $spec_content = <<'SPEC';
+Broken:ORX /a/ -> Broken { return_a(Broken) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my $ret = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        { return_descr => 1 },
+        { runtime_ctx => $runtime_ctx },
+    );
+
+    ok(!defined($ret), 'compiler pipeline returns undef for malformed first-rule label syntax');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'malformed first-rule label records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'malformed first-rule label records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'malformed first-rule label records validate_spec_content stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'malformed first-rule label records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Malformed rule label syntax', 'malformed first-rule label preserves the specific validator summary');
+    like($runtime_ctx->{last_error}{detail}, qr/DSL Error at line 1:/, 'malformed first-rule label preserves the formatted validator detail header');
+    like($runtime_ctx->{last_error}{detail}, qr/Malformed rule label syntax/, 'malformed first-rule label preserves the specific validator detail');
+    like($runtime_ctx->{last_error}{detail}, qr/Line: Broken:ORX \/a\/ -> Broken \{ return_a\(Broken\) \}/, 'malformed first-rule label preserves the offending line text');
+    is($runtime_ctx->{last_error}{rule_label}, 'Broken', 'malformed first-rule label preserves the parsed rule label when known');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Broken', 'malformed first-rule label preserves the label-only generated-handler source identity');
+    like($runtime_ctx->{last_error}{detail}, qr/Suggestion: Use a supported rule label like 'RuleName:'/, 'malformed first-rule label preserves targeted validator guidance');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_spec_content_dies' => sub {
     plan tests => 10;
@@ -9668,8 +9700,8 @@ subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' 
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'captured runtime context exposes structured last_error after compile failure');
     is($runtime_ctx->{last_error}{stage}, 'validate_spec_content', 'captured runtime context records validation stage through the public Get facade');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'captured runtime context records combined compiler owner stage through the public Get facade');
-    is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'captured runtime context records validation summary through the public Get facade');
-    like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'captured runtime context records validation detail through the public Get facade');
+    is($runtime_ctx->{last_error}{summary}, 'Spec file must start with a rule definition', 'captured runtime context records the specific validator summary through the public Get facade');
+    like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'captured runtime context records the specific validator detail through the public Get facade');
 };
 subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure' => sub {
     plan tests => 12;
@@ -9697,7 +9729,7 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'compile failure records combined compiler owner stage in shared runtime context');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'compile failure last_error preserves requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'compile failure last_error preserves resolved spec path');
-    like($runtime_ctx->{last_error}{detail}, qr/Input envelope validation failed/, 'compile failure last_error preserves detail alongside preserved spec metadata');
+    like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'compile failure last_error preserves specific validator detail alongside preserved spec metadata');
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
 subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clears_on_success' => sub {

@@ -622,14 +622,35 @@ sub run_get_pipeline {
   return undef;
  }
 
- my $spec_content_valid = eval { LinkedSpec::Validation::validate_spec_content($spec_content_ref) };
+ my %validate_spec_content_failure;
+ my $spec_content_valid = eval {
+  LinkedSpec::Validation::validate_spec_content(
+   $spec_content_ref,
+   {
+    on_failure => sub {
+     %validate_spec_content_failure = @_;
+     return 1;
+    },
+   },
+  )
+ };
  my $validate_spec_content_error = $@;
+ my $validate_spec_content_handler_source_label =
+  (defined($validate_spec_content_failure{rule_label}) && length($validate_spec_content_failure{rule_label}))
+   ? _build_generated_handler_source_label(label => $validate_spec_content_failure{rule_label})
+   : undef;
  if ($validate_spec_content_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'validate_spec_content',
-   summary => 'Spec content validation failed',
-   detail => $validate_spec_content_error,
+   summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
+    ? $validate_spec_content_failure{summary}
+    : 'Spec content validation failed',
+   detail => defined($validate_spec_content_failure{detail}) && length($validate_spec_content_failure{detail})
+    ? $validate_spec_content_failure{detail}
+    : $validate_spec_content_error,
+   rule_label => $validate_spec_content_failure{rule_label},
+   handler_source_label => $validate_spec_content_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - trapped exception during validation");
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
@@ -643,16 +664,28 @@ sub run_get_pipeline {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_spec_content',
-    summary => 'Spec content validation failed',
-    detail => 'Input envelope validation failed',
+    summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
+     ? $validate_spec_content_failure{summary}
+     : 'Spec content validation failed',
+    detail => defined($validate_spec_content_failure{detail}) && length($validate_spec_content_failure{detail})
+     ? $validate_spec_content_failure{detail}
+     : 'Input envelope validation failed',
+    rule_label => $validate_spec_content_failure{rule_label},
+    handler_source_label => $validate_spec_content_handler_source_label,
    );
    _trace_log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
   } else {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_spec_content',
-    summary => 'Spec content validation failed',
-    detail => 'Input envelope validation failed',
+    summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
+     ? $validate_spec_content_failure{summary}
+     : 'Spec content validation failed',
+    detail => defined($validate_spec_content_failure{detail}) && length($validate_spec_content_failure{detail})
+     ? $validate_spec_content_failure{detail}
+     : 'Input envelope validation failed',
+    rule_label => $validate_spec_content_failure{rule_label},
+    handler_source_label => $validate_spec_content_handler_source_label,
    );
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec content validation failed - terminating parser generation");
    _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_content' }, DUMP_LOW);
