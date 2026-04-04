@@ -257,14 +257,30 @@ sub run_get_parser {
    return undef
   }
 
-  my $spec_path = eval { $resolve_spec_path->($spec_name, $trace_scope) };
+  my %resolve_spec_path_failure;
+  my $spec_path = eval {
+   $resolve_spec_path->(
+    $spec_name,
+    $trace_scope,
+    {
+     on_failure => sub {
+      %resolve_spec_path_failure = @_;
+      return 1;
+     },
+    },
+   )
+  };
   my $resolve_spec_path_error = $@;
   if ($resolve_spec_path_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'resolve_spec_path',
-    summary => 'Spec resolution failed',
-    detail => $resolve_spec_path_error,
+    summary => defined($resolve_spec_path_failure{summary}) && length($resolve_spec_path_failure{summary})
+     ? $resolve_spec_path_failure{summary}
+     : 'Spec resolution failed',
+    detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
+     ? $resolve_spec_path_failure{detail}
+     : $resolve_spec_path_error,
    );
    return undef;
   }
@@ -272,8 +288,12 @@ sub run_get_parser {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'resolve_spec_path',
-    summary => 'Spec resolution failed',
-    detail => 'resolve_spec_path returned undef for the requested parser name',
+    summary => defined($resolve_spec_path_failure{summary}) && length($resolve_spec_path_failure{summary})
+     ? $resolve_spec_path_failure{summary}
+     : 'Spec resolution failed',
+    detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
+     ? $resolve_spec_path_failure{detail}
+     : 'resolve_spec_path returned undef for the requested parser name',
   );
   return undef;
  }

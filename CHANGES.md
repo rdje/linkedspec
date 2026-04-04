@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: preserve specific resolve-spec-path diagnostics
+
+- extended `perl/LinkedSpec/Resolver.pm` so `resolve_spec_path(...)` now exposes structured failure metadata on its non-throwing resolver-side `undef` paths, including specific summary/detail pairs like `Spec path not found`, `Spec path is not a file`, and `Unable to resolve spec 'name'` instead of only logging those distinctions to trace output,
+- updated `perl/LinkedSpec/ParserFactory.pm` so `parser_factory:resolve_spec_path` now preserves that resolver-provided summary/detail on false-return failures instead of collapsing back to the generic `Spec resolution failed` wrapper text,
+- widened `t/phase0_regression.t` with one direct parser-factory regression plus updated public `get_parser(...)` runtime-context expectations so both the lower-level and public file-oriented paths now lock the more specific resolution-failure contract,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats resolver-attributed false-return resolution failures as covered diagnostics continuity, not just thrown parser-factory callback failures.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-02 - Phase 5: preserve parser-boundary handler labels on missing top-rule entries
 
 - extended `perl/LinkedSpec/Compiler.pm` so `runtime_parser:resolve_top_rule_handler` now also preserves `handler_source_label` when the selected top-rule label is known but the compiled descriptor entry itself is missing, instead of dropping that generated-handler identity until a concrete handler coderef exists,

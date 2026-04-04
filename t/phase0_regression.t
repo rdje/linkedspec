@@ -8982,6 +8982,39 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_resolve_spe
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RESOLVE_SPEC_PATH_DIE__/, 'resolve_spec_path die records original thrown detail');
     is($runtime_ctx->{last_error}{spec_path}, '', 'resolve_spec_path die leaves spec_path empty');
 };
+subtest 'parser_factory_run_get_parser_preserves_specific_error_when_resolve_spec_path_returns_undef' => sub {
+    plan tests => 10;
+
+    my $missing_spec_name = 'phase5_specific_resolve_missing_' . $$ . '.spec';
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        $missing_spec_name,
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => \&LinkedSpec::Resolver::validate_spec_name,
+            resolve_spec_path => \&LinkedSpec::Resolver::resolve_spec_path,
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when resolve_spec_path returns undef');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when resolve_spec_path returns undef');
+    is($runtime_ctx->{spec_name}, $missing_spec_name, 'ParserFactory runtime context preserves requested spec name when resolve_spec_path returns undef');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when resolve_spec_path returns undef');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'resolve_spec_path false-return records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'resolve_spec_path false-return records resolve_spec_path stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'resolve_spec_path false-return records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec path not found', 'resolve_spec_path false-return preserves the specific resolver summary');
+    is($runtime_ctx->{last_error}{detail}, "spec='$missing_spec_name' resolved='<undef>'", 'resolve_spec_path false-return preserves the specific resolver detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'resolve_spec_path false-return leaves spec_path empty');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_load_spec_content_dies' => sub {
     plan tests => 11;
 
@@ -9520,7 +9553,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_PRESERVED_RUNTIME_ERROR__/, 'compiler delegation die after payload preserves deeper owner detail');
 };
 subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
-    plan tests => 13;
+    plan tests => 14;
 
     my $missing_spec_name = 'phase5_runtime_ctx_missing_dot_spec_' . $$ . '.spec';
     my $runtime_ctx;
@@ -9538,7 +9571,8 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser runtime context records parser_factory type on resolution failure');
     is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'get_parser runtime context records parser-factory resolution stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'get_parser runtime context records combined parser-factory owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'get_parser runtime context records parser-factory resolution summary');
+    is($runtime_ctx->{last_error}{summary}, 'Spec path not found', 'get_parser runtime context records resolver-specific parser-factory resolution summary');
+    is($runtime_ctx->{last_error}{detail}, "spec='$missing_spec_name' resolved='<undef>'", 'get_parser runtime context records resolver-specific parser-factory resolution detail');
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
     is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'get_parser runtime error payload records requested top_rule before resolution failure');
@@ -9592,7 +9626,7 @@ subtest 'get_parser_resolution_failure_clears_stale_parser_source_capture' => su
     is($runtime_ctx{last_error}{stage}, 'resolve_spec_path', 'get_parser reused-context resolution failure with stale parser-source state still records the parser-factory resolution stage');
 };
 subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failure' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     my $missing_spec_name = 'phase5_runtime_ctx_hashref_missing_dot_spec_' . $$ . '.spec';
     my %runtime_ctx = (seed => 'kept');
@@ -9609,7 +9643,8 @@ subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failur
     is($runtime_ctx{last_error}{type}, 'parser_factory', 'get_parser direct runtime_ctx_ref hashref records parser_factory type on resolution failure');
     is($runtime_ctx{last_error}{stage}, 'resolve_spec_path', 'get_parser direct runtime_ctx_ref hashref records parser-factory resolution stage');
     is($runtime_ctx{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'get_parser direct runtime_ctx_ref hashref records combined parser-factory owner stage');
-    is($runtime_ctx{last_error}{summary}, 'Spec resolution failed', 'get_parser direct runtime_ctx_ref hashref records parser-factory resolution summary');
+    is($runtime_ctx{last_error}{summary}, 'Spec path not found', 'get_parser direct runtime_ctx_ref hashref records resolver-specific parser-factory resolution summary');
+    is($runtime_ctx{last_error}{detail}, "spec='$missing_spec_name' resolved='<undef>'", 'get_parser direct runtime_ctx_ref hashref records resolver-specific parser-factory resolution detail');
     is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser direct runtime_ctx_ref hashref records requested spec name in last_error');
     is($runtime_ctx{last_error}{spec_path}, '', 'get_parser direct runtime_ctx_ref hashref leaves spec_path empty when resolution never succeeds');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing direct runtime_ctx_ref hashref');
