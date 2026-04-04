@@ -80,6 +80,7 @@ Runtime/diagnostic continuity note:
 - parser-factory `load_spec_content` false-return failures from the real resolver now also preserve the resolver’s specific `summary` and `detail` instead of collapsing to a generic “Spec file load failed” wrapper.
 - parser-factory `compile_spec` malformed defined return shapes now also preserve specific parser-result detail instead of accepting arbitrary defined values as successful parser results or collapsing to a generic compile wrapper.
 - runtime and parser-factory mode-only compile paths now also preserve explicit malformed-result detail instead of accepting defined values as successful `parse_only` / `generate_only` runs.
+- runtime-owner fallback `runtime_owner:run_get_pipeline` payloads now also preserve the same label-only generated-handler identity whenever the selected top rule is already known at that seam.
 - compiler `bootstrap_parse` malformed non-throwing return shapes now also preserve specific result-shape detail instead of collapsing to one generic invalid-intermediate-representation detail string.
 - malformed non-throwing `compile_spec_entry(...)` return shapes at `compiler_pipeline:spec_descr` now also preserve specific tuple-shape detail instead of collapsing to the old generic descriptor-build wrapper string.
 - the remaining `runtime_parser:resolve_top_rule_handler` missing-descriptor-entry seam now follows that same rule too, so callers still get `LinkedSpec::generated_handler:<top_rule>` even when the selected top-rule label is known but no compiled descriptor entry exists yet.

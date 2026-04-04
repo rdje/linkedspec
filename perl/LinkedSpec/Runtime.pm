@@ -86,6 +86,20 @@ sub _set_runtime_ctx_last_error_unless_present {
 }
 
 #------------------------------------------------------------------------------
+# Function: _runtime_owner_handler_source_label
+# Purpose : Build one label-only generated-handler identity for runtime-owner
+#           fallback diagnostics when the selected top rule is already known.
+# Args    : ($runtime_ctx)
+# Returns : handler_source_label string | undef
+#------------------------------------------------------------------------------
+sub _runtime_owner_handler_source_label {
+ my ($runtime_ctx) = @_;
+ my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
+ return undef unless defined($top_rule) && length($top_rule);
+ return _call_runtime_ctx('build_generated_handler_source_label', label => $top_rule)
+}
+
+#------------------------------------------------------------------------------
 # Function: _describe_run_get_pipeline_result
 # Purpose : Explain one malformed compiler result shape for the active runtime
 #           owner mode instead of accepting arbitrary defined values as success.
@@ -145,6 +159,7 @@ sub run_get {
     stage => 'run_get_pipeline',
     summary => 'Runtime compile delegation failed',
     detail => $runtime_owner_error,
+    handler_source_label => _runtime_owner_handler_source_label($runtime_ctx),
    );
    return undef;
   }
@@ -159,6 +174,7 @@ sub run_get {
     stage => 'run_get_pipeline',
     summary => 'Runtime compile delegation failed',
     detail => _describe_run_get_pipeline_result($ret, $option),
+    handler_source_label => _runtime_owner_handler_source_label($runtime_ctx),
    );
    return undef;
   }
