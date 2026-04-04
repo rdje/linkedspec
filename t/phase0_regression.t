@@ -9680,6 +9680,75 @@ SPEC
     is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'compiler delegation undef records stable fallback detail');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation undef leaves spec_path empty in inline runtime context');
 };
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_non_coderef_without_runtime_payload' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return { malformed => 1 } };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation yields a malformed non-coderef result') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation yields a malformed non-coderef result');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation yields a malformed non-coderef result');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation yields a malformed non-coderef result');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation malformed parser result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation malformed parser result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation malformed parser result records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation malformed parser result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid parser value: HASH; expected CODE', 'compiler delegation malformed parser result records specific malformed parser detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation malformed parser result leaves spec_path empty in inline runtime context');
+};
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_non_hash_in_return_descr_mode' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return ['not_a_hash'] };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                return_descr => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation yields a malformed non-hash descriptor result') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation yields a malformed non-hash descriptor result');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation yields a malformed non-hash descriptor result');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation yields a malformed non-hash descriptor result');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation malformed descriptor result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation malformed descriptor result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation malformed descriptor result records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation malformed descriptor result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid descriptor value: ARRAY; expected HASH', 'compiler delegation malformed descriptor result records specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation malformed descriptor result leaves spec_path empty in inline runtime context');
+};
 subtest 'runtime_run_get_parse_only_success_leaves_failure_channel_clear' => sub {
     plan tests => 5;
 
@@ -9973,6 +10042,69 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get runtime owner failure records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get runtime owner failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LINKEDSPEC_GET_RUNTIME_OWNER_DIE__/, 'LinkedSpec::Get runtime owner failure records original thrown detail');
+};
+subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_malformed_non_coderef_result' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return { malformed => 1 } };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when Runtime catches a malformed non-coderef compiler result') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when Runtime catches a malformed non-coderef compiler result');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when Runtime catches a malformed non-coderef compiler result');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get exposes structured runtime_owner last_error when Runtime catches a malformed non-coderef compiler result');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'LinkedSpec::Get malformed parser result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'LinkedSpec::Get malformed parser result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get malformed parser result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get malformed parser result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid parser value: HASH; expected CODE', 'LinkedSpec::Get malformed parser result records specific malformed parser detail');
+};
+subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_malformed_non_hash_descriptor_result' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return ['not_a_hash'] };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when Runtime catches a malformed non-hash descriptor result') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when Runtime catches a malformed non-hash descriptor result');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when Runtime catches a malformed non-hash descriptor result');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get exposes structured runtime_owner last_error when Runtime catches a malformed non-hash descriptor result');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'LinkedSpec::Get malformed descriptor result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'LinkedSpec::Get malformed descriptor result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get malformed descriptor result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get malformed descriptor result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid descriptor value: ARRAY; expected HASH', 'LinkedSpec::Get malformed descriptor result records specific malformed descriptor detail');
 };
 subtest 'linkedspec_get_preserves_compiler_setup_failure_context_when_compiler_traps_invalid_bootstrap_callback' => sub {
     plan tests => 9;

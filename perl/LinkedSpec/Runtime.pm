@@ -86,6 +86,34 @@ sub _set_runtime_ctx_last_error_unless_present {
 }
 
 #------------------------------------------------------------------------------
+# Function: _describe_run_get_pipeline_result
+# Purpose : Explain one malformed compiler result shape for the active runtime
+#           owner mode instead of accepting arbitrary defined values as success.
+# Args    : ($ret, $option_hashref)
+# Returns : string detail describing the invalid result
+#------------------------------------------------------------------------------
+sub _describe_run_get_pipeline_result {
+ my ($ret, $option) = @_;
+ my $value_desc = !defined($ret)
+  ? 'undef'
+  : ref($ret) ? ref($ret) : 'SCALAR';
+
+ return 'run_get_pipeline returned undef without structured runtime context'
+  unless defined($ret);
+
+ if (ref($option) eq 'HASH' && $option->{return_descr}) {
+  return "run_get_pipeline returned invalid descriptor value: $value_desc; expected HASH";
+ }
+
+ if (ref($option) eq 'HASH' && ($option->{parse_only} || $option->{generate_only})) {
+  my $mode = $option->{parse_only} ? 'parse_only' : 'generate_only';
+  return "run_get_pipeline returned invalid $mode value: $value_desc; expected undef";
+ }
+
+ return "run_get_pipeline returned invalid parser value: $value_desc; expected CODE";
+}
+
+#------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
 #           and compiler pipeline invocation against injected runtime state.
@@ -109,7 +137,7 @@ sub run_get {
      runtime_ctx => $runtime_ctx,
     }
    )
-  };
+ };
   my $runtime_owner_error = $@;
   if ($runtime_owner_error) {
    _set_runtime_ctx_last_error_unless_present(
@@ -120,13 +148,17 @@ sub run_get {
    );
    return undef;
   }
-  if (!defined($ret)) {
-   return undef if $parse_only || $generate_only;
+  my $ret_ok = (ref($option) eq 'HASH' && $option->{return_descr})
+   ? (defined($ret) && ref($ret) eq 'HASH')
+   : ($parse_only || $generate_only)
+    ? !defined($ret)
+    : (defined($ret) && ref($ret) eq 'CODE');
+  unless ($ret_ok) {
    _set_runtime_ctx_last_error_unless_present(
     $runtime_ctx,
     stage => 'run_get_pipeline',
     summary => 'Runtime compile delegation failed',
-    detail => 'run_get_pipeline returned undef without structured runtime context',
+    detail => _describe_run_get_pipeline_result($ret, $option),
    );
    return undef;
   }

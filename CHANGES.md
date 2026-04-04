@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: tighten runtime compile result diagnostics
+
+- extended `perl/LinkedSpec/Runtime.pm` so the inline runtime compile boundary now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descr => 1` result, while still preserving intentional `undef` success for `parse_only` / `generate_only`,
+- widened `t/phase0_regression.t` with direct `Runtime::run_get(...)` regressions plus public `LinkedSpec::Get(...)` regressions so both the lower-level runtime seam and the outward inline compile contract now lock malformed defined result diagnostics,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed defined `run_get_pipeline(...)` results as covered runtime-owner diagnostics continuity now instead of assuming only thrown or `undef` compiler-delegation paths matter there.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: tighten parser-factory compile result diagnostics
 
 - extended `perl/LinkedSpec/ParserFactory.pm` so the file-oriented compile boundary now treats only a real parser coderef as a successful `compile_spec(...)` result, and malformed defined return shapes now preserve specific detail such as `compile_spec returned invalid parser value: HASH; expected CODE` instead of drifting outward as bogus parser objects or collapsing back to one generic compile wrapper string,
