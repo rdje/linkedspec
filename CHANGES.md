@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-05 - Phase 5: preserve compiler validation pre-rule handler labels
+
+- updated `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:validate_spec_content` and unattributed `compiler_pipeline:validate_dsl_syntax` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those early validation seams,
+- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::run_get_pipeline(...)` coverage and public `LinkedSpec::Get(...)` / `get_parser(...)` continuity paths so malformed preamble, forced validation-die, and unattributed DSL-false-return branches now lock the preserved top-rule `handler_source_label`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats pre-rule compiler-validation handler attribution as part of the stable structured-diagnostics contract now instead of assuming label-only handler identity starts only after rule attribution begins.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-05 - Phase 5: preserve compiler pre-rule handler labels
 
 - extended `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:prepare_pipeline` and `compiler_pipeline:bootstrap_parse` payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known at those early seams,

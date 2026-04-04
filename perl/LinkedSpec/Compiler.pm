@@ -540,6 +540,14 @@ sub _compiler_top_rule_handler_source_label {
  return _build_generated_handler_source_label(label => $top_rule)
 }
 
+sub _compiler_rule_or_top_handler_source_label {
+ my ($runtime_ctx, $rule_label) = @_;
+ if (defined($rule_label) && length($rule_label)) {
+  return _build_generated_handler_source_label(label => $rule_label)
+ }
+ return _compiler_top_rule_handler_source_label($runtime_ctx)
+}
+
 sub _reset_spec_content_pos {
  my ($spec_content_ref) = @_;
  return unless ref($spec_content_ref) eq 'SCALAR';
@@ -694,9 +702,7 @@ sub run_get_pipeline {
  };
  my $validate_spec_content_error = $@;
  my $validate_spec_content_handler_source_label =
-  (defined($validate_spec_content_failure{rule_label}) && length($validate_spec_content_failure{rule_label}))
-   ? _build_generated_handler_source_label(label => $validate_spec_content_failure{rule_label})
-   : undef;
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_spec_content_failure{rule_label});
  if ($validate_spec_content_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -769,9 +775,7 @@ sub run_get_pipeline {
   };
   my $validate_dsl_syntax_error = $@;
   my $validate_dsl_handler_source_label =
-   (defined($validate_dsl_failure{rule_label}) && length($validate_dsl_failure{rule_label}))
-    ? _build_generated_handler_source_label(label => $validate_dsl_failure{rule_label})
-    : undef;
+   _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_dsl_failure{rule_label});
   if ($validate_dsl_syntax_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,

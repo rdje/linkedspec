@@ -8195,11 +8195,11 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'callback-setup failure leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failure' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = "this is not a valid LinkedSpec rule line\n";
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'RequestedTop',
         parser_source_chunks_ref => [],
     };
 
@@ -8217,6 +8217,8 @@ subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failu
     is($runtime_ctx->{last_error}{summary}, 'Spec file must start with a rule definition', 'validation failure error context records the specific validator summary');
     like($runtime_ctx->{last_error}{detail}, qr/DSL Error at line 1:/, 'validation failure error context records the formatted validator detail');
     like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'validation failure error context records the specific validator message');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'validation failure error context preserves the requested top_rule when rule attribution is unavailable');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'validation failure error context preserves the top-rule generated handler label when no rule label is available');
     is($runtime_ctx->{last_error}{spec_name}, '', 'validation failure error context leaves spec_name empty when no file-oriented context exists');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validation failure error context leaves spec_path empty when no file-oriented context exists');
 };
@@ -8252,7 +8254,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/Suggestion: Use a supported rule label like 'RuleName:'/, 'malformed first-rule label preserves targeted validator guidance');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_spec_content_dies' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8260,7 +8262,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8285,11 +8287,13 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'validate_spec_content die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec content validation failed', 'validate_spec_content die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_SPEC_CONTENT_DIE__/, 'validate_spec_content die records original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'validate_spec_content die preserves the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_spec_content die preserves the top-rule generated handler label when no rule label is available');
     is($runtime_ctx->{last_error}{spec_name}, '', 'validate_spec_content die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_content die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_dsl_syntax_dies' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8297,7 +8301,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8322,8 +8326,55 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dsl_syntax', 'validate_dsl_syntax die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'DSL syntax validation failed', 'validate_dsl_syntax die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_DSL_SYNTAX_DIE__/, 'validate_dsl_syntax die records original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'validate_dsl_syntax die preserves the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_dsl_syntax die preserves the top-rule generated handler label when no rule label is available');
     is($runtime_ctx->{last_error}{spec_name}, '', 'validate_dsl_syntax die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_dsl_syntax die leaves inline-spec spec_path empty');
+};
+subtest 'compiler_run_get_pipeline_preserves_top_rule_handler_label_when_validate_dsl_syntax_returns_false_without_rule_label' => sub {
+    plan tests => 11;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => 'RequestedTop',
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_dsl_syntax = sub {
+            my ($spec_ref, $opt) = @_;
+            $opt->{on_failure}->(
+                summary => 'Forced DSL syntax validation failure',
+                detail  => '__FORCED_VALIDATE_DSL_FALSE__',
+            );
+            return 0;
+        };
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline returns cleanly when validate_dsl_syntax returns false without rule attribution') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_dsl_syntax returns false without rule attribution');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_dsl_syntax false-return without rule attribution records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_dsl_syntax false-return without rule attribution records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dsl_syntax', 'validate_dsl_syntax false-return without rule attribution records validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dsl_syntax', 'validate_dsl_syntax false-return without rule attribution records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Forced DSL syntax validation failure', 'validate_dsl_syntax false-return without rule attribution preserves the specific validator summary');
+    is($runtime_ctx->{last_error}{detail}, '__FORCED_VALIDATE_DSL_FALSE__', 'validate_dsl_syntax false-return without rule attribution preserves the specific validator detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'validate_dsl_syntax false-return without rule attribution preserves the requested top_rule in structured diagnostics');
+    ok(!defined($runtime_ctx->{last_error}{rule_label}), 'validate_dsl_syntax false-return without rule attribution leaves rule_label unset');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'validate_dsl_syntax false-return without rule attribution preserves the top-rule generated handler label');
 };
 subtest 'compiler_run_get_pipeline_preserves_rule_label_when_validate_dsl_syntax_returns_false' => sub {
     plan tests => 14;
@@ -10522,7 +10573,7 @@ SPEC
     is($runtime_ctx->{last_error}{detail}, q{compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY}, 'LinkedSpec::Get malformed compile_spec_entry tuple preserves the specific malformed-return detail');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
-    plan tests => 7;
+    plan tests => 9;
 
     my $spec_content = "this is not a valid LinkedSpec rule line\n";
     my $runtime_ctx;
@@ -10530,6 +10581,7 @@ subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' 
     my $ret = LinkedSpec::Get(
         \$spec_content,
         return_descr => 1,
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
@@ -10540,9 +10592,11 @@ subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' 
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'captured runtime context records combined compiler owner stage through the public Get facade');
     is($runtime_ctx->{last_error}{summary}, 'Spec file must start with a rule definition', 'captured runtime context records the specific validator summary through the public Get facade');
     like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'captured runtime context records the specific validator detail through the public Get facade');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'captured runtime context preserves the requested top_rule through the public Get facade');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'captured runtime context preserves the top-rule generated handler label through the public Get facade when no rule label is available');
 };
 subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure' => sub {
-    plan tests => 12;
+    plan tests => 14;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -10554,6 +10608,7 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     my $runtime_ctx;
     my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
         $tmp_spec,
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
@@ -10567,6 +10622,8 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_spec_content', 'compile failure records combined compiler owner stage in shared runtime context');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'compile failure last_error preserves requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'compile failure last_error preserves resolved spec path');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'compile failure last_error preserves the requested top_rule through get_parser');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'compile failure last_error preserves the top-rule generated handler label through get_parser when no rule label is available');
     like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'compile failure last_error preserves specific validator detail alongside preserved spec metadata');
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
