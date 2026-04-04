@@ -8292,6 +8292,48 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'validate_dsl_syntax die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_dsl_syntax die leaves inline-spec spec_path empty');
 };
+subtest 'compiler_run_get_pipeline_preserves_rule_label_when_validate_dsl_syntax_returns_false' => sub {
+    plan tests => 14;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child:
+ => Leaf.
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => 'Top',
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            { runtime_ctx => $runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline returns cleanly when validate_dsl_syntax rejects the spec') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_dsl_syntax returns false');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_dsl_syntax false-return records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_dsl_syntax false-return records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dsl_syntax', 'validate_dsl_syntax false-return records validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dsl_syntax', 'validate_dsl_syntax false-return records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Malformed blind-call fluent suffix syntax', 'validate_dsl_syntax false-return preserves the specific validator summary');
+    like($runtime_ctx->{last_error}{detail}, qr/DSL Error at line 5:/, 'validate_dsl_syntax false-return preserves the formatted DSL error header');
+    like($runtime_ctx->{last_error}{detail}, qr/Malformed blind-call fluent suffix syntax/, 'validate_dsl_syntax false-return preserves the specific validator detail');
+    like($runtime_ctx->{last_error}{detail}, qr/Line:  => Leaf\./, 'validate_dsl_syntax false-return preserves the offending line text');
+    is($runtime_ctx->{last_error}{rule_label}, 'Child', 'validate_dsl_syntax false-return preserves the owning rule label when known');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Child', 'validate_dsl_syntax false-return preserves the synthetic generated-handler label for the owning rule');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'validate_dsl_syntax false-return keeps the seeded top_rule visible in structured diagnostics');
+    like($runtime_ctx->{last_error}{detail}, qr/Suggestion: Use '=> RuleName\.method\(\.\.\.\)'/, 'validate_dsl_syntax false-return preserves the targeted validator guidance');
+};
 subtest 'compiler_run_get_pipeline_records_structured_error_when_bootstrap_parse_dies' => sub {
     plan tests => 10;
 

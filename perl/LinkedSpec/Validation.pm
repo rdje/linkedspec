@@ -114,7 +114,7 @@ sub get_dsl_context {
  };
 }
 
-sub report_dsl_error {
+sub _build_dsl_error_message {
  my ($spec_content, $position, $error_msg, $suggestion) = @_;
 
  my $context = get_dsl_context($spec_content, $position);
@@ -133,6 +133,13 @@ sub report_dsl_error {
  if ($suggestion) {
   $error .= "  Suggestion: $suggestion\n";
  }
+
+ return $error;
+}
+
+sub report_dsl_error {
+ my ($spec_content, $position, $error_msg, $suggestion) = @_;
+ my $error = _build_dsl_error_message($spec_content, $position, $error_msg, $suggestion);
 
  _trace_log_output(DUMP_NONE, $error, "DSL validation failed");
  return undef
@@ -240,6 +247,26 @@ sub _notify_gdata_validation_failure {
  my $cb = $option->{on_failure};
  return undef unless ref($cb) eq 'CODE';
  return $cb->(%info)
+}
+
+sub _notify_dsl_validation_failure {
+ my ($option, %info) = @_;
+ return undef unless ref($option) eq 'HASH';
+ my $cb = $option->{on_failure};
+ return undef unless ref($cb) eq 'CODE';
+ return $cb->(%info)
+}
+
+sub _report_dsl_validation_failure {
+ my ($spec_content, $position, $error_msg, $suggestion, $option, %info) = @_;
+ my $detail = _build_dsl_error_message($spec_content, $position, $error_msg, $suggestion);
+ _notify_dsl_validation_failure(
+  $option,
+  summary => defined($info{summary}) ? $info{summary} : $error_msg,
+  detail => $detail,
+  (defined($info{rule_label}) ? (rule_label => $info{rule_label}) : ()),
+ );
+ return report_dsl_error($spec_content, $position, $error_msg, $suggestion)
 }
 
 sub validate_gdata_references {
@@ -375,7 +402,8 @@ sub validate_gdata_references {
 }
 
 sub validate_dsl_syntax {
- my ($spec_content) = @_;
+ my ($spec_content, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
 
  my @lines = split(/\n/, $$spec_content);
  my @defined_rules = ();
@@ -397,14 +425,18 @@ sub validate_dsl_syntax {
   $current_rule->{label},
   $current_rule->{acode_count},
   $current_rule->{bcode_count},
+  $option,
  );
 }
 
    if ($rule_label->{invalid_mode}) {
     my $position = index($$spec_content, $line);
-    report_dsl_error($spec_content, $position,
+    _report_dsl_validation_failure($spec_content, $position,
      "Malformed rule label syntax",
-     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
+     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'",
+     $option,
+     summary => 'Malformed rule label syntax',
+    );
     return 0;
   }
   my $rule_name = $rule_label->{label};
@@ -412,20 +444,24 @@ sub validate_dsl_syntax {
 
   if ($seen_defined_rules{$rule_name}++) {
     my $position = index($$spec_content, $line);
-    report_dsl_error($spec_content, $position,
+    _report_dsl_validation_failure($spec_content, $position,
      "Duplicate rule definition: '$rule_name'",
-     "Remove the duplicate rule or rename one of them");
+     "Remove the duplicate rule or rename one of them",
+     $option,
+     summary => "Duplicate rule definition: '$rule_name'",
+     rule_label => $rule_name,
+    );
     return 0;
    }
 
-   unless (_validate_rule_header_rhs_start($spec_content, $line, $rule_label->{rhs})) {
+   unless (_validate_rule_header_rhs_start($spec_content, $line, $rule_label->{rhs}, $option, $rule_name)) {
     return 0;
    }
 
    my $edge_scan = _scan_rule_edges_in_fragment($rule_label->{rhs});
    if ($edge_scan->{error}) {
     my $position = index($$spec_content, $line);
-    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error});
+    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error}, $option, $rule_name);
    }
    my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs}, $edge_scan);
    push @used_rules, map { $_->{label} } @{$edge_scan->{edges} || []};
@@ -437,34 +473,44 @@ sub validate_dsl_syntax {
    };
   } elsif ($at_rule_top_level && _looks_like_malformed_rule_label_line($line)) {
    my $position = index($$spec_content, $line);
-   report_dsl_error($spec_content, $position,
+   _report_dsl_validation_failure($spec_content, $position,
     "Malformed rule label syntax",
-    "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'");
+    "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'",
+    $option,
+    summary => 'Malformed rule label syntax',
+   );
    return 0;
   } elsif (!$seen_first_rule) {
    my $position = index($$spec_content, $line);
-   report_dsl_error($spec_content, $position,
+   _report_dsl_validation_failure($spec_content, $position,
     "Spec file must start with a rule definition",
-    "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'");
+    "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'",
+    $option,
+    summary => 'Spec file must start with a rule definition',
+   );
    return 0;
   } elsif ($current_rule) {
    my $start_depth = $current_rule->{edge_scan_depth} // 0;
    if ($start_depth == 0 && _looks_like_split_marker_prefix($line) && !_looks_like_supported_split_marker_start($line)) {
     my $position = index($$spec_content, $line);
-    return _report_split_marker_syntax_error($spec_content, $position);
+    return _report_split_marker_syntax_error($spec_content, $position, $option, $current_rule->{label});
    }
    if ($start_depth == 0 && !_looks_like_supported_rule_paragraph_member_line($line)) {
     my $position = index($$spec_content, $line);
-    report_dsl_error($spec_content, $position,
+    _report_dsl_validation_failure($spec_content, $position,
      "Unsupported top-level rule paragraph content",
-     "After a rule start, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or start the next rule");
+     "After a rule start, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or start the next rule",
+     $option,
+     summary => 'Unsupported top-level rule paragraph content',
+     rule_label => $current_rule->{label},
+    );
     return 0;
    }
 
    my $edge_scan = _scan_rule_edges_in_fragment($line, $start_depth);
    if ($edge_scan->{error}) {
     my $position = index($$spec_content, $line);
-    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error});
+    return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error}, $option, $current_rule->{label});
    }
    my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($line, $edge_scan);
    $current_rule->{acode_count} += $acode_count;
@@ -476,22 +522,24 @@ sub validate_dsl_syntax {
      $current_rule->{label},
      $current_rule->{acode_count},
      $current_rule->{bcode_count},
+     $option,
     );
    }
   }
 
  }
 
- if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
+if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count}) {
  return _report_mixed_rule_action_modes(
   $current_rule->{label},
   $current_rule->{acode_count},
   $current_rule->{bcode_count},
+  $option,
  );
 }
 
  if ($current_rule && (($current_rule->{edge_scan_depth} // 0) > 0)) {
-  return _report_unclosed_rule_block_error($spec_content, length($$spec_content));
+  return _report_unclosed_rule_block_error($spec_content, length($$spec_content), $option, $current_rule->{label});
  }
 
 my $regex_depth = 0;
@@ -511,9 +559,13 @@ my $regex_depth = 0;
 
    eval { qr/$regex_pattern/ } or do {
     my $position = index($$spec_content, $line);
-    report_dsl_error($spec_content, $position,
+    _report_dsl_validation_failure($spec_content, $position,
      "Invalid regex pattern: $regex_literal",
-     "Check the regex syntax and ensure proper escaping");
+     "Check the regex syntax and ensure proper escaping",
+     $option,
+     summary => "Invalid regex pattern: $regex_literal",
+     rule_label => $current_rule ? $current_rule->{label} : undef,
+    );
     return 0;
    };
   }
@@ -600,7 +652,7 @@ sub _invalid_regex_token_prefix {
 }
 
 sub _validate_rule_header_rhs_start {
- my ($spec_content, $line, $rhs) = @_;
+ my ($spec_content, $line, $rhs, $option, $rule_label) = @_;
  return 1 unless defined $rhs;
 
  my $trimmed_rhs = $rhs;
@@ -611,15 +663,19 @@ sub _validate_rule_header_rhs_start {
 
  if (length($remaining) && _looks_like_split_marker_prefix($remaining) && !_looks_like_supported_split_marker_start($remaining)) {
   my $position = index($$spec_content, $line);
-  return _report_split_marker_syntax_error($spec_content, $position);
+  return _report_split_marker_syntax_error($spec_content, $position, $option, $rule_label);
  }
 
  if (length($remaining) && $remaining =~ m{\A/}o) {
   my $position = index($$spec_content, $line);
   my $bad_regex = _invalid_regex_token_prefix($remaining);
-  report_dsl_error($spec_content, $position,
+  _report_dsl_validation_failure($spec_content, $position,
    "Invalid regex pattern: $bad_regex",
-   "Check the regex syntax and ensure proper escaping");
+   "Check the regex syntax and ensure proper escaping",
+   $option,
+   summary => "Invalid regex pattern: $bad_regex",
+   rule_label => $rule_label,
+  );
   return 0;
  }
 
@@ -627,9 +683,13 @@ sub _validate_rule_header_rhs_start {
  return 1 if _looks_like_supported_rule_paragraph_member_line($remaining);
 
  my $position = index($$spec_content, $line);
- report_dsl_error($spec_content, $position,
+ _report_dsl_validation_failure($spec_content, $position,
   "Unsupported same-line rule header content",
-  "After a rule start or leading regex cluster, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or end the line");
+  "After a rule start or leading regex cluster, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or end the line",
+  $option,
+  summary => 'Unsupported same-line rule header content',
+  rule_label => $rule_label,
+ );
  return 0;
 }
 
@@ -953,128 +1013,176 @@ sub _count_rule_edge_kinds_in_fragment {
 # Returns : undef/false through report_dsl_error
 #------------------------------------------------------------------------------
 sub _report_edge_target_syntax_error {
- my ($spec_content, $position, $error) = @_;
+ my ($spec_content, $position, $error, $option, $rule_label) = @_;
  my $kind = $error->{kind} || 'action';
  my $reason = $error->{reason} || '';
 
  if ($reason eq 'unexpected_closer') {
   my $closer = $error->{closer} || '?';
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Unexpected closing delimiter '$closer' in rule paragraph",
    "Remove the stray '$closer' or add the matching opening delimiter earlier in the same rule paragraph",
+   $option,
+   summary => "Unexpected closing delimiter '$closer' in rule paragraph",
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'blind_call' && $reason eq 'missing_target') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Blind-call edge is missing a target rule",
    "Use '=> RuleName' or '=> RuleName { ... }'; blind calls must name a child rule explicitly",
+   $option,
+   summary => 'Blind-call edge is missing a target rule',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'action' && $reason eq 'missing_target') {
- return report_dsl_error(
+ return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Action edge is missing a target rule",
    "Use '-> RuleName', '-> RuleName[idx]', '-> RuleA | RuleB { ... }', or '-> RuleName { ... }'; action edges must name target rule(s) explicitly",
+   $option,
+   summary => 'Action edge is missing a target rule',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'action' && $reason eq 'grouped_targets_require_block') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Grouped action-edge targets require a shared code block",
    "Use '-> RuleA | RuleB { ... }' when multiple action-edge targets need to share one code block",
+   $option,
+   summary => 'Grouped action-edge targets require a shared code block',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'blind_call' && $reason eq 'indexed_target_not_supported') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Blind-call targets do not support regex-slot indexing",
    "Use '=> RuleName' for blind calls, or use '-> RuleName[idx]' when you need a regex-slot action edge",
+   $option,
+   summary => 'Blind-call targets do not support regex-slot indexing',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'blind_call' && $reason eq 'malformed_target_suffix') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Malformed blind-call target syntax",
    "Use '=> RuleName' or '=> RuleName { ... }'; blind-call target names use word characters only and cannot have glued punctuation suffixes",
+   $option,
+   summary => 'Malformed blind-call target syntax',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'blind_call' && $reason eq 'malformed_fluent_suffix') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Malformed blind-call fluent suffix syntax",
    "Use '=> RuleName.method(...)', '=> RuleName .method(...)', or '=> RuleName { ... }'; the '.' must be followed by a method name",
+   $option,
+   summary => 'Malformed blind-call fluent suffix syntax',
+   rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'action' && $reason eq 'malformed_target_suffix') {
- return report_dsl_error(
+ return _report_dsl_validation_failure(
   $spec_content,
   $position,
   "Malformed action-edge target syntax",
    "Use '-> RuleName', '-> RuleName[idx]', '-> RuleA | RuleB { ... }', '-> RuleName { ... }', or a supported fluent suffix like '-> RuleName.method'; action-edge target names use word characters only",
+  $option,
+  summary => 'Malformed action-edge target syntax',
+  rule_label => $rule_label,
   );
  }
 
  if ($kind eq 'action' && $reason eq 'malformed_fluent_suffix') {
-  return report_dsl_error(
+  return _report_dsl_validation_failure(
    $spec_content,
    $position,
    "Malformed action-edge fluent suffix syntax",
    "Use a method-style continuation like '-> RuleName.method' or '-> RuleName.method(args)'; the '.' must be followed by a method name",
+   $option,
+   summary => 'Malformed action-edge fluent suffix syntax',
+   rule_label => $rule_label,
   );
  }
 
- return report_dsl_error(
+ return _report_dsl_validation_failure(
   $spec_content,
   $position,
   "Malformed action-edge target syntax",
   "Use '-> RuleName', '-> RuleName[0]', or '-> RuleName { ... }'; regex-slot indexes must be unsigned integers in brackets",
+  $option,
+  summary => 'Malformed action-edge target syntax',
+  rule_label => $rule_label,
  );
 }
 
 sub _report_split_marker_syntax_error {
- my ($spec_content, $position) = @_;
- return report_dsl_error(
+ my ($spec_content, $position, $option, $rule_label) = @_;
+ return _report_dsl_validation_failure(
   $spec_content,
   $position,
   "Malformed split marker syntax",
   "Use '@capture_slice', '@mark(name)', or compatibility aliases '@capture_from_here' / '@move_pos' when you need a split-boundary cursor marker",
+  $option,
+  summary => 'Malformed split marker syntax',
+  rule_label => $rule_label,
  );
 }
 
 sub _report_unclosed_rule_block_error {
- my ($spec_content, $position) = @_;
+ my ($spec_content, $position, $option, $rule_label) = @_;
  $position = 0 unless defined $position;
  while ($position > 0 && substr($$spec_content, $position - 1, 1) eq "\n") {
   --$position;
  }
- return report_dsl_error(
+ return _report_dsl_validation_failure(
   $spec_content,
   $position,
   "Unclosed rule block before end of file",
   "Close the still-open '{', '(', or '[' construct before the end of the spec",
+  $option,
+  summary => 'Unclosed rule block before end of file',
+  rule_label => $rule_label,
  );
 }
 
 sub _report_mixed_rule_action_modes {
- my ($label, $acode_count, $bcode_count) = @_;
+ my ($label, $acode_count, $bcode_count, $option) = @_;
  my $error_msg = "Rule '$label': Cannot mix ACTION (->) and BLIND CALL (=>) code blocks";
  my $context = "ACTION blocks: ".($acode_count // 0)." found, BLIND CALL blocks: ".($bcode_count // 0)." found";
+ my $detail = join(
+  "\n",
+  $context,
+  "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both",
+  "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'",
+ );
+ _notify_dsl_validation_failure(
+  $option,
+  summary => $error_msg,
+  detail => $detail,
+  rule_label => $label,
+ );
  _trace_log_output(DUMP_NONE, $error_msg, $context);
  print "  Solution: Use either ACTION blocks OR BLIND CALL blocks, not both\n";
  print "  Example: Use '-> rule_name { code }' OR '=> function_name { code }'\n";

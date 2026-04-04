@@ -664,14 +664,35 @@ sub run_get_pipeline {
 
  unless ($validation_failed) {
   _reset_spec_content_pos($spec_content_ref);
-  my $dsl_valid = eval { LinkedSpec::Validation::validate_dsl_syntax($spec_content_ref) };
+  my %validate_dsl_failure;
+  my $dsl_valid = eval {
+   LinkedSpec::Validation::validate_dsl_syntax(
+    $spec_content_ref,
+    {
+     on_failure => sub {
+      %validate_dsl_failure = @_;
+      return 1;
+     },
+    },
+   )
+  };
   my $validate_dsl_syntax_error = $@;
+  my $validate_dsl_handler_source_label =
+   (defined($validate_dsl_failure{rule_label}) && length($validate_dsl_failure{rule_label}))
+    ? _build_generated_handler_source_label(label => $validate_dsl_failure{rule_label})
+    : undef;
   if ($validate_dsl_syntax_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_dsl_syntax',
-    summary => 'DSL syntax validation failed',
-    detail => $validate_dsl_syntax_error,
+    summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
+     ? $validate_dsl_failure{summary}
+     : 'DSL syntax validation failed',
+    detail => defined($validate_dsl_failure{detail}) && length($validate_dsl_failure{detail})
+     ? $validate_dsl_failure{detail}
+     : $validate_dsl_syntax_error,
+    rule_label => $validate_dsl_failure{rule_label},
+    handler_source_label => $validate_dsl_handler_source_label,
    );
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - trapped exception during validation");
    _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
@@ -685,16 +706,28 @@ sub run_get_pipeline {
     _set_runtime_ctx_last_error(
      $runtime_ctx,
      stage => 'validate_dsl_syntax',
-     summary => 'DSL syntax validation failed',
-     detail => 'Rule-level DSL syntax validation failed',
+     summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
+      ? $validate_dsl_failure{summary}
+      : 'DSL syntax validation failed',
+     detail => defined($validate_dsl_failure{detail}) && length($validate_dsl_failure{detail})
+      ? $validate_dsl_failure{detail}
+      : 'Rule-level DSL syntax validation failed',
+     rule_label => $validate_dsl_failure{rule_label},
+     handler_source_label => $validate_dsl_handler_source_label,
     );
     _trace_log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
    } else {
     _set_runtime_ctx_last_error(
      $runtime_ctx,
      stage => 'validate_dsl_syntax',
-     summary => 'DSL syntax validation failed',
-     detail => 'Rule-level DSL syntax validation failed',
+     summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
+      ? $validate_dsl_failure{summary}
+      : 'DSL syntax validation failed',
+     detail => defined($validate_dsl_failure{detail}) && length($validate_dsl_failure{detail})
+      ? $validate_dsl_failure{detail}
+      : 'Rule-level DSL syntax validation failed',
+     rule_label => $validate_dsl_failure{rule_label},
+     handler_source_label => $validate_dsl_handler_source_label,
     );
     _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "DSL syntax validation failed - terminating parser generation");
     _trace_exit($trace_scope, { status => 'error', stage => 'validate_dsl_syntax' }, DUMP_LOW);
