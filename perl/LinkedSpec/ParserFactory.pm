@@ -299,14 +299,30 @@ sub run_get_parser {
  }
  _set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
 
-  my $content = eval { $load_spec_content->($spec_path, $trace_scope) };
+  my %load_spec_content_failure;
+  my $content = eval {
+   $load_spec_content->(
+    $spec_path,
+    $trace_scope,
+    {
+     on_failure => sub {
+      %load_spec_content_failure = @_;
+      return 1;
+     },
+    },
+   )
+  };
   my $load_spec_content_error = $@;
   if ($load_spec_content_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'load_spec_content',
-    summary => 'Spec file load failed',
-    detail => $load_spec_content_error,
+    summary => defined($load_spec_content_failure{summary}) && length($load_spec_content_failure{summary})
+     ? $load_spec_content_failure{summary}
+     : 'Spec file load failed',
+    detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
+     ? $load_spec_content_failure{detail}
+     : $load_spec_content_error,
    );
    return undef;
   }
@@ -314,8 +330,12 @@ sub run_get_parser {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'load_spec_content',
-    summary => 'Spec file load failed',
-    detail => "load_spec_content returned undef for '$spec_path'",
+    summary => defined($load_spec_content_failure{summary}) && length($load_spec_content_failure{summary})
+     ? $load_spec_content_failure{summary}
+     : 'Spec file load failed',
+    detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
+     ? $load_spec_content_failure{detail}
+     : "load_spec_content returned undef for '$spec_path'",
    );
    return undef;
   }

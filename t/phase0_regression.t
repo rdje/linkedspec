@@ -9049,6 +9049,51 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_load_spec_c
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LOAD_SPEC_CONTENT_DIE__/, 'load_spec_content die records original thrown detail');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'load_spec_content die preserves resolved spec_path inside last_error');
 };
+subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_content_returns_undef' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_unreadable_load_false_return.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create unreadable parser-factory spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+    my $perm_ok = chmod 0000, $tmp_spec;
+    ok($perm_ok, 'temporary parser-factory spec permissions changed to unreadable') or diag("chmod 0000 failed for '$tmp_spec': $!");
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_unreadable_load_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => \&LinkedSpec::Resolver::validate_spec_name,
+            resolve_spec_path => sub { return $tmp_spec },
+            load_spec_content => \&LinkedSpec::Resolver::load_spec_content,
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    chmod 0600, $tmp_spec;
+    unlink($tmp_spec);
+
+    ok(!defined($ret), 'ParserFactory returns undef when load_spec_content returns undef');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when load_spec_content returns undef');
+    is($runtime_ctx->{spec_name}, 'forced_unreadable_load_name', 'ParserFactory runtime context preserves requested spec name when load_spec_content returns undef');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'ParserFactory runtime context preserves resolved spec path when load_spec_content returns undef');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when load_spec_content returns undef');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'load_spec_content false-return records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'load_spec_content', 'load_spec_content false-return records load_spec_content stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'load_spec_content false-return records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, "Unable to open spec file '$tmp_spec'", 'load_spec_content false-return preserves the specific resolver summary');
+    like($runtime_ctx->{last_error}{detail}, qr/^OS Error: /, 'load_spec_content false-return preserves the specific resolver detail');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'load_spec_content false-return preserves resolved spec_path inside last_error');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_dies_without_runtime_error_payload' => sub {
     plan tests => 11;
 
@@ -9648,6 +9693,42 @@ subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failur
     is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser direct runtime_ctx_ref hashref records requested spec name in last_error');
     is($runtime_ctx{last_error}{spec_path}, '', 'get_parser direct runtime_ctx_ref hashref leaves spec_path empty when resolution never succeeds');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing direct runtime_ctx_ref hashref');
+};
+subtest 'get_parser_runtime_ctx_preserves_specific_load_spec_content_failure' => sub {
+    plan tests => 14;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_unreadable_get_parser_load.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create unreadable get_parser spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+    ok(-f $tmp_spec, 'temporary unreadable get_parser spec created');
+
+    my $perm_ok = chmod 0000, $tmp_spec;
+    ok($perm_ok, 'temporary get_parser spec permissions changed to unreadable') or diag("chmod 0000 failed for '$tmp_spec': $!");
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        $tmp_spec,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    chmod 0600, $tmp_spec;
+    unlink($tmp_spec);
+
+    ok($ok_call, 'get_parser unreadable-spec call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for unreadable spec with runtime_ctx_ref enabled');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on unreadable spec failure');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser runtime context records requested unreadable spec path');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser runtime context records resolved unreadable spec path');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'get_parser unreadable spec failure records structured last_error');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser unreadable spec failure records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'load_spec_content', 'get_parser unreadable spec failure records load_spec_content stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'get_parser unreadable spec failure records combined parser-factory owner stage');
+    is($runtime_ctx->{last_error}{summary}, "Unable to open spec file '$tmp_spec'", 'get_parser unreadable spec failure preserves resolver-specific load summary');
+    like($runtime_ctx->{last_error}{detail}, qr/^OS Error: /, 'get_parser unreadable spec failure preserves resolver-specific load detail');
+    like($out, qr/Unable to open spec file/, 'get_parser still emits the existing unreadable-spec diagnostic while exposing runtime_ctx_ref');
 };
 subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
     plan tests => 9;

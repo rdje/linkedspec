@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: preserve specific load-spec diagnostics
+
+- extended `perl/LinkedSpec/Resolver.pm` so `load_spec_content(...)` now exposes structured failure metadata on its non-throwing open-failure `undef` path, preserving the concrete file-open summary and `OS Error: ...` detail instead of only writing those distinctions to trace output,
+- updated `perl/LinkedSpec/ParserFactory.pm` so `parser_factory:load_spec_content` now preserves that resolver-provided summary/detail on false-return failures instead of collapsing back to the generic `Spec file load failed` wrapper,
+- widened `t/phase0_regression.t` with one direct parser-factory unreadable-file regression plus one public `get_parser(...)` runtime-context unreadable-file regression so both the lower-level and public file-oriented paths now lock the more specific load-failure contract,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats resolver-attributed false-return load failures as covered diagnostics continuity, not just thrown parser-factory callback failures.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Resolver.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: preserve specific resolve-spec-path diagnostics
 
 - extended `perl/LinkedSpec/Resolver.pm` so `resolve_spec_path(...)` now exposes structured failure metadata on its non-throwing resolver-side `undef` paths, including specific summary/detail pairs like `Spec path not found`, `Spec path is not a file`, and `Unable to resolve spec 'name'` instead of only logging those distinctions to trace output,

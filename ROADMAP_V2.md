@@ -77,6 +77,7 @@ Runtime/diagnostic continuity note:
 - `compiler_pipeline:validate_spec_content` false-return failures now also preserve the validator’s specific `summary` and formatted DSL-error `detail`, and malformed-first-rule failures now also preserve that same synthetic `handler_source_label` whenever the early rule label is already known.
 - parser-factory `validate_spec_name` false-return failures now also preserve the validator’s specific `summary` and `detail` instead of collapsing to a generic “validate_spec_name rejected the requested parser name” wrapper.
 - parser-factory `resolve_spec_path` false-return failures from the real resolver now also preserve the resolver’s specific `summary` and `detail` instead of collapsing to a generic “Spec resolution failed” wrapper.
+- parser-factory `load_spec_content` false-return failures from the real resolver now also preserve the resolver’s specific `summary` and `detail` instead of collapsing to a generic “Spec file load failed” wrapper.
 - the remaining `runtime_parser:resolve_top_rule_handler` missing-descriptor-entry seam now follows that same rule too, so callers still get `LinkedSpec::generated_handler:<top_rule>` even when the selected top-rule label is known but no compiled descriptor entry exists yet.
 
 ## Near-Term Execution Priorities

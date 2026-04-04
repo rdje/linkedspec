@@ -208,9 +208,17 @@ sub resolve_spec_path {
 }
 
 sub load_spec_content {
- my ($spec_path, $trace_scope) = @_;
+ my ($spec_path, $trace_scope, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
 
  open(my $f, '<', $spec_path) or do {
+  my $summary = "Unable to open spec file '$spec_path'";
+  my $detail = "OS Error: $!";
+  _notify_failure(
+   $option,
+   summary => $summary,
+   detail => $detail,
+  );
   _trace_log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Unable to open spec file '$spec_path'", "OS Error: $!");
   _trace_exit($trace_scope, { status => 'error', stage => 'open_spec_file', spec_path => $spec_path }, DUMP_LOW);
   return undef;
