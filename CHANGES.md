@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: preserve specific spec-descr tuple diagnostics
+
+- extended `perl/LinkedSpec/Compiler.pm` so malformed non-throwing `compile_spec_entry(...)` return shapes at `compiler_pipeline:spec_descr` now preserve specific tuple detail such as `compile_spec_entry returned invalid descriptor tuple: label=undef, info=undef` or `compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY` instead of collapsing back to the old generic descriptor-build wrapper detail,
+- widened `t/phase0_regression.t` with one direct compiler regression plus one public `LinkedSpec::Get(...)` runtime-context regression so both the lower-level seam and the outward structured-diagnostics contract now lock that sharper malformed-tuple detail,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed non-throwing `spec_descr` tuple returns as covered compiler diagnostics continuity now instead of assuming only thrown `compile_spec_entry(...)` failures preserve specific detail.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: tighten bootstrap-parse invalid-result diagnostics
 
 - extended `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:bootstrap_parse` now treats only a non-empty top-level ARRAY parse result as valid intermediate representation and preserves specific malformed-return detail such as `bootstrap_parse returned undef while reporting parse_success=1` or `bootstrap_parse returned HASH while reporting parse_success=1; expected ARRAY` instead of collapsing all non-throwing invalid-return shapes to one generic detail string,

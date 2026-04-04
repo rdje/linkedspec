@@ -8649,7 +8649,7 @@ SPEC
     is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'invalid compile_spec_entry tuple records spec_descr stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'invalid compile_spec_entry tuple records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'invalid compile_spec_entry tuple records summary');
-    is($runtime_ctx->{last_error}{detail}, 'Rule descriptor build failed while compiling parsed spec entries', 'invalid compile_spec_entry tuple records the stable descriptor-build detail');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec_entry returned invalid descriptor tuple: label=undef, info=undef', 'invalid compile_spec_entry tuple records the specific malformed tuple detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid compile_spec_entry tuple records the active parsed rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'invalid compile_spec_entry tuple records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_name empty');
@@ -9901,6 +9901,39 @@ SPEC
     is($runtime_ctx->{last_error}{stage}, 'bootstrap_parse', 'LinkedSpec::Get malformed bootstrap result preserves bootstrap_parse stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec parsing did not produce a valid intermediate representation', 'LinkedSpec::Get malformed bootstrap result preserves summary');
     is($runtime_ctx->{last_error}{detail}, 'bootstrap_parse returned HASH while reporting parse_success=1; expected ARRAY', 'LinkedSpec::Get malformed bootstrap result preserves specific malformed-return detail');
+};
+subtest 'linkedspec_get_preserves_specific_invalid_compile_spec_entry_tuple_detail' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_default_compile_spec_entry_cb = sub {
+            return sub { return ('Top', ['not_a_hash']); };
+        };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when compile_spec_entry reports a malformed non-hash tuple') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when compile_spec_entry reports a malformed non-hash tuple');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when compile_spec_entry reports a malformed non-hash tuple');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured compiler spec_descr failure context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves spec_descr stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves summary');
+    is($runtime_ctx->{last_error}{detail}, q{compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY}, 'LinkedSpec::Get malformed compile_spec_entry tuple preserves the specific malformed-return detail');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 7;

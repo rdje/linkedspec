@@ -340,6 +340,7 @@ sub _build_action_rewriter_migration_summary {
 sub spec_descr {
  my ($specretv, $compile_spec_entry) = @_;
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
+ _clear_last_spec_descr_failure_detail();
  die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
   unless ref($compile_spec_entry) eq 'CODE';
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_descr', {
@@ -350,7 +351,9 @@ sub spec_descr {
  foreach my $entry (@$specretv) {
   my ($label, $info) = $compile_spec_entry->($entry);
   unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
-   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Rule descriptor build failed while compiling parsed spec entries");
+   my $detail = _describe_compile_spec_entry_result($label, $info);
+   _set_last_spec_descr_failure_detail($detail);
+   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
    _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
   }
@@ -388,6 +391,7 @@ sub spec_descr {
   _trace_log_dump("=== END GENERATED SPEC DUMP ===\n");
  }
  _trace_exit($trace_scope, { status => 'ok', rule_count => scalar(keys %$result) }, DUMP_MEDIUM);
+ _clear_last_spec_descr_failure_detail();
 
  return $result
 }
@@ -567,6 +571,36 @@ sub _bootstrap_parse_result_detail {
   unless @$retv;
 
  return '';
+}
+
+my $LAST_SPEC_DESCR_FAILURE_DETAIL = '';
+
+sub _clear_last_spec_descr_failure_detail {
+ $LAST_SPEC_DESCR_FAILURE_DETAIL = '';
+ return ''
+}
+
+sub _set_last_spec_descr_failure_detail {
+ my ($detail) = @_;
+ $LAST_SPEC_DESCR_FAILURE_DETAIL = defined($detail) ? $detail : '';
+ return $LAST_SPEC_DESCR_FAILURE_DETAIL
+}
+
+sub _get_last_spec_descr_failure_detail {
+ return $LAST_SPEC_DESCR_FAILURE_DETAIL
+}
+
+sub _describe_compile_spec_entry_result {
+ my ($label, $info) = @_;
+
+ my $label_desc = !defined($label)
+  ? 'undef'
+  : ref($label) ? ref($label) : "'" . $label . "'";
+ my $info_desc = !defined($info)
+  ? 'undef'
+  : ref($info) ? ref($info) : 'SCALAR';
+
+ return "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
 }
 
 #------------------------------------------------------------------------------
@@ -852,6 +886,7 @@ sub run_get_pipeline {
  }
 
 my $active_spec_descr_rule_label = undef;
+_clear_last_spec_descr_failure_detail();
 my $auto_descr_spec = eval {
  spec_descr($retv, sub {
    my ($entry) = @_;
@@ -878,11 +913,16 @@ if ($spec_descr_error) {
   return undef;
  }
  unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
-  _set_runtime_ctx_last_error(
+ _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'spec_descr',
    summary => 'Spec descriptor generation failed',
-   detail => 'Rule descriptor build failed while compiling parsed spec entries',
+   detail => do {
+    my $detail = _get_last_spec_descr_failure_detail();
+    defined($detail) && length($detail)
+     ? $detail
+     : 'Rule descriptor build failed while compiling parsed spec entries'
+   },
    rule_label => $active_spec_descr_rule_label,
    handler_source_label => $active_spec_descr_handler_source_label,
   );
