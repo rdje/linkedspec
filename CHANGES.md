@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-05 - Phase 5: preserve compiler pre-rule handler labels
+
+- extended `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:prepare_pipeline` and `compiler_pipeline:bootstrap_parse` payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known at those early seams,
+- widened `t/phase0_regression.t` across both the direct `LinkedSpec::Compiler::run_get_pipeline(...)` seam and the public `LinkedSpec::Get(...)` path, covering setup failure, invalid parse mode, bootstrap-parse die, and malformed bootstrap-result branches with preserved `handler_source_label`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats compiler pre-rule handler attribution as part of the stable structured-diagnostics contract now instead of assuming label-only handler identity starts only at later compiler stages or runtime/parser boundaries.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-05 - Phase 5: preserve parser-factory pre-compile handler labels
 
 - extended `perl/LinkedSpec/ParserFactory.pm` so the pre-compile parser-factory seams `prepare_parser_factory`, `validate_spec_name`, `resolve_spec_path`, and `load_spec_content` now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known there,

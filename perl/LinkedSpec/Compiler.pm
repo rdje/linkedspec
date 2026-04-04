@@ -533,6 +533,13 @@ sub _build_generated_handler_source_label {
  return _call_runtime_ctx('build_generated_handler_source_label', %args)
 }
 
+sub _compiler_top_rule_handler_source_label {
+ my ($runtime_ctx) = @_;
+ my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
+ return undef unless defined($top_rule) && length($top_rule);
+ return _build_generated_handler_source_label(label => $top_rule)
+}
+
 sub _reset_spec_content_pos {
  my ($spec_content_ref) = @_;
  return unless ref($spec_content_ref) eq 'SCALAR';
@@ -661,11 +668,12 @@ sub run_get_pipeline {
  };
  my $pipeline_setup_error = $@;
  unless ($pipeline_setup_ok) {
-  _set_runtime_ctx_last_error(
+ _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'prepare_pipeline',
    summary => 'Compiler pipeline setup failed',
    detail => $pipeline_setup_error,
+   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiler pipeline setup failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'prepare_pipeline' }, DUMP_LOW);
@@ -833,11 +841,12 @@ sub run_get_pipeline {
  };
  my $bootstrap_parse_error = $@;
  unless ($bootstrap_parse_eval_ok) {
-  _set_runtime_ctx_last_error(
+ _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'bootstrap_parse',
    summary => 'Spec parsing failed',
    detail => $bootstrap_parse_error,
+   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing failed - trapped exception during bootstrap parse");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
@@ -868,6 +877,7 @@ sub run_get_pipeline {
    stage => 'bootstrap_parse',
    summary => 'Spec parsing did not produce a valid intermediate representation',
    detail => _bootstrap_parse_result_detail($parse_success, $retv, $parse_error),
+   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);

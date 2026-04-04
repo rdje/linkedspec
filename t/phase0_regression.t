@@ -8156,7 +8156,7 @@ SPEC
     ok(!exists $runtime_ctx->{last_error}, 'repeat-helper parser-source inspection leaves runtime context error state clear');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_pipeline_setup_fails' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8164,7 +8164,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8190,6 +8190,7 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'callback-setup failure records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Compiler pipeline setup failed', 'callback-setup failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/dependency 'bootstrap_parse' must be CODE/, 'callback-setup failure records original setup-contract detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'callback-setup failure preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, '', 'callback-setup failure leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'callback-setup failure leaves inline-spec spec_path empty');
 };
@@ -8367,7 +8368,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/Suggestion: Use '=> RuleName\.method\(\.\.\.\)'/, 'validate_dsl_syntax false-return preserves the targeted validator guidance');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_bootstrap_parse_dies' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8375,7 +8376,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8401,11 +8402,12 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:bootstrap_parse', 'bootstrap_parse die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec parsing failed', 'bootstrap_parse die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_BOOTSTRAP_PARSE_DIE__/, 'bootstrap_parse die records original thrown detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'bootstrap_parse die preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, '', 'bootstrap_parse die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'bootstrap_parse die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_preserves_specific_detail_for_invalid_bootstrap_parse_result' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8413,7 +8415,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8439,6 +8441,7 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:bootstrap_parse', 'invalid bootstrap result shape records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec parsing did not produce a valid intermediate representation', 'invalid bootstrap result shape records summary');
     is($runtime_ctx->{last_error}{detail}, 'bootstrap_parse returned undef while reporting parse_success=1', 'invalid bootstrap result shape records specific malformed-return detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'invalid bootstrap result shape preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, '', 'invalid bootstrap result shape leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'invalid bootstrap result shape leaves inline-spec spec_path empty');
 };
@@ -10417,7 +10420,7 @@ SPEC
     is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid generate_only value: ARRAY; expected undef', 'LinkedSpec::Get generate_only malformed defined result records specific malformed mode-only detail');
 };
 subtest 'linkedspec_get_preserves_compiler_setup_failure_context_when_compiler_traps_invalid_bootstrap_callback' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -10431,6 +10434,7 @@ SPEC
         local *LinkedSpec::Compiler::_default_bootstrap_parse_cb = sub { return '__NOT_A_CALLBACK__' };
         $ret = LinkedSpec::Get(
             \$spec_content,
+            top_rule => 'Top',
             return_descr => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
@@ -10447,9 +10451,10 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'LinkedSpec::Get compiler setup failure preserves combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Compiler pipeline setup failed', 'LinkedSpec::Get compiler setup failure preserves summary');
     like($runtime_ctx->{last_error}{detail}, qr/dependency 'bootstrap_parse' must be CODE/, 'LinkedSpec::Get compiler setup failure preserves setup-contract detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'LinkedSpec::Get compiler setup failure preserves label-scoped generated handler source label when top_rule is known');
 };
 subtest 'linkedspec_get_preserves_specific_invalid_bootstrap_result_detail' => sub {
-    plan tests => 8;
+    plan tests => 9;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -10465,6 +10470,7 @@ SPEC
         };
         $ret = LinkedSpec::Get(
             \$spec_content,
+            top_rule => 'Top',
             return_descr => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
@@ -10480,6 +10486,7 @@ SPEC
     is($runtime_ctx->{last_error}{stage}, 'bootstrap_parse', 'LinkedSpec::Get malformed bootstrap result preserves bootstrap_parse stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec parsing did not produce a valid intermediate representation', 'LinkedSpec::Get malformed bootstrap result preserves summary');
     is($runtime_ctx->{last_error}{detail}, 'bootstrap_parse returned HASH while reporting parse_success=1; expected ARRAY', 'LinkedSpec::Get malformed bootstrap result preserves specific malformed-return detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'LinkedSpec::Get malformed bootstrap result preserves label-scoped generated handler source label when top_rule is known');
 };
 subtest 'linkedspec_get_preserves_specific_invalid_compile_spec_entry_tuple_detail' => sub {
     plan tests => 8;
@@ -41509,7 +41516,7 @@ PERL
 };
 
 subtest 'invalid_parse_mode_records_structured_prepare_pipeline_error' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -41534,6 +41541,7 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'invalid parse mode records combined compiler owner stage');
     like($runtime_ctx->{last_error}{detail}, qr/option 'parse_mode' must be 'seek' or 'consume'/, 'invalid parse mode preserves parse-mode contract detail');
     is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'invalid parse mode records the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'invalid parse mode preserves label-scoped generated handler source label when top_rule is known');
 };
 
 done_testing();
