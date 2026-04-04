@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: tighten parser-factory compile result diagnostics
+
+- extended `perl/LinkedSpec/ParserFactory.pm` so the file-oriented compile boundary now treats only a real parser coderef as a successful `compile_spec(...)` result, and malformed defined return shapes now preserve specific detail such as `compile_spec returned invalid parser value: HASH; expected CODE` instead of drifting outward as bogus parser objects or collapsing back to one generic compile wrapper string,
+- widened `t/phase0_regression.t` with one direct parser-factory regression plus one public `get_parser(...)` runtime-context regression so both the lower-level seam and the outward contract now lock the malformed compile-result diagnostics,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed defined `compile_spec(...)` results as covered parser-factory diagnostics continuity now instead of assuming only thrown or `undef` compile paths matter at that seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: preserve specific spec-descr tuple diagnostics
 
 - extended `perl/LinkedSpec/Compiler.pm` so malformed non-throwing `compile_spec_entry(...)` return shapes at `compiler_pipeline:spec_descr` now preserve specific tuple detail such as `compile_spec_entry returned invalid descriptor tuple: label=undef, info=undef` or `compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY` instead of collapsing back to the old generic descriptor-build wrapper detail,

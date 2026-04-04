@@ -109,6 +109,33 @@ sub _default_deps {
 }
 
 #------------------------------------------------------------------------------
+# Function: _describe_compile_spec_result
+# Purpose : Explain one malformed parser-factory compile result shape for the
+#           active public parser-factory mode.
+# Args    : ($parser, $option_hashref)
+# Returns : string detail describing the invalid result
+#------------------------------------------------------------------------------
+sub _describe_compile_spec_result {
+ my ($parser, $option) = @_;
+ my $value_desc = !defined($parser)
+  ? 'undef'
+  : ref($parser) ? ref($parser) : 'SCALAR';
+
+ if (ref($option) eq 'HASH' && $option->{return_descr}) {
+  return "compile_spec returned invalid descriptor value: $value_desc; expected HASH";
+ }
+
+ if (ref($option) eq 'HASH' && ($option->{parse_only} || $option->{generate_only})) {
+  my $mode = $option->{parse_only} ? 'parse_only' : 'generate_only';
+  return "compile_spec returned invalid $mode value: $value_desc; expected undef";
+ }
+
+ return 'compile_spec returned undef without structured runtime context'
+  unless defined($parser);
+ return "compile_spec returned invalid parser value: $value_desc; expected CODE";
+}
+
+#------------------------------------------------------------------------------
 # Function: _prepare_runtime_ctx_for_get_parser
 # Purpose : Prepare the runtime context for `get_parser(...)` orchestration.
 # Args    : ($option_hashref, %args)
@@ -344,6 +371,10 @@ sub run_get_parser {
   $forward_opt_hash{_preserve_runtime_ctx_spec_identity} = 1 if defined $runtime_ctx;
   my $parser = eval { $compile_spec->(\$content, \%forward_opt_hash) };
   my $compile_spec_error = $@;
+  my $parser_ok =
+     $forward_opt_hash{return_descr} ? (defined($parser) && ref($parser) eq 'HASH')
+   : ($forward_opt_hash{parse_only} || $forward_opt_hash{generate_only}) ? !defined($parser)
+   : defined($parser) && ref($parser) eq 'CODE';
   if ($compile_spec_error) {
    _set_runtime_ctx_last_error_unless_present(
     $runtime_ctx,
@@ -353,19 +384,31 @@ sub run_get_parser {
    );
    return undef;
   }
-  if (!defined($parser)) {
+  if (!$parser_ok) {
    _set_runtime_ctx_last_error_unless_present(
     $runtime_ctx,
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
-    detail => 'compile_spec returned undef without structured runtime context',
+    detail => _describe_compile_spec_result($parser, \%forward_opt_hash),
    );
+   $parser = undef;
   }
-  $trace_decision->('get_parser_compilation_result', defined($parser) ? 1 : 0, defined($parser) ? 'parser coderef generated' : 'Get() returned undef', $dump_medium);
+  $trace_decision->(
+   'get_parser_compilation_result',
+   $parser_ok ? 1 : 0,
+   $parser_ok
+    ? ($forward_opt_hash{return_descr}
+       ? 'descriptor hash generated'
+       : ($forward_opt_hash{parse_only} || $forward_opt_hash{generate_only})
+        ? 'mode-only compile path completed'
+        : 'parser coderef generated')
+    : 'Get() returned invalid compile result',
+   $dump_medium
+  );
   $trace_exit->(
    $trace_scope,
    {
-    status => defined($parser) ? 'ok' : 'error',
+    status => $parser_ok ? 'ok' : 'error',
     spec_path => $spec_path,
     parser_ref => ref($parser) || '',
    },

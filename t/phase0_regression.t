@@ -9200,6 +9200,74 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned undef without structured runtime context', 'compile_spec undef without runtime payload records stable fallback detail');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec undef without runtime payload preserves resolved spec_path inside last_error');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_coderef_without_runtime_error_payload' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec_hash.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_hash_name',
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return { malformed => 1 } },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a non-coderef without structured runtime error payload');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a non-coderef');
+    is($runtime_ctx->{spec_name}, 'forced_compile_hash_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a non-coderef');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a non-coderef');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a non-coderef without runtime payload');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec non-coderef without runtime payload records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec non-coderef without runtime payload records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-coderef without runtime payload records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-coderef without runtime payload records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parser value: HASH; expected CODE', 'compile_spec non-coderef without runtime payload records specific malformed parser detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-coderef without runtime payload preserves resolved spec_path inside last_error');
+};
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_hash_in_return_descr_mode' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec_array.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_array_name',
+        { return_descr => 1, runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return ['not_a_hash']; },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a non-hash in return_descr mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a non-hash in return_descr mode');
+    is($runtime_ctx->{spec_name}, 'forced_compile_array_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a non-hash in return_descr mode');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a non-hash in return_descr mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a non-hash in return_descr mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec non-hash in return_descr mode records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec non-hash in return_descr mode records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-hash in return_descr mode records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-hash in return_descr mode records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'compile_spec non-hash in return_descr mode records specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-hash in return_descr mode preserves resolved spec_path inside last_error');
+};
 subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_dies' => sub {
     plan tests => 9;
 
@@ -9319,6 +9387,75 @@ subtest 'get_parser_preserves_runtime_owner_error_when_runtime_returns_undef_wit
     is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned undef without structured runtime context', 'get_parser preserves deeper runtime_owner detail when Runtime fallback handles silent compiler undef');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser runtime_owner payload preserves requested spec name when Runtime fallback handles silent compiler undef');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser runtime_owner payload preserves resolved spec path when Runtime fallback handles silent compiler undef');
+};
+subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_without_payload' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_hash.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get = sub { return { malformed => 1 } };
+        ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when Runtime returns a malformed non-coderef result') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef when Runtime returns a malformed non-coderef result');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a malformed non-coderef result');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a malformed non-coderef result');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a malformed non-coderef result');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser malformed compile result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'get_parser malformed compile result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser malformed compile result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser malformed compile result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parser value: HASH; expected CODE', 'get_parser malformed compile result preserves the specific malformed parser detail');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed compile result preserves requested spec name in last_error');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed compile result preserves resolved spec path in last_error');
+};
+subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_return_descr_mode' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_array.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $descr, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get = sub { return ['not_a_hash']; };
+        ($ok_call, $descr, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when Runtime returns a malformed non-hash in return_descr mode') or diag(normalize_error($err_call));
+    ok(!defined($descr), 'get_parser returns undef when Runtime returns a malformed non-hash in return_descr mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a malformed non-hash in return_descr mode');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a malformed non-hash in return_descr mode');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a malformed non-hash in return_descr mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser malformed descriptor result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'get_parser malformed descriptor result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser malformed descriptor result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser malformed descriptor result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'get_parser malformed descriptor result preserves the specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed descriptor result preserves requested spec name in last_error');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed descriptor result preserves resolved spec path in last_error');
 };
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
