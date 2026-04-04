@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: preserve parser-factory handler labels
+
+- extended `perl/LinkedSpec/ParserFactory.pm` so fallback `parser_factory:compile_spec` payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known at that seam,
+- widened `t/phase0_regression.t` across both the direct `LinkedSpec::ParserFactory::run_get_parser(...)` seam and the public `get_parser(...)` continuity path, covering default parser, `return_descr`, `parse_only`, and `generate_only` malformed/fallback compile-result branches with preserved `handler_source_label`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats parser-factory compile-stage handler attribution as part of the stable structured-diagnostics contract now instead of assuming label-only handler identity appears only after runtime-owner or parser-boundary fallback.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: preserve runtime-owner handler labels
 
 - extended `perl/LinkedSpec/Runtime.pm` so fallback `runtime_owner:run_get_pipeline` payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known at that seam,

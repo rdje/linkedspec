@@ -197,6 +197,20 @@ sub _set_runtime_ctx_spec_path {
 }
 
 #------------------------------------------------------------------------------
+# Function: _parser_factory_handler_source_label
+# Purpose : Build one label-only generated-handler identity for parser-factory
+#           compile fallback diagnostics when the selected top rule is known.
+# Args    : ($runtime_ctx)
+# Returns : handler_source_label string | undef
+#------------------------------------------------------------------------------
+sub _parser_factory_handler_source_label {
+ my ($runtime_ctx) = @_;
+ my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
+ return undef unless defined($top_rule) && length($top_rule);
+ return _call_runtime_ctx('build_generated_handler_source_label', label => $top_rule)
+}
+
+#------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
@@ -381,6 +395,7 @@ sub run_get_parser {
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => $compile_spec_error,
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef;
   }
@@ -390,6 +405,7 @@ sub run_get_parser {
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => _describe_compile_spec_result($parser, \%forward_opt_hash),
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    $parser = undef;
   }

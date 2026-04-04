@@ -9133,13 +9133,13 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_c
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'load_spec_content false-return preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_dies_without_runtime_error_payload' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9164,16 +9164,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec die without runtime payload records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec die without runtime payload records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_DIE__/, 'compile_spec die without runtime payload records original thrown detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec die without runtime payload preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec die without runtime payload preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_undef_without_runtime_error_payload' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_undef.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_undef_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9198,16 +9199,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec undef without runtime payload records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec undef without runtime payload records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned undef without structured runtime context', 'compile_spec undef without runtime payload records stable fallback detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec undef without runtime payload preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec undef without runtime payload preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_coderef_without_runtime_error_payload' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_hash.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_hash_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9232,16 +9234,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-coderef without runtime payload records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-coderef without runtime payload records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parser value: HASH; expected CODE', 'compile_spec non-coderef without runtime payload records specific malformed parser detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec non-coderef without runtime payload preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-coderef without runtime payload preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_hash_in_return_descr_mode' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_array.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_array_name',
-        { return_descr => 1, runtime_ctx_ref => \$runtime_ctx },
+        { return_descr => 1, top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9266,16 +9269,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-hash in return_descr mode records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-hash in return_descr mode records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'compile_spec non-hash in return_descr mode records specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec non-hash in return_descr mode preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-hash in return_descr mode preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_defined_value_in_parse_only_mode' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_parse_only_hash.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_parse_only_hash_name',
-        { parse_only => 1, runtime_ctx_ref => \$runtime_ctx },
+        { parse_only => 1, top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9300,16 +9304,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec parse_only malformed defined result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec parse_only malformed defined result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parse_only value: HASH; expected undef', 'compile_spec parse_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec parse_only malformed defined result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec parse_only malformed defined result preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_defined_value_in_generate_only_mode' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_generate_only_array.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_generate_only_array_name',
-        { generate_only => 1, runtime_ctx_ref => \$runtime_ctx },
+        { generate_only => 1, top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9334,6 +9339,7 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec generate_only malformed defined result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec generate_only malformed defined result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid generate_only value: ARRAY; expected undef', 'compile_spec generate_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec generate_only malformed defined result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec generate_only malformed defined result preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_dies' => sub {
@@ -9459,7 +9465,7 @@ subtest 'get_parser_preserves_runtime_owner_error_when_runtime_returns_undef_wit
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser runtime_owner payload preserves label-scoped generated handler source label when the requested top_rule is known');
 };
 subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_without_payload' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -9475,6 +9481,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_wi
         local *LinkedSpec::Runtime::run_get = sub { return { malformed => 1 } };
         ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
+            top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
@@ -9489,11 +9496,12 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_wi
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser malformed compile result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser malformed compile result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parser value: HASH; expected CODE', 'get_parser malformed compile result preserves the specific malformed parser detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser malformed compile result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed compile result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed compile result preserves resolved spec path in last_error');
 };
 subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_return_descr_mode' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -9510,6 +9518,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_re
         ($ok_call, $descr, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
             return_descr => 1,
+            top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
@@ -9524,11 +9533,12 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_re
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser malformed descriptor result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser malformed descriptor result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'get_parser malformed descriptor result preserves the specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser malformed descriptor result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed descriptor result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed descriptor result preserves resolved spec path in last_error');
 };
 subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_in_parse_only_mode' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -9545,6 +9555,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
         ($ok_call, $ret, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
             parse_only => 1,
+            top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
@@ -9559,11 +9570,12 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser parse_only malformed compile result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser parse_only malformed compile result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parse_only value: HASH; expected undef', 'get_parser parse_only malformed compile result preserves the specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser parse_only malformed compile result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser parse_only malformed compile result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser parse_only malformed compile result preserves resolved spec path in last_error');
 };
 subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_in_generate_only_mode' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -9580,6 +9592,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
         ($ok_call, $ret, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
             generate_only => 1,
+            top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
@@ -9594,6 +9607,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser generate_only malformed compile result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser generate_only malformed compile result records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid generate_only value: ARRAY; expected undef', 'get_parser generate_only malformed compile result preserves the specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser generate_only malformed compile result preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser generate_only malformed compile result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser generate_only malformed compile result preserves resolved spec path in last_error');
 };
