@@ -78,6 +78,7 @@ Runtime/diagnostic continuity note:
 - parser-factory `validate_spec_name` false-return failures now also preserve the validator’s specific `summary` and `detail` instead of collapsing to a generic “validate_spec_name rejected the requested parser name” wrapper.
 - parser-factory `resolve_spec_path` false-return failures from the real resolver now also preserve the resolver’s specific `summary` and `detail` instead of collapsing to a generic “Spec resolution failed” wrapper.
 - parser-factory `load_spec_content` false-return failures from the real resolver now also preserve the resolver’s specific `summary` and `detail` instead of collapsing to a generic “Spec file load failed” wrapper.
+- compiler `bootstrap_parse` malformed non-throwing return shapes now also preserve specific result-shape detail instead of collapsing to one generic invalid-intermediate-representation detail string.
 - the remaining `runtime_parser:resolve_top_rule_handler` missing-descriptor-entry seam now follows that same rule too, so callers still get `LinkedSpec::generated_handler:<top_rule>` even when the selected top-rule label is known but no compiled descriptor entry exists yet.
 
 ## Near-Term Execution Priorities

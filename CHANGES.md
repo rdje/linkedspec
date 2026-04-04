@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: tighten bootstrap-parse invalid-result diagnostics
+
+- extended `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:bootstrap_parse` now treats only a non-empty top-level ARRAY parse result as valid intermediate representation and preserves specific malformed-return detail such as `bootstrap_parse returned undef while reporting parse_success=1` or `bootstrap_parse returned HASH while reporting parse_success=1; expected ARRAY` instead of collapsing all non-throwing invalid-return shapes to one generic detail string,
+- widened `t/phase0_regression.t` with one direct compiler regression for an `undef` malformed success-shape plus one public `LinkedSpec::Get(...)` regression for a malformed non-array success-shape so both the compiler seam and the public runtime-context contract now lock the sharper bootstrap-parse diagnostics,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed non-throwing bootstrap results as covered compiler diagnostics continuity instead of assuming only thrown bootstrap callbacks preserve useful detail.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: preserve specific load-spec diagnostics
 
 - extended `perl/LinkedSpec/Resolver.pm` so `load_spec_content(...)` now exposes structured failure metadata on its non-throwing open-failure `undef` path, preserving the concrete file-open summary and `OS Error: ...` detail instead of only writing those distinctions to trace output,

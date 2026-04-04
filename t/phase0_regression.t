@@ -8404,6 +8404,44 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'bootstrap_parse die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'bootstrap_parse die leaves inline-spec spec_path empty');
 };
+subtest 'compiler_run_get_pipeline_preserves_specific_detail_for_invalid_bootstrap_parse_result' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                bootstrap_parse => sub { return (1, undef, ''); },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline returns without outer die when bootstrap_parse reports an invalid result shape') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when bootstrap_parse reports an invalid result shape');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid bootstrap result shape records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid bootstrap result shape records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'bootstrap_parse', 'invalid bootstrap result shape records bootstrap_parse stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:bootstrap_parse', 'invalid bootstrap result shape records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec parsing did not produce a valid intermediate representation', 'invalid bootstrap result shape records summary');
+    is($runtime_ctx->{last_error}{detail}, 'bootstrap_parse returned undef while reporting parse_success=1', 'invalid bootstrap result shape records specific malformed-return detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'invalid bootstrap result shape leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'invalid bootstrap result shape leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_for_generated_descriptor_validation_failure' => sub {
     plan tests => 11;
 
@@ -9830,6 +9868,39 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:prepare_pipeline', 'LinkedSpec::Get compiler setup failure preserves combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Compiler pipeline setup failed', 'LinkedSpec::Get compiler setup failure preserves summary');
     like($runtime_ctx->{last_error}{detail}, qr/dependency 'bootstrap_parse' must be CODE/, 'LinkedSpec::Get compiler setup failure preserves setup-contract detail');
+};
+subtest 'linkedspec_get_preserves_specific_invalid_bootstrap_result_detail' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_default_bootstrap_parse_cb = sub {
+            return sub { return (1, { malformed => 1 }, ''); };
+        };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when bootstrap_parse reports a malformed non-array result') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when bootstrap_parse reports a malformed non-array result');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when bootstrap_parse reports a malformed non-array result');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured compiler bootstrap-parse failure context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get malformed bootstrap result preserves compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'bootstrap_parse', 'LinkedSpec::Get malformed bootstrap result preserves bootstrap_parse stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec parsing did not produce a valid intermediate representation', 'LinkedSpec::Get malformed bootstrap result preserves summary');
+    is($runtime_ctx->{last_error}{detail}, 'bootstrap_parse returned HASH while reporting parse_success=1; expected ARRAY', 'LinkedSpec::Get malformed bootstrap result preserves specific malformed-return detail');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 7;

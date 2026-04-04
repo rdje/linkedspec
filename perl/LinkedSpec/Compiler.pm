@@ -553,6 +553,22 @@ sub _parsed_rule_label {
  return undef
 }
 
+sub _bootstrap_parse_result_detail {
+ my ($parse_success, $retv, $parse_error) = @_;
+
+ return $parse_error if defined($parse_error) && length($parse_error);
+ return 'bootstrap_parse reported failure without parse_error detail' unless $parse_success;
+ return 'bootstrap_parse returned undef while reporting parse_success=1' unless defined($retv);
+
+ my $retv_ref = ref($retv);
+ return "bootstrap_parse returned $retv_ref while reporting parse_success=1; expected ARRAY"
+  unless $retv_ref eq 'ARRAY';
+ return 'bootstrap_parse returned an empty ARRAY while reporting parse_success=1'
+  unless @$retv;
+
+ return '';
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
@@ -812,14 +828,12 @@ sub run_get_pipeline {
   _trace_log_dump("=== END SPEC COMPILE RESULT DUMP ===\n");
  }
 
- unless ($parse_success && defined $retv) {
+ unless ($parse_success && ref($retv) eq 'ARRAY' && @$retv) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'bootstrap_parse',
    summary => 'Spec parsing did not produce a valid intermediate representation',
-   detail => defined($parse_error) && length($parse_error)
-    ? $parse_error
-    : 'Hardcoded parser did not return a valid parsed spec result',
+   detail => _bootstrap_parse_result_detail($parse_success, $retv, $parse_error),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
