@@ -9268,6 +9268,74 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'compile_spec non-hash in return_descr mode records specific malformed descriptor detail');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-hash in return_descr mode preserves resolved spec_path inside last_error');
 };
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_defined_value_in_parse_only_mode' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec_parse_only_hash.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_parse_only_hash_name',
+        { parse_only => 1, runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return { malformed => 1 } },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a defined value in parse_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a defined value in parse_only mode');
+    is($runtime_ctx->{spec_name}, 'forced_compile_parse_only_hash_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a defined value in parse_only mode');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a defined value in parse_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a defined value in parse_only mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec parse_only malformed defined result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec parse_only malformed defined result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec parse_only malformed defined result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec parse_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parse_only value: HASH; expected undef', 'compile_spec parse_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec parse_only malformed defined result preserves resolved spec_path inside last_error');
+};
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_defined_value_in_generate_only_mode' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my $spec_path = '/tmp/forced_compile_spec_generate_only_array.spec';
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        'forced_compile_generate_only_array_name',
+        { generate_only => 1, runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => sub { return 1 },
+            resolve_spec_path => sub { return $spec_path },
+            load_spec_content => sub { return "Top::\n /a/ -> Top { return_a(Top) }\n" },
+            compile_spec => sub { return ['not_undef']; },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a defined value in generate_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a defined value in generate_only mode');
+    is($runtime_ctx->{spec_name}, 'forced_compile_generate_only_array_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a defined value in generate_only mode');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a defined value in generate_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a defined value in generate_only mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec generate_only malformed defined result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec generate_only malformed defined result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec generate_only malformed defined result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec generate_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid generate_only value: ARRAY; expected undef', 'compile_spec generate_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec generate_only malformed defined result preserves resolved spec_path inside last_error');
+};
 subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_dies' => sub {
     plan tests => 9;
 
@@ -9456,6 +9524,76 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_re
     is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'get_parser malformed descriptor result preserves the specific malformed descriptor detail');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed descriptor result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed descriptor result preserves resolved spec path in last_error');
+};
+subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_in_parse_only_mode' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_parse_only_hash.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $ret, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get = sub { return { malformed => 1 } };
+        ($ok_call, $ret, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            parse_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when Runtime returns a defined value in parse_only mode') or diag(normalize_error($err_call));
+    ok(!defined($ret), 'get_parser returns undef when Runtime returns a defined value in parse_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a defined value in parse_only mode');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a defined value in parse_only mode');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a defined value in parse_only mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser parse_only malformed compile result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'get_parser parse_only malformed compile result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser parse_only malformed compile result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser parse_only malformed compile result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid parse_only value: HASH; expected undef', 'get_parser parse_only malformed compile result preserves the specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser parse_only malformed compile result preserves requested spec name in last_error');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser parse_only malformed compile result preserves resolved spec path in last_error');
+};
+subtest 'get_parser_records_structured_error_when_runtime_returns_defined_value_in_generate_only_mode' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_generate_only_array.spec');
+    open(my $fh, '>', $tmp_spec) or die "Cannot create spec '$tmp_spec': $!";
+    print {$fh} "Top::\n /a/ -> Top { return_a(Top) }\n";
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_call, $ret, $err_call, $out, $warn);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Runtime::run_get = sub { return ['not_undef'] };
+        ($ok_call, $ret, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            generate_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_call, 'get_parser returns without outer die when Runtime returns a defined value in generate_only mode') or diag(normalize_error($err_call));
+    ok(!defined($ret), 'get_parser returns undef when Runtime returns a defined value in generate_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a defined value in generate_only mode');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a defined value in generate_only mode');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a defined value in generate_only mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser generate_only malformed compile result records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'get_parser generate_only malformed compile result records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser generate_only malformed compile result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'get_parser generate_only malformed compile result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid generate_only value: ARRAY; expected undef', 'get_parser generate_only malformed compile result preserves the specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser generate_only malformed compile result preserves requested spec name in last_error');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser generate_only malformed compile result preserves resolved spec path in last_error');
 };
 subtest 'runtime_run_get_defers_default_pipeline_callbacks_to_compiler_owner' => sub {
     plan tests => 6;
@@ -9795,6 +9933,76 @@ SPEC
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY', 'Runtime::run_get generate_only success still prepares parser-source chunk storage');
     is($runtime_ctx->{top_rule}, 'Top', 'Runtime::run_get generate_only success still records the selected top_rule');
 };
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_defined_value_in_parse_only_mode' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return { malformed => 1 } };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                parse_only => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation yields a defined value in parse_only mode') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation yields a defined value in parse_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation yields a defined value in parse_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation yields a defined value in parse_only mode');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation parse_only malformed defined result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation parse_only malformed defined result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation parse_only malformed defined result records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation parse_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid parse_only value: HASH; expected undef', 'compiler delegation parse_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation parse_only malformed defined result leaves spec_path empty in inline runtime context');
+};
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_defined_value_in_generate_only_mode' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return ['not_undef'] };
+        $ret = LinkedSpec::Runtime::run_get(
+            \$spec_content,
+            {
+                generate_only => 1,
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Runtime::run_get returns without outer die when compiler delegation yields a defined value in generate_only mode') or diag(normalize_error($err));
+    ok(!defined($ret), 'Runtime::run_get returns undef when compiler delegation yields a defined value in generate_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context through runtime_ctx_ref when compiler delegation yields a defined value in generate_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get records structured last_error when compiler delegation yields a defined value in generate_only mode');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'compiler delegation generate_only malformed defined result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'compiler delegation generate_only malformed defined result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'compiler delegation generate_only malformed defined result records combined runtime owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'compiler delegation generate_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid generate_only value: ARRAY; expected undef', 'compiler delegation generate_only malformed defined result records specific malformed mode-only detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation generate_only malformed defined result leaves spec_path empty in inline runtime context');
+};
 subtest 'runtime_run_get_preserves_existing_runtime_error_when_run_get_pipeline_dies' => sub {
     plan tests => 9;
 
@@ -10105,6 +10313,70 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get malformed descriptor result records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get malformed descriptor result records summary');
     is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid descriptor value: ARRAY; expected HASH', 'LinkedSpec::Get malformed descriptor result records specific malformed descriptor detail');
+};
+subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_defined_value_in_parse_only_mode' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return { malformed => 1 } };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            parse_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when Runtime catches a defined value in parse_only mode') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when Runtime catches a defined value in parse_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when Runtime catches a defined value in parse_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get exposes structured runtime_owner last_error when Runtime catches a defined value in parse_only mode');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'LinkedSpec::Get parse_only malformed defined result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'LinkedSpec::Get parse_only malformed defined result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get parse_only malformed defined result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get parse_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid parse_only value: HASH; expected undef', 'LinkedSpec::Get parse_only malformed defined result records specific malformed mode-only detail');
+};
+subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_defined_value_in_generate_only_mode' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::run_get_pipeline = sub { return ['not_undef'] };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            generate_only => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when Runtime catches a defined value in generate_only mode') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when Runtime catches a defined value in generate_only mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when Runtime catches a defined value in generate_only mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get exposes structured runtime_owner last_error when Runtime catches a defined value in generate_only mode');
+    is($runtime_ctx->{last_error}{type}, 'runtime_owner', 'LinkedSpec::Get generate_only malformed defined result records runtime_owner type');
+    is($runtime_ctx->{last_error}{stage}, 'run_get_pipeline', 'LinkedSpec::Get generate_only malformed defined result records run_get_pipeline stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_owner:run_get_pipeline', 'LinkedSpec::Get generate_only malformed defined result records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Runtime compile delegation failed', 'LinkedSpec::Get generate_only malformed defined result records summary');
+    is($runtime_ctx->{last_error}{detail}, 'run_get_pipeline returned invalid generate_only value: ARRAY; expected undef', 'LinkedSpec::Get generate_only malformed defined result records specific malformed mode-only detail');
 };
 subtest 'linkedspec_get_preserves_compiler_setup_failure_context_when_compiler_traps_invalid_bootstrap_callback' => sub {
     plan tests => 9;

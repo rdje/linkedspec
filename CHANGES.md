@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-04 - Phase 5: lock mode-only compile result diagnostics
+
+- widened `t/phase0_regression.t` so both the inline runtime boundary and the file-oriented parser-factory boundary now lock malformed defined `parse_only` / `generate_only` result handling directly, including both lower-level seams and outward public `LinkedSpec::Get(...)` / `get_parser(...)` behavior,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats the mode-only result contract as explicit too: `parse_only` / `generate_only` accept only `undef` success, and defined values must preserve specific malformed-result detail instead of drifting outward as silent success.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-04 - Phase 5: tighten runtime compile result diagnostics
 
 - extended `perl/LinkedSpec/Runtime.pm` so the inline runtime compile boundary now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descr => 1` result, while still preserving intentional `undef` success for `parse_only` / `generate_only`,
