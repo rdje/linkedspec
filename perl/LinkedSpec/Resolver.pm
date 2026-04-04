@@ -54,10 +54,26 @@ sub _trace_decision {
  })
 }
 
+sub _notify_validation_failure {
+ my ($option, %info) = @_;
+ return undef unless ref($option) eq 'HASH';
+ my $cb = $option->{on_failure};
+ return undef unless ref($cb) eq 'CODE';
+ return $cb->(%info)
+}
+
 sub validate_spec_name {
- my ($spec_name, $trace_scope) = @_;
+ my ($spec_name, $trace_scope, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
  unless (defined $spec_name && !ref($spec_name) && $spec_name =~ /\S/o && $spec_name !~ /^\s|\s$/o && $spec_name !~ /[[:cntrl:]]/o) {
-  _trace_log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- Invalid spec name", "spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace");
+  my $summary = 'Invalid spec name';
+  my $detail = 'spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace';
+  _notify_validation_failure(
+   $option,
+   summary => $summary,
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, "(LinkedSpec::get_parser) -E- $summary", $detail);
   _trace_exit($trace_scope, { status => 'error', stage => 'validate_spec_name' }, DUMP_LOW);
   return 0;
  }

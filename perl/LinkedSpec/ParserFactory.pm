@@ -215,14 +215,30 @@ sub run_get_parser {
    return undef;
   }
 
-  my $spec_name_ok = eval { $validate_spec_name->($spec_name, $trace_scope) };
+  my %validate_spec_name_failure;
+  my $spec_name_ok = eval {
+   $validate_spec_name->(
+    $spec_name,
+    $trace_scope,
+    {
+     on_failure => sub {
+      %validate_spec_name_failure = @_;
+      return 1;
+     },
+    },
+   )
+  };
   my $validate_spec_name_error = $@;
   if ($validate_spec_name_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_spec_name',
-    summary => 'Spec name validation failed',
-    detail => $validate_spec_name_error,
+    summary => defined($validate_spec_name_failure{summary}) && length($validate_spec_name_failure{summary})
+     ? $validate_spec_name_failure{summary}
+     : 'Spec name validation failed',
+    detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
+     ? $validate_spec_name_failure{detail}
+     : $validate_spec_name_error,
    );
    return undef
   }
@@ -231,8 +247,12 @@ sub run_get_parser {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
     stage => 'validate_spec_name',
-    summary => 'Invalid spec name',
-    detail => 'validate_spec_name rejected the requested parser name',
+    summary => defined($validate_spec_name_failure{summary}) && length($validate_spec_name_failure{summary})
+     ? $validate_spec_name_failure{summary}
+     : 'Invalid spec name',
+    detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
+     ? $validate_spec_name_failure{detail}
+     : 'validate_spec_name rejected the requested parser name',
    );
    return undef
   }

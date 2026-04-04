@@ -8918,6 +8918,38 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_validate_sp
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_SPEC_NAME_DIE__/, 'validate_spec_name die records original thrown detail');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_name die leaves spec_path empty');
 };
+subtest 'parser_factory_run_get_parser_preserves_specific_error_when_validate_spec_name_returns_false' => sub {
+    plan tests => 10;
+
+    my $runtime_ctx;
+    my $ret = LinkedSpec::ParserFactory::run_get_parser(
+        " leading_space_name",
+        { runtime_ctx_ref => \$runtime_ctx },
+        {
+            apply_trace_options => sub { return 1 },
+            trace_enter => sub { return { scope => 'entered' } },
+            trace_exit => sub { return 1 },
+            trace_decision => sub { return 1 },
+            validate_spec_name => \&LinkedSpec::Resolver::validate_spec_name,
+            resolve_spec_path => sub { die "__UNEXPECTED_RESOLVE_SPEC_PATH__\n" },
+            load_spec_content => sub { die "__UNEXPECTED_LOAD_SPEC_CONTENT__\n" },
+            compile_spec => sub { die "__UNEXPECTED_COMPILE_SPEC__\n" },
+            dump_low => 100,
+            dump_medium => 200,
+        },
+    );
+
+    ok(!defined($ret), 'ParserFactory returns undef when validate_spec_name returns false');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when validate_spec_name returns false');
+    is($runtime_ctx->{spec_name}, " leading_space_name", 'ParserFactory runtime context preserves requested spec name when validate_spec_name returns false');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when validate_spec_name returns false');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'validate_spec_name false-return records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_name', 'validate_spec_name false-return records validate_spec_name stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:validate_spec_name', 'validate_spec_name false-return records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Invalid spec name', 'validate_spec_name false-return preserves the specific validator summary');
+    is($runtime_ctx->{last_error}{detail}, 'spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace', 'validate_spec_name false-return preserves the specific validator detail');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_name false-return leaves spec_path empty');
+};
 subtest 'parser_factory_run_get_parser_records_structured_error_when_resolve_spec_path_dies' => sub {
     plan tests => 10;
 
@@ -9731,6 +9763,24 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'compile failure last_error preserves resolved spec path');
     like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'compile failure last_error preserves specific validator detail alongside preserved spec metadata');
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
+};
+subtest 'get_parser_runtime_ctx_preserves_specific_validate_spec_name_failure' => sub {
+    plan tests => 8;
+
+    my $runtime_ctx;
+    my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+        " leading_space_name",
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_call, 'get_parser invalid-spec-name call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef for invalid spec name');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on invalid spec name');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'invalid spec name records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_spec_name', 'invalid spec name records validate_spec_name stage');
+    is($runtime_ctx->{last_error}{summary}, 'Invalid spec name', 'invalid spec name preserves the validator summary through get_parser');
+    is($runtime_ctx->{last_error}{detail}, 'spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace', 'invalid spec name preserves the validator detail through get_parser');
+    like($out, qr/Invalid spec name/, 'get_parser still emits the existing invalid-spec diagnostic while preserving shared runtime context');
 };
 subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clears_on_success' => sub {
     plan tests => 18;
