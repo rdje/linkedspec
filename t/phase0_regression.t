@@ -8894,12 +8894,12 @@ subtest 'spec_entry_set_runtime_ctx_top_rule_routes_through_runtime_context_owne
     is($captured_top_rule, 'CapturedTop', 'SpecEntry top-rule helper forwards the discovered top rule');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'setup_fail_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => '__NOT_A_CALLBACK__',
@@ -8923,14 +8923,15 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:prepare_parser_factory', 'setup failure records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Parser factory setup failed', 'setup failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/missing dependency callback 'trace_enter'/, 'setup failure records original dependency-contract detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'setup failure preserves label-scoped generated handler source label when top_rule is known');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_validate_spec_name_dies' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_invalid_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -8954,15 +8955,16 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_validate_sp
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:validate_spec_name', 'validate_spec_name die records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec name validation failed', 'validate_spec_name die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_SPEC_NAME_DIE__/, 'validate_spec_name die records original thrown detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_spec_name die preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_name die leaves spec_path empty');
 };
 subtest 'parser_factory_run_get_parser_preserves_specific_error_when_validate_spec_name_returns_false' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         " leading_space_name",
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -8986,15 +8988,16 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_validate_sp
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:validate_spec_name', 'validate_spec_name false-return records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Invalid spec name', 'validate_spec_name false-return preserves the specific validator summary');
     is($runtime_ctx->{last_error}{detail}, 'spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace', 'validate_spec_name false-return preserves the specific validator detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_spec_name false-return preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_spec_name false-return leaves spec_path empty');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_resolve_spec_path_dies' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_resolve_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9018,16 +9021,17 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_resolve_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'resolve_spec_path die records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec resolution failed', 'resolve_spec_path die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_RESOLVE_SPEC_PATH_DIE__/, 'resolve_spec_path die records original thrown detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'resolve_spec_path die preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, '', 'resolve_spec_path die leaves spec_path empty');
 };
 subtest 'parser_factory_run_get_parser_preserves_specific_error_when_resolve_spec_path_returns_undef' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $missing_spec_name = 'phase5_specific_resolve_missing_' . $$ . '.spec';
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         $missing_spec_name,
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9051,16 +9055,17 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_resolve_spe
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:resolve_spec_path', 'resolve_spec_path false-return records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec path not found', 'resolve_spec_path false-return preserves the specific resolver summary');
     is($runtime_ctx->{last_error}{detail}, "spec='$missing_spec_name' resolved='<undef>'", 'resolve_spec_path false-return preserves the specific resolver detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'resolve_spec_path false-return preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, '', 'resolve_spec_path false-return leaves spec_path empty');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_load_spec_content_dies' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_load_spec_content.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_load_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9085,10 +9090,11 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_load_spec_c
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'load_spec_content die records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec file load failed', 'load_spec_content die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_LOAD_SPEC_CONTENT_DIE__/, 'load_spec_content die records original thrown detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'load_spec_content die preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'load_spec_content die preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_content_returns_undef' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -9102,7 +9108,7 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_c
     my $runtime_ctx;
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_unreadable_load_name',
-        { runtime_ctx_ref => \$runtime_ctx },
+        { top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9130,6 +9136,7 @@ subtest 'parser_factory_run_get_parser_preserves_specific_error_when_load_spec_c
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'load_spec_content false-return records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, "Unable to open spec file '$tmp_spec'", 'load_spec_content false-return preserves the specific resolver summary');
     like($runtime_ctx->{last_error}{detail}, qr/^OS Error: /, 'load_spec_content false-return preserves the specific resolver detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'load_spec_content false-return preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'load_spec_content false-return preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_dies_without_runtime_error_payload' => sub {
@@ -10072,7 +10079,7 @@ SPEC
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_PRESERVED_RUNTIME_ERROR__/, 'compiler delegation die after payload preserves deeper owner detail');
 };
 subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my $missing_spec_name = 'phase5_runtime_ctx_missing_dot_spec_' . $$ . '.spec';
     my $runtime_ctx;
@@ -10095,6 +10102,7 @@ subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
     is($runtime_ctx->{last_error}{spec_name}, $missing_spec_name, 'get_parser runtime error payload records requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, '', 'get_parser runtime error payload leaves spec_path empty when resolution never succeeds');
     is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'get_parser runtime error payload records requested top_rule before resolution failure');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'get_parser resolution failure preserves label-scoped generated handler source label when top_rule is known');
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing runtime_ctx_ref');
 };
 subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub {
@@ -10169,7 +10177,7 @@ subtest 'get_parser_accepts_direct_hashref_runtime_ctx_ref_for_resolution_failur
     like($out, qr/Spec path not found/, 'get_parser still emits the existing resolution diagnostic while exposing direct runtime_ctx_ref hashref');
 };
 subtest 'get_parser_runtime_ctx_preserves_specific_load_spec_content_failure' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     require File::Temp;
     my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
@@ -10185,6 +10193,7 @@ subtest 'get_parser_runtime_ctx_preserves_specific_load_spec_content_failure' =>
     my $runtime_ctx;
     my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
         $tmp_spec,
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
@@ -10202,10 +10211,11 @@ subtest 'get_parser_runtime_ctx_preserves_specific_load_spec_content_failure' =>
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:load_spec_content', 'get_parser unreadable spec failure records combined parser-factory owner stage');
     is($runtime_ctx->{last_error}{summary}, "Unable to open spec file '$tmp_spec'", 'get_parser unreadable spec failure preserves resolver-specific load summary');
     like($runtime_ctx->{last_error}{detail}, qr/^OS Error: /, 'get_parser unreadable spec failure preserves resolver-specific load detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'get_parser unreadable spec failure preserves label-scoped generated handler source label when top_rule is known');
     like($out, qr/Unable to open spec file/, 'get_parser still emits the existing unreadable-spec diagnostic while exposing runtime_ctx_ref');
 };
 subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     my $runtime_ctx;
     my ($ok_call, $parser, $err_call, $out, $warn);
@@ -10227,6 +10237,7 @@ subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
         };
         ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             'Lispish',
+            top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
@@ -10240,6 +10251,7 @@ subtest 'get_parser_preserves_parser_factory_setup_failure_context' => sub {
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:prepare_parser_factory', 'get_parser setup failure records combined parser-factory owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Parser factory setup failed', 'get_parser setup failure records summary');
     like($runtime_ctx->{last_error}{detail}, qr/missing dependency callback 'trace_enter'/, 'get_parser setup failure records setup-contract detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'get_parser setup failure preserves label-scoped generated handler source label when top_rule is known');
 };
 subtest 'linkedspec_get_exposes_runtime_owner_failure_context_when_runtime_catches_compiler_die' => sub {
     plan tests => 10;
@@ -10552,11 +10564,12 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
 subtest 'get_parser_runtime_ctx_preserves_specific_validate_spec_name_failure' => sub {
-    plan tests => 8;
+    plan tests => 9;
 
     my $runtime_ctx;
     my ($ok_call, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
         " leading_space_name",
+        top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
 
@@ -10567,6 +10580,7 @@ subtest 'get_parser_runtime_ctx_preserves_specific_validate_spec_name_failure' =
     is($runtime_ctx->{last_error}{stage}, 'validate_spec_name', 'invalid spec name records validate_spec_name stage');
     is($runtime_ctx->{last_error}{summary}, 'Invalid spec name', 'invalid spec name preserves the validator summary through get_parser');
     is($runtime_ctx->{last_error}{detail}, 'spec argument is undefined, empty, whitespace-only, non-scalar, contains control byte, or has leading/trailing whitespace', 'invalid spec name preserves the validator detail through get_parser');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'invalid spec name preserves label-scoped generated handler source label through get_parser when top_rule is known');
     like($out, qr/Invalid spec name/, 'get_parser still emits the existing invalid-spec diagnostic while preserving shared runtime context');
 };
 subtest 'linkedspec_get_runtime_ctx_ref_records_runtime_handler_failure_and_clears_on_success' => sub {

@@ -252,6 +252,7 @@ sub run_get_parser {
     stage => 'prepare_parser_factory',
     summary => 'Parser factory setup failed',
     detail => $setup_error,
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef;
   }
@@ -280,6 +281,7 @@ sub run_get_parser {
     detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
      ? $validate_spec_name_failure{detail}
      : $validate_spec_name_error,
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef
   }
@@ -294,6 +296,7 @@ sub run_get_parser {
     detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
      ? $validate_spec_name_failure{detail}
      : 'validate_spec_name rejected the requested parser name',
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef
   }
@@ -322,6 +325,7 @@ sub run_get_parser {
     detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
      ? $resolve_spec_path_failure{detail}
      : $resolve_spec_path_error,
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef;
   }
@@ -335,6 +339,7 @@ sub run_get_parser {
     detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
      ? $resolve_spec_path_failure{detail}
      : 'resolve_spec_path returned undef for the requested parser name',
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
   );
   return undef;
  }
@@ -364,6 +369,7 @@ sub run_get_parser {
     detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
      ? $load_spec_content_failure{detail}
      : $load_spec_content_error,
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef;
   }
@@ -377,6 +383,7 @@ sub run_get_parser {
     detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
      ? $load_spec_content_failure{detail}
      : "load_spec_content returned undef for '$spec_path'",
+    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
    );
    return undef;
   }
