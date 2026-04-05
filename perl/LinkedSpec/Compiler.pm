@@ -910,9 +910,7 @@ my $auto_descr_spec = eval {
 };
 my $spec_descr_error = $@;
  my $active_spec_descr_handler_source_label =
-  (defined($active_spec_descr_rule_label) && length($active_spec_descr_rule_label))
-   ? _build_generated_handler_source_label(label => $active_spec_descr_rule_label)
-   : undef;
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_spec_descr_rule_label);
 if ($spec_descr_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -949,9 +947,7 @@ if ($spec_descr_error) {
 my $build_final_descr_error = $@;
 my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
  my $build_final_descr_handler_source_label =
-  (defined($build_final_descr_rule_label) && length($build_final_descr_rule_label))
-   ? _build_generated_handler_source_label(label => $build_final_descr_rule_label)
-   : undef;
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $build_final_descr_rule_label);
 _clear_active_spec_gdata_rule_label();
 if ($build_final_descr_error) {
   _set_runtime_ctx_last_error(
@@ -982,9 +978,7 @@ if ($build_final_descr_error) {
 };
 my $validate_gdata_references_error = $@;
  my $validate_gdata_handler_source_label =
-  (defined($validate_gdata_failure{rule_label}) && length($validate_gdata_failure{rule_label}))
-   ? _build_generated_handler_source_label(label => $validate_gdata_failure{rule_label})
-   : undef;
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_gdata_failure{rule_label});
 if ($validate_gdata_references_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,

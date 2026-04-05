@@ -8554,7 +8554,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'generated descriptor validation rejection leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_gdata_references_dies' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8562,7 +8562,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8587,6 +8587,8 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'validate_gdata_references die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'validate_gdata_references die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_GDATA_REFERENCES_DIE__/, 'validate_gdata_references die records original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'validate_gdata_references die preserves the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_gdata_references die preserves the top-rule generated handler label when no rule label is available');
     is($runtime_ctx->{last_error}{spec_name}, '', 'validate_gdata_references die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
 };
@@ -8710,7 +8712,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'invalid compile_spec_entry tuple leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_error_when_final_descriptor_build_dies' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -8718,7 +8720,7 @@ Top::
 SPEC
 
     my $runtime_ctx = {
-        top_rule => undef,
+        top_rule => 'Top',
         parser_source_chunks_ref => [],
     };
 
@@ -8743,6 +8745,8 @@ SPEC
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'final descriptor assembly die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'final descriptor assembly die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_DIE__/, 'final descriptor assembly die records original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'final descriptor assembly die preserves the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'final descriptor assembly die preserves the top-rule generated handler label when no rule label is available');
     is($runtime_ctx->{last_error}{spec_name}, '', 'final descriptor assembly die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
 };
@@ -10571,6 +10575,39 @@ SPEC
     is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves spec_descr stage');
     is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves summary');
     is($runtime_ctx->{last_error}{detail}, q{compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY}, 'LinkedSpec::Get malformed compile_spec_entry tuple preserves the specific malformed-return detail');
+};
+subtest 'linkedspec_get_preserves_top_rule_handler_label_for_generic_late_build_failure' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_GET_SPEC_GDATA_DIE__\n" };
+        $ret = LinkedSpec::Get(
+            \$spec_content,
+            return_descr => 1,
+            top_rule => 'Top',
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::Get returns without outer die when late descriptor assembly fails generically') or diag(normalize_error($err));
+    ok(!defined($ret), 'LinkedSpec::Get returns undef when late descriptor assembly fails generically');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context on late descriptor assembly failure');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured build_final_descr failure context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get generic late build failure preserves compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'LinkedSpec::Get generic late build failure preserves build_final_descr stage');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_SPEC_GDATA_DIE__/, 'LinkedSpec::Get generic late build failure preserves the original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'LinkedSpec::Get generic late build failure preserves the selected top_rule');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'LinkedSpec::Get generic late build failure preserves the top-rule generated handler label when no rule label is available');
 };
 subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' => sub {
     plan tests => 9;

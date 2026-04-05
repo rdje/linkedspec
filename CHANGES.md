@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-05 - Phase 5: preserve late compiler fallback handler labels
+
+- updated `perl/LinkedSpec/Compiler.pm` so unattributed `compiler_pipeline:spec_descr`, `compiler_pipeline:build_final_descr`, and `compiler_pipeline:validate_gdata_references` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those later generic compiler seams,
+- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::run_get_pipeline(...)` coverage and public `LinkedSpec::Get(...)` continuity so generic late `build_final_descr` and `validate_gdata_references` failures now lock the preserved top-rule `handler_source_label`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats late generic compiler-failure handler attribution as part of the stable structured-diagnostics contract now instead of assuming that only rule-attributed late compiler stages preserve handler identity.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-05 - Phase 5: preserve compiler validation pre-rule handler labels
 
 - updated `perl/LinkedSpec/Compiler.pm` so `compiler_pipeline:validate_spec_content` and unattributed `compiler_pipeline:validate_dsl_syntax` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those early validation seams,
