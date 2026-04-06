@@ -10664,6 +10664,48 @@ subtest 'get_parser_preserves_runtime_ctx_across_resolution_and_compile_failure'
     like($runtime_ctx->{last_error}{detail}, qr/Spec file must start with a rule definition/, 'compile failure last_error preserves specific validator detail alongside preserved spec metadata');
     like($out, qr/Spec content validation failed/, 'get_parser still emits the existing compile failure diagnostic while preserving shared runtime context');
 };
+subtest 'get_parser_preserves_top_rule_handler_label_for_late_generic_compile_failure' => sub {
+    plan tests => 12;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_late_build_failure.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create late-build-failure spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_inner, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
+    my $ok_outer = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_GET_PARSER_SPEC_GDATA_DIE__\n" };
+        ($ok_inner, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            top_rule => 'Top',
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+        1;
+    };
+    my $outer_err = $@ // '' unless $ok_outer;
+
+    ok($ok_outer, 'get_parser late generic compile-failure call returns without outer die') or diag(normalize_error($outer_err));
+    ok($ok_inner, 'get_parser late generic compile-failure inner call returns without die') or diag(normalize_error($err_call));
+    ok(!defined($parser), 'get_parser returns undef when late descriptor assembly fails generically');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on late generic compile failure');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'late generic compile failure upgrades shared runtime context to compiler_pipeline last_error');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'late generic compile failure records build_final_descr stage in shared runtime context');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'late generic compile failure records combined compiler owner stage in shared runtime context');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'late generic compile failure last_error preserves requested spec name');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'late generic compile failure last_error preserves resolved spec path');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'late generic compile failure last_error preserves the selected top_rule through get_parser');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'late generic compile failure last_error preserves the top-rule generated handler label through get_parser when no rule label is available');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_SPEC_GDATA_DIE__/, 'late generic compile failure last_error preserves the original thrown detail through get_parser');
+};
 subtest 'get_parser_runtime_ctx_preserves_specific_validate_spec_name_failure' => sub {
     plan tests => 9;
 

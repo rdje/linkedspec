@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-06 - Phase 5: lock get_parser late compiler handler continuity
+
+- widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks late generic compiler-failure continuity too: after spec resolution/load succeeds, a generic `build_final_descr` die still preserves `spec_path`, selected `top_rule`, and the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` in shared `runtime_ctx->{last_error}`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats late generic compiler-failure attribution through `get_parser(...)` as part of the stable diagnostics contract now instead of assuming only inline `Get(...)` or direct compiler seams cover that story.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-05 - Phase 5: preserve late compiler fallback handler labels
 
 - updated `perl/LinkedSpec/Compiler.pm` so unattributed `compiler_pipeline:spec_descr`, `compiler_pipeline:build_final_descr`, and `compiler_pipeline:validate_gdata_references` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those later generic compiler seams,
