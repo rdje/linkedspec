@@ -338,21 +338,63 @@ sub _build_action_rewriter_migration_summary {
 }
 
 sub spec_descr {
- my ($specretv, $compile_spec_entry) = @_;
+ my ($specretv, $compile_spec_entry, $option) = @_;
+ if (ref($compile_spec_entry) eq 'HASH' && !defined($option)) {
+  $option = $compile_spec_entry;
+  $compile_spec_entry = undef;
+ }
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
  _clear_last_spec_descr_failure_detail();
  die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
   unless ref($compile_spec_entry) eq 'CODE';
+ my $runtime_ctx = _prepare_runtime_ctx_for_spec_descr($specretv, $option);
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_descr', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
 
  my @specinfo;
  foreach my $entry (@$specretv) {
-  my ($label, $info) = $compile_spec_entry->($entry);
+  my $active_rule_label = _parsed_rule_label($entry);
+  my $active_handler_source_label = (ref($runtime_ctx) eq 'HASH')
+   ? _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_rule_label)
+   : undef;
+  my ($label, $info);
+  my $compile_ok = eval {
+   ($label, $info) = $compile_spec_entry->($entry);
+   1;
+  };
+  my $compile_error = $@;
+  unless ($compile_ok) {
+   my $detail = defined($compile_error) && length($compile_error)
+    ? $compile_error
+    : 'compile_spec_entry died without diagnostic detail';
+   _set_last_spec_descr_failure_detail($detail);
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'spec_descr',
+    summary => 'Spec descriptor generation failed',
+    detail => $detail,
+    rule_label => $active_rule_label,
+    handler_source_label => $active_handler_source_label,
+   ) if ref($runtime_ctx) eq 'HASH';
+   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
+   _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
+   return undef
+  }
   unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
    my $detail = _describe_compile_spec_entry_result($label, $info);
+   my $failure_rule_label = defined($label) && !ref($label) && length($label)
+    ? $label
+    : $active_rule_label;
    _set_last_spec_descr_failure_detail($detail);
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'spec_descr',
+    summary => 'Spec descriptor generation failed',
+    detail => $detail,
+    rule_label => $failure_rule_label,
+    handler_source_label => _compiler_rule_or_top_handler_source_label($runtime_ctx, $failure_rule_label),
+   ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
    _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
@@ -546,6 +588,28 @@ sub _compiler_rule_or_top_handler_source_label {
   return _build_generated_handler_source_label(label => $rule_label)
  }
  return _compiler_top_rule_handler_source_label($runtime_ctx)
+}
+
+sub _prepare_runtime_ctx_for_spec_descr {
+ my ($specretv, $option) = @_;
+ return undef unless ref($option) eq 'HASH' && exists($option->{runtime_ctx_ref});
+ my $runtime_ctx_ref = _call_runtime_ctx(
+  'normalize_runtime_ctx_ref',
+  $option->{runtime_ctx_ref},
+  owner => 'LinkedSpec::Compiler::spec_descr',
+ );
+ my $runtime_ctx = _call_runtime_ctx('ensure_runtime_ctx', $runtime_ctx_ref);
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ _clear_runtime_ctx_last_error($runtime_ctx);
+ _call_runtime_ctx('clear_runtime_ctx_spec_name', $runtime_ctx);
+ _call_runtime_ctx('clear_runtime_ctx_spec_path', $runtime_ctx);
+ _call_runtime_ctx('clear_runtime_ctx_top_rule', $runtime_ctx);
+ my $top_rule = defined($option->{top_rule}) && length($option->{top_rule})
+  ? $option->{top_rule}
+  : _first_parsed_rule_label($specretv);
+ _set_runtime_ctx_top_rule($runtime_ctx, $top_rule)
+  if defined($top_rule) && length($top_rule);
+ return $runtime_ctx;
 }
 
 sub _describe_parser_input_ref {

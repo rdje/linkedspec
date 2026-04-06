@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-06 - Phase 5: add structured spec_descr runtime context
+
+- updated `perl/LinkedSpec/Compiler.pm` so the low-level `spec_descr(...)` surface now accepts an optional `{ runtime_ctx_ref => \$ctx }` options hash, seeds `top_rule` from the parsed entries when available, and normalizes both thrown and malformed non-throwing `compile_spec_entry(...)` failures into the same `compiler_pipeline:spec_descr` payload family instead of leaving low-level callers with a raw die or local undef-only path,
+- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::spec_descr(...)` and public `LinkedSpec::spec_descr(...)` usage so the new runtime-context hook, thrown-callback normalization, and malformed-tuple detail/identity continuity are locked,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats low-level `spec_descr(...)` diagnostics continuity as part of the stable Phase 5 contract now instead of assuming structured `spec_descr` failures only exist inside `run_get_pipeline(...)`.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-06 - Phase 5: validate top-level parser input refs explicitly
 
 - updated `perl/LinkedSpec/Compiler.pm` so returned parser coderefs now reject malformed non-`SCALAR`-reference input explicitly at `runtime_parser:validate_input_ref`, preserving targeted structured detail plus the existing `top_rule` / `rule_label` / `handler_variant` / `handler_source_label` continuity instead of falling through to lower-level Perl dereference failures,

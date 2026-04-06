@@ -7386,6 +7386,78 @@ SPEC
     is($forwarded_entry_count, 1, 'LinkedSpec::spec_descr forwards the parsed entry array unchanged');
     ok(defined($compiled) && ref($compiled) eq 'HASH' && ref($compiled->{Top}{handler}) eq 'CODE', 'Compiler-owned default compile callback still builds a compiled handler');
 };
+subtest 'compiler_spec_descr_records_structured_error_when_compile_spec_entry_dies_with_runtime_ctx_ref' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for spec_descr runtime_ctx die test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for spec_descr runtime_ctx die test');
+
+    my $runtime_ctx;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        $compiled = LinkedSpec::Compiler::spec_descr(
+            $retv,
+            sub { die "__FORCED_SPEC_DESCR_DIE__\n" },
+            { runtime_ctx_ref => \$runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Compiler::spec_descr returns without outer die when compile_spec_entry dies and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::spec_descr returns undef when compile_spec_entry dies under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr compile_spec_entry die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr compile_spec_entry die records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr compile_spec_entry die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr compile_spec_entry die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_DESCR_DIE__/, 'spec_descr compile_spec_entry die preserves thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr compile_spec_entry die seeds top_rule from the first parsed rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'spec_descr compile_spec_entry die records the active parsed rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr compile_spec_entry die records label-scoped generated handler source label');
+};
+subtest 'linkedspec_spec_descr_records_structured_invalid_tuple_with_runtime_ctx_ref' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for LinkedSpec::spec_descr runtime_ctx invalid-tuple test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for LinkedSpec::spec_descr runtime_ctx invalid-tuple test');
+
+    my $runtime_ctx;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        $compiled = LinkedSpec::spec_descr(
+            $retv,
+            sub { return ('Top', []) },
+            { runtime_ctx_ref => \$runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::spec_descr returns without outer die when compile_spec_entry returns an invalid tuple and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'LinkedSpec::spec_descr returns undef when compile_spec_entry returns an invalid tuple under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::spec_descr exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid tuple records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid tuple records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid tuple records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid tuple records summary');
+    is($runtime_ctx->{last_error}{detail}, "compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY", 'spec_descr invalid tuple preserves specific tuple-shape detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr invalid tuple seeds top_rule from the first parsed rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'spec_descr invalid tuple records the failing rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr invalid tuple records label-scoped generated handler source label');
+};
 subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
     plan tests => 4;
 
