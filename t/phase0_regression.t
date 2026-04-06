@@ -10816,6 +10816,68 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'get_parser runtime handler failure records rule label');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_HANDLER_FAILURE__/, 'get_parser runtime handler failure preserves runtime detail');
 };
+subtest 'get_parser_runtime_ctx_ref_records_runtime_parser_failure_with_spec_identity' => sub {
+    plan tests => 16;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_runtime_parser_ctx.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create runtime parser spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_get, $parser, $err_get, $out_get, $warn_get);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_default_compile_spec_entry_cb = sub {
+            return sub {
+                return (
+                    'Top',
+                    {
+                        handler => sub { die "__FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE__\n" },
+                        gdata => [],
+                        meta => {
+                            selected_handler_variant => 'FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE',
+                        },
+                    },
+                    'Top',
+                );
+            };
+        };
+        ($ok_get, $parser, $err_get, $out_get, $warn_get) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_get, 'get_parser runtime-parser setup call returns without die') or diag(normalize_error($err_get));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser returns parser coderef for runtime-parser diagnostics capture');
+
+    my $input = 'a';
+    my ($ok_run, $ast_run, $err_run, $out_run, $warn_run, $inner_eval_err_run) =
+        run_parser_with_captured_io($parser, \$input);
+
+    ok(!$ok_run, 'forced get_parser runtime parser failure still propagates as outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast_run), 'forced get_parser runtime parser failure returns undef AST');
+    like($err_run, qr/__FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE__/, 'forced get_parser runtime parser failure preserves outer die text');
+    is($inner_eval_err_run, '', 'forced get_parser runtime parser failure does not masquerade as inner eval error');
+    is($runtime_ctx->{last_error}{type}, 'runtime_parser', 'get_parser runtime parser failure records runtime_parser type');
+    is($runtime_ctx->{last_error}{stage}, 'invoke_top_rule', 'get_parser runtime parser failure records invoke_top_rule stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_parser:invoke_top_rule', 'get_parser runtime parser failure records combined runtime parser owner stage');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser runtime parser failure preserves spec_name');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser runtime parser failure preserves spec_path');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'get_parser runtime parser failure preserves selected top_rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'get_parser runtime parser failure records top rule label');
+    is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE', 'get_parser runtime parser failure records handler variant');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE', 'get_parser runtime parser failure records generated handler source label');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE__/, 'get_parser runtime parser failure preserves runtime detail');
+};
 subtest 'spec_entry_runtime_handler_compiles_generated_source_once_per_rule' => sub {
     plan tests => 6;
 

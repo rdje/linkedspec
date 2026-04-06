@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-06 - Phase 5: lock get_parser runtime_parser continuity
+
+- widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks runtime-parser continuity too: after spec resolution/load succeeds and a parser is returned, a later top-level parser invocation failure still preserves resolved `spec_path`, selected `top_rule`, handler variant, and generated-handler identity in shared `runtime_ctx->{last_error}`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats file-oriented `runtime_parser` identity continuity as part of the stable diagnostics contract now instead of assuming only runtime-handler or compile-time failures preserve that file-backed context.
+
+- Validation:
+  - `git diff --check`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-06 - Phase 5: lock get_parser late compiler handler continuity
 
 - widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks late generic compiler-failure continuity too: after spec resolution/load succeeds, a generic `build_final_descr` die still preserves `spec_path`, selected `top_rule`, and the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` in shared `runtime_ctx->{last_error}`,
