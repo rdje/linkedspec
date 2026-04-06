@@ -548,6 +548,14 @@ sub _compiler_rule_or_top_handler_source_label {
  return _compiler_top_rule_handler_source_label($runtime_ctx)
 }
 
+sub _describe_parser_input_ref {
+ my ($input_ref) = @_;
+ my $value_desc = !defined($input_ref)
+  ? 'undef'
+  : ref($input_ref) ? ref($input_ref) : 'SCALAR';
+ return "Top-level parser expects a SCALAR reference input; got $value_desc";
+}
+
 sub _reset_spec_content_pos {
  my ($spec_content_ref) = @_;
  return unless ref($spec_content_ref) eq 'SCALAR';
@@ -1112,11 +1120,11 @@ if ($validate_gdata_references_error) {
    _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
    die "$detail\n";
   }
-  if (ref($handler) ne 'CODE') {
-   my $detail = "No handler coderef found for top-level rule '$top_rule'";
-   _set_runtime_ctx_last_error(
-    $runtime_ctx,
-    type => 'runtime_parser',
+ if (ref($handler) ne 'CODE') {
+  my $detail = "No handler coderef found for top-level rule '$top_rule'";
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   type => 'runtime_parser',
     stage => 'resolve_top_rule_handler',
     summary => 'Top-level parser invocation failed',
     detail => $detail,
@@ -1124,12 +1132,30 @@ if ($validate_gdata_references_error) {
     handler_variant => $top_handler_variant,
     handler_source_label => $top_handler_source_label,
    );
-   _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
-   _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
-   die "$detail\n";
-  }
-  _trace_decision('resolve_top_rule_handler', 1, "Resolved top-level rule '$top_rule'", DUMP_DEBUG);
-  my $retv = eval { &$handler($final_descr, $_[0]) };
+  _trace_decision('resolve_top_rule_handler', 0, $detail, DUMP_NONE);
+  _trace_exit($runtime_scope, { status => 'error', stage => 'resolve_top_rule_handler', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
+  die "$detail\n";
+ }
+ _trace_decision('resolve_top_rule_handler', 1, "Resolved top-level rule '$top_rule'", DUMP_DEBUG);
+ my $input_ref = $_[0];
+ if (ref($input_ref) ne 'SCALAR') {
+  my $detail = _describe_parser_input_ref($input_ref);
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   type => 'runtime_parser',
+   stage => 'validate_input_ref',
+   summary => 'Top-level parser invocation failed',
+   detail => $detail,
+   rule_label => $top_rule,
+   handler_variant => $top_handler_variant,
+   handler_source_label => $top_handler_source_label,
+  );
+  _trace_decision('validate_input_ref', 0, $detail, DUMP_NONE);
+  _trace_exit($runtime_scope, { status => 'error', stage => 'validate_input_ref', returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
+  die "$detail\n";
+ }
+ _trace_decision('validate_input_ref', 1, 'Top-level parser received SCALAR reference input', DUMP_DEBUG);
+ my $retv = eval { &$handler($final_descr, $input_ref) };
   my $eval_error = $@;
   if ($eval_error) {
    _set_runtime_ctx_last_error(

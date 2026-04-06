@@ -239,6 +239,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
    - `my $parser = LinkedSpec::get_parser('my_spec_name');`
 3. Parse data:
    - `my $ast = $parser->(\$input_string);`
+   - Returned parser coderefs expect a `SCALAR` reference input. Passing a plain scalar, array ref, hash ref, or `undef` now fails explicitly at the top-level parser boundary instead of falling through to a lower-level Perl dereference error.
 4. If the grammar is large or heterogeneous, run additional passes on captured substrings or substructures.
 5. If you are working on backend-neutral migration, inspect the lowering metadata with `return_descr => 1`.
 
@@ -1271,7 +1272,10 @@ That same `handler_source_label` is now also carried on `runtime_parser` failure
 
 That `runtime_parser` family now covers both:
 - `resolve_top_rule_handler` when a returned parser coderef cannot find a usable selected top rule or handler coderef to invoke,
+- `validate_input_ref` when a returned parser coderef is invoked with something other than a `SCALAR` reference input,
 - and `invoke_top_rule` when the selected top-rule handler itself dies at the outer parser-call boundary.
+
+That means the parser-entry contract is now explicit too: top-level parser coderefs expect the same `\$input_string` shape that the generated handlers already use internally. If you accidentally pass something else, the failure stays at the parser boundary with targeted structured detail like `Top-level parser expects a SCALAR reference input; got ARRAY`, plus the same `top_rule`, `rule_label`, `handler_variant`, `handler_source_label`, and file-backed `spec_path` continuity that other `runtime_parser` failures already preserve.
 
 On the successful path, `runtime_ctx->{last_error}` should be treated as a failure-only channel. The returned parser now clears stale inner `runtime_handler` payloads if a later path in the same top-level invocation succeeds and returns a defined AST, so callers do not have to special-case old inner backtracking failures after a successful parse.
 

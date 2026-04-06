@@ -4879,17 +4879,17 @@ SPEC
 
     unlink($tmp_spec);
 };
-subtest 'parser_invalid_input_returns_undef_without_exit' => sub {
+subtest 'parser_invalid_input_fails_at_runtime_parser_boundary' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_parser_invocation_in_subprocess('Lispish', '__INPUT_ARRAYREF__');
     my $combined = ($out // '') . ($err // '');
 
-    is(defined($exit_code) ? $exit_code : '<undef>', '0', 'invalid-input parser subprocess exit code is 0');
-    like($combined, qr/__AST_UNDEF__/, 'invalid-input parser subprocess reports undef AST marker');
-    unlike($combined, qr/__AST_DEFINED__/, 'invalid-input parser subprocess does not report AST-defined marker');
+    isnt(defined($exit_code) ? $exit_code : '<undef>', '0', 'invalid-input parser subprocess exits non-zero');
+    unlike($combined, qr/__AST_UNDEF__/, 'invalid-input parser subprocess does not report undef AST marker after outer parser failure');
+    unlike($combined, qr/__AST_DEFINED__/, 'invalid-input parser subprocess does not report AST-defined marker after outer parser failure');
     unlike($combined, qr/Error during handler code generation/, 'invalid-input parser subprocess does not emit handler-generation error banner');
-    unlike($combined, qr/__NO_PARSER__/, 'invalid-input parser subprocess confirms parser was created');
+    like($combined, qr/Top-level parser expects a SCALAR reference input; got ARRAY/, 'invalid-input parser subprocess fails with explicit parser-boundary input-shape detail');
 };
 subtest 'bootstrap_registry_curly_brace_recursion_smoke' => sub {
     plan tests => 3;
@@ -10878,6 +10878,67 @@ SPEC
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE', 'get_parser runtime parser failure records generated handler source label');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_PARSER_RUNTIME_PARSER_FAILURE__/, 'get_parser runtime parser failure preserves runtime detail');
 };
+subtest 'get_parser_runtime_ctx_ref_records_invalid_input_ref_with_spec_identity' => sub {
+    plan tests => 16;
+
+    require File::Temp;
+    my $tmp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $tmp_spec = File::Spec->catfile($tmp_dir, 'phase5_invalid_input_ref_ctx.spec');
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    open(my $fh, '>', $tmp_spec) or die "Cannot create invalid input-ref spec '$tmp_spec': $!";
+    print {$fh} $spec_content;
+    close($fh);
+
+    my $runtime_ctx;
+    my ($ok_get, $parser, $err_get, $out_get, $warn_get);
+    {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_default_compile_spec_entry_cb = sub {
+            return sub {
+                return (
+                    'Top',
+                    {
+                        handler => sub { return ['ok'] },
+                        gdata => [],
+                        meta => {
+                            selected_handler_variant => 'FORCED_GET_PARSER_INVALID_INPUT_REF',
+                        },
+                    },
+                    'Top',
+                );
+            };
+        };
+        ($ok_get, $parser, $err_get, $out_get, $warn_get) = run_get_parser_with_captured_io(
+            $tmp_spec,
+            runtime_ctx_ref => \$runtime_ctx,
+        );
+    }
+
+    ok($ok_get, 'get_parser invalid input-ref setup call returns without die') or diag(normalize_error($err_get));
+    ok(defined($parser) && ref($parser) eq 'CODE', 'get_parser returns parser coderef for invalid input-ref diagnostics capture');
+
+    my ($ok_run, $ast_run, $err_run, $out_run, $warn_run, $inner_eval_err_run) =
+        run_parser_with_captured_io($parser, []);
+
+    ok(!$ok_run, 'invalid get_parser input ref still propagates as outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast_run), 'invalid get_parser input ref returns undef AST');
+    like($err_run, qr/Top-level parser expects a SCALAR reference input; got ARRAY/, 'invalid get_parser input ref preserves outer die text');
+    is($inner_eval_err_run, '', 'invalid get_parser input ref does not masquerade as inner eval error');
+    is($runtime_ctx->{last_error}{type}, 'runtime_parser', 'invalid get_parser input ref records runtime_parser type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_input_ref', 'invalid get_parser input ref records validate_input_ref stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_parser:validate_input_ref', 'invalid get_parser input ref records combined runtime parser owner stage');
+    is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'invalid get_parser input ref preserves spec_name');
+    is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'invalid get_parser input ref preserves spec_path');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'invalid get_parser input ref preserves selected top_rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid get_parser input ref records top rule label');
+    is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_GET_PARSER_INVALID_INPUT_REF', 'invalid get_parser input ref records handler variant');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_GET_PARSER_INVALID_INPUT_REF', 'invalid get_parser input ref records generated handler source label');
+    like($runtime_ctx->{last_error}{detail}, qr/Top-level parser expects a SCALAR reference input; got ARRAY/, 'invalid get_parser input ref preserves runtime detail');
+};
 subtest 'spec_entry_runtime_handler_compiles_generated_source_once_per_rule' => sub {
     plan tests => 6;
 
@@ -11009,6 +11070,63 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'forced outer parser die records top rule label');
     is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_OUTER_DIE', 'forced outer parser die records handler variant');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_OUTER_DIE', 'forced outer parser die records generated handler source label');
+};
+subtest 'compiler_pipeline_records_structured_runtime_parser_failure_for_invalid_input_ref' => sub {
+    plan tests => 17;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+    my $parser = LinkedSpec::Compiler::run_get_pipeline(
+        \$spec_content,
+        {},
+        {
+            runtime_ctx => $runtime_ctx,
+            validate_gdata_references => sub { return 1 },
+            compile_spec_entry => sub {
+                $runtime_ctx->{top_rule} = 'Top';
+                return (
+                    'Top',
+                    {
+                        handler => sub { return ['ok'] },
+                        gdata => [],
+                        meta => {
+                            selected_handler_variant => 'FORCED_INVALID_INPUT_REF',
+                        },
+                    },
+                    'Top',
+                );
+            },
+        },
+    );
+
+    ok(defined($parser) && ref($parser) eq 'CODE', 'compiler pipeline still returns parser coderef for invalid input-ref test');
+
+    my ($ok_run, $ast, $err_run, $out_run, $warn_run, $inner_eval_err) =
+        run_parser_with_captured_io($parser, []);
+
+    ok(!$ok_run, 'invalid parser input ref still propagates as outer die') or diag(normalize_error($err_run));
+    ok(!defined($ast), 'invalid parser input ref returns no AST');
+    like($err_run, qr/Top-level parser expects a SCALAR reference input; got ARRAY/, 'invalid parser input ref preserves targeted outer die text');
+    is($inner_eval_err, '', 'invalid parser input ref does not masquerade as inner eval error');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid parser input ref records structured runtime_parser failure');
+    is($runtime_ctx->{last_error}{type}, 'runtime_parser', 'invalid parser input ref records runtime_parser type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_input_ref', 'invalid parser input ref records validate_input_ref stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'runtime_parser:validate_input_ref', 'invalid parser input ref records combined runtime parser owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Top-level parser invocation failed', 'invalid parser input ref records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/Top-level parser expects a SCALAR reference input; got ARRAY/, 'invalid parser input ref records detail');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'invalid parser input ref leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'invalid parser input ref leaves inline-spec spec_path empty');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'invalid parser input ref records selected top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid parser input ref records top rule label');
+    is($runtime_ctx->{last_error}{handler_variant}, 'FORCED_INVALID_INPUT_REF', 'invalid parser input ref records handler variant');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top:FORCED_INVALID_INPUT_REF', 'invalid parser input ref records generated handler source label');
 };
 subtest 'compiler_pipeline_clears_stale_runtime_handler_error_after_successful_parse' => sub {
     plan tests => 8;

@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-06 - Phase 5: validate top-level parser input refs explicitly
+
+- updated `perl/LinkedSpec/Compiler.pm` so returned parser coderefs now reject malformed non-`SCALAR`-reference input explicitly at `runtime_parser:validate_input_ref`, preserving targeted structured detail plus the existing `top_rule` / `rule_label` / `handler_variant` / `handler_source_label` continuity instead of falling through to lower-level Perl dereference failures,
+- widened `t/phase0_regression.t` across both the direct `LinkedSpec::Compiler::run_get_pipeline(...)` seam and the file-oriented `LinkedSpec::get_parser(...)` continuity path so invalid parser input now locks the same structured runtime-parser contract with file-backed `spec_path` continuity after spec resolution/load,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats explicit parser-input validation as part of the stable Phase 5 runtime-parser contract now instead of assuming parser coderefs only fail at handler resolution or handler invocation.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-06 - Phase 5: lock get_parser runtime_parser continuity
 
 - widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks runtime-parser continuity too: after spec resolution/load succeeds and a parser is returned, a later top-level parser invocation failure still preserves resolved `spec_path`, selected `top_rule`, handler variant, and generated-handler identity in shared `runtime_ctx->{last_error}`,
