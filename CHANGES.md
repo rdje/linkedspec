@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: add compiled descriptor state seam
+
+- updated `perl/LinkedSpec/Compiler.pm` so final descriptor assembly now builds one explicit internal `compiled_descriptor_state` after compiled-spec state and compiled `gdata` are available, then projects the outward compatibility descriptor `{ spec => ..., gdata => ..., meta => ... }` from that state instead of treating the projected outer hash as its own working model,
+- updated the same seam so descriptor metadata now also exposes `meta.definition_order`, preserving the full rule-definition sequence before last-definition-wins collapse,
+- tightened final descriptor contract handling so malformed compiled `gdata` callback output is rejected directly at final descriptor assembly with specific detail (`final descriptor assembly expects compiled gdata HASH ref; got ...`) instead of drifting into later generated-descriptor validation,
+- widened `t/phase0_regression.t` with:
+  - direct coverage for the new internal `compiled_descriptor_state` seam and its legacy descriptor projection,
+  - direct coverage for malformed compiled-`gdata` callback output at the final-descriptor boundary,
+  - updated `return_descr` metadata coverage for `meta.definition_order`,
+  - and updated final-descriptor-owner trap coverage so `run_get_pipeline(...)` is locked to the new `_build_final_descr_state(...)` seam,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats final descriptor assembly as part of the same state-first compiler story.
+
+- Validation:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=911`)
+
 ## 2026-04-07 - Phase 5: keep migration summary state-first
 
 - updated `perl/LinkedSpec/Compiler.pm` so `_build_action_rewriter_migration_summary(...)` now accepts compiled-spec state directly instead of requiring a projected legacy `spec` hash first,

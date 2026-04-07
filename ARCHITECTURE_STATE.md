@@ -203,15 +203,21 @@ One concrete architectural consequence matters now:
   - `rules_by_label`
   - `duplicate_rule_labels`
 - default `spec_gdata(...)` now consumes that state directly,
-- final descriptor assembly now projects compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record and only then projects compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
 - and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
 That is a real structural improvement, not only a diagnostics tweak:
 
 - the compiler now has one explicit internal descriptor model,
+- final descriptor assembly now also has one explicit internal descriptor-state model,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
 - and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
+
+One more boundary is now tighter too:
+
+- malformed compiled `gdata` callback output is rejected directly at final descriptor assembly,
+- instead of being allowed to drift into later generated-descriptor validation before the contract problem is identified.
 
 ### `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core`
 - own the hardcoded bootstrap grammar,

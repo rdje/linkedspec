@@ -1078,6 +1078,7 @@ Descriptor summary fields:
 
 Descriptor topology fields:
 - `meta.descriptor_model`
+- `meta.definition_order`
 - `meta.rule_order`
 - `meta.duplicate_rule_labels`
 
@@ -1099,6 +1100,7 @@ There is one important internal-model change behind that outer descriptor shape 
 The current state-derived metadata is intentionally exposed at the descriptor boundary too:
 
 - `meta.descriptor_model` is currently `compiled_spec_state_v1`,
+- `meta.definition_order` preserves the full rule-definition sequence, including repeated labels before last-definition-wins collapse,
 - `meta.rule_order` preserves the first-seen deterministic rule order,
 - `meta.duplicate_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
 
@@ -1107,6 +1109,17 @@ That same state-first rule now also reaches descriptor-level migration summary g
 - `meta.action_rewriter_migration` is now built from compiled-spec state directly rather than by bouncing back through a compatibility `spec` hash first,
 - non-priority summary rule lists such as `language_agnostic_ready_rules` and `compatibility_surface_ready_rules` therefore now follow source rule order,
 - while explicit priority views such as `language_agnostic_blocked_rules_by_priority` and `compatibility_surface_rules_by_priority` keep their separate triage ordering rules.
+
+One more state-first seam now sits behind that same outer descriptor shape:
+
+- final descriptor assembly first builds an internal `compiled_descriptor_state`,
+- that state keeps the compiled-spec state plus the compiled `gdata` map together as one explicit compiler-owned record,
+- and only then projects the outward `{ spec => ..., gdata => ..., meta => ... }` compatibility descriptor.
+
+That internal seam is mostly for compiler quality and refactor safety, but it does have one practical contract improvement:
+
+- malformed compiled `gdata` callback output is now rejected directly at final descriptor assembly with specific contract detail,
+- instead of drifting further into later generated-descriptor validation before the actual shape problem is identified.
 
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 

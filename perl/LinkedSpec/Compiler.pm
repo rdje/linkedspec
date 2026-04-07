@@ -388,6 +388,12 @@ sub _compiled_spec_state_rule_order {
  return $state->{rule_order}
 }
 
+sub _compiled_spec_state_definition_order {
+ my ($state) = @_;
+ return [] unless _is_compiled_spec_state($state);
+ return $state->{definition_order}
+}
+
 sub _compiled_spec_state_to_legacy_spec {
  my ($state) = @_;
  return undef unless _is_compiled_spec_state($state);
@@ -399,6 +405,7 @@ sub _compiled_spec_state_meta {
  return {} unless _is_compiled_spec_state($state);
  return {
   descriptor_model => 'compiled_spec_state_v1',
+  definition_order => [map { $_->{label} } @{_compiled_spec_state_definition_order($state)}],
   rule_order => [@{$state->{rule_order}}],
   duplicate_rule_labels => [@{$state->{duplicate_rule_labels}}],
  }
@@ -420,6 +427,65 @@ sub _record_compiled_spec_rule {
  }
  $state->{rules_by_label}{$label} = $info;
  return $is_duplicate
+}
+
+sub _new_compiled_descriptor_state {
+ my (%args) = @_;
+ my $compiled_spec_state = $args{compiled_spec_state};
+ my $compiled_gdata_by_label = $args{compiled_gdata_by_label};
+ my $meta = (ref($args{meta}) eq 'HASH') ? $args{meta} : {};
+
+ die "(LinkedSpec::Compiler::_new_compiled_descriptor_state) -E- compiled spec state is invalid"
+  unless _is_compiled_spec_state($compiled_spec_state);
+ die "(LinkedSpec::Compiler::_new_compiled_descriptor_state) -E- compiled gdata map must be HASH ref"
+  unless ref($compiled_gdata_by_label) eq 'HASH';
+
+ return {
+  kind => 'compiled_descriptor_state',
+  version => 1,
+  compiled_spec_state => $compiled_spec_state,
+  compiled_gdata_by_label => $compiled_gdata_by_label,
+  meta => { %$meta },
+ }
+}
+
+sub _is_compiled_descriptor_state {
+ my ($value) = @_;
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless _is_compiled_spec_state($value->{compiled_spec_state});
+ return 0 unless ref($value->{compiled_gdata_by_label}) eq 'HASH';
+ return 0 unless ref($value->{meta}) eq 'HASH';
+ return 1
+}
+
+sub _compiled_descriptor_state_spec_state {
+ my ($state) = @_;
+ return undef unless _is_compiled_descriptor_state($state);
+ return $state->{compiled_spec_state}
+}
+
+sub _compiled_descriptor_state_gdata_by_label {
+ my ($state) = @_;
+ return {} unless _is_compiled_descriptor_state($state);
+ return $state->{compiled_gdata_by_label}
+}
+
+sub _compiled_descriptor_state_meta {
+ my ($state) = @_;
+ return {} unless _is_compiled_descriptor_state($state);
+ return $state->{meta}
+}
+
+sub _compiled_descriptor_state_to_legacy_descr {
+ my ($state) = @_;
+ return undef unless _is_compiled_descriptor_state($state);
+ return {
+  spec => _compiled_spec_state_to_legacy_spec(_compiled_descriptor_state_spec_state($state)),
+  gdata => { %{_compiled_descriptor_state_gdata_by_label($state)} },
+  meta => { %{_compiled_descriptor_state_meta($state)} },
+ }
 }
 
 sub _normalize_compiled_spec_input {
@@ -669,25 +735,31 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
  return $result
 }
 
-sub _build_final_descr {
+sub _build_final_descr_state {
  my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
- my $legacy_spec = _compiled_spec_state_to_legacy_spec($compiled_state);
  my $use_default_spec_gdata = !defined($spec_gdata_cb);
  $spec_gdata_cb ||= \&spec_gdata;
+ my $legacy_spec = $use_default_spec_gdata ? undef : _compiled_spec_state_to_legacy_spec($compiled_state);
+ my $compiled_gdata_by_label = $use_default_spec_gdata ? $spec_gdata_cb->($compiled_state) : $spec_gdata_cb->($legacy_spec);
+ _die_with_detail(_describe_final_descr_gdata_result($compiled_gdata_by_label))
+  unless ref($compiled_gdata_by_label) eq 'HASH';
 
- my $final_descr = {
-  spec  => $legacy_spec,
-  gdata => $use_default_spec_gdata ? $spec_gdata_cb->($compiled_state) : $spec_gdata_cb->($legacy_spec),
- };
- $final_descr->{meta} ||= {};
  my $compiled_state_meta = _compiled_spec_state_meta($compiled_state);
- foreach my $meta_key (keys %$compiled_state_meta) {
-  $final_descr->{meta}{$meta_key} = $compiled_state_meta->{$meta_key};
- }
- $final_descr->{meta}{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
- $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($compiled_state);
- return $final_descr;
+ $compiled_state_meta->{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
+ $compiled_state_meta->{action_rewriter_migration} = _build_action_rewriter_migration_summary($compiled_state);
+
+ return _new_compiled_descriptor_state(
+  compiled_spec_state => $compiled_state,
+  compiled_gdata_by_label => $compiled_gdata_by_label,
+  meta => $compiled_state_meta,
+ );
+}
+
+sub _build_final_descr {
+ my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
+ my $descriptor_state = _build_final_descr_state($compiled_spec_input, $spec_gdata_cb, %args);
+ return _compiled_descriptor_state_to_legacy_descr($descriptor_state);
 }
 
 sub _normalize_parse_mode {
@@ -891,11 +963,25 @@ sub _describe_spec_descr_entry_result {
  return "spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
 }
 
+sub _describe_final_descr_state_result {
+ my ($value) = @_;
+
+ return 'final descriptor assembly expects a compiled_descriptor_state result; got '
+  . _describe_contract_value_kind($value);
+}
+
 sub _describe_contract_value_kind {
  my ($value) = @_;
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : 'SCALAR';
+}
+
+sub _describe_final_descr_gdata_result {
+ my ($value) = @_;
+
+ return 'final descriptor assembly expects compiled gdata HASH ref; got '
+  . _describe_contract_value_kind($value);
 }
 
 sub _describe_contract_scalar_value {
@@ -1293,12 +1379,12 @@ if ($spec_descr_error) {
    rule_label => $active_spec_descr_rule_label,
    handler_source_label => $active_spec_descr_handler_source_label,
   );
-  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
+ _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
  _clear_active_spec_gdata_rule_label();
- my $final_descr = eval { _build_final_descr($compiled_spec_state, undef, parse_mode => $parse_mode) };
+ my $final_descr_state = eval { _build_final_descr_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descr_error = $@;
 my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
  my $build_final_descr_handler_source_label =
@@ -1317,6 +1403,20 @@ if ($build_final_descr_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
  return undef;
  }
+ unless (_is_compiled_descriptor_state($final_descr_state)) {
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'build_final_descr',
+   summary => 'Final descriptor assembly failed',
+   detail => _describe_final_descr_state_result($final_descr_state),
+   rule_label => $build_final_descr_rule_label,
+   handler_source_label => $build_final_descr_handler_source_label,
+  );
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly did not produce a valid compiled descriptor state");
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
+  return undef;
+ }
+ my $final_descr = _compiled_descriptor_state_to_legacy_descr($final_descr_state);
 
  my %validate_gdata_failure;
  my $gdata_refs_valid = eval {
