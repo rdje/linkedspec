@@ -1047,7 +1047,7 @@ Examples:
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
 ### Descriptor introspection with `return_descr => 1`
-Use descriptor mode when you want to inspect rule readiness or migration metadata.
+Use descriptor mode when you want to inspect rule readiness, migration metadata, or the current compiled-descriptor topology.
 
 Typical shape:
 
@@ -1076,6 +1076,11 @@ Descriptor summary fields:
 - `meta.action_rewriter_migration.compatibility_surface_rules_by_priority`
 - `meta.action_rewriter_migration.compatibility_surface_top_rule`
 
+Descriptor topology fields:
+- `meta.descriptor_model`
+- `meta.rule_order`
+- `meta.duplicate_rule_labels`
+
 That distinction is intentional:
 - `language_agnostic_action_ir_ready = 1` means the rule no longer depends on RAW_PERL fallback or unresolved helpers,
 - but a nonzero `compatibility_surface_count` still means the rule is relying on older compatibility-shaped syntax that should eventually move to canonical method-like DSL forms.
@@ -1084,7 +1089,38 @@ That compatibility lane now covers both:
 - Perl-shaped pass-through syntax such as bare `return` / `exit` and other classified compatibility idioms,
 - and older helper wrappers such as `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array`, `capture_if`, and raw call-wrapper forms.
 
+There is one important internal-model change behind that outer descriptor shape now:
+
+- the compiler no longer treats the legacy rule-label => info hash as its own working source of truth,
+- it first builds an explicit internal `compiled_spec_state`,
+- default `spec_gdata(...)` now derives combined regex/dependency data from that state,
+- and the outward descriptor `{ spec => ..., gdata => ... }` is now a compatibility projection of that richer internal model.
+
+The current state-derived metadata is intentionally exposed at the descriptor boundary too:
+
+- `meta.descriptor_model` is currently `compiled_spec_state_v1`,
+- `meta.rule_order` preserves the first-seen deterministic rule order,
+- `meta.duplicate_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
+
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
+
+If you want the compiler's richer internal model directly, `spec_descr(...)` now also accepts `{ return_state => 1 }` and returns the explicit compiled-spec state record instead of the historical compatibility hash:
+
+```perl
+my $state = LinkedSpec::spec_descr($entries, { return_state => 1 });
+
+# Current shape:
+# {
+#   kind => 'compiled_spec_state',
+#   version => 1,
+#   definition_order => [ ... ],
+#   rule_order => [ ... ],
+#   rules_by_label => { ... },
+#   duplicate_rule_labels => [ ... ],
+# }
+```
+
+That low-level state is mainly for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1`, which keeps the stable outer descriptor contract while exposing the useful state-derived metadata in `meta`.
 
 If you want the same structured diagnostics continuity there, `spec_descr(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `spec_descr(...)` now returns `undef` and records a normal `compiler_pipeline:spec_descr` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.
 

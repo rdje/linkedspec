@@ -337,6 +337,95 @@ sub _build_action_rewriter_migration_summary {
  return $summary
 }
 
+sub _new_compiled_spec_state {
+ return {
+  kind => 'compiled_spec_state',
+  version => 1,
+  definition_order => [],
+  rule_order => [],
+  rules_by_label => {},
+  duplicate_rule_labels => [],
+ }
+}
+
+sub _is_compiled_spec_state {
+ my ($value) = @_;
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_spec_state';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{definition_order}) eq 'ARRAY';
+ return 0 unless ref($value->{rule_order}) eq 'ARRAY';
+ return 0 unless ref($value->{rules_by_label}) eq 'HASH';
+ return 0 unless ref($value->{duplicate_rule_labels}) eq 'ARRAY';
+ return 1
+}
+
+sub _compiled_spec_state_rule_count {
+ my ($state) = @_;
+ return 0 unless _is_compiled_spec_state($state);
+ return scalar(@{$state->{rule_order}})
+}
+
+sub _compiled_spec_state_rules_by_label {
+ my ($state) = @_;
+ return undef unless _is_compiled_spec_state($state);
+ return $state->{rules_by_label}
+}
+
+sub _compiled_spec_state_rule_order {
+ my ($state) = @_;
+ return [] unless _is_compiled_spec_state($state);
+ return $state->{rule_order}
+}
+
+sub _compiled_spec_state_to_legacy_spec {
+ my ($state) = @_;
+ return undef unless _is_compiled_spec_state($state);
+ return { %{$state->{rules_by_label}} }
+}
+
+sub _compiled_spec_state_meta {
+ my ($state) = @_;
+ return {} unless _is_compiled_spec_state($state);
+ return {
+  descriptor_model => 'compiled_spec_state_v1',
+  rule_order => [@{$state->{rule_order}}],
+  duplicate_rule_labels => [@{$state->{duplicate_rule_labels}}],
+ }
+}
+
+sub _record_compiled_spec_rule {
+ my ($state, $label, $info, $duplicate_seen) = @_;
+ die "(LinkedSpec::Compiler::_record_compiled_spec_rule) -E- compiled spec state is invalid"
+  unless _is_compiled_spec_state($state);
+
+ my $is_duplicate = exists $state->{rules_by_label}{$label};
+ push @{$state->{definition_order}}, {
+  label => $label,
+  info => $info,
+ };
+ push @{$state->{rule_order}}, $label unless $is_duplicate;
+ if ($is_duplicate && ref($duplicate_seen) eq 'HASH' && !$duplicate_seen->{$label}++) {
+  push @{$state->{duplicate_rule_labels}}, $label;
+ }
+ $state->{rules_by_label}{$label} = $info;
+ return $is_duplicate
+}
+
+sub _normalize_compiled_spec_input {
+ my ($value) = @_;
+ return $value if _is_compiled_spec_state($value);
+
+ _die_with_detail(_describe_spec_gdata_spec_result($value))
+  unless ref($value) eq 'HASH';
+
+ my $state = _new_compiled_spec_state();
+ foreach my $label (sort keys %$value) {
+  _record_compiled_spec_rule($state, $label, $value->{$label}, {});
+ }
+ return $state
+}
+
 sub spec_descr {
  my ($specretv, $compile_spec_entry, $option) = @_;
  if (ref($compile_spec_entry) eq 'HASH' && !defined($option)) {
@@ -380,7 +469,8 @@ sub spec_descr {
   return undef
  }
 
- my @specinfo;
+ my $compiled_state = _new_compiled_spec_state();
+ my %duplicate_seen;
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
   my $entry = $specretv->[$entry_idx];
   unless (ref($entry) eq 'ARRAY') {
@@ -439,52 +529,58 @@ sub spec_descr {
     handler_source_label => _compiler_rule_or_top_handler_source_label($runtime_ctx, $failure_rule_label),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
-   _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
+    _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
   }
-  push @specinfo, $label, $info;
- }
-
- _trace_log_output(DUMP_LOW, "Specinfo array contents", "Number of entries: " . scalar(@specinfo));
- for (my $i = 0; $i < @specinfo; $i += 2) {
-  my $label = $specinfo[$i];
-  my $info  = $specinfo[$i + 1];
-  _trace_log_output(DUMP_LOW, "Entry " . ($i / 2), "Label: '$label', Type: " . ref($info));
- }
-
- my %seen_rules;
- my @duplicate_rules;
- for (my $i = 0; $i < @specinfo; $i += 2) {
-  my $label = $specinfo[$i];
-   if (exists $seen_rules{$label}) {
-    push @duplicate_rules, $label;
+  my $is_duplicate = _record_compiled_spec_rule($compiled_state, $label, $info, \%duplicate_seen);
+  if ($is_duplicate) {
    _trace_log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
   }
-  $seen_rules{$label} = 1;
  }
+
+ my $definition_order = $compiled_state->{definition_order};
+ _trace_log_output(DUMP_LOW, "Compiled spec state", "Number of compiled rule entries: " . scalar(@$definition_order));
+ for (my $i = 0; $i < @$definition_order; ++$i) {
+  my $record = $definition_order->[$i];
+  my $label = $record->{label};
+  my $info  = $record->{info};
+  _trace_log_output(DUMP_LOW, "Entry $i", "Label: '$label', Type: " . ref($info));
+ }
+
+ my @duplicate_rules = @{$compiled_state->{duplicate_rule_labels}};
  _trace_decision('duplicate_rule_definitions_present', scalar(@duplicate_rules) ? 1 : 0, scalar(@duplicate_rules) ? ('duplicate_rules=' . join(',', @duplicate_rules)) : 'no duplicates detected', DUMP_MEDIUM);
 
  if (@duplicate_rules) {
   _trace_log_output(DUMP_LOW, "Duplicate rules summary", "Rules with multiple definitions: " . join(", ", @duplicate_rules));
  }
 
- my $result = {@specinfo};
+ my $result = (ref($option) eq 'HASH' && $option->{return_state})
+  ? $compiled_state
+  : _compiled_spec_state_to_legacy_spec($compiled_state);
 
  if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED SPEC DUMP ===\n");
   _trace_log_dump(_dump_value($result));
   _trace_log_dump("=== END GENERATED SPEC DUMP ===\n");
  }
- _trace_exit($trace_scope, { status => 'ok', rule_count => scalar(keys %$result) }, DUMP_MEDIUM);
+ _trace_exit(
+  $trace_scope,
+  {
+   status => 'ok',
+   rule_count => _compiled_spec_state_rule_count($compiled_state),
+   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_spec_state' : 'legacy_spec_hash',
+  },
+  DUMP_MEDIUM
+ );
  _clear_last_spec_descr_failure_detail();
 
  return $result
 }
 
 sub spec_gdata {
- my $sg = shift;
+ my $sg = _normalize_compiled_spec_input(shift);
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_gdata', {
-  rule_count => (ref($sg) eq 'HASH') ? scalar(keys %$sg) : undef,
+  rule_count => _compiled_spec_state_rule_count($sg),
  }, DUMP_MEDIUM);
 
  if (_trace_should_dump(DUMP_HIGH)) {
@@ -493,13 +589,11 @@ sub spec_gdata {
   _trace_log_dump("=== END SPEC GDATA DUMP ===\n");
  }
 
- _die_with_detail(_describe_spec_gdata_spec_result($sg))
-  unless ref($sg) eq 'HASH';
-
 my %gdata;
-foreach my $label (keys %$sg) {
+my $rules_by_label = _compiled_spec_state_rules_by_label($sg);
+foreach my $label (@{_compiled_spec_state_rule_order($sg)}) {
   $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
-  my $rule_info = $sg->{$label};
+  my $rule_info = $rules_by_label->{$label};
   _die_with_detail(_describe_spec_gdata_rule_info_result($label, $rule_info))
    unless ref($rule_info) eq 'HASH';
   my $rule_gdata = $rule_info->{gdata};
@@ -517,8 +611,8 @@ foreach my $label (keys %$sg) {
    _die_with_detail(_describe_spec_gdata_dependency_index_result($label, $dep_idx, $gde_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
    _die_with_detail(_describe_spec_gdata_dependency_rule_missing($label, $dep_label, $dep_idx))
-    unless exists $sg->{$dep_label};
-   my $dep_rule = $sg->{$dep_label};
+    unless exists $rules_by_label->{$dep_label};
+   my $dep_rule = $rules_by_label->{$dep_label};
    _die_with_detail(_describe_spec_gdata_dependency_rule_info_result($label, $dep_label, $dep_rule))
     unless ref($dep_rule) eq 'HASH';
    my $dep_re = $dep_rule->{re};
@@ -566,16 +660,23 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
 }
 
 sub _build_final_descr {
- my ($auto_descr_spec, $spec_gdata_cb, %args) = @_;
+ my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
+ my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
+ my $legacy_spec = _compiled_spec_state_to_legacy_spec($compiled_state);
+ my $use_default_spec_gdata = !defined($spec_gdata_cb);
  $spec_gdata_cb ||= \&spec_gdata;
 
  my $final_descr = {
-  spec  => $auto_descr_spec,
-  gdata => $spec_gdata_cb->($auto_descr_spec),
+  spec  => $legacy_spec,
+  gdata => $use_default_spec_gdata ? $spec_gdata_cb->($compiled_state) : $spec_gdata_cb->($legacy_spec),
  };
  $final_descr->{meta} ||= {};
+ my $compiled_state_meta = _compiled_spec_state_meta($compiled_state);
+ foreach my $meta_key (keys %$compiled_state_meta) {
+  $final_descr->{meta}{$meta_key} = $compiled_state_meta->{$meta_key};
+ }
  $final_descr->{meta}{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
- $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($final_descr->{spec});
+ $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($legacy_spec);
  return $final_descr;
 }
 
@@ -1145,12 +1246,12 @@ sub run_get_pipeline {
 
 my $active_spec_descr_rule_label = undef;
 _clear_last_spec_descr_failure_detail();
-my $auto_descr_spec = eval {
+my $compiled_spec_state = eval {
  spec_descr($retv, sub {
    my ($entry) = @_;
    $active_spec_descr_rule_label = _parsed_rule_label($entry);
    return $compile_spec_entry->($entry)
-  })
+  }, { return_state => 1 })
 };
 my $spec_descr_error = $@;
  my $active_spec_descr_handler_source_label =
@@ -1168,7 +1269,7 @@ if ($spec_descr_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
   return undef;
  }
- unless (defined($auto_descr_spec) && ref($auto_descr_spec) eq 'HASH') {
+ unless (_is_compiled_spec_state($compiled_spec_state)) {
  _set_runtime_ctx_last_error(
    $runtime_ctx,
    stage => 'spec_descr',
@@ -1187,7 +1288,7 @@ if ($spec_descr_error) {
   return undef;
  }
  _clear_active_spec_gdata_rule_label();
- my $final_descr = eval { _build_final_descr($auto_descr_spec, undef, parse_mode => $parse_mode) };
+ my $final_descr = eval { _build_final_descr($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descr_error = $@;
 my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
  my $build_final_descr_handler_source_label =
@@ -1204,7 +1305,7 @@ if ($build_final_descr_error) {
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building gdata/final descriptor state");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
-  return undef;
+ return undef;
  }
 
  my %validate_gdata_failure;
@@ -1264,7 +1365,7 @@ if ($validate_gdata_references_error) {
   : _first_parsed_rule_label($retv);
  _set_runtime_ctx_top_rule($runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
- my $rule_count = scalar(keys %$auto_descr_spec);
+ my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
   _emit_runtime_ctx_parser_source_line($runtime_ctx, " },\n gdata => {\n");

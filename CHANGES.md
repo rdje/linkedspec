@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-07 - Phase 5: introduce compiled-spec state model
+
+- updated `perl/LinkedSpec/Compiler.pm` so the compiler now has one explicit internal compiled-spec state model instead of treating loose legacy `spec_descr` / `spec_gdata` hashes as its own working truth:
+  - `spec_descr(...)` now first builds `compiled_spec_state` with `kind`, `version`, `definition_order`, `rule_order`, `rules_by_label`, and `duplicate_rule_labels`,
+  - default `spec_gdata(...)` now accepts that state directly and derives combined regex/dependency data from it,
+  - `_build_final_descr(...)` now projects legacy `spec` / `gdata` hashes outward from that state while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+  - `run_get_pipeline(...)` now carries that state through final descriptor assembly instead of threading only the historical legacy spec hash,
+- updated `perl/LinkedSpec.pm` comments so the public `spec_descr(...)` façade now documents the richer owner-owned state model accurately instead of describing only the old compatibility hash contract,
+- widened `t/phase0_regression.t` so the new state model is locked directly:
+  - `spec_descr(..., { return_state => 1 })` now has explicit regression coverage for the returned state shape,
+  - `spec_gdata(...)` now has explicit regression coverage for compiled-spec state input,
+  - `run_get_pipeline(...)` / `return_descr => 1` now lock the new descriptor metadata (`descriptor_model`, `rule_order`, `duplicate_rule_labels`) and the fact that final descriptor assembly receives compiled-spec state rather than only the legacy spec hash,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiled-spec state as the compiler's internal source of truth and legacy `spec` / `gdata` hashes as edge compatibility projections rather than the compiler's preferred internal model.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=908`)
+  - `bash tools/run_ci_local.sh`
+    - local CI gate passed
+
 ## 2026-04-07 - Phase 5: tighten spec_gdata shape diagnostics
 
 - updated `perl/LinkedSpec/Compiler.pm` so low-level default `spec_gdata(...)` now validates its descriptor input shape explicitly instead of relying on incidental Perl reference failures: it rejects malformed top-level spec maps, malformed per-rule info hashes, malformed `gdata` arrays, malformed dependency entries, malformed dependency labels/indices, missing referenced rules, and malformed referenced `re` arrays with targeted detail strings,

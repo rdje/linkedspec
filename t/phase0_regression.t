@@ -7353,6 +7353,29 @@ SPEC
     is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
+subtest 'compiler_spec_descr_can_return_explicit_compiled_spec_state' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for compiled-state spec_descr test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state spec_descr test');
+
+    my $state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+
+    ok(defined($state) && ref($state) eq 'HASH', 'spec_descr return_state still returns a hashref');
+    is($state->{kind}, 'compiled_spec_state', 'spec_descr return_state exposes compiled-spec state kind');
+    is($state->{version}, 1, 'spec_descr return_state exposes compiled-spec state version');
+    is_deeply($state->{rule_order}, ['Top'], 'spec_descr return_state preserves deterministic unique rule order');
+    ok(ref($state->{definition_order}) eq 'ARRAY' && @{$state->{definition_order}} == 1, 'spec_descr return_state preserves definition-order records');
+    is($state->{definition_order}[0]{label}, 'Top', 'spec_descr return_state definition-order record preserves rule label');
+    ok(ref($state->{rules_by_label}) eq 'HASH' && ref($state->{rules_by_label}{Top}{handler}) eq 'CODE', 'spec_descr return_state exposes rules_by_label with compiled handler coderef');
+    is_deeply($state->{duplicate_rule_labels}, [], 'spec_descr return_state records no duplicate labels for a single-rule spec');
+};
 subtest 'spec_descr_defers_default_compile_callback_to_compiler_owner' => sub {
     plan tests => 6;
 
@@ -8950,6 +8973,28 @@ subtest 'compiler_spec_gdata_rejects_malformed_rule_gdata_shape_with_specific_de
     ok(!$ok_run, 'spec_gdata dies when rule gdata shape is malformed');
     ok(!defined($ret), 'spec_gdata does not return gdata when rule gdata shape is malformed');
     is(normalize_error($err), "spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'spec_gdata reports the specific malformed gdata-shape detail');
+};
+subtest 'compiler_spec_gdata_accepts_compiled_spec_state_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for compiled-state spec_gdata test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state spec_gdata test');
+
+    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $gdata = LinkedSpec::Compiler::spec_gdata($compiled_state);
+
+    ok(defined($gdata) && ref($gdata) eq 'HASH', 'spec_gdata accepts compiled-spec state input and returns a hashref');
+    ok(exists $gdata->{Top}, 'spec_gdata built from compiled-spec state still resolves Top dependency regex');
+    ok(!exists $gdata->{Child}, 'spec_gdata built from compiled-spec state omits dependency-free rules');
 };
 subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
     plan tests => 12;
@@ -11637,7 +11682,7 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned without the legacy compiler bootstrap helper still preserves compiled handler coderef');
 };
 subtest 'run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner' => sub {
-    plan tests => 5;
+    plan tests => 8;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -11651,13 +11696,20 @@ SPEC
 
     my $orig_build_final_descr = \&LinkedSpec::Compiler::_build_final_descr;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_undef_spec_gdata_cb, $saw_top_rule_spec);
+    my ($saw_undef_spec_gdata_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Compiler::_build_final_descr = sub {
-            my ($auto_descr_spec, $spec_gdata_cb) = @_;
+            my ($compiled_spec_input, $spec_gdata_cb) = @_;
             $saw_undef_spec_gdata_cb = !defined($spec_gdata_cb);
-            $saw_top_rule_spec = ref($auto_descr_spec) eq 'HASH' && exists $auto_descr_spec->{Top};
+            $saw_compiled_spec_state = ref($compiled_spec_input) eq 'HASH' && ($compiled_spec_input->{kind} || '') eq 'compiled_spec_state';
+            $saw_top_rule_spec = $saw_compiled_spec_state
+                && ref($compiled_spec_input->{rules_by_label}) eq 'HASH'
+                && exists $compiled_spec_input->{rules_by_label}{Top};
+            $saw_rule_order = $saw_compiled_spec_state
+                && ref($compiled_spec_input->{rule_order}) eq 'ARRAY'
+                && @{$compiled_spec_input->{rule_order}} == 1
+                && $compiled_spec_input->{rule_order}[0] eq 'Top';
             return $orig_build_final_descr->(@_);
         };
 
@@ -11680,9 +11732,12 @@ SPEC
 
     ok($ok_run, 'compiler pipeline succeeds while final descriptor assembly is trapped') or diag(normalize_error($err));
     ok($saw_undef_spec_gdata_cb, 'compiler pipeline now lets final descriptor assembly own the default spec_gdata callback');
-    ok($saw_top_rule_spec, 'compiler pipeline still forwards compiled rule descriptors into final descriptor assembly');
+    ok($saw_compiled_spec_state, 'compiler pipeline now forwards explicit compiled-spec state into final descriptor assembly');
+    ok($saw_top_rule_spec, 'compiled-spec state forwarded into final descriptor assembly still exposes the Top rule through rules_by_label');
+    ok($saw_rule_order, 'compiled-spec state forwarded into final descriptor assembly preserves deterministic rule order');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor owner supplies spec_gdata');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor assembly still preserves compiled handler coderef');
+    is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
 };
 subtest 'compiler_pipeline_avoids_linkedspec_spec_gdata_facade' => sub {
     plan tests => 4;
@@ -42036,7 +42091,7 @@ PERL
 };
 
 subtest 'return_descr_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
-    plan tests => 6;
+    plan tests => 9;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -42046,6 +42101,9 @@ SPEC
     my $default_descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
     ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descr still builds descriptor hash');
     is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
+    is($default_descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'default parse mode descriptor records the compiled-spec state model');
+    is_deeply($default_descr->{meta}{rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic rule order metadata');
+    is_deeply($default_descr->{meta}{duplicate_rule_labels}, [], 'default parse mode descriptor preserves duplicate-rule metadata');
 
     my $consume_descr = LinkedSpec::Get(
         \$spec_content,

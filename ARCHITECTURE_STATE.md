@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-03-30`
+- Last refreshed: `2026-04-07`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -41,6 +41,7 @@ This document is the current high-level technical reading of the project shape. 
 - Backend-neutral action semantics now largely live in:
   - `LinkedSpec::ActionIR::*`
 - `RuntimeContext` is one of the cleanest and most important boundaries in the tree.
+- `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel `spec_descr` / `spec_gdata` hashes as its own source of truth.
 - Dynamic plugin loading is still present in the public facade, but current project direction treats it as legacy-removal territory rather than a feature family to preserve.
 
 ## LinkedSpec Facade Reading
@@ -188,8 +189,28 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 ### `LinkedSpec::Compiler`
 - is the main compile pipeline coordinator,
 - owns validation/bootstrap/descriptor-build orchestration,
+- now builds one explicit internal compiled-spec state first and treats that as the source of truth for later descriptor assembly,
+- still emits the legacy descriptor `{ spec => ..., gdata => ... }` shape at the outer boundary for compatibility, but that is now a projection of the compiled-spec state rather than the compiler's own working model,
 - carries much of the compile-stage structured-diagnostics normalization,
 - is one of the project's main implementation centers.
+
+One concrete architectural consequence matters now:
+
+- `spec_descr(...)` still exposes the historical rule-label => info hash by default for compatibility,
+- but internally it first builds a `compiled_spec_state` record with:
+  - `definition_order`
+  - `rule_order`
+  - `rules_by_label`
+  - `duplicate_rule_labels`
+- default `spec_gdata(...)` now consumes that state directly,
+- and final descriptor assembly now projects compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`.
+
+That is a real structural improvement, not only a diagnostics tweak:
+
+- the compiler now has one explicit internal descriptor model,
+- ordering is first-class instead of incidental,
+- duplicate-label tracking is first-class instead of ad hoc,
+- and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
 
 ### `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core`
 - own the hardcoded bootstrap grammar,
@@ -311,7 +332,10 @@ This is the practical core spine of the system and gives a readable ownership mo
 ### 3. `RuntimeContext`
 This is one of the best extractions in the project so far. It reduced drift and made structured diagnostics much more coherent.
 
-### 4. ActionIR modularization
+### 4. Compiler-owned compiled-spec state
+This is now one of the healthiest improvements in the compile path. The compiler no longer has to reason about “legacy spec hash” as its own internal truth; it has one explicit compiled-spec state model and emits legacy compatibility shapes only at the edges.
+
+### 5. ActionIR modularization
 The lowering stack is big, but it now has real sub-owners instead of one giant mixed-semantics file.
 
 ## Main Hotspots and Risks
@@ -362,6 +386,12 @@ The helper family is much richer than it used to be. The bigger future wins are 
 - self-hosting,
 - and eventual backend decoupling.
 
+### 5. `spec_descr` / `spec_gdata` should now be read as phases, not as the ideal long-term data model
+The information they represent is still needed. What changed is the ownership model:
+- `spec_descr(...)` is now best read as "build compiled-spec state",
+- `spec_gdata(...)` is now best read as "derive regex/dependency enrichment from compiled-spec state",
+- and the legacy hash forms are compatibility outputs rather than the compiler's own preferred representation.
+
 ## Suggested Session-Start Refresh Checklist
 At the start of a future session, this document should be re-read and adjusted if any of the following changed:
 
@@ -380,6 +410,7 @@ Current best reading:
 - `LinkedSpec.pm` is a facade,
 - `ParserFactory`, `Runtime`, and `Compiler` are the practical parser-build spine,
 - `BootstrapSpec::Core` and `Validation` still define much of the frontend truth,
+- `Compiler.pm` now has one explicit compiled-spec state model internally and only emits legacy `spec` / `gdata` hashes at compatibility boundaries,
 - `SpecEntry` remains the biggest portability hotspot,
 - `RuleIR` plus `ActionIR::*` are where backend-neutral action semantics really live,
 - `RuntimeContext` is one of the strongest architectural boundaries in the project,

@@ -185,10 +185,12 @@ sub Get {
 
 #------------------------------------------------------------------------------
 # Function: spec_descr
-# Purpose : Convert parsed bootstrap entries into the descriptor's `spec` hash
-#           (rule label => compiled rule info).
-# Args    : ($parsed_spec_entries)
-# Returns : hashref of spec rule definitions
+# Purpose : Convert parsed bootstrap entries into compiled rule state.
+#           Default return remains the historical descriptor `spec` hash
+#           (rule label => compiled rule info), while advanced callers may
+#           request richer compiled-spec state through owner options.
+# Args    : ($parsed_spec_entries, [$compile_spec_entry_cb], [$option_hashref])
+# Returns : hashref of spec rule definitions or compiled-spec state hashref
 #------------------------------------------------------------------------------
 sub spec_descr {
  my @args = @_;
