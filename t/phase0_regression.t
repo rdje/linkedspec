@@ -7523,6 +7523,50 @@ subtest 'linkedspec_spec_descr_records_structured_invalid_entry_container_with_r
     ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr invalid parsed-entry container leaves rule_label absent before any parsed rule exists');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'spec_descr invalid parsed-entry container records top-rule generated handler identity');
 };
+subtest 'compiler_spec_descr_records_structured_invalid_individual_entry_with_runtime_ctx_ref' => sub {
+    plan tests => 12;
+
+    my $runtime_ctx;
+    my $compile_spec_entry_count = 0;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        $compiled = LinkedSpec::Compiler::spec_descr(
+            [
+                [['ELABEL', 'Top']],
+                {},
+            ],
+            sub {
+                ++$compile_spec_entry_count;
+                return (
+                    'Top',
+                    {
+                        handler => sub { return ['ok'] },
+                        gdata => [],
+                        meta => {},
+                    },
+                );
+            },
+            {
+                runtime_ctx_ref => \$runtime_ctx,
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Compiler::spec_descr returns without outer die when one parsed entry is malformed and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::spec_descr returns undef when one parsed entry is malformed under runtime_ctx_ref');
+    is($compile_spec_entry_count, 1, 'Compiler::spec_descr stops before invoking compile_spec_entry on the malformed later entry');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref for malformed individual parsed entries');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr malformed individual entry records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr malformed individual entry records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr malformed individual entry records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr malformed individual entry records summary');
+    is($runtime_ctx->{last_error}{detail}, 'spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[1] got HASH', 'spec_descr malformed individual entry preserves targeted entry-shape detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr malformed individual entry preserves first parsed top_rule continuity');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr malformed individual entry leaves rule_label absent when the malformed entry has no parsed label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr malformed individual entry records top-rule generated handler identity');
+};
 subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
     plan tests => 4;
 

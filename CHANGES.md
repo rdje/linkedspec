@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-07 - Phase 5: tighten spec_descr entry-shape diagnostics
+
+- updated `perl/LinkedSpec/Compiler.pm` so low-level `spec_descr(...)` now also validates each individual parsed bootstrap entry before invoking the compile callback, instead of letting malformed later entries fall through into callback-specific behavior,
+- widened `t/phase0_regression.t` so a malformed later parsed entry now locks the same `compiler_pipeline:spec_descr` structured payload with preserved `top_rule` / `handler_source_label` continuity and a targeted detail string like `spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[1] got HASH`,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed individual parsed entries as part of the stable low-level `spec_descr(...)` diagnostics contract now instead of assuming only the outer container and callback contracts are validated there.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-07 - Phase 5: tighten spec_descr pre-entry contract diagnostics
 
 - updated `perl/LinkedSpec/Compiler.pm` so low-level `spec_descr(...)` no longer raw-dies on malformed pre-entry contracts before its newer structured diagnostics can engage: invalid non-CODE `compile_spec_entry` callbacks and malformed non-ARRAY parsed-entry containers now return `undef` and normalize into `compiler_pipeline:spec_descr` payloads when `runtime_ctx_ref` is in use,

@@ -381,7 +381,22 @@ sub spec_descr {
  }
 
  my @specinfo;
- foreach my $entry (@$specretv) {
+ for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
+  my $entry = $specretv->[$entry_idx];
+  unless (ref($entry) eq 'ARRAY') {
+   my $detail = _describe_spec_descr_entry_result($entry, $entry_idx);
+   _set_last_spec_descr_failure_detail($detail);
+   _set_runtime_ctx_last_error(
+    $runtime_ctx,
+    stage => 'spec_descr',
+    summary => 'Spec descriptor generation failed',
+    detail => $detail,
+    handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   ) if ref($runtime_ctx) eq 'HASH';
+   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
+   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+   return undef
+  }
   my $active_rule_label = _parsed_rule_label($entry);
   my $active_handler_source_label = (ref($runtime_ctx) eq 'HASH')
    ? _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_rule_label)
@@ -726,6 +741,17 @@ sub _describe_spec_descr_entries_result {
   : ref($specretv) ? ref($specretv) : 'SCALAR';
 
  return "spec_descr expects an ARRAY ref of parsed bootstrap entries; got $value_desc";
+}
+
+sub _describe_spec_descr_entry_result {
+ my ($entry, $idx) = @_;
+
+ my $value_desc = !defined($entry)
+  ? 'undef'
+  : ref($entry) ? ref($entry) : 'SCALAR';
+ my $entry_idx = defined($idx) ? $idx : '?';
+
+ return "spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
 }
 
 #------------------------------------------------------------------------------
