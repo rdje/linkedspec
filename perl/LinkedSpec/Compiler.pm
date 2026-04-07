@@ -182,7 +182,7 @@ sub _require_validation_pkg {
 }
 
 sub _build_action_rewriter_migration_summary {
- my ($spec) = @_;
+ my ($spec_or_state) = @_;
 
  my $summary = {
  total_rules => 0,
@@ -207,15 +207,25 @@ sub _build_action_rewriter_migration_summary {
   compatibility_surface_rules => [],
   compatibility_surface_ready_rules => [],
   compatibility_surface_rules_by_priority => [],
-  compatibility_surface_top_rule => undef,
+ compatibility_surface_top_rule => undef,
   language_agnostic_blocked_rules_by_priority => [],
   language_agnostic_top_blocked_rule => undef,
  };
 
- return $summary unless ref($spec) eq 'HASH';
+ my @rule_rows;
+ if (_is_compiled_spec_state($spec_or_state)) {
+  my $rules_by_label = _compiled_spec_state_rules_by_label($spec_or_state);
+  @rule_rows = map { [$_, $rules_by_label->{$_}] } @{_compiled_spec_state_rule_order($spec_or_state)};
+ }
+ elsif (ref($spec_or_state) eq 'HASH') {
+  @rule_rows = map { [$_, $spec_or_state->{$_}] } sort keys %$spec_or_state;
+ }
+ else {
+  return $summary
+ }
 
- foreach my $rule_name (sort keys %$spec) {
-  my $rule = $spec->{$rule_name};
+ foreach my $row (@rule_rows) {
+  my ($rule_name, $rule) = @$row;
   next unless ref($rule) eq 'HASH';
   ++$summary->{total_rules};
 
@@ -329,7 +339,7 @@ sub _build_action_rewriter_migration_summary {
  if (_trace_should_dump(DUMP_DEBUG)) {
  _trace_log_output(
    DUMP_DEBUG,
-   "(LinkedSpec.pm::_build_action_rewriter_migration_summary) summary",
+   "(LinkedSpec::Compiler::_build_action_rewriter_migration_summary) summary",
    _dump_value($summary)
   );
  }
@@ -676,7 +686,7 @@ sub _build_final_descr {
   $final_descr->{meta}{$meta_key} = $compiled_state_meta->{$meta_key};
  }
  $final_descr->{meta}{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
- $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($legacy_spec);
+ $final_descr->{meta}{action_rewriter_migration} = _build_action_rewriter_migration_summary($compiled_state);
  return $final_descr;
 }
 

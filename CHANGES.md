@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-07 - Phase 5: keep migration summary state-first
+
+- updated `perl/LinkedSpec/Compiler.pm` so `_build_action_rewriter_migration_summary(...)` now accepts compiled-spec state directly instead of requiring a projected legacy `spec` hash first,
+- updated `_build_final_descr(...)` so descriptor-level `meta.action_rewriter_migration` is now built from compiled-spec state too, keeping the compiler on its explicit internal state model longer instead of bouncing back through compatibility data just for migration metadata,
+- the same slice also makes non-priority migration-summary rule lists follow source rule order when compiled-spec state is available:
+  - `language_agnostic_ready_rules`
+  - `compatibility_surface_ready_rules`
+  - and the per-rule payload arrays behind those summaries,
+  while explicit `*_by_priority` fields keep their separate blocker/compatibility triage ordering,
+- widened `t/phase0_regression.t` with:
+  - a trapped `run_get_pipeline(...)` regression proving migration-summary generation now receives compiled-spec state directly,
+  - updated migration-summary expectations proving ready compatibility/ready language-agnostic rule lists now follow source order,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats migration-summary generation as part of the same state-first compiler story rather than one remaining legacy-spec detour.
+
+- Validation:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=909`)
+
 ## 2026-04-07 - Phase 5: introduce compiled-spec state model
 
 - updated `perl/LinkedSpec/Compiler.pm` so the compiler now has one explicit internal compiled-spec state model instead of treating loose legacy `spec_descr` / `spec_gdata` hashes as its own working truth:

@@ -1102,6 +1102,12 @@ The current state-derived metadata is intentionally exposed at the descriptor bo
 - `meta.rule_order` preserves the first-seen deterministic rule order,
 - `meta.duplicate_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
 
+That same state-first rule now also reaches descriptor-level migration summary generation:
+
+- `meta.action_rewriter_migration` is now built from compiled-spec state directly rather than by bouncing back through a compatibility `spec` hash first,
+- non-priority summary rule lists such as `language_agnostic_ready_rules` and `compatibility_surface_ready_rules` therefore now follow source rule order,
+- while explicit priority views such as `language_agnostic_blocked_rules_by_priority` and `compatibility_surface_rules_by_priority` keep their separate triage ordering rules.
+
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 
 If you want the compiler's richer internal model directly, `spec_descr(...)` now also accepts `{ return_state => 1 }` and returns the explicit compiled-spec state record instead of the historical compatibility hash:

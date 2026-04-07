@@ -11739,6 +11739,44 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor assembly still preserves compiled handler coderef');
     is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
 };
+subtest 'run_get_pipeline_builds_action_rewriter_migration_summary_from_compiled_spec_state' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { call(Leaf); return_a(Top) }
+
+Leaf:
+ /a/ -> Leaf { return_a(Leaf) }
+SPEC
+
+    my $orig_build_action_rewriter_migration_summary = \&LinkedSpec::Compiler::_build_action_rewriter_migration_summary;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my ($saw_compiled_spec_state, $saw_rule_order);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Compiler::_build_action_rewriter_migration_summary = sub {
+            my ($summary_input) = @_;
+            $saw_compiled_spec_state = ref($summary_input) eq 'HASH' && ($summary_input->{kind} || '') eq 'compiled_spec_state';
+            $saw_rule_order = $saw_compiled_spec_state
+                && ref($summary_input->{rule_order}) eq 'ARRAY'
+                && @{$summary_input->{rule_order}} == 2
+                && $summary_input->{rule_order}[0] eq 'Top'
+                && $summary_input->{rule_order}[1] eq 'Leaf';
+            return $orig_build_action_rewriter_migration_summary->(@_);
+        };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds while migration-summary builder is trapped') or diag(normalize_error($err));
+    ok($saw_compiled_spec_state, 'final descriptor assembly now builds the action-rewriter migration summary from compiled-spec state');
+    ok($saw_rule_order, 'migration-summary builder receives compiled-spec state with deterministic source rule order');
+    ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor still exposes action-rewriter migration summary metadata');
+    is_deeply($descr->{meta}{action_rewriter_migration}{language_agnostic_ready_rules}, ['Top', 'Leaf'], 'migration summary ready-rule list now follows source rule order');
+    is($descr->{meta}{action_rewriter_migration}{total_rules}, 2, 'migration summary still counts compiled rules correctly');
+};
 subtest 'compiler_pipeline_avoids_linkedspec_spec_gdata_facade' => sub {
     plan tests => 4;
 
@@ -39096,7 +39134,7 @@ SPEC
     is($summary->{language_agnostic_ready_rule_count}, 2, 'migration summary tracks ready rule count');
     is($summary->{language_agnostic_blocked_rule_count}, 2, 'migration summary tracks blocked rule count');
     is($summary->{language_agnostic_blocker_statement_total_count}, 2, 'migration summary tracks total blocker statement count across blocked rules');
-    is_deeply($summary->{language_agnostic_ready_rules}, ['Leaf', 'Top'], 'migration summary exposes deterministic ready-rule list');
+    is_deeply($summary->{language_agnostic_ready_rules}, ['Top', 'Leaf'], 'migration summary exposes deterministic ready-rule list in source order');
 
     my ($mixed_row) = grep { $_->{rule} eq 'Mixed' } @{$summary->{language_agnostic_blocked_rules}};
     my ($unresolved_row) = grep { $_->{rule} eq 'Unresolved' } @{$summary->{language_agnostic_blocked_rules}};
@@ -39173,7 +39211,7 @@ SPEC
     my $summary = $descr->{meta}{action_rewriter_migration};
     is($summary->{compatibility_surface_rule_count}, 2, 'migration summary counts rules that still use legacy helper wrappers');
     is($summary->{compatibility_surface_ready_rule_count}, 2, 'migration summary keeps legacy helper wrappers in the ready subset when they avoid blockers');
-    is_deeply($summary->{compatibility_surface_ready_rules}, ['Leaf', 'Top'], 'migration summary exposes deterministic ready legacy-helper rule list');
+    is_deeply($summary->{compatibility_surface_ready_rules}, ['Top', 'Leaf'], 'migration summary exposes deterministic ready legacy-helper rule list in source order');
     is_deeply($summary->{compatibility_surface_rules_by_priority}, ['Top', 'Leaf'], 'migration summary prioritizes the denser legacy-helper rule first');
     is($summary->{compatibility_surface_top_rule}, 'Top', 'migration summary exposes the top legacy-helper compatibility rule');
     my ($top_row) = grep { $_->{rule} eq 'Top' } @{$summary->{compatibility_surface_rules}};

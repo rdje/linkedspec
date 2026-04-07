@@ -203,7 +203,8 @@ One concrete architectural consequence matters now:
   - `rules_by_label`
   - `duplicate_rule_labels`
 - default `spec_gdata(...)` now consumes that state directly,
-- and final descriptor assembly now projects compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`.
+- final descriptor assembly now projects compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+- and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
 That is a real structural improvement, not only a diagnostics tweak:
 
