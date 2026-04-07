@@ -343,14 +343,42 @@ sub spec_descr {
   $option = $compile_spec_entry;
   $compile_spec_entry = undef;
  }
+ my $runtime_ctx = _prepare_runtime_ctx_for_spec_descr($specretv, $option);
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
  _clear_last_spec_descr_failure_detail();
- die "(LinkedSpec::Compiler::spec_descr) -E- compile_spec_entry callback must be CODE"
-  unless ref($compile_spec_entry) eq 'CODE';
- my $runtime_ctx = _prepare_runtime_ctx_for_spec_descr($specretv, $option);
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_descr', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
+
+ unless (ref($compile_spec_entry) eq 'CODE') {
+  my $detail = 'compile_spec_entry callback must be CODE';
+  _set_last_spec_descr_failure_detail($detail);
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'spec_descr',
+   summary => 'Spec descriptor generation failed',
+   detail => $detail,
+   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+  ) if ref($runtime_ctx) eq 'HASH';
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
+  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+  return undef
+ }
+
+ unless (ref($specretv) eq 'ARRAY') {
+  my $detail = _describe_spec_descr_entries_result($specretv);
+  _set_last_spec_descr_failure_detail($detail);
+  _set_runtime_ctx_last_error(
+   $runtime_ctx,
+   stage => 'spec_descr',
+   summary => 'Spec descriptor generation failed',
+   detail => $detail,
+   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+  ) if ref($runtime_ctx) eq 'HASH';
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
+  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+  return undef
+ }
 
  my @specinfo;
  foreach my $entry (@$specretv) {
@@ -688,6 +716,16 @@ sub _describe_compile_spec_entry_result {
   : ref($info) ? ref($info) : 'SCALAR';
 
  return "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
+}
+
+sub _describe_spec_descr_entries_result {
+ my ($specretv) = @_;
+
+ my $value_desc = !defined($specretv)
+  ? 'undef'
+  : ref($specretv) ? ref($specretv) : 'SCALAR';
+
+ return "spec_descr expects an ARRAY ref of parsed bootstrap entries; got $value_desc";
 }
 
 #------------------------------------------------------------------------------

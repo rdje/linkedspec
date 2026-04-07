@@ -7458,6 +7458,71 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'spec_descr invalid tuple records the failing rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr invalid tuple records label-scoped generated handler source label');
 };
+subtest 'compiler_spec_descr_records_structured_invalid_callback_contract_with_runtime_ctx_ref' => sub {
+    plan tests => 13;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for spec_descr invalid-callback-contract test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for spec_descr invalid-callback-contract test');
+
+    my $runtime_ctx;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        $compiled = LinkedSpec::Compiler::spec_descr(
+            $retv,
+            [],
+            { runtime_ctx_ref => \$runtime_ctx },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Compiler::spec_descr returns without outer die when compile_spec_entry callback contract is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::spec_descr returns undef when compile_spec_entry callback contract is invalid under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref for invalid callback contracts');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid callback contract records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid callback contract records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid callback contract records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid callback contract records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec_entry callback must be CODE', 'spec_descr invalid callback contract preserves targeted contract detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr invalid callback contract still seeds top_rule from the first parsed rule');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr invalid callback contract leaves rule_label absent before rule iteration starts');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr invalid callback contract records label-scoped generated handler source label');
+};
+subtest 'linkedspec_spec_descr_records_structured_invalid_entry_container_with_runtime_ctx_ref' => sub {
+    plan tests => 11;
+
+    my $runtime_ctx;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        $compiled = LinkedSpec::spec_descr(
+            {},
+            {
+                runtime_ctx_ref => \$runtime_ctx,
+                top_rule => 'RequestedTop',
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'LinkedSpec::spec_descr returns without outer die when the parsed-entry container is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'LinkedSpec::spec_descr returns undef when the parsed-entry container is invalid under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::spec_descr exposes runtime context through runtime_ctx_ref for invalid parsed-entry containers');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid parsed-entry container records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid parsed-entry container records spec_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid parsed-entry container records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid parsed-entry container records summary');
+    is($runtime_ctx->{last_error}{detail}, 'spec_descr expects an ARRAY ref of parsed bootstrap entries; got HASH', 'spec_descr invalid parsed-entry container preserves targeted contract detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'spec_descr invalid parsed-entry container preserves requested top_rule continuity');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr invalid parsed-entry container leaves rule_label absent before any parsed rule exists');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'spec_descr invalid parsed-entry container records top-rule generated handler identity');
+};
 subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
     plan tests => 4;
 

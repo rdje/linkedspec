@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-07 - Phase 5: tighten spec_descr pre-entry contract diagnostics
+
+- updated `perl/LinkedSpec/Compiler.pm` so low-level `spec_descr(...)` no longer raw-dies on malformed pre-entry contracts before its newer structured diagnostics can engage: invalid non-CODE `compile_spec_entry` callbacks and malformed non-ARRAY parsed-entry containers now return `undef` and normalize into `compiler_pipeline:spec_descr` payloads when `runtime_ctx_ref` is in use,
+- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::spec_descr(...)` and public `LinkedSpec::spec_descr(...)` usage so invalid callback contracts and invalid parsed-entry containers now lock `top_rule` / `handler_source_label` continuity at that low-level seam too,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats low-level `spec_descr(...)` contract validation as part of the stable Phase 5 diagnostics surface now instead of assuming only in-loop callback failure shapes are normalized there.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-06 - Phase 5: add structured spec_descr runtime context
 
 - updated `perl/LinkedSpec/Compiler.pm` so the low-level `spec_descr(...)` surface now accepts an optional `{ runtime_ctx_ref => \$ctx }` options hash, seeds `top_rule` from the parsed entries when available, and normalizes both thrown and malformed non-throwing `compile_spec_entry(...)` failures into the same `compiler_pipeline:spec_descr` payload family instead of leaving low-level callers with a raw die or local undef-only path,
