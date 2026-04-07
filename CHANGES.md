@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-07 - Phase 5: tighten spec_gdata shape diagnostics
+
+- updated `perl/LinkedSpec/Compiler.pm` so low-level default `spec_gdata(...)` now validates its descriptor input shape explicitly instead of relying on incidental Perl reference failures: it rejects malformed top-level spec maps, malformed per-rule info hashes, malformed `gdata` arrays, malformed dependency entries, malformed dependency labels/indices, missing referenced rules, and malformed referenced `re` arrays with targeted detail strings,
+- widened `t/phase0_regression.t` with both a direct `LinkedSpec::Compiler::spec_gdata(...)` regression and a `run_get_pipeline(...)` continuity regression so malformed descriptor content now locks a specific `compiler_pipeline:build_final_descr` payload detail such as `spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR`, with preserved `rule_label` / `handler_source_label` continuity,
+- refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats explicit `spec_gdata(...)` shape validation as part of the stable Phase 5 final-descriptor diagnostics contract now instead of assuming that seam only preserves thrown `LinkedRE::or(...)`-style failures.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-07 - Phase 5: tighten spec_descr entry-shape diagnostics
 
 - updated `perl/LinkedSpec/Compiler.pm` so low-level `spec_descr(...)` now also validates each individual parsed bootstrap entry before invoking the compile callback, instead of letting malformed later entries fall through into callback-specific behavior,

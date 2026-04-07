@@ -8931,6 +8931,75 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'final descriptor assembly die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
 };
+subtest 'compiler_spec_gdata_rejects_malformed_rule_gdata_shape_with_specific_detail' => sub {
+    plan tests => 3;
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::spec_gdata({
+            Top => {
+                re    => ['a'],
+                gdata => 'not-an-array',
+                meta  => {},
+            },
+        });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok(!$ok_run, 'spec_gdata dies when rule gdata shape is malformed');
+    ok(!defined($ret), 'spec_gdata does not return gdata when rule gdata shape is malformed');
+    is(normalize_error($err), "spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'spec_gdata reports the specific malformed gdata-shape detail');
+};
+subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
+    plan tests => 12;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx = {
+        top_rule => undef,
+        parser_source_chunks_ref => [],
+    };
+
+    my ($ok_run, $ret, $err) = (0, undef, '');
+    $ok_run = eval {
+        $ret = LinkedSpec::Compiler::run_get_pipeline(
+            \$spec_content,
+            { return_descr => 1 },
+            {
+                runtime_ctx => $runtime_ctx,
+                compile_spec_entry => sub {
+                    return (
+                        'Top',
+                        {
+                            re    => ['a'],
+                            gdata => 'not-an-array',
+                            meta  => {},
+                        },
+                    );
+                },
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline traps malformed rule gdata shape without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when final descriptor assembly sees malformed rule gdata shape');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'malformed rule gdata shape records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'malformed rule gdata shape records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'malformed rule gdata shape records build_final_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'malformed rule gdata shape records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'malformed rule gdata shape records summary');
+    is($runtime_ctx->{last_error}{detail}, "spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'malformed rule gdata shape preserves the specific spec_gdata contract detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'malformed rule gdata shape records the active gdata-compilation rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'malformed rule gdata shape records label-scoped generated handler source label when variant is not known yet');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'malformed rule gdata shape leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'malformed rule gdata shape leaves inline-spec spec_path empty');
+};
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_spec_gdata_dies_mid_rule' => sub {
     plan tests => 12;
 

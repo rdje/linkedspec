@@ -488,23 +488,49 @@ sub spec_gdata {
  }, DUMP_MEDIUM);
 
  if (_trace_should_dump(DUMP_HIGH)) {
-  _trace_log_dump("=== SPEC GDATA DUMP ===\n");
+ _trace_log_dump("=== SPEC GDATA DUMP ===\n");
   _trace_log_dump(_dump_value($sg));
   _trace_log_dump("=== END SPEC GDATA DUMP ===\n");
  }
 
+ _die_with_detail(_describe_spec_gdata_spec_result($sg))
+  unless ref($sg) eq 'HASH';
+
 my %gdata;
 foreach my $label (keys %$sg) {
   $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
+  my $rule_info = $sg->{$label};
+  _die_with_detail(_describe_spec_gdata_rule_info_result($label, $rule_info))
+   unless ref($rule_info) eq 'HASH';
+  my $rule_gdata = $rule_info->{gdata};
+  _die_with_detail(_describe_spec_gdata_rule_gdata_result($label, $rule_gdata))
+   unless ref($rule_gdata) eq 'ARRAY';
   my @lgdata;
-  foreach my $gde (@{$$sg{$label}{gdata}}) {
-   if (exists $$sg{$$gde{label}}{re}[$$gde{idx}]) {
-    push @lgdata, $$sg{$$gde{label}}{re}[$$gde{idx}]
+  for (my $gde_idx = 0; $gde_idx < @$rule_gdata; ++$gde_idx) {
+   my $gde = $rule_gdata->[$gde_idx];
+   _die_with_detail(_describe_spec_gdata_dependency_result($label, $gde, $gde_idx))
+    unless ref($gde) eq 'HASH';
+   my $dep_label = $gde->{label};
+   _die_with_detail(_describe_spec_gdata_dependency_label_result($label, $dep_label, $gde_idx))
+    unless defined($dep_label) && !ref($dep_label) && length($dep_label);
+   my $dep_idx = $gde->{idx};
+   _die_with_detail(_describe_spec_gdata_dependency_index_result($label, $dep_idx, $gde_idx))
+    unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
+   _die_with_detail(_describe_spec_gdata_dependency_rule_missing($label, $dep_label, $dep_idx))
+    unless exists $sg->{$dep_label};
+   my $dep_rule = $sg->{$dep_label};
+   _die_with_detail(_describe_spec_gdata_dependency_rule_info_result($label, $dep_label, $dep_rule))
+    unless ref($dep_rule) eq 'HASH';
+   my $dep_re = $dep_rule->{re};
+   _die_with_detail(_describe_spec_gdata_dependency_re_result($label, $dep_label, $dep_re))
+    unless ref($dep_re) eq 'ARRAY';
+   if (exists $dep_re->[$dep_idx]) {
+    push @lgdata, $dep_re->[$dep_idx]
    } else {
-    _trace_decision("spec_gdata:$label", 0, "missing regex mapping for label=$$gde{label} idx=$$gde{idx}", DUMP_HIGH);
-    my $error_msg = "Rule '$label': Referenced rule '$$gde{label}' has no regex at index $$gde{idx}";
-    my $context = "Referenced rule: $$gde{label}, Requested index: $$gde{idx}, Available indices: " .
-                  (defined $$sg{$$gde{label}}{re} ? "0.." . ($#{$$sg{$$gde{label}}{re}}) : "none");
+    _trace_decision("spec_gdata:$label", 0, "missing regex mapping for label=$dep_label idx=$dep_idx", DUMP_HIGH);
+    my $error_msg = "Rule '$label': Referenced rule '$dep_label' has no regex at index $dep_idx";
+    my $context = "Referenced rule: $dep_label, Requested index: $dep_idx, Available indices: " .
+                  (defined $dep_re ? "0.." . ($#$dep_re) : "none");
     _trace_log_output(DUMP_NONE, $error_msg, $context);
     if (_trace_should_dump(DUMP_HIGH)) {
      _trace_log_dump("=== GDATA ERROR CONTEXT ===\n");
@@ -752,6 +778,88 @@ sub _describe_spec_descr_entry_result {
  my $entry_idx = defined($idx) ? $idx : '?';
 
  return "spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
+}
+
+sub _describe_contract_value_kind {
+ my ($value) = @_;
+
+ return 'undef' unless defined($value);
+ return ref($value) ? ref($value) : 'SCALAR';
+}
+
+sub _describe_contract_scalar_value {
+ my ($value) = @_;
+
+ return 'undef' unless defined($value);
+ return ref($value) ? ref($value) : "'" . $value . "'";
+}
+
+sub _describe_spec_gdata_spec_result {
+ my ($sg) = @_;
+
+ return 'spec_gdata expects a HASH ref of compiled rule info; got ' . _describe_contract_value_kind($sg);
+}
+
+sub _describe_spec_gdata_rule_info_result {
+ my ($label, $rule_info) = @_;
+
+ return "spec_gdata expects rule '$label' info to be HASH ref; got " . _describe_contract_value_kind($rule_info);
+}
+
+sub _describe_spec_gdata_rule_gdata_result {
+ my ($label, $rule_gdata) = @_;
+
+ return "spec_gdata expects rule '$label' gdata to be ARRAY ref; got " . _describe_contract_value_kind($rule_gdata);
+}
+
+sub _describe_spec_gdata_dependency_result {
+ my ($label, $gde, $gde_idx) = @_;
+
+ return "spec_gdata expects rule '$label' gdata[$gde_idx] to be HASH ref; got " . _describe_contract_value_kind($gde);
+}
+
+sub _describe_spec_gdata_dependency_label_result {
+ my ($label, $dep_label, $gde_idx) = @_;
+
+ return "spec_gdata expects rule '$label' gdata[$gde_idx]{label} to be a non-empty scalar; got " . _describe_contract_scalar_value($dep_label);
+}
+
+sub _describe_spec_gdata_dependency_index_result {
+ my ($label, $dep_idx, $gde_idx) = @_;
+
+ return "spec_gdata expects rule '$label' gdata[$gde_idx]{idx} to be a non-negative integer; got " . _describe_contract_scalar_value($dep_idx);
+}
+
+sub _describe_spec_gdata_dependency_rule_missing {
+ my ($label, $dep_label, $dep_idx) = @_;
+
+ return "spec_gdata expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule";
+}
+
+sub _describe_spec_gdata_dependency_rule_info_result {
+ my ($label, $dep_label, $dep_rule) = @_;
+
+ return "spec_gdata expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got " . _describe_contract_value_kind($dep_rule);
+}
+
+sub _describe_spec_gdata_dependency_re_result {
+ my ($label, $dep_label, $dep_re) = @_;
+
+ return "spec_gdata expects referenced rule '$dep_label' regex list for rule '$label' to be ARRAY ref; got " . _describe_contract_value_kind($dep_re);
+}
+
+sub _die_with_detail {
+ my ($detail) = @_;
+
+ die((defined($detail) ? $detail : '') . "\n");
+}
+
+sub _normalize_error_detail {
+ my ($detail) = @_;
+
+ return '' unless defined($detail);
+ $detail =~ s/\n+\z//;
+ return $detail;
 }
 
 #------------------------------------------------------------------------------
@@ -1090,7 +1198,7 @@ if ($build_final_descr_error) {
    $runtime_ctx,
    stage => 'build_final_descr',
    summary => 'Final descriptor assembly failed',
-   detail => $build_final_descr_error,
+   detail => _normalize_error_detail($build_final_descr_error),
    rule_label => $build_final_descr_rule_label,
    handler_source_label => $build_final_descr_handler_source_label,
   );
