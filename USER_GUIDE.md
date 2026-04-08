@@ -1180,6 +1180,7 @@ That same owner boundary now covers read-side state access too:
 - generated-descriptor validation now reads the descriptor-owned rule map through `LinkedSpec::CompilerState` too,
 - ordered compiled-rule iteration now also goes through one `LinkedSpec::CompilerState` view rather than rebuilding it ad hoc from `rule_order + rules_by_label`,
 - and compiled-spec dependency lookup during `spec_gdata(...)` now also goes through `LinkedSpec::CompilerState` helpers rather than direct compiler-side rule-map probing,
+- while compiled-descriptor metadata assembly now also goes through `LinkedSpec::CompilerState` rather than `Compiler.pm` mutating owner metadata locally,
 - so `Compiler.pm` and `Validation.pm` no longer need to reach into raw compiled-state fields directly on the active path.
 
 If you want the same structured diagnostics continuity there, `spec_descr(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `spec_descr(...)` now returns `undef` and records a normal `compiler_pipeline:spec_descr` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.

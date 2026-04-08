@@ -103,6 +103,16 @@ sub compiled_spec_state_meta {
  }
 }
 
+sub build_compiled_descriptor_meta {
+ my ($compiled_spec_state, %args) = @_;
+ return {} unless is_compiled_spec_state($compiled_spec_state);
+ my $meta = compiled_spec_state_meta($compiled_spec_state);
+ $meta->{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
+ $meta->{action_rewriter_migration} = $args{action_rewriter_migration}
+  if exists $args{action_rewriter_migration};
+ return $meta
+}
+
 sub record_compiled_spec_rule {
  my ($state, $label, $info, $duplicate_seen) = @_;
  die "(LinkedSpec::CompilerState::record_compiled_spec_rule) -E- compiled spec state is invalid"

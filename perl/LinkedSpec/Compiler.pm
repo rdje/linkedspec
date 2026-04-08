@@ -399,6 +399,10 @@ sub _compiled_spec_state_meta {
  return _call_compiler_state('compiled_spec_state_meta', @_)
 }
 
+sub _build_compiled_descriptor_meta {
+ return _call_compiler_state('build_compiled_descriptor_meta', @_)
+}
+
 sub _record_compiled_spec_rule {
  return _call_compiler_state('record_compiled_spec_rule', @_)
 }
@@ -724,9 +728,11 @@ sub _build_final_descr_state {
   : $spec_gdata_cb->($legacy_spec);
  my $compiled_gdata_state = _normalize_compiled_gdata_output($compiled_gdata_input, $compiled_state);
 
- my $compiled_state_meta = _compiled_spec_state_meta($compiled_state);
- $compiled_state_meta->{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
- $compiled_state_meta->{action_rewriter_migration} = _build_action_rewriter_migration_summary($compiled_state);
+ my $compiled_state_meta = _build_compiled_descriptor_meta(
+  $compiled_state,
+  parse_mode => $args{parse_mode},
+  action_rewriter_migration => _build_action_rewriter_migration_summary($compiled_state),
+ );
 
  return _new_compiled_descriptor_state(
   compiled_spec_state => $compiled_state,
