@@ -1090,7 +1090,7 @@ Descriptor summary fields:
 Descriptor topology fields:
 - `meta.descriptor_model`
 - `meta.definition_order`
-- `meta.rule_order`
+- `meta.compiled_rule_order`
 - `meta.duplicate_rule_labels`
 
 That distinction is intentional:
@@ -1113,7 +1113,7 @@ The current state-derived metadata is intentionally exposed at the descriptor bo
 
 - `meta.descriptor_model` is currently `compiled_spec_state_v1`,
 - `meta.definition_order` preserves the full rule-definition sequence, including repeated labels before last-definition-wins collapse,
-- `meta.rule_order` preserves the first-seen deterministic rule order,
+- `meta.compiled_rule_order` preserves the first-seen deterministic unique compiled rule order,
 - `meta.duplicate_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
 
 That same state-first rule now also reaches descriptor-level migration summary generation:
@@ -1154,7 +1154,7 @@ my $state = LinkedSpec::build_compiled_rule_table($entries, { return_state => 1 
 #   kind => 'compiled_spec_state',
 #   version => 1,
 #   definition_order => [ ... ],
-#   rule_order => [ ... ],
+#   compiled_rule_order => [ ... ],
 #   rules_by_label => { ... },
 #   duplicate_rule_labels => [ ... ],
 # }
@@ -1190,7 +1190,7 @@ That same owner boundary now covers read-side state access too:
 - compiler trace/logging reads such as compiled-spec definition order and duplicate-label lists now go through `LinkedSpec::CompilerState` accessors,
 - generated-descriptor validation now also consumes one owner-provided descriptor-state validation view from `LinkedSpec::CompilerState`, so rule rows, gdata rows, and by-label lookup are assembled once at the owner boundary instead of being rebuilt through repeated owner dispatch from inside validation loops,
 - and that validation logic now also goes through one shared validation-view engine in `Validation.pm`, so the legacy `validate_dependency_regex_references(...)` surface and the newer descriptor-state validation surface no longer carry separate copies of the same gdata/rule consistency checks,
-- ordered compiled-rule iteration now also goes through one `LinkedSpec::CompilerState` view rather than rebuilding it ad hoc from `rule_order + rules_by_label`,
+- ordered compiled-rule iteration now also goes through one `LinkedSpec::CompilerState` view rather than rebuilding it ad hoc from `compiled_rule_order + rules_by_label`,
 - and compiled-spec dependency lookup during `build_dependency_regex_map(...)` now also goes through `LinkedSpec::CompilerState` helpers rather than direct compiler-side rule-map probing,
 - while compiled-descriptor metadata assembly now also goes through `LinkedSpec::CompilerState` rather than `Compiler.pm` mutating owner metadata locally,
 - and the `action_rewriter_migration` summary itself is now shaped inside `LinkedSpec::CompilerState` too, with `Compiler.pm` only tracing that owner-produced result,

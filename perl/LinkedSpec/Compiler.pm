@@ -225,8 +225,8 @@ sub _compiled_spec_state_rule_info {
  return _call_compiler_state('compiled_spec_state_rule_info', @_)
 }
 
-sub _compiled_spec_state_rule_order {
- return _call_compiler_state('compiled_spec_state_rule_order', @_)
+sub _compiled_spec_state_compiled_rule_order {
+ return _call_compiler_state('compiled_spec_state_compiled_rule_order', @_)
 }
 
 sub _compiled_spec_state_rule_rows {

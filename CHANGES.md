@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Phase 5: rename compiled rule-order state fields
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the explicit compiled-spec state now records `compiled_rule_order` instead of the more ambiguous `rule_order`, and the preferred read accessor is now `compiled_spec_state_compiled_rule_order(...)`,
+- updated the same state model so outward descriptor metadata now exposes `meta.compiled_rule_order` instead of `meta.rule_order`, keeping the descriptor surface aligned with the internal compiled-spec model,
+- widened `t/phase0_regression.t` so the state-model and descriptor-metadata locks now expect `compiled_rule_order` through compiled-spec state, compiled-descriptor validation, migration-summary input, and `return_descr` metadata,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats `compiled_rule_order` as the active term for the deterministic unique compiled-rule sequence.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-09 - Phase 5: rename active dependency-regex seams
 
 - updated `perl/LinkedSpec/Compiler.pm` so the active derived-regex seam is now named consistently around `build_dependency_regex_map(...)`, with active helper names, trace labels, contract detail builders, runtime diagnostics wording, and final-descriptor builder variables all speaking in terms of dependency-regex state instead of the older mixed `spec_gdata` / `gdata` vocabulary,

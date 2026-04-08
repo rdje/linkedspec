@@ -7370,7 +7370,7 @@ SPEC
     ok(defined($state) && ref($state) eq 'HASH', 'build_compiled_rule_table return_state still returns a hashref');
     is($state->{kind}, 'compiled_spec_state', 'build_compiled_rule_table return_state exposes compiled-spec state kind');
     is($state->{version}, 1, 'build_compiled_rule_table return_state exposes compiled-spec state version');
-    is_deeply($state->{rule_order}, ['Top'], 'build_compiled_rule_table return_state preserves deterministic unique rule order');
+    is_deeply($state->{compiled_rule_order}, ['Top'], 'build_compiled_rule_table return_state preserves deterministic unique compiled rule order');
     ok(ref($state->{definition_order}) eq 'ARRAY' && @{$state->{definition_order}} == 1, 'build_compiled_rule_table return_state preserves definition-order records');
     is($state->{definition_order}[0]{label}, 'Top', 'build_compiled_rule_table return_state definition-order record preserves rule label');
     ok(ref($state->{rules_by_label}) eq 'HASH' && ref($state->{rules_by_label}{Top}{handler}) eq 'CODE', 'build_compiled_rule_table return_state exposes rules_by_label with compiled handler coderef');
@@ -9149,7 +9149,7 @@ SPEC
     ok(ref($descriptor_state->{compiled_dependency_regex_state}) eq 'HASH', 'final descriptor state also exposes preferred dependency-regex state');
     is($descriptor_state->{compiled_dependency_regex_state}{kind}, 'compiled_dependency_regex_state', 'final descriptor state keeps the explicit compiled-dependency-regex state');
     is_deeply($descriptor_state->{meta}{definition_order}, ['Top', 'Child'], 'final descriptor state meta preserves full definition order');
-    is_deeply($descriptor_state->{meta}{rule_order}, ['Top', 'Child'], 'final descriptor state meta preserves deterministic unique rule order');
+    is_deeply($descriptor_state->{meta}{compiled_rule_order}, ['Top', 'Child'], 'final descriptor state meta preserves deterministic unique compiled rule order');
     ok(exists $descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}{Top}, 'final descriptor state keeps dependency-regex map inside dependency-regex state');
     ok(!exists $descriptor_state->{compiled_gdata_state}, 'final descriptor state no longer exposes compiled_gdata_state alias');
     ok(!exists $descriptor_state->{compiled_dependency_regex_state}{gdata_by_label}, 'dependency-regex state no longer exposes gdata_by_label alias');
@@ -11981,7 +11981,7 @@ SPEC
 
     my $orig_build_final_descr_state = \&LinkedSpec::Compiler::_build_final_descr_state;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_undef_dependency_regex_builder_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_rule_order);
+    my ($saw_undef_dependency_regex_builder_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_compiled_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Compiler::_build_final_descr_state = sub {
@@ -11991,10 +11991,10 @@ SPEC
             $saw_top_rule_spec = $saw_compiled_spec_state
                 && ref($compiled_spec_input->{rules_by_label}) eq 'HASH'
                 && exists $compiled_spec_input->{rules_by_label}{Top};
-            $saw_rule_order = $saw_compiled_spec_state
-                && ref($compiled_spec_input->{rule_order}) eq 'ARRAY'
-                && @{$compiled_spec_input->{rule_order}} == 1
-                && $compiled_spec_input->{rule_order}[0] eq 'Top';
+            $saw_compiled_rule_order = $saw_compiled_spec_state
+                && ref($compiled_spec_input->{compiled_rule_order}) eq 'ARRAY'
+                && @{$compiled_spec_input->{compiled_rule_order}} == 1
+                && $compiled_spec_input->{compiled_rule_order}[0] eq 'Top';
             return $orig_build_final_descr_state->(@_);
         };
 
@@ -12019,7 +12019,7 @@ SPEC
     ok($saw_undef_dependency_regex_builder_cb, 'compiler pipeline now lets final descriptor state assembly own the default build_dependency_regex_map callback');
     ok($saw_compiled_spec_state, 'compiler pipeline now forwards explicit compiled-spec state into final descriptor state assembly');
     ok($saw_top_rule_spec, 'compiled-spec state forwarded into final descriptor state assembly still exposes the Top rule through rules_by_label');
-    ok($saw_rule_order, 'compiled-spec state forwarded into final descriptor state assembly preserves deterministic rule order');
+    ok($saw_compiled_rule_order, 'compiled-spec state forwarded into final descriptor state assembly preserves deterministic compiled rule order');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor state owner supplies build_dependency_regex_map');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor state assembly still preserves compiled handler coderef');
     is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
@@ -12037,7 +12037,7 @@ SPEC
 
     my $orig_validate_compiled_descriptor_state = \&LinkedSpec::Validation::validate_compiled_descriptor_state;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_descriptor_state, $saw_definition_order, $saw_rule_order);
+    my ($saw_descriptor_state, $saw_definition_order, $saw_compiled_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub {
@@ -12048,11 +12048,11 @@ SPEC
                 && @{$descriptor_state->{compiled_spec_state}{definition_order}} == 2
                 && $descriptor_state->{compiled_spec_state}{definition_order}[0]{label} eq 'Top'
                 && $descriptor_state->{compiled_spec_state}{definition_order}[1]{label} eq 'Child';
-            $saw_rule_order = $saw_descriptor_state
-                && ref($descriptor_state->{compiled_spec_state}{rule_order}) eq 'ARRAY'
-                && @{$descriptor_state->{compiled_spec_state}{rule_order}} == 2
-                && $descriptor_state->{compiled_spec_state}{rule_order}[0] eq 'Top'
-                && $descriptor_state->{compiled_spec_state}{rule_order}[1] eq 'Child';
+            $saw_compiled_rule_order = $saw_descriptor_state
+                && ref($descriptor_state->{compiled_spec_state}{compiled_rule_order}) eq 'ARRAY'
+                && @{$descriptor_state->{compiled_spec_state}{compiled_rule_order}} == 2
+                && $descriptor_state->{compiled_spec_state}{compiled_rule_order}[0] eq 'Top'
+                && $descriptor_state->{compiled_spec_state}{compiled_rule_order}[1] eq 'Child';
             return $orig_validate_compiled_descriptor_state->(@_);
         };
         $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
@@ -12063,7 +12063,7 @@ SPEC
     ok($ok_run, 'compiler pipeline succeeds while compiled-descriptor validation is trapped') or diag(normalize_error($err));
     ok($saw_descriptor_state, 'generated-descriptor validation now receives compiled descriptor state directly');
     ok($saw_definition_order, 'compiled-descriptor validation sees full definition-order state');
-    ok($saw_rule_order, 'compiled-descriptor validation sees deterministic unique rule order');
+    ok($saw_compiled_rule_order, 'compiled-descriptor validation sees deterministic unique compiled rule order');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when compiled-descriptor validation is trapped');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiled-descriptor validation path still preserves compiled handler coderef');
     is($descr->{meta}{definition_order}[0], 'Top', 'descriptor metadata still exposes definition-order data after direct state validation');
@@ -12120,17 +12120,17 @@ SPEC
 
     my $orig_build_action_rewriter_migration_summary = \&LinkedSpec::Compiler::_build_action_rewriter_migration_summary;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_compiled_spec_state, $saw_rule_order);
+    my ($saw_compiled_spec_state, $saw_compiled_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Compiler::_build_action_rewriter_migration_summary = sub {
             my ($summary_input) = @_;
             $saw_compiled_spec_state = ref($summary_input) eq 'HASH' && ($summary_input->{kind} || '') eq 'compiled_spec_state';
-            $saw_rule_order = $saw_compiled_spec_state
-                && ref($summary_input->{rule_order}) eq 'ARRAY'
-                && @{$summary_input->{rule_order}} == 2
-                && $summary_input->{rule_order}[0] eq 'Top'
-                && $summary_input->{rule_order}[1] eq 'Leaf';
+            $saw_compiled_rule_order = $saw_compiled_spec_state
+                && ref($summary_input->{compiled_rule_order}) eq 'ARRAY'
+                && @{$summary_input->{compiled_rule_order}} == 2
+                && $summary_input->{compiled_rule_order}[0] eq 'Top'
+                && $summary_input->{compiled_rule_order}[1] eq 'Leaf';
             return $orig_build_action_rewriter_migration_summary->(@_);
         };
         $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
@@ -12140,7 +12140,7 @@ SPEC
 
     ok($ok_run, 'compiler pipeline succeeds while migration-summary builder is trapped') or diag(normalize_error($err));
     ok($saw_compiled_spec_state, 'final descriptor assembly now builds the action-rewriter migration summary from compiled-spec state');
-    ok($saw_rule_order, 'migration-summary builder receives compiled-spec state with deterministic source rule order');
+    ok($saw_compiled_rule_order, 'migration-summary builder receives compiled-spec state with deterministic compiled rule order');
     ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor still exposes action-rewriter migration summary metadata');
     is_deeply($descr->{meta}{action_rewriter_migration}{language_agnostic_ready_rules}, ['Top', 'Leaf'], 'migration summary ready-rule list now follows source rule order');
     is($descr->{meta}{action_rewriter_migration}{total_rules}, 2, 'migration summary still counts compiled rules correctly');
@@ -42509,7 +42509,7 @@ SPEC
     is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
     is($default_descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'default parse mode descriptor records the compiled-spec state model');
     is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default parse mode descriptor preserves definition-order metadata');
-    is_deeply($default_descr->{meta}{rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic rule order metadata');
+    is_deeply($default_descr->{meta}{compiled_rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic compiled-rule-order metadata');
     is_deeply($default_descr->{meta}{duplicate_rule_labels}, [], 'default parse mode descriptor preserves duplicate-rule metadata');
 
     my $consume_descr = LinkedSpec::Get(

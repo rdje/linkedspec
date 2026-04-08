@@ -18,7 +18,7 @@ sub new_compiled_spec_state {
   kind => 'compiled_spec_state',
   version => 1,
   definition_order => [],
-  rule_order => [],
+  compiled_rule_order => [],
   rules_by_label => {},
   duplicate_rule_labels => [],
  }
@@ -30,7 +30,7 @@ sub is_compiled_spec_state {
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_spec_state';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless ref($value->{definition_order}) eq 'ARRAY';
- return 0 unless ref($value->{rule_order}) eq 'ARRAY';
+ return 0 unless ref($value->{compiled_rule_order}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
  return 0 unless ref($value->{duplicate_rule_labels}) eq 'ARRAY';
  return 1
@@ -39,7 +39,7 @@ sub is_compiled_spec_state {
 sub compiled_spec_state_rule_count {
  my ($state) = @_;
  return 0 unless is_compiled_spec_state($state);
- return scalar(@{$state->{rule_order}})
+ return scalar(@{$state->{compiled_rule_order}})
 }
 
 sub compiled_spec_state_rules_by_label {
@@ -61,17 +61,17 @@ sub compiled_spec_state_rule_info {
  return $state->{rules_by_label}{$label}
 }
 
-sub compiled_spec_state_rule_order {
+sub compiled_spec_state_compiled_rule_order {
  my ($state) = @_;
  return [] unless is_compiled_spec_state($state);
- return $state->{rule_order}
+ return $state->{compiled_rule_order}
 }
 
 sub compiled_spec_state_rule_rows {
  my ($state) = @_;
  return [] unless is_compiled_spec_state($state);
  my $rules_by_label = compiled_spec_state_rules_by_label($state);
- return [map { [$_, $rules_by_label->{$_}] } @{compiled_spec_state_rule_order($state)}]
+ return [map { [$_, $rules_by_label->{$_}] } @{compiled_spec_state_compiled_rule_order($state)}]
 }
 
 sub compiled_spec_state_definition_order {
@@ -98,7 +98,7 @@ sub compiled_spec_state_meta {
  return {
   descriptor_model => 'compiled_spec_state_v1',
   definition_order => [map { $_->{label} } @{compiled_spec_state_definition_order($state)}],
-  rule_order => [@{$state->{rule_order}}],
+  compiled_rule_order => [@{$state->{compiled_rule_order}}],
   duplicate_rule_labels => [@{$state->{duplicate_rule_labels}}],
  }
 }
@@ -276,11 +276,11 @@ sub record_compiled_spec_rule {
   unless is_compiled_spec_state($state);
 
  my $is_duplicate = exists $state->{rules_by_label}{$label};
- push @{$state->{definition_order}}, {
+push @{$state->{definition_order}}, {
   label => $label,
   info => $info,
  };
- push @{$state->{rule_order}}, $label unless $is_duplicate;
+ push @{$state->{compiled_rule_order}}, $label unless $is_duplicate;
  if ($is_duplicate && ref($duplicate_seen) eq 'HASH' && !$duplicate_seen->{$label}++) {
   push @{$state->{duplicate_rule_labels}}, $label;
  }
@@ -298,7 +298,7 @@ sub new_compiled_dependency_regex_state {
  die "(LinkedSpec::CompilerState::new_compiled_dependency_regex_state) -E- compiled dependency-regex map must be HASH ref"
   unless ref($compiled_dependency_regex_by_label) eq 'HASH';
 
- my $source_rule_order = [@{compiled_spec_state_rule_order($compiled_spec_state)}];
+ my $source_rule_order = [@{compiled_spec_state_compiled_rule_order($compiled_spec_state)}];
  my %seen_compiled;
  my @compiled_label_order = grep {
   exists($compiled_dependency_regex_by_label->{$_}) && !$seen_compiled{$_}++
@@ -398,12 +398,12 @@ sub compiled_descriptor_state_dependency_regex_rows {
  return [] unless is_compiled_descriptor_state($state);
 
  my $dependency_regex_by_label = compiled_descriptor_state_dependency_regex_by_label($state);
- my $rule_order = compiled_spec_state_rule_order(compiled_descriptor_state_spec_state($state));
+ my $compiled_rule_order = compiled_spec_state_compiled_rule_order(compiled_descriptor_state_spec_state($state));
  my %seen;
  my @rows = map {
   $seen{$_} = 1;
   [$_, $dependency_regex_by_label->{$_}]
- } grep { exists $dependency_regex_by_label->{$_} } @$rule_order;
+ } grep { exists $dependency_regex_by_label->{$_} } @$compiled_rule_order;
 
  push @rows, map { [$_, $dependency_regex_by_label->{$_}] } sort grep { !$seen{$_} } keys %$dependency_regex_by_label;
  return \@rows
