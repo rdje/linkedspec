@@ -4770,7 +4770,7 @@ subtest 'get_parser_malformed_spec_reports_validation_error' => sub {
         local *LinkedSpec::report_dsl_error = sub { die "__UNEXPECTED_LINKEDSPEC_REPORT_DSL_ERROR__\n" };
         local *LinkedSpec::validate_spec_content = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_SPEC_CONTENT__\n" };
         local *LinkedSpec::validate_rule_definition = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_DEFINITION__\n" };
-        local *LinkedSpec::validate_gdata_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
+        local *LinkedSpec::validate_dependency_regex_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
         local *LinkedSpec::validate_dsl_syntax = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_DSL_SYNTAX__\n" };
         local *LinkedSpec::extract_regex_literals_from_rule_rhs = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_REGEX_LITERALS_FROM_RULE_RHS__\n" };
         run_get_parser_with_captured_io($tmp_spec);
@@ -8237,7 +8237,7 @@ SPEC
         local *LinkedSpec::report_dsl_error = sub { die "__UNEXPECTED_LINKEDSPEC_REPORT_DSL_ERROR__\n" };
         local *LinkedSpec::validate_spec_content = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_SPEC_CONTENT__\n" };
         local *LinkedSpec::validate_rule_definition = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_DEFINITION__\n" };
-        local *LinkedSpec::validate_gdata_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
+        local *LinkedSpec::validate_dependency_regex_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
         local *LinkedSpec::validate_dsl_syntax = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_DSL_SYNTAX__\n" };
         local *LinkedSpec::extract_regex_literals_from_rule_rhs = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_REGEX_LITERALS_FROM_RULE_RHS__\n" };
         $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
@@ -8748,8 +8748,8 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when generated descriptor validation rejects a rule gdata reference');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiler pipeline records structured error context for generated descriptor validation rejection');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'generated descriptor validation rejection records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'generated descriptor validation rejection records gdata-validation stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'generated descriptor validation rejection records combined owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dependency_regex_references', 'generated descriptor validation rejection records dependency-regex-validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dependency_regex_references', 'generated descriptor validation rejection records combined owner stage');
     is($runtime_ctx->{last_error}{summary}, "Invalid regex index 1 for rule 'Leaf'", 'generated descriptor validation rejection records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/Rule 'Top' references out-of-bounds regex index 1 on rule 'Leaf'/, 'generated descriptor validation rejection records owning-rule detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'generated descriptor validation rejection records the owning compiled rule label');
@@ -8787,8 +8787,8 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when compiled descriptor validation dies');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiled descriptor validation die records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compiled descriptor validation die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'compiled descriptor validation die preserves validation stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'compiled descriptor validation die preserves combined compiler owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dependency_regex_references', 'compiled descriptor validation die preserves validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dependency_regex_references', 'compiled descriptor validation die preserves combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'compiled descriptor validation die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_COMPILED_DESCRIPTOR_STATE_DIE__/, 'compiled descriptor validation die records original thrown detail');
     is($runtime_ctx->{last_error}{top_rule}, 'Top', 'compiled descriptor validation die preserves the requested top_rule in structured diagnostics');
@@ -8796,7 +8796,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'compiled descriptor validation die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'compiled descriptor validation die leaves inline-spec spec_path empty');
 };
-subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_gdata_references_dies_mid_rule' => sub {
+subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_dependency_regex_references_dies_mid_rule' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -8823,11 +8823,11 @@ SPEC
     $err = $@ // '' unless $ok_run;
 
     ok($ok_run, 'compiler pipeline traps nested validate_rule_definition die and returns without outer die') or diag(normalize_error($err));
-    ok(!defined($ret), 'compiler pipeline returns undef when validate_gdata_references dies while validating one rule');
+    ok(!defined($ret), 'compiler pipeline returns undef when validate_dependency_regex_references dies while validating one rule');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'nested validate_rule_definition die records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'nested validate_rule_definition die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'nested validate_rule_definition die records validate_gdata_references stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'nested validate_rule_definition die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'validate_dependency_regex_references', 'nested validate_rule_definition die records validate_dependency_regex_references stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_dependency_regex_references', 'nested validate_rule_definition die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, "Rule definition validation failed for rule 'Top'", 'nested validate_rule_definition die records specific validation summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_RULE_DEFINITION_DIE__/, 'nested validate_rule_definition die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'nested validate_rule_definition die records the owning compiled rule label');
@@ -8931,7 +8931,7 @@ SPEC
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_SPEC_GDATA_DIE__\n" };
+        local *LinkedSpec::Compiler::build_dependency_regex_map = sub { die "__FORCED_SPEC_GDATA_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
             { return_descr => 1 },
@@ -8954,12 +8954,12 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'final descriptor assembly die leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'final descriptor assembly die leaves inline-spec spec_path empty');
 };
-subtest 'compiler_spec_gdata_rejects_malformed_rule_gdata_shape_with_specific_detail' => sub {
+subtest 'compiler_build_dependency_regex_map_rejects_malformed_rule_gdata_shape_with_specific_detail' => sub {
     plan tests => 3;
 
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
-        $ret = LinkedSpec::Compiler::spec_gdata({
+        $ret = LinkedSpec::Compiler::build_dependency_regex_map({
             Top => {
                 re    => ['a'],
                 gdata => 'not-an-array',
@@ -8970,11 +8970,11 @@ subtest 'compiler_spec_gdata_rejects_malformed_rule_gdata_shape_with_specific_de
     };
     $err = $@ // '' unless $ok_run;
 
-    ok(!$ok_run, 'spec_gdata dies when rule gdata shape is malformed');
-    ok(!defined($ret), 'spec_gdata does not return gdata when rule gdata shape is malformed');
-    is(normalize_error($err), "spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'spec_gdata reports the specific malformed gdata-shape detail');
+    ok(!$ok_run, 'build_dependency_regex_map dies when rule gdata shape is malformed');
+    ok(!defined($ret), 'build_dependency_regex_map does not return gdata when rule gdata shape is malformed');
+    is(normalize_error($err), "build_dependency_regex_map expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'build_dependency_regex_map reports the specific malformed gdata-shape detail');
 };
-subtest 'compiler_spec_gdata_accepts_compiled_spec_state_input' => sub {
+subtest 'compiler_build_dependency_regex_map_accepts_compiled_spec_state_input' => sub {
     plan tests => 5;
 
     my $spec_content = <<'SPEC';
@@ -8986,18 +8986,18 @@ Child::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for compiled-state spec_gdata test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state spec_gdata test');
+    ok($parse_success, 'bootstrap parse succeeds for compiled-state build_dependency_regex_map test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state build_dependency_regex_map test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $gdata = LinkedSpec::Compiler::spec_gdata($compiled_state);
+    my $gdata = LinkedSpec::Compiler::build_dependency_regex_map($compiled_state);
 
-    ok(defined($gdata) && ref($gdata) eq 'HASH', 'spec_gdata accepts compiled-spec state input and returns a hashref');
-    ok(exists $gdata->{Top}, 'spec_gdata built from compiled-spec state still resolves Top dependency regex');
-    ok(!exists $gdata->{Child}, 'spec_gdata built from compiled-spec state omits dependency-free rules');
+    ok(defined($gdata) && ref($gdata) eq 'HASH', 'build_dependency_regex_map accepts compiled-spec state input and returns a hashref');
+    ok(exists $gdata->{Top}, 'build_dependency_regex_map built from compiled-spec state still resolves Top dependency regex');
+    ok(!exists $gdata->{Child}, 'build_dependency_regex_map built from compiled-spec state omits dependency-free rules');
 };
-subtest 'compiler_spec_gdata_return_state_builds_explicit_compiled_gdata_state' => sub {
-    plan tests => 10;
+subtest 'compiler_build_dependency_regex_map_return_state_builds_explicit_compiled_dependency_regex_state' => sub {
+    plan tests => 9;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9008,20 +9008,19 @@ Child::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for compiled-gdata-state test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-gdata-state test');
+    ok($parse_success, 'bootstrap parse succeeds for compiled dependency-regex-state test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled dependency-regex-state test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $gdata_state = LinkedSpec::Compiler::spec_gdata($compiled_state, { return_state => 1 });
+    my $gdata_state = LinkedSpec::Compiler::build_dependency_regex_map($compiled_state, { return_state => 1 });
 
-    ok(ref($gdata_state) eq 'HASH', 'spec_gdata return_state returns a hashref');
-    is($gdata_state->{kind}, 'compiled_gdata_state', 'spec_gdata return_state exposes explicit compiled-gdata-state kind');
-    is($gdata_state->{version}, 1, 'spec_gdata return_state exposes expected compiled-gdata-state version');
-    is_deeply($gdata_state->{source_rule_order}, ['Top', 'Child'], 'compiled gdata state preserves source rule order');
-    is_deeply($gdata_state->{compiled_label_order}, ['Top'], 'compiled gdata state preserves deterministic compiled label order');
-    ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
-    ok(exists $gdata_state->{dependency_regex_by_label}{Top} && !exists $gdata_state->{dependency_regex_by_label}{Child}, 'compiled gdata state also exposes preferred dependency-regex alias by label');
-    is_deeply($gdata_state->{dependency_regex_by_label}, $gdata_state->{gdata_by_label}, 'compiled gdata state keeps dependency-regex alias data aligned with legacy gdata alias');
+    ok(ref($gdata_state) eq 'HASH', 'build_dependency_regex_map return_state returns a hashref');
+    is($gdata_state->{kind}, 'compiled_dependency_regex_state', 'build_dependency_regex_map return_state exposes explicit compiled-dependency-regex-state kind');
+    is($gdata_state->{version}, 1, 'build_dependency_regex_map return_state exposes expected compiled-dependency-regex-state version');
+    is_deeply($gdata_state->{source_rule_order}, ['Top', 'Child'], 'compiled dependency-regex state preserves source rule order');
+    is_deeply($gdata_state->{compiled_label_order}, ['Top'], 'compiled dependency-regex state preserves deterministic compiled label order');
+    ok(exists $gdata_state->{dependency_regex_by_label}{Top} && !exists $gdata_state->{dependency_regex_by_label}{Child}, 'compiled dependency-regex state keeps only rules with compiled dependency regexes');
+    ok(!exists $gdata_state->{gdata_by_label}, 'compiled dependency-regex state no longer exposes legacy gdata_by_label alias');
 };
 subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
     plan tests => 16;
@@ -9126,7 +9125,7 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler-state owner routing still preserves compiled handler coderef');
 };
 subtest 'compiler_build_final_descr_state_builds_explicit_compiled_descriptor_state' => sub {
-    plan tests => 18;
+    plan tests => 16;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9148,15 +9147,13 @@ SPEC
     is($descriptor_state->{version}, 1, 'final descriptor state exposes the expected version');
     is($descriptor_state->{compiled_spec_state}{kind}, 'compiled_spec_state', 'final descriptor state retains the compiled-spec state as its source of truth');
     ok(ref($descriptor_state->{compiled_dependency_regex_state}) eq 'HASH', 'final descriptor state also exposes preferred dependency-regex state');
-    is($descriptor_state->{compiled_gdata_state}{kind}, 'compiled_gdata_state', 'final descriptor state retains explicit compiled-gdata state');
-    is($descriptor_state->{compiled_gdata_state}{version}, 1, 'final descriptor state keeps expected compiled-gdata-state version');
-    is($descriptor_state->{compiled_dependency_regex_state}{kind}, 'compiled_gdata_state', 'preferred dependency-regex state currently preserves compatibility kind');
+    is($descriptor_state->{compiled_dependency_regex_state}{kind}, 'compiled_dependency_regex_state', 'final descriptor state keeps the explicit compiled-dependency-regex state');
     is_deeply($descriptor_state->{meta}{definition_order}, ['Top', 'Child'], 'final descriptor state meta preserves full definition order');
     is_deeply($descriptor_state->{meta}{rule_order}, ['Top', 'Child'], 'final descriptor state meta preserves deterministic unique rule order');
-    ok(exists $descriptor_state->{compiled_gdata_state}{gdata_by_label}{Top}, 'final descriptor state keeps the compiled gdata map inside compiled-gdata state');
-    ok(exists $descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}{Top}, 'final descriptor state keeps preferred dependency-regex map inside preferred state alias');
-    is_deeply($descriptor_state->{compiled_gdata_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled gdata label order');
-    is_deeply($descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}, $descriptor_state->{compiled_gdata_state}{gdata_by_label}, 'dependency-regex alias data stays aligned with legacy gdata alias');
+    ok(exists $descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}{Top}, 'final descriptor state keeps dependency-regex map inside dependency-regex state');
+    ok(!exists $descriptor_state->{compiled_gdata_state}, 'final descriptor state no longer exposes compiled_gdata_state alias');
+    ok(!exists $descriptor_state->{compiled_dependency_regex_state}{gdata_by_label}, 'dependency-regex state no longer exposes gdata_by_label alias');
+    is_deeply($descriptor_state->{compiled_dependency_regex_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled dependency-regex label order');
 
     my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr($descriptor_state);
     ok(ref($legacy_descr->{spec}) eq 'HASH' && ref($legacy_descr->{gdata}) eq 'HASH', 'compiled descriptor state still projects to the legacy outer descriptor shape');
@@ -9185,10 +9182,10 @@ SPEC
     is($validation_view->{kind}, 'compiled_descriptor_state_validation_view', 'compiled descriptor validation view exposes explicit kind');
     is_deeply([map { $_->[0] } @{$validation_view->{rule_rows}}], ['Top', 'Child'], 'compiled descriptor validation view preserves ordered rule rows');
     is_deeply([map { $_->[0] } @{$validation_view->{dependency_regex_rows}}], ['Top'], 'compiled descriptor validation view also exposes ordered preferred dependency-regex rows');
-    is_deeply([map { $_->[0] } @{$validation_view->{gdata_rows}}], ['Top'], 'compiled descriptor validation view preserves ordered gdata rows');
+    ok(!exists $validation_view->{gdata_rows}, 'compiled descriptor validation view no longer exposes legacy gdata rows');
     ok(ref($validation_view->{rules_by_label}) eq 'HASH' && exists $validation_view->{rules_by_label}{Top} && exists $validation_view->{rules_by_label}{Child}, 'compiled descriptor validation view exposes by-label rule lookup');
 };
-subtest 'compiler_build_final_descr_state_rejects_invalid_compiled_gdata_shape_with_specific_detail' => sub {
+subtest 'compiler_build_final_descr_state_rejects_invalid_compiled_dependency_regex_shape_with_specific_detail' => sub {
     plan tests => 3;
 
     my $spec_content = <<'SPEC';
@@ -9197,7 +9194,7 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for invalid compiled-gdata shape test') or diag(normalize_error($parse_error));
+    ok($parse_success, 'bootstrap parse succeeds for invalid compiled-dependency-regex shape test') or diag(normalize_error($parse_error));
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my ($ok_run, $ret, $err) = (0, undef, '');
@@ -9210,8 +9207,8 @@ SPEC
     };
     $err = $@ // '' unless $ok_run;
 
-    ok(!$ok_run, 'final descriptor state build dies when compiled gdata is malformed');
-    is(normalize_error($err), 'final descriptor assembly expects compiled gdata HASH ref or compiled_gdata_state; got ARRAY', 'final descriptor state build reports the specific malformed compiled-gdata detail');
+    ok(!$ok_run, 'final descriptor state build dies when compiled dependency-regex state is malformed');
+    is(normalize_error($err), 'final descriptor assembly expects compiled dependency-regex HASH ref or compiled_dependency_regex_state; got ARRAY', 'final descriptor state build reports the specific malformed compiled-dependency-regex detail');
 };
 subtest 'validation_accepts_compiled_descriptor_state_input' => sub {
     plan tests => 5;
@@ -9233,7 +9230,7 @@ SPEC
     my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
 
     ok($valid, 'compiled descriptor state passes generated-descriptor validation');
-    ok(ref($descriptor_state->{compiled_gdata_state}{gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
+    ok(ref($descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}) eq 'HASH', 'compiled descriptor state retains compiled dependency-regex map for validation');
     ok(ref($descriptor_state->{compiled_spec_state}{rules_by_label}) eq 'HASH', 'compiled descriptor state retains compiled spec map for validation');
 };
 subtest 'validation_accepts_legacy_gdata_and_spec_hash_input' => sub {
@@ -9251,8 +9248,8 @@ SPEC
     ok(ref($descr) eq 'HASH', 'return_descr builds descriptor hash for legacy gdata validation test');
     ok(ref($descr->{gdata}) eq 'HASH' && ref($descr->{spec}) eq 'HASH', 'descriptor exposes legacy gdata/spec hash inputs');
 
-    my $valid = LinkedSpec::Validation::validate_gdata_references($descr->{gdata}, $descr->{spec});
-    ok($valid, 'legacy validate_gdata_references still accepts valid gdata/spec hash inputs');
+    my $valid = LinkedSpec::Validation::validate_dependency_regex_references($descr->{gdata}, $descr->{spec});
+    ok($valid, 'legacy validate_dependency_regex_references still accepts valid gdata/spec hash inputs');
     ok(exists $descr->{gdata}{Top} && exists $descr->{spec}{Top}, 'legacy validation test keeps expected rule entries available');
 };
 subtest 'validation_compiled_descriptor_state_avoids_legacy_gdata_validator' => sub {
@@ -9274,7 +9271,7 @@ SPEC
     my ($ok_run, $valid, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Validation::validate_gdata_references = sub { die "__UNEXPECTED_LEGACY_GDATA_VALIDATOR__\n" };
+        local *LinkedSpec::Validation::validate_dependency_regex_references = sub { die "__UNEXPECTED_LEGACY_GDATA_VALIDATOR__\n" };
         $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
         1;
     };
@@ -9282,7 +9279,7 @@ SPEC
 
     ok($ok_run, 'compiled descriptor validation succeeds without the legacy gdata validator entrypoint') or diag(normalize_error($err));
     ok($valid, 'compiled descriptor validation still reports success');
-    unlike($err, qr/__UNEXPECTED_LEGACY_GDATA_VALIDATOR__/, 'compiled descriptor validation does not call validate_gdata_references internally');
+    unlike($err, qr/__UNEXPECTED_LEGACY_GDATA_VALIDATOR__/, 'compiled descriptor validation does not call validate_dependency_regex_references internally');
 };
 subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
     plan tests => 12;
@@ -9327,13 +9324,13 @@ SPEC
     is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'malformed rule gdata shape records build_final_descr stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'malformed rule gdata shape records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'malformed rule gdata shape records summary');
-    is($runtime_ctx->{last_error}{detail}, "spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'malformed rule gdata shape preserves the specific spec_gdata contract detail');
+    is($runtime_ctx->{last_error}{detail}, "build_dependency_regex_map expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'malformed rule gdata shape preserves the specific build_dependency_regex_map contract detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'malformed rule gdata shape records the active gdata-compilation rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'malformed rule gdata shape records label-scoped generated handler source label when variant is not known yet');
     is($runtime_ctx->{last_error}{spec_name}, '', 'malformed rule gdata shape leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'malformed rule gdata shape leaves inline-spec spec_path empty');
 };
-subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_spec_gdata_dies_mid_rule' => sub {
+subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_default_build_dependency_regex_map_dies_mid_rule' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -9368,18 +9365,18 @@ SPEC
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'compiler pipeline traps default spec_gdata die and returns without outer die') or diag(normalize_error($err));
-    ok(!defined($ret), 'compiler pipeline returns undef when default spec_gdata dies during final descriptor assembly');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'default spec_gdata die records structured error context');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'default spec_gdata die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'default spec_gdata die records build_final_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'default spec_gdata die records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'default spec_gdata die records summary');
-    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_ORED_RE_DIE__/, 'default spec_gdata die records original thrown detail');
-    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'default spec_gdata die records the active gdata-compilation rule label');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'default spec_gdata die records label-scoped generated handler source label when variant is not known yet');
-    is($runtime_ctx->{last_error}{spec_name}, '', 'default spec_gdata die leaves inline-spec spec_name empty');
-    is($runtime_ctx->{last_error}{spec_path}, '', 'default spec_gdata die leaves inline-spec spec_path empty');
+    ok($ok_run, 'compiler pipeline traps default build_dependency_regex_map die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when default build_dependency_regex_map dies during final descriptor assembly');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'default build_dependency_regex_map die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'default build_dependency_regex_map die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'default build_dependency_regex_map die records build_final_descr stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'default build_dependency_regex_map die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'default build_dependency_regex_map die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_ORED_RE_DIE__/, 'default build_dependency_regex_map die records original thrown detail');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'default build_dependency_regex_map die records the active gdata-compilation rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'default build_dependency_regex_map die records label-scoped generated handler source label when variant is not known yet');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'default build_dependency_regex_map die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'default build_dependency_regex_map die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_clears_stale_runtime_ctx_error_on_success' => sub {
     plan tests => 4;
@@ -11171,7 +11168,7 @@ SPEC
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_GET_SPEC_GDATA_DIE__\n" };
+        local *LinkedSpec::Compiler::build_dependency_regex_map = sub { die "__FORCED_GET_SPEC_GDATA_DIE__\n" };
         $ret = LinkedSpec::Get(
             \$spec_content,
             return_descr => 1,
@@ -11266,7 +11263,7 @@ SPEC
     my ($ok_inner, $parser, $err_call, $out, $warn) = (0, undef, '', '', '');
     my $ok_outer = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Compiler::spec_gdata = sub { die "__FORCED_GET_PARSER_SPEC_GDATA_DIE__\n" };
+        local *LinkedSpec::Compiler::build_dependency_regex_map = sub { die "__FORCED_GET_PARSER_SPEC_GDATA_DIE__\n" };
         ($ok_inner, $parser, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
             top_rule => 'Top',
@@ -11613,7 +11610,7 @@ SPEC
         {},
         {
             runtime_ctx => $runtime_ctx,
-            validate_gdata_references => sub { return 1 },
+            validate_dependency_regex_references => sub { return 1 },
             compile_spec_entry => sub {
                 $runtime_ctx->{top_rule} = 'Top';
                 return (
@@ -11671,7 +11668,7 @@ SPEC
         {},
         {
             runtime_ctx => $runtime_ctx,
-            validate_gdata_references => sub { return 1 },
+            validate_dependency_regex_references => sub { return 1 },
             compile_spec_entry => sub {
                 $runtime_ctx->{top_rule} = 'Top';
                 return (
@@ -11728,7 +11725,7 @@ SPEC
         {},
         {
             runtime_ctx => $runtime_ctx,
-            validate_gdata_references => sub { return 1 },
+            validate_dependency_regex_references => sub { return 1 },
             compile_spec_entry => sub {
                 $runtime_ctx->{top_rule} = 'Top';
                 return (
@@ -11969,7 +11966,7 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the legacy compiler bootstrap helper');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned without the legacy compiler bootstrap helper still preserves compiled handler coderef');
 };
-subtest 'run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner' => sub {
+subtest 'run_get_pipeline_defers_default_build_dependency_regex_map_callback_to_final_descr_owner' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -11984,12 +11981,12 @@ SPEC
 
     my $orig_build_final_descr_state = \&LinkedSpec::Compiler::_build_final_descr_state;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_undef_spec_gdata_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_rule_order);
+    my ($saw_undef_dependency_regex_builder_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Compiler::_build_final_descr_state = sub {
-            my ($compiled_spec_input, $spec_gdata_cb) = @_;
-            $saw_undef_spec_gdata_cb = !defined($spec_gdata_cb);
+            my ($compiled_spec_input, $dependency_regex_builder_cb) = @_;
+            $saw_undef_dependency_regex_builder_cb = !defined($dependency_regex_builder_cb);
             $saw_compiled_spec_state = ref($compiled_spec_input) eq 'HASH' && ($compiled_spec_input->{kind} || '') eq 'compiled_spec_state';
             $saw_top_rule_spec = $saw_compiled_spec_state
                 && ref($compiled_spec_input->{rules_by_label}) eq 'HASH'
@@ -12019,11 +12016,11 @@ SPEC
     $err = $@ // '' unless $ok_run;
 
     ok($ok_run, 'compiler pipeline succeeds while final descriptor state assembly is trapped') or diag(normalize_error($err));
-    ok($saw_undef_spec_gdata_cb, 'compiler pipeline now lets final descriptor state assembly own the default spec_gdata callback');
+    ok($saw_undef_dependency_regex_builder_cb, 'compiler pipeline now lets final descriptor state assembly own the default build_dependency_regex_map callback');
     ok($saw_compiled_spec_state, 'compiler pipeline now forwards explicit compiled-spec state into final descriptor state assembly');
     ok($saw_top_rule_spec, 'compiled-spec state forwarded into final descriptor state assembly still exposes the Top rule through rules_by_label');
     ok($saw_rule_order, 'compiled-spec state forwarded into final descriptor state assembly preserves deterministic rule order');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor state owner supplies spec_gdata');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor state owner supplies build_dependency_regex_map');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor state assembly still preserves compiled handler coderef');
     is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
 };
@@ -12148,7 +12145,7 @@ SPEC
     is_deeply($descr->{meta}{action_rewriter_migration}{language_agnostic_ready_rules}, ['Top', 'Leaf'], 'migration summary ready-rule list now follows source rule order');
     is($descr->{meta}{action_rewriter_migration}{total_rules}, 2, 'migration summary still counts compiled rules correctly');
 };
-subtest 'compiler_pipeline_avoids_linkedspec_spec_gdata_facade' => sub {
+subtest 'compiler_pipeline_avoids_linkedspec_build_dependency_regex_map_facade' => sub {
     plan tests => 4;
 
     my $spec_content = <<'SPEC';
@@ -12159,15 +12156,15 @@ SPEC
     my ($ok_run, $descr, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::spec_gdata = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__\n" };
+        local *LinkedSpec::build_dependency_regex_map = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__\n" };
         $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'compiler pipeline succeeds without the LinkedSpec spec_gdata facade') or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__/, 'compiler pipeline does not call the trapped LinkedSpec spec_gdata facade');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the LinkedSpec spec_gdata facade');
+    ok($ok_run, 'compiler pipeline succeeds without the LinkedSpec build_dependency_regex_map facade') or diag(normalize_error($err));
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__/, 'compiler pipeline does not call the trapped LinkedSpec build_dependency_regex_map facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash without the LinkedSpec build_dependency_regex_map facade');
     ok(ref($descr->{gdata}) eq 'HASH', 'final descriptor assembly still produces compiled gdata through Compiler ownership');
 };
 subtest 'ruleir_emit_context_avoids_removed_linkedspec_action_rewriter_facade' => sub {

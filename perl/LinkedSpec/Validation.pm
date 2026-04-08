@@ -260,7 +260,7 @@ sub validate_rule_definition {
  return 1;
 }
 
-sub _notify_gdata_validation_failure {
+sub _notify_dependency_regex_validation_failure {
  my ($option, %info) = @_;
  return undef unless ref($option) eq 'HASH';
  my $cb = $option->{on_failure};
@@ -295,48 +295,47 @@ sub _describe_validation_value_kind {
  return ref($value) ? ref($value) : 'SCALAR';
 }
 
-sub _new_gdata_validation_view {
+sub _new_dependency_regex_validation_view {
  my (%args) = @_;
  my $dependency_regex_rows = (ref($args{dependency_regex_rows}) eq 'ARRAY')
   ? $args{dependency_regex_rows}
-  : (ref($args{gdata_rows}) eq 'ARRAY' ? $args{gdata_rows} : []);
+  : [];
  return {
-  kind => 'gdata_validation_view',
+  kind => 'dependency_regex_validation_view',
   version => 1,
   dependency_regex_rows => $dependency_regex_rows,
-  gdata_rows => $dependency_regex_rows,
   rule_rows => (ref($args{rule_rows}) eq 'ARRAY') ? $args{rule_rows} : [],
   rules_by_label => (ref($args{rules_by_label}) eq 'HASH') ? $args{rules_by_label} : {},
  }
 }
 
-sub _is_gdata_validation_view {
+sub _is_dependency_regex_validation_view {
  my ($value) = @_;
  return 0 unless ref($value) eq 'HASH';
- return 0 unless defined($value->{kind}) && $value->{kind} eq 'gdata_validation_view';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'dependency_regex_validation_view';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
- return 0 unless ref($value->{dependency_regex_rows}) eq 'ARRAY' || ref($value->{gdata_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{dependency_regex_rows}) eq 'ARRAY';
  return 0 unless ref($value->{rule_rows}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
  return 1
 }
 
-sub _build_legacy_gdata_validation_view {
- my ($gdata, $rules_by_label, $option) = @_;
- unless (ref($gdata) eq 'HASH') {
-  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($gdata);
-  _notify_gdata_validation_failure(
+sub _build_legacy_dependency_regex_validation_view {
+ my ($dependency_regex_map, $rules_by_label, $option) = @_;
+ unless (ref($dependency_regex_map) eq 'HASH') {
+  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($dependency_regex_map);
+  _notify_dependency_regex_validation_failure(
    $option,
-   summary => 'Invalid gdata structure',
+   summary => 'Invalid dependency-regex structure',
    detail => $detail,
   );
-  _trace_log_output(DUMP_NONE, "Invalid gdata structure", $detail);
+  _trace_log_output(DUMP_NONE, "Invalid dependency-regex structure", $detail);
   return undef;
  }
 
  unless (ref($rules_by_label) eq 'HASH') {
   my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($rules_by_label);
-  _notify_gdata_validation_failure(
+  _notify_dependency_regex_validation_failure(
    $option,
    summary => 'Invalid spec structure',
    detail => $detail,
@@ -345,40 +344,38 @@ sub _build_legacy_gdata_validation_view {
   return undef;
  }
 
- return _new_gdata_validation_view(
-  dependency_regex_rows => [map { [$_, $gdata->{$_}] } sort keys %$gdata],
+ return _new_dependency_regex_validation_view(
+  dependency_regex_rows => [map { [$_, $dependency_regex_map->{$_}] } sort keys %$dependency_regex_map],
   rule_rows => [map { [$_, $rules_by_label->{$_}] } sort keys %$rules_by_label],
   rules_by_label => { %$rules_by_label },
  );
 }
 
-sub _validate_gdata_validation_view {
+sub _validate_dependency_regex_validation_view {
  my ($validation_view, $option) = @_;
 
- unless (_is_gdata_validation_view($validation_view)) {
-  my $detail = 'Expected gdata_validation_view HASH reference, got '
+ unless (_is_dependency_regex_validation_view($validation_view)) {
+  my $detail = 'Expected dependency_regex_validation_view HASH reference, got '
    . _describe_validation_value_kind($validation_view);
-  _notify_gdata_validation_failure(
+  _notify_dependency_regex_validation_failure(
    $option,
-   summary => 'Invalid gdata validation view',
+   summary => 'Invalid dependency-regex validation view',
    detail => $detail,
   );
-  _trace_log_output(DUMP_NONE, 'Invalid gdata validation view', $detail);
+  _trace_log_output(DUMP_NONE, 'Invalid dependency-regex validation view', $detail);
   return 0;
  }
 
  my $rules_by_label = $validation_view->{rules_by_label};
- my $dependency_regex_rows = ref($validation_view->{dependency_regex_rows}) eq 'ARRAY'
-  ? $validation_view->{dependency_regex_rows}
-  : $validation_view->{gdata_rows};
+ my $dependency_regex_rows = $validation_view->{dependency_regex_rows};
 
  for my $row (@$dependency_regex_rows) {
-  my ($rule_name, $gdata_entry) = @$row;
+  my ($rule_name, $dependency_regex_entry) = @$row;
 
   unless (exists $rules_by_label->{$rule_name}) {
-   my $summary = "Gdata references non-existent rule '$rule_name'";
+   my $summary = "Dependency regex references non-existent rule '$rule_name'";
    my $detail = 'Rule not found in spec';
-   _notify_gdata_validation_failure(
+   _notify_dependency_regex_validation_failure(
     $option,
     summary => $summary,
     detail => $detail,
@@ -388,10 +385,10 @@ sub _validate_gdata_validation_view {
    return 0;
   }
 
-  unless (ref($gdata_entry) eq 'Regexp') {
-   my $summary = "Invalid gdata entry for rule '$rule_name'";
-   my $detail = "Expected compiled regex, got " . ref($gdata_entry);
-   _notify_gdata_validation_failure(
+  unless (ref($dependency_regex_entry) eq 'Regexp') {
+   my $summary = "Invalid dependency regex entry for rule '$rule_name'";
+   my $detail = "Expected compiled regex, got " . ref($dependency_regex_entry);
+   _notify_dependency_regex_validation_failure(
     $option,
     summary => $summary,
     detail => $detail,
@@ -408,7 +405,7 @@ sub _validate_gdata_validation_view {
   my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
   my $validate_rule_definition_error = $@;
   if ($validate_rule_definition_error) {
-   _notify_gdata_validation_failure(
+   _notify_dependency_regex_validation_failure(
     $option,
     summary => "Rule definition validation failed for rule '$rule_name'",
     detail => $validate_rule_definition_error,
@@ -418,7 +415,7 @@ sub _validate_gdata_validation_view {
   }
 
   unless ($rule_valid) {
-   _notify_gdata_validation_failure(
+   _notify_dependency_regex_validation_failure(
     $option,
     summary => "Invalid rule definition for rule '$rule_name'",
     detail => "validate_rule_definition returned false for rule '$rule_name'",
@@ -431,9 +428,9 @@ sub _validate_gdata_validation_view {
    for my $i (0..$#{$rule_def->{gdata}}) {
     my $element = $rule_def->{gdata}[$i];
     unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
-     my $summary = "Invalid gdata element at index $i for rule '$rule_name'";
+     my $summary = "Invalid dependency entry at index $i for rule '$rule_name'";
      my $detail = "Expected HASH with 'label' and 'idx' keys";
-     _notify_gdata_validation_failure(
+     _notify_dependency_regex_validation_failure(
       $option,
       summary => $summary,
       detail => $detail,
@@ -445,9 +442,9 @@ sub _validate_gdata_validation_view {
 
     my $ref_rule = $element->{label};
     unless (exists $rules_by_label->{$ref_rule}) {
-      my $summary = "Gdata element references non-existent rule '$ref_rule'";
-      my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
-      _notify_gdata_validation_failure(
+      my $summary = "Dependency entry references non-existent rule '$ref_rule'";
+      my $detail = "Rule '$rule_name' references missing dependency rule '$ref_rule'";
+      _notify_dependency_regex_validation_failure(
        $option,
        summary => $summary,
        detail => $detail,
@@ -462,7 +459,7 @@ sub _validate_gdata_validation_view {
     unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
      my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
      my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";
-     _notify_gdata_validation_failure(
+     _notify_dependency_regex_validation_failure(
       $option,
       summary => $summary,
       detail => $detail,
@@ -485,7 +482,7 @@ sub _validate_compiled_descriptor_state_native {
  unless (_call_compiler_state('is_compiled_descriptor_state_validation_view', $validation_view)) {
   my $detail = 'Expected compiled_descriptor_state_validation_view HASH reference, got '
    . _describe_validation_value_kind($validation_view);
-  _notify_gdata_validation_failure(
+  _notify_dependency_regex_validation_failure(
    $option,
    summary => 'Invalid compiled descriptor validation view',
    detail => $detail,
@@ -494,11 +491,9 @@ sub _validate_compiled_descriptor_state_native {
   return 0;
  }
 
- return _validate_gdata_validation_view(
-  _new_gdata_validation_view(
-   dependency_regex_rows => (ref($validation_view->{dependency_regex_rows}) eq 'ARRAY'
-    ? $validation_view->{dependency_regex_rows}
-    : $validation_view->{gdata_rows}),
+ return _validate_dependency_regex_validation_view(
+  _new_dependency_regex_validation_view(
+   dependency_regex_rows => $validation_view->{dependency_regex_rows},
    rule_rows => $validation_view->{rule_rows},
    rules_by_label => $validation_view->{rules_by_label},
   ),
@@ -513,7 +508,7 @@ sub validate_compiled_descriptor_state {
  unless (_call_compiler_state('is_compiled_descriptor_state', $descriptor_state)) {
   my $detail = 'Expected compiled_descriptor_state HASH reference, got '
    . _describe_validation_value_kind($descriptor_state);
-  _notify_gdata_validation_failure(
+  _notify_dependency_regex_validation_failure(
    $option,
    summary => 'Invalid compiled descriptor state',
    detail => $detail,
@@ -525,12 +520,12 @@ sub validate_compiled_descriptor_state {
  return _validate_compiled_descriptor_state_native($descriptor_state, $option);
 }
 
-sub validate_gdata_references {
- my ($gdata, $spec, $option) = @_;
+sub validate_dependency_regex_references {
+ my ($dependency_regex_map, $spec, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
- my $validation_view = _build_legacy_gdata_validation_view($gdata, $spec, $option);
+ my $validation_view = _build_legacy_dependency_regex_validation_view($dependency_regex_map, $spec, $option);
  return 0 unless defined $validation_view;
- return _validate_gdata_validation_view($validation_view, $option);
+ return _validate_dependency_regex_validation_view($validation_view, $option);
 }
 
 sub validate_dsl_syntax {

@@ -92,15 +92,15 @@ sub _ored_re {
  })
 }
 
-my $ACTIVE_SPEC_GDATA_RULE_LABEL;
+my $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
 
-sub _clear_active_spec_gdata_rule_label {
- $ACTIVE_SPEC_GDATA_RULE_LABEL = undef;
+sub _clear_active_dependency_regex_rule_label {
+ $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
  return undef
 }
 
-sub _get_active_spec_gdata_rule_label {
- return $ACTIVE_SPEC_GDATA_RULE_LABEL
+sub _get_active_dependency_regex_rule_label {
+ return $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL
 }
 
 sub _trace_log_output {
@@ -273,22 +273,6 @@ sub _compiled_dependency_regex_state_to_legacy_gdata {
  return _call_compiler_state('compiled_dependency_regex_state_to_legacy_gdata', @_)
 }
 
-sub _new_compiled_gdata_state {
- return _call_compiler_state('new_compiled_gdata_state', @_)
-}
-
-sub _is_compiled_gdata_state {
- return _call_compiler_state('is_compiled_gdata_state', @_)
-}
-
-sub _compiled_gdata_state_gdata_by_label {
- return _call_compiler_state('compiled_gdata_state_gdata_by_label', @_)
-}
-
-sub _compiled_gdata_state_to_legacy_gdata {
- return _call_compiler_state('compiled_gdata_state_to_legacy_gdata', @_)
-}
-
 sub _new_compiled_descriptor_state {
  return _call_compiler_state('new_compiled_descriptor_state', @_)
 }
@@ -309,14 +293,6 @@ sub _compiled_descriptor_state_dependency_regex_by_label {
  return _call_compiler_state('compiled_descriptor_state_dependency_regex_by_label', @_)
 }
 
-sub _compiled_descriptor_state_gdata_state {
- return _call_compiler_state('compiled_descriptor_state_gdata_state', @_)
-}
-
-sub _compiled_descriptor_state_gdata_by_label {
- return _call_compiler_state('compiled_descriptor_state_gdata_by_label', @_)
-}
-
 sub _compiled_descriptor_state_rules_by_label {
  return _call_compiler_state('compiled_descriptor_state_rules_by_label', @_)
 }
@@ -335,7 +311,7 @@ sub _normalize_compiled_dependency_regex_output {
   'normalize_compiled_dependency_regex_output',
   $value,
   $compiled_spec_state,
-  on_invalid => sub { return _describe_final_descr_gdata_result($_[0]) },
+  on_invalid => sub { return _describe_final_descr_dependency_regex_result($_[0]) },
  );
 }
 
@@ -344,7 +320,7 @@ sub _normalize_compiled_spec_input {
  return _call_compiler_state(
   'normalize_compiled_spec_input',
   $value,
-  on_invalid => sub { return _describe_spec_gdata_spec_result($_[0]) },
+  on_invalid => sub { return _describe_build_dependency_regex_map_spec_result($_[0]) },
  )
 }
 
@@ -499,51 +475,51 @@ sub build_compiled_rule_table {
  return $result
 }
 
-sub spec_gdata {
+sub build_dependency_regex_map {
  my ($spec_input, $option) = @_;
  my $sg = _normalize_compiled_spec_input($spec_input);
- my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_gdata', {
+ my $trace_scope = _trace_enter('LinkedSpec::Compiler::build_dependency_regex_map', {
   rule_count => _compiled_spec_state_rule_count($sg),
  }, DUMP_MEDIUM);
 
  if (_trace_should_dump(DUMP_HIGH)) {
- _trace_log_dump("=== SPEC GDATA DUMP ===\n");
+ _trace_log_dump("=== SPEC DEPENDENCY REGEX DUMP ===\n");
   _trace_log_dump(_dump_value($sg));
-  _trace_log_dump("=== END SPEC GDATA DUMP ===\n");
+  _trace_log_dump("=== END SPEC DEPENDENCY REGEX DUMP ===\n");
  }
 
 my %gdata;
 foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
   my ($label, $rule_info) = @$row;
-  $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
-  _die_with_detail(_describe_spec_gdata_rule_info_result($label, $rule_info))
+  $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = $label;
+  _die_with_detail(_describe_build_dependency_regex_map_rule_info_result($label, $rule_info))
    unless ref($rule_info) eq 'HASH';
   my $rule_gdata = $rule_info->{gdata};
-  _die_with_detail(_describe_spec_gdata_rule_gdata_result($label, $rule_gdata))
+  _die_with_detail(_describe_build_dependency_regex_map_rule_gdata_result($label, $rule_gdata))
    unless ref($rule_gdata) eq 'ARRAY';
   my @lgdata;
   for (my $gde_idx = 0; $gde_idx < @$rule_gdata; ++$gde_idx) {
    my $gde = $rule_gdata->[$gde_idx];
-   _die_with_detail(_describe_spec_gdata_dependency_result($label, $gde, $gde_idx))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_result($label, $gde, $gde_idx))
     unless ref($gde) eq 'HASH';
    my $dep_label = $gde->{label};
-   _die_with_detail(_describe_spec_gdata_dependency_label_result($label, $dep_label, $gde_idx))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_label_result($label, $dep_label, $gde_idx))
     unless defined($dep_label) && !ref($dep_label) && length($dep_label);
    my $dep_idx = $gde->{idx};
-   _die_with_detail(_describe_spec_gdata_dependency_index_result($label, $dep_idx, $gde_idx))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_index_result($label, $dep_idx, $gde_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
-   _die_with_detail(_describe_spec_gdata_dependency_rule_missing($label, $dep_label, $dep_idx))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_missing($label, $dep_label, $dep_idx))
     unless _compiled_spec_state_has_rule($sg, $dep_label);
    my $dep_rule = _compiled_spec_state_rule_info($sg, $dep_label);
-   _die_with_detail(_describe_spec_gdata_dependency_rule_info_result($label, $dep_label, $dep_rule))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_info_result($label, $dep_label, $dep_rule))
     unless ref($dep_rule) eq 'HASH';
    my $dep_re = $dep_rule->{re};
-   _die_with_detail(_describe_spec_gdata_dependency_re_result($label, $dep_label, $dep_re))
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_re_result($label, $dep_label, $dep_re))
     unless ref($dep_re) eq 'ARRAY';
    if (exists $dep_re->[$dep_idx]) {
     push @lgdata, $dep_re->[$dep_idx]
    } else {
-    _trace_decision("spec_gdata:$label", 0, "missing regex mapping for label=$dep_label idx=$dep_idx", DUMP_HIGH);
+    _trace_decision("build_dependency_regex_map:$label", 0, "missing regex mapping for label=$dep_label idx=$dep_idx", DUMP_HIGH);
     my $error_msg = "Rule '$label': Referenced rule '$dep_label' has no regex at index $dep_idx";
     my $context = "Referenced rule: $dep_label, Requested index: $dep_idx, Available indices: " .
                   (defined $dep_re ? "0.." . ($#$dep_re) : "none");
@@ -561,11 +537,11 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
   }
 
   if (@lgdata) {
-   _trace_decision("spec_gdata:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
+   _trace_decision("build_dependency_regex_map:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
    $gdata{$label} = _ored_re(@lgdata);
   }
   else {
-   _trace_decision("spec_gdata:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
+   _trace_decision("build_dependency_regex_map:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
   }
 }
 
@@ -576,31 +552,31 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
      compiled_dependency_regex_by_label => $legacy_gdata,
     )
   : $legacy_gdata;
- _clear_active_spec_gdata_rule_label();
+ _clear_active_dependency_regex_rule_label();
 
 if (_trace_should_dump(DUMP_MEDIUM)) {
-  _trace_log_dump("=== GENERATED GDATA DUMP ===\n");
+  _trace_log_dump("=== GENERATED DEPENDENCY REGEX DUMP ===\n");
   _trace_log_dump(_dump_value($result));
-  _trace_log_dump("=== END GENERATED GDATA DUMP ===\n");
+  _trace_log_dump("=== END GENERATED DEPENDENCY REGEX DUMP ===\n");
  }
  _trace_exit($trace_scope, {
    status => 'ok',
    compiled_labels => scalar(keys %$legacy_gdata),
-   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_gdata_state' : 'legacy_gdata_hash',
+   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_dependency_regex_state' : 'legacy_gdata_hash',
   }, DUMP_MEDIUM);
  return $result
 }
 
 sub _build_final_descr_state {
- my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
+ my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
- my $use_default_spec_gdata = !defined($spec_gdata_cb);
- $spec_gdata_cb ||= \&spec_gdata;
- my $legacy_spec = $use_default_spec_gdata ? undef : _compiled_spec_state_to_legacy_spec($compiled_state);
- my $compiled_gdata_input = $use_default_spec_gdata
-  ? $spec_gdata_cb->($compiled_state, { return_state => 1 })
-  : $spec_gdata_cb->($legacy_spec);
- my $compiled_dependency_regex_state = _normalize_compiled_dependency_regex_output($compiled_gdata_input, $compiled_state);
+ my $use_default_dependency_regex_builder = !defined($dependency_regex_builder_cb);
+ $dependency_regex_builder_cb ||= \&build_dependency_regex_map;
+ my $legacy_spec = $use_default_dependency_regex_builder ? undef : _compiled_spec_state_to_legacy_spec($compiled_state);
+ my $compiled_dependency_regex_input = $use_default_dependency_regex_builder
+  ? $dependency_regex_builder_cb->($compiled_state, { return_state => 1 })
+  : $dependency_regex_builder_cb->($legacy_spec);
+ my $compiled_dependency_regex_state = _normalize_compiled_dependency_regex_output($compiled_dependency_regex_input, $compiled_state);
 
  my $compiled_state_meta = _build_compiled_descriptor_meta(
   $compiled_state,
@@ -616,8 +592,8 @@ sub _build_final_descr_state {
 }
 
 sub _build_final_descr {
- my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
- my $descriptor_state = _build_final_descr_state($compiled_spec_input, $spec_gdata_cb, %args);
+ my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
+ my $descriptor_state = _build_final_descr_state($compiled_spec_input, $dependency_regex_builder_cb, %args);
  return _compiled_descriptor_state_to_legacy_descr($descriptor_state);
 }
 
@@ -836,10 +812,10 @@ sub _describe_contract_value_kind {
  return ref($value) ? ref($value) : 'SCALAR';
 }
 
-sub _describe_final_descr_gdata_result {
+sub _describe_final_descr_dependency_regex_result {
  my ($value) = @_;
 
- return 'final descriptor assembly expects compiled gdata HASH ref or compiled_gdata_state; got '
+ return 'final descriptor assembly expects compiled dependency-regex HASH ref or compiled_dependency_regex_state; got '
   . _describe_contract_value_kind($value);
 }
 
@@ -850,58 +826,58 @@ sub _describe_contract_scalar_value {
  return ref($value) ? ref($value) : "'" . $value . "'";
 }
 
-sub _describe_spec_gdata_spec_result {
+sub _describe_build_dependency_regex_map_spec_result {
  my ($sg) = @_;
 
- return 'spec_gdata expects a HASH ref of compiled rule info; got ' . _describe_contract_value_kind($sg);
+ return 'build_dependency_regex_map expects a HASH ref of compiled rule info; got ' . _describe_contract_value_kind($sg);
 }
 
-sub _describe_spec_gdata_rule_info_result {
+sub _describe_build_dependency_regex_map_rule_info_result {
  my ($label, $rule_info) = @_;
 
- return "spec_gdata expects rule '$label' info to be HASH ref; got " . _describe_contract_value_kind($rule_info);
+ return "build_dependency_regex_map expects rule '$label' info to be HASH ref; got " . _describe_contract_value_kind($rule_info);
 }
 
-sub _describe_spec_gdata_rule_gdata_result {
+sub _describe_build_dependency_regex_map_rule_gdata_result {
  my ($label, $rule_gdata) = @_;
 
- return "spec_gdata expects rule '$label' gdata to be ARRAY ref; got " . _describe_contract_value_kind($rule_gdata);
+ return "build_dependency_regex_map expects rule '$label' gdata to be ARRAY ref; got " . _describe_contract_value_kind($rule_gdata);
 }
 
-sub _describe_spec_gdata_dependency_result {
+sub _describe_build_dependency_regex_map_dependency_result {
  my ($label, $gde, $gde_idx) = @_;
 
- return "spec_gdata expects rule '$label' gdata[$gde_idx] to be HASH ref; got " . _describe_contract_value_kind($gde);
+ return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx] to be HASH ref; got " . _describe_contract_value_kind($gde);
 }
 
-sub _describe_spec_gdata_dependency_label_result {
+sub _describe_build_dependency_regex_map_dependency_label_result {
  my ($label, $dep_label, $gde_idx) = @_;
 
- return "spec_gdata expects rule '$label' gdata[$gde_idx]{label} to be a non-empty scalar; got " . _describe_contract_scalar_value($dep_label);
+ return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx]{label} to be a non-empty scalar; got " . _describe_contract_scalar_value($dep_label);
 }
 
-sub _describe_spec_gdata_dependency_index_result {
+sub _describe_build_dependency_regex_map_dependency_index_result {
  my ($label, $dep_idx, $gde_idx) = @_;
 
- return "spec_gdata expects rule '$label' gdata[$gde_idx]{idx} to be a non-negative integer; got " . _describe_contract_scalar_value($dep_idx);
+ return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx]{idx} to be a non-negative integer; got " . _describe_contract_scalar_value($dep_idx);
 }
 
-sub _describe_spec_gdata_dependency_rule_missing {
+sub _describe_build_dependency_regex_map_dependency_rule_missing {
  my ($label, $dep_label, $dep_idx) = @_;
 
- return "spec_gdata expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule";
+ return "build_dependency_regex_map expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule";
 }
 
-sub _describe_spec_gdata_dependency_rule_info_result {
+sub _describe_build_dependency_regex_map_dependency_rule_info_result {
  my ($label, $dep_label, $dep_rule) = @_;
 
- return "spec_gdata expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got " . _describe_contract_value_kind($dep_rule);
+ return "build_dependency_regex_map expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got " . _describe_contract_value_kind($dep_rule);
 }
 
-sub _describe_spec_gdata_dependency_re_result {
+sub _describe_build_dependency_regex_map_dependency_re_result {
  my ($label, $dep_label, $dep_re) = @_;
 
- return "spec_gdata expects referenced rule '$dep_label' regex list for rule '$label' to be ARRAY ref; got " . _describe_contract_value_kind($dep_re);
+ return "build_dependency_regex_map expects referenced rule '$dep_label' regex list for rule '$label' to be ARRAY ref; got " . _describe_contract_value_kind($dep_re);
 }
 
 sub _die_with_detail {
@@ -1242,13 +1218,13 @@ if ($build_compiled_rule_table_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
- _clear_active_spec_gdata_rule_label();
+ _clear_active_dependency_regex_rule_label();
  my $final_descr_state = eval { _build_final_descr_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descr_error = $@;
-my $build_final_descr_rule_label = _get_active_spec_gdata_rule_label();
+my $build_final_descr_rule_label = _get_active_dependency_regex_rule_label();
  my $build_final_descr_handler_source_label =
   _compiler_rule_or_top_handler_source_label($runtime_ctx, $build_final_descr_rule_label);
-_clear_active_spec_gdata_rule_label();
+_clear_active_dependency_regex_rule_label();
 if ($build_final_descr_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -1258,7 +1234,7 @@ if ($build_final_descr_error) {
    rule_label => $build_final_descr_rule_label,
    handler_source_label => $build_final_descr_handler_source_label,
   );
-  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building gdata/final descriptor state");
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building dependency-regex/final descriptor state");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
  return undef;
  }
@@ -1276,54 +1252,54 @@ if ($build_final_descr_error) {
   return undef;
  }
 
- my %validate_gdata_failure;
- my $gdata_refs_valid = eval {
+ my %validate_dependency_regex_failure;
+ my $dependency_regex_refs_valid = eval {
   LinkedSpec::Validation::validate_compiled_descriptor_state(
    $final_descr_state,
    {
     on_failure => sub {
-     %validate_gdata_failure = @_;
+     %validate_dependency_regex_failure = @_;
      return 1;
     },
    },
   )
  };
-my $validate_gdata_references_error = $@;
- my $validate_gdata_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_gdata_failure{rule_label});
-if ($validate_gdata_references_error) {
+my $validate_dependency_regex_references_error = $@;
+ my $validate_dependency_regex_handler_source_label =
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_dependency_regex_failure{rule_label});
+if ($validate_dependency_regex_references_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'validate_gdata_references',
-   summary => defined($validate_gdata_failure{summary}) && length($validate_gdata_failure{summary})
-    ? $validate_gdata_failure{summary}
+   stage => 'validate_dependency_regex_references',
+   summary => defined($validate_dependency_regex_failure{summary}) && length($validate_dependency_regex_failure{summary})
+    ? $validate_dependency_regex_failure{summary}
     : 'Generated parser validation failed',
-   detail => defined($validate_gdata_failure{detail}) && length($validate_gdata_failure{detail})
-    ? $validate_gdata_failure{detail}
-    : $validate_gdata_references_error,
-   rule_label => $validate_gdata_failure{rule_label},
-   handler_source_label => $validate_gdata_handler_source_label,
+   detail => defined($validate_dependency_regex_failure{detail}) && length($validate_dependency_regex_failure{detail})
+    ? $validate_dependency_regex_failure{detail}
+    : $validate_dependency_regex_references_error,
+   rule_label => $validate_dependency_regex_failure{rule_label},
+   handler_source_label => $validate_dependency_regex_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - trapped exception during generated-descriptor validation");
-  _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+  _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
   return undef;
  }
 
- unless ($gdata_refs_valid) {
+ unless ($dependency_regex_refs_valid) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'validate_gdata_references',
-   summary => defined($validate_gdata_failure{summary}) && length($validate_gdata_failure{summary})
-    ? $validate_gdata_failure{summary}
+   stage => 'validate_dependency_regex_references',
+   summary => defined($validate_dependency_regex_failure{summary}) && length($validate_dependency_regex_failure{summary})
+    ? $validate_dependency_regex_failure{summary}
     : 'Generated parser validation failed',
-   detail => defined($validate_gdata_failure{detail}) && length($validate_gdata_failure{detail})
-    ? $validate_gdata_failure{detail}
-    : 'validate_gdata_references returned false for the generated descriptor',
-   rule_label => $validate_gdata_failure{rule_label},
-   handler_source_label => $validate_gdata_handler_source_label,
+   detail => defined($validate_dependency_regex_failure{detail}) && length($validate_dependency_regex_failure{detail})
+    ? $validate_dependency_regex_failure{detail}
+    : 'validate_dependency_regex_references returned false for the generated descriptor',
+   rule_label => $validate_dependency_regex_failure{rule_label},
+   handler_source_label => $validate_dependency_regex_handler_source_label,
   );
  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
- _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+ _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
  return undef;
 }
  my $final_descr = _compiled_descriptor_state_to_legacy_descr($final_descr_state);

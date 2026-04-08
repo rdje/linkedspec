@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Phase 5: rename active dependency-regex seams
+
+- updated `perl/LinkedSpec/Compiler.pm` so the active derived-regex seam is now named consistently around `build_dependency_regex_map(...)`, with active helper names, trace labels, contract detail builders, runtime diagnostics wording, and final-descriptor builder variables all speaking in terms of dependency-regex state instead of the older mixed `spec_gdata` / `gdata` vocabulary,
+- updated `perl/LinkedSpec/CompilerState.pm` so the active internal derived-regex state is now fully `compiled_dependency_regex_state`, with the state kind, descriptor-state storage, and descriptor-validation views all dropping the old `compiled_gdata_state` / `gdata_by_label` / `gdata_rows` compatibility aliases from the active internal model,
+- updated `perl/LinkedSpec/Validation.pm` so the legacy low-level validator seam is now `validate_dependency_regex_references(...)`, and the shared validation-view engine now consistently uses dependency-regex naming internally instead of mixed `gdata_validation_view` wording,
+- widened `t/phase0_regression.t` so the active lock now expects `compiled_dependency_regex_state`, the removed alias fields to stay absent, and the renamed dependency-regex validation stage/test seams to remain stable,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats `build_dependency_regex_map(...)`, `validate_dependency_regex_references(...)`, and `compiled_dependency_regex_state` as the current active terminology.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: rename `spec_descr(...)` to `build_compiled_rule_table(...)`
 
 - updated `perl/LinkedSpec/Compiler.pm` so the active low-level compiled-rule build seam is now named `build_compiled_rule_table(...)`, with helper names, trace scopes, structured diagnostics stages, and summary/detail wording renamed to match the clearer state-first model,
