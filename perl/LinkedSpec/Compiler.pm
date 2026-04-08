@@ -434,16 +434,11 @@ sub _compiled_descriptor_state_to_legacy_descr {
 
 sub _normalize_compiled_spec_input {
  my ($value) = @_;
- return $value if _is_compiled_spec_state($value);
-
- _die_with_detail(_describe_spec_gdata_spec_result($value))
-  unless ref($value) eq 'HASH';
-
- my $state = _new_compiled_spec_state();
- foreach my $label (sort keys %$value) {
-  _record_compiled_spec_rule($state, $label, $value->{$label}, {});
- }
- return $state
+ return _call_compiler_state(
+  'normalize_compiled_spec_input',
+  $value,
+  on_invalid => sub { return _describe_spec_gdata_spec_result($_[0]) },
+ )
 }
 
 sub spec_descr {
@@ -692,12 +687,11 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
 
 sub _normalize_compiled_gdata_output {
  my ($value, $compiled_spec_state) = @_;
- return $value if _is_compiled_gdata_state($value);
- _die_with_detail(_describe_final_descr_gdata_result($value))
-  unless ref($value) eq 'HASH';
- return _new_compiled_gdata_state(
-  compiled_spec_state => $compiled_spec_state,
-  compiled_gdata_by_label => $value,
+ return _call_compiler_state(
+  'normalize_compiled_gdata_output',
+  $value,
+  $compiled_spec_state,
+  on_invalid => sub { return _describe_final_descr_gdata_result($_[0]) },
  );
 }
 

@@ -208,4 +208,43 @@ sub compiled_descriptor_state_to_legacy_descr {
  }
 }
 
+sub normalize_compiled_spec_input {
+ my ($value, %args) = @_;
+ my $on_invalid = $args{on_invalid};
+ return $value if is_compiled_spec_state($value);
+
+ unless (ref($value) eq 'HASH') {
+  my $detail = defined($on_invalid) && ref($on_invalid) eq 'CODE'
+   ? $on_invalid->($value)
+   : undef;
+  die(($detail =~ /\n\z/) ? $detail : "$detail\n") if defined($detail) && length($detail);
+  die "(LinkedSpec::CompilerState::normalize_compiled_spec_input) -E- expected HASH or compiled_spec_state";
+ }
+
+ my $state = new_compiled_spec_state();
+ foreach my $label (sort keys %$value) {
+  record_compiled_spec_rule($state, $label, $value->{$label}, {});
+ }
+ return $state
+}
+
+sub normalize_compiled_gdata_output {
+ my ($value, $compiled_spec_state, %args) = @_;
+ my $on_invalid = $args{on_invalid};
+ return $value if is_compiled_gdata_state($value);
+
+ unless (ref($value) eq 'HASH') {
+  my $detail = defined($on_invalid) && ref($on_invalid) eq 'CODE'
+   ? $on_invalid->($value)
+   : undef;
+  die(($detail =~ /\n\z/) ? $detail : "$detail\n") if defined($detail) && length($detail);
+  die "(LinkedSpec::CompilerState::normalize_compiled_gdata_output) -E- expected HASH or compiled_gdata_state";
+ }
+
+ return new_compiled_gdata_state(
+  compiled_spec_state => $compiled_spec_state,
+  compiled_gdata_by_label => $value,
+ )
+}
+
 1;

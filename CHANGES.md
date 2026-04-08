@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: move compiler-state normalization into owner
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also owns the remaining legacy compatibility-shape normalization seams:
+  - `normalize_compiled_spec_input(...)` accepts either historical compiled-spec hashes or explicit `compiled_spec_state`,
+  - `normalize_compiled_gdata_output(...)` accepts either historical compiled-gdata hashes or explicit `compiled_gdata_state`,
+  - both seams now preserve caller-supplied detail strings cleanly when rejecting malformed non-HASH compatibility input,
+- updated `perl/LinkedSpec/Compiler.pm` so the last local compiled-state normalization helpers now delegate through `LinkedSpec::CompilerState` instead of carrying inline conversion rules beside the extracted state owner,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves `Compiler.pm` routes compiled-spec normalization and compiled-gdata normalization through `LinkedSpec::CompilerState`, not only state creation and validation,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiler-state normalization as part of the same extracted owner seam instead of as leftover local compiler glue.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: extract compiler state owner
 
 - added `perl/LinkedSpec/CompilerState.pm` as the dedicated owner for `compiled_spec_state`, `compiled_gdata_state`, and `compiled_descriptor_state`,

@@ -1168,6 +1168,12 @@ my $gdata_state = LinkedSpec::Compiler::spec_gdata($state, { return_state => 1 }
 
 That lower-level state is mainly useful for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1` unless they are intentionally working inside compiler-owned seams.
 
+The same refactor is now complete on the compatibility bridge too:
+
+- when low-level compiler seams still receive or return historical compatibility hashes, the active path now normalizes those values through `LinkedSpec::CompilerState`,
+- so that owner now defines not only the explicit state records themselves, but also the bridge from legacy compatibility shape into that state model,
+- and `Compiler.pm` no longer carries a second local copy of that conversion logic beside the state owner.
+
 If you want the same structured diagnostics continuity there, `spec_descr(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `spec_descr(...)` now returns `undef` and records a normal `compiler_pipeline:spec_descr` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.
 
 Likewise, final descriptor assembly keeps its `gdata` compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `spec_gdata` callback or depend on an older `LinkedSpec::spec_gdata(...)` façade helper.
