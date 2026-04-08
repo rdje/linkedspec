@@ -303,39 +303,8 @@ sub _is_compiled_descriptor_state {
  return 1;
 }
 
-sub _compiled_descriptor_state_to_legacy_spec {
- my ($descriptor_state) = @_;
- return undef unless _is_compiled_descriptor_state($descriptor_state);
- return { %{$descriptor_state->{compiled_spec_state}{rules_by_label}} };
-}
-
-sub validate_compiled_descriptor_state {
- my ($descriptor_state, $option) = @_;
- $option = {} unless ref($option) eq 'HASH';
-
- unless (_is_compiled_descriptor_state($descriptor_state)) {
-  my $detail = 'Expected compiled_descriptor_state HASH reference, got '
-   . _describe_validation_value_kind($descriptor_state);
-  _notify_gdata_validation_failure(
-   $option,
-   summary => 'Invalid compiled descriptor state',
-   detail => $detail,
-  );
-  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor state', $detail);
-  return 0;
- }
-
- return validate_gdata_references(
-  $descriptor_state->{compiled_gdata_by_label},
-  _compiled_descriptor_state_to_legacy_spec($descriptor_state),
-  $option,
- );
-}
-
-sub validate_gdata_references {
- my ($gdata, $spec, $option) = @_;
- $option = {} unless ref($option) eq 'HASH';
-
+sub _validate_gdata_against_rules_by_label {
+ my ($gdata, $rules_by_label, $option) = @_;
  unless (ref($gdata) eq 'HASH') {
   my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($gdata);
   _notify_gdata_validation_failure(
@@ -347,8 +316,8 @@ sub validate_gdata_references {
   return 0;
  }
 
- unless (ref($spec) eq 'HASH') {
-  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($spec);
+ unless (ref($rules_by_label) eq 'HASH') {
+  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($rules_by_label);
   _notify_gdata_validation_failure(
    $option,
    summary => 'Invalid spec structure',
@@ -361,7 +330,7 @@ sub validate_gdata_references {
  for my $rule_name (keys %$gdata) {
   my $gdata_entry = $gdata->{$rule_name};
 
-  unless (exists $spec->{$rule_name}) {
+  unless (exists $rules_by_label->{$rule_name}) {
    my $summary = "Gdata references non-existent rule '$rule_name'";
    my $detail = 'Rule not found in spec';
    _notify_gdata_validation_failure(
@@ -388,8 +357,8 @@ sub validate_gdata_references {
   }
  }
 
- for my $rule_name (keys %$spec) {
-  my $rule_def = $spec->{$rule_name};
+ for my $rule_name (keys %$rules_by_label) {
+  my $rule_def = $rules_by_label->{$rule_name};
 
   my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
   my $validate_rule_definition_error = $@;
@@ -430,7 +399,7 @@ sub validate_gdata_references {
     }
 
     my $ref_rule = $element->{label};
-    unless (exists $spec->{$ref_rule}) {
+    unless (exists $rules_by_label->{$ref_rule}) {
      my $summary = "Gdata element references non-existent rule '$ref_rule'";
      my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
      _notify_gdata_validation_failure(
@@ -444,7 +413,7 @@ sub validate_gdata_references {
     }
 
     my $ref_idx = $element->{idx};
-    my $ref_rule_def = $spec->{$ref_rule};
+    my $ref_rule_def = $rules_by_label->{$ref_rule};
     unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
      my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
      my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";
@@ -462,6 +431,35 @@ sub validate_gdata_references {
  }
 
  return 1;
+}
+
+sub validate_compiled_descriptor_state {
+ my ($descriptor_state, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
+
+ unless (_is_compiled_descriptor_state($descriptor_state)) {
+  my $detail = 'Expected compiled_descriptor_state HASH reference, got '
+   . _describe_validation_value_kind($descriptor_state);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid compiled descriptor state',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor state', $detail);
+  return 0;
+ }
+
+ return _validate_gdata_against_rules_by_label(
+  $descriptor_state->{compiled_gdata_by_label},
+  $descriptor_state->{compiled_spec_state}{rules_by_label},
+  $option,
+ );
+}
+
+sub validate_gdata_references {
+ my ($gdata, $spec, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
+ return _validate_gdata_against_rules_by_label($gdata, $spec, $option);
 }
 
 sub validate_dsl_syntax {

@@ -8757,7 +8757,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_name}, '', 'generated descriptor validation rejection leaves inline-spec spec_name empty');
     is($runtime_ctx->{last_error}{spec_path}, '', 'generated descriptor validation rejection leaves inline-spec spec_path empty');
 };
-subtest 'compiler_run_get_pipeline_records_structured_error_when_validate_gdata_references_dies' => sub {
+subtest 'compiler_run_get_pipeline_records_structured_error_when_compiled_descriptor_validation_dies' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -8773,7 +8773,7 @@ SPEC
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Validation::validate_gdata_references = sub { die "__FORCED_VALIDATE_GDATA_REFERENCES_DIE__\n" };
+        local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub { die "__FORCED_VALIDATE_COMPILED_DESCRIPTOR_STATE_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
             { return_descr => 1 },
@@ -8783,18 +8783,18 @@ SPEC
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'compiler pipeline traps validate_gdata_references die and returns without outer die') or diag(normalize_error($err));
-    ok(!defined($ret), 'compiler pipeline returns undef when validate_gdata_references dies');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'validate_gdata_references die records structured error context');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'validate_gdata_references die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'validate_gdata_references die records validation stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'validate_gdata_references die records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'validate_gdata_references die records summary');
-    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_GDATA_REFERENCES_DIE__/, 'validate_gdata_references die records original thrown detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'validate_gdata_references die preserves the requested top_rule in structured diagnostics');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'validate_gdata_references die preserves the top-rule generated handler label when no rule label is available');
-    is($runtime_ctx->{last_error}{spec_name}, '', 'validate_gdata_references die leaves inline-spec spec_name empty');
-    is($runtime_ctx->{last_error}{spec_path}, '', 'validate_gdata_references die leaves inline-spec spec_path empty');
+    ok($ok_run, 'compiler pipeline traps compiled descriptor validation die and returns without outer die') or diag(normalize_error($err));
+    ok(!defined($ret), 'compiler pipeline returns undef when compiled descriptor validation dies');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compiled descriptor validation die records structured error context');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compiled descriptor validation die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'validate_gdata_references', 'compiled descriptor validation die preserves validation stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:validate_gdata_references', 'compiled descriptor validation die preserves combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Generated parser validation failed', 'compiled descriptor validation die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_VALIDATE_COMPILED_DESCRIPTOR_STATE_DIE__/, 'compiled descriptor validation die records original thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'compiled descriptor validation die preserves the requested top_rule in structured diagnostics');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compiled descriptor validation die preserves the top-rule generated handler label when no rule label is available');
+    is($runtime_ctx->{last_error}{spec_name}, '', 'compiled descriptor validation die leaves inline-spec spec_name empty');
+    is($runtime_ctx->{last_error}{spec_path}, '', 'compiled descriptor validation die leaves inline-spec spec_path empty');
 };
 subtest 'compiler_run_get_pipeline_records_structured_rule_label_when_validate_gdata_references_dies_mid_rule' => sub {
     plan tests => 12;
@@ -9073,6 +9073,35 @@ SPEC
     ok($valid, 'compiled descriptor state passes generated-descriptor validation');
     ok(ref($descriptor_state->{compiled_gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
     ok(ref($descriptor_state->{compiled_spec_state}{rules_by_label}) eq 'HASH', 'compiled descriptor state retains compiled spec map for validation');
+};
+subtest 'validation_compiled_descriptor_state_avoids_legacy_gdata_validator' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor direct-validation test') or diag(normalize_error($parse_error));
+
+    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my ($ok_run, $valid, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_gdata_references = sub { die "__UNEXPECTED_LEGACY_GDATA_VALIDATOR__\n" };
+        $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiled descriptor validation succeeds without the legacy gdata validator entrypoint') or diag(normalize_error($err));
+    ok($valid, 'compiled descriptor validation still reports success');
+    unlike($err, qr/__UNEXPECTED_LEGACY_GDATA_VALIDATOR__/, 'compiled descriptor validation does not call validate_gdata_references internally');
 };
 subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
     plan tests => 12;
@@ -11635,7 +11664,7 @@ SPEC
     my $parser;
     {
         no warnings 'redefine';
-        local *LinkedSpec::Validation::validate_gdata_references = sub { return 1 };
+        local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub { return 1 };
         $parser = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
             {},
@@ -11860,6 +11889,45 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when compiled-descriptor validation is trapped');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiled-descriptor validation path still preserves compiled handler coderef');
     is($descr->{meta}{definition_order}[0], 'Top', 'descriptor metadata still exposes definition-order data after direct state validation');
+};
+subtest 'run_get_pipeline_defers_legacy_descriptor_projection_until_after_state_validation' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my $orig_validate_compiled_descriptor_state = \&LinkedSpec::Validation::validate_compiled_descriptor_state;
+    my $orig_compiled_descriptor_state_to_legacy_descr = \&LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my $validation_started = 0;
+    my $saw_projection_after_validation = 0;
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub {
+            $validation_started = 1;
+            return $orig_validate_compiled_descriptor_state->(@_);
+        };
+        local *LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr = sub {
+            die "__UNEXPECTED_EARLY_LEGACY_DESCRIPTOR_PROJECTION__\n" unless $validation_started;
+            $saw_projection_after_validation = 1;
+            return $orig_compiled_descriptor_state_to_legacy_descr->(@_);
+        };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds while legacy descriptor projection ordering is trapped') or diag(normalize_error($err));
+    ok($validation_started, 'compiled descriptor validation starts before legacy descriptor projection is allowed');
+    ok($saw_projection_after_validation, 'legacy descriptor projection still happens after validation for compatibility output');
+    unlike($err, qr/__UNEXPECTED_EARLY_LEGACY_DESCRIPTOR_PROJECTION__/, 'compiler pipeline no longer projects the legacy descriptor before validation starts');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash after deferred projection');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'deferred projection still preserves compiled handler coderef');
 };
 subtest 'run_get_pipeline_builds_action_rewriter_migration_summary_from_compiled_spec_state' => sub {
     plan tests => 6;

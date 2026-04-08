@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: keep validation state-first
+
+- updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now validates compiled descriptor state directly through one shared state-aware validator instead of flattening back to the historical legacy `spec` / `gdata` pair and routing through `validate_gdata_references(...)`,
+- updated `perl/LinkedSpec/Compiler.pm` so the active `run_get_pipeline(...)` path now stays on that internal descriptor-state model through generated-descriptor validation and only projects the outward compatibility descriptor after descriptor-state validation has already succeeded,
+- widened `t/phase0_regression.t` with:
+  - direct coverage proving `validate_compiled_descriptor_state(...)` no longer calls the legacy validator entrypoint internally,
+  - direct ordering coverage proving `run_get_pipeline(...)` defers legacy descriptor projection until after descriptor-state validation starts,
+  - updated compiler-failure/runtime-parser regressions so the traps now hook the active `validate_compiled_descriptor_state(...)` seam rather than the retired legacy validation entrypoint,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats generated-descriptor validation as fully state-first now instead of merely state-aware.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=915`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: validate compiled descriptor state directly
 
 - updated `perl/LinkedSpec/Validation.pm` so generated-descriptor validation now has an explicit `validate_compiled_descriptor_state(...)` seam over the internal compiled descriptor state model instead of only the historical parallel `gdata` / `spec` hash pair,

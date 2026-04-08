@@ -1115,12 +1115,20 @@ One more state-first seam now sits behind that same outer descriptor shape:
 - final descriptor assembly first builds an internal `compiled_descriptor_state`,
 - that state keeps the compiled-spec state plus the compiled `gdata` map together as one explicit compiler-owned record,
 - generated-descriptor validation now consumes that compiled descriptor state directly,
+- that validation no longer routes back through the historical legacy `validate_gdata_references(...)` entrypoint on the active compiler path,
 - and only after that does the compiler project the outward `{ spec => ..., gdata => ..., meta => ... }` compatibility descriptor.
 
 That internal seam is mostly for compiler quality and refactor safety, but it does have one practical contract improvement:
 
 - malformed compiled `gdata` callback output is now rejected directly at final descriptor assembly with specific contract detail,
 - instead of drifting further into later generated-descriptor validation before the actual shape problem is identified.
+
+So the active compiler path now stays on one explicit internal descriptor model from:
+
+- compiled-spec state,
+- to compiled descriptor state,
+- through generated-descriptor validation,
+- and only then back out to the compatibility descriptor surface that older callers still consume.
 
 Lower-level callers that already hold parsed bootstrap entries can also use `LinkedSpec::spec_descr($entries)`. The default rule-compilation callback is owned internally by `LinkedSpec::Compiler`, so you only need to pass an explicit callback when you are intentionally overriding rule compilation behavior; normal callers should not depend on the older `LinkedSpec::spec_entry(...)` façade helper.
 

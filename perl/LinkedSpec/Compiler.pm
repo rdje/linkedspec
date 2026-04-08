@@ -1412,11 +1412,10 @@ if ($build_final_descr_error) {
    rule_label => $build_final_descr_rule_label,
    handler_source_label => $build_final_descr_handler_source_label,
   );
-  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly did not produce a valid compiled descriptor state");
-  _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
+ _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly did not produce a valid compiled descriptor state");
+ _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
   return undef;
  }
- my $final_descr = _compiled_descriptor_state_to_legacy_descr($final_descr_state);
 
  my %validate_gdata_failure;
  my $gdata_refs_valid = eval {
@@ -1464,10 +1463,11 @@ if ($validate_gdata_references_error) {
    rule_label => $validate_gdata_failure{rule_label},
    handler_source_label => $validate_gdata_handler_source_label,
   );
-  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
+ _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
  _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
  return undef;
 }
+ my $final_descr = _compiled_descriptor_state_to_legacy_descr($final_descr_state);
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule

@@ -204,6 +204,7 @@ One concrete architectural consequence matters now:
   - `duplicate_rule_labels`
 - default `spec_gdata(...)` now consumes that state directly,
 - final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+- generated-descriptor validation now also walks that descriptor state directly instead of routing back through the historical legacy `validate_gdata_references(...)` entrypoint, so compatibility descriptor projection is fully deferred until after descriptor-state validation succeeds,
 - and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
 That is a real structural improvement, not only a diagnostics tweak:
