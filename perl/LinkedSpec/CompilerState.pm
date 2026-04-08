@@ -60,6 +60,12 @@ sub compiled_spec_state_definition_order {
  return $state->{definition_order}
 }
 
+sub compiled_spec_state_duplicate_rule_labels {
+ my ($state) = @_;
+ return [] unless is_compiled_spec_state($state);
+ return $state->{duplicate_rule_labels}
+}
+
 sub compiled_spec_state_to_legacy_spec {
  my ($state) = @_;
  return undef unless is_compiled_spec_state($state);
@@ -190,6 +196,12 @@ sub compiled_descriptor_state_gdata_by_label {
  my ($state) = @_;
  return {} unless is_compiled_descriptor_state($state);
  return compiled_gdata_state_gdata_by_label(compiled_descriptor_state_gdata_state($state))
+}
+
+sub compiled_descriptor_state_rules_by_label {
+ my ($state) = @_;
+ return {} unless is_compiled_descriptor_state($state);
+ return compiled_spec_state_rules_by_label(compiled_descriptor_state_spec_state($state))
 }
 
 sub compiled_descriptor_state_meta {

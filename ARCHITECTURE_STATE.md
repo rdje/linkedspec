@@ -214,6 +214,7 @@ That is a real structural improvement, not only a diagnostics tweak:
 - final descriptor assembly now also has one explicit internal descriptor-state model,
 - generated-descriptor validation now also consumes that same descriptor-state model directly on the active path,
 - the last legacy compatibility-shape normalization seams for compiled spec and compiled gdata now also route through that same owner instead of living as local compiler glue,
+- and read-side compiled-state access for definition-order, duplicate-label, and descriptor-to-rule-map reads now also routes through that same owner instead of peeking raw state fields directly,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
 - and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
@@ -221,10 +222,11 @@ That is a real structural improvement, not only a diagnostics tweak:
 ### `LinkedSpec::CompilerState`
 - owns the internal compiled-spec, compiled-gdata, and compiled-descriptor state records,
 - owns normalization of legacy compatibility hashes into those explicit state records,
+- owns the preferred read-side accessors for that state as well,
 - owns validation-friendly shape checks for those records,
 - owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
 - is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`,
-- which means `Compiler.pm` no longer carries one leftover local “accept legacy hash or compiled-state record” conversion seam beside the state owner.
+- which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
 
 One more boundary is now tighter too:
 

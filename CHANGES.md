@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: route compiled-state reads through owner
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes explicit read-side helpers for:
+  - compiled-spec duplicate-rule labels,
+  - compiled-descriptor rule maps,
+- updated `perl/LinkedSpec/Compiler.pm` so compiled-spec trace/logging now reads definition-order and duplicate-label data through `LinkedSpec::CompilerState` accessors instead of reaching into raw state fields directly,
+- updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now reads the descriptor-owned rule map through `LinkedSpec::CompilerState` instead of dereferencing `$descriptor_state->{compiled_spec_state}` directly,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves read-side compiled-state access routes through `LinkedSpec::CompilerState`, not only state creation, normalization, and validation,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiled-state reads as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: move compiler-state normalization into owner
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also owns the remaining legacy compatibility-shape normalization seams:

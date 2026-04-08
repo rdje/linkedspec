@@ -443,7 +443,7 @@ sub validate_compiled_descriptor_state {
 
  return _validate_gdata_against_rules_by_label(
   _call_compiler_state('compiled_descriptor_state_gdata_by_label', $descriptor_state),
-  _call_compiler_state('compiled_spec_state_rules_by_label', $descriptor_state->{compiled_spec_state}),
+  _call_compiler_state('compiled_descriptor_state_rules_by_label', $descriptor_state),
   $option,
  );
 }

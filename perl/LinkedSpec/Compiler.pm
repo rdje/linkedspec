@@ -376,6 +376,10 @@ sub _compiled_spec_state_definition_order {
  return _call_compiler_state('compiled_spec_state_definition_order', @_)
 }
 
+sub _compiled_spec_state_duplicate_rule_labels {
+ return _call_compiler_state('compiled_spec_state_duplicate_rule_labels', @_)
+}
+
 sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
@@ -422,6 +426,10 @@ sub _compiled_descriptor_state_gdata_state {
 
 sub _compiled_descriptor_state_gdata_by_label {
  return _call_compiler_state('compiled_descriptor_state_gdata_by_label', @_)
+}
+
+sub _compiled_descriptor_state_rules_by_label {
+ return _call_compiler_state('compiled_descriptor_state_rules_by_label', @_)
 }
 
 sub _compiled_descriptor_state_meta {
@@ -553,7 +561,7 @@ sub spec_descr {
   }
  }
 
- my $definition_order = $compiled_state->{definition_order};
+ my $definition_order = _compiled_spec_state_definition_order($compiled_state);
  _trace_log_output(DUMP_LOW, "Compiled spec state", "Number of compiled rule entries: " . scalar(@$definition_order));
  for (my $i = 0; $i < @$definition_order; ++$i) {
   my $record = $definition_order->[$i];
@@ -562,7 +570,7 @@ sub spec_descr {
   _trace_log_output(DUMP_LOW, "Entry $i", "Label: '$label', Type: " . ref($info));
  }
 
- my @duplicate_rules = @{$compiled_state->{duplicate_rule_labels}};
+ my @duplicate_rules = @{_compiled_spec_state_duplicate_rule_labels($compiled_state)};
  _trace_decision('duplicate_rule_definitions_present', scalar(@duplicate_rules) ? 1 : 0, scalar(@duplicate_rules) ? ('duplicate_rules=' . join(',', @duplicate_rules)) : 'no duplicates detected', DUMP_MEDIUM);
 
  if (@duplicate_rules) {

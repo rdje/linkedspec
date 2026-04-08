@@ -1174,6 +1174,12 @@ The same refactor is now complete on the compatibility bridge too:
 - so that owner now defines not only the explicit state records themselves, but also the bridge from legacy compatibility shape into that state model,
 - and `Compiler.pm` no longer carries a second local copy of that conversion logic beside the state owner.
 
+That same owner boundary now covers read-side state access too:
+
+- compiler trace/logging reads such as compiled-spec definition order and duplicate-label lists now go through `LinkedSpec::CompilerState` accessors,
+- generated-descriptor validation now reads the descriptor-owned rule map through `LinkedSpec::CompilerState` too,
+- so `Compiler.pm` and `Validation.pm` no longer need to reach into raw compiled-state fields directly on the active path.
+
 If you want the same structured diagnostics continuity there, `spec_descr(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `spec_descr(...)` now returns `undef` and records a normal `compiler_pipeline:spec_descr` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.
 
 Likewise, final descriptor assembly keeps its `gdata` compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `spec_gdata` callback or depend on an older `LinkedSpec::spec_gdata(...)` façade helper.
