@@ -237,8 +237,8 @@ sub _compiled_spec_state_definition_order {
  return _call_compiler_state('compiled_spec_state_definition_order', @_)
 }
 
-sub _compiled_spec_state_duplicate_rule_labels {
- return _call_compiler_state('compiled_spec_state_duplicate_rule_labels', @_)
+sub _compiled_spec_state_redefined_rule_labels {
+ return _call_compiler_state('compiled_spec_state_redefined_rule_labels', @_)
 }
 
 sub _compiled_spec_state_to_legacy_spec {
@@ -368,7 +368,7 @@ sub build_compiled_rule_table {
  }
 
  my $compiled_state = _new_compiled_spec_state();
- my %duplicate_seen;
+ my %redefined_seen;
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
   my $entry = $specretv->[$entry_idx];
   unless (ref($entry) eq 'ARRAY') {
@@ -430,7 +430,7 @@ sub build_compiled_rule_table {
     _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
    return undef
   }
-  my $is_duplicate = _record_compiled_spec_rule($compiled_state, $label, $info, \%duplicate_seen);
+  my $is_duplicate = _record_compiled_spec_rule($compiled_state, $label, $info, \%redefined_seen);
   if ($is_duplicate) {
    _trace_log_output(DUMP_LOW, "Duplicate rule detected", "Rule '$label' is defined multiple times - second definition will overwrite the first");
   }
@@ -445,11 +445,11 @@ sub build_compiled_rule_table {
   _trace_log_output(DUMP_LOW, "Entry $i", "Label: '$label', Type: " . ref($info));
  }
 
- my @duplicate_rules = @{_compiled_spec_state_duplicate_rule_labels($compiled_state)};
- _trace_decision('duplicate_rule_definitions_present', scalar(@duplicate_rules) ? 1 : 0, scalar(@duplicate_rules) ? ('duplicate_rules=' . join(',', @duplicate_rules)) : 'no duplicates detected', DUMP_MEDIUM);
+ my @redefined_rules = @{_compiled_spec_state_redefined_rule_labels($compiled_state)};
+ _trace_decision('redefined_rule_definitions_present', scalar(@redefined_rules) ? 1 : 0, scalar(@redefined_rules) ? ('redefined_rules=' . join(',', @redefined_rules)) : 'no redefinitions detected', DUMP_MEDIUM);
 
- if (@duplicate_rules) {
-  _trace_log_output(DUMP_LOW, "Duplicate rules summary", "Rules with multiple definitions: " . join(", ", @duplicate_rules));
+ if (@redefined_rules) {
+  _trace_log_output(DUMP_LOW, "Redefined rules summary", "Rules redefined later in the source: " . join(", ", @redefined_rules));
  }
 
  my $result = (ref($option) eq 'HASH' && $option->{return_state})

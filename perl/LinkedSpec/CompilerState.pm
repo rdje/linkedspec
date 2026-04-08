@@ -20,7 +20,7 @@ sub new_compiled_spec_state {
   definition_order => [],
   compiled_rule_order => [],
   rules_by_label => {},
-  duplicate_rule_labels => [],
+  redefined_rule_labels => [],
  }
 }
 
@@ -32,7 +32,7 @@ sub is_compiled_spec_state {
  return 0 unless ref($value->{definition_order}) eq 'ARRAY';
  return 0 unless ref($value->{compiled_rule_order}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
- return 0 unless ref($value->{duplicate_rule_labels}) eq 'ARRAY';
+ return 0 unless ref($value->{redefined_rule_labels}) eq 'ARRAY';
  return 1
 }
 
@@ -80,10 +80,10 @@ sub compiled_spec_state_definition_order {
  return $state->{definition_order}
 }
 
-sub compiled_spec_state_duplicate_rule_labels {
+sub compiled_spec_state_redefined_rule_labels {
  my ($state) = @_;
  return [] unless is_compiled_spec_state($state);
- return $state->{duplicate_rule_labels}
+ return $state->{redefined_rule_labels}
 }
 
 sub compiled_spec_state_to_legacy_spec {
@@ -99,7 +99,7 @@ sub compiled_spec_state_meta {
   descriptor_model => 'compiled_spec_state_v1',
   definition_order => [map { $_->{label} } @{compiled_spec_state_definition_order($state)}],
   compiled_rule_order => [@{$state->{compiled_rule_order}}],
-  duplicate_rule_labels => [@{$state->{duplicate_rule_labels}}],
+  redefined_rule_labels => [@{$state->{redefined_rule_labels}}],
  }
 }
 
@@ -271,7 +271,7 @@ sub build_action_rewriter_migration_summary {
 }
 
 sub record_compiled_spec_rule {
- my ($state, $label, $info, $duplicate_seen) = @_;
+ my ($state, $label, $info, $redefined_seen) = @_;
  die "(LinkedSpec::CompilerState::record_compiled_spec_rule) -E- compiled spec state is invalid"
   unless is_compiled_spec_state($state);
 
@@ -281,8 +281,8 @@ push @{$state->{definition_order}}, {
   info => $info,
  };
  push @{$state->{compiled_rule_order}}, $label unless $is_duplicate;
- if ($is_duplicate && ref($duplicate_seen) eq 'HASH' && !$duplicate_seen->{$label}++) {
-  push @{$state->{duplicate_rule_labels}}, $label;
+ if ($is_duplicate && ref($redefined_seen) eq 'HASH' && !$redefined_seen->{$label}++) {
+  push @{$state->{redefined_rule_labels}}, $label;
  }
  $state->{rules_by_label}{$label} = $info;
  return $is_duplicate

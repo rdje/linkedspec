@@ -7374,7 +7374,7 @@ SPEC
     ok(ref($state->{definition_order}) eq 'ARRAY' && @{$state->{definition_order}} == 1, 'build_compiled_rule_table return_state preserves definition-order records');
     is($state->{definition_order}[0]{label}, 'Top', 'build_compiled_rule_table return_state definition-order record preserves rule label');
     ok(ref($state->{rules_by_label}) eq 'HASH' && ref($state->{rules_by_label}{Top}{handler}) eq 'CODE', 'build_compiled_rule_table return_state exposes rules_by_label with compiled handler coderef');
-    is_deeply($state->{duplicate_rule_labels}, [], 'build_compiled_rule_table return_state records no duplicate labels for a single-rule spec');
+    is_deeply($state->{redefined_rule_labels}, [], 'build_compiled_rule_table return_state records no redefined labels for a single-rule spec');
 };
 subtest 'build_compiled_rule_table_defers_default_compile_callback_to_compiler_owner' => sub {
     plan tests => 6;
@@ -9041,13 +9041,13 @@ SPEC
     my $orig_compiled_spec_state_rule_info = \&LinkedSpec::CompilerState::compiled_spec_state_rule_info;
     my $orig_compiled_spec_state_rule_rows = \&LinkedSpec::CompilerState::compiled_spec_state_rule_rows;
     my $orig_compiled_spec_state_definition_order = \&LinkedSpec::CompilerState::compiled_spec_state_definition_order;
-    my $orig_compiled_spec_state_duplicate_rule_labels = \&LinkedSpec::CompilerState::compiled_spec_state_duplicate_rule_labels;
+    my $orig_compiled_spec_state_redefined_rule_labels = \&LinkedSpec::CompilerState::compiled_spec_state_redefined_rule_labels;
     my $orig_is_compiled_descriptor_state = \&LinkedSpec::CompilerState::is_compiled_descriptor_state;
     my $orig_compiled_descriptor_state_validation_view = \&LinkedSpec::CompilerState::compiled_descriptor_state_validation_view;
     my $orig_normalize_compiled_spec_input = \&LinkedSpec::CompilerState::normalize_compiled_spec_input;
     my $orig_normalize_compiled_dependency_regex_output = \&LinkedSpec::CompilerState::normalize_compiled_dependency_regex_output;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_new_compiled_spec_state, $saw_new_compiled_dependency_regex_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_validation_view, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_dependency_regex_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    my ($saw_new_compiled_spec_state, $saw_new_compiled_dependency_regex_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_redefined_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_validation_view, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_dependency_regex_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::CompilerState::new_compiled_spec_state = sub {
@@ -9082,9 +9082,9 @@ SPEC
             $saw_compiled_spec_state_definition_order = 1;
             return $orig_compiled_spec_state_definition_order->(@_);
         };
-        local *LinkedSpec::CompilerState::compiled_spec_state_duplicate_rule_labels = sub {
-            $saw_compiled_spec_state_duplicate_rule_labels = 1;
-            return $orig_compiled_spec_state_duplicate_rule_labels->(@_);
+        local *LinkedSpec::CompilerState::compiled_spec_state_redefined_rule_labels = sub {
+            $saw_compiled_spec_state_redefined_rule_labels = 1;
+            return $orig_compiled_spec_state_redefined_rule_labels->(@_);
         };
         local *LinkedSpec::CompilerState::normalize_compiled_spec_input = sub {
             $saw_normalize_compiled_spec_input = 1;
@@ -9116,7 +9116,7 @@ SPEC
     ok($saw_compiled_spec_state_rule_info, 'Compiler.pm routes compiled-spec dependency rule lookup through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_rule_rows, 'Compiler.pm routes compiled-spec ordered rule iteration through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_definition_order, 'Compiler.pm routes compiled-spec definition-order reads through LinkedSpec::CompilerState');
-    ok($saw_compiled_spec_state_duplicate_rule_labels, 'Compiler.pm routes compiled-spec duplicate-label reads through LinkedSpec::CompilerState');
+    ok($saw_compiled_spec_state_redefined_rule_labels, 'Compiler.pm routes compiled-spec redefined-label reads through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_spec_input, 'Compiler.pm routes compiled-spec normalization through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_dependency_regex_output, 'Compiler.pm routes dependency-regex normalization through LinkedSpec::CompilerState');
     ok($saw_is_compiled_descriptor_state, 'Validation.pm routes descriptor-state validation through LinkedSpec::CompilerState');
@@ -42510,7 +42510,7 @@ SPEC
     is($default_descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'default parse mode descriptor records the compiled-spec state model');
     is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default parse mode descriptor preserves definition-order metadata');
     is_deeply($default_descr->{meta}{compiled_rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic compiled-rule-order metadata');
-    is_deeply($default_descr->{meta}{duplicate_rule_labels}, [], 'default parse mode descriptor preserves duplicate-rule metadata');
+    is_deeply($default_descr->{meta}{redefined_rule_labels}, [], 'default parse mode descriptor preserves redefined-rule metadata');
 
     my $consume_descr = LinkedSpec::Get(
         \$spec_content,

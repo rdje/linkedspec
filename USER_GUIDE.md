@@ -1091,7 +1091,7 @@ Descriptor topology fields:
 - `meta.descriptor_model`
 - `meta.definition_order`
 - `meta.compiled_rule_order`
-- `meta.duplicate_rule_labels`
+- `meta.redefined_rule_labels`
 
 That distinction is intentional:
 - `language_agnostic_action_ir_ready = 1` means the rule no longer depends on RAW_PERL fallback or unresolved helpers,
@@ -1114,7 +1114,7 @@ The current state-derived metadata is intentionally exposed at the descriptor bo
 - `meta.descriptor_model` is currently `compiled_spec_state_v1`,
 - `meta.definition_order` preserves the full rule-definition sequence, including repeated labels before last-definition-wins collapse,
 - `meta.compiled_rule_order` preserves the first-seen deterministic unique compiled rule order,
-- `meta.duplicate_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
+- `meta.redefined_rule_labels` records labels that were defined more than once while keeping the historical last-definition-wins rule map semantics.
 
 That same state-first rule now also reaches descriptor-level migration summary generation:
 
@@ -1156,7 +1156,7 @@ my $state = LinkedSpec::build_compiled_rule_table($entries, { return_state => 1 
 #   definition_order => [ ... ],
 #   compiled_rule_order => [ ... ],
 #   rules_by_label => { ... },
-#   duplicate_rule_labels => [ ... ],
+#   redefined_rule_labels => [ ... ],
 # }
 ```
 

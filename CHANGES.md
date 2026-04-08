@@ -188,7 +188,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-08 - Phase 5: route compiled-state reads through owner
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes explicit read-side helpers for:
-  - compiled-spec duplicate-rule labels,
+  - compiled-spec redefined-rule labels,
   - compiled-descriptor rule maps,
 - updated `perl/LinkedSpec/Compiler.pm` so compiled-spec trace/logging now reads definition-order and duplicate-label data through `LinkedSpec::CompilerState` accessors instead of reaching into raw state fields directly,
 - updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now reads the descriptor-owned rule map through `LinkedSpec::CompilerState` instead of dereferencing `$descriptor_state->{compiled_spec_state}` directly,
@@ -337,15 +337,15 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-07 - Phase 5: introduce compiled-spec state model
 
 - updated `perl/LinkedSpec/Compiler.pm` so the compiler now has one explicit internal compiled-spec state model instead of treating loose legacy `spec_descr` / `spec_gdata` hashes as its own working truth:
-  - `spec_descr(...)` now first builds `compiled_spec_state` with `kind`, `version`, `definition_order`, `rule_order`, `rules_by_label`, and `duplicate_rule_labels`,
+  - `spec_descr(...)` now first builds `compiled_spec_state` with `kind`, `version`, `definition_order`, `rule_order`, `rules_by_label`, and `redefined_rule_labels`,
   - default `spec_gdata(...)` now accepts that state directly and derives combined regex/dependency data from it,
-  - `_build_final_descr(...)` now projects legacy `spec` / `gdata` hashes outward from that state while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+  - `_build_final_descr(...)` now projects legacy `spec` / `gdata` hashes outward from that state while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.redefined_rule_labels`,
   - `run_get_pipeline(...)` now carries that state through final descriptor assembly instead of threading only the historical legacy spec hash,
 - updated `perl/LinkedSpec.pm` comments so the public `spec_descr(...)` façade now documents the richer owner-owned state model accurately instead of describing only the old compatibility hash contract,
 - widened `t/phase0_regression.t` so the new state model is locked directly:
   - `spec_descr(..., { return_state => 1 })` now has explicit regression coverage for the returned state shape,
   - `spec_gdata(...)` now has explicit regression coverage for compiled-spec state input,
-  - `run_get_pipeline(...)` / `return_descr => 1` now lock the new descriptor metadata (`descriptor_model`, `rule_order`, `duplicate_rule_labels`) and the fact that final descriptor assembly receives compiled-spec state rather than only the legacy spec hash,
+  - `run_get_pipeline(...)` / `return_descr => 1` now lock the new descriptor metadata (`descriptor_model`, `rule_order`, `redefined_rule_labels`) and the fact that final descriptor assembly receives compiled-spec state rather than only the legacy spec hash,
 - refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiled-spec state as the compiler's internal source of truth and legacy `spec` / `gdata` hashes as edge compatibility projections rather than the compiler's preferred internal model.
 
 - Validation:
