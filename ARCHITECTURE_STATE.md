@@ -202,14 +202,15 @@ One concrete architectural consequence matters now:
   - `rule_order`
   - `rules_by_label`
   - `duplicate_rule_labels`
-- default `spec_gdata(...)` now consumes that state directly,
-- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+- default `spec_gdata(...)` now consumes that state directly and, on the active path, first builds an explicit internal `compiled_gdata_state` record instead of leaving compiled gdata as one last anonymous hash,
+- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record that composes compiled-spec state plus compiled-gdata state, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
 - generated-descriptor validation now also walks that descriptor state directly instead of routing back through the historical legacy `validate_gdata_references(...)` entrypoint, so compatibility descriptor projection is fully deferred until after descriptor-state validation succeeds,
 - and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
 That is a real structural improvement, not only a diagnostics tweak:
 
 - the compiler now has one explicit internal descriptor model,
+- derived gdata now also has one explicit internal state model,
 - final descriptor assembly now also has one explicit internal descriptor-state model,
 - generated-descriptor validation now also consumes that same descriptor-state model directly on the active path,
 - ordering is first-class instead of incidental,
@@ -398,7 +399,7 @@ The helper family is much richer than it used to be. The bigger future wins are 
 ### 5. `spec_descr` / `spec_gdata` should now be read as phases, not as the ideal long-term data model
 The information they represent is still needed. What changed is the ownership model:
 - `spec_descr(...)` is now best read as "build compiled-spec state",
-- `spec_gdata(...)` is now best read as "derive regex/dependency enrichment from compiled-spec state",
+- `spec_gdata(...)` is now best read as "build compiled-gdata state from compiled-spec state and project a legacy gdata hash only when a caller still wants that older shape",
 - and the legacy hash forms are compatibility outputs rather than the compiler's own preferred representation.
 
 ## Suggested Session-Start Refresh Checklist

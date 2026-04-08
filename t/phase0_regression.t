@@ -8996,8 +8996,33 @@ SPEC
     ok(exists $gdata->{Top}, 'spec_gdata built from compiled-spec state still resolves Top dependency regex');
     ok(!exists $gdata->{Child}, 'spec_gdata built from compiled-spec state omits dependency-free rules');
 };
+subtest 'compiler_spec_gdata_return_state_builds_explicit_compiled_gdata_state' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for compiled-gdata-state test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-gdata-state test');
+
+    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $gdata_state = LinkedSpec::Compiler::spec_gdata($compiled_state, { return_state => 1 });
+
+    ok(ref($gdata_state) eq 'HASH', 'spec_gdata return_state returns a hashref');
+    is($gdata_state->{kind}, 'compiled_gdata_state', 'spec_gdata return_state exposes explicit compiled-gdata-state kind');
+    is($gdata_state->{version}, 1, 'spec_gdata return_state exposes expected compiled-gdata-state version');
+    is_deeply($gdata_state->{source_rule_order}, ['Top', 'Child'], 'compiled gdata state preserves source rule order');
+    is_deeply($gdata_state->{compiled_label_order}, ['Top'], 'compiled gdata state preserves deterministic compiled label order');
+    ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
+};
 subtest 'compiler_build_final_descr_state_builds_explicit_compiled_descriptor_state' => sub {
-    plan tests => 11;
+    plan tests => 14;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9018,9 +9043,12 @@ SPEC
     is($descriptor_state->{kind}, 'compiled_descriptor_state', 'final descriptor state exposes the explicit descriptor-state kind');
     is($descriptor_state->{version}, 1, 'final descriptor state exposes the expected version');
     is($descriptor_state->{compiled_spec_state}{kind}, 'compiled_spec_state', 'final descriptor state retains the compiled-spec state as its source of truth');
+    is($descriptor_state->{compiled_gdata_state}{kind}, 'compiled_gdata_state', 'final descriptor state retains explicit compiled-gdata state');
+    is($descriptor_state->{compiled_gdata_state}{version}, 1, 'final descriptor state keeps expected compiled-gdata-state version');
     is_deeply($descriptor_state->{meta}{definition_order}, ['Top', 'Child'], 'final descriptor state meta preserves full definition order');
     is_deeply($descriptor_state->{meta}{rule_order}, ['Top', 'Child'], 'final descriptor state meta preserves deterministic unique rule order');
-    ok(exists $descriptor_state->{compiled_gdata_by_label}{Top}, 'final descriptor state keeps the compiled gdata map');
+    ok(exists $descriptor_state->{compiled_gdata_state}{gdata_by_label}{Top}, 'final descriptor state keeps the compiled gdata map inside compiled-gdata state');
+    is_deeply($descriptor_state->{compiled_gdata_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled gdata label order');
 
     my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr($descriptor_state);
     ok(ref($legacy_descr->{spec}) eq 'HASH' && ref($legacy_descr->{gdata}) eq 'HASH', 'compiled descriptor state still projects to the legacy outer descriptor shape');
@@ -9049,7 +9077,7 @@ SPEC
     $err = $@ // '' unless $ok_run;
 
     ok(!$ok_run, 'final descriptor state build dies when compiled gdata is malformed');
-    is(normalize_error($err), 'final descriptor assembly expects compiled gdata HASH ref; got ARRAY', 'final descriptor state build reports the specific malformed compiled-gdata detail');
+    is(normalize_error($err), 'final descriptor assembly expects compiled gdata HASH ref or compiled_gdata_state; got ARRAY', 'final descriptor state build reports the specific malformed compiled-gdata detail');
 };
 subtest 'validation_accepts_compiled_descriptor_state_input' => sub {
     plan tests => 5;
@@ -9071,7 +9099,7 @@ SPEC
     my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
 
     ok($valid, 'compiled descriptor state passes generated-descriptor validation');
-    ok(ref($descriptor_state->{compiled_gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
+    ok(ref($descriptor_state->{compiled_gdata_state}{gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
     ok(ref($descriptor_state->{compiled_spec_state}{rules_by_label}) eq 'HASH', 'compiled descriptor state retains compiled spec map for validation');
 };
 subtest 'validation_compiled_descriptor_state_avoids_legacy_gdata_validator' => sub {

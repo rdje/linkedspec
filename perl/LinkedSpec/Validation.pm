@@ -298,9 +298,27 @@ sub _is_compiled_descriptor_state {
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless ref($value->{compiled_spec_state}) eq 'HASH';
  return 0 unless ref($value->{compiled_spec_state}{rules_by_label}) eq 'HASH';
- return 0 unless ref($value->{compiled_gdata_by_label}) eq 'HASH';
+ return 0 unless _is_compiled_gdata_state($value->{compiled_gdata_state});
  return 0 unless ref($value->{meta}) eq 'HASH';
  return 1;
+}
+
+sub _is_compiled_gdata_state {
+ my ($value) = @_;
+
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_gdata_state';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{source_rule_order}) eq 'ARRAY';
+ return 0 unless ref($value->{compiled_label_order}) eq 'ARRAY';
+ return 0 unless ref($value->{gdata_by_label}) eq 'HASH';
+ return 1;
+}
+
+sub _compiled_gdata_state_gdata_by_label {
+ my ($state) = @_;
+ return {} unless _is_compiled_gdata_state($state);
+ return $state->{gdata_by_label};
 }
 
 sub _validate_gdata_against_rules_by_label {
@@ -450,7 +468,7 @@ sub validate_compiled_descriptor_state {
  }
 
  return _validate_gdata_against_rules_by_label(
-  $descriptor_state->{compiled_gdata_by_label},
+  _compiled_gdata_state_gdata_by_label($descriptor_state->{compiled_gdata_state}),
   $descriptor_state->{compiled_spec_state}{rules_by_label},
   $option,
  );

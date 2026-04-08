@@ -429,22 +429,70 @@ sub _record_compiled_spec_rule {
  return $is_duplicate
 }
 
-sub _new_compiled_descriptor_state {
+sub _new_compiled_gdata_state {
  my (%args) = @_;
  my $compiled_spec_state = $args{compiled_spec_state};
  my $compiled_gdata_by_label = $args{compiled_gdata_by_label};
+
+ die "(LinkedSpec::Compiler::_new_compiled_gdata_state) -E- compiled spec state is invalid"
+  unless _is_compiled_spec_state($compiled_spec_state);
+ die "(LinkedSpec::Compiler::_new_compiled_gdata_state) -E- compiled gdata map must be HASH ref"
+  unless ref($compiled_gdata_by_label) eq 'HASH';
+
+ my $source_rule_order = [@{_compiled_spec_state_rule_order($compiled_spec_state)}];
+ my %seen_compiled;
+ my @compiled_label_order = grep {
+  exists($compiled_gdata_by_label->{$_}) && !$seen_compiled{$_}++
+ } @$source_rule_order;
+
+ return {
+  kind => 'compiled_gdata_state',
+  version => 1,
+  source_rule_order => $source_rule_order,
+  compiled_label_order => \@compiled_label_order,
+  gdata_by_label => { %$compiled_gdata_by_label },
+ }
+}
+
+sub _is_compiled_gdata_state {
+ my ($value) = @_;
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_gdata_state';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{source_rule_order}) eq 'ARRAY';
+ return 0 unless ref($value->{compiled_label_order}) eq 'ARRAY';
+ return 0 unless ref($value->{gdata_by_label}) eq 'HASH';
+ return 1
+}
+
+sub _compiled_gdata_state_gdata_by_label {
+ my ($state) = @_;
+ return {} unless _is_compiled_gdata_state($state);
+ return $state->{gdata_by_label}
+}
+
+sub _compiled_gdata_state_to_legacy_gdata {
+ my ($state) = @_;
+ return undef unless _is_compiled_gdata_state($state);
+ return { %{_compiled_gdata_state_gdata_by_label($state)} }
+}
+
+sub _new_compiled_descriptor_state {
+ my (%args) = @_;
+ my $compiled_spec_state = $args{compiled_spec_state};
+ my $compiled_gdata_state = $args{compiled_gdata_state};
  my $meta = (ref($args{meta}) eq 'HASH') ? $args{meta} : {};
 
  die "(LinkedSpec::Compiler::_new_compiled_descriptor_state) -E- compiled spec state is invalid"
   unless _is_compiled_spec_state($compiled_spec_state);
- die "(LinkedSpec::Compiler::_new_compiled_descriptor_state) -E- compiled gdata map must be HASH ref"
-  unless ref($compiled_gdata_by_label) eq 'HASH';
+ die "(LinkedSpec::Compiler::_new_compiled_descriptor_state) -E- compiled gdata state is invalid"
+  unless _is_compiled_gdata_state($compiled_gdata_state);
 
  return {
   kind => 'compiled_descriptor_state',
   version => 1,
   compiled_spec_state => $compiled_spec_state,
-  compiled_gdata_by_label => $compiled_gdata_by_label,
+  compiled_gdata_state => $compiled_gdata_state,
   meta => { %$meta },
  }
 }
@@ -455,7 +503,7 @@ sub _is_compiled_descriptor_state {
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless _is_compiled_spec_state($value->{compiled_spec_state});
- return 0 unless ref($value->{compiled_gdata_by_label}) eq 'HASH';
+ return 0 unless _is_compiled_gdata_state($value->{compiled_gdata_state});
  return 0 unless ref($value->{meta}) eq 'HASH';
  return 1
 }
@@ -466,10 +514,16 @@ sub _compiled_descriptor_state_spec_state {
  return $state->{compiled_spec_state}
 }
 
+sub _compiled_descriptor_state_gdata_state {
+ my ($state) = @_;
+ return undef unless _is_compiled_descriptor_state($state);
+ return $state->{compiled_gdata_state}
+}
+
 sub _compiled_descriptor_state_gdata_by_label {
  my ($state) = @_;
  return {} unless _is_compiled_descriptor_state($state);
- return $state->{compiled_gdata_by_label}
+ return _compiled_gdata_state_gdata_by_label(_compiled_descriptor_state_gdata_state($state))
 }
 
 sub _compiled_descriptor_state_meta {
@@ -483,7 +537,7 @@ sub _compiled_descriptor_state_to_legacy_descr {
  return undef unless _is_compiled_descriptor_state($state);
  return {
   spec => _compiled_spec_state_to_legacy_spec(_compiled_descriptor_state_spec_state($state)),
-  gdata => { %{_compiled_descriptor_state_gdata_by_label($state)} },
+  gdata => _compiled_gdata_state_to_legacy_gdata(_compiled_descriptor_state_gdata_state($state)),
   meta => { %{_compiled_descriptor_state_meta($state)} },
  }
 }
@@ -654,7 +708,8 @@ sub spec_descr {
 }
 
 sub spec_gdata {
- my $sg = _normalize_compiled_spec_input(shift);
+ my ($spec_input, $option) = @_;
+ my $sg = _normalize_compiled_spec_input($spec_input);
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_gdata', {
   rule_count => _compiled_spec_state_rule_count($sg),
  }, DUMP_MEDIUM);
@@ -723,7 +778,13 @@ foreach my $label (@{_compiled_spec_state_rule_order($sg)}) {
   }
 }
 
-my $result = \%gdata;
+ my $legacy_gdata = \%gdata;
+ my $result = (ref($option) eq 'HASH' && $option->{return_state})
+  ? _new_compiled_gdata_state(
+     compiled_spec_state => $sg,
+     compiled_gdata_by_label => $legacy_gdata,
+    )
+  : $legacy_gdata;
  _clear_active_spec_gdata_rule_label();
 
 if (_trace_should_dump(DUMP_MEDIUM)) {
@@ -731,8 +792,23 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump(_dump_value($result));
   _trace_log_dump("=== END GENERATED GDATA DUMP ===\n");
  }
- _trace_exit($trace_scope, { status => 'ok', compiled_labels => scalar(keys %$result) }, DUMP_MEDIUM);
+ _trace_exit($trace_scope, {
+   status => 'ok',
+   compiled_labels => scalar(keys %$legacy_gdata),
+   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_gdata_state' : 'legacy_gdata_hash',
+  }, DUMP_MEDIUM);
  return $result
+}
+
+sub _normalize_compiled_gdata_output {
+ my ($value, $compiled_spec_state) = @_;
+ return $value if _is_compiled_gdata_state($value);
+ _die_with_detail(_describe_final_descr_gdata_result($value))
+  unless ref($value) eq 'HASH';
+ return _new_compiled_gdata_state(
+  compiled_spec_state => $compiled_spec_state,
+  compiled_gdata_by_label => $value,
+ );
 }
 
 sub _build_final_descr_state {
@@ -741,9 +817,10 @@ sub _build_final_descr_state {
  my $use_default_spec_gdata = !defined($spec_gdata_cb);
  $spec_gdata_cb ||= \&spec_gdata;
  my $legacy_spec = $use_default_spec_gdata ? undef : _compiled_spec_state_to_legacy_spec($compiled_state);
- my $compiled_gdata_by_label = $use_default_spec_gdata ? $spec_gdata_cb->($compiled_state) : $spec_gdata_cb->($legacy_spec);
- _die_with_detail(_describe_final_descr_gdata_result($compiled_gdata_by_label))
-  unless ref($compiled_gdata_by_label) eq 'HASH';
+ my $compiled_gdata_input = $use_default_spec_gdata
+  ? $spec_gdata_cb->($compiled_state, { return_state => 1 })
+  : $spec_gdata_cb->($legacy_spec);
+ my $compiled_gdata_state = _normalize_compiled_gdata_output($compiled_gdata_input, $compiled_state);
 
  my $compiled_state_meta = _compiled_spec_state_meta($compiled_state);
  $compiled_state_meta->{parse_mode} = $args{parse_mode} if defined $args{parse_mode};
@@ -751,7 +828,7 @@ sub _build_final_descr_state {
 
  return _new_compiled_descriptor_state(
   compiled_spec_state => $compiled_state,
-  compiled_gdata_by_label => $compiled_gdata_by_label,
+  compiled_gdata_state => $compiled_gdata_state,
   meta => $compiled_state_meta,
  );
 }
@@ -980,7 +1057,7 @@ sub _describe_contract_value_kind {
 sub _describe_final_descr_gdata_result {
  my ($value) = @_;
 
- return 'final descriptor assembly expects compiled gdata HASH ref; got '
+ return 'final descriptor assembly expects compiled gdata HASH ref or compiled_gdata_state; got '
   . _describe_contract_value_kind($value);
 }
 

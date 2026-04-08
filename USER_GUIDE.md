@@ -1094,7 +1094,7 @@ There is one important internal-model change behind that outer descriptor shape 
 
 - the compiler no longer treats the legacy rule-label => info hash as its own working source of truth,
 - it first builds an explicit internal `compiled_spec_state`,
-- default `spec_gdata(...)` now derives combined regex/dependency data from that state,
+- default `spec_gdata(...)` now derives combined regex/dependency data from that state and can expose the result as an explicit internal `compiled_gdata_state`,
 - and the outward descriptor `{ spec => ..., gdata => ... }` is now a compatibility projection of that richer internal model.
 
 The current state-derived metadata is intentionally exposed at the descriptor boundary too:
@@ -1113,7 +1113,7 @@ That same state-first rule now also reaches descriptor-level migration summary g
 One more state-first seam now sits behind that same outer descriptor shape:
 
 - final descriptor assembly first builds an internal `compiled_descriptor_state`,
-- that state keeps the compiled-spec state plus the compiled `gdata` map together as one explicit compiler-owned record,
+- that state keeps the compiled-spec state plus explicit compiled-gdata state together as one compiler-owned record,
 - generated-descriptor validation now consumes that compiled descriptor state directly,
 - that validation no longer routes back through the historical legacy `validate_gdata_references(...)` entrypoint on the active compiler path,
 - and only after that does the compiler project the outward `{ spec => ..., gdata => ..., meta => ... }` compatibility descriptor.
@@ -1149,6 +1149,23 @@ my $state = LinkedSpec::spec_descr($entries, { return_state => 1 });
 ```
 
 That low-level state is mainly for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1`, which keeps the stable outer descriptor contract while exposing the useful state-derived metadata in `meta`.
+
+`spec_gdata(...)` now follows the same pattern on its low-level seam. By default it still returns the historical gdata hash for compatibility, but `{ return_state => 1 }` now returns explicit compiled-gdata state instead:
+
+```perl
+my $gdata_state = LinkedSpec::Compiler::spec_gdata($state, { return_state => 1 });
+
+# Current shape:
+# {
+#   kind => 'compiled_gdata_state',
+#   version => 1,
+#   source_rule_order => [ ... ],
+#   compiled_label_order => [ ... ],
+#   gdata_by_label => { ... },
+# }
+```
+
+That lower-level state is mainly useful for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1` unless they are intentionally working inside compiler-owned seams.
 
 If you want the same structured diagnostics continuity there, `spec_descr(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `spec_descr(...)` now returns `undef` and records a normal `compiler_pipeline:spec_descr` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.
 

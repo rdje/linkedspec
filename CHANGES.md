@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: add compiled gdata state seam
+
+- updated `perl/LinkedSpec/Compiler.pm` so `spec_gdata(...)` now supports `{ return_state => 1 }` and returns one explicit internal `compiled_gdata_state` record with source rule order, compiled-label order, and `gdata_by_label` content instead of only the historical raw gdata hash,
+- updated the same module so `compiled_descriptor_state` now composes `compiled_spec_state` plus `compiled_gdata_state` instead of storing a raw compiled-gdata hash, while still projecting the outward compatibility descriptor `{ spec => ..., gdata => ..., meta => ... }`,
+- updated `perl/LinkedSpec/Validation.pm` so generated-descriptor validation now reads compiled gdata from that explicit `compiled_gdata_state` seam rather than from a raw `compiled_gdata_by_label` hash field,
+- widened `t/phase0_regression.t` with:
+  - direct `spec_gdata(..., { return_state => 1 })` coverage for the explicit compiled-gdata-state shape,
+  - updated final-descriptor-state coverage proving `compiled_descriptor_state` now retains compiled-gdata state instead of a raw gdata hash,
+  - updated validation coverage proving the direct validation seam still reads compiled gdata correctly from that state,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiled gdata as part of the same explicit state-model story now instead of as the last anonymous compiler-owned hash.
+
+- Validation:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=916`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: keep validation state-first
 
 - updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now validates compiled descriptor state directly through one shared state-aware validator instead of flattening back to the historical legacy `spec` / `gdata` pair and routing through `validate_gdata_references(...)`,
@@ -40,7 +59,7 @@ Detailed technical history of changes prepared for commit.
 
 - updated `perl/LinkedSpec/Compiler.pm` so final descriptor assembly now builds one explicit internal `compiled_descriptor_state` after compiled-spec state and compiled `gdata` are available, then projects the outward compatibility descriptor `{ spec => ..., gdata => ..., meta => ... }` from that state instead of treating the projected outer hash as its own working model,
 - updated the same seam so descriptor metadata now also exposes `meta.definition_order`, preserving the full rule-definition sequence before last-definition-wins collapse,
-- tightened final descriptor contract handling so malformed compiled `gdata` callback output is rejected directly at final descriptor assembly with specific detail (`final descriptor assembly expects compiled gdata HASH ref; got ...`) instead of drifting into later generated-descriptor validation,
+- tightened final descriptor contract handling so malformed compiled `gdata` callback output is rejected directly at final descriptor assembly with specific detail (`final descriptor assembly expects compiled gdata HASH ref or compiled_gdata_state; got ...`) instead of drifting into later generated-descriptor validation,
 - widened `t/phase0_regression.t` with:
   - direct coverage for the new internal `compiled_descriptor_state` seam and its legacy descriptor projection,
   - direct coverage for malformed compiled-`gdata` callback output at the final-descriptor boundary,
