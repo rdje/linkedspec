@@ -1420,9 +1420,8 @@ if ($build_final_descr_error) {
 
  my %validate_gdata_failure;
  my $gdata_refs_valid = eval {
-  LinkedSpec::Validation::validate_gdata_references(
-   $final_descr->{gdata},
-   $final_descr->{spec},
+  LinkedSpec::Validation::validate_compiled_descriptor_state(
+   $final_descr_state,
    {
     on_failure => sub {
      %validate_gdata_failure = @_;
@@ -1430,7 +1429,7 @@ if ($build_final_descr_error) {
     },
    },
   )
-};
+ };
 my $validate_gdata_references_error = $@;
  my $validate_gdata_handler_source_label =
   _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_gdata_failure{rule_label});
@@ -1466,9 +1465,9 @@ if ($validate_gdata_references_error) {
    handler_source_label => $validate_gdata_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Generated parser validation failed - terminating parser generation");
-  _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
-  return undef;
- }
+ _trace_exit($trace_scope, { status => 'error', stage => 'validate_gdata_references' }, DUMP_LOW);
+ return undef;
+}
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule

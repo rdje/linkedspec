@@ -1114,7 +1114,8 @@ One more state-first seam now sits behind that same outer descriptor shape:
 
 - final descriptor assembly first builds an internal `compiled_descriptor_state`,
 - that state keeps the compiled-spec state plus the compiled `gdata` map together as one explicit compiler-owned record,
-- and only then projects the outward `{ spec => ..., gdata => ..., meta => ... }` compatibility descriptor.
+- generated-descriptor validation now consumes that compiled descriptor state directly,
+- and only after that does the compiler project the outward `{ spec => ..., gdata => ..., meta => ... }` compatibility descriptor.
 
 That internal seam is mostly for compiler quality and refactor safety, but it does have one practical contract improvement:
 

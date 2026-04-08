@@ -9051,6 +9051,29 @@ SPEC
     ok(!$ok_run, 'final descriptor state build dies when compiled gdata is malformed');
     is(normalize_error($err), 'final descriptor assembly expects compiled gdata HASH ref; got ARRAY', 'final descriptor state build reports the specific malformed compiled-gdata detail');
 };
+subtest 'validation_accepts_compiled_descriptor_state_input' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor validation test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor validation test');
+
+    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
+
+    ok($valid, 'compiled descriptor state passes generated-descriptor validation');
+    ok(ref($descriptor_state->{compiled_gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
+    ok(ref($descriptor_state->{compiled_spec_state}{rules_by_label}) eq 'HASH', 'compiled descriptor state retains compiled spec map for validation');
+};
 subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
     plan tests => 12;
 
@@ -11793,6 +11816,50 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor state owner supplies spec_gdata');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor state assembly still preserves compiled handler coderef');
     is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
+};
+subtest 'run_get_pipeline_validates_compiled_descriptor_state_directly' => sub {
+    plan tests => 7;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my $orig_validate_compiled_descriptor_state = \&LinkedSpec::Validation::validate_compiled_descriptor_state;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my ($saw_descriptor_state, $saw_definition_order, $saw_rule_order);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub {
+            my ($descriptor_state) = @_;
+            $saw_descriptor_state = ref($descriptor_state) eq 'HASH' && ($descriptor_state->{kind} || '') eq 'compiled_descriptor_state';
+            $saw_definition_order = $saw_descriptor_state
+                && ref($descriptor_state->{compiled_spec_state}{definition_order}) eq 'ARRAY'
+                && @{$descriptor_state->{compiled_spec_state}{definition_order}} == 2
+                && $descriptor_state->{compiled_spec_state}{definition_order}[0]{label} eq 'Top'
+                && $descriptor_state->{compiled_spec_state}{definition_order}[1]{label} eq 'Child';
+            $saw_rule_order = $saw_descriptor_state
+                && ref($descriptor_state->{compiled_spec_state}{rule_order}) eq 'ARRAY'
+                && @{$descriptor_state->{compiled_spec_state}{rule_order}} == 2
+                && $descriptor_state->{compiled_spec_state}{rule_order}[0] eq 'Top'
+                && $descriptor_state->{compiled_spec_state}{rule_order}[1] eq 'Child';
+            return $orig_validate_compiled_descriptor_state->(@_);
+        };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds while compiled-descriptor validation is trapped') or diag(normalize_error($err));
+    ok($saw_descriptor_state, 'generated-descriptor validation now receives compiled descriptor state directly');
+    ok($saw_definition_order, 'compiled-descriptor validation sees full definition-order state');
+    ok($saw_rule_order, 'compiled-descriptor validation sees deterministic unique rule order');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when compiled-descriptor validation is trapped');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiled-descriptor validation path still preserves compiled handler coderef');
+    is($descr->{meta}{definition_order}[0], 'Top', 'descriptor metadata still exposes definition-order data after direct state validation');
 };
 subtest 'run_get_pipeline_builds_action_rewriter_migration_summary_from_compiled_spec_state' => sub {
     plan tests => 6;

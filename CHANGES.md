@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: validate compiled descriptor state directly
+
+- updated `perl/LinkedSpec/Validation.pm` so generated-descriptor validation now has an explicit `validate_compiled_descriptor_state(...)` seam over the internal compiled descriptor state model instead of only the historical parallel `gdata` / `spec` hash pair,
+- updated `perl/LinkedSpec/Compiler.pm` so the active `run_get_pipeline(...)` path now validates `compiled_descriptor_state` directly and only projects the outward compatibility descriptor `{ spec => ..., gdata => ..., meta => ... }` after that validation seam,
+- widened `t/phase0_regression.t` with:
+  - direct coverage that `validate_compiled_descriptor_state(...)` accepts the compiler-owned state record,
+  - a trapped `run_get_pipeline(...)` regression proving generated-descriptor validation now receives `compiled_descriptor_state` directly with both definition order and rule order intact,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats generated-descriptor validation as part of the same state-first compiler path.
+
+- Validation:
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=913`)
+
 ## 2026-04-08 - Phase 5: add compiled descriptor state seam
 
 - updated `perl/LinkedSpec/Compiler.pm` so final descriptor assembly now builds one explicit internal `compiled_descriptor_state` after compiled-spec state and compiled `gdata` are available, then projects the outward compatibility descriptor `{ spec => ..., gdata => ..., meta => ... }` from that state instead of treating the projected outer hash as its own working model,

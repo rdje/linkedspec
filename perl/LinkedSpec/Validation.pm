@@ -283,12 +283,61 @@ sub _report_dsl_validation_failure {
  return report_dsl_error($spec_content, $position, $error_msg, $suggestion)
 }
 
+sub _describe_validation_value_kind {
+ my ($value) = @_;
+
+ return 'undef' unless defined($value);
+ return ref($value) ? ref($value) : 'SCALAR';
+}
+
+sub _is_compiled_descriptor_state {
+ my ($value) = @_;
+
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{compiled_spec_state}) eq 'HASH';
+ return 0 unless ref($value->{compiled_spec_state}{rules_by_label}) eq 'HASH';
+ return 0 unless ref($value->{compiled_gdata_by_label}) eq 'HASH';
+ return 0 unless ref($value->{meta}) eq 'HASH';
+ return 1;
+}
+
+sub _compiled_descriptor_state_to_legacy_spec {
+ my ($descriptor_state) = @_;
+ return undef unless _is_compiled_descriptor_state($descriptor_state);
+ return { %{$descriptor_state->{compiled_spec_state}{rules_by_label}} };
+}
+
+sub validate_compiled_descriptor_state {
+ my ($descriptor_state, $option) = @_;
+ $option = {} unless ref($option) eq 'HASH';
+
+ unless (_is_compiled_descriptor_state($descriptor_state)) {
+  my $detail = 'Expected compiled_descriptor_state HASH reference, got '
+   . _describe_validation_value_kind($descriptor_state);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid compiled descriptor state',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor state', $detail);
+  return 0;
+ }
+
+ return validate_gdata_references(
+  $descriptor_state->{compiled_gdata_by_label},
+  _compiled_descriptor_state_to_legacy_spec($descriptor_state),
+  $option,
+ );
+}
+
 sub validate_gdata_references {
  my ($gdata, $spec, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
 
  unless (ref($gdata) eq 'HASH') {
-  my $detail = "Expected HASH reference, got " . ref($gdata);
+  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($gdata);
   _notify_gdata_validation_failure(
    $option,
    summary => 'Invalid gdata structure',
@@ -299,7 +348,7 @@ sub validate_gdata_references {
  }
 
  unless (ref($spec) eq 'HASH') {
-  my $detail = "Expected HASH reference, got " . ref($spec);
+  my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($spec);
   _notify_gdata_validation_failure(
    $option,
    summary => 'Invalid spec structure',
