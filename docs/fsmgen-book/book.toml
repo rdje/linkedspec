@@ -1,0 +1,26 @@
+[book]
+authors = ["LinkedSpec / FSMGen maintainers"]
+language = "en"
+src = "src"
+title = "FSMGen Book"
+description = "Comprehensive user-facing documentation for FSMGen."
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/richarddje/linkedspec"
+site-url = "/"
+additional-css = []
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true

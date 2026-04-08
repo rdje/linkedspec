@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: scaffold FSMGen mdBook
+
+- added a dedicated FSMGen mdBook root under `docs/fsmgen-book/` with:
+  - `book.toml`,
+  - book-local `.gitignore`,
+  - navigable `SUMMARY.md`,
+  - overview, usage, model, reference, and development chapter groups,
+- seeded the first FSMGen-focused long-form chapters from the active code surfaces in `perl/FSMGen.pm`, `plugin/fsmgen.plg`, `perl/env.conf`, `conf/vhdl_template.conf`, and `conf/xif.conf`,
+- updated `README.md` so the repo-level doc map now points readers at the dedicated FSMGen book as the new long-form documentation home for that subsystem.
+
+- Validation:
+  - `mdbook build docs/fsmgen-book`
+
 ## 2026-04-09 - Phase 5: rename return_descriptor option
 
 - renamed the active public descriptor-introspection option from `return_descr` to `return_descriptor` across `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/ParserFactory.pm`, `perl/LinkedSpec/Compiler.pm`, the active regression locks in `t/phase0_regression.t`, and the current user/continuity docs,

@@ -62,6 +62,9 @@ Top-level project docs:
 - `CHANGES.md`
 - `MEMORY.md`
 - `COMMIT.md`
+- `docs/fsmgen-book/`
+  - Dedicated mdBook for FSMGen-focused long-form documentation.
+  - Entry page: `docs/fsmgen-book/src/introduction.md`
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the same gate used by GitHub Actions.
