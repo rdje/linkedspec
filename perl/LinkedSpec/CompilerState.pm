@@ -54,6 +54,13 @@ sub compiled_spec_state_rule_order {
  return $state->{rule_order}
 }
 
+sub compiled_spec_state_rule_rows {
+ my ($state) = @_;
+ return [] unless is_compiled_spec_state($state);
+ my $rules_by_label = compiled_spec_state_rules_by_label($state);
+ return [map { [$_, $rules_by_label->{$_}] } @{compiled_spec_state_rule_order($state)}]
+}
+
 sub compiled_spec_state_definition_order {
  my ($state) = @_;
  return [] unless is_compiled_spec_state($state);

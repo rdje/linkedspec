@@ -214,8 +214,7 @@ sub _build_action_rewriter_migration_summary {
 
  my @rule_rows;
  if (_is_compiled_spec_state($spec_or_state)) {
-  my $rules_by_label = _compiled_spec_state_rules_by_label($spec_or_state);
-  @rule_rows = map { [$_, $rules_by_label->{$_}] } @{_compiled_spec_state_rule_order($spec_or_state)};
+  @rule_rows = @{_compiled_spec_state_rule_rows($spec_or_state)};
  }
  elsif (ref($spec_or_state) eq 'HASH') {
   @rule_rows = map { [$_, $spec_or_state->{$_}] } sort keys %$spec_or_state;
@@ -370,6 +369,10 @@ sub _compiled_spec_state_rules_by_label {
 
 sub _compiled_spec_state_rule_order {
  return _call_compiler_state('compiled_spec_state_rule_order', @_)
+}
+
+sub _compiled_spec_state_rule_rows {
+ return _call_compiler_state('compiled_spec_state_rule_rows', @_)
 }
 
 sub _compiled_spec_state_definition_order {
@@ -615,9 +618,9 @@ sub spec_gdata {
 
 my %gdata;
 my $rules_by_label = _compiled_spec_state_rules_by_label($sg);
-foreach my $label (@{_compiled_spec_state_rule_order($sg)}) {
+foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
+  my ($label, $rule_info) = @$row;
   $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
-  my $rule_info = $rules_by_label->{$label};
   _die_with_detail(_describe_spec_gdata_rule_info_result($label, $rule_info))
    unless ref($rule_info) eq 'HASH';
   my $rule_gdata = $rule_info->{gdata};

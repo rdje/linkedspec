@@ -9022,7 +9022,7 @@ SPEC
     ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
 };
 subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9033,6 +9033,7 @@ Child::
 SPEC
 
     my $orig_new_compiled_spec_state = \&LinkedSpec::CompilerState::new_compiled_spec_state;
+    my $orig_compiled_spec_state_rule_rows = \&LinkedSpec::CompilerState::compiled_spec_state_rule_rows;
     my $orig_compiled_spec_state_definition_order = \&LinkedSpec::CompilerState::compiled_spec_state_definition_order;
     my $orig_compiled_spec_state_duplicate_rule_labels = \&LinkedSpec::CompilerState::compiled_spec_state_duplicate_rule_labels;
     my $orig_is_compiled_descriptor_state = \&LinkedSpec::CompilerState::is_compiled_descriptor_state;
@@ -9040,12 +9041,16 @@ SPEC
     my $orig_normalize_compiled_spec_input = \&LinkedSpec::CompilerState::normalize_compiled_spec_input;
     my $orig_normalize_compiled_gdata_output = \&LinkedSpec::CompilerState::normalize_compiled_gdata_output;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_new_compiled_spec_state, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_rules_by_label, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_gdata_output) = (0, 0, 0, 0, 0, 0, 0);
+    my ($saw_new_compiled_spec_state, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_rules_by_label, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_gdata_output) = (0, 0, 0, 0, 0, 0, 0, 0);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::CompilerState::new_compiled_spec_state = sub {
             $saw_new_compiled_spec_state = 1;
             return $orig_new_compiled_spec_state->(@_);
+        };
+        local *LinkedSpec::CompilerState::compiled_spec_state_rule_rows = sub {
+            $saw_compiled_spec_state_rule_rows = 1;
+            return $orig_compiled_spec_state_rule_rows->(@_);
         };
         local *LinkedSpec::CompilerState::compiled_spec_state_definition_order = sub {
             $saw_compiled_spec_state_definition_order = 1;
@@ -9078,6 +9083,7 @@ SPEC
 
     ok($ok_run, 'compiler pipeline succeeds while compiler-state owner seams are trapped') or diag(normalize_error($err));
     ok($saw_new_compiled_spec_state, 'Compiler.pm routes compiled-spec state creation through LinkedSpec::CompilerState');
+    ok($saw_compiled_spec_state_rule_rows, 'Compiler.pm routes compiled-spec ordered rule iteration through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_definition_order, 'Compiler.pm routes compiled-spec definition-order reads through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_duplicate_rule_labels, 'Compiler.pm routes compiled-spec duplicate-label reads through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_spec_input, 'Compiler.pm routes compiled-spec normalization through LinkedSpec::CompilerState');

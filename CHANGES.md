@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: centralize compiled rule iteration
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes one canonical ordered compiled-rule view via `compiled_spec_state_rule_rows(...)`,
+- updated `perl/LinkedSpec/Compiler.pm` so:
+  - descriptor migration-summary generation now consumes that owner-provided ordered rule view instead of reconstructing it locally from `rule_order + rules_by_label`,
+  - `spec_gdata(...)` now also iterates compiled rules through that same owner-provided ordered rule view while still using the rule map for dependency lookups,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves ordered compiled-rule iteration routes through `LinkedSpec::CompilerState`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats ordered compiled-rule iteration as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: route compiled-state reads through owner
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes explicit read-side helpers for:
