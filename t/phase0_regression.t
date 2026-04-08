@@ -857,7 +857,7 @@ PERL
     like($out, qr/__CANONICAL_EVENTS_NODES_OK__/, 'canonical-event build preserves classification output after lazy CanonicalEvents::Core loading');
     is($err, '', 'ActionIR::CanonicalEvents require/build subprocess does not emit stderr');
 };
-subtest 'linkedspec_require_avoids_compiler_load_until_spec_descr' => sub {
+subtest 'linkedspec_require_avoids_compiler_load_until_build_compiled_rule_table' => sub {
     plan tests => 6;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -867,17 +867,17 @@ require LinkedSpec::BootstrapSpec;
 print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_EAGER__\n" : "__COMPILER_STILL_LAZY__\n";
 my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
 print $parse_success ? "__BOOTSTRAP_PARSED__\n" : "__BOOTSTRAP_FAILED__\n";
-my $compiled = $parse_success ? LinkedSpec::spec_descr($retv) : undef;
-print defined($compiled) ? "__SPEC_DESCR_DEFINED__\n" : "__SPEC_DESCR_UNDEF__\n";
-print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_SPEC_DESCR__\n" : "__COMPILER_STILL_UNLOADED__\n";
+my $compiled = $parse_success ? LinkedSpec::build_compiled_rule_table($retv) : undef;
+print defined($compiled) ? "__COMPILED_RULE_TABLE_DEFINED__\n" : "__COMPILED_RULE_TABLE_UNDEF__\n";
+print exists($INC{"LinkedSpec/Compiler.pm"}) ? "__COMPILER_AFTER_RULE_TABLE__\n" : "__COMPILER_STILL_UNLOADED__\n";
 PERL
 
-    is($exit_code, 0, 'LinkedSpec require/spec_descr subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec keeps Compiler unloaded before spec_descr');
-    like($out, qr/__BOOTSTRAP_PARSED__/, 'bootstrap parse still succeeds before spec_descr lazy-loads Compiler');
-    like($out, qr/__SPEC_DESCR_DEFINED__/, 'spec_descr still returns compiled rule data after lazy Compiler loading');
-    like($out, qr/__COMPILER_AFTER_SPEC_DESCR__/, 'spec_descr lazy-loads Compiler on demand');
-    is($err, '', 'LinkedSpec require/spec_descr subprocess does not emit stderr');
+    is($exit_code, 0, 'LinkedSpec require/build_compiled_rule_table subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__COMPILER_STILL_LAZY__/, 'require LinkedSpec keeps Compiler unloaded before build_compiled_rule_table');
+    like($out, qr/__BOOTSTRAP_PARSED__/, 'bootstrap parse still succeeds before build_compiled_rule_table lazy-loads Compiler');
+    like($out, qr/__COMPILED_RULE_TABLE_DEFINED__/, 'build_compiled_rule_table still returns compiled rule data after lazy Compiler loading');
+    like($out, qr/__COMPILER_AFTER_RULE_TABLE__/, 'build_compiled_rule_table lazy-loads Compiler on demand');
+    is($err, '', 'LinkedSpec require/build_compiled_rule_table subprocess does not emit stderr');
 };
 subtest 'linkedspec_require_avoids_action_rewriter_load_until_compat_helper' => sub {
     plan tests => 7;
@@ -1056,7 +1056,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
 
     local *LinkedSpec::_require_pkg = sub { return 1 };
     local *LinkedSpec::Runtime::run_get = sub { return 'parser_ok' };
-    local *LinkedSpec::Compiler::spec_descr = sub { return { compiled => 1 } };
+    local *LinkedSpec::Compiler::build_compiled_rule_table = sub { return { compiled => 1 } };
     local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub { return 'rewritten_ok' };
     local *LinkedSpec::ParserFactory::run_get_parser = sub { return 'factory_ok' };
     local *LinkedSpec::PluginRegistry::register_plugin = sub { return 'registered_ok' };
@@ -1086,8 +1086,8 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'Get preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
-    is_deeply(LinkedSpec::spec_descr([]), { compiled => 1 }, 'spec_descr still delegates through the compiler owner');
-    is($@, "__SAVED_ERR__\n", 'spec_descr preserves caller $@ on successful delegation');
+    is_deeply(LinkedSpec::build_compiled_rule_table([]), { compiled => 1 }, 'build_compiled_rule_table still delegates through the compiler owner');
+    is($@, "__SAVED_ERR__\n", 'build_compiled_rule_table preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::call_spec_handler_subst('Top', 'return_a(Top)'), 'rewritten_ok', 'call_spec_handler_subst still delegates through the EmitContext compatibility owner');
@@ -7328,7 +7328,7 @@ SPEC
     is($descr->{spec}{Top}{meta}{acode_count}, 2, 'Top metadata acode_count preserved');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'AND_ACODE', 'Top handler variant remains AND_ACODE for multi-acode AND');
 };
-subtest 'compiler_spec_descr_uses_injected_compile_spec_entry_callback' => sub {
+subtest 'compiler_build_compiled_rule_table_uses_injected_compile_spec_entry_callback' => sub {
     plan tests => 5;
 
     my $spec_content = <<'SPEC';
@@ -7337,11 +7337,11 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for injected spec_descr callback test') or diag(normalize_error($parse_error));
+    ok($parse_success, 'bootstrap parse succeeds for injected build_compiled_rule_table callback test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array');
 
     my $compile_spec_entry_count = 0;
-    my $compiled = LinkedSpec::Compiler::spec_descr(
+    my $compiled = LinkedSpec::Compiler::build_compiled_rule_table(
         $retv,
         sub {
             ++$compile_spec_entry_count;
@@ -7349,11 +7349,11 @@ SPEC
         }
     );
 
-    ok(defined($compiled) && ref($compiled) eq 'HASH', 'spec_descr succeeds with injected compile_spec_entry callback');
-    is($compile_spec_entry_count, 1, 'spec_descr invokes injected compile_spec_entry callback once for the single parsed rule');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'build_compiled_rule_table succeeds with injected compile_spec_entry callback');
+    is($compile_spec_entry_count, 1, 'build_compiled_rule_table invokes injected compile_spec_entry callback once for the single parsed rule');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'compiled spec entry still exposes runtime handler coderef');
 };
-subtest 'compiler_spec_descr_can_return_explicit_compiled_spec_state' => sub {
+subtest 'compiler_build_compiled_rule_table_can_return_explicit_compiled_spec_state' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -7362,21 +7362,21 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for compiled-state spec_descr test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state spec_descr test');
+    ok($parse_success, 'bootstrap parse succeeds for compiled-state build_compiled_rule_table test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state build_compiled_rule_table test');
 
-    my $state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
 
-    ok(defined($state) && ref($state) eq 'HASH', 'spec_descr return_state still returns a hashref');
-    is($state->{kind}, 'compiled_spec_state', 'spec_descr return_state exposes compiled-spec state kind');
-    is($state->{version}, 1, 'spec_descr return_state exposes compiled-spec state version');
-    is_deeply($state->{rule_order}, ['Top'], 'spec_descr return_state preserves deterministic unique rule order');
-    ok(ref($state->{definition_order}) eq 'ARRAY' && @{$state->{definition_order}} == 1, 'spec_descr return_state preserves definition-order records');
-    is($state->{definition_order}[0]{label}, 'Top', 'spec_descr return_state definition-order record preserves rule label');
-    ok(ref($state->{rules_by_label}) eq 'HASH' && ref($state->{rules_by_label}{Top}{handler}) eq 'CODE', 'spec_descr return_state exposes rules_by_label with compiled handler coderef');
-    is_deeply($state->{duplicate_rule_labels}, [], 'spec_descr return_state records no duplicate labels for a single-rule spec');
+    ok(defined($state) && ref($state) eq 'HASH', 'build_compiled_rule_table return_state still returns a hashref');
+    is($state->{kind}, 'compiled_spec_state', 'build_compiled_rule_table return_state exposes compiled-spec state kind');
+    is($state->{version}, 1, 'build_compiled_rule_table return_state exposes compiled-spec state version');
+    is_deeply($state->{rule_order}, ['Top'], 'build_compiled_rule_table return_state preserves deterministic unique rule order');
+    ok(ref($state->{definition_order}) eq 'ARRAY' && @{$state->{definition_order}} == 1, 'build_compiled_rule_table return_state preserves definition-order records');
+    is($state->{definition_order}[0]{label}, 'Top', 'build_compiled_rule_table return_state definition-order record preserves rule label');
+    ok(ref($state->{rules_by_label}) eq 'HASH' && ref($state->{rules_by_label}{Top}{handler}) eq 'CODE', 'build_compiled_rule_table return_state exposes rules_by_label with compiled handler coderef');
+    is_deeply($state->{duplicate_rule_labels}, [], 'build_compiled_rule_table return_state records no duplicate labels for a single-rule spec');
 };
-subtest 'spec_descr_defers_default_compile_callback_to_compiler_owner' => sub {
+subtest 'build_compiled_rule_table_defers_default_compile_callback_to_compiler_owner' => sub {
     plan tests => 6;
 
     my $spec_content = <<'SPEC';
@@ -7385,31 +7385,31 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for spec_descr owner-default test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for spec_descr owner-default test');
+    ok($parse_success, 'bootstrap parse succeeds for build_compiled_rule_table owner-default test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY' && @$retv == 1, 'bootstrap parse returns one parsed entry for build_compiled_rule_table owner-default test');
 
-    my $orig_compiler_spec_descr = \&LinkedSpec::Compiler::spec_descr;
+    my $orig_compiler_build_compiled_rule_table = \&LinkedSpec::Compiler::build_compiled_rule_table;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     my ($saw_undef_callback, $forwarded_entry_count);
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Compiler::spec_descr = sub {
+        local *LinkedSpec::Compiler::build_compiled_rule_table = sub {
             my ($entries, $compile_spec_entry) = @_;
             $saw_undef_callback = !defined($compile_spec_entry);
             $forwarded_entry_count = ref($entries) eq 'ARRAY' ? scalar(@$entries) : undef;
-            return $orig_compiler_spec_descr->(@_);
+            return $orig_compiler_build_compiled_rule_table->(@_);
         };
-        $compiled = LinkedSpec::spec_descr($retv);
+        $compiled = LinkedSpec::build_compiled_rule_table($retv);
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'LinkedSpec::spec_descr succeeds while Compiler::spec_descr delegation is trapped') or diag(normalize_error($err));
-    ok($saw_undef_callback, 'LinkedSpec::spec_descr now delegates without injecting the default compile callback');
-    is($forwarded_entry_count, 1, 'LinkedSpec::spec_descr forwards the parsed entry array unchanged');
+    ok($ok_run, 'LinkedSpec::build_compiled_rule_table succeeds while Compiler::build_compiled_rule_table delegation is trapped') or diag(normalize_error($err));
+    ok($saw_undef_callback, 'LinkedSpec::build_compiled_rule_table now delegates without injecting the default compile callback');
+    is($forwarded_entry_count, 1, 'LinkedSpec::build_compiled_rule_table forwards the parsed entry array unchanged');
     ok(defined($compiled) && ref($compiled) eq 'HASH' && ref($compiled->{Top}{handler}) eq 'CODE', 'Compiler-owned default compile callback still builds a compiled handler');
 };
-subtest 'compiler_spec_descr_records_structured_error_when_compile_spec_entry_dies_with_runtime_ctx_ref' => sub {
+subtest 'compiler_build_compiled_rule_table_records_structured_error_when_compile_spec_entry_dies_with_runtime_ctx_ref' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -7418,34 +7418,34 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for spec_descr runtime_ctx die test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for spec_descr runtime_ctx die test');
+    ok($parse_success, 'bootstrap parse succeeds for build_compiled_rule_table runtime_ctx die test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for build_compiled_rule_table runtime_ctx die test');
 
     my $runtime_ctx;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     $ok_run = eval {
-        $compiled = LinkedSpec::Compiler::spec_descr(
+        $compiled = LinkedSpec::Compiler::build_compiled_rule_table(
             $retv,
-            sub { die "__FORCED_SPEC_DESCR_DIE__\n" },
+            sub { die "__FORCED_BUILD_COMPILED_RULE_TABLE_DIE__\n" },
             { runtime_ctx_ref => \$runtime_ctx },
         );
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'Compiler::spec_descr returns without outer die when compile_spec_entry dies and runtime_ctx_ref is provided') or diag(normalize_error($err));
-    ok(!defined($compiled), 'Compiler::spec_descr returns undef when compile_spec_entry dies under runtime_ctx_ref');
-    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr compile_spec_entry die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr compile_spec_entry die records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr compile_spec_entry die records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr compile_spec_entry die records summary');
-    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_DESCR_DIE__/, 'spec_descr compile_spec_entry die preserves thrown detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr compile_spec_entry die seeds top_rule from the first parsed rule');
-    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'spec_descr compile_spec_entry die records the active parsed rule label');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr compile_spec_entry die records label-scoped generated handler source label');
+    ok($ok_run, 'Compiler::build_compiled_rule_table returns without outer die when compile_spec_entry dies and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::build_compiled_rule_table returns undef when compile_spec_entry dies under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::build_compiled_rule_table exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'build_compiled_rule_table compile_spec_entry die records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'build_compiled_rule_table compile_spec_entry die records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'build_compiled_rule_table compile_spec_entry die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'build_compiled_rule_table compile_spec_entry die records summary');
+    like($runtime_ctx->{last_error}{detail}, qr/__FORCED_BUILD_COMPILED_RULE_TABLE_DIE__/, 'build_compiled_rule_table compile_spec_entry die preserves thrown detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'build_compiled_rule_table compile_spec_entry die seeds top_rule from the first parsed rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'build_compiled_rule_table compile_spec_entry die records the active parsed rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table compile_spec_entry die records label-scoped generated handler source label');
 };
-subtest 'linkedspec_spec_descr_records_structured_invalid_tuple_with_runtime_ctx_ref' => sub {
+subtest 'linkedspec_build_compiled_rule_table_records_structured_invalid_tuple_with_runtime_ctx_ref' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -7454,13 +7454,13 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for LinkedSpec::spec_descr runtime_ctx invalid-tuple test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for LinkedSpec::spec_descr runtime_ctx invalid-tuple test');
+    ok($parse_success, 'bootstrap parse succeeds for LinkedSpec::build_compiled_rule_table runtime_ctx invalid-tuple test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for LinkedSpec::build_compiled_rule_table runtime_ctx invalid-tuple test');
 
     my $runtime_ctx;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     $ok_run = eval {
-        $compiled = LinkedSpec::spec_descr(
+        $compiled = LinkedSpec::build_compiled_rule_table(
             $retv,
             sub { return ('Top', []) },
             { runtime_ctx_ref => \$runtime_ctx },
@@ -7469,19 +7469,19 @@ SPEC
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'LinkedSpec::spec_descr returns without outer die when compile_spec_entry returns an invalid tuple and runtime_ctx_ref is provided') or diag(normalize_error($err));
-    ok(!defined($compiled), 'LinkedSpec::spec_descr returns undef when compile_spec_entry returns an invalid tuple under runtime_ctx_ref');
-    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::spec_descr exposes runtime context through runtime_ctx_ref');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid tuple records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid tuple records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid tuple records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid tuple records summary');
-    is($runtime_ctx->{last_error}{detail}, "compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY", 'spec_descr invalid tuple preserves specific tuple-shape detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr invalid tuple seeds top_rule from the first parsed rule');
-    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'spec_descr invalid tuple records the failing rule label');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr invalid tuple records label-scoped generated handler source label');
+    ok($ok_run, 'LinkedSpec::build_compiled_rule_table returns without outer die when compile_spec_entry returns an invalid tuple and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'LinkedSpec::build_compiled_rule_table returns undef when compile_spec_entry returns an invalid tuple under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::build_compiled_rule_table exposes runtime context through runtime_ctx_ref');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'build_compiled_rule_table invalid tuple records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'build_compiled_rule_table invalid tuple records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'build_compiled_rule_table invalid tuple records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'build_compiled_rule_table invalid tuple records summary');
+    is($runtime_ctx->{last_error}{detail}, "compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY", 'build_compiled_rule_table invalid tuple preserves specific tuple-shape detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'build_compiled_rule_table invalid tuple seeds top_rule from the first parsed rule');
+    is($runtime_ctx->{last_error}{rule_label}, 'Top', 'build_compiled_rule_table invalid tuple records the failing rule label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table invalid tuple records label-scoped generated handler source label');
 };
-subtest 'compiler_spec_descr_records_structured_invalid_callback_contract_with_runtime_ctx_ref' => sub {
+subtest 'compiler_build_compiled_rule_table_records_structured_invalid_callback_contract_with_runtime_ctx_ref' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -7490,13 +7490,13 @@ Top::
 SPEC
 
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
-    ok($parse_success, 'bootstrap parse succeeds for spec_descr invalid-callback-contract test') or diag(normalize_error($parse_error));
-    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for spec_descr invalid-callback-contract test');
+    ok($parse_success, 'bootstrap parse succeeds for build_compiled_rule_table invalid-callback-contract test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for build_compiled_rule_table invalid-callback-contract test');
 
     my $runtime_ctx;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     $ok_run = eval {
-        $compiled = LinkedSpec::Compiler::spec_descr(
+        $compiled = LinkedSpec::Compiler::build_compiled_rule_table(
             $retv,
             [],
             { runtime_ctx_ref => \$runtime_ctx },
@@ -7505,25 +7505,25 @@ SPEC
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'Compiler::spec_descr returns without outer die when compile_spec_entry callback contract is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
-    ok(!defined($compiled), 'Compiler::spec_descr returns undef when compile_spec_entry callback contract is invalid under runtime_ctx_ref');
-    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref for invalid callback contracts');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid callback contract records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid callback contract records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid callback contract records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid callback contract records summary');
-    is($runtime_ctx->{last_error}{detail}, 'compile_spec_entry callback must be CODE', 'spec_descr invalid callback contract preserves targeted contract detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr invalid callback contract still seeds top_rule from the first parsed rule');
-    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr invalid callback contract leaves rule_label absent before rule iteration starts');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr invalid callback contract records label-scoped generated handler source label');
+    ok($ok_run, 'Compiler::build_compiled_rule_table returns without outer die when compile_spec_entry callback contract is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::build_compiled_rule_table returns undef when compile_spec_entry callback contract is invalid under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::build_compiled_rule_table exposes runtime context through runtime_ctx_ref for invalid callback contracts');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'build_compiled_rule_table invalid callback contract records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'build_compiled_rule_table invalid callback contract records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'build_compiled_rule_table invalid callback contract records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'build_compiled_rule_table invalid callback contract records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec_entry callback must be CODE', 'build_compiled_rule_table invalid callback contract preserves targeted contract detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'build_compiled_rule_table invalid callback contract still seeds top_rule from the first parsed rule');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'build_compiled_rule_table invalid callback contract leaves rule_label absent before rule iteration starts');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table invalid callback contract records label-scoped generated handler source label');
 };
-subtest 'linkedspec_spec_descr_records_structured_invalid_entry_container_with_runtime_ctx_ref' => sub {
+subtest 'linkedspec_build_compiled_rule_table_records_structured_invalid_entry_container_with_runtime_ctx_ref' => sub {
     plan tests => 11;
 
     my $runtime_ctx;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     $ok_run = eval {
-        $compiled = LinkedSpec::spec_descr(
+        $compiled = LinkedSpec::build_compiled_rule_table(
             {},
             {
                 runtime_ctx_ref => \$runtime_ctx,
@@ -7534,26 +7534,26 @@ subtest 'linkedspec_spec_descr_records_structured_invalid_entry_container_with_r
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'LinkedSpec::spec_descr returns without outer die when the parsed-entry container is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
-    ok(!defined($compiled), 'LinkedSpec::spec_descr returns undef when the parsed-entry container is invalid under runtime_ctx_ref');
-    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::spec_descr exposes runtime context through runtime_ctx_ref for invalid parsed-entry containers');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr invalid parsed-entry container records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr invalid parsed-entry container records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr invalid parsed-entry container records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr invalid parsed-entry container records summary');
-    is($runtime_ctx->{last_error}{detail}, 'spec_descr expects an ARRAY ref of parsed bootstrap entries; got HASH', 'spec_descr invalid parsed-entry container preserves targeted contract detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'spec_descr invalid parsed-entry container preserves requested top_rule continuity');
-    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr invalid parsed-entry container leaves rule_label absent before any parsed rule exists');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'spec_descr invalid parsed-entry container records top-rule generated handler identity');
+    ok($ok_run, 'LinkedSpec::build_compiled_rule_table returns without outer die when the parsed-entry container is invalid and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'LinkedSpec::build_compiled_rule_table returns undef when the parsed-entry container is invalid under runtime_ctx_ref');
+    ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::build_compiled_rule_table exposes runtime context through runtime_ctx_ref for invalid parsed-entry containers');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'build_compiled_rule_table invalid parsed-entry container records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'build_compiled_rule_table invalid parsed-entry container records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'build_compiled_rule_table invalid parsed-entry container records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'build_compiled_rule_table invalid parsed-entry container records summary');
+    is($runtime_ctx->{last_error}{detail}, 'build_compiled_rule_table expects an ARRAY ref of parsed bootstrap entries; got HASH', 'build_compiled_rule_table invalid parsed-entry container preserves targeted contract detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'RequestedTop', 'build_compiled_rule_table invalid parsed-entry container preserves requested top_rule continuity');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'build_compiled_rule_table invalid parsed-entry container leaves rule_label absent before any parsed rule exists');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'build_compiled_rule_table invalid parsed-entry container records top-rule generated handler identity');
 };
-subtest 'compiler_spec_descr_records_structured_invalid_individual_entry_with_runtime_ctx_ref' => sub {
+subtest 'compiler_build_compiled_rule_table_records_structured_invalid_individual_entry_with_runtime_ctx_ref' => sub {
     plan tests => 12;
 
     my $runtime_ctx;
     my $compile_spec_entry_count = 0;
     my ($ok_run, $compiled, $err) = (0, undef, '');
     $ok_run = eval {
-        $compiled = LinkedSpec::Compiler::spec_descr(
+        $compiled = LinkedSpec::Compiler::build_compiled_rule_table(
             [
                 [['ELABEL', 'Top']],
                 {},
@@ -7577,18 +7577,18 @@ subtest 'compiler_spec_descr_records_structured_invalid_individual_entry_with_ru
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'Compiler::spec_descr returns without outer die when one parsed entry is malformed and runtime_ctx_ref is provided') or diag(normalize_error($err));
-    ok(!defined($compiled), 'Compiler::spec_descr returns undef when one parsed entry is malformed under runtime_ctx_ref');
-    is($compile_spec_entry_count, 1, 'Compiler::spec_descr stops before invoking compile_spec_entry on the malformed later entry');
-    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::spec_descr exposes runtime context through runtime_ctx_ref for malformed individual parsed entries');
-    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'spec_descr malformed individual entry records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'spec_descr malformed individual entry records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'spec_descr malformed individual entry records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'spec_descr malformed individual entry records summary');
-    is($runtime_ctx->{last_error}{detail}, 'spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[1] got HASH', 'spec_descr malformed individual entry preserves targeted entry-shape detail');
-    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'spec_descr malformed individual entry preserves first parsed top_rule continuity');
-    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'spec_descr malformed individual entry leaves rule_label absent when the malformed entry has no parsed label');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'spec_descr malformed individual entry records top-rule generated handler identity');
+    ok($ok_run, 'Compiler::build_compiled_rule_table returns without outer die when one parsed entry is malformed and runtime_ctx_ref is provided') or diag(normalize_error($err));
+    ok(!defined($compiled), 'Compiler::build_compiled_rule_table returns undef when one parsed entry is malformed under runtime_ctx_ref');
+    is($compile_spec_entry_count, 1, 'Compiler::build_compiled_rule_table stops before invoking compile_spec_entry on the malformed later entry');
+    ok(ref($runtime_ctx) eq 'HASH', 'Compiler::build_compiled_rule_table exposes runtime context through runtime_ctx_ref for malformed individual parsed entries');
+    is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'build_compiled_rule_table malformed individual entry records compiler_pipeline type');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'build_compiled_rule_table malformed individual entry records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'build_compiled_rule_table malformed individual entry records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'build_compiled_rule_table malformed individual entry records summary');
+    is($runtime_ctx->{last_error}{detail}, 'build_compiled_rule_table expects each parsed bootstrap entry to be ARRAY ref; entry[1] got HASH', 'build_compiled_rule_table malformed individual entry preserves targeted entry-shape detail');
+    is($runtime_ctx->{last_error}{top_rule}, 'Top', 'build_compiled_rule_table malformed individual entry preserves first parsed top_rule continuity');
+    ok(!exists $runtime_ctx->{last_error}{rule_label}, 'build_compiled_rule_table malformed individual entry leaves rule_label absent when the malformed entry has no parsed label');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table malformed individual entry records top-rule generated handler identity');
 };
 subtest 'get_avoids_runtime_run_get_from_args_wrapper' => sub {
     plan tests => 4;
@@ -8133,7 +8133,7 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Runtime::compile_spec_entry = sub { die "__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__\n" };
-        $compiled = LinkedSpec::spec_descr($retv);
+        $compiled = LinkedSpec::build_compiled_rule_table($retv);
         $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
         1;
     };
@@ -8142,13 +8142,13 @@ SPEC
     ok($ok_run, 'default spec-entry paths succeed without Runtime compile_spec_entry wrapper')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__/, 'default spec-entry paths do not call the trapped Runtime compile_spec_entry wrapper');
-    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr default callback still builds compiled rule hash');
-    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr default callback still exposes runtime handler coderef');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table default callback still builds compiled rule hash');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table default callback still exposes runtime handler coderef');
     ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without Runtime compile_spec_entry wrapper');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get preserves selected handler metadata');
 };
-subtest 'spec_descr_paths_avoid_linkedspec_spec_entry_facade' => sub {
+subtest 'build_compiled_rule_table_paths_avoid_linkedspec_spec_entry_facade' => sub {
     plan tests => 9;
 
     my $spec_content = <<'SPEC';
@@ -8165,7 +8165,7 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::spec_entry = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__\n" };
-        $compiled = LinkedSpec::spec_descr($retv);
+        $compiled = LinkedSpec::build_compiled_rule_table($retv);
         $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
         1;
     };
@@ -8174,13 +8174,13 @@ SPEC
     ok($ok_run, 'default spec-entry owner paths succeed without the LinkedSpec spec_entry facade')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__/, 'default spec-entry owner paths do not call the trapped LinkedSpec spec_entry facade');
-    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr default callback still builds compiled rule hash without the facade');
-    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr still exposes runtime handler coderef without the facade');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table default callback still builds compiled rule hash without the facade');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table still exposes runtime handler coderef without the facade');
     ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the LinkedSpec spec_entry facade');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the facade');
 };
-subtest 'spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade' => sub {
+subtest 'build_compiled_rule_table_and_get_avoid_removed_linkedspec_ruleir_internal_facade' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -8206,17 +8206,17 @@ SPEC
         local *LinkedSpec::_validate_rule_ir_or_exit = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_RULE_IR_OR_EXIT__\n" };
         local *LinkedSpec::_normalize_rule_code_chunks = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_RULE_CODE_CHUNKS__\n" };
         local *LinkedSpec::_build_rule_ir_emit_context = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_RULE_IR_EMIT_CONTEXT__\n" };
-        $compiled = LinkedSpec::spec_descr($retv);
+        $compiled = LinkedSpec::build_compiled_rule_table($retv);
         $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'spec_descr and Get succeed without the removed LinkedSpec RuleIR/internal facade helpers')
+    ok($ok_run, 'build_compiled_rule_table and Get succeed without the removed LinkedSpec RuleIR/internal facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'spec_descr and Get do not call the trapped removed LinkedSpec RuleIR/internal facade helpers');
-    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::spec_descr still builds compiled rule hash without the removed internal facade');
-    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::spec_descr still exposes runtime handler coderef without the removed internal facade');
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'build_compiled_rule_table and Get do not call the trapped removed LinkedSpec RuleIR/internal facade helpers');
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table still builds compiled rule hash without the removed internal facade');
+    ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table still exposes runtime handler coderef without the removed internal facade');
     ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the removed internal facade');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the removed internal facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the removed internal facade');
@@ -8863,12 +8863,12 @@ SPEC
     $err = $@ // '' unless $ok_run;
 
     ok($ok_run, 'compiler pipeline traps compile_spec_entry die and returns without outer die') or diag(normalize_error($err));
-    ok(!defined($ret), 'compiler pipeline returns undef when compile_spec_entry dies during spec descriptor generation');
+    ok(!defined($ret), 'compiler pipeline returns undef when compile_spec_entry dies during compiled rule-table generation');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'compile_spec_entry die records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compile_spec_entry die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compile_spec_entry die records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec_entry die records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compile_spec_entry die records summary');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'compile_spec_entry die records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'compile_spec_entry die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'compile_spec_entry die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_COMPILE_SPEC_ENTRY_DIE__/, 'compile_spec_entry die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'compile_spec_entry die records the active parsed rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec_entry die records label-scoped generated handler source label when variant is not known yet');
@@ -8906,9 +8906,9 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when compile_spec_entry yields an invalid descriptor tuple');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'invalid compile_spec_entry tuple records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'invalid compile_spec_entry tuple records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'invalid compile_spec_entry tuple records spec_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'invalid compile_spec_entry tuple records combined compiler owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'invalid compile_spec_entry tuple records summary');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'invalid compile_spec_entry tuple records build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'invalid compile_spec_entry tuple records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'invalid compile_spec_entry tuple records summary');
     is($runtime_ctx->{last_error}{detail}, 'compile_spec_entry returned invalid descriptor tuple: label=undef, info=undef', 'invalid compile_spec_entry tuple records the specific malformed tuple detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'invalid compile_spec_entry tuple records the active parsed rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'invalid compile_spec_entry tuple records label-scoped generated handler source label when variant is not known yet');
@@ -8989,7 +8989,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-state spec_gdata test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-state spec_gdata test');
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $gdata = LinkedSpec::Compiler::spec_gdata($compiled_state);
 
     ok(defined($gdata) && ref($gdata) eq 'HASH', 'spec_gdata accepts compiled-spec state input and returns a hashref');
@@ -9011,7 +9011,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-gdata-state test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-gdata-state test');
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $gdata_state = LinkedSpec::Compiler::spec_gdata($compiled_state, { return_state => 1 });
 
     ok(ref($gdata_state) eq 'HASH', 'spec_gdata return_state returns a hashref');
@@ -9140,7 +9140,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor-state test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor-state test');
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
 
     ok(ref($descriptor_state) eq 'HASH', 'final descriptor state build returns a hashref');
@@ -9177,7 +9177,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for descriptor-state validation-view test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for descriptor-state validation-view test');
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
     my $validation_view = LinkedSpec::CompilerState::compiled_descriptor_state_validation_view($descriptor_state);
 
@@ -9199,7 +9199,7 @@ SPEC
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
     ok($parse_success, 'bootstrap parse succeeds for invalid compiled-gdata shape test') or diag(normalize_error($parse_error));
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::_build_final_descr_state(
@@ -9228,7 +9228,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor validation test') or diag(normalize_error($parse_error));
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor validation test');
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
     my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
 
@@ -9269,7 +9269,7 @@ SPEC
     my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
     ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor direct-validation test') or diag(normalize_error($parse_error));
 
-    my $compiled_state = LinkedSpec::Compiler::spec_descr($retv, { return_state => 1 });
+    my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
     my ($ok_run, $valid, $err) = (0, undef, '');
     $ok_run = eval {
@@ -10009,9 +10009,9 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
             compile_spec => sub {
                 $runtime_ctx->{last_error} = {
                     type => 'compiler_pipeline',
-                    stage => 'spec_descr',
-                    owner_stage => 'compiler_pipeline:spec_descr',
-                    summary => 'Spec descriptor generation failed',
+                    stage => 'build_compiled_rule_table',
+                    owner_stage => 'compiler_pipeline:build_compiled_rule_table',
+                    summary => 'Compiled rule-table generation failed',
                     detail => '__FORCED_INNER_COMPILE_ERROR__',
                     spec_name => 'forced_compile_preserve_name',
                     spec_path => $spec_path,
@@ -10029,8 +10029,8 @@ subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_com
     is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec dies after writing runtime payload');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory preserves structured runtime error payload when compile_spec dies after writing one');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compile_spec die after runtime payload preserves deeper owner type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compile_spec die after runtime payload preserves deeper owner stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compile_spec die after runtime payload preserves deeper owner_stage');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'compile_spec die after runtime payload preserves deeper owner stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'compile_spec die after runtime payload preserves deeper owner_stage');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_INNER_COMPILE_ERROR__/, 'compile_spec die after runtime payload preserves deeper owner detail');
 };
 subtest 'parser_factory_run_get_parser_preserves_existing_runtime_error_when_compile_spec_returns_undef' => sub {
@@ -10689,9 +10689,9 @@ SPEC
             my ($spec_content_ref, $option, $deps) = @_;
             $deps->{runtime_ctx}{last_error} = {
                 type => 'compiler_pipeline',
-                stage => 'spec_descr',
-                owner_stage => 'compiler_pipeline:spec_descr',
-                summary => 'Spec descriptor generation failed',
+                stage => 'build_compiled_rule_table',
+                owner_stage => 'compiler_pipeline:build_compiled_rule_table',
+                summary => 'Compiled rule-table generation failed',
                 detail => '__FORCED_PRESERVED_RUNTIME_ERROR__',
                 spec_name => '',
                 spec_path => '',
@@ -10714,9 +10714,9 @@ SPEC
     ok(ref($runtime_ctx) eq 'HASH', 'Runtime::run_get exposes runtime context when compiler delegation dies after writing structured payload');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'Runtime::run_get preserves structured last_error when compiler delegation dies after writing one');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'compiler delegation die after payload preserves deeper owner type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'compiler delegation die after payload preserves deeper owner stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:spec_descr', 'compiler delegation die after payload preserves deeper owner_stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'compiler delegation die after payload preserves deeper owner summary');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'compiler delegation die after payload preserves deeper owner stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_compiled_rule_table', 'compiler delegation die after payload preserves deeper owner_stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'compiler delegation die after payload preserves deeper owner summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_PRESERVED_RUNTIME_ERROR__/, 'compiler delegation die after payload preserves deeper owner detail');
 };
 subtest 'get_parser_exposes_runtime_ctx_ref_for_resolution_failure' => sub {
@@ -11153,10 +11153,10 @@ SPEC
     ok($ok_run, 'LinkedSpec::Get returns without outer die when compile_spec_entry reports a malformed non-hash tuple') or diag(normalize_error($err));
     ok(!defined($ret), 'LinkedSpec::Get returns undef when compile_spec_entry reports a malformed non-hash tuple');
     ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context when compile_spec_entry reports a malformed non-hash tuple');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured compiler spec_descr failure context');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured compiler build_compiled_rule_table failure context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'spec_descr', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves spec_descr stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec descriptor generation failed', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves summary');
+    is($runtime_ctx->{last_error}{stage}, 'build_compiled_rule_table', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves build_compiled_rule_table stage');
+    is($runtime_ctx->{last_error}{summary}, 'Compiled rule-table generation failed', 'LinkedSpec::Get malformed compile_spec_entry tuple preserves summary');
     is($runtime_ctx->{last_error}{detail}, q{compile_spec_entry returned invalid descriptor tuple: label='Top', info=ARRAY}, 'LinkedSpec::Get malformed compile_spec_entry tuple preserves the specific malformed-return detail');
 };
 subtest 'linkedspec_get_preserves_top_rule_handler_label_for_generic_late_build_failure' => sub {

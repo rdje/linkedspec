@@ -184,17 +184,17 @@ sub Get {
 }
 
 #------------------------------------------------------------------------------
-# Function: spec_descr
-# Purpose : Convert parsed bootstrap entries into compiled rule state.
-#           Default return remains the historical descriptor `spec` hash
-#           (rule label => compiled rule info), while advanced callers may
+# Function: build_compiled_rule_table
+# Purpose : Convert parsed bootstrap entries into the compiled rule-table
+#           surface used by later descriptor assembly. Default return is the
+#           rule-label => compiled-rule-info hash, while advanced callers may
 #           request richer compiled-spec state through owner options.
 # Args    : ($parsed_spec_entries, [$compile_spec_entry_cb], [$option_hashref])
-# Returns : hashref of spec rule definitions or compiled-spec state hashref
+# Returns : compiled rule-table hashref or compiled-spec state hashref
 #------------------------------------------------------------------------------
-sub spec_descr {
+sub build_compiled_rule_table {
  my @args = @_;
- return _dispatch_owner_call('LinkedSpec::Compiler', 'spec_descr', @args)
+ return _dispatch_owner_call('LinkedSpec::Compiler', 'build_compiled_rule_table', @args)
 }
 
 #------------------------------------------------------------------------------

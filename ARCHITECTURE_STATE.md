@@ -41,7 +41,7 @@ This document is the current high-level technical reading of the project shape. 
 - Backend-neutral action semantics now largely live in:
   - `LinkedSpec::ActionIR::*`
 - `RuntimeContext` is one of the cleanest and most important boundaries in the tree.
-- `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel `spec_descr` / `spec_gdata` hashes as its own source of truth.
+- `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel compiled-rule-table / `spec_gdata` hashes as its own source of truth.
 - Dynamic plugin loading is still present in the public facade, but current project direction treats it as legacy-removal territory rather than a feature family to preserve.
 
 ## LinkedSpec Facade Reading
@@ -72,7 +72,7 @@ The facade surface currently falls into four bands.
 
 ### Compile/Runtime Surface
 - `Get`
-- `spec_descr`
+- `build_compiled_rule_table`
 - `call_spec_handler_subst`
 - `get_parser`
 
@@ -196,7 +196,7 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 
 One concrete architectural consequence matters now:
 
-- `spec_descr(...)` still exposes the historical rule-label => info hash by default for compatibility,
+- `build_compiled_rule_table(...)` is now the active low-level seam and still exposes the historical rule-label => info hash by default,
 - but internally it first builds a `compiled_spec_state` record with:
   - `definition_order`
   - `rule_order`
@@ -418,9 +418,9 @@ The helper family is much richer than it used to be. The bigger future wins are 
 - self-hosting,
 - and eventual backend decoupling.
 
-### 5. `spec_descr` / `spec_gdata` should now be read as phases, not as the ideal long-term data model
+### 5. `build_compiled_rule_table` / `spec_gdata` should now be read as phases, not as the ideal long-term data model
 The information they represent is still needed. What changed is the ownership model:
-- `spec_descr(...)` is now best read as "build compiled-spec state",
+- `build_compiled_rule_table(...)` is now best read as "build compiled-spec state",
 - `spec_gdata(...)` is now best read as "build compiled-gdata state from compiled-spec state and project a legacy gdata hash only when a caller still wants that older shape",
 - and the legacy hash forms are compatibility outputs rather than the compiler's own preferred representation.
 

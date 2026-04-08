@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: rename `spec_descr(...)` to `build_compiled_rule_table(...)`
+
+- updated `perl/LinkedSpec/Compiler.pm` so the active low-level compiled-rule build seam is now named `build_compiled_rule_table(...)`, with helper names, trace scopes, structured diagnostics stages, and summary/detail wording renamed to match the clearer state-first model,
+- updated `perl/LinkedSpec.pm` so the public façade now exposes `build_compiled_rule_table(...)` directly and no longer preserves the historical `spec_descr(...)` wrapper name,
+- widened `t/phase0_regression.t` so the active seam locks now exercise `LinkedSpec::build_compiled_rule_table(...)`, `LinkedSpec::Compiler::build_compiled_rule_table(...)`, and the renamed `compiler_pipeline:build_compiled_rule_table` diagnostics family instead of the removed historical name,
+- refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats `build_compiled_rule_table(...)` as the real current seam and `spec_descr(...)` as historical vocabulary only.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: introduce dependency-regex state naming
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the preferred internal name for derived compiled `gdata` is now dependency-regex state, while historical `compiled_gdata_state`, `gdata_by_label`, and `gdata_rows` remain supported compatibility aliases over the same state payload,

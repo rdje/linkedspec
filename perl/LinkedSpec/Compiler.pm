@@ -348,46 +348,46 @@ sub _normalize_compiled_spec_input {
  )
 }
 
-sub spec_descr {
+sub build_compiled_rule_table {
  my ($specretv, $compile_spec_entry, $option) = @_;
  if (ref($compile_spec_entry) eq 'HASH' && !defined($option)) {
   $option = $compile_spec_entry;
   $compile_spec_entry = undef;
  }
- my $runtime_ctx = _prepare_runtime_ctx_for_spec_descr($specretv, $option);
+ my $runtime_ctx = _prepare_runtime_ctx_for_build_compiled_rule_table($specretv, $option);
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
- _clear_last_spec_descr_failure_detail();
- my $trace_scope = _trace_enter('LinkedSpec::Compiler::spec_descr', {
+ _clear_last_build_compiled_rule_table_failure_detail();
+ my $trace_scope = _trace_enter('LinkedSpec::Compiler::build_compiled_rule_table', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
 
  unless (ref($compile_spec_entry) eq 'CODE') {
   my $detail = 'compile_spec_entry callback must be CODE';
-  _set_last_spec_descr_failure_detail($detail);
+  _set_last_build_compiled_rule_table_failure_detail($detail);
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'spec_descr',
-   summary => 'Spec descriptor generation failed',
+   stage => 'build_compiled_rule_table',
+   summary => 'Compiled rule-table generation failed',
    detail => $detail,
    handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
   ) if ref($runtime_ctx) eq 'HASH';
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
-  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
   return undef
  }
 
  unless (ref($specretv) eq 'ARRAY') {
-  my $detail = _describe_spec_descr_entries_result($specretv);
-  _set_last_spec_descr_failure_detail($detail);
+  my $detail = _describe_build_compiled_rule_table_entries_result($specretv);
+  _set_last_build_compiled_rule_table_failure_detail($detail);
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'spec_descr',
-   summary => 'Spec descriptor generation failed',
+   stage => 'build_compiled_rule_table',
+   summary => 'Compiled rule-table generation failed',
    detail => $detail,
    handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
   ) if ref($runtime_ctx) eq 'HASH';
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
-  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
   return undef
  }
 
@@ -396,17 +396,17 @@ sub spec_descr {
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
   my $entry = $specretv->[$entry_idx];
   unless (ref($entry) eq 'ARRAY') {
-   my $detail = _describe_spec_descr_entry_result($entry, $entry_idx);
-   _set_last_spec_descr_failure_detail($detail);
+   my $detail = _describe_build_compiled_rule_table_entry_result($entry, $entry_idx);
+   _set_last_build_compiled_rule_table_failure_detail($detail);
    _set_runtime_ctx_last_error(
     $runtime_ctx,
-    stage => 'spec_descr',
-    summary => 'Spec descriptor generation failed',
+    stage => 'build_compiled_rule_table',
+    summary => 'Compiled rule-table generation failed',
     detail => $detail,
     handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
-   _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_MEDIUM);
+   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
    return undef
   }
   my $active_rule_label = _parsed_rule_label($entry);
@@ -423,11 +423,11 @@ sub spec_descr {
    my $detail = defined($compile_error) && length($compile_error)
     ? $compile_error
     : 'compile_spec_entry died without diagnostic detail';
-   _set_last_spec_descr_failure_detail($detail);
+   _set_last_build_compiled_rule_table_failure_detail($detail);
    _set_runtime_ctx_last_error(
     $runtime_ctx,
-    stage => 'spec_descr',
-    summary => 'Spec descriptor generation failed',
+    stage => 'build_compiled_rule_table',
+    summary => 'Compiled rule-table generation failed',
     detail => $detail,
     rule_label => $active_rule_label,
     handler_source_label => $active_handler_source_label,
@@ -441,11 +441,11 @@ sub spec_descr {
    my $failure_rule_label = defined($label) && !ref($label) && length($label)
     ? $label
     : $active_rule_label;
-   _set_last_spec_descr_failure_detail($detail);
+   _set_last_build_compiled_rule_table_failure_detail($detail);
    _set_runtime_ctx_last_error(
     $runtime_ctx,
-    stage => 'spec_descr',
-    summary => 'Spec descriptor generation failed',
+    stage => 'build_compiled_rule_table',
+    summary => 'Compiled rule-table generation failed',
     detail => $detail,
     rule_label => $failure_rule_label,
     handler_source_label => _compiler_rule_or_top_handler_source_label($runtime_ctx, $failure_rule_label),
@@ -481,20 +481,20 @@ sub spec_descr {
   : _compiled_spec_state_to_legacy_spec($compiled_state);
 
  if (_trace_should_dump(DUMP_MEDIUM)) {
-  _trace_log_dump("=== GENERATED SPEC DUMP ===\n");
+  _trace_log_dump("=== GENERATED RULE TABLE DUMP ===\n");
   _trace_log_dump(_dump_value($result));
-  _trace_log_dump("=== END GENERATED SPEC DUMP ===\n");
+  _trace_log_dump("=== END GENERATED RULE TABLE DUMP ===\n");
  }
  _trace_exit(
   $trace_scope,
   {
    status => 'ok',
    rule_count => _compiled_spec_state_rule_count($compiled_state),
-   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_spec_state' : 'legacy_spec_hash',
+   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_spec_state' : 'compiled_rule_table_hash',
   },
   DUMP_MEDIUM
  );
- _clear_last_spec_descr_failure_detail();
+ _clear_last_build_compiled_rule_table_failure_detail();
 
  return $result
 }
@@ -701,13 +701,13 @@ sub _compiler_rule_or_top_handler_source_label {
  return _compiler_top_rule_handler_source_label($runtime_ctx)
 }
 
-sub _prepare_runtime_ctx_for_spec_descr {
+sub _prepare_runtime_ctx_for_build_compiled_rule_table {
  my ($specretv, $option) = @_;
  return undef unless ref($option) eq 'HASH' && exists($option->{runtime_ctx_ref});
  my $runtime_ctx_ref = _call_runtime_ctx(
   'normalize_runtime_ctx_ref',
   $option->{runtime_ctx_ref},
-  owner => 'LinkedSpec::Compiler::spec_descr',
+  owner => 'LinkedSpec::Compiler::build_compiled_rule_table',
  );
  my $runtime_ctx = _call_runtime_ctx('ensure_runtime_ctx', $runtime_ctx_ref);
  return undef unless ref($runtime_ctx) eq 'HASH';
@@ -771,21 +771,21 @@ sub _bootstrap_parse_result_detail {
  return '';
 }
 
-my $LAST_SPEC_DESCR_FAILURE_DETAIL = '';
+my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 
-sub _clear_last_spec_descr_failure_detail {
- $LAST_SPEC_DESCR_FAILURE_DETAIL = '';
+sub _clear_last_build_compiled_rule_table_failure_detail {
+ $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
  return ''
 }
 
-sub _set_last_spec_descr_failure_detail {
+sub _set_last_build_compiled_rule_table_failure_detail {
  my ($detail) = @_;
- $LAST_SPEC_DESCR_FAILURE_DETAIL = defined($detail) ? $detail : '';
- return $LAST_SPEC_DESCR_FAILURE_DETAIL
+ $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = defined($detail) ? $detail : '';
+ return $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL
 }
 
-sub _get_last_spec_descr_failure_detail {
- return $LAST_SPEC_DESCR_FAILURE_DETAIL
+sub _get_last_build_compiled_rule_table_failure_detail {
+ return $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL
 }
 
 sub _describe_compile_spec_entry_result {
@@ -801,17 +801,17 @@ sub _describe_compile_spec_entry_result {
  return "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
 }
 
-sub _describe_spec_descr_entries_result {
+sub _describe_build_compiled_rule_table_entries_result {
  my ($specretv) = @_;
 
  my $value_desc = !defined($specretv)
   ? 'undef'
   : ref($specretv) ? ref($specretv) : 'SCALAR';
 
- return "spec_descr expects an ARRAY ref of parsed bootstrap entries; got $value_desc";
+ return "build_compiled_rule_table expects an ARRAY ref of parsed bootstrap entries; got $value_desc";
 }
 
-sub _describe_spec_descr_entry_result {
+sub _describe_build_compiled_rule_table_entry_result {
  my ($entry, $idx) = @_;
 
  my $value_desc = !defined($entry)
@@ -819,7 +819,7 @@ sub _describe_spec_descr_entry_result {
   : ref($entry) ? ref($entry) : 'SCALAR';
  my $entry_idx = defined($idx) ? $idx : '?';
 
- return "spec_descr expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
+ return "build_compiled_rule_table expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
 }
 
 sub _describe_final_descr_state_result {
@@ -1199,47 +1199,47 @@ sub run_get_pipeline {
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
-my $active_spec_descr_rule_label = undef;
-_clear_last_spec_descr_failure_detail();
+my $active_build_compiled_rule_table_rule_label = undef;
+_clear_last_build_compiled_rule_table_failure_detail();
 my $compiled_spec_state = eval {
- spec_descr($retv, sub {
+ build_compiled_rule_table($retv, sub {
    my ($entry) = @_;
-   $active_spec_descr_rule_label = _parsed_rule_label($entry);
+   $active_build_compiled_rule_table_rule_label = _parsed_rule_label($entry);
    return $compile_spec_entry->($entry)
   }, { return_state => 1 })
 };
-my $spec_descr_error = $@;
- my $active_spec_descr_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_spec_descr_rule_label);
-if ($spec_descr_error) {
+my $build_compiled_rule_table_error = $@;
+ my $active_build_compiled_rule_table_handler_source_label =
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_build_compiled_rule_table_rule_label);
+if ($build_compiled_rule_table_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'spec_descr',
-   summary => 'Spec descriptor generation failed',
-   detail => $spec_descr_error,
-   rule_label => $active_spec_descr_rule_label,
-   handler_source_label => $active_spec_descr_handler_source_label,
+   stage => 'build_compiled_rule_table',
+   summary => 'Compiled rule-table generation failed',
+   detail => $build_compiled_rule_table_error,
+   rule_label => $active_build_compiled_rule_table_rule_label,
+   handler_source_label => $active_build_compiled_rule_table_handler_source_label,
   );
-  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed - trapped exception while compiling parsed spec entries");
-  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
+  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiled rule-table generation failed - trapped exception while compiling parsed spec entries");
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
  unless (_is_compiled_spec_state($compiled_spec_state)) {
  _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'spec_descr',
-   summary => 'Spec descriptor generation failed',
+   stage => 'build_compiled_rule_table',
+   summary => 'Compiled rule-table generation failed',
    detail => do {
-    my $detail = _get_last_spec_descr_failure_detail();
+    my $detail = _get_last_build_compiled_rule_table_failure_detail();
     defined($detail) && length($detail)
      ? $detail
-     : 'Rule descriptor build failed while compiling parsed spec entries'
+     : 'Compiled rule-table build failed while compiling parsed spec entries'
    },
-   rule_label => $active_spec_descr_rule_label,
-   handler_source_label => $active_spec_descr_handler_source_label,
+   rule_label => $active_build_compiled_rule_table_rule_label,
+   handler_source_label => $active_build_compiled_rule_table_handler_source_label,
   );
- _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec descriptor generation failed");
-  _trace_exit($trace_scope, { status => 'error', stage => 'spec_descr' }, DUMP_LOW);
+ _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiled rule-table generation failed");
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
  _clear_active_spec_gdata_rule_label();
