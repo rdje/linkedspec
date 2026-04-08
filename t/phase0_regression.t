@@ -225,7 +225,7 @@ print exists($INC{"LinkedSpec/BootstrapSpec.pm"}) ? "__BOOTSTRAP_EAGER__\n" : "_
 print exists($INC{"LinkedSpec/SpecEntry.pm"}) ? "__SPEC_ENTRY_EAGER__\n" : "__SPEC_ENTRY_STILL_LAZY__\n";
 print exists($INC{"LinkedSpec/Validation.pm"}) ? "__VALIDATION_EAGER__\n" : "__VALIDATION_STILL_LAZY__\n";
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
-my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descriptor => 1 }, { runtime_ctx => $runtime_ctx });
 print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
 print exists($INC{"LinkedSpec/BootstrapSpec.pm"}) ? "__BOOTSTRAP_AFTER_PIPELINE__\n" : "__BOOTSTRAP_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/SpecEntry.pm"}) ? "__SPEC_ENTRY_AFTER_PIPELINE__\n" : "__SPEC_ENTRY_STILL_UNLOADED__\n";
@@ -249,7 +249,7 @@ my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
-my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descriptor => 1 }, { runtime_ctx => $runtime_ctx });
 print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_PIPELINE__\n" : "__TRACE_STILL_UNLOADED__\n";
 PERL
@@ -270,7 +270,7 @@ print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_EAGER__\n" : "__DUMPER_STILL_LA
 require LinkedSpec::Trace;
 LinkedSpec::Trace::configure_trace(trace_level => 'high');
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
-my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descriptor => 1 }, { runtime_ctx => $runtime_ctx });
 print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
 print exists($INC{"Data/Dumper.pm"}) ? "__DUMPER_AFTER_PIPELINE__\n" : "__DUMPER_STILL_UNLOADED__\n";
 PERL
@@ -289,7 +289,7 @@ my $spec_content = "Top::\n /a/ -> Top { return_a(Top) }\n";
 require LinkedSpec::Compiler;
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
 my $runtime_ctx = { top_rule => undef, parser_source_chunks_ref => [] };
-my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descr => 1 }, { runtime_ctx => $runtime_ctx });
+my $descr = LinkedSpec::Compiler::run_get_pipeline(\$spec_content, { return_descriptor => 1 }, { runtime_ctx => $runtime_ctx });
 print defined($descr) ? "__DESCR_DEFINED__\n" : "__DESCR_UNDEF__\n";
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_AFTER_PIPELINE__\n" : "__LINKEDRE_STILL_UNLOADED__\n";
 PERL
@@ -1429,10 +1429,10 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'BootstrapSpec build wrapper preserves caller $@ on successful list-context delegation');
 
     $@ = "__SAVED_ERR__\n";
-    my $runtime_ret = LinkedSpec::Runtime::run_get(\"Top::\n /a/ -> Top { return_a(Top) }\n", { return_descr => 1 });
+    my $runtime_ret = LinkedSpec::Runtime::run_get(\"Top::\n /a/ -> Top { return_a(Top) }\n", { return_descriptor => 1 });
     is_deeply($runtime_ret, {
         spec => "Top::\n /a/ -> Top { return_a(Top) }\n",
-        option => { return_descr => 1 },
+        option => { return_descriptor => 1 },
         deps => { runtime_ctx => $runtime_ret->{deps}{runtime_ctx} },
     }, 'Runtime run_get wrapper still delegates through Compiler');
     ok(ref($runtime_ret->{deps}{runtime_ctx}) eq 'HASH', 'Runtime run_get still injects runtime context');
@@ -4907,7 +4907,7 @@ SPEC
     ok(!$@, 'bootstrap-registry smoke parser executes without die') or diag(normalize_error($@));
     ok(defined($ast) && ref($ast) eq 'ARRAY', 'bootstrap-registry smoke parser returns AST array');
 };
-subtest 'get_return_descr_rule_meta_single_vs_multi_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_single_vs_multi_strategy' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -4922,10 +4922,10 @@ Choice:|
  /d/ -> Choice { return_a(Choice) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash');
-    ok(exists $descr->{spec} && ref($descr->{spec}) eq 'HASH', 'return_descr descriptor includes spec hash');
-    ok(exists $descr->{gdata} && ref($descr->{gdata}) eq 'HASH', 'return_descr descriptor includes gdata hash');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash');
+    ok(exists $descr->{spec} && ref($descr->{spec}) eq 'HASH', 'return_descriptor descriptor includes spec hash');
+    ok(exists $descr->{gdata} && ref($descr->{gdata}) eq 'HASH', 'return_descriptor descriptor includes gdata hash');
 
     ok(exists $descr->{spec}{Top}{meta}, 'Top rule includes execution metadata');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'AND_SINGLE_ACODE', 'Top single-regex AND maps to AND_SINGLE_ACODE');
@@ -4940,7 +4940,7 @@ SPEC
     is($descr->{spec}{Choice}{meta}{handler_variant}, 'OR_ACODE', 'Choice OR rule maps to OR_ACODE');
     ok(!$descr->{spec}{Choice}{meta}{uses_loop}, 'Choice OR metadata reports non-loop dispatch');
 };
-subtest 'get_return_descr_rule_meta_repetition_strategies' => sub {
+subtest 'get_return_descriptor_rule_meta_repetition_strategies' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -4959,8 +4959,8 @@ Opt:?
  /c/ -> Opt { return_a(Opt) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for repetition-strategy rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for repetition-strategy rules');
 
     ok(exists $descr->{spec}{Plus}{meta}, 'Plus rule includes execution metadata');
     is($descr->{spec}{Plus}{meta}{handler_variant}, 'REP_ACODE', 'Plus repetition rule maps to REP_ACODE');
@@ -4977,7 +4977,7 @@ SPEC
     is($descr->{spec}{Opt}{meta}{node_type}, 'REP_OPT', 'Opt metadata preserves REP_OPT node type');
     ok($descr->{spec}{Opt}{meta}{uses_loop}, 'Opt repetition metadata reports loop strategy');
 };
-subtest 'get_return_descr_rule_meta_explicit_or_repetition_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_explicit_or_repetition_strategy' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -4985,8 +4985,8 @@ Top::OR
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for explicit OR repetition rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for explicit OR repetition rules');
     ok(exists $descr->{spec}{Top}{meta}, 'Top explicit OR rule includes execution metadata');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_ACODE', 'Top explicit OR rule maps to REP_ACODE');
     is($descr->{spec}{Top}{meta}{node_type}, 'REP_OR_EXPLICIT', 'Top metadata preserves explicit OR node type');
@@ -4994,7 +4994,7 @@ SPEC
     is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');
     ok($descr->{spec}{Top}{meta}{uses_loop}, 'Top explicit OR metadata reports loop strategy');
 };
-subtest 'get_return_descr_rule_meta_or_plus_repetition_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_or_plus_repetition_strategy' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -5002,8 +5002,8 @@ Top::OR+
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for OR+ repetition rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for OR+ repetition rules');
     ok(exists $descr->{spec}{Top}{meta}, 'Top OR+ rule includes execution metadata');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_ACODE', 'Top OR+ rule maps to REP_ACODE');
     is($descr->{spec}{Top}{meta}{node_type}, 'REP_OR_PLUS', 'Top metadata preserves explicit OR+ node type');
@@ -5107,7 +5107,7 @@ SPEC
     ok(!defined($or_plus_empty), 'OR+ blind-call parser rejects empty input below the implicit minimum');
     ok(!defined($bounded_empty), 'open-ended bounded OR blind-call parser rejects empty input below the implicit minimum');
 };
-subtest 'get_return_descr_rule_meta_bounded_or_repetition_strategies' => sub {
+subtest 'get_return_descriptor_rule_meta_bounded_or_repetition_strategies' => sub {
     plan tests => 21;
 
     my $spec_content = <<'SPEC';
@@ -5130,8 +5130,8 @@ UpToTwo:OR{,2}
  /d/ -> UpToTwo { return_a(UpToTwo) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded OR repetition rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for bounded OR repetition rules');
 
     ok(exists $descr->{spec}{ExactTwo}{meta}, 'ExactTwo rule includes execution metadata');
     is($descr->{spec}{ExactTwo}{meta}{handler_variant}, 'REP_ACODE', 'ExactTwo bounded OR rule maps to REP_ACODE');
@@ -5220,7 +5220,7 @@ subtest 'bootstrap_rejects_invalid_bounded_or_labels' => sub {
         ok(defined($parse_error) || !$parse_success, "invalid bounded OR label for $label reports a parse failure");
     }
 };
-subtest 'get_return_descr_rule_meta_explicit_and_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_explicit_and_strategy' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -5232,8 +5232,8 @@ Pair:AND
  /b/ -> Pair { return_a(Pair) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for explicit AND rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for explicit AND rules');
     ok(exists $descr->{spec}{Pair}{meta}, 'Pair explicit AND rule includes execution metadata');
     is($descr->{spec}{Pair}{meta}{handler_variant}, 'AND_ACODE', 'Pair explicit AND rule maps to AND_ACODE');
     is($descr->{spec}{Pair}{meta}{node_type}, 'AND_EXPLICIT', 'Pair metadata preserves explicit AND node type');
@@ -5296,7 +5296,7 @@ SPEC
     ok(!defined($explicit_short), 'explicit AND parser rejects incomplete ordered sequence');
     ok(!defined($sigil_short), 'ampersand AND parser rejects incomplete ordered sequence');
 };
-subtest 'get_return_descr_rule_meta_blind_call_sequence_and_choice_strategies' => sub {
+subtest 'get_return_descriptor_rule_meta_blind_call_sequence_and_choice_strategies' => sub {
     plan tests => 15;
 
     my $sequence_spec = <<'SPEC';
@@ -5323,8 +5323,8 @@ Second:
  /b/ -> Second { return_a(Second) }
 SPEC
 
-    my $sequence_descr = LinkedSpec::Get(\$sequence_spec, return_descr => 1);
-    ok(defined($sequence_descr) && ref($sequence_descr) eq 'HASH', 'return_descr mode returns descriptor hash for blind-call sequence rules');
+    my $sequence_descr = LinkedSpec::Get(\$sequence_spec, return_descriptor => 1);
+    ok(defined($sequence_descr) && ref($sequence_descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for blind-call sequence rules');
 
     ok(exists $sequence_descr->{spec}{Sequence}{meta}, 'Sequence blind-call rule includes execution metadata');
     is($sequence_descr->{spec}{Sequence}{meta}{handler_variant}, 'AND_BCODE', 'Sequence blind-call rule maps to AND_BCODE');
@@ -5334,8 +5334,8 @@ SPEC
     is($sequence_descr->{spec}{Sequence}{meta}{regex_count}, 0, 'Sequence blind-call rule does not report regex slots on the blind-call wrapper rule itself');
     ok($sequence_descr->{spec}{Sequence}{meta}{uses_loop}, 'Sequence blind-call rule reports loop execution');
 
-    my $choice_descr = LinkedSpec::Get(\$choice_spec, return_descr => 1);
-    ok(defined($choice_descr) && ref($choice_descr) eq 'HASH', 'return_descr mode returns descriptor hash for blind-call choice rules');
+    my $choice_descr = LinkedSpec::Get(\$choice_spec, return_descriptor => 1);
+    ok(defined($choice_descr) && ref($choice_descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for blind-call choice rules');
     is($choice_descr->{spec}{Choice}{meta}{handler_variant}, 'OR_BCODE', 'Choice blind-call rule maps to OR_BCODE');
     is($choice_descr->{spec}{Choice}{meta}{action_mode}, 'blind_call', 'Choice blind-call rule reports blind_call action mode');
     is($choice_descr->{spec}{Choice}{meta}{execution_shape}, 'or_call_loop', 'Choice blind-call rule reports child-parser choice loop execution shape');
@@ -5366,8 +5366,8 @@ Second:
  /b/ -> Second { return_a(Second) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for worded blind-call rule-mode variants');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode builds descriptor hash for worded blind-call rule-mode variants');
 
     is($descr->{spec}{Sequence}{meta}{handler_variant}, 'AND_BCODE', 'blind-call ordered-sequence rule still follows explicit AND label');
     is($descr->{spec}{Sequence}{meta}{execution_shape}, 'and_call_loop', 'blind-call ordered-sequence rule reports ordered call-loop execution');
@@ -5498,8 +5498,8 @@ Second:
  /b/ -> Second { return_a(Second) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for default and explicit repeated-choice blind-call rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode builds descriptor hash for default and explicit repeated-choice blind-call rules');
 
     is($descr->{spec}{Choice}{meta}{handler_variant}, 'REP_BCODE', 'default blind-call rule maps to REP_BCODE');
     is($descr->{spec}{Choice}{meta}{action_mode}, 'blind_call', 'default blind-call rule keeps blind_call action mode');
@@ -5540,8 +5540,8 @@ Second:
  /b/ -> Second { return_a(Second) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode builds descriptor hash for shorthand and bounded repeated-choice blind-call rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode builds descriptor hash for shorthand and bounded repeated-choice blind-call rules');
 
     is($descr->{spec}{Plus}{meta}{handler_variant}, 'REP_BCODE', 'blind-call plus rule maps to REP_BCODE');
     is($descr->{spec}{Plus}{meta}{node_type}, 'REP_PLUS', 'blind-call plus rule preserves REP_PLUS node type');
@@ -5788,7 +5788,7 @@ SPEC
     my $parser = LinkedSpec::Get(\$spec_content);
     ok(ref($parser) eq 'CODE', 'runtime parser builds for grouped action-edge target syntax');
 };
-subtest 'get_return_descr_rule_meta_and_plus_repetition_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_and_plus_repetition_strategy' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -5797,8 +5797,8 @@ Top::AND+
  /b/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for AND+ repetition rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for AND+ repetition rules');
     ok(exists $descr->{spec}{Top}{meta}, 'Top AND+ rule includes execution metadata');
     is($descr->{spec}{Top}{meta}{handler_variant}, 'REP_AND_ACODE', 'Top AND+ rule maps to REP_AND_ACODE');
     is($descr->{spec}{Top}{meta}{node_type}, 'REP_AND_PLUS', 'Top metadata preserves explicit AND+ node type');
@@ -5868,7 +5868,7 @@ SPEC
     ok(!defined($and_plus_short), 'AND+ parser rejects empty input below the implicit minimum');
     ok(!defined($bounded_short), 'open-ended bounded AND parser rejects empty input below the implicit minimum');
 };
-subtest 'get_return_descr_rule_meta_bounded_and_repetition_strategies' => sub {
+subtest 'get_return_descriptor_rule_meta_bounded_and_repetition_strategies' => sub {
     plan tests => 21;
 
     my $spec_content = <<'SPEC';
@@ -5895,8 +5895,8 @@ UpToTwo:AND{,2}
  /h/ -> UpToTwo { return_a(UpToTwo) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded AND repetition rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for bounded AND repetition rules');
 
     ok(exists $descr->{spec}{ExactTwo}{meta}, 'ExactTwo bounded AND rule includes execution metadata');
     is($descr->{spec}{ExactTwo}{meta}{handler_variant}, 'REP_AND_ACODE', 'ExactTwo bounded AND rule maps to REP_AND_ACODE');
@@ -5922,7 +5922,7 @@ SPEC
     is($descr->{spec}{UpToTwo}{meta}{rep_min}, 0, 'UpToTwo metadata preserves implicit zero lower bound');
     is($descr->{spec}{UpToTwo}{meta}{rep_max}, 2, 'UpToTwo metadata preserves upper bound');
 };
-subtest 'get_return_descr_rule_meta_bounded_and_blind_call_strategy' => sub {
+subtest 'get_return_descriptor_rule_meta_bounded_and_blind_call_strategy' => sub {
     plan tests => 7;
 
     my $spec_content = <<'SPEC';
@@ -5937,8 +5937,8 @@ Second:
  /b/ -> Second { return_a(Second) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descr mode returns descriptor hash for bounded AND blind-call rules');
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'return_descriptor mode returns descriptor hash for bounded AND blind-call rules');
     ok(exists $descr->{spec}{Sequence}{meta}, 'Sequence bounded AND blind-call rule includes execution metadata');
     is($descr->{spec}{Sequence}{meta}{handler_variant}, 'REP_AND_BCODE', 'Sequence bounded AND blind-call rule maps to REP_AND_BCODE');
     is($descr->{spec}{Sequence}{meta}{node_type}, 'REP_AND_BOUNDED', 'Sequence blind-call metadata preserves bounded AND node type');
@@ -6138,10 +6138,10 @@ SPEC
         'bootstrap parse preserves LX lifecycle payloads across action-rule paragraph order variants',
     );
 
-    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descr => 1);
+    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descriptor => 1);
     ok(defined($conv_descr) && ref($conv_descr) eq 'HASH', 'descriptor build succeeds for conventional action-rule paragraph order');
 
-    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descr => 1);
+    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descriptor => 1);
     ok(defined($free_descr) && ref($free_descr) eq 'HASH', 'descriptor build succeeds for freer interleaved action-rule paragraph order');
 
     is_deeply(
@@ -6208,10 +6208,10 @@ SPEC
         'bootstrap parse preserves LX lifecycle payloads across blind-call paragraph order variants',
     );
 
-    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descr => 1);
+    my $conv_descr = LinkedSpec::Get(\$conventional_spec, return_descriptor => 1);
     ok(defined($conv_descr) && ref($conv_descr) eq 'HASH', 'descriptor build succeeds for conventional blind-call paragraph order');
 
-    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descr => 1);
+    my $free_descr = LinkedSpec::Get(\$free_order_spec, return_descriptor => 1);
     ok(defined($free_descr) && ref($free_descr) eq 'HASH', 'descriptor build succeeds for freer interleaved blind-call paragraph order');
 
     is_deeply(
@@ -6271,10 +6271,10 @@ SPEC
         'same-line action-rule paragraph preserves LX lifecycle payloads',
     );
 
-    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descr => 1);
+    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descriptor => 1);
     ok(defined($multi_descr) && ref($multi_descr) eq 'HASH', 'descriptor build succeeds for multiline action-rule paragraph form');
 
-    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descr => 1);
+    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descriptor => 1);
     ok(defined($same_descr) && ref($same_descr) eq 'HASH', 'descriptor build succeeds for same-line action-rule paragraph form');
 
     is_deeply(
@@ -6332,10 +6332,10 @@ SPEC
         'same-line blind-call paragraph preserves LX lifecycle payloads',
     );
 
-    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descr => 1);
+    my $multi_descr = LinkedSpec::Get(\$multiline_spec, return_descriptor => 1);
     ok(defined($multi_descr) && ref($multi_descr) eq 'HASH', 'descriptor build succeeds for multiline blind-call paragraph form');
 
-    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descr => 1);
+    my $same_descr = LinkedSpec::Get(\$same_line_spec, return_descriptor => 1);
     ok(defined($same_descr) && ref($same_descr) eq 'HASH', 'descriptor build succeeds for same-line blind-call paragraph form');
 
     is_deeply(
@@ -7319,7 +7319,7 @@ Beta:
  /b/ -> Beta { return_a(Beta) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'RuleIR pipeline descriptor build returns hash');
     ok(ref($descr->{spec}{Top}{gdata}) eq 'ARRAY', 'Top rule gdata mapping array exists');
     is(scalar @{$descr->{spec}{Top}{gdata}}, 2, 'Top rule gdata mapping count preserved');
@@ -7636,12 +7636,12 @@ SPEC
 
         $even_ret = LinkedSpec::Get(
             \$spec_content,
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
         );
         $odd_ret = LinkedSpec::Get(
             \$spec_content,
-            return_descr => 1,
+            return_descriptor => 1,
             '__ODD_TRAILING_OPTION__',
         );
         1;
@@ -7650,7 +7650,7 @@ SPEC
 
     ok($ok_run, 'Get succeeds while Runtime option contract is trapped') or diag(normalize_error($err));
     is($even_ret, '__EVEN_OPTION_RET__', 'Get still returns Runtime-owned value for normalized even option list');
-    is_deeply([sort keys %{ $captured_options[0] || {} }], [qw(dump_parser_source return_descr)], 'Get forwards the expected normalized option keys into Runtime');
+    is_deeply([sort keys %{ $captured_options[0] || {} }], [qw(dump_parser_source return_descriptor)], 'Get forwards the expected normalized option keys into Runtime');
     is($odd_ret, '__ODD_OPTION_RET__', 'Get still returns Runtime-owned value for odd trailing option list');
     is_deeply($captured_options[1], {}, 'Get falls back to an empty option hash for odd trailing option lists');
     is_deeply([map { ref($_) } @captured_spec_refs], [qw(SCALAR SCALAR)], 'Get forwards spec scalar refs into Runtime on both calls');
@@ -7667,7 +7667,7 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Runtime::run_get_from_args = sub { die "__UNEXPECTED_RUNTIME_RUN_GET_FROM_ARGS__\n" };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -8134,7 +8134,7 @@ SPEC
         no warnings 'redefine';
         local *LinkedSpec::Runtime::compile_spec_entry = sub { die "__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__\n" };
         $compiled = LinkedSpec::build_compiled_rule_table($retv);
-        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descriptor => 1);
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -8144,7 +8144,7 @@ SPEC
     unlike($err, qr/__UNEXPECTED_RUNTIME_COMPILE_SPEC_ENTRY__/, 'default spec-entry paths do not call the trapped Runtime compile_spec_entry wrapper');
     ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table default callback still builds compiled rule hash');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table default callback still exposes runtime handler coderef');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without Runtime compile_spec_entry wrapper');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descriptor path still builds descriptor without Runtime compile_spec_entry wrapper');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get preserves selected handler metadata');
 };
@@ -8166,7 +8166,7 @@ SPEC
         no warnings 'redefine';
         local *LinkedSpec::spec_entry = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__\n" };
         $compiled = LinkedSpec::build_compiled_rule_table($retv);
-        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descriptor => 1);
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -8176,7 +8176,7 @@ SPEC
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_SPEC_ENTRY__/, 'default spec-entry owner paths do not call the trapped LinkedSpec spec_entry facade');
     ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table default callback still builds compiled rule hash without the facade');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table still exposes runtime handler coderef without the facade');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the LinkedSpec spec_entry facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descriptor path still builds descriptor without the LinkedSpec spec_entry facade');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the facade');
 };
@@ -8207,7 +8207,7 @@ SPEC
         local *LinkedSpec::_normalize_rule_code_chunks = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_RULE_CODE_CHUNKS__\n" };
         local *LinkedSpec::_build_rule_ir_emit_context = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_RULE_IR_EMIT_CONTEXT__\n" };
         $compiled = LinkedSpec::build_compiled_rule_table($retv);
-        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descr => 1);
+        $descr = LinkedSpec::Get(\$spec_content_for_get, return_descriptor => 1);
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -8217,12 +8217,12 @@ SPEC
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'build_compiled_rule_table and Get do not call the trapped removed LinkedSpec RuleIR/internal facade helpers');
     ok(defined($compiled) && ref($compiled) eq 'HASH', 'LinkedSpec::build_compiled_rule_table still builds compiled rule hash without the removed internal facade');
     ok(ref($compiled->{Top}{handler}) eq 'CODE', 'LinkedSpec::build_compiled_rule_table still exposes runtime handler coderef without the removed internal facade');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descr path still builds descriptor without the removed internal facade');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'LinkedSpec::Get return_descriptor path still builds descriptor without the removed internal facade');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build through Get still exposes runtime handler coderef without the removed internal facade');
     is($descr->{spec}{Top}{meta}{selected_handler_variant}, '_default', 'descriptor build through Get still preserves selected handler metadata without the removed internal facade');
     ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor build through Get still exposes action-rewriter migration summary without the removed internal facade');
 };
-subtest 'get_return_descr_avoids_removed_linkedspec_validation_facade' => sub {
+subtest 'get_return_descriptor_avoids_removed_linkedspec_validation_facade' => sub {
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
@@ -8240,15 +8240,15 @@ SPEC
         local *LinkedSpec::validate_dependency_regex_references = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_GDATA_REFERENCES__\n" };
         local *LinkedSpec::validate_dsl_syntax = sub { die "__UNEXPECTED_LINKEDSPEC_VALIDATE_DSL_SYNTAX__\n" };
         local *LinkedSpec::extract_regex_literals_from_rule_rhs = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_REGEX_LITERALS_FROM_RULE_RHS__\n" };
-        $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+        $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'Get return_descr succeeds without the removed LinkedSpec validation facade helpers')
+    ok($ok_run, 'Get return_descriptor succeeds without the removed LinkedSpec validation facade helpers')
         or diag(normalize_error($err));
-    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'Get return_descr does not call the trapped removed LinkedSpec validation facade helpers');
-    ok(defined($descr) && ref($descr) eq 'HASH', 'Get return_descr still returns descriptor hash without the removed validation facade');
+    unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'Get return_descriptor does not call the trapped removed LinkedSpec validation facade helpers');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'Get return_descriptor still returns descriptor hash without the removed validation facade');
     ok(ref($descr->{spec}) eq 'HASH', 'descriptor build still exposes spec hash without the removed validation facade');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor build still exposes runtime handler coderef without the removed validation facade');
     ok(ref($descr->{gdata}) eq 'HASH', 'descriptor build still exposes gdata hash without the removed validation facade');
@@ -8278,7 +8278,7 @@ SPEC
     my $descr = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
             parser_source_ref => \$parser_source,
         },
@@ -8336,7 +8336,7 @@ SPEC
     my $descr = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
             parser_source_ref => \$parser_source,
         },
@@ -8376,7 +8376,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 bootstrap_parse => '__NOT_A_CALLBACK__',
@@ -8409,7 +8409,7 @@ subtest 'compiler_run_get_pipeline_records_structured_error_for_validation_failu
 
     my $ret = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
-        { return_descr => 1 },
+        { return_descriptor => 1 },
         { runtime_ctx => $runtime_ctx },
     );
 
@@ -8440,7 +8440,7 @@ SPEC
 
     my $ret = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
-        { return_descr => 1 },
+        { return_descriptor => 1 },
         { runtime_ctx => $runtime_ctx },
     );
 
@@ -8476,7 +8476,7 @@ SPEC
         local *LinkedSpec::Validation::validate_spec_content = sub { die "__FORCED_VALIDATE_SPEC_CONTENT_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8515,7 +8515,7 @@ SPEC
         local *LinkedSpec::Validation::validate_dsl_syntax = sub { die "__FORCED_VALIDATE_DSL_SYNTAX_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8561,7 +8561,7 @@ SPEC
         };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8600,7 +8600,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8639,7 +8639,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 bootstrap_parse => sub { die "__FORCED_BOOTSTRAP_PARSE_DIE__\n" },
@@ -8678,7 +8678,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 bootstrap_parse => sub { return (1, undef, ''); },
@@ -8715,7 +8715,7 @@ SPEC
 
     my $ret = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
-        { return_descr => 1 },
+        { return_descriptor => 1 },
         {
             runtime_ctx => $runtime_ctx,
             bootstrap_parse => sub { return (1, [['__TOP__'], ['__LEAF__']], ''); },
@@ -8776,7 +8776,7 @@ SPEC
         local *LinkedSpec::Validation::validate_compiled_descriptor_state = sub { die "__FORCED_VALIDATE_COMPILED_DESCRIPTOR_STATE_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8815,7 +8815,7 @@ SPEC
         local *LinkedSpec::Validation::validate_rule_definition = sub { die "__FORCED_VALIDATE_RULE_DEFINITION_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -8852,7 +8852,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 compile_spec_entry => sub { die "__FORCED_COMPILE_SPEC_ENTRY_DIE__\n" },
@@ -8892,7 +8892,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 compile_spec_entry => sub { return () },
@@ -8934,7 +8934,7 @@ SPEC
         local *LinkedSpec::Compiler::build_dependency_regex_map = sub { die "__FORCED_SPEC_GDATA_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             { runtime_ctx => $runtime_ctx },
         );
         1;
@@ -9102,7 +9102,7 @@ SPEC
             $saw_compiled_descriptor_state_validation_view = 1;
             return $orig_compiled_descriptor_state_validation_view->(@_);
         };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -9244,8 +9244,8 @@ Child::
  /b/ { return_undef() }
 SPEC
 
-    my $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
-    ok(ref($descr) eq 'HASH', 'return_descr builds descriptor hash for legacy gdata validation test');
+    my $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
+    ok(ref($descr) eq 'HASH', 'return_descriptor builds descriptor hash for legacy gdata validation test');
     ok(ref($descr->{gdata}) eq 'HASH' && ref($descr->{spec}) eq 'HASH', 'descriptor exposes legacy gdata/spec hash inputs');
 
     my $valid = LinkedSpec::Validation::validate_dependency_regex_references($descr->{gdata}, $descr->{spec});
@@ -9298,7 +9298,7 @@ SPEC
     $ok_run = eval {
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 compile_spec_entry => sub {
@@ -9349,7 +9349,7 @@ SPEC
         local *LinkedSpec::Compiler::_ored_re = sub { die "__FORCED_SPEC_GDATA_ORED_RE_DIE__\n" };
         $ret = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 runtime_ctx => $runtime_ctx,
                 bootstrap_parse => sub { return (1, [['__TOP__'], ['__LEAF__']], '') },
@@ -9399,7 +9399,7 @@ SPEC
 
     my $descr = LinkedSpec::Compiler::run_get_pipeline(
         \$spec_content,
-        { return_descr => 1 },
+        { return_descriptor => 1 },
         { runtime_ctx => $runtime_ctx },
     );
 
@@ -9882,14 +9882,14 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec non-coderef without runtime payload preserves label-scoped generated handler source label when top_rule is known');
     is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-coderef without runtime payload preserves resolved spec_path inside last_error');
 };
-subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_hash_in_return_descr_mode' => sub {
+subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_non_hash_in_return_descriptor_mode' => sub {
     plan tests => 12;
 
     my $runtime_ctx;
     my $spec_path = '/tmp/forced_compile_spec_array.spec';
     my $ret = LinkedSpec::ParserFactory::run_get_parser(
         'forced_compile_array_name',
-        { return_descr => 1, top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
+        { return_descriptor => 1, top_rule => 'Top', runtime_ctx_ref => \$runtime_ctx },
         {
             apply_trace_options => sub { return 1 },
             trace_enter => sub { return { scope => 'entered' } },
@@ -9904,18 +9904,18 @@ subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spe
         },
     );
 
-    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a non-hash in return_descr mode');
-    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a non-hash in return_descr mode');
-    is($runtime_ctx->{spec_name}, 'forced_compile_array_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a non-hash in return_descr mode');
-    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a non-hash in return_descr mode');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a non-hash in return_descr mode');
-    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec non-hash in return_descr mode records parser_factory type');
-    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec non-hash in return_descr mode records compile_spec stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-hash in return_descr mode records combined owner stage');
-    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-hash in return_descr mode records summary');
-    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'compile_spec non-hash in return_descr mode records specific malformed descriptor detail');
-    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec non-hash in return_descr mode preserves label-scoped generated handler source label when top_rule is known');
-    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-hash in return_descr mode preserves resolved spec_path inside last_error');
+    ok(!defined($ret), 'ParserFactory returns undef when compile_spec returns a non-hash in return_descriptor mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'ParserFactory exposes runtime context through runtime_ctx_ref when compile_spec returns a non-hash in return_descriptor mode');
+    is($runtime_ctx->{spec_name}, 'forced_compile_array_name', 'ParserFactory runtime context preserves requested spec name when compile_spec returns a non-hash in return_descriptor mode');
+    is($runtime_ctx->{spec_path}, $spec_path, 'ParserFactory runtime context preserves resolved spec path when compile_spec returns a non-hash in return_descriptor mode');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'ParserFactory records structured last_error when compile_spec returns a non-hash in return_descriptor mode');
+    is($runtime_ctx->{last_error}{type}, 'parser_factory', 'compile_spec non-hash in return_descriptor mode records parser_factory type');
+    is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'compile_spec non-hash in return_descriptor mode records compile_spec stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'compile_spec non-hash in return_descriptor mode records combined owner stage');
+    is($runtime_ctx->{last_error}{summary}, 'Spec compilation failed', 'compile_spec non-hash in return_descriptor mode records summary');
+    is($runtime_ctx->{last_error}{detail}, 'compile_spec returned invalid descriptor value: ARRAY; expected HASH', 'compile_spec non-hash in return_descriptor mode records specific malformed descriptor detail');
+    is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compile_spec non-hash in return_descriptor mode preserves label-scoped generated handler source label when top_rule is known');
+    is($runtime_ctx->{last_error}{spec_path}, $spec_path, 'compile_spec non-hash in return_descriptor mode preserves resolved spec_path inside last_error');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_compile_spec_returns_defined_value_in_parse_only_mode' => sub {
     plan tests => 12;
@@ -10145,7 +10145,7 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_coderef_wi
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'get_parser malformed compile result preserves requested spec name in last_error');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'get_parser malformed compile result preserves resolved spec path in last_error');
 };
-subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_return_descr_mode' => sub {
+subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_return_descriptor_mode' => sub {
     plan tests => 13;
 
     require File::Temp;
@@ -10162,17 +10162,17 @@ subtest 'get_parser_records_structured_error_when_runtime_returns_non_hash_in_re
         local *LinkedSpec::Runtime::run_get = sub { return ['not_a_hash']; };
         ($ok_call, $descr, $err_call, $out, $warn) = run_get_parser_with_captured_io(
             $tmp_spec,
-            return_descr => 1,
+            return_descriptor => 1,
             top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
     }
 
-    ok($ok_call, 'get_parser returns without outer die when Runtime returns a malformed non-hash in return_descr mode') or diag(normalize_error($err_call));
-    ok(!defined($descr), 'get_parser returns undef when Runtime returns a malformed non-hash in return_descr mode');
-    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a malformed non-hash in return_descr mode');
-    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a malformed non-hash in return_descr mode');
-    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a malformed non-hash in return_descr mode');
+    ok($ok_call, 'get_parser returns without outer die when Runtime returns a malformed non-hash in return_descriptor mode') or diag(normalize_error($err_call));
+    ok(!defined($descr), 'get_parser returns undef when Runtime returns a malformed non-hash in return_descriptor mode');
+    ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref when Runtime returns a malformed non-hash in return_descriptor mode');
+    is($runtime_ctx->{spec_name}, $tmp_spec, 'get_parser preserves requested explicit spec path as spec_name when Runtime returns a malformed non-hash in return_descriptor mode');
+    is($runtime_ctx->{spec_path}, $tmp_spec, 'get_parser preserves resolved spec path when Runtime returns a malformed non-hash in return_descriptor mode');
     is($runtime_ctx->{last_error}{type}, 'parser_factory', 'get_parser malformed descriptor result records parser_factory type');
     is($runtime_ctx->{last_error}{stage}, 'compile_spec', 'get_parser malformed descriptor result records compile_spec stage');
     is($runtime_ctx->{last_error}{owner_stage}, 'parser_factory:compile_spec', 'get_parser malformed descriptor result records combined owner stage');
@@ -10277,7 +10277,7 @@ SPEC
             return $orig_run_get_pipeline->(@_);
         };
 
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -10302,7 +10302,7 @@ SPEC
     my $descr = LinkedSpec::Runtime::run_get(
         \$spec_content,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
             parser_source_ref => \$parser_source,
             runtime_ctx_ref => \$runtime_ctx,
@@ -10328,7 +10328,7 @@ SPEC
     my $descr = LinkedSpec::Runtime::run_get(
         \$spec_content,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \%runtime_ctx,
         },
     );
@@ -10355,7 +10355,7 @@ SPEC
     my $descr_one = LinkedSpec::Runtime::run_get(
         \$spec_content_first,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
             parser_source_ref => \$parser_source_one,
             runtime_ctx_ref => \%runtime_ctx,
@@ -10371,7 +10371,7 @@ SPEC
     my $descr_two = LinkedSpec::Runtime::run_get(
         \$spec_content_second,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             dump_parser_source => 1,
             parser_source_ref => \$parser_source_two,
             runtime_ctx_ref => \%runtime_ctx,
@@ -10396,7 +10396,7 @@ subtest 'runtime_run_get_clears_stale_file_identity_in_reused_runtime_ctx' => su
     my $ret = LinkedSpec::Runtime::run_get(
         \$spec_content,
         {
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \%runtime_ctx,
         },
     );
@@ -10426,7 +10426,7 @@ SPEC
             \$spec_content,
             {
                 top_rule => 'Top',
-                return_descr => 1,
+                return_descriptor => 1,
                 runtime_ctx_ref => \$runtime_ctx,
             },
         );
@@ -10463,7 +10463,7 @@ SPEC
             \$spec_content,
             {
                 top_rule => 'Top',
-                return_descr => 1,
+                return_descriptor => 1,
                 runtime_ctx_ref => \$runtime_ctx,
             },
         );
@@ -10519,7 +10519,7 @@ SPEC
     is($runtime_ctx->{last_error}{spec_path}, '', 'compiler delegation malformed parser result leaves spec_path empty in inline runtime context');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'compiler delegation malformed parser result preserves label-scoped generated handler source label when top_rule is known');
 };
-subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_non_hash_in_return_descr_mode' => sub {
+subtest 'runtime_run_get_records_structured_error_when_run_get_pipeline_returns_non_hash_in_return_descriptor_mode' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -10535,7 +10535,7 @@ SPEC
         $ret = LinkedSpec::Runtime::run_get(
             \$spec_content,
             {
-                return_descr => 1,
+                return_descriptor => 1,
                 runtime_ctx_ref => \$runtime_ctx,
             },
         );
@@ -10698,7 +10698,7 @@ SPEC
         $ret = LinkedSpec::Runtime::run_get(
             \$spec_content,
             {
-                return_descr => 1,
+                return_descriptor => 1,
                 runtime_ctx_ref => \$runtime_ctx,
             },
         );
@@ -10907,7 +10907,7 @@ SPEC
         $ret = LinkedSpec::Get(
             \$spec_content,
             top_rule => 'Top',
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
         1;
@@ -10973,7 +10973,7 @@ SPEC
         local *LinkedSpec::Compiler::run_get_pipeline = sub { return ['not_a_hash'] };
         $ret = LinkedSpec::Get(
             \$spec_content,
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
         1;
@@ -11070,7 +11070,7 @@ SPEC
         $ret = LinkedSpec::Get(
             \$spec_content,
             top_rule => 'Top',
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
         1;
@@ -11106,7 +11106,7 @@ SPEC
         $ret = LinkedSpec::Get(
             \$spec_content,
             top_rule => 'Top',
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
         1;
@@ -11140,7 +11140,7 @@ SPEC
         };
         $ret = LinkedSpec::Get(
             \$spec_content,
-            return_descr => 1,
+            return_descriptor => 1,
             runtime_ctx_ref => \$runtime_ctx,
         );
         1;
@@ -11171,7 +11171,7 @@ SPEC
         local *LinkedSpec::Compiler::build_dependency_regex_map = sub { die "__FORCED_GET_SPEC_GDATA_DIE__\n" };
         $ret = LinkedSpec::Get(
             \$spec_content,
-            return_descr => 1,
+            return_descriptor => 1,
             top_rule => 'Top',
             runtime_ctx_ref => \$runtime_ctx,
         );
@@ -11197,7 +11197,7 @@ subtest 'linkedspec_get_exposes_runtime_ctx_ref_for_structured_failure_context' 
 
     my $ret = LinkedSpec::Get(
         \$spec_content,
-        return_descr => 1,
+        return_descriptor => 1,
         top_rule => 'RequestedTop',
         runtime_ctx_ref => \$runtime_ctx,
     );
@@ -11956,7 +11956,7 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Compiler::_run_bootstrap_parse = sub { die "__UNEXPECTED_COMPILER_RUN_BOOTSTRAP_PARSE__\n" };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12000,7 +12000,7 @@ SPEC
 
         $descr = LinkedSpec::Compiler::run_get_pipeline(
             \$spec_content,
-            { return_descr => 1 },
+            { return_descriptor => 1 },
             {
                 bootstrap_parse => sub {
                     return LinkedSpec::BootstrapSpec::run_bootstrap_parse($_[0]);
@@ -12055,7 +12055,7 @@ SPEC
                 && $descriptor_state->{compiled_spec_state}{compiled_rule_order}[1] eq 'Child';
             return $orig_validate_compiled_descriptor_state->(@_);
         };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12095,7 +12095,7 @@ SPEC
             $saw_projection_after_validation = 1;
             return $orig_compiled_descriptor_state_to_legacy_descr->(@_);
         };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12133,7 +12133,7 @@ SPEC
                 && $summary_input->{compiled_rule_order}[1] eq 'Leaf';
             return $orig_build_action_rewriter_migration_summary->(@_);
         };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12157,7 +12157,7 @@ SPEC
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::build_dependency_regex_map = sub { die "__UNEXPECTED_LINKEDSPEC_SPEC_GDATA__\n" };
-        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -15753,7 +15753,7 @@ Top:: I.declare(array, items, captures=array(scalar(seed))).declare(scalar, flag
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for non-action chained declare methods');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -16158,7 +16158,7 @@ Top:: I.assign(scalar(c), CAPTURE).substr(scalar(c), "\\s*$", "", o).return_arra
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for non-action capture/return method contracts');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -16194,7 +16194,7 @@ Top:: I.declare(array, items).declare(scalar, retv).assign(scalar(retv), CAPTURE
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_value method contract');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -16252,7 +16252,7 @@ Top:: I.declare(array, items).declare(scalar, retv).assign(array(items), array(s
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for array snapshot alias/assign method contracts');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -16315,7 +16315,7 @@ Top::&
  /a/ -> Top .return(["semantic", { key => scalar(name) }, [scalar(foo_arr, idx)]])
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-chain general return payload form');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -16336,8 +16336,8 @@ Top::&
  /a/ -> Top { return(array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent nested return-payload pipeline form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured nested return-payload pipeline form');
@@ -16390,8 +16390,8 @@ I { declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), 
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent collection-value pipeline lifecycle form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured collection-value pipeline lifecycle form');
@@ -16442,8 +16442,8 @@ I { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent collection-hash pipeline lifecycle form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured collection-hash pipeline lifecycle form');
@@ -16473,8 +16473,8 @@ Top::&
  /a/ -> Top { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/)))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent collection-hash action-chain form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured collection-hash action-block form');
@@ -16505,8 +16505,8 @@ Top::&
  /a/ -> Top { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); elseif(scalar(alt_on)); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); else(); return_undef(); endif() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent if/elseif branch-local method form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured if/elseif branch-local method form');
@@ -16546,8 +16546,8 @@ Top::&
  /a/ -> Top { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); default(); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); endswitch() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent switch/case branch-local method form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured switch/case branch-local method form');
@@ -16589,8 +16589,8 @@ LX { if(scalar(on)); return(hash("items", array(filter_match(uniq(uppercase_each
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif branch-local method form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif branch-local method form');
@@ -16633,8 +16633,8 @@ LX { switch(scalar(kind)); case("A"); return(hash("items", array(filter_match(un
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case branch-local method form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case branch-local method form');
@@ -16675,8 +16675,8 @@ Top::&
  /a/ -> Top { if(scalar(on)); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); elseif(scalar(alt_on)); say("alt"); return_undef(); else(); return_undef(); endif() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif multi-step branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif multi-step branch form');
@@ -16716,8 +16716,8 @@ Top::&
  /a/ -> Top { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return_array(semantic_annotation, hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/)))); default(); say("miss"); return_undef(); endswitch() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case multi-step branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case multi-step branch form');
@@ -16759,8 +16759,8 @@ LX { if(scalar(on)); declare(array, events); push_value(array(events), hash("ite
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif multi-step branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif multi-step branch form');
@@ -16802,8 +16802,8 @@ LX { switch(scalar(kind)); case("A"); declare(array, events); push_value(array(e
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case multi-step branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case multi-step branch form');
@@ -16843,8 +16843,8 @@ Top::&
  /a/ -> Top { switch(scalar(op), case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge inline composite switch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge inline composite switch form');
@@ -16888,8 +16888,8 @@ LX { switch(scalar(op), case("|", declare(array, events), push_value(array(event
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle inline composite switch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle inline composite switch form');
@@ -16944,8 +16944,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch action-list form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch branch-block form');
@@ -17002,8 +17002,8 @@ LX {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch action-list form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch branch-block form');
@@ -17071,8 +17071,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar');
@@ -17154,8 +17154,8 @@ LX {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch structured-argument branch-block baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite switch attached-branch-block sugar');
@@ -17210,8 +17210,8 @@ Top::&
  /a/ -> Top { if(scalar(on)) declare(array, events) push_value(array(events), hash("items", array(IMATCH_LIST))) return_array(semantic_annotation, hash("items", array(events))) elseif(scalar(alt_on)) say("alt") return_undef() else() return_undef() endif() }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if form');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style if baseline');
@@ -17258,8 +17258,8 @@ LX { if(scalar(on)) declare(array, events) push_value(array(events), hash("items
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if form');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for lifecycle marker-style if baseline');
@@ -17320,8 +17320,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if action-list form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form');
@@ -17382,8 +17382,8 @@ LX {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if action-list form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if branch-block form');
@@ -17455,8 +17455,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form');
@@ -17530,8 +17530,8 @@ LX {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for lifecycle inline composite if branch-block baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for lifecycle attached-block composite if form');
@@ -17591,8 +17591,8 @@ $tag { if(scalar(on), declare(array, events), return_undef(), elseif(scalar(alt_
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle inline composite if form");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle inline composite if form");
@@ -17675,8 +17675,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block baseline");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form");
@@ -17735,8 +17735,8 @@ Top::&
  }
 SPEC
 
-    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
     ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured attached-block composite if baseline');
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent outer attached-block composite if');
@@ -17808,8 +17808,8 @@ $tag.if(scalar(on)) {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
             ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured attached-block composite if baseline");
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent outer attached-block composite if");
@@ -17867,8 +17867,8 @@ Top::&
  }
 SPEC
 
-    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
     ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured mixed-branch-carrier composite if baseline');
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent mixed-branch-carrier composite if');
@@ -17939,8 +17939,8 @@ $tag.if(scalar(on)) {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
             ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured mixed-branch-carrier composite if baseline");
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent mixed-branch-carrier composite if");
@@ -18010,8 +18010,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with nested marker switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with nested marker switch flow');
@@ -18103,8 +18103,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with nested marker switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with nested marker switch flow");
@@ -18198,8 +18198,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if/elseif branch-block form with nested marker switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if/elseif form with nested marker switch flow');
@@ -18312,8 +18312,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if/elseif branch-block form with nested marker switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if/elseif form with nested marker switch flow");
@@ -18412,8 +18412,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if/elseif branch-block form with nested inline-composite switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if/elseif form with nested inline-composite switch flow');
@@ -18529,8 +18529,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if/elseif branch-block form with nested inline-composite switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if/elseif form with nested inline-composite switch flow");
@@ -18606,8 +18606,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with nested inline-composite switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with nested inline-composite switch flow');
@@ -18700,8 +18700,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with nested inline-composite switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with nested inline-composite switch flow");
@@ -18804,8 +18804,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with nested multi-case inline-composite switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with nested multi-case inline-composite switch flow');
@@ -18926,8 +18926,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with nested multi-case inline-composite switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with nested multi-case inline-composite switch flow");
@@ -19026,8 +19026,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with nested multi-case marker-style switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with nested multi-case marker-style switch flow');
@@ -19145,8 +19145,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with nested multi-case marker-style switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with nested multi-case marker-style switch flow");
@@ -19278,8 +19278,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if/elseif branch-block form with nested multi-case inline-composite switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if/elseif form with nested multi-case inline-composite switch flow');
@@ -19429,8 +19429,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if/elseif branch-block form with nested multi-case inline-composite switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if/elseif form with nested multi-case inline-composite switch flow");
@@ -19556,8 +19556,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if/elseif branch-block form with nested multi-case marker-style switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if/elseif form with nested multi-case marker-style switch flow');
@@ -19702,8 +19702,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if/elseif branch-block form with nested multi-case marker-style switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if/elseif form with nested multi-case marker-style switch flow");
@@ -19764,8 +19764,8 @@ $tag { switch(scalar(op), case("|", declare(array, events), return_array(semanti
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle inline composite switch form");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle inline composite switch form");
@@ -19835,8 +19835,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if action-list form");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form");
@@ -19903,8 +19903,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch action-list form");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch branch-block form");
@@ -19982,8 +19982,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar");
@@ -20042,7 +20042,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested marker flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20121,7 +20121,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested marker flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20179,7 +20179,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested marker switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20256,7 +20256,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested marker switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20318,7 +20318,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested composite if flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20404,7 +20404,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested composite if flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20471,7 +20471,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested inline-composite switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20556,7 +20556,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested inline-composite switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20622,7 +20622,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested composite if/elseif flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20716,7 +20716,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested composite if/elseif flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -20764,8 +20764,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge flat-list helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge flat-list helper form');
@@ -20806,8 +20806,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(fla
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle flat-list helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle flat-list helper form');
@@ -20846,8 +20846,8 @@ Top::&
  /a/ -> Top { return(array_copy(array(items))); return(hash("content", array_values(array(assigns)))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge array snapshot helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge array snapshot helper form');
@@ -20887,8 +20887,8 @@ LX { return(array_copy(array(items))); return(hash("content", array_values(array
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle array snapshot helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle array snapshot helper form');
@@ -20926,8 +20926,8 @@ Top::&
  /a/ -> Top { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); return(hash("content", array_values(array(assigns)))); else(); return_undef(); endif() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif array snapshot branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif array snapshot branch form');
@@ -20967,8 +20967,8 @@ Top::&
  /a/ -> Top { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_values(array(assigns)))); endswitch() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case array snapshot branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case array snapshot branch form');
@@ -21030,8 +21030,8 @@ Top::&
  endswitch() }
 SPEC
 
-    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descr => 1);
-    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descr => 1);
+    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descriptor => 1);
+    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descriptor => 1);
     ok(defined($if_fluent_descr) && ref($if_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif branch form used as semicolonless comparison baseline');
     ok(defined($if_block_descr) && ref($if_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured action-edge if/elseif branch form');
     is_deeply($if_fluent_descr->{spec}{Top}{ACODE}, $if_block_descr->{spec}{Top}{ACODE}, 'semicolonless structured action-edge if/elseif branch form lowers to the same ACODE as the fluent baseline');
@@ -21042,8 +21042,8 @@ SPEC
         'semicolonless structured action-edge if/elseif branch form stays fully language-agnostic-ready',
     );
 
-    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descr => 1);
-    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descr => 1);
+    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descriptor => 1);
+    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descriptor => 1);
     ok(defined($switch_fluent_descr) && ref($switch_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case branch form used as semicolonless comparison baseline');
     ok(defined($switch_block_descr) && ref($switch_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured action-edge switch/case branch form');
     is_deeply($switch_fluent_descr->{spec}{Top}{ACODE}, $switch_block_descr->{spec}{Top}{ACODE}, 'semicolonless structured action-edge switch/case branch form lowers to the same ACODE as the fluent baseline');
@@ -21090,8 +21090,8 @@ Top::&
  endswitch }
 SPEC
 
-    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descr => 1);
-    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descr => 1);
+    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descriptor => 1);
+    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descriptor => 1);
     ok(defined($if_fluent_descr) && ref($if_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif branch form used as bare-marker comparison baseline');
     ok(defined($if_block_descr) && ref($if_block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif block with bare zero-arg markers');
     is_deeply($if_fluent_descr->{spec}{Top}{ACODE}, $if_block_descr->{spec}{Top}{ACODE}, 'structured action-edge if/elseif block with bare zero-arg markers lowers to the same ACODE as the fluent baseline');
@@ -21102,8 +21102,8 @@ SPEC
         'structured action-edge if/elseif block with bare zero-arg markers stays fully language-agnostic-ready',
     );
 
-    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descr => 1);
-    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descr => 1);
+    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descriptor => 1);
+    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descriptor => 1);
     ok(defined($switch_fluent_descr) && ref($switch_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case branch form used as bare-marker comparison baseline');
     ok(defined($switch_block_descr) && ref($switch_block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case block with bare zero-arg markers');
     is_deeply($switch_fluent_descr->{spec}{Top}{ACODE}, $switch_block_descr->{spec}{Top}{ACODE}, 'structured action-edge switch/case block with bare zero-arg markers lowers to the same ACODE as the fluent baseline');
@@ -21137,8 +21137,8 @@ Top::&
  /a/ -> Top .switch(scalar(kind)).case("A").return(array_copy(array(items))).endcase.default.return(hash("content", array_values(array(assigns)))).endcase.endswitch
 SPEC
 
-    my $if_explicit_descr = LinkedSpec::Get(\$if_explicit_spec, return_descr => 1);
-    my $if_bare_descr = LinkedSpec::Get(\$if_bare_spec, return_descr => 1);
+    my $if_explicit_descr = LinkedSpec::Get(\$if_explicit_spec, return_descriptor => 1);
+    my $if_bare_descr = LinkedSpec::Get(\$if_bare_spec, return_descriptor => 1);
     ok(defined($if_explicit_descr) && ref($if_explicit_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif chain with explicit zero-arg markers');
     ok(defined($if_bare_descr) && ref($if_bare_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif chain with bare zero-arg markers');
     is_deeply($if_explicit_descr->{spec}{Top}{ACODE}, $if_bare_descr->{spec}{Top}{ACODE}, 'fluent action-edge if/elseif chain with bare zero-arg markers lowers to the same ACODE as the explicit baseline');
@@ -21149,8 +21149,8 @@ SPEC
         'fluent action-edge if/elseif chain with bare zero-arg markers stays fully language-agnostic-ready',
     );
 
-    my $switch_explicit_descr = LinkedSpec::Get(\$switch_explicit_spec, return_descr => 1);
-    my $switch_bare_descr = LinkedSpec::Get(\$switch_bare_spec, return_descr => 1);
+    my $switch_explicit_descr = LinkedSpec::Get(\$switch_explicit_spec, return_descriptor => 1);
+    my $switch_bare_descr = LinkedSpec::Get(\$switch_bare_spec, return_descriptor => 1);
     ok(defined($switch_explicit_descr) && ref($switch_explicit_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case chain with explicit zero-arg markers');
     ok(defined($switch_bare_descr) && ref($switch_bare_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case chain with bare zero-arg markers');
     is_deeply($switch_explicit_descr->{spec}{Top}{ACODE}, $switch_bare_descr->{spec}{Top}{ACODE}, 'fluent action-edge switch/case chain with bare zero-arg markers lowers to the same ACODE as the explicit baseline');
@@ -21199,8 +21199,8 @@ LX { switch(scalar(kind))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descr => 1);
-    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descr => 1);
+    my $if_fluent_descr = LinkedSpec::Get(\$if_fluent_spec, return_descriptor => 1);
+    my $if_block_descr = LinkedSpec::Get(\$if_block_spec, return_descriptor => 1);
     ok(defined($if_fluent_descr) && ref($if_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif branch form used as semicolonless comparison baseline');
     ok(defined($if_block_descr) && ref($if_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle if/elseif branch form');
     is_deeply($if_fluent_descr->{spec}{Top}{LXCODE}, $if_block_descr->{spec}{Top}{LXCODE}, 'semicolonless structured lifecycle if/elseif branch form lowers to the same LXCODE as the fluent baseline');
@@ -21211,8 +21211,8 @@ SPEC
         'semicolonless structured lifecycle if/elseif branch form stays fully language-agnostic-ready',
     );
 
-    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descr => 1);
-    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descr => 1);
+    my $switch_fluent_descr = LinkedSpec::Get(\$switch_fluent_spec, return_descriptor => 1);
+    my $switch_block_descr = LinkedSpec::Get(\$switch_block_spec, return_descriptor => 1);
     ok(defined($switch_fluent_descr) && ref($switch_fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case branch form used as semicolonless comparison baseline');
     ok(defined($switch_block_descr) && ref($switch_block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle switch/case branch form');
     is_deeply($switch_fluent_descr->{spec}{Top}{LXCODE}, $switch_block_descr->{spec}{Top}{LXCODE}, 'semicolonless structured lifecycle switch/case branch form lowers to the same LXCODE as the fluent baseline');
@@ -21276,8 +21276,8 @@ $tag { if(scalar(on))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain used as bare-marker comparison baseline");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle if/else block with bare zero-arg markers");
@@ -21319,8 +21319,8 @@ $tag { switch(scalar(kind))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain used as bare-marker comparison baseline");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for structured $tag lifecycle switch/case block with bare zero-arg markers");
@@ -21372,8 +21372,8 @@ $tag.if(scalar(on)).return(hash("item", scalar(retv))).else.return_undef().endif
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descr => 1);
-            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descr => 1);
+            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descriptor => 1);
+            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descriptor => 1);
 
             ok(defined($explicit_descr) && ref($explicit_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain with explicit zero-arg markers");
             ok(defined($bare_descr) && ref($bare_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain with bare zero-arg markers");
@@ -21413,8 +21413,8 @@ $tag.switch(scalar(kind)).case("A").return(hash("item", scalar(retv))).endcase.d
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descr => 1);
-            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descr => 1);
+            my $explicit_descr = LinkedSpec::Get(\$explicit_spec, return_descriptor => 1);
+            my $bare_descr = LinkedSpec::Get(\$bare_spec, return_descriptor => 1);
 
             ok(defined($explicit_descr) && ref($explicit_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain with explicit zero-arg markers");
             ok(defined($bare_descr) && ref($bare_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain with bare zero-arg markers");
@@ -21490,8 +21490,8 @@ $tag { if(scalar(on))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle if/else chain used as semicolonless comparison baseline");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle if/else block");
@@ -21531,8 +21531,8 @@ $tag { switch(scalar(kind))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle switch/case chain used as semicolonless comparison baseline");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle switch/case block");
@@ -21586,8 +21586,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar');
@@ -21666,8 +21666,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch baseline");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar");
@@ -21729,8 +21729,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block baseline');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch form');
@@ -21812,8 +21812,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block baseline");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch form");
@@ -21872,8 +21872,8 @@ Top::&
  }
 SPEC
 
-    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
-    my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
+    my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descriptor => 1);
 
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with attached branch blocks');
     ok(defined($plain_descr) && ref($plain_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with plain marker branches');
@@ -21952,8 +21952,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
-            my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
+            my $plain_descr = LinkedSpec::Get(\$plain_marker_spec, return_descriptor => 1);
 
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with attached branch blocks");
             ok(defined($plain_descr) && ref($plain_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with plain marker branches");
@@ -22008,8 +22008,8 @@ Top::&
  }
 SPEC
 
-    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
     ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured outer attached-block switch baseline');
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent outer attached-block switch');
@@ -22075,8 +22075,8 @@ $tag.switch(scalar(op)) {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
             ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured outer attached-block switch baseline");
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent outer attached-block switch");
@@ -22142,8 +22142,8 @@ Top::&
  }
 SPEC
 
-    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
-    my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descr => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
+    my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descriptor => 1);
 
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with all-attached branch blocks');
     ok(defined($mixed_descr) && ref($mixed_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block outer switch with mixed branch carriers');
@@ -22229,8 +22229,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descr => 1);
-            my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descr => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_branch_block_spec, return_descriptor => 1);
+            my $mixed_descr = LinkedSpec::Get(\$mixed_carrier_spec, return_descriptor => 1);
 
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with all-attached branch blocks");
             ok(defined($mixed_descr) && ref($mixed_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block outer switch with mixed branch carriers");
@@ -22293,8 +22293,8 @@ Top::&
  }
 SPEC
 
-    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+    my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
     ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', 'descriptor build succeeds for action-edge structured outer attached-block switch with mixed branch carriers');
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for action-edge fluent outer attached-block switch with mixed branch carriers');
@@ -22373,8 +22373,8 @@ $tag.switch(scalar(op)) {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descr => 1);
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
+            my $structured_descr = LinkedSpec::Get(\$structured_spec, return_descriptor => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
 
             ok(defined($structured_descr) && ref($structured_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle structured outer attached-block switch with mixed branch carriers");
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle fluent outer attached-block switch with mixed branch carriers");
@@ -22422,7 +22422,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested marker flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22502,7 +22502,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested marker flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22561,7 +22561,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested marker switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22637,7 +22637,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested marker switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22698,7 +22698,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested composite if flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22785,7 +22785,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested composite if flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22853,7 +22853,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested inline-composite switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -22939,7 +22939,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested inline-composite switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -23006,7 +23006,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested composite if/elseif flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -23101,7 +23101,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested composite if/elseif flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -23273,8 +23273,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested structured inline composite if/elseif switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested attached-block composite if/elseif switch flow');
@@ -23458,8 +23458,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested structured inline composite if/elseif switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested attached-block composite if/elseif switch flow");
@@ -23625,8 +23625,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested structured inline composite if/elseif switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested attached-block composite if/elseif switch flow');
@@ -23809,8 +23809,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested structured inline composite if/elseif switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested attached-block composite if/elseif switch flow");
@@ -23955,8 +23955,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested structured inline composite if/elseif marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested attached-block composite if/elseif marker-switch flow');
@@ -24117,8 +24117,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested structured inline composite if/elseif marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested attached-block composite if/elseif marker-switch flow");
@@ -24261,8 +24261,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested structured inline composite if/elseif marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested attached-block composite if/elseif marker-switch flow');
@@ -24421,8 +24421,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested structured inline composite if/elseif marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested attached-block composite if/elseif marker-switch flow");
@@ -24583,8 +24583,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested structured inline composite if/elseif multi-case marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested attached-block composite if/elseif multi-case marker-switch flow');
@@ -24761,8 +24761,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested structured inline composite if/elseif multi-case marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested attached-block composite if/elseif multi-case marker-switch flow");
@@ -24921,8 +24921,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested structured inline composite if/elseif multi-case marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested attached-block composite if/elseif multi-case marker-switch flow');
@@ -25097,8 +25097,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested structured inline composite if/elseif multi-case marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested attached-block composite if/elseif multi-case marker-switch flow");
@@ -25291,8 +25291,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested structured inline composite if/elseif multi-case inline-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch blocks with nested attached-block composite if/elseif multi-case inline-switch flow');
@@ -25500,8 +25500,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested structured inline composite if/elseif multi-case inline-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch blocks with nested attached-block composite if/elseif multi-case inline-switch flow");
@@ -25691,8 +25691,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested structured inline composite if/elseif multi-case inline-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch blocks with nested attached-block composite if/elseif multi-case inline-switch flow');
@@ -25899,8 +25899,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_if_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_if_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested structured inline composite if/elseif multi-case inline-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch blocks with nested attached-block composite if/elseif multi-case inline-switch flow");
@@ -25974,7 +25974,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested multi-case inline-composite switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26065,7 +26065,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested multi-case inline-composite switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26133,7 +26133,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested multi-case inline-composite switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26225,7 +26225,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested multi-case inline-composite switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26294,7 +26294,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached branch block with nested multi-case marker switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26385,7 +26385,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached branch block with nested multi-case marker switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26453,7 +26453,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with nested multi-case marker switch flow');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26543,7 +26543,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with nested multi-case marker switch flow");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -26647,8 +26647,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested multi-case marker switch flow');
@@ -26768,8 +26768,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested multi-case marker switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested multi-case marker switch flow");
@@ -26871,8 +26871,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested composite if/elseif flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested composite if/elseif flow');
@@ -26992,8 +26992,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested composite if/elseif flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested composite if/elseif flow");
@@ -27171,8 +27171,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested composite if/elseif deeper alternating marker flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested composite if/elseif deeper alternating marker flow');
@@ -27367,8 +27367,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested composite if/elseif deeper alternating marker flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested composite if/elseif deeper alternating marker flow");
@@ -27489,8 +27489,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with deeper alternating marker if/switch nesting');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with deeper alternating marker if/switch nesting');
@@ -27627,8 +27627,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with deeper alternating marker if/switch nesting");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with deeper alternating marker if/switch nesting");
@@ -27729,8 +27729,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with nested composite if/elseif flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with nested composite if/elseif flow');
@@ -27847,8 +27847,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with nested composite if/elseif flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with nested composite if/elseif flow");
@@ -28023,8 +28023,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with nested composite if/elseif deeper alternating marker flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with nested composite if/elseif deeper alternating marker flow');
@@ -28215,8 +28215,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with nested composite if/elseif deeper alternating marker flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with nested composite if/elseif deeper alternating marker flow");
@@ -28377,8 +28377,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested composite if/elseif multi-case marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested composite if/elseif multi-case marker-switch flow');
@@ -28555,8 +28555,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested composite if/elseif multi-case marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested composite if/elseif multi-case marker-switch flow");
@@ -28713,8 +28713,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with nested composite if/elseif multi-case marker-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with nested composite if/elseif multi-case marker-switch flow');
@@ -28887,8 +28887,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with nested composite if/elseif multi-case marker-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with nested composite if/elseif multi-case marker-switch flow");
@@ -29005,8 +29005,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with deeper alternating marker if/switch nesting');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting');
@@ -29139,8 +29139,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with deeper alternating marker if/switch nesting");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with deeper alternating marker if/switch nesting");
@@ -29260,8 +29260,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and deeper alternating marker if/switch nesting');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and deeper alternating marker if/switch nesting');
@@ -29396,8 +29396,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and deeper alternating marker if/switch nesting");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and deeper alternating marker if/switch nesting");
@@ -29502,8 +29502,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested multi-case marker switch flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested multi-case marker switch flow');
@@ -29621,8 +29621,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested multi-case marker switch flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested multi-case marker switch flow");
@@ -29728,8 +29728,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested multi-case inline-composite switch flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested multi-case inline-composite switch flow');
@@ -29849,8 +29849,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested multi-case inline-composite switch flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested multi-case inline-composite switch flow");
@@ -29948,8 +29948,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif flow');
@@ -30066,8 +30066,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif flow");
@@ -30242,8 +30242,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif deeper alternating marker flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif deeper alternating marker flow');
@@ -30435,8 +30435,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif deeper alternating marker flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif deeper alternating marker flow");
@@ -30594,8 +30594,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif multi-case marker-switch flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif multi-case marker-switch flow');
@@ -30769,8 +30769,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif multi-case marker-switch flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif multi-case marker-switch flow");
@@ -30960,8 +30960,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite outer switch with attached branch blocks and nested composite if/elseif multi-case inline-switch flow');
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style outer switch with attached branch blocks and nested composite if/elseif multi-case inline-switch flow');
@@ -31166,8 +31166,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite outer switch with attached branch blocks and nested composite if/elseif multi-case inline-switch flow");
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style outer switch with attached branch blocks and nested composite if/elseif multi-case inline-switch flow");
@@ -31267,8 +31267,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with nested multi-case marker switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with nested multi-case marker switch flow');
@@ -31384,8 +31384,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with nested multi-case marker switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with nested multi-case marker switch flow");
@@ -31575,8 +31575,8 @@ Top::&
  }
 SPEC
 
-    my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($list_descr) && ref($list_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch structured-argument branch-block baseline with nested composite if/elseif multi-case inline-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite switch attached-branch-block sugar with nested composite if/elseif multi-case inline-switch flow');
@@ -31784,8 +31784,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $list_descr = LinkedSpec::Get(\$list_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $list_descr = LinkedSpec::Get(\$list_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($list_descr) && ref($list_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch structured-argument branch-block baseline with nested composite if/elseif multi-case inline-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite switch attached-branch-block sugar with nested composite if/elseif multi-case inline-switch flow");
@@ -31973,8 +31973,8 @@ Top::&
  }
 SPEC
 
-    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch plain branch baseline with nested composite if/elseif multi-case inline-switch flow');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached-branch-block sugar with nested composite if/elseif multi-case inline-switch flow');
@@ -32179,8 +32179,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $marker_descr = LinkedSpec::Get(\$marker_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($marker_descr) && ref($marker_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch plain branch baseline with nested composite if/elseif multi-case inline-switch flow");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached-branch-block sugar with nested composite if/elseif multi-case inline-switch flow");
@@ -32251,7 +32251,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge deeper alternating marker if/switch nesting');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -32332,7 +32332,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle deeper alternating marker if/switch nesting");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -32399,7 +32399,7 @@ Top::&
  }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action-edge marker-style switch attached branch block with deeper alternating marker if/switch nesting');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -32481,7 +32481,7 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $descr = LinkedSpec::Get(\$spec, return_descr => 1);
+            my $descr = LinkedSpec::Get(\$spec, return_descriptor => 1);
             ok(defined($descr) && ref($descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle marker-style switch attached branch block with deeper alternating marker if/switch nesting");
 
             my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -32586,8 +32586,8 @@ Top::&
  }
 SPEC
 
-    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+    my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+    my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
     ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', 'descriptor build succeeds for action-edge inline composite if branch-block form with deeper alternating marker if/switch nesting');
     ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', 'descriptor build succeeds for action-edge attached-block composite if form with deeper alternating marker if/switch nesting');
@@ -32712,8 +32712,8 @@ $tag {
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descr => 1);
-            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descr => 1);
+            my $inline_descr = LinkedSpec::Get(\$inline_spec, return_descriptor => 1);
+            my $attached_descr = LinkedSpec::Get(\$attached_spec, return_descriptor => 1);
 
             ok(defined($inline_descr) && ref($inline_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle inline composite if branch-block form with deeper alternating marker if/switch nesting");
             ok(defined($attached_descr) && ref($attached_descr) eq 'HASH', "descriptor build succeeds for $tag lifecycle attached-block composite if form with deeper alternating marker if/switch nesting");
@@ -32762,8 +32762,8 @@ LX { if(scalar(on)); return(array_copy(array(items))); elseif(scalar(alt_on)); r
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif array snapshot branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif array snapshot branch form');
@@ -32805,8 +32805,8 @@ LX { switch(scalar(kind)); case("A"); return(array_copy(array(items))); default(
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case array snapshot branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case array snapshot branch form');
@@ -32847,8 +32847,8 @@ Top::&
  /a/ -> Top { return(hash("joined", join_values(", ", array(parts)))); return(array("word", join_values("", array(word)))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge join_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge join_values helper form');
@@ -32888,8 +32888,8 @@ LX { return(hash("joined", join_values(", ", array(parts)))); return(array("word
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle join_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle join_values helper form');
@@ -32927,8 +32927,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, joined_keys); assign(scalar(joined_keys), join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge projected-array join_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge projected-array join_values helper form');
@@ -32970,8 +32970,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normali
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle projected-array join_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle projected-array join_values helper form');
@@ -33011,8 +33011,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); assign(scalar(first_key), first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); assign(scalar(last_value), last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", scalar(first_key), "last_value", scalar(last_value))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge first/last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge first/last helper form');
@@ -33054,8 +33054,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normali
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle first/last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle first/last helper form');
@@ -33095,8 +33095,8 @@ Top::&
  /a/ -> Top { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(clean_name), trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN "))); assign(scalar(clean_length), length(scalar(clean_name))); return(hash("clean_name", scalar(clean_name), "clean_length", scalar(clean_length), "raw_length", length(scalar(IMATCH)))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge length helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge length helper form');
@@ -33138,8 +33138,8 @@ LX { declare(scalar, clean_name); declare(scalar, clean_length); assign(scalar(c
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle length helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle length helper form');
@@ -33179,8 +33179,8 @@ Top::&
  /a/ -> Top { declare(scalar, first_key); declare(scalar, chosen_kind); assign(scalar(first_key), scalar(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 0)); assign(scalar(chosen_kind), scalar(merge_hash(hash(meta), hash("kind", "NODE")), "kind")); return(hash("first_key", scalar(first_key), "chosen_kind", scalar(chosen_kind))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge composed scalar container-read form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge composed scalar container-read form');
@@ -33222,8 +33222,8 @@ LX { declare(scalar, first_key); declare(scalar, chosen_kind); assign(scalar(fir
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle composed scalar container-read form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle composed scalar container-read form');
@@ -33263,8 +33263,8 @@ Top::&
  /a/ -> Top { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge tail helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge tail helper form');
@@ -33306,8 +33306,8 @@ LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assig
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle tail helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle tail helper form');
@@ -33347,8 +33347,8 @@ Top::&
  /a/ -> Top { declare(array, first_keys); declare(scalar, take_count=2, first_count); assign(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_count))); assign(scalar(first_count), count(array(first_keys))); return(hash("first_keys", array_copy(array(first_keys)), "first_count", scalar(first_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge take helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge take helper form');
@@ -33390,8 +33390,8 @@ LX { declare(array, first_keys); declare(scalar, take_count=2, first_count); ass
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle take helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle take helper form');
@@ -33431,8 +33431,8 @@ Top::&
  /a/ -> Top { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); assign(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(slice_start), scalar(slice_count))); assign(scalar(middle_count), count(array(middle_keys))); assign(scalar(first_middle), scalar(array(middle_keys), 0)); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", scalar(middle_count), "first_middle", scalar(first_middle))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge slice helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge slice helper form');
@@ -33474,8 +33474,8 @@ LX { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, 
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle slice helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle slice helper form');
@@ -33515,8 +33515,8 @@ Top::&
  /a/ -> Top { declare(array, last_keys); declare(scalar, take_last_count=2, last_count); assign(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(take_last_count))); assign(scalar(last_count), count(array(last_keys))); return(hash("last_keys", array_copy(array(last_keys)), "last_count", scalar(last_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge take_last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge take_last helper form');
@@ -33558,8 +33558,8 @@ LX { declare(array, last_keys); declare(scalar, take_last_count=2, last_count); 
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle take_last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle take_last helper form');
@@ -33599,8 +33599,8 @@ Top::&
  /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix); assign(scalar(has_prefix), starts_with(lowercase(trim(scalar(raw_name))), "prefix")); assign(scalar(has_suffix), ends_with(lowercase(trim(scalar(raw_name))), "suffix")); return(hash("has_prefix", scalar(has_prefix), "has_suffix", scalar(has_suffix))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar boundary helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar boundary helper form');
@@ -33642,8 +33642,8 @@ LX { declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix); assign(
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar boundary helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar boundary helper form');
@@ -33683,8 +33683,8 @@ Top::&
  /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); assign(scalar(has_fix), contains_substr(lowercase(trim(scalar(raw_name))), "fix")); assign(scalar(has_node), contains_substr(uppercase(trim(coalesce(scalar(kind), scalar(IMATCH)))), "NODE")); return(hash("has_fix", scalar(has_fix), "has_node", scalar(has_node))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar contains_substr helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar contains_substr helper form');
@@ -33726,8 +33726,8 @@ LX { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, ha
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar contains_substr helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar contains_substr helper form');
@@ -33767,8 +33767,8 @@ Top::&
  /a/ -> Top { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); assign(scalar(normalized), replace_substr(lowercase(trim(coalesce(scalar(raw_name), scalar(IMATCH)))), "-", "_")); if(eq(replace_substr(lowercase(trim(scalar(kind))), " ", "_"), "node_type")); return(hash("normalized", scalar(normalized), "normalized_kind", replace_substr(lowercase(trim(scalar(kind))), " ", "_"))); else; return(hash("normalized", scalar(normalized), "normalized_kind", "other")); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar replace_substr helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar replace_substr helper form');
@@ -33812,8 +33812,8 @@ LX { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); as
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar replace_substr helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar replace_substr helper form');
@@ -33855,8 +33855,8 @@ Top::&
  /a/ -> Top { declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed); assign(scalar(prefix_trimmed), rm_prefix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "node_")); assign(scalar(suffix_trimmed), rm_suffix(replace_substr(lowercase(trim(scalar(raw_name))), " ", "_"), "_end")); return(hash("prefix_trimmed", scalar(prefix_trimmed), "suffix_trimmed", scalar(suffix_trimmed))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar boundary-transform helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar boundary-transform helper form');
@@ -33898,8 +33898,8 @@ LX { declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed)
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar boundary-transform helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar boundary-transform helper form');
@@ -33939,8 +33939,8 @@ Top::&
  /a/ -> Top { declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name); assign(scalar(full_name), concat(lowercase(trim(scalar(first_name))), "_", replace_substr(lowercase(trim(scalar(last_name))), " ", "_"))); return(hash("full_name", scalar(full_name), "stage_key", concat(scalar(full_name), "::", scalar(stage)))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar concat helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar concat helper form');
@@ -33982,8 +33982,8 @@ LX { declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", ful
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar concat helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar concat helper form');
@@ -34023,8 +34023,8 @@ Top::&
  /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); assign(scalar(is_prefixed), matches(lowercase(trim(scalar(raw_name))), /^prefix/)); assign(scalar(is_alpha), matches(uppercase(trim(scalar(raw_name))), /^[A-Z]+$/)); return(hash("is_prefixed", scalar(is_prefixed), "is_alpha", scalar(is_alpha))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar regex helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar regex helper form');
@@ -34066,8 +34066,8 @@ LX { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); assign(s
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar regex helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar regex helper form');
@@ -34107,8 +34107,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); assign(scalar(next_depth), num_add(scalar(depth), 1, scalar(offset))); assign(scalar(remaining), num_sub(num_add(count(array(parts)), scalar(offset)), 1)); return(hash("next_depth", scalar(next_depth), "remaining", scalar(remaining))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric arithmetic helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric arithmetic helper form');
@@ -34150,8 +34150,8 @@ LX { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, off
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric arithmetic helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric arithmetic helper form');
@@ -34191,8 +34191,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, factor=1.5, divisor=2, scaled_count, average_count); assign(scalar(scaled_count), num_mul(count(array(parts)), scalar(factor))); assign(scalar(average_count), num_div(num_mul(count(array(parts)), scalar(factor)), scalar(divisor))); return(hash("scaled_count", scalar(scaled_count), "average_count", scalar(average_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric product/division helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric product/division helper form');
@@ -34234,8 +34234,8 @@ LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, factor=1.5
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric product/division helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric product/division helper form');
@@ -34275,8 +34275,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value); assign(scalar(floor_value), num_min(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), 10)); assign(scalar(ceiling_value), num_max(num_add(count(array(parts)), scalar(offset)), 2, scalar(upper_limit))); return(hash("floor_value", scalar(floor_value), "ceiling_value", scalar(ceiling_value))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric min/max helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric min/max helper form');
@@ -34318,8 +34318,8 @@ LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=1, 
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric min/max helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric min/max helper form');
@@ -34359,8 +34359,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C", "D", "E")); declare(scalar, offset=1, divisor=3, bucket, wrapped); assign(scalar(bucket), num_mod(num_add(count(array(parts)), scalar(offset)), scalar(divisor))); assign(scalar(wrapped), num_mod(num_add(scalar(bucket), 5), 4)); return(hash("bucket", scalar(bucket), "wrapped", scalar(wrapped))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric modulo helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric modulo helper form');
@@ -34402,8 +34402,8 @@ LX { declare(array, parts=array("A", "B", "C", "D", "E")); declare(scalar, offse
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric modulo helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric modulo helper form');
@@ -34443,8 +34443,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta); assign(scalar(bounded), num_clamp(num_add(count(array(parts)), scalar(offset)), scalar(lower_limit), scalar(upper_limit))); assign(scalar(delta), num_clamp(num_sub(scalar(offset), 5), -4, 0)); return(hash("bounded", scalar(bounded), "delta", scalar(delta))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric clamp helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric clamp helper form');
@@ -34486,8 +34486,8 @@ LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=2, 
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric clamp helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric clamp helper form');
@@ -34527,8 +34527,8 @@ Top::&
  /a/ -> Top { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_last helper form');
@@ -34570,8 +34570,8 @@ LX { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); as
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_last helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_last helper form');
@@ -34611,8 +34611,8 @@ Top::&
  /a/ -> Top { declare(array, rest_keys); declare(array, leading_keys); declare(scalar, skip_count=2, drop_count=1, kept_count); assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop alias helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop alias helper form');
@@ -34654,8 +34654,8 @@ LX { declare(array, rest_keys); declare(array, leading_keys); declare(scalar, sk
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop alias helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop alias helper form');
@@ -34695,8 +34695,8 @@ Top::&
  /a/ -> Top { if(scalar(on)); return(hash("joined", join_values(", ", array(parts)))); elseif(scalar(alt_on)); return(array("word", join_values("", array(word)))); else(); return_undef(); endif() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif join_values branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif join_values branch form');
@@ -34736,8 +34736,8 @@ Top::&
  /a/ -> Top { switch(scalar(kind)); case("A"); return(hash("joined", join_values(", ", array(parts)))); default(); return(array("word", join_values("", array(word)))); endswitch() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case join_values branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case join_values branch form');
@@ -34780,8 +34780,8 @@ LX { if(scalar(on)); return(hash("joined", join_values(", ", array(parts)))); el
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif join_values branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif join_values branch form');
@@ -34823,8 +34823,8 @@ LX { switch(scalar(kind)); case("A"); return(hash("joined", join_values(", ", ar
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case join_values branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case join_values branch form');
@@ -34865,8 +34865,8 @@ Top::&
  /a/ -> Top { if(scalar(on)); return(hash(flat_hash(extra_pairs), "kind", "node")); elseif(scalar(alt_on)); return(array("?node:", flat_array(IMATCH_LIST))); else(); return_undef(); endif() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif flat-list branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif flat-list branch form');
@@ -34906,8 +34906,8 @@ Top::&
  /a/ -> Top { switch(scalar(kind)); case("A"); return(hash(flat_hash(extra_pairs), "kind", "node")); default(); return(array("?node:", flat_array(IMATCH_LIST))); endswitch() }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case flat-list branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case flat-list branch form');
@@ -34950,8 +34950,8 @@ LX { if(scalar(on)); return(hash(flat_hash(extra_pairs), "kind", "node")); elsei
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif flat-list branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif flat-list branch form');
@@ -34993,8 +34993,8 @@ LX { switch(scalar(kind)); case("A"); return(hash(flat_hash(extra_pairs), "kind"
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case flat-list branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case flat-list branch form');
@@ -35039,8 +35039,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge call-value helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge call-value helper form');
@@ -35087,8 +35087,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle call-value helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle call-value helper form');
@@ -35133,8 +35133,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge if/elseif call-value branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge if/elseif call-value branch form');
@@ -35181,8 +35181,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge switch/case call-value branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge switch/case call-value branch form');
@@ -35232,8 +35232,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle if/elseif call-value branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle if/elseif call-value branch form');
@@ -35282,8 +35282,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle switch/case call-value branch form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle switch/case call-value branch form');
@@ -35327,8 +35327,8 @@ Top::&
  /a/ -> Top { declare(scalar, content); assign(scalar(content), scalaref(retv, {content})); return(hash("content", scalar(content), "head", scalar(items, 0))); return(array(scalaref(tree, [0]{kind}), scalar(hash(by_name), key))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge nested accessor payload form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge nested accessor payload form');
@@ -35370,8 +35370,8 @@ LX { declare(scalar, content); assign(scalar(content), scalaref(retv, {content})
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle nested accessor payload form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle nested accessor payload form');
@@ -35411,8 +35411,8 @@ Top::&
  /a/ -> Top { declare(array, parts); declare(scalar, args); assign(scalar(args), "left:1, right:2"); split(array(parts), scalar(args), /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array_copy(array(parts))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge array-normalization pipeline form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge array-normalization pipeline form');
@@ -35458,8 +35458,8 @@ LX { declare(array, parts); declare(scalar, args); assign(scalar(args), "left:1,
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle array-normalization pipeline form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle array-normalization pipeline form');
@@ -35503,8 +35503,8 @@ Top::&
  /a/ -> Top { declare(array, parts); assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(array_copy(array(parts))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge case-normalization/filter pipeline form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge case-normalization/filter pipeline form');
@@ -35550,8 +35550,8 @@ LX { declare(array, parts); assign(array(parts), filter_match(uniq(uppercase_eac
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle case-normalization/filter pipeline form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle case-normalization/filter pipeline form');
@@ -35628,8 +35628,8 @@ Top::&
  /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {content}), scalar(IMATCH), "UNKNOWN")); if(eq(coalesce(scalaref(retv, {type}), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "parts", coalesce(scalaref(retv, {parts}), array("empty")))); else; return(hash("chosen", scalar(chosen), "parts", array("fallback"))); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge coalesce helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge coalesce helper form');
@@ -35671,8 +35671,8 @@ Top::&
  /a/ -> Top { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonempty(trim(scalaref(retv, {content})), trim(scalar(IMATCH)), "UNKNOWN")); if(eq(coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"), "WORD")); return(hash("chosen", scalar(chosen), "kind", coalesce_nonempty(trim(scalaref(retv, {type})), scalar(kind), "WORD"))); else; return(hash("chosen", scalar(chosen), "kind", "OTHER")); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge coalesce_nonempty helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge coalesce_nonempty helper form');
@@ -35716,8 +35716,8 @@ LX { declare(scalar, chosen); assign(scalar(chosen), coalesce(scalaref(retv, {co
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle coalesce helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle coalesce helper form');
@@ -35761,8 +35761,8 @@ LX { declare(scalar, kind="WORD", chosen); assign(scalar(chosen), coalesce_nonem
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle coalesce_nonempty helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle coalesce_nonempty helper form');
@@ -35838,8 +35838,8 @@ Top::&
  /a/ -> Top { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(scalar(chosen), scalaref(retv, {content})); elseif(is_undefined(scalaref(retv, {type}))); assign(scalar(chosen), "MISSING_TYPE"); else; assign(scalar(chosen), coalesce(scalaref(retv, {type}), "UNKNOWN")); endif; return(hash("chosen", scalar(chosen))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge definedness-helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge definedness-helper form');
@@ -35884,8 +35884,8 @@ LX { declare(scalar, chosen); if(is_defined(scalaref(retv, {content}))); assign(
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle definedness-helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle definedness-helper form');
@@ -35967,8 +35967,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge aggregate-emptiness helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge aggregate-emptiness helper form');
@@ -36011,8 +36011,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle aggregate-emptiness helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle aggregate-emptiness helper form');
@@ -36072,8 +36072,8 @@ Top::&
  /a/ -> Top { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(scalaref(retv, {content}), scalar(IMATCH), " UNKNOWN ")))); if(eq(uppercase(trim(coalesce(scalaref(retv, {type}), "word"))), "WORD")); return(hash("chosen", scalar(chosen), "type", uppercase(trim(coalesce(scalaref(retv, {type}), "word"))))); else; return(hash("chosen", scalar(chosen), "type", "OTHER")); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge scalar-normalization helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge scalar-normalization helper form');
@@ -36117,8 +36117,8 @@ LX { declare(scalar, chosen); assign(scalar(chosen), lowercase(trim(coalesce(sca
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle scalar-normalization helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle scalar-normalization helper form');
@@ -36184,8 +36184,8 @@ Top::&
  /a/ -> Top { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(scalaref(retv, {parts}), array("empty")))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", scalar(part_count), "seen", count(array(parts)))); else; return(hash("part_count", scalar(part_count), "seen", 0)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge count helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge count helper form');
@@ -36229,8 +36229,8 @@ LX { declare(scalar, part_count); assign(scalar(part_count), count(coalesce(scal
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle count helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle count helper form');
@@ -36450,8 +36450,8 @@ Top::&
  /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); assign(scalar(has_kind), contains(array(projected_keys), "kind")); if(and(scalar(has_kind), contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", scalar(has_kind), "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", scalar(has_kind), "keys", array())); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge contains helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge contains helper form');
@@ -36495,8 +36495,8 @@ LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "s
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle contains helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle contains helper form');
@@ -36562,8 +36562,8 @@ Top::&
  /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); assign(scalar(kind_index), index_of(array(projected_keys), "kind")); if(is_defined(scalar(kind_index))); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge index_of helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge index_of helper form');
@@ -36607,8 +36607,8 @@ LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "s
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle index_of helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle index_of helper form');
@@ -36674,8 +36674,8 @@ Top::&
  /a/ -> Top { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", scalar(meta_key_count), "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", scalar(meta_key_count), "seen", 0)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge count_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge count_keys helper form');
@@ -36719,8 +36719,8 @@ LX { declare(scalar, meta_key_count); assign(scalar(meta_key_count), count_keys(
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle count_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle count_keys helper form');
@@ -36786,8 +36786,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); assign(scalar(has_kind), has_key(coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", scalar(has_kind), "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", scalar(has_kind), "meta_key_count", 0)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge has_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge has_key helper form');
@@ -36831,8 +36831,8 @@ LX { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(sca
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle has_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle has_key helper form');
@@ -36898,8 +36898,8 @@ Top::&
  /a/ -> Top { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); assign(hash(merged_meta), merge_hash(hash(meta_base), coalesce(scalaref(retv, {meta}), hash("kind", "fallback")), hash("stage", "normalized"))); assign(scalar(has_kind), has_key(hash(merged_meta), "kind")); if(scalar(has_kind)); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge merge_hash helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge merge_hash helper form');
@@ -36943,8 +36943,8 @@ LX { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declar
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle merge_hash helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle merge_hash helper form');
@@ -37010,8 +37010,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); assign(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(kind_seen), scalar(hash_copy(hash(copied)), "kind")); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", scalar(kind_seen), "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge hash_copy helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge hash_copy helper form');
@@ -37055,8 +37055,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copi
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle hash_copy helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle hash_copy helper form');
@@ -37122,8 +37122,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), set_key(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(scalar(IMATCH), "normalized"))))); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge set_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge set_key helper form');
@@ -37167,8 +37167,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); dec
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle set_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle set_key helper form');
@@ -37234,8 +37234,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); assign(hash(normalized), rename_key(set_key(hash(meta), "owner", scalar(rule_name)), "old_stage", "stage")); assign(scalar(has_stage), has_key(hash(normalized), "stage")); assign(scalar(chosen_stage), scalar(hash(normalized), "stage")); if(scalar(has_stage)); return(hash("stage", scalar(chosen_stage), "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge rename_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge rename_key helper form');
@@ -37279,8 +37279,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "ru
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle rename_key helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle rename_key helper form');
@@ -37346,8 +37346,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); assign(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "debug")); assign(scalar(has_kind), has_key(hash(cleaned), "kind")); if(scalar(has_kind)); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_keys helper form');
@@ -37391,8 +37391,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); dec
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_keys helper form');
@@ -37458,8 +37458,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); assign(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage")); assign(scalar(has_kind), has_key(hash(projected), "kind")); if(scalar(has_kind)); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge pick_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge pick_keys helper form');
@@ -37503,8 +37503,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "nois
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle pick_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle pick_keys helper form');
@@ -37570,8 +37570,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); assign(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(key_count), count(array(projected_keys))); if(num_gt(scalar(key_count), 0)); return(hash("key_count", scalar(key_count), "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge sorted_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge sorted_keys helper form');
@@ -37615,8 +37615,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "nois
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle sorted_keys helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle sorted_keys helper form');
@@ -37682,8 +37682,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); assign(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(scalaref(retv, {meta}), hash("stage", "normalized"))), "kind", "source", "stage"))); assign(scalar(value_count), count(array(projected_values))); if(num_gt(scalar(value_count), 0)); return(hash("value_count", scalar(value_count), "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge sorted_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge sorted_values helper form');
@@ -37727,8 +37727,8 @@ LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "nois
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle sorted_values helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle sorted_values helper form');
@@ -37794,8 +37794,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail"))); declare(scalar, combined_count, first_item); assign(scalar(combined_count), count(array(combined))); assign(scalar(first_item), scalar(array(combined), 0)); return(hash("combined", array_copy(array(combined)), "combined_count", scalar(combined_count), "first_item", scalar(first_item))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge concat_arrays helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge concat_arrays helper form');
@@ -37837,8 +37837,8 @@ LX { declare(array, parts=array("left", "right"), combined=concat_arrays(array(p
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle concat_arrays helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle concat_arrays helper form');
@@ -37902,8 +37902,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); assign(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("delta")))); assign(scalar(first_item), scalar(array(ordered), 0)); assign(scalar(ordered_count), count(array(ordered))); assign(scalar(joined), join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", scalar(first_item), "ordered_count", scalar(ordered_count), "joined", scalar(joined))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge sorted array helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge sorted array helper form');
@@ -37945,8 +37945,8 @@ LX { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(sca
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle sorted array helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle sorted array helper form');
@@ -38010,8 +38010,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts); declare(scalar, first_item, reversed_count, joined); assign(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), array("tail")))); assign(scalar(first_item), scalar(array(reversed_parts), 0)); assign(scalar(reversed_count), count(array(reversed_parts))); assign(scalar(joined), join_values("|", array(reversed_parts))); return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", scalar(first_item), "reversed_count", scalar(reversed_count), "joined", scalar(joined))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge reversed array helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge reversed array helper form');
@@ -38053,8 +38053,8 @@ LX { declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts); decl
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle reversed array helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle reversed array helper form');
@@ -38118,8 +38118,8 @@ Top::&
  /a/ -> Top { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); assign(scalar(total), num_sum(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(bounded_total), num_clamp(scalar(total), 0, 20)); return(hash("total", scalar(total), "bounded_total", scalar(bounded_total))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge num_sum helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge num_sum helper form');
@@ -38161,8 +38161,8 @@ LX { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle num_sum helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle num_sum helper form');
@@ -38226,8 +38226,8 @@ Top::&
  /a/ -> Top { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, avg, rounded_avg); assign(scalar(avg), num_avg(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(rounded_avg), num_round(scalar(avg))); return(hash("avg", scalar(avg), "rounded_avg", scalar(rounded_avg))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge num_avg helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge num_avg helper form');
@@ -38269,8 +38269,8 @@ LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar,
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle num_avg helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle num_avg helper form');
@@ -38334,8 +38334,8 @@ Top::&
  /a/ -> Top { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, median, rounded_median); assign(scalar(median), num_median(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(rounded_median), num_round(scalar(median))); return(hash("median", scalar(median), "rounded_median", scalar(rounded_median))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge num_median helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge num_median helper form');
@@ -38377,8 +38377,8 @@ LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar,
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle num_median helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle num_median helper form');
@@ -38442,8 +38442,8 @@ Top::&
  /a/ -> Top { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, span); assign(scalar(span), num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", scalar(span))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge num_range helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge num_range helper form');
@@ -38485,8 +38485,8 @@ LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar,
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle num_range helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle num_range helper form');
@@ -38560,8 +38560,8 @@ Top::&
  /a/ -> Top { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); assign(scalar(lowest), num_min(take(concat_arrays(array(scores), array(extras)), 4))); assign(scalar(highest), num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", scalar(lowest), "highest", scalar(highest))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge unary-array num_min/max helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge unary-array num_min/max helper form');
@@ -38603,8 +38603,8 @@ LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar,
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle unary-array num_min/max helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle unary-array num_min/max helper form');
@@ -38685,7 +38685,7 @@ Top::&
  /(\w+)\s+(\w+)/ -> Top .return(flat_array(IMATCH_LIST))
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-chain flat list return payload form');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -38723,7 +38723,7 @@ Top:: I.declare(array, parts).declare(scalar, args).assign(scalar(args), CAPTURE
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for composable array-string method contracts');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -38773,7 +38773,7 @@ Top:: I.declare(array, parts).lowercase_each(array(parts)).filter_match(uniq(upp
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for mixed dot-chained and nested functional-composition routines');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -38835,7 +38835,7 @@ pipe_operator:
  /a/ -> pipe_operator { return_a(pipe_operator) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for fluent if/elseif/else/endif chain');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -38920,7 +38920,7 @@ Top::&
 pipe_operator:
  /a/ -> pipe_operator { return_a(pipe_operator) }
 SPEC
-    my $composite_descr = LinkedSpec::Get(\$composite_spec_content, return_descr => 1);
+    my $composite_descr = LinkedSpec::Get(\$composite_spec_content, return_descriptor => 1);
     ok(defined($composite_descr) && ref($composite_descr) eq 'HASH', 'descriptor build succeeds for inline composite switch(case/default) method form');
 
     my $composite_meta = $composite_descr->{spec}{Top}{meta}{action_rewriter};
@@ -38946,7 +38946,7 @@ pipe_operator:
  /a/ -> pipe_operator { return_a(pipe_operator) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for fluent switch/case/default/endswitch chain');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -38981,7 +38981,7 @@ pipe_operator:
  /\|/ -> pipe_operator { return_a(pipe_operator) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pipe_operator fluent if/else chain');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39007,7 +39007,7 @@ Top::&
  /a/ -> Top .return_a().return_m()
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for chained method-like action block');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39042,10 +39042,10 @@ I { lowercase_each(array(parts)); filter_match(uniq(uppercase_each(array(parts))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descr => 1);
-    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descr => 1);
-    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descr => 1);
-    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descr => 1);
+    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descriptor => 1);
+    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descriptor => 1);
+    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descriptor => 1);
+    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descriptor => 1);
 
     ok(defined($fluent_action_descr) && ref($fluent_action_descr) eq 'HASH', 'descriptor build succeeds for fluent method-like action chain');
     ok(defined($block_action_descr) && ref($block_action_descr) eq 'HASH', 'descriptor build succeeds for structured helper-only action block');
@@ -39107,8 +39107,8 @@ I { lowercase_each(array(parts))
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descr => 1);
-    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descr => 1);
+    my $fluent_action_descr = LinkedSpec::Get(\$fluent_action_spec, return_descriptor => 1);
+    my $block_action_descr = LinkedSpec::Get(\$block_action_spec, return_descriptor => 1);
     ok(defined($fluent_action_descr) && ref($fluent_action_descr) eq 'HASH', 'descriptor build succeeds for fluent helper-only action chain used as semicolonless comparison baseline');
     ok(defined($block_action_descr) && ref($block_action_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured helper-only action block');
     is_deeply($fluent_action_descr->{spec}{Top}{ACODE}, $block_action_descr->{spec}{Top}{ACODE}, 'semicolonless structured helper-only action block lowers to the same ACODE as the fluent baseline');
@@ -39119,8 +39119,8 @@ SPEC
         'semicolonless structured helper-only action block stays fully language-agnostic-ready',
     );
 
-    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descr => 1);
-    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descr => 1);
+    my $fluent_lifecycle_descr = LinkedSpec::Get(\$fluent_lifecycle_spec, return_descriptor => 1);
+    my $block_lifecycle_descr = LinkedSpec::Get(\$block_lifecycle_spec, return_descriptor => 1);
     ok(defined($fluent_lifecycle_descr) && ref($fluent_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle helper chain used as semicolonless comparison baseline');
     ok(defined($block_lifecycle_descr) && ref($block_lifecycle_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured lifecycle helper block');
     is_deeply($fluent_lifecycle_descr->{spec}{Top}{ICODE}, $block_lifecycle_descr->{spec}{Top}{ICODE}, 'semicolonless structured lifecycle helper block lowers to the same ICODE as the fluent baseline');
@@ -39152,8 +39152,8 @@ Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent LX helper chain used as semicolonless comparison baseline');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for semicolonless structured LX helper block');
@@ -39208,8 +39208,8 @@ $tag { declare(scalar, retv)
  /a/ -> Top { return_a(Top) }
 SPEC
 
-            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-            my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+            my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+            my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
             ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', "descriptor build succeeds for fluent $tag lifecycle helper chain used as semicolonless comparison baseline");
             ok(defined($block_descr) && ref($block_descr) eq 'HASH', "descriptor build succeeds for semicolonless structured $tag lifecycle helper block");
@@ -39261,7 +39261,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for unresolved-helper diagnostics check');
     ok(exists $descr->{spec}{Top}{meta}{action_rewriter}, 'Top rule exposes action_rewriter metadata');
 
@@ -39281,7 +39281,7 @@ Top::&
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for contract-id metadata check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39302,7 +39302,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for helper action-IR metadata check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39325,7 +39325,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for helper action-IR payload event metadata check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39353,7 +39353,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for canonical action-IR metadata check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39393,7 +39393,7 @@ Leaf:
  /c/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for language-agnostic readiness metadata check');
 
     my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39426,7 +39426,7 @@ Leaf:
  /b/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for language-agnostic blocker statement metadata check');
 
     my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39455,7 +39455,7 @@ CompatBlocked::&
  /c/ -> CompatBlocked { return 1; my $tmp = 2 }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for compatibility-surface metadata check');
 
     my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39472,7 +39472,7 @@ SPEC
     is_deeply($compat_meta->{compatibility_surface_statements}, ['return 1', 'exit'], 'compatibility-surface rule exposes deterministic compatibility statements');
     is_deeply($compat_meta->{compatibility_surface_hits}, { exit_bare => 1, return_bare => 1 }, 'compatibility-surface rule exposes per-contract hit counts');
 };
-subtest 'return_descr_exposes_action_rewriter_migration_summary' => sub {
+subtest 'return_descriptor_exposes_action_rewriter_migration_summary' => sub {
     plan tests => 15;
 
     my $spec_content = <<'SPEC';
@@ -39491,7 +39491,7 @@ Leaf:
  /c/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for action_rewriter migration summary check');
     ok(ref($descr->{meta}) eq 'HASH', 'descriptor exposes top-level meta hash');
     ok(ref($descr->{meta}{action_rewriter_migration}) eq 'HASH', 'descriptor exposes action_rewriter migration summary');
@@ -39513,7 +39513,7 @@ SPEC
     is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
     is($summary->{language_agnostic_ready_ratio}, '0.5000', 'migration summary exposes language-agnostic ready ratio');
 };
-subtest 'return_descr_exposes_action_rewriter_compatibility_surface_summary' => sub {
+subtest 'return_descriptor_exposes_action_rewriter_compatibility_surface_summary' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -39527,7 +39527,7 @@ CompatBlocked::&
  /c/ -> CompatBlocked { return 1; my $tmp = 2 }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for compatibility-surface migration summary check');
 
     my $summary = $descr->{meta}{action_rewriter_migration};
@@ -39558,7 +39558,7 @@ Leaf:
  /(\w+)/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for legacy helper compatibility-surface check');
 
     my $top_meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39586,7 +39586,7 @@ SPEC
     is_deeply($top_row->{compatibility_surface_contract_ids}, ['assign_call_my', 'capture_if', 'return_m'], 'migration summary preserves legacy helper contract ids per rule');
     is($top_row->{compatibility_surface_statement_count}, 3, 'migration summary preserves per-rule statement count for legacy helper wrappers');
 };
-subtest 'return_descr_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
+subtest 'return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown' => sub {
     plan tests => 13;
 
     my $spec_content = <<'SPEC';
@@ -39609,7 +39609,7 @@ Leaf:
  /d/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for migration blocker-type breakdown check');
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'descriptor exposes migration summary for blocker-type breakdown check');
@@ -39637,7 +39637,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for call-wrapper canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39661,7 +39661,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for indexed push-call wrapper canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39685,7 +39685,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for return-call wrapper canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39706,7 +39706,7 @@ Top::&
  /a/ -> Top { return 1; return }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-return canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39727,7 +39727,7 @@ Top::&
  /a/ -> Top { exit; exit 1; exit(2) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-exit canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39748,7 +39748,7 @@ Top::&
  /a/ -> Top { my @startline = substr($$STRING, 0, $IPOS) =~ /\n/g }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for prefix-newline line-count canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39769,7 +39769,7 @@ Top::&
  /a/ -> Top { return(hash("cursor_pos", cursor_pos(), "cursor_line", cursor_line(), "entry", entry_line(), "match", match_line())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit cursor/line helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39796,7 +39796,7 @@ Top::&
  /a/ -> Top { return(hash("capture", capture_slice_col(), "mark", mark_col(body_start), "cursor", cursor_col(), "entry", entry_col(), "match", match_col())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit column helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39825,7 +39825,7 @@ Top::&
  /a/ -> Top { return(hash("entry_start_line", entry_start_line(), "entry_start_col", entry_start_col(), "match_start_line", match_start_line(), "match_start_col", match_start_col())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit start-edge line/column helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39852,7 +39852,7 @@ Top::&
  /a/ -> Top { return(hash("tail", cursor_rest(), "width", cursor_rest_len())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit cursor-tail helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39876,7 +39876,7 @@ Top::&
 /a/ -> Top { return(hash("capture", capture_slice(), "width", capture_slice_len(), "pos", capture_slice_pos(), "line", capture_slice_line())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit capture_slice helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39903,7 +39903,7 @@ Top::&
  /a/ -> Top { return(hash("pos", mark_pos(body_start), "line", mark_line(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named mark read helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39926,7 +39926,7 @@ Top::&
  /a/ -> Top { start_capture_slice(); return(hash("tail", capture_rest(), "width", capture_rest_len())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit capture_rest helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39951,7 +39951,7 @@ Top::&
  /a/ -> Top { start_capture_slice(); return(hash("tail", capture_take_rest(), "width", capture_take_rest_len())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing anonymous tail helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -39983,7 +39983,7 @@ Top::AND
  -> Top[2] { return(hash("segment", capture_take(), "width", capture_take_len())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit anonymous capture_take helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40010,7 +40010,7 @@ Top::&
  /a/ -> Top { return(hash("segment", capture_take(body_start), "width", capture_take_len_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named-mark capture_take width helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40036,7 +40036,7 @@ Top::&
  /a/ -> Top { return(hash("mark", mark_capture_slice(body_start), "reset", start_capture_slice_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit anonymous/named capture-boundary bridge helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40061,7 +40061,7 @@ Top::&
  /a/ -> Top { mark_input_start(file_start); mark_input_end(file_end); return(hash("start", mark_pos(file_start), "end", mark_pos(file_end))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit absolute input-boundary mark helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40087,7 +40087,7 @@ Top::&
  /a/ -> Top { return(hash("text", input_text(), "width", input_len(), "end_pos", input_end_pos(), "end_line", input_end_line(), "end_col", input_end_col())) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit whole-input read helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40117,7 +40117,7 @@ Top::&
  /a/ -> Top { return(hash("entry_start", mark_entry_start(entry_start), "entry_end", mark_entry_end(entry_end), "match_end", mark_match_end(match_end))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named-mark boundary write helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40142,7 +40142,7 @@ Top::&
  /a/ -> Top { return(hash("tail", capture_rest_from(body_start), "width", capture_rest_len_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit named-mark tail helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40166,7 +40166,7 @@ Top::&
  /a/ -> Top { return(hash("tail", capture_take_rest_from(body_start), "width", capture_take_rest_len_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing named-mark tail helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40194,7 +40194,7 @@ Top::&
  /a/ -> Top { return(hash("slice", capture_slice_until_cursor(), "slice_width", capture_slice_until_cursor_len(), "mark", capture_until_cursor_from(body_start), "mark_width", capture_until_cursor_len_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit capture-through-cursor helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40223,7 +40223,7 @@ Top::&
  /a/ -> Top { return(hash("slice", capture_take_until_cursor(), "slice_width", capture_take_until_cursor_len(), "mark", capture_take_until_cursor_from(body_start), "mark_width", capture_take_until_cursor_len_from(body_start))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing through-cursor helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40253,7 +40253,7 @@ Top::&
  /a/ -> Top { return(hash("slice", capture_take_between(body_start, first_end), "slice_width", capture_take_between_len(body_start, first_end))) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit advancing two-mark helper coverage');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40281,7 +40281,7 @@ Top::&
  /a/ -> Top { print "<".substr($$STRING, $IPOS, $LSPOS - $IPOS -1).">\n" }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for capture-substr-print canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40302,7 +40302,7 @@ Top::&
  /a/ -> Top { my $retv; my @matches }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for bare-my-declaration canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40323,7 +40323,7 @@ Top::&
  /a/ -> Top { my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for position-tracking cluster canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40344,7 +40344,7 @@ Top::&
  /a/ -> Top { $args =~ s/\s*\)\s*$// }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for inline-regex-subst assignment canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40365,7 +40365,7 @@ Top::&
  /a/ -> Top { my $args = $IMATCH }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for lexical match-assignment canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40386,7 +40386,7 @@ Top::&
  /a/ -> Top { my ($attribute_name, $value) = @IMATCH_LIST }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for IMATCH_LIST destructure canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40407,7 +40407,7 @@ Top::&
  /a/ -> Top { print "perl_dquotes:<<$_>>\n" foreach (@matches) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for print-foreach canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40428,7 +40428,7 @@ Top::&
  /a/ -> Top { my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for split-trim-filter assignment canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40449,7 +40449,7 @@ Top::&
  /a/ -> Top { next }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for next-statement canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40470,7 +40470,7 @@ Top::&
  /a/ -> Top { $prev_node_type = $retv->{type} }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ref-field-assignment canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40494,7 +40494,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for method-style return with leading-space args');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40515,7 +40515,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for nested-semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40543,7 +40543,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for line-comment semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40572,7 +40572,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for backtick-semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40601,7 +40601,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for slash-quote semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40630,7 +40630,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for angle-quote semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40659,7 +40659,7 @@ Leaf:
  /a/ -> Leaf { return_a(Leaf) }
 SPEC
 
-    my $descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pipe-quote semicolon canonical action-IR check');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
@@ -40680,7 +40680,7 @@ SPEC
 subtest 'ebnf_grammar_file_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 
-    my $descr = LinkedSpec::get_parser('ebnf', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ebnf grammar_file migration check');
 
     my $meta = $descr->{spec}{grammar_file}{meta}{action_rewriter};
@@ -40710,7 +40710,7 @@ subtest 'ebnf_terminal_token_rules_helper_flow_eliminates_raw_fallback' => sub {
     my @rules = qw(grammar_rule rule_name quoted_string quantifier probability regex);
     plan tests => 1 + @rules * 4;
 
-    my $descr = LinkedSpec::get_parser('ebnf', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ebnf terminal token helper migration check');
 
     for my $rule (@rules) {
@@ -40736,7 +40736,7 @@ subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => s
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 
-    my $descr = LinkedSpec::get_parser('ds_vhistory', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('ds_vhistory', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ds_vhistory vhistory migration check');
 
     my $meta = $descr->{spec}{vhistory}{meta}{action_rewriter};
@@ -40806,7 +40806,7 @@ subtest 'regdef_token_readers_prefer_entry_groups' => sub {
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 9;
 
-    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep operator guard migration check');
 
     for my $rule (qw(grep group)) {
@@ -40822,7 +40822,7 @@ subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallb
 subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' => sub {
     plan tests => 11;
 
-    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep accumulator migration check');
 
     for my $rule (qw(grep group)) {
@@ -40839,7 +40839,7 @@ subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' =>
 subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 21;
 
-    my $descr = LinkedSpec::get_parser('tablegrep', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep terminal/token migration check');
 
     for my $rule (qw(and_op or_op)) {
@@ -40886,7 +40886,7 @@ subtest 'tablegrep_terminal_token_band_prefers_entry_group_reads' => sub {
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
     plan tests => 11;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl signal_decl_range migration check');
 
     my $meta = $descr->{spec}{signal_decl_range}{meta}{action_rewriter};
@@ -40914,7 +40914,7 @@ subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' =
 subtest 'vhdl_package_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 15;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl package migration check');
 
     my $package_decl_meta = $descr->{spec}{package_declaration}{meta}{action_rewriter};
@@ -40949,7 +40949,7 @@ subtest 'vhdl_package_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl declaration migration check');
 
     my $subprogram_meta = $descr->{spec}{subprogram_declaration}{meta}{action_rewriter};
@@ -40985,7 +40985,7 @@ subtest 'vhdl_declaration_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 20;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for small vhdl blocker migration check');
 
     for my $rule (qw(signal_declaration configuration_specification vhdl_file)) {
@@ -41006,7 +41006,7 @@ subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl process_statement migration check');
 
     my $meta = $descr->{spec}{process_statement}{meta}{action_rewriter};
@@ -41031,7 +41031,7 @@ subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'vhdl_subprogram_body_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 12;
 
-    my $descr = LinkedSpec::get_parser('vhdl', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl subprogram_body migration check');
 
     my $meta = $descr->{spec}{subprogram_body}{meta}{action_rewriter};
@@ -41170,7 +41170,7 @@ subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
 
-    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('simenv', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv begin_end_blocks migration check');
 
     my $meta = $descr->{spec}{begin_end_blocks}{meta}{action_rewriter};
@@ -41205,7 +41205,7 @@ subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub 
 subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
-    my $descr = LinkedSpec::get_parser('ifelse', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('ifelse', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ifelse debug-print migration check');
 
     for my $rule (qw(program if then elsif else while while_then)) {
@@ -41220,7 +41220,7 @@ subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 61;
 
-    my $descr = LinkedSpec::get_parser('BNF', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('BNF', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for BNF debug-print migration check');
 
     for my $rule (qw(description construction_start node dquote_str squote_str regex group g_repetition q_mark plus star pipe)) {
@@ -41247,7 +41247,7 @@ subtest 'bnf_token_readers_prefer_entry_text' => sub {
 subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 70;
 
-    my $descr = LinkedSpec::get_parser('operators_try', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('operators_try', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for operators_try debug-print migration check');
 
     for my $rule (qw(top_expression group function_call string auto_inc_op auto_dec_op div_op mul_op add_op sub_op string_concat variable integer)) {
@@ -41280,7 +41280,7 @@ subtest 'operators_try_token_readers_prefer_entry_text' => sub {
 subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 60;
 
-    my $descr = LinkedSpec::get_parser('DT', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('DT', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for DT debug-print migration check');
 
     for my $rule (qw(dtree testcontrol group identifier if_binary if_vector reg_assignment_lhs state_transition dtree_call logical_operator inline_dt_definition)) {
@@ -41313,7 +41313,7 @@ subtest 'dt_token_readers_prefer_entry_text' => sub {
 subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;
 
-    my $descr = LinkedSpec::get_parser('hlink_substitution', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('hlink_substitution', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for hlink_substitution helper-flow migration check');
 
     for my $rule (qw(substitute_top substitute_statement2 curlyb)) {
@@ -41406,7 +41406,7 @@ subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' =>
 subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;
 
-    my $descr = LinkedSpec::get_parser('lib_reader', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('lib_reader', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for lib_reader helper-flow migration check');
 
     for my $rule (qw(group cattribute sattribute)) {
@@ -41481,7 +41481,7 @@ subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub 
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
 
-    my $descr = LinkedSpec::get_parser('sdce', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('sdce', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for sdce helper-flow migration check');
 
     for my $rule (qw(sdc_esplit get_pinport)) {
@@ -41555,7 +41555,7 @@ subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
 
-    my $descr = LinkedSpec::get_parser('portmap', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('portmap', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for portmap bare_bit_slice migration check');
 
     my $meta = $descr->{spec}{bare_bit_slice}{meta}{action_rewriter};
@@ -41619,7 +41619,7 @@ subtest 'portmap_spec_prefers_short_container_aliases_in_bare_bit_slice_band' =>
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
 
-    my $descr = LinkedSpec::get_parser('pplugin', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('pplugin', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pplugin helper-flow migration check');
 
     my $meta = $descr->{spec}{pplugin_top}{meta}{action_rewriter};
@@ -41678,7 +41678,7 @@ subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' =
 subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
 
-    my $descr = LinkedSpec::get_parser('tkgui', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('tkgui', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tkgui helper-flow migration check');
 
     my $meta = $descr->{spec}{sub_gui}{meta}{action_rewriter};
@@ -41732,7 +41732,7 @@ subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
-    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('simenv', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv delimiter-helper migration check');
 
     for my $rule (qw(bs_nl squotes perl_squotes multiline_value bvariable_substitution curlybrace parenthesis)) {
@@ -41747,7 +41747,7 @@ subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
 subtest 'simenv_quote_substitution_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;
 
-    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('simenv', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv quote-substitution migration check');
 
     for my $rule (qw(singleline_value dquotes perl_dquotes command_substitution perl_command_substitution variable_substitution comments)) {
@@ -41762,7 +41762,7 @@ subtest 'simenv_quote_substitution_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'simenv_top_and_anyvariable_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
 
-    my $descr = LinkedSpec::get_parser('simenv', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('simenv', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for simenv top/anyvariable migration check');
 
     my $top_meta = $descr->{spec}{top}{meta}{action_rewriter};
@@ -41853,7 +41853,7 @@ subtest 'simenv_delimiter_readers_prefer_capture_slice' => sub {
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 47;
 
-    my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('Lispish', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for small Lispish migration check');
 
     for my $rule (qw(Lispish comments curlyb dquotes others sbrackets spaces squotes)) {
@@ -41885,7 +41885,7 @@ subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
 subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 7;
 
-    my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+    my $descr = LinkedSpec::get_parser('Lispish', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for Lispish parenthesis migration check');
 
     my $meta = $descr->{spec}{parenthesis}{meta}{action_rewriter};
@@ -42194,8 +42194,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C")); declare(scalar, offset=1, limit=6, distance); assign(scalar(distance), num_abs(num_sub(num_add(count(array(parts)), scalar(offset)), scalar(limit)))); return(hash("distance", scalar(distance))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric abs helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric abs helper form');
@@ -42238,8 +42238,8 @@ LX { declare(array, parts=array("A", "B", "C")); declare(scalar, offset=1, limit
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric abs helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric abs helper form');
@@ -42280,8 +42280,8 @@ Top::&
  /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded); assign(scalar(floored), num_floor(num_sub(scalar(raw_score), scalar(offset)))); assign(scalar(ceiled), num_ceil(num_div(num_mul(count(array(parts)), scalar(factor)), 2))); assign(scalar(rounded), num_round(num_add(coalesce(length(trim(scalar(raw_name))), 0), scalar(offset)))); return(hash("floored", scalar(floored), "ceiled", scalar(ceiled), "rounded", scalar(rounded))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge numeric rounding helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge numeric rounding helper form');
@@ -42324,8 +42324,8 @@ LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, raw_name="
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle numeric rounding helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle numeric rounding helper form');
@@ -42365,8 +42365,8 @@ Top::&
  /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty), "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug")))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action value-emptiness helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action value-emptiness helper form');
@@ -42408,8 +42408,8 @@ Top::&
 LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); assign(scalar(values_empty), is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); assign(scalar(meta_nonempty), is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", scalar(values_empty), "meta_nonempty", scalar(meta_nonempty))) }
 SPEC
 
-    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descr => 1);
-    my $block_descr = LinkedSpec::Get(\$block_spec, return_descr => 1);
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
     ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle value-emptiness helper form');
     ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle value-emptiness helper form');
@@ -42496,7 +42496,7 @@ PERL
     like($accept_out, qr/\?Top:/, 'consume parse mode still accepts contiguous matching input');
 };
 
-subtest 'return_descr_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
+subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
     plan tests => 10;
 
     my $spec_content = <<'SPEC';
@@ -42504,8 +42504,8 @@ Top::
  /a/ -> Top { return_a(Top) }
 SPEC
 
-    my $default_descr = LinkedSpec::Get(\$spec_content, return_descr => 1);
-    ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descr still builds descriptor hash');
+    my $default_descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descriptor still builds descriptor hash');
     is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
     is($default_descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'default parse mode descriptor records the compiled-spec state model');
     is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default parse mode descriptor preserves definition-order metadata');
@@ -42514,10 +42514,10 @@ SPEC
 
     my $consume_descr = LinkedSpec::Get(
         \$spec_content,
-        return_descr => 1,
+        return_descriptor => 1,
         parse_mode => 'consume',
     );
-    ok(defined($consume_descr) && ref($consume_descr) eq 'HASH', 'consume parse mode return_descr still builds descriptor hash');
+    ok(defined($consume_descr) && ref($consume_descr) eq 'HASH', 'consume parse mode return_descriptor still builds descriptor hash');
     is($consume_descr->{meta}{parse_mode}, 'consume', 'consume parse mode is recorded in descriptor metadata');
 
     my $snippet = <<'PERL';
@@ -42529,7 +42529,7 @@ SPEC
 my $parser_source = '';
 my $descr = LinkedSpec::Get(
   \$spec_content,
-  return_descr => 1,
+  return_descriptor => 1,
   dump_parser_source => 1,
   parser_source_ref => \$parser_source,
   parse_mode => 'consume',
@@ -42557,7 +42557,7 @@ SPEC
     my $runtime_ctx;
     my $ret = LinkedSpec::Get(
         \$spec_content,
-        return_descr => 1,
+        return_descriptor => 1,
         top_rule => 'RequestedTop',
         parse_mode => 'sideways',
         runtime_ctx_ref => \$runtime_ctx,

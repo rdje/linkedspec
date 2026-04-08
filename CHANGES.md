@@ -1,11 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Phase 5: rename return_descriptor option
+
+- renamed the active public descriptor-introspection option from `return_descr` to `return_descriptor` across `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/ParserFactory.pm`, `perl/LinkedSpec/Compiler.pm`, the active regression locks in `t/phase0_regression.t`, and the current user/continuity docs,
+- updated the active runtime and parser-factory result-shape contracts so descriptor-return mode is now described and checked consistently as `return_descriptor => 1`,
+- updated descriptor-introspection regression names, public examples, roadmap notes, and session continuity docs so future resume treats `return_descriptor` as the real surface and `return_descr` as historical vocabulary only.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -Iperl -c perl/LinkedSpec/ParserFactory.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-09 - Phase 5: rename compiled rule-order state fields
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the explicit compiled-spec state now records `compiled_rule_order` instead of the more ambiguous `rule_order`, and the preferred read accessor is now `compiled_spec_state_compiled_rule_order(...)`,
 - updated the same state model so outward descriptor metadata now exposes `meta.compiled_rule_order` instead of `meta.rule_order`, keeping the descriptor surface aligned with the internal compiled-spec model,
-- widened `t/phase0_regression.t` so the state-model and descriptor-metadata locks now expect `compiled_rule_order` through compiled-spec state, compiled-descriptor validation, migration-summary input, and `return_descr` metadata,
+- widened `t/phase0_regression.t` so the state-model and descriptor-metadata locks now expect `compiled_rule_order` through compiled-spec state, compiled-descriptor validation, migration-summary input, and `return_descriptor` metadata,
 - refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats `compiled_rule_order` as the active term for the deterministic unique compiled-rule sequence.
 
 - Validation:
@@ -304,7 +319,7 @@ Detailed technical history of changes prepared for commit.
 - widened `t/phase0_regression.t` with:
   - direct coverage for the new internal `compiled_descriptor_state` seam and its legacy descriptor projection,
   - direct coverage for malformed compiled-`gdata` callback output at the final-descriptor boundary,
-  - updated `return_descr` metadata coverage for `meta.definition_order`,
+  - updated `return_descriptor` metadata coverage for `meta.definition_order`,
   - and updated final-descriptor-owner trap coverage so `run_get_pipeline(...)` is locked to the new `_build_final_descr_state(...)` seam,
 - refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats final descriptor assembly as part of the same state-first compiler story.
 
@@ -345,7 +360,7 @@ Detailed technical history of changes prepared for commit.
 - widened `t/phase0_regression.t` so the new state model is locked directly:
   - `spec_descr(..., { return_state => 1 })` now has explicit regression coverage for the returned state shape,
   - `spec_gdata(...)` now has explicit regression coverage for compiled-spec state input,
-  - `run_get_pipeline(...)` / `return_descr => 1` now lock the new descriptor metadata (`descriptor_model`, `rule_order`, `redefined_rule_labels`) and the fact that final descriptor assembly receives compiled-spec state rather than only the legacy spec hash,
+  - `run_get_pipeline(...)` / `return_descriptor => 1` now lock the new descriptor metadata (`descriptor_model`, `rule_order`, `redefined_rule_labels`) and the fact that final descriptor assembly receives compiled-spec state rather than only the legacy spec hash,
 - refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats compiled-spec state as the compiler's internal source of truth and legacy `spec` / `gdata` hashes as edge compatibility projections rather than the compiler's preferred internal model.
 
 - Validation:
@@ -500,7 +515,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-04 - Phase 5: preserve parser-factory handler labels
 
 - extended `perl/LinkedSpec/ParserFactory.pm` so fallback `parser_factory:compile_spec` payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected top rule is already known at that seam,
-- widened `t/phase0_regression.t` across both the direct `LinkedSpec::ParserFactory::run_get_parser(...)` seam and the public `get_parser(...)` continuity path, covering default parser, `return_descr`, `parse_only`, and `generate_only` malformed/fallback compile-result branches with preserved `handler_source_label`,
+- widened `t/phase0_regression.t` across both the direct `LinkedSpec::ParserFactory::run_get_parser(...)` seam and the public `get_parser(...)` continuity path, covering default parser, `return_descriptor`, `parse_only`, and `generate_only` malformed/fallback compile-result branches with preserved `handler_source_label`,
 - refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats parser-factory compile-stage handler attribution as part of the stable structured-diagnostics contract now instead of assuming label-only handler identity appears only after runtime-owner or parser-boundary fallback.
 
 - Validation:
@@ -536,7 +551,7 @@ Detailed technical history of changes prepared for commit.
 
 ## 2026-04-04 - Phase 5: tighten runtime compile result diagnostics
 
-- extended `perl/LinkedSpec/Runtime.pm` so the inline runtime compile boundary now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descr => 1` result, while still preserving intentional `undef` success for `parse_only` / `generate_only`,
+- extended `perl/LinkedSpec/Runtime.pm` so the inline runtime compile boundary now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descriptor => 1` result, while still preserving intentional `undef` success for `parse_only` / `generate_only`,
 - widened `t/phase0_regression.t` with direct `Runtime::run_get(...)` regressions plus public `LinkedSpec::Get(...)` regressions so both the lower-level runtime seam and the outward inline compile contract now lock malformed defined result diagnostics,
 - refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats malformed defined `run_get_pipeline(...)` results as covered runtime-owner diagnostics continuity now instead of assuming only thrown or `undef` compiler-delegation paths matter there.
 
@@ -2548,7 +2563,7 @@ Added explicit repeated-choice shorthand `OR+` as a current supported rule-label
 - Updated `perl/LinkedSpec/BootstrapSpec/Core.pm` so `rule:OR+` parses as a real grouped repeated-choice label with the same min-one/open-ended repetition contract as `rule:OR` and `rule:OR{1,}`.
 - Updated `perl/LinkedSpec/Validation.pm` and `perl/LinkedSpec/SpecEntry.pm` so validation accepts the new spelling and runtime repetition-bound resolution treats `REP_OR_PLUS` as a real first-class repetition node instead of an undocumented alias.
 - Added focused regression coverage in `t/phase0_regression.t` for:
-  - `return_descr` metadata on `rule:OR+`,
+  - `return_descriptor` metadata on `rule:OR+`,
   - runtime parity between `rule:OR+` and `rule:OR{1,}` on blind-call repeated-choice rules,
   - and validation acceptance of the current rule-label surface including explicit `OR+`.
 - Expanded `USER_GUIDE_RuleModesAndSplit.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so `OR+` is taught as explicit repeated-choice shorthand rather than being left implicit through the older “bare `rule:` is conceptually OR+” wording alone.
@@ -10396,10 +10411,10 @@ Reduced another stale `LinkedSpec.pm` seam by removing the dead validation deleg
 - Preserved behavior:
   - active compile-time validation still routes through `LinkedSpec::Validation` from `LinkedSpec::Compiler`,
   - malformed-spec diagnostics still report DSL line context through the `LinkedSpec::Validation` owner path,
-  - `Get(..., return_descr => 1)` still returns the same descriptor structure and metadata.
+  - `Get(..., return_descriptor => 1)` still returns the same descriptor structure and metadata.
 - Updated focused regression coverage:
   - expanded `get_parser_malformed_spec_reports_validation_error` to trap the removed `LinkedSpec` validation helpers on the error path,
-  - added `get_return_descr_avoids_removed_linkedspec_validation_facade` to trap the removed validation helpers on the successful descriptor-build path.
+  - added `get_return_descriptor_avoids_removed_linkedspec_validation_facade` to trap the removed validation helpers on the successful descriptor-build path.
 
 ## Validation
 - Ran:
@@ -10515,10 +10530,10 @@ Reduced another stale `LinkedSpec.pm` seam by removing the dead internal `Compil
   - deleted `_build_rule_ir_emit_context(...)`
 - Preserved behavior:
   - `LinkedSpec::spec_descr(...)` still compiles rules through `LinkedSpec::Compiler` plus `LinkedSpec::SpecEntry`,
-  - `LinkedSpec::Get(..., return_descr => 1)` still exposes compiled handlers, selected handler metadata, and descriptor-level action-rewriter migration summary.
+  - `LinkedSpec::Get(..., return_descriptor => 1)` still exposes compiled handlers, selected handler metadata, and descriptor-level action-rewriter migration summary.
 - Added focused regression coverage:
   - `spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade`
-  - the seam lock traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descr => 1)` succeed through the owner modules only.
+  - the seam lock traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descriptor => 1)` succeed through the owner modules only.
 
 ## Validation
 - Ran:
@@ -10630,7 +10645,7 @@ Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade
   - active rule-entry compilation continues to resolve through `LinkedSpec::SpecEntry::compile_spec_entry(...)` via compiler-owned defaults.
 - Added focused regression coverage:
   - `spec_descr_paths_avoid_linkedspec_spec_entry_facade`
-  - the regression traps the removed façade helper name and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still build compiled handlers through the `SpecEntry.pm` owner path.
+  - the regression traps the removed façade helper name and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descriptor => 1)` still build compiled handlers through the `SpecEntry.pm` owner path.
 
 ## Validation
 - Ran:
@@ -10661,7 +10676,7 @@ Reduced another stale runtime seam by removing `LinkedSpec::Runtime::run_get_fro
   - active runtime entrypoints continue to resolve through `LinkedSpec::Runtime::run_get(...)` with normalized hashref options supplied by `LinkedSpec::Get(...)` and `LinkedSpec::ParserFactory`.
 - Added focused regression coverage:
   - `runtime_run_get_avoids_legacy_raw_arg_wrapper`
-  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descr => 1 })` still returns a descriptor hash directly through the active owner path.
+  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descriptor => 1 })` still returns a descriptor hash directly through the active owner path.
 
 ## Validation
 - Ran:
@@ -10692,7 +10707,7 @@ Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade
   - active final descriptor `gdata` compilation continues to resolve through `LinkedSpec::Compiler::spec_gdata(...)` inside `_build_final_descr(...)`.
 - Added focused regression coverage:
   - `compiler_pipeline_avoids_linkedspec_spec_gdata_facade`
-  - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descr => 1)` still returns a descriptor hash with compiled `gdata` through the compiler-owned path.
+  - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descriptor => 1)` still returns a descriptor hash with compiled `gdata` through the compiler-owned path.
 
 ## Validation
 - Ran:
@@ -11112,7 +11127,7 @@ Reduced another façade-era wrapper by letting `LinkedSpec::SpecEntry::compile_s
   - `LinkedSpec::Runtime::compile_spec_entry(...)` remains only as a compatibility wrapper around the extracted owner.
 - Added focused regression coverage:
   - `spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper`
-  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still compile rules successfully without touching that wrapper.
+  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descriptor => 1)` still compile rules successfully without touching that wrapper.
 
 ## Validation
 - Ran:
@@ -14722,7 +14737,7 @@ Extended descriptor-level action-rewriter migration summary with blocker-type ra
     - `language_agnostic_blocked_mixed_ratio`
   - ratio fields default to `'0.0000'` when blocked-rule count is zero.
 - Extended focused regression lock:
-  - `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`
+  - `return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown`
   - now validates all three blocker-type ratio fields in addition to blocked-rule type counts/lists.
 
 ## Validation
@@ -14756,7 +14771,7 @@ Extended descriptor-level action-rewriter migration summary with explicit blocke
     - `language_agnostic_blocked_unresolved_helper_only_rules`
     - `language_agnostic_blocked_mixed_rules`
 - Added focused regression lock:
-  - `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`
+  - `return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown`
   - verifies blocked-rule type counts/lists and priority interaction (`language_agnostic_top_blocked_rule`) for mixed/raw/unresolved blocker combinations.
 
 ## Validation
@@ -14816,7 +14831,7 @@ Extended descriptor-level action-rewriter migration summary metadata with determ
     - rule name (ascending tie-breaker),
   - exposes highest-priority blocked rule (`language_agnostic_top_blocked_rule`).
 - Extended migration-summary regression lock:
-  - `return_descr_exposes_action_rewriter_migration_summary`
+  - `return_descriptor_exposes_action_rewriter_migration_summary`
   - now validates blocker-statement total, deterministic blocked-rule priority order, and top blocked rule.
 
 ## Validation
@@ -14829,7 +14844,7 @@ Extended descriptor-level action-rewriter migration summary metadata with determ
   - PASS (`Files=1, Tests=55`)
 ## 2026-02-24 - Backbone Item #3 Follow-up: Descriptor-Level Action Rewriter Migration Summary
 ## Summary
-Added descriptor-level migration summary metadata so `return_descr` consumers can quantify language-agnostic readiness across all rules and prioritize concrete blocker cleanup.
+Added descriptor-level migration summary metadata so `return_descriptor` consumers can quantify language-agnostic readiness across all rules and prioritize concrete blocker cleanup.
 
 ## Changed Files
 - Updated: `perl/LinkedSpec.pm`
@@ -14853,7 +14868,7 @@ Added descriptor-level migration summary metadata so `return_descr` consumers ca
   - `language_agnostic_blocked_rules`
   - `language_agnostic_ready_ratio`
 - Added focused regression lock:
-  - `return_descr_exposes_action_rewriter_migration_summary`
+  - `return_descriptor_exposes_action_rewriter_migration_summary`
   - verifies deterministic counts/lists, blocked rule payloads, and readiness ratio.
 
 ## Validation
@@ -15374,7 +15389,7 @@ Refactored action-rewriter helper lowering to use an explicit contract catalog s
 
 ## 2026-02-24 - Backbone Item #3 Follow-up: Action-Rewriter Diagnostics Metadata
 ## Summary
-Extended the structured action rewriter with diagnostics for unresolved helper forms and surfaced those diagnostics in per-rule metadata for `return_descr` tooling workflows.
+Extended the structured action rewriter with diagnostics for unresolved helper forms and surfaced those diagnostics in per-rule metadata for `return_descriptor` tooling workflows.
 
 ## Changed Files
 - Updated: `perl/LinkedSpec.pm`
@@ -15532,7 +15547,7 @@ Reworked core rule-compilation structure in `LinkedSpec.pm` to expose explicit p
 - Updated: `MEMORY.md`
 
 ## Technical Details
-- Added `return_descr => 1` mode to `LinkedSpec::Get(...)`:
+- Added `return_descriptor => 1` mode to `LinkedSpec::Get(...)`:
   - returns generated descriptor hash (`{ spec => ..., gdata => ... }`) for tooling/introspection instead of parser coderef.
 - Added deterministic rule-strategy helpers:
   - `_select_rule_handler_variant(...)`

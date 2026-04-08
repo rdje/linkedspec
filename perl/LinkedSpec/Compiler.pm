@@ -910,7 +910,7 @@ sub run_get_pipeline {
  _trace_apply_trace_options($option);
  my $parse_only = $option->{parse_only};
  my $generate_only = $option->{generate_only};
- my $return_descr = $option->{return_descr};
+ my $return_descriptor = $option->{return_descriptor};
  my $test_expectation = $option->{test_expectation};
  my $dump_parser_source = $option->{dump_parser_source};
  my $parser_source_ref = $option->{parser_source_ref};
@@ -924,7 +924,7 @@ sub run_get_pipeline {
  my $trace_scope = _trace_enter('LinkedSpec::Get', {
   parse_only => $parse_only ? 1 : 0,
   generate_only => $generate_only ? 1 : 0,
-  return_descr => $return_descr ? 1 : 0,
+  return_descriptor => $return_descriptor ? 1 : 0,
   dump_parser_source => $dump_parser_source ? 1 : 0,
   parse_mode => $parse_mode,
   trace_level => _trace_level_name_for_current_verbosity(),
@@ -1338,9 +1338,9 @@ if ($validate_dependency_regex_references_error) {
   return undef;
  }
 
- if ($return_descr) {
+ if ($return_descriptor) {
   _trace_log_output(DUMP_LOW, "Descriptor-return mode", "Returning generated parser descriptor hash");
-  _trace_exit($trace_scope, { status => 'ok', stage => 'return_descr', return_descr => 1, rule_count => $rule_count }, DUMP_LOW);
+  _trace_exit($trace_scope, { status => 'ok', stage => 'return_descriptor', return_descriptor => 1, rule_count => $rule_count }, DUMP_LOW);
   return $final_descr;
  }
 

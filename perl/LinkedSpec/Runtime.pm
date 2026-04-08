@@ -115,7 +115,7 @@ sub _describe_run_get_pipeline_result {
  return 'run_get_pipeline returned undef without structured runtime context'
   unless defined($ret);
 
- if (ref($option) eq 'HASH' && $option->{return_descr}) {
+ if (ref($option) eq 'HASH' && $option->{return_descriptor}) {
   return "run_get_pipeline returned invalid descriptor value: $value_desc; expected HASH";
  }
 
@@ -163,7 +163,7 @@ sub run_get {
    );
    return undef;
   }
-  my $ret_ok = (ref($option) eq 'HASH' && $option->{return_descr})
+  my $ret_ok = (ref($option) eq 'HASH' && $option->{return_descriptor})
    ? (defined($ret) && ref($ret) eq 'HASH')
    : ($parse_only || $generate_only)
     ? !defined($ret)

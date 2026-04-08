@@ -121,7 +121,7 @@ sub _describe_compile_spec_result {
   ? 'undef'
   : ref($parser) ? ref($parser) : 'SCALAR';
 
- if (ref($option) eq 'HASH' && $option->{return_descr}) {
+ if (ref($option) eq 'HASH' && $option->{return_descriptor}) {
   return "compile_spec returned invalid descriptor value: $value_desc; expected HASH";
  }
 
@@ -393,7 +393,7 @@ sub run_get_parser {
   my $parser = eval { $compile_spec->(\$content, \%forward_opt_hash) };
   my $compile_spec_error = $@;
   my $parser_ok =
-     $forward_opt_hash{return_descr} ? (defined($parser) && ref($parser) eq 'HASH')
+     $forward_opt_hash{return_descriptor} ? (defined($parser) && ref($parser) eq 'HASH')
    : ($forward_opt_hash{parse_only} || $forward_opt_hash{generate_only}) ? !defined($parser)
    : defined($parser) && ref($parser) eq 'CODE';
   if ($compile_spec_error) {
@@ -420,7 +420,7 @@ sub run_get_parser {
    'get_parser_compilation_result',
    $parser_ok ? 1 : 0,
    $parser_ok
-    ? ($forward_opt_hash{return_descr}
+    ? ($forward_opt_hash{return_descriptor}
        ? 'descriptor hash generated'
        : ($forward_opt_hash{parse_only} || $forward_opt_hash{generate_only})
         ? 'mode-only compile path completed'

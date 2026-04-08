@@ -252,7 +252,7 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
    - `my $ast = $parser->(\$input_string);`
    - Returned parser coderefs expect a `SCALAR` reference input. Passing a plain scalar, array ref, hash ref, or `undef` now fails explicitly at the top-level parser boundary instead of falling through to a lower-level Perl dereference error.
 4. If the grammar is large or heterogeneous, run additional passes on captured substrings or substructures.
-5. If you are working on backend-neutral migration, inspect the lowering metadata with `return_descr => 1`.
+5. If you are working on backend-neutral migration, inspect the lowering metadata with `return_descriptor => 1`.
 
 Validation note: when changing parser/compiler/runtime behavior, run `bash tools/run_ci_local.sh` from the repo root before pushing so the local phase-0 gate matches GitHub CI. Recent internal load-time cleanup means `LinkedSpec.pm` no longer imports `Data::Dumper` or `LinkedRE` at façade load time, its public façade wrappers now preserve caller `$@` across successful owner delegation, its public trace wrappers now preserve caller `$@` across successful owner delegation too, `Validation.pm`, `Resolver.pm`, `RuleIR.pm`, and `RuleIR::EmitContext.pm` now preserve caller `$@` across successful extracted-owner delegation too, the remaining thin owner delegates in `BootstrapSpec.pm`, `Runtime.pm`, `ActionIR::Scanner.pm`, `ActionIR::StatementSplit.pm`, and `ActionIR::CanonicalEvents.pm` now preserve caller `$@` across successful owner delegation too, `ActionRewriter.pm` now preserves caller `$@` across successful owner delegation for its dep-builder/helper/lowering/rewrite wrapper surface too, `SpecEntry.pm` now preserves caller `$@` across successful trace/dump helper delegation too, `Compiler.pm` now preserves caller `$@` across successful trace/dump/regex helper delegation too, `BootstrapSpec::Core.pm` now preserves caller `$@` across successful regex-helper delegation too, `Trace::_trace_stringify(...)` now preserves caller `$@` across successful dump formatting too, `PluginBridge.pm` now preserves caller `$@` across successful legacy runtime load/exec delegation too, `ParserFactory.pm` now preserves caller `$@` across successful lazy owner lookup and public parser-factory orchestration too, and the remaining extracted ActionIR dep-builder owners now preserve caller `$@` across successful callback-map lookup/build paths too. `Trace.pm` now lazy-loads `Data::Dumper` only when referenced values actually need structured dump formatting, `RuleIR.pm` now lazy-loads `Data::Dumper` only when debug execution-meta dumps actually need it, `SpecEntry.pm` now lazy-loads `Data::Dumper` only when high-verbosity rule-entry debug dumps actually need it, `SpecEntry.pm` now lazy-loads `RuleIR::EmitContext.pm` only when rule-entry compilation reaches emit-context assembly, `Compiler.pm` now lazy-loads `Data::Dumper` only when traced compiler dumps actually need it and now lazy-loads `LinkedRE` only when regex gdata assembly actually needs it, `BootstrapSpec::Core.pm` now lazy-loads `LinkedRE` only when bootstrap registry construction or bootstrap scanner handlers actually need it, `Validation.pm` now lazy-loads `Trace.pm` only when validation errors or warnings actually emit trace output, `Resolver.pm` now lazy-loads `Trace.pm` only when invalid-spec or spec-resolution trace/error paths actually emit output, `RuleIR::EmitContext.pm` now lazy-loads `ActionIR::RewritePipeline.pm` and `ActionIR::Diagnostics.pm` when emit-context build paths need rewrite/diagnostic helpers, now keeps `ActionRewriter.pm` out of normal compile-time emit-context builds entirely, and now owns the façade compatibility rewrite entrypoint too, `ActionIR::Scanner.pm` now lazy-loads `ScannerCore.pm` only when contract scanning starts, `ActionIR::ScannerCore.pm` now lazy-loads its scanner rule packages only when scanning actually starts, `ActionRewriter.pm` now lazy-loads `ActionIR::Scanner.pm`, `ActionIR::CanonicalEvents.pm`, `ActionIR::Diagnostics.pm`, `ActionIR::StatementSplit.pm`, `ActionIR::Contracts.pm`, `ActionIR::RewritePipeline.pm`, `ActionIR::ControlFlow.pm`, `ActionIR::MethodLowering.pm`, and `ActionIR::DeclareMethod.pm` only when those helper families are used, `ActionIR::StatementSplit.pm` now lazy-loads `StatementSplit::Core.pm` only when statement splitting starts, `ActionIR::StatementSplit::Core.pm` now lazy-loads `StatementSplit::Mode.pm` only when splitting actually starts, and `ActionIR::CanonicalEvents.pm` now lazy-loads `CanonicalEvents::Core.pm` only when canonical-event building starts.
 The same owner pattern now applies one level deeper too: `ActionIR::DeclareMethod.pm` and `ActionIR::Scanner.pm` lazy-load `ActionIR::MethodExpr.pm` while assembling their default callback maps, so `ActionRewriter.pm` no longer needs to preload `MethodExpr` just to build those dep-builder payloads.
@@ -1057,13 +1057,13 @@ Examples:
 
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
-### Descriptor introspection with `return_descr => 1`
+### Descriptor introspection with `return_descriptor => 1`
 Use descriptor mode when you want to inspect rule readiness, migration metadata, or the current compiled-descriptor topology.
 
 Typical shape:
 
 ```perl
-my $descr = LinkedSpec::get_parser('Lispish', return_descr => 1);
+my $descr = LinkedSpec::get_parser('Lispish', return_descriptor => 1);
 my $meta  = $descr->{spec}{parenthesis}{meta}{action_rewriter};
 ```
 
@@ -1160,7 +1160,7 @@ my $state = LinkedSpec::build_compiled_rule_table($entries, { return_state => 1 
 # }
 ```
 
-That low-level state is mainly for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1`, which keeps the stable outer descriptor contract while exposing the useful state-derived metadata in `meta`.
+That low-level state is mainly for advanced tooling and refactor work. Normal callers should still prefer `return_descriptor => 1`, which keeps the stable outer descriptor contract while exposing the useful state-derived metadata in `meta`.
 
 `build_dependency_regex_map(...)` now follows the same pattern on its low-level seam. By default it still returns the historical gdata hash for compatibility, but `{ return_state => 1 }` now returns explicit compiled-dependency-regex state instead:
 
@@ -1177,7 +1177,7 @@ my $gdata_state = LinkedSpec::Compiler::build_dependency_regex_map($state, { ret
 # }
 ```
 
-That lower-level state is mainly useful for advanced tooling and refactor work. Normal callers should still prefer `return_descr => 1` unless they are intentionally working inside compiler-owned seams.
+That lower-level state is mainly useful for advanced tooling and refactor work. Normal callers should still prefer `return_descriptor => 1` unless they are intentionally working inside compiler-owned seams.
 
 The same refactor is now complete on the compatibility bridge too:
 
@@ -1240,7 +1240,7 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`
 - `generate_only => 1`
-- `return_descr => 1`
+- `return_descriptor => 1`
 - `parse_mode => 'seek' | 'consume'`
 - `top_rule => 'RuleName'`
 - `dump_parser_source => 1`
@@ -1278,7 +1278,7 @@ So future implementation should keep these concepts independent:
 At the intuition level, `seek` can feel more extraction-like and `consume` can feel more grammar-like, but they are not aliases for `OR` and `AND`.
 
 If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
-If you ask for `return_descr => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
+If you ask for `return_descriptor => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
 
 `runtime_ctx_ref` is an opt-in diagnostics/introspection hook. You can pass either:
 - a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
@@ -1323,7 +1323,7 @@ Example:
 my $ctx;
 my $descr = LinkedSpec::Get(
   \$spec_content,
-  return_descr => 1,
+  return_descriptor => 1,
   runtime_ctx_ref => \$ctx,
 );
 
@@ -1362,9 +1362,9 @@ Those same compile-time attributed failures can now also carry `handler_source_l
 
 Compiler-owned setup failures before that main validation/parse flow now use the same channel too. If the compiler cannot prepare its callback/runtime-owner surface cleanly, for example because `bootstrap_parse` resolved to an invalid non-CODE value, `last_error` is populated as `compiler_pipeline` at stage `prepare_pipeline` instead of falling through to the generic runtime-owner fallback. When the selected `top_rule` is already known at that seam, that same payload now also preserves the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>`, so even compiler setup failures can still be tied back to the intended parser entrypoint without scraping `detail`.
 
-The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)`, or if that delegated compiler path returns `undef` on a real failure path without writing its own structured payload first, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying or before returning `undef`, that deeper payload is preserved and not overwritten by the runtime wrapper. The same boundary is now strict about malformed defined results too: normal inline compilation only treats a parser coderef as success, `return_descr => 1` only treats a descriptor hash as success, and `parse_only` / `generate_only` only treat `undef` as success. Malformed defined return shapes now preserve specific detail such as `run_get_pipeline returned invalid parser value: HASH; expected CODE` or `run_get_pipeline returned invalid parse_only value: HASH; expected undef` instead of drifting outward as bogus success values. When the selected `top_rule` is already known at that fallback seam, the same `runtime_owner` payload now also preserves the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>`, so even a runtime-owner fallback can still be tied back to the intended parser entrypoint without scraping `detail`. Successful `parse_only` and `generate_only` calls are excluded from that fallback rule: they still return `undef` by design, but they should leave the failure channel clear.
+The runtime owner now normalizes one higher-level fallback seam on the inline path too. If `LinkedSpec::Runtime::run_get(...)` or the public `LinkedSpec::Get(...)` facade catches a raw die coming back from `Compiler::run_get_pipeline(...)`, or if that delegated compiler path returns `undef` on a real failure path without writing its own structured payload first, `last_error` is populated with a `runtime_owner` payload at stage `run_get_pipeline`. If the deeper compiler/runtime owner already wrote a structured `last_error` payload before dying or before returning `undef`, that deeper payload is preserved and not overwritten by the runtime wrapper. The same boundary is now strict about malformed defined results too: normal inline compilation only treats a parser coderef as success, `return_descriptor => 1` only treats a descriptor hash as success, and `parse_only` / `generate_only` only treat `undef` as success. Malformed defined return shapes now preserve specific detail such as `run_get_pipeline returned invalid parser value: HASH; expected CODE` or `run_get_pipeline returned invalid parse_only value: HASH; expected undef` instead of drifting outward as bogus success values. When the selected `top_rule` is already known at that fallback seam, the same `runtime_owner` payload now also preserves the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>`, so even a runtime-owner fallback can still be tied back to the intended parser entrypoint without scraping `detail`. Successful `parse_only` and `generate_only` calls are excluded from that fallback rule: they still return `undef` by design, but they should leave the failure channel clear.
 
-The parser-factory owner now has the same kind of explicit setup stage too. If `LinkedSpec::ParserFactory::run_get_parser(...)` cannot prepare its callback/trace/dependency surface cleanly, for example because `trace_enter` or another required callback resolved to a non-CODE value, `last_error` is populated as `parser_factory` at stage `prepare_parser_factory` instead of letting that setup seam escape as a raw owner die. The same pre-compile parser-factory seams now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected `top_rule` is already known there, so `prepare_parser_factory`, `validate_spec_name`, `resolve_spec_path`, and `load_spec_content` failures can still be tied back to the intended parser entrypoint without reconstructing that label from separate fields. Later in that same file-oriented path, the compile boundary now also treats only a real parser coderef as a successful default `compile_spec(...)` result, only a descriptor hash as a successful `return_descr => 1` result, and only `undef` as a successful `parse_only` / `generate_only` result. A silent `undef` on a real failure path still preserves the stable fallback detail `compile_spec returned undef without structured runtime context`, and malformed defined values now preserve specific shape detail like `compile_spec returned invalid parser value: HASH; expected CODE` or `compile_spec returned invalid generate_only value: ARRAY; expected undef` instead of drifting outward as a bogus parser object or collapsing back to a generic wrapper string. When the selected `top_rule` is already known at that parser-factory compile seam, those same fallback payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>`, so file-oriented compile failures can still be tied back to the intended parser entrypoint without reconstructing that label from separate fields.
+The parser-factory owner now has the same kind of explicit setup stage too. If `LinkedSpec::ParserFactory::run_get_parser(...)` cannot prepare its callback/trace/dependency surface cleanly, for example because `trace_enter` or another required callback resolved to a non-CODE value, `last_error` is populated as `parser_factory` at stage `prepare_parser_factory` instead of letting that setup seam escape as a raw owner die. The same pre-compile parser-factory seams now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` whenever the selected `top_rule` is already known there, so `prepare_parser_factory`, `validate_spec_name`, `resolve_spec_path`, and `load_spec_content` failures can still be tied back to the intended parser entrypoint without reconstructing that label from separate fields. Later in that same file-oriented path, the compile boundary now also treats only a real parser coderef as a successful default `compile_spec(...)` result, only a descriptor hash as a successful `return_descriptor => 1` result, and only `undef` as a successful `parse_only` / `generate_only` result. A silent `undef` on a real failure path still preserves the stable fallback detail `compile_spec returned undef without structured runtime context`, and malformed defined values now preserve specific shape detail like `compile_spec returned invalid parser value: HASH; expected CODE` or `compile_spec returned invalid generate_only value: ARRAY; expected undef` instead of drifting outward as a bogus parser object or collapsing back to a generic wrapper string. When the selected `top_rule` is already known at that parser-factory compile seam, those same fallback payloads now also preserve the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>`, so file-oriented compile failures can still be tied back to the intended parser entrypoint without reconstructing that label from separate fields.
 
 That means the `last_error` payload is now largely self-contained:
 - `type` tells you which owner family raised the error (`parser_factory`, `compiler_pipeline`, or `runtime_owner` on compile-time failure paths today),
@@ -1483,7 +1483,7 @@ If backend neutrality matters, these are the defaults you should follow.
 5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
 7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
-8. Use snippet inspection and `return_descr` metadata to verify that the rule stays language-agnostic-action-IR ready.
+8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances
 - `return(payload)` is the preferred general return form, but method-chain `.return(...)` detection is still more conservative than block-form `return(payload)`.

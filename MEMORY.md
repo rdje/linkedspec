@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-09: Renamed the active public descriptor-introspection option from `return_descr` to `return_descriptor` with no compatibility alias preserved. Runtime, ParserFactory, Compiler, the active regression locks, and the current docs now all treat `return_descriptor => 1` as the real descriptor-return surface. Future resume should use `return_descriptor` everywhere on the active path and avoid reintroducing `return_descr` outside older historical notes.
 - 2026-04-09: Continued the active compiler-state naming cleanup by replacing `duplicate_rule_labels` with `redefined_rule_labels` across compiled-spec state, descriptor metadata, regression locks, and the current docs. Future resume should treat `redefined_rule_labels` as the active last-definition-wins overwrite signal on the state-first compiler path and avoid reintroducing the older duplicate-label term there.
 - 2026-04-09: Continued the active compiler-state naming cleanup by renaming the deterministic unique compiled-rule sequence from `rule_order` to `compiled_rule_order` across compiled-spec state and outward descriptor metadata. Future resume should treat `compiled_rule_order` as the active term on the state-first compiler path and avoid adding new active uses of bare `rule_order`.
 - 2026-04-09: Finished the active naming cleanup on the derived-regex compiler path with no internal compatibility aliases preserved. `Compiler.pm`, `CompilerState.pm`, and `Validation.pm` now speak in terms of `build_dependency_regex_map(...)`, `validate_dependency_regex_references(...)`, `compiled_dependency_regex_state`, and dependency-regex validation views throughout the active state-first path. Future resume should treat `spec_gdata`, `compiled_gdata_state`, and `gdata_validation_view` as historical vocabulary only unless the task is explicitly about older notes or the outward legacy descriptor field `gdata`.
@@ -13,7 +14,7 @@ Compact, actionable session memory for interruption-safe continuation.
 - 2026-04-08: Continued the state-first compiler refactor into derived gdata too. `Compiler.pm` now has an explicit `compiled_gdata_state` model, `spec_gdata(...)` now supports `{ return_state => 1 }`, `compiled_descriptor_state` now composes compiled-spec state plus compiled-gdata state instead of a raw compiled-gdata hash, and `Validation.pm` now reads generated-descriptor validation input from that explicit gdata-state seam. Future resume should treat compiled gdata as part of the same explicit compiler state model now.
 - 2026-04-08: Finished the next state-first compiler follow-up after `compiled_descriptor_state`. `Validation.pm` now validates descriptor state directly instead of bouncing back through the legacy `validate_gdata_references(...)` entrypoint, and `Compiler.pm` now defers outward compatibility descriptor projection until that internal descriptor-state validation has already passed. Future resume should treat generated-descriptor validation as fully state-first now.
 - 2026-04-08: Continued the state-first compiler refactor into generated-descriptor validation too. `Validation.pm` now exposes `validate_compiled_descriptor_state(...)`, and `Compiler.pm` now validates the internal `compiled_descriptor_state` directly before projecting the outward compatibility descriptor. Future resume should treat validation as state-first now too, not only final descriptor assembly.
-- 2026-04-08: Continued the state-first compiler refactor into final descriptor assembly too. `Compiler.pm` now builds an internal `compiled_descriptor_state` after compiled-spec state and compiled `gdata` are available, then projects the outward compatibility descriptor from that state. `return_descr` metadata now also exposes `definition_order`, and malformed compiled `gdata` callback output is rejected directly at final descriptor assembly with specific contract detail. Future resume should treat final descriptor assembly as state-first now too.
+- 2026-04-08: Continued the state-first compiler refactor into final descriptor assembly too. `Compiler.pm` now builds an internal `compiled_descriptor_state` after compiled-spec state and compiled `gdata` are available, then projects the outward compatibility descriptor from that state. `return_descriptor` metadata now also exposes `definition_order`, and malformed compiled `gdata` callback output is rejected directly at final descriptor assembly with specific contract detail. Future resume should treat final descriptor assembly as state-first now too.
 - 2026-04-07: Continued the compiled-spec-state refactor one seam later. `Compiler.pm` now builds descriptor-level `meta.action_rewriter_migration` directly from compiled-spec state too, so migration-summary generation no longer needs a projected legacy `spec` hash as intermediate working data. The same slice also changed non-priority migration-summary rule lists to source order when compiled-spec state is available, while leaving explicit `*_by_priority` triage lists on their separate ordering rules. Future resume should treat migration-summary generation as state-first now too.
 - 2026-04-07: Refactored the historical `spec_descr` / `spec_gdata` seam into one explicit compiler-owned compiled-spec state model. `Compiler.pm` now builds `compiled_spec_state` first (`kind`, `version`, `definition_order`, `rule_order`, `rules_by_label`, `redefined_rule_labels`), default `spec_gdata(...)` now enriches that state directly, `_build_final_descr(...)` now projects legacy `spec` / `gdata` hashes outward while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.redefined_rule_labels`, and low-level callers can request the same richer state directly with `spec_descr(..., { return_state => 1 })`. Future resume should treat compiled-spec state as the compiler's internal source of truth now instead of reasoning from the legacy spec hash first.
 - 2026-04-07: Tightened the default `spec_gdata(...)` final-descriptor seam too. Malformed descriptor content there now fails with explicit contract detail instead of incidental Perl reference errors, and `run_get_pipeline(...)` preserves that as `compiler_pipeline:build_final_descr` with the active `rule_label` plus label-scoped `handler_source_label` continuity. Future resume should treat malformed `gdata` / dependency / referenced-`re` shapes as covered structured Phase 5 surface now instead of assuming `build_final_descr` only preserves thrown inner callback failures.
@@ -26,7 +27,7 @@ Compact, actionable session memory for interruption-safe continuation.
 - 2026-04-04: Continued the same Phase 5 diagnostics-attribution line into the parser-factory compile fallback seam too. `ParserFactory.pm` now preserves the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` on fallback `parser_factory:compile_spec` payloads whenever the selected top rule is already known. Regression coverage now locks that through both the direct `run_get_parser(...)` seam and the public `get_parser(...)` continuity path, including default parser, descriptor, and mode-only malformed-result branches. Future resume should treat parser-factory compile fallback handler attribution as covered structured-diagnostics surface now instead of assuming label-only handler identity starts only at runtime-owner or parser-boundary failures.
 - 2026-04-04: Continued the same Phase 5 diagnostics-attribution line into the runtime-owner fallback seam. `Runtime.pm` now preserves the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` on fallback `runtime_owner:run_get_pipeline` payloads whenever the selected top rule is already known. Regression coverage now locks that through direct `Runtime::run_get(...)`, public `LinkedSpec::Get(...)`, and file-oriented `get_parser(...)` continuity paths. Future resume should treat runtime-owner fallback handler attribution as covered structured-diagnostics surface now instead of assuming label-only handler identity starts only at compiler- or parser-boundary failures.
 - 2026-04-04: Tightened the same Phase 5 compile-result line around the mode-only branches too. `parse_only` / `generate_only` were already intended to accept only `undef` success on both the runtime and parser-factory boundaries, but that contract was not locked. Regression coverage now explicitly traps malformed defined mode-only returns on both the lower-level seams and the outward `LinkedSpec::Get(...)` / `get_parser(...)` surfaces, and the guide/roadmap now call that contract out directly. Future resume should treat malformed defined `parse_only` / `generate_only` results as covered diagnostics surface now instead of assuming only default parser/descriptor result shapes are locked.
-- 2026-04-04: Continued the same real Phase 5 diagnostics line on the inline runtime compile seam. `Runtime.pm` now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descr => 1` result, while preserving intentional `undef` success for `parse_only` / `generate_only`. Malformed defined compiler-delegation results now preserve specific detail such as `run_get_pipeline returned invalid parser value: HASH; expected CODE` instead of drifting outward as bogus success values or collapsing back to the generic runtime-owner wrapper. Future resume should treat malformed defined `run_get_pipeline(...)` returns as covered runtime-owner diagnostics surface now instead of assuming only thrown or silent-`undef` compiler-delegation paths matter there.
+- 2026-04-04: Continued the same real Phase 5 diagnostics line on the inline runtime compile seam. `Runtime.pm` now treats only a real parser coderef as a successful default `run_get_pipeline(...)` result and only a descriptor hash as a successful `return_descriptor => 1` result, while preserving intentional `undef` success for `parse_only` / `generate_only`. Malformed defined compiler-delegation results now preserve specific detail such as `run_get_pipeline returned invalid parser value: HASH; expected CODE` instead of drifting outward as bogus success values or collapsing back to the generic runtime-owner wrapper. Future resume should treat malformed defined `run_get_pipeline(...)` returns as covered runtime-owner diagnostics surface now instead of assuming only thrown or silent-`undef` compiler-delegation paths matter there.
 - 2026-04-04: Continued the same real Phase 5 diagnostics line on the parser-factory compile seam. `ParserFactory.pm` now treats only a real parser coderef as a successful `compile_spec(...)` result and preserves specific malformed defined return detail such as `compile_spec returned invalid parser value: HASH; expected CODE` instead of letting bogus defined values drift outward as parsers or collapsing back to one generic wrapper. Future resume should treat malformed defined `compile_spec(...)` returns as covered parser-factory diagnostics surface now instead of assuming only thrown or `undef` compile paths matter there.
 - 2026-04-04: Continued the same real Phase 5 diagnostics line inside the descriptor-build seam. `Compiler.pm` now preserves specific malformed non-throwing `compile_spec_entry(...)` tuple detail on `compiler_pipeline:spec_descr` failures instead of collapsing back to the old generic descriptor-build wrapper text. Future resume should treat malformed non-throwing `spec_descr` tuple returns as covered structured-diagnostics surface now instead of assuming only thrown `compile_spec_entry(...)` failures preserve useful detail.
 - 2026-04-04: Continued the real Phase 5 diagnostics line back into the compiler bootstrap seam. `bootstrap_parse(...)` now has a stricter valid-result contract at the compiler boundary: only a non-empty top-level ARRAY is accepted as valid intermediate representation, and malformed non-throwing success-shapes now preserve specific result-shape detail instead of collapsing to one generic invalid-IR message. Future resume should treat malformed non-throwing bootstrap results as covered compiler diagnostics surface now instead of assuming only thrown bootstrap callbacks preserve useful detail.
@@ -3091,7 +3092,7 @@ These files are live and must be amended before any commit:
   - active compile-time validation and DSL error reporting now remain on `LinkedSpec::Validation`.
 - Regression outcome:
   - `get_parser_malformed_spec_reports_validation_error` now traps the removed validation helper names and proves malformed-spec diagnostics still route through the `LinkedSpec::Validation` owner path,
-  - added `get_return_descr_avoids_removed_linkedspec_validation_facade` to prove successful descriptor-build paths do not depend on the removed helper names.
+  - added `get_return_descriptor_avoids_removed_linkedspec_validation_facade` to prove successful descriptor-build paths do not depend on the removed helper names.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/Validation.pm` => syntax OK
@@ -3143,7 +3144,7 @@ These files are live and must be amended before any commit:
   - no live repo path still depends on the deleted internal delegate names.
 - Regression outcome:
   - added `spec_descr_and_get_avoid_removed_linkedspec_ruleir_internal_facade`,
-  - the regression traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descr => 1)` still succeed through the owner modules only.
+  - the regression traps the removed helper names and proves both `spec_descr(...)` and `Get(..., return_descriptor => 1)` still succeed through the owner modules only.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
@@ -3195,7 +3196,7 @@ These files are live and must be amended before any commit:
   - no live repo path still depends on the deleted façade rule-entry helper.
 - Regression outcome:
   - added `spec_descr_paths_avoid_linkedspec_spec_entry_facade`,
-  - the regression traps the removed façade helper name and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descr => 1)` still build compiled handlers directly through the owner path.
+  - the regression traps the removed façade helper name and proves both `LinkedSpec::spec_descr(...)` and `LinkedSpec::Get(..., return_descriptor => 1)` still build compiled handlers directly through the owner path.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
@@ -3211,7 +3212,7 @@ These files are live and must be amended before any commit:
   - no live repo path still depends on the deleted raw-arg runtime wrapper.
 - Regression outcome:
   - added `runtime_run_get_avoids_legacy_raw_arg_wrapper`,
-  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descr => 1 })` still returns a descriptor hash directly.
+  - the regression traps the removed wrapper name and proves `LinkedSpec::Runtime::run_get(..., { return_descriptor => 1 })` still returns a descriptor hash directly.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/Runtime.pm` => syntax OK
@@ -3227,7 +3228,7 @@ These files are live and must be amended before any commit:
   - `LinkedSpec::Runtime::run_get(...)` no longer has a façade-level `gdata` helper alias anywhere on the active descriptor path.
 - Regression outcome:
   - added `compiler_pipeline_avoids_linkedspec_spec_gdata_facade`,
-  - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descr => 1)` still returns a descriptor hash with compiled `gdata`.
+  - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descriptor => 1)` still returns a descriptor hash with compiled `gdata`.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/Compiler.pm` => syntax OK
@@ -3418,7 +3419,7 @@ These files are live and must be amended before any commit:
   - default rule compilation paths (`LinkedSpec::spec_descr(...)`, `LinkedSpec::spec_entry(...)`, and `Runtime::run_get(...)`) no longer need `LinkedSpec::Runtime::compile_spec_entry(...)` as the active owner.
 - Regression outcome:
   - added `spec_entry_paths_avoid_runtime_compile_spec_entry_wrapper`,
-  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both the façade default path and `LinkedSpec::Get(..., return_descr => 1)` still compile rules successfully.
+  - the regression traps `LinkedSpec::Runtime::compile_spec_entry(...)` and proves both the façade default path and `LinkedSpec::Get(..., return_descriptor => 1)` still compile rules successfully.
 - Validation snapshot:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm` => syntax OK
@@ -4267,7 +4268,7 @@ When resuming after interruption:
 - Landed Backbone item #3 descriptor migration blocker-type ratio follow-up in `perl/LinkedSpec.pm`:
   - descriptor-level `meta.action_rewriter_migration` now exposes blocked-rule composition ratios (`language_agnostic_blocked_raw_perl_only_ratio`, `language_agnostic_blocked_unresolved_helper_only_ratio`, `language_agnostic_blocked_mixed_ratio`) normalized by blocked-rule count.
 - Extended focused regression lock in `t/phase0_regression.t`:
-  - subtest `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown` now validates blocker-type ratio fields in addition to counts/lists.
+  - subtest `return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown` now validates blocker-type ratio fields in addition to counts/lists.
 - Re-ran full validation after descriptor migration blocker-type ratio follow-up:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -c t/phase0_regression.t` => syntax OK
@@ -4275,7 +4276,7 @@ When resuming after interruption:
 - Landed Backbone item #3 descriptor migration blocker-type breakdown follow-up in `perl/LinkedSpec.pm`:
   - descriptor-level `meta.action_rewriter_migration` now exposes blocked-rule type counters/lists for raw-perl-only, unresolved-helper-only, and mixed blockers.
 - Added focused regression lock in `t/phase0_regression.t`:
-  - subtest `return_descr_exposes_action_rewriter_migration_blocker_type_breakdown`.
+  - subtest `return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown`.
 - Re-ran full validation after descriptor migration blocker-type breakdown follow-up:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -c t/phase0_regression.t` => syntax OK
@@ -4287,16 +4288,16 @@ When resuming after interruption:
   - descriptor-level `meta.action_rewriter_migration` now exposes `language_agnostic_blocker_statement_total_count`, `language_agnostic_blocked_rules_by_priority`, and `language_agnostic_top_blocked_rule`,
   - blocked-rule priority ordering is deterministic: blocker statement count (desc), unresolved helper count (desc), raw-Perl dependency count (desc), rule name (asc).
 - Extended focused regression lock in `t/phase0_regression.t`:
-  - subtest `return_descr_exposes_action_rewriter_migration_summary` now validates blocker total, prioritized blocked-rule ordering, and top blocked rule.
+  - subtest `return_descriptor_exposes_action_rewriter_migration_summary` now validates blocker total, prioritized blocked-rule ordering, and top blocked rule.
 - Re-ran full validation after descriptor migration prioritization follow-up:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -c t/phase0_regression.t` => syntax OK
   - `prove -v -Iperl t/phase0_regression.t` => PASS (55 tests)
 - Landed Backbone item #3 descriptor-level migration summary follow-up in `perl/LinkedSpec.pm`:
-  - descriptor now exposes top-level `meta.action_rewriter_migration` summary in `return_descr` mode with ready/blocked counts, deterministic rule lists, blocked rule payload details, and readiness ratio,
+  - descriptor now exposes top-level `meta.action_rewriter_migration` summary in `return_descriptor` mode with ready/blocked counts, deterministic rule lists, blocked rule payload details, and readiness ratio,
   - this provides a direct roadmap-aligned prioritization surface for language-agnostic migration backlog selection.
 - Added focused regression lock in `t/phase0_regression.t`:
-  - subtest `return_descr_exposes_action_rewriter_migration_summary`.
+  - subtest `return_descriptor_exposes_action_rewriter_migration_summary`.
 - Re-ran full validation after descriptor-level migration summary follow-up:
   - `perl -c perl/LinkedSpec.pm` => syntax OK
   - `perl -c t/phase0_regression.t` => syntax OK
@@ -4488,13 +4489,13 @@ When resuming after interruption:
   - `prove -v -Iperl t/phase0_regression.t` => PASS (38 tests)
 - Paused further `get_parser` hardening by explicit user direction and shifted focus to `LinkedSpec.pm` core structure.
 - Landed core execution-structure increment in `perl/LinkedSpec.pm`:
-  - added `Get(..., return_descr => 1)` for descriptor introspection (`spec` + `gdata`),
+  - added `Get(..., return_descriptor => 1)` for descriptor introspection (`spec` + `gdata`),
   - added deterministic rule strategy helpers (`_select_rule_handler_variant`, `_build_rule_execution_meta`),
   - added per-rule `meta` payload under `spec->{rule}{meta}` (counts, strategy, loop marker),
   - added dedicated `AND_SINGLE_ACODE` template for single-regex AND action rules,
   - replaced non-deterministic handler selection via hash-key order with metadata-based selection.
 - Added regression lock in `t/phase0_regression.t`:
-  - subtest `get_return_descr_rule_meta_single_vs_multi_strategy` validates descriptor metadata and single-vs-multi AND strategy mapping.
+  - subtest `get_return_descriptor_rule_meta_single_vs_multi_strategy` validates descriptor metadata and single-vs-multi AND strategy mapping.
 - Re-ran baseline after core changes:
   - command: `prove -v -Iperl t/phase0_regression.t`
   - result: PASS
