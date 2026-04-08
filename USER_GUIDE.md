@@ -1177,7 +1177,7 @@ The same refactor is now complete on the compatibility bridge too:
 That same owner boundary now covers read-side state access too:
 
 - compiler trace/logging reads such as compiled-spec definition order and duplicate-label lists now go through `LinkedSpec::CompilerState` accessors,
-- generated-descriptor validation now also walks descriptor-state rule rows, descriptor-state gdata rows, and descriptor-state by-label lookup through `LinkedSpec::CompilerState` instead of flattening back into one raw rule/gdata map pair,
+- generated-descriptor validation now also consumes one owner-provided descriptor-state validation view from `LinkedSpec::CompilerState`, so rule rows, gdata rows, and by-label lookup are assembled once at the owner boundary instead of being rebuilt through repeated owner dispatch from inside validation loops,
 - ordered compiled-rule iteration now also goes through one `LinkedSpec::CompilerState` view rather than rebuilding it ad hoc from `rule_order + rules_by_label`,
 - and compiled-spec dependency lookup during `spec_gdata(...)` now also goes through `LinkedSpec::CompilerState` helpers rather than direct compiler-side rule-map probing,
 - while compiled-descriptor metadata assembly now also goes through `LinkedSpec::CompilerState` rather than `Compiler.pm` mutating owner metadata locally,

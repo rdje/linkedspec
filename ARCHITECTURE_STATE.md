@@ -231,11 +231,11 @@ That is a real structural improvement, not only a diagnostics tweak:
 - owns the preferred by-label compiled-rule lookup helpers as well,
 - owns compiled-descriptor metadata assembly over compiled-spec state as well,
 - owns migration-summary shaping over compiled-spec state as well,
-- owns the preferred ordered descriptor-state validation views as well,
+- owns the preferred descriptor-state validation views as well,
 - owns validation-friendly shape checks for those records,
 - owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
 - is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`,
-- which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, direct rule-map probing, migration-summary reduction, descriptor-meta mutation, descriptor-validation map flattening, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
+- which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, direct rule-map probing, migration-summary reduction, descriptor-meta mutation, repeated descriptor-validation owner dispatch inside validation loops, descriptor-validation map flattening, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
 
 One more boundary is now tighter too:
 

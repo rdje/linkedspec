@@ -432,6 +432,34 @@ sub compiled_descriptor_state_rule_rows {
  return compiled_spec_state_rule_rows(compiled_descriptor_state_spec_state($state))
 }
 
+sub compiled_descriptor_state_validation_view {
+ my ($state) = @_;
+ return undef unless is_compiled_descriptor_state($state);
+
+ my $rule_rows = compiled_descriptor_state_rule_rows($state);
+ my $gdata_rows = compiled_descriptor_state_gdata_rows($state);
+ my $rules_by_label = compiled_descriptor_state_rules_by_label($state);
+
+ return {
+  kind => 'compiled_descriptor_state_validation_view',
+  version => 1,
+  rule_rows => [map { [@$_] } @$rule_rows],
+  gdata_rows => [map { [@$_] } @$gdata_rows],
+  rules_by_label => { %$rules_by_label },
+ }
+}
+
+sub is_compiled_descriptor_state_validation_view {
+ my ($value) = @_;
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state_validation_view';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{rule_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{gdata_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{rules_by_label}) eq 'HASH';
+ return 1
+}
+
 sub compiled_descriptor_state_meta {
  my ($state) = @_;
  return {} unless is_compiled_descriptor_state($state);

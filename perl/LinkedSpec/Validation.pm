@@ -427,11 +427,26 @@ sub _validate_gdata_against_rules_by_label {
 
 sub _validate_compiled_descriptor_state_native {
  my ($descriptor_state, $option) = @_;
+ my $validation_view = _call_compiler_state('compiled_descriptor_state_validation_view', $descriptor_state);
 
- for my $row (@{_call_compiler_state('compiled_descriptor_state_gdata_rows', $descriptor_state)}) {
+ unless (_call_compiler_state('is_compiled_descriptor_state_validation_view', $validation_view)) {
+  my $detail = 'Expected compiled_descriptor_state_validation_view HASH reference, got '
+   . _describe_validation_value_kind($validation_view);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid compiled descriptor validation view',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor validation view', $detail);
+  return 0;
+ }
+
+ my $rules_by_label = $validation_view->{rules_by_label};
+
+ for my $row (@{$validation_view->{gdata_rows}}) {
   my ($rule_name, $gdata_entry) = @$row;
 
-  unless (_call_compiler_state('compiled_descriptor_state_has_rule', $descriptor_state, $rule_name)) {
+  unless (exists $rules_by_label->{$rule_name}) {
    my $summary = "Gdata references non-existent rule '$rule_name'";
    my $detail = 'Rule not found in spec';
    _notify_gdata_validation_failure(
@@ -458,7 +473,7 @@ sub _validate_compiled_descriptor_state_native {
   }
  }
 
- for my $row (@{_call_compiler_state('compiled_descriptor_state_rule_rows', $descriptor_state)}) {
+ for my $row (@{$validation_view->{rule_rows}}) {
   my ($rule_name, $rule_def) = @$row;
 
   my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
@@ -500,7 +515,7 @@ sub _validate_compiled_descriptor_state_native {
     }
 
     my $ref_rule = $element->{label};
-    unless (_call_compiler_state('compiled_descriptor_state_has_rule', $descriptor_state, $ref_rule)) {
+    unless (exists $rules_by_label->{$ref_rule}) {
      my $summary = "Gdata element references non-existent rule '$ref_rule'";
      my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
      _notify_gdata_validation_failure(
@@ -514,7 +529,7 @@ sub _validate_compiled_descriptor_state_native {
     }
 
     my $ref_idx = $element->{idx};
-    my $ref_rule_def = _call_compiler_state('compiled_descriptor_state_rule_info', $descriptor_state, $ref_rule);
+    my $ref_rule_def = $rules_by_label->{$ref_rule};
     unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
      my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
      my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";

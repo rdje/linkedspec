@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: centralize descriptor validation view assembly
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes one explicit `compiled_descriptor_state_validation_view(...)` contract for ordered rule rows, ordered gdata rows, and by-label rule lookup,
+- updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now validates through that single owner-provided view instead of issuing repeated descriptor-state owner lookups from inside its validation loops,
+- widened `t/phase0_regression.t` so the owner-routing lock now proves descriptor-state validation view assembly routes through `LinkedSpec::CompilerState`, and added a direct low-level regression for the explicit validation-view shape,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats descriptor validation view assembly as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=918`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: centralize descriptor-state validation views
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes ordered descriptor-state validation views and by-label descriptor-state lookup helpers,
