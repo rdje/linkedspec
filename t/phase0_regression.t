@@ -8997,7 +8997,7 @@ SPEC
     ok(!exists $gdata->{Child}, 'spec_gdata built from compiled-spec state omits dependency-free rules');
 };
 subtest 'compiler_spec_gdata_return_state_builds_explicit_compiled_gdata_state' => sub {
-    plan tests => 8;
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9020,9 +9020,11 @@ SPEC
     is_deeply($gdata_state->{source_rule_order}, ['Top', 'Child'], 'compiled gdata state preserves source rule order');
     is_deeply($gdata_state->{compiled_label_order}, ['Top'], 'compiled gdata state preserves deterministic compiled label order');
     ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
+    ok(exists $gdata_state->{dependency_regex_by_label}{Top} && !exists $gdata_state->{dependency_regex_by_label}{Child}, 'compiled gdata state also exposes preferred dependency-regex alias by label');
+    is_deeply($gdata_state->{dependency_regex_by_label}, $gdata_state->{gdata_by_label}, 'compiled gdata state keeps dependency-regex alias data aligned with legacy gdata alias');
 };
 subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9033,6 +9035,7 @@ Child::
 SPEC
 
     my $orig_new_compiled_spec_state = \&LinkedSpec::CompilerState::new_compiled_spec_state;
+    my $orig_new_compiled_dependency_regex_state = \&LinkedSpec::CompilerState::new_compiled_dependency_regex_state;
     my $orig_build_action_rewriter_migration_summary = \&LinkedSpec::CompilerState::build_action_rewriter_migration_summary;
     my $orig_build_compiled_descriptor_meta = \&LinkedSpec::CompilerState::build_compiled_descriptor_meta;
     my $orig_compiled_spec_state_has_rule = \&LinkedSpec::CompilerState::compiled_spec_state_has_rule;
@@ -9043,14 +9046,18 @@ SPEC
     my $orig_is_compiled_descriptor_state = \&LinkedSpec::CompilerState::is_compiled_descriptor_state;
     my $orig_compiled_descriptor_state_validation_view = \&LinkedSpec::CompilerState::compiled_descriptor_state_validation_view;
     my $orig_normalize_compiled_spec_input = \&LinkedSpec::CompilerState::normalize_compiled_spec_input;
-    my $orig_normalize_compiled_gdata_output = \&LinkedSpec::CompilerState::normalize_compiled_gdata_output;
+    my $orig_normalize_compiled_dependency_regex_output = \&LinkedSpec::CompilerState::normalize_compiled_dependency_regex_output;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_new_compiled_spec_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_validation_view, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_gdata_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    my ($saw_new_compiled_spec_state, $saw_new_compiled_dependency_regex_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_validation_view, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_dependency_regex_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::CompilerState::new_compiled_spec_state = sub {
             $saw_new_compiled_spec_state = 1;
             return $orig_new_compiled_spec_state->(@_);
+        };
+        local *LinkedSpec::CompilerState::new_compiled_dependency_regex_state = sub {
+            $saw_new_compiled_dependency_regex_state = 1;
+            return $orig_new_compiled_dependency_regex_state->(@_);
         };
         local *LinkedSpec::CompilerState::build_action_rewriter_migration_summary = sub {
             $saw_build_action_rewriter_migration_summary = 1;
@@ -9084,9 +9091,9 @@ SPEC
             $saw_normalize_compiled_spec_input = 1;
             return $orig_normalize_compiled_spec_input->(@_);
         };
-        local *LinkedSpec::CompilerState::normalize_compiled_gdata_output = sub {
-            $saw_normalize_compiled_gdata_output = 1;
-            return $orig_normalize_compiled_gdata_output->(@_);
+        local *LinkedSpec::CompilerState::normalize_compiled_dependency_regex_output = sub {
+            $saw_normalize_compiled_dependency_regex_output = 1;
+            return $orig_normalize_compiled_dependency_regex_output->(@_);
         };
         local *LinkedSpec::CompilerState::is_compiled_descriptor_state = sub {
             $saw_is_compiled_descriptor_state = 1;
@@ -9103,6 +9110,7 @@ SPEC
 
     ok($ok_run, 'compiler pipeline succeeds while compiler-state owner seams are trapped') or diag(normalize_error($err));
     ok($saw_new_compiled_spec_state, 'Compiler.pm routes compiled-spec state creation through LinkedSpec::CompilerState');
+    ok($saw_new_compiled_dependency_regex_state, 'Compiler.pm routes dependency-regex state creation through LinkedSpec::CompilerState');
     ok($saw_build_action_rewriter_migration_summary, 'Compiler.pm routes migration-summary assembly through LinkedSpec::CompilerState');
     ok($saw_build_compiled_descriptor_meta, 'Compiler.pm routes compiled-descriptor metadata assembly through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_has_rule, 'Compiler.pm routes compiled-spec dependency existence checks through LinkedSpec::CompilerState');
@@ -9111,14 +9119,14 @@ SPEC
     ok($saw_compiled_spec_state_definition_order, 'Compiler.pm routes compiled-spec definition-order reads through LinkedSpec::CompilerState');
     ok($saw_compiled_spec_state_duplicate_rule_labels, 'Compiler.pm routes compiled-spec duplicate-label reads through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_spec_input, 'Compiler.pm routes compiled-spec normalization through LinkedSpec::CompilerState');
-    ok($saw_normalize_compiled_gdata_output, 'Compiler.pm routes compiled-gdata normalization through LinkedSpec::CompilerState');
+    ok($saw_normalize_compiled_dependency_regex_output, 'Compiler.pm routes dependency-regex normalization through LinkedSpec::CompilerState');
     ok($saw_is_compiled_descriptor_state, 'Validation.pm routes descriptor-state validation through LinkedSpec::CompilerState');
     ok($saw_compiled_descriptor_state_validation_view, 'Validation.pm routes descriptor-state validation view assembly through LinkedSpec::CompilerState');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-state owner routing still returns descriptor hash');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler-state owner routing still preserves compiled handler coderef');
 };
 subtest 'compiler_build_final_descr_state_builds_explicit_compiled_descriptor_state' => sub {
-    plan tests => 14;
+    plan tests => 18;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9139,19 +9147,23 @@ SPEC
     is($descriptor_state->{kind}, 'compiled_descriptor_state', 'final descriptor state exposes the explicit descriptor-state kind');
     is($descriptor_state->{version}, 1, 'final descriptor state exposes the expected version');
     is($descriptor_state->{compiled_spec_state}{kind}, 'compiled_spec_state', 'final descriptor state retains the compiled-spec state as its source of truth');
+    ok(ref($descriptor_state->{compiled_dependency_regex_state}) eq 'HASH', 'final descriptor state also exposes preferred dependency-regex state');
     is($descriptor_state->{compiled_gdata_state}{kind}, 'compiled_gdata_state', 'final descriptor state retains explicit compiled-gdata state');
     is($descriptor_state->{compiled_gdata_state}{version}, 1, 'final descriptor state keeps expected compiled-gdata-state version');
+    is($descriptor_state->{compiled_dependency_regex_state}{kind}, 'compiled_gdata_state', 'preferred dependency-regex state currently preserves compatibility kind');
     is_deeply($descriptor_state->{meta}{definition_order}, ['Top', 'Child'], 'final descriptor state meta preserves full definition order');
     is_deeply($descriptor_state->{meta}{rule_order}, ['Top', 'Child'], 'final descriptor state meta preserves deterministic unique rule order');
     ok(exists $descriptor_state->{compiled_gdata_state}{gdata_by_label}{Top}, 'final descriptor state keeps the compiled gdata map inside compiled-gdata state');
+    ok(exists $descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}{Top}, 'final descriptor state keeps preferred dependency-regex map inside preferred state alias');
     is_deeply($descriptor_state->{compiled_gdata_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled gdata label order');
+    is_deeply($descriptor_state->{compiled_dependency_regex_state}{dependency_regex_by_label}, $descriptor_state->{compiled_gdata_state}{gdata_by_label}, 'dependency-regex alias data stays aligned with legacy gdata alias');
 
     my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr($descriptor_state);
     ok(ref($legacy_descr->{spec}) eq 'HASH' && ref($legacy_descr->{gdata}) eq 'HASH', 'compiled descriptor state still projects to the legacy outer descriptor shape');
     is_deeply($legacy_descr->{meta}{definition_order}, ['Top', 'Child'], 'legacy descriptor projection preserves definition-order metadata');
 };
 subtest 'compiled_descriptor_state_validation_view_exposes_ordered_rows' => sub {
-    plan tests => 7;
+    plan tests => 8;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9172,6 +9184,7 @@ SPEC
     ok(ref($validation_view) eq 'HASH', 'compiled descriptor validation view returns a hashref');
     is($validation_view->{kind}, 'compiled_descriptor_state_validation_view', 'compiled descriptor validation view exposes explicit kind');
     is_deeply([map { $_->[0] } @{$validation_view->{rule_rows}}], ['Top', 'Child'], 'compiled descriptor validation view preserves ordered rule rows');
+    is_deeply([map { $_->[0] } @{$validation_view->{dependency_regex_rows}}], ['Top'], 'compiled descriptor validation view also exposes ordered preferred dependency-regex rows');
     is_deeply([map { $_->[0] } @{$validation_view->{gdata_rows}}], ['Top'], 'compiled descriptor validation view preserves ordered gdata rows');
     ok(ref($validation_view->{rules_by_label}) eq 'HASH' && exists $validation_view->{rules_by_label}{Top} && exists $validation_view->{rules_by_label}{Child}, 'compiled descriptor validation view exposes by-label rule lookup');
 };

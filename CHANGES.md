@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: introduce dependency-regex state naming
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the preferred internal name for derived compiled `gdata` is now dependency-regex state, while historical `compiled_gdata_state`, `gdata_by_label`, and `gdata_rows` remain supported compatibility aliases over the same state payload,
+- updated `perl/LinkedSpec/Compiler.pm` so the active state-first compiler path now builds and normalizes that preferred dependency-regex state directly during `spec_gdata(...)` and final descriptor assembly, while still projecting the outward compatibility descriptor as `{ spec => ..., gdata => ... }`,
+- updated `perl/LinkedSpec/Validation.pm` so the shared validation-view engine now accepts the preferred `dependency_regex_rows` shape directly while keeping legacy `gdata_rows` compatibility intact,
+- widened `t/phase0_regression.t` so future resume now has direct coverage for:
+  - preferred dependency-regex aliases on compiled derived-state records,
+  - preferred dependency-regex aliases inside compiled descriptor state,
+  - owner routing through `new_compiled_dependency_regex_state(...)` and `normalize_compiled_dependency_regex_output(...)`,
+  - and descriptor-state validation views exposing ordered `dependency_regex_rows` alongside legacy `gdata_rows`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats `gdata` as historical compatibility vocabulary and dependency-regex state as the preferred internal compiler model.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=919`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: unify gdata validation view engine
 
 - updated `perl/LinkedSpec/Validation.pm` so both legacy `validate_gdata_references(...)` and descriptor-state validation now run through one shared validation-view engine instead of carrying two near-duplicate copies of the same gdata/rule consistency checks,

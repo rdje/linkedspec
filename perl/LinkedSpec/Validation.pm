@@ -297,10 +297,14 @@ sub _describe_validation_value_kind {
 
 sub _new_gdata_validation_view {
  my (%args) = @_;
+ my $dependency_regex_rows = (ref($args{dependency_regex_rows}) eq 'ARRAY')
+  ? $args{dependency_regex_rows}
+  : (ref($args{gdata_rows}) eq 'ARRAY' ? $args{gdata_rows} : []);
  return {
   kind => 'gdata_validation_view',
   version => 1,
-  gdata_rows => (ref($args{gdata_rows}) eq 'ARRAY') ? $args{gdata_rows} : [],
+  dependency_regex_rows => $dependency_regex_rows,
+  gdata_rows => $dependency_regex_rows,
   rule_rows => (ref($args{rule_rows}) eq 'ARRAY') ? $args{rule_rows} : [],
   rules_by_label => (ref($args{rules_by_label}) eq 'HASH') ? $args{rules_by_label} : {},
  }
@@ -311,7 +315,7 @@ sub _is_gdata_validation_view {
  return 0 unless ref($value) eq 'HASH';
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'gdata_validation_view';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
- return 0 unless ref($value->{gdata_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{dependency_regex_rows}) eq 'ARRAY' || ref($value->{gdata_rows}) eq 'ARRAY';
  return 0 unless ref($value->{rule_rows}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
  return 1
@@ -342,7 +346,7 @@ sub _build_legacy_gdata_validation_view {
  }
 
  return _new_gdata_validation_view(
-  gdata_rows => [map { [$_, $gdata->{$_}] } sort keys %$gdata],
+  dependency_regex_rows => [map { [$_, $gdata->{$_}] } sort keys %$gdata],
   rule_rows => [map { [$_, $rules_by_label->{$_}] } sort keys %$rules_by_label],
   rules_by_label => { %$rules_by_label },
  );
@@ -364,8 +368,11 @@ sub _validate_gdata_validation_view {
  }
 
  my $rules_by_label = $validation_view->{rules_by_label};
+ my $dependency_regex_rows = ref($validation_view->{dependency_regex_rows}) eq 'ARRAY'
+  ? $validation_view->{dependency_regex_rows}
+  : $validation_view->{gdata_rows};
 
- for my $row (@{$validation_view->{gdata_rows}}) {
+ for my $row (@$dependency_regex_rows) {
   my ($rule_name, $gdata_entry) = @$row;
 
   unless (exists $rules_by_label->{$rule_name}) {
@@ -489,7 +496,9 @@ sub _validate_compiled_descriptor_state_native {
 
  return _validate_gdata_validation_view(
   _new_gdata_validation_view(
-   gdata_rows => $validation_view->{gdata_rows},
+   dependency_regex_rows => (ref($validation_view->{dependency_regex_rows}) eq 'ARRAY'
+    ? $validation_view->{dependency_regex_rows}
+    : $validation_view->{gdata_rows}),
    rule_rows => $validation_view->{rule_rows},
    rules_by_label => $validation_view->{rules_by_label},
   ),

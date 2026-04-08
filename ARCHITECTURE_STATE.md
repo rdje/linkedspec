@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-04-07`
+- Last refreshed: `2026-04-08`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -202,15 +202,15 @@ One concrete architectural consequence matters now:
   - `rule_order`
   - `rules_by_label`
   - `duplicate_rule_labels`
-- default `spec_gdata(...)` now consumes that state directly and, on the active path, first builds an explicit internal `compiled_gdata_state` record instead of leaving compiled gdata as one last anonymous hash,
-- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record that composes compiled-spec state plus compiled-gdata state, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
+- default `spec_gdata(...)` now consumes that state directly and, on the active path, first builds an explicit internal dependency-regex state record, with historical `compiled_gdata_state` retained as a compatibility alias instead of as the preferred mental model,
+- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record that composes compiled-spec state plus dependency-regex state, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.rule_order`, and `meta.duplicate_rule_labels`,
 - generated-descriptor validation now also walks that descriptor state directly instead of routing back through the historical legacy `validate_gdata_references(...)` entrypoint, so compatibility descriptor projection is fully deferred until after descriptor-state validation succeeds,
 - and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
 That is a real structural improvement, not only a diagnostics tweak:
 
 - the compiler now has one explicit internal state-model owner behind its descriptor model,
-- derived gdata now also has one explicit internal state model,
+- derived dependency regexes now also have one explicit internal state model, with `gdata` kept as a compatibility alias,
 - final descriptor assembly now also has one explicit internal descriptor-state model,
 - generated-descriptor validation now also consumes that same descriptor-state model directly on the active path,
 - the last legacy compatibility-shape normalization seams for compiled spec and compiled gdata now also route through that same owner instead of living as local compiler glue,
@@ -221,10 +221,10 @@ That is a real structural improvement, not only a diagnostics tweak:
 - and descriptor migration-summary shaping now also routes through that same owner instead of being computed as a large compiler-local reduction over compiled rules,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
-- and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
+- and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`, even though the outward compatibility descriptor still calls that derived payload `gdata`.
 
 ### `LinkedSpec::CompilerState`
-- owns the internal compiled-spec, compiled-gdata, and compiled-descriptor state records,
+- owns the internal compiled-spec, dependency-regex, and compiled-descriptor state records,
 - owns normalization of legacy compatibility hashes into those explicit state records,
 - owns the preferred read-side accessors for that state as well,
 - owns the preferred ordered-rule iteration view for compiled-spec state as well,
@@ -234,6 +234,7 @@ That is a real structural improvement, not only a diagnostics tweak:
 - owns the preferred descriptor-state validation views as well,
 - owns validation-friendly shape checks for those records,
 - owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
+- treats historical `compiled_gdata_state`, `gdata_by_label`, and `gdata_rows` surfaces as compatibility aliases over the preferred dependency-regex state/read model,
 - is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`,
 - which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, direct rule-map probing, migration-summary reduction, descriptor-meta mutation, repeated descriptor-validation owner dispatch inside validation loops, descriptor-validation map flattening, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
 

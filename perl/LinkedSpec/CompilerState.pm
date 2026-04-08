@@ -288,81 +288,120 @@ sub record_compiled_spec_rule {
  return $is_duplicate
 }
 
-sub new_compiled_gdata_state {
+sub new_compiled_dependency_regex_state {
  my (%args) = @_;
  my $compiled_spec_state = $args{compiled_spec_state};
- my $compiled_gdata_by_label = $args{compiled_gdata_by_label};
+ my $compiled_dependency_regex_by_label = $args{compiled_dependency_regex_by_label};
 
- die "(LinkedSpec::CompilerState::new_compiled_gdata_state) -E- compiled spec state is invalid"
+ die "(LinkedSpec::CompilerState::new_compiled_dependency_regex_state) -E- compiled spec state is invalid"
   unless is_compiled_spec_state($compiled_spec_state);
- die "(LinkedSpec::CompilerState::new_compiled_gdata_state) -E- compiled gdata map must be HASH ref"
-  unless ref($compiled_gdata_by_label) eq 'HASH';
+ die "(LinkedSpec::CompilerState::new_compiled_dependency_regex_state) -E- compiled dependency-regex map must be HASH ref"
+  unless ref($compiled_dependency_regex_by_label) eq 'HASH';
 
  my $source_rule_order = [@{compiled_spec_state_rule_order($compiled_spec_state)}];
  my %seen_compiled;
  my @compiled_label_order = grep {
-  exists($compiled_gdata_by_label->{$_}) && !$seen_compiled{$_}++
+  exists($compiled_dependency_regex_by_label->{$_}) && !$seen_compiled{$_}++
  } @$source_rule_order;
+ my $dependency_regex_by_label = { %$compiled_dependency_regex_by_label };
 
  return {
   kind => 'compiled_gdata_state',
   version => 1,
   source_rule_order => $source_rule_order,
   compiled_label_order => \@compiled_label_order,
-  gdata_by_label => { %$compiled_gdata_by_label },
+  dependency_regex_by_label => $dependency_regex_by_label,
+  gdata_by_label => $dependency_regex_by_label,
  }
 }
 
-sub is_compiled_gdata_state {
+sub new_compiled_gdata_state {
+ my (%args) = @_;
+ return new_compiled_dependency_regex_state(
+  compiled_spec_state => $args{compiled_spec_state},
+  compiled_dependency_regex_by_label => $args{compiled_gdata_by_label},
+ )
+}
+
+sub is_compiled_dependency_regex_state {
  my ($value) = @_;
  return 0 unless ref($value) eq 'HASH';
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_gdata_state';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless ref($value->{source_rule_order}) eq 'ARRAY';
  return 0 unless ref($value->{compiled_label_order}) eq 'ARRAY';
- return 0 unless ref($value->{gdata_by_label}) eq 'HASH';
+ my $dependency_regex_by_label =
+  ref($value->{dependency_regex_by_label}) eq 'HASH' ? $value->{dependency_regex_by_label}
+  : ref($value->{gdata_by_label}) eq 'HASH' ? $value->{gdata_by_label}
+  : undef;
+ return 0 unless ref($dependency_regex_by_label) eq 'HASH';
  return 1
+}
+
+sub is_compiled_gdata_state {
+ my ($value) = @_;
+ return is_compiled_dependency_regex_state($value)
+}
+
+sub compiled_dependency_regex_state_regex_by_label {
+ my ($state) = @_;
+ return {} unless is_compiled_dependency_regex_state($state);
+ return ref($state->{dependency_regex_by_label}) eq 'HASH'
+  ? $state->{dependency_regex_by_label}
+  : $state->{gdata_by_label}
 }
 
 sub compiled_gdata_state_gdata_by_label {
  my ($state) = @_;
- return {} unless is_compiled_gdata_state($state);
- return $state->{gdata_by_label}
+ return compiled_dependency_regex_state_regex_by_label($state)
+}
+
+sub compiled_dependency_regex_state_to_legacy_gdata {
+ my ($state) = @_;
+ return undef unless is_compiled_dependency_regex_state($state);
+ return { %{compiled_dependency_regex_state_regex_by_label($state)} }
 }
 
 sub compiled_gdata_state_to_legacy_gdata {
  my ($state) = @_;
- return undef unless is_compiled_gdata_state($state);
- return { %{compiled_gdata_state_gdata_by_label($state)} }
+ return compiled_dependency_regex_state_to_legacy_gdata($state)
 }
 
 sub new_compiled_descriptor_state {
  my (%args) = @_;
  my $compiled_spec_state = $args{compiled_spec_state};
- my $compiled_gdata_state = $args{compiled_gdata_state};
+ my $compiled_dependency_regex_state =
+  defined($args{compiled_dependency_regex_state})
+   ? $args{compiled_dependency_regex_state}
+   : $args{compiled_gdata_state};
  my $meta = (ref($args{meta}) eq 'HASH') ? $args{meta} : {};
 
  die "(LinkedSpec::CompilerState::new_compiled_descriptor_state) -E- compiled spec state is invalid"
   unless is_compiled_spec_state($compiled_spec_state);
- die "(LinkedSpec::CompilerState::new_compiled_descriptor_state) -E- compiled gdata state is invalid"
-  unless is_compiled_gdata_state($compiled_gdata_state);
+ die "(LinkedSpec::CompilerState::new_compiled_descriptor_state) -E- compiled dependency-regex state is invalid"
+  unless is_compiled_dependency_regex_state($compiled_dependency_regex_state);
 
  return {
   kind => 'compiled_descriptor_state',
   version => 1,
   compiled_spec_state => $compiled_spec_state,
-  compiled_gdata_state => $compiled_gdata_state,
+  compiled_dependency_regex_state => $compiled_dependency_regex_state,
+  compiled_gdata_state => $compiled_dependency_regex_state,
   meta => { %$meta },
  }
 }
 
 sub is_compiled_descriptor_state {
  my ($value) = @_;
+ my $compiled_dependency_regex_state =
+  is_compiled_dependency_regex_state($value->{compiled_dependency_regex_state}) ? $value->{compiled_dependency_regex_state}
+  : is_compiled_dependency_regex_state($value->{compiled_gdata_state}) ? $value->{compiled_gdata_state}
+  : undef;
  return 0 unless ref($value) eq 'HASH';
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless is_compiled_spec_state($value->{compiled_spec_state});
- return 0 unless is_compiled_gdata_state($value->{compiled_gdata_state});
+ return 0 unless is_compiled_dependency_regex_state($compiled_dependency_regex_state);
  return 0 unless ref($value->{meta}) eq 'HASH';
  return 1
 }
@@ -373,39 +412,61 @@ sub compiled_descriptor_state_spec_state {
  return $state->{compiled_spec_state}
 }
 
-sub compiled_descriptor_state_gdata_state {
+sub compiled_descriptor_state_dependency_regex_state {
  my ($state) = @_;
  return undef unless is_compiled_descriptor_state($state);
- return $state->{compiled_gdata_state}
+ return is_compiled_dependency_regex_state($state->{compiled_dependency_regex_state})
+  ? $state->{compiled_dependency_regex_state}
+  : $state->{compiled_gdata_state}
+}
+
+sub compiled_descriptor_state_gdata_state {
+ my ($state) = @_;
+ return compiled_descriptor_state_dependency_regex_state($state)
+}
+
+sub compiled_descriptor_state_dependency_regex_by_label {
+ my ($state) = @_;
+ return {} unless is_compiled_descriptor_state($state);
+ return compiled_dependency_regex_state_regex_by_label(compiled_descriptor_state_dependency_regex_state($state))
 }
 
 sub compiled_descriptor_state_gdata_by_label {
  my ($state) = @_;
- return {} unless is_compiled_descriptor_state($state);
- return compiled_gdata_state_gdata_by_label(compiled_descriptor_state_gdata_state($state))
+ return compiled_descriptor_state_dependency_regex_by_label($state)
+}
+
+sub compiled_descriptor_state_dependency_regex_entry {
+ my ($state, $label) = @_;
+ return undef unless is_compiled_descriptor_state($state);
+ my $dependency_regex_by_label = compiled_descriptor_state_dependency_regex_by_label($state);
+ return $dependency_regex_by_label->{$label}
 }
 
 sub compiled_descriptor_state_gdata_entry {
  my ($state, $label) = @_;
- return undef unless is_compiled_descriptor_state($state);
- my $gdata_by_label = compiled_descriptor_state_gdata_by_label($state);
- return $gdata_by_label->{$label}
+ return compiled_descriptor_state_dependency_regex_entry($state, $label)
 }
 
-sub compiled_descriptor_state_gdata_rows {
+sub compiled_descriptor_state_dependency_regex_rows {
  my ($state) = @_;
  return [] unless is_compiled_descriptor_state($state);
 
- my $gdata_by_label = compiled_descriptor_state_gdata_by_label($state);
+ my $dependency_regex_by_label = compiled_descriptor_state_dependency_regex_by_label($state);
  my $rule_order = compiled_spec_state_rule_order(compiled_descriptor_state_spec_state($state));
  my %seen;
  my @rows = map {
   $seen{$_} = 1;
-  [$_, $gdata_by_label->{$_}]
- } grep { exists $gdata_by_label->{$_} } @$rule_order;
+  [$_, $dependency_regex_by_label->{$_}]
+ } grep { exists $dependency_regex_by_label->{$_} } @$rule_order;
 
- push @rows, map { [$_, $gdata_by_label->{$_}] } sort grep { !$seen{$_} } keys %$gdata_by_label;
+ push @rows, map { [$_, $dependency_regex_by_label->{$_}] } sort grep { !$seen{$_} } keys %$dependency_regex_by_label;
  return \@rows
+}
+
+sub compiled_descriptor_state_gdata_rows {
+ my ($state) = @_;
+ return compiled_descriptor_state_dependency_regex_rows($state)
 }
 
 sub compiled_descriptor_state_rules_by_label {
@@ -437,14 +498,15 @@ sub compiled_descriptor_state_validation_view {
  return undef unless is_compiled_descriptor_state($state);
 
  my $rule_rows = compiled_descriptor_state_rule_rows($state);
- my $gdata_rows = compiled_descriptor_state_gdata_rows($state);
+ my $dependency_regex_rows = compiled_descriptor_state_dependency_regex_rows($state);
  my $rules_by_label = compiled_descriptor_state_rules_by_label($state);
 
  return {
   kind => 'compiled_descriptor_state_validation_view',
   version => 1,
   rule_rows => [map { [@$_] } @$rule_rows],
-  gdata_rows => [map { [@$_] } @$gdata_rows],
+  dependency_regex_rows => [map { [@$_] } @$dependency_regex_rows],
+  gdata_rows => [map { [@$_] } @$dependency_regex_rows],
   rules_by_label => { %$rules_by_label },
  }
 }
@@ -455,7 +517,7 @@ sub is_compiled_descriptor_state_validation_view {
  return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state_validation_view';
  return 0 unless defined($value->{version}) && $value->{version} == 1;
  return 0 unless ref($value->{rule_rows}) eq 'ARRAY';
- return 0 unless ref($value->{gdata_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{dependency_regex_rows}) eq 'ARRAY' || ref($value->{gdata_rows}) eq 'ARRAY';
  return 0 unless ref($value->{rules_by_label}) eq 'HASH';
  return 1
 }
@@ -471,7 +533,7 @@ sub compiled_descriptor_state_to_legacy_descr {
  return undef unless is_compiled_descriptor_state($state);
  return {
   spec => compiled_spec_state_to_legacy_spec(compiled_descriptor_state_spec_state($state)),
-  gdata => compiled_gdata_state_to_legacy_gdata(compiled_descriptor_state_gdata_state($state)),
+  gdata => compiled_dependency_regex_state_to_legacy_gdata(compiled_descriptor_state_dependency_regex_state($state)),
   meta => { %{compiled_descriptor_state_meta($state)} },
  }
 }
@@ -496,23 +558,28 @@ sub normalize_compiled_spec_input {
  return $state
 }
 
-sub normalize_compiled_gdata_output {
+sub normalize_compiled_dependency_regex_output {
  my ($value, $compiled_spec_state, %args) = @_;
  my $on_invalid = $args{on_invalid};
- return $value if is_compiled_gdata_state($value);
+ return $value if is_compiled_dependency_regex_state($value);
 
  unless (ref($value) eq 'HASH') {
   my $detail = defined($on_invalid) && ref($on_invalid) eq 'CODE'
    ? $on_invalid->($value)
    : undef;
   die(($detail =~ /\n\z/) ? $detail : "$detail\n") if defined($detail) && length($detail);
-  die "(LinkedSpec::CompilerState::normalize_compiled_gdata_output) -E- expected HASH or compiled_gdata_state";
+  die "(LinkedSpec::CompilerState::normalize_compiled_dependency_regex_output) -E- expected HASH or compiled_dependency_regex_state";
  }
 
- return new_compiled_gdata_state(
+ return new_compiled_dependency_regex_state(
   compiled_spec_state => $compiled_spec_state,
-  compiled_gdata_by_label => $value,
+  compiled_dependency_regex_by_label => $value,
  )
+}
+
+sub normalize_compiled_gdata_output {
+ my ($value, $compiled_spec_state, %args) = @_;
+ return normalize_compiled_dependency_regex_output($value, $compiled_spec_state, %args)
 }
 
 1;

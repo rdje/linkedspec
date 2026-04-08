@@ -257,6 +257,22 @@ sub _record_compiled_spec_rule {
  return _call_compiler_state('record_compiled_spec_rule', @_)
 }
 
+sub _new_compiled_dependency_regex_state {
+ return _call_compiler_state('new_compiled_dependency_regex_state', @_)
+}
+
+sub _is_compiled_dependency_regex_state {
+ return _call_compiler_state('is_compiled_dependency_regex_state', @_)
+}
+
+sub _compiled_dependency_regex_state_regex_by_label {
+ return _call_compiler_state('compiled_dependency_regex_state_regex_by_label', @_)
+}
+
+sub _compiled_dependency_regex_state_to_legacy_gdata {
+ return _call_compiler_state('compiled_dependency_regex_state_to_legacy_gdata', @_)
+}
+
 sub _new_compiled_gdata_state {
  return _call_compiler_state('new_compiled_gdata_state', @_)
 }
@@ -285,6 +301,14 @@ sub _compiled_descriptor_state_spec_state {
  return _call_compiler_state('compiled_descriptor_state_spec_state', @_)
 }
 
+sub _compiled_descriptor_state_dependency_regex_state {
+ return _call_compiler_state('compiled_descriptor_state_dependency_regex_state', @_)
+}
+
+sub _compiled_descriptor_state_dependency_regex_by_label {
+ return _call_compiler_state('compiled_descriptor_state_dependency_regex_by_label', @_)
+}
+
 sub _compiled_descriptor_state_gdata_state {
  return _call_compiler_state('compiled_descriptor_state_gdata_state', @_)
 }
@@ -303,6 +327,16 @@ sub _compiled_descriptor_state_meta {
 
 sub _compiled_descriptor_state_to_legacy_descr {
  return _call_compiler_state('compiled_descriptor_state_to_legacy_descr', @_)
+}
+
+sub _normalize_compiled_dependency_regex_output {
+ my ($value, $compiled_spec_state) = @_;
+ return _call_compiler_state(
+  'normalize_compiled_dependency_regex_output',
+  $value,
+  $compiled_spec_state,
+  on_invalid => sub { return _describe_final_descr_gdata_result($_[0]) },
+ );
 }
 
 sub _normalize_compiled_spec_input {
@@ -537,9 +571,9 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
 
  my $legacy_gdata = \%gdata;
  my $result = (ref($option) eq 'HASH' && $option->{return_state})
-  ? _new_compiled_gdata_state(
+  ? _new_compiled_dependency_regex_state(
      compiled_spec_state => $sg,
-     compiled_gdata_by_label => $legacy_gdata,
+     compiled_dependency_regex_by_label => $legacy_gdata,
     )
   : $legacy_gdata;
  _clear_active_spec_gdata_rule_label();
@@ -557,16 +591,6 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
  return $result
 }
 
-sub _normalize_compiled_gdata_output {
- my ($value, $compiled_spec_state) = @_;
- return _call_compiler_state(
-  'normalize_compiled_gdata_output',
-  $value,
-  $compiled_spec_state,
-  on_invalid => sub { return _describe_final_descr_gdata_result($_[0]) },
- );
-}
-
 sub _build_final_descr_state {
  my ($compiled_spec_input, $spec_gdata_cb, %args) = @_;
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
@@ -576,7 +600,7 @@ sub _build_final_descr_state {
  my $compiled_gdata_input = $use_default_spec_gdata
   ? $spec_gdata_cb->($compiled_state, { return_state => 1 })
   : $spec_gdata_cb->($legacy_spec);
- my $compiled_gdata_state = _normalize_compiled_gdata_output($compiled_gdata_input, $compiled_state);
+ my $compiled_dependency_regex_state = _normalize_compiled_dependency_regex_output($compiled_gdata_input, $compiled_state);
 
  my $compiled_state_meta = _build_compiled_descriptor_meta(
   $compiled_state,
@@ -586,7 +610,7 @@ sub _build_final_descr_state {
 
  return _new_compiled_descriptor_state(
   compiled_spec_state => $compiled_state,
-  compiled_gdata_state => $compiled_gdata_state,
+  compiled_dependency_regex_state => $compiled_dependency_regex_state,
   meta => $compiled_state_meta,
  );
 }

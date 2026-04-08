@@ -5,6 +5,17 @@ This guide explains LinkedSpec in two layers:
 
 For current LinkedSpec work, the second layer matters the most. If you want `.spec` files that stay backend-neutral and portable across future non-Perl backends, you should understand the lowering surface and keep `.spec` authoring on the canonical method-like DSL rather than on raw Perl fragments.
 
+## Internal Compiler Model Note
+For advanced compiler/descriptor work, one naming point is now explicit:
+- historical `gdata` is still the outward compatibility term in returned descriptors and legacy validation seams,
+- but the preferred internal compiler model is now "dependency-regex state",
+- so current architecture/docs should be read as:
+  - `compiled_spec_state`
+  - `compiled_dependency_regex_state`
+  - `compiled_descriptor_state`
+
+That distinction matters because the project is refactoring toward clearer state models, not preserving every historical struct name as the best long-term mental model. When you see `gdata` in current public or compatibility surfaces, read it as the legacy outward alias for the compiler's derived dependency-regex payload.
+
 ## Authoring Contract
 The project direction is now explicit:
 - `.spec` files are intended to become 100% raw-Perl-free,
