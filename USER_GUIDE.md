@@ -1093,6 +1093,7 @@ That compatibility lane now covers both:
 There is one important internal-model change behind that outer descriptor shape now:
 
 - the compiler no longer treats the legacy rule-label => info hash as its own working source of truth,
+- the internal compiled-state model now lives in `LinkedSpec::CompilerState` instead of being split between `Compiler.pm` and `Validation.pm`,
 - it first builds an explicit internal `compiled_spec_state`,
 - default `spec_gdata(...)` now derives combined regex/dependency data from that state and can expose the result as an explicit internal `compiled_gdata_state`,
 - and the outward descriptor `{ spec => ..., gdata => ... }` is now a compatibility projection of that richer internal model.

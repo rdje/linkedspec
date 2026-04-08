@@ -9021,6 +9021,42 @@ SPEC
     is_deeply($gdata_state->{compiled_label_order}, ['Top'], 'compiled gdata state preserves deterministic compiled label order');
     ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
 };
+subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
+    plan tests => 5;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my $orig_new_compiled_spec_state = \&LinkedSpec::CompilerState::new_compiled_spec_state;
+    my $orig_is_compiled_descriptor_state = \&LinkedSpec::CompilerState::is_compiled_descriptor_state;
+    my ($ok_run, $descr, $err) = (0, undef, '');
+    my ($saw_new_compiled_spec_state, $saw_is_compiled_descriptor_state) = (0, 0);
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::CompilerState::new_compiled_spec_state = sub {
+            $saw_new_compiled_spec_state = 1;
+            return $orig_new_compiled_spec_state->(@_);
+        };
+        local *LinkedSpec::CompilerState::is_compiled_descriptor_state = sub {
+            $saw_is_compiled_descriptor_state = 1;
+            return $orig_is_compiled_descriptor_state->(@_);
+        };
+        $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'compiler pipeline succeeds while compiler-state owner seams are trapped') or diag(normalize_error($err));
+    ok($saw_new_compiled_spec_state, 'Compiler.pm routes compiled-spec state creation through LinkedSpec::CompilerState');
+    ok($saw_is_compiled_descriptor_state, 'Validation.pm routes descriptor-state validation through LinkedSpec::CompilerState');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-state owner routing still returns descriptor hash');
+    ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler-state owner routing still preserves compiled handler coderef');
+};
 subtest 'compiler_build_final_descr_state_builds_explicit_compiled_descriptor_state' => sub {
     plan tests => 14;
 

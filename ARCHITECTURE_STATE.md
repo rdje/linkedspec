@@ -189,7 +189,7 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 ### `LinkedSpec::Compiler`
 - is the main compile pipeline coordinator,
 - owns validation/bootstrap/descriptor-build orchestration,
-- now builds one explicit internal compiled-spec state first and treats that as the source of truth for later descriptor assembly,
+- now coordinates one explicit internal compiled-state model first and treats that as the source of truth for later descriptor assembly,
 - still emits the legacy descriptor `{ spec => ..., gdata => ... }` shape at the outer boundary for compatibility, but that is now a projection of the compiled-spec state rather than the compiler's own working model,
 - carries much of the compile-stage structured-diagnostics normalization,
 - is one of the project's main implementation centers.
@@ -209,13 +209,19 @@ One concrete architectural consequence matters now:
 
 That is a real structural improvement, not only a diagnostics tweak:
 
-- the compiler now has one explicit internal descriptor model,
+- the compiler now has one explicit internal state-model owner behind its descriptor model,
 - derived gdata now also has one explicit internal state model,
 - final descriptor assembly now also has one explicit internal descriptor-state model,
 - generated-descriptor validation now also consumes that same descriptor-state model directly on the active path,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
 - and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
+
+### `LinkedSpec::CompilerState`
+- owns the internal compiled-spec, compiled-gdata, and compiled-descriptor state records,
+- owns validation-friendly shape checks for those records,
+- owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
+- is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`.
 
 One more boundary is now tighter too:
 

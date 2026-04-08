@@ -29,6 +29,11 @@ sub _call_preserving_err {
  return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
+sub _call_compiler_state {
+ my ($subname, @args) = @_;
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
+}
+
 sub _trace_log_output {
  my @args = @_;
  return _call_preserving_err(sub {
@@ -290,37 +295,6 @@ sub _describe_validation_value_kind {
  return ref($value) ? ref($value) : 'SCALAR';
 }
 
-sub _is_compiled_descriptor_state {
- my ($value) = @_;
-
- return 0 unless ref($value) eq 'HASH';
- return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_descriptor_state';
- return 0 unless defined($value->{version}) && $value->{version} == 1;
- return 0 unless ref($value->{compiled_spec_state}) eq 'HASH';
- return 0 unless ref($value->{compiled_spec_state}{rules_by_label}) eq 'HASH';
- return 0 unless _is_compiled_gdata_state($value->{compiled_gdata_state});
- return 0 unless ref($value->{meta}) eq 'HASH';
- return 1;
-}
-
-sub _is_compiled_gdata_state {
- my ($value) = @_;
-
- return 0 unless ref($value) eq 'HASH';
- return 0 unless defined($value->{kind}) && $value->{kind} eq 'compiled_gdata_state';
- return 0 unless defined($value->{version}) && $value->{version} == 1;
- return 0 unless ref($value->{source_rule_order}) eq 'ARRAY';
- return 0 unless ref($value->{compiled_label_order}) eq 'ARRAY';
- return 0 unless ref($value->{gdata_by_label}) eq 'HASH';
- return 1;
-}
-
-sub _compiled_gdata_state_gdata_by_label {
- my ($state) = @_;
- return {} unless _is_compiled_gdata_state($state);
- return $state->{gdata_by_label};
-}
-
 sub _validate_gdata_against_rules_by_label {
  my ($gdata, $rules_by_label, $option) = @_;
  unless (ref($gdata) eq 'HASH') {
@@ -455,7 +429,7 @@ sub validate_compiled_descriptor_state {
  my ($descriptor_state, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
 
- unless (_is_compiled_descriptor_state($descriptor_state)) {
+ unless (_call_compiler_state('is_compiled_descriptor_state', $descriptor_state)) {
   my $detail = 'Expected compiled_descriptor_state HASH reference, got '
    . _describe_validation_value_kind($descriptor_state);
   _notify_gdata_validation_failure(
@@ -468,8 +442,8 @@ sub validate_compiled_descriptor_state {
  }
 
  return _validate_gdata_against_rules_by_label(
-  _compiled_gdata_state_gdata_by_label($descriptor_state->{compiled_gdata_state}),
-  $descriptor_state->{compiled_spec_state}{rules_by_label},
+  _call_compiler_state('compiled_descriptor_state_gdata_by_label', $descriptor_state),
+  _call_compiler_state('compiled_spec_state_rules_by_label', $descriptor_state->{compiled_spec_state}),
   $option,
  );
 }

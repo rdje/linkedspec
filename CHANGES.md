@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: extract compiler state owner
+
+- added `perl/LinkedSpec/CompilerState.pm` as the dedicated owner for `compiled_spec_state`, `compiled_gdata_state`, and `compiled_descriptor_state`,
+- updated `perl/LinkedSpec/Compiler.pm` so the compile pipeline now delegates compiled-state construction, shape checks, and legacy projection through `LinkedSpec::CompilerState` instead of defining that state model inline,
+- updated `perl/LinkedSpec/Validation.pm` so generated-descriptor validation now also delegates compiled-state shape logic through `LinkedSpec::CompilerState` instead of carrying a local copy of descriptor/gdata-state validation knowledge,
+- widened `t/phase0_regression.t` with one direct routing lock proving `Compiler.pm` and `Validation.pm` now route their state-model work through `LinkedSpec::CompilerState`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats the compiled state model as its own owner seam now instead of as private inline logic split across compiler/validation modules.
+
+- Validation:
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: add compiled gdata state seam
 
 - updated `perl/LinkedSpec/Compiler.pm` so `spec_gdata(...)` now supports `{ return_state => 1 }` and returns one explicit internal `compiled_gdata_state` record with source rule order, compiled-label order, and `gdata_by_label` content instead of only the historical raw gdata hash,
