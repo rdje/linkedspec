@@ -251,6 +251,7 @@ One more boundary is now tighter too:
 ### `LinkedSpec::Validation`
 - owns frontend hardening before bootstrap or runtime failure,
 - checks malformed rule starts, modes, split markers, edges, and top-level paragraph structure,
+- now also uses one shared gdata-validation engine across both legacy hash inputs and owner-provided descriptor-state validation views,
 - remains strategically important because it is the earliest trustworthy barrier against bad DSL input.
 
 ### `LinkedSpec::SpecEntry`

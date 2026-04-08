@@ -1178,6 +1178,7 @@ That same owner boundary now covers read-side state access too:
 
 - compiler trace/logging reads such as compiled-spec definition order and duplicate-label lists now go through `LinkedSpec::CompilerState` accessors,
 - generated-descriptor validation now also consumes one owner-provided descriptor-state validation view from `LinkedSpec::CompilerState`, so rule rows, gdata rows, and by-label lookup are assembled once at the owner boundary instead of being rebuilt through repeated owner dispatch from inside validation loops,
+- and that validation logic now also goes through one shared validation-view engine in `Validation.pm`, so the legacy `validate_gdata_references(...)` surface and the newer descriptor-state validation surface no longer carry separate copies of the same gdata/rule consistency checks,
 - ordered compiled-rule iteration now also goes through one `LinkedSpec::CompilerState` view rather than rebuilding it ad hoc from `rule_order + rules_by_label`,
 - and compiled-spec dependency lookup during `spec_gdata(...)` now also goes through `LinkedSpec::CompilerState` helpers rather than direct compiler-side rule-map probing,
 - while compiled-descriptor metadata assembly now also goes through `LinkedSpec::CompilerState` rather than `Compiler.pm` mutating owner metadata locally,

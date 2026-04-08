@@ -295,7 +295,29 @@ sub _describe_validation_value_kind {
  return ref($value) ? ref($value) : 'SCALAR';
 }
 
-sub _validate_gdata_against_rules_by_label {
+sub _new_gdata_validation_view {
+ my (%args) = @_;
+ return {
+  kind => 'gdata_validation_view',
+  version => 1,
+  gdata_rows => (ref($args{gdata_rows}) eq 'ARRAY') ? $args{gdata_rows} : [],
+  rule_rows => (ref($args{rule_rows}) eq 'ARRAY') ? $args{rule_rows} : [],
+  rules_by_label => (ref($args{rules_by_label}) eq 'HASH') ? $args{rules_by_label} : {},
+ }
+}
+
+sub _is_gdata_validation_view {
+ my ($value) = @_;
+ return 0 unless ref($value) eq 'HASH';
+ return 0 unless defined($value->{kind}) && $value->{kind} eq 'gdata_validation_view';
+ return 0 unless defined($value->{version}) && $value->{version} == 1;
+ return 0 unless ref($value->{gdata_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{rule_rows}) eq 'ARRAY';
+ return 0 unless ref($value->{rules_by_label}) eq 'HASH';
+ return 1
+}
+
+sub _build_legacy_gdata_validation_view {
  my ($gdata, $rules_by_label, $option) = @_;
  unless (ref($gdata) eq 'HASH') {
   my $detail = "Expected HASH reference, got " . _describe_validation_value_kind($gdata);
@@ -305,7 +327,7 @@ sub _validate_gdata_against_rules_by_label {
    detail => $detail,
   );
   _trace_log_output(DUMP_NONE, "Invalid gdata structure", $detail);
-  return 0;
+  return undef;
  }
 
  unless (ref($rules_by_label) eq 'HASH') {
@@ -316,128 +338,28 @@ sub _validate_gdata_against_rules_by_label {
    detail => $detail,
   );
   _trace_log_output(DUMP_NONE, "Invalid spec structure", $detail);
-  return 0;
+  return undef;
  }
 
- for my $rule_name (keys %$gdata) {
-  my $gdata_entry = $gdata->{$rule_name};
-
-  unless (exists $rules_by_label->{$rule_name}) {
-   my $summary = "Gdata references non-existent rule '$rule_name'";
-   my $detail = 'Rule not found in spec';
-   _notify_gdata_validation_failure(
-    $option,
-    summary => $summary,
-    detail => $detail,
-    rule_label => $rule_name,
-   );
-   _trace_log_output(DUMP_NONE, $summary, $detail);
-   return 0;
-  }
-
-  unless (ref($gdata_entry) eq 'Regexp') {
-   my $summary = "Invalid gdata entry for rule '$rule_name'";
-   my $detail = "Expected compiled regex, got " . ref($gdata_entry);
-   _notify_gdata_validation_failure(
-    $option,
-    summary => $summary,
-    detail => $detail,
-    rule_label => $rule_name,
-   );
-   _trace_log_output(DUMP_NONE, $summary, $detail);
-   return 0;
-  }
- }
-
- for my $rule_name (keys %$rules_by_label) {
-  my $rule_def = $rules_by_label->{$rule_name};
-
-  my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
-  my $validate_rule_definition_error = $@;
-  if ($validate_rule_definition_error) {
-   _notify_gdata_validation_failure(
-    $option,
-    summary => "Rule definition validation failed for rule '$rule_name'",
-    detail => $validate_rule_definition_error,
-    rule_label => $rule_name,
-   );
-   die $validate_rule_definition_error;
-  }
-
-  unless ($rule_valid) {
-   _notify_gdata_validation_failure(
-    $option,
-    summary => "Invalid rule definition for rule '$rule_name'",
-    detail => "validate_rule_definition returned false for rule '$rule_name'",
-    rule_label => $rule_name,
-   );
-   return 0;
-  }
-
-  if (exists $rule_def->{gdata} && ref($rule_def->{gdata}) eq 'ARRAY') {
-   for my $i (0..$#{$rule_def->{gdata}}) {
-    my $element = $rule_def->{gdata}[$i];
-    unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
-     my $summary = "Invalid gdata element at index $i for rule '$rule_name'";
-     my $detail = "Expected HASH with 'label' and 'idx' keys";
-     _notify_gdata_validation_failure(
-      $option,
-      summary => $summary,
-      detail => $detail,
-      rule_label => $rule_name,
-     );
-     _trace_log_output(DUMP_NONE, $summary, $detail);
-     return 0;
-    }
-
-    my $ref_rule = $element->{label};
-    unless (exists $rules_by_label->{$ref_rule}) {
-     my $summary = "Gdata element references non-existent rule '$ref_rule'";
-     my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
-     _notify_gdata_validation_failure(
-      $option,
-      summary => $summary,
-      detail => $detail,
-      rule_label => $rule_name,
-     );
-     _trace_log_output(DUMP_NONE, $summary, $detail);
-     return 0;
-    }
-
-    my $ref_idx = $element->{idx};
-    my $ref_rule_def = $rules_by_label->{$ref_rule};
-    unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
-     my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
-     my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";
-     _notify_gdata_validation_failure(
-      $option,
-      summary => $summary,
-      detail => $detail,
-      rule_label => $rule_name,
-     );
-     _trace_log_output(DUMP_NONE, $summary, $detail);
-     return 0;
-    }
-   }
-  }
- }
-
- return 1;
+ return _new_gdata_validation_view(
+  gdata_rows => [map { [$_, $gdata->{$_}] } sort keys %$gdata],
+  rule_rows => [map { [$_, $rules_by_label->{$_}] } sort keys %$rules_by_label],
+  rules_by_label => { %$rules_by_label },
+ );
 }
 
-sub _validate_compiled_descriptor_state_native {
- my ($descriptor_state, $option) = @_;
- my $validation_view = _call_compiler_state('compiled_descriptor_state_validation_view', $descriptor_state);
+sub _validate_gdata_validation_view {
+ my ($validation_view, $option) = @_;
 
- unless (_call_compiler_state('is_compiled_descriptor_state_validation_view', $validation_view)) {
-  my $detail = 'Expected compiled_descriptor_state_validation_view HASH reference, got '
+ unless (_is_gdata_validation_view($validation_view)) {
+  my $detail = 'Expected gdata_validation_view HASH reference, got '
    . _describe_validation_value_kind($validation_view);
   _notify_gdata_validation_failure(
    $option,
-   summary => 'Invalid compiled descriptor validation view',
+   summary => 'Invalid gdata validation view',
    detail => $detail,
   );
-  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor validation view', $detail);
+  _trace_log_output(DUMP_NONE, 'Invalid gdata validation view', $detail);
   return 0;
  }
 
@@ -516,16 +438,16 @@ sub _validate_compiled_descriptor_state_native {
 
     my $ref_rule = $element->{label};
     unless (exists $rules_by_label->{$ref_rule}) {
-     my $summary = "Gdata element references non-existent rule '$ref_rule'";
-     my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
-     _notify_gdata_validation_failure(
-      $option,
-      summary => $summary,
-      detail => $detail,
-      rule_label => $rule_name,
-     );
-     _trace_log_output(DUMP_NONE, $summary, $detail);
-     return 0;
+      my $summary = "Gdata element references non-existent rule '$ref_rule'";
+      my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
+      _notify_gdata_validation_failure(
+       $option,
+       summary => $summary,
+       detail => $detail,
+       rule_label => $rule_name,
+      );
+      _trace_log_output(DUMP_NONE, $summary, $detail);
+      return 0;
     }
 
     my $ref_idx = $element->{idx};
@@ -547,6 +469,32 @@ sub _validate_compiled_descriptor_state_native {
  }
 
  return 1;
+}
+
+sub _validate_compiled_descriptor_state_native {
+ my ($descriptor_state, $option) = @_;
+ my $validation_view = _call_compiler_state('compiled_descriptor_state_validation_view', $descriptor_state);
+
+ unless (_call_compiler_state('is_compiled_descriptor_state_validation_view', $validation_view)) {
+  my $detail = 'Expected compiled_descriptor_state_validation_view HASH reference, got '
+   . _describe_validation_value_kind($validation_view);
+  _notify_gdata_validation_failure(
+   $option,
+   summary => 'Invalid compiled descriptor validation view',
+   detail => $detail,
+  );
+  _trace_log_output(DUMP_NONE, 'Invalid compiled descriptor validation view', $detail);
+  return 0;
+ }
+
+ return _validate_gdata_validation_view(
+  _new_gdata_validation_view(
+   gdata_rows => $validation_view->{gdata_rows},
+   rule_rows => $validation_view->{rule_rows},
+   rules_by_label => $validation_view->{rules_by_label},
+  ),
+  $option,
+ );
 }
 
 sub validate_compiled_descriptor_state {
@@ -571,7 +519,9 @@ sub validate_compiled_descriptor_state {
 sub validate_gdata_references {
  my ($gdata, $spec, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
- return _validate_gdata_against_rules_by_label($gdata, $spec, $option);
+ my $validation_view = _build_legacy_gdata_validation_view($gdata, $spec, $option);
+ return 0 unless defined $validation_view;
+ return _validate_gdata_validation_view($validation_view, $option);
 }
 
 sub validate_dsl_syntax {

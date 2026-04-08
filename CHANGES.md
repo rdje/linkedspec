@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: unify gdata validation view engine
+
+- updated `perl/LinkedSpec/Validation.pm` so both legacy `validate_gdata_references(...)` and descriptor-state validation now run through one shared validation-view engine instead of carrying two near-duplicate copies of the same gdata/rule consistency checks,
+- kept the owner-provided descriptor-state validation-view path intact while adding one low-level regression that `validate_gdata_references(...)` still accepts valid legacy `gdata` / `spec` hash inputs directly,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats validation-view unification as part of the same state-first hardening line.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=919`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: centralize descriptor validation view assembly
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes one explicit `compiled_descriptor_state_validation_view(...)` contract for ordered rule rows, ordered gdata rows, and by-label rule lookup,

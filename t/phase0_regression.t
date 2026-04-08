@@ -9223,6 +9223,25 @@ SPEC
     ok(ref($descriptor_state->{compiled_gdata_state}{gdata_by_label}) eq 'HASH', 'compiled descriptor state retains compiled gdata map for validation');
     ok(ref($descriptor_state->{compiled_spec_state}{rules_by_label}) eq 'HASH', 'compiled descriptor state retains compiled spec map for validation');
 };
+subtest 'validation_accepts_legacy_gdata_and_spec_hash_input' => sub {
+    plan tests => 4;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Child
+
+Child::
+ /b/ { return_undef() }
+SPEC
+
+    my $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
+    ok(ref($descr) eq 'HASH', 'return_descr builds descriptor hash for legacy gdata validation test');
+    ok(ref($descr->{gdata}) eq 'HASH' && ref($descr->{spec}) eq 'HASH', 'descriptor exposes legacy gdata/spec hash inputs');
+
+    my $valid = LinkedSpec::Validation::validate_gdata_references($descr->{gdata}, $descr->{spec});
+    ok($valid, 'legacy validate_gdata_references still accepts valid gdata/spec hash inputs');
+    ok(exists $descr->{gdata}{Top} && exists $descr->{spec}{Top}, 'legacy validation test keeps expected rule entries available');
+};
 subtest 'validation_compiled_descriptor_state_avoids_legacy_gdata_validator' => sub {
     plan tests => 4;
 
