@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: centralize compiled rule lookup
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes explicit by-label compiled-rule lookup helpers:
+  - `compiled_spec_state_has_rule(...)`
+  - `compiled_spec_state_rule_info(...)`
+- updated `perl/LinkedSpec/Compiler.pm` so `spec_gdata(...)` now resolves dependency existence and dependent-rule lookup through those `LinkedSpec::CompilerState` helpers instead of probing the compiled rule map directly,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves compiled-spec dependency lookup routes through `LinkedSpec::CompilerState`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats by-label compiled-rule lookup as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: centralize compiled rule iteration
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes one canonical ordered compiled-rule view via `compiled_spec_state_rule_rows(...)`,

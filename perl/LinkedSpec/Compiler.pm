@@ -367,6 +367,14 @@ sub _compiled_spec_state_rules_by_label {
  return _call_compiler_state('compiled_spec_state_rules_by_label', @_)
 }
 
+sub _compiled_spec_state_has_rule {
+ return _call_compiler_state('compiled_spec_state_has_rule', @_)
+}
+
+sub _compiled_spec_state_rule_info {
+ return _call_compiler_state('compiled_spec_state_rule_info', @_)
+}
+
 sub _compiled_spec_state_rule_order {
  return _call_compiler_state('compiled_spec_state_rule_order', @_)
 }
@@ -617,7 +625,6 @@ sub spec_gdata {
  }
 
 my %gdata;
-my $rules_by_label = _compiled_spec_state_rules_by_label($sg);
 foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
   my ($label, $rule_info) = @$row;
   $ACTIVE_SPEC_GDATA_RULE_LABEL = $label;
@@ -638,8 +645,8 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
    _die_with_detail(_describe_spec_gdata_dependency_index_result($label, $dep_idx, $gde_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
    _die_with_detail(_describe_spec_gdata_dependency_rule_missing($label, $dep_label, $dep_idx))
-    unless exists $rules_by_label->{$dep_label};
-   my $dep_rule = $rules_by_label->{$dep_label};
+    unless _compiled_spec_state_has_rule($sg, $dep_label);
+   my $dep_rule = _compiled_spec_state_rule_info($sg, $dep_label);
    _die_with_detail(_describe_spec_gdata_dependency_rule_info_result($label, $dep_label, $dep_rule))
     unless ref($dep_rule) eq 'HASH';
    my $dep_re = $dep_rule->{re};

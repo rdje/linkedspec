@@ -48,6 +48,19 @@ sub compiled_spec_state_rules_by_label {
  return $state->{rules_by_label}
 }
 
+sub compiled_spec_state_has_rule {
+ my ($state, $label) = @_;
+ return 0 unless is_compiled_spec_state($state);
+ return exists $state->{rules_by_label}{$label} ? 1 : 0
+}
+
+sub compiled_spec_state_rule_info {
+ my ($state, $label) = @_;
+ return undef unless is_compiled_spec_state($state);
+ return undef unless compiled_spec_state_has_rule($state, $label);
+ return $state->{rules_by_label}{$label}
+}
+
 sub compiled_spec_state_rule_order {
  my ($state) = @_;
  return [] unless is_compiled_spec_state($state);

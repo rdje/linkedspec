@@ -216,6 +216,7 @@ That is a real structural improvement, not only a diagnostics tweak:
 - the last legacy compatibility-shape normalization seams for compiled spec and compiled gdata now also route through that same owner instead of living as local compiler glue,
 - and read-side compiled-state access for definition-order, duplicate-label, and descriptor-to-rule-map reads now also routes through that same owner instead of peeking raw state fields directly,
 - while ordered compiled-rule iteration now also comes from one owner-provided `rule_rows` view instead of being rebuilt ad hoc from `rule_order + rules_by_label` in compiler consumers,
+- and compiled-spec dependency existence / rule-info lookup now also routes through that same owner instead of direct compiler-side map probing during `spec_gdata(...)`,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
 - and `spec_gdata(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`.
@@ -225,10 +226,11 @@ That is a real structural improvement, not only a diagnostics tweak:
 - owns normalization of legacy compatibility hashes into those explicit state records,
 - owns the preferred read-side accessors for that state as well,
 - owns the preferred ordered-rule iteration view for compiled-spec state as well,
+- owns the preferred by-label compiled-rule lookup helpers as well,
 - owns validation-friendly shape checks for those records,
 - owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
 - is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`,
-- which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
+- which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, direct rule-map probing, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
 
 One more boundary is now tighter too:
 
