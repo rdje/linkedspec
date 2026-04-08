@@ -9022,7 +9022,7 @@ SPEC
     ok(exists $gdata_state->{gdata_by_label}{Top} && !exists $gdata_state->{gdata_by_label}{Child}, 'compiled gdata state keeps only rules with compiled dependency regexes');
 };
 subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
-    plan tests => 15;
+    plan tests => 18;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9041,11 +9041,14 @@ SPEC
     my $orig_compiled_spec_state_definition_order = \&LinkedSpec::CompilerState::compiled_spec_state_definition_order;
     my $orig_compiled_spec_state_duplicate_rule_labels = \&LinkedSpec::CompilerState::compiled_spec_state_duplicate_rule_labels;
     my $orig_is_compiled_descriptor_state = \&LinkedSpec::CompilerState::is_compiled_descriptor_state;
-    my $orig_compiled_descriptor_state_rules_by_label = \&LinkedSpec::CompilerState::compiled_descriptor_state_rules_by_label;
+    my $orig_compiled_descriptor_state_gdata_rows = \&LinkedSpec::CompilerState::compiled_descriptor_state_gdata_rows;
+    my $orig_compiled_descriptor_state_rule_rows = \&LinkedSpec::CompilerState::compiled_descriptor_state_rule_rows;
+    my $orig_compiled_descriptor_state_has_rule = \&LinkedSpec::CompilerState::compiled_descriptor_state_has_rule;
+    my $orig_compiled_descriptor_state_rule_info = \&LinkedSpec::CompilerState::compiled_descriptor_state_rule_info;
     my $orig_normalize_compiled_spec_input = \&LinkedSpec::CompilerState::normalize_compiled_spec_input;
     my $orig_normalize_compiled_gdata_output = \&LinkedSpec::CompilerState::normalize_compiled_gdata_output;
     my ($ok_run, $descr, $err) = (0, undef, '');
-    my ($saw_new_compiled_spec_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_rules_by_label, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_gdata_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    my ($saw_new_compiled_spec_state, $saw_build_action_rewriter_migration_summary, $saw_build_compiled_descriptor_meta, $saw_compiled_spec_state_has_rule, $saw_compiled_spec_state_rule_info, $saw_compiled_spec_state_rule_rows, $saw_compiled_spec_state_definition_order, $saw_compiled_spec_state_duplicate_rule_labels, $saw_is_compiled_descriptor_state, $saw_compiled_descriptor_state_gdata_rows, $saw_compiled_descriptor_state_rule_rows, $saw_compiled_descriptor_state_has_rule, $saw_compiled_descriptor_state_rule_info, $saw_normalize_compiled_spec_input, $saw_normalize_compiled_gdata_output) = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::CompilerState::new_compiled_spec_state = sub {
@@ -9092,9 +9095,21 @@ SPEC
             $saw_is_compiled_descriptor_state = 1;
             return $orig_is_compiled_descriptor_state->(@_);
         };
-        local *LinkedSpec::CompilerState::compiled_descriptor_state_rules_by_label = sub {
-            $saw_compiled_descriptor_state_rules_by_label = 1;
-            return $orig_compiled_descriptor_state_rules_by_label->(@_);
+        local *LinkedSpec::CompilerState::compiled_descriptor_state_gdata_rows = sub {
+            $saw_compiled_descriptor_state_gdata_rows = 1;
+            return $orig_compiled_descriptor_state_gdata_rows->(@_);
+        };
+        local *LinkedSpec::CompilerState::compiled_descriptor_state_rule_rows = sub {
+            $saw_compiled_descriptor_state_rule_rows = 1;
+            return $orig_compiled_descriptor_state_rule_rows->(@_);
+        };
+        local *LinkedSpec::CompilerState::compiled_descriptor_state_has_rule = sub {
+            $saw_compiled_descriptor_state_has_rule = 1;
+            return $orig_compiled_descriptor_state_has_rule->(@_);
+        };
+        local *LinkedSpec::CompilerState::compiled_descriptor_state_rule_info = sub {
+            $saw_compiled_descriptor_state_rule_info = 1;
+            return $orig_compiled_descriptor_state_rule_info->(@_);
         };
         $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descr => 1 });
         1;
@@ -9113,7 +9128,10 @@ SPEC
     ok($saw_normalize_compiled_spec_input, 'Compiler.pm routes compiled-spec normalization through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_gdata_output, 'Compiler.pm routes compiled-gdata normalization through LinkedSpec::CompilerState');
     ok($saw_is_compiled_descriptor_state, 'Validation.pm routes descriptor-state validation through LinkedSpec::CompilerState');
-    ok($saw_compiled_descriptor_state_rules_by_label, 'Validation.pm routes descriptor-state rule-map reads through LinkedSpec::CompilerState');
+    ok($saw_compiled_descriptor_state_gdata_rows, 'Validation.pm routes descriptor-state gdata iteration through LinkedSpec::CompilerState');
+    ok($saw_compiled_descriptor_state_rule_rows, 'Validation.pm routes descriptor-state rule iteration through LinkedSpec::CompilerState');
+    ok($saw_compiled_descriptor_state_has_rule, 'Validation.pm routes descriptor-state by-label rule existence checks through LinkedSpec::CompilerState');
+    ok($saw_compiled_descriptor_state_rule_info, 'Validation.pm routes descriptor-state by-label rule lookup through LinkedSpec::CompilerState');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-state owner routing still returns descriptor hash');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler-state owner routing still preserves compiled handler coderef');
 };

@@ -385,10 +385,51 @@ sub compiled_descriptor_state_gdata_by_label {
  return compiled_gdata_state_gdata_by_label(compiled_descriptor_state_gdata_state($state))
 }
 
+sub compiled_descriptor_state_gdata_entry {
+ my ($state, $label) = @_;
+ return undef unless is_compiled_descriptor_state($state);
+ my $gdata_by_label = compiled_descriptor_state_gdata_by_label($state);
+ return $gdata_by_label->{$label}
+}
+
+sub compiled_descriptor_state_gdata_rows {
+ my ($state) = @_;
+ return [] unless is_compiled_descriptor_state($state);
+
+ my $gdata_by_label = compiled_descriptor_state_gdata_by_label($state);
+ my $rule_order = compiled_spec_state_rule_order(compiled_descriptor_state_spec_state($state));
+ my %seen;
+ my @rows = map {
+  $seen{$_} = 1;
+  [$_, $gdata_by_label->{$_}]
+ } grep { exists $gdata_by_label->{$_} } @$rule_order;
+
+ push @rows, map { [$_, $gdata_by_label->{$_}] } sort grep { !$seen{$_} } keys %$gdata_by_label;
+ return \@rows
+}
+
 sub compiled_descriptor_state_rules_by_label {
  my ($state) = @_;
  return {} unless is_compiled_descriptor_state($state);
  return compiled_spec_state_rules_by_label(compiled_descriptor_state_spec_state($state))
+}
+
+sub compiled_descriptor_state_has_rule {
+ my ($state, $label) = @_;
+ return 0 unless is_compiled_descriptor_state($state);
+ return compiled_spec_state_has_rule(compiled_descriptor_state_spec_state($state), $label)
+}
+
+sub compiled_descriptor_state_rule_info {
+ my ($state, $label) = @_;
+ return undef unless is_compiled_descriptor_state($state);
+ return compiled_spec_state_rule_info(compiled_descriptor_state_spec_state($state), $label)
+}
+
+sub compiled_descriptor_state_rule_rows {
+ my ($state) = @_;
+ return [] unless is_compiled_descriptor_state($state);
+ return compiled_spec_state_rule_rows(compiled_descriptor_state_spec_state($state))
 }
 
 sub compiled_descriptor_state_meta {

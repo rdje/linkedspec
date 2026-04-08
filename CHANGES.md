@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: centralize descriptor-state validation views
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes ordered descriptor-state validation views and by-label descriptor-state lookup helpers,
+- updated `perl/LinkedSpec/Validation.pm` so `validate_compiled_descriptor_state(...)` now validates through those owner-provided descriptor-state rows/lookups instead of flattening descriptor state back into raw rule and gdata maps first,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves descriptor-state validation iteration and lookup routes through `LinkedSpec::CompilerState`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats descriptor-state validation views as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: centralize migration summary shaping
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes `build_action_rewriter_migration_summary(...)`,

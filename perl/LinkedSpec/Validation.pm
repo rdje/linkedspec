@@ -425,6 +425,115 @@ sub _validate_gdata_against_rules_by_label {
  return 1;
 }
 
+sub _validate_compiled_descriptor_state_native {
+ my ($descriptor_state, $option) = @_;
+
+ for my $row (@{_call_compiler_state('compiled_descriptor_state_gdata_rows', $descriptor_state)}) {
+  my ($rule_name, $gdata_entry) = @$row;
+
+  unless (_call_compiler_state('compiled_descriptor_state_has_rule', $descriptor_state, $rule_name)) {
+   my $summary = "Gdata references non-existent rule '$rule_name'";
+   my $detail = 'Rule not found in spec';
+   _notify_gdata_validation_failure(
+    $option,
+    summary => $summary,
+    detail => $detail,
+    rule_label => $rule_name,
+   );
+   _trace_log_output(DUMP_NONE, $summary, $detail);
+   return 0;
+  }
+
+  unless (ref($gdata_entry) eq 'Regexp') {
+   my $summary = "Invalid gdata entry for rule '$rule_name'";
+   my $detail = "Expected compiled regex, got " . ref($gdata_entry);
+   _notify_gdata_validation_failure(
+    $option,
+    summary => $summary,
+    detail => $detail,
+    rule_label => $rule_name,
+   );
+   _trace_log_output(DUMP_NONE, $summary, $detail);
+   return 0;
+  }
+ }
+
+ for my $row (@{_call_compiler_state('compiled_descriptor_state_rule_rows', $descriptor_state)}) {
+  my ($rule_name, $rule_def) = @$row;
+
+  my $rule_valid = eval { validate_rule_definition($rule_name, $rule_def) };
+  my $validate_rule_definition_error = $@;
+  if ($validate_rule_definition_error) {
+   _notify_gdata_validation_failure(
+    $option,
+    summary => "Rule definition validation failed for rule '$rule_name'",
+    detail => $validate_rule_definition_error,
+    rule_label => $rule_name,
+   );
+   die $validate_rule_definition_error;
+  }
+
+  unless ($rule_valid) {
+   _notify_gdata_validation_failure(
+    $option,
+    summary => "Invalid rule definition for rule '$rule_name'",
+    detail => "validate_rule_definition returned false for rule '$rule_name'",
+    rule_label => $rule_name,
+   );
+   return 0;
+  }
+
+  if (exists $rule_def->{gdata} && ref($rule_def->{gdata}) eq 'ARRAY') {
+   for my $i (0..$#{$rule_def->{gdata}}) {
+    my $element = $rule_def->{gdata}[$i];
+    unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
+     my $summary = "Invalid gdata element at index $i for rule '$rule_name'";
+     my $detail = "Expected HASH with 'label' and 'idx' keys";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
+     return 0;
+    }
+
+    my $ref_rule = $element->{label};
+    unless (_call_compiler_state('compiled_descriptor_state_has_rule', $descriptor_state, $ref_rule)) {
+     my $summary = "Gdata element references non-existent rule '$ref_rule'";
+     my $detail = "Rule '$rule_name' references missing gdata rule '$ref_rule'";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
+     return 0;
+    }
+
+    my $ref_idx = $element->{idx};
+    my $ref_rule_def = _call_compiler_state('compiled_descriptor_state_rule_info', $descriptor_state, $ref_rule);
+    unless (exists $ref_rule_def->{re} && $ref_idx < @{$ref_rule_def->{re}}) {
+     my $summary = "Invalid regex index $ref_idx for rule '$ref_rule'";
+     my $detail = "Rule '$rule_name' references out-of-bounds regex index $ref_idx on rule '$ref_rule'";
+     _notify_gdata_validation_failure(
+      $option,
+      summary => $summary,
+      detail => $detail,
+      rule_label => $rule_name,
+     );
+     _trace_log_output(DUMP_NONE, $summary, $detail);
+     return 0;
+    }
+   }
+  }
+ }
+
+ return 1;
+}
+
 sub validate_compiled_descriptor_state {
  my ($descriptor_state, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
@@ -441,11 +550,7 @@ sub validate_compiled_descriptor_state {
   return 0;
  }
 
- return _validate_gdata_against_rules_by_label(
-  _call_compiler_state('compiled_descriptor_state_gdata_by_label', $descriptor_state),
-  _call_compiler_state('compiled_descriptor_state_rules_by_label', $descriptor_state),
-  $option,
- );
+ return _validate_compiled_descriptor_state_native($descriptor_state, $option);
 }
 
 sub validate_gdata_references {
