@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-08 - Phase 5: centralize migration summary shaping
+
+- updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes `build_action_rewriter_migration_summary(...)`,
+- updated `perl/LinkedSpec/Compiler.pm` so `_build_action_rewriter_migration_summary(...)` now delegates summary shaping through `LinkedSpec::CompilerState` and only keeps the optional trace dump locally,
+- widened `t/phase0_regression.t` so the direct owner-routing lock now also proves migration-summary shaping routes through `LinkedSpec::CompilerState`,
+- refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats migration-summary shaping as part of the same extracted owner seam.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+    - PASS (`Files=1, Tests=917`)
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-08 - Phase 5: centralize compiled descriptor metadata
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes `build_compiled_descriptor_meta(...)` for assembling descriptor metadata from compiled-spec state plus compiler-supplied metadata extensions,
