@@ -202,8 +202,8 @@ sub _linkedre_or_expr {
   ? $args{parse_mode}
   : 'seek';
  return $parse_mode eq 'consume'
-  ? "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, 'consume', \$info)"
-  : "LinkedRE::or(\$STRING, \$\$descr{gdata}{$label}, \$info)"
+  ? "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, 'consume', \$info)"
+  : "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, \$info)"
 }
 
 sub _build_handler_preamble {
@@ -923,7 +923,7 @@ sub compile_spec_entry {
  my @ACODEs = @{$emit_ctx->{ACODEs}};
  my %BCODEs = %{$emit_ctx->{BCODEs}};
  my @BCALLs = @{$emit_ctx->{BCALLs}};
- my @GDATA = @{$emit_ctx->{GDATA}};
+ my @dependency_refs = @{$emit_ctx->{DEPENDENCY_REFS}};
  my %ab_count = %{$emit_ctx->{ab_count}};
 
  my $icode = $emit_ctx->{icode};
@@ -984,7 +984,7 @@ sub compile_spec_entry {
   rule_meta => $rule_meta,
   runtime_ctx => $runtime_ctx,
  );
- $info{gdata} = [@GDATA];
+ $info{dependency_refs} = [@dependency_refs];
  $info{meta} = $rule_meta;
 
  if (_trace_should_dump(DUMP_HIGH)) {

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Phase 5: rename active dependency-regex descriptor surfaces
+
+- renamed the live outward descriptor key from `gdata` to `dependency_regex_map` across the active compiler/runtime path, parser-source emission, generated handler dispatch, static parser fixtures, and the active regression locks,
+- renamed the live per-rule compiled dependency mapping from `gdata` to `dependency_refs`, and renamed the remaining RuleIR emit-context holdout from `GDATA` to `DEPENDENCY_REFS` so the active compiler story is consistent end to end,
+- refreshed the current user/architecture/roadmap docs so the active compiler model now describes dependency-regex maps and dependency refs directly instead of mixing that with older `gdata` vocabulary,
+- left bootstrap/history notes alone for now, since this slice was about the active compiler/runtime/public surfaces rather than rewriting every older historical entry in place.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -Iperl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -Iperl -c perl/LinkedSpec/Validation.pm`
+  - `perl -Iperl -c perl/HLinkSubst.pm`
+  - `perl -Iperl -c perl/TkGui.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-09 - Phase 5: rename final descriptor compiler seam
 
 - renamed the remaining active final-descriptor compiler seam from compressed `descr` wording to full `descriptor` wording across `perl/LinkedSpec/Compiler.pm`, `perl/LinkedSpec/CompilerState.pm`, and the active regression locks in `t/phase0_regression.t`,

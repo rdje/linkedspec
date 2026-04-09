@@ -190,7 +190,7 @@ This module, not the plugin branch, is the real home of the "ask for `foo`, get 
 - is the main compile pipeline coordinator,
 - owns validation/bootstrap/descriptor-build orchestration,
 - now coordinates one explicit internal compiled-state model first and treats that as the source of truth for later descriptor assembly,
-- still emits the legacy descriptor `{ spec => ..., gdata => ... }` shape at the outer boundary for compatibility, but that is now a projection of the compiled-spec state rather than the compiler's own working model,
+- now emits the outward descriptor `{ spec => ..., dependency_regex_map => ... }` at the outer boundary, but that is now a projection of the compiled-spec state rather than the compiler's own working model,
 - carries much of the compile-stage structured-diagnostics normalization,
 - is one of the project's main implementation centers.
 
@@ -203,7 +203,7 @@ One concrete architectural consequence matters now:
   - `rules_by_label`
   - `redefined_rule_labels`
 - default `build_dependency_regex_map(...)` now consumes that state directly and, on the active path, first builds an explicit internal `compiled_dependency_regex_state` record,
-- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record that composes compiled-spec state plus dependency-regex state, generated-descriptor validation now consumes that state directly, and only then does the compiler project compatibility `spec` / `gdata` hashes outward while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.compiled_rule_order`, and `meta.redefined_rule_labels`,
+- final descriptor assembly now first builds an explicit internal `compiled_descriptor_state` record that composes compiled-spec state plus dependency-regex state, generated-descriptor validation now consumes that state directly, and only then does the compiler project outward `spec` / `dependency_regex_map` hashes while also exposing state-derived metadata such as `meta.descriptor_model`, `meta.definition_order`, `meta.compiled_rule_order`, and `meta.redefined_rule_labels`,
 - generated-descriptor validation now also walks that descriptor state directly instead of routing back through the historical legacy `validate_dependency_regex_references(...)` entrypoint, so compatibility descriptor projection is fully deferred until after descriptor-state validation succeeds,
 - and descriptor-level migration summary generation now also consumes compiled-spec state directly, so even that metadata no longer needs to bounce back through a legacy spec-hash working model.
 
@@ -213,7 +213,7 @@ That is a real structural improvement, not only a diagnostics tweak:
 - derived dependency regexes now also have one explicit internal state model,
 - final descriptor assembly now also has one explicit internal descriptor-state model,
 - generated-descriptor validation now also consumes that same descriptor-state model directly on the active path,
-- the last legacy compatibility-shape normalization seams for compiled spec and compiled gdata now also route through that same owner instead of living as local compiler glue,
+- the last legacy compatibility-shape normalization seams for compiled spec and compiled dependency-regex maps now also route through that same owner instead of living as local compiler glue,
 - and read-side compiled-state access for definition-order, duplicate-label, and descriptor-to-rule-map reads now also routes through that same owner instead of peeking raw state fields directly,
 - while ordered compiled-rule iteration now also comes from one owner-provided `rule_rows` view instead of being rebuilt ad hoc from `compiled_rule_order + rules_by_label` in compiler consumers,
 - and compiled-spec dependency existence / rule-info lookup now also routes through that same owner instead of direct compiler-side map probing during `build_dependency_regex_map(...)`,
@@ -221,7 +221,7 @@ That is a real structural improvement, not only a diagnostics tweak:
 - and descriptor migration-summary shaping now also routes through that same owner instead of being computed as a large compiler-local reduction over compiled rules,
 - ordering is first-class instead of incidental,
 - duplicate-label tracking is first-class instead of ad hoc,
-- and `build_dependency_regex_map(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`, even though the outward compatibility descriptor still calls that derived payload `gdata`.
+- and `build_dependency_regex_map(...)` is now clearly a derived-enrichment phase over compiled-spec state rather than a peer loose hash the compiler happens to juggle beside `spec`, while the outward descriptor now calls that derived payload `dependency_regex_map`.
 
 ### `LinkedSpec::CompilerState`
 - owns the internal compiled-spec, dependency-regex, and compiled-descriptor state records,
@@ -233,13 +233,13 @@ That is a real structural improvement, not only a diagnostics tweak:
 - owns migration-summary shaping over compiled-spec state as well,
 - owns the preferred descriptor-state validation views as well,
 - owns validation-friendly shape checks for those records,
-- owns compatibility projection back to legacy outer `spec` / `gdata` hashes,
+- owns projection back to outward `spec` / `dependency_regex_map` hashes,
 - is now the one place where the compiler's state model is defined instead of splitting that logic between `Compiler.pm` and `Validation.pm`,
 - which means `Compiler.pm` and `Validation.pm` no longer need to carry raw-state field reads, local ordered-rule reconstruction, direct rule-map probing, migration-summary reduction, descriptor-meta mutation, repeated descriptor-validation owner dispatch inside validation loops, descriptor-validation map flattening, or leftover local “accept legacy hash or compiled-state record” conversion seams beside the state owner.
 
 One more boundary is now tighter too:
 
-- malformed compiled `gdata` callback output is rejected directly at final descriptor assembly,
+- malformed compiled dependency-regex-map callback output is rejected directly at final descriptor assembly,
 - instead of being allowed to drift into later generated-descriptor validation before the contract problem is identified.
 
 ### `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core`
@@ -420,7 +420,7 @@ The helper family is much richer than it used to be. The bigger future wins are 
 ### 5. `build_compiled_rule_table` / `build_dependency_regex_map` should now be read as phases, not as the ideal long-term data model
 The information they represent is still needed. What changed is the ownership model:
 - `build_compiled_rule_table(...)` is now best read as "build compiled-spec state",
-- `build_dependency_regex_map(...)` is now best read as "build compiled dependency-regex state from compiled-spec state and project a legacy gdata hash only when a caller still wants that older shape",
+- `build_dependency_regex_map(...)` is now best read as "build compiled dependency-regex state from compiled-spec state and project the outward dependency_regex_map hash when a caller wants the normal descriptor surface",
 - and the legacy hash forms are compatibility outputs rather than the compiler's own preferred representation.
 
 ## Suggested Session-Start Refresh Checklist
@@ -441,7 +441,7 @@ Current best reading:
 - `LinkedSpec.pm` is a facade,
 - `ParserFactory`, `Runtime`, and `Compiler` are the practical parser-build spine,
 - `BootstrapSpec::Core` and `Validation` still define much of the frontend truth,
-- `Compiler.pm` now has one explicit compiled-spec state model internally and only emits legacy `spec` / `gdata` hashes at compatibility boundaries,
+- `Compiler.pm` now has one explicit compiled-spec state model internally and only emits outward `spec` / `dependency_regex_map` hashes at descriptor boundaries,
 - `SpecEntry` remains the biggest portability hotspot,
 - `RuleIR` plus `ActionIR::*` are where backend-neutral action semantics really live,
 - `RuntimeContext` is one of the strongest architectural boundaries in the project,

@@ -591,15 +591,15 @@ sub _rewrite_acode_entries {
  my ($label, $acode_entries, $rewrite_rules, $rewrite_diag_acc) = @_;
 
  my @ACODEs;
- my @GDATA;
+ my @dependency_refs;
  foreach my $acode_entry (@$acode_entries) {
   my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @ACODEs, $rewritten_acode;
-  push @GDATA, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
+  push @dependency_refs, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
  }
 
- return (\@ACODEs, \@GDATA)
+ return (\@ACODEs, \@dependency_refs)
 }
 
 sub _rewrite_bcode_entries {
@@ -770,7 +770,7 @@ sub _build_action_rewriter_meta {
 
 #------------------------------------------------------------------------------
 # Function: build_rule_ir_emit_context
-# Purpose : Build fully-rewritten emit context (ACODE/BCODE/gdata/lifecycle
+# Purpose : Build fully-rewritten emit context (ACODE/BCODE/dependency_refs/lifecycle
 #           chunks) plus rich action-rewriter diagnostics metadata.
 # Args    : ($rule_ir)
 # Returns : hashref emit context
@@ -781,7 +781,7 @@ sub build_rule_ir_emit_context {
  my $rewrite_rules = _build_action_rewrite_rules($label);
  my $rewrite_diag_acc = _build_rewrite_diag_acc();
 
- my ($acodes, $gdata) = _rewrite_acode_entries(
+ my ($acodes, $dependency_refs) = _rewrite_acode_entries(
   $label,
   $rule_ir->{acode_entries},
   $rewrite_rules,
@@ -817,7 +817,7 @@ sub build_rule_ir_emit_context {
   ACODEs    => $acodes,
   BCODEs    => $bcodes,
   BCALLs    => $bcalls,
-  GDATA     => $gdata,
+  DEPENDENCY_REFS => $dependency_refs,
   ab_count  => \%ab_count,
   icode     => $lifecycle_code->{icode},
   ecode     => $lifecycle_code->{ecode},

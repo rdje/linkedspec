@@ -20,7 +20,7 @@ my $IPOS  = pos $$STRING;
 my @sub_guis; 
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{sub_gui_list});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{sub_gui_list});
   unless($minfo) {
   return {@sub_guis};
   }
@@ -54,7 +54,7 @@ my $IPOS  = pos $$STRING;
 ; 
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{sub_gui});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{sub_gui});
   unless($minfo) {
    return undef
   }
@@ -85,7 +85,7 @@ my $IPOS  = pos $$STRING;
  
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{curlyb});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{curlyb});
   unless($minfo) {
    return undef
   }
@@ -122,7 +122,7 @@ my $IPOS  = pos $$STRING;
 my ($descr, $STRING) = @_; 
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{_main_});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{_main_});
   return undef unless $minfo;
 
   
@@ -137,7 +137,7 @@ my ($descr, $STRING) = @_;
  }
 },
 
- gdata => {
+ dependency_regex_map => {
  sub_gui	=> qr/(?-xism:(?-xism:\{)(?{$pos=0})|(?-xism:\})(?{$pos=1}))/o,
  sub_gui_list	=> qr/(?-xism:(?-xism:\S+\s+\{)(?{$pos=0})|(?-xism:#.*\n)(?{$pos=1}))/o,
  _main_	=> qr/(?-xism:(?-xism:\S+\s+\{)(?{$pos=0})|(?-xism:\{)(?{$pos=1})|(?-xism:#.*\n)(?{$pos=2}))/o,

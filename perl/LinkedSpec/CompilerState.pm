@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Package: LinkedSpec::CompilerState
-# Purpose: Internal compiled-spec / gdata / descriptor state model owner for
+# Purpose: Internal compiled-spec / dependency-regex / descriptor state model owner for
 #          the LinkedSpec compiler pipeline.
 #------------------------------------------------------------------------------
 package LinkedSpec::CompilerState;
@@ -331,7 +331,7 @@ sub compiled_dependency_regex_state_regex_by_label {
  return $state->{dependency_regex_by_label}
 }
 
-sub compiled_dependency_regex_state_to_legacy_gdata {
+sub compiled_dependency_regex_state_to_dependency_regex_map {
  my ($state) = @_;
  return undef unless is_compiled_dependency_regex_state($state);
  return { %{compiled_dependency_regex_state_regex_by_label($state)} }
@@ -472,7 +472,7 @@ sub compiled_descriptor_state_to_legacy_descriptor {
  return undef unless is_compiled_descriptor_state($state);
  return {
   spec => compiled_spec_state_to_legacy_spec(compiled_descriptor_state_spec_state($state)),
-  gdata => compiled_dependency_regex_state_to_legacy_gdata(compiled_descriptor_state_dependency_regex_state($state)),
+  dependency_regex_map => compiled_dependency_regex_state_to_dependency_regex_map(compiled_descriptor_state_dependency_regex_state($state)),
   meta => { %{compiled_descriptor_state_meta($state)} },
  }
 }

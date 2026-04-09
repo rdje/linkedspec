@@ -20,7 +20,7 @@ my $IPOS  = pos $$STRING;
 my $retv; my @word_items; 
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{substitute_top});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{substitute_top});
   unless($minfo) {
   return @word_items ? \@word_items : undef;
   }
@@ -55,7 +55,7 @@ my $IPOS  = pos $$STRING;
  
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{substitute_statement2});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{substitute_statement2});
   unless($minfo) {
   print "(HLinkSubst) -E- Unmatched closing bracket\n"; exit 2;
   }
@@ -88,7 +88,7 @@ my $IPOS  = pos $$STRING;
  
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{curlyb});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{curlyb});
   unless($minfo) {
   print "(HLinkSubst) -E- Unmatched closing brace\n"; exit 2;
   }
@@ -123,7 +123,7 @@ return $IMATCH;
 my ($descr, $STRING) = @_; 
 
  while (1) {
-  my $minfo = LinkedRE::or($STRING, $$descr{gdata}{_main_});
+  my $minfo = LinkedRE::or($STRING, $$descr{dependency_regex_map}{_main_});
   return undef unless $minfo;
 
   
@@ -138,7 +138,7 @@ my ($descr, $STRING) = @_;
  }
 },
 
- gdata => {
+ dependency_regex_map => {
  substitute_top	=> qr/(?-xism:(?-xism:(?<!\\)\[)(?{$pos=0})|(?-xism:\{)(?{$pos=1})|(?-xism:(\\(?:\[|\])|[^\{\}\[\]])+)(?{$pos=2})|(?-xism:(?<!\\)\])(?{$pos=3}))/o,
  substitute_statement2	=> qr/(?-xism:(?-xism:(?<!\\)\[)(?{$pos=0})|(?-xism:\{)(?{$pos=1})|(?-xism:(?<!\\)\])(?{$pos=2}))/o,
  _main_	=> qr/(?-xism:(?-xism:(?<!\\)\[)(?{$pos=0})|(?-xism:\{)(?{$pos=1})|(?-xism:(\\(?:\[|\])|[^\{\}\[\]])+)(?{$pos=2}))/o,

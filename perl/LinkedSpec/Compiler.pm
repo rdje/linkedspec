@@ -269,8 +269,8 @@ sub _compiled_dependency_regex_state_regex_by_label {
  return _call_compiler_state('compiled_dependency_regex_state_regex_by_label', @_)
 }
 
-sub _compiled_dependency_regex_state_to_legacy_gdata {
- return _call_compiler_state('compiled_dependency_regex_state_to_legacy_gdata', @_)
+sub _compiled_dependency_regex_state_to_dependency_regex_map {
+ return _call_compiler_state('compiled_dependency_regex_state_to_dependency_regex_map', @_)
 }
 
 sub _new_compiled_descriptor_state {
@@ -488,25 +488,25 @@ sub build_dependency_regex_map {
   _trace_log_dump("=== END SPEC DEPENDENCY REGEX DUMP ===\n");
  }
 
-my %gdata;
+my %dependency_regex_map;
 foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
   my ($label, $rule_info) = @$row;
   $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = $label;
   _die_with_detail(_describe_build_dependency_regex_map_rule_info_result($label, $rule_info))
    unless ref($rule_info) eq 'HASH';
-  my $rule_gdata = $rule_info->{gdata};
-  _die_with_detail(_describe_build_dependency_regex_map_rule_gdata_result($label, $rule_gdata))
-   unless ref($rule_gdata) eq 'ARRAY';
-  my @lgdata;
-  for (my $gde_idx = 0; $gde_idx < @$rule_gdata; ++$gde_idx) {
-   my $gde = $rule_gdata->[$gde_idx];
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_result($label, $gde, $gde_idx))
-    unless ref($gde) eq 'HASH';
-   my $dep_label = $gde->{label};
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_label_result($label, $dep_label, $gde_idx))
+  my $rule_dependency_refs = $rule_info->{dependency_refs};
+  _die_with_detail(_describe_build_dependency_regex_map_rule_dependency_refs_result($label, $rule_dependency_refs))
+   unless ref($rule_dependency_refs) eq 'ARRAY';
+  my @dependency_regexes;
+  for (my $dependency_ref_idx = 0; $dependency_ref_idx < @$rule_dependency_refs; ++$dependency_ref_idx) {
+   my $dependency_ref = $rule_dependency_refs->[$dependency_ref_idx];
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_ref_result($label, $dependency_ref, $dependency_ref_idx))
+    unless ref($dependency_ref) eq 'HASH';
+   my $dep_label = $dependency_ref->{label};
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_label_result($label, $dep_label, $dependency_ref_idx))
     unless defined($dep_label) && !ref($dep_label) && length($dep_label);
-   my $dep_idx = $gde->{idx};
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_index_result($label, $dep_idx, $gde_idx))
+   my $dep_idx = $dependency_ref->{idx};
+   _die_with_detail(_describe_build_dependency_regex_map_dependency_index_result($label, $dep_idx, $dependency_ref_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
    _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_missing($label, $dep_label, $dep_idx))
     unless _compiled_spec_state_has_rule($sg, $dep_label);
@@ -517,7 +517,7 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
    _die_with_detail(_describe_build_dependency_regex_map_dependency_re_result($label, $dep_label, $dep_re))
     unless ref($dep_re) eq 'ARRAY';
    if (exists $dep_re->[$dep_idx]) {
-    push @lgdata, $dep_re->[$dep_idx]
+    push @dependency_regexes, $dep_re->[$dep_idx]
    } else {
     _trace_decision("build_dependency_regex_map:$label", 0, "missing regex mapping for label=$dep_label idx=$dep_idx", DUMP_HIGH);
     my $error_msg = "Rule '$label': Referenced rule '$dep_label' has no regex at index $dep_idx";
@@ -525,33 +525,33 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
                   (defined $dep_re ? "0.." . ($#$dep_re) : "none");
     _trace_log_output(DUMP_NONE, $error_msg, $context);
     if (_trace_should_dump(DUMP_HIGH)) {
-     _trace_log_dump("=== GDATA ERROR CONTEXT ===\n");
+     _trace_log_dump("=== DEPENDENCY REGEX ERROR CONTEXT ===\n");
      _trace_log_dump("label: $label\n");
-     _trace_log_dump("gde: "._dump_value($gde)."\n");
+     _trace_log_dump("dependency_ref: "._dump_value($dependency_ref)."\n");
      _trace_log_dump("sg: "._dump_value($sg)."\n");
-     _trace_log_dump("lgdata: "._dump_value(\@lgdata)."\n");
-     _trace_log_dump("=== END GDATA ERROR CONTEXT ===\n");
+     _trace_log_dump("dependency_regexes: "._dump_value(\@dependency_regexes)."\n");
+     _trace_log_dump("=== END DEPENDENCY REGEX ERROR CONTEXT ===\n");
     }
     # exit 1
    }
   }
 
-  if (@lgdata) {
+  if (@dependency_regexes) {
    _trace_decision("build_dependency_regex_map:$label", 1, 'resolved at least one regex dependency', DUMP_DEBUG);
-   $gdata{$label} = _ored_re(@lgdata);
+   $dependency_regex_map{$label} = _ored_re(@dependency_regexes);
   }
   else {
    _trace_decision("build_dependency_regex_map:$label", 0, 'no resolvable regex dependencies for this label', DUMP_DEBUG);
   }
 }
 
- my $legacy_gdata = \%gdata;
+ my $dependency_regex_map = \%dependency_regex_map;
  my $result = (ref($option) eq 'HASH' && $option->{return_state})
   ? _new_compiled_dependency_regex_state(
      compiled_spec_state => $sg,
-     compiled_dependency_regex_by_label => $legacy_gdata,
+     compiled_dependency_regex_by_label => $dependency_regex_map,
     )
-  : $legacy_gdata;
+  : $dependency_regex_map;
  _clear_active_dependency_regex_rule_label();
 
 if (_trace_should_dump(DUMP_MEDIUM)) {
@@ -561,8 +561,8 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
  }
  _trace_exit($trace_scope, {
    status => 'ok',
-   compiled_labels => scalar(keys %$legacy_gdata),
-   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_dependency_regex_state' : 'legacy_gdata_hash',
+   compiled_labels => scalar(keys %$dependency_regex_map),
+   result_model => (ref($option) eq 'HASH' && $option->{return_state}) ? 'compiled_dependency_regex_state' : 'dependency_regex_map_hash',
   }, DUMP_MEDIUM);
  return $result
 }
@@ -838,28 +838,28 @@ sub _describe_build_dependency_regex_map_rule_info_result {
  return "build_dependency_regex_map expects rule '$label' info to be HASH ref; got " . _describe_contract_value_kind($rule_info);
 }
 
-sub _describe_build_dependency_regex_map_rule_gdata_result {
- my ($label, $rule_gdata) = @_;
+sub _describe_build_dependency_regex_map_rule_dependency_refs_result {
+ my ($label, $rule_dependency_refs) = @_;
 
- return "build_dependency_regex_map expects rule '$label' gdata to be ARRAY ref; got " . _describe_contract_value_kind($rule_gdata);
+ return "build_dependency_regex_map expects rule '$label' dependency_refs to be ARRAY ref; got " . _describe_contract_value_kind($rule_dependency_refs);
 }
 
-sub _describe_build_dependency_regex_map_dependency_result {
- my ($label, $gde, $gde_idx) = @_;
+sub _describe_build_dependency_regex_map_dependency_ref_result {
+ my ($label, $dependency_ref, $dependency_ref_idx) = @_;
 
- return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx] to be HASH ref; got " . _describe_contract_value_kind($gde);
+ return "build_dependency_regex_map expects rule '$label' dependency_refs[$dependency_ref_idx] to be HASH ref; got " . _describe_contract_value_kind($dependency_ref);
 }
 
 sub _describe_build_dependency_regex_map_dependency_label_result {
- my ($label, $dep_label, $gde_idx) = @_;
+ my ($label, $dep_label, $dependency_ref_idx) = @_;
 
- return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx]{label} to be a non-empty scalar; got " . _describe_contract_scalar_value($dep_label);
+ return "build_dependency_regex_map expects rule '$label' dependency_refs[$dependency_ref_idx]{label} to be a non-empty scalar; got " . _describe_contract_scalar_value($dep_label);
 }
 
 sub _describe_build_dependency_regex_map_dependency_index_result {
- my ($label, $dep_idx, $gde_idx) = @_;
+ my ($label, $dep_idx, $dependency_ref_idx) = @_;
 
- return "build_dependency_regex_map expects rule '$label' gdata[$gde_idx]{idx} to be a non-negative integer; got " . _describe_contract_scalar_value($dep_idx);
+ return "build_dependency_regex_map expects rule '$label' dependency_refs[$dependency_ref_idx]{idx} to be a non-negative integer; got " . _describe_contract_scalar_value($dep_idx);
 }
 
 sub _describe_build_dependency_regex_map_dependency_rule_missing {
@@ -1312,11 +1312,11 @@ if ($validate_dependency_regex_references_error) {
  my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
-  _emit_runtime_ctx_parser_source_line($runtime_ctx, " },\n gdata => {\n");
-  my @glabels = sort keys %{$final_descr->{gdata} || {}};
+  _emit_runtime_ctx_parser_source_line($runtime_ctx, " },\n dependency_regex_map => {\n");
+  my @glabels = sort keys %{$final_descr->{dependency_regex_map} || {}};
   for (my $i = 0; $i < @glabels; ++$i) {
    my $label = $glabels[$i];
-   my $gregex = $final_descr->{gdata}{$label};
+   my $gregex = $final_descr->{dependency_regex_map}{$label};
    my $prefix = $i ? ",\n" : '';
    _emit_runtime_ctx_parser_source_line($runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }

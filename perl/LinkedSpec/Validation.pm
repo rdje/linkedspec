@@ -424,9 +424,9 @@ sub _validate_dependency_regex_validation_view {
    return 0;
   }
 
-  if (exists $rule_def->{gdata} && ref($rule_def->{gdata}) eq 'ARRAY') {
-   for my $i (0..$#{$rule_def->{gdata}}) {
-    my $element = $rule_def->{gdata}[$i];
+  if (exists $rule_def->{dependency_refs} && ref($rule_def->{dependency_refs}) eq 'ARRAY') {
+   for my $i (0..$#{$rule_def->{dependency_refs}}) {
+    my $element = $rule_def->{dependency_refs}[$i];
     unless (ref($element) eq 'HASH' && exists $element->{label} && exists $element->{idx}) {
      my $summary = "Invalid dependency entry at index $i for rule '$rule_name'";
      my $detail = "Expected HASH with 'label' and 'idx' keys";
