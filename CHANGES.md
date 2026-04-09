@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: deepen FSMGen source-model chapter
+
+- replaced the placeholder `docs/fsmgen-book/src/model/fsm-source-model.md` content with a code-grounded source-shape reference driven directly from the active FSMGen walkers in `perl/FSMGen.pm` and the hierarchy helper parsing in `plugin/fsmgen.plg`,
+- documented the active top-level paragraph families (`?define:<name>`, `?fsm:<name>`, `?top:<name>`), the main FSM body entry kinds (state trees, stand-alone trees, resets, shared-info), the active decision-tree node families (assignments, transitions, tests, repeats, boolean operators), and the hierarchy node families (`?&...`, `?fsmc`, `?rtl`, `?ports`, `?toplink`, `?top`),
+- added explicit mini-language coverage for interface-object atoms, mapping atoms, generic atoms, instance-name atoms, and plugin hook atoms so the FSMGen mdBook is already behaving like a live operational reference instead of a sparse scaffold.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/fsmgen-book`
+
 ## 2026-04-09 - Docs: scaffold FSMGen mdBook
 
 - added a dedicated FSMGen mdBook root under `docs/fsmgen-book/` with:
