@@ -467,7 +467,7 @@ sub compiled_descriptor_state_meta {
  return $state->{meta}
 }
 
-sub compiled_descriptor_state_to_legacy_descr {
+sub compiled_descriptor_state_to_legacy_descriptor {
  my ($state) = @_;
  return undef unless is_compiled_descriptor_state($state);
  return {

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Phase 5: rename final descriptor compiler seam
+
+- renamed the remaining active final-descriptor compiler seam from compressed `descr` wording to full `descriptor` wording across `perl/LinkedSpec/Compiler.pm`, `perl/LinkedSpec/CompilerState.pm`, and the active regression locks in `t/phase0_regression.t`,
+- the live private helper names are now `_build_final_descriptor_state(...)`, `_build_final_descriptor(...)`, `_describe_final_descriptor_state_result(...)`, `_describe_final_descriptor_dependency_regex_result(...)`, and `_compiled_descriptor_state_to_legacy_descriptor(...)`,
+- updated the structured diagnostics contract so final-descriptor assembly failures now report `stage => 'build_final_descriptor'` and `owner_stage => 'compiler_pipeline:build_final_descriptor'`,
+- refreshed the current user/continuity docs so future resume treats `build_final_descriptor` as the active seam and avoids reintroducing compressed `build_final_descr` / legacy-descriptor helper wording on the live path.
+
+- Validation:
+  - `git diff --check`
+  - `perl -Iperl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -Iperl -c perl/LinkedSpec/CompilerState.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-09 - Docs: remove stray external-project book work
 
 - removed the mistakenly added external-project mdBook scaffold and its follow-up chapter work from this repository,
@@ -159,7 +174,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-08 - Phase 5: centralize compiled descriptor metadata
 
 - updated `perl/LinkedSpec/CompilerState.pm` so the state owner now also exposes `build_compiled_descriptor_meta(...)` for assembling descriptor metadata from compiled-spec state plus compiler-supplied metadata extensions,
-- updated `perl/LinkedSpec/Compiler.pm` so `_build_final_descr_state(...)` now delegates descriptor metadata assembly through `LinkedSpec::CompilerState` instead of taking owner metadata and then mutating in `parse_mode` and `action_rewriter_migration` locally,
+- updated `perl/LinkedSpec/Compiler.pm` so `_build_final_descriptor_state(...)` now delegates descriptor metadata assembly through `LinkedSpec::CompilerState` instead of taking owner metadata and then mutating in `parse_mode` and `action_rewriter_migration` locally,
 - widened `t/phase0_regression.t` so the direct owner-routing lock now also proves compiled-descriptor metadata assembly routes through `LinkedSpec::CompilerState`,
 - refreshed `ARCHITECTURE_STATE.md`, `USER_GUIDE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats descriptor metadata assembly as part of the same extracted owner seam.
 
@@ -329,7 +344,7 @@ Detailed technical history of changes prepared for commit.
   - direct coverage for the new internal `compiled_descriptor_state` seam and its legacy descriptor projection,
   - direct coverage for malformed compiled-`gdata` callback output at the final-descriptor boundary,
   - updated `return_descriptor` metadata coverage for `meta.definition_order`,
-  - and updated final-descriptor-owner trap coverage so `run_get_pipeline(...)` is locked to the new `_build_final_descr_state(...)` seam,
+  - and updated final-descriptor-owner trap coverage so `run_get_pipeline(...)` is locked to the new `_build_final_descriptor_state(...)` seam,
 - refreshed `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, `ROADMAP_V2.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` so future resume treats final descriptor assembly as part of the same state-first compiler story.
 
 - Validation:
@@ -341,7 +356,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-07 - Phase 5: keep migration summary state-first
 
 - updated `perl/LinkedSpec/Compiler.pm` so `_build_action_rewriter_migration_summary(...)` now accepts compiled-spec state directly instead of requiring a projected legacy `spec` hash first,
-- updated `_build_final_descr(...)` so descriptor-level `meta.action_rewriter_migration` is now built from compiled-spec state too, keeping the compiler on its explicit internal state model longer instead of bouncing back through compatibility data just for migration metadata,
+- updated `_build_final_descriptor(...)` so descriptor-level `meta.action_rewriter_migration` is now built from compiled-spec state too, keeping the compiler on its explicit internal state model longer instead of bouncing back through compatibility data just for migration metadata,
 - the same slice also makes non-priority migration-summary rule lists follow source rule order when compiled-spec state is available:
   - `language_agnostic_ready_rules`
   - `compatibility_surface_ready_rules`
@@ -363,7 +378,7 @@ Detailed technical history of changes prepared for commit.
 - updated `perl/LinkedSpec/Compiler.pm` so the compiler now has one explicit internal compiled-spec state model instead of treating loose legacy `spec_descr` / `spec_gdata` hashes as its own working truth:
   - `spec_descr(...)` now first builds `compiled_spec_state` with `kind`, `version`, `definition_order`, `rule_order`, `rules_by_label`, and `redefined_rule_labels`,
   - default `spec_gdata(...)` now accepts that state directly and derives combined regex/dependency data from it,
-  - `_build_final_descr(...)` now projects legacy `spec` / `gdata` hashes outward from that state while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.redefined_rule_labels`,
+  - `_build_final_descriptor(...)` now projects legacy `spec` / `gdata` hashes outward from that state while exposing `meta.descriptor_model`, `meta.rule_order`, and `meta.redefined_rule_labels`,
   - `run_get_pipeline(...)` now carries that state through final descriptor assembly instead of threading only the historical legacy spec hash,
 - updated `perl/LinkedSpec.pm` comments so the public `spec_descr(...)` façade now documents the richer owner-owned state model accurately instead of describing only the old compatibility hash contract,
 - widened `t/phase0_regression.t` so the new state model is locked directly:
@@ -385,7 +400,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-07 - Phase 5: tighten spec_gdata shape diagnostics
 
 - updated `perl/LinkedSpec/Compiler.pm` so low-level default `spec_gdata(...)` now validates its descriptor input shape explicitly instead of relying on incidental Perl reference failures: it rejects malformed top-level spec maps, malformed per-rule info hashes, malformed `gdata` arrays, malformed dependency entries, malformed dependency labels/indices, missing referenced rules, and malformed referenced `re` arrays with targeted detail strings,
-- widened `t/phase0_regression.t` with both a direct `LinkedSpec::Compiler::spec_gdata(...)` regression and a `run_get_pipeline(...)` continuity regression so malformed descriptor content now locks a specific `compiler_pipeline:build_final_descr` payload detail such as `spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR`, with preserved `rule_label` / `handler_source_label` continuity,
+- widened `t/phase0_regression.t` with both a direct `LinkedSpec::Compiler::spec_gdata(...)` regression and a `run_get_pipeline(...)` continuity regression so malformed descriptor content now locks a specific `compiler_pipeline:build_final_descriptor` payload detail such as `spec_gdata expects rule 'Top' gdata to be ARRAY ref; got SCALAR`, with preserved `rule_label` / `handler_source_label` continuity,
 - refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats explicit `spec_gdata(...)` shape validation as part of the stable Phase 5 final-descriptor diagnostics contract now instead of assuming that seam only preserves thrown `LinkedRE::or(...)`-style failures.
 
 - Validation:
@@ -460,7 +475,7 @@ Detailed technical history of changes prepared for commit.
 
 ## 2026-04-06 - Phase 5: lock get_parser late compiler handler continuity
 
-- widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks late generic compiler-failure continuity too: after spec resolution/load succeeds, a generic `build_final_descr` die still preserves `spec_path`, selected `top_rule`, and the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` in shared `runtime_ctx->{last_error}`,
+- widened `t/phase0_regression.t` so the file-oriented `LinkedSpec::get_parser(...)` path now locks late generic compiler-failure continuity too: after spec resolution/load succeeds, a generic `build_final_descriptor` die still preserves `spec_path`, selected `top_rule`, and the label-only generated-handler identity `LinkedSpec::generated_handler:<top_rule>` in shared `runtime_ctx->{last_error}`,
 - refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats late generic compiler-failure attribution through `get_parser(...)` as part of the stable diagnostics contract now instead of assuming only inline `Get(...)` or direct compiler seams cover that story.
 
 - Validation:
@@ -471,8 +486,8 @@ Detailed technical history of changes prepared for commit.
 
 ## 2026-04-05 - Phase 5: preserve late compiler fallback handler labels
 
-- updated `perl/LinkedSpec/Compiler.pm` so unattributed `compiler_pipeline:spec_descr`, `compiler_pipeline:build_final_descr`, and `compiler_pipeline:validate_gdata_references` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those later generic compiler seams,
-- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::run_get_pipeline(...)` coverage and public `LinkedSpec::Get(...)` continuity so generic late `build_final_descr` and `validate_gdata_references` failures now lock the preserved top-rule `handler_source_label`,
+- updated `perl/LinkedSpec/Compiler.pm` so unattributed `compiler_pipeline:spec_descr`, `compiler_pipeline:build_final_descriptor`, and `compiler_pipeline:validate_gdata_references` failures now fall back to the selected `top_rule` for `handler_source_label` when no rule label is known yet, instead of dropping the generated-handler identity on those later generic compiler seams,
+- widened `t/phase0_regression.t` across both direct `LinkedSpec::Compiler::run_get_pipeline(...)` coverage and public `LinkedSpec::Get(...)` continuity so generic late `build_final_descriptor` and `validate_gdata_references` failures now lock the preserved top-rule `handler_source_label`,
 - refreshed `USER_GUIDE.md` plus the roadmap/continuity notes so future resume treats late generic compiler-failure handler attribution as part of the stable structured-diagnostics contract now instead of assuming that only rule-attributed late compiler stages preserve handler identity.
 
 - Validation:
@@ -655,7 +670,7 @@ Detailed technical history of changes prepared for commit.
 
 ## 2026-04-02 - Phase 5: preserve generated handler labels on attributed compile failures
 
-- extended `perl/LinkedSpec/Compiler.pm` so structured `runtime_ctx->{last_error}` payloads now also preserve `handler_source_label` on `compiler_pipeline:spec_descr`, attributed `compiler_pipeline:build_final_descr`, and attributed `compiler_pipeline:validate_gdata_references` failures whenever the failing rule label is already known, instead of reserving that generated-handler identity only for exact runtime-handler/runtime-parser variant-known paths,
+- extended `perl/LinkedSpec/Compiler.pm` so structured `runtime_ctx->{last_error}` payloads now also preserve `handler_source_label` on `compiler_pipeline:spec_descr`, attributed `compiler_pipeline:build_final_descriptor`, and attributed `compiler_pipeline:validate_gdata_references` failures whenever the failing rule label is already known, instead of reserving that generated-handler identity only for exact runtime-handler/runtime-parser variant-known paths,
 - widened `t/phase0_regression.t` so compile-entry, final-descriptor, and generated-descriptor validation attribution seams now all lock the new label-preservation contract with the stable label-only form `LinkedSpec::generated_handler:<rule_label>` when the exact handler variant is not known yet,
 - expanded the diagnostics guide so `USER_GUIDE.md` now teaches that compile-time attributed failures can carry `handler_source_label` too, not only runtime execution failures, and clarifies that top-level parser failures now keep the shorter label-only form when only the selected top-rule label is known,
 - refreshed roadmap/continuity notes so future resume treats synthetic generated-handler labels on attributed compile failures as part of the active Phase 5 diagnostics contract rather than a runtime-only detail.
@@ -10713,7 +10728,7 @@ Reduced another stale `LinkedSpec.pm` compatibility seam by removing the façade
 ## Technical Details
 - Removed stale compiler delegation from `LinkedSpec.pm`:
   - deleted `LinkedSpec::spec_gdata(...)`,
-  - active final descriptor `gdata` compilation continues to resolve through `LinkedSpec::Compiler::spec_gdata(...)` inside `_build_final_descr(...)`.
+  - active final descriptor `gdata` compilation continues to resolve through `LinkedSpec::Compiler::spec_gdata(...)` inside `_build_final_descriptor(...)`.
 - Added focused regression coverage:
   - `compiler_pipeline_avoids_linkedspec_spec_gdata_facade`
   - the regression traps the removed façade helper name and proves `Runtime::run_get(..., return_descriptor => 1)` still returns a descriptor hash with compiled `gdata` through the compiler-owned path.
@@ -10862,7 +10877,7 @@ Reduced another compiler/runtime callback seam by making `LinkedSpec::Compiler::
   - PASS (`Files=1, Tests=130`)
 ## 2026-03-10 - Phase 1A Slice: Move Final Descriptor `spec_gdata` Default Into `Compiler`
 ## Summary
-Reduced another compiler-owned callback seam by making `LinkedSpec::Compiler::_build_final_descr(...)` own the default `spec_gdata` callback, so `run_get_pipeline(...)` no longer threads that callback explicitly during descriptor assembly.
+Reduced another compiler-owned callback seam by making `LinkedSpec::Compiler::_build_final_descriptor(...)` own the default `spec_gdata` callback, so `run_get_pipeline(...)` no longer threads that callback explicitly during descriptor assembly.
 
 ## Changed Files
 - Updated: `perl/LinkedSpec/Compiler.pm`
@@ -10875,15 +10890,15 @@ Reduced another compiler-owned callback seam by making `LinkedSpec::Compiler::_b
 - Updated: `git_message_brief.txt`
 
 ## Technical Details
-- Refactored `LinkedSpec::Compiler::_build_final_descr(...)`:
+- Refactored `LinkedSpec::Compiler::_build_final_descriptor(...)`:
   - it now defaults `spec_gdata` to `LinkedSpec::Compiler::spec_gdata(...)` internally,
   - explicit callback injection remains available for focused tests and future internal refactors.
 - Simplified `LinkedSpec::Compiler::run_get_pipeline(...)`:
-  - final descriptor assembly now calls `_build_final_descr($auto_descr_spec)` directly,
+  - final descriptor assembly now calls `_build_final_descriptor($auto_descr_spec)` directly,
   - `run_get_pipeline(...)` no longer threads `\&spec_gdata` as an explicit callback.
 - Added focused regression coverage:
   - `run_get_pipeline_defers_default_spec_gdata_callback_to_final_descr_owner`
-  - the regression traps `LinkedSpec::Compiler::_build_final_descr(...)` and proves the compiler pipeline now leaves the default `spec_gdata` callback undefined at the call site while still returning a valid descriptor.
+  - the regression traps `LinkedSpec::Compiler::_build_final_descriptor(...)` and proves the compiler pipeline now leaves the default `spec_gdata` callback undefined at the call site while still returning a valid descriptor.
 
 ## Validation
 - Ran:
@@ -13968,13 +13983,13 @@ Executed the next Phase 1A modularization slice by extracting selected compile-o
 - Added new module `LinkedSpec::Compiler` with extracted helpers:
   - `_run_bootstrap_parse`
   - `_build_action_rewriter_migration_summary`
-  - `_build_final_descr`
+  - `_build_final_descriptor`
 - Updated `LinkedSpec.pm`:
   - added `use LinkedSpec::Compiler ();`
   - delegated `_build_action_rewriter_migration_summary(...)` to `LinkedSpec::Compiler`.
   - updated `Get(...)` to delegate:
     - bootstrap parser eval invocation via `_run_bootstrap_parse(...)`,
-    - final descriptor/meta assembly via `_build_final_descr(...)`.
+    - final descriptor/meta assembly via `_build_final_descriptor(...)`.
 - Behavioral parity note:
   - diagnostics/logging text and stage decisions in `Get(...)` remain unchanged; only helper execution location moved.
 - Added local `@INC` bootstrap in `LinkedSpec::Compiler` for direct module syntax-check workflows.
@@ -16554,7 +16569,7 @@ Accepted punctuation-light attached branch aliases on the method-like control-fl
 - 2026-03-20: Tightened the same Phase 5 diagnostics contract by making `last_error` more self-contained. Both parser-factory and compiler-pipeline failure payloads now carry `owner_stage` plus `spec_name` / `spec_path` when known, so callers do not need to stitch those back together from side-channel context fields just to log or persist a failure. Regression coverage now locks those richer payload fields on parser-factory resolution failure, direct compiler failure, and shared `get_parser(...)` compile failure.
 - 2026-03-20: Continued the same Phase 5 runtime/diagnostics line into parser invocation failures. Compiled rule handlers now promote eval-visible execution failures into the same `runtime_ctx->{last_error}` channel as structured `runtime_handler` payloads, including `owner_stage`, `rule_label`, `handler_variant`, and preserved `spec_name` / `spec_path` when available. The top-level returned parser coderef now also clears stale runtime `last_error` state on successful re-entry, so one forced handler failure does not poison later successful parser calls. Regression coverage now locks both inline `LinkedSpec::Get(...)` runtime failure capture/clear behavior and file-oriented `get_parser(...)` runtime failure capture with preserved spec identity.
 - 2026-03-20: Extended that same Phase 5 diagnostics line to outer parser-call dies that bypass inner handler eval. The top-level parser coderef returned by `Compiler.pm` now wraps top-rule invocation just enough to promote those failures into a structured `runtime_parser` payload in `runtime_ctx->{last_error}`, including `owner_stage`, `rule_label`, `handler_variant`, and preserved spec identity when known, while still rethrowing the outer die. Regression coverage now locks that structured `runtime_parser` payload through a forced top-level handler die injected via a compiler callback.
-- 2026-03-21: Continued the same Phase 5 diagnostics line back into compile-time descriptor assembly. `LinkedSpec::Compiler::run_get_pipeline(...)` now traps exceptions thrown while `spec_descr(...)` is compiling parsed rule entries and while final descriptor assembly is building `gdata`, and promotes both into the existing structured `compiler_pipeline` `last_error` channel instead of letting those paths bypass diagnostics as raw outer dies. Regression coverage now locks both a forced `compile_spec_entry(...)` exception and a forced `spec_gdata(...)` exception, and the user guide now documents the corresponding `spec_descr` / `build_final_descr` stages as part of the runtime-context diagnostics contract.
+- 2026-03-21: Continued the same Phase 5 diagnostics line back into compile-time descriptor assembly. `LinkedSpec::Compiler::run_get_pipeline(...)` now traps exceptions thrown while `spec_descr(...)` is compiling parsed rule entries and while final descriptor assembly is building `gdata`, and promotes both into the existing structured `compiler_pipeline` `last_error` channel instead of letting those paths bypass diagnostics as raw outer dies. Regression coverage now locks both a forced `compile_spec_entry(...)` exception and a forced `spec_gdata(...)` exception, and the user guide now documents the corresponding `spec_descr` / `build_final_descriptor` stages as part of the runtime-context diagnostics contract.
 - 2026-03-21: Continued the same Phase 5 diagnostics line across the remaining validation/parse callback seams too. `LinkedSpec::Compiler::run_get_pipeline(...)` now traps exceptions thrown by `validate_spec_content(...)`, `validate_dsl_syntax(...)`, `bootstrap_parse(...)`, and `validate_gdata_references(...)`, and normalizes them into the same structured `compiler_pipeline` `last_error` channel instead of letting those stages bypass diagnostics as raw dies. Regression coverage now locks all four forced-exception paths, and the user guide now treats those owner stages as part of the stable runtime-context diagnostics contract.
 - 2026-03-21: Continued that same Phase 5 diagnostics normalization on the parser-factory side. `LinkedSpec::ParserFactory::run_get_parser(...)` now traps exceptions thrown by `validate_spec_name(...)`, `resolve_spec_path(...)`, `load_spec_content(...)`, and the delegated `compile_spec(...)` callback, and records parser-factory `last_error` payloads instead of letting those callback dies leak through. When the delegated compile/runtime owner already recorded a structured `last_error` payload before throwing, that deeper payload is now preserved instead of being overwritten by a generic parser-factory wrapper error. Regression coverage now locks the forced parser-factory exception paths plus the preserved-deeper-payload case.
 - 2026-03-21: Continued the same Phase 5 diagnostics normalization into the runtime owner itself. `LinkedSpec::Runtime::run_get(...)` now traps raw dies coming back from `Compiler::run_get_pipeline(...)` and records a fallback structured `runtime_owner` `last_error` payload at stage `run_get_pipeline` when no deeper owner payload exists yet. When the compiler/runtime owner already wrote a structured `last_error` record before dying, that deeper payload is preserved. Regression coverage now locks the forced runtime-delegation die path through both `Runtime::run_get(...)` and the public `LinkedSpec::Get(...)` facade, plus the preserved-deeper-payload case.
@@ -16644,7 +16659,7 @@ Accepted punctuation-light attached branch aliases on the method-like control-fl
 - 2026-03-31: Continued the same Phase 4 `vhdl` helper-adoption line with a bounded declaration-reader spend. `specs/vhdl.spec::{constant_declaration,variable_declaration,file_declaration,signal_declaration,configuration_specification}` now replace raw `@IMATCH_LIST` destructuring with explicit `declare(...=entry_group(...))` locals while preserving the surrounding `split /\s*,\s*/` plus `map` return logic unchanged. Focused source coverage in `t/phase0_regression.t` now locks that migration, and validation for the slice was: `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t` → `PASS (Files=1, Tests=812)`, and `bash tools/run_ci_local.sh` → local CI gate passed.
 - 2026-03-31: Continued the same Phase 4 `vhdl` helper-adoption line with a bounded interface-port spend. `specs/vhdl.spec::interface_signal_declaration` now uses an explicit helper array seeded from `entry_groups()` and returned through `array_copy(...)` instead of mutating raw `@IMATCH_LIST` with `push @IMATCH_LIST, call(signal_decl_range)` while appending the optional `signal_decl_range` child result. Focused source coverage in `t/phase0_regression.t` now locks that helper-array migration, and validation for the slice was: `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t` → `PASS (Files=1, Tests=813)`, and `bash tools/run_ci_local.sh` → local CI gate passed.
 - 2026-04-01: Continued the Phase 5 diagnostics line at the descriptor-build seam. `LinkedSpec::Compiler::run_get_pipeline(...)` now preserves `rule_label` on structured `compiler_pipeline:spec_descr` failures when the active parsed rule entry is still known, covering both thrown `compile_spec_entry(...)` failures and non-thrown invalid descriptor tuples. The user guide now teaches that `runtime_ctx->{last_error}{rule_label}` is no longer runtime-only: descriptor-build failures can expose it too when LinkedSpec still knows the failing parsed rule label. Validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Compiler.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.
-- 2026-04-01: Continued the same Phase 5 diagnostics line one stage later. Default `spec_gdata(...)` work inside `compiler_pipeline:build_final_descr` now preserves `rule_label` when the active rule’s combined regex dependencies are being compiled and `_ored_re(...)` dies, so structured final-descriptor assembly failures keep rule attribution when that rule context is still available. The user guide and roadmap now teach that `rule_label` can come from both `spec_descr` and default-`spec_gdata(...)` `build_final_descr` failures. Validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Compiler.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.
+- 2026-04-01: Continued the same Phase 5 diagnostics line one stage later. Default `spec_gdata(...)` work inside `compiler_pipeline:build_final_descriptor` now preserves `rule_label` when the active rule’s combined regex dependencies are being compiled and `_ored_re(...)` dies, so structured final-descriptor assembly failures keep rule attribution when that rule context is still available. The user guide and roadmap now teach that `rule_label` can come from both `spec_descr` and default-`spec_gdata(...)` `build_final_descriptor` failures. Validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Compiler.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.
 - 2026-04-02: Continued the same Phase 5 diagnostics line one stage later in generated-descriptor validation. `LinkedSpec::Validation::validate_gdata_references(...)` now exposes structured failure metadata back to `Compiler.pm`, and `run_get_pipeline(...)` now preserves `runtime_ctx->{last_error}{rule_label}` plus a more specific owning-rule `detail` string when `compiler_pipeline:validate_gdata_references` rejects the generated descriptor by returning false for one compiled rule. Focused regression coverage now locks that false-return attribution seam through a generated `gdata` reference failure, and validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Validation.pm`, `perl -Iperl -c perl/LinkedSpec/Compiler.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.
 - 2026-04-02: Continued the same Phase 5 diagnostics attribution line one step further inside generated-descriptor validation. `validate_gdata_references(...)` now also reports owning-rule metadata before rethrowing nested rule-local validation exceptions, so `Compiler.pm` can preserve `runtime_ctx->{last_error}{rule_label}` on `compiler_pipeline:validate_gdata_references` throw paths as well, not only on false-return validation failures. Focused regression coverage now locks that nested `validate_rule_definition(...)` die seam, and validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Validation.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.
 - 2026-04-02: Continued the same Phase 5 generated-descriptor validation line with a structured-summary follow-up. `Compiler.pm` now reuses the more specific validation `summary` from `validate_gdata_references(...)` when that seam already knows the exact failing rule/reference, so `compiler_pipeline:validate_gdata_references` payloads no longer collapse back to the generic “Generated parser validation failed” banner on those attributed false-return and nested-throw paths. Focused regression coverage now locks both the false-return and nested-throw summary shapes, and validation for the slice was: `git diff --check`, `perl -Iperl -c perl/LinkedSpec/Compiler.pm`, `perl -c -Iperl t/phase0_regression.t`, `prove -Iperl t/phase0_regression.t`, and `bash tools/run_ci_local.sh`.

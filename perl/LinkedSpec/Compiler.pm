@@ -301,8 +301,8 @@ sub _compiled_descriptor_state_meta {
  return _call_compiler_state('compiled_descriptor_state_meta', @_)
 }
 
-sub _compiled_descriptor_state_to_legacy_descr {
- return _call_compiler_state('compiled_descriptor_state_to_legacy_descr', @_)
+sub _compiled_descriptor_state_to_legacy_descriptor {
+ return _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', @_)
 }
 
 sub _normalize_compiled_dependency_regex_output {
@@ -311,7 +311,7 @@ sub _normalize_compiled_dependency_regex_output {
   'normalize_compiled_dependency_regex_output',
   $value,
   $compiled_spec_state,
-  on_invalid => sub { return _describe_final_descr_dependency_regex_result($_[0]) },
+  on_invalid => sub { return _describe_final_descriptor_dependency_regex_result($_[0]) },
  );
 }
 
@@ -567,7 +567,7 @@ if (_trace_should_dump(DUMP_MEDIUM)) {
  return $result
 }
 
-sub _build_final_descr_state {
+sub _build_final_descriptor_state {
  my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
  my $compiled_state = _normalize_compiled_spec_input($compiled_spec_input);
  my $use_default_dependency_regex_builder = !defined($dependency_regex_builder_cb);
@@ -591,10 +591,10 @@ sub _build_final_descr_state {
  );
 }
 
-sub _build_final_descr {
+sub _build_final_descriptor {
  my ($compiled_spec_input, $dependency_regex_builder_cb, %args) = @_;
- my $descriptor_state = _build_final_descr_state($compiled_spec_input, $dependency_regex_builder_cb, %args);
- return _compiled_descriptor_state_to_legacy_descr($descriptor_state);
+ my $descriptor_state = _build_final_descriptor_state($compiled_spec_input, $dependency_regex_builder_cb, %args);
+ return _compiled_descriptor_state_to_legacy_descriptor($descriptor_state);
 }
 
 sub _normalize_parse_mode {
@@ -798,7 +798,7 @@ sub _describe_build_compiled_rule_table_entry_result {
  return "build_compiled_rule_table expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
 }
 
-sub _describe_final_descr_state_result {
+sub _describe_final_descriptor_state_result {
  my ($value) = @_;
 
  return 'final descriptor assembly expects a compiled_descriptor_state result; got '
@@ -812,7 +812,7 @@ sub _describe_contract_value_kind {
  return ref($value) ? ref($value) : 'SCALAR';
 }
 
-sub _describe_final_descr_dependency_regex_result {
+sub _describe_final_descriptor_dependency_regex_result {
  my ($value) = @_;
 
  return 'final descriptor assembly expects compiled dependency-regex HASH ref or compiled_dependency_regex_state; got '
@@ -1219,36 +1219,36 @@ if ($build_compiled_rule_table_error) {
   return undef;
  }
  _clear_active_dependency_regex_rule_label();
- my $final_descr_state = eval { _build_final_descr_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
-my $build_final_descr_error = $@;
-my $build_final_descr_rule_label = _get_active_dependency_regex_rule_label();
- my $build_final_descr_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $build_final_descr_rule_label);
+ my $final_descr_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
+my $build_final_descriptor_error = $@;
+my $build_final_descriptor_rule_label = _get_active_dependency_regex_rule_label();
+ my $build_final_descriptor_handler_source_label =
+  _compiler_rule_or_top_handler_source_label($runtime_ctx, $build_final_descriptor_rule_label);
 _clear_active_dependency_regex_rule_label();
-if ($build_final_descr_error) {
+if ($build_final_descriptor_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'build_final_descr',
+   stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
-   detail => _normalize_error_detail($build_final_descr_error),
-   rule_label => $build_final_descr_rule_label,
-   handler_source_label => $build_final_descr_handler_source_label,
+   detail => _normalize_error_detail($build_final_descriptor_error),
+   rule_label => $build_final_descriptor_rule_label,
+   handler_source_label => $build_final_descriptor_handler_source_label,
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly failed - trapped exception while building dependency-regex/final descriptor state");
-  _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
+  _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descriptor' }, DUMP_LOW);
  return undef;
  }
  unless (_is_compiled_descriptor_state($final_descr_state)) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
-   stage => 'build_final_descr',
+   stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
-   detail => _describe_final_descr_state_result($final_descr_state),
-   rule_label => $build_final_descr_rule_label,
-   handler_source_label => $build_final_descr_handler_source_label,
+   detail => _describe_final_descriptor_state_result($final_descr_state),
+   rule_label => $build_final_descriptor_rule_label,
+   handler_source_label => $build_final_descriptor_handler_source_label,
   );
  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Final descriptor assembly did not produce a valid compiled descriptor state");
- _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descr' }, DUMP_LOW);
+ _trace_exit($trace_scope, { status => 'error', stage => 'build_final_descriptor' }, DUMP_LOW);
   return undef;
  }
 
@@ -1302,7 +1302,7 @@ if ($validate_dependency_regex_references_error) {
  _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
  return undef;
 }
- my $final_descr = _compiled_descriptor_state_to_legacy_descr($final_descr_state);
+ my $final_descr = _compiled_descriptor_state_to_legacy_descriptor($final_descr_state);
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule

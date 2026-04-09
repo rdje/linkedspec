@@ -8945,8 +8945,8 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when final descriptor assembly dies');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'final descriptor assembly die records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'final descriptor assembly die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'final descriptor assembly die records build_final_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'final descriptor assembly die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descriptor', 'final descriptor assembly die records build_final_descriptor stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descriptor', 'final descriptor assembly die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'final descriptor assembly die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_DIE__/, 'final descriptor assembly die records original thrown detail');
     is($runtime_ctx->{last_error}{top_rule}, 'Top', 'final descriptor assembly die preserves the requested top_rule in structured diagnostics');
@@ -9124,7 +9124,7 @@ SPEC
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler-state owner routing still returns descriptor hash');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'compiler-state owner routing still preserves compiled handler coderef');
 };
-subtest 'compiler_build_final_descr_state_builds_explicit_compiled_descriptor_state' => sub {
+subtest 'compiler_build_final_descriptor_state_builds_explicit_compiled_descriptor_state' => sub {
     plan tests => 16;
 
     my $spec_content = <<'SPEC';
@@ -9140,7 +9140,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor-state test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
 
     ok(ref($descriptor_state) eq 'HASH', 'final descriptor state build returns a hashref');
     is($descriptor_state->{kind}, 'compiled_descriptor_state', 'final descriptor state exposes the explicit descriptor-state kind');
@@ -9155,7 +9155,7 @@ SPEC
     ok(!exists $descriptor_state->{compiled_dependency_regex_state}{gdata_by_label}, 'dependency-regex state no longer exposes gdata_by_label alias');
     is_deeply($descriptor_state->{compiled_dependency_regex_state}{compiled_label_order}, ['Top'], 'final descriptor state keeps deterministic compiled dependency-regex label order');
 
-    my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr($descriptor_state);
+    my $legacy_descr = LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor($descriptor_state);
     ok(ref($legacy_descr->{spec}) eq 'HASH' && ref($legacy_descr->{gdata}) eq 'HASH', 'compiled descriptor state still projects to the legacy outer descriptor shape');
     is_deeply($legacy_descr->{meta}{definition_order}, ['Top', 'Child'], 'legacy descriptor projection preserves definition-order metadata');
 };
@@ -9175,7 +9175,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for descriptor-state validation-view test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
     my $validation_view = LinkedSpec::CompilerState::compiled_descriptor_state_validation_view($descriptor_state);
 
     ok(ref($validation_view) eq 'HASH', 'compiled descriptor validation view returns a hashref');
@@ -9185,7 +9185,7 @@ SPEC
     ok(!exists $validation_view->{gdata_rows}, 'compiled descriptor validation view no longer exposes legacy gdata rows');
     ok(ref($validation_view->{rules_by_label}) eq 'HASH' && exists $validation_view->{rules_by_label}{Top} && exists $validation_view->{rules_by_label}{Child}, 'compiled descriptor validation view exposes by-label rule lookup');
 };
-subtest 'compiler_build_final_descr_state_rejects_invalid_compiled_dependency_regex_shape_with_specific_detail' => sub {
+subtest 'compiler_build_final_descriptor_state_rejects_invalid_compiled_dependency_regex_shape_with_specific_detail' => sub {
     plan tests => 3;
 
     my $spec_content = <<'SPEC';
@@ -9199,7 +9199,7 @@ SPEC
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
     my ($ok_run, $ret, $err) = (0, undef, '');
     $ok_run = eval {
-        $ret = LinkedSpec::Compiler::_build_final_descr_state(
+        $ret = LinkedSpec::Compiler::_build_final_descriptor_state(
             $compiled_state,
             sub { return [] },
         );
@@ -9226,7 +9226,7 @@ SPEC
     ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for compiled-descriptor validation test');
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
     my $valid = LinkedSpec::Validation::validate_compiled_descriptor_state($descriptor_state);
 
     ok($valid, 'compiled descriptor state passes generated-descriptor validation');
@@ -9267,7 +9267,7 @@ SPEC
     ok($parse_success, 'bootstrap parse succeeds for compiled-descriptor direct-validation test') or diag(normalize_error($parse_error));
 
     my $compiled_state = LinkedSpec::Compiler::build_compiled_rule_table($retv, { return_state => 1 });
-    my $descriptor_state = LinkedSpec::Compiler::_build_final_descr_state($compiled_state, undef, parse_mode => 'seek');
+    my $descriptor_state = LinkedSpec::Compiler::_build_final_descriptor_state($compiled_state, undef, parse_mode => 'seek');
     my ($ok_run, $valid, $err) = (0, undef, '');
     $ok_run = eval {
         no warnings 'redefine';
@@ -9281,7 +9281,7 @@ SPEC
     ok($valid, 'compiled descriptor validation still reports success');
     unlike($err, qr/__UNEXPECTED_LEGACY_GDATA_VALIDATOR__/, 'compiled descriptor validation does not call validate_dependency_regex_references internally');
 };
-subtest 'compiler_run_get_pipeline_records_specific_build_final_descr_detail_for_malformed_rule_gdata_shape' => sub {
+subtest 'compiler_run_get_pipeline_records_specific_build_final_descriptor_detail_for_malformed_rule_gdata_shape' => sub {
     plan tests => 12;
 
     my $spec_content = <<'SPEC';
@@ -9321,8 +9321,8 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when final descriptor assembly sees malformed rule gdata shape');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'malformed rule gdata shape records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'malformed rule gdata shape records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'malformed rule gdata shape records build_final_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'malformed rule gdata shape records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descriptor', 'malformed rule gdata shape records build_final_descriptor stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descriptor', 'malformed rule gdata shape records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'malformed rule gdata shape records summary');
     is($runtime_ctx->{last_error}{detail}, "build_dependency_regex_map expects rule 'Top' gdata to be ARRAY ref; got SCALAR", 'malformed rule gdata shape preserves the specific build_dependency_regex_map contract detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'malformed rule gdata shape records the active gdata-compilation rule label');
@@ -9369,8 +9369,8 @@ SPEC
     ok(!defined($ret), 'compiler pipeline returns undef when default build_dependency_regex_map dies during final descriptor assembly');
     ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'default build_dependency_regex_map die records structured error context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'default build_dependency_regex_map die records compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'default build_dependency_regex_map die records build_final_descr stage');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'default build_dependency_regex_map die records combined compiler owner stage');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descriptor', 'default build_dependency_regex_map die records build_final_descriptor stage');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descriptor', 'default build_dependency_regex_map die records combined compiler owner stage');
     is($runtime_ctx->{last_error}{summary}, 'Final descriptor assembly failed', 'default build_dependency_regex_map die records summary');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_SPEC_GDATA_ORED_RE_DIE__/, 'default build_dependency_regex_map die records original thrown detail');
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'default build_dependency_regex_map die records the active gdata-compilation rule label');
@@ -11182,9 +11182,9 @@ SPEC
     ok($ok_run, 'LinkedSpec::Get returns without outer die when late descriptor assembly fails generically') or diag(normalize_error($err));
     ok(!defined($ret), 'LinkedSpec::Get returns undef when late descriptor assembly fails generically');
     ok(ref($runtime_ctx) eq 'HASH', 'LinkedSpec::Get still exposes runtime context on late descriptor assembly failure');
-    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured build_final_descr failure context');
+    ok(ref($runtime_ctx->{last_error}) eq 'HASH', 'LinkedSpec::Get preserves structured build_final_descriptor failure context');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'LinkedSpec::Get generic late build failure preserves compiler_pipeline type');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'LinkedSpec::Get generic late build failure preserves build_final_descr stage');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descriptor', 'LinkedSpec::Get generic late build failure preserves build_final_descriptor stage');
     like($runtime_ctx->{last_error}{detail}, qr/__FORCED_GET_SPEC_GDATA_DIE__/, 'LinkedSpec::Get generic late build failure preserves the original thrown detail');
     is($runtime_ctx->{last_error}{top_rule}, 'Top', 'LinkedSpec::Get generic late build failure preserves the selected top_rule');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'LinkedSpec::Get generic late build failure preserves the top-rule generated handler label when no rule label is available');
@@ -11278,8 +11278,8 @@ SPEC
     ok(!defined($parser), 'get_parser returns undef when late descriptor assembly fails generically');
     ok(ref($runtime_ctx) eq 'HASH', 'get_parser exposes runtime context through runtime_ctx_ref on late generic compile failure');
     is($runtime_ctx->{last_error}{type}, 'compiler_pipeline', 'late generic compile failure upgrades shared runtime context to compiler_pipeline last_error');
-    is($runtime_ctx->{last_error}{stage}, 'build_final_descr', 'late generic compile failure records build_final_descr stage in shared runtime context');
-    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descr', 'late generic compile failure records combined compiler owner stage in shared runtime context');
+    is($runtime_ctx->{last_error}{stage}, 'build_final_descriptor', 'late generic compile failure records build_final_descriptor stage in shared runtime context');
+    is($runtime_ctx->{last_error}{owner_stage}, 'compiler_pipeline:build_final_descriptor', 'late generic compile failure records combined compiler owner stage in shared runtime context');
     is($runtime_ctx->{last_error}{spec_name}, $tmp_spec, 'late generic compile failure last_error preserves requested spec name');
     is($runtime_ctx->{last_error}{spec_path}, $tmp_spec, 'late generic compile failure last_error preserves resolved spec path');
     is($runtime_ctx->{last_error}{top_rule}, 'Top', 'late generic compile failure last_error preserves the selected top_rule through get_parser');
@@ -11979,12 +11979,12 @@ SPEC
         parser_source_chunks_ref => [],
     };
 
-    my $orig_build_final_descr_state = \&LinkedSpec::Compiler::_build_final_descr_state;
+    my $orig_build_final_descriptor_state = \&LinkedSpec::Compiler::_build_final_descriptor_state;
     my ($ok_run, $descr, $err) = (0, undef, '');
     my ($saw_undef_dependency_regex_builder_cb, $saw_compiled_spec_state, $saw_top_rule_spec, $saw_compiled_rule_order);
     $ok_run = eval {
         no warnings 'redefine';
-        local *LinkedSpec::Compiler::_build_final_descr_state = sub {
+        local *LinkedSpec::Compiler::_build_final_descriptor_state = sub {
             my ($compiled_spec_input, $dependency_regex_builder_cb) = @_;
             $saw_undef_dependency_regex_builder_cb = !defined($dependency_regex_builder_cb);
             $saw_compiled_spec_state = ref($compiled_spec_input) eq 'HASH' && ($compiled_spec_input->{kind} || '') eq 'compiled_spec_state';
@@ -11995,7 +11995,7 @@ SPEC
                 && ref($compiled_spec_input->{compiled_rule_order}) eq 'ARRAY'
                 && @{$compiled_spec_input->{compiled_rule_order}} == 1
                 && $compiled_spec_input->{compiled_rule_order}[0] eq 'Top';
-            return $orig_build_final_descr_state->(@_);
+            return $orig_build_final_descriptor_state->(@_);
         };
 
         $descr = LinkedSpec::Compiler::run_get_pipeline(
@@ -12080,7 +12080,7 @@ Child::
 SPEC
 
     my $orig_validate_compiled_descriptor_state = \&LinkedSpec::Validation::validate_compiled_descriptor_state;
-    my $orig_compiled_descriptor_state_to_legacy_descr = \&LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr;
+    my $orig_compiled_descriptor_state_to_legacy_descriptor = \&LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor;
     my ($ok_run, $descr, $err) = (0, undef, '');
     my $validation_started = 0;
     my $saw_projection_after_validation = 0;
@@ -12090,10 +12090,10 @@ SPEC
             $validation_started = 1;
             return $orig_validate_compiled_descriptor_state->(@_);
         };
-        local *LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descr = sub {
+        local *LinkedSpec::Compiler::_compiled_descriptor_state_to_legacy_descriptor = sub {
             die "__UNEXPECTED_EARLY_LEGACY_DESCRIPTOR_PROJECTION__\n" unless $validation_started;
             $saw_projection_after_validation = 1;
-            return $orig_compiled_descriptor_state_to_legacy_descr->(@_);
+            return $orig_compiled_descriptor_state_to_legacy_descriptor->(@_);
         };
         $descr = LinkedSpec::Runtime::run_get(\$spec_content, { return_descriptor => 1 });
         1;
