@@ -1,0 +1,15 @@
+[book]
+authors = ["LinkedSpec contributors"]
+language = "en"
+src = "src"
+title = "The LinkedSpec Book"
+description = "Public-facing, living documentation for LinkedSpec."
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/richarddje/linkedspec"
+site-url = "/"

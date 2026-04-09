@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: start the real LinkedSpec mdBook
+
+- added a real public-facing mdBook scaffold at `docs/linkedspec-book/` with a broad chapter spine covering overview, user model, public API, DSL/action surface, compiler/runtime internals, shipped material, architecture, and development workflow,
+- seeded the first book chapters so the public docs now already explain what LinkedSpec is, why it exists, how the project should be read, and how the public book differs from the repo’s internal continuity docs,
+- updated `README.md` so the documentation map now distinguishes the public book from repo-native working docs and continuity docs,
+- updated `COMMIT.md` so the workflow now states explicitly that `docs/linkedspec-book/` is the public project book and that continuity docs (`CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, roadmap notes, `COMMIT.md`) are separate operational documents rather than a substitute for public-facing documentation.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-09 - Phase 5: rename active dependency-regex descriptor surfaces
 
 - renamed the live outward descriptor key from `gdata` to `dependency_regex_map` across the active compiler/runtime path, parser-source emission, generated handler dispatch, static parser fixtures, and the active regression locks,

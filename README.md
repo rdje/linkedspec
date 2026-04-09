@@ -3,6 +3,16 @@ LinkedSpec is a progressive extraction parser DSL for fast parser prototyping wi
 
 This `README.md` is the **single entry point** to the project.
 
+## Documentation Layers
+- `docs/linkedspec-book/`
+  - Public-facing book for the world outside the repo.
+  - This is where LinkedSpec should explain what it does, how it works, and why it is designed the way it is.
+- repo-root working docs
+  - `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, and related files remain valuable repo-native working references.
+- continuity docs
+  - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, and `COMMIT.md` are internal execution/continuity docs.
+  - They exist for crash recovery, session handoff, and implementation continuity, not as the main public narrative.
+
 ## Project Objective
 - Provide a robust, trustworthy parser-prototyping platform that is intentionally different from strict EBNF-centric tooling.
 - Preserve LinkedSpec strengths (recursive parsing + multi-pass extraction workflows).
@@ -13,21 +23,24 @@ Read these in order for fastest onboarding:
 
 1. `README.md` (this file)
    - Project objective, navigation, and key paths.
-2. `ROADMAP.md`
+2. `docs/linkedspec-book/`
+   - Public-facing book for LinkedSpec.
+   - Start here when you want the project explained as a coherent system rather than as a working repo.
+3. `ROADMAP.md`
    - Strategy, phases, priorities, and current execution direction.
-3. `USER_GUIDE.md`
+4. `USER_GUIDE.md`
    - How to write and use `.spec` grammars and parser workflows.
    - Includes the plain paragraph-based mental model for `.spec` file structure.
-4. `ARCHITECTURE_STATE.md`
+5. `ARCHITECTURE_STATE.md`
    - Live architectural reading of the current codebase shape.
    - Use this to re-enter the project with the current implementation model and main hotspots in mind.
-5. `DEVELOPMENT_NOTES.md`
+6. `DEVELOPMENT_NOTES.md`
    - Architecture rationale and implementation decisions.
-6. `CHANGES.md`
+7. `CHANGES.md`
    - Technical change history, validation records, and migration slices.
-7. `MEMORY.md`
+8. `MEMORY.md`
    - Interruption-safe continuation context and recent execution state.
-8. `COMMIT.md`
+9. `COMMIT.md`
    - Commit workflow and commit hygiene conventions.
 
 ## Project File/Path Map
@@ -55,6 +68,7 @@ Top-level directories and files:
 
 Top-level project docs:
 - `README.md`
+- `docs/linkedspec-book/`
 - `ROADMAP.md`
 - `USER_GUIDE.md`
 - `ARCHITECTURE_STATE.md`

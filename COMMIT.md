@@ -40,6 +40,12 @@ This document defines the standard commit workflow for this repository so any ne
 - Examples: `perl/LinkedSpec.pm`, `t/phase0_regression.t`, `USER_GUIDE.md`, etc.
 - Stage only files that belong to the completed task slice.
 
+### 6) `docs/linkedspec-book/`
+- **Type:** persistent, git-tracked public documentation book.
+- **Purpose:** explain LinkedSpec to the outside world: what it does, how it works, why it is designed that way, and how to use it.
+- **Lifecycle:** evolve alongside the project; update when public-facing behavior, architecture understanding, rationale, or user-facing surfaces change materially.
+- **Important:** this book is a public product surface, not a crash-recovery log.
+
 ## Commit cadence (when to run this workflow)
 - Run after a task/activity slice is completed and accepted.
 - Preferred granularity: one coherent, validated change slice per commit.
@@ -51,6 +57,12 @@ This document defines the standard commit workflow for this repository so any ne
   - `perl -c perl/LinkedSpec.pm`
   - `perl -c -Iperl t/phase0_regression.t`
   - `prove -v -Iperl t/phase0_regression.t`
+
+## Documentation Layers
+- Keep the public book and the continuity docs separate.
+- `docs/linkedspec-book/` is the public-facing explanation of LinkedSpec.
+- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, roadmap notes, and the workflow described here exist for interruption recovery, handoff continuity, and execution hygiene.
+- Updating continuity docs does **not** replace updating the public book when a slice changes what users or outside readers need to understand.
 
 ## Exact workflow steps
 
@@ -64,6 +76,7 @@ This document defines the standard commit workflow for this repository so any ne
      - `DEVELOPMENT_NOTES.md`
      - `MEMORY.md`
    - Include validation commands/results.
+   - If the slice changes the public understanding of LinkedSpec, update `docs/linkedspec-book/` too.
    - If a slice adds, renames, or materially clarifies DSL methods, treat user-facing documentation as required completion work: update the relevant guides with clear semantics and extensive worked examples, and backfill older methods in that same user-facing family when the documentation is still too thin for confident adoption.
 
 3. **Prepare commit message**
