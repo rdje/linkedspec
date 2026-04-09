@@ -1,0 +1,95 @@
+# ActionIR Lowering Mental Model
+
+ActionIR is the bridge between LinkedSpec action syntax and emitted runtime code.
+
+It exists because the project does not want `.spec` files to remain tied forever to raw Perl fragments. The target is a cleaner semantic layer:
+
+```text
+.spec helper DSL -> canonical ActionIR -> emitted backend code
+```
+
+Today the emitted backend is Perl. The direction is backend-neutrality.
+
+## Why not just keep raw Perl?
+
+Raw Perl is powerful, but it has a cost:
+
+- it is hard to validate structurally
+- it is hard to translate to non-Perl backends
+- it hides parser intent inside host-language details
+- it makes examples harder for new users to generalize
+
+Helper DSL makes common parser actions explicit.
+
+Instead of asking readers to understand a substring expression, a mutable array push, and a return shape all at once, a rule can say:
+
+```text
+assign(scalar(name), entry_group(0));
+push_value(array(items), scalar(name));
+return(hash("kind", "names", "items", array_copy(array(items))));
+```
+
+That is still compact, but it is more self-describing.
+
+## A simple lowering example
+
+Source-level helper DSL:
+
+```text
+assign(scalar(name), entry_group(0));
+return(hash("kind", "token", "name", scalar(name)));
+```
+
+Semantic reading:
+
+- write the first entry capture group to local scalar `name`
+- return a structured payload with a fixed `kind` and the captured `name`
+
+The exact emitted Perl is an implementation detail for most users. What matters is that these helper forms describe operations LinkedSpec can reason about.
+
+## Canonical versus compatibility forms
+
+LinkedSpec still recognizes older compatibility forms because real specs exist and migrations are incremental.
+
+However, new public examples should prefer canonical helper forms:
+
+```text
+assign(scalar(retv), call(Child));
+push_value(array(items), scalar(retv));
+```
+
+over raw or compatibility-heavy shapes such as direct Perl assignment and manual array mutation.
+
+Compatibility is useful for migration. It should not be the teaching default.
+
+## What counts as a good helper form?
+
+A good helper form should make these questions easy to answer:
+
+- What value is being read?
+- What value is being written?
+- Which parser boundary or mark is being used?
+- Does the helper mutate a boundary or only read it?
+- Is the result a scalar, array, hash, boolean, or rule call?
+
+That is why recent naming work strongly favors explicit names such as:
+
+- `capture_rest_from(name)`
+- `capture_take_until_cursor_len_from(name)`
+- `dependency_regex_map`
+- `dependency_refs`
+
+Names should reduce guessing.
+
+## How to learn the surface
+
+Start with the core families:
+
+- `assign(...)` for writing values
+- `return(...)` for returning payloads
+- `scalar(...)`, `array(...)`, `hash(...)` for value construction
+- `entry_*` and `match_*` readers for match data
+- `capture_*` and `mark_*` helpers for parser boundary work
+- `if(...)` and `switch` helpers for structured control flow
+
+Then move into the more specialized helper families as needed.

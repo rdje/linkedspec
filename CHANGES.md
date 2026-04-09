@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: deepen LinkedSpec book DSL path
+
+- expanded the public mdBook DSL/action section with a clearer action-surface overview and three new chapters:
+  - `ActionIR Lowering Mental Model`,
+  - `Capture, Marks, and Source Locations`,
+  - `Values, Containers, and Flow Helpers`,
+- documented the public rationale for moving away from raw Perl-shaped actions toward helper DSL and canonical ActionIR lowering,
+- added example-heavy explanations for `capture_*`, `mark_*`, `cursor_*`, `entry_*`, `match_*`, `input_*`, `assign(...)`, `push_value(...)`, `return(...)`, container helpers, and structured `if`/`switch` control-flow helpers,
+- kept the book public-facing while leaving exhaustive method-by-method reference in the repo-root ActionIR guides for now.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-09 - Docs: deepen LinkedSpec book user path
 
 - expanded the public mdBook `.spec` rule-paragraph chapter with concrete minimal examples, top-level rule-start versus block-content explanation, same-line versus multiline authoring examples, and a clearer list of supported paragraph-member categories,
