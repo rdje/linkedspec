@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: deepen LinkedSpec book runtime context path
+
+- expanded the public mdBook runtime-context/tracing chapter from a short overview into a detailed user-facing guide,
+- documented `runtime_ctx_ref` hash and scalar-slot forms, the context lifecycle across `Get(...)`, `get_parser(...)`, compilation, and parser invocation, and the fields carried through `last_error`,
+- added examples for compile-failure reporting, file-identity preservation, parser-invocation failures, handler source labels, and parser-source capture with `dump_parser_source` / `parser_source_ref`,
+- documented trace configuration through `configure_trace(...)`, compile-call trace options, named trace levels, trace output modes, trace environment variables, trace scopes/decisions, and the runtime-context-versus-tracing split.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: deepen LinkedSpec book architecture path
 
 - expanded the public mdBook architecture chapter from a short pointer into a self-contained owner-tree and module-boundary explanation,
