@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: deepen LinkedSpec book compiler path
+
+- expanded the public mdBook compiler/runtime path with a stage-by-stage pipeline explanation from source `.spec` text through bootstrap parse, compiled rule-table state, dependency-regex state, descriptor state validation, and outward descriptor/parser projection,
+- expanded the compiled-state model chapter with concrete explanations of `compiled_spec_state`, `compiled_dependency_regex_state`, `compiled_descriptor_state`, `definition_order`, `compiled_rule_order`, `redefined_rule_labels`, `dependency_refs`, and `dependency_regex_map`,
+- expanded the generated-handler chapter with the RuleIR/emit-context flow, dependency-regex dispatch examples for `seek` and `consume`, generated handler identity, and the active `DEPENDENCY_REFS` emit-context naming,
+- expanded the diagnostics chapter with structured `runtime_ctx->{last_error}` examples, owner/stage families, rule/handler attribution, file-oriented continuity, and fallback-preservation rules.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-09 - Docs: deepen LinkedSpec book DSL path
 
 - expanded the public mdBook DSL/action section with a clearer action-surface overview and three new chapters:
