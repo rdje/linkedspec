@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: deepen LinkedSpec book shipped material path
+
+- expanded the public mdBook shipped specs/corpora chapter from a placeholder into a real map of the shipped material,
+- documented the current `specs/` inventory with main entry rules, purpose notes, and maturity caveats for current, historical, experimental, and placeholder specs,
+- documented how `plugin/`, `conf/`, `tablescript/`, and `ebnf/` act as corpus or legacy-transition material, and clarified that `.plg` remains transition machinery rather than LinkedSpec's future architectural center,
+- documented how `t/phase0_regression.t` and `tools/run_ci_local.sh` use shipped material as part of the quality gate, plus a recommended reading order and future per-spec documentation obligations.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: deepen LinkedSpec book runtime context path
 
 - expanded the public mdBook runtime-context/tracing chapter from a short overview into a detailed user-facing guide,
