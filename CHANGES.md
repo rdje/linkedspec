@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: deepen LinkedSpec book development workflow path
+
+- expanded the public mdBook development workflow chapters so local CI, regression discipline, and documentation workflow are no longer placeholder notes,
+- documented how `.github/workflows/ci.yml` delegates to `tools/run_ci_local.sh`, what the shared local gate checks, which tracked input areas it protects, and why untracked CI inputs fail deliberately,
+- documented docs-only versus code/spec/runtime validation paths, including `git diff --check`, `mdbook build docs/linkedspec-book`, and `bash tools/run_ci_local.sh`,
+- documented the public-book versus continuity-doc split, mdBook source/build paths, `SUMMARY.md` chapter registration, public documentation style expectations, and the DSL documentation bar.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: deepen LinkedSpec book shipped material path
 
 - expanded the public mdBook shipped specs/corpora chapter from a placeholder into a real map of the shipped material,
