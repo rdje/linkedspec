@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: deepen LinkedSpec book architecture path
+
+- expanded the public mdBook architecture chapter from a short pointer into a self-contained owner-tree and module-boundary explanation,
+- documented the active facade/core-spine model: `LinkedSpec.pm`, `OwnerDispatch`, `ParserFactory`, `Resolver`, `Runtime`, `RuntimeContext`, `Compiler`, `CompilerState`, `BootstrapSpec`, `Validation`, `SpecEntry`, `RuleIR`, `RuleIR::EmitContext`, and `ActionIR::*`,
+- documented how `get_parser(...)` and `Get(...)` converge on the runtime/compiler path, and why `CompilerState` owns compiled state while `Compiler` coordinates compile stages,
+- documented the legacy plugin branch as transition machinery rather than LinkedSpec's future architectural center, and added a practical "how to route a change" owner map.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-09 - Docs: deepen LinkedSpec book compiler path
 
 - expanded the public mdBook compiler/runtime path with a stage-by-stage pipeline explanation from source `.spec` text through bootstrap parse, compiled rule-table state, dependency-regex state, descriptor state validation, and outward descriptor/parser projection,
