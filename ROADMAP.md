@@ -111,7 +111,6 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - `consume` now drives contiguous `LinkedRE::or(...)` matching from the current input position,
   - generated descriptors now expose the selected mode at `meta->{parse_mode}`,
 - Recent landed follow-up: the public descriptor-introspection option is now `return_descriptor => 1` with no active `return_descr` alias preserved, so the active runtime/parser-factory/compiler path and the current docs all use one explicit descriptor-return term.
-- Recent landed follow-up: FSMGen now has a dedicated mdBook scaffold under `docs/fsmgen-book/`, giving that subsystem a real long-form documentation home with navigable overview/usage/model/reference/development chapters instead of forcing all FSMGen docs into ad hoc top-level markdown notes.
   - the documented contract now states explicitly that `seek` / `consume` is cursor discipline while `OR` / `AND` is rule composition, so those axes should stay orthogonal as Phase 3 continues,
   - and the Phase 3 semantics notes now also state explicitly that current LinkedSpec is not targeting full parser-engine backtracking: `BACKTRACK()` / `IBACKTRACK()` are local cursor-rewind helpers inside a mostly forward-moving model, and well-written `.spec` files should not depend on systemic search-tree rollback.
 - Exit criteria:

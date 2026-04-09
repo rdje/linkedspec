@@ -1,28 +1,14 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
-## 2026-04-09 - Docs: deepen FSMGen source-model chapter
+## 2026-04-09 - Docs: remove stray external-project book work
 
-- replaced the placeholder `docs/fsmgen-book/src/model/fsm-source-model.md` content with a code-grounded source-shape reference driven directly from the active FSMGen walkers in `perl/FSMGen.pm` and the hierarchy helper parsing in `plugin/fsmgen.plg`,
-- documented the active top-level paragraph families (`?define:<name>`, `?fsm:<name>`, `?top:<name>`), the main FSM body entry kinds (state trees, stand-alone trees, resets, shared-info), the active decision-tree node families (assignments, transitions, tests, repeats, boolean operators), and the hierarchy node families (`?&...`, `?fsmc`, `?rtl`, `?ports`, `?toplink`, `?top`),
-- added explicit mini-language coverage for interface-object atoms, mapping atoms, generic atoms, instance-name atoms, and plugin hook atoms so the FSMGen mdBook is already behaving like a live operational reference instead of a sparse scaffold.
+- removed the mistakenly added external-project mdBook scaffold and its follow-up chapter work from this repository,
+- removed the corresponding README and roadmap pointers so the active documentation map is back to LinkedSpec-only scope,
+- refreshed continuity notes so future resume knows the external-project documentation slice was intentionally rolled back rather than lost.
 
 - Validation:
   - `git diff --check`
-  - `mdbook build docs/fsmgen-book`
-
-## 2026-04-09 - Docs: scaffold FSMGen mdBook
-
-- added a dedicated FSMGen mdBook root under `docs/fsmgen-book/` with:
-  - `book.toml`,
-  - book-local `.gitignore`,
-  - navigable `SUMMARY.md`,
-  - overview, usage, model, reference, and development chapter groups,
-- seeded the first FSMGen-focused long-form chapters from the active code surfaces in `perl/FSMGen.pm`, `plugin/fsmgen.plg`, `perl/env.conf`, `conf/vhdl_template.conf`, and `conf/xif.conf`,
-- updated `README.md` so the repo-level doc map now points readers at the dedicated FSMGen book as the new long-form documentation home for that subsystem.
-
-- Validation:
-  - `mdbook build docs/fsmgen-book`
 
 ## 2026-04-09 - Phase 5: rename return_descriptor option
 
