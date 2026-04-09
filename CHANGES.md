@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add LinkedSpec source-boundary helper reference
+
+- added a public mdBook source-boundary helper reference chapter under the DSL section,
+- documented the implementation-backed `capture_*`, `mark_*`, `cursor_*`, `input_*`, `entry_*`, and `match_*` helper surfaces with boundary semantics, stable-versus-advancing read behavior, compatibility aliases, and examples,
+- linked the existing capture/mark/source-location mental-model chapter to the new method-level reference and registered the new chapter in `SUMMARY.md`,
+- kept this as public documentation, with continuity docs recording the slice separately from the book.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: deepen LinkedSpec book development workflow path
 
 - expanded the public mdBook development workflow chapters so local CI, regression discipline, and documentation workflow are no longer placeholder notes,

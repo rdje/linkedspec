@@ -25,6 +25,7 @@
 - [Action Model and Helper Surface](dsl/action-model-and-helper-surface.md)
 - [ActionIR Lowering Mental Model](dsl/actionir-lowering-mental-model.md)
 - [Capture, Marks, and Source Locations](dsl/capture-marks-and-source-locations.md)
+- [Source Boundary Helper Reference](dsl/source-boundary-helper-reference.md)
 - [Values, Containers, and Flow Helpers](dsl/values-containers-and-flow-helpers.md)
 
 # Compiler and Runtime

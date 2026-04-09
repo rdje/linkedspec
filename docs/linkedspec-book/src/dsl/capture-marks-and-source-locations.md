@@ -4,6 +4,8 @@ LinkedSpec has several helper families for reading parser spans and source posit
 
 This chapter explains the mental model before the exhaustive method list.
 
+For the method-by-method public reference, read [Source Boundary Helper Reference](source-boundary-helper-reference.md) after this chapter.
+
 ## Five anchor families
 
 Most source-boundary helpers belong to one of these families:
