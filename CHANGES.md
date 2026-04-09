@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-09 - Docs: deepen LinkedSpec book user path
+
+- expanded the public mdBook `.spec` rule-paragraph chapter with concrete minimal examples, top-level rule-start versus block-content explanation, same-line versus multiline authoring examples, and a clearer list of supported paragraph-member categories,
+- expanded the public rule-mode / parse-mode chapter with exact rule-mode spelling guidance, `seek` versus `consume` semantics, concrete input examples, and public option examples for `Get(...)`, `get_parser(...)`, and descriptor metadata,
+- expanded the public API chapters with runnable-shaped `Get(...)` / `get_parser(...)` examples, shared option descriptions for `top_rule`, `parse_mode`, `return_descriptor`, and `runtime_ctx_ref`, plus an explicit descriptor-shape example using `spec`, `dependency_regex_map`, `dependency_refs`, and `meta`,
+- kept this slice public-facing and book-local, while continuity docs record only the slice summary and validation.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-09 - Docs: start the real LinkedSpec mdBook
 
 - added a real public-facing mdBook scaffold at `docs/linkedspec-book/` with a broad chapter spine covering overview, user model, public API, DSL/action surface, compiler/runtime internals, shipped material, architecture, and development workflow,

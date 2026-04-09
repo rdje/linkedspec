@@ -15,6 +15,33 @@ Once that rule start is seen at top level, the rest of the paragraph belongs to 
 
 This is a better mental model than thinking of `.spec` files as rigid line-by-line mini-programs.
 
+## Minimal example
+
+```text
+Top::
+ /foo/ -> Word { return_a(Top) }
+
+Word:
+ /foo/ { return_a(Word) }
+```
+
+This file contains two rule paragraphs:
+
+- `Top::`
+- `Word:`
+
+`Top` is written with the double-colon form because it is intended as an entry-style rule in this example. `Word` is written with the single-colon form because it is a normal child rule.
+
+The body of `Top` contains:
+
+- one regex anchor: `/foo/`
+- one action edge: `-> Word { ... }`
+
+The body of `Word` contains:
+
+- one regex anchor: `/foo/`
+- one local action block
+
 ## Why it matters
 
 This paragraph-oriented model helps explain why LinkedSpec is comfortable with:
@@ -25,6 +52,85 @@ This paragraph-oriented model helps explain why LinkedSpec is comfortable with:
 - same-line and multiline authoring styles
 
 It also explains why top-level validation matters so much: the parser has to know when a new rule really starts and when a label-like line is still just content inside an open block.
+
+## Top-level rule starts versus block content
+
+Rule starts are top-level constructs. A label-like line inside an open block is not a new rule.
+
+```text
+Top::
+ /a/ -> Next {
+label:
+ return_a(Top)
+ }
+
+Next:
+ /b/ { return_a(Next) }
+```
+
+Here `label:` belongs to the action block attached to `Top`. It does not start a new `label` rule because the parser is still inside the `{ ... }` block.
+
+This matters because LinkedSpec allows rule bodies to carry real action and lifecycle blocks. If the frontend treated every `word:` token as a rule start, it would misread valid block content.
+
+## What can appear inside a rule paragraph
+
+A rule paragraph can include supported paragraph members such as:
+
+- regex tokens such as `/.../`
+- action edges such as `-> Child`
+- blind-call edges such as `=> Child`
+- action blocks such as `{ ... }`
+- lifecycle blocks such as `I { ... }`, `LS { ... }`, `LE { ... }`, and `LX { ... }`
+- split/capture markers such as `@capture_slice` and `@mark(name)`
+- method-like helper forms that lower through ActionIR
+
+The exact set of supported forms is intentionally validated. Stray top-level text is not “mostly okay.” It should be rejected clearly so users do not accidentally depend on token loss or partial parsing.
+
+## Same-line and multiline styles
+
+LinkedSpec supports compact same-line authoring:
+
+```text
+Top:: /foo/ -> Word { return_a(Top) }
+Word: /foo/ { return_a(Word) }
+```
+
+It also supports the clearer multiline style:
+
+```text
+Top::
+ /foo/
+ -> Word {
+   return_a(Top)
+ }
+
+Word:
+ /foo/ {
+   return_a(Word)
+ }
+```
+
+The multiline style is usually better for non-trivial rules. It leaves room for lifecycle blocks, markers, helper chains, and comments without forcing readers to scan a dense one-liner.
+
+## Conventional layout versus actual structure
+
+Most `.spec` files naturally use this order:
+
+```text
+RuleName:
+ /anchor/
+ -> Child { ... }
+```
+
+That convention is useful, but the deeper point is that the rule paragraph is the unit of structure. Regexes, lifecycle blocks, edges, and helper forms are members of the paragraph.
+
+So when reading a `.spec` file, ask:
+
+- What rule paragraph am I in?
+- Which top-level member comes next?
+- Am I inside an open block, or back at paragraph top level?
+
+Those questions will explain most of the syntax behavior more reliably than a strict line-oriented mental model.
 
 ## Where to go next
 
