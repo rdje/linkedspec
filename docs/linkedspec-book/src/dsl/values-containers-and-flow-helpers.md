@@ -2,7 +2,7 @@
 
 This chapter gives the public mental model for LinkedSpec’s value and control-flow helpers.
 
-The exhaustive reference still lives in the repo-root ActionIR guides while the book continues growing. This chapter explains how to think about the surface.
+For the method-by-method public reference, read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter. This chapter explains how to think about the surface before diving into exact helper choices.
 
 ## Containers: `scalar`, `array`, and `hash`
 

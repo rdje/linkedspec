@@ -27,6 +27,7 @@
 - [Capture, Marks, and Source Locations](dsl/capture-marks-and-source-locations.md)
 - [Source Boundary Helper Reference](dsl/source-boundary-helper-reference.md)
 - [Values, Containers, and Flow Helpers](dsl/values-containers-and-flow-helpers.md)
+- [Value, Container, and Flow Helper Reference](dsl/value-container-flow-helper-reference.md)
 
 # Compiler and Runtime
 

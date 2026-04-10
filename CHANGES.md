@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add value/container/flow helper reference
+
+- added a public mdBook method-level reference chapter for value, container, array-pipeline, predicate, and structured-flow helpers under the DSL section,
+- documented composition sites, accessors, snapshots versus flattening, assignment/call/append/return helpers, scalar/string/numeric helpers, array/hash helpers, fallback/presence helpers, and `if`/`switch` flow with examples,
+- linked the existing values/containers/flow mental-model chapter to the new reference and registered it in `SUMMARY.md`,
+- kept this as public documentation, with continuity docs recording the slice separately from the book.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add LinkedSpec source-boundary helper reference
 
 - added a public mdBook source-boundary helper reference chapter under the DSL section,
