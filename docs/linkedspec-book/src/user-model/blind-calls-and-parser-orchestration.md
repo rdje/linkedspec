@@ -48,7 +48,7 @@ The target must be a plain rule name. These forms are intentionally invalid:
 => Child-extra
 => Child[0]
 => Child.
-=> Child..return_a()
+=> Child..return(...)
 ```
 
 The invalid cases fail for different reasons:
@@ -56,7 +56,7 @@ The invalid cases fail for different reasons:
 - `=> { ... }` has no target rule.
 - `=> Child-extra` glues punctuation onto the target name.
 - `=> Child[0]` tries to apply regex-slot indexing to a parser-step edge.
-- `=> Child.` and `=> Child..return_a()` start malformed fluent suffixes.
+- `=> Child.` and `=> Child..return(...)` start malformed fluent suffixes.
 
 Slot indexing belongs to regex/action edges:
 
@@ -271,10 +271,10 @@ A blind call can include post-call code:
 
 ```text
 Wrapper::AND
- => Child { return_a(Wrapper) }
+ => Child { return(array("?Wrapper:", array_copy(array(Wrapper)))) }
 
 Child:
- /child/ -> Child { return_a(Child) }
+ /child/ -> Child { return(array("?Child:", array_copy(array(Child)))) }
 ```
 
 The lowering model is:
@@ -289,22 +289,22 @@ Fluent post-call chains are compact sugar over the same idea:
 
 ```text
 Wrapper::AND
- => Child .return_a()
+ => Child .return(array("?Wrapper:", array_copy(array(Wrapper))))
 
 Child:
- /child/ -> Child { return_a(Child) }
+ /child/ -> Child { return(array("?Child:", array_copy(array(Child)))) }
 ```
 
 The fluent example above is equivalent in lowered meaning to the explicit block form:
 
 ```text
 Wrapper::AND
- => Child { return_a(Wrapper) }
+ => Child { return(array("?Wrapper:", array_copy(array(Wrapper)))) }
 ```
 
 Use fluent post-call chains only when they remain short and obvious. Use an explicit block when the post-call logic needs more than one or two steps.
 
-This example uses `return_a()` because it is the compact historical helper already used by the blind-call post-processing surface. For new complex shaping, prefer helper-style action blocks or explicit child-result dataflow where the payload structure is visible:
+The examples above use explicit `return(array(...))` payloads because the returned shape is visible at the call site. For more complex shaping, prefer helper-style action blocks or explicit child-result dataflow:
 
 ```text
 Parent::AND

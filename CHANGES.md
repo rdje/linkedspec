@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Docs: modernize blind-call book examples
+
+- updated the public mdBook blind-call post-processing examples to use explicit `return(array(...))` payloads instead of the historical `return_a(...)` shortcut,
+- updated the malformed blind-call fluent suffix example from `=> Child..return_a()` to `=> Child..return(...)`,
+- reframed the post-call guidance so the book teaches visible payload shape by default and leaves legacy tagged return helpers to compatibility references,
+- refreshed roadmap and continuity notes so future sessions no longer treat the blind-call book examples as an intentional `return_a(...)` teaching surface.
+
+- Validation:
+  - targeted descriptor probe for the updated blind-call fluent and block post-call examples
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - blind-call book stale-example scan for `return_a(...)` fluent/post-call examples
+
 ## 2026-04-11 - Docs: prefer canonical helper examples in root guides
 
 - updated ordinary `USER_GUIDE.md` examples to use explicit `return(array(...))` payloads instead of the legacy `return_a(...)` shortcut,
