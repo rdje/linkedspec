@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add worked spec walkthrough
+
+- added a public mdBook end-to-end `.spec` walkthrough under the user-model section,
+- documented a small helper-style `Pair::AND` parser from rule paragraph through regex captures, `match_group(...)`, `trim(...)`, `hash(...)`, `return(...)`, inline `Get(...)`, `seek` versus `consume`, descriptor mode, runtime context, and evolution paths,
+- linked the walkthrough from `SUMMARY.md`, the `.spec` rule-paragraph chapter, and the public `Get(...)` / `get_parser(...)` chapter so readers have a concrete first parser path.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add blind-call orchestration guide
 
 - added a public mdBook chapter for blind calls and parser orchestration under the user-model section,
