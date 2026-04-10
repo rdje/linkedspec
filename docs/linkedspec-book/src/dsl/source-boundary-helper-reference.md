@@ -382,7 +382,7 @@ The following older helpers remain useful when reading or migrating legacy specs
 | `ibacktrack(label)` / `IBACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
 | `backtrack(label)` / `BACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
 
-The `label` argument on the legacy capture/backtrack helpers is compatibility syntax. The active lowering uses the current rule context, not a new independent target selected by that label text. New docs and examples should normally prefer explicit helper composition.
+The `label` argument on the legacy capture/backtrack helpers is compatibility syntax. The active lowering uses the current rule context, not a new independent target selected by that label text. For `capture(label)`, `capture_if(label)`, and `CAPTURE_IF()`, that means the captured value is appended to the rule-local default accumulator array named after the current rule. New docs and examples should normally prefer explicit helper composition.
 
 ## Choosing the smallest helper
 

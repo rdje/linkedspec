@@ -24,6 +24,36 @@ h(meta)
 
 These aliases are DSL spellings. They are not Perl sigils.
 
+## Per-rule default accumulator
+
+Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.
+
+The compact shorthand that uses this convention is:
+
+```text
+push(Child)
+```
+
+Inside `Parent`, that means "call `Child` and append the child result into `@Parent`."
+
+If `Child` returns an array-like payload and only one element should be appended, use:
+
+```text
+push(Child, 1)
+```
+
+That appends `call(Child)->[1]` into the current rule accumulator.
+
+Use this convention when the rule name is the best name for the collection. If a domain name is clearer, keep the target explicit:
+
+```text
+push(Child, children)
+push_value(array(children), scalar(child))
+push_nonempty(array(children), trim(capture_slice()))
+```
+
+Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `array(Parent)`, `push_value(array(Parent), value)`, or `return(hash("children", array_copy(array(Parent))))`.
+
 ## Assignment
 
 Use `assign(target, source)` to replace a target value.

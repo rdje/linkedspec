@@ -43,6 +43,74 @@ That rule keeps each concern explicit:
 - `declare(...)` names the intermediate value.
 - `return(hash(...))` returns one structured payload.
 
+## Per-rule default accumulator convention
+
+Each generated rule handler starts with one rule-local array named after that rule. A rule named `Parent` has a fresh `@Parent` array for that handler invocation; a rule named `logging_annotation` has `@logging_annotation`; a rule named `sub_gui_list` has `@sub_gui_list`.
+
+This is a convention, not global state. The array is local to the generated handler call and starts empty for that call. It exists so simple accumulator rules do not need to declare a separate array just to collect repeated child results.
+
+The current helper surface uses that convention in these implicit child-call forms:
+
+```text
+push(Child)
+push(Child, 1)
+```
+
+Read those as:
+
+```text
+# inside rule Parent
+push(Child)     # append call(Child) into @Parent
+push(Child, 1)  # append call(Child)->[1] into @Parent
+```
+
+LinkedSpec standardizes child-call appends on `push(...)`: the first argument is the child rule being called, the optional second bare-word argument is the target array, and a numeric final argument selects one indexed element from the child return.
+
+Use the convention when the rule itself is the natural accumulator:
+
+```text
+Parent::
+ -> Child {
+   push(Child)
+ }
+ LX {
+   return(hash("kind", "parent", "children", array_copy(array(Parent))));
+ }
+```
+
+If the accumulator has a domain name that is clearer than the rule name, use an explicit target instead:
+
+```text
+Parent:: I { declare(array, children); }
+ -> Child {
+   push(Child, children)
+ }
+ LX {
+   return(hash("kind", "parent", "children", array_copy(array(children))));
+ }
+```
+
+Other modern helpers do not silently guess the current rule accumulator. They can still use it when you name it explicitly:
+
+```text
+push_value(array(Parent), capture_slice());
+push_nonempty(array(Parent), trim(capture_slice()));
+assign(array(Parent), array());
+return(hash("children", array_copy(array(Parent))));
+```
+
+Older capture and return helpers also use this convention:
+
+| Helper | Current-rule accumulator behavior | Modern direction |
+| --- | --- | --- |
+| `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_value(array(CurrentRule), capture_slice())` or an explicit domain array |
+| `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` or an explicit domain array |
+| `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` |
+| `return_a(CurrentRule)` | returns the historical tagged payload including `@CurrentRule` | prefer `return(...)` with `array_copy(array(CurrentRule))` when writing new structured payloads |
+| `return_ma(CurrentRule)` | returns the historical match-list-plus-accumulator payload including `@CurrentRule` | prefer `return(...)` with explicit fields |
+
+For new specs, prefer `push(...)` for child-call appends. Prefer explicit targets when there is any chance the reader would wonder which collection is being mutated.
+
 ## Containers and accessors
 
 These helpers are the entry point into local working state and structured values.
@@ -139,10 +207,10 @@ These helpers are statements. They consume values and change rule behavior.
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
-| `push_call(rule)` | call one rule and append its result | a child rule result should go straight into the current rule's conventional array accumulator. |
-| `push_call(rule, index)` | call one rule and append one indexed result | one element from a shaped child return should go straight into the current rule's conventional array accumulator. |
-| `push_call(target, rule)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
-| `push_call(target, rule, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
+| `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
+| `push(rule, index)` | call one rule and append one indexed result | one element from a shaped child return should go straight into the current rule's conventional array accumulator. |
+| `push(rule, target)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
+| `push(rule, target, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
 | `push_value(array(name), expr)` | append one value | an array should grow by one item. |
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
@@ -168,29 +236,29 @@ Direct child-accumulator pattern:
 ```text
 Parent::
  -> Child {
-   push_call(Child)
+   push(Child)
  }
  LX {
    return(hash("kind", "parent", "children", array_copy(array(Parent))));
  }
 ```
 
-`push_call(rule)` is the compact form for a very common parser action: run one child rule and append that child result into the current rule's conventional array. In a rule named `Parent`, `push_call(Child)` means "call `Child` and push the return value into `@Parent`."
+`push(rule)` is the compact form for a very common parser action: run one child rule and append that child result into the current rule's conventional array. In a rule named `Parent`, `push(Child)` means "call `Child` and push the return value into `@Parent`."
 
 Use the one-argument form when the current rule's conventional array is the accumulator:
 
 ```text
-push_call(Item);
-push_call(Field);
-push_call(Node);
+push(Item);
+push(Field);
+push(Node);
 ```
 
 Use the targeted two-argument form when the destination should be a separate array variable:
 
 ```text
-push_call(items, Item);
-push_call(fields, Field);
-push_call(children, Node);
+push(Item, items);
+push(Field, fields);
+push(Node, children);
 ```
 
 This is intentionally shorter than spelling the lower-level pieces:
@@ -211,13 +279,13 @@ push_value(array(children), hash("kind", "wrapped", "node", call(Node)));
 When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
 
 ```text
-push_call(quoted_string, 1);
+push(quoted_string, 1);
 ```
 
 That is the helper equivalent of pushing `call(quoted_string)->[1]` into the current rule's array. If the target should be a separate array, use the three-argument form:
 
 ```text
-push_call(logging_annotation, quoted_string, 1);
+push(quoted_string, logging_annotation, 1);
 ```
 
 Keep indexed forms for shaped child payloads whose convention is already clear; otherwise, prefer returning a clearer hash or typed payload from the child and pushing the whole child result.
@@ -229,7 +297,7 @@ logging_annotation: /@(\w+)\s*\(\s*/ /\s*\)/ @capture_slice
 I { declare(array, logging_annotation); }
 
 -> quoted_string {
-  push_call(quoted_string, 1)
+  push(quoted_string, 1)
 }
 -> comma {
   push_nonempty(array(logging_annotation), trim(capture_slice()))

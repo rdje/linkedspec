@@ -202,7 +202,7 @@ logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*
 I {$IMATCH =~ s/@|\s*\(//go}
 
 -> quoted_string {
-  push_call(quoted_string, 1)
+  push(quoted_string, 1)
 }
 -> comma {
   push_nonempty(a(logging_annotation), trim(capture_slice()))

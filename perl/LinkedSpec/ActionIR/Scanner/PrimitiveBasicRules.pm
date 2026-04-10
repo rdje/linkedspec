@@ -15,8 +15,8 @@ sub try_scan_contract_ir_events {
  my %dispatch = (
   'assign_call_my' => \&_scan_contract_assign_call_my,
   'assign_call' => \&_scan_contract_assign_call,
-  'push_call_indexed_builtin' => \&_scan_contract_push_call_indexed_builtin,
-  'push_call_builtin' => \&_scan_contract_push_call_builtin,
+  'push_child_call_indexed_builtin' => \&_scan_contract_push_child_call_indexed_builtin,
+  'push_child_call_builtin' => \&_scan_contract_push_child_call_builtin,
   'return_call' => \&_scan_contract_return_call,
   'return_bare' => \&_scan_contract_return_bare,
   'exit_bare' => \&_scan_contract_exit_bare,
@@ -53,7 +53,7 @@ while ($code =~ /(?<!\bmy\s)(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*
  return \@events
 }
 
-sub _scan_contract_push_call_indexed_builtin {
+sub _scan_contract_push_child_call_indexed_builtin {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)\s*->\s*\[\s*(?<index>\d+)\s*\]/g) {
@@ -62,7 +62,7 @@ while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)
  return \@events
 }
 
-sub _scan_contract_push_call_builtin {
+sub _scan_contract_push_child_call_builtin {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)(?!\s*->\s*\[)/g) {

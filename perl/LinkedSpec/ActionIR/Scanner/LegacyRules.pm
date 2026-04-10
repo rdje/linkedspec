@@ -20,7 +20,9 @@ sub try_scan_contract_ir_events {
  my %dispatch = (
   'call' => \&_scan_contract_call,
   'push_single_arg' => \&_scan_contract_push_single_arg,
+  'push_indexed_arg' => \&_scan_contract_push_indexed_arg,
   'push_target_arg' => \&_scan_contract_push_target_arg,
+  'push_target_indexed_arg' => \&_scan_contract_push_target_indexed_arg,
   'push_scope_target_arg' => \&_scan_contract_push_scope_target_arg,
   'return_a' => \&_scan_contract_return_a,
   'return_general' => \&_scan_contract_return_general,
@@ -158,6 +160,24 @@ sub _scan_contract_push_target_arg {
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
  push @events, {raw => $&, args => {source => $+{source}, target => $+{target}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_indexed_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {source => $+{source}, index => $+{index}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_target_indexed_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {source => $+{source}, target => $+{target}, index => $+{index}}};
 }
  return \@events
 }

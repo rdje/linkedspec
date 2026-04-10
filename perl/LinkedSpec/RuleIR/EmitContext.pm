@@ -403,11 +403,6 @@ sub _lower_push_nonempty_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_push_nonempty_statement', @args)
 }
 
-sub _lower_push_call_statement {
- my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_lower_push_call_statement', @args)
-}
-
 sub _lower_regex_subst_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_regex_subst_statement', @args)

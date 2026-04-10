@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - DSL: standardize child-call appends on push
+
+- documented that each generated rule handler owns a fresh rule-local default accumulator array named after the rule,
+- standardized child-call appends on the existing shorter `push(Rule)` helper instead of keeping a duplicate `push_call(Rule)` surface,
+- added indexed `push(Rule, index)` and `push(Rule, target, index)` forms so `push(...)` covers shaped child-result appends too,
+- migrated the recently helperized `specs/tkgui.spec`, `specs/regdef.spec`, and `specs/ebnf.spec::logging_annotation` examples from `push_call(...)` to `push(...)`,
+- renamed the internal raw-wrapper contracts from `push_call_*_builtin` to `push_child_call_*_builtin` so descriptor metadata no longer looks like it exposes a public `push_call(...)` DSL helper,
+- documented which older capture and tagged-return helper surfaces also use the current-rule accumulator convention,
+- added examples showing when to use the convention and when an explicit domain array is clearer,
+- logged the next DSL consistency audit targets in the live roadmaps: legacy return helper overlap, snapshot/flatten aliases, tail/drop aliases, and convention-based accumulator helpers.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm`
+  - `perl -c t/phase0_regression.t`
+  - focused descriptor probe for indexed `push(Rule, index)` canonical `PUSH` metadata
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - Specs: helperize small push-call aggregators
 
 - added the compact `push_call(Rule)` DSL helper for the common "call a child rule and push its result into the current rule accumulator" intent, with `push_call(Rule, index)` and explicit-target `push_call(target, Rule[, index])` forms for the less implicit cases,

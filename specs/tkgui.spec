@@ -1,5 +1,5 @@
 sub_gui_list:: 
- -> sub_gui	{push_call(sub_gui)}
+ -> sub_gui	{push(sub_gui)}
  -> comment	{next}
 
  LX {return {@sub_gui_list}}

@@ -616,7 +616,7 @@ and then:
 
 ```text
 -> quoted_string {
-  push_call(quoted_string, 1)
+  push(quoted_string, 1)
 }
 -> comma {
   push_nonempty(a(logging_annotation), trim(capture_slice()))
@@ -632,7 +632,7 @@ This is a useful advanced example because it combines:
 - a two-regex rule,
 - an anonymous capture-boundary marker,
 - a child call into `quoted_string`,
-- `push_call(...)` for the indexed quoted-string child result,
+- `push(...)` for the indexed quoted-string child result,
 - comma handling,
 - `push_nonempty(...)` for trimmed optional capture appends,
 - a normalized typed return payload.

@@ -156,7 +156,7 @@ sub _kind_override_for_contract_id {
  return 'CALL'      if $contract_id eq 'return_call';
  return 'RETURN'    if $contract_id eq 'return_imatch' || $contract_id eq 'return_array';
  return 'DECLARE'   if $contract_id eq 'declare_typed' || $contract_id eq 'declare_alias';
- return 'PUSH'      if $contract_id eq 'push_single_arg' || $contract_id eq 'push_target_arg' || $contract_id eq 'push_scope_target_arg';
+ return 'PUSH'      if $contract_id eq 'push_single_arg' || $contract_id eq 'push_indexed_arg' || $contract_id eq 'push_target_arg' || $contract_id eq 'push_target_indexed_arg' || $contract_id eq 'push_scope_target_arg';
  return 'CAPTURE_IF' if $contract_id eq 'capture_if' || $contract_id eq 'capture_if_macro';
  return 'IBACKTRACK' if $contract_id eq 'ibacktrack' || $contract_id eq 'ibacktrack_macro';
  return 'BACKTRACK'  if $contract_id eq 'backtrack' || $contract_id eq 'backtrack_macro';
@@ -177,20 +177,12 @@ sub _normalize_canonical_args {
  if ($contract_id eq 'return_call') {
   $args{context} = 'return';
  }
- elsif ($contract_id eq 'push_single_arg') {
+ elsif ($contract_id eq 'push_single_arg' || $contract_id eq 'push_indexed_arg') {
   $args{target} = $label unless defined $args{target};
   $args{target_mode} = 'implicit_current_label';
  }
- elsif ($contract_id eq 'push_target_arg' || $contract_id eq 'push_scope_target_arg') {
+ elsif ($contract_id eq 'push_target_arg' || $contract_id eq 'push_target_indexed_arg' || $contract_id eq 'push_scope_target_arg') {
   $args{target_mode} = 'explicit';
- }
- elsif ($contract_id eq 'push_call') {
-  if (!defined($args{target})) {
-   $args{target} = $label;
-   $args{target_mode} = 'implicit_current_label';
-  } else {
-   $args{target_mode} = 'explicit';
-  }
  }
  elsif ($contract_id eq 'return_undef') {
   $args{value} = 'undef';

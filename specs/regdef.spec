@@ -1,11 +1,11 @@
 regdef_top::
--> reg_def  {push_call(reg_def)}
+-> reg_def  {push(reg_def)}
 -> comment
 
 LX {return ['?regdef_top:', \@regdef_top]}
 
 reg_def: /(?is)\breg_def\s+(\w+).+?(?<!\\)\{/  /(?<!\\)\}/
--> reg_fld         {push_call(reg_fld)}
+-> reg_fld         {push(reg_fld)}
 -> comment
 -> ml_dquotes
 -> ob_cb
