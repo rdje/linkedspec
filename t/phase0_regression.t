@@ -38760,7 +38760,7 @@ SPEC
     );
 };
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
-    plan tests => 14;
+    plan tests => 16;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
@@ -38773,6 +38773,11 @@ subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
         'flat(array(name)) lowers explicit array wrapper into surrounding array constructor list context'
     );
     is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic", flatten(array(parts)), scalar(name)))'),
+        'return ["semantic", @parts, $name]',
+        'flatten(array(name)) remains a compatibility alias for flat(array(name))'
+    );
+    is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node", "item", scalar(name)))'),
         'return {%extra, "kind" => "node", "item" => $name}',
         'flat_hash(name) lowers hash contents into surrounding hash constructor list context'
@@ -38781,6 +38786,11 @@ subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat(hash(extra)), "kind", "node"))'),
         'return {%extra, "kind" => "node"}',
         'flat(hash(name)) lowers explicit hash wrapper into surrounding hash constructor list context'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flatten(hash(extra)), "kind", "node"))'),
+        'return {%extra, "kind" => "node"}',
+        'flatten(hash(name)) remains a compatibility alias for flat(hash(name))'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(flat_array(items))'),

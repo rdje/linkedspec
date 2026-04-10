@@ -72,7 +72,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `coalesce(...)`
 - `array_copy(...)`
 - `array_values(...)` as a compatibility alias
-- `flat(...)`, `flatten(...)`, `flat_array(...)`, `flat_hash(...)`
+- `flat(...)`, `flat_array(...)`, `flat_hash(...)` with compatibility alias `flatten(...)`
 - `join_values(...)`
 - `call(rule)` as a value source
 - generalized `return(payload)` payload lowering
@@ -308,7 +308,7 @@ Method-DSL migration note:
 - on both action-edge and lifecycle surfaces,
 - so pure array layering is now part of the same explicit method-like DSL contract as `sorted_keys(...)`, `take(...)`, `tail(...)`, and the other parser-oriented array helpers.
 
-## `flat(...)`, `flatten(...)`, `flat_array(...)`, `flat_hash(...)`
+## `flat(...)`, `flat_array(...)`, `flat_hash(...)`
 These helpers mean “splice this collection into the surrounding constructor.”
 
 Examples:
@@ -326,9 +326,10 @@ Equivalent generic forms:
 ```text
 array("?subprogram_declaration:", flat(array(IMATCH_LIST)))
 hash(flat(hash(extra_pairs)), "kind", "node")
-hash(flatten(hash(extra_pairs)), "kind", "node")
-array(flatten(array(semantic_annotations)))
+array(flat(array(semantic_annotations)))
 ```
+
+`flatten(...)` remains supported as a compatibility alias for `flat(...)`, but new examples should use `flat(...)`. The helper is a list-context splice, not a recursive deep-tree flatten operation.
 
 Use cases:
 - inserting `@IMATCH_LIST` into a surrounding `array(...)`,

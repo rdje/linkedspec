@@ -129,12 +129,12 @@ They take effect when the expression appears inside a statement or helper that c
 - `coalesce(scalaref(retv, {parts}), array("empty"))` -> `do { my $__ls_coalesce = $retv->{parts}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }`
 - `flat_array(items)` -> `@items`
 - `flat(array(parts))` -> `@parts`
-- `flatten(array(parts))` -> `@parts`
 - `flat_array(sorted_keys(hash(meta)))` -> `do { my $__ls_flat_array = [sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq 'ARRAY') ? @{$__ls_flat_array} : () }`
 - `flat_hash(extra)` -> `%extra`
 - `flat(hash(extra))` -> `%extra`
-- `flatten(hash(extra))` -> `%extra`
 - `flat_hash(hash_copy(hash(meta)))` -> `do { my $__ls_flat_hash = {%meta}; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq 'HASH') ? %{$__ls_flat_hash} : () }`
+- `flatten(array(parts))` -> `@parts` (compatibility alias for `flat(...)`)
+- `flatten(hash(extra))` -> `%extra` (compatibility alias for `flat(...)`)
 - `join_values("", array(word))` -> `join("", @word)`
 - `call(Leaf)` -> `&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)`
 
@@ -207,11 +207,9 @@ Important nuance:
 - `return(tail(sorted_keys(hash(meta)), 2))` -> `return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }`
 - `return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))` -> `return ["?subprogram_declaration:", @IMATCH_LIST]`
 - `return(array("semantic", flat(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
-- `return(array("semantic", flatten(array(parts)), scalar(name)))` -> `return ["semantic", @parts, $name]`
 - `return(array("keys", flat_array(sorted_keys(hash(meta)))))` -> `return ["keys", do { my $__ls_flat_array = [sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq 'ARRAY') ? @{$__ls_flat_array} : () }]`
 - `return(hash(flat_hash(extra), "kind", "node", "item", scalar(name)))` -> `return {%extra, "kind" => "node", "item" => $name}`
 - `return(hash(flat(hash(extra)), "kind", "node"))` -> `return {%extra, "kind" => "node"}`
-- `return(hash(flatten(hash(extra)), "kind", "node"))` -> `return {%extra, "kind" => "node"}`
 - `return(hash(flat_hash(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "stage")), "item", scalar(name)))` -> `return {do { my $__ls_flat_hash = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq 'HASH') ? %{$__ls_flat_hash} : () }, "item" => $name}`
 - `return(flat_array(items))` -> `return @items`
 - `return(flat_array(sorted_values(hash(meta))))` -> `return do { my $__ls_flat_array = [map { $meta{$_} } sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq 'ARRAY') ? @{$__ls_flat_array} : () }`

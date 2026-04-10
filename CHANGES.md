@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - DSL: make flat the canonical splice helper name
+
+- clarified `flat(...)` as the canonical generic list-context splice helper for array/hash expressions,
+- kept `flatten(...)` as an explicit compatibility alias and added direct regression coverage for array and hash generic alias lowering,
+- updated current lowering/reference docs so `flatten(...)` is no longer presented as a peer spelling or normal example,
+- removed the `flat(...)` / `flatten(...)` pair from the active DSL consistency audit queue.
+
+- Validation:
+  - `perl -c t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - DSL: prefer array_copy snapshots in live specs
 
 - migrated live `.spec` snapshot payloads from compatibility `array_values(...)` to preferred `array_copy(...)` in `lib_reader`, `sdce`, `ds_vhistory`, `Lispish`, `hlink_substitution`, `simenv`, and `vhdl`,

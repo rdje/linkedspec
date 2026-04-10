@@ -164,7 +164,7 @@ The most important collection distinction is snapshot versus flatten.
 | `flat_array(array(items))` | splice array items into the surrounding constructor. |
 | `flat_hash(hash(meta))` | splice hash key/value pairs into the surrounding constructor. |
 | `flat(expr)` | generic flatten/splice helper for array or hash expressions. |
-| `flatten(expr)` | alias for `flat(expr)`. |
+| `flatten(expr)` | compatibility alias for `flat(expr)`; prefer `flat(...)` in new examples. |
 
 Snapshot example:
 
