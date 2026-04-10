@@ -135,4 +135,5 @@ Those questions will explain most of the syntax behavior more reliably than a st
 ## Where to go next
 
 - Read the rule-modes and parse-modes chapter next for execution behavior.
+- Read [Action and Lifecycle Placement](../dsl/action-and-lifecycle-placement.md) when you need to know where action edges and lifecycle blocks run.
 - Use the repo `USER_GUIDE.md` when you want the denser working reference while this book is still growing.

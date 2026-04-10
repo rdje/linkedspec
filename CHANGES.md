@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add action/lifecycle placement chapter
+
+- added a public mdBook action/lifecycle placement chapter under the DSL section,
+- documented rule paragraph members, `I { ... }` setup, action edges, method-chain action edges, empty action edges, blind-call edges, match-context helper use, local `LS`/`LE` hooks, `LX` failure shaping, advanced `IT`/`EX`/`E` hooks, and placement-sensitive split/mark markers,
+- linked the new chapter from `SUMMARY.md` and the `.spec` rule-paragraph chapter,
+- kept advanced lifecycle semantics carefully framed around practical placement because exact hook behavior depends on the generated handler variant selected by the rule mode/body shape.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add declaration helper reference
 
 - added a public mdBook declaration helper reference chapter under the DSL section,
