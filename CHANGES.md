@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add declaration helper reference
+
+- added a public mdBook declaration helper reference chapter under the DSL section,
+- documented canonical `declare(type, ...)`, declaration aliases, declaration placement, multiple entries, initialized declarations, scalar/array/hash initializer examples, fluent versus structured forms, and common mistakes,
+- linked the new declaration reference into `SUMMARY.md` and added declaration helpers to the action-model helper-family overview,
+- kept lifecycle discussion focused on declaration lifetime and pointed readers to the value/flow and source-boundary references for initializer expression details.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add value/container/flow helper reference
 
 - added a public mdBook method-level reference chapter for value, container, array-pipeline, predicate, and structured-flow helpers under the DSL section,
