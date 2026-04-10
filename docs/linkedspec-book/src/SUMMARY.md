@@ -43,6 +43,7 @@
 # Shipped Material
 
 - [Shipped Specs and Corpora](specs-and-corpora/shipped-specs-and-corpora.md)
+- [`Lispish.spec` Walkthrough](specs-and-corpora/lispish-spec-walkthrough.md)
 
 # Architecture
 

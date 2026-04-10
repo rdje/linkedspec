@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add Lispish shipped-spec walkthrough
+
+- added a public mdBook walkthrough for `specs/Lispish.spec` under the shipped-material section,
+- documented how to run `LinkedSpec::get_parser('Lispish')`, the regression-locked nested AST shape, head/tail output conventions, rule inventory, top-level dispatch, recursive `parenthesis` accumulator flow, token readers, comment handling, descriptor readiness, and the `perl/Lispish.pm` convenience module,
+- linked the new walkthrough from `SUMMARY.md` and the shipped specs/corpora chapter so the public book now has its first detailed shipped-spec walkthrough.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: modernize first-reader examples
 
 - updated the public book's first-reader `.spec` and `Get(...)` examples away from tiny legacy `return_a(...)` snippets and toward helper-built payload examples using `return(hash(...))` and `match_text()`,

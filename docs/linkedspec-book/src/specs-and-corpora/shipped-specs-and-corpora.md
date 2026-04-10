@@ -126,6 +126,8 @@ my $input = '(a (b c) d)';
 my $ast = $parser->(\$input);
 ```
 
+For the detailed rule-by-rule explanation, read [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md).
+
 Load the VHDL parser:
 
 ```perl
@@ -258,7 +260,7 @@ That means shipped material is not just documentation decoration. It is part of 
 
 Use this reading order:
 
-1. Start with `Lispish.spec` for a compact recursive AST parser.
+1. Start with [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md) for a compact recursive AST parser.
 2. Read `ebnf.spec` to see grammar parsing and annotation-like structures.
 3. Read `vhdl.spec` to see a larger real-domain grammar with many nested rule families.
 4. Read `tablegrep.spec`, `portmap.spec`, and `sdce.spec` for focused domain-specific parsers.
