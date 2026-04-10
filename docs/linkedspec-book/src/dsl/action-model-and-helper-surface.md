@@ -55,7 +55,7 @@ The current helper surface is broad, but it is easier to learn in families:
 
 - value and container helpers: `scalar(...)`, `array(...)`, `hash(...)`, `flat_array(...)`, `join_values(...)`
 - declaration helpers: `declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`
-- assignment and mutation helpers: `assign(...)`, `push_value(...)`, `set_key(...)`
+- assignment and mutation helpers: `assign(...)`, `push_value(...)`, `push_nonempty(...)`, `set_key(...)`
 - capture and mark helpers: `capture_slice()`, `capture_take()`, `mark_here(name)`, `capture_from(name)`
 - source-location helpers: `cursor_line()`, `cursor_col()`, `entry_start_pos()`, `match_end_col()`
 - input and match readers: `input_text()`, `entry_text()`, `match_text()`, `entry_group(index)`

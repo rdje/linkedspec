@@ -204,9 +204,11 @@ I {$IMATCH =~ s/@|\s*\(//go}
 -> quoted_string {
   push @logging_annotation, call(quoted_string)->[1]
 }
--> comma.capture_if
+-> comma {
+  push_nonempty(a(logging_annotation), trim(capture_slice()))
+}
 -> logging_annotation[1] {
-  CAPTURE_IF();
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
   return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
 }
 

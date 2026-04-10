@@ -140,6 +140,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
 | `push_value(array(name), expr)` | append one value | an array should grow by one item. |
+| `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `return_imatch(...)` / `return_im(...)` | legacy tagged current-match return | reading or migrating older specs. Prefer `return(...)` for new structured payloads. |
@@ -157,6 +158,46 @@ Parent::AND
    return(hash("kind", "parent", "children", array_copy(array(children))));
  }
 ```
+
+Conditional append pattern:
+
+```text
+logging_annotation: /@(\w+)\s*\(\s*/ /\s*\)/ @capture_slice
+I { declare(array, logging_annotation); }
+
+-> quoted_string {
+  push_value(array(logging_annotation), call(quoted_string)->[1])
+}
+-> comma {
+  push_nonempty(array(logging_annotation), trim(capture_slice()))
+}
+-> logging_annotation[1] {
+  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  return(hash(
+    "kind", "logging_annotation",
+    "name", match_group(0),
+    "args", array_copy(array(logging_annotation))
+  ))
+}
+```
+
+`push_nonempty(array(target), value)` is for accumulator rules where an optional parse span may be empty after normalization. It evaluates the value once, skips `undef`, skips the empty string, skips empty array references, and skips empty hash references. It still preserves the string `"0"` because `"0"` is data, not absence. Other reference values count as present values and are appended.
+
+Use `push_nonempty(...)` when the empty value is parser noise:
+
+```text
+push_nonempty(array(parts), trim(capture_slice()));
+push_nonempty(array(children), call(OptionalChild));
+push_nonempty(array(tags), lowercase(trim(match_text())));
+```
+
+Do not use it when an empty string is a meaningful token:
+
+```text
+push_value(array(fields), scalar(field_text));
+```
+
+That distinction is deliberate. `push_value(...)` says "append exactly what I computed." `push_nonempty(...)` says "append the computed value only if it survived the emptiness filter."
 
 Append versus replace:
 

@@ -17,6 +17,7 @@ sub try_scan_contract_ir_events {
   'split_trim_filter_assignment' => \&_scan_contract_split_trim_filter_assignment,
   'return_imatch' => \&_scan_contract_return_imatch,
   'push_value' => \&_scan_contract_push_value,
+  'push_nonempty' => \&_scan_contract_push_nonempty,
   'assign_value' => \&_scan_contract_assign_value,
   'regex_subst' => \&_scan_contract_regex_subst,
   'split_array' => \&_scan_contract_split_array,
@@ -94,6 +95,29 @@ while ($code =~ /\b(?<expr>push_value\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^
  }
  next unless defined($target_symbol) && length($target_symbol);
  push @events, {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_nonempty {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+ my $raw_expr = $+{expr};
+ my $call = _parse_method_function_expr($raw_expr);
+ next unless $call && $call->{method} eq 'push_nonempty';
+ my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
+ next unless $effective_args;
+ my $target_expr = _trim_action_ir_value($effective_args->[0]);
+ my $value_expr = _trim_action_ir_value($effective_args->[1]);
+ next unless defined($target_expr) && length($target_expr);
+ next unless defined($value_expr) && length($value_expr);
+ my ($target_symbol) = $target_expr =~ /^(?:array|a)\s*\(\s*(\w+)\s*\)$/o;
+ if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+  $target_symbol = $1;
+ }
+ next unless defined($target_symbol) && length($target_symbol);
+ push @events, {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr, predicate => 'nonempty'}};
 }
  return \@events
 }

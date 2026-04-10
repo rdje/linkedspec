@@ -618,9 +618,11 @@ and then:
 -> quoted_string {
   push @logging_annotation, call(quoted_string)->[1]
 }
--> comma.capture_if
+-> comma {
+  push_nonempty(a(logging_annotation), trim(capture_slice()))
+}
 -> logging_annotation[1] {
-  CAPTURE_IF();
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
   return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
 }
 ```
@@ -631,16 +633,16 @@ This is a useful advanced example because it combines:
 - an anonymous capture-boundary marker,
 - a child call into `quoted_string`,
 - comma handling,
-- `CAPTURE_IF()` for the closing edge,
+- `push_nonempty(...)` for trimmed optional capture appends,
 - a normalized typed return payload.
 
-The current regression suite locks this runtime behavior because the generated `capture_if(...)` / `CAPTURE_IF()` trim code must preserve the literal whitespace regex:
+The current regression suite locks this runtime behavior because the optional comma and closing-edge spans are real parser data only after trimming. `push_nonempty(a(logging_annotation), trim(capture_slice()))` makes that intention explicit: read the current anonymous capture slice, trim it, and append it only when the result is not empty. This replaces the old `capture_if(...)` / `CAPTURE_IF()` surface in the live `ebnf.spec` rule while keeping the same runtime shape for nonempty argument fragments.
 
 ```text
-$capt =~ s/^\s*|\s*$//go;
+push_nonempty(a(logging_annotation), trim(capture_slice()));
 ```
 
-That is not incidental. If a helper-lowering path accidentally interpolates the trim regex while generating Perl code, the resulting handler can fail to compile. The regression exists so logging annotations remain a real parser feature, not just descriptor metadata.
+That is not incidental. The helper is short enough to use in a spec, but explicit enough to expose all three concepts the parser author cares about: the capture boundary, the normalization step, and the accumulator append rule. The regression exists so logging annotations remain a real parser feature, not just descriptor metadata.
 
 ## Corpus relationship
 
@@ -712,7 +714,7 @@ regex raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETU
 include_dir raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
 include_file raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
 semantic_annotation raw=0 unresolved=0 ready=1 nodes=ASSIGN|BACKTRACK|CAPTURE_MACRO|REGEX_SUBST|RETURN
-logging_annotation raw=0 unresolved=0 ready=1 nodes=CALL|CAPTURE_IF|POSITION_TRACK|REGEX_SUBST|RETURN
+logging_annotation raw=0 unresolved=0 ready=1 nodes=CALL|CAPTURE_SLICE|POSITION_TRACK|PUSH|REGEX_SUBST|RETURN
 ```
 
 The key public reading is:
@@ -733,6 +735,7 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
 - the source spec prefers short aliases such as `s(...)` and `a(...)` in the core method-DSL band,
 - `logging_annotation` uses the `@capture_slice` marker,
+- `logging_annotation` uses `push_nonempty(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
 - `@log_rule("expr", "term")` parses at runtime into a normalized `logging_annotation` payload,
 - `ebnf/*.ebnf` corpus files parse through `ebnf.spec` and return array ASTs,
 - the small `Expr` / `Term` smoke input preserves the expected top rule names.

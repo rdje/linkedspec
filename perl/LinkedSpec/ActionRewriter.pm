@@ -60,6 +60,7 @@ my @EMIT_CONTEXT_FORWARDERS = qw(
  _lower_return_imatch_statement
  _lower_assign_statement
  _lower_push_value_statement
+ _lower_push_nonempty_statement
  _lower_regex_subst_statement
  _lower_return_undef_statement
  _lower_return_array_statement

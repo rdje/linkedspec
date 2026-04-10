@@ -85,6 +85,7 @@ sub default_deps_for_package {
    'lower_return_imatch_statement',
    'lower_assign_method_statement',
    'lower_push_value_statement',
+   'lower_push_nonempty_statement',
    'lower_regex_subst_statement',
    'lower_array_pipeline_expr',
    'lower_if_flow_statement',
@@ -112,6 +113,7 @@ sub _require_lowering_deps {
   lower_return_imatch_statement  => _require_dep($deps, 'lower_return_imatch_statement'),
   lower_assign_method_statement  => _require_dep($deps, 'lower_assign_method_statement'),
   lower_push_value_statement     => _require_dep($deps, 'lower_push_value_statement'),
+  lower_push_nonempty_statement  => _require_dep($deps, 'lower_push_nonempty_statement'),
   lower_regex_subst_statement    => _require_dep($deps, 'lower_regex_subst_statement'),
   lower_array_pipeline_expr      => _require_dep($deps, 'lower_array_pipeline_expr'),
   lower_if_flow_statement        => _require_dep($deps, 'lower_if_flow_statement'),
@@ -1796,6 +1798,18 @@ sub _build_assignment_and_regex_contracts {
     my ($code) = @_;
     my $lower = $d->{lower_push_value_statement};
     $code =~ s/\b(?<expr>push_value\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'push_nonempty',
+   ir_node            => 'PUSH',
+   diag_name          => 'push_nonempty',
+   unresolved_pattern => qr/\bpush_nonempty\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_push_nonempty_statement};
+    $code =~ s/\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },

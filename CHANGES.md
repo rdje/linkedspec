@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - DSL: add push_nonempty helper
+
+- added the modern `push_nonempty(array(target), value)` DSL statement helper as a concise replacement for common trimmed optional-capture append flows,
+- wired the helper through ActionIR contracts, primitive scanning, method lowering, emit-context forwarding, and action rewriting so it classifies as canonical `PUSH` instead of legacy `CAPTURE_IF`,
+- defined runtime semantics that skip `undef`, empty strings, empty arrayrefs, and empty hashrefs while preserving meaningful values such as `"0"`,
+- migrated `specs/ebnf.spec::logging_annotation` from the legacy `capture_if(...)` / `CAPTURE_IF()` surface to `push_nonempty(a(logging_annotation), trim(capture_slice()))`,
+- expanded regression coverage for helper lowering, runtime behavior, descriptor ActionIR metadata, and the shipped EBNF logging-annotation parser path,
+- updated the public mdBook helper reference and EBNF walkthrough so the new helper is documented with rationale, semantics, and examples.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c t/phase0_regression.t`
+  - focused `push_nonempty(...)` / `ebnf` descriptor and runtime probes
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - Docs: add EBNF shipped-spec walkthrough
 
 - added a public mdBook walkthrough for `specs/ebnf.spec` under the shipped-material section,

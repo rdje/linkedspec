@@ -1505,7 +1505,7 @@ subtest 'action_rewriter_compat_wrappers_share_emit_context_delegator' => sub {
 };
 
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 113;
+    plan tests => 115;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1629,6 +1629,10 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_lower_push_value_statement = sub {
         my ($expr) = @_;
         return "push_value:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_push_nonempty_statement = sub {
+        my ($expr) = @_;
+        return "push_nonempty:$expr";
     };
     local *LinkedSpec::RuleIR::EmitContext::_lower_regex_subst_statement = sub {
         my ($target, $pattern, $replacement, $flags) = @_;
@@ -1853,6 +1857,10 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_push_value_statement('push_value(array(items), scalar(foo))'), 'push_value:push_value(array(items), scalar(foo))', 'ActionRewriter push-value helper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter push-value helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_push_nonempty_statement('push_nonempty(array(items), scalar(foo))'), 'push_nonempty:push_nonempty(array(items), scalar(foo))', 'ActionRewriter push-nonempty helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter push-nonempty helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_regex_subst_statement('scalar(foo)', '"/a/"', '"/b/"', 'g'), 'regex_subst:scalar(foo):"/a/":"/b/":g', 'ActionRewriter regex-subst helper now delegates through the EmitContext compatibility owner');
@@ -2313,6 +2321,7 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
             lower_return_imatch_statement  => sub { return 'return_imatch_ok' },
             lower_assign_method_statement  => sub { return 'assign_method_ok' },
             lower_push_value_statement     => sub { return 'push_value_ok' },
+            lower_push_nonempty_statement  => sub { return 'push_nonempty_ok' },
             lower_regex_subst_statement    => sub { return 'regex_subst_ok' },
             lower_array_pipeline_expr      => sub { return 'array_pipeline_ok' },
             lower_if_flow_statement        => sub { return 'if_ok' },
@@ -2732,6 +2741,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_return_imatch_statement = sub { return 'return_imatch_ok' };
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
+    local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
     local *Synthetic::ActionIROwner::_lower_regex_subst_statement = sub { return 'regex_subst_ok' };
     local *Synthetic::ActionIROwner::_lower_array_pipeline_expr = sub { return 'array_pipeline_ok' };
     local *Synthetic::ActionIROwner::_lower_if_flow_statement = sub { return 'if_ok' };
@@ -13116,7 +13126,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -16213,6 +16223,49 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'push_value method contract avoids unresolved-helper hits');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
     ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_lowers_push_nonempty_method_contract' => sub {
+    plan tests => 13;
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), trim(capture_slice()))');
+    like($rewrite, qr/\bpush \@items, \$__ls_push_nonempty if \$__ls_push_nonempty_ok\b/, 'push_nonempty(array(target), value) lowers to a guarded push statement');
+    like($rewrite, qr/\$__ls_push_nonempty ne ''/, 'push_nonempty scalar guard treats empty string as empty');
+    like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'ARRAY'/, 'push_nonempty array guard checks arrayref cardinality');
+    like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'HASH'/, 'push_nonempty hash guard checks hashref cardinality');
+
+    my @items;
+    my $empty_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), "")');
+    my $zero_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), "0")');
+    my $empty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), array())');
+    my $nonempty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), array("item"))');
+    my $empty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), hash())');
+    my $nonempty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(a(items), hash("key", "value"))');
+    my $ok_eval = eval "$empty_rewrite; $zero_rewrite; $empty_array_rewrite; $nonempty_array_rewrite; $empty_hash_rewrite; $nonempty_hash_rewrite; 1";
+    ok($ok_eval, 'push_nonempty generated statements eval cleanly for empty and nonempty scalar/array/hash values') or diag(normalize_error($@));
+    is_deeply(\@items, ['0', ['item'], {key => 'value'}], 'push_nonempty skips empty string/array/hash values while preserving meaningful scalar/array/hash payloads');
+
+    my $spec_content = <<'SPEC';
+Top::AND I.declare(array, items)
+ /a/
+ /,/
+ /b/
+ -> Top[1] { push_nonempty(a(items), trim(capture_slice())) }
+ -> Top[2] { return(a(array_values(a(items)))) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_nonempty method contract');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'push_nonempty method contract avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'push_nonempty method contract avoids unresolved-helper hits');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_nonempty contract');
+    ok(!@{$meta->{compatibility_surface_contract_ids}}, 'push_nonempty is a modern helper, not compatibility-surface syntax');
+    ok($meta->{language_agnostic_action_ir_ready}, 'push_nonempty method contract remains language-agnostic action-IR ready');
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    my $input = 'a,b';
+    is_deeply($parser->(\$input), [['a']], 'push_nonempty appends the trimmed capture slice at runtime');
 };
 subtest 'action_rewriter_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
     plan tests => 13;
@@ -41554,7 +41607,7 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
-    plan tests => 3;
+    plan tests => 5;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
@@ -41562,9 +41615,11 @@ subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for capture-slice marker inspection');
     like($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation now prefers @capture_slice as the anonymous capture-boundary marker');
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
+    like($source_content, qr/push_nonempty\(a\(logging_annotation\), trim\(capture_slice\(\)\)\)/, 'ebnf logging_annotation now uses push_nonempty for trimmed optional capture appends');
+    unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
 };
-subtest 'ebnf_logging_annotation_runtime_parses_after_capture_if_lowering' => sub {
-    plan tests => 4;
+subtest 'ebnf_logging_annotation_runtime_parses_after_push_nonempty_migration' => sub {
+    plan tests => 5;
 
     my $parser = LinkedSpec::get_parser('ebnf');
     ok(defined($parser) && ref($parser) eq 'CODE', 'ebnf parser created for logging annotation runtime smoke');
@@ -41587,7 +41642,9 @@ subtest 'ebnf_logging_annotation_runtime_parses_after_capture_if_lowering' => su
     );
 
     my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
-    ok(grep { $_ eq 'CAPTURE_IF' } @{$descr->{spec}{logging_annotation}{meta}{action_rewriter}{canonical_action_ir_nodes}}, 'logging_annotation descriptor still records CAPTURE_IF ActionIR coverage');
+    my $nodes = $descr->{spec}{logging_annotation}{meta}{action_rewriter}{canonical_action_ir_nodes};
+    ok(grep { $_ eq 'PUSH' } @{$nodes}, 'logging_annotation descriptor records PUSH ActionIR coverage for push_nonempty');
+    ok(!grep { $_ eq 'CAPTURE_IF' } @{$nodes}, 'logging_annotation descriptor no longer records CAPTURE_IF ActionIR coverage');
 };
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;
