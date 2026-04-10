@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: modernize first-reader examples
+
+- updated the public book's first-reader `.spec` and `Get(...)` examples away from tiny legacy `return_a(...)` snippets and toward helper-built payload examples using `return(hash(...))` and `match_text()`,
+- kept the `return_a(...)` mentions that deliberately document the historical blind-call post-processing surface while removing it from the introductory path,
+- added a note to the block-boundary example explaining that its raw Perl label exists only to demonstrate rule-start parsing inside an action block.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add worked spec walkthrough
 
 - added a public mdBook end-to-end `.spec` walkthrough under the user-model section,

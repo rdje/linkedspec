@@ -12,8 +12,10 @@ Minimal example:
 use LinkedSpec;
 
 my $spec = <<'SPEC';
-Top::
- /foo/ { return_a(Top) }
+Top::AND
+ /foo/ -> Top[0] {
+   return(hash("kind", "top", "text", match_text()));
+ }
 SPEC
 
 my $parser = LinkedSpec::Get(\$spec);

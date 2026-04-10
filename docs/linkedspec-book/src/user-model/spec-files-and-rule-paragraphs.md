@@ -18,29 +18,32 @@ This is a better mental model than thinking of `.spec` files as rigid line-by-li
 ## Minimal example
 
 ```text
-Top::
- /foo/ -> Word { return_a(Top) }
+Top::AND
+ => Word
 
-Word:
- /foo/ { return_a(Word) }
+Word:AND
+ /foo/ -> Word[0] {
+   return(hash("kind", "word", "text", match_text()));
+ }
 ```
 
 This file contains two rule paragraphs:
 
-- `Top::`
-- `Word:`
+- `Top::AND`
+- `Word:AND`
 
 `Top` is written with the double-colon form because it is intended as an entry-style rule in this example. `Word` is written with the single-colon form because it is a normal child rule.
 
 The body of `Top` contains:
 
-- one regex anchor: `/foo/`
-- one action edge: `-> Word { ... }`
+- one blind-call edge: `=> Word`
 
 The body of `Word` contains:
 
 - one regex anchor: `/foo/`
-- one local action block
+- one action edge: `-> Word[0] { ... }`
+
+The action returns a structured helper-built payload rather than depending on the older compact `return_a(...)` helper style.
 
 ## Why it matters
 
@@ -58,17 +61,21 @@ It also explains why top-level validation matters so much: the parser has to kno
 Rule starts are top-level constructs. A label-like line inside an open block is not a new rule.
 
 ```text
-Top::
- /a/ -> Next {
+Top::AND
+ /a/ -> Top[0] {
 label:
- return_a(Top)
+ return { kind => "top" };
  }
 
-Next:
- /b/ { return_a(Next) }
+Next:AND
+ /b/ -> Next[0] {
+   return(hash("kind", "next", "text", match_text()));
+ }
 ```
 
 Here `label:` belongs to the action block attached to `Top`. It does not start a new `label` rule because the parser is still inside the `{ ... }` block.
+
+This example uses a raw Perl label only to show the block-boundary rule-start distinction. New payload-shaping code should prefer helper DSL forms like the `Next` rule's `return(hash(...))` action.
 
 This matters because LinkedSpec allows rule bodies to carry real action and lifecycle blocks. If the frontend treated every `word:` token as a rule start, it would misread valid block content.
 
@@ -91,22 +98,20 @@ The exact set of supported forms is intentionally validated. Stray top-level tex
 LinkedSpec supports compact same-line authoring:
 
 ```text
-Top:: /foo/ -> Word { return_a(Top) }
-Word: /foo/ { return_a(Word) }
+Top::AND => Word
+Word:AND /foo/ -> Word[0] { return(hash("kind", "word", "text", match_text())); }
 ```
 
 It also supports the clearer multiline style:
 
 ```text
-Top::
- /foo/
- -> Word {
-   return_a(Top)
- }
+Top::AND
+ => Word
 
-Word:
- /foo/ {
-   return_a(Word)
+Word:AND
+ /foo/
+ -> Word[0] {
+   return(hash("kind", "word", "text", match_text()));
  }
 ```
 
