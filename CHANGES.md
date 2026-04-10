@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Docs: prefer canonical helper examples in root guides
+
+- updated ordinary `USER_GUIDE.md` examples to use explicit `return(array(...))` payloads instead of the legacy `return_a(...)` shortcut,
+- updated the blind-call post-processing example in `USER_GUIDE_RuleModesAndSplit.md` to show the same explicit payload shape,
+- refreshed the real EBNF logging-annotation snippet in `USER_GUIDE_RuleModesAndSplit.md` so it matches the live `push(...)` / `push_nonempty(...)` helper surface instead of teaching raw child-call pushes plus `capture_if(...)` / `CAPTURE_IF()`,
+- left remaining root-guide mentions of `return_a(...)` and `capture_if(...)` only in compatibility-focused lists.
+
+- Validation:
+  - targeted descriptor probe for the updated blind-call fluent and block examples
+  - descriptor compile probe for `ebnf`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - root-guide stale-example scan for `return_a(...)`, `capture_if`, `CAPTURE_IF()`, and raw `push @..., call(...)`
+
 ## 2026-04-11 - DSL: prefer explicit return payloads in vhdl
 
 - migrated the remaining live `specs/vhdl.spec` uses of legacy tagged return helpers `return_m`, `return_ma`, and `return_a` to explicit `return(array(...))` payloads,

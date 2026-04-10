@@ -525,15 +525,15 @@ So a fluent blind-call chain is now explicit sugar for post-call processing that
 Example:
 
 ```text
-wrapper:AND
- => child .return_a()
+wrapper::AND
+ => child .return(array("?wrapper:", array_copy(array(wrapper))))
 ```
 
 is equivalent in lowered meaning to:
 
 ```text
-wrapper:AND
- => child { return_a(wrapper) }
+wrapper::AND
+ => child { return(array("?wrapper:", array_copy(array(wrapper)))) }
 ```
 
 The same idea extends to longer chains:
@@ -978,11 +978,13 @@ logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*
 I {$IMATCH =~ s/@|\s*\(//go}
 
 -> quoted_string {
-  push @logging_annotation, call(quoted_string)->[1]
+  push(quoted_string, 1)
 }
--> comma.capture_if
+-> comma {
+  push_nonempty(a(logging_annotation), trim(capture_slice()))
+}
 -> logging_annotation[1] {
-  CAPTURE_IF();
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
   return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
 }
 ```

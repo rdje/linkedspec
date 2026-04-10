@@ -76,11 +76,11 @@ Example:
 Top::
  /a/ -> Next {
 label:
- return_a(Top)
+ return(array("?Top:", array_copy(array(Top))))
  }
 
 Next::
- /b/ { return_a(Next) }
+ /b/ { return(array("?Next:", array_copy(array(Next)))) }
 ```
 
 Here `label:` is block content inside `Top`, not the start of a new `label` rule paragraph.
@@ -407,7 +407,7 @@ Current frontend validation now rejects malformed edge-target indexing before bo
 That exactness rule is intentional:
 - supported action-edge continuations like `-> rule[idx]`, `-> rule.method`, `-> rule { ... }`, and grouped shared-block forms like `-> rule_a | rule_b { ... }` are still valid,
 - action-edge fluent continuations must actually name a method after the dot, so malformed starts like `-> rule.` and `-> rule..push(...)` are rejected during validation,
-- blind-call fluent continuations must also actually name a method after the dot, so malformed starts like `=> rule.` and `=> rule..return_a()` are rejected during validation,
+- blind-call fluent continuations must also actually name a method after the dot, so malformed starts like `=> rule.` and `=> rule..return(...)` are rejected during validation,
 - but glued punctuation suffixes like `-> rule-extra` are rejected early instead of being misread as plain `-> rule`,
 - while blind-call targets stay plain rule names, so `=> rule`, `=> rule { ... }`, `=> rule.method(...)`, and `=> rule .method(...)` are valid but glued punctuation forms like `=> rule-extra` are not.
 
@@ -415,16 +415,16 @@ An explicit side-by-side equivalence example can help:
 
 ```text
 A::
- /a/ -> A   { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A   { return(array("?A:", array_copy(array(A)))) }
+ /b/ -> A[1] { return(array("?A:", array_copy(array(A)))) }
 ```
 
 and:
 
 ```text
 A::
- /a/ -> A[0] { return_a(A) }
- /b/ -> A[1] { return_a(A) }
+ /a/ -> A[0] { return(array("?A:", array_copy(array(A)))) }
+ /b/ -> A[1] { return(array("?A:", array_copy(array(A)))) }
 ```
 
 mean the same thing for the recursive first slot:
