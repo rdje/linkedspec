@@ -828,10 +828,9 @@ return(array("?node:", scalar(name), scalar(kind)))
 
 ```text
 array_copy(array(items))
-array_values(array(items))
 ```
 
-Use these when you want one nested array payload that contains the current contents of an array variable.
+Use this when you want one nested array payload that contains the current contents of an array variable. `array_values(array(items))` remains supported as the older compatibility spelling, but new examples should use `array_copy(...)`.
 
 Examples:
 

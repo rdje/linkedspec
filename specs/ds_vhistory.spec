@@ -16,15 +16,15 @@ LX  {
   else();
    assign(s(entry_tag), "?version_entry:");
   endif();
-  push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
+  push_value(a(object_hier), a(s(entry_tag), array_copy(a(capt))));
  endif();
 
  if(is_nonempty(a(object_hier)));
   assign(s(current_object_name), scalaref(cur_object, [1]));
-  push_value(a(vhistory), a("?object:", s(current_object_name), array_values(a(object_hier))));
+  push_value(a(vhistory), a("?object:", s(current_object_name), array_copy(a(object_hier))));
  endif();
 
- return(a("?ds_vhistory:", array_values(a(vhistory))))
+ return(a("?ds_vhistory:", array_copy(a(vhistory))))
 } 
 
 -> object             {
@@ -35,14 +35,14 @@ LX  {
    else();
     assign(s(entry_tag), "?version_entry:");
    endif();
-   push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
+   push_value(a(object_hier), a(s(entry_tag), array_copy(a(capt))));
    assign(a(capt), a());
 
   endif();
 
   if(is_nonempty(a(object_hier)));
    assign(s(current_object_name), scalaref(cur_object, [1]));
-   push_value(a(vhistory), a("?object:", s(current_object_name), array_values(a(object_hier))));
+   push_value(a(vhistory), a("?object:", s(current_object_name), array_copy(a(object_hier))));
    assign(a(object_hier), a());
   endif();
 
@@ -59,7 +59,7 @@ LX  {
    else();
     assign(s(entry_tag), "?version_entry:");
    endif();
-   push_value(a(object_hier), a(s(entry_tag), array_values(a(capt))));
+   push_value(a(object_hier), a(s(entry_tag), array_copy(a(capt))));
    assign(a(capt), a());
   endif();
 }

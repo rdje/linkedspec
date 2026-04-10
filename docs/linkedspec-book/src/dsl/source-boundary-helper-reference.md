@@ -113,7 +113,7 @@ Tuple::AND
  -> Tuple[0] { start_capture_slice() }
  -> Tuple[2] { push_value(array(parts), capture_take()) }
  -> Tuple[4] { push_value(array(parts), capture_take()) }
- -> Tuple[6] { push_value(array(parts), capture_slice()); return(array("?Tuple:", array_values(array(parts)))) }
+ -> Tuple[6] { push_value(array(parts), capture_slice()); return(array("?Tuple:", array_copy(array(parts)))) }
 ```
 
 Reading this example:

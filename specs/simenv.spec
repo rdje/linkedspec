@@ -10,7 +10,7 @@ top::            I {declare(array, blocks)}
 
 LX {
      if(is_nonempty(array(blocks)));
-       return(array_values(array(blocks)));
+       return(array_copy(array(blocks)));
      else();
        return_undef();
      endif()
@@ -22,7 +22,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
  -> comments
  -> anyvariable                       {
                                        if(is_nonempty(array(keyval_pairs)));
-                                         push_value(array(assigns), array_values(array(keyval_pairs)));
+                                         push_value(array(assigns), array_copy(array(keyval_pairs)));
                                        endif();
                                        $retv = call(anyvariable);
                                        assign(array(keyval_pairs), array(scalar(retv)))
@@ -41,11 +41,11 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {declare(scalar, block_namei=
                                        endif();
 
                                        if(is_nonempty(array(keyval_pairs)));
-                                         push_value(array(assigns), array_values(array(keyval_pairs)));
+                                         push_value(array(assigns), array_copy(array(keyval_pairs)));
                                        endif();
                                        print("begin_end_blocks: END    (", match_text(), "\n");
                                        if(is_nonempty(array(assigns)));
-                                         return({name=>scalar(block_namei), content=>array_values(array(assigns))});
+                                         return({name=>scalar(block_namei), content=>array_copy(array(assigns))});
                                        else();
                                          return_undef();
                                        endif()

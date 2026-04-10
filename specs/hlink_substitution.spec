@@ -9,7 +9,7 @@ substitute_top::   I        {declare(scalar, retv); declare(array, word_items)}
  LE {push_value(a(word_items), s(retv))}
  LX {
      if(is_nonempty(a(word_items)));
-       return(array_values(a(word_items)));
+       return(array_copy(a(word_items)));
      else();
        return_undef();
      endif()

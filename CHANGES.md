@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - DSL: prefer array_copy snapshots in live specs
+
+- migrated live `.spec` snapshot payloads from compatibility `array_values(...)` to preferred `array_copy(...)` in `lib_reader`, `sdce`, `ds_vhistory`, `Lispish`, `hlink_substitution`, `simenv`, and `vhdl`,
+- updated current public examples and source-lock tests so normal teaching material no longer presents `array_values(...)` as the active spelling,
+- kept explicit compatibility coverage and documentation for `array_values(...)` where the alias behavior itself is the point,
+- narrowed the live-roadmap consistency queue so snapshot-helper work is tracked as eventual compatibility-alias retirement rather than a live-spec migration gap.
+
+- Validation:
+  - `perl -c t/phase0_regression.t`
+  - descriptor compile probe for `lib_reader`, `sdce`, `ds_vhistory`, `Lispish`, `hlink_substitution`, `simenv`, and `vhdl`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - DSL: standardize child-call appends on push
 
 - documented that each generated rule handler owns a fresh rule-local default accumulator array named after the rule,

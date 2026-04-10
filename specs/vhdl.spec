@@ -152,7 +152,7 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 
 -> process_statement[2]                 {
    assign(scalar(process_statement_part), substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH));
-   return(array("?process_statement:", flat_array(entry_groups()), array_values(array(process_statement)), scalar(process_statement_part)))
+   return(array("?process_statement:", flat_array(entry_groups()), array_copy(array(process_statement)), scalar(process_statement_part)))
 }
 
 
@@ -188,7 +188,7 @@ I {declare(array, imatch_copy)}
 -> package_declaration[1]        {
 	assign(array(imatch_copy), array(entry_group(0)));
 	lowercase_each(array(imatch_copy));
-	return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_values(array(package_declaration))))
+	return(array("?package_declaration:", scalar(array(imatch_copy), 0), array_copy(array(package_declaration))))
 }
 
 
@@ -208,7 +208,7 @@ package_body: /(?i)\bpackage\s+body\s+(\w+)\s+is\b/ /(?i)\bend(?:\s+package\s+bo
 -> use_clause                .push     
 -> group_template_declaration.push     
 -> group_declaration         .push              
--> package_body[1]                .return(array("?package_body:", entry_group(0), array_values(array(package_body))))
+-> package_body[1]                .return(array("?package_body:", entry_group(0), array_copy(array(package_body))))
 
 
 configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(?i)\bend\b(?:\s+configuration\b)?(?:\s+(\w+))?\s*;/
@@ -257,7 +257,7 @@ I {declare(scalar, pos_begin, subprogram_statement_part); declare(array, subprog
    split(array(subprogram_statement_tokens), scalar(subprogram_statement_part), /((?:\s*--.*\s*)+|\s*;\s*)/);
    split_each(array(subprogram_statement_tokens), /^(\s+)/);
    filter_nonempty(array(subprogram_statement_tokens));
-   return(array("?subprogram_body:", flat_array(entry_groups()), array_values(array(subprogram_statement_tokens))))
+   return(array("?subprogram_body:", flat_array(entry_groups()), array_copy(array(subprogram_statement_tokens))))
 }
 
 

@@ -2452,7 +2452,7 @@ Child::AND
  /(\w)(\w+)/
  /(\))/
  -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
- -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+ -> Child[1] { return(array("?Child:", array_copy(array(entry_groups_seen)), array_copy(array(body_groups_seen)), match_groups())) }
 ```
 
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.
@@ -2886,7 +2886,7 @@ Child::AND
  /(\w)(\w+)/
  /(\))/
  -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
- -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+ -> Child[1] { return(array("?Child:", array_copy(array(entry_groups_seen)), array_copy(array(body_groups_seen)), match_groups())) }
 ```
 
 When building this exact inline example directly, select `top_rule => Top` so the entry rule is explicit.

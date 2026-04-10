@@ -15128,7 +15128,7 @@ Child::AND
  /(\w)(\w+)/
  /(\))/
  -> Child[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
- -> Child[1] { return(array("?Child:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+ -> Child[1] { return(array("?Child:", array_copy(array(entry_groups_seen)), array_copy(array(body_groups_seen)), match_groups())) }
 SPEC
 
     my %runtime_ctx;
@@ -16255,7 +16255,7 @@ subtest 'action_rewriter_lowers_push_child_call_contracts' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf); return(a(array_values(a(Top)))) }
+Top:: /a/ -> Top { push(Leaf); return(a(array_copy(a(Top)))) }
 Leaf:
  /a/ -> Leaf { return(a("leaf", match_text())) }
 SPEC
@@ -16274,7 +16274,7 @@ SPEC
     is_deeply($event->{args}, { target => 'Top', source => 'Leaf', target_mode => 'implicit_current_label' }, 'push(Rule) canonical event records the implicit destination array and source rule');
 
     my $indexed_spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf, 1); return(a(array_values(a(Top)))) }
+Top:: /a/ -> Top { push(Leaf, 1); return(a(array_copy(a(Top)))) }
 Leaf:
  /a/ -> Leaf { return(a("leaf", match_text())) }
 SPEC
@@ -16314,7 +16314,7 @@ Top::AND I.declare(array, items)
  /,/
  /b/
  -> Top[1] { push_nonempty(a(items), trim(capture_slice())) }
- -> Top[2] { return(a(array_values(a(items)))) }
+ -> Top[2] { return(a(array_copy(a(items)))) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -40904,9 +40904,9 @@ subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => s
 
     ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for alias migration inspection');
     like($source_content, qr/assign\(s\(first_capt\), scalar\(a\(capt\), 0\)\)/, 'ds_vhistory vhistory band now prefers s(first_capt) plus a(capt) in first captured-entry reads');
-    like($source_content, qr/push_value\(a\(object_hier\), a\(s\(entry_tag\), array_values\(a\(capt\)\)\)\)/, 'ds_vhistory vhistory band now prefers nested a()/s() aliases in object_hier pushes');
-    ok(index($source_content, 'return(a("?ds_vhistory:", array_values(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias in top-level return construction');
-    unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_values\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() form in object aggregation pushes');
+    like($source_content, qr/push_value\(a\(object_hier\), a\(s\(entry_tag\), array_copy\(a\(capt\)\)\)\)/, 'ds_vhistory vhistory band now prefers nested a()/s() aliases plus array_copy in object_hier pushes');
+    ok(index($source_content, 'return(a("?ds_vhistory:", array_copy(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias plus array_copy in top-level return construction');
+    unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_(?:values|copy)\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() wrapper form in object aggregation pushes');
 };
 subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     plan tests => 5;
@@ -41224,9 +41224,9 @@ subtest 'vhdl_package_rules_prefer_entry_group' => sub {
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for package-name helper inspection');
     like($source_content, qr/assign\(array\(imatch_copy\), array\(entry_group\(0\)\)\);/, 'vhdl package_declaration now prefers entry_group(0) for the package-name snapshot');
-    like($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", entry_group\(0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body now prefers entry_group(0) for the package-name return');
+    like($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", entry_group\(0\), array_copy\(array\(package_body\)\)\)\)/, 'vhdl package_body now prefers entry_group(0) and array_copy for the package-name return');
     unlike($source_content, qr/assign\(array\(imatch_copy\), array\(scalar\(IMATCH_LIST, 0\)\)\);/, 'vhdl package_declaration no longer uses scalar(IMATCH_LIST, 0)');
-    unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_values\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
+    unlike($source_content, qr/-> package_body\[1\]\s+\.return\(array\("\?package_body:", scalar\(IMATCH_LIST, 0\), array_(?:values|copy)\(array\(package_body\)\)\)\)/, 'vhdl package_body no longer uses scalar(IMATCH_LIST, 0)');
 };
 subtest 'vhdl_concurrent_signal_assignment_prefers_entry_group_reorder' => sub {
     plan tests => 3;
@@ -41276,13 +41276,13 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for helper-return entry_groups migration inspection');
     like($source_content, qr/subprogram_declaration: .*?I\.return\(array\("\?subprogram_declaration:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl subprogram_declaration now prefers entry_groups() in its helper return');
-    like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), array_copy\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() and array_copy in its helper return');
     like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
-    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), array_values\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), array_copy\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement now prefers entry_groups() and array_copy in its helper return');
     unlike($source_content, qr/subprogram_declaration: .*?flat_array\(IMATCH_LIST\)/, 'vhdl subprogram_declaration no longer uses flat_array(IMATCH_LIST)');
-    unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_values\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
+    unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
-    unlike($source_content, qr/return\(array\("\?process_statement:", flat_array\(IMATCH_LIST\), array_values\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement no longer uses flat_array(IMATCH_LIST)');
+    unlike($source_content, qr/return\(array\("\?process_statement:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement no longer uses flat_array(IMATCH_LIST)');
 };
 subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
     plan tests => 7;
@@ -41531,7 +41531,7 @@ subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' =>
     ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for alias migration inspection');
     like($source_content, qr/assign\(s\(retv\), call\(substitute_statement2\)\)/, 'hlink_substitution top band now prefers s(retv) in substitute_statement2 assignment');
     like($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution top band now prefers a(word_items) plus s(retv) in accumulator pushes');
-    ok(index($source_content, 'return(array_values(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) in aggregate return flow');
+    ok(index($source_content, 'return(array_copy(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) plus array_copy in aggregate return flow');
     unlike($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution migrated band no longer uses the older array()/scalar() form in accumulator pushes');
 };
 subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
@@ -41605,9 +41605,9 @@ subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub 
 
     ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for alias migration inspection');
     ok(index($source_content, '.substr(s(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now prefers s(groupname) in regex-subst cleanup');
-    like($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_values\(a\(group\)\)\)\)/, 'lib_reader group return now prefers combined s()/a() aliases');
+    like($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_copy\(a\(group\)\)\)\)/, 'lib_reader group return now prefers combined s()/a() aliases plus array_copy');
     like($source_content, qr/\.split\(a\(value_items\), s\(value\), \/,\//, 'lib_reader cattribute splitter now prefers short array/scalar aliases');
-    unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_values\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
+    unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_(?:values|copy)\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 17;
@@ -41663,14 +41663,14 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     unlike($source_content, qr/LS\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(a\(pieces\), s\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
     unlike($source_content, qr/assign\(s\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
-    like($source_content, qr/LX\s+\{assign\(s\(retv\), capture_rest\(\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_values\(a\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() for anonymous capture-boundary tail reads');
-    unlike($source_content, qr/LX\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_values\(a\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
+    like($source_content, qr/LX\s+\{assign\(s\(retv\), capture_rest\(\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_copy\(a\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus array_copy for anonymous capture-boundary tail reads');
+    unlike($source_content, qr/LX\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_(?:values|copy)\(a\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
     like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
     like($source_content, qr/assign\(s\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(s\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
     ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
-    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(entry_groups\(\)\), array_values\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() in its helper return');
-    unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(IMATCH_LIST\), array_values\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
+    like($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(entry_groups\(\)\), array_copy\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus array_copy in its helper return');
+    unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
@@ -42078,9 +42078,9 @@ subtest 'lispish_spec_prefers_short_container_aliases_in_parenthesis_and_reader_
     ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for alias migration inspection');
     like($source_content, qr/if\(is_nonempty\(a\(word\)\)\);/, 'Lispish parenthesis band now prefers a(word) in aggregate flow guards');
     like($source_content, qr/assign\(s\(head\), join_values\("", a\(word\)\)\);/, 'Lispish parenthesis band now prefers s(head) plus a(word) in head assignment');
-    like($source_content, qr/return\(a\(s\(head\), array_values\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path now prefers combined s()/a() aliases');
+    like($source_content, qr/return\(a\(s\(head\), array_copy\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path now prefers combined s()/a() aliases plus array_copy');
     like($source_content, qr/I\.return\(h\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now also spend the short hash constructor alias');
-    unlike($source_content, qr/return\(array\(scalar\(head\), array_values\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses the older scalar()/array() form in the migrated band');
+    unlike($source_content, qr/return\(array\(scalar\(head\), array_(?:values|copy)\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses the older scalar()/array() form in the migrated band');
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');

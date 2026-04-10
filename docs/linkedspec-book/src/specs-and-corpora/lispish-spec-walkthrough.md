@@ -224,7 +224,7 @@ The closing parenthesis edge finalizes the current form:
   ...
   if(s(has_head));
    if(is_nonempty(a(tail)));
-    return(a(s(head), array_values(a(tail))));
+    return(a(s(head), array_copy(a(tail))));
    else();
     return(a(s(head), undef));
    endif();
@@ -238,7 +238,7 @@ The short aliases matter:
 
 - `s(head)` means scalar variable `head`.
 - `a(tail)` means array variable `tail`.
-- `array_values(a(tail))` splices the tail elements into the returned array shape.
+- `array_copy(a(tail))` snapshots the tail elements into the returned array shape.
 - `return(a(...))` returns an array payload.
 
 This is a good real example of why helper DSL matters. The rule contains recursion, accumulation, conditional flow, child calls, array pushes, and structured returns without falling back to ad hoc raw Perl for the core dataflow.

@@ -55,7 +55,7 @@ I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
 
    if(s(has_head));
     if(is_nonempty(a(tail)));
-     return(a(s(head), array_values(a(tail))));
+     return(a(s(head), array_copy(a(tail))));
     else();
      return(a(s(head), undef));
     endif();

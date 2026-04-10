@@ -1765,7 +1765,7 @@ entry_vs_local_group_lists_body::AND
  /(\w)(\w+)/
  /(\))/
  -> entry_vs_local_group_lists_body[0] { assign(array(entry_groups_seen), entry_groups()); assign(array(body_groups_seen), match_groups()) }
- -> entry_vs_local_group_lists_body[1] { return(array("?entry_vs_local_group_lists_body:", array_values(array(entry_groups_seen)), array_values(array(body_groups_seen)), match_groups())) }
+ -> entry_vs_local_group_lists_body[1] { return(array("?entry_vs_local_group_lists_body:", array_copy(array(entry_groups_seen)), array_copy(array(body_groups_seen)), match_groups())) }
 ```
 
 When building this exact inline example directly, select `top_rule => entry_vs_local_group_lists` so the entry rule is explicit.
