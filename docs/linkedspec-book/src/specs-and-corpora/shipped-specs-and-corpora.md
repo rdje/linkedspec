@@ -152,6 +152,8 @@ my $summary = $descr->{meta}{action_rewriter_migration};
 
 That descriptor mode is heavily used by regression tests because it exposes rule metadata, dependency refs, compiled order, and ActionIR migration status.
 
+For the detailed rule-by-rule explanation of the shipped grammar-file parser, read [`ebnf.spec` Walkthrough](ebnf-spec-walkthrough.md).
+
 ## `plugin/`
 
 `plugin/` contains legacy `.plg` files.
@@ -261,7 +263,7 @@ That means shipped material is not just documentation decoration. It is part of 
 Use this reading order:
 
 1. Start with [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md) for a compact recursive AST parser.
-2. Read `ebnf.spec` to see grammar parsing and annotation-like structures.
+2. Read [`ebnf.spec` Walkthrough](ebnf-spec-walkthrough.md) to see grammar parsing, annotations, return payloads, and the `ebnf/*.ebnf` corpus path.
 3. Read `vhdl.spec` to see a larger real-domain grammar with many nested rule families.
 4. Read `tablegrep.spec`, `portmap.spec`, and `sdce.spec` for focused domain-specific parsers.
 5. Read `pplugin.spec` only with the architecture caveat that `.plg` is legacy transition material.

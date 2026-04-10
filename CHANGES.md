@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add EBNF shipped-spec walkthrough
+
+- added a public mdBook walkthrough for `specs/ebnf.spec` under the shipped-material section,
+- documented `LinkedSpec::get_parser('ebnf')`, the regression-locked `Expr` / `Term` AST shape, include entries, rule-entry output conventions, semantic annotations, logging annotations, rule inventory, top-level accumulator state, guarded rule-body token flow, terminal token readers, return annotations, corpus parsing over `ebnf/*.ebnf`, descriptor ActionIR readiness, and regression-lock coverage,
+- fixed the shared ActionIR `capture_if(...)` / `CAPTURE_IF()` lowering so generated code preserves the literal whitespace trim regex instead of interpolating it into invalid Perl,
+- added regression coverage for the capture-if trim lowering and for runtime parsing of `@log_rule("expr", "term")` through `ebnf.spec`,
+- linked the new walkthrough from `SUMMARY.md` and the shipped specs/corpora chapter so the public book now has detailed shipped-spec coverage for both `Lispish.spec` and `ebnf.spec`.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c t/phase0_regression.t`
+  - focused `capture_if(...)` / `CAPTURE_IF()` lowering probe
+  - focused `ebnf` logging-annotation runtime probe
+  - `git diff --check`
+  - stale external-project wording scan on the new shipped-material book slice
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - Docs: add Lispish shipped-spec walkthrough
 
 - added a public mdBook walkthrough for `specs/Lispish.spec` under the shipped-material section,

@@ -429,7 +429,7 @@ sub _build_capture_and_backtrack_contracts {
    unresolved_pattern => qr/\bcapture_if\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{\bcapture_if\s*\(\s*\w+\s*\)}{my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    $code =~ s{\bcapture_if\s*\(\s*\w+\s*\)}{q{my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @} . $label . q{, $capt if $capt}}ge;
     return $code
    },
   },
@@ -441,7 +441,7 @@ sub _build_capture_and_backtrack_contracts {
    unresolved_pattern => qr/\bCAPTURE_IF\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{\bCAPTURE_IF\s*\(\s*\)}{my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\); \$capt =~ s/^\s*|\s*$//go; push \@$label, \$capt if \$capt}g;
+    $code =~ s{\bCAPTURE_IF\s*\(\s*\)}{q{my $capt = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $capt =~ s/^\s*|\s*$//go; push @} . $label . q{, $capt if $capt}}ge;
     return $code
    },
   },

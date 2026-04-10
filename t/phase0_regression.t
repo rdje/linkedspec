@@ -13649,6 +13649,17 @@ subtest 'action_rewriter_pipeline_helper_substitutions' => sub {
         'CAPTURE_IF() helper rewrite preserves optional whitespace forms'
     );
 };
+subtest 'action_rewriter_capture_if_lowering_preserves_trim_regex' => sub {
+    plan tests => 4;
+
+    my $capture_if = LinkedSpec::call_spec_handler_subst('Top', 'capture_if(Top)');
+    my $capture_if_macro = LinkedSpec::call_spec_handler_subst('Top', 'CAPTURE_IF()');
+
+    ok(index($capture_if, q{$capt =~ s/^\s*|\s*$//go;}) >= 0, 'capture_if(label) lowering preserves literal whitespace trim regex');
+    ok(index($capture_if_macro, q{$capt =~ s/^\s*|\s*$//go;}) >= 0, 'CAPTURE_IF() lowering preserves literal whitespace trim regex');
+    unlike($capture_if, qr/\$capt =~ s\/\^s\*\|s\*\n\/go/, 'capture_if(label) lowering does not interpolate the trim regex into invalid Perl');
+    unlike($capture_if_macro, qr/\$capt =~ s\/\^s\*\|s\*\n\/go/, 'CAPTURE_IF() lowering does not interpolate the trim regex into invalid Perl');
+};
 subtest 'named_mark_capture_from_reads_rule_local_checkpoint' => sub {
     plan tests => 5;
 
@@ -41551,6 +41562,32 @@ subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for capture-slice marker inspection');
     like($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation now prefers @capture_slice as the anonymous capture-boundary marker');
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
+};
+subtest 'ebnf_logging_annotation_runtime_parses_after_capture_if_lowering' => sub {
+    plan tests => 4;
+
+    my $parser = LinkedSpec::get_parser('ebnf');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'ebnf parser created for logging annotation runtime smoke');
+
+    my $input = 'Expr := Term ' . q{@log_rule("expr", "term")} . "\n";
+    my $ast = eval { $parser->(\$input) };
+    my $err = $@;
+
+    ok(!$err, 'ebnf parser executes logging annotation input without die') or diag(normalize_error($err));
+    is_deeply(
+        $ast,
+        [
+            [
+                ['rule', 'Expr'],
+                ['rule_reference', 'Term'],
+                ['logging_annotation', ['log_rule', ['expr', 'term']]],
+            ],
+        ],
+        'ebnf parser returns the normalized logging annotation payload'
+    );
+
+    my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
+    ok(grep { $_ eq 'CAPTURE_IF' } @{$descr->{spec}{logging_annotation}{meta}{action_rewriter}{canonical_action_ir_nodes}}, 'logging_annotation descriptor still records CAPTURE_IF ActionIR coverage');
 };
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 13;

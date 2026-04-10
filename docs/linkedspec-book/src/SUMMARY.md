@@ -44,6 +44,7 @@
 
 - [Shipped Specs and Corpora](specs-and-corpora/shipped-specs-and-corpora.md)
 - [`Lispish.spec` Walkthrough](specs-and-corpora/lispish-spec-walkthrough.md)
+- [`ebnf.spec` Walkthrough](specs-and-corpora/ebnf-spec-walkthrough.md)
 
 # Architecture
 
