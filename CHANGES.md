@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: add blind-call orchestration guide
+
+- added a public mdBook chapter for blind calls and parser orchestration under the user-model section,
+- documented `=>` versus `->`, supported blind-call forms, invalid target shapes, label-driven sequence/choice/repetition semantics, ordered wrappers, choice wrappers, repeated-choice wrappers, repeated ordered wrappers, post-call processing, edge-family separation, formatting guidance, and `=>` versus explicit `call(Child)` dataflow,
+- linked the new chapter from `SUMMARY.md`, the rule-modes chapter, and the action/lifecycle placement chapter so the public book has a dedicated explanation path for blind calls.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: deepen rule-mode public guide
 
 - expanded the public mdBook rule-modes/parse-modes chapter from a short overview into a mode-by-mode guide,

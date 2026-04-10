@@ -379,6 +379,8 @@ That reads as "on each iteration, try the child parsers as alternatives, collect
 
 The important rule is: `=> Child` tells LinkedSpec to call a child parser, but the label tells LinkedSpec whether those calls are sequenced, chosen, or repeated.
 
+For a deeper walkthrough of `=>`, post-call processing, edge-family selection, and parser-orchestration examples, read [Blind Calls and Parser Orchestration](blind-calls-and-parser-orchestration.md).
+
 Do not mix action edges and blind calls in the same rule body:
 
 ```text

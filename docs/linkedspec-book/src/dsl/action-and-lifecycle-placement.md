@@ -190,6 +190,8 @@ Wrapper::AND
 
 Use this family when the rule needs a child-rule call as part of the body rather than one local regex-slot action.
 
+The full parser-orchestration model for `=>`, including rule-label semantics and post-call processing, is documented in [Blind Calls and Parser Orchestration](../user-model/blind-calls-and-parser-orchestration.md).
+
 In new public examples, prefer the more explicit child-result pattern unless the rule is specifically teaching blind-call behavior:
 
 ```text
