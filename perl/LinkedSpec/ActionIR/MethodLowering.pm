@@ -296,7 +296,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -363,6 +363,40 @@ sub _lower_method_value_expr {
   my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
   return undef unless $effective_args;
   return $lower_scalaref_value_expr->($effective_args->[0], $effective_args->[1]);
+ }
+ if ($method_call && $method_call->{method} eq 'entry_group') {
+  my $entry_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $entry_group_args;
+  my $index = $trim_action_ir_value->($entry_group_args->[0]);
+  return undef unless defined($index) && $index =~ /^\d+$/o;
+  return 'do { scalar(@IMATCH_LIST) > '.$index.' ? $IMATCH_LIST['.$index.'] : undef }';
+ }
+ if ($method_call && $method_call->{method} eq 'entry_groups') {
+  my $entry_groups_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $entry_groups_args;
+  return 'do { [@IMATCH_LIST] }';
+ }
+ if ($method_call && ($method_call->{method} eq 'entry_map' || $method_call->{method} eq 'entry_named_map')) {
+  my $entry_map_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $entry_map_args;
+  return 'do { +{%IMATCH_HASH} }';
+ }
+ if ($method_call && $method_call->{method} eq 'match_group') {
+  my $match_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $match_group_args;
+  my $index = $trim_action_ir_value->($match_group_args->[0]);
+  return undef unless defined($index) && $index =~ /^\d+$/o;
+  return 'do { scalar(@LMATCH_LIST) > '.$index.' ? $LMATCH_LIST['.$index.'] : undef }';
+ }
+ if ($method_call && $method_call->{method} eq 'match_groups') {
+  my $match_groups_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $match_groups_args;
+  return 'do { [@LMATCH_LIST] }';
+ }
+ if ($method_call && ($method_call->{method} eq 'match_map' || $method_call->{method} eq 'match_named_map')) {
+  my $match_map_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $match_map_args;
+  return 'do { +{%LMATCH_HASH} }';
  }
  if ($method_call && $method_call->{method} eq 'scalar') {
   my $scalar_args = $method_call->{args} || [];

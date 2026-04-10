@@ -328,6 +328,10 @@ Important nuance:
 - `return_a(...)`, `return_m(...)`, `return_ma(...)`, and `return(label, arg)` are compatibility helpers.
 - Their raw arg positions are not the best place to introduce nested helper DSL.
 - For new portable authoring, prefer `return(payload)`.
+- Prefer `return(array("?Top:", array_copy(array(Top))))` over `return_a(Top)` when the rule wants a tagged payload carrying the current rule accumulator.
+- Prefer `return(array("?Top:", flat_array(entry_groups())))` over `return_m(Top)` when the rule wants to splice immediate capture groups into the tagged payload.
+- Prefer `return(array("?Top:", flat_array(entry_groups()), array_copy(array(Top))))` over `return_ma(Top)` when the rule wants both immediate capture groups and the current rule accumulator.
+- Prefer `return(array("group_open", scalar(IMATCH)))` over `return_im(...)` / `return_imatch(...)` when the rule wants a tagged immediate-match payload.
 
 ### Capture and backtrack helpers
 - `$CAPTURE` -> `substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH)`

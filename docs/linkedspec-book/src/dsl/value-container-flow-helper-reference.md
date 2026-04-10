@@ -106,8 +106,19 @@ Older capture and return helpers also use this convention:
 | `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_value(array(CurrentRule), capture_slice())` or an explicit domain array |
 | `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` or an explicit domain array |
 | `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` |
-| `return_a(CurrentRule)` | returns the historical tagged payload including `@CurrentRule` | prefer `return(...)` with `array_copy(array(CurrentRule))` when writing new structured payloads |
-| `return_ma(CurrentRule)` | returns the historical match-list-plus-accumulator payload including `@CurrentRule` | prefer `return(...)` with explicit fields |
+| `return_a(CurrentRule)` | returns the historical tagged payload including `@CurrentRule` | prefer `return(array("?CurrentRule:", array_copy(array(CurrentRule))))` when writing new structured payloads |
+| `return_m(CurrentRule)` | returns the historical tagged payload including the immediate match-group list | prefer `return(array("?CurrentRule:", flat_array(entry_groups())))` |
+| `return_ma(CurrentRule)` | returns the historical match-list-plus-accumulator payload including `@CurrentRule` | prefer `return(array("?CurrentRule:", flat_array(entry_groups()), array_copy(array(CurrentRule))))` |
+
+For example, a historical VHDL-style `return_ma(generate_statement)` says “return the tag, splice the entry capture groups, then carry the current rule accumulator.” The modern spelling makes each part explicit:
+
+```text
+return(array(
+  "?generate_statement:",
+  flat_array(entry_groups()),
+  array_copy(array(generate_statement))
+));
+```
 
 For new specs, prefer `push(...)` for child-call appends. Prefer explicit targets when there is any chance the reader would wonder which collection is being mutated.
 
@@ -215,6 +226,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
+| `return_a(label)` / `return_m(label)` / `return_ma(label)` | legacy tagged return shortcuts | reading or migrating older specs. Prefer `return(array(...))` with `array_copy(array(label))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 | `return_imatch(...)` / `return_im(...)` | legacy tagged current-match return | reading or migrating older specs. Prefer `return(...)` for new structured payloads. |
 | `return_array(tag, payload)` | legacy tagged array return | reading or migrating older specs. Prefer `return(array(...))` or `return(hash(...))` for new payloads. |
 

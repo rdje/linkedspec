@@ -38760,7 +38760,7 @@ SPEC
     );
 };
 subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
-    plan tests => 16;
+    plan tests => 18;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
@@ -38801,6 +38801,16 @@ subtest 'action_rewriter_lowers_flat_list_value_helpers' => sub {
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("keys", flat_array(sorted_keys(hash(meta)))))'),
         'return ["keys", do { my $__ls_flat_array = [sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }]',
         'flat_array(...) now flattens composed array-valued helper expressions into surrounding array constructors'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(entry_groups())))'),
+        'return ["?Top:", do { my $__ls_flat_array = do { [@IMATCH_LIST] }; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }]',
+        'flat_array(...) flattens entry_groups() inside general return payloads instead of leaving a runtime helper call'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(match_groups())))'),
+        'return ["?Top:", do { my $__ls_flat_array = do { [@LMATCH_LIST] }; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }]',
+        'flat_array(...) flattens match_groups() inside general return payloads instead of leaving a runtime helper call'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(hash_copy(hash(meta))), "kind", "node"))'),
@@ -41293,6 +41303,24 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?process_statement:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement no longer uses flat_array(IMATCH_LIST)');
+};
+subtest 'vhdl_legacy_return_aliases_prefer_explicit_payloads' => sub {
+    plan tests => 11;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for legacy return-alias inspection');
+    unlike($source_content, qr/\breturn_(?:a|m|ma)\b/, 'vhdl source no longer uses legacy tagged return helper aliases');
+    unlike($source_content, qr/flat_array\(IMATCH_LIST\)/, 'vhdl source no longer uses raw IMATCH_LIST flattening for migrated helper returns');
+    like($source_content, qr/dquote_string:\s+.*?I\.return\(array\("\?dquote_string:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl dquote_string now spells return_m intent as an explicit entry_groups payload');
+    like($source_content, qr/library_clause:\s+.*?I\.return\(array\("\?library_clause:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl library_clause now spells return_m intent as an explicit entry_groups payload');
+    like($source_content, qr/-> generate_statement\[1\]\s+\.return\(array\("\?generate_statement:", flat_array\(entry_groups\(\)\), array_copy\(array\(generate_statement\)\)\)\)/, 'vhdl generate_statement now spells return_ma intent as an explicit entry_groups plus accumulator payload');
+    like($source_content, qr/-> generic_map_aspect\[1\]\s+\.return\(array\("\?generic_map_aspect:", array_copy\(array\(generic_map_aspect\)\)\)\)/, 'vhdl generic_map_aspect now spells return_a intent as an explicit accumulator payload');
+    like($source_content, qr/-> port_map_aspect\[1\]\s+\.return\(array\("\?port_map_aspect:", array_copy\(array\(port_map_aspect\)\)\)\)/, 'vhdl port_map_aspect now spells return_a intent as an explicit accumulator payload');
+    like($source_content, qr/association_element: .*?I\.return\(array\("\?association_element:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl association_element now spells return_m intent as an explicit entry_groups payload');
+    like($source_content, qr/-> component_declaration\[1\]\s+\.return\(array\("\?component_declaration:", flat_array\(entry_groups\(\)\), array_copy\(array\(component_declaration\)\)\)\)/, 'vhdl component_declaration now spells return_ma intent as an explicit entry_groups plus accumulator payload');
+    like($source_content, qr/-> configuration_declaration\[1\]\s+\.return\(array\("\?configuration_declaration:", flat_array\(entry_groups\(\)\), array_copy\(array\(configuration_declaration\)\)\)\)/, 'vhdl configuration_declaration now spells return_ma intent as an explicit entry_groups plus accumulator payload');
 };
 subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
     plan tests => 7;

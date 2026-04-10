@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - DSL: prefer explicit return payloads in vhdl
+
+- migrated the remaining live `specs/vhdl.spec` uses of legacy tagged return helpers `return_m`, `return_ma`, and `return_a` to explicit `return(array(...))` payloads,
+- kept the historical payload intent visible with `flat_array(entry_groups())` for immediate capture-group splices and `array_copy(array(rule))` for current-rule accumulator payloads,
+- fixed method-return value lowering so `flat_array(entry_groups())` and `flat_array(match_groups())` are classified as flattenable array-valued helper expressions instead of leaving runtime helper calls behind,
+- added a VHDL source-lock regression that rejects reintroducing those legacy return aliases or raw `IMATCH_LIST` flattening in the migrated helper-return band,
+- updated the ActionIR contract guide, emitted-Perl reference, and mdBook value/container/flow reference so the compatibility helpers now point directly to modern replacement spellings.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c t/phase0_regression.t`
+  - descriptor compile probe for `vhdl`
+  - VHDL smoke probe for `?library_clause:` / `?use_clause:` tags
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - DSL: prefer explicit drop edge helpers
 
 - standardized the documented array-edge drop surface around `drop_front(...)` and `drop_back(...)` as the preferred explicit names,

@@ -14,9 +14,9 @@ LX {return \@vhdl_file}
 
 comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(s(text))
 space:          /\s+/                          I.declare(scalar, text=entry_text()).return(s(text))
-dquote_string:  /"(.+?)(?<!")"/                I.return_m       
-library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return_m       
-use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return_m       
+dquote_string:  /"(.+?)(?<!")"/                I.return(array("?dquote_string:", flat_array(entry_groups())))
+library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return(array("?library_clause:", flat_array(entry_groups())))
+use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return(array("?use_clause:", flat_array(entry_groups())))
 
 entity_declaration:    /(?i)\bentity\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+entity\b)?(?:\s+\w+)?\s*;/
 I {declare(array, entity_header_parts)}
@@ -85,7 +85,7 @@ generate_statement: /(?is)(?:\w+\s*:\s*(?:(for|if)\s+(.+?))\s*)?\bgenerate\b/ /(
 #-> concurrent_assertion_statement         .push
 -> generate_statement                      .push
 -> component_instantiation_statement       .push
--> generate_statement[1]                   .return_ma
+-> generate_statement[1]                   .return(array("?generate_statement:", flat_array(entry_groups()), array_copy(array(generate_statement))))
 -> concurrent_signal_assignment_statement  .push
 
 
@@ -94,7 +94,7 @@ block_statement: /(?i)(?:(\w+)\s*:\s*)?\bblock\b/ /(?i)\bend\s+block\b.*?;/
 -> block_statement
 -> comment
 -> dquote_string
--> block_statement[1]  .return_m
+-> block_statement[1]  .return(array("?block_statement:", flat_array(entry_groups())))
 
 component_instantiation_statement: /(?i)(\w+)\s*:\s*(?:entity\s+(\S+)(?:\s+\(\s*(\S+)\s*\))?|configuration\s+(\w+)|(?:component\s+)?(\w+))/  /;/
 I {declare(array, instantiation_parts)}
@@ -115,7 +115,7 @@ generic_map_aspect: /(?i)generic\s+map\s*\(/  /\)/
 -> dquote_string          .push
 -> space                  .push
 -> association_element    .push
--> generic_map_aspect[1]  .return_a
+-> generic_map_aspect[1]  .return(array("?generic_map_aspect:", array_copy(array(generic_map_aspect))))
 
 
 port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
@@ -123,11 +123,11 @@ port_map_aspect: /(?i)port\s+map\s*\(/  /\)/
 -> dquote_string          .push
 -> space                  .push
 -> association_element    .push
--> port_map_aspect[1]     .return_a
+-> port_map_aspect[1]     .return(array("?port_map_aspect:", array_copy(array(port_map_aspect))))
 
 # The 'port' is to deal w/ generic_map_aspect's association_element's followed
 # by a port_map_aspect. I know it is not ** elegant ** but...
-association_element: /(?is)(\w+)\s*=>\s*(.+?)(?=\s*(?:,|\)\s*(?:;|port\b)))/  I.return_m
+association_element: /(?is)(\w+)\s*=>\s*(.+?)(?=\s*(?:,|\)\s*(?:;|port\b)))/  I.return(array("?association_element:", flat_array(entry_groups())))
 
 process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\bend(?:\s+postponed)?\s+process\b.*?;/  I {declare(scalar, pos_begin, process_statement_part)}
 -> comment                              .push
@@ -161,7 +161,7 @@ component_declaration:    /(?i)\bcomponent\s+(\w+)\s+is\b/ /(?i)\bend\b(?:\s+com
 -> comment                  .push
 -> dquote_string            .push
 -> port_clause              .push
--> component_declaration[1] .return_ma
+-> component_declaration[1] .return(array("?component_declaration:", flat_array(entry_groups()), array_copy(array(component_declaration))))
 
 
 package_declaration:    /(?i)\bpackage\s+(\w+)\s+is\b/ /(?i)\bend\b(?!\s+component\b)(?:\s+package\b)?(?:\s+\w+)?\s*;/ 
@@ -216,7 +216,7 @@ configuration_declaration: /(?i)\bconfiguration\s+(\w+)\s+of\s+(\w+)\s+is\b/  /(
 -> attribute_specification       .push
 -> group_declaration             .push
 -> block_configuration           .push
--> configuration_declaration[1]  .return_ma
+-> configuration_declaration[1]  .return(array("?configuration_declaration:", flat_array(entry_groups()), array_copy(array(configuration_declaration))))
 
 block_configuration: /(?i)\bfor\b(?!\s+generate)/  /(?i)end\s+for\s*;/
 -> use_clause
@@ -339,7 +339,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 
-subtype_declaration:  /(?is)\bsubtype\s+(\w+)\s+is\s+(.+?)\s*;/                     I.return_m
+subtype_declaration:  /(?is)\bsubtype\s+(\w+)\s+is\s+(.+?)\s*;/                     I.return(array("?subtype_declaration:", flat_array(entry_groups())))
 constant_declaration: /(?is)\bconstant\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/   I {
   declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
 
@@ -358,11 +358,11 @@ file_declaration: /(?is)\bfile\s+(.+?)\s*:\s*(.+?)\s*;/ I {
   return [map {['?file_declaration:', $_, $remainder_info]} split /\s*,\s*/o, $identifier_list]
 }
 
-alias_declaration:          /(?is)\balias\s+(\S+)\s+(.+?)?\bis\s+(\w+)(?:.*?)\s*;/    I.return_m
-attribute_declaration:      /(?is)\battribute\s+(\w+)\s*:\s*(.+?)\s*;/                I.return_m
-attribute_specification:    /(?is)\battribute\s+(\w+)\s+of\s+(.+?)\s+is\s+(.+?)\s*;/  I.return_m
-group_template_declaration: /(?is)group\s+(\w+)\s+is\s+\(\s*(.+?)\s*\)\s*;/           I.return_m
-group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*;/    I.return_m
+alias_declaration:          /(?is)\balias\s+(\S+)\s+(.+?)?\bis\s+(\w+)(?:.*?)\s*;/    I.return(array("?alias_declaration:", flat_array(entry_groups())))
+attribute_declaration:      /(?is)\battribute\s+(\w+)\s*:\s*(.+?)\s*;/                I.return(array("?attribute_declaration:", flat_array(entry_groups())))
+attribute_specification:    /(?is)\battribute\s+(\w+)\s+of\s+(.+?)\s+is\s+(.+?)\s*;/  I.return(array("?attribute_specification:", flat_array(entry_groups())))
+group_template_declaration: /(?is)group\s+(\w+)\s+is\s+\(\s*(.+?)\s*\)\s*;/           I.return(array("?group_template_declaration:", flat_array(entry_groups())))
+group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*;/    I.return(array("?group_declaration:", flat_array(entry_groups())))
 
 signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\s*:=\s*(.+?))?\s*;/ I {
   declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), signal_kind=entry_group(2), expression=entry_group(3));
@@ -377,4 +377,4 @@ configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
 }
 
 downto_or_to: /(?i)\b(?:downto|to)\b/
-disconnection_specification: /(?is)disconnection_specification\s+(.+)\s*;/ I.return_m
+disconnection_specification: /(?is)disconnection_specification\s+(.+)\s*;/ I.return(array("?disconnection_specification:", flat_array(entry_groups())))

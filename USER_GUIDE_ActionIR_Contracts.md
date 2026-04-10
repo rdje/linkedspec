@@ -82,51 +82,114 @@ push(Top, child, items)
 This is mainly useful as an emitted/internal compatibility shape for method-chain lowering.
 
 ## Return helper family
-### `return_a(label[, arg])`
-Return the label tag plus the current rule array.
+`return(payload)` is the canonical return surface for new DSL authoring. It makes the returned value explicit and lets nested value helpers lower normally inside that payload: `array(...)`, `hash(...)`, `array_copy(...)`, `flat_array(...)`, `entry_group(...)`, `entry_groups()`, `match_group(...)`, and the scalar/container helper family all stay visible to the reader.
 
-Example:
+The older tagged return helpers below remain recognized because historical specs use them, but they should be read as compatibility shortcuts rather than the spelling to teach in new code. Their most important hidden convention is that the label also implies the rule-local accumulator array of the same name.
+
+Preferred replacement shapes:
+
+```text
+# Historical:
+return_a(Top)
+
+# Modern:
+return(array("?Top:", array_copy(array(Top))))
+
+# Historical:
+return_m(Top)
+
+# Modern:
+return(array("?Top:", flat_array(entry_groups())))
+
+# Historical:
+return_ma(Top)
+
+# Modern:
+return(array("?Top:", flat_array(entry_groups()), array_copy(array(Top))))
+
+# Historical:
+return_im(group_open)
+
+# Modern:
+return(array("group_open", scalar(IMATCH)))
+```
+
+### `return_a(label[, arg])`
+Return the label tag plus the current rule accumulator array. This is the compact historical spelling for a tagged node that carries the array named by `label`.
+
+Compatibility examples:
 
 ```text
 return_a(Top)
 return_a(Top, scalar(name))
 ```
 
-### `return_m(label)`
-Return the label tag plus `IMATCH_LIST`.
+Prefer an explicit payload when writing new code:
 
-Example:
+```text
+return(array("?Top:", array_copy(array(Top))))
+return(array("?Top:", scalar(name), array_copy(array(Top))))
+```
+
+### `return_m(label)`
+Return the label tag plus the current immediate-match capture-group list.
+
+Compatibility example:
 
 ```text
 return_m(Top)
 ```
 
-### `return_ma(label)`
-Return the label tag plus `IMATCH_LIST` plus the current rule array.
+Prefer an explicit payload:
 
-Example:
+```text
+return(array("?Top:", flat_array(entry_groups())))
+```
+
+### `return_ma(label)`
+Return the label tag plus the current immediate-match capture-group list plus the current rule accumulator array.
+
+Compatibility example:
 
 ```text
 return_ma(Top)
 ```
 
+Prefer an explicit payload:
+
+```text
+return(array("?Top:", flat_array(entry_groups()), array_copy(array(Top))))
+```
+
 ### `return(label, arg)`
 Legacy tagged return form.
 
-Example:
+Compatibility example:
 
 ```text
 return(Top, scalar(name))
 ```
 
+Prefer an explicit payload:
+
+```text
+return(array("?Top:", scalar(name)))
+```
+
 ### `return_imatch(tag)` / `return_im(tag)`
 Return a tagged immediate-match payload.
 
-Examples:
+Compatibility examples:
 
 ```text
 return_imatch(group_open)
 return_im(group_open)
+```
+
+Prefer an explicit payload:
+
+```text
+return(array("group_open", scalar(IMATCH)))
 ```
 
 ### `return_array(tag, payload)`
