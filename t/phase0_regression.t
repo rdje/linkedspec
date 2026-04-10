@@ -1505,7 +1505,7 @@ subtest 'action_rewriter_compat_wrappers_share_emit_context_delegator' => sub {
 };
 
 subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
-    plan tests => 115;
+    plan tests => 117;
 
     no warnings 'redefine';
     require LinkedSpec::ActionRewriter;
@@ -1633,6 +1633,10 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::RuleIR::EmitContext::_lower_push_nonempty_statement = sub {
         my ($expr) = @_;
         return "push_nonempty:$expr";
+    };
+    local *LinkedSpec::RuleIR::EmitContext::_lower_push_call_statement = sub {
+        my ($expr) = @_;
+        return "push_call:$expr";
     };
     local *LinkedSpec::RuleIR::EmitContext::_lower_regex_subst_statement = sub {
         my ($target, $pattern, $replacement, $flags) = @_;
@@ -1861,6 +1865,10 @@ subtest 'action_rewriter_owner_wrappers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_push_nonempty_statement('push_nonempty(array(items), scalar(foo))'), 'push_nonempty:push_nonempty(array(items), scalar(foo))', 'ActionRewriter push-nonempty helper now delegates through the EmitContext compatibility owner');
     is($@, "__SAVED_ERR__\n", 'ActionRewriter push-nonempty helper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::ActionRewriter::_lower_push_call_statement('push_call(items, Leaf)'), 'push_call:push_call(items, Leaf)', 'ActionRewriter push-call helper now delegates through the EmitContext compatibility owner');
+    is($@, "__SAVED_ERR__\n", 'ActionRewriter push-call helper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::ActionRewriter::_lower_regex_subst_statement('scalar(foo)', '"/a/"', '"/b/"', 'g'), 'regex_subst:scalar(foo):"/a/":"/b/":g', 'ActionRewriter regex-subst helper now delegates through the EmitContext compatibility owner');
@@ -2322,6 +2330,7 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
             lower_assign_method_statement  => sub { return 'assign_method_ok' },
             lower_push_value_statement     => sub { return 'push_value_ok' },
             lower_push_nonempty_statement  => sub { return 'push_nonempty_ok' },
+            lower_push_call_statement      => sub { return 'push_call_ok' },
             lower_regex_subst_statement    => sub { return 'regex_subst_ok' },
             lower_array_pipeline_expr      => sub { return 'array_pipeline_ok' },
             lower_if_flow_statement        => sub { return 'if_ok' },
@@ -2742,6 +2751,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_assign_method_statement = sub { return 'assign_method_ok' };
     local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
     local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
+    local *Synthetic::ActionIROwner::_lower_push_call_statement = sub { return 'push_call_ok' };
     local *Synthetic::ActionIROwner::_lower_regex_subst_statement = sub { return 'regex_subst_ok' };
     local *Synthetic::ActionIROwner::_lower_array_pipeline_expr = sub { return 'array_pipeline_ok' };
     local *Synthetic::ActionIROwner::_lower_if_flow_statement = sub { return 'if_ok' };
@@ -13126,7 +13136,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_push_call_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -16223,6 +16233,70 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'push_value method contract avoids unresolved-helper hits');
     ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
     ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
+};
+subtest 'action_rewriter_lowers_push_call_method_contract' => sub {
+    plan tests => 15;
+
+    my $handler_call = '&{$$descr{spec}{Leaf}{handler}}($descr, $STRING, $minfo)';
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_call(Leaf)'),
+        'push @Top, '.$handler_call,
+        'push_call(Rule) lowers to a child call pushed into the current rule array'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_call(items, Leaf)'),
+        'push @items, '.$handler_call,
+        'push_call(target, Rule) lowers to a child call pushed into the target array'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_call(a(items), call(Leaf))'),
+        'push @items, '.$handler_call,
+        'push_call accepts explicit a(target) and redundant call(Rule) callee spelling'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_call(items, Leaf, 1)'),
+        'push @items, '.$handler_call.'->[1]',
+        'push_call(target, Rule, index) lowers to an indexed child-result push'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'push_call(Leaf, 1)'),
+        'push @Top, '.$handler_call.'->[1]',
+        'push_call(Rule, index) lowers to an indexed child-result push into the current rule array'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: /a/ -> Top { push_call(Leaf); return(a(array_values(a(Top)))) }
+Leaf:
+ /a/ -> Leaf { return(a("leaf", match_text())) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_call method contract');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'push_call method contract avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'push_call method contract avoids unresolved-helper hits');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_call contract');
+    ok(!@{$meta->{compatibility_surface_contract_ids}}, 'push_call is a modern helper, not compatibility-surface syntax');
+    ok($meta->{language_agnostic_action_ir_ready}, 'push_call method contract remains language-agnostic action-IR ready');
+
+    my ($event) = grep { ($_->{contract_id} // '') eq 'push_call' } @{$meta->{canonical_action_ir_events}};
+    is_deeply($event->{args}, { target => 'Top', callee => 'Leaf', target_mode => 'implicit_current_label' }, 'push_call canonical event records the implicit destination array and callee rule');
+
+    my $indexed_spec_content = <<'SPEC';
+Top:: /a/ -> Top { push_call(Leaf, 1); return(a(array_values(a(Top)))) }
+Leaf:
+ /a/ -> Leaf { return(a("leaf", match_text())) }
+SPEC
+
+    my $indexed_descr = LinkedSpec::Get(\$indexed_spec_content, return_descriptor => 1);
+    ok(defined($indexed_descr) && ref($indexed_descr) eq 'HASH', 'descriptor build succeeds for indexed push_call method contract');
+    my ($indexed_event) = grep { ($_->{contract_id} // '') eq 'push_call' } @{$indexed_descr->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_events}};
+    is_deeply($indexed_event->{args}, { target => 'Top', callee => 'Leaf', index => '1', target_mode => 'implicit_current_label' }, 'push_call(Rule, index) canonical event records the implicit destination array, callee rule, and child-result index');
+
+    my $parser = LinkedSpec::Get(\$spec_content);
+    my $input = 'aa';
+    is_deeply($parser->(\$input), [[['leaf', 'a']]], 'push_call(Rule) appends the whole child result as one element in the current rule array at runtime');
 };
 subtest 'action_rewriter_lowers_push_nonempty_method_contract' => sub {
     plan tests => 13;
@@ -40857,13 +40931,16 @@ subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
 };
 subtest 'regdef_token_readers_prefer_entry_groups' => sub {
-    plan tests => 4;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'regdef.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'regdef source spec text is available for entry_groups migration inspection');
-    like($source_content, qr/-> reg_def\[1\]\s+\{return \['\?reg_def:', flat_array\(entry_groups\(\)\), \\\@capt\]\}/, 'regdef reg_def return now prefers entry_groups()');
+    like($source_content, qr/-> reg_def\s+\{push_call\(reg_def\)\}/, 'regdef top aggregation now prefers push_call(reg_def)');
+    like($source_content, qr/-> reg_fld\s+\{push_call\(reg_fld\)\}/, 'regdef nested aggregation now prefers push_call(reg_fld)');
+    unlike($source_content, qr/push \@capt, call\(/, 'regdef migrated aggregators no longer use raw push-call wrappers');
+    like($source_content, qr/-> reg_def\[1\]\s+\{return \['\?reg_def:', flat_array\(entry_groups\(\)\), \\\@reg_def\]\}/, 'regdef reg_def return now prefers entry_groups()');
     like($source_content, qr/reg_fld: .*?I \{return \['\?reg_fld:', flat_array\(entry_groups\(\)\)\]\}/, 'regdef reg_fld return now prefers entry_groups()');
     unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
 };
@@ -41607,7 +41684,7 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
@@ -41615,6 +41692,8 @@ subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for capture-slice marker inspection');
     like($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation now prefers @capture_slice as the anonymous capture-boundary marker');
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
+    like($source_content, qr/push_call\(quoted_string, 1\)/, 'ebnf logging_annotation now uses push_call for indexed quoted-string child results');
+    unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
     like($source_content, qr/push_nonempty\(a\(logging_annotation\), trim\(capture_slice\(\)\)\)/, 'ebnf logging_annotation now uses push_nonempty for trimmed optional capture appends');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
 };
@@ -41811,12 +41890,14 @@ subtest 'tkgui_parser_smoke' => sub {
     is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
 };
 subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
-    plan tests => 6;
+    plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'tkgui.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
+    like($source_content, qr/-> sub_gui\s+\{push_call\(sub_gui\)\}/, 'tkgui top aggregation now prefers push_call(sub_gui)');
+    unlike($source_content, qr/push \@sub_guis, call\(/, 'tkgui top aggregation no longer uses a raw push-call wrapper');
     like($source_content, qr/assign\(scalar\(subgui_name\), entry_group\(0\)\);/, 'tkgui sub_gui now prefers entry_group(0) for the entry-point name read');
     like($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.capture_slice\(\)\.'\)'\)\}/, 'tkgui sub_gui now prefers capture_slice() for the inner parenthesized body read');
     unlike($source_content, qr/my \(\$subgui_name\) = \@IMATCH_LIST;/, 'tkgui sub_gui no longer destructures raw @IMATCH_LIST for the entry-point name read');

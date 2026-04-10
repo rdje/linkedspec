@@ -184,6 +184,14 @@ sub _normalize_canonical_args {
  elsif ($contract_id eq 'push_target_arg' || $contract_id eq 'push_scope_target_arg') {
   $args{target_mode} = 'explicit';
  }
+ elsif ($contract_id eq 'push_call') {
+  if (!defined($args{target})) {
+   $args{target} = $label;
+   $args{target_mode} = 'implicit_current_label';
+  } else {
+   $args{target_mode} = 'explicit';
+  }
+ }
  elsif ($contract_id eq 'return_undef') {
   $args{value} = 'undef';
  }

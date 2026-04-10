@@ -86,6 +86,7 @@ sub default_deps_for_package {
    'lower_assign_method_statement',
    'lower_push_value_statement',
    'lower_push_nonempty_statement',
+   'lower_push_call_statement',
    'lower_regex_subst_statement',
    'lower_array_pipeline_expr',
    'lower_if_flow_statement',
@@ -114,6 +115,7 @@ sub _require_lowering_deps {
   lower_assign_method_statement  => _require_dep($deps, 'lower_assign_method_statement'),
   lower_push_value_statement     => _require_dep($deps, 'lower_push_value_statement'),
   lower_push_nonempty_statement  => _require_dep($deps, 'lower_push_nonempty_statement'),
+  lower_push_call_statement      => _require_dep($deps, 'lower_push_call_statement'),
   lower_regex_subst_statement    => _require_dep($deps, 'lower_regex_subst_statement'),
   lower_array_pipeline_expr      => _require_dep($deps, 'lower_array_pipeline_expr'),
   lower_if_flow_statement        => _require_dep($deps, 'lower_if_flow_statement'),
@@ -1787,8 +1789,20 @@ sub _build_passthrough_ir_contracts {
 # Purpose : Contracts that lower assignment and substitution helper methods.
 #------------------------------------------------------------------------------
 sub _build_assignment_and_regex_contracts {
- my ($d) = @_;
+ my ($label, $d) = @_;
  return [
+  {
+   id                 => 'push_call',
+   ir_node            => 'PUSH',
+   diag_name          => 'push_call',
+   unresolved_pattern => qr/\bpush_call\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_push_call_statement};
+    $code =~ s/\b(?<expr>push_call\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}, $label) || $&/ge;
+    return $code
+   },
+  },
   {
    id                 => 'push_value',
    ir_node            => 'PUSH',
@@ -2135,7 +2149,7 @@ sub build_action_lowering_contracts {
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_backtrack_contracts($label)},
   @{_build_passthrough_ir_contracts()},
-  @{_build_assignment_and_regex_contracts($d)},
+  @{_build_assignment_and_regex_contracts($label, $d)},
   @{_build_array_pipeline_contracts($d)},
   @{_build_flow_control_contracts($d)},
   @{_build_emit_and_declare_contracts($d)},

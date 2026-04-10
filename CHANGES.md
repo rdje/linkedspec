@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Specs: helperize small push-call aggregators
+
+- added the compact `push_call(Rule)` DSL helper for the common "call a child rule and push its result into the current rule accumulator" intent, with `push_call(Rule, index)` and explicit-target `push_call(target, Rule[, index])` forms for the less implicit cases,
+- migrated the remaining simple raw `push @array, call(child)` accumulator wrappers in `specs/tkgui.spec` and `specs/regdef.spec` to implicit-target `push_call(Rule)` calls,
+- migrated the indexed quoted-string accumulator in `specs/ebnf.spec::logging_annotation` to `push_call(quoted_string, 1)`,
+- preserved the existing parser AST shapes while moving those action edges onto the modern helper surface and canonical `PUSH` ActionIR path,
+- added regression locks proving the migrated source no longer spells those raw push-call wrappers.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -Iperl -c perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c t/phase0_regression.t`
+  - focused `push_call(...)`, EBNF logging-annotation, `tkgui`, and descriptor metadata probes
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - DSL: add push_nonempty helper
 
 - added the modern `push_nonempty(array(target), value)` DSL statement helper as a concise replacement for common trimmed optional-capture append flows,

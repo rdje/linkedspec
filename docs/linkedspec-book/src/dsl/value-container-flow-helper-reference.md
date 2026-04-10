@@ -139,6 +139,10 @@ These helpers are statements. They consume values and change rule behavior.
 | `assign(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `assign(scalar(retv), call(rule))` | capture a child result | later helper logic needs the child payload. |
+| `push_call(rule)` | call one rule and append its result | a child rule result should go straight into the current rule's conventional array accumulator. |
+| `push_call(rule, index)` | call one rule and append one indexed result | one element from a shaped child return should go straight into the current rule's conventional array accumulator. |
+| `push_call(target, rule)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
+| `push_call(target, rule, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
 | `push_value(array(name), expr)` | append one value | an array should grow by one item. |
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
@@ -159,6 +163,65 @@ Parent::AND
  }
 ```
 
+Direct child-accumulator pattern:
+
+```text
+Parent::
+ -> Child {
+   push_call(Child)
+ }
+ LX {
+   return(hash("kind", "parent", "children", array_copy(array(Parent))));
+ }
+```
+
+`push_call(rule)` is the compact form for a very common parser action: run one child rule and append that child result into the current rule's conventional array. In a rule named `Parent`, `push_call(Child)` means "call `Child` and push the return value into `@Parent`."
+
+Use the one-argument form when the current rule's conventional array is the accumulator:
+
+```text
+push_call(Item);
+push_call(Field);
+push_call(Node);
+```
+
+Use the targeted two-argument form when the destination should be a separate array variable:
+
+```text
+push_call(items, Item);
+push_call(fields, Field);
+push_call(children, Node);
+```
+
+This is intentionally shorter than spelling the lower-level pieces:
+
+```text
+push_value(array(children), call(Child));
+```
+
+That longer shape is still valid. It is just not the clearest spelling when the whole intent is "call and push."
+
+Use `push_value(...)` instead when the pushed value is not simply the child result:
+
+```text
+push_value(array(items), trim(match_text()));
+push_value(array(children), hash("kind", "wrapped", "node", call(Node)));
+```
+
+When the child returns an array-like payload and the current rule accumulator needs one element from it, pass a zero-based index as the second argument:
+
+```text
+push_call(quoted_string, 1);
+```
+
+That is the helper equivalent of pushing `call(quoted_string)->[1]` into the current rule's array. If the target should be a separate array, use the three-argument form:
+
+```text
+push_call(logging_annotation, quoted_string, 1);
+```
+
+Keep indexed forms for shaped child payloads whose convention is already clear; otherwise, prefer returning a clearer hash or typed payload from the child and pushing the whole child result.
+
 Conditional append pattern:
 
 ```text
@@ -166,7 +229,7 @@ logging_annotation: /@(\w+)\s*\(\s*/ /\s*\)/ @capture_slice
 I { declare(array, logging_annotation); }
 
 -> quoted_string {
-  push_value(array(logging_annotation), call(quoted_string)->[1])
+  push_call(quoted_string, 1)
 }
 -> comma {
   push_nonempty(array(logging_annotation), trim(capture_slice()))

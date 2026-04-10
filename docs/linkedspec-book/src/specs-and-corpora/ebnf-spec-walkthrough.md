@@ -616,7 +616,7 @@ and then:
 
 ```text
 -> quoted_string {
-  push @logging_annotation, call(quoted_string)->[1]
+  push_call(quoted_string, 1)
 }
 -> comma {
   push_nonempty(a(logging_annotation), trim(capture_slice()))
@@ -632,6 +632,7 @@ This is a useful advanced example because it combines:
 - a two-regex rule,
 - an anonymous capture-boundary marker,
 - a child call into `quoted_string`,
+- `push_call(...)` for the indexed quoted-string child result,
 - comma handling,
 - `push_nonempty(...)` for trimmed optional capture appends,
 - a normalized typed return payload.
@@ -714,7 +715,7 @@ regex raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETU
 include_dir raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
 include_file raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
 semantic_annotation raw=0 unresolved=0 ready=1 nodes=ASSIGN|BACKTRACK|CAPTURE_MACRO|REGEX_SUBST|RETURN
-logging_annotation raw=0 unresolved=0 ready=1 nodes=CALL|CAPTURE_SLICE|POSITION_TRACK|PUSH|REGEX_SUBST|RETURN
+logging_annotation raw=0 unresolved=0 ready=1 nodes=CAPTURE_SLICE|POSITION_TRACK|PUSH|REGEX_SUBST|RETURN
 ```
 
 The key public reading is:

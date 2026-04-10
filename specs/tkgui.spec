@@ -1,9 +1,8 @@
 sub_gui_list:: 
- I {my @sub_guis}
- -> sub_gui	{push @sub_guis, call(sub_gui)}
+ -> sub_gui	{push_call(sub_gui)}
  -> comment	{next}
 
- LX {return {@sub_guis}}
+ LX {return {@sub_gui_list}}
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {

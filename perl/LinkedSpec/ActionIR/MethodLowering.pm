@@ -1692,6 +1692,76 @@ sub _lower_push_value_statement {
 }
 
 #------------------------------------------------------------------------------
+# Function: _lower_push_call_statement
+# Purpose : Lower `push_call(Rule[, index])` and
+#           `push_call(target, Rule[, index])` helper calls.
+# Args    : ($expr, $label, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_push_call_statement {
+ my ($expr, $label, $deps) = @_;
+ if (ref($label) eq 'HASH' && !defined($deps)) {
+  $deps = $label;
+  $label = undef;
+ }
+ $deps = {} unless ref($deps) eq 'HASH';
+ my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+ my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+
+ my $call = $parse_method_function_expr->($expr);
+ return undef unless $call && $call->{method} eq 'push_call';
+
+ my $raw_args = $call->{args} || [];
+ return undef unless ref($raw_args) eq 'ARRAY' && @$raw_args >= 1 && @$raw_args <= 3;
+
+ my ($target_symbol, $callee_expr, $index_expr);
+ my $two_arg_index_expr = @$raw_args == 2 ? $trim_action_ir_value->($raw_args->[1]) : undef;
+ if (@$raw_args == 1) {
+  return undef unless defined($label) && $label =~ /^\w+$/o;
+  $target_symbol = $label;
+  $callee_expr = $trim_action_ir_value->($raw_args->[0]);
+ } elsif (defined($two_arg_index_expr) && $two_arg_index_expr =~ /^\d+$/o) {
+  return undef unless defined($label) && $label =~ /^\w+$/o;
+  $target_symbol = $label;
+  $callee_expr = $trim_action_ir_value->($raw_args->[0]);
+  $index_expr = $two_arg_index_expr;
+ } else {
+  my $target_expr = $trim_action_ir_value->($raw_args->[0]);
+  return undef unless defined($target_expr) && length($target_expr);
+  $target_symbol = $extract_array_symbol_name->($target_expr);
+  if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
+   $target_symbol = $1;
+  }
+  return undef unless defined($target_symbol) && length($target_symbol);
+  $callee_expr = $trim_action_ir_value->($raw_args->[1]);
+  $index_expr = $trim_action_ir_value->($raw_args->[2]) if @$raw_args == 3;
+ }
+
+ return undef unless defined($callee_expr) && length($callee_expr);
+ my $callee_symbol;
+ if ($callee_expr =~ /^(\w+)$/o) {
+  $callee_symbol = $1;
+ } else {
+  my $callee_call = $parse_method_function_expr->($callee_expr);
+  if ($callee_call && $callee_call->{method} eq 'call') {
+   my $callee_args = $normalize_method_args_with_optional_scope->($callee_call->{args} || [], 1, 1);
+   $callee_symbol = $trim_action_ir_value->($callee_args->[0]) if $callee_args;
+  }
+ }
+ return undef unless defined($callee_symbol) && $callee_symbol =~ /^\w+$/o;
+
+ my $handler_call = '&{$$descr{spec}{'.$callee_symbol.'}{handler}}($descr, $STRING, $minfo)';
+ if (defined($index_expr)) {
+  return undef unless defined($index_expr) && $index_expr =~ /^\d+$/o;
+  $handler_call .= '->['.$index_expr.']';
+ }
+
+ return 'push @'.$target_symbol.', '.$handler_call
+}
+
+#------------------------------------------------------------------------------
 # Function: _lower_push_nonempty_statement
 # Purpose : Lower `push_nonempty(array(target), value)` helper calls.
 # Args    : ($expr, $deps)
