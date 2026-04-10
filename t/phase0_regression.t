@@ -15979,39 +15979,39 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'starts_with(...) and ends_with(...) compose together inside flow conditions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(tail(sorted_keys(hash(meta))))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(hash(meta))))}),
         q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }},
-        'return(payload) accepts tail(projected-array-expression) lowering'
+        'return(payload) accepts drop_front(projected-array-expression) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))}),
-        q{@rest_keys = (do { my $__ls_array_init = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
-        'assign helper accepts tail(projected-array-expression) array source lowering'
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))}),
+        q{@rest_keys = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        'assign helper accepts drop_front(projected-array-expression) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(tail(sorted_keys(hash(meta)))), 0)}),
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)))), 0)}),
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
-        'tail(...) composes inside count(...) and numeric flow comparisons'
+        'drop_front(...) composes inside count(...) and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(tail(sorted_keys(hash(meta)), 2))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(hash(meta)), 2))}),
         q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
-        'return(payload) accepts tail(projected-array-expression, literal-count) lowering'
+        'return(payload) accepts drop_front(projected-array-expression, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))}),
-        q{@rest_keys = (do { my $__ls_array_init = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = $skip_count; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_array_init) ? @{$__ls_array_init} : () })},
-        'assign helper accepts tail(projected-array-expression, scalar-count) array source lowering'
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))}),
+        q{@rest_keys = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = $skip_count; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        'assign helper accepts drop_front(projected-array-expression, scalar-count) array source lowering'
     );
     is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)}),
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(hash(meta)), 2)), 0)}),
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
-        'tail(..., count) composes inside count(...) and numeric flow comparisons'
+        'drop_front(..., count) composes inside count(...) and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(tail(sorted_keys(hash(meta)), 1), 0))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(drop_front(sorted_keys(hash(meta)), 1), 0))}),
         q{return do { my $__ls_scalar_source = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 1; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
-        'tail(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
+        'drop_front(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(take(sorted_keys(hash(meta))))}),
@@ -16089,39 +16089,39 @@ subtest 'action_rewriter_lowers_method_contracts_for_capture_and_structured_retu
         'take_last(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_last(sorted_keys(hash(meta))))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_back(sorted_keys(hash(meta))))}),
         q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); $__ls_drop_last_len > 1 ? [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 2]] : [] } else { [] } }},
-        'return(payload) accepts drop_last(projected-array-expression) lowering'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_last(sorted_keys(hash(meta)), 2))}),
-        q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
-        'return(payload) accepts drop_last(projected-array-expression, literal-count) lowering'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))}),
-        q{@leading_keys = do { my $__ls_drop_last = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = $drop_count; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
-        'assign helper accepts drop_last(projected-array-expression, scalar-count) array source lowering'
-    );
-    is(
-        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
-        'drop_last(..., count) composes inside count(...) and numeric flow comparisons'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(drop_last(sorted_keys(hash(meta)), 1), 0))}),
-        q{return do { my $__ls_scalar_source = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 1; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
-        'drop_last(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(hash(meta)), 2))}),
-        q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
-        'drop_front(..., count) aliases tail(..., count) lowering'
+        'return(payload) accepts drop_back(projected-array-expression) lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(drop_back(sorted_keys(hash(meta)), 2))}),
         q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
-        'drop_back(..., count) aliases drop_last(..., count) lowering'
+        'return(payload) accepts drop_back(projected-array-expression, literal-count) lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))}),
+        q{@leading_keys = do { my $__ls_drop_last = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = $drop_count; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
+        'assign helper accepts drop_back(projected-array-expression, scalar-count) array source lowering'
+    );
+    is(
+        LinkedSpec::ActionRewriter::_lower_flow_composite_expr(q{num_gt(count(drop_back(sorted_keys(hash(meta)), 2)), 0)}),
+        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        'drop_back(..., count) composes inside count(...) and numeric flow comparisons'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(scalar(drop_back(sorted_keys(hash(meta)), 1), 0))}),
+        q{return do { my $__ls_scalar_source = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 1; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; (defined($__ls_scalar_source) && ref($__ls_scalar_source) eq 'ARRAY') ? $__ls_scalar_source->[0] : undef }},
+        'drop_back(..., count) remains a real array-valued helper for nested scalar(container, index) reads'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(tail(sorted_keys(hash(meta)), 2))}),
+        q{return do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        'tail(..., count) remains a compatibility alias for drop_front(..., count) lowering'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_last(sorted_keys(hash(meta)), 2))}),
+        q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
+        'drop_last(..., count) remains a compatibility alias for drop_back(..., count) lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{assign(Top, scalar(first_key), scalar(sorted_keys(hash(meta)), 0))}),
@@ -33378,88 +33378,88 @@ SPEC
         'lifecycle composed scalar container-read fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'method_like_fluent_and_structured_action_tail_array_helpers_lower_equivalently' => sub {
+subtest 'method_like_fluent_and_structured_action_drop_front_array_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
+ /a/ -> Top .declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
+ /a/ -> Top { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge tail helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge tail helper form');
-    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge tail helper forms lower to identical ACODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_front helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_front helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge drop_front helper forms lower to identical ACODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge tail helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge tail helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge tail helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge tail helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge tail helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge tail helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge tail helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge drop_front helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge drop_front helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge drop_front helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge drop_front helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge drop_front helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge drop_front helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge drop_front helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured action-edge tail helper forms remain language-agnostic action-IR ready'
+        'fluent and structured action-edge drop_front helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge tail fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge drop_front fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'method_like_fluent_and_structured_lifecycle_tail_array_helpers_lower_equivalently' => sub {
+subtest 'method_like_fluent_and_structured_lifecycle_drop_front_array_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
+LX.declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))).assign(scalar(rest_count), count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count)))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
+LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count))); assign(scalar(rest_count), count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", scalar(rest_count))) }
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle tail helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle tail helper form');
-    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle tail helper forms lower to identical LXCODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_front helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_front helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle drop_front helper forms lower to identical LXCODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle tail helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle tail helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle tail helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle tail helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle tail helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle tail helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle tail helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle drop_front helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle drop_front helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle drop_front helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle drop_front helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle drop_front helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle drop_front helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle drop_front helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured lifecycle tail helper forms remain language-agnostic action-IR ready'
+        'fluent and structured lifecycle drop_front helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle tail fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle drop_front fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_take_array_helpers_lower_equivalently' => sub {
@@ -34642,88 +34642,88 @@ SPEC
         'lifecycle numeric clamp helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'method_like_fluent_and_structured_action_drop_last_array_helpers_lower_equivalently' => sub {
+subtest 'method_like_fluent_and_structured_action_drop_back_array_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
+ /a/ -> Top .declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
+ /a/ -> Top { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_last helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_last helper form');
-    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge drop_last helper forms lower to identical ACODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge drop_back helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge drop_back helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge drop_back helper forms lower to identical ACODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge drop_last helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge drop_last helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge drop_last helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge drop_last helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge drop_last helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge drop_last helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge drop_last helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge drop_back helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge drop_back helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge drop_back helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge drop_back helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge drop_back helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge drop_back helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge drop_back helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured action-edge drop_last helper forms remain language-agnostic action-IR ready'
+        'fluent and structured action-edge drop_back helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge drop_last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge drop_back fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
-subtest 'method_like_fluent_and_structured_lifecycle_drop_last_array_helpers_lower_equivalently' => sub {
+subtest 'method_like_fluent_and_structured_lifecycle_drop_back_array_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
+LX.declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))).assign(scalar(kept_count), count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count)))
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
+LX { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count))); assign(scalar(kept_count), count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", scalar(kept_count))) }
  /a/ -> Top { return_a(Top) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_last helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_last helper form');
-    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle drop_last helper forms lower to identical LXCODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle drop_back helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle drop_back helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle drop_back helper forms lower to identical LXCODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle drop_last helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle drop_last helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle drop_last helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle drop_last helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle drop_last helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle drop_last helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle drop_last helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle drop_back helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle drop_back helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle drop_back helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle drop_back helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle drop_back helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle drop_back helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle drop_back helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured lifecycle drop_last helper forms remain language-agnostic action-IR ready'
+        'fluent and structured lifecycle drop_back helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle drop_last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle drop_back fluent form preserves DECLARE/ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_drop_alias_array_helpers_lower_equivalently' => sub {

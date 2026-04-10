@@ -163,7 +163,7 @@ slice(coalesce(scalaref(retv, {parts}), array("fallback")), scalar(slice_start))
 ```
 
 Use `slice(...)` when:
-- `tail(...)` is too coarse because you need one later starting point rather than only “drop the first one or first `N`,”
+- `drop_front(...)` is too coarse because you need one later starting point rather than only “drop the first one or first `N`,”
 - `take(...)` is too coarse because you need one middle window rather than a prefix,
 - one rule wants to keep processing one canonical middle subarray without temporary staging arrays,
 - or one later reducer / nested read still needs to compose directly on that kept middle array.
@@ -187,7 +187,7 @@ Important semantic note:
 - `slice(array_expr, start_index, take_count)` keeps at most `take_count` items starting there,
 - negative or invalid `start_index` / `take_count` values clamp to `0`,
 - if the source is undefined, the start is already out of range, or the count is non-positive, the result is `[]`,
-- and `slice(...)` stays array-valued, so it composes naturally with `count(...)`, `join_values(...)`, `concat_arrays(...)`, `take(...)`, `tail(...)`, and nested `scalar(container, index)` reads.
+- and `slice(...)` stays array-valued, so it composes naturally with `count(...)`, `join_values(...)`, `concat_arrays(...)`, `take(...)`, `drop_front(...)`, and nested `scalar(container, index)` reads.
 
 ### Scalar text normalization
 These helpers keep common string cleanup inside the canonical value-expression layer:
@@ -875,7 +875,7 @@ assign(scalar(first_combined), scalar(concat_arrays(array(parts), take(sorted_ke
 Important semantic notes:
 - `concat_arrays(...)` always returns one array value,
 - it accepts one or more array-valued operands,
-- supported operands include direct working arrays, `array(...)`, `sorted_keys(...)`, `sorted_values(...)`, array slicing helpers such as `take(...)` / `take_last(...)` / `tail(...)` / `drop_last(...)`, and array-valued `coalesce(...)`,
+- supported operands include direct working arrays, `array(...)`, `sorted_keys(...)`, `sorted_values(...)`, array slicing helpers such as `take(...)` / `take_last(...)` / `drop_front(...)` / `drop_back(...)`, and array-valued `coalesce(...)`,
 - items are appended from left to right,
 - undefined array-valued operands contribute nothing,
 - and if you want one nested array snapshot of one working array rather than a layered concatenation, `array_copy(...)` is usually the better tool.
@@ -1005,39 +1005,36 @@ Important semantic notes:
 - when the needle is `undef`, `index_of(...)` looks for the first undefined array item,
 - and `index_of(...)` complements `contains(...)`: use `contains(...)` for yes/no membership, use `index_of(...)` when you need the actual location.
 
-### Array tail as an array with `tail(...)` or `drop_front(...)`
-`tail(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `tail(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”. `drop_front(...)` is the exact alias for the same lowering contract.
+### Drop the front array prefix with `drop_front(...)`
+`drop_front(...)` is the parser-oriented helper for “give me the rest of this array after the first element”, and `drop_front(array_expr, drop_count)` extends that to “give me the rest after the first `N` elements”. `tail(...)` remains supported as a compatibility alias for the same lowering contract, but new specs should prefer `drop_front(...)` because the name says exactly which edge is being removed.
 
 Examples:
 
 ```text
-tail(array(parts))
-tail(array(parts), 2)
 drop_front(array(parts))
 drop_front(array(parts), 2)
-tail(sorted_keys(hash(meta)))
-tail(sorted_keys(hash(meta)), scalar(skip_count))
-tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-tail(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_front(sorted_keys(hash(meta)))
+drop_front(sorted_keys(hash(meta)), scalar(skip_count))
+drop_front(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_front(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
 
 Use cases:
-- keep a “head” item in one scalar while carrying the remaining items as one canonical array value,
-- express recursive head/tail decomposition in `.spec` without raw Perl slicing,
+- keep one leading item in one scalar while carrying the remaining items as one canonical array value,
+- express recursive leading-item/rest decomposition in `.spec` without raw Perl slicing,
 - skip the first `N` projected keys or values after some earlier parse step has already consumed them,
 - skip one projected key/value and keep processing the remainder through the same aggregate helper family.
 
 Examples in context:
 
 ```text
-assign(array(rest_parts), tail(array(parts)))
-assign(array(rest_parts), tail(array(parts), 2))
+assign(array(rest_parts), drop_front(array(parts)))
 assign(array(rest_parts), drop_front(array(parts), 2))
-assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
-assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
-assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
-return(hash("rest_parts", tail(array(parts)), "rest_keys", tail(sorted_keys(hash(meta)))))
-if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
+assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
+assign(scalar(rest_count), count(drop_front(sorted_keys(hash(meta)))))
+return(hash("rest_parts", drop_front(array(parts)), "rest_keys", drop_front(sorted_keys(hash(meta)))))
+if(num_gt(count(drop_front(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
 ```
 
 Worked example:
@@ -1051,7 +1048,7 @@ I {
 -> header[1] {
   assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
   assign(scalar(first_key), first(array(keys)))
-  assign(array(rest_keys), tail(array(keys), scalar(skip_count)))
+  assign(array(rest_keys), drop_front(array(keys), scalar(skip_count)))
   assign(scalar(rest_count), count(array(rest_keys)))
   return(
     hash(
@@ -1064,12 +1061,11 @@ I {
 ```
 
 Important semantic note:
-- `tail(array_expr)` defaults to dropping `1` entry when no explicit count is supplied,
-- `drop_front(array_expr)` is the exact alias of `tail(array_expr)`,
-- `tail(...)` returns one array value, not one scalar,
+- `drop_front(array_expr)` defaults to dropping `1` entry when no explicit count is supplied,
+- `drop_front(...)` returns one array value, not one scalar,
 - it works on both direct working arrays and composed array-valued helper expressions,
 - an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(skip_count)`,
-- `drop_front(array_expr, drop_count)` is the exact alias of `tail(array_expr, drop_count)`,
+- `tail(array_expr)` and `tail(array_expr, drop_count)` are compatibility aliases for the same lowering contract,
 - a one-element source becomes one empty array,
 - an empty source becomes one empty array,
 - a source shorter than the requested drop count also becomes one empty array,
@@ -1389,20 +1385,18 @@ Semantic notes:
 - `matches(...)` is designed around the same regex literal surface already used by flow predicates, so `/.../flags` remains the standard spelling there too,
 - and empty string prefixes/suffixes/substrings therefore still behave consistently once both sides are defined.
 
-### Drop the trailing array suffix with `drop_last(...)` or `drop_back(...)`
-`drop_last(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_last(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”. `drop_back(...)` is the exact alias for the same lowering contract.
+### Drop the trailing array suffix with `drop_back(...)`
+`drop_back(...)` is the parser-oriented helper for “give me everything except the last part of this array”, and `drop_back(array_expr, drop_count)` extends that to “drop the last `N` elements as one canonical array transformation”. `drop_last(...)` remains supported as a compatibility alias for the same lowering contract, but new specs should prefer `drop_back(...)` because it mirrors `drop_front(...)`.
 
 Examples:
 
 ```text
-drop_last(array(parts))
-drop_last(array(parts), 2)
 drop_back(array(parts))
 drop_back(array(parts), 2)
-drop_last(sorted_keys(hash(meta)))
-drop_last(sorted_keys(hash(meta)), scalar(drop_count))
-drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-drop_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_back(sorted_keys(hash(meta)))
+drop_back(sorted_keys(hash(meta)), scalar(drop_count))
+drop_back(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_back(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
 
 Use cases:
@@ -1414,14 +1408,13 @@ Use cases:
 Examples in context:
 
 ```text
-assign(array(leading_parts), drop_last(array(parts)))
-assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_parts), drop_back(array(parts)))
 assign(array(leading_parts), drop_back(array(parts), 2))
-assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
-assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
-assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))
-return(hash("leading_parts", drop_last(array(parts)), "leading_keys", drop_last(sorted_keys(hash(meta)), 2)))
-if(num_gt(count(drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
+assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
+assign(scalar(kept_count), count(drop_back(sorted_keys(hash(meta)), 2)))
+return(hash("leading_parts", drop_back(array(parts)), "leading_keys", drop_back(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(drop_back(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0))
 ```
 
 Worked example:
@@ -1434,7 +1427,7 @@ I {
 
 -> header[1] {
   assign(array(keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))
-  assign(array(leading_keys), drop_last(array(keys), scalar(drop_count)))
+  assign(array(leading_keys), drop_back(array(keys), scalar(drop_count)))
   assign(scalar(kept_count), count(array(leading_keys)))
   return(
     hash(
@@ -1447,12 +1440,11 @@ I {
 ```
 
 Important semantic note:
-- `drop_last(array_expr)` defaults to dropping `1` trailing entry when no explicit count is supplied,
-- `drop_back(array_expr)` is the exact alias of `drop_last(array_expr)`,
-- `drop_last(...)` returns one array value, not one scalar,
+- `drop_back(array_expr)` defaults to dropping `1` trailing entry when no explicit count is supplied,
+- `drop_back(...)` returns one array value, not one scalar,
 - it works on both direct working arrays and composed array-valued helper expressions,
 - an explicit `drop_count` can be a literal like `2` or one scalar-valued expression such as `scalar(drop_count)`,
-- `drop_back(array_expr, drop_count)` is the exact alias of `drop_last(array_expr, drop_count)`,
+- `drop_last(array_expr)` and `drop_last(array_expr, drop_count)` are compatibility aliases for the same lowering contract,
 - a source shorter than the requested drop count returns one empty array,
 - a non-positive drop count keeps the whole source array,
 - and an undefined array-valued expression also becomes one empty array rather than `undef`.
@@ -2366,7 +2358,7 @@ What this example teaches:
 - `reversed(...)` is the pure array-side order-flip helper,
 - it pairs naturally with `concat_arrays(...)` when one rule first assembles one larger list from several array-valued sources,
 - it works on direct working arrays and composed array-valued expressions the same way,
-- and the resulting array can immediately feed `scalar(array_expr, idx)`, `count(...)`, `join_values(...)`, `array_copy(...)`, or later `take(...)` / `tail(...)` slices without leaving the DSL.
+- and the resulting array can immediately feed `scalar(array_expr, idx)`, `count(...)`, `join_values(...)`, `array_copy(...)`, or later `take(...)` / `drop_front(...)` slices without leaving the DSL.
 
 ## Worked example: key existence versus defined value
 This is the pattern to use when the parser cares about object shape first and value definedness second.

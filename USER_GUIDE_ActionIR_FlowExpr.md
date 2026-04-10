@@ -244,11 +244,11 @@ starts_with(lowercase(trim(scalar(name))), "node_")
 ends_with(lowercase(trim(scalar(name))), "_end")
 contains_substr(lowercase(trim(scalar(name))), "node")
 num_gt(count(take_last(sorted_keys(hash(meta)), 2)), 0)
-num_gt(count(drop_last(sorted_keys(hash(meta)), 2)), 0)
+num_gt(count(drop_back(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(take(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(slice(sorted_keys(hash(meta)), 1, 2)), 0)
-num_gt(count(tail(sorted_keys(hash(meta)))), 0)
-num_gt(count(tail(sorted_keys(hash(meta)), 2)), 0)
+num_gt(count(drop_front(sorted_keys(hash(meta)))), 0)
+num_gt(count(drop_front(sorted_keys(hash(meta)), 2)), 0)
 num_gt(count(concat_arrays(array(parts), take(sorted_keys(hash(meta)), 2), array("tail"))), 3)
 num_gt(count(sorted(concat_arrays(array(parts), array("delta"), array("alpha")))), 2)
 num_gt(count(reversed(concat_arrays(array(parts), array("delta"), array("tail")))), 2)
@@ -310,13 +310,13 @@ contains_substr(lowercase(trim(scalar(name))), "node")
 ### Example: projected object still has keys after skipping the first stable key
 
 ```text
-num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))), 0)
+num_gt(count(drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))), 0)
 ```
 
 ### Example: projected object still has keys after skipping the first two stable keys
 
 ```text
-num_gt(count(tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
+num_gt(count(drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
 ```
 
 ### Example: projected object still has at least two stable keys in its prefix view
@@ -340,21 +340,21 @@ num_gt(count(take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stag
 ### Example: projected object still has any leading keys after dropping the last two stable keys
 
 ```text
-num_gt(count(drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
+num_gt(count(drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)
 ```
 
 ### Practical guidance
-- reducers like `count(...)` can wrap composed array helpers such as `drop_last(sorted_keys(...), 2)` directly,
+- reducers like `count(...)` can wrap composed array helpers such as `drop_back(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take_last(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `take(sorted_keys(...), 2)` directly,
 - reducers like `count(...)` can wrap composed array helpers such as `slice(sorted_keys(...), 1, 2)` directly,
-- reducers like `count(...)` can wrap composed array helpers such as `tail(sorted_keys(...))` directly,
+- reducers like `count(...)` can wrap composed array helpers such as `drop_front(sorted_keys(...))` directly,
 - scalar predicate helpers like `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, and `matches(...)` can wrap normalized values such as `lowercase(trim(scalar(name)))` directly,
-- the same pattern works when you want one trimmed leading array via `count(drop_last(sorted_keys(...), scalar(drop_count)))`,
+- the same pattern works when you want one trimmed leading array via `count(drop_back(sorted_keys(...), scalar(drop_count)))`,
 - the same pattern works when you want one bounded suffix via `count(take_last(sorted_keys(...), scalar(take_last_count)))`,
 - the same pattern works when you want one bounded prefix via `count(take(sorted_keys(...), scalar(take_count)))`,
 - the same pattern works when you want one bounded middle window via `count(slice(sorted_keys(...), scalar(slice_start), scalar(slice_count)))`,
-- the same pattern works with explicit counts like `count(tail(sorted_keys(...), scalar(skip_count)))`,
+- the same pattern works with explicit counts like `count(drop_front(sorted_keys(...), scalar(skip_count)))`,
 - so flow conditions can stay inside one parser-oriented expression instead of splitting into temporary variables first,
 - and the same no-fixed-depth composition rule applies here just as it does in `return(...)`, `assign(...)`, `if(...)`, and `switch(...)` arguments.
 
@@ -610,7 +610,7 @@ endif()
 - Prefer `index_of(...)` when the real question is “where is the first matching item in this array or projected array?” rather than only “does it contain?” or “what is the boundary item?”.
 - Prefer `take(...)` when the real question is “what is the first bounded prefix array I want to keep and keep composing?” rather than “what is the first single item?” or “what is the remainder?”.
 - Prefer `take_last(...)` when the real question is “what is the final bounded suffix array I want to keep and keep composing?” rather than “what is the last single item?” or “what is the leading array after discarding a suffix?”.
-- Prefer `drop_last(...)` when the real question is “what is the leading array after I discard one trailing delimiter or suffix?” rather than “what is the first bounded prefix?” or “what is the remainder after the head?”.
+- Prefer `drop_back(...)` when the real question is “what is the leading array after I discard one trailing delimiter or suffix?” rather than “what is the first bounded prefix?” or “what is the remainder after the front edge?”.
 - Prefer `join_values(...)` on top of `sorted_keys(...)`, `sorted_values(...)`, or other array-valued helpers when the real question is “does this projected aggregate reduce to one exact scalar string?”
 - Prefer `contains(...)` when the real question is “does this array or projected array contain one exact scalar value?”
 - Prefer `is_empty(...)` / `is_nonempty(...)` over raw truthiness checks when the intent is emptiness, especially after `sorted_values(...)`, `pick_keys(...)`, `drop_keys(...)`, or aggregate `coalesce(...)` have already built one value for you.

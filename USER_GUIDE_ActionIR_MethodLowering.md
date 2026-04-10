@@ -50,10 +50,10 @@ In practical terms, this is the guide you want when you need to understand:
 - `last(...)`
 - `take(...)`
 - `take_last(...)`
-- `drop_last(...)`
-- `tail(...)`
-- `drop_front(...)` as an alias of `tail(...)`
-- `drop_back(...)` as an alias of `drop_last(...)`
+- `drop_front(...)`
+- `drop_back(...)`
+- `tail(...)` as a compatibility alias of `drop_front(...)`
+- `drop_last(...)` as a compatibility alias of `drop_back(...)`
 - `concat_arrays(...)`
 - `sorted(...)`
 - `reversed(...)`
@@ -298,7 +298,7 @@ Use it when you want:
 
 Important semantics:
 - `concat_arrays(...)` accepts one or more operands,
-- operands must be supported array-valued expressions such as direct working arrays, `array(...)`, projected arrays like `sorted_keys(...)` / `sorted_values(...)`, array slicing helpers like `take(...)` / `tail(...)`, or array-valued `coalesce(...)`,
+- operands must be supported array-valued expressions such as direct working arrays, `array(...)`, projected arrays like `sorted_keys(...)` / `sorted_values(...)`, array slicing helpers like `take(...)` / `drop_front(...)`, or array-valued `coalesce(...)`,
 - operands contribute their items in order from left to right,
 - undefined array-valued operands contribute nothing rather than crashing or inventing a fallback,
 - and clearly non-array helper forms are rejected at lowering time instead of being guessed.
@@ -306,7 +306,7 @@ Important semantics:
 Method-DSL migration note:
 - fluent and structured authoring are now regression-locked on representative `concat_arrays(...)` declaration, assignment, `return(payload)`, and reducer-composition forms too,
 - on both action-edge and lifecycle surfaces,
-- so pure array layering is now part of the same explicit method-like DSL contract as `sorted_keys(...)`, `take(...)`, `tail(...)`, and the other parser-oriented array helpers.
+- so pure array layering is now part of the same explicit method-like DSL contract as `sorted_keys(...)`, `take(...)`, `drop_front(...)`, and the other parser-oriented array helpers.
 
 ## `flat(...)`, `flat_array(...)`, `flat_hash(...)`
 These helpers mean “splice this collection into the surrounding constructor.”
@@ -969,50 +969,46 @@ return(hash(
 ))
 ```
 
-## `tail(array_or_array_expr)` / `drop_front(array_or_array_expr)`
-## `tail(array_or_array_expr, drop_count)` / `drop_front(array_or_array_expr, drop_count)`
-Use `tail(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied. `drop_front(...)` is the exact alias for the same lowering contract.
+## `drop_front(array_or_array_expr)` and `drop_front(array_or_array_expr, drop_count)`
+Use `drop_front(...)` when you want one array value that contains everything after the first element, or after the first `N` elements when an explicit drop count is supplied. `tail(...)` remains supported as a compatibility alias for the same lowering contract, but `drop_front(...)` is the canonical spelling because it says which side is being dropped.
 
 Examples:
 
 ```text
-tail(array(parts))
-tail(array(parts), 2)
 drop_front(array(parts))
 drop_front(array(parts), 2)
-tail(sorted_keys(hash(meta)))
-tail(sorted_keys(hash(meta)), scalar(skip_count))
-tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-tail(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_front(sorted_keys(hash(meta)))
+drop_front(sorted_keys(hash(meta)), scalar(skip_count))
+drop_front(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_front(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
 
 Typical uses:
-- implement head/tail style recursive parsing without dropping into host-language slicing,
+- implement head/remainder style recursive parsing without dropping into host-language slicing,
 - keep one leading token separate while carrying the remainder as a canonical array value,
 - skip the first few stable projected keys or values when the rule has already consumed them elsewhere,
 - skip one normalized projected key and continue working on the rest of the projected array.
 
 Important semantic note:
-- `tail(array_expr)` is shorthand for `tail(array_expr, 1)`,
-- `drop_front(array_expr)` is the exact alias of `tail(array_expr)`,
-- `tail(array(name))` returns one new array value containing every live element after index `0`,
-- `tail(array_expr, drop_count)` drops the first `drop_count` entries when that count is one explicit integer-like scalar expression,
-- `drop_front(array_expr, drop_count)` is the exact alias of `tail(array_expr, drop_count)`,
-- `tail(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
-- `tail(...)` always returns an array value rather than one scalar boundary element,
-- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `tail(...)` returns one empty array instead of `undef`.
+- `drop_front(array_expr)` is shorthand for `drop_front(array_expr, 1)`,
+- `tail(array_expr)` is the compatibility alias of `drop_front(array_expr)`,
+- `drop_front(array(name))` returns one new array value containing every live element after index `0`,
+- `drop_front(array_expr, drop_count)` drops the first `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `tail(array_expr, drop_count)` is the compatibility alias of `drop_front(array_expr, drop_count)`,
+- `drop_front(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, `drop_front(...)`, and array-valued `coalesce(...)` chains,
+- `drop_front(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `drop_front(...)` returns one empty array instead of `undef`.
 
 Examples in context:
 
 ```text
-assign(array(rest_parts), tail(array(parts)))
-assign(array(rest_parts), tail(array(parts), 2))
+assign(array(rest_parts), drop_front(array(parts)))
 assign(array(rest_parts), drop_front(array(parts), 2))
-assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
-assign(array(rest_keys), tail(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
-assign(scalar(rest_count), count(tail(sorted_keys(hash(meta)))))
-if(num_gt(count(tail(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
-return(hash("rest_keys", tail(sorted_keys(hash(meta))), "rest_count", count(tail(sorted_keys(hash(meta))))))
+assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(skip_count)))
+assign(scalar(rest_count), count(drop_front(sorted_keys(hash(meta)))))
+if(num_gt(count(drop_front(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
+return(hash("rest_keys", drop_front(sorted_keys(hash(meta))), "rest_count", count(drop_front(sorted_keys(hash(meta))))))
 ```
 
 ## `take(array_or_array_expr)` and `take(array_or_array_expr, take_count)`
@@ -1039,7 +1035,7 @@ Important semantic note:
 - `take(array_expr)` is shorthand for `take(array_expr, 1)`,
 - `take(array(name))` returns one new array value containing the first live element when present,
 - `take(array_expr, take_count)` keeps the first `take_count` entries when that count is one explicit integer-like scalar expression,
-- `take(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
+- `take(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `drop_front(...)`, and array-valued `coalesce(...)` chains,
 - `take(...)` always returns an array value rather than one scalar boundary element,
 - and if the source array is empty, the requested take count is non-positive, or the array-valued expression is still undefined, `take(...)` returns one empty array instead of `undef`.
 
@@ -1080,7 +1076,7 @@ Important semantic note:
 - `slice(array_expr, start_index, take_count)` keeps at most `take_count` entries starting at `start_index`,
 - `start_index` and `take_count` must be integer-like scalar expressions when supplied,
 - negative or otherwise invalid `start_index` / `take_count` values clamp to `0`,
-- `slice(projected_array_expr, ...)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, `concat_arrays(...)`, and array-valued `coalesce(...)` chains,
+- `slice(projected_array_expr, ...)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `drop_front(...)`, `concat_arrays(...)`, and array-valued `coalesce(...)` chains,
 - `slice(...)` always returns an array value rather than one scalar boundary element,
 - and if the source array is empty, the start position is already beyond the end, or the requested count is non-positive, `slice(...)` returns one empty array instead of `undef`.
 
@@ -1119,7 +1115,7 @@ Important semantic note:
 - `take_last(array_expr)` is shorthand for `take_last(array_expr, 1)`,
 - `take_last(array(name))` returns one new array value containing the last live element when present,
 - `take_last(array_expr, take_last_count)` keeps the last `take_last_count` entries when that count is one explicit integer-like scalar expression,
-- `take_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `take_last(...)`, `drop_last(...)`, `tail(...)`, and array-valued `coalesce(...)` chains,
+- `take_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `take_last(...)`, `drop_back(...)`, `drop_front(...)`, and array-valued `coalesce(...)` chains,
 - `take_last(...)` always returns an array value rather than one scalar boundary element,
 - and if the source array is empty, the requested count is non-positive, or the array-valued expression is still undefined, `take_last(...)` returns one empty array instead of `undef`.
 
@@ -1135,50 +1131,46 @@ if(num_gt(count(take_last(sorted_values(pick_keys(hash(meta), "kind", "source", 
 return(hash("last_keys", take_last(sorted_keys(hash(meta))), "last_count", count(take_last(sorted_keys(hash(meta)), 2))))
 ```
 
-## `drop_last(array_or_array_expr)` / `drop_back(array_or_array_expr)`
-## `drop_last(array_or_array_expr, drop_count)` / `drop_back(array_or_array_expr, drop_count)`
-Use `drop_last(...)` when you want one array value that contains everything except the last element, or except the last `N` elements when an explicit drop count is supplied. `drop_back(...)` is the exact alias for the same lowering contract.
+## `drop_back(array_or_array_expr)` and `drop_back(array_or_array_expr, drop_count)`
+Use `drop_back(...)` when you want one array value that contains everything except the last element, or except the last `N` elements when an explicit drop count is supplied. `drop_last(...)` remains supported as a compatibility alias for the same lowering contract, but `drop_back(...)` is the canonical spelling because it mirrors `drop_front(...)`.
 
 Examples:
 
 ```text
-drop_last(array(parts))
-drop_last(array(parts), 2)
 drop_back(array(parts))
 drop_back(array(parts), 2)
-drop_last(sorted_keys(hash(meta)))
-drop_last(sorted_keys(hash(meta)), scalar(drop_count))
-drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
-drop_last(coalesce(scalaref(retv, {parts}), array("fallback")))
+drop_back(sorted_keys(hash(meta)))
+drop_back(sorted_keys(hash(meta)), scalar(drop_count))
+drop_back(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))
+drop_back(coalesce(scalaref(retv, {parts}), array("fallback")))
 ```
 
 Typical uses:
 - strip one trailing delimiter or terminator from one token array without raw Perl slicing,
 - keep the stable leading part of one projected key/value list while discarding one trailing suffix,
 - express “drop the last `N` items” without temporary arrays,
-- and feed the resulting leading array directly into reducers like `count(...)` or nested reads like `scalar(drop_last(...), 0)`.
+- and feed the resulting leading array directly into reducers like `count(...)` or nested reads like `scalar(drop_back(...), 0)`.
 
 Important semantic note:
-- `drop_last(array_expr)` is shorthand for `drop_last(array_expr, 1)`,
-- `drop_back(array_expr)` is the exact alias of `drop_last(array_expr)`,
-- `drop_last(array(name))` returns one new array value containing every live element before the last one,
-- `drop_last(array_expr, drop_count)` drops the final `drop_count` entries when that count is one explicit integer-like scalar expression,
-- `drop_back(array_expr, drop_count)` is the exact alias of `drop_last(array_expr, drop_count)`,
-- `drop_last(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `tail(...)`, `drop_last(...)`, and array-valued `coalesce(...)` chains,
-- `drop_last(...)` always returns an array value rather than one scalar boundary element,
-- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `drop_last(...)` returns one empty array instead of `undef`.
+- `drop_back(array_expr)` is shorthand for `drop_back(array_expr, 1)`,
+- `drop_last(array_expr)` is the compatibility alias of `drop_back(array_expr)`,
+- `drop_back(array(name))` returns one new array value containing every live element before the last one,
+- `drop_back(array_expr, drop_count)` drops the final `drop_count` entries when that count is one explicit integer-like scalar expression,
+- `drop_last(array_expr, drop_count)` is the compatibility alias of `drop_back(array_expr, drop_count)`,
+- `drop_back(projected_array_expr)` works directly on composed array-valued helpers like `sorted_keys(...)`, `sorted_values(...)`, `take(...)`, `drop_front(...)`, `drop_back(...)`, and array-valued `coalesce(...)` chains,
+- `drop_back(...)` always returns an array value rather than one scalar boundary element,
+- and if the source array is empty, too short for the requested drop count, or the array-valued expression is still undefined, `drop_back(...)` returns one empty array instead of `undef`.
 
 Examples in context:
 
 ```text
-assign(array(leading_parts), drop_last(array(parts)))
-assign(array(leading_parts), drop_last(array(parts), 2))
+assign(array(leading_parts), drop_back(array(parts)))
 assign(array(leading_parts), drop_back(array(parts), 2))
-assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
-assign(array(leading_keys), drop_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
-assign(scalar(kept_count), count(drop_last(sorted_keys(hash(meta)), 2)))
-if(num_gt(count(drop_last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
-return(hash("leading_keys", drop_last(sorted_keys(hash(meta))), "kept_count", count(drop_last(sorted_keys(hash(meta)), 2))))
+assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage"))))
+assign(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), scalar(drop_count)))
+assign(scalar(kept_count), count(drop_back(sorted_keys(hash(meta)), 2)))
+if(num_gt(count(drop_back(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")), 2)), 0)); ... endif()
+return(hash("leading_keys", drop_back(sorted_keys(hash(meta))), "kept_count", count(drop_back(sorted_keys(hash(meta)), 2))))
 ```
 
 ## `contains(array_or_array_expr, value_expr)`

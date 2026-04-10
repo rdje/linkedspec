@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - DSL: prefer explicit drop edge helpers
+
+- standardized the documented array-edge drop surface around `drop_front(...)` and `drop_back(...)` as the preferred explicit names,
+- kept `tail(...)` and `drop_last(...)` as documented compatibility aliases with regression coverage that now says so directly,
+- updated the repo guides, mdBook helper reference, emitted-Perl reference, flow examples, and fluent/structured regression fixtures so new examples no longer teach the aliases as primary,
+- removed the tail/drop alias pair from the active DSL consistency audit queue and left it as future compatibility-retirement policy only.
+
+- Validation:
+  - `perl -c t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-10 - DSL: make flat the canonical splice helper name
 
 - clarified `flat(...)` as the canonical generic list-context splice helper for array/hash expressions,

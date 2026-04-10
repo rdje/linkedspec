@@ -509,18 +509,18 @@ Array helpers return either scalar information about an array or a new array val
 | `last(array_expr)` | scalar value or `undef` | read the last item. |
 | `index_of(array_expr, needle)` | scalar index or `undef` | find the first matching item by zero-based index. |
 | `contains(array_expr, needle)` | `1` or `0` | test exact array membership. |
-| `tail(array_expr)` | array value | drop the first item. |
-| `tail(array_expr, count)` | array value | drop the first `count` items. |
-| `drop_front(array_expr, count?)` | array value | alias for `tail(...)`. |
+| `drop_front(array_expr)` | array value | drop the first item. |
+| `drop_front(array_expr, count)` | array value | drop the first `count` items. |
+| `tail(array_expr, count?)` | array value | compatibility alias for `drop_front(...)`. |
 | `take(array_expr)` | array value | keep the first item. |
 | `take(array_expr, count)` | array value | keep the first `count` items. |
 | `slice(array_expr, start)` | array value | keep from zero-based `start` through the end. |
 | `slice(array_expr, start, count)` | array value | keep at most `count` items from `start`. |
 | `take_last(array_expr)` | array value | keep the last item. |
 | `take_last(array_expr, count)` | array value | keep the last `count` items. |
-| `drop_last(array_expr)` | array value | drop the last item. |
-| `drop_last(array_expr, count)` | array value | drop the last `count` items. |
-| `drop_back(array_expr, count?)` | array value | alias for `drop_last(...)`. |
+| `drop_back(array_expr)` | array value | drop the last item. |
+| `drop_back(array_expr, count)` | array value | drop the last `count` items. |
+| `drop_last(array_expr, count?)` | array value | compatibility alias for `drop_back(...)`. |
 | `concat_arrays(array_expr, array_expr, ...)` | array value | concatenate multiple array values without mutating them. |
 | `sorted(array_expr)` | array value | return a lexical sorted copy. |
 | `reversed(array_expr)` | array value | return a reversed copy. |
@@ -532,11 +532,11 @@ assign(scalar(first_part), first(array(parts)));
 assign(scalar(last_part), last(array(parts)));
 assign(scalar(kind_index), index_of(sorted_keys(hash(meta)), "kind"));
 assign(scalar(has_tail), contains(array(parts), "tail"));
-assign(array(rest_parts), tail(array(parts)));
+assign(array(rest_parts), drop_front(array(parts)));
 assign(array(first_two), take(array(parts), 2));
 assign(array(middle), slice(array(parts), 1, 3));
 assign(array(last_two), take_last(array(parts), 2));
-assign(array(without_last), drop_last(array(parts)));
+assign(array(without_last), drop_back(array(parts)));
 assign(array(combined), concat_arrays(array(parts), array(extra_parts), array("tail")));
 assign(array(canonical), sorted(array(combined)));
 assign(array(reverse_view), reversed(array(canonical)));
@@ -860,7 +860,7 @@ Sequence::AND
      return(hash(
        "kind", "sequence",
        "head", first(array(items)),
-       "tail", tail(array(items)),
+       "rest", drop_front(array(items)),
        "item_count", count(array(items))
      ));
    else()

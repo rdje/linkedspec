@@ -851,14 +851,14 @@ Typical patterns:
 - `slice(..., start, n)`
 - `take_last(...)`
 - `take_last(..., n)`
-- `drop_last(...)`
-- `drop_last(..., n)`
-- `drop_back(...)`
-- `drop_back(..., n)`
-- `tail(...)`
-- `tail(..., n)`
 - `drop_front(...)`
 - `drop_front(..., n)`
+- `drop_back(...)`
+- `drop_back(..., n)`
+- compatibility `tail(...)`
+- compatibility `tail(..., n)`
+- compatibility `drop_last(...)`
+- compatibility `drop_last(..., n)`
 - `concat_arrays(...)`
 - `array_copy(...)`
 - `hash_copy(...)`
@@ -886,10 +886,10 @@ Typical patterns:
 - prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
 - middle-window arrays from `slice(array_expr, scalar(slice_start))` and bounded middle-window arrays from `slice(array_expr, scalar(slice_start), scalar(slice_count))`
 - suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
-- trailing-drop arrays from `drop_last(array_expr)` and counted trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
-- trailing-drop aliases from `drop_back(array_expr)` and counted trailing-drop aliases from `drop_back(array_expr, scalar(drop_count))`
-- tail arrays from `tail(array_expr)` and counted tail arrays from `tail(array_expr, scalar(skip_count))`
-- front-drop aliases from `drop_front(array_expr)` and counted front-drop aliases from `drop_front(array_expr, scalar(skip_count))`
+- front-drop arrays from `drop_front(array_expr)` and counted front-drop arrays from `drop_front(array_expr, scalar(skip_count))`
+- back-drop arrays from `drop_back(array_expr)` and counted back-drop arrays from `drop_back(array_expr, scalar(drop_count))`
+- compatibility tail arrays from `tail(array_expr)` and counted compatibility tail arrays from `tail(array_expr, scalar(skip_count))`
+- compatibility trailing-drop arrays from `drop_last(array_expr)` and counted compatibility trailing-drop arrays from `drop_last(array_expr, scalar(drop_count))`
 - pure array layering via `concat_arrays(array_expr, array_expr, ...)`
 - deterministic array sorting via `sorted(array_expr)` over direct or composed array-valued expressions
 - pure array order inversion via `reversed(array_expr)` over direct or composed array-valued expressions
