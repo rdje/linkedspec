@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-10 - Docs: deepen rule-mode public guide
+
+- expanded the public mdBook rule-modes/parse-modes chapter from a short overview into a mode-by-mode guide,
+- documented baseline labels, compact sigils, worded `AND`/`OR` forms, bounded forms, choice versus sequence versus repetition, blind-call label semantics, and parse-mode `seek`/`consume` behavior,
+- kept exact spelling guidance explicit so `AND`, `OR`, and bounded labels are not treated as fuzzy prefixes,
+- used the book chapter as the public explanation layer while keeping this entry as internal continuity history.
+
+- Validation:
+  - `git diff --check`
+  - `git diff --cached --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-10 - Docs: add action/lifecycle placement chapter
 
 - added a public mdBook action/lifecycle placement chapter under the DSL section,
