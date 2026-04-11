@@ -64,7 +64,8 @@ dsp_ram_mbist_offset {
 
 
 _dsp_xyz_constants_2htree {
- my $hc = vhdl_constant_value_eval ($_[0]);
+ require Plugin::VHDLConst;
+ my $hc = Plugin::VHDLConst::evaluate_constant_values($_[0]);
 
  my $h = {};
  map {print "$_\n";my @c = grep {defined} m/(w\d)_mem_(out|in)_(?:(xs1102|r(?:a|o)m\d)_(.+)|(start_c|end_c|size_c))/o; HUtils::avv_get($h, @c) = $$hc{$_} if @c} grep {m/w\d/o} keys %$hc;

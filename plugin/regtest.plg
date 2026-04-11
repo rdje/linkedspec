@@ -1,6 +1,7 @@
 register_test {
 my ($conf) = @_;
  use LinkedSpec;
+ require Plugin::VHDLConst;
 
  my $parse_info  = Storable::retrieve($$conf{_argv}[0]);
 
@@ -60,7 +61,7 @@ my ($conf) = @_;
    }
 
    my %subh = map {$_, $h->{package}{$$pkg[1]}{constant}{$_}} grep {$h->{package}{$$pkg[1]}{constant}{$_} !~ /\(|--|\&/o} keys %{$h->{package}{$$pkg[1]}{constant}};
-   LinkedSpec::run_plugin('hvalue_substitute', \%subh);
+   Plugin::VHDLConst::substitute_hash_values(\%subh);
    HUtils::Merge($h->{package}{$$pkg[1]}{constant}, \%subh);
 
    #print "---------------------\n";

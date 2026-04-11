@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-11: `plugin/vhdconst_eval.plg` removed. `Plugin::VHDLConst` now owns VHDL constant extraction and hash-value substitution; `mbist.plg` calls `evaluate_constant_values(...)`, `regtest.plg` calls `substitute_hash_values(...)`, and the old print action is available only as explicit package function `print_constant_values_for_conf(...)`.
 - 2026-04-11: `plugin/msoffice.plg` removed. Its only repo-owned caller, `spyglass_waive`, now requires `Plugin::MSOffice` and calls `Plugin::MSOffice::excel_start(...)` directly; the package owner keeps the active-Excel reuse behavior and lazy `Win32::OLE` boundary.
 - 2026-04-11: `plugin/table.plg` removed. The last repo-owned `list_2table(...)` callers now use `Table::list2table(...)` directly in `generic_fake_memory_module.plg`, `lte_digital_rf.plg`, and `spyglass.plg`; the old `table_2ss` wrapper had no repo-owned caller to preserve.
 - 2026-04-11: `plugin/plugin.plg` removed. Its only remaining repo-owned consumer, `plugin/fsmgen.plg::getop_plugin_list`, now calls `LinkedSpec::get_plugin($name) // sub {}` directly, preserving the old unresolved-name no-op fallback without keeping the generic `plugin(...)` shim.

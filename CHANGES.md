@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move VHDL constant helpers into package owner
+
+- moved the historical `vhdl_constant_value_eval` and `hvalue_substitute` helper behavior out of `plugin/vhdconst_eval.plg` into `Plugin::VHDLConst::evaluate_constant_values(...)` and `Plugin::VHDLConst::substitute_hash_values(...)`,
+- migrated `plugin/mbist.plg` and `plugin/regtest.plg` to call `Plugin::VHDLConst` directly instead of using bare helper calls or `LinkedSpec::run_plugin('hvalue_substitute', ...)`,
+- deleted `plugin/vhdconst_eval.plg` now that no repo-owned caller still needs those helper names as legacy `.plg` registrations, while preserving the old print action as `Plugin::VHDLConst::print_constant_values_for_conf(...)`.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/VHDLConst.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/mbist.plg` and `plugin/regtest.plg`
+  - `rg --files -g 'vhdconst_eval.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move MSOffice Excel helper into package owner
 
 - moved the historical `excel_start` helper out of `plugin/msoffice.plg` into `Plugin::MSOffice::excel_start(...)`, preserving the active-Excel reuse behavior and lazy `Win32::OLE` dependency boundary while preventing the helper's internal eval probes from leaking successful `$@` changes,
