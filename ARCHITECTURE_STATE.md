@@ -157,10 +157,10 @@ Plugin::* (migration scaffold)
 ├─ Plugin::CGI
 ├─ Plugin::HTTP
 ├─ Plugin::GenericFilter
-├─ Plugin::MSOffice
-└─ Plugin::VHDLConst
-Project utility owners
-└─ InteractivePrompt
+└─ Plugin::MSOffice
+Project/domain utility owners
+├─ InteractivePrompt
+└─ VHDL::ConstantEval
 ```
 
 ## What the Main Owners Do
@@ -371,7 +371,7 @@ Current project direction does not treat that branch as a target architecture.
 - keeps the recursive `group_by_port` / `group_by_ioclock` behavior on the existing HUtils grouping path without routing through stringly plugin lookup,
 - and no longer keeps `plugin/genericfilter.plg` as a thin legacy registration wrapper now that no repo-owned caller still needs those `genericfilter_*` plugin names.
 
-`Plugin::String`, `Plugin::CGI`, `Plugin::GenericFilter`, `Plugin::MSOffice`, and `Plugin::VHDLConst` show the preferred short-term destination for pure helper extractions: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too.
+`Plugin::String`, `Plugin::CGI`, `Plugin::GenericFilter`, and `Plugin::MSOffice` show the preferred short-term destination for pure helper extractions: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`.
 
 `Plugin::HTTP` now shows the same destination applied to formerly real legacy actions, not just thin helper wrappers. The package owns `httplink`, `set_http_hostport`, `set_http_localhost`, the former `http` file-link action through `print_file_links_for_conf(...)`, the former `lighttpd` action through `run_lighttpd_for_conf(...)`, and the former `httpd` action through `run_httpd_for_conf(...)`; `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` have been removed. Repo-owned `.plg` callers that need HTTP helpers call `Plugin::HTTP` explicitly.
 
@@ -383,7 +383,7 @@ The small utility wrapper `plugin/table.plg` has also been removed. Repo-owned t
 
 The Office automation wrapper `plugin/msoffice.plg` has also been removed. Repo-owned SpyGlass waiver extraction now names `Plugin::MSOffice::excel_start(...)` directly, and the package owner keeps the lazy `Win32::OLE` boundary instead of exposing an unqualified `excel_start` plugin action.
 
-The VHDL constant helper wrapper `plugin/vhdconst_eval.plg` has also been removed. Repo-owned MBIST and register-test paths now name `Plugin::VHDLConst::evaluate_constant_values(...)` / `substitute_hash_values(...)` directly, and the old print action is preserved only as explicit package function `print_constant_values_for_conf(...)`.
+The VHDL constant helper wrapper `plugin/vhdconst_eval.plg` has also been removed. Repo-owned MBIST and register-test paths now name `VHDL::ConstantEval::evaluate_constant_values(...)` / `substitute_hash_values(...)` directly, and the old print action is preserved only as explicit package function `print_constant_values_for_conf(...)`.
 
 The interactive yes/no prompt helper wrapper `plugin/yesno.plg` has also been removed, and its short-lived `Plugin::Prompt` scaffold has been removed too. Repo-owned FX environment comparison code now names `InteractivePrompt::yes_no(...)` directly, and that owner fixes the historical no-branch array-callback typo while preserving the empty-answer-defaults-to-yes behavior.
 

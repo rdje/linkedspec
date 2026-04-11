@@ -3841,17 +3841,17 @@ subtest 'repo_owned_perl_modules_no_longer_advertise_legacy_pplugin_inheritance'
     is($lispml_exit, 0, 'LispML require-only subprocess exits cleanly') or diag($lispml_err || $lispml_out);
     like($lispml_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring LispML no longer loads the legacy PPlugin runtime');
 };
-subtest 'regtest_hvalue_substitute_uses_vhdlconst_owner' => sub {
+subtest 'regtest_hvalue_substitute_uses_vhdl_constant_eval_owner' => sub {
     plan tests => 8;
 
     my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
 
-    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDLConst owner inspection');
+    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDL::ConstantEval owner inspection');
     unlike($regtest_plugin, qr/\bnew PPlugin\b/, 'regtest plugin no longer instantiates the legacy PPlugin runtime directly');
     unlike($regtest_plugin, qr/\$pl->exec\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through legacy PPlugin exec');
     unlike($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute'/, 'regtest plugin no longer routes hvalue_substitute through LinkedSpec::run_plugin');
-    like($regtest_plugin, qr/require Plugin::VHDLConst;/, 'regtest plugin loads the package-backed VHDL constant owner explicitly');
-    like($regtest_plugin, qr/Plugin::VHDLConst::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls Plugin::VHDLConst directly for hvalue substitution');
+    like($regtest_plugin, qr/require VHDL::ConstantEval;/, 'regtest plugin loads the VHDL constant-evaluation owner explicitly');
+    like($regtest_plugin, qr/VHDL::ConstantEval::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls VHDL::ConstantEval directly for hvalue substitution');
     unlike($regtest_plugin, qr/PPlugin->exec_plugin_name\('/, 'regtest plugin no longer routes known plugin names through PPlugin explicit-name exec');
     unlike($regtest_plugin, qr/PPlugin->exec\('/, 'regtest plugin no longer routes known plugin names through legacy mixed-name PPlugin exec');
 };
@@ -4013,61 +4013,64 @@ subtest 'msoffice_excel_helper_moves_to_package_owner' => sub {
     }
     is_deeply(\@unqualified_excel_start_hits, [], 'repo-owned plugin files no longer depend on the legacy excel_start action wrapper');
 };
-subtest 'vhdlconst_helpers_move_to_package_owner' => sub {
-    plan tests => 23;
+subtest 'vhdl_constant_helpers_live_under_domain_owner' => sub {
+    plan tests => 25;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $vhdconst_plugin_path = File::Spec->catfile($plugin_dir, 'vhdconst_eval.plg');
-    my $vhdlconst_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'VHDLConst.pm'));
+    my $legacy_vhdlconst_pm_path = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'VHDLConst.pm');
+    my $vhdl_constant_eval_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'VHDL', 'ConstantEval.pm'));
     my $mbist_plugin = slurp(File::Spec->catfile($plugin_dir, 'mbist.plg'));
     my $regtest_plugin = slurp(File::Spec->catfile($plugin_dir, 'regtest.plg'));
 
-    ok(!-e $vhdconst_plugin_path, 'vhdconst_eval.plg wrapper is removed after callers moved to Plugin::VHDLConst directly');
-    ok(defined($vhdlconst_pm) && length($vhdlconst_pm), 'Plugin::VHDLConst package owner source is available');
-    like($vhdlconst_pm, qr/package Plugin::VHDLConst;/, 'Plugin::VHDLConst declares the expected package');
-    like($vhdlconst_pm, qr/sub evaluate_constant_values\b/, 'Plugin::VHDLConst owns VHDL constant value extraction');
-    like($vhdlconst_pm, qr/sub substitute_hash_values\b/, 'Plugin::VHDLConst owns hvalue substitution');
-    like($vhdlconst_pm, qr/sub print_constant_values_for_conf\b/, 'Plugin::VHDLConst preserves the old print action as an explicit package function');
-    like($vhdlconst_pm, qr/sub _slurp_file\b/, 'Plugin::VHDLConst owns file reading instead of depending on plugin-provided slurp');
+    ok(!-e $vhdconst_plugin_path, 'vhdconst_eval.plg wrapper remains removed after callers moved to a direct owner');
+    ok(!-e $legacy_vhdlconst_pm_path, 'Plugin::VHDLConst scaffold is removed after VHDL constants graduated to a domain owner');
+    ok(defined($vhdl_constant_eval_pm) && length($vhdl_constant_eval_pm), 'VHDL::ConstantEval package owner source is available');
+    like($vhdl_constant_eval_pm, qr/package VHDL::ConstantEval;/, 'VHDL::ConstantEval declares the expected domain-owner package');
+    unlike($vhdl_constant_eval_pm, qr/package Plugin::VHDLConst|Plugin::VHDLConst::/, 'VHDL constant owner no longer carries plugin-scaffold package naming');
+    like($vhdl_constant_eval_pm, qr/sub evaluate_constant_values\b/, 'VHDL::ConstantEval owns VHDL constant value extraction');
+    like($vhdl_constant_eval_pm, qr/sub substitute_hash_values\b/, 'VHDL::ConstantEval owns hvalue substitution');
+    like($vhdl_constant_eval_pm, qr/sub print_constant_values_for_conf\b/, 'VHDL::ConstantEval preserves the old print action as an explicit package function');
+    like($vhdl_constant_eval_pm, qr/sub _slurp_file\b/, 'VHDL::ConstantEval owns file reading instead of depending on plugin-provided slurp');
 
-    ok(defined($mbist_plugin) && length($mbist_plugin), 'mbist.plg source is available for VHDLConst migration inspection');
-    like($mbist_plugin, qr/require Plugin::VHDLConst;/, 'mbist plugin loads the package-backed VHDLConst owner explicitly');
-    like($mbist_plugin, qr/Plugin::VHDLConst::evaluate_constant_values\(\$_\[0\]\)/, 'mbist plugin calls Plugin::VHDLConst directly for constant evaluation');
+    ok(defined($mbist_plugin) && length($mbist_plugin), 'mbist.plg source is available for VHDL::ConstantEval migration inspection');
+    like($mbist_plugin, qr/require VHDL::ConstantEval;/, 'mbist plugin loads the VHDL::ConstantEval owner explicitly');
+    like($mbist_plugin, qr/VHDL::ConstantEval::evaluate_constant_values\(\$_\[0\]\)/, 'mbist plugin calls VHDL::ConstantEval directly for constant evaluation');
     unlike($mbist_plugin, qr/(?<!::)\bvhdl_constant_value_eval\s*\(/, 'mbist plugin no longer calls the legacy bare vhdl_constant_value_eval wrapper');
 
-    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDLConst substitution migration inspection');
-    like($regtest_plugin, qr/Plugin::VHDLConst::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls Plugin::VHDLConst directly for hvalue substitution');
+    ok(defined($regtest_plugin) && length($regtest_plugin), 'regtest.plg source is available for VHDL::ConstantEval substitution migration inspection');
+    like($regtest_plugin, qr/VHDL::ConstantEval::substitute_hash_values\(\\%subh\)/, 'regtest plugin calls VHDL::ConstantEval directly for hvalue substitution');
     unlike($regtest_plugin, qr/LinkedSpec::run_plugin\('hvalue_substitute'/, 'regtest plugin no longer dispatches hvalue_substitute through the plugin bridge');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require File::Temp;
-require Plugin::VHDLConst;
+require VHDL::ConstantEval;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 my %values = (BASE => 4, SUM => 'BASE+3');
-Plugin::VHDLConst::substitute_hash_values(\%values);
+VHDL::ConstantEval::substitute_hash_values(\%values);
 print "__SUB_VALUE__=$values{SUM}\n";
 my ($fh, $file) = File::Temp::tempfile(UNLINK => 1);
 print {$fh} "constant base_c : integer := 2;\n";
 print {$fh} "constant total_c : integer := base_c+5;\n";
 print {$fh} "constant ignored_init_c : integer := 99;\n";
 close $fh;
-my $constants = Plugin::VHDLConst::evaluate_constant_values($file);
+my $constants = VHDL::ConstantEval::evaluate_constant_values($file);
 print "__TOTAL__=$constants->{total_c}\n";
 print exists($constants->{ignored_init_c}) ? "__INIT_PRESENT__\n" : "__INIT_FILTERED__\n";
 PERL
 
-    is($exit_code, 0, 'VHDLConst package-owner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the VHDLConst package owner keeps PPlugin unloaded');
-    like($out, qr/__SUB_VALUE__=7/, 'VHDLConst package owner preserves hash-value substitution behavior');
-    like($out, qr/__TOTAL__=7/, 'VHDLConst package owner evaluates dependent VHDL constants');
-    like($out, qr/__INIT_FILTERED__/, 'VHDLConst package owner preserves init_c filtering');
-    unlike($err, qr/PPlugin|Can't locate Plugin\/VHDLConst\.pm/, 'VHDLConst package-owner subprocess stays clear of legacy plugin runtime issues');
+    is($exit_code, 0, 'VHDL::ConstantEval package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the VHDL::ConstantEval package owner keeps PPlugin unloaded');
+    like($out, qr/__SUB_VALUE__=7/, 'VHDL::ConstantEval package owner preserves hash-value substitution behavior');
+    like($out, qr/__TOTAL__=7/, 'VHDL::ConstantEval package owner evaluates dependent VHDL constants');
+    like($out, qr/__INIT_FILTERED__/, 'VHDL::ConstantEval package owner preserves init_c filtering');
+    unlike($err, qr/PPlugin|Can't locate VHDL\/ConstantEval\.pm/, 'VHDL::ConstantEval package-owner subprocess stays clear of legacy plugin runtime issues');
 
     my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for VHDLConst-owner migrated plugin smoke');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for VHDL::ConstantEval-owner migrated plugin smoke');
     for my $plugin_source ($mbist_plugin, $regtest_plugin) {
         my $ast = eval { $parser->(\$plugin_source) };
-        ok(!$@ && defined($ast) && ref($ast) eq 'HASH', 'VHDLConst caller plugin still parses under pplugin after wrapper removal') or diag(normalize_error($@));
+        ok(!$@ && defined($ast) && ref($ast) eq 'HASH', 'VHDL::ConstantEval caller plugin still parses under pplugin after wrapper removal') or diag(normalize_error($@));
     }
 };
 subtest 'prompt_yes_no_helper_moves_to_package_owner' => sub {

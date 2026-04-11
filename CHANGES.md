@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: graduate VHDL constants out of plugin namespace
+
+- renamed the short-lived `Plugin::VHDLConst` migration scaffold to domain owner `VHDL::ConstantEval`,
+- migrated `plugin/mbist.plg`, `plugin/regtest.plg`, and regression coverage to call `VHDL::ConstantEval::evaluate_constant_values(...)` / `substitute_hash_values(...)` directly,
+- updated working docs and the public book so the current VHDL constant surface no longer teaches a plugin-branded owner after the `.plg` wrapper removal.
+
+- Validation:
+  - `perl -Iperl -c perl/VHDL/ConstantEval.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/mbist.plg` and `plugin/regtest.plg`
+  - `rg --files -g 'VHDLConst.pm'` absence scan for the removed scaffold file
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: graduate prompt helper out of plugin namespace
 
 - renamed the short-lived `Plugin::Prompt` scaffold to `InteractivePrompt` so the yes/no helper no longer lives under a plugin-branded package after the `.plg` wrapper removal,

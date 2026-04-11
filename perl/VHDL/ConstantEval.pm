@@ -1,9 +1,10 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::VHDLConst
-# Purpose: Package-backed owner for VHDL constant evaluation helpers that are
-#          being migrated out of legacy `.plg` files.
+# Package: VHDL::ConstantEval
+# Purpose: Domain owner for VHDL constant evaluation helpers that were
+#          migrated out of legacy `.plg` files and should no longer live under
+#          plugin-branded scaffolding.
 #------------------------------------------------------------------------------
-package Plugin::VHDLConst;
+package VHDL::ConstantEval;
 
 use 5.010;
 BEGIN {
@@ -81,7 +82,7 @@ sub print_constant_values_for_conf {
 sub _slurp_file {
  my ($file) = @_;
 
- open(my $fh, '<', $file) || die "(Plugin::VHDLConst::_slurp_file) -E- Can't read open '$file',";
+ open(my $fh, '<', $file) || die "(VHDL::ConstantEval::_slurp_file) -E- Can't read open '$file',";
  local $/;
  return <$fh>
 }
