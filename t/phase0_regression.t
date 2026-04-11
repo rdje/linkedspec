@@ -3978,29 +3978,32 @@ subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     is_deeply(\@unqualified_list_2table_hits, [], 'repo-owned plugin files no longer depend on the legacy list_2table action wrapper');
     is_deeply(\@table_2ss_hits, [], 'repo-owned plugin files have no remaining table_2ss compatibility action usage');
 };
-subtest 'msoffice_excel_helper_moves_to_package_owner' => sub {
-    plan tests => 15;
+subtest 'msoffice_excel_helper_lives_under_domain_owner' => sub {
+    plan tests => 17;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $msoffice_plugin_path = File::Spec->catfile($plugin_dir, 'msoffice.plg');
-    my $msoffice_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'MSOffice.pm'));
+    my $legacy_msoffice_pm_path = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'MSOffice.pm');
+    my $msoffice_excel_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'MSOffice', 'Excel.pm'));
     my $spyglass_plugin = slurp(File::Spec->catfile($plugin_dir, 'spyglass.plg'));
 
-    ok(!-e $msoffice_plugin_path, 'msoffice.plg wrapper is removed after spyglass moved to Plugin::MSOffice directly');
-    ok(defined($msoffice_pm) && length($msoffice_pm), 'Plugin::MSOffice package owner source is available');
-    like($msoffice_pm, qr/package Plugin::MSOffice;/, 'Plugin::MSOffice declares the expected package');
-    like($msoffice_pm, qr/sub excel_start\b/, 'Plugin::MSOffice owns the Excel-start helper');
-    like($msoffice_pm, qr/require Win32::OLE;/, 'Plugin::MSOffice owns the Win32::OLE dependency boundary lazily');
-    like($msoffice_pm, qr/local \$@;/, 'Plugin::MSOffice keeps internal eval probes from leaking successful $@ changes');
-    like($msoffice_pm, qr/Win32::OLE->GetActiveObject\('Excel\.Application'\)/, 'Plugin::MSOffice preserves the active Excel instance preference');
+    ok(!-e $msoffice_plugin_path, 'msoffice.plg wrapper remains removed after spyglass moved to a direct owner');
+    ok(!-e $legacy_msoffice_pm_path, 'Plugin::MSOffice scaffold is removed after Excel automation graduated to a domain owner');
+    ok(defined($msoffice_excel_pm) && length($msoffice_excel_pm), 'MSOffice::Excel package owner source is available');
+    like($msoffice_excel_pm, qr/package MSOffice::Excel;/, 'MSOffice::Excel declares the expected domain-owner package');
+    unlike($msoffice_excel_pm, qr/package Plugin::MSOffice|Plugin::MSOffice::|sub excel_start\b/, 'Excel automation owner no longer carries plugin-scaffold package naming or redundant helper name');
+    like($msoffice_excel_pm, qr/sub start\b/, 'MSOffice::Excel owns the short start helper');
+    like($msoffice_excel_pm, qr/require Win32::OLE;/, 'MSOffice::Excel owns the Win32::OLE dependency boundary lazily');
+    like($msoffice_excel_pm, qr/local \$@;/, 'MSOffice::Excel keeps internal eval probes from leaking successful $@ changes');
+    like($msoffice_excel_pm, qr/Win32::OLE->GetActiveObject\('Excel\.Application'\)/, 'MSOffice::Excel preserves the active Excel instance preference');
 
     ok(defined($spyglass_plugin) && length($spyglass_plugin), 'spyglass.plg source is available for MSOffice migration inspection');
-    like($spyglass_plugin, qr/require Plugin::MSOffice;/, 'spyglass plugin loads the package-backed MSOffice owner explicitly');
-    like($spyglass_plugin, qr/Plugin::MSOffice::excel_start\(\)/, 'spyglass plugin calls Plugin::MSOffice::excel_start directly');
-    unlike($spyglass_plugin, qr/(?<!::)\bexcel_start\s*\(/, 'spyglass plugin no longer calls the legacy bare excel_start wrapper');
+    like($spyglass_plugin, qr/require MSOffice::Excel;/, 'spyglass plugin loads the MSOffice::Excel owner explicitly');
+    like($spyglass_plugin, qr/MSOffice::Excel::start\(\)/, 'spyglass plugin calls MSOffice::Excel::start directly');
+    unlike($spyglass_plugin, qr/Plugin::MSOffice|(?<!::)\bexcel_start\s*\(/, 'spyglass plugin no longer calls the plugin-scaffold owner or legacy bare excel_start wrapper');
 
     my $parser = LinkedSpec::get_parser('pplugin');
-    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for MSOffice-owner migrated plugin smoke');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for MSOffice::Excel-owner migrated plugin smoke');
     my $spyglass_ast = eval { $parser->(\$spyglass_plugin) };
     ok(!$@, 'spyglass plugin still parses without die under pplugin after MSOffice wrapper removal') or diag(normalize_error($@));
     ok(defined($spyglass_ast) && ref($spyglass_ast) eq 'HASH', 'spyglass plugin still returns a hash AST under pplugin');

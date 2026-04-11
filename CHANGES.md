@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: graduate Excel automation out of plugin namespace
+
+- renamed the short-lived `Plugin::MSOffice` migration scaffold to domain owner `MSOffice::Excel`,
+- shortened the redundant `excel_start(...)` helper to `MSOffice::Excel::start(...)`,
+- migrated `plugin/spyglass.plg` and regression coverage to the domain owner directly,
+- updated working docs and the public book so the current Excel automation surface no longer teaches a plugin-branded owner after the `.plg` wrapper removal.
+
+- Validation:
+  - `perl -Iperl -c perl/MSOffice/Excel.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/spyglass.plg`
+  - `rg --files -g 'MSOffice.pm'` absence scan for the removed scaffold file
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-12 - Plugin runtime: graduate VHDL constants out of plugin namespace
 
 - renamed the short-lived `Plugin::VHDLConst` migration scaffold to domain owner `VHDL::ConstantEval`,
@@ -64,8 +80,8 @@ Detailed technical history of changes prepared for commit.
 
 ## 2026-04-11 - Plugin runtime: move MSOffice Excel helper into package owner
 
-- moved the historical `excel_start` helper out of `plugin/msoffice.plg` into `Plugin::MSOffice::excel_start(...)`, preserving the active-Excel reuse behavior and lazy `Win32::OLE` dependency boundary while preventing the helper's internal eval probes from leaking successful `$@` changes,
-- migrated `plugin/spyglass.plg::spyglass_waive` to require `Plugin::MSOffice` and call the package owner directly instead of depending on an unqualified helper action,
+- moved the historical `excel_start` helper out of `plugin/msoffice.plg` into the then-current `Plugin::MSOffice::excel_start(...)` migration scaffold, preserving the active-Excel reuse behavior and lazy `Win32::OLE` dependency boundary while preventing the helper's internal eval probes from leaking successful `$@` changes,
+- migrated `plugin/spyglass.plg::spyglass_waive` off the unqualified helper action; the newer 2026-04-12 note above records that the scaffold has since graduated to `MSOffice::Excel::start(...)`,
 - deleted `plugin/msoffice.plg` now that no repo-owned caller still needs `excel_start` as a legacy `.plg` registration name.
 
 - Validation:

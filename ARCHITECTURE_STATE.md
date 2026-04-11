@@ -31,7 +31,7 @@ This document is the current high-level technical reading of the project shape. 
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, and successful `$@` preservation no longer require bridge-local eval/restore branches.
 - `Plugin::GenericFilter` now owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions that used to live entirely in `plugin/genericfilter.plg`, so `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` no longer build `genericfilter_*` names and bounce through `LinkedSpec::run_plugin(...)` / `get_plugin(...)`; the pure `plugin/genericfilter.plg` wrapper is now removed too.
-- Pure extracted helper wrappers are being deleted once no repo-owned caller needs the old plugin name: `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, `plugin/vhdconst_eval.plg`, and `plugin/yesno.plg` are now gone while explicit package owners carry the behavior directly. `Plugin::*` remains useful migration scaffolding for legacy plugin extractions, but it is not the permanent home for behavior that has a clearer non-plugin domain owner; the former prompt helper has already graduated to `InteractivePrompt`.
+- Pure extracted helper wrappers are being deleted once no repo-owned caller needs the old plugin name: `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, `plugin/vhdconst_eval.plg`, and `plugin/yesno.plg` are now gone while explicit package owners carry the behavior directly. `Plugin::*` remains useful migration scaffolding for legacy plugin extractions, but it is not the permanent home for behavior that has a clearer non-plugin/domain owner; the former prompt helper has already graduated to `InteractivePrompt`, VHDL constants to `VHDL::ConstantEval`, and Excel automation to `MSOffice::Excel`.
 - `Plugin::HTTP` is following the same boundary beyond helper subdefs now: repo-owned `.plg` actions call it directly for `httplink`, `set_http_hostport`, and `set_http_localhost`, while the former `plugin/http.plg` file-link action lives in `Plugin::HTTP::print_file_links_for_conf(...)`, the former `plugin/lighttpd.plg` action lives in `Plugin::HTTP::run_lighttpd_for_conf(...)`, and the former `plugin/httpd.plg` action lives in `Plugin::HTTP::run_httpd_for_conf(...)`; those legacy wrapper files are gone.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
@@ -156,11 +156,11 @@ Plugin::* (migration scaffold)
 ├─ Plugin::String
 ├─ Plugin::CGI
 ├─ Plugin::HTTP
-├─ Plugin::GenericFilter
-└─ Plugin::MSOffice
+└─ Plugin::GenericFilter
 Project/domain utility owners
 ├─ InteractivePrompt
-└─ VHDL::ConstantEval
+├─ VHDL::ConstantEval
+└─ MSOffice::Excel
 ```
 
 ## What the Main Owners Do
@@ -371,7 +371,7 @@ Current project direction does not treat that branch as a target architecture.
 - keeps the recursive `group_by_port` / `group_by_ioclock` behavior on the existing HUtils grouping path without routing through stringly plugin lookup,
 - and no longer keeps `plugin/genericfilter.plg` as a thin legacy registration wrapper now that no repo-owned caller still needs those `genericfilter_*` plugin names.
 
-`Plugin::String`, `Plugin::CGI`, `Plugin::GenericFilter`, and `Plugin::MSOffice` show the preferred short-term destination for pure helper extractions: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`.
+`Plugin::String`, `Plugin::CGI`, and `Plugin::GenericFilter` show the preferred short-term destination for pure helper extractions: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`, and `MSOffice::Excel` now owns the Excel helper that briefly lived under `Plugin::MSOffice`.
 
 `Plugin::HTTP` now shows the same destination applied to formerly real legacy actions, not just thin helper wrappers. The package owns `httplink`, `set_http_hostport`, `set_http_localhost`, the former `http` file-link action through `print_file_links_for_conf(...)`, the former `lighttpd` action through `run_lighttpd_for_conf(...)`, and the former `httpd` action through `run_httpd_for_conf(...)`; `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` have been removed. Repo-owned `.plg` callers that need HTTP helpers call `Plugin::HTTP` explicitly.
 
@@ -381,7 +381,7 @@ The generic one-line dynamic lookup shim `plugin/plugin.plg` is gone as well. It
 
 The small utility wrapper `plugin/table.plg` has also been removed. Repo-owned table-row extraction now names `Table::list2table(...)` directly, and the unused `table_2ss` action is not preserved as a legacy plugin registration without a concrete caller.
 
-The Office automation wrapper `plugin/msoffice.plg` has also been removed. Repo-owned SpyGlass waiver extraction now names `Plugin::MSOffice::excel_start(...)` directly, and the package owner keeps the lazy `Win32::OLE` boundary instead of exposing an unqualified `excel_start` plugin action.
+The Office automation wrapper `plugin/msoffice.plg` has also been removed. Repo-owned SpyGlass waiver extraction now names `MSOffice::Excel::start()` directly, and the package owner keeps the lazy `Win32::OLE` boundary instead of exposing an unqualified `excel_start` plugin action.
 
 The VHDL constant helper wrapper `plugin/vhdconst_eval.plg` has also been removed. Repo-owned MBIST and register-test paths now name `VHDL::ConstantEval::evaluate_constant_values(...)` / `substitute_hash_values(...)` directly, and the old print action is preserved only as explicit package function `print_constant_values_for_conf(...)`.
 

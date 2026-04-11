@@ -72,8 +72,8 @@ my %ruleseverity;
 
 spyglass_waive {
  my $conf = config_read ('spyglass');
- require Plugin::MSOffice;
- my $xcel = Plugin::MSOffice::excel_start();
+ require MSOffice::Excel;
+ my $xcel = MSOffice::Excel::start();
 
  my $wb   = $xcel->Workbooks->Open(realpath ($_[0]{_argv}[0]));
 

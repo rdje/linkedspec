@@ -1,9 +1,10 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::MSOffice
-# Purpose: Package-backed owner for Microsoft Office automation helpers that are
-#          being migrated out of legacy `.plg` files.
+# Package: MSOffice::Excel
+# Purpose: Domain owner for Microsoft Excel automation helpers that were
+#          migrated out of legacy `.plg` files and should no longer live under
+#          plugin-branded scaffolding.
 #------------------------------------------------------------------------------
-package Plugin::MSOffice;
+package MSOffice::Excel;
 
 use 5.010;
 BEGIN {
@@ -14,14 +15,14 @@ BEGIN {
 }
 
 #------------------------------------------------------------------------------
-# Function: excel_start
+# Function: start
 # Purpose : Preserve the historical Excel automation helper as an explicit
 #           package function: reuse an active Excel instance when one exists,
 #           otherwise create a new instance that quits when released.
 # Args    : none
 # Returns : Win32::OLE Excel.Application object
 #------------------------------------------------------------------------------
-sub excel_start {
+sub start {
  my $excel;
 
  my $load_err;
