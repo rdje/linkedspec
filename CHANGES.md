@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: retire plugin.plg lookup shim
+
+- migrated `plugin/fsmgen.plg::getop_plugin_list` off the generic `plugin(...)` helper and onto `LinkedSpec::get_plugin($name) // sub {}` directly, preserving the previous no-op fallback for unresolved dynamic plugin names,
+- deleted the one-line `plugin/plugin.plg` lookup shim now that no repo-owned caller still needs `plugin(...)` as a legacy `.plg` action,
+- updated regression coverage so the dynamic lookup migration is locked on the real `fsmgen.plg` caller and the remaining `pplugin` corpus no longer expects `plugin.plg`.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'plugin.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: retire spec.plg parser lookup shim
 
 - deleted `plugin/spec.plg`, the one-line `_get_parser` compatibility shim, now that repo-owned parser lookup callers use `LinkedSpec::get_parser(...)` directly,

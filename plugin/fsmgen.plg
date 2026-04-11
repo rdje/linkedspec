@@ -19,6 +19,7 @@ interface_object {
 get_instance_name          {my ($iname) = map {m/(\w+)/o} grep {!ref && m/^:[[:alpha:]]/o} @{$_[0]}; $iname}
 getop_plugin_list          {
 my %plugins;
+ use LinkedSpec;
 
  # Current Plugin Specif
  foreach my $cps (map {s/\+//o; $_} grep {!ref && m/^\+\S/o} @{$_[0]}) {
@@ -27,7 +28,8 @@ my %plugins;
   my ($type, $plugin_list) = (${^PREMATCH}, ${^POSTMATCH});
 
   my @plg_n_args = split /#/o, $plugin_list;
-  push @{$plugins{$type}}, {plugin=> plugin ($plg_n_args[0]), args=>[@plg_n_args[1 .. $#plg_n_args]]}
+  my $plugin = LinkedSpec::get_plugin($plg_n_args[0]) // sub {};
+  push @{$plugins{$type}}, {plugin=> $plugin, args=>[@plg_n_args[1 .. $#plg_n_args]]}
  }
 
  return  %plugins ? \%plugins : undef

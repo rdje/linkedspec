@@ -170,6 +170,7 @@ It is still important because:
 - extracted wrappers are not permanent by default; `plugin/string.plg`, `plugin/cgi.plg`, and `plugin/genericfilter.plg` have been removed now that their package owners handle all repo-owned usage directly,
 - package-backed helper subdefs are removable even when their containing legacy action file remains, and real actions can move once a package owner can carry the behavior; `Plugin::HTTP::print_file_links_for_conf(...)`, `Plugin::HTTP::run_lighttpd_for_conf(...)`, and `Plugin::HTTP::run_httpd_for_conf(...)` now own the former `http` / `lighttpd` / `httpd` actions, so `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` are gone,
 - parser lookup is no longer treated as a plugin action inside the shipped project; repo-owned callers use `LinkedSpec::get_parser(...)` directly, and the old `plugin/spec.plg` `_get_parser` shim is gone,
+- generic dynamic callback lookup is no longer hidden behind the old `plugin/plugin.plg` action either; the remaining repo-owned caller in `fsmgen.plg` now uses `LinkedSpec::get_plugin(...)` directly,
 - the migration plan needs real legacy inputs so compatibility-removal decisions are grounded.
 
 Do not read `plugin/` as a recommendation to build new LinkedSpec functionality around dynamic `.plg` loading. The current architectural direction is to keep LinkedSpec focused on `.spec` parsing, runtime execution, ActionIR helper semantics, and diagnostics.

@@ -373,6 +373,8 @@ Current project direction does not treat that branch as a target architecture.
 
 The one-line parser-lookup compatibility shim `plugin/spec.plg` has also been removed. Repo-owned parser lookup now stays on `LinkedSpec::get_parser(...)` directly instead of routing through a legacy `_get_parser` plugin action.
 
+The generic one-line dynamic lookup shim `plugin/plugin.plg` is gone as well. Its remaining repo-owned caller in `plugin/fsmgen.plg` now calls `LinkedSpec::get_plugin(...)` directly, so known dynamic lookup stays behind the explicit bridge without preserving an extra legacy action name.
+
 The current intended direction is:
 - keep deterministic named `.spec` resolution,
 - treat dynamic `.plg` loading and plugin execution as legacy-removal territory,
