@@ -210,9 +210,8 @@ sub build_dep_bundle {
 sub dispatch_owner_call {
  my ($owner_pkg, $target_pkg, $subname, @args) = @_;
  return call_preserving_err(sub {
-  require_pkg($owner_pkg, $target_pkg) unless $target_pkg->can($subname);
-  no strict 'refs';
-  return &{"${target_pkg}::${subname}"}(@args);
+  my $cb = require_pkg_cb($owner_pkg, $target_pkg, $subname);
+  return $cb->(@args);
  })
 }
 

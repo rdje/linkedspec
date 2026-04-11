@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - OwnerDispatch: reuse callback loader for delegated calls
+
+- routed `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` through the shared `require_pkg_cb(...)` callback-loader path instead of keeping a second package-`can(...)` plus symbol-call implementation inside `OwnerDispatch` itself,
+- added regression coverage proving delegated owner calls still preserve list-context return payloads and caller-visible successful `$@`,
+- refreshed architecture and roadmap notes so delegated owner calls are recorded as sharing the same callback-loader seam as dependency maps and thin wrappers.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/OwnerDispatch.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+
 ## 2026-04-11 - OwnerDispatch: centralize wrapper callback lookup
 
 - routed the remaining thin wrapper callback lookups in `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, and `ActionIR::Scanner` through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)` instead of local `Package->can(...)` probes,

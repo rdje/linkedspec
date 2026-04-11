@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 152;
+    plan tests => 153;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1194,6 +1194,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($owner_dispatch_pm, qr/sub build_dep_map\b/, 'OwnerDispatch defines the shared dependency-map builder');
     like($owner_dispatch_pm, qr/sub build_dep_bundle\b/, 'OwnerDispatch defines the shared mixed dependency-bundle builder');
     like($owner_dispatch_pm, qr/sub dispatch_owner_call\b/, 'OwnerDispatch defines the shared delegated owner-call helper');
+    like($owner_dispatch_pm, qr/sub dispatch_owner_call\b.*my \$cb = require_pkg_cb\(\$owner_pkg, \$target_pkg, \$subname\).*return \$cb->\(\@args\)/s, 'OwnerDispatch delegated owner calls now reuse the shared callback loader');
     like($linkedspec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'LinkedSpec.pm now loads the shared owner-dispatch helper');
     like($linkedspec_pm, qr/sub _dispatch_owner_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, \$pkg, \$subname, \@args\)/s, 'LinkedSpec.pm now routes facade owner dispatch through OwnerDispatch');
     like($trace_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Trace.pm now loads the shared owner-dispatch helper');
@@ -1316,12 +1317,13 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     );
 };
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     {
         no warnings 'redefine';
         local *Synthetic::DepOwner::_trim_action_ir_value = sub { return 'trim_ok' };
         local *Synthetic::OtherOwner::_parse_method_function_expr = sub { return { method => 'call', args => [] } };
+        local *Synthetic::OtherOwner::list_payload = sub { return ('alpha', 'beta') };
 
         $@ = "__SAVED_ERR__\n";
         my $deps = LinkedSpec::OwnerDispatch::build_dep_map(
@@ -1338,6 +1340,11 @@ subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_erro
         is($deps->{parse_method_function_expr}->()->{method}, 'call', 'build_dep_map resolves explicit alternate-owner callbacks');
         ok(!exists($deps->{missing}), 'build_dep_map only returns requested dependency callbacks');
         is($@, "__SAVED_ERR__\n", 'build_dep_map preserves caller $@ on successful callback lookup');
+
+        $@ = "__SAVED_ERR__\n";
+        my @delegated = LinkedSpec::OwnerDispatch::dispatch_owner_call('Synthetic::Caller', 'Synthetic::OtherOwner', 'list_payload');
+        is_deeply(\@delegated, [qw(alpha beta)], 'dispatch_owner_call preserves delegated list-context return payloads through the shared callback loader');
+        is($@, "__SAVED_ERR__\n", 'dispatch_owner_call preserves caller $@ on successful shared callback-loader delegation');
     }
 };
 subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
