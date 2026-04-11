@@ -1,5 +1,5 @@
 check4diff {
- require Plugin::Prompt;
+ require InteractivePrompt;
 
  rmtree ('COMPARE', {verbose=>1});
  mkpath ('COMPARE', {verbose=>1});
@@ -24,10 +24,10 @@ check4diff {
  say '';
 
  if (@ronly_list) {
-  Plugin::Prompt::yes_no(
+  InteractivePrompt::yes_no(
    'Should I try to check-out ALL Read-Only files ?',
    sub {
-    Plugin::Prompt::yes_no(
+    InteractivePrompt::yes_no(
      'Are you sure ?',
      sub {system ("dssc pop -lock $_") foreach @ronly_list},
     )
@@ -37,13 +37,13 @@ check4diff {
 
  say '';
  if (@diff_list) {
-  Plugin::Prompt::yes_no(
+  InteractivePrompt::yes_no(
    'Should I update ALL files now ?',
    sub {system ("cp  -v  @$_[1,0]") foreach @diff_list; say ''},
    sub {
-    Plugin::Prompt::yes_no(
+    InteractivePrompt::yes_no(
      'Selectively (No->Quit) ?',
-     sub {map {Plugin::Prompt::yes_no ("$$_[0] ?", sub {system ("cp -v @$_[1,0]"); say ''})} @diff_list}
+     sub {map {InteractivePrompt::yes_no ("$$_[0] ?", sub {system ("cp -v @$_[1,0]"); say ''})} @diff_list}
     )
    },
   );

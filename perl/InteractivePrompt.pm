@@ -1,17 +1,11 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::Prompt
+# Package: InteractivePrompt
 # Purpose: Package-backed owner for interactive prompt helpers that are being
-#          migrated out of legacy `.plg` files.
+#          graduated out of legacy `.plg` / `Plugin::*` scaffolding.
 #------------------------------------------------------------------------------
-package Plugin::Prompt;
+package InteractivePrompt;
 
 use 5.010;
-BEGIN {
- require File::Basename;
- my $module_dir = (File::Basename::fileparse(__FILE__))[1];
- my $perl_root = File::Basename::dirname($module_dir);
- unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
-}
 
 #------------------------------------------------------------------------------
 # Function: yes_no
@@ -57,13 +51,13 @@ sub _invoke_response_callback {
 
  if (ref($callback) eq 'ARRAY') {
   my ($code, @args) = @$callback;
-  die "(Plugin::Prompt::yes_no) -E- invalid $answer callback array; first element must be CODE"
+  die "(InteractivePrompt::yes_no) -E- invalid $answer callback array; first element must be CODE"
    unless ref($code) eq 'CODE';
   $code->(@args);
   return
  }
 
- die "(Plugin::Prompt::yes_no) -E- invalid $answer callback; expected CODE or ARRAY"
+ die "(InteractivePrompt::yes_no) -E- invalid $answer callback; expected CODE or ARRAY"
 }
 
 1;

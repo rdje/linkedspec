@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: graduate prompt helper out of plugin namespace
+
+- renamed the short-lived `Plugin::Prompt` scaffold to `InteractivePrompt` so the yes/no helper no longer lives under a plugin-branded package after the `.plg` wrapper removal,
+- migrated `plugin/fxenv_helper.plg` and regression coverage to `InteractivePrompt::yes_no(...)`,
+- updated working docs and the public book to state that `Plugin::*` package owners are tactical extraction scaffolding, not a permanent taxonomy when a clearer non-plugin owner exists.
+
+- Validation:
+  - `perl -Iperl -c perl/InteractivePrompt.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/fxenv_helper.plg`
+  - `rg --files -g 'Prompt.pm'` absence scan for the removed scaffold file
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move prompt helper into package owner
 
 - moved the historical `yes_no` helper out of `plugin/yesno.plg` into `Plugin::Prompt::yes_no(...)`,
