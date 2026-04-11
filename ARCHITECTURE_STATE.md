@@ -31,6 +31,7 @@ This document is the current high-level technical reading of the project shape. 
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, and successful `$@` preservation no longer require bridge-local eval/restore branches.
 - `Plugin::GenericFilter` now owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions that used to live entirely in `plugin/genericfilter.plg`, so `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` no longer build `genericfilter_*` names and bounce through `LinkedSpec::run_plugin(...)` / `get_plugin(...)`.
+- `plugin/cgi.plg` is now removed after extraction: `Plugin::CGI::file_list_path2http(...)` owns that behavior directly, so extracted `.pm` owners no longer imply a permanent `.plg` compatibility shadow.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
@@ -364,6 +365,8 @@ Current project direction does not treat that branch as a target architecture.
 - exposes an explicit `dispatch($action, ...)` boundary for `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)`,
 - keeps the recursive `group_by_port` / `group_by_ioclock` behavior on the existing HUtils grouping path without routing through stringly plugin lookup,
 - and leaves `plugin/genericfilter.plg` as a thin legacy registration wrapper only.
+
+`Plugin::CGI` is already one step further along that same path: `Plugin::CGI::file_list_path2http(...)` owns the behavior directly, and the old `plugin/cgi.plg` registration wrapper is gone. That is the preferred shape once no repo-owned code still needs a legacy plugin name.
 
 The current intended direction is:
 - keep deterministic named `.spec` resolution,

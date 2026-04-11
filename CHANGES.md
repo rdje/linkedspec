@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: remove obsolete CGI plg wrapper
+
+- deleted `plugin/cgi.plg` now that `Plugin::CGI::file_list_path2http(...)` owns all repo-owned usage and no internal caller still needs the legacy `file_list_path2http` plugin registration name,
+- updated regression coverage to lock that `Plugin::CGI` is the only implementation/dispatch surface for `file_list_path2http(...)` and that the removed wrapper is no longer part of the `pplugin` corpus,
+- refreshed the plugin-roadmap and public/private architecture docs so extracted package owners do not automatically imply a permanent `.plg` compatibility shadow.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/CGI.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'cgi.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: extract GenericFilter package owner
 
 - moved the executable `genericfilter_group_by`, `genericfilter_group_by_port`, `genericfilter_group_by_ioclock`, and `genericfilter_group_byRE` behavior out of `plugin/genericfilter.plg` into the new package owner `Plugin::GenericFilter`,

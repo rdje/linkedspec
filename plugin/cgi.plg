@@ -1,4 +1,0 @@
-file_list_path2http {
-   use Plugin::CGI;
-   Plugin::CGI::file_list_path2http(@_);
-}

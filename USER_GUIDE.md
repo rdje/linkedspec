@@ -1239,6 +1239,8 @@ The current legacy `.plg` adapter in `PPlugin` still searches the working direct
 
 The `GenericFilter` grouping helpers are now package-owned too. `Plugin::GenericFilter` owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions used by `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)`. The legacy `plugin/genericfilter.plg` file remains as a thin compatibility registration shim for older `.plg` discovery, but repo-owned Perl callers no longer construct `genericfilter_*` plugin names or route those calls through `LinkedSpec::run_plugin(...)` / `LinkedSpec::get_plugin(...)`. This is the preferred migration shape for extracted plugin behavior: keep real executable logic in a normal package owner, keep `.plg` wrappers only where compatibility still needs the old names, and avoid direct `PPlugin` access in new code.
 
+That last clause is intentional. A `.pm` owner does not automatically require a permanent `.plg` shadow. `Plugin::CGI::file_list_path2http(...)` is the first extracted helper where the compatibility wrapper has now been removed completely: repo-owned code calls `Plugin::CGI` directly, and `plugin/cgi.plg` is no longer part of the shipped legacy plugin corpus. Use this as the direction for future extractions: keep `.plg` only while a real remaining legacy caller needs the old registration name.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`

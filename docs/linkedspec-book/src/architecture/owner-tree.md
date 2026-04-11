@@ -373,6 +373,8 @@ Package-backed plugin extraction is already underway. `Plugin::String`, `Plugin:
 
 The `plugin/genericfilter.plg` file still exists, but its role is compatibility registration. It delegates each legacy `genericfilter_*` name to `Plugin::GenericFilter`, keeping older `.plg` discovery paths alive without letting the implementation remain trapped in the dynamic plugin layer.
 
+Not every extracted package owner should keep such a wrapper. `Plugin::CGI::file_list_path2http(...)` now has no repo-owned legacy plugin caller left, so the old `plugin/cgi.plg` registration file has been removed. That is the healthier destination: normal package owner first, temporary `.plg` bridge only when a concrete remaining caller still needs it, then deletion.
+
 The current direction is not to make dynamic plugin loading the identity of LinkedSpec. The healthier core story is:
 
 ```text

@@ -76,6 +76,7 @@ Plugin modernization note:
 - `PPlugin` registry construction now reads plugin files through an explicit helper instead of localized diamond-reader state, reports unreadable/malformed files as skipped entries, and preserves caller `$@` after successful partial registry builds.
 - Repo-owned `plugin/*.plg` lookup callers now route callback lookup through `LinkedSpec::get_plugin(...)`; direct `PPlugin->get(...)` is no longer used in shipped `.plg` source and should stay constrained to the compatibility bridge/adapter internals while those remain.
 - `Plugin::GenericFilter` now owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions; `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` call that package owner directly instead of constructing `genericfilter_*` names for `LinkedSpec::run_plugin(...)` / `get_plugin(...)`.
+- `plugin/cgi.plg` is now deleted rather than kept as a permanent compatibility shadow: `Plugin::CGI::file_list_path2http(...)` owns all repo-owned usage directly. Future extraction slices should keep `.plg` wrappers only when a concrete remaining legacy caller still needs the old registration name.
 
 DSL helper surface consistency note:
 - Child-rule append authoring is now standardized on `push(...)`: `push(Rule)`, `push(Rule, index)`, `push(Rule, target)`, and `push(Rule, target, index)`. The duplicate public `push_call(...)` helper is retired, and raw Perl wrapper metadata now uses `push_child_call_*_builtin` contract IDs instead of names that look like public helper calls.

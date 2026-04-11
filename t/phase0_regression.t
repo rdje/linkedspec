@@ -3970,22 +3970,18 @@ PERL
     unlike($err, qr/Can't locate Plugin\/String\.pm/, 'string package-owner subprocess resolves the new package file');
 };
 subtest 'cgi_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 11;
+    plan tests => 7;
 
     my $cgi_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'CGI.pm'));
-    my $cgi_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'));
+    my $cgi_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg');
 
     ok(defined($cgi_plugin_pm) && length($cgi_plugin_pm), 'package-backed cgi plugin owner source is available');
-    ok(defined($cgi_plugin_plg) && length($cgi_plugin_plg), 'cgi.plg compatibility wrapper source is available');
+    ok(!-e $cgi_plugin_plg, 'cgi.plg compatibility wrapper is removed now that Plugin::CGI owns all repo-owned usage');
     like($cgi_plugin_pm, qr/package Plugin::CGI;/, 'package-backed cgi plugin owner declares the expected package');
     like($cgi_plugin_pm, qr/sub file_list_path2http\b/, 'package-backed cgi plugin owner defines file_list_path2http');
     like($cgi_plugin_pm, qr/Plugin::String::var_subst\(/, 'package-backed cgi plugin owner reuses the extracted string package owner');
     like($cgi_plugin_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'package-backed cgi plugin owner uses the package-backed HTTP owner for httplink');
-    like($cgi_plugin_plg, qr/use Plugin::CGI;/, 'cgi.plg now loads the package-backed cgi plugin owner');
-    like($cgi_plugin_plg, qr/Plugin::CGI::file_list_path2http\(\@_\);/, 'cgi.plg now delegates file_list_path2http to the package-backed owner');
-    unlike($cgi_plugin_plg, qr/httplink \(\$subst\)/, 'cgi.plg no longer carries the inline httplink call implementation');
-    unlike($cgi_plugin_plg, qr/Plugin::String::var_subst \(/, 'cgi.plg no longer carries the inline string-substitution implementation');
-    unlike($cgi_plugin_plg, qr/join "", map \{!\/#\/o \? join/, 'cgi.plg no longer owns the inline path-link formatting body');
+    unlike($cgi_plugin_pm, qr/LinkedSpec::run_plugin|LinkedSpec::get_plugin|PPlugin/, 'Plugin::CGI no longer depends on the plugin bridge for file_list_path2http');
 };
 subtest 'cgi_package_owner_avoids_pplugin_and_preserves_link_wrapping_contract' => sub {
     plan tests => 7;
@@ -4107,7 +4103,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http hostport-setter subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 16;
+    plan tests => 14;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
@@ -4119,11 +4115,7 @@ subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin
     is($string_ast->{var_subst}->('prefix $NAME suffix', qr/\$(\w+)/, NAME => 'VALUE'), 'prefix VALUE suffix', 'string compatibility wrapper preserves var_subst behavior through the package owner');
     is(ref($string_ast->{var_subst_test}), 'CODE', 'string compatibility wrapper still exposes var_subst_test as a coderef');
 
-    my $cgi_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'));
-    my $cgi_ast = eval { $parser->(\$cgi_input) };
-    ok(!$@, 'cgi plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
-    ok(defined($cgi_ast) && ref($cgi_ast) eq 'HASH', 'cgi plugin still returns a hash AST under pplugin');
-    is(ref($cgi_ast->{file_list_path2http}), 'CODE', 'cgi plugin still exposes file_list_path2http as a coderef');
+    ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'), 'cgi.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 
     my $http_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
     my $http_ast = eval { $parser->(\$http_input) };
