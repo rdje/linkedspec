@@ -1,5 +1,6 @@
 old_default {
 my ($conf) = @_;
+ use LinkedSpec;
 
  print "($conf->{_program}) -I- Loading SETUP & HOLD info..";
  my $setup_hold = TcFlow::GetSH($conf->{_consolidated});
@@ -15,27 +16,27 @@ my ($conf) = @_;
  $conf->{_questionable_paths} = 
  $conf->{_stafrequency_paths} = {};
 
- HUtils::Recurse($conf->{_filteredata},        [PPlugin->get ('stafrequency'),            $conf]);
- HUtils::Recurse($conf->{_stafrequency},       [PPlugin->get ('freqency_detailed'),       $conf]);
+ HUtils::Recurse($conf->{_filteredata},        [LinkedSpec::get_plugin('stafrequency'),            $conf]);
+ HUtils::Recurse($conf->{_stafrequency},       [LinkedSpec::get_plugin('freqency_detailed'),       $conf]);
  
  open(DFREQ, ">$conf->{_workdir}/drive_freqency_detailed.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_workdir}/drive_freqency_detailed.lof', ";
- HUtils::Recurse($conf->{_freqency_detailed},  [PPlugin->get ('drive_freqency_detailed'), $conf]);
+ HUtils::Recurse($conf->{_freqency_detailed},  [LinkedSpec::get_plugin('drive_freqency_detailed'), $conf]);
  close(DFREQ);
- HUtils::Recurse($conf->{_stafrequency_paths}, [PPlugin->get ('freqency_detailed_paths'), $conf]);
- HUtils::WRecurse($conf->{_filteredata},       [PPlugin->get ('portiming'),               $conf]);
+ HUtils::Recurse($conf->{_stafrequency_paths}, [LinkedSpec::get_plugin('freqency_detailed_paths'), $conf]);
+ HUtils::WRecurse($conf->{_filteredata},       [LinkedSpec::get_plugin('portiming'),               $conf]);
 
  # HOLD info
  print "($conf->{_program}) -I- Processing HOLD info..\n";
  my $filteredata_hold = HUtils::GenericFilter($conf, $setup_hold->{hold}, "filter_sequence");
- HUtils::WRecurse($filteredata_hold,   [PPlugin->get ('portiming'), $conf]);
+ HUtils::WRecurse($filteredata_hold,   [LinkedSpec::get_plugin('portiming'), $conf]);
  
 # print "($conf->{_program}) -I- Generating DM DATA..\n";
-# PPlugin::Get('setup_hold_tmax_tmin')->($conf, $conf->{_filteredata}, $filteredata_hold);
+# LinkedSpec::get_plugin('setup_hold_tmax_tmin')->($conf, $conf->{_filteredata}, $filteredata_hold);
 
-# PPlugin::Get('freqency_summary')->($conf);
-# PPlugin::Get('potential_fp')->($conf);
-# PPlugin::Get('questionable_paths')->($conf);
-# PPlugin::Get('drive_nopath_check')->();
+# LinkedSpec::get_plugin('freqency_summary')->($conf);
+# LinkedSpec::get_plugin('potential_fp')->($conf);
+# LinkedSpec::get_plugin('questionable_paths')->($conf);
+# LinkedSpec::get_plugin('drive_nopath_check')->();
 }
 
 portiming {
@@ -56,6 +57,7 @@ my ($info, $a2d, $conf) = @_;
 
 dm_measures {
 my ($conf) = @_;
+ use LinkedSpec;
 
  print "($conf->{_program}) -I- DM Measures..\n";
  
@@ -80,7 +82,7 @@ my ($conf) = @_;
    {paths=>$sorted, min=>shift(@minmax), max=>pop(@minmax)}
  });
 
- PPlugin->get ('drive_tckdelays')->($conf, $filteredata_sh);
+ LinkedSpec::get_plugin('drive_tckdelays')->($conf, $filteredata_sh);
 }
 
 drive_tckdelays {
@@ -158,11 +160,12 @@ my ($info, $freqs, $conf) = @_;
 
 freqency_detailed_paths {
 my ($info, $paths, $conf) = @_;
+ use LinkedSpec;
 
  my ($pathtype, $direction, $iomode, $corner) = @$info;
 
  my ($iomode_idx) = $iomode =~ /iomode(\d+)/;
- my $filename     = PPlugin->get ('get_freqency_detailed_fname')->($pathtype, $direction, $iomode_idx, $corner);
+ my $filename     = LinkedSpec::get_plugin('get_freqency_detailed_fname')->($pathtype, $direction, $iomode_idx, $corner);
  open(PATHD, ">$conf->{_stanpaths_lof_workdir}/$filename.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_stanpaths_lof_workdir}/$filename.lof', ";
  print PATHD "=stan_freqency_detailed_paths=\n";
 
@@ -175,6 +178,7 @@ my ($info, $paths, $conf) = @_;
 
 drive_freqency_detailed {
 my ($info, $freqs, $conf) = @_;
+ use LinkedSpec;
 
  my $label 	     = join("/", @$info);
  my $corner_count    = keys %{$conf->{frequencies}};
@@ -192,7 +196,7 @@ my ($info, $freqs, $conf) = @_;
  foreach my $iomode_ent (@$freqs) {
   print DFREQ "io_mode$idx";
   foreach my $ccorner (@sorted_corners) {
-   my $refilename = PPlugin->get ('get_freqency_detailed_fname')->(@$info, $idx, $ccorner);
+   my $refilename = LinkedSpec::get_plugin('get_freqency_detailed_fname')->(@$info, $idx, $ccorner);
    my $cellval = $$iomode_ent{$ccorner} || "-";
 
    # No internal link for '-'
@@ -247,11 +251,12 @@ my ($conf) = @_;
 
 drive_nopath_check {
 my ($conf) = @_;
+ use LinkedSpec;
 
  open(CHECK, ">$conf->{_workdir}/stan_nopath_check.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_workdir}/stan_nopath_check.lof', ";
  print CHECK "=stan_nopath_check=\n";
  
- HUtils::Recurse($conf->{_filteredata}, [PPlugin->get ('nopath_check'), $conf]);
+ HUtils::Recurse($conf->{_filteredata}, [LinkedSpec::get_plugin('nopath_check'), $conf]);
 
  print CHECK "=stan_nopath_check_end=\n";
  close(CHECK);
@@ -364,4 +369,3 @@ my ($info, $a2d_ref, $conf)  = @_;
  }
 
 }
-

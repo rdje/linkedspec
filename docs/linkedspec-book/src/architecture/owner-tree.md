@@ -367,6 +367,8 @@ Architecturally, this branch should be read as transition machinery.
 
 `PPlugin` owns the old `.plg` discovery/execution path. It reads legacy plugin files through explicit file IO, reports and skips unreadable or malformed files during registry construction, and still reaches back to `LinkedSpec::get_parser('pplugin')` to parse `.plg` files. That callback load now goes through the shared owner-dispatch seam instead of a local `require LinkedSpec` branch.
 
+Repo-owned `.plg` files should not reach into `PPlugin->get(...)` directly. Shipped lookup callers now use `LinkedSpec::get_plugin(...)`, which keeps registry-first lookup and legacy fallback under `PluginBridge` while the `.plg` surface is being retired.
+
 The current direction is not to make dynamic plugin loading the identity of LinkedSpec. The healthier core story is:
 
 ```text

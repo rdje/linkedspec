@@ -1,6 +1,7 @@
 
 glc_xcel2hm {
 my ($qconf) = @_;
+ use LinkedSpec;
 
  -s $qconf->{glc_xcel2hm} || die "($qconf->{progname}) -E- CSV file '$qconf->{glc_xcel2hm}' is either empty or doesn't exist,";
 	
@@ -56,8 +57,8 @@ my ($qconf) = @_;
  my %match_port;
  my @portlist;
  my @tcl4interconn;
- my $tcl4code       = PPlugin->get ('tcl4interconn');
-    $qconf->{_fanx} = $qconf->{fanx} ? PPlugin->get ('tcl4fanx')->($qconf) : undef;
+ my $tcl4code       = LinkedSpec::get_plugin('tcl4interconn');
+    $qconf->{_fanx} = $qconf->{fanx} ? LinkedSpec::get_plugin('tcl4fanx')->($qconf) : undef;
  HUtils::Recurse($groups{ios}, sub {my ($info, $a2d) = @_;
  		               my $port = $info->[1];
  			       print "($qconf->{progname}) -I- Checking port '$port'..\n" unless $qconf->{tcl4interconn};
@@ -90,9 +91,9 @@ my ($qconf) = @_;
  
  my %budget_check;
  open(my $qcflowlog, ">$qconf->{logfile}") || die "($qconf->{progname}) -E- Can't write open '$qconf->{logfile}'";
- my $qc_pushonce         = PPlugin->get ('qc_pushonce');
- my $single_n_zero_match = PPlugin->get ('qc_budget_check_01match_code');
- HUtils::Recurse($groups{ios}, [PPlugin->get ('qc_budget_check'), $qc_pushonce, $single_n_zero_match, $qconf, \%groups, $qcflowlog, \%budget_check, \%match_port, \%qclog, \%once]);
+ my $qc_pushonce         = LinkedSpec::get_plugin('qc_pushonce');
+ my $single_n_zero_match = LinkedSpec::get_plugin('qc_budget_check_01match_code');
+ HUtils::Recurse($groups{ios}, [LinkedSpec::get_plugin('qc_budget_check'), $qc_pushonce, $single_n_zero_match, $qconf, \%groups, $qcflowlog, \%budget_check, \%match_port, \%qclog, \%once]);
  
  # Multiple matches List
  foreach my $mmatch (sort {$a cmp $b} keys %{$budget_check{mmatch}}) {
@@ -132,9 +133,9 @@ my ($qconf) = @_;
  # Loading QCFLOW specific table2ss' scripts
  Table2SS::UConf(PathSearch->go('qcflow_table2ss'));
 
-    $qconf->{_filter_handler}  = PPlugin->get ('qcflow_filter_handler');
- my $qcflow_qclogdata          = PPlugin->get ('qcflow_qclogdata');
- my $qcflow_links_n_qclog      = PPlugin->get ('qcflow_links_n_qclog');
+    $qconf->{_filter_handler}  = LinkedSpec::get_plugin('qcflow_filter_handler');
+ my $qcflow_qclogdata          = LinkedSpec::get_plugin('qcflow_qclogdata');
+ my $qcflow_links_n_qclog      = LinkedSpec::get_plugin('qcflow_links_n_qclog');
 
  if ($qconf->{filter}) {
   unless (-s $qconf->{filter}) {
@@ -145,7 +146,7 @@ my ($qconf) = @_;
  }
   
  HUtils::Recurse($groups{ios}{ion}, sub {my ($info, $table) = @_;
-        my $fanx_info  = PPlugin->get ('get_fanxinfo')->($qconf, $info->[$#$info]);
+        my $fanx_info  = LinkedSpec::get_plugin('get_fanxinfo')->($qconf, $info->[$#$info]);
 	foreach (@$table) {
          # Frequency in Mhz
 	 my $clock    = $$_[$qconf->{indexes}{reference_signal}];
@@ -743,7 +744,7 @@ my ($qconf) = @_;
   $qconf->{_qco} ||= $default_o || 'qclog.xls';
 
   # Extracting the CTS information per Clock
-  PPlugin->get ('qcflow_clock_ctsinfo')->($qconf, \%extracted_cts);
+  LinkedSpec::get_plugin('qcflow_clock_ctsinfo')->($qconf, \%extracted_cts);
 
   $qcflow_links_n_qclog->($qconf);
 
@@ -827,6 +828,7 @@ my $port = $info->[1];
 
 qc_budget_check_01match_code {
 my ($port, $qc_pushonce, $qconf, $groups, $qcflowlog, $budget_check, $match_port, $qclog, $once, $zero_one_flag) = @_;
+ use LinkedSpec;
  # Single match. Will be budget checked
 
  print $qcflowlog "\n".('#' x 40)." $port ".('#' x 40)."\n";
@@ -952,7 +954,7 @@ my ($port, $qc_pushonce, $qconf, $groups, $qcflowlog, $budget_check, $match_port
       # For Min Check there is a failure if GL(min) > XCEL(min) for output and GL(Max) < XCEL(Max) for input
       my @interface_n_re_info = $zero_one_flag ? split(/\s+:\s+/, $$match_port{$port}{regexes}[0]) : ('NOT_COVERED', 'not_applicable');
       my $freq       = $$groups{clocks}{clockn}{$reference_clock}[0][$qconf->{clock_indexes}{silicon_frequency}];
-      my $fanx_info  = PPlugin->get ('get_fanxinfo')->($qconf, $port);
+      my $fanx_info  = LinkedSpec::get_plugin('get_fanxinfo')->($qconf, $port);
 
       # In nano-seconds
       my $period     = sprintf("%4.1f", 1000/$freq);
@@ -977,7 +979,7 @@ my ($port, $qc_pushonce, $qconf, $groups, $qcflowlog, $budget_check, $match_port
       #
       my @interface_n_re_info = $zero_one_flag ? split(/\s+:\s+/, $$match_port{$port}{regexes}[0]) : ('NOT_COVERED', 'not_applicable');
       my $freq       = $$groups{clocks}{clockn}{$reference_clock}[0][$qconf->{clock_indexes}{silicon_frequency}];
-      my $fanx_info  = PPlugin->get ('get_fanxinfo')->($qconf, $port);
+      my $fanx_info  = LinkedSpec::get_plugin('get_fanxinfo')->($qconf, $port);
       # In nano-seconds
       my $period     = sprintf("%4.1f", 1000/$freq);
       my $xcel_delay = sprintf("%4.1f", $cxbudget  *10/$freq);

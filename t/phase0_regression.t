@@ -3813,21 +3813,45 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     is(ref($string_ast->{var_subst_test}), 'CODE', 'string plugin still exposes var_subst_test as a coderef');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 10;
+    plan tests => 22;
 
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
     my $skew_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
+    my $tssio_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tssio.plg'));
+    my $setup_hold_tmax_tmin_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'setup_hold_tmax_tmin.plg'));
+    my $plugin_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg'));
+    my $stan_omap2430c_backend_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
 
     ok(defined($qc_summary_plugin) && length($qc_summary_plugin), 'qc_summary.plg source is available for explicit lookup inspection');
     ok(defined($skew_plugin) && length($skew_plugin), 'skew.plg source is available for explicit lookup inspection');
+    ok(defined($tssio_plugin) && length($tssio_plugin), 'tssio.plg source is available for explicit lookup inspection');
+    ok(defined($setup_hold_tmax_tmin_plugin) && length($setup_hold_tmax_tmin_plugin), 'setup_hold_tmax_tmin.plg source is available for explicit lookup inspection');
+    ok(defined($plugin_plugin) && length($plugin_plugin), 'plugin.plg source is available for explicit lookup inspection');
+    ok(defined($stan_omap2430c_backend_plugin) && length($stan_omap2430c_backend_plugin), 'stan_omap2430c_backend.plg source is available for explicit lookup inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for explicit lookup inspection');
     unlike($qc_summary_plugin, qr/PPlugin->get \('qc_summary_merge'\)/, 'qc_summary plugin no longer routes qc_summary_merge through legacy PPlugin lookup');
     like($qc_summary_plugin, qr/LinkedSpec::get_plugin\('qc_summary_merge'\)/, 'qc_summary plugin now resolves qc_summary_merge through LinkedSpec::get_plugin');
     like($qc_summary_plugin, qr/my \$qc_summary_merge = LinkedSpec::get_plugin\('qc_summary_merge'\);/, 'qc_summary plugin caches the explicit lookup for reuse');
     unlike($skew_plugin, qr/PPlugin->get \('stan_backend_start'\)/, 'skew plugin no longer routes stan_backend_start through legacy PPlugin lookup');
     like($skew_plugin, qr/LinkedSpec::get_plugin\('stan_backend_start'\)->\(\$conf\)/, 'skew plugin now resolves stan_backend_start through LinkedSpec::get_plugin');
+    like($tssio_plugin, qr/LinkedSpec::get_plugin\(\$info->\[\$\$index\{direction\}\] eq 'input' \? 'tss_setup_hold' : 'tss_tmax_tmin'\)->\(\$conf, \$\$a2d\[0\]/, 'tssio plugin now resolves dynamic setup/hold helpers through LinkedSpec::get_plugin');
+    like($setup_hold_tmax_tmin_plugin, qr/LinkedSpec::get_plugin\('DxCy'\)/, 'setup_hold_tmax_tmin plugin now resolves DxCy through LinkedSpec::get_plugin');
+    like($plugin_plugin, qr/LinkedSpec::get_plugin\(\$_\[-1\]\) \/\/ sub \{\}/, 'plugin lookup shim now resolves dynamic plugin names through LinkedSpec::get_plugin');
+    like($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('stafrequency'\)/, 'stan_omap2430c_backend plugin now resolves traversal handlers through LinkedSpec::get_plugin');
+    like($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('get_freqency_detailed_fname'\)->/, 'stan_omap2430c_backend plugin now resolves repeated filename helpers through LinkedSpec::get_plugin');
+    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
+    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
     like($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin now loads LinkedSpec explicitly before using get_plugin');
     like($skew_plugin, qr/use LinkedSpec;/, 'skew plugin now loads LinkedSpec explicitly before using get_plugin');
-    unlike($qc_summary_plugin . $skew_plugin, qr/PPlugin->get \('/, 'migrated small repo-owned plugin lookup callers avoid direct PPlugin->get(...) use');
+    my @direct_pplugin_lookup_hits;
+    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
+        my $source = slurp($plugin_file);
+        push @direct_pplugin_lookup_hits, basename($plugin_file)
+            if $source =~ /\bPPlugin->get\s*\(/;
+    }
+    is_deeply(\@direct_pplugin_lookup_hits, [], 'repo-owned plugin files avoid direct PPlugin->get(...) lookups outside the compatibility bridge');
 };
 subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
     plan tests => 8;

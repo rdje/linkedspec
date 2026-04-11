@@ -1,11 +1,12 @@
 setup_hold_tmax_tmin {
 my ($conf, $maxcheck, $mincheck) = @_;
+ use LinkedSpec;
 
  my @iomodes = sort {$a cmp $b} keys %{$conf->{iomode}};
  my @corners = sort {$b <=> $a} keys %{$conf->{corner}};
  my @modes   = sort {$a <=> $b} keys %{$conf->{mode}};
 
- HUtils::Recurse($conf->{DxCy}, [PPlugin->get ('DxCy'), $maxcheck, $mincheck, \@iomodes, \@corners, \@modes, my $crail = {}, $conf]);
+ HUtils::Recurse($conf->{DxCy}, [LinkedSpec::get_plugin('DxCy'), $maxcheck, $mincheck, \@iomodes, \@corners, \@modes, my $crail = {}, $conf]);
 
  open(SHTT, ">$conf->{_workdir}/shtm_SUMMARY.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_workdir}/shtm_SUMMARY.lof',";
  foreach my $cpath (sort {$a cmp $b} keys %{$crail->{pathtype}}) {
@@ -43,10 +44,11 @@ my ($conf, $maxcheck, $mincheck) = @_;
 
 DxCy {
 my ($info, $dxcy, $maxcheck, $mincheck, $iomodes, $corners, $modes, $crail, $conf) = @_;
+ use LinkedSpec;
 
  my ($path_type, $sens, $port) = @$info; 
 
- $dxcy = PPlugin->get ($dxcy);
+ $dxcy = LinkedSpec::get_plugin($dxcy);
 
  my $callnum = $$crail{callnum} || 0;
 

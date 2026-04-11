@@ -1,1 +1,1 @@
-plugin {PPlugin->get($_[-1]) // sub {}}
+plugin {use LinkedSpec; LinkedSpec::get_plugin($_[-1]) // sub {}}
