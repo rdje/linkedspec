@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Package: Plugin::HTTP
-# Purpose: Package-backed owner for lightweight URL-building behavior being
+# Purpose: Package-backed owner for lightweight HTTP/file-link behavior being
 #          migrated out of legacy `.plg` files.
 #------------------------------------------------------------------------------
 package Plugin::HTTP;
@@ -63,6 +63,36 @@ sub set_http_hostport : lvalue {
 #------------------------------------------------------------------------------
 sub set_http_localhost : lvalue {
  set_http_hostport(undef, $_[0])
+}
+
+#------------------------------------------------------------------------------
+# Function: print_file_links_for_conf
+# Purpose : Preserve the historical `http` plugin action as an explicit package
+#           function: configure CGI/http state, then print signed links for
+#           existing files listed in the supplied action config.
+# Args    : ($conf_hashref) with optional `_host`, `_port`, and `_argv`
+# Returns : undef after writing the historical link listing to STDOUT
+#------------------------------------------------------------------------------
+sub print_file_links_for_conf {
+ my ($conf) = @_;
+ $conf //= {};
+
+ require Global;
+ require HUtils;
+ require PathSearch;
+ require Sys::Hostname;
+
+ Global->set('cgi') = HUtils::Conf(PathSearch->go('cgi'));
+ set_http_hostport(($conf->{_host} || Sys::Hostname::hostname()) . Global->http_hostail, $conf->{_port});
+
+ print "\n";
+ foreach my $path (@{$conf->{_argv} || []}) {
+  next unless -f $path;
+  print " ", httplink($path), "\n";
+ }
+ print "\n";
+
+ return
 }
 
 1;

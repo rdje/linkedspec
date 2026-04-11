@@ -4002,10 +4002,10 @@ PERL
     unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
 };
 subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 31;
+    plan tests => 24;
 
     my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
-    my $http_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
+    my $http_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'http.plg');
     my $lighttpd_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
     my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
     my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
@@ -4015,7 +4015,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     my $unqualified_httplink = qr/(?:^|[^\w:])httplink\s*\(/;
 
     ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
-    ok(defined($http_plugin_plg) && length($http_plugin_plg), 'http.plg legacy action source is available');
+    ok(!-e $http_plugin_plg, 'http.plg is removed now that Plugin::HTTP owns the legacy file-link action directly');
     ok(defined($lighttpd_plugin_plg) && length($lighttpd_plugin_plg), 'lighttpd.plg legacy action source is available');
     ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
     ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
@@ -4024,14 +4024,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     like($http_plugin_pm, qr/sub httplink\b/, 'package-backed http plugin owner defines httplink');
     like($http_plugin_pm, qr/sub set_http_hostport\b/, 'package-backed http plugin owner defines set_http_hostport');
     like($http_plugin_pm, qr/sub set_http_localhost\b/, 'package-backed http plugin owner defines set_http_localhost');
-    like($http_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'http.plg legacy http action now sets hostport through the package-backed owner');
-    like($http_plugin_plg, qr/Plugin::HTTP::httplink \(\$_\)/, 'http.plg legacy http action now builds links through the package-backed owner');
-    unlike($http_plugin_plg, qr/^httplink\s*\{/m, 'http.plg no longer registers a thin httplink compatibility helper');
-    unlike($http_plugin_plg, $unqualified_set_http_hostport, 'http.plg no longer calls set_http_hostport through an unqualified plugin helper');
-    unlike($http_plugin_plg, $unqualified_httplink, 'http.plg no longer calls httplink through an unqualified plugin helper');
-    unlike($http_plugin_plg, qr/Digest::MD5::md5_hex/, 'http.plg no longer carries the inline signed URL implementation');
-    unlike($http_plugin_plg, qr/File::Spec->rel2abs/, 'http.plg no longer carries the inline absolute-path conversion logic');
-    unlike($http_plugin_plg, qr/http:\/\/".Global->http_hostport/, 'http.plg no longer owns the inline final URL concatenation logic');
+    like($http_plugin_pm, qr/sub print_file_links_for_conf\b/, 'package-backed http plugin owner defines the former http action as print_file_links_for_conf');
     unlike($lighttpd_plugin_plg, qr/^set_http_hostport\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_hostport compatibility helper');
     unlike($lighttpd_plugin_plg, qr/^set_http_localhost\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_localhost compatibility helper');
     unlike($lighttpd_plugin_plg, qr/Global->set \('http_hostport'\)/, 'lighttpd.plg no longer carries the inline http_hostport assignment body');
@@ -4113,21 +4106,72 @@ PERL
     like($out, qr/__HOSTPORT2__=stubhost\.example\.test:4321/, 'set_http_localhost writes the composed host:port into Global state');
     unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http hostport-setter subprocess stays clear of legacy plugin runtime issues');
 };
+subtest 'http_package_owner_preserves_legacy_file_link_action_contract' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{'Global.pm'} = __FILE__;
+    $INC{'HUtils.pm'} = __FILE__;
+    $INC{'PathSearch.pm'} = __FILE__;
+
+    package Global;
+    my %STORE = (
+        md5_encode => 'pepper',
+        http_hostail => '.example.test',
+        http_default_port => 8080,
+    );
+    sub set : lvalue {
+        my ($class, $slot, $key) = @_;
+        defined($key) ? $STORE{$slot}{$key} : $STORE{$slot};
+    }
+    sub md5_encode { return $STORE{md5_encode} }
+    sub http_hostport { return $STORE{http_hostport} }
+    sub http_hostail { return $STORE{http_hostail} }
+    sub http_default_port { return $STORE{http_default_port} }
+
+    package HUtils;
+    sub Conf { return { sepc => 'salt' } }
+
+    package PathSearch;
+    sub go {
+        my ($class, $name) = @_;
+        print "__PATHSEARCH__=$name\n";
+        return 'cgi.conf';
+    }
+}
+require File::Temp;
+require Plugin::HTTP;
+require Sys::Hostname;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my ($fh, $file) = File::Temp::tempfile(UNLINK => 1);
+print {$fh} "demo";
+close($fh);
+{
+ no warnings 'redefine';
+ local *Sys::Hostname::hostname = sub { return 'stubhost' };
+ Plugin::HTTP::print_file_links_for_conf({ _port => 4242, _argv => [$file, "$file.missing"] });
+}
+print "__HOSTPORT__=" . Global->set('http_hostport') . "\n";
+PERL
+
+    is($exit_code, 0, 'http file-link action subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'http file-link action keeps PPlugin unloaded');
+    like($out, qr/__PATHSEARCH__=cgi/, 'http file-link action still resolves the cgi config through PathSearch');
+    like($out, qr/__HOSTPORT__=stubhost\.example\.test:4242/, 'http file-link action preserves historical host:port setup');
+    like($out, qr/http:\/\/stubhost\.example\.test:4242\/cgi-bin\/getfile\.cgi\?file=.*&id=[0-9a-f]{32}/, 'http file-link action prints one signed getfile.cgi URL');
+    is(scalar(() = $out =~ /\/cgi-bin\/getfile\.cgi\?/g), 1, 'http file-link action skips missing argv paths');
+    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http file-link action subprocess stays clear of legacy plugin runtime issues');
+};
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 12;
+    plan tests => 9;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
 
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'), 'cgi.plg is no longer part of the legacy pplugin corpus after package-owner migration');
-
-    my $http_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
-    my $http_ast = eval { $parser->(\$http_input) };
-    ok(!$@, 'http plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
-    ok(defined($http_ast) && ref($http_ast) eq 'HASH', 'http plugin still returns a hash AST under pplugin');
-    is(ref($http_ast->{http}), 'CODE', 'http plugin still exposes http as a coderef');
-    ok(!exists $http_ast->{httplink}, 'http plugin no longer exposes the package-backed httplink helper as a legacy coderef');
+    ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'), 'http.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 
     my $lighttpd_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
     my $lighttpd_ast = eval { $parser->(\$lighttpd_input) };

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move http action into package owner
+
+- moved the historical `http` file-link action into `Plugin::HTTP::print_file_links_for_conf(...)`, keeping the old CGI config lookup, host/port setup, signed `getfile.cgi` URL generation, and missing-file skip behavior under a normal package owner,
+- deleted `plugin/http.plg` now that no repo-owned caller still needs `http` as a legacy `.plg` registration name,
+- updated regression coverage so `Plugin::HTTP` owns the file-link action contract directly and the remaining `pplugin` corpus no longer expects `http.plg` to exist.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/HTTP.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'http.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: remove pure package-backed helper wrappers
 
 - deleted `plugin/string.plg` now that `Plugin::String::var_subst(...)` / `var_subst_test(...)` own all repo-owned string-helper usage directly,
