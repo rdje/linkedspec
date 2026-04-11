@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move prompt helper into package owner
+
+- moved the historical `yes_no` helper out of `plugin/yesno.plg` into `Plugin::Prompt::yes_no(...)`,
+- migrated `plugin/fxenv_helper.plg` to require `Plugin::Prompt` and call the package owner directly instead of depending on a bare legacy helper action,
+- deleted `plugin/yesno.plg` now that no repo-owned caller still needs `yes_no` as a legacy `.plg` registration name,
+- fixed the historical no-branch array-callback typo while preserving the empty-answer-defaults-to-yes behavior.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/Prompt.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/fxenv_helper.plg`
+  - `rg --files -g 'yesno.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move VHDL constant helpers into package owner
 
 - moved the historical `vhdl_constant_value_eval` and `hvalue_substitute` helper behavior out of `plugin/vhdconst_eval.plg` into `Plugin::VHDLConst::evaluate_constant_values(...)` and `Plugin::VHDLConst::substitute_hash_values(...)`,

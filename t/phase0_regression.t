@@ -4070,6 +4070,65 @@ PERL
         ok(!$@ && defined($ast) && ref($ast) eq 'HASH', 'VHDLConst caller plugin still parses under pplugin after wrapper removal') or diag(normalize_error($@));
     }
 };
+subtest 'prompt_yes_no_helper_moves_to_package_owner' => sub {
+    plan tests => 20;
+
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
+    my $yesno_plugin_path = File::Spec->catfile($plugin_dir, 'yesno.plg');
+    my $prompt_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'Prompt.pm'));
+    my $fxenv_helper_plugin = slurp(File::Spec->catfile($plugin_dir, 'fxenv_helper.plg'));
+
+    ok(!-e $yesno_plugin_path, 'yesno.plg wrapper is removed after callers moved to Plugin::Prompt directly');
+    ok(defined($prompt_pm) && length($prompt_pm), 'Plugin::Prompt package owner source is available');
+    like($prompt_pm, qr/package Plugin::Prompt;/, 'Plugin::Prompt declares the expected package');
+    like($prompt_pm, qr/sub yes_no\b/, 'Plugin::Prompt owns the interactive yes/no helper');
+    like($prompt_pm, qr/sub _invoke_response_callback\b/, 'Plugin::Prompt owns callback dispatch instead of preserving inline branch duplication');
+
+    ok(defined($fxenv_helper_plugin) && length($fxenv_helper_plugin), 'fxenv_helper.plg source is available for Prompt migration inspection');
+    like($fxenv_helper_plugin, qr/require Plugin::Prompt;/, 'fxenv helper plugin loads the package-backed Prompt owner explicitly');
+    like($fxenv_helper_plugin, qr/Plugin::Prompt::yes_no\s*\(/, 'fxenv helper plugin calls Plugin::Prompt directly for yes/no prompts');
+    unlike($fxenv_helper_plugin, qr/(?<!::)\byes_no\s*\(/, 'fxenv helper plugin no longer depends on the legacy bare yes_no plugin helper');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require Plugin::Prompt;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+{
+ open my $stdin, '<', \"\n" or die $!;
+ local *STDIN = $stdin;
+ my $yes_count = 0;
+ my $yes_ret = Plugin::Prompt::yes_no('Continue?', sub { $yes_count++; print "__YES_CALLBACK__\n" });
+ print "__YES_RET__=$yes_ret\n";
+ print "__YES_COUNT__=$yes_count\n";
+}
+{
+ open my $stdin, '<', \"n\n" or die $!;
+ local *STDIN = $stdin;
+ my $no_ret = Plugin::Prompt::yes_no('Stop?', undef, [sub { print "__NO_ARRAY__=@_\n" }, qw(alpha beta)]);
+ print "__NO_RET__=$no_ret\n";
+}
+{
+ open my $stdin, '<', \"";
+ local *STDIN = $stdin;
+ my $eof_ret = Plugin::Prompt::yes_no('EOF?');
+ print defined($eof_ret) ? "__EOF_DEFINED__\n" : "__EOF_UNDEF__\n";
+}
+PERL
+
+    is($exit_code, 0, 'Prompt package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the Prompt package owner keeps PPlugin unloaded');
+    like($out, qr/__YES_CALLBACK__/, 'Prompt package owner preserves default-empty-answer yes callback execution');
+    like($out, qr/__YES_RET__=1/, 'Prompt package owner returns true for yes answers');
+    like($out, qr/__YES_COUNT__=1/, 'Prompt package owner invokes the yes callback exactly once');
+    like($out, qr/__NO_ARRAY__=alpha beta/, 'Prompt package owner supports no-branch ARRAY callbacks correctly');
+    like($out, qr/__NO_RET__=0/, 'Prompt package owner returns false for no answers');
+    like($out, qr/__EOF_UNDEF__/, 'Prompt package owner returns undef on EOF instead of looping forever');
+    unlike($err, qr/PPlugin|Can't locate Plugin\/Prompt\.pm/, 'Prompt package-owner subprocess stays clear of legacy plugin runtime issues');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Prompt-owner migrated plugin smoke');
+    my $fxenv_ast = eval { $parser->(\$fxenv_helper_plugin) };
+    ok(!$@ && defined($fxenv_ast) && ref($fxenv_ast) eq 'HASH', 'fxenv helper plugin still parses under pplugin after yesno wrapper removal') or diag(normalize_error($@));
+};
 subtest 'string_plugin_logic_moves_into_package_owner' => sub {
     plan tests => 10;
 

@@ -166,14 +166,15 @@ It is still important because:
 - plugin compatibility remains publicly visible in the current facade,
 - regression checks still prove legacy plugin discovery and parsing behavior where needed,
 - shipped `.plg` lookup callers now go through `LinkedSpec::get_plugin(...)` instead of direct `PPlugin->get(...)`, so even legacy inputs route through the explicit transition bridge,
-- extracted package owners such as `Plugin::String`, `Plugin::CGI`, `Plugin::GenericFilter`, `Plugin::MSOffice`, and `Plugin::VHDLConst` now carry real behavior that used to live in `.plg` files,
-- extracted wrappers are not permanent by default; `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, and `plugin/vhdconst_eval.plg` have been removed now that their package owners handle all repo-owned usage directly,
+- extracted package owners such as `Plugin::String`, `Plugin::CGI`, `Plugin::GenericFilter`, `Plugin::MSOffice`, `Plugin::VHDLConst`, and `Plugin::Prompt` now carry real behavior that used to live in `.plg` files,
+- extracted wrappers are not permanent by default; `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, `plugin/vhdconst_eval.plg`, and `plugin/yesno.plg` have been removed now that their package owners handle all repo-owned usage directly,
 - package-backed helper subdefs are removable even when their containing legacy action file remains, and real actions can move once a package owner can carry the behavior; `Plugin::HTTP::print_file_links_for_conf(...)`, `Plugin::HTTP::run_lighttpd_for_conf(...)`, and `Plugin::HTTP::run_httpd_for_conf(...)` now own the former `http` / `lighttpd` / `httpd` actions, so `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` are gone,
 - parser lookup is no longer treated as a plugin action inside the shipped project; repo-owned callers use `LinkedSpec::get_parser(...)` directly, and the old `plugin/spec.plg` `_get_parser` shim is gone,
 - generic dynamic callback lookup is no longer hidden behind the old `plugin/plugin.plg` action either; the remaining repo-owned caller in `fsmgen.plg` now uses `LinkedSpec::get_plugin(...)` directly,
 - small utility wrappers are removed when a normal package owner is clearer; the old `plugin/table.plg` wrapper is gone, remaining callers use `Table::list2table(...)` directly, and the unused `table_2ss` action is not preserved as a legacy registration,
 - Office automation helpers follow the same rule; the old `plugin/msoffice.plg` wrapper is gone, and `spyglass_waive` calls `Plugin::MSOffice::excel_start(...)` directly,
 - VHDL constant helpers follow the same rule; the old `plugin/vhdconst_eval.plg` wrapper is gone, and MBIST/register-test callers use `Plugin::VHDLConst` directly,
+- interactive prompt helpers follow the same rule; the old `plugin/yesno.plg` wrapper is gone, and FX environment comparison code uses `Plugin::Prompt::yes_no(...)` directly,
 - the migration plan needs real legacy inputs so compatibility-removal decisions are grounded.
 
 Do not read `plugin/` as a recommendation to build new LinkedSpec functionality around dynamic `.plg` loading. The current architectural direction is to keep LinkedSpec focused on `.spec` parsing, runtime execution, ActionIR helper semantics, and diagnostics.
