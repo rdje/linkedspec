@@ -1,22 +1,18 @@
 http {
  use Sys::Hostname;
+ use Plugin::HTTP;
 
  Global->set ('cgi') = HUtils::Conf(PathSearch->go('cgi'));
 
- set_http_hostport (($_[0]{_host} || hostname).Global->http_hostail, $_[0]{_port});
+ Plugin::HTTP::set_http_hostport (($_[0]{_host} || hostname).Global->http_hostail, $_[0]{_port});
 
  print "\n";
 
  foreach (@{$_[0]{_argv}}) {
   next unless -f;
 
-  print " ", httplink ($_), "\n";
+  print " ", Plugin::HTTP::httplink ($_), "\n";
  }
 
  print "\n";
-}
-
-httplink {
- use Plugin::HTTP;
- Plugin::HTTP::httplink(@_);
 }

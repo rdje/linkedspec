@@ -4011,29 +4011,49 @@ PERL
     unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
 };
 subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 17;
+    plan tests => 31;
 
     my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
     my $http_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'));
     my $lighttpd_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
+    my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
+    my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
+    my $tree_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tree.plg'));
+    my $unqualified_set_http_hostport = qr/(?:^|[^\w:])set_http_hostport\s*\(/;
+    my $unqualified_set_http_localhost = qr/(?:^|[^\w:])set_http_localhost\s*\(/;
+    my $unqualified_httplink = qr/(?:^|[^\w:])httplink\s*\(/;
 
     ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
-    ok(defined($http_plugin_plg) && length($http_plugin_plg), 'http.plg compatibility wrapper source is available');
-    ok(defined($lighttpd_plugin_plg) && length($lighttpd_plugin_plg), 'lighttpd.plg compatibility wrapper source is available');
+    ok(defined($http_plugin_plg) && length($http_plugin_plg), 'http.plg legacy action source is available');
+    ok(defined($lighttpd_plugin_plg) && length($lighttpd_plugin_plg), 'lighttpd.plg legacy action source is available');
+    ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
+    ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
+    ok(defined($tree_plugin_plg) && length($tree_plugin_plg), 'tree.plg source is available for HTTP helper migration inspection');
     like($http_plugin_pm, qr/package Plugin::HTTP;/, 'package-backed http plugin owner declares the expected package');
     like($http_plugin_pm, qr/sub httplink\b/, 'package-backed http plugin owner defines httplink');
     like($http_plugin_pm, qr/sub set_http_hostport\b/, 'package-backed http plugin owner defines set_http_hostport');
     like($http_plugin_pm, qr/sub set_http_localhost\b/, 'package-backed http plugin owner defines set_http_localhost');
-    like($http_plugin_plg, qr/use Plugin::HTTP;/, 'http.plg now loads the package-backed HTTP owner');
-    like($http_plugin_plg, qr/Plugin::HTTP::httplink\(\@_\);/, 'http.plg now delegates httplink to the package-backed owner');
+    like($http_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'http.plg legacy http action now sets hostport through the package-backed owner');
+    like($http_plugin_plg, qr/Plugin::HTTP::httplink \(\$_\)/, 'http.plg legacy http action now builds links through the package-backed owner');
+    unlike($http_plugin_plg, qr/^httplink\s*\{/m, 'http.plg no longer registers a thin httplink compatibility helper');
+    unlike($http_plugin_plg, $unqualified_set_http_hostport, 'http.plg no longer calls set_http_hostport through an unqualified plugin helper');
+    unlike($http_plugin_plg, $unqualified_httplink, 'http.plg no longer calls httplink through an unqualified plugin helper');
     unlike($http_plugin_plg, qr/Digest::MD5::md5_hex/, 'http.plg no longer carries the inline signed URL implementation');
     unlike($http_plugin_plg, qr/File::Spec->rel2abs/, 'http.plg no longer carries the inline absolute-path conversion logic');
     unlike($http_plugin_plg, qr/http:\/\/".Global->http_hostport/, 'http.plg no longer owns the inline final URL concatenation logic');
-    like($lighttpd_plugin_plg, qr/Plugin::HTTP::set_http_hostport\(\@_\);/, 'lighttpd.plg now delegates set_http_hostport to the package-backed HTTP owner');
-    like($lighttpd_plugin_plg, qr/Plugin::HTTP::set_http_localhost\(\@_\);/, 'lighttpd.plg now delegates set_http_localhost to the package-backed HTTP owner');
+    unlike($lighttpd_plugin_plg, qr/^set_http_hostport\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_hostport compatibility helper');
+    unlike($lighttpd_plugin_plg, qr/^set_http_localhost\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_localhost compatibility helper');
     unlike($lighttpd_plugin_plg, qr/Global->set \('http_hostport'\)/, 'lighttpd.plg no longer carries the inline http_hostport assignment body');
     unlike($lighttpd_plugin_plg, qr/set_http_hostport \(undef, \$_\[0\]\)/, 'lighttpd.plg no longer carries the inline localhost wrapper body');
     unlike($lighttpd_plugin_plg, qr/Sys::Hostname::hostname\.Global->http_hostail/, 'lighttpd.plg no longer carries the inline hostname composition logic');
+    like($rtl_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'rtl.plg now sets hostport through the package-backed HTTP owner');
+    like($rtl_plugin_plg, qr/Plugin::HTTP::httplink\(/, 'rtl.plg now builds links through the package-backed HTTP owner');
+    unlike($rtl_plugin_plg, $unqualified_set_http_hostport, 'rtl.plg no longer calls set_http_hostport through an unqualified plugin helper');
+    unlike($rtl_plugin_plg, $unqualified_httplink, 'rtl.plg no longer calls httplink through an unqualified plugin helper');
+    like($stan_backend_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(\$conf->\{_host\}, \$conf->\{_port\}\)/, 'stan_backend.plg now sets hostport through the package-backed HTTP owner');
+    unlike($stan_backend_plugin_plg, $unqualified_set_http_hostport, 'stan_backend.plg no longer calls set_http_hostport through an unqualified plugin helper');
+    like($tree_plugin_plg, qr/Plugin::HTTP::set_http_localhost \(\$_\[0\]\{_port\}\)/, 'tree.plg now sets localhost through the package-backed HTTP owner');
+    unlike($tree_plugin_plg, $unqualified_set_http_localhost, 'tree.plg no longer calls set_http_localhost through an unqualified plugin helper');
 };
 subtest 'http_package_owner_avoids_pplugin_and_preserves_httplink_contract' => sub {
     plan tests => 5;
@@ -4103,7 +4123,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http hostport-setter subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
@@ -4122,14 +4142,15 @@ subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin
     ok(!$@, 'http plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
     ok(defined($http_ast) && ref($http_ast) eq 'HASH', 'http plugin still returns a hash AST under pplugin');
     is(ref($http_ast->{http}), 'CODE', 'http plugin still exposes http as a coderef');
-    is(ref($http_ast->{httplink}), 'CODE', 'http plugin still exposes httplink as a coderef');
+    ok(!exists $http_ast->{httplink}, 'http plugin no longer exposes the package-backed httplink helper as a legacy coderef');
 
     my $lighttpd_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
     my $lighttpd_ast = eval { $parser->(\$lighttpd_input) };
     ok(!$@, 'lighttpd plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
     ok(defined($lighttpd_ast) && ref($lighttpd_ast) eq 'HASH', 'lighttpd plugin still returns a hash AST under pplugin');
-    is(ref($lighttpd_ast->{set_http_hostport}), 'CODE', 'lighttpd plugin still exposes set_http_hostport as a coderef');
-    is(ref($lighttpd_ast->{set_http_localhost}), 'CODE', 'lighttpd plugin still exposes set_http_localhost as a coderef');
+    is(ref($lighttpd_ast->{lighttpd}), 'CODE', 'lighttpd plugin still exposes lighttpd as a coderef');
+    ok(!exists $lighttpd_ast->{set_http_hostport}, 'lighttpd plugin no longer exposes the package-backed set_http_hostport helper as a legacy coderef');
+    ok(!exists $lighttpd_ast->{set_http_localhost}, 'lighttpd plugin no longer exposes the package-backed set_http_localhost helper as a legacy coderef');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;

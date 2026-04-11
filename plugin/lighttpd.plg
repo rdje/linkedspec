@@ -11,13 +11,3 @@ lighttpd {
  print $fh $lighttpd_conf;
  system ("lighttpd -f ".$filename);
 }
-
-
-set_http_hostport  {
- use Plugin::HTTP;
- Plugin::HTTP::set_http_hostport(@_);
-}
-set_http_localhost {
- use Plugin::HTTP;
- Plugin::HTTP::set_http_localhost(@_);
-}

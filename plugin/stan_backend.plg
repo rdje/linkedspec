@@ -188,9 +188,10 @@ my ($conf) = @_;
 
 stan_backend_start {
 my ($conf) = @_;
+ use Plugin::HTTP;
  
  print "($conf->{_program})($conf->{_action}) -I- Launching '$conf->{_action}' processing..\n"; 
- set_http_hostport ($conf->{_host}, $conf->{_port});
+ Plugin::HTTP::set_http_hostport ($conf->{_host}, $conf->{_port});
  Table2SS::UConf(PathSearch->go('stan_backend_table2ss'));
 }
 
@@ -273,4 +274,3 @@ my ($conf) = @_;
 
  Table2SS::Close($wbid)
 }
-

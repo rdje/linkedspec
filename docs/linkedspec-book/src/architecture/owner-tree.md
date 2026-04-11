@@ -375,6 +375,8 @@ The `plugin/genericfilter.plg` file still exists, but its role is compatibility 
 
 Not every extracted package owner should keep such a wrapper. `Plugin::CGI::file_list_path2http(...)` now has no repo-owned legacy plugin caller left, so the old `plugin/cgi.plg` registration file has been removed. That is the healthier destination: normal package owner first, temporary `.plg` bridge only when a concrete remaining caller still needs it, then deletion.
 
+The HTTP helpers show the same distinction at subdef granularity. `plugin/http.plg` and `plugin/lighttpd.plg` still exist because they contain real historical actions, but they no longer register `httplink`, `set_http_hostport`, or `set_http_localhost` as thin helper names. Repo-owned `.plg` callers now call `Plugin::HTTP` directly for those helper behaviors, leaving only the real legacy actions behind.
+
 The current direction is not to make dynamic plugin loading the identity of LinkedSpec. The healthier core story is:
 
 ```text

@@ -169,8 +169,9 @@ my $cache = private_state ('retrieve_vhdlcompile_db');
 
 entity_2ss {# Reads in a vhdl_compile DB
  my $mlist = retrieve_vhdlcompile_db ($_[0]{_argv}); # [map {say "(entity_2ss) -I- Loading '$_'..."; Storable::retrieve($_)} @{$_[0]{_argv}}];
+ use Plugin::HTTP;
 
- set_http_hostport ($_[0]{_host}, $_[0]{_port});
+ Plugin::HTTP::set_http_hostport ($_[0]{_host}, $_[0]{_port});
 
  my $ea_2d = dunit_2data($mlist);
  __vhd_2html($ea_2d);
@@ -209,10 +210,11 @@ entity_2ss {# Reads in a vhdl_compile DB
 
 mversion_2ss {# Reads in a vhdl_compile DB
  use POSIX qw(strftime);
+ use Plugin::HTTP;
 
  my $mlist = retrieve_vhdlcompile_db ($_[0]{_argv}); # Storable::retrieve($_[0]{_argv}[0]);
 
- set_http_hostport ($_[0]{_host}, $_[0]{_port});
+ Plugin::HTTP::set_http_hostport ($_[0]{_host}, $_[0]{_port});
  print "(mversion_2ss) -I- Extracting design units info...\n";
 
  my $ea_2d = dunit_2data($mlist);
@@ -254,8 +256,9 @@ mversion_2ss {# Reads in a vhdl_compile DB
 
 xdep_2ss {# Reads in a vhdl_compile DB
  my $mlist = retrieve_vhdlcompile_db ($_[0]{_argv}); # [map {say "(xdep_2ss) -I- Loading '$_'..."; Storable::retrieve($_)} @{$_[0]{_argv}}];
+ use Plugin::HTTP;
 
- set_http_hostport ($_[0]{_host}, $_[0]{_port});
+ Plugin::HTTP::set_http_hostport ($_[0]{_host}, $_[0]{_port});
  print "(xdep_2ss) -I- Extracting design units info...\n";
  my $ea_2d = dunit_2data($mlist);
 
@@ -344,8 +347,9 @@ xdep_2ss {# Reads in a vhdl_compile DB
 
 xinstance_2ss {# Reads in a vhdl_compile DB
  my $mlist = retrieve_vhdlcompile_db ($_[0]{_argv}); #Storable::retrieve($_[0]{_argv}[0]);
+ use Plugin::HTTP;
 
- set_http_hostport ($_[0]{_host}, $_[0]{_port});
+ Plugin::HTTP::set_http_hostport ($_[0]{_host}, $_[0]{_port});
  print "(xinstance_2ss) -I- Extracting design units info...\n";
 
  __vhd_2html(my $ea_2d = dunit_2data($mlist));
@@ -415,6 +419,7 @@ xinstance_2ss {# Reads in a vhdl_compile DB
 #-----------------------------------------------------------------------
 __vhd_2html {
 my ($ea_2d) = @_;
+ use Plugin::HTTP;
 
  mkdir 'HTML';
  foreach $fi (keys %{avv_get($ea_2d, 'file')}) {
@@ -443,7 +448,7 @@ my ($ea_2d) = @_;
      if ($fi ne $laf) {
       my $re   = qr#(entity</font></b>\s*)$ce(\s+)#i;
       
-      my $http = httplink(avv_get($ea_2d, 'file', $laf, 'html'));
+      my $http = Plugin::HTTP::httplink(avv_get($ea_2d, 'file', $laf, 'html'));
 
          $la   =~ s/:.+//o;
          $html =~ s{$re}{$1<a class="has_link" title="$la" href="$http">$ce</a>$2};
@@ -468,7 +473,7 @@ my ($ea_2d) = @_;
       my $p_f   = avv_get($ea_2d, 'package', lc $package, 'file');
 
       if ($p_f) {
-       my $http  = httplink(avv_get($ea_2d, 'file', $p_f, 'html'));
+       my $http  = Plugin::HTTP::httplink(avv_get($ea_2d, 'file', $p_f, 'html'));
 
         $html     =~ s{$re}{$1<A class="has_link" href="$http">$package</A>}g;
       } else {
@@ -489,7 +494,7 @@ my ($ea_2d) = @_;
 
      my $latest_a = avv_get($ea_2d, 'entity', $cis->[2], 'latest_architecture');
      if ($latest_a) {
-      my $http     = httplink(avv_get($ea_2d, 'file', avv_get($ea_2d, 'architecture', $latest_a, 'file'), 'html'));
+      my $http     = Plugin::HTTP::httplink(avv_get($ea_2d, 'file', avv_get($ea_2d, 'architecture', $latest_a, 'file'), 'html'));
 
       $latest_a =~ s/:.+//o;
       $html     =~ s{$re}{$+{instance_name}$+{separator}<A class="has_link" title="$latest_a" href="$http">$+{component_name}</A>}g;
@@ -719,4 +724,3 @@ rtldb_2portinfo {# Reads in a vhdl_compile DB
 
 drive_instances {my ($cr, $module) = @_;
 }
-

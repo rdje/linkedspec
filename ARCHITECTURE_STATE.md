@@ -32,6 +32,7 @@ This document is the current high-level technical reading of the project shape. 
 - `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, and successful `$@` preservation no longer require bridge-local eval/restore branches.
 - `Plugin::GenericFilter` now owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions that used to live entirely in `plugin/genericfilter.plg`, so `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` no longer build `genericfilter_*` names and bounce through `LinkedSpec::run_plugin(...)` / `get_plugin(...)`.
 - `plugin/cgi.plg` is now removed after extraction: `Plugin::CGI::file_list_path2http(...)` owns that behavior directly, so extracted `.pm` owners no longer imply a permanent `.plg` compatibility shadow.
+- `Plugin::HTTP` is following the same boundary at the subdef level: repo-owned `.plg` actions now call `Plugin::HTTP` directly for `httplink`, `set_http_hostport`, and `set_http_localhost`, so `plugin/http.plg` and `plugin/lighttpd.plg` keep only their real legacy `http` / `lighttpd` actions instead of registering those package-backed helpers as legacy plugin names.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
@@ -367,6 +368,8 @@ Current project direction does not treat that branch as a target architecture.
 - and leaves `plugin/genericfilter.plg` as a thin legacy registration wrapper only.
 
 `Plugin::CGI` is already one step further along that same path: `Plugin::CGI::file_list_path2http(...)` owns the behavior directly, and the old `plugin/cgi.plg` registration wrapper is gone. That is the preferred shape once no repo-owned code still needs a legacy plugin name.
+
+`Plugin::HTTP` now shows the same destination applied inside legacy action files rather than by deleting the whole file. `plugin/http.plg` still owns the real `http` action and `plugin/lighttpd.plg` still owns the real `lighttpd` action, but the package-backed helper registrations `httplink`, `set_http_hostport`, and `set_http_localhost` have been removed. Repo-owned `.plg` callers that need those helpers now call `Plugin::HTTP` explicitly.
 
 The current intended direction is:
 - keep deterministic named `.spec` resolution,

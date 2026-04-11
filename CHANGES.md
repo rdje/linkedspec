@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: retire package-backed HTTP helper registrations
+
+- migrated repo-owned `.plg` callers of `httplink(...)`, `set_http_hostport(...)`, and `set_http_localhost(...)` to call `Plugin::HTTP` directly instead of depending on helper names registered through the legacy `.plg` runtime,
+- removed the thin `httplink` helper registration from `plugin/http.plg` and the thin `set_http_hostport` / `set_http_localhost` helper registrations from `plugin/lighttpd.plg`, while preserving the real legacy `http` and `lighttpd` actions,
+- updated regression coverage to lock the new package-owner boundary and to prove the affected legacy `.plg` files still parse under `pplugin`.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/HTTP.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/http.plg`, `plugin/lighttpd.plg`, `plugin/rtl.plg`, `plugin/tree.plg`, and `plugin/stan_backend.plg`
+  - scan for remaining unqualified HTTP helper calls in touched `.plg` files
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: remove obsolete CGI plg wrapper
 
 - deleted `plugin/cgi.plg` now that `Plugin::CGI::file_list_path2http(...)` owns all repo-owned usage and no internal caller still needs the legacy `file_list_path2http` plugin registration name,

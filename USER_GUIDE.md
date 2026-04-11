@@ -1241,6 +1241,8 @@ The `GenericFilter` grouping helpers are now package-owned too. `Plugin::Generic
 
 That last clause is intentional. A `.pm` owner does not automatically require a permanent `.plg` shadow. `Plugin::CGI::file_list_path2http(...)` is the first extracted helper where the compatibility wrapper has now been removed completely: repo-owned code calls `Plugin::CGI` directly, and `plugin/cgi.plg` is no longer part of the shipped legacy plugin corpus. Use this as the direction for future extractions: keep `.plg` only while a real remaining legacy caller needs the old registration name.
 
+The same rule also applies inside mixed legacy files. `plugin/http.plg` still contains the real historical `http` action and `plugin/lighttpd.plg` still contains the real historical `lighttpd` action, but the package-backed helper names `httplink`, `set_http_hostport`, and `set_http_localhost` are no longer registered as legacy `.plg` helpers. Repo-owned `.plg` code now calls `Plugin::HTTP::httplink(...)`, `Plugin::HTTP::set_http_hostport(...)`, or `Plugin::HTTP::set_http_localhost(...)` directly when it needs that behavior.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`
