@@ -114,6 +114,23 @@ sub _build_plugin_registry {
 }
 
 #------------------------------------------------------------------------------
+# Function: _load_linkedspec_parser
+# Purpose : Lazy-load the `pplugin` parser through the shared owner-dispatch
+#           seam instead of carrying a local `require LinkedSpec` branch.
+# Args    : ()
+# Returns : parser coderef for `pplugin`
+#------------------------------------------------------------------------------
+sub _load_linkedspec_parser {
+ require LinkedSpec::OwnerDispatch;
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec',
+  'get_parser',
+  'pplugin',
+ )
+}
+
+#------------------------------------------------------------------------------
 # Function: _default_deps
 # Purpose : Build the default dependency callback map used by the legacy plugin
 #           registry loader.
@@ -122,11 +139,7 @@ sub _build_plugin_registry {
 #------------------------------------------------------------------------------
 sub _default_deps {
  return {
-  load_plugin_parser => sub {
-   my $ok = eval { require LinkedSpec; 1 };
-   die "(PPlugin::_default_deps) -E- unable to load LinkedSpec: $@" unless $ok;
-   return LinkedSpec::get_parser('pplugin')
-  },
+  load_plugin_parser => \&_load_linkedspec_parser,
   discover_plugin_files => sub { return [_legacy_plugin_files()] },
   build_plugin_registry => sub { return _build_plugin_registry(@_) },
  }

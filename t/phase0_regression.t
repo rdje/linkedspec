@@ -3443,10 +3443,11 @@ subtest 'pplugin_load_legacy_registry_uses_explicit_dependency_callbacks' => sub
     ok(ref($registry) eq 'HASH' && ref($registry->{synthetic}) eq 'CODE', 'PPlugin legacy registry loader preserves the injected registry payload');
 };
 subtest 'pplugin_default_registry_deps_load_through_explicit_owner_paths' => sub {
-    plan tests => 6;
+    plan tests => 11;
 
     require PPlugin;
 
+    my $pplugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'PPlugin.pm'));
     my $deps = PPlugin::_default_deps();
     my ($ok_run, $parser, $plugin_files, $registry, $err) = (0, undef, undef, undef, '');
 
@@ -3465,7 +3466,9 @@ subtest 'pplugin_default_registry_deps_load_through_explicit_owner_paths' => sub
             };
         };
 
+        $@ = "__SAVED_ERR__\n";
         $parser = $deps->{load_plugin_parser}->();
+        die "__PPLUGIN_SAVED_ERR_CLOBBERED__\n" unless $@ eq "__SAVED_ERR__\n";
         $plugin_files = $deps->{discover_plugin_files}->();
         $registry = $deps->{build_plugin_registry}->($parser, @$plugin_files);
         1;
@@ -3478,13 +3481,19 @@ subtest 'pplugin_default_registry_deps_load_through_explicit_owner_paths' => sub
     ok(ref($registry) eq 'HASH', 'PPlugin default registry deps preserve the registry-builder payload');
     is($registry->{parser_result}, 'parser:pplugin', 'PPlugin default parser-loader dep targets the pplugin spec explicitly');
     is_deeply($registry->{files}, ['001_first.plg', '002_second.plg'], 'PPlugin default registry-builder dep forwards discovered plugin files unchanged');
+    ok(defined($pplugin_pm) && length($pplugin_pm), 'PPlugin source is available for default-dep owner-dispatch inspection');
+    like($pplugin_pm, qr/sub _load_linkedspec_parser\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec',\s*'get_parser',\s*'pplugin',\s*\)/s, 'PPlugin default parser loader now dispatches through OwnerDispatch');
+    like($pplugin_pm, qr/load_plugin_parser => \\&_load_linkedspec_parser/, 'PPlugin default deps route parser loading through the named helper');
+    unlike($pplugin_pm, qr/eval\s*\{\s*require\s+LinkedSpec/, 'PPlugin default deps no longer carry a local eval-require LinkedSpec branch');
+    unlike($err, qr/__PPLUGIN_SAVED_ERR_CLOBBERED__/, 'PPlugin default parser loader preserves caller $@ on successful owner-dispatch lookup');
 };
 subtest 'pplugin_require_does_not_eagerly_load_linkedspec' => sub {
-    plan tests => 4;
+    plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require PPlugin;'
       . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_LOADED__\n" : "__LINKEDSPEC_NOT_LOADED__\n";'
+      . 'print exists($INC{"LinkedSpec/OwnerDispatch.pm"}) ? "__OWNERDISPATCH_LOADED__\n" : "__OWNERDISPATCH_NOT_LOADED__\n";'
       . 'print defined(&Cwd::abs_path) ? "__CWD_READY__\n" : "__CWD_MISSING__\n";'
       . 'print eval { File::Spec->catdir("a", "b"); 1 } ? "__FILESPEC_READY__\n" : "__FILESPEC_MISSING__\n";'
       . 'print defined(&File::Basename::fileparse) ? "__BASENAME_READY__\n" : "__BASENAME_MISSING__\n";'
@@ -3492,25 +3501,30 @@ subtest 'pplugin_require_does_not_eagerly_load_linkedspec' => sub {
 
     is($exit_code, 0, 'PPlugin require-only subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__LINKEDSPEC_NOT_LOADED__/, 'PPlugin require-only subprocess keeps LinkedSpec unloaded');
+    like($out, qr/__OWNERDISPATCH_NOT_LOADED__/, 'PPlugin require-only subprocess keeps OwnerDispatch unloaded');
     like($out, qr/__CWD_READY__\n__FILESPEC_READY__\n__BASENAME_READY__/, 'PPlugin require-only subprocess loads its direct core path modules explicitly');
     is($err, '', 'PPlugin require-only subprocess does not emit stderr');
 };
 subtest 'pplugin_default_parser_dep_lazy_loads_linkedspec' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require PPlugin;'
       . 'my $deps = PPlugin::_default_deps();'
       . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_EAGER__\n" : "__LINKEDSPEC_STILL_LAZY__\n";'
+      . 'print exists($INC{"LinkedSpec/OwnerDispatch.pm"}) ? "__OWNERDISPATCH_EAGER__\n" : "__OWNERDISPATCH_STILL_LAZY__\n";'
       . 'my $parser = $deps->{load_plugin_parser}->();'
       . 'print defined($parser) ? "__PARSER_DEFINED__\n" : "__PARSER_UNDEF__\n";'
       . 'print exists($INC{"LinkedSpec.pm"}) ? "__LINKEDSPEC_AFTER_CALLBACK__\n" : "__LINKEDSPEC_STILL_UNLOADED__\n";'
+      . 'print exists($INC{"LinkedSpec/OwnerDispatch.pm"}) ? "__OWNERDISPATCH_AFTER_CALLBACK__\n" : "__OWNERDISPATCH_STILL_UNLOADED__\n";'
     );
 
     is($exit_code, 0, 'PPlugin default parser-dep subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__LINKEDSPEC_STILL_LAZY__/, 'PPlugin default deps do not eager-load LinkedSpec when built');
+    like($out, qr/__OWNERDISPATCH_STILL_LAZY__/, 'PPlugin default deps do not eager-load OwnerDispatch when built');
     like($out, qr/__PARSER_DEFINED__/, 'PPlugin default parser dep returns a parser callback when invoked');
     like($out, qr/__LINKEDSPEC_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads LinkedSpec only on callback execution');
+    like($out, qr/__OWNERDISPATCH_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads OwnerDispatch only on callback execution');
     is($err, '', 'PPlugin default parser-dep subprocess does not emit stderr');
 };
 subtest 'tablescript_http_exec_uses_plugin_http_directly' => sub {

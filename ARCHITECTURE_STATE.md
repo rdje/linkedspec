@@ -345,6 +345,7 @@ The current public facade still exposes a plugin/runtime branch, but the archite
 - parses `.plg` files through the `pplugin` parser,
 - caches discovered handlers,
 - executes them dynamically,
+- lazy-loads its default `pplugin` parser callback through `LinkedSpec::OwnerDispatch` rather than a local `require LinkedSpec` branch,
 - and still closes the remaining lazy compatibility cycle:
   - `LinkedSpec -> PluginBridge -> PPlugin -> LinkedSpec::get_parser('pplugin')`
 
