@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-11: `plugin/msoffice.plg` removed. Its only repo-owned caller, `spyglass_waive`, now requires `Plugin::MSOffice` and calls `Plugin::MSOffice::excel_start(...)` directly; the package owner keeps the active-Excel reuse behavior and lazy `Win32::OLE` boundary.
 - 2026-04-11: `plugin/table.plg` removed. The last repo-owned `list_2table(...)` callers now use `Table::list2table(...)` directly in `generic_fake_memory_module.plg`, `lte_digital_rf.plg`, and `spyglass.plg`; the old `table_2ss` wrapper had no repo-owned caller to preserve.
 - 2026-04-11: `plugin/plugin.plg` removed. Its only remaining repo-owned consumer, `plugin/fsmgen.plg::getop_plugin_list`, now calls `LinkedSpec::get_plugin($name) // sub {}` directly, preserving the old unresolved-name no-op fallback without keeping the generic `plugin(...)` shim.
 - 2026-04-11: `plugin/spec.plg` removed. It only provided the old `_get_parser` plugin shim, and all repo-owned parser lookup callers already use `LinkedSpec::get_parser(...)` directly. Future parser lookup work should stay on explicit `LinkedSpec::get_parser(...)` / `LinkedSpec::Get(...)` surfaces rather than reintroducing plugin-mediated parser lookup.

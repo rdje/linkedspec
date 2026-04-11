@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move MSOffice Excel helper into package owner
+
+- moved the historical `excel_start` helper out of `plugin/msoffice.plg` into `Plugin::MSOffice::excel_start(...)`, preserving the active-Excel reuse behavior and lazy `Win32::OLE` dependency boundary while preventing the helper's internal eval probes from leaking successful `$@` changes,
+- migrated `plugin/spyglass.plg::spyglass_waive` to require `Plugin::MSOffice` and call the package owner directly instead of depending on an unqualified helper action,
+- deleted `plugin/msoffice.plg` now that no repo-owned caller still needs `excel_start` as a legacy `.plg` registration name.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/MSOffice.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/spyglass.plg`
+  - `rg --files -g 'msoffice.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: retire table.plg wrapper
 
 - migrated the remaining repo-owned `list_2table(...)` callers in `plugin/generic_fake_memory_module.plg`, `plugin/lte_digital_rf.plg`, and `plugin/spyglass.plg` to call `Table::list2table(...)` directly,
