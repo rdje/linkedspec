@@ -3567,7 +3567,69 @@ PERL
     like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the Plugin::HTTP return payload');
     unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'TableScript http_exec resolves the package-backed HTTP owner');
 };
-subtest 'hutils_generic_filter_uses_run_plugin_explicit_api' => sub {
+subtest 'plugin_genericfilter_package_owner_groups_table_rows' => sub {
+    plan tests => 6;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require TableGrep;
+require Plugin::GenericFilter;
+no warnings 'redefine';
+local *TableGrep::IndexOf = sub {
+    my ($field, $maptable) = @_;
+    print "__INDEX__=$field/$maptable\n";
+    return 1;
+};
+my $ret = Plugin::GenericFilter::group_by(
+    {},
+    ['root'],
+    [
+        ['row0', 'A'],
+        ['row1', 'B'],
+        ['row2', 'A'],
+    ],
+    'fake_map',
+    ['field'],
+);
+print "__A_COUNT__=" . scalar(@{$ret->{A}}) . "\n";
+print "__B_COUNT__=" . scalar(@{$ret->{B}}) . "\n";
+my $clock_ret = Plugin::GenericFilter::group_by(
+    {},
+    ['root'],
+    [
+        ['row0', "CLK'"],
+        ['row1', 'CLK'],
+    ],
+    'fake_map',
+    ['field', { clock_aware => 1 }],
+);
+print "__CLK_COUNT__=" . scalar(@{$clock_ret->{CLK}}) . "\n";
+my $ok = eval { Plugin::GenericFilter::dispatch('missing_action', {}, [], [], 'fake_map', []); 1 };
+print "__UNSUPPORTED__=$@\n" unless $ok;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_LOADED__\n" : "__PPLUGIN_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'Plugin::GenericFilter subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INDEX__=field\/fake_map/, 'Plugin::GenericFilter group_by resolves the requested field through TableGrep');
+    like($out, qr/__A_COUNT__=2\n__B_COUNT__=1/, 'Plugin::GenericFilter group_by preserves field-value grouping');
+    like($out, qr/__CLK_COUNT__=2/, 'Plugin::GenericFilter group_by preserves clock-aware tick normalization');
+    like($out, qr/__UNSUPPORTED__=\(Plugin::GenericFilter::dispatch\) -E- Unsupported generic filter action 'missing_action',/, 'Plugin::GenericFilter rejects unknown action names explicitly');
+    like($out, qr/__PPLUGIN_UNLOADED__/, 'Plugin::GenericFilter does not load the legacy PPlugin runtime for package-owned grouping');
+};
+subtest 'genericfilter_bridge_callers_stay_on_package_owner' => sub {
+    plan tests => 6;
+
+    my $hutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'HUtils.pm'));
+    my $tablesort_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'TableSort.pm'));
+    my $genericfilter_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'genericfilter.plg'));
+
+    like($hutils_pm, qr/Plugin::GenericFilter::dispatch\(\$action, \@varargs\)/, 'HUtils GenericFilter calls the package owner dispatcher directly');
+    unlike($hutils_pm, qr/LinkedSpec::run_plugin\("genericfilter_\$action"/, 'HUtils GenericFilter no longer builds genericfilter plugin names for run_plugin');
+    like($tablesort_pm, qr/Plugin::GenericFilter::dispatch\(\$action, \@varargs\)/, 'TableSort GenericFilter calls the package owner dispatcher directly');
+    unlike($tablesort_pm, qr/LinkedSpec::get_plugin\("genericfilter_\$action"/, 'TableSort GenericFilter no longer builds genericfilter plugin names for get_plugin');
+    like($genericfilter_plg, qr/Plugin::GenericFilter::group_byRE\(\@_\)/, 'genericfilter.plg keeps thin compatibility wrappers into Plugin::GenericFilter');
+    unlike($genericfilter_plg, qr/TableGrep::IndexOf|HUtils::GenericFilter|TableGrep::Filter/, 'genericfilter.plg no longer owns the executable GenericFilter implementation body');
+};
+subtest 'hutils_generic_filter_uses_plugin_genericfilter_owner' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -3585,9 +3647,10 @@ local *HUtils::avv_set = sub {
 };
 local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
 local *PPlugin::exec_plugin_name = sub { die "__UNEXPECTED_PPLUGIN_EXEC_PLUGIN_NAME__\n" };
-local *LinkedSpec::run_plugin = sub {
-    my ($plugin_name, @args) = @_;
-    print "__PLUGIN_NAME__=$plugin_name\n";
+local *LinkedSpec::run_plugin = sub { die "__UNEXPECTED_LINKEDSPEC_RUN_PLUGIN__\n" };
+local *Plugin::GenericFilter::dispatch = sub {
+    my ($action, @args) = @_;
+    print "__ACTION__=$action\n";
     print "__MAPTABLE__=$args[3]\n";
     return 'filtered_payload';
 };
@@ -3603,12 +3666,12 @@ print "__LEAF__=$ret->{leaf}\n";
 PERL
 
     is($exit_code, 0, 'HUtils GenericFilter subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_PPLUGIN/, 'HUtils GenericFilter avoids the legacy PPlugin dispatch paths');
-    like($out, qr/__PLUGIN_NAME__=genericfilter_contains/, 'HUtils GenericFilter dispatches through LinkedSpec::run_plugin');
-    like($out, qr/__MAPTABLE__=default_map/, 'HUtils GenericFilter forwards the selected maptable into run_plugin');
-    like($out, qr/__LEAF__=filtered_payload/, 'HUtils GenericFilter preserves the run_plugin filtered payload');
+    unlike($err, qr/__UNEXPECTED_(?:PPLUGIN|LINKEDSPEC)/, 'HUtils GenericFilter avoids the legacy plugin bridge dispatch paths');
+    like($out, qr/__ACTION__=contains/, 'HUtils GenericFilter dispatches through Plugin::GenericFilter by action name');
+    like($out, qr/__MAPTABLE__=default_map/, 'HUtils GenericFilter forwards the selected maptable into Plugin::GenericFilter');
+    like($out, qr/__LEAF__=filtered_payload/, 'HUtils GenericFilter preserves the package-owner filtered payload');
 };
-subtest 'tablesort_generic_filter_uses_get_plugin_explicit_api' => sub {
+subtest 'tablesort_generic_filter_uses_plugin_genericfilter_owner' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -3621,14 +3684,12 @@ local *TableSort::Recurse = sub {
 };
 local *TableSort::WRecurse = sub { return };
 local *PPlugin::get = sub { die "__UNEXPECTED_PPLUGIN_GET__\n" };
-local *LinkedSpec::get_plugin = sub {
-    my ($plugin_name) = @_;
-    print "__PLUGIN_NAME__=$plugin_name\n";
-    return sub {
-        my @args = @_;
-        print "__MAPTABLE__=$args[3]\n";
-        return 'filtered_payload';
-    };
+local *LinkedSpec::get_plugin = sub { die "__UNEXPECTED_LINKEDSPEC_GET_PLUGIN__\n" };
+local *Plugin::GenericFilter::dispatch = sub {
+    my ($action, @args) = @_;
+    print "__ACTION__=$action\n";
+    print "__MAPTABLE__=$args[3]\n";
+    return 'filtered_payload';
 };
 my $ret = TableSort::GenericFilter(
     {
@@ -3642,10 +3703,10 @@ print "__LEAF__=$ret->{leaf}\n";
 PERL
 
     is($exit_code, 0, 'TableSort GenericFilter subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_PPLUGIN_GET__/, 'TableSort GenericFilter avoids the legacy PPlugin get wrapper');
-    like($out, qr/__PLUGIN_NAME__=genericfilter_contains/, 'TableSort GenericFilter dispatches plugin lookup through LinkedSpec::get_plugin');
-    like($out, qr/__MAPTABLE__=default_map/, 'TableSort GenericFilter forwards the selected maptable into the looked-up plugin callback');
-    like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the get_plugin callback payload');
+    unlike($err, qr/__UNEXPECTED_(?:PPLUGIN|LINKEDSPEC)/, 'TableSort GenericFilter avoids the legacy plugin bridge lookup paths');
+    like($out, qr/__ACTION__=contains/, 'TableSort GenericFilter dispatches through Plugin::GenericFilter by action name');
+    like($out, qr/__MAPTABLE__=default_map/, 'TableSort GenericFilter forwards the selected maptable into Plugin::GenericFilter');
+    like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the package-owner callback payload');
 };
 subtest 'rtlutils_add_header_paths_spend_run_plugin_explicit_api' => sub {
     plan tests => 2;

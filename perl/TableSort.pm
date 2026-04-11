@@ -7,19 +7,18 @@
 #------------------------------------------------------------------------------
 # Package: TableSort
 # Purpose: Table-oriented filtering helpers that combine `TableGrep` with
-#          plugin-discovered filter callbacks.
+#          package-owned GenericFilter callbacks.
 #------------------------------------------------------------------------------
 package TableSort;
 
-use LinkedSpec;
+use Plugin::GenericFilter;
 use TableGrep;
 
 
 #------------------------------------------------------------------------------
 # Function: GenericFilter
 # Purpose : Apply one configured filter sequence over table-like input data,
-#           resolving plugin-backed filter actions through the explicit
-#           LinkedSpec plugin lookup API.
+#           resolving GenericFilter actions through the package-backed owner.
 # Args    : ($conf, $a2d_ref, $filter_seq, %option)
 # Returns : hashref filtered result tree
 #------------------------------------------------------------------------------
@@ -49,7 +48,7 @@ my ($conf, $a2d_ref, $filter_seq) = @_;
 			      my @varargs;
 
 			      push @varargs, $conf, $info, $a2d_ref, $maptable, \@args;
-			      $filteredata = LinkedSpec::get_plugin("genericfilter_$action")->(@varargs);
+			      $filteredata = Plugin::GenericFilter::dispatch($action, @varargs);
 			      die "$@, " if $@;
 
 			     } else {

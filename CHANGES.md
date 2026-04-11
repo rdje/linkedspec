@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: extract GenericFilter package owner
+
+- moved the executable `genericfilter_group_by`, `genericfilter_group_by_port`, `genericfilter_group_by_ioclock`, and `genericfilter_group_byRE` behavior out of `plugin/genericfilter.plg` into the new package owner `Plugin::GenericFilter`,
+- reduced `plugin/genericfilter.plg` to thin compatibility wrappers that delegate the legacy `.plg` names into the package owner,
+- updated `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` to call `Plugin::GenericFilter::dispatch(...)` directly instead of constructing `genericfilter_*` names for `LinkedSpec::run_plugin(...)` / `LinkedSpec::get_plugin(...)`,
+- added regression coverage for the package-owned grouping behavior and for both callers avoiding the legacy plugin bridge path.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/GenericFilter.pm`
+  - `perl -Iperl -c perl/HUtils.pm`
+  - `perl -Iperl -c perl/TableSort.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `pplugin` parse probe for `plugin/genericfilter.plg`
+  - scan for remaining `genericfilter_*` bridge calls in repo-owned Perl/plugin code
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - OwnerDispatch: reuse callback loader for delegated calls
 
 - routed `LinkedSpec::OwnerDispatch::dispatch_owner_call(...)` through the shared `require_pkg_cb(...)` callback-loader path instead of keeping a second package-`can(...)` plus symbol-call implementation inside `OwnerDispatch` itself,

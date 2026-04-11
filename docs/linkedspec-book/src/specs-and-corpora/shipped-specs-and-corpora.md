@@ -166,6 +166,7 @@ It is still important because:
 - plugin compatibility remains publicly visible in the current facade,
 - regression checks still prove legacy plugin discovery and parsing behavior where needed,
 - shipped `.plg` lookup callers now go through `LinkedSpec::get_plugin(...)` instead of direct `PPlugin->get(...)`, so even legacy inputs route through the explicit transition bridge,
+- extracted package owners such as `Plugin::GenericFilter` now carry real behavior that used to live in `.plg` files, leaving files such as `plugin/genericfilter.plg` as compatibility wrappers rather than implementation centers,
 - the migration plan needs real legacy inputs so compatibility-removal decisions are grounded.
 
 Do not read `plugin/` as a recommendation to build new LinkedSpec functionality around dynamic `.plg` loading. The current architectural direction is to keep LinkedSpec focused on `.spec` parsing, runtime execution, ActionIR helper semantics, and diagnostics.

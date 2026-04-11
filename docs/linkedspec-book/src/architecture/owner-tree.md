@@ -369,6 +369,10 @@ Architecturally, this branch should be read as transition machinery.
 
 Repo-owned `.plg` files should not reach into `PPlugin->get(...)` directly. Shipped lookup callers now use `LinkedSpec::get_plugin(...)`, which keeps registry-first lookup and legacy fallback under `PluginBridge` while the `.plg` surface is being retired.
 
+Package-backed plugin extraction is already underway. `Plugin::String`, `Plugin::CGI`, and `Plugin::HTTP` own small helper surfaces that used to live only in `.plg` files. `Plugin::GenericFilter` now owns the generic table grouping actions too: `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE`. That means `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` can call a normal package owner instead of constructing `genericfilter_*` strings and asking the bridge or legacy runtime to look them up.
+
+The `plugin/genericfilter.plg` file still exists, but its role is compatibility registration. It delegates each legacy `genericfilter_*` name to `Plugin::GenericFilter`, keeping older `.plg` discovery paths alive without letting the implementation remain trapped in the dynamic plugin layer.
+
 The current direction is not to make dynamic plugin loading the identity of LinkedSpec. The healthier core story is:
 
 ```text

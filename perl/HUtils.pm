@@ -12,6 +12,7 @@ use HLinkSubst;
 use Lispish;
 use LinkedSpec;
 use PathSearch;
+use Plugin::GenericFilter;
 use TableGrep;
 
 
@@ -340,7 +341,7 @@ my ($conf, $a2d_ref, $filter_seq) = @_;
 			      my @varargs;
 
 			      push @varargs, $conf, $info, $a2d_ref, $maptable, \@args;
-			      $filteredata = LinkedSpec::run_plugin("genericfilter_$action", @varargs);
+			      $filteredata = Plugin::GenericFilter::dispatch($action, @varargs);
 			      die "$@, " if $@;
 
 			     } else {
