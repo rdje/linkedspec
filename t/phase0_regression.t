@@ -3356,7 +3356,7 @@ subtest 'pplugin_legacy_plugin_files_are_sorted_and_deduped' => sub {
     ok((scalar grep { /\.txt\z/ } @files) == 0, 'PPlugin legacy plugin file enumeration only returns .plg files');
 };
 subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_failures' => sub {
-    plan tests => 6;
+    plan tests => 13;
 
     require File::Temp;
     require PPlugin;
@@ -3365,25 +3365,31 @@ subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_fail
     my $first_file = File::Spec->catfile($tmp_root, '001_first.plg');
     my $second_file = File::Spec->catfile($tmp_root, '002_second.plg');
     my $bad_file = File::Spec->catfile($tmp_root, '003_bad.plg');
+    my $missing_file = File::Spec->catfile($tmp_root, '004_missing.plg');
     write_text($first_file, "first\n");
     write_text($second_file, "second\n");
     write_text($bad_file, "bad\n");
 
+    my $pplugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'PPlugin.pm'));
     my ($registry, $stdout, $ok_run, $err) = (undef, '', 0, '');
     $ok_run = eval {
         local *STDOUT;
         open(STDOUT, '>', \$stdout) or die "Unable to capture STDOUT: $!";
+        $@ = "__SAVED_ERR__\n";
         $registry = PPlugin::_build_plugin_registry(
             sub {
                 my ($content_ref) = @_;
                 return { foo => sub { 1 } } if $$content_ref eq "first\n";
                 return { foo => sub { 2 }, bar => sub { 3 } } if $$content_ref eq "second\n";
+                $@ = "__PPLUGIN_PARSE_BAD__\n";
                 return undef;
             },
             $first_file,
             $second_file,
             $bad_file,
+            $missing_file,
         );
+        die "__PPLUGIN_SAVED_ERR_CLOBBERED__\n" unless $@ eq "__SAVED_ERR__\n";
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -3394,6 +3400,13 @@ subtest 'pplugin_build_plugin_registry_preserves_file_order_and_skips_parse_fail
     is($registry->{bar}->(), 3, 'PPlugin explicit registry builder preserves non-duplicate plugin entries');
     ok(!exists $registry->{bad}, 'PPlugin explicit registry builder skips malformed plugin files');
     like($stdout, qr/\Q$bad_file\E/, 'PPlugin explicit registry builder reports skipped malformed plugin files');
+    like($stdout, qr/__PPLUGIN_PARSE_BAD__/, 'PPlugin explicit registry builder reports real parser errors for skipped plugin files');
+    like($stdout, qr/unable to read plugin file '\Q$missing_file\E'/, 'PPlugin explicit registry builder reports unreadable plugin files without invoking the parser');
+    unlike($stdout, qr/__SAVED_ERR__/, 'PPlugin explicit registry builder does not report stale caller eval error text');
+    unlike($err, qr/__PPLUGIN_SAVED_ERR_CLOBBERED__/, 'PPlugin explicit registry builder preserves caller $@ after successful partial registry build');
+    ok(defined($pplugin_pm) && length($pplugin_pm), 'PPlugin source is available for explicit plugin-file reader inspection');
+    like($pplugin_pm, qr/sub _read_plugin_file\b.*open\(my \$fh, '<', \$plugin_file\)/s, 'PPlugin registry builder now uses an explicit file reader helper');
+    unlike($pplugin_pm, qr/local\(\@ARGV, \$\/\)/, 'PPlugin registry builder no longer slurps plugin files through localized diamond-reader state');
 };
 subtest 'pplugin_load_legacy_registry_uses_explicit_dependency_callbacks' => sub {
     plan tests => 8;

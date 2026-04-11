@@ -85,6 +85,29 @@ sub _legacy_plugin_files {
 }
 
 #------------------------------------------------------------------------------
+# Function: _read_plugin_file
+# Purpose : Read one legacy plugin file with explicit IO instead of relying on
+#           global diamond-reader state.
+# Args    : ($plugin_file)
+# Returns : ($content, undef) on success, (undef, $error_message) on failure
+#------------------------------------------------------------------------------
+sub _read_plugin_file {
+ my ($plugin_file) = @_;
+ return (undef, "plugin file path is undefined")
+  unless defined($plugin_file) && length($plugin_file);
+
+ open(my $fh, '<', $plugin_file)
+  or return (undef, "unable to read plugin file '$plugin_file': $!");
+ local $/;
+ my $content = <$fh>;
+ close($fh)
+  or return (undef, "unable to close plugin file '$plugin_file': $!");
+
+ $content = '' unless defined $content;
+ return ($content, undef)
+}
+
+#------------------------------------------------------------------------------
 # Function: _build_plugin_registry
 # Purpose : Parse discovered `.plg` files and build the legacy name-to-coderef
 #           registry consumed by compatibility callers.
@@ -96,12 +119,24 @@ sub _build_plugin_registry {
  die "(PPlugin::_build_plugin_registry) -E- parser callback must be CODE"
   unless ref($get) eq 'CODE';
 
+ my $saved_err = $@;
  my @plugins;
  foreach my $cplugin (@plugin_list) {
-  my $content = do { local(@ARGV, $/) = $cplugin; <> };
-  my $rt = $get->(\$content); say $@ if $@;
+  my ($content, $read_err) = _read_plugin_file($cplugin);
+  if (defined($read_err) && length($read_err)) {
+   print "(PPlugin) -W- $read_err\n";
+   next
+  }
+
+  $@ = '';
+  my $rt = $get->(\$content);
+  my $parse_err = $@;
 
   unless ($rt) {
+   if (defined($parse_err) && length($parse_err)) {
+    print $parse_err;
+    print "\n" unless $parse_err =~ /\n\z/o;
+   }
    print "(PPlugin) -W- Issue parsing plugin file '$cplugin'\n";
    next
   }
@@ -110,6 +145,7 @@ sub _build_plugin_registry {
  }
 
  my %plugins = @plugins;
+ $@ = $saved_err;
  return \%plugins
 }
 

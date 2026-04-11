@@ -73,6 +73,7 @@ Current regression anchors are `I { ... }` and `LX { ... }`, but those are only 
 Plugin modernization note:
 - `LinkedSpec::PluginBridge` still exists as transition machinery, but its default registered-plugin lookup and legacy `PPlugin` runtime loading now spend the shared `LinkedSpec::OwnerDispatch` seam instead of carrying local eval-require / `$@` preservation branches.
 - `PPlugin` still exists as the legacy `.plg` adapter, but its default `pplugin` parser callback now also loads through `LinkedSpec::OwnerDispatch` instead of a local `eval { require LinkedSpec }` branch; the callback remains lazy and only fires when the legacy registry loader actually needs to parse `.plg` files.
+- `PPlugin` registry construction now reads plugin files through an explicit helper instead of localized diamond-reader state, reports unreadable/malformed files as skipped entries, and preserves caller `$@` after successful partial registry builds.
 
 DSL helper surface consistency note:
 - Child-rule append authoring is now standardized on `push(...)`: `push(Rule)`, `push(Rule, index)`, `push(Rule, target)`, and `push(Rule, target, index)`. The duplicate public `push_call(...)` helper is retired, and raw Perl wrapper metadata now uses `push_child_call_*_builtin` contract IDs instead of names that look like public helper calls.

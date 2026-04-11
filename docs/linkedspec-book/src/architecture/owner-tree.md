@@ -365,7 +365,7 @@ Architecturally, this branch should be read as transition machinery.
 
 `LinkedSpec::PluginBridge` checks explicit registration first and falls back to legacy behavior when needed. Its current compatibility plumbing uses the shared owner-dispatch seam for registered-plugin lookup, legacy `PPlugin` loading, and successful `$@` preservation, so even this transition branch follows the same wrapper discipline as the main runtime owners.
 
-`PPlugin` owns the old `.plg` discovery/execution path. It still reaches back to `LinkedSpec::get_parser('pplugin')` to parse `.plg` files, but that callback load now goes through the shared owner-dispatch seam instead of a local `require LinkedSpec` branch.
+`PPlugin` owns the old `.plg` discovery/execution path. It reads legacy plugin files through explicit file IO, reports and skips unreadable or malformed files during registry construction, and still reaches back to `LinkedSpec::get_parser('pplugin')` to parse `.plg` files. That callback load now goes through the shared owner-dispatch seam instead of a local `require LinkedSpec` branch.
 
 The current direction is not to make dynamic plugin loading the identity of LinkedSpec. The healthier core story is:
 

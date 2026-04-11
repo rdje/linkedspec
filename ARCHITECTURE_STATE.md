@@ -342,6 +342,7 @@ The current public facade still exposes a plugin/runtime branch, but the archite
 
 ### `PPlugin`
 - owns legacy `.plg` discovery,
+- reads legacy `.plg` files through explicit file IO rather than global diamond-reader state,
 - parses `.plg` files through the `pplugin` parser,
 - caches discovered handlers,
 - executes them dynamically,
