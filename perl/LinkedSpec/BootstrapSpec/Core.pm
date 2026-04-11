@@ -474,12 +474,12 @@ sub _parse_entry_label_token {
 }
 
 sub _dispatch_curly_brace_handler {
- my ($ctx, $minfo, $descr, $string, $gdata) = @_;
+ my ($ctx, $minfo, $rule_descriptors, $string, $dispatch_state) = @_;
  my $brace_rule_idx = $ctx->{bootstrap_rule_index}{CURLY_BRACE};
  return undef unless defined $brace_rule_idx;
- return undef unless ref($descr->[$brace_rule_idx]) eq 'HASH';
- return undef unless ref($descr->[$brace_rule_idx]{handler}) eq 'CODE';
- return &{$descr->[$brace_rule_idx]{handler}}($minfo, $descr, $string, $gdata)
+ return undef unless ref($rule_descriptors->[$brace_rule_idx]) eq 'HASH';
+ return undef unless ref($rule_descriptors->[$brace_rule_idx]{handler}) eq 'CODE';
+ return &{$rule_descriptors->[$brace_rule_idx]{handler}}($minfo, $rule_descriptors, $string, $dispatch_state)
 }
 
 sub _build_spec_root_rule {
@@ -488,20 +488,20 @@ sub _build_spec_root_rule {
   id => 'SPEC_ROOT',
   tags => { root => 1 },
   handler => sub {
-   my ($descr, $string, $gdata) = @_;
+   my ($rule_descriptors, $string, $dispatch_state) = @_;
    my @specentry;
    my @specs;
    while (1) {
-    my $minfo = _linkedre_or($string, $$gdata{startREs});
+    my $minfo = _linkedre_or($string, $dispatch_state->{start_token_re});
     unless($minfo) {
      push @specs, [@specentry] if @specentry;
      return [@specs]
     }
 
-    my $dispatch_idx = $$gdata{start_dispatch}[$$minfo{index}];
+    my $dispatch_idx = $dispatch_state->{start_rule_dispatch}[$$minfo{index}];
     return undef unless defined $dispatch_idx;
 
-    my $retv = &{$$descr[$dispatch_idx]{handler}}($minfo, $descr, $string, $gdata);
+    my $retv = &{$$rule_descriptors[$dispatch_idx]{handler}}($minfo, $rule_descriptors, $string, $dispatch_state);
     return undef unless $retv;
 
     my @ret_entries = ref($$retv[0]) eq 'ARRAY' ? @$retv : ($retv);
@@ -531,11 +531,11 @@ sub _build_entry_label_rule {
   tags => { start_token => 1 },
   re=> [qr/\w+\s*::?\s*(?:(?:&|\||\+|\*|\?|OR(?:\+|\s*\{[^}]+\})?|AND(?:\+|\s*\{[^}]+\})?)|(?!(?:OR|AND)\b))/o],
   handler=> sub {
-   my ($info, undef, undef, $gdata) = @_;
+   my ($info, undef, undef, $dispatch_state) = @_;
    my $parsed = _parse_entry_label_token($$info{match}, $ctx);
    return undef unless ref($parsed) eq 'HASH';
 
-   $gdata->{_current_entry} = $parsed->{label};
+   $dispatch_state->{current_rule_label} = $parsed->{label};
    return [
     "ELABEL$parsed->{target}",
     $parsed->{label},
@@ -567,20 +567,20 @@ sub _build_action_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/->\s*(?<TARGETS>(?:\w+\s*(?:\[\s*\d+\s*\]\s*)?)(?:\s*\|\s*\w+\s*(?:\[\s*\d+\s*\]\s*)?)*)\s*\{/o, qr/\}/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
    my $ipos = pos($$string);
    my $targets = _parse_action_edge_targets($$info{match_hash}{TARGETS});
    return undef unless ref($targets) eq 'ARRAY' && @$targets;
 
    while (1) {
-    my $minfo = _linkedre_or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
      return _build_action_edge_entries($targets, substr($$string, $ipos, pos($$string) - $ipos - 1))
     } elsif ($$minfo{index} == 0) {
-     _dispatch_curly_brace_handler($ctx, $minfo, $descr, $string, $gdata);
+     _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
     }
    }
@@ -594,7 +594,7 @@ sub _build_method_empty_action_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, undef, $string) = @_;
    my ($entry_label, $reidx, $chain, $block) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN BLOCK/};
    my $code = _render_method_call_chain($entry_label, $chain, $block);
    return undef unless defined $code;
@@ -620,7 +620,7 @@ sub _build_empty_action_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/->\s*\w+(?:\[0\])?/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info) = @_;
 
    my ($entry_label) = $$info{match} =~ /(\w+)/o;
    return ['ACODE', {relabel=>$entry_label, reidx=>0, code=>"call($entry_label)"}]
@@ -635,19 +635,19 @@ sub _build_non_action_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/\w+\s*\{/o, qr/\}/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
    my $ipos = pos($$string);
    my ($type) = $$info{match} =~ /(\w+)/o;
 
    while (1) {
-    my $minfo = _linkedre_or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
      return ["${type}CODE", substr($$string, $ipos, pos($$string) - $ipos - 1)]
     } elsif ($$minfo{index} == 0) {
-     _dispatch_curly_brace_handler($ctx, $minfo, $descr, $string, $gdata);
+     _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
     }
    }
@@ -671,19 +671,19 @@ sub _build_blind_call_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/=>\s*\w+\s*\{/o, qr/\}/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
    my $ipos = pos($$string);
    my ($call) = $$info{match} =~ /(\w+)/o;
 
    while (1) {
-    my $minfo = _linkedre_or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
-     return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call);\n".substr($$string, $ipos, pos($$string) - $ipos - 1)}]
+     return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call);\n".substr($$string, $ipos, pos($$string) - $ipos - 1)}]
     } elsif ($$minfo{index} == 0) {
-     _dispatch_curly_brace_handler($ctx, $minfo, $descr, $string, $gdata);
+     _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
     }
    }
@@ -697,9 +697,9 @@ sub _build_method_empty_blind_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/=>\s*(?<CALL>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, undef, $string, $dispatch_state) = @_;
    my ($call, $chain, $block) = @{$$info{match_hash}}{qw/CALL CHAIN BLOCK/};
-   my $code = _render_method_call_chain($gdata->{_current_entry}, $chain, $block);
+   my $code = _render_method_call_chain($dispatch_state->{current_rule_label}, $chain, $block);
    return undef unless defined $code;
    my $calls = _parse_method_call_chain($chain);
    if ($calls && @$calls && defined($block) && length($block)) {
@@ -712,7 +712,7 @@ sub _build_method_empty_blind_code_block_rule {
      }
     }
    }
-   return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call);\n" . $code}]
+   return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call);\n" . $code}]
   },
  }
 }
@@ -738,10 +738,10 @@ sub _build_empty_blind_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/=>\s*\w+/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, undef, undef, $dispatch_state) = @_;
 
    my ($call) = $$info{match} =~ /(\w+)/o;
-   return ['BCODE', {call=>$call, code=>"\$$gdata->{_current_entry} = call($call)"}]
+   return ['BCODE', {call=>$call, code=>"\$$dispatch_state->{current_rule_label} = call($call)"}]
   },
  }
 }
@@ -752,9 +752,9 @@ sub _build_method_empty_non_action_code_block_rule {
   tags => { start_token => 1 },
   re=> [qr/(?<TYPE>\w+)(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, undef, $string, $dispatch_state) = @_;
    my ($type, $chain, $block) = @{$$info{match_hash}}{qw/TYPE CHAIN BLOCK/};
-   my $code = _render_method_call_chain($gdata->{_current_entry}, $chain, $block);
+   my $code = _render_method_call_chain($dispatch_state->{current_rule_label}, $chain, $block);
    return undef unless defined $code;
    my $calls = _parse_method_call_chain($chain);
    if ($calls && @$calls && defined($block) && length($block)) {
@@ -779,18 +779,18 @@ sub _build_curly_brace_rule {
   tags => { start_token => 1, brace_scanner => 1 },
   re=> [qr/(?<!\\)\{/o, qr/(?<!\\)\}/o, qr/(?<!\\)\".*?(?<!\\)\"/o, qr/(?<!\\)'.*?(?<!\\)'/o],
   handler=> sub {
-   my ($info, $descr, $string, $gdata) = @_;
+   my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
    my $ipos = pos($$string);
 
    while (1) {
-    my $minfo = _linkedre_or($string, $$gdata{cbrace});
+    my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
      return 1
     } elsif ($$minfo{index} == 0)  {
-     _dispatch_curly_brace_handler($ctx, $minfo, $descr, $string, $gdata);
+     _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
     }
    }
@@ -818,55 +818,56 @@ sub _build_bootstrap_rule_descriptors {
  ]
 }
 
-sub _build_bootstrap_registry_gdata {
- my ($spec_descr) = @_;
+sub _build_bootstrap_dispatch_metadata {
+ my ($rule_descriptors) = @_;
 
  my %bootstrap_rule_index = map {
-  my $id = $spec_descr->[$_]{id};
+  my $id = $rule_descriptors->[$_]{id};
   defined $id ? ($id => $_) : ()
- } 0 .. $#$spec_descr;
+ } 0 .. $#$rule_descriptors;
 
  for my $required_rule_id (qw/SPEC_ROOT CURLY_BRACE/) {
   die "(LinkedSpec.pm) -E- Missing required bootstrap rule id '$required_rule_id'"
    unless defined $bootstrap_rule_index{$required_rule_id};
  }
 
- my @bootstrap_start_res;
- my @bootstrap_start_dispatch;
- for my $idx (0 .. $#$spec_descr) {
-  my $rule = $spec_descr->[$idx];
+ my @start_token_res;
+ my @start_rule_dispatch;
+ for my $idx (0 .. $#$rule_descriptors) {
+  my $rule = $rule_descriptors->[$idx];
   next unless ref($rule) eq 'HASH';
   next unless exists $rule->{tags} && ref($rule->{tags}) eq 'HASH' && $rule->{tags}{start_token};
   next unless exists $rule->{re} && ref($rule->{re}) eq 'ARRAY' && @{$rule->{re}};
-  push @bootstrap_start_res, $rule->{re}[0];
-  push @bootstrap_start_dispatch, $idx;
+  push @start_token_res, $rule->{re}[0];
+  push @start_rule_dispatch, $idx;
  }
 
  die "(LinkedSpec.pm) -E- Bootstrap start-token registry is empty"
-  unless @bootstrap_start_res && @bootstrap_start_dispatch;
+  unless @start_token_res && @start_rule_dispatch;
 
- my @bootstrap_cbrace_res = ();
+ my @brace_scanner_res = ();
  if (defined $bootstrap_rule_index{CURLY_BRACE}
-     && exists $spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}
-     && ref($spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}) eq 'ARRAY') {
-  @bootstrap_cbrace_res = @{$spec_descr->[$bootstrap_rule_index{CURLY_BRACE}]{re}};
+     && exists $rule_descriptors->[$bootstrap_rule_index{CURLY_BRACE}]{re}
+     && ref($rule_descriptors->[$bootstrap_rule_index{CURLY_BRACE}]{re}) eq 'ARRAY') {
+  @brace_scanner_res = @{$rule_descriptors->[$bootstrap_rule_index{CURLY_BRACE}]{re}};
  }
 
- my $gdata = {
-  startREs       => _linkedre_ored_re(@bootstrap_start_res),
-  start_dispatch => \@bootstrap_start_dispatch,
-  cbrace         => _linkedre_ored_re(@bootstrap_cbrace_res)
+ my $dispatch_state = {
+  start_token_re      => _linkedre_ored_re(@start_token_res),
+  start_rule_dispatch => \@start_rule_dispatch,
+  brace_scanner_re    => _linkedre_ored_re(@brace_scanner_res),
+  current_rule_label  => undef,
  };
 
- return (\%bootstrap_rule_index, $gdata);
+ return (\%bootstrap_rule_index, $dispatch_state);
 }
 
 #------------------------------------------------------------------------------
 # Function: build_bootstrap_spec
 # Purpose : Build and return the hardcoded bootstrap grammar descriptor and its
-#           compiled dispatch metadata (registry + gdata).
+#           bootstrap rule index plus parser dispatch state.
 # Args    : none
-# Returns : ($spec_descr, $bootstrap_rule_index_ref, $gdata)
+# Returns : ($rule_descriptors, $bootstrap_rule_index_ref, $dispatch_state)
 #------------------------------------------------------------------------------
 sub build_bootstrap_spec {
  my $ctx = {
@@ -874,11 +875,11 @@ sub build_bootstrap_spec {
   node_type => _build_bootstrap_node_type_map(),
  };
 
- my $spec_descr = _build_bootstrap_rule_descriptors($ctx);
- my ($bootstrap_rule_index_ref, $gdata) = _build_bootstrap_registry_gdata($spec_descr);
+ my $rule_descriptors = _build_bootstrap_rule_descriptors($ctx);
+ my ($bootstrap_rule_index_ref, $dispatch_state) = _build_bootstrap_dispatch_metadata($rule_descriptors);
  %{$ctx->{bootstrap_rule_index}} = %$bootstrap_rule_index_ref;
 
- return ($spec_descr, $bootstrap_rule_index_ref, $gdata)
+ return ($rule_descriptors, $bootstrap_rule_index_ref, $dispatch_state)
 }
 
 1;

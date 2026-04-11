@@ -599,14 +599,14 @@ subtest 'bootstrap_spec_core_require_avoids_linkedre_load_until_bootstrap_spec_b
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::BootstrapSpec::Core;
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_EAGER__\n" : "__LINKEDRE_STILL_LAZY__\n";
-my ($descr, $rule_index, $gdata) = LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec();
-print (ref($descr) eq "ARRAY" && ref($rule_index) eq "HASH" && ref($gdata) eq "HASH" && defined($gdata->{startREs}) ? "__BOOTSTRAP_SPEC_DEFINED__\n" : "__BOOTSTRAP_SPEC_BAD__\n");
+my ($rule_descriptors, $rule_index, $dispatch_state) = LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec();
+print (ref($rule_descriptors) eq "ARRAY" && ref($rule_index) eq "HASH" && ref($dispatch_state) eq "HASH" && defined($dispatch_state->{start_token_re}) ? "__BOOTSTRAP_SPEC_DEFINED__\n" : "__BOOTSTRAP_SPEC_BAD__\n");
 print exists($INC{"LinkedRE.pm"}) ? "__LINKEDRE_AFTER_BUILD__\n" : "__LINKEDRE_STILL_UNLOADED__\n";
 PERL
 
     is($exit_code, 0, 'LinkedSpec::BootstrapSpec::Core require/build_bootstrap_spec subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__LINKEDRE_STILL_LAZY__/, 'require LinkedSpec::BootstrapSpec::Core keeps LinkedRE unloaded');
-    like($out, qr/__BOOTSTRAP_SPEC_DEFINED__/, 'build_bootstrap_spec still returns descriptor, rule index, and gdata after lazy LinkedRE loading');
+    like($out, qr/__BOOTSTRAP_SPEC_DEFINED__/, 'build_bootstrap_spec still returns rule descriptors, rule index, and dispatch state after lazy LinkedRE loading');
     like($out, qr/__LINKEDRE_AFTER_BUILD__/, 'build_bootstrap_spec lazy-loads LinkedRE on demand');
     is($err, '', 'LinkedSpec::BootstrapSpec::Core require/build_bootstrap_spec subprocess does not emit stderr');
 };
@@ -1401,7 +1401,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     local *LinkedSpec::ActionIR::CanonicalEvents::_require_canonical_events_core_pkg = sub { return 1 };
 
     local *LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec = sub {
-        return ('bootstrap_descr', { SPEC_ROOT => 0 }, { root => 'gdata' });
+        return ('bootstrap_rule_descriptors', { SPEC_ROOT => 0 }, { root => 'dispatch_state' });
     };
     local *LinkedSpec::Compiler::run_get_pipeline = sub {
         my ($spec_content_ref, $option, $deps) = @_;
@@ -1425,7 +1425,7 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
 
     $@ = "__SAVED_ERR__\n";
     my @bootstrap = LinkedSpec::BootstrapSpec::build_bootstrap_spec();
-    is_deeply(\@bootstrap, ['bootstrap_descr', { SPEC_ROOT => 0 }, { root => 'gdata' }], 'BootstrapSpec build wrapper still delegates through BootstrapSpec::Core');
+    is_deeply(\@bootstrap, ['bootstrap_rule_descriptors', { SPEC_ROOT => 0 }, { root => 'dispatch_state' }], 'BootstrapSpec build wrapper still delegates through BootstrapSpec::Core');
     is($@, "__SAVED_ERR__\n", 'BootstrapSpec build wrapper preserves caller $@ on successful list-context delegation');
 
     $@ = "__SAVED_ERR__\n";

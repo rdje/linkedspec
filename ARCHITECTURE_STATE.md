@@ -27,7 +27,7 @@ This document is the current high-level technical reading of the project shape. 
 - In practice that static tree is now almost just `File::Basename` plus `LinkedSpec::OwnerDispatch`; even the public trace globals are simple aliases into `LinkedSpec::Trace`.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
-- A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and remaining `spec_descr` / `gdata` vocabulary is now a bootstrap-internal historical island rather than the active descriptor model.
+- A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
   - `ParserFactory -> Runtime -> Compiler`
@@ -247,7 +247,7 @@ One more boundary is now tighter too:
 - parse `.spec` syntax before self-hosting is fully realized,
 - also carry bootstrap-side parsing/rendering intelligence for method-chain and attached control-flow syntax normalization,
 - remain a major syntax and safety hotspot,
-- still carry bootstrap-only historical tuple names (`spec_descr` and `gdata`) inside bootstrap parser handler plumbing. This is not the active compiler descriptor/dependency-regex model anymore; if resumed, it should be treated as a bootstrap-local naming cleanup rather than a compiler-state compatibility task.
+- now use explicit `rule_descriptors` and `dispatch_state` naming for bootstrap parser handler plumbing. The old `spec_descr` / `gdata` words should be read as history/compatibility context, not active compiler descriptor/dependency-regex terminology.
 
 ### `LinkedSpec::Validation`
 - owns frontend hardening before bootstrap or runtime failure,
@@ -375,7 +375,7 @@ The lowering stack is big, but it now has real sub-owners instead of one giant m
 - dense syntax hotspot,
 - difficult to change safely,
 - still central until self-hosting is stronger,
-- still contains the remaining bootstrap-only `spec_descr` / `gdata` vocabulary, which is now a naming/clarity risk rather than an active compiler-state model.
+- the former bootstrap-only `spec_descr` / `gdata` vocabulary has been renamed to `rule_descriptors` / `dispatch_state`, so the remaining risk is the density of the bootstrap syntax logic rather than a known active naming island.
 
 ### `SpecEntry`
 - still relies on generated Perl source plus `eval`,

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Bootstrap: rename parser dispatch state
+
+- replaced the remaining active bootstrap-local `spec_descr` / `gdata` vocabulary in `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core` with explicit `rule_descriptors` and `dispatch_state` naming,
+- renamed bootstrap dispatch-state keys from `startREs`, `start_dispatch`, `cbrace`, and `_current_entry` to `start_token_re`, `start_rule_dispatch`, `brace_scanner_re`, and `current_rule_label`,
+- refreshed bootstrap regression snippets so tests describe rule descriptors and dispatch state rather than the old gdata-shaped tuple,
+- updated the live architecture snapshot and public owner-tree chapter so the docs now treat `spec_descr` / `gdata` as historical wording rather than remaining active bootstrap parser terminology.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused bootstrap parse probe
+  - focused descriptor compile probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+
 ## 2026-04-11 - Docs: refresh architecture bootstrap naming boundary
 
 - executed the README bootstrap instruction by reading `README.md`, `SESSION_BOOTSTRAP.md`, the referenced public/working/continuity doc map, and the `LinkedSpec.pm` facade/import tree,

@@ -52,9 +52,9 @@ sub _call_preserving_err {
 #------------------------------------------------------------------------------
 # Function: build_bootstrap_spec
 # Purpose : Build and return the hardcoded bootstrap grammar descriptor and its
-#           compiled dispatch metadata (registry + gdata).
+#           bootstrap rule index plus parser dispatch state.
 # Args    : none
-# Returns : ($spec_descr, $bootstrap_rule_index_ref, $gdata)
+# Returns : ($rule_descriptors, $bootstrap_rule_index_ref, $dispatch_state)
 #------------------------------------------------------------------------------
 sub build_bootstrap_spec {
  my @args = @_;
@@ -69,16 +69,16 @@ sub build_bootstrap_spec {
 # Purpose : Lazily build and retain the shared hardcoded bootstrap grammar
 #           state used by the runtime/parser-generation entrypoints.
 # Args    : none
-# Returns : hashref { spec_descr, bootstrap_rule_index, gdata }
+# Returns : hashref { rule_descriptors, bootstrap_rule_index, dispatch_state }
 #------------------------------------------------------------------------------
 sub cached_bootstrap_state {
  return $CACHED_BOOTSTRAP_STATE if ref($CACHED_BOOTSTRAP_STATE) eq 'HASH';
 
- my ($spec_descr, $bootstrap_rule_index_ref, $gdata) = build_bootstrap_spec();
+ my ($rule_descriptors, $bootstrap_rule_index_ref, $dispatch_state) = build_bootstrap_spec();
  $CACHED_BOOTSTRAP_STATE = {
-  spec_descr => $spec_descr,
+  rule_descriptors => $rule_descriptors,
   bootstrap_rule_index => { %{$bootstrap_rule_index_ref || {}} },
-  gdata => $gdata,
+  dispatch_state => $dispatch_state,
  };
  return $CACHED_BOOTSTRAP_STATE
 }
@@ -87,7 +87,7 @@ sub cached_bootstrap_state {
 # Function: run_bootstrap_parse
 # Purpose : Execute the hardcoded bootstrap parser against `.spec` content using
 #           shared cached bootstrap grammar state unless an explicit state hash
-#           is injected for tests or compatibility callers.
+#           is injected for tests or controlled internal callers.
 # Args    : ($spec_content_ref, $bootstrap_state?)
 # Returns : ($parse_success, $retv, $error)
 #------------------------------------------------------------------------------
@@ -99,10 +99,10 @@ sub run_bootstrap_parse {
  my $parse_success = 1;
  my $error = '';
  eval {
-  my $spec_descr = $bootstrap_state->{spec_descr};
+  my $rule_descriptors = $bootstrap_state->{rule_descriptors};
   my $bootstrap_rule_index = $bootstrap_state->{bootstrap_rule_index};
-  my $gdata = $bootstrap_state->{gdata};
-  $retv = &{$$spec_descr[$$bootstrap_rule_index{SPEC_ROOT}]{handler}}($spec_descr, $spec_content_ref, $gdata);
+  my $dispatch_state = $bootstrap_state->{dispatch_state};
+  $retv = &{$$rule_descriptors[$$bootstrap_rule_index{SPEC_ROOT}]{handler}}($rule_descriptors, $spec_content_ref, $dispatch_state);
  } or do {
   $parse_success = 0;
   $error = $@;
