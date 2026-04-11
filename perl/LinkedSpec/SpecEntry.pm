@@ -58,14 +58,18 @@ sub _require_pkg {
  return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
+}
+
 sub _require_rule_ir_pkg {
- _require_pkg('LinkedSpec::RuleIR') unless LinkedSpec::RuleIR->can('_collect_rule_ir');
+ _require_pkg_cb('LinkedSpec::RuleIR', '_collect_rule_ir');
  return 1
 }
 
 sub _require_emit_context_pkg {
- _require_pkg('LinkedSpec::RuleIR::EmitContext')
-  unless LinkedSpec::RuleIR::EmitContext->can('build_rule_ir_emit_context');
+ _require_pkg_cb('LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
  return 1
 }
 

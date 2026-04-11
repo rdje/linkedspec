@@ -26,6 +26,18 @@ sub _require_pkg {
 }
 
 #------------------------------------------------------------------------------
+# Function: _require_pkg_cb
+# Purpose : Lazy-load one runtime dependency owner and resolve one callback
+#           through the shared owner-dispatch seam.
+# Args    : ($pkg, $name)
+# Returns : callback coderef
+#------------------------------------------------------------------------------
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
+}
+
+#------------------------------------------------------------------------------
 # Function: _call_preserving_err
 # Purpose : Execute callback without clobbering caller-visible successful `$@`.
 # Args    : ($cb)
@@ -127,6 +139,10 @@ sub _describe_run_get_pipeline_result {
  return "run_get_pipeline returned invalid parser value: $value_desc; expected CODE";
 }
 
+sub _run_get_pipeline_cb {
+ return _require_pkg_cb('LinkedSpec::Compiler', 'run_get_pipeline')
+}
+
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
@@ -143,8 +159,8 @@ sub run_get {
  my $runtime_ctx = _build_runtime_context($option);
  return _call_preserving_err(sub {
   my $ret = eval {
-   _require_pkg('LinkedSpec::Compiler') unless LinkedSpec::Compiler->can('run_get_pipeline');
-   return LinkedSpec::Compiler::run_get_pipeline(
+   my $run_get_pipeline = _run_get_pipeline_cb();
+   return $run_get_pipeline->(
     $spec_content_ref,
     $option,
     {

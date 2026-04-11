@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 151;
+    plan tests => 152;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1241,6 +1241,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Scanner.pm now routes $@ preservation through OwnerDispatch');
     like($scanner_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'Scanner.pm now routes callback lookup through OwnerDispatch');
     like($scanner_pm, qr/sub default_deps_for_package\b.*_require_scanner_core_pkg\(\).*LinkedSpec::ActionIR::ScannerCore::_scanner_dep_specs\(\).*LinkedSpec::OwnerDispatch::build_dep_map/s, 'Scanner.pm now assembles scanner deps from ScannerCore shared dependency specs through OwnerDispatch');
+    unlike(join("\n", $runtime_pm, $bootstrap_spec_pm, $compiler_pm, $spec_entry_pm, $scanner_pm), qr/->can\(/, 'runtime/bootstrap/compiler/spec-entry/scanner wrappers no longer probe callbacks with local ->can checks');
     like($scanner_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ScannerCore.pm now loads the shared owner-dispatch helper');
     like($scanner_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now routes lazy package loading through OwnerDispatch');
     like($scanner_core_pm, qr/sub _scanner_dep_specs\b/s, 'ScannerCore.pm now defines the shared scanner dependency contract');

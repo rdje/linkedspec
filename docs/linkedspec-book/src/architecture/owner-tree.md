@@ -125,6 +125,8 @@ It centralizes repeated owner-wrapper behavior:
 
 This matters because many LinkedSpec owners are thin wrappers around deeper implementation packages. If each wrapper hand-rolls lazy loading and callback lookup, the project accumulates small inconsistencies. `OwnerDispatch` keeps that boilerplate in one place.
 
+Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, and `ActionIR::Scanner` goes through this shared callback-loader seam. The remaining direct callback probing under `RuleIR::EmitContext` is deliberately tied to its owner-key registry diagnostics rather than generic wrapper loading.
+
 The design rule is:
 
 ```text

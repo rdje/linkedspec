@@ -29,7 +29,7 @@ sub _require_pkg {
 }
 
 sub _require_scanner_core_pkg {
- _require_pkg('LinkedSpec::ActionIR::ScannerCore') unless LinkedSpec::ActionIR::ScannerCore->can('scan_contract_ir_events');
+ _require_pkg_cb('LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
  return 1
 }
 

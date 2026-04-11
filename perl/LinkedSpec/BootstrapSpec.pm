@@ -27,6 +27,11 @@ sub _require_pkg {
  return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
 }
 
+sub _require_pkg_cb {
+ my ($pkg, $name) = @_;
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
+}
+
 #------------------------------------------------------------------------------
 # Function: _require_bootstrap_core_pkg
 # Purpose : Lazy-load the extracted bootstrap-core owner.
@@ -34,7 +39,7 @@ sub _require_pkg {
 # Returns : true when `BootstrapSpec::Core` is available
 #------------------------------------------------------------------------------
 sub _require_bootstrap_core_pkg {
- _require_pkg('LinkedSpec::BootstrapSpec::Core') unless LinkedSpec::BootstrapSpec::Core->can('build_bootstrap_spec');
+ _require_pkg_cb('LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec');
  return 1
 }
 

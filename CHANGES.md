@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - OwnerDispatch: centralize wrapper callback lookup
+
+- routed the remaining thin wrapper callback lookups in `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, and `ActionIR::Scanner` through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)` instead of local `Package->can(...)` probes,
+- left `RuleIR::EmitContext`'s direct `->can(...)` checks in place because they are part of its owner-key registry diagnostics rather than generic wrapper callback loading,
+- added a source-level regression lock proving the selected wrapper owners no longer reintroduce local callback probing,
+- refreshed architecture and roadmap notes so the OwnerDispatch seam is recorded as owning callback lookup for these wrappers too.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/Runtime.pm`
+  - `perl -c perl/LinkedSpec/Compiler.pm`
+  - `perl -c perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `LinkedSpec::Get(...)` parser and descriptor probes
+  - focused `Runtime`, `Compiler`, `BootstrapSpec`, and `ActionIR::Scanner` owner probes
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+
 ## 2026-04-11 - Bootstrap: rename parser dispatch state
 
 - replaced the remaining active bootstrap-local `spec_descr` / `gdata` vocabulary in `LinkedSpec::BootstrapSpec` and `LinkedSpec::BootstrapSpec::Core` with explicit `rule_descriptors` and `dispatch_state` naming,
