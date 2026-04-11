@@ -95,4 +95,46 @@ sub print_file_links_for_conf {
  return
 }
 
+#------------------------------------------------------------------------------
+# Function: run_lighttpd_for_conf
+# Purpose : Preserve the historical `lighttpd` plugin action as an explicit
+#           package function: render the configured lighttpd template with the
+#           active host/port and start lighttpd against the generated file.
+# Args    : ($conf_hashref) with optional `_notail` and `_port`
+# Returns : `system(...)` exit status from the lighttpd invocation
+#------------------------------------------------------------------------------
+sub run_lighttpd_for_conf {
+ my ($conf) = @_;
+ $conf //= {};
+
+ require File::Temp;
+ require Global;
+ require Sys::Hostname;
+
+ my $host = Sys::Hostname::hostname() . ($conf->{_notail} ? '' : Global->http_hostail);
+ my $port = $conf->{_port} || Global->http_default_port;
+ die "Invalid lighttpd port '$port'" unless defined($port) && $port =~ /\A\d+\z/;
+ my $lighttpd_conf = _read_text_file(Global->lighttpd_conf);
+
+ $lighttpd_conf =~ s/<server_name>/$host/o;
+ $lighttpd_conf =~ s/<server_port>/$port/o;
+
+ my $template_port = $port;
+ $template_port =~ s/[^A-Za-z0-9_.-]/_/g;
+ my ($fh, $filename) = File::Temp::tempfile("lighttpd_${template_port}_XXXXX", TMPDIR => 1, UNLINK => 1);
+
+ print {$fh} $lighttpd_conf;
+ close($fh) or die "Unable to close generated lighttpd config '$filename': $!";
+
+ return system('lighttpd', '-f', $filename);
+}
+
+sub _read_text_file {
+ my ($path) = @_;
+
+ open(my $fh, '<', $path) or die "Unable to read '$path': $!";
+ local $/;
+ return <$fh>;
+}
+
 1;

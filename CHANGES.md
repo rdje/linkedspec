@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move lighttpd action into package owner
+
+- moved the historical `lighttpd` action into `Plugin::HTTP::run_lighttpd_for_conf(...)`, keeping the template substitution behavior while making the package owner responsible for reading `Global->lighttpd_conf`, composing the host/port, writing the generated config, and launching `lighttpd`,
+- hardened the migrated action by using list-form `system('lighttpd', '-f', $filename)`, flushing/closing the generated temp config before launch, and rejecting non-numeric lighttpd ports before any process execution,
+- deleted `plugin/lighttpd.plg` now that no repo-owned caller still needs `lighttpd` as a legacy `.plg` registration name, and updated regression coverage so the remaining `pplugin` corpus no longer expects it to parse.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/HTTP.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'lighttpd.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move http action into package owner
 
 - moved the historical `http` file-link action into `Plugin::HTTP::print_file_links_for_conf(...)`, keeping the old CGI config lookup, host/port setup, signed `getfile.cgi` URL generation, and missing-file skip behavior under a normal package owner,

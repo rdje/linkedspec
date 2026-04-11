@@ -4002,11 +4002,11 @@ PERL
     unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
 };
 subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 24;
+    plan tests => 20;
 
     my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
     my $http_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'http.plg');
-    my $lighttpd_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
+    my $lighttpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg');
     my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
     my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
     my $tree_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tree.plg'));
@@ -4016,7 +4016,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
 
     ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
     ok(!-e $http_plugin_plg, 'http.plg is removed now that Plugin::HTTP owns the legacy file-link action directly');
-    ok(defined($lighttpd_plugin_plg) && length($lighttpd_plugin_plg), 'lighttpd.plg legacy action source is available');
+    ok(!-e $lighttpd_plugin_plg, 'lighttpd.plg is removed now that Plugin::HTTP owns the legacy lighttpd action directly');
     ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
     ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
     ok(defined($tree_plugin_plg) && length($tree_plugin_plg), 'tree.plg source is available for HTTP helper migration inspection');
@@ -4025,11 +4025,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     like($http_plugin_pm, qr/sub set_http_hostport\b/, 'package-backed http plugin owner defines set_http_hostport');
     like($http_plugin_pm, qr/sub set_http_localhost\b/, 'package-backed http plugin owner defines set_http_localhost');
     like($http_plugin_pm, qr/sub print_file_links_for_conf\b/, 'package-backed http plugin owner defines the former http action as print_file_links_for_conf');
-    unlike($lighttpd_plugin_plg, qr/^set_http_hostport\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_hostport compatibility helper');
-    unlike($lighttpd_plugin_plg, qr/^set_http_localhost\s*\{/m, 'lighttpd.plg no longer registers a thin set_http_localhost compatibility helper');
-    unlike($lighttpd_plugin_plg, qr/Global->set \('http_hostport'\)/, 'lighttpd.plg no longer carries the inline http_hostport assignment body');
-    unlike($lighttpd_plugin_plg, qr/set_http_hostport \(undef, \$_\[0\]\)/, 'lighttpd.plg no longer carries the inline localhost wrapper body');
-    unlike($lighttpd_plugin_plg, qr/Sys::Hostname::hostname\.Global->http_hostail/, 'lighttpd.plg no longer carries the inline hostname composition logic');
+    like($http_plugin_pm, qr/sub run_lighttpd_for_conf\b/, 'package-backed http plugin owner defines the former lighttpd action as run_lighttpd_for_conf');
     like($rtl_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'rtl.plg now sets hostport through the package-backed HTTP owner');
     like($rtl_plugin_plg, qr/Plugin::HTTP::httplink\(/, 'rtl.plg now builds links through the package-backed HTTP owner');
     unlike($rtl_plugin_plg, $unqualified_set_http_hostport, 'rtl.plg no longer calls set_http_hostport through an unqualified plugin helper');
@@ -4163,8 +4159,69 @@ PERL
     is(scalar(() = $out =~ /\/cgi-bin\/getfile\.cgi\?/g), 1, 'http file-link action skips missing argv paths');
     unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http file-link action subprocess stays clear of legacy plugin runtime issues');
 };
+subtest 'http_package_owner_preserves_lighttpd_action_contract' => sub {
+    plan tests => 10;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{'Global.pm'} = __FILE__;
+
+    package Global;
+    our $LIGHTTPD_CONF;
+    sub lighttpd_conf { return $LIGHTTPD_CONF }
+    sub http_hostail { return '.example.test' }
+    sub http_default_port { return 8080 }
+}
+BEGIN {
+    *CORE::GLOBAL::system = sub {
+        $main::SYSTEM_CALLS++;
+        print "__SYSTEM_ARGC__=" . scalar(@_) . "\n";
+        print "__SYSTEM_ARG0__=$_[0]\n";
+        print "__SYSTEM_ARG1__=$_[1]\n";
+        print "__SYSTEM_FILE__=$_[2]\n";
+        open(my $fh, '<', $_[2]) or die "__SYSTEM_OPEN_FAIL__=$!";
+        local $/;
+        my $content = <$fh>;
+        $content =~ s/\n/\\n/g;
+        print "__SYSTEM_CONF__=$content\n";
+        return 77;
+    };
+}
+require File::Temp;
+my ($fh, $template_file) = File::Temp::tempfile(UNLINK => 1);
+print {$fh} "server.name=<server_name>\nserver.port=<server_port>\n";
+close($fh);
+$Global::LIGHTTPD_CONF = $template_file;
+require Plugin::HTTP;
+require Sys::Hostname;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+{
+ no warnings 'redefine';
+ local *Sys::Hostname::hostname = sub { return 'stubhost' };
+ my $ret = Plugin::HTTP::run_lighttpd_for_conf({ _port => 4242 });
+ print "__RET__=$ret\n";
+ my $invalid_ok = eval { Plugin::HTTP::run_lighttpd_for_conf({ _port => '42;bad' }); 1 };
+ print "__INVALID_OK__=" . ($invalid_ok ? 1 : 0) . "\n";
+ my $invalid_err = $@;
+ $invalid_err =~ s/\n/\\n/g;
+ print "__INVALID_ERR__=$invalid_err\n";
+ print "__SYSTEM_CALLS__=$main::SYSTEM_CALLS\n";
+}
+PERL
+
+    is($exit_code, 0, 'lighttpd package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'lighttpd package-owner action keeps PPlugin unloaded');
+    like($out, qr/__SYSTEM_ARGC__=3/, 'lighttpd package-owner action invokes system in list form');
+    like($out, qr/__SYSTEM_ARG0__=lighttpd\n__SYSTEM_ARG1__=-f\n__SYSTEM_FILE__=/, 'lighttpd package-owner action preserves the lighttpd -f invocation contract');
+    like($out, qr/__SYSTEM_CONF__=.*server\.name=stubhost\.example\.test\\nserver\.port=4242\\n/, 'lighttpd package-owner action writes the substituted config before launch');
+    like($out, qr/__RET__=77/, 'lighttpd package-owner action returns the lighttpd system exit status');
+    like($out, qr/__INVALID_OK__=0/, 'lighttpd package-owner action rejects invalid port values');
+    like($out, qr/__INVALID_ERR__=Invalid lighttpd port '42;bad'/, 'lighttpd package-owner action reports the invalid port before launch');
+    like($out, qr/__SYSTEM_CALLS__=1/, 'lighttpd package-owner invalid-port path does not invoke system');
+    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'lighttpd package-owner subprocess stays clear of legacy plugin runtime issues');
+};
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 9;
+    plan tests => 5;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
@@ -4172,14 +4229,7 @@ subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'), 'cgi.plg is no longer part of the legacy pplugin corpus after package-owner migration');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'), 'http.plg is no longer part of the legacy pplugin corpus after package-owner migration');
-
-    my $lighttpd_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'));
-    my $lighttpd_ast = eval { $parser->(\$lighttpd_input) };
-    ok(!$@, 'lighttpd plugin still parses without die under pplugin after package-owner extraction') or diag(normalize_error($@));
-    ok(defined($lighttpd_ast) && ref($lighttpd_ast) eq 'HASH', 'lighttpd plugin still returns a hash AST under pplugin');
-    is(ref($lighttpd_ast->{lighttpd}), 'CODE', 'lighttpd plugin still exposes lighttpd as a coderef');
-    ok(!exists $lighttpd_ast->{set_http_hostport}, 'lighttpd plugin no longer exposes the package-backed set_http_hostport helper as a legacy coderef');
-    ok(!exists $lighttpd_ast->{set_http_localhost}, 'lighttpd plugin no longer exposes the package-backed set_http_localhost helper as a legacy coderef');
+    ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'), 'lighttpd.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;
