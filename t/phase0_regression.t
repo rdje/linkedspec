@@ -3791,7 +3791,7 @@ subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub
     my $ds_vhistory_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'ds_vhistory.plg'));
     my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
     my $regtest_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'regtest.plg'));
-    my $spec_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'spec.plg'));
+    my $spec_plugin_path = File::Spec->catfile($Bin, '..', 'plugin', 'spec.plg');
 
     ok(defined($lispish_pm) && length($lispish_pm), 'Lispish.pm source is available for parser-lookup compatibility inspection');
     unlike($lispish_pm, qr/PPlugin->_get_parser\('Lispish'\)/, 'Lispish.pm no longer routes parser lookup through the legacy _get_parser plugin');
@@ -3799,7 +3799,7 @@ subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub
     unlike($ds_vhistory_plugin . $fsmgen_plugin . $regtest_plugin, qr/\b_get_parser\s*\(/, 'repo-owned plugin files no longer use the legacy _get_parser helper plugin');
     like($ds_vhistory_plugin, qr/LinkedSpec::get_parser\('ds_vhistory'\)/, 'ds_vhistory plugin now uses LinkedSpec::get_parser(...) directly');
     like($fsmgen_plugin, qr/LinkedSpec::get_parser\('portmap'\)/, 'fsmgen plugin now uses LinkedSpec::get_parser(...) directly');
-    like($spec_plugin, qr/_get_parser\s*\{/, 'legacy spec plugin still exists as compatibility surface for older callers');
+    ok(!-e $spec_plugin_path, 'legacy spec.plg _get_parser compatibility shim is removed after repo-owned callers moved to LinkedSpec::get_parser(...)');
 };
 subtest 'lispish_single_uses_linkedspec_parser_lookup_without_pplugin' => sub {
     plan tests => 6;

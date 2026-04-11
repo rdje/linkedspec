@@ -371,6 +371,8 @@ Current project direction does not treat that branch as a target architecture.
 
 `Plugin::HTTP` now shows the same destination applied to formerly real legacy actions, not just thin helper wrappers. The package owns `httplink`, `set_http_hostport`, `set_http_localhost`, the former `http` file-link action through `print_file_links_for_conf(...)`, the former `lighttpd` action through `run_lighttpd_for_conf(...)`, and the former `httpd` action through `run_httpd_for_conf(...)`; `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` have been removed. Repo-owned `.plg` callers that need HTTP helpers call `Plugin::HTTP` explicitly.
 
+The one-line parser-lookup compatibility shim `plugin/spec.plg` has also been removed. Repo-owned parser lookup now stays on `LinkedSpec::get_parser(...)` directly instead of routing through a legacy `_get_parser` plugin action.
+
 The current intended direction is:
 - keep deterministic named `.spec` resolution,
 - treat dynamic `.plg` loading and plugin execution as legacy-removal territory,

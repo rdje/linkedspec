@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: retire spec.plg parser lookup shim
+
+- deleted `plugin/spec.plg`, the one-line `_get_parser` compatibility shim, now that repo-owned parser lookup callers use `LinkedSpec::get_parser(...)` directly,
+- updated regression coverage so the parser-lookup migration contract no longer expects a permanent `.plg` compatibility surface after internal callers have left it,
+- refreshed the plugin-roadmap and public/private docs to make this deletion part of the `.plg` retirement story rather than a new package-extraction step.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'spec.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move httpd action into package owner
 
 - moved the historical `httpd` action into `Plugin::HTTP::run_httpd_for_conf(...)`, keeping the template substitution behavior while making the package owner responsible for reading `Global->httpd_conf`, composing host/port/email values, writing the generated config, and launching `apachectl`,
@@ -2390,10 +2403,10 @@ Regression coverage now locks:
 Continued the plugin/runtime modernization track by removing one of the remaining “parser lookup through plugin magic” seams from repo-owned code:
 - `perl/Lispish.pm` now uses `LinkedSpec::get_parser('Lispish')` directly instead of `PPlugin->_get_parser('Lispish')`,
 - the remaining repo-owned `.plg` callers that were still using `_get_parser(...)` (`plugin/ds_vhistory.plg`, `plugin/fsmgen.plg`, and `plugin/regtest.plg`) now also call `LinkedSpec::get_parser(...)` explicitly,
-- and `plugin/spec.plg::_get_parser` is now left only as compatibility surface for older external callers rather than as the preferred parser-lookup contract for repo-owned code.
+- and, at the time, `plugin/spec.plg::_get_parser` was left only as compatibility surface for older external callers rather than as the preferred parser-lookup contract for repo-owned code. That compatibility shim was later removed on 2026-04-11.
 
 Regression coverage now locks:
-- that repo-owned module/plugin callers avoid `_get_parser(...)` while `plugin/spec.plg` remains present as compatibility,
+- that repo-owned module/plugin callers avoid `_get_parser(...)`, with the current 2026-04-11 regression now locking that `plugin/spec.plg` is no longer present,
 - and that `Lispish::single(...)` still parses successfully while keeping `PPlugin` unloaded.
 
 ## 2026-03-24 - Docs: Formalize Perl Package And Routine Docstring Convention

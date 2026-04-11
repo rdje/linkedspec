@@ -1243,6 +1243,8 @@ That last clause is intentional. A `.pm` owner does not automatically require a 
 
 The same rule also applies inside mixed legacy files. The former real historical `http` action now lives in `Plugin::HTTP::print_file_links_for_conf(...)`, the former real historical `lighttpd` action now lives in `Plugin::HTTP::run_lighttpd_for_conf(...)`, and the former historical Apache `httpd` action now lives in `Plugin::HTTP::run_httpd_for_conf(...)`, so `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` are no longer shipped as legacy registry wrappers. Repo-owned `.plg` code now calls `Plugin::HTTP::httplink(...)`, `Plugin::HTTP::set_http_hostport(...)`, or `Plugin::HTTP::set_http_localhost(...)` directly when it needs HTTP helper behavior.
 
+Parser lookup follows the same principle. The old one-line `plugin/spec.plg` `_get_parser` shim is gone; use `LinkedSpec::get_parser('Name')` or `LinkedSpec::Get(...)` directly rather than treating parser lookup as a plugin action.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`
