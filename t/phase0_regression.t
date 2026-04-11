@@ -4002,11 +4002,12 @@ PERL
     unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
 };
 subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 20;
+    plan tests => 22;
 
     my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
     my $http_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'http.plg');
     my $lighttpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg');
+    my $httpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'httpd.plg');
     my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
     my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
     my $tree_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tree.plg'));
@@ -4017,6 +4018,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
     ok(!-e $http_plugin_plg, 'http.plg is removed now that Plugin::HTTP owns the legacy file-link action directly');
     ok(!-e $lighttpd_plugin_plg, 'lighttpd.plg is removed now that Plugin::HTTP owns the legacy lighttpd action directly');
+    ok(!-e $httpd_plugin_plg, 'httpd.plg is removed now that Plugin::HTTP owns the legacy httpd action directly');
     ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
     ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
     ok(defined($tree_plugin_plg) && length($tree_plugin_plg), 'tree.plg source is available for HTTP helper migration inspection');
@@ -4026,6 +4028,7 @@ subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     like($http_plugin_pm, qr/sub set_http_localhost\b/, 'package-backed http plugin owner defines set_http_localhost');
     like($http_plugin_pm, qr/sub print_file_links_for_conf\b/, 'package-backed http plugin owner defines the former http action as print_file_links_for_conf');
     like($http_plugin_pm, qr/sub run_lighttpd_for_conf\b/, 'package-backed http plugin owner defines the former lighttpd action as run_lighttpd_for_conf');
+    like($http_plugin_pm, qr/sub run_httpd_for_conf\b/, 'package-backed http plugin owner defines the former httpd action as run_httpd_for_conf');
     like($rtl_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'rtl.plg now sets hostport through the package-backed HTTP owner');
     like($rtl_plugin_plg, qr/Plugin::HTTP::httplink\(/, 'rtl.plg now builds links through the package-backed HTTP owner');
     unlike($rtl_plugin_plg, $unqualified_set_http_hostport, 'rtl.plg no longer calls set_http_hostport through an unqualified plugin helper');
@@ -4220,8 +4223,79 @@ PERL
     like($out, qr/__SYSTEM_CALLS__=1/, 'lighttpd package-owner invalid-port path does not invoke system');
     unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'lighttpd package-owner subprocess stays clear of legacy plugin runtime issues');
 };
+subtest 'http_package_owner_preserves_httpd_action_contract' => sub {
+    plan tests => 12;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{'Global.pm'} = __FILE__;
+
+    package Global;
+    our $HTTPD_CONF;
+    sub httpd_conf { return $HTTPD_CONF }
+    sub http_hostail { return '.example.test' }
+    sub http_default_port { return 8080 }
+    sub author_email_address { return 'maintainer@example.test' }
+}
+BEGIN {
+    *CORE::GLOBAL::system = sub {
+        $main::SYSTEM_CALLS++;
+        print "__SYSTEM_ARGC__=" . scalar(@_) . "\n";
+        print "__SYSTEM_ARG0__=$_[0]\n";
+        print "__SYSTEM_ARG1__=$_[1]\n";
+        print "__SYSTEM_ARG2__=$_[2]\n";
+        print "__SYSTEM_ARG3__=$_[3]\n";
+        print "__SYSTEM_FILE__=$_[4]\n";
+        open(my $fh, '<', $_[4]) or die "__SYSTEM_OPEN_FAIL__=$!";
+        local $/;
+        my $content = <$fh>;
+        $content =~ s/\n/\\n/g;
+        print "__SYSTEM_CONF__=$content\n";
+        return 88;
+    };
+}
+require File::Temp;
+my ($fh, $template_file) = File::Temp::tempfile(UNLINK => 1);
+print {$fh} "server.name=<server_name>\nserver.port=<server_port>\nserver.admin=<author_email_address>\n";
+close($fh);
+$Global::HTTPD_CONF = $template_file;
+require Plugin::HTTP;
+require Sys::Hostname;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+{
+ no warnings 'redefine';
+ local *Sys::Hostname::hostname = sub { return 'stubhost' };
+ my $ret = Plugin::HTTP::run_httpd_for_conf({ _port => 4242, _argv => ['restart'] });
+ print "__RET__=$ret\n";
+ my $invalid_action_ok = eval { Plugin::HTTP::run_httpd_for_conf({ _port => 4242, _argv => ['restart;bad'] }); 1 };
+ print "__INVALID_ACTION_OK__=" . ($invalid_action_ok ? 1 : 0) . "\n";
+ my $invalid_action_err = $@;
+ $invalid_action_err =~ s/\n/\\n/g;
+ print "__INVALID_ACTION_ERR__=$invalid_action_err\n";
+ my $invalid_port_ok = eval { Plugin::HTTP::run_httpd_for_conf({ _port => '42;bad' }); 1 };
+ print "__INVALID_PORT_OK__=" . ($invalid_port_ok ? 1 : 0) . "\n";
+ my $invalid_port_err = $@;
+ $invalid_port_err =~ s/\n/\\n/g;
+ print "__INVALID_PORT_ERR__=$invalid_port_err\n";
+ print "__SYSTEM_CALLS__=$main::SYSTEM_CALLS\n";
+}
+PERL
+
+    is($exit_code, 0, 'httpd package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'httpd package-owner action keeps PPlugin unloaded');
+    like($out, qr/__SYSTEM_ARGC__=5/, 'httpd package-owner action invokes apachectl in list form');
+    like($out, qr/__SYSTEM_ARG0__=apachectl\n__SYSTEM_ARG1__=-k\n__SYSTEM_ARG2__=restart\n__SYSTEM_ARG3__=-f\n__SYSTEM_FILE__=/, 'httpd package-owner action preserves the apachectl -k action -f config invocation contract');
+    like($out, qr/__SYSTEM_CONF__=.*server\.name=stubhost\.example\.test\\nserver\.port=4242\\nserver\.admin=maintainer\@example\.test\\n/, 'httpd package-owner action writes the substituted config before launch');
+    like($out, qr/__RET__=88/, 'httpd package-owner action returns the apachectl system exit status');
+    like($out, qr/__INVALID_ACTION_OK__=0/, 'httpd package-owner action rejects unsafe action values');
+    like($out, qr/__INVALID_ACTION_ERR__=Invalid apachectl action 'restart;bad'/, 'httpd package-owner action reports invalid actions before launch');
+    like($out, qr/__INVALID_PORT_OK__=0/, 'httpd package-owner action rejects invalid port values');
+    like($out, qr/__INVALID_PORT_ERR__=Invalid httpd port '42;bad'/, 'httpd package-owner action reports invalid ports before launch');
+    like($out, qr/__SYSTEM_CALLS__=1/, 'httpd package-owner invalid paths do not invoke system');
+    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'httpd package-owner subprocess stays clear of legacy plugin runtime issues');
+};
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 5;
+    plan tests => 6;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for package-extracted plugin smoke');
@@ -4230,6 +4304,7 @@ subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg'), 'cgi.plg is no longer part of the legacy pplugin corpus after package-owner migration');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'http.plg'), 'http.plg is no longer part of the legacy pplugin corpus after package-owner migration');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg'), 'lighttpd.plg is no longer part of the legacy pplugin corpus after package-owner migration');
+    ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'httpd.plg'), 'httpd.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'pplugin_exec_wrapper_normalizes_to_explicit_name_owner' => sub {
     plan tests => 5;

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: move httpd action into package owner
+
+- moved the historical `httpd` action into `Plugin::HTTP::run_httpd_for_conf(...)`, keeping the template substitution behavior while making the package owner responsible for reading `Global->httpd_conf`, composing host/port/email values, writing the generated config, and launching `apachectl`,
+- hardened the migrated action by using list-form `system('apachectl', '-k', $action, '-f', $filename)`, flushing/closing the generated temp config before launch, rejecting non-numeric ports, and rejecting unsafe action tokens before any process execution,
+- deleted `plugin/httpd.plg` now that no repo-owned caller still needs `httpd` as a legacy `.plg` registration name, and updated regression coverage so the remaining `pplugin` corpus no longer expects it to parse.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/HTTP.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'httpd.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: move lighttpd action into package owner
 
 - moved the historical `lighttpd` action into `Plugin::HTTP::run_lighttpd_for_conf(...)`, keeping the template substitution behavior while making the package owner responsible for reading `Global->lighttpd_conf`, composing the host/port, writing the generated config, and launching `lighttpd`,

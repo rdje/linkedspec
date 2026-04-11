@@ -109,11 +109,8 @@ sub run_lighttpd_for_conf {
 
  require File::Temp;
  require Global;
- require Sys::Hostname;
 
- my $host = Sys::Hostname::hostname() . ($conf->{_notail} ? '' : Global->http_hostail);
- my $port = $conf->{_port} || Global->http_default_port;
- die "Invalid lighttpd port '$port'" unless defined($port) && $port =~ /\A\d+\z/;
+ my ($host, $port) = _daemon_host_port($conf, 'lighttpd');
  my $lighttpd_conf = _read_text_file(Global->lighttpd_conf);
 
  $lighttpd_conf =~ s/<server_name>/$host/o;
@@ -127,6 +124,56 @@ sub run_lighttpd_for_conf {
  close($fh) or die "Unable to close generated lighttpd config '$filename': $!";
 
  return system('lighttpd', '-f', $filename);
+}
+
+#------------------------------------------------------------------------------
+# Function: run_httpd_for_conf
+# Purpose : Preserve the historical `httpd` plugin action as an explicit
+#           package function: render the configured Apache httpd template with
+#           the active host/port/email and run apachectl against the file.
+# Args    : ($conf_hashref) with optional `_notail`, `_port`, and `_argv->[0]`
+# Returns : `system(...)` exit status from the apachectl invocation
+#------------------------------------------------------------------------------
+sub run_httpd_for_conf {
+ my ($conf) = @_;
+ $conf //= {};
+
+ require File::Spec;
+ require File::Temp;
+ require Global;
+
+ my ($host, $port) = _daemon_host_port($conf, 'httpd');
+ my $action = $conf->{_argv} && @{$conf->{_argv}} ? $conf->{_argv}[0] : 'start';
+ die "Invalid apachectl action '$action'" unless defined($action) && $action =~ /\A[A-Za-z0-9_.-]+\z/;
+ my $httpd_conf = _read_text_file(Global->httpd_conf);
+ my $email = Global->author_email_address;
+
+ $httpd_conf =~ s/<server_name>/$host/g;
+ $httpd_conf =~ s/<server_port>/$port/g;
+ $httpd_conf =~ s/<author_email_address>/$email/o;
+
+ my $template_port = $port;
+ $template_port =~ s/[^A-Za-z0-9_.-]/_/g;
+ my ($fh, $filename) = File::Temp::tempfile("httpd_${template_port}_XXXXX", TMPDIR => 1, UNLINK => 1);
+ my $abs_filename = File::Spec->rel2abs($filename);
+
+ print {$fh} $httpd_conf;
+ close($fh) or die "Unable to close generated httpd config '$abs_filename': $!";
+
+ return system('apachectl', '-k', $action, '-f', $abs_filename);
+}
+
+sub _daemon_host_port {
+ my ($conf, $daemon_name) = @_;
+
+ require Global;
+ require Sys::Hostname;
+
+ my $host = Sys::Hostname::hostname() . ($conf->{_notail} ? '' : Global->http_hostail);
+ my $port = $conf->{_port} || Global->http_default_port;
+ die "Invalid $daemon_name port '$port'" unless defined($port) && $port =~ /\A\d+\z/;
+
+ return ($host, $port);
 }
 
 sub _read_text_file {
