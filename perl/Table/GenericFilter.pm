@@ -1,9 +1,9 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::GenericFilter
-# Purpose: Package-backed owner for the generic table-filter grouping actions
-#          that historically lived entirely in `plugin/genericfilter.plg`.
+# Package: Table::GenericFilter
+# Purpose: Table-domain owner for the generic grouping actions that
+#          historically lived entirely in `plugin/genericfilter.plg`.
 #------------------------------------------------------------------------------
-package Plugin::GenericFilter;
+package Table::GenericFilter;
 
 use 5.010;
 BEGIN {
@@ -63,7 +63,7 @@ sub _action_handlers {
 sub dispatch {
  my ($action, @args) = @_;
  my $handler = _action_handlers()->{$action};
- die "(Plugin::GenericFilter::dispatch) -E- Unsupported generic filter action '$action',"
+ die "(Table::GenericFilter::dispatch) -E- Unsupported generic filter action '$action',"
   unless ref($handler) eq 'CODE';
  return $handler->(@args)
 }

@@ -11,7 +11,7 @@
 #------------------------------------------------------------------------------
 package TableSort;
 
-use Plugin::GenericFilter;
+use Table::GenericFilter;
 use TableGrep;
 
 
@@ -48,7 +48,7 @@ my ($conf, $a2d_ref, $filter_seq) = @_;
 			      my @varargs;
 
 			      push @varargs, $conf, $info, $a2d_ref, $maptable, \@args;
-			      $filteredata = Plugin::GenericFilter::dispatch($action, @varargs);
+			      $filteredata = Table::GenericFilter::dispatch($action, @varargs);
 			      die "$@, " if $@;
 
 			     } else {
