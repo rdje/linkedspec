@@ -1247,6 +1247,8 @@ Parser lookup follows the same principle. The old one-line `plugin/spec.plg` `_g
 
 Generic plugin lookup follows it too. The old one-line `plugin/plugin.plg` shim is gone; code that genuinely needs a callback lookup should call `LinkedSpec::get_plugin($name)` directly and handle an unresolved name explicitly, for example with `// sub {}` when a no-op fallback is intentional.
 
+Small utility wrappers follow the same rule. The old `plugin/table.plg` wrapper is gone; code that wants to split a flat list into fixed-width rows should call `Table::list2table(...)` directly instead of relying on a `list_2table` plugin action. The unused `table_2ss` action is not kept as a permanent compatibility name without a real caller.
+
 ## Runtime Options
 `LinkedSpec::Get(\$spec, %options)` supports:
 - `parse_only => 1`

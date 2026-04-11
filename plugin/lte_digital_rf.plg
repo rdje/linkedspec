@@ -4,7 +4,7 @@ add_mem_io_assigns {my ($cr, %opt) = @_;
 
  my %assigns;
  my %align;
- foreach my $wid_cnt (@{list_2table ($conf->{instance_count}, 2)}) {
+ foreach my $wid_cnt (@{Table::list2table ($conf->{instance_count}, 2)}) {
    my ($wid, $cnt) = @$wid_cnt;
 
    foreach my $cdir (qw/in out/) {
@@ -41,4 +41,3 @@ add_mem_io_assigns {my ($cr, %opt) = @_;
  say "\n\n";
 
 }
-

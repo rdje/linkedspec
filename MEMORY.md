@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-11: `plugin/table.plg` removed. The last repo-owned `list_2table(...)` callers now use `Table::list2table(...)` directly in `generic_fake_memory_module.plg`, `lte_digital_rf.plg`, and `spyglass.plg`; the old `table_2ss` wrapper had no repo-owned caller to preserve.
 - 2026-04-11: `plugin/plugin.plg` removed. Its only remaining repo-owned consumer, `plugin/fsmgen.plg::getop_plugin_list`, now calls `LinkedSpec::get_plugin($name) // sub {}` directly, preserving the old unresolved-name no-op fallback without keeping the generic `plugin(...)` shim.
 - 2026-04-11: `plugin/spec.plg` removed. It only provided the old `_get_parser` plugin shim, and all repo-owned parser lookup callers already use `LinkedSpec::get_parser(...)` directly. Future parser lookup work should stay on explicit `LinkedSpec::get_parser(...)` / `LinkedSpec::Get(...)` surfaces rather than reintroducing plugin-mediated parser lookup.
 - 2026-04-11: `plugin/httpd.plg` removed after moving the historical `httpd` action into `Plugin::HTTP::run_httpd_for_conf(...)`. The action was already stale because repo-owned `conf/httpd.conf` had been intentionally removed, but the package owner preserves the behavior for callers that provide `Global->httpd_conf`, validates port/action input, closes the generated temp config before launch, and uses list-form `system('apachectl', '-k', $action, '-f', $filename)`.

@@ -3937,6 +3937,45 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     is(ref($fsmgen_ast->{getop_plugin_list}), 'CODE', 'fsmgen plugin still exposes getop_plugin_list as a coderef');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg'), 'plugin.plg is no longer part of the legacy pplugin corpus after dynamic lookup migration');
 };
+subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
+    plan tests => 19;
+
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
+    my $table_plugin_path = File::Spec->catfile($plugin_dir, 'table.plg');
+    my @migrated_plugins = qw(
+        generic_fake_memory_module.plg
+        lte_digital_rf.plg
+        spyglass.plg
+    );
+
+    ok(!-e $table_plugin_path, 'table.plg wrapper is removed after repo-owned callers moved to Table::list2table(...) directly');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for table-owner migrated plugin smoke');
+
+    foreach my $plugin_basename (@migrated_plugins) {
+        my $source = slurp(File::Spec->catfile($plugin_dir, $plugin_basename));
+        ok(defined($source) && length($source), "$plugin_basename source is available for table-owner migration inspection");
+        unlike($source, qr/\blist_2table\s*\(/, "$plugin_basename no longer calls the legacy list_2table wrapper");
+        like($source, qr/Table::list2table\s*\(/, "$plugin_basename calls Table::list2table directly");
+
+        my $ast = eval { $parser->(\$source) };
+        ok(!$@, "$plugin_basename still parses without die under pplugin after table wrapper removal") or diag(normalize_error($@));
+        ok(defined($ast) && ref($ast) eq 'HASH', "$plugin_basename still returns a hash AST under pplugin");
+    }
+
+    my @unqualified_list_2table_hits;
+    my @table_2ss_hits;
+    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
+        my $source = slurp($plugin_file);
+        push @unqualified_list_2table_hits, basename($plugin_file)
+            if $source =~ /\blist_2table\s*\(/;
+        push @table_2ss_hits, basename($plugin_file)
+            if $source =~ /\btable_2ss\b/;
+    }
+    is_deeply(\@unqualified_list_2table_hits, [], 'repo-owned plugin files no longer depend on the legacy list_2table action wrapper');
+    is_deeply(\@table_2ss_hits, [], 'repo-owned plugin files have no remaining table_2ss compatibility action usage');
+};
 subtest 'string_plugin_logic_moves_into_package_owner' => sub {
     plan tests => 10;
 

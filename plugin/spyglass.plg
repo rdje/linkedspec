@@ -14,7 +14,7 @@ my %ruleseverity;
 
   say "(spyglass_2ss) -I- Loading file '$realp'..";
   my $slurp = slurp ($realp);
-  $ruleseverity{$realp} = {map {$$_[1] => $$_[0]} @{list_2table([($slurp =~ /summary\s+status\s+.+?=\n(.+?)\n\n/sio)[0] =~ /^(error|warning|info)\s+(\S+).+?(?=(?1)|\n\n)/msgio], 2)}};
+  $ruleseverity{$realp} = {map {$$_[1] => $$_[0]} @{Table::list2table([($slurp =~ /summary\s+status\s+.+?=\n(.+?)\n\n/sio)[0] =~ /^(error|warning|info)\s+(\S+).+?(?=(?1)|\n\n)/msgio], 2)}};
 
   $slurp =~ /detailed\s+status\s+/pio;
   my $detailedstatus_postmatch = ${^POSTMATCH};
@@ -142,4 +142,3 @@ spyglass_waive {
  }
  #Table2SS::Close($wbid);
 }
-

@@ -4,7 +4,7 @@ $|=1;
  
  my $modinfo = {};
  my @mm_suffix;
- foreach my $cspec (@{list_2table ($c->{buffer_info}, 3)}) {
+ foreach my $cspec (@{Table::list2table ($c->{buffer_info}, 3)}) {
   my ($nbi, $nbw, $nbb) = @$cspec;
 
   my $quotient = int $nbi / $c->{max_buffer_per_memory_module};

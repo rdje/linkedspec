@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: retire table.plg wrapper
+
+- migrated the remaining repo-owned `list_2table(...)` callers in `plugin/generic_fake_memory_module.plg`, `plugin/lte_digital_rf.plg`, and `plugin/spyglass.plg` to call `Table::list2table(...)` directly,
+- deleted `plugin/table.plg`, whose only remaining purpose was a thin table-helper registration wrapper, and confirmed the sibling `table_2ss` action had no repo-owned caller to preserve,
+- updated regression coverage so the affected legacy plugin files still parse under `pplugin` while repo-owned `.plg` source no longer depends on the `list_2table` / `table_2ss` compatibility actions.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/generic_fake_memory_module.plg`, `plugin/lte_digital_rf.plg`, and `plugin/spyglass.plg`
+  - `rg --files -g 'table.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: retire plugin.plg lookup shim
 
 - migrated `plugin/fsmgen.plg::getop_plugin_list` off the generic `plugin(...)` helper and onto `LinkedSpec::get_plugin($name) // sub {}` directly, preserving the previous no-op fallback for unresolved dynamic plugin names,

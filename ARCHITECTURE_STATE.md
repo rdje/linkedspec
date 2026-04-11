@@ -375,6 +375,8 @@ The one-line parser-lookup compatibility shim `plugin/spec.plg` has also been re
 
 The generic one-line dynamic lookup shim `plugin/plugin.plg` is gone as well. Its remaining repo-owned caller in `plugin/fsmgen.plg` now calls `LinkedSpec::get_plugin(...)` directly, so known dynamic lookup stays behind the explicit bridge without preserving an extra legacy action name.
 
+The small utility wrapper `plugin/table.plg` has also been removed. Repo-owned table-row extraction now names `Table::list2table(...)` directly, and the unused `table_2ss` action is not preserved as a legacy plugin registration without a concrete caller.
+
 The current intended direction is:
 - keep deterministic named `.spec` resolution,
 - treat dynamic `.plg` loading and plugin execution as legacy-removal territory,
