@@ -12,8 +12,9 @@ BEGIN {
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
 
- #------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Function: _require_dep
 # Purpose : Validate and return one injected dependency callback by name.
 # Args    : ($deps, $name)
@@ -28,6 +29,17 @@ sub _require_dep {
 }
 
 #------------------------------------------------------------------------------
+# Function: _require_pkg
+# Purpose : Lazy-load one owner package through the shared dispatch helper.
+# Args    : ($pkg)
+# Returns : true on successful require
+#------------------------------------------------------------------------------
+sub _require_pkg {
+ my ($pkg) = @_;
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
+}
+
+#------------------------------------------------------------------------------
 # Function: _call_preserving_err
 # Purpose : Execute callback without clobbering caller-visible successful `$@`.
 # Args    : ($cb)
@@ -35,21 +47,7 @@ sub _require_dep {
 #------------------------------------------------------------------------------
 sub _call_preserving_err {
  my ($cb) = @_;
- my $saved_err = $@;
- my $wantarray = wantarray;
- if ($wantarray) {
-  my @ret = $cb->();
-  $@ = $saved_err;
-  return @ret
- }
- if (defined $wantarray) {
-  my $ret = $cb->();
-  $@ = $saved_err;
-  return $ret
- }
- $cb->();
- $@ = $saved_err;
- return
+ return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 #------------------------------------------------------------------------------
@@ -59,11 +57,7 @@ sub _call_preserving_err {
 # Returns : true on successful load
 #------------------------------------------------------------------------------
 sub _load_legacy_plugin_runtime {
- return _call_preserving_err(sub {
-  my $ok = eval { require PPlugin; 1 };
-  die "(LinkedSpec::AUTOLOAD) -E- Unable to load PPlugin: $@" unless $ok;
-  return 1
- })
+ return _require_pkg('PPlugin')
 }
 
 #------------------------------------------------------------------------------
@@ -101,11 +95,12 @@ sub _get_legacy_plugin {
 #------------------------------------------------------------------------------
 sub _resolve_registered_plugin {
  my ($plugin_name) = @_;
- return _call_preserving_err(sub {
-  my $ok = eval { require LinkedSpec::PluginRegistry; 1 };
-  die "(LinkedSpec::PluginBridge::_resolve_registered_plugin) -E- Unable to load LinkedSpec::PluginRegistry: $@" unless $ok;
-  return LinkedSpec::PluginRegistry::get_plugin($plugin_name)
- })
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::PluginRegistry',
+  'get_plugin',
+  $plugin_name,
+ )
 }
 
 #------------------------------------------------------------------------------

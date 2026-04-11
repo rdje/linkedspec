@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 153;
+    plan tests => 160;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1157,6 +1157,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     my $resolver_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Resolver.pm'));
     my $validation_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Validation.pm'));
     my $action_rewriter_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionRewriter.pm'));
+    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));
 
     ok(defined($owner_dispatch_pm) && length($owner_dispatch_pm), 'OwnerDispatch source is available for architecture inspection');
     ok(defined($linkedspec_pm) && length($linkedspec_pm), 'LinkedSpec.pm source is available for architecture inspection');
@@ -1186,6 +1187,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     ok(defined($resolver_pm) && length($resolver_pm), 'Resolver.pm source is available for architecture inspection');
     ok(defined($validation_pm) && length($validation_pm), 'Validation.pm source is available for architecture inspection');
     ok(defined($action_rewriter_pm) && length($action_rewriter_pm), 'ActionRewriter.pm source is available for architecture inspection');
+    ok(defined($plugin_bridge_pm) && length($plugin_bridge_pm), 'PluginBridge.pm source is available for architecture inspection');
     like($owner_dispatch_pm, qr/package LinkedSpec::OwnerDispatch;/, 'OwnerDispatch declares the shared owner-dispatch package');
     like($owner_dispatch_pm, qr/sub call_preserving_err\b/, 'OwnerDispatch defines the shared $@ preservation helper');
     like($owner_dispatch_pm, qr/sub require_pkg\b/, 'OwnerDispatch defines the shared lazy package loader');
@@ -1315,6 +1317,16 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
         qr/sub _delegate_emit_context_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec::RuleIR::EmitContext',\s*\$method,\s*\@args,\s*\)/s,
         'ActionRewriter.pm now routes EmitContext compatibility dispatch through OwnerDispatch',
     );
+    like($plugin_bridge_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'PluginBridge.pm now loads the shared owner-dispatch helper');
+    like($plugin_bridge_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'PluginBridge.pm now routes lazy package loading through OwnerDispatch');
+    like($plugin_bridge_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'PluginBridge.pm now routes $@ preservation through OwnerDispatch');
+    like($plugin_bridge_pm, qr/sub _load_legacy_plugin_runtime\b.*_require_pkg\('PPlugin'\)/s, 'PluginBridge.pm now routes legacy runtime loading through its shared owner-dispatch package seam');
+    like(
+        $plugin_bridge_pm,
+        qr/sub _resolve_registered_plugin\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec::PluginRegistry',\s*'get_plugin',\s*\$plugin_name,\s*\)/s,
+        'PluginBridge.pm now routes registered-plugin lookup through OwnerDispatch',
+    );
+    unlike($plugin_bridge_pm, qr/eval\s*\{\s*require\s+(?:PPlugin|LinkedSpec::PluginRegistry)/s, 'PluginBridge.pm no longer carries local eval-require branches for its default plugin owners');
 };
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;

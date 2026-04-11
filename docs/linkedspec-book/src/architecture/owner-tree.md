@@ -363,7 +363,7 @@ Architecturally, this branch should be read as transition machinery.
 
 `LinkedSpec::PluginRegistry` owns explicit in-memory plugin registration.
 
-`LinkedSpec::PluginBridge` checks explicit registration first and falls back to legacy behavior when needed.
+`LinkedSpec::PluginBridge` checks explicit registration first and falls back to legacy behavior when needed. Its current compatibility plumbing uses the shared owner-dispatch seam for registered-plugin lookup, legacy `PPlugin` loading, and successful `$@` preservation, so even this transition branch follows the same wrapper discipline as the main runtime owners.
 
 `PPlugin` owns the old `.plg` discovery/execution path.
 

@@ -29,6 +29,7 @@ This document is the current high-level technical reading of the project shape. 
 - Delegated owner calls now resolve their target callbacks through the same `OwnerDispatch::require_pkg_cb(...)` loader path used by dependency maps and thin wrappers, so `dispatch_owner_call(...)` no longer carries a second symbol-call route internally.
 - Thin wrapper callback lookup now routes through that seam for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, and `ActionIR::Scanner`; direct callback probing is reserved for `OwnerDispatch` itself and the custom `RuleIR::EmitContext` owner-key registry diagnostics.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
+- `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, and successful `$@` preservation no longer require bridge-local eval/restore branches.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
@@ -336,6 +337,7 @@ The current public facade still exposes a plugin/runtime branch, but the archite
 - is the transition bridge,
 - checks explicit registration first,
 - falls back to legacy behavior only when needed,
+- routes its default registered-plugin lookup and legacy runtime load through `LinkedSpec::OwnerDispatch`,
 - and does not own discovery itself; it is a registry-first dispatch shim over the older `.plg` runtime.
 
 ### `PPlugin`
