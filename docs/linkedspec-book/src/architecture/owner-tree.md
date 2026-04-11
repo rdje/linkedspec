@@ -278,6 +278,8 @@ Validation validates through owner-provided views.
 
 That area is powerful and still a hotspot because LinkedSpec uses a bootstrap parser to parse the language used to define parsers.
 
+One naming caveat is worth keeping straight: active compiler descriptors now use compiled-state and dependency-regex terminology, but the bootstrap parser internals still contain some historical `spec_descr` / `gdata` variable names as bootstrap-local plumbing. Those names should not be read as the active compiler descriptor model.
+
 `LinkedSpec::Validation` owns early hardening before failures become confusing runtime behavior. It validates things like malformed rule starts, mode syntax, split markers, top-level paragraph shape, and descriptor-state dependency consistency.
 
 The frontend rule is:

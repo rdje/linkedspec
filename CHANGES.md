@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Docs: refresh architecture bootstrap naming boundary
+
+- executed the README bootstrap instruction by reading `README.md`, `SESSION_BOOTSTRAP.md`, the referenced public/working/continuity doc map, and the `LinkedSpec.pm` facade/import tree,
+- refreshed the live architecture snapshot to record the 2026-04-11 reading that active compiler/facade naming is now on `build_compiled_rule_table(...)` plus compiled dependency-regex state, while remaining `spec_descr` / `gdata` vocabulary is confined to bootstrap parser internals,
+- added the same caveat to the public owner-tree chapter so readers do not confuse bootstrap-local historical tuple names with the active compiler descriptor model.
+
+- Validation:
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -c perl/LinkedSpec/BootstrapSpec.pm`
+
 ## 2026-04-11 - Docs: modernize blind-call book examples
 
 - updated the public mdBook blind-call post-processing examples to use explicit `return(array(...))` payloads instead of the historical `return_a(...)` shortcut,
