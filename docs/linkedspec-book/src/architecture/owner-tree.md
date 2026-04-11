@@ -371,9 +371,9 @@ Repo-owned `.plg` files should not reach into `PPlugin->get(...)` directly. Ship
 
 Package-backed plugin extraction is already underway. `Plugin::String`, `Plugin::CGI`, and `Plugin::HTTP` own small helper surfaces that used to live only in `.plg` files. `Plugin::GenericFilter` now owns the generic table grouping actions too: `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE`. That means `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` can call a normal package owner instead of constructing `genericfilter_*` strings and asking the bridge or legacy runtime to look them up.
 
-The `plugin/genericfilter.plg` file still exists, but its role is compatibility registration. It delegates each legacy `genericfilter_*` name to `Plugin::GenericFilter`, keeping older `.plg` discovery paths alive without letting the implementation remain trapped in the dynamic plugin layer.
+The `plugin/genericfilter.plg` file no longer exists. It had already become only compatibility registration after `Plugin::GenericFilter` took over the implementation, and it was deleted once no repo-owned caller still needed the legacy `genericfilter_*` names.
 
-Not every extracted package owner should keep such a wrapper. `Plugin::CGI::file_list_path2http(...)` now has no repo-owned legacy plugin caller left, so the old `plugin/cgi.plg` registration file has been removed. That is the healthier destination: normal package owner first, temporary `.plg` bridge only when a concrete remaining caller still needs it, then deletion.
+Not every extracted package owner should keep such a wrapper. `Plugin::String`, `Plugin::CGI`, and `Plugin::GenericFilter` now have no repo-owned legacy plugin caller left, so `plugin/string.plg`, `plugin/cgi.plg`, and `plugin/genericfilter.plg` have been removed. That is the healthier destination: normal package owner first, temporary `.plg` bridge only when a concrete remaining caller still needs it, then deletion.
 
 The HTTP helpers show the same distinction at subdef granularity. `plugin/http.plg` and `plugin/lighttpd.plg` still exist because they contain real historical actions, but they no longer register `httplink`, `set_http_hostport`, or `set_http_localhost` as thin helper names. Repo-owned `.plg` callers now call `Plugin::HTTP` directly for those helper behaviors, leaving only the real legacy actions behind.
 

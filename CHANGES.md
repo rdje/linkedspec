@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-11 - Plugin runtime: remove pure package-backed helper wrappers
+
+- deleted `plugin/string.plg` now that `Plugin::String::var_subst(...)` / `var_subst_test(...)` own all repo-owned string-helper usage directly,
+- deleted `plugin/genericfilter.plg` now that `Plugin::GenericFilter` owns all repo-owned GenericFilter actions and the direct Perl callers no longer construct `genericfilter_*` legacy plugin names,
+- updated regression coverage to lock both wrapper removals and to keep package-owner behavior covered through direct `Plugin::String` / `Plugin::GenericFilter` tests instead of pplugin replay.
+
+- Validation:
+  - `perl -Iperl -c perl/Plugin/String.pm`
+  - `perl -Iperl -c perl/Plugin/GenericFilter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'string.plg' -g 'genericfilter.plg'` absence scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-11 - Plugin runtime: retire package-backed HTTP helper registrations
 
 - migrated repo-owned `.plg` callers of `httplink(...)`, `set_http_hostport(...)`, and `set_http_localhost(...)` to call `Plugin::HTTP` directly instead of depending on helper names registered through the legacy `.plg` runtime,
