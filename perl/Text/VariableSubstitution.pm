@@ -1,9 +1,10 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::String
-# Purpose: Package-backed owner for lightweight string-substitution plugin
-#          behavior that is being migrated out of legacy `.plg` files.
+# Package: Text::VariableSubstitution
+# Purpose: Text-domain owner for lightweight variable substitution behavior
+#          that migrated out of legacy `.plg` files and no longer belongs
+#          under plugin-branded scaffolding.
 #------------------------------------------------------------------------------
-package Plugin::String;
+package Text::VariableSubstitution;
 
 use 5.010;
 BEGIN {

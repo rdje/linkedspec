@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-04-11`
+- Last refreshed: `2026-04-12`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -153,11 +153,11 @@ LinkedSpec
    └─ PPlugin
       └─ LinkedSpec
 Plugin::* (migration scaffold)
-├─ Plugin::String
 ├─ Plugin::CGI
 └─ Plugin::HTTP
 Project/domain utility owners
 ├─ InteractivePrompt
+├─ Text::VariableSubstitution
 ├─ VHDL::ConstantEval
 ├─ MSOffice::Excel
 └─ Table::GenericFilter
@@ -371,7 +371,7 @@ Current project direction does not treat that branch as a target architecture.
 - keeps the recursive `group_by_port` / `group_by_ioclock` behavior on the existing HUtils grouping path without routing through stringly plugin lookup,
 - and no longer keeps `plugin/genericfilter.plg` as a thin legacy registration wrapper now that no repo-owned caller still needs those `genericfilter_*` plugin names.
 
-`Plugin::String` and `Plugin::CGI` show the preferred short-term destination for pure helper extractions when no clearer owner has been chosen yet: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `Table::GenericFilter` now owns the table grouping helpers that briefly lived under `Plugin::GenericFilter`, `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`, and `MSOffice::Excel` now owns the Excel helper that briefly lived under `Plugin::MSOffice`.
+`Plugin::CGI` shows the preferred short-term destination for pure helper extractions when no clearer owner has been chosen yet: the package owner keeps the behavior, while the old `.plg` registration wrapper is deleted once no repo-owned code still needs the legacy plugin name. That destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `Text::VariableSubstitution` now owns the string substitution helpers that briefly lived under `Plugin::String`, `Table::GenericFilter` now owns the table grouping helpers that briefly lived under `Plugin::GenericFilter`, `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`, and `MSOffice::Excel` now owns the Excel helper that briefly lived under `Plugin::MSOffice`.
 
 `Plugin::HTTP` now shows the same destination applied to formerly real legacy actions, not just thin helper wrappers. The package owns `httplink`, `set_http_hostport`, `set_http_localhost`, the former `http` file-link action through `print_file_links_for_conf(...)`, the former `lighttpd` action through `run_lighttpd_for_conf(...)`, and the former `httpd` action through `run_httpd_for_conf(...)`; `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` have been removed. Repo-owned `.plg` callers that need HTTP helpers call `Plugin::HTTP` explicitly.
 

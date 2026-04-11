@@ -23,12 +23,12 @@ BEGIN {
 sub file_list_path2http {
  require Global;
  require Plugin::HTTP;
- require Plugin::String;
+ require Text::VariableSubstitution;
 
  return join "", map {
   !/#/o ? join("", map {
    m/\//o ? do {
-    my $subst = Plugin::String::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
+    my $subst = Text::VariableSubstitution::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
     my $http = Plugin::HTTP::httplink($subst);
     qq{<A HREF="$http">$_</A>};
    } : $_

@@ -4142,38 +4142,41 @@ PERL
     my $fxenv_ast = eval { $parser->(\$fxenv_helper_plugin) };
     ok(!$@ && defined($fxenv_ast) && ref($fxenv_ast) eq 'HASH', 'fxenv helper plugin still parses under pplugin after yesno wrapper removal') or diag(normalize_error($@));
 };
-subtest 'string_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 10;
+subtest 'string_substitution_logic_moves_into_text_domain_owner' => sub {
+    plan tests => 12;
 
-    my $string_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'String.pm'));
+    my $string_plugin_pm = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'String.pm');
+    my $text_substitution_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Text', 'VariableSubstitution.pm'));
     my $string_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'string.plg');
 
-    ok(defined($string_plugin_pm) && length($string_plugin_pm), 'package-backed string plugin owner source is available');
-    ok(!-e $string_plugin_plg, 'string.plg compatibility wrapper is removed now that Plugin::String owns all repo-owned usage');
-    like($string_plugin_pm, qr/package Plugin::String;/, 'package-backed string plugin owner declares the expected package');
-    like($string_plugin_pm, qr/sub var_subst\b/, 'package-backed string plugin owner defines var_subst');
-    like($string_plugin_pm, qr/sub var_subst_test\b/, 'package-backed string plugin owner defines var_subst_test');
-    like($string_plugin_pm, qr/Plugin::HTTP::set_http_localhost\(/, 'package-backed string plugin owner now uses Plugin::HTTP directly for localhost setup');
-    like($string_plugin_pm, qr/Plugin::CGI::file_list_path2http\(/, 'package-backed string plugin owner now uses Plugin::CGI directly for path-to-link formatting');
-    unlike($string_plugin_pm, qr/LinkedSpec::run_plugin\('set_http_localhost'/, 'package-backed string plugin owner no longer routes set_http_localhost through LinkedSpec::run_plugin');
-    unlike($string_plugin_pm, qr/LinkedSpec::run_plugin\('file_list_path2http'/, 'package-backed string plugin owner no longer routes file_list_path2http through LinkedSpec::run_plugin');
-    unlike($string_plugin_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Plugin::String no longer depends on the plugin bridge for package-owned string helpers');
+    ok(defined($text_substitution_pm) && length($text_substitution_pm), 'text-domain variable substitution owner source is available');
+    ok(!-e $string_plugin_pm, 'short-lived Plugin::String scaffold is removed now that a clearer text-domain owner exists');
+    ok(!-e $string_plugin_plg, 'string.plg compatibility wrapper is removed now that no repo-owned caller needs the legacy string plugin name');
+    like($text_substitution_pm, qr/package Text::VariableSubstitution;/, 'text-domain variable substitution owner declares the expected package');
+    like($text_substitution_pm, qr/sub var_subst\b/, 'text-domain variable substitution owner defines var_subst');
+    like($text_substitution_pm, qr/sub var_subst_test\b/, 'text-domain variable substitution owner defines var_subst_test');
+    like($text_substitution_pm, qr/Plugin::HTTP::set_http_localhost\(/, 'text-domain variable substitution owner still uses Plugin::HTTP directly for localhost setup');
+    like($text_substitution_pm, qr/Plugin::CGI::file_list_path2http\(/, 'text-domain variable substitution owner still uses Plugin::CGI directly for path-to-link formatting');
+    unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('set_http_localhost'/, 'text-domain variable substitution owner no longer routes set_http_localhost through LinkedSpec::run_plugin');
+    unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('file_list_path2http'/, 'text-domain variable substitution owner no longer routes file_list_path2http through LinkedSpec::run_plugin');
+    unlike($text_substitution_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'text-domain variable substitution owner no longer depends on the plugin bridge for package-owned string helpers');
+    unlike($text_substitution_pm, qr/package Plugin::String|Plugin::String::/, 'text-domain variable substitution owner does not preserve the obsolete Plugin::String namespace');
 };
-subtest 'string_package_owner_avoids_pplugin_and_preserves_var_subst_contract' => sub {
+subtest 'text_variable_substitution_owner_avoids_pplugin_and_preserves_var_subst_contract' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require Plugin::String;
+require Text::VariableSubstitution;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-my $ret = Plugin::String::var_subst('prefix $NAME suffix', qr/\$(\w+)/, NAME => 'VALUE');
+my $ret = Text::VariableSubstitution::var_subst('prefix $NAME suffix', qr/\$(\w+)/, NAME => 'VALUE');
 print "__VAR_SUBST__=$ret\n";
 PERL
 
-    is($exit_code, 0, 'string package-owner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the string package owner keeps PPlugin unloaded');
-    like($out, qr/__VAR_SUBST__=prefix VALUE suffix/, 'string package owner preserves the historical var_subst behavior');
-    unlike($err, qr/PPlugin/, 'string package-owner subprocess does not emit legacy PPlugin stderr');
-    unlike($err, qr/Can't locate Plugin\/String\.pm/, 'string package-owner subprocess resolves the new package file');
+    is($exit_code, 0, 'text-domain variable substitution subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the text-domain variable substitution owner keeps PPlugin unloaded');
+    like($out, qr/__VAR_SUBST__=prefix VALUE suffix/, 'text-domain variable substitution owner preserves the historical var_subst behavior');
+    unlike($err, qr/PPlugin/, 'text-domain variable substitution subprocess does not emit legacy PPlugin stderr');
+    unlike($err, qr/Can't locate Text\/VariableSubstitution\.pm|Can't locate Plugin\/String\.pm/, 'text-domain variable substitution subprocess resolves the new package file');
 };
 subtest 'cgi_plugin_logic_moves_into_package_owner' => sub {
     plan tests => 7;
@@ -4185,7 +4188,7 @@ subtest 'cgi_plugin_logic_moves_into_package_owner' => sub {
     ok(!-e $cgi_plugin_plg, 'cgi.plg compatibility wrapper is removed now that Plugin::CGI owns all repo-owned usage');
     like($cgi_plugin_pm, qr/package Plugin::CGI;/, 'package-backed cgi plugin owner declares the expected package');
     like($cgi_plugin_pm, qr/sub file_list_path2http\b/, 'package-backed cgi plugin owner defines file_list_path2http');
-    like($cgi_plugin_pm, qr/Plugin::String::var_subst\(/, 'package-backed cgi plugin owner reuses the extracted string package owner');
+    like($cgi_plugin_pm, qr/Text::VariableSubstitution::var_subst\(/, 'package-backed cgi plugin owner reuses the extracted text-domain variable substitution owner');
     like($cgi_plugin_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'package-backed cgi plugin owner uses the package-backed HTTP owner for httplink');
     unlike($cgi_plugin_pm, qr/LinkedSpec::run_plugin|LinkedSpec::get_plugin|PPlugin/, 'Plugin::CGI no longer depends on the plugin bridge for file_list_path2http');
 };

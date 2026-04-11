@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: graduate string substitution out of plugin namespace
+
+- renamed the short-lived `Plugin::String` migration scaffold to text-domain owner `Text::VariableSubstitution`,
+- migrated `Plugin::CGI::file_list_path2http(...)` and regression coverage to call `Text::VariableSubstitution::var_subst(...)` directly,
+- preserved the existing `var_subst(...)` and `var_subst_test(...)` contracts while removing the plugin-branded package from current repo-owned usage,
+- updated working docs and the public book so the current string substitution surface no longer teaches a plugin-branded owner after the `.plg` wrapper removal.
+
+- Validation:
+  - `perl -Iperl -c perl/Text/VariableSubstitution.pm`
+  - `perl -Iperl -c perl/Plugin/CGI.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'String.pm'` absence scan for the removed scaffold file
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-12 - Plugin runtime: graduate GenericFilter out of plugin namespace
 
 - renamed the short-lived `Plugin::GenericFilter` migration scaffold to table-domain owner `Table::GenericFilter`,
