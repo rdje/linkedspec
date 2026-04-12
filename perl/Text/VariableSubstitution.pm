@@ -44,15 +44,15 @@ sub var_subst_test {
  require Global;
  require HUtils;
  require HTML::PathLinks;
+ require HTTP::FileAccess;
  require PathSearch;
- require Plugin::HTTP;
 
  open(my $f, $_[0]{_argv}[0]);
  local $/;
  my $file = <$f>;
 
  Global->set('cgi') = HUtils::Conf(PathSearch->go('cgi'));
- Plugin::HTTP::set_http_localhost();
+ HTTP::FileAccess::set_localhost();
  my $fo = HTML::PathLinks::link_path_tokens($file);
 
  print "var_subst_test: ($fo)\n";

@@ -23,14 +23,14 @@ BEGIN {
 #------------------------------------------------------------------------------
 sub link_path_tokens {
  require Global;
- require Plugin::HTTP;
+ require HTTP::FileAccess;
  require Text::VariableSubstitution;
 
  return join "", map {
   !/#/o ? join("", map {
    m/\//o ? do {
     my $subst = Text::VariableSubstitution::var_subst($_, qr/\$(\w+)/o, %ENV, 'VOB_ROOT' => Global->VOB_ROOT);
-    my $http = Plugin::HTTP::httplink($subst);
+    my $http = HTTP::FileAccess::url_for_path($subst);
     qq{<A HREF="$http">$_</A>};
    } : $_
   } split /(\S*\/\S+)/o, $_) : $_

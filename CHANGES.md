@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: graduate HTTP file access out of plugin namespace
+
+- renamed the short-lived `Plugin::HTTP` migration scaffold to HTTP-domain owner `HTTP::FileAccess`,
+- replaced the historical helper names `httplink(...)`, `set_http_hostport(...)`, and `set_http_localhost(...)` with `url_for_path(...)`, `set_hostport(...)`, and `set_localhost(...)`,
+- migrated `TableScript`, `HTML::PathLinks`, `Text::VariableSubstitution`, and repo-owned `.plg` callers in `rtl.plg`, `stan_backend.plg`, and `tree.plg` to call `HTTP::FileAccess` directly,
+- preserved the signed `getfile.cgi` URL contract plus the former `http` / `lighttpd` / `httpd` package-owned action contracts while removing the plugin-branded package from current repo-owned usage,
+- updated working docs and the public book so the current HTTP file-access surface no longer teaches a plugin-branded owner after the `.plg` wrapper removal.
+
+- Validation:
+  - `perl -Iperl -c perl/HTTP/FileAccess.pm`
+  - `perl -Iperl -c perl/HTML/PathLinks.pm`
+  - `perl -Iperl -c perl/Text/VariableSubstitution.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'HTTP.pm'` absence scan for the removed scaffold file
+  - focused `pplugin` parse probe for `plugin/rtl.plg`, `plugin/stan_backend.plg`, and `plugin/tree.plg`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-12 - Plugin runtime: graduate path links out of plugin namespace
 
 - renamed the short-lived `Plugin::CGI` migration scaffold to HTML-domain owner `HTML::PathLinks`,

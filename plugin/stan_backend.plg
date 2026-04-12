@@ -188,10 +188,10 @@ my ($conf) = @_;
 
 stan_backend_start {
 my ($conf) = @_;
- use Plugin::HTTP;
+ use HTTP::FileAccess;
  
  print "($conf->{_program})($conf->{_action}) -I- Launching '$conf->{_action}' processing..\n"; 
- Plugin::HTTP::set_http_hostport ($conf->{_host}, $conf->{_port});
+ HTTP::FileAccess::set_hostport ($conf->{_host}, $conf->{_port});
  Table2SS::UConf(PathSearch->go('stan_backend_table2ss'));
 }
 

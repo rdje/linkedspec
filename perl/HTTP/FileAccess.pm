@@ -1,9 +1,9 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::HTTP
-# Purpose: Package-backed owner for lightweight HTTP/file-link behavior being
-#          migrated out of legacy `.plg` files.
+# Package: HTTP::FileAccess
+# Purpose: HTTP-domain owner for signed file-access URLs plus the small local
+#          HTTP daemon actions that migrated out of legacy `.plg` files.
 #------------------------------------------------------------------------------
-package Plugin::HTTP;
+package HTTP::FileAccess;
 
 use 5.010;
 BEGIN {
@@ -14,13 +14,13 @@ BEGIN {
 }
 
 #------------------------------------------------------------------------------
-# Function: httplink
+# Function: url_for_path
 # Purpose : Build the historical signed `getfile.cgi` URL for one filesystem
 #           path using the existing Global CGI/http settings.
 # Args    : ($path)
 # Returns : fully-qualified HTTP URL
 #------------------------------------------------------------------------------
-sub httplink {
+sub url_for_path {
  my ($path) = @_;
 
  require Digest::MD5;
@@ -38,13 +38,13 @@ sub httplink {
 }
 
 #------------------------------------------------------------------------------
-# Function: set_http_hostport
+# Function: set_hostport
 # Purpose : Preserve the historical helper that sets the active
 #           `Global->http_hostport` value from an optional host and port.
 # Args    : ($host, $port)
 # Returns : assigned "<host>:<port>" value
 #------------------------------------------------------------------------------
-sub set_http_hostport : lvalue {
+sub set_hostport : lvalue {
  my ($host, $port) = @_;
 
  require Global;
@@ -55,14 +55,14 @@ sub set_http_hostport : lvalue {
 }
 
 #------------------------------------------------------------------------------
-# Function: set_http_localhost
+# Function: set_localhost
 # Purpose : Preserve the historical helper that sets `http_hostport` using the
 #           default host logic and one optional explicit port.
 # Args    : ($port)
 # Returns : assigned "<host>:<port>" value
 #------------------------------------------------------------------------------
-sub set_http_localhost : lvalue {
- set_http_hostport(undef, $_[0])
+sub set_localhost : lvalue {
+ set_hostport(undef, $_[0])
 }
 
 #------------------------------------------------------------------------------
@@ -83,12 +83,12 @@ sub print_file_links_for_conf {
  require Sys::Hostname;
 
  Global->set('cgi') = HUtils::Conf(PathSearch->go('cgi'));
- set_http_hostport(($conf->{_host} || Sys::Hostname::hostname()) . Global->http_hostail, $conf->{_port});
+ set_hostport(($conf->{_host} || Sys::Hostname::hostname()) . Global->http_hostail, $conf->{_port});
 
  print "\n";
  foreach my $path (@{$conf->{_argv} || []}) {
   next unless -f $path;
-  print " ", httplink($path), "\n";
+  print " ", url_for_path($path), "\n";
  }
  print "\n";
 

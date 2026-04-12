@@ -3540,7 +3540,7 @@ subtest 'pplugin_default_parser_dep_lazy_loads_linkedspec' => sub {
     like($out, qr/__OWNERDISPATCH_AFTER_CALLBACK__/, 'PPlugin default parser dep lazy-loads OwnerDispatch only on callback execution');
     is($err, '', 'PPlugin default parser-dep subprocess does not emit stderr');
 };
-subtest 'tablescript_http_exec_uses_plugin_http_directly' => sub {
+subtest 'tablescript_http_exec_uses_http_file_access_directly' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -3552,7 +3552,7 @@ require TableScript;
 no warnings 'redefine';
 local *TableScript::node_exec = sub { return $_[1] };
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-local *Plugin::HTTP::httplink = sub {
+local *HTTP::FileAccess::url_for_path = sub {
     my ($path) = @_;
     print "__PATH__=$path\n";
     return 'http://example.test/file';
@@ -3563,9 +3563,9 @@ PERL
 
     is($exit_code, 0, 'TableScript http_exec subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'TableScript http_exec keeps the legacy PPlugin runtime unloaded');
-    like($out, qr/__PATH__=report\.txt/, 'TableScript http_exec forwards the resolved filename into Plugin::HTTP::httplink');
-    like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the Plugin::HTTP return payload');
-    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'TableScript http_exec resolves the package-backed HTTP owner');
+    like($out, qr/__PATH__=report\.txt/, 'TableScript http_exec forwards the resolved filename into HTTP::FileAccess::url_for_path');
+    like($out, qr/__RET__=http:\/\/example\.test\/file\@Report/, 'TableScript http_exec preserves the HTTP::FileAccess return payload');
+    unlike($err, qr/Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'TableScript http_exec resolves the HTTP file-access owner');
 };
 subtest 'table_genericfilter_domain_owner_groups_table_rows' => sub {
     plan tests => 7;
@@ -4155,7 +4155,7 @@ subtest 'string_substitution_logic_moves_into_text_domain_owner' => sub {
     like($text_substitution_pm, qr/package Text::VariableSubstitution;/, 'text-domain variable substitution owner declares the expected package');
     like($text_substitution_pm, qr/sub var_subst\b/, 'text-domain variable substitution owner defines var_subst');
     like($text_substitution_pm, qr/sub var_subst_test\b/, 'text-domain variable substitution owner defines var_subst_test');
-    like($text_substitution_pm, qr/Plugin::HTTP::set_http_localhost\(/, 'text-domain variable substitution owner still uses Plugin::HTTP directly for localhost setup');
+    like($text_substitution_pm, qr/HTTP::FileAccess::set_localhost\(/, 'text-domain variable substitution owner uses the HTTP file-access owner directly for localhost setup');
     like($text_substitution_pm, qr/HTML::PathLinks::link_path_tokens\(/, 'text-domain variable substitution owner uses the HTML path-link owner directly for path-to-link formatting');
     unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('set_http_localhost'/, 'text-domain variable substitution owner no longer routes set_http_localhost through LinkedSpec::run_plugin');
     unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('file_list_path2http'/, 'text-domain variable substitution owner no longer routes file_list_path2http through LinkedSpec::run_plugin');
@@ -4192,7 +4192,7 @@ subtest 'path_link_logic_moves_into_html_domain_owner' => sub {
     like($html_path_links_pm, qr/sub link_path_tokens\b/, 'HTML path-link owner defines link_path_tokens');
     unlike($html_path_links_pm, qr/sub file_list_path2http\b/, 'HTML path-link owner does not preserve the obsolete file_list_path2http helper name');
     like($html_path_links_pm, qr/Text::VariableSubstitution::var_subst\(/, 'HTML path-link owner reuses the extracted text-domain variable substitution owner');
-    like($html_path_links_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'HTML path-link owner uses the package-backed HTTP owner for httplink');
+    like($html_path_links_pm, qr/HTTP::FileAccess::url_for_path\(\$subst\)/, 'HTML path-link owner uses the HTTP file-access owner for signed file URLs');
     unlike($html_path_links_pm, qr/LinkedSpec::run_plugin|LinkedSpec::get_plugin|PPlugin/, 'HTML path-link owner no longer depends on the plugin bridge for path-link rendering');
     unlike($html_path_links_pm, qr/package Plugin::CGI|Plugin::CGI::/, 'HTML path-link owner does not preserve the obsolete Plugin::CGI namespace');
 };
@@ -4201,11 +4201,11 @@ subtest 'html_path_link_owner_avoids_pplugin_and_preserves_link_wrapping_contrac
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require HTML::PathLinks;
-require Plugin::HTTP;
+require HTTP::FileAccess;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
  no warnings 'redefine';
- local *Plugin::HTTP::httplink = sub {
+ local *HTTP::FileAccess::url_for_path = sub {
   my ($arg) = @_;
   print "__PLUGIN_ARG__=$arg\n";
   return "http://example$arg";
@@ -4217,50 +4217,53 @@ PERL
 
     is($exit_code, 0, 'HTML path-link owner subprocess exits cleanly') or diag($err || $out);
     like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the HTML path-link owner keeps PPlugin unloaded');
-    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'HTML path-link owner passes the substituted path into Plugin::HTTP::httplink');
+    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'HTML path-link owner passes the substituted path into HTTP::FileAccess::url_for_path');
     like($out, qr/__RET__=<A HREF="http:\/\/example\/tmp\/demo\.txt">\/tmp\/demo\.txt<\/A>/, 'HTML path-link owner preserves the historical link-wrapping behavior');
     unlike($err, qr/PPlugin/, 'HTML path-link owner subprocess does not emit legacy PPlugin stderr');
     unlike($err, qr/Can't locate HTML\/PathLinks\.pm|Can't locate Plugin\/CGI\.pm/, 'HTML path-link owner subprocess resolves the new package file');
-    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'HTML path-link owner subprocess resolves the package-backed HTTP owner');
+    unlike($err, qr/Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'HTML path-link owner subprocess resolves the HTTP file-access owner');
 };
-subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 22;
+subtest 'http_file_access_logic_moves_into_domain_owner' => sub {
+    plan tests => 24;
 
-    my $http_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm'));
+    my $http_plugin_pm = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'HTTP.pm');
+    my $http_file_access_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'HTTP', 'FileAccess.pm'));
     my $http_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'http.plg');
     my $lighttpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'lighttpd.plg');
     my $httpd_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'httpd.plg');
     my $rtl_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'rtl.plg'));
     my $stan_backend_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
     my $tree_plugin_plg = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tree.plg'));
-    my $unqualified_set_http_hostport = qr/(?:^|[^\w:])set_http_hostport\s*\(/;
-    my $unqualified_set_http_localhost = qr/(?:^|[^\w:])set_http_localhost\s*\(/;
-    my $unqualified_httplink = qr/(?:^|[^\w:])httplink\s*\(/;
+    my $unqualified_set_hostport = qr/(?:^|[^\w:])set_hostport\s*\(/;
+    my $unqualified_set_localhost = qr/(?:^|[^\w:])set_localhost\s*\(/;
+    my $unqualified_url_for_path = qr/(?:^|[^\w:])url_for_path\s*\(/;
 
-    ok(defined($http_plugin_pm) && length($http_plugin_pm), 'package-backed http plugin owner source is available');
-    ok(!-e $http_plugin_plg, 'http.plg is removed now that Plugin::HTTP owns the legacy file-link action directly');
-    ok(!-e $lighttpd_plugin_plg, 'lighttpd.plg is removed now that Plugin::HTTP owns the legacy lighttpd action directly');
-    ok(!-e $httpd_plugin_plg, 'httpd.plg is removed now that Plugin::HTTP owns the legacy httpd action directly');
+    ok(defined($http_file_access_pm) && length($http_file_access_pm), 'HTTP file-access owner source is available');
+    ok(!-e $http_plugin_pm, 'short-lived Plugin::HTTP scaffold is removed now that a clearer HTTP-domain owner exists');
+    ok(!-e $http_plugin_plg, 'http.plg is removed now that HTTP::FileAccess owns the legacy file-link action directly');
+    ok(!-e $lighttpd_plugin_plg, 'lighttpd.plg is removed now that HTTP::FileAccess owns the legacy lighttpd action directly');
+    ok(!-e $httpd_plugin_plg, 'httpd.plg is removed now that HTTP::FileAccess owns the legacy httpd action directly');
     ok(defined($rtl_plugin_plg) && length($rtl_plugin_plg), 'rtl.plg source is available for HTTP helper migration inspection');
     ok(defined($stan_backend_plugin_plg) && length($stan_backend_plugin_plg), 'stan_backend.plg source is available for HTTP helper migration inspection');
     ok(defined($tree_plugin_plg) && length($tree_plugin_plg), 'tree.plg source is available for HTTP helper migration inspection');
-    like($http_plugin_pm, qr/package Plugin::HTTP;/, 'package-backed http plugin owner declares the expected package');
-    like($http_plugin_pm, qr/sub httplink\b/, 'package-backed http plugin owner defines httplink');
-    like($http_plugin_pm, qr/sub set_http_hostport\b/, 'package-backed http plugin owner defines set_http_hostport');
-    like($http_plugin_pm, qr/sub set_http_localhost\b/, 'package-backed http plugin owner defines set_http_localhost');
-    like($http_plugin_pm, qr/sub print_file_links_for_conf\b/, 'package-backed http plugin owner defines the former http action as print_file_links_for_conf');
-    like($http_plugin_pm, qr/sub run_lighttpd_for_conf\b/, 'package-backed http plugin owner defines the former lighttpd action as run_lighttpd_for_conf');
-    like($http_plugin_pm, qr/sub run_httpd_for_conf\b/, 'package-backed http plugin owner defines the former httpd action as run_httpd_for_conf');
-    like($rtl_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(/, 'rtl.plg now sets hostport through the package-backed HTTP owner');
-    like($rtl_plugin_plg, qr/Plugin::HTTP::httplink\(/, 'rtl.plg now builds links through the package-backed HTTP owner');
-    unlike($rtl_plugin_plg, $unqualified_set_http_hostport, 'rtl.plg no longer calls set_http_hostport through an unqualified plugin helper');
-    unlike($rtl_plugin_plg, $unqualified_httplink, 'rtl.plg no longer calls httplink through an unqualified plugin helper');
-    like($stan_backend_plugin_plg, qr/Plugin::HTTP::set_http_hostport \(\$conf->\{_host\}, \$conf->\{_port\}\)/, 'stan_backend.plg now sets hostport through the package-backed HTTP owner');
-    unlike($stan_backend_plugin_plg, $unqualified_set_http_hostport, 'stan_backend.plg no longer calls set_http_hostport through an unqualified plugin helper');
-    like($tree_plugin_plg, qr/Plugin::HTTP::set_http_localhost \(\$_\[0\]\{_port\}\)/, 'tree.plg now sets localhost through the package-backed HTTP owner');
-    unlike($tree_plugin_plg, $unqualified_set_http_localhost, 'tree.plg no longer calls set_http_localhost through an unqualified plugin helper');
+    like($http_file_access_pm, qr/package HTTP::FileAccess;/, 'HTTP file-access owner declares the expected package');
+    like($http_file_access_pm, qr/sub url_for_path\b/, 'HTTP file-access owner defines url_for_path');
+    like($http_file_access_pm, qr/sub set_hostport\b/, 'HTTP file-access owner defines set_hostport');
+    like($http_file_access_pm, qr/sub set_localhost\b/, 'HTTP file-access owner defines set_localhost');
+    like($http_file_access_pm, qr/sub print_file_links_for_conf\b/, 'HTTP file-access owner defines the former http action as print_file_links_for_conf');
+    like($http_file_access_pm, qr/sub run_lighttpd_for_conf\b/, 'HTTP file-access owner defines the former lighttpd action as run_lighttpd_for_conf');
+    like($http_file_access_pm, qr/sub run_httpd_for_conf\b/, 'HTTP file-access owner defines the former httpd action as run_httpd_for_conf');
+    unlike($http_file_access_pm, qr/package Plugin::HTTP|Plugin::HTTP::|sub httplink\b|sub set_http_hostport\b|sub set_http_localhost\b/, 'HTTP file-access owner does not preserve the obsolete Plugin::HTTP namespace or helper names');
+    like($rtl_plugin_plg, qr/HTTP::FileAccess::set_hostport \(/, 'rtl.plg now sets hostport through the HTTP file-access owner');
+    like($rtl_plugin_plg, qr/HTTP::FileAccess::url_for_path\(/, 'rtl.plg now builds links through the HTTP file-access owner');
+    unlike($rtl_plugin_plg, $unqualified_set_hostport, 'rtl.plg no longer calls set_hostport through an unqualified helper');
+    unlike($rtl_plugin_plg, $unqualified_url_for_path, 'rtl.plg no longer calls url_for_path through an unqualified helper');
+    like($stan_backend_plugin_plg, qr/HTTP::FileAccess::set_hostport \(\$conf->\{_host\}, \$conf->\{_port\}\)/, 'stan_backend.plg now sets hostport through the HTTP file-access owner');
+    unlike($stan_backend_plugin_plg, $unqualified_set_hostport, 'stan_backend.plg no longer calls set_hostport through an unqualified helper');
+    like($tree_plugin_plg, qr/HTTP::FileAccess::set_localhost \(\$_\[0\]\{_port\}\)/, 'tree.plg now sets localhost through the HTTP file-access owner');
+    unlike($tree_plugin_plg, $unqualified_set_localhost, 'tree.plg no longer calls set_localhost through an unqualified helper');
 };
-subtest 'http_package_owner_avoids_pplugin_and_preserves_httplink_contract' => sub {
+subtest 'http_file_access_owner_avoids_pplugin_and_preserves_url_contract' => sub {
     plan tests => 5;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -4278,19 +4281,19 @@ BEGIN {
     sub md5_encode { return $STORE{md5_encode} }
     sub http_hostport { return $STORE{http_hostport} }
 }
-require Plugin::HTTP;
+require HTTP::FileAccess;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
-my $ret = Plugin::HTTP::httplink('demo.txt');
+my $ret = HTTP::FileAccess::url_for_path('demo.txt');
 print "__RET__=$ret\n";
 PERL
 
-    is($exit_code, 0, 'http package-owner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the http package owner keeps PPlugin unloaded');
-    like($out, qr/__RET__=http:\/\/example\.test:8080\/cgi-bin\/getfile\.cgi\?file=.*demo\.txt&id=[0-9a-f]{32}/, 'http package owner preserves the signed httplink URL contract');
-    unlike($err, qr/PPlugin/, 'http package-owner subprocess does not emit legacy PPlugin stderr');
-    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'http package-owner subprocess resolves the new package file');
+    is($exit_code, 0, 'HTTP file-access subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the HTTP file-access owner keeps PPlugin unloaded');
+    like($out, qr/__RET__=http:\/\/example\.test:8080\/cgi-bin\/getfile\.cgi\?file=.*demo\.txt&id=[0-9a-f]{32}/, 'HTTP file-access owner preserves the signed URL contract');
+    unlike($err, qr/PPlugin/, 'HTTP file-access subprocess does not emit legacy PPlugin stderr');
+    unlike($err, qr/Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'HTTP file-access subprocess resolves the new package file');
 };
-subtest 'http_package_owner_preserves_hostport_setter_contracts' => sub {
+subtest 'http_file_access_owner_preserves_hostport_setter_contracts' => sub {
     plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -4304,30 +4307,30 @@ BEGIN {
     sub http_hostail { return '.example.test' }
     sub http_default_port { return 8080 }
 }
-require Plugin::HTTP;
+require HTTP::FileAccess;
 require Sys::Hostname;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
  no warnings 'redefine';
  local *Sys::Hostname::hostname = sub { return 'stubhost' };
- my $ret1 = Plugin::HTTP::set_http_hostport('custom.example', 1234);
+ my $ret1 = HTTP::FileAccess::set_hostport('custom.example', 1234);
  print "__RET1__=$ret1\n";
  print "__HOSTPORT1__=" . Global->set('http_hostport') . "\n";
- my $ret2 = Plugin::HTTP::set_http_localhost(4321);
+ my $ret2 = HTTP::FileAccess::set_localhost(4321);
  print "__RET2__=$ret2\n";
  print "__HOSTPORT2__=" . Global->set('http_hostport') . "\n";
 }
 PERL
 
     is($exit_code, 0, 'http hostport-setter subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the http package owner for hostport setters keeps PPlugin unloaded');
-    like($out, qr/__RET1__=custom\.example:1234/, 'set_http_hostport returns the explicitly assigned host:port value');
-    like($out, qr/__HOSTPORT1__=custom\.example:1234/, 'set_http_hostport writes the explicit host:port into Global state');
-    like($out, qr/__RET2__=stubhost\.example\.test:4321/, 'set_http_localhost composes the default host and explicit port');
-    like($out, qr/__HOSTPORT2__=stubhost\.example\.test:4321/, 'set_http_localhost writes the composed host:port into Global state');
-    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http hostport-setter subprocess stays clear of legacy plugin runtime issues');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the HTTP file-access owner for hostport setters keeps PPlugin unloaded');
+    like($out, qr/__RET1__=custom\.example:1234/, 'set_hostport returns the explicitly assigned host:port value');
+    like($out, qr/__HOSTPORT1__=custom\.example:1234/, 'set_hostport writes the explicit host:port into Global state');
+    like($out, qr/__RET2__=stubhost\.example\.test:4321/, 'set_localhost composes the default host and explicit port');
+    like($out, qr/__HOSTPORT2__=stubhost\.example\.test:4321/, 'set_localhost writes the composed host:port into Global state');
+    unlike($err, qr/PPlugin|Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'HTTP file-access hostport-setter subprocess stays clear of legacy plugin runtime issues');
 };
-subtest 'http_package_owner_preserves_legacy_file_link_action_contract' => sub {
+subtest 'http_file_access_owner_preserves_legacy_file_link_action_contract' => sub {
     plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -4362,7 +4365,7 @@ BEGIN {
     }
 }
 require File::Temp;
-require Plugin::HTTP;
+require HTTP::FileAccess;
 require Sys::Hostname;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 my ($fh, $file) = File::Temp::tempfile(UNLINK => 1);
@@ -4371,7 +4374,7 @@ close($fh);
 {
  no warnings 'redefine';
  local *Sys::Hostname::hostname = sub { return 'stubhost' };
- Plugin::HTTP::print_file_links_for_conf({ _port => 4242, _argv => [$file, "$file.missing"] });
+ HTTP::FileAccess::print_file_links_for_conf({ _port => 4242, _argv => [$file, "$file.missing"] });
 }
 print "__HOSTPORT__=" . Global->set('http_hostport') . "\n";
 PERL
@@ -4382,9 +4385,9 @@ PERL
     like($out, qr/__HOSTPORT__=stubhost\.example\.test:4242/, 'http file-link action preserves historical host:port setup');
     like($out, qr/http:\/\/stubhost\.example\.test:4242\/cgi-bin\/getfile\.cgi\?file=.*&id=[0-9a-f]{32}/, 'http file-link action prints one signed getfile.cgi URL');
     is(scalar(() = $out =~ /\/cgi-bin\/getfile\.cgi\?/g), 1, 'http file-link action skips missing argv paths');
-    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'http file-link action subprocess stays clear of legacy plugin runtime issues');
+    unlike($err, qr/PPlugin|Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'http file-link action subprocess stays clear of legacy plugin runtime issues');
 };
-subtest 'http_package_owner_preserves_lighttpd_action_contract' => sub {
+subtest 'http_file_access_owner_preserves_lighttpd_action_contract' => sub {
     plan tests => 10;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -4417,15 +4420,15 @@ my ($fh, $template_file) = File::Temp::tempfile(UNLINK => 1);
 print {$fh} "server.name=<server_name>\nserver.port=<server_port>\n";
 close($fh);
 $Global::LIGHTTPD_CONF = $template_file;
-require Plugin::HTTP;
+require HTTP::FileAccess;
 require Sys::Hostname;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
  no warnings 'redefine';
  local *Sys::Hostname::hostname = sub { return 'stubhost' };
- my $ret = Plugin::HTTP::run_lighttpd_for_conf({ _port => 4242 });
+ my $ret = HTTP::FileAccess::run_lighttpd_for_conf({ _port => 4242 });
  print "__RET__=$ret\n";
- my $invalid_ok = eval { Plugin::HTTP::run_lighttpd_for_conf({ _port => '42;bad' }); 1 };
+ my $invalid_ok = eval { HTTP::FileAccess::run_lighttpd_for_conf({ _port => '42;bad' }); 1 };
  print "__INVALID_OK__=" . ($invalid_ok ? 1 : 0) . "\n";
  my $invalid_err = $@;
  $invalid_err =~ s/\n/\\n/g;
@@ -4443,9 +4446,9 @@ PERL
     like($out, qr/__INVALID_OK__=0/, 'lighttpd package-owner action rejects invalid port values');
     like($out, qr/__INVALID_ERR__=Invalid lighttpd port '42;bad'/, 'lighttpd package-owner action reports the invalid port before launch');
     like($out, qr/__SYSTEM_CALLS__=1/, 'lighttpd package-owner invalid-port path does not invoke system');
-    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'lighttpd package-owner subprocess stays clear of legacy plugin runtime issues');
+    unlike($err, qr/PPlugin|Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'lighttpd package-owner subprocess stays clear of legacy plugin runtime issues');
 };
-subtest 'http_package_owner_preserves_httpd_action_contract' => sub {
+subtest 'http_file_access_owner_preserves_httpd_action_contract' => sub {
     plan tests => 12;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -4481,20 +4484,20 @@ my ($fh, $template_file) = File::Temp::tempfile(UNLINK => 1);
 print {$fh} "server.name=<server_name>\nserver.port=<server_port>\nserver.admin=<author_email_address>\n";
 close($fh);
 $Global::HTTPD_CONF = $template_file;
-require Plugin::HTTP;
+require HTTP::FileAccess;
 require Sys::Hostname;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
  no warnings 'redefine';
  local *Sys::Hostname::hostname = sub { return 'stubhost' };
- my $ret = Plugin::HTTP::run_httpd_for_conf({ _port => 4242, _argv => ['restart'] });
+ my $ret = HTTP::FileAccess::run_httpd_for_conf({ _port => 4242, _argv => ['restart'] });
  print "__RET__=$ret\n";
- my $invalid_action_ok = eval { Plugin::HTTP::run_httpd_for_conf({ _port => 4242, _argv => ['restart;bad'] }); 1 };
+ my $invalid_action_ok = eval { HTTP::FileAccess::run_httpd_for_conf({ _port => 4242, _argv => ['restart;bad'] }); 1 };
  print "__INVALID_ACTION_OK__=" . ($invalid_action_ok ? 1 : 0) . "\n";
  my $invalid_action_err = $@;
  $invalid_action_err =~ s/\n/\\n/g;
  print "__INVALID_ACTION_ERR__=$invalid_action_err\n";
- my $invalid_port_ok = eval { Plugin::HTTP::run_httpd_for_conf({ _port => '42;bad' }); 1 };
+ my $invalid_port_ok = eval { HTTP::FileAccess::run_httpd_for_conf({ _port => '42;bad' }); 1 };
  print "__INVALID_PORT_OK__=" . ($invalid_port_ok ? 1 : 0) . "\n";
  my $invalid_port_err = $@;
  $invalid_port_err =~ s/\n/\\n/g;
@@ -4514,7 +4517,7 @@ PERL
     like($out, qr/__INVALID_PORT_OK__=0/, 'httpd package-owner action rejects invalid port values');
     like($out, qr/__INVALID_PORT_ERR__=Invalid httpd port '42;bad'/, 'httpd package-owner action reports invalid ports before launch');
     like($out, qr/__SYSTEM_CALLS__=1/, 'httpd package-owner invalid paths do not invoke system');
-    unlike($err, qr/PPlugin|Can't locate Plugin\/HTTP\.pm/, 'httpd package-owner subprocess stays clear of legacy plugin runtime issues');
+    unlike($err, qr/PPlugin|Can't locate HTTP\/FileAccess\.pm|Can't locate Plugin\/HTTP\.pm/, 'httpd package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'package_extracted_http_string_related_plugins_still_parse_under_pplugin' => sub {
     plan tests => 6;

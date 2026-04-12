@@ -14,7 +14,7 @@ package TableScript;
 use File::Glob ':glob';
 
 use HUtils;
-use Plugin::HTTP;
+use HTTP::FileAccess;
 
 my @script_list = bsd_glob(q({).join(',', map {"$_/*.ts"} @{Global->search_path}).q(}), GLOB_BRACE | GLOB_TILDE);
 
@@ -384,7 +384,7 @@ sub exit_exec    {my ($conf, $args) = @_; exit}
 
 #------------------------------------------------------------------------------
 # Function: http_exec
-# Purpose : Build the historical `httplink` URL for one filename and append
+# Purpose : Build the historical signed HTTP file URL for one filename and append
 #           the existing label suffix used by table-script HTTP output.
 # Args    : ($conf, $args)
 # Returns : "<url>@<label>"
@@ -394,7 +394,7 @@ my ($conf, $args) = @_;
 
  my ($filename, $label) = map {node_exec $conf, $_} @$args[0,1];
 
- Plugin::HTTP::httplink($filename).'@'.$label
+ HTTP::FileAccess::url_for_path($filename).'@'.$label
 }
 
 sub get_index {

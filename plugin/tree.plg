@@ -150,8 +150,8 @@ my ($cn, $cind, $first, $last, $parentlast_list, $info) = @_;
 itable_2ascii_default {print '  ' x (1+$$_[0]), "$$_[1]\n" foreach @{$_[0]}}
 
 dirlist_2ss {
- use Plugin::HTTP;
- Plugin::HTTP::set_http_localhost ($_[0]{_port});
+ use HTTP::FileAccess;
+ HTTP::FileAccess::set_localhost ($_[0]{_port});
 
  my $db_name  = $_[0]{_argv}[0];
 
