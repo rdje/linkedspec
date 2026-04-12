@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: extract setup/hold timing owner
+
+- moved the historical setup/hold timing helper bodies (`DxCy`, `DiCi`, `DiCo`, `DoCi`, `DoCo`, `tss_setup_hold`, and `tss_tmax_tmin`) out of legacy `.plg` helper registrations and into `Timing::SetupHold`,
+- migrated `plugin/setup_hold_tmax_tmin.plg` and `plugin/tssio.plg` to call the package owner directly instead of resolving timing math through `LinkedSpec::get_plugin(...)`,
+- removed those private helper subdefs from the shipped legacy plugin corpus while keeping the visible `setup_hold_tmax_tmin` and `tssio` actions in place,
+- tightened the `DxCy` traversal helper so package-owned delay calculators receive the timing configuration explicitly, matching their formula contracts instead of depending on dynamic plugin dispatch quirks,
+- added regression coverage for package loading, the reduced `pplugin` surfaces, PPlugin-free package use, preserved delay formulas, and preserved DxCy row/header shaping.
+
+- Validation:
+  - `perl -c perl/LinkedSpec.pm`
+  - `perl -Iperl -c perl/Timing/SetupHold.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/setup_hold_tmax_tmin.plg` and `plugin/tssio.plg`
+  - direct `Timing::SetupHold` behavior smoke for formula and DxCy traversal behavior
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-12 - Plugin runtime: extract QC summary merge owner
 
 - moved the historical `qc_summary_merge` helper body out of `plugin/qc_summary.plg` and into `QC::Summary::append_merged_rows(...)`,
@@ -17429,4 +17448,4 @@ Accepted punctuation-light attached branch aliases on the method-like control-fl
 - 2026-04-11: Continued the plugin/resource modernization track with a no-behavior-change owner-dispatch cleanup inside `LinkedSpec::PluginBridge`. The bridge now uses `LinkedSpec::OwnerDispatch` for its local `$@` preservation helper, lazy `PPlugin` runtime loading, and default registered-plugin lookup through `LinkedSpec::PluginRegistry`, removing the remaining bridge-local eval-require branches for those owner paths. Focused architecture regression coverage now locks that `PluginBridge` spends the shared dispatch seam while preserving the registry-first / legacy-fallback behavior.
 - 2026-04-11: Continued that same plugin/resource modernization cleanup one step lower in the legacy adapter. `PPlugin::_default_deps()` now routes its default `pplugin` parser callback through a named `_load_linkedspec_parser(...)` helper that dispatches to `LinkedSpec::get_parser('pplugin')` via `LinkedSpec::OwnerDispatch`, instead of carrying a local `eval { require LinkedSpec }` branch. Regression coverage now locks that `PPlugin` still keeps both `LinkedSpec.pm` and `LinkedSpec::OwnerDispatch` unloaded at require/default-dep construction time, then lazy-loads them only when the parser callback is invoked.
 - 2026-04-11: Continued the legacy `.plg` adapter cleanup inside `PPlugin::_build_plugin_registry(...)`. Plugin-file reads now go through an explicit `_read_plugin_file(...)` helper instead of localized `@ARGV`/diamond-reader state, unreadable files are reported and skipped before parser invocation, real parser errors are still reported for malformed plugin files, and successful partial registry builds restore the caller's prior `$@` rather than printing stale eval-error text. Focused regression coverage now locks file order, duplicate override behavior, malformed-file skipping, unreadable-file skipping, and stale-`$@` preservation together.
-- 2026-04-11: Continued the plugin/resource modernization track across shipped `.plg` lookup callers. `plugin/{plugin,qcflow,setup_hold_tmax_tmin,stan_omap2430c_backend,tssio}.plg` now use `LinkedSpec::get_plugin(...)` instead of direct `PPlugin->get(...)`, and the regression suite now scans repo-owned `plugin/*.plg` files to keep direct `PPlugin->get(...)` constrained to the compatibility bridge/adapter internals. Validation included `perl -c -Iperl t/phase0_regression.t`, `git diff --check`, a direct `pplugin` parse probe for the migrated plugin files, and the full phase0 regression gate.
+- 2026-04-11: Continued the plugin/resource modernization track across shipped `.plg` lookup callers. At that step `plugin/{plugin,qcflow,setup_hold_tmax_tmin,stan_omap2430c_backend,tssio}.plg` used `LinkedSpec::get_plugin(...)` instead of direct `PPlugin->get(...)`; the newer 2026-04-12 setup/hold slice records that `setup_hold_tmax_tmin.plg` and `tssio.plg` now call `Timing::SetupHold` directly for private timing helpers. The regression suite now scans repo-owned `plugin/*.plg` files to keep direct `PPlugin->get(...)` constrained to the compatibility bridge/adapter internals. Validation included `perl -c -Iperl t/phase0_regression.t`, `git diff --check`, a direct `pplugin` parse probe for the migrated plugin files, and the full phase0 regression gate.

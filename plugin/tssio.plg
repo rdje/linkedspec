@@ -1,19 +1,6 @@
-tss_setup_hold {
-my ($conf, $path, $type) = @_; 
-
- ($type eq 'max' ? 1 : -1)*($path->[$$conf{indexes}{capture_start_time}] - $path->[$$conf{indexes}{launch_start_time}] - $path->[$$conf{indexes}{input_external_delay}]) 
-}
-
-
-tss_tmax_tmin {
-my ($conf, $path, $type) = @_; 
-
- $path->[$$conf{indexes}{capture_start_time}] - $path->[$$conf{indexes}{launch_start_time}] + ($type eq 'max' ? 1 : -1)*$path->[$$conf{indexes}{output_external_delay}]
-}
-
 tssio {
 my ($conf) = @_; 
- use LinkedSpec;
+ use Timing::SetupHold;
 
  system("mkdir -p $conf->{_workdir}; rm -rf $conf->{_workdir}/*");
 
@@ -36,7 +23,7 @@ my ($conf) = @_;
   # Frequency (Mhz). Computed only for Maxdelay Check
   my $freq      = $info->[$$index{setup_hold}] eq 'setup' ? sprintf("%4.2f", 1000/($deltatime * ($halfull eq 'H' ? 2 : 1))) : '-';
      
-  my $tss       = sprintf("%4.2f", LinkedSpec::get_plugin($info->[$$index{direction}] eq 'input' ? 'tss_setup_hold' : 'tss_tmax_tmin')->($conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min'));
+  my $tss       = sprintf("%4.2f", ($info->[$$index{direction}] eq 'input' ? \&Timing::SetupHold::tss_setup_hold_delay : \&Timing::SetupHold::tss_tmax_tmin_delay)->($conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min'));
 
   my $dxcy      = "D".(split(//, $info->[$$index{direction}]))[0]."C";
   # Trying to determine the actual direction of the reference clock (i.e. its associated port direction)
@@ -69,7 +56,7 @@ my ($conf) = @_;
       $ignore = 1;
      }
 
-  my $sta          = $ignore && '-' || sprintf("%4.2f", LinkedSpec::get_plugin($dxcy)->($conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min'));
+  my $sta          = $ignore && '-' || sprintf("%4.2f", Timing::SetupHold::calculate_path_delay($dxcy, $conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min'));
 
 #  print "###################### <@$info> ($dxcy) <$info->[$$index{setup_hold}]> ######################\n";
 #  print "freq<$freq>\n";

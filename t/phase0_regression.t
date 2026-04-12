@@ -3873,7 +3873,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 25;
+    plan tests => 29;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
@@ -3898,8 +3898,12 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     like($qc_summary_plugin, qr/QC::Summary::append_merged_rows/, 'qc_summary plugin now calls the package-owned row merge helper');
     unlike($skew_plugin, qr/PPlugin->get \('stan_backend_start'\)/, 'skew plugin no longer routes stan_backend_start through legacy PPlugin lookup');
     like($skew_plugin, qr/LinkedSpec::get_plugin\('stan_backend_start'\)->\(\$conf\)/, 'skew plugin now resolves stan_backend_start through LinkedSpec::get_plugin');
-    like($tssio_plugin, qr/LinkedSpec::get_plugin\(\$info->\[\$\$index\{direction\}\] eq 'input' \? 'tss_setup_hold' : 'tss_tmax_tmin'\)->\(\$conf, \$\$a2d\[0\]/, 'tssio plugin now resolves dynamic setup/hold helpers through LinkedSpec::get_plugin');
-    like($setup_hold_tmax_tmin_plugin, qr/LinkedSpec::get_plugin\('DxCy'\)/, 'setup_hold_tmax_tmin plugin now resolves DxCy through LinkedSpec::get_plugin');
+    unlike($tssio_plugin, qr/LinkedSpec::get_plugin\(\$info->\[\$\$index\{direction\}\] eq 'input' \? 'tss_setup_hold' : 'tss_tmax_tmin'\)/, 'tssio plugin no longer resolves dynamic setup/hold helpers through plugin lookup');
+    like($tssio_plugin, qr/use Timing::SetupHold;/, 'tssio plugin now loads the setup/hold timing package owner directly');
+    like($tssio_plugin, qr/Timing::SetupHold::calculate_path_delay/, 'tssio plugin now uses the package-owned path-delay dispatcher');
+    unlike($setup_hold_tmax_tmin_plugin, qr/LinkedSpec::get_plugin\('DxCy'\)/, 'setup_hold_tmax_tmin plugin no longer resolves DxCy through plugin lookup');
+    like($setup_hold_tmax_tmin_plugin, qr/use Timing::SetupHold;/, 'setup_hold_tmax_tmin plugin now loads the setup/hold timing package owner directly');
+    like($setup_hold_tmax_tmin_plugin, qr/Timing::SetupHold::collect_dxcy/, 'setup_hold_tmax_tmin plugin now uses the package-owned DxCy traversal helper');
     like($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'fsmgen plugin now resolves dynamic plugin-list entries through LinkedSpec::get_plugin');
     unlike($fsmgen_plugin, qr/\bplugin\s*\(/, 'fsmgen plugin no longer routes dynamic plugin-list entries through the legacy plugin lookup shim');
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
@@ -3996,6 +4000,103 @@ PERL
     like($out, qr/__TAIL__=tail/, 'QC::Summary preserves later section row append behavior');
     like($out, qr/__ROW_BLOCKS__=1/, 'QC::Summary appends exactly one merged row block to the accumulator');
     unlike($err, qr/PPlugin|Can't locate QC\/Summary\.pm/, 'QC::Summary package-owner subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'setup_hold_timing_helpers_move_to_timing_setuphold_package_owner' => sub {
+    plan tests => 41;
+
+    my $timing_setup_hold_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'SetupHold.pm'));
+    my $setup_hold_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'setup_hold_tmax_tmin.plg'));
+    my $tssio_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tssio.plg'));
+
+    ok(defined($timing_setup_hold_pm) && length($timing_setup_hold_pm), 'Timing::SetupHold package owner source is available');
+    ok(defined($setup_hold_plugin) && length($setup_hold_plugin), 'setup_hold_tmax_tmin.plg source is available for Timing::SetupHold migration inspection');
+    ok(defined($tssio_plugin) && length($tssio_plugin), 'tssio.plg source is available for Timing::SetupHold migration inspection');
+    like($timing_setup_hold_pm, qr/package Timing::SetupHold;/, 'Timing::SetupHold declares the expected package');
+    like($timing_setup_hold_pm, qr/sub calculate_path_delay\b/, 'Timing::SetupHold owns the named path-delay dispatcher');
+    like($timing_setup_hold_pm, qr/sub delay_dici\b/, 'Timing::SetupHold owns the DiCi delay formula');
+    like($timing_setup_hold_pm, qr/sub delay_dico\b/, 'Timing::SetupHold owns the DiCo delay formula');
+    like($timing_setup_hold_pm, qr/sub delay_doci\b/, 'Timing::SetupHold owns the DoCi delay formula');
+    like($timing_setup_hold_pm, qr/sub delay_doco\b/, 'Timing::SetupHold owns the DoCo delay formula');
+    like($timing_setup_hold_pm, qr/sub tss_setup_hold_delay\b/, 'Timing::SetupHold owns the tss setup/hold delay formula');
+    like($timing_setup_hold_pm, qr/sub tss_tmax_tmin_delay\b/, 'Timing::SetupHold owns the tss tmax/tmin delay formula');
+    like($timing_setup_hold_pm, qr/sub collect_dxcy\b/, 'Timing::SetupHold owns the DxCy traversal helper');
+    unlike($timing_setup_hold_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::SetupHold does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($setup_hold_plugin, qr/use Timing::SetupHold;/, 'setup_hold_tmax_tmin.plg loads the Timing::SetupHold owner directly');
+    like($setup_hold_plugin, qr/Timing::SetupHold::collect_dxcy/, 'setup_hold_tmax_tmin.plg calls the package-owned DxCy traversal helper');
+    unlike($setup_hold_plugin, qr/LinkedSpec::get_plugin|PPlugin|\buse LinkedSpec;/, 'setup_hold_tmax_tmin.plg no longer uses plugin lookup for setup/hold helper math');
+    unlike($setup_hold_plugin, qr/\b(?:DxCy|DiCi|DiCo|DoCi|DoCo)\s*\{/, 'setup_hold_tmax_tmin.plg no longer exposes timing helper subdefs as legacy plugins');
+
+    like($tssio_plugin, qr/use Timing::SetupHold;/, 'tssio.plg loads the Timing::SetupHold owner directly');
+    like($tssio_plugin, qr/Timing::SetupHold::tss_setup_hold_delay/, 'tssio.plg calls the package-owned setup/hold delay helper');
+    like($tssio_plugin, qr/Timing::SetupHold::tss_tmax_tmin_delay/, 'tssio.plg calls the package-owned tmax/tmin delay helper');
+    like($tssio_plugin, qr/Timing::SetupHold::calculate_path_delay/, 'tssio.plg calls the package-owned path-delay dispatcher');
+    unlike($tssio_plugin, qr/LinkedSpec::get_plugin|PPlugin|\buse LinkedSpec;/, 'tssio.plg no longer uses plugin lookup for timing helper math');
+    unlike($tssio_plugin, qr/\b(?:tss_setup_hold|tss_tmax_tmin)\s*\{/, 'tssio.plg no longer exposes private tss helper subdefs as legacy plugins');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Timing::SetupHold migrated plugin smoke');
+    my $setup_hold_ast = eval { $parser->(\$setup_hold_plugin) };
+    ok(!$@, 'setup_hold_tmax_tmin plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($setup_hold_ast) && ref($setup_hold_ast) eq 'HASH', 'setup_hold_tmax_tmin plugin still returns a hash AST under pplugin');
+    is_deeply([sort keys %$setup_hold_ast], [qw(setup_hold_tmax_tmin)], 'setup_hold_tmax_tmin plugin no longer exposes timing helper subdefs');
+    my $tssio_ast = eval { $parser->(\$tssio_plugin) };
+    ok(!$@, 'tssio plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($tssio_ast) && ref($tssio_ast) eq 'HASH', 'tssio plugin still returns a hash AST under pplugin');
+    is_deeply([sort keys %$tssio_ast], [qw(tssio)], 'tssio plugin no longer exposes private tss helper subdefs');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require Timing::SetupHold;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $path_conf = {
+    _indexes => {
+        capture_start_time   => 0,
+        startpoint_delay     => 1,
+        slack                => 2,
+        launch_start_time    => 3,
+        input_external_delay => 4,
+        arrival_time         => 5,
+        output_external_delay => 6,
+    },
+    'official-target-frequencies' => { io => { 1 => 100 } },
+};
+my $path = [10, 3, 2, 4, 1, 9, 2];
+print "__DICI__=", Timing::SetupHold::calculate_path_delay('DiCi', $path_conf, $path, 'max'), "\n";
+print "__DICO__=", Timing::SetupHold::calculate_path_delay('DiCo', $path_conf, $path, 'min'), "\n";
+print "__DOCI__=", Timing::SetupHold::calculate_path_delay('DoCi', $path_conf, $path, 'max'), "\n";
+print "__DOCO__=", Timing::SetupHold::calculate_path_delay('DoCo', $path_conf, $path, 'max'), "\n";
+my $tss_conf = {
+    indexes => {
+        capture_start_time   => 0,
+        launch_start_time    => 3,
+        input_external_delay => 4,
+        output_external_delay => 6,
+    },
+};
+print "__TSS_SETUP__=", Timing::SetupHold::tss_setup_hold_delay($tss_conf, $path, 'max'), "\n";
+print "__TSS_TMAX__=", Timing::SetupHold::tss_tmax_tmin_delay($tss_conf, $path, 'min'), "\n";
+my $max = { 1 => { 0 => { nom => { io => { input => { port => [$path] } } } } } };
+my $min = { 1 => { 0 => { nom => { io => { input => { port => [[8, 2, 1, 3, 1, 7, 2]] } } } } } };
+my @iomodes = ('nom');
+my @corners = (1);
+my @modes = (0);
+my $crail = {};
+Timing::SetupHold::collect_dxcy([qw(io input port)], 'DiCi', $max, $min, \@iomodes, \@corners, \@modes, $crail, $path_conf);
+print "__HEADER__=$crail->{pathtype}{io}{header}\n";
+print "__DXCY_ROW__=$crail->{pathtype}{io}{data}{port}{input}{nom}[0]\n";
+PERL
+
+    is($exit_code, 0, 'Timing::SetupHold package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring Timing::SetupHold keeps PPlugin unloaded');
+    like($out, qr/__DICI__=5\b/, 'Timing::SetupHold preserves the DiCi max formula with explicit conf input');
+    like($out, qr/__DICO__=-7\b/, 'Timing::SetupHold preserves the DiCo min formula with explicit conf input');
+    like($out, qr/__DOCI__=5\b/, 'Timing::SetupHold preserves the DoCi formula');
+    like($out, qr/__DOCO__=6\b/, 'Timing::SetupHold preserves the DoCo max formula');
+    like($out, qr/__TSS_SETUP__=5\b/, 'Timing::SetupHold preserves the tss setup/hold formula');
+    like($out, qr/__TSS_TMAX__=4\b/, 'Timing::SetupHold preserves the tss tmax/tmin formula');
+    like($out, qr/__HEADER__=\+ io \+ 1/, 'Timing::SetupHold preserves DxCy section header shaping');
+    like($out, qr/__DXCY_ROW__=internal:shtm_io_000!A1\@5\.00\(50\.0%\)\/-7\.00/, 'Timing::SetupHold preserves DxCy row-link shaping while passing conf into calculators');
+    unlike($err, qr/PPlugin|Can't locate Timing\/SetupHold\.pm/, 'Timing::SetupHold package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     plan tests => 19;

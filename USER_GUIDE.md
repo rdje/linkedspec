@@ -1245,6 +1245,8 @@ The same rule also applies inside mixed legacy files. The former real historical
 
 Internal helper subdefinitions in mixed legacy files follow the same rule too. The visible `qc_summary` action still lives in `plugin/qc_summary.plg`, but its private row-merging helper no longer appears as `qc_summary_merge` in the dynamic plugin registry. That behavior now lives in `QC::Summary::append_merged_rows(...)`, and the `.plg` action calls the package owner directly instead of using `LinkedSpec::get_plugin('qc_summary_merge')`.
 
+The setup/hold timing helpers now follow the same rule across two mixed legacy files. The visible `setup_hold_tmax_tmin` action still lives in `plugin/setup_hold_tmax_tmin.plg`, and the visible `tssio` action still lives in `plugin/tssio.plg`, but their private timing formulas no longer appear as `DxCy`, `DiCi`, `DiCo`, `DoCi`, `DoCo`, `tss_setup_hold`, or `tss_tmax_tmin` dynamic plugin registrations. That behavior now lives in `Timing::SetupHold`, and those `.plg` actions call the package owner directly.
+
 Parser lookup follows the same principle. The old one-line `plugin/spec.plg` `_get_parser` shim is gone; use `LinkedSpec::get_parser('Name')` or `LinkedSpec::Get(...)` directly rather than treating parser lookup as a plugin action.
 
 Generic plugin lookup follows it too. The old one-line `plugin/plugin.plg` shim is gone; code that genuinely needs a callback lookup should call `LinkedSpec::get_plugin($name)` directly and handle an unresolved name explicitly, for example with `// sub {}` when a no-op fallback is intentional.
