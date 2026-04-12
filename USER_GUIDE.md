@@ -1243,6 +1243,8 @@ That last clause is intentional. A `.pm` owner does not automatically require a 
 
 The same rule also applies inside mixed legacy files. The former real historical `http` action now lives in `HTTP::FileAccess::print_file_links_for_conf(...)`, the former real historical `lighttpd` action now lives in `HTTP::FileAccess::run_lighttpd_for_conf(...)`, and the former historical Apache `httpd` action now lives in `HTTP::FileAccess::run_httpd_for_conf(...)`, so `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` are no longer shipped as legacy registry wrappers. Repo-owned `.plg` code now calls `HTTP::FileAccess::url_for_path(...)`, `HTTP::FileAccess::set_hostport(...)`, or `HTTP::FileAccess::set_localhost(...)` directly when it needs HTTP file-access behavior.
 
+Internal helper subdefinitions in mixed legacy files follow the same rule too. The visible `qc_summary` action still lives in `plugin/qc_summary.plg`, but its private row-merging helper no longer appears as `qc_summary_merge` in the dynamic plugin registry. That behavior now lives in `QC::Summary::append_merged_rows(...)`, and the `.plg` action calls the package owner directly instead of using `LinkedSpec::get_plugin('qc_summary_merge')`.
+
 Parser lookup follows the same principle. The old one-line `plugin/spec.plg` `_get_parser` shim is gone; use `LinkedSpec::get_parser('Name')` or `LinkedSpec::Get(...)` directly rather than treating parser lookup as a plugin action.
 
 Generic plugin lookup follows it too. The old one-line `plugin/plugin.plg` shim is gone; code that genuinely needs a callback lookup should call `LinkedSpec::get_plugin($name)` directly and handle an unresolved name explicitly, for example with `// sub {}` when a no-op fallback is intentional.

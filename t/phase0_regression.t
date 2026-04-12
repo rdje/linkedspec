@@ -3873,7 +3873,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 24;
+    plan tests => 25;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
@@ -3893,8 +3893,9 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     ok(defined($stan_omap2430c_backend_plugin) && length($stan_omap2430c_backend_plugin), 'stan_omap2430c_backend.plg source is available for explicit lookup inspection');
     ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for explicit lookup inspection');
     unlike($qc_summary_plugin, qr/PPlugin->get \('qc_summary_merge'\)/, 'qc_summary plugin no longer routes qc_summary_merge through legacy PPlugin lookup');
-    like($qc_summary_plugin, qr/LinkedSpec::get_plugin\('qc_summary_merge'\)/, 'qc_summary plugin now resolves qc_summary_merge through LinkedSpec::get_plugin');
-    like($qc_summary_plugin, qr/my \$qc_summary_merge = LinkedSpec::get_plugin\('qc_summary_merge'\);/, 'qc_summary plugin caches the explicit lookup for reuse');
+    unlike($qc_summary_plugin, qr/LinkedSpec::get_plugin\('qc_summary_merge'\)/, 'qc_summary plugin no longer routes same-file summary merging through plugin lookup');
+    like($qc_summary_plugin, qr/use QC::Summary;/, 'qc_summary plugin now loads the QC summary package owner directly');
+    like($qc_summary_plugin, qr/QC::Summary::append_merged_rows/, 'qc_summary plugin now calls the package-owned row merge helper');
     unlike($skew_plugin, qr/PPlugin->get \('stan_backend_start'\)/, 'skew plugin no longer routes stan_backend_start through legacy PPlugin lookup');
     like($skew_plugin, qr/LinkedSpec::get_plugin\('stan_backend_start'\)->\(\$conf\)/, 'skew plugin now resolves stan_backend_start through LinkedSpec::get_plugin');
     like($tssio_plugin, qr/LinkedSpec::get_plugin\(\$info->\[\$\$index\{direction\}\] eq 'input' \? 'tss_setup_hold' : 'tss_tmax_tmin'\)->\(\$conf, \$\$a2d\[0\]/, 'tssio plugin now resolves dynamic setup/hold helpers through LinkedSpec::get_plugin');
@@ -3906,7 +3907,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     like($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('get_freqency_detailed_fname'\)->/, 'stan_omap2430c_backend plugin now resolves repeated filename helpers through LinkedSpec::get_plugin');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
-    like($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin now loads LinkedSpec explicitly before using get_plugin');
+    unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
     like($skew_plugin, qr/use LinkedSpec;/, 'skew plugin now loads LinkedSpec explicitly before using get_plugin');
     my @direct_pplugin_lookup_hits;
     foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
@@ -3917,7 +3918,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     is_deeply(\@direct_pplugin_lookup_hits, [], 'repo-owned plugin files avoid direct PPlugin->get(...) lookups outside the compatibility bridge');
 };
 subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => sub {
-    plan tests => 12;
+    plan tests => 13;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for migrated get_plugin plugin-file smoke');
@@ -3926,6 +3927,7 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     my $qc_summary_ast = eval { $parser->(\$qc_summary_input) };
     ok(!$@, 'qc_summary plugin still parses without die under pplugin') or diag(normalize_error($@));
     ok(defined($qc_summary_ast) && ref($qc_summary_ast) eq 'HASH', 'qc_summary plugin still returns a hash AST under pplugin');
+    is_deeply([sort keys %$qc_summary_ast], [qw(qc_summary)], 'qc_summary plugin no longer exposes qc_summary_merge as a legacy plugin subdef');
     is(ref($qc_summary_ast->{qc_summary}), 'CODE', 'qc_summary plugin still exposes qc_summary as a coderef');
 
     my $skew_input = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
@@ -3941,6 +3943,59 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen plugin still returns a hash AST under pplugin');
     is(ref($fsmgen_ast->{getop_plugin_list}), 'CODE', 'fsmgen plugin still exposes getop_plugin_list as a coderef');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg'), 'plugin.plg is no longer part of the legacy pplugin corpus after dynamic lookup migration');
+};
+subtest 'qc_summary_merge_moves_to_qc_summary_package_owner' => sub {
+    plan tests => 18;
+
+    my $qc_summary_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Summary.pm'));
+    my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
+
+    ok(defined($qc_summary_pm) && length($qc_summary_pm), 'QC::Summary package owner source is available');
+    ok(defined($qc_summary_plugin) && length($qc_summary_plugin), 'qc_summary.plg source is available for QC::Summary migration inspection');
+    like($qc_summary_pm, qr/package QC::Summary;/, 'QC::Summary declares the expected package');
+    like($qc_summary_pm, qr/sub append_merged_rows\b/, 'QC::Summary owns the summary row merge helper');
+    unlike($qc_summary_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Summary does not depend on plugin lookup or the legacy PPlugin runtime');
+    like($qc_summary_plugin, qr/use QC::Summary;/, 'qc_summary.plg loads the QC::Summary owner directly');
+    like($qc_summary_plugin, qr/QC::Summary::append_merged_rows/, 'qc_summary.plg calls the QC::Summary row merge helper directly');
+    unlike($qc_summary_plugin, qr/\bqc_summary_merge\s*\{/, 'qc_summary.plg no longer exposes qc_summary_merge as a legacy plugin subdef');
+    unlike($qc_summary_plugin, qr/LinkedSpec::get_plugin|PPlugin/, 'qc_summary.plg no longer uses plugin lookup for summary row merging');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require QC::Summary;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my @rows;
+my $info = ['top.block.leaf'];
+my $data = [
+    [
+        ['header', 'old_io', 'old_cts', 'old_comment', 9],
+        ['first', 'in', '10', 'note', 3],
+    ],
+    [
+        ['slow', 'out', '10', 'note', 5],
+        ['fast', 'out', '20', 'note', 1],
+    ],
+    [
+        ['tail', 'out', '30', 'note', 7],
+    ],
+];
+QC::Summary::append_merged_rows($info, $data, \@rows, 3, 1, 2, 4);
+print "__TOP__=$rows[0][0][0]\n";
+print "__HEADER__=$rows[0][1][1]|$rows[0][1][2]|$rows[0][1][3]\n";
+print "__SORTED__=$rows[0][3][0],$rows[0][4][0]\n";
+print "__SEPARATOR__=", join('', @{$rows[0][5]}), "\n";
+print "__TAIL__=$rows[0][6][0]\n";
+print "__ROW_BLOCKS__=", scalar(@rows), "\n";
+PERL
+
+    is($exit_code, 0, 'QC::Summary package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Summary keeps PPlugin unloaded');
+    like($out, qr/__TOP__=block\/leaf/, 'QC::Summary preserves dotted-file summary title shaping');
+    like($out, qr/__HEADER__=IO_Type\|Cts_Tpd\|Comment/, 'QC::Summary preserves first-section header relabeling');
+    like($out, qr/__SORTED__=fast,slow/, 'QC::Summary preserves slack sorting for sortable sections');
+    like($out, qr/__SEPARATOR__=\+\+\+\+/, 'QC::Summary preserves separator row insertion after the second section');
+    like($out, qr/__TAIL__=tail/, 'QC::Summary preserves later section row append behavior');
+    like($out, qr/__ROW_BLOCKS__=1/, 'QC::Summary appends exactly one merged row block to the accumulator');
+    unlike($err, qr/PPlugin|Can't locate QC\/Summary\.pm/, 'QC::Summary package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     plan tests => 19;

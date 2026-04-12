@@ -1,6 +1,6 @@
 qc_summary  {
 my ($qconf) = @_;
- use LinkedSpec;
+ use QC::Summary;
 
  unless (@ARGV) {
   print "(qc_summary) -E- No CSV file provided,";
@@ -50,47 +50,19 @@ my ($qconf) = @_;
  system("mkdir -p $od;");
 
  my @summary;
- my $qc_summary_merge = LinkedSpec::get_plugin('qc_summary_merge');
- HUtils::Recurse(\%myexcel, [$qc_summary_merge, \@summary, $comment, $io_type, $cts_tpd, $slack]);
+ my $append_merged_rows = \&QC::Summary::append_merged_rows;
+ HUtils::Recurse(\%myexcel, [$append_merged_rows, \@summary, $comment, $io_type, $cts_tpd, $slack]);
  my $qcwb        = Table2SS::AddWorkBook("$od/qcsummary.xls");
  my $rca_summary = Table2SS::RCAllocate(1, 1, 2, [@summary], 'qcsummary');
  Table2SS::DriveSheet($qcwb, 'summary',  $rca_summary);
  
  HUtils::Recurse(\%myclone_excel, sub {my ($info, $data) = @_;
   my $mysummary = [];
-  $qc_summary_merge->($info, $data, $mysummary, $comment, $io_type, $cts_tpd, $slack);
+  $append_merged_rows->($info, $data, $mysummary, $comment, $io_type, $cts_tpd, $slack);
   my $c_rca = Table2SS::RCAllocate(1, 1, 2, $mysummary, 'qcsummary');
   my ($sheetname) = $info->[0] =~ /(.+)\./;
   Table2SS::DriveSheet($qcwb, $sheetname,  $c_rca);
  });
  
  Table2SS::Close($qcwb);
-}
-
-
-qc_summary_merge {
-my ($info, $data, $a2dlist, $comment, $io_type, $cts_tpd, $slack) = @_;
-
- my $name = join('/',(split(/\./, $info->[0]))[1 .. 2]);
- #print "qc_summary_merge: <$info->[0]>\n"; 
- my @lsummary;
- push @lsummary, [$name, ('+') x $comment];
- 
- my $i = 0;
- foreach my $sec (@$data) {
-  push @lsummary,  [('+') x ($comment + 1)] if $i >= 2;
- 
-  #print "qc_summary_merge: Driving index($i) type..\n";
-  do {
-   $sec->[0][$io_type] = "IO_Type";
-   $sec->[0][$cts_tpd] = "Cts_Tpd"; 
-   $sec->[0][$comment] = "Comment"; 
-  } unless $i;
-
-  push @lsummary, [@$_] foreach (($i == 1 || $i == 4) ? sort {$a->[$slack] <=> $b->[$slack]} @$sec : @$sec);
- 
-  ++$i
- }
- 
- push @$a2dlist, [@lsummary];
 }

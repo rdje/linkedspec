@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: extract QC summary merge owner
+
+- moved the historical `qc_summary_merge` helper body out of `plugin/qc_summary.plg` and into `QC::Summary::append_merged_rows(...)`,
+- migrated `plugin/qc_summary.plg` to call the package owner directly instead of resolving its own helper through `LinkedSpec::get_plugin(...)`,
+- removed `qc_summary_merge` as a legacy `.plg` subdefinition from the shipped plugin corpus while keeping the visible `qc_summary` action in place,
+- added regression coverage for the package owner, the reduced `pplugin` surface, PPlugin-free package loading, and preserved row-title/header/sort/separator append behavior.
+
+- Validation:
+  - `bash tools/run_ci_local.sh`
+  - `perl -Iperl -c perl/QC/Summary.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/qc_summary.plg`
+  - direct `QC::Summary::append_merged_rows(...)` behavior smoke
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-12 - Plugin runtime: graduate HTTP file access out of plugin namespace
 
 - renamed the short-lived `Plugin::HTTP` migration scaffold to HTTP-domain owner `HTTP::FileAccess`,
@@ -2552,8 +2569,8 @@ Regression coverage now locks:
 ## 2026-03-24 - Plugin Track: Spend `get_plugin(...)` in Small Repo-Owned `.plg` Callers
 
 Continued the plugin/runtime modernization track by moving smaller repo-owned lightweight plugin files off direct legacy lookup:
-- `plugin/qc_summary.plg` now resolves `qc_summary_merge` through `LinkedSpec::get_plugin(...)` once and reuses that coderef instead of calling `PPlugin->get(...)`,
-- `plugin/skew.plg` now resolves `stan_backend_start` through `LinkedSpec::get_plugin(...)` instead of `PPlugin->get(...)`,
+- `plugin/qc_summary.plg` resolved `qc_summary_merge` through `LinkedSpec::get_plugin(...)` once and reused that coderef instead of calling `PPlugin->get(...)`; a newer 2026-04-12 slice moved that private helper into `QC::Summary::append_merged_rows(...)`,
+- `plugin/skew.plg` resolved `stan_backend_start` through `LinkedSpec::get_plugin(...)` instead of `PPlugin->get(...)`,
 - and both plugin files now load `LinkedSpec` explicitly before using the new public lookup API.
 
 Regression coverage now locks:
