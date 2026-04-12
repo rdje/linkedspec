@@ -4156,7 +4156,7 @@ subtest 'string_substitution_logic_moves_into_text_domain_owner' => sub {
     like($text_substitution_pm, qr/sub var_subst\b/, 'text-domain variable substitution owner defines var_subst');
     like($text_substitution_pm, qr/sub var_subst_test\b/, 'text-domain variable substitution owner defines var_subst_test');
     like($text_substitution_pm, qr/Plugin::HTTP::set_http_localhost\(/, 'text-domain variable substitution owner still uses Plugin::HTTP directly for localhost setup');
-    like($text_substitution_pm, qr/Plugin::CGI::file_list_path2http\(/, 'text-domain variable substitution owner still uses Plugin::CGI directly for path-to-link formatting');
+    like($text_substitution_pm, qr/HTML::PathLinks::link_path_tokens\(/, 'text-domain variable substitution owner uses the HTML path-link owner directly for path-to-link formatting');
     unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('set_http_localhost'/, 'text-domain variable substitution owner no longer routes set_http_localhost through LinkedSpec::run_plugin');
     unlike($text_substitution_pm, qr/LinkedSpec::run_plugin\('file_list_path2http'/, 'text-domain variable substitution owner no longer routes file_list_path2http through LinkedSpec::run_plugin');
     unlike($text_substitution_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'text-domain variable substitution owner no longer depends on the plugin bridge for package-owned string helpers');
@@ -4178,25 +4178,29 @@ PERL
     unlike($err, qr/PPlugin/, 'text-domain variable substitution subprocess does not emit legacy PPlugin stderr');
     unlike($err, qr/Can't locate Text\/VariableSubstitution\.pm|Can't locate Plugin\/String\.pm/, 'text-domain variable substitution subprocess resolves the new package file');
 };
-subtest 'cgi_plugin_logic_moves_into_package_owner' => sub {
-    plan tests => 7;
+subtest 'path_link_logic_moves_into_html_domain_owner' => sub {
+    plan tests => 10;
 
-    my $cgi_plugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'CGI.pm'));
+    my $cgi_plugin_pm = File::Spec->catfile($Bin, '..', 'perl', 'Plugin', 'CGI.pm');
+    my $html_path_links_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'HTML', 'PathLinks.pm'));
     my $cgi_plugin_plg = File::Spec->catfile($Bin, '..', 'plugin', 'cgi.plg');
 
-    ok(defined($cgi_plugin_pm) && length($cgi_plugin_pm), 'package-backed cgi plugin owner source is available');
-    ok(!-e $cgi_plugin_plg, 'cgi.plg compatibility wrapper is removed now that Plugin::CGI owns all repo-owned usage');
-    like($cgi_plugin_pm, qr/package Plugin::CGI;/, 'package-backed cgi plugin owner declares the expected package');
-    like($cgi_plugin_pm, qr/sub file_list_path2http\b/, 'package-backed cgi plugin owner defines file_list_path2http');
-    like($cgi_plugin_pm, qr/Text::VariableSubstitution::var_subst\(/, 'package-backed cgi plugin owner reuses the extracted text-domain variable substitution owner');
-    like($cgi_plugin_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'package-backed cgi plugin owner uses the package-backed HTTP owner for httplink');
-    unlike($cgi_plugin_pm, qr/LinkedSpec::run_plugin|LinkedSpec::get_plugin|PPlugin/, 'Plugin::CGI no longer depends on the plugin bridge for file_list_path2http');
+    ok(defined($html_path_links_pm) && length($html_path_links_pm), 'HTML path-link owner source is available');
+    ok(!-e $cgi_plugin_pm, 'short-lived Plugin::CGI scaffold is removed now that a clearer HTML-domain owner exists');
+    ok(!-e $cgi_plugin_plg, 'cgi.plg compatibility wrapper is removed now that no repo-owned caller needs the legacy file_list_path2http plugin name');
+    like($html_path_links_pm, qr/package HTML::PathLinks;/, 'HTML path-link owner declares the expected package');
+    like($html_path_links_pm, qr/sub link_path_tokens\b/, 'HTML path-link owner defines link_path_tokens');
+    unlike($html_path_links_pm, qr/sub file_list_path2http\b/, 'HTML path-link owner does not preserve the obsolete file_list_path2http helper name');
+    like($html_path_links_pm, qr/Text::VariableSubstitution::var_subst\(/, 'HTML path-link owner reuses the extracted text-domain variable substitution owner');
+    like($html_path_links_pm, qr/Plugin::HTTP::httplink\(\$subst\)/, 'HTML path-link owner uses the package-backed HTTP owner for httplink');
+    unlike($html_path_links_pm, qr/LinkedSpec::run_plugin|LinkedSpec::get_plugin|PPlugin/, 'HTML path-link owner no longer depends on the plugin bridge for path-link rendering');
+    unlike($html_path_links_pm, qr/package Plugin::CGI|Plugin::CGI::/, 'HTML path-link owner does not preserve the obsolete Plugin::CGI namespace');
 };
-subtest 'cgi_package_owner_avoids_pplugin_and_preserves_link_wrapping_contract' => sub {
+subtest 'html_path_link_owner_avoids_pplugin_and_preserves_link_wrapping_contract' => sub {
     plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require Plugin::CGI;
+require HTML::PathLinks;
 require Plugin::HTTP;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 {
@@ -4206,18 +4210,18 @@ print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLO
   print "__PLUGIN_ARG__=$arg\n";
   return "http://example$arg";
  };
- my $ret = Plugin::CGI::file_list_path2http('/tmp/demo.txt');
+ my $ret = HTML::PathLinks::link_path_tokens('/tmp/demo.txt');
  print "__RET__=$ret\n";
 }
 PERL
 
-    is($exit_code, 0, 'cgi package-owner subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the cgi package owner keeps PPlugin unloaded');
-    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'cgi package owner passes the substituted path into Plugin::HTTP::httplink');
-    like($out, qr/__RET__=<A HREF="http:\/\/example\/tmp\/demo\.txt">\/tmp\/demo\.txt<\/A>/, 'cgi package owner preserves the historical link-wrapping behavior');
-    unlike($err, qr/PPlugin/, 'cgi package-owner subprocess does not emit legacy PPlugin stderr');
-    unlike($err, qr/Can't locate Plugin\/CGI\.pm/, 'cgi package-owner subprocess resolves the new package file');
-    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'cgi package-owner subprocess resolves the package-backed HTTP owner');
+    is($exit_code, 0, 'HTML path-link owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring the HTML path-link owner keeps PPlugin unloaded');
+    like($out, qr/__PLUGIN_ARG__=\/tmp\/demo\.txt/, 'HTML path-link owner passes the substituted path into Plugin::HTTP::httplink');
+    like($out, qr/__RET__=<A HREF="http:\/\/example\/tmp\/demo\.txt">\/tmp\/demo\.txt<\/A>/, 'HTML path-link owner preserves the historical link-wrapping behavior');
+    unlike($err, qr/PPlugin/, 'HTML path-link owner subprocess does not emit legacy PPlugin stderr');
+    unlike($err, qr/Can't locate HTML\/PathLinks\.pm|Can't locate Plugin\/CGI\.pm/, 'HTML path-link owner subprocess resolves the new package file');
+    unlike($err, qr/Can't locate Plugin\/HTTP\.pm/, 'HTML path-link owner subprocess resolves the package-backed HTTP owner');
 };
 subtest 'http_related_plugin_logic_moves_into_package_owner' => sub {
     plan tests => 22;

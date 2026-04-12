@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-12 - Plugin runtime: graduate path links out of plugin namespace
+
+- renamed the short-lived `Plugin::CGI` migration scaffold to HTML-domain owner `HTML::PathLinks`,
+- replaced the historical `file_list_path2http(...)` helper name with `link_path_tokens(...)`,
+- migrated `Text::VariableSubstitution::var_subst_test(...)` and regression coverage to call `HTML::PathLinks::link_path_tokens(...)` directly,
+- preserved the existing path-token link-wrapping behavior while removing the plugin/CGI-branded package from current repo-owned usage,
+- updated working docs and the public book so the current path-link surface no longer teaches a plugin-branded owner after the `.plg` wrapper removal.
+
+- Validation:
+  - `perl -Iperl -c perl/HTML/PathLinks.pm`
+  - `perl -Iperl -c perl/Text/VariableSubstitution.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `rg --files -g 'CGI.pm'` absence scan for the removed scaffold file
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -v -Iperl t/phase0_regression.t`
+
 ## 2026-04-12 - Plugin runtime: graduate string substitution out of plugin namespace
 
 - renamed the short-lived `Plugin::String` migration scaffold to text-domain owner `Text::VariableSubstitution`,

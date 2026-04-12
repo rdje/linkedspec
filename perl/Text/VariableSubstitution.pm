@@ -36,15 +36,15 @@ sub var_subst {
 #------------------------------------------------------------------------------
 # Function: var_subst_test
 # Purpose : Preserve the historical string-plugin smoke helper while routing
-#           its helper calls through package-backed owners.
+#           its helper calls through normal package owners.
 # Args    : ($conf_hashref)
 # Returns : undef after printing test output
 #------------------------------------------------------------------------------
 sub var_subst_test {
  require Global;
  require HUtils;
+ require HTML::PathLinks;
  require PathSearch;
- require Plugin::CGI;
  require Plugin::HTTP;
 
  open(my $f, $_[0]{_argv}[0]);
@@ -53,7 +53,7 @@ sub var_subst_test {
 
  Global->set('cgi') = HUtils::Conf(PathSearch->go('cgi'));
  Plugin::HTTP::set_http_localhost();
- my $fo = Plugin::CGI::file_list_path2http($file);
+ my $fo = HTML::PathLinks::link_path_tokens($file);
 
  print "var_subst_test: ($fo)\n";
  return

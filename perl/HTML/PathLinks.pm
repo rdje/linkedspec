@@ -1,9 +1,10 @@
 #------------------------------------------------------------------------------
-# Package: Plugin::CGI
-# Purpose: Package-backed owner for lightweight CGI/link-formatting plugin
-#          behavior being migrated out of legacy `.plg` files.
+# Package: HTML::PathLinks
+# Purpose: HTML-domain owner for path-token link rendering that migrated out
+#          of legacy `.plg` files and no longer belongs under plugin or CGI
+#          migration scaffolding.
 #------------------------------------------------------------------------------
-package Plugin::CGI;
+package HTML::PathLinks;
 
 use 5.010;
 BEGIN {
@@ -14,13 +15,13 @@ BEGIN {
 }
 
 #------------------------------------------------------------------------------
-# Function: file_list_path2http
+# Function: link_path_tokens
 # Purpose : Convert path-like tokens in one string into HTML links using the
 #           package-backed HTTP owner for URL generation.
 # Args    : ($text)
 # Returns : linked HTML text
 #------------------------------------------------------------------------------
-sub file_list_path2http {
+sub link_path_tokens {
  require Global;
  require Plugin::HTTP;
  require Text::VariableSubstitution;
