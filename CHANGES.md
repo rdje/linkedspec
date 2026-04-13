@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-13 - Plugin runtime: extract STAN OMAP frequency-detail owner
+
+- moved the historical `freqency_detailed`, `freqency_detailed_paths`, `drive_freqency_detailed`, and `get_freqency_detailed_fname` helper bodies out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend`,
+- replaced the misspelled dynamic helper names with explicit package functions: `record_frequency_detail(...)`, `write_frequency_detail_paths(...)`, `write_frequency_detail(...)`, and `frequency_detail_filename(...)`,
+- migrated the visible `old_default` legacy action to call those package functions directly while leaving remaining visible STAN OMAP actions in the `.plg` file,
+- removed those private frequency-detail helper subdefs from the shipped legacy plugin corpus while preserving the existing LOF section names and filename/link format.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - focused `pplugin` parse probe for `plugin/stan_omap2430c_backend.plg`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-13 - Plugin runtime: extract STAN backend setup owner
 
 - moved the historical `stan_backend_start` setup helper out of `plugin/stan_backend.plg` and into timing-domain owner `Timing::StanBackend::start(...)`,

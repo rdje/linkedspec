@@ -1,6 +1,7 @@
 old_default {
 my ($conf) = @_;
  use LinkedSpec;
+ use Timing::StanOmap2430cBackend;
 
  print "($conf->{_program}) -I- Loading SETUP & HOLD info..";
  my $setup_hold = TcFlow::GetSH($conf->{_consolidated});
@@ -17,12 +18,12 @@ my ($conf) = @_;
  $conf->{_stafrequency_paths} = {};
 
  HUtils::Recurse($conf->{_filteredata},        [LinkedSpec::get_plugin('stafrequency'),            $conf]);
- HUtils::Recurse($conf->{_stafrequency},       [LinkedSpec::get_plugin('freqency_detailed'),       $conf]);
+ HUtils::Recurse($conf->{_stafrequency},       [\&Timing::StanOmap2430cBackend::record_frequency_detail, $conf]);
  
- open(DFREQ, ">$conf->{_workdir}/drive_freqency_detailed.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_workdir}/drive_freqency_detailed.lof', ";
- HUtils::Recurse($conf->{_freqency_detailed},  [LinkedSpec::get_plugin('drive_freqency_detailed'), $conf]);
- close(DFREQ);
- HUtils::Recurse($conf->{_stafrequency_paths}, [LinkedSpec::get_plugin('freqency_detailed_paths'), $conf]);
+ open(my $dfreq, ">$conf->{_workdir}/drive_freqency_detailed.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_workdir}/drive_freqency_detailed.lof', ";
+ HUtils::Recurse($conf->{_freqency_detailed},  [\&Timing::StanOmap2430cBackend::write_frequency_detail, $conf, $dfreq]);
+ close($dfreq);
+ HUtils::Recurse($conf->{_stafrequency_paths}, [\&Timing::StanOmap2430cBackend::write_frequency_detail_paths, $conf]);
  HUtils::WRecurse($conf->{_filteredata},       [LinkedSpec::get_plugin('portiming'),               $conf]);
 
  # HOLD info
@@ -144,77 +145,6 @@ my ($conf) = @_;
  print QUEST "@$_\n" foreach (@{$conf->{_questionable_paths}});
  print QUEST "=stan_questionable_paths_end=\n";
  close(QUEST)
-}
-
-freqency_detailed {
-my ($info, $freqs, $conf) = @_;
-
- my ($pathtype, $direction, $iomode, $corner) = @$info;
- my ($iomode_idx) = $iomode =~ /iomode(\d+)/;
-
- my $qmark = grep {!/\d+/} @$freqs;
-
- my $minfreq = $qmark ? '?' : (sort {$a <=> $b} @$freqs)[0];
- $conf->{_freqency_detailed}{$pathtype}{$direction}[$iomode_idx]{$corner} = $minfreq;
-}
-
-freqency_detailed_paths {
-my ($info, $paths, $conf) = @_;
- use LinkedSpec;
-
- my ($pathtype, $direction, $iomode, $corner) = @$info;
-
- my ($iomode_idx) = $iomode =~ /iomode(\d+)/;
- my $filename     = LinkedSpec::get_plugin('get_freqency_detailed_fname')->($pathtype, $direction, $iomode_idx, $corner);
- open(PATHD, ">$conf->{_stanpaths_lof_workdir}/$filename.lof") || die "($conf->{_program}) -E- Can't write open '$conf->{_stanpaths_lof_workdir}/$filename.lof', ";
- print PATHD "=stan_freqency_detailed_paths=\n";
-
- if (exists $$paths[0]) {print PATHD "@$_\n" foreach (@{$$paths[0]})}
- if (exists $$paths[1]) {print PATHD "@$_\n" foreach (@{$$paths[1]})}
-
- print PATHD "=stan_freqency_detailed_paths_end=\n";
- close(PATHD);
-}
-
-drive_freqency_detailed {
-my ($info, $freqs, $conf) = @_;
- use LinkedSpec;
-
- my $label 	     = join("/", @$info);
- my $corner_count    = keys %{$conf->{frequencies}};
- my @sorted_corners  = sort {$b <=> $a} keys %{$conf->{frequencies}};
- 
- my $pathtype	     = $info->[0];
- print DFREQ "=stan_frequency_detailed=\n";
-
- my @official_target_freqs = map {$conf->{'official-target-frequencies'}{$pathtype}{$_}."(Mhz)"} @sorted_corners;
-
-# print "<@official_target_freqs>\n";
- print DFREQ join("\t", "+", @official_target_freqs)."\n";
- print DFREQ join("\t", $label, @sorted_corners)."\n";
- my $idx = 0;
- foreach my $iomode_ent (@$freqs) {
-  print DFREQ "io_mode$idx";
-  foreach my $ccorner (@sorted_corners) {
-   my $refilename = LinkedSpec::get_plugin('get_freqency_detailed_fname')->(@$info, $idx, $ccorner);
-   my $cellval = $$iomode_ent{$ccorner} || "-";
-
-   # No internal link for '-'
-   print DFREQ  $cellval eq '-' ? "\t$cellval" : "\tinternal:$refilename!A1\@$cellval"
-  }
-
-  print DFREQ "\n";
-  ++$idx
- }
-
- print DFREQ "=stan_frequency_detailed_end=\n";
-}
-
-get_freqency_detailed_fname {
-my ($pathtype, $direction, $idx, $corner) = @_;
-
- $corner =~ s/\./_/;
- return (split(//, $direction))[0].'_'.join("", (split(//, $pathtype))[0 .. 2]).'_'.$idx.'_'.$corner
 }
 
 freqency_summary {

@@ -3907,8 +3907,8 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     like($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'fsmgen plugin now resolves dynamic plugin-list entries through LinkedSpec::get_plugin');
     unlike($fsmgen_plugin, qr/\bplugin\s*\(/, 'fsmgen plugin no longer routes dynamic plugin-list entries through the legacy plugin lookup shim');
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
-    like($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('stafrequency'\)/, 'stan_omap2430c_backend plugin now resolves traversal handlers through LinkedSpec::get_plugin');
-    like($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('get_freqency_detailed_fname'\)->/, 'stan_omap2430c_backend plugin now resolves repeated filename helpers through LinkedSpec::get_plugin');
+    like($stan_omap2430c_backend_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend plugin now loads the STAN OMAP timing package owner directly');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend plugin no longer resolves frequency-detail helpers through plugin lookup');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
     unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
@@ -4074,6 +4074,82 @@ PERL
     like($out, qr/__UCONF__=\/tmp\/stan_backend_table2ss\.conf/, 'Timing::StanBackend forwards resolved table2ss config to Table2SS::UConf');
     like($out, qr/__RET__=uconf-ok/, 'Timing::StanBackend preserves the setup return value');
     unlike($err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend package-owner subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
+    plan tests => 32;
+
+    my $timing_stan_omap_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanOmap2430cBackend.pm'));
+    my $stan_omap_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
+
+    ok(defined($timing_stan_omap_pm) && length($timing_stan_omap_pm), 'Timing::StanOmap2430cBackend package owner source is available');
+    ok(defined($stan_omap_plugin) && length($stan_omap_plugin), 'stan_omap2430c_backend.plg source is available for STAN OMAP helper migration inspection');
+    like($timing_stan_omap_pm, qr/package Timing::StanOmap2430cBackend;/, 'Timing::StanOmap2430cBackend declares the expected package');
+    like($timing_stan_omap_pm, qr/sub frequency_detail_filename\b/, 'Timing::StanOmap2430cBackend owns the corrected frequency-detail filename helper');
+    like($timing_stan_omap_pm, qr/sub record_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail accumulator callback');
+    like($timing_stan_omap_pm, qr/sub write_frequency_detail_paths\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail path writer');
+    like($timing_stan_omap_pm, qr/sub write_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail summary writer');
+    unlike($timing_stan_omap_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanOmap2430cBackend does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($stan_omap_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend.plg loads the Timing::StanOmap2430cBackend owner directly');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::record_frequency_detail/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail accumulator');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail\b/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail summary writer');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail_paths/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail path writer');
+    unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for frequency-detail helpers');
+    unlike($stan_omap_plugin, qr/\b(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)\s*\{/, 'stan_omap2430c_backend.plg no longer exposes frequency-detail helpers as legacy plugin subdefs');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Timing::StanOmap2430cBackend migrated plugin smoke');
+    my $stan_omap_ast = eval { $parser->(\$stan_omap_plugin) };
+    ok(!$@, 'stan_omap2430c_backend plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($stan_omap_ast) && ref($stan_omap_ast) eq 'HASH', 'stan_omap2430c_backend plugin still returns a hash AST under pplugin');
+    ok(!exists $stan_omap_ast->{freqency_detailed}, 'stan_omap2430c_backend plugin no longer exposes freqency_detailed as a coderef');
+    ok(!exists $stan_omap_ast->{freqency_detailed_paths}, 'stan_omap2430c_backend plugin no longer exposes freqency_detailed_paths as a coderef');
+    ok(!exists $stan_omap_ast->{drive_freqency_detailed}, 'stan_omap2430c_backend plugin no longer exposes drive_freqency_detailed as a coderef');
+    ok(!exists $stan_omap_ast->{get_freqency_detailed_fname}, 'stan_omap2430c_backend plugin no longer exposes get_freqency_detailed_fname as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+use File::Temp qw(tempdir);
+require Timing::StanOmap2430cBackend;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $tmp = tempdir(CLEANUP => 1);
+my $conf = {
+ _program => 'prog',
+ _stanpaths_lof_workdir => $tmp,
+ frequencies => { '2.0' => 1, '1.0' => 1 },
+ 'official-target-frequencies' => { setup => { '2.0' => 400, '1.0' => 200 } },
+};
+my $filename = Timing::StanOmap2430cBackend::frequency_detail_filename('setup', 'input', 1, '1.0');
+print "__FNAME__=$filename\n";
+Timing::StanOmap2430cBackend::record_frequency_detail(['setup', 'input', 'iomode1', '1.0'], [125, 100], $conf);
+Timing::StanOmap2430cBackend::record_frequency_detail(['setup', 'output', 'iomode0', '2.0'], [90, '?'], $conf);
+print "__DETAIL_MIN__=$conf->{_freqency_detailed}{setup}{input}[1]{'1.0'}\n";
+print "__DETAIL_Q__=$conf->{_freqency_detailed}{setup}{output}[0]{'2.0'}\n";
+my $paths = [[['ok_path']], [['questionable_path']]];
+Timing::StanOmap2430cBackend::write_frequency_detail_paths(['setup', 'input', 'iomode1', '1.0'], $paths, $conf);
+open(my $path_fh, '<', "$tmp/$filename.lof") or die "read $tmp/$filename.lof: $!";
+my $path_content = do { local $/; <$path_fh> };
+close($path_fh);
+$path_content =~ s/\n/|/g;
+print "__PATHS__=$path_content\n";
+my $summary = '';
+open(my $summary_fh, '>', \$summary) or die "open scalar fh: $!";
+Timing::StanOmap2430cBackend::write_frequency_detail(['setup', 'input'], [{ '2.0' => 120, '1.0' => '-' }], $conf, $summary_fh);
+close($summary_fh);
+$summary =~ s/\n/|/g;
+print "__SUMMARY__=$summary\n";
+PERL
+
+    is($exit_code, 0, 'Timing::StanOmap2430cBackend package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring Timing::StanOmap2430cBackend keeps PPlugin unloaded');
+    like($out, qr/__FNAME__=i_set_1_1_0/, 'Timing::StanOmap2430cBackend preserves the historical frequency-detail filename shape');
+    like($out, qr/__DETAIL_MIN__=100/, 'Timing::StanOmap2430cBackend preserves minimum-frequency detail accumulation');
+    like($out, qr/__DETAIL_Q__=\?/, 'Timing::StanOmap2430cBackend preserves questionable-frequency marker accumulation');
+    like($out, qr/__PATHS__=.*=stan_freqency_detailed_paths=/, 'Timing::StanOmap2430cBackend preserves frequency-detail paths section header');
+    like($out, qr/__PATHS__=.*ok_path/, 'Timing::StanOmap2430cBackend writes normal frequency-detail paths');
+    like($out, qr/__PATHS__=.*questionable_path/, 'Timing::StanOmap2430cBackend writes questionable frequency-detail paths');
+    like($out, qr/__SUMMARY__=.*=stan_frequency_detailed=.*setup\/input.*internal:i_set_0_2_0!A1\@120/s, 'Timing::StanOmap2430cBackend preserves frequency-detail summary links');
+    like($out, qr/__SUMMARY__=.*io_mode0\tinternal:i_set_0_2_0!A1\@120\t-/s, 'Timing::StanOmap2430cBackend preserves dash cells without internal links');
+    unlike($err, qr/PPlugin|Can't locate Timing\/StanOmap2430cBackend\.pm/, 'Timing::StanOmap2430cBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'setup_hold_timing_helpers_move_to_timing_setuphold_package_owner' => sub {
     plan tests => 41;
