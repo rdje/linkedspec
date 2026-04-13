@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-13 - Plugin runtime: extract STAN backend setup owner
+
+- moved the historical `stan_backend_start` setup helper out of `plugin/stan_backend.plg` and into timing-domain owner `Timing::StanBackend::start(...)`,
+- migrated `plugin/stan_backend.plg`, `plugin/skew.plg`, and `plugin/duty_cycle_degradation.plg` to call the package owner directly instead of relying on a legacy dynamic helper registration or `LinkedSpec::get_plugin('stan_backend_start')`,
+- removed `stan_backend_start` from the shipped legacy plugin corpus while keeping the visible STAN backend actions in their existing `.plg` files,
+- preserved the historical launch banner, HTTP host/port setup, `stan_backend_table2ss` lookup, and `Table2SS::UConf(...)` return behavior behind a normal package owner.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-12 - Plugin runtime: extract setup/hold timing owner
 
 - moved the historical setup/hold timing helper bodies (`DxCy`, `DiCi`, `DiCo`, `DoCi`, `DoCo`, `tss_setup_hold`, and `tss_tmax_tmin`) out of legacy `.plg` helper registrations and into `Timing::SetupHold`,

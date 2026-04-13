@@ -3897,7 +3897,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     like($qc_summary_plugin, qr/use QC::Summary;/, 'qc_summary plugin now loads the QC summary package owner directly');
     like($qc_summary_plugin, qr/QC::Summary::append_merged_rows/, 'qc_summary plugin now calls the package-owned row merge helper');
     unlike($skew_plugin, qr/PPlugin->get \('stan_backend_start'\)/, 'skew plugin no longer routes stan_backend_start through legacy PPlugin lookup');
-    like($skew_plugin, qr/LinkedSpec::get_plugin\('stan_backend_start'\)->\(\$conf\)/, 'skew plugin now resolves stan_backend_start through LinkedSpec::get_plugin');
+    like($skew_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'skew plugin now calls the Timing::StanBackend owner directly');
     unlike($tssio_plugin, qr/LinkedSpec::get_plugin\(\$info->\[\$\$index\{direction\}\] eq 'input' \? 'tss_setup_hold' : 'tss_tmax_tmin'\)/, 'tssio plugin no longer resolves dynamic setup/hold helpers through plugin lookup');
     like($tssio_plugin, qr/use Timing::SetupHold;/, 'tssio plugin now loads the setup/hold timing package owner directly');
     like($tssio_plugin, qr/Timing::SetupHold::calculate_path_delay/, 'tssio plugin now uses the package-owned path-delay dispatcher');
@@ -3912,7 +3912,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
     unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
-    like($skew_plugin, qr/use LinkedSpec;/, 'skew plugin now loads LinkedSpec explicitly before using get_plugin');
+    like($skew_plugin, qr/use Timing::StanBackend;/, 'skew plugin now loads the Timing::StanBackend owner directly');
     my @direct_pplugin_lookup_hits;
     foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
         my $source = slurp($plugin_file);
@@ -4000,6 +4000,80 @@ PERL
     like($out, qr/__TAIL__=tail/, 'QC::Summary preserves later section row append behavior');
     like($out, qr/__ROW_BLOCKS__=1/, 'QC::Summary appends exactly one merged row block to the accumulator');
     unlike($err, qr/PPlugin|Can't locate QC\/Summary\.pm/, 'QC::Summary package-owner subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'stan_backend_start_moves_to_timing_stanbackend_package_owner' => sub {
+    plan tests => 29;
+
+    my $timing_stan_backend_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanBackend.pm'));
+    my $stan_backend_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
+    my $skew_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
+    my $dutycycled_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'duty_cycle_degradation.plg'));
+
+    ok(defined($timing_stan_backend_pm) && length($timing_stan_backend_pm), 'Timing::StanBackend package owner source is available');
+    ok(defined($stan_backend_plugin) && length($stan_backend_plugin), 'stan_backend.plg source is available for Timing::StanBackend migration inspection');
+    ok(defined($skew_plugin) && length($skew_plugin), 'skew.plg source is available for Timing::StanBackend migration inspection');
+    ok(defined($dutycycled_plugin) && length($dutycycled_plugin), 'duty_cycle_degradation.plg source is available for Timing::StanBackend migration inspection');
+    like($timing_stan_backend_pm, qr/package Timing::StanBackend;/, 'Timing::StanBackend declares the expected package');
+    like($timing_stan_backend_pm, qr/sub start\b/, 'Timing::StanBackend owns the former stan_backend_start setup helper');
+    like($timing_stan_backend_pm, qr/HTTP::FileAccess::set_hostport/, 'Timing::StanBackend owns the HTTP hostport setup call');
+    unlike($timing_stan_backend_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanBackend does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($stan_backend_plugin, qr/use Timing::StanBackend;/, 'stan_backend.plg loads the Timing::StanBackend owner directly');
+    like($stan_backend_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'stan_backend.plg calls the Timing::StanBackend setup helper directly');
+    unlike($stan_backend_plugin, qr/\bstan_backend_start\s*\{/, 'stan_backend.plg no longer exposes stan_backend_start as a legacy plugin subdef');
+    unlike($stan_backend_plugin, qr/(?<!::)\bstan_backend_start\s*\(/, 'stan_backend.plg no longer calls the unqualified legacy setup helper');
+
+    like($skew_plugin, qr/use Timing::StanBackend;/, 'skew.plg loads the Timing::StanBackend owner directly');
+    like($skew_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'skew.plg calls the Timing::StanBackend setup helper directly');
+    unlike($skew_plugin, qr/LinkedSpec::get_plugin|PPlugin|\buse LinkedSpec;|(?<!::)\bstan_backend_start\s*\(/, 'skew.plg no longer uses plugin lookup for STAN backend setup');
+
+    like($dutycycled_plugin, qr/use Timing::StanBackend;/, 'duty_cycle_degradation.plg loads the Timing::StanBackend owner directly');
+    like($dutycycled_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'duty_cycle_degradation.plg calls the Timing::StanBackend setup helper directly');
+    unlike($dutycycled_plugin, qr/LinkedSpec::get_plugin|PPlugin|\buse LinkedSpec;|(?<!::)\bstan_backend_start\s*\(/, 'duty_cycle_degradation.plg no longer relies on a legacy setup helper');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Timing::StanBackend migrated plugin smoke');
+    my $stan_backend_ast = eval { $parser->(\$stan_backend_plugin) };
+    ok(!$@, 'stan_backend plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($stan_backend_ast) && ref($stan_backend_ast) eq 'HASH', 'stan_backend plugin still returns a hash AST under pplugin');
+    ok(!exists $stan_backend_ast->{stan_backend_start}, 'stan_backend plugin no longer exposes stan_backend_start as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+ $INC{"HTTP/FileAccess.pm"} = __FILE__;
+ package HTTP::FileAccess;
+ sub set_hostport {
+  print "__HOSTPORT__=$_[0]:$_[1]\n";
+  return "$_[0]:$_[1]";
+ }
+
+ $INC{"PathSearch.pm"} = __FILE__;
+ package PathSearch;
+ sub go {
+  print "__PATHSEARCH__=$_[1]\n";
+  return '/tmp/stan_backend_table2ss.conf';
+ }
+
+ $INC{"Table2SS.pm"} = __FILE__;
+ package Table2SS;
+ sub UConf {
+  print "__UCONF__=$_[0]\n";
+  return 'uconf-ok';
+ }
+}
+require Timing::StanBackend;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $ret = Timing::StanBackend::start({ _program => 'prog', _action => 'act', _host => 'host', _port => 1234 });
+print "__RET__=$ret\n";
+PERL
+
+    is($exit_code, 0, 'Timing::StanBackend package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring Timing::StanBackend keeps PPlugin unloaded');
+    like($out, qr/\(prog\)\(act\) -I- Launching 'act' processing/, 'Timing::StanBackend preserves the historical launch banner');
+    like($out, qr/__HOSTPORT__=host:1234/, 'Timing::StanBackend forwards configured host and port to HTTP::FileAccess');
+    like($out, qr/__UCONF__=\/tmp\/stan_backend_table2ss\.conf/, 'Timing::StanBackend forwards resolved table2ss config to Table2SS::UConf');
+    like($out, qr/__RET__=uconf-ok/, 'Timing::StanBackend preserves the setup return value');
+    unlike($err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'setup_hold_timing_helpers_move_to_timing_setuphold_package_owner' => sub {
     plan tests => 41;
@@ -4414,8 +4488,8 @@ subtest 'http_file_access_logic_moves_into_domain_owner' => sub {
     like($rtl_plugin_plg, qr/HTTP::FileAccess::url_for_path\(/, 'rtl.plg now builds links through the HTTP file-access owner');
     unlike($rtl_plugin_plg, $unqualified_set_hostport, 'rtl.plg no longer calls set_hostport through an unqualified helper');
     unlike($rtl_plugin_plg, $unqualified_url_for_path, 'rtl.plg no longer calls url_for_path through an unqualified helper');
-    like($stan_backend_plugin_plg, qr/HTTP::FileAccess::set_hostport \(\$conf->\{_host\}, \$conf->\{_port\}\)/, 'stan_backend.plg now sets hostport through the HTTP file-access owner');
-    unlike($stan_backend_plugin_plg, $unqualified_set_hostport, 'stan_backend.plg no longer calls set_hostport through an unqualified helper');
+    like($stan_backend_plugin_plg, qr/Timing::StanBackend::start\(\$conf\)/, 'stan_backend.plg now delegates backend setup through the Timing::StanBackend owner');
+    unlike($stan_backend_plugin_plg, qr/HTTP::FileAccess::set_hostport|$unqualified_set_hostport/, 'stan_backend.plg no longer owns hostport setup directly');
     like($tree_plugin_plg, qr/HTTP::FileAccess::set_localhost \(\$_\[0\]\{_port\}\)/, 'tree.plg now sets localhost through the HTTP file-access owner');
     unlike($tree_plugin_plg, $unqualified_set_localhost, 'tree.plg no longer calls set_localhost through an unqualified helper');
 };

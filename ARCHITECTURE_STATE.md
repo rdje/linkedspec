@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-04-12`
+- Last refreshed: `2026-04-13`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -35,6 +35,7 @@ This document is the current high-level technical reading of the project shape. 
 - `HTTP::FileAccess` carries the former HTTP plugin boundary beyond helper subdefs now: repo-owned `.plg` actions call it directly for `url_for_path`, `set_hostport`, and `set_localhost`, while the former `plugin/http.plg` file-link action lives in `HTTP::FileAccess::print_file_links_for_conf(...)`, the former `plugin/lighttpd.plg` action lives in `HTTP::FileAccess::run_lighttpd_for_conf(...)`, and the former `plugin/httpd.plg` action lives in `HTTP::FileAccess::run_httpd_for_conf(...)`; those legacy wrapper files are gone.
 - `QC::Summary` now owns the former internal `qc_summary_merge` helper from `plugin/qc_summary.plg` as `append_merged_rows(...)`; the visible `qc_summary` action still exists in the legacy corpus for now, but its private row-merge helper no longer goes through `LinkedSpec::get_plugin(...)` or appears as a dynamic plugin registration.
 - `Timing::SetupHold` now owns the former internal setup/hold timing helpers from `plugin/setup_hold_tmax_tmin.plg` and `plugin/tssio.plg`: `collect_dxcy(...)`, named path-delay formulas, and the TSS setup/tmax delay helpers now live in a normal package owner while the visible legacy actions call that owner directly.
+- `Timing::StanBackend` now owns the former internal `stan_backend_start` setup helper from `plugin/stan_backend.plg`; the visible STAN backend actions still live in legacy `.plg` files for now, while `plugin/stan_backend.plg`, `plugin/skew.plg`, and `plugin/duty_cycle_degradation.plg` call the timing-domain owner directly instead of using plugin lookup or an unqualified helper.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
 - The remaining legacy `ActionRewriter` compatibility surface is thinner now too: its shared `EmitContext` delegation uses the same owner-dispatch seam instead of one extra local lazy-load / `can(...)` / symbol-call implementation.
 - The practical core path is:
@@ -163,6 +164,7 @@ Project/domain utility owners
 ├─ MSOffice::Excel
 ├─ QC::Summary
 ├─ Timing::SetupHold
+├─ Timing::StanBackend
 └─ Table::GenericFilter
 ```
 
@@ -374,13 +376,15 @@ Current project direction does not treat that branch as a target architecture.
 - keeps the recursive `group_by_port` / `group_by_ioclock` behavior on the existing HUtils grouping path without routing through stringly plugin lookup,
 - and no longer keeps `plugin/genericfilter.plg` as a thin legacy registration wrapper now that no repo-owned caller still needs those `genericfilter_*` plugin names.
 
-Pure helper extractions may land temporarily in a `Plugin::*` package when no clearer owner has been chosen yet, but that destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `HTTP::FileAccess` now owns the signed file-access URLs plus local HTTP daemon actions that briefly lived under `Plugin::HTTP`, `HTML::PathLinks` now owns the path-token HTML link rendering that briefly lived under `Plugin::CGI`, `Text::VariableSubstitution` now owns the string substitution helpers that briefly lived under `Plugin::String`, `Table::GenericFilter` now owns the table grouping helpers that briefly lived under `Plugin::GenericFilter`, `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`, `MSOffice::Excel` now owns the Excel helper that briefly lived under `Plugin::MSOffice`, and `Timing::SetupHold` now owns setup/hold timing helpers that moved straight out of mixed `.plg` implementation detail.
+Pure helper extractions may land temporarily in a `Plugin::*` package when no clearer owner has been chosen yet, but that destination is tactical rather than sacred. When a clearer domain owner exists, the behavior should graduate out of `Plugin::*` too; `HTTP::FileAccess` now owns the signed file-access URLs plus local HTTP daemon actions that briefly lived under `Plugin::HTTP`, `HTML::PathLinks` now owns the path-token HTML link rendering that briefly lived under `Plugin::CGI`, `Text::VariableSubstitution` now owns the string substitution helpers that briefly lived under `Plugin::String`, `Table::GenericFilter` now owns the table grouping helpers that briefly lived under `Plugin::GenericFilter`, `VHDL::ConstantEval` now owns the VHDL constant helpers that briefly lived under `Plugin::VHDLConst`, `MSOffice::Excel` now owns the Excel helper that briefly lived under `Plugin::MSOffice`, and `Timing::SetupHold` plus `Timing::StanBackend` now own timing helpers that moved straight out of mixed `.plg` implementation detail.
 
 `HTTP::FileAccess` shows the same destination applied to formerly real legacy actions, not just thin helper wrappers. The package owns `url_for_path`, `set_hostport`, `set_localhost`, the former `http` file-link action through `print_file_links_for_conf(...)`, the former `lighttpd` action through `run_lighttpd_for_conf(...)`, and the former `httpd` action through `run_httpd_for_conf(...)`; `plugin/http.plg`, `plugin/lighttpd.plg`, and `plugin/httpd.plg` have been removed. Repo-owned `.plg` callers that need HTTP file-access helpers call `HTTP::FileAccess` explicitly.
 
 `QC::Summary` shows the same cleanup inside a mixed legacy file. `plugin/qc_summary.plg` still carries the visible `qc_summary` action, but the private row-merging subdefinition is no longer registered as `qc_summary_merge` and no longer requires a plugin lookup just to reuse local implementation detail. The package owner now exposes `append_merged_rows(...)`, and the `.plg` action calls that directly.
 
 `Timing::SetupHold` extends that cleanup to a small helper family shared by two still-shipped legacy action files. `plugin/setup_hold_tmax_tmin.plg` still exposes `setup_hold_tmax_tmin`, and `plugin/tssio.plg` still exposes `tssio`, but their private timing formulas and DxCy traversal helper are no longer registered as `DxCy`, `DiCi`, `DiCo`, `DoCi`, `DoCo`, `tss_setup_hold`, or `tss_tmax_tmin` plugin subdefs. The package owner now carries those formulas and the named dispatcher directly, which keeps timing math explicit and avoids a same-file plugin lookup just to call implementation detail.
+
+`Timing::StanBackend` applies the same cleanup to STAN/report-timing backend setup. `plugin/stan_backend.plg` still exposes visible actions such as `clockmatrix`, `filterout`, `eponsout`, `defaultout`, `treeout`, and `interface`, but its private `stan_backend_start` helper is no longer a dynamic plugin subdef. The package owner now preserves the launch banner, HTTP host/port setup, and `stan_backend_table2ss` configuration load directly, and repo-owned callers such as `plugin/skew.plg` plus `plugin/duty_cycle_degradation.plg` call `Timing::StanBackend::start(...)` without plugin lookup.
 
 The one-line parser-lookup compatibility shim `plugin/spec.plg` has also been removed. Repo-owned parser lookup now stays on `LinkedSpec::get_parser(...)` directly instead of routing through a legacy `_get_parser` plugin action.
 

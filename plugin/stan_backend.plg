@@ -1,8 +1,9 @@
 
 clockmatrix {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
 
  my $filtered        = HUtils::GenericFilter($conf, TcFlow::GetAll($conf->{_argv}), "$conf->{_action}_sequence",  maptable=>'reportiming');
 
@@ -82,8 +83,9 @@ my ($conf, $wb, $row, $col, $hh) = @_;
 
 filterout {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
  my $field_cnt = ref $conf->{"$conf->{_action}_sequence"} ? @{$conf->{"$conf->{_action}_sequence"}} : 1;
 
  Table2SS::DriveTableTree($conf->{_excelfile} || "$conf->{_action}.xls", 
@@ -115,13 +117,14 @@ my ($conf) = @_;
 
 eponsout {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
  my %mode_corner_iomode;
  my %eponsout_i;
  my @eponsout;
  my %eponsout;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
  HUtils::KeyGrep(HUtils::GenericFilter($conf, TcFlow::GetAll($conf->{_argv}), "$conf->{_action}_sequence",  maptable=>'reportiming'),
 	         qr/mode:/o,
 		 sub {my ($info, $subtree) = @_;
@@ -186,21 +189,13 @@ my ($conf) = @_;
  }
 }
 
-stan_backend_start {
-my ($conf) = @_;
- use HTTP::FileAccess;
- 
- print "($conf->{_program})($conf->{_action}) -I- Launching '$conf->{_action}' processing..\n"; 
- HTTP::FileAccess::set_hostport ($conf->{_host}, $conf->{_port});
- Table2SS::UConf(PathSearch->go('stan_backend_table2ss'));
-}
-
 syncts {filterout(@_)}
 
 defaultout {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
 
  my $wbid = Table2SS::AddWorkBook($conf->{_excelfile} || "$conf->{_action}.xls");
 
@@ -214,8 +209,9 @@ my ($conf) = @_;
 
 treeout {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
 
  Table2SS::DriveTableTree($conf->{_excelfile} || "$conf->{_action}.xls", 
 	                  'links', 
@@ -230,8 +226,9 @@ my ($conf) = @_;
 
 interface {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start($conf); 
+ Timing::StanBackend::start($conf);
 
  my $workbookname = $conf->{_excelfile} || "$conf->{_action}.xls";
  my $byinterface = HUtils::GenericFilter($conf, TcFlow::GetAll($conf->{_argv}), "$conf->{_action}_1_sequence",  maptable=>'reportiming'); 

@@ -1247,6 +1247,8 @@ Internal helper subdefinitions in mixed legacy files follow the same rule too. T
 
 The setup/hold timing helpers now follow the same rule across two mixed legacy files. The visible `setup_hold_tmax_tmin` action still lives in `plugin/setup_hold_tmax_tmin.plg`, and the visible `tssio` action still lives in `plugin/tssio.plg`, but their private timing formulas no longer appear as `DxCy`, `DiCi`, `DiCo`, `DoCi`, `DoCo`, `tss_setup_hold`, or `tss_tmax_tmin` dynamic plugin registrations. That behavior now lives in `Timing::SetupHold`, and those `.plg` actions call the package owner directly.
 
+STAN/report-timing backend setup follows it as well. The visible STAN backend actions still live in `plugin/stan_backend.plg`, and related legacy actions in `plugin/skew.plg` plus `plugin/duty_cycle_degradation.plg` still exist, but the private setup helper no longer appears as `stan_backend_start` in the dynamic plugin registry. That behavior now lives in `Timing::StanBackend::start(...)`, preserving the launch banner, HTTP host/port setup, and `stan_backend_table2ss` configuration load while letting repo-owned callers name the timing-domain owner directly.
+
 Parser lookup follows the same principle. The old one-line `plugin/spec.plg` `_get_parser` shim is gone; use `LinkedSpec::get_parser('Name')` or `LinkedSpec::Get(...)` directly rather than treating parser lookup as a plugin action.
 
 Generic plugin lookup follows it too. The old one-line `plugin/plugin.plg` shim is gone; code that genuinely needs a callback lookup should call `LinkedSpec::get_plugin($name)` directly and handle an unresolved name explicitly, for example with `// sub {}` when a no-op fallback is intentional.

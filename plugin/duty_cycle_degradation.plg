@@ -1,7 +1,8 @@
 dutycycled {
 my ($conf) = @_;
+ use Timing::StanBackend;
 
- stan_backend_start ($conf); 
+ Timing::StanBackend::start($conf);
 
  my $filtered           = HUtils::GenericFilter($conf, TcFlow::GetAll($conf->{_argv}), "$conf->{_action}_sequence",  maptable=>'reportiming');
  my $arrival_time_index = TableGrep::IndexOf("arrival_time");
