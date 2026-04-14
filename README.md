@@ -63,6 +63,7 @@ Top-level directories and files:
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
+  - Hosted GitHub Actions CI is currently disabled to preserve account Actions minutes.
 - `plugin/`, `conf/`, `tablescript/`, `ebnf/`
   - Corpus and real-project inputs used in regression/integration flows.
 
@@ -78,8 +79,8 @@ Top-level project docs:
 - `COMMIT.md`
 
 ## Local CI
-- Run `bash tools/run_ci_local.sh` from the repo root to execute the same gate used by GitHub Actions.
-- `.github/workflows/ci.yml` delegates to that shared script so local validation and GitHub CI stay aligned.
+- Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
+- `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 
 ## Maintenance Policy for README
 - `README.md` must remain the single project entry point.

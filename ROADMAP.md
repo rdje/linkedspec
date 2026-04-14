@@ -576,7 +576,7 @@ Historical rationale note:
    - Keep this track orthogonal to Backbone item #3: clearing `pplugin.spec` is parser-grammar work, not a commitment to preserve the current plugin runtime forever.
 
 ## Immediate Next Steps
-- Keep local and GitHub CI aligned through the shared entrypoint `tools/run_ci_local.sh`, with `.github/workflows/ci.yml` delegating to that same repo-root gate.
+- Keep `tools/run_ci_local.sh` as the canonical repo-root gate; hosted GitHub Actions CI is currently disabled to preserve account minutes, while `.github/workflows/ci.yml` remains tracked as the re-enable wrapper around that same gate.
 - Use the new emitted-Perl lowering reference as the review baseline for Backbone item #3 and let user review feedback drive any compatibility-surface cleanup or syntax/semantic amendments.
 - Start Phase 1A modularization in no-behavior-change slices with Trace/Validation/Resolver extraction first, while keeping the façade API in `LinkedSpec.pm`.
 - Keep Phase-0 baseline continuously green while Phase-1 proceeds.

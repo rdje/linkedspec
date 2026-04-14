@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-14 - CI: disable hosted GitHub Actions auto-runs
+
+- removed automatic `push` and `pull_request` triggers from `.github/workflows/ci.yml` so LinkedSpec stops spending hosted GitHub Actions minutes,
+- kept the workflow tracked and manually dispatchable because `tools/run_ci_local.sh` audits it as part of the local CI contract,
+- added a job-level disabled guard so an accidental manual dispatch still does not allocate a hosted runner,
+- updated the README, roadmap note, user guide, and public book development workflow chapter so the current source of truth is explicit: local CI remains canonical while hosted CI is paused until intentionally re-enabled.
+
+- Validation:
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-13 - Plugin runtime: extract STAN OMAP frequency-detail owner
 
 - moved the historical `freqency_detailed`, `freqency_detailed_paths`, `drive_freqency_detailed`, and `get_freqency_detailed_fname` helper bodies out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend`,

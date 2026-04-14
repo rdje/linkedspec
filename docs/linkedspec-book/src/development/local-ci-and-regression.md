@@ -12,16 +12,24 @@ Run:
 bash tools/run_ci_local.sh
 ```
 
-This keeps local validation aligned with the GitHub CI gate.
+This is the canonical regression gate for local development.
 
-The GitHub workflow does the same thing:
+The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text
 .github/workflows/ci.yml
   -> bash tools/run_ci_local.sh
 ```
 
-That means local validation and GitHub validation are intentionally not two separate systems.
+That means local validation and hosted validation are intentionally not two separate systems when hosted CI is enabled.
+
+## Hosted GitHub Actions status
+
+Hosted GitHub Actions CI is currently disabled for cost-control reasons.
+
+The workflow file remains tracked because the local CI script audits it as part of the repository's validation surface, but the hosted workflow no longer runs on `push` or `pull_request`. It is left behind `workflow_dispatch` with a disabled job guard, so even an accidental manual dispatch does not spend runner minutes.
+
+To re-enable hosted CI later, restore the `push` and `pull_request` triggers in `.github/workflows/ci.yml`, remove the job-level disabled guard, and run the local gate before pushing the re-enable commit.
 
 ## What the local gate checks
 

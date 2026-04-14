@@ -1,8 +1,10 @@
 name: ci
 
+# Hosted GitHub Actions CI is intentionally disabled to avoid consuming the
+# account's included Actions minutes. Keep this workflow tracked because the
+# local CI gate audits that GitHub CI delegates to the same repo-root script.
+# Re-enable by restoring push/pull_request triggers and removing the job guard.
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -10,6 +12,7 @@ permissions:
 
 jobs:
   phase0-regression:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
