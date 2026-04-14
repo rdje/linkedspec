@@ -3873,7 +3873,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 29;
+    plan tests => 31;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
@@ -3909,6 +3909,8 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
     like($stan_omap2430c_backend_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend plugin now loads the STAN OMAP timing package owner directly');
     unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend plugin no longer resolves frequency-detail helpers through plugin lookup');
+    like($stan_omap2430c_backend_plugin, qr/Timing::StanOmap2430cBackend::filter_port_timing_paths/, 'stan_omap2430c_backend plugin now calls the package-owned port-timing filter callback');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('portiming'\)/, 'stan_omap2430c_backend plugin no longer resolves portiming through plugin lookup');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
     like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
     unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
@@ -4076,7 +4078,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
-    plan tests => 32;
+    plan tests => 41;
 
     my $timing_stan_omap_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanOmap2430cBackend.pm'));
     my $stan_omap_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
@@ -4086,16 +4088,20 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     like($timing_stan_omap_pm, qr/package Timing::StanOmap2430cBackend;/, 'Timing::StanOmap2430cBackend declares the expected package');
     like($timing_stan_omap_pm, qr/sub frequency_detail_filename\b/, 'Timing::StanOmap2430cBackend owns the corrected frequency-detail filename helper');
     like($timing_stan_omap_pm, qr/sub record_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail accumulator callback');
+    like($timing_stan_omap_pm, qr/sub filter_port_timing_paths\b/, 'Timing::StanOmap2430cBackend owns the port-timing path filter callback');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail_paths\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail path writer');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail summary writer');
     unlike($timing_stan_omap_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanOmap2430cBackend does not depend on plugin lookup or the legacy PPlugin runtime');
 
     like($stan_omap_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend.plg loads the Timing::StanOmap2430cBackend owner directly');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::record_frequency_detail/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail accumulator');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::filter_port_timing_paths/, 'stan_omap2430c_backend.plg calls the package-owned port-timing path filter');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail\b/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail summary writer');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail_paths/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail path writer');
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for frequency-detail helpers');
+    unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('portiming'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for port-timing filtering');
     unlike($stan_omap_plugin, qr/\b(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)\s*\{/, 'stan_omap2430c_backend.plg no longer exposes frequency-detail helpers as legacy plugin subdefs');
+    unlike($stan_omap_plugin, qr/\bportiming\s*\{/, 'stan_omap2430c_backend.plg no longer exposes portiming as a legacy plugin subdef');
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Timing::StanOmap2430cBackend migrated plugin smoke');
@@ -4106,9 +4112,20 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     ok(!exists $stan_omap_ast->{freqency_detailed_paths}, 'stan_omap2430c_backend plugin no longer exposes freqency_detailed_paths as a coderef');
     ok(!exists $stan_omap_ast->{drive_freqency_detailed}, 'stan_omap2430c_backend plugin no longer exposes drive_freqency_detailed as a coderef');
     ok(!exists $stan_omap_ast->{get_freqency_detailed_fname}, 'stan_omap2430c_backend plugin no longer exposes get_freqency_detailed_fname as a coderef');
+    ok(!exists $stan_omap_ast->{portiming}, 'stan_omap2430c_backend plugin no longer exposes portiming as a coderef');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 use File::Temp qw(tempdir);
+BEGIN {
+ $INC{"TableGrep.pm"} = __FILE__;
+ package TableGrep;
+ our @FILTERS;
+ sub Filter {
+  my ($filter, $paths) = @_;
+  push @FILTERS, $filter;
+  return $filter =~ /PORT_A/ ? [['rowA']] : undef;
+ }
+}
 require Timing::StanOmap2430cBackend;
 print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 my $tmp = tempdir(CLEANUP => 1);
@@ -4124,6 +4141,11 @@ Timing::StanOmap2430cBackend::record_frequency_detail(['setup', 'input', 'iomode
 Timing::StanOmap2430cBackend::record_frequency_detail(['setup', 'output', 'iomode0', '2.0'], [90, '?'], $conf);
 print "__DETAIL_MIN__=$conf->{_freqency_detailed}{setup}{input}[1]{'1.0'}\n";
 print "__DETAIL_Q__=$conf->{_freqency_detailed}{setup}{output}[0]{'2.0'}\n";
+my $port_result = Timing::StanOmap2430cBackend::filter_port_timing_paths(['setup', 'input'], [['unused']], { portiming => { input => ['PORT_A', 'PORT_B'] } });
+print "__PORT_KEYS__=", join(",", sort keys %$port_result), "\n";
+print "__PORT_A__=$port_result->{PORT_A}[0][0]\n";
+print "__PORT_HAS_B__=", exists($port_result->{PORT_B}) ? 'yes' : 'no', "\n";
+print "__PORT_FILTERS__=", join("|", @TableGrep::FILTERS), "\n";
 my $paths = [[['ok_path']], [['questionable_path']]];
 Timing::StanOmap2430cBackend::write_frequency_detail_paths(['setup', 'input', 'iomode1', '1.0'], $paths, $conf);
 open(my $path_fh, '<', "$tmp/$filename.lof") or die "read $tmp/$filename.lof: $!";
@@ -4144,6 +4166,10 @@ PERL
     like($out, qr/__FNAME__=i_set_1_1_0/, 'Timing::StanOmap2430cBackend preserves the historical frequency-detail filename shape');
     like($out, qr/__DETAIL_MIN__=100/, 'Timing::StanOmap2430cBackend preserves minimum-frequency detail accumulation');
     like($out, qr/__DETAIL_Q__=\?/, 'Timing::StanOmap2430cBackend preserves questionable-frequency marker accumulation');
+    like($out, qr/__PORT_KEYS__=PORT_A/, 'Timing::StanOmap2430cBackend preserves port-timing filtered result keys');
+    like($out, qr/__PORT_A__=rowA/, 'Timing::StanOmap2430cBackend preserves port-timing filtered path payloads');
+    like($out, qr/__PORT_HAS_B__=no/, 'Timing::StanOmap2430cBackend skips empty port-timing filter results');
+    like($out, qr/__PORT_FILTERS__=startpoint =~ \/PORT_A\/\|startpoint =~ \/PORT_B\//, 'Timing::StanOmap2430cBackend preserves input sensitivity TableGrep filters');
     like($out, qr/__PATHS__=.*=stan_freqency_detailed_paths=/, 'Timing::StanOmap2430cBackend preserves frequency-detail paths section header');
     like($out, qr/__PATHS__=.*ok_path/, 'Timing::StanOmap2430cBackend writes normal frequency-detail paths');
     like($out, qr/__PATHS__=.*questionable_path/, 'Timing::StanOmap2430cBackend writes questionable frequency-detail paths');

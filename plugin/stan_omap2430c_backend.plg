@@ -24,12 +24,12 @@ my ($conf) = @_;
  HUtils::Recurse($conf->{_freqency_detailed},  [\&Timing::StanOmap2430cBackend::write_frequency_detail, $conf, $dfreq]);
  close($dfreq);
  HUtils::Recurse($conf->{_stafrequency_paths}, [\&Timing::StanOmap2430cBackend::write_frequency_detail_paths, $conf]);
- HUtils::WRecurse($conf->{_filteredata},       [LinkedSpec::get_plugin('portiming'),               $conf]);
+ HUtils::WRecurse($conf->{_filteredata},       [\&Timing::StanOmap2430cBackend::filter_port_timing_paths, $conf]);
 
  # HOLD info
  print "($conf->{_program}) -I- Processing HOLD info..\n";
  my $filteredata_hold = HUtils::GenericFilter($conf, $setup_hold->{hold}, "filter_sequence");
- HUtils::WRecurse($filteredata_hold,   [LinkedSpec::get_plugin('portiming'), $conf]);
+ HUtils::WRecurse($filteredata_hold,   [\&Timing::StanOmap2430cBackend::filter_port_timing_paths, $conf]);
  
 # print "($conf->{_program}) -I- Generating DM DATA..\n";
 # LinkedSpec::get_plugin('setup_hold_tmax_tmin')->($conf, $conf->{_filteredata}, $filteredata_hold);
@@ -38,22 +38,6 @@ my ($conf) = @_;
 # LinkedSpec::get_plugin('potential_fp')->($conf);
 # LinkedSpec::get_plugin('questionable_paths')->($conf);
 # LinkedSpec::get_plugin('drive_nopath_check')->();
-}
-
-portiming {
-my ($info, $a2d, $conf) = @_;
- 
- my %ohash;
- my $sens = (reverse @$info)[0];
-
- foreach (@{$conf->{portiming}{$sens}}) {
-  my $filter  = ($sens =~ /input/ ? "startpoint" : "endpoint")." =~ /$_/";
-  my $filterd = TableGrep::Filter($filter, $a2d);
-
-  $ohash{$_} = $filterd if $filterd;
- }
-
- return \%ohash
 }
 
 dm_measures {

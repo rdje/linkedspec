@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-15 - Plugin runtime: extract STAN OMAP port-timing owner
+
+- moved the historical `portiming` traversal callback out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend::filter_port_timing_paths(...)`,
+- migrated the visible `old_default` setup/hold filtering flow to pass that package callback directly to `HUtils::WRecurse(...)` instead of resolving `LinkedSpec::get_plugin('portiming')`,
+- removed `portiming` from the shipped legacy plugin subdefinition surface while preserving the existing input/output sensitivity filter expression behavior,
+- added source, `pplugin` AST, and direct package-behavior regression coverage with a stubbed `TableGrep` boundary.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl t/phase0_regression.t --match stan_omap` (the harness ran the broad 937-subtest phase0 regression file)
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-14 - CI: disable hosted GitHub Actions auto-runs
 
 - removed automatic `push` and `pull_request` triggers from `.github/workflows/ci.yml` so LinkedSpec stops spending hosted GitHub Actions minutes,

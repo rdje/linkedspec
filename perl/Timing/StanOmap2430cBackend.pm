@@ -48,6 +48,31 @@ sub record_frequency_detail {
 }
 
 #------------------------------------------------------------------------------
+# Function: filter_port_timing_paths
+# Purpose : Preserve the historical portiming traversal callback while keeping
+#           the callback under an explicit package owner.
+# Args    : ($info, $paths, $conf)
+# Returns : hashref keyed by configured port-timing regex, with filtered paths
+#------------------------------------------------------------------------------
+sub filter_port_timing_paths {
+ my ($info, $paths, $conf) = @_;
+
+ require TableGrep;
+
+ my %paths_by_port_filter;
+ my $sensitivity = $info->[-1];
+ foreach my $port_filter (@{$conf->{portiming}{$sensitivity}}) {
+  my $field = $sensitivity =~ /input/ ? 'startpoint' : 'endpoint';
+  my $filter_expr = "$field =~ /$port_filter/";
+  my $filtered_paths = TableGrep::Filter($filter_expr, $paths);
+
+  $paths_by_port_filter{$port_filter} = $filtered_paths if $filtered_paths;
+ }
+
+ return \%paths_by_port_filter
+}
+
+#------------------------------------------------------------------------------
 # Function: write_frequency_detail_paths
 # Purpose : Preserve the historical freqency_detailed_paths file writer.
 # Args    : ($info, $paths, $conf)
