@@ -147,6 +147,7 @@ LinkedSpec
 │     │  ├─ LinkedSpec::Trace
 │     │  └─ LinkedSpec::RuntimeContext
 │     ├─ LinkedSpec::Validation
+│     ├─ LinkedSpec::CompilerState
 │     └─ LinkedSpec::RuntimeContext
 ├─ LinkedSpec::ParserFactory
 │  ├─ LinkedSpec::RuntimeContext
@@ -362,6 +363,7 @@ The current public facade still exposes a plugin/runtime branch, but the archite
 - is the transition bridge,
 - checks explicit registration first,
 - falls back to legacy behavior only when needed,
+- assembles its default dependency callback map through `LinkedSpec::OwnerDispatch::build_dep_map(...)`,
 - routes its default registered-plugin lookup and legacy runtime load through `LinkedSpec::OwnerDispatch`,
 - and does not own discovery itself; it is a registry-first dispatch shim over the older `.plg` runtime.
 

@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Bootstrap: refresh architecture owner tree
+
+- re-ran the README/SESSION_BOOTSTRAP bootstrap pass over the referenced docs and the current `LinkedSpec.pm` load shape,
+- confirmed plain `require LinkedSpec` still keeps the static project load tree down to `LinkedSpec::OwnerDispatch`,
+- refreshed `ARCHITECTURE_STATE.md` so the root owner tree explicitly lists `LinkedSpec::CompilerState` under the compiler path and the `PluginBridge` section records default dependency-map assembly through `OwnerDispatch::build_dep_map(...)`.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec.pm`
+  - `perl -Iperl -e 'require LinkedSpec; my @loaded = sort grep { /^(LinkedSpec|LinkedRE|PPlugin|PathSearch)\// } keys %INC; die join("\n", @loaded)."\n" unless @loaded == 1 && $loaded[0] eq "LinkedSpec/OwnerDispatch.pm"; print "linkedspec_require_static_tree_ok\n"'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+
 ## 2026-04-17 - OwnerDispatch: build PluginBridge dependency map
 
 - routed `LinkedSpec::PluginBridge::_default_deps()` through `LinkedSpec::OwnerDispatch::build_dep_map(...)` instead of hand-building its local default callback map,
