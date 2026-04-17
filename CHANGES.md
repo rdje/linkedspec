@@ -1,6 +1,148 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: extract QC flow qclog data owner
+
+- moved the historical `qcflow_qclogdata` qclog table-preparation helper out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::prepare_qclog_data(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to call `QC::Flow::prepare_qclog_data($qconf)` directly instead of resolving `LinkedSpec::get_plugin('qcflow_qclogdata')`,
+- removed `qcflow_qclogdata` from the shipped legacy plugin subdefinition surface while preserving filter dispatch, qclog table index mapping, XCEL2HM row links, and prepared qclog table storage,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `QC::Flow` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `env GIT_INDEX_FILE=/tmp/linkedspec-ci-index-qcflow bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract QC flow qclog link owner
+
+- moved the historical `qcflow_links_n_qclog` qclog workbook/link writer out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::write_qclog_links(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to call `QC::Flow::write_qclog_links($qconf)` directly instead of resolving `LinkedSpec::get_plugin('qcflow_links_n_qclog')`,
+- removed `qcflow_links_n_qclog` from the shipped legacy plugin subdefinition surface while preserving workbook creation, links/qclog sheet writes, clock CTS links, and `$qconf->{_logallocate}` storage,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `QC::Flow` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `env GIT_INDEX_FILE=/tmp/linkedspec-ci-index-qcflow bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract QC flow clock CTS owner
+
+- moved the historical `qcflow_clock_ctsinfo` clock CTS summary helper out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::clock_cts_info(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to call `QC::Flow::clock_cts_info($qconf, \%extracted_cts)` directly instead of resolving `LinkedSpec::get_plugin('qcflow_clock_ctsinfo')`,
+- removed `qcflow_clock_ctsinfo` from the shipped legacy plugin subdefinition surface while preserving CTS min/max range aggregation and `ctsinfo` RC allocation on `$qconf->{_ctsinfo_rca}`,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `QC::Flow` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `env GIT_INDEX_FILE=/tmp/linkedspec-ci-index-qcflow bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract QC flow filter handler owner
+
+- moved the historical `qcflow_filter_handler` filter-expression helper out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::filter_handler(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to store `\&QC::Flow::filter_handler` in `$qconf->{_filter_handler}` instead of resolving `LinkedSpec::get_plugin('qcflow_filter_handler')`,
+- removed `qcflow_filter_handler` from the shipped legacy plugin subdefinition surface while preserving scalar filter passthrough and array-to-grouped-OR expression formatting,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `QC::Flow` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `env GIT_INDEX_FILE=/tmp/linkedspec-ci-index-qcflow bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract QC flow budget-check owner
+
+- moved the historical `qc_budget_check` traversal callback and `qc_budget_check_01match_code` helper out of `plugin/qcflow.plg` and into QC-domain owner functions `QC::Flow::budget_check(...)` and `budget_check_single_or_zero_match(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to pass those package coderefs through `HUtils::Recurse(...)` instead of resolving same-file budget helpers through `LinkedSpec::get_plugin(...)`,
+- kept the remaining `get_fanxinfo` legacy lookup at the visible action boundary and passed that callback into `QC::Flow`, so the package owner stays clear of `LinkedSpec::get_plugin(...)` and `PPlugin`,
+- removed `qc_budget_check` and `qc_budget_check_01match_code` from the shipped legacy plugin subdefinition surface while preserving unknown-port/no-reference-clock qclog behavior, budget counters, and log output,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `QC::Flow` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `env GIT_INDEX_FILE=/tmp/linkedspec-ci-index-qcflow bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract QC flow push-once owner
+
+- moved the historical `qc_pushonce` duplicate-suppressed qclog insertion helper out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::push_once(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to pass `\&QC::Flow::push_once` through the existing budget-check callback flow instead of resolving `LinkedSpec::get_plugin('qc_pushonce')`,
+- removed `qc_pushonce` from the shipped legacy plugin subdefinition surface while preserving first-row insertion and duplicate occurrence counting,
+- added source, `pplugin` AST, and direct package-behavior regression coverage for `QC::Flow`.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/Flow.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract STAN OMAP no-path owner
+
+- moved the historical `drive_nopath_check` writer and `nopath_check` traversal callback out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner functions `Timing::StanOmap2430cBackend::write_no_path_check(...)` and `record_no_path_check(...)`,
+- replaced the legacy shared `CHECK` filehandle with an explicit filehandle argument passed through `HUtils::Recurse(...)`,
+- removed `drive_nopath_check` and `nopath_check` from the shipped legacy plugin subdefinition surface while preserving `stan_nopath_check.lof`, section markers, missing-port row formatting, and startpoint/endpoint matching behavior,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the STAN OMAP package owner.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
+## 2026-04-17 - Plugin runtime: extract STAN OMAP TCK-delay writer
+
+- moved the historical `drive_tckdelays` DM-measures writer out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend::write_tck_delays(...)`,
+- migrated the visible `dm_measures` flow to call that package owner directly instead of resolving `LinkedSpec::get_plugin('drive_tckdelays')`,
+- removed `drive_tckdelays` from the shipped legacy plugin subdefinition surface while preserving `stan_tcksegments.lof`, per-segment sheet filenames, workbook links, and `consolidated_ns` section output,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the STAN OMAP package owner.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
+## 2026-04-16 - Plugin runtime: extract STAN OMAP STA-frequency owner
+
+- moved the historical `stafrequency` traversal callback out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend::collect_sta_frequency(...)`,
+- migrated the visible `old_default` setup flow to pass that package callback directly to `HUtils::Recurse(...)` instead of resolving `LinkedSpec::get_plugin('stafrequency')`,
+- removed `stafrequency` from the shipped legacy plugin subdefinition surface while preserving good-path frequency accumulation, negative-period/questionable path handling, and potential false-path collection,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the STAN OMAP package owner.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-15 - Plugin runtime: extract STAN OMAP port-timing owner
 
 - moved the historical `portiming` traversal callback out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend::filter_port_timing_paths(...)`,

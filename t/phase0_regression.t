@@ -3873,7 +3873,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 31;
+    plan tests => 51;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
@@ -3908,11 +3908,31 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     unlike($fsmgen_plugin, qr/\bplugin\s*\(/, 'fsmgen plugin no longer routes dynamic plugin-list entries through the legacy plugin lookup shim');
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
     like($stan_omap2430c_backend_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend plugin now loads the STAN OMAP timing package owner directly');
+    like($stan_omap2430c_backend_plugin, qr/Timing::StanOmap2430cBackend::collect_sta_frequency/, 'stan_omap2430c_backend plugin now calls the package-owned STA frequency callback');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('stafrequency'\)/, 'stan_omap2430c_backend plugin no longer resolves stafrequency through plugin lookup');
     unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend plugin no longer resolves frequency-detail helpers through plugin lookup');
     like($stan_omap2430c_backend_plugin, qr/Timing::StanOmap2430cBackend::filter_port_timing_paths/, 'stan_omap2430c_backend plugin now calls the package-owned port-timing filter callback');
     unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('portiming'\)/, 'stan_omap2430c_backend plugin no longer resolves portiming through plugin lookup');
-    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin now resolves budget-check handlers through LinkedSpec::get_plugin');
-    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)->\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now resolves CTS extraction through LinkedSpec::get_plugin');
+    like($stan_omap2430c_backend_plugin, qr/Timing::StanOmap2430cBackend::write_tck_delays/, 'stan_omap2430c_backend plugin now calls the package-owned TCK-delay writer');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('drive_tckdelays'\)/, 'stan_omap2430c_backend plugin no longer resolves drive_tckdelays through plugin lookup');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('drive_nopath_check'\)/, 'stan_omap2430c_backend plugin no longer resolves drive_nopath_check through plugin lookup');
+    unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('nopath_check'\)/, 'stan_omap2430c_backend plugin no longer resolves nopath_check through plugin lookup');
+    like($qcflow_plugin, qr/\\&QC::Flow::budget_check/, 'qcflow plugin now calls the package-owned QC budget-check callback');
+    like($qcflow_plugin, qr/\\&QC::Flow::budget_check_single_or_zero_match/, 'qcflow plugin now calls the package-owned single/zero-match budget helper');
+    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('get_fanxinfo'\)/, 'qcflow plugin resolves fanx lookup once and passes it into QC::Flow helpers');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin no longer resolves qc_budget_check through plugin lookup');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check_01match_code'\)/, 'qcflow plugin no longer resolves qc_budget_check_01match_code through plugin lookup');
+    like($qcflow_plugin, qr/QC::Flow::clock_cts_info\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now calls the package-owned clock CTS summary helper');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)/, 'qcflow plugin no longer resolves qcflow_clock_ctsinfo through plugin lookup');
+    like($qcflow_plugin, qr/QC::Flow::write_qclog_links\(\$qconf\)/, 'qcflow plugin now calls the package-owned qclog link writer');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_links_n_qclog'\)/, 'qcflow plugin no longer resolves qcflow_links_n_qclog through plugin lookup');
+    like($qcflow_plugin, qr/QC::Flow::prepare_qclog_data\(\$qconf\)/, 'qcflow plugin now calls the package-owned qclog data preparer');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_qclogdata'\)/, 'qcflow plugin no longer resolves qcflow_qclogdata through plugin lookup');
+    like($qcflow_plugin, qr/use QC::Flow;/, 'qcflow plugin now loads the QC flow package owner directly');
+    like($qcflow_plugin, qr/\\&QC::Flow::push_once/, 'qcflow plugin now calls the package-owned qclog push-once helper');
+    like($qcflow_plugin, qr/\\&QC::Flow::filter_handler/, 'qcflow plugin now calls the package-owned filter expression helper');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_filter_handler'\)/, 'qcflow plugin no longer resolves qcflow_filter_handler through plugin lookup');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_pushonce'\)/, 'qcflow plugin no longer resolves qc_pushonce through plugin lookup');
     unlike($qc_summary_plugin, qr/use LinkedSpec;/, 'qc_summary plugin no longer loads LinkedSpec just to resolve its own merge helper');
     like($skew_plugin, qr/use Timing::StanBackend;/, 'skew plugin now loads the Timing::StanBackend owner directly');
     my @direct_pplugin_lookup_hits;
@@ -3949,6 +3969,418 @@ subtest 'repo_owned_get_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen plugin still returns a hash AST under pplugin');
     is(ref($fsmgen_ast->{getop_plugin_list}), 'CODE', 'fsmgen plugin still exposes getop_plugin_list as a coderef');
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg'), 'plugin.plg is no longer part of the legacy pplugin corpus after dynamic lookup migration');
+};
+subtest 'qcflow_pushonce_moves_to_qc_flow_package_owner' => sub {
+    plan tests => 19;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for QC::Flow migration inspection');
+    like($qc_flow_pm, qr/package QC::Flow;/, 'QC::Flow declares the expected package');
+    like($qc_flow_pm, qr/sub push_once\b/, 'QC::Flow owns the qclog push-once helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/use QC::Flow;/, 'qcflow.plg loads the QC::Flow owner directly');
+    like($qcflow_plugin, qr/\\&QC::Flow::push_once/, 'qcflow.plg uses the QC::Flow push-once coderef directly');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_pushonce'\)/, 'qcflow.plg no longer uses plugin lookup for qc_pushonce');
+    unlike($qcflow_plugin, qr/\bqc_pushonce\s*\{/, 'qcflow.plg no longer exposes qc_pushonce as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die under pplugin') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST under pplugin');
+    ok(!exists $qcflow_ast->{qc_pushonce}, 'qcflow plugin no longer exposes qc_pushonce as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my (%qclog, %once);
+QC::Flow::push_once(\%qclog, \%once, 'Entry', 'portA', 'clockA');
+QC::Flow::push_once(\%qclog, \%once, 'Entry', 'portA', 'clockA');
+QC::Flow::push_once(\%qclog, \%once, 'Entry', 'portB', 'clockB');
+my $dup_count = $once{Entry}{'portA:clockA'};
+my $unique_count = $once{Entry}{'portB:clockB'};
+print "__ROWS__=", join("|", map { join(",", @$_) } @{$qclog{Entry}}), "\n";
+print "__DUP_COUNT__=$dup_count\n";
+print "__UNIQUE_COUNT__=$unique_count\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow keeps PPlugin unloaded');
+    like($out, qr/__ROWS__=portA,clockA\|portB,clockB/, 'QC::Flow preserves duplicate-suppressed qclog row insertion');
+    like($out, qr/__DUP_COUNT__=2/, 'QC::Flow preserves duplicate occurrence counting');
+    like($out, qr/__UNIQUE_COUNT__=1/, 'QC::Flow preserves first occurrence counting for unique rows');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow package-owner subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_budget_checks_move_to_qc_flow_package_owner' => sub {
+    plan tests => 25;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available for budget-check migration inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for budget-check migration inspection');
+    like($qc_flow_pm, qr/sub budget_check\b/, 'QC::Flow owns the budget-check traversal callback');
+    like($qc_flow_pm, qr/sub budget_check_single_or_zero_match\b/, 'QC::Flow owns the single/zero-match budget-check helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow budget helpers do not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/\\&QC::Flow::budget_check/, 'qcflow.plg uses the QC::Flow budget-check callback directly');
+    like($qcflow_plugin, qr/\\&QC::Flow::budget_check_single_or_zero_match/, 'qcflow.plg uses the QC::Flow single/zero-match helper directly');
+    like($qcflow_plugin, qr/my \$get_fanxinfo\s*=\s*LinkedSpec::get_plugin\('get_fanxinfo'\)/, 'qcflow.plg resolves get_fanxinfo once before passing it to QC::Flow');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow.plg no longer uses plugin lookup for qc_budget_check');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check_01match_code'\)/, 'qcflow.plg no longer uses plugin lookup for qc_budget_check_01match_code');
+    unlike($qcflow_plugin, qr/\bqc_budget_check\s*\{/, 'qcflow.plg no longer exposes qc_budget_check as a legacy plugin subdef');
+    unlike($qcflow_plugin, qr/\bqc_budget_check_01match_code\s*\{/, 'qcflow.plg no longer exposes qc_budget_check_01match_code as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow budget-check migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after budget-check migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after budget-check migration');
+    ok(!exists $qcflow_ast->{qc_budget_check}, 'qcflow plugin no longer exposes qc_budget_check as a coderef');
+    ok(!exists $qcflow_ast->{qc_budget_check_01match_code}, 'qcflow plugin no longer exposes qc_budget_check_01match_code as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my (%qclog, %once, %budget_check, %match_port);
+my $log_text = '';
+open(my $qcflowlog, '>', \$log_text) or die "open scalar log failed: $!";
+my $qconf = {
+    progname => 'qcflow-test',
+    vssvdd_re => qr/^(?:vss|vdd)$/i,
+    indexes => {
+        direction => 0,
+        reference_signal => 1,
+    },
+};
+my $groups = {
+    ios => { ion => { PORTA => [[ 'input', '-' ]] } },
+    clocks => { clockn => {} },
+};
+my $fanx_calls = 0;
+my $get_fanxinfo = sub { ++$fanx_calls; return 'fanx-info' };
+QC::Flow::budget_check(
+    [ 'ios', 'PORTA' ],
+    $groups->{ios}{ion}{PORTA},
+    \&QC::Flow::push_once,
+    \&QC::Flow::budget_check_single_or_zero_match,
+    $get_fanxinfo,
+    $qconf,
+    $groups,
+    $qcflowlog,
+    \%budget_check,
+    \%match_port,
+    \%qclog,
+    \%once,
+);
+close($qcflowlog);
+print "__UNKNOWN__=", ($budget_check{unknown}{PORTA} // 0), "\n";
+print "__UNKNOWN_ROW__=", join(',', @{$qclog{'(XCEL2HM vs GUIDELINE) Ports not defined in the GUIDELINE'}[0] || []}), "\n";
+print "__NO_REF_ROW__=", join(',', @{$qclog{'(XCEL2HM vs GUIDELINE) Ports with NO reference clock'}[0] || []}), "\n";
+print "__FANX_CALLS__=$fanx_calls\n";
+print "__LOG_HAS_DATA__=", ($log_text =~ /Budget Checking DATA port 'PORTA'/ ? 1 : 0), "\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow budget-check subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow budget helpers keeps PPlugin unloaded');
+    like($out, qr/__UNKNOWN__=1/, 'QC::Flow budget_check preserves unknown-port accounting');
+    like($out, qr/__UNKNOWN_ROW__=PORTA/, 'QC::Flow budget_check preserves unknown-port qclog insertion');
+    like($out, qr/__NO_REF_ROW__=PORTA,input/, 'QC::Flow single/zero-match helper preserves no-reference-clock qclog insertion');
+    like($out, qr/__FANX_CALLS__=0/, 'QC::Flow budget helper does not call fanx lookup on no-reference-clock paths');
+    like($out, qr/__LOG_HAS_DATA__=1/, 'QC::Flow budget helper preserves data-port log output');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow budget-check subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_filter_handler_moves_to_qc_flow_package_owner' => sub {
+    plan tests => 16;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available for filter-handler migration inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for filter-handler migration inspection');
+    like($qc_flow_pm, qr/sub filter_handler\b/, 'QC::Flow owns the qclog filter-expression helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow filter helper does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/\\&QC::Flow::filter_handler/, 'qcflow.plg uses the QC::Flow filter handler directly');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_filter_handler'\)/, 'qcflow.plg no longer uses plugin lookup for qcflow_filter_handler');
+    unlike($qcflow_plugin, qr/\bqcflow_filter_handler\s*\{/, 'qcflow.plg no longer exposes qcflow_filter_handler as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow filter-handler migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after filter-handler migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after filter-handler migration');
+    ok(!exists $qcflow_ast->{qcflow_filter_handler}, 'qcflow plugin no longer exposes qcflow_filter_handler as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+print "__SCALAR__=", QC::Flow::filter_handler('direction =~ /input/'), "\n";
+print "__ARRAY__=", QC::Flow::filter_handler(['port =~ /foo/', 'clock =~ /bar/']), "\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow filter-handler subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow filter helper keeps PPlugin unloaded');
+    like($out, qr/__SCALAR__=direction =~ \/input\//, 'QC::Flow filter handler preserves scalar filter expressions');
+    like($out, qr/__ARRAY__=\(port =~ \/foo\/\) \|\| \(clock =~ \/bar\/\)/, 'QC::Flow filter handler preserves OR grouping for filter arrays');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow filter-handler subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_clock_cts_info_moves_to_qc_flow_package_owner' => sub {
+    plan tests => 17;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available for clock CTS migration inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for clock CTS migration inspection');
+    like($qc_flow_pm, qr/sub clock_cts_info\b/, 'QC::Flow owns the clock CTS summary helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow clock CTS helper does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/QC::Flow::clock_cts_info\(\$qconf, \\%extracted_cts\)/, 'qcflow.plg uses the QC::Flow clock CTS helper directly');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_clock_ctsinfo'\)/, 'qcflow.plg no longer uses plugin lookup for qcflow_clock_ctsinfo');
+    unlike($qcflow_plugin, qr/\bqcflow_clock_ctsinfo\s*\{/, 'qcflow.plg no longer exposes qcflow_clock_ctsinfo as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow clock CTS migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after clock CTS migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after clock CTS migration');
+    ok(!exists $qcflow_ast->{qcflow_clock_ctsinfo}, 'qcflow plugin no longer exposes qcflow_clock_ctsinfo as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{"HUtils.pm"} = __FILE__;
+    package HUtils;
+    sub Recurse {
+        my ($node, $coderef) = @_;
+        _walk($node, $coderef, []);
+        return $node;
+    }
+    sub _walk {
+        my ($node, $coderef, $path) = @_;
+        foreach my $key (sort keys %$node) {
+            my $value = $node->{$key};
+            if (ref($value) && "$value" =~ /HASH\(/) {
+                _walk($value, $coderef, [@$path, $key]);
+            } else {
+                $coderef->([@$path, $key], $value);
+            }
+        }
+    }
+
+    $INC{"Table2SS.pm"} = __FILE__;
+    package Table2SS;
+    sub RCAllocate {
+        my ($baserow, $basecol, $table_per_row, $tlinfo, $script) = @_;
+        print "__RCALLOC__=$baserow,$basecol,$table_per_row,$script\n";
+        print "__CTS_ROWS__=", join('|', map { join(',', @$_) } @{$tlinfo->[0]}), "\n";
+        return [{ a1 => 'B2', data => $tlinfo, script => $script }];
+    }
+}
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $qconf = {
+    qclib => 'cts.lib',
+    noctslib => 'nocts.lib',
+    clock_indexes => {
+        smallest_insertion_delay => 0,
+        skew => 1,
+    },
+    _groups => {
+        clocks => {
+            clockn => {
+                CLK_A => [[0.10, 0.15]],
+            },
+        },
+    },
+};
+my $extracted_cts = {
+    PIN_A => {
+        input => {
+            CLK_A => {
+                max_budget => {
+                    setup => {
+                        cell_rise => [[qw(i1 i2)], [50, 300], [-10, 120]],
+                    },
+                },
+            },
+        },
+    },
+};
+QC::Flow::clock_cts_info($qconf, $extracted_cts);
+print "__CTS_A1__=", $qconf->{_ctsinfo_rca}[0]{a1}, "\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow clock CTS subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow clock CTS helper keeps PPlugin unloaded');
+    like($out, qr/__RCALLOC__=1,1,1,ctsinfo/, 'QC::Flow clock CTS helper preserves ctsinfo RC allocation');
+    like($out, qr/__CTS_ROWS__=CLK_A,V:50\.00,V:300\.00,100\.00,250\.00/, 'QC::Flow clock CTS helper preserves min/max violation summary formatting');
+    like($out, qr/__CTS_A1__=B2/, 'QC::Flow clock CTS helper stores the CTS RC allocation on qconf');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow clock CTS subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_qclog_links_move_to_qc_flow_package_owner' => sub {
+    plan tests => 20;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available for qclog-link migration inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for qclog-link migration inspection');
+    like($qc_flow_pm, qr/sub write_qclog_links\b/, 'QC::Flow owns the qclog link writer helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow qclog link writer does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/QC::Flow::write_qclog_links\(\$qconf\)/, 'qcflow.plg uses the QC::Flow qclog link writer directly');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_links_n_qclog'\)/, 'qcflow.plg no longer uses plugin lookup for qcflow_links_n_qclog');
+    unlike($qcflow_plugin, qr/\bqcflow_links_n_qclog\s*\{/, 'qcflow.plg no longer exposes qcflow_links_n_qclog as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow qclog-link migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after qclog-link migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after qclog-link migration');
+    ok(!exists $qcflow_ast->{qcflow_links_n_qclog}, 'qcflow plugin no longer exposes qcflow_links_n_qclog as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{"Table2SS.pm"} = __FILE__;
+    package Table2SS;
+    sub AddWorkBook {
+        print "__WORKBOOK__=$_[0]\n";
+        return "workbook:$_[0]";
+    }
+    sub _flatten {
+        my ($value) = @_;
+        return ref($value) eq 'ARRAY' ? join(',', map { _flatten($_) } @$value) : $value;
+    }
+    sub RCAllocate {
+        my ($baserow, $basecol, $table_per_row, $tlinfo, $script) = @_;
+        my $name = defined($script) ? $script : 'qclog';
+        print "__RCALLOC__=$baserow,$basecol,$table_per_row,$name\n";
+        print "__LINK_ROWS__=", join('|', map { _flatten($_) } @$tlinfo), "\n" if defined($script) && $script eq 'qcflow_links';
+        return [{ a1 => $name eq 'qclog' ? 'A1' : 'L1', row => $baserow, col => $basecol, data => $tlinfo, script => $script }];
+    }
+    sub DriveSheet {
+        my ($workbook, $sheet, $data) = @_;
+        print "__DRIVE__=$workbook:$sheet:$data->[0]{a1}\n";
+        return 1;
+    }
+}
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $qconf = {
+    progname => 'qcflow-test',
+    _qco => 'qclog.xls',
+    _qclogdata_a => [[['row']]],
+    _qclogdata_h => { Entry => 0 },
+    _ctsinfo_rca => [{ a1 => 'C3' }],
+};
+QC::Flow::write_qclog_links($qconf);
+print "__QCWB__=$qconf->{_qcwb}\n";
+print "__LOGALLOC_A1__=$qconf->{_logallocate}[0]{a1}\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow qclog-link subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow qclog-link writer keeps PPlugin unloaded');
+    like($out, qr/__WORKBOOK__=qclog\.xls/, 'QC::Flow qclog-link writer preserves workbook creation');
+    like($out, qr/__RCALLOC__=1,1,1,qclog/, 'QC::Flow qclog-link writer preserves qclog table allocation');
+    like($out, qr/__LINK_ROWS__=internal:qclog!A1\@Entry\|internal:clock_ctsinfo!C3\@Clocks Min and Max CTS information/, 'QC::Flow qclog-link writer preserves qclog and clock CTS links');
+    like($out, qr/__DRIVE__=workbook:qclog\.xls:links:L1.*__DRIVE__=workbook:qclog\.xls:qclog:A1/s, 'QC::Flow qclog-link writer preserves links and qclog sheet writes');
+    like($out, qr/__QCWB__=workbook:qclog\.xls/, 'QC::Flow qclog-link writer stores workbook handle on qconf');
+    like($out, qr/__LOGALLOC_A1__=A1/, 'QC::Flow qclog-link writer stores qclog allocation on qconf');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow qclog-link subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_qclog_data_moves_to_qc_flow_package_owner' => sub {
+    plan tests => 20;
+
+    my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+
+    ok(defined($qc_flow_pm) && length($qc_flow_pm), 'QC::Flow package owner source is available for qclog-data migration inspection');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for qclog-data migration inspection');
+    like($qc_flow_pm, qr/sub prepare_qclog_data\b/, 'QC::Flow owns the qclog data preparation helper');
+    unlike($qc_flow_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::Flow qclog data preparer does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/QC::Flow::prepare_qclog_data\(\$qconf\)/, 'qcflow.plg uses the QC::Flow qclog data preparer directly');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qcflow_qclogdata'\)/, 'qcflow.plg no longer uses plugin lookup for qcflow_qclogdata');
+    unlike($qcflow_plugin, qr/\bqcflow_qclogdata\s*\{/, 'qcflow.plg no longer exposes qcflow_qclogdata as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC::Flow qclog-data migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after qclog-data migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after qclog-data migration');
+    ok(!exists $qcflow_ast->{qcflow_qclogdata}, 'qcflow plugin no longer exposes qcflow_qclogdata as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{"HUtils.pm"} = __FILE__;
+    package HUtils;
+    sub Recurse {
+        my ($node, $coderef) = @_;
+        foreach my $key (sort keys %$node) {
+            $coderef->([$key], $node->{$key});
+        }
+        return $node;
+    }
+
+    $INC{"TableGrep.pm"} = __FILE__;
+    package TableGrep;
+    sub Filter {
+        my ($expr, $a2d, %opt) = @_;
+        print "__FILTER__=$expr:$opt{invert}\n";
+        return [grep { $_->[0] ne 'drop' } @$a2d];
+    }
+
+    $INC{"Table2SS.pm"} = __FILE__;
+    package Table2SS;
+    sub TableTreeA1 {
+        my ($tree, $path) = @_;
+        return "A1_$path->[0]";
+    }
+    sub TableHandler {
+        my ($a2d, $name) = @_;
+        print "__TABLE__=$name=", join('|', map { join(',', @$_) } @$a2d), "\n";
+        return { name => $name, rows => $a2d };
+    }
+}
+require QC::Flow;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $qconf = {
+    progname => 'qcflow-test',
+    _qclog => {
+        Filtered => [[qw(keep 1)], [qw(drop 2)]],
+        'Port Entries' => [[qw(PORTA clockA)], [qw(PORTB clockB)]],
+    },
+    _filter_info => {
+        Filtered => ['port =~ /drop/'],
+    },
+    _filter_handler => sub {
+        my ($filter) = @_;
+        return ref($filter) ? join(' OR ', @$filter) : $filter;
+    },
+    tableport_2_xcel2hm_re => ['Port Entries'],
+    _rca_qcflow_port_2_xcel2hm_budget => {},
+    _qclogdata_h => {},
+    _qclogdata_a => [],
+};
+QC::Flow::prepare_qclog_data($qconf);
+print "__INDEXES__=", join(',', map { "$_=$qconf->{_qclogdata_h}{$_}" } sort keys %{$qconf->{_qclogdata_h}}), "\n";
+print "__COUNT__=", scalar(@{$qconf->{_qclogdata_a}}), "\n";
+PERL
+
+    is($exit_code, 0, 'QC::Flow qclog-data subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::Flow qclog data preparer keeps PPlugin unloaded');
+    like($out, qr/__FILTER__=port =~ \/drop\/:1/, 'QC::Flow qclog data preparer preserves configured inverted filter dispatch');
+    like($out, qr/__TABLE__=qcflow_Filtered=keep,1/, 'QC::Flow qclog data preparer preserves filtered qclog table handling');
+    unlike($out, qr/__TABLE__=qcflow_Filtered=.*drop,2/, 'QC::Flow qclog data preparer omits filtered-out rows');
+    like($out, qr/__TABLE__=qcflow_Port Entries=internal:XCEL2HM_UITiming!A1_PORTA\@PORTA,clockA\|internal:XCEL2HM_UITiming!A1_PORTB\@PORTB,clockB/, 'QC::Flow qclog data preparer preserves XCEL2HM internal row links');
+    like($out, qr/__INDEXES__=Filtered=0,Port Entries=1/, 'QC::Flow qclog data preparer preserves qclog table index mapping');
+    like($out, qr/__COUNT__=2/, 'QC::Flow qclog data preparer stores prepared qclog tables');
+    unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow qclog-data subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'qc_summary_merge_moves_to_qc_summary_package_owner' => sub {
     plan tests => 18;
@@ -4078,7 +4510,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
-    plan tests => 41;
+    plan tests => 67;
 
     my $timing_stan_omap_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanOmap2430cBackend.pm'));
     my $stan_omap_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
@@ -4086,33 +4518,49 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     ok(defined($timing_stan_omap_pm) && length($timing_stan_omap_pm), 'Timing::StanOmap2430cBackend package owner source is available');
     ok(defined($stan_omap_plugin) && length($stan_omap_plugin), 'stan_omap2430c_backend.plg source is available for STAN OMAP helper migration inspection');
     like($timing_stan_omap_pm, qr/package Timing::StanOmap2430cBackend;/, 'Timing::StanOmap2430cBackend declares the expected package');
+    like($timing_stan_omap_pm, qr/sub collect_sta_frequency\b/, 'Timing::StanOmap2430cBackend owns the STA frequency traversal callback');
     like($timing_stan_omap_pm, qr/sub frequency_detail_filename\b/, 'Timing::StanOmap2430cBackend owns the corrected frequency-detail filename helper');
     like($timing_stan_omap_pm, qr/sub record_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail accumulator callback');
     like($timing_stan_omap_pm, qr/sub filter_port_timing_paths\b/, 'Timing::StanOmap2430cBackend owns the port-timing path filter callback');
+    like($timing_stan_omap_pm, qr/sub write_tck_delays\b/, 'Timing::StanOmap2430cBackend owns the TCK-delay DM-measures writer');
+    like($timing_stan_omap_pm, qr/sub write_no_path_check\b/, 'Timing::StanOmap2430cBackend owns the no-path check writer');
+    like($timing_stan_omap_pm, qr/sub record_no_path_check\b/, 'Timing::StanOmap2430cBackend owns the no-path check traversal callback');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail_paths\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail path writer');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail summary writer');
     unlike($timing_stan_omap_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanOmap2430cBackend does not depend on plugin lookup or the legacy PPlugin runtime');
 
     like($stan_omap_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend.plg loads the Timing::StanOmap2430cBackend owner directly');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::collect_sta_frequency/, 'stan_omap2430c_backend.plg calls the package-owned STA frequency callback');
+    unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('stafrequency'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for STA frequency classification');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::record_frequency_detail/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail accumulator');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::filter_port_timing_paths/, 'stan_omap2430c_backend.plg calls the package-owned port-timing path filter');
+    like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_tck_delays/, 'stan_omap2430c_backend.plg calls the package-owned TCK-delay writer');
+    unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('drive_tckdelays'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for TCK-delay writing');
+    unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:drive_nopath_check|nopath_check)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for no-path checking');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail\b/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail summary writer');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail_paths/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail path writer');
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for frequency-detail helpers');
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('portiming'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for port-timing filtering');
+    unlike($stan_omap_plugin, qr/\bstafrequency\s*\{/, 'stan_omap2430c_backend.plg no longer exposes stafrequency as a legacy plugin subdef');
     unlike($stan_omap_plugin, qr/\b(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)\s*\{/, 'stan_omap2430c_backend.plg no longer exposes frequency-detail helpers as legacy plugin subdefs');
     unlike($stan_omap_plugin, qr/\bportiming\s*\{/, 'stan_omap2430c_backend.plg no longer exposes portiming as a legacy plugin subdef');
+    unlike($stan_omap_plugin, qr/\bdrive_tckdelays\s*\{/, 'stan_omap2430c_backend.plg no longer exposes drive_tckdelays as a legacy plugin subdef');
+    unlike($stan_omap_plugin, qr/\b(?:drive_nopath_check|nopath_check)\s*\{/, 'stan_omap2430c_backend.plg no longer exposes no-path helpers as legacy plugin subdefs');
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for Timing::StanOmap2430cBackend migrated plugin smoke');
     my $stan_omap_ast = eval { $parser->(\$stan_omap_plugin) };
     ok(!$@, 'stan_omap2430c_backend plugin still parses without die under pplugin') or diag(normalize_error($@));
     ok(defined($stan_omap_ast) && ref($stan_omap_ast) eq 'HASH', 'stan_omap2430c_backend plugin still returns a hash AST under pplugin');
+    ok(!exists $stan_omap_ast->{stafrequency}, 'stan_omap2430c_backend plugin no longer exposes stafrequency as a coderef');
     ok(!exists $stan_omap_ast->{freqency_detailed}, 'stan_omap2430c_backend plugin no longer exposes freqency_detailed as a coderef');
     ok(!exists $stan_omap_ast->{freqency_detailed_paths}, 'stan_omap2430c_backend plugin no longer exposes freqency_detailed_paths as a coderef');
     ok(!exists $stan_omap_ast->{drive_freqency_detailed}, 'stan_omap2430c_backend plugin no longer exposes drive_freqency_detailed as a coderef');
     ok(!exists $stan_omap_ast->{get_freqency_detailed_fname}, 'stan_omap2430c_backend plugin no longer exposes get_freqency_detailed_fname as a coderef');
     ok(!exists $stan_omap_ast->{portiming}, 'stan_omap2430c_backend plugin no longer exposes portiming as a coderef');
+    ok(!exists $stan_omap_ast->{drive_tckdelays}, 'stan_omap2430c_backend plugin no longer exposes drive_tckdelays as a coderef');
+    ok(!exists $stan_omap_ast->{drive_nopath_check}, 'stan_omap2430c_backend plugin no longer exposes drive_nopath_check as a coderef');
+    ok(!exists $stan_omap_ast->{nopath_check}, 'stan_omap2430c_backend plugin no longer exposes nopath_check as a coderef');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 use File::Temp qw(tempdir);
@@ -4146,6 +4594,34 @@ print "__PORT_KEYS__=", join(",", sort keys %$port_result), "\n";
 print "__PORT_A__=$port_result->{PORT_A}[0][0]\n";
 print "__PORT_HAS_B__=", exists($port_result->{PORT_B}) ? 'yes' : 'no', "\n";
 print "__PORT_FILTERS__=", join("|", @TableGrep::FILTERS), "\n";
+my $freq_conf = {
+ _program => 'prog',
+ _verbose => 0,
+ frequencies => { corner1 => 1000 },
+ cycle_type => { pathA => { input => 'full', input_launch_edge => 'rise' } },
+ _indexes => {
+  startpoint_clock => 0,
+  endpoint_clock => 1,
+  startpoint_clock_edge => 2,
+  endpoint_clock_edge => 3,
+  slack => 4,
+ },
+ _questionable_paths => [],
+ _potential_fp => [],
+};
+my $ok_path = ['clk', 'other_clk', 'rise', 'rise', 0.2];
+my $questionable_path = ['clk', 'other_clk', 'rise', 'rise', 2];
+my $false_path = ['clk', 'other_clk', 'fall', 'rise', 0.2];
+Timing::StanOmap2430cBackend::collect_sta_frequency(
+ ['corner1', 'mode0', 'iomode0', 'pathA', 'input'],
+ [$ok_path, $questionable_path, $false_path],
+ $freq_conf,
+);
+print "__STA_FREQS__=", join(",", @{$freq_conf->{_stafrequency}{pathA}{input}{iomode0}{corner1}}), "\n";
+print "__STA_OK_SLACK__=$freq_conf->{_stafrequency_paths}{pathA}{input}{iomode0}{corner1}[0][0][4]\n";
+print "__STA_Q_SLACK__=$freq_conf->{_stafrequency_paths}{pathA}{input}{iomode0}{corner1}[1][0][4]\n";
+print "__STA_Q_COUNT__=", scalar(@{$freq_conf->{_questionable_paths}}), "\n";
+print "__STA_FP_COUNT__=", scalar(@{$freq_conf->{_potential_fp}}), "\n";
 my $paths = [[['ok_path']], [['questionable_path']]];
 Timing::StanOmap2430cBackend::write_frequency_detail_paths(['setup', 'input', 'iomode1', '1.0'], $paths, $conf);
 open(my $path_fh, '<', "$tmp/$filename.lof") or die "read $tmp/$filename.lof: $!";
@@ -4159,6 +4635,64 @@ Timing::StanOmap2430cBackend::write_frequency_detail(['setup', 'input'], [{ '2.0
 close($summary_fh);
 $summary =~ s/\n/|/g;
 print "__SUMMARY__=$summary\n";
+my $tck_conf = {
+ _program => 'prog',
+ _workdir => $tmp,
+ mode => { mode0 => 1 },
+ tck_timing_segments => { tsegA => 1 },
+ tck_iomode => { iomode3 => 1 },
+ 'corner-order' => ['c0', 'c1'],
+ dmsegment_name_map => { tsegA => 'SEG_A' },
+};
+my $tck_data = {
+ mode0 => {
+  iomode3 => {
+   c0 => { tsegA => { min => 1.5, max => 0, paths => [['fast_path'], ['slow_path']] } },
+   c1 => { tsegA => { max => 2.25, paths => [['max_path']] } },
+  },
+ },
+};
+Timing::StanOmap2430cBackend::write_tck_delays($tck_conf, $tck_data);
+open(my $tck_main_fh, '<', "$tmp/stan_tcksegments.lof") or die "read $tmp/stan_tcksegments.lof: $!";
+my $tck_main = do { local $/; <$tck_main_fh> };
+close($tck_main_fh);
+$tck_main =~ s/\n/|/g;
+print "__TCK_MAIN__=$tck_main\n";
+open(my $tck_sheet_fh, '<', "$tmp/SEG_A_min30.lof") or die "read $tmp/SEG_A_min30.lof: $!";
+my $tck_sheet = do { local $/; <$tck_sheet_fh> };
+close($tck_sheet_fh);
+$tck_sheet =~ s/\n/|/g;
+print "__TCK_SHEET__=$tck_sheet\n";
+my $no_path_conf = {
+ _program => 'prog',
+ _workdir => $tmp,
+ _verbose => 0,
+ _indexes => { startpoint => 0, endpoint => 1 },
+ ports => {
+  instA => {
+   input => ['PORT_A', 'PORT_B'],
+   output => ['PORT_C', 'PORT_D'],
+  },
+ },
+ _filteredata => {
+  corner1 => {
+   mode0 => {
+    iomode0 => {
+     instA => {
+      input => undef,
+      output => [['SRC0', 'PORT_C']],
+     },
+    },
+   },
+  },
+ },
+};
+Timing::StanOmap2430cBackend::write_no_path_check($no_path_conf);
+open(my $no_path_fh, '<', "$tmp/stan_nopath_check.lof") or die "read $tmp/stan_nopath_check.lof: $!";
+my $no_path_content = do { local $/; <$no_path_fh> };
+close($no_path_fh);
+$no_path_content =~ s/\n/|/g;
+print "__NOPATH__=$no_path_content\n";
 PERL
 
     is($exit_code, 0, 'Timing::StanOmap2430cBackend package-owner subprocess exits cleanly') or diag($err || $out);
@@ -4170,11 +4704,21 @@ PERL
     like($out, qr/__PORT_A__=rowA/, 'Timing::StanOmap2430cBackend preserves port-timing filtered path payloads');
     like($out, qr/__PORT_HAS_B__=no/, 'Timing::StanOmap2430cBackend skips empty port-timing filter results');
     like($out, qr/__PORT_FILTERS__=startpoint =~ \/PORT_A\/\|startpoint =~ \/PORT_B\//, 'Timing::StanOmap2430cBackend preserves input sensitivity TableGrep filters');
+    like($out, qr/__STA_FREQS__=1250,\?/, 'Timing::StanOmap2430cBackend preserves STA frequency and questionable markers');
+    like($out, qr/__STA_OK_SLACK__=0\.2/, 'Timing::StanOmap2430cBackend stores good STA paths in the normal path bucket');
+    like($out, qr/__STA_Q_SLACK__=2/, 'Timing::StanOmap2430cBackend stores negative-period paths in the questionable path bucket');
+    like($out, qr/__STA_Q_COUNT__=1/, 'Timing::StanOmap2430cBackend preserves questionable path collection');
+    like($out, qr/__STA_FP_COUNT__=1/, 'Timing::StanOmap2430cBackend preserves potential false-path collection');
     like($out, qr/__PATHS__=.*=stan_freqency_detailed_paths=/, 'Timing::StanOmap2430cBackend preserves frequency-detail paths section header');
     like($out, qr/__PATHS__=.*ok_path/, 'Timing::StanOmap2430cBackend writes normal frequency-detail paths');
     like($out, qr/__PATHS__=.*questionable_path/, 'Timing::StanOmap2430cBackend writes questionable frequency-detail paths');
     like($out, qr/__SUMMARY__=.*=stan_frequency_detailed=.*setup\/input.*internal:i_set_0_2_0!A1\@120/s, 'Timing::StanOmap2430cBackend preserves frequency-detail summary links');
     like($out, qr/__SUMMARY__=.*io_mode0\tinternal:i_set_0_2_0!A1\@120\t-/s, 'Timing::StanOmap2430cBackend preserves dash cells without internal links');
+    like($out, qr/__TCK_MAIN__=.*=stan_dmeasures=.*\+ \+ \+ c0 c1.*SEG_A min iomode3 internal:SEG_A_min30!A1\@1\.50 -.*SEG_A max iomode3 - internal:SEG_A_max31!A1\@2\.25.*=stan_dmeasures_end=/s, 'Timing::StanOmap2430cBackend preserves TCK-delay summary links and dash cells');
+    like($out, qr/__TCK_SHEET__=.*=consolidated_ns=.*fast_path.*slow_path.*=consolidated_ns_end=/s, 'Timing::StanOmap2430cBackend preserves per-TCK-delay path sheet contents');
+    like($out, qr/__NOPATH__=.*=stan_nopath_check=.*PORT_A corner1 mode0 iomode0 instA input.*PORT_B corner1 mode0 iomode0 instA input.*=stan_nopath_check_end=/s, 'Timing::StanOmap2430cBackend preserves no-path output for entirely missing path data');
+    like($out, qr/__NOPATH__=.*PORT_D corner1 mode0 iomode0 instA output/s, 'Timing::StanOmap2430cBackend records missing ports when sibling paths exist');
+    unlike($out, qr/__NOPATH__=.*PORT_C corner1 mode0 iomode0 instA output/s, 'Timing::StanOmap2430cBackend does not report ports found in the selected path endpoint/startpoint field');
     unlike($err, qr/PPlugin|Can't locate Timing\/StanOmap2430cBackend\.pm/, 'Timing::StanOmap2430cBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'setup_hold_timing_helpers_move_to_timing_setuphold_package_owner' => sub {
