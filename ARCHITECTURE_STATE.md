@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-04-13`
+- Last refreshed: `2026-04-17`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -29,7 +29,7 @@ This document is the current high-level technical reading of the project shape. 
 - Delegated owner calls now resolve their target callbacks through the same `OwnerDispatch::require_pkg_cb(...)` loader path used by dependency maps and thin wrappers, so `dispatch_owner_call(...)` no longer carries a second symbol-call route internally.
 - Thin wrapper callback lookup now routes through that seam for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch; direct callback probing is reserved for `OwnerDispatch` itself.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
-- `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, and successful `$@` preservation no longer require bridge-local eval/restore branches.
+- `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, successful `$@` preservation, and default callback-map assembly no longer require bridge-local eval/restore branches or a hand-built dependency hash.
 - `Table::GenericFilter` now owns the `group_by`, `group_by_port`, `group_by_ioclock`, and `group_byRE` actions that used to live entirely in `plugin/genericfilter.plg`, so `HUtils::GenericFilter(...)` and `TableSort::GenericFilter(...)` no longer build `genericfilter_*` names and bounce through `LinkedSpec::run_plugin(...)` / `get_plugin(...)`; the pure `plugin/genericfilter.plg` wrapper and short-lived `Plugin::GenericFilter` scaffold are now removed too.
 - `RTLUtils` now also owns the former `get_log2` address-width helper from `plugin/generic_fake_memory_module.plg` as `ceil_log2(...)`; `plugin/generic_fake_memory_module.plg` and `plugin/wrapgen.plg` call the RTL-domain owner directly for memory wrapper sizing instead of sharing that utility through the legacy plugin registry.
 - Pure extracted helper wrappers are being deleted once no repo-owned caller needs the old plugin name: `plugin/string.plg`, `plugin/cgi.plg`, `plugin/genericfilter.plg`, `plugin/msoffice.plg`, `plugin/vhdconst_eval.plg`, and `plugin/yesno.plg` are now gone while explicit package owners carry the behavior directly. `Plugin::*` was useful migration scaffolding for legacy plugin extractions, but it is not the permanent home for behavior that has a clearer non-plugin/domain owner; the former prompt helper has graduated to `InteractivePrompt`, VHDL constants to `VHDL::ConstantEval`, Excel automation to `MSOffice::Excel`, and HTTP file access to `HTTP::FileAccess`.

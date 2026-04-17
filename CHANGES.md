@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - OwnerDispatch: build PluginBridge dependency map
+
+- routed `LinkedSpec::PluginBridge::_default_deps()` through `LinkedSpec::OwnerDispatch::build_dep_map(...)` instead of hand-building its local default callback map,
+- kept the existing registry-first / legacy-`PPlugin` fallback behavior while putting registered-plugin lookup, legacy runtime loading, legacy lookup, and legacy exec callbacks on the same shared dependency-map assembly seam,
+- extended the owner-dispatch source coverage so `PluginBridge.pm` stays aligned with the shared dependency-map pattern already used by parser and ActionIR owners.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl -MLinkedSpec::PluginBridge -e '$@="__SAVED_ERR__\n"; my $deps = LinkedSpec::PluginBridge::_default_deps(); die "bad deps\n" unless ref($deps) eq "HASH" && ref($deps->{resolve_registered_plugin}) eq "CODE" && ref($deps->{load_plugin_runtime}) eq "CODE" && ref($deps->{get_plugin}) eq "CODE" && ref($deps->{exec_plugin}) eq "CODE"; die "err clobbered\n" unless $@ eq "__SAVED_ERR__\n"; print "plugin_bridge_default_deps_ok\n"'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - OwnerDispatch: remove dead ActionIR callback wrappers
 
 - removed unused local `_require_pkg_cb(...)` wrappers from the ActionIR default-dependency owners whose callback maps already resolve through `LinkedSpec::OwnerDispatch::build_dep_map(...)`,

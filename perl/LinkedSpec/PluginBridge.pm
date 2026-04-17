@@ -111,12 +111,12 @@ sub _resolve_registered_plugin {
 # Returns : hashref dependency map
 #------------------------------------------------------------------------------
 sub _default_deps {
- return {
-  resolve_registered_plugin => \&_resolve_registered_plugin,
-  load_plugin_runtime => \&_load_legacy_plugin_runtime,
-  get_plugin => \&_get_legacy_plugin,
-  exec_plugin => \&_exec_legacy_plugin,
- }
+ return LinkedSpec::OwnerDispatch::build_dep_map(__PACKAGE__, __PACKAGE__, [
+  'resolve_registered_plugin',
+  { dep => 'load_plugin_runtime', cb => '_load_legacy_plugin_runtime' },
+  { dep => 'get_plugin', cb => '_get_legacy_plugin' },
+  { dep => 'exec_plugin', cb => '_exec_legacy_plugin' },
+ ])
 }
 
 #------------------------------------------------------------------------------

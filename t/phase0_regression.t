@@ -1127,7 +1127,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 162;
+    plan tests => 163;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1322,6 +1322,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($plugin_bridge_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'PluginBridge.pm now loads the shared owner-dispatch helper');
     like($plugin_bridge_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'PluginBridge.pm now routes lazy package loading through OwnerDispatch');
     like($plugin_bridge_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'PluginBridge.pm now routes $@ preservation through OwnerDispatch');
+    like($plugin_bridge_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'PluginBridge.pm now assembles its default dependency map through OwnerDispatch');
     like($plugin_bridge_pm, qr/sub _load_legacy_plugin_runtime\b.*_require_pkg\('PPlugin'\)/s, 'PluginBridge.pm now routes legacy runtime loading through its shared owner-dispatch package seam');
     like(
         $plugin_bridge_pm,
