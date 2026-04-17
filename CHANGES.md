@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: extract STAN backend clock-matrix cell owner
+
+- moved the historical `minmax_clockmx_cellcode` clock-matrix summary cell formatter out of `plugin/stan_backend.plg` and into timing-domain owner `Timing::StanBackend::clock_matrix_cell_code(...)`,
+- migrated `plugin/stan_backend.plg::clockmatrix` to call `Timing::StanBackend::clock_matrix_cell_code($conf, $wbid, $row, $col, $sshash)` directly instead of relying on an unqualified same-file helper,
+- removed `minmax_clockmx_cellcode` from the shipped legacy plugin subdefinition surface while preserving min/max slack sorting, first-100 path sheet allocation, and internal workbook summary-link text,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `Timing::StanBackend` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanBackend.pm`
+  - `perl -c -Iperl plugin/stan_backend.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: extract QC flow qclog data owner
 
 - moved the historical `qcflow_qclogdata` qclog table-preparation helper out of `plugin/qcflow.plg` and into QC-domain owner `QC::Flow::prepare_qclog_data(...)`,

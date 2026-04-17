@@ -35,4 +35,36 @@ sub start {
  return Table2SS::UConf(PathSearch->go('stan_backend_table2ss'));
 }
 
+#------------------------------------------------------------------------------
+# Function: clock_matrix_cell_code
+# Purpose : Preserve the historical minmax_clockmx_cellcode clock-matrix cell
+#           formatter under the STAN timing backend owner.
+# Args    : ($conf, $workbook, $row, $col, $path_tree)
+# Returns : internal workbook link text for the summary cell
+#------------------------------------------------------------------------------
+sub clock_matrix_cell_code {
+ my ($conf, $wb, $row, $col, $hh) = @_;
+
+ require HUtils;
+ require Table2SS;
+
+ HUtils::WRecurse($hh, sub {
+   my @num_slack   = grep {$$_[$conf->{_indexes}{slack}] ne '-'} @{$_[1]};
+   my @undef_slack = grep {$$_[$conf->{_indexes}{slack}] eq '-'} @{$_[1]};
+   [(sort {$a->[$conf->{_indexes}{slack}] <=> $b->[$conf->{_indexes}{slack}]} @num_slack), @undef_slack];
+ });
+
+ my $outstr_min = $hh->{pathtype}{min} ? $hh->{pathtype}{min}[0][$conf->{_indexes}{slack}]." (".@{$hh->{pathtype}{min}}.")" : "-";
+ my $outstr_max = $hh->{pathtype}{max} ? $hh->{pathtype}{max}[0][$conf->{_indexes}{slack}]." (".@{$hh->{pathtype}{max}}.")" : "-";
+
+ my @localpaths;
+
+ push @localpaths, [grep {defined} @{$hh->{pathtype}{min}}[0 .. 99]] if $hh->{pathtype}{min};
+ push @localpaths, [grep {defined} @{$hh->{pathtype}{max}}[0 .. 99]] if $hh->{pathtype}{max};
+
+ Table2SS::DriveSheet($wb, "first100_r${row}c$col", Table2SS::RCAllocate(1, 1, 2, [@localpaths], "consolidated_rep"));
+
+ return "internal:first100_r${row}c$col!A1\@$outstr_min / $outstr_max"
+}
+
 1;

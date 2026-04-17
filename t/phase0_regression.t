@@ -4436,7 +4436,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate QC\/Summary\.pm/, 'QC::Summary package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'stan_backend_start_moves_to_timing_stanbackend_package_owner' => sub {
-    plan tests => 29;
+    plan tests => 40;
 
     my $timing_stan_backend_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanBackend.pm'));
     my $stan_backend_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_backend.plg'));
@@ -4449,13 +4449,17 @@ subtest 'stan_backend_start_moves_to_timing_stanbackend_package_owner' => sub {
     ok(defined($dutycycled_plugin) && length($dutycycled_plugin), 'duty_cycle_degradation.plg source is available for Timing::StanBackend migration inspection');
     like($timing_stan_backend_pm, qr/package Timing::StanBackend;/, 'Timing::StanBackend declares the expected package');
     like($timing_stan_backend_pm, qr/sub start\b/, 'Timing::StanBackend owns the former stan_backend_start setup helper');
+    like($timing_stan_backend_pm, qr/sub clock_matrix_cell_code\b/, 'Timing::StanBackend owns the clock-matrix min/max cell formatter');
     like($timing_stan_backend_pm, qr/HTTP::FileAccess::set_hostport/, 'Timing::StanBackend owns the HTTP hostport setup call');
     unlike($timing_stan_backend_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanBackend does not depend on plugin lookup or the legacy PPlugin runtime');
 
     like($stan_backend_plugin, qr/use Timing::StanBackend;/, 'stan_backend.plg loads the Timing::StanBackend owner directly');
     like($stan_backend_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'stan_backend.plg calls the Timing::StanBackend setup helper directly');
+    like($stan_backend_plugin, qr/Timing::StanBackend::clock_matrix_cell_code\(\$conf, \$wbid, \$row, \$col, \$sshash\)/, 'stan_backend.plg calls the package-owned clock-matrix cell formatter directly');
     unlike($stan_backend_plugin, qr/\bstan_backend_start\s*\{/, 'stan_backend.plg no longer exposes stan_backend_start as a legacy plugin subdef');
     unlike($stan_backend_plugin, qr/(?<!::)\bstan_backend_start\s*\(/, 'stan_backend.plg no longer calls the unqualified legacy setup helper');
+    unlike($stan_backend_plugin, qr/\bminmax_clockmx_cellcode\s*\{/, 'stan_backend.plg no longer exposes minmax_clockmx_cellcode as a legacy plugin subdef');
+    unlike($stan_backend_plugin, qr/(?<!::)\bminmax_clockmx_cellcode\s*\(/, 'stan_backend.plg no longer calls the unqualified clock-matrix cell helper');
 
     like($skew_plugin, qr/use Timing::StanBackend;/, 'skew.plg loads the Timing::StanBackend owner directly');
     like($skew_plugin, qr/Timing::StanBackend::start\(\$conf\)/, 'skew.plg calls the Timing::StanBackend setup helper directly');
@@ -4471,6 +4475,7 @@ subtest 'stan_backend_start_moves_to_timing_stanbackend_package_owner' => sub {
     ok(!$@, 'stan_backend plugin still parses without die under pplugin') or diag(normalize_error($@));
     ok(defined($stan_backend_ast) && ref($stan_backend_ast) eq 'HASH', 'stan_backend plugin still returns a hash AST under pplugin');
     ok(!exists $stan_backend_ast->{stan_backend_start}, 'stan_backend plugin no longer exposes stan_backend_start as a coderef');
+    ok(!exists $stan_backend_ast->{minmax_clockmx_cellcode}, 'stan_backend plugin no longer exposes minmax_clockmx_cellcode as a coderef');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 BEGIN {
@@ -4508,6 +4513,57 @@ PERL
     like($out, qr/__UCONF__=\/tmp\/stan_backend_table2ss\.conf/, 'Timing::StanBackend forwards resolved table2ss config to Table2SS::UConf');
     like($out, qr/__RET__=uconf-ok/, 'Timing::StanBackend preserves the setup return value');
     unlike($err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend package-owner subprocess stays clear of legacy plugin runtime issues');
+
+    my ($cell_exit_code, $cell_out, $cell_err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+ $INC{"HUtils.pm"} = __FILE__;
+ package HUtils;
+ sub WRecurse {
+  my ($node, $coderef) = @_;
+  foreach my $pathtype (sort keys %{$node->{pathtype}}) {
+   $node->{pathtype}{$pathtype} = $coderef->(['pathtype', $pathtype], $node->{pathtype}{$pathtype});
+  }
+  return $node;
+ }
+
+ $INC{"Table2SS.pm"} = __FILE__;
+ package Table2SS;
+ sub RCAllocate {
+  my ($row, $col, $level, $tables, $script) = @_;
+  print "__RCALLOC__=$row:$col:$level:$script:", scalar(@$tables), ":", join('|', map { $_->[0][2] } @$tables), "\n";
+  return [{ a1 => 'A1' }];
+ }
+ sub DriveSheet {
+  my ($wb, $sheet, $rca) = @_;
+  print "__DRIVE__=$wb:$sheet:$rca->[0]{a1}\n";
+  return;
+ }
+}
+require Timing::StanBackend;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $path_tree = {
+ pathtype => {
+  min => [
+   ['min_slow',  'endpoint',  '0.5'],
+   ['min_fast',  'endpoint', '-0.2'],
+   ['min_blank', 'endpoint', '-'],
+  ],
+  max => [
+   ['max_slow', 'endpoint', '0.6'],
+   ['max_fast', 'endpoint', '0.1'],
+  ],
+ },
+};
+my $ret = Timing::StanBackend::clock_matrix_cell_code({ _indexes => { slack => 2 } }, 'WB', 3, 4, $path_tree);
+print "__RET__=$ret\n";
+PERL
+
+    is($cell_exit_code, 0, 'Timing::StanBackend clock-matrix cell formatter subprocess exits cleanly') or diag($cell_err || $cell_out);
+    like($cell_out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring Timing::StanBackend cell formatter keeps PPlugin unloaded');
+    like($cell_out, qr/__RCALLOC__=1:1:2:consolidated_rep:2:-0\.2\|0\.1/, 'Timing::StanBackend cell formatter preserves sorted min/max first-100 table allocation');
+    like($cell_out, qr/__DRIVE__=WB:first100_r3c4:A1/, 'Timing::StanBackend cell formatter writes the per-cell first-100 sheet');
+    like($cell_out, qr/__RET__=internal:first100_r3c4!A1\@-0\.2 \(3\) \/ 0\.1 \(2\)/, 'Timing::StanBackend cell formatter preserves summary link text');
+    unlike($cell_err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend cell formatter subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     plan tests => 67;

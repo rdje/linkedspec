@@ -29,7 +29,7 @@ my ($conf) = @_;
                 foreach my $cmodentry (@$modata) {
 		 my ($sinfo, $sshash)   = @$cmodentry;
                  my $col                = HUtils::GetKeyIndex($vert, $sinfo);
-		 $table_out[$row][$col] = minmax_clockmx_cellcode ($conf, $wbid, $row, $col, $sshash);
+		 $table_out[$row][$col] = Timing::StanBackend::clock_matrix_cell_code($conf, $wbid, $row, $col, $sshash);
 		}
 
 		# The very first column is the StartPoint Clock name
@@ -55,28 +55,6 @@ my ($conf) = @_;
  $summary->freeze_panes('c3');
 
  Table2SS::Close($wbid);
-}
-
-minmax_clockmx_cellcode {
-my ($conf, $wb, $row, $col, $hh) = @_;
-
- HUtils::WRecurse($hh, sub {
-		   my @num_slack   = grep {$$_[$conf->{_indexes}{slack}] ne '-'} @{$_[1]}; 
-		   my @undef_slack = grep {$$_[$conf->{_indexes}{slack}] eq '-'} @{$_[1]}; 
-		   [(sort {$a->[$conf->{_indexes}{slack}] <=> $b->[$conf->{_indexes}{slack}]} @num_slack), @undef_slack];
- });
-
- my $outstr_min = $hh->{pathtype}{min} ? $hh->{pathtype}{min}[0][$conf->{_indexes}{slack}]." (".@{$hh->{pathtype}{min}}.")" : "-";
- my $outstr_max = $hh->{pathtype}{max} ? $hh->{pathtype}{max}[0][$conf->{_indexes}{slack}]." (".@{$hh->{pathtype}{max}}.")" : "-";
-
- my @localpaths;
-
- push @localpaths, [grep {defined} @{$hh->{pathtype}{min}}[0 .. 99]] if $hh->{pathtype}{min};
- push @localpaths, [grep {defined} @{$hh->{pathtype}{max}}[0 .. 99]] if $hh->{pathtype}{max};
-
- Table2SS::DriveSheet($wb, "first100_r${row}c$col", Table2SS::RCAllocate(1, 1, 2, [@localpaths], "consolidated_rep"));
-
- "internal:first100_r${row}c$col!A1\@$outstr_min / $outstr_max"
 }
 
 
