@@ -48,6 +48,113 @@ sub ceil_log2 {
  return int($log2) + ($log2 =~ /\./o ? 1 : 0)
 }
 
+#------------------------------------------------------------------------------
+# Function: add_header_n_context_clause
+# Purpose : Build the VHDL header/context-clause text formerly emitted through
+#           the add_header_n_context_clause legacy plugin helper.
+# Args    : ($conf_hashref, %options)
+# Returns : generated header/context-clause string
+#------------------------------------------------------------------------------
+sub add_header_n_context_clause {
+ my ($cr, %opt) = @_;
+
+ require Global;
+
+ my $std_context_clause = Global->set(qw/rtl std_context_clause/);
+
+ HUtils::avv_get($cr, '_raw_header_') //= do {
+  my $header = _get_leaf($cr, 'corporate_file_header');
+
+  if ($header) {
+   if (ref($header) eq 'SCALAR') {
+    $$header
+   } elsif (-f $header) {
+    _slurp($header)
+   } else {
+    say STDOUT "(fsmgen) -W- Can't stat header file '$header', ignoring it.";
+    ''
+   }
+  } else {
+   ''
+  }
+ };
+
+ my $corporate_file_header = _get_leaf($cr, '_raw_header_')
+  ? _string_substitute(
+     _get_leaf($cr, '_raw_header_'),
+     file_name      => $opt{file_name},
+     file_type      => 'VHDL',
+     author_signame => $opt{author_signame},
+     author_name    => $opt{author_name},
+     description    => $opt{description},
+     revision       => 'Initial Version',
+     language       => 'VHDL\'93',
+    )
+  : '';
+
+ my $user_defined_clause = '';
+ if (_get_leaf($cr, 'user_defined_clause')) {
+  my $add_package_re    = _get_leaf($cr, 'add_package_re');
+  my $under_add_package = _get_leaf($cr, 'add_package_list');
+
+  my @last_minute_package_list = $opt{last_minute_pkg}
+   ? (ref $opt{last_minute_pkg} ? @{$opt{last_minute_pkg}} : $opt{last_minute_pkg})
+   : ();
+
+  foreach (@{Table::list2table([map { m/$add_package_re/o } map { split /,/o } @$under_add_package, @last_minute_package_list], 2)}) {
+   $user_defined_clause .= "LIBRARY $$_[0];" . ($$_[1] ? "\nUSE" . (' ' x 5) . "$$_[0].$$_[1].ALL;" : '') . "\n\n";
+  }
+ }
+
+ return $corporate_file_header .
+        (_get_leaf($cr, 'context_clause') || $std_context_clause) .
+        $user_defined_clause .
+        "\n"
+}
+
+sub _get_leaf {
+ my ($h, $re, %opt) = @_;
+ my @leaf;
+
+ HUtils::KeyGrep($h, qr/$re/, sub {
+  push @leaf, $_[1] unless grep { defined($_) && $_ =~ /$re/ } @leaf;
+ });
+
+ if ($opt{verbose}) {
+  unless (@leaf) {
+   say STDERR "(fsmgen) -W- (get_leaf) RE '$re' did not match !";
+  } elsif (@leaf > 1) {
+   say STDERR "(fsmgen) -W- (get_leaf) RE '$re' matched more than once (x" . scalar(@leaf) . "), kept the last ($leaf[-1]) !";
+  }
+ }
+
+ return $leaf[-1]
+}
+
+sub _slurp {
+ open(my $f, '<', ref($_[0]) ? $_[1] : $_[0]);
+ local $/;
+ return <$f>
+}
+
+sub _string_substitute {
+ my ($string, @subst_data) = @_;
+
+ my @timeinfo = localtime;
+ my $day      = sprintf "%02d", $timeinfo[3];
+ my $month    = sprintf "%02d", 1 + $timeinfo[4];
+ my $year     = 1900 + $timeinfo[5];
+ my $date     = join '-', $year, $month, $day;
+
+ return sub {
+  local $_ = shift;
+  my %h = map { !ref($_) ? $_ : (ref eq 'HASH' ? %$_ : @$_) } @_;
+  s{(?<!\\)<(\w+?)>}{$h{lc $1} // "<$1>"}goe;
+  s/"/\\"/go;
+  eval(qq("$_"))
+ }->($string, @subst_data, date => $date, year => $year)
+}
+
 
 sub drive_entity_component {
 my ($conf, $modules, $mod, %option) = @_;
@@ -85,7 +192,7 @@ my ($conf, $modules, $mod, %option) = @_;
  }
 
 
- print LinkedSpec::run_plugin('add_header_n_context_clause', $conf, %option) unless $option{component};
+ print RTLUtils::add_header_n_context_clause($conf, %option) unless $option{component};
 
  print "$entity_or_component  $mod  IS";
 
@@ -332,7 +439,7 @@ my ($conf, $modules, $top, %options) = @_;
  open (my $mb, "> Entities/$options{macroname}".($options{entity} || "_a").".vhd") || die "-E- Can't write architecture of *$options{macroname}*,";
  select $mb;
 
- print LinkedSpec::run_plugin('add_header_n_context_clause', $conf, %options);
+ print RTLUtils::add_header_n_context_clause($conf, %options);
 
  print "ARCHITECTURE $options{macroname}_arch OF $options{macroname} IS\n";
  foreach (sort {$a cmp $b} keys %{$modules->{$top}{hierarchy}}) {

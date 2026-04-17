@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: move RTL header generation to RTLUtils
+
+- moved the historical `add_header_n_context_clause` VHDL header/context-clause helper into `RTLUtils::add_header_n_context_clause(...)`,
+- migrated `RTLUtils` entity/architecture generation and `FSMGen.pm` package code to call the package owner directly instead of routing known header generation through `LinkedSpec::run_plugin(...)` / AUTOLOAD,
+- kept `plugin/fsmgen.plg::add_header_n_context_clause` as a thin compatibility wrapper that delegates to `RTLUtils` for any remaining legacy plugin-name caller,
+- extended source and runtime regression coverage for the package-owned header/context helper, including corporate-header substitution, context clauses, user package clauses, and staying clear of eager `PPlugin` loading.
+
+- Validation:
+  - `perl -c -Iperl perl/RTLUtils.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl -e 'BEGIN { package Table2SS; 1; $INC{"Table2SS.pm"}=1; } require FSMGen; print "fsmgen_require_ok\n"'`
+  - `perl -Iperl -MLinkedSpec -e 'my $parser = LinkedSpec::get_parser("pplugin"); open(my $fh, "<", "plugin/fsmgen.plg") or die $!; local $/; my $input=<$fh>; my $ast = $parser->(\$input); die "no ast\n" unless ref($ast) eq "HASH" && ref($ast->{add_header_n_context_clause}) eq "CODE"; print "fsmgen_pplugin_wrapper_ok\n"'`
+  - `perl -Iperl -e 'require RTLUtils; my $conf = { context_clause => "-- CONTEXT --\n", corporate_file_header => \ "Header <file_name> <file_type> <author_signame> <author_name> <description> <revision> <language>\n", user_defined_clause => 1, add_package_re => q{([[:alpha:]]\w+)(?:\.((?1)))?$}, add_package_list => ["work.pkg,local.extra"] }; my $text = RTLUtils::add_header_n_context_clause($conf, file_name => "unit.vhd", author_signame => "RDJE", author_name => "Richard", description => "Description", last_minute_pkg => ["ieee.std_logic_1164"]); die $text unless $text =~ /Header unit\.vhd VHDL RDJE Richard Description Initial Version VHDL.93/ && $text =~ /LIBRARY work;\nUSE\s+work\.pkg\.ALL;/ && $text =~ /LIBRARY ieee;\nUSE\s+ieee\.std_logic_1164\.ALL;/; die "pplugin loaded\n" if exists $INC{"PPlugin.pm"}; print "rtl_header_owner_ok\n"'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Bootstrap: refresh architecture owner tree
 
 - re-ran the README/SESSION_BOOTSTRAP bootstrap pass over the referenced docs and the current `LinkedSpec.pm` load shape,

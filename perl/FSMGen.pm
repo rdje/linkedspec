@@ -1575,7 +1575,7 @@ my ($db) = @_;
  my $interface2align = RTLUtils::string_align($$db{interface2align});
 
  my $ent_string  = "";
- $ent_string    .= add_header_n_context_clause($$db{conf}                                                    , 
+ $ent_string    .= RTLUtils::add_header_n_context_clause($$db{conf}                                                    ,
                                                file_name      => get_entity_file_name($db, $$db{fsm})        ,
                                                author_signame => get_leaf ($db, 'author_signame')            , 
                                                author_name    => get_leaf ($db, 'author_name')               ,       
@@ -1925,7 +1925,7 @@ my ($gdb) = @_;
                                                        keys %{$$gdb{shared}{module}{$$gdb{conf}{_dp}}{extra_info}{sliced_output}},
                                                        keys %{$$gdb{shared}{module}{$$gdb{conf}{_dp}}{extra_info}{output}}]);
 
-  $dp_string .= add_header_n_context_clause ($gdb                                                                  ,
+  $dp_string .= RTLUtils::add_header_n_context_clause ($gdb                                                                  ,
                                              file_name      => get_entity_file_name ($gdb, $$gdb{conf}{_dp})       ,
                                              author_signame => get_leaf ($gdb, 'author_signame')                   ,
                                              author_name    => get_leaf ($gdb, 'author_name')                      ,
@@ -2748,7 +2748,7 @@ my ($sdb) = @_;
   unless (get_leaf($sdb, '\bmerge$')) {
    open ($ch, ">$cm/$architecture_file_name");
 
-   print '', add_header_n_context_clause ($$sdb{conf}                                                    , 
+   print '', RTLUtils::add_header_n_context_clause ($$sdb{conf}                                                    ,
                                           file_name      => $architecture_file_name                      ,
                                           author_signame => get_leaf ($sdb, 'author_signame')            , 
                                           author_name    => get_leaf ($sdb, 'author_name')               ,
@@ -3289,7 +3289,7 @@ sub drive_tops {my ($cr, $tops, $submodules, $plugins) = @_;
 		    _args       => $$_{args})} foreach @{$plugins->{$ct}{cclausearch} // []};
   
 
-  print '', add_header_n_context_clause ($cr                                                                        ,
+  print '', RTLUtils::add_header_n_context_clause ($cr                                                                        ,
                                          file_name       => $architecture_file_name                                 , 
                                          author_signame  => get_leaf($cr, 'author_signame')                         ,
                                          author_name     => get_leaf($cr, 'author_name')                            ,

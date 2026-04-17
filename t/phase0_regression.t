@@ -3713,31 +3713,36 @@ PERL
     like($out, qr/__MAPTABLE__=default_map/, 'TableSort GenericFilter forwards the selected maptable into Table::GenericFilter');
     like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the package-owner callback payload');
 };
-subtest 'rtlutils_add_header_paths_spend_run_plugin_explicit_api' => sub {
-    plan tests => 2;
+subtest 'rtlutils_add_header_paths_use_package_owner' => sub {
+    plan tests => 7;
 
-    my $source_content = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
+    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
+    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
+    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
 
-    is(scalar(() = $source_content =~ /LinkedSpec::run_plugin\('add_header_n_context_clause'/g), 2, 'RTLUtils header-generation paths now call LinkedSpec::run_plugin at both explicit add_header_n_context_clause sites');
-    unlike($source_content, qr/PPlugin->exec_plugin_name\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through PPlugin explicit-name dispatch');
+    like($rtlutils_pm, qr/sub add_header_n_context_clause\b/, 'RTLUtils owns the VHDL header/context-clause helper');
+    is(scalar(() = $rtlutils_pm =~ /RTLUtils::add_header_n_context_clause\(/g), 2, 'RTLUtils header-generation paths call the package-owned header/context helper directly');
+    unlike($rtlutils_pm, qr/LinkedSpec::run_plugin\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through LinkedSpec plugin dispatch');
+    unlike($rtlutils_pm, qr/PPlugin->exec_plugin_name\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through PPlugin explicit-name dispatch');
+    is(scalar(() = $fsmgen_pm =~ /RTLUtils::add_header_n_context_clause\s*\(/g), 4, 'FSMGen package code calls the RTLUtils header/context helper directly');
+    unlike($fsmgen_pm, qr/(?<!::)\badd_header_n_context_clause\s*\(/, 'FSMGen package code no longer relies on AUTOLOAD for add_header_n_context_clause');
+    like($fsmgen_plugin, qr/add_header_n_context_clause \{require RTLUtils; RTLUtils::add_header_n_context_clause\(\@_\)\}/, 'fsmgen.plg keeps add_header_n_context_clause as a thin compatibility wrapper');
 };
-subtest 'rtlutils_drive_entity_component_uses_run_plugin_explicit_api' => sub {
-    plan tests => 6;
+subtest 'rtlutils_drive_entity_component_uses_header_package_owner' => sub {
+    plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
-require PPlugin;
 require RTLUtils;
 no warnings 'redefine';
 local *HUtils::Recurse = sub {
     my ($data, $cb) = @_;
     return $cb->(['default'], [['clk', 'IN', 'STD_LOGIC']]);
 };
-local *PPlugin::exec = sub { die "__UNEXPECTED_PPLUGIN_EXEC__\n" };
-local *PPlugin::exec_plugin_name = sub { die "__UNEXPECTED_PPLUGIN_EXEC_PLUGIN_NAME__\n" };
-local *LinkedSpec::run_plugin = sub {
-    my ($plugin_name, $conf, @opt_pairs) = @_;
+local *LinkedSpec::run_plugin = sub { die "__UNEXPECTED_LINKEDSPEC_RUN_PLUGIN__\n" };
+local *RTLUtils::add_header_n_context_clause = sub {
+    my ($conf, @opt_pairs) = @_;
     my %opt = @opt_pairs;
-    print "__PLUGIN_NAME__=$plugin_name\n";
+    print "__PACKAGE_OWNER__=RTLUtils::add_header_n_context_clause\n";
     print "__COMPONENT__=" . (defined($opt{component}) ? $opt{component} : '<undef>') . "\n";
     return "-- HEADER --\n";
 };
@@ -3751,15 +3756,49 @@ my $modules = {
     },
 };
 RTLUtils::drive_entity_component({}, $modules, 'Top');
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
 print "__DONE__\n";
 PERL
 
     is($exit_code, 0, 'RTLUtils drive_entity_component subprocess exits cleanly') or diag($err || $out);
-    unlike($err, qr/__UNEXPECTED_PPLUGIN/, 'RTLUtils drive_entity_component avoids the legacy PPlugin dispatch paths');
-    like($out, qr/__PLUGIN_NAME__=add_header_n_context_clause/, 'RTLUtils drive_entity_component dispatches add_header_n_context_clause through LinkedSpec::run_plugin');
-    like($out, qr/__COMPONENT__=<undef>/, 'RTLUtils drive_entity_component preserves the existing non-component option shape when dispatching through run_plugin');
-    like($out, qr/-- HEADER --/, 'RTLUtils drive_entity_component prints the run_plugin header payload');
-    like($out, qr/ENTITY\s+Top\s+IS/, 'RTLUtils drive_entity_component preserves the surrounding entity output after the run_plugin header');
+    unlike($err, qr/__UNEXPECTED_(?:PPLUGIN|LINKEDSPEC)/, 'RTLUtils drive_entity_component avoids the legacy plugin dispatch paths');
+    like($out, qr/__PACKAGE_OWNER__=RTLUtils::add_header_n_context_clause/, 'RTLUtils drive_entity_component dispatches add_header_n_context_clause through the package owner');
+    like($out, qr/__COMPONENT__=<undef>/, 'RTLUtils drive_entity_component preserves the existing non-component option shape when calling the package owner');
+    like($out, qr/-- HEADER --/, 'RTLUtils drive_entity_component prints the package-owner header payload');
+    like($out, qr/ENTITY\s+Top\s+IS/, 'RTLUtils drive_entity_component preserves the surrounding entity output after the package-owner header');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'RTLUtils drive_entity_component package-owner path keeps PPlugin unloaded');
+};
+subtest 'rtlutils_header_context_clause_package_owner_preserves_payload' => sub {
+    plan tests => 7;
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require RTLUtils;
+my $conf = {
+    context_clause        => "-- CONTEXT --\n",
+    corporate_file_header => \ "Header <file_name> <file_type> <author_signame> <author_name> <description> <revision> <language>\n",
+    user_defined_clause   => 1,
+    add_package_re        => '([[:alpha:]]\w+)(?:\.((?1)))?$',
+    add_package_list      => ['work.pkg,local.extra'],
+};
+my $text = RTLUtils::add_header_n_context_clause(
+    $conf,
+    file_name       => 'unit.vhd',
+    author_signame  => 'RDJE',
+    author_name     => 'Richard',
+    description     => 'Description',
+    last_minute_pkg => ['ieee.std_logic_1164'],
+);
+print "__TEXT_START__\n", $text, "__TEXT_END__\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+PERL
+
+    is($exit_code, 0, 'RTLUtils add_header_n_context_clause subprocess exits cleanly') or diag($err || $out);
+    unlike($err, qr/PPlugin|Can't locate RTLUtils\.pm/, 'RTLUtils add_header_n_context_clause stays clear of legacy plugin runtime issues');
+    like($out, qr/Header unit\.vhd VHDL RDJE Richard Description Initial Version VHDL'93/, 'RTLUtils add_header_n_context_clause preserves corporate-header substitution');
+    like($out, qr/-- CONTEXT --/, 'RTLUtils add_header_n_context_clause preserves explicit context clause text');
+    like($out, qr/LIBRARY work;\nUSE\s+work\.pkg\.ALL;/, 'RTLUtils add_header_n_context_clause preserves configured user package clauses');
+    like($out, qr/LIBRARY ieee;\nUSE\s+ieee\.std_logic_1164\.ALL;/, 'RTLUtils add_header_n_context_clause preserves last-minute package clauses');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'RTLUtils add_header_n_context_clause keeps PPlugin unloaded');
 };
 subtest 'fsmgen_autoload_uses_linkedspec_dispatch_plugin_autoload_name' => sub {
     plan tests => 5;

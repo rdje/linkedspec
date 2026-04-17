@@ -412,51 +412,7 @@ helper_find_signalport_size {my ($cr, $acneb_2modpin, $nodename, $acebn, $type) 
 
 
 # Build the library and use clauses
-add_header_n_context_clause {my ($cr, %opt) = @_;
-
-my $std_context_clause = Global->set(qw/rtl std_context_clause/);
-
- HUtils::avv_get ($cr, '_raw_header_') //= do {
-   my $header = get_leaf ($cr, 'corporate_file_header');
-
-   if ($header) {
-     if (ref ($header) eq 'SCALAR') {
-      $$header
-     } elsif (-f $header) {
-      slurp ($header)
-     } else {
-      say STDOUT "(fsmgen) -W- Can't stat header file '$header', ignoring it.";
-      ''
-     }
-   } else {''}
- };
-
- my $corporate_file_header = get_leaf ($cr, '_raw_header_') ? string_substitute (get_leaf($cr, '_raw_header_'),
-                                                              file_name      => $opt{file_name}               ,
-                                                              file_type      => 'VHDL'                        ,
-                                                              author_signame => $opt{author_signame}          ,
-                                                              author_name    => $opt{author_name}             ,
-							      description    => $opt{description}             ,
-                                                              revision       => 'Initial Version'             ,
-                                                              language       => 'VHDL\'93'
-                                                             ) : '';
- my $user_defined_clause = '';
- if (get_leaf ($cr, 'user_defined_clause')) {
-  my $add_package_re    = get_leaf ($cr, 'add_package_re');
-  my $under_add_package = get_leaf ($cr, 'add_package_list');
-
-  my @last_minute_package_list = $opt{last_minute_pkg} ?  (ref $opt{last_minute_pkg} ? @{$opt{last_minute_pkg}} : $opt{last_minute_pkg}) : ();
-
-  foreach (@{Table::list2table([map {m/$add_package_re/o} map {split /,/o} @$under_add_package, @last_minute_package_list], 2)}) {
-    $user_defined_clause .= "LIBRARY $$_[0];".($$_[1] ? "\nUSE".(' ' x 5)."$$_[0].$$_[1].ALL;" : '')."\n\n";
-  }
- }
-
- $corporate_file_header                                    .
- (get_leaf ($cr, 'context_clause') || $std_context_clause) .
- $user_defined_clause                                      . 
- "\n"
-}
+add_header_n_context_clause {require RTLUtils; RTLUtils::add_header_n_context_clause(@_)}
 
 
 get_entity_file_name       {
