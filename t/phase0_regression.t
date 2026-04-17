@@ -3829,6 +3829,92 @@ PERL
     like($out, qr/__ARGS__=alpha,beta/, 'FSMGen AUTOLOAD preserves plugin arguments through LinkedSpec dispatch_plugin_autoload_name');
     like($out, qr/__RET__=plugin_ok/, 'FSMGen AUTOLOAD preserves the LinkedSpec dispatch_plugin_autoload_name return payload');
 };
+subtest 'fsmgen_dynamic_plugin_list_moves_to_fsmgen_package_owner' => sub {
+    plan tests => 25;
+
+    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
+    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
+
+    ok(defined($fsmgen_pm) && length($fsmgen_pm), 'FSMGen package source is available for dynamic plugin-list migration inspection');
+    ok(defined($fsmgen_plugin) && length($fsmgen_plugin), 'fsmgen.plg source is available for dynamic plugin-list migration inspection');
+    like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package owns the dynamic plugin-list parser');
+    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ \\&LinkedSpec::get_plugin/, 'FSMGen package defaults dynamic plugin-list lookup to LinkedSpec::get_plugin');
+    like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved plugin no-op fallback');
+    like($fsmgen_plugin, qr/getop_plugin_list\s+\{require FSMGen; FSMGen::getop_plugin_list\(\@_\)\}/, 'fsmgen.plg delegates getop_plugin_list to the package owner');
+    unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen.plg no longer resolves dynamic plugin-list entries directly');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for FSMGen plugin-list wrapper smoke');
+    my $fsmgen_ast = eval { $parser->(\$fsmgen_plugin) };
+    ok(!$@, 'fsmgen plugin still parses without die after dynamic plugin-list migration') or diag(normalize_error($@));
+    ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen plugin still returns a hash AST after dynamic plugin-list migration');
+    is(ref($fsmgen_ast->{getop_plugin_list}), 'CODE', 'fsmgen plugin still exposes getop_plugin_list as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{"Table2SS.pm"} = __FILE__;
+    package Table2SS;
+}
+require FSMGen;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my @lookups;
+my %handlers = (
+    plugin_a => sub { return join(':', 'plugin_a', @_) },
+    plugin_b => sub { return join(':', 'plugin_b', @_) },
+);
+my $plugins = FSMGen::getop_plugin_list(
+    [
+        '+top=plugin_a#ARG1#ARG2',
+        '+top=missing_plugin#IGNORED',
+        '+signal=plugin_b',
+        'plain_entry',
+        [ 'ignored_ref' ],
+    ],
+    get_plugin => sub {
+        push @lookups, $_[0];
+        return $handlers{$_[0]};
+    },
+);
+print "__KEYS__=", join(',', sort keys %$plugins), "\n";
+print "__TOP_COUNT__=", scalar(@{$plugins->{top}}), "\n";
+print "__SIGNAL_COUNT__=", scalar(@{$plugins->{signal}}), "\n";
+print "__LOOKUPS__=", join(',', @lookups), "\n";
+print "__ARGS__=", join(',', @{$plugins->{top}[0]{args}}), "\n";
+print "__KNOWN_RET__=", $plugins->{top}[0]{plugin}->('CALL'), "\n";
+my $missing_ret = $plugins->{top}[1]{plugin}->('CALL');
+print "__MISSING_RET__=", defined($missing_ret) ? $missing_ret : 'undef', "\n";
+my $none = FSMGen::getop_plugin_list(['plain_entry'], get_plugin => sub { die "unexpected lookup" });
+print "__NONE__=", defined($none) ? 'defined' : 'undef', "\n";
+
+my $parser = LinkedSpec::get_parser('pplugin');
+open(my $fh, '<', 'plugin/fsmgen.plg') or die $!;
+local $/;
+my $source = <$fh>;
+my $ast = $parser->(\$source);
+local *FSMGen::getop_plugin_list = sub {
+    print "__WRAPPER_ARGS__=", join('|', @{$_[0]}), "\n";
+    return { delegated => 1 };
+};
+my $wrapper_ret = $ast->{getop_plugin_list}->(['+wrapped=plugin_a']);
+print "__WRAPPER_RET__=", $wrapper_ret->{delegated}, "\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_AFTER_OWNER__\n" : "__PPLUGIN_STILL_UNLOADED_AFTER_OWNER__\n";
+PERL
+
+    is($exit_code, 0, 'FSMGen dynamic plugin-list subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring FSMGen for plugin-list parsing keeps PPlugin unloaded');
+    like($out, qr/__KEYS__=signal,top/, 'FSMGen dynamic plugin-list parser preserves plugin type buckets');
+    like($out, qr/__TOP_COUNT__=2/, 'FSMGen dynamic plugin-list parser preserves multiple callbacks for one type');
+    like($out, qr/__SIGNAL_COUNT__=1/, 'FSMGen dynamic plugin-list parser preserves single callback buckets');
+    like($out, qr/__LOOKUPS__=plugin_a,missing_plugin,plugin_b/, 'FSMGen dynamic plugin-list parser resolves plugin names in entry order');
+    like($out, qr/__ARGS__=ARG1,ARG2/, 'FSMGen dynamic plugin-list parser preserves plugin arguments');
+    like($out, qr/__KNOWN_RET__=plugin_a:CALL/, 'FSMGen dynamic plugin-list parser preserves resolved plugin coderef behavior');
+    like($out, qr/__MISSING_RET__=undef/, 'FSMGen dynamic plugin-list parser preserves unresolved plugin no-op fallback');
+    like($out, qr/__NONE__=undef/, 'FSMGen dynamic plugin-list parser returns undef when no plugin entries are present');
+    like($out, qr/__WRAPPER_ARGS__=\+wrapped=plugin_a/, 'fsmgen.plg getop_plugin_list wrapper delegates the original entry list');
+    like($out, qr/__WRAPPER_RET__=1/, 'fsmgen.plg getop_plugin_list wrapper preserves the package-owner return payload');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_OWNER__/, 'FSMGen dynamic plugin-list owner path avoids loading PPlugin when lookup is injected');
+    unlike($err, qr/PPlugin|Can't locate FSMGen\.pm|Can't locate Table2SS\.pm/, 'FSMGen dynamic plugin-list subprocess stays clear of legacy plugin runtime and unstubbed dependency errors');
+};
 subtest 'repo_owned_parser_lookup_callers_avoid_legacy_get_parser_plugin' => sub {
     plan tests => 7;
 
@@ -3915,9 +4001,10 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 56;
+    plan tests => 61;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
+    my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
     my $skew_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'skew.plg'));
     my $tssio_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tssio.plg'));
@@ -3927,6 +4014,7 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
     my $plugin_plugin_path = File::Spec->catfile($Bin, '..', 'plugin', 'plugin.plg');
 
+    ok(defined($fsmgen_pm) && length($fsmgen_pm), 'FSMGen.pm source is available for dynamic plugin-list owner inspection');
     ok(defined($qc_summary_plugin) && length($qc_summary_plugin), 'qc_summary.plg source is available for explicit lookup inspection');
     ok(defined($skew_plugin) && length($skew_plugin), 'skew.plg source is available for explicit lookup inspection');
     ok(defined($tssio_plugin) && length($tssio_plugin), 'tssio.plg source is available for explicit lookup inspection');
@@ -3946,7 +4034,11 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     unlike($setup_hold_tmax_tmin_plugin, qr/LinkedSpec::get_plugin\('DxCy'\)/, 'setup_hold_tmax_tmin plugin no longer resolves DxCy through plugin lookup');
     like($setup_hold_tmax_tmin_plugin, qr/use Timing::SetupHold;/, 'setup_hold_tmax_tmin plugin now loads the setup/hold timing package owner directly');
     like($setup_hold_tmax_tmin_plugin, qr/Timing::SetupHold::collect_dxcy/, 'setup_hold_tmax_tmin plugin now uses the package-owned DxCy traversal helper');
-    like($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'fsmgen plugin now resolves dynamic plugin-list entries through LinkedSpec::get_plugin');
+    like($fsmgen_pm, qr/sub getop_plugin_list\b/, 'FSMGen package now owns the dynamic plugin-list parser');
+    like($fsmgen_pm, qr/my \$get_plugin = \$opt\{get_plugin\} \/\/ \\&LinkedSpec::get_plugin/, 'FSMGen package keeps LinkedSpec::get_plugin as the default dynamic plugin-list resolver');
+    like($fsmgen_pm, qr/\$get_plugin->\(\$plg_n_args\[0\]\) \/\/ sub \{\}/, 'FSMGen package preserves the unresolved dynamic plugin-list no-op fallback');
+    like($fsmgen_plugin, qr/getop_plugin_list\s+\{require FSMGen; FSMGen::getop_plugin_list\(\@_\)\}/, 'fsmgen plugin keeps getop_plugin_list as a thin package-owner wrapper');
+    unlike($fsmgen_plugin, qr/LinkedSpec::get_plugin\(\$plg_n_args\[0\]\)/, 'fsmgen plugin no longer resolves dynamic plugin-list entries through LinkedSpec::get_plugin directly');
     unlike($fsmgen_plugin, qr/\bplugin\s*\(/, 'fsmgen plugin no longer routes dynamic plugin-list entries through the legacy plugin lookup shim');
     ok(!-e $plugin_plugin_path, 'plugin.plg lookup shim is removed after repo-owned callers moved to LinkedSpec::get_plugin(...)');
     like($stan_omap2430c_backend_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend plugin now loads the STAN OMAP timing package owner directly');

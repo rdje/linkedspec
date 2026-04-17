@@ -55,6 +55,30 @@ sub top_from_string  {
 # *.fsm -> ATree list
 sub fsm_file_load  {map {Lispish::multi($_)}  @_};
 
+#------------------------------------------------------------------------------
+# Function: getop_plugin_list
+# Purpose : Preserve the historical fsmgen `+type=plugin#args...` dynamic
+#           plugin-list parser under the FSMGen package owner.
+# Args    : ($atree_entry_list, %opt)
+# Returns : hashref of plugin callback entries keyed by plugin type, or undef
+#------------------------------------------------------------------------------
+sub getop_plugin_list {
+ my ($entry_list, %opt) = @_;
+ my %plugins;
+ my $get_plugin = $opt{get_plugin} // \&LinkedSpec::get_plugin;
+
+ foreach my $cps (map {s/\+//o; $_} grep {!ref && m/^\+\S/o} @$entry_list) {
+  $cps =~ /=/po;
+  my ($type, $plugin_list) = (${^PREMATCH}, ${^POSTMATCH});
+
+  my @plg_n_args = split /#/o, $plugin_list;
+  my $plugin = $get_plugin->($plg_n_args[0]) // sub {};
+  push @{$plugins{$type}}, {plugin=> $plugin, args=>[@plg_n_args[1 .. $#plg_n_args]]}
+ }
+
+ return %plugins ? \%plugins : undef
+}
+
 # $conf, Atree list
 sub fsm_initialize {
  my ($conf, @fsm_atrees) = @_;

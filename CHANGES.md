@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: move FSMGen plugin-list lookup to owner
+
+- moved the historical `+type=plugin#args...` dynamic plugin-list parser out of `plugin/fsmgen.plg::getop_plugin_list` and into `FSMGen::getop_plugin_list(...)`,
+- kept `plugin/fsmgen.plg::getop_plugin_list` as a thin compatibility wrapper that delegates to the package owner,
+- preserved the old `LinkedSpec::get_plugin(...)` default resolver and unresolved-plugin no-op fallback while allowing tests and package callers to inject an explicit resolver,
+- extended source, `pplugin` AST, and subprocess behavior coverage for plugin bucket construction, argument preservation, wrapper delegation, and keeping the package-owner path clear of eager `PPlugin` loading.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl -e 'BEGIN { package Table2SS; 1; $INC{"Table2SS.pm"}=1; } require FSMGen; print "fsmgen_require_ok\n"; print exists($INC{"PPlugin.pm"}) ? "pplugin_loaded\n" : "pplugin_unloaded\n";'`
+  - `perl -Iperl -MLinkedSpec -e 'my $parser = LinkedSpec::get_parser("pplugin"); open(my $fh,"<","plugin/fsmgen.plg") or die $!; local $/; my $src=<$fh>; my $ast=eval { $parser->(\$src) }; die $@ if $@; die "no wrapper\n" unless ref($ast->{getop_plugin_list}) eq "CODE"; print "fsmgen_pplugin_wrapper_ok\n";'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: move QC Tcl/FANX helpers to QC::TclInterconn
 
 - moved the historical `tcl4interconn`, `tcl4fanx`, and `get_fanxinfo` helper bodies into QC-domain owner `QC::TclInterconn` as `append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)`,
