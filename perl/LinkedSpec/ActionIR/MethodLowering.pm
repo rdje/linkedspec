@@ -55,18 +55,6 @@ sub _call_preserving_err {
 }
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Resolve a named callback from a package through the shared
-#           owner-dispatch helper.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default callback map exported by this owner for active
 #           ActionIR lowering callers.

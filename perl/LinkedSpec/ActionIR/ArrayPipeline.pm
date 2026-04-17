@@ -57,18 +57,6 @@ sub _call_preserving_err {
 }
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Lazy-load one array-pipeline dependency owner and resolve one
-#           callback from it through the shared owner-dispatch seam.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default array-pipeline dependency bundle for one owner
 #           package.

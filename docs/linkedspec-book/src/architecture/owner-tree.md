@@ -129,6 +129,8 @@ Delegated owner calls go through that same callback-loader route too: `dispatch_
 
 Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch goes through this shared callback-loader seam. Direct callback probing is reserved for `OwnerDispatch` itself.
 
+ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
+
 The design rule is:
 
 ```text

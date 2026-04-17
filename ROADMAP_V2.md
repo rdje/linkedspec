@@ -263,7 +263,7 @@ Runtime/diagnostic continuity note:
    - reduce leftover compatibility seams,
    - keep `LinkedSpec::OwnerDispatch` as the preferred seam for any remaining thin-wrapper lazy owner loading / `$@` preservation cleanup instead of reintroducing local copies,
    - keep the new `EmitContext` ActionIR owner/dependency registry as the single source of truth for that bridge instead of reintroducing per-wrapper package/dependency duplication,
-   - keep the new shared ActionIR dep-map builder as the preferred way to assemble owner callback maps instead of letting `default_deps_for_package(...)` drift back into repeated inline callback registries, including the remaining scanner-side secondary owners,
+   - keep the new shared ActionIR dep-map builder as the preferred way to assemble owner callback maps instead of letting `default_deps_for_package(...)` drift back into repeated inline callback registries or dead local callback-loader wrappers,
    - keep `EmitContext` and extracted ActionIR owners as the stable lowering surface.
 4. Keep documentation synchronized with every meaningful slice:
    - roadmap,

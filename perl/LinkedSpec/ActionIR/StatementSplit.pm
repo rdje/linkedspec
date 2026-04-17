@@ -45,18 +45,6 @@ sub _call_preserving_err {
  return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Lazy-load one statement-split dependency owner and resolve one
-#           callback through the shared owner-dispatch seam.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;

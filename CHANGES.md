@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - OwnerDispatch: remove dead ActionIR callback wrappers
+
+- removed unused local `_require_pkg_cb(...)` wrappers from the ActionIR default-dependency owners whose callback maps already resolve through `LinkedSpec::OwnerDispatch::build_dep_map(...)`,
+- kept the still-used scanner/core wrapper path intact while trimming dead dep-map-only callback-loader scaffolding from `ArrayPipeline`, `CanonicalEvents`, `Contracts`, `ControlFlow`, `DeclareMethod`, `Diagnostics`, `FlowExpr`, `MethodLowering`, `RewritePipeline`, `StatementSplit`, and `ValueExpr`,
+- updated owner-dispatch source coverage so those ActionIR owners stay on direct `build_dep_map(...)` dependency assembly instead of reintroducing local callback-loader wrappers.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/{ArrayPipeline,CanonicalEvents,Contracts,ControlFlow,DeclareMethod,Diagnostics,FlowExpr,MethodLowering,RewritePipeline,StatementSplit,ValueExpr}.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `rg -n "sub _require_pkg_cb|_require_pkg_cb\(" perl/LinkedSpec/ActionIR`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - OwnerDispatch: route EmitContext owner callbacks
 
 - routed `LinkedSpec::RuleIR::EmitContext` ActionIR owner callback lookup through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)` instead of local `Package->can(...)` probes,

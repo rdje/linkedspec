@@ -49,18 +49,6 @@ sub _call_preserving_err {
  return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Lazy-load one rewrite-pipeline dependency owner and resolve one
-#           callback from it through the shared owner-dispatch seam.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
 sub _event_continues_implicit_if_flow {
  my ($event) = @_;
  my $contract_id = $event->{contract_id} // '';
