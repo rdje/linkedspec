@@ -135,6 +135,19 @@ sub _call_preserving_err {
 }
 
 #------------------------------------------------------------------------------
+# Function: _actionir_owner_callback
+# Purpose : Resolve one callback from a local ActionIR owner through the shared
+#           owner-dispatch callback loader.
+# Args    : ($owner_key, $method)
+# Returns : coderef
+#------------------------------------------------------------------------------
+sub _actionir_owner_callback {
+ my ($owner_key, $method) = @_;
+ my $pkg = _actionir_owner_package($owner_key);
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $method)
+}
+
+#------------------------------------------------------------------------------
 # Function: _actionir_owner_default_deps
 # Purpose : Ask one local ActionIR owner for its default dependency bundle as
 #           seen from this emit-context package.
@@ -144,10 +157,7 @@ sub _call_preserving_err {
 sub _actionir_owner_default_deps {
  my ($owner_key) = @_;
  return _call_preserving_err(sub {
-  my $pkg = _actionir_owner_package($owner_key);
-  my $code = $pkg->can('default_deps_for_package');
-  die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_default_deps) -E- owner '$pkg' does not define default_deps_for_package(...)"
-   unless ref($code) eq 'CODE';
+  my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
   return $code->(__PACKAGE__)
  })
 }
@@ -162,10 +172,7 @@ sub _actionir_owner_default_deps {
 sub _call_actionir_owner {
  my ($owner_key, $method, @args) = @_;
  return _call_preserving_err(sub {
-  my $pkg = _actionir_owner_package($owner_key);
-  my $code = $pkg->can($method);
-  die "(LinkedSpec::RuleIR::EmitContext::_call_actionir_owner) -E- owner '$pkg' missing callback '$method'"
-   unless ref($code) eq 'CODE';
+  my $code = _actionir_owner_callback($owner_key, $method);
   return $code->(@args)
  })
 }
@@ -180,10 +187,7 @@ sub _call_actionir_owner {
 sub _call_actionir_owner_with_deps {
  my ($owner_key, $method, @args) = @_;
  return _call_preserving_err(sub {
-  my $pkg = _actionir_owner_package($owner_key);
-  my $code = $pkg->can($method);
-  die "(LinkedSpec::RuleIR::EmitContext::_call_actionir_owner_with_deps) -E- owner '$pkg' missing callback '$method'"
-   unless ref($code) eq 'CODE';
+  my $code = _actionir_owner_callback($owner_key, $method);
   my $deps = _actionir_owner_default_deps($owner_key);
   return $code->(@args, $deps)
  })

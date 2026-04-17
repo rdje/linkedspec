@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - OwnerDispatch: route EmitContext owner callbacks
+
+- routed `LinkedSpec::RuleIR::EmitContext` ActionIR owner callback lookup through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)` instead of local `Package->can(...)` probes,
+- kept the existing EmitContext owner-key registry and default-dependency lookup shape while putting direct callback resolution on the shared owner-dispatch seam,
+- extended the owner-dispatch source regression so `EmitContext.pm` is locked against reintroducing local `->can(...)` callback probing.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `rg -n -- "->can\(" perl/LinkedSpec perl/LinkedSpec.pm`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: extract RTL log2 sizing owner
 
 - moved the historical `get_log2` address-width helper out of `plugin/generic_fake_memory_module.plg` and into RTL-domain owner `RTLUtils::ceil_log2(...)`,

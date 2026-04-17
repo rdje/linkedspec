@@ -127,7 +127,7 @@ This matters because many LinkedSpec owners are thin wrappers around deeper impl
 
 Delegated owner calls go through that same callback-loader route too: `dispatch_owner_call(...)` resolves its target through `require_pkg_cb(...)` before invoking the coderef. That keeps lazy loading, callback validation, list-context return preservation, and successful `$@` preservation on one shared path.
 
-Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, and `ActionIR::Scanner` goes through this shared callback-loader seam. The remaining direct callback probing under `RuleIR::EmitContext` is deliberately tied to its owner-key registry diagnostics rather than generic wrapper loading.
+Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch goes through this shared callback-loader seam. Direct callback probing is reserved for `OwnerDispatch` itself.
 
 The design rule is:
 
