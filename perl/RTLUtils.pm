@@ -35,6 +35,19 @@ my ($alignedset, $newitems) = @_;
  return  string_align ([keys %$alignedset, @$newitems])
 }
 
+#------------------------------------------------------------------------------
+# Function: ceil_log2
+# Purpose : Return the address-width style ceiling log2 used by RTL generation
+#           helpers that historically called the legacy get_log2 plugin helper.
+# Args    : ($value)
+# Returns : integer ceiling of log2($value)
+#------------------------------------------------------------------------------
+sub ceil_log2 {
+ my ($value) = @_;
+ my $log2 = log($value) / log(2);
+ return int($log2) + ($log2 =~ /\./o ? 1 : 0)
+}
+
 
 sub drive_entity_component {
 my ($conf, $modules, $mod, %option) = @_;

@@ -4913,6 +4913,45 @@ subtest 'table_plugin_wrapper_moves_to_table_owner' => sub {
     is_deeply(\@unqualified_list_2table_hits, [], 'repo-owned plugin files no longer depend on the legacy list_2table action wrapper');
     is_deeply(\@table_2ss_hits, [], 'repo-owned plugin files have no remaining table_2ss compatibility action usage');
 };
+subtest 'rtl_log2_helper_moves_to_rtlutils_owner' => sub {
+    plan tests => 19;
+
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
+    my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
+    my $fake_mem_plugin = slurp(File::Spec->catfile($plugin_dir, 'generic_fake_memory_module.plg'));
+    my $wrapgen_plugin = slurp(File::Spec->catfile($plugin_dir, 'wrapgen.plg'));
+
+    ok(defined($rtlutils_pm) && length($rtlutils_pm), 'RTLUtils source is available for log2 helper migration inspection');
+    ok(defined($fake_mem_plugin) && length($fake_mem_plugin), 'generic_fake_memory_module.plg source is available for log2 helper migration inspection');
+    ok(defined($wrapgen_plugin) && length($wrapgen_plugin), 'wrapgen.plg source is available for log2 helper migration inspection');
+    like($rtlutils_pm, qr/sub ceil_log2\b/, 'RTLUtils owns the address-width ceiling log2 helper');
+    like($fake_mem_plugin, qr/RTLUtils::ceil_log2\(\$height\)/, 'generic_fake_memory_module.plg calls the RTLUtils log2 owner directly');
+    like($wrapgen_plugin, qr/RTLUtils::ceil_log2\(\$height\)/, 'wrapgen.plg calls the RTLUtils log2 owner directly');
+    unlike($fake_mem_plugin, qr/\bget_log2\s*\{/, 'generic_fake_memory_module.plg no longer exposes get_log2 as a legacy plugin subdef');
+    unlike($fake_mem_plugin, qr/(?<!::)\bget_log2\s*\(/, 'generic_fake_memory_module.plg no longer calls the unqualified get_log2 helper');
+    unlike($wrapgen_plugin, qr/(?<!::)\bget_log2\s*\(/, 'wrapgen.plg no longer calls the unqualified get_log2 helper');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for RTLUtils log2 migrated plugin smoke');
+    my $fake_mem_ast = eval { $parser->(\$fake_mem_plugin) };
+    ok(!$@, 'generic_fake_memory_module.plg still parses without die after log2 migration') or diag(normalize_error($@));
+    ok(defined($fake_mem_ast) && ref($fake_mem_ast) eq 'HASH', 'generic_fake_memory_module.plg still returns a hash AST after log2 migration');
+    ok(!exists $fake_mem_ast->{get_log2}, 'generic_fake_memory_module.plg no longer exposes get_log2 as a coderef');
+    my $wrapgen_ast = eval { $parser->(\$wrapgen_plugin) };
+    ok(!$@, 'wrapgen.plg still parses without die after log2 migration') or diag(normalize_error($@));
+    ok(defined($wrapgen_ast) && ref($wrapgen_ast) eq 'HASH', 'wrapgen.plg still returns a hash AST after log2 migration');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+require RTLUtils;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+print "__LOG2__=", join(',', map { RTLUtils::ceil_log2($_) } qw(1 2 3 4 8 9)), "\n";
+PERL
+
+    is($exit_code, 0, 'RTLUtils ceil_log2 subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring RTLUtils for ceil_log2 keeps PPlugin unloaded');
+    like($out, qr/__LOG2__=0,1,2,2,3,4/, 'RTLUtils ceil_log2 preserves address-width ceiling log2 results');
+    unlike($err, qr/PPlugin|Can't locate RTLUtils\.pm/, 'RTLUtils ceil_log2 subprocess stays clear of legacy plugin runtime issues');
+};
 subtest 'msoffice_excel_helper_lives_under_domain_owner' => sub {
     plan tests => 17;
 

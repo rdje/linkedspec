@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: extract RTL log2 sizing owner
+
+- moved the historical `get_log2` address-width helper out of `plugin/generic_fake_memory_module.plg` and into RTL-domain owner `RTLUtils::ceil_log2(...)`,
+- migrated `plugin/generic_fake_memory_module.plg` and `plugin/wrapgen.plg` to call `RTLUtils::ceil_log2($height)` directly instead of relying on an unqualified legacy helper subdefinition,
+- removed `get_log2` from the shipped legacy plugin subdefinition surface while preserving address-width ceiling log2 results for RTL memory wrappers,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for the expanded `RTLUtils` owner.
+
+- Validation:
+  - `perl -c -Iperl perl/RTLUtils.pm`
+  - `perl -c -Iperl plugin/wrapgen.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `rg -n "\bget_log2\b" plugin/generic_fake_memory_module.plg plugin/wrapgen.plg`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: extract STAN backend clock-matrix cell owner
 
 - moved the historical `minmax_clockmx_cellcode` clock-matrix summary cell formatter out of `plugin/stan_backend.plg` and into timing-domain owner `Timing::StanBackend::clock_matrix_cell_code(...)`,

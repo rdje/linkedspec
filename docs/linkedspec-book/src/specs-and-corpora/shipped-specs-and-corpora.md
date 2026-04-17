@@ -177,6 +177,7 @@ It is still important because:
 - parser lookup is no longer treated as a plugin action inside the shipped project; repo-owned callers use `LinkedSpec::get_parser(...)` directly, and the old `plugin/spec.plg` `_get_parser` shim is gone,
 - generic dynamic callback lookup is no longer hidden behind the old `plugin/plugin.plg` action either; the remaining repo-owned caller in `fsmgen.plg` now uses `LinkedSpec::get_plugin(...)` directly,
 - small utility wrappers are removed when a normal package owner is clearer; the old `plugin/table.plg` wrapper is gone, remaining callers use `Table::list2table(...)` directly, and the unused `table_2ss` action is not preserved as a legacy registration,
+- small RTL utility helpers can move the same way; the old `get_log2` helper is gone from the `.plg` registry, and fake-memory / wrapper-generation callers use `RTLUtils::ceil_log2(...)` directly for address-width sizing,
 - Office automation helpers follow the same rule; the old `plugin/msoffice.plg` wrapper is gone, and `spyglass_waive` calls `MSOffice::Excel::start()` directly,
 - VHDL constant helpers follow the same rule; the old `plugin/vhdconst_eval.plg` wrapper is gone, and MBIST/register-test callers use `VHDL::ConstantEval` directly,
 - interactive prompt helpers follow the same rule and have already graduated out of the temporary `Plugin::*` scaffold; the old `plugin/yesno.plg` wrapper is gone, and FX environment comparison code uses `InteractivePrompt::yes_no(...)` directly,

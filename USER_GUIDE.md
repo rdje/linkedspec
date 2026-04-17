@@ -1259,6 +1259,8 @@ Generic plugin lookup follows it too. The old one-line `plugin/plugin.plg` shim 
 
 Small utility wrappers follow the same rule. The old `plugin/table.plg` wrapper is gone; code that wants to split a flat list into fixed-width rows should call `Table::list2table(...)` directly instead of relying on a `list_2table` plugin action. The unused `table_2ss` action is not kept as a permanent compatibility name without a real caller.
 
+RTL sizing helpers follow it too. The address-width helper that used to appear as `get_log2` now lives in `RTLUtils::ceil_log2(...)`, and shipped fake-memory / wrapper-generation actions call that package owner directly instead of sharing the helper through the plugin registry.
+
 Office automation helpers follow it too. The old `plugin/msoffice.plg` wrapper is gone; code that needs the historical Excel automation helper should call `MSOffice::Excel::start()` directly. That package owns the lazy `Win32::OLE` dependency boundary instead of hiding it behind an unqualified `excel_start` plugin action.
 
 VHDL constant helpers follow it as well. The old `plugin/vhdconst_eval.plg` wrapper is gone; code that needs VHDL constant extraction or hash-value substitution should call `VHDL::ConstantEval::evaluate_constant_values(...)` or `VHDL::ConstantEval::substitute_hash_values(...)` directly. The former print action exists as `VHDL::ConstantEval::print_constant_values_for_conf(...)`, not as a legacy plugin registration.
