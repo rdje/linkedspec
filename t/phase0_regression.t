@@ -3915,7 +3915,7 @@ subtest 'repo_owned_run_plugin_migrated_plugins_still_parse_under_pplugin' => su
     ok(!-e File::Spec->catfile($Bin, '..', 'plugin', 'string.plg'), 'string.plg is no longer part of the legacy pplugin corpus after package-owner migration');
 };
 subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
-    plan tests => 51;
+    plan tests => 56;
 
     my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_summary_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qc_summary.plg'));
@@ -3961,7 +3961,12 @@ subtest 'repo_owned_plugin_lookup_callers_prefer_linkedspec_get_plugin' => sub {
     unlike($stan_omap2430c_backend_plugin, qr/LinkedSpec::get_plugin\('nopath_check'\)/, 'stan_omap2430c_backend plugin no longer resolves nopath_check through plugin lookup');
     like($qcflow_plugin, qr/\\&QC::Flow::budget_check/, 'qcflow plugin now calls the package-owned QC budget-check callback');
     like($qcflow_plugin, qr/\\&QC::Flow::budget_check_single_or_zero_match/, 'qcflow plugin now calls the package-owned single/zero-match budget helper');
-    like($qcflow_plugin, qr/LinkedSpec::get_plugin\('get_fanxinfo'\)/, 'qcflow plugin resolves fanx lookup once and passes it into QC::Flow helpers');
+    like($qcflow_plugin, qr/use QC::TclInterconn;/, 'qcflow plugin now loads the QC Tcl/FANX package owner directly');
+    like($qcflow_plugin, qr/QC::TclInterconn::append_interconnect_tcl/, 'qcflow plugin now calls the package-owned Tcl interconnect helper');
+    like($qcflow_plugin, qr/QC::TclInterconn::load_fanx/, 'qcflow plugin now calls the package-owned FANX loader');
+    like($qcflow_plugin, qr/\\&QC::TclInterconn::fanx_info/, 'qcflow plugin now passes the package-owned FANX formatter into QC::Flow helpers');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('(?:tcl4interconn|tcl4fanx|get_fanxinfo)'\)/, 'qcflow plugin no longer resolves Tcl/FANX helpers through plugin lookup');
+    unlike($qcflow_plugin, qr/use LinkedSpec;/, 'qcflow plugin no longer loads LinkedSpec just to resolve Tcl/FANX helpers');
     unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow plugin no longer resolves qc_budget_check through plugin lookup');
     unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check_01match_code'\)/, 'qcflow plugin no longer resolves qc_budget_check_01match_code through plugin lookup');
     like($qcflow_plugin, qr/QC::Flow::clock_cts_info\(\$qconf, \\%extracted_cts\)/, 'qcflow plugin now calls the package-owned clock CTS summary helper');
@@ -4058,7 +4063,7 @@ PERL
     unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'qcflow_budget_checks_move_to_qc_flow_package_owner' => sub {
-    plan tests => 25;
+    plan tests => 26;
 
     my $qc_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'Flow.pm'));
     my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
@@ -4071,7 +4076,8 @@ subtest 'qcflow_budget_checks_move_to_qc_flow_package_owner' => sub {
 
     like($qcflow_plugin, qr/\\&QC::Flow::budget_check/, 'qcflow.plg uses the QC::Flow budget-check callback directly');
     like($qcflow_plugin, qr/\\&QC::Flow::budget_check_single_or_zero_match/, 'qcflow.plg uses the QC::Flow single/zero-match helper directly');
-    like($qcflow_plugin, qr/my \$get_fanxinfo\s*=\s*LinkedSpec::get_plugin\('get_fanxinfo'\)/, 'qcflow.plg resolves get_fanxinfo once before passing it to QC::Flow');
+    like($qcflow_plugin, qr/my \$get_fanxinfo\s*=\s*\\&QC::TclInterconn::fanx_info/, 'qcflow.plg passes the package-owned FANX formatter to QC::Flow');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('get_fanxinfo'\)/, 'qcflow.plg no longer uses plugin lookup for get_fanxinfo');
     unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check'\)/, 'qcflow.plg no longer uses plugin lookup for qc_budget_check');
     unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('qc_budget_check_01match_code'\)/, 'qcflow.plg no longer uses plugin lookup for qc_budget_check_01match_code');
     unlike($qcflow_plugin, qr/\bqc_budget_check\s*\{/, 'qcflow.plg no longer exposes qc_budget_check as a legacy plugin subdef');
@@ -4135,6 +4141,133 @@ PERL
     like($out, qr/__FANX_CALLS__=0/, 'QC::Flow budget helper does not call fanx lookup on no-reference-clock paths');
     like($out, qr/__LOG_HAS_DATA__=1/, 'QC::Flow budget helper preserves data-port log output');
     unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow budget-check subprocess stays clear of legacy plugin runtime issues');
+};
+subtest 'qcflow_tcl_interconnect_helpers_move_to_qc_tcl_package_owner' => sub {
+    plan tests => 41;
+
+    my $qc_tcl_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'TclInterconn.pm'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
+    my $tcl4interconn_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tcl4interconn.plg'));
+
+    ok(defined($qc_tcl_pm) && length($qc_tcl_pm), 'QC::TclInterconn package owner source is available');
+    ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for Tcl/FANX migration inspection');
+    ok(defined($tcl4interconn_plugin) && length($tcl4interconn_plugin), 'tcl4interconn.plg compatibility wrapper source is available');
+    like($qc_tcl_pm, qr/package QC::TclInterconn;/, 'QC::TclInterconn declares the expected package');
+    like($qc_tcl_pm, qr/sub append_interconnect_tcl\b/, 'QC::TclInterconn owns the Tcl interconnect writer');
+    like($qc_tcl_pm, qr/sub load_fanx\b/, 'QC::TclInterconn owns the FANX loader');
+    like($qc_tcl_pm, qr/sub fanx_info\b/, 'QC::TclInterconn owns the FANX display formatter');
+    unlike($qc_tcl_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'QC::TclInterconn does not depend on plugin lookup or the legacy PPlugin runtime');
+
+    like($qcflow_plugin, qr/use QC::TclInterconn;/, 'qcflow.plg loads the QC Tcl/FANX owner directly');
+    like($qcflow_plugin, qr/QC::TclInterconn::append_interconnect_tcl/, 'qcflow.plg uses the package-owned Tcl interconnect writer');
+    like($qcflow_plugin, qr/QC::TclInterconn::load_fanx/, 'qcflow.plg uses the package-owned FANX loader');
+    like($qcflow_plugin, qr/\\&QC::TclInterconn::fanx_info/, 'qcflow.plg passes the package-owned FANX formatter as a coderef');
+    unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('(?:tcl4interconn|tcl4fanx|get_fanxinfo)'\)/, 'qcflow.plg no longer uses plugin lookup for Tcl/FANX helpers');
+    unlike($qcflow_plugin, qr/use LinkedSpec;/, 'qcflow.plg no longer loads LinkedSpec just for Tcl/FANX helper lookup');
+
+    like($tcl4interconn_plugin, qr/use QC::TclInterconn;/, 'tcl4interconn.plg loads the QC Tcl/FANX owner');
+    like($tcl4interconn_plugin, qr/QC::TclInterconn::append_interconnect_tcl/, 'tcl4interconn.plg delegates tcl4interconn to the package owner');
+    like($tcl4interconn_plugin, qr/QC::TclInterconn::load_fanx/, 'tcl4interconn.plg delegates tcl4fanx to the package owner');
+    like($tcl4interconn_plugin, qr/QC::TclInterconn::fanx_info/, 'tcl4interconn.plg delegates get_fanxinfo to the package owner');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC Tcl/FANX migrated plugin smoke');
+    my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
+    ok(!$@, 'qcflow plugin still parses without die after Tcl/FANX migration') or diag(normalize_error($@));
+    ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after Tcl/FANX migration');
+    my $tcl4interconn_ast = eval { $parser->(\$tcl4interconn_plugin) };
+    ok(!$@, 'tcl4interconn compatibility wrapper still parses without die after package-owner migration') or diag(normalize_error($@));
+    ok(defined($tcl4interconn_ast) && ref($tcl4interconn_ast) eq 'HASH', 'tcl4interconn compatibility wrapper still returns a hash AST');
+    is_deeply([sort keys %$tcl4interconn_ast], [qw(get_fanxinfo tcl4fanx tcl4interconn)], 'tcl4interconn wrapper still exposes the legacy Tcl/FANX plugin names');
+    is(ref($tcl4interconn_ast->{tcl4interconn}), 'CODE', 'tcl4interconn wrapper still exposes tcl4interconn as a coderef');
+    is(ref($tcl4interconn_ast->{tcl4fanx}), 'CODE', 'tcl4interconn wrapper still exposes tcl4fanx as a coderef');
+    is(ref($tcl4interconn_ast->{get_fanxinfo}), 'CODE', 'tcl4interconn wrapper still exposes get_fanxinfo as a coderef');
+
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+BEGIN {
+    $INC{"HUtils.pm"} = __FILE__;
+    package HUtils;
+    sub KeyGrep {
+        my ($hash, $matcher, $callback) = @_;
+        foreach my $key (sort keys %$hash) {
+            my $value = $hash->{$key};
+            $callback->([$key], $value) if $matcher->([$key], $value);
+        }
+        return $hash;
+    }
+
+    $INC{"Table2SS.pm"} = __FILE__;
+    package Table2SS;
+    sub List2Table {
+        my ($items) = @_;
+        return [map { [$_] } @$items];
+    }
+    sub TableTreeAllocate {
+        my ($tree) = @_;
+        print "__ALLOC_KEYS__=", join(',', sort keys %$tree), "\n";
+        return { tree => $tree };
+    }
+    sub TableTreeA1 {
+        return 'B9';
+    }
+}
+require QC::TclInterconn;
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_EAGER__\n" : "__PPLUGIN_STILL_UNLOADED__\n";
+my $qconf = {
+    progname => 'qc-tcl-test',
+    vssvdd_re => qr/^(?:vss|vdd)$/i,
+    indexes => { direction => 0 },
+};
+my $groups = {
+    ios => {
+        ion => {
+            PORTA => [[ 'input' ]],
+            PORTB => [[ 'output' ]],
+            VDD => [[ 'vdd' ]],
+        },
+    },
+};
+my @tcl;
+QC::TclInterconn::append_interconnect_tcl($qconf, $groups, 'PORTA', \@tcl);
+QC::TclInterconn::append_interconnect_tcl($qconf, $groups, 'PORTB', \@tcl);
+QC::TclInterconn::append_interconnect_tcl($qconf, $groups, 'VDD', \@tcl);
+print "__TCL_COUNT__=", scalar(@tcl), "\n";
+print "__TCL_HAS_FIR__=", (index($tcl[0], 'get_fir -thrulatch -unknown $MODULE_PATH/PORTA') >= 0 ? 1 : 0), "\n";
+print "__TCL_HAS_FOR__=", (index($tcl[1], 'get_for -thrulatch -unknown $MODULE_PATH/PORTB') >= 0 ? 1 : 0), "\n";
+
+require File::Temp;
+my ($fh, $fanx_path) = File::Temp::tempfile();
+print $fh "/tmp/PORTA NODEA\n";
+print $fh "(ignored row)\n";
+print $fh "[ignored row]\n";
+print $fh "/tmp/PORTB N1 N2 N3\n";
+print $fh "/tmp/PORTC N1 N2\n";
+close $fh;
+$qconf->{fanx} = $fanx_path;
+$qconf->{_fanx} = QC::TclInterconn::load_fanx($qconf);
+print "__FANX_KEYS__=", join(',', sort keys %{$qconf->{_fanx}}), "\n";
+print "__FANX_SINGLE__=", QC::TclInterconn::fanx_info($qconf, 'PORTC'), "\n";
+print "__FANX_EMPTY__=", QC::TclInterconn::fanx_info($qconf, 'PORTA'), "\n";
+print "__FANX_TABLE__=", QC::TclInterconn::fanx_info($qconf, 'PORTB'), "\n";
+print "__FANX_MISSING__=", QC::TclInterconn::fanx_info($qconf, 'NOPE'), "\n";
+print "__PORTB_REF__=", ref($qconf->{_fanx}{PORTB}), "\n";
+print "__TREE_REF__=", ref($qconf->{_fanxtree}), "\n";
+PERL
+
+    is($exit_code, 0, 'QC::TclInterconn package-owner subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__PPLUGIN_STILL_UNLOADED__/, 'requiring QC::TclInterconn keeps PPlugin unloaded');
+    like($out, qr/__TCL_COUNT__=2/, 'QC::TclInterconn preserves VSS/VDD suppression while writing Tcl snippets');
+    like($out, qr/__TCL_HAS_FIR__=1/, 'QC::TclInterconn preserves input-port get_fir Tcl generation');
+    like($out, qr/__TCL_HAS_FOR__=1/, 'QC::TclInterconn preserves output-port get_for Tcl generation');
+    like($out, qr/__FANX_KEYS__=PORTA,PORTB,PORTC/, 'QC::TclInterconn load_fanx preserves stripped FANX port keys and filters ignored rows');
+    like($out, qr/__FANX_SINGLE__=N2/, 'QC::TclInterconn fanx_info preserves single FANX node display');
+    like($out, qr/__FANX_EMPTY__=-/, 'QC::TclInterconn fanx_info preserves empty FANX fallback display');
+    like($out, qr/__FANX_TABLE__=internal:fanx!B9\@N2  \(2\)/, 'QC::TclInterconn fanx_info preserves table-backed FANX link display');
+    like($out, qr/__FANX_MISSING__=-/, 'QC::TclInterconn fanx_info preserves missing FANX fallback display');
+    like($out, qr/__PORTB_REF__=ARRAY/, 'QC::TclInterconn load_fanx preserves multi-node FANX tables');
+    like($out, qr/__ALLOC_KEYS__=PORTB/, 'QC::TclInterconn load_fanx preserves FANX table-tree allocation');
+    like($out, qr/__TREE_REF__=HASH/, 'QC::TclInterconn load_fanx stores FANX table-tree state on qconf');
+    unlike($err, qr/PPlugin|Can't locate QC\/TclInterconn\.pm/, 'QC::TclInterconn package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'qcflow_filter_handler_moves_to_qc_flow_package_owner' => sub {
     plan tests => 16;

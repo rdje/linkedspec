@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-17 - Plugin runtime: move QC Tcl/FANX helpers to QC::TclInterconn
+
+- moved the historical `tcl4interconn`, `tcl4fanx`, and `get_fanxinfo` helper bodies into QC-domain owner `QC::TclInterconn` as `append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)`,
+- migrated `plugin/qcflow.plg::glc_xcel2hm` to call `QC::TclInterconn` directly for Tcl interconnect generation, FANX loading, and FANX display formatting instead of resolving those helpers through `LinkedSpec::get_plugin(...)`,
+- kept `plugin/tcl4interconn.plg` as a thin compatibility wrapper for the three legacy plugin names while removing the dynamic lookup from repo-owned QC flow execution,
+- extended source, `pplugin` AST, and direct package-behavior regression coverage for Tcl generation, FANX parsing, FANX table-tree allocation, fallback display, and staying clear of eager `PPlugin` loading.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/TclInterconn.pm`
+  - `perl -c -Iperl plugin/qcflow.plg`
+  - `perl -c -Iperl plugin/tcl4interconn.plg`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: move RTL header generation to RTLUtils
 
 - moved the historical `add_header_n_context_clause` VHDL header/context-clause helper into `RTLUtils::add_header_n_context_clause(...)`,

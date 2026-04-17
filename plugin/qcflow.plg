@@ -1,8 +1,8 @@
 
 glc_xcel2hm {
 my ($qconf) = @_;
- use LinkedSpec;
  use QC::Flow;
+ use QC::TclInterconn;
 
  -s $qconf->{glc_xcel2hm} || die "($qconf->{progname}) -E- CSV file '$qconf->{glc_xcel2hm}' is either empty or doesn't exist,";
 	
@@ -58,14 +58,13 @@ my ($qconf) = @_;
  my %match_port;
  my @portlist;
  my @tcl4interconn;
- my $tcl4code       = LinkedSpec::get_plugin('tcl4interconn');
-    $qconf->{_fanx} = $qconf->{fanx} ? LinkedSpec::get_plugin('tcl4fanx')->($qconf) : undef;
+    $qconf->{_fanx} = $qconf->{fanx} ? QC::TclInterconn::load_fanx($qconf) : undef;
  HUtils::Recurse($groups{ios}, sub {my ($info, $a2d) = @_;
  		               my $port = $info->[1];
- 			       print "($qconf->{progname}) -I- Checking port '$port'..\n" unless $qconf->{tcl4interconn};
- 			       push @portlist, $port;
- 
-			       $tcl4code->($qconf, \%groups, $port, \@tcl4interconn) if $qconf->{tcl4interconn};
+			       print "($qconf->{progname}) -I- Checking port '$port'..\n" unless $qconf->{tcl4interconn};
+			       push @portlist, $port;
+
+			       QC::TclInterconn::append_interconnect_tcl($qconf, \%groups, $port, \@tcl4interconn) if $qconf->{tcl4interconn};
 
  			       foreach my $cgl (@{$qconf->{sequence}}) {
  				HUtils::Recurse($qconf->{$cgl}, sub {my ($i, $d) = @_;
@@ -94,7 +93,7 @@ my ($qconf) = @_;
  open(my $qcflowlog, ">$qconf->{logfile}") || die "($qconf->{progname}) -E- Can't write open '$qconf->{logfile}'";
  my $qc_pushonce         = \&QC::Flow::push_once;
  my $single_n_zero_match = \&QC::Flow::budget_check_single_or_zero_match;
- my $get_fanxinfo        = LinkedSpec::get_plugin('get_fanxinfo');
+ my $get_fanxinfo        = \&QC::TclInterconn::fanx_info;
  HUtils::Recurse($groups{ios}, [\&QC::Flow::budget_check, $qc_pushonce, $single_n_zero_match, $get_fanxinfo, $qconf, \%groups, $qcflowlog, \%budget_check, \%match_port, \%qclog, \%once]);
  
  # Multiple matches List
