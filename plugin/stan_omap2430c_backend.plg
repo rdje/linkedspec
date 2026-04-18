@@ -33,9 +33,9 @@ my ($conf) = @_;
 # print "($conf->{_program}) -I- Generating DM DATA..\n";
 # LinkedSpec::get_plugin('setup_hold_tmax_tmin')->($conf, $conf->{_filteredata}, $filteredata_hold);
 
-# LinkedSpec::get_plugin('freqency_summary')->($conf);
-# LinkedSpec::get_plugin('potential_fp')->($conf);
-# LinkedSpec::get_plugin('questionable_paths')->($conf);
+# Timing::StanOmap2430cBackend::write_frequency_summary($conf);
+# Timing::StanOmap2430cBackend::write_potential_fp($conf);
+# Timing::StanOmap2430cBackend::write_questionable_paths($conf);
 # Timing::StanOmap2430cBackend::write_no_path_check($conf);
 }
 
@@ -70,53 +70,16 @@ my ($conf) = @_;
 }
 
 potential_fp {
-my ($conf) = @_;
-
- open(FP, ">$workdir/stan_potential_fp.lof") || die "($conf->{_program}) -E- Can't write open 'stan_potential_fp.lof', ";
- print FP "=stan_potential_fp=\n";
- print FP "@$_\n" foreach (@{$conf->{_potential_fp}});
- print FP "=stan_potential_fp_end=\n";
- close(FP)
+use Timing::StanOmap2430cBackend;
+Timing::StanOmap2430cBackend::write_potential_fp(@_)
 }
 
 questionable_paths {
-my ($conf) = @_;
-
- open( QUEST, ">$workdir/stan_questionable_paths.lof") || die "($conf->{_program}) -E- Can't write open 'stan_questionable_paths.lof', ";
- print QUEST "=stan_questionable_paths=\n";
- print QUEST "@$_\n" foreach (@{$conf->{_questionable_paths}});
- print QUEST "=stan_questionable_paths_end=\n";
- close(QUEST)
+use Timing::StanOmap2430cBackend;
+Timing::StanOmap2430cBackend::write_questionable_paths(@_)
 }
 
 freqency_summary {
-my ($conf) = @_;
-
- my $corner_count    = keys %{$conf->{frequencies}};
- my @sorted_corners  = sort {$b <=> $a} keys %{$conf->{frequencies}};
-
- open(FREQ, ">stan_frequency_summary.lof") || die "($conf->{_program}) -E- Can't write open 'stan_frequency_summary.lof', ";
- 
- print FREQ "=stan_frequency_summary=\n";
- print FREQ join("\t", '+', @sorted_corners)."\n";
-
- foreach $pathtype (sort {$a cmp $b} keys %{$conf->{paths}}) {
-  print FREQ $pathtype;
-  unless (exists $conf->{_stafrequency}{$pathtype}) {
-   print FREQ "\t-" x $corner_count."\n";
-   next
-  }
-  
-  foreach $corner (@sorted_corners) {
-   my @corner_freqlist = @{$conf->{_stafrequency}{$pathtype}{$corner}};
-   my $qmark = grep {!/\d+/} @corner_freqlist;
-   
-   print FREQ exists $conf->{_stafrequency}{$pathtype}{$corner} ? "\t".($qmark ? '?' : (sort {$a <=> $b} @corner_freqlist)[0]) : "\t-";
-  }
-
-  print FREQ "\n";
- }
-
- print FREQ "=stan_frequency_summary_end=\n";
- close(FREQ);
+use Timing::StanOmap2430cBackend;
+Timing::StanOmap2430cBackend::write_frequency_summary(@_)
 }

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-18 - Plugin runtime: move STAN OMAP report writers to owner
+
+- moved the historical `potential_fp`, `questionable_paths`, and `freqency_summary` report-writer bodies out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend` as `write_potential_fp(...)`, `write_questionable_paths(...)`, and `write_frequency_summary(...)`,
+- kept the visible legacy plugin names as thin compatibility wrappers that delegate to the package owner instead of keeping the writer bodies in `.plg`,
+- preserved `stan_potential_fp.lof`, `stan_questionable_paths.lof`, and `stan_frequency_summary.lof` contents plus section markers while keeping the package-owner path clear of eager `PPlugin` loading,
+- extended source, `pplugin` AST, wrapper-delegation, and subprocess report-output regression coverage for the new package-owned writers.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/StanOmap2430cBackend.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl -MLinkedSpec -e 'my $parser = LinkedSpec::get_parser("pplugin"); open(my $fh,"<","plugin/stan_omap2430c_backend.plg") or die $!; local $/; my $src=<$fh>; my $ast = $parser->(\$src); die "missing wrappers\n" unless ref($ast->{potential_fp}) eq "CODE" && ref($ast->{questionable_paths}) eq "CODE" && ref($ast->{freqency_summary}) eq "CODE"; print "stan_omap_wrappers_ok\n";'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-17 - Plugin runtime: move FSMGen plugin-list lookup to owner
 
 - moved the historical `+type=plugin#args...` dynamic plugin-list parser out of `plugin/fsmgen.plg::getop_plugin_list` and into `FSMGen::getop_plugin_list(...)`,

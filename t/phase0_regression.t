@@ -4833,7 +4833,7 @@ PERL
     unlike($cell_err, qr/PPlugin|Can't locate Timing\/StanBackend\.pm/, 'Timing::StanBackend cell formatter subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
-    plan tests => 67;
+    plan tests => 84;
 
     my $timing_stan_omap_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'Timing', 'StanOmap2430cBackend.pm'));
     my $stan_omap_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'stan_omap2430c_backend.plg'));
@@ -4850,6 +4850,9 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     like($timing_stan_omap_pm, qr/sub record_no_path_check\b/, 'Timing::StanOmap2430cBackend owns the no-path check traversal callback');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail_paths\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail path writer');
     like($timing_stan_omap_pm, qr/sub write_frequency_detail\b/, 'Timing::StanOmap2430cBackend owns the frequency-detail summary writer');
+    like($timing_stan_omap_pm, qr/sub write_potential_fp\b/, 'Timing::StanOmap2430cBackend owns the potential false-path report writer');
+    like($timing_stan_omap_pm, qr/sub write_questionable_paths\b/, 'Timing::StanOmap2430cBackend owns the questionable-path report writer');
+    like($timing_stan_omap_pm, qr/sub write_frequency_summary\b/, 'Timing::StanOmap2430cBackend owns the corrected frequency-summary report writer');
     unlike($timing_stan_omap_pm, qr/LinkedSpec::get_plugin|PPlugin/, 'Timing::StanOmap2430cBackend does not depend on plugin lookup or the legacy PPlugin runtime');
 
     like($stan_omap_plugin, qr/use Timing::StanOmap2430cBackend;/, 'stan_omap2430c_backend.plg loads the Timing::StanOmap2430cBackend owner directly');
@@ -4862,6 +4865,9 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:drive_nopath_check|nopath_check)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for no-path checking');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail\b/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail summary writer');
     like($stan_omap_plugin, qr/Timing::StanOmap2430cBackend::write_frequency_detail_paths/, 'stan_omap2430c_backend.plg calls the package-owned frequency-detail path writer');
+    like($stan_omap_plugin, qr/potential_fp\s+\{[^}]*Timing::StanOmap2430cBackend::write_potential_fp\(\@_\)/s, 'stan_omap2430c_backend.plg keeps potential_fp as a thin package-owner wrapper');
+    like($stan_omap_plugin, qr/questionable_paths\s+\{[^}]*Timing::StanOmap2430cBackend::write_questionable_paths\(\@_\)/s, 'stan_omap2430c_backend.plg keeps questionable_paths as a thin package-owner wrapper');
+    like($stan_omap_plugin, qr/freqency_summary\s+\{[^}]*Timing::StanOmap2430cBackend::write_frequency_summary\(\@_\)/s, 'stan_omap2430c_backend.plg keeps freqency_summary as a thin package-owner wrapper');
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('(?:freqency_detailed|drive_freqency_detailed|freqency_detailed_paths|get_freqency_detailed_fname)'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for frequency-detail helpers');
     unlike($stan_omap_plugin, qr/LinkedSpec::get_plugin\('portiming'\)/, 'stan_omap2430c_backend.plg no longer uses plugin lookup for port-timing filtering');
     unlike($stan_omap_plugin, qr/\bstafrequency\s*\{/, 'stan_omap2430c_backend.plg no longer exposes stafrequency as a legacy plugin subdef');
@@ -4884,9 +4890,13 @@ subtest 'stan_omap_frequency_detail_helpers_move_to_timing_owner' => sub {
     ok(!exists $stan_omap_ast->{drive_tckdelays}, 'stan_omap2430c_backend plugin no longer exposes drive_tckdelays as a coderef');
     ok(!exists $stan_omap_ast->{drive_nopath_check}, 'stan_omap2430c_backend plugin no longer exposes drive_nopath_check as a coderef');
     ok(!exists $stan_omap_ast->{nopath_check}, 'stan_omap2430c_backend plugin no longer exposes nopath_check as a coderef');
+    is(ref($stan_omap_ast->{potential_fp}), 'CODE', 'stan_omap2430c_backend plugin still exposes potential_fp as a compatibility wrapper coderef');
+    is(ref($stan_omap_ast->{questionable_paths}), 'CODE', 'stan_omap2430c_backend plugin still exposes questionable_paths as a compatibility wrapper coderef');
+    is(ref($stan_omap_ast->{freqency_summary}), 'CODE', 'stan_omap2430c_backend plugin still exposes freqency_summary as a compatibility wrapper coderef');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 use File::Temp qw(tempdir);
+use Cwd qw(getcwd);
 BEGIN {
  $INC{"TableGrep.pm"} = __FILE__;
  package TableGrep;
@@ -4958,6 +4968,41 @@ Timing::StanOmap2430cBackend::write_frequency_detail(['setup', 'input'], [{ '2.0
 close($summary_fh);
 $summary =~ s/\n/|/g;
 print "__SUMMARY__=$summary\n";
+my $report_conf = {
+ _program => 'prog',
+ _workdir => $tmp,
+ frequencies => { '2.0' => 1, '1.0' => 1 },
+ paths => { alpha => 1, beta => 1 },
+ _stafrequency => {
+  alpha => {
+   '2.0' => [500, 450],
+   '1.0' => ['?'],
+  },
+ },
+ _potential_fp => [['fp_path_a'], ['fp_path_b']],
+ _questionable_paths => [['q_path_a']],
+};
+Timing::StanOmap2430cBackend::write_potential_fp($report_conf);
+Timing::StanOmap2430cBackend::write_questionable_paths($report_conf);
+my $cwd = getcwd();
+chdir($tmp) or die "chdir $tmp: $!";
+Timing::StanOmap2430cBackend::write_frequency_summary($report_conf);
+chdir($cwd) or die "restore cwd: $!";
+open(my $potential_fh, '<', "$tmp/stan_potential_fp.lof") or die "read $tmp/stan_potential_fp.lof: $!";
+my $potential = do { local $/; <$potential_fh> };
+close($potential_fh);
+$potential =~ s/\n/|/g;
+print "__POTENTIAL__=$potential\n";
+open(my $questionable_fh, '<', "$tmp/stan_questionable_paths.lof") or die "read $tmp/stan_questionable_paths.lof: $!";
+my $questionable = do { local $/; <$questionable_fh> };
+close($questionable_fh);
+$questionable =~ s/\n/|/g;
+print "__QUESTIONABLE__=$questionable\n";
+open(my $freq_summary_fh, '<', "$tmp/stan_frequency_summary.lof") or die "read $tmp/stan_frequency_summary.lof: $!";
+my $freq_summary = do { local $/; <$freq_summary_fh> };
+close($freq_summary_fh);
+$freq_summary =~ s/\n/|/g;
+print "__FREQ_SUMMARY__=$freq_summary\n";
 my $tck_conf = {
  _program => 'prog',
  _workdir => $tmp,
@@ -5016,6 +5061,29 @@ my $no_path_content = do { local $/; <$no_path_fh> };
 close($no_path_fh);
 $no_path_content =~ s/\n/|/g;
 print "__NOPATH__=$no_path_content\n";
+require LinkedSpec;
+open(my $plugin_fh, '<', 'plugin/stan_omap2430c_backend.plg') or die "read plugin/stan_omap2430c_backend.plg: $!";
+my $plugin_source = do { local $/; <$plugin_fh> };
+close($plugin_fh);
+my $parser = LinkedSpec::get_parser('pplugin');
+my $plugin_ast = $parser->(\$plugin_source);
+local *Timing::StanOmap2430cBackend::write_potential_fp = sub {
+ print "__WRAP_POTENTIAL_ARGS__=", scalar(@_), "\n";
+ return { delegated => 'potential' };
+};
+local *Timing::StanOmap2430cBackend::write_questionable_paths = sub {
+ print "__WRAP_QUESTIONABLE_ARGS__=", scalar(@_), "\n";
+ return { delegated => 'questionable' };
+};
+local *Timing::StanOmap2430cBackend::write_frequency_summary = sub {
+ print "__WRAP_FREQ_ARGS__=", scalar(@_), "\n";
+ return { delegated => 'frequency' };
+};
+my $wrap_potential = $plugin_ast->{potential_fp}->($report_conf);
+my $wrap_questionable = $plugin_ast->{questionable_paths}->($report_conf);
+my $wrap_frequency = $plugin_ast->{freqency_summary}->($report_conf);
+print "__WRAP_RET__=", join(':', $wrap_potential->{delegated}, $wrap_questionable->{delegated}, $wrap_frequency->{delegated}), "\n";
+print exists($INC{"PPlugin.pm"}) ? "__PPLUGIN_AFTER_WRAPPERS__\n" : "__PPLUGIN_STILL_UNLOADED_AFTER_WRAPPERS__\n";
 PERL
 
     is($exit_code, 0, 'Timing::StanOmap2430cBackend package-owner subprocess exits cleanly') or diag($err || $out);
@@ -5037,11 +5105,19 @@ PERL
     like($out, qr/__PATHS__=.*questionable_path/, 'Timing::StanOmap2430cBackend writes questionable frequency-detail paths');
     like($out, qr/__SUMMARY__=.*=stan_frequency_detailed=.*setup\/input.*internal:i_set_0_2_0!A1\@120/s, 'Timing::StanOmap2430cBackend preserves frequency-detail summary links');
     like($out, qr/__SUMMARY__=.*io_mode0\tinternal:i_set_0_2_0!A1\@120\t-/s, 'Timing::StanOmap2430cBackend preserves dash cells without internal links');
+    like($out, qr/__POTENTIAL__=.*=stan_potential_fp=.*fp_path_a.*fp_path_b.*=stan_potential_fp_end=/s, 'Timing::StanOmap2430cBackend preserves potential false-path report output');
+    like($out, qr/__QUESTIONABLE__=.*=stan_questionable_paths=.*q_path_a.*=stan_questionable_paths_end=/s, 'Timing::StanOmap2430cBackend preserves questionable-path report output');
+    like($out, qr/__FREQ_SUMMARY__=.*=stan_frequency_summary=.*\+\t2\.0\t1\.0\|alpha\t450\t\?\|beta\t-\t-.*=stan_frequency_summary_end=/s, 'Timing::StanOmap2430cBackend preserves frequency-summary report output');
     like($out, qr/__TCK_MAIN__=.*=stan_dmeasures=.*\+ \+ \+ c0 c1.*SEG_A min iomode3 internal:SEG_A_min30!A1\@1\.50 -.*SEG_A max iomode3 - internal:SEG_A_max31!A1\@2\.25.*=stan_dmeasures_end=/s, 'Timing::StanOmap2430cBackend preserves TCK-delay summary links and dash cells');
     like($out, qr/__TCK_SHEET__=.*=consolidated_ns=.*fast_path.*slow_path.*=consolidated_ns_end=/s, 'Timing::StanOmap2430cBackend preserves per-TCK-delay path sheet contents');
     like($out, qr/__NOPATH__=.*=stan_nopath_check=.*PORT_A corner1 mode0 iomode0 instA input.*PORT_B corner1 mode0 iomode0 instA input.*=stan_nopath_check_end=/s, 'Timing::StanOmap2430cBackend preserves no-path output for entirely missing path data');
     like($out, qr/__NOPATH__=.*PORT_D corner1 mode0 iomode0 instA output/s, 'Timing::StanOmap2430cBackend records missing ports when sibling paths exist');
     unlike($out, qr/__NOPATH__=.*PORT_C corner1 mode0 iomode0 instA output/s, 'Timing::StanOmap2430cBackend does not report ports found in the selected path endpoint/startpoint field');
+    like($out, qr/__WRAP_POTENTIAL_ARGS__=1/, 'stan_omap2430c_backend potential_fp wrapper delegates its original argument list');
+    like($out, qr/__WRAP_QUESTIONABLE_ARGS__=1/, 'stan_omap2430c_backend questionable_paths wrapper delegates its original argument list');
+    like($out, qr/__WRAP_FREQ_ARGS__=1/, 'stan_omap2430c_backend freqency_summary wrapper delegates its original argument list');
+    like($out, qr/__WRAP_RET__=potential:questionable:frequency/, 'stan_omap2430c_backend report wrappers preserve the package-owner return payloads');
+    like($out, qr/__PPLUGIN_STILL_UNLOADED_AFTER_WRAPPERS__/, 'stan_omap2430c_backend report wrappers keep PPlugin unloaded');
     unlike($err, qr/PPlugin|Can't locate Timing\/StanOmap2430cBackend\.pm/, 'Timing::StanOmap2430cBackend package-owner subprocess stays clear of legacy plugin runtime issues');
 };
 subtest 'setup_hold_timing_helpers_move_to_timing_setuphold_package_owner' => sub {

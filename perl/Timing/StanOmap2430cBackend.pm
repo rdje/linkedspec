@@ -348,4 +348,89 @@ sub write_frequency_detail {
  return
 }
 
+#------------------------------------------------------------------------------
+# Function: write_potential_fp
+# Purpose : Preserve the historical potential_fp report writer under the STAN
+#           OMAP timing package owner.
+# Args    : ($conf)
+# Returns : undef after writing stan_potential_fp.lof
+#------------------------------------------------------------------------------
+sub write_potential_fp {
+ my ($conf) = @_;
+ my $workdir = $conf->{_workdir} // '.';
+
+ open(my $fp_fh, ">", "$workdir/stan_potential_fp.lof")
+  || die "($conf->{_program}) -E- Can't write open 'stan_potential_fp.lof', ";
+ print {$fp_fh} "=stan_potential_fp=\n";
+ print {$fp_fh} "@$_\n" foreach (@{$conf->{_potential_fp} // []});
+ print {$fp_fh} "=stan_potential_fp_end=\n";
+ close($fp_fh);
+ return
+}
+
+#------------------------------------------------------------------------------
+# Function: write_questionable_paths
+# Purpose : Preserve the historical questionable_paths report writer under the
+#           STAN OMAP timing package owner.
+# Args    : ($conf)
+# Returns : undef after writing stan_questionable_paths.lof
+#------------------------------------------------------------------------------
+sub write_questionable_paths {
+ my ($conf) = @_;
+ my $workdir = $conf->{_workdir} // '.';
+
+ open(my $quest_fh, ">", "$workdir/stan_questionable_paths.lof")
+  || die "($conf->{_program}) -E- Can't write open 'stan_questionable_paths.lof', ";
+ print {$quest_fh} "=stan_questionable_paths=\n";
+ print {$quest_fh} "@$_\n" foreach (@{$conf->{_questionable_paths} // []});
+ print {$quest_fh} "=stan_questionable_paths_end=\n";
+ close($quest_fh);
+ return
+}
+
+#------------------------------------------------------------------------------
+# Function: write_frequency_summary
+# Purpose : Preserve the historical freqency_summary report writer under the
+#           STAN OMAP timing package owner while correcting the callable API
+#           spelling.
+# Args    : ($conf)
+# Returns : undef after writing stan_frequency_summary.lof
+#------------------------------------------------------------------------------
+sub write_frequency_summary {
+ my ($conf) = @_;
+
+ my $corner_count = keys %{$conf->{frequencies}};
+ my @sorted_corners = sort { $b <=> $a } keys %{$conf->{frequencies}};
+
+ open(my $freq_fh, ">", "stan_frequency_summary.lof")
+  || die "($conf->{_program}) -E- Can't write open 'stan_frequency_summary.lof', ";
+
+ print {$freq_fh} "=stan_frequency_summary=\n";
+ print {$freq_fh} join("\t", '+', @sorted_corners) . "\n";
+
+ foreach my $path_type (sort { $a cmp $b } keys %{$conf->{paths}}) {
+  print {$freq_fh} $path_type;
+  unless (exists $conf->{_stafrequency}{$path_type}) {
+   print {$freq_fh} "\t-" x $corner_count;
+   print {$freq_fh} "\n";
+   next
+  }
+
+  foreach my $corner (@sorted_corners) {
+   my @corner_freqlist = @{$conf->{_stafrequency}{$path_type}{$corner}};
+   my $qmark = grep { !/\d+/ } @corner_freqlist;
+
+   print {$freq_fh} exists $conf->{_stafrequency}{$path_type}{$corner}
+    ? "\t" . ($qmark ? '?' : (sort { $a <=> $b } @corner_freqlist)[0])
+    : "\t-";
+  }
+
+  print {$freq_fh} "\n";
+ }
+
+ print {$freq_fh} "=stan_frequency_summary_end=\n";
+ close($freq_fh);
+ return
+}
+
 1;
