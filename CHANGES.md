@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-18 - Plugin runtime: move tssio action to Timing::SetupHold
+
+- moved the historical `tssio` report/action body out of `plugin/tssio.plg` and into timing-domain owner `Timing::SetupHold::write_tssio(...)`,
+- kept `plugin/tssio.plg::tssio` as a thin compatibility wrapper that delegates to the package owner instead of keeping the report logic in `.plg`,
+- preserved `tssio.lof`, per-path `sta_<n>.lof` sheets, banner/error strings, and internal workbook-link text while keeping the package-owner path clear of eager `PPlugin` loading,
+- extended source, `pplugin` AST, wrapper-delegation, and subprocess report-output regression coverage for the new package-owned action body.
+
+- Validation:
+  - `perl -c -Iperl perl/Timing/SetupHold.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `perl -Iperl -MLinkedSpec -e 'my $parser = LinkedSpec::get_parser("pplugin"); open(my $fh,"<","plugin/tssio.plg") or die $!; local $/; my $src=<$fh>; my $ast = $parser->(\$src); die "missing wrapper\n" unless ref($ast->{tssio}) eq "CODE"; print "tssio_wrapper_ok\n";'`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-18 - Plugin runtime: move STAN OMAP report writers to owner
 
 - moved the historical `potential_fp`, `questionable_paths`, and `freqency_summary` report-writer bodies out of `plugin/stan_omap2430c_backend.plg` and into timing-domain owner `Timing::StanOmap2430cBackend` as `write_potential_fp(...)`, `write_questionable_paths(...)`, and `write_frequency_summary(...)`,

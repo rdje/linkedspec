@@ -16,6 +16,42 @@ BEGIN {
 }
 
 #------------------------------------------------------------------------------
+# Function: _require_hutils
+# Purpose : Lazy-load HUtils only when package-owned report helpers need the
+#           recursive walkers.
+# Args    : ()
+# Returns : true on successful load
+#------------------------------------------------------------------------------
+sub _require_hutils {
+ require HUtils;
+ return 1
+}
+
+#------------------------------------------------------------------------------
+# Function: _require_tablegrep
+# Purpose : Lazy-load TableGrep only when package-owned report helpers need the
+#           legacy index map.
+# Args    : ()
+# Returns : true on successful load
+#------------------------------------------------------------------------------
+sub _require_tablegrep {
+ require TableGrep;
+ return 1
+}
+
+#------------------------------------------------------------------------------
+# Function: _require_tcflow
+# Purpose : Lazy-load TcFlow only when package-owned report helpers need the
+#           historical setup/hold path loader.
+# Args    : ()
+# Returns : true on successful load
+#------------------------------------------------------------------------------
+sub _require_tcflow {
+ require TcFlow;
+ return 1
+}
+
+#------------------------------------------------------------------------------
 # Function: _indexes
 # Purpose : Return the timing-index map used by legacy setup/hold callers.
 # Args    : ($conf)
@@ -169,6 +205,111 @@ sub collect_dxcy {
  }
 
  ++$$crail{callnum};
+ return
+}
+
+#------------------------------------------------------------------------------
+# Function: write_tssio
+# Purpose : Preserve the historical tssio report/action body under the
+#           setup/hold timing package owner.
+# Args    : ($conf)
+# Returns : undef after writing tssio and per-path STA LOF files
+#------------------------------------------------------------------------------
+sub write_tssio {
+ my ($conf) = @_;
+
+ _require_hutils();
+ _require_tablegrep();
+ _require_tcflow();
+
+ system("mkdir -p $conf->{_workdir}; rm -rf $conf->{_workdir}/*");
+
+ print "(stan)(tssio) -I- Processing SETUP/HOLD info..\n";
+
+ my $index = TableGrep::IndexOf('ALL', 'tssinfo');
+ my %lastruct;
+ my $counter = 0;
+
+ HUtils::Recurse(
+  HUtils::WRecurse(
+   TcFlow::GetSH($$conf{_consolidated}),
+   sub { HUtils::GenericFilter($conf, $_[1], 'filter_sequence') }
+  ),
+  sub {
+   my ($info, $a2d) = @_;
+   my $deltatime = abs($$a2d[0][$$conf{indexes}{capture_start_time}] - $$a2d[0][$$conf{indexes}{launch_start_time}]);
+
+   my $halfull = $$a2d[0][$$conf{indexes}{startpoint_clock_edge}] ne $$a2d[0][$$conf{indexes}{endpoint_clock_edge}] ? 'H' : 'F';
+   $halfull = $$a2d[0][$$conf{indexes}{startpoint_clock}] =~ /'/o && $$a2d[0][$$conf{indexes}{endpoint_clock}] =~ /'/o
+    || $$a2d[0][$$conf{indexes}{startpoint_clock}] !~ /'/o && $$a2d[0][$$conf{indexes}{endpoint_clock}] !~ /'/o
+     ? $halfull
+     : ($halfull eq 'H' ? 'F' : 'H');
+
+   my $freq = $info->[$$index{setup_hold}] eq 'setup' ? sprintf("%4.2f", 1000 / ($deltatime * ($halfull eq 'H' ? 2 : 1))) : '-';
+   my $tss = sprintf(
+    "%4.2f",
+    ($info->[$$index{direction}] eq 'input' ? \&tss_setup_hold_delay : \&tss_tmax_tmin_delay)
+     ->($conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min')
+   );
+
+   my $dxcy = "D" . (split(//, $info->[$$index{direction}]))[0] . "C";
+   my $side = $info->[$$index{direction}] eq 'input' ? 'launch' : 'capture';
+   my $startnode = $$a2d[0][$$conf{indexes}{"${side}_clock_path_startnode"}];
+   my $endnode = $$a2d[0][$$conf{indexes}{"${side}_clock_path_endnode"}];
+   my $reference_clock;
+
+   my $ignore = 0;
+   if ($startnode !~ /\// && $endnode !~ /\//) {
+    $dxcy .= 'o';
+    $reference_clock = $endnode;
+   } elsif ($startnode !~ /\// && $endnode =~ /\//) {
+    $dxcy .= 'i';
+    $reference_clock = $startnode;
+   } elsif ($startnode =~ /\// && $endnode !~ /\//) {
+    $dxcy .= 'o';
+    $reference_clock = $endnode;
+   } else {
+    print "(stan)(tssio) -E- An IO reference clock for <@$info> can't be an internal pin !!\n";
+    $ignore = 1;
+   }
+
+   my $sta = $ignore && '-' || sprintf("%4.2f", calculate_path_delay($dxcy, $conf, $$a2d[0], $info->[$$index{setup_hold}] eq 'setup' ? 'max' : 'min'));
+
+   my $pointer_base = 16 * $$conf{toindex}{corner}{$info->[$$index{corner}]}
+                    +  8 * $$conf{toindex}{direction}{$info->[$$index{direction}]}
+                    +  4 * $$conf{toindex}{maxmin}{$info->[$$index{setup_hold}]};
+
+   $lastruct{$info->[$$index{interface}]}{$info->[$$index{iomode}]}{$info->[$$index{port}]}{$reference_clock}[$pointer_base + $$conf{toindex}{tssta}{freq}] = $freq;
+   $lastruct{$info->[$$index{interface}]}{$info->[$$index{iomode}]}{$info->[$$index{port}]}{$reference_clock}[$pointer_base + $$conf{toindex}{tssta}{halfull}] = $halfull;
+   $lastruct{$info->[$$index{interface}]}{$info->[$$index{iomode}]}{$info->[$$index{port}]}{$reference_clock}[$pointer_base + $$conf{toindex}{tssta}{tss}] = $tss;
+   $lastruct{$info->[$$index{interface}]}{$info->[$$index{iomode}]}{$info->[$$index{port}]}{$reference_clock}[$pointer_base + $$conf{toindex}{tssta}{sta}] = "internal:sta_$counter!A1\@$sta";
+
+   open(my $stapaths, ">", "$conf->{_workdir}/sta_$counter.lof") || die "(stan)(tssio) -E- Can't write open $conf->{_workdir}/sta_$counter.lof,";
+   print {$stapaths} "=consolidated_ns=\n";
+   print {$stapaths} "@$_\n" foreach (@$a2d);
+   print {$stapaths} "=consolidated_ns_end=\n";
+   close($stapaths);
+
+   ++$counter;
+  }
+ );
+
+ open(my $tss, ">", "$conf->{_workdir}/tssio.lof") || die "(stan)(tssio) -E- Can't write open $conf->{_workdir}/tssio.lof,";
+ print {$tss} "=tssio=\n";
+ print {$tss} "@{$$conf{header_1stpart}} " . join(" ", (@{$$conf{header_varpart}}) x 3) . "\n";
+ HUtils::Recurse(\%lastruct, sub {
+  my ($info, $tssdata) = @_;
+  my $maxcnt = 3 * 2 * 2 * 4;
+  my @a = ('-') x $maxcnt;
+  foreach (0 .. $maxcnt - 1) {
+   $a[$_] = $$tssdata[$_] if $$tssdata[$_]
+  }
+
+  print {$tss} "@$info @a\n";
+ });
+
+ print {$tss} "=tssio_end=\n";
+ close($tss);
  return
 }
 
