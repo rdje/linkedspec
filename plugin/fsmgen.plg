@@ -17,7 +17,6 @@ interface_object {
 }
 
 get_instance_name          {my ($iname) = map {m/(\w+)/o} grep {!ref && m/^:[[:alpha:]]/o} @{$_[0]}; $iname}
-getop_plugin_list          {require FSMGen; FSMGen::getop_plugin_list(@_)}
 
 override_interface_objects {my %ov = map {$$_[0] => $_} grep {defined} map {interface_object ($_)} map {s/=//o; $_} grep {!ref && m/^=/o} @{$_[0]}; \%ov}
 interface_objects          {

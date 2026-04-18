@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-18 - Plugin runtime: remove obsolete FSMGen plugin-list wrapper
+
+- deleted the legacy `getop_plugin_list` compatibility subdef from `plugin/fsmgen.plg` now that repo-owned dynamic plugin-list parsing already uses `FSMGen::getop_plugin_list(...)` directly,
+- confirmed no repo-owned `.plg` file still calls `getop_plugin_list(...)` as a legacy action name,
+- preserved direct `FSMGen` regression coverage for `+type=plugin#args...` bucket parsing, default/injected resolver behavior, unresolved-name no-op fallback, and staying clear of eager `PPlugin` loading while updating `pplugin` coverage so `fsmgen.plg` no longer exposes the removed helper coderef.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-18 - Plugin runtime: remove obsolete RTL/FSM header helper wrapper
 
 - deleted the legacy `add_header_n_context_clause` compatibility subdef from `plugin/fsmgen.plg` now that repo-owned RTL/FSM generation calls `RTLUtils::add_header_n_context_clause(...)` directly,
@@ -64,7 +77,7 @@ Detailed technical history of changes prepared for commit.
 ## 2026-04-17 - Plugin runtime: move FSMGen plugin-list lookup to owner
 
 - moved the historical `+type=plugin#args...` dynamic plugin-list parser out of `plugin/fsmgen.plg::getop_plugin_list` and into `FSMGen::getop_plugin_list(...)`,
-- kept `plugin/fsmgen.plg::getop_plugin_list` as a thin compatibility wrapper that delegates to the package owner,
+- at that step, kept `plugin/fsmgen.plg::getop_plugin_list` as a thin compatibility wrapper that delegated to the package owner; the newer 2026-04-18 note above records that the obsolete wrapper has since been deleted,
 - preserved the old `LinkedSpec::get_plugin(...)` default resolver and unresolved-plugin no-op fallback while allowing tests and package callers to inject an explicit resolver,
 - extended source, `pplugin` AST, and subprocess behavior coverage for plugin bucket construction, argument preservation, wrapper delegation, and keeping the package-owner path clear of eager `PPlugin` loading.
 
