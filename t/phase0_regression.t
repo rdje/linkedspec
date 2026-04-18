@@ -4234,16 +4234,17 @@ PERL
     like($out, qr/__LOG_HAS_DATA__=1/, 'QC::Flow budget helper preserves data-port log output');
     unlike($err, qr/PPlugin|Can't locate QC\/Flow\.pm/, 'QC::Flow budget-check subprocess stays clear of legacy plugin runtime issues');
 };
-subtest 'qcflow_tcl_interconnect_helpers_move_to_qc_tcl_package_owner' => sub {
-    plan tests => 41;
+subtest 'qcflow_tcl_interconnect_helpers_live_under_qc_tcl_package_owner' => sub {
+    plan tests => 33;
 
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $qc_tcl_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'QC', 'TclInterconn.pm'));
-    my $qcflow_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'qcflow.plg'));
-    my $tcl4interconn_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'tcl4interconn.plg'));
+    my $qcflow_plugin = slurp(File::Spec->catfile($plugin_dir, 'qcflow.plg'));
+    my $tcl4interconn_plugin_path = File::Spec->catfile($plugin_dir, 'tcl4interconn.plg');
 
     ok(defined($qc_tcl_pm) && length($qc_tcl_pm), 'QC::TclInterconn package owner source is available');
     ok(defined($qcflow_plugin) && length($qcflow_plugin), 'qcflow.plg source is available for Tcl/FANX migration inspection');
-    ok(defined($tcl4interconn_plugin) && length($tcl4interconn_plugin), 'tcl4interconn.plg compatibility wrapper source is available');
+    ok(!-e $tcl4interconn_plugin_path, 'tcl4interconn.plg wrapper is removed after repo-owned callers moved to QC::TclInterconn directly');
     like($qc_tcl_pm, qr/package QC::TclInterconn;/, 'QC::TclInterconn declares the expected package');
     like($qc_tcl_pm, qr/sub append_interconnect_tcl\b/, 'QC::TclInterconn owns the Tcl interconnect writer');
     like($qc_tcl_pm, qr/sub load_fanx\b/, 'QC::TclInterconn owns the FANX loader');
@@ -4257,23 +4258,20 @@ subtest 'qcflow_tcl_interconnect_helpers_move_to_qc_tcl_package_owner' => sub {
     unlike($qcflow_plugin, qr/LinkedSpec::get_plugin\('(?:tcl4interconn|tcl4fanx|get_fanxinfo)'\)/, 'qcflow.plg no longer uses plugin lookup for Tcl/FANX helpers');
     unlike($qcflow_plugin, qr/use LinkedSpec;/, 'qcflow.plg no longer loads LinkedSpec just for Tcl/FANX helper lookup');
 
-    like($tcl4interconn_plugin, qr/use QC::TclInterconn;/, 'tcl4interconn.plg loads the QC Tcl/FANX owner');
-    like($tcl4interconn_plugin, qr/QC::TclInterconn::append_interconnect_tcl/, 'tcl4interconn.plg delegates tcl4interconn to the package owner');
-    like($tcl4interconn_plugin, qr/QC::TclInterconn::load_fanx/, 'tcl4interconn.plg delegates tcl4fanx to the package owner');
-    like($tcl4interconn_plugin, qr/QC::TclInterconn::fanx_info/, 'tcl4interconn.plg delegates get_fanxinfo to the package owner');
-
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for QC Tcl/FANX migrated plugin smoke');
     my $qcflow_ast = eval { $parser->(\$qcflow_plugin) };
     ok(!$@, 'qcflow plugin still parses without die after Tcl/FANX migration') or diag(normalize_error($@));
     ok(defined($qcflow_ast) && ref($qcflow_ast) eq 'HASH', 'qcflow plugin still returns a hash AST after Tcl/FANX migration');
-    my $tcl4interconn_ast = eval { $parser->(\$tcl4interconn_plugin) };
-    ok(!$@, 'tcl4interconn compatibility wrapper still parses without die after package-owner migration') or diag(normalize_error($@));
-    ok(defined($tcl4interconn_ast) && ref($tcl4interconn_ast) eq 'HASH', 'tcl4interconn compatibility wrapper still returns a hash AST');
-    is_deeply([sort keys %$tcl4interconn_ast], [qw(get_fanxinfo tcl4fanx tcl4interconn)], 'tcl4interconn wrapper still exposes the legacy Tcl/FANX plugin names');
-    is(ref($tcl4interconn_ast->{tcl4interconn}), 'CODE', 'tcl4interconn wrapper still exposes tcl4interconn as a coderef');
-    is(ref($tcl4interconn_ast->{tcl4fanx}), 'CODE', 'tcl4interconn wrapper still exposes tcl4fanx as a coderef');
-    is(ref($tcl4interconn_ast->{get_fanxinfo}), 'CODE', 'tcl4interconn wrapper still exposes get_fanxinfo as a coderef');
+    ok(!exists $qcflow_ast->{tcl4interconn} && !exists $qcflow_ast->{tcl4fanx} && !exists $qcflow_ast->{get_fanxinfo}, 'qcflow plugin no longer exposes legacy Tcl/FANX helper names as coderefs');
+
+    my @legacy_qc_tcl_hits;
+    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
+        my $source = slurp($plugin_file);
+        push @legacy_qc_tcl_hits, basename($plugin_file)
+            if $source =~ /(?<!::)\b(?:tcl4interconn|tcl4fanx|get_fanxinfo)\s*\(/;
+    }
+    is_deeply(\@legacy_qc_tcl_hits, [], 'repo-owned plugin files no longer depend on legacy Tcl/FANX action wrappers');
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 BEGIN {

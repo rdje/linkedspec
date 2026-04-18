@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-18 - Plugin runtime: remove obsolete QC Tcl/FANX wrapper
+
+- deleted `plugin/tcl4interconn.plg` now that repo-owned callers use `QC::TclInterconn::append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)` directly,
+- kept `plugin/qcflow.plg::glc_xcel2hm` on explicit QC package-owner calls and confirmed no repo-owned `.plg` file still calls `tcl4interconn(...)`, `tcl4fanx(...)`, or `get_fanxinfo(...)` as legacy actions,
+- preserved direct `QC::TclInterconn` regression coverage for Tcl snippet generation, FANX loading, table-tree allocation, display formatting, and staying clear of eager `PPlugin` loading while removing the standalone wrapper from the shipped legacy plugin corpus.
+
+- Validation:
+  - `perl -c -Iperl perl/QC/TclInterconn.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-18 - Plugin runtime: move tssio action to Timing::SetupHold
 
 - moved the historical `tssio` report/action body out of `plugin/tssio.plg` and into timing-domain owner `Timing::SetupHold::write_tssio(...)`,
@@ -53,7 +67,7 @@ Detailed technical history of changes prepared for commit.
 
 - moved the historical `tcl4interconn`, `tcl4fanx`, and `get_fanxinfo` helper bodies into QC-domain owner `QC::TclInterconn` as `append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)`,
 - migrated `plugin/qcflow.plg::glc_xcel2hm` to call `QC::TclInterconn` directly for Tcl interconnect generation, FANX loading, and FANX display formatting instead of resolving those helpers through `LinkedSpec::get_plugin(...)`,
-- kept `plugin/tcl4interconn.plg` as a thin compatibility wrapper for the three legacy plugin names while removing the dynamic lookup from repo-owned QC flow execution,
+- at that step, kept `plugin/tcl4interconn.plg` as a thin compatibility wrapper for the three legacy plugin names while removing the dynamic lookup from repo-owned QC flow execution; the newer 2026-04-18 note above records that the wrapper has since been deleted,
 - extended source, `pplugin` AST, and direct package-behavior regression coverage for Tcl generation, FANX parsing, FANX table-tree allocation, fallback display, and staying clear of eager `PPlugin` loading.
 
 - Validation:
