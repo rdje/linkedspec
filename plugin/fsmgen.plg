@@ -395,10 +395,6 @@ helper_find_signalport_size {my ($cr, $acneb_2modpin, $nodename, $acebn, $type) 
 }
 
 
-# Build the library and use clauses
-add_header_n_context_clause {require RTLUtils; RTLUtils::add_header_n_context_clause(@_)}
-
-
 get_entity_file_name       {
   string_substitute(get_leaf($_[0], 'entity_file_name_template')                                            , 
   	             module_name        => $_[1]                                                            ,

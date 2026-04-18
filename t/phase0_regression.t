@@ -3714,11 +3714,12 @@ PERL
     like($out, qr/__LEAF__=filtered_payload/, 'TableSort GenericFilter preserves the package-owner callback payload');
 };
 subtest 'rtlutils_add_header_paths_use_package_owner' => sub {
-    plan tests => 7;
+    plan tests => 12;
 
+    my $plugin_dir = File::Spec->catdir($Bin, '..', 'plugin');
     my $rtlutils_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'RTLUtils.pm'));
     my $fsmgen_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'FSMGen.pm'));
-    my $fsmgen_plugin = slurp(File::Spec->catfile($Bin, '..', 'plugin', 'fsmgen.plg'));
+    my $fsmgen_plugin = slurp(File::Spec->catfile($plugin_dir, 'fsmgen.plg'));
 
     like($rtlutils_pm, qr/sub add_header_n_context_clause\b/, 'RTLUtils owns the VHDL header/context-clause helper');
     is(scalar(() = $rtlutils_pm =~ /RTLUtils::add_header_n_context_clause\(/g), 2, 'RTLUtils header-generation paths call the package-owned header/context helper directly');
@@ -3726,7 +3727,22 @@ subtest 'rtlutils_add_header_paths_use_package_owner' => sub {
     unlike($rtlutils_pm, qr/PPlugin->exec_plugin_name\('add_header_n_context_clause'/, 'RTLUtils no longer routes add_header_n_context_clause through PPlugin explicit-name dispatch');
     is(scalar(() = $fsmgen_pm =~ /RTLUtils::add_header_n_context_clause\s*\(/g), 4, 'FSMGen package code calls the RTLUtils header/context helper directly');
     unlike($fsmgen_pm, qr/(?<!::)\badd_header_n_context_clause\s*\(/, 'FSMGen package code no longer relies on AUTOLOAD for add_header_n_context_clause');
-    like($fsmgen_plugin, qr/add_header_n_context_clause \{require RTLUtils; RTLUtils::add_header_n_context_clause\(\@_\)\}/, 'fsmgen.plg keeps add_header_n_context_clause as a thin compatibility wrapper');
+    unlike($fsmgen_plugin, qr/\badd_header_n_context_clause\s*\{/, 'fsmgen.plg no longer exposes add_header_n_context_clause as a legacy plugin subdef');
+
+    my $parser = LinkedSpec::get_parser('pplugin');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created for RTLUtils add_header migration smoke');
+    my $fsmgen_ast = eval { $parser->(\$fsmgen_plugin) };
+    ok(!$@, 'fsmgen.plg still parses without die after add_header compatibility wrapper removal') or diag(normalize_error($@));
+    ok(defined($fsmgen_ast) && ref($fsmgen_ast) eq 'HASH', 'fsmgen.plg still returns a hash AST after add_header compatibility wrapper removal');
+    ok(!exists $fsmgen_ast->{add_header_n_context_clause}, 'fsmgen.plg no longer exposes add_header_n_context_clause as a coderef');
+
+    my @legacy_add_header_hits;
+    foreach my $plugin_file (discover_dir_files_by_suffix($plugin_dir, '.plg')) {
+        my $source = slurp($plugin_file);
+        push @legacy_add_header_hits, basename($plugin_file)
+            if $source =~ /(?<!::)\badd_header_n_context_clause\s*\(/;
+    }
+    is_deeply(\@legacy_add_header_hits, [], 'repo-owned plugin files no longer depend on the legacy add_header_n_context_clause action wrapper');
 };
 subtest 'rtlutils_drive_entity_component_uses_header_package_owner' => sub {
     plan tests => 7;

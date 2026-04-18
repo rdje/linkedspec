@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-18 - Plugin runtime: remove obsolete RTL/FSM header helper wrapper
+
+- deleted the legacy `add_header_n_context_clause` compatibility subdef from `plugin/fsmgen.plg` now that repo-owned RTL/FSM generation calls `RTLUtils::add_header_n_context_clause(...)` directly,
+- confirmed no repo-owned `.plg` file still calls `add_header_n_context_clause(...)` as a legacy action name,
+- preserved direct `RTLUtils` regression coverage for header/context-clause generation and added `pplugin` coverage that `fsmgen.plg` no longer exposes the removed helper coderef.
+
+- Validation:
+  - `perl -c -Iperl perl/RTLUtils.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-18 - Plugin runtime: remove obsolete QC Tcl/FANX wrapper
 
 - deleted `plugin/tcl4interconn.plg` now that repo-owned callers use `QC::TclInterconn::append_interconnect_tcl(...)`, `load_fanx(...)`, and `fanx_info(...)` directly,
@@ -84,7 +98,7 @@ Detailed technical history of changes prepared for commit.
 
 - moved the historical `add_header_n_context_clause` VHDL header/context-clause helper into `RTLUtils::add_header_n_context_clause(...)`,
 - migrated `RTLUtils` entity/architecture generation and `FSMGen.pm` package code to call the package owner directly instead of routing known header generation through `LinkedSpec::run_plugin(...)` / AUTOLOAD,
-- kept `plugin/fsmgen.plg::add_header_n_context_clause` as a thin compatibility wrapper that delegates to `RTLUtils` for any remaining legacy plugin-name caller,
+- at that step, kept `plugin/fsmgen.plg::add_header_n_context_clause` as a thin compatibility wrapper that delegated to `RTLUtils` for any remaining legacy plugin-name caller; the newer 2026-04-18 note above records that the obsolete wrapper has since been deleted,
 - extended source and runtime regression coverage for the package-owned header/context helper, including corporate-header substitution, context clauses, user package clauses, and staying clear of eager `PPlugin` loading.
 
 - Validation:
