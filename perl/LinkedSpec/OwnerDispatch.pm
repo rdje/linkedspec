@@ -7,8 +7,10 @@ package LinkedSpec::OwnerDispatch;
 
 use 5.010;
 BEGIN {
+ require Cwd;
  require File::Basename;
- my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ my $module_file = Cwd::abs_path(__FILE__) || __FILE__;
+ my $module_dir = (File::Basename::fileparse($module_file))[1];
  my $perl_root = File::Basename::dirname($module_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }

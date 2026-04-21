@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: remove single-use helper-owner wrappers and harden lazy loads
+
+- deleted single-use local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Trace.pm`, `perl/LinkedSpec/Validation.pm`, `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`, and `perl/LinkedSpec/ActionIR/StatementSplit.pm`,
+- kept the helper entrypoints intact while spending the shared seam directly inside those live helper bodies: `Trace::_trace_stringify(...)`, `Validation::_trace_log_output(...)`, `CanonicalEvents::_require_canonical_events_core_pkg(...)` / `_canonicalize_helper_action_ir_event(...)`, and `StatementSplit::_require_statement_split_core_pkg(...)` / `_split_action_ir_statements(...)` now call `LinkedSpec::OwnerDispatch` inline instead of bouncing through one-off local wrappers,
+- hardened `LinkedSpec::OwnerDispatch` lazy package loading so it seeds the repo `perl` root as an absolute `@INC` entry at module load time, which keeps later owner `require` calls working after tests or callers `chdir(...)` away from the repository root,
+- updated phase0 owner-dispatch coverage so those helper owners are now locked against reintroducing single-use package-loader or `$@`-preservation wrappers where the direct `OwnerDispatch` call is already the real path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Trace.pm`
+  - `perl -c -Iperl perl/LinkedSpec/Validation.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/CanonicalEvents.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: remove dead runtime/bootstrap/scanner wrappers
 
 - deleted unused local `_require_pkg(...)` pass-through helpers from `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/BootstrapSpec.pm`, and `perl/LinkedSpec/ActionIR/Scanner.pm`, plus the unused local `_require_trace_pkg(...)` wrapper from `perl/LinkedSpec/RuleIR/EmitContext.pm`,

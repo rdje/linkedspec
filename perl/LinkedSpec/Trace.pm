@@ -28,29 +28,6 @@ our $TRACE_INDENT_WIDTH = 2;
 our $TRACE_TOPIC_SPACING = 1;
 our $TRACE_INITIALIZED = 0;
 
-#------------------------------------------------------------------------------
-# Function: _require_data_dumper_pkg
-# Purpose : Lazy-load `Data::Dumper` through the shared owner-dispatch helper
-#           before structured trace stringification.
-# Args    : none
-# Returns : true on success
-#------------------------------------------------------------------------------
-sub _require_data_dumper_pkg {
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper')
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute a callback while preserving caller `$@` through successful
-#           completion.
-# Args    : ($cb)
-# Returns : callback result in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _trace_trim {
  my ($value) = @_;
  return undef unless defined $value;
@@ -107,8 +84,8 @@ sub _trace_stringify {
  return undef unless defined $value;
  return $value unless ref($value);
 
- return _call_preserving_err(sub {
-  _require_data_dumper_pkg();
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper');
   local $Data::Dumper::Terse = 1;
   local $Data::Dumper::Indent = 0;
   local $Data::Dumper::Sortkeys = 1;

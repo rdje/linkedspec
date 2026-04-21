@@ -16,33 +16,9 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one statement-split dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
 sub _require_statement_split_core_pkg {
- return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Core')
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           statement-split helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core');
+ return 'LinkedSpec::ActionIR::StatementSplit::Core'
 }
 
 sub _require_dep {
@@ -68,7 +44,7 @@ sub _split_action_ir_statements {
  my ($code, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
  my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_statement_split_core_pkg();
   return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
  })

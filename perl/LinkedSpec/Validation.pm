@@ -19,16 +19,6 @@ use constant {
  DUMP_LOW  => 100,
 };
 
-sub _require_trace_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
- return 1
-}
-
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _call_compiler_state {
  my ($subname, @args) = @_;
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
@@ -36,8 +26,8 @@ sub _call_compiler_state {
 
 sub _trace_log_output {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_output(@args)
  })
 }

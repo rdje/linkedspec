@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 170;
+    plan tests => 174;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1201,8 +1201,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($linkedspec_pm, qr/sub _call_preserving_err\b/, 'LinkedSpec.pm no longer carries an unused local $@-preservation wrapper');
     like($linkedspec_pm, qr/sub _dispatch_owner_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, \$pkg, \$subname, \@args\)/s, 'LinkedSpec.pm now routes facade owner dispatch through OwnerDispatch');
     like($trace_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Trace.pm now loads the shared owner-dispatch helper');
-    like($trace_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'Trace.pm now routes Data::Dumper loading through OwnerDispatch');
-    like($trace_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Trace.pm now routes $@ preservation through OwnerDispatch');
+    unlike($trace_pm, qr/sub _require_data_dumper_pkg\b/, 'Trace.pm no longer carries an unused single-use Data::Dumper loader wrapper');
+    unlike($trace_pm, qr/sub _call_preserving_err\b/, 'Trace.pm no longer carries an unused single-use $@-preservation wrapper');
+    like($trace_pm, qr/sub _trace_stringify\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'Trace.pm now spends OwnerDispatch directly inside _trace_stringify');
     like($runtime_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Runtime.pm now loads the shared owner-dispatch helper');
     unlike($runtime_pm, qr/sub _require_pkg\b/, 'Runtime.pm no longer carries an unused local package-loader wrapper');
     like($runtime_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'Runtime.pm now routes compiler callback lookup through OwnerDispatch');
@@ -1262,15 +1263,17 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\)/s, 'ScannerCore.pm now loads scanner rule families through the shared family registry');
     like($scanner_core_pm, qr/sub _with_scanner_rule_deps\b.*reverse _scanner_rule_family_packages\(\)/s, 'ScannerCore.pm now rebinds scanner-rule helpers by iterating the shared family registry');
     like($statement_split_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit.pm now loads the shared owner-dispatch helper');
-    like($statement_split_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit.pm now routes lazy package loading through OwnerDispatch');
-    like($statement_split_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'StatementSplit.pm now routes $@ preservation through OwnerDispatch');
+    unlike($statement_split_pm, qr/sub _require_pkg\b/, 'StatementSplit.pm no longer carries an unused single-use package-loader wrapper');
+    unlike($statement_split_pm, qr/sub _call_preserving_err\b/, 'StatementSplit.pm no longer carries an unused single-use $@-preservation wrapper');
+    like($statement_split_pm, qr/sub _require_statement_split_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core'\)/s, 'StatementSplit.pm now spends OwnerDispatch directly inside its core-loader helper');
     unlike($statement_split_pm, qr/sub _require_pkg_cb\b/, 'StatementSplit.pm no longer carries an unused local callback-loader wrapper');
     like($statement_split_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'StatementSplit.pm now assembles its default dependency map through OwnerDispatch');
     like($statement_split_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit/Core.pm now loads the shared owner-dispatch helper');
     like($statement_split_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit/Core.pm now routes lazy package loading through OwnerDispatch');
     like($canonical_events_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'CanonicalEvents.pm now loads the shared owner-dispatch helper');
-    like($canonical_events_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'CanonicalEvents.pm now routes lazy package loading through OwnerDispatch');
-    like($canonical_events_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'CanonicalEvents.pm now routes $@ preservation through OwnerDispatch');
+    unlike($canonical_events_pm, qr/sub _require_pkg\b/, 'CanonicalEvents.pm no longer carries an unused single-use package-loader wrapper');
+    unlike($canonical_events_pm, qr/sub _call_preserving_err\b/, 'CanonicalEvents.pm no longer carries an unused single-use $@-preservation wrapper');
+    like($canonical_events_pm, qr/sub _require_canonical_events_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core'\)/s, 'CanonicalEvents.pm now spends OwnerDispatch directly inside its core-loader helper');
     unlike($canonical_events_pm, qr/sub _require_pkg_cb\b/, 'CanonicalEvents.pm no longer carries an unused local callback-loader wrapper');
     like($canonical_events_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'CanonicalEvents.pm now assembles its default dependency map through OwnerDispatch');
     like($diagnostics_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Diagnostics.pm now loads the shared owner-dispatch helper');
@@ -1317,8 +1320,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($resolver_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Resolver.pm now routes Trace loading through OwnerDispatch');
     like($resolver_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Resolver.pm now routes $@ preservation through OwnerDispatch');
     like($validation_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Validation.pm now loads the shared owner-dispatch helper');
-    like($validation_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Validation.pm now routes Trace loading through OwnerDispatch');
-    like($validation_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'Validation.pm now routes $@ preservation through OwnerDispatch');
+    unlike($validation_pm, qr/sub _require_trace_pkg\b/, 'Validation.pm no longer carries an unused single-use Trace-loader wrapper');
+    unlike($validation_pm, qr/sub _call_preserving_err\b/, 'Validation.pm no longer carries an unused single-use $@-preservation wrapper');
+    like($validation_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Validation.pm now spends OwnerDispatch directly inside its trace-output helper');
     like($action_rewriter_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ActionRewriter.pm now loads the shared owner-dispatch helper');
     like(
         $action_rewriter_pm,
@@ -1377,13 +1381,13 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     require LinkedSpec::RuleIR;
     require LinkedSpec::RuleIR::EmitContext;
 
-    local *LinkedSpec::Validation::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::Resolver::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_require_rewrite_pipeline_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps = sub { return { injected => 1 } };
 
+    local $INC{'LinkedSpec/Trace.pm'} = __FILE__;
     local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
     local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
     local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
@@ -2585,7 +2589,7 @@ subtest 'trace_stringify_preserves_eval_error_state' => sub {
     no warnings 'redefine';
     require LinkedSpec::Trace;
 
-    local *LinkedSpec::Trace::_require_data_dumper_pkg = sub { return 1 };
+    local $INC{'Data/Dumper.pm'} = __FILE__;
     local *Data::Dumper::Dumper = sub { return "dump_value_ok\n" };
 
     $@ = "__SAVED_ERR__\n";

@@ -17,38 +17,14 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one canonical-events dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_canonical_events_core_pkg
 # Purpose : Lazy-load the canonical-events core owner.
 # Args    : none
 # Returns : requested package name
 #------------------------------------------------------------------------------
 sub _require_canonical_events_core_pkg {
- return _require_pkg('LinkedSpec::ActionIR::CanonicalEvents::Core')
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           canonical-events helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core');
+ return 'LinkedSpec::ActionIR::CanonicalEvents::Core'
 }
 
 sub _require_dep {
@@ -73,7 +49,7 @@ sub default_deps_for_package {
 
 sub _canonicalize_helper_action_ir_event {
  my ($label, $event, $deps) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_canonical_events_core_pkg();
   return LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event($label, $event)
  })

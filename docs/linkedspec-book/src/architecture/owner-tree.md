@@ -127,6 +127,8 @@ This matters because many LinkedSpec owners are thin wrappers around deeper impl
 
 Delegated owner calls go through that same callback-loader route too: `dispatch_owner_call(...)` resolves its target through `require_pkg_cb(...)` before invoking the coderef. That keeps lazy loading, callback validation, list-context return preservation, and successful `$@` preservation on one shared path.
 
+`OwnerDispatch` now also makes that lazy-load path `chdir(...)`-safe by seeding the repo `perl` root into `@INC` as an absolute path at module load time. That matters for file-oriented parser flows such as `get_parser(...)`, which may resolve deeper owners only after tests or callers have moved into a temp directory.
+
 Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch goes through this shared callback-loader seam. Direct callback probing is reserved for `OwnerDispatch` itself.
 
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
