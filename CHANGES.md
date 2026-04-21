@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline support-owner package loaders
+
+- deleted the single-use local generic package-loader wrappers from `perl/LinkedSpec/BootstrapSpec/Core.pm`, `perl/LinkedSpec/ActionIR/ScannerCore.pm`, and `perl/LinkedSpec/PluginBridge.pm`,
+- kept the meaningful helper entrypoints intact while spending the shared seam directly inside them: `BootstrapSpec::Core::_require_linkedre_pkg(...)`, `ScannerCore::_scanner_dispatchers(...)`, and `PluginBridge::_load_legacy_plugin_runtime(...)` now call `LinkedSpec::OwnerDispatch::require_pkg(...)` inline instead of bouncing through local `_require_pkg(...)` pass-through wrappers,
+- updated phase0 owner-dispatch coverage so those support owners are now locked against reintroducing single-use generic package-loader wrappers where the direct `OwnerDispatch` call is already the real path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -c -Iperl perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline scanner owner wrappers
 
 - deleted the local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/ActionIR/Scanner.pm`,

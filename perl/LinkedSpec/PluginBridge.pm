@@ -29,17 +29,6 @@ sub _require_dep {
 }
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one owner package through the shared dispatch helper.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
-#------------------------------------------------------------------------------
 # Function: _call_preserving_err
 # Purpose : Execute callback without clobbering caller-visible successful `$@`.
 # Args    : ($cb)
@@ -57,7 +46,7 @@ sub _call_preserving_err {
 # Returns : true on successful load
 #------------------------------------------------------------------------------
 sub _load_legacy_plugin_runtime {
- return _require_pkg('PPlugin')
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'PPlugin')
 }
 
 #------------------------------------------------------------------------------

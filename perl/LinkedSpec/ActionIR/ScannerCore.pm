@@ -17,18 +17,6 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load a package through the shared owner-dispatch helper.
-# Args    : ($pkg)
-# Returns : package name string
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_dep
 # Purpose : Resolve a required callback from a dependency hash.
 # Args    : ($deps, $name)
@@ -123,7 +111,7 @@ sub _scanner_dispatchers {
  my @dispatchers;
  no strict 'refs';
  foreach my $pkg (_scanner_rule_family_packages()) {
-  _require_pkg($pkg);
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
   push @dispatchers, \&{"${pkg}::try_scan_contract_ir_events"};
  }
  return @dispatchers

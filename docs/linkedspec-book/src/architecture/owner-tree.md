@@ -135,6 +135,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `Resolver` and `ActionIR::Scanner` now follow that same pattern for their local trace/scanner-owner helper paths too: the meaningful local helpers remain, but the live bodies spend `OwnerDispatch` directly instead of bouncing through extra local pass-through wrappers first.
 
+`BootstrapSpec::Core`, `ActionIR::ScannerCore`, and `PluginBridge` now follow the same rule for single-use package loading too: they still keep their meaningful local LinkedRE/scanner-family/legacy-runtime helper seams, but those helpers now call `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
+
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
 
 The design rule is:

@@ -16,25 +16,13 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load a package through the shared owner-dispatch helper.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_linkedre_pkg
 # Purpose : Ensure `LinkedRE` is loaded before bootstrap regex helper use.
 # Args    : none
 # Returns : true on success
 #------------------------------------------------------------------------------
 sub _require_linkedre_pkg {
- _require_pkg('LinkedRE');
- return 1
+ return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE')
 }
 
 #------------------------------------------------------------------------------

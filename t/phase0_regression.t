@@ -1226,8 +1226,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($bootstrap_spec_pm, qr/sub _require_bootstrap_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec'\)/s, 'BootstrapSpec.pm now spends OwnerDispatch directly inside its bootstrap-core loader');
     like($bootstrap_spec_pm, qr/sub build_bootstrap_spec\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'BootstrapSpec.pm now spends OwnerDispatch directly inside build_bootstrap_spec');
     like($bootstrap_spec_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'BootstrapSpec/Core.pm now loads the shared owner-dispatch helper');
-    like($bootstrap_spec_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'BootstrapSpec/Core.pm now routes lazy package loading through OwnerDispatch');
-    like($bootstrap_spec_core_pm, qr/sub _require_linkedre_pkg\b.*_require_pkg\('LinkedRE'\)/s, 'BootstrapSpec/Core.pm still resolves LinkedRE through its local helper seam');
+    unlike($bootstrap_spec_core_pm, qr/sub _require_pkg\b/, 'BootstrapSpec/Core.pm no longer carries an unused single-use package-loader wrapper');
+    like($bootstrap_spec_core_pm, qr/sub _require_linkedre_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\)/s, 'BootstrapSpec/Core.pm now spends OwnerDispatch directly inside its LinkedRE loader');
     like($bootstrap_spec_core_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'BootstrapSpec/Core.pm now routes $@ preservation through OwnerDispatch');
     like($compiler_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Compiler.pm now loads the shared owner-dispatch helper');
     like($compiler_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Compiler.pm now routes lazy package loading through OwnerDispatch');
@@ -1264,12 +1264,12 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_pm, qr/sub scan_contract_ir_events\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_scanner_core_pkg\(\).*LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events/s, 'Scanner.pm now spends OwnerDispatch directly inside its scan helper');
     unlike(join("\n", $runtime_pm, $bootstrap_spec_pm, $compiler_pm, $spec_entry_pm, $scanner_pm), qr/->can\(/, 'runtime/bootstrap/compiler/spec-entry/scanner wrappers no longer probe callbacks with local ->can checks');
     like($scanner_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ScannerCore.pm now loads the shared owner-dispatch helper');
-    like($scanner_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now routes lazy package loading through OwnerDispatch');
+    unlike($scanner_core_pm, qr/sub _require_pkg\b/, 'ScannerCore.pm no longer carries an unused single-use package-loader wrapper');
     like($scanner_core_pm, qr/sub _scanner_dep_specs\b/s, 'ScannerCore.pm now defines the shared scanner dependency contract');
     like($scanner_core_pm, qr/sub _scanner_rule_dep_bindings\b.*foreach my \$spec \(_scanner_dep_specs\(\)\)/s, 'ScannerCore.pm now builds scanner-rule bindings from the shared dependency contract');
     like($scanner_core_pm, qr/sub _scanner_rule_family_packages\b/s, 'ScannerCore.pm now defines the shared scanner-rule family registry');
     like($scanner_core_pm, qr/sub _scanner_rule_binding_symbols\b/s, 'ScannerCore.pm now defines the shared scanner-rule binding symbol registry');
-    like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\)/s, 'ScannerCore.pm now loads scanner rule families through the shared family registry');
+    like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\).*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now lazy-loads scanner rule families directly through OwnerDispatch inside the shared family-registry loop');
     like($scanner_core_pm, qr/sub _with_scanner_rule_deps\b.*reverse _scanner_rule_family_packages\(\)/s, 'ScannerCore.pm now rebinds scanner-rule helpers by iterating the shared family registry');
     like($statement_split_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit.pm now loads the shared owner-dispatch helper');
     unlike($statement_split_pm, qr/sub _require_pkg\b/, 'StatementSplit.pm no longer carries an unused single-use package-loader wrapper');
@@ -1342,10 +1342,10 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
         'ActionRewriter.pm now routes EmitContext compatibility dispatch through OwnerDispatch',
     );
     like($plugin_bridge_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'PluginBridge.pm now loads the shared owner-dispatch helper');
-    like($plugin_bridge_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'PluginBridge.pm now routes lazy package loading through OwnerDispatch');
+    unlike($plugin_bridge_pm, qr/sub _require_pkg\b/, 'PluginBridge.pm no longer carries an unused single-use package-loader wrapper');
     like($plugin_bridge_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'PluginBridge.pm now routes $@ preservation through OwnerDispatch');
     like($plugin_bridge_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'PluginBridge.pm now assembles its default dependency map through OwnerDispatch');
-    like($plugin_bridge_pm, qr/sub _load_legacy_plugin_runtime\b.*_require_pkg\('PPlugin'\)/s, 'PluginBridge.pm now routes legacy runtime loading through its shared owner-dispatch package seam');
+    like($plugin_bridge_pm, qr/sub _load_legacy_plugin_runtime\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'PPlugin'\)/s, 'PluginBridge.pm now spends OwnerDispatch directly inside its legacy runtime loader');
     like(
         $plugin_bridge_pm,
         qr/sub _resolve_registered_plugin\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(\s*__PACKAGE__,\s*'LinkedSpec::PluginRegistry',\s*'get_plugin',\s*\$plugin_name,\s*\)/s,
