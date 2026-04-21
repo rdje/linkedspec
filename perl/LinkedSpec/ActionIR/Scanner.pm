@@ -16,18 +16,6 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one scanner dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
 sub _require_scanner_core_pkg {
  _require_pkg_cb('LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
  return 1

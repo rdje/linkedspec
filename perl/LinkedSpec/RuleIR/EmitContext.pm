@@ -118,10 +118,6 @@ sub _require_value_expr_pkg {
  return _actionir_owner_package('value_expr')
 }
 
-sub _require_trace_pkg {
- return _actionir_owner_package('trace')
-}
-
 #------------------------------------------------------------------------------
 # Function: _call_preserving_err
 # Purpose : Preserve caller-visible successful `$@` while executing one

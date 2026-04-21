@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: remove dead runtime/bootstrap/scanner wrappers
+
+- deleted unused local `_require_pkg(...)` pass-through helpers from `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/BootstrapSpec.pm`, and `perl/LinkedSpec/ActionIR/Scanner.pm`, plus the unused local `_require_trace_pkg(...)` wrapper from `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+- kept the live owner-dispatch seams intact: Runtime still resolves `run_get_pipeline(...)` through `OwnerDispatch::require_pkg_cb(...)`, BootstrapSpec still resolves bootstrap-core through `require_pkg_cb(...)`, Scanner still resolves scanner-core through `require_pkg_cb(...)`, and EmitContext still lazy-loads ActionIR owners through `_actionir_owner_package(...)`,
+- updated phase0 owner-dispatch coverage so those owners are now locked against reintroducing dead local package-loader or trace-loader wrappers around their active shared-dispatch paths.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: drop dead dep-map ActionIR wrappers
 
 - deleted unused local `_require_pkg(...)` and `_call_preserving_err(...)` pass-through helpers from the dep-map-only ActionIR owners `RewritePipeline`, `Diagnostics`, `ValueExpr`, `FlowExpr`, `ArrayPipeline`, `ControlFlow`, `Contracts`, `MethodLowering`, and `DeclareMethod`,

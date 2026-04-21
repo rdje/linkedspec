@@ -15,17 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one owner package through the shared dispatch utility.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_pkg_cb
 # Purpose : Lazy-load one runtime dependency owner and resolve one callback
 #           through the shared owner-dispatch seam.
