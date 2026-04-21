@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline Resolver trace wrappers
+
+- deleted the local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Resolver.pm`,
+- kept the helper entrypoints intact while spending the shared seam directly inside the live trace helper bodies: `Resolver::_trace_log_output(...)`, `_trace_exit(...)`, and `_trace_decision(...)` now call `LinkedSpec::OwnerDispatch` inline for Trace loading and successful `$@` preservation instead of bouncing through local `_require_trace_pkg(...)` / `_call_preserving_err(...)` wrappers,
+- updated phase0 owner-dispatch coverage so `Resolver.pm` is now locked against reintroducing those local trace-loader or `$@` pass-through wrappers where the direct `OwnerDispatch` call is already the real path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Resolver.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline one-shot runtime/bootstrap/parser-factory wrappers
 
 - deleted one-shot local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/BootstrapSpec.pm`, and `perl/LinkedSpec/ParserFactory.pm`,

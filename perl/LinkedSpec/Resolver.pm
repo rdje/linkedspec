@@ -20,36 +20,26 @@ use constant {
  DUMP_MEDIUM => 200,
 };
 
-sub _require_trace_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
- return 1
-}
-
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _trace_log_output {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_output(@args)
  })
 }
 
 sub _trace_exit {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_exit(@args)
  })
 }
 
 sub _trace_decision {
  my @args = @_;
- return _call_preserving_err(sub {
-  _require_trace_pkg();
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_decision(@args)
  })
 }

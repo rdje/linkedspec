@@ -179,6 +179,8 @@ get_parser('vhdl') should be able to find specs/vhdl.spec
 
 That responsibility is different from plugin lookup. Spec resolution should stay deterministic and file-oriented. It should not be confused with the legacy dynamic plugin system.
 
+Its small trace-reporting helpers now spend `LinkedSpec::OwnerDispatch` directly for lazy `Trace` loading and successful `$@` preservation, so the resolver owner no longer carries a separate local trace-wrapper layer on top of the shared seam.
+
 ## `Runtime`
 
 `LinkedSpec::Runtime` owns the source-oriented public path:
