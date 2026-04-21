@@ -15,29 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Lazy-load one runtime dependency owner and resolve one callback
-#           through the shared owner-dispatch seam.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _build_runtime_context
 # Purpose : Prepare the runtime-owned mutable context used by `run_get(...)`.
 # Args    : ($option_hashref)
@@ -129,7 +106,7 @@ sub _describe_run_get_pipeline_result {
 }
 
 sub _run_get_pipeline_cb {
- return _require_pkg_cb('LinkedSpec::Compiler', 'run_get_pipeline')
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline')
 }
 
 #------------------------------------------------------------------------------
@@ -146,7 +123,7 @@ sub run_get {
  my $generate_only = $option->{generate_only} ? 1 : 0;
 
  my $runtime_ctx = _build_runtime_context($option);
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $ret = eval {
    my $run_get_pipeline = _run_get_pipeline_cb();
    return $run_get_pipeline->(

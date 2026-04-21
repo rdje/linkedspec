@@ -29,17 +29,6 @@ sub _require_dep {
 }
 
 #------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_value_dep
 # Purpose : Validate and return one injected dependency value by name.
 # Args    : ($deps, $name)
@@ -185,7 +174,7 @@ sub _parser_factory_handler_source_label {
 #------------------------------------------------------------------------------
 sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
   my $runtime_ctx = _prepare_runtime_ctx_for_get_parser(\%opt_hash, spec_name => $spec_name);
   my ($apply_trace_options, $trace_enter, $trace_exit, $trace_decision, $validate_spec_name,

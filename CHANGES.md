@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline one-shot runtime/bootstrap/parser-factory wrappers
+
+- deleted one-shot local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Runtime.pm`, `perl/LinkedSpec/BootstrapSpec.pm`, and `perl/LinkedSpec/ParserFactory.pm`,
+- kept the public/helper entrypoints intact while spending the shared seam directly inside the live orchestration bodies: `Runtime::_run_get_pipeline_cb(...)` plus `run_get(...)`, `BootstrapSpec::_require_bootstrap_core_pkg(...)` plus `build_bootstrap_spec(...)`, and `ParserFactory::run_get_parser(...)` now call `LinkedSpec::OwnerDispatch` inline instead of bouncing through one-use local wrappers,
+- updated phase0 owner-dispatch coverage so those owners are now locked against reintroducing single-use callback-loader or `$@`-preservation wrappers where the direct `OwnerDispatch` call is already the real path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: remove single-use helper-owner wrappers and harden lazy loads
 
 - deleted single-use local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Trace.pm`, `perl/LinkedSpec/Validation.pm`, `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`, and `perl/LinkedSpec/ActionIR/StatementSplit.pm`,

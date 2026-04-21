@@ -16,11 +16,6 @@ use LinkedSpec::OwnerDispatch ();
 
 my $CACHED_BOOTSTRAP_STATE;
 
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
 #------------------------------------------------------------------------------
 # Function: _require_bootstrap_core_pkg
 # Purpose : Lazy-load the extracted bootstrap-core owner.
@@ -28,19 +23,8 @@ sub _require_pkg_cb {
 # Returns : true when `BootstrapSpec::Core` is available
 #------------------------------------------------------------------------------
 sub _require_bootstrap_core_pkg {
- _require_pkg_cb('LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec');
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec');
  return 1
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 #------------------------------------------------------------------------------
@@ -52,7 +36,7 @@ sub _call_preserving_err {
 #------------------------------------------------------------------------------
 sub build_bootstrap_spec {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_bootstrap_core_pkg();
   return LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec(@args)
  })
