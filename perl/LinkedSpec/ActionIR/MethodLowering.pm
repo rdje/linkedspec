@@ -17,18 +17,6 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load a package through the shared owner-dispatch helper.
-# Args    : ($pkg)
-# Returns : package name string
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_dep
 # Purpose : Resolve a required callback from a dependency hash.
 # Args    : ($deps, $name)
@@ -40,18 +28,6 @@ sub _require_dep {
  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
   unless ref($cb) eq 'CODE';
  return $cb
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute a callback while preserving caller `$@` through successful
-#           completion.
-# Args    : ($cb)
-# Returns : callback result in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 #------------------------------------------------------------------------------

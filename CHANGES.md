@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: drop dead dep-map ActionIR wrappers
+
+- deleted unused local `_require_pkg(...)` and `_call_preserving_err(...)` pass-through helpers from the dep-map-only ActionIR owners `RewritePipeline`, `Diagnostics`, `ValueExpr`, `FlowExpr`, `ArrayPipeline`, `ControlFlow`, `Contracts`, `MethodLowering`, and `DeclareMethod`,
+- kept those owners on their real active seam: default dependency assembly still routes through `LinkedSpec::OwnerDispatch::build_dep_map(...)`, while the now-removed wrapper bodies were no longer called anywhere in those files,
+- updated phase0 owner-dispatch source coverage so those ActionIR owners are now locked against reintroducing dead local package-loader or `$@`-preservation wrappers around that shared dependency-map path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/{RewritePipeline,Diagnostics,ValueExpr,FlowExpr,ArrayPipeline,ControlFlow,Contracts,MethodLowering,DeclareMethod}.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-21 - OwnerDispatch: remove dead facade/parser-factory pass-through wrappers
 
 - deleted unused local `_require_pkg(...)` and `_call_preserving_err(...)` pass-through helpers from `perl/LinkedSpec.pm` now that the public facade already routes its real owner delegation through `LinkedSpec::OwnerDispatch`,

@@ -16,37 +16,12 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one rewrite-pipeline dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
 sub _require_dep {
  my ($deps, $name) = @_;
  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback '$name'"
   unless ref($cb) eq 'CODE';
  return $cb
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           rewrite-pipeline helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 sub _event_continues_implicit_if_flow {

@@ -17,19 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one value-expression dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_dep
 # Purpose : Resolve one required value-expression dependency callback from the
 #           provided dependency map.
@@ -42,18 +29,6 @@ sub _require_dep {
  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
   unless ref($cb) eq 'CODE';
  return $cb
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           value-expression helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
 }
 
 #------------------------------------------------------------------------------
