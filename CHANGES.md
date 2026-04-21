@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline scanner owner wrappers
+
+- deleted the local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/ActionIR/Scanner.pm`,
+- kept the owner helper entrypoints intact while spending the shared seam directly inside the live scanner owner bodies: `Scanner::_require_scanner_core_pkg(...)`, `default_deps_for_package(...)`, and `scan_contract_ir_events(...)` now call `LinkedSpec::OwnerDispatch` inline instead of bouncing through local `_require_pkg_cb(...)` / `_call_preserving_err(...)` wrappers,
+- updated phase0 owner-dispatch coverage so `Scanner.pm` is now locked against reintroducing those local callback-loader or `$@` pass-through wrappers where the direct `OwnerDispatch` call is already the real path.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline Resolver trace wrappers
 
 - deleted the local `OwnerDispatch` pass-through wrappers from `perl/LinkedSpec/Resolver.pm`,

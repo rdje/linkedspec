@@ -17,37 +17,13 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 sub _require_scanner_core_pkg {
- _require_pkg_cb('LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
  return 1
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one scanner
-#           helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Lazy-load one scanner dependency owner and resolve one callback
-#           through the shared owner-dispatch seam.
-# Args    : ($pkg, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
 sub default_deps_for_package {
  my ($pkg) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_scanner_core_pkg();
   my @dep_specs = map {
    +{
@@ -69,7 +45,7 @@ sub default_deps_for_package {
 #------------------------------------------------------------------------------
 sub scan_contract_ir_events {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_scanner_core_pkg();
   return LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args)
  })

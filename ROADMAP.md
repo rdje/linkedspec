@@ -99,6 +99,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `OwnerDispatch` lazy package loading is now anchored to an absolute repo `perl` root at module load time, so later `chdir(...)` no longer strands `get_parser(...)` and other lazy owner paths on stale relative `@INC` entries when they need to load `ParserFactory`, `RuntimeContext`, or deeper compile/runtime owners on demand.
 - Recent landed follow-up: `Runtime.pm`, `BootstrapSpec.pm`, and `ParserFactory.pm` no longer keep one-shot local `OwnerDispatch` callback-loader or `$@`-preservation wrappers either; their live orchestration bodies now spend `OwnerDispatch` directly for the compiler/bootstrap callback and successful `$@`-preservation seams.
 - Recent landed follow-up: `Resolver.pm` no longer keeps local `_require_trace_pkg(...)` or `_call_preserving_err(...)` wrappers either; its live trace helper bodies now spend `OwnerDispatch` directly for Trace loading and successful `$@` preservation.
+- Recent landed follow-up: `ActionIR::Scanner.pm` no longer keeps local `_require_pkg_cb(...)` or `_call_preserving_err(...)` wrappers either; its live owner helper bodies now spend `OwnerDispatch` directly for `ScannerCore` callback lookup and successful `$@` preservation while `_require_scanner_core_pkg(...)` remains the meaningful local scanner-core seam.
 
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.

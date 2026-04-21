@@ -133,6 +133,8 @@ Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`,
 
 In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer keep one-shot local pass-through wrappers for the single compiler/bootstrap callback or `$@`-preservation calls inside their main orchestration helpers. Those live bodies now spend `OwnerDispatch` directly, which keeps the real seam visible instead of hiding it behind wrapper names that only had one caller.
 
+`Resolver` and `ActionIR::Scanner` now follow that same pattern for their local trace/scanner-owner helper paths too: the meaningful local helpers remain, but the live bodies spend `OwnerDispatch` directly instead of bouncing through extra local pass-through wrappers first.
+
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
 
 The design rule is:
