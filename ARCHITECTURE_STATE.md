@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-04-18`
+- Last refreshed: `2026-04-21`
 - Scope of this snapshot:
   - `perl/LinkedSpec.pm`
   - the main owner modules it dispatches into
@@ -26,6 +26,7 @@ This document is the current high-level technical reading of the project shape. 
 - Its static import tree is intentionally shallow; the real architecture is the lazy owner tree it dispatches into.
 - In practice that static tree is now almost just `File::Basename` plus `LinkedSpec::OwnerDispatch`; even the public trace globals are simple aliases into `LinkedSpec::Trace`.
 - `LinkedSpec::OwnerDispatch` is now the small shared seam for thin-wrapper lazy loading, callback/value lookup, and delegated owner calls.
+- `LinkedSpec.pm` and `LinkedSpec::ParserFactory` no longer keep dead local pass-throughs around that seam; once the active facade/parser-factory paths spent `OwnerDispatch` directly, the shadow `_require_pkg(...)`, `_call_preserving_err(...)`, `_require_pkg_cb(...)`, and `_require_pkg_value(...)` wrappers became removable compatibility debris rather than real architecture.
 - Delegated owner calls now resolve their target callbacks through the same `OwnerDispatch::require_pkg_cb(...)` loader path used by dependency maps and thin wrappers, so `dispatch_owner_call(...)` no longer carries a second symbol-call route internally.
 - Thin wrapper callback lookup now routes through that seam for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch; direct callback probing is reserved for `OwnerDispatch` itself.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
@@ -63,6 +64,7 @@ This document is the current high-level technical reading of the project shape. 
 - expose the public API,
 - lazily load owner modules,
 - preserve `$@` across owner dispatch through `LinkedSpec::OwnerDispatch`,
+- no longer carry dead local `_require_pkg(...)` / `_call_preserving_err(...)` pass-through helpers now that the shared owner-dispatch seam is the real implementation,
 - normalize flat option pairs,
 - re-export trace-oriented globals from `LinkedSpec::Trace`.
 
@@ -205,6 +207,7 @@ Project/domain utility owners
 - loads file content,
 - prepares trace/runtime context,
 - now assembles its default trace/resolve/compile callback dependencies plus trace dump-level values through one shared `OwnerDispatch` bundle helper instead of another owner-local registry,
+- no longer keeps dead local `_require_pkg(...)`, `_require_pkg_cb(...)`, or `_require_pkg_value(...)` pass-through wrappers around that now-shared dependency/owner-dispatch path,
 - delegates actual compilation to the runtime/compiler path.
 
 ### `LinkedSpec::Resolver`

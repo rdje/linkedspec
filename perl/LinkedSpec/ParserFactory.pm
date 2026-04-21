@@ -40,40 +40,6 @@ sub _call_preserving_err {
 }
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one owner package through the shared dispatch helper.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
-#------------------------------------------------------------------------------
-# Function: _require_pkg_cb
-# Purpose : Resolve one named callback from a lazily loaded owner package.
-# Args    : ($pkg, $name)
-# Returns : coderef for the requested callback
-#------------------------------------------------------------------------------
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
-#------------------------------------------------------------------------------
-# Function: _require_pkg_value
-# Purpose : Resolve one named callback from a lazily loaded owner package and
-#           invoke it to obtain a dependency value.
-# Args    : ($pkg, $name)
-# Returns : callback return value
-#------------------------------------------------------------------------------
-sub _require_pkg_value {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_value(__PACKAGE__, $pkg, $name)
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_value_dep
 # Purpose : Validate and return one injected dependency value by name.
 # Args    : ($deps, $name)

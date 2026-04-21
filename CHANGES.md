@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-21 - OwnerDispatch: remove dead facade/parser-factory pass-through wrappers
+
+- deleted unused local `_require_pkg(...)` and `_call_preserving_err(...)` pass-through helpers from `perl/LinkedSpec.pm` now that the public facade already routes its real owner delegation through `LinkedSpec::OwnerDispatch`,
+- deleted unused local `_require_pkg(...)`, `_require_pkg_cb(...)`, and `_require_pkg_value(...)` pass-through helpers from `perl/LinkedSpec/ParserFactory.pm` now that parser-factory dependency wiring already uses `LinkedSpec::OwnerDispatch::build_dep_bundle(...)` and `dispatch_owner_call(...)` directly,
+- updated phase0 owner-dispatch coverage to lock both the missing wrapper bodies and the preserved `$@` behavior on direct `OwnerDispatch` package/callback/value lookup for ParserFactory-owned paths.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `prove -Iperl t/phase0_regression.t`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-18 - Plugin runtime: remove obsolete FSMGen plugin-list wrapper
 
 - deleted the legacy `getop_plugin_list` compatibility subdef from `plugin/fsmgen.plg` now that repo-owned dynamic plugin-list parsing already uses `FSMGen::getop_plugin_list(...)` directly,

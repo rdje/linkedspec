@@ -123,28 +123,6 @@ sub should_dump {
 }
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one owner package by package name.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _dispatch_owner_call
 # Purpose : Shared facade delegator that lazy-loads an owner package and calls
 #           one named routine through it.

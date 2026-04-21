@@ -1054,7 +1054,6 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
 
     no warnings 'redefine';
 
-    local *LinkedSpec::_require_pkg = sub { return 1 };
     local *LinkedSpec::Runtime::run_get = sub { return 'parser_ok' };
     local *LinkedSpec::Compiler::build_compiled_rule_table = sub { return { compiled => 1 } };
     local *LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat = sub { return 'rewritten_ok' };
@@ -1127,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 163;
+    plan tests => 167;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1198,6 +1197,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($owner_dispatch_pm, qr/sub dispatch_owner_call\b/, 'OwnerDispatch defines the shared delegated owner-call helper');
     like($owner_dispatch_pm, qr/sub dispatch_owner_call\b.*my \$cb = require_pkg_cb\(\$owner_pkg, \$target_pkg, \$subname\).*return \$cb->\(\@args\)/s, 'OwnerDispatch delegated owner calls now reuse the shared callback loader');
     like($linkedspec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'LinkedSpec.pm now loads the shared owner-dispatch helper');
+    unlike($linkedspec_pm, qr/sub _require_pkg\b/, 'LinkedSpec.pm no longer carries an unused local package-loader wrapper');
+    unlike($linkedspec_pm, qr/sub _call_preserving_err\b/, 'LinkedSpec.pm no longer carries an unused local $@-preservation wrapper');
     like($linkedspec_pm, qr/sub _dispatch_owner_call\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, \$pkg, \$subname, \@args\)/s, 'LinkedSpec.pm now routes facade owner dispatch through OwnerDispatch');
     like($trace_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Trace.pm now loads the shared owner-dispatch helper');
     like($trace_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'Trace.pm now routes Data::Dumper loading through OwnerDispatch');
@@ -1206,7 +1207,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($runtime_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'Runtime.pm now routes lazy package loading through OwnerDispatch');
     like($runtime_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'Runtime.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($parser_factory_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ParserFactory.pm now loads the shared owner-dispatch helper');
-    like($parser_factory_pm, qr/sub _require_pkg_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$name\)/s, 'ParserFactory.pm now routes callback lookup through OwnerDispatch');
+    unlike($parser_factory_pm, qr/sub _require_pkg\b/, 'ParserFactory.pm no longer carries an unused local package-loader wrapper');
+    unlike($parser_factory_pm, qr/sub _require_pkg_cb\b/, 'ParserFactory.pm no longer carries an unused local callback-loader wrapper');
+    unlike($parser_factory_pm, qr/sub _require_pkg_value\b/, 'ParserFactory.pm no longer carries an unused local callback-value loader wrapper');
     like($parser_factory_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_bundle/s, 'ParserFactory.pm now assembles its mixed default dependency bundle through OwnerDispatch');
     like($parser_factory_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'ParserFactory.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($bootstrap_spec_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'BootstrapSpec.pm now loads the shared owner-dispatch helper');
@@ -2683,7 +2686,7 @@ subtest 'plugin_bridge_owner_wrappers_preserve_eval_error_state' => sub {
     );
     is($@, "__SAVED_ERR__\n", 'PluginBridge autoload dispatch preserves caller $@ on successful delegation');
 };
-subtest 'parser_factory_wrappers_preserve_eval_error_state' => sub {
+subtest 'parser_factory_owner_dispatch_helpers_preserve_eval_error_state' => sub {
     plan tests => 11;
 
     no warnings 'redefine';
@@ -2695,17 +2698,17 @@ subtest 'parser_factory_wrappers_preserve_eval_error_state' => sub {
     local *Synthetic::ParserFactoryLoaded::value = sub { return 'value_ok' };
 
     $@ = "__SAVED_ERR__\n";
-    ok(LinkedSpec::ParserFactory::_require_pkg('Synthetic::ParserFactoryLoaded'), 'ParserFactory package loader still succeeds for already-loaded packages');
-    is($@, "__SAVED_ERR__\n", 'ParserFactory package loader preserves caller $@ on successful load');
+    ok(LinkedSpec::OwnerDispatch::require_pkg('LinkedSpec::ParserFactory', 'Synthetic::ParserFactoryLoaded'), 'OwnerDispatch package loader still succeeds for ParserFactory-owned already-loaded packages');
+    is($@, "__SAVED_ERR__\n", 'OwnerDispatch package loader preserves caller $@ on successful load for ParserFactory-owned lookups');
 
     $@ = "__SAVED_ERR__\n";
-    my $cb = LinkedSpec::ParserFactory::_require_pkg_cb('Synthetic::ParserFactoryLoaded', 'callback');
-    is($cb->(), 'cb_ok', 'ParserFactory callback loader still returns the requested owner callback');
-    is($@, "__SAVED_ERR__\n", 'ParserFactory callback loader preserves caller $@ on successful lookup');
+    my $cb = LinkedSpec::OwnerDispatch::require_pkg_cb('LinkedSpec::ParserFactory', 'Synthetic::ParserFactoryLoaded', 'callback');
+    is($cb->(), 'cb_ok', 'OwnerDispatch callback loader still returns the requested owner callback for ParserFactory-owned lookups');
+    is($@, "__SAVED_ERR__\n", 'OwnerDispatch callback loader preserves caller $@ on successful ParserFactory-owned lookup');
 
     $@ = "__SAVED_ERR__\n";
-    is(LinkedSpec::ParserFactory::_require_pkg_value('Synthetic::ParserFactoryLoaded', 'value'), 'value_ok', 'ParserFactory value loader still returns the requested owner value');
-    is($@, "__SAVED_ERR__\n", 'ParserFactory value loader preserves caller $@ on successful lookup');
+    is(LinkedSpec::OwnerDispatch::require_pkg_value('LinkedSpec::ParserFactory', 'Synthetic::ParserFactoryLoaded', 'value'), 'value_ok', 'OwnerDispatch value loader still returns the requested owner value for ParserFactory-owned lookups');
+    is($@, "__SAVED_ERR__\n", 'OwnerDispatch value loader preserves caller $@ on successful ParserFactory-owned lookup');
 
     $@ = "__SAVED_ERR__\n";
     my $dep_bundle = LinkedSpec::OwnerDispatch::build_dep_bundle(
