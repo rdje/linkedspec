@@ -1470,6 +1470,14 @@ subtest 'pplugin_legacy_registry_loader_keeps_inline_callback_validation' => sub
     unlike($pplugin_pm, qr/sub _require_dep\b/, 'PPlugin.pm no longer carries a separate local dependency-validator wrapper');
     like($pplugin_pm, qr/sub _load_legacy_registry\b.*my \$require_dep = sub \{.*missing dependency callback '\$name'.*\$load_plugin_parser = \$require_dep->\('load_plugin_parser'\).*\$discover_plugin_files = \$require_dep->\('discover_plugin_files'\).*\$build_plugin_registry = \$require_dep->\('build_plugin_registry'\)/s, 'PPlugin.pm now keeps callback validation inline inside its legacy registry-loader seam');
 };
+subtest 'compiler_pipeline_keeps_inline_dependency_validation' => sub {
+    plan tests => 3;
+
+    my $compiler_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Compiler.pm'));
+    ok(defined($compiler_pm) && length($compiler_pm), 'Compiler.pm source is available for source-shape inspection');
+    unlike($compiler_pm, qr/sub _require_dep\b/, 'Compiler.pm no longer carries a separate local dependency-validator wrapper');
+    like($compiler_pm, qr/sub _require_runtime_ctx\b.*my \$runtime_ctx = \(ref\(\$deps\) eq 'HASH'\) \? \$deps->\{runtime_ctx\} : undef;.*\Qmissing dependency 'runtime_ctx'\E.*sub run_get_pipeline\b.*exists \$deps->\{bootstrap_parse\}.*\$bootstrap_parse = \$deps->\{bootstrap_parse\};.*\Qmissing dependency 'bootstrap_parse'\E.*exists \$deps->\{compile_spec_entry\}.*\$compile_spec_entry = \$deps->\{compile_spec_entry\};.*\Qmissing dependency 'compile_spec_entry'\E/s, 'Compiler.pm now keeps dependency validation inline inside its runtime-ctx and pipeline-setup seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

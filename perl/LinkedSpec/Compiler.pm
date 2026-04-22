@@ -23,20 +23,6 @@ use constant {
  DUMP_DEBUG  => 500,
 };
 
-#------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Fetch one named dependency from the compile-pipeline dependency map.
-# Args    : ($deps, $name)
-# Returns : dependency value
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $value = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency '$name'"
-  unless defined $value;
- return $value
-}
-
 sub _require_trace_pkg {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
  return 1
@@ -580,7 +566,9 @@ sub _normalize_parse_mode {
 
 sub _require_runtime_ctx {
  my ($deps) = @_;
- my $runtime_ctx = _require_dep($deps, 'runtime_ctx');
+ my $runtime_ctx = (ref($deps) eq 'HASH') ? $deps->{runtime_ctx} : undef;
+ die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency 'runtime_ctx'"
+  unless defined $runtime_ctx;
  die "(LinkedSpec::Compiler::_require_runtime_ctx) -E- dependency 'runtime_ctx' must be HASH ref"
   unless ref($runtime_ctx) eq 'HASH';
  return _call_runtime_ctx('prepare_runtime_ctx_for_run_get_pipeline', $runtime_ctx)
@@ -912,15 +900,23 @@ sub run_get_pipeline {
  my ($bootstrap_parse, $compile_spec_entry);
  my $pipeline_setup_ok = eval {
   $parse_mode = _normalize_parse_mode($option->{parse_mode});
-  $bootstrap_parse = exists $deps->{bootstrap_parse}
-   ? _require_dep($deps, 'bootstrap_parse')
-   : _default_bootstrap_parse_cb();
+  if (exists $deps->{bootstrap_parse}) {
+   $bootstrap_parse = $deps->{bootstrap_parse};
+   die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency 'bootstrap_parse'"
+    unless defined $bootstrap_parse;
+  } else {
+   $bootstrap_parse = _default_bootstrap_parse_cb();
+  }
   die "(LinkedSpec::Compiler::run_get_pipeline) -E- dependency 'bootstrap_parse' must be CODE"
    unless ref($bootstrap_parse) eq 'CODE';
   my $default_compile_spec_entry = _default_compile_spec_entry_cb();
-  $compile_spec_entry = exists $deps->{compile_spec_entry}
-   ? _require_dep($deps, 'compile_spec_entry')
-   : sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx, parse_mode => $parse_mode }) };
+  if (exists $deps->{compile_spec_entry}) {
+   $compile_spec_entry = $deps->{compile_spec_entry};
+   die "(LinkedSpec::Compiler::_require_dep) -E- missing dependency 'compile_spec_entry'"
+    unless defined $compile_spec_entry;
+  } else {
+   $compile_spec_entry = sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx, parse_mode => $parse_mode }) };
+  }
   _require_validation_pkg();
   1;
  };
