@@ -52,21 +52,9 @@ sub _require_linkedre_pkg {
  return 1
 }
 
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one compile
-#           helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _dump_value {
  my ($value) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_data_dumper_pkg();
   return Data::Dumper::Dumper($value)
  })
@@ -74,7 +62,7 @@ sub _dump_value {
 
 sub _ored_re {
  my (@regexes) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_linkedre_pkg();
   return LinkedRE::oredRE(@regexes)
  })
@@ -93,7 +81,7 @@ sub _get_active_dependency_regex_rule_label {
 
 sub _trace_log_output {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::log_output(@args)
  })
@@ -101,7 +89,7 @@ sub _trace_log_output {
 
 sub _trace_log_dump {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::log_dump(@args)
  })
@@ -109,7 +97,7 @@ sub _trace_log_dump {
 
 sub _trace_should_dump {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
   return LinkedSpec::Trace::should_dump(@args)
  })
@@ -117,7 +105,7 @@ sub _trace_should_dump {
 
 sub _trace_enter {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_enter(@args)
  })
@@ -125,7 +113,7 @@ sub _trace_enter {
 
 sub _trace_exit {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_exit(@args)
  })
@@ -133,7 +121,7 @@ sub _trace_exit {
 
 sub _trace_decision {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_decision(@args)
  })
@@ -141,14 +129,14 @@ sub _trace_decision {
 
 sub _trace_apply_trace_options {
  my ($option) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::_apply_trace_options($option)
  })
 }
 
 sub _trace_level_name_for_current_verbosity {
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::_trace_level_name($LinkedSpec::Trace::DUMP_VERBOSITY)
  })

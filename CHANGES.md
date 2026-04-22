@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline Compiler trace wrappers
+
+- deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/Compiler.pm`,
+- kept the meaningful helper entrypoints intact while spending the shared seam directly inside them: `Compiler::_dump_value(...)`, `_ored_re(...)`, `_trace_log_output(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_apply_trace_options(...)`, and `_trace_level_name_for_current_verbosity(...)` now call `LinkedSpec::OwnerDispatch::call_preserving_err(...)` inline instead of bouncing through a local `_call_preserving_err(...)` pass-through wrapper,
+- updated phase0 owner-dispatch coverage so `Compiler.pm` is now locked against reintroducing that local `$@` wrapper where the direct `OwnerDispatch` call is already the real compile-path trace/dump-helper seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline SpecEntry trace wrappers
 
 - deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/SpecEntry.pm`,

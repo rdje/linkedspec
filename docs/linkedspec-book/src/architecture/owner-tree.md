@@ -149,6 +149,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `PluginBridge` now follows that same rule for its compatibility dispatch helpers too: `_exec_legacy_plugin(...)`, `_get_legacy_plugin(...)`, `_lookup_plugin_name(...)`, and `_dispatch_plugin_name(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another local `_call_preserving_err(...)` shim first.
 
+`Compiler` now follows it too for its compile-path trace/dump helpers: `_dump_value(...)`, `_ored_re(...)`, `_trace_log_output(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_apply_trace_options(...)`, and `_trace_level_name_for_current_verbosity(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another local `_call_preserving_err(...)` shim first.
+
 `SpecEntry` now follows it too for its compile-path trace/dump helpers: `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, `_trace_log_dump(...)`, `_trace_should_dump(...)`, `_dump_value(...)`, and `_trace_runtime_mark_event(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another local `_call_preserving_err(...)` shim first.
 
 `RuleIR` now follows it too: `_trace_should_dump(...)`, `_trace_log_output(...)`, `_trace_decision(...)`, and `_dump_value(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another local `_call_preserving_err(...)` shim first.
