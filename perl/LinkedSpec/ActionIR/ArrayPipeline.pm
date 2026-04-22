@@ -17,21 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve one required array-pipeline dependency callback from the
-#           provided dependency map.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default array-pipeline dependency bundle for one owner
 #           package.
@@ -62,8 +47,16 @@ sub default_deps_for_package {
 #------------------------------------------------------------------------------
 sub _normalize_split_delimiter_expr {
  my ($delimiter, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $strip_literal_delimiters = _require_dep($deps, 'strip_literal_delimiters');
+ my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
+  ? $deps->{trim_action_ir_value}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
+  unless ref($trim_action_ir_value) eq 'CODE';
+ my $strip_literal_delimiters = (ref($deps->{strip_literal_delimiters}) eq 'CODE')
+  ? $deps->{strip_literal_delimiters}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'strip_literal_delimiters'"
+  unless ref($strip_literal_delimiters) eq 'CODE';
 
  $delimiter = $trim_action_ir_value->($delimiter // '');
  return '/\s*,\s*/' unless defined($delimiter) && length($delimiter);
@@ -84,11 +77,31 @@ sub _normalize_split_delimiter_expr {
 #------------------------------------------------------------------------------
 sub _build_array_pipeline_plan_from_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $is_bare_method_scope_token = _require_dep($deps, 'is_bare_method_scope_token');
- my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
+ my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
+  ? $deps->{trim_action_ir_value}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
+  unless ref($trim_action_ir_value) eq 'CODE';
+ my $extract_array_symbol_name = (ref($deps->{extract_array_symbol_name}) eq 'CODE')
+  ? $deps->{extract_array_symbol_name}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'extract_array_symbol_name'"
+  unless ref($extract_array_symbol_name) eq 'CODE';
+ my $parse_method_function_expr = (ref($deps->{parse_method_function_expr}) eq 'CODE')
+  ? $deps->{parse_method_function_expr}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'parse_method_function_expr'"
+  unless ref($parse_method_function_expr) eq 'CODE';
+ my $is_bare_method_scope_token = (ref($deps->{is_bare_method_scope_token}) eq 'CODE')
+  ? $deps->{is_bare_method_scope_token}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'is_bare_method_scope_token'"
+  unless ref($is_bare_method_scope_token) eq 'CODE';
+ my $extract_scalar_symbol_name = (ref($deps->{extract_scalar_symbol_name}) eq 'CODE')
+  ? $deps->{extract_scalar_symbol_name}
+  : undef;
+ die "(LinkedSpec::ActionIR::ArrayPipeline::_require_dep) -E- missing dependency callback 'extract_scalar_symbol_name'"
+  unless ref($extract_scalar_symbol_name) eq 'CODE';
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
