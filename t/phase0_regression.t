@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 198;
+    plan tests => 199;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1290,7 +1290,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($statement_split_pm, qr/sub _require_pkg_cb\b/, 'StatementSplit.pm no longer carries an unused local callback-loader wrapper');
     like($statement_split_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'StatementSplit.pm now assembles its default dependency map through OwnerDispatch');
     like($statement_split_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit/Core.pm now loads the shared owner-dispatch helper');
-    like($statement_split_core_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'StatementSplit/Core.pm now routes lazy package loading through OwnerDispatch');
+    unlike($statement_split_core_pm, qr/sub _require_pkg\b/, 'StatementSplit/Core.pm no longer carries an unused generic package-loader wrapper');
+    like($statement_split_core_pm, qr/sub _require_statement_split_mode_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Mode'\).*sub _require_method_expr_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr'\)/s, 'StatementSplit/Core.pm now spends OwnerDispatch directly inside its statement-split-mode and MethodExpr loaders');
     like($canonical_events_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'CanonicalEvents.pm now loads the shared owner-dispatch helper');
     unlike($canonical_events_pm, qr/sub _require_pkg\b/, 'CanonicalEvents.pm no longer carries an unused single-use package-loader wrapper');
     unlike($canonical_events_pm, qr/sub _call_preserving_err\b/, 'CanonicalEvents.pm no longer carries an unused single-use $@-preservation wrapper');

@@ -18,24 +18,14 @@ use LinkedSpec::OwnerDispatch ();
 #           and lazily loads the helper packages needed for split heuristics.
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load a package through the shared owner-dispatch helper.
-# Args    : ($pkg)
-# Returns : package name string
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
 sub _require_statement_split_mode_pkg {
- return _require_pkg('LinkedSpec::ActionIR::StatementSplit::Mode')
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Mode');
+ return 'LinkedSpec::ActionIR::StatementSplit::Mode'
 }
 
 sub _require_method_expr_pkg {
- return _require_pkg('LinkedSpec::ActionIR::MethodExpr')
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+ return 'LinkedSpec::ActionIR::MethodExpr'
 }
 
 sub _build_initial_state {

@@ -143,6 +143,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `RuleIR::EmitContext` now follows that same rule for its internal ActionIR owner-package registry: `_actionir_owner_package(...)` remains the meaningful local seam, but it now calls `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
 
+`ActionIR::StatementSplit::Core` now follows it too: `_require_statement_split_mode_pkg(...)` and `_require_method_expr_pkg(...)` remain the meaningful local seams, but they now call `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
+
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
 
 The design rule is:
