@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ActionIR: dedupe ScannerCore binding registry
+
+- deleted the redundant local `_scanner_rule_binding_symbols(...)` helper from `perl/LinkedSpec/ActionIR/ScannerCore.pm`,
+- kept the meaningful scanner-owner seams intact while shrinking the remaining contract surface: `ScannerCore::_with_scanner_rule_family_deps(...)` now derives its rebinding symbols straight from `_scanner_dep_specs()` instead of maintaining a second hardwired symbol list beside the canonical scanner dependency contract,
+- updated phase0 owner-contract coverage so `ScannerCore.pm` is now locked against reintroducing that extra binding-symbol registry where the dep-spec table is already the real source of truth for both scanner dependency assembly and scanner-rule rebinding.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline Compiler trace wrappers
 
 - deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/Compiler.pm`,

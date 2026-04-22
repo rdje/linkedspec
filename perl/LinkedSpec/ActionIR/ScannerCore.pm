@@ -47,25 +47,6 @@ sub _scanner_rule_family_packages {
 }
 
 #------------------------------------------------------------------------------
-# Function: _scanner_rule_binding_symbols
-# Purpose : Return the shared helper symbol list rebound into each scanner-rule
-#           family while contract scanning runs.
-# Args    : none
-# Returns : ordered helper-symbol list
-#------------------------------------------------------------------------------
-sub _scanner_rule_binding_symbols {
- return (
-  '_split_action_ir_statements',
-  '_trim_action_ir_value',
-  '_parse_method_function_expr',
-  '_normalize_method_args_with_optional_scope',
-  '_build_array_pipeline_plan_from_expr',
-  '_extract_declare_statement_from_method_expr',
-  '_parse_declare_binding_entry',
- )
-}
-
-#------------------------------------------------------------------------------
 # Function: _scanner_dep_specs
 # Purpose : Return the canonical scanner dependency contract shared by the
 #           scanner owner and the scanner-core rebinding path.
@@ -119,8 +100,9 @@ sub _scanner_dispatchers {
 
 #------------------------------------------------------------------------------
 # Function: _with_scanner_rule_family_deps
-# Purpose : Rebind the shared helper symbols into one scanner-rule family for
-#           the duration of one callback body.
+# Purpose : Rebind the shared helper symbols from the canonical scanner
+#           dependency contract into one scanner-rule family for the duration
+#           of one callback body.
 # Args    : ($pkg, $bindings, $body)
 # Returns : callback return value
 #------------------------------------------------------------------------------
@@ -134,7 +116,8 @@ sub _with_scanner_rule_family_deps {
   unless ref($body) eq 'CODE';
 
  my $runner = $body;
- foreach my $symbol (reverse _scanner_rule_binding_symbols()) {
+ my @binding_symbols = map { $_->{binding_symbol} } _scanner_dep_specs();
+ foreach my $symbol (reverse @binding_symbols) {
   my $cb = $bindings->{$symbol};
   die "(LinkedSpec::ActionIR::ScannerCore::_with_scanner_rule_family_deps) -E- missing bound scanner helper '$symbol'"
    unless ref($cb) eq 'CODE';

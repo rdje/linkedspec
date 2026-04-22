@@ -1303,9 +1303,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($scanner_core_pm, qr/sub _scanner_dep_specs\b/s, 'ScannerCore.pm now defines the shared scanner dependency contract');
     like($scanner_core_pm, qr/sub _scanner_rule_dep_bindings\b.*foreach my \$spec \(_scanner_dep_specs\(\)\)/s, 'ScannerCore.pm now builds scanner-rule bindings from the shared dependency contract');
     like($scanner_core_pm, qr/sub _scanner_rule_family_packages\b/s, 'ScannerCore.pm now defines the shared scanner-rule family registry');
-    like($scanner_core_pm, qr/sub _scanner_rule_binding_symbols\b/s, 'ScannerCore.pm now defines the shared scanner-rule binding symbol registry');
+    unlike($scanner_core_pm, qr/sub _scanner_rule_binding_symbols\b/, 'ScannerCore.pm no longer carries a second scanner-rule binding symbol registry beside the shared dependency contract');
     like($scanner_core_pm, qr/sub _scanner_dispatchers\b.*foreach my \$pkg \(_scanner_rule_family_packages\(\)\).*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'ScannerCore.pm now lazy-loads scanner rule families directly through OwnerDispatch inside the shared family-registry loop');
-    like($scanner_core_pm, qr/sub _with_scanner_rule_deps\b.*reverse _scanner_rule_family_packages\(\)/s, 'ScannerCore.pm now rebinds scanner-rule helpers by iterating the shared family registry');
+    like($scanner_core_pm, qr/sub _with_scanner_rule_family_deps\b.*map \{ \$_->\{binding_symbol\} \} _scanner_dep_specs\(\).*sub _with_scanner_rule_deps\b.*reverse _scanner_rule_family_packages\(\)/s, 'ScannerCore.pm now derives rebinding symbols from the shared dependency contract and still iterates the shared family registry');
     like($statement_split_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit.pm now loads the shared owner-dispatch helper');
     unlike($statement_split_pm, qr/sub _require_pkg\b/, 'StatementSplit.pm no longer carries an unused single-use package-loader wrapper');
     unlike($statement_split_pm, qr/sub _call_preserving_err\b/, 'StatementSplit.pm no longer carries an unused single-use $@-preservation wrapper');
