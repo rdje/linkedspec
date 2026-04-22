@@ -15,20 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Validate and return one injected dependency callback by name.
-# Args    : ($deps, $name)
-# Returns : coderef dependency callback
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::PluginBridge::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: _load_legacy_plugin_runtime
 # Purpose : Lazy-load the legacy `PPlugin` runtime for compatibility dispatch.
 # Args    : ()
@@ -140,8 +126,16 @@ sub _lookup_plugin_name {
  my $resolve_registered_plugin = (ref($deps->{resolve_registered_plugin}) eq 'CODE')
   ? $deps->{resolve_registered_plugin}
   : undef;
- my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
- my $get_plugin = _require_dep($deps, 'get_plugin');
+ my $load_plugin_runtime = (ref($deps->{load_plugin_runtime}) eq 'CODE')
+  ? $deps->{load_plugin_runtime}
+  : undef;
+ die "(LinkedSpec::PluginBridge::_require_dep) -E- missing dependency callback 'load_plugin_runtime'"
+  unless ref($load_plugin_runtime) eq 'CODE';
+ my $get_plugin = (ref($deps->{get_plugin}) eq 'CODE')
+  ? $deps->{get_plugin}
+  : undef;
+ die "(LinkedSpec::PluginBridge::_require_dep) -E- missing dependency callback 'get_plugin'"
+  unless ref($get_plugin) eq 'CODE';
  $plugin_name = _require_plugin_name($plugin_name);
 
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -167,8 +161,16 @@ sub _dispatch_plugin_name {
  my $resolve_registered_plugin = (ref($deps->{resolve_registered_plugin}) eq 'CODE')
   ? $deps->{resolve_registered_plugin}
   : undef;
- my $load_plugin_runtime = _require_dep($deps, 'load_plugin_runtime');
- my $exec_plugin = _require_dep($deps, 'exec_plugin');
+ my $load_plugin_runtime = (ref($deps->{load_plugin_runtime}) eq 'CODE')
+  ? $deps->{load_plugin_runtime}
+  : undef;
+ die "(LinkedSpec::PluginBridge::_require_dep) -E- missing dependency callback 'load_plugin_runtime'"
+  unless ref($load_plugin_runtime) eq 'CODE';
+ my $exec_plugin = (ref($deps->{exec_plugin}) eq 'CODE')
+  ? $deps->{exec_plugin}
+  : undef;
+ die "(LinkedSpec::PluginBridge::_require_dep) -E- missing dependency callback 'exec_plugin'"
+  unless ref($exec_plugin) eq 'CODE';
  $plugin_name = _require_plugin_name($plugin_name);
 
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {

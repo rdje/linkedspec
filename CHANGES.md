@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - Plugin runtime: inline PluginBridge callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/PluginBridge.pm`,
+- kept the meaningful local compatibility seams intact while shrinking the file-level helper surface: `PluginBridge::_lookup_plugin_name(...)` and `_dispatch_plugin_name(...)` now validate their required callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `PluginBridge.pm` is now locked against reintroducing that extra validator layer where those lookup/dispatch seams are already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ActionIR: inline ArrayPipeline callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`,

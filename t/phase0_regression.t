@@ -1446,6 +1446,14 @@ subtest 'actionir_array_pipeline_helpers_keep_inline_callback_validation' => sub
     unlike($array_pipeline_pm, qr/sub _require_dep\b/, 'ArrayPipeline.pm no longer carries a separate local dependency-validator wrapper');
     like($array_pipeline_pm, qr/sub _normalize_split_delimiter_expr\b.*my \$trim_action_ir_value = \(ref\(\$deps->\{trim_action_ir_value\}\) eq 'CODE'\).*\Qmissing dependency callback 'trim_action_ir_value'\E.*my \$strip_literal_delimiters = \(ref\(\$deps->\{strip_literal_delimiters\}\) eq 'CODE'\).*\Qmissing dependency callback 'strip_literal_delimiters'\E.*sub _build_array_pipeline_plan_from_expr\b.*my \$trim_action_ir_value = \(ref\(\$deps->\{trim_action_ir_value\}\) eq 'CODE'\).*\Qmissing dependency callback 'trim_action_ir_value'\E.*my \$extract_array_symbol_name = \(ref\(\$deps->\{extract_array_symbol_name\}\) eq 'CODE'\).*\Qmissing dependency callback 'extract_array_symbol_name'\E.*my \$parse_method_function_expr = \(ref\(\$deps->\{parse_method_function_expr\}\) eq 'CODE'\).*\Qmissing dependency callback 'parse_method_function_expr'\E.*my \$is_bare_method_scope_token = \(ref\(\$deps->\{is_bare_method_scope_token\}\) eq 'CODE'\).*\Qmissing dependency callback 'is_bare_method_scope_token'\E.*my \$extract_scalar_symbol_name = \(ref\(\$deps->\{extract_scalar_symbol_name\}\) eq 'CODE'\).*\Qmissing dependency callback 'extract_scalar_symbol_name'\E/s, 'ArrayPipeline.pm now keeps callback validation inline inside its delimiter-normalization and pipeline-planning seams');
 };
+subtest 'plugin_bridge_lookup_and_dispatch_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));
+    ok(defined($plugin_bridge_pm) && length($plugin_bridge_pm), 'PluginBridge.pm source is available for source-shape inspection');
+    unlike($plugin_bridge_pm, qr/sub _require_dep\b/, 'PluginBridge.pm no longer carries a separate local dependency-validator wrapper');
+    like($plugin_bridge_pm, qr/sub _lookup_plugin_name\b.*my \$load_plugin_runtime = \(ref\(\$deps->\{load_plugin_runtime\}\) eq 'CODE'\).*\Qmissing dependency callback 'load_plugin_runtime'\E.*my \$get_plugin = \(ref\(\$deps->\{get_plugin\}\) eq 'CODE'\).*\Qmissing dependency callback 'get_plugin'\E.*sub _dispatch_plugin_name\b.*my \$load_plugin_runtime = \(ref\(\$deps->\{load_plugin_runtime\}\) eq 'CODE'\).*\Qmissing dependency callback 'load_plugin_runtime'\E.*my \$exec_plugin = \(ref\(\$deps->\{exec_plugin\}\) eq 'CODE'\).*\Qmissing dependency callback 'exec_plugin'\E/s, 'PluginBridge.pm now keeps callback validation inline inside its lookup and dispatch seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 
