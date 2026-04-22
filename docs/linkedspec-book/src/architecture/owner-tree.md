@@ -88,7 +88,7 @@ LinkedSpec
 
 This tree is intentionally a reading guide, not a literal static import tree. LinkedSpec uses lazy loading, so the code that matters is often reached through owner dispatch rather than visible in one large `use` list.
 
-Two small but useful examples of that owner-shape cleanup are `LinkedSpec::ActionIR::Contracts` and `LinkedSpec::ActionIR::ScannerCore`: those files now keep `_require_lowering_deps(...)` and `_scanner_rule_dep_bindings(...)` as their local dependency seams and no longer expose second top-level `_require_dep(...)` validator wrappers beside them.
+Three small but useful examples of that owner-shape cleanup are `LinkedSpec::ActionIR::Contracts`, `LinkedSpec::ActionIR::ScannerCore`, and `LinkedSpec::ActionIR::StatementSplit`: those files now keep `_require_lowering_deps(...)`, `_scanner_rule_dep_bindings(...)`, and `_split_action_ir_statements(...)` as their local dependency seams and no longer expose second top-level `_require_dep(...)` validator wrappers beside them.
 
 ## The facade owns routing, not semantics
 

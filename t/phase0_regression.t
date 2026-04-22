@@ -1406,6 +1406,14 @@ subtest 'actionir_scannercore_binding_builder_keeps_inline_callback_validation' 
     unlike($scanner_core_pm, qr/sub _require_dep\b/, 'ScannerCore.pm no longer carries a separate local dependency-validator wrapper');
     like($scanner_core_pm, qr/sub _scanner_rule_dep_bindings\b.*my \$require_dep = sub \{.*foreach my \$spec \(_scanner_dep_specs\(\)\).*\$bindings\{\$spec->\{binding_symbol\}\} = \$require_dep->\(\$spec->\{dep_name\}\)/s, 'ScannerCore.pm now keeps callback validation inline inside its scanner-rule binding seam');
 };
+subtest 'actionir_statement_split_splitter_keeps_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $statement_split_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit.pm'));
+    ok(defined($statement_split_pm) && length($statement_split_pm), 'StatementSplit.pm source is available for source-shape inspection');
+    unlike($statement_split_pm, qr/sub _require_dep\b/, 'StatementSplit.pm no longer carries a separate local dependency-validator wrapper');
+    like($statement_split_pm, qr/sub _split_action_ir_statements\b.*my \$trim_action_ir_value = \(ref\(\$deps->\{trim_action_ir_value\}\) eq 'CODE'\).*\Qmissing dependency callback 'trim_action_ir_value'\E/s, 'StatementSplit.pm now keeps callback validation inline inside its statement-splitting seam');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

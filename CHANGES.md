@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ActionIR: inline StatementSplit callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/StatementSplit.pm`,
+- kept the meaningful local statement-splitting seam intact while shrinking the file-level helper surface: `StatementSplit::_split_action_ir_statements(...)` now validates its required `trim_action_ir_value` callback inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `StatementSplit.pm` is now locked against reintroducing that extra validator layer where `_split_action_ir_statements(...)` is already the real local dependency seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ActionIR: inline ScannerCore binding validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ScannerCore.pm`,

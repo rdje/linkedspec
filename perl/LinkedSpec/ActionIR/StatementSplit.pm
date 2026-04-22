@@ -21,14 +21,6 @@ sub _require_statement_split_core_pkg {
  return 'LinkedSpec::ActionIR::StatementSplit::Core'
 }
 
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::StatementSplit::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -43,7 +35,11 @@ sub default_deps_for_package {
 sub _split_action_ir_statements {
  my ($code, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
+  ? $deps->{trim_action_ir_value}
+  : undef;
+ die "(LinkedSpec::ActionIR::StatementSplit::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
+  unless ref($trim_action_ir_value) eq 'CODE';
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_statement_split_core_pkg();
   return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
