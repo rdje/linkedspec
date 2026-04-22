@@ -66,21 +66,9 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           SpecEntry helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _trace_enter {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_enter(@args)
  })
@@ -88,7 +76,7 @@ sub _trace_enter {
 
 sub _trace_exit {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_exit(@args)
  })
@@ -96,7 +84,7 @@ sub _trace_exit {
 
 sub _trace_decision {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::trace_decision(@args)
  })
@@ -104,7 +92,7 @@ sub _trace_decision {
 
 sub _trace_log_dump {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::log_dump(@args)
  })
@@ -112,7 +100,7 @@ sub _trace_log_dump {
 
 sub _trace_should_dump {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
   return LinkedSpec::Trace::should_dump(@args)
  })
@@ -120,7 +108,7 @@ sub _trace_should_dump {
 
 sub _dump_value {
  my ($value) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_data_dumper_pkg();
   return Data::Dumper::Dumper($value)
  })
@@ -155,7 +143,7 @@ sub _set_runtime_ctx_top_rule {
 
 sub _trace_runtime_mark_event {
  my (%args) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return undef unless exists $INC{'LinkedSpec/Trace.pm'};
   return undef unless LinkedSpec::Trace::should_dump(DUMP_HIGH);
   return LinkedSpec::Trace::trace_mark_event(%args, caller_depth => 3);

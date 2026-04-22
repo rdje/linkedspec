@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 206;
+    plan tests => 213;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1248,7 +1248,14 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($spec_entry_pm, qr/sub _require_emit_context_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside its emit-context loader');
     like($spec_entry_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside its Trace loader');
     like($spec_entry_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside its Data::Dumper loader');
-    like($spec_entry_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'SpecEntry.pm now routes $@ preservation through OwnerDispatch');
+    unlike($spec_entry_pm, qr/sub _call_preserving_err\b/, 'SpecEntry.pm no longer carries an unused local $@-preservation wrapper');
+    like($spec_entry_pm, qr/sub _trace_enter\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_enter/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_enter');
+    like($spec_entry_pm, qr/sub _trace_exit\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_exit/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_exit');
+    like($spec_entry_pm, qr/sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_decision/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_decision');
+    like($spec_entry_pm, qr/sub _trace_log_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::log_dump/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_log_dump');
+    like($spec_entry_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*exists \$INC\{'LinkedSpec\/Trace.pm'\}.*LinkedSpec::Trace::should_dump/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_should_dump');
+    like($spec_entry_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_data_dumper_pkg\(\).*Data::Dumper::Dumper/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _dump_value');
+    like($spec_entry_pm, qr/sub _trace_runtime_mark_event\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::Trace::trace_mark_event/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_runtime_mark_event');
     like($spec_entry_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'SpecEntry.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($rule_ir_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RuleIR.pm now loads the shared owner-dispatch helper');
     unlike($rule_ir_pm, qr/sub _require_pkg\b/, 'RuleIR.pm no longer carries an unused generic package-loader wrapper');
