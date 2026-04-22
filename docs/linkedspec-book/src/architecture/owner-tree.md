@@ -88,6 +88,8 @@ LinkedSpec
 
 This tree is intentionally a reading guide, not a literal static import tree. LinkedSpec uses lazy loading, so the code that matters is often reached through owner dispatch rather than visible in one large `use` list.
 
+One small but useful example of that owner-shape cleanup is `LinkedSpec::ActionIR::Contracts`: the file now keeps `_require_lowering_deps(...)` as its local lowering-dependency seam and no longer exposes a second top-level `_require_dep(...)` validator wrapper beside it.
+
 ## The facade owns routing, not semantics
 
 `LinkedSpec.pm` is the public door.

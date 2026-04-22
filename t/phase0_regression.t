@@ -1390,6 +1390,14 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     );
     unlike($plugin_bridge_pm, qr/eval\s*\{\s*require\s+(?:PPlugin|LinkedSpec::PluginRegistry)/s, 'PluginBridge.pm no longer carries local eval-require branches for its default plugin owners');
 };
+subtest 'actionir_contracts_lowering_dep_builder_keeps_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $contracts_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Contracts.pm'));
+    ok(defined($contracts_pm) && length($contracts_pm), 'Contracts.pm source is available for source-shape inspection');
+    unlike($contracts_pm, qr/sub _require_dep\b/, 'Contracts.pm no longer carries a separate local dependency-validator wrapper');
+    like($contracts_pm, qr/sub _require_lowering_deps\b.*my \$require_dep = sub \{.*lower_return_general_statement => \$require_dep->\('lower_return_general_statement'\).*lower_declare_method_statement => \$require_dep->\('lower_declare_method_statement'\)/s, 'Contracts.pm now keeps callback validation inline inside its lowering-deps seam');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

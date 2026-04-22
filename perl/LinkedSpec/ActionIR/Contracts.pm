@@ -17,21 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve one required contracts dependency callback from the
-#           provided dependency map.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::Contracts::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default contracts dependency bundle for one owner
 #           package.
@@ -71,28 +56,35 @@ sub default_deps_for_package {
 
 sub _require_lowering_deps {
  my ($deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::Contracts::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb
+ };
  return {
-  lower_return_general_statement => _require_dep($deps, 'lower_return_general_statement'),
-  lower_return_imatch_statement  => _require_dep($deps, 'lower_return_imatch_statement'),
-  lower_assign_method_statement  => _require_dep($deps, 'lower_assign_method_statement'),
-  lower_push_value_statement     => _require_dep($deps, 'lower_push_value_statement'),
-  lower_push_nonempty_statement  => _require_dep($deps, 'lower_push_nonempty_statement'),
-  lower_regex_subst_statement    => _require_dep($deps, 'lower_regex_subst_statement'),
-  lower_array_pipeline_expr      => _require_dep($deps, 'lower_array_pipeline_expr'),
-  lower_if_flow_statement        => _require_dep($deps, 'lower_if_flow_statement'),
-  lower_elseif_flow_statement    => _require_dep($deps, 'lower_elseif_flow_statement'),
-  lower_else_flow_statement      => _require_dep($deps, 'lower_else_flow_statement'),
-  lower_endif_flow_statement     => _require_dep($deps, 'lower_endif_flow_statement'),
-  lower_switch_flow_statement    => _require_dep($deps, 'lower_switch_flow_statement'),
-  lower_case_flow_statement      => _require_dep($deps, 'lower_case_flow_statement'),
-  lower_default_flow_statement   => _require_dep($deps, 'lower_default_flow_statement'),
-  lower_endcase_flow_statement   => _require_dep($deps, 'lower_endcase_flow_statement'),
-  lower_endswitch_flow_statement => _require_dep($deps, 'lower_endswitch_flow_statement'),
-  lower_say_statement            => _require_dep($deps, 'lower_say_statement'),
-  lower_print_statement          => _require_dep($deps, 'lower_print_statement'),
-  lower_return_undef_statement   => _require_dep($deps, 'lower_return_undef_statement'),
-  lower_return_array_statement   => _require_dep($deps, 'lower_return_array_statement'),
-  lower_declare_method_statement => _require_dep($deps, 'lower_declare_method_statement'),
+  lower_return_general_statement => $require_dep->('lower_return_general_statement'),
+  lower_return_imatch_statement  => $require_dep->('lower_return_imatch_statement'),
+  lower_assign_method_statement  => $require_dep->('lower_assign_method_statement'),
+  lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
+  lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
+  lower_regex_subst_statement    => $require_dep->('lower_regex_subst_statement'),
+  lower_array_pipeline_expr      => $require_dep->('lower_array_pipeline_expr'),
+  lower_if_flow_statement        => $require_dep->('lower_if_flow_statement'),
+  lower_elseif_flow_statement    => $require_dep->('lower_elseif_flow_statement'),
+  lower_else_flow_statement      => $require_dep->('lower_else_flow_statement'),
+  lower_endif_flow_statement     => $require_dep->('lower_endif_flow_statement'),
+  lower_switch_flow_statement    => $require_dep->('lower_switch_flow_statement'),
+  lower_case_flow_statement      => $require_dep->('lower_case_flow_statement'),
+  lower_default_flow_statement   => $require_dep->('lower_default_flow_statement'),
+  lower_endcase_flow_statement   => $require_dep->('lower_endcase_flow_statement'),
+  lower_endswitch_flow_statement => $require_dep->('lower_endswitch_flow_statement'),
+  lower_say_statement            => $require_dep->('lower_say_statement'),
+  lower_print_statement          => $require_dep->('lower_print_statement'),
+  lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
+  lower_return_array_statement   => $require_dep->('lower_return_array_statement'),
+  lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
  }
 }
 

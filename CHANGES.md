@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ActionIR: inline Contracts lowering-dep validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/Contracts.pm`,
+- kept the meaningful local lowering seam intact while shrinking the file-level helper surface: `Contracts::_require_lowering_deps(...)` now validates the required lowering callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `Contracts.pm` is now locked against reintroducing that extra validator layer where `_require_lowering_deps(...)` is already the real local dependency seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - EmitContext: drop dead owner package-loader shims
 
 - deleted the dead local `_require_*_pkg(...)` owner-package wrappers from `perl/LinkedSpec/RuleIR/EmitContext.pm`,
