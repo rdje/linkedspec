@@ -27,14 +27,6 @@ sub _require_canonical_events_core_pkg {
  return 'LinkedSpec::ActionIR::CanonicalEvents::Core'
 }
 
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::CanonicalEvents::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -58,8 +50,16 @@ sub _canonicalize_helper_action_ir_event {
 sub _build_canonical_action_ir_events {
  my ($label, $code, $helper_events, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $split_action_ir_statements = _require_dep($deps, 'split_action_ir_statements');
+ my $trim_action_ir_value = (ref($deps->{trim_action_ir_value}) eq 'CODE')
+  ? $deps->{trim_action_ir_value}
+  : undef;
+ die "(LinkedSpec::ActionIR::CanonicalEvents::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
+  unless ref($trim_action_ir_value) eq 'CODE';
+ my $split_action_ir_statements = (ref($deps->{split_action_ir_statements}) eq 'CODE')
+  ? $deps->{split_action_ir_statements}
+  : undef;
+ die "(LinkedSpec::ActionIR::CanonicalEvents::_require_dep) -E- missing dependency callback 'split_action_ir_statements'"
+  unless ref($split_action_ir_statements) eq 'CODE';
 
  my %helper_event_queue;
  foreach my $helper_event (@$helper_events) {
