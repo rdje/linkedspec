@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - EmitContext: drop dead owner package-loader shims
+
+- deleted the dead local `_require_*_pkg(...)` owner-package wrappers from `perl/LinkedSpec/RuleIR/EmitContext.pm`,
+- kept the meaningful local ActionIR owner-key seam intact while shrinking the remaining compatibility surface: `EmitContext::_actionir_owner_package(...)` is now the sole package-loading path there, and `_accumulate_action_rewrite_diagnostics(...)` now routes diagnostics accumulation through `_call_actionir_owner('diagnostics', ...)` instead of keeping a special-case local diagnostics loader wrapper,
+- updated phase0 owner-dispatch coverage so `EmitContext.pm` is now locked against reintroducing those owner-specific package-loader shims where the owner-key registry and shared dispatcher are already the real seams.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ActionIR: dedupe ScannerCore binding registry
 
 - deleted the redundant local `_scanner_rule_binding_symbols(...)` helper from `perl/LinkedSpec/ActionIR/ScannerCore.pm`,

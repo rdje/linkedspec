@@ -317,7 +317,8 @@ One more boundary is now tighter too:
 ### `LinkedSpec::RuleIR::EmitContext`
 - is the bridge from rule IR into ActionIR scanning and lowering,
 - is the main gateway into backend-neutral action rewriting,
-- now also centralizes its internal ActionIR owner package registry and owner default-dependency lookup instead of hardwiring those contracts separately across dozens of local wrappers.
+- now also centralizes its internal ActionIR owner package registry and owner default-dependency lookup instead of hardwiring those contracts separately across dozens of local wrappers,
+- and now treats that owner-key registry plus shared owner dispatcher as the only package/callback-loading seams on the bridge instead of keeping a second layer of owner-specific `_require_*_pkg(...)` shims.
 
 ## ActionIR Reading
 The ActionIR subtree is now large, but structurally it is much healthier than the older monolithic style.

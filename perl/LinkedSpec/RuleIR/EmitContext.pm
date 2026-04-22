@@ -54,58 +54,6 @@ sub _actionir_owner_package {
  return $pkg
 }
 
-sub _require_rewrite_pipeline_pkg {
- return _actionir_owner_package('rewrite_pipeline')
-}
-
-sub _require_method_expr_pkg {
- return _actionir_owner_package('method_expr')
-}
-
-sub _require_scanner_pkg {
- return _actionir_owner_package('scanner')
-}
-
-sub _require_canonical_events_pkg {
- return _actionir_owner_package('canonical_events')
-}
-
-sub _require_diagnostics_pkg {
- return _actionir_owner_package('diagnostics')
-}
-
-sub _require_statement_split_pkg {
- return _actionir_owner_package('statement_split')
-}
-
-sub _require_contracts_pkg {
- return _actionir_owner_package('contracts')
-}
-
-sub _require_flow_expr_pkg {
- return _actionir_owner_package('flow_expr')
-}
-
-sub _require_array_pipeline_pkg {
- return _actionir_owner_package('array_pipeline')
-}
-
-sub _require_control_flow_pkg {
- return _actionir_owner_package('control_flow')
-}
-
-sub _require_method_lowering_pkg {
- return _actionir_owner_package('method_lowering')
-}
-
-sub _require_declare_method_pkg {
- return _actionir_owner_package('declare_method')
-}
-
-sub _require_value_expr_pkg {
- return _actionir_owner_package('value_expr')
-}
-
 #------------------------------------------------------------------------------
 # Function: _actionir_owner_callback
 # Purpose : Resolve one callback from a local ActionIR owner through the shared
@@ -516,10 +464,7 @@ sub _rewrite_action_code_with_diagnostics {
 
 sub _accumulate_action_rewrite_diagnostics {
  my @args = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_diagnostics_pkg();
-  return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
- })
+ return _call_actionir_owner('diagnostics', '_accumulate_action_rewrite_diagnostics', @args)
 }
 
 sub _lower_action_code_from_canonical_ir {

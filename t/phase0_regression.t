@@ -1275,14 +1275,14 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($rule_ir_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'RuleIR.pm now spends OwnerDispatch directly inside its trace and dump helpers');
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     unlike($emit_context_pm, qr/sub _require_pkg\b/, 'EmitContext.pm no longer carries an unused generic package-loader wrapper');
-    unlike($emit_context_pm, qr/sub _require_trace_pkg\b/, 'EmitContext.pm no longer carries an unused local Trace-loader wrapper');
+    unlike($emit_context_pm, qr/sub _require_(?:trace|rewrite_pipeline|method_expr|scanner|canonical_events|diagnostics|statement_split|contracts|flow_expr|array_pipeline|control_flow|method_lowering|declare_method|value_expr)_pkg\b/, 'EmitContext.pm no longer carries local Trace-loader or owner-specific package-loader wrappers beside its owner-key registry');
     unlike($emit_context_pm, qr/sub _call_preserving_err\b/, 'EmitContext.pm no longer carries an unused local $@-preservation wrapper');
     like($emit_context_pm, qr/sub _actionir_owner_package\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\).*return \$pkg/s, 'EmitContext.pm now defines the shared ActionIR owner-package registry helper and spends OwnerDispatch directly inside it');
     like($emit_context_pm, qr/sub _actionir_owner_callback\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$method\)/s, 'EmitContext.pm now routes ActionIR owner callback lookup through OwnerDispatch');
     like($emit_context_pm, qr/sub _actionir_owner_default_deps\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, 'default_deps_for_package'\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner default-deps helper');
     like($emit_context_pm, qr/sub _call_actionir_owner\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, \$method\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner dispatcher');
     like($emit_context_pm, qr/sub _call_actionir_owner_with_deps\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, \$method\).*_actionir_owner_default_deps\(\$owner_key\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner-with-deps dispatcher');
-    like($emit_context_pm, qr/sub _accumulate_action_rewrite_diagnostics\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_diagnostics_pkg\(\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its rewrite-diagnostic accumulator');
+    like($emit_context_pm, qr/sub _accumulate_action_rewrite_diagnostics\b.*_call_actionir_owner\('diagnostics', '_accumulate_action_rewrite_diagnostics', \@args\)/s, 'EmitContext.pm now routes rewrite-diagnostic accumulation through the shared ActionIR owner dispatcher');
     like($emit_context_pm, qr/sub rewrite_action_code_for_compat\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'EmitContext.pm now spends OwnerDispatch directly inside its compat rewrite helper');
     unlike($emit_context_pm, qr/->can\(/, 'EmitContext.pm no longer probes ActionIR owner callbacks with local ->can checks');
     like($rewrite_pipeline_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RewritePipeline.pm now loads the shared owner-dispatch helper');
@@ -1431,8 +1431,6 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     require LinkedSpec::RuleIR::EmitContext;
 
     local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
-    local *LinkedSpec::RuleIR::EmitContext::_require_trace_pkg = sub { return 1 };
-    local *LinkedSpec::RuleIR::EmitContext::_require_rewrite_pipeline_pkg = sub { return 1 };
     local *LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps = sub { return { injected => 1 } };
 
     local $INC{'LinkedSpec/Trace.pm'} = __FILE__;
