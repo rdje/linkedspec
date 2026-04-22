@@ -25,21 +25,9 @@ sub _require_linkedre_pkg {
  return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE')
 }
 
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute a callback while preserving caller `$@` through successful
-#           completion.
-# Args    : ($cb)
-# Returns : callback result in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _linkedre_or {
  my (@args) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_linkedre_pkg();
   return LinkedRE::or(@args)
  })
@@ -47,7 +35,7 @@ sub _linkedre_or {
 
 sub _linkedre_ored_re {
  my (@args) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_linkedre_pkg();
   return LinkedRE::oredRE(@args)
  })

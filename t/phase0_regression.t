@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 199;
+    plan tests => 200;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1228,7 +1228,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($bootstrap_spec_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'BootstrapSpec/Core.pm now loads the shared owner-dispatch helper');
     unlike($bootstrap_spec_core_pm, qr/sub _require_pkg\b/, 'BootstrapSpec/Core.pm no longer carries an unused single-use package-loader wrapper');
     like($bootstrap_spec_core_pm, qr/sub _require_linkedre_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\)/s, 'BootstrapSpec/Core.pm now spends OwnerDispatch directly inside its LinkedRE loader');
-    like($bootstrap_spec_core_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'BootstrapSpec/Core.pm now routes $@ preservation through OwnerDispatch');
+    unlike($bootstrap_spec_core_pm, qr/sub _call_preserving_err\b/, 'BootstrapSpec/Core.pm no longer carries an unused single-use $@-preservation wrapper');
+    like($bootstrap_spec_core_pm, qr/sub _linkedre_or\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_linkedre_pkg\(\).*LinkedRE::or\(\@args\).*sub _linkedre_ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_linkedre_pkg\(\).*LinkedRE::oredRE\(\@args\)/s, 'BootstrapSpec/Core.pm now spends OwnerDispatch directly inside its LinkedRE helper wrappers');
     like($compiler_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Compiler.pm now loads the shared owner-dispatch helper');
     unlike($compiler_pm, qr/sub _require_pkg_cb\b/, 'Compiler.pm no longer carries an unused generic callback-loader wrapper');
     unlike($compiler_pm, qr/sub _require_pkg\b/, 'Compiler.pm no longer carries an unused generic package-loader wrapper');
