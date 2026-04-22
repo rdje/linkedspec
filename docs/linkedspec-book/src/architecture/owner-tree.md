@@ -141,6 +141,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `BootstrapSpec::Core`, `ActionIR::ScannerCore`, and `PluginBridge` now follow the same rule for single-use package loading too: they still keep their meaningful local LinkedRE/scanner-family/legacy-runtime helper seams, but those helpers now call `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
 
+`RuleIR::EmitContext` now follows that same rule for its internal ActionIR owner-package registry: `_actionir_owner_package(...)` remains the meaningful local seam, but it now calls `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
+
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
 
 The design rule is:

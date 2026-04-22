@@ -22,19 +22,6 @@ use constant {
 };
 
 #------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one emit-context dependency owner through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
- return $pkg
-}
-
-#------------------------------------------------------------------------------
 # Function: _actionir_owner_package
 # Purpose : Resolve one local ActionIR owner key to its package name and
 #           lazy-load it through the shared owner-dispatch seam.
@@ -63,7 +50,8 @@ sub _actionir_owner_package {
  my $pkg = $owner_pkgs->{$owner_key};
  die "(LinkedSpec::RuleIR::EmitContext::_actionir_owner_package) -E- unknown owner key '$owner_key'"
   unless defined($pkg) && length($pkg);
- return _require_pkg($pkg)
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg);
+ return $pkg
 }
 
 sub _require_rewrite_pipeline_pkg {

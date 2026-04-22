@@ -1255,10 +1255,10 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($rule_ir_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'RuleIR.pm now spends OwnerDispatch directly inside its Data::Dumper loader');
     like($rule_ir_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'RuleIR.pm now routes $@ preservation through OwnerDispatch');
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
-    like($emit_context_pm, qr/sub _require_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\)/s, 'EmitContext.pm now routes lazy package loading through OwnerDispatch');
+    unlike($emit_context_pm, qr/sub _require_pkg\b/, 'EmitContext.pm no longer carries an unused generic package-loader wrapper');
     unlike($emit_context_pm, qr/sub _require_trace_pkg\b/, 'EmitContext.pm no longer carries an unused local Trace-loader wrapper');
     like($emit_context_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'EmitContext.pm now routes $@ preservation through OwnerDispatch');
-    like($emit_context_pm, qr/sub _actionir_owner_package\b/s, 'EmitContext.pm now defines the shared ActionIR owner-package registry helper');
+    like($emit_context_pm, qr/sub _actionir_owner_package\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\).*return \$pkg/s, 'EmitContext.pm now defines the shared ActionIR owner-package registry helper and spends OwnerDispatch directly inside it');
     like($emit_context_pm, qr/sub _actionir_owner_callback\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$method\)/s, 'EmitContext.pm now routes ActionIR owner callback lookup through OwnerDispatch');
     like($emit_context_pm, qr/sub _actionir_owner_default_deps\b.*_actionir_owner_callback\(\$owner_key, 'default_deps_for_package'\)/s, 'EmitContext.pm now centralizes ActionIR owner default-dependency lookup through the shared callback loader');
     unlike($emit_context_pm, qr/->can\(/, 'EmitContext.pm no longer probes ActionIR owner callbacks with local ->can checks');

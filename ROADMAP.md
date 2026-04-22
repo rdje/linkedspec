@@ -103,6 +103,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `BootstrapSpec::Core.pm`, `ActionIR::ScannerCore.pm`, and `PluginBridge.pm` no longer keep single-use local `_require_pkg(...)` wrappers either; their remaining meaningful helper seams now spend `OwnerDispatch::require_pkg(...)` directly for LinkedRE, scanner-rule-family, and legacy-`PPlugin` loading.
 - Recent landed follow-up: `Compiler.pm`, `SpecEntry.pm`, and `RuleIR.pm` no longer keep generic local `_require_pkg(...)` wrappers either; their remaining Trace / `Data::Dumper` / `LinkedRE` helper seams now spend `OwnerDispatch::require_pkg(...)` directly instead of bouncing through a second local package-loader layer.
 - Recent landed follow-up: `Compiler.pm` and `SpecEntry.pm` no longer keep generic local `_require_pkg_cb(...)` wrappers either; their remaining bootstrap/spec-entry/validation and RuleIR/emit-context helper seams now spend `OwnerDispatch::require_pkg_cb(...)` directly instead of bouncing through a second local callback-loader layer.
+- Recent landed follow-up: `RuleIR::EmitContext.pm` no longer keeps a generic local `_require_pkg(...)` wrapper either; its meaningful local ActionIR owner-key registry remains `_actionir_owner_package(...)`, and that helper now spends `OwnerDispatch::require_pkg(...)` directly instead of bouncing through a second local package-loader layer.
 
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.
