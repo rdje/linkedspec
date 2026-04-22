@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline compile-path package loaders
+
+- deleted the local generic package-loader wrappers from `perl/LinkedSpec/Compiler.pm`, `perl/LinkedSpec/SpecEntry.pm`, and `perl/LinkedSpec/RuleIR.pm`,
+- kept the meaningful helper entrypoints intact while spending the shared seam directly inside them: the Trace, `Data::Dumper`, and `LinkedRE` loader helpers in those compile-path owners now call `LinkedSpec::OwnerDispatch::require_pkg(...)` inline instead of bouncing through a local `_require_pkg(...)` pass-through wrapper,
+- updated phase0 owner-dispatch coverage so those owners are now locked against reintroducing generic package-loader wrappers where the package-specific helper is already the real seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline support-owner package loaders
 
 - deleted the single-use local generic package-loader wrappers from `perl/LinkedSpec/BootstrapSpec/Core.pm`, `perl/LinkedSpec/ActionIR/ScannerCore.pm`, and `perl/LinkedSpec/PluginBridge.pm`,

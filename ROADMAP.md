@@ -101,6 +101,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `Resolver.pm` no longer keeps local `_require_trace_pkg(...)` or `_call_preserving_err(...)` wrappers either; its live trace helper bodies now spend `OwnerDispatch` directly for Trace loading and successful `$@` preservation.
 - Recent landed follow-up: `ActionIR::Scanner.pm` no longer keeps local `_require_pkg_cb(...)` or `_call_preserving_err(...)` wrappers either; its live owner helper bodies now spend `OwnerDispatch` directly for `ScannerCore` callback lookup and successful `$@` preservation while `_require_scanner_core_pkg(...)` remains the meaningful local scanner-core seam.
 - Recent landed follow-up: `BootstrapSpec::Core.pm`, `ActionIR::ScannerCore.pm`, and `PluginBridge.pm` no longer keep single-use local `_require_pkg(...)` wrappers either; their remaining meaningful helper seams now spend `OwnerDispatch::require_pkg(...)` directly for LinkedRE, scanner-rule-family, and legacy-`PPlugin` loading.
+- Recent landed follow-up: `Compiler.pm`, `SpecEntry.pm`, and `RuleIR.pm` no longer keep generic local `_require_pkg(...)` wrappers either; their remaining Trace / `Data::Dumper` / `LinkedRE` helper seams now spend `OwnerDispatch::require_pkg(...)` directly instead of bouncing through a second local package-loader layer.
 
 ## Phase 2: DSL Frontend Hardening
 - Replace permissive/spec-skipping behavior with explicit token handling.

@@ -37,35 +37,23 @@ sub _require_dep {
  return $value
 }
 
-#------------------------------------------------------------------------------
-# Function: _require_pkg
-# Purpose : Lazy-load one compile-pipeline owner package through the shared
-#           owner-dispatch seam.
-# Args    : ($pkg)
-# Returns : true on successful require
-#------------------------------------------------------------------------------
-sub _require_pkg {
- my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, $pkg)
-}
-
 sub _require_pkg_cb {
  my ($pkg, $name) = @_;
  return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
 }
 
 sub _require_trace_pkg {
- _require_pkg('LinkedSpec::Trace');
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
  return 1
 }
 
 sub _require_data_dumper_pkg {
- _require_pkg('Data::Dumper');
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper');
  return 1
 }
 
 sub _require_linkedre_pkg {
- _require_pkg('LinkedRE');
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE');
  return 1
 }
 
