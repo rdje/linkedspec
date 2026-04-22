@@ -29,17 +29,6 @@ sub _require_dep {
 }
 
 #------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Execute callback without clobbering caller-visible successful `$@`.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _load_legacy_plugin_runtime
 # Purpose : Lazy-load the legacy `PPlugin` runtime for compatibility dispatch.
 # Args    : ()
@@ -57,7 +46,7 @@ sub _load_legacy_plugin_runtime {
 #------------------------------------------------------------------------------
 sub _exec_legacy_plugin {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return PPlugin->exec_plugin_name(@args)
  })
 }
@@ -70,7 +59,7 @@ sub _exec_legacy_plugin {
 #------------------------------------------------------------------------------
 sub _get_legacy_plugin {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return PPlugin->get(@args)
  })
 }
@@ -155,7 +144,7 @@ sub _lookup_plugin_name {
  my $get_plugin = _require_dep($deps, 'get_plugin');
  $plugin_name = _require_plugin_name($plugin_name);
 
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $registered_plugin = $resolve_registered_plugin ? $resolve_registered_plugin->($plugin_name) : undef;
   return $registered_plugin if ref($registered_plugin) eq 'CODE';
   $load_plugin_runtime->();
@@ -182,7 +171,7 @@ sub _dispatch_plugin_name {
  my $exec_plugin = _require_dep($deps, 'exec_plugin');
  $plugin_name = _require_plugin_name($plugin_name);
 
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $registered_plugin = $resolve_registered_plugin ? $resolve_registered_plugin->($plugin_name) : undef;
   if (ref($registered_plugin) eq 'CODE') {
    return $registered_plugin->(@$args)

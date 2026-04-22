@@ -147,6 +147,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `BootstrapSpec::Core` now follows the same rule for its tiny LinkedRE helper wrappers: `_linkedre_or(...)` and `_linkedre_ored_re(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another single-use `_call_preserving_err(...)` shim first.
 
+`PluginBridge` now follows that same rule for its compatibility dispatch helpers too: `_exec_legacy_plugin(...)`, `_get_legacy_plugin(...)`, `_lookup_plugin_name(...)`, and `_dispatch_plugin_name(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another local `_call_preserving_err(...)` shim first.
+
 ActionIR owners whose only callback resolution happens while assembling `default_deps_for_package(...)` do not keep local callback-loader wrappers. They use `OwnerDispatch::build_dep_map(...)` directly, and that shared builder owns dependency callback loading.
 
 The design rule is:

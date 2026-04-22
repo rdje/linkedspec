@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline plugin bridge dispatch wrappers
+
+- deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/PluginBridge.pm`,
+- kept the meaningful helper entrypoints intact while spending the shared seam directly inside them: `PluginBridge::_exec_legacy_plugin(...)`, `_get_legacy_plugin(...)`, `_lookup_plugin_name(...)`, and `_dispatch_plugin_name(...)` now call `LinkedSpec::OwnerDispatch::call_preserving_err(...)` inline instead of bouncing through a local `_call_preserving_err(...)` pass-through wrapper,
+- updated phase0 owner-dispatch coverage so `PluginBridge.pm` is now locked against reintroducing that local `$@` wrapper where the direct `OwnerDispatch` call is already the real compatibility seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/PluginBridge.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline bootstrap-core LinkedRE wrappers
 
 - deleted the single-use local `$@`-preservation wrapper from `perl/LinkedSpec/BootstrapSpec/Core.pm`,

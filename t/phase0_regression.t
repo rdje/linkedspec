@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 200;
+    plan tests => 201;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1357,7 +1357,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     );
     like($plugin_bridge_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'PluginBridge.pm now loads the shared owner-dispatch helper');
     unlike($plugin_bridge_pm, qr/sub _require_pkg\b/, 'PluginBridge.pm no longer carries an unused single-use package-loader wrapper');
-    like($plugin_bridge_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'PluginBridge.pm now routes $@ preservation through OwnerDispatch');
+    unlike($plugin_bridge_pm, qr/sub _call_preserving_err\b/, 'PluginBridge.pm no longer carries an unused local $@-preservation wrapper');
+    like($plugin_bridge_pm, qr/sub _exec_legacy_plugin\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _get_legacy_plugin\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _lookup_plugin_name\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _dispatch_plugin_name\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'PluginBridge.pm now spends OwnerDispatch directly inside its legacy dispatch helpers');
     like($plugin_bridge_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'PluginBridge.pm now assembles its default dependency map through OwnerDispatch');
     like($plugin_bridge_pm, qr/sub _load_legacy_plugin_runtime\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'PPlugin'\)/s, 'PluginBridge.pm now spends OwnerDispatch directly inside its legacy runtime loader');
     like(
