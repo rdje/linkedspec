@@ -15,20 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Validate and return one injected dependency callback by name.
-# Args    : ($deps, $name)
-# Returns : coderef dependency callback
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: _require_value_dep
 # Purpose : Validate and return one injected dependency value by name.
 # Args    : ($deps, $name)
@@ -179,17 +165,49 @@ sub run_get_parser {
   my $runtime_ctx = _prepare_runtime_ctx_for_get_parser(\%opt_hash, spec_name => $spec_name);
   my ($apply_trace_options, $trace_enter, $trace_exit, $trace_decision, $validate_spec_name,
       $resolve_spec_path, $load_spec_content, $compile_spec, $dump_low, $dump_medium, $trace_scope);
-  my $setup_ok = eval {
+ my $setup_ok = eval {
    $deps = _default_deps() unless ref($deps) eq 'HASH';
 
-   $apply_trace_options = _require_dep($deps, 'apply_trace_options');
-   $trace_enter = _require_dep($deps, 'trace_enter');
-   $trace_exit = _require_dep($deps, 'trace_exit');
-   $trace_decision = _require_dep($deps, 'trace_decision');
-   $validate_spec_name = _require_dep($deps, 'validate_spec_name');
-   $resolve_spec_path = _require_dep($deps, 'resolve_spec_path');
-   $load_spec_content = _require_dep($deps, 'load_spec_content');
-   $compile_spec = _require_dep($deps, 'compile_spec');
+   $apply_trace_options = (ref($deps->{apply_trace_options}) eq 'CODE')
+    ? $deps->{apply_trace_options}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'apply_trace_options'"
+    unless ref($apply_trace_options) eq 'CODE';
+   $trace_enter = (ref($deps->{trace_enter}) eq 'CODE')
+    ? $deps->{trace_enter}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'trace_enter'"
+    unless ref($trace_enter) eq 'CODE';
+   $trace_exit = (ref($deps->{trace_exit}) eq 'CODE')
+    ? $deps->{trace_exit}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'trace_exit'"
+    unless ref($trace_exit) eq 'CODE';
+   $trace_decision = (ref($deps->{trace_decision}) eq 'CODE')
+    ? $deps->{trace_decision}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'trace_decision'"
+    unless ref($trace_decision) eq 'CODE';
+   $validate_spec_name = (ref($deps->{validate_spec_name}) eq 'CODE')
+    ? $deps->{validate_spec_name}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'validate_spec_name'"
+    unless ref($validate_spec_name) eq 'CODE';
+   $resolve_spec_path = (ref($deps->{resolve_spec_path}) eq 'CODE')
+    ? $deps->{resolve_spec_path}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'resolve_spec_path'"
+    unless ref($resolve_spec_path) eq 'CODE';
+   $load_spec_content = (ref($deps->{load_spec_content}) eq 'CODE')
+    ? $deps->{load_spec_content}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'load_spec_content'"
+    unless ref($load_spec_content) eq 'CODE';
+   $compile_spec = (ref($deps->{compile_spec}) eq 'CODE')
+    ? $deps->{compile_spec}
+    : undef;
+   die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'compile_spec'"
+    unless ref($compile_spec) eq 'CODE';
    $dump_low = _require_value_dep($deps, 'dump_low');
    $dump_medium = _require_value_dep($deps, 'dump_medium');
 

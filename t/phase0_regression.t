@@ -1454,6 +1454,14 @@ subtest 'plugin_bridge_lookup_and_dispatch_keep_inline_callback_validation' => s
     unlike($plugin_bridge_pm, qr/sub _require_dep\b/, 'PluginBridge.pm no longer carries a separate local dependency-validator wrapper');
     like($plugin_bridge_pm, qr/sub _lookup_plugin_name\b.*my \$load_plugin_runtime = \(ref\(\$deps->\{load_plugin_runtime\}\) eq 'CODE'\).*\Qmissing dependency callback 'load_plugin_runtime'\E.*my \$get_plugin = \(ref\(\$deps->\{get_plugin\}\) eq 'CODE'\).*\Qmissing dependency callback 'get_plugin'\E.*sub _dispatch_plugin_name\b.*my \$load_plugin_runtime = \(ref\(\$deps->\{load_plugin_runtime\}\) eq 'CODE'\).*\Qmissing dependency callback 'load_plugin_runtime'\E.*my \$exec_plugin = \(ref\(\$deps->\{exec_plugin\}\) eq 'CODE'\).*\Qmissing dependency callback 'exec_plugin'\E/s, 'PluginBridge.pm now keeps callback validation inline inside its lookup and dispatch seams');
 };
+subtest 'parser_factory_setup_keeps_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));
+    ok(defined($parser_factory_pm) && length($parser_factory_pm), 'ParserFactory.pm source is available for source-shape inspection');
+    unlike($parser_factory_pm, qr/sub _require_dep\b/, 'ParserFactory.pm no longer carries a separate local dependency-validator wrapper');
+    like($parser_factory_pm, qr/sub run_get_parser\b.*\$apply_trace_options = \(ref\(\$deps->\{apply_trace_options\}\) eq 'CODE'\).*\Qmissing dependency callback 'apply_trace_options'\E.*\$trace_enter = \(ref\(\$deps->\{trace_enter\}\) eq 'CODE'\).*\Qmissing dependency callback 'trace_enter'\E.*\$trace_exit = \(ref\(\$deps->\{trace_exit\}\) eq 'CODE'\).*\Qmissing dependency callback 'trace_exit'\E.*\$trace_decision = \(ref\(\$deps->\{trace_decision\}\) eq 'CODE'\).*\Qmissing dependency callback 'trace_decision'\E.*\$validate_spec_name = \(ref\(\$deps->\{validate_spec_name\}\) eq 'CODE'\).*\Qmissing dependency callback 'validate_spec_name'\E.*\$resolve_spec_path = \(ref\(\$deps->\{resolve_spec_path\}\) eq 'CODE'\).*\Qmissing dependency callback 'resolve_spec_path'\E.*\$load_spec_content = \(ref\(\$deps->\{load_spec_content\}\) eq 'CODE'\).*\Qmissing dependency callback 'load_spec_content'\E.*\$compile_spec = \(ref\(\$deps->\{compile_spec\}\) eq 'CODE'\).*\Qmissing dependency callback 'compile_spec'\E/s, 'ParserFactory.pm now keeps callback validation inline inside its setup seam');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

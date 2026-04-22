@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ParserFactory: inline setup callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ParserFactory.pm`,
+- kept the meaningful local parser-factory setup seam intact while shrinking the file-level helper surface: `ParserFactory::run_get_parser(...)` now validates its required setup callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `ParserFactory.pm` is now locked against reintroducing that extra validator layer where the parser-factory setup seam is already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - Plugin runtime: inline PluginBridge callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/PluginBridge.pm`,
