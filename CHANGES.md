@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ActionIR: inline DeclareMethod callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/DeclareMethod.pm`,
+- kept the meaningful local declare/assign lowering seams intact while shrinking the file-level helper surface: `DeclareMethod::_parse_declare_binding_entry(...)`, `_lower_declare_value_expr(...)`, `_lower_declare_initializer_expr(...)`, `_extract_declare_statement_from_method_expr(...)`, `_lower_declare_method_statement(...)`, and `_lower_assign_method_statement(...)` now validate their required callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `DeclareMethod.pm` is now locked against reintroducing that extra validator layer where the declare/assign lowering seams are already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/DeclareMethod.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - Compiler: inline pipeline dependency validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/Compiler.pm`,

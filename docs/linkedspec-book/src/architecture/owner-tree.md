@@ -368,6 +368,8 @@ Important families include:
 - `Diagnostics` for unresolved helper and compatibility-surface telemetry,
 - `RewritePipeline` for gluing scan, classify, and lower phases together.
 
+Within those lowering owners, `DeclareMethod` now treats its declare/assign helper routines as the direct callback-validation seams instead of carrying a second top-level `_require_dep(...)` wrapper above them.
+
 `ScannerCore` is also the single source of truth for the scanner dependency contract: `Scanner.pm` assembles its default dep map from `_scanner_dep_specs()`, and the core derives its rebinding symbols from that same table instead of carrying a second symbol registry.
 
 This is where much of the long-term portability story lives. The project can keep the current Perl backend while progressively making action semantics less dependent on raw Perl snippets.

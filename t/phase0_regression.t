@@ -1478,6 +1478,14 @@ subtest 'compiler_pipeline_keeps_inline_dependency_validation' => sub {
     unlike($compiler_pm, qr/sub _require_dep\b/, 'Compiler.pm no longer carries a separate local dependency-validator wrapper');
     like($compiler_pm, qr/sub _require_runtime_ctx\b.*my \$runtime_ctx = \(ref\(\$deps\) eq 'HASH'\) \? \$deps->\{runtime_ctx\} : undef;.*\Qmissing dependency 'runtime_ctx'\E.*sub run_get_pipeline\b.*exists \$deps->\{bootstrap_parse\}.*\$bootstrap_parse = \$deps->\{bootstrap_parse\};.*\Qmissing dependency 'bootstrap_parse'\E.*exists \$deps->\{compile_spec_entry\}.*\$compile_spec_entry = \$deps->\{compile_spec_entry\};.*\Qmissing dependency 'compile_spec_entry'\E/s, 'Compiler.pm now keeps dependency validation inline inside its runtime-ctx and pipeline-setup seams');
 };
+subtest 'actionir_declare_method_helpers_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));
+    ok(defined($declare_method_pm) && length($declare_method_pm), 'DeclareMethod.pm source is available for source-shape inspection');
+    unlike($declare_method_pm, qr/sub _require_dep\b/, 'DeclareMethod.pm no longer carries a separate local dependency-validator wrapper');
+    like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _extract_declare_statement_from_method_expr\b.*my \$require_dep = sub \{.*\$declare_alias_to_type = \$require_dep->\('declare_alias_to_type'\).*sub _lower_declare_method_statement\b.*my \$require_dep = sub \{.*\$lower_typed_declare_statement = \$require_dep->\('lower_typed_declare_statement'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its declare/assign lowering seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 
