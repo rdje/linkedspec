@@ -46,18 +46,13 @@ sub _resolve_rep_bounds {
  return @{$rep_nodes_minmax->{$node_type}};
 }
 
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
 sub _require_rule_ir_pkg {
- _require_pkg_cb('LinkedSpec::RuleIR', '_collect_rule_ir');
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR', '_collect_rule_ir');
  return 1
 }
 
 sub _require_emit_context_pkg {
- _require_pkg_cb('LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
  return 1
 }
 

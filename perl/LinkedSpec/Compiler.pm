@@ -37,11 +37,6 @@ sub _require_dep {
  return $value
 }
 
-sub _require_pkg_cb {
- my ($pkg, $name) = @_;
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, $pkg, $name)
-}
-
 sub _require_trace_pkg {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
  return 1
@@ -160,15 +155,15 @@ sub _trace_level_name_for_current_verbosity {
 }
 
 sub _default_bootstrap_parse_cb {
- return _require_pkg_cb('LinkedSpec::BootstrapSpec', 'run_bootstrap_parse')
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::BootstrapSpec', 'run_bootstrap_parse')
 }
 
 sub _default_compile_spec_entry_cb {
- return _require_pkg_cb('LinkedSpec::SpecEntry', 'compile_spec_entry')
+ return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::SpecEntry', 'compile_spec_entry')
 }
 
 sub _require_validation_pkg {
- _require_pkg_cb('LinkedSpec::Validation', 'validate_spec_content');
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content');
  return 1
 }
 
