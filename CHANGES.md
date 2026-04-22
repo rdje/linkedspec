@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - ActionIR: inline ScannerCore binding validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ScannerCore.pm`,
+- kept the meaningful local scanner-rule rebinding seam intact while shrinking the file-level helper surface: `ScannerCore::_scanner_rule_dep_bindings(...)` now validates required scanner callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `ScannerCore.pm` is now locked against reintroducing that extra validator layer where `_scanner_rule_dep_bindings(...)` is already the real local dependency seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/ScannerCore.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ActionIR: inline Contracts lowering-dep validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/Contracts.pm`,

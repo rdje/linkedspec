@@ -17,20 +17,6 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve a required callback from a dependency hash.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::ScannerCore::_require_dep) -E- missing dependency callback '$name'"
- unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: _scanner_rule_family_packages
 # Purpose : Return the ordered scanner-rule family package list used for both
 #           lazy loading and shared dependency rebinding.
@@ -74,9 +60,16 @@ sub _scanner_dep_specs {
 #------------------------------------------------------------------------------
 sub _scanner_rule_dep_bindings {
  my ($deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ScannerCore::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb
+ };
  my %bindings;
  foreach my $spec (_scanner_dep_specs()) {
-  $bindings{$spec->{binding_symbol}} = _require_dep($deps, $spec->{dep_name});
+  $bindings{$spec->{binding_symbol}} = $require_dep->($spec->{dep_name});
  }
  return \%bindings
 }

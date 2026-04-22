@@ -1398,6 +1398,14 @@ subtest 'actionir_contracts_lowering_dep_builder_keeps_inline_callback_validatio
     unlike($contracts_pm, qr/sub _require_dep\b/, 'Contracts.pm no longer carries a separate local dependency-validator wrapper');
     like($contracts_pm, qr/sub _require_lowering_deps\b.*my \$require_dep = sub \{.*lower_return_general_statement => \$require_dep->\('lower_return_general_statement'\).*lower_declare_method_statement => \$require_dep->\('lower_declare_method_statement'\)/s, 'Contracts.pm now keeps callback validation inline inside its lowering-deps seam');
 };
+subtest 'actionir_scannercore_binding_builder_keeps_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $scanner_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ScannerCore.pm'));
+    ok(defined($scanner_core_pm) && length($scanner_core_pm), 'ScannerCore.pm source is available for source-shape inspection');
+    unlike($scanner_core_pm, qr/sub _require_dep\b/, 'ScannerCore.pm no longer carries a separate local dependency-validator wrapper');
+    like($scanner_core_pm, qr/sub _scanner_rule_dep_bindings\b.*my \$require_dep = sub \{.*foreach my \$spec \(_scanner_dep_specs\(\)\).*\$bindings\{\$spec->\{binding_symbol\}\} = \$require_dep->\(\$spec->\{dep_name\}\)/s, 'ScannerCore.pm now keeps callback validation inline inside its scanner-rule binding seam');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 
