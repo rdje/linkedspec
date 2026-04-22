@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - Plugin runtime: inline PPlugin registry callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/PPlugin.pm`,
+- kept the meaningful local legacy-registry seam intact while shrinking the file-level helper surface: `PPlugin::_load_legacy_registry(...)` now validates its required parser/discovery/registry callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `PPlugin.pm` is now locked against reintroducing that extra validator layer where the legacy registry-loader seam is already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/PPlugin.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ParserFactory: inline setup callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ParserFactory.pm`,

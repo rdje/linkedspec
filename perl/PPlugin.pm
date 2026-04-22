@@ -16,20 +16,6 @@ use Cwd ();
 use File::Basename ();
 use File::Spec ();
 
- #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Validate and return one injected legacy runtime dependency callback.
-# Args    : ($deps, $name)
-# Returns : coderef dependency callback
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(PPlugin::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
 #------------------------------------------------------------------------------
 # Function: _plugin_project_root
 # Purpose : Resolve the project root used for legacy plugin-file discovery.
@@ -191,9 +177,17 @@ sub _load_legacy_registry {
  my ($deps) = @_;
  $deps = _default_deps() unless ref($deps) eq 'HASH';
 
- my $load_plugin_parser = _require_dep($deps, 'load_plugin_parser');
- my $discover_plugin_files = _require_dep($deps, 'discover_plugin_files');
- my $build_plugin_registry = _require_dep($deps, 'build_plugin_registry');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(PPlugin::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+
+ my $load_plugin_parser = $require_dep->('load_plugin_parser');
+ my $discover_plugin_files = $require_dep->('discover_plugin_files');
+ my $build_plugin_registry = $require_dep->('build_plugin_registry');
 
  my $get = $load_plugin_parser->();
  my $plugin_list = $discover_plugin_files->();
