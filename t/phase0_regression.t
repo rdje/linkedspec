@@ -1422,6 +1422,14 @@ subtest 'actionir_canonical_events_builder_keeps_inline_callback_validation' => 
     unlike($canonical_events_pm, qr/sub _require_dep\b/, 'CanonicalEvents.pm no longer carries a separate local dependency-validator wrapper');
     like($canonical_events_pm, qr/sub _build_canonical_action_ir_events\b.*my \$trim_action_ir_value = \(ref\(\$deps->\{trim_action_ir_value\}\) eq 'CODE'\).*\Qmissing dependency callback 'trim_action_ir_value'\E.*my \$split_action_ir_statements = \(ref\(\$deps->\{split_action_ir_statements\}\) eq 'CODE'\).*\Qmissing dependency callback 'split_action_ir_statements'\E/s, 'CanonicalEvents.pm now keeps callback validation inline inside its canonical-event builder seam');
 };
+subtest 'actionir_diagnostics_helpers_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $diagnostics_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Diagnostics.pm'));
+    ok(defined($diagnostics_pm) && length($diagnostics_pm), 'Diagnostics.pm source is available for source-shape inspection');
+    unlike($diagnostics_pm, qr/sub _require_dep\b/, 'Diagnostics.pm no longer carries a separate local dependency-validator wrapper');
+    like($diagnostics_pm, qr/sub _find_unresolved_action_helpers\b.*my \$split_action_ir_statements = \(ref\(\$deps->\{split_action_ir_statements\}\) eq 'CODE'\).*\Qmissing dependency callback 'split_action_ir_statements'\E.*sub _collect_action_helper_ir_nodes\b.*my \$scan_contract_ir_events = \(ref\(\$deps->\{scan_contract_ir_events\}\) eq 'CODE'\).*\Qmissing dependency callback 'scan_contract_ir_events'\E/s, 'Diagnostics.pm now keeps callback validation inline inside its helper-diagnostics seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

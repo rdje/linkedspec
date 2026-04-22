@@ -17,21 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve one required diagnostics dependency callback from the
-#           provided dependency map.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::Diagnostics::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default diagnostics dependency bundle for one owner
 #           package.
@@ -60,7 +45,11 @@ sub default_deps_for_package {
 sub _find_unresolved_action_helpers {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $split_action_ir_statements = _require_dep($deps, 'split_action_ir_statements');
+ my $split_action_ir_statements = (ref($deps->{split_action_ir_statements}) eq 'CODE')
+  ? $deps->{split_action_ir_statements}
+  : undef;
+ die "(LinkedSpec::ActionIR::Diagnostics::_require_dep) -E- missing dependency callback 'split_action_ir_statements'"
+  unless ref($split_action_ir_statements) eq 'CODE';
 
  my %hits;
  my $total = 0;
@@ -97,7 +86,11 @@ sub _find_unresolved_action_helpers {
 sub _collect_action_helper_ir_nodes {
  my ($code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $scan_contract_ir_events = _require_dep($deps, 'scan_contract_ir_events');
+ my $scan_contract_ir_events = (ref($deps->{scan_contract_ir_events}) eq 'CODE')
+  ? $deps->{scan_contract_ir_events}
+  : undef;
+ die "(LinkedSpec::ActionIR::Diagnostics::_require_dep) -E- missing dependency callback 'scan_contract_ir_events'"
+  unless ref($scan_contract_ir_events) eq 'CODE';
 
  my %hits;
  my $total = 0;
