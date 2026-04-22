@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-22 - OwnerDispatch: inline RuleIR trace wrappers
+
+- deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/RuleIR.pm`,
+- kept the meaningful helper entrypoints intact while spending the shared seam directly inside them: `RuleIR::_trace_should_dump(...)`, `_trace_log_output(...)`, `_trace_decision(...)`, and `_dump_value(...)` now call `LinkedSpec::OwnerDispatch::call_preserving_err(...)` inline instead of bouncing through a local `_call_preserving_err(...)` pass-through wrapper,
+- updated phase0 owner-dispatch coverage so `RuleIR.pm` is now locked against reintroducing that local `$@` wrapper where the direct `OwnerDispatch` call is already the real helper seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - OwnerDispatch: inline plugin bridge dispatch wrappers
 
 - deleted the local `$@`-preservation wrapper from `perl/LinkedSpec/PluginBridge.pm`,

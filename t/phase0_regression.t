@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 201;
+    plan tests => 202;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1254,7 +1254,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($rule_ir_pm, qr/sub _require_pkg\b/, 'RuleIR.pm no longer carries an unused generic package-loader wrapper');
     like($rule_ir_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'RuleIR.pm now spends OwnerDispatch directly inside its Trace loader');
     like($rule_ir_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'RuleIR.pm now spends OwnerDispatch directly inside its Data::Dumper loader');
-    like($rule_ir_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'RuleIR.pm now routes $@ preservation through OwnerDispatch');
+    unlike($rule_ir_pm, qr/sub _call_preserving_err\b/, 'RuleIR.pm no longer carries an unused local $@-preservation wrapper');
+    like($rule_ir_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'RuleIR.pm now spends OwnerDispatch directly inside its trace and dump helpers');
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     unlike($emit_context_pm, qr/sub _require_pkg\b/, 'EmitContext.pm no longer carries an unused generic package-loader wrapper');
     unlike($emit_context_pm, qr/sub _require_trace_pkg\b/, 'EmitContext.pm no longer carries an unused local Trace-loader wrapper');

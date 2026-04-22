@@ -58,21 +58,9 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
-#------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one RuleIR
-#           helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
 sub _trace_should_dump {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
   return LinkedSpec::Trace::should_dump(@args)
  })
@@ -80,7 +68,7 @@ sub _trace_should_dump {
 
 sub _trace_log_output {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_trace_pkg();
   return LinkedSpec::Trace::log_output(@args)
  })
@@ -88,7 +76,7 @@ sub _trace_log_output {
 
 sub _trace_decision {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   return 0 unless exists $INC{'LinkedSpec/Trace.pm'};
   return LinkedSpec::Trace::trace_decision(@args)
  })
@@ -96,7 +84,7 @@ sub _trace_decision {
 
 sub _dump_value {
  my ($value) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_data_dumper_pkg();
   return Data::Dumper::Dumper($value)
  })
