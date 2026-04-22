@@ -107,18 +107,6 @@ sub _require_value_expr_pkg {
 }
 
 #------------------------------------------------------------------------------
-# Function: _call_preserving_err
-# Purpose : Preserve caller-visible successful `$@` while executing one
-#           emit-context helper callback.
-# Args    : ($cb)
-# Returns : callback return value in caller context
-#------------------------------------------------------------------------------
-sub _call_preserving_err {
- my ($cb) = @_;
- return LinkedSpec::OwnerDispatch::call_preserving_err($cb)
-}
-
-#------------------------------------------------------------------------------
 # Function: _actionir_owner_callback
 # Purpose : Resolve one callback from a local ActionIR owner through the shared
 #           owner-dispatch callback loader.
@@ -140,7 +128,7 @@ sub _actionir_owner_callback {
 #------------------------------------------------------------------------------
 sub _actionir_owner_default_deps {
  my ($owner_key) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
   return $code->(__PACKAGE__)
  })
@@ -155,7 +143,7 @@ sub _actionir_owner_default_deps {
 #------------------------------------------------------------------------------
 sub _call_actionir_owner {
  my ($owner_key, $method, @args) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $code = _actionir_owner_callback($owner_key, $method);
   return $code->(@args)
  })
@@ -170,7 +158,7 @@ sub _call_actionir_owner {
 #------------------------------------------------------------------------------
 sub _call_actionir_owner_with_deps {
  my ($owner_key, $method, @args) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $code = _actionir_owner_callback($owner_key, $method);
   my $deps = _actionir_owner_default_deps($owner_key);
   return $code->(@args, $deps)
@@ -528,7 +516,7 @@ sub _rewrite_action_code_with_diagnostics {
 
 sub _accumulate_action_rewrite_diagnostics {
  my @args = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   _require_diagnostics_pkg();
   return LinkedSpec::ActionIR::Diagnostics::_accumulate_action_rewrite_diagnostics(@args)
  })
@@ -546,7 +534,7 @@ sub _build_action_rewrite_rules {
 
 sub rewrite_action_code_for_compat {
  my ($label, $code) = @_;
- return _call_preserving_err(sub {
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my ($rewritten) = _rewrite_action_code_with_diagnostics($label, $code, undef);
   my $trimmed = _trim_action_ir_value($code);
   if (

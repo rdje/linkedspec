@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 202;
+    plan tests => 206;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1259,10 +1259,14 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     unlike($emit_context_pm, qr/sub _require_pkg\b/, 'EmitContext.pm no longer carries an unused generic package-loader wrapper');
     unlike($emit_context_pm, qr/sub _require_trace_pkg\b/, 'EmitContext.pm no longer carries an unused local Trace-loader wrapper');
-    like($emit_context_pm, qr/sub _call_preserving_err\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(\$cb\)/s, 'EmitContext.pm now routes $@ preservation through OwnerDispatch');
+    unlike($emit_context_pm, qr/sub _call_preserving_err\b/, 'EmitContext.pm no longer carries an unused local $@-preservation wrapper');
     like($emit_context_pm, qr/sub _actionir_owner_package\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, \$pkg\).*return \$pkg/s, 'EmitContext.pm now defines the shared ActionIR owner-package registry helper and spends OwnerDispatch directly inside it');
     like($emit_context_pm, qr/sub _actionir_owner_callback\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, \$pkg, \$method\)/s, 'EmitContext.pm now routes ActionIR owner callback lookup through OwnerDispatch');
-    like($emit_context_pm, qr/sub _actionir_owner_default_deps\b.*_actionir_owner_callback\(\$owner_key, 'default_deps_for_package'\)/s, 'EmitContext.pm now centralizes ActionIR owner default-dependency lookup through the shared callback loader');
+    like($emit_context_pm, qr/sub _actionir_owner_default_deps\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, 'default_deps_for_package'\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner default-deps helper');
+    like($emit_context_pm, qr/sub _call_actionir_owner\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, \$method\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner dispatcher');
+    like($emit_context_pm, qr/sub _call_actionir_owner_with_deps\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_actionir_owner_callback\(\$owner_key, \$method\).*_actionir_owner_default_deps\(\$owner_key\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its ActionIR owner-with-deps dispatcher');
+    like($emit_context_pm, qr/sub _accumulate_action_rewrite_diagnostics\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_diagnostics_pkg\(\)/s, 'EmitContext.pm now spends OwnerDispatch directly inside its rewrite-diagnostic accumulator');
+    like($emit_context_pm, qr/sub rewrite_action_code_for_compat\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'EmitContext.pm now spends OwnerDispatch directly inside its compat rewrite helper');
     unlike($emit_context_pm, qr/->can\(/, 'EmitContext.pm no longer probes ActionIR owner callbacks with local ->can checks');
     like($rewrite_pipeline_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RewritePipeline.pm now loads the shared owner-dispatch helper');
     unlike($rewrite_pipeline_pm, qr/sub _require_pkg\b/, 'RewritePipeline.pm no longer carries an unused local package-loader wrapper');
