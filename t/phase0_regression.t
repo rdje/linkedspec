@@ -1430,6 +1430,14 @@ subtest 'actionir_diagnostics_helpers_keep_inline_callback_validation' => sub {
     unlike($diagnostics_pm, qr/sub _require_dep\b/, 'Diagnostics.pm no longer carries a separate local dependency-validator wrapper');
     like($diagnostics_pm, qr/sub _find_unresolved_action_helpers\b.*my \$split_action_ir_statements = \(ref\(\$deps->\{split_action_ir_statements\}\) eq 'CODE'\).*\Qmissing dependency callback 'split_action_ir_statements'\E.*sub _collect_action_helper_ir_nodes\b.*my \$scan_contract_ir_events = \(ref\(\$deps->\{scan_contract_ir_events\}\) eq 'CODE'\).*\Qmissing dependency callback 'scan_contract_ir_events'\E/s, 'Diagnostics.pm now keeps callback validation inline inside its helper-diagnostics seams');
 };
+subtest 'actionir_rewrite_pipeline_helpers_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $rewrite_pipeline_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'RewritePipeline.pm'));
+    ok(defined($rewrite_pipeline_pm) && length($rewrite_pipeline_pm), 'RewritePipeline.pm source is available for source-shape inspection');
+    unlike($rewrite_pipeline_pm, qr/sub _require_dep\b/, 'RewritePipeline.pm no longer carries a separate local dependency-validator wrapper');
+    like($rewrite_pipeline_pm, qr/sub _build_action_rewrite_rules\b.*my \$build_action_lowering_contracts = \(ref\(\$deps->\{build_action_lowering_contracts\}\) eq 'CODE'\).*\Qmissing dependency callback 'build_action_lowering_contracts'\E.*sub _rewrite_action_code_with_diagnostics\b.*my \$collect_action_helper_ir_nodes = \(ref\(\$deps->\{collect_action_helper_ir_nodes\}\) eq 'CODE'\).*\Qmissing dependency callback 'collect_action_helper_ir_nodes'\E.*my \$build_canonical_action_ir_events = \(ref\(\$deps->\{build_canonical_action_ir_events\}\) eq 'CODE'\).*\Qmissing dependency callback 'build_canonical_action_ir_events'\E.*my \$find_unresolved_action_helpers = \(ref\(\$deps->\{find_unresolved_action_helpers\}\) eq 'CODE'\).*\Qmissing dependency callback 'find_unresolved_action_helpers'\E/s, 'RewritePipeline.pm now keeps callback validation inline inside its rewrite-rule and rewrite-orchestration seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

@@ -16,14 +16,6 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
 sub _event_continues_implicit_if_flow {
  my ($event) = @_;
  my $contract_id = $event->{contract_id} // '';
@@ -115,7 +107,11 @@ sub _lower_action_code_from_canonical_ir {
 sub _build_action_rewrite_rules {
  my ($label, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $build_action_lowering_contracts = _require_dep($deps, 'build_action_lowering_contracts');
+ my $build_action_lowering_contracts = (ref($deps->{build_action_lowering_contracts}) eq 'CODE')
+  ? $deps->{build_action_lowering_contracts}
+  : undef;
+ die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_action_lowering_contracts'"
+  unless ref($build_action_lowering_contracts) eq 'CODE';
  my $contracts = $build_action_lowering_contracts->($label);
  return [map {{
   id                 => $_->{id},
@@ -130,9 +126,21 @@ sub _build_action_rewrite_rules {
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $collect_action_helper_ir_nodes = _require_dep($deps, 'collect_action_helper_ir_nodes');
- my $build_canonical_action_ir_events = _require_dep($deps, 'build_canonical_action_ir_events');
- my $find_unresolved_action_helpers = _require_dep($deps, 'find_unresolved_action_helpers');
+ my $collect_action_helper_ir_nodes = (ref($deps->{collect_action_helper_ir_nodes}) eq 'CODE')
+  ? $deps->{collect_action_helper_ir_nodes}
+  : undef;
+ die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'collect_action_helper_ir_nodes'"
+  unless ref($collect_action_helper_ir_nodes) eq 'CODE';
+ my $build_canonical_action_ir_events = (ref($deps->{build_canonical_action_ir_events}) eq 'CODE')
+  ? $deps->{build_canonical_action_ir_events}
+  : undef;
+ die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_canonical_action_ir_events'"
+  unless ref($build_canonical_action_ir_events) eq 'CODE';
+ my $find_unresolved_action_helpers = (ref($deps->{find_unresolved_action_helpers}) eq 'CODE')
+  ? $deps->{find_unresolved_action_helpers}
+  : undef;
+ die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'find_unresolved_action_helpers'"
+  unless ref($find_unresolved_action_helpers) eq 'CODE';
 
  $rewrite_rules //= _build_action_rewrite_rules($label, $deps);
  my $ir_diag = $collect_action_helper_ir_nodes->($code, $rewrite_rules);

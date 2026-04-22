@@ -88,7 +88,7 @@ LinkedSpec
 
 This tree is intentionally a reading guide, not a literal static import tree. LinkedSpec uses lazy loading, so the code that matters is often reached through owner dispatch rather than visible in one large `use` list.
 
-Five small but useful examples of that owner-shape cleanup are `LinkedSpec::ActionIR::Contracts`, `LinkedSpec::ActionIR::ScannerCore`, `LinkedSpec::ActionIR::StatementSplit`, `LinkedSpec::ActionIR::CanonicalEvents`, and `LinkedSpec::ActionIR::Diagnostics`: those files now keep `_require_lowering_deps(...)`, `_scanner_rule_dep_bindings(...)`, `_split_action_ir_statements(...)`, `_build_canonical_action_ir_events(...)`, `_find_unresolved_action_helpers(...)`, and `_collect_action_helper_ir_nodes(...)` as their local dependency seams and no longer expose second top-level `_require_dep(...)` validator wrappers beside them.
+Six small but useful examples of that owner-shape cleanup are `LinkedSpec::ActionIR::Contracts`, `LinkedSpec::ActionIR::ScannerCore`, `LinkedSpec::ActionIR::StatementSplit`, `LinkedSpec::ActionIR::CanonicalEvents`, `LinkedSpec::ActionIR::Diagnostics`, and `LinkedSpec::ActionIR::RewritePipeline`: those files now keep `_require_lowering_deps(...)`, `_scanner_rule_dep_bindings(...)`, `_split_action_ir_statements(...)`, `_build_canonical_action_ir_events(...)`, `_find_unresolved_action_helpers(...)`, `_collect_action_helper_ir_nodes(...)`, `_build_action_rewrite_rules(...)`, and `_rewrite_action_code_with_diagnostics(...)` as their local dependency seams and no longer expose second top-level `_require_dep(...)` validator wrappers beside them.
 
 ## The facade owns routing, not semantics
 
