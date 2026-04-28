@@ -17,21 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve one required flow-expression dependency callback from the
-#           provided dependency map.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default flow-expression dependency bundle for one owner
 #           package.
@@ -64,10 +49,17 @@ sub default_deps_for_package {
 #------------------------------------------------------------------------------
 sub _looks_like_array_value_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
 
  return 0 unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -113,10 +105,17 @@ sub _looks_like_array_value_expr {
 #------------------------------------------------------------------------------
 sub _looks_like_hash_value_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
- my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
 
  return 0 unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -162,11 +161,18 @@ sub _looks_like_hash_value_expr {
 #------------------------------------------------------------------------------
 sub _lower_is_empty_expr {
  my ($arg_expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
- my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+ my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+ my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
 
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
@@ -210,9 +216,16 @@ sub _lower_is_empty_expr {
 #------------------------------------------------------------------------------
 sub _lower_defined_target_expr {
  my ($arg_expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
 
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
@@ -238,10 +251,17 @@ sub _lower_defined_target_expr {
 #------------------------------------------------------------------------------
 sub _lower_flow_composite_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ActionIR: inline FlowExpr callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/FlowExpr.pm`,
+- kept the meaningful local flow-expression lowering seams intact while shrinking the file-level helper surface: `FlowExpr::_looks_like_array_value_expr(...)`, `_looks_like_hash_value_expr(...)`, `_lower_is_empty_expr(...)`, `_lower_defined_target_expr(...)`, and `_lower_flow_composite_expr(...)` now validate their required callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `FlowExpr.pm` is now locked against reintroducing that extra validator layer where those flow-expression lowering helpers are already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/FlowExpr.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-28 - ActionIR: inline ValueExpr callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ValueExpr.pm`,
