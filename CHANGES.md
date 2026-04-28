@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-28 - ActionIR: inline ValueExpr callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ValueExpr.pm`,
+- kept the meaningful local value-expression lowering seams intact while shrinking the file-level helper surface: `ValueExpr::_extract_scalar_symbol_name(...)`, `_extract_array_symbol_name(...)`, `_extract_hash_symbol_name(...)`, `_lower_scalar_access_key_expr(...)`, `_split_scalaref_path_segments(...)`, `_lower_scalaref_segment_expr(...)`, `_infer_scalar_container_kind(...)`, `_lower_assignment_source_expr(...)`, and `_strip_literal_delimiters(...)` now validate their required callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `ValueExpr.pm` is now locked against reintroducing that extra validator layer where those value-expression lowering helpers are already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-22 - ActionIR: inline DeclareMethod callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/DeclareMethod.pm`,

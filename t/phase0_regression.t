@@ -1486,6 +1486,14 @@ subtest 'actionir_declare_method_helpers_keep_inline_callback_validation' => sub
     unlike($declare_method_pm, qr/sub _require_dep\b/, 'DeclareMethod.pm no longer carries a separate local dependency-validator wrapper');
     like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _extract_declare_statement_from_method_expr\b.*my \$require_dep = sub \{.*\$declare_alias_to_type = \$require_dep->\('declare_alias_to_type'\).*sub _lower_declare_method_statement\b.*my \$require_dep = sub \{.*\$lower_typed_declare_statement = \$require_dep->\('lower_typed_declare_statement'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its declare/assign lowering seams');
 };
+subtest 'actionir_value_expr_helpers_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $value_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ValueExpr.pm'));
+    ok(defined($value_expr_pm) && length($value_expr_pm), 'ValueExpr.pm source is available for source-shape inspection');
+    unlike($value_expr_pm, qr/sub _require_dep\b/, 'ValueExpr.pm no longer carries a separate local dependency-validator wrapper');
+    like($value_expr_pm, qr/sub _extract_scalar_symbol_name\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_scalar_access_key_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _split_scalaref_path_segments\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_scalaref_segment_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _lower_assignment_source_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _strip_literal_delimiters\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\)/s, 'ValueExpr.pm now keeps callback validation inline inside its value-expression lowering seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 

@@ -17,21 +17,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve one required value-expression dependency callback from the
-#           provided dependency map.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default value-expression dependency bundle for one owner
 #           package.
@@ -59,7 +44,14 @@ sub default_deps_for_package {
 #------------------------------------------------------------------------------
 sub _extract_scalar_symbol_name {
  my ($token, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
@@ -76,7 +68,14 @@ sub _extract_scalar_symbol_name {
 #------------------------------------------------------------------------------
 sub _extract_array_symbol_name {
  my ($token, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
@@ -93,7 +92,14 @@ sub _extract_array_symbol_name {
 #------------------------------------------------------------------------------
 sub _extract_hash_symbol_name {
  my ($token, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
@@ -110,9 +116,16 @@ sub _extract_hash_symbol_name {
 #------------------------------------------------------------------------------
 sub _lower_scalar_access_key_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
 
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
@@ -137,7 +150,14 @@ sub _lower_scalar_access_key_expr {
 #------------------------------------------------------------------------------
 sub _split_scalaref_path_segments {
  my ($path_expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  return undef unless defined $path_expr;
  my $path = $trim_action_ir_value->($path_expr);
  return undef unless defined($path) && length($path);
@@ -245,9 +265,16 @@ sub _split_scalaref_path_segments {
 #------------------------------------------------------------------------------
 sub _lower_scalaref_segment_expr {
  my ($segment_expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
 
  return undef unless defined $segment_expr;
  my $trimmed = $trim_action_ir_value->($segment_expr);
@@ -303,7 +330,14 @@ sub _lower_scalaref_value_expr {
 #------------------------------------------------------------------------------
 sub _infer_scalar_container_kind {
  my ($container_symbol, $key_expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  return 'hash' if defined($container_symbol) && $container_symbol =~ /(hash|map|dict)/io;
  return 'array' if defined($container_symbol) && $container_symbol =~ /(arr|array|list|vec|vector)/io;
@@ -322,9 +356,16 @@ sub _infer_scalar_container_kind {
 #------------------------------------------------------------------------------
 sub _lower_assignment_source_expr {
  my ($source, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $lower_flow_composite_expr = _require_dep($deps, 'lower_flow_composite_expr');
- my $lower_method_value_expr = _require_dep($deps, 'lower_method_value_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
+ my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
 
  return undef unless defined $source;
  $source = $trim_action_ir_value->($source);
@@ -352,7 +393,14 @@ sub _lower_assignment_source_expr {
 #------------------------------------------------------------------------------
 sub _strip_literal_delimiters {
  my ($value, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ValueExpr::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  return undef unless defined $value;
  $value = $trim_action_ir_value->($value);
