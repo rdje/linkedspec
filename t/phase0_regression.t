@@ -1502,6 +1502,14 @@ subtest 'actionir_flow_expr_helpers_keep_inline_callback_validation' => sub {
     unlike($flow_expr_pm, qr/sub _require_dep\b/, 'FlowExpr.pm no longer carries a separate local dependency-validator wrapper');
     like($flow_expr_pm, qr/sub _looks_like_array_value_expr\b.*my \$require_dep = sub \{.*\$extract_array_symbol_name = \$require_dep->\('extract_array_symbol_name'\).*sub _looks_like_hash_value_expr\b.*my \$require_dep = sub \{.*\$extract_hash_symbol_name = \$require_dep->\('extract_hash_symbol_name'\).*sub _lower_is_empty_expr\b.*my \$require_dep = sub \{.*\$lower_method_value_expr = \$require_dep->\('lower_method_value_expr'\).*sub _lower_defined_target_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_flow_composite_expr\b.*my \$require_dep = sub \{.*\$normalize_method_args_with_optional_scope = \$require_dep->\('normalize_method_args_with_optional_scope'\)/s, 'FlowExpr.pm now keeps callback validation inline inside its flow-expression lowering seams');
 };
+subtest 'actionir_control_flow_helpers_keep_inline_callback_validation' => sub {
+    plan tests => 3;
+
+    my $control_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ControlFlow.pm'));
+    ok(defined($control_flow_pm) && length($control_flow_pm), 'ControlFlow.pm source is available for source-shape inspection');
+    unlike($control_flow_pm, qr/sub _require_dep\b/, 'ControlFlow.pm no longer carries a separate local dependency-validator wrapper');
+    like($control_flow_pm, qr/sub _lower_control_flow_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_if_flow_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _expand_flow_branch_action_exprs\b.*my \$require_dep = sub \{.*\$split_action_ir_statements = \$require_dep->\('split_action_ir_statements'\).*sub _lower_switch_flow_statement\b.*my \$require_dep = sub \{.*\$normalize_method_args_with_optional_scope = \$require_dep->\('normalize_method_args_with_optional_scope'\).*sub _lower_print_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\)/s, 'ControlFlow.pm now keeps callback validation inline inside its control-flow lowering seams');
+};
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
 
