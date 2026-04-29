@@ -17,20 +17,6 @@ use LinkedSpec::OwnerDispatch ();
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Function: _require_dep
-# Purpose : Resolve a required callback from a dependency hash.
-# Args    : ($deps, $name)
-# Returns : callback coderef
-#------------------------------------------------------------------------------
-sub _require_dep {
- my ($deps, $name) = @_;
- my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
- die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
-  unless ref($cb) eq 'CODE';
- return $cb
-}
-
-#------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default callback map exported by this owner for active
 #           ActionIR lowering callers.
@@ -100,9 +86,16 @@ sub _declare_alias_to_type {
 #------------------------------------------------------------------------------
 sub _lower_typed_declare_statement {
  my ($type, $entries_or_names, $deps) = @_;
- my $split_declare_symbol_names = _require_dep($deps, 'split_declare_symbol_names');
- my $parse_declare_binding_entry = _require_dep($deps, 'parse_declare_binding_entry');
- my $lower_declare_initializer_expr = _require_dep($deps, 'lower_declare_initializer_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $split_declare_symbol_names = $require_dep->('split_declare_symbol_names');
+ my $parse_declare_binding_entry = $require_dep->('parse_declare_binding_entry');
+ my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
 
  my $sigil = _declare_sigil_for_type($type, $deps);
  return undef unless defined $sigil;
@@ -140,7 +133,14 @@ sub _lower_typed_declare_statement {
 #------------------------------------------------------------------------------
 sub _normalize_method_tag_expr {
  my ($tag, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  return undef unless defined $tag;
  $tag = $trim_action_ir_value->($tag);
@@ -163,17 +163,24 @@ sub _normalize_method_tag_expr {
 #------------------------------------------------------------------------------
 sub _lower_method_value_expr {
  my ($expr, $deps) = @_;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
- my $lower_scalaref_value_expr = _require_dep($deps, 'lower_scalaref_value_expr');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
- my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
- my $lower_scalar_access_key_expr = _require_dep($deps, 'lower_scalar_access_key_expr');
- my $infer_scalar_container_kind = _require_dep($deps, 'infer_scalar_container_kind');
- my $split_top_level_csv = _require_dep($deps, 'split_top_level_csv');
- my $lower_array_pipeline_expr = _require_dep($deps, 'lower_array_pipeline_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $lower_scalaref_value_expr = $require_dep->('lower_scalaref_value_expr');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+ my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+ my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
+ my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+ my $infer_scalar_container_kind = $require_dep->('infer_scalar_container_kind');
+ my $split_top_level_csv = $require_dep->('split_top_level_csv');
+ my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
  my $array_container_prefix_re = qr/^(?:array|a)\s*\(/;
  my $hash_container_prefix_re = qr/^(?:hash|h)\s*\(/;
  my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
@@ -1558,7 +1565,14 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 sub _lower_return_payload_expr {
  my ($expr, $deps) = @_;
  return undef unless defined $expr;
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -1592,7 +1606,14 @@ sub _lower_return_payload_expr {
 #------------------------------------------------------------------------------
 sub _lower_return_general_statement {
  my ($expr, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'return';
@@ -1625,11 +1646,18 @@ sub _lower_return_imatch_statement {
 #------------------------------------------------------------------------------
 sub _lower_assign_statement {
  my ($target, $source, $deps) = @_;
- my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $extract_hash_symbol_name = _require_dep($deps, 'extract_hash_symbol_name');
- my $lower_assignment_source_expr = _require_dep($deps, 'lower_assignment_source_expr');
- my $lower_declare_initializer_expr = _require_dep($deps, 'lower_declare_initializer_expr');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+ my $extract_hash_symbol_name = $require_dep->('extract_hash_symbol_name');
+ my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
+ my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
 
  my $symbol = $extract_scalar_symbol_name->($target);
  if (defined $symbol) {
@@ -1663,10 +1691,17 @@ sub _lower_assign_statement {
 #------------------------------------------------------------------------------
 sub _lower_push_value_statement {
  my ($expr, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'push_value';
@@ -1697,10 +1732,17 @@ sub _lower_push_value_statement {
 #------------------------------------------------------------------------------
 sub _lower_push_nonempty_statement {
  my ($expr, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
- my $extract_array_symbol_name = _require_dep($deps, 'extract_array_symbol_name');
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'push_nonempty';
@@ -1732,9 +1774,16 @@ sub _lower_push_nonempty_statement {
 #------------------------------------------------------------------------------
 sub _lower_regex_subst_statement {
  my ($target, $pattern, $replacement, $flags, $deps) = @_;
- my $extract_scalar_symbol_name = _require_dep($deps, 'extract_scalar_symbol_name');
- my $strip_literal_delimiters = _require_dep($deps, 'strip_literal_delimiters');
- my $trim_action_ir_value = _require_dep($deps, 'trim_action_ir_value');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $extract_scalar_symbol_name = $require_dep->('extract_scalar_symbol_name');
+ my $strip_literal_delimiters = $require_dep->('strip_literal_delimiters');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $symbol = $extract_scalar_symbol_name->($target);
  return undef unless defined $symbol;
@@ -1756,8 +1805,15 @@ sub _lower_regex_subst_statement {
 #------------------------------------------------------------------------------
 sub _lower_return_undef_statement {
  my ($expr, $deps) = @_;
- my $parse_method_function_expr = _require_dep($deps, 'parse_method_function_expr');
- my $normalize_method_args_with_optional_scope = _require_dep($deps, 'normalize_method_args_with_optional_scope');
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
  my $call = $parse_method_function_expr->($expr);
  return undef unless $call && $call->{method} eq 'return_undef';

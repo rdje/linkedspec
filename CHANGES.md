@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ActionIR: inline MethodLowering callback validation
+
+- deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+- kept the meaningful local method/value/assignment/return lowering seams intact while shrinking the file-level helper surface: `MethodLowering::_lower_typed_declare_statement(...)`, `_normalize_method_tag_expr(...)`, `_lower_method_value_expr(...)`, `_lower_return_payload_expr(...)`, `_lower_return_general_statement(...)`, `_lower_assign_statement(...)`, `_lower_push_value_statement(...)`, `_lower_push_nonempty_statement(...)`, `_lower_regex_subst_statement(...)`, and `_lower_return_undef_statement(...)` now validate their required callbacks inline instead of bouncing through a second top-level wrapper subdef,
+- updated phase0 owner-contract coverage so `MethodLowering.pm` is now locked against reintroducing that extra validator layer where those method/value/assignment/return lowering helpers are already the real local dependency surface.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ActionIR: inline ControlFlow callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/ControlFlow.pm`,
