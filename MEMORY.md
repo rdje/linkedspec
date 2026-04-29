@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-29: `specs/portmap.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated the top aggregate return from bare ternary Perl to structured helper flow over `count(a(portmap))`, `scalar(a(portmap), 0)`, and `array_copy(a(portmap))`, and migrated `concatenation` to `return(a("?concat:", array_copy(a(concatenation))))`. Phase0 locks zero compatibility metadata, source spelling, and preserved singleton/multi/concat classification smoke output.
 - 2026-04-29: `specs/lib_reader.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated `lib_file` from `return \@lib_file` to `return(array_copy(a(lib_file)))` and `group` from bare `exit 1` to `exit_now(1)`. Phase0 locks zero compatibility metadata, source spelling, and the grouped attribute AST smoke.
 - 2026-04-29: `specs/Lispish.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated top-level `return call(parenthesis)` to `return(call(parenthesis))` and `exit 1` to `exit_now(1)`. Phase0 and the public Lispish walkthrough lock metadata and source spelling.
 - 2026-04-29: `exit_now(status)` now lowers as a canonical `EXIT` helper without counting as compatibility syntax. `specs/tablegrep.spec::{grep,group}` use helper-form child captures, `declare(scalar, retv)`, structured `LX` return flow, and `exit_now(...)`; the full `tablegrep` descriptor now reports `compatibility_surface_rule_count == 0`. Phase0 locks metadata and source spelling.

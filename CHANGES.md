@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - portmap: finish compatibility-surface cleanup
+
+- migrated `specs/portmap.spec::portmap` from a bare Perl ternary aggregate return to helper-form structured flow using `count(a(portmap))`, `scalar(a(portmap), 0)`, and `array_copy(a(portmap))`,
+- migrated `specs/portmap.spec::concatenation` from a bare arrayref return to helper-form `return(a("?concat:", array_copy(a(concatenation))))`,
+- reduced the full `portmap` descriptor migration summary to `compatibility_surface_rule_count == 0` while preserving singleton, multi, concat, bit, slice, constant, and bare AST shapes.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `portmap` descriptor metadata probe
+  - direct `portmap` parser smoke
+  - direct top-level aggregate / concatenation lowering probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - lib_reader: finish compatibility-surface cleanup
 
 - migrated `specs/lib_reader.spec::lib_file` from a bare array-ref lifecycle return (`return \@lib_file`) to helper-form `return(array_copy(a(lib_file)))`,

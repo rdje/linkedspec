@@ -44132,32 +44132,37 @@ subtest 'ebnf_logging_annotation_runtime_parses_after_push_nonempty_migration' =
     ok(!grep { $_ eq 'CAPTURE_IF' } @{$nodes}, 'logging_annotation descriptor no longer records CAPTURE_IF ActionIR coverage');
 };
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 13;
+    plan tests => 28;
 
     my $descr = LinkedSpec::get_parser('portmap', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for portmap bare_bit_slice migration check');
 
-    my $meta = $descr->{spec}{bare_bit_slice}{meta}{action_rewriter};
-    ok(ref($meta) eq 'HASH', 'portmap bare_bit_slice exposes action_rewriter metadata');
-    is($meta->{raw_perl_dependency_count}, 0, 'portmap bare_bit_slice no longer reports raw-Perl fallback dependency');
-    is_deeply($meta->{raw_perl_dependency_statements}, [], 'portmap bare_bit_slice exposes no raw-Perl fallback statements');
-    is($meta->{unresolved_helper_count}, 0, 'portmap bare_bit_slice avoids unresolved-helper hits');
+    for my $rule (qw(portmap concatenation bare_bit_slice)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "portmap $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "portmap $rule reports no raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "portmap $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "portmap $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "portmap $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "portmap $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "portmap $rule is language-agnostic action-IR ready");
+    }
+
+    my $bare_meta = $descr->{spec}{bare_bit_slice}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'ELIF' } @{$meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'ELSE' } @{$meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        scalar(grep { $_ eq 'IF' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELIF' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ELSE' } @{$bare_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$bare_meta->{canonical_action_ir_nodes}}),
         'portmap bare_bit_slice canonical action-IR nodes include IF/ELIF/ELSE/RETURN after helper migration'
     );
-    ok($meta->{language_agnostic_action_ir_ready}, 'portmap bare_bit_slice is language-agnostic action-IR ready');
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'portmap descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'portmap blocked-rule count drops to zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'portmap compatibility-surface rule count drops to zero after helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'portmap exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'portmap exposes no top blocked rule after helper migration');
-    is($descr->{spec}{portmap}{meta}{action_rewriter}{raw_perl_dependency_count}, 0, 'portmap top rule remains free of raw fallback after bare_bit_slice migration');
-    is($descr->{spec}{concatenation}{meta}{action_rewriter}{raw_perl_dependency_count}, 0, 'portmap concatenation rule remains free of raw fallback after bare_bit_slice migration');
 };
 subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
     plan tests => 15;
@@ -44184,16 +44189,21 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
     }
 };
 subtest 'portmap_spec_prefers_short_container_aliases_in_bare_bit_slice_band' => sub {
-    plan tests => 5;
+    plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'portmap.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'portmap source spec text is available for alias migration inspection');
     like($source_content, qr/assign\(a\(entry_parts\), entry_groups\(\)\);/, 'portmap bare_bit_slice now prefers a(entry_parts) for immediate group snapshot assignment');
+    like($source_content, qr/if\(num_eq\(count\(a\(portmap\)\), 1\)\);/, 'portmap top lifecycle now branches through helper-form count comparison');
+    like($source_content, qr/return\(scalar\(a\(portmap\), 0\)\);/, 'portmap top lifecycle now returns singleton entries through scalar array access');
+    like($source_content, qr/return\(a\("\?multi:", array_copy\(a\(portmap\)\)\)\);/, 'portmap top lifecycle now builds multi-entry return payload through helper-form array copy');
+    like($source_content, qr/return\(a\("\?concat:", array_copy\(a\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concat payload through helper-form array copy');
     like($source_content, qr/return\(a\("\?slice:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now prefers nested short array aliases');
     like($source_content, qr/return\(a\("\?bare:", a\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now prefers nested short array aliases');
     unlike($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap migrated band no longer uses the older array()/array() form for slice returns');
+    unlike($source_content, qr/return \@portmap == 1 \? \$portmap\[0\]/, 'portmap migrated band no longer uses bare Perl ternary return syntax');
 };
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;

@@ -5,13 +5,19 @@ portmap::
 -> bare_bit_slice .push
 -> concatenation  .push
 
-LX {return @portmap == 1 ? $portmap[0] : ['?multi:', [@portmap]]}
+LX {
+	if(num_eq(count(a(portmap)), 1));
+		return(scalar(a(portmap), 0));
+	else();
+		return(a("?multi:", array_copy(a(portmap))));
+	endif()
+}
 
 
 concatenation: /\{/ /\}/
 -> concatenation  .push
 -> bare_bit_slice .push
--> concatenation[1]    {return ['?concat:', [@concatenation]]} 
+-> concatenation[1]    {return(a("?concat:", array_copy(a(concatenation))))}
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
 	declare(array, entry_parts);
 	assign(a(entry_parts), entry_groups());
