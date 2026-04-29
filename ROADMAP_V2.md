@@ -262,6 +262,7 @@ Runtime/diagnostic continuity note:
    - keep raw-Perl-free `.spec` authoring as the target.
 3. Finish the remaining Backbone Item 3 cleanup:
    - reduce leftover compatibility seams,
+   - `specs/ds_vhistory.spec::vhistory` now has zero compatibility-surface statements after migrating `$cur_object = call(object)` and the remaining `push @capt, call(...)` child-capture wrappers onto `assign(...)` / `push_value(...)`,
    - keep `LinkedSpec::OwnerDispatch` as the preferred seam for any remaining thin-wrapper lazy owner loading / `$@` preservation cleanup instead of reintroducing local copies,
    - keep the new `EmitContext` ActionIR owner/dependency registry as the single source of truth for that bridge instead of reintroducing per-wrapper package/dependency duplication,
    - keep the new shared ActionIR dep-map builder as the preferred way to assemble owner callback maps instead of letting `default_deps_for_package(...)` drift back into repeated inline callback registries or dead local callback-loader wrappers,

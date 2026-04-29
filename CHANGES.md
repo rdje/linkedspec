@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ds_vhistory: retire vhistory compatibility wrappers
+
+- migrated `specs/ds_vhistory.spec::vhistory` off the remaining compatibility-surface assignment and child-call push wrappers: `$cur_object = call(object)` now uses `assign(s(cur_object), call(object))`, and the child capture edges now use `push_value(a(capt), call(...))`,
+- preserved the existing `vhistory` descriptor readiness while reducing the rule's `compatibility_surface_count` to zero,
+- extended phase0 source and metadata locks so the `vhistory` band stays raw-fallback-free, unresolved-helper-free, and free of compatibility-surface statements.
+
+- Validation:
+  - `perl -c t/phase0_regression.t`
+  - direct `ds_vhistory::vhistory` descriptor metadata probe
+  - direct `ds_vhistory` parser smoke on representative verbose history text
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ActionIR: add explicit whole-input slices
 
 - added `input_slice(start, width)` as a source-boundary helper for rules that already have absolute source boundaries and need the corresponding whole-input substring without spelling raw `substr($$STRING, ...)`,

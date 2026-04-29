@@ -43144,7 +43144,7 @@ subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => s
     like($source_content, qr/push_value\(a\(rules\), a\(s\(rule\), flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now prefers combined s()/a() aliases');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 13;
+    plan tests => 15;
 
     my $descr = LinkedSpec::get_parser('ds_vhistory', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ds_vhistory vhistory migration check');
@@ -43155,6 +43155,8 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($meta->{raw_perl_dependency_statements}, [], 'ds_vhistory vhistory exposes no raw-Perl fallback statements');
     is($meta->{unresolved_helper_count}, 0, 'ds_vhistory vhistory avoids unresolved-helper hits');
     is_deeply($meta->{language_agnostic_action_ir_blocker_statements}, [], 'ds_vhistory vhistory exposes no language-agnostic blocker statements');
+    is($meta->{compatibility_surface_count}, 0, 'ds_vhistory vhistory no longer reports compatibility-surface statements');
+    is_deeply($meta->{compatibility_surface_statements}, [], 'ds_vhistory vhistory exposes no compatibility-surface statements');
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
@@ -43179,7 +43181,7 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
 subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => sub {
-    plan tests => 5;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
     my $source_content = slurp($source_spec);
@@ -43187,8 +43189,12 @@ subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => s
     ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for alias migration inspection');
     like($source_content, qr/assign\(s\(first_capt\), scalar\(a\(capt\), 0\)\)/, 'ds_vhistory vhistory band now prefers s(first_capt) plus a(capt) in first captured-entry reads');
     like($source_content, qr/push_value\(a\(object_hier\), a\(s\(entry_tag\), array_copy\(a\(capt\)\)\)\)/, 'ds_vhistory vhistory band now prefers nested a()/s() aliases plus array_copy in object_hier pushes');
+    like($source_content, qr/assign\(s\(cur_object\), call\(object\)\)/, 'ds_vhistory object edge now prefers assign(s(cur_object), call(object)) instead of compatibility assignment');
+    like($source_content, qr/push_value\(a\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push_value(a(capt), call(...))');
     ok(index($source_content, 'return(a("?ds_vhistory:", array_copy(a(vhistory))))') >= 0, 'ds_vhistory vhistory band now prefers the short array alias plus array_copy in top-level return construction');
     unlike($source_content, qr/push_value\(array\(vhistory\), array\("\?object:", scalar\(current_object_name\), array_(?:values|copy)\(array\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses the older array()/scalar() wrapper form in object aggregation pushes');
+    unlike($source_content, qr/\$cur_object\s*=\s*call\(object\)/, 'ds_vhistory object edge no longer uses compatibility assignment syntax');
+    unlike($source_content, qr/push \@capt, call\(/, 'ds_vhistory child capture edges no longer use raw-looking push-call wrappers');
 };
 subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     plan tests => 5;

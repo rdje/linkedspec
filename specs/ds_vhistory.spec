@@ -46,7 +46,7 @@ LX  {
    assign(a(object_hier), a());
   endif();
 
-  $cur_object  = call(object);
+  assign(s(cur_object), call(object));
   print("\tObject   ", scalaref(cur_object, [1]), "\n")
 }
 
@@ -65,15 +65,15 @@ LX  {
 }
 
 
--> branch             {push @capt, call(branch)}
--> version            {push @capt, call(version)}
--> branch_tags        {push @capt, call(branch_tags)}
--> version_tags       {push @capt, call(version_tags)}
--> date               {push @capt, call(date)}
--> author             {push @capt, call(author)}
--> comment            {push @capt, call(comment)}
--> manifest           {push @capt, call(manifest)}
--> derived_from       {push @capt, call(derived_from)}
+-> branch             {push_value(a(capt), call(branch))}
+-> version            {push_value(a(capt), call(version))}
+-> branch_tags        {push_value(a(capt), call(branch_tags))}
+-> version_tags       {push_value(a(capt), call(version_tags))}
+-> date               {push_value(a(capt), call(date))}
+-> author             {push_value(a(capt), call(author))}
+-> comment            {push_value(a(capt), call(comment))}
+-> manifest           {push_value(a(capt), call(manifest))}
+-> derived_from       {push_value(a(capt), call(derived_from))}
 
 
 
