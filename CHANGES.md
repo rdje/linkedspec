@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - lib_reader: finish compatibility-surface cleanup
+
+- migrated `specs/lib_reader.spec::lib_file` from a bare array-ref lifecycle return (`return \@lib_file`) to helper-form `return(array_copy(a(lib_file)))`,
+- migrated `specs/lib_reader.spec::group` from bare `exit 1` to `exit_now(1)`, preserving the syntax-error diagnostic and fatal exit behavior,
+- reduced the full `lib_reader` descriptor migration summary to `compatibility_surface_rule_count == 0` while preserving the grouped attribute AST smoke output.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `lib_reader` descriptor metadata probe
+  - direct `lib_reader` parser smoke
+  - direct `return(array_copy(...))` / `exit_now(...)` lowering probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - Lispish: finish compatibility-surface cleanup
 
 - migrated the top-level `specs/Lispish.spec::Lispish` child-return edge from compatibility `return call(parenthesis)` to helper-form `return(call(parenthesis))`,

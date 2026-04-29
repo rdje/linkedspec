@@ -43925,17 +43925,19 @@ subtest 'hlink_substitution_raw_string_prefers_entry_text' => sub {
     unlike($source_content, qr/raw_string:.*?\$IMATCH/, 'hlink_substitution raw_string no longer returns raw $IMATCH directly');
 };
 subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 23;
+    plan tests => 38;
 
     my $descr = LinkedSpec::get_parser('lib_reader', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for lib_reader helper-flow migration check');
 
-    for my $rule (qw(group cattribute sattribute)) {
+    for my $rule (qw(lib_file group cattribute sattribute)) {
         my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
         ok(ref($meta) eq 'HASH', "lib_reader $rule exposes action_rewriter metadata");
         is($meta->{raw_perl_dependency_count}, 0, "lib_reader $rule no longer reports raw-Perl fallback dependency");
         is_deeply($meta->{raw_perl_dependency_statements}, [], "lib_reader $rule exposes no raw-Perl fallback statements");
         is($meta->{unresolved_helper_count}, 0, "lib_reader $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "lib_reader $rule no longer reports compatibility-surface statements");
+        is_deeply($meta->{compatibility_surface_statements}, [], "lib_reader $rule exposes no compatibility-surface statements");
         ok($meta->{language_agnostic_action_ir_ready}, "lib_reader $rule is language-agnostic action-IR ready");
     }
 
@@ -43948,6 +43950,13 @@ subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
         scalar(grep { $_ eq 'SAY' } @{$group_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'EXIT' } @{$group_meta->{canonical_action_ir_nodes}}),
         'lib_reader group canonical action-IR nodes include DECLARE/REGEX_SUBST/PUSH/RETURN/SAY/EXIT after helper migration'
+    );
+
+    my $lib_file_meta = $descr->{spec}{lib_file}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'PUSH' } @{$lib_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$lib_file_meta->{canonical_action_ir_nodes}}),
+        'lib_reader lib_file canonical action-IR nodes include PUSH/RETURN after helper migration'
     );
 
     my $cattribute_meta = $descr->{spec}{cattribute}{meta}{action_rewriter};
@@ -43965,8 +43974,9 @@ subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'lib_reader descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'lib_reader blocked-rule count drops to zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'lib_reader descriptor exposes no compatibility-surface rules after return/exit migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'lib_reader exposes no prioritized blocked-rule list after helper migration');
-   ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'lib_reader exposes no top blocked rule after helper migration');
 };
 subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     plan tests => 4;
@@ -43988,16 +43998,20 @@ subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
 subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub {
-    plan tests => 5;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'lib_reader.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for alias migration inspection');
     ok(index($source_content, '.substr(s(groupname), "\"", "", go)') >= 0, 'lib_reader group reader now prefers s(groupname) in regex-subst cleanup');
+    ok(index($source_content, 'LX          {return(array_copy(a(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
     like($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_copy\(a\(group\)\)\)\)/, 'lib_reader group return now prefers combined s()/a() aliases plus array_copy');
+    like($source_content, qr/LX \{say\("GROUP <", s\(grouptype\), ">\(", s\(groupname\), "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
+    like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
     like($source_content, qr/\.split\(a\(value_items\), s\(value\), \/,\//, 'lib_reader cattribute splitter now prefers short array/scalar aliases');
     unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_(?:values|copy)\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
+    unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;

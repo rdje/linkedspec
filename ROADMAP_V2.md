@@ -270,6 +270,7 @@ Runtime/diagnostic continuity note:
    - `specs/operators_try.spec` now reports zero compatibility-surface rules after migrating the final `group`, `function_call`, and `string` bare `return 1` statements to helper-form `return(1)`,
    - `specs/tablegrep.spec` now reports zero compatibility-surface rules after migrating its child-call captures, loop `retv` declarations, aggregate lifecycle return flow, and fatal exits onto helper DSL,
    - `specs/Lispish.spec` now reports zero compatibility-surface rules after migrating top-level `return call(parenthesis)` to `return(call(parenthesis))` and bare `exit 1` to `exit_now(1)`,
+   - `specs/lib_reader.spec` now reports zero compatibility-surface rules after migrating its top accumulator return to `return(array_copy(a(lib_file)))` and its group syntax-error path to `exit_now(1)`,
    - keep `LinkedSpec::OwnerDispatch` as the preferred seam for any remaining thin-wrapper lazy owner loading / `$@` preservation cleanup instead of reintroducing local copies,
    - keep the new `EmitContext` ActionIR owner/dependency registry as the single source of truth for that bridge instead of reintroducing per-wrapper package/dependency duplication,
    - keep the new shared ActionIR dep-map builder as the preferred way to assemble owner callback maps instead of letting `default_deps_for_package(...)` drift back into repeated inline callback registries or dead local callback-loader wrappers,

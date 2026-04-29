@@ -1,5 +1,5 @@
 lib_file::  -> group    .push
-LX          {return \@lib_file}
+LX          {return(array_copy(a(lib_file)))}
 
 group: /\b(\w+)\s*\(\s*((?s:.*?))\s*\)\s*\{/ /\}/  I.declare(scalar, grouptype=entry_group(0), groupname=entry_group(1)).substr(s(groupname), "\"", "", go)
 
@@ -8,7 +8,7 @@ group: /\b(\w+)\s*\(\s*((?s:.*?))\s*\)\s*\{/ /\}/  I.declare(scalar, grouptype=e
 -> sattribute            .push
 -> group[1]              .return(a("GROUP", s(grouptype), s(groupname), array_copy(a(group))))
 
-LX {say("GROUP <", s(grouptype), ">(", s(groupname), ") Has a syntax error."); exit 1}
+LX {say("GROUP <", s(grouptype), ">(", s(groupname), ") Has a syntax error."); exit_now(1)}
 
 sattribute: /\b(\w+)\s*:\s*(.*?)\s*;/    I.declare(scalar, attribute_name=entry_group(0), value=entry_group(1)).substr(s(value), "\"", "", go).return(a("SATTRIBUTE", s(attribute_name), s(value)))
 
