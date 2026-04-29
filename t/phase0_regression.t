@@ -1270,9 +1270,9 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($rule_ir_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'RuleIR.pm now loads the shared owner-dispatch helper');
     unlike($rule_ir_pm, qr/sub _require_pkg\b/, 'RuleIR.pm no longer carries an unused generic package-loader wrapper');
     like($rule_ir_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'RuleIR.pm now spends OwnerDispatch directly inside its Trace loader');
-    like($rule_ir_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'RuleIR.pm now spends OwnerDispatch directly inside its Data::Dumper loader');
+    unlike($rule_ir_pm, qr/sub _require_data_dumper_pkg\b/, 'RuleIR.pm no longer carries a separate Data::Dumper loader wrapper');
     unlike($rule_ir_pm, qr/sub _call_preserving_err\b/, 'RuleIR.pm no longer carries an unused local $@-preservation wrapper');
-    like($rule_ir_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'RuleIR.pm now spends OwnerDispatch directly inside its trace and dump helpers');
+    like($rule_ir_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\).*Data::Dumper::Dumper/s, 'RuleIR.pm now spends OwnerDispatch directly inside its trace and dump helpers');
     like($emit_context_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'EmitContext.pm now loads the shared owner-dispatch helper');
     unlike($emit_context_pm, qr/sub _require_pkg\b/, 'EmitContext.pm no longer carries an unused generic package-loader wrapper');
     unlike($emit_context_pm, qr/sub _require_(?:trace|rewrite_pipeline|method_expr|scanner|canonical_events|diagnostics|statement_split|contracts|flow_expr|array_pipeline|control_flow|method_lowering|declare_method|value_expr)_pkg\b/, 'EmitContext.pm no longer carries local Trace-loader or owner-specific package-loader wrappers beside its owner-key registry');
@@ -1552,7 +1552,7 @@ subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_erro
     }
 };
 subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
-    plan tests => 9;
+    plan tests => 11;
 
     no warnings 'redefine';
     require LinkedSpec::Validation;
@@ -1560,13 +1560,22 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     require LinkedSpec::RuleIR;
     require LinkedSpec::RuleIR::EmitContext;
 
+    my $owner_dispatch_require_pkg = \&LinkedSpec::OwnerDispatch::require_pkg;
     local *LinkedSpec::RuleIR::_require_trace_pkg = sub { return 1 };
+    local *LinkedSpec::OwnerDispatch::require_pkg = sub {
+        my ($owner_pkg, $target_pkg) = @_;
+        return 1
+            if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::RuleIR'
+            && defined($target_pkg) && $target_pkg eq 'Data::Dumper';
+        return $owner_dispatch_require_pkg->(@_);
+    };
     local *LinkedSpec::RuleIR::EmitContext::_rewrite_pipeline_deps = sub { return { injected => 1 } };
 
     local $INC{'LinkedSpec/Trace.pm'} = __FILE__;
     local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
     local *LinkedSpec::Trace::trace_exit = sub { return 'trace_exit_ok' };
     local *LinkedSpec::Trace::trace_decision = sub { return 'trace_decision_ok' };
+    local *Data::Dumper::Dumper = sub { return 'dump_value_ok' };
     local *LinkedSpec::ActionRewriter::_rewrite_action_code_with_diagnostics = sub {
         die "__UNEXPECTED_ACTION_REWRITER_REWRITE__\n";
     };
@@ -1586,6 +1595,10 @@ subtest 'extracted_wrapper_helpers_preserve_eval_error_state' => sub {
     $@ = "__SAVED_ERR__\n";
     is(LinkedSpec::RuleIR::_trace_decision('ruleir_check', 1, 'ok', 100), 'trace_decision_ok', 'RuleIR trace wrapper still delegates through Trace');
     is($@, "__SAVED_ERR__\n", 'RuleIR trace wrapper preserves caller $@ on successful delegation');
+
+    $@ = "__SAVED_ERR__\n";
+    is(LinkedSpec::RuleIR::_dump_value({ foo => 1 }), 'dump_value_ok', 'RuleIR dump_value wrapper still delegates through Data::Dumper');
+    is($@, "__SAVED_ERR__\n", 'RuleIR dump_value wrapper preserves caller $@ on successful delegation');
 
     $@ = "__SAVED_ERR__\n";
     my ($rewritten, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics('Top', 'call(Leaf)', []);

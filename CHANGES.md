@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - RuleIR: inline Data::Dumper loading
+
+- deleted the separate `_require_data_dumper_pkg(...)` loader wrapper from `perl/LinkedSpec/RuleIR.pm`,
+- kept the meaningful RuleIR dump-formatting seam intact while shrinking the file-level helper surface: `RuleIR::_dump_value(...)` now lazy-loads `Data::Dumper` directly through `LinkedSpec::OwnerDispatch::require_pkg(...)` inside its `$@`-preserving helper body,
+- updated phase0 owner-dispatch coverage so `RuleIR.pm` is now locked against reintroducing that extra Data::Dumper-loader wrapper where `_dump_value(...)` is already the real local seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - SpecEntry: inline Data::Dumper loading
 
 - deleted the separate `_require_data_dumper_pkg(...)` loader wrapper from `perl/LinkedSpec/SpecEntry.pm`,
