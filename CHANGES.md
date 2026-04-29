@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ds_vhistory: finish compatibility-surface cleanup
+
+- migrated `specs/ds_vhistory.spec::manifest` from a raw arrayref return block to direct helper return payload form: `I.return(a("?manifest:"))`,
+- reduced the full `ds_vhistory` descriptor migration summary to `compatibility_surface_rule_count == 0`, keeping the spec raw-fallback-free and unresolved-helper-free,
+- extended phase0 coverage so the manifest token reader keeps the helper spelling and the spec-level migration summary stays compatibility-surface clean.
+
+- Validation:
+  - `perl -c t/phase0_regression.t`
+  - direct `ds_vhistory` descriptor metadata probe
+  - direct `ds_vhistory` parser smoke with a manifest entry
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ds_vhistory: retire vhistory compatibility wrappers
 
 - migrated `specs/ds_vhistory.spec::vhistory` off the remaining compatibility-surface assignment and child-call push wrappers: `$cur_object = call(object)` now uses `assign(s(cur_object), call(object))`, and the child capture edges now use `push_value(a(capt), call(...))`,

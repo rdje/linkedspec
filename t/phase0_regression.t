@@ -43144,7 +43144,7 @@ subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => s
     like($source_content, qr/push_value\(a\(rules\), a\(s\(rule\), flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now prefers combined s()/a() aliases');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 15;
+    plan tests => 16;
 
     my $descr = LinkedSpec::get_parser('ds_vhistory', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ds_vhistory vhistory migration check');
@@ -43177,6 +43177,7 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'ds_vhistory descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'ds_vhistory no longer reports blocked rules after vhistory migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'ds_vhistory exposes no compatibility-surface rules after manifest helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ds_vhistory exposes no prioritized blocked-rule list after vhistory migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
@@ -43197,7 +43198,7 @@ subtest 'ds_vhistory_spec_prefers_short_container_aliases_in_vhistory_band' => s
     unlike($source_content, qr/push \@capt, call\(/, 'ds_vhistory child capture edges no longer use raw-looking push-call wrappers');
 };
 subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
     my $source_content = slurp($source_spec);
@@ -43206,7 +43207,9 @@ subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     like($source_content, qr/object:\s+.*?I\.return\(a\("\?object:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory object token reader now prefers entry_groups()');
     like($source_content, qr/branch_tags:\s+.*?I\.return\(a\("\?branch_tags:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory branch_tags token reader now prefers entry_groups()');
     like($source_content, qr/derived_from:\s+.*?I\.return\(a\("\?derived_from:", flat_array\(entry_groups\(\)\)\)\)/, 'ds_vhistory derived_from token reader now prefers entry_groups()');
+    like($source_content, qr/manifest:\s+.*?I\.return\(a\("\?manifest:"\)\)/, 'ds_vhistory manifest token reader now prefers direct helper return payloads');
     unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
+    unlike($source_content, qr/manifest:.*?return\s+\['\?manifest:'\]/, 'ds_vhistory manifest token reader no longer uses a raw arrayref return literal');
 };
 subtest 'regdef_token_readers_prefer_entry_groups' => sub {
     plan tests => 7;

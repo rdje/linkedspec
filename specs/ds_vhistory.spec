@@ -87,4 +87,4 @@ date:         /(?i)\ndate:\s+(.+)/                                              
 comment:      /(?i)\ncomment:\s+(.+)/                                             I.return(a("?comment:", flat_array(entry_groups())))
 author:       /(?i)\nauthor:\s+(.+)/                                              I.return(a("?author:", flat_array(entry_groups())))
 derived_from: /(?i)\nderived_from:\s+(\S+)/                                       I.return(a("?derived_from:", flat_array(entry_groups())))
-manifest:     /(?is)\nmanifest:\s+.+?\n\n/                                        I {return  ['?manifest:']}
+manifest:     /(?is)\nmanifest:\s+.+?\n\n/                                        I.return(a("?manifest:"))
