@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - Lispish: finish compatibility-surface cleanup
+
+- migrated the top-level `specs/Lispish.spec::Lispish` child-return edge from compatibility `return call(parenthesis)` to helper-form `return(call(parenthesis))`,
+- migrated the top-level syntax-error branch from bare `exit 1` to `exit_now(1)`, preserving the emitted fatal exit while removing the compatibility-surface hit,
+- reduced the full `Lispish` descriptor migration summary to `compatibility_surface_rule_count == 0` and refreshed the public Lispish walkthrough to show the modern helper spelling.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `Lispish` descriptor metadata probe
+  - direct `Lispish` parser smoke
+  - direct `return(call(...))` / `exit_now(...)` lowering probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - tablegrep: finish compatibility-surface cleanup
 
 - added `exit_now(status)` as an explicit canonical `EXIT` helper that lowers to host `exit` statements without entering the compatibility-surface bucket,

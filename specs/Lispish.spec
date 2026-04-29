@@ -1,6 +1,6 @@
 Lispish::
- -> parenthesis     {return call(parenthesis)}
- -> parenthesis[1]  {say("(Lispish) -E- Syntax Error"); exit 1}
+ -> parenthesis     {return(call(parenthesis))}
+ -> parenthesis[1]  {say("(Lispish) -E- Syntax Error"); exit_now(1)}
  -> comments
 
 parenthesis: /\(/ /\)/

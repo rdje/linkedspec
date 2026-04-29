@@ -44418,7 +44418,7 @@ subtest 'simenv_delimiter_readers_prefer_capture_slice' => sub {
     unlike($source_content, qr/parenthesis: .*?print\("<", substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\), ">\\n"\);/s, 'simenv parenthesis no longer uses the raw anonymous-boundary substr debug print');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 47;
+    plan tests => 50;
 
     my $descr = LinkedSpec::get_parser('Lispish', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for small Lispish migration check');
@@ -44442,10 +44442,13 @@ subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
 
     my $top_meta = $descr->{spec}{Lispish}{meta}{action_rewriter};
     ok(grep { $_ eq 'SAY' } @{$top_meta->{canonical_action_ir_nodes}}, 'Lispish top canonical action-IR nodes include SAY after helper migration');
+    ok(grep { $_ eq 'EXIT' } @{$top_meta->{canonical_action_ir_nodes}}, 'Lispish top canonical action-IR nodes include EXIT after exit_now migration');
+    is($top_meta->{compatibility_surface_count}, 0, 'Lispish top rule no longer reports compatibility-surface statements after helper return/exit migration');
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'Lispish descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'Lispish blocked-rule count drops to zero after the final parenthesis migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'Lispish descriptor exposes no compatibility-surface rules after top-rule helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'Lispish exposes no prioritized blocked-rule list after the final parenthesis migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'Lispish exposes no top blocked rule after the final parenthesis migration');
 };
@@ -44472,7 +44475,7 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
 subtest 'lispish_spec_prefers_short_container_aliases_in_parenthesis_and_reader_band' => sub {
-    plan tests => 6;
+    plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
     my $source_content = slurp($source_spec);
@@ -44482,7 +44485,11 @@ subtest 'lispish_spec_prefers_short_container_aliases_in_parenthesis_and_reader_
     like($source_content, qr/assign\(s\(head\), join_values\("", a\(word\)\)\);/, 'Lispish parenthesis band now prefers s(head) plus a(word) in head assignment');
     like($source_content, qr/return\(a\(s\(head\), array_copy\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path now prefers combined s()/a() aliases plus array_copy');
     like($source_content, qr/I\.return\(h\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now also spend the short hash constructor alias');
+    like($source_content, qr/-> parenthesis\s+\{return\(call\(parenthesis\)\)\}/, 'Lispish top child-return edge now uses helper-form return(call(...))');
+    like($source_content, qr/-> parenthesis\[1\]\s+\{say\("\(Lispish\) -E- Syntax Error"\); exit_now\(1\)\}/, 'Lispish top syntax-error edge now uses exit_now(1)');
     unlike($source_content, qr/return\(array\(scalar\(head\), array_(?:values|copy)\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses the older scalar()/array() form in the migrated band');
+    unlike($source_content, qr/return\s+call\(parenthesis\)/, 'Lispish top child-return edge no longer uses compatibility return-call spelling');
+    unlike($source_content, qr/\bexit\s+1\b/, 'Lispish top syntax-error edge no longer uses bare exit compatibility spelling');
 };
 subtest 'lispish_ast_smoke' => sub {
     my $parser = LinkedSpec::get_parser('Lispish');

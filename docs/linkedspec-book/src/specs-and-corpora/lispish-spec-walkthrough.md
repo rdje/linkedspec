@@ -152,19 +152,19 @@ The file begins:
 
 ```text
 Lispish::
- -> parenthesis     {return call(parenthesis)}
- -> parenthesis[1]  {say("(Lispish) -E- Syntax Error"); exit 1}
+ -> parenthesis     {return(call(parenthesis))}
+ -> parenthesis[1]  {say("(Lispish) -E- Syntax Error"); exit_now(1)}
  -> comments
 ```
 
 The important ideas are:
 
 - `Lispish::` is the public entry-style rule.
-- The normal path calls `parenthesis` and returns that child parser's result.
+- The normal path calls `parenthesis` and returns that child parser's result through `return(call(...))`.
 - The `parenthesis[1]` edge is an explicit syntax-error path.
 - Comments can appear at the top level.
 
-This is older compact authoring style, but it is still useful to read because it shows the bridge between historical `.spec` idioms and the modern helper surface. The modern explicit action form for the normal path would be to assign a child call into a scalar with helper DSL and return that value; the shipped file keeps its compact historical shape where that is still intentional.
+This is compact helper authoring style, but it now stays on the modern helper surface: the normal branch uses helper-form child return flow, and the fatal syntax-error branch uses `exit_now(1)` instead of host `exit` syntax.
 
 ## The recursive `parenthesis` rule
 
@@ -378,11 +378,12 @@ The descriptor-level migration summary reports:
 ```text
 language_agnostic_blocked_rule_count == 0
 language_agnostic_top_blocked_rule == undef
+compatibility_surface_rule_count == 0
 ```
 
 The regression suite locks those facts in the Lispish helper-flow migration checks.
 
-This does not mean the spec is stylistically perfect or finished forever. It means the shipped parser is currently a strong example of the helper DSL and ActionIR migration direction: its active rule actions are no longer blocked by raw fallback dependencies.
+This does not mean the spec is stylistically perfect or finished forever. It means the shipped parser is currently a strong example of the helper DSL and ActionIR migration direction: its active rule actions are no longer blocked by raw fallback dependencies or compatibility-surface syntax.
 
 ## The convenience module
 
