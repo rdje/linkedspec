@@ -2089,6 +2089,19 @@ sub _build_emit_and_declare_contracts {
    },
   },
   {
+   id                 => 'exit_now',
+   ir_node            => 'EXIT',
+   diag_name          => 'exit_now',
+   unresolved_pattern => qr/\bexit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower_value = $d->{lower_method_value_expr};
+    $code =~ s/\bexit_now\s*\(\s*\)/exit/g;
+    $code =~ s/\bexit_now\s*\(\s*(?<payload>(?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?<P>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&P))*\)))*)\s*\)/do { my $payload = defined($+{payload}) ? $+{payload} : ''; my $lowered = $lower_value->($payload); 'exit(' . (defined($lowered) && length($lowered) ? $lowered : $payload) . ')' }/ge;
+    return $code
+   },
+  },
+  {
    id                 => 'declare_typed',
    ir_node            => 'DECLARE',
    diag_name          => 'declare',

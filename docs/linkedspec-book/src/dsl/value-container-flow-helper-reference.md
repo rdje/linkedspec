@@ -226,6 +226,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
+| `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
 | `return_a(label)` / `return_m(label)` / `return_ma(label)` | legacy tagged return shortcuts | reading or migrating older specs. Prefer `return(array(...))` with `array_copy(array(label))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 | `return_imatch(...)` / `return_im(...)` | legacy tagged current-match return | reading or migrating older specs. Prefer `return(...)` for new structured payloads. |
 | `return_array(tag, payload)` | legacy tagged array return | reading or migrating older specs. Prefer `return(array(...))` or `return(hash(...))` for new payloads. |

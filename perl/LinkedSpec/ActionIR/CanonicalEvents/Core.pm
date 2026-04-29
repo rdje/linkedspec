@@ -144,6 +144,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  endswitch_flow                   => 'ENDSWITCH',
  say_stmt                         => 'SAY',
  print_stmt                       => 'PRINT',
+ exit_now                         => 'EXIT',
 );
 
 sub _event_args_hash {

@@ -1,16 +1,21 @@
 grep::
- -> re_term	{$retv = call(re_term)}
- -> or_op	{$retv = call(or_op)}
- -> and_op	{$retv = call(and_op)}
- -> group	{$retv = call(group)}
+ -> re_term	{assign(s(retv), call(re_term))}
+ -> or_op	{assign(s(retv), call(or_op))}
+ -> and_op	{assign(s(retv), call(and_op))}
+ -> group	{assign(s(retv), call(group))}
 
 I {
  declare(array, internal);
  declare(scalar, prev_node_type)
 }
 
-LX {return @internal ? \@internal : undef}
-LS {my $retv}
+LX {
+ if(is_empty(array(internal)));
+  return_undef();
+ endif();
+ return(array_copy(array(internal)))
+}
+LS {declare(scalar, retv)}
 LE {
  if(not(scalar(retv)));
   return_undef();
@@ -18,7 +23,7 @@ LE {
  
  if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
   print("ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
-  exit 1;
+  exit_now(1);
  endif();
  
  push_value(array(internal), scalar(retv));
@@ -28,14 +33,14 @@ LE {
 
 
 group:	/\(/ /\)/
- -> group		{$retv = call(group)}
- -> re_term		{$retv = call(re_term)}
- -> or_op		{$retv = call(or_op)}
- -> and_op		{$retv = call(and_op)}
+ -> group		{assign(s(retv), call(group))}
+ -> re_term		{assign(s(retv), call(re_term))}
+ -> or_op		{assign(s(retv), call(or_op))}
+ -> and_op		{assign(s(retv), call(and_op))}
  -> group[1]		{
   if(is_empty(array(internal)));
    print("\\nERROR: ** Empty **  GROUP\\n");
-   exit 2;
+   exit_now(2);
   endif();
   return({type=>'GROUP', group=>array(internal)})
  }
@@ -45,7 +50,7 @@ I {
  declare(scalar, prev_node_type)
 }
 
-LS {my $retv}
+LS {declare(scalar, retv)}
 LE {
  if(not(scalar(retv)));
   return_undef();
@@ -53,7 +58,7 @@ LE {
  
  if(and(and(scalar(prev_node_type), matches(scalar(prev_node_type), /_OP/o)), matches(scalaref(retv, {type}), /_OP/o)));
   print("\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
-  exit 1;
+  exit_now(1);
  endif();
 
  push_value(array(internal), scalar(retv));

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - tablegrep: finish compatibility-surface cleanup
+
+- added `exit_now(status)` as an explicit canonical `EXIT` helper that lowers to host `exit` statements without entering the compatibility-surface bucket,
+- migrated `specs/tablegrep.spec::{grep,group}` child-call captures, loop `retv` declaration, aggregate lifecycle return, and fatal exits onto helper-form DSL,
+- reduced the full `tablegrep` descriptor migration summary to `compatibility_surface_rule_count == 0` while keeping the parser raw-fallback-free and unresolved-helper-free.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `exit_now` descriptor/lowering probe
+  - direct `tablegrep` descriptor metadata probe
+  - direct `tablegrep` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - operators_try: finish compatibility-surface cleanup
 
 - migrated `specs/operators_try.spec::{group,function_call,string}` from bare compatibility returns (`return 1`) to helper-form numeric return spelling (`return(1)`),

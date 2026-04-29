@@ -42100,6 +42100,30 @@ SPEC
     is($rewritten, 'exit; exit 1; exit(2)', 'bare exit statements are preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'bare-exit-only rule remains language-agnostic action-IR ready');
 };
+subtest 'method_like_exit_now_helper_lowers_without_compatibility_surface' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { exit_now(); exit_now(2); exit_now(s(status)) }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for exit_now helper check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'exit_now helper avoids canonical action-IR fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'exit_now helper avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'exit_now helper avoids unresolved-helper hits');
+    is($meta->{compatibility_surface_count}, 0, 'exit_now helper is not compatibility-surface syntax');
+    ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include EXIT for exit_now helper coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'exit_now(); exit_now(2); exit_now(s(status))');
+    is($rewritten, 'exit; exit(2); exit($status)', 'exit_now helper lowers to the runtime exit statement and value-lowers its optional status');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'exit_now-only rule remains language-agnostic action-IR ready');
+    is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'exit_now helper does not create compatibility-surface summary entries');
+    is_deeply($meta->{compatibility_surface_contract_ids}, [], 'exit_now helper exposes no compatibility-surface contract ids');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback' => sub {
     plan tests => 7;
 
@@ -43226,7 +43250,7 @@ subtest 'regdef_token_readers_prefer_entry_groups' => sub {
     unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
 };
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
-    plan tests => 9;
+    plan tests => 13;
 
     my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep operator guard migration check');
@@ -43237,6 +43261,8 @@ subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallb
 
         my @if_prev_node_raw = grep { defined($_) && $_ =~ /^if\s*\(.*prev_node_type/s } @{$meta->{raw_perl_dependency_statements} || []};
         is(scalar @if_prev_node_raw, 0, "tablegrep $rule no longer reports prev_node_type if-guard as raw-perl fallback");
+        is($meta->{compatibility_surface_count}, 0, "tablegrep $rule no longer reports compatibility-surface statements after exit/helper-flow migration");
+        is_deeply($meta->{compatibility_surface_statements}, [], "tablegrep $rule exposes no compatibility-surface statements after exit/helper-flow migration");
         ok(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include IF");
         ok(grep { $_ eq 'EXIT' } @{$meta->{canonical_action_ir_nodes}}, "tablegrep $rule canonical action-IR nodes include EXIT");
     }
@@ -43259,7 +43285,7 @@ subtest 'tablegrep_accumulator_method_flow_avoids_push_internal_raw_fallback' =>
     }
 };
 subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 21;
+    plan tests => 22;
 
     my $descr = LinkedSpec::get_parser('tablegrep', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tablegrep terminal/token migration check');
@@ -43290,6 +43316,7 @@ subtest 'tablegrep_terminal_token_helper_flow_eliminates_raw_fallback' => sub {
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'tablegrep descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'tablegrep no longer reports blocked rules after terminal/token migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'tablegrep descriptor exposes no compatibility-surface rules after helper-flow migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'tablegrep exposes no prioritized blocked-rule list after terminal/token migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tablegrep exposes no top blocked rule after terminal/token migration');
 };
@@ -43304,6 +43331,21 @@ subtest 'tablegrep_terminal_token_band_prefers_entry_group_reads' => sub {
     like($source_content, qr/return\(hash\("type", "STERM", "field", scalar\(subscript\), "sens", scalar\(sens\), "re", scalar\(re\)\)\)/, 'tablegrep subscript terminal return shape remains preserved after entry_group migration');
     like($source_content, qr/or_op:\s*\/\\\|\\\|\//, 'tablegrep operator token rules remain present after terminal-token migration');
     unlike($source_content, qr/declare\(scalar,\s*field=scalar\(IMATCH_LIST,\s*0\),\s*sens=scalar\(IMATCH_LIST,\s*1\),\s*re=scalar\(IMATCH_LIST,\s*2\)\);/, 'tablegrep re_term no longer uses scalar(IMATCH_LIST, ...) in the migrated terminal-token band');
+};
+subtest 'tablegrep_core_flow_prefers_structured_helpers' => sub {
+    plan tests => 8;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'tablegrep.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for helper-flow inspection');
+    like($source_content, qr/-> re_term\s+\{assign\(s\(retv\), call\(re_term\)\)\}/, 'tablegrep grep child calls now capture through assign(s(retv), call(...))');
+    like($source_content, qr/-> group\s+\{assign\(s\(retv\), call\(group\)\)\}/, 'tablegrep group child calls now capture through assign(s(retv), call(...))');
+    like($source_content, qr/LS \{declare\(scalar, retv\)\}/, 'tablegrep loop-start retv declaration now uses declare(scalar, retv)');
+    like($source_content, qr/return\(array_copy\(array\(internal\)\)\)/, 'tablegrep top lifecycle return now uses helper-form array snapshot return');
+    like($source_content, qr/exit_now\(1\)/, 'tablegrep operator guard exits now use exit_now(1)');
+    unlike($source_content, qr/\$retv\s*=\s*call\(/, 'tablegrep no longer uses compatibility child-call assignment wrappers');
+    unlike($source_content, qr/\b(?:exit\s+\d+|my\s+\$retv|return\s+\@internal)/, 'tablegrep no longer uses bare exit/my/conditional-return compatibility spellings in the migrated flow');
 };
 subtest 'vhdl_signal_decl_range_method_flow_reduces_raw_push_capture_fallback' => sub {
     plan tests => 11;

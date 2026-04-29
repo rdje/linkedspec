@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-29: `exit_now(status)` now lowers as a canonical `EXIT` helper without counting as compatibility syntax. `specs/tablegrep.spec::{grep,group}` use helper-form child captures, `declare(scalar, retv)`, structured `LX` return flow, and `exit_now(...)`; the full `tablegrep` descriptor now reports `compatibility_surface_rule_count == 0`. Phase0 locks metadata and source spelling.
 - 2026-04-29: `specs/operators_try.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated `group`, `function_call`, and `string` completion edges from bare `return 1` to helper-form `return(1)`. Phase0 locks per-rule metadata and source spelling.
 - 2026-04-29: `specs/DT.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated `testcontrol`, `group`, and `inline_dt_definition` completion edges from bare `return 1` to helper-form `return(1)`. Phase0 locks per-rule metadata and source spelling.
 - 2026-04-29: `specs/BNF.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup was `group`, migrated from bare `return 1` to helper-form `return(1)` on the closing edge. Phase0 locks the group metadata and the source spelling.

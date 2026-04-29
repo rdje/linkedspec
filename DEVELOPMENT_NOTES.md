@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-04-29: `exit_now(status)` is now a first-class canonical `EXIT` helper for fatal DSL flow; it lowers to host `exit` while avoiding compatibility-surface metadata. `specs/tablegrep.spec::{grep,group}` now use helper-form child-call captures, loop `retv` declaration, structured aggregate return flow, and `exit_now(...)`, so the full `tablegrep` descriptor reports `compatibility_surface_rule_count == 0`; phase0 locks the helper metadata plus preferred source spelling.
 - 2026-04-29: `specs/operators_try.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rules were `group`, `function_call`, and `string`; their completion edges now use `return(1)` instead of bare `return 1`, and phase0 locks both per-rule metadata and source spelling.
 - 2026-04-29: `specs/DT.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rules were `testcontrol`, `group`, and `inline_dt_definition`; their completion edges now use `return(1)` instead of the bare compatibility statement `return 1`, and phase0 locks both per-rule metadata and source spelling.
 - 2026-04-29: `specs/BNF.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rule was `group`, where the completion edge now uses `return(1)` instead of the bare compatibility statement `return 1`; phase0 locks both the `BNF::group` metadata and the source spelling.

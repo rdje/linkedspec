@@ -24,6 +24,7 @@ sub try_scan_contract_ir_events {
   'endswitch_flow' => \&_scan_contract_endswitch_flow,
   'say_stmt' => \&_scan_contract_say_stmt,
   'print_stmt' => \&_scan_contract_print_stmt,
+  'exit_now' => \&_scan_contract_exit_now,
   'return_undef' => \&_scan_contract_return_undef,
   'return_array' => \&_scan_contract_return_array,
   'declare_typed' => \&_scan_contract_declare_typed,
@@ -250,6 +251,19 @@ while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, undef);
  next unless $effective_args && @$effective_args;
  push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
+}
+ return \@events
+}
+
+sub _scan_contract_exit_now {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my $call = _parse_method_function_expr($+{expr});
+ next unless $call;
+ my @args = @{$call->{args} || []};
+ next unless @args <= 1;
+ push @events, {raw => $+{expr}, args => {payload => @args ? _trim_action_ir_value($args[0]) : ''}};
 }
  return \@events
 }
