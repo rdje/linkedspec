@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - pplugin: finish compatibility cleanup
+
+- migrated `specs/pplugin.spec::pplugin_top` from bare `next`, raw state declarations, bare child-call assignment, bare `return undef unless ...`, and bare hashref return syntax to helper-form `next()`, `declare(...)`, `assign(...)`, structured `if(is_defined(...))`, `return_undef()`, and `return(hash(flat_array(a(defs))))`,
+- migrated `specs/pplugin.spec::subdef` from a bare arrayref return to helper-form `return(a(entry_named(subname), ...))` while preserving the plugin-body coderef evaluation behavior,
+- migrated `specs/pplugin.spec::curlyb` from bare `return` to `return_undef()`, reducing the full `pplugin` descriptor migration summary to `compatibility_surface_rule_count == 0`.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `pplugin` descriptor metadata probe
+  - direct `pplugin` parser smoke
+  - direct `next()` / `return(...)` / `return_undef()` / `hash(...)` lowering probes
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - hlink_substitution: finish compatibility cleanup
 
 - migrated `specs/hlink_substitution.spec` fatal dangling/unmatched bracket/brace paths from bare host `exit` statements to canonical `exit_now(...)`,

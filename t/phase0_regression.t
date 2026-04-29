@@ -44240,29 +44240,50 @@ subtest 'portmap_spec_prefers_short_container_aliases_in_bare_bit_slice_band' =>
     unlike($source_content, qr/return \@portmap == 1 \? \$portmap\[0\]/, 'portmap migrated band no longer uses bare Perl ternary return syntax');
 };
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 11;
+    plan tests => 30;
 
     my $descr = LinkedSpec::get_parser('pplugin', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for pplugin helper-flow migration check');
 
+    for my $rule (qw(pplugin_top subdef curlyb)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "pplugin $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "pplugin $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "pplugin $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "pplugin $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "pplugin $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "pplugin $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "pplugin $rule is language-agnostic action-IR ready");
+    }
+
     my $meta = $descr->{spec}{pplugin_top}{meta}{action_rewriter};
-    ok(ref($meta) eq 'HASH', 'pplugin_top exposes action_rewriter metadata');
-    is($meta->{raw_perl_dependency_count}, 0, 'pplugin_top no longer reports raw-Perl fallback dependency');
-    is_deeply($meta->{raw_perl_dependency_statements}, [], 'pplugin_top exposes no raw-Perl fallback statements');
-    is($meta->{unresolved_helper_count}, 0, 'pplugin_top avoids unresolved-helper hits');
     ok(
         scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IF' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'pplugin_top canonical action-IR nodes include DECLARE/ASSIGN/NEXT/CALL/RETURN after helper migration'
+        'pplugin_top canonical action-IR nodes include DECLARE/ASSIGN/NEXT/CALL/IF/RETURN after helper migration'
     );
-    ok($meta->{language_agnostic_action_ir_ready}, 'pplugin_top is language-agnostic action-IR ready');
+
+    my $subdef_meta = $descr->{spec}{subdef}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'IMATCH_NAMED_READ' } @{$subdef_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$subdef_meta->{canonical_action_ir_nodes}}),
+        'pplugin subdef canonical action-IR nodes include named entry read and RETURN after helper migration'
+    );
+
+    my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'RETURN' } @{$curlyb_meta->{canonical_action_ir_nodes}}),
+        'pplugin curlyb canonical action-IR nodes include RETURN after helper migration'
+    );
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'pplugin descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'pplugin blocked-rule count drops to zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'pplugin compatibility-surface rule count drops to zero after helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'pplugin exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'pplugin exposes no top blocked rule after helper migration');
 };
@@ -44288,15 +44309,25 @@ PPLUGIN
    is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
 };
 subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' => sub {
-    plan tests => 4;
+    plan tests => 14;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'pplugin.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'pplugin source spec text is available for alias migration inspection');
+    like($source_content, qr/I \{declare\(array, defs\); declare\(scalar, retv\)\}/, 'pplugin top setup now declares working state through helper-form declarations');
+    like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
+    like($source_content, qr/-> subdef\s+\{assign\(s\(retv\), call\(subdef\)\)\}/, 'pplugin subdef edge now uses helper-form assignment');
+    like($source_content, qr/if\(is_defined\(s\(retv\)\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
     like($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation now prefers the short array alias in assign and constructor positions');
+    like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
+    like($source_content, qr/^LX \{return\(hash\(flat_array\(a\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
+    like($source_content, qr/subdef\[1\]\s+\{return\(a\(entry_named\(subname\), sub \{eval substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)\}\)\)\}/, 'pplugin subdef body now uses helper-form array return around the preserved plugin-body coderef');
+    like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
     unlike($source_content, qr/assign\(array\(defs\), array\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)/, 'pplugin top aggregation no longer uses the older array()/array() form in the migrated band');
-    like($source_content, qr/^LE \{return undef unless defined \$retv; assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)\}/m, 'pplugin migrated alias use stays anchored in the LE aggregation line');
+    unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');
+    unlike($source_content, qr/^LX \{return \{\@defs\}\}/m, 'pplugin top LX no longer uses bare hashref return compatibility syntax');
+    unlike($source_content, qr/curlyb\[1\]\s+\{return\}/, 'pplugin curlyb completion no longer uses bare return compatibility syntax');
 };
 subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 30;
