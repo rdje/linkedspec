@@ -33,11 +33,6 @@ sub _require_data_dumper_pkg {
  return 1
 }
 
-sub _require_linkedre_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE');
- return 1
-}
-
 sub _dump_value {
  my ($value) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -49,7 +44,7 @@ sub _dump_value {
 sub _ored_re {
  my (@regexes) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_linkedre_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE');
   return LinkedRE::oredRE(@regexes)
  })
 }

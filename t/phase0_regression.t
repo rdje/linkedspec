@@ -1235,13 +1235,13 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _require_pkg\b/, 'Compiler.pm no longer carries an unused generic package-loader wrapper');
     like($compiler_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its Trace loader');
     like($compiler_pm, qr/sub _require_data_dumper_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its Data::Dumper loader');
-    like($compiler_pm, qr/sub _require_linkedre_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its LinkedRE loader');
+    unlike($compiler_pm, qr/sub _require_linkedre_pkg\b/, 'Compiler.pm no longer carries a separate LinkedRE loader wrapper');
     like($compiler_pm, qr/sub _default_bootstrap_parse_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::BootstrapSpec', 'run_bootstrap_parse'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its bootstrap-parse callback loader');
     like($compiler_pm, qr/sub _default_compile_spec_entry_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::SpecEntry', 'compile_spec_entry'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its spec-entry callback loader');
     like($compiler_pm, qr/sub _require_validation_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its validation loader');
     unlike($compiler_pm, qr/sub _call_preserving_err\b/, 'Compiler.pm no longer carries an unused local $@-preservation wrapper');
     like($compiler_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_data_dumper_pkg\(\).*Data::Dumper::Dumper/s, 'Compiler.pm now spends OwnerDispatch directly inside _dump_value');
-    like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_linkedre_pkg\(\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
+    like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
     like($compiler_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::log_output/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_output');
     like($compiler_pm, qr/sub _trace_log_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::log_dump/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_dump');
     like($compiler_pm, qr/sub _trace_should_dump\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*exists \$INC\{'LinkedSpec\/Trace.pm'\}.*LinkedSpec::Trace::should_dump/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_should_dump');
@@ -2650,9 +2650,16 @@ subtest 'compiler_helper_wrappers_preserve_eval_error_state' => sub {
     no warnings 'redefine';
     require LinkedSpec::Compiler;
 
+    my $owner_dispatch_require_pkg = \&LinkedSpec::OwnerDispatch::require_pkg;
     local *LinkedSpec::Compiler::_require_trace_pkg = sub { return 1 };
     local *LinkedSpec::Compiler::_require_data_dumper_pkg = sub { return 1 };
-    local *LinkedSpec::Compiler::_require_linkedre_pkg = sub { return 1 };
+    local *LinkedSpec::OwnerDispatch::require_pkg = sub {
+        my ($owner_pkg, $target_pkg) = @_;
+        return 1
+            if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::Compiler'
+            && defined($target_pkg) && $target_pkg eq 'LinkedRE';
+        return $owner_dispatch_require_pkg->(@_);
+    };
     local *LinkedSpec::Trace::log_output = sub { return 'trace_log_ok' };
     local *LinkedSpec::Trace::log_dump = sub { return 'trace_dump_ok' };
     local *LinkedSpec::Trace::should_dump = sub { return 1 };

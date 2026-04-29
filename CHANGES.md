@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - Compiler: inline LinkedRE loading
+
+- deleted the separate `_require_linkedre_pkg(...)` loader wrapper from `perl/LinkedSpec/Compiler.pm`,
+- kept the meaningful compiler regex helper seam intact while shrinking the file-level helper surface: `Compiler::_ored_re(...)` now lazy-loads `LinkedRE` directly through `LinkedSpec::OwnerDispatch::require_pkg(...)` inside its `$@`-preserving helper body,
+- updated phase0 owner-dispatch coverage so `Compiler.pm` is now locked against reintroducing that extra LinkedRE-loader wrapper where `_ored_re(...)` is already the real local seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - BootstrapSpec: inline LinkedRE loading
 
 - deleted the separate `_require_linkedre_pkg(...)` loader wrapper from `perl/LinkedSpec/BootstrapSpec/Core.pm`,
