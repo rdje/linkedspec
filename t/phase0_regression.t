@@ -17226,7 +17226,7 @@ SPEC
     like($len_rewrite, qr/length \$LMATCH/, 'match_len() lowering reads the current local match width directly without consulting stored marks');
 };
 subtest 'entry_text_helper_reads_rule_entry_match_content' => sub {
-    plan tests => 5;
+    plan tests => 6;
 
     my $spec_content = <<'SPEC';
 Top::AND
@@ -17258,6 +17258,8 @@ SPEC
 
     my $text_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'entry_text()');
     like($text_rewrite, qr/\$IMATCH/, 'entry_text() lowering reads the current immediate match text directly without consulting stored marks');
+
+    is(LinkedSpec::call_spec_handler_subst('Child', 'return(entry_text())'), 'return do { $IMATCH }', 'return(entry_text()) enters generalized return lowering instead of raw fallback');
 };
 subtest 'entry_and_match_column_helpers_read_immediate_and_local_match_columns' => sub {
     plan tests => 5;
@@ -43690,12 +43692,12 @@ subtest 'dt_token_readers_prefer_entry_text' => sub {
     unlike($source_content, qr/scalar\(IMATCH\)/, 'DT migrated token readers no longer rely on scalar(IMATCH)');
 };
 subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 23;
+    plan tests => 28;
 
     my $descr = LinkedSpec::get_parser('hlink_substitution', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for hlink_substitution helper-flow migration check');
 
-    for my $rule (qw(substitute_top substitute_statement2 curlyb)) {
+    for my $rule (qw(substitute_top substitute_statement2 curlyb raw_string)) {
         my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
         ok(ref($meta) eq 'HASH', "hlink_substitution $rule exposes action_rewriter metadata");
         is($meta->{raw_perl_dependency_count}, 0, "hlink_substitution $rule no longer reports raw-Perl fallback dependency");
@@ -43781,6 +43783,16 @@ subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' =>
     like($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution top band now prefers a(word_items) plus s(retv) in accumulator pushes');
     ok(index($source_content, 'return(array_copy(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) plus array_copy in aggregate return flow');
     unlike($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution migrated band no longer uses the older array()/scalar() form in accumulator pushes');
+};
+subtest 'hlink_substitution_raw_string_prefers_entry_text' => sub {
+    plan tests => 3;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for raw-string helper inspection');
+    like($source_content, qr/raw_string:.*?I\.return\(entry_text\(\)\)/, 'hlink_substitution raw_string now prefers entry_text() for the immediate token read');
+    unlike($source_content, qr/raw_string:.*?\$IMATCH/, 'hlink_substitution raw_string no longer returns raw $IMATCH directly');
 };
 subtest 'lib_reader_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 23;

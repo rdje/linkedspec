@@ -38,4 +38,4 @@ curlyb: /\{/ /\}/
 
  LX {print("(HLinkSubst) -E- Unmatched closing brace\n"); exit 2}
 
-raw_string: /(\\(?:\[|\])|[^\{\}\[\]])+/   I {return $IMATCH}
+raw_string: /(\\(?:\[|\])|[^\{\}\[\]])+/   I.return(entry_text())

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ActionIR: accept direct entry_text returns
+
+- widened the generalized `return(payload)` recognition surface so documented direct payloads such as `return(entry_text())` enter the canonical return lowering path instead of falling through as raw Perl,
+- aligned the bootstrap method-chain preprocessor with that same payload recognition so fluent `.return(entry_text())` keeps general-return semantics instead of being rewritten into legacy label-injected `return(label, ...)` form,
+- migrated `specs/hlink_substitution.spec::raw_string` from raw `$IMATCH` to fluent `entry_text()` and extended phase0 coverage so `raw_string` is locked as language-agnostic ActionIR-ready with no raw fallback or unresolved helper hits.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `hlink_substitution` descriptor/parser probe
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - BootstrapSpec: inline bootstrap-core loading
 
 - deleted the separate `_require_bootstrap_core_pkg(...)` loader wrapper from `perl/LinkedSpec/BootstrapSpec.pm`,
