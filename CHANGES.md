@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - Capture returns: align fluent direct payloads
+
+- widened the bootstrap method-chain general-return classifier so direct anonymous capture-reader payloads such as `.return(capture_slice_len())` keep canonical `return(payload)` semantics instead of being rewritten into legacy label-injected return form,
+- migrated `specs/sdce.spec::oc_brace` from raw cursor arithmetic (`$LSPOS - $IPOS - 1`) to `return(capture_slice_len())`, preserving brace-body width behavior while exposing a real `CAPTURE_SLICE_LEN` ActionIR node,
+- extended phase0 coverage so fluent and structured direct `capture_slice_len()` returns have identical canonical ActionIR metadata, and so `sdce` source/descriptor checks lock the helper spelling and reject the old raw arithmetic.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c t/phase0_regression.t`
+  - direct fluent `capture_slice_len()` / `sdce::oc_brace` descriptor probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ActionIR: accept direct entry_text returns
 
 - widened the generalized `return(payload)` recognition surface so documented direct payloads such as `return(entry_text())` enter the canonical return lowering path instead of falling through as raw Perl,

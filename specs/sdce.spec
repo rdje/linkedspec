@@ -12,4 +12,4 @@ get_pinport: /\[\s*((?:get_port|get_pin)\w?\s+)/ /\]/ I.declare(array, pieces)
 LS   {declare(scalar, segment); declare(array, segment_parts); assign(s(segment), capture_slice()); split(a(segment_parts), s(segment), /(\s+)/); filter_nonempty(a(segment_parts)); assign(a(pieces), a(flat_array(pieces), flat_array(segment_parts)))}
 LE   {start_capture_slice()}
 
-oc_brace: /\{/ /\}/ -> oc_brace  -> oc_brace[1]  {return  $LSPOS - $IPOS - 1}
+oc_brace: /\{/ /\}/ -> oc_brace  -> oc_brace[1]  {return(capture_slice_len())}

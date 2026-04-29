@@ -1511,13 +1511,13 @@ If backend neutrality matters, these are the defaults you should follow.
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, and `flat_*` helpers over ad hoc Perl data literals when possible.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, `flat_*` helpers, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
 7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
 8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances
-- `return(payload)` is the preferred general return form, but method-chain `.return(...)` detection is still more conservative than block-form `return(payload)`.
+- `return(payload)` is the preferred general return form. Method-chain `.return(...)` now recognizes the common structured payload families plus direct immediate-match and anonymous capture-reader payloads such as `entry_text()` and `capture_slice_len()`; use `return_descriptor` metadata when trying a less common direct reader shape.
 - Helper shells can still contain raw backend expressions; this is sometimes practical, but it is less portable than pure helper-only authoring.
 - Legacy compatibility wrappers are still important because many existing specs depend on them. Keep them in mind when reading old specs, but do not default to them in new code.
 - Some old specs are still extraction-oriented and permissive; that is part of LinkedSpec's intended character, not automatically a bug.

@@ -86,6 +86,8 @@ The anonymous capture boundary is the simplest stateful capture tool: one rollin
 | `capture_take()` | text | advances anonymous boundary to the live cursor | read to the current local-match left edge, then roll the boundary forward. |
 | `capture_take_len()` | width | advances anonymous boundary to the live cursor | record that current-edge width and roll forward. |
 
+Anonymous capture readers can be returned directly. For example, `return(capture_slice_len())` and fluent `.return(capture_slice_len())` both return the current anonymous capture span width without materializing the text.
+
 Compatibility aliases:
 
 | Compatibility helper | Preferred helper |

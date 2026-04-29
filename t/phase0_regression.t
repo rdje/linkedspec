@@ -42255,6 +42255,41 @@ SPEC
     ok(index($rewritten, 'my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0;') >= 0 && index($rewritten, 'substr($$STRING, 0, $__ls_capture_pos) =~ /\n/g') >= 0, 'capture_slice_line() lowers to a direct anonymous capture-boundary line read');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit capture_slice helper rule remains language-agnostic action-IR ready');
 };
+subtest 'method_chain_capture_slice_return_helper_lowers_without_raw_fallback' => sub {
+    plan tests => 10;
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+/a/ -> Top.return(capture_slice_len())
+SPEC
+
+    my $block_spec = <<'SPEC';
+Top::&
+/a/ -> Top { return(capture_slice_len()) }
+SPEC
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
+
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent direct capture_slice_len() return');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured direct capture_slice_len() return');
+
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
+
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent direct capture_slice_len() return avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent direct capture_slice_len() return avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent direct capture_slice_len() return avoids unresolved helper hits');
+    ok($fluent_meta->{language_agnostic_action_ir_ready}, 'fluent direct capture_slice_len() return remains language-agnostic action-IR ready');
+    ok(grep { $_ eq 'CAPTURE_SLICE_LEN' } @{$fluent_meta->{canonical_action_ir_nodes}}, 'fluent direct capture_slice_len() return contributes CAPTURE_SLICE_LEN action-IR node');
+    ok(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}, 'fluent direct capture_slice_len() return contributes RETURN action-IR node');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured direct capture_slice_len() returns produce identical canonical action-IR node coverage');
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(capture_slice_len())'),
+        'return do { ($LSPOS - $IPOS - length $LMATCH) }',
+        'direct capture_slice_len() return lowers to the anonymous capture-boundary width expression'
+    );
+};
 subtest 'action_rewriter_named_mark_read_helpers_lower_without_raw_fallback' => sub {
     plan tests => 9;
 
@@ -43870,12 +43905,12 @@ subtest 'lib_reader_spec_prefers_short_container_aliases_in_reader_band' => sub 
     unlike($source_content, qr/\.return\(array\("GROUP", scalar\(grouptype\), scalar\(groupname\), array_(?:values|copy)\(array\(group\)\)\)\)/, 'lib_reader group return no longer uses the older scalar()/array() form in the migrated band');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 17;
+    plan tests => 23;
 
     my $descr = LinkedSpec::get_parser('sdce', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for sdce helper-flow migration check');
 
-    for my $rule (qw(sdc_esplit get_pinport)) {
+    for my $rule (qw(sdc_esplit get_pinport oc_brace)) {
         my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
         ok(ref($meta) eq 'HASH', "sdce $rule exposes action_rewriter metadata");
         is($meta->{raw_perl_dependency_count}, 0, "sdce $rule no longer reports raw-Perl fallback dependency");
@@ -43904,6 +43939,13 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
         'sdce get_pinport canonical action-IR nodes include DECLARE/ASSIGN/CALL/SPLIT/FILTER_NONEMPTY/RETURN after helper migration'
     );
 
+    my $oc_meta = $descr->{spec}{oc_brace}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CAPTURE_SLICE_LEN' } @{$oc_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$oc_meta->{canonical_action_ir_nodes}}),
+        'sdce oc_brace canonical action-IR nodes include CAPTURE_SLICE_LEN/RETURN after brace-width helper migration'
+    );
+
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'sdce descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'sdce blocked-rule count drops to zero after helper migration');
@@ -43911,7 +43953,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 16;
+    plan tests => 18;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -43931,6 +43973,8 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');
     like($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(entry_groups\(\)\), array_copy\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus array_copy in its helper return');
     unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(a\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(a\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
+    like($source_content, qr/oc_brace: .*?\{return\(capture_slice_len\(\)\)\}/, 'sdce oc_brace now prefers capture_slice_len() for brace-body width reads');
+    unlike($source_content, qr/\$LSPOS - \$IPOS - 1/, 'sdce oc_brace no longer uses raw cursor arithmetic for brace-body width reads');
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
