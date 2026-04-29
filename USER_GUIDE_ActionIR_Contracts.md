@@ -2113,6 +2113,49 @@ the practical reading is:
 
 Use it when the rule wants the full current input string directly, even inside child rules or later same-rule slots where entry and local match helpers have become narrower views.
 
+### `input_slice(start, width)`
+Return a substring from the whole current input using explicit absolute boundaries.
+
+Practical reading:
+- use it when the rule already has an absolute source start and a width,
+- prefer it over raw `substr($$STRING, start, width)` in normal user-facing `.spec` examples,
+- prefer it over `capture_between(start_mark, end_mark)` when the boundaries are already expressions rather than stored named checkpoints,
+- and treat it as the whole-input span companion to `input_text()` and `input_len()`.
+
+Simple form:
+
+```text
+input_slice(match_end_pos(), call(oc_brace))
+```
+
+Worked child-rule example:
+
+```text
+Top::AND
+ /foo\(/
+ -> Top[0] { return(call(Child)) }
+
+Child::AND
+ I { declare(scalar, prefix_text, prefix_width) }
+ /\w+/
+ /\)/
+ -> Child[0] { assign(scalar(prefix_width), match_start_pos()); assign(scalar(prefix_text), input_slice(0, scalar(prefix_width))) }
+ -> Child[1] { return(array("?Child:", scalar(prefix_text), input_slice(match_start_pos(), match_len()))) }
+```
+
+On input:
+
+```text
+foo(bar)
+```
+
+the practical reading is:
+- at `-> Child[0]`, `match_start_pos()` is the absolute start of `bar`, so `input_slice(0, scalar(prefix_width))` returns `foo(`,
+- at `-> Child[1]`, `input_slice(match_start_pos(), match_len())` reads the current local match `)` from the whole input using explicit absolute boundaries,
+- and both reads ignore the live parser cursor except where the supplied boundary expressions read it.
+
+Use it when the rule needs a backend-neutral whole-input span read but the start/width values are already available as explicit expressions.
+
 ### `input_len()`
 Return the numeric width of the whole current input string directly.
 

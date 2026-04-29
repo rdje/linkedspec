@@ -268,12 +268,13 @@ Cursor helpers read the live parser cursor. Whole-input helpers ignore the curso
 | `cursor_rest()` | text from cursor to end-of-input, or `undef` | a rule needs the remaining input text at the live cursor. |
 | `cursor_rest_len()` | width from cursor to end-of-input, or `undef` | a rule needs the remaining input width. |
 | `input_text()` | whole input text | diagnostics or metadata need the full source. |
+| `input_slice(start, width)` | whole-input substring, or `undef` | logic already has absolute source boundaries and needs that span as text. |
 | `input_len()` | whole input width | logic needs the total width. |
 | `input_end_pos()` | whole-input right-edge position | the value is a boundary rather than merely a width. |
 | `input_end_line()` | whole-input right-edge line | diagnostics need where the file ends. |
 | `input_end_col()` | whole-input right-edge column | diagnostics need the final column. |
 
-`input_len()` and `input_end_pos()` are numerically the same today because the input starts at position zero. Use `input_len()` when the concept is width. Use `input_end_pos()` when the concept is a boundary.
+`input_slice(start, width)` evaluates both boundary expressions once, then reads from the whole current input. `input_len()` and `input_end_pos()` are numerically the same today because the input starts at position zero. Use `input_len()` when the concept is width. Use `input_end_pos()` when the concept is a boundary.
 
 Example:
 
@@ -284,6 +285,7 @@ AtEnd::AND
    return(hash(
      "cursor_pos", cursor_pos(),
      "remaining", cursor_rest(),
+     "prefix", input_slice(0, cursor_pos()),
      "source_len", input_len(),
      "source_end_line", input_end_line(),
      "source_end_col", input_end_col()

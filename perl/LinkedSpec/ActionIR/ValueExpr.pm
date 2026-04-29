@@ -375,6 +375,7 @@ sub _lower_assignment_source_expr {
 
  my $method_value = $lower_method_value_expr->($source);
  return $method_value if defined($method_value) && length($method_value) && $source =~ /^call\s*\(/o;
+ return $method_value if defined($method_value) && length($method_value) && $method_value ne $source && $source =~ /^input_slice\s*\(/o;
 
  my $lowered = $lower_flow_composite_expr->($source);
  return $lowered if defined($lowered) && length($lowered);

@@ -95,6 +95,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  cursor_col                       => 'CURSOR_COL_READ',
  cursor_rest                      => 'CURSOR_REST',
  cursor_rest_len                  => 'CURSOR_REST_LEN',
+ input_slice                      => 'INPUT_SLICE_READ',
  input_text                       => 'INPUT_TEXT_READ',
  input_len                        => 'INPUT_LEN_READ',
  input_end_pos                    => 'INPUT_END_POS_READ',

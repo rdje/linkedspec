@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ActionIR: add explicit whole-input slices
+
+- added `input_slice(start, width)` as a source-boundary helper for rules that already have absolute source boundaries and need the corresponding whole-input substring without spelling raw `substr($$STRING, ...)`,
+- wired the helper through method-value lowering, assignment lowering, return-payload lowering, scan contracts, canonical ActionIR metadata, and fluent `.return(...)` classification so block and method-chain forms report `INPUT_SLICE_READ` with zero raw/unresolved helper metadata,
+- migrated `specs/sdce.spec::get_pinport` from raw `$LSPOS` whole-input substring code to `input_slice(match_end_pos(), call(oc_brace))`, preserving the brace segment behavior while keeping the `sdce` descriptor fully language-agnostic ActionIR-ready.
+
+- Validation:
+  - `perl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c perl/LinkedSpec/ActionIR/ValueExpr.pm`
+  - `perl -c perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c t/phase0_regression.t`
+  - direct `input_slice(...)` assignment / fluent-return / `sdce::get_pinport` descriptor probes
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - Capture returns: align fluent direct payloads
 
 - widened the bootstrap method-chain general-return classifier so direct anonymous capture-reader payloads such as `.return(capture_slice_len())` keep canonical `return(payload)` semantics instead of being rewritten into legacy label-injected return form,

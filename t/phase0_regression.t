@@ -42475,11 +42475,16 @@ SPEC
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit absolute input-boundary mark helper rule remains language-agnostic action-IR ready');
 };
 subtest 'action_rewriter_whole_input_read_helpers_lower_without_raw_fallback' => sub {
-    plan tests => 16;
+    plan tests => 23;
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top { return(hash("text", input_text(), "width", input_len(), "end_pos", input_end_pos(), "end_line", input_end_line(), "end_col", input_end_col())) }
+ /a/ -> Top { return(hash("text", input_text(), "slice", input_slice(0, input_len()), "width", input_len(), "end_pos", input_end_pos(), "end_line", input_end_line(), "end_col", input_end_col())) }
+SPEC
+
+    my $fluent_spec = <<'SPEC';
+Top::&
+ /a/ -> Top.return(input_slice(0, input_len()))
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42490,19 +42495,29 @@ SPEC
     is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes explicit whole-input read helpers');
     is($meta->{unresolved_helper_count}, 0, 'explicit whole-input read helpers keep unresolved-helper count at zero');
     ok(grep { $_ eq 'INPUT_TEXT_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_TEXT_READ');
+    ok(grep { $_ eq 'INPUT_SLICE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_SLICE_READ');
     ok(grep { $_ eq 'INPUT_LEN_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_LEN_READ');
     ok(grep { $_ eq 'INPUT_END_POS_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_END_POS_READ');
     ok(grep { $_ eq 'INPUT_END_LINE_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_END_LINE_READ');
     ok(grep { $_ eq 'INPUT_END_COL_READ' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include INPUT_END_COL_READ');
 
-    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("text", input_text(), "width", input_len(), "end_pos", input_end_pos(), "end_line", input_end_line(), "end_col", input_end_col()))');
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'return(hash("text", input_text(), "slice", input_slice(0, input_len()), "width", input_len(), "end_pos", input_end_pos(), "end_line", input_end_line(), "end_col", input_end_col()))');
     ok(index($rewritten, q{do { $$STRING }}) >= 0, 'input_text() lowers to a direct whole-input string read');
+    ok(index($rewritten, q{my $__ls_input_slice_start = 0;}) >= 0 && index($rewritten, q{substr($$STRING, $__ls_input_slice_start, $__ls_input_slice_width)}) >= 0, 'input_slice(start, width) lowers to a direct whole-input substring read with evaluated boundaries');
     ok(index($rewritten, q{do { length($$STRING) }}) >= 0, 'input_len() lowers to a direct whole-input width read');
     ok(index($rewritten, q{"end_pos" => do { length($$STRING) }}) >= 0, 'input_end_pos() lowers to a direct whole-input right-edge position read');
     ok(index($rewritten, q{substr($$STRING, 0, length($$STRING)) =~ /\n/g}) >= 0, 'input_end_line() lowers to a direct whole-input right-edge line read');
     ok(index($rewritten, q{my $__ls_col_pos = length($$STRING);}) >= 0, 'input_end_col() lowers to a direct whole-input right-edge column read');
-    ok(index($rewritten, q{input_text()}) < 0 && index($rewritten, q{input_len()}) < 0 && index($rewritten, q{input_end_pos()}) < 0 && index($rewritten, q{input_end_line()}) < 0 && index($rewritten, q{input_end_col()}) < 0, 'whole-input helper reads are fully lowered inside the same return block');
+    ok(index($rewritten, q{input_text()}) < 0 && index($rewritten, q{input_slice(}) < 0 && index($rewritten, q{input_len()}) < 0 && index($rewritten, q{input_end_pos()}) < 0 && index($rewritten, q{input_end_line()}) < 0 && index($rewritten, q{input_end_col()}) < 0, 'whole-input helper reads are fully lowered inside the same return block');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'explicit whole-input read helper rule remains language-agnostic action-IR ready');
+
+    my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent direct input_slice() return');
+    my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent direct input_slice() return avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent direct input_slice() return avoids unresolved helper hits');
+    ok($fluent_meta->{language_agnostic_action_ir_ready}, 'fluent direct input_slice() return remains language-agnostic action-IR ready');
+    ok(grep { $_ eq 'INPUT_SLICE_READ' } @{$fluent_meta->{canonical_action_ir_nodes}}, 'fluent direct input_slice() return contributes INPUT_SLICE_READ action-IR node');
 };
 subtest 'action_rewriter_named_mark_boundary_write_helpers_lower_without_raw_fallback' => sub {
     plan tests => 11;
@@ -43933,10 +43948,11 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
         scalar(grep { $_ eq 'DECLARE' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$get_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'INPUT_SLICE_READ' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$get_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$get_meta->{canonical_action_ir_nodes}}),
-        'sdce get_pinport canonical action-IR nodes include DECLARE/ASSIGN/CALL/SPLIT/FILTER_NONEMPTY/RETURN after helper migration'
+        'sdce get_pinport canonical action-IR nodes include DECLARE/ASSIGN/CALL/INPUT_SLICE/SPLIT/FILTER_NONEMPTY/RETURN after helper migration'
     );
 
     my $oc_meta = $descr->{spec}{oc_brace}{meta}{action_rewriter};
@@ -43953,7 +43969,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
-    plan tests => 18;
+    plan tests => 20;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -43968,6 +43984,8 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     like($source_content, qr/LX\s+\{assign\(s\(retv\), capture_rest\(\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_copy\(a\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus array_copy for anonymous capture-boundary tail reads');
     unlike($source_content, qr/LX\s+\{assign\(s\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(a\(pieces\), s\(retv\)\); return\(array_(?:values|copy)\(a\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
     like($source_content, qr/push_value\(a\(pieces\), s\(retv\)\)/, 'sdce top band now prefers a(pieces) plus s(retv) in accumulator pushes');
+    like($source_content, qr/assign\(s\(segment\), input_slice\(match_end_pos\(\), call\(oc_brace\)\)\)/, 'sdce get_pinport brace segment read now prefers input_slice() with an explicit match-end start');
+    unlike($source_content, qr/substr\(\$\$STRING, \$LSPOS, call\(oc_brace\)\)/, 'sdce get_pinport brace segment read no longer uses raw whole-input substr with LSPOS');
     like($source_content, qr/assign\(s\(segment\), capture_slice\(\)\)/, 'sdce nested split band now prefers capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(s\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
     ok(index($source_content, 'split(a(segment_parts), s(segment), /\s+/)') >= 0, 'sdce get_pinport now prefers short aliases in split source and target positions');

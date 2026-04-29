@@ -50,6 +50,7 @@ sub default_deps_for_package {
    'lower_return_undef_statement',
    'lower_return_array_statement',
    'lower_declare_method_statement',
+   'lower_method_value_expr',
   ],
  )
 }
@@ -85,6 +86,7 @@ sub _require_lowering_deps {
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
   lower_return_array_statement   => $require_dep->('lower_return_array_statement'),
   lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
+  lower_method_value_expr        => $require_dep->('lower_method_value_expr'),
  }
 }
 
@@ -276,7 +278,7 @@ sub _build_return_contracts {
    id                 => 'return_general',
    ir_node            => 'RETURN',
    diag_name          => 'return',
-   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|(?:scalar|s)\s*\(|(?:array|a)\s*\(|(?:hash|h)\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len)\s*\()/o,
+   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|(?:scalar|s)\s*\(|(?:array|a)\s*\(|(?:hash|h)\s*\(|flat_array\s*\(|flat_hash\s*\(|flatten\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len|input_slice)\s*\()/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_return_general_statement};
@@ -376,7 +378,8 @@ sub _build_return_contracts {
 # Purpose : Contracts that normalize capture/backtrack helper macros/functions.
 #------------------------------------------------------------------------------
 sub _build_capture_and_backtrack_contracts {
- my ($label) = @_;
+ my ($label, $d) = @_;
+ $d = {} unless ref($d) eq 'HASH';
  return [
   {
    id                 => 'capture_macro',
@@ -1261,6 +1264,19 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
+   id                 => 'input_slice',
+   ir_node            => 'INPUT_SLICE_READ',
+   diag_name          => 'input_slice',
+   unresolved_pattern => qr/\binput_slice\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_method_value_expr};
+    return $code unless ref($lower) eq 'CODE';
+    $code =~ s/\b(?<expr>input_slice\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
    id                 => 'input_text',
    ir_node            => 'INPUT_TEXT_READ',
    diag_name          => 'input_text',
@@ -2110,7 +2126,7 @@ sub build_action_lowering_contracts {
  return [
   @{_build_call_and_dispatch_contracts($label)},
   @{_build_return_contracts($label, $d)},
-  @{_build_capture_and_backtrack_contracts($label)},
+  @{_build_capture_and_backtrack_contracts($label, $d)},
   @{_build_passthrough_ir_contracts()},
   @{_build_assignment_and_regex_contracts($d)},
   @{_build_array_pipeline_contracts($d)},

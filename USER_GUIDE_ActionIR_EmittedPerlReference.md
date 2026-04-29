@@ -466,6 +466,7 @@ Important nuance:
 - `cursor_rest()` reads the current parser-cursor tail directly from one live `pos $$STRING` read through end-of-input, without consulting the rule-local mark bucket.
 - `cursor_rest_len()` reads the width of that same current parser-cursor tail directly from one live `pos $$STRING` read, without consulting the rule-local mark bucket.
 - `input_text()` reads the whole current input directly as `do { $$STRING }`, so it ignores the live parser cursor, the rule-local mark bucket, and the narrower entry/local match surfaces completely.
+- `input_slice(start, width)` evaluates the start and width expressions once, then reads that substring from the whole current input with `substr($$STRING, $__ls_input_slice_start, $__ls_input_slice_width)` when both boundaries are defined.
 - `input_len()` reads the width of that same whole current input directly as `do { length($$STRING) }`, so it is the whole-input numeric companion to `input_text()`.
 - `input_end_pos()` reads the absolute position of that same whole-input right edge directly as `do { length($$STRING) }`, so it is numerically equal to `input_len()` today but communicates explicit right-edge boundary intent instead of width intent.
 - `input_end_line()` reads the 1-based line number of the whole-input right edge directly from the full current `$$STRING`, so it stays fixed even when the live parser cursor is still earlier in the input.

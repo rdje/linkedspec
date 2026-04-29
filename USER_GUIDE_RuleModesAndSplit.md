@@ -2305,6 +2305,11 @@ Use `input_text()` when:
 - child-rule logic should keep the full source visible even while `entry_text()` and `match_text()` answer different narrower questions,
 - or the rule wants a backend-neutral replacement for raw `$$STRING` in normal user-facing `.spec` code.
 
+Use `input_slice(start, width)` when:
+- the rule already has explicit absolute source boundaries and needs that span as text,
+- child-rule logic should read a whole-input span even though entry, local-match, and live-cursor views are narrower,
+- or the rule wants a backend-neutral replacement for raw `substr($$STRING, start, width)` in normal user-facing `.spec` code.
+
 Use `input_len()` when:
 - the rule should expose the width of the whole current input directly instead of a narrower live-cursor, entry-match, or local-match width,
 - child-rule logic should keep the full source width visible even while `entry_len()` and `match_len()` answer different narrower questions,
@@ -2495,6 +2500,7 @@ The current supported contract is:
 - `cursor_rest()` means “return the remaining text from the live current parser cursor through end-of-input,”
 - `cursor_rest_len()` means “return the width of that same live current parser-cursor tail or `undef` when the live cursor itself is unavailable,”
 - `input_text()` means “return the whole current input string directly,”
+- `input_slice(start, width)` means “return a substring from the whole current input using explicit absolute start and width expressions,”
 - `input_len()` means “return the width of the whole current input string directly,”
 - `input_end_pos()` means “return the absolute position of the whole-input right edge directly,”
 - `input_end_line()` means “return the 1-based line number of the whole-input right edge directly,”
