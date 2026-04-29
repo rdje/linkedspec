@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - hlink_substitution: finish compatibility cleanup
+
+- migrated `specs/hlink_substitution.spec` fatal dangling/unmatched bracket/brace paths from bare host `exit` statements to canonical `exit_now(...)`,
+- migrated the bracket scalar-ref body return and wrapped-brace body return from bare compatibility `return` statements to helper-form `return(...)`, using `capture_slice()` plus `concat(...)` for the wrapped brace payload,
+- removed stale commented-out `substitute_statement1` legacy snippets that still advertised raw `substr(...)` and bare `exit` forms in the shipped spec source,
+- reduced the full `hlink_substitution` descriptor migration summary to `compatibility_surface_rule_count == 0` while preserving bracket scalar-ref, wrapped brace, raw string, and mixed parser smoke shapes.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `hlink_substitution` descriptor metadata probe
+  - direct `hlink_substitution` parser smoke
+  - direct `return(...)` / `concat(...)` / `exit_now(...)` lowering probes
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - tkgui: add canonical next helper and finish compatibility cleanup
 
 - added canonical `next()` action-helper support, mapping it to `NEXT` ActionIR metadata and lowering it to the runtime `next` statement without counting as compatibility-surface syntax,

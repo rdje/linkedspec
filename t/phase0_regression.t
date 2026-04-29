@@ -43846,7 +43846,7 @@ subtest 'dt_token_readers_prefer_entry_text' => sub {
     unlike($source_content, qr/(?:testcontrol\[1\]|group\[1\]|inline_dt_definition\[1\])\s*\{[^\n]*return\s+1\b/, 'DT completion edges no longer use bare compatibility returns');
 };
 subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 28;
+    plan tests => 37;
 
     my $descr = LinkedSpec::get_parser('hlink_substitution', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for hlink_substitution helper-flow migration check');
@@ -43857,6 +43857,8 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
         is($meta->{raw_perl_dependency_count}, 0, "hlink_substitution $rule no longer reports raw-Perl fallback dependency");
         is_deeply($meta->{raw_perl_dependency_statements}, [], "hlink_substitution $rule exposes no raw-Perl fallback statements");
         is($meta->{unresolved_helper_count}, 0, "hlink_substitution $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "hlink_substitution $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "hlink_substitution $rule exposes no compatibility-surface statements");
         ok($meta->{language_agnostic_action_ir_ready}, "hlink_substitution $rule is language-agnostic action-IR ready");
     }
 
@@ -43891,6 +43893,7 @@ subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'hlink_substitution descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'hlink_substitution blocked-rule count drops to zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'hlink_substitution compatibility-surface rule count drops to zero after helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'hlink_substitution exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'hlink_substitution exposes no top blocked rule after helper migration');
 };
@@ -43915,19 +43918,24 @@ subtest 'hlink_substitution_parser_smoke' => sub {
     }
 };
 subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
-    plan tests => 5;
+    plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for delimiter-helper inspection');
-    like($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = capture_slice\(\)\)\}/, 'hlink_substitution substitute_statement2 now prefers capture_slice() for the bracket body read');
+    like($source_content, qr/substitute_statement2\[1\] \{return\(\\\(my \$capt = capture_slice\(\)\)\)\}/, 'hlink_substitution substitute_statement2 now prefers helper-form return plus capture_slice() for the bracket body read');
     unlike($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\)\}/, 'hlink_substitution substitute_statement2 no longer uses the raw anonymous-boundary substr read');
-    like($source_content, qr/curlyb\[1\]\s+\{return '\{'\.capture_slice\(\)\.'\}'\}/, 'hlink_substitution curlyb now rebuilds the wrapped brace body from capture_slice()');
+    unlike($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = capture_slice\(\)\)\}/, 'hlink_substitution substitute_statement2 no longer uses bare return compatibility syntax');
+    like($source_content, qr/curlyb\[1\]\s+\{return\(concat\("\{", capture_slice\(\), "\}"\)\)\}/, 'hlink_substitution curlyb now rebuilds the wrapped brace body through helper-form concat plus capture_slice()');
+    unlike($source_content, qr/curlyb\[1\]\s+\{return '\{'\.capture_slice\(\)\.'\}'\}/, 'hlink_substitution curlyb no longer uses bare return plus host string concatenation');
     unlike($source_content, qr/curlyb\[1\]\s+\{return substr\(\$\$STRING, \$IPOS-1, \$LSPOS - \$IPOS \+ 1\)\}/, 'hlink_substitution curlyb no longer uses the raw wrapped-brace substr read');
+    like($source_content, qr/LX \{print\("\(HLinkSubst\) -E- Unmatched closing bracket\\n"\); exit_now\(2\)\}/, 'hlink_substitution bracket syntax-error path now uses exit_now(2)');
+    like($source_content, qr/LX \{print\("\(HLinkSubst\) -E- Unmatched closing brace\\n"\); exit_now\(2\)\}/, 'hlink_substitution brace syntax-error path now uses exit_now(2)');
+    unlike($source_content, qr/\bexit 2\b/, 'hlink_substitution delimiter syntax-error paths no longer use bare exit compatibility syntax');
 };
 subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
     my $source_content = slurp($source_spec);
@@ -43936,7 +43944,9 @@ subtest 'hlink_substitution_spec_prefers_short_container_aliases_in_top_band' =>
     like($source_content, qr/assign\(s\(retv\), call\(substitute_statement2\)\)/, 'hlink_substitution top band now prefers s(retv) in substitute_statement2 assignment');
     like($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution top band now prefers a(word_items) plus s(retv) in accumulator pushes');
     ok(index($source_content, 'return(array_copy(a(word_items)));') >= 0, 'hlink_substitution top band now prefers a(word_items) plus array_copy in aggregate return flow');
+    like($source_content, qr/-> substitute_statement2\[1\] \{print\("\(HLinkSubst\) -E- Dangling closing bracket\\n"\); exit_now\(1\)\}/, 'hlink_substitution top dangling-bracket path now uses exit_now(1)');
     unlike($source_content, qr/push_value\(array\(word_items\), scalar\(retv\)\)/, 'hlink_substitution migrated band no longer uses the older array()/scalar() form in accumulator pushes');
+    unlike($source_content, qr/\bexit 1\b/, 'hlink_substitution top dangling-bracket path no longer uses bare exit compatibility syntax');
 };
 subtest 'hlink_substitution_raw_string_prefers_entry_text' => sub {
     plan tests => 3;
