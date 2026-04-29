@@ -43692,7 +43692,7 @@ subtest 'bnf_token_readers_prefer_entry_text' => sub {
     unlike($source_content, qr/group\[1\].*?return\s+1;/s, 'BNF group completion no longer uses a bare compatibility return');
 };
 subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 70;
+    plan tests => 77;
 
     my $descr = LinkedSpec::get_parser('operators_try', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for operators_try debug-print migration check');
@@ -43706,14 +43706,21 @@ subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "operators_try $rule is language-agnostic action-IR ready");
     }
 
+    for my $rule (qw(group function_call string)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        is($meta->{compatibility_surface_count}, 0, "operators_try $rule no longer reports compatibility-surface statements after helper return migration");
+        is_deeply($meta->{compatibility_surface_statements}, [], "operators_try $rule exposes no compatibility-surface statements after helper return migration");
+    }
+
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'operators_try descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'operators_try blocked-rule count drops to zero after debug-print migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'operators_try descriptor exposes no compatibility-surface rules after helper return migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'operators_try exposes no prioritized blocked-rule list after debug-print migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'operators_try exposes no top blocked rule after debug-print migration');
 };
 subtest 'operators_try_token_readers_prefer_entry_text' => sub {
-    plan tests => 5;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'operators_try.spec');
     my $source_content = slurp($source_spec);
@@ -43722,7 +43729,11 @@ subtest 'operators_try_token_readers_prefer_entry_text' => sub {
     like($source_content, qr/function_call: .*?entry_text\(\)/s, 'operators_try function_call now prefers entry_text() for the immediate token read');
     like($source_content, qr/auto_inc_op: .*?entry_text\(\)/s, 'operators_try simple operator token readers now prefer entry_text()');
     like($source_content, qr/variable: .*?entry_text\(\)/s, 'operators_try variable token reader now prefers entry_text()');
+    like($source_content, qr/group\[1\]\s*\{[^\n]*return\(1\)\}/, 'operators_try group completion now prefers helper-form numeric return');
+    like($source_content, qr/function_call\[1\]\s*\{[^\n]*return\(1\)\}/, 'operators_try function_call completion now prefers helper-form numeric return');
+    like($source_content, qr/string\[1\]\s*\{[^\n]*return\(1\)\}/, 'operators_try string completion now prefers helper-form numeric return');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'operators_try migrated token readers no longer rely on scalar(IMATCH)');
+    unlike($source_content, qr/(?:group\[1\]|function_call\[1\]|string\[1\])\s*\{[^\n]*return\s+1\b/, 'operators_try completion edges no longer use bare compatibility returns');
 };
 subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 67;

@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-04-29: `specs/operators_try.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rules were `group`, `function_call`, and `string`; their completion edges now use `return(1)` instead of bare `return 1`, and phase0 locks both per-rule metadata and source spelling.
 - 2026-04-29: `specs/DT.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rules were `testcontrol`, `group`, and `inline_dt_definition`; their completion edges now use `return(1)` instead of the bare compatibility statement `return 1`, and phase0 locks both per-rule metadata and source spelling.
 - 2026-04-29: `specs/BNF.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready compatibility rule was `group`, where the completion edge now uses `return(1)` instead of the bare compatibility statement `return 1`; phase0 locks both the `BNF::group` metadata and the source spelling.
 - 2026-04-29: `specs/ds_vhistory.spec` is now fully compatibility-surface clean in descriptor migration metadata. The last ready-but-legacy rule was `manifest`, which now uses `I.return(a("?manifest:"))` instead of `I { return ['?manifest:'] }`; phase0 locks both the manifest source spelling and `compatibility_surface_rule_count == 0` for the full `ds_vhistory` descriptor.

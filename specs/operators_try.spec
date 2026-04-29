@@ -25,16 +25,16 @@ group: /\(/ /\)/       I {print("-> {start-group\n")}
 -> integer
 -> function_call
 -> variable
--> group[1]    {print("-> end-group}\n"); return 1}
+-> group[1]    {print("-> end-group}\n"); return(1)}
 
 function_call: /\w+\s*\(/ /\)/  I {print("-> (", entry_text(), ") {start-function_call\n")}
 -> variable
 -> integer
 -> string
--> function_call[1]    {print("-> end-function_call}\n"); return 1}
+-> function_call[1]    {print("-> end-function_call}\n"); return(1)}
 
 string: /"/  /(?<!\\)"/      I {print("-> {start-string\n")}
--> string[1]                 {print("-> end-string}\n"); return 1}
+-> string[1]                 {print("-> end-string}\n"); return(1)}
 
 auto_inc_op: /\+\+/          I {print("-> (", entry_text(), ") auto_inc_op\n")}
 auto_dec_op: /\-\-/          I {print("-> (", entry_text(), ") auto_dec_op\n")}
