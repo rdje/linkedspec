@@ -43725,7 +43725,7 @@ subtest 'operators_try_token_readers_prefer_entry_text' => sub {
     unlike($source_content, qr/scalar\(IMATCH\)/, 'operators_try migrated token readers no longer rely on scalar(IMATCH)');
 };
 subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 60;
+    plan tests => 67;
 
     my $descr = LinkedSpec::get_parser('DT', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for DT debug-print migration check');
@@ -43739,14 +43739,21 @@ subtest 'dt_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "DT $rule is language-agnostic action-IR ready");
     }
 
+    for my $rule (qw(testcontrol group inline_dt_definition)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        is($meta->{compatibility_surface_count}, 0, "DT $rule no longer reports compatibility-surface statements after helper return migration");
+        is_deeply($meta->{compatibility_surface_statements}, [], "DT $rule exposes no compatibility-surface statements after helper return migration");
+    }
+
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'DT descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'DT blocked-rule count drops to zero after debug-print migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'DT descriptor exposes no compatibility-surface rules after helper return migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'DT exposes no prioritized blocked-rule list after debug-print migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'DT exposes no top blocked rule after debug-print migration');
 };
 subtest 'dt_token_readers_prefer_entry_text' => sub {
-    plan tests => 5;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'DT.spec');
     my $source_content = slurp($source_spec);
@@ -43755,7 +43762,11 @@ subtest 'dt_token_readers_prefer_entry_text' => sub {
     like($source_content, qr/identifier:\s+.*?entry_text\(\)/s, 'DT identifier now prefers entry_text() for the immediate token read');
     like($source_content, qr/reg_assignment_lhs:\s+.*?entry_text\(\)/s, 'DT register-assignment token reader now prefers entry_text()');
     like($source_content, qr/logical_operator:\s+.*?entry_text\(\)/s, 'DT logical_operator token reader now prefers entry_text()');
+    like($source_content, qr/testcontrol\[1\]\s*\{[^\n]*return\(1\)\}/, 'DT testcontrol completion now prefers helper-form numeric return');
+    like($source_content, qr/group\[1\]\s*\{[^\n]*return\(1\)\}/, 'DT group completion now prefers helper-form numeric return');
+    like($source_content, qr/inline_dt_definition\[1\]\s*\{[^\n]*return\(1\)\}/, 'DT inline_dt_definition completion now prefers helper-form numeric return');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'DT migrated token readers no longer rely on scalar(IMATCH)');
+    unlike($source_content, qr/(?:testcontrol\[1\]|group\[1\]|inline_dt_definition\[1\])\s*\{[^\n]*return\s+1\b/, 'DT completion edges no longer use bare compatibility returns');
 };
 subtest 'hlink_substitution_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 28;

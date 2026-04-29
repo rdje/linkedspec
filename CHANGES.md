@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - DT: finish compatibility-surface cleanup
+
+- migrated `specs/DT.spec::{testcontrol,group,inline_dt_definition}` from bare compatibility returns (`return 1`) to helper-form numeric return spelling (`return(1)`),
+- preserved the emitted parser code shape while reducing the full `DT` descriptor migration summary to `compatibility_surface_rule_count == 0`,
+- extended phase0 coverage so the migrated DT completion rules keep zero compatibility-surface statements and the source keeps the helper-form return spelling.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `return(1)` lowering probe
+  - direct `DT` descriptor metadata probe
+  - direct `DT` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - BNF: finish compatibility-surface cleanup
 
 - migrated `specs/BNF.spec::group` from a bare compatibility return (`return 1`) to helper-form numeric return spelling (`return(1)`),

@@ -265,6 +265,7 @@ Runtime/diagnostic continuity note:
    - `specs/ds_vhistory.spec::vhistory` now has zero compatibility-surface statements after migrating `$cur_object = call(object)` and the remaining `push @capt, call(...)` child-capture wrappers onto `assign(...)` / `push_value(...)`,
    - `specs/ds_vhistory.spec` now reports zero compatibility-surface rules after migrating the final `manifest` raw arrayref return block to `I.return(a("?manifest:"))`,
    - `specs/BNF.spec` now reports zero compatibility-surface rules after migrating the final `group` bare `return 1` statement to helper-form `return(1)`,
+   - `specs/DT.spec` now reports zero compatibility-surface rules after migrating the final `testcontrol`, `group`, and `inline_dt_definition` bare `return 1` statements to helper-form `return(1)`,
    - keep `LinkedSpec::OwnerDispatch` as the preferred seam for any remaining thin-wrapper lazy owner loading / `$@` preservation cleanup instead of reintroducing local copies,
    - keep the new `EmitContext` ActionIR owner/dependency registry as the single source of truth for that bridge instead of reintroducing per-wrapper package/dependency duplication,
    - keep the new shared ActionIR dep-map builder as the preferred way to assemble owner callback maps instead of letting `default_deps_for_package(...)` drift back into repeated inline callback registries or dead local callback-loader wrappers,
