@@ -61,11 +61,6 @@ sub _require_trace_pkg {
  return 1
 }
 
-sub _require_data_dumper_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper');
- return 1
-}
-
 sub _trace_enter {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -109,7 +104,7 @@ sub _trace_should_dump {
 sub _dump_value {
  my ($value) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_data_dumper_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'Data::Dumper');
   return Data::Dumper::Dumper($value)
  })
 }
