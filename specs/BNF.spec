@@ -55,7 +55,7 @@ LE {print("LOOP END Message\n")}
  -> g_repetition
  -> group[1]			  	  	  { 
 	 print("(group)        -I-  ########################################## Leaving\n");
-	 return 1;
+	 return(1);
  }
 
 g_repetition: 		/\{(?:\d+(?:,\d*)?|,\d+)\}/	I {print("(g_repetition) -I- <", entry_text(), ">\n")}

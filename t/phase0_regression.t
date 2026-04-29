@@ -43658,7 +43658,7 @@ subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     }
 };
 subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 61;
+    plan tests => 64;
 
     my $descr = LinkedSpec::get_parser('BNF', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for BNF debug-print migration check');
@@ -43671,9 +43671,14 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "BNF $rule canonical action-IR nodes include PRINT after debug-print migration");
         ok($meta->{language_agnostic_action_ir_ready}, "BNF $rule is language-agnostic action-IR ready");
     }
+
+    my $group_meta = $descr->{spec}{group}{meta}{action_rewriter};
+    is($group_meta->{compatibility_surface_count}, 0, 'BNF group no longer reports compatibility-surface statements after helper return migration');
+    is_deeply($group_meta->{compatibility_surface_statements}, [], 'BNF group exposes no compatibility-surface statements after helper return migration');
+    is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'BNF descriptor exposes no compatibility-surface rules after helper return migration');
 };
 subtest 'bnf_token_readers_prefer_entry_text' => sub {
-    plan tests => 5;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'BNF.spec');
     my $source_content = slurp($source_spec);
@@ -43682,7 +43687,9 @@ subtest 'bnf_token_readers_prefer_entry_text' => sub {
     ok(index($source_content, 'declare(scalar, text=entry_text());') >= 0, 'BNF migrated token readers now prefer entry_text() before cleanup');
     like($source_content, qr/node:\s+.*?entry_text\(\)/s, 'BNF node now prefers entry_text() for the immediate token read');
     ok(index($source_content, 'substr(scalar(text), "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
+    like($source_content, qr/group\[1\].*?return\(1\);/s, 'BNF group completion now prefers helper-form numeric return');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'BNF migrated token readers no longer rely on scalar(IMATCH)');
+    unlike($source_content, qr/group\[1\].*?return\s+1;/s, 'BNF group completion no longer uses a bare compatibility return');
 };
 subtest 'operators_try_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 70;

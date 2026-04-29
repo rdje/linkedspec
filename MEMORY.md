@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-29: `specs/BNF.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup was `group`, migrated from bare `return 1` to helper-form `return(1)` on the closing edge. Phase0 locks the group metadata and the source spelling.
 - 2026-04-29: `specs/ds_vhistory.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup was `manifest`, migrated from `I { return ['?manifest:'] }` to `I.return(a("?manifest:"))`. Phase0 locks the manifest helper spelling and the spec-level compatibility-surface summary.
 - 2026-04-29: `specs/ds_vhistory.spec::vhistory` now has zero compatibility-surface statements after replacing `$cur_object = call(object)` with `assign(s(cur_object), call(object))` and replacing the child capture `push @capt, call(...)` wrappers with `push_value(a(capt), call(...))`. Phase0 locks both metadata (`compatibility_surface_count == 0`) and preferred source spelling.
 - 2026-04-29: `input_slice(start, width)` is now the explicit whole-input substring helper for already-known absolute source boundaries. It lowers through method values, assignment sources, return payloads, scan contracts, canonical `INPUT_SLICE_READ` metadata, and fluent `.return(...)`; `specs/sdce.spec::get_pinport` uses `input_slice(match_end_pos(), call(oc_brace))` instead of raw `$LSPOS` `substr(...)`, with phase0 coverage for zero raw/unresolved metadata and source spelling.

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - BNF: finish compatibility-surface cleanup
+
+- migrated `specs/BNF.spec::group` from a bare compatibility return (`return 1`) to helper-form numeric return spelling (`return(1)`),
+- preserved the emitted parser code shape while reducing the full `BNF` descriptor migration summary to `compatibility_surface_rule_count == 0`,
+- extended phase0 coverage so `BNF::group` keeps zero compatibility-surface statements and the source keeps the helper-form return spelling.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `return(1)` lowering probe
+  - direct `BNF` descriptor metadata probe
+  - direct `BNF` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ds_vhistory: finish compatibility-surface cleanup
 
 - migrated `specs/ds_vhistory.spec::manifest` from a raw arrayref return block to direct helper return payload form: `I.return(a("?manifest:"))`,
