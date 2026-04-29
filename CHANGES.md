@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - ActionIR: inline StatementSplit core loading
+
+- deleted the single-use `_require_statement_split_core_pkg(...)` loader wrapper from `perl/LinkedSpec/ActionIR/StatementSplit.pm`,
+- kept the meaningful statement-splitting seam intact while shrinking the file-level helper surface: `StatementSplit::_split_action_ir_statements(...)` now lazy-loads `StatementSplit::Core` directly through `LinkedSpec::OwnerDispatch::require_pkg(...)` inside its `$@`-preserving delegation body,
+- updated phase0 owner-dispatch coverage so `StatementSplit.pm` is now locked against reintroducing that extra core-loader wrapper where `_split_action_ir_statements(...)` is already the real local split seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/StatementSplit.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ActionIR: inline MethodLowering callback validation
 
 - deleted the separate local `_require_dep(...)` validator wrapper from `perl/LinkedSpec/ActionIR/MethodLowering.pm`,

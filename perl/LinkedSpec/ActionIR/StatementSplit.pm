@@ -16,11 +16,6 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-sub _require_statement_split_core_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core');
- return 'LinkedSpec::ActionIR::StatementSplit::Core'
-}
-
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -41,7 +36,7 @@ sub _split_action_ir_statements {
  die "(LinkedSpec::ActionIR::StatementSplit::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
   unless ref($trim_action_ir_value) eq 'CODE';
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_statement_split_core_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core');
   return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($code, $trim_action_ir_value)
  })
 }

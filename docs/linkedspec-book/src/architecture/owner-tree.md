@@ -145,6 +145,8 @@ In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer
 
 `RuleIR::EmitContext` now follows that same rule for its internal ActionIR owner-package registry: `_actionir_owner_package(...)` remains the meaningful local seam, but it now calls `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
 
+`ActionIR::StatementSplit` now follows the same rule at the split facade: `_split_action_ir_statements(...)` remains the meaningful local seam, but it now calls `OwnerDispatch::require_pkg(...)` directly when it lazy-loads `StatementSplit::Core` instead of bouncing through another single-use core-loader wrapper.
+
 `ActionIR::StatementSplit::Core` now follows it too: `_require_statement_split_mode_pkg(...)` and `_require_method_expr_pkg(...)` remain the meaningful local seams, but they now call `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.
 
 `BootstrapSpec::Core` now follows the same rule for its tiny LinkedRE helper wrappers: `_linkedre_or(...)` and `_linkedre_ored_re(...)` remain the meaningful local seams, but they now call `OwnerDispatch::call_preserving_err(...)` directly instead of bouncing through another single-use `_call_preserving_err(...)` shim first.

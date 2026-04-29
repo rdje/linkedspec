@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 223;
+    plan tests => 224;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1309,7 +1309,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($statement_split_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit.pm now loads the shared owner-dispatch helper');
     unlike($statement_split_pm, qr/sub _require_pkg\b/, 'StatementSplit.pm no longer carries an unused single-use package-loader wrapper');
     unlike($statement_split_pm, qr/sub _call_preserving_err\b/, 'StatementSplit.pm no longer carries an unused single-use $@-preservation wrapper');
-    like($statement_split_pm, qr/sub _require_statement_split_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core'\)/s, 'StatementSplit.pm now spends OwnerDispatch directly inside its core-loader helper');
+    unlike($statement_split_pm, qr/sub _require_statement_split_core_pkg\b/, 'StatementSplit.pm no longer carries a single-use StatementSplit::Core loader wrapper');
+    like($statement_split_pm, qr/sub _split_action_ir_statements\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core'\).*LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements/s, 'StatementSplit.pm now spends OwnerDispatch directly inside its split helper');
     unlike($statement_split_pm, qr/sub _require_pkg_cb\b/, 'StatementSplit.pm no longer carries an unused local callback-loader wrapper');
     like($statement_split_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'StatementSplit.pm now assembles its default dependency map through OwnerDispatch');
     like($statement_split_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'StatementSplit/Core.pm now loads the shared owner-dispatch helper');
@@ -1601,10 +1602,17 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     require LinkedSpec::ActionIR::StatementSplit;
     require LinkedSpec::ActionIR::CanonicalEvents;
 
+    my $owner_dispatch_require_pkg = \&LinkedSpec::OwnerDispatch::require_pkg;
     local *LinkedSpec::BootstrapSpec::_require_bootstrap_core_pkg = sub { return 1 };
     local *LinkedSpec::Runtime::_require_pkg = sub { return 1 };
     local *LinkedSpec::ActionIR::Scanner::_require_scanner_core_pkg = sub { return 1 };
-    local *LinkedSpec::ActionIR::StatementSplit::_require_statement_split_core_pkg = sub { return 1 };
+    local *LinkedSpec::OwnerDispatch::require_pkg = sub {
+        my ($owner_pkg, $target_pkg) = @_;
+        return 1
+            if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::ActionIR::StatementSplit'
+            && defined($target_pkg) && $target_pkg eq 'LinkedSpec::ActionIR::StatementSplit::Core';
+        return $owner_dispatch_require_pkg->(@_);
+    };
     local *LinkedSpec::ActionIR::CanonicalEvents::_require_canonical_events_core_pkg = sub { return 1 };
 
     local *LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec = sub {
