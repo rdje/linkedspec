@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - BootstrapSpec: inline LinkedRE loading
+
+- deleted the separate `_require_linkedre_pkg(...)` loader wrapper from `perl/LinkedSpec/BootstrapSpec/Core.pm`,
+- kept the meaningful bootstrap regex helper seams intact while shrinking the file-level helper surface: `BootstrapSpec::Core::_linkedre_or(...)` and `_linkedre_ored_re(...)` now lazy-load `LinkedRE` directly through `LinkedSpec::OwnerDispatch::require_pkg(...)` inside their `$@`-preserving helper bodies,
+- updated phase0 owner-dispatch coverage so `BootstrapSpec/Core.pm` is now locked against reintroducing that extra LinkedRE-loader wrapper where the two `_linkedre_*` helpers are already the real local seams.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec/Core.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - ActionIR: inline CanonicalEvents core loading
 
 - deleted the single-use `_require_canonical_events_core_pkg(...)` loader wrapper from `perl/LinkedSpec/ActionIR/CanonicalEvents.pm`,

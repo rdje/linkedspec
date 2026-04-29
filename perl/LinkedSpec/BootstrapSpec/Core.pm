@@ -15,20 +15,10 @@ use LinkedSpec::OwnerDispatch ();
 #           bootstrap regex helper access and method-chain preprocessing.
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# Function: _require_linkedre_pkg
-# Purpose : Ensure `LinkedRE` is loaded before bootstrap regex helper use.
-# Args    : none
-# Returns : true on success
-#------------------------------------------------------------------------------
-sub _require_linkedre_pkg {
- return LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE')
-}
-
 sub _linkedre_or {
  my (@args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_linkedre_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE');
   return LinkedRE::or(@args)
  })
 }
@@ -36,7 +26,7 @@ sub _linkedre_or {
 sub _linkedre_ored_re {
  my (@args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_linkedre_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedRE');
   return LinkedRE::oredRE(@args)
  })
 }
