@@ -16,17 +16,6 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 
-#------------------------------------------------------------------------------
-# Function: _require_canonical_events_core_pkg
-# Purpose : Lazy-load the canonical-events core owner.
-# Args    : none
-# Returns : requested package name
-#------------------------------------------------------------------------------
-sub _require_canonical_events_core_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core');
- return 'LinkedSpec::ActionIR::CanonicalEvents::Core'
-}
-
 sub default_deps_for_package {
  my ($pkg) = @_;
  return LinkedSpec::OwnerDispatch::build_dep_map(
@@ -42,7 +31,7 @@ sub default_deps_for_package {
 sub _canonicalize_helper_action_ir_event {
  my ($label, $event, $deps) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_canonical_events_core_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core');
   return LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event($label, $event)
  })
 }

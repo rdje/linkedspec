@@ -1126,7 +1126,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 224;
+    plan tests => 225;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1319,7 +1319,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     like($canonical_events_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'CanonicalEvents.pm now loads the shared owner-dispatch helper');
     unlike($canonical_events_pm, qr/sub _require_pkg\b/, 'CanonicalEvents.pm no longer carries an unused single-use package-loader wrapper');
     unlike($canonical_events_pm, qr/sub _call_preserving_err\b/, 'CanonicalEvents.pm no longer carries an unused single-use $@-preservation wrapper');
-    like($canonical_events_pm, qr/sub _require_canonical_events_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core'\)/s, 'CanonicalEvents.pm now spends OwnerDispatch directly inside its core-loader helper');
+    unlike($canonical_events_pm, qr/sub _require_canonical_events_core_pkg\b/, 'CanonicalEvents.pm no longer carries a single-use CanonicalEvents::Core loader wrapper');
+    like($canonical_events_pm, qr/sub _canonicalize_helper_action_ir_event\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::ActionIR::CanonicalEvents::Core'\).*LinkedSpec::ActionIR::CanonicalEvents::Core::canonicalize_helper_action_ir_event/s, 'CanonicalEvents.pm now spends OwnerDispatch directly inside its canonicalize helper');
     unlike($canonical_events_pm, qr/sub _require_pkg_cb\b/, 'CanonicalEvents.pm no longer carries an unused local callback-loader wrapper');
     like($canonical_events_pm, qr/sub default_deps_for_package\b.*LinkedSpec::OwnerDispatch::build_dep_map/s, 'CanonicalEvents.pm now assembles its default dependency map through OwnerDispatch');
     like($diagnostics_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'Diagnostics.pm now loads the shared owner-dispatch helper');
@@ -1611,9 +1612,11 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
         return 1
             if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::ActionIR::StatementSplit'
             && defined($target_pkg) && $target_pkg eq 'LinkedSpec::ActionIR::StatementSplit::Core';
+        return 1
+            if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::ActionIR::CanonicalEvents'
+            && defined($target_pkg) && $target_pkg eq 'LinkedSpec::ActionIR::CanonicalEvents::Core';
         return $owner_dispatch_require_pkg->(@_);
     };
-    local *LinkedSpec::ActionIR::CanonicalEvents::_require_canonical_events_core_pkg = sub { return 1 };
 
     local *LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec = sub {
         return ('bootstrap_rule_descriptors', { SPEC_ROOT => 0 }, { root => 'dispatch_state' });
