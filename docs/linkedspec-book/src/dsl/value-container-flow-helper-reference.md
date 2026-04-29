@@ -226,6 +226,7 @@ These helpers are statements. They consume values and change rule behavior.
 | `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
+| `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
 | `return_a(label)` / `return_m(label)` / `return_ma(label)` | legacy tagged return shortcuts | reading or migrating older specs. Prefer `return(array(...))` with `array_copy(array(label))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 | `return_imatch(...)` / `return_im(...)` | legacy tagged current-match return | reading or migrating older specs. Prefer `return(...)` for new structured payloads. |
@@ -822,6 +823,12 @@ Examples:
 ```text
 say("normalized kind: ", scalar(kind));
 print("token=", scalar(text), " kind=", scalar(kind), "\n");
+```
+
+Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator:
+
+```text
+-> comment {next()}
 ```
 
 Keep public examples focused on structured return values. Use debug output helpers when the example is genuinely about tracing or demonstrating a branch.

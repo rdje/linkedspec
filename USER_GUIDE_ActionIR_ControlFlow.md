@@ -55,6 +55,7 @@ This module lowers:
 - `say(...)`
 - `print(...)`
 - `return_undef()`
+- `next()`
 
 It also supports three switch surfaces:
 1. marker-style flow (`switch() case() default() endswitch()` with optional semicolons on both action-edge structured blocks and lifecycle `I`, `LS`, `LE`, `E`, `EX`, `IT`, and `LX` blocks), including attached branch-block sugar such as `case(value) { ... }`, `default() { ... }`, and `default { ... }`, and
@@ -638,6 +639,21 @@ endif()
 ```
 
 Use it when the “no result” case is a deliberate branch outcome.
+
+## `next()`
+This is the explicit helper for skipping the current action path with the runtime `next` statement while staying on canonical ActionIR metadata.
+
+Example:
+
+```text
+comment: /#.*\n/
+
+Top::
+ -> Item    {push(Item)}
+ -> comment {next()}
+```
+
+Use it when an edge should consume or recognize something, such as a comment, but should not add a value to the current accumulator. Bare `next` is still recognized for old specs, but `next()` is the preferred spelling for new backend-neutral authoring.
 
 ## Worked examples
 ### Example: simple presence guard

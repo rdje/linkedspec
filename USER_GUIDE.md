@@ -930,7 +930,7 @@ Typical patterns:
 - `if(...); ... else(); ... endif()`
 - `switch(...); case(...); default(); endswitch()`
 - `switch(expr, case(...), default(...))`
-- `say(...)`, `print(...)`, `return_undef()`, `exit_now(status)`
+- `say(...)`, `print(...)`, `return_undef()`, `next()`, `exit_now(status)`
 
 ### I need array tokenization or array post-processing
 Start with [`USER_GUIDE_ActionIR_ArrayPipeline.md`](USER_GUIDE_ActionIR_ArrayPipeline.md).

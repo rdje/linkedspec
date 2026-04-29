@@ -25,6 +25,7 @@ sub try_scan_contract_ir_events {
   'say_stmt' => \&_scan_contract_say_stmt,
   'print_stmt' => \&_scan_contract_print_stmt,
   'exit_now' => \&_scan_contract_exit_now,
+  'next_stmt' => \&_scan_contract_next_stmt,
   'return_undef' => \&_scan_contract_return_undef,
   'return_array' => \&_scan_contract_return_array,
   'declare_typed' => \&_scan_contract_declare_typed,
@@ -264,6 +265,15 @@ while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"]
  my @args = @{$call->{args} || []};
  next unless @args <= 1;
  push @events, {raw => $+{expr}, args => {payload => @args ? _trim_action_ir_value($args[0]) : ''}};
+}
+ return \@events
+}
+
+sub _scan_contract_next_stmt {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>next\s*\(\s*\))/g) {
+ push @events, {raw => $+{expr}, args => {}};
 }
  return \@events
 }

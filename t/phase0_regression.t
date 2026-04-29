@@ -42124,6 +42124,30 @@ SPEC
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'exit_now helper does not create compatibility-surface summary entries');
     is_deeply($meta->{compatibility_surface_contract_ids}, [], 'exit_now helper exposes no compatibility-surface contract ids');
 };
+subtest 'method_like_next_helper_lowers_without_compatibility_surface' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::&
+ /a/ -> Top { next() }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for next helper check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'next helper avoids canonical action-IR fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'next helper avoids raw Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'next helper avoids unresolved-helper hits');
+    is($meta->{compatibility_surface_count}, 0, 'next helper is not compatibility-surface syntax');
+    ok(grep { $_ eq 'NEXT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include NEXT for next helper coverage');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'next()');
+    is($rewritten, 'next', 'next helper lowers to the runtime next statement');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'next-helper-only rule remains language-agnostic action-IR ready');
+    is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'next helper does not create compatibility-surface summary entries');
+    is_deeply($meta->{compatibility_surface_contract_ids}, [], 'next helper exposes no compatibility-surface contract ids');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback' => sub {
     plan tests => 7;
 
@@ -44265,16 +44289,31 @@ subtest 'pplugin_spec_prefers_short_container_aliases_in_top_aggregation_band' =
     like($source_content, qr/^LE \{return undef unless defined \$retv; assign\(a\(defs\), a\(flat_array\(defs\), scalaref\(retv, \[0\]\), scalaref\(retv, \[1\]\)\)\)\}/m, 'pplugin migrated alias use stays anchored in the LE aggregation line');
 };
 subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 11;
+    plan tests => 30;
 
     my $descr = LinkedSpec::get_parser('tkgui', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for tkgui helper-flow migration check');
 
+    for my $rule (qw(sub_gui_list sub_gui curlyb)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "tkgui $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "tkgui $rule reports no raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "tkgui $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "tkgui $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "tkgui $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "tkgui $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "tkgui $rule is language-agnostic action-IR ready");
+    }
+
+    my $top_meta = $descr->{spec}{sub_gui_list}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'NEXT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
+        'tkgui sub_gui_list canonical action-IR nodes include NEXT/PUSH/RETURN after helper migration'
+    );
+
     my $meta = $descr->{spec}{sub_gui}{meta}{action_rewriter};
-    ok(ref($meta) eq 'HASH', 'tkgui sub_gui exposes action_rewriter metadata');
-    is($meta->{raw_perl_dependency_count}, 0, 'tkgui sub_gui no longer reports raw-Perl fallback dependency');
-    is_deeply($meta->{raw_perl_dependency_statements}, [], 'tkgui sub_gui exposes no raw-Perl fallback statements');
-    is($meta->{unresolved_helper_count}, 0, 'tkgui sub_gui avoids unresolved-helper hits');
     ok(
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$meta->{canonical_action_ir_nodes}}) &&
@@ -44282,11 +44321,19 @@ subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
         'tkgui sub_gui canonical action-IR nodes include ASSIGN/CALL/PRINT/RETURN after helper migration'
     );
-    ok($meta->{language_agnostic_action_ir_ready}, 'tkgui sub_gui is language-agnostic action-IR ready');
+
+    my $curlyb_meta = $descr->{spec}{curlyb}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CALL' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'NEXT' } @{$curlyb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$curlyb_meta->{canonical_action_ir_nodes}}),
+        'tkgui curlyb canonical action-IR nodes include CALL/NEXT/RETURN after helper migration'
+    );
 
     my $summary = $descr->{meta}{action_rewriter_migration};
     ok(ref($summary) eq 'HASH', 'tkgui descriptor exposes action_rewriter migration summary');
     is($summary->{language_agnostic_blocked_rule_count}, 0, 'tkgui blocked-rule count drops to zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'tkgui compatibility-surface rule count drops to zero after helper migration');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'tkgui exposes no prioritized blocked-rule list after helper migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'tkgui exposes no top blocked rule after helper migration');
 };
@@ -44306,19 +44353,25 @@ subtest 'tkgui_parser_smoke' => sub {
     is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
 };
 subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
-    plan tests => 8;
+    plan tests => 14;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'tkgui.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
     like($source_content, qr/-> sub_gui\s+\{push\(sub_gui\)\}/, 'tkgui top aggregation now prefers push(sub_gui)');
+    like($source_content, qr/LX \{return\(hash\(flat_array\(a\(sub_gui_list\)\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated pair list through helper-form hash construction');
+    like($source_content, qr/-> comment\s+\{next\(\)\}/, 'tkgui comment skips now use the helper-form next statement');
     unlike($source_content, qr/push \@sub_guis, call\(/, 'tkgui top aggregation no longer uses a raw push-call wrapper');
     like($source_content, qr/assign\(scalar\(subgui_name\), entry_group\(0\)\);/, 'tkgui sub_gui now prefers entry_group(0) for the entry-point name read');
     like($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.capture_slice\(\)\.'\)'\)\}/, 'tkgui sub_gui now prefers capture_slice() for the inner parenthesized body read');
+    like($source_content, qr/-> curlyb\[1\]\s+\{return_undef\(\)\}/, 'tkgui curlyb terminal edge now uses helper-form undef return');
     unlike($source_content, qr/my \(\$subgui_name\) = \@IMATCH_LIST;/, 'tkgui sub_gui no longer destructures raw @IMATCH_LIST for the entry-point name read');
     unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\.'\)'\)\}/, 'tkgui sub_gui no longer uses the raw anonymous-boundary substr read');
     unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(/, 'tkgui sub_gui source no longer spells the old raw substr helper pattern');
+    unlike($source_content, qr/LX \{return \{\@sub_gui_list\}\}/, 'tkgui top lifecycle no longer uses bare Perl hash construction from the accumulator');
+    unlike($source_content, qr/-> comment\s+\{next\}/, 'tkgui comment skips no longer use bare next compatibility syntax');
+    unlike($source_content, qr/-> curlyb\[1\]\s+\{return\}\s*$/m, 'tkgui curlyb terminal edge no longer uses bare return compatibility syntax');
 };
 subtest 'simenv_delimiter_helper_print_flow_eliminates_raw_fallback' => sub {
     plan tests => 36;

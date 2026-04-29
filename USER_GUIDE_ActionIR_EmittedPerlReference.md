@@ -506,6 +506,11 @@ Important nuance:
 - named marks are scoped under the current rule label in runtime storage, so different rules can reuse the same mark name safely.
 - `@mark(name)` lowers into later `LECODE`, so same-slot actions should not expect a freshly written mark yet; later slots in that same rule are the intended readers.
 
+### Flow skip helper
+- DSL: `next()`
+- Perl: `next`
+- IR node: `NEXT`
+
 ## Classified pass-through compatibility patterns
 These forms are recognized by the ActionIR scanner, contribute canonical ActionIR nodes, and avoid `RAW_PERL` fallback, but the emitted Perl is intentionally preserved verbatim.
 They are important for migration audits and old-spec compatibility, not the preferred first-choice DSL for new backend-neutral authoring.
@@ -554,6 +559,7 @@ They are important for migration audits and old-spec compatibility, not the pref
 - DSL: `next`
 - Perl: `next`
 - IR node: `NEXT`
+- Preferred canonical helper: `next()`
 
 ### Ref-field assignment
 - DSL: `$prev_node_type = $retv->{type}`

@@ -2102,6 +2102,17 @@ sub _build_emit_and_declare_contracts {
    },
   },
   {
+   id                 => 'next_stmt',
+   ir_node            => 'NEXT',
+   diag_name          => 'next',
+   unresolved_pattern => qr/\bnext\s*\(\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s/\bnext\s*\(\s*\)/next/g;
+    return $code
+   },
+  },
+  {
    id                 => 'declare_typed',
    ir_node            => 'DECLARE',
    diag_name          => 'declare',
