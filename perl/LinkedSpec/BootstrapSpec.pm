@@ -17,17 +17,6 @@ use LinkedSpec::OwnerDispatch ();
 my $CACHED_BOOTSTRAP_STATE;
 
 #------------------------------------------------------------------------------
-# Function: _require_bootstrap_core_pkg
-# Purpose : Lazy-load the extracted bootstrap-core owner.
-# Args    : ()
-# Returns : true when `BootstrapSpec::Core` is available
-#------------------------------------------------------------------------------
-sub _require_bootstrap_core_pkg {
- LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec');
- return 1
-}
-
-#------------------------------------------------------------------------------
 # Function: build_bootstrap_spec
 # Purpose : Build and return the hardcoded bootstrap grammar descriptor and its
 #           bootstrap rule index plus parser dispatch state.
@@ -37,8 +26,8 @@ sub _require_bootstrap_core_pkg {
 sub build_bootstrap_spec {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_bootstrap_core_pkg();
-  return LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec(@args)
+  my $build_bootstrap_spec_cb = LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec');
+  return $build_bootstrap_spec_cb->(@args)
  })
 }
 

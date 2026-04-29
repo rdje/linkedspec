@@ -135,6 +135,8 @@ Current thin wrapper callback lookup for `Runtime`, `Compiler`, `BootstrapSpec`,
 
 In the same direction, `Runtime`, `BootstrapSpec`, and `ParserFactory` no longer keep one-shot local pass-through wrappers for the single compiler/bootstrap callback or `$@`-preservation calls inside their main orchestration helpers. Those live bodies now spend `OwnerDispatch` directly, which keeps the real seam visible instead of hiding it behind wrapper names that only had one caller.
 
+`BootstrapSpec` now follows that rule at the bootstrap facade too: `build_bootstrap_spec(...)` remains the meaningful local seam, but it now calls `OwnerDispatch::require_pkg_cb(...)` directly for `BootstrapSpec::Core::build_bootstrap_spec(...)` instead of bouncing through a separate `_require_bootstrap_core_pkg(...)` loader first.
+
 `Resolver` and `ActionIR::Scanner` now follow that same pattern for their local trace/scanner-owner helper paths too: the meaningful local helpers remain, but the live bodies spend `OwnerDispatch` directly instead of bouncing through extra local pass-through wrappers first.
 
 `Compiler`, `SpecEntry`, and `RuleIR` now follow the same rule for package-specific helper loading on the compile path: the meaningful Trace / `Data::Dumper` / `LinkedRE` helper seams remain, but they call `OwnerDispatch::require_pkg(...)` directly instead of bouncing through another generic `_require_pkg(...)` shim first.

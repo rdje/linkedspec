@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-29 - BootstrapSpec: inline bootstrap-core loading
+
+- deleted the separate `_require_bootstrap_core_pkg(...)` loader wrapper from `perl/LinkedSpec/BootstrapSpec.pm`,
+- kept the meaningful bootstrap grammar builder seam intact while shrinking the file-level helper surface: `BootstrapSpec::build_bootstrap_spec(...)` now resolves `LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec(...)` directly through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)` inside its `$@`-preserving helper body,
+- updated phase0 owner-dispatch coverage so `BootstrapSpec.pm` is now locked against reintroducing that extra bootstrap-core loader wrapper where `build_bootstrap_spec(...)` is already the real local seam.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/BootstrapSpec.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-29 - RuleIR: inline Data::Dumper loading
 
 - deleted the separate `_require_data_dumper_pkg(...)` loader wrapper from `perl/LinkedSpec/RuleIR.pm`,

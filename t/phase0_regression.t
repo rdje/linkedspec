@@ -1223,8 +1223,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($bootstrap_spec_pm, qr/sub _require_pkg\b/, 'BootstrapSpec.pm no longer carries an unused local package-loader wrapper');
     unlike($bootstrap_spec_pm, qr/sub _require_pkg_cb\b/, 'BootstrapSpec.pm no longer carries an unused single-use callback-loader wrapper');
     unlike($bootstrap_spec_pm, qr/sub _call_preserving_err\b/, 'BootstrapSpec.pm no longer carries an unused single-use $@-preservation wrapper');
-    like($bootstrap_spec_pm, qr/sub _require_bootstrap_core_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec'\)/s, 'BootstrapSpec.pm now spends OwnerDispatch directly inside its bootstrap-core loader');
-    like($bootstrap_spec_pm, qr/sub build_bootstrap_spec\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'BootstrapSpec.pm now spends OwnerDispatch directly inside build_bootstrap_spec');
+    unlike($bootstrap_spec_pm, qr/sub _require_bootstrap_core_pkg\b/, 'BootstrapSpec.pm no longer carries a separate bootstrap-core loader wrapper');
+    like($bootstrap_spec_pm, qr/sub build_bootstrap_spec\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::BootstrapSpec::Core', 'build_bootstrap_spec'\).*->\(\@args\)/s, 'BootstrapSpec.pm now spends OwnerDispatch directly inside build_bootstrap_spec');
     like($bootstrap_spec_core_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'BootstrapSpec/Core.pm now loads the shared owner-dispatch helper');
     unlike($bootstrap_spec_core_pm, qr/sub _require_pkg\b/, 'BootstrapSpec/Core.pm no longer carries an unused single-use package-loader wrapper');
     unlike($bootstrap_spec_core_pm, qr/sub _require_linkedre_pkg\b/, 'BootstrapSpec/Core.pm no longer carries a separate LinkedRE loader wrapper');
@@ -1617,9 +1617,17 @@ subtest 'remaining_owner_wrappers_preserve_eval_error_state' => sub {
     require LinkedSpec::ActionIR::CanonicalEvents;
 
     my $owner_dispatch_require_pkg = \&LinkedSpec::OwnerDispatch::require_pkg;
-    local *LinkedSpec::BootstrapSpec::_require_bootstrap_core_pkg = sub { return 1 };
+    my $owner_dispatch_require_pkg_cb = \&LinkedSpec::OwnerDispatch::require_pkg_cb;
     local *LinkedSpec::Runtime::_require_pkg = sub { return 1 };
     local *LinkedSpec::ActionIR::Scanner::_require_scanner_core_pkg = sub { return 1 };
+    local *LinkedSpec::OwnerDispatch::require_pkg_cb = sub {
+        my ($owner_pkg, $target_pkg, $subname) = @_;
+        return \&LinkedSpec::BootstrapSpec::Core::build_bootstrap_spec
+            if defined($owner_pkg) && $owner_pkg eq 'LinkedSpec::BootstrapSpec'
+            && defined($target_pkg) && $target_pkg eq 'LinkedSpec::BootstrapSpec::Core'
+            && defined($subname) && $subname eq 'build_bootstrap_spec';
+        return $owner_dispatch_require_pkg_cb->(@_);
+    };
     local *LinkedSpec::OwnerDispatch::require_pkg = sub {
         my ($owner_pkg, $target_pkg) = @_;
         return 1
