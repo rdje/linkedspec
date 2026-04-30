@@ -43869,7 +43869,7 @@ subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub 
     ok($meta->{language_agnostic_action_ir_ready}, 'simenv begin_end_blocks is now language-agnostic action-IR ready');
 };
 subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
-    plan tests => 36;
+    plan tests => 69;
 
     my $descr = LinkedSpec::get_parser('ifelse', return_descriptor => 1);
     ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ifelse debug-print migration check');
@@ -43879,9 +43879,70 @@ subtest 'ifelse_debug_print_helper_flow_eliminates_raw_fallback' => sub {
         ok(ref($meta) eq 'HASH', "ifelse $rule exposes action_rewriter metadata");
         is($meta->{raw_perl_dependency_count}, 0, "ifelse $rule no longer reports raw-Perl fallback dependency");
         is_deeply($meta->{raw_perl_dependency_statements}, [], "ifelse $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "ifelse $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "ifelse $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "ifelse $rule exposes no compatibility-surface statements");
         ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, "ifelse $rule canonical action-IR nodes include PRINT after debug-print migration");
+        ok($rule eq 'program' || grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, "ifelse $rule canonical action-IR nodes preserve RETURN coverage where control flow stops");
         ok($meta->{language_agnostic_action_ir_ready}, "ifelse $rule is language-agnostic action-IR ready");
     }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'ifelse descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'ifelse blocked-rule count remains zero after return_undef migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'ifelse compatibility-surface rule count drops to zero after return_undef migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ifelse exposes no prioritized blocked-rule list after return_undef migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ifelse exposes no top blocked rule after return_undef migration');
+};
+subtest 'ifelse_return_undef_source_and_runtime_smoke' => sub {
+    plan tests => 7;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'ifelse.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'ifelse source spec text is available for return_undef inspection');
+    like($source_content, qr/return_undef\(\)/, 'ifelse flow-stop edges now use return_undef()');
+    unlike($source_content, qr/\breturn\s*}/, 'ifelse flow-stop edges no longer use bare return compatibility syntax');
+
+    my $parser = LinkedSpec::get_parser('ifelse');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'ifelse parser created');
+
+    my $input = 'if (a) { while (b) { } } elsif (c) { } else { if (d) { } }';
+    my $stdout = '';
+    open my $capture, '>', \$stdout or die "open scalar stdout capture: $!";
+    my $old_stdout = select $capture;
+    my $ast = eval { $parser->(\$input) };
+    my $err = $@;
+    select $old_stdout;
+
+    ok(!$err, 'ifelse parser executed without die') or diag(normalize_error($err));
+    ok(!defined($ast), 'ifelse parser still returns undef for debug-flow smoke input');
+    is($stdout, <<'IFELSE_STDOUT', 'ifelse parser preserves expected debug trace output after return_undef migration');
+==== program =====
+program: --> IF
+==== if =====
+if: --> THEN
+==== then =====
+then: --> WHILE
+==== while =====
+while: --> WHILE_THEN
+==== while_then =====
+while_then: CLOSING BRACE SEEN
+then: --> ELSIF
+
+==== elsif =====
+
+elseif: --> IF_TOP_THEN
+==== then =====
+then: --> ELSE
+==== else =====
+else: --> IF
+==== if =====
+if: --> THEN
+==== then =====
+then: CLOSING Brace
+else: CLOSING BRACE SEEN
+IFELSE_STDOUT
 };
 subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 64;

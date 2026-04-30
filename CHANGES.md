@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - ifelse: finish compatibility cleanup
+
+- migrated `specs/ifelse.spec::{if,then,elsif,else,while,while_then}` flow-stop edges from bare compatibility `return` statements to canonical `return_undef()`,
+- reduced the full `ifelse` descriptor migration summary to `compatibility_surface_rule_count == 0` while preserving the debug parser's `undef` result and printed trace sequence.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `ifelse` descriptor metadata probe
+  - direct `ifelse` parser stdout smoke
+  - direct `return_undef()` lowering probe
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - ebnf: finish compatibility cleanup
 
 - migrated `specs/ebnf.spec::grammar_file` from the remaining bare child-call assignment to `assign(s(rule), call(grammar_rule))`,
