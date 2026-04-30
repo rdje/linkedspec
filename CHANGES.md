@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - regdef: finish compatibility cleanup
+
+- migrated `specs/regdef.spec::{regdef_top,reg_def,reg_fld}` from bare arrayref returns to helper-form `return(a(...))` / fluent `I.return(...)` payloads using `array_copy(a(...))` for accumulator snapshots,
+- migrated `specs/regdef.spec::ob_cb` from bare `return 1` to helper-form `return(1)`,
+- reduced the full `regdef` descriptor migration summary to `compatibility_surface_rule_count == 0` and added a parser smoke that locks the nested `?regdef_top:` / `?reg_def:` / `?reg_fld:` AST shape.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `regdef` descriptor metadata probe
+  - direct `regdef` parser smoke
+  - direct `return(a(...))` / `return(1)` lowering probes
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - pplugin: finish compatibility cleanup
 
 - migrated `specs/pplugin.spec::pplugin_top` from bare `next`, raw state declarations, bare child-call assignment, bare `return undef unless ...`, and bare hashref return syntax to helper-form `next()`, `declare(...)`, `assign(...)`, structured `if(is_defined(...))`, `return_undef()`, and `return(hash(flat_array(a(defs))))`,

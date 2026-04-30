@@ -43259,8 +43259,85 @@ subtest 'ds_vhistory_token_readers_prefer_entry_groups' => sub {
     unlike($source_content, qr/^(?:object|branch|branch_tags|version_tags|version|date|comment|author|derived_from):.*\@IMATCH_LIST/m, 'ds_vhistory migrated token readers no longer return raw @IMATCH_LIST');
     unlike($source_content, qr/manifest:.*?return\s+\['\?manifest:'\]/, 'ds_vhistory manifest token reader no longer uses a raw arrayref return literal');
 };
+subtest 'regdef_helper_flow_eliminates_compatibility_surface' => sub {
+    plan tests => 38;
+
+    my $descr = LinkedSpec::get_parser('regdef', return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for regdef compatibility cleanup check');
+
+    for my $rule (qw(regdef_top reg_def reg_fld ob_cb)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "regdef $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "regdef $rule no longer reports raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "regdef $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "regdef $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "regdef $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "regdef $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "regdef $rule is language-agnostic action-IR ready");
+    }
+
+    my $top_meta = $descr->{spec}{regdef_top}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CALL' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
+        'regdef top canonical action-IR nodes include CALL/PUSH/RETURN after helper migration'
+    );
+
+    my $reg_def_meta = $descr->{spec}{reg_def}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CALL' } @{$reg_def_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IMATCH_GROUPS_READ' } @{$reg_def_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$reg_def_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$reg_def_meta->{canonical_action_ir_nodes}}),
+        'regdef reg_def canonical action-IR nodes include CALL/IMATCH_GROUPS_READ/PUSH/RETURN after helper migration'
+    );
+
+    my $reg_fld_meta = $descr->{spec}{reg_fld}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'IMATCH_GROUPS_READ' } @{$reg_fld_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$reg_fld_meta->{canonical_action_ir_nodes}}),
+        'regdef reg_fld canonical action-IR nodes include IMATCH_GROUPS_READ/RETURN after helper migration'
+    );
+
+    my $ob_cb_meta = $descr->{spec}{ob_cb}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CALL' } @{$ob_cb_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$ob_cb_meta->{canonical_action_ir_nodes}}),
+        'regdef ob_cb canonical action-IR nodes include CALL/RETURN after helper migration'
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'regdef descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'regdef blocked-rule count remains zero after helper migration');
+    is($summary->{compatibility_surface_rule_count}, 0, 'regdef compatibility-surface rule count drops to zero after helper migration');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'regdef exposes no prioritized blocked-rule list after helper migration');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'regdef exposes no top blocked rule after helper migration');
+};
+subtest 'regdef_parser_smoke' => sub {
+    plan tests => 4;
+
+    my $parser = LinkedSpec::get_parser('regdef');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'regdef parser created');
+
+    my $input = <<'REGDEF';
+reg_def CTRL {
+  reg_fld ENABLE : RW : anything;
+  reg_fld MODE : RO : other;
+}
+REGDEF
+
+    my $ast = eval { $parser->(\$input) };
+    ok(!$@, 'regdef parser executed without die') or diag(normalize_error($@));
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'regdef parser returned an array AST');
+    is_deeply(
+        $ast,
+        ['?regdef_top:', [['?reg_def:', 'CTRL', [['?reg_fld:', 'ENABLE', 'RW'], ['?reg_fld:', 'MODE', 'RO']]]]],
+        'regdef parser preserves expected nested reg/fld AST shape'
+    );
+};
 subtest 'regdef_token_readers_prefer_entry_groups' => sub {
-    plan tests => 7;
+    plan tests => 13;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'regdef.spec');
     my $source_content = slurp($source_spec);
@@ -43269,9 +43346,15 @@ subtest 'regdef_token_readers_prefer_entry_groups' => sub {
     like($source_content, qr/-> reg_def\s+\{push\(reg_def\)\}/, 'regdef top aggregation now prefers push(reg_def)');
     like($source_content, qr/-> reg_fld\s+\{push\(reg_fld\)\}/, 'regdef nested aggregation now prefers push(reg_fld)');
     unlike($source_content, qr/push \@capt, call\(/, 'regdef migrated aggregators no longer use raw push-call wrappers');
-    like($source_content, qr/-> reg_def\[1\]\s+\{return \['\?reg_def:', flat_array\(entry_groups\(\)\), \\\@reg_def\]\}/, 'regdef reg_def return now prefers entry_groups()');
-    like($source_content, qr/reg_fld: .*?I \{return \['\?reg_fld:', flat_array\(entry_groups\(\)\)\]\}/, 'regdef reg_fld return now prefers entry_groups()');
+    like($source_content, qr/LX \{return\(a\("\?regdef_top:", array_copy\(a\(regdef_top\)\)\)\)\}/, 'regdef top LX now returns helper-form top payload with array_copy');
+    like($source_content, qr/-> reg_def\[1\]\s+\{return\(a\("\?reg_def:", flat_array\(entry_groups\(\)\), array_copy\(a\(reg_def\)\)\)\)\}/, 'regdef reg_def return now prefers helper-form entry_groups() plus array_copy');
+    like($source_content, qr/reg_fld: .*?I\.return\(a\("\?reg_fld:", flat_array\(entry_groups\(\)\)\)\)/, 'regdef reg_fld return now prefers fluent helper-form entry_groups()');
+    like($source_content, qr/-> ob_cb\[1\]\s+\{return\(1\)\}/, 'regdef ob_cb completion now uses helper-form return(1)');
     unlike($source_content, qr/^(?:-> reg_def\[1\].*|reg_fld:.*)\@IMATCH_LIST/m, 'regdef migrated token readers no longer return raw @IMATCH_LIST');
+    unlike($source_content, qr/return \['\?regdef_top:', \\\@regdef_top\]/, 'regdef top LX no longer uses bare arrayref return syntax');
+    unlike($source_content, qr/return \['\?reg_def:', flat_array\(entry_groups\(\)\), \\\@reg_def\]/, 'regdef reg_def no longer uses bare arrayref return syntax');
+    unlike($source_content, qr/return \['\?reg_fld:', flat_array\(entry_groups\(\)\)\]/, 'regdef reg_fld no longer uses bare arrayref return syntax');
+    unlike($source_content, qr/-> ob_cb\[1\]\s+\{return 1\}/, 'regdef ob_cb completion no longer uses bare return compatibility syntax');
 };
 subtest 'tablegrep_operator_guard_method_flow_avoids_prev_node_type_if_raw_fallback' => sub {
     plan tests => 13;
