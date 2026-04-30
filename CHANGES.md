@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - plugin runtime: remove tssio wrapper
+
+- deleted the obsolete `plugin/tssio.plg` compatibility wrapper now that `Timing::SetupHold::write_tssio(...)` owns the visible `tssio` report/action body directly,
+- updated phase0 regression coverage to lock the wrapper absence while preserving `setup_hold_tmax_tmin.plg` parsing and the direct `Timing::SetupHold` `tssio.lof` / `sta_<n>.lof` output smoke,
+- refreshed architecture, roadmap, user guide, book, and memory notes so the setup/hold timing path is described as package-owned behavior rather than a shipped thin wrapper.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - tclite: join shipped-spec regression
 
 - fixed the deferred `specs/tclite.spec` literal `[` / `]` command-substitution regexes so the spec compiles again,

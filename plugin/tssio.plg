@@ -1,4 +1,0 @@
-tssio {
-use Timing::SetupHold;
-Timing::SetupHold::write_tssio(@_)
-}
