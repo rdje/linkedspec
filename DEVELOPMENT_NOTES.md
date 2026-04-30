@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-04-30: `specs/tclite.spec` is no longer deferred from phase0. The old literal command-substitution bracket regex now escapes `[` / `]`, the remaining fluent `.return_a` forms now use canonical helper payloads, and the descriptor reports zero raw fallback, zero unresolved helpers, and zero compatibility-surface counts across all `tclite` rules. Phase0 now includes `tclite.spec` in `compile_all_target_specs` and locks bracket plus empty-quote parser smokes.
 - 2026-04-30: `specs/simenv.spec` is now fully compatibility-surface clean in descriptor migration metadata. The final cleanup added canonical `print_each(array(target), prefix, suffix?)` for array-backed debug output, migrated the remaining top/block/value/substitution return/exit/position/appender forms onto helpers, and fixed `BEGIN` / `END` block-name cleanup to use regex literals instead of string patterns. Phase0 locks zero compatibility metadata, the preferred source spelling, `print_each(...)` lowering, and the preserved nested begin/end AST smoke.
 - 2026-04-30: `specs/vhdl.spec` is now fully compatibility-surface clean in descriptor migration metadata. The remaining ready compatibility rules were `vhdl_file`, `architecture_statement_part`, `signal_decl_range`, `constant_declaration`, `variable_declaration`, `file_declaration`, `signal_declaration`, and `configuration_specification`; accumulator returns now use `array_copy(...)`, the signal range list-context return uses `flat_array(array(msi_lsi))`, and the repeated declaration/configuration comma-list payloads now use the new array-valued `split_tagged_records(...)` helper. Phase0 locks the helper lowering, zero compatibility metadata, source spelling, and preserved VHDL smoke behavior.
 - 2026-04-30: `specs/ifelse.spec` is now fully compatibility-surface clean in descriptor migration metadata. The remaining ready compatibility rules were `if`, `then`, `elsif`, `else`, `while`, and `while_then`; their flow-stop edges now use canonical `return_undef()` instead of bare `return`, preserving the debug parser's `undef` result and printed trace sequence. Phase0 now locks zero compatibility metadata, source spelling, and the runtime stdout smoke.
@@ -5200,7 +5201,6 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 
 ## Open Technical Work
 - Build robust regression harness for all existing specs.
-- Fix known `tclite.spec` regex issue.
 - Define strict vs permissive mode contracts.
 - Introduce structured error reporting and tracing.
 - Reduce hot-path runtime eval usage.
@@ -5209,7 +5209,7 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
 - Framework: `Test::More`.
 - Baseline test entry point: `t/phase0_regression.t`.
 - Scope:
-  - Compile/generation checks for all `specs/*.spec` except `tclite.spec` (currently deferred).
+  - Compile/generation checks for all `specs/*.spec`.
   - `get_parser` resolution-path checks:
     - module-relative local resolution from non-project cwd (no `PathSearch` load),
     - explicit file path resolution (no `PathSearch` load),
@@ -5410,7 +5410,7 @@ It should also not remain dependent on embedded Perl code-blocks in `.spec` as a
     - invariant-based AST assertions for `vhdl.spec`.
     - invariant-based AST assertions for `ebnf.spec`.
 - Current deferred test target:
-  - `tclite.spec` (explicitly deferred by scope decision).
+  - none.
 - Corpus regression (directory-level):
   - `plugin/*.plg` parsed via `pplugin.spec`.
   - `conf/*.conf` parsed via LinkedSpec-generated `Lispish.spec` parser stream.

@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - tclite: join shipped-spec regression
+
+- fixed the deferred `specs/tclite.spec` literal `[` / `]` command-substitution regexes so the spec compiles again,
+- migrated the remaining `tclite` `.return_a` fluent returns to canonical helper-form `return(a(..., array_copy(a(...))))` payloads,
+- removed the explicit `tclite.spec` exclusion from the phase0 shipped-spec compile pass and added a focused parser smoke for command-substitution brackets plus empty double quotes.
+
+- Validation:
+  - direct `tclite` descriptor metadata probe
+  - direct `tclite` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-04-30 - simenv: finish compatibility cleanup
 
 - added canonical `print_each(array(target), prefix, suffix?)` support for iterable diagnostic output, lowering to the existing Perl `foreach` print shape while contributing `PRINT` ActionIR metadata and avoiding compatibility-surface syntax,

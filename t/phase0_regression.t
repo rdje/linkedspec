@@ -19,13 +19,11 @@ use LinkedSpec;
 my $spec_dir = File::Spec->catdir($Bin, '..', 'specs');
 my @all_specs = discover_specs($spec_dir);
 
-my %excluded_specs = (
-    'tclite.spec' => 'Deferred by current scope decision',
-);
+my %excluded_specs;
 
 my @target_specs = grep { !exists $excluded_specs{$_} } @all_specs;
 ok(@target_specs > 0, 'Discovered target specs for regression pass');
-diag('Excluded specs: ' . join(', ', sort keys %excluded_specs));
+diag('Excluded specs: ' . join(', ', sort keys %excluded_specs)) if %excluded_specs;
 
 subtest 'compile_all_target_specs' => sub {
     plan tests => scalar @target_specs;
@@ -39,6 +37,49 @@ subtest 'compile_all_target_specs' => sub {
         ok(defined($parser) && ref($parser) eq 'CODE', "$spec builds parser coderef")
             or diag(normalize_error($err || "LinkedSpec::Get returned non-CODE for $spec"));
     }
+};
+
+subtest 'tclite_literal_bracket_and_canonical_returns_compile' => sub {
+    plan tests => 9;
+
+    my $descr = LinkedSpec::get_parser('tclite', return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'tclite descriptor builds after literal bracket regex migration');
+
+    for my $rule (qw(tcl_script double_quote command_subst)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(
+            ref($meta) eq 'HASH' &&
+            $meta->{canonical_action_ir_fallback_count} == 0 &&
+            $meta->{raw_perl_dependency_count} == 0 &&
+            $meta->{compatibility_surface_count} == 0 &&
+            $meta->{unresolved_helper_count} == 0 &&
+            $meta->{language_agnostic_action_ir_ready},
+            "tclite $rule returns through canonical helper flow without compatibility surface",
+        );
+    }
+
+    my $parser = LinkedSpec::get_parser('tclite');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'tclite parser builds as a shipped spec');
+
+    my $brackets = '[]';
+    my $bracket_ast = eval { $parser->(\$brackets) };
+    my $bracket_err = $@ // '';
+    ok(!$bracket_err, 'tclite parses literal command-substitution brackets without die') or diag(normalize_error($bracket_err));
+    is_deeply(
+        $bracket_ast,
+        ['?tcl_script:', [['?command_subst:', []]]],
+        'tclite preserves command_subst AST shape after bracket regex fix',
+    );
+
+    my $quotes = '""';
+    my $quote_ast = eval { $parser->(\$quotes) };
+    my $quote_err = $@ // '';
+    ok(!$quote_err, 'tclite parses empty double quotes without die') or diag(normalize_error($quote_err));
+    is_deeply(
+        $quote_ast,
+        ['?tcl_script:', [['?double_quote:', []]]],
+        'tclite preserves double_quote AST shape after canonical return migration',
+    );
 };
 
 subtest 'get_parser_local_resolution_without_pathsearch' => sub {

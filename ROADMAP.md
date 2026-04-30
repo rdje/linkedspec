@@ -22,8 +22,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   - `TableGrep`
   - Note: downstream-consumer compatibility is deferred and out of current implementation scope unless explicitly resumed later.
 - Specs baseline:
-  - Most files in `specs/*.spec` compile.
-  - Known compile failure: `specs/tclite.spec` (regex for `[` needs correction).
+  - All shipped files in `specs/*.spec` compile in the phase0 baseline.
+  - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
 ## Strategic Principles
 1. Keep staged extraction as a first-class concept.
@@ -49,7 +49,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Freeze baseline AST shapes for representative inputs.
 - Exit criteria:
   - Green baseline suite.
-  - Known failures documented (including `tclite.spec`).
+  - Known failures documented; no shipped-spec compile blocker is currently deferred.
 
 ## Phase 1: Parser-Core Isolation
 - Reduce non-essential module coupling during LinkedSpec load/compile.
@@ -653,7 +653,7 @@ Historical rationale note:
 - Keep backend emission under strict canonical forms we control so emitted host-language code avoids avoidable parser/splitter fragility.
 - Landed DSL naming cleanup: backend-neutral array snapshot helper now prefers `array_copy(array(...))` while preserving `array_values(array(...))` as a compatibility alias, and existing specs can migrate opportunistically rather than through a dedicated sweep.
 - Landed DSL naming cleanup: array-edge drop helpers now prefer explicit `drop_front(...)` / `drop_back(...)`, while `tail(...)` / `drop_last(...)` remain compatibility aliases for future retirement policy rather than active naming ambiguities.
-- Keep `specs/tclite.spec` deferred until explicitly resumed.
+- `specs/tclite.spec` has been resumed and now participates in phase0; keep the shipped-spec compile pass complete unless a new explicit deferral is recorded.
 - Define explicit `seek` vs `consume` semantics in design notes before Phase-3 code changes.
 
 ## Deferred Future Rule-Grouping Exploration
@@ -720,7 +720,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `in progress` | Whole-project delivery across parser core, semantics, runtime, docs, and future self-hosting. | Finish the remaining Backbone Item 3 cleanup, then drive the later semantic/runtime/self-hosting phases. |
-| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; `tclite.spec` remains the only explicitly deferred known issue. |
+| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all shipped `specs/*.spec` files now participate in the baseline compile pass. |
 | Phase 1 | `mostly done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Finish the last parser-core isolation cleanup around remaining compile-path compatibility seams. |
 | Phase 1A | `mostly done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Finish shrinking `LinkedSpec.pm` and the remaining thin compatibility wrappers down to stable owner paths; public façade option normalization is now aligned across both `Get(...)` and `get_parser(...)`, and the remaining lazy owner-dispatch boilerplate is now centralized instead of being repeated per wrapper across `LinkedSpec.pm`, `Runtime.pm`, `ParserFactory.pm`, `BootstrapSpec.pm`, `Compiler.pm`, `SpecEntry.pm`, `RuleIR.pm`, `RuleIR::EmitContext.pm`, `Resolver.pm`, `Validation.pm`, and `ActionRewriter.pm`, with `ActionRewriter` now also routing its shared `EmitContext` compatibility delegation straight through `OwnerDispatch::dispatch_owner_call(...)`, while Backbone Item 3 now also spends that same seam inside `LinkedSpec::ActionIR::RewritePipeline`, `LinkedSpec::ActionIR::Scanner`, `LinkedSpec::ActionIR::StatementSplit`, `LinkedSpec::ActionIR::CanonicalEvents`, `LinkedSpec::ActionIR::Diagnostics`, `LinkedSpec::ActionIR::ValueExpr`, `LinkedSpec::ActionIR::FlowExpr`, `LinkedSpec::ActionIR::ArrayPipeline`, `LinkedSpec::ActionIR::ControlFlow`, and `LinkedSpec::ActionIR::Contracts`, and the dead facade/parser-factory, dep-map-only ActionIR, runtime/bootstrap/scanner/emit-context, plus one-shot helper-owner wrapper shadows are gone now that the shared seam is the real active path. |
 | Phase 2 | `in progress` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Continue expanding syntax-aware validation from the current rule-paragraph regex checks into broader token/error hardening and clearer diagnostics. |
@@ -766,7 +766,7 @@ These are tracked implementation concerns, not immediate blockers.
   - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.
 
 ### Detailed Status Notes
-- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all in-scope specs; `tclite.spec` deferred).
+- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all shipped specs).
 - Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
 - Phase 1: `mostly done`.
 - Phase 1A (LinkedSpec.pm modularization): `mostly done`.

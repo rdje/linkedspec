@@ -92,6 +92,7 @@ The mature center of gravity is currently:
 - `simenv.spec`
 - `portmap.spec`
 - `pplugin.spec`
+- `tclite.spec`
 - `tkgui.spec`
 - `hlink_substitution.spec`
 - `lib_reader.spec`
@@ -106,7 +107,6 @@ Smaller experimental or historical specs still matter, but they should be read w
 - `DT.spec`
 - `ifelse.spec`
 - `operators_try.spec`
-- `tclite.spec`
 - `verilog.spec`
 
 That does not mean they are useless. It means a reader should not infer the same product-level completeness from every shipped `.spec`.

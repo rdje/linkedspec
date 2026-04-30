@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-04-30: `specs/tclite.spec` is no longer deferred from phase0. The literal command-substitution bracket regex now uses escaped `[` / `]`, the remaining fluent `.return_a` returns now use canonical `return(a(..., array_copy(a(...))))` payloads, and every `tclite` rule reports zero raw fallback, zero unresolved helpers, and zero compatibility surface. Phase0 now includes `tclite.spec` in shipped-spec compilation and has bracket / empty-quote parser smokes.
 - 2026-04-30: `specs/simenv.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup added canonical `print_each(array(target), prefix, suffix?)` for iterable debug output, migrated the remaining helper-ready declarations/assignments/appends/returns/exits/position tracking, and corrected `BEGIN` / `END` block-name cleanup to regex literals. Phase0 locks `print_each(...)` metadata/lowering, zero compatibility metadata, source spelling, and the preserved nested begin/end AST smoke.
 - 2026-04-30: `specs/vhdl.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated `vhdl_file`, `architecture_statement_part`, `signal_decl_range`, `constant_declaration`, `variable_declaration`, `file_declaration`, `signal_declaration`, and `configuration_specification` from bare return compatibility syntax to helper-form returns. New helper `split_tagged_records(...)` covers the repeated comma-list-to-tagged-record VHDL payload shape; phase0 locks helper lowering, source spelling, zero compatibility metadata, and preserved VHDL smoke behavior.
 - 2026-04-30: `specs/ifelse.spec` now reports `compatibility_surface_rule_count == 0`; the final cleanup migrated the remaining bare flow-stop `return` statements in `if`, `then`, `elsif`, `else`, `while`, and `while_then` to canonical `return_undef()`. Phase0 locks zero compatibility metadata, source spelling, and preserved debug parser stdout / `undef` result behavior.
@@ -1663,7 +1664,7 @@ LinkedSpec is being evolved into a serious progressive extraction parser tool (a
 - Dependencies analyzed: `perl/LinkedRE.pm`, `perl/PathSearch.pm`, `perl/PPlugin.pm`, and downstream consumers (`LibReader`, `RTLUtils`, `TableGrep`).
 - Spec corpus reviewed: `specs/*.spec` examples, including complex recursive/nested grammars.
 - Known concrete issue:
-  - `specs/tclite.spec` compile failure due to regex for literal `[` pattern.
+  - no deferred shipped-spec compile blocker is currently recorded.
 - Strategic direction agreed:
   - Keep extraction-oriented behavior as intentional strength.
   - Hide internal complexity behind transparent user concepts.
@@ -4032,7 +4033,7 @@ When resuming after interruption:
   - avoid introducing new features that increase raw Perl action dependency in `.spec`,
   - keep canonical-IR-first lowering as the default rewrite path while tightening helper-contract diagnostics boundaries,
   - keep strict balanced-delimiter behavior (no permissive missing-close helper variants),
-  - keep `tclite.spec` deferred until explicitly resumed.
+  - `tclite.spec` has since been resumed, fixed, and included in phase0; do not reintroduce a shipped-spec exclusion without a new explicit scope decision.
 
 ## Earlier Session Updates
 - Implemented Backbone item #3 roadmap slice in `specs/vhdl.spec`:
@@ -4655,7 +4656,7 @@ When resuming after interruption:
 - Recorded user clarification that downstream consumers are independent projects and updated planning notes accordingly.
 - Recorded subsequent scope decision: downstream-consumer work is deferred for now.
 - Switched Phase-0 baseline from ad-hoc script to `Test::More` (`t/phase0_regression.t`).
-- Current test scope excludes `tclite.spec`.
+- Current test scope includes `tclite.spec`.
 - Baseline command executed: `prove -Iperl t/phase0_regression.t`
 - Baseline result: PASS.
 - `specs/ebnf.spec` is now explicitly smoke-tested (invariant-based) in `t/phase0_regression.t`.
