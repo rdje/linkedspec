@@ -156,7 +156,7 @@ sub _normalize_method_tag_expr {
 #           `array(...)`, `input_slice(...)`, `hash_copy(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
 #           `length(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `tail(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
-#           `flat(...)`)
+#           `split_tagged_records(...)`, `flat(...)`)
 #           into Perl value expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -181,6 +181,7 @@ sub _lower_method_value_expr {
  my $infer_scalar_container_kind = $require_dep->('infer_scalar_container_kind');
  my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_array_pipeline_expr = $require_dep->('lower_array_pipeline_expr');
+ my $strip_literal_delimiters = $require_dep->('strip_literal_delimiters');
  my $array_container_prefix_re = qr/^(?:array|a)\s*\(/;
  my $hash_container_prefix_re = qr/^(?:hash|h)\s*\(/;
  my $array_symbol_expr_re = qr/^(?:(?:array|a)\s*\(\s*\w+\s*\)|\w+)$/;
@@ -267,7 +268,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
+  return 1 if $candidate_method =~ /^(?:array|array_copy|array_values|sorted|reversed|sorted_keys|sorted_values|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -1138,6 +1139,34 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   return '['.join(', ', @parts).']';
  }
+ if ($method_call && $method_call->{method} eq 'split_tagged_records') {
+  my $record_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, undef);
+  return undef unless $record_args && @$record_args >= 3;
+
+  my $source_expr = _lower_method_value_expr($record_args->[0], $deps);
+  $source_expr = $trim_action_ir_value->($record_args->[0]) unless defined($source_expr) && length($source_expr);
+  return undef unless defined($source_expr) && length($source_expr);
+
+  my $delimiter_expr = $trim_action_ir_value->($record_args->[1]);
+  return undef unless defined($delimiter_expr) && length($delimiter_expr);
+  if ($delimiter_expr !~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
+   my $literal = $strip_literal_delimiters->($delimiter_expr);
+   return undef unless defined $literal;
+   $delimiter_expr = '/'.quotemeta($literal).'/';
+  }
+
+  my $tag_expr = _normalize_method_tag_expr($record_args->[2], $deps);
+  return undef unless defined($tag_expr) && length($tag_expr);
+
+  my @payload = ($tag_expr, '$_');
+  foreach my $arg (@{$record_args}[3 .. $#$record_args]) {
+   my $field_expr = _lower_method_value_expr($arg, $deps);
+   $field_expr = $trim_action_ir_value->($arg) unless defined($field_expr) && length($field_expr);
+   return undef unless defined($field_expr) && length($field_expr);
+   push @payload, $field_expr;
+  }
+  return '[map { ['.join(', ', @payload).'] } split '.$delimiter_expr.', '.$source_expr.']';
+ }
  if ($method_call && $method_call->{method} eq 'sorted') {
   my $sorted_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $sorted_args;
@@ -1595,7 +1624,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:scalaref|scalar|s|array|a|hash|h|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|array_values|flat_array|flat_hash|flatten|flat)\s*\(/o || $direct ne $trimmed)
  ) {
   return $direct;
  }
@@ -1603,7 +1632,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|array_values|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:scalaref|scalar|s|array_copy|array_values|input_slice|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|tail|drop_front|take|slice|take_last|drop_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flatten|flat|array|a|hash|h)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;

@@ -133,7 +133,7 @@ sub _lower_declare_initializer_expr {
   if ($trimmed =~ /^\[(?<payload>.*)\]$/s) {
    return '('.$+{payload}.')';
   }
-  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'array_values' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'tail' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
+  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'array_values' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'tail' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return undef unless defined($derived_expr) && length($derived_expr);
    return '('.$+{payload}.')' if $derived_expr =~ /^\[(?<payload>.*)\]$/s;

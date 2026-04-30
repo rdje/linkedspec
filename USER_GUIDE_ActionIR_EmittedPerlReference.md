@@ -54,6 +54,7 @@ They take effect when the expression appears inside a statement or helper that c
 - `array_values(array(items))` -> `[@items]` (compatibility alias for `array_copy(...)`)
 - `hash_copy(hash(meta))` -> `{%meta}`
 - `concat_arrays(array(parts), sorted_keys(hash(meta)), array("tail"))` -> `[@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]`
+- `split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?row:", scalar(kind), scalar(expr))` -> `[map { ["?row:", $_, $kind, $expr] } split /\s*,\s*/o, $identifier_list]`
 - `slice(sorted_keys(hash(meta)), 1, 2)` -> `do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }`
 - `trim(scalar(IMATCH))` -> `do { my $__ls_trim = $IMATCH; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }`
 - `lowercase(trim(scalaref(retv, {content})))` -> `do { my $__ls_lower = do { my $__ls_trim = $retv->{content}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }`
@@ -217,7 +218,7 @@ Important nuance:
 - `return_undef()` -> `return undef`
 
 Important nuance:
-- `return(payload)` is the preferred general return surface because nested `scalar`, `scalaref`, `array`, `hash`, `array_copy`, compatibility `array_values`, and `flat_*` helpers all lower inside the payload.
+- `return(payload)` is the preferred general return surface because nested `scalar`, `scalaref`, `array`, `hash`, `array_copy`, compatibility `array_values`, `flat_*`, and `split_tagged_records(...)` helpers all lower inside the payload.
 
 ### Flow expressions (`FlowExpr.pm`)
 - `or(scalar(on), scalar(off))` -> `(($on) || ($off))`
@@ -297,6 +298,7 @@ Important nuance:
 - `filter_match(array(parts), /^[A-Z_]+$/)` -> `@parts = grep { $_ =~ /^[A-Z_]+$/ } @parts`
 - `filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)` -> `@parts = grep { $_ =~ /^[A-Z_]+$/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @parts }`
 - `split(array(parts), scalar(args), /\\s*,\\s*/); trim_each(array(parts)); filter_nonempty(array(parts))` -> `@parts = split /\\s*,\\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\\s+|\\s+$//g; $v } @parts; @parts = grep { length($_) } @parts`
+- `return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?row:", scalar(kind), scalar(expr)))` -> `return [map { ["?row:", $_, $kind, $expr] } split /\s*,\s*/o, $identifier_list]`
 
 ## Compatibility helper surface (`Contracts.pm`)
 ### Dispatch and push wrappers

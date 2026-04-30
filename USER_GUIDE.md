@@ -943,6 +943,7 @@ Typical patterns:
 - `lowercase_each(...)`, `uppercase_each(...)`
 - `uniq(...)`
 - `filter_match(...)`
+- `split_tagged_records(scalar(list), delimiter, tag, extra...)`
 
 ### I need legacy helper wrappers or capture/backtrack helpers
 Start with [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md).
@@ -1511,7 +1512,7 @@ If backend neutrality matters, these are the defaults you should follow.
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, `flat_*` helpers, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, legacy `array_values(...)`, `hash_copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
 7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, keep `array_values(array(name))` only as compatibility syntax, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
 8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.

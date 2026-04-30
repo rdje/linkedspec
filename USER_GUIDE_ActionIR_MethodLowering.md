@@ -55,6 +55,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `tail(...)` as a compatibility alias of `drop_front(...)`
 - `drop_last(...)` as a compatibility alias of `drop_back(...)`
 - `concat_arrays(...)`
+- `split_tagged_records(...)`
 - `sorted(...)`
 - `reversed(...)`
 - `contains(...)`
@@ -77,6 +78,23 @@ In practical terms, this is the guide you want when you need to understand:
 - `call(rule)` as a value source
 - generalized `return(payload)` payload lowering
 - `push_value(...)` value lowering
+
+## `split_tagged_records(...)`
+Use `split_tagged_records(scalar(source), delimiter, tag, field...)` when a scalar list should return repeated tagged array records.
+
+Example:
+
+```text
+return(split_tagged_records(
+  scalar(identifier_list),
+  /\s*,\s*/o,
+  "?constant_declaration:",
+  scalar(subtype_indication),
+  scalar(expression)
+))
+```
+
+This lowers to `return [map { [tag, item, field...] } split ...]`, but the source rule stays in helper form and remains visible to descriptor metadata.
 
 ## `scalar(...)`
 `scalar(...)` is the most frequently used value helper.

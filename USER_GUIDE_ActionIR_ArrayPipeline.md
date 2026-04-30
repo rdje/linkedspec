@@ -14,6 +14,7 @@ The array pipeline surface currently includes:
 - `uppercase_each(array_target)`
 - `uniq(array_target)`
 - `filter_match(array_target, regex)`
+- related array-valued `split_tagged_records(scalar_source, delimiter, tag, extra...)`
 
 These helpers can be used in:
 - direct method statements,
@@ -123,6 +124,23 @@ Typical use case:
 - keep only identifiers,
 - drop comments/noise fragments,
 - constrain a normalized list to a category.
+
+## `split_tagged_records(scalar_source, delimiter, tag, extra...)`
+Use it when a scalar list should become repeated tagged payload rows.
+
+Example:
+
+```text
+return(split_tagged_records(
+  scalar(identifier_list),
+  /\s*,\s*/o,
+  "?constant_declaration:",
+  scalar(subtype_indication),
+  scalar(expression)
+))
+```
+
+This lowers to the traditional `map { [tag, item, extra...] } split ...` shape while keeping the source `.spec` in helper form. It is array-valued, so it can be returned directly, assigned into an array declaration, or composed anywhere an array-valued helper is accepted.
 
 ## Chained style
 You can apply these helpers in chained form.

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - vhdl: finish compatibility cleanup
+
+- added `split_tagged_records(...)` as an array-valued helper for comma-list-to-tagged-record payloads, lowering to the legacy VHDL `map { [tag, item, ...] } split ...` shape without exposing raw authoring syntax,
+- migrated the remaining `specs/vhdl.spec` compatibility returns in `vhdl_file`, `architecture_statement_part`, `signal_decl_range`, `constant_declaration`, `variable_declaration`, `file_declaration`, `signal_declaration`, and `configuration_specification` to canonical helper forms,
+- reduced the full `vhdl` descriptor migration summary to `compatibility_surface_rule_count == 0` while preserving the VHDL smoke parser shape.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `split_tagged_records(...)` lowering probe
+  - direct `vhdl` descriptor metadata probe
+  - direct `vhdl` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - broad shipped-spec compatibility scan
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - ifelse: finish compatibility cleanup
 
 - migrated `specs/ifelse.spec::{if,then,elsif,else,while,while_then}` flow-stop edges from bare compatibility `return` statements to canonical `return_undef()`,

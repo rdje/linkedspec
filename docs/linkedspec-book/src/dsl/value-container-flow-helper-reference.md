@@ -648,6 +648,7 @@ Array-pipeline helpers are statements or composable array-valued transformations
 | `uppercase_each(array(target))` | uppercase every array item. |
 | `uniq(array(target))` | remove duplicates while preserving first-seen order. |
 | `filter_match(array(target), /regex/)` | keep only items that match the regex. |
+| `split_tagged_records(scalar(source), delimiter, tag, field...)` | build one tagged array record for each split source item. |
 
 Worked example:
 
@@ -679,6 +680,21 @@ lowercase_each(array(public_fields));
 ```
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
+
+Use `split_tagged_records(...)` when a comma-separated identifier list should become repeated tagged payload rows:
+
+```text
+return(split_tagged_records(
+  scalar(identifier_list),
+  /\s*,\s*/o,
+  "?signal_declaration:",
+  scalar(subtype_indication),
+  scalar(signal_kind),
+  scalar(expression)
+))
+```
+
+That lowers to the traditional `map { [tag, item, ...] } split ...` shape while keeping the authoring surface helper-based.
 
 ## Boolean composition
 

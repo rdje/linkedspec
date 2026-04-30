@@ -53,7 +53,7 @@ The important part is not the exact emitted Perl. The important part is that the
 
 The current helper surface is broad, but it is easier to learn in families:
 
-- value and container helpers: `scalar(...)`, `array(...)`, `hash(...)`, `flat_array(...)`, `join_values(...)`
+- value and container helpers: `scalar(...)`, `array(...)`, `hash(...)`, `flat_array(...)`, `join_values(...)`, `split_tagged_records(...)`
 - declaration helpers: `declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`
 - assignment and mutation helpers: `assign(...)`, `push(...)`, `push_value(...)`, `push_nonempty(...)`, `set_key(...)`
 - capture and mark helpers: `capture_slice()`, `capture_take()`, `mark_here(name)`, `capture_from(name)`

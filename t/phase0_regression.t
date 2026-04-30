@@ -41145,6 +41145,34 @@ SPEC
     ok(grep { $_ eq 'FILTER_MATCH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include FILTER_MATCH');
     ok($meta->{language_agnostic_action_ir_ready}, 'dot-chained lowercase/uppercase/uniq/filter_match rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_lowers_split_tagged_records_helper' => sub {
+    plan tests => 7;
+
+    is(
+        LinkedSpec::call_spec_handler_subst('Top', 'return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?row:", scalar(kind), scalar(expr)))'),
+        'return [map { ["?row:", $_, $kind, $expr] } split /\s*,\s*/o, $identifier_list]',
+        'split_tagged_records helper lowers comma-list records into the legacy VHDL map/split shape'
+    );
+
+    my $spec_content = <<'SPEC';
+Top:: I.declare(scalar, identifier_list="A,B", kind="wire", expr="1").declare(array, rows=split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?row:", scalar(kind), scalar(expr))).return(array_copy(array(rows)))
+ /a/ -> Top { return_undef() }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for split_tagged_records declaration initializer flow');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{raw_perl_dependency_count}, 0, 'split_tagged_records flow avoids raw-Perl fallback');
+    is($meta->{unresolved_helper_count}, 0, 'split_tagged_records flow avoids unresolved-helper hits');
+    is($meta->{compatibility_surface_count}, 0, 'split_tagged_records flow avoids compatibility-surface events');
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
+        'split_tagged_records flow contributes DECLARE/RETURN action-IR coverage'
+    );
+    ok($meta->{language_agnostic_action_ir_ready}, 'split_tagged_records flow remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_lowers_fluent_if_else_and_branch_statements' => sub {
     plan tests => 12;
 
@@ -43651,6 +43679,42 @@ subtest 'vhdl_small_blocker_helper_flow_eliminates_raw_fallback' => sub {
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'vhdl blocked-rule priority list is empty after the later subprogram_body migration');
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after the later subprogram_body migration');
 };
+subtest 'vhdl_remaining_return_shapes_clear_compatibility_surface' => sub {
+    plan tests => 53;
+
+    my $descr = LinkedSpec::get_parser('vhdl', return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for vhdl compatibility-surface return-shape cleanup');
+
+    for my $rule (qw(vhdl_file architecture_statement_part signal_decl_range constant_declaration variable_declaration file_declaration signal_declaration configuration_specification)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "vhdl $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "vhdl $rule still reports no raw-Perl fallback after return-shape cleanup");
+        is($meta->{unresolved_helper_count}, 0, "vhdl $rule still avoids unresolved-helper hits after return-shape cleanup");
+        is($meta->{compatibility_surface_count}, 0, "vhdl $rule reports no compatibility-surface events after return-shape cleanup");
+        is_deeply($meta->{compatibility_surface_statements}, [], "vhdl $rule exposes no compatibility-surface statements after return-shape cleanup");
+        ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, "vhdl $rule retains canonical RETURN coverage after return-shape cleanup");
+    }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'vhdl descriptor exposes action_rewriter migration summary after compatibility cleanup');
+    is($summary->{compatibility_surface_rule_count}, 0, 'vhdl compatibility-surface rule count drops to zero after return-shape cleanup');
+    is_deeply($summary->{compatibility_surface_rules_by_priority}, [], 'vhdl exposes no prioritized compatibility-surface rule list after return-shape cleanup');
+    ok(!defined($summary->{compatibility_surface_top_rule}), 'vhdl exposes no top compatibility-surface rule after return-shape cleanup');
+};
+subtest 'vhdl_accumulator_and_flat_returns_prefer_helper_source' => sub {
+    plan tests => 7;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for accumulator-return helper inspection');
+    like($source_content, qr/LX \{return\(array_copy\(array\(vhdl_file\)\)\)\}/, 'vhdl top lifecycle now returns an explicit vhdl_file array snapshot');
+    like($source_content, qr/-> architecture_body\[2\]\s+\{return\(array_copy\(array\(architecture_statement_part\)\)\)\}/, 'vhdl architecture_statement_part terminal return now uses an explicit array snapshot');
+    like($source_content, qr/signal_decl_range: .*?return\(flat_array\(array\(msi_lsi\)\)\)/s, 'vhdl signal_decl_range now uses flat_array(array(msi_lsi)) for the list-context range return');
+    unlike($source_content, qr/return \\\@vhdl_file/, 'vhdl top lifecycle no longer returns a raw accumulator reference');
+    unlike($source_content, qr/return \[\@architecture_statement_part\]/, 'vhdl architecture_statement_part no longer returns a raw accumulator copy');
+    unlike($source_content, qr/return \@msi_lsi/, 'vhdl signal_decl_range no longer uses bare list return compatibility syntax');
+};
 subtest 'vhdl_process_statement_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 11;
 
@@ -43768,7 +43832,7 @@ subtest 'vhdl_interface_port_decl_prefers_helper_array_flow' => sub {
     unlike($source_content, qr/-> signal_decl_range\s+\{push \@IMATCH_LIST, call\(signal_decl_range\)\}/, 'vhdl interface_signal_declaration no longer pushes child results directly into raw @IMATCH_LIST');
 };
 subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
-    plan tests => 11;
+    plan tests => 21;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
     my $source_content = slurp($source_spec);
@@ -43779,11 +43843,21 @@ subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
     like($source_content, qr/file_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), remainder_info=entry_group\(1\)\);/s, 'vhdl file_declaration now prefers entry_group(...) locals');
     like($source_content, qr/signal_declaration: .*?declare\(scalar, identifier_list=entry_group\(0\), subtype_indication=entry_group\(1\), signal_kind=entry_group\(2\), expression=entry_group\(3\)\);/s, 'vhdl signal_declaration now prefers entry_group(...) locals');
     like($source_content, qr/configuration_specification: .*?declare\(scalar, instantiation_list=entry_group\(0\), component_name=entry_group\(1\), binding_indication=entry_group\(2\)\);/s, 'vhdl configuration_specification now prefers entry_group(...) locals');
+    like($source_content, qr/constant_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?constant_declaration:", scalar\(subtype_indication\), scalar\(expression\)\)\)/s, 'vhdl constant_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/variable_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?variable_declaration:", scalar\(subtype_indication\), scalar\(expression\)\)\)/s, 'vhdl variable_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/file_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?file_declaration:", scalar\(remainder_info\)\)\)/s, 'vhdl file_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/signal_declaration: .*?return\(split_tagged_records\(scalar\(identifier_list\), \/\\s\*,\\s\*\/o, "\?signal_declaration:", scalar\(subtype_indication\), scalar\(signal_kind\), scalar\(expression\)\)\)/s, 'vhdl signal_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/configuration_specification: .*?return\(split_tagged_records\(scalar\(instantiation_list\), \/\\s\*,\\s\*\/o, "\?configuration_specification:", scalar\(component_name\), scalar\(binding_indication\)\)\)/s, 'vhdl configuration_specification now prefers split_tagged_records for instantiation-list returns');
     unlike($source_content, qr/constant_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl constant_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/variable_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl variable_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/file_declaration: .*?my \(\$identifier_list, \$remainder_info\) = \@IMATCH_LIST;/s, 'vhdl file_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/signal_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$signal_kind, \$expression\) = \@IMATCH_LIST;/s, 'vhdl signal_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/configuration_specification: .*?my \(\$instantiation_list, \$component_name, \$binding_indication\) = \@IMATCH_LIST;/s, 'vhdl configuration_specification no longer destructures raw @IMATCH_LIST');
+    unlike($source_content, qr/constant_declaration: .*?return \[map \{\['\?constant_declaration:'/s, 'vhdl constant_declaration no longer uses bare Perl map/split return');
+    unlike($source_content, qr/variable_declaration: .*?return \[map \{\['\?variable_declaration:'/s, 'vhdl variable_declaration no longer uses bare Perl map/split return');
+    unlike($source_content, qr/file_declaration: .*?return \[map \{\['\?file_declaration:'/s, 'vhdl file_declaration no longer uses bare Perl map/split return');
+    unlike($source_content, qr/signal_declaration: .*?return \[map \{\['\?signal_declaration:'/s, 'vhdl signal_declaration no longer uses bare Perl map/split return');
+    unlike($source_content, qr/configuration_specification: .*?return \[map \{\['\?configuration_specification:'/s, 'vhdl configuration_specification no longer uses bare Perl map/split return');
 };
 subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     plan tests => 9;

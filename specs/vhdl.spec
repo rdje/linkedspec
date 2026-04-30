@@ -9,7 +9,7 @@ vhdl_file::
 -> package_body               .push
 -> configuration_declaration  .push
 
-LX {return \@vhdl_file}
+LX {return(array_copy(array(vhdl_file)))}
 
 
 comment:        /--.*/                         I.declare(scalar, text=entry_text()).return(s(text))
@@ -70,7 +70,7 @@ architecture_statement_part:
 #-> concurrent_assertion_statement         .push
 -> generate_statement                      .push
 -> component_instantiation_statement       .push
--> architecture_body[2]                    {return [@architecture_statement_part]}
+-> architecture_body[2]                    {return(array_copy(array(architecture_statement_part)))}
 -> concurrent_signal_assignment_statement  .push
 
 
@@ -325,7 +325,7 @@ LE {start_capture_slice()}
     endif();
    endif();
 
-   return @msi_lsi
+   return(flat_array(array(msi_lsi)))
 }
 
 
@@ -343,19 +343,19 @@ subtype_declaration:  /(?is)\bsubtype\s+(\w+)\s+is\s+(.+?)\s*;/                 
 constant_declaration: /(?is)\bconstant\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/   I {
   declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
 
-  return [map {['?constant_declaration:', $_, $subtype_indication, $expression]} split /\s*,\s*/o, $identifier_list]
+  return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?constant_declaration:", scalar(subtype_indication), scalar(expression)))
 }
 
 variable_declaration: /(?is)\b(?:shared\s+)?variable\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/ I {
   declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), expression=entry_group(2));
 
-  return [map {['?variable_declaration:', $_, $subtype_indication, $expression]} split /\s*,\s*/o, $identifier_list]
+  return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?variable_declaration:", scalar(subtype_indication), scalar(expression)))
 }
 
 file_declaration: /(?is)\bfile\s+(.+?)\s*:\s*(.+?)\s*;/ I {
   declare(scalar, identifier_list=entry_group(0), remainder_info=entry_group(1));
 
-  return [map {['?file_declaration:', $_, $remainder_info]} split /\s*,\s*/o, $identifier_list]
+  return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?file_declaration:", scalar(remainder_info)))
 }
 
 alias_declaration:          /(?is)\balias\s+(\S+)\s+(.+?)?\bis\s+(\w+)(?:.*?)\s*;/    I.return(array("?alias_declaration:", flat_array(entry_groups())))
@@ -367,13 +367,13 @@ group_declaration:          /(?is)group\s+(\w+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*
 signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\s*:=\s*(.+?))?\s*;/ I {
   declare(scalar, identifier_list=entry_group(0), subtype_indication=entry_group(1), signal_kind=entry_group(2), expression=entry_group(3));
 
-  return [map {['?signal_declaration:', $_, $subtype_indication, $signal_kind, $expression]} split /\s*,\s*/o, $identifier_list],
+  return(split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?signal_declaration:", scalar(subtype_indication), scalar(signal_kind), scalar(expression)))
 }
 
 configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
   declare(scalar, instantiation_list=entry_group(0), component_name=entry_group(1), binding_indication=entry_group(2));
 
-  return [map {['?configuration_specification:', $_, $component_name, $binding_indication]} split /\s*,\s*/o, $instantiation_list]
+  return(split_tagged_records(scalar(instantiation_list), /\s*,\s*/o, "?configuration_specification:", scalar(component_name), scalar(binding_indication)))
 }
 
 downto_or_to: /(?i)\b(?:downto|to)\b/

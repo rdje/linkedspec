@@ -171,7 +171,7 @@ This pattern is useful when:
 
 ## What initializer expressions may contain
 Initializer expressions reuse the broader value-expression lowering surface. In practice that means you can initialize from:
-- helper value expressions such as `scalar(...)`, `array(...)`, `hash(...)`, `scalaref(...)`, `join_values(...)`, and ActionIR boolean/value helpers,
+- helper value expressions such as `scalar(...)`, `array(...)`, `hash(...)`, `scalaref(...)`, `join_values(...)`, `split_tagged_records(...)`, and ActionIR boolean/value helpers,
 - array/list constructors,
 - hash constructors,
 - simple raw literals.

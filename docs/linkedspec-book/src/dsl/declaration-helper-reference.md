@@ -306,7 +306,7 @@ Common initializer sources include:
 | Source readers | `entry_text()`, `entry_group(0)`, `capture_slice()`, `cursor_pos()` |
 | Child payload access | `scalaref(retv, {content})`, `scalaref(retv, {children}[0]{name})` |
 | Constructors | `array(...)`, `hash(...)` |
-| Aggregate helpers | `array_copy(...)`, `hash_copy(...)`, `sorted_keys(...)`, `pick_keys(...)` |
+| Aggregate helpers | `array_copy(...)`, `hash_copy(...)`, `sorted_keys(...)`, `pick_keys(...)`, `split_tagged_records(...)` |
 | String helpers | `trim(...)`, `lowercase(...)`, `replace_substr(...)`, `concat(...)` |
 | Numeric helpers | `count(...)`, `length(...)`, `num_add(...)`, `num_clamp(...)` |
 | Predicate helpers | `is_nonempty(...)`, `has_key(...)`, `matches(...)` |

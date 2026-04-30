@@ -109,9 +109,10 @@ array_copy(array(items))
 hash_copy(hash(meta))
 flat_array(array(parts))
 join_values("", array(tokens))
+split_tagged_records(scalar(identifier_list), /\s*,\s*/o, "?node:", scalar(type_name))
 ```
 
-This keeps the action code declarative. A reader can tell whether you are copying, flattening, or joining without unpacking raw Perl syntax.
+This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
 
 ## Hash shaping
 
