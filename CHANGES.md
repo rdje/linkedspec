@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - ebnf: finish compatibility cleanup
+
+- migrated `specs/ebnf.spec::grammar_file` from the remaining bare child-call assignment to `assign(s(rule), call(grammar_rule))`,
+- migrated `specs/ebnf.spec::{include_dir,include_file}` from host-language `$IMATCH` cleanup, `split`/`map`/`grep`, and bare arrayref returns to helper-form `entry_text()`, `substr(...)`, `split(...)`, `trim_each(...)`, `filter_nonempty(...)`, and `return(a(..., array_copy(a(parts))))`,
+- migrated `specs/ebnf.spec::{semantic_annotation,logging_annotation}` from bare capture/return forms to helper-form capture cleanup, explicit rolling `start_capture_slice()` movement, stored `entry_group(0)` names, and helper-form return payloads while preserving semantic and logging annotation ASTs.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `ebnf` descriptor metadata probe
+  - direct `ebnf` include / semantic annotation / logging annotation parser smokes
+  - direct helper-lowering probes for the migrated EBNF action forms
+  - `prove -Iperl t/phase0_regression.t`
+  - `git diff --check`
+  - `mdbook build docs/linkedspec-book`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - regdef: finish compatibility cleanup
 
 - migrated `specs/regdef.spec::{regdef_top,reg_def,reg_fld}` from bare arrayref returns to helper-form `return(a(...))` / fluent `I.return(...)` payloads using `array_copy(a(...))` for accumulator snapshots,

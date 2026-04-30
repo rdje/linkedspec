@@ -25,7 +25,7 @@ LX {
   assign(a(rule), a(flat_array(semantic_annotations)));
   assign(a(semantic_annotations), a());
 
-  $rule = call(grammar_rule);
+  assign(s(rule), call(grammar_rule));
   assign(s(on), 1)
 }
 
@@ -180,36 +180,25 @@ probability: /@\d+%?/             I.declare(scalar, value=entry_text()).substr(s
 regex: /(?<!\\)\/.+?(?<!\\)\//    I.declare(scalar, value=entry_text()).substr(s(value), "^/|/$", "", go).return(a("regex", s(value)))
 whitespace: /\s+/
 comment: /#.*/
-include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {
-  my $args = $IMATCH;
-  $args =~ s/^\s*(?:include_)?dir\(\s*//;
-  $args =~ s/\s*\)\s*$//;
-  my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args;
-  return ["include_dir", \@parts]
-}
-include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {
-  my $args = $IMATCH;
-  $args =~ s/^\s*(?:include(?:_file)?|file)\(\s*//;
-  $args =~ s/\s*\)\s*$//;
-  my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } split /\s*,\s*/, $args;
-  return ["include_file", \@parts]
-}
+include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(s(args), "^\s*(?:include_)?dir\(\s*", "", g).substr(s(args), "\s*\)\s*$", "", g).declare(array, parts).split(a(parts), s(args), /\s*,\s*/).trim_each(a(parts)).filter_nonempty(a(parts)).return(a("include_dir", array_copy(a(parts))))
+include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I.declare(scalar, args=entry_text()).substr(s(args), "^\s*(?:include(?:_file)?|file)\(\s*", "", g).substr(s(args), "\s*\)\s*$", "", g).declare(array, parts).split(a(parts), s(args), /\s*,\s*/).trim_each(a(parts)).filter_nonempty(a(parts)).return(a("include_file", array_copy(a(parts))))
 
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); my $c = $CAPTURE; $c =~ s/\s*$//o; $c =~ s/^"|"$//go; return ['semantic_annotation', [$IMATCH_LIST[0], $c]]}
+-> semantic_annotation | grammar_rule {BACKTRACK(); declare(scalar, c=capture_slice()); substr(s(c), "\s*$", "", o); substr(s(c), "^\"|\"$", "", go); return(a("semantic_annotation", a(entry_group(0), s(c))))}
 
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_slice
-I {$IMATCH =~ s/@|\s*\(//go}
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
 
 -> quoted_string {
-  push(quoted_string, 1)
+  push(quoted_string, 1);
+  start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()))
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  start_capture_slice()
 }
 -> logging_annotation[1] {
   push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
+  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
 }
 
 comma: /\s*,\s*/

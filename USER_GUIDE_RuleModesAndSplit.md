@@ -974,26 +974,27 @@ This is the anonymous/named bridge pattern:
 A real current example already exists in [`specs/ebnf.spec`](specs/ebnf.spec):
 
 ```text
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ 	@capture_slice
-I {$IMATCH =~ s/@|\s*\(//go}
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
 
 -> quoted_string {
-  push(quoted_string, 1)
+  push(quoted_string, 1);
+  start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()))
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  start_capture_slice()
 }
 -> logging_annotation[1] {
   push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
+  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
 }
 ```
 
 Why that shape matters:
 - the outer anchors find the logging annotation and its closing `)`,
-- `@capture_slice` moves the capture baseline forward,
-- later capture logic can treat the content between anchors as the meaningful span,
-- and the rule can build a coarse structured result from that anchored slice.
+- `start_capture_slice()` moves the capture baseline forward after the opener and after each consumed argument/separator,
+- later capture logic can treat only the unconsumed content between anchors as a meaningful span,
+- and the rule builds a structured result without mutating `$IMATCH` or returning a bare host-language array literal.
 
 If you are reading older specs or older notes, this may still appear as `@capture_from_here` or `@move_pos`. Those legacy spellings still work and lower to the same internal `MOVE_POS` event.
 

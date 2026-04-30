@@ -608,29 +608,30 @@ The parser returns:
 The shipped rule is:
 
 ```text
-logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/  @capture_slice
-I {$IMATCH =~ s/@|\s*\(//go}
+logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {declare(scalar, logging_name=entry_group(0)); start_capture_slice()}
 ```
 
 and then:
 
 ```text
 -> quoted_string {
-  push(quoted_string, 1)
+  push(quoted_string, 1);
+  start_capture_slice()
 }
 -> comma {
-  push_nonempty(a(logging_annotation), trim(capture_slice()))
+  push_nonempty(a(logging_annotation), trim(capture_slice()));
+  start_capture_slice()
 }
 -> logging_annotation[1] {
   push_nonempty(a(logging_annotation), trim(capture_slice()));
-  return ['logging_annotation', [$IMATCH, [@logging_annotation]]]
+  return(a("logging_annotation", a(s(logging_name), array_copy(a(logging_annotation)))))
 }
 ```
 
 This is a useful advanced example because it combines:
 
 - a two-regex rule,
-- an anonymous capture-boundary marker,
+- explicit anonymous capture-boundary movement,
 - a child call into `quoted_string`,
 - `push(...)` for the indexed quoted-string child result,
 - comma handling,
@@ -694,11 +695,12 @@ my $descr = LinkedSpec::get_parser(
 );
 ```
 
-The descriptor currently reports 24 rules and no language-agnostic ActionIR blockers:
+The descriptor currently reports 24 rules, no language-agnostic ActionIR blockers, and no compatibility-surface rules:
 
 ```text
 rules=24
 blocked=0
+compatibility_surface_rules=0
 top_blocked=<undef>
 ```
 
@@ -712,10 +714,10 @@ quoted_string raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SU
 quantifier raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETURN
 probability raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETURN
 regex raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETURN
-include_dir raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
-include_file raw=0 unresolved=0 ready=1 nodes=ASSIGN|REGEX_SUBST|RETURN
-semantic_annotation raw=0 unresolved=0 ready=1 nodes=ASSIGN|BACKTRACK|CAPTURE_MACRO|REGEX_SUBST|RETURN
-logging_annotation raw=0 unresolved=0 ready=1 nodes=CAPTURE_SLICE|POSITION_TRACK|PUSH|REGEX_SUBST|RETURN
+include_dir raw=0 unresolved=0 ready=1 nodes=DECLARE|FILTER_NONEMPTY|IMATCH_TEXT_READ|REGEX_SUBST|RETURN|SPLIT|TRIM_EACH
+include_file raw=0 unresolved=0 ready=1 nodes=DECLARE|FILTER_NONEMPTY|IMATCH_TEXT_READ|REGEX_SUBST|RETURN|SPLIT|TRIM_EACH
+semantic_annotation raw=0 unresolved=0 ready=1 nodes=BACKTRACK|CAPTURE_SLICE|DECLARE|IMATCH_GROUP_READ|REGEX_SUBST|RETURN
+logging_annotation raw=0 unresolved=0 ready=1 nodes=CAPTURE_SLICE|CAPTURE_SLICE_START|DECLARE|IMATCH_GROUP_READ|PUSH|RETURN
 ```
 
 The key public reading is:
@@ -735,8 +737,9 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - `grammar_file` no longer reports raw-Perl fallback dependency,
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
 - the source spec prefers short aliases such as `s(...)` and `a(...)` in the core method-DSL band,
-- `logging_annotation` uses the `@capture_slice` marker,
+- `logging_annotation` uses explicit `start_capture_slice()` boundary movement,
 - `logging_annotation` uses `push_nonempty(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
+- the full `ebnf` descriptor reports zero compatibility-surface rules,
 - `@log_rule("expr", "term")` parses at runtime into a normalized `logging_annotation` payload,
 - `ebnf/*.ebnf` corpus files parse through `ebnf.spec` and return array ASTs,
 - the small `Expr` / `Term` smoke input preserves the expected top rule names.

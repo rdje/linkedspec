@@ -43179,6 +43179,83 @@ subtest 'ebnf_terminal_token_rules_helper_flow_eliminates_raw_fallback' => sub {
         ok($meta->{language_agnostic_action_ir_ready}, "ebnf $rule is language-agnostic action-IR ready");
     }
 };
+subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
+    plan tests => 46;
+
+    my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for ebnf compatibility cleanup check');
+
+    for my $rule (qw(grammar_file include_dir include_file semantic_annotation logging_annotation)) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        ok(ref($meta) eq 'HASH', "ebnf $rule exposes action_rewriter metadata");
+        is($meta->{raw_perl_dependency_count}, 0, "ebnf $rule reports no raw-Perl fallback dependency");
+        is_deeply($meta->{raw_perl_dependency_statements}, [], "ebnf $rule exposes no raw-Perl fallback statements");
+        is($meta->{unresolved_helper_count}, 0, "ebnf $rule avoids unresolved-helper hits");
+        is($meta->{compatibility_surface_count}, 0, "ebnf $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "ebnf $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "ebnf $rule is language-agnostic action-IR ready");
+    }
+
+    my $grammar_meta = $descr->{spec}{grammar_file}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'ASSIGN' } @{$grammar_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$grammar_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$grammar_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$grammar_meta->{canonical_action_ir_nodes}}),
+        'ebnf grammar_file canonical action-IR nodes include ASSIGN/CALL/PUSH/RETURN after compatibility cleanup'
+    );
+
+    my $include_meta = $descr->{spec}{include_dir}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SPLIT' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'TRIM_EACH' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$include_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$include_meta->{canonical_action_ir_nodes}}),
+        'ebnf include_dir canonical action-IR nodes include declare/subst/split/trim/filter/return after compatibility cleanup'
+    );
+
+    my $include_file_meta = $descr->{spec}{include_file}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'DECLARE' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'SPLIT' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'TRIM_EACH' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$include_file_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$include_file_meta->{canonical_action_ir_nodes}}),
+        'ebnf include_file canonical action-IR nodes include declare/subst/split/trim/filter/return after compatibility cleanup'
+    );
+
+    my $semantic_meta = $descr->{spec}{semantic_annotation}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'BACKTRACK' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REGEX_SUBST' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$semantic_meta->{canonical_action_ir_nodes}}),
+        'ebnf semantic_annotation canonical action-IR nodes include backtrack/capture/subst/return after compatibility cleanup'
+    );
+
+    my $logging_meta = $descr->{spec}{logging_annotation}{meta}{action_rewriter};
+    ok(
+        scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CAPTURE_SLICE_START' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'DECLARE' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'PUSH' } @{$logging_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'RETURN' } @{$logging_meta->{canonical_action_ir_nodes}}),
+        'ebnf logging_annotation canonical action-IR nodes include capture-start/push/return after compatibility cleanup'
+    );
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'ebnf descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'ebnf blocked-rule count remains zero after compatibility cleanup');
+    is($summary->{compatibility_surface_rule_count}, 0, 'ebnf compatibility-surface rule count drops to zero after compatibility cleanup');
+    is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, [], 'ebnf exposes no prioritized blocked-rule list after compatibility cleanup');
+    ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after compatibility cleanup');
+};
 subtest 'ebnf_spec_prefers_short_container_aliases_in_core_method_dsl_band' => sub {
     plan tests => 5;
 
@@ -44206,22 +44283,26 @@ subtest 'sdce_spec_prefers_short_container_aliases_in_split_band' => sub {
     unlike($source_content, qr/\$LSPOS - \$IPOS - 1/, 'sdce oc_brace no longer uses raw cursor arithmetic for brace-body width reads');
     unlike($source_content, qr/assign\(array\(pieces\), array\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses the older array()/array() form in segment accumulation');
 };
-subtest 'ebnf_logging_annotation_prefers_capture_slice_marker' => sub {
-    plan tests => 7;
+subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
+    plan tests => 11;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for capture-slice marker inspection');
-    like($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation now prefers @capture_slice as the anonymous capture-boundary marker');
+    like($source_content, qr/logging_annotation: .*?I \{declare\(scalar, logging_name=entry_group\(0\)\); start_capture_slice\(\)\}/, 'ebnf logging_annotation now initializes the anonymous capture boundary explicitly');
+    unlike($source_content, qr/logging_annotation: .*?\@capture_slice/, 'ebnf logging_annotation no longer relies on the paragraph-level @capture_slice marker');
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
-    like($source_content, qr/push\(quoted_string, 1\)/, 'ebnf logging_annotation now uses push for indexed quoted-string child results');
+    like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
     unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
-    like($source_content, qr/push_nonempty\(a\(logging_annotation\), trim\(capture_slice\(\)\)\)/, 'ebnf logging_annotation now uses push_nonempty for trimmed optional capture appends');
+    like($source_content, qr/-> comma \{\s+push_nonempty\(a\(logging_annotation\), trim\(capture_slice\(\)\)\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation advances the capture boundary after comma spans');
+    like($source_content, qr/return\(a\("logging_annotation", a\(s\(logging_name\), array_copy\(a\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
+    unlike($source_content, qr/\$IMATCH =~ s\/\@\|\\s\*\\\(\//, 'ebnf logging_annotation no longer mutates $IMATCH with raw regex substitution');
+    unlike($source_content, qr/return \['logging_annotation', \[\$IMATCH, \[\@logging_annotation\]\]\]/, 'ebnf logging_annotation no longer uses bare arrayref return syntax');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
 };
 subtest 'ebnf_logging_annotation_runtime_parses_after_push_nonempty_migration' => sub {
-    plan tests => 5;
+    plan tests => 6;
 
     my $parser = LinkedSpec::get_parser('ebnf');
     ok(defined($parser) && ref($parser) eq 'CODE', 'ebnf parser created for logging annotation runtime smoke');
@@ -44246,6 +44327,7 @@ subtest 'ebnf_logging_annotation_runtime_parses_after_push_nonempty_migration' =
     my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
     my $nodes = $descr->{spec}{logging_annotation}{meta}{action_rewriter}{canonical_action_ir_nodes};
     ok(grep { $_ eq 'PUSH' } @{$nodes}, 'logging_annotation descriptor records PUSH ActionIR coverage for push_nonempty');
+    ok(grep { $_ eq 'CAPTURE_SLICE_START' } @{$nodes}, 'logging_annotation descriptor records explicit capture-boundary movement');
     ok(!grep { $_ eq 'CAPTURE_IF' } @{$nodes}, 'logging_annotation descriptor no longer records CAPTURE_IF ActionIR coverage');
 };
 subtest 'portmap_bare_bit_slice_helper_flow_eliminates_raw_fallback' => sub {
