@@ -9982,6 +9982,46 @@ subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
     LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'gamma');
     is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper becomes a no-op when parser-source capture is disabled');
 };
+subtest 'runtime_context_helpers_preserve_populated_scalar_slot_contract' => sub {
+    plan tests => 18;
+
+    my $runtime_ctx;
+    my $slot_ref = \$runtime_ctx;
+    is(ref($slot_ref), 'SCALAR', 'empty runtime_ctx_ref scalar slot starts as a SCALAR ref');
+    is(LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref($slot_ref), $slot_ref, 'RuntimeContext normalize helper accepts an empty scalar slot');
+
+    my $first_ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($slot_ref, seed => 'first');
+    ok(ref($first_ctx) eq 'HASH', 'RuntimeContext ensure helper materializes a hashref for an empty scalar slot');
+    is($runtime_ctx, $first_ctx, 'RuntimeContext ensure helper installs the materialized hashref into the scalar slot');
+    is($first_ctx->{seed}, 'first', 'RuntimeContext ensure helper applies seed fields to the materialized scalar-slot context');
+    is(ref($slot_ref), 'REF', 'populated scalar runtime_ctx_ref slot reports as a REF after the slot holds a hashref');
+
+    is(LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref($slot_ref), $slot_ref, 'RuntimeContext normalize helper accepts a populated scalar slot');
+    my $second_ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($slot_ref, fresh => 'second');
+    is($second_ctx, $first_ctx, 'RuntimeContext ensure helper reuses the existing hashref in a populated scalar slot');
+    is($runtime_ctx, $first_ctx, 'RuntimeContext ensure helper keeps the scalar slot pointed at the same context hashref');
+    is($runtime_ctx->{fresh}, 'second', 'RuntimeContext ensure helper applies new seed fields to the reused scalar-slot context');
+
+    my %direct_ctx = (caller_marker => 'kept');
+    my $direct_ctx_ref = \%direct_ctx;
+    is(ref($direct_ctx_ref), 'HASH', 'direct runtime_ctx_ref hashref keeps the HASH ref shape');
+    is(LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref($direct_ctx_ref), $direct_ctx_ref, 'RuntimeContext normalize helper accepts a direct context hashref');
+    my $direct_ctx = LinkedSpec::RuntimeContext::ensure_runtime_ctx($direct_ctx_ref, injected => 'yes');
+    is($direct_ctx, $direct_ctx_ref, 'RuntimeContext ensure helper reuses a direct context hashref');
+    is($direct_ctx{caller_marker}, 'kept', 'RuntimeContext ensure helper preserves caller fields in a direct context hashref');
+    is($direct_ctx{injected}, 'yes', 'RuntimeContext ensure helper applies seed fields to a direct context hashref');
+
+    my $bad_ctx = [];
+    my $bad_slot_ref = \$bad_ctx;
+    is(ref($bad_slot_ref), 'REF', 'scalar slot that already holds a non-hash reference also reports as a REF');
+    my $bad_ok = eval {
+        LinkedSpec::RuntimeContext::normalize_runtime_ctx_ref($bad_slot_ref, owner => 'Synthetic::RuntimeCtxProbe');
+        1;
+    };
+    my $bad_err = $@ // '';
+    ok(!$bad_ok, 'RuntimeContext normalize helper rejects a scalar slot already populated with a non-hash reference');
+    like($bad_err, qr/\(Synthetic::RuntimeCtxProbe\) -E- option 'runtime_ctx_ref' must be a runtime context hashref or scalar slot/, 'RuntimeContext normalize helper reports the public runtime_ctx_ref contract instead of raw Perl ref internals');
+};
 subtest 'runtime_context_helpers_flush_parser_source_output' => sub {
     plan tests => 7;
 
@@ -12573,6 +12613,44 @@ SPEC
     ok(!exists $runtime_ctx{last_error}, 'direct runtime_ctx_ref hashref exposes no stale last_error on success');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through direct runtime_ctx_ref hashref still preserves compiled handler coderef');
     is(ref(\%runtime_ctx), 'HASH', 'direct runtime_ctx_ref remains a shared hashref container');
+};
+subtest 'runtime_run_get_reuses_populated_scalar_runtime_ctx_ref_slot' => sub {
+    plan tests => 9;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $first_descr = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            return_descriptor => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        },
+    );
+
+    ok(defined($first_descr) && ref($first_descr) eq 'HASH', 'first Runtime::run_get call succeeds with an empty scalar runtime_ctx_ref slot');
+    ok(ref($runtime_ctx) eq 'HASH', 'first Runtime::run_get call materializes runtime context into the scalar slot');
+    is($runtime_ctx->{top_rule}, 'Top', 'first Runtime::run_get call records top_rule in the scalar-slot context');
+    my $first_ctx_ref = $runtime_ctx;
+    $runtime_ctx->{caller_marker} = 'kept';
+    is(ref(\$runtime_ctx), 'REF', 'populated scalar runtime_ctx_ref slot reports as a REF before reuse');
+
+    my $second_descr = LinkedSpec::Runtime::run_get(
+        \$spec_content,
+        {
+            return_descriptor => 1,
+            runtime_ctx_ref => \$runtime_ctx,
+        },
+    );
+
+    ok(defined($second_descr) && ref($second_descr) eq 'HASH', 'second Runtime::run_get call succeeds when reusing a populated scalar runtime_ctx_ref slot');
+    is($runtime_ctx, $first_ctx_ref, 'second Runtime::run_get call reuses the existing scalar-slot runtime context hashref');
+    is($runtime_ctx->{caller_marker}, 'kept', 'second Runtime::run_get call preserves caller fields in the reused scalar-slot context');
+    is($runtime_ctx->{top_rule}, 'Top', 'second Runtime::run_get call refreshes top_rule in the reused scalar-slot context');
+    ok(!exists $runtime_ctx->{last_error}, 'second Runtime::run_get call leaves reused scalar-slot last_error clear on success');
 };
 subtest 'runtime_run_get_reused_context_replaces_parser_source_capture' => sub {
     plan tests => 7;

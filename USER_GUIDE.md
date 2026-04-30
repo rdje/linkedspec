@@ -1316,6 +1316,8 @@ If you ask for `return_descriptor => 1`, the generated descriptor now also expos
 - a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
 - or a direct shared hashref like `\%ctx` / `$ctx_hashref`, in which case LinkedSpec reuses and updates that existing hash in place.
 
+A scalar slot remains the same public contract after LinkedSpec has populated it. On a later call, `runtime_ctx_ref => \$ctx` reuses the existing hashref in `$ctx`; a slot that is already populated with some other reference type is rejected instead of being silently reshaped.
+
 Typical uses:
 - inspect `top_rule` after successful descriptor/parser generation,
 - inspect `parser_source_chunks_ref` when you are already using parser-source capture,

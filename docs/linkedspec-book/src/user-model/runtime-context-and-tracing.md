@@ -39,6 +39,8 @@ die "no runtime context" unless ref($ctx) eq 'HASH';
 
 Both shapes exist because some callers already own a hash, while other callers want LinkedSpec to populate a shared slot.
 
+The scalar-slot form is reusable. After the first call, `$ctx` holds the context hashref; passing `runtime_ctx_ref => \$ctx` again keeps that same hashref alive and refreshes LinkedSpec-owned fields for the new call. If the slot already contains a non-hash reference, LinkedSpec rejects it as an invalid `runtime_ctx_ref` shape.
+
 ## What runtime context carries
 
 The runtime context can carry useful execution information such as:

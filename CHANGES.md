@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - runtime context: lock scalar-slot reuse
+
+- clarified `LinkedSpec::RuntimeContext`'s `runtime_ctx_ref` normalization path so a populated scalar slot is named and treated as the same public scalar-slot contract, not as an unexplained extra `REF` shape,
+- added focused helper regression coverage for empty scalar slots, populated scalar slots, direct context hashrefs, and non-hash populated slot rejection,
+- added an end-to-end `Runtime::run_get(...)` regression proving that `runtime_ctx_ref => \$ctx` reuses the same context hashref after the first call has populated `$ctx`,
+- refreshed runtime-context user docs, book pages, architecture notes, roadmap, and session memory with the reusable scalar-slot contract.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - plugin runtime: remove tssio wrapper
 
 - deleted the obsolete `plugin/tssio.plg` compatibility wrapper now that `Timing::SetupHold::write_tssio(...)` owns the visible `tssio` report/action body directly,
