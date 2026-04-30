@@ -827,19 +827,23 @@ Use `switch(...)` when the rule is classification-by-one-value. Use `if(...)` / 
 
 ## Debug output helpers
 
-`say(...)` and `print(...)` are statement helpers for simple diagnostic output in rule actions.
+`say(...)`, `print(...)`, and `print_each(...)` are statement helpers for simple diagnostic output in rule actions.
 
 | Helper | Effect |
 | --- | --- |
 | `say(value, ...)` | print values with a trailing newline. |
 | `print(value, ...)` | print values without adding a newline. |
+| `print_each(array(target), prefix, suffix?)` | print each item in an array with optional text before and after it. |
 
 Examples:
 
 ```text
 say("normalized kind: ", scalar(kind));
 print("token=", scalar(text), " kind=", scalar(kind), "\n");
+print_each(array(matches), "match:<<", ">>\n");
 ```
+
+Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
 
 Use `next()` when a rule edge should consume a recognized item, such as a comment, and then skip adding a value to the current accumulator:
 

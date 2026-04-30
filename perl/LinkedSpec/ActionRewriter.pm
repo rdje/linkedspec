@@ -77,6 +77,7 @@ my @EMIT_CONTEXT_FORWARDERS = qw(
  _lower_endswitch_flow_statement
  _lower_say_statement
  _lower_print_statement
+ _lower_print_each_statement
  _build_action_lowering_contracts
  _scan_contract_ir_events
  _find_unresolved_action_helpers

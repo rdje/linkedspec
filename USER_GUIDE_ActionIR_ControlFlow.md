@@ -54,6 +54,7 @@ This module lowers:
 - `endswitch()`
 - `say(...)`
 - `print(...)`
+- `print_each(...)`
 - `return_undef()`
 - `next()`
 
@@ -625,6 +626,24 @@ Use it when:
 - you want to assemble richer diagnostics,
 - you are porting older debug-print rules into canonical helper flow.
 
+## `print_each(array(target), prefix, suffix?)`
+`print_each(...)` prints every item in one working array, with optional text before and after each item.
+
+Examples:
+
+```text
+print_each(array(matches), "match:<<", ">>\n")
+print_each(array(tokens), "token=", "\n")
+print_each(array(debug_rows), "")
+```
+
+The first argument must name an array container. The second argument is printed before each item. The optional third argument is printed after each item, so include `"\n"` there when you want one output line per item.
+
+Use it when:
+- you have already accumulated child results or debug fragments in an array,
+- you want canonical ActionIR metadata for iterable debug output,
+- you are replacing older raw loops like `print "...$_..." foreach (@matches)`.
+
 ## `return_undef()`
 This is the explicit helper for returning `undef` in canonical control-flow.
 
@@ -722,7 +741,7 @@ endswitch()
 - Raw Perl control-flow bodies are legacy migration debt, not part of the intended long-term `.spec` surface.
 - Keep nested `if(...)` blocks readable; deeply nested branch stacks are still harder to maintain than assigning an intermediate flag.
 - Prefer inline switch only when each branch is short. Use marker-style switch for longer bodies.
-- Use `say(...)` and `print(...)` for diagnostics instead of embedding raw output statements if backend-neutrality matters.
+- Use `say(...)`, `print(...)`, and `print_each(...)` for diagnostics instead of embedding raw output statements if backend-neutrality matters.
 
 ## Related guides
 - Condition expressions: [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md)

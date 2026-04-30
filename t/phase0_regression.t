@@ -3014,6 +3014,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_endswitch_flow_statement = sub { return 'endswitch_ok' };
     local *Synthetic::ActionIROwner::_lower_say_statement = sub { return 'say_ok' };
     local *Synthetic::ActionIROwner::_lower_print_statement = sub { return 'print_ok' };
+    local *Synthetic::ActionIROwner::_lower_print_each_statement = sub { return 'print_each_ok' };
     local *Synthetic::ActionIROwner::_lower_return_undef_statement = sub { return 'return_undef_ok' };
     local *Synthetic::ActionIROwner::_lower_return_array_statement = sub { return 'return_array_ok' };
     local *Synthetic::ActionIROwner::_lower_declare_method_statement = sub { return 'declare_method_ok' };
@@ -15336,7 +15337,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_return_imatch_statement _lower_assign_method_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_return_array_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -42906,6 +42907,28 @@ SPEC
     is($rewritten, 'print "perl_dquotes:<<$_>>\n" foreach (@matches)', 'print-foreach statement is preserved while avoiding RAW_PERL fallback');
     is($meta->{language_agnostic_action_ir_ready}, 1, 'print-foreach-only rule remains language-agnostic action-IR ready');
 };
+subtest 'action_rewriter_lowers_print_each_helper_without_compatibility_surface' => sub {
+    plan tests => 8;
+
+    my $spec_content = <<'SPEC';
+Top::& I {declare(array, matches=array("x", "y"))}
+ /a/ -> Top { print_each(array(matches), "item<<", ">>\n") }
+SPEC
+
+    my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for print_each helper check');
+
+    my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'canonical action-IR fallback count excludes print_each helper');
+    is($meta->{raw_perl_dependency_count}, 0, 'raw-perl dependency count excludes print_each helper');
+    is($meta->{unresolved_helper_count}, 0, 'print_each helper keeps unresolved-helper count at zero');
+    is($meta->{compatibility_surface_count}, 0, 'print_each helper is not a compatibility-surface event');
+    ok(grep { $_ eq 'PRINT' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PRINT for print_each helper');
+
+    my $rewritten = LinkedSpec::call_spec_handler_subst('Top', 'print_each(array(matches), "item<<", ">>\n")');
+    is($rewritten, 'print "item<<", $_, ">>\n" foreach (@matches)', 'print_each lowers to the existing iterable debug-output shape');
+    is($meta->{language_agnostic_action_ir_ready}, 1, 'print_each-only rule remains language-agnostic action-IR ready');
+};
 subtest 'action_rewriter_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback' => sub {
     plan tests => 7;
 
@@ -44827,13 +44850,92 @@ subtest 'simenv_delimiter_readers_prefer_capture_slice' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'simenv source spec text is available for delimiter-reader helper inspection');
-    like($source_content, qr/multiline_value: .*?content=>capture_slice\(\)/s, 'simenv multiline_value now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/multiline_value: .*?return\(hash\("type", "multiline_value", "content", capture_slice\(\)\)\)/s, 'simenv multiline_value now prefers capture_slice() for the delimiter body read');
     like($source_content, qr/singleline_value: .*?print\("<", capture_slice\(\), ">\\n"\);/s, 'simenv singleline_value now prefers capture_slice() for the delimiter-body debug print');
-    like($source_content, qr/squotes: .*?content=>capture_slice\(\)/s, 'simenv squotes now prefers capture_slice() for the delimiter body read');
-    like($source_content, qr/bvariable_substitution: .*?content=>capture_slice\(\)/s, 'simenv bvariable_substitution now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/squotes: .*?return\(hash\("type", "squotes", "content", capture_slice\(\)\)\)/s, 'simenv squotes now prefers capture_slice() for the delimiter body read');
+    like($source_content, qr/bvariable_substitution: .*?return\(hash\("type", "bvariable_substitution", "content", capture_slice\(\)\)\)/s, 'simenv bvariable_substitution now prefers capture_slice() for the delimiter body read');
     like($source_content, qr/parenthesis: .*?print\("<", capture_slice\(\), ">\\n"\);/s, 'simenv parenthesis now prefers capture_slice() for the delimiter-body debug print');
     unlike($source_content, qr/multiline_value: .*?content=>substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)/s, 'simenv multiline_value no longer uses the raw anonymous-boundary substr read');
     unlike($source_content, qr/parenthesis: .*?print\("<", substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\), ">\\n"\);/s, 'simenv parenthesis no longer uses the raw anonymous-boundary substr debug print');
+};
+subtest 'simenv_remaining_compatibility_surface_is_clear' => sub {
+    my @rules = qw(
+        top begin_end_blocks anyvariable multiline_value singleline_value bs_nl
+        squotes dquotes perl_squotes perl_dquotes command_substitution
+        perl_command_substitution bvariable_substitution variable_substitution
+        curlybrace parenthesis comments
+    );
+    plan tests => 1 + (3 * @rules) + 5;
+
+    my $descr = LinkedSpec::get_parser('simenv', return_descriptor => 1);
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for full simenv compatibility cleanup check');
+
+    for my $rule (@rules) {
+        my $meta = $descr->{spec}{$rule}{meta}{action_rewriter};
+        is($meta->{compatibility_surface_count}, 0, "simenv $rule reports no compatibility-surface events");
+        is_deeply($meta->{compatibility_surface_statements}, [], "simenv $rule exposes no compatibility-surface statements");
+        ok($meta->{language_agnostic_action_ir_ready}, "simenv $rule remains language-agnostic action-IR ready");
+    }
+
+    my $summary = $descr->{meta}{action_rewriter_migration};
+    ok(ref($summary) eq 'HASH', 'simenv descriptor exposes action_rewriter migration summary');
+    is($summary->{language_agnostic_blocked_rule_count}, 0, 'simenv blocked-rule count remains zero after final compatibility cleanup');
+    is($summary->{compatibility_surface_rule_count}, 0, 'simenv compatibility-surface rule count drops to zero');
+    is_deeply($summary->{compatibility_surface_rules_by_priority}, [], 'simenv exposes no prioritized compatibility-surface rule list');
+    ok(!defined($summary->{compatibility_surface_top_rule}), 'simenv exposes no top compatibility-surface rule');
+};
+subtest 'simenv_remaining_compatibility_source_prefers_helpers' => sub {
+    plan tests => 12;
+
+    my $source_spec = File::Spec->catfile($spec_dir, 'simenv.spec');
+    my $source_content = slurp($source_spec);
+
+    ok(defined($source_content) && length($source_content), 'simenv source spec text is available for final compatibility-source inspection');
+    like($source_content, qr/top::\s+I \{declare\(array, blocks\); declare\(scalar, retv\)\}/, 'simenv top now declares retv through helper-form declaration');
+    like($source_content, qr/assign\(scalar\(retv\), call\(begin_end_blocks\)\)/, 'simenv top now assigns child block calls through helper-form assignment');
+    like($source_content, qr/push_value\(array\(keyval_pairs\), call\(multiline_value\)\)/, 'simenv begin_end_blocks now appends multiline values through push_value');
+    like($source_content, qr/declare\(scalar, last_pos=capture_slice_pos\(\), shift\)/, 'simenv substitution readers initialize position tracking with capture_slice_pos()');
+    like($source_content, qr/assign\(scalar\(last_pos\), cursor_pos\(\)\)/, 'simenv substitution readers advance position tracking with cursor_pos()');
+    like($source_content, qr/input_slice\(scalar\(last_pos\), scalar\(shift\)\)/, 'simenv verbatim slices now use input_slice()');
+    like($source_content, qr/print_each\(array\(matches\), "perl_command_substitution:<<", ">>\\n"\)/, 'simenv debug match loops now use print_each()');
+    like($source_content, qr/substr\(scalar\(block_namei\), \/\^\.\*\\s\+\/, "", o\)/, 'simenv BEGIN block-name cleanup uses a regex literal for whitespace stripping');
+    unlike($source_content, qr/my \$last_pos=\$IPOS|my \@matches|pos\(\$\$STRING\)|push \@matches|print ".*?" foreach \(\@matches\)|\bexit\b|return \{type=>|return \{name=>/s, 'simenv source no longer uses the old compatibility position/loop/return/exit forms');
+    like($source_content, qr/return_undef\(\)/, 'simenv void completion paths now use return_undef()');
+    like($source_content, qr/exit_now\(\)/, 'simenv fatal error paths now use exit_now()');
+};
+subtest 'simenv_parser_smoke_preserves_begin_end_ast_after_helper_cleanup' => sub {
+    plan tests => 8;
+
+    my $parser = LinkedSpec::get_parser('simenv');
+    ok(defined($parser) && ref($parser) eq 'CODE', 'simenv parser created');
+
+    my $input = "BEGIN top\nFOO=bar\nBAR={baz}\nEND top\n";
+    my ($ok, $ast, $err, $stdout, $stderr, $inner_eval_err) = run_parser_with_captured_io($parser, \$input);
+    ok($ok, 'simenv parser executed without die') or diag(normalize_error($err));
+    is($inner_eval_err, '', 'simenv parser execution leaves no inner eval error');
+    is($stderr, '', 'simenv parser emits no stderr for the smoke input');
+    ok(defined($ast) && ref($ast) eq 'ARRAY', 'simenv parser returned an array AST');
+    is_deeply(
+        $ast,
+        [
+            {
+                name => 'top',
+                content => [
+                    [
+                        {type => 'anyvariable', content => 'FOO'},
+                        {type => 'singleline_value', content => [{type => 'verbatim', content => 'bar'}]},
+                    ],
+                    [
+                        {type => 'anyvariable', content => 'BAR'},
+                        {type => 'multiline_value', content => 'baz'},
+                    ],
+                ],
+            },
+        ],
+        'simenv parser preserves the nested begin/end assignment AST'
+    );
+    like($stdout, qr/begin_end_blocks: END\s+\(END top/, 'simenv parser reaches the matching END block after regex-literal name cleanup');
+    like($stdout, qr/singleline_value:<<HASH\(/, 'simenv parser preserves iterable debug printing through print_each()');
 };
 subtest 'lispish_small_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 50;

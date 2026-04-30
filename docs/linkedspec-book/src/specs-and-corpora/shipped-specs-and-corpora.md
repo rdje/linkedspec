@@ -58,7 +58,7 @@ At the time of this book slice, it contains these public examples and regression
 | `pplugin.spec` | `pplugin_top` | Legacy `.plg` subdefinition parsing and plugin-body capture. |
 | `regdef.spec` | `regdef_top` | Register-definition and field-definition extraction. |
 | `sdce.spec` | `sdc_esplit` | SDC-style split flows around `get_port` / `get_pin` forms and brace-aware capture. |
-| `simenv.spec` | `top` | Simulation-environment config blocks, multiline values, substitutions, comments, and nested delimiters. |
+| `simenv.spec` | `top` | Simulation-environment config blocks, multiline values, substitutions, comments, nested delimiters, and helper-form iterable debug output. |
 | `tablegrep.spec` | `grep` | Boolean expression parsing for table filtering, including `AND`, `OR`, grouping, and regex terms. |
 | `tclite.spec` | `tcl_script` | Tcl-like syntax experiment with commands, quotes, comments, substitutions, and braces. |
 | `tkgui.spec` | `sub_gui_list` | Small GUI-subdefinition parser with captured inner bodies. |
@@ -151,6 +151,8 @@ my $summary = $descr->{meta}{action_rewriter_migration};
 ```
 
 That descriptor mode is heavily used by regression tests because it exposes rule metadata, dependency refs, compiled order, and ActionIR migration status.
+
+`simenv.spec` is now regression-locked as compatibility-surface clean: block aggregation, variable/value readers, delimiter readers, substitution readers, fatal exits, and debug iteration all use helper-form ActionIR paths while preserving the shipped begin/end AST smoke behavior.
 
 For the detailed rule-by-rule explanation of the shipped grammar-file parser, read [`ebnf.spec` Walkthrough](ebnf-spec-walkthrough.md).
 

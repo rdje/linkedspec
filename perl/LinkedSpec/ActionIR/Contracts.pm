@@ -47,6 +47,7 @@ sub default_deps_for_package {
    'lower_endswitch_flow_statement',
    'lower_say_statement',
    'lower_print_statement',
+   'lower_print_each_statement',
    'lower_return_undef_statement',
    'lower_return_array_statement',
    'lower_declare_method_statement',
@@ -83,6 +84,7 @@ sub _require_lowering_deps {
   lower_endswitch_flow_statement => $require_dep->('lower_endswitch_flow_statement'),
   lower_say_statement            => $require_dep->('lower_say_statement'),
   lower_print_statement          => $require_dep->('lower_print_statement'),
+  lower_print_each_statement     => $require_dep->('lower_print_each_statement'),
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
   lower_return_array_statement   => $require_dep->('lower_return_array_statement'),
   lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
@@ -2073,6 +2075,18 @@ sub _build_emit_and_declare_contracts {
     my ($code, $ctx) = @_;
     my $lower = $d->{lower_say_statement};
     $code =~ s/\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    return $code
+   },
+  },
+  {
+   id                 => 'print_each',
+   ir_node            => 'PRINT',
+   diag_name          => 'print_each',
+   unresolved_pattern => qr/\bprint_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $lower = $d->{lower_print_each_statement};
+    $code =~ s/\b(?<expr>print_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },

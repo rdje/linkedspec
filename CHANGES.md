@@ -1,6 +1,30 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-04-30 - simenv: finish compatibility cleanup
+
+- added canonical `print_each(array(target), prefix, suffix?)` support for iterable diagnostic output, lowering to the existing Perl `foreach` print shape while contributing `PRINT` ActionIR metadata and avoiding compatibility-surface syntax,
+- migrated the remaining `specs/simenv.spec` compatibility forms to helper-style declaration, assignment, child-result appends, position tracking, returns, fatal exits, and iterable debug printing,
+- fixed the `BEGIN` / `END` block-name cleanup patterns to use regex literals, preserving the shipped begin/end parser smoke after the helper migration,
+- reduced the full `simenv` descriptor migration summary to `compatibility_surface_rule_count == 0`.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/ControlFlow.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm`
+  - `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`
+  - `perl -c -Iperl perl/LinkedSpec/ActionRewriter.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - direct `print_each(...)` lowering probe
+  - direct `simenv` descriptor metadata probe
+  - direct `simenv` parser smoke
+  - `prove -Iperl t/phase0_regression.t`
+  - broad shipped-spec compatibility scan
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - vhdl: finish compatibility cleanup
 
 - added `split_tagged_records(...)` as an array-valued helper for comma-list-to-tagged-record payloads, lowering to the legacy VHDL `map { [tag, item, ...] } split ...` shape without exposing raw authoring syntax,

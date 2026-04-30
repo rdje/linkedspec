@@ -422,6 +422,11 @@ sub _lower_print_statement {
  return _call_actionir_owner_with_deps('control_flow', '_lower_print_statement', @args)
 }
 
+sub _lower_print_each_statement {
+ my @args = @_;
+ return _call_actionir_owner_with_deps('control_flow', '_lower_print_each_statement', @args)
+}
+
 sub _normalize_method_tag_expr {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_normalize_method_tag_expr', @args)

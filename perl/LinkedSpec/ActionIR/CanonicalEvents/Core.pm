@@ -29,6 +29,7 @@ my %DIRECT_KIND_BY_CONTRACT_ID = (
  ref_field_assign                 => 'ASSIGN',
  position_tracking                => 'POSITION_TRACK',
  print_foreach_iterable           => 'PRINT',
+ print_each                       => 'PRINT',
  assign_value                     => 'ASSIGN',
  regex_subst                      => 'REGEX_SUBST',
  return_a                         => 'RETURN_A',

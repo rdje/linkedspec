@@ -60,6 +60,7 @@ The current helper surface is broad, but it is easier to learn in families:
 - source-location helpers: `cursor_line()`, `cursor_col()`, `entry_start_pos()`, `match_end_col()`
 - input and match readers: `input_text()`, `entry_text()`, `match_text()`, `entry_group(index)`
 - control-flow helpers: `if(...)`, `elseif(...)`, `else`, `endif`, `switch`, `case`, `default`, `endswitch`
+- output helpers: `say(...)`, `print(...)`, `print_each(...)`
 - rule-dispatch helpers: `call(rule)` and helper-based child-result handling
 
 The linked chapters below introduce these families in public-facing terms. The repo-root ActionIR guides remain the exhaustive working references while the book continues growing.

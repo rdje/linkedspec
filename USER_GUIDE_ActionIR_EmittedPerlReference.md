@@ -274,6 +274,7 @@ Important nuance:
 - `say("warn")` -> `say "warn"`
 - `say("entered rule ", scalar(rule_name))` -> `say "entered rule ", $rule_name`
 - `print("token=", scalar(token), "\n")` -> `print "token=", $token, "\n"`
+- `print_each(array(matches), "item<<", ">>\n")` -> `print "item<<", $_, ">>\n" foreach (@matches)`
 - `switch(scalar(op))` -> `do { my $__ls_switch_value_1 = $op; my $__ls_switch_hit_1 = 0`
 - `case("|")` inside that switch -> `if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq "|") { $__ls_switch_hit_1 = 1`
 - `case(/^BEGIN_/)` inside that switch -> `if (!$__ls_switch_hit_1 && $__ls_switch_value_1 =~ /^BEGIN_/) { $__ls_switch_hit_1 = 1`
@@ -589,6 +590,7 @@ They are important for migration audits and old-spec compatibility, not the pref
 2. Prefer `assign(...)` over raw assignment wrappers.
 3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
 4. Prefer `push_value(...)` over raw `push @target, ...` once you already have a value expression.
-5. Prefer `return(payload)` over `return_a`/`return_m`/`return_ma` when you want helper-aware nested payload lowering.
-6. Prefer helper pipelines over raw `split/map/grep` chains.
-7. Treat pass-through classified idioms as compatibility tools, not as the default design language for new `.spec` authoring.
+5. Prefer `print_each(array(target), prefix, suffix)` over raw `print "...$_..." foreach (@target)` debug loops.
+6. Prefer `return(payload)` over `return_a`/`return_m`/`return_ma` when you want helper-aware nested payload lowering.
+7. Prefer helper pipelines over raw `split/map/grep` chains.
+8. Treat pass-through classified idioms as compatibility tools, not as the default design language for new `.spec` authoring.

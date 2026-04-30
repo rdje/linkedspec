@@ -35,6 +35,7 @@ sub default_deps_for_package {
    'lower_flow_composite_expr',
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
+   { dep => 'extract_array_symbol_name', pkg => 'LinkedSpec::ActionIR::ValueExpr' },
   ],
  )
 }
@@ -1045,6 +1046,50 @@ sub _lower_print_statement {
  my @values = map { _lower_control_flow_value_expr($_, $deps) } @$effective_args;
  return undef unless @values && !grep { !defined($_) || !length($_) } @values;
  return 'print '.join(', ', @values)
+}
+
+#------------------------------------------------------------------------------
+# Function: _lower_print_each_statement
+# Purpose : Lower `print_each(array(target), prefix, suffix?)` iterable output.
+# Args    : ($expr, $deps)
+# Returns : Perl statement string or undef
+#------------------------------------------------------------------------------
+sub _lower_print_each_statement {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+ my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
+
+ my $call = $parse_method_function_expr->($expr);
+ return undef unless $call && $call->{method} eq 'print_each';
+
+ my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 3);
+ return undef unless $effective_args && @$effective_args >= 2;
+
+ my $array_expr = $trim_action_ir_value->($effective_args->[0]);
+ return undef unless defined($array_expr) && length($array_expr);
+ my $array_symbol = $extract_array_symbol_name->($array_expr, $deps);
+ return undef unless defined($array_symbol) && length($array_symbol);
+
+ my $prefix_expr = _lower_control_flow_value_expr($effective_args->[1], $deps);
+ return undef unless defined($prefix_expr) && length($prefix_expr);
+
+ my @parts = ($prefix_expr, '$_');
+ if (@$effective_args > 2) {
+  my $suffix_expr = _lower_control_flow_value_expr($effective_args->[2], $deps);
+  return undef unless defined($suffix_expr) && length($suffix_expr);
+  push @parts, $suffix_expr;
+ }
+
+ return 'print '.join(', ', @parts).' foreach (@'.$array_symbol.')'
 }
 
 1;
