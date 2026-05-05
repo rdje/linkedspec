@@ -12652,6 +12652,42 @@ SPEC
     is($runtime_ctx->{top_rule}, 'Top', 'second Runtime::run_get call refreshes top_rule in the reused scalar-slot context');
     ok(!exists $runtime_ctx->{last_error}, 'second Runtime::run_get call leaves reused scalar-slot last_error clear on success');
 };
+subtest 'linkedspec_get_reuses_populated_scalar_runtime_ctx_ref_slot' => sub {
+    plan tests => 10;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my $runtime_ctx;
+    my $first_descr = LinkedSpec::Get(
+        \$spec_content,
+        return_descriptor => 1,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok(defined($first_descr) && ref($first_descr) eq 'HASH', 'first LinkedSpec::Get call succeeds with an empty scalar runtime_ctx_ref slot');
+    ok(ref($runtime_ctx) eq 'HASH', 'first LinkedSpec::Get call materializes runtime context into the scalar slot');
+    is($runtime_ctx->{top_rule}, 'Top', 'first LinkedSpec::Get call records top_rule in the scalar-slot context');
+    my $first_ctx_ref = $runtime_ctx;
+    $runtime_ctx->{caller_marker} = 'kept';
+    $runtime_ctx->{last_error} = { type => 'stale' };
+    is(ref(\$runtime_ctx), 'REF', 'populated scalar runtime_ctx_ref slot still reaches the public Get facade as a REF');
+
+    my $second_descr = LinkedSpec::Get(
+        \$spec_content,
+        return_descriptor => 1,
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok(defined($second_descr) && ref($second_descr) eq 'HASH', 'second LinkedSpec::Get call succeeds when reusing a populated scalar runtime_ctx_ref slot');
+    is($runtime_ctx, $first_ctx_ref, 'second LinkedSpec::Get call reuses the existing scalar-slot runtime context hashref');
+    is($runtime_ctx->{caller_marker}, 'kept', 'second LinkedSpec::Get call preserves caller fields in the reused scalar-slot context');
+    is($runtime_ctx->{top_rule}, 'Top', 'second LinkedSpec::Get call refreshes top_rule in the reused scalar-slot context');
+    ok(!exists $runtime_ctx->{last_error}, 'second LinkedSpec::Get call clears stale scalar-slot last_error on success');
+    ok(ref($second_descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned through the public Get facade still preserves compiled handler coderef');
+};
 subtest 'runtime_run_get_reused_context_replaces_parser_source_capture' => sub {
     plan tests => 7;
 
@@ -13078,6 +13114,48 @@ subtest 'get_parser_resolution_failure_clears_stale_runtime_ctx_identity' => sub
     is($runtime_ctx{last_error}{spec_name}, $missing_spec_name, 'get_parser reused-context last_error records the refreshed spec_name');
     is($runtime_ctx{last_error}{spec_path}, '', 'get_parser reused-context last_error does not inherit stale spec_path');
     is($runtime_ctx{last_error}{top_rule}, 'RequestedTop', 'get_parser reused-context last_error records the requested top_rule instead of stale state');
+};
+subtest 'get_parser_reuses_populated_scalar_runtime_ctx_ref_slot' => sub {
+    plan tests => 18;
+
+    my $missing_one = 'phase5_get_parser_scalar_slot_one_' . $$ . '.spec';
+    my $missing_two = 'phase5_get_parser_scalar_slot_two_' . $$ . '.spec';
+    my $runtime_ctx;
+    my ($ok_one, $parser_one, $err_one, $out_one, $warn_one) = run_get_parser_with_captured_io(
+        $missing_one,
+        top_rule => 'FirstTop',
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_one, 'first get_parser scalar-slot resolution-failure call returns without die') or diag(normalize_error($err_one));
+    ok(!defined($parser_one), 'first get_parser scalar-slot call returns undef for a missing explicit dot-spec name');
+    ok(ref($runtime_ctx) eq 'HASH', 'first get_parser scalar-slot call materializes runtime context into the scalar slot');
+    is($runtime_ctx->{spec_name}, $missing_one, 'first get_parser scalar-slot call records requested spec name');
+    is($runtime_ctx->{top_rule}, 'FirstTop', 'first get_parser scalar-slot call records requested top_rule');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'first get_parser scalar-slot call records parser-factory resolution stage');
+    is($runtime_ctx->{last_error}{spec_name}, $missing_one, 'first get_parser scalar-slot last_error records requested spec name');
+    my $first_ctx_ref = $runtime_ctx;
+    $runtime_ctx->{caller_marker} = 'kept';
+    $runtime_ctx->{spec_path} = '/tmp/stale.spec';
+    $runtime_ctx->{last_error} = { type => 'stale', spec_name => 'OldSpec' };
+    is(ref(\$runtime_ctx), 'REF', 'populated scalar runtime_ctx_ref slot still reaches get_parser as a REF');
+
+    my ($ok_two, $parser_two, $err_two, $out_two, $warn_two) = run_get_parser_with_captured_io(
+        $missing_two,
+        top_rule => 'SecondTop',
+        runtime_ctx_ref => \$runtime_ctx,
+    );
+
+    ok($ok_two, 'second get_parser scalar-slot resolution-failure call returns without die') or diag(normalize_error($err_two));
+    ok(!defined($parser_two), 'second get_parser scalar-slot call returns undef for a missing explicit dot-spec name');
+    is($runtime_ctx, $first_ctx_ref, 'second get_parser scalar-slot call reuses the existing runtime context hashref');
+    is($runtime_ctx->{caller_marker}, 'kept', 'second get_parser scalar-slot call preserves caller fields in the reused context');
+    is($runtime_ctx->{spec_name}, $missing_two, 'second get_parser scalar-slot call refreshes requested spec name');
+    is($runtime_ctx->{spec_path}, undef, 'second get_parser scalar-slot call clears stale spec_path before resolution');
+    is($runtime_ctx->{top_rule}, 'SecondTop', 'second get_parser scalar-slot call refreshes requested top_rule');
+    is($runtime_ctx->{last_error}{stage}, 'resolve_spec_path', 'second get_parser scalar-slot call replaces stale last_error with parser-factory resolution stage');
+    is($runtime_ctx->{last_error}{spec_name}, $missing_two, 'second get_parser scalar-slot last_error records the refreshed spec name');
+    is($runtime_ctx->{last_error}{top_rule}, 'SecondTop', 'second get_parser scalar-slot last_error records the refreshed top_rule');
 };
 subtest 'get_parser_resolution_failure_clears_stale_parser_source_capture' => sub {
     plan tests => 7;

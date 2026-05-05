@@ -1318,6 +1318,8 @@ If you ask for `return_descriptor => 1`, the generated descriptor now also expos
 
 A scalar slot remains the same public contract after LinkedSpec has populated it. On a later call, `runtime_ctx_ref => \$ctx` reuses the existing hashref in `$ctx`; a slot that is already populated with some other reference type is rejected instead of being silently reshaped.
 
+That populated-slot reuse is supported through both public entrypoints. Callers can pass the same `runtime_ctx_ref => \$ctx` on later `LinkedSpec::Get(...)` or `LinkedSpec::get_parser(...)` calls and keep caller-owned fields while LinkedSpec refreshes its own run identity fields.
+
 Typical uses:
 - inspect `top_rule` after successful descriptor/parser generation,
 - inspect `parser_source_chunks_ref` when you are already using parser-source capture,

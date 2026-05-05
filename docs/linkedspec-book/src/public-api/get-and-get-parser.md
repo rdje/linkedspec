@@ -116,7 +116,7 @@ my $parser = LinkedSpec::Get(
 );
 ```
 
-Callers may also pass a scalar slot with `runtime_ctx_ref => \$ctx`. LinkedSpec installs the context hashref there on the first call and reuses that same hashref on later calls when the slot is already populated.
+Callers may also pass a scalar slot with `runtime_ctx_ref => \$ctx`. LinkedSpec installs the context hashref there on the first call and reuses that same hashref on later calls when the slot is already populated. This populated scalar-slot reuse is part of both public entrypoints: later `LinkedSpec::Get(...)` and `LinkedSpec::get_parser(...)` calls can keep caller-owned fields while LinkedSpec refreshes its own context fields. A populated slot that already contains a non-hash reference is rejected as an invalid `runtime_ctx_ref` shape.
 
 On failures, the context can carry structured `last_error` data such as owner/stage, rule label, selected top rule, and file identity when known.
 
