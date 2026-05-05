@@ -631,24 +631,16 @@ sub _compiler_rule_or_top_handler_source_label {
 
 sub _prepare_runtime_ctx_for_build_compiled_rule_table {
  my ($specretv, $option) = @_;
- return undef unless ref($option) eq 'HASH' && exists($option->{runtime_ctx_ref});
- my $runtime_ctx_ref = _call_runtime_ctx(
-  'normalize_runtime_ctx_ref',
-  $option->{runtime_ctx_ref},
-  owner => 'LinkedSpec::Compiler::build_compiled_rule_table',
- );
- my $runtime_ctx = _call_runtime_ctx('ensure_runtime_ctx', $runtime_ctx_ref);
- return undef unless ref($runtime_ctx) eq 'HASH';
- _clear_runtime_ctx_last_error($runtime_ctx);
- _call_runtime_ctx('clear_runtime_ctx_spec_name', $runtime_ctx);
- _call_runtime_ctx('clear_runtime_ctx_spec_path', $runtime_ctx);
- _call_runtime_ctx('clear_runtime_ctx_top_rule', $runtime_ctx);
+ return undef unless ref($option) eq 'HASH';
  my $top_rule = defined($option->{top_rule}) && length($option->{top_rule})
   ? $option->{top_rule}
   : _first_parsed_rule_label($specretv);
- _set_runtime_ctx_top_rule($runtime_ctx, $top_rule)
-  if defined($top_rule) && length($top_rule);
- return $runtime_ctx;
+ return _call_runtime_ctx(
+  'prepare_runtime_ctx_for_build_compiled_rule_table',
+  $option,
+  owner => 'LinkedSpec::Compiler::build_compiled_rule_table',
+  top_rule => $top_rule,
+ );
 }
 
 sub _describe_parser_input_ref {

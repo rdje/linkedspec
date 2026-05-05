@@ -126,6 +126,8 @@ Common stages include:
 - `validate_input_ref`
 - `invoke_top_rule`
 
+The low-level `build_compiled_rule_table(...)` path uses the same shared runtime-context preparation owner before it writes compiler-pipeline diagnostics. That preparation clears stale `last_error` and stale file identity, then seeds the selected `top_rule` when one is known.
+
 `owner_stage` is the combined form:
 
 ```text

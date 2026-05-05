@@ -9678,6 +9678,58 @@ SPEC
     is($runtime_ctx->{last_error}{rule_label}, 'Top', 'build_compiled_rule_table compile_spec_entry die records the active parsed rule label');
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table compile_spec_entry die records label-scoped generated handler source label');
 };
+subtest 'compiler_build_compiled_rule_table_prepares_runtime_ctx_through_shared_owner' => sub {
+    plan tests => 12;
+
+    my $spec_content = <<'SPEC';
+Top::
+ /a/ -> Top { return_a(Top) }
+SPEC
+
+    my ($parse_success, $retv, $parse_error) = LinkedSpec::BootstrapSpec::run_bootstrap_parse(\$spec_content);
+    ok($parse_success, 'bootstrap parse succeeds for build_compiled_rule_table shared runtime-context preparation test') or diag(normalize_error($parse_error));
+    ok(ref($retv) eq 'ARRAY', 'bootstrap parse returns parsed entry array for build_compiled_rule_table shared runtime-context preparation test');
+
+    my $runtime_ctx = {
+        caller_marker => 'kept',
+        spec_name => 'OldSpec',
+        spec_path => '/tmp/old.spec',
+        top_rule => 'OldTop',
+        last_error => { type => 'stale' },
+    };
+    my $prepare_call_count = 0;
+    my ($prepared_option_ref, %prepared_args);
+    my $orig_prepare = \&LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table;
+    my ($ok_run, $compiled, $err) = (0, undef, '');
+    $ok_run = eval {
+        no warnings 'redefine';
+        local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table = sub {
+            ($prepared_option_ref, %prepared_args) = @_;
+            ++$prepare_call_count;
+            return $orig_prepare->(@_);
+        };
+        $compiled = LinkedSpec::Compiler::build_compiled_rule_table(
+            $retv,
+            {
+                runtime_ctx_ref => $runtime_ctx,
+                top_rule => 'RequestedTop',
+            },
+        );
+        1;
+    };
+    $err = $@ // '' unless $ok_run;
+
+    ok($ok_run, 'Compiler::build_compiled_rule_table succeeds while shared RuntimeContext preparation is trapped') or diag(normalize_error($err));
+    ok(defined($compiled) && ref($compiled) eq 'HASH', 'Compiler::build_compiled_rule_table still returns compiled rule hash after shared runtime-context preparation');
+    is($prepare_call_count, 1, 'Compiler::build_compiled_rule_table calls the shared RuntimeContext build-table preparation helper once');
+    ok(ref($prepared_option_ref) eq 'HASH' && $prepared_option_ref->{runtime_ctx_ref} eq $runtime_ctx, 'Compiler::build_compiled_rule_table forwards the option hash to the shared RuntimeContext preparation helper');
+    is($prepared_args{owner}, 'LinkedSpec::Compiler::build_compiled_rule_table', 'Compiler::build_compiled_rule_table forwards owner metadata to shared RuntimeContext preparation');
+    is($prepared_args{top_rule}, 'RequestedTop', 'Compiler::build_compiled_rule_table forwards requested top_rule to shared RuntimeContext preparation');
+    is($runtime_ctx->{caller_marker}, 'kept', 'Compiler::build_compiled_rule_table preserves caller fields through shared RuntimeContext preparation');
+    is($runtime_ctx->{spec_name}, undef, 'Compiler::build_compiled_rule_table clears stale spec_name through shared RuntimeContext preparation');
+    is($runtime_ctx->{spec_path}, undef, 'Compiler::build_compiled_rule_table clears stale spec_path through shared RuntimeContext preparation');
+    is($runtime_ctx->{top_rule}, 'RequestedTop', 'Compiler::build_compiled_rule_table seeds requested top_rule through shared RuntimeContext preparation');
+};
 subtest 'linkedspec_build_compiled_rule_table_records_structured_invalid_tuple_with_runtime_ctx_ref' => sub {
     plan tests => 13;
 
@@ -10332,6 +10384,64 @@ subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub 
     my $same = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_pipeline($runtime_ctx);
     is($same->{parser_source_chunks_ref}, $runtime_ctx->{parser_source_chunks_ref}, 'RuntimeContext run_get_pipeline preparation helper preserves the existing parser-source chunk arrayref');
     is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper clears stale parser-source chunks');
+};
+subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state' => sub {
+    plan tests => 13;
+
+    my $runtime_ctx = {
+        caller_marker => 'kept',
+        top_rule => 'StaleTop',
+        spec_name => 'OldSpec',
+        spec_path => '/tmp/stale.spec',
+        last_error => { type => 'stale' },
+    };
+    my %option = (runtime_ctx_ref => $runtime_ctx);
+
+    my $prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
+        \%option,
+        owner => 't::runtime_context_helper',
+        top_rule => 'SeededTop',
+    );
+
+    is($prepared, $runtime_ctx, 'RuntimeContext build_compiled_rule_table preparation helper reuses the supplied hashref');
+    is($runtime_ctx->{caller_marker}, 'kept', 'RuntimeContext build_compiled_rule_table preparation helper preserves caller fields');
+    ok(!exists $runtime_ctx->{last_error}, 'RuntimeContext build_compiled_rule_table preparation helper clears stale last_error');
+    is($runtime_ctx->{spec_name}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears stale spec_name');
+    is($runtime_ctx->{spec_path}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears stale spec_path');
+    is($runtime_ctx->{top_rule}, 'SeededTop', 'RuntimeContext build_compiled_rule_table preparation helper seeds requested top_rule');
+
+    my $slot_ctx = { caller_marker => 'slot', top_rule => 'OldSlotTop', last_error => { type => 'stale' } };
+    my $slot_ref = \$slot_ctx;
+    my %slot_option = (runtime_ctx_ref => $slot_ref);
+    my $slot_prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
+        \%slot_option,
+        owner => 't::runtime_context_helper',
+    );
+    is($slot_prepared, $slot_ctx, 'RuntimeContext build_compiled_rule_table preparation helper reuses populated scalar-slot hashrefs');
+    is($slot_ctx->{caller_marker}, 'slot', 'RuntimeContext build_compiled_rule_table preparation helper preserves scalar-slot caller fields');
+    ok(!exists $slot_ctx->{last_error}, 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot stale last_error');
+    is($slot_ctx->{top_rule}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot top_rule when no top_rule is supplied');
+
+    my $empty = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
+        {},
+        owner => 't::runtime_context_helper',
+        top_rule => 'NoHookTop',
+    );
+    ok(!defined($empty), 'RuntimeContext build_compiled_rule_table preparation helper returns undef when no runtime_ctx_ref hook is provided');
+    is($runtime_ctx->{top_rule}, 'SeededTop', 'RuntimeContext build_compiled_rule_table preparation helper leaves the previously seeded context untouched after an unhooked call');
+
+    my $bad_ctx = [];
+    my $bad_slot_ref = \$bad_ctx;
+    my %bad_option = (runtime_ctx_ref => $bad_slot_ref);
+    my $bad_ok = eval {
+        LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
+            \%bad_option,
+            owner => 'Synthetic::BuildTableRuntimeCtxProbe',
+        );
+        1;
+    };
+    my $bad_err = $@ // '';
+    ok(!$bad_ok && $bad_err =~ /\(Synthetic::BuildTableRuntimeCtxProbe\) -E- option 'runtime_ctx_ref' must be a runtime context hashref or scalar slot/, 'RuntimeContext build_compiled_rule_table preparation helper rejects scalar slots populated with non-hash refs');
 };
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
     plan tests => 14;

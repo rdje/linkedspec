@@ -103,6 +103,24 @@ sub prepare_runtime_ctx_for_run_get_pipeline {
  return $runtime_ctx
 }
 
+sub prepare_runtime_ctx_for_build_compiled_rule_table {
+ my ($option, %args) = @_;
+ return undef unless ref($option) eq 'HASH' && exists($option->{runtime_ctx_ref});
+ my $runtime_ctx_ref = normalize_runtime_ctx_ref(
+  $option->{runtime_ctx_ref},
+  owner => defined($args{owner}) ? $args{owner} : 'LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table',
+ );
+ my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_last_error($runtime_ctx);
+ clear_runtime_ctx_spec_name($runtime_ctx);
+ clear_runtime_ctx_spec_path($runtime_ctx);
+ clear_runtime_ctx_top_rule($runtime_ctx);
+ set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
+  if defined($args{top_rule}) && length($args{top_rule});
+ return $runtime_ctx
+}
+
 sub ensure_runtime_ctx_parser_source_chunks_ref {
  my ($runtime_ctx) = @_;
  return undef unless ref($runtime_ctx) eq 'HASH';
