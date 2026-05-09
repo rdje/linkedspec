@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - parser factory: remove spec-path setter wrapper
+
+- removed `LinkedSpec::ParserFactory::_set_runtime_ctx_spec_path(...)`, now that runtime-context spec-path writes live in `RuntimeContext`,
+- routed resolved-spec-path writes directly through `_call_runtime_ctx('set_runtime_ctx_spec_path', ...)`,
+- extended the architecture source-lock regression so `ParserFactory.pm` cannot silently regain the one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - parser factory: inline runtime-context preparation
 
 - removed `LinkedSpec::ParserFactory::_prepare_runtime_ctx_for_get_parser(...)`, now that it had one call site,

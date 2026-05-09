@@ -99,17 +99,6 @@ sub _set_runtime_ctx_last_error_unless_present {
 }
 
 #------------------------------------------------------------------------------
-# Function: _set_runtime_ctx_spec_path
-# Purpose : Record the resolved spec path in the active runtime context.
-# Args    : ($runtime_ctx, $spec_path)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _set_runtime_ctx_spec_path {
- my ($runtime_ctx, $spec_path) = @_;
- return _call_runtime_ctx('set_runtime_ctx_spec_path', $runtime_ctx, $spec_path)
-}
-
-#------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
@@ -283,7 +272,7 @@ sub run_get_parser {
   );
   return undef;
  }
- _set_runtime_ctx_spec_path($runtime_ctx, $spec_path);
+ _call_runtime_ctx('set_runtime_ctx_spec_path', $runtime_ctx, $spec_path);
 
   my %load_spec_content_failure;
   my $content = eval {
