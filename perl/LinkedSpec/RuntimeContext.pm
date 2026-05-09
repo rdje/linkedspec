@@ -49,7 +49,7 @@ sub prepare_runtime_ctx_for_run_get {
   clear_runtime_ctx_spec_name($runtime_ctx);
   clear_runtime_ctx_spec_path($runtime_ctx);
  }
- clear_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ clear_runtime_ctx_parser_source_capture($runtime_ctx, ensure_storage => 1);
  configure_runtime_ctx_parser_source_capture(
   $runtime_ctx,
   enabled => $args{dump_parser_source} ? 1 : 0,
@@ -87,9 +87,7 @@ sub prepare_runtime_ctx_for_get_parser {
  clear_runtime_ctx_top_rule($runtime_ctx);
  clear_runtime_ctx_spec_path($runtime_ctx);
  clear_runtime_ctx_spec_name($runtime_ctx);
- my $parser_source_chunks_ref = get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
- @$parser_source_chunks_ref = () if ref($parser_source_chunks_ref) eq 'ARRAY';
- delete $runtime_ctx->{emit_parser_source_line};
+ clear_runtime_ctx_parser_source_capture($runtime_ctx);
  set_runtime_ctx_spec_name($runtime_ctx, $args{spec_name}) if defined $args{spec_name};
  set_runtime_ctx_top_rule($runtime_ctx, $option->{top_rule})
   if ref($option) eq 'HASH' && defined($option->{top_rule}) && length($option->{top_rule});
@@ -116,8 +114,7 @@ sub prepare_runtime_ctx_for_build_compiled_rule_table {
  clear_runtime_ctx_spec_name($runtime_ctx);
  clear_runtime_ctx_spec_path($runtime_ctx);
  clear_runtime_ctx_top_rule($runtime_ctx);
- clear_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
- delete $runtime_ctx->{emit_parser_source_line};
+ clear_runtime_ctx_parser_source_capture($runtime_ctx, ensure_storage => 1);
  set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
   if defined($args{top_rule}) && length($args{top_rule});
  return $runtime_ctx
@@ -144,6 +141,17 @@ sub clear_runtime_ctx_parser_source_chunks_ref {
  return undef unless ref($runtime_ctx) eq 'HASH';
  my $parser_source_chunks_ref = ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
  @$parser_source_chunks_ref = ();
+ return $parser_source_chunks_ref
+}
+
+sub clear_runtime_ctx_parser_source_capture {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $parser_source_chunks_ref = $args{ensure_storage}
+  ? ensure_runtime_ctx_parser_source_chunks_ref($runtime_ctx)
+  : get_runtime_ctx_parser_source_chunks_ref($runtime_ctx);
+ @$parser_source_chunks_ref = () if ref($parser_source_chunks_ref) eq 'ARRAY';
+ delete $runtime_ctx->{emit_parser_source_line};
  return $parser_source_chunks_ref
 }
 

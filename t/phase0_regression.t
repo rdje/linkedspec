@@ -10013,7 +10013,7 @@ SPEC
     like(join('', @parser_source_chunks), qr/\n Top => sub \{/s, 'SpecEntry compile_spec_entry emits parser source through injected runtime context');
 };
 subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
-    plan tests => 8;
+    plan tests => 12;
 
     my $runtime_ctx = {};
     my $chunks_ref = LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture(
@@ -10037,6 +10037,15 @@ subtest 'runtime_context_helpers_manage_parser_source_capture' => sub {
     ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext configure helper removes emit callback when parser-source capture is disabled');
     LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'gamma');
     is_deeply($chunks_ref, ['alpha', 'beta'], 'RuntimeContext emit helper becomes a no-op when parser-source capture is disabled');
+
+    LinkedSpec::RuntimeContext::configure_runtime_ctx_parser_source_capture($runtime_ctx, enabled => 1);
+    LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'delta');
+    my $cleared_chunks_ref = LinkedSpec::RuntimeContext::clear_runtime_ctx_parser_source_capture($runtime_ctx);
+    is($cleared_chunks_ref, $chunks_ref, 'RuntimeContext clear-capture helper preserves the existing parser-source chunk arrayref');
+    is_deeply($chunks_ref, [], 'RuntimeContext clear-capture helper clears stale parser-source chunks');
+    ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext clear-capture helper removes stale parser-source emit callback');
+    LinkedSpec::RuntimeContext::emit_runtime_ctx_parser_source_line($runtime_ctx, 'epsilon');
+    is_deeply($chunks_ref, [], 'RuntimeContext clear-capture helper leaves parser-source emission disabled');
 };
 subtest 'runtime_context_helpers_preserve_populated_scalar_slot_contract' => sub {
     plan tests => 18;

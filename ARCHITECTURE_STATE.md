@@ -235,7 +235,7 @@ Project/domain utility owners
 
 ### `LinkedSpec::RuntimeContext`
 - owns shared runtime state and structured error payload helpers,
-- owns parser-source chunk capture helpers,
+- owns parser-source chunk capture and capture-reset helpers,
 - normalizes `runtime_ctx_ref` for direct hashrefs plus scalar slots, including reuse after a scalar slot already contains the shared context hashref,
 - carries `spec_name`, `spec_path`, `top_rule`, and `last_error`,
 - now also keeps `last_error` more self-contained by copying the known `top_rule` into the structured payload alongside `spec_name` and `spec_path`,
