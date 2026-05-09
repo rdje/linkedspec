@@ -569,11 +569,6 @@ sub _call_runtime_ctx {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
-sub _emit_runtime_ctx_parser_source_line {
- my ($runtime_ctx, $chunk) = @_;
- return _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $chunk)
-}
-
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
@@ -1074,7 +1069,7 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
  if ($dump_parser_source) {
-  _emit_runtime_ctx_parser_source_line($runtime_ctx, "my \$descr = {\n spec => {\n");
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
 my $active_build_compiled_rule_table_rule_label = undef;
@@ -1214,16 +1209,16 @@ if ($validate_dependency_regex_references_error) {
  my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
  if ($dump_parser_source) {
-  _emit_runtime_ctx_parser_source_line($runtime_ctx, " },\n dependency_regex_map => {\n");
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, " },\n dependency_regex_map => {\n");
   my @glabels = sort keys %{$final_descr->{dependency_regex_map} || {}};
   for (my $i = 0; $i < @glabels; ++$i) {
    my $label = $glabels[$i];
    my $gregex = $final_descr->{dependency_regex_map}{$label};
    my $prefix = $i ? ",\n" : '';
-   _emit_runtime_ctx_parser_source_line($runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
+   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }
   my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
-  _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
   _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref);
  }
 

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: remove parser-source emit wrapper
+
+- removed `LinkedSpec::Compiler::_emit_runtime_ctx_parser_source_line(...)`, now that parser-source emission lives in `RuntimeContext`,
+- routed compiler parser-source emission calls directly through `_call_runtime_ctx('emit_runtime_ctx_parser_source_line', ...)`,
+- extended the architecture source-lock regression so `Compiler.pm` cannot silently regain the pass-through wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: remove last-error clear wrapper
 
 - removed `LinkedSpec::Compiler::_clear_runtime_ctx_last_error(...)`, now that runtime-context last-error clearing lives in `RuntimeContext`,
