@@ -248,7 +248,7 @@ handler_source_label => 'LinkedSpec::generated_handler:Top:<variant>'
 
 This matters because generated Perl source and `eval` are still part of the current backend. A structured handler label gives users and tests a stable way to identify the logical rule that owns a failure.
 
-Top-rule diagnostics derive that label from the shared runtime context, so runtime, parser-factory, and compiler failures use the same selected-rule attribution. When the parser-invocation boundary knows the selected handler variant, that variant is included through the same shared helper.
+Top-rule diagnostics derive that label from the shared runtime context, so runtime, parser-factory, and compiler failures use the same selected-rule attribution. Compiler diagnostics that know a concrete failing rule label prefer that rule label and fall back to the selected `top_rule` through the same shared runtime-context helper. When the parser-invocation boundary knows the selected handler variant, that variant is included through the same shared helper.
 
 ## Parser-source capture
 

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime context: centralize rule-or-top handler labels
+
+- added `LinkedSpec::RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` for diagnostics that prefer a known rule label but fall back to the active `top_rule`,
+- routed the compiler's rule-or-top handler-source label fallback through that shared helper,
+- removed the now-unused compiler-local generated-handler label builder wrapper and extended focused RuntimeContext label-helper coverage.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: reuse runtime-context top-rule label helper
 
 - routed the compiler's parser-invocation `handler_source_label` construction through `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)`,

@@ -609,11 +609,6 @@ sub _flush_runtime_ctx_parser_source {
  return _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref)
 }
 
-sub _build_generated_handler_source_label {
- my (%args) = @_;
- return _call_runtime_ctx('build_generated_handler_source_label', %args)
-}
-
 sub _compiler_top_rule_handler_source_label {
  my ($runtime_ctx) = @_;
  return _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx)
@@ -621,10 +616,7 @@ sub _compiler_top_rule_handler_source_label {
 
 sub _compiler_rule_or_top_handler_source_label {
  my ($runtime_ctx, $rule_label) = @_;
- if (defined($rule_label) && length($rule_label)) {
-  return _build_generated_handler_source_label(label => $rule_label)
- }
- return _compiler_top_rule_handler_source_label($runtime_ctx)
+ return _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $rule_label)
 }
 
 sub _prepare_runtime_ctx_for_build_compiled_rule_table {

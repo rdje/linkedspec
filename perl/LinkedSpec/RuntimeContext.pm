@@ -312,6 +312,17 @@ sub build_runtime_ctx_top_rule_handler_source_label {
  )
 }
 
+sub build_runtime_ctx_rule_or_top_handler_source_label {
+ my ($runtime_ctx, $rule_label, %args) = @_;
+ if (defined($rule_label) && length($rule_label)) {
+  return build_generated_handler_source_label(
+   label => $rule_label,
+   handler_variant => $args{handler_variant},
+  )
+ }
+ return build_runtime_ctx_top_rule_handler_source_label($runtime_ctx, %args)
+}
+
 #------------------------------------------------------------------------------
 # Function: set_runtime_ctx_last_error
 # Purpose : Store one normalized structured failure payload on the shared
