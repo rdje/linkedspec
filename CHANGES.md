@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - parser factory: inline trace value validation
+
+- removed `LinkedSpec::ParserFactory::_require_value_dep(...)`, the remaining one-shot value dependency validator in the parser-factory setup path,
+- validated `dump_low` and `dump_medium` directly in `run_get_parser(...)` beside the existing inline callback dependency checks,
+- extended the architecture source-lock regression so `ParserFactory.pm` cannot silently regain that wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-05-09 - runtime context: centralize spec identity reset
 
 - added `LinkedSpec::RuntimeContext::clear_runtime_ctx_spec_identity(...)` as the shared helper for clearing stale file-oriented `spec_name` / `spec_path` state without touching selected `top_rule`,

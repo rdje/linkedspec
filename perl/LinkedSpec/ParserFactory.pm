@@ -15,19 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _require_value_dep
-# Purpose : Validate and return one injected dependency value by name.
-# Args    : ($deps, $name)
-# Returns : dependency value
-#------------------------------------------------------------------------------
-sub _require_value_dep {
- my ($deps, $name) = @_;
- die "(LinkedSpec::ParserFactory::_require_value_dep) -E- missing dependency value '$name'"
- unless ref($deps) eq 'HASH' && exists $deps->{$name};
- return $deps->{$name}
-}
-
-#------------------------------------------------------------------------------
 # Function: _default_deps
 # Purpose : Build the default parser-factory dependency map for trace, resolve,
 #           load, and compile ownership.
@@ -208,8 +195,12 @@ sub run_get_parser {
     : undef;
    die "(LinkedSpec::ParserFactory::_require_dep) -E- missing dependency callback 'compile_spec'"
     unless ref($compile_spec) eq 'CODE';
-   $dump_low = _require_value_dep($deps, 'dump_low');
-   $dump_medium = _require_value_dep($deps, 'dump_medium');
+   die "(LinkedSpec::ParserFactory::run_get_parser) -E- missing dependency value 'dump_low'"
+    unless exists $deps->{dump_low};
+   $dump_low = $deps->{dump_low};
+   die "(LinkedSpec::ParserFactory::run_get_parser) -E- missing dependency value 'dump_medium'"
+    unless exists $deps->{dump_medium};
+   $dump_medium = $deps->{dump_medium};
 
    $apply_trace_options->(\%opt_hash) if %opt_hash;
    $trace_scope = $trace_enter->('LinkedSpec::get_parser', {
