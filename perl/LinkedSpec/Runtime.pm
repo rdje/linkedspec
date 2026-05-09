@@ -27,17 +27,6 @@ sub _call_runtime_ctx {
 }
 
 #------------------------------------------------------------------------------
-# Function: _set_runtime_ctx_last_error
-# Purpose : Write one structured runtime-owner error into the active context.
-# Args    : ($runtime_ctx, %args)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _set_runtime_ctx_last_error {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_owner', %args)
-}
-
-#------------------------------------------------------------------------------
 # Function: _set_runtime_ctx_last_error_unless_present
 # Purpose : Preserve an existing structured runtime-owner error while providing
 #           a fallback error payload when none has been recorded yet.
