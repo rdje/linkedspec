@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime context: clear build-table parser-source state
+
+- extended `LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(...)` so the low-level rule-table path clears stale parser-source chunks and removes stale parser-source emit callbacks alongside stale `last_error`, spec identity, and top-rule state,
+- added focused RuntimeContext helper regression coverage for direct hashrefs and populated scalar slots, plus compiler-routed coverage proving `Compiler::build_compiled_rule_table(...)` spends the shared owner cleanup,
+- refreshed runtime-context user docs, mdBook runtime/architecture pages, architecture notes, roadmap trackers, and session memory with the low-level parser-source cleanup contract.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-04-30 - runtime context: lock scalar-slot reuse
 
 - clarified `LinkedSpec::RuntimeContext`'s `runtime_ctx_ref` normalization path so a populated scalar slot is named and treated as the same public scalar-slot contract, not as an unexplained extra `REF` shape,

@@ -9679,7 +9679,7 @@ SPEC
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:Top', 'build_compiled_rule_table compile_spec_entry die records label-scoped generated handler source label');
 };
 subtest 'compiler_build_compiled_rule_table_prepares_runtime_ctx_through_shared_owner' => sub {
-    plan tests => 12;
+    plan tests => 14;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -9696,6 +9696,8 @@ SPEC
         spec_path => '/tmp/old.spec',
         top_rule => 'OldTop',
         last_error => { type => 'stale' },
+        parser_source_chunks_ref => ['old parser source'],
+        emit_parser_source_line => sub { die "__STALE_COMPILER_BUILD_TABLE_EMIT__\n" },
     };
     my $prepare_call_count = 0;
     my ($prepared_option_ref, %prepared_args);
@@ -9729,6 +9731,8 @@ SPEC
     is($runtime_ctx->{spec_name}, undef, 'Compiler::build_compiled_rule_table clears stale spec_name through shared RuntimeContext preparation');
     is($runtime_ctx->{spec_path}, undef, 'Compiler::build_compiled_rule_table clears stale spec_path through shared RuntimeContext preparation');
     is($runtime_ctx->{top_rule}, 'RequestedTop', 'Compiler::build_compiled_rule_table seeds requested top_rule through shared RuntimeContext preparation');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'Compiler::build_compiled_rule_table clears stale parser-source chunks through shared RuntimeContext preparation');
+    ok(!exists $runtime_ctx->{emit_parser_source_line}, 'Compiler::build_compiled_rule_table clears stale parser-source emit callback through shared RuntimeContext preparation');
 };
 subtest 'linkedspec_build_compiled_rule_table_records_structured_invalid_tuple_with_runtime_ctx_ref' => sub {
     plan tests => 13;
@@ -10386,7 +10390,7 @@ subtest 'runtime_context_helpers_prepare_run_get_pipeline_context_state' => sub 
     is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext run_get_pipeline preparation helper clears stale parser-source chunks');
 };
 subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state' => sub {
-    plan tests => 13;
+    plan tests => 17;
 
     my $runtime_ctx = {
         caller_marker => 'kept',
@@ -10394,6 +10398,8 @@ subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state
         spec_name => 'OldSpec',
         spec_path => '/tmp/stale.spec',
         last_error => { type => 'stale' },
+        parser_source_chunks_ref => ['old parser source'],
+        emit_parser_source_line => sub { die "__STALE_BUILD_TABLE_EMIT__\n" },
     };
     my %option = (runtime_ctx_ref => $runtime_ctx);
 
@@ -10409,8 +10415,16 @@ subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state
     is($runtime_ctx->{spec_name}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears stale spec_name');
     is($runtime_ctx->{spec_path}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears stale spec_path');
     is($runtime_ctx->{top_rule}, 'SeededTop', 'RuntimeContext build_compiled_rule_table preparation helper seeds requested top_rule');
+    is_deeply($runtime_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext build_compiled_rule_table preparation helper clears stale parser-source chunks');
+    ok(!exists $runtime_ctx->{emit_parser_source_line}, 'RuntimeContext build_compiled_rule_table preparation helper clears stale parser-source emit callback');
 
-    my $slot_ctx = { caller_marker => 'slot', top_rule => 'OldSlotTop', last_error => { type => 'stale' } };
+    my $slot_ctx = {
+        caller_marker => 'slot',
+        top_rule => 'OldSlotTop',
+        last_error => { type => 'stale' },
+        parser_source_chunks_ref => ['old scalar-slot parser source'],
+        emit_parser_source_line => sub { die "__STALE_SLOT_BUILD_TABLE_EMIT__\n" },
+    };
     my $slot_ref = \$slot_ctx;
     my %slot_option = (runtime_ctx_ref => $slot_ref);
     my $slot_prepared = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
@@ -10421,6 +10435,8 @@ subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state
     is($slot_ctx->{caller_marker}, 'slot', 'RuntimeContext build_compiled_rule_table preparation helper preserves scalar-slot caller fields');
     ok(!exists $slot_ctx->{last_error}, 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot stale last_error');
     is($slot_ctx->{top_rule}, undef, 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot top_rule when no top_rule is supplied');
+    is_deeply($slot_ctx->{parser_source_chunks_ref}, [], 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot stale parser-source chunks');
+    ok(!exists $slot_ctx->{emit_parser_source_line}, 'RuntimeContext build_compiled_rule_table preparation helper clears scalar-slot stale parser-source emit callback');
 
     my $empty = LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(
         {},

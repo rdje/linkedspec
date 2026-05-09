@@ -1200,7 +1200,7 @@ That same owner boundary now covers read-side state access too:
 
 If you want the same structured diagnostics continuity there, `build_compiled_rule_table(...)` now also accepts an optional third argument hash like `{ runtime_ctx_ref => \$ctx }`. On that low-level surface, `build_compiled_rule_table(...)` now returns `undef` and records a normal `compiler_pipeline:build_compiled_rule_table` payload in that shared runtime context not only when a custom `compile_spec_entry(...)` callback throws or returns a malformed descriptor tuple, but also when the low-level contract itself is malformed before or during rule iteration, such as an invalid non-CODE `compile_spec_entry` callback, a non-ARRAY parsed-entry container, or a malformed individual parsed entry inside that container.
 
-That low-level runtime-context preparation is owned by `LinkedSpec::RuntimeContext` too. Before `build_compiled_rule_table(...)` writes a compiler-pipeline failure, the shared owner normalizes the hook, clears stale `last_error` / file identity, and seeds the selected `top_rule` when one is known.
+That low-level runtime-context preparation is owned by `LinkedSpec::RuntimeContext` too. Before `build_compiled_rule_table(...)` writes a compiler-pipeline failure, the shared owner normalizes the hook, clears stale `last_error` / file identity / parser-source capture state, and seeds the selected `top_rule` when one is known.
 
 Likewise, final descriptor assembly keeps its dependency-regex compilation defaults inside `LinkedSpec::Compiler`; normal callers do not need to provide a separate `build_dependency_regex_map` callback or depend on an older `LinkedSpec::build_dependency_regex_map(...)` façade helper.
 
