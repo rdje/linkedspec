@@ -40,6 +40,7 @@ sub _ored_re {
 }
 
 my $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
+my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 
 sub _trace_log_output {
  my @args = @_;
@@ -281,7 +282,7 @@ sub build_compiled_rule_table {
 
  unless (ref($compile_spec_entry) eq 'CODE') {
   my $detail = 'compile_spec_entry callback must be CODE';
-  _set_last_build_compiled_rule_table_failure_detail($detail);
+  $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
   _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
@@ -298,7 +299,7 @@ sub build_compiled_rule_table {
 
  unless (ref($specretv) eq 'ARRAY') {
   my $detail = _describe_build_compiled_rule_table_entries_result($specretv);
-  _set_last_build_compiled_rule_table_failure_detail($detail);
+  $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
   _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
@@ -319,7 +320,7 @@ sub build_compiled_rule_table {
   my $entry = $specretv->[$entry_idx];
   unless (ref($entry) eq 'ARRAY') {
    my $detail = _describe_build_compiled_rule_table_entry_result($entry, $entry_idx);
-   _set_last_build_compiled_rule_table_failure_detail($detail);
+   $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
@@ -347,7 +348,7 @@ sub build_compiled_rule_table {
    my $detail = defined($compile_error) && length($compile_error)
     ? $compile_error
     : 'compile_spec_entry died without diagnostic detail';
-   _set_last_build_compiled_rule_table_failure_detail($detail);
+   $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
@@ -367,7 +368,7 @@ sub build_compiled_rule_table {
    my $failure_rule_label = defined($label) && !ref($label) && length($label)
     ? $label
     : $active_rule_label;
-   _set_last_build_compiled_rule_table_failure_detail($detail);
+   $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
@@ -580,14 +581,6 @@ sub _parsed_rule_label {
   return $centry->[1] if defined($centry->[1]) && length($centry->[1]);
  }
  return undef
-}
-
-my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
-
-sub _set_last_build_compiled_rule_table_failure_detail {
- my ($detail) = @_;
- $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = defined($detail) ? $detail : '';
- return $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL
 }
 
 sub _describe_compile_spec_entry_result {

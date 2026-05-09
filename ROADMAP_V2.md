@@ -94,6 +94,7 @@ Owner-dispatch cleanup note:
 - Invalid bootstrap-parse result diagnostics now build their detail directly at the last-error write, so the one-shot `_bootstrap_parse_result_detail(...)` wrapper is gone too.
 - The pipeline fallback now reads retained rule-table failure detail directly, so the one-shot `_get_last_build_compiled_rule_table_failure_detail(...)` wrapper is gone too.
 - Rule-table and pipeline boundaries now reset retained failure detail directly, so the one-shot `_clear_last_build_compiled_rule_table_failure_detail(...)` wrapper is gone too.
+- Rule-table failure sites now write retained failure detail directly, so the one-shot `_set_last_build_compiled_rule_table_failure_detail(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
