@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime context: clear boundary last_error
+
+- routed `prepare_runtime_ctx_for_run_get(...)` and `prepare_runtime_ctx_for_get_parser(...)` through `clear_runtime_ctx_last_error(...)`,
+- kept low-level `build_compiled_rule_table(...)` preparation aligned with the higher-level runtime and parser-factory boundaries,
+- extended focused RuntimeContext helper coverage so reused contexts cannot carry stale structured failure payloads into a new `Get(...)` or `get_parser(...)` preparation.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-05-09 - workflow docs: add live achievement status
 
 - added `LIVE_ACHIEVEMENT_STATUS.md` as the persistent current-state tracker for batch workflow recovery,

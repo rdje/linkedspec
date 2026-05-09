@@ -42,6 +42,7 @@ sub prepare_runtime_ctx_for_run_get {
  my ($runtime_ctx_ref, %args) = @_;
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  $runtime_ctx = {} unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_last_error($runtime_ctx);
  clear_runtime_ctx_top_rule($runtime_ctx);
  set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
   if defined($args{top_rule}) && length($args{top_rule});
@@ -83,6 +84,7 @@ sub prepare_runtime_ctx_for_get_parser {
   : undef;
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  return undef unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_last_error($runtime_ctx);
  clear_runtime_ctx_top_rule($runtime_ctx);
  clear_runtime_ctx_spec_identity($runtime_ctx);
  clear_runtime_ctx_parser_source_capture($runtime_ctx);

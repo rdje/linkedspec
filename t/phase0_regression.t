@@ -10309,12 +10309,13 @@ subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
     ok(!defined(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path(undef)), 'RuntimeContext spec-path reader returns undef for non-hash runtime context input');
 };
 subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $runtime_ctx = {
         top_rule => 'StaleTop',
         spec_name => 'StaleSpec',
         spec_path => '/tmp/stale.spec',
+        last_error => { type => 'stale' },
         parser_source_chunks_ref => ['stale'],
         emit_parser_source_line => sub { die '__SHOULD_BE_REPLACED__' },
     };
@@ -10326,6 +10327,7 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
 
     is($prepared, $runtime_ctx, 'RuntimeContext run_get preparation helper reuses the supplied hashref');
     ok(exists $runtime_ctx->{top_rule}, 'RuntimeContext run_get preparation helper keeps the top_rule key present');
+    ok(!exists $runtime_ctx->{last_error}, 'RuntimeContext run_get preparation helper clears stale last_error');
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper clears stale top_rule state');
     is($runtime_ctx->{spec_name}, undef, 'RuntimeContext run_get preparation helper clears stale spec_name by default');
     is($runtime_ctx->{spec_path}, undef, 'RuntimeContext run_get preparation helper clears stale spec_path by default');
@@ -10341,12 +10343,13 @@ subtest 'runtime_context_helpers_prepare_run_get_context_state' => sub {
     is($runtime_ctx->{top_rule}, undef, 'RuntimeContext run_get preparation helper keeps top_rule cleared across repeated preparation');
 };
 subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
-    plan tests => 13;
+    plan tests => 14;
 
     my %runtime_ctx = (
         top_rule => 'StaleTop',
         spec_name => 'StaleSpec',
         spec_path => '/tmp/stale.spec',
+        last_error => { type => 'stale' },
         parser_source_chunks_ref => ['seed'],
     );
     my %option = (
@@ -10361,6 +10364,7 @@ subtest 'runtime_context_helpers_prepare_run_get_option_state' => sub {
 
     is($prepared, \%runtime_ctx, 'RuntimeContext run_get option helper reuses the supplied runtime context hashref');
     ok(exists $runtime_ctx{top_rule}, 'RuntimeContext run_get option helper keeps the top_rule key present');
+    ok(!exists $runtime_ctx{last_error}, 'RuntimeContext run_get option helper clears stale last_error');
     is($runtime_ctx{top_rule}, undef, 'RuntimeContext run_get option helper clears stale top_rule state');
     is($runtime_ctx{spec_name}, undef, 'RuntimeContext run_get option helper clears stale spec_name by default');
     is($runtime_ctx{spec_path}, undef, 'RuntimeContext run_get option helper clears stale spec_path by default');
@@ -10475,13 +10479,14 @@ subtest 'runtime_context_helpers_prepare_build_compiled_rule_table_context_state
     ok(!$bad_ok && $bad_err =~ /\(Synthetic::BuildTableRuntimeCtxProbe\) -E- option 'runtime_ctx_ref' must be a runtime context hashref or scalar slot/, 'RuntimeContext build_compiled_rule_table preparation helper rejects scalar slots populated with non-hash refs');
 };
 subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my @stale_parser_source_chunks = ('old parser source');
     my %runtime_ctx = (
         top_rule => 'StaleTop',
         spec_name => 'OldSpec',
         spec_path => '/tmp/stale.spec',
+        last_error => { type => 'stale' },
         parser_source_chunks_ref => \@stale_parser_source_chunks,
         emit_parser_source_line => sub { push @stale_parser_source_chunks, $_[0] },
     );
@@ -10495,6 +10500,7 @@ subtest 'runtime_context_helpers_prepare_get_parser_context_state' => sub {
 
     is($prepared, \%runtime_ctx, 'RuntimeContext get_parser preparation helper reuses the supplied hashref');
     is($runtime_ctx{spec_name}, 'SeededSpec', 'RuntimeContext get_parser preparation helper seeds spec_name');
+    ok(!exists $runtime_ctx{last_error}, 'RuntimeContext get_parser preparation helper clears stale last_error');
     ok(exists $runtime_ctx{top_rule}, 'RuntimeContext get_parser preparation helper keeps the top_rule key present when clearing stale state');
     is($runtime_ctx{top_rule}, undef, 'RuntimeContext get_parser preparation helper clears stale top_rule state');
     is($runtime_ctx{spec_path}, undef, 'RuntimeContext get_parser preparation helper clears stale spec_path before resolution');

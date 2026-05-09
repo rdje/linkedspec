@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: `RuntimeContext::prepare_runtime_ctx_for_run_get(...)` and `prepare_runtime_ctx_for_get_parser(...)` now clear stale `last_error` when preparing a reused context, matching the low-level build-table preparation path. Focused phase0 coverage locks the `Get(...)` and `get_parser(...)` preparation helpers against carrying old structured failures into a new call.
 - 2026-05-09: Added `LIVE_ACHIEVEMENT_STATUS.md` and documented it in `README.md` plus `COMMIT.md`. Future batch slices should update that file with the latest completed slice and next direction whenever workflow status changes, then keep using `git_message_brief.txt` as the untracked temporary commit-message file.
 - 2026-05-09: `LinkedSpec::ParserFactory` no longer carries the one-shot `_require_value_dep(...)` wrapper. `run_get_parser(...)` validates `dump_low` / `dump_medium` directly in its setup seam beside the existing callback dependency checks, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Added `RuntimeContext::clear_runtime_ctx_spec_identity(...)` and routed `run_get(...)`, `get_parser(...)`, and low-level `build_compiled_rule_table(...)` preparation through it for stale `spec_name` / `spec_path` cleanup. The helper intentionally leaves `top_rule` separate so selected-entrypoint continuity remains explicit. Focused phase0 coverage locks the helper contract.
