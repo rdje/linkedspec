@@ -36,11 +36,17 @@ This document defines the standard commit workflow for this repository so any ne
 - **Lifecycle:** update for each accepted implementation slice so the latest execution state and decisions are recoverable.
 - **Important:** this file is cumulative and not reset.
 
-### 5) Source/test/docs changed by the task
+### 5) `LIVE_ACHIEVEMENT_STATUS.md`
+- **Type:** persistent, git-tracked live batch status.
+- **Purpose:** preserve current batch progress, latest completed slice, and immediate next direction for crash recovery and handoff.
+- **Lifecycle:** update for each accepted implementation slice when batch/workflow status changes.
+- **Important:** this file is cumulative/current-state documentation and is not reset.
+
+### 6) Source/test/docs changed by the task
 - Examples: `perl/LinkedSpec.pm`, `t/phase0_regression.t`, `USER_GUIDE.md`, etc.
 - Stage only files that belong to the completed task slice.
 
-### 6) `docs/linkedspec-book/`
+### 7) `docs/linkedspec-book/`
 - **Type:** persistent, git-tracked public documentation book.
 - **Purpose:** explain LinkedSpec to the outside world: what it does, how it works, why it is designed that way, and how to use it.
 - **Lifecycle:** evolve alongside the project; update when public-facing behavior, architecture understanding, rationale, or user-facing surfaces change materially.
@@ -61,7 +67,7 @@ This document defines the standard commit workflow for this repository so any ne
 ## Documentation Layers
 - Keep the public book and the continuity docs separate.
 - `docs/linkedspec-book/` is the public-facing explanation of LinkedSpec.
-- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, roadmap notes, and the workflow described here exist for interruption recovery, handoff continuity, and execution hygiene.
+- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, `LIVE_ACHIEVEMENT_STATUS.md`, roadmap notes, and the workflow described here exist for interruption recovery, handoff continuity, and execution hygiene.
 - Updating continuity docs does **not** replace updating the public book when a slice changes what users or outside readers need to understand.
 
 ## Exact workflow steps
@@ -75,6 +81,7 @@ This document defines the standard commit workflow for this repository so any ne
      - `CHANGES.md`
      - `DEVELOPMENT_NOTES.md`
      - `MEMORY.md`
+     - `LIVE_ACHIEVEMENT_STATUS.md`
    - Include validation commands/results.
    - If the slice changes the public understanding of LinkedSpec, update `docs/linkedspec-book/` too.
    - If a slice adds, renames, or materially clarifies DSL methods, treat user-facing documentation as required completion work: update the relevant guides with clear semantics and extensive worked examples, and backfill older methods in that same user-facing family when the documentation is still too thin for confident adoption.

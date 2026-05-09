@@ -10,7 +10,7 @@ This `README.md` is the **single entry point** to the project.
 - repo-root working docs
   - `USER_GUIDE.md`, `ARCHITECTURE_STATE.md`, `ROADMAP.md`, and related files remain valuable repo-native working references.
 - continuity docs
-  - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, and `COMMIT.md` are internal execution/continuity docs.
+  - `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `COMMIT.md` are internal execution/continuity docs.
   - They exist for crash recovery, session handoff, and implementation continuity, not as the main public narrative.
 
 ## Project Objective
@@ -40,7 +40,9 @@ Read these in order for fastest onboarding:
    - Technical change history, validation records, and migration slices.
 8. `MEMORY.md`
    - Interruption-safe continuation context and recent execution state.
-9. `COMMIT.md`
+9. `LIVE_ACHIEVEMENT_STATUS.md`
+   - Current batch/workflow status and latest completed slice direction.
+10. `COMMIT.md`
    - Commit workflow and commit hygiene conventions.
 
 ## Project File/Path Map
@@ -76,6 +78,7 @@ Top-level project docs:
 - `DEVELOPMENT_NOTES.md`
 - `CHANGES.md`
 - `MEMORY.md`
+- `LIVE_ACHIEVEMENT_STATUS.md`
 - `COMMIT.md`
 
 ## Local CI

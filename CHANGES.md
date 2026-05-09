@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - workflow docs: add live achievement status
+
+- added `LIVE_ACHIEVEMENT_STATUS.md` as the persistent current-state tracker for batch workflow recovery,
+- wired the tracker into `README.md` and `COMMIT.md` so it is part of the documented onboarding and commit workflow,
+- updated roadmap/live continuity notes to make the new status file part of Phase 6 execution hygiene.
+
+- Validation:
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - parser factory: inline trace value validation
 
 - removed `LinkedSpec::ParserFactory::_require_value_dep(...)`, the remaining one-shot value dependency validator in the parser-factory setup path,
