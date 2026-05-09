@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Documentation path hygiene is now explicit and regression-locked. `COMMIT.md` requires repo-root-relative file references in tracked live docs/book, and `t/phase0_regression.t` scans the tracked Markdown/book set for machine-local absolute checkout path leaks.
 - 2026-05-09: Removed `SpecEntry::_generated_handler_source_label(...)`; runtime-handler construction now calls `RuntimeContext::build_rule_meta_handler_source_label(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Added `RuntimeContext::build_rule_meta_handler_source_label(...)` and routed `SpecEntry` generated-handler source labels through it. RuntimeContext now owns the selected-handler-variant extraction from rule metadata for generated-handler source labels.
 - 2026-05-09: Added `RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` and routed compiler rule-or-top handler-source attribution through it. The compiler no longer keeps a local generated-handler label builder wrapper; explicit rule labels still win, with selected `top_rule` as the shared fallback.

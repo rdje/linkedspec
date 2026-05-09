@@ -108,4 +108,5 @@ This document defines the standard commit workflow for this repository so any ne
 - Do not bundle unrelated changes in the same commit.
 - Keep commit messages specific and technically descriptive.
 - Keep `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` synchronized with the actual committed slice.
+- In tracked live docs and the public book, write repository file references relative to the git repo root (for example `perl/LinkedSpec.pm`), never as machine-local absolute checkout paths or developer-specific checkout directories.
 - If `git_message_brief.txt` is accidentally committed, remove it from index immediately and restore the untracked-temp-file invariant. Amend when appropriate; otherwise make the corrective follow-up commit right away.

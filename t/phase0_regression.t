@@ -8,6 +8,7 @@ no warnings 'once';
 use Test::More;
 use FindBin qw($Bin);
 use File::Basename qw(basename);
+use File::Find qw(find);
 use File::Spec;
 use Cwd qw(getcwd);
 use IPC::Open3;
@@ -46038,6 +46039,24 @@ SPEC
     is($runtime_ctx->{last_error}{handler_source_label}, 'LinkedSpec::generated_handler:RequestedTop', 'invalid parse mode preserves label-scoped generated handler source label when top_rule is known');
 };
 
+subtest 'tracked_markdown_docs_do_not_capture_machine_local_absolute_paths' => sub {
+    my $repo_root = File::Spec->rel2abs(File::Spec->catdir($Bin, '..'));
+    my @markdown_docs = discover_markdown_docs($repo_root);
+    plan tests => scalar @markdown_docs;
+
+    for my $path (@markdown_docs) {
+        my $content = slurp($path);
+        my $relative_path = File::Spec->abs2rel($path, $repo_root);
+        my @leaks;
+        push @leaks, 'current repo absolute path' if index($content, $repo_root) >= 0;
+        push @leaks, 'Unix user home path' if $content =~ m{/(?:Users|home)/[A-Za-z0-9._-]+/};
+        push @leaks, 'macOS private var path' if $content =~ m{/private/var/};
+        push @leaks, 'Windows user home path' if $content =~ m{[A-Za-z]:\\Users\\[^\\\s]+\\};
+        ok(!@leaks, "$relative_path uses repo-relative paths instead of machine-local absolute paths")
+            or diag("$relative_path leaked: " . join(', ', @leaks));
+    }
+};
+
 done_testing();
 
 sub discover_specs {
@@ -46046,6 +46065,42 @@ sub discover_specs {
     my @specs = sort grep { /\.spec\z/ } readdir($dh);
     closedir($dh);
     return @specs;
+}
+
+sub discover_markdown_docs {
+    my ($repo_root) = @_;
+    my @docs;
+    my %top_level_docs = map { $_ => 1 } qw(
+        README.md
+        SESSION_BOOTSTRAP.md
+        ROADMAP.md
+        ROADMAP_V2.md
+        USER_GUIDE.md
+        ARCHITECTURE_STATE.md
+        DEVELOPMENT_NOTES.md
+        CHANGES.md
+        MEMORY.md
+        LIVE_ACHIEVEMENT_STATUS.md
+        COMMIT.md
+    );
+    foreach my $doc (sort keys %top_level_docs) {
+        my $path = File::Spec->catfile($repo_root, $doc);
+        push @docs, $path if -f $path;
+    }
+    my $book_root = File::Spec->catdir($repo_root, 'docs', 'linkedspec-book');
+    if (-d $book_root) {
+        find(
+            {
+                wanted => sub {
+                    return unless -f $_ && /\.md\z/;
+                    push @docs, $File::Find::name;
+                },
+                no_chdir => 1,
+            },
+            $book_root,
+        );
+    }
+    return sort @docs;
 }
 
 sub slurp {

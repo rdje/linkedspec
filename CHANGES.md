@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - workflow docs: enforce repo-relative doc paths
+
+- documented that tracked live docs and the public book must use repo-root-relative file references rather than machine-local absolute checkout paths,
+- added phase0 regression coverage that scans live Markdown docs and the mdBook for current-checkout absolute paths plus common machine-local user-home and temporary checkout path shapes,
+- confirmed the tracked live docs and book do not currently capture the local checkout path.
+
+- Validation:
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - spec entry: remove generated-handler label wrapper
 
 - removed `LinkedSpec::SpecEntry::_generated_handler_source_label(...)`, now that rule-metadata handler label construction lives in `RuntimeContext`,
