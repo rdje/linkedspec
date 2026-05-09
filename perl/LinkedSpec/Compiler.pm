@@ -322,7 +322,10 @@ sub build_compiled_rule_table {
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
   my $entry = $specretv->[$entry_idx];
   unless (ref($entry) eq 'ARRAY') {
-   my $detail = _describe_build_compiled_rule_table_entry_result($entry, $entry_idx);
+   my $value_desc = !defined($entry)
+    ? 'undef'
+    : ref($entry) ? ref($entry) : 'SCALAR';
+   my $detail = "build_compiled_rule_table expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
    $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = $detail;
    _call_runtime_ctx(
     'set_runtime_ctx_last_error_for_owner',
@@ -597,17 +600,6 @@ sub _describe_compile_spec_entry_result {
   : ref($info) ? ref($info) : 'SCALAR';
 
  return "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
-}
-
-sub _describe_build_compiled_rule_table_entry_result {
- my ($entry, $idx) = @_;
-
- my $value_desc = !defined($entry)
-  ? 'undef'
-  : ref($entry) ? ref($entry) : 'SCALAR';
- my $entry_idx = defined($idx) ? $idx : '?';
-
- return "build_compiled_rule_table expects each parsed bootstrap entry to be ARRAY ref; entry[$entry_idx] got $value_desc";
 }
 
 sub _describe_final_descriptor_state_result {
