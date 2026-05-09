@@ -10270,7 +10270,7 @@ SPEC
     is($called, 1, 'compile_spec_entry routes top_rule state through the RuntimeContext setter helper');
 };
 subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
-    plan tests => 15;
+    plan tests => 19;
 
     my $runtime_ctx = {
         top_rule => 'Top',
@@ -10291,6 +10291,11 @@ subtest 'runtime_context_helpers_expose_read_side_state_accessors' => sub {
     ok(LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler'), 'RuntimeContext read helper matches the current last_error type');
     ok(!LinkedSpec::RuntimeContext::has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_parser'), 'RuntimeContext read helper rejects a non-matching last_error type');
     is(LinkedSpec::RuntimeContext::get_runtime_ctx_last_error_detail($runtime_ctx), 'handler detail', 'RuntimeContext read helper returns the last_error detail text');
+
+    is(LinkedSpec::RuntimeContext::clear_runtime_ctx_spec_identity($runtime_ctx), $runtime_ctx, 'RuntimeContext spec-identity clear helper returns the supplied context hashref');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_name($runtime_ctx), undef, 'RuntimeContext spec-identity clear helper clears spec_name');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path($runtime_ctx), undef, 'RuntimeContext spec-identity clear helper clears spec_path');
+    is(LinkedSpec::RuntimeContext::get_runtime_ctx_top_rule($runtime_ctx), 'Top', 'RuntimeContext spec-identity clear helper leaves top_rule untouched');
 
     delete $runtime_ctx->{last_error};
     ok(!LinkedSpec::RuntimeContext::has_structured_runtime_ctx_last_error($runtime_ctx), 'RuntimeContext read helper reports no structured last_error after deletion');

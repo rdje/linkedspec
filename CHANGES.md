@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime context: centralize spec identity reset
+
+- added `LinkedSpec::RuntimeContext::clear_runtime_ctx_spec_identity(...)` as the shared helper for clearing stale file-oriented `spec_name` / `spec_path` state without touching selected `top_rule`,
+- routed `run_get(...)`, `get_parser(...)`, and low-level `build_compiled_rule_table(...)` preparation through that helper where they need to refresh stale file identity,
+- extended focused RuntimeContext helper coverage to lock that spec-identity reset returns the context, clears only `spec_name` / `spec_path`, and leaves `top_rule` available for caller-selected entrypoint continuity.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - runtime context: centralize parser-source capture reset
 
 - added `LinkedSpec::RuntimeContext::clear_runtime_ctx_parser_source_capture(...)` as the shared helper for clearing stale parser-source chunks and removing stale emit callbacks,

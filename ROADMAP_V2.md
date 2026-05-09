@@ -107,6 +107,7 @@ DSL helper surface consistency note:
 
 Runtime/diagnostic continuity note:
 - `LinkedSpec::RuntimeContext` preparation now reseeds an explicit requested `top_rule` during both inline `run_get(...)` and file-oriented `get_parser(...)` setup, so earlier compiler/parser-factory failures still report the caller’s intended parser entrypoint instead of an empty or stale `top_rule`.
+- Stale file identity reset for `spec_name` / `spec_path` now also has one shared `RuntimeContext` helper, deliberately separate from `top_rule` so selected-entrypoint continuity remains explicit.
 - `runtime_ctx_ref => \$ctx` scalar slots are now explicitly reusable after first population: `RuntimeContext` treats Perl's later `REF` shape as the same populated scalar-slot contract, reuses the existing context hashref, and rejects slots already holding non-hash references.
 - The reusable populated scalar-slot contract is now locked through the public `LinkedSpec::Get(...)` and `LinkedSpec::get_parser(...)` entrypoints too, so public callers can reuse the same context hashref across later calls while caller-owned fields survive and LinkedSpec-owned identity/error fields refresh for the current run.
 - Parser-source capture reset now also has one shared `RuntimeContext` helper for paths that must clear stale chunks and remove stale emit callbacks, while `run_get_pipeline(...)` keeps the narrower chunk-only reset needed to preserve active compiler emission.

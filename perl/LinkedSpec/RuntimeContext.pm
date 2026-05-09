@@ -46,8 +46,7 @@ sub prepare_runtime_ctx_for_run_get {
  set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
   if defined($args{top_rule}) && length($args{top_rule});
  unless ($args{preserve_spec_identity}) {
-  clear_runtime_ctx_spec_name($runtime_ctx);
-  clear_runtime_ctx_spec_path($runtime_ctx);
+  clear_runtime_ctx_spec_identity($runtime_ctx);
  }
  clear_runtime_ctx_parser_source_capture($runtime_ctx, ensure_storage => 1);
  configure_runtime_ctx_parser_source_capture(
@@ -85,8 +84,7 @@ sub prepare_runtime_ctx_for_get_parser {
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  return undef unless ref($runtime_ctx) eq 'HASH';
  clear_runtime_ctx_top_rule($runtime_ctx);
- clear_runtime_ctx_spec_path($runtime_ctx);
- clear_runtime_ctx_spec_name($runtime_ctx);
+ clear_runtime_ctx_spec_identity($runtime_ctx);
  clear_runtime_ctx_parser_source_capture($runtime_ctx);
  set_runtime_ctx_spec_name($runtime_ctx, $args{spec_name}) if defined $args{spec_name};
  set_runtime_ctx_top_rule($runtime_ctx, $option->{top_rule})
@@ -111,8 +109,7 @@ sub prepare_runtime_ctx_for_build_compiled_rule_table {
  my $runtime_ctx = ensure_runtime_ctx($runtime_ctx_ref);
  return undef unless ref($runtime_ctx) eq 'HASH';
  clear_runtime_ctx_last_error($runtime_ctx);
- clear_runtime_ctx_spec_name($runtime_ctx);
- clear_runtime_ctx_spec_path($runtime_ctx);
+ clear_runtime_ctx_spec_identity($runtime_ctx);
  clear_runtime_ctx_top_rule($runtime_ctx);
  clear_runtime_ctx_parser_source_capture($runtime_ctx, ensure_storage => 1);
  set_runtime_ctx_top_rule($runtime_ctx, $args{top_rule})
@@ -203,6 +200,14 @@ sub clear_runtime_ctx_spec_name {
  return undef unless ref($runtime_ctx) eq 'HASH';
  $runtime_ctx->{spec_name} = undef;
  return $runtime_ctx->{spec_name}
+}
+
+sub clear_runtime_ctx_spec_identity {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ clear_runtime_ctx_spec_name($runtime_ctx);
+ clear_runtime_ctx_spec_path($runtime_ctx);
+ return $runtime_ctx
 }
 
 sub get_runtime_ctx_spec_name {
