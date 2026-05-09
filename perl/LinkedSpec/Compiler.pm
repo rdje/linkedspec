@@ -745,14 +745,6 @@ sub _die_with_detail {
  die((defined($detail) ? $detail : '') . "\n");
 }
 
-sub _normalize_error_detail {
- my ($detail) = @_;
-
- return '' unless defined($detail);
- $detail =~ s/\n+\z//;
- return $detail;
-}
-
 #------------------------------------------------------------------------------
 # Function: run_get_pipeline
 # Purpose : Execute the full `.spec` compile/generate pipeline used by
@@ -1121,7 +1113,11 @@ if ($build_final_descriptor_error) {
    'compiler_pipeline',
    stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
-   detail => _normalize_error_detail($build_final_descriptor_error),
+   detail => do {
+    my $detail = defined($build_final_descriptor_error) ? $build_final_descriptor_error : '';
+    $detail =~ s/\n+\z//;
+    $detail;
+   },
    rule_label => $build_final_descriptor_rule_label,
    handler_source_label => $build_final_descriptor_handler_source_label,
   );
