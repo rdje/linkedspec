@@ -126,11 +126,6 @@ sub _set_runtime_ctx_last_error {
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_handler', %args)
 }
 
-sub _emit_runtime_ctx_parser_source_line {
- my ($runtime_ctx, $chunk) = @_;
- return _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $chunk)
-}
-
 sub _trace_runtime_mark_event {
  my (%args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -931,7 +926,7 @@ sub compile_spec_entry {
 
  my $external_handler = $handler;
  $external_handler =~ s/&{\$\$descr{spec}{(\w+)}{handler}}/&{\$\$descr{spec}{$1}}/g;
- _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n $label => sub {\n$external_handler\n },\n");
+ _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n $label => sub {\n$external_handler\n },\n");
 
  $info{handler} = _build_runtime_handler(
   label => $label,

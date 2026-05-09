@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - spec entry: remove parser-source emit wrapper
+
+- removed `LinkedSpec::SpecEntry::_emit_runtime_ctx_parser_source_line(...)`, now that parser-source emission lives in `RuntimeContext`,
+- routed generated-handler parser-source emission directly through `_call_runtime_ctx('emit_runtime_ctx_parser_source_line', ...)`,
+- extended the architecture source-lock regression so `SpecEntry.pm` cannot silently regain the pass-through wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - spec entry: remove top-rule setter wrapper
 
 - removed `LinkedSpec::SpecEntry::_set_runtime_ctx_top_rule(...)`, now that runtime-context top-rule writes live in `RuntimeContext`,
