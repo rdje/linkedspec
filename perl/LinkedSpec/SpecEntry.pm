@@ -121,11 +121,6 @@ sub _call_runtime_ctx {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
-sub _set_runtime_ctx_last_error {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'runtime_handler', %args)
-}
-
 sub _trace_runtime_mark_event {
  my (%args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -781,8 +776,10 @@ sub _build_runtime_handler {
    DUMP_HIGH
   );
   if ($compile_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'runtime_handler',
     stage => 'rule_handler_compile',
     summary => 'Rule handler compilation failed',
     detail => $compile_error,
@@ -805,8 +802,10 @@ sub _build_runtime_handler {
   my $retv = eval { $compiled_handler->($descr, $STRING, $info) };
   my $eval_error = $@;
   if ($eval_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'runtime_handler',
     stage => 'rule_handler_eval',
     summary => 'Rule handler execution failed',
     detail => $eval_error,
