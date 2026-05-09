@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - workflow docs: record full validation gate
+
+- updated the previous runtime-context boundary cleanup entry to include the broader documentation/whitespace/local-CI gate that was run before commit,
+- refreshed live continuity status so validation records remain complete for handoff and crash recovery.
+
+- Validation:
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - runtime context: clear boundary last_error
 
 - routed `prepare_runtime_ctx_for_run_get(...)` and `prepare_runtime_ctx_for_get_parser(...)` through `clear_runtime_ctx_last_error(...)`,
@@ -11,6 +21,9 @@ Detailed technical history of changes prepared for commit.
   - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
   - `perl -c -Iperl t/phase0_regression.t`
   - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
 
 ## 2026-05-09 - workflow docs: add live achievement status
 
