@@ -74,6 +74,7 @@ Owner-dispatch cleanup note:
 - `Runtime::run_get(...)` now calls the shared runtime-context top-rule handler label helper directly for runtime-owner fallback diagnostics, so the one-shot `_runtime_owner_handler_source_label(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared runtime-context top-rule handler label helper directly for parser-factory fallback diagnostics, so the one-shot `_parser_factory_handler_source_label(...)` wrapper is gone too.
 - Compiler top-rule-only fallback diagnostics now call the shared runtime-context top-rule handler label helper directly, so the one-shot `_compiler_top_rule_handler_source_label(...)` wrapper is gone too.
+- Rule-attributed compiler diagnostics now call the shared runtime-context rule-or-top handler label helper directly, so the one-shot `_compiler_rule_or_top_handler_source_label(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now validates required trace-level values inline beside its callback dependency checks, so the one-shot `_require_value_dep(...)` wrapper is gone too.
 
 Plugin modernization note:

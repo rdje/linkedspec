@@ -337,7 +337,7 @@ sub build_compiled_rule_table {
   }
   my $active_rule_label = _parsed_rule_label($entry);
   my $active_handler_source_label = (ref($runtime_ctx) eq 'HASH')
-   ? _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_rule_label)
+   ? _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $active_rule_label)
    : undef;
   my ($label, $info);
   my $compile_ok = eval {
@@ -374,7 +374,7 @@ sub build_compiled_rule_table {
     summary => 'Compiled rule-table generation failed',
     detail => $detail,
     rule_label => $failure_rule_label,
-    handler_source_label => _compiler_rule_or_top_handler_source_label($runtime_ctx, $failure_rule_label),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $failure_rule_label),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
     _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
@@ -607,11 +607,6 @@ sub _get_runtime_ctx_last_error_detail {
 sub _flush_runtime_ctx_parser_source {
  my ($runtime_ctx, $parser_source_ref) = @_;
  return _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref)
-}
-
-sub _compiler_rule_or_top_handler_source_label {
- my ($runtime_ctx, $rule_label) = @_;
- return _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $rule_label)
 }
 
 sub _prepare_runtime_ctx_for_build_compiled_rule_table {
@@ -915,7 +910,7 @@ sub run_get_pipeline {
  };
  my $validate_spec_content_error = $@;
  my $validate_spec_content_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_spec_content_failure{rule_label});
+  _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_spec_content_failure{rule_label});
  if ($validate_spec_content_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -988,7 +983,7 @@ sub run_get_pipeline {
   };
   my $validate_dsl_syntax_error = $@;
   my $validate_dsl_handler_source_label =
-   _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_dsl_failure{rule_label});
+   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_dsl_failure{rule_label});
   if ($validate_dsl_syntax_error) {
    _set_runtime_ctx_last_error(
     $runtime_ctx,
@@ -1123,7 +1118,7 @@ my $compiled_spec_state = eval {
 };
 my $build_compiled_rule_table_error = $@;
  my $active_build_compiled_rule_table_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $active_build_compiled_rule_table_rule_label);
+  _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $active_build_compiled_rule_table_rule_label);
 if ($build_compiled_rule_table_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
@@ -1160,7 +1155,7 @@ if ($build_compiled_rule_table_error) {
 my $build_final_descriptor_error = $@;
 my $build_final_descriptor_rule_label = _get_active_dependency_regex_rule_label();
  my $build_final_descriptor_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $build_final_descriptor_rule_label);
+  _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $build_final_descriptor_rule_label);
 _clear_active_dependency_regex_rule_label();
 if ($build_final_descriptor_error) {
   _set_runtime_ctx_last_error(
@@ -1203,7 +1198,7 @@ if ($build_final_descriptor_error) {
  };
 my $validate_dependency_regex_references_error = $@;
  my $validate_dependency_regex_handler_source_label =
-  _compiler_rule_or_top_handler_source_label($runtime_ctx, $validate_dependency_regex_failure{rule_label});
+  _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_dependency_regex_failure{rule_label});
 if ($validate_dependency_regex_references_error) {
   _set_runtime_ctx_last_error(
    $runtime_ctx,
