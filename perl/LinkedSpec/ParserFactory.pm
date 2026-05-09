@@ -64,21 +64,6 @@ sub _describe_compile_spec_result {
 }
 
 #------------------------------------------------------------------------------
-# Function: _prepare_runtime_ctx_for_get_parser
-# Purpose : Prepare the runtime context for `get_parser(...)` orchestration.
-# Args    : ($option_hashref, %args)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _prepare_runtime_ctx_for_get_parser {
- my ($option, %args) = @_;
- return _call_runtime_ctx('prepare_runtime_ctx_for_get_parser',
-  $option,
-  owner => 'LinkedSpec::ParserFactory::run_get_parser',
-  %args,
- )
-}
-
-#------------------------------------------------------------------------------
 # Function: _call_runtime_ctx
 # Purpose : Lazy-load and invoke one `RuntimeContext` helper through the shared
 #           owner-dispatch seam.
@@ -135,7 +120,12 @@ sub run_get_parser {
  my ($spec_name, $option, $deps) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my %opt_hash = (ref($option) eq 'HASH') ? %{$option} : ();
-  my $runtime_ctx = _prepare_runtime_ctx_for_get_parser(\%opt_hash, spec_name => $spec_name);
+  my $runtime_ctx = _call_runtime_ctx(
+   'prepare_runtime_ctx_for_get_parser',
+   \%opt_hash,
+   owner => 'LinkedSpec::ParserFactory::run_get_parser',
+   spec_name => $spec_name,
+  );
   my ($apply_trace_options, $trace_enter, $trace_exit, $trace_decision, $validate_spec_name,
       $resolve_spec_path, $load_spec_content, $compile_spec, $dump_low, $dump_medium, $trace_scope);
  my $setup_ok = eval {

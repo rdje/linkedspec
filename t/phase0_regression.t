@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 241;
+    plan tests => 242;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1261,6 +1261,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($parser_factory_pm, qr/sub _require_value_dep\b/, 'ParserFactory.pm no longer carries a one-shot value dependency validator wrapper');
     unlike($parser_factory_pm, qr/sub _call_preserving_err\b/, 'ParserFactory.pm no longer carries an unused single-use $@-preservation wrapper');
     unlike($parser_factory_pm, qr/sub _parser_factory_handler_source_label\b/, 'ParserFactory.pm no longer carries a one-shot generated-handler label wrapper');
+    unlike($parser_factory_pm, qr/sub _prepare_runtime_ctx_for_get_parser\b/, 'ParserFactory.pm no longer carries a one-shot runtime-context preparation wrapper');
     like($parser_factory_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_bundle/s, 'ParserFactory.pm now assembles its mixed default dependency bundle through OwnerDispatch');
     like($parser_factory_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'ParserFactory.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($parser_factory_pm, qr/sub run_get_parser\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'ParserFactory.pm now spends OwnerDispatch directly inside run_get_parser');
@@ -11932,26 +11933,15 @@ subtest 'parser_factory_run_get_parser_records_structured_error_for_resolution_f
 subtest 'parser_factory_prepare_runtime_ctx_routes_through_runtime_context_owner' => sub {
     plan tests => 4;
 
-    my $called = 0;
-    my ($captured_option, $captured_owner, $captured_spec_name);
-    my $expected = { prepared => 'runtime_ctx' };
-
-    no warnings 'redefine';
-    local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_get_parser = sub {
-        my ($option, %args) = @_;
-        $called++;
-        $captured_option = $option;
-        $captured_owner = $args{owner};
-        $captured_spec_name = $args{spec_name};
-        return $expected;
-    };
-
-    my $option = {};
-    my $prepared = LinkedSpec::ParserFactory::_prepare_runtime_ctx_for_get_parser($option, spec_name => 'CapturedSpec');
-    is($prepared, $expected, 'ParserFactory private prepare helper returns the RuntimeContext-owned result');
-    is($called, 1, 'ParserFactory private prepare helper routes through RuntimeContext exactly once');
-    is($captured_option, $option, 'ParserFactory private prepare helper forwards the original option hashref');
-    is_deeply([$captured_owner, $captured_spec_name], ['LinkedSpec::ParserFactory::run_get_parser', 'CapturedSpec'], 'ParserFactory private prepare helper forwards owner metadata and spec name into RuntimeContext');
+    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));
+    ok(defined($parser_factory_pm) && length($parser_factory_pm), 'ParserFactory.pm source is available for runtime-context preparation inspection');
+    unlike($parser_factory_pm, qr/sub _prepare_runtime_ctx_for_get_parser\b/, 'ParserFactory.pm no longer carries a runtime-context preparation pass-through');
+    like(
+        $parser_factory_pm,
+        qr/sub run_get_parser\b.*_call_runtime_ctx\(\s*'prepare_runtime_ctx_for_get_parser',\s*\\%opt_hash,\s*owner => 'LinkedSpec::ParserFactory::run_get_parser',\s*spec_name => \$spec_name,/s,
+        'ParserFactory run_get_parser calls RuntimeContext preparation directly with owner metadata and spec name',
+    );
+    unlike($parser_factory_pm, qr/_prepare_runtime_ctx_for_get_parser\(\\%opt_hash,/, 'ParserFactory live body no longer calls the removed preparation wrapper');
 };
 subtest 'runtime_build_runtime_context_routes_through_runtime_context_owner' => sub {
     plan tests => 4;

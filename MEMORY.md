@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `ParserFactory::_prepare_runtime_ctx_for_get_parser(...)`; `run_get_parser(...)` now calls `RuntimeContext::prepare_runtime_ctx_for_get_parser(...)` directly through `_call_runtime_ctx(...)` with owner metadata and requested spec name. The focused regression now inspects the live call path, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `SpecEntry::_emit_runtime_ctx_parser_source_line(...)`; generated-handler parser-source emission now calls `RuntimeContext::emit_runtime_ctx_parser_source_line(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `SpecEntry::_set_runtime_ctx_top_rule(...)`; `compile_spec_entry(...)` now writes discovered top-rule state through `RuntimeContext::set_runtime_ctx_top_rule(...)` directly via `_call_runtime_ctx(...)`. The focused regression now inspects the live call path, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `Compiler::_prepare_runtime_ctx_for_build_compiled_rule_table(...)`; `build_compiled_rule_table(...)` now inlines top-rule selection and calls `RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
