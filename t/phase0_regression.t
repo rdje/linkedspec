@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 243;
+    plan tests => 244;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1251,6 +1251,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($runtime_pm, qr/sub _require_pkg_cb\b/, 'Runtime.pm no longer carries an unused single-use callback-loader wrapper');
     unlike($runtime_pm, qr/sub _call_preserving_err\b/, 'Runtime.pm no longer carries an unused single-use $@-preservation wrapper');
     unlike($runtime_pm, qr/sub _runtime_owner_handler_source_label\b/, 'Runtime.pm no longer carries a one-shot generated-handler label wrapper');
+    unlike($runtime_pm, qr/sub _build_runtime_context\b/, 'Runtime.pm no longer carries a one-shot runtime-context preparation wrapper');
     like($runtime_pm, qr/sub _run_get_pipeline_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline'\)/s, 'Runtime.pm now spends OwnerDispatch directly inside its compiler callback helper');
     like($runtime_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'Runtime.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($runtime_pm, qr/sub run_get\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'Runtime.pm now spends OwnerDispatch directly inside run_get');
@@ -11947,25 +11948,15 @@ subtest 'parser_factory_prepare_runtime_ctx_routes_through_runtime_context_owner
 subtest 'runtime_build_runtime_context_routes_through_runtime_context_owner' => sub {
     plan tests => 4;
 
-    my $called = 0;
-    my ($captured_option, $captured_owner);
-    my $expected = { prepared => 'runtime_ctx' };
-
-    no warnings 'redefine';
-    local *LinkedSpec::RuntimeContext::prepare_runtime_ctx_for_run_get_option = sub {
-        my ($option, %args) = @_;
-        $called++;
-        $captured_option = $option;
-        $captured_owner = $args{owner};
-        return $expected;
-    };
-
-    my $option = {};
-    my $prepared = LinkedSpec::Runtime::_build_runtime_context($option);
-    is($prepared, $expected, 'Runtime private context builder returns the RuntimeContext-owned result');
-    is($called, 1, 'Runtime private context builder routes through RuntimeContext exactly once');
-    is($captured_option, $option, 'Runtime private context builder forwards the original option hashref');
-    is($captured_owner, 'LinkedSpec::Runtime::run_get', 'Runtime private context builder forwards owner metadata into RuntimeContext');
+    my $runtime_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Runtime.pm'));
+    ok(defined($runtime_pm) && length($runtime_pm), 'Runtime.pm source is available for runtime-context preparation inspection');
+    unlike($runtime_pm, qr/sub _build_runtime_context\b/, 'Runtime.pm no longer carries a runtime-context preparation pass-through');
+    like(
+        $runtime_pm,
+        qr/sub run_get\b.*_call_runtime_ctx\(\s*'prepare_runtime_ctx_for_run_get_option',\s*\$option,\s*owner => 'LinkedSpec::Runtime::run_get',/s,
+        'Runtime run_get calls RuntimeContext preparation directly with owner metadata',
+    );
+    unlike($runtime_pm, qr/_build_runtime_context\(\$option\)/, 'Runtime live body no longer calls the removed preparation wrapper');
 };
 subtest 'compiler_require_runtime_ctx_routes_through_runtime_context_owner' => sub {
     plan tests => 3;

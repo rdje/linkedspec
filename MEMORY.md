@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Runtime::_build_runtime_context(...)`; `run_get(...)` now calls `RuntimeContext::prepare_runtime_ctx_for_run_get_option(...)` directly through `_call_runtime_ctx(...)` with owner metadata. The focused regression now inspects the live call path, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `ParserFactory::_set_runtime_ctx_spec_path(...)`; `run_get_parser(...)` now writes resolved spec paths through `RuntimeContext::set_runtime_ctx_spec_path(...)` directly via `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `ParserFactory::_prepare_runtime_ctx_for_get_parser(...)`; `run_get_parser(...)` now calls `RuntimeContext::prepare_runtime_ctx_for_get_parser(...)` directly through `_call_runtime_ctx(...)` with owner metadata and requested spec name. The focused regression now inspects the live call path, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `SpecEntry::_emit_runtime_ctx_parser_source_line(...)`; generated-handler parser-source emission now calls `RuntimeContext::emit_runtime_ctx_parser_source_line(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.

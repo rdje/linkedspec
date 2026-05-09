@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime: inline runtime-context preparation
+
+- removed `LinkedSpec::Runtime::_build_runtime_context(...)`, now that it had one call site,
+- routed `run_get(...)` setup directly through `_call_runtime_ctx('prepare_runtime_ctx_for_run_get_option', ...)` with owner metadata,
+- reshaped the focused regression around the live call path and extended source-lock coverage so `Runtime.pm` cannot silently regain the one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+
 ## 2026-05-09 - parser factory: remove spec-path setter wrapper
 
 - removed `LinkedSpec::ParserFactory::_set_runtime_ctx_spec_path(...)`, now that runtime-context spec-path writes live in `RuntimeContext`,

@@ -15,20 +15,6 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 
 #------------------------------------------------------------------------------
-# Function: _build_runtime_context
-# Purpose : Prepare the runtime-owned mutable context used by `run_get(...)`.
-# Args    : ($option_hashref)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _build_runtime_context {
- my ($option) = @_;
- return _call_runtime_ctx('prepare_runtime_ctx_for_run_get_option',
-  $option,
-  owner => 'LinkedSpec::Runtime::run_get',
- )
-}
-
-#------------------------------------------------------------------------------
 # Function: _call_runtime_ctx
 # Purpose : Lazy-load and invoke one `RuntimeContext` helper through the local
 #           runtime-owner compatibility seam.
@@ -108,7 +94,11 @@ sub run_get {
  my $parse_only = $option->{parse_only} ? 1 : 0;
  my $generate_only = $option->{generate_only} ? 1 : 0;
 
- my $runtime_ctx = _build_runtime_context($option);
+ my $runtime_ctx = _call_runtime_ctx(
+  'prepare_runtime_ctx_for_run_get_option',
+  $option,
+  owner => 'LinkedSpec::Runtime::run_get',
+ );
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $ret = eval {
    my $run_get_pipeline = _run_get_pipeline_cb();
