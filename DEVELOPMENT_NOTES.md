@@ -1,7 +1,8 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
-- 2026-05-09: Removed the unused `Runtime::_set_runtime_ctx_last_error(...)` wrapper. Runtime-owner fallback writes still use `_set_runtime_ctx_last_error_unless_present(...)`, while source-lock coverage now rejects reintroducing the dead direct setter.
+- 2026-05-09: Removed the pass-through `Runtime::_set_runtime_ctx_last_error_unless_present(...)` wrapper. Runtime-owner fallback writes now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` through `_call_runtime_ctx(...)` directly.
+- 2026-05-09: Removed the unused `Runtime::_set_runtime_ctx_last_error(...)` wrapper. Runtime-owner fallback writes are handled by the preserve-existing RuntimeContext helper, while source-lock coverage rejects reintroducing the dead direct setter.
 - 2026-05-09: Removed the now-one-shot `Runtime::_build_runtime_context(...)` wrapper. `run_get(...)` now calls `RuntimeContext::prepare_runtime_ctx_for_run_get_option(...)` through `_call_runtime_ctx(...)` directly with owner metadata; the focused regression now inspects that live call path instead of preserving the pass-through.
 - 2026-05-09: Removed the now-one-shot `ParserFactory::_set_runtime_ctx_spec_path(...)` wrapper. `run_get_parser(...)` now writes the resolved spec path by calling `RuntimeContext::set_runtime_ctx_spec_path(...)` through `_call_runtime_ctx(...)` directly.
 - 2026-05-09: Removed the now-one-shot `ParserFactory::_prepare_runtime_ctx_for_get_parser(...)` wrapper. `run_get_parser(...)` now calls `RuntimeContext::prepare_runtime_ctx_for_get_parser(...)` through `_call_runtime_ctx(...)` directly with owner metadata and the requested spec name; the focused regression now inspects that live call path instead of preserving the pass-through.

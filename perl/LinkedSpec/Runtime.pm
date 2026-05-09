@@ -27,18 +27,6 @@ sub _call_runtime_ctx {
 }
 
 #------------------------------------------------------------------------------
-# Function: _set_runtime_ctx_last_error_unless_present
-# Purpose : Preserve an existing structured runtime-owner error while providing
-#           a fallback error payload when none has been recorded yet.
-# Args    : ($runtime_ctx, %args)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _set_runtime_ctx_last_error_unless_present {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'runtime_owner', %args)
-}
-
-#------------------------------------------------------------------------------
 # Function: _describe_run_get_pipeline_result
 # Purpose : Explain one malformed compiler result shape for the active runtime
 #           owner mode instead of accepting arbitrary defined values as success.
@@ -101,8 +89,10 @@ sub run_get {
  };
   my $runtime_owner_error = $@;
   if ($runtime_owner_error) {
-   _set_runtime_ctx_last_error_unless_present(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_unless_present_for_owner',
     $runtime_ctx,
+    'runtime_owner',
     stage => 'run_get_pipeline',
     summary => 'Runtime compile delegation failed',
     detail => $runtime_owner_error,
@@ -116,8 +106,10 @@ sub run_get {
     ? !defined($ret)
     : (defined($ret) && ref($ret) eq 'CODE');
   unless ($ret_ok) {
-   _set_runtime_ctx_last_error_unless_present(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_unless_present_for_owner',
     $runtime_ctx,
+    'runtime_owner',
     stage => 'run_get_pipeline',
     summary => 'Runtime compile delegation failed',
     detail => _describe_run_get_pipeline_result($ret, $option),
