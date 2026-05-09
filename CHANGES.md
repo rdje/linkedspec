@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - parser factory: inline direct last-error writes
+
+- removed `LinkedSpec::ParserFactory::_set_runtime_ctx_last_error(...)`,
+- routed setup, validation, resolution, and load error writes directly through `_call_runtime_ctx('set_runtime_ctx_last_error_for_owner', ...)`,
+- extended shared owner-dispatch source-lock coverage so `ParserFactory.pm` cannot silently regain the pass-through direct setter wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/ParserFactory.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - parser factory: inline fallback last-error writes
 
 - removed `LinkedSpec::ParserFactory::_set_runtime_ctx_last_error_unless_present(...)`,

@@ -87,6 +87,7 @@ Owner-dispatch cleanup note:
 - `ParserFactory::run_get_parser(...)` now calls the shared runtime-context preparation helper directly, so the one-shot `_prepare_runtime_ctx_for_get_parser(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared runtime-context spec-path setter directly, so the one-shot `_set_runtime_ctx_spec_path(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared preserve-existing last-error helper directly, so the pass-through `_set_runtime_ctx_last_error_unless_present(...)` wrapper is gone too.
+- `ParserFactory::run_get_parser(...)` now calls the shared parser-factory last-error writer directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
 - `Runtime::run_get(...)` now calls the shared runtime-context preparation helper directly, so the one-shot `_build_runtime_context(...)` wrapper is gone too.
 - `Runtime` no longer carries an unused direct last-error setter wrapper; its live fallback writes stay on the preserve-existing last-error path.
 - `Runtime::run_get(...)` now calls the shared preserve-existing last-error helper directly, so the pass-through `_set_runtime_ctx_last_error_unless_present(...)` wrapper is gone too.

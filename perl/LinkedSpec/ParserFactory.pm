@@ -76,17 +76,6 @@ sub _call_runtime_ctx {
 }
 
 #------------------------------------------------------------------------------
-# Function: _set_runtime_ctx_last_error
-# Purpose : Write one structured parser-factory error into the active context.
-# Args    : ($runtime_ctx, %args)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _set_runtime_ctx_last_error {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'parser_factory', %args)
-}
-
-#------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
@@ -164,8 +153,10 @@ sub run_get_parser {
   };
   my $setup_error = $@;
   unless ($setup_ok) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'prepare_parser_factory',
     summary => 'Parser factory setup failed',
     detail => $setup_error,
@@ -189,8 +180,10 @@ sub run_get_parser {
   };
   my $validate_spec_name_error = $@;
   if ($validate_spec_name_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'validate_spec_name',
     summary => defined($validate_spec_name_failure{summary}) && length($validate_spec_name_failure{summary})
      ? $validate_spec_name_failure{summary}
@@ -204,8 +197,10 @@ sub run_get_parser {
   }
 
   unless ($spec_name_ok) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'validate_spec_name',
     summary => defined($validate_spec_name_failure{summary}) && length($validate_spec_name_failure{summary})
      ? $validate_spec_name_failure{summary}
@@ -233,8 +228,10 @@ sub run_get_parser {
   };
   my $resolve_spec_path_error = $@;
   if ($resolve_spec_path_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'resolve_spec_path',
     summary => defined($resolve_spec_path_failure{summary}) && length($resolve_spec_path_failure{summary})
      ? $resolve_spec_path_failure{summary}
@@ -247,8 +244,10 @@ sub run_get_parser {
    return undef;
   }
   unless (defined $spec_path) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'resolve_spec_path',
     summary => defined($resolve_spec_path_failure{summary}) && length($resolve_spec_path_failure{summary})
      ? $resolve_spec_path_failure{summary}
@@ -277,8 +276,10 @@ sub run_get_parser {
   };
   my $load_spec_content_error = $@;
   if ($load_spec_content_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'load_spec_content',
     summary => defined($load_spec_content_failure{summary}) && length($load_spec_content_failure{summary})
      ? $load_spec_content_failure{summary}
@@ -291,8 +292,10 @@ sub run_get_parser {
    return undef;
   }
   unless (defined $content) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'load_spec_content',
     summary => defined($load_spec_content_failure{summary}) && length($load_spec_content_failure{summary})
      ? $load_spec_content_failure{summary}

@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `ParserFactory::_set_runtime_ctx_last_error(...)`; setup, validation, resolution, and load errors now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` directly through `_call_runtime_ctx(...)` with parser-factory ownership. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.
 - 2026-05-09: Removed `ParserFactory::_set_runtime_ctx_last_error_unless_present(...)`; compile-stage fallback errors now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` directly through `_call_runtime_ctx(...)` with parser-factory ownership. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.
 - 2026-05-09: Removed `Runtime::_run_get_pipeline_cb(...)`; `run_get(...)` now resolves `Compiler::run_get_pipeline(...)` directly through `OwnerDispatch::require_pkg_cb(...)`. Phase0 source-lock coverage rejects reintroducing the one-shot callback-loader wrapper.
 - 2026-05-09: Removed `Runtime::_set_runtime_ctx_last_error_unless_present(...)`; runtime-owner fallback errors now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.

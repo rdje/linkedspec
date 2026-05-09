@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the pass-through `ParserFactory::_set_runtime_ctx_last_error(...)` wrapper. Setup, validation, resolution, and load error writes now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly with parser-factory ownership.
 - 2026-05-09: Removed the pass-through `ParserFactory::_set_runtime_ctx_last_error_unless_present(...)` wrapper. Compile-stage fallback writes now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` through `_call_runtime_ctx(...)` directly with parser-factory ownership.
 - 2026-05-09: Removed the one-shot `Runtime::_run_get_pipeline_cb(...)` wrapper. `run_get(...)` now resolves `Compiler::run_get_pipeline(...)` directly through `OwnerDispatch::require_pkg_cb(...)` inside the live orchestration body.
 - 2026-05-09: Removed the pass-through `Runtime::_set_runtime_ctx_last_error_unless_present(...)` wrapper. Runtime-owner fallback writes now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` through `_call_runtime_ctx(...)` directly.
