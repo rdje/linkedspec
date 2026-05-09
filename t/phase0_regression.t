@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 232;
+    plan tests => 234;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1288,6 +1288,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _compiler_top_rule_handler_source_label\b/, 'Compiler.pm no longer carries a one-shot top-rule generated-handler label wrapper');
     unlike($compiler_pm, qr/sub _compiler_rule_or_top_handler_source_label\b/, 'Compiler.pm no longer carries a one-shot rule-or-top generated-handler label wrapper');
     unlike($compiler_pm, qr/sub _flush_runtime_ctx_parser_source\b/, 'Compiler.pm no longer carries a one-shot parser-source flush wrapper');
+    unlike($compiler_pm, qr/sub _has_runtime_ctx_last_error_type\b/, 'Compiler.pm no longer carries a one-shot last-error type read wrapper');
+    unlike($compiler_pm, qr/sub _get_runtime_ctx_last_error_detail\b/, 'Compiler.pm no longer carries a one-shot last-error detail read wrapper');
     like($compiler_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\).*Data::Dumper::Dumper/s, 'Compiler.pm now spends OwnerDispatch directly inside _dump_value');
     like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
     like($compiler_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::log_output/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_output');

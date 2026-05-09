@@ -594,16 +594,6 @@ sub _set_runtime_ctx_last_error {
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
 }
 
-sub _has_runtime_ctx_last_error_type {
- my ($runtime_ctx, $type) = @_;
- return _call_runtime_ctx('has_runtime_ctx_last_error_type', $runtime_ctx, $type)
-}
-
-sub _get_runtime_ctx_last_error_detail {
- my ($runtime_ctx) = @_;
- return _call_runtime_ctx('get_runtime_ctx_last_error_detail', $runtime_ctx)
-}
-
 sub _prepare_runtime_ctx_for_build_compiled_rule_table {
  my ($specretv, $option) = @_;
  return undef unless ref($option) eq 'HASH';
@@ -1380,13 +1370,13 @@ if ($validate_dependency_regex_references_error) {
    die $eval_error;
   }
   my $invoke_reason = defined($retv) ? 'top-level handler returned defined AST' : 'top-level handler returned undef';
-  if (_has_runtime_ctx_last_error_type($runtime_ctx, 'runtime_handler')) {
+  if (_call_runtime_ctx('has_runtime_ctx_last_error_type', $runtime_ctx, 'runtime_handler')) {
    if (defined($retv)) {
     _clear_runtime_ctx_last_error($runtime_ctx);
     $@ = '';
     $invoke_reason = 'top-level handler returned defined AST and cleared stale runtime_handler context';
    } else {
-    $@ = _get_runtime_ctx_last_error_detail($runtime_ctx);
+    $@ = _call_runtime_ctx('get_runtime_ctx_last_error_detail', $runtime_ctx);
     $invoke_reason = 'top-level handler returned undef while preserving runtime_handler context';
    }
   }

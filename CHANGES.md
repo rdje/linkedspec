@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: remove last-error read wrappers
+
+- removed `LinkedSpec::Compiler::_has_runtime_ctx_last_error_type(...)` and `_get_runtime_ctx_last_error_detail(...)`, now that runtime-context last-error reads live in `RuntimeContext`,
+- routed the parser-invocation runtime-handler preservation branch directly through `_call_runtime_ctx(...)`,
+- extended the architecture source-lock regression so `Compiler.pm` cannot silently regain those one-shot wrappers.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: remove parser-source flush wrapper
 
 - removed `LinkedSpec::Compiler::_flush_runtime_ctx_parser_source(...)`, now that final parser-source flushing lives in `RuntimeContext`,

@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the now-one-shot `Compiler::_has_runtime_ctx_last_error_type(...)` and `Compiler::_get_runtime_ctx_last_error_detail(...)` wrappers. The parser-invocation path now calls the shared `RuntimeContext` last-error read helpers directly when preserving deeper `runtime_handler` context.
 - 2026-05-09: Removed the now-one-shot `Compiler::_flush_runtime_ctx_parser_source(...)` wrapper. The final parser-source output path now calls `RuntimeContext::flush_runtime_ctx_parser_source(...)` through `_call_runtime_ctx(...)` directly, leaving parser-source flushing ownership in `RuntimeContext` without a compiler-local pass-through.
 - 2026-05-09: Removed the now-one-shot `Compiler::_compiler_rule_or_top_handler_source_label(...)` wrapper too. Rule-attributed compiler diagnostics now call `RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` through `_call_runtime_ctx(...)` directly, leaving `RuntimeContext` as the only owner for concrete-rule-versus-selected-top-rule label fallback.
 - 2026-05-09: Removed the now-one-shot `Compiler::_compiler_top_rule_handler_source_label(...)` wrapper. Compiler top-rule-only fallback diagnostics now call `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` through `_call_runtime_ctx(...)` directly.
