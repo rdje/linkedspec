@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the now-one-shot `SpecEntry::_set_runtime_ctx_top_rule(...)` wrapper. `compile_spec_entry(...)` now writes discovered top-rule state by calling `RuntimeContext::set_runtime_ctx_top_rule(...)` through `_call_runtime_ctx(...)` directly; the focused regression now inspects that live call path instead of preserving the pass-through.
 - 2026-05-09: Removed the now-one-shot `Compiler::_prepare_runtime_ctx_for_build_compiled_rule_table(...)` wrapper. `build_compiled_rule_table(...)` now owns its small `top_rule` selection locally and calls `RuntimeContext::prepare_runtime_ctx_for_build_compiled_rule_table(...)` through `_call_runtime_ctx(...)` directly.
 - 2026-05-09: Removed the now-pass-through `Compiler::_emit_runtime_ctx_parser_source_line(...)` wrapper. Compiler parser-source emission now calls `RuntimeContext::emit_runtime_ctx_parser_source_line(...)` through `_call_runtime_ctx(...)` directly, matching the earlier final parser-source flush cleanup.
 - 2026-05-09: Removed the now-one-shot `Compiler::_clear_runtime_ctx_last_error(...)` wrapper. Compiler operation-boundary and parser-invocation stale-error clearing now call `RuntimeContext::clear_runtime_ctx_last_error(...)` through `_call_runtime_ctx(...)` directly.

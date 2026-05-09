@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 239;
+    plan tests => 240;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1315,6 +1315,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($spec_entry_pm, qr/sub _require_data_dumper_pkg\b/, 'SpecEntry.pm no longer carries a separate Data::Dumper loader wrapper');
     unlike($spec_entry_pm, qr/sub _call_preserving_err\b/, 'SpecEntry.pm no longer carries an unused local $@-preservation wrapper');
     unlike($spec_entry_pm, qr/sub _generated_handler_source_label\b/, 'SpecEntry.pm no longer carries a one-shot generated-handler label wrapper');
+    unlike($spec_entry_pm, qr/sub _set_runtime_ctx_top_rule\b/, 'SpecEntry.pm no longer carries a one-shot top-rule setter wrapper');
     like($spec_entry_pm, qr/sub _trace_enter\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_enter/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_enter');
     like($spec_entry_pm, qr/sub _trace_exit\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_exit/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_exit');
     like($spec_entry_pm, qr/sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_decision/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_decision');
@@ -11995,28 +11996,18 @@ subtest 'compiler_require_runtime_ctx_routes_through_runtime_context_owner' => s
     is($called, 1, 'Compiler runtime-context requirement routes through RuntimeContext exactly once');
     is($captured_runtime_ctx, $runtime_ctx, 'Compiler runtime-context requirement forwards the injected runtime context hashref');
 };
-subtest 'spec_entry_set_runtime_ctx_top_rule_routes_through_runtime_context_owner' => sub {
+subtest 'spec_entry_top_rule_write_routes_through_runtime_context_owner' => sub {
     plan tests => 4;
 
-    my $called = 0;
-    my ($captured_runtime_ctx, $captured_top_rule);
-    my $expected = { updated => 'top_rule' };
-
-    no warnings 'redefine';
-    local *LinkedSpec::RuntimeContext::set_runtime_ctx_top_rule = sub {
-        my ($runtime_ctx, $top_rule) = @_;
-        $called++;
-        $captured_runtime_ctx = $runtime_ctx;
-        $captured_top_rule = $top_rule;
-        return $expected;
-    };
-
-    my $runtime_ctx = {};
-    my $ret = LinkedSpec::SpecEntry::_set_runtime_ctx_top_rule($runtime_ctx, 'CapturedTop');
-    is($ret, $expected, 'SpecEntry top-rule helper returns the RuntimeContext-owned result');
-    is($called, 1, 'SpecEntry top-rule helper routes through RuntimeContext exactly once');
-    is($captured_runtime_ctx, $runtime_ctx, 'SpecEntry top-rule helper forwards the injected runtime context hashref');
-    is($captured_top_rule, 'CapturedTop', 'SpecEntry top-rule helper forwards the discovered top rule');
+    my $spec_entry_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'SpecEntry.pm'));
+    ok(defined($spec_entry_pm) && length($spec_entry_pm), 'SpecEntry.pm source is available for top-rule write inspection');
+    unlike($spec_entry_pm, qr/sub _set_runtime_ctx_top_rule\b/, 'SpecEntry.pm no longer carries a top-rule setter pass-through');
+    like(
+        $spec_entry_pm,
+        qr/if \(defined \$rule_ir->\{top_rule\}\) \{\s*_call_runtime_ctx\('set_runtime_ctx_top_rule', \$runtime_ctx, \$rule_ir->\{top_rule\}\);\s*\}/s,
+        'SpecEntry top-rule write calls RuntimeContext directly through _call_runtime_ctx',
+    );
+    unlike($spec_entry_pm, qr/_set_runtime_ctx_top_rule\(\$runtime_ctx,/, 'SpecEntry live body no longer calls the removed top-rule setter wrapper');
 };
 subtest 'parser_factory_run_get_parser_records_structured_error_when_setup_fails' => sub {
     plan tests => 10;

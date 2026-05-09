@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - spec entry: remove top-rule setter wrapper
+
+- removed `LinkedSpec::SpecEntry::_set_runtime_ctx_top_rule(...)`, now that runtime-context top-rule writes live in `RuntimeContext`,
+- routed the discovered top-rule write in `compile_spec_entry(...)` directly through `_call_runtime_ctx('set_runtime_ctx_top_rule', ...)`,
+- reshaped the focused regression around the live call path and extended source-lock coverage so `SpecEntry.pm` cannot silently regain the one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline rule-table runtime-context preparation
 
 - removed `LinkedSpec::Compiler::_prepare_runtime_ctx_for_build_compiled_rule_table(...)`, now that it had one call site,

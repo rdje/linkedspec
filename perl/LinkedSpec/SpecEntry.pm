@@ -131,11 +131,6 @@ sub _emit_runtime_ctx_parser_source_line {
  return _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $chunk)
 }
 
-sub _set_runtime_ctx_top_rule {
- my ($runtime_ctx, $top_rule) = @_;
- return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
-}
-
 sub _trace_runtime_mark_event {
  my (%args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -956,7 +951,7 @@ sub compile_spec_entry {
  _trace_log_dump("=== END HANDLER DUMP for $label ===\n");
  }
  if (defined $rule_ir->{top_rule}) {
-  _set_runtime_ctx_top_rule($runtime_ctx, $rule_ir->{top_rule});
+  _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $rule_ir->{top_rule});
  }
  _trace_exit($trace_scope, { status => 'ok', label => $label, handler_variant => $rule_meta->{selected_handler_variant} }, DUMP_HIGH);
 
