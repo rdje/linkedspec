@@ -46,11 +46,6 @@ sub _resolve_rep_bounds {
  return @{$rep_nodes_minmax->{$node_type}};
 }
 
-sub _require_rule_ir_pkg {
- LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR', '_collect_rule_ir');
- return 1
-}
-
 sub _require_emit_context_pkg {
  LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
  return 1
@@ -834,7 +829,7 @@ sub compile_spec_entry {
  my ($einfo, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
  my $runtime_ctx = ref($deps->{runtime_ctx}) eq 'HASH' ? $deps->{runtime_ctx} : undef;
- _require_rule_ir_pkg();
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR', '_collect_rule_ir');
 
  my $trace_scope = _trace_enter('LinkedSpec::spec_entry', {
   token_count => (ref($einfo) eq 'ARRAY') ? scalar(@$einfo) : undef,

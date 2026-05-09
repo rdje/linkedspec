@@ -86,6 +86,7 @@ Owner-dispatch cleanup note:
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
 - `SpecEntry::compile_spec_entry(...)` now reads the optional runtime context dependency inline, so the one-shot `_runtime_ctx_from_deps(...)` wrapper is gone too.
+- `SpecEntry::compile_spec_entry(...)` now checks RuleIR callback availability directly through `OwnerDispatch`, so the one-shot `_require_rule_ir_pkg(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared runtime-context preparation helper directly, so the one-shot `_prepare_runtime_ctx_for_get_parser(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared runtime-context spec-path setter directly, so the one-shot `_set_runtime_ctx_spec_path(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now calls the shared preserve-existing last-error helper directly, so the pass-through `_set_runtime_ctx_last_error_unless_present(...)` wrapper is gone too.
