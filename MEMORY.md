@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Compiler::_first_parsed_rule_label(...)`; rule-table preparation and final top-rule selection now derive the first parsed rule label directly at their decision points. Phase0 source-lock coverage rejects reintroducing the first-label wrapper.
 - 2026-05-09: Removed `Compiler::_reset_spec_content_pos(...)`; `run_get_pipeline(...)` now resets scalar input position directly at validation and bootstrap-parse boundaries. Phase0 source-lock coverage rejects reintroducing the scalar-position reset wrapper.
 - 2026-05-09: Removed `Compiler::_clear_active_dependency_regex_rule_label(...)`; dependency-regex map/build-final-descriptor boundaries now reset the active rule label directly. Phase0 source-lock coverage rejects reintroducing the one-shot clearer wrapper.
 - 2026-05-09: Removed `Compiler::_get_active_dependency_regex_rule_label(...)`; final-descriptor failure attribution now reads the active dependency-regex rule label directly at its only read site. Phase0 source-lock coverage rejects reintroducing the one-shot reader wrapper.

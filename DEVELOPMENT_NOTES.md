@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed `Compiler::_first_parsed_rule_label(...)`. Rule-table runtime-context preparation and final top-rule selection now read the first parsed rule label directly at their local decision points.
 - 2026-05-09: Removed the small `Compiler::_reset_spec_content_pos(...)` wrapper. `run_get_pipeline(...)` now resets scalar input position directly at the validation and bootstrap-parse boundaries.
 - 2026-05-09: Removed the one-use-shape `Compiler::_clear_active_dependency_regex_rule_label(...)` clearer wrapper. Dependency-regex map/build-final-descriptor boundaries now reset the active label directly around diagnostic attribution.
 - 2026-05-09: Removed the one-use `Compiler::_get_active_dependency_regex_rule_label(...)` reader wrapper. Final-descriptor failure attribution now reads the active dependency-regex rule label directly where the diagnostic label is built.

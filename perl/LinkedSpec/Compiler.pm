@@ -265,7 +265,7 @@ sub build_compiled_rule_table {
  if (ref($option) eq 'HASH') {
   my $top_rule = defined($option->{top_rule}) && length($option->{top_rule})
    ? $option->{top_rule}
-   : _first_parsed_rule_label($specretv);
+   : (ref($specretv) eq 'ARRAY' && @$specretv ? _parsed_rule_label($specretv->[0]) : undef);
   $runtime_ctx = _call_runtime_ctx(
    'prepare_runtime_ctx_for_build_compiled_rule_table',
    $option,
@@ -577,12 +577,6 @@ sub _describe_parser_input_ref {
   ? 'undef'
   : ref($input_ref) ? ref($input_ref) : 'SCALAR';
  return "Top-level parser expects a SCALAR reference input; got $value_desc";
-}
-
-sub _first_parsed_rule_label {
- my ($parsed_spec_entries) = @_;
- return undef unless ref($parsed_spec_entries) eq 'ARRAY' && @$parsed_spec_entries;
- return _parsed_rule_label($parsed_spec_entries->[0])
 }
 
 sub _parsed_rule_label {
@@ -1209,7 +1203,7 @@ if ($validate_dependency_regex_references_error) {
 
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
-  : _first_parsed_rule_label($retv);
+  : (ref($retv) eq 'ARRAY' && @$retv ? _parsed_rule_label($retv->[0]) : undef);
  _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
  my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
