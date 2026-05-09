@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - spec entry: remove generated-handler label wrapper
+
+- removed `LinkedSpec::SpecEntry::_generated_handler_source_label(...)`, now that rule-metadata handler label construction lives in `RuntimeContext`,
+- routed runtime-handler construction directly through `_call_runtime_ctx('build_rule_meta_handler_source_label', ...)`,
+- extended the architecture source-lock regression so `SpecEntry.pm` cannot silently regain that one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - runtime context: centralize rule-meta handler labels
 
 - added `LinkedSpec::RuntimeContext::build_rule_meta_handler_source_label(...)` for deriving generated-handler labels from a rule label plus selected handler variant stored in rule metadata,

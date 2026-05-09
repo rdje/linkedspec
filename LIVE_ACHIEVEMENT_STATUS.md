@@ -7,13 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-09: Centralized `SpecEntry` rule-metadata handler-source label construction in `RuntimeContext`.
+- 2026-05-09: Removed the now-one-shot `SpecEntry` generated-handler label wrapper after moving rule-metadata label construction into `RuntimeContext`.
 
 ## Recent Completed Slices
+- Phase 5: Centralize `SpecEntry` rule-metadata handler-source label construction.
 - Phase 5: Centralize compiler rule-or-top handler-source labels.
 - Phase 5: Reuse RuntimeContext top-rule label helper in compiler parser invocation.
 - Phase 5: Centralize top-rule generated-handler source labels.
-- Phase 6: Record full validation gate for the latest runtime-context cleanup.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.

@@ -145,15 +145,6 @@ sub _trace_runtime_mark_event {
  })
 }
 
-sub _generated_handler_source_label {
- my (%args) = @_;
- return _call_runtime_ctx(
-  'build_rule_meta_handler_source_label',
-  label => $args{label},
-  rule_meta => $args{rule_meta},
- )
-}
-
 sub _quote_source_label_for_line_directive {
  my ($source_label) = @_;
  $source_label = '' unless defined $source_label;
@@ -770,7 +761,8 @@ sub _build_runtime_handler {
  my $rule_meta = $args{rule_meta};
  my $runtime_ctx = $args{runtime_ctx};
  my $handler_variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
- my $handler_source_label = _generated_handler_source_label(
+ my $handler_source_label = _call_runtime_ctx(
+  'build_rule_meta_handler_source_label',
   label => $label,
   rule_meta => $rule_meta,
  );
