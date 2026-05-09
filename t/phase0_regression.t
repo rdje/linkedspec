@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 261;
+    plan tests => 262;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1311,6 +1311,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _first_parsed_rule_label\b/, 'Compiler.pm no longer carries a first parsed-rule label wrapper');
     unlike($compiler_pm, qr/sub _normalize_error_detail\b/, 'Compiler.pm no longer carries a one-shot error-detail normalizer wrapper');
     unlike($compiler_pm, qr/sub _describe_parser_input_ref\b/, 'Compiler.pm no longer carries a one-shot parser-input ref describer wrapper');
+    unlike($compiler_pm, qr/sub _bootstrap_parse_result_detail\b/, 'Compiler.pm no longer carries a one-shot bootstrap-parse result detail wrapper');
     like($compiler_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\).*Data::Dumper::Dumper/s, 'Compiler.pm now spends OwnerDispatch directly inside _dump_value');
     like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
     like($compiler_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\).*LinkedSpec::Trace::log_output/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_output');

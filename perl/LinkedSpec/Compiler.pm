@@ -582,22 +582,6 @@ sub _parsed_rule_label {
  return undef
 }
 
-sub _bootstrap_parse_result_detail {
- my ($parse_success, $retv, $parse_error) = @_;
-
- return $parse_error if defined($parse_error) && length($parse_error);
- return 'bootstrap_parse reported failure without parse_error detail' unless $parse_success;
- return 'bootstrap_parse returned undef while reporting parse_success=1' unless defined($retv);
-
- my $retv_ref = ref($retv);
- return "bootstrap_parse returned $retv_ref while reporting parse_success=1; expected ARRAY"
-  unless $retv_ref eq 'ARRAY';
- return 'bootstrap_parse returned an empty ARRAY while reporting parse_success=1'
-  unless @$retv;
-
- return '';
-}
-
 my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 
 sub _clear_last_build_compiled_rule_table_failure_detail {
@@ -1025,7 +1009,19 @@ sub run_get_pipeline {
    'compiler_pipeline',
    stage => 'bootstrap_parse',
    summary => 'Spec parsing did not produce a valid intermediate representation',
-   detail => _bootstrap_parse_result_detail($parse_success, $retv, $parse_error),
+   detail => do {
+    defined($parse_error) && length($parse_error)
+     ? $parse_error
+     : !$parse_success
+      ? 'bootstrap_parse reported failure without parse_error detail'
+      : !defined($retv)
+       ? 'bootstrap_parse returned undef while reporting parse_success=1'
+       : ref($retv) ne 'ARRAY'
+        ? "bootstrap_parse returned " . ref($retv) . " while reporting parse_success=1; expected ARRAY"
+        : !@$retv
+         ? 'bootstrap_parse returned an empty ARRAY while reporting parse_success=1'
+         : '';
+   },
    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
