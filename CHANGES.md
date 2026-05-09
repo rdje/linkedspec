@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: inline spec-content position reset
+
+- removed `LinkedSpec::Compiler::_reset_spec_content_pos(...)`,
+- reset scalar input position directly at the validation and bootstrap-parse boundaries,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the scalar-position reset wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline dependency-regex label clear
 
 - removed `LinkedSpec::Compiler::_clear_active_dependency_regex_rule_label(...)`,

@@ -579,13 +579,6 @@ sub _describe_parser_input_ref {
  return "Top-level parser expects a SCALAR reference input; got $value_desc";
 }
 
-sub _reset_spec_content_pos {
- my ($spec_content_ref) = @_;
- return unless ref($spec_content_ref) eq 'SCALAR';
- pos($$spec_content_ref) = 0;
- return 0
-}
-
 sub _first_parsed_rule_label {
  my ($parsed_spec_entries) = @_;
  return undef unless ref($parsed_spec_entries) eq 'ARRAY' && @$parsed_spec_entries;
@@ -924,7 +917,7 @@ sub run_get_pipeline {
  }
 
  unless ($validation_failed) {
-  _reset_spec_content_pos($spec_content_ref);
+  pos($$spec_content_ref) = 0 if ref($spec_content_ref) eq 'SCALAR';
   my %validate_dsl_failure;
   my $dsl_valid = eval {
    LinkedSpec::Validation::validate_dsl_syntax(
@@ -1008,7 +1001,7 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting spec file parsing", "Attempting to parse .spec file content");
  my $parse_error = '';
- _reset_spec_content_pos($spec_content_ref);
+ pos($$spec_content_ref) = 0 if ref($spec_content_ref) eq 'SCALAR';
  my $bootstrap_parse_eval_ok = eval {
   ($parse_success, $retv, $parse_error) = $bootstrap_parse->($spec_content_ref);
   1;

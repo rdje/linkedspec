@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the small `Compiler::_reset_spec_content_pos(...)` wrapper. `run_get_pipeline(...)` now resets scalar input position directly at the validation and bootstrap-parse boundaries.
 - 2026-05-09: Removed the one-use-shape `Compiler::_clear_active_dependency_regex_rule_label(...)` clearer wrapper. Dependency-regex map/build-final-descriptor boundaries now reset the active label directly around diagnostic attribution.
 - 2026-05-09: Removed the one-use `Compiler::_get_active_dependency_regex_rule_label(...)` reader wrapper. Final-descriptor failure attribution now reads the active dependency-regex rule label directly where the diagnostic label is built.
 - 2026-05-09: Removed the pass-through `Compiler::_set_runtime_ctx_last_error(...)` wrapper. Compiler-pipeline error boundaries now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly.

@@ -87,6 +87,7 @@ Owner-dispatch cleanup note:
 - Compiler-pipeline error boundaries now call the shared last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
 - Final-descriptor failure attribution now reads the active dependency-regex label directly, so the one-shot `_get_active_dependency_regex_rule_label(...)` wrapper is gone too.
 - Dependency-regex boundaries now reset the transient active label directly, so the one-shot `_clear_active_dependency_regex_rule_label(...)` wrapper is gone too.
+- Validation and bootstrap-parse boundaries now reset scalar input position directly, so the small `_reset_spec_content_pos(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
