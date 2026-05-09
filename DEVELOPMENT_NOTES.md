@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_clear_last_build_compiled_rule_table_failure_detail(...)`. Rule-table and pipeline boundaries now reset retained build-compiled-rule-table failure detail directly.
 - 2026-05-09: Removed `Compiler::_get_last_build_compiled_rule_table_failure_detail(...)`. The pipeline fallback now reads the retained build-compiled-rule-table failure detail directly when constructing its structured diagnostic.
 - 2026-05-09: Removed `Compiler::_bootstrap_parse_result_detail(...)`. Invalid bootstrap-parse result diagnostics now build their structured last-error detail directly at the failure boundary.
 - 2026-05-09: Removed `Compiler::_describe_parser_input_ref(...)`. The top-level parser invocation now builds its invalid input-ref diagnostic directly where it writes the runtime-parser last-error payload.

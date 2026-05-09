@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: inline rule-table failure detail clear
+
+- removed `LinkedSpec::Compiler::_clear_last_build_compiled_rule_table_failure_detail(...)`,
+- reset retained build-compiled-rule-table failure detail directly at rule-table and pipeline boundaries,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot failure-detail clearer wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline rule-table failure detail read
 
 - removed `LinkedSpec::Compiler::_get_last_build_compiled_rule_table_failure_detail(...)`,

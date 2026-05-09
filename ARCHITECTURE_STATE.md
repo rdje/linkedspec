@@ -50,6 +50,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a one-shot parser-input ref describer wrapper either; top-level parser invocation builds invalid-input diagnostics directly at the runtime-parser last-error write.
 - `Compiler` no longer keeps a one-shot bootstrap-parse result detail wrapper either; invalid intermediate-representation diagnostics are built directly at the structured last-error write.
 - `Compiler` no longer keeps a one-shot rule-table failure-detail reader wrapper either; the pipeline fallback reads retained rule-table failure detail directly.
+- `Compiler` no longer keeps a one-shot rule-table failure-detail clearer wrapper either; rule-table and pipeline boundaries reset retained failure detail directly.
 - `SpecEntry` no longer keeps a one-shot runtime-context top-rule setter wrapper either; discovered top-rule writes ask `RuntimeContext` to update shared top-rule state directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a parser-source emission pass-through wrapper either; generated-handler source emission asks `RuntimeContext` to append captured source text directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a pass-through runtime-handler last-error setter wrapper either; rule-handler compile/eval errors ask `RuntimeContext` to write runtime-handler error state directly through the owner-dispatch seam.

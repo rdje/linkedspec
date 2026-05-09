@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Started new `BWFSC=150` batch. Removed `Compiler::_clear_last_build_compiled_rule_table_failure_detail(...)`; rule-table and pipeline boundaries now reset retained failure detail directly. Phase0 source-lock coverage rejects reintroducing the one-shot failure-detail clearer wrapper.
 - 2026-05-09: Removed `Compiler::_get_last_build_compiled_rule_table_failure_detail(...)`; the pipeline fallback now reads the retained rule-table failure detail directly when constructing structured diagnostics. Phase0 source-lock coverage rejects reintroducing the one-shot failure-detail reader wrapper.
 - 2026-05-09: Removed `Compiler::_bootstrap_parse_result_detail(...)`; invalid bootstrap-parse result diagnostics now build their structured last-error detail directly at the failure boundary. Phase0 source-lock coverage rejects reintroducing the one-shot bootstrap detail wrapper.
 - 2026-05-09: Removed `Compiler::_describe_parser_input_ref(...)`; top-level parser invocation now builds invalid input-ref diagnostics directly at the runtime-parser last-error write. Phase0 source-lock coverage rejects reintroducing the one-shot parser-input describer wrapper.

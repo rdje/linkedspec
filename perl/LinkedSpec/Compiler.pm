@@ -274,7 +274,7 @@ sub build_compiled_rule_table {
   );
  }
  $compile_spec_entry ||= _default_compile_spec_entry_cb();
- _clear_last_build_compiled_rule_table_failure_detail();
+ $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
  my $trace_scope = _trace_enter('LinkedSpec::Compiler::build_compiled_rule_table', {
   entry_count => (ref($specretv) eq 'ARRAY') ? scalar(@$specretv) : undef,
  }, DUMP_MEDIUM);
@@ -422,7 +422,7 @@ sub build_compiled_rule_table {
   },
   DUMP_MEDIUM
  );
- _clear_last_build_compiled_rule_table_failure_detail();
+ $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 
  return $result
 }
@@ -583,11 +583,6 @@ sub _parsed_rule_label {
 }
 
 my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
-
-sub _clear_last_build_compiled_rule_table_failure_detail {
- $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
- return ''
-}
 
 sub _set_last_build_compiled_rule_table_failure_detail {
  my ($detail) = @_;
@@ -1037,7 +1032,7 @@ sub run_get_pipeline {
  }
 
 my $active_build_compiled_rule_table_rule_label = undef;
-_clear_last_build_compiled_rule_table_failure_detail();
+$LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 my $compiled_spec_state = eval {
  build_compiled_rule_table($retv, sub {
    my ($entry) = @_;
