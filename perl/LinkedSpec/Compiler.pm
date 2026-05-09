@@ -291,8 +291,10 @@ sub build_compiled_rule_table {
  unless (ref($compile_spec_entry) eq 'CODE') {
   my $detail = 'compile_spec_entry callback must be CODE';
   _set_last_build_compiled_rule_table_failure_detail($detail);
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => $detail,
@@ -306,8 +308,10 @@ sub build_compiled_rule_table {
  unless (ref($specretv) eq 'ARRAY') {
   my $detail = _describe_build_compiled_rule_table_entries_result($specretv);
   _set_last_build_compiled_rule_table_failure_detail($detail);
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => $detail,
@@ -325,8 +329,10 @@ sub build_compiled_rule_table {
   unless (ref($entry) eq 'ARRAY') {
    my $detail = _describe_build_compiled_rule_table_entry_result($entry, $entry_idx);
    _set_last_build_compiled_rule_table_failure_detail($detail);
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'build_compiled_rule_table',
     summary => 'Compiled rule-table generation failed',
     detail => $detail,
@@ -351,8 +357,10 @@ sub build_compiled_rule_table {
     ? $compile_error
     : 'compile_spec_entry died without diagnostic detail';
    _set_last_build_compiled_rule_table_failure_detail($detail);
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'build_compiled_rule_table',
     summary => 'Compiled rule-table generation failed',
     detail => $detail,
@@ -369,8 +377,10 @@ sub build_compiled_rule_table {
     ? $label
     : $active_rule_label;
    _set_last_build_compiled_rule_table_failure_detail($detail);
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'build_compiled_rule_table',
     summary => 'Compiled rule-table generation failed',
     detail => $detail,
@@ -568,11 +578,6 @@ sub _require_runtime_ctx {
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
-}
-
-sub _set_runtime_ctx_last_error {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
 }
 
 sub _describe_parser_input_ref {
@@ -836,8 +841,10 @@ sub run_get_pipeline {
  };
  my $pipeline_setup_error = $@;
  unless ($pipeline_setup_ok) {
- _set_runtime_ctx_last_error(
+ _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'prepare_pipeline',
    summary => 'Compiler pipeline setup failed',
    detail => $pipeline_setup_error,
@@ -864,8 +871,10 @@ sub run_get_pipeline {
  my $validate_spec_content_handler_source_label =
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_spec_content_failure{rule_label});
  if ($validate_spec_content_error) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'validate_spec_content',
    summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
     ? $validate_spec_content_failure{summary}
@@ -885,8 +894,10 @@ sub run_get_pipeline {
   _trace_decision('validate_spec_content', 0, 'Input envelope validation failed', DUMP_HIGH);
   if ($parse_only && $test_expectation eq 'fail') {
    $validation_failed = 1;
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'validate_spec_content',
     summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
      ? $validate_spec_content_failure{summary}
@@ -899,8 +910,10 @@ sub run_get_pipeline {
    );
    _trace_log_output(DUMP_LOW, "Validation failed as expected", "Spec content validation failed - this is expected for this test");
   } else {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'validate_spec_content',
     summary => defined($validate_spec_content_failure{summary}) && length($validate_spec_content_failure{summary})
      ? $validate_spec_content_failure{summary}
@@ -937,8 +950,10 @@ sub run_get_pipeline {
   my $validate_dsl_handler_source_label =
    _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_dsl_failure{rule_label});
   if ($validate_dsl_syntax_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     stage => 'validate_dsl_syntax',
     summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
      ? $validate_dsl_failure{summary}
@@ -958,8 +973,10 @@ sub run_get_pipeline {
    _trace_decision('validate_dsl_syntax', 0, 'Rule-level DSL syntax validation failed', DUMP_HIGH);
    if ($parse_only && $test_expectation eq 'fail') {
     $validation_failed = 1;
-    _set_runtime_ctx_last_error(
+    _call_runtime_ctx(
+     'set_runtime_ctx_last_error_for_owner',
      $runtime_ctx,
+     'compiler_pipeline',
      stage => 'validate_dsl_syntax',
      summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
       ? $validate_dsl_failure{summary}
@@ -972,8 +989,10 @@ sub run_get_pipeline {
     );
     _trace_log_output(DUMP_LOW, "Validation failed as expected", "DSL syntax validation failed - this is expected for this test");
    } else {
-    _set_runtime_ctx_last_error(
+    _call_runtime_ctx(
+     'set_runtime_ctx_last_error_for_owner',
      $runtime_ctx,
+     'compiler_pipeline',
      stage => 'validate_dsl_syntax',
      summary => defined($validate_dsl_failure{summary}) && length($validate_dsl_failure{summary})
       ? $validate_dsl_failure{summary}
@@ -1005,8 +1024,10 @@ sub run_get_pipeline {
  };
  my $bootstrap_parse_error = $@;
  unless ($bootstrap_parse_eval_ok) {
- _set_runtime_ctx_last_error(
+ _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'bootstrap_parse',
    summary => 'Spec parsing failed',
    detail => $bootstrap_parse_error,
@@ -1036,8 +1057,10 @@ sub run_get_pipeline {
  }
 
  unless ($parse_success && ref($retv) eq 'ARRAY' && @$retv) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'bootstrap_parse',
    summary => 'Spec parsing did not produce a valid intermediate representation',
    detail => _bootstrap_parse_result_detail($parse_success, $retv, $parse_error),
@@ -1072,8 +1095,10 @@ my $build_compiled_rule_table_error = $@;
  my $active_build_compiled_rule_table_handler_source_label =
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $active_build_compiled_rule_table_rule_label);
 if ($build_compiled_rule_table_error) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => $build_compiled_rule_table_error,
@@ -1085,8 +1110,10 @@ if ($build_compiled_rule_table_error) {
   return undef;
  }
  unless (_is_compiled_spec_state($compiled_spec_state)) {
- _set_runtime_ctx_last_error(
+ _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => do {
@@ -1110,8 +1137,10 @@ my $build_final_descriptor_rule_label = _get_active_dependency_regex_rule_label(
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $build_final_descriptor_rule_label);
 _clear_active_dependency_regex_rule_label();
 if ($build_final_descriptor_error) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
    detail => _normalize_error_detail($build_final_descriptor_error),
@@ -1123,8 +1152,10 @@ if ($build_final_descriptor_error) {
  return undef;
  }
  unless (_is_compiled_descriptor_state($final_descr_state)) {
-  _set_runtime_ctx_last_error(
+ _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
    detail => _describe_final_descriptor_state_result($final_descr_state),
@@ -1152,8 +1183,10 @@ my $validate_dependency_regex_references_error = $@;
  my $validate_dependency_regex_handler_source_label =
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $validate_dependency_regex_failure{rule_label});
 if ($validate_dependency_regex_references_error) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'validate_dependency_regex_references',
    summary => defined($validate_dependency_regex_failure{summary}) && length($validate_dependency_regex_failure{summary})
     ? $validate_dependency_regex_failure{summary}
@@ -1170,8 +1203,10 @@ if ($validate_dependency_regex_references_error) {
  }
 
  unless ($dependency_regex_refs_valid) {
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    stage => 'validate_dependency_regex_references',
    summary => defined($validate_dependency_regex_failure{summary}) && length($validate_dependency_regex_failure{summary})
     ? $validate_dependency_regex_failure{summary}
@@ -1258,8 +1293,10 @@ if ($validate_dependency_regex_references_error) {
   );
   if (!defined($top_rule) || !length($top_rule)) {
    my $detail = "No top-level rule label is available for parser invocation";
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     type => 'runtime_parser',
     stage => 'resolve_top_rule_handler',
     summary => 'Top-level parser invocation failed',
@@ -1271,8 +1308,10 @@ if ($validate_dependency_regex_references_error) {
   }
   if (ref($top_rule_entry) ne 'HASH') {
    my $detail = "No compiled descriptor entry found for top-level rule '$top_rule'";
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     type => 'runtime_parser',
     stage => 'resolve_top_rule_handler',
     summary => 'Top-level parser invocation failed',
@@ -1286,8 +1325,10 @@ if ($validate_dependency_regex_references_error) {
   }
  if (ref($handler) ne 'CODE') {
   my $detail = "No handler coderef found for top-level rule '$top_rule'";
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    type => 'runtime_parser',
     stage => 'resolve_top_rule_handler',
     summary => 'Top-level parser invocation failed',
@@ -1304,8 +1345,10 @@ if ($validate_dependency_regex_references_error) {
  my $input_ref = $_[0];
  if (ref($input_ref) ne 'SCALAR') {
   my $detail = _describe_parser_input_ref($input_ref);
-  _set_runtime_ctx_last_error(
+  _call_runtime_ctx(
+   'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
+   'compiler_pipeline',
    type => 'runtime_parser',
    stage => 'validate_input_ref',
    summary => 'Top-level parser invocation failed',
@@ -1322,8 +1365,10 @@ if ($validate_dependency_regex_references_error) {
  my $retv = eval { &$handler($final_descr, $input_ref) };
   my $eval_error = $@;
   if ($eval_error) {
-   _set_runtime_ctx_last_error(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_for_owner',
     $runtime_ctx,
+    'compiler_pipeline',
     type => 'runtime_parser',
     stage => 'invoke_top_rule',
     summary => 'Top-level parser invocation failed',

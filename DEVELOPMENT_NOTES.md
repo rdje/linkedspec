@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the pass-through `Compiler::_set_runtime_ctx_last_error(...)` wrapper. Compiler-pipeline error boundaries now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly.
 - 2026-05-09: Removed the `Compiler::_require_trace_pkg(...)` loader wrapper. Compiler trace helpers now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)` inside their `$@`-preserving bodies.
 - 2026-05-09: Removed the one-shot `Compiler::_require_validation_pkg(...)` wrapper. `run_get_pipeline(...)` now checks `Validation::validate_spec_content(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` during pipeline dependency setup.
 - 2026-05-09: Removed the `SpecEntry::_require_trace_pkg(...)` loader wrapper. `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, and `_trace_log_dump(...)` now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)` inside their `$@`-preserving bodies.

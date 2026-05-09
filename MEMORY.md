@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Compiler::_set_runtime_ctx_last_error(...)`; compiler-pipeline error boundaries now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the pass-through setter wrapper.
 - 2026-05-09: Removed `Compiler::_require_trace_pkg(...)`; compiler trace helpers now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)`. Phase0 source-lock coverage rejects reintroducing the Trace loader wrapper.
 - 2026-05-09: Removed `Compiler::_require_validation_pkg(...)`; `run_get_pipeline(...)` now checks `Validation::validate_spec_content(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)`. Phase0 source-lock coverage rejects reintroducing the one-shot validation callback availability wrapper.
 - 2026-05-09: Removed `SpecEntry::_require_trace_pkg(...)`; `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, and `_trace_log_dump(...)` now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)`. Phase0 source-lock coverage rejects reintroducing the Trace loader wrapper.

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: inline last-error writes
+
+- removed `LinkedSpec::Compiler::_set_runtime_ctx_last_error(...)`,
+- routed compiler-pipeline error writes directly through `_call_runtime_ctx('set_runtime_ctx_last_error_for_owner', ...)`,
+- extended shared owner-dispatch source-lock coverage so `Compiler.pm` cannot silently regain the pass-through compiler-pipeline setter wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline Trace loading
 
 - removed `LinkedSpec::Compiler::_require_trace_pkg(...)`,
