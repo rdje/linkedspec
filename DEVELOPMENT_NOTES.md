@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the one-shot `Compiler::_require_validation_pkg(...)` wrapper. `run_get_pipeline(...)` now checks `Validation::validate_spec_content(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` during pipeline dependency setup.
 - 2026-05-09: Removed the `SpecEntry::_require_trace_pkg(...)` loader wrapper. `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, and `_trace_log_dump(...)` now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)` inside their `$@`-preserving bodies.
 - 2026-05-09: Removed the one-shot `SpecEntry::_require_emit_context_pkg(...)` wrapper. `compile_spec_entry(...)` now checks `RuleIR::EmitContext::build_rule_ir_emit_context(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` before building the emit context.
 - 2026-05-09: Removed the one-shot `SpecEntry::_require_rule_ir_pkg(...)` wrapper. `compile_spec_entry(...)` now checks `RuleIR::_collect_rule_ir(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` before entering RuleIR flow; the focused regression now inspects that live call path.

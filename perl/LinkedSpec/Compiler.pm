@@ -126,11 +126,6 @@ sub _default_compile_spec_entry_cb {
  return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::SpecEntry', 'compile_spec_entry')
 }
 
-sub _require_validation_pkg {
- LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content');
- return 1
-}
-
 sub _build_action_rewriter_migration_summary {
  my ($spec_or_state) = @_;
  my $summary = _call_compiler_state('build_action_rewriter_migration_summary', $spec_or_state);
@@ -841,7 +836,7 @@ sub run_get_pipeline {
   } else {
    $compile_spec_entry = sub { return $default_compile_spec_entry->($_[0], { runtime_ctx => $runtime_ctx, parse_mode => $parse_mode }) };
   }
-  _require_validation_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content');
   1;
  };
  my $pipeline_setup_error = $@;

@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 253;
+    plan tests => 254;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1291,7 +1291,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _require_linkedre_pkg\b/, 'Compiler.pm no longer carries a separate LinkedRE loader wrapper');
     like($compiler_pm, qr/sub _default_bootstrap_parse_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::BootstrapSpec', 'run_bootstrap_parse'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its bootstrap-parse callback loader');
     like($compiler_pm, qr/sub _default_compile_spec_entry_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::SpecEntry', 'compile_spec_entry'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its spec-entry callback loader');
-    like($compiler_pm, qr/sub _require_validation_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside its validation loader');
+    like($compiler_pm, qr/sub run_get_pipeline\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Validation', 'validate_spec_content'\)/s, 'Compiler.pm now spends OwnerDispatch directly inside run_get_pipeline for validation availability');
+    unlike($compiler_pm, qr/sub _require_validation_pkg\b/, 'Compiler.pm no longer carries a one-shot validation callback availability wrapper');
     unlike($compiler_pm, qr/sub _call_preserving_err\b/, 'Compiler.pm no longer carries an unused local $@-preservation wrapper');
     unlike($compiler_pm, qr/sub _compiler_top_rule_handler_source_label\b/, 'Compiler.pm no longer carries a one-shot top-rule generated-handler label wrapper');
     unlike($compiler_pm, qr/sub _compiler_rule_or_top_handler_source_label\b/, 'Compiler.pm no longer carries a one-shot rule-or-top generated-handler label wrapper');
