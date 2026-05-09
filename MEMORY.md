@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Added `RuntimeContext::build_rule_meta_handler_source_label(...)` and routed `SpecEntry` generated-handler source labels through it. RuntimeContext now owns the selected-handler-variant extraction from rule metadata for generated-handler source labels.
 - 2026-05-09: Added `RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` and routed compiler rule-or-top handler-source attribution through it. The compiler no longer keeps a local generated-handler label builder wrapper; explicit rule labels still win, with selected `top_rule` as the shared fallback.
 - 2026-05-09: `Compiler.pm` now also uses `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` for parser-invocation `runtime_parser` labels, passing the selected handler variant through the shared helper. Existing phase0 runtime-parser coverage preserves variant-specific labels.
 - 2026-05-09: Added `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` and routed `Runtime`, `ParserFactory`, and compiler top-rule diagnostics through it. The shared runtime-context owner now owns label-only generated-handler attribution from active `top_rule`, while existing rule-specific and variant-specific labels still use `build_generated_handler_source_label(...)`.

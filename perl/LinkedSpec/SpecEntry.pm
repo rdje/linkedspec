@@ -147,12 +147,10 @@ sub _trace_runtime_mark_event {
 
 sub _generated_handler_source_label {
  my (%args) = @_;
- my $rule_meta = $args{rule_meta};
- my $variant = (ref($rule_meta) eq 'HASH') ? $rule_meta->{selected_handler_variant} : undef;
  return _call_runtime_ctx(
-  'build_generated_handler_source_label',
+  'build_rule_meta_handler_source_label',
   label => $args{label},
-  handler_variant => $variant,
+  rule_meta => $args{rule_meta},
  )
 }
 

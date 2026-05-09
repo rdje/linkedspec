@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime context: centralize rule-meta handler labels
+
+- added `LinkedSpec::RuntimeContext::build_rule_meta_handler_source_label(...)` for deriving generated-handler labels from a rule label plus selected handler variant stored in rule metadata,
+- routed `SpecEntry` generated-handler source labels through that shared helper instead of extracting `selected_handler_variant` locally before calling the lower-level label builder,
+- extended focused RuntimeContext label-helper coverage for rule-metadata variant and label-only fallback behavior.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/RuntimeContext.pm`
+  - `perl -c -Iperl perl/LinkedSpec/SpecEntry.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - runtime context: centralize rule-or-top handler labels
 
 - added `LinkedSpec::RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` for diagnostics that prefer a known rule label but fall back to the active `top_rule`,

@@ -10157,7 +10157,7 @@ subtest 'runtime_context_helpers_manage_top_rule_and_spec_identity' => sub {
     is(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path($runtime_ctx), '/tmp/fresh.spec', 'RuntimeContext get spec-path helper returns the stored spec path');
 };
 subtest 'runtime_context_helpers_build_generated_handler_source_labels' => sub {
-    plan tests => 7;
+    plan tests => 9;
 
     is(
         LinkedSpec::RuntimeContext::build_generated_handler_source_label(label => 'Top'),
@@ -10194,6 +10194,19 @@ subtest 'runtime_context_helpers_build_generated_handler_source_labels' => sub {
         LinkedSpec::RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label($runtime_ctx, undef),
         'LinkedSpec::generated_handler:RequestedTop',
         'RuntimeContext rule-or-top handler label helper falls back to the active top rule'
+    );
+    is(
+        LinkedSpec::RuntimeContext::build_rule_meta_handler_source_label(
+            label => 'MetaRule',
+            rule_meta => { selected_handler_variant => 'AND_ACODE' },
+        ),
+        'LinkedSpec::generated_handler:MetaRule:AND_ACODE',
+        'RuntimeContext rule-meta handler label helper uses selected handler variants from rule metadata'
+    );
+    is(
+        LinkedSpec::RuntimeContext::build_rule_meta_handler_source_label(label => 'MetaRule', rule_meta => {}),
+        'LinkedSpec::generated_handler:MetaRule',
+        'RuntimeContext rule-meta handler label helper falls back to a label-only identity without selected handler metadata'
     );
 };
 subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub {
