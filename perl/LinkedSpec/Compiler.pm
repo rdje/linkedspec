@@ -595,10 +595,6 @@ sub _set_last_build_compiled_rule_table_failure_detail {
  return $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL
 }
 
-sub _get_last_build_compiled_rule_table_failure_detail {
- return $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL
-}
-
 sub _describe_compile_spec_entry_result {
  my ($label, $info) = @_;
 
@@ -1075,7 +1071,7 @@ if ($build_compiled_rule_table_error) {
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => do {
-    my $detail = _get_last_build_compiled_rule_table_failure_detail();
+    my $detail = $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL;
     defined($detail) && length($detail)
      ? $detail
      : 'Compiled rule-table build failed while compiling parsed spec entries'
