@@ -295,7 +295,7 @@ sub build_compiled_rule_table {
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => $detail,
-   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   ) if ref($runtime_ctx) eq 'HASH';
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
@@ -310,7 +310,7 @@ sub build_compiled_rule_table {
    stage => 'build_compiled_rule_table',
    summary => 'Compiled rule-table generation failed',
    detail => $detail,
-   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   ) if ref($runtime_ctx) eq 'HASH';
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
@@ -329,7 +329,7 @@ sub build_compiled_rule_table {
     stage => 'build_compiled_rule_table',
     summary => 'Compiled rule-table generation failed',
     detail => $detail,
-    handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
    _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_MEDIUM);
@@ -607,11 +607,6 @@ sub _get_runtime_ctx_last_error_detail {
 sub _flush_runtime_ctx_parser_source {
  my ($runtime_ctx, $parser_source_ref) = @_;
  return _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref)
-}
-
-sub _compiler_top_rule_handler_source_label {
- my ($runtime_ctx) = @_;
- return _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx)
 }
 
 sub _compiler_rule_or_top_handler_source_label {
@@ -899,7 +894,7 @@ sub run_get_pipeline {
    stage => 'prepare_pipeline',
    summary => 'Compiler pipeline setup failed',
    detail => $pipeline_setup_error,
-   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiler pipeline setup failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'prepare_pipeline' }, DUMP_LOW);
@@ -1068,7 +1063,7 @@ sub run_get_pipeline {
    stage => 'bootstrap_parse',
    summary => 'Spec parsing failed',
    detail => $bootstrap_parse_error,
-   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing failed - trapped exception during bootstrap parse");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);
@@ -1099,7 +1094,7 @@ sub run_get_pipeline {
    stage => 'bootstrap_parse',
    summary => 'Spec parsing did not produce a valid intermediate representation',
    detail => _bootstrap_parse_result_detail($parse_success, $retv, $parse_error),
-   handler_source_label => _compiler_top_rule_handler_source_label($runtime_ctx),
+   handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   );
   _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Spec parsing did not produce a valid intermediate representation");
   _trace_exit($trace_scope, { status => 'error', stage => 'bootstrap_parse' }, DUMP_LOW);

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: remove top-rule handler-label wrapper
+
+- removed `LinkedSpec::Compiler::_compiler_top_rule_handler_source_label(...)`, now that selected-top-rule handler-source labels live in `RuntimeContext`,
+- routed compiler top-rule-only fallback diagnostics directly through `_call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', ...)`,
+- extended the architecture source-lock regression so `Compiler.pm` cannot silently regain that one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - parser factory: remove handler-label wrapper
 
 - removed `LinkedSpec::ParserFactory::_parser_factory_handler_source_label(...)`, now that selected-top-rule handler-source labels live in `RuntimeContext`,
