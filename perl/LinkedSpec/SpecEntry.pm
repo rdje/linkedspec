@@ -109,13 +109,6 @@ sub _dump_value {
  })
 }
 
-sub _runtime_ctx_from_deps {
- my ($deps) = @_;
- return undef unless ref($deps) eq 'HASH';
- return $deps->{runtime_ctx} if ref($deps->{runtime_ctx}) eq 'HASH';
- return undef
-}
-
 sub _call_runtime_ctx {
  my ($subname, @args) = @_;
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
@@ -840,7 +833,7 @@ sub _build_runtime_handler {
 sub compile_spec_entry {
  my ($einfo, $deps) = @_;
  $deps = {} unless ref($deps) eq 'HASH';
- my $runtime_ctx = _runtime_ctx_from_deps($deps);
+ my $runtime_ctx = ref($deps->{runtime_ctx}) eq 'HASH' ? $deps->{runtime_ctx} : undef;
  _require_rule_ir_pkg();
 
  my $trace_scope = _trace_enter('LinkedSpec::spec_entry', {

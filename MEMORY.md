@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `SpecEntry::_runtime_ctx_from_deps(...)`; `compile_spec_entry(...)` now reads the optional `runtime_ctx` dependency inline before RuleIR setup. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-reader wrapper.
 - 2026-05-09: Removed `SpecEntry::_set_runtime_ctx_last_error(...)`; rule-handler compile/eval errors now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` directly through `_call_runtime_ctx(...)` with runtime-handler ownership. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.
 - 2026-05-09: Removed `ParserFactory::_set_runtime_ctx_last_error(...)`; setup, validation, resolution, and load errors now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` directly through `_call_runtime_ctx(...)` with parser-factory ownership. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.
 - 2026-05-09: Removed `ParserFactory::_set_runtime_ctx_last_error_unless_present(...)`; compile-stage fallback errors now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` directly through `_call_runtime_ctx(...)` with parser-factory ownership. Phase0 source-lock coverage rejects reintroducing the pass-through wrapper.

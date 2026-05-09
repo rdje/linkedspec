@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the one-shot `SpecEntry::_runtime_ctx_from_deps(...)` wrapper. `compile_spec_entry(...)` now reads the optional `runtime_ctx` dependency inline before setting up RuleIR flow.
 - 2026-05-09: Removed the pass-through `SpecEntry::_set_runtime_ctx_last_error(...)` wrapper. Rule-handler compile/eval errors now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly with runtime-handler ownership.
 - 2026-05-09: Removed the pass-through `ParserFactory::_set_runtime_ctx_last_error(...)` wrapper. Setup, validation, resolution, and load error writes now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly with parser-factory ownership.
 - 2026-05-09: Removed the pass-through `ParserFactory::_set_runtime_ctx_last_error_unless_present(...)` wrapper. Compile-stage fallback writes now call `RuntimeContext::set_runtime_ctx_last_error_unless_present_for_owner(...)` through `_call_runtime_ctx(...)` directly with parser-factory ownership.
