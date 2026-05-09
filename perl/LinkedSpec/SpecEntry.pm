@@ -46,15 +46,10 @@ sub _resolve_rep_bounds {
  return @{$rep_nodes_minmax->{$node_type}};
 }
 
-sub _require_trace_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
- return 1
-}
-
 sub _trace_enter {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_enter(@args)
  })
 }
@@ -62,7 +57,7 @@ sub _trace_enter {
 sub _trace_exit {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_exit(@args)
  })
 }
@@ -70,7 +65,7 @@ sub _trace_exit {
 sub _trace_decision {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_decision(@args)
  })
 }
@@ -78,7 +73,7 @@ sub _trace_decision {
 sub _trace_log_dump {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_dump(@args)
  })
 }

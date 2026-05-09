@@ -118,6 +118,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a one-shot `_runtime_ctx_from_deps(...)` wrapper either; `compile_spec_entry(...)` reads the optional runtime context dependency inline.
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a one-shot `_require_rule_ir_pkg(...)` wrapper either; `compile_spec_entry(...)` checks RuleIR callback availability directly through `OwnerDispatch`.
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a one-shot `_require_emit_context_pkg(...)` wrapper either; `compile_spec_entry(...)` checks emit-context callback availability directly through `OwnerDispatch`.
+- Recent landed follow-up: `SpecEntry.pm` no longer keeps a `_require_trace_pkg(...)` loader wrapper either; its trace wrappers load `LinkedSpec::Trace` directly through `OwnerDispatch`.
 - Recent landed follow-up: `ParserFactory.pm` no longer keeps a one-shot `_prepare_runtime_ctx_for_get_parser(...)` wrapper either; `run_get_parser(...)` calls the shared runtime-context preparation helper directly.
 - Recent landed follow-up: `ParserFactory.pm` no longer keeps a one-shot `_set_runtime_ctx_spec_path(...)` wrapper either; resolved-spec-path writes call the shared runtime-context spec-path setter directly.
 - Recent landed follow-up: `ParserFactory.pm` no longer keeps a pass-through `_set_runtime_ctx_last_error_unless_present(...)` wrapper either; compile-stage fallback writes call the shared preserve-existing last-error helper directly.

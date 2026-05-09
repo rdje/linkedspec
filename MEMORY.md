@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `SpecEntry::_require_trace_pkg(...)`; `_trace_enter(...)`, `_trace_exit(...)`, `_trace_decision(...)`, and `_trace_log_dump(...)` now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)`. Phase0 source-lock coverage rejects reintroducing the Trace loader wrapper.
 - 2026-05-09: Removed `SpecEntry::_require_emit_context_pkg(...)`; `compile_spec_entry(...)` now checks `RuleIR::EmitContext::build_rule_ir_emit_context(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)`. Phase0 source-lock coverage rejects reintroducing the one-shot callback availability wrapper.
 - 2026-05-09: Removed `SpecEntry::_require_rule_ir_pkg(...)`; `compile_spec_entry(...)` now checks `RuleIR::_collect_rule_ir(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)`. Phase0 source-lock coverage rejects reintroducing the one-shot callback availability wrapper.
 - 2026-05-09: Removed `SpecEntry::_runtime_ctx_from_deps(...)`; `compile_spec_entry(...)` now reads the optional `runtime_ctx` dependency inline before RuleIR setup. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-reader wrapper.
