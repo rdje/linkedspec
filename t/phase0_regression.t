@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 228;
+    plan tests => 229;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1260,6 +1260,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($parser_factory_pm, qr/sub _require_pkg_value\b/, 'ParserFactory.pm no longer carries an unused local callback-value loader wrapper');
     unlike($parser_factory_pm, qr/sub _require_value_dep\b/, 'ParserFactory.pm no longer carries a one-shot value dependency validator wrapper');
     unlike($parser_factory_pm, qr/sub _call_preserving_err\b/, 'ParserFactory.pm no longer carries an unused single-use $@-preservation wrapper');
+    unlike($parser_factory_pm, qr/sub _parser_factory_handler_source_label\b/, 'ParserFactory.pm no longer carries a one-shot generated-handler label wrapper');
     like($parser_factory_pm, qr/sub _default_deps\b.*LinkedSpec::OwnerDispatch::build_dep_bundle/s, 'ParserFactory.pm now assembles its mixed default dependency bundle through OwnerDispatch');
     like($parser_factory_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'ParserFactory.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($parser_factory_pm, qr/sub run_get_parser\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'ParserFactory.pm now spends OwnerDispatch directly inside run_get_parser');

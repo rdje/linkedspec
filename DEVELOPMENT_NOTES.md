@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the now-one-shot `ParserFactory::_parser_factory_handler_source_label(...)` wrapper. Parser-factory fallback diagnostics now call `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` through `_call_runtime_ctx(...)` directly, matching the recent Runtime owner-label cleanup pattern.
 - 2026-05-09: Removed the now-one-shot `Runtime::_runtime_owner_handler_source_label(...)` wrapper. Runtime-owner fallback diagnostics now call `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` through `_call_runtime_ctx(...)` directly, matching the recent `SpecEntry` generated-handler label cleanup pattern.
 - 2026-05-09: Added a durable documentation path-hygiene guard. `COMMIT.md` now states that tracked live docs and the public book must use repo-root-relative file references, and `t/phase0_regression.t` scans the live Markdown/book set for machine-local absolute path leaks such as user-home checkout paths, temporary checkout paths, Windows user-home paths, or the current checkout's absolute path.
 - 2026-05-09: Removed the now-one-shot `SpecEntry::_generated_handler_source_label(...)` wrapper. Runtime handler construction now calls `RuntimeContext::build_rule_meta_handler_source_label(...)` through the existing `_call_runtime_ctx(...)` dispatch seam directly, keeping `SpecEntry` focused on handler construction rather than carrying a local label pass-through.

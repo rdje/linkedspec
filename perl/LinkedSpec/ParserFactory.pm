@@ -125,18 +125,6 @@ sub _set_runtime_ctx_spec_path {
 }
 
 #------------------------------------------------------------------------------
-# Function: _parser_factory_handler_source_label
-# Purpose : Build one label-only generated-handler identity for parser-factory
-#           compile fallback diagnostics when the selected top rule is known.
-# Args    : ($runtime_ctx)
-# Returns : handler_source_label string | undef
-#------------------------------------------------------------------------------
-sub _parser_factory_handler_source_label {
- my ($runtime_ctx) = @_;
- return _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx)
-}
-
-#------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
@@ -214,7 +202,7 @@ sub run_get_parser {
     stage => 'prepare_parser_factory',
     summary => 'Parser factory setup failed',
     detail => $setup_error,
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef;
   }
@@ -243,7 +231,7 @@ sub run_get_parser {
     detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
      ? $validate_spec_name_failure{detail}
      : $validate_spec_name_error,
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef
   }
@@ -258,7 +246,7 @@ sub run_get_parser {
     detail => defined($validate_spec_name_failure{detail}) && length($validate_spec_name_failure{detail})
      ? $validate_spec_name_failure{detail}
      : 'validate_spec_name rejected the requested parser name',
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef
   }
@@ -287,7 +275,7 @@ sub run_get_parser {
     detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
      ? $resolve_spec_path_failure{detail}
      : $resolve_spec_path_error,
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef;
   }
@@ -301,7 +289,7 @@ sub run_get_parser {
     detail => defined($resolve_spec_path_failure{detail}) && length($resolve_spec_path_failure{detail})
      ? $resolve_spec_path_failure{detail}
      : 'resolve_spec_path returned undef for the requested parser name',
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
   );
   return undef;
  }
@@ -331,7 +319,7 @@ sub run_get_parser {
     detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
      ? $load_spec_content_failure{detail}
      : $load_spec_content_error,
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef;
   }
@@ -345,7 +333,7 @@ sub run_get_parser {
     detail => defined($load_spec_content_failure{detail}) && length($load_spec_content_failure{detail})
      ? $load_spec_content_failure{detail}
      : "load_spec_content returned undef for '$spec_path'",
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef;
   }
@@ -364,7 +352,7 @@ sub run_get_parser {
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => $compile_spec_error,
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    return undef;
   }
@@ -374,7 +362,7 @@ sub run_get_parser {
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => _describe_compile_spec_result($parser, \%forward_opt_hash),
-    handler_source_label => _parser_factory_handler_source_label($runtime_ctx),
+    handler_source_label => _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx),
    );
    $parser = undef;
   }
