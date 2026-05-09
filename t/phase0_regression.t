@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 246;
+    plan tests => 247;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1254,7 +1254,8 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($runtime_pm, qr/sub _build_runtime_context\b/, 'Runtime.pm no longer carries a one-shot runtime-context preparation wrapper');
     unlike($runtime_pm, qr/sub _set_runtime_ctx_last_error\b/, 'Runtime.pm no longer carries an unused runtime-owner last-error setter wrapper');
     unlike($runtime_pm, qr/sub _set_runtime_ctx_last_error_unless_present\b/, 'Runtime.pm no longer carries a pass-through runtime-owner fallback last-error setter wrapper');
-    like($runtime_pm, qr/sub _run_get_pipeline_cb\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline'\)/s, 'Runtime.pm now spends OwnerDispatch directly inside its compiler callback helper');
+    unlike($runtime_pm, qr/sub _run_get_pipeline_cb\b/, 'Runtime.pm no longer carries a one-shot compiler callback-loader wrapper');
+    like($runtime_pm, qr/sub run_get\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline'\)/s, 'Runtime.pm now spends OwnerDispatch directly inside run_get for compiler callback lookup');
     like($runtime_pm, qr/sub _call_runtime_ctx\b.*LinkedSpec::OwnerDispatch::dispatch_owner_call\(__PACKAGE__, 'LinkedSpec::RuntimeContext', \$subname, \@args\)/s, 'Runtime.pm now routes RuntimeContext helper dispatch through OwnerDispatch');
     like($runtime_pm, qr/sub run_get\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{/s, 'Runtime.pm now spends OwnerDispatch directly inside run_get');
     like($parser_factory_pm, qr/use LinkedSpec::OwnerDispatch \(\);/, 'ParserFactory.pm now loads the shared owner-dispatch helper');

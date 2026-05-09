@@ -54,10 +54,6 @@ sub _describe_run_get_pipeline_result {
  return "run_get_pipeline returned invalid parser value: $value_desc; expected CODE";
 }
 
-sub _run_get_pipeline_cb {
- return LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline')
-}
-
 #------------------------------------------------------------------------------
 # Function: run_get
 # Purpose : Own `Get` entrypoint orchestration glue for parser-source capture
@@ -78,7 +74,7 @@ sub run_get {
  );
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my $ret = eval {
-   my $run_get_pipeline = _run_get_pipeline_cb();
+   my $run_get_pipeline = LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::Compiler', 'run_get_pipeline');
    return $run_get_pipeline->(
     $spec_content_ref,
     $option,

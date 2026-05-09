@@ -89,6 +89,7 @@ Owner-dispatch cleanup note:
 - `Runtime::run_get(...)` now calls the shared runtime-context preparation helper directly, so the one-shot `_build_runtime_context(...)` wrapper is gone too.
 - `Runtime` no longer carries an unused direct last-error setter wrapper; its live fallback writes stay on the preserve-existing last-error path.
 - `Runtime::run_get(...)` now calls the shared preserve-existing last-error helper directly, so the pass-through `_set_runtime_ctx_last_error_unless_present(...)` wrapper is gone too.
+- `Runtime::run_get(...)` now resolves the compiler pipeline callback directly through `OwnerDispatch`, so the one-shot `_run_get_pipeline_cb(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now validates required trace-level values inline beside its callback dependency checks, so the one-shot `_require_value_dep(...)` wrapper is gone too.
 
 Plugin modernization note:

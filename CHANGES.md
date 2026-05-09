@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - runtime: inline compiler callback lookup
+
+- removed `LinkedSpec::Runtime::_run_get_pipeline_cb(...)`,
+- moved the `LinkedSpec::Compiler::run_get_pipeline(...)` callback lookup directly into `run_get(...)` through `LinkedSpec::OwnerDispatch::require_pkg_cb(...)`,
+- extended shared owner-dispatch source-lock coverage so `Runtime.pm` cannot silently regain the one-shot compiler callback-loader wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Runtime.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - runtime: inline fallback last-error writes
 
 - removed `LinkedSpec::Runtime::_set_runtime_ctx_last_error_unless_present(...)`,
