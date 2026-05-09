@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the now-one-shot `Compiler::_get_runtime_ctx_top_rule(...)` wrapper. Parser-source emission, final descriptor trace output, parser-ready trace metadata, and parser-closure capture now read selected top-rule state by calling `RuntimeContext::get_runtime_ctx_top_rule(...)` through `_call_runtime_ctx(...)` directly.
 - 2026-05-09: Removed the now-one-shot `Compiler::_set_runtime_ctx_top_rule(...)` wrapper. The compiler now writes selected top-rule state by calling `RuntimeContext::set_runtime_ctx_top_rule(...)` through `_call_runtime_ctx(...)` directly; the missing-top-rule parser regression stubs the shared owner helper directly instead of depending on a compiler-local pass-through.
 - 2026-05-09: Removed the now-one-shot `Compiler::_has_runtime_ctx_last_error_type(...)` and `Compiler::_get_runtime_ctx_last_error_detail(...)` wrappers. The parser-invocation path now calls the shared `RuntimeContext` last-error read helpers directly when preserving deeper `runtime_handler` context.
 - 2026-05-09: Removed the now-one-shot `Compiler::_flush_runtime_ctx_parser_source(...)` wrapper. The final parser-source output path now calls `RuntimeContext::flush_runtime_ctx_parser_source(...)` through `_call_runtime_ctx(...)` directly, leaving parser-source flushing ownership in `RuntimeContext` without a compiler-local pass-through.

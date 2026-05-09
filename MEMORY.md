@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Compiler::_get_runtime_ctx_top_rule(...)`; compiler top-rule reads now call `RuntimeContext::get_runtime_ctx_top_rule(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `Compiler::_set_runtime_ctx_top_rule(...)`; compiler selected-top-rule writes now call `RuntimeContext::set_runtime_ctx_top_rule(...)` directly through `_call_runtime_ctx(...)`. The missing-top-rule regression now stubs the shared RuntimeContext setter directly, and phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `Compiler::_has_runtime_ctx_last_error_type(...)` and `Compiler::_get_runtime_ctx_last_error_detail(...)`; parser invocation now calls the shared `RuntimeContext` last-error read helpers directly when preserving runtime-handler context. Phase0 source-lock coverage rejects reintroducing the wrappers.
 - 2026-05-09: Removed `Compiler::_flush_runtime_ctx_parser_source(...)`; final parser-source flushing now calls `RuntimeContext::flush_runtime_ctx_parser_source(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.

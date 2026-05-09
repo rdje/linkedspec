@@ -579,11 +579,6 @@ sub _clear_runtime_ctx_last_error {
  return _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx)
 }
 
-sub _get_runtime_ctx_top_rule {
- my ($runtime_ctx) = @_;
- return _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx)
-}
-
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
@@ -1232,13 +1227,13 @@ if ($validate_dependency_regex_references_error) {
    my $prefix = $i ? ",\n" : '';
    _emit_runtime_ctx_parser_source_line($runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
   }
-  my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
+  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
   _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref);
  }
 
  if (_trace_should_dump(DUMP_LOW)) {
-  my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
+  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
   _trace_log_dump("=== FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
   _trace_log_dump(_dump_value($final_descr));
   _trace_log_dump("=== END FINAL_DESCR DUMP: top_rule=$top_rule ===\n");
@@ -1257,9 +1252,9 @@ if ($validate_dependency_regex_references_error) {
  }
 
  _trace_log_output(DUMP_LOW, "Parser generation completed successfully", "Returning functional parser for execution");
- _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => _get_runtime_ctx_top_rule($runtime_ctx), rule_count => $rule_count }, DUMP_LOW);
+ _trace_exit($trace_scope, { status => 'ok', stage => 'parser_ready', top_rule => _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx), rule_count => $rule_count }, DUMP_LOW);
 
- my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
+ my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
  return sub {
   _clear_runtime_ctx_last_error($runtime_ctx);
  my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descr->{spec}{$top_rule}) eq 'HASH')

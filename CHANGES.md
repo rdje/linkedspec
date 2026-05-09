@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: remove top-rule reader wrapper
+
+- removed `LinkedSpec::Compiler::_get_runtime_ctx_top_rule(...)`, now that runtime-context top-rule reads live in `RuntimeContext`,
+- routed parser-source emission, final descriptor trace output, parser-ready trace metadata, and parser-closure capture directly through `_call_runtime_ctx('get_runtime_ctx_top_rule', ...)`,
+- extended the architecture source-lock regression so `Compiler.pm` cannot silently regain the one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: remove top-rule setter wrapper
 
 - removed `LinkedSpec::Compiler::_set_runtime_ctx_top_rule(...)`, now that runtime-context top-rule writes live in `RuntimeContext`,
