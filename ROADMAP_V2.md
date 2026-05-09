@@ -79,6 +79,7 @@ Owner-dispatch cleanup note:
 - Parser invocation now calls the shared runtime-context last-error read helpers directly when preserving deeper runtime-handler context, so the one-shot `_has_runtime_ctx_last_error_type(...)` and `_get_runtime_ctx_last_error_detail(...)` wrappers are gone too.
 - Compiler selected-top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - Compiler selected-top-rule reads now call the shared runtime-context getter directly, so the one-shot `_get_runtime_ctx_top_rule(...)` wrapper is gone too.
+- Compiler stale-error cleanup now calls the shared runtime-context clearer directly, so the one-shot `_clear_runtime_ctx_last_error(...)` wrapper is gone too.
 - `ParserFactory::run_get_parser(...)` now validates required trace-level values inline beside its callback dependency checks, so the one-shot `_require_value_dep(...)` wrapper is gone too.
 
 Plugin modernization note:
