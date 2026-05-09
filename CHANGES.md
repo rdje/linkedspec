@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: inline Trace loading
+
+- removed `LinkedSpec::Compiler::_require_trace_pkg(...)`,
+- moved Trace package loading directly into the compiler trace wrapper bodies that call `LinkedSpec::Trace`,
+- reshaped shared owner-dispatch source-lock coverage so `Compiler.pm` cannot silently regain the Trace loader wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline validation availability check
 
 - removed `LinkedSpec::Compiler::_require_validation_pkg(...)`,

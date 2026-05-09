@@ -23,11 +23,6 @@ use constant {
  DUMP_DEBUG  => 500,
 };
 
-sub _require_trace_pkg {
- LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
- return 1
-}
-
 sub _dump_value {
  my ($value) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -58,7 +53,7 @@ sub _get_active_dependency_regex_rule_label {
 sub _trace_log_output {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_output(@args)
  })
 }
@@ -66,7 +61,7 @@ sub _trace_log_output {
 sub _trace_log_dump {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_dump(@args)
  })
 }
@@ -82,7 +77,7 @@ sub _trace_should_dump {
 sub _trace_enter {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_enter(@args)
  })
 }
@@ -90,7 +85,7 @@ sub _trace_enter {
 sub _trace_exit {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_exit(@args)
  })
 }
@@ -98,7 +93,7 @@ sub _trace_exit {
 sub _trace_decision {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::trace_decision(@args)
  })
 }
@@ -106,14 +101,14 @@ sub _trace_decision {
 sub _trace_apply_trace_options {
  my ($option) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::_apply_trace_options($option)
  })
 }
 
 sub _trace_level_name_for_current_verbosity {
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  _require_trace_pkg();
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::_trace_level_name($LinkedSpec::Trace::DUMP_VERBOSITY)
  })
 }
