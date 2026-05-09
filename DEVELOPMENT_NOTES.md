@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_describe_build_compiled_rule_table_entries_result(...)`. The rule-table boundary now builds invalid parsed-entry-list diagnostics directly where it writes retained and structured failure detail.
 - 2026-05-10: Removed `Compiler::_set_last_build_compiled_rule_table_failure_detail(...)`. Rule-table failure sites now write retained failure detail directly, and that lexical state is declared before the write sites so the later pipeline fallback reads the same retained diagnostic.
 - 2026-05-10: Removed `Compiler::_clear_last_build_compiled_rule_table_failure_detail(...)`. Rule-table and pipeline boundaries now reset retained build-compiled-rule-table failure detail directly.
 - 2026-05-09: Removed `Compiler::_get_last_build_compiled_rule_table_failure_detail(...)`. The pipeline fallback now reads the retained build-compiled-rule-table failure detail directly when constructing its structured diagnostic.

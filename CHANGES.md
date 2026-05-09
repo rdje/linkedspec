@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: inline rule-table entries detail
+
+- removed `LinkedSpec::Compiler::_describe_build_compiled_rule_table_entries_result(...)`,
+- built invalid parsed-entry-list diagnostics directly at the rule-table boundary,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot entries-result describer wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: inline rule-table failure detail set
 
 - removed `LinkedSpec::Compiler::_set_last_build_compiled_rule_table_failure_detail(...)`,
