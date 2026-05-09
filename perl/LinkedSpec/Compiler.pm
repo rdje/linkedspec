@@ -571,14 +571,6 @@ sub _call_runtime_ctx {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::RuntimeContext', $subname, @args)
 }
 
-sub _describe_parser_input_ref {
- my ($input_ref) = @_;
- my $value_desc = !defined($input_ref)
-  ? 'undef'
-  : ref($input_ref) ? ref($input_ref) : 'SCALAR';
- return "Top-level parser expects a SCALAR reference input; got $value_desc";
-}
-
 sub _parsed_rule_label {
  my ($parsed_entry) = @_;
  return undef unless ref($parsed_entry) eq 'ARRAY';
@@ -1318,7 +1310,10 @@ if ($validate_dependency_regex_references_error) {
  _trace_decision('resolve_top_rule_handler', 1, "Resolved top-level rule '$top_rule'", DUMP_DEBUG);
  my $input_ref = $_[0];
  if (ref($input_ref) ne 'SCALAR') {
-  my $detail = _describe_parser_input_ref($input_ref);
+  my $value_desc = !defined($input_ref)
+   ? 'undef'
+   : ref($input_ref) ? ref($input_ref) : 'SCALAR';
+  my $detail = "Top-level parser expects a SCALAR reference input; got $value_desc";
   _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,

@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed `Compiler::_describe_parser_input_ref(...)`. The top-level parser invocation now builds its invalid input-ref diagnostic directly where it writes the runtime-parser last-error payload.
 - 2026-05-09: Removed `Compiler::_normalize_error_detail(...)`. Final-descriptor failure handling now trims trapped error detail directly where it writes the structured last-error payload.
 - 2026-05-09: Removed `Compiler::_first_parsed_rule_label(...)`. Rule-table runtime-context preparation and final top-rule selection now read the first parsed rule label directly at their local decision points.
 - 2026-05-09: Removed the small `Compiler::_reset_spec_content_pos(...)` wrapper. `run_get_pipeline(...)` now resets scalar input position directly at the validation and bootstrap-parse boundaries.

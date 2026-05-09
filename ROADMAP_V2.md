@@ -90,6 +90,7 @@ Owner-dispatch cleanup note:
 - Validation and bootstrap-parse boundaries now reset scalar input position directly, so the small `_reset_spec_content_pos(...)` wrapper is gone too.
 - Rule-table preparation and final top-rule selection now derive the first parsed rule label directly, so the small `_first_parsed_rule_label(...)` wrapper is gone too.
 - Final-descriptor failures now trim trapped error detail directly at the last-error write, so the one-shot `_normalize_error_detail(...)` wrapper is gone too.
+- Top-level parser invocation now builds invalid input-ref diagnostics directly at the runtime-parser last-error write, so the one-shot `_describe_parser_input_ref(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.

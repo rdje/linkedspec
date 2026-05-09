@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: inline parser-input ref detail
+
+- removed `LinkedSpec::Compiler::_describe_parser_input_ref(...)`,
+- built the top-level parser input-ref diagnostic directly at the validation failure site,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot parser-input describer wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline final-descriptor error normalization
 
 - removed `LinkedSpec::Compiler::_normalize_error_detail(...)`,

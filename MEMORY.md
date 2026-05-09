@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Compiler::_describe_parser_input_ref(...)`; top-level parser invocation now builds invalid input-ref diagnostics directly at the runtime-parser last-error write. Phase0 source-lock coverage rejects reintroducing the one-shot parser-input describer wrapper.
 - 2026-05-09: Removed `Compiler::_normalize_error_detail(...)`; final-descriptor failure handling now trims trapped error detail directly at the structured last-error write. Phase0 source-lock coverage rejects reintroducing the one-shot error normalizer wrapper.
 - 2026-05-09: Removed `Compiler::_first_parsed_rule_label(...)`; rule-table preparation and final top-rule selection now derive the first parsed rule label directly at their decision points. Phase0 source-lock coverage rejects reintroducing the first-label wrapper.
 - 2026-05-09: Removed `Compiler::_reset_spec_content_pos(...)`; `run_get_pipeline(...)` now resets scalar input position directly at validation and bootstrap-parse boundaries. Phase0 source-lock coverage rejects reintroducing the scalar-position reset wrapper.
