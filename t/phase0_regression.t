@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 255;
+    plan tests => 256;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1305,6 +1305,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($compiler_pm, qr/sub _emit_runtime_ctx_parser_source_line\b/, 'Compiler.pm no longer carries a parser-source emit pass-through wrapper');
     unlike($compiler_pm, qr/sub _prepare_runtime_ctx_for_build_compiled_rule_table\b/, 'Compiler.pm no longer carries a one-shot rule-table runtime-context preparation wrapper');
     unlike($compiler_pm, qr/sub _set_runtime_ctx_last_error\b/, 'Compiler.pm no longer carries a pass-through compiler-pipeline last-error setter wrapper');
+    unlike($compiler_pm, qr/sub _get_active_dependency_regex_rule_label\b/, 'Compiler.pm no longer carries a one-shot active dependency-regex label reader wrapper');
     like($compiler_pm, qr/sub _dump_value\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'Data::Dumper'\).*Data::Dumper::Dumper/s, 'Compiler.pm now spends OwnerDispatch directly inside _dump_value');
     like($compiler_pm, qr/sub _ored_re\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedRE'\).*LinkedRE::oredRE/s, 'Compiler.pm now spends OwnerDispatch directly inside _ored_re');
     like($compiler_pm, qr/sub _trace_log_output\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\).*LinkedSpec::Trace::log_output/s, 'Compiler.pm now spends OwnerDispatch directly inside _trace_log_output');

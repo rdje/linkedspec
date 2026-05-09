@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: inline dependency-regex label read
+
+- removed `LinkedSpec::Compiler::_get_active_dependency_regex_rule_label(...)`,
+- read the active dependency-regex rule label directly at the single final-descriptor failure attribution site,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot reader wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: inline last-error writes
 
 - removed `LinkedSpec::Compiler::_set_runtime_ctx_last_error(...)`,

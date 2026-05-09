@@ -46,10 +46,6 @@ sub _clear_active_dependency_regex_rule_label {
  return undef
 }
 
-sub _get_active_dependency_regex_rule_label {
- return $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL
-}
-
 sub _trace_log_output {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -1132,7 +1128,7 @@ if ($build_compiled_rule_table_error) {
  _clear_active_dependency_regex_rule_label();
  my $final_descr_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descriptor_error = $@;
-my $build_final_descriptor_rule_label = _get_active_dependency_regex_rule_label();
+my $build_final_descriptor_rule_label = $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
  my $build_final_descriptor_handler_source_label =
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $build_final_descriptor_rule_label);
 _clear_active_dependency_regex_rule_label();
