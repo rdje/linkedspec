@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Removed `Compiler::_flush_runtime_ctx_parser_source(...)`; final parser-source flushing now calls `RuntimeContext::flush_runtime_ctx_parser_source(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `Compiler::_compiler_rule_or_top_handler_source_label(...)`; rule-attributed compiler diagnostics now call `RuntimeContext::build_runtime_ctx_rule_or_top_handler_source_label(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `Compiler::_compiler_top_rule_handler_source_label(...)`; compiler top-rule-only fallback diagnostics now call `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.
 - 2026-05-09: Removed `ParserFactory::_parser_factory_handler_source_label(...)`; parser-factory fallback diagnostics now call `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` directly through `_call_runtime_ctx(...)`. Phase0 source-lock coverage rejects reintroducing the wrapper.

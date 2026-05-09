@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-09 - compiler: remove parser-source flush wrapper
+
+- removed `LinkedSpec::Compiler::_flush_runtime_ctx_parser_source(...)`, now that final parser-source flushing lives in `RuntimeContext`,
+- routed the parser-source flush site directly through `_call_runtime_ctx('flush_runtime_ctx_parser_source', ...)`,
+- extended the architecture source-lock regression so `Compiler.pm` cannot silently regain that one-shot wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-09 - compiler: remove rule-or-top handler-label wrapper
 
 - removed `LinkedSpec::Compiler::_compiler_rule_or_top_handler_source_label(...)`, now that rule-or-top handler-source label fallback lives in `RuntimeContext`,

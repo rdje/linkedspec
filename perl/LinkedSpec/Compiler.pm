@@ -604,11 +604,6 @@ sub _get_runtime_ctx_last_error_detail {
  return _call_runtime_ctx('get_runtime_ctx_last_error_detail', $runtime_ctx)
 }
 
-sub _flush_runtime_ctx_parser_source {
- my ($runtime_ctx, $parser_source_ref) = @_;
- return _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref)
-}
-
 sub _prepare_runtime_ctx_for_build_compiled_rule_table {
  my ($specretv, $option) = @_;
  return undef unless ref($option) eq 'HASH';
@@ -1254,7 +1249,7 @@ if ($validate_dependency_regex_references_error) {
   }
   my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
   _emit_runtime_ctx_parser_source_line($runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
-  _flush_runtime_ctx_parser_source($runtime_ctx, $parser_source_ref);
+  _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref);
  }
 
  if (_trace_should_dump(DUMP_LOW)) {
