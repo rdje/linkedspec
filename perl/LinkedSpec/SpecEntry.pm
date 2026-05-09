@@ -46,11 +46,6 @@ sub _resolve_rep_bounds {
  return @{$rep_nodes_minmax->{$node_type}};
 }
 
-sub _require_emit_context_pkg {
- LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
- return 1
-}
-
 sub _require_trace_pkg {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
  return 1
@@ -851,7 +846,7 @@ sub compile_spec_entry {
   return
  }
 
- _require_emit_context_pkg();
+ LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context');
  my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
  $rule_meta->{action_rewriter} = $emit_ctx->{action_rewriter_meta};
  my $label = $emit_ctx->{label};

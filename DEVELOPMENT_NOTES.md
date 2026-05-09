@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the one-shot `SpecEntry::_require_emit_context_pkg(...)` wrapper. `compile_spec_entry(...)` now checks `RuleIR::EmitContext::build_rule_ir_emit_context(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` before building the emit context.
 - 2026-05-09: Removed the one-shot `SpecEntry::_require_rule_ir_pkg(...)` wrapper. `compile_spec_entry(...)` now checks `RuleIR::_collect_rule_ir(...)` availability directly through `OwnerDispatch::require_pkg_cb(...)` before entering RuleIR flow; the focused regression now inspects that live call path.
 - 2026-05-09: Removed the one-shot `SpecEntry::_runtime_ctx_from_deps(...)` wrapper. `compile_spec_entry(...)` now reads the optional `runtime_ctx` dependency inline before setting up RuleIR flow.
 - 2026-05-09: Removed the pass-through `SpecEntry::_set_runtime_ctx_last_error(...)` wrapper. Rule-handler compile/eval errors now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly with runtime-handler ownership.

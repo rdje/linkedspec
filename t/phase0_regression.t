@@ -1168,7 +1168,7 @@ subtest 'linkedspec_public_facade_wrappers_preserve_eval_error_state' => sub {
     is($@, "__SAVED_ERR__\n", 'AUTOLOAD preserves caller $@ on successful delegation');
 };
 subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_plumbing' => sub {
-    plan tests => 252;
+    plan tests => 253;
 
     my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));
     my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));
@@ -1318,7 +1318,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($spec_entry_pm, qr/sub _require_pkg_cb\b/, 'SpecEntry.pm no longer carries an unused generic callback-loader wrapper');
     unlike($spec_entry_pm, qr/sub _require_pkg\b/, 'SpecEntry.pm no longer carries an unused generic package-loader wrapper');
     like($spec_entry_pm, qr/sub compile_spec_entry\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::RuleIR', '_collect_rule_ir'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside compile_spec_entry for RuleIR availability');
-    like($spec_entry_pm, qr/sub _require_emit_context_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside its emit-context loader');
+    like($spec_entry_pm, qr/sub compile_spec_entry\b.*LinkedSpec::OwnerDispatch::require_pkg_cb\(__PACKAGE__, 'LinkedSpec::RuleIR::EmitContext', 'build_rule_ir_emit_context'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside compile_spec_entry for emit-context availability');
     like($spec_entry_pm, qr/sub _require_trace_pkg\b.*LinkedSpec::OwnerDispatch::require_pkg\(__PACKAGE__, 'LinkedSpec::Trace'\)/s, 'SpecEntry.pm now spends OwnerDispatch directly inside its Trace loader');
     unlike($spec_entry_pm, qr/sub _require_data_dumper_pkg\b/, 'SpecEntry.pm no longer carries a separate Data::Dumper loader wrapper');
     unlike($spec_entry_pm, qr/sub _call_preserving_err\b/, 'SpecEntry.pm no longer carries an unused local $@-preservation wrapper');
@@ -1328,6 +1328,7 @@ subtest 'shared_owner_dispatch_module_centralizes_active_compile_path_wrapper_pl
     unlike($spec_entry_pm, qr/sub _set_runtime_ctx_last_error\b/, 'SpecEntry.pm no longer carries a pass-through runtime-handler last-error setter wrapper');
     unlike($spec_entry_pm, qr/sub _runtime_ctx_from_deps\b/, 'SpecEntry.pm no longer carries a one-shot runtime-context dependency reader wrapper');
     unlike($spec_entry_pm, qr/sub _require_rule_ir_pkg\b/, 'SpecEntry.pm no longer carries a one-shot RuleIR callback availability wrapper');
+    unlike($spec_entry_pm, qr/sub _require_emit_context_pkg\b/, 'SpecEntry.pm no longer carries a one-shot emit-context callback availability wrapper');
     like($spec_entry_pm, qr/sub _trace_enter\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_enter/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_enter');
     like($spec_entry_pm, qr/sub _trace_exit\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_exit/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_exit');
     like($spec_entry_pm, qr/sub _trace_decision\b.*LinkedSpec::OwnerDispatch::call_preserving_err\(sub \{.*_require_trace_pkg\(\).*LinkedSpec::Trace::trace_decision/s, 'SpecEntry.pm now spends OwnerDispatch directly inside _trace_decision');
