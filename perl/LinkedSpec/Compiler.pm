@@ -41,11 +41,6 @@ sub _ored_re {
 
 my $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
 
-sub _clear_active_dependency_regex_rule_label {
- $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
- return undef
-}
-
 sub _trace_log_output {
  my @args = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -509,7 +504,7 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
      compiled_dependency_regex_by_label => $dependency_regex_map,
     )
   : $dependency_regex_map;
- _clear_active_dependency_regex_rule_label();
+ $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
 
 if (_trace_should_dump(DUMP_MEDIUM)) {
   _trace_log_dump("=== GENERATED DEPENDENCY REGEX DUMP ===\n");
@@ -1125,13 +1120,13 @@ if ($build_compiled_rule_table_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
- _clear_active_dependency_regex_rule_label();
+ $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
  my $final_descr_state = eval { _build_final_descriptor_state($compiled_spec_state, undef, parse_mode => $parse_mode) };
 my $build_final_descriptor_error = $@;
 my $build_final_descriptor_rule_label = $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
  my $build_final_descriptor_handler_source_label =
   _call_runtime_ctx('build_runtime_ctx_rule_or_top_handler_source_label', $runtime_ctx, $build_final_descriptor_rule_label);
-_clear_active_dependency_regex_rule_label();
+$ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = undef;
 if ($build_final_descriptor_error) {
   _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',

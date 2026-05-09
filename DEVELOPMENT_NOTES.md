@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-09: Removed the one-use-shape `Compiler::_clear_active_dependency_regex_rule_label(...)` clearer wrapper. Dependency-regex map/build-final-descriptor boundaries now reset the active label directly around diagnostic attribution.
 - 2026-05-09: Removed the one-use `Compiler::_get_active_dependency_regex_rule_label(...)` reader wrapper. Final-descriptor failure attribution now reads the active dependency-regex rule label directly where the diagnostic label is built.
 - 2026-05-09: Removed the pass-through `Compiler::_set_runtime_ctx_last_error(...)` wrapper. Compiler-pipeline error boundaries now call `RuntimeContext::set_runtime_ctx_last_error_for_owner(...)` through `_call_runtime_ctx(...)` directly.
 - 2026-05-09: Removed the `Compiler::_require_trace_pkg(...)` loader wrapper. Compiler trace helpers now load `LinkedSpec::Trace` directly through `OwnerDispatch::require_pkg(...)` inside their `$@`-preserving bodies.

@@ -116,6 +116,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Recent landed follow-up: `Compiler.pm` no longer keeps a `_require_trace_pkg(...)` loader wrapper either; its trace helpers load `LinkedSpec::Trace` directly through `OwnerDispatch`.
 - Recent landed follow-up: `Compiler.pm` no longer keeps a pass-through `_set_runtime_ctx_last_error(...)` wrapper either; compiler-pipeline error boundaries call the shared last-error helper directly.
 - Recent landed follow-up: `Compiler.pm` no longer keeps a one-shot `_get_active_dependency_regex_rule_label(...)` wrapper either; final-descriptor failure attribution reads the active dependency-regex label directly.
+- Recent landed follow-up: `Compiler.pm` no longer keeps a one-shot `_clear_active_dependency_regex_rule_label(...)` wrapper either; dependency-regex boundaries reset the transient active label directly.
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a one-shot `_set_runtime_ctx_top_rule(...)` wrapper either; discovered top-rule writes call the shared runtime-context setter directly.
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper either; generated-handler parser-source emission calls the shared runtime-context emitter directly.
 - Recent landed follow-up: `SpecEntry.pm` no longer keeps a pass-through `_set_runtime_ctx_last_error(...)` wrapper either; rule-handler compile/eval errors call the shared runtime-handler last-error helper directly.

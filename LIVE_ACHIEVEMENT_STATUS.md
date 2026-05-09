@@ -7,13 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-09: Removed the `Compiler` active dependency-regex rule-label reader wrapper after inlining the single read site.
+- 2026-05-09: Removed the `Compiler` active dependency-regex rule-label clearer wrapper after inlining direct resets around diagnostic attribution.
 
 ## Recent Completed Slices
+- Phase 5: Inline `Compiler` active dependency-regex rule-label read.
 - Phase 5: Inline `Compiler` compiler-pipeline last-error writes.
 - Phase 5: Inline `Compiler` Trace loading.
 - Phase 5: Inline `Compiler` validation callback availability check.
-- Phase 5: Inline `SpecEntry` Trace loading.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.
