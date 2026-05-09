@@ -1305,12 +1305,11 @@ if ($validate_dependency_regex_references_error) {
    : undef;
   my $top_rule_meta = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{meta} : undef;
   my $top_handler_variant = (ref($top_rule_meta) eq 'HASH') ? $top_rule_meta->{selected_handler_variant} : undef;
-  my $top_handler_source_label = (defined($top_rule) && length($top_rule))
-   ? _build_generated_handler_source_label(
-      label => $top_rule,
-      handler_variant => $top_handler_variant,
-     )
-   : undef;
+  my $top_handler_source_label = _call_runtime_ctx(
+   'build_runtime_ctx_top_rule_handler_source_label',
+   $runtime_ctx,
+   handler_variant => $top_handler_variant,
+  );
   my $handler = (ref($top_rule_entry) eq 'HASH') ? $top_rule_entry->{handler} : undef;
   my $runtime_scope = _trace_enter(
    defined($top_rule) && length($top_rule)
