@@ -616,9 +616,7 @@ sub _build_generated_handler_source_label {
 
 sub _compiler_top_rule_handler_source_label {
  my ($runtime_ctx) = @_;
- my $top_rule = _get_runtime_ctx_top_rule($runtime_ctx);
- return undef unless defined($top_rule) && length($top_rule);
- return _build_generated_handler_source_label(label => $top_rule)
+ return _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx)
 }
 
 sub _compiler_rule_or_top_handler_source_label {

@@ -301,6 +301,17 @@ sub build_generated_handler_source_label {
   : "LinkedSpec::generated_handler:$label"
 }
 
+sub build_runtime_ctx_top_rule_handler_source_label {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $top_rule = get_runtime_ctx_top_rule($runtime_ctx);
+ return undef unless defined($top_rule) && length($top_rule);
+ return build_generated_handler_source_label(
+  label => $top_rule,
+  handler_variant => $args{handler_variant},
+ )
+}
+
 #------------------------------------------------------------------------------
 # Function: set_runtime_ctx_last_error
 # Purpose : Store one normalized structured failure payload on the shared

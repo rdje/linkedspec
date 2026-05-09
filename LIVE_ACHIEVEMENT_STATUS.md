@@ -7,13 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-09: Corrected the latest runtime-context cleanup validation record to include the broader gate that passed before commit.
+- 2026-05-09: Centralized top-rule generated-handler source labels in `RuntimeContext` and routed runtime/parser/compiler top-rule diagnostics through that helper.
 
 ## Recent Completed Slices
+- Phase 6: Record full validation gate for the latest runtime-context cleanup.
 - Phase 5: Clear runtime-context boundary `last_error` state.
 - Phase 6: Add live achievement status tracking.
 - Phase 5: Inline parser-factory value validation.
-- Phase 5: Centralize runtime-context spec identity reset.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.

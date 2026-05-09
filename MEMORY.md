@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-09: Added `RuntimeContext::build_runtime_ctx_top_rule_handler_source_label(...)` and routed `Runtime`, `ParserFactory`, and compiler top-rule diagnostics through it. The shared runtime-context owner now owns label-only generated-handler attribution from active `top_rule`, while existing rule-specific and variant-specific labels still use `build_generated_handler_source_label(...)`.
 - 2026-05-09: Corrected the latest `CHANGES.md` validation record to include the broader gate that had already passed before the `RuntimeContext` boundary cleanup commit. Future entries should list both focused checks and broader gates when both are run.
 - 2026-05-09: `RuntimeContext::prepare_runtime_ctx_for_run_get(...)` and `prepare_runtime_ctx_for_get_parser(...)` now clear stale `last_error` when preparing a reused context, matching the low-level build-table preparation path. Focused phase0 coverage locks the `Get(...)` and `get_parser(...)` preparation helpers against carrying old structured failures into a new call.
 - 2026-05-09: Added `LIVE_ACHIEVEMENT_STATUS.md` and documented it in `README.md` plus `COMMIT.md`. Future batch slices should update that file with the latest completed slice and next direction whenever workflow status changes, then keep using `git_message_brief.txt` as the untracked temporary commit-message file.

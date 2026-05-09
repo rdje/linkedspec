@@ -10156,6 +10156,36 @@ subtest 'runtime_context_helpers_manage_top_rule_and_spec_identity' => sub {
     is($runtime_ctx->{spec_path}, '/tmp/fresh.spec', 'RuntimeContext set spec-path helper stores the new spec path');
     is(LinkedSpec::RuntimeContext::get_runtime_ctx_spec_path($runtime_ctx), '/tmp/fresh.spec', 'RuntimeContext get spec-path helper returns the stored spec path');
 };
+subtest 'runtime_context_helpers_build_generated_handler_source_labels' => sub {
+    plan tests => 5;
+
+    is(
+        LinkedSpec::RuntimeContext::build_generated_handler_source_label(label => 'Top'),
+        'LinkedSpec::generated_handler:Top',
+        'RuntimeContext generated-handler label helper builds a label-only identity'
+    );
+    is(
+        LinkedSpec::RuntimeContext::build_generated_handler_source_label(label => 'Top', handler_variant => '_default'),
+        'LinkedSpec::generated_handler:Top:_default',
+        'RuntimeContext generated-handler label helper includes handler variants when known'
+    );
+    is(
+        LinkedSpec::RuntimeContext::build_generated_handler_source_label(),
+        'LinkedSpec::generated_handler:<unknown_rule>',
+        'RuntimeContext generated-handler label helper provides an unknown-rule fallback for direct callers'
+    );
+
+    my $runtime_ctx = { top_rule => 'RequestedTop' };
+    is(
+        LinkedSpec::RuntimeContext::build_runtime_ctx_top_rule_handler_source_label($runtime_ctx),
+        'LinkedSpec::generated_handler:RequestedTop',
+        'RuntimeContext top-rule handler label helper builds from the active runtime context'
+    );
+    ok(
+        !defined(LinkedSpec::RuntimeContext::build_runtime_ctx_top_rule_handler_source_label({})),
+        'RuntimeContext top-rule handler label helper returns undef when no top_rule is known'
+    );
+};
 subtest 'runtime_context_helpers_manage_structured_last_error_fallbacks' => sub {
     plan tests => 10;
 

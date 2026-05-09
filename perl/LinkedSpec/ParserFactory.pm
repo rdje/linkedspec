@@ -133,9 +133,7 @@ sub _set_runtime_ctx_spec_path {
 #------------------------------------------------------------------------------
 sub _parser_factory_handler_source_label {
  my ($runtime_ctx) = @_;
- my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
- return undef unless defined($top_rule) && length($top_rule);
- return _call_runtime_ctx('build_generated_handler_source_label', label => $top_rule)
+ return _call_runtime_ctx('build_runtime_ctx_top_rule_handler_source_label', $runtime_ctx)
 }
 
 #------------------------------------------------------------------------------
