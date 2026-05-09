@@ -584,11 +584,6 @@ sub _get_runtime_ctx_top_rule {
  return _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx)
 }
 
-sub _set_runtime_ctx_top_rule {
- my ($runtime_ctx, $top_rule) = @_;
- return _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $top_rule)
-}
-
 sub _set_runtime_ctx_last_error {
  my ($runtime_ctx, %args) = @_;
  return _call_runtime_ctx('set_runtime_ctx_last_error_for_owner', $runtime_ctx, 'compiler_pipeline', %args)
@@ -1224,7 +1219,7 @@ if ($validate_dependency_regex_references_error) {
  my $selected_top_rule =
     defined($requested_top_rule) && length($requested_top_rule) ? $requested_top_rule
   : _first_parsed_rule_label($retv);
- _set_runtime_ctx_top_rule($runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
+ _call_runtime_ctx('set_runtime_ctx_top_rule', $runtime_ctx, $selected_top_rule) if defined($selected_top_rule) && length($selected_top_rule);
 
  my $rule_count = _compiled_spec_state_rule_count($compiled_spec_state);
  _trace_log_output(DUMP_LOW, "Parser generation completed", "Generated parser with $rule_count rules");
