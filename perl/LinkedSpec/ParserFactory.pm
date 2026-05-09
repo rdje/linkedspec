@@ -87,18 +87,6 @@ sub _set_runtime_ctx_last_error {
 }
 
 #------------------------------------------------------------------------------
-# Function: _set_runtime_ctx_last_error_unless_present
-# Purpose : Preserve an existing structured parser-factory error while writing
-#           one fallback error payload only when none exists yet.
-# Args    : ($runtime_ctx, %args)
-# Returns : runtime_ctx hashref
-#------------------------------------------------------------------------------
-sub _set_runtime_ctx_last_error_unless_present {
- my ($runtime_ctx, %args) = @_;
- return _call_runtime_ctx('set_runtime_ctx_last_error_unless_present_for_owner', $runtime_ctx, 'parser_factory', %args)
-}
-
-#------------------------------------------------------------------------------
 # Function: run_get_parser
 # Purpose : Orchestrate public parser-factory flow: trace setup, spec validation,
 #           resolution/loading and compilation via injected runtime compile callback.
@@ -326,8 +314,10 @@ sub run_get_parser {
    : ($forward_opt_hash{parse_only} || $forward_opt_hash{generate_only}) ? !defined($parser)
    : defined($parser) && ref($parser) eq 'CODE';
   if ($compile_spec_error) {
-   _set_runtime_ctx_last_error_unless_present(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_unless_present_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => $compile_spec_error,
@@ -336,8 +326,10 @@ sub run_get_parser {
    return undef;
   }
   if (!$parser_ok) {
-   _set_runtime_ctx_last_error_unless_present(
+   _call_runtime_ctx(
+    'set_runtime_ctx_last_error_unless_present_for_owner',
     $runtime_ctx,
+    'parser_factory',
     stage => 'compile_spec',
     summary => 'Spec compilation failed',
     detail => _describe_compile_spec_result($parser, \%forward_opt_hash),
