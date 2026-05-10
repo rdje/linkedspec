@@ -484,7 +484,7 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
    _die_with_detail("build_dependency_regex_map expects rule '$label' dependency_refs[$dependency_ref_idx]{idx} to be a non-negative integer; got "
     . _describe_contract_scalar_value($dep_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_missing($label, $dep_label, $dep_idx))
+   _die_with_detail("build_dependency_regex_map expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule")
     unless _compiled_spec_state_has_rule($sg, $dep_label);
    my $dep_rule = _compiled_spec_state_rule_info($sg, $dep_label);
    _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_info_result($label, $dep_label, $dep_rule))
@@ -618,12 +618,6 @@ sub _describe_contract_scalar_value {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : "'" . $value . "'";
-}
-
-sub _describe_build_dependency_regex_map_dependency_rule_missing {
- my ($label, $dep_label, $dep_idx) = @_;
-
- return "build_dependency_regex_map expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule";
 }
 
 sub _describe_build_dependency_regex_map_dependency_rule_info_result {

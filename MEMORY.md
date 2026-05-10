@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_rule_missing(...)`; the dependency-regex map validation boundary now builds missing dependency-rule diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot missing-rule describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_index_result(...)`; the dependency-regex map validation boundary now builds invalid dependency-index diagnostics directly while still sharing the scalar value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-index describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_label_result(...)`; the dependency-regex map validation boundary now builds invalid dependency-label diagnostics directly while still sharing the scalar value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-label describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_ref_result(...)`; the dependency-regex map validation boundary now builds invalid dependency-ref diagnostics directly while still sharing the contract value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-ref describer wrapper.
