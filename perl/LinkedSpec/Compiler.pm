@@ -255,7 +255,10 @@ sub _normalize_compiled_spec_input {
  return _call_compiler_state(
   'normalize_compiled_spec_input',
   $value,
-  on_invalid => sub { return _describe_build_dependency_regex_map_spec_result($_[0]) },
+  on_invalid => sub {
+   return 'build_dependency_regex_map expects a HASH ref of compiled rule info; got '
+    . _describe_contract_value_kind($_[0])
+  },
  )
 }
 
@@ -610,12 +613,6 @@ sub _describe_contract_scalar_value {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : "'" . $value . "'";
-}
-
-sub _describe_build_dependency_regex_map_spec_result {
- my ($sg) = @_;
-
- return 'build_dependency_regex_map expects a HASH ref of compiled rule info; got ' . _describe_contract_value_kind($sg);
 }
 
 sub _describe_build_dependency_regex_map_rule_info_result {

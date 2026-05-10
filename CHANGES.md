@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: inline dependency-regex map spec detail
+
+- removed `LinkedSpec::Compiler::_describe_build_dependency_regex_map_spec_result(...)`,
+- built invalid compiled-spec input diagnostics directly inside the `CompilerState` normalization callback,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot dependency-regex map spec-result describer wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: inline final-descriptor dependency-regex detail
 
 - removed `LinkedSpec::Compiler::_describe_final_descriptor_dependency_regex_result(...)`,
