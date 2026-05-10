@@ -1,0 +1,3 @@
+Phase 5: remove unused rules-by-label wrapper
+
+Remove the dead compiler compiled-spec rules-by-label pass-through so map access remains owned by CompilerState, with source-lock coverage and live docs updated.

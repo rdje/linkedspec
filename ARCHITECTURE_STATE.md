@@ -69,6 +69,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler` no longer keeps a compiled-spec state constructor pass-through wrapper either; rule-table build asks `CompilerState` for new state directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-spec state predicate pass-through wrapper either; compiler-pipeline validation asks `CompilerState` directly through the shared owner seam.
 - `Compiler` no longer keeps a compiled-spec rule-count pass-through wrapper either; trace and parser-generation counts ask `CompilerState` directly through the shared owner seam.
+- `Compiler` no longer keeps the unused compiled-spec rules-by-label pass-through wrapper either; rules-by-label map access stays owned by `CompilerState` without a compiler-local mirror.
 - `SpecEntry` no longer keeps a one-shot runtime-context top-rule setter wrapper either; discovered top-rule writes ask `RuntimeContext` to update shared top-rule state directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a parser-source emission pass-through wrapper either; generated-handler source emission asks `RuntimeContext` to append captured source text directly through the owner-dispatch seam.
 - `SpecEntry` no longer keeps a pass-through runtime-handler last-error setter wrapper either; rule-handler compile/eval errors ask `RuntimeContext` to write runtime-handler error state directly through the owner-dispatch seam.

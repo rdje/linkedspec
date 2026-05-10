@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_rules_by_label {
- return _call_compiler_state('compiled_spec_state_rules_by_label', @_)
-}
-
 sub _compiled_spec_state_has_rule {
  return _call_compiler_state('compiled_spec_state_has_rule', @_)
 }
