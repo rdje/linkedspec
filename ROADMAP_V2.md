@@ -99,6 +99,7 @@ Owner-dispatch cleanup note:
 - Invalid per-entry diagnostics are now built directly at the rule-table boundary, so the one-shot `_describe_build_compiled_rule_table_entry_result(...)` wrapper is gone too.
 - Invalid compile-spec-entry tuple diagnostics are now built directly at the rule-table boundary, so the one-shot `_describe_compile_spec_entry_result(...)` wrapper is gone too.
 - Invalid descriptor-state diagnostics are now built directly at the final descriptor boundary, so the one-shot `_describe_final_descriptor_state_result(...)` wrapper is gone too.
+- Invalid compiled dependency-regex normalization diagnostics are now built directly inside the `CompilerState` callback, so the one-shot `_describe_final_descriptor_dependency_regex_result(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.

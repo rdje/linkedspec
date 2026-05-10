@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed `Compiler::_describe_final_descriptor_dependency_regex_result(...)`; the compiled dependency-regex normalization callback now builds invalid-output diagnostics directly while still sharing the contract value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot dependency-regex describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_final_descriptor_state_result(...)`; the final-descriptor validation boundary now builds invalid descriptor-state diagnostics directly while still sharing the contract value-kind formatter. Phase0 source-lock coverage rejects reintroducing the one-shot state describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_compile_spec_entry_result(...)`; the rule-table tuple validation boundary now builds invalid compile-spec-entry diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot tuple describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_compiled_rule_table_entry_result(...)`; the per-entry rule-table boundary now builds invalid parsed-entry diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot entry-result describer wrapper.

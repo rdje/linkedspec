@@ -243,7 +243,10 @@ sub _normalize_compiled_dependency_regex_output {
   'normalize_compiled_dependency_regex_output',
   $value,
   $compiled_spec_state,
-  on_invalid => sub { return _describe_final_descriptor_dependency_regex_result($_[0]) },
+  on_invalid => sub {
+   return 'final descriptor assembly expects compiled dependency-regex HASH ref or compiled_dependency_regex_state; got '
+    . _describe_contract_value_kind($_[0])
+  },
  );
 }
 
@@ -600,13 +603,6 @@ sub _describe_contract_value_kind {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : 'SCALAR';
-}
-
-sub _describe_final_descriptor_dependency_regex_result {
- my ($value) = @_;
-
- return 'final descriptor assembly expects compiled dependency-regex HASH ref or compiled_dependency_regex_state; got '
-  . _describe_contract_value_kind($value);
 }
 
 sub _describe_contract_scalar_value {
