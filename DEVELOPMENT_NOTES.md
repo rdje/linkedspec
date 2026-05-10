@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_spec_state_meta(...)`. Compiled-spec metadata ownership now remains solely in `CompilerState`; future compiler metadata reads should route through the explicit owner seam rather than adding local mirrors.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_redefined_rule_labels(...)`. Compiled-state trace reporting now asks the `CompilerState` owner directly for redefined rule labels.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_definition_order(...)`. Compiled-state trace output now asks the `CompilerState` owner directly for definition order.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_rule_rows(...)`. Dependency-regex map iteration now asks the `CompilerState` owner directly for compiled rule rows.

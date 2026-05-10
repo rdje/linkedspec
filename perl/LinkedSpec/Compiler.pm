@@ -137,10 +137,6 @@ sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
 
-sub _compiled_spec_state_meta {
- return _call_compiler_state('compiled_spec_state_meta', @_)
-}
-
 sub _build_compiled_descriptor_meta {
  return _call_compiler_state('build_compiled_descriptor_meta', @_)
 }
