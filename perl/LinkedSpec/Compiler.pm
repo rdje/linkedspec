@@ -487,7 +487,8 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
    _die_with_detail("build_dependency_regex_map expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule")
     unless _compiled_spec_state_has_rule($sg, $dep_label);
    my $dep_rule = _compiled_spec_state_rule_info($sg, $dep_label);
-   _die_with_detail(_describe_build_dependency_regex_map_dependency_rule_info_result($label, $dep_label, $dep_rule))
+   _die_with_detail("build_dependency_regex_map expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got "
+    . _describe_contract_value_kind($dep_rule))
     unless ref($dep_rule) eq 'HASH';
    my $dep_re = $dep_rule->{re};
    _die_with_detail(_describe_build_dependency_regex_map_dependency_re_result($label, $dep_label, $dep_re))
@@ -618,12 +619,6 @@ sub _describe_contract_scalar_value {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : "'" . $value . "'";
-}
-
-sub _describe_build_dependency_regex_map_dependency_rule_info_result {
- my ($label, $dep_label, $dep_rule) = @_;
-
- return "build_dependency_regex_map expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got " . _describe_contract_value_kind($dep_rule);
 }
 
 sub _describe_build_dependency_regex_map_dependency_re_result {
