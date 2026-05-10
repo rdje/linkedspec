@@ -7,13 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-10: Removed the `Compiler` compile-spec-entry tuple describer wrapper after inlining invalid tuple diagnostics at the rule-table boundary.
+- 2026-05-10: Removed the `Compiler` final-descriptor state describer wrapper after inlining invalid descriptor-state diagnostics at the final descriptor boundary.
 
 ## Recent Completed Slices
+- Phase 5: Inline `Compiler` compile-spec-entry tuple diagnostics.
 - Phase 5: Inline `Compiler` rule-table entry-result diagnostics.
 - Phase 5: Inline `Compiler` rule-table entries-result diagnostics.
 - Phase 5: Inline `Compiler` rule-table failure detail set.
-- Phase 5: Inline `Compiler` rule-table failure detail clear.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.

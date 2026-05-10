@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: inline final-descriptor state detail
+
+- removed `LinkedSpec::Compiler::_describe_final_descriptor_state_result(...)`,
+- built invalid final-descriptor state diagnostics directly at the final descriptor validation boundary,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the one-shot final-descriptor state describer wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: inline compile-spec-entry tuple detail
 
 - removed `LinkedSpec::Compiler::_describe_compile_spec_entry_result(...)`,

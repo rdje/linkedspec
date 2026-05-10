@@ -595,13 +595,6 @@ sub _parsed_rule_label {
  return undef
 }
 
-sub _describe_final_descriptor_state_result {
- my ($value) = @_;
-
- return 'final descriptor assembly expects a compiled_descriptor_state result; got '
-  . _describe_contract_value_kind($value);
-}
-
 sub _describe_contract_value_kind {
  my ($value) = @_;
 
@@ -1082,7 +1075,8 @@ if ($build_final_descriptor_error) {
    'compiler_pipeline',
    stage => 'build_final_descriptor',
    summary => 'Final descriptor assembly failed',
-   detail => _describe_final_descriptor_state_result($final_descr_state),
+  detail => 'final descriptor assembly expects a compiled_descriptor_state result; got '
+   . _describe_contract_value_kind($final_descr_state),
    rule_label => $build_final_descriptor_rule_label,
    handler_source_label => $build_final_descriptor_handler_source_label,
   );
