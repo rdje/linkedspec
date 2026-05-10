@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed `Compiler::_describe_compile_spec_entry_result(...)`; the rule-table tuple validation boundary now builds invalid compile-spec-entry diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot tuple describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_compiled_rule_table_entry_result(...)`; the per-entry rule-table boundary now builds invalid parsed-entry diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot entry-result describer wrapper.
 - 2026-05-10: Removed `Compiler::_describe_build_compiled_rule_table_entries_result(...)`; the rule-table boundary now builds invalid parsed-entry-list diagnostics directly. Phase0 source-lock coverage rejects reintroducing the one-shot entries-result describer wrapper.
 - 2026-05-10: Removed `Compiler::_set_last_build_compiled_rule_table_failure_detail(...)`; rule-table failure sites now write retained failure detail directly, with lexical state declared before the direct write sites. Phase0 source-lock coverage rejects reintroducing the one-shot failure-detail setter wrapper.

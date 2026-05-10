@@ -370,7 +370,13 @@ sub build_compiled_rule_table {
    return undef
   }
   unless (defined($label) && defined($info) && ref($info) eq 'HASH') {
-   my $detail = _describe_compile_spec_entry_result($label, $info);
+   my $label_desc = !defined($label)
+    ? 'undef'
+    : ref($label) ? ref($label) : "'" . $label . "'";
+   my $info_desc = !defined($info)
+    ? 'undef'
+    : ref($info) ? ref($info) : 'SCALAR';
+   my $detail = "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
    my $failure_rule_label = defined($label) && !ref($label) && length($label)
     ? $label
     : $active_rule_label;
@@ -587,19 +593,6 @@ sub _parsed_rule_label {
   return $centry->[1] if defined($centry->[1]) && length($centry->[1]);
  }
  return undef
-}
-
-sub _describe_compile_spec_entry_result {
- my ($label, $info) = @_;
-
- my $label_desc = !defined($label)
-  ? 'undef'
-  : ref($label) ? ref($label) : "'" . $label . "'";
- my $info_desc = !defined($info)
-  ? 'undef'
-  : ref($info) ? ref($info) : 'SCALAR';
-
- return "compile_spec_entry returned invalid descriptor tuple: label=$label_desc, info=$info_desc";
 }
 
 sub _describe_final_descriptor_state_result {
