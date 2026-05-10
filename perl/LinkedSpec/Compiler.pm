@@ -149,10 +149,6 @@ sub _new_compiled_dependency_regex_state {
  return _call_compiler_state('new_compiled_dependency_regex_state', @_)
 }
 
-sub _is_compiled_dependency_regex_state {
- return _call_compiler_state('is_compiled_dependency_regex_state', @_)
-}
-
 sub _compiled_dependency_regex_state_regex_by_label {
  return _call_compiler_state('compiled_dependency_regex_state_regex_by_label', @_)
 }
