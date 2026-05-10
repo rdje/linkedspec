@@ -11560,7 +11560,7 @@ SPEC
     ok(!exists $dependency_regex_state->{gdata_by_label}, 'compiled dependency-regex state no longer exposes legacy gdata_by_label alias');
 };
 subtest 'compiler_and_validation_route_state_model_through_compiler_state_owner' => sub {
-    plan tests => 19;
+    plan tests => 20;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -11657,6 +11657,7 @@ SPEC
     ok(!LinkedSpec::Compiler->can('_compiled_spec_state_meta'), 'Compiler.pm no longer keeps unused compiled-spec metadata pass-through wrapper');
     ok(!LinkedSpec::Compiler->can('_is_compiled_dependency_regex_state'), 'Compiler.pm no longer keeps unused compiled dependency-regex state predicate wrapper');
     ok(!LinkedSpec::Compiler->can('_compiled_dependency_regex_state_regex_by_label'), 'Compiler.pm no longer keeps unused compiled dependency-regex by-label pass-through wrapper');
+    ok(!LinkedSpec::Compiler->can('_compiled_dependency_regex_state_to_dependency_regex_map'), 'Compiler.pm no longer keeps unused compiled dependency-regex legacy-map projection wrapper');
     ok($saw_normalize_compiled_spec_input, 'Compiler.pm routes compiled-spec normalization through LinkedSpec::CompilerState');
     ok($saw_normalize_compiled_dependency_regex_output, 'Compiler.pm routes dependency-regex normalization through LinkedSpec::CompilerState');
     ok($saw_is_compiled_descriptor_state, 'Validation.pm routes descriptor-state validation through LinkedSpec::CompilerState');
