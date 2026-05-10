@@ -121,6 +121,7 @@ Owner-dispatch cleanup note:
 - Compiled-state trace reporting now asks `CompilerState` directly for redefined rule labels, so the pass-through `_compiled_spec_state_redefined_rule_labels(...)` wrapper is gone too.
 - Compiled-spec metadata ownership remains solely with `CompilerState`, so the unused pass-through `_compiled_spec_state_meta(...)` wrapper is gone too.
 - Compiled dependency-regex state shape checks remain solely with `CompilerState`, so the unused pass-through `_is_compiled_dependency_regex_state(...)` wrapper is gone too.
+- Compiled dependency-regex by-label access remains solely with `CompilerState`, so the unused pass-through `_compiled_dependency_regex_state_regex_by_label(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.

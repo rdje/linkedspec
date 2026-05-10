@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: remove unused compiled dependency-regex by-label wrapper
+
+- removed unused `LinkedSpec::Compiler::_compiled_dependency_regex_state_regex_by_label(...)`,
+- left compiled dependency-regex by-label access owned by `LinkedSpec::CompilerState` instead of exposing a compiler-local pass-through,
+- extended source-lock coverage so `Compiler.pm` cannot silently regain the by-label wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: remove unused compiled dependency-regex predicate wrapper
 
 - removed unused `LinkedSpec::Compiler::_is_compiled_dependency_regex_state(...)`,

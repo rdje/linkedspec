@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_dependency_regex_state_regex_by_label(...)`; compiled dependency-regex by-label access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the by-label wrapper.
 - 2026-05-10: Removed unused `Compiler::_is_compiled_dependency_regex_state(...)`; compiled dependency-regex state shape checks remain owned only by `CompilerState` instead of a compiler-local predicate pass-through. Phase0 source-lock coverage rejects reintroducing the predicate wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_spec_state_meta(...)`; compiled-spec metadata remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the metadata wrapper.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_redefined_rule_labels(...)`; compiled-state trace reporting now asks `CompilerState` directly for redefined rule labels. Phase0 source-lock coverage rejects reintroducing the redefined-labels pass-through wrapper.
