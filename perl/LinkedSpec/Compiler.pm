@@ -157,10 +157,6 @@ sub _is_compiled_descriptor_state {
  return _call_compiler_state('is_compiled_descriptor_state', @_)
 }
 
-sub _compiled_descriptor_state_rules_by_label {
- return _call_compiler_state('compiled_descriptor_state_rules_by_label', @_)
-}
-
 sub _compiled_descriptor_state_meta {
  return _call_compiler_state('compiled_descriptor_state_meta', @_)
 }
