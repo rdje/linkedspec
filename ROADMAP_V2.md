@@ -118,6 +118,7 @@ Owner-dispatch cleanup note:
 - The unused compiled-rule-order mirror is gone too; `CompilerState` remains the only owner for compiled rule ordering instead of `Compiler.pm` carrying a local pass-through.
 - Dependency-regex map iteration now asks `CompilerState` directly for compiled rule rows, so the pass-through `_compiled_spec_state_rule_rows(...)` wrapper is gone too.
 - Compiled-state trace output now asks `CompilerState` directly for definition order, so the pass-through `_compiled_spec_state_definition_order(...)` wrapper is gone too.
+- Compiled-state trace reporting now asks `CompilerState` directly for redefined rule labels, so the pass-through `_compiled_spec_state_redefined_rule_labels(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.

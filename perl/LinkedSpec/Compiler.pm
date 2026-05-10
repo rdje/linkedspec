@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_redefined_rule_labels {
- return _call_compiler_state('compiled_spec_state_redefined_rule_labels', @_)
-}
-
 sub _compiled_spec_state_to_legacy_spec {
  return _call_compiler_state('compiled_spec_state_to_legacy_spec', @_)
 }
@@ -380,7 +376,7 @@ sub build_compiled_rule_table {
   _trace_log_output(DUMP_LOW, "Entry $i", "Label: '$label', Type: " . ref($info));
  }
 
- my @redefined_rules = @{_compiled_spec_state_redefined_rule_labels($compiled_state)};
+ my @redefined_rules = @{_call_compiler_state('compiled_spec_state_redefined_rule_labels', $compiled_state)};
  _trace_decision('redefined_rule_definitions_present', scalar(@redefined_rules) ? 1 : 0, scalar(@redefined_rules) ? ('redefined_rules=' . join(',', @redefined_rules)) : 'no redefinitions detected', DUMP_MEDIUM);
 
  if (@redefined_rules) {
