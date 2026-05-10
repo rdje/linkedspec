@@ -104,6 +104,7 @@ Owner-dispatch cleanup note:
 - Invalid rule-info diagnostics are now built directly at the dependency-regex map validation boundary, so the one-shot `_describe_build_dependency_regex_map_rule_info_result(...)` wrapper is gone too.
 - Invalid dependency-list diagnostics are now built directly at the dependency-regex map validation boundary, so the one-shot `_describe_build_dependency_regex_map_rule_dependency_refs_result(...)` wrapper is gone too.
 - Invalid dependency-ref diagnostics are now built directly at the dependency-regex map validation boundary, so the one-shot `_describe_build_dependency_regex_map_dependency_ref_result(...)` wrapper is gone too.
+- Invalid dependency-label diagnostics are now built directly at the dependency-regex map validation boundary, so the one-shot `_describe_build_dependency_regex_map_dependency_label_result(...)` wrapper is gone too.
 - `SpecEntry` discovered top-rule writes now call the shared runtime-context setter directly, so the one-shot `_set_runtime_ctx_top_rule(...)` wrapper is gone too.
 - `SpecEntry` generated-handler parser-source emission now calls the shared runtime-context emitter directly, so the pass-through `_emit_runtime_ctx_parser_source_line(...)` wrapper is gone too.
 - `SpecEntry` rule-handler compile/eval errors now call the shared runtime-handler last-error helper directly, so the pass-through `_set_runtime_ctx_last_error(...)` wrapper is gone too.
