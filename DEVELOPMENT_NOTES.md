@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_is_compiled_spec_state(...)`. The compiler pipeline now asks the `CompilerState` owner to validate compiled-spec state directly through `_call_compiler_state(...)`.
 - 2026-05-10: Removed `Compiler::_new_compiled_spec_state(...)`. Rule-table build now asks the `CompilerState` owner for new compiled-spec state directly through `_call_compiler_state(...)`.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_re_result(...)`. The dependency-regex map validation boundary now builds invalid referenced dependency regex-list diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_dependency_rule_info_result(...)`. The dependency-regex map validation boundary now builds invalid referenced dependency-rule info diagnostics directly while still sharing the remaining contract value-kind formatter.

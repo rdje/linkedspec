@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _is_compiled_spec_state {
- return _call_compiler_state('is_compiled_spec_state', @_)
-}
-
 sub _compiled_spec_state_rule_count {
  return _call_compiler_state('compiled_spec_state_rule_count', @_)
 }
@@ -970,7 +966,7 @@ if ($build_compiled_rule_table_error) {
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);
   return undef;
  }
- unless (_is_compiled_spec_state($compiled_spec_state)) {
+unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
  _call_runtime_ctx(
    'set_runtime_ctx_last_error_for_owner',
    $runtime_ctx,
