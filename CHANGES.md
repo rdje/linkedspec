@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-05-10 - compiler: inline compiled-spec has-rule checks
+
+- removed `LinkedSpec::Compiler::_compiled_spec_state_has_rule(...)`,
+- routed dependency-regex referenced-rule existence checks directly through `_call_compiler_state('compiled_spec_state_has_rule', ...)`,
+- extended shared source-lock coverage so `Compiler.pm` cannot silently regain the has-rule pass-through wrapper.
+
+- Validation:
+  - `perl -c -Iperl perl/LinkedSpec/Compiler.pm`
+  - `perl -c -Iperl t/phase0_regression.t`
+  - `prove -Iperl t/phase0_regression.t`
+  - `mdbook build docs/linkedspec-book`
+  - `git diff --check`
+  - `bash tools/run_ci_local.sh`
+
 ## 2026-05-10 - compiler: remove unused compiled-spec rules-by-label wrapper
 
 - removed unused `LinkedSpec::Compiler::_compiled_spec_state_rules_by_label(...)`,

@@ -7,13 +7,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
-- 2026-05-10: Removed the unused `Compiler` compiled-spec rules-by-label wrapper so map ownership stays solely with CompilerState.
+- 2026-05-10: Removed the `Compiler` compiled-spec has-rule wrapper after routing dependency-rule existence checks directly through CompilerState.
 
 ## Recent Completed Slices
+- Phase 5: Remove unused `Compiler` compiled-spec rules-by-label wrapper.
 - Phase 5: Inline `Compiler` compiled-spec rule-count reads.
 - Phase 5: Inline `Compiler` compiled-spec state predicate.
 - Phase 5: Inline `Compiler` compiled-spec state construction.
-- Phase 5: Inline `Compiler` dependency-regex map regex-list diagnostics.
 
 ## Next Slice Direction
 - Continue with the smallest roadmap-aligned slice that advances Phase 1A / Backbone Item 3 cleanup, Phase 5 runtime diagnostics, or Phase 6 live documentation upkeep.

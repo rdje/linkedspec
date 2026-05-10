@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_compiled_spec_state_has_rule(...)`. Dependency-regex validation now asks the `CompilerState` owner directly whether referenced dependency rules exist.
 - 2026-05-10: Removed unused `Compiler::_compiled_spec_state_rules_by_label(...)`. Rules-by-label map access now remains solely in the `CompilerState` owner instead of being mirrored by a compiler-local pass-through.
 - 2026-05-10: Removed `Compiler::_compiled_spec_state_rule_count(...)`. Trace and parser-generation rule-count reads now ask the `CompilerState` owner directly through `_call_compiler_state(...)`.
 - 2026-05-10: Removed `Compiler::_is_compiled_spec_state(...)`. The compiler pipeline now asks the `CompilerState` owner to validate compiled-spec state directly through `_call_compiler_state(...)`.

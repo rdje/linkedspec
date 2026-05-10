@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_has_rule {
- return _call_compiler_state('compiled_spec_state_has_rule', @_)
-}
-
 sub _compiled_spec_state_rule_info {
  return _call_compiler_state('compiled_spec_state_rule_info', @_)
 }
@@ -469,7 +465,7 @@ foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
     . _describe_contract_scalar_value($dep_idx))
     unless defined($dep_idx) && !ref($dep_idx) && $dep_idx =~ /\A\d+\z/;
    _die_with_detail("build_dependency_regex_map expects rule '$label' dependency '$dep_label' at index $dep_idx to refer to an existing compiled rule")
-    unless _compiled_spec_state_has_rule($sg, $dep_label);
+   unless _call_compiler_state('compiled_spec_state_has_rule', $sg, $dep_label);
    my $dep_rule = _compiled_spec_state_rule_info($sg, $dep_label);
    _die_with_detail("build_dependency_regex_map expects referenced rule '$dep_label' for rule '$label' to be HASH ref; got "
     . _describe_contract_value_kind($dep_rule))
