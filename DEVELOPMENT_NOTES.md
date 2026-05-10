@@ -1,6 +1,7 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_rule_info_result(...)`. The dependency-regex map validation boundary now builds invalid rule-info diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_build_dependency_regex_map_spec_result(...)`. The compiled-spec input normalization callback now builds invalid input diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_final_descriptor_dependency_regex_result(...)`. The compiled dependency-regex normalization callback now builds invalid-output diagnostics directly while still sharing the remaining contract value-kind formatter.
 - 2026-05-10: Removed `Compiler::_describe_final_descriptor_state_result(...)`. The final-descriptor validation boundary now builds invalid descriptor-state diagnostics directly while still sharing the remaining contract value-kind formatter.

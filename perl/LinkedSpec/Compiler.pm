@@ -463,7 +463,8 @@ my %dependency_regex_map;
 foreach my $row (@{_compiled_spec_state_rule_rows($sg)}) {
   my ($label, $rule_info) = @$row;
   $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL = $label;
-  _die_with_detail(_describe_build_dependency_regex_map_rule_info_result($label, $rule_info))
+  _die_with_detail("build_dependency_regex_map expects rule '$label' info to be HASH ref; got "
+   . _describe_contract_value_kind($rule_info))
    unless ref($rule_info) eq 'HASH';
   my $rule_dependency_refs = $rule_info->{dependency_refs};
   _die_with_detail(_describe_build_dependency_regex_map_rule_dependency_refs_result($label, $rule_dependency_refs))
@@ -613,12 +614,6 @@ sub _describe_contract_scalar_value {
 
  return 'undef' unless defined($value);
  return ref($value) ? ref($value) : "'" . $value . "'";
-}
-
-sub _describe_build_dependency_regex_map_rule_info_result {
- my ($label, $rule_info) = @_;
-
- return "build_dependency_regex_map expects rule '$label' info to be HASH ref; got " . _describe_contract_value_kind($rule_info);
 }
 
 sub _describe_build_dependency_regex_map_rule_dependency_refs_result {
