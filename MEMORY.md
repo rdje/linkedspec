@@ -1,6 +1,7 @@
 # MEMORY
 Compact, actionable session memory for interruption-safe continuation.
 
+- 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_dependency_regex_state(...)`; compiled descriptor dependency-regex-state access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor dependency-regex-state wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_descriptor_state_spec_state(...)`; compiled descriptor spec-state access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the descriptor spec-state wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_dependency_regex_state_to_dependency_regex_map(...)`; compiled dependency-regex legacy-map projection remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the map projection wrapper.
 - 2026-05-10: Removed unused `Compiler::_compiled_dependency_regex_state_regex_by_label(...)`; compiled dependency-regex by-label access remains owned only by `CompilerState` instead of a compiler-local pass-through. Phase0 source-lock coverage rejects reintroducing the by-label wrapper.
