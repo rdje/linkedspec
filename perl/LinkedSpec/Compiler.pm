@@ -133,10 +133,6 @@ sub _call_compiler_state {
  return LinkedSpec::OwnerDispatch::dispatch_owner_call(__PACKAGE__, 'LinkedSpec::CompilerState', $subname, @args)
 }
 
-sub _compiled_spec_state_definition_order {
- return _call_compiler_state('compiled_spec_state_definition_order', @_)
-}
-
 sub _compiled_spec_state_redefined_rule_labels {
  return _call_compiler_state('compiled_spec_state_redefined_rule_labels', @_)
 }
@@ -375,7 +371,7 @@ sub build_compiled_rule_table {
   }
  }
 
- my $definition_order = _compiled_spec_state_definition_order($compiled_state);
+ my $definition_order = _call_compiler_state('compiled_spec_state_definition_order', $compiled_state);
  _trace_log_output(DUMP_LOW, "Compiled spec state", "Number of compiled rule entries: " . scalar(@$definition_order));
  for (my $i = 0; $i < @$definition_order; ++$i) {
   my $record = $definition_order->[$i];
